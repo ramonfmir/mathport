@@ -5,6 +5,7 @@ Authors: Mario Carneiro, Daniel Selsam
 -/
 import Mathport.Binary
 import Mathport.Syntax
+import Mathport.Syntax.ProofSource
 
 -- We import all of mathlib here so that `lake build` keeps the `Mathlib.olean` up to date.
 import Mathlib
@@ -48,7 +49,8 @@ def mathport1 (config : Config) (path : Path) : IO Unit := do
       CommandElabM.toIO (ctx := cmdCtx) (s := cmdState) do
         -- let _ ← IO.FS.withIsolatedStreams' $ binport1 config path
         binport1 config path
-        synport1 config path
+        --synport1 config path
+        synportProofSource config path
         writeModule (← getEnv) $ path.toLean4olean pcfg
 
       println! "\n[mathport] END   {path.mod3}\n"

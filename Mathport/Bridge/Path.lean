@@ -42,6 +42,12 @@ def Path.toLean4src (cfg : Path.Config) (p : Path) : FilePath :=
   let path := cfg.outRoot / (FilePath.mk "src") / (FilePath.mk p.package.decapitalize) / (FilePath.mk p.package) / p.mod4.toFilePath
   ⟨path.toString ++ ".lean"⟩
 
+def Path.toLean4proofsource (cfg : Path.Config) (p : Path) : FilePath :=
+  -- Lib4/lean3/Lean3.lean
+  -- Lib4/mathbin/Mathbin.lean
+  let path := cfg.outRoot / (FilePath.mk "src") / (FilePath.mk p.package.decapitalize) / (FilePath.mk p.package) / p.mod4.toFilePath
+  ⟨path.toString ++ ".json"⟩
+
 def Path.toLean4olean (cfg : Path.Config) (p : Path) : FilePath :=
   let path := cfg.outRoot / (FilePath.mk "oleans") / (FilePath.mk p.package.decapitalize) / (FilePath.mk p.package) / p.mod4.toFilePath
   ⟨path.toString ++ ".olean"⟩
