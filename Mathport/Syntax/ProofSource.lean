@@ -113,7 +113,7 @@ def proofSource (ast : AST3) : Translate.M Lean.Json := do
       currOutput := (toString (← get).output).toSubstring
       let proofSource := currOutput.extract prevOutput.stopPos currOutput.stopPos
       --let proofSource := (← get).output
-      res := res ++ [(toString n.kind, Lean.toJson $ s!"{proofSource}")]
+      res := res ++ [(toString (← Translate.renameIdent n.kind), Lean.toJson $ s!"{proofSource}")]
       --IO.eprintln s!"Source for {n.kind}: {proofSource}"
     --modify fun s => { s with output := "" }
     --modify fun s => { s with afterNextCommand := #[] }
