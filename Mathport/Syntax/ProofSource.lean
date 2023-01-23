@@ -106,8 +106,10 @@ def proofSource (ast : AST3) : Translate.M Lean.Json := do
   --     printOutput f!"/- {e}\nLean 3 AST:\n{(repr c.kind).group}-/\n\n"
   let mut currOutput : Substring := (toString (← get).output).toSubstring
   let mut res :  List (String × Lean.Json) := []
+  let mut noTheorems := 0
   for command in ast.commands do 
     if let Command.decl (DeclKind.«theorem») _ (some n) _ _ _ _ _ := command.kind then 
+      noTheorems := noTheorems + 1
       Translate.trCommand command
       let prevOutput := currOutput
       currOutput := (toString (← get).output).toSubstring
@@ -117,10 +119,12 @@ def proofSource (ast : AST3) : Translate.M Lean.Json := do
       --IO.eprintln s!"Source for {n.kind}: {proofSource}"
     --modify fun s => { s with output := "" }
     --modify fun s => { s with afterNextCommand := #[] }
+  dbg_trace "Theorems: {noTheorems} | Total : {ast.commands.size}"
   return Lean.Json.mkObj res
 
 def synportProofSource (config : Config) (path : Path) : Lean.Elab.Command.CommandElabM Unit := do
   let pcfg := config.pathConfig
   let (ast3, _) ← parseAST3 (path.toLean3 pcfg ".ast.json") false
+  dbg_trace "path.mod3: {path.mod3}"
   let ps ← (proofSource ast3).run ast3.comments ast3.indexed_nota ast3.indexed_cmds config
   IO.FS.writeFile (path.toLean4proofsource pcfg) (Lean.Json.pretty ps)
