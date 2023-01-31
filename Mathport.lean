@@ -14,7 +14,7 @@ namespace Mathport
 
 open Lean Lean.Elab.Command
 
-def mathport1 (config : Config) (path : Path) : IO Unit := do
+def mathport1 (config : Config) (path : Path) : IO Nat := do
   let pcfg := config.pathConfig
 
   createDirectoriesIfNotExists (path.toLean4olean pcfg).toString
@@ -46,14 +46,16 @@ def mathport1 (config : Config) (path : Path) : IO Unit := do
       }
       let cmdState : Elab.Command.State := Lean.Elab.Command.mkState (env := env) (opts := opts)
 
-      CommandElabM.toIO (ctx := cmdCtx) (s := cmdState) do
+      let noTheorems ← CommandElabM.toIO (ctx := cmdCtx) (s := cmdState) do
         -- let _ ← IO.FS.withIsolatedStreams' $ binport1 config path
         --binport1 config path
         --synport1 config path
-        synportProofSource config path
+        let count ← synportProofSource config path
         writeModule (← getEnv) $ path.toLean4olean pcfg
+        return count
 
       println! "\n[mathport] END   {path.mod3}\n"
+      return noTheorems
   catch err =>
     throw $ IO.userError s!"failed to port {path.package}:{path.mod4} with imports {imports.toList}:\n{err}"
 
