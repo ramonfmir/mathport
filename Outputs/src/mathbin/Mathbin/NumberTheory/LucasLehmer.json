@@ -1,0 +1,96 @@
+{"ωb_mul_ω":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«exprℕ+» -/\ntheorem ωb_mul_ω (q : «exprℕ+») : (ωb : X q) * ω = 1 :=\n  by\n  dsimp [ω, ωb]\n  ext <;> simp <;> ring\n#align ωb_mul_ω ωb_mul_ω\n\n",
+ "ω_unit_coe":
+ "@[simp]\ntheorem ω_unit_coe (p : ℕ) : (ω_unit p : X (q p)) = ω :=\n  rfl\n#align ω_unit_coe ω_unit_coe\n\n",
+ "ω_pow_formula":
+ "theorem ω_pow_formula (p' : ℕ) (h : lucas_lehmer_residue (p' + 2) = 0) :\n    ∃ k : ℤ, (ω : X (q (p' + 2))) ^ 2 ^ (p' + 1) = k * mersenne (p' + 2) * (ω : X (q (p' + 2))) ^ 2 ^ p' - 1 :=\n  by\n  dsimp [lucas_lehmer_residue] at h\n  rw [s_zmod_eq_s p'] at h\n  simp [zmod.int_coe_zmod_eq_zero_iff_dvd] at h\n  cases' h with k h\n  use k\n  replace h := congr_arg (fun n : ℤ => (n : X (q (p' + 2)))) h\n  -- coercion from ℤ to X q\n  dsimp at h\n  rw [closed_form] at h\n  replace h := congr_arg (fun x => ω ^ 2 ^ p' * x) h\n  dsimp at h\n  have t : 2 ^ p' + 2 ^ p' = 2 ^ (p' + 1) := by ring\n  rw [mul_add, ← pow_add ω, t, ← mul_pow ω ωb (2 ^ p'), ω_mul_ωb, one_pow] at h\n  rw [mul_comm, coe_mul] at h\n  rw [mul_comm _ (k : X (q (p' + 2)))] at h\n  replace h := eq_sub_of_add_eq h\n  have : 1 ≤ 2 ^ (p' + 2) := Nat.one_le_pow _ _ (by decide)\n  exact_mod_cast h\n#align ω_pow_formula ω_pow_formula\n\n",
+ "ω_pow_eq_one":
+ "theorem ω_pow_eq_one (p' : ℕ) (h : lucas_lehmer_residue (p' + 2) = 0) : (ω : X (q (p' + 2))) ^ 2 ^ (p' + 2) = 1 :=\n  calc\n    (ω : X (q (p' + 2))) ^ 2 ^ (p' + 2) = (ω ^ 2 ^ (p' + 1)) ^ 2 := by rw [← pow_mul, ← pow_succ']\n    _ = (-1) ^ 2 := by rw [ω_pow_eq_neg_one p' h]\n    _ = 1 := by simp\n    \n#align ω_pow_eq_one ω_pow_eq_one\n\n",
+ "ω_pow_eq_neg_one":
+ "theorem ω_pow_eq_neg_one (p' : ℕ) (h : lucas_lehmer_residue (p' + 2) = 0) : (ω : X (q (p' + 2))) ^ 2 ^ (p' + 1) = -1 :=\n  by\n  cases' ω_pow_formula p' h with k w\n  rw [mersenne_coe_X] at w\n  simpa using w\n#align ω_pow_eq_neg_one ω_pow_eq_neg_one\n\n",
+ "ω_mul_ωb":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«exprℕ+» -/\ntheorem ω_mul_ωb (q : «exprℕ+») : (ω : X q) * ωb = 1 :=\n  by\n  dsimp [ω, ωb]\n  ext <;> simp <;> ring\n#align ω_mul_ωb ω_mul_ωb\n\n",
+ "units_card":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ˣ» -/\n/-- There are strictly fewer than `q^2` units, since `0` is not a unit. -/\ntheorem units_card (w : 1 < q) : fintype.card («expr ˣ» (X q)) < q ^ 2 :=\n  by\n  haveI : fact (1 < (q : ℕ)) := ⟨w⟩\n  convert card_units_lt (X q)\n  rw [X_card]\n#align units_card units_card\n\n",
+ "two_lt_q":
+ "/-- If `1 < p`, then `q p`, the smallest prime factor of `mersenne p`, is more than 2. -/\ntheorem two_lt_q (p' : ℕ) : 2 < q (p' + 2) := by\n  by_contra H\n  simp at H\n  interval_cases q (p' + 2); clear H\n  · -- If q = 1, we get a contradiction from 2^p = 2\n    dsimp [q] at h\n    injection h with h'\n    clear h\n    simp [mersenne] at h'\n    exact\n      lt_irrefl 2\n        (calc\n          2 ≤ p' + 2 := nat.le_add_left _ _\n          _ < 2 ^ (p' + 2) := Nat.lt_two_pow _\n          _ = 2 := nat.pred_inj (Nat.one_le_two_pow _) (by decide) h'\n          )\n  · -- If q = 2, we get a contradiction from 2 ∣ 2^p - 1\n    dsimp [q] at h\n    injection h with h'\n    clear h\n    rw [mersenne, PNat.one_coe, Nat.minFac_eq_two_iff, pow_succ] at h'\n    exact nat.two_not_dvd_two_mul_sub_one (Nat.one_le_two_pow _) h'\n#align two_lt_q two_lt_q\n\n",
+ "succ_mersenne":
+ "@[simp]\ntheorem succ_mersenne (k : ℕ) : mersenne k + 1 = 2 ^ k :=\n  by\n  rw [mersenne, tsub_add_cancel_of_le]\n  exact one_le_pow_of_one_le (by norm_num) k\n#align succ_mersenne succ_mersenne\n\n",
+ "s_zmod_eq_s_mod":
+ "theorem s_zmod_eq_s_mod (p : ℕ) (i : ℕ) : s_zmod p i = (s_mod p i : zmod (2 ^ p - 1)) := by\n  induction i <;> push_cast [← int.coe_nat_two_pow_pred p, s_mod, s_zmod, *]\n#align s_zmod_eq_s_mod s_zmod_eq_s_mod\n\n",
+ "s_zmod_eq_s":
+ "theorem s_zmod_eq_s (p' : ℕ) (i : ℕ) : s_zmod (p' + 2) i = (s i : zmod (2 ^ (p' + 2) - 1)) :=\n  by\n  induction' i with i ih\n  · dsimp [s, s_zmod]\n    norm_num\n  · push_cast [s, s_zmod, ih]\n#align s_zmod_eq_s s_zmod_eq_s\n\n",
+ "s_mod_succ":
+ "-- Here we calculate the residue, very inefficiently, using `dec_trivial`. We can do much better.\n-- Next we use `norm_num` to calculate each `s p i`.\ntheorem s_mod_succ {p a i b c} (h1 : (2 ^ p - 1 : ℤ) = a) (h2 : s_mod p i = b) (h3 : (b * b - 2) % a = c) :\n    s_mod p (i + 1) = c := by\n  dsimp [s_mod, mersenne]\n  rw [h1, h2, sq, h3]\n#align s_mod_succ s_mod_succ\n\n",
+ "s_mod_nonneg":
+ "theorem s_mod_nonneg (p : ℕ) (w : 0 < p) (i : ℕ) : 0 ≤ s_mod p i :=\n  by\n  cases i <;> dsimp [s_mod]\n  · exact sup_eq_right.mp rfl\n  · apply Int.emod_nonneg\n    exact mersenne_int_ne_zero p w\n#align s_mod_nonneg s_mod_nonneg\n\n",
+ "s_mod_mod":
+ "theorem s_mod_mod (p i : ℕ) : s_mod p i % (2 ^ p - 1) = s_mod p i := by cases i <;> simp [s_mod]\n#align s_mod_mod s_mod_mod\n\n",
+ "s_mod_lt":
+ "theorem s_mod_lt (p : ℕ) (w : 0 < p) (i : ℕ) : s_mod p i < 2 ^ p - 1 :=\n  by\n  rw [← s_mod_mod]\n  convert Int.emod_lt _ _\n  · refine' (abs_of_nonneg _).symm\n    simp only [sub_nonneg, ge_iff_le]\n    exact_mod_cast Nat.one_le_two_pow p\n  · exact mersenne_int_ne_zero p w\n#align s_mod_lt s_mod_lt\n\n",
+ "right_distrib":
+ "#print right_distrib /-\ntheorem right_distrib (x y z : X q) : (x + y) * z = x * z + y * z := by\n  ext <;>\n    · dsimp\n      ring\n#align right_distrib right_distrib\n-/\n\n",
+ "residue_eq_zero_iff_s_mod_eq_zero":
+ "theorem residue_eq_zero_iff_s_mod_eq_zero (p : ℕ) (w : 1 < p) : lucas_lehmer_residue p = 0 ↔ s_mod p (p - 2) = 0 :=\n  by\n  dsimp [lucas_lehmer_residue]\n  rw [s_zmod_eq_s_mod p]\n  constructor\n  · -- We want to use that fact that `0 ≤ s_mod p (p-2) < 2^p - 1`\n    -- and `lucas_lehmer_residue p = 0 → 2^p - 1 ∣ s_mod p (p-2)`.\n    intro h\n    simp [zmod.int_coe_zmod_eq_zero_iff_dvd] at h\n    apply Int.eq_zero_of_dvd_of_nonneg_of_lt _ _ h <;> clear h\n    apply s_mod_nonneg _ (nat.lt_of_succ_lt w)\n    exact s_mod_lt _ (nat.lt_of_succ_lt w) (p - 2)\n  · intro h\n    rw [h]\n    simp\n#align residue_eq_zero_iff_s_mod_eq_zero residue_eq_zero_iff_s_mod_eq_zero\n\n",
+ "order_ω":
+ "/-- The order of `ω` in the unit group is exactly `2^p`. -/\ntheorem order_ω (p' : ℕ) (h : lucas_lehmer_residue (p' + 2) = 0) : order_of (ω_unit (p' + 2)) = 2 ^ (p' + 2) :=\n  by\n  apply Nat.eq_prime_pow_of_dvd_least_prime_pow\n  -- the order of ω divides 2^p\n  · exact Nat.prime_two\n  · intro o\n    have ω_pow := order_of_dvd_iff_pow_eq_one.1 o\n    replace ω_pow := congr_arg (Units.coeHom (X (q (p' + 2))) : Units (X (q (p' + 2))) → X (q (p' + 2))) ω_pow\n    simp at ω_pow\n    have h : (1 : zmod (q (p' + 2))) = -1 := congr_arg prod.fst (ω_pow.symm.trans (ω_pow_eq_neg_one p' h))\n    haveI : fact (2 < (q (p' + 2) : ℕ)) := ⟨two_lt_q _⟩\n    apply zmod.neg_one_ne_one h.symm\n  · apply order_of_dvd_iff_pow_eq_one.2\n    apply Units.ext\n    push_cast\n    exact ω_pow_eq_one p' h\n#align order_ω order_ω\n\n",
+ "order_ineq":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ˣ» -/\ntheorem order_ineq (p' : ℕ) (h : lucas_lehmer_residue (p' + 2) = 0) : 2 ^ (p' + 2) < (q (p' + 2) : ℕ) ^ 2 :=\n  calc\n    2 ^ (p' + 2) = order_of (ω_unit (p' + 2)) := (order_ω p' h).symm\n    _ ≤ fintype.card («expr ˣ» (X _)) := order_of_le_card_univ\n    _ < (q (p' + 2) : ℕ) ^ 2 := units_card (nat.lt_of_succ_lt (two_lt_q _))\n    \n#align order_ineq order_ineq\n\n",
+ "one_snd":
+ "@[simp]\ntheorem one_snd : (1 : X q).2 = 0 :=\n  rfl\n#align one_snd one_snd\n\n",
+ "one_fst":
+ "@[simp]\ntheorem one_fst : (1 : X q).1 = 1 :=\n  rfl\n#align one_fst one_fst\n\n",
+ "neg_snd":
+ "@[simp]\ntheorem neg_snd (x : X q) : (-x).2 = -x.2 :=\n  rfl\n#align neg_snd neg_snd\n\n",
+ "neg_fst":
+ "@[simp]\ntheorem neg_fst (x : X q) : (-x).1 = -x.1 :=\n  rfl\n#align neg_fst neg_fst\n\n",
+ "nat_coe_snd":
+ "@[simp]\ntheorem nat_coe_snd (n : ℕ) : (n : X q).snd = (0 : zmod q) :=\n  rfl\n#align nat_coe_snd nat_coe_snd\n\n",
+ "nat_coe_fst":
+ "@[simp]\ntheorem nat_coe_fst (n : ℕ) : (n : X q).fst = (n : zmod q) :=\n  rfl\n#align nat_coe_fst nat_coe_fst\n\n",
+ "mul_snd":
+ "@[simp]\ntheorem mul_snd (x y : X q) : (x * y).2 = x.1 * y.2 + x.2 * y.1 :=\n  rfl\n#align mul_snd mul_snd\n\n",
+ "mul_fst":
+ "@[simp]\ntheorem mul_fst (x y : X q) : (x * y).1 = x.1 * y.1 + 3 * x.2 * y.2 :=\n  rfl\n#align mul_fst mul_fst\n\n",
+ "modeq_mersenne":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≡ [MOD ]» -/\n-- Calculate the candidate Mersenne prime\n-- base case\n-- step case, repeated p-2 times\n-- now close the goal\ntheorem modeq_mersenne (n k : ℕ) : «expr ≡ [MOD ]» k (k / 2 ^ n + k % 2 ^ n) (2 ^ n - 1) :=\n  by\n  -- See https://leanprover.zulipchat.com/#narrow/stream/113489-new-members/topic/help.20finding.20a.20lemma/near/177698446\n  conv in k => rw [← nat.div_add_mod k (2 ^ n)]\n  refine' Nat.ModEq.add_right _ _\n  conv =>\n    congr\n    skip\n    skip\n    rw [← one_mul (k / 2 ^ n)]\n  exact (Nat.modEq_sub <| nat.succ_le_of_lt <| pow_pos zero_lt_two _).mul_right _\n#align modeq_mersenne modeq_mersenne\n\n",
+ "mersenne_pos":
+ "/-\nCopyright (c) 2020 Scott Morrison. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Mario Carneiro, Scott Morrison, Ainsley Pahljina\n-/\ntheorem mersenne_pos {p : ℕ} (h : 0 < p) : 0 < mersenne p :=\n  by\n  dsimp [mersenne]\n  calc\n    0 < 2 ^ 1 - 1 := by norm_num\n    _ ≤ 2 ^ p - 1 := nat.pred_le_pred (Nat.pow_le_pow_of_le_right (nat.succ_pos 1) h)\n    \n#align mersenne_pos mersenne_pos\n\n",
+ "mersenne_int_ne_zero":
+ "theorem mersenne_int_ne_zero (p : ℕ) (w : 0 < p) : (2 ^ p - 1 : ℤ) ≠ 0 :=\n  by\n  apply ne_of_gt; simp only [gt_iff_lt, sub_pos]\n  exact_mod_cast Nat.one_lt_two_pow p w\n#align mersenne_int_ne_zero mersenne_int_ne_zero\n\n",
+ "mersenne_coe_X":
+ "/-- `q` is the minimum factor of `mersenne p`, so `M p = 0` in `X q`. -/\ntheorem mersenne_coe_X (p : ℕ) : (mersenne p : X (q p)) = 0 :=\n  by\n  ext <;> simp [mersenne, q, zmod.nat_coe_zmod_eq_zero_iff_dvd, -pow_pos]\n  apply Nat.minFac_dvd\n#align mersenne_coe_X mersenne_coe_X\n\n",
+ "lucas_lehmer_sufficiency":
+ "theorem lucas_lehmer_sufficiency (p : ℕ) (w : 1 < p) : lucas_lehmer_test p → (mersenne p).prime :=\n  by\n  let p' := p - 2\n  have z : p = p' + 2 := (tsub_eq_iff_eq_add_of_le w.nat_succ_le).mp rfl\n  have w : 1 < p' + 2 := nat.lt_of_sub_eq_succ rfl\n  contrapose\n  intro a t\n  rw [z] at a\n  rw [z] at t\n  have h₁ := order_ineq p' t\n  have h₂ := Nat.minFac_sq_le_self (mersenne_pos (nat.lt_of_succ_lt w)) a\n  have h := lt_of_lt_of_le h₁ h₂\n  exact not_lt_of_ge (nat.sub_le _ _) h\n#align lucas_lehmer_sufficiency lucas_lehmer_sufficiency\n\n",
+ "left_distrib":
+ "#print left_distrib /-\ntheorem left_distrib (x y z : X q) : x * (y + z) = x * y + x * z := by\n  ext <;>\n    · dsimp\n      ring\n#align left_distrib left_distrib\n-/\n\n",
+ "int_coe_snd":
+ "@[simp]\ntheorem int_coe_snd (n : ℤ) : (n : X q).snd = (0 : zmod q) :=\n  rfl\n#align int_coe_snd int_coe_snd\n\n",
+ "int_coe_fst":
+ "@[simp]\ntheorem int_coe_fst (n : ℤ) : (n : X q).fst = (n : zmod q) :=\n  rfl\n#align int_coe_fst int_coe_fst\n\n",
+ "ext":
+ "-- It would be nice to define this as (ℤ/qℤ)[x] / (x^2 - 3),\n-- obtaining the ring structure for free,\n-- but that seems to be more trouble than it's worth;\n-- if it were easy to make the definition,\n-- cardinality calculations would be somewhat more involved, too.\n@[ext]\ntheorem ext {x y : X q} (h₁ : x.1 = y.1) (h₂ : x.2 = y.2) : x = y :=\n  by\n  cases x; cases y\n  congr <;> assumption\n#align ext ext\n\n",
+ "coe_nat_two_pow_pred":
+ "theorem int.coe_nat_two_pow_pred (p : ℕ) : ((2 ^ p - 1 : ℕ) : ℤ) = (2 ^ p - 1 : ℤ) :=\n  int.coe_nat_pow_pred 2 p (by decide)\n#align int.coe_nat_two_pow_pred int.coe_nat_two_pow_pred\n\n",
+ "coe_nat_pow_pred":
+ "-- These next two don't make good `norm_cast` lemmas.\ntheorem int.coe_nat_pow_pred (b p : ℕ) (w : 0 < b) : ((b ^ p - 1 : ℕ) : ℤ) = (b ^ p - 1 : ℤ) :=\n  by\n  have : 1 ≤ b ^ p := Nat.one_le_pow p b w\n  norm_cast\n#align int.coe_nat_pow_pred int.coe_nat_pow_pred\n\n",
+ "coe_nat":
+ "@[norm_cast]\ntheorem coe_nat (n : ℕ) : ((n : ℤ) : X q) = (n : X q) := by ext <;> simp\n#align coe_nat coe_nat\n\n",
+ "coe_mul":
+ "@[norm_cast]\ntheorem coe_mul (n m : ℤ) : ((n * m : ℤ) : X q) = (n : X q) * (m : X q) := by ext <;> simp <;> ring\n#align coe_mul coe_mul\n\n",
+ "closed_form":
+ "/-- A closed form for the recurrence relation. -/\ntheorem closed_form (i : ℕ) : (s i : X q) = (ω : X q) ^ 2 ^ i + (ωb : X q) ^ 2 ^ i :=\n  by\n  induction' i with i ih\n  · dsimp [s, ω, ωb]\n    ext <;> · simp <;> rfl\n  ·\n    calc\n      (s (i + 1) : X q) = (s i ^ 2 - 2 : ℤ) := rfl\n      _ = (s i : X q) ^ 2 - 2 := by push_cast\n      _ = (ω ^ 2 ^ i + ωb ^ 2 ^ i) ^ 2 - 2 := by rw [ih]\n      _ = (ω ^ 2 ^ i) ^ 2 + (ωb ^ 2 ^ i) ^ 2 + 2 * (ωb ^ 2 ^ i * ω ^ 2 ^ i) - 2 := by ring\n      _ = (ω ^ 2 ^ i) ^ 2 + (ωb ^ 2 ^ i) ^ 2 := by rw [← mul_pow ωb ω, ωb_mul_ω, one_pow, mul_one, add_sub_cancel]\n      _ = ω ^ 2 ^ (i + 1) + ωb ^ 2 ^ (i + 1) := by rw [← pow_mul, ← pow_mul, pow_succ']\n      \n#align closed_form closed_form\n\n",
+ "bit1_snd":
+ "@[simp]\ntheorem bit1_snd (x : X q) : (bit1 x).2 = bit0 x.2 :=\n  by\n  dsimp [bit1]\n  simp\n#align bit1_snd bit1_snd\n\n",
+ "bit1_fst":
+ "@[simp]\ntheorem bit1_fst (x : X q) : (bit1 x).1 = bit1 x.1 :=\n  rfl\n#align bit1_fst bit1_fst\n\n",
+ "bit0_snd":
+ "@[simp]\ntheorem bit0_snd (x : X q) : (bit0 x).2 = bit0 x.2 :=\n  rfl\n#align bit0_snd bit0_snd\n\n",
+ "bit0_fst":
+ "@[simp]\ntheorem bit0_fst (x : X q) : (bit0 x).1 = bit0 x.1 :=\n  rfl\n#align bit0_fst bit0_fst\n\n",
+ "add_snd":
+ "@[simp]\ntheorem add_snd (x y : X q) : (x + y).2 = x.2 + y.2 :=\n  rfl\n#align add_snd add_snd\n\n",
+ "add_fst":
+ "@[simp]\ntheorem add_fst (x y : X q) : (x + y).1 = x.1 + y.1 :=\n  rfl\n#align add_fst add_fst\n\n",
+ "X_card":
+ "/-- The cardinality of `X` is `q^2`. -/\ntheorem X_card : fintype.card (X q) = q ^ 2 := by\n  dsimp [X]\n  rw [fintype.card_prod, zmod.card q]\n  ring\n#align X_card X_card\n\n"}

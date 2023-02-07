@@ -1,0 +1,54 @@
+{"succ_div_of_not_dvd":
+ "theorem succ_div_of_not_dvd {a b : ℕ} (hba : ¬b ∣ a + 1) : (a + 1) / b = a / b := by rw [succ_div, if_neg hba, add_zero]\n#align succ_div_of_not_dvd succ_div_of_not_dvd\n\n",
+ "succ_div_of_dvd":
+ "theorem succ_div_of_dvd {a b : ℕ} (hba : b ∣ a + 1) : (a + 1) / b = a / b + 1 := by rw [succ_div, if_pos hba]\n#align succ_div_of_dvd succ_div_of_dvd\n\n",
+ "succ_div":
+ "theorem succ_div : ∀ a b : ℕ, (a + 1) / b = a / b + if b ∣ a + 1 then 1 else 0\n  | a, 0 => by simp\n  | 0, 1 => by simp\n  | 0, b + 2 => by\n    have hb2 : b + 2 > 1 := by decide\n    simp [ne_of_gt hb2, div_eq_of_lt hb2]\n  | a + 1, b + 1 => by\n    rw [Nat.div_eq]; conv_rhs => rw [Nat.div_eq]\n    by_cases hb_eq_a : b = a + 1\n    · simp [hb_eq_a, le_refl]\n    by_cases hb_le_a1 : b ≤ a + 1\n    · have hb_le_a : b ≤ a := le_of_lt_succ (lt_of_le_of_ne hb_le_a1 hb_eq_a)\n      have h₁ : 0 < b + 1 ∧ b + 1 ≤ a + 1 + 1 := ⟨succ_pos _, (add_le_add_iff_right _).2 hb_le_a1⟩\n      have h₂ : 0 < b + 1 ∧ b + 1 ≤ a + 1 := ⟨succ_pos _, (add_le_add_iff_right _).2 hb_le_a⟩\n      have dvd_iff : b + 1 ∣ a - b + 1 ↔ b + 1 ∣ a + 1 + 1 := by\n        rw [nat.dvd_add_iff_left (dvd_refl (b + 1)), ← add_tsub_add_eq_tsub_right a 1 b, add_comm (_ - _), add_assoc,\n          tsub_add_cancel_of_le (succ_le_succ hb_le_a), add_comm 1]\n      have wf : a - b < a + 1 := lt_succ_of_le tsub_le_self\n      rw [if_pos h₁, if_pos h₂, add_tsub_add_eq_tsub_right, ← tsub_add_eq_add_tsub hb_le_a,\n        have := wf\n        succ_div (a - b),\n        add_tsub_add_eq_tsub_right]\n      simp [dvd_iff, succ_eq_add_one, add_comm 1, add_assoc]\n    · have hba : ¬b ≤ a := not_le_of_gt (lt_trans (lt_succ_self a) (lt_of_not_ge hb_le_a1))\n      have hb_dvd_a : ¬b + 1 ∣ a + 2 := fun h => hb_le_a1 (le_of_succ_le_succ (le_of_dvd (succ_pos _) h))\n      simp [hba, hb_le_a1, hb_dvd_a]\n#align succ_div succ_div\n\n",
+ "set_eq_univ":
+ "theorem set_eq_univ {S : set ℕ} : S = Set.univ ↔ 0 ∈ S ∧ ∀ k : ℕ, k ∈ S → k + 1 ∈ S :=\n  ⟨by rintro rfl <;> simp, fun ⟨h0, hs⟩ => Set.eq_univ_of_forall (set_induction h0 hs)⟩\n#align set_eq_univ set_eq_univ\n\n",
+ "not_two_dvd_bit1":
+ "@[simp]\nprotected theorem not_two_dvd_bit1 (n : ℕ) : ¬2 ∣ bit1 n :=\n  by\n  rw [bit1, Nat.dvd_add_right two_dvd_bit0, Nat.dvd_one]\n  cc\n#align not_two_dvd_bit1 not_two_dvd_bit1\n\n",
+ "not_dvd_iff_between_consec_multiples":
+ "/-- `n` is not divisible by `a` iff it is between `a * k` and `a * (k + 1)` for some `k`. -/\ntheorem not_dvd_iff_between_consec_multiples (n : ℕ) {a : ℕ} (ha : 0 < a) :\n    (∃ k : ℕ, a * k < n ∧ n < a * (k + 1)) ↔ ¬a ∣ n :=\n  by\n  refine'\n    ⟨fun ⟨k, hk1, hk2⟩ => not_dvd_of_between_consec_multiples hk1 hk2, fun han =>\n      ⟨n / a, ⟨lt_of_le_of_ne (mul_div_le n a) _, lt_mul_div_succ _ ha⟩⟩⟩\n  exact mt (Dvd.intro (n / a)) han\n#align not_dvd_iff_between_consec_multiples not_dvd_iff_between_consec_multiples\n\n",
+ "mod_div_self":
+ "@[simp]\ntheorem mod_div_self (m n : ℕ) : m % n / n = 0 := by\n  cases n\n  · exact (m % 0).div_zero\n  · exact Nat.div_eq_zero (m.mod_lt n.succ_pos)\n#align mod_div_self mod_div_self\n\n",
+ "lt_div_iff_mul_lt":
+ "#print lt_div_iff_mul_lt /-\nprotected theorem lt_div_iff_mul_lt {n d : ℕ} (hnd : d ∣ n) (a : ℕ) : a < n / d ↔ d * a < n :=\n  by\n  rcases d.eq_zero_or_pos with (rfl | hd0); · simp [zero_dvd_iff.mp hnd]\n  rw [← mul_lt_mul_left hd0, ← Nat.eq_mul_of_div_eq_right hnd rfl]\n#align lt_div_iff_mul_lt lt_div_iff_mul_lt\n-/\n\n",
+ "eq_zero_of_dvd_of_lt":
+ "/-- If a small natural number is divisible by a larger natural number,\nthe small number is zero. -/\ntheorem eq_zero_of_dvd_of_lt {a b : ℕ} (w : a ∣ b) (h : b < a) : b = 0 :=\n  Nat.eq_zero_of_dvd_of_div_eq_zero w ((Nat.div_eq_zero_iff (lt_of_le_of_lt (zero_le b) h)).elim_right h)\n#align eq_zero_of_dvd_of_lt eq_zero_of_dvd_of_lt\n\n",
+ "dvd_sub'":
+ "-- TODO: update `nat.dvd_sub` in core\ntheorem dvd_sub' {k m n : ℕ} (h₁ : k ∣ m) (h₂ : k ∣ n) : k ∣ m - n :=\n  by\n  cases' le_total n m with H H\n  · exact dvd_sub H h₁ h₂\n  · rw [tsub_eq_zero_iff_le.mpr H]\n    exact dvd_zero k\n#align dvd_sub' dvd_sub'\n\n",
+ "dvd_right_iff_eq":
+ "/-- Two natural numbers are equal if and only if they have the same multiples. -/\ntheorem dvd_right_iff_eq {m n : ℕ} : (∀ a : ℕ, m ∣ a ↔ n ∣ a) ↔ m = n :=\n  ⟨fun h => dvd_antisymm ((h _).mpr dvd_rfl) ((h _).mp dvd_rfl), fun h n => by rw [h]⟩\n#align dvd_right_iff_eq dvd_right_iff_eq\n\n",
+ "dvd_one":
+ "@[simp]\nprotected theorem dvd_one {n : ℕ} : n ∣ 1 ↔ n = 1 :=\n  ⟨eq_one_of_dvd_one, fun e => e.symm ▸ dvd_rfl⟩\n#align dvd_one dvd_one\n\n",
+ "dvd_left_injective":
+ "/-- `dvd` is injective in the left argument -/\ntheorem dvd_left_injective : function.injective ((· ∣ ·) : ℕ → ℕ → Prop) := fun m n h =>\n  dvd_right_iff_eq.mp fun a => iff_of_eq (congr_fun h a)\n#align dvd_left_injective dvd_left_injective\n\n",
+ "dvd_left_iff_eq":
+ "/-- Two natural numbers are equal if and only if they have the same divisors. -/\ntheorem dvd_left_iff_eq {m n : ℕ} : (∀ a : ℕ, a ∣ m ↔ a ∣ n) ↔ m = n :=\n  ⟨fun h => dvd_antisymm ((h _).mp dvd_rfl) ((h _).mpr dvd_rfl), fun h n => by rw [h]⟩\n#align dvd_left_iff_eq dvd_left_iff_eq\n\n",
+ "dvd_iff_le_div_mul":
+ "theorem dvd_iff_le_div_mul (n d : ℕ) : d ∣ n ↔ n ≤ n / d * d :=\n  ((dvd_iff_div_mul_eq _ _).trans le_antisymm_iff).trans (and_iff_right (div_mul_le_self n d))\n#align dvd_iff_le_div_mul dvd_iff_le_div_mul\n\n",
+ "dvd_iff_dvd_dvd":
+ "theorem dvd_iff_dvd_dvd (n d : ℕ) : d ∣ n ↔ ∀ k : ℕ, k ∣ d → k ∣ n :=\n  ⟨fun h k hkd => dvd_trans hkd h, fun h => h _ dvd_rfl⟩\n#align dvd_iff_dvd_dvd dvd_iff_dvd_dvd\n\n",
+ "dvd_iff_div_mul_eq":
+ "theorem dvd_iff_div_mul_eq (n d : ℕ) : d ∣ n ↔ n / d * d = n :=\n  ⟨fun h => Nat.div_mul_cancel h, fun h => Dvd.intro_left (n / d) h⟩\n#align dvd_iff_div_mul_eq dvd_iff_div_mul_eq\n\n",
+ "dvd_div_of_mul_dvd":
+ "theorem dvd_div_of_mul_dvd {a b c : ℕ} (h : a * b ∣ c) : b ∣ c / a :=\n  if ha : a = 0 then by simp [ha]\n  else\n    have ha : 0 < a := nat.pos_of_ne_zero ha\n    have h1 : ∃ d, c = a * b * d := h\n    let ⟨d, hd⟩ := h1\n    have h2 : c / a = b * d := Nat.div_eq_of_eq_mul_right ha (by simpa [mul_assoc] using hd)\n    show ∃ d, c / a = b * d from ⟨d, h2⟩\n#align dvd_div_of_mul_dvd dvd_div_of_mul_dvd\n\n",
+ "dvd_div_iff":
+ "@[simp]\ntheorem dvd_div_iff {a b c : ℕ} (hbc : c ∣ b) : a ∣ b / c ↔ c * a ∣ b :=\n  ⟨fun h => mul_dvd_of_dvd_div hbc h, fun h => dvd_div_of_mul_dvd h⟩\n#align dvd_div_iff dvd_div_iff\n\n",
+ "dvd_add_self_right":
+ "#print dvd_add_self_right /-\n/-- A natural number `m` divides the sum `n + m` if and only if `m` divides `n`.-/\n@[simp]\nprotected theorem dvd_add_self_right {m n : ℕ} : m ∣ n + m ↔ m ∣ n :=\n  Nat.dvd_add_left (dvd_refl m)\n#align dvd_add_self_right dvd_add_self_right\n-/\n\n",
+ "dvd_add_self_left":
+ "#print dvd_add_self_left /-\n/-- A natural number `m` divides the sum `m + n` if and only if `m` divides `n`.-/\n@[simp]\nprotected theorem dvd_add_self_left {m n : ℕ} : m ∣ m + n ↔ m ∣ n :=\n  Nat.dvd_add_right (dvd_refl m)\n#align dvd_add_self_left dvd_add_self_left\n-/\n\n",
+ "div_lt_div_of_lt_of_dvd":
+ "theorem div_lt_div_of_lt_of_dvd {a b d : ℕ} (hdb : d ∣ b) (h : a < b) : a / d < b / d :=\n  by\n  rw [Nat.lt_div_iff_mul_lt hdb]\n  exact lt_of_le_of_lt (mul_div_le a d) h\n#align div_lt_div_of_lt_of_dvd div_lt_div_of_lt_of_dvd\n\n",
+ "div_eq_zero_iff":
+ "#print div_eq_zero_iff /-\nprotected theorem div_eq_zero_iff {a b : ℕ} (hb : 0 < b) : a / b = 0 ↔ a < b :=\n  ⟨fun h => by rw [← mod_add_div a b, h, mul_zero, add_zero] <;> exact mod_lt _ hb, fun h => by\n    rw [← mul_right_inj' hb.ne', ← @add_left_cancel_iff _ _ _ (a % b), mod_add_div, mod_eq_of_lt h, mul_zero, add_zero]⟩\n#align div_eq_zero_iff div_eq_zero_iff\n-/\n\n",
+ "div_eq_zero":
+ "protected theorem div_eq_zero {a b : ℕ} (hb : a < b) : a / b = 0 :=\n  (Nat.div_eq_zero_iff <| (zero_le a).trans_lt hb).mpr hb\n#align div_eq_zero div_eq_zero\n\n",
+ "div_eq_iff_eq_of_dvd_dvd":
+ "theorem div_eq_iff_eq_of_dvd_dvd {n x y : ℕ} (hn : n ≠ 0) (hx : x ∣ n) (hy : y ∣ n) : n / x = n / y ↔ x = y :=\n  by\n  constructor\n  · intro h\n    rw [← mul_right_inj' hn]\n    apply Nat.eq_mul_of_div_eq_left (dvd_mul_of_dvd_left hy x)\n    rw [eq_comm, mul_comm, Nat.mul_div_assoc _ hy]\n    exact Nat.eq_mul_of_div_eq_right hx h\n  · intro h\n    rw [h]\n#align div_eq_iff_eq_of_dvd_dvd div_eq_iff_eq_of_dvd_dvd\n\n",
+ "div_div_div_eq_div":
+ "@[simp]\ntheorem div_div_div_eq_div : ∀ {a b c : ℕ} (dvd : b ∣ a) (dvd2 : a ∣ c), c / (a / b) / b = c / a\n  | 0, _ => by simp\n  | a + 1, 0 => fun _ dvd _ => by simpa using dvd\n  | a + 1, c + 1 =>\n    have a_split : a + 1 ≠ 0 := succ_ne_zero a\n    have c_split : c + 1 ≠ 0 := succ_ne_zero c\n    fun b dvd dvd2 => by\n    rcases dvd2 with ⟨k, rfl⟩\n    rcases dvd with ⟨k2, pr⟩\n    have k2_nonzero : k2 ≠ 0 := fun k2_zero => by simpa [k2_zero] using pr\n    rw [nat.mul_div_cancel_left k (nat.pos_of_ne_zero a_split), pr,\n      nat.mul_div_cancel_left k2 (nat.pos_of_ne_zero c_split), nat.mul_comm ((c + 1) * k2) k, ←\n      nat.mul_assoc k (c + 1) k2, nat.mul_div_cancel _ (nat.pos_of_ne_zero k2_nonzero),\n      nat.mul_div_cancel _ (nat.pos_of_ne_zero c_split)]\n#align div_div_div_eq_div div_div_div_eq_div\n\n",
+ "coe_bot":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n#print Subtype.coe_bot /-\n/-\nCopyright (c) 2014 Floris van Doorn (c) 2016 Microsoft Corporation. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Floris van Doorn, Leonardo de Moura, Jeremy Avigad, Mario Carneiro\n-/\ntheorem Subtype.coe_bot {s : set ℕ} [decidable_pred (· ∈ s)] [h : nonempty s] :\n    ((«expr⊥» : s) : ℕ) = nat.find (nonempty_subtype.1 h) :=\n  rfl\n#align subtype.coe_bot Subtype.coe_bot\n-/\n\n"}

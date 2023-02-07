@@ -1,0 +1,8 @@
+{"right_inv_nat":
+ "theorem right_inv_nat : function.right_inverse of_nat to_nat\n  | nat.zero => rfl\n  | nat.succ n => by rw [of_nat, to_nat, right_inv_nat n]\n#align right_inv_nat right_inv_nat\n\n",
+ "right_inv_list":
+ "theorem right_inv_list : function.right_inverse (of_list γ) (to_list _)\n  | list.nil => rfl\n  | list.cons hd tl => by simp [right_inv_list tl]\n#align right_inv_list right_inv_list\n\n",
+ "left_inv_nat":
+ "/-\nCopyright (c) 2015 Joseph Hua. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Joseph Hua\n-/\ntheorem left_inv_nat : function.left_inverse of_nat to_nat\n  | W_type.mk nat_α.zero f => by\n    simp\n    tidy\n  | W_type.mk nat_α.succ f => by\n    simp\n    tidy\n#align left_inv_nat left_inv_nat\n\n",
+ "left_inv_list":
+ "theorem left_inv_list : function.left_inverse (of_list γ) (to_list _)\n  | W_type.mk list_α.nil f => by\n    simp\n    tidy\n  | W_type.mk (list_α.cons x) f => by\n    simp\n    tidy\n#align left_inv_list left_inv_list\n\n"}

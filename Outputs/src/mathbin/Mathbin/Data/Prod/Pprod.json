@@ -1,0 +1,12 @@
+{"pprod_map":
+ "theorem function.injective.pprod_map {f : α → β} {g : γ → δ} (hf : injective f) (hg : injective g) :\n    injective (fun x => ⟨f x.1, g x.2⟩ : PProd α γ → PProd β δ) := fun ⟨x₁, x₂⟩ ⟨y₁, y₂⟩ h =>\n  have A := congr_arg pprod.fst h\n  have B := congr_arg pprod.snd h\n  congr_arg₂ pprod.mk (hf A) (hg B)\n#align function.injective.pprod_map function.injective.pprod_map\n\n",
+ "forall'":
+ "theorem forall' {p : α → β → Prop} : (∀ x : PProd α β, p x.1 x.2) ↔ ∀ a b, p a b :=\n  pprod.forall\n#align forall' forall'\n\n",
+ "forall":
+ "@[simp]\ntheorem forall {p : PProd α β → Prop} : (∀ x, p x) ↔ ∀ a b, p ⟨a, b⟩ :=\n  ⟨fun h a b => h ⟨a, b⟩, fun h ⟨a, b⟩ => h a b⟩\n#align forall forall\n\n",
+ "exists'":
+ "theorem exists' {p : α → β → Prop} : (∃ x : PProd α β, p x.1 x.2) ↔ ∃ a b, p a b :=\n  pprod.exists\n#align exists' exists'\n\n",
+ "exists":
+ "@[simp]\ntheorem exists {p : PProd α β → Prop} : (∃ x, p x) ↔ ∃ a b, p ⟨a, b⟩ :=\n  ⟨fun ⟨⟨a, b⟩, h⟩ => ⟨a, b, h⟩, fun ⟨a, b, h⟩ => ⟨⟨a, b⟩, h⟩⟩\n#align exists exists\n\n",
+ "eta":
+ "/-\nCopyright (c) 2020 Eric Wieser. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Eric Wieser\n-/\n@[simp]\ntheorem mk.eta {p : PProd α β} : pprod.mk p.1 p.2 = p :=\n  pprod.cases_on p fun a b => rfl\n#align mk.eta mk.eta\n\n"}

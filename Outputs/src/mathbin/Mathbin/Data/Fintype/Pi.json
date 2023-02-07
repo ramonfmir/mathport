@@ -1,0 +1,18 @@
+{"univ_pi_univ":
+ "@[simp]\ntheorem finset.univ_pi_univ {α : Type _} {β : α → Type _} [decidable_eq α] [fintype α] [∀ a, fintype (β a)] :\n    (finset.univ.pi fun a : α => (finset.univ : Finset (β a))) = finset.univ :=\n  by\n  ext\n  simp\n#align finset.univ_pi_univ finset.univ_pi_univ\n\n",
+ "pi_finset_univ":
+ "@[simp]\ntheorem fintype.pi_finset_univ {α : Type _} {β : α → Type _} [decidable_eq α] [fintype α] [∀ a, fintype (β a)] :\n    (fintype.pi_finset fun a : α => (finset.univ : Finset (β a))) = (finset.univ : Finset (∀ a, β a)) :=\n  rfl\n#align fintype.pi_finset_univ fintype.pi_finset_univ\n\n",
+ "pi_finset_subsingleton":
+ "theorem pi_finset_subsingleton {f : ∀ i, Finset (δ i)} (hf : ∀ i, (f i : set (δ i)).subsingleton) :\n    (fintype.pi_finset f : set (∀ i, δ i)).subsingleton := fun a ha b hb =>\n  funext fun i => hf _ (mem_pi_finset.1 ha _) (mem_pi_finset.1 hb _)\n#align pi_finset_subsingleton pi_finset_subsingleton\n\n",
+ "pi_finset_subset":
+ "theorem pi_finset_subset (t₁ t₂ : ∀ a, Finset (δ a)) (h : ∀ a, t₁ a ⊆ t₂ a) : pi_finset t₁ ⊆ pi_finset t₂ := fun g hg =>\n  mem_pi_finset.2 fun a => h a <| mem_pi_finset.1 hg a\n#align pi_finset_subset pi_finset_subset\n\n",
+ "pi_finset_singleton":
+ "@[simp]\ntheorem pi_finset_singleton (f : ∀ i, δ i) : pi_finset (fun i => {f i} : ∀ i, Finset (δ i)) = {f} :=\n  ext fun _ => by simp only [function.funext_iff, fintype.mem_pi_finset, mem_singleton]\n#align pi_finset_singleton pi_finset_singleton\n\n",
+ "pi_finset_empty":
+ "@[simp]\ntheorem pi_finset_empty [nonempty α] : pi_finset (fun _ => ∅ : ∀ i, Finset (δ i)) = ∅ :=\n  eq_empty_of_forall_not_mem fun _ => by simp\n#align pi_finset_empty pi_finset_empty\n\n",
+ "pi_finset_disjoint_of_disjoint":
+ "theorem pi_finset_disjoint_of_disjoint (t₁ t₂ : ∀ a, Finset (δ a)) {a : α} (h : Disjoint (t₁ a) (t₂ a)) :\n    Disjoint (pi_finset t₁) (pi_finset t₂) :=\n  disjoint_iff_ne.2 fun f₁ hf₁ f₂ hf₂ eq₁₂ =>\n    disjoint_iff_ne.1 h (f₁ a) (mem_pi_finset.1 hf₁ a) (f₂ a) (mem_pi_finset.1 hf₂ a) (congr_fun eq₁₂ a)\n#align pi_finset_disjoint_of_disjoint pi_finset_disjoint_of_disjoint\n\n",
+ "mem_pi_finset":
+ "/-\nCopyright (c) 2017 Mario Carneiro. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Mario Carneiro\n-/\n@[simp]\ntheorem mem_pi_finset {t : ∀ a, Finset (δ a)} {f : ∀ a, δ a} : f ∈ pi_finset t ↔ ∀ a, f a ∈ t a :=\n  by\n  constructor\n  · simp only [pi_finset, mem_map, and_imp, forall_prop_of_true, exists_prop, mem_univ, exists_imp, mem_pi]\n    rintro g hg hgf a\n    rw [← hgf]\n    exact hg a\n  · simp only [pi_finset, mem_map, forall_prop_of_true, exists_prop, mem_univ, mem_pi]\n    exact fun hf => ⟨fun a ha => f a, hf, rfl⟩\n#align mem_pi_finset mem_pi_finset\n\n",
+ "coe_pi_finset":
+ "@[simp]\ntheorem coe_pi_finset (t : ∀ a, Finset (δ a)) : (pi_finset t : set (∀ a, δ a)) = Set.pi Set.univ fun a => t a :=\n  Set.ext fun x => by\n    rw [Set.mem_univ_pi]\n    exact fintype.mem_pi_finset\n#align coe_pi_finset coe_pi_finset\n\n"}

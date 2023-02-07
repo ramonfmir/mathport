@@ -1,0 +1,16 @@
+{"one_apply":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⟶ » -/\n@[simp, to_additive]\ntheorem one_apply (G H : CommGroup) (g : G) : (1 : «expr ⟶ » G H) g = 1 :=\n  rfl\n#align one_apply one_apply\n\n",
+ "of_hom_apply":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →* » -/\n@[simp, to_additive]\ntheorem of_hom_apply {X Y : Type _} [comm_group X] [comm_group Y] (f : «expr →* » X Y) (x : X) : of_hom f x = f x :=\n  rfl\n#align of_hom_apply of_hom_apply\n\n",
+ "int_hom_ext":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⟶ » -/\n@[ext]\ntheorem int_hom_ext {G : AddCommGroup.{0}} (f g : «expr ⟶ » (AddCommGroup.of ℤ) G) (w : f (1 : ℤ) = g (1 : ℤ)) :\n    f = g :=\n  AddMonoidHom.ext_int w\n#align int_hom_ext int_hom_ext\n\n",
+ "injective_of_mono":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≫ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≫ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⟶ » -/\n-- TODO: this argument should be generalised to the situation where\n-- the forgetful functor is representable.\ntheorem injective_of_mono {G H : AddCommGroup.{0}} (f : «expr ⟶ » G H) [Mono f] : function.injective f := fun g₁ g₂ h =>\n  by\n  have t0 : «expr ≫ » (as_hom g₁) f = «expr ≫ » (as_hom g₂) f :=\n    by\n    ext\n    simpa [as_hom_apply] using h\n  have t1 : as_hom g₁ = as_hom g₂ := (cancel_mono _).1 t0\n  apply as_hom_injective t1\n#align injective_of_mono injective_of_mono\n\n",
+ "ext":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⟶ » -/\n@[ext, to_additive]\ntheorem ext (G H : CommGroup) (f₁ f₂ : «expr ⟶ » G H) (w : ∀ x, f₁ x = f₂ x) : f₁ = f₂ :=\n  by\n  ext1\n  apply w\n#align ext ext\n\n",
+ "coe_of":
+ "@[simp, to_additive]\ntheorem coe_of (R : Type u) [comm_group R] : (CommGroup.of R : Type u) = R :=\n  rfl\n#align coe_of coe_of\n\n",
+ "as_hom_injective":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⟶ » -/\ntheorem as_hom_injective {G : AddCommGroup.{0}} : function.injective (@as_hom G) := fun h k w => by\n  convert congr_arg (fun k : «expr ⟶ » (AddCommGroup.of ℤ) G => (k : ℤ → G) (1 : ℤ)) w <;> simp\n#align as_hom_injective as_hom_injective\n\n",
+ "as_hom_apply":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n-- This example verifies an improvement possible in Lean 3.8.\n-- Before that, to have `monoid_hom.map_map` usable by `simp` here,\n-- we had to mark all the concrete category `has_coe_to_sort` instances reducible.\n-- Now, it just works.\n-- Note that because `ℤ : Type 0`, this forces `G : AddCommGroup.{0}`,\n-- so we write this explicitly to be clear.\n-- TODO generalize this, requiring a `ulift_instances.lean` file\n@[simp]\ntheorem as_hom_apply {G : AddCommGroup.{0}} (g : G) (i : ℤ) : (as_hom g) i = «expr • » i g :=\n  rfl\n#align as_hom_apply as_hom_apply\n\n"}

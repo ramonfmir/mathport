@@ -1,0 +1,30 @@
+{"to_nat_of_nonpos":
+ "theorem to_nat_of_nonpos : ∀ {z : ℤ}, z ≤ 0 → z.to_nat = 0\n  | 0, _ => rfl\n  | (n + 1 : ℕ), h => (h.not_lt (by simp)).elim\n  | -[n+1], _ => rfl\n#align to_nat_of_nonpos to_nat_of_nonpos\n\n",
+ "succ_coe_nat_pos":
+ "@[simp]\ntheorem succ_coe_nat_pos (n : ℕ) : 0 < (n : ℤ) + 1 :=\n  lt_add_one_iff.mpr (by simp)\n#align succ_coe_nat_pos succ_coe_nat_pos\n\n",
+ "strict_mono_on_nat_abs":
+ "theorem strict_mono_on_nat_abs : strict_mono_on natAbs (Ici 0) := fun a ha b hb hab =>\n  natAbs_lt_natAbs_of_nonneg_of_lt ha hab\n#align strict_mono_on_nat_abs strict_mono_on_nat_abs\n\n",
+ "strict_anti_on_nat_abs":
+ "theorem strict_anti_on_nat_abs : strict_anti_on natAbs (Iic 0) := fun a ha b hb hab => by\n  simpa [Int.natAbs_neg] using nat_abs_lt_nat_abs_of_nonneg_of_lt (right.nonneg_neg_iff.mpr hb) (neg_lt_neg_iff.mpr hab)\n#align strict_anti_on_nat_abs strict_anti_on_nat_abs\n\n",
+ "nat_abs_lt_iff_sq_lt":
+ "theorem nat_abs_lt_iff_sq_lt {a b : ℤ} : a.nat_abs < b.nat_abs ↔ a ^ 2 < b ^ 2 :=\n  by\n  rw [sq, sq]\n  exact nat_abs_lt_iff_mul_self_lt\n#align nat_abs_lt_iff_sq_lt nat_abs_lt_iff_sq_lt\n\n",
+ "nat_abs_le_iff_sq_le":
+ "theorem nat_abs_le_iff_sq_le {a b : ℤ} : a.nat_abs ≤ b.nat_abs ↔ a ^ 2 ≤ b ^ 2 :=\n  by\n  rw [sq, sq]\n  exact nat_abs_le_iff_mul_self_le\n#align nat_abs_le_iff_sq_le nat_abs_le_iff_sq_le\n\n",
+ "nat_abs_inj_of_nonpos_of_nonpos":
+ "theorem nat_abs_inj_of_nonpos_of_nonpos {a b : ℤ} (ha : a ≤ 0) (hb : b ≤ 0) : natAbs a = natAbs b ↔ a = b := by\n  simpa only [Int.natAbs_neg, neg_inj] using\n    nat_abs_inj_of_nonneg_of_nonneg (neg_nonneg_of_nonpos ha) (neg_nonneg_of_nonpos hb)\n#align nat_abs_inj_of_nonpos_of_nonpos nat_abs_inj_of_nonpos_of_nonpos\n\n",
+ "nat_abs_inj_of_nonpos_of_nonneg":
+ "theorem nat_abs_inj_of_nonpos_of_nonneg {a b : ℤ} (ha : a ≤ 0) (hb : 0 ≤ b) : natAbs a = natAbs b ↔ -a = b := by\n  simpa only [Int.natAbs_neg] using nat_abs_inj_of_nonneg_of_nonneg (neg_nonneg_of_nonpos ha) hb\n#align nat_abs_inj_of_nonpos_of_nonneg nat_abs_inj_of_nonpos_of_nonneg\n\n",
+ "nat_abs_inj_of_nonneg_of_nonpos":
+ "theorem nat_abs_inj_of_nonneg_of_nonpos {a b : ℤ} (ha : 0 ≤ a) (hb : b ≤ 0) : natAbs a = natAbs b ↔ a = -b := by\n  simpa only [Int.natAbs_neg] using nat_abs_inj_of_nonneg_of_nonneg ha (neg_nonneg_of_nonpos hb)\n#align nat_abs_inj_of_nonneg_of_nonpos nat_abs_inj_of_nonneg_of_nonpos\n\n",
+ "nat_abs_inj_of_nonneg_of_nonneg":
+ "theorem nat_abs_inj_of_nonneg_of_nonneg {a b : ℤ} (ha : 0 ≤ a) (hb : 0 ≤ b) : natAbs a = natAbs b ↔ a = b := by\n  rw [← sq_eq_sq ha hb, ← nat_abs_eq_iff_sq_eq]\n#align nat_abs_inj_of_nonneg_of_nonneg nat_abs_inj_of_nonneg_of_nonneg\n\n",
+ "nat_abs_eq_iff_sq_eq":
+ "theorem nat_abs_eq_iff_sq_eq {a b : ℤ} : a.nat_abs = b.nat_abs ↔ a ^ 2 = b ^ 2 :=\n  by\n  rw [sq, sq]\n  exact nat_abs_eq_iff_mul_self_eq\n#align nat_abs_eq_iff_sq_eq nat_abs_eq_iff_sq_eq\n\n",
+ "le_coe_nat_sub":
+ "/-\nCopyright (c) 2016 Jeremy Avigad. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Jeremy Avigad\n-/\ntheorem le_coe_nat_sub (m n : ℕ) : (m - n : ℤ) ≤ ↑(m - n : ℕ) :=\n  by\n  by_cases h : m ≥ n\n  · exact le_of_eq (Int.ofNat_sub h).symm\n  · simp [le_of_not_ge h, coe_nat_le]\n#align le_coe_nat_sub le_coe_nat_sub\n\n",
+ "inj_on_nat_abs_Iic":
+ "theorem inj_on_nat_abs_Iic : InjOn natAbs (Iic 0) :=\n  strictAntiOn_natAbs.inj_on\n#align inj_on_nat_abs_Iic inj_on_nat_abs_Iic\n\n",
+ "inj_on_nat_abs_Ici":
+ "theorem inj_on_nat_abs_Ici : InjOn natAbs (Ici 0) :=\n  strictMonoOn_natAbs.inj_on\n#align inj_on_nat_abs_Ici inj_on_nat_abs_Ici\n\n",
+ "div2_bit":
+ "@[simp]\ntheorem div2_bit (b n) : div2 (bit b n) = n :=\n  by\n  rw [bit_val, div2_val, add_comm, Int.add_mul_ediv_left, (_ : (_ / 2 : ℤ) = 0), zero_add]\n  cases b\n  · simp\n  · show of_nat _ = _\n    rw [Nat.div_eq_zero] <;> simp\n  · cc\n#align div2_bit div2_bit\n\n"}

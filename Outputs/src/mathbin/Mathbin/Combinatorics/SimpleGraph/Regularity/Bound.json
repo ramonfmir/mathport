@@ -1,0 +1,44 @@
+{"step_bound_pos_iff":
+ "theorem step_bound_pos_iff {n : ℕ} : 0 < step_bound n ↔ 0 < n :=\n  zero_lt_mul_right <| by positivity\n#align step_bound_pos_iff step_bound_pos_iff\n\n",
+ "step_bound_mono":
+ "theorem step_bound_mono : monotone step_bound := fun a b h =>\n  nat.mul_le_mul h <| Nat.pow_le_pow_of_le_right (by norm_num) h\n#align step_bound_mono step_bound_mono\n\n",
+ "seven_le_initial_bound":
+ "theorem seven_le_initial_bound : 7 ≤ initial_bound ε l :=\n  le_max_left _ _\n#align seven_le_initial_bound seven_le_initial_bound\n\n",
+ "pow_mul_m_le_card_part":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprm -/\ntheorem pow_mul_m_le_card_part (hP : P.is_equipartition) (hu : u ∈ P.parts) :\n    (4 : exprℝ) ^ P.parts.card * exprm ≤ u.card := by\n  norm_cast\n  rw [step_bound, ← nat.div_div_eq_div_mul]\n  exact (Nat.mul_div_le _ _).trans (hP.average_le_card_part hu)\n#align pow_mul_m_le_card_part pow_mul_m_le_card_part\n\n",
+ "one_le_m_coe":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprm -/\ntheorem one_le_m_coe [nonempty α] (hPα : P.parts.card * 16 ^ P.parts.card ≤ card α) : (1 : exprℝ) ≤ exprm :=\n  nat.one_le_cast.2 <| m_pos hPα\n#align one_le_m_coe one_le_m_coe\n\n",
+ "m_pos":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprm -/\ntheorem m_pos [nonempty α] (hPα : P.parts.card * 16 ^ P.parts.card ≤ card α) : 0 < exprm :=\n  Nat.div_pos ((nat.mul_le_mul_left _ <| Nat.pow_le_pow_of_le_left (by norm_num) _).trans hPα) <|\n    step_bound_pos (P.parts_nonempty <| univ_nonempty.ne_empty).card_pos\n#align m_pos m_pos\n\n",
+ "m_coe_pos":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprm -/\ntheorem m_coe_pos [nonempty α] (hPα : P.parts.card * 16 ^ P.parts.card ≤ card α) : (0 : exprℝ) < exprm :=\n  nat.cast_pos.2 <| m_pos hPα\n#align m_coe_pos m_coe_pos\n\n",
+ "le_step_bound":
+ "/-\nCopyright (c) 2022 Yaël Dillies, Bhavik Mehta. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Yaël Dillies, Bhavik Mehta\n-/\ntheorem le_step_bound : id ≤ step_bound := fun n => Nat.le_mul_of_pos_right <| pow_pos (by norm_num) n\n#align le_step_bound le_step_bound\n\n",
+ "le_initial_bound":
+ "theorem le_initial_bound : l ≤ initial_bound ε l :=\n  (le_max_left _ _).trans <| le_max_right _ _\n#align le_initial_bound le_initial_bound\n\n",
+ "le_bound":
+ "theorem le_bound : l ≤ bound ε l :=\n  (le_initial_bound ε l).trans <| initial_bound_le_bound ε l\n#align le_bound le_bound\n\n",
+ "initial_bound_pos":
+ "theorem initial_bound_pos : 0 < initial_bound ε l :=\n  Nat.succ_pos'.trans_le <| seven_le_initial_bound _ _\n#align initial_bound_pos initial_bound_pos\n\n",
+ "initial_bound_le_bound":
+ "theorem initial_bound_le_bound : initial_bound ε l ≤ bound ε l :=\n  (id_le_iterate_of_id_le le_step_bound _ _).trans <| Nat.le_mul_of_pos_right <| by positivity\n#align initial_bound_le_bound initial_bound_le_bound\n\n",
+ "hundred_lt_pow_initial_bound_mul":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\ntheorem hundred_lt_pow_initial_bound_mul {ε : exprℝ} (hε : 0 < ε) (l : ℕ) : 100 < 4 ^ initial_bound ε l * ε ^ 5 :=\n  by\n  rw [← rpow_nat_cast 4, ← div_lt_iff (pow_pos hε 5), lt_rpow_iff_log_lt _ zero_lt_four, ← div_lt_iff, initial_bound,\n    nat.cast_max, nat.cast_max]\n  · push_cast\n    exact lt_max_of_lt_right (lt_max_of_lt_right <| Nat.lt_floor_add_one _)\n  · exact log_pos (by norm_num)\n  · exact div_pos (by norm_num) (pow_pos hε 5)\n#align hundred_lt_pow_initial_bound_mul hundred_lt_pow_initial_bound_mul\n\n",
+ "hundred_le_m":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprm -/\ntheorem hundred_le_m [nonempty α] (hPα : P.parts.card * 16 ^ P.parts.card ≤ card α)\n    (hPε : 100 ≤ 4 ^ P.parts.card * ε ^ 5) (hε : ε ≤ 1) : 100 ≤ exprm := by\n  exact_mod_cast\n    (le_div_self (by norm_num) (eps_pow_five_pos hPε) <| pow_le_one _ (eps_pos hPε).le hε).trans\n      (hundred_div_ε_pow_five_le_m hPα hPε)\n#align hundred_le_m hundred_le_m\n\n",
+ "hundred_div_ε_pow_five_le_m":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprm -/\ntheorem hundred_div_ε_pow_five_le_m [nonempty α] (hPα : P.parts.card * 16 ^ P.parts.card ≤ card α)\n    (hPε : 100 ≤ 4 ^ P.parts.card * ε ^ 5) : 100 / ε ^ 5 ≤ exprm :=\n  (div_le_of_nonneg_of_le_mul (eps_pow_five_pos hPε).le (by positivity) hPε).trans\n    (by\n      norm_cast\n      rwa [Nat.le_div_iff_mul_le' (step_bound_pos (P.parts_nonempty <| univ_nonempty.ne_empty).card_pos), step_bound,\n        mul_left_comm, ← mul_pow])\n#align hundred_div_ε_pow_five_le_m hundred_div_ε_pow_five_le_m\n\n",
+ "eps_pow_five_pos":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\ntheorem eps_pow_five_pos (hPε : 100 ≤ 4 ^ P.parts.card * ε ^ 5) : 0 < ε ^ 5 :=\n  pos_of_mul_pos_right ((by norm_num : (0 : exprℝ) < 100).trans_le hPε) <| pow_nonneg (by norm_num) _\n#align eps_pow_five_pos eps_pow_five_pos\n\n",
+ "eps_pos":
+ "theorem eps_pos (hPε : 100 ≤ 4 ^ P.parts.card * ε ^ 5) : 0 < ε :=\n  pow_bit1_pos_iff.1 <| eps_pow_five_pos hPε\n#align eps_pos eps_pos\n\n",
+ "coe_m_add_one_pos":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprm -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\ntheorem coe_m_add_one_pos : 0 < (exprm : exprℝ) + 1 :=\n  nat.cast_add_one_pos _\n#align coe_m_add_one_pos coe_m_add_one_pos\n\n",
+ "card_aux₂":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprm -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprm -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `expra -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `expra -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprm -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `expra -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprm -/\ntheorem card_aux₂ (hP : P.is_equipartition) (hu : u ∈ P.parts) (hucard : ¬u.card = exprm * 4 ^ P.parts.card + expra) :\n    (4 ^ P.parts.card - (expra + 1)) * exprm + (expra + 1) * (exprm + 1) = u.card :=\n  by\n  have : exprm * 4 ^ P.parts.card ≤ card α / P.parts.card :=\n    by\n    rw [step_bound, ← nat.div_div_eq_div_mul]\n    exact nat.div_mul_le_self _ _\n  rw [nat.add_sub_of_le this] at hucard\n  rw [(hP.card_parts_eq_average hu).resolve_left hucard, mul_add, mul_one, ← add_assoc, ← add_mul,\n    nat.sub_add_cancel a_add_one_le_four_pow_parts_card, ← add_assoc, mul_comm, nat.add_sub_of_le this, card_univ]\n#align card_aux₂ card_aux₂\n\n",
+ "card_aux₁":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprm -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `expra -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `expra -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprm -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `expra -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprm -/\ntheorem card_aux₁ (hucard : u.card = exprm * 4 ^ P.parts.card + expra) :\n    (4 ^ P.parts.card - expra) * exprm + expra * (exprm + 1) = u.card := by\n  rw [hucard, mul_add, mul_one, ← add_assoc, ← add_mul,\n    nat.sub_add_cancel ((nat.le_succ _).trans a_add_one_le_four_pow_parts_card), mul_comm]\n#align card_aux₁ card_aux₁\n\n",
+ "bound_pos":
+ "theorem bound_pos : 0 < bound ε l :=\n  (initial_bound_pos ε l).trans_le <| initial_bound_le_bound ε l\n#align bound_pos bound_pos\n\n",
+ "a_add_one_le_four_pow_parts_card":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `expra -/\ntheorem a_add_one_le_four_pow_parts_card : expra + 1 ≤ 4 ^ P.parts.card :=\n  by\n  have h : 1 ≤ 4 ^ P.parts.card := one_le_pow_of_one_le (by norm_num) _\n  rw [step_bound, ← nat.div_div_eq_div_mul, ← nat.le_sub_iff_right h, tsub_le_iff_left, ← nat.add_sub_assoc h]\n  exact Nat.le_pred_of_lt (Nat.lt_div_mul_add h)\n#align a_add_one_le_four_pow_parts_card a_add_one_le_four_pow_parts_card\n\n"}

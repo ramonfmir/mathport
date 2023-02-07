@@ -1,0 +1,18 @@
+{"succ_iterate":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ^[ ]» -/\ntheorem succ_iterate (a : ℤ) : ∀ n, («expr ^[ ]» succ n) a = a + n\n  | 0 => (add_zero a).symm\n  | n + 1 => by\n    rw [function.iterate_succ', Int.ofNat_succ, ← add_assoc]\n    exact congr_arg _ (succ_iterate n)\n#align succ_iterate succ_iterate\n\n",
+ "succ_eq_succ":
+ "/-\nCopyright (c) 2021 Yaël Dillies. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Yaël Dillies\n-/\n-- so that Lean reads `int.succ` through `succ_order.succ`\n-- so that Lean reads `int.pred` through `pred_order.pred`\n@[simp]\ntheorem succ_eq_succ : Order.succ = succ :=\n  rfl\n#align succ_eq_succ succ_eq_succ\n\n",
+ "sub_one_covby":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⋖ » -/\n@[simp]\ntheorem sub_one_covby (z : ℤ) : «expr ⋖ » (z - 1) z := by rw [Int.covby_iff_succ_eq, sub_add_cancel]\n#align sub_one_covby sub_one_covby\n\n",
+ "pred_iterate":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ^[ ]» -/\ntheorem pred_iterate (a : ℤ) : ∀ n, («expr ^[ ]» pred n) a = a - n\n  | 0 => (sub_zero a).symm\n  | n + 1 => by\n    rw [function.iterate_succ', Int.ofNat_succ, ← sub_sub]\n    exact congr_arg _ (pred_iterate n)\n#align pred_iterate pred_iterate\n\n",
+ "pred_eq_pred":
+ "@[simp]\ntheorem pred_eq_pred : Order.pred = pred :=\n  rfl\n#align pred_eq_pred pred_eq_pred\n\n",
+ "pos_iff_one_le":
+ "theorem pos_iff_one_le {a : ℤ} : 0 < a ↔ 1 ≤ a :=\n  Order.succ_le_iff.symm\n#align pos_iff_one_le pos_iff_one_le\n\n",
+ "covby_iff_succ_eq":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⋖ » -/\nprotected theorem covby_iff_succ_eq {m n : ℤ} : «expr ⋖ » m n ↔ m + 1 = n :=\n  succ_eq_iff_covby.symm\n#align covby_iff_succ_eq covby_iff_succ_eq\n\n",
+ "covby_add_one":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⋖ » -/\n@[simp]\ntheorem covby_add_one (z : ℤ) : «expr ⋖ » z (z + 1) :=\n  Int.covby_iff_succ_eq.mpr rfl\n#align covby_add_one covby_add_one\n\n",
+ "cast_int_covby_iff":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⋖ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⋖ » -/\n#print Nat.cast_int_covby_iff /-\n@[simp, norm_cast]\ntheorem Nat.cast_int_covby_iff {a b : ℕ} : «expr ⋖ » (a : ℤ) b ↔ «expr ⋖ » a b :=\n  by\n  rw [Nat.covby_iff_succ_eq, Int.covby_iff_succ_eq]\n  exact Int.coe_nat_inj'\n#align nat.cast_int_covby_iff Nat.cast_int_covby_iff\n-/\n\n"}

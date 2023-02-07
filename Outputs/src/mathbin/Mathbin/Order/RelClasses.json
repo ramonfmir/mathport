@@ -1,0 +1,148 @@
+{"well_founded_lt_dual_iff":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵈ» -/\ntheorem well_founded_lt_dual_iff (α : Type _) [LT α] : well_founded_lt («expr ᵒᵈ» α) ↔ well_founded_gt α :=\n  ⟨fun h => ⟨h.wf⟩, fun h => ⟨h.wf⟩⟩\n#align well_founded_lt_dual_iff well_founded_lt_dual_iff\n\n",
+ "well_founded_gt_dual_iff":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵈ» -/\n-- see Note [lower instance priority]\n-- see Note [lower instance priority]\n-- See note [lower instance priority]\n-- See note [lower instance priority]\ntheorem well_founded_gt_dual_iff (α : Type _) [LT α] : well_founded_gt («expr ᵒᵈ» α) ↔ well_founded_lt α :=\n  ⟨fun h => ⟨h.wf⟩, fun h => ⟨h.wf⟩⟩\n#align well_founded_gt_dual_iff well_founded_gt_dual_iff\n\n",
+ "unbounded_of_is_empty":
+ "theorem unbounded_of_is_empty [is_empty α] {r : α → α → Prop} (s : set α) : unbounded r s :=\n  is_empty_elim\n#align unbounded_of_is_empty unbounded_of_is_empty\n\n",
+ "transitive_of_trans":
+ "#print transitive_of_trans /-\ntheorem transitive_of_trans (r : α → α → Prop) [is_trans α r] : transitive r := fun _ _ _ => trans\n#align transitive_of_trans transitive_of_trans\n-/\n\n",
+ "transitive_lt":
+ "#print transitive_lt /-\ntheorem transitive_lt [preorder α] : transitive (@LT.lt α _) :=\n  transitive_of_trans _\n#align transitive_lt transitive_lt\n-/\n\n",
+ "transitive_le":
+ "#print transitive_le /-\ntheorem transitive_le [preorder α] : transitive (@LE.le α _) :=\n  transitive_of_trans _\n#align transitive_le transitive_le\n-/\n\n",
+ "transitive_gt":
+ "#print transitive_gt /-\ntheorem transitive_gt [preorder α] : transitive (@GT.gt α _) :=\n  transitive_of_trans _\n#align transitive_gt transitive_gt\n-/\n\n",
+ "transitive_ge":
+ "#print transitive_ge /-\ntheorem transitive_ge [preorder α] : transitive (@GE.ge α _) :=\n  transitive_of_trans _\n#align transitive_ge transitive_ge\n-/\n\n",
+ "trans_trichotomous_right":
+ "#print trans_trichotomous_right /-\ntheorem trans_trichotomous_right [is_trans α r] [is_trichotomous α r] {a b c : α} : r a b → ¬r c b → r a c :=\n  by\n  intro h₁ h₂; rcases trichotomous_of r b c with (h₃ | h₃ | h₃)\n  exact trans h₁ h₃; rw [← h₃]; exact h₁; exfalso; exact h₂ h₃\n#align trans_trichotomous_right trans_trichotomous_right\n-/\n\n",
+ "trans_trichotomous_left":
+ "#print trans_trichotomous_left /-\ntheorem trans_trichotomous_left [is_trans α r] [is_trichotomous α r] {a b c : α} : ¬r b a → r b c → r a c :=\n  by\n  intro h₁ h₂; rcases trichotomous_of r a b with (h₃ | h₃ | h₃)\n  exact trans h₃ h₂; rw [h₃]; exact h₂; exfalso; exact h₁ h₃\n#align trans_trichotomous_left trans_trichotomous_left\n-/\n\n",
+ "swap":
+ "theorem is_strict_total_order.swap (r) [is_strict_total_order α r] : is_strict_total_order α (swap r) :=\n  { is_trichotomous.swap r, is_strict_order.swap r with }\n#align is_strict_total_order.swap is_strict_total_order.swap\n\n",
+ "superset_of_eq":
+ "#print superset_of_eq /-\ntheorem superset_of_eq [is_refl α (· ⊆ ·)] : a = b → b ⊆ a := fun h => h ▸ subset_rfl\n#align superset_of_eq superset_of_eq\n-/\n\n",
+ "superset_antisymm_iff":
+ "#print superset_antisymm_iff /-\ntheorem superset_antisymm_iff [is_refl α (· ⊆ ·)] [is_antisymm α (· ⊆ ·)] : a = b ↔ b ⊆ a ∧ a ⊆ b :=\n  ⟨fun h => ⟨h.superset, h.subset'⟩, fun h => h.1.antisymm' h.2⟩\n#align superset_antisymm_iff superset_antisymm_iff\n-/\n\n",
+ "superset_antisymm":
+ "#print superset_antisymm /-\ntheorem superset_antisymm [is_antisymm α (· ⊆ ·)] (h : a ⊆ b) (h' : b ⊆ a) : b = a :=\n  antisymm' h h'\n#align superset_antisymm superset_antisymm\n-/\n\n",
+ "subset_trans":
+ "#print subset_trans /-\n@[trans]\ntheorem subset_trans [is_trans α (· ⊆ ·)] {a b c : α} : a ⊆ b → b ⊆ c → a ⊆ c :=\n  trans\n#align subset_trans subset_trans\n-/\n\n",
+ "subset_rfl":
+ "#print subset_rfl /-\ntheorem subset_rfl [is_refl α (· ⊆ ·)] : a ⊆ a :=\n  refl _\n#align subset_rfl subset_rfl\n-/\n\n",
+ "subset_refl":
+ "#print subset_refl /-\n@[refl]\ntheorem subset_refl [is_refl α (· ⊆ ·)] (a : α) : a ⊆ a :=\n  refl _\n#align subset_refl subset_refl\n-/\n\n",
+ "subset_of_subset_of_eq":
+ "#print subset_of_subset_of_eq /-\ntheorem subset_of_subset_of_eq (hab : a ⊆ b) (hbc : b = c) : a ⊆ c := by rwa [← hbc]\n#align subset_of_subset_of_eq subset_of_subset_of_eq\n-/\n\n",
+ "subset_of_ssubset":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊂ » -/\n#print subset_of_ssubset /-\ntheorem subset_of_ssubset (h : «expr ⊂ » a b) : a ⊆ b :=\n  (ssubset_iff_subset_not_subset.1 h).1\n#align subset_of_ssubset subset_of_ssubset\n-/\n\n",
+ "subset_of_eq_of_subset":
+ "#print subset_of_eq_of_subset /-\n-- The free parameter `r` is strictly speaking not uniquely determined by `s`, but in practice it\n-- always has a unique instance, so this is not dangerous.\n-- see Note [lower instance priority]\ntheorem subset_of_eq_of_subset (hab : a = b) (hbc : b ⊆ c) : a ⊆ c := by rwa [hab]\n#align subset_of_eq_of_subset subset_of_eq_of_subset\n-/\n\n",
+ "subset_of_eq":
+ "#print subset_of_eq /-\ntheorem subset_of_eq [is_refl α (· ⊆ ·)] : a = b → a ⊆ b := fun h => h ▸ subset_rfl\n#align subset_of_eq subset_of_eq\n-/\n\n",
+ "subset_iff_ssubset_or_eq":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊂ » -/\n#print subset_iff_ssubset_or_eq /-\ntheorem subset_iff_ssubset_or_eq [is_refl α (· ⊆ ·)] [is_antisymm α (· ⊆ ·)] : a ⊆ b ↔ «expr ⊂ » a b ∨ a = b :=\n  ⟨fun h => h.ssubset_or_eq, fun h => h.elim subset_of_ssubset subset_of_eq⟩\n#align subset_iff_ssubset_or_eq subset_iff_ssubset_or_eq\n-/\n\n",
+ "subset_antisymm_iff":
+ "#print subset_antisymm_iff /-\n--TODO: Fix it and kill `eq.subset`\ntheorem subset_antisymm_iff [is_refl α (· ⊆ ·)] [is_antisymm α (· ⊆ ·)] : a = b ↔ a ⊆ b ∧ b ⊆ a :=\n  ⟨fun h => ⟨h.subset', h.superset⟩, fun h => h.1.antisymm h.2⟩\n#align subset_antisymm_iff subset_antisymm_iff\n-/\n\n",
+ "subset_antisymm":
+ "#print subset_antisymm /-\ntheorem subset_antisymm [is_antisymm α (· ⊆ ·)] (h : a ⊆ b) (h' : b ⊆ a) : a = b :=\n  antisymm h h'\n#align subset_antisymm subset_antisymm\n-/\n\n",
+ "ssubset_trans":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:219:4: warning: unsupported binary notation `«expr ⊂ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊂ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊂ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊂ » -/\n#print ssubset_trans /-\n@[trans]\ntheorem ssubset_trans [is_trans α («expr ⊂ » · ·)] {a b c : α} : «expr ⊂ » a b → «expr ⊂ » b c → «expr ⊂ » a c :=\n  trans\n#align ssubset_trans ssubset_trans\n-/\n\n",
+ "ssubset_or_eq_of_subset":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊂ » -/\n#print ssubset_or_eq_of_subset /-\ntheorem ssubset_or_eq_of_subset [is_antisymm α (· ⊆ ·)] (h : a ⊆ b) : «expr ⊂ » a b ∨ a = b :=\n  (eq_or_ssubset_of_subset h).swap\n#align ssubset_or_eq_of_subset ssubset_or_eq_of_subset\n-/\n\n",
+ "ssubset_of_subset_of_ssubset":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊂ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊂ » -/\n#print ssubset_of_subset_of_ssubset /-\ntheorem ssubset_of_subset_of_ssubset [is_trans α (· ⊆ ·)] (h₁ : a ⊆ b) (h₂ : «expr ⊂ » b c) : «expr ⊂ » a c :=\n  (h₁.trans h₂.subset).ssubset_of_not_subset fun h => h₂.not_subset <| h.trans h₁\n#align ssubset_of_subset_of_ssubset ssubset_of_subset_of_ssubset\n-/\n\n",
+ "ssubset_of_subset_of_ne":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊂ » -/\n#print ssubset_of_subset_of_ne /-\ntheorem ssubset_of_subset_of_ne [is_antisymm α (· ⊆ ·)] (h₁ : a ⊆ b) (h₂ : a ≠ b) : «expr ⊂ » a b :=\n  h₁.ssubset_of_not_subset <| mt h₁.antisymm h₂\n#align ssubset_of_subset_of_ne ssubset_of_subset_of_ne\n-/\n\n",
+ "ssubset_of_subset_not_subset":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊂ » -/\n#print ssubset_of_subset_not_subset /-\ntheorem ssubset_of_subset_not_subset (h₁ : a ⊆ b) (h₂ : ¬b ⊆ a) : «expr ⊂ » a b :=\n  ssubset_iff_subset_not_subset.2 ⟨h₁, h₂⟩\n#align ssubset_of_subset_not_subset ssubset_of_subset_not_subset\n-/\n\n",
+ "ssubset_of_ssubset_of_subset":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊂ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊂ » -/\n#print ssubset_of_ssubset_of_subset /-\ntheorem ssubset_of_ssubset_of_subset [is_trans α (· ⊆ ·)] (h₁ : «expr ⊂ » a b) (h₂ : b ⊆ c) : «expr ⊂ » a c :=\n  (h₁.subset.trans h₂).ssubset_of_not_subset fun h => h₁.not_subset <| h₂.trans h\n#align ssubset_of_ssubset_of_subset ssubset_of_ssubset_of_subset\n-/\n\n",
+ "ssubset_of_ssubset_of_eq":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊂ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊂ » -/\n#print ssubset_of_ssubset_of_eq /-\ntheorem ssubset_of_ssubset_of_eq (hab : «expr ⊂ » a b) (hbc : b = c) : «expr ⊂ » a c := by rwa [← hbc]\n#align ssubset_of_ssubset_of_eq ssubset_of_ssubset_of_eq\n-/\n\n",
+ "ssubset_of_ne_of_subset":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊂ » -/\n#print ssubset_of_ne_of_subset /-\ntheorem ssubset_of_ne_of_subset [is_antisymm α (· ⊆ ·)] (h₁ : a ≠ b) (h₂ : a ⊆ b) : «expr ⊂ » a b :=\n  ssubset_of_subset_of_ne h₂ h₁\n#align ssubset_of_ne_of_subset ssubset_of_ne_of_subset\n-/\n\n",
+ "ssubset_of_eq_of_ssubset":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊂ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊂ » -/\n#print ssubset_of_eq_of_ssubset /-\ntheorem ssubset_of_eq_of_ssubset (hab : a = b) (hbc : «expr ⊂ » b c) : «expr ⊂ » a c := by rwa [hab]\n#align ssubset_of_eq_of_ssubset ssubset_of_eq_of_ssubset\n-/\n\n",
+ "ssubset_irrfl":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:219:4: warning: unsupported binary notation `«expr ⊂ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊂ » -/\n#print ssubset_irrfl /-\ntheorem ssubset_irrfl [is_irrefl α («expr ⊂ » · ·)] {a : α} : ¬«expr ⊂ » a a :=\n  irrefl _\n#align ssubset_irrfl ssubset_irrfl\n-/\n\n",
+ "ssubset_irrefl":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:219:4: warning: unsupported binary notation `«expr ⊂ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊂ » -/\n#print ssubset_irrefl /-\ntheorem ssubset_irrefl [is_irrefl α («expr ⊂ » · ·)] (a : α) : ¬«expr ⊂ » a a :=\n  irrefl _\n#align ssubset_irrefl ssubset_irrefl\n-/\n\n",
+ "ssubset_iff_subset_not_subset":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊂ » -/\n#print ssubset_iff_subset_not_subset /-\ntheorem ssubset_iff_subset_not_subset : «expr ⊂ » a b ↔ a ⊆ b ∧ ¬b ⊆ a :=\n  right_iff_left_not_left\n#align ssubset_iff_subset_not_subset ssubset_iff_subset_not_subset\n-/\n\n",
+ "ssubset_iff_subset_ne":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊂ » -/\n#print ssubset_iff_subset_ne /-\ntheorem ssubset_iff_subset_ne [is_antisymm α (· ⊆ ·)] : «expr ⊂ » a b ↔ a ⊆ b ∧ a ≠ b :=\n  ⟨fun h => ⟨h.subset, h.ne⟩, fun h => h.1.ssubset_of_ne h.2⟩\n#align ssubset_iff_subset_ne ssubset_iff_subset_ne\n-/\n\n",
+ "ssubset_asymm":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:219:4: warning: unsupported binary notation `«expr ⊂ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊂ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊂ » -/\n#print ssubset_asymm /-\ntheorem ssubset_asymm [is_asymm α («expr ⊂ » · ·)] {a b : α} (h : «expr ⊂ » a b) : ¬«expr ⊂ » b a :=\n  asymm h\n#align ssubset_asymm ssubset_asymm\n-/\n\n",
+ "right_iff_left_not_left_of":
+ "#print right_iff_left_not_left_of /-\n/-- A version of `right_iff_left_not_left` with explicit `r` and `s`. -/\ntheorem right_iff_left_not_left_of (r s : α → α → Prop) [is_nonstrict_strict_order α r s] {a b : α} :\n    s a b ↔ r a b ∧ ¬r b a :=\n  right_iff_left_not_left\n#align right_iff_left_not_left_of right_iff_left_not_left_of\n-/\n\n",
+ "right_iff_left_not_left":
+ "#print right_iff_left_not_left /-\ntheorem right_iff_left_not_left {r s : α → α → Prop} [is_nonstrict_strict_order α r s] {a b : α} :\n    s a b ↔ r a b ∧ ¬r b a :=\n  is_nonstrict_strict_order.right_iff_left_not_left _ _\n#align right_iff_left_not_left right_iff_left_not_left\n-/\n\n",
+ "rel_of_subsingleton":
+ "#print rel_of_subsingleton /-\ntheorem rel_of_subsingleton (r) [is_refl α r] [subsingleton α] (x y) : r x y :=\n  subsingleton.elim x y ▸ refl x\n#align rel_of_subsingleton rel_of_subsingleton\n-/\n\n",
+ "of_eq":
+ "#print of_eq /-\n/-\nCopyright (c) 2020 Jeremy Avigad. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Jeremy Avigad, Mario Carneiro, Yury G. Kudryashov\n-/\ntheorem of_eq [is_refl α r] : ∀ {a b}, a = b → r a b\n  | _, _, ⟨h⟩ => refl _\n#align of_eq of_eq\n-/\n\n",
+ "not_unbounded_iff":
+ "@[simp]\ntheorem not_unbounded_iff {r : α → α → Prop} (s : set α) : ¬unbounded r s ↔ bounded r s := by\n  rw [not_iff_comm, not_bounded_iff]\n#align not_unbounded_iff not_unbounded_iff\n\n",
+ "not_subset_of_ssubset":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊂ » -/\n#print not_subset_of_ssubset /-\ntheorem not_subset_of_ssubset (h : «expr ⊂ » a b) : ¬b ⊆ a :=\n  (ssubset_iff_subset_not_subset.1 h).2\n#align not_subset_of_ssubset not_subset_of_ssubset\n-/\n\n",
+ "not_ssubset_of_subset":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊂ » -/\n#print not_ssubset_of_subset /-\ntheorem not_ssubset_of_subset (h : a ⊆ b) : ¬«expr ⊂ » b a := fun h' => not_subset_of_ssubset h' h\n#align not_ssubset_of_subset not_ssubset_of_subset\n-/\n\n",
+ "not_rel_of_subsingleton":
+ "#print not_rel_of_subsingleton /-\ntheorem not_rel_of_subsingleton (r) [is_irrefl α r] [subsingleton α] (x y) : ¬r x y :=\n  subsingleton.elim x y ▸ irrefl x\n#align not_rel_of_subsingleton not_rel_of_subsingleton\n-/\n\n",
+ "not_bounded_iff":
+ "@[simp]\ntheorem not_bounded_iff {r : α → α → Prop} (s : set α) : ¬bounded r s ↔ unbounded r s := by\n  simp only [bounded, unbounded, not_forall, not_exists, exists_prop, not_and, not_not]\n#align not_bounded_iff not_bounded_iff\n\n",
+ "neg_trans":
+ "theorem is_order_connected.neg_trans {r : α → α → Prop} [is_order_connected α r] {a b c} (h₁ : ¬r a b) (h₂ : ¬r b c) :\n    ¬r a c :=\n  mt (is_order_connected.conn a b c) <| by simp [h₁, h₂]\n#align is_order_connected.neg_trans is_order_connected.neg_trans\n\n",
+ "ne_of_ssuperset":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:219:4: warning: unsupported binary notation `«expr ⊂ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊂ » -/\n#print ne_of_ssuperset /-\ntheorem ne_of_ssuperset [is_irrefl α («expr ⊂ » · ·)] {a b : α} : «expr ⊂ » a b → b ≠ a :=\n  ne_of_irrefl'\n#align ne_of_ssuperset ne_of_ssuperset\n-/\n\n",
+ "ne_of_ssubset":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:219:4: warning: unsupported binary notation `«expr ⊂ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊂ » -/\n#print ne_of_ssubset /-\ntheorem ne_of_ssubset [is_irrefl α («expr ⊂ » · ·)] {a b : α} : «expr ⊂ » a b → a ≠ b :=\n  ne_of_irrefl\n#align ne_of_ssubset ne_of_ssubset\n-/\n\n",
+ "ne_of_not_superset":
+ "#print ne_of_not_superset /-\ntheorem ne_of_not_superset [is_refl α (· ⊆ ·)] : ¬a ⊆ b → b ≠ a :=\n  mt superset_of_eq\n#align ne_of_not_superset ne_of_not_superset\n-/\n\n",
+ "ne_of_not_subset":
+ "#print ne_of_not_subset /-\ntheorem ne_of_not_subset [is_refl α (· ⊆ ·)] : ¬a ⊆ b → a ≠ b :=\n  mt subset_of_eq\n#align ne_of_not_subset ne_of_not_subset\n-/\n\n",
+ "ne_of_irrefl'":
+ "#print ne_of_irrefl' /-\ntheorem ne_of_irrefl' {r} [is_irrefl α r] : ∀ {x y : α}, r x y → y ≠ x\n  | _, _, h, rfl => irrefl _ h\n#align ne_of_irrefl' ne_of_irrefl'\n-/\n\n",
+ "ne_of_irrefl":
+ "#print ne_of_irrefl /-\n-- see Note [lower instance priority]\ntheorem ne_of_irrefl {r} [is_irrefl α r] : ∀ {x y : α}, r x y → x ≠ y\n  | _, _, h, rfl => irrefl _ h\n#align ne_of_irrefl ne_of_irrefl\n-/\n\n",
+ "is_well_order":
+ "-- This isn't made into an instance as it loops with `is_irrefl α r`.\ntheorem subsingleton.is_well_order [subsingleton α] (r : α → α → Prop) [hr : is_irrefl α r] : is_well_order α r :=\n  { hr with\n    trichotomous := fun a b => or.inr <| or.inl <| subsingleton.elim a b\n    trans := fun a b c h => (not_rel_of_subsingleton r a b h).elim\n    wf := ⟨fun a => ⟨_, fun y h => (not_rel_of_subsingleton r y a h).elim⟩⟩ }\n#align subsingleton.is_well_order subsingleton.is_well_order\n\n",
+ "is_well_founded":
+ "theorem subrelation.is_well_founded (r : α → α → Prop) [is_well_founded α r] {s : α → α → Prop} (h : subrelation s r) :\n    is_well_founded α s :=\n  ⟨h.wf is_well_founded.wf⟩\n#align subrelation.is_well_founded subrelation.is_well_founded\n\n",
+ "is_trichotomous":
+ "protected theorem is_total.is_trichotomous (r) [is_total α r] : is_trichotomous α r :=\n  ⟨fun a b => or_left_comm.1 (or.inr <| total_of r a b)⟩\n#align is_total.is_trichotomous is_total.is_trichotomous\n\n",
+ "is_irrefl":
+ "protected theorem is_asymm.is_irrefl [is_asymm α r] : is_irrefl α r :=\n  ⟨fun a h => asymm h h⟩\n#align is_asymm.is_irrefl is_asymm.is_irrefl\n\n",
+ "is_antisymm":
+ "protected theorem is_asymm.is_antisymm (r) [is_asymm α r] : is_antisymm α r :=\n  ⟨fun x y h₁ h₂ => (asymm h₁ h₂).elim⟩\n#align is_asymm.is_antisymm is_asymm.is_antisymm\n\n",
+ "isStrictWeakOrder_of_isOrderConnected":
+ "#print isStrictWeakOrder_of_isOrderConnected /-\ntheorem isStrictWeakOrder_of_isOrderConnected [is_asymm α r] [is_order_connected α r] : is_strict_weak_order α r :=\n  {\n    @is_asymm.is_irrefl α r\n      _ with\n    trans := fun a b c h₁ h₂ => (is_order_connected.conn _ c _ h₁).resolve_right (asymm h₂)\n    incomp_trans := fun a b c ⟨h₁, h₂⟩ ⟨h₃, h₄⟩ =>\n      ⟨is_order_connected.neg_trans h₁ h₃, is_order_connected.neg_trans h₄ h₂⟩ }\n#align is_strict_weak_order_of_is_order_connected isStrictWeakOrder_of_isOrderConnected\n-/\n\n",
+ "induction":
+ "/-- Inducts on a well-founded `>` relation. -/\ntheorem induction {C : α → Prop} : ∀ a, (∀ x, (∀ y, x < y → C y) → C x) → C a :=\n  is_well_founded.induction _\n#align induction induction\n\n",
+ "fix_eq":
+ "/-- The value from `well_founded_gt.fix` is built from the successive ones as specified. -/\ntheorem fix_eq {C : α → Sort _} (F : ∀ x : α, (∀ y : α, x < y → C y) → C x) : ∀ x, fix F x = F x fun y h => fix F y :=\n  is_well_founded.fix_eq _ F\n#align fix_eq fix_eq\n\n",
+ "extensional_of_trichotomous_of_irrefl":
+ "#print extensional_of_trichotomous_of_irrefl /-\n/-- In a trichotomous irreflexive order, every element is determined by the set of predecessors. -/\ntheorem extensional_of_trichotomous_of_irrefl (r : α → α → Prop) [is_trichotomous α r] [is_irrefl α r] {a b : α}\n    (H : ∀ x, r x a ↔ r x b) : a = b :=\n  ((@trichotomous _ r _ a b).resolve_left <| mt (H _).2 <| irrefl a).resolve_right <| mt (H _).1 <| irrefl b\n#align extensional_of_trichotomous_of_irrefl extensional_of_trichotomous_of_irrefl\n-/\n\n",
+ "eq_or_ssubset_of_subset":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊂ » -/\n#print eq_or_ssubset_of_subset /-\ntheorem eq_or_ssubset_of_subset [is_antisymm α (· ⊆ ·)] (h : a ⊆ b) : a = b ∨ «expr ⊂ » a b :=\n  (em (b ⊆ a)).imp h.antisymm h.ssubset_of_not_subset\n#align eq_or_ssubset_of_subset eq_or_ssubset_of_subset\n-/\n\n",
+ "eq_empty_relation":
+ "#print eq_empty_relation /-\ntheorem eq_empty_relation (r) [is_irrefl α r] [subsingleton α] : r = empty_relation :=\n  funext₂ <| by simpa using not_rel_of_subsingleton r\n#align eq_empty_relation eq_empty_relation\n-/\n\n",
+ "empty_relation_apply":
+ "#print empty_relation_apply /-\n@[simp]\ntheorem empty_relation_apply (a b : α) : empty_relation a b ↔ false :=\n  iff.rfl\n#align empty_relation_apply empty_relation_apply\n-/\n\n",
+ "comm_of":
+ "#print comm_of /-\n/-- A version of `comm` with `r` explicit.\n\nThis lemma matches the lemmas from lean core in `init.algebra.classes`, but is missing there.  -/\ntheorem comm_of (r : α → α → Prop) [is_symm α r] {a b : α} : r a b ↔ r b a :=\n  comm\n#align comm_of comm_of\n-/\n\n",
+ "comm":
+ "#print comm /-\ntheorem comm [is_symm α r] {a b : α} : r a b ↔ r b a :=\n  ⟨symm, symm⟩\n#align comm comm\n-/\n\n",
+ "asymmetric":
+ "theorem well_founded.asymmetric {α : Sort _} {r : α → α → Prop} (h : well_founded r) : ∀ ⦃a b⦄, r a b → ¬r b a\n  | a => fun b hab hba => well_founded.asymmetric hba hab termination_by' ⟨_, h⟩\n#align well_founded.asymmetric well_founded.asymmetric\n\n",
+ "apply":
+ "/-- All values are accessible under the well-founded `>`. -/\ntheorem apply : ∀ a : α, acc (· > ·) a :=\n  is_well_founded.apply _\n#align apply apply\n\n",
+ "antisymm_of'":
+ "#print antisymm_of' /-\n/-- A version of `antisymm'` with `r` explicit.\n\nThis lemma matches the lemmas from lean core in `init.algebra.classes`, but is missing there.  -/\n@[elab_without_expected_type]\ntheorem antisymm_of' (r : α → α → Prop) [is_antisymm α r] {a b : α} : r a b → r b a → b = a :=\n  antisymm'\n#align antisymm_of' antisymm_of'\n-/\n\n",
+ "antisymm_of":
+ "#print antisymm_of /-\n/-- A version of `antisymm` with `r` explicit.\n\nThis lemma matches the lemmas from lean core in `init.algebra.classes`, but is missing there.  -/\n@[elab_without_expected_type]\ntheorem antisymm_of (r : α → α → Prop) [is_antisymm α r] {a b : α} : r a b → r b a → a = b :=\n  antisymm\n#align antisymm_of antisymm_of\n-/\n\n",
+ "antisymm_iff":
+ "#print antisymm_iff /-\ntheorem antisymm_iff [is_refl α r] [is_antisymm α r] {a b : α} : r a b ∧ r b a ↔ a = b :=\n  ⟨fun h => antisymm h.1 h.2, by\n    rintro rfl\n    exact ⟨refl _, refl _⟩⟩\n#align antisymm_iff antisymm_iff\n-/\n\n",
+ "antisymm'":
+ "#print antisymm' /-\ntheorem antisymm' [is_antisymm α r] {a b : α} : r a b → r b a → b = a := fun h h' => antisymm h' h\n#align antisymm' antisymm'\n-/\n\n"}

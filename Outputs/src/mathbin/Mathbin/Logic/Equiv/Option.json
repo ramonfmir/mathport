@@ -1,0 +1,42 @@
+{"some_remove_none_iff":
+ "theorem some_remove_none_iff {x : α} : some (removeNone e x) = e none ↔ e.symm none = some x :=\n  by\n  cases' h : e (some x) with a\n  · rw [remove_none_none _ h]\n    simpa using (congr_arg e.symm h).symm\n  · rw [remove_none_some _ ⟨a, h⟩]\n    have := congr_arg e.symm h\n    rw [symm_apply_apply] at this\n    simp only [false_iff_iff, apply_eq_iff_eq]\n    simp [this]\n#align some_remove_none_iff some_remove_none_iff\n\n",
+ "remove_none_symm":
+ "@[simp]\ntheorem remove_none_symm : (removeNone e).symm = removeNone e.symm :=\n  rfl\n#align remove_none_symm remove_none_symm\n\n",
+ "remove_none_some":
+ "theorem remove_none_some {x : α} (h : ∃ x', e (some x) = some x') : some (removeNone e x) = e (some x) :=\n  remove_none_aux_some e h\n#align remove_none_some remove_none_some\n\n",
+ "remove_none_option_congr":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ » -/\n@[simp]\ntheorem remove_none_option_congr (e : «expr ≃ » α β) : removeNone e.option_congr = e :=\n  equiv.ext fun x => option.some_injective _ <| removeNone_some _ ⟨e x, by simp [equiv_functor.map]⟩\n#align remove_none_option_congr remove_none_option_congr\n\n",
+ "remove_none_none":
+ "theorem remove_none_none {x : α} (h : e (some x) = none) : some (removeNone e x) = e none :=\n  remove_none_aux_none e h\n#align remove_none_none remove_none_none\n\n",
+ "remove_none_aux_some":
+ "private theorem remove_none_aux_some {x : α} (h : ∃ x', e (some x) = some x') :\n    some (remove_none_aux e x) = e (some x) := by simp [remove_none_aux, option.is_some_iff_exists.mpr h]\n#align remove_none_aux_some remove_none_aux_some\n\n",
+ "remove_none_aux_none":
+ "private theorem remove_none_aux_none {x : α} (h : e (some x) = none) : some (remove_none_aux e x) = e none := by\n  simp [remove_none_aux, option.not_is_some_iff_eq_none.mpr h]\n#align remove_none_aux_none remove_none_aux_none\n\n",
+ "remove_none_aux_inv":
+ "private theorem remove_none_aux_inv (x : α) : remove_none_aux e.symm (remove_none_aux e x) = x :=\n  option.some_injective _\n    (by\n      cases h1 : e.symm (some (remove_none_aux e x)) <;> cases h2 : e (some x)\n      · rw [remove_none_aux_none _ h1]\n        exact (e.eq_symm_apply.mpr h2).symm\n      · rw [remove_none_aux_some _ ⟨_, h2⟩] at h1\n        simpa using h1\n      · rw [remove_none_aux_none _ h2] at h1\n        simpa using h1\n      · rw [remove_none_aux_some _ ⟨_, h1⟩]\n        rw [remove_none_aux_some _ ⟨_, h2⟩]\n        simp)\n#align remove_none_aux_inv remove_none_aux_inv\n\n",
+ "option_symm_apply_none_iff":
+ "@[simp]\ntheorem option_symm_apply_none_iff : e.symm none = none ↔ e none = none :=\n  ⟨fun h => by simpa using (congr_arg e h).symm, fun h => by simpa using (congr_arg e.symm h).symm⟩\n#align option_symm_apply_none_iff option_symm_apply_none_iff\n\n",
+ "option_subtype_symm_apply_symm_apply":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ » -/\n@[simp]\ntheorem option_subtype_symm_apply_symm_apply [decidable_eq β] (x : β) (e : «expr ≃ » α { y : β // y ≠ x })\n    (b : { y : β // y ≠ x }) : ((optionSubtype x).symm e : «expr ≃ » (option α) β).symm b = e.symm b :=\n  by\n  simp only [option_subtype, coe_fn_symm_mk, subtype.coe_mk, subtype.coe_eta, dite_eq_ite, ite_eq_right_iff]\n  exact fun h => false.elim (b.property h)\n#align option_subtype_symm_apply_symm_apply option_subtype_symm_apply_symm_apply\n\n",
+ "option_subtype_symm_apply_apply_some":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ » -/\n@[simp]\ntheorem option_subtype_symm_apply_apply_some [decidable_eq β] (x : β) (e : «expr ≃ » α { y : β // y ≠ x }) (a : α) :\n    (optionSubtype x).symm e (some a) = e a :=\n  rfl\n#align option_subtype_symm_apply_apply_some option_subtype_symm_apply_apply_some\n\n",
+ "option_subtype_symm_apply_apply_none":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ » -/\n@[simp]\ntheorem option_subtype_symm_apply_apply_none [decidable_eq β] (x : β) (e : «expr ≃ » α { y : β // y ≠ x }) :\n    (optionSubtype x).symm e none = x :=\n  rfl\n#align option_subtype_symm_apply_apply_none option_subtype_symm_apply_apply_none\n\n",
+ "option_subtype_symm_apply_apply_coe":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ » -/\n@[simp]\ntheorem option_subtype_symm_apply_apply_coe [decidable_eq β] (x : β) (e : «expr ≃ » α { y : β // y ≠ x }) (a : α) :\n    (optionSubtype x).symm e a = e a :=\n  rfl\n#align option_subtype_symm_apply_apply_coe option_subtype_symm_apply_apply_coe\n\n",
+ "option_subtype_apply_symm_apply":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ » -/\n@[simp]\ntheorem option_subtype_apply_symm_apply [decidable_eq β] (x : β) (e : { e : «expr ≃ » (option α) β // e none = x })\n    (b : { y : β // y ≠ x }) : ↑((optionSubtype x e).symm b) = (e : «expr ≃ » (option α) β).symm b :=\n  by\n  dsimp only [option_subtype]\n  simp\n#align option_subtype_apply_symm_apply option_subtype_apply_symm_apply\n\n",
+ "option_subtype_apply_apply":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ » -/\n@[simp]\ntheorem option_subtype_apply_apply [decidable_eq β] (x : β) (e : { e : «expr ≃ » (option α) β // e none = x }) (a : α)\n    (h) : optionSubtype x e a = ⟨(e : «expr ≃ » (option α) β) a, h⟩ :=\n  rfl\n#align option_subtype_apply_apply option_subtype_apply_apply\n\n",
+ "option_congr_trans":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ » -/\n@[simp]\ntheorem option_congr_trans (e₁ : «expr ≃ » α β) (e₂ : «expr ≃ » β γ) :\n    (optionCongr e₁).trans (optionCongr e₂) = optionCongr (e₁.trans e₂) :=\n  ext <| option.map_map _ _\n#align option_congr_trans option_congr_trans\n\n",
+ "option_congr_symm":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ » -/\n@[simp]\ntheorem option_congr_symm (e : «expr ≃ » α β) : (optionCongr e).symm = optionCongr e.symm :=\n  rfl\n#align option_congr_symm option_congr_symm\n\n",
+ "option_congr_refl":
+ "/-\nCopyright (c) 2021 Eric Wieser. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Eric Wieser\n-/\n@[simp]\ntheorem option_congr_refl : optionCongr (equiv.refl α) = equiv.refl _ :=\n  ext <| congr_fun option.map_id\n#align option_congr_refl option_congr_refl\n\n",
+ "option_congr_injective":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ » -/\ntheorem option_congr_injective : function.injective (optionCongr : «expr ≃ » α β → «expr ≃ » (option α) (option β)) :=\n  function.left_inverse.injective removeNone_optionCongr\n#align option_congr_injective option_congr_injective\n\n",
+ "option_congr_eq_equiv_function_map_equiv":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ » -/\n/-- When `α` and `β` are in the same universe, this is the same as the result of\n`equiv_functor.map_equiv`. -/\ntheorem option_congr_eq_equiv_function_map_equiv {α β : Type _} (e : «expr ≃ » α β) :\n    optionCongr e = EquivFunctor.mapEquiv option e :=\n  rfl\n#align option_congr_eq_equiv_function_map_equiv option_congr_eq_equiv_function_map_equiv\n\n",
+ "coe_option_subtype_apply_apply":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ » -/\n@[simp]\ntheorem coe_option_subtype_apply_apply [decidable_eq β] (x : β) (e : { e : «expr ≃ » (option α) β // e none = x })\n    (a : α) : ↑(optionSubtype x e a) = (e : «expr ≃ » (option α) β) a :=\n  rfl\n#align coe_option_subtype_apply_apply coe_option_subtype_apply_apply\n\n"}

@@ -1,0 +1,14 @@
+{"one_div_pos_of_nat":
+ "theorem one_div_pos_of_nat {n : ℕ} : 0 < 1 / ((n : α) + 1) :=\n  by\n  rw [one_div]\n  exact inv_pos_of_nat\n#align one_div_pos_of_nat one_div_pos_of_nat\n\n",
+ "one_div_lt_one_div":
+ "#print one_div_lt_one_div /-\ntheorem one_div_lt_one_div {n m : ℕ} (h : n < m) : 1 / ((m : α) + 1) < 1 / ((n : α) + 1) :=\n  by\n  refine' one_div_lt_one_div_of_lt _ _\n  exact nat.cast_add_one_pos _\n  simpa\n#align one_div_lt_one_div one_div_lt_one_div\n-/\n\n",
+ "one_div_le_one_div":
+ "#print one_div_le_one_div /-\ntheorem one_div_le_one_div {n m : ℕ} (h : n ≤ m) : 1 / ((m : α) + 1) ≤ 1 / ((n : α) + 1) :=\n  by\n  refine' one_div_le_one_div_of_le _ _\n  exact nat.cast_add_one_pos _\n  simpa\n#align one_div_le_one_div one_div_le_one_div\n-/\n\n",
+ "inv_pos_of_nat":
+ "theorem inv_pos_of_nat {n : ℕ} : 0 < ((n : α) + 1)⁻¹ :=\n  inv_pos.2 <| add_pos_of_nonneg_of_pos n.cast_nonneg zero_lt_one\n#align inv_pos_of_nat inv_pos_of_nat\n\n",
+ "cast_div_le":
+ "/-- Natural division is always less than division in the field. -/\ntheorem cast_div_le {m n : ℕ} : ((m / n : ℕ) : α) ≤ m / n :=\n  by\n  cases n\n  · rw [cast_zero, div_zero, nat.div_zero, cast_zero]\n  rwa [le_div_iff, ← nat.cast_mul]\n  exact nat.cast_le.2 (nat.div_mul_le_self m n.succ)\n  · exact nat.cast_pos.2 n.succ_pos\n#align cast_div_le cast_div_le\n\n",
+ "cast_div_div_div_cancel_right":
+ "theorem cast_div_div_div_cancel_right [Field α] [CharZero α] {m n d : ℕ} (hn : d ∣ n) (hm : d ∣ m) :\n    (↑(m / d) : α) / (↑(n / d) : α) = (m : α) / n :=\n  by\n  rcases eq_or_ne d 0 with (rfl | hd); · simp [zero_dvd_iff.mp hm]\n  replace hd : (d : α) ≠ 0;\n  · norm_cast\n    assumption\n  simp [hd, hm, hn, div_div_div_cancel_right _ hd]\n#align cast_div_div_div_cancel_right cast_div_div_div_cancel_right\n\n",
+ "cast_div":
+ "/-\nCopyright (c) 2014 Mario Carneiro. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Mario Carneiro, Yaël Dillies, Patrick Stevens\n-/\n@[simp]\ntheorem cast_div [Field α] {m n : ℕ} (n_dvd : n ∣ m) (n_nonzero : (n : α) ≠ 0) : ((m / n : ℕ) : α) = m / n :=\n  by\n  rcases n_dvd with ⟨k, rfl⟩\n  have : n ≠ 0 := by\n    rintro rfl\n    simpa using n_nonzero\n  rw [nat.mul_div_cancel_left _ this.bot_lt, cast_mul, mul_div_cancel_left _ n_nonzero]\n#align cast_div cast_div\n\n"}

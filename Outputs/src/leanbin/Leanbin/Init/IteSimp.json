@@ -1,0 +1,8 @@
+{"if_true_right_eq_or":
+ "/-\nCopyright (c) 2017 Microsoft Corporation. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Leonardo de Moura\n-/\n@[simp]\ntheorem if_true_right_eq_or (p : Prop) [h : decidable p] (q : Prop) : (if p then q else true) = (¬p ∨ q) := by\n  by_cases p <;> simp [h]\n#align if_true_right_eq_or if_true_right_eq_or\n\n",
+ "if_true_left_eq_or":
+ "@[simp]\ntheorem if_true_left_eq_or (p : Prop) [h : decidable p] (q : Prop) : (if p then true else q) = (p ∨ q) := by\n  by_cases p <;> simp [h]\n#align if_true_left_eq_or if_true_left_eq_or\n\n",
+ "if_false_right_eq_and":
+ "@[simp]\ntheorem if_false_right_eq_and (p : Prop) [h : decidable p] (q : Prop) : (if p then q else false) = (p ∧ q) := by\n  by_cases p <;> simp [h]\n#align if_false_right_eq_and if_false_right_eq_and\n\n",
+ "if_false_left_eq_and":
+ "@[simp]\ntheorem if_false_left_eq_and (p : Prop) [h : decidable p] (q : Prop) : (if p then false else q) = (¬p ∧ q) := by\n  by_cases p <;> simp [h]\n#align if_false_left_eq_and if_false_left_eq_and\n\n"}

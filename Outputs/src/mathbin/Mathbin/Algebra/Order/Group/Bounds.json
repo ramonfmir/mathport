@@ -1,0 +1,8 @@
+{"exists_between_sub_self'":
+ "#print IsLUB.exists_between_sub_self' /-\ntheorem IsLUB.exists_between_sub_self' (h : IsLUB s a) (h₂ : a ∉ s) (hε : 0 < ε) : ∃ b ∈ s, a - ε < b ∧ b < a :=\n  h.exists_between' h₂ <| sub_lt_self _ hε\n#align is_lub.exists_between_sub_self' IsLUB.exists_between_sub_self'\n-/\n\n",
+ "exists_between_sub_self":
+ "#print IsLUB.exists_between_sub_self /-\ntheorem IsLUB.exists_between_sub_self (h : IsLUB s a) (hε : 0 < ε) : ∃ b ∈ s, a - ε < b ∧ b ≤ a :=\n  h.exists_between <| sub_lt_self _ hε\n#align is_lub.exists_between_sub_self IsLUB.exists_between_sub_self\n-/\n\n",
+ "exists_between_self_add'":
+ "#print IsGLB.exists_between_self_add' /-\ntheorem IsGLB.exists_between_self_add' (h : IsGLB s a) (h₂ : a ∉ s) (hε : 0 < ε) : ∃ b ∈ s, a < b ∧ b < a + ε :=\n  h.exists_between' h₂ <| lt_add_of_pos_right _ hε\n#align is_glb.exists_between_self_add' IsGLB.exists_between_self_add'\n-/\n\n",
+ "exists_between_self_add":
+ "#print IsGLB.exists_between_self_add /-\n/-\nCopyright (c) 2017 Johannes Hölzl. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Johannes Hölzl, Yury Kudryashov\n-/\ntheorem IsGLB.exists_between_self_add (h : IsGLB s a) (hε : 0 < ε) : ∃ b ∈ s, a ≤ b ∧ b < a + ε :=\n  h.exists_between <| lt_add_of_pos_right _ hε\n#align is_glb.exists_between_self_add IsGLB.exists_between_self_add\n-/\n\n"}

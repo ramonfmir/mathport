@@ -1,0 +1,28 @@
+{"zero_disj_sum":
+ "/-\nCopyright (c) 2022 Yaël Dillies. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Yaël Dillies\n-/\n@[simp]\ntheorem zero_disj_sum : (0 : Multiset α).disj_sum t = t.map inr :=\n  zero_add _\n#align zero_disj_sum zero_disj_sum\n\n",
+ "mem_disj_sum":
+ "theorem mem_disj_sum : x ∈ s.disj_sum t ↔ (∃ a, a ∈ s ∧ inl a = x) ∨ ∃ b, b ∈ t ∧ inr b = x := by\n  simp_rw [disj_sum, mem_add, mem_map]\n#align mem_disj_sum mem_disj_sum\n\n",
+ "inr_mem_disj_sum":
+ "@[simp]\ntheorem inr_mem_disj_sum : inr b ∈ s.disj_sum t ↔ b ∈ t :=\n  by\n  rw [mem_disj_sum, or_iff_right]\n  simp only [exists_eq_right]\n  rintro ⟨a, _, ha⟩\n  exact inl_ne_inr ha\n#align inr_mem_disj_sum inr_mem_disj_sum\n\n",
+ "inl_mem_disj_sum":
+ "@[simp]\ntheorem inl_mem_disj_sum : inl a ∈ s.disj_sum t ↔ a ∈ s :=\n  by\n  rw [mem_disj_sum, or_iff_left]\n  simp only [exists_eq_right]\n  rintro ⟨b, _, hb⟩\n  exact inr_ne_inl hb\n#align inl_mem_disj_sum inl_mem_disj_sum\n\n",
+ "disj_sum_zero":
+ "@[simp]\ntheorem disj_sum_zero : s.disj_sum (0 : Multiset β) = s.map inl :=\n  add_zero _\n#align disj_sum_zero disj_sum_zero\n\n",
+ "disj_sum_strict_mono_right":
+ "theorem disj_sum_strict_mono_right (s : Multiset α) : strict_mono (s.disj_sum : Multiset β → Multiset (Sum α β)) :=\n  fun s₁ s₂ => disjSum_lt_disjSum_of_le_of_lt le_rfl\n#align disj_sum_strict_mono_right disj_sum_strict_mono_right\n\n",
+ "disj_sum_strict_mono_left":
+ "theorem disj_sum_strict_mono_left (t : Multiset β) : strict_mono fun s : Multiset α => s.disj_sum t := fun s₁ s₂ hs =>\n  disjSum_lt_disjSum_of_lt_of_le hs le_rfl\n#align disj_sum_strict_mono_left disj_sum_strict_mono_left\n\n",
+ "disj_sum_mono_right":
+ "theorem disj_sum_mono_right (s : Multiset α) : monotone (s.disj_sum : Multiset β → Multiset (Sum α β)) :=\n  fun t₁ t₂ ht => add_le_add_left (map_le_map ht) _\n#align disj_sum_mono_right disj_sum_mono_right\n\n",
+ "disj_sum_mono_left":
+ "theorem disj_sum_mono_left (t : Multiset β) : monotone fun s : Multiset α => s.disj_sum t := fun s₁ s₂ hs =>\n  add_le_add_right (map_le_map hs) _\n#align disj_sum_mono_left disj_sum_mono_left\n\n",
+ "disj_sum_mono":
+ "theorem disj_sum_mono (hs : s₁ ≤ s₂) (ht : t₁ ≤ t₂) : s₁.disj_sum t₁ ≤ s₂.disj_sum t₂ :=\n  add_le_add (map_le_map hs) (map_le_map ht)\n#align disj_sum_mono disj_sum_mono\n\n",
+ "disj_sum_lt_disj_sum_of_lt_of_le":
+ "theorem disj_sum_lt_disj_sum_of_lt_of_le (hs : s₁ < s₂) (ht : t₁ ≤ t₂) : s₁.disj_sum t₁ < s₂.disj_sum t₂ :=\n  add_lt_add_of_lt_of_le (map_lt_map hs) (map_le_map ht)\n#align disj_sum_lt_disj_sum_of_lt_of_le disj_sum_lt_disj_sum_of_lt_of_le\n\n",
+ "disj_sum_lt_disj_sum_of_le_of_lt":
+ "theorem disj_sum_lt_disj_sum_of_le_of_lt (hs : s₁ ≤ s₂) (ht : t₁ < t₂) : s₁.disj_sum t₁ < s₂.disj_sum t₂ :=\n  add_lt_add_of_le_of_lt (map_le_map hs) (map_lt_map ht)\n#align disj_sum_lt_disj_sum_of_le_of_lt disj_sum_lt_disj_sum_of_le_of_lt\n\n",
+ "disj_sum":
+ "protected theorem nodup.disj_sum (hs : s.nodup) (ht : t.nodup) : (s.disj_sum t).nodup :=\n  by\n  refine' ((hs.map inl_injective).add_iff <| ht.map inr_injective).2 fun x hs ht => _\n  rw [Multiset.mem_map] at hs ht\n  obtain ⟨a, _, rfl⟩ := hs\n  obtain ⟨b, _, h⟩ := ht\n  exact inr_ne_inl h\n#align nodup.disj_sum nodup.disj_sum\n\n",
+ "card_disj_sum":
+ "@[simp]\ntheorem card_disj_sum : (s.disj_sum t).card = s.card + t.card := by rw [disj_sum, card_add, card_map, card_map]\n#align card_disj_sum card_disj_sum\n\n"}

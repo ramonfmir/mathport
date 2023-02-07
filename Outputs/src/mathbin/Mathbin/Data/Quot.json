@@ -1,0 +1,106 @@
+{"true_equivalence":
+ "#print true_equivalence /-\ntheorem true_equivalence : @equivalence α fun _ _ => true :=\n  ⟨fun _ => trivial, fun _ _ _ => trivial, fun _ _ _ _ _ => trivial⟩\n#align true_equivalence true_equivalence\n-/\n\n",
+ "surjective_quotient_mk'":
+ "/-- `quotient.mk'` is a surjective function. -/\ntheorem surjective_quotient_mk' : surjective (quotient.mk' : α → quotient s₁) :=\n  quot.exists_rep\n#align surjective_quotient_mk' surjective_quotient_mk'\n\n",
+ "surjective_quotient_mk":
+ "#print surjective_quotient_mk /-\n/-- `quotient.mk` is a surjective function. -/\ntheorem surjective_quotient_mk (α : Sort _) [s : setoid α] : surjective (Quotient.mk'' : α → quotient s) :=\n  quot.exists_rep\n#align surjective_quotient_mk surjective_quotient_mk\n-/\n\n",
+ "surjective_quot_mk":
+ "#print surjective_quot_mk /-\n/-- `quot.mk r` is a surjective function. -/\ntheorem surjective_quot_mk (r : α → α → Prop) : surjective (Quot.mk r) :=\n  quot.exists_rep\n#align surjective_quot_mk surjective_quot_mk\n-/\n\n",
+ "surjective_lift_on'":
+ "@[simp]\ntheorem surjective_lift_on' {f : α → φ} (h : ∀ a b, @Setoid.r α s₁ a b → f a = f b) :\n    (surjective fun x => quotient.lift_on' x f h) ↔ surjective f :=\n  Quot.surjective_lift _\n#align surjective_lift_on' surjective_lift_on'\n\n",
+ "surjective_lift":
+ "@[simp]\ntheorem surjective_lift {f : α → γ} (h : ∀ a₁ a₂, r a₁ a₂ → f a₁ = f a₂) : surjective (lift f h) ↔ surjective f :=\n  ⟨fun hf => hf.comp quot.exists_rep, fun hf y =>\n    let ⟨x, hx⟩ := hf y\n    ⟨Quot.mk _ x, hx⟩⟩\n#align surjective_lift surjective_lift\n\n",
+ "sound'":
+ "theorem sound' {a b : α} : @Setoid.r _ s₁ a b → @quotient.mk' α s₁ a = quotient.mk' b :=\n  quotient.sound\n#align sound' sound'\n\n",
+ "out_injective":
+ "theorem quotient.out_injective {s : setoid α} : injective (@quotient.out α s) := fun a b h =>\n  quotient.out_equiv_out.1 <| h ▸ setoid.refl _\n#align quotient.out_injective quotient.out_injective\n\n",
+ "out_inj":
+ "@[simp]\ntheorem quotient.out_inj {s : setoid α} {x y : quotient s} : x.out = y.out ↔ x = y :=\n  ⟨fun h => quotient.out_injective h, fun h => h ▸ rfl⟩\n#align quotient.out_inj quotient.out_inj\n\n",
+ "out_equiv_out":
+ "@[simp]\ntheorem quotient.out_equiv_out {s : setoid α} {x y : quotient s} : x.out ≈ y.out ↔ x = y := by\n  rw [← quotient.eq_mk_iff_out, quotient.out_eq]\n#align quotient.out_equiv_out quotient.out_equiv_out\n\n",
+ "out_eq'":
+ "@[simp]\ntheorem out_eq' (q : quotient s₁) : quotient.mk' q.out' = q :=\n  q.out_eq\n#align out_eq' out_eq'\n\n",
+ "out_eq":
+ "@[simp]\ntheorem out_eq (q : trunc α) : mk q.out = q :=\n  trunc.eq _ _\n#align out_eq out_eq\n\n",
+ "nonempty_quotient_iff":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⟦ ⟧» -/\n#print nonempty_quotient_iff /-\ntheorem nonempty_quotient_iff (s : setoid α) : nonempty (quotient s) ↔ nonempty α :=\n  ⟨fun ⟨a⟩ => Quotient.inductionOn a nonempty.intro, fun ⟨a⟩ => ⟨«expr⟦ ⟧» a⟩⟩\n#align nonempty_quotient_iff nonempty_quotient_iff\n-/\n\n",
+ "nonempty":
+ "protected theorem nonempty (q : trunc α) : nonempty α :=\n  nonempty_of_exists q.exists_rep\n#align nonempty nonempty\n\n",
+ "mk_out'":
+ "theorem mk_out' (a : α) : @Setoid.r α s₁ (quotient.mk' a : quotient s₁).out' a :=\n  quotient.exact (quotient.out_eq _)\n#align mk_out' mk_out'\n\n",
+ "mk_out":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⟦ ⟧» -/\ntheorem quotient.mk_out [s : setoid α] (a : α) : («expr⟦ ⟧» a).out ≈ a :=\n  quotient.exact (quotient.out_eq _)\n#align quotient.mk_out quotient.mk_out\n\n",
+ "mk_eq_iff_out":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⟦ ⟧» -/\ntheorem quotient.mk_eq_iff_out [s : setoid α] {x : α} {y : quotient s} : «expr⟦ ⟧» x = y ↔ x ≈ quotient.out y :=\n  by\n  refine' iff.trans _ quotient.eq\n  rw [quotient.out_eq y]\n#align quotient.mk_eq_iff_out quotient.mk_eq_iff_out\n\n",
+ "mk'_eq_mk":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⟦ ⟧» -/\nprotected theorem mk'_eq_mk (x : α) : quotient.mk' x = «expr⟦ ⟧» x :=\n  rfl\n#align mk'_eq_mk mk'_eq_mk\n\n",
+ "map₂_mk":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⇒ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⇒ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⟦ ⟧» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⟦ ⟧» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⟦ ⟧» -/\n@[simp]\ntheorem map₂_mk (f : α → β → γ) (h : («expr ⇒ » (· ≈ ·) («expr ⇒ » (· ≈ ·) (· ≈ ·))) f f) (x : α) (y : β) :\n    quotient.map₂ f h («expr⟦ ⟧» x : quotient sa) («expr⟦ ⟧» y : quotient sb) = («expr⟦ ⟧» (f x y) : quotient sc) :=\n  rfl\n#align map₂_mk map₂_mk\n\n",
+ "map₂'_mk'":
+ "@[simp]\ntheorem map₂'_mk' (f : α → β → γ) (h) (x : α) :\n    (quotient.mk' x : quotient s₁).map₂' f h = (quotient.map' (f x) (h (setoid.refl x)) : quotient s₂ → quotient s₃) :=\n  rfl\n#align map₂'_mk' map₂'_mk'\n\n",
+ "map_mk":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⇒ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⟦ ⟧» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⟦ ⟧» -/\n@[simp]\ntheorem map_mk (f : α → β) (h : («expr ⇒ » (· ≈ ·) (· ≈ ·)) f f) (x : α) :\n    quotient.map f h («expr⟦ ⟧» x : quotient sa) = («expr⟦ ⟧» (f x) : quotient sb) :=\n  rfl\n#align map_mk map_mk\n\n",
+ "map'_mk'":
+ "@[simp]\ntheorem map'_mk' (f : α → β) (h) (x : α) :\n    (quotient.mk' x : quotient s₁).map' f h = (quotient.mk' (f x) : quotient s₂) :=\n  rfl\n#align map'_mk' map'_mk'\n\n",
+ "map'_mk":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⟦ ⟧» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⟦ ⟧» -/\n@[simp]\ntheorem map'_mk [setoid β] (f : α → β) (h) (x : α) : («expr⟦ ⟧» x).map' f h = «expr⟦ ⟧» (f x) :=\n  rfl\n#align map'_mk map'_mk\n\n",
+ "lift₂_mk":
+ "@[simp]\ntheorem quotient.lift₂_mk {α : Sort _} {β : Sort _} {γ : Sort _} [setoid α] [setoid β] (f : α → β → γ)\n    (h : ∀ (a₁ : α) (a₂ : β) (b₁ : α) (b₂ : β), a₁ ≈ b₁ → a₂ ≈ b₂ → f a₁ a₂ = f b₁ b₂) (a : α) (b : β) :\n    quotient.lift₂ f h (Quotient.mk'' a) (Quotient.mk'' b) = f a b :=\n  rfl\n#align quotient.lift₂_mk quotient.lift₂_mk\n\n",
+ "lift_on₂_mk":
+ "@[simp]\ntheorem quotient.lift_on₂_mk {α : Sort _} {β : Sort _} [setoid α] (f : α → α → β)\n    (h : ∀ a₁ a₂ b₁ b₂ : α, a₁ ≈ b₁ → a₂ ≈ b₂ → f a₁ a₂ = f b₁ b₂) (x y : α) :\n    quotient.lift_on₂ (Quotient.mk'' x) (Quotient.mk'' y) f h = f x y :=\n  rfl\n#align quotient.lift_on₂_mk quotient.lift_on₂_mk\n\n",
+ "lift_on₂'_mk'":
+ "@[simp]\nprotected theorem lift_on₂'_mk' (f : α → β → γ) (h) (a : α) (b : β) :\n    quotient.lift_on₂' (@quotient.mk' _ s₁ a) (@quotient.mk' _ s₂ b) f h = f a b :=\n  rfl\n#align lift_on₂'_mk' lift_on₂'_mk'\n\n",
+ "lift_on₂'_mk":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⟦ ⟧» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⟦ ⟧» -/\n@[simp]\nprotected theorem lift_on₂'_mk [setoid β] (f : α → β → γ) (h) (a : α) (b : β) :\n    quotient.lift_on₂' («expr⟦ ⟧» a) («expr⟦ ⟧» b) f h = f a b :=\n  quotient.lift_on₂'_mk' _ _ _ _\n#align lift_on₂'_mk lift_on₂'_mk\n\n",
+ "lift_on_mk":
+ "@[simp]\ntheorem quotient.lift_on_mk [s : setoid α] (f : α → β) (h : ∀ a b : α, a ≈ b → f a = f b) (x : α) :\n    quotient.lift_on (Quotient.mk'' x) f h = f x :=\n  rfl\n#align quotient.lift_on_mk quotient.lift_on_mk\n\n",
+ "lift_on'_mk'":
+ "@[simp]\nprotected theorem lift_on'_mk' (f : α → φ) (h) (x : α) : quotient.lift_on' (@quotient.mk' _ s₁ x) f h = f x :=\n  rfl\n#align lift_on'_mk' lift_on'_mk'\n\n",
+ "lift_on'_mk":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⟦ ⟧» -/\n@[simp]\nprotected theorem lift_on'_mk (x : α) (f : α → β) (h) : («expr⟦ ⟧» x).lift_on' f h = f x :=\n  rfl\n#align lift_on'_mk lift_on'_mk\n\n",
+ "lift_mk":
+ "protected theorem lift_mk (f : α → β) (c) (a : α) : lift f c (mk a) = f a :=\n  rfl\n#align lift_mk lift_mk\n\n",
+ "lift_comp_mk":
+ "@[simp]\ntheorem quotient.lift_comp_mk [setoid α] (f : α → β) (h : ∀ a b : α, a ≈ b → f a = f b) :\n    quotient.lift f h ∘ Quotient.mk'' = f :=\n  rfl\n#align quotient.lift_comp_mk quotient.lift_comp_mk\n\n",
+ "ind₂'":
+ "/-- A version of `quotient.ind₂` taking `{s₁ : setoid α} {s₂ : setoid β}` as implicit arguments\ninstead of instance arguments. -/\n@[elab_as_elim]\nprotected theorem ind₂' {p : quotient s₁ → quotient s₂ → Prop} (h : ∀ a₁ a₂, p (quotient.mk' a₁) (quotient.mk' a₂))\n    (q₁ : quotient s₁) (q₂ : quotient s₂) : p q₁ q₂ :=\n  quotient.ind₂ h q₁ q₂\n#align ind₂' ind₂'\n\n",
+ "induction_on₃'":
+ "/-- A version of `quotient.induction_on₃` taking `{s₁ : setoid α} {s₂ : setoid β} {s₃ : setoid γ}`\nas implicit arguments instead of instance arguments. -/\n@[elab_as_elim]\nprotected theorem induction_on₃' {p : quotient s₁ → quotient s₂ → quotient s₃ → Prop} (q₁ : quotient s₁)\n    (q₂ : quotient s₂) (q₃ : quotient s₃) (h : ∀ a₁ a₂ a₃, p (quotient.mk' a₁) (quotient.mk' a₂) (quotient.mk' a₃)) :\n    p q₁ q₂ q₃ :=\n  quotient.induction_on₃ q₁ q₂ q₃ h\n#align induction_on₃' induction_on₃'\n\n",
+ "induction_on₃":
+ "@[elab_as_elim]\nprotected theorem induction_on₃ {δ : Quot r → Quot s → Quot t → Prop} (q₁ : Quot r) (q₂ : Quot s) (q₃ : Quot t)\n    (h : ∀ a b c, δ (Quot.mk r a) (Quot.mk s b) (Quot.mk t c)) : δ q₁ q₂ q₃ :=\n  Quot.ind (fun a₁ => Quot.ind (fun a₂ => Quot.ind (fun a₃ => h a₁ a₂ a₃) q₃) q₂) q₁\n#align induction_on₃ induction_on₃\n\n",
+ "induction_on₂'":
+ "/-- A version of `quotient.induction_on₂` taking `{s₁ : setoid α} {s₂ : setoid β}` as implicit\narguments instead of instance arguments. -/\n@[elab_as_elim]\nprotected theorem induction_on₂' {p : quotient s₁ → quotient s₂ → Prop} (q₁ : quotient s₁) (q₂ : quotient s₂)\n    (h : ∀ a₁ a₂, p (quotient.mk' a₁) (quotient.mk' a₂)) : p q₁ q₂ :=\n  quotient.induction_on₂ q₁ q₂ h\n#align induction_on₂' induction_on₂'\n\n",
+ "induction_on₂":
+ "@[elab_as_elim]\nprotected theorem induction_on₂ {C : trunc α → trunc β → Prop} (q₁ : trunc α) (q₂ : trunc β)\n    (h : ∀ a b, C (mk a) (mk b)) : C q₁ q₂ :=\n  trunc.induction_on q₁ fun a₁ => trunc.induction_on q₂ (h a₁)\n#align induction_on₂ induction_on₂\n\n",
+ "induction_on_pi":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⟦ ⟧» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⟦ ⟧» -/\n@[elab_as_elim]\ntheorem quotient.induction_on_pi {ι : Type _} {α : ι → Sort _} [s : ∀ i, setoid (α i)]\n    {p : (∀ i, quotient (s i)) → Prop} (f : ∀ i, quotient (s i)) (h : ∀ a : ∀ i, α i, p fun i => «expr⟦ ⟧» (a i)) :\n    p f := by\n  rw [← (funext fun i => quotient.out_eq (f i) : (fun i => «expr⟦ ⟧» (f i).out) = f)]\n  apply h\n#align quotient.induction_on_pi quotient.induction_on_pi\n\n",
+ "induction_on'":
+ "/-- A version of `quotient.induction_on` taking `{s : setoid α}` as an implicit argument instead\nof an instance argument. -/\n@[elab_as_elim]\nprotected theorem induction_on' {p : quotient s₁ → Prop} (q : quotient s₁) (h : ∀ a, p (quotient.mk' a)) : p q :=\n  Quotient.inductionOn q h\n#align induction_on' induction_on'\n\n",
+ "induction_on":
+ "@[elab_as_elim]\nprotected theorem induction_on {β : trunc α → Prop} (q : trunc α) (h : ∀ a, β (mk a)) : β q :=\n  ind h q\n#align induction_on induction_on\n\n",
+ "ind'":
+ "/-- A version of `quotient.ind` taking `{s : setoid α}` as an implicit argument instead of an\ninstance argument. -/\n@[elab_as_elim]\nprotected theorem ind' {p : quotient s₁ → Prop} (h : ∀ a, p (quotient.mk' a)) (q : quotient s₁) : p q :=\n  quotient.ind h q\n#align ind' ind'\n\n",
+ "ind":
+ "theorem ind {β : trunc α → Prop} : (∀ a : α, β (mk a)) → ∀ q : trunc α, β q :=\n  Quot.ind\n#align ind ind\n\n",
+ "hrec_on₂'_mk'":
+ "@[simp]\ntheorem hrec_on₂'_mk' {φ : quotient s₁ → quotient s₂ → Sort _} (f : ∀ a b, φ (quotient.mk' a) (quotient.mk' b))\n    (c : ∀ a₁ b₁ a₂ b₂, a₁ ≈ a₂ → b₁ ≈ b₂ → HEq (f a₁ b₁) (f a₂ b₂)) (x : α) (qb : quotient s₂) :\n    (quotient.mk' x).hrec_on₂' qb f c = qb.hrec_on' (f x) fun b₁ b₂ => c _ _ _ _ (setoid.refl _) :=\n  rfl\n#align hrec_on₂'_mk' hrec_on₂'_mk'\n\n",
+ "hrec_on'_mk'":
+ "@[simp]\ntheorem hrec_on'_mk' {φ : quotient s₁ → Sort _} (f : ∀ a, φ (quotient.mk' a)) (c : ∀ a₁ a₂, a₁ ≈ a₂ → HEq (f a₁) (f a₂))\n    (x : α) : (quotient.mk' x).hrec_on' f c = f x :=\n  rfl\n#align hrec_on'_mk' hrec_on'_mk'\n\n",
+ "forall_quotient_iff":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⟦ ⟧» -/\n#print forall_quotient_iff /-\ntheorem forall_quotient_iff {α : Type _} [r : setoid α] {p : quotient r → Prop} :\n    (∀ a : quotient r, p a) ↔ ∀ a : α, p («expr⟦ ⟧» a) :=\n  ⟨fun h x => h _, fun h a => a.induction_on h⟩\n#align forall_quotient_iff forall_quotient_iff\n-/\n\n",
+ "factor_mk_eq":
+ "theorem factor_mk_eq {α : Type _} (r s : α → α → Prop) (h : ∀ x y, r x y → s x y) :\n    factor r s h ∘ Quot.mk _ = Quot.mk _ :=\n  rfl\n#align factor_mk_eq factor_mk_eq\n\n",
+ "ext":
+ "/-\nCopyright (c) 2017 Johannes Hölzl. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Johannes Hölzl\n-/\ntheorem ext {α : Sort _} : ∀ {s t : setoid α}, (∀ a b, @Setoid.r α s a b ↔ @Setoid.r α t a b) → s = t\n  | ⟨r, _⟩, ⟨p, _⟩, eq => by\n    have : r = p := funext fun a => funext fun b => propext <| eq a b\n    subst this\n#align ext ext\n\n",
+ "exists_rep":
+ "theorem exists_rep (q : trunc α) : ∃ a : α, mk a = q :=\n  quot.exists_rep q\n#align exists_rep exists_rep\n\n",
+ "exact'":
+ "theorem exact' {a b : α} : (quotient.mk' a : quotient s₁) = quotient.mk' b → @Setoid.r _ s₁ a b :=\n  quotient.exact\n#align exact' exact'\n\n",
+ "eq_mk_iff_out":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⟦ ⟧» -/\ntheorem quotient.eq_mk_iff_out [s : setoid α] {x : quotient s} {y : α} : x = «expr⟦ ⟧» y ↔ quotient.out x ≈ y :=\n  by\n  refine' iff.trans _ quotient.eq\n  rw [quotient.out_eq x]\n#align quotient.eq_mk_iff_out quotient.eq_mk_iff_out\n\n",
+ "eq'":
+ "@[simp]\nprotected theorem eq' {a b : α} : @quotient.mk' α s₁ a = quotient.mk' b ↔ @Setoid.r _ s₁ a b :=\n  quotient.eq\n#align eq' eq'\n\n",
+ "eq":
+ "protected theorem eq (a b : trunc α) : a = b :=\n  trunc.induction_on₂ a b fun x y => quot.sound trivial\n#align eq eq\n\n",
+ "choice_eq":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⟦ ⟧» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⟦ ⟧» -/\n@[simp]\ntheorem quotient.choice_eq {ι : Type _} {α : ι → Type _} [∀ i, setoid (α i)] (f : ∀ i, α i) :\n    (quotient.choice fun i => «expr⟦ ⟧» (f i)) = «expr⟦ ⟧» f :=\n  quotient.sound fun i => quotient.mk_out _\n#align quotient.choice_eq quotient.choice_eq\n\n"}

@@ -1,0 +1,4 @@
+{"mem_attach_fin":
+ "/-\nCopyright (c) 2018 Chris Hughes. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Chris Hughes, Scott Morrison, Johan Commelin\n-/\n@[simp]\ntheorem mem_attach_fin {n : ℕ} {s : Finset ℕ} (h : ∀ m ∈ s, m < n) {a : fin n} : a ∈ s.attach_fin h ↔ (a : ℕ) ∈ s :=\n  ⟨fun h =>\n    let ⟨b, hb₁, hb₂⟩ := Multiset.mem_pmap.1 h\n    hb₂ ▸ hb₁,\n    fun h => Multiset.mem_pmap.2 ⟨a, h, Fin.eta _ _⟩⟩\n#align mem_attach_fin mem_attach_fin\n\n",
+ "card_attach_fin":
+ "@[simp]\ntheorem card_attach_fin {n : ℕ} (s : Finset ℕ) (h : ∀ m ∈ s, m < n) : (s.attach_fin h).card = s.card :=\n  Multiset.card_pmap _ _ _\n#align card_attach_fin card_attach_fin\n\n"}

@@ -1,0 +1,14 @@
+{"sections_zero":
+ "/-\nCopyright (c) 2018 Johannes Hölzl. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Johannes Hölzl\n-/\n@[simp]\ntheorem sections_zero : Sections (0 : Multiset (Multiset α)) = {0} :=\n  rfl\n#align sections_zero sections_zero\n\n",
+ "sections_cons":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ::ₘ » -/\n@[simp]\ntheorem sections_cons (s : Multiset (Multiset α)) (m : Multiset α) :\n    Sections («expr ::ₘ » m s) = m.bind fun a => (Sections s).map (Multiset.cons a) :=\n  recOn_cons m s\n#align sections_cons sections_cons\n\n",
+ "sections_add":
+ "@[simp]\ntheorem sections_add (s t : Multiset (Multiset α)) :\n    Sections (s + t) = (Sections s).bind fun m => (Sections t).map ((· + ·) m) :=\n  Multiset.induction_on s (by simp) fun a s ih => by simp [ih, bind_assoc, map_bind, bind_map, -add_comm]\n#align sections_add sections_add\n\n",
+ "prod_map_sum":
+ "theorem prod_map_sum [CommSemiring α] {s : Multiset (Multiset α)} : prod (s.map sum) = sum ((Sections s).map prod) :=\n  Multiset.induction_on s (by simp) fun a s ih => by simp [ih, map_bind, sum_map_mul_left, sum_map_mul_right]\n#align prod_map_sum prod_map_sum\n\n",
+ "mem_sections":
+ "theorem mem_sections {s : Multiset (Multiset α)} : ∀ {a}, a ∈ Sections s ↔ s.rel (fun s a => a ∈ s) a :=\n  Multiset.induction_on s (by simp) fun a s ih a' => by\n    simp [ih, rel_cons_left, -exists_and_left, exists_and_distrib_left.symm, eq_comm]\n#align mem_sections mem_sections\n\n",
+ "coe_sections":
+ "theorem coe_sections :\n    ∀ l : list (list α),\n      Sections (l.map fun l : list α => (l : Multiset α) : Multiset (Multiset α)) =\n        (l.sections.map fun l : list α => (l : Multiset α) : Multiset (Multiset α))\n  | [] => rfl\n  | a :: l => by\n    simp\n    rw [← cons_coe, sections_cons, bind_map_comm, coe_sections l]\n    simp [List.sections, (· ∘ ·), list.bind]\n#align coe_sections coe_sections\n\n",
+ "card_sections":
+ "theorem card_sections {s : Multiset (Multiset α)} : card (Sections s) = prod (s.map card) :=\n  Multiset.induction_on s (by simp) (by simp (config := { contextual := true }))\n#align card_sections card_sections\n\n"}

@@ -1,0 +1,20 @@
+{"snd_pred_mem_erase_of_mem_left":
+ "theorem snd_pred_mem_erase_of_mem_left {b : board} {m : ℤ × ℤ} (h : m ∈ left b) : (m.1, m.2 - 1) ∈ b.erase m :=\n  by\n  rw [mem_left] at h\n  apply Finset.mem_erase_of_ne_of_mem _ h.2\n  exact ne_of_apply_ne prod.snd (pred_ne_self m.2)\n#align snd_pred_mem_erase_of_mem_left snd_pred_mem_erase_of_mem_left\n\n",
+ "move_right_smaller":
+ "theorem move_right_smaller {b : board} {m : ℤ × ℤ} (h : m ∈ right b) :\n    finset.card (move_right b m) / 2 < finset.card b / 2 := by simp [← move_right_card h, lt_add_one]\n#align move_right_smaller move_right_smaller\n\n",
+ "move_right_card":
+ "theorem move_right_card {b : board} {m : ℤ × ℤ} (h : m ∈ right b) : finset.card (move_right b m) + 2 = finset.card b :=\n  by\n  dsimp [move_right]\n  rw [finset.card_erase_of_mem (fst_pred_mem_erase_of_mem_right h)]\n  rw [finset.card_erase_of_mem (Finset.mem_of_mem_inter_left h)]\n  exact tsub_add_cancel_of_le (card_of_mem_right h)\n#align move_right_card move_right_card\n\n",
+ "move_left_smaller":
+ "theorem move_left_smaller {b : board} {m : ℤ × ℤ} (h : m ∈ left b) :\n    finset.card (move_left b m) / 2 < finset.card b / 2 := by simp [← move_left_card h, lt_add_one]\n#align move_left_smaller move_left_smaller\n\n",
+ "move_left_card":
+ "theorem move_left_card {b : board} {m : ℤ × ℤ} (h : m ∈ left b) : finset.card (move_left b m) + 2 = finset.card b :=\n  by\n  dsimp [move_left]\n  rw [finset.card_erase_of_mem (snd_pred_mem_erase_of_mem_left h)]\n  rw [finset.card_erase_of_mem (Finset.mem_of_mem_inter_left h)]\n  exact tsub_add_cancel_of_le (card_of_mem_left h)\n#align move_left_card move_left_card\n\n",
+ "mem_right":
+ "theorem mem_right {b : board} (x : ℤ × ℤ) : x ∈ right b ↔ x ∈ b ∧ (x.1 - 1, x.2) ∈ b :=\n  Finset.mem_inter.trans (and_congr iff.rfl Finset.mem_map_equiv)\n#align mem_right mem_right\n\n",
+ "mem_left":
+ "/-\nCopyright (c) 2019 Scott Morrison. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Scott Morrison\n-/\ntheorem mem_left {b : board} (x : ℤ × ℤ) : x ∈ left b ↔ x ∈ b ∧ (x.1, x.2 - 1) ∈ b :=\n  Finset.mem_inter.trans (and_congr iff.rfl Finset.mem_map_equiv)\n#align mem_left mem_left\n\n",
+ "fst_pred_mem_erase_of_mem_right":
+ "theorem fst_pred_mem_erase_of_mem_right {b : board} {m : ℤ × ℤ} (h : m ∈ right b) : (m.1 - 1, m.2) ∈ b.erase m :=\n  by\n  rw [mem_right] at h\n  apply Finset.mem_erase_of_ne_of_mem _ h.2\n  exact ne_of_apply_ne prod.fst (pred_ne_self m.1)\n#align fst_pred_mem_erase_of_mem_right fst_pred_mem_erase_of_mem_right\n\n",
+ "card_of_mem_right":
+ "theorem card_of_mem_right {b : board} {m : ℤ × ℤ} (h : m ∈ right b) : 2 ≤ finset.card b :=\n  by\n  have w₁ : m ∈ b := (Finset.mem_inter.1 h).1\n  have w₂ := fst_pred_mem_erase_of_mem_right h\n  have i₁ := finset.card_erase_lt_of_mem w₁\n  have i₂ := nat.lt_of_le_of_lt (nat.zero_le _) (finset.card_erase_lt_of_mem w₂)\n  exact nat.lt_of_le_of_lt i₂ i₁\n#align card_of_mem_right card_of_mem_right\n\n",
+ "card_of_mem_left":
+ "theorem card_of_mem_left {b : board} {m : ℤ × ℤ} (h : m ∈ left b) : 2 ≤ finset.card b :=\n  by\n  have w₁ : m ∈ b := (Finset.mem_inter.1 h).1\n  have w₂ : (m.1, m.2 - 1) ∈ b.erase m := snd_pred_mem_erase_of_mem_left h\n  have i₁ := finset.card_erase_lt_of_mem w₁\n  have i₂ := nat.lt_of_le_of_lt (nat.zero_le _) (finset.card_erase_lt_of_mem w₂)\n  exact nat.lt_of_le_of_lt i₂ i₁\n#align card_of_mem_left card_of_mem_left\n\n"}

@@ -1,0 +1,208 @@
+{"verts_sup":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊔ » -/\n@[simp]\ntheorem verts_sup {H H' : G.subgraph} : («expr ⊔ » H H').verts = H.verts ∪ H'.verts :=\n  rfl\n#align verts_sup verts_sup\n\n",
+ "verts_inf":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊓ » -/\n@[simp]\ntheorem verts_inf {H H' : G.subgraph} : («expr ⊓ » H H').verts = H.verts ∩ H'.verts :=\n  rfl\n#align verts_inf verts_inf\n\n",
+ "top_verts":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n-- TODO simp lemmas for the other lattice operations on subgraphs\n@[simp]\ntheorem top_verts : («expr⊤» : subgraph G).verts = Set.univ :=\n  rfl\n#align top_verts top_verts\n\n",
+ "top_adj_iff":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n@[simp]\ntheorem top_adj_iff {v w : V} : («expr⊤» : subgraph G).adj v w ↔ G.adj v w :=\n  iff.rfl\n#align top_adj_iff top_adj_iff\n\n",
+ "symm":
+ "protected theorem adj.symm {G' : subgraph G} {u v : V} (h : G'.adj u v) : G'.adj v u :=\n  G'.symm h\n#align adj.symm adj.symm\n\n",
+ "support_subset_verts":
+ "theorem support_subset_verts (H : subgraph G) : H.support ⊆ H.verts := fun v ⟨w, h⟩ => H.edge_vert h\n#align support_subset_verts support_subset_verts\n\n",
+ "support_mono":
+ "theorem support_mono {H H' : subgraph G} (h : H ≤ H') : H.support ⊆ H'.support :=\n  Rel.dom_mono h.2\n#align support_mono support_mono\n\n",
+ "sup_adj":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊔ » -/\n@[simp]\ntheorem sup_adj {H₁ H₂ : subgraph G} {v w : V} : («expr ⊔ » H₁ H₂).adj v w ↔ H₁.adj v w ∨ H₂.adj v w :=\n  iff.rfl\n#align sup_adj sup_adj\n\n",
+ "subgraph_of_adj_symm":
+ "theorem subgraph_of_adj_symm {v w : V} (hvw : G.adj v w) : G.subgraph_of_adj hvw.symm = G.subgraph_of_adj hvw := by\n  ext <;> simp [or_comm', and_comm']\n#align subgraph_of_adj_symm subgraph_of_adj_symm\n\n",
+ "subgraph_of_adj_eq_induce":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\ntheorem subgraph_of_adj_eq_induce {v w : V} (hvw : G.adj v w) :\n    G.subgraph_of_adj hvw = («expr⊤» : G.subgraph).induce {v, w} :=\n  by\n  ext\n  · simp\n  · constructor\n    · intro h\n      simp only [subgraph_of_adj_adj, quotient.eq, sym2.rel_iff] at h\n      obtain ⟨rfl, rfl⟩ | ⟨rfl, rfl⟩ := h <;> simp [hvw, hvw.symm]\n    · intro h\n      simp only [induce_adj, Set.mem_insert_iff, Set.mem_singleton_iff, top_adj_iff] at h\n      obtain ⟨rfl | rfl, rfl | rfl, ha⟩ := h <;> first |exact (ha.ne rfl).elim|simp\n#align subgraph_of_adj_eq_induce subgraph_of_adj_eq_induce\n\n",
+ "spanning_coe_top":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n@[simp]\ntheorem spanning_coe_top : («expr⊤» : subgraph G).spanning_coe = G :=\n  by\n  ext\n  rfl\n#align spanning_coe_top spanning_coe_top\n\n",
+ "spanning_coe_le_of_le":
+ "theorem spanning_coe_le_of_le {H H' : subgraph G} (h : H ≤ H') : H.spanning_coe ≤ H'.spanning_coe :=\n  h.2\n#align spanning_coe_le_of_le spanning_coe_le_of_le\n\n",
+ "spanning_coe_delete_edges_le":
+ "theorem spanning_coe_delete_edges_le (G' : G.subgraph) (s : set (sym2 V)) :\n    (G'.delete_edges s).spanning_coe ≤ G'.spanning_coe :=\n  spanning_coe_le_of_le (delete_edges_le s)\n#align spanning_coe_delete_edges_le spanning_coe_delete_edges_le\n\n",
+ "spanning_coe_bot":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n@[simp]\ntheorem spanning_coe_bot : («expr⊥» : subgraph G).spanning_coe = «expr⊥» :=\n  rfl\n#align spanning_coe_bot spanning_coe_bot\n\n",
+ "snd_mem":
+ "protected theorem adj.snd_mem {H : G.subgraph} {u v : V} (h : H.adj u v) : v ∈ H.verts :=\n  h.symm.fst_mem\n#align adj.snd_mem adj.snd_mem\n\n",
+ "singleton_subgraph_snd_le_subgraph_of_adj":
+ "theorem singleton_subgraph_snd_le_subgraph_of_adj {u v : V} {h : G.adj u v} :\n    G.singleton_subgraph v ≤ G.subgraph_of_adj h := by constructor <;> simp [-Set.bot_eq_empty]\n#align singleton_subgraph_snd_le_subgraph_of_adj singleton_subgraph_snd_le_subgraph_of_adj\n\n",
+ "singleton_subgraph_le_iff":
+ "@[simp]\ntheorem singleton_subgraph_le_iff (v : V) (H : G.subgraph) : G.singleton_subgraph v ≤ H ↔ v ∈ H.verts :=\n  by\n  refine' ⟨fun h => h.1 (Set.mem_singleton v), _⟩\n  intro h\n  constructor\n  · simp [h]\n  · simp [-Set.bot_eq_empty]\n#align singleton_subgraph_le_iff singleton_subgraph_le_iff\n\n",
+ "singleton_subgraph_fst_le_subgraph_of_adj":
+ "theorem singleton_subgraph_fst_le_subgraph_of_adj {u v : V} {h : G.adj u v} :\n    G.singleton_subgraph u ≤ G.subgraph_of_adj h := by constructor <;> simp [-Set.bot_eq_empty]\n#align singleton_subgraph_fst_le_subgraph_of_adj singleton_subgraph_fst_le_subgraph_of_adj\n\n",
+ "singleton_subgraph_eq_induce":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\ntheorem singleton_subgraph_eq_induce {v : V} : G.singleton_subgraph v = («expr⊤» : G.subgraph).induce {v} := by\n  ext <;> simp (config := { contextual := true }) [-Set.bot_eq_empty, Prop.bot_eq_false]\n#align singleton_subgraph_eq_induce singleton_subgraph_eq_induce\n\n",
+ "restrict_coe_subgraph":
+ "theorem restrict_coe_subgraph {G' : G.subgraph} (G'' : G'.coe.subgraph) : G''.coe_subgraph.restrict = G'' :=\n  by\n  ext\n  · simp\n  · simp only [relation.map, comap_adj, coe_adj, subtype.coe_prop, hom_apply, map_adj, SetCoe.exists, subtype.coe_mk,\n      exists_and_right, exists_eq_right_right, subtype.coe_eta, exists_true_left, exists_eq_right,\n      and_iff_right_iff_imp]\n    apply G''.adj_sub\n#align restrict_coe_subgraph restrict_coe_subgraph\n\n",
+ "of_spanning_coe":
+ "@[simp]\ntheorem adj.of_spanning_coe {G' : subgraph G} {u v : G'.verts} (h : G'.spanning_coe.adj u v) : G.adj u v :=\n  G'.adj_sub h\n#align adj.of_spanning_coe adj.of_spanning_coe\n\n",
+ "not_bot_adj":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n@[simp]\ntheorem not_bot_adj {v w : V} : ¬(«expr⊥» : subgraph G).adj v w :=\n  not_false\n#align not_bot_adj not_bot_adj\n\n",
+ "neighbor_set_sup":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊔ » -/\ntheorem neighbor_set_sup {H H' : G.subgraph} (v : V) :\n    («expr ⊔ » H H').neighbor_set v = H.neighbor_set v ∪ H'.neighbor_set v :=\n  by\n  ext w\n  simp\n#align neighbor_set_sup neighbor_set_sup\n\n",
+ "neighbor_set_subset_verts":
+ "theorem neighbor_set_subset_verts (G' : subgraph G) (v : V) : G'.neighbor_set v ⊆ G'.verts := fun _ h =>\n  G'.edge_vert (adj_symm G' h)\n#align neighbor_set_subset_verts neighbor_set_subset_verts\n\n",
+ "neighbor_set_subset_of_subgraph":
+ "theorem neighbor_set_subset_of_subgraph {x y : subgraph G} (h : x ≤ y) (v : V) : x.neighbor_set v ⊆ y.neighbor_set v :=\n  fun w h' => h.2 h'\n#align neighbor_set_subset_of_subgraph neighbor_set_subset_of_subgraph\n\n",
+ "neighbor_set_subset":
+ "theorem neighbor_set_subset (G' : subgraph G) (v : V) : G'.neighbor_set v ⊆ G.neighbor_set v := fun w h => G'.adj_sub h\n#align neighbor_set_subset neighbor_set_subset\n\n",
+ "neighbor_set_subgraph_of_adj_subset":
+ "theorem neighbor_set_subgraph_of_adj_subset {u v w : V} (hvw : G.adj v w) :\n    (G.subgraph_of_adj hvw).neighbor_set u ⊆ {v, w} :=\n  (G.subgraph_of_adj hvw).neighbor_set_subset_verts _\n#align neighbor_set_subgraph_of_adj_subset neighbor_set_subgraph_of_adj_subset\n\n",
+ "neighbor_set_subgraph_of_adj_of_ne_of_ne":
+ "@[simp]\ntheorem neighbor_set_subgraph_of_adj_of_ne_of_ne {u v w : V} (hvw : G.adj v w) (hv : u ≠ v) (hw : u ≠ w) :\n    (G.subgraph_of_adj hvw).neighbor_set u = ∅ := by\n  ext\n  simp [hv.symm, hw.symm]\n#align neighbor_set_subgraph_of_adj_of_ne_of_ne neighbor_set_subgraph_of_adj_of_ne_of_ne\n\n",
+ "neighbor_set_subgraph_of_adj":
+ "theorem neighbor_set_subgraph_of_adj [decidable_eq V] {u v w : V} (hvw : G.adj v w) :\n    (G.subgraph_of_adj hvw).neighbor_set u = (if u = v then {w} else ∅) ∪ if u = w then {v} else ∅ := by\n  split_ifs <;> subst_vars <;> simp [*]\n#align neighbor_set_subgraph_of_adj neighbor_set_subgraph_of_adj\n\n",
+ "neighbor_set_snd_subgraph_of_adj":
+ "@[simp]\ntheorem neighbor_set_snd_subgraph_of_adj {v w : V} (hvw : G.adj v w) : (G.subgraph_of_adj hvw).neighbor_set w = {v} :=\n  by\n  rw [subgraph_of_adj_symm hvw.symm]\n  exact neighbor_set_fst_subgraph_of_adj hvw.symm\n#align neighbor_set_snd_subgraph_of_adj neighbor_set_snd_subgraph_of_adj\n\n",
+ "neighbor_set_singleton_subgraph":
+ "@[simp]\ntheorem neighbor_set_singleton_subgraph (v w : V) : (G.singleton_subgraph v).neighbor_set w = ∅ :=\n  by\n  ext u\n  rfl\n#align neighbor_set_singleton_subgraph neighbor_set_singleton_subgraph\n\n",
+ "neighbor_set_inf":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊓ » -/\ntheorem neighbor_set_inf {H H' : G.subgraph} (v : V) :\n    («expr ⊓ » H H').neighbor_set v = H.neighbor_set v ∩ H'.neighbor_set v :=\n  by\n  ext w\n  simp\n#align neighbor_set_inf neighbor_set_inf\n\n",
+ "neighbor_set_fst_subgraph_of_adj":
+ "@[simp]\ntheorem neighbor_set_fst_subgraph_of_adj {v w : V} (hvw : G.adj v w) : (G.subgraph_of_adj hvw).neighbor_set v = {w} :=\n  by\n  ext u\n  suffices w = u ↔ u = w by simpa [hvw.ne.symm] using this\n  rw [eq_comm]\n#align neighbor_set_fst_subgraph_of_adj neighbor_set_fst_subgraph_of_adj\n\n",
+ "ne":
+ "protected theorem adj.ne {H : G.subgraph} {u v : V} (h : H.adj u v) : u ≠ v :=\n  h.adj_sub.ne\n#align adj.ne adj.ne\n\n",
+ "mem_verts_if_mem_edge":
+ "theorem mem_verts_if_mem_edge {G' : subgraph G} {e : sym2 V} {v : V} (he : e ∈ G'.edge_set) (hv : v ∈ e) :\n    v ∈ G'.verts := by\n  refine' quotient.ind (fun e he hv => _) e he hv\n  cases' e with v w\n  simp only [mem_edge_set] at he\n  cases' sym2.mem_iff.mp hv with h h <;> subst h\n  · exact G'.edge_vert he\n  · exact G'.edge_vert (G'.symm he)\n#align mem_verts_if_mem_edge mem_verts_if_mem_edge\n\n",
+ "mem_support":
+ "theorem mem_support (H : subgraph G) {v : V} : v ∈ H.support ↔ ∃ w, H.adj v w :=\n  iff.rfl\n#align mem_support mem_support\n\n",
+ "mem_neighbor_set":
+ "@[simp]\ntheorem mem_neighbor_set (G' : subgraph G) (v w : V) : w ∈ G'.neighbor_set v ↔ G'.adj v w :=\n  iff.rfl\n#align mem_neighbor_set mem_neighbor_set\n\n",
+ "mem_edge_set":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⟦ ⟧» -/\n@[simp]\ntheorem mem_edge_set {G' : subgraph G} {v w : V} : «expr⟦ ⟧» (v, w) ∈ G'.edge_set ↔ G'.adj v w :=\n  iff.rfl\n#align mem_edge_set mem_edge_set\n\n",
+ "map_sup":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →g » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊔ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊔ » -/\ntheorem map_sup {G : simple_graph V} {G' : simple_graph W} (f : «expr →g » G G') {H H' : G.subgraph} :\n    («expr ⊔ » H H').map f = «expr ⊔ » (H.map f) (H'.map f) :=\n  by\n  ext1\n  · simp only [Set.image_union, map_verts, verts_sup]\n  · ext\n    simp only [relation.map, map_adj, sup_adj]\n    constructor\n    · rintro ⟨a, b, h | h, rfl, rfl⟩\n      · exact or.inl ⟨_, _, h, rfl, rfl⟩\n      · exact or.inr ⟨_, _, h, rfl, rfl⟩\n    · rintro (⟨a, b, h, rfl, rfl⟩ | ⟨a, b, h, rfl, rfl⟩)\n      · exact ⟨_, _, or.inl h, rfl, rfl⟩\n      · exact ⟨_, _, or.inr h, rfl, rfl⟩\n#align map_sup map_sup\n\n",
+ "map_subgraph_of_adj":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →g » -/\n@[simp]\ntheorem map_subgraph_of_adj (f : «expr →g » G G') {v w : V} (hvw : G.adj v w) :\n    subgraph.map f (G.subgraph_of_adj hvw) = G'.subgraph_of_adj (f.map_adj hvw) :=\n  by\n  ext\n  · simp only [subgraph.map_verts, subgraph_of_adj_verts, Set.mem_image, Set.mem_insert_iff, Set.mem_singleton_iff]\n    constructor\n    · rintro ⟨u, rfl | rfl, rfl⟩ <;> simp\n    · rintro (rfl | rfl)\n      · use v\n        simp\n      · use w\n        simp\n  · simp only [relation.map, subgraph.map_adj, subgraph_of_adj_adj, quotient.eq, sym2.rel_iff]\n    constructor\n    · rintro ⟨a, b, ⟨rfl, rfl⟩ | ⟨rfl, rfl⟩, rfl, rfl⟩ <;> simp\n    · rintro (⟨rfl, rfl⟩ | ⟨rfl, rfl⟩)\n      · use v, w\n        simp\n      · use w, v\n        simp\n#align map_subgraph_of_adj map_subgraph_of_adj\n\n",
+ "map_singleton_subgraph":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →g » -/\n@[simp]\ntheorem map_singleton_subgraph (f : «expr →g » G G') {v : V} :\n    subgraph.map f (G.singleton_subgraph v) = G'.singleton_subgraph (f v) := by\n  ext <;>\n    simp only [relation.map, subgraph.map_adj, singleton_subgraph_adj, Pi.bot_apply, exists_and_left,\n      and_iff_left_iff_imp, is_empty.forall_iff, subgraph.map_verts, singleton_subgraph_verts, Set.image_singleton]\n#align map_singleton_subgraph map_singleton_subgraph\n\n",
+ "map_monotone":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →g » -/\ntheorem map_monotone {G' : simple_graph W} (f : «expr →g » G G') : monotone (subgraph.map f) :=\n  by\n  intro H H' h\n  constructor\n  · intro\n    simp only [map_verts, Set.mem_image, forall_exists_index, and_imp]\n    rintro v hv rfl\n    exact ⟨_, h.1 hv, rfl⟩\n  · rintro _ _ ⟨u, v, ha, rfl, rfl⟩\n    exact ⟨_, _, h.2 ha, rfl, rfl⟩\n#align map_monotone map_monotone\n\n",
+ "map_le_iff_le_comap":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →g » -/\ntheorem map_le_iff_le_comap {G' : simple_graph W} (f : «expr →g » G G') (H : G.subgraph) (H' : G'.subgraph) :\n    H.map f ≤ H' ↔ H ≤ H'.comap f :=\n  by\n  refine' ⟨fun h => ⟨fun v hv => _, fun v w hvw => _⟩, fun h => ⟨fun v => _, fun v w => _⟩⟩\n  · simp only [comap_verts, Set.mem_preimage]\n    exact h.1 ⟨v, hv, rfl⟩\n  · simp only [H.adj_sub hvw, comap_adj, true_and_iff]\n    exact h.2 ⟨v, w, hvw, rfl, rfl⟩\n  · simp only [map_verts, Set.mem_image, forall_exists_index, and_imp]\n    rintro w hw rfl\n    exact h.1 hw\n  · simp only [relation.map, map_adj, forall_exists_index, and_imp]\n    rintro u u' hu rfl rfl\n    have := h.2 hu\n    simp only [comap_adj] at this\n    exact this.2\n#align map_le_iff_le_comap map_le_iff_le_comap\n\n",
+ "loopless":
+ "/-\nCopyright (c) 2021 Hunter Monroe. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Hunter Monroe, Kyle Miller, Alena Gusakov\n-/\nprotected theorem loopless (G' : subgraph G) : irreflexive G'.adj := fun v h => G.loopless v (G'.adj_sub h)\n#align loopless loopless\n\n",
+ "is_spanning_iff":
+ "theorem is_spanning_iff {G' : subgraph G} : G'.is_spanning ↔ G'.verts = Set.univ :=\n  Set.eq_univ_iff_forall.symm\n#align is_spanning_iff is_spanning_iff\n\n",
+ "is_spanning":
+ "theorem _root_.simple_graph.to_subgraph.is_spanning (H : simple_graph V) (h : H ≤ G) : (H.to_subgraph h).is_spanning :=\n  Set.mem_univ\n#align simple_graph.to_subgraph.is_spanning simple_graph.to_subgraph.is_spanning\n\n",
+ "injective":
+ "theorem spanning_hom.injective {x : subgraph G} : function.injective x.spanning_hom := fun v w h => h\n#align spanning_hom.injective spanning_hom.injective\n\n",
+ "inf_adj":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊓ » -/\n@[simp]\ntheorem inf_adj {H₁ H₂ : subgraph G} {v w : V} : («expr ⊓ » H₁ H₂).adj v w ↔ H₁.adj v w ∧ H₂.adj v w :=\n  iff.rfl\n#align inf_adj inf_adj\n\n",
+ "induce_self_verts":
+ "@[simp]\ntheorem induce_self_verts : G'.induce G'.verts = G' := by\n  ext\n  · simp\n  · constructor <;> simp (config := { contextual := true }) only [induce_adj, imp_true_iff, and_true_iff]\n    exact fun ha => ⟨G'.edge_vert ha, G'.edge_vert ha.symm⟩\n#align induce_self_verts induce_self_verts\n\n",
+ "induce_mono_right":
+ "@[mono]\ntheorem induce_mono_right (hs : s ⊆ s') : G'.induce s ≤ G'.induce s' :=\n  induce_mono (by rfl) hs\n#align induce_mono_right induce_mono_right\n\n",
+ "induce_mono_left":
+ "@[mono]\ntheorem induce_mono_left (hg : G' ≤ G'') : G'.induce s ≤ G''.induce s :=\n  induce_mono hg (by rfl)\n#align induce_mono_left induce_mono_left\n\n",
+ "induce_mono":
+ "theorem induce_mono (hg : G' ≤ G'') (hs : s ⊆ s') : G'.induce s ≤ G''.induce s' :=\n  by\n  constructor\n  · simp [hs]\n  · simp (config := { contextual := true }) only [induce_adj, true_and_iff, and_imp]\n    intro v w hv hw ha\n    exact ⟨hs hv, hs hw, hg.2 ha⟩\n#align induce_mono induce_mono\n\n",
+ "induce_eq_coe_induce_top":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n/- Given a subgraph, we can change its vertex set while removing any invalid edges, which\ngives induced subgraphs. See also `simple_graph.induce` for the `simple_graph` version, which,\nunlike for subgraphs, results in a graph with a different vertex type. -/\ntheorem _root_.simple_graph.induce_eq_coe_induce_top (s : set V) : G.induce s = ((«expr⊤» : G.subgraph).induce s).coe :=\n  by\n  ext (v w)\n  simp\n#align simple_graph.induce_eq_coe_induce_top simple_graph.induce_eq_coe_induce_top\n\n",
+ "induce_empty":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n@[simp]\ntheorem induce_empty : G'.induce ∅ = «expr⊥» := by ext <;> simp\n#align induce_empty induce_empty\n\n",
+ "incidence_set_subset_incidence_set":
+ "theorem incidence_set_subset_incidence_set (G' : subgraph G) (v : V) : G'.incidence_set v ⊆ G.incidence_set v :=\n  fun e h => ⟨G'.edge_set_subset h.1, h.2⟩\n#align incidence_set_subset_incidence_set incidence_set_subset_incidence_set\n\n",
+ "incidence_set_subset":
+ "theorem incidence_set_subset (G' : subgraph G) (v : V) : G'.incidence_set v ⊆ G'.edge_set := fun _ h => h.1\n#align incidence_set_subset incidence_set_subset\n\n",
+ "fst_mem":
+ "protected theorem adj.fst_mem {H : G.subgraph} {u v : V} (h : H.adj u v) : u ∈ H.verts :=\n  H.edge_vert h\n#align adj.fst_mem adj.fst_mem\n\n",
+ "finset_card_neighbor_set_eq_degree":
+ "theorem finset_card_neighbor_set_eq_degree {G' : subgraph G} {v : V} [fintype (G'.neighbor_set v)] :\n    (G'.neighbor_set v).to_finset.card = G'.degree v := by rw [degree, set.to_finset_card]\n#align finset_card_neighbor_set_eq_degree finset_card_neighbor_set_eq_degree\n\n",
+ "eq_singleton_subgraph_iff_verts_eq":
+ "theorem eq_singleton_subgraph_iff_verts_eq (H : G.subgraph) {v : V} : H = G.singleton_subgraph v ↔ H.verts = {v} :=\n  by\n  refine' ⟨fun h => by simp [h], fun h => _⟩\n  ext\n  · rw [h, singleton_subgraph_verts]\n  · simp only [Prop.bot_eq_false, singleton_subgraph_adj, Pi.bot_apply, iff_false_iff]\n    intro ha\n    have ha1 := ha.fst_mem\n    have ha2 := ha.snd_mem\n    rw [h, Set.mem_singleton_iff] at ha1 ha2\n    subst_vars\n    exact ha.ne rfl\n#align eq_singleton_subgraph_iff_verts_eq eq_singleton_subgraph_iff_verts_eq\n\n",
+ "edge_set_top":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n@[simp]\ntheorem edge_set_top : («expr⊤» : subgraph G).edge_set = G.edge_set :=\n  rfl\n#align edge_set_top edge_set_top\n\n",
+ "edge_set_sup":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊔ » -/\n@[simp]\ntheorem edge_set_sup {H₁ H₂ : subgraph G} : («expr ⊔ » H₁ H₂).edge_set = H₁.edge_set ∪ H₂.edge_set :=\n  Set.ext <| sym2.ind (by simp)\n#align edge_set_sup edge_set_sup\n\n",
+ "edge_set_subset":
+ "theorem edge_set_subset (G' : subgraph G) : G'.edge_set ⊆ G.edge_set := fun e =>\n  quotient.ind (fun e h => G'.adj_sub h) e\n#align edge_set_subset edge_set_subset\n\n",
+ "edge_set_subgraph_of_adj":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⟦ ⟧» -/\n@[simp]\ntheorem edge_set_subgraph_of_adj {v w : V} (hvw : G.adj v w) : (G.subgraph_of_adj hvw).edge_set = {«expr⟦ ⟧» (v, w)} :=\n  by\n  ext e\n  refine' e.ind _\n  simp only [eq_comm, Set.mem_singleton_iff, subgraph.mem_edge_set, subgraph_of_adj_adj, iff_self_iff, forall₂_true_iff]\n#align edge_set_subgraph_of_adj edge_set_subgraph_of_adj\n\n",
+ "edge_set_singleton_subgraph":
+ "@[simp]\ntheorem edge_set_singleton_subgraph (v : V) : (G.singleton_subgraph v).edge_set = ∅ :=\n  sym2.from_rel_bot\n#align edge_set_singleton_subgraph edge_set_singleton_subgraph\n\n",
+ "edge_set_mono":
+ "theorem edge_set_mono {H₁ H₂ : subgraph G} (h : H₁ ≤ H₂) : H₁.edge_set ≤ H₂.edge_set := fun e => sym2.ind h.2 e\n#align edge_set_mono edge_set_mono\n\n",
+ "edge_set_inf":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊓ » -/\n@[simp]\ntheorem edge_set_inf {H₁ H₂ : subgraph G} : («expr ⊓ » H₁ H₂).edge_set = H₁.edge_set ∩ H₂.edge_set :=\n  Set.ext <| sym2.ind (by simp)\n#align edge_set_inf edge_set_inf\n\n",
+ "edge_set_bot":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n@[simp]\ntheorem edge_set_bot : («expr⊥» : subgraph G).edge_set = ∅ :=\n  Set.ext <| sym2.ind (by simp)\n#align edge_set_bot edge_set_bot\n\n",
+ "edge_set":
+ "theorem _root_.disjoint.edge_set {H₁ H₂ : subgraph G} (h : Disjoint H₁ H₂) : Disjoint H₁.edge_set H₂.edge_set :=\n  disjoint_iff_inf_le.mpr <| by simpa using edge_set_mono h.le_bot\n#align disjoint.edge_set disjoint.edge_set\n\n",
+ "delete_verts_verts":
+ "theorem delete_verts_verts : (G'.delete_verts s).verts = G'.verts \\ s :=\n  rfl\n#align delete_verts_verts delete_verts_verts\n\n",
+ "delete_verts_mono":
+ "@[mono]\ntheorem delete_verts_mono {G' G'' : G.subgraph} (h : G' ≤ G'') : G'.delete_verts s ≤ G''.delete_verts s :=\n  induce_mono h (Set.diff_subset_diff_left h.1)\n#align delete_verts_mono delete_verts_mono\n\n",
+ "delete_verts_le":
+ "theorem delete_verts_le : G'.delete_verts s ≤ G' := by constructor <;> simp [Set.diff_subset]\n#align delete_verts_le delete_verts_le\n\n",
+ "delete_verts_inter_verts_set_right_eq":
+ "@[simp]\ntheorem delete_verts_inter_verts_set_right_eq : G'.delete_verts (s ∩ G'.verts) = G'.delete_verts s := by\n  ext <;> simp (config := { contextual := true }) [imp_false]\n#align delete_verts_inter_verts_set_right_eq delete_verts_inter_verts_set_right_eq\n\n",
+ "delete_verts_inter_verts_left_eq":
+ "@[simp]\ntheorem delete_verts_inter_verts_left_eq : G'.delete_verts (G'.verts ∩ s) = G'.delete_verts s := by\n  ext <;> simp (config := { contextual := true }) [imp_false]\n#align delete_verts_inter_verts_left_eq delete_verts_inter_verts_left_eq\n\n",
+ "delete_verts_empty":
+ "@[simp]\ntheorem delete_verts_empty : G'.delete_verts ∅ = G' := by simp [delete_verts]\n#align delete_verts_empty delete_verts_empty\n\n",
+ "delete_verts_delete_verts":
+ "@[simp]\ntheorem delete_verts_delete_verts (s s' : set V) : (G'.delete_verts s).delete_verts s' = G'.delete_verts (s ∪ s') := by\n  ext <;> simp (config := { contextual := true }) [not_or, and_assoc']\n#align delete_verts_delete_verts delete_verts_delete_verts\n\n",
+ "delete_verts_anti":
+ "@[mono]\ntheorem delete_verts_anti {s s' : set V} (h : s ⊆ s') : G'.delete_verts s' ≤ G'.delete_verts s :=\n  induce_mono (le_refl _) (Set.diff_subset_diff_right h)\n#align delete_verts_anti delete_verts_anti\n\n",
+ "delete_verts_adj":
+ "theorem delete_verts_adj {u v : V} :\n    (G'.delete_verts s).adj u v ↔ u ∈ G'.verts ∧ ¬u ∈ s ∧ v ∈ G'.verts ∧ ¬v ∈ s ∧ G'.adj u v := by simp [and_assoc']\n#align delete_verts_adj delete_verts_adj\n\n",
+ "delete_edges_verts":
+ "@[simp]\ntheorem delete_edges_verts : (G'.delete_edges s).verts = G'.verts :=\n  rfl\n#align delete_edges_verts delete_edges_verts\n\n",
+ "delete_edges_spanning_coe_eq":
+ "@[simp]\ntheorem delete_edges_spanning_coe_eq : G'.spanning_coe.delete_edges s = (G'.delete_edges s).spanning_coe :=\n  by\n  ext\n  simp\n#align delete_edges_spanning_coe_eq delete_edges_spanning_coe_eq\n\n",
+ "delete_edges_le_of_le":
+ "theorem delete_edges_le_of_le {s s' : set (sym2 V)} (h : s ⊆ s') : G'.delete_edges s' ≤ G'.delete_edges s :=\n  by\n  constructor <;>\n    simp (config := { contextual := true }) only [delete_edges_verts, delete_edges_adj, true_and_iff, and_imp]\n  exact fun v w hvw hs' hs => hs' (h hs)\n#align delete_edges_le_of_le delete_edges_le_of_le\n\n",
+ "delete_edges_le":
+ "theorem delete_edges_le : G'.delete_edges s ≤ G' := by constructor <;> simp (config := { contextual := true })\n#align delete_edges_le delete_edges_le\n\n",
+ "delete_edges_inter_edge_set_right_eq":
+ "@[simp]\ntheorem delete_edges_inter_edge_set_right_eq : G'.delete_edges (s ∩ G'.edge_set) = G'.delete_edges s := by\n  ext <;> simp (config := { contextual := true }) [imp_false]\n#align delete_edges_inter_edge_set_right_eq delete_edges_inter_edge_set_right_eq\n\n",
+ "delete_edges_inter_edge_set_left_eq":
+ "@[simp]\ntheorem delete_edges_inter_edge_set_left_eq : G'.delete_edges (G'.edge_set ∩ s) = G'.delete_edges s := by\n  ext <;> simp (config := { contextual := true }) [imp_false]\n#align delete_edges_inter_edge_set_left_eq delete_edges_inter_edge_set_left_eq\n\n",
+ "delete_edges_empty_eq":
+ "@[simp]\ntheorem delete_edges_empty_eq : G'.delete_edges ∅ = G' := by ext <;> simp\n#align delete_edges_empty_eq delete_edges_empty_eq\n\n",
+ "delete_edges_delete_edges":
+ "@[simp]\ntheorem delete_edges_delete_edges (s s' : set (sym2 V)) :\n    (G'.delete_edges s).delete_edges s' = G'.delete_edges (s ∪ s') := by ext <;> simp [and_assoc', not_or]\n#align delete_edges_delete_edges delete_edges_delete_edges\n\n",
+ "delete_edges_coe_eq":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\ntheorem delete_edges_coe_eq (s : set (sym2 G'.verts)) :\n    G'.coe.delete_edges s = (G'.delete_edges («expr '' » (sym2.map coe) s)).coe :=\n  by\n  ext (⟨v, hv⟩⟨w, hw⟩)\n  simp only [simple_graph.delete_edges_adj, coe_adj, subtype.coe_mk, delete_edges_adj, Set.mem_image, not_exists,\n    not_and, and_congr_right_iff]\n  intro h\n  constructor\n  · intro hs\n    refine' sym2.ind _\n    rintro ⟨v', hv'⟩ ⟨w', hw'⟩\n    simp only [sym2.map_pair_eq, subtype.coe_mk, quotient.eq]\n    contrapose!\n    rintro (_ | _) <;> simpa [sym2.eq_swap]\n  · intro h' hs\n    exact h' _ hs rfl\n#align delete_edges_coe_eq delete_edges_coe_eq\n\n",
+ "delete_edges_adj":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⟦ ⟧» -/\n@[simp]\ntheorem delete_edges_adj (v w : V) : (G'.delete_edges s).adj v w ↔ G'.adj v w ∧ ¬«expr⟦ ⟧» (v, w) ∈ s :=\n  iff.rfl\n#align delete_edges_adj delete_edges_adj\n\n",
+ "degree_spanning_coe":
+ "@[simp]\ntheorem degree_spanning_coe {G' : G.subgraph} (v : V) [fintype (G'.neighbor_set v)]\n    [fintype (G'.spanning_coe.neighbor_set v)] : G'.spanning_coe.degree v = G'.degree v :=\n  by\n  rw [← card_neighbor_set_eq_degree, subgraph.degree]\n  congr\n#align degree_spanning_coe degree_spanning_coe\n\n",
+ "degree_le'":
+ "theorem degree_le' (G' G'' : subgraph G) (h : G' ≤ G'') (v : V) [fintype (G'.neighbor_set v)]\n    [fintype (G''.neighbor_set v)] : G'.degree v ≤ G''.degree v :=\n  set.card_le_of_subset (neighbor_set_subset_of_subgraph h v)\n#align degree_le' degree_le'\n\n",
+ "degree_le":
+ "theorem degree_le (G' : subgraph G) (v : V) [fintype (G'.neighbor_set v)] [fintype (G.neighbor_set v)] :\n    G'.degree v ≤ G.degree v := by\n  rw [← card_neighbor_set_eq_degree]\n  exact set.card_le_of_subset (G'.neighbor_set_subset v)\n#align degree_le degree_le\n\n",
+ "degree_eq_one_iff_unique_adj":
+ "theorem degree_eq_one_iff_unique_adj {G' : subgraph G} {v : V} [fintype (G'.neighbor_set v)] :\n    G'.degree v = 1 ↔ ∃! w : V, G'.adj v w :=\n  by\n  rw [← finset_card_neighbor_set_eq_degree, finset.card_eq_one, Finset.singleton_iff_unique_mem]\n  simp only [set.mem_to_finset, mem_neighbor_set]\n#align degree_eq_one_iff_unique_adj degree_eq_one_iff_unique_adj\n\n",
+ "copy_eq":
+ "theorem copy_eq (G' : subgraph G) (V'' : set V) (hV : V'' = G'.verts) (adj' : V → V → Prop) (hadj : adj' = G'.adj) :\n    G'.copy V'' hV adj' hadj = G' :=\n  subgraph.ext _ _ hV hadj\n#align copy_eq copy_eq\n\n",
+ "comap_monotone":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →g » -/\ntheorem comap_monotone {G' : simple_graph W} (f : «expr →g » G G') : monotone (subgraph.comap f) :=\n  by\n  intro H H' h\n  constructor\n  · intro\n    simp only [comap_verts, Set.mem_preimage]\n    apply h.1\n  · intro v w\n    simp (config := { contextual := true }) only [comap_adj, and_imp, true_and_iff]\n    intro\n    apply h.2\n#align comap_monotone comap_monotone\n\n",
+ "coe_subgraph_injective":
+ "theorem coe_subgraph_injective (G' : G.subgraph) :\n    function.injective (subgraph.coe_subgraph : G'.coe.subgraph → G.subgraph) :=\n  function.left_inverse.injective restrict_coe_subgraph\n#align coe_subgraph_injective coe_subgraph_injective\n\n",
+ "coe_delete_edges_le":
+ "theorem coe_delete_edges_le : (G'.delete_edges s).coe ≤ (G'.coe : simple_graph G'.verts) := fun v w => by\n  simp (config := { contextual := true })\n#align coe_delete_edges_le coe_delete_edges_le\n\n",
+ "coe_delete_edges_eq":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\ntheorem coe_delete_edges_eq (s : set (sym2 V)) :\n    (G'.delete_edges s).coe = G'.coe.delete_edges («expr ⁻¹' » (sym2.map coe) s) :=\n  by\n  ext (⟨v, hv⟩⟨w, hw⟩)\n  simp\n#align coe_delete_edges_eq coe_delete_edges_eq\n\n",
+ "coe_degree":
+ "@[simp]\ntheorem coe_degree (G' : subgraph G) (v : G'.verts) [fintype (G'.coe.neighbor_set v)] [fintype (G'.neighbor_set v)] :\n    G'.coe.degree v = G'.degree v := by\n  rw [← card_neighbor_set_eq_degree]\n  exact fintype.card_congr (coe_neighbor_set_equiv v)\n#align coe_degree coe_degree\n\n",
+ "coe_adj_sub":
+ "@[simp]\ntheorem coe_adj_sub (G' : subgraph G) (u v : G'.verts) (h : G'.coe.adj u v) : G.adj u v :=\n  G'.adj_sub h\n#align coe_adj_sub coe_adj_sub\n\n",
+ "coe":
+ "-- Given `h : H.adj u v`, then `h.coe : H.coe.adj ⟨u, _⟩ ⟨v, _⟩`.\nprotected theorem adj.coe {H : G.subgraph} {u v : V} (h : H.adj u v) :\n    H.coe.adj ⟨u, H.edge_vert h⟩ ⟨v, H.edge_vert h.symm⟩ :=\n  h\n#align adj.coe adj.coe\n\n",
+ "card_verts":
+ "theorem is_spanning.card_verts [fintype V] {G' : subgraph G} [fintype G'.verts] (h : G'.is_spanning) :\n    G'.verts.to_finset.card = fintype.card V :=\n  by\n  rw [is_spanning_iff] at h\n  simpa [h]\n#align is_spanning.card_verts is_spanning.card_verts\n\n",
+ "bot_verts":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n@[simp]\ntheorem bot_verts : («expr⊥» : subgraph G).verts = ∅ :=\n  rfl\n#align bot_verts bot_verts\n\n",
+ "adj_symm":
+ "@[symm]\ntheorem adj_symm (G' : subgraph G) {u v : V} (h : G'.adj u v) : G'.adj v u :=\n  G'.symm h\n#align adj_symm adj_symm\n\n",
+ "adj_sub":
+ "protected theorem adj.adj_sub {H : G.subgraph} {u v : V} (h : H.adj u v) : G.adj u v :=\n  H.adj_sub h\n#align adj.adj_sub adj.adj_sub\n\n",
+ "adj_comm":
+ "theorem adj_comm (G' : subgraph G) (v w : V) : G'.adj v w ↔ G'.adj w v :=\n  ⟨fun x => G'.symm x, fun x => G'.symm x⟩\n#align adj_comm adj_comm\n\n"}

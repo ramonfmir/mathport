@@ -1,0 +1,26 @@
+{"nth_mem":
+ "/-\nCopyright (c) 2022 Devon Tuma. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Devon Tuma\n-/\n@[simp]\ntheorem nth_mem (i : fin n) (v : Vector α n) : v.nth i ∈ v.to_list :=\n  by\n  rw [nth_eq_nth_le]\n  exact List.nthLe_mem _ _ _\n#align nth_mem nth_mem\n\n",
+ "not_mem_zero":
+ "theorem not_mem_zero (v : Vector α 0) : a ∉ v.to_list :=\n  (Vector.eq_nil v).symm ▸ not_mem_nil a\n#align not_mem_zero not_mem_zero\n\n",
+ "not_mem_nil":
+ "theorem not_mem_nil : a ∉ (Vector.nil : Vector α 0).to_list :=\n  id\n#align not_mem_nil not_mem_nil\n\n",
+ "not_mem_map_zero":
+ "theorem not_mem_map_zero (b : β) (v : Vector α 0) (f : α → β) : b ∉ (v.map f).to_list := by\n  simpa only [Vector.eq_nil v, Vector.map_nil, Vector.toList_nil] using list.not_mem_nil b\n#align not_mem_map_zero not_mem_map_zero\n\n",
+ "mem_succ_iff":
+ "theorem mem_succ_iff (v : Vector α (n + 1)) : a ∈ v.to_list ↔ a = v.head ∨ a ∈ v.tail.to_list :=\n  by\n  obtain ⟨a', v', h⟩ := exists_eq_cons v\n  simp_rw [h, vector.mem_cons_iff, Vector.head_cons, Vector.tail_cons]\n#align mem_succ_iff mem_succ_iff\n\n",
+ "mem_of_mem_tail":
+ "theorem mem_of_mem_tail (v : Vector α n) (ha : a ∈ v.tail.to_list) : a ∈ v.to_list :=\n  by\n  induction' n with n hn\n  · exact false.elim (vector.not_mem_zero a v.tail ha)\n  · exact (mem_succ_iff a v).2 (or.inr ha)\n#align mem_of_mem_tail mem_of_mem_tail\n\n",
+ "mem_map_succ_iff":
+ "theorem mem_map_succ_iff (b : β) (v : Vector α (n + 1)) (f : α → β) :\n    b ∈ (v.map f).to_list ↔ f v.head = b ∨ ∃ a : α, a ∈ v.tail.to_list ∧ f a = b := by\n  rw [mem_succ_iff, head_map, tail_map, mem_map_iff, @eq_comm _ b]\n#align mem_map_succ_iff mem_map_succ_iff\n\n",
+ "mem_map_iff":
+ "theorem mem_map_iff (b : β) (v : Vector α n) (f : α → β) : b ∈ (v.map f).to_list ↔ ∃ a : α, a ∈ v.to_list ∧ f a = b :=\n  by rw [vector.to_list_map, List.mem_map']\n#align mem_map_iff mem_map_iff\n\n",
+ "mem_iff_nth":
+ "theorem mem_iff_nth (v : Vector α n) : a ∈ v.to_list ↔ ∃ i, v.nth i = a := by\n  simp only [List.mem_iff_nthLe, Fin.exists_iff, vector.nth_eq_nth_le] <;>\n    exact ⟨fun ⟨i, hi, h⟩ => ⟨i, by rwa [to_list_length] at hi, h⟩, fun ⟨i, hi, h⟩ => ⟨i, by rwa [to_list_length], h⟩⟩\n#align mem_iff_nth mem_iff_nth\n\n",
+ "mem_cons_self":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ::ᵥ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ::ᵥ » -/\ntheorem mem_cons_self (v : Vector α n) : a ∈ («expr ::ᵥ » a v).to_list :=\n  (vector.mem_iff_nth a («expr ::ᵥ » a v)).2 ⟨0, vector.nth_cons_zero a v⟩\n#align mem_cons_self mem_cons_self\n\n",
+ "mem_cons_of_mem":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ::ᵥ » -/\ntheorem mem_cons_of_mem (v : Vector α n) (ha' : a' ∈ v.to_list) : a' ∈ («expr ::ᵥ » a v).to_list :=\n  (vector.mem_cons_iff a a' v).2 (or.inr ha')\n#align mem_cons_of_mem mem_cons_of_mem\n\n",
+ "mem_cons_iff":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ::ᵥ » -/\ntheorem mem_cons_iff (v : Vector α n) : a' ∈ («expr ::ᵥ » a v).to_list ↔ a' = a ∨ a' ∈ v.to_list := by\n  rw [Vector.toList_cons, List.mem_cons]\n#align mem_cons_iff mem_cons_iff\n\n",
+ "head_mem":
+ "@[simp]\ntheorem head_mem (v : Vector α (n + 1)) : v.head ∈ v.to_list :=\n  (vector.mem_iff_nth v.head v).2 ⟨0, vector.nth_zero v⟩\n#align head_mem head_mem\n\n"}

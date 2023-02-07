@@ -1,0 +1,46 @@
+{"one_mem":
+ "@[to_additive]\nprotected theorem one_mem : (1 : G) ∈ U :=\n  U.one_mem'\n#align one_mem one_mem\n\n",
+ "mul_mem":
+ "@[to_additive]\nprotected theorem mul_mem {g₁ g₂ : G} (h₁ : g₁ ∈ U) (h₂ : g₂ ∈ U) : g₁ * g₂ ∈ U :=\n  U.mul_mem' h₁ h₂\n#align mul_mem mul_mem\n\n",
+ "mem_nhds_one":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `nhds -/\n@[to_additive]\ntheorem mem_nhds_one : (U : set G) ∈ (nhds) (1 : G) :=\n  is_open.mem_nhds U.is_open U.one_mem\n#align mem_nhds_one mem_nhds_one\n\n",
+ "mem_comap":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →* » -/\n@[simp, to_additive]\ntheorem mem_comap {H : open_subgroup N} {f : «expr →* » G N} {hf : continuous f} {x : G} : x ∈ H.comap f hf ↔ f x ∈ H :=\n  iff.rfl\n#align mem_comap mem_comap\n\n",
+ "mem_coe_subgroup":
+ "@[simp, norm_cast, to_additive]\ntheorem mem_coe_subgroup : g ∈ (U : subgroup G) ↔ g ∈ U :=\n  iff.rfl\n#align mem_coe_subgroup mem_coe_subgroup\n\n",
+ "mem_coe_opens":
+ "@[simp, norm_cast, to_additive]\ntheorem mem_coe_opens : g ∈ (U : opens G) ↔ g ∈ U :=\n  iff.rfl\n#align mem_coe_opens mem_coe_opens\n\n",
+ "mem_coe":
+ "/-\nCopyright (c) 2019 Johan Commelin All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Johan Commelin\n-/\n@[simp, norm_cast, to_additive]\ntheorem mem_coe : g ∈ (U : set G) ↔ g ∈ U :=\n  iff.rfl\n#align mem_coe mem_coe\n\n",
+ "is_open_of_open_subideal":
+ "theorem is_open_of_open_subideal {U I : ideal R} (h : U ≤ I) (hU : is_open (U : set R)) : is_open (I : set R) :=\n  submodule.is_open_mono h hU\n#align is_open_of_open_subideal is_open_of_open_subideal\n\n",
+ "is_open_of_open_subgroup":
+ "@[to_additive]\ntheorem is_open_of_open_subgroup {U : open_subgroup G} (h : U.1 ≤ H) : is_open (H : set G) :=\n  H.is_open_of_mem_nhds (filter.mem_of_superset U.mem_nhds_one h)\n#align is_open_of_open_subgroup is_open_of_open_subgroup\n\n",
+ "is_open_of_one_mem_interior":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `nhds -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `nhds -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `nhds -/\n/-- If a subgroup of a topological group has `1` in its interior, then it is open. -/\n@[to_additive \"If a subgroup of an additive topological group has `0` in its interior, then it is\\nopen.\"]\ntheorem is_open_of_one_mem_interior {G : Type _} [group G] [topological_space G] [topological_group G] {H : subgroup G}\n    (h_1_int : (1 : G) ∈ interior (H : set G)) : is_open (H : set G) :=\n  by\n  have h : (nhds) 1 ≤ filter.principal (H : set G) :=\n    nhds_le_of_le h_1_int is_open_interior (filter.principal_mono.2 interior_subset)\n  rw [is_open_iff_nhds]\n  intro g hg\n  rw [show (nhds) g = filter.map («expr⇑ » (homeomorph.mul_left g)) ((nhds) 1) by simp]\n  convert filter.map_mono h\n  simp only [homeomorph.coe_mul_left, filter.map_principal, Set.image_mul_left, filter.principal_eq_iff_eq]\n  ext\n  simp [H.mul_mem_cancel_left (H.inv_mem hg)]\n#align is_open_of_one_mem_interior is_open_of_one_mem_interior\n\n",
+ "is_open_of_mem_nhds":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `nhds -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `nhds -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `nhds -/\n@[to_additive]\ntheorem is_open_of_mem_nhds {g : G} (hg : (H : set G) ∈ (nhds) g) : is_open (H : set G) :=\n  by\n  simp only [is_open_iff_mem_nhds, SetLike.mem_coe] at hg⊢\n  intro x hx\n  have : filter.tendsto (fun y => y * (x⁻¹ * g)) ((nhds) x) (nhds <| x * (x⁻¹ * g)) :=\n    (continuous_id.mul continuous_const).tendsto _\n  rw [mul_inv_cancel_left] at this\n  have := filter.mem_map'.1 (this hg)\n  replace hg : g ∈ H := SetLike.mem_coe.1 (mem_of_mem_nhds hg)\n  simp only [SetLike.mem_coe, H.mul_mem_cancel_right (H.mul_mem (H.inv_mem hx) hg)] at this\n  exact this\n#align is_open_of_mem_nhds is_open_of_mem_nhds\n\n",
+ "is_open_mono":
+ "theorem is_open_mono {U P : submodule R M} (h : U ≤ P) (hU : is_open (U : set M)) : is_open (P : set M) :=\n  @add_subgroup.is_open_mono M _ _ _ U.to_add_subgroup P.to_add_subgroup h hU\n#align is_open_mono is_open_mono\n\n",
+ "is_open":
+ "@[to_additive]\nprotected theorem is_open : is_open (U : set G) :=\n  U.is_open'\n#align is_open is_open\n\n",
+ "is_closed":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\n@[to_additive]\ntheorem is_closed [has_continuous_mul G] (U : open_subgroup G) : is_closed (U : set G) :=\n  by\n  apply is_open_compl_iff.1\n  refine' is_open_iff_forall_mem_open.2 fun x hx => ⟨«expr ⁻¹' » (fun y => y * x⁻¹) U, _, _, _⟩\n  · intro u hux\n    simp only [Set.mem_preimage, Set.mem_compl_iff, mem_coe] at hux hx⊢\n    refine' mt (fun hu => _) hx\n    convert U.mul_mem (U.inv_mem hux) hu\n    simp\n  · exact U.is_open.preimage (continuous_mul_right _)\n  · simp [U.one_mem]\n#align is_closed is_closed\n\n",
+ "inv_mem":
+ "@[to_additive]\nprotected theorem inv_mem {g : G} (h : g ∈ U) : g⁻¹ ∈ U :=\n  U.inv_mem' h\n#align inv_mem inv_mem\n\n",
+ "ext_iff":
+ "@[to_additive]\ntheorem ext_iff : U = V ↔ ∀ x, x ∈ U ↔ x ∈ V :=\n  ⟨fun h x => h ▸ iff.rfl, ext⟩\n#align ext_iff ext_iff\n\n",
+ "ext":
+ "@[ext, to_additive]\ntheorem ext (h : ∀ x, x ∈ U ↔ x ∈ V) : U = V :=\n  coe_injective <| Set.ext h\n#align ext ext\n\n",
+ "comap_comap":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →* » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →* » -/\n@[to_additive]\ntheorem comap_comap {P : Type _} [group P] [topological_space P] (K : open_subgroup P) (f₂ : «expr →* » N P)\n    (hf₂ : continuous f₂) (f₁ : «expr →* » G N) (hf₁ : continuous f₁) :\n    (K.comap f₂ hf₂).comap f₁ hf₁ = K.comap (f₂.comp f₁) (hf₂.comp hf₁) :=\n  rfl\n#align comap_comap comap_comap\n\n",
+ "coe_subset":
+ "@[simp, norm_cast, to_additive]\ntheorem coe_subset : (U : set G) ⊆ V ↔ U ≤ V :=\n  iff.rfl\n#align coe_subset coe_subset\n\n",
+ "coe_subgroup_le":
+ "@[simp, norm_cast, to_additive]\ntheorem coe_subgroup_le : (U : subgroup G) ≤ (V : subgroup G) ↔ U ≤ V :=\n  iff.rfl\n#align coe_subgroup_le coe_subgroup_le\n\n",
+ "coe_injective":
+ "@[to_additive]\ntheorem coe_injective : injective (coe : open_subgroup G → set G) :=\n  by\n  rintro ⟨⟨⟩⟩ ⟨⟨⟩⟩ ⟨h⟩\n  congr\n#align coe_injective coe_injective\n\n",
+ "coe_inf":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊓ » -/\n@[simp, norm_cast, to_additive]\ntheorem coe_inf : (↑(«expr ⊓ » U V) : set G) = (U : set G) ∩ V :=\n  rfl\n#align coe_inf coe_inf\n\n",
+ "coe_comap":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →* » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\n@[simp, to_additive]\ntheorem coe_comap (H : open_subgroup N) (f : «expr →* » G N) (hf : continuous f) :\n    (H.comap f hf : set G) = «expr ⁻¹' » f H :=\n  rfl\n#align coe_comap coe_comap\n\n"}

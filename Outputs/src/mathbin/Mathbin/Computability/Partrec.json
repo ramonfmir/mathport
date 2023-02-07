@@ -1,0 +1,178 @@
+{"vector_to_list":
+ "theorem vector_to_list {n} : computable (@Vector.toList α n) :=\n  primrec.vector_to_list.to_comp\n#align vector_to_list vector_to_list\n\n",
+ "vector_tail":
+ "theorem vector_tail {n} : computable (@Vector.tail α n) :=\n  primrec.vector_tail.to_comp\n#align vector_tail vector_tail\n\n",
+ "vector_of_fn'":
+ "theorem vector_of_fn' {n} : computable (@Vector.ofFn α n) :=\n  primrec.vector_of_fn'.to_comp\n#align vector_of_fn' vector_of_fn'\n\n",
+ "vector_of_fn":
+ "theorem vector_of_fn {n} {f : fin n → α → σ} (hf : ∀ i, computable (f i)) :\n    computable fun a => Vector.ofFn fun i => f i a :=\n  (partrec.vector_m_of_fn hf).of_eq fun a => by simp\n#align vector_of_fn vector_of_fn\n\n",
+ "vector_nth'":
+ "theorem vector_nth' {n} : computable (@Vector.nth α n) :=\n  primrec.vector_nth'.to_comp\n#align vector_nth' vector_nth'\n\n",
+ "vector_nth":
+ "theorem vector_nth {n} : computable₂ (@Vector.nth α n) :=\n  primrec.vector_nth.to_comp\n#align vector_nth vector_nth\n\n",
+ "vector_m_of_fn":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →. » -/\ntheorem vector_m_of_fn :\n    ∀ {n} {f : fin n → «expr →. » α σ}, (∀ i, partrec (f i)) → partrec fun a : α => vector.m_of_fn fun i => f i a\n  | 0, f, hf => const _\n  | n + 1, f, hf => by\n    simp [vector.m_of_fn] <;>\n      exact\n        (hf 0).bind\n          (partrec.bind ((vector_m_of_fn fun i => hf i.succ).comp fst)\n            (primrec.vector_cons.to_comp.comp (snd.comp fst) snd))\n#align vector_m_of_fn vector_m_of_fn\n\n",
+ "vector_length":
+ "theorem vector_length {n} : computable (@Vector.length α n) :=\n  primrec.vector_length.to_comp\n#align vector_length vector_length\n\n",
+ "vector_head":
+ "theorem vector_head {n} : computable (@Vector.head α n) :=\n  primrec.vector_head.to_comp\n#align vector_head vector_head\n\n",
+ "vector_cons":
+ "theorem vector_cons {n} : computable₂ (@Vector.cons α n) :=\n  primrec.vector_cons.to_comp\n#align vector_cons vector_cons\n\n",
+ "unpaired'":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →. » -/\ntheorem unpaired' {f : ℕ → «expr →. » ℕ ℕ} : nat.partrec (nat.unpaired f) ↔ partrec₂ f :=\n  partrec.nat_iff.symm.trans unpaired\n#align unpaired' unpaired'\n\n",
+ "unpaired":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →. » -/\ntheorem unpaired {f : ℕ → «expr →. » ℕ α} : partrec (nat.unpaired f) ↔ partrec₂ f :=\n  ⟨fun h => by simpa using h.comp primrec₂.mkpair.to_comp, fun h => h.comp primrec.unpair.to_comp⟩\n#align unpaired unpaired\n\n",
+ "unpair":
+ "theorem unpair : computable Nat.unpair :=\n  primrec.unpair.to_comp\n#align unpair unpair\n\n",
+ "to₂":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →. » -/\ntheorem to₂ {f : «expr →. » (α × β) σ} (hf : partrec f) : partrec₂ fun a b => f (a, b) :=\n  hf.of_eq fun ⟨a, b⟩ => rfl\n#align to₂ to₂\n\n",
+ "to_comp":
+ "theorem primrec₂.to_comp {α β σ} [primcodable α] [primcodable β] [primcodable σ] {f : α → β → σ} (hf : primrec₂ f) :\n    computable₂ f :=\n  hf.to_comp\n#align primrec₂.to_comp primrec₂.to_comp\n\n",
+ "sum_inr":
+ "theorem sum_inr : computable (@sum.inr α β) :=\n  primrec.sum_inr.to_comp\n#align sum_inr sum_inr\n\n",
+ "sum_inl":
+ "theorem sum_inl : computable (@sum.inl α β) :=\n  primrec.sum_inl.to_comp\n#align sum_inl sum_inl\n\n",
+ "sum_cases_right":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →. » -/\ntheorem sum_cases_right {f : α → Sum β γ} {g : α → β → σ} {h : α → «expr →. » γ σ} (hf : computable f)\n    (hg : computable₂ g) (hh : partrec₂ h) :\n    @partrec _ σ _ _ fun a => sum.cases_on (f a) (fun b => some (g a b)) (h a) :=\n  have :\n    partrec fun a =>\n      (option.cases_on (sum.cases_on (f a) (fun b => option.none) option.some : option γ)\n          (some (sum.cases_on (f a) (fun b => some (g a b)) fun c => option.none)) fun c => (h a c).map option.some :\n        Part (option σ)) :=\n    option_cases_right (sum_cases hf (const option.none).to₂ (option_some.comp snd).to₂)\n      (sum_cases hf (option_some.comp hg) (const option.none).to₂) (option_some_iff.2 hh)\n  option_some_iff.1 <| this.of_eq fun a => by cases f a <;> simp\n#align sum_cases_right sum_cases_right\n\n",
+ "sum_cases_left":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →. » -/\ntheorem sum_cases_left {f : α → Sum β γ} {g : α → «expr →. » β σ} {h : α → γ → σ} (hf : computable f) (hg : partrec₂ g)\n    (hh : computable₂ h) : @partrec _ σ _ _ fun a => sum.cases_on (f a) (g a) fun c => some (h a c) :=\n  (sum_cases_right (sum_cases hf (sum_inr.comp snd).to₂ (sum_inl.comp snd).to₂) hh hg).of_eq fun a => by\n    cases f a <;> simp\n#align sum_cases_left sum_cases_left\n\n",
+ "sum_cases":
+ "theorem sum_cases {f : α → Sum β γ} {g : α → β → σ} {h : α → γ → σ} (hf : computable f) (hg : computable₂ g)\n    (hh : computable₂ h) : @computable _ σ _ _ fun a => sum.cases_on (f a) (g a) (h a) :=\n  option_some_iff.1 <|\n    (cond (nat_bodd.comp <| encode_iff.2 hf)\n          (option_map (computable.decode.comp <| nat_div2.comp <| encode_iff.2 hf) hh)\n          (option_map (computable.decode.comp <| nat_div2.comp <| encode_iff.2 hf) hg)).of_eq\n      fun a => by cases' f a with b c <;> simp [Nat.div2_bit, Nat.bodd_bit, encodek] <;> rfl\n#align sum_cases sum_cases\n\n",
+ "succ":
+ "theorem succ : computable nat.succ :=\n  primrec.succ.to_comp\n#align succ succ\n\n",
+ "subtype_mk":
+ "theorem subtype_mk {f : α → β} {p : β → Prop} [decidable_pred p] {h : ∀ a, p (f a)} (hp : primrec_pred p)\n    (hf : computable f) : @computable _ _ _ (primcodable.subtype hp) fun a => (⟨f a, h a⟩ : subtype p) :=\n  hf\n#align subtype_mk subtype_mk\n\n",
+ "some":
+ "protected theorem some : partrec (@Part.some α) :=\n  computable.id\n#align some some\n\n",
+ "snd":
+ "theorem snd : computable (@prod.snd α β) :=\n  primrec.snd.to_comp\n#align snd snd\n\n",
+ "rfind_zero_none":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →. » -/\ntheorem rfind_zero_none (p : «expr →. » ℕ bool) (p0 : p 0 = none) : rfind p = none :=\n  eq_none_iff.2 fun a h =>\n    let ⟨n, h₁, h₂⟩ := rfind_dom'.1 h.fst\n    (p0 ▸ h₂ (zero_le _) : (@Part.none bool).dom)\n#align rfind_zero_none rfind_zero_none\n\n",
+ "rfind_spec":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →. » -/\n/-\nCopyright (c) 2018 Mario Carneiro. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Mario Carneiro\n-/\ntheorem rfind_spec {p : «expr →. » ℕ bool} {n : ℕ} (h : n ∈ rfind p) : tt ∈ p n :=\n  h.snd ▸ (rfind_x p h.fst).2.1\n#align rfind_spec rfind_spec\n\n",
+ "rfind_opt_spec":
+ "theorem rfind_opt_spec {α} {f : ℕ → option α} {a} (h : a ∈ rfind_opt f) : ∃ n, a ∈ f n :=\n  let ⟨n, h₁, h₂⟩ := mem_bind_iff.1 h\n  ⟨n, mem_coe.1 h₂⟩\n#align rfind_opt_spec rfind_opt_spec\n\n",
+ "rfind_opt_mono":
+ "theorem rfind_opt_mono {α} {f : ℕ → option α} (H : ∀ {a m n}, m ≤ n → a ∈ f m → a ∈ f n) {a} :\n    a ∈ rfind_opt f ↔ ∃ n, a ∈ f n :=\n  ⟨rfind_opt_spec, fun ⟨n, h⟩ => by\n    have h' := rfind_opt_dom.2 ⟨_, _, h⟩\n    cases' rfind_opt_spec ⟨h', rfl⟩ with k hk\n    have := (H (le_max_left _ _) h).symm.trans (H (le_max_right _ _) hk)\n    simp at this; simp [this, get_mem]⟩\n#align rfind_opt_mono rfind_opt_mono\n\n",
+ "rfind_opt_dom":
+ "theorem rfind_opt_dom {α} {f : ℕ → option α} : (rfind_opt f).dom ↔ ∃ n a, a ∈ f n :=\n  ⟨fun h => (rfind_opt_spec ⟨h, rfl⟩).imp fun n h => ⟨_, h⟩, fun h =>\n    by\n    have h' : ∃ n, (f n).is_some := h.imp fun n => Option.isSome_iff_exists.2\n    have s := nat.find_spec h'\n    have fd : (rfind fun n => (f n).is_some).dom := ⟨nat.find h', by simpa using s.symm, fun _ _ => trivial⟩\n    refine' ⟨fd, _⟩\n    have := rfind_spec (get_mem fd)\n    simp at this⊢\n    cases' Option.isSome_iff_exists.1 this.symm with a e\n    rw [e]; trivial⟩\n#align rfind_opt_dom rfind_opt_dom\n\n",
+ "rfind_opt":
+ "theorem rfind_opt {f : α → ℕ → option σ} (hf : computable₂ f) : partrec fun a => nat.rfind_opt (f a) :=\n  (rfind (primrec.option_is_some.to_comp.comp hf).partrec.to₂).bind (of_option hf)\n#align rfind_opt rfind_opt\n\n",
+ "rfind_min'":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →. » -/\ntheorem rfind_min' {p : ℕ → bool} {m : ℕ} (pm : p m) : ∃ n ∈ rfind p, n ≤ m :=\n  have : tt ∈ (p : «expr →. » ℕ bool) m := ⟨trivial, pm⟩\n  let ⟨n, hn⟩ := dom_iff_mem.1 <| (@rfind_dom p).2 ⟨m, this, fun k h => ⟨⟩⟩\n  ⟨n, hn, not_lt.1 fun h => by injection mem_unique this (rfind_min hn h)⟩\n#align rfind_min' rfind_min'\n\n",
+ "rfind_min":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →. » -/\ntheorem rfind_min {p : «expr →. » ℕ bool} {n : ℕ} (h : n ∈ rfind p) : ∀ {m : ℕ}, m < n → ff ∈ p m :=\n  h.snd ▸ (rfind_x p h.fst).2.2\n#align rfind_min rfind_min\n\n",
+ "rfind_dom'":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →. » -/\ntheorem rfind_dom' {p : «expr →. » ℕ bool} : (rfind p).dom ↔ ∃ n, tt ∈ p n ∧ ∀ {m : ℕ}, m ≤ n → (p m).dom :=\n  exists_congr fun n =>\n    and_congr_right fun pn =>\n      ⟨fun H m h => (decidable.eq_or_lt_of_le h).elim (fun e => e.symm ▸ pn.fst) (H _), fun H m h => H (le_of_lt h)⟩\n#align rfind_dom' rfind_dom'\n\n",
+ "rfind_dom":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →. » -/\n@[simp]\ntheorem rfind_dom {p : «expr →. » ℕ bool} : (rfind p).dom ↔ ∃ n, tt ∈ p n ∧ ∀ {m : ℕ}, m < n → (p m).dom :=\n  iff.rfl\n#align rfind_dom rfind_dom\n\n",
+ "rfind":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →. » -/\ntheorem rfind {p : α → «expr →. » ℕ bool} (hp : partrec₂ p) : partrec fun a => nat.rfind (p a) :=\n  (nat.partrec.rfind <| hp.map ((primrec.dom_bool fun b => cond b 0 1).comp primrec.snd).to₂.to_comp).of_eq fun n =>\n    by\n    cases' e : decode α n with a <;> simp [e, nat.rfind_zero_none, map_id']\n    congr ; funext n\n    simp [Part.map_map, (· ∘ ·)]\n    apply map_id' fun b => _\n    cases b <;> rfl\n#align rfind rfind\n\n",
+ "pred":
+ "theorem pred : computable nat.pred :=\n  primrec.pred.to_comp\n#align pred pred\n\n",
+ "prec'":
+ "theorem prec' {f g h} (hf : partrec f) (hg : partrec g) (hh : partrec h) :\n    partrec fun a =>\n      (f a).bind fun n =>\n        n.elim (g a) fun y IH => do\n          let i ← IH\n          h (mkpair a (mkpair y i)) :=\n  ((prec hg hh).comp (pair partrec.some hf)).of_eq fun a =>\n    ext fun s => by\n      simp [(· <*> ·)] <;>\n        exact\n          ⟨fun ⟨n, h₁, h₂⟩ => ⟨_, ⟨_, h₁, rfl⟩, by simpa using h₂⟩, fun ⟨_, ⟨n, h₁, rfl⟩, h₂⟩ =>\n            ⟨_, h₁, by simpa using h₂⟩⟩\n#align prec' prec'\n\n",
+ "ppred":
+ "theorem ppred : partrec fun n => ppred n :=\n  have : primrec₂ fun n m => if n = nat.succ m then 0 else 1 :=\n    (primrec.ite (@primrec_rel.comp _ _ _ _ _ _ _ primrec.eq primrec.fst (_root_.primrec.succ.comp primrec.snd))\n        (_root_.primrec.const 0) (_root_.primrec.const 1)).to₂\n  (of_primrec (primrec₂.unpaired'.2 this)).rfind.of_eq fun n =>\n    by\n    cases n <;> simp\n    · exact eq_none_iff.2 fun a ⟨⟨m, h, _⟩, _⟩ => by simpa [show 0 ≠ m.succ by intro h <;> injection h] using h\n    · refine' eq_some_iff.2 _\n      simp\n      intro m h\n      simp [ne_of_gt h]\n#align ppred ppred\n\n",
+ "partrec₂":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →. » -/\nprotected theorem computable₂.partrec₂ {α β σ} [primcodable α] [primcodable β] [primcodable σ] {f : α → β → σ}\n    (hf : computable₂ f) : partrec₂ fun a => (f a : «expr →. » β σ) :=\n  hf\n#align computable₂.partrec₂ computable₂.partrec₂\n\n",
+ "partrec":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →. » -/\nprotected theorem computable.partrec {α σ} [primcodable α] [primcodable σ] {f : α → σ} (hf : computable f) :\n    partrec (f : «expr →. » α σ) :=\n  hf\n#align computable.partrec computable.partrec\n\n",
+ "pair":
+ "theorem pair {f : α → β} {g : α → γ} (hf : computable f) (hg : computable g) : computable fun a => (f a, g a) :=\n  (hf.pair hg).of_eq fun n => by cases decode α n <;> simp [(· <*> ·)]\n#align pair pair\n\n",
+ "option_some_iff":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →. » -/\ntheorem option_some_iff {f : «expr →. » α σ} : (partrec fun a => (f a).map option.some) ↔ partrec f :=\n  ⟨fun h => (nat.partrec.ppred.comp h).of_eq fun n => by simp [Part.bind_assoc, bind_some_eq_map], fun hf =>\n    hf.map (option_some.comp snd).to₂⟩\n#align option_some_iff option_some_iff\n\n",
+ "option_some":
+ "theorem option_some : computable (@option.some α) :=\n  primrec.option_some.to_comp\n#align option_some option_some\n\n",
+ "option_map":
+ "theorem option_map {f : α → option β} {g : α → β → σ} (hf : computable f) (hg : computable₂ g) :\n    computable fun a => (f a).map (g a) :=\n  option_bind hf (option_some.comp₂ hg)\n#align option_map option_map\n\n",
+ "option_get_or_else":
+ "theorem option_get_or_else {f : α → option β} {g : α → β} (hf : computable f) (hg : computable g) :\n    computable fun a => (f a).get_or_else (g a) :=\n  (computable.option_cases hf hg (show computable₂ fun a b => b from computable.snd)).of_eq fun a => by\n    cases f a <;> rfl\n#align option_get_or_else option_get_or_else\n\n",
+ "option_cases_right":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →. » -/\ntheorem option_cases_right {o : α → option β} {f : α → σ} {g : α → «expr →. » β σ} (ho : computable o)\n    (hf : computable f) (hg : partrec₂ g) : @partrec _ σ _ _ fun a => option.cases_on (o a) (some (f a)) (g a) :=\n  have : partrec fun a : α => nat.cases (Part.some (f a)) (fun n => Part.bind (decode β n) (g a)) (encode (o a)) :=\n    nat_cases_right (encode_iff.2 ho) hf.partrec <|\n      ((@computable.decode β _).comp snd).of_option.bind (hg.comp (fst.comp fst) snd).to₂\n  this.of_eq fun a => by cases' o a with b <;> simp [encodek]\n#align option_cases_right option_cases_right\n\n",
+ "option_cases":
+ "theorem option_cases {o : α → option β} {f : α → σ} {g : α → β → σ} (ho : computable o) (hf : computable f)\n    (hg : computable₂ g) : @computable _ σ _ _ fun a => option.cases_on (o a) (f a) (g a) :=\n  option_some_iff.1 <|\n    (nat_cases (encode_iff.2 ho) (option_some_iff.2 hf) (map_decode_iff.2 hg)).of_eq fun a => by\n      cases o a <;> simp [encodek] <;> rfl\n#align option_cases option_cases\n\n",
+ "option_bind":
+ "theorem option_bind {f : α → option β} {g : α → β → option σ} (hf : computable f) (hg : computable₂ g) :\n    computable fun a => (f a).bind (g a) :=\n  (option_cases hf (const option.none) hg).of_eq fun a => by cases f a <;> rfl\n#align option_bind option_bind\n\n",
+ "of_primrec":
+ "theorem of_primrec {f : ℕ → ℕ} (hf : primrec f) : partrec f :=\n  by\n  induction hf\n  case zero => exact zero\n  case succ => exact succ\n  case left => exact left\n  case right => exact right\n  case pair f g hf hg pf pg =>\n    refine' (pf.pair pg).of_eq_tot fun n => _\n    simp [has_seq.seq]\n  case comp f g hf hg pf pg =>\n    refine' (pf.comp pg).of_eq_tot fun n => _\n    simp\n  case prec f g hf hg pf pg =>\n    refine' (pf.prec pg).of_eq_tot fun n => _\n    simp\n    induction' n.unpair.2 with m IH; · simp\n    simp; exact ⟨_, IH, rfl⟩\n#align of_primrec of_primrec\n\n",
+ "of_option":
+ "theorem of_option {f : α → option β} (hf : computable f) : partrec fun a => (f a : Part β) :=\n  (nat.partrec.ppred.comp hf).of_eq fun n =>\n    by\n    cases' decode α n with a <;> simp\n    cases' f a with b <;> simp\n#align of_option of_option\n\n",
+ "of_nat":
+ "protected theorem of_nat (α) [denumerable α] : computable (of_nat α) :=\n  (primrec.of_nat _).to_comp\n#align of_nat of_nat\n\n",
+ "of_eq_tot":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →. » -/\ntheorem of_eq_tot {f : «expr →. » α σ} {g : α → σ} (hf : partrec f) (H : ∀ n, g n ∈ f n) : computable g :=\n  hf.of_eq fun a => eq_some_iff.2 (H a)\n#align of_eq_tot of_eq_tot\n\n",
+ "of_eq":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →. » -/\n#print of_eq /-\ntheorem of_eq {f g : «expr →. » α σ} (hf : partrec f) (H : ∀ n, f n = g n) : partrec g :=\n  (funext H : f = g) ▸ hf\n#align of_eq of_eq\n-/\n\n",
+ "none":
+ "theorem none : partrec fun a : α => @Part.none σ :=\n  nat.partrec.none.of_eq fun n => by cases decode α n <;> simp\n#align none none\n\n",
+ "nat_strong_rec":
+ "theorem nat_strong_rec (f : α → ℕ → σ) {g : α → list σ → option σ} (hg : computable₂ g)\n    (H : ∀ a n, g a ((list.range n).map (f a)) = some (f a n)) : computable₂ f :=\n  suffices computable₂ fun a n => (list.range n).map (f a) from\n    option_some_iff.1 <|\n      (list_nth.comp (this.comp fst (succ.comp snd)) snd).to₂.of_eq fun a => by\n        simp [List.nth_range (nat.lt_succ_self a.2)] <;> rfl\n  option_some_iff.1 <|\n    (nat_elim snd (const (option.some []))\n          (to₂ <|\n            option_bind (snd.comp snd) <|\n              to₂ <|\n                option_map (hg.comp (fst.comp <| fst.comp fst) snd) (to₂ <| list_concat.comp (snd.comp fst) snd))).of_eq\n      fun a => by\n      simp; induction' a.2 with n IH; · rfl\n      simp [IH, H, List.range_succ]\n#align nat_strong_rec nat_strong_rec\n\n",
+ "nat_iff":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →. » -/\ntheorem nat_iff {f : «expr →. » ℕ ℕ} : partrec f ↔ nat.partrec f := by simp [partrec, map_id']\n#align nat_iff nat_iff\n\n",
+ "nat_elim":
+ "theorem nat_elim {f : α → ℕ} {g : α → σ} {h : α → ℕ × σ → σ} (hf : computable f) (hg : computable g)\n    (hh : computable₂ h) : computable fun a => (f a).elim (g a) fun y IH => h a (y, IH) :=\n  (partrec.nat_elim hf hg hh.partrec₂).of_eq fun a => by simp <;> induction f a <;> simp [*]\n#align nat_elim nat_elim\n\n",
+ "nat_div2":
+ "theorem nat_div2 : computable Nat.div2 :=\n  primrec.nat_div2.to_comp\n#align nat_div2 nat_div2\n\n",
+ "nat_cases_right":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →. » -/\ntheorem nat_cases_right {f : α → ℕ} {g : α → σ} {h : α → «expr →. » ℕ σ} (hf : computable f) (hg : computable g)\n    (hh : partrec₂ h) : partrec fun a => (f a).cases (some (g a)) (h a) :=\n  (nat_elim hf hg (hh.comp fst (pred.comp <| hf.comp fst)).to₂).of_eq fun a =>\n    by\n    simp; cases f a <;> simp\n    refine' ext fun b => ⟨fun H => _, fun H => _⟩\n    · rcases mem_bind_iff.1 H with ⟨c, h₁, h₂⟩\n      exact h₂\n    · have : ∀ m, (nat.elim (Part.some (g a)) (fun y IH => IH.bind fun _ => h a n) m).dom :=\n        by\n        intro\n        induction m <;> simp [*, H.fst]\n      exact ⟨⟨this n, H.fst⟩, H.snd⟩\n#align nat_cases_right nat_cases_right\n\n",
+ "nat_cases":
+ "theorem nat_cases {f : α → ℕ} {g : α → σ} {h : α → ℕ → σ} (hf : computable f) (hg : computable g) (hh : computable₂ h) :\n    computable fun a => (f a).cases (g a) (h a) :=\n  nat_elim hf hg (hh.comp fst <| fst.comp snd).to₂\n#align nat_cases nat_cases\n\n",
+ "nat_bodd":
+ "theorem nat_bodd : computable Nat.bodd :=\n  primrec.nat_bodd.to_comp\n#align nat_bodd nat_bodd\n\n",
+ "mem_rfind":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →. » -/\n@[simp]\ntheorem mem_rfind {p : «expr →. » ℕ bool} {n : ℕ} : n ∈ rfind p ↔ tt ∈ p n ∧ ∀ {m : ℕ}, m < n → ff ∈ p m :=\n  ⟨fun h => ⟨rfind_spec h, @rfind_min _ _ h⟩, fun ⟨h₁, h₂⟩ =>\n    by\n    let ⟨m, hm⟩ := dom_iff_mem.1 <| (@rfind_dom p).2 ⟨_, h₁, fun m mn => (h₂ mn).fst⟩\n    rcases lt_trichotomy m n with (h | h | h)\n    · injection mem_unique (h₂ h) (rfind_spec hm)\n    · rwa [← h]\n    · injection mem_unique h₁ (rfind_min hm h)⟩\n#align mem_rfind mem_rfind\n\n",
+ "map_encode_iff":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →. » -/\ntheorem map_encode_iff {f : «expr →. » α σ} : (partrec fun a => (f a).map encode) ↔ partrec f :=\n  iff.rfl\n#align map_encode_iff map_encode_iff\n\n",
+ "map_decode_iff":
+ "theorem map_decode_iff {f : α → β → σ} : (computable₂ fun a n => (decode β n).map (f a)) ↔ computable₂ f :=\n  bind_decode_iff.trans option_some_iff\n#align map_decode_iff map_decode_iff\n\n",
+ "map":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →. » -/\ntheorem map {f : «expr →. » α β} {g : α → β → σ} (hf : partrec f) (hg : computable₂ g) :\n    partrec fun a => (f a).map (g a) := by\n  simpa [bind_some_eq_map] using @partrec.bind _ _ _ (fun a b => Part.some (g a b)) hf hg\n#align map map\n\n",
+ "m_of_fn_part_some":
+ "@[simp]\ntheorem vector.m_of_fn_part_some {α n} :\n    ∀ f : fin n → α, (vector.m_of_fn fun i => Part.some (f i)) = Part.some (Vector.ofFn f) :=\n  vector.m_of_fn_pure\n#align vector.m_of_fn_part_some vector.m_of_fn_part_some\n\n",
+ "list_reverse":
+ "theorem list_reverse : computable (@list.reverse α) :=\n  primrec.list_reverse.to_comp\n#align list_reverse list_reverse\n\n",
+ "list_of_fn":
+ "theorem list_of_fn : ∀ {n} {f : fin n → α → σ}, (∀ i, computable (f i)) → computable fun a => List.ofFn fun i => f i a\n  | 0, f, hf => const []\n  | n + 1, f, hf => by simp [list.of_fn_succ] <;> exact list_cons.comp (hf 0) (list_of_fn fun i => hf i.succ)\n#align list_of_fn list_of_fn\n\n",
+ "list_nth":
+ "theorem list_nth : computable₂ (@List.get? α) :=\n  primrec.list_nth.to_comp\n#align list_nth list_nth\n\n",
+ "list_length":
+ "theorem list_length : computable (@list.length α) :=\n  primrec.list_length.to_comp\n#align list_length list_length\n\n",
+ "list_cons":
+ "theorem list_cons : computable₂ (@list.cons α) :=\n  primrec.list_cons.to_comp\n#align list_cons list_cons\n\n",
+ "list_concat":
+ "theorem list_concat : computable₂ fun l (a : α) => l ++ [a] :=\n  primrec.list_concat.to_comp\n#align list_concat list_concat\n\n",
+ "list_append":
+ "theorem list_append : computable₂ ((· ++ ·) : list α → list α → list α) :=\n  primrec.list_append.to_comp\n#align list_append list_append\n\n",
+ "id":
+ "#print id /-\nprotected theorem id : computable (@id α) :=\n  primrec.id.to_comp\n#align id id\n-/\n\n",
+ "fst":
+ "theorem fst : computable (@prod.fst α β) :=\n  primrec.fst.to_comp\n#align fst fst\n\n",
+ "fix_aux":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →. » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →. » -/\ntheorem fix_aux {α σ} (f : «expr →. » α (Sum σ α)) (a : α) (b : σ) :\n    let F : α → «expr →. » ℕ (Sum σ α) := fun a n =>\n      n.elim (some (sum.inr a)) fun y IH => IH.bind fun s => sum.cases_on s (fun _ => Part.some s) f\n    (∃ n : ℕ, ((∃ b' : σ, sum.inl b' ∈ F a n) ∧ ∀ {m : ℕ}, m < n → ∃ b : α, sum.inr b ∈ F a m) ∧ sum.inl b ∈ F a n) ↔\n      b ∈ pfun.fix f a :=\n  by\n  intro ; refine' ⟨fun h => _, fun h => _⟩\n  · rcases h with ⟨n, ⟨_x, h₁⟩, h₂⟩\n    have : ∀ (m a') (_ : sum.inr a' ∈ F a m) (_ : b ∈ pfun.fix f a'), b ∈ pfun.fix f a :=\n      by\n      intro m a' am ba\n      induction' m with m IH generalizing a' <;> simp [F] at am\n      · rwa [← am]\n      rcases am with ⟨a₂, am₂, fa₂⟩\n      exact IH _ am₂ (pfun.mem_fix_iff.2 (or.inr ⟨_, fa₂, ba⟩))\n    cases n <;> simp [F] at h₂\n    · cases h₂\n    rcases h₂ with (h₂ | ⟨a', am', fa'⟩)\n    · cases' h₁ (nat.lt_succ_self _) with a' h\n      injection mem_unique h h₂\n    · exact this _ _ am' (pfun.mem_fix_iff.2 (or.inl fa'))\n  · suffices\n      ∀ (a') (_ : b ∈ pfun.fix f a') (k) (_ : sum.inr a' ∈ F a k),\n        ∃ n, sum.inl b ∈ F a n ∧ ∀ m < n, ∀ (_ : k ≤ m), ∃ a₂, sum.inr a₂ ∈ F a m\n      by\n      rcases this _ h 0 (by simp [F]) with ⟨n, hn₁, hn₂⟩\n      exact ⟨_, ⟨⟨_, hn₁⟩, fun m mn => hn₂ m mn (nat.zero_le _)⟩, hn₁⟩\n    intro a₁ h₁\n    apply pfun.fix_induction h₁\n    intro a₂ h₂ IH k hk\n    rcases pfun.mem_fix_iff.1 h₂ with (h₂ | ⟨a₃, am₃, fa₃⟩)\n    · refine' ⟨k.succ, _, fun m mk km => ⟨a₂, _⟩⟩\n      · simp [F]\n        exact or.inr ⟨_, hk, h₂⟩\n      · rwa [le_antisymm (nat.le_of_lt_succ mk) km]\n    · rcases IH _ am₃ k.succ _ with ⟨n, hn₁, hn₂⟩\n      · refine' ⟨n, hn₁, fun m mn km => _⟩\n        cases' km.lt_or_eq_dec with km km\n        · exact hn₂ _ mn km\n        · exact km ▸ ⟨_, hk⟩\n      · simp [F]\n        exact ⟨_, hk, am₃⟩\n#align fix_aux fix_aux\n\n",
+ "fix":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →. » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →. » -/\ntheorem fix {f : «expr →. » α (Sum σ α)} (hf : partrec f) : partrec (pfun.fix f) :=\n  let F : α → «expr →. » ℕ (Sum σ α) := fun a n =>\n    n.elim (some (sum.inr a)) fun y IH => IH.bind fun s => sum.cases_on s (fun _ => Part.some s) f\n  have hF : partrec₂ F :=\n    partrec.nat_elim snd (sum_inr.comp fst).partrec\n      (sum_cases_right (snd.comp snd) (snd.comp <| snd.comp fst).to₂ (hf.comp snd).to₂).to₂\n  let p a n := @Part.map _ bool (fun s => sum.cases_on s (fun _ => true) fun _ => false) (F a n)\n  have hp : partrec₂ p := hF.map ((sum_cases computable.id (const true).to₂ (const false).to₂).comp snd).to₂\n  (hp.rfind.bind (hF.bind (sum_cases_right snd snd.to₂ none.to₂).to₂).to₂).of_eq fun a =>\n    ext fun b => by simp <;> apply fix_aux f\n#align fix fix\n\n",
+ "fin_app":
+ "theorem fin_app {n} : computable₂ (@id (fin n → σ)) :=\n  primrec.fin_app.to_comp\n#align fin_app fin_app\n\n",
+ "encode_iff":
+ "theorem encode_iff {f : α → σ} : (computable fun a => encode (f a)) ↔ computable f :=\n  iff.rfl\n#align encode_iff encode_iff\n\n",
+ "encode":
+ "protected theorem encode : computable (@encode α _) :=\n  primrec.encode.to_comp\n#align encode encode\n\n",
+ "decode":
+ "protected theorem decode : computable (decode α) :=\n  primrec.decode.to_comp\n#align decode decode\n\n",
+ "const'":
+ "theorem const' (s : Part σ) : partrec fun a : α => s :=\n  haveI := classical.dec s.dom\n  decidable.partrec.const' s\n#align const' const'\n\n",
+ "const":
+ "theorem const (s : σ) : computable fun a : α => s :=\n  (primrec.const _).to_comp\n#align const const\n\n",
+ "cond":
+ "#print cond /-\ntheorem cond {c : α → bool} {f : α → σ} {g : α → σ} (hc : computable c) (hf : computable f) (hg : computable g) :\n    computable fun a => cond (c a) (f a) (g a) :=\n  (nat_cases (encode_iff.2 hc) hg (hf.comp fst).to₂).of_eq fun a => by cases c a <;> rfl\n#align cond cond\n-/\n\n",
+ "comp₂":
+ "theorem comp₂ {f : γ → δ → σ} {g : α → β → γ} {h : α → β → δ} (hf : computable₂ f) (hg : computable₂ g)\n    (hh : computable₂ h) : computable₂ fun a b => f (g a b) (h a b) :=\n  hf.comp hg hh\n#align comp₂ comp₂\n\n",
+ "comp":
+ "theorem comp {f : β → γ → σ} {g : α → β} {h : α → γ} (hf : computable₂ f) (hg : computable g) (hh : computable h) :\n    computable fun a => f (g a) (h a) :=\n  hf.comp (hg.pair hh)\n#align comp comp\n\n",
+ "bind_decode₂_iff":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →. » -/\ntheorem bind_decode₂_iff {f : «expr →. » α σ} :\n    partrec f ↔ nat.partrec fun n => Part.bind (decode₂ α n) fun a => (f a).map encode :=\n  ⟨fun hf =>\n    nat_iff.1 <| (of_option primrec.decode₂.to_comp).bind <| (map hf (computable.encode.comp snd).to₂).comp snd,\n    fun h => map_encode_iff.1 <| by simpa [encodek₂] using (nat_iff.2 h).comp (@computable.encode α _)⟩\n#align bind_decode₂_iff bind_decode₂_iff\n\n",
+ "bind_decode_iff":
+ "theorem bind_decode_iff {f : α → β → option σ} : (computable₂ fun a n => (decode β n).bind (f a)) ↔ computable₂ f :=\n  ⟨fun hf =>\n    nat.partrec.of_eq\n      (((partrec.nat_iff.2 (nat.partrec.ppred.comp <| nat.partrec.of_primrec <| primcodable.prim β)).comp snd).bind\n        (computable.comp hf fst).to₂.partrec₂)\n      fun n => by simp <;> cases decode α n.unpair.1 <;> simp <;> cases decode β n.unpair.2 <;> simp,\n    fun hf =>\n    by\n    have :\n      partrec fun a : α × ℕ =>\n        (encode (decode β a.2)).cases (some option.none) fun n => Part.map (f a.1) (decode β n) :=\n      partrec.nat_cases_right (primrec.encdec.to_comp.comp snd) (const none)\n        ((of_option (computable.decode.comp snd)).map (hf.comp (fst.comp <| fst.comp fst) snd).to₂)\n    refine' this.of_eq fun a => _\n    simp; cases decode β a.2 <;> simp [encodek]⟩\n#align bind_decode_iff bind_decode_iff\n\n",
+ "bind":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →. » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →. » -/\nprotected theorem bind {f : «expr →. » α β} {g : α → «expr →. » β σ} (hf : partrec f) (hg : partrec₂ g) :\n    partrec fun a => (f a).bind (g a) :=\n  (hg.comp (nat.partrec.some.pair hf)).of_eq fun n => by\n    simp [(· <*> ·)] <;> cases' e : decode α n with a <;> simp [e, encodek]\n#align bind bind\n\n"}

@@ -1,0 +1,8 @@
+{"mk_lt_mk_iff":
+ "@[simp]\ntheorem mk_lt_mk_iff [∀ i, LT (α i)] {i : ι} {a b : α i} : (⟨i, a⟩ : sigma α) < ⟨i, b⟩ ↔ a < b :=\n  ⟨fun ⟨_, _, _, h⟩ => h, lt.fiber _ _ _⟩\n#align mk_lt_mk_iff mk_lt_mk_iff\n\n",
+ "mk_le_mk_iff":
+ "/-\nCopyright (c) 2021 Yaël Dillies. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Yaël Dillies\n-/\n@[simp]\ntheorem mk_le_mk_iff [∀ i, LE (α i)] {i : ι} {a b : α i} : (⟨i, a⟩ : sigma α) ≤ ⟨i, b⟩ ↔ a ≤ b :=\n  ⟨fun ⟨_, _, _, h⟩ => h, le.fiber _ _ _⟩\n#align mk_le_mk_iff mk_le_mk_iff\n\n",
+ "lt_def":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«exprΣₗ , » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«exprΣₗ , » -/\ntheorem lt_def [LT ι] [∀ i, LT (α i)]\n    {a b : «exprΣₗ , » \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«exprΣₗ , »\" (α i)} :\n    a < b ↔ a.1 < b.1 ∨ ∃ h : a.1 = b.1, h.rec a.2 < b.2 :=\n  Sigma.lex_iff\n#align lt_def lt_def\n\n",
+ "le_def":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«exprΣₗ , » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«exprΣₗ , » -/\ntheorem le_def [LT ι] [∀ i, LE (α i)]\n    {a b : «exprΣₗ , » \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«exprΣₗ , »\" (α i)} :\n    a ≤ b ↔ a.1 < b.1 ∨ ∃ h : a.1 = b.1, h.rec a.2 ≤ b.2 :=\n  Sigma.lex_iff\n#align le_def le_def\n\n"}

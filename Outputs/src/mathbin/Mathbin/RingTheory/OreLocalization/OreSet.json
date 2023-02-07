@@ -1,0 +1,4 @@
+{"ore_left_cancel":
+ "/-\nCopyright (c) 2022 Jakob von Raumer. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Jakob von Raumer, Kevin Klinge\n-/\n/-- Common factors on the left can be turned into common factors on the right, a weak form of\ncancellability. -/\ntheorem ore_left_cancel (r₁ r₂ : R) (s : S) (h : ↑s * r₁ = s * r₂) : ∃ s' : S, r₁ * s' = r₂ * s' :=\n  ore_set.ore_left_cancel r₁ r₂ s h\n#align ore_left_cancel ore_left_cancel\n\n",
+ "ore_eq":
+ "/-- The Ore condition of a fraction, expressed in terms of `ore_num` and `ore_denom`. -/\ntheorem ore_eq (r : R) (s : S) : r * oreDenom r s = s * oreNum r s :=\n  ore_set.ore_eq r s\n#align ore_eq ore_eq\n\n"}

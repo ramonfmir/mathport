@@ -1,0 +1,132 @@
+{"sound":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `list.perm -/\ntheorem sound {a b : Vector α n} (h : list.perm a.val b.val) : (↑a : sym α n) = ↑b :=\n  subtype.ext <| quotient.sound h\n#align sound sound\n\n",
+ "sigma_sub_ext":
+ "theorem sigma_sub_ext {m₁ m₂ : Σi : fin (n + 1), sym α (n - i)} (h : (m₁.2 : Multiset α) = m₂.2) : m₁ = m₂ :=\n  sigma.subtype_ext\n    (Fin.ext <| by\n      rw [← nat.sub_sub_self m₁.1.is_le, ← nat.sub_sub_self m₂.1.is_le, ← m₁.2.2, ← m₂.2.2, subtype.val_eq_coe,\n        subtype.val_eq_coe, h])\n    h\n#align sigma_sub_ext sigma_sub_ext\n\n",
+ "replicate_succ":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ::ₛ » -/\ntheorem replicate_succ {a : α} {n : ℕ} : replicate n.succ a = «expr ::ₛ » a (replicate n a) :=\n  rfl\n#align replicate_succ replicate_succ\n\n",
+ "replicate_right_injective":
+ "theorem replicate_right_injective {n : ℕ} (h : n ≠ 0) : function.injective (replicate n : α → sym α n) := fun a b =>\n  (replicate_right_inj h).1\n#align replicate_right_injective replicate_right_injective\n\n",
+ "replicate_right_inj":
+ "theorem replicate_right_inj {a b : α} {n : ℕ} (h : n ≠ 0) : replicate n a = replicate n b ↔ a = b :=\n  subtype.ext_iff.trans (Multiset.replicate_right_inj h)\n#align replicate_right_inj replicate_right_inj\n\n",
+ "of_vector_nil":
+ "@[simp]\ntheorem of_vector_nil : ↑(Vector.nil : Vector α 0) = (sym.nil : sym α 0) :=\n  rfl\n#align of_vector_nil of_vector_nil\n\n",
+ "of_vector_cons":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ::ₛ » -/\n@[simp]\ntheorem of_vector_cons (a : α) (v : Vector α n) : ↑(Vector.cons a v) = «expr ::ₛ » a (↑v : sym α n) :=\n  by\n  cases v\n  rfl\n#align of_vector_cons of_vector_cons\n\n",
+ "mem_replicate":
+ "@[simp]\ntheorem mem_replicate : b ∈ replicate n a ↔ n ≠ 0 ∧ b = a :=\n  Multiset.mem_replicate\n#align mem_replicate mem_replicate\n\n",
+ "mem_mk":
+ "@[simp]\ntheorem mem_mk (a : α) (s : Multiset α) (h : s.card = n) : a ∈ mk s h ↔ a ∈ s :=\n  iff.rfl\n#align mem_mk mem_mk\n\n",
+ "mem_map":
+ "@[simp]\ntheorem mem_map {n : ℕ} {f : α → β} {b : β} {l : sym α n} : b ∈ sym.map f l ↔ ∃ a, a ∈ l ∧ f a = b :=\n  Multiset.mem_map\n#align mem_map mem_map\n\n",
+ "mem_fill_iff":
+ "theorem mem_fill_iff {a b : α} {i : fin (n + 1)} {s : sym α (n - i)} :\n    a ∈ sym.fill b i s ↔ (i : ℕ) ≠ 0 ∧ a = b ∨ a ∈ s := by rw [fill, mem_cast, mem_append_iff, or_comm', mem_replicate]\n#align mem_fill_iff mem_fill_iff\n\n",
+ "mem_cons_self":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ::ₛ » -/\n@[simp]\ntheorem mem_cons_self (a : α) (s : sym α n) : a ∈ «expr ::ₛ » a s :=\n  Multiset.mem_cons_self a s.1\n#align mem_cons_self mem_cons_self\n\n",
+ "mem_cons_of_mem":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ::ₛ » -/\ntheorem mem_cons_of_mem (h : a ∈ s) : a ∈ «expr ::ₛ » b s :=\n  Multiset.mem_cons_of_mem h\n#align mem_cons_of_mem mem_cons_of_mem\n\n",
+ "mem_cons":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ::ₛ » -/\n@[simp]\ntheorem mem_cons : a ∈ «expr ::ₛ » b s ↔ a = b ∨ a ∈ s :=\n  Multiset.mem_cons\n#align mem_cons mem_cons\n\n",
+ "mem_coe":
+ "@[simp]\ntheorem mem_coe : a ∈ (s : Multiset α) ↔ a ∈ s :=\n  iff.rfl\n#align mem_coe mem_coe\n\n",
+ "mem_cast":
+ "@[simp]\ntheorem mem_cast (h : n = m) : a ∈ sym.cast h s ↔ a ∈ s :=\n  iff.rfl\n#align mem_cast mem_cast\n\n",
+ "mem_attach":
+ "@[simp]\ntheorem mem_attach (s : sym α n) (x : { x // x ∈ s }) : x ∈ s.attach :=\n  Multiset.mem_attach _ _\n#align mem_attach mem_attach\n\n",
+ "mem_append_iff":
+ "theorem mem_append_iff {s' : sym α m} : a ∈ s.append s' ↔ a ∈ s ∨ a ∈ s' :=\n  Multiset.mem_add\n#align mem_append_iff mem_append_iff\n\n",
+ "map_zero":
+ "#print map_zero /-\n@[simp]\ntheorem map_zero (f : α → β) : sym.map f (0 : sym α 0) = (0 : sym β 0) :=\n  rfl\n#align map_zero map_zero\n-/\n\n",
+ "map_mk":
+ "@[simp]\ntheorem map_mk {f : α → β} {m : Multiset α} {hc : m.card = n} : map f (mk m hc) = mk (m.map f) (by simp [hc]) :=\n  rfl\n#align map_mk map_mk\n\n",
+ "map_map":
+ "@[simp]\ntheorem map_map {α β γ : Type _} {n : ℕ} (g : β → γ) (f : α → β) (s : sym α n) :\n    sym.map g (sym.map f s) = sym.map (g ∘ f) s := by simp [sym.map]\n#align map_map map_map\n\n",
+ "map_injective":
+ "theorem map_injective {f : α → β} (hf : injective f) (n : ℕ) : injective (map f : sym α n → sym β n) := fun s t h =>\n  coe_injective <| Multiset.map_injective hf <| coe_inj.2 h\n#align map_injective map_injective\n\n",
+ "map_id'":
+ "/-- Note: `sym.map_id` is not simp-normal, as simp ends up unfolding `id` with `sym.map_congr` -/\n@[simp]\ntheorem map_id' {α : Type _} {n : ℕ} (s : sym α n) : sym.map (fun x : α => x) s = s := by simp [sym.map]\n#align map_id' map_id'\n\n",
+ "map_id":
+ "theorem map_id {α : Type _} {n : ℕ} (s : sym α n) : sym.map id s = s := by simp [sym.map]\n#align map_id map_id\n\n",
+ "map_cons":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ::ₛ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ::ₛ » -/\n@[simp]\ntheorem map_cons {n : ℕ} (f : α → β) (a : α) (s : sym α n) : («expr ::ₛ » a s).map f = «expr ::ₛ » (f a) (s.map f) := by\n  simp [map, cons]\n#align map_cons map_cons\n\n",
+ "map_congr":
+ "#print map_congr /-\n@[congr]\ntheorem map_congr {f g : α → β} {s : sym α n} (h : ∀ x ∈ s, f x = g x) : map f s = map g s :=\n  subtype.ext <| Multiset.map_congr rfl h\n#align map_congr map_congr\n-/\n\n",
+ "filter_ne_fill":
+ "theorem filter_ne_fill [decidable_eq α] (a : α) (m : Σi : fin (n + 1), sym α (n - i)) (h : a ∉ m.2) :\n    (m.2.fill a m.1).filter_ne a = m :=\n  sigma_sub_ext\n    (by\n      dsimp only [filter_ne, subtype.coe_mk, subtype.val_eq_coe, coe_fill]\n      rw [filter_add, filter_eq_self.2, add_right_eq_self, eq_zero_iff_forall_not_mem]\n      · intro b hb\n        rw [mem_filter, sym.mem_coe, mem_replicate] at hb\n        exact hb.2 hb.1.2.symm\n      · exact fun b hb => (hb.ne_of_not_mem h).symm)\n#align filter_ne_fill filter_ne_fill\n\n",
+ "fill_filter_ne":
+ "theorem fill_filter_ne [decidable_eq α] (a : α) (m : sym α n) : (m.filter_ne a).2.fill a (m.filter_ne a).1 = m :=\n  subtype.ext\n    (by\n      dsimp only [coe_fill, filter_ne, subtype.coe_mk, Fin.val_mk]\n      ext b; rw [count_add, count_filter, sym.coe_replicate, count_replicate]\n      obtain rfl | h := eq_or_ne a b\n      · rw [if_pos rfl, if_neg (not_not.2 rfl), zero_add]\n        rfl\n      · rw [if_pos h, if_neg h.symm, add_zero]\n        rfl)\n#align fill_filter_ne fill_filter_ne\n\n",
+ "exists_mem":
+ "theorem exists_mem (s : sym α n.succ) : ∃ a, a ∈ s :=\n  Multiset.card_pos_iff_exists_mem.1 <| s.2.symm ▸ n.succ_pos\n#align exists_mem exists_mem\n\n",
+ "exists_eq_cons_of_succ":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ::ₛ » -/\ntheorem exists_eq_cons_of_succ (s : sym α n.succ) : ∃ (a : α)(s' : sym α n), s = «expr ::ₛ » a s' :=\n  by\n  obtain ⟨a, ha⟩ := exists_mem s\n  classical exact ⟨a, s.erase a ha, (cons_erase ha).symm⟩\n#align exists_eq_cons_of_succ exists_eq_cons_of_succ\n\n",
+ "erase_mk":
+ "@[simp]\ntheorem erase_mk [decidable_eq α] (m : Multiset α) (hc : m.card = n + 1) (a : α) (h : a ∈ m) :\n    (mk m hc).erase a h =\n      mk (m.erase a)\n        (by\n          rw [Multiset.card_erase_of_mem h, hc]\n          rfl) :=\n  rfl\n#align erase_mk erase_mk\n\n",
+ "erase_cons_head":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ::ₛ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ::ₛ » -/\n@[simp]\ntheorem erase_cons_head [decidable_eq α] (s : sym α n) (a : α) (h : a ∈ «expr ::ₛ » a s := mem_cons_self a s) :\n    («expr ::ₛ » a s).erase a h = s :=\n  coe_injective <| Multiset.erase_cons_head a s.1\n#align erase_cons_head erase_cons_head\n\n",
+ "eq_replicate_of_subsingleton":
+ "theorem eq_replicate_of_subsingleton [subsingleton α] (a : α) {n : ℕ} (s : sym α n) : s = replicate n a :=\n  eq_replicate.2 fun b hb => subsingleton.elim _ _\n#align eq_replicate_of_subsingleton eq_replicate_of_subsingleton\n\n",
+ "eq_replicate_iff":
+ "theorem eq_replicate_iff : s = replicate n a ↔ ∀ b ∈ s, b = a :=\n  by\n  rw [subtype.ext_iff, coe_replicate, Multiset.eq_replicate]\n  exact and_iff_right s.2\n#align eq_replicate_iff eq_replicate_iff\n\n",
+ "eq_replicate":
+ "theorem eq_replicate {a : α} {n : ℕ} {s : sym α n} : s = replicate n a ↔ ∀ b ∈ s, b = a :=\n  subtype.ext_iff.trans <| Multiset.eq_replicate.trans <| and_iff_right s.prop\n#align eq_replicate eq_replicate\n\n",
+ "eq_nil_of_card_zero":
+ "theorem eq_nil_of_card_zero (s : sym α 0) : s = nil :=\n  subtype.ext <| Multiset.card_eq_zero.1 s.2\n#align eq_nil_of_card_zero eq_nil_of_card_zero\n\n",
+ "encode_of_not_none_mem":
+ "@[simp]\ntheorem encode_of_not_none_mem [decidable_eq α] (s : sym (option α) n.succ) (h : ¬none ∈ s) :\n    encode s =\n      sum.inr (s.attach.map fun o => option.get <| Option.ne_none_iff_isSome.1 <| ne_of_mem_of_not_mem o.2 h) :=\n  dif_neg h\n#align encode_of_not_none_mem encode_of_not_none_mem\n\n",
+ "encode_of_none_mem":
+ "@[simp]\ntheorem encode_of_none_mem [decidable_eq α] (s : sym (option α) n.succ) (h : none ∈ s) :\n    encode s = sum.inl (s.erase none h) :=\n  dif_pos h\n#align encode_of_none_mem encode_of_none_mem\n\n",
+ "encode_decode":
+ "@[simp]\ntheorem encode_decode [decidable_eq α] (s : Sum (sym (option α) n) (sym α n.succ)) : encode (decode s) = s :=\n  by\n  obtain s | s := s\n  · simp\n  · unfold sym_option_succ_equiv.encode\n    split_ifs\n    · obtain ⟨a, _, ha⟩ := multiset.mem_map.mp h\n      exact option.some_ne_none _ ha\n    · refine' map_injective (option.some_injective _) _ _\n      convert eq.trans _ (sym_option_succ_equiv.decode (sum.inr s)).attach_map_coe\n      simp\n#align encode_decode encode_decode\n\n",
+ "decode_encode":
+ "@[simp]\ntheorem decode_encode [decidable_eq α] (s : sym (option α) n.succ) : decode (encode s) = s :=\n  by\n  by_cases h : none ∈ s\n  · simp [h]\n  · simp only [h, decode, not_false_iff, subtype.val_eq_coe, encode_of_not_none_mem, embedding.coe_option_apply,\n      map_map, comp_app, option.coe_get]\n    convert s.attach_map_coe\n#align decode_encode decode_encode\n\n",
+ "cons_swap":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ::ₛ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ::ₛ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ::ₛ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ::ₛ » -/\ntheorem cons_swap (a b : α) (s : sym α n) : «expr ::ₛ » a («expr ::ₛ » b s) = «expr ::ₛ » b («expr ::ₛ » a s) :=\n  subtype.ext <| Multiset.cons_swap a b s.1\n#align cons_swap cons_swap\n\n",
+ "cons_of_coe_eq":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ::ₛ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ::ᵥ » -/\ntheorem cons_of_coe_eq (a : α) (v : Vector α n) : «expr ::ₛ » a (↑v : sym α n) = ↑(«expr ::ᵥ » a v) :=\n  subtype.ext <| by\n    cases v\n    rfl\n#align cons_of_coe_eq cons_of_coe_eq\n\n",
+ "cons_inj_right":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ::ₛ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ::ₛ » -/\n@[simp]\ntheorem cons_inj_right (a : α) (s s' : sym α n) : «expr ::ₛ » a s = «expr ::ₛ » a s' ↔ s = s' :=\n  subtype.ext_iff.trans <| (Multiset.cons_inj_right _).trans subtype.ext_iff.symm\n#align cons_inj_right cons_inj_right\n\n",
+ "cons_inj_left":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ::ₛ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ::ₛ » -/\n@[simp]\ntheorem cons_inj_left (a a' : α) (s : sym α n) : «expr ::ₛ » a s = «expr ::ₛ » a' s ↔ a = a' :=\n  subtype.ext_iff.trans <| Multiset.cons_inj_left _\n#align cons_inj_left cons_inj_left\n\n",
+ "cons_erase":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ::ₛ » -/\n@[simp]\ntheorem cons_erase [decidable_eq α] {s : sym α n.succ} {a : α} (h : a ∈ s) : «expr ::ₛ » a (s.erase a h) = s :=\n  coe_injective <| Multiset.cons_erase h\n#align cons_erase cons_erase\n\n",
+ "cons_equiv_eq_equiv_cons":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:177:8: unsupported: ambiguous notation -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `sym.cons' -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ::ₛ » -/\ntheorem cons_equiv_eq_equiv_cons (α : Type _) (n : ℕ) (a : α) (s : sym α n) :\n    sym.cons' a (sym_equiv_sym' s) = sym_equiv_sym' («expr ::ₛ » a s) :=\n  by\n  rcases s with ⟨⟨l⟩, _⟩\n  rfl\n#align cons_equiv_eq_equiv_cons cons_equiv_eq_equiv_cons\n\n",
+ "coe_replicate":
+ "theorem coe_replicate : (replicate n a : Multiset α) = multiset.replicate n a :=\n  rfl\n#align coe_replicate coe_replicate\n\n",
+ "coe_nil":
+ "@[simp]\ntheorem coe_nil : coe (@sym.nil α) = (0 : Multiset α) :=\n  rfl\n#align coe_nil coe_nil\n\n",
+ "coe_map":
+ "@[simp]\ntheorem coe_map (s : sym α n) (f : α → β) : ↑(s.map f) = Multiset.map f s :=\n  rfl\n#align coe_map coe_map\n\n",
+ "coe_injective":
+ "/-\nCopyright (c) 2020 Kyle Miller All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Kyle Miller\n-/\ntheorem coe_injective : injective (coe : sym α n → Multiset α) :=\n  subtype.coe_injective\n#align coe_injective coe_injective\n\n",
+ "coe_inj":
+ "@[simp, norm_cast]\ntheorem coe_inj {s₁ s₂ : sym α n} : (s₁ : Multiset α) = s₂ ↔ s₁ = s₂ :=\n  coe_injective.eq_iff\n#align coe_inj coe_inj\n\n",
+ "coe_fill":
+ "theorem coe_fill {a : α} {i : fin (n + 1)} {m : sym α (n - i)} : (fill a i m : Multiset α) = m + replicate i a :=\n  rfl\n#align coe_fill coe_fill\n\n",
+ "coe_erase":
+ "@[simp]\ntheorem coe_erase [decidable_eq α] {s : sym α n.succ} {a : α} (h : a ∈ s) :\n    (s.erase a h : Multiset α) = Multiset.erase s a :=\n  rfl\n#align coe_erase coe_erase\n\n",
+ "coe_cons":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ::ₛ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ::ₘ » -/\ntheorem coe_cons (s : sym α n) (a : α) : («expr ::ₛ » a s : Multiset α) = «expr ::ₘ » a s :=\n  rfl\n#align coe_cons coe_cons\n\n",
+ "coe_cast":
+ "@[simp]\ntheorem coe_cast (h : n = m) : (sym.cast h s : Multiset α) = s :=\n  rfl\n#align coe_cast coe_cast\n\n",
+ "coe_attach":
+ "@[simp]\ntheorem coe_attach (s : sym α n) : (s.attach : Multiset { a // a ∈ s }) = Multiset.attach s :=\n  rfl\n#align coe_attach coe_attach\n\n",
+ "coe_append":
+ "@[simp, norm_cast]\ntheorem coe_append (s : sym α n) (s' : sym α n') : (s.append s' : Multiset α) = s + s' :=\n  rfl\n#align coe_append coe_append\n\n",
+ "cast_rfl":
+ "@[simp]\ntheorem cast_rfl : sym.cast rfl s = s :=\n  subtype.ext rfl\n#align cast_rfl cast_rfl\n\n",
+ "cast_cast":
+ "#print cast_cast /-\n@[simp]\ntheorem cast_cast {n'' : ℕ} (h : n = n') (h' : n' = n'') : sym.cast h' (sym.cast h s) = sym.cast (h.trans h') s :=\n  rfl\n#align cast_cast cast_cast\n-/\n\n",
+ "attach_nil":
+ "@[simp]\ntheorem attach_nil : (nil : sym α 0).attach = nil :=\n  rfl\n#align attach_nil attach_nil\n\n",
+ "attach_mk":
+ "@[simp]\ntheorem attach_mk {m : Multiset α} {hc : m.card = n} : attach (mk m hc) = mk m.attach (Multiset.card_attach.trans hc) :=\n  rfl\n#align attach_mk attach_mk\n\n",
+ "attach_map_coe":
+ "theorem attach_map_coe (s : sym α n) : s.attach.map coe = s :=\n  coe_injective <| Multiset.attach_map_val _\n#align attach_map_coe attach_map_coe\n\n",
+ "attach_cons":
+ "@[simp]\ntheorem attach_cons (x : α) (s : sym α n) :\n    (cons x s).attach = cons ⟨x, mem_cons_self _ _⟩ (s.attach.map fun x => ⟨x, mem_cons_of_mem x.prop⟩) :=\n  coe_injective <| Multiset.attach_cons _ _\n#align attach_cons attach_cons\n\n",
+ "append_inj_right":
+ "@[simp]\ntheorem append_inj_right (s : sym α n) {t t' : sym α n'} : s.append t = s.append t' ↔ t = t' :=\n  subtype.ext_iff.trans <| (add_right_inj _).trans subtype.ext_iff.symm\n#align append_inj_right append_inj_right\n\n",
+ "append_inj_left":
+ "@[simp]\ntheorem append_inj_left {s s' : sym α n} (t : sym α n') : s.append t = s'.append t ↔ s = s' :=\n  subtype.ext_iff.trans <| (add_left_inj _).trans subtype.ext_iff.symm\n#align append_inj_left append_inj_left\n\n",
+ "append_comm":
+ "theorem append_comm (s : sym α n') (s' : sym α n') : s.append s' = sym.cast (add_comm _ _) (s'.append s) :=\n  by\n  ext\n  simp [append, add_comm]\n#align append_comm append_comm\n\n"}

@@ -1,0 +1,66 @@
+{"zpow_two_pos_of_ne_zero":
+ "#print zpow_two_pos_of_ne_zero /-\ntheorem zpow_two_pos_of_ne_zero (h : a ≠ 0) : 0 < a ^ (2 : ℤ) :=\n  zpow_bit0_pos h _\n#align zpow_two_pos_of_ne_zero zpow_two_pos_of_ne_zero\n-/\n\n",
+ "zpow_two_nonneg":
+ "#print zpow_two_nonneg /-\ntheorem zpow_two_nonneg (a : α) : 0 ≤ a ^ (2 : ℤ) :=\n  zpow_bit0_nonneg _ _\n#align zpow_two_nonneg zpow_two_nonneg\n-/\n\n",
+ "zpow_strictMono":
+ "#print zpow_strictMono /-\ntheorem zpow_strictMono (hx : 1 < a) : strict_mono ((· ^ ·) a : ℤ → α) :=\n  strictMono_int_of_lt_succ fun n =>\n    have xpos : 0 < a := zero_lt_one.trans hx\n    calc\n      a ^ n < a ^ n * a := lt_mul_of_one_lt_right (zpow_pos_of_pos xpos _) hx\n      _ = a ^ (n + 1) := (zpow_add_one₀ xpos.ne' _).symm\n      \n#align zpow_strict_mono zpow_strictMono\n-/\n\n",
+ "zpow_strictAnti":
+ "#print zpow_strictAnti /-\ntheorem zpow_strictAnti (h₀ : 0 < a) (h₁ : a < 1) : strict_anti ((· ^ ·) a : ℤ → α) :=\n  strictAnti_int_of_succ_lt fun n =>\n    calc\n      a ^ (n + 1) = a ^ n * a := zpow_add_one₀ h₀.ne' _\n      _ < a ^ n * 1 := (mul_lt_mul_left <| zpow_pos_of_pos h₀ _).2 h₁\n      _ = a ^ n := mul_one _\n      \n#align zpow_strict_anti zpow_strictAnti\n-/\n\n",
+ "zpow_pos_of_pos":
+ "#print Nat.zpow_pos_of_pos /-\nprotected theorem Nat.zpow_pos_of_pos {a : ℕ} (h : 0 < a) (n : ℤ) : 0 < (a : α) ^ n :=\n  by\n  apply zpow_pos_of_pos\n  exact_mod_cast h\n#align nat.zpow_pos_of_pos Nat.zpow_pos_of_pos\n-/\n\n",
+ "zpow_pos_iff":
+ "#print Odd.zpow_pos_iff /-\ntheorem Odd.zpow_pos_iff (hn : Odd n) : 0 < a ^ n ↔ 0 < a := by\n  cases' hn with k hk <;> simpa only [hk, two_mul] using zpow_bit1_pos_iff\n#align odd.zpow_pos_iff Odd.zpow_pos_iff\n-/\n\n",
+ "zpow_nonpos_iff":
+ "#print Odd.zpow_nonpos_iff /-\ntheorem Odd.zpow_nonpos_iff (hn : Odd n) : a ^ n ≤ 0 ↔ a ≤ 0 := by\n  cases' hn with k hk <;> simpa only [hk, two_mul] using zpow_bit1_nonpos_iff\n#align odd.zpow_nonpos_iff Odd.zpow_nonpos_iff\n-/\n\n",
+ "zpow_nonneg_iff":
+ "#print Odd.zpow_nonneg_iff /-\nprotected theorem Odd.zpow_nonneg_iff (hn : Odd n) : 0 ≤ a ^ n ↔ 0 ≤ a := by\n  cases' hn with k hk <;> simpa only [hk, two_mul] using zpow_bit1_nonneg_iff\n#align odd.zpow_nonneg_iff Odd.zpow_nonneg_iff\n-/\n\n",
+ "zpow_nonneg":
+ "#print Even.zpow_nonneg /-\nprotected theorem Even.zpow_nonneg (hn : Even n) (a : α) : 0 ≤ a ^ n := by\n  obtain ⟨k, rfl⟩ := hn <;> exact zpow_bit0_nonneg _ _\n#align even.zpow_nonneg Even.zpow_nonneg\n-/\n\n",
+ "zpow_neg_iff":
+ "#print Odd.zpow_neg_iff /-\ntheorem Odd.zpow_neg_iff (hn : Odd n) : a ^ n < 0 ↔ a < 0 := by\n  cases' hn with k hk <;> simpa only [hk, two_mul] using zpow_bit1_neg_iff\n#align odd.zpow_neg_iff Odd.zpow_neg_iff\n-/\n\n",
+ "zpow_ne_zero_of_pos":
+ "#print Nat.zpow_ne_zero_of_pos /-\ntheorem Nat.zpow_ne_zero_of_pos {a : ℕ} (h : 0 < a) (n : ℤ) : (a : α) ^ n ≠ 0 :=\n  (Nat.zpow_pos_of_pos h n).ne'\n#align nat.zpow_ne_zero_of_pos Nat.zpow_ne_zero_of_pos\n-/\n\n",
+ "zpow_lt_iff_lt":
+ "#print zpow_lt_iff_lt /-\n@[simp]\ntheorem zpow_lt_iff_lt (hx : 1 < a) : a ^ m < a ^ n ↔ m < n :=\n  (zpow_strictMono hx).lt_iff_lt\n#align zpow_lt_iff_lt zpow_lt_iff_lt\n-/\n\n",
+ "zpow_le_one_of_nonpos":
+ "#print zpow_le_one_of_nonpos /-\ntheorem zpow_le_one_of_nonpos (ha : 1 ≤ a) (hn : n ≤ 0) : a ^ n ≤ 1 :=\n  (zpow_le_of_le ha hn).trans_eq <| zpow_zero _\n#align zpow_le_one_of_nonpos zpow_le_one_of_nonpos\n-/\n\n",
+ "zpow_le_of_le":
+ "#print zpow_le_of_le /-\n/-\nCopyright (c) 2014 Robert Lewis. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Robert Lewis, Leonardo de Moura, Mario Carneiro, Floris van Doorn\n-/\ntheorem zpow_le_of_le (ha : 1 ≤ a) (h : m ≤ n) : a ^ m ≤ a ^ n :=\n  by\n  have ha₀ : 0 < a := one_pos.trans_le ha\n  lift n - m to ℕ using sub_nonneg.2 h with k hk\n  calc\n    a ^ m = a ^ m * 1 := (mul_one _).symm\n    _ ≤ a ^ m * a ^ k := mul_le_mul_of_nonneg_left (one_le_pow_of_one_le ha _) (zpow_nonneg ha₀.le _)\n    _ = a ^ n := by rw [← zpow_ofNat, ← zpow_add₀ ha₀.ne', hk, add_sub_cancel'_right]\n    \n#align zpow_le_of_le zpow_le_of_le\n-/\n\n",
+ "zpow_le_max_of_min_le":
+ "#print zpow_le_max_of_min_le /-\ntheorem zpow_le_max_of_min_le {x : α} (hx : 1 ≤ x) {a b c : ℤ} (h : min a b ≤ c) :\n    x ^ (-c) ≤ max (x ^ (-a)) (x ^ (-b)) :=\n  haveI : antitone fun n : ℤ => x ^ (-n) := fun m n h => zpow_le_of_le hx (neg_le_neg h)\n  (this h).trans_eq this.map_min\n#align zpow_le_max_of_min_le zpow_le_max_of_min_le\n-/\n\n",
+ "zpow_le_max_iff_min_le":
+ "#print zpow_le_max_iff_min_le /-\ntheorem zpow_le_max_iff_min_le {x : α} (hx : 1 < x) {a b c : ℤ} : x ^ (-c) ≤ max (x ^ (-a)) (x ^ (-b)) ↔ min a b ≤ c :=\n  by simp_rw [le_max_iff, min_le_iff, zpow_le_iff_le hx, neg_le_neg_iff]\n#align zpow_le_max_iff_min_le zpow_le_max_iff_min_le\n-/\n\n",
+ "zpow_le_iff_le":
+ "#print zpow_le_iff_le /-\n@[simp]\ntheorem zpow_le_iff_le (hx : 1 < a) : a ^ m ≤ a ^ n ↔ m ≤ n :=\n  (zpow_strictMono hx).le_iff_le\n#align zpow_le_iff_le zpow_le_iff_le\n-/\n\n",
+ "zpow_injective":
+ "#print zpow_injective /-\ntheorem zpow_injective (h₀ : 0 < a) (h₁ : a ≠ 1) : injective ((· ^ ·) a : ℤ → α) :=\n  by\n  rcases h₁.lt_or_lt with (H | H)\n  · exact (zpow_strictAnti h₀ H).injective\n  · exact (zpow_strictMono H).injective\n#align zpow_injective zpow_injective\n-/\n\n",
+ "zpow_inj":
+ "#print zpow_inj /-\n@[simp]\ntheorem zpow_inj (h₀ : 0 < a) (h₁ : a ≠ 1) : a ^ m = a ^ n ↔ m = n :=\n  (zpow_injective h₀ h₁).eq_iff\n#align zpow_inj zpow_inj\n-/\n\n",
+ "zpow_bit1_pos_iff":
+ "#print zpow_bit1_pos_iff /-\n@[simp]\ntheorem zpow_bit1_pos_iff : 0 < a ^ bit1 n ↔ 0 < a :=\n  lt_iff_lt_of_le_iff_le zpow_bit1_nonpos_iff\n#align zpow_bit1_pos_iff zpow_bit1_pos_iff\n-/\n\n",
+ "zpow_bit1_nonpos_iff":
+ "#print zpow_bit1_nonpos_iff /-\n@[simp]\ntheorem zpow_bit1_nonpos_iff : a ^ bit1 n ≤ 0 ↔ a ≤ 0 := by\n  rw [le_iff_lt_or_eq, le_iff_lt_or_eq, zpow_bit1_neg_iff, zpow_eq_zero_iff (Int.bit1_ne_zero n)]\n#align zpow_bit1_nonpos_iff zpow_bit1_nonpos_iff\n-/\n\n",
+ "zpow_bit1_nonneg_iff":
+ "#print zpow_bit1_nonneg_iff /-\n@[simp]\ntheorem zpow_bit1_nonneg_iff : 0 ≤ a ^ bit1 n ↔ 0 ≤ a :=\n  le_iff_le_iff_lt_iff_lt.2 zpow_bit1_neg_iff\n#align zpow_bit1_nonneg_iff zpow_bit1_nonneg_iff\n-/\n\n",
+ "zpow_bit1_neg_iff":
+ "#print zpow_bit1_neg_iff /-\n@[simp]\ntheorem zpow_bit1_neg_iff : a ^ bit1 n < 0 ↔ a < 0 :=\n  ⟨fun h => not_le.1 fun h' => not_le.2 h <| zpow_nonneg h' _, fun h => by\n    rw [bit1, zpow_add_one₀ h.ne] <;> exact mul_neg_of_pos_of_neg (zpow_bit0_pos h.ne _) h⟩\n#align zpow_bit1_neg_iff zpow_bit1_neg_iff\n-/\n\n",
+ "zpow_bit0_pos_iff":
+ "#print zpow_bit0_pos_iff /-\n@[simp]\ntheorem zpow_bit0_pos_iff (hn : n ≠ 0) : 0 < a ^ bit0 n ↔ a ≠ 0 :=\n  ⟨by\n    rintro h rfl\n    refine' (zero_zpow _ _).not_gt h\n    rwa [bit0_ne_zero], fun h => zpow_bit0_pos h _⟩\n#align zpow_bit0_pos_iff zpow_bit0_pos_iff\n-/\n\n",
+ "zpow_bit0_pos":
+ "#print zpow_bit0_pos /-\ntheorem zpow_bit0_pos (h : a ≠ 0) (n : ℤ) : 0 < a ^ bit0 n :=\n  (zpow_bit0_nonneg a n).lt_of_ne (zpow_ne_zero _ h).symm\n#align zpow_bit0_pos zpow_bit0_pos\n-/\n\n",
+ "zpow_bit0_nonneg":
+ "#print zpow_bit0_nonneg /-\ntheorem zpow_bit0_nonneg (a : α) (n : ℤ) : 0 ≤ a ^ bit0 n :=\n  (mul_self_nonneg _).trans_eq <| (zpow_bit0 _ _).symm\n#align zpow_bit0_nonneg zpow_bit0_nonneg\n-/\n\n",
+ "zpow_bit0_abs":
+ "#print zpow_bit0_abs /-\n@[simp]\ntheorem zpow_bit0_abs (a : α) (p : ℤ) : |a| ^ bit0 p = a ^ bit0 p :=\n  (even_bit0 _).zpow_abs _\n#align zpow_bit0_abs zpow_bit0_abs\n-/\n\n",
+ "zpow_abs":
+ "#print Even.zpow_abs /-\ntheorem Even.zpow_abs {p : ℤ} (hp : Even p) (a : α) : |a| ^ p = a ^ p := by\n  cases' abs_choice a with h h <;> simp only [h, hp.neg_zpow _]\n#align even.zpow_abs Even.zpow_abs\n-/\n\n",
+ "one_lt_zpow":
+ "#print one_lt_zpow /-\ntheorem one_lt_zpow (ha : 1 < a) : ∀ n : ℤ, 0 < n → 1 < a ^ n\n  | (n : ℕ), h => (zpow_ofNat _ _).symm.subst (one_lt_pow ha <| Int.coe_nat_ne_zero.mp h.ne')\n  | -[n+1], h => ((Int.negSucc_not_pos _).mp h).elim\n#align one_lt_zpow one_lt_zpow\n-/\n\n",
+ "one_le_zpow_of_nonneg":
+ "#print one_le_zpow_of_nonneg /-\ntheorem one_le_zpow_of_nonneg (ha : 1 ≤ a) (hn : 0 ≤ n) : 1 ≤ a ^ n :=\n  (zpow_zero _).symm.trans_le <| zpow_le_of_le ha hn\n#align one_le_zpow_of_nonneg one_le_zpow_of_nonneg\n-/\n\n",
+ "div_pow_le":
+ "#print div_pow_le /-\n@[simp]\ntheorem div_pow_le (ha : 0 ≤ a) (hb : 1 ≤ b) (k : ℕ) : a / b ^ k ≤ a :=\n  div_le_self ha <| one_le_pow_of_one_le hb _\n#align div_pow_le div_pow_le\n-/\n\n",
+ "cast_le_pow_sub_div_sub":
+ "#print Nat.cast_le_pow_sub_div_sub /-\n/-- Bernoulli's inequality reformulated to estimate `(n : α)`. -/\ntheorem Nat.cast_le_pow_sub_div_sub (H : 1 < a) (n : ℕ) : (n : α) ≤ (a ^ n - 1) / (a - 1) :=\n  (le_div_iff (sub_pos.2 H)).2 <|\n    le_sub_left_of_add_le <| one_add_mul_sub_le_pow ((neg_le_self zero_le_one).trans H.le) _\n#align nat.cast_le_pow_sub_div_sub Nat.cast_le_pow_sub_div_sub\n-/\n\n",
+ "cast_le_pow_div_sub":
+ "#print Nat.cast_le_pow_div_sub /-\n/-- For any `a > 1` and a natural `n` we have `n ≤ a ^ n / (a - 1)`. See also\n`nat.cast_le_pow_sub_div_sub` for a stronger inequality with `a ^ n - 1` in the numerator. -/\ntheorem Nat.cast_le_pow_div_sub (H : 1 < a) (n : ℕ) : (n : α) ≤ a ^ n / (a - 1) :=\n  (n.cast_le_pow_sub_div_sub H).trans <| div_le_div_of_le (sub_nonneg.2 H.le) (sub_le_self _ zero_le_one)\n#align nat.cast_le_pow_div_sub Nat.cast_le_pow_div_sub\n-/\n\n"}

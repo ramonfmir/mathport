@@ -1,0 +1,6 @@
+{"sqrt_nonneg":
+ "theorem sqrt_nonneg (n : ℤ) : 0 ≤ sqrt n :=\n  coe_nat_nonneg _\n#align sqrt_nonneg sqrt_nonneg\n\n",
+ "sqrt_eq":
+ "/-\nCopyright (c) 2018 Kenny Lau. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Kenny Lau\n-/\ntheorem sqrt_eq (n : ℤ) : sqrt (n * n) = n.nat_abs := by rw [sqrt, ← nat_abs_mul_self, to_nat_coe_nat, Nat.sqrt_eq]\n#align sqrt_eq sqrt_eq\n\n",
+ "exists_mul_self":
+ "theorem exists_mul_self (x : ℤ) : (∃ n, n * n = x) ↔ sqrt x * sqrt x = x :=\n  ⟨fun ⟨n, hn⟩ => by rw [← hn, sqrt_eq, ← Int.ofNat_mul, nat_abs_mul_self], fun h => ⟨sqrt x, h⟩⟩\n#align exists_mul_self exists_mul_self\n\n"}

@@ -1,0 +1,4 @@
+{"finset_le":
+ "#print Directed.finset_le /-\n/-\nCopyright (c) 2018 Mario Carneiro. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Mario Carneiro, Kenny Lau\n-/\ntheorem Directed.finset_le {r : α → α → Prop} [is_trans α r] {ι} [hι : nonempty ι] {f : ι → α} (D : Directed r f)\n    (s : Finset ι) : ∃ z, ∀ i ∈ s, r (f i) (f z) :=\n  show ∃ z, ∀ i ∈ s.1, r (f i) (f z) from\n    Multiset.induction_on s.1\n      (let ⟨z⟩ := hι\n      ⟨z, fun _ => false.elim⟩)\n      fun i s ⟨j, H⟩ =>\n      let ⟨k, h₁, h₂⟩ := D i j\n      ⟨k, fun a h => or.cases_on (Multiset.mem_cons.1 h) (fun h => h.symm ▸ h₁) fun h => trans (H _ h) h₂⟩\n#align directed.finset_le Directed.finset_le\n-/\n\n",
+ "exists_le":
+ "#print Finset.exists_le /-\ntheorem Finset.exists_le [nonempty α] [preorder α] [IsDirected α (· ≤ ·)] (s : Finset α) : ∃ M, ∀ i ∈ s, i ≤ M :=\n  directed_id.finset_le _\n#align finset.exists_le Finset.exists_le\n-/\n\n"}

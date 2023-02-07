@@ -1,0 +1,68 @@
+{"not_mem_of_find_none":
+ "theorem not_mem_of_find_none [is_strict_weak_order α lt] {a : α} {t : rbtree α lt} : t.find a = none → a ∉ t := fun h =>\n  Iff.mpr (not_congr (find_correct a t)) <| by\n    intro h\n    cases' h with _ h; cases' h with h₁ h₂\n    rw [h] at h₁; contradiction\n#align not_mem_of_find_none not_mem_of_find_none\n\n",
+ "not_mem_of_empty":
+ "theorem not_mem_of_empty {t : rbtree α lt} (a : α) : t.empty = tt → a ∉ t := by\n  cases' t with n p <;> cases n <;> simp [empty, has_mem.mem, rbtree.mem, rbnode.mem, false_imp_iff]\n#align not_mem_of_empty not_mem_of_empty\n\n",
+ "not_mem_mk_rbtree":
+ "theorem not_mem_mk_rbtree : ∀ a : α, a ∉ mk_rbtree α lt := by simp [has_mem.mem, rbtree.mem, rbnode.mem, mk_rbtree]\n#align not_mem_mk_rbtree not_mem_mk_rbtree\n\n",
+ "min_is_minimal":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≈[ ] » -/\ntheorem min_is_minimal [is_strict_weak_order α lt] {a : α} {t : rbtree α lt} :\n    t.min = some a → ∀ {b}, b ∈ t → «expr ≈[ ] » a lt b ∨ lt a b := by\n  classical\n    cases t\n    apply rbnode.min_is_minimal\n    apply rbnode.is_searchable_of_well_formed\n    assumption\n#align min_is_minimal min_is_minimal\n\n",
+ "mem_of_min_eq":
+ "theorem mem_of_min_eq [is_irrefl α lt] {a : α} {t : rbtree α lt} : t.min = some a → a ∈ t := by cases t;\n  apply rbnode.mem_of_min_eq\n#align mem_of_min_eq mem_of_min_eq\n\n",
+ "mem_of_mem_of_eqv":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≈[ ] » -/\ntheorem mem_of_mem_of_eqv [is_strict_weak_order α lt] {t : rbtree α lt} {a b : α} :\n    a ∈ t → «expr ≈[ ] » a lt b → b ∈ t :=\n  by\n  cases' t with n p <;> simp [has_mem.mem, rbtree.mem] <;> clear p <;> induction n <;>\n        simp only [rbnode.mem, strict_weak_order.equiv, false_imp_iff] <;>\n      intro h₁ h₂ <;>\n    cases_type*or.1\n  iterate 2\n    \n    · have : rbnode.mem lt b n_lchild := n_ih_lchild h₁ h₂\n      simp [this]\n    · simp [incomp_trans_of lt h₂.swap h₁]\n    · have : rbnode.mem lt b n_rchild := n_ih_rchild h₁ h₂\n      simp [this]\n#align mem_of_mem_of_eqv mem_of_mem_of_eqv\n\n",
+ "mem_of_max_eq":
+ "theorem mem_of_max_eq [is_irrefl α lt] {a : α} {t : rbtree α lt} : t.max = some a → a ∈ t := by cases t;\n  apply rbnode.mem_of_max_eq\n#align mem_of_max_eq mem_of_max_eq\n\n",
+ "mem_of_find_some":
+ "theorem mem_of_find_some [is_strict_weak_order α lt] {a b : α} {t : rbtree α lt} : t.find a = some b → a ∈ t := fun h =>\n  Iff.mpr (find_correct a t) ⟨b, ⟨h, eqv_of_find_some h⟩⟩\n#align mem_of_find_some mem_of_find_some\n\n",
+ "mem_insert_of_mem":
+ "theorem mem_insert_of_mem [is_strict_weak_order α lt] {a : α} {t : rbtree α lt} (b : α) : a ∈ t → a ∈ t.insert b := by\n  cases t; apply rbnode.mem_insert_of_mem\n#align mem_insert_of_mem mem_insert_of_mem\n\n",
+ "mem_insert_of_incomp":
+ "theorem mem_insert_of_incomp {a b : α} (t : rbtree α lt) : ¬lt a b ∧ ¬lt b a → a ∈ t.insert b := by cases t;\n  apply rbnode.mem_insert_of_incomp\n#align mem_insert_of_incomp mem_insert_of_incomp\n\n",
+ "mem_insert_of_equiv":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≈[ ] » -/\ntheorem mem_insert_of_equiv {a b : α} (t : rbtree α lt) : «expr ≈[ ] » a lt b → a ∈ t.insert b := by cases t;\n  apply rbnode.mem_insert_of_incomp\n#align mem_insert_of_equiv mem_insert_of_equiv\n\n",
+ "mem_insert":
+ "theorem mem_insert [is_irrefl α lt] : ∀ (a : α) (t : rbtree α lt), a ∈ t.insert a := by intros ;\n  apply mem_insert_of_incomp; constructor <;> apply irrefl_of lt\n#align mem_insert mem_insert\n\n",
+ "max_is_maximal":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≈[ ] » -/\ntheorem max_is_maximal [is_strict_weak_order α lt] {a : α} {t : rbtree α lt} :\n    t.max = some a → ∀ {b}, b ∈ t → «expr ≈[ ] » a lt b ∨ lt b a :=\n  by\n  cases t\n  apply rbnode.max_is_maximal\n  apply rbnode.is_searchable_of_well_formed\n  assumption\n#align max_is_maximal max_is_maximal\n\n",
+ "is_searchable_of_well_formed":
+ "/-\nCopyright (c) 2017 Microsoft Corporation. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Leonardo de Moura\n-/\ntheorem is_searchable_of_well_formed {t : rbnode α} [is_strict_weak_order α lt] :\n    t.well_formed lt → is_searchable lt t none none := by\n  intro h; induction h\n  · constructor\n    simp [lift]\n  · subst h_n'\n    apply is_searchable_insert\n    assumption\n#align is_searchable_of_well_formed is_searchable_of_well_formed\n\n",
+ "is_red_black_of_well_formed":
+ "theorem is_red_black_of_well_formed {t : rbnode α} : t.well_formed lt → ∃ c n, is_red_black t c n :=\n  by\n  intro h; induction h\n  · exists black\n    exists 0\n    constructor\n  · cases' h_ih with c ih\n    cases' ih with n ih\n    subst h_n'\n    apply insert_is_red_black\n    assumption\n#align is_red_black_of_well_formed is_red_black_of_well_formed\n\n",
+ "insert_ne_mk_rbtree":
+ "theorem insert_ne_mk_rbtree (t : rbtree α lt) (a : α) : t.insert a ≠ mk_rbtree α lt :=\n  by\n  cases' t with n p\n  simpa [insert, mk_rbtree] using rbnode.insert_ne_leaf lt n a\n#align insert_ne_mk_rbtree insert_ne_mk_rbtree\n\n",
+ "incomp_or_mem_of_mem_ins":
+ "theorem incomp_or_mem_of_mem_ins {a b : α} {t : rbtree α lt} : a ∈ t.insert b → ¬lt a b ∧ ¬lt b a ∨ a ∈ t :=\n  equiv_or_mem_of_mem_insert\n#align incomp_or_mem_of_mem_ins incomp_or_mem_of_mem_ins\n\n",
+ "find_insert_of_not_eqv":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≈[ ] » -/\ntheorem find_insert_of_not_eqv [is_strict_weak_order α lt] {x y : α} (t : rbtree α lt) :\n    ¬«expr ≈[ ] » x lt y → (t.insert x).find y = t.find y :=\n  by\n  cases t; intro h; apply rbnode.find_insert_of_not_eqv lt h\n  apply rbnode.is_searchable_of_well_formed; assumption\n#align find_insert_of_not_eqv find_insert_of_not_eqv\n\n",
+ "find_insert_of_ne":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≈[ ] » -/\ntheorem find_insert_of_ne [is_strict_total_order α lt] {x y : α} (t : rbtree α lt) :\n    x ≠ y → (t.insert x).find y = t.find y := by\n  cases t; intro h\n  have : ¬«expr ≈[ ] » x lt y := fun h' => h (eq_of_eqv_lt h')\n  apply rbnode.find_insert_of_not_eqv lt this\n  apply rbnode.is_searchable_of_well_formed; assumption\n#align find_insert_of_ne find_insert_of_ne\n\n",
+ "find_insert_of_eqv":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≈[ ] » -/\ntheorem find_insert_of_eqv [is_strict_weak_order α lt] (t : rbtree α lt) {x y} :\n    «expr ≈[ ] » x lt y → (t.insert x).find y = some x :=\n  by\n  cases t; intro h; apply rbnode.find_insert_of_eqv lt h; apply rbnode.is_searchable_of_well_formed\n  assumption\n#align find_insert_of_eqv find_insert_of_eqv\n\n",
+ "find_insert_of_disj":
+ "theorem find_insert_of_disj [is_strict_weak_order α lt] {x y : α} (t : rbtree α lt) :\n    lt x y ∨ lt y x → (t.insert x).find y = t.find y :=\n  by\n  cases t; intro h; apply rbnode.find_insert_of_disj lt h\n  apply rbnode.is_searchable_of_well_formed\n  assumption\n#align find_insert_of_disj find_insert_of_disj\n\n",
+ "find_insert":
+ "theorem find_insert [is_strict_weak_order α lt] (t : rbtree α lt) (x) : (t.insert x).find x = some x :=\n  find_insert_of_eqv t (refl x)\n#align find_insert find_insert\n\n",
+ "find_eq_find_of_eqv":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≈[ ] » -/\ntheorem find_eq_find_of_eqv [is_strict_weak_order α lt] {a b : α} (t : rbtree α lt) :\n    «expr ≈[ ] » a lt b → t.find a = t.find b := by\n  cases t; apply rbnode.find_eq_find_of_eqv\n  apply rbnode.is_searchable_of_well_formed; assumption\n#align find_eq_find_of_eqv find_eq_find_of_eqv\n\n",
+ "find_correct_of_total":
+ "theorem find_correct_of_total [is_strict_total_order α lt] (a : α) (t : rbtree α lt) : a ∈ t ↔ t.find a = some a :=\n  iff.intro\n    (fun h =>\n      match Iff.mp (find_correct a t) h with\n      | ⟨b, HEq, heqv⟩ => by simp [HEq, (eq_of_eqv_lt heqv).symm])\n    fun h => Iff.mpr (find_correct a t) ⟨a, ⟨h, refl a⟩⟩\n#align find_correct_of_total find_correct_of_total\n\n",
+ "find_correct_exact":
+ "theorem find_correct_exact [is_strict_total_order α lt] (a : α) (t : rbtree α lt) : mem_exact a t ↔ t.find a = some a :=\n  by cases t; apply rbnode.find_correct_exact; apply rbnode.is_searchable_of_well_formed; assumption\n#align find_correct_exact find_correct_exact\n\n",
+ "find_correct":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≈[ ] » -/\ntheorem find_correct [is_strict_weak_order α lt] (a : α) (t : rbtree α lt) :\n    a ∈ t ↔ ∃ b, t.find a = some b ∧ «expr ≈[ ] » a lt b := by cases t; apply rbnode.find_correct;\n  apply rbnode.is_searchable_of_well_formed; assumption\n#align find_correct find_correct\n\n",
+ "eqv_of_find_some":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≈[ ] » -/\ntheorem eqv_of_find_some [is_strict_weak_order α lt] {a b : α} {t : rbtree α lt} :\n    t.find a = some b → «expr ≈[ ] » a lt b := by cases t; apply rbnode.eqv_of_find_some;\n  apply rbnode.is_searchable_of_well_formed; assumption\n#align eqv_of_find_some eqv_of_find_some\n\n",
+ "equiv_or_mem_of_mem_insert":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≈[ ] » -/\ntheorem equiv_or_mem_of_mem_insert {a b : α} {t : rbtree α lt} : a ∈ t.insert b → «expr ≈[ ] » a lt b ∨ a ∈ t := by\n  cases t; apply rbnode.equiv_or_mem_of_mem_insert\n#align equiv_or_mem_of_mem_insert equiv_or_mem_of_mem_insert\n\n",
+ "eq_or_mem_of_mem_ins":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≈[ ] » -/\ntheorem eq_or_mem_of_mem_ins [is_strict_total_order α lt] {a b : α} {t : rbtree α lt} :\n    a ∈ t.insert b → a = b ∨ a ∈ t := fun h =>\n  suffices «expr ≈[ ] » a lt b ∨ a ∈ t by simp [eqv_lt_iff_eq] at this <;> assumption\n  incomp_or_mem_of_mem_ins h\n#align eq_or_mem_of_mem_ins eq_or_mem_of_mem_ins\n\n",
+ "eq_of_find_some":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≈[ ] » -/\ntheorem eq_of_find_some [is_strict_total_order α lt] {a b : α} {t : rbtree α lt} : t.find a = some b → a = b := fun h =>\n  suffices «expr ≈[ ] » a lt b from eq_of_eqv_lt this\n  eqv_of_find_some h\n#align eq_of_find_some eq_of_find_some\n\n",
+ "eq_leaf_of_min_eq_none":
+ "theorem eq_leaf_of_min_eq_none {t : rbtree α lt} : t.min = none → t = mk_rbtree α lt := by cases t; intro h; congr ;\n  apply rbnode.eq_leaf_of_min_eq_none h\n#align eq_leaf_of_min_eq_none eq_leaf_of_min_eq_none\n\n",
+ "eq_leaf_of_max_eq_none":
+ "theorem eq_leaf_of_max_eq_none {t : rbtree α lt} : t.max = none → t = mk_rbtree α lt := by cases t; intro h; congr ;\n  apply rbnode.eq_leaf_of_max_eq_none h\n#align eq_leaf_of_max_eq_none eq_leaf_of_max_eq_none\n\n",
+ "contains_correct":
+ "theorem contains_correct [is_strict_weak_order α lt] (a : α) (t : rbtree α lt) : a ∈ t ↔ t.contains a = tt :=\n  by\n  have h := find_correct a t\n  simp [h, contains]; apply iff.intro\n  · intro h'\n    cases' h' with _ h'\n    cases h'\n    simp [*]\n    simp [option.is_some]\n  · intro h'\n    cases' heq : find t a with v\n    simp [HEq, option.is_some] at h'\n    contradiction\n    exists v\n    simp\n    apply eqv_of_find_some HEq\n#align contains_correct contains_correct\n\n",
+ "balanced":
+ "theorem balanced (t : rbtree α lt) : t.depth max ≤ 2 * t.depth min + 1 :=\n  by\n  cases' t with n p; simp only [depth]\n  have := rbnode.is_red_black_of_well_formed p\n  cases' this with _ this; cases' this with _ this\n  apply rbnode.balanced; assumption\n#align balanced balanced\n\n"}

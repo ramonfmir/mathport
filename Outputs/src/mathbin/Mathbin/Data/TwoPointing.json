@@ -1,0 +1,32 @@
+{"to_nontrivial":
+ "-- See note [reducible non instances]\n@[reducible]\ntheorem to_nontrivial : nontrivial α :=\n  ⟨⟨p.fst, p.snd, p.fst_ne_snd⟩⟩\n#align to_nontrivial to_nontrivial\n\n",
+ "swap_swap":
+ "@[simp]\ntheorem swap_swap : p.swap.swap = p := by ext <;> rfl\n#align swap_swap swap_swap\n\n",
+ "swap_snd":
+ "theorem swap_snd : p.swap.snd = p.fst :=\n  rfl\n#align swap_snd swap_snd\n\n",
+ "swap_fst":
+ "theorem swap_fst : p.swap.fst = p.snd :=\n  rfl\n#align swap_fst swap_fst\n\n",
+ "sum_snd":
+ "@[simp]\ntheorem sum_snd : (p.sum q).snd = sum.inr q.snd :=\n  rfl\n#align sum_snd sum_snd\n\n",
+ "sum_fst":
+ "@[simp]\ntheorem sum_fst : (p.sum q).fst = sum.inl p.fst :=\n  rfl\n#align sum_fst sum_fst\n\n",
+ "snd_ne_fst":
+ "/-\nCopyright (c) 2022 Yaël Dillies. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Yaël Dillies\n-/\ntheorem snd_ne_fst : p.snd ≠ p.fst :=\n  p.fst_ne_snd.symm\n#align snd_ne_fst snd_ne_fst\n\n",
+ "prod_snd":
+ "@[simp]\ntheorem prod_snd : (p.prod q).snd = (p.snd, q.snd) :=\n  rfl\n#align prod_snd prod_snd\n\n",
+ "prod_fst":
+ "@[simp]\ntheorem prod_fst : (p.prod q).fst = (p.fst, q.fst) :=\n  rfl\n#align prod_fst prod_fst\n\n",
+ "pi_snd":
+ "@[simp]\ntheorem pi_snd : (q.pi α).snd = const α q.snd :=\n  rfl\n#align pi_snd pi_snd\n\n",
+ "pi_fst":
+ "@[simp]\ntheorem pi_fst : (q.pi α).fst = const α q.fst :=\n  rfl\n#align pi_fst pi_fst\n\n",
+ "nonempty_two_pointing_iff":
+ "@[simp]\ntheorem nonempty_two_pointing_iff : nonempty (TwoPointing α) ↔ nontrivial α :=\n  ⟨fun ⟨p⟩ => p.to_nontrivial, @two_pointing.nonempty _⟩\n#align nonempty_two_pointing_iff nonempty_two_pointing_iff\n\n",
+ "bool_snd":
+ "@[simp]\ntheorem bool_snd : TwoPointing.bool.snd = tt :=\n  rfl\n#align bool_snd bool_snd\n\n",
+ "bool_fst":
+ "@[simp]\ntheorem bool_fst : TwoPointing.bool.fst = ff :=\n  rfl\n#align bool_fst bool_fst\n\n",
+ "Prop_snd":
+ "@[simp]\ntheorem Prop_snd : TwoPointing.prop.snd = true :=\n  rfl\n#align Prop_snd Prop_snd\n\n",
+ "Prop_fst":
+ "@[simp]\ntheorem Prop_fst : TwoPointing.prop.fst = false :=\n  rfl\n#align Prop_fst Prop_fst\n\n"}

@@ -1,0 +1,32 @@
+{"to_fun_eq_coe":
+ "@[simp]\ntheorem to_fun_eq_coe {f : locally_bounded_map α β} : f.to_fun = (f : α → β) :=\n  rfl\n#align to_fun_eq_coe to_fun_eq_coe\n\n",
+ "of_map_bounded_apply":
+ "@[simp]\ntheorem of_map_bounded_apply (f : α → β) {h} (a : α) : of_map_bounded f h a = f a :=\n  rfl\n#align of_map_bounded_apply of_map_bounded_apply\n\n",
+ "image":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\n/-\nCopyright (c) 2022 Yaël Dillies. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Yaël Dillies\n-/\ntheorem is_bounded.image [bornology α] [bornology β] [locally_bounded_map_class F α β] {f : F} {s : set α}\n    (hs : is_bounded s) : is_bounded («expr '' » f s) :=\n  comap_cobounded_le_iff.1 (comap_cobounded_le f) hs\n#align is_bounded.image is_bounded.image\n\n",
+ "id_comp":
+ "@[simp]\ntheorem id_comp (f : locally_bounded_map α β) : (locally_bounded_map.id β).comp f = f :=\n  ext fun a => rfl\n#align id_comp id_comp\n\n",
+ "id_apply":
+ "@[simp]\ntheorem id_apply (a : α) : locally_bounded_map.id α a = a :=\n  rfl\n#align id_apply id_apply\n\n",
+ "ext":
+ "@[ext]\ntheorem ext {f g : locally_bounded_map α β} (h : ∀ a, f a = g a) : f = g :=\n  fun_like.ext f g h\n#align ext ext\n\n",
+ "copy_eq":
+ "theorem copy_eq (f : locally_bounded_map α β) (f' : α → β) (h : f' = f) : f.copy f' h = f :=\n  fun_like.ext' h\n#align copy_eq copy_eq\n\n",
+ "comp_id":
+ "@[simp]\ntheorem comp_id (f : locally_bounded_map α β) : f.comp (locally_bounded_map.id α) = f :=\n  ext fun a => rfl\n#align comp_id comp_id\n\n",
+ "comp_assoc":
+ "@[simp]\ntheorem comp_assoc (f : locally_bounded_map γ δ) (g : locally_bounded_map β γ) (h : locally_bounded_map α β) :\n    (f.comp g).comp h = f.comp (g.comp h) :=\n  rfl\n#align comp_assoc comp_assoc\n\n",
+ "comp_apply":
+ "@[simp]\ntheorem comp_apply (f : locally_bounded_map β γ) (g : locally_bounded_map α β) (a : α) : f.comp g a = f (g a) :=\n  rfl\n#align comp_apply comp_apply\n\n",
+ "coe_of_map_bounded":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n@[simp]\ntheorem coe_of_map_bounded (f : α → β) {h} : «expr⇑ » (of_map_bounded f h) = f :=\n  rfl\n#align coe_of_map_bounded coe_of_map_bounded\n\n",
+ "coe_id":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n@[simp]\ntheorem coe_id : «expr⇑ » (locally_bounded_map.id α) = id :=\n  rfl\n#align coe_id coe_id\n\n",
+ "coe_copy":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n@[simp]\ntheorem coe_copy (f : locally_bounded_map α β) (f' : α → β) (h : f' = f) : «expr⇑ » (f.copy f' h) = f' :=\n  rfl\n#align coe_copy coe_copy\n\n",
+ "coe_comp":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n@[simp]\ntheorem coe_comp (f : locally_bounded_map β γ) (g : locally_bounded_map α β) : «expr⇑ » (f.comp g) = f ∘ g :=\n  rfl\n#align coe_comp coe_comp\n\n",
+ "cancel_right":
+ "theorem cancel_right {g₁ g₂ : locally_bounded_map β γ} {f : locally_bounded_map α β} (hf : surjective f) :\n    g₁.comp f = g₂.comp f ↔ g₁ = g₂ :=\n  ⟨fun h => ext <| hf.forall.2 <| fun_like.ext_iff.1 h, congr_arg _⟩\n#align cancel_right cancel_right\n\n",
+ "cancel_left":
+ "theorem cancel_left {g : locally_bounded_map β γ} {f₁ f₂ : locally_bounded_map α β} (hg : injective g) :\n    g.comp f₁ = g.comp f₂ ↔ f₁ = f₂ :=\n  ⟨fun h => ext fun a => hg <| by rw [← comp_apply, h, comp_apply], congr_arg _⟩\n#align cancel_left cancel_left\n\n"}

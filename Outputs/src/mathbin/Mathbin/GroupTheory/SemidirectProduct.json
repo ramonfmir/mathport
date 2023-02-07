@@ -1,0 +1,76 @@
+{"right_inr":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⋊[ ] » -/\n@[simp]\ntheorem right_inr (g : G) : (inr g : «expr ⋊[ ] » N φ G).right = g :=\n  rfl\n#align right_inr right_inr\n\n",
+ "right_inl":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⋊[ ] » -/\n@[simp]\ntheorem right_inl (n : N) : (inl n : «expr ⋊[ ] » N φ G).right = 1 :=\n  rfl\n#align right_inl right_inl\n\n",
+ "right_hom_surjective":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⋊[ ] » -/\ntheorem right_hom_surjective : function.surjective (right_hom : «expr ⋊[ ] » N φ G → G) :=\n  Function.surjective_iff_hasRightInverse.2 ⟨inr, right_hom_inr⟩\n#align right_hom_surjective right_hom_surjective\n\n",
+ "right_hom_inr":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⋊[ ] » -/\n@[simp]\ntheorem right_hom_inr (g : G) : right_hom (inr g : «expr ⋊[ ] » N φ G) = g := by simp [right_hom]\n#align right_hom_inr right_hom_inr\n\n",
+ "right_hom_inl":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⋊[ ] » -/\n@[simp]\ntheorem right_hom_inl (n : N) : right_hom (inl n : «expr ⋊[ ] » N φ G) = 1 := by simp [right_hom]\n#align right_hom_inl right_hom_inl\n\n",
+ "right_hom_eq_right":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⋊[ ] » -/\n@[simp]\ntheorem right_hom_eq_right : (right_hom : «expr ⋊[ ] » N φ G → G) = right :=\n  rfl\n#align right_hom_eq_right right_hom_eq_right\n\n",
+ "right_hom_comp_map":
+ "@[simp]\ntheorem right_hom_comp_map : right_hom.comp (map f₁ f₂ h) = f₂.comp right_hom :=\n  rfl\n#align right_hom_comp_map right_hom_comp_map\n\n",
+ "right_hom_comp_inr":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →* » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⋊[ ] » -/\n@[simp]\ntheorem right_hom_comp_inr : (right_hom : «expr →* » («expr ⋊[ ] » N φ G) G).comp inr = MonoidHom.id _ := by\n  ext <;> simp [right_hom]\n#align right_hom_comp_inr right_hom_comp_inr\n\n",
+ "right_hom_comp_inl":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →* » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⋊[ ] » -/\n@[simp]\ntheorem right_hom_comp_inl : (right_hom : «expr →* » («expr ⋊[ ] » N φ G) G).comp inl = 1 := by ext <;> simp [right_hom]\n#align right_hom_comp_inl right_hom_comp_inl\n\n",
+ "range_inl_eq_ker_right_hom":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →* » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⋊[ ] » -/\ntheorem range_inl_eq_ker_right_hom : (inl : «expr →* » N («expr ⋊[ ] » N φ G)).range = right_hom.ker :=\n  le_antisymm (fun _ => by simp (config := { contextual := true }) [monoid_hom.mem_ker, eq_comm]) fun x hx =>\n    ⟨x.left, by ext <;> simp_all [monoid_hom.mem_ker]⟩\n#align range_inl_eq_ker_right_hom range_inl_eq_ker_right_hom\n\n",
+ "one_right":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⋊[ ] » -/\n@[simp]\ntheorem one_right : (1 : «expr ⋊[ ] » N φ G).right = 1 :=\n  rfl\n#align one_right one_right\n\n",
+ "one_left":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⋊[ ] » -/\n/-\nCopyright (c) 2020 Chris Hughes. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Chris Hughes\n-/\n@[simp]\ntheorem one_left : (1 : «expr ⋊[ ] » N φ G).left = 1 :=\n  rfl\n#align one_left one_left\n\n",
+ "mul_right":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⋊[ ] » -/\n@[simp]\ntheorem mul_right (a b : «expr ⋊[ ] » N φ G) : (a * b).right = a.right * b.right :=\n  rfl\n#align mul_right mul_right\n\n",
+ "mul_left":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⋊[ ] » -/\n@[simp]\ntheorem mul_left (a b : «expr ⋊[ ] » N φ G) : (a * b).left = a.left * φ a.right b.left :=\n  rfl\n#align mul_left mul_left\n\n",
+ "mk_eq_inl_mul_inr":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⋊[ ] » -/\n@[simp]\ntheorem mk_eq_inl_mul_inr (g : G) (n : N) : (⟨n, g⟩ : «expr ⋊[ ] » N φ G) = inl n * inr g := by ext <;> simp\n#align mk_eq_inl_mul_inr mk_eq_inl_mul_inr\n\n",
+ "map_right":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⋊[ ] » -/\n@[simp]\ntheorem map_right (g : «expr ⋊[ ] » N φ G) : (map f₁ f₂ h g).right = f₂ g.right :=\n  rfl\n#align map_right map_right\n\n",
+ "map_left":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⋊[ ] » -/\n@[simp]\ntheorem map_left (g : «expr ⋊[ ] » N φ G) : (map f₁ f₂ h g).left = f₁ g.left :=\n  rfl\n#align map_left map_left\n\n",
+ "map_inr":
+ "@[simp]\ntheorem map_inr (g : G) : map f₁ f₂ h (inr g) = inr (f₂ g) := by simp [map]\n#align map_inr map_inr\n\n",
+ "map_inl":
+ "@[simp]\ntheorem map_inl (n : N) : map f₁ f₂ h (inl n) = inl (f₁ n) := by simp [map]\n#align map_inl map_inl\n\n",
+ "map_comp_inr":
+ "@[simp]\ntheorem map_comp_inr : (map f₁ f₂ h).comp inr = inr.comp f₂ := by ext <;> simp [map]\n#align map_comp_inr map_comp_inr\n\n",
+ "map_comp_inl":
+ "@[simp]\ntheorem map_comp_inl : (map f₁ f₂ h).comp inl = inl.comp f₁ := by ext <;> simp\n#align map_comp_inl map_comp_inl\n\n",
+ "lift_unique":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →* » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⋊[ ] » -/\ntheorem lift_unique (F : «expr →* » («expr ⋊[ ] » N φ G) H) :\n    F = lift (F.comp inl) (F.comp inr) fun _ => by ext <;> simp [inl_aut] :=\n  by\n  ext\n  simp only [lift, MonoidHom.comp_apply, MonoidHom.coe_mk]\n  rw [← F.map_mul, inl_left_mul_inr_right]\n#align lift_unique lift_unique\n\n",
+ "lift_inr":
+ "@[simp]\ntheorem lift_inr (g : G) : lift f₁ f₂ h (inr g) = f₂ g := by simp [lift]\n#align lift_inr lift_inr\n\n",
+ "lift_inl":
+ "@[simp]\ntheorem lift_inl (n : N) : lift f₁ f₂ h (inl n) = f₁ n := by simp [lift]\n#align lift_inl lift_inl\n\n",
+ "lift_comp_inr":
+ "@[simp]\ntheorem lift_comp_inr : (lift f₁ f₂ h).comp inr = f₂ := by ext <;> simp\n#align lift_comp_inr lift_comp_inr\n\n",
+ "lift_comp_inl":
+ "@[simp]\ntheorem lift_comp_inl : (lift f₁ f₂ h).comp inl = f₁ := by ext <;> simp\n#align lift_comp_inl lift_comp_inl\n\n",
+ "left_inr":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⋊[ ] » -/\n@[simp]\ntheorem left_inr (g : G) : (inr g : «expr ⋊[ ] » N φ G).left = 1 :=\n  rfl\n#align left_inr left_inr\n\n",
+ "left_inl":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⋊[ ] » -/\n@[simp]\ntheorem left_inl (n : N) : (inl n : «expr ⋊[ ] » N φ G).left = n :=\n  rfl\n#align left_inl left_inl\n\n",
+ "inv_right":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⋊[ ] » -/\n@[simp]\ntheorem inv_right (a : «expr ⋊[ ] » N φ G) : a⁻¹.right = a.right⁻¹ :=\n  rfl\n#align inv_right inv_right\n\n",
+ "inv_left":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⋊[ ] » -/\n@[simp]\ntheorem inv_left (a : «expr ⋊[ ] » N φ G) : a⁻¹.left = φ a.right⁻¹ a.left⁻¹ :=\n  rfl\n#align inv_left inv_left\n\n",
+ "inr_injective":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⋊[ ] » -/\ntheorem inr_injective : function.injective (inr : G → «expr ⋊[ ] » N φ G) :=\n  function.injective_iff_has_left_inverse.2 ⟨right, right_inr⟩\n#align inr_injective inr_injective\n\n",
+ "inr_inj":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⋊[ ] » -/\n@[simp]\ntheorem inr_inj {g₁ g₂ : G} : (inr g₁ : «expr ⋊[ ] » N φ G) = inr g₂ ↔ g₁ = g₂ :=\n  inr_injective.eq_iff\n#align inr_inj inr_inj\n\n",
+ "inl_left_mul_inr_right":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⋊[ ] » -/\n@[simp]\ntheorem inl_left_mul_inr_right (x : «expr ⋊[ ] » N φ G) : inl x.left * inr x.right = x := by ext <;> simp\n#align inl_left_mul_inr_right inl_left_mul_inr_right\n\n",
+ "inl_injective":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⋊[ ] » -/\ntheorem inl_injective : function.injective (inl : N → «expr ⋊[ ] » N φ G) :=\n  function.injective_iff_has_left_inverse.2 ⟨left, left_inl⟩\n#align inl_injective inl_injective\n\n",
+ "inl_inj":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⋊[ ] » -/\n@[simp]\ntheorem inl_inj {n₁ n₂ : N} : (inl n₁ : «expr ⋊[ ] » N φ G) = inl n₂ ↔ n₁ = n₂ :=\n  inl_injective.eq_iff\n#align inl_inj inl_inj\n\n",
+ "inl_aut_inv":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⋊[ ] » -/\ntheorem inl_aut_inv (g : G) (n : N) : (inl ((φ g)⁻¹ n) : «expr ⋊[ ] » N φ G) = inr g⁻¹ * inl n * inr g := by\n  rw [← MonoidHom.map_inv, inl_aut, inv_inv]\n#align inl_aut_inv inl_aut_inv\n\n",
+ "inl_aut":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⋊[ ] » -/\ntheorem inl_aut (g : G) (n : N) : (inl (φ g n) : «expr ⋊[ ] » N φ G) = inr g * inl n * inr g⁻¹ := by ext <;> simp\n#align inl_aut inl_aut\n\n",
+ "hom_ext":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →* » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⋊[ ] » -/\n/-- Two maps out of the semidirect product are equal if they're equal after composition\n  with both `inl` and `inr` -/\ntheorem hom_ext {f g : «expr →* » («expr ⋊[ ] » N φ G) H} (hl : f.comp inl = g.comp inl)\n    (hr : f.comp inr = g.comp inr) : f = g :=\n  by\n  rw [lift_unique f, lift_unique g]\n  simp only [*]\n#align hom_ext hom_ext\n\n"}

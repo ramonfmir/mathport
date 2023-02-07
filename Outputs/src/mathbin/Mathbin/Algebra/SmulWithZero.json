@@ -1,0 +1,16 @@
+{"zero_smul":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n#print zero_smul /-\n/-\nCopyright (c) 2021 Damiano Testa. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Damiano Testa\n-/\n@[simp]\ntheorem zero_smul (m : M) : «expr • » (0 : R) m = 0 :=\n  smul_with_zero.zero_smul m\n#align zero_smul zero_smul\n-/\n\n",
+ "subsingleton":
+ "-- these fields are copied from `smul_with_zero`, as `extends` behaves poorly\n-- see Note [lower instance priority]\nprotected theorem mul_action_with_zero.subsingleton [MulActionWithZero R M] [subsingleton R] : subsingleton M :=\n  ⟨fun x y => by rw [← one_smul R x, ← one_smul R y, subsingleton.elim (1 : R) 0, zero_smul, zero_smul]⟩\n#align mul_action_with_zero.subsingleton mul_action_with_zero.subsingleton\n\n",
+ "smul_inv₀":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n#print smul_inv₀ /-\ntheorem smul_inv₀ [SMulCommClass α β β] [IsScalarTower α β β] (c : α) (x : β) : («expr • » c x)⁻¹ = «expr • » c⁻¹ x⁻¹ :=\n  by\n  obtain rfl | hc := eq_or_ne c 0\n  · simp only [inv_zero, zero_smul]\n  obtain rfl | hx := eq_or_ne x 0\n  · simp only [inv_zero, smul_zero]\n  · refine' inv_eq_of_mul_eq_one_left _\n    rw [smul_mul_smul, inv_mul_cancel hc, inv_mul_cancel hx, one_smul]\n#align smul_inv₀ smul_inv₀\n-/\n\n",
+ "smul_eq_zero_of_right":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\ntheorem smul_eq_zero_of_right (a : R) (h : b = 0) : «expr • » a b = 0 :=\n  h.symm ▸ smul_zero a\n#align smul_eq_zero_of_right smul_eq_zero_of_right\n\n",
+ "smul_eq_zero_of_left":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\ntheorem smul_eq_zero_of_left (h : a = 0) (b : M) : «expr • » a b = 0 :=\n  h.symm ▸ zero_smul _ b\n#align smul_eq_zero_of_left smul_eq_zero_of_left\n\n",
+ "right_ne_zero_of_smul":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\ntheorem right_ne_zero_of_smul : «expr • » a b ≠ 0 → b ≠ 0 :=\n  mt <| smul_eq_zero_of_right a\n#align right_ne_zero_of_smul right_ne_zero_of_smul\n\n",
+ "nontrivial":
+ "protected theorem mul_action_with_zero.nontrivial [MulActionWithZero R M] [nontrivial M] : nontrivial R :=\n  (subsingleton_or_nontrivial R).resolve_left fun hR => not_subsingleton M <| mul_action_with_zero.subsingleton R M\n#align mul_action_with_zero.nontrivial mul_action_with_zero.nontrivial\n\n",
+ "left_ne_zero_of_smul":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\ntheorem left_ne_zero_of_smul : «expr • » a b ≠ 0 → a ≠ 0 :=\n  mt fun h => smul_eq_zero_of_left h b\n#align left_ne_zero_of_smul left_ne_zero_of_smul\n\n"}

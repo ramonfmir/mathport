@@ -1,0 +1,10 @@
+{"reverse_eq":
+ "/-\nCopyright (c) 2020 Google LLC. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Chris Wong\n-/\ntheorem reverse_eq {l : list α} (p : Palindrome l) : reverse l = l :=\n  palindrome.rec_on p rfl (fun _ => rfl) fun x l p h => by simp [h]\n#align reverse_eq reverse_eq\n\n",
+ "of_reverse_eq":
+ "theorem of_reverse_eq {l : list α} : reverse l = l → Palindrome l :=\n  by\n  refine' bidirectional_rec_on l (fun _ => palindrome.nil) (fun a _ => palindrome.singleton a) _\n  intro x l y hp hr\n  rw [reverse_cons, reverse_append] at hr\n  rw [head_eq_of_cons_eq hr]\n  have : palindrome l := hp (append_inj_left' (tail_eq_of_cons_eq hr) rfl)\n  exact palindrome.cons_concat x this\n#align of_reverse_eq of_reverse_eq\n\n",
+ "map":
+ "protected theorem map (f : α → β) (p : Palindrome l) : Palindrome (map f l) :=\n  of_reverse_eq <| by rw [← map_reverse, p.reverse_eq]\n#align map map\n\n",
+ "iff_reverse_eq":
+ "theorem iff_reverse_eq {l : list α} : Palindrome l ↔ reverse l = l :=\n  iff.intro reverse_eq of_reverse_eq\n#align iff_reverse_eq iff_reverse_eq\n\n",
+ "append_reverse":
+ "theorem append_reverse (l : list α) : Palindrome (l ++ reverse l) :=\n  by\n  apply of_reverse_eq\n  rw [reverse_append, reverse_reverse]\n#align append_reverse append_reverse\n\n"}

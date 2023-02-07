@@ -1,0 +1,110 @@
+{"unique_quotient_iff_eq_top":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⧸ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\ntheorem unique_quotient_iff_eq_top : nonempty (unique («expr ⧸ » M p)) ↔ p = «expr⊤» :=\n  ⟨fun ⟨h⟩ => subsingleton_quotient_iff_eq_top.mp (@unique.subsingleton h),\n    by\n    rintro rfl\n    exact ⟨quotient_top.unique⟩⟩\n#align unique_quotient_iff_eq_top unique_quotient_iff_eq_top\n\n",
+ "subsingleton_quotient_iff_eq_top":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⧸ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\ntheorem subsingleton_quotient_iff_eq_top : subsingleton («expr ⧸ » M p) ↔ p = «expr⊤» :=\n  by\n  constructor\n  · rintro h\n    refine' eq_top_iff.mpr fun x _ => _\n    have : x - 0 ∈ p := (submodule.quotient.eq p).mp (subsingleton.elim _ _)\n    rwa [sub_zero] at this\n  · rintro rfl\n    infer_instance\n#align subsingleton_quotient_iff_eq_top subsingleton_quotient_iff_eq_top\n\n",
+ "span_preimage_eq":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₛₗ[ ] » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\ntheorem span_preimage_eq [RingHomSurjective τ₁₂] {f : «expr →ₛₗ[ ] » M τ₁₂ M₂} {s : set M₂} (h₀ : s.nonempty)\n    (h₁ : s ⊆ range f) : span R («expr ⁻¹' » f s) = (span R₂ s).comap f :=\n  by\n  suffices (span R₂ s).comap f ≤ span R («expr ⁻¹' » f s) by exact le_antisymm (span_preimage_le f s) this\n  have hk : ker f ≤ span R («expr ⁻¹' » f s) :=\n    by\n    let y := Classical.choose h₀\n    have hy : y ∈ s := Classical.choose_spec h₀\n    rw [ker_le_iff]\n    use y, h₁ hy\n    rw [← Set.singleton_subset_iff] at hy\n    exact Set.Subset.trans subset_span (span_mono (Set.preimage_mono hy))\n  rw [← left_eq_sup] at hk\n  rw [f.range_coe] at h₁\n  rw [hk, ← linear_map.map_le_map_iff, map_span, map_comap_eq, Set.image_preimage_eq_of_subset h₁]\n  exact inf_le_right\n#align span_preimage_eq span_preimage_eq\n\n",
+ "restrict_scalars_equiv_symm_mk":
+ "@[simp]\ntheorem restrict_scalars_equiv_symm_mk [Ring S] [SMul S R] [Module S M] [IsScalarTower S R M] (P : submodule R M)\n    (x : M) : (restrict_scalars_equiv S P).symm (mk x) = mk x :=\n  rfl\n#align restrict_scalars_equiv_symm_mk restrict_scalars_equiv_symm_mk\n\n",
+ "restrict_scalars_equiv_mk":
+ "@[simp]\ntheorem restrict_scalars_equiv_mk [Ring S] [SMul S R] [Module S M] [IsScalarTower S R M] (P : submodule R M) (x : M) :\n    restrict_scalars_equiv S P (mk x) = mk x :=\n  rfl\n#align restrict_scalars_equiv_mk restrict_scalars_equiv_mk\n\n",
+ "range_mkq_comp":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₛₗ[ ] » -/\ntheorem range_mkq_comp (f : «expr →ₛₗ[ ] » M τ₁₂ M₂) : f.range.mkq.comp f = 0 :=\n  linear_map.ext fun x => by simp\n#align range_mkq_comp range_mkq_comp\n\n",
+ "range_mkq":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n@[simp]\ntheorem range_mkq : p.mkq.range = «expr⊤» :=\n  eq_top_iff'.2 <| by rintro ⟨x⟩ <;> exact ⟨x, rfl⟩\n#align range_mkq range_mkq\n\n",
+ "range_liftq":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₛₗ[ ] » -/\ntheorem range_liftq [RingHomSurjective τ₁₂] (f : «expr →ₛₗ[ ] » M τ₁₂ M₂) (h) : range (p.liftq f h) = range f := by\n  simpa only [range_eq_map] using map_liftq _ _ _ _\n#align range_liftq range_liftq\n\n",
+ "range_eq_top_of_cancel":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₗ[ ] » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⧸ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₛₗ[ ] » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₗ[ ] » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⧸ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n/-- An epimorphism is surjective. -/\ntheorem range_eq_top_of_cancel {f : «expr →ₛₗ[ ] » M τ₁₂ M₂}\n    (h : ∀ u v : «expr →ₗ[ ] » M₂ R₂ («expr ⧸ » M₂ f.range), u.comp f = v.comp f → u = v) : f.range = «expr⊤» :=\n  by\n  have h₁ : (0 : «expr →ₗ[ ] » M₂ R₂ («expr ⧸ » M₂ f.range)).comp f = 0 := zero_comp _\n  rw [← submodule.ker_mkq f.range, ← h 0 f.range.mkq (eq.trans h₁ (range_mkq_comp _).symm)]\n  exact ker_zero\n#align range_eq_top_of_cancel range_eq_top_of_cancel\n\n",
+ "quotient_rel_r_def":
+ "/-\nCopyright (c) 2017 Johannes Hölzl. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Johannes Hölzl, Mario Carneiro, Kevin Buzzard, Yury Kudryashov\n-/\n-- For most of this file we work over a noncommutative ring\ntheorem quotient_rel_r_def {x y : M} : @Setoid.r _ p.quotient_rel x y ↔ x - y ∈ p :=\n  iff.trans\n    (by\n      rw [left_rel_apply, sub_eq_add_neg, neg_add, neg_neg]\n      rfl)\n    neg_mem_iff\n#align quotient_rel_r_def quotient_rel_r_def\n\n",
+ "quot_mk_eq_mk":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⧸ » -/\n@[simp]\ntheorem quot_mk_eq_mk {p : submodule R M} (x : M) : (Quot.mk _ x : «expr ⧸ » M p) = mk x :=\n  rfl\n#align quot_mk_eq_mk quot_mk_eq_mk\n\n",
+ "quot_hom_ext":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₗ[ ] » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⧸ » -/\ntheorem quot_hom_ext ⦃f g : «expr →ₗ[ ] » («expr ⧸ » M p) R M₂⦄ (h : ∀ x, f (quotient.mk x) = g (quotient.mk x)) :\n    f = g :=\n  linear_map.ext fun x => Quotient.inductionOn' x h\n#align quot_hom_ext quot_hom_ext\n\n",
+ "quot_equiv_of_eq_mk":
+ "@[simp]\ntheorem quot_equiv_of_eq_mk (h : p = p') (x : M) :\n    submodule.quot_equiv_of_eq p p' h (submodule.quotient.mk x) = submodule.quotient.mk x :=\n  rfl\n#align quot_equiv_of_eq_mk quot_equiv_of_eq_mk\n\n",
+ "quot_equiv_of_eq_bot_symm_apply":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n@[simp]\ntheorem quot_equiv_of_eq_bot_symm_apply (hp : p = «expr⊥») (x : M) :\n    (p.quot_equiv_of_eq_bot hp).symm x = quotient.mk x :=\n  rfl\n#align quot_equiv_of_eq_bot_symm_apply quot_equiv_of_eq_bot_symm_apply\n\n",
+ "quot_equiv_of_eq_bot_apply_mk":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n@[simp]\ntheorem quot_equiv_of_eq_bot_apply_mk (hp : p = «expr⊥») (x : M) : p.quot_equiv_of_eq_bot hp (quotient.mk x) = x :=\n  rfl\n#align quot_equiv_of_eq_bot_apply_mk quot_equiv_of_eq_bot_apply_mk\n\n",
+ "nontrivial_of_lt_top":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⧸ » -/\ntheorem nontrivial_of_lt_top (h : p < «expr⊤») : nontrivial («expr ⧸ » M p) :=\n  by\n  obtain ⟨x, _, not_mem_s⟩ := SetLike.exists_of_lt h\n  refine' ⟨⟨mk x, 0, _⟩⟩\n  simpa using not_mem_s\n#align nontrivial_of_lt_top nontrivial_of_lt_top\n\n",
+ "mkq_surjective":
+ "theorem mkq_surjective (A : submodule R M) : function.surjective A.mkq := by rintro ⟨x⟩ <;> exact ⟨x, rfl⟩\n#align mkq_surjective mkq_surjective\n\n",
+ "mkq_map_self":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n@[simp]\ntheorem mkq_map_self : map p.mkq p = «expr⊥» := by\n  rw [eq_bot_iff, map_le_iff_le_comap, comap_bot, ker_mkq] <;> exact le_rfl\n#align mkq_map_self mkq_map_self\n\n",
+ "mkq_apply":
+ "@[simp]\ntheorem mkq_apply (x : M) : p.mkq x = quotient.mk x :=\n  rfl\n#align mkq_apply mkq_apply\n\n",
+ "mk_zero":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⧸ » -/\n@[simp]\ntheorem mk_zero : mk 0 = (0 : «expr ⧸ » M p) :=\n  rfl\n#align mk_zero mk_zero\n\n",
+ "mk_surjective":
+ "theorem mk_surjective : function.surjective (@mk _ _ _ _ _ p) :=\n  by\n  rintro ⟨x⟩\n  exact ⟨x, rfl⟩\n#align mk_surjective mk_surjective\n\n",
+ "mk_sub":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⧸ » -/\n@[simp]\ntheorem mk_sub : (mk (x - y) : «expr ⧸ » M p) = mk x - mk y :=\n  rfl\n#align mk_sub mk_sub\n\n",
+ "mk_smul":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⧸ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n@[simp]\ntheorem mk_smul (r : S) (x : M) : (mk («expr • » r x) : «expr ⧸ » M p) = «expr • » r (mk x) :=\n  rfl\n#align mk_smul mk_smul\n\n",
+ "mk_neg":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⧸ » -/\n@[simp]\ntheorem mk_neg : (mk (-x) : «expr ⧸ » M p) = -mk x :=\n  rfl\n#align mk_neg mk_neg\n\n",
+ "mk_eq_zero":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⧸ » -/\n@[simp]\ntheorem mk_eq_zero : (mk x : «expr ⧸ » M p) = 0 ↔ x ∈ p := by simpa using (quotient.eq p : mk x = 0 ↔ _)\n#align mk_eq_zero mk_eq_zero\n\n",
+ "mk_eq_mk":
+ "@[simp]\ntheorem mk_eq_mk {p : submodule R M} (x : M) : @Quotient.mk'' _ (quotient_rel p) x = mk x :=\n  rfl\n#align mk_eq_mk mk_eq_mk\n\n",
+ "mk_add":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⧸ » -/\n@[simp]\ntheorem mk_add : (mk (x + y) : «expr ⧸ » M p) = mk x + mk y :=\n  rfl\n#align mk_add mk_add\n\n",
+ "mk'_eq_mk":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⧸ » -/\n@[simp]\ntheorem mk'_eq_mk {p : submodule R M} (x : M) : (quotient.mk' x : «expr ⧸ » M p) = mk x :=\n  rfl\n#align mk'_eq_mk mk'_eq_mk\n\n",
+ "mapq_zero":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₛₗ[ ] » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₛₗ[ ] » -/\n@[simp]\ntheorem mapq_zero (h : p ≤ q.comap (0 : «expr →ₛₗ[ ] » M τ₁₂ M₂) := (by simp)) :\n    p.mapq q (0 : «expr →ₛₗ[ ] » M τ₁₂ M₂) h = 0 := by\n  ext\n  simp\n#align mapq_zero mapq_zero\n\n",
+ "mapq_pow":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₗ[ ] » -/\ntheorem mapq_pow {f : «expr →ₗ[ ] » M R M} (h : p ≤ p.comap f) (k : ℕ)\n    (h' : p ≤ p.comap (f ^ k) := p.le_comap_pow_of_le_comap h k) : p.mapq p (f ^ k) h' = p.mapq p f h ^ k :=\n  by\n  induction' k with k ih\n  · simp [linear_map.one_eq_id]\n  · simp only [linear_map.iterate_succ, ← ih]\n    apply p.mapq_comp\n#align mapq_pow mapq_pow\n\n",
+ "mapq_mkq":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₛₗ[ ] » -/\ntheorem mapq_mkq (f : «expr →ₛₗ[ ] » M τ₁₂ M₂) {h} : (mapq p q f h).comp p.mkq = q.mkq.comp f := by ext x <;> rfl\n#align mapq_mkq mapq_mkq\n\n",
+ "mapq_id":
+ "@[simp]\ntheorem mapq_id\n    (h : p ≤ p.comap linear_map.id :=\n      (by\n        rw [comap_id]\n        exact le_refl _)) :\n    p.mapq p linear_map.id h = linear_map.id := by\n  ext\n  simp\n#align mapq_id mapq_id\n\n",
+ "mapq_comp":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →+* » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →+* » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₛₗ[ ] » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₛₗ[ ] » -/\n/-- Given submodules `p ⊆ M`, `p₂ ⊆ M₂`, `p₃ ⊆ M₃` and maps `f : M → M₂`, `g : M₂ → M₃` inducing\n`mapq f : M ⧸ p → M₂ ⧸ p₂` and `mapq g : M₂ ⧸ p₂ → M₃ ⧸ p₃` then\n`mapq (g ∘ f) = (mapq g) ∘ (mapq f)`. -/\ntheorem mapq_comp {R₃ M₃ : Type _} [Ring R₃] [add_comm_group M₃] [Module R₃ M₃] (p₂ : submodule R₂ M₂)\n    (p₃ : submodule R₃ M₃) {τ₂₃ : «expr →+* » R₂ R₃} {τ₁₃ : «expr →+* » R R₃} [RingHomCompTriple τ₁₂ τ₂₃ τ₁₃]\n    (f : «expr →ₛₗ[ ] » M τ₁₂ M₂) (g : «expr →ₛₗ[ ] » M₂ τ₂₃ M₃) (hf : p ≤ p₂.comap f) (hg : p₂ ≤ p₃.comap g)\n    (h := hf.trans (comap_mono hg)) : p.mapq p₃ (g.comp f) h = (p₂.mapq p₃ g hg).comp (p.mapq p₂ f hf) :=\n  by\n  ext\n  simp\n#align mapq_comp mapq_comp\n\n",
+ "mapq_apply":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₛₗ[ ] » -/\n@[simp]\ntheorem mapq_apply (f : «expr →ₛₗ[ ] » M τ₁₂ M₂) {h} (x : M) : mapq p q f h (quotient.mk x) = quotient.mk (f x) :=\n  rfl\n#align mapq_apply mapq_apply\n\n",
+ "map_mkq_eq_top":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊔ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n@[simp]\ntheorem map_mkq_eq_top : map p.mkq p' = «expr⊤» ↔ «expr ⊔ » p p' = «expr⊤» := by\n  simp only [map_eq_top_iff p.range_mkq, sup_comm, ker_mkq]\n#align map_mkq_eq_top map_mkq_eq_top\n\n",
+ "map_liftq":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₛₗ[ ] » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⧸ » -/\ntheorem map_liftq [RingHomSurjective τ₁₂] (f : «expr →ₛₗ[ ] » M τ₁₂ M₂) (h) (q : submodule R («expr ⧸ » M p)) :\n    q.map (p.liftq f h) = (q.comap p.mkq).map f :=\n  le_antisymm (by rintro _ ⟨⟨x⟩, hxq, rfl⟩ <;> exact ⟨x, hxq, rfl⟩)\n    (by rintro _ ⟨x, hxq, rfl⟩ <;> exact ⟨Quotient.mk'' x, hxq, rfl⟩)\n#align map_liftq map_liftq\n\n",
+ "linear_map_qext":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₛₗ[ ] » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⧸ » -/\n/-- Two `linear_map`s from a quotient module are equal if their compositions with\n`submodule.mkq` are equal.\n\nSee note [partially-applied ext lemmas]. -/\n@[ext]\ntheorem linear_map_qext ⦃f g : «expr →ₛₗ[ ] » («expr ⧸ » M p) τ₁₂ M₂⦄ (h : f.comp p.mkq = g.comp p.mkq) : f = g :=\n  linear_map.ext fun x => Quotient.inductionOn' x <| (linear_map.congr_fun h : _)\n#align linear_map_qext linear_map_qext\n\n",
+ "liftq_span_singleton_apply":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₛₗ[ ] » -/\n@[simp]\ntheorem liftq_span_singleton_apply (x : M) (f : «expr →ₛₗ[ ] » M τ₁₂ M₂) (h : f x = 0) (y : M) :\n    liftq_span_singleton x f h (quotient.mk y) = f y :=\n  rfl\n#align liftq_span_singleton_apply liftq_span_singleton_apply\n\n",
+ "liftq_mkq":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₛₗ[ ] » -/\n@[simp]\ntheorem liftq_mkq (f : «expr →ₛₗ[ ] » M τ₁₂ M₂) (h) : (p.liftq f h).comp p.mkq = f := by ext <;> rfl\n#align liftq_mkq liftq_mkq\n\n",
+ "liftq_apply":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₛₗ[ ] » -/\n@[simp]\ntheorem liftq_apply (f : «expr →ₛₗ[ ] » M τ₁₂ M₂) {h} (x : M) : p.liftq f h (quotient.mk x) = f x :=\n  rfl\n#align liftq_apply liftq_apply\n\n",
+ "le_comap_mkq":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⧸ » -/\ntheorem le_comap_mkq (p' : submodule R («expr ⧸ » M p)) : p ≤ comap p.mkq p' := by\n  simpa using (comap_mono bot_le : p.mkq.ker ≤ comap p.mkq p')\n#align le_comap_mkq le_comap_mkq\n\n",
+ "ker_mkq":
+ "@[simp]\ntheorem ker_mkq : p.mkq.ker = p := by ext <;> simp\n#align ker_mkq ker_mkq\n\n",
+ "ker_liftq_eq_bot":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₛₗ[ ] » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\ntheorem ker_liftq_eq_bot (f : «expr →ₛₗ[ ] » M τ₁₂ M₂) (h) (h' : ker f ≤ p) : ker (p.liftq f h) = «expr⊥» := by\n  rw [ker_liftq, le_antisymm h h', mkq_map_self]\n#align ker_liftq_eq_bot ker_liftq_eq_bot\n\n",
+ "ker_liftq":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₛₗ[ ] » -/\ntheorem ker_liftq (f : «expr →ₛₗ[ ] » M τ₁₂ M₂) (h) : ker (p.liftq f h) = (ker f).map (mkq p) :=\n  comap_liftq _ _ _ _\n#align ker_liftq ker_liftq\n\n",
+ "ker_le_range_iff":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₛₗ[ ] » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₛₗ[ ] » -/\ntheorem ker_le_range_iff {f : «expr →ₛₗ[ ] » M τ₁₂ M₂} {g : «expr →ₛₗ[ ] » M₂ τ₂₃ M₃} :\n    g.ker ≤ f.range ↔ f.range.mkq.comp g.ker.subtype = 0 := by\n  rw [← range_le_ker_iff, submodule.ker_mkq, submodule.range_subtype]\n#align ker_le_range_iff ker_le_range_iff\n\n",
+ "equiv_trans":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ₗ[ ] » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ₗ[ ] » -/\n@[simp]\ntheorem quotient.equiv_trans {N O : Type _} [add_comm_group N] [Module R N] [add_comm_group O] [Module R O]\n    (P : submodule R M) (Q : submodule R N) (S : submodule R O) (e : «expr ≃ₗ[ ] » M R N) (f : «expr ≃ₗ[ ] » N R O)\n    (he : P.map e = Q) (hf : Q.map f = S) (hef : P.map (e.trans f) = S) :\n    quotient.equiv P S (e.trans f) hef = (quotient.equiv P Q e he).trans (quotient.equiv Q S f hf) :=\n  by\n  ext\n  -- `simp` can deal with `hef` depending on `e` and `f`\n  simp only [quotient.equiv_apply, linear_equiv.trans_apply, linear_equiv.coe_trans]\n  -- `rw` can deal with `mapq_comp` needing extra hypotheses coming from the RHS\n  rw [mapq_comp, linear_map.comp_apply]\n#align quotient.equiv_trans quotient.equiv_trans\n\n",
+ "equiv_symm":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ₗ[ ] » -/\n@[simp]\ntheorem quotient.equiv_symm {R M N : Type _} [CommRing R] [add_comm_group M] [Module R M] [add_comm_group N]\n    [Module R N] (P : submodule R M) (Q : submodule R N) (f : «expr ≃ₗ[ ] » M R N) (hf : P.map f = Q) :\n    (quotient.equiv P Q f hf).symm = quotient.equiv Q P f.symm ((submodule.map_symm_eq_iff f).mpr hf) :=\n  rfl\n#align quotient.equiv_symm quotient.equiv_symm\n\n",
+ "equiv_refl":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₗ[ ] » -/\n@[simp]\ntheorem quotient.equiv_refl (P : submodule R M) (Q : submodule R M)\n    (hf : P.map (linear_equiv.refl R M : «expr →ₗ[ ] » M R M) = Q) :\n    quotient.equiv P Q (linear_equiv.refl R M) hf = quot_equiv_of_eq _ _ (by simpa using hf) :=\n  rfl\n#align quotient.equiv_refl quotient.equiv_refl\n\n",
+ "eq'":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⧸ » -/\nprotected theorem eq' {x y : M} : (mk x : «expr ⧸ » M p) = mk y ↔ -x + y ∈ p :=\n  quotient_add_group.eq\n#align eq' eq'\n\n",
+ "eq":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⧸ » -/\nprotected theorem eq {x y : M} : (mk x : «expr ⧸ » M p) = mk y ↔ x - y ∈ p :=\n  p.trans (left_rel_apply.symm.trans p.quotient_rel_r_def)\n#align eq eq\n\n",
+ "comap_mkq_embedding_eq":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⧸ » -/\n@[simp]\ntheorem comap_mkq_embedding_eq (p' : submodule R («expr ⧸ » M p)) : comap_mkq.order_embedding p p' = comap p.mkq p' :=\n  rfl\n#align comap_mkq_embedding_eq comap_mkq_embedding_eq\n\n",
+ "comap_map_mkq":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊔ » -/\n@[simp]\ntheorem comap_map_mkq : comap p.mkq (map p.mkq p') = «expr ⊔ » p p' := by simp [comap_map_eq, sup_comm]\n#align comap_map_mkq comap_map_mkq\n\n",
+ "comap_liftq":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₛₗ[ ] » -/\ntheorem comap_liftq (f : «expr →ₛₗ[ ] » M τ₁₂ M₂) (h) : q.comap (p.liftq f h) = (q.comap f).map (mkq p) :=\n  le_antisymm (by rintro ⟨x⟩ hx <;> exact ⟨_, hx, rfl⟩)\n    (by rw [map_le_iff_le_comap, ← comap_comp, liftq_mkq] <;> exact le_rfl)\n#align comap_liftq comap_liftq\n\n",
+ "coe_quot_equiv_of_eq_bot_symm":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₗ[ ] » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⧸ » -/\n@[simp]\ntheorem coe_quot_equiv_of_eq_bot_symm (hp : p = «expr⊥») :\n    ((p.quot_equiv_of_eq_bot hp).symm : «expr →ₗ[ ] » M R («expr ⧸ » M p)) = p.mkq :=\n  rfl\n#align coe_quot_equiv_of_eq_bot_symm coe_quot_equiv_of_eq_bot_symm\n\n",
+ "card_eq_card_quotient_mul_card":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⧸ » -/\ntheorem card_eq_card_quotient_mul_card [fintype M] (S : submodule R M) [decidable_pred (· ∈ S)] :\n    fintype.card M = fintype.card S * fintype.card («expr ⧸ » M S) :=\n  by\n  rw [mul_comm, ← fintype.card_prod]\n  exact fintype.card_congr add_subgroup.add_group_equiv_quotient_times_add_subgroup\n#align card_eq_card_quotient_mul_card card_eq_card_quotient_mul_card\n\n"}

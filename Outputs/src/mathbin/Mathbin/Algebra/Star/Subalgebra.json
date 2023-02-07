@@ -1,0 +1,168 @@
+{"top_to_subalgebra":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n@[simp]\ntheorem top_to_subalgebra : («expr⊤» : star_subalgebra R A).to_subalgebra = «expr⊤» :=\n  rfl\n#align top_to_subalgebra top_to_subalgebra\n\n",
+ "to_subalgebra_subtype":
+ "@[simp]\ntheorem to_subalgebra_subtype : S.to_subalgebra.val = S.subtype.to_alg_hom :=\n  rfl\n#align to_subalgebra_subtype to_subalgebra_subtype\n\n",
+ "to_subalgebra_le_iff":
+ "theorem to_subalgebra_le_iff {S₁ S₂ : star_subalgebra R A} : S₁.to_subalgebra ≤ S₂.to_subalgebra ↔ S₁ ≤ S₂ :=\n  iff.rfl\n#align to_subalgebra_le_iff to_subalgebra_le_iff\n\n",
+ "to_subalgebra_injective":
+ "theorem to_subalgebra_injective : function.injective (to_subalgebra : star_subalgebra R A → subalgebra R A) :=\n  fun S T h => ext fun x => by rw [← mem_to_subalgebra, ← mem_to_subalgebra, h]\n#align to_subalgebra_injective to_subalgebra_injective\n\n",
+ "to_subalgebra_inj":
+ "theorem to_subalgebra_inj {S U : star_subalgebra R A} : S.to_subalgebra = U.to_subalgebra ↔ S = U :=\n  to_subalgebra_injective.eq_iff\n#align to_subalgebra_inj to_subalgebra_inj\n\n",
+ "to_subalgebra_eq_top":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n@[simp]\ntheorem to_subalgebra_eq_top {S : star_subalgebra R A} : S.to_subalgebra = «expr⊤» ↔ S = «expr⊤» :=\n  star_subalgebra.to_subalgebra_injective.eq_iff' top_to_subalgebra\n#align to_subalgebra_eq_top to_subalgebra_eq_top\n\n",
+ "subtype_comp_inclusion":
+ "@[simp]\ntheorem subtype_comp_inclusion {S₁ S₂ : star_subalgebra R A} (h : S₁ ≤ S₂) :\n    S₂.subtype.comp (inclusion h) = S₁.subtype :=\n  rfl\n#align subtype_comp_inclusion subtype_comp_inclusion\n\n",
+ "subtype_apply":
+ "theorem subtype_apply (x : S) : S.subtype x = (x : A) :=\n  rfl\n#align subtype_apply subtype_apply\n\n",
+ "subset_adjoin":
+ "theorem subset_adjoin (s : set A) : s ⊆ adjoin R s :=\n  (Set.subset_union_left s (star s)).trans algebra.subset_adjoin\n#align subset_adjoin subset_adjoin\n\n",
+ "star_subset_adjoin":
+ "theorem star_subset_adjoin (s : set A) : star s ⊆ adjoin R s :=\n  (Set.subset_union_right s (star s)).trans algebra.subset_adjoin\n#align star_subset_adjoin star_subset_adjoin\n\n",
+ "star_self_mem_adjoin_singleton":
+ "theorem star_self_mem_adjoin_singleton (x : A) : star x ∈ adjoin R ({x} : set A) :=\n  star_mem <| self_mem_adjoin_singleton R x\n#align star_self_mem_adjoin_singleton star_self_mem_adjoin_singleton\n\n",
+ "star_mono":
+ "theorem star_mono : monotone (star : subalgebra R A → subalgebra R A) := fun _ _ h _ hx => h hx\n#align star_mono star_mono\n\n",
+ "star_mem_star_iff":
+ "@[simp]\ntheorem star_mem_star_iff (S : subalgebra R A) (x : A) : star x ∈ star S ↔ x ∈ S := by\n  simpa only [star_star] using mem_star_iff S (star x)\n#align star_mem_star_iff star_mem_star_iff\n\n",
+ "star_closure_le_iff":
+ "theorem star_closure_le_iff {S₁ : subalgebra R A} {S₂ : star_subalgebra R A} :\n    S₁.star_closure ≤ S₂ ↔ S₁ ≤ S₂.to_subalgebra :=\n  ⟨fun h => le_sup_left.trans h, star_closure_le⟩\n#align star_closure_le_iff star_closure_le_iff\n\n",
+ "star_closure_le":
+ "theorem star_closure_le {S₁ : subalgebra R A} {S₂ : star_subalgebra R A} (h : S₁ ≤ S₂.to_subalgebra) :\n    S₁.star_closure ≤ S₂ :=\n  star_subalgebra.to_subalgebra_le_iff.1 <|\n    sup_le h fun x hx => (star_star x ▸ star_mem (show star x ∈ S₂ from h <| (S₁.mem_star_iff _).1 hx) : x ∈ S₂)\n#align star_closure_le star_closure_le\n\n",
+ "star_closure_eq_adjoin":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊔ » -/\ntheorem _root_.subalgebra.star_closure_eq_adjoin (S : subalgebra R A) : S.star_closure = adjoin R (S : set A) :=\n  le_antisymm (subalgebra.star_closure_le_iff.2 <| subset_adjoin R (S : set A))\n    (adjoin_le (le_sup_left : S ≤ «expr ⊔ » S (star S)))\n#align subalgebra.star_closure_eq_adjoin subalgebra.star_closure_eq_adjoin\n\n",
+ "star_adjoin_comm":
+ "/-- The star operation on `subalgebra` commutes with `algebra.adjoin`. -/\ntheorem star_adjoin_comm (s : set A) : star (algebra.adjoin R s) = algebra.adjoin R (star s) :=\n  have this : ∀ t : set A, algebra.adjoin R (star t) ≤ star (algebra.adjoin R t) := fun t =>\n    algebra.adjoin_le fun x hx => algebra.subset_adjoin hx\n  le_antisymm (by simpa only [star_star] using subalgebra.star_mono (this (star s))) (this s)\n#align star_adjoin_comm star_adjoin_comm\n\n",
+ "srange_le":
+ "theorem srange_le : (algebra_map R A).srange ≤ S.to_subalgebra.to_subsemiring := fun x ⟨r, hr⟩ =>\n  hr ▸ S.algebra_map_mem r\n#align srange_le srange_le\n\n",
+ "smul_mem":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n#print smul_mem /-\nprotected theorem smul_mem {x : A} (hx : x ∈ S) (r : R) : «expr • » r x ∈ S :=\n  (algebra.smul_def r x).symm ▸ mul_mem (S.algebra_map_mem r) hx\n#align smul_mem smul_mem\n-/\n\n",
+ "self_mem_adjoin_singleton":
+ "theorem self_mem_adjoin_singleton (x : A) : x ∈ adjoin R ({x} : set A) :=\n  algebra.subset_adjoin <| Set.mem_union_left _ (Set.mem_singleton x)\n#align self_mem_adjoin_singleton self_mem_adjoin_singleton\n\n",
+ "range_subset":
+ "theorem range_subset : Set.range (algebra_map R A) ⊆ S := fun x ⟨r, hr⟩ => hr ▸ S.algebra_map_mem r\n#align range_subset range_subset\n\n",
+ "range_le":
+ "theorem range_le : Set.range (algebra_map R A) ≤ S :=\n  S.range_subset\n#align range_le range_le\n\n",
+ "mul_mem_sup":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊔ » -/\ntheorem mul_mem_sup {S T : star_subalgebra R A} {x y : A} (hx : x ∈ S) (hy : y ∈ T) : x * y ∈ «expr ⊔ » S T :=\n  mul_mem (mem_sup_left hx) (mem_sup_right hy)\n#align mul_mem_sup mul_mem_sup\n\n",
+ "mem_top":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n@[simp]\ntheorem mem_top {x : A} : x ∈ («expr⊤» : star_subalgebra R A) :=\n  Set.mem_univ x\n#align mem_top mem_top\n\n",
+ "mem_to_subalgebra":
+ "@[simp]\ntheorem mem_to_subalgebra {S : star_subalgebra R A} {x} : x ∈ S.to_subalgebra ↔ x ∈ S :=\n  iff.rfl\n#align mem_to_subalgebra mem_to_subalgebra\n\n",
+ "mem_sup_right":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊔ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊔ » -/\ntheorem mem_sup_right {S T : star_subalgebra R A} : ∀ {x : A}, x ∈ T → x ∈ «expr ⊔ » S T :=\n  show T ≤ «expr ⊔ » S T from le_sup_right\n#align mem_sup_right mem_sup_right\n\n",
+ "mem_sup_left":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊔ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊔ » -/\ntheorem mem_sup_left {S T : star_subalgebra R A} : ∀ {x : A}, x ∈ S → x ∈ «expr ⊔ » S T :=\n  show S ≤ «expr ⊔ » S T from le_sup_left\n#align mem_sup_left mem_sup_left\n\n",
+ "mem_star_iff":
+ "@[simp]\ntheorem mem_star_iff (S : subalgebra R A) (x : A) : x ∈ star S ↔ star x ∈ S :=\n  iff.rfl\n#align mem_star_iff mem_star_iff\n\n",
+ "mem_map":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →⋆ₐ[ ] » -/\ntheorem mem_map {S : star_subalgebra R A} {f : «expr →⋆ₐ[ ] » A R B} {y : B} : y ∈ map f S ↔ ∃ x ∈ S, f x = y :=\n  subsemiring.mem_map\n#align mem_map mem_map\n\n",
+ "mem_infi":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⨅ , » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⨅ , » -/\ntheorem mem_infi {ι : Sort _} {S : ι → star_subalgebra R A} {x : A} :\n    x ∈ «expr⨅ , » \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⨅ , »\" (S i) ↔\n      ∀ i, x ∈ S i :=\n  by simp only [infᵢ, mem_Inf, Set.forall_range_iff]\n#align mem_infi mem_infi\n\n",
+ "mem_inf":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊓ » -/\n@[simp]\ntheorem mem_inf {S T : star_subalgebra R A} {x : A} : x ∈ «expr ⊓ » S T ↔ x ∈ S ∧ x ∈ T :=\n  iff.rfl\n#align mem_inf mem_inf\n\n",
+ "mem_equalizer":
+ "@[simp]\ntheorem mem_equalizer (x : A) : x ∈ star_alg_hom.equalizer f g ↔ f x = g x :=\n  iff.rfl\n#align mem_equalizer mem_equalizer\n\n",
+ "mem_comap":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →⋆ₐ[ ] » -/\n@[simp]\ntheorem mem_comap (S : star_subalgebra R B) (f : «expr →⋆ₐ[ ] » A R B) (x : A) : x ∈ S.comap f ↔ f x ∈ S :=\n  iff.rfl\n#align mem_comap mem_comap\n\n",
+ "mem_centralizer_iff":
+ "theorem mem_centralizer_iff {s : set A} {w} {z : A} : z ∈ centralizer R s w ↔ ∀ g ∈ s, g * z = z * g :=\n  iff.rfl\n#align mem_centralizer_iff mem_centralizer_iff\n\n",
+ "mem_carrier":
+ "/-\nCopyright (c) 2022 Scott Morrison. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Scott Morrison, Jireh Loreaux\n-/\n-- this uses the `has_star` instance `s` inherits from `star_mem_class (star_subalgebra R A) A`\n@[simp]\ntheorem mem_carrier {s : star_subalgebra R A} {x : A} : x ∈ s.carrier ↔ x ∈ s :=\n  iff.rfl\n#align mem_carrier mem_carrier\n\n",
+ "mem_bot":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\ntheorem mem_bot {x : A} : x ∈ («expr⊥» : star_subalgebra R A) ↔ x ∈ Set.range (algebra_map R A) := by\n  rw [← mem_to_subalgebra, bot_to_subalgebra, algebra.mem_bot]\n#align mem_bot mem_bot\n\n",
+ "mem_Inf":
+ "theorem mem_Inf {S : set (star_subalgebra R A)} {x : A} : x ∈ infₛ S ↔ ∀ p ∈ S, x ∈ p := by\n  simp only [← SetLike.mem_coe, coe_Inf, Set.mem_interᵢ₂]\n#align mem_Inf mem_Inf\n\n",
+ "map_to_subalgebra":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →⋆ₐ[ ] » -/\ntheorem map_to_subalgebra {S : star_subalgebra R A} {f : «expr →⋆ₐ[ ] » A R B} :\n    (S.map f).to_subalgebra = S.to_subalgebra.map f.to_alg_hom :=\n  SetLike.coe_injective rfl\n#align map_to_subalgebra map_to_subalgebra\n\n",
+ "map_sup":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →⋆ₐ[ ] » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊔ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊔ » -/\ntheorem map_sup (f : «expr →⋆ₐ[ ] » A R B) (S T : star_subalgebra R A) :\n    map f («expr ⊔ » S T) = «expr ⊔ » (map f S) (map f T) :=\n  (star_subalgebra.gc_map_comap f).l_sup\n#align map_sup map_sup\n\n",
+ "map_mono":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →⋆ₐ[ ] » -/\ntheorem map_mono {S₁ S₂ : star_subalgebra R A} {f : «expr →⋆ₐ[ ] » A R B} : S₁ ≤ S₂ → S₁.map f ≤ S₂.map f :=\n  Set.image_subset f\n#align map_mono map_mono\n\n",
+ "map_map":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →⋆ₐ[ ] » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →⋆ₐ[ ] » -/\ntheorem map_map (S : star_subalgebra R A) (g : «expr →⋆ₐ[ ] » B R C) (f : «expr →⋆ₐ[ ] » A R B) :\n    (S.map f).map g = S.map (g.comp f) :=\n  SetLike.coe_injective <| Set.image_image _ _ _\n#align map_map map_map\n\n",
+ "map_le_iff_le_comap":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →⋆ₐ[ ] » -/\ntheorem map_le_iff_le_comap {S : star_subalgebra R A} {f : «expr →⋆ₐ[ ] » A R B} {U : star_subalgebra R B} :\n    map f S ≤ U ↔ S ≤ comap f U :=\n  Set.image_subset_iff\n#align map_le_iff_le_comap map_le_iff_le_comap\n\n",
+ "map_injective":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →⋆ₐ[ ] » -/\ntheorem map_injective {f : «expr →⋆ₐ[ ] » A R B} (hf : function.injective f) : function.injective (map f) :=\n  fun S₁ S₂ ih => ext <| Set.ext_iff.1 <| Set.image_injective.2 hf <| Set.ext <| SetLike.ext_iff.mp ih\n#align map_injective map_injective\n\n",
+ "map_id":
+ "@[simp]\ntheorem map_id (S : star_subalgebra R A) : S.map (star_alg_hom.id R A) = S :=\n  SetLike.coe_injective <| Set.image_id _\n#align map_id map_id\n\n",
+ "map_adjoin":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →⋆ₐ[ ] » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\ntheorem map_adjoin [StarModule R B] (f : «expr →⋆ₐ[ ] » A R B) (s : set A) :\n    map f (adjoin R s) = adjoin R («expr '' » f s) :=\n  GaloisConnection.l_comm_of_u_comm Set.image_preimage (gc_map_comap f) star_subalgebra.gc star_subalgebra.gc fun _ =>\n    rfl\n#align map_adjoin map_adjoin\n\n",
+ "infi_to_subalgebra":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⨅ , » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⨅ , » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⨅ , » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⨅ , » -/\n@[simp]\ntheorem infi_to_subalgebra {ι : Sort _} (S : ι → star_subalgebra R A) :\n    («expr⨅ , » \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⨅ , »\"\n          (S i)).to_subalgebra =\n      «expr⨅ , » \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⨅ , »\"\n        (S i).to_subalgebra :=\n  SetLike.coe_injective <| by simp\n#align infi_to_subalgebra infi_to_subalgebra\n\n",
+ "inf_to_subalgebra":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊓ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊓ » -/\n@[simp]\ntheorem inf_to_subalgebra (S T : star_subalgebra R A) :\n    («expr ⊓ » S T).to_subalgebra = «expr ⊓ » S.to_subalgebra T.to_subalgebra :=\n  rfl\n#align inf_to_subalgebra inf_to_subalgebra\n\n",
+ "inclusion_injective":
+ "theorem inclusion_injective {S₁ S₂ : star_subalgebra R A} (h : S₁ ≤ S₂) : function.injective <| inclusion h :=\n  Set.inclusion_injective h\n#align inclusion_injective inclusion_injective\n\n",
+ "gc_map_comap":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →⋆ₐ[ ] » -/\ntheorem gc_map_comap (f : «expr →⋆ₐ[ ] » A R B) : GaloisConnection (map f) (comap f) := fun S U => map_le_iff_le_comap\n#align gc_map_comap gc_map_comap\n\n",
+ "gc":
+ "protected theorem gc : GaloisConnection (adjoin R : set A → star_subalgebra R A) coe :=\n  by\n  intro s S\n  rw [← to_subalgebra_le_iff, adjoin_to_subalgebra, algebra.adjoin_le_iff, coe_to_subalgebra]\n  exact\n    ⟨fun h => (Set.subset_union_left s _).trans h, fun h =>\n      Set.union_subset h fun x hx => star_star x ▸ star_mem (show star x ∈ S from h hx)⟩\n#align gc gc\n\n",
+ "ext_of_adjoin_eq_top":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\ntheorem ext_of_adjoin_eq_top {s : set A} (h : adjoin R s = «expr⊤») ⦃f g : F⦄ (hs : s.eq_on f g) : f = g :=\n  fun_like.ext f g fun x => star_alg_hom.adjoin_le_equalizer f g hs <| h.symm ▸ trivial\n#align ext_of_adjoin_eq_top ext_of_adjoin_eq_top\n\n",
+ "ext_adjoin_singleton":
+ "theorem ext_adjoin_singleton {a : A} [star_alg_hom_class F R (adjoin R ({a} : set A)) B] {f g : F}\n    (h : f ⟨a, self_mem_adjoin_singleton R a⟩ = g ⟨a, self_mem_adjoin_singleton R a⟩) : f = g :=\n  ext_adjoin fun x hx =>\n    (show x = ⟨a, self_mem_adjoin_singleton R a⟩ from subtype.ext <| Set.mem_singleton_iff.mp hx).symm ▸ h\n#align ext_adjoin_singleton ext_adjoin_singleton\n\n",
+ "ext_adjoin":
+ "theorem ext_adjoin {s : set A} [star_alg_hom_class F R (adjoin R s) B] {f g : F}\n    (h : ∀ x : adjoin R s, (x : A) ∈ s → f x = g x) : f = g :=\n  by\n  refine'\n    fun_like.ext f g fun a =>\n      adjoin_induction' a (fun x hx => _) (fun r => _) (fun x y hx hy => _) (fun x y hx hy => _) fun x hx => _\n  · exact h ⟨x, subset_adjoin R s hx⟩ hx\n  · simp only [alg_hom_class.commutes]\n  · rw [map_add, map_add, hx, hy]\n  · rw [map_mul, map_mul, hx, hy]\n  · rw [map_star, map_star, hx]\n#align ext_adjoin ext_adjoin\n\n",
+ "ext":
+ "@[ext]\ntheorem ext {S T : star_subalgebra R A} (h : ∀ x : A, x ∈ S ↔ x ∈ T) : S = T :=\n  SetLike.ext h\n#align ext ext\n\n",
+ "eq_top_iff":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n#print eq_top_iff /-\ntheorem eq_top_iff {S : star_subalgebra R A} : S = «expr⊤» ↔ ∀ x : A, x ∈ S :=\n  ⟨fun h x => by rw [h] <;> exact mem_top, fun h => by ext x <;> exact ⟨fun _ => mem_top, fun _ => h x⟩⟩\n#align eq_top_iff eq_top_iff\n-/\n\n",
+ "copy_eq":
+ "theorem copy_eq (S : star_subalgebra R A) (s : set A) (hs : s = ↑S) : S.copy s hs = S :=\n  SetLike.coe_injective hs\n#align copy_eq copy_eq\n\n",
+ "comap_mono":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →⋆ₐ[ ] » -/\ntheorem comap_mono {S₁ S₂ : star_subalgebra R B} {f : «expr →⋆ₐ[ ] » A R B} : S₁ ≤ S₂ → S₁.comap f ≤ S₂.comap f :=\n  Set.preimage_mono\n#align comap_mono comap_mono\n\n",
+ "comap_injective":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →⋆ₐ[ ] » -/\ntheorem comap_injective {f : «expr →⋆ₐ[ ] » A R B} (hf : function.surjective f) : function.injective (comap f) :=\n  fun S₁ S₂ h =>\n  ext fun b =>\n    let ⟨x, hx⟩ := hf b\n    let this := SetLike.ext_iff.1 h x\n    hx ▸ this\n#align comap_injective comap_injective\n\n",
+ "comap_id":
+ "@[simp]\ntheorem comap_id (S : star_subalgebra R A) : S.comap (star_alg_hom.id R A) = S :=\n  SetLike.coe_injective <| Set.preimage_id\n#align comap_id comap_id\n\n",
+ "comap_comap":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →⋆ₐ[ ] » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →⋆ₐ[ ] » -/\ntheorem comap_comap (S : star_subalgebra R C) (g : «expr →⋆ₐ[ ] » B R C) (f : «expr →⋆ₐ[ ] » A R B) :\n    (S.comap g).comap f = S.comap (g.comp f) :=\n  SetLike.coe_injective <| Set.preimage_preimage\n#align comap_comap comap_comap\n\n",
+ "coe_top":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n@[simp]\ntheorem coe_top : (↑(«expr⊤» : star_subalgebra R A) : set A) = Set.univ :=\n  rfl\n#align coe_top coe_top\n\n",
+ "coe_to_subalgebra":
+ "@[simp]\ntheorem coe_to_subalgebra (S : star_subalgebra R A) : (S.to_subalgebra : set A) = S :=\n  rfl\n#align coe_to_subalgebra coe_to_subalgebra\n\n",
+ "coe_subtype":
+ "@[simp]\ntheorem coe_subtype : (S.subtype : S → A) = coe :=\n  rfl\n#align coe_subtype coe_subtype\n\n",
+ "coe_star":
+ "@[simp]\ntheorem coe_star (S : subalgebra R A) : ((star S : subalgebra R A) : set A) = star S :=\n  rfl\n#align coe_star coe_star\n\n",
+ "coe_map":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →⋆ₐ[ ] » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\n@[simp]\ntheorem coe_map (S : star_subalgebra R A) (f : «expr →⋆ₐ[ ] » A R B) : (S.map f : set B) = «expr '' » f S :=\n  rfl\n#align coe_map coe_map\n\n",
+ "coe_infi":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⨅ , » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⨅ , » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⋂ , » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⋂ , » -/\n@[simp, norm_cast]\ntheorem coe_infi {ι : Sort _} {S : ι → star_subalgebra R A} :\n    (↑(«expr⨅ , » \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⨅ , »\" (S i)) : set A) =\n      «expr⋂ , » \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⋂ , »\" (S i) :=\n  by simp [infᵢ]\n#align coe_infi coe_infi\n\n",
+ "coe_inf":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊓ » -/\n@[simp, norm_cast]\ntheorem coe_inf (S T : star_subalgebra R A) : (↑(«expr ⊓ » S T) : set A) = S ∩ T :=\n  rfl\n#align coe_inf coe_inf\n\n",
+ "coe_copy":
+ "@[simp]\ntheorem coe_copy (S : star_subalgebra R A) (s : set A) (hs : s = ↑S) : (S.copy s hs : set A) = s :=\n  rfl\n#align coe_copy coe_copy\n\n",
+ "coe_comap":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →⋆ₐ[ ] » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\n@[simp, norm_cast]\ntheorem coe_comap (S : star_subalgebra R B) (f : «expr →⋆ₐ[ ] » A R B) :\n    (S.comap f : set A) = «expr ⁻¹' » f (S : set B) :=\n  rfl\n#align coe_comap coe_comap\n\n",
+ "coe_centralizer":
+ "@[simp]\ntheorem coe_centralizer (s : set A) (w : ∀ a : A, a ∈ s → star a ∈ s) : (centralizer R s w : set A) = s.centralizer :=\n  rfl\n#align coe_centralizer coe_centralizer\n\n",
+ "coe_bot":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n@[simp]\ntheorem coe_bot : ((«expr⊥» : star_subalgebra R A) : set A) = Set.range (algebra_map R A) := by\n  simp [Set.ext_iff, mem_bot]\n#align coe_bot coe_bot\n\n",
+ "coe_Inf":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⋂ , » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⋂ , » -/\n@[simp, norm_cast]\ntheorem coe_Inf (S : set (star_subalgebra R A)) :\n    (↑(infₛ S) : set A) =\n      «expr⋂ , » \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⋂ , »\" ↑s :=\n  infₛ_image\n#align coe_Inf coe_Inf\n\n",
+ "centralizer_le":
+ "theorem centralizer_le (s t : set A) (ws : ∀ a : A, a ∈ s → star a ∈ s) (wt : ∀ a : A, a ∈ t → star a ∈ t) (h : s ⊆ t) :\n    centralizer R t wt ≤ centralizer R s ws :=\n  Set.centralizer_subset h\n#align centralizer_le centralizer_le\n\n",
+ "bot_to_subalgebra":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\ntheorem bot_to_subalgebra : («expr⊥» : star_subalgebra R A).to_subalgebra = «expr⊥» :=\n  by\n  change algebra.adjoin R (∅ ∪ star ∅) = algebra.adjoin R ∅\n  simp\n#align bot_to_subalgebra bot_to_subalgebra\n\n",
+ "algebra_map_mem":
+ "theorem algebra_map_mem (r : R) : algebra_map R A r ∈ S :=\n  S.algebra_map_mem' r\n#align algebra_map_mem algebra_map_mem\n\n",
+ "adjoin_to_subalgebra":
+ "theorem adjoin_to_subalgebra (s : set A) : (adjoin R s).to_subalgebra = algebra.adjoin R (s ∪ star s) :=\n  rfl\n#align adjoin_to_subalgebra adjoin_to_subalgebra\n\n",
+ "adjoin_le_iff":
+ "theorem adjoin_le_iff {S : star_subalgebra R A} {s : set A} : adjoin R s ≤ S ↔ s ⊆ S :=\n  star_subalgebra.gc _ _\n#align adjoin_le_iff adjoin_le_iff\n\n",
+ "adjoin_le_equalizer":
+ "theorem adjoin_le_equalizer {s : set A} (h : s.eq_on f g) : adjoin R s ≤ star_alg_hom.equalizer f g :=\n  adjoin_le h\n#align adjoin_le_equalizer adjoin_le_equalizer\n\n",
+ "adjoin_le":
+ "theorem adjoin_le {S : star_subalgebra R A} {s : set A} (hs : s ⊆ S) : adjoin R s ≤ S :=\n  star_subalgebra.gc.l_le hs\n#align adjoin_le adjoin_le\n\n",
+ "adjoin_induction₂":
+ "theorem adjoin_induction₂ {s : set A} {p : A → A → Prop} {a b : A} (ha : a ∈ adjoin R s) (hb : b ∈ adjoin R s)\n    (Hs : ∀ x : A, x ∈ s → ∀ y : A, y ∈ s → p x y) (Halg : ∀ r₁ r₂ : R, p (algebra_map R A r₁) (algebra_map R A r₂))\n    (Halg_left : ∀ (r : R) (x : A), x ∈ s → p (algebra_map R A r) x)\n    (Halg_right : ∀ (r : R) (x : A), x ∈ s → p x (algebra_map R A r))\n    (Hadd_left : ∀ x₁ x₂ y : A, p x₁ y → p x₂ y → p (x₁ + x₂) y)\n    (Hadd_right : ∀ x y₁ y₂ : A, p x y₁ → p x y₂ → p x (y₁ + y₂))\n    (Hmul_left : ∀ x₁ x₂ y : A, p x₁ y → p x₂ y → p (x₁ * x₂) y)\n    (Hmul_right : ∀ x y₁ y₂ : A, p x y₁ → p x y₂ → p x (y₁ * y₂)) (Hstar : ∀ x y : A, p x y → p (star x) (star y))\n    (Hstar_left : ∀ x y : A, p x y → p (star x) y) (Hstar_right : ∀ x y : A, p x y → p x (star y)) : p a b :=\n  by\n  refine'\n    algebra.adjoin_induction₂ ha hb (fun x hx y hy => _) Halg (fun r x hx => _) (fun r x hx => _) Hadd_left Hadd_right\n      Hmul_left Hmul_right\n  · cases hx <;> cases hy\n    exacts[Hs x hx y hy, star_star y ▸ Hstar_right _ _ (Hs _ hx _ hy), star_star x ▸ Hstar_left _ _ (Hs _ hx _ hy),\n      star_star x ▸ star_star y ▸ Hstar _ _ (Hs _ hx _ hy)]\n  · cases hx\n    exacts[Halg_left _ _ hx, star_star x ▸ Hstar_right _ _ (Halg_left r _ hx)]\n  · cases hx\n    exacts[Halg_right _ _ hx, star_star x ▸ Hstar_left _ _ (Halg_right r _ hx)]\n#align adjoin_induction₂ adjoin_induction₂\n\n",
+ "adjoin_induction'":
+ "/-- The difference with `star_subalgebra.adjoin_induction` is that this acts on the subtype. -/\ntheorem adjoin_induction' {s : set A} {p : adjoin R s → Prop} (a : adjoin R s)\n    (Hs : ∀ (x) (h : x ∈ s), p ⟨x, subset_adjoin R s h⟩) (Halg : ∀ r, p (algebra_map R _ r))\n    (Hadd : ∀ x y, p x → p y → p (x + y)) (Hmul : ∀ x y, p x → p y → p (x * y)) (Hstar : ∀ x, p x → p (star x)) : p a :=\n  subtype.rec_on a fun b hb =>\n    by\n    refine' exists.elim _ fun (hb : b ∈ adjoin R s) (hc : p ⟨b, hb⟩) => hc\n    apply adjoin_induction hb\n    exacts[fun x hx => ⟨subset_adjoin R s hx, Hs x hx⟩, fun r => ⟨star_subalgebra.algebra_map_mem _ r, Halg r⟩,\n      fun x y hx hy => exists.elim hx fun hx' hx => exists.elim hy fun hy' hy => ⟨add_mem hx' hy', Hadd _ _ hx hy⟩,\n      fun x y hx hy => exists.elim hx fun hx' hx => exists.elim hy fun hy' hy => ⟨mul_mem hx' hy', Hmul _ _ hx hy⟩,\n      fun x hx => exists.elim hx fun hx' hx => ⟨star_mem hx', Hstar _ hx⟩]\n#align adjoin_induction' adjoin_induction'\n\n",
+ "adjoin_induction":
+ "/-- If some predicate holds for all `x ∈ (s : set A)` and this predicate is closed under the\n`algebra_map`, addition, multiplication and star operations, then it holds for `a ∈ adjoin R s`. -/\ntheorem adjoin_induction {s : set A} {p : A → Prop} {a : A} (h : a ∈ adjoin R s) (Hs : ∀ x : A, x ∈ s → p x)\n    (Halg : ∀ r : R, p (algebra_map R A r)) (Hadd : ∀ x y : A, p x → p y → p (x + y))\n    (Hmul : ∀ x y : A, p x → p y → p (x * y)) (Hstar : ∀ x : A, p x → p (star x)) : p a :=\n  algebra.adjoin_induction h (fun x hx => hx.elim (fun hx => Hs x hx) fun hx => star_star x ▸ Hstar _ (Hs _ hx)) Halg\n    Hadd Hmul\n#align adjoin_induction adjoin_induction\n\n",
+ "adjoin_eq_star_closure_adjoin":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊔ » -/\ntheorem adjoin_eq_star_closure_adjoin (s : set A) : adjoin R s = (algebra.adjoin R s).star_closure :=\n  to_subalgebra_injective <|\n    show algebra.adjoin R (s ∪ star s) = «expr ⊔ » (algebra.adjoin R s) (star (algebra.adjoin R s)) from\n      (subalgebra.star_adjoin_comm R s).symm ▸ algebra.adjoin_union s (star s)\n#align adjoin_eq_star_closure_adjoin adjoin_eq_star_closure_adjoin\n\n",
+ "Inf_to_subalgebra":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\n@[simp]\ntheorem Inf_to_subalgebra (S : set (star_subalgebra R A)) :\n    (infₛ S).to_subalgebra = infₛ («expr '' » star_subalgebra.to_subalgebra S) :=\n  SetLike.coe_injective <| by simp\n#align Inf_to_subalgebra Inf_to_subalgebra\n\n"}

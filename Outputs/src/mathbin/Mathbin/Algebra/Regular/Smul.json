@@ -1,0 +1,48 @@
+{"zero_iff_subsingleton":
+ "/-- The element `0` is `M`-regular if and only if `M` is trivial. -/\ntheorem zero_iff_subsingleton : IsSMulRegular M (0 : R) ↔ subsingleton M :=\n  ⟨fun h => h.subsingleton, fun H a b h => @subsingleton.elim _ H a b⟩\n#align zero_iff_subsingleton zero_iff_subsingleton\n\n",
+ "zero":
+ "/-- The element `0` is `M`-regular when `M` is trivial. -/\ntheorem zero [sM : subsingleton M] : IsSMulRegular M (0 : R) :=\n  zero_iff_subsingleton.mpr sM\n#align zero zero\n\n",
+ "subsingleton":
+ "/-- The element `0` is `M`-regular if and only if `M` is trivial. -/\nprotected theorem subsingleton (h : IsSMulRegular M (0 : R)) : subsingleton M :=\n  ⟨fun a b => h (by repeat' rw [mul_action_with_zero.zero_smul])⟩\n#align subsingleton subsingleton\n\n",
+ "smul_iff":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/-- An element is `M`-regular if and only if multiplying it on the left by an `M`-regular element\nis `M`-regular. -/\n@[simp]\ntheorem smul_iff (b : S) (ha : IsSMulRegular M a) : IsSMulRegular M («expr • » a b) ↔ IsSMulRegular M b :=\n  ⟨of_smul _, ha.smul⟩\n#align smul_iff smul_iff\n\n",
+ "smul":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/-- The product of `M`-regular elements is `M`-regular. -/\ntheorem smul (ra : IsSMulRegular M a) (rs : IsSMulRegular M s) : IsSMulRegular M («expr • » a s) := fun a b ab =>\n  rs (ra ((smul_assoc _ _ _).symm.trans (ab.trans (smul_assoc _ _ _))))\n#align smul smul\n\n",
+ "pow_iff":
+ "/-- An element `a` is `M`-regular if and only if a positive power of `a` is `M`-regular. -/\ntheorem pow_iff {n : ℕ} (n0 : 0 < n) : IsSMulRegular M (a ^ n) ↔ IsSMulRegular M a :=\n  by\n  refine' ⟨_, pow n⟩\n  rw [← nat.succ_pred_eq_of_pos n0, pow_succ', ← smul_eq_mul]\n  exact of_smul _\n#align pow_iff pow_iff\n\n",
+ "pow":
+ "/-- Any power of an `M`-regular element is `M`-regular. -/\ntheorem pow (n : ℕ) (ra : IsSMulRegular M a) : IsSMulRegular M (a ^ n) :=\n  by\n  induction' n with n hn\n  · simp only [one, pow_zero]\n  · rw [pow_succ]\n    exact (ra.smul_iff (a ^ n)).mpr hn\n#align pow pow\n\n",
+ "one":
+ "/-- One is `M`-regular always. -/\n@[simp]\ntheorem one : IsSMulRegular M (1 : R) := fun a b ab => by rwa [one_smul, one_smul] at ab\n#align one one\n\n",
+ "of_smul_eq_one":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/-- An element of `S` admitting a left inverse in `R` is `M`-regular. -/\ntheorem of_smul_eq_one (h : «expr • » a s = 1) : IsSMulRegular M s :=\n  of_smul a\n    (by\n      rw [h]\n      exact one M)\n#align of_smul_eq_one of_smul_eq_one\n\n",
+ "of_smul":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/-- If an element `b` becomes `M`-regular after multiplying it on the left by an `M`-regular\nelement, then `b` is `M`-regular. -/\ntheorem of_smul (a : R) (ab : IsSMulRegular M («expr • » a s)) : IsSMulRegular M s :=\n  @function.injective.of_comp _ _ _ (fun m : M => «expr • » a m) _ fun c d cd => ab (by rwa [smul_assoc, smul_assoc])\n#align of_smul of_smul\n\n",
+ "of_mul_eq_one":
+ "/-- An element of `R` admitting a left inverse is `M`-regular. -/\ntheorem of_mul_eq_one (h : a * b = 1) : IsSMulRegular M b :=\n  of_mul\n    (by\n      rw [h]\n      exact one M)\n#align of_mul_eq_one of_mul_eq_one\n\n",
+ "of_mul":
+ "theorem of_mul [Mul R] [IsScalarTower R R M] (ab : IsSMulRegular M (a * b)) : IsSMulRegular M b :=\n  by\n  rw [← smul_eq_mul] at ab\n  exact ab.of_smul _\n#align of_mul of_mul\n\n",
+ "not_zero_iff":
+ "/-- The `0` element is not `M`-regular, on a non-trivial module. -/\ntheorem not_zero_iff : ¬IsSMulRegular M (0 : R) ↔ nontrivial M :=\n  by\n  rw [nontrivial_iff, not_iff_comm, zero_iff_subsingleton, subsingleton_iff]\n  push_neg\n  exact iff.rfl\n#align not_zero_iff not_zero_iff\n\n",
+ "not_zero":
+ "/-- The `0` element is not `M`-regular, on a non-trivial module. -/\ntheorem not_zero [nM : nontrivial M] : ¬IsSMulRegular M (0 : R) :=\n  not_zero_iff.mpr nM\n#align not_zero not_zero\n\n",
+ "mul_iff_right":
+ "@[simp]\ntheorem mul_iff_right [Mul R] [IsScalarTower R R M] (ha : IsSMulRegular M a) :\n    IsSMulRegular M (a * b) ↔ IsSMulRegular M b :=\n  ⟨of_mul, ha.mul⟩\n#align mul_iff_right mul_iff_right\n\n",
+ "mul_iff":
+ "/-- A product is `M`-regular if and only if the factors are. -/\ntheorem mul_iff : IsSMulRegular M (a * b) ↔ IsSMulRegular M a ∧ IsSMulRegular M b :=\n  by\n  rw [← mul_and_mul_iff]\n  exact ⟨fun ab => ⟨ab, by rwa [mul_comm]⟩, fun rab => rab.1⟩\n#align mul_iff mul_iff\n\n",
+ "mul_and_mul_iff":
+ "/-- Two elements `a` and `b` are `M`-regular if and only if both products `a * b` and `b * a`\nare `M`-regular. -/\ntheorem mul_and_mul_iff [Mul R] [IsScalarTower R R M] :\n    IsSMulRegular M (a * b) ∧ IsSMulRegular M (b * a) ↔ IsSMulRegular M a ∧ IsSMulRegular M b :=\n  by\n  refine' ⟨_, _⟩\n  · rintro ⟨ab, ba⟩\n    refine' ⟨ba.of_mul, ab.of_mul⟩\n  · rintro ⟨ha, hb⟩\n    exact ⟨ha.mul hb, hb.mul ha⟩\n#align mul_and_mul_iff mul_and_mul_iff\n\n",
+ "mul":
+ "theorem mul [Mul R] [IsScalarTower R R M] (ra : IsSMulRegular M a) (rb : IsSMulRegular M b) : IsSMulRegular M (a * b) :=\n  ra.smul rb\n#align mul mul\n\n",
+ "isSMulRegular_of_group":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:219:4: warning: unsupported binary notation `«expr • » -/\n#print isSMulRegular_of_group /-\n/-- An element of a group acting on a Type is regular. This relies on the availability\nof the inverse given by groups, since there is no `left_cancel_smul` typeclass. -/\ntheorem isSMulRegular_of_group [MulAction G R] (g : G) : IsSMulRegular R g :=\n  by\n  intro x y h\n  convert congr_arg ((«expr • » · ·) g⁻¹) h using 1 <;> simp [← smul_assoc]\n#align is_smul_regular_of_group isSMulRegular_of_group\n-/\n\n",
+ "isSMulRegular":
+ "#print IsUnit.isSMulRegular /-\n/-- A unit is `M`-regular. -/\ntheorem IsUnit.isSMulRegular (ua : is_unit a) : IsSMulRegular M a :=\n  by\n  rcases ua with ⟨a, rfl⟩\n  exact a.is_smul_regular M\n#align is_unit.is_smul_regular IsUnit.isSMulRegular\n-/\n\n",
+ "isRightRegular_iff":
+ "#print isRightRegular_iff /-\n/-- Right-regular multiplication on `R` is equivalent to `Rᵐᵒᵖ`-regularity of `R` itself. -/\ntheorem isRightRegular_iff [Mul R] {a : R} : IsRightRegular a ↔ IsSMulRegular R (MulOpposite.op a) :=\n  iff.rfl\n#align is_right_regular_iff isRightRegular_iff\n-/\n\n",
+ "isLeftRegular_iff":
+ "#print isLeftRegular_iff /-\n/-- Left-regular multiplication on `R` is equivalent to `R`-regularity of `R` itself. -/\ntheorem isLeftRegular_iff [Mul R] {a : R} : IsLeftRegular a ↔ IsSMulRegular R a :=\n  iff.rfl\n#align is_left_regular_iff isLeftRegular_iff\n-/\n\n",
+ "IsRightRegular":
+ "#print IsRightRegular /-\ntheorem IsRightRegular [Mul R] {a : R} (h : IsSMulRegular R (MulOpposite.op a)) : IsRightRegular a :=\n  h\n#align is_right_regular IsRightRegular\n-/\n\n",
+ "IsLeftRegular":
+ "#print IsLeftRegular /-\ntheorem IsLeftRegular [Mul R] {a : R} (h : IsSMulRegular R a) : IsLeftRegular a :=\n  h\n#align is_left_regular IsLeftRegular\n-/\n\n"}

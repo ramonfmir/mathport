@@ -1,0 +1,44 @@
+{"to_dual_symm_eq":
+ "/-\nCopyright (c) 2020 Johan Commelin, Damiano Testa. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Johan Commelin, Damiano Testa, Yaël Dillies\n-/\n@[simp]\ntheorem to_dual_symm_eq : (@toDual α).symm = of_dual :=\n  rfl\n#align to_dual_symm_eq to_dual_symm_eq\n\n",
+ "to_dual_of_dual":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵈ» -/\n@[simp]\ntheorem to_dual_of_dual (a : «expr ᵒᵈ» α) : toDual (ofDual a) = a :=\n  rfl\n#align to_dual_of_dual to_dual_of_dual\n\n",
+ "to_dual_lt_to_dual":
+ "@[simp]\ntheorem to_dual_lt_to_dual [LT α] {a b : α} : toDual a < toDual b ↔ b < a :=\n  iff.rfl\n#align to_dual_lt_to_dual to_dual_lt_to_dual\n\n",
+ "to_dual_lt":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵈ» -/\ntheorem to_dual_lt [LT α] {a : α} {b : «expr ᵒᵈ» α} : toDual a < b ↔ ofDual b < a :=\n  iff.rfl\n#align to_dual_lt to_dual_lt\n\n",
+ "to_dual_le_to_dual":
+ "@[simp]\ntheorem to_dual_le_to_dual [LE α] {a b : α} : toDual a ≤ toDual b ↔ b ≤ a :=\n  iff.rfl\n#align to_dual_le_to_dual to_dual_le_to_dual\n\n",
+ "to_dual_le":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵈ» -/\ntheorem to_dual_le [LE α] {a : α} {b : «expr ᵒᵈ» α} : toDual a ≤ b ↔ ofDual b ≤ a :=\n  iff.rfl\n#align to_dual_le to_dual_le\n\n",
+ "to_dual_inj":
+ "@[simp]\ntheorem to_dual_inj {a b : α} : toDual a = toDual b ↔ a = b :=\n  iff.rfl\n#align to_dual_inj to_dual_inj\n\n",
+ "toLex_symm_eq":
+ "#print toLex_symm_eq /-\n@[simp]\ntheorem toLex_symm_eq : (@to_lex α).symm = of_lex :=\n  rfl\n#align to_lex_symm_eq toLex_symm_eq\n-/\n\n",
+ "toLex_ofLex":
+ "#print toLex_ofLex /-\n@[simp]\ntheorem toLex_ofLex (a : lex α) : to_lex (of_lex a) = a :=\n  rfl\n#align to_lex_of_lex toLex_ofLex\n-/\n\n",
+ "toLex_inj":
+ "#print toLex_inj /-\n@[simp]\ntheorem toLex_inj {a b : α} : to_lex a = to_lex b ↔ a = b :=\n  iff.rfl\n#align to_lex_inj toLex_inj\n-/\n\n",
+ "of_dual_to_dual":
+ "@[simp]\ntheorem of_dual_to_dual (a : α) : ofDual (toDual a) = a :=\n  rfl\n#align of_dual_to_dual of_dual_to_dual\n\n",
+ "of_dual_symm_eq":
+ "@[simp]\ntheorem of_dual_symm_eq : (@ofDual α).symm = to_dual :=\n  rfl\n#align of_dual_symm_eq of_dual_symm_eq\n\n",
+ "of_dual_lt_of_dual":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵈ» -/\n@[simp]\ntheorem of_dual_lt_of_dual [LT α] {a b : «expr ᵒᵈ» α} : ofDual a < ofDual b ↔ b < a :=\n  iff.rfl\n#align of_dual_lt_of_dual of_dual_lt_of_dual\n\n",
+ "of_dual_le_of_dual":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵈ» -/\n@[simp]\ntheorem of_dual_le_of_dual [LE α] {a b : «expr ᵒᵈ» α} : ofDual a ≤ ofDual b ↔ b ≤ a :=\n  iff.rfl\n#align of_dual_le_of_dual of_dual_le_of_dual\n\n",
+ "of_dual_inj":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵈ» -/\n@[simp]\ntheorem of_dual_inj {a b : «expr ᵒᵈ» α} : ofDual a = ofDual b ↔ a = b :=\n  iff.rfl\n#align of_dual_inj of_dual_inj\n\n",
+ "ofLex_toLex":
+ "#print ofLex_toLex /-\n@[simp]\ntheorem ofLex_toLex (a : α) : of_lex (to_lex a) = a :=\n  rfl\n#align of_lex_to_lex ofLex_toLex\n-/\n\n",
+ "ofLex_symm_eq":
+ "#print ofLex_symm_eq /-\n@[simp]\ntheorem ofLex_symm_eq : (@of_lex α).symm = to_lex :=\n  rfl\n#align of_lex_symm_eq ofLex_symm_eq\n-/\n\n",
+ "ofLex_inj":
+ "#print ofLex_inj /-\n@[simp]\ntheorem ofLex_inj {a b : lex α} : of_lex a = of_lex b ↔ a = b :=\n  iff.rfl\n#align of_lex_inj ofLex_inj\n-/\n\n",
+ "lt_to_dual":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵈ» -/\ntheorem lt_to_dual [LT α] {a : «expr ᵒᵈ» α} {b : α} : a < toDual b ↔ b < ofDual a :=\n  iff.rfl\n#align lt_to_dual lt_to_dual\n\n",
+ "le_to_dual":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵈ» -/\ntheorem le_to_dual [LE α] {a : «expr ᵒᵈ» α} {b : α} : a ≤ toDual b ↔ b ≤ ofDual a :=\n  iff.rfl\n#align le_to_dual le_to_dual\n\n",
+ "forall":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵈ» -/\n@[simp]\nprotected theorem forall {p : «expr ᵒᵈ» α → Prop} : (∀ a, p a) ↔ ∀ a, p (toDual a) :=\n  iff.rfl\n#align forall forall\n\n",
+ "exists":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵈ» -/\n@[simp]\nprotected theorem exists {p : «expr ᵒᵈ» α → Prop} : (∃ a, p a) ↔ ∃ a, p (toDual a) :=\n  iff.rfl\n#align exists exists\n\n"}

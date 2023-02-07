@@ -1,0 +1,28 @@
+{"to_list_take":
+ "@[simp]\ntheorem to_list_take {n m : ℕ} (v : Vector α m) : toList (take n v) = list.take n (toList v) := by cases v; rfl\n#align to_list_take to_list_take\n\n",
+ "to_list_nil":
+ "@[simp]\ntheorem to_list_nil : toList nil = @list.nil α :=\n  rfl\n#align to_list_nil to_list_nil\n\n",
+ "to_list_mk":
+ "@[simp]\ntheorem to_list_mk (v : list α) (P : list.length v = n) : toList (subtype.mk v P) = v :=\n  rfl\n#align to_list_mk to_list_mk\n\n",
+ "to_list_length":
+ "@[simp]\ntheorem to_list_length (v : Vector α n) : (toList v).length = n :=\n  v.2\n#align to_list_length to_list_length\n\n",
+ "to_list_drop":
+ "@[simp]\ntheorem to_list_drop {n m : ℕ} (v : Vector α m) : toList (drop n v) = list.drop n (toList v) := by cases v; rfl\n#align to_list_drop to_list_drop\n\n",
+ "to_list_cons":
+ "@[simp]\ntheorem to_list_cons (a : α) (v : Vector α n) : toList (cons a v) = a :: toList v := by cases v; rfl\n#align to_list_cons to_list_cons\n\n",
+ "to_list_append":
+ "@[simp]\ntheorem to_list_append {n m : nat} (v : Vector α n) (w : Vector α m) : toList (append v w) = toList v ++ toList w := by\n  cases v; cases w; rfl\n#align to_list_append to_list_append\n\n",
+ "tail_cons":
+ "theorem tail_cons (a : α) : ∀ v : Vector α n, tail (cons a v) = v\n  | ⟨l, h⟩ => rfl\n#align tail_cons tail_cons\n\n",
+ "map_nil":
+ "-- map\n@[simp]\ntheorem map_nil (f : α → β) : map f nil = nil :=\n  rfl\n#align map_nil map_nil\n\n",
+ "map_cons":
+ "theorem map_cons (f : α → β) (a : α) : ∀ v : Vector α n, map f (cons a v) = cons (f a) (map f v)\n  | ⟨l, h⟩ => rfl\n#align map_cons map_cons\n\n",
+ "head_cons":
+ "/-\nCopyright (c) 2015 Microsoft Corporation. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthor: Leonardo de Moura\n\nTuples are lists of a fixed size.\nIt is implemented as a subtype.\n-/\ntheorem head_cons (a : α) : ∀ v : Vector α n, head (cons a v) = a\n  | ⟨l, h⟩ => rfl\n#align head_cons head_cons\n\n",
+ "eq_nil":
+ "protected theorem eq_nil (v : Vector α 0) : v = nil :=\n  v.eq nil (list.eq_nil_of_length_eq_zero v.2)\n#align eq_nil eq_nil\n\n",
+ "eq":
+ "protected theorem eq {n : ℕ} : ∀ a1 a2 : Vector α n, toList a1 = toList a2 → a1 = a2\n  | ⟨x, h1⟩, ⟨_, h2⟩, rfl => rfl\n#align eq eq\n\n",
+ "cons_head_tail":
+ "@[simp]\ntheorem cons_head_tail : ∀ v : Vector α (succ n), cons (head v) (tail v) = v\n  | ⟨[], h⟩ => by contradiction\n  | ⟨a :: v, h⟩ => rfl\n#align cons_head_tail cons_head_tail\n\n"}

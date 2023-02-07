@@ -1,0 +1,184 @@
+{"zero_apply":
+ "@[simp]\ntheorem zero_apply (x : M) : (0 : quadratic_form R M) x = 0 :=\n  rfl\n#align zero_apply zero_apply\n\n",
+ "weighted_sum_squares_apply":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `finset.sum_univ -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.sum_univ -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n@[simp]\ntheorem weighted_sum_squares_apply [monoid S] [DistribMulAction S R₁] [SMulCommClass S R₁ R₁] (w : ι → S) (v : ι → R₁) :\n    weighted_sum_squares R₁ w v =\n      finset.sum_univ \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.sum_univ\"\n        («expr • » (w i) (v i * v i)) :=\n  quadratic_form.sum_apply _ _ _\n#align weighted_sum_squares_apply weighted_sum_squares_apply\n\n",
+ "to_quadratic_form_zero":
+ "@[simp]\ntheorem to_quadratic_form_zero : (0 : bilin_form R M).to_quadratic_form = 0 :=\n  rfl\n#align to_quadratic_form_zero to_quadratic_form_zero\n\n",
+ "to_quadratic_form_sum":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `finset.sum -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.sum -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `finset.sum -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.sum -/\n@[simp]\ntheorem to_quadratic_form_sum {ι : Type _} (s : Finset ι) (B : ι → bilin_form R M) :\n    (finset.sum \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.sum\" s\n          (B i)).to_quadratic_form =\n      finset.sum \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.sum\" s\n        (B i).to_quadratic_form :=\n  map_sum (to_quadratic_form_add_monoid_hom R M) B s\n#align to_quadratic_form_sum to_quadratic_form_sum\n\n",
+ "to_quadratic_form_sub":
+ "@[simp]\ntheorem to_quadratic_form_sub (B₁ B₂ : bilin_form R M) :\n    (B₁ - B₂).to_quadratic_form = B₁.to_quadratic_form - B₂.to_quadratic_form :=\n  rfl\n#align to_quadratic_form_sub to_quadratic_form_sub\n\n",
+ "to_quadratic_form_smul":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n@[simp]\ntheorem to_quadratic_form_smul [monoid S] [DistribMulAction S R] [SMulCommClass S R R] (a : S) (B : bilin_form R M) :\n    («expr • » a B).to_quadratic_form = «expr • » a B.to_quadratic_form :=\n  rfl\n#align to_quadratic_form_smul to_quadratic_form_smul\n\n",
+ "to_quadratic_form_neg":
+ "@[simp]\ntheorem to_quadratic_form_neg (B : bilin_form R M) : (-B).to_quadratic_form = -B.to_quadratic_form :=\n  rfl\n#align to_quadratic_form_neg to_quadratic_form_neg\n\n",
+ "to_quadratic_form_multiset_sum":
+ "@[simp]\ntheorem to_quadratic_form_multiset_sum (B : Multiset (bilin_form R M)) :\n    B.sum.to_quadratic_form = (B.map to_quadratic_form).sum :=\n  map_multiset_sum (to_quadratic_form_add_monoid_hom R M) B\n#align to_quadratic_form_multiset_sum to_quadratic_form_multiset_sum\n\n",
+ "to_quadratic_form_list_sum":
+ "@[simp]\ntheorem to_quadratic_form_list_sum (B : list (bilin_form R M)) :\n    B.sum.to_quadratic_form = (B.map to_quadratic_form).sum :=\n  map_list_sum (to_quadratic_form_add_monoid_hom R M) B\n#align to_quadratic_form_list_sum to_quadratic_form_list_sum\n\n",
+ "to_quadratic_form_associated":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⅟» -/\ntheorem to_quadratic_form_associated : (associated_hom S Q).to_quadratic_form = Q :=\n  quadratic_form.ext fun x =>\n    calc\n      (associated_hom S Q).to_quadratic_form x = («expr⅟») 2 * (Q x + Q x) := by\n        simp only [add_assoc, add_sub_cancel', one_mul, to_quadratic_form_apply, add_mul, associated_apply,\n          map_add_self, bit0]\n      _ = Q x := by rw [← two_mul (Q x), ← mul_assoc, invOf_mul_self, one_mul]\n      \n#align to_quadratic_form_associated to_quadratic_form_associated\n\n",
+ "to_quadratic_form_apply":
+ "@[simp]\ntheorem to_quadratic_form_apply (B : bilin_form R M) (x : M) : B.to_quadratic_form x = B x x :=\n  rfl\n#align to_quadratic_form_apply to_quadratic_form_apply\n\n",
+ "to_quadratic_form_add":
+ "@[simp]\ntheorem to_quadratic_form_add (B₁ B₂ : bilin_form R M) :\n    (B₁ + B₂).to_quadratic_form = B₁.to_quadratic_form + B₂.to_quadratic_form :=\n  rfl\n#align to_quadratic_form_add to_quadratic_form_add\n\n",
+ "to_matrix'_smul":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\ntheorem quadratic_form.to_matrix'_smul (a : R₁) (Q : quadratic_form R₁ (n → R₁)) :\n    («expr • » a Q).to_matrix' = «expr • » a Q.to_matrix' := by\n  simp only [to_matrix', linear_equiv.map_smul, linear_map.map_smul]\n#align quadratic_form.to_matrix'_smul quadratic_form.to_matrix'_smul\n\n",
+ "to_matrix'_comp":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₗ[ ] » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `matrix.mul -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `matrix.mul -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `matrix.transpose -/\n@[simp]\ntheorem to_matrix'_comp (Q : quadratic_form R₁ (m → R₁)) (f : «expr →ₗ[ ] » (n → R₁) R₁ (m → R₁)) :\n    (Q.comp f).to_matrix' = matrix.mul (matrix.mul (matrix.transpose f.to_matrix') Q.to_matrix') f.to_matrix' :=\n  by\n  ext\n  simp only [quadratic_form.associated_comp, bilin_form.to_matrix'_comp, to_matrix']\n#align to_matrix'_comp to_matrix'_comp\n\n",
+ "to_fun_eq_coe":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n/-- The `simp` normal form for a quadratic form is `coe_fn`, not `to_fun`. -/\n@[simp]\ntheorem to_fun_eq_coe : Q.to_fun = «expr⇑ » Q :=\n  rfl\n#align to_fun_eq_coe to_fun_eq_coe\n\n",
+ "sum_apply":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →+ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `finset.sum -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.sum -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `finset.sum -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.sum -/\n@[simp]\ntheorem sum_apply {ι : Type _} (Q : ι → quadratic_form R M) (s : Finset ι) (x : M) :\n    (finset.sum \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.sum\" s (Q i)) x =\n      finset.sum \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.sum\" s (Q i x) :=\n  (eval_add_monoid_hom x : «expr →+ » _ R).map_sum Q s\n#align sum_apply sum_apply\n\n",
+ "sub_apply":
+ "@[simp]\ntheorem sub_apply (Q Q' : quadratic_form R M) (x : M) : (Q - Q') x = Q x - Q' x :=\n  rfl\n#align sub_apply sub_apply\n\n",
+ "some_exists_companion":
+ "/-- In a ring the companion bilinear form is unique and equal to `quadratic_form.polar`. -/\ntheorem some_exists_companion : Q.exists_companion.some = polar_bilin Q :=\n  bilin_form.ext fun x y => by rw [polar_bilin_apply, polar, Q.exists_companion.some_spec, sub_sub, add_sub_cancel']\n#align some_exists_companion some_exists_companion\n\n",
+ "smul_apply":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n@[simp]\ntheorem smul_apply (a : S) (Q : quadratic_form R M) (x : M) : («expr • » a Q) x = «expr • » a (Q x) :=\n  rfl\n#align smul_apply smul_apply\n\n",
+ "smul":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\ntheorem pos_def.smul {R} [LinearOrderedCommRing R] [Module R M] {Q : quadratic_form R M} (h : pos_def Q) {a : R}\n    (a_pos : 0 < a) : pos_def («expr • » a Q) := fun x hx => mul_pos a_pos (h x hx)\n#align pos_def.smul pos_def.smul\n\n",
+ "proj_apply":
+ "@[simp]\ntheorem proj_apply (i j : n) (x : n → R) : proj i j x = x i * x j :=\n  rfl\n#align proj_apply proj_apply\n\n",
+ "pos_def_of_nonneg":
+ "theorem pos_def_of_nonneg {Q : quadratic_form R₂ M} (h : ∀ x, 0 ≤ Q x) (h0 : Q.anisotropic) : pos_def Q := fun x hx =>\n  lt_of_le_of_ne (h x) (ne.symm fun hQx => hx <| h0 _ hQx)\n#align pos_def_of_nonneg pos_def_of_nonneg\n\n",
+ "pos_def_iff_nonneg":
+ "theorem pos_def_iff_nonneg {Q : quadratic_form R₂ M} : pos_def Q ↔ (∀ x, 0 ≤ Q x) ∧ Q.anisotropic :=\n  ⟨fun h => ⟨h.nonneg, h.anisotropic⟩, fun ⟨n, a⟩ => pos_def_of_nonneg n a⟩\n#align pos_def_iff_nonneg pos_def_iff_nonneg\n\n",
+ "polar_zero_right":
+ "@[simp]\ntheorem polar_zero_right (y : M) : polar Q y 0 = 0 := by simp only [add_zero, polar, quadratic_form.map_zero, sub_self]\n#align polar_zero_right polar_zero_right\n\n",
+ "polar_zero_left":
+ "@[simp]\ntheorem polar_zero_left (y : M) : polar Q 0 y = 0 := by\n  simp only [polar, zero_add, quadratic_form.map_zero, sub_zero, sub_self]\n#align polar_zero_left polar_zero_left\n\n",
+ "polar_to_quadratic_form":
+ "theorem polar_to_quadratic_form (x y : M) : polar (fun x => B x x) x y = B x y + B y x := by\n  simp only [add_assoc, add_sub_cancel', add_right, polar, add_left_inj, add_neg_cancel_left, add_left,\n    sub_eq_add_neg _ (B y y), add_comm (B y x) _]\n#align polar_to_quadratic_form polar_to_quadratic_form\n\n",
+ "polar_sub_right":
+ "@[simp]\ntheorem polar_sub_right (x y y' : M) : polar Q x (y - y') = polar Q x y - polar Q x y' := by\n  rw [sub_eq_add_neg, sub_eq_add_neg, polar_add_right, polar_neg_right]\n#align polar_sub_right polar_sub_right\n\n",
+ "polar_sub_left":
+ "@[simp]\ntheorem polar_sub_left (x x' y : M) : polar Q (x - x') y = polar Q x y - polar Q x' y := by\n  rw [sub_eq_add_neg, sub_eq_add_neg, polar_add_left, polar_neg_left]\n#align polar_sub_left polar_sub_left\n\n",
+ "polar_smul_right_of_tower":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n@[simp]\ntheorem polar_smul_right_of_tower (a : S) (x y : M) : polar Q x («expr • » a y) = «expr • » a (polar Q x y) := by\n  rw [← is_scalar_tower.algebra_map_smul R a y, polar_smul_right, algebra.smul_def]\n#align polar_smul_right_of_tower polar_smul_right_of_tower\n\n",
+ "polar_smul_right":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n@[simp]\ntheorem polar_smul_right (a : R) (x y : M) : polar Q x («expr • » a y) = a * polar Q x y := by\n  rw [polar_comm Q x, polar_comm Q x, polar_smul_left]\n#align polar_smul_right polar_smul_right\n\n",
+ "polar_smul_left_of_tower":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n@[simp]\ntheorem polar_smul_left_of_tower (a : S) (x y : M) : polar Q («expr • » a x) y = «expr • » a (polar Q x y) := by\n  rw [← is_scalar_tower.algebra_map_smul R a x, polar_smul_left, algebra.smul_def]\n#align polar_smul_left_of_tower polar_smul_left_of_tower\n\n",
+ "polar_smul_left":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n@[simp]\ntheorem polar_smul_left (a : R) (x y : M) : polar Q («expr • » a x) y = a * polar Q x y :=\n  by\n  obtain ⟨B, h⟩ := Q.exists_companion\n  simp_rw [polar, h, Q.map_smul, bilin_form.smul_left, sub_sub, add_sub_cancel']\n#align polar_smul_left polar_smul_left\n\n",
+ "polar_smul":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\ntheorem polar_smul [monoid S] [DistribMulAction S R] (f : M → R) (s : S) (x y : M) :\n    polar («expr • » s f) x y = «expr • » s (polar f x y) := by simp only [polar, pi.smul_apply, smul_sub]\n#align polar_smul polar_smul\n\n",
+ "polar_self":
+ "@[simp]\ntheorem polar_self (x : M) : polar Q x x = 2 * Q x :=\n  by\n  rw [polar, map_add_self, sub_sub, sub_eq_iff_eq_add, ← two_mul, ← two_mul, ← mul_assoc]\n  norm_num\n#align polar_self polar_self\n\n",
+ "polar_neg_right":
+ "@[simp]\ntheorem polar_neg_right (x y : M) : polar Q x (-y) = -polar Q x y := by\n  rw [← neg_one_smul R y, polar_smul_right, neg_one_mul]\n#align polar_neg_right polar_neg_right\n\n",
+ "polar_neg_left":
+ "@[simp]\ntheorem polar_neg_left (x y : M) : polar Q (-x) y = -polar Q x y := by\n  rw [← neg_one_smul R x, polar_smul_left, neg_one_mul]\n#align polar_neg_left polar_neg_left\n\n",
+ "polar_neg":
+ "theorem polar_neg (f : M → R) (x y : M) : polar (-f) x y = -polar f x y := by\n  simp only [polar, pi.neg_apply, sub_eq_add_neg, neg_add]\n#align polar_neg polar_neg\n\n",
+ "polar_comp":
+ "theorem polar_comp {F : Type _} [Ring S] [AddMonoidHomClass F R S] (f : M → R) (g : F) (x y : M) :\n    polar (g ∘ f) x y = g (polar f x y) := by simp only [polar, pi.smul_apply, function.comp_apply, map_sub]\n#align polar_comp polar_comp\n\n",
+ "polar_comm":
+ "theorem polar_comm (f : M → R) (x y : M) : polar f x y = polar f y x := by\n  rw [polar, polar, add_comm, sub_sub, sub_sub, add_comm (f x) (f y)]\n#align polar_comm polar_comm\n\n",
+ "polar_add_right":
+ "@[simp]\ntheorem polar_add_right (x y y' : M) : polar Q x (y + y') = polar Q x y + polar Q x y' := by\n  rw [polar_comm Q x, polar_comm Q x, polar_comm Q x, polar_add_left]\n#align polar_add_right polar_add_right\n\n",
+ "polar_add_left_iff":
+ "/-- Auxiliary lemma to express bilinearity of `quadratic_form.polar` without subtraction. -/\ntheorem polar_add_left_iff {f : M → R} {x x' y : M} :\n    polar f (x + x') y = polar f x y + polar f x' y ↔\n      f (x + x' + y) + (f x + f x' + f y) = f (x + x') + f (x' + y) + f (y + x) :=\n  by\n  simp only [← add_assoc]\n  simp only [polar, sub_eq_iff_eq_add, eq_sub_iff_add_eq, sub_add_eq_add_sub, add_sub]\n  simp only [add_right_comm _ (f y) _, add_right_comm _ (f x') (f x)]\n  rw [add_comm y x, add_right_comm _ _ (f (x + y)), add_comm _ (f (x + y)), add_right_comm (f (x + y)), add_left_inj]\n#align polar_add_left_iff polar_add_left_iff\n\n",
+ "polar_add_left":
+ "@[simp]\ntheorem polar_add_left (x x' y : M) : polar Q (x + x') y = polar Q x y + polar Q x' y :=\n  polar_add_left_iff.mpr <| Q.map_add_add_add_map x x' y\n#align polar_add_left polar_add_left\n\n",
+ "polar_add":
+ "/-\nCopyright (c) 2020 Anne Baanen. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Anne Baanen, Kexing Ying, Eric Wieser\n-/\ntheorem polar_add (f g : M → R) (x y : M) : polar (f + g) x y = polar f x y + polar g x y :=\n  by\n  simp only [polar, pi.add_apply]\n  abel\n#align polar_add polar_add\n\n",
+ "not_anisotropic_iff_exists":
+ "/- ./././Mathport/Syntax/Translate/Basic.lean:632:2: warning: expanding binder collection (x «expr ≠ » 0) -/\ntheorem not_anisotropic_iff_exists (Q : quadratic_form R M) : ¬anisotropic Q ↔ ∃ (x : _)(_ : x ≠ 0), Q x = 0 := by\n  simp only [anisotropic, not_forall, exists_prop, and_comm']\n#align not_anisotropic_iff_exists not_anisotropic_iff_exists\n\n",
+ "nonneg":
+ "theorem pos_def.nonneg {Q : quadratic_form R₂ M} (hQ : pos_def Q) (x : M) : 0 ≤ Q x :=\n  (eq_or_ne x 0).elim (fun h => h.symm ▸ (map_zero Q).symm.le) fun h => (hQ _ h).le\n#align pos_def.nonneg pos_def.nonneg\n\n",
+ "nondegenerate_of_anisotropic":
+ "/-- A bilinear form is nondegenerate if the quadratic form it is associated with is anisotropic. -/\ntheorem nondegenerate_of_anisotropic {B : bilin_form R M} (hB : B.to_quadratic_form.anisotropic) : B.nondegenerate :=\n  fun x hx => hB _ (hx x)\n#align nondegenerate_of_anisotropic nondegenerate_of_anisotropic\n\n",
+ "neg_apply":
+ "@[simp]\ntheorem neg_apply (Q : quadratic_form R M) (x : M) : (-Q) x = -Q x :=\n  rfl\n#align neg_apply neg_apply\n\n",
+ "map_zero":
+ "#print map_zero /-\n@[simp]\ntheorem map_zero : Q 0 = 0 := by rw [← @zero_smul R _ _ _ _ (0 : M), map_smul, zero_mul, zero_mul]\n#align map_zero map_zero\n-/\n\n",
+ "map_sub":
+ "#print map_sub /-\ntheorem map_sub (x y : M) : Q (x - y) = Q (y - x) := by rw [← neg_sub, map_neg]\n#align map_sub map_sub\n-/\n\n",
+ "map_smul_of_tower":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\ntheorem map_smul_of_tower [CommSemiring S] [algebra S R] [Module S M] [IsScalarTower S R M] (a : S) (x : M) :\n    Q («expr • » a x) = «expr • » (a * a) (Q x) := by\n  rw [← is_scalar_tower.algebra_map_smul R a x, map_smul, ← RingHom.map_mul, algebra.smul_def]\n#align map_smul_of_tower map_smul_of_tower\n\n",
+ "map_smul":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\ntheorem map_smul (a : R) (x : M) : Q («expr • » a x) = a * a * Q x :=\n  Q.to_fun_smul a x\n#align map_smul map_smul\n\n",
+ "map_neg":
+ "#print map_neg /-\n@[simp]\ntheorem map_neg (x : M) : Q (-x) = Q x := by rw [← @neg_one_smul R _ _ _ _ x, map_smul, neg_one_mul, neg_neg, one_mul]\n#align map_neg map_neg\n-/\n\n",
+ "map_add_self":
+ "theorem map_add_self (x : M) : Q (x + x) = 4 * Q x :=\n  by\n  rw [← one_smul R x, ← add_smul, map_smul]\n  norm_num\n#align map_add_self map_add_self\n\n",
+ "map_add_add_add_map":
+ "theorem map_add_add_add_map (x y z : M) : Q (x + y + z) + (Q x + Q y + Q z) = Q (x + y) + Q (y + z) + Q (z + x) :=\n  by\n  obtain ⟨B, h⟩ := Q.exists_companion\n  rw [add_comm z x]\n  simp [h]\n  abel\n#align map_add_add_add_map map_add_add_add_map\n\n",
+ "lin_mul_lin_self_pos_def":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₗ[ ] » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\ntheorem lin_mul_lin_self_pos_def {R} [LinearOrderedCommRing R] [Module R M] (f : «expr →ₗ[ ] » M R R)\n    (hf : linear_map.ker f = «expr⊥») : pos_def (lin_mul_lin f f) := fun x hx =>\n  mul_self_pos.2 fun h => hx <| linear_map.ker_eq_bot'.mp hf _ h\n#align lin_mul_lin_self_pos_def lin_mul_lin_self_pos_def\n\n",
+ "lin_mul_lin_comp":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₗ[ ] » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₗ[ ] » -/\n@[simp]\ntheorem lin_mul_lin_comp (f g : «expr →ₗ[ ] » M R R) (h : «expr →ₗ[ ] » N R M) :\n    (lin_mul_lin f g).comp h = lin_mul_lin (f.comp h) (g.comp h) :=\n  rfl\n#align lin_mul_lin_comp lin_mul_lin_comp\n\n",
+ "lin_mul_lin_apply":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₗ[ ] » -/\n@[simp]\ntheorem lin_mul_lin_apply (f g : «expr →ₗ[ ] » M R R) (x) : lin_mul_lin f g x = f x * g x :=\n  rfl\n#align lin_mul_lin_apply lin_mul_lin_apply\n\n",
+ "lin_mul_lin_add":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₗ[ ] » -/\n@[simp]\ntheorem lin_mul_lin_add (f g h : «expr →ₗ[ ] » M R R) : lin_mul_lin f (g + h) = lin_mul_lin f g + lin_mul_lin f h :=\n  ext fun x => mul_add _ _ _\n#align lin_mul_lin_add lin_mul_lin_add\n\n",
+ "is_symm_to_matrix'":
+ "theorem quadratic_form.is_symm_to_matrix' (Q : quadratic_form R₁ (n → R₁)) : Q.to_matrix'.is_symm :=\n  by\n  ext (i j)\n  rw [to_matrix', bilin_form.to_matrix'_apply, bilin_form.to_matrix'_apply, associated_is_symm]\n#align quadratic_form.is_symm_to_matrix' quadratic_form.is_symm_to_matrix'\n\n",
+ "ext_iff":
+ "theorem ext_iff : Q = Q' ↔ ∀ x, Q x = Q' x :=\n  fun_like.ext_iff\n#align ext_iff ext_iff\n\n",
+ "ext":
+ "-- this must come after the coe_to_fun definition\n@[ext]\ntheorem ext (H : ∀ x : M, Q x = Q' x) : Q = Q' :=\n  fun_like.ext _ _ H\n#align ext ext\n\n",
+ "exists_quadratic_form_ne_zero":
+ "/-- There exists a non-null vector with respect to any quadratic form `Q` whose associated\nbilinear form is non-zero, i.e. there exists `x` such that `Q x ≠ 0`. -/\ntheorem exists_quadratic_form_ne_zero {Q : quadratic_form R M} (hB₁ : Q.associated' ≠ 0) : ∃ x, Q x ≠ 0 :=\n  by\n  rw [← not_forall]\n  intro h\n  apply hB₁\n  rw [(quadratic_form.ext h : Q = 0), linear_map.map_zero]\n#align exists_quadratic_form_ne_zero exists_quadratic_form_ne_zero\n\n",
+ "exists_orthogonal_basis":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ∙ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/-- Given a symmetric bilinear form `B` on some vector space `V` over a field `K`\nin which `2` is invertible, there exists an orthogonal basis with respect to `B`. -/\ntheorem exists_orthogonal_basis [hK : Invertible (2 : K)] {B : bilin_form K V} (hB₂ : B.is_symm) :\n    ∃ v : basis (fin (finrank K V)) K V, B.is_Ortho v :=\n  by\n  induction' hd : finrank K V with d ih generalizing V\n  · exact ⟨basis_of_finrank_zero hd, fun _ _ _ => zero_left _⟩\n  haveI := finrank_pos_iff.1 (hd.symm ▸ nat.succ_pos d : 0 < finrank K V)\n  -- either the bilinear form is trivial or we can pick a non-null `x`\n  obtain rfl | hB₁ := eq_or_ne B 0\n  · let b := finite_dimensional.fin_basis K V\n    rw [hd] at b\n    refine' ⟨b, fun i j hij => rfl⟩\n  obtain ⟨x, hx⟩ := exists_bilin_form_self_ne_zero hB₁ hB₂\n  rw [← submodule.finrank_add_eq_of_is_compl (is_compl_span_singleton_orthogonal hx).symm,\n    finrank_span_singleton (ne_zero_of_not_is_ortho_self x hx)] at hd\n  let B' := B.restrict (B.orthogonal <| «expr ∙ » K x)\n  obtain ⟨v', hv₁⟩ := ih (B.restrict_symm hB₂ _ : B'.is_symm) (nat.succ.inj hd)\n  -- concatenate `x` with the basis obtained by induction\n  let b :=\n    basis.mk_fin_cons x v'\n      (by\n        rintro c y hy hc\n        rw [add_eq_zero_iff_neg_eq] at hc\n        rw [← hc, submodule.neg_mem_iff] at hy\n        have := (is_compl_span_singleton_orthogonal hx).disjoint\n        rw [submodule.disjoint_def] at this\n        have := this («expr • » c x) (submodule.smul_mem _ _ <| submodule.mem_span_singleton_self _) hy\n        exact (smul_eq_zero.1 this).resolve_right fun h => hx <| h.symm ▸ zero_left _)\n      (by\n        intro y\n        refine' ⟨-B x y / B x x, fun z hz => _⟩\n        obtain ⟨c, rfl⟩ := submodule.mem_span_singleton.1 hz\n        rw [is_ortho, smul_left, add_right, smul_right, div_mul_cancel _ hx, add_neg_self, mul_zero])\n  refine' ⟨b, _⟩\n  · rw [basis.coe_mk_fin_cons]\n    intro j i\n    refine' Fin.cases _ (fun i => _) i <;> refine' Fin.cases _ (fun j => _) j <;> intro hij <;>\n      simp only [function.on_fun, fin.cons_zero, fin.cons_succ, function.comp_apply]\n    · exact (hij rfl).elim\n    · rw [is_ortho, hB₂]\n      exact (v' j).prop _ (submodule.mem_span_singleton_self x)\n    · exact (v' i).prop _ (submodule.mem_span_singleton_self x)\n    · exact hv₁ (ne_of_apply_ne _ hij)\n#align exists_orthogonal_basis exists_orthogonal_basis\n\n",
+ "exists_companion":
+ "theorem exists_companion : ∃ B : bilin_form R M, ∀ x y, Q (x + y) = Q x + Q y + B x y :=\n  Q.exists_companion'\n#align exists_companion exists_companion\n\n",
+ "exists_bilin_form_self_ne_zero":
+ "/-- There exists a non-null vector with respect to any symmetric, nonzero bilinear form `B`\non a module `M` over a ring `R` with invertible `2`, i.e. there exists some\n`x : M` such that `B x x ≠ 0`. -/\ntheorem exists_bilin_form_self_ne_zero [htwo : Invertible (2 : R)] {B : bilin_form R M} (hB₁ : B ≠ 0)\n    (hB₂ : B.is_symm) : ∃ x, ¬B.is_ortho x x :=\n  by\n  lift B to quadratic_form R M using hB₂ with Q\n  obtain ⟨x, hx⟩ := quadratic_form.exists_quadratic_form_ne_zero hB₁\n  exact ⟨x, fun h => hx (Q.associated_eq_self_apply ℕ x ▸ h)⟩\n#align exists_bilin_form_self_ne_zero exists_bilin_form_self_ne_zero\n\n",
+ "eq_zero_iff":
+ "theorem anisotropic.eq_zero_iff {Q : quadratic_form R M} (h : anisotropic Q) {x : M} : Q x = 0 ↔ x = 0 :=\n  ⟨h x, fun h => h.symm ▸ map_zero Q⟩\n#align anisotropic.eq_zero_iff anisotropic.eq_zero_iff\n\n",
+ "discr_smul":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\ntheorem discr_smul (a : R₁) : («expr • » a Q).discr = a ^ fintype.card n * Q.discr := by\n  simp only [discr, to_matrix'_smul, matrix.det_smul]\n#align discr_smul discr_smul\n\n",
+ "discr_comp":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₗ[ ] » -/\ntheorem discr_comp (f : «expr →ₗ[ ] » (n → R₁) R₁ (n → R₁)) :\n    (Q.comp f).discr = f.to_matrix'.det * f.to_matrix'.det * Q.discr := by\n  simp only [matrix.det_transpose, mul_left_comm, quadratic_form.to_matrix'_comp, mul_comm, matrix.det_mul, discr]\n#align discr_comp discr_comp\n\n",
+ "copy_eq":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\ntheorem copy_eq (Q : quadratic_form R M) (Q' : M → R) (h : Q' = «expr⇑ » Q) : Q.copy Q' h = Q :=\n  fun_like.ext' h\n#align copy_eq copy_eq\n\n",
+ "congr_fun":
+ "#print congr_fun /-\ntheorem congr_fun (h : Q = Q') (x : M) : Q x = Q' x :=\n  fun_like.congr_fun h _\n#align congr_fun congr_fun\n-/\n\n",
+ "comp_apply":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₗ[ ] » -/\n@[simp]\ntheorem comp_apply (Q : quadratic_form R N) (f : «expr →ₗ[ ] » M R N) (x : M) : (Q.comp f) x = Q (f x) :=\n  rfl\n#align comp_apply comp_apply\n\n",
+ "coe_fn_zero":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n@[simp]\ntheorem coe_fn_zero : «expr⇑ » (0 : quadratic_form R M) = 0 :=\n  rfl\n#align coe_fn_zero coe_fn_zero\n\n",
+ "coe_fn_sum":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →+ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `finset.sum -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.sum -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `finset.sum -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.sum -/\n@[simp]\ntheorem coe_fn_sum {ι : Type _} (Q : ι → quadratic_form R M) (s : Finset ι) :\n    «expr⇑ » (finset.sum \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.sum\" s (Q i)) =\n      finset.sum \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.sum\" s (Q i) :=\n  (coe_fn_add_monoid_hom : «expr →+ » _ (M → R)).map_sum Q s\n#align coe_fn_sum coe_fn_sum\n\n",
+ "coe_fn_sub":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n@[simp]\ntheorem coe_fn_sub (Q Q' : quadratic_form R M) : «expr⇑ » (Q - Q') = Q - Q' :=\n  rfl\n#align coe_fn_sub coe_fn_sub\n\n",
+ "coe_fn_smul":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n@[simp]\ntheorem coe_fn_smul (a : S) (Q : quadratic_form R M) : «expr⇑ » («expr • » a Q) = «expr • » a Q :=\n  rfl\n#align coe_fn_smul coe_fn_smul\n\n",
+ "coe_fn_neg":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n@[simp]\ntheorem coe_fn_neg (Q : quadratic_form R M) : «expr⇑ » (-Q) = -Q :=\n  rfl\n#align coe_fn_neg coe_fn_neg\n\n",
+ "coe_fn_add":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n@[simp]\ntheorem coe_fn_add (Q Q' : quadratic_form R M) : «expr⇑ » (Q + Q') = Q + Q' :=\n  rfl\n#align coe_fn_add coe_fn_add\n\n",
+ "coe_copy":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n@[simp]\ntheorem coe_copy (Q : quadratic_form R M) (Q' : M → R) (h : Q' = «expr⇑ » Q) : «expr⇑ » (Q.copy Q' h) = Q' :=\n  rfl\n#align coe_copy coe_copy\n\n",
+ "basis_repr_eq_of_is_Ortho":
+ "/-- On an orthogonal basis, the basis representation of `Q` is just a sum of squares. -/\ntheorem basis_repr_eq_of_is_Ortho {R₁ M} [CommRing R₁] [add_comm_group M] [Module R₁ M] [Invertible (2 : R₁)]\n    (Q : quadratic_form R₁ M) (v : basis ι R₁ M) (hv₂ : (associated Q).is_Ortho v) :\n    Q.basis_repr v = weighted_sum_squares _ fun i => Q (v i) :=\n  by\n  ext w\n  rw [basis_repr_apply, ← @associated_eq_self_apply R₁, sum_left, weighted_sum_squares_apply]\n  refine' sum_congr rfl fun j hj => _\n  rw [← @associated_eq_self_apply R₁, sum_right, sum_eq_single_of_mem j hj]\n  · rw [smul_left, smul_right, smul_eq_mul]\n    ring\n  · intro i _ hij\n    rw [smul_left, smul_right, show associated_hom R₁ Q (v j) (v i) = 0 from hv₂ hij.symm, mul_zero, mul_zero]\n#align basis_repr_eq_of_is_Ortho basis_repr_eq_of_is_Ortho\n\n",
+ "basis_repr_apply":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `finset.sum_univ -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.sum_univ -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n@[simp]\ntheorem basis_repr_apply (Q : quadratic_form R M) (w : ι → R) :\n    Q.basis_repr v w =\n      Q\n        (finset.sum_univ \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.sum_univ\"\n          («expr • » (w i) (v i))) :=\n  by\n  rw [← v.equiv_fun_symm_apply]\n  rfl\n#align basis_repr_apply basis_repr_apply\n\n",
+ "associated_to_quadratic_form":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⅟» -/\ntheorem associated_to_quadratic_form (B : bilin_form R M) (x y : M) :\n    associated_hom S B.to_quadratic_form x y = («expr⅟») 2 * (B x y + B y x) := by\n  simp only [associated_apply, ← polar_to_quadratic_form, polar, to_quadratic_form_apply]\n#align associated_to_quadratic_form associated_to_quadratic_form\n\n",
+ "associated_right_inverse":
+ "-- note: usually `right_inverse` lemmas are named the other way around, but this is consistent\n-- with historical naming in this file.\ntheorem associated_right_inverse :\n    function.right_inverse (associated_hom S) (bilin_form.to_quadratic_form : _ → quadratic_form R M) := fun Q =>\n  to_quadratic_form_associated S Q\n#align associated_right_inverse associated_right_inverse\n\n",
+ "associated_lin_mul_lin":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₗ[ ] » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⅟» -/\n-- Note:  When possible, rather than writing lemmas about `associated`, write a lemma applying to\n-- the more general `associated_hom` and place it in the previous section.\n@[simp]\ntheorem associated_lin_mul_lin (f g : «expr →ₗ[ ] » M R₁ R₁) :\n    (lin_mul_lin f g).associated =\n      «expr • » ((«expr⅟») (2 : R₁)) (bilin_form.lin_mul_lin f g + bilin_form.lin_mul_lin g f) :=\n  by\n  ext\n  simp only [smul_add, algebra.id.smul_eq_mul, bilin_form.lin_mul_lin_apply, quadratic_form.lin_mul_lin_apply,\n    bilin_form.smul_apply, associated_apply, bilin_form.add_apply, linear_map.map_add]\n  ring\n#align associated_lin_mul_lin associated_lin_mul_lin\n\n",
+ "associated_left_inverse":
+ "theorem associated_left_inverse (h : B₁.is_symm) : associated_hom S B₁.to_quadratic_form = B₁ :=\n  bilin_form.ext fun x y => by\n    rw [associated_to_quadratic_form, is_symm.eq h x y, ← two_mul, ← mul_assoc, invOf_mul_self, one_mul]\n#align associated_left_inverse associated_left_inverse\n\n",
+ "associated_is_symm":
+ "theorem associated_is_symm : (associated_hom S Q).is_symm := fun x y => by\n  simp only [associated_apply, add_comm, add_left_comm, sub_eq_add_neg]\n#align associated_is_symm associated_is_symm\n\n",
+ "associated_eq_self_apply":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⅟» -/\ntheorem associated_eq_self_apply (x : M) : associated_hom S Q x x = Q x :=\n  by\n  rw [associated_apply, map_add_self]\n  suffices («expr⅟») 2 * (2 * Q x) = Q x by\n    convert this\n    simp only [bit0, add_mul, one_mul]\n    abel\n  simp only [← mul_assoc, one_mul, invOf_mul_self]\n#align associated_eq_self_apply associated_eq_self_apply\n\n",
+ "associated_comp":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₗ[ ] » -/\n@[simp]\ntheorem associated_comp {N : Type v} [add_comm_group N] [Module R N] (f : «expr →ₗ[ ] » N R M) :\n    associated_hom S (Q.comp f) = (associated_hom S Q).comp f f :=\n  by\n  ext\n  simp only [quadratic_form.comp_apply, bilin_form.comp_apply, associated_apply, linear_map.map_add]\n#align associated_comp associated_comp\n\n",
+ "associated_apply":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⅟» -/\n@[simp]\ntheorem associated_apply (x y : M) : associated_hom S Q x y = («expr⅟») 2 * (Q (x + y) - Q x - Q y) :=\n  rfl\n#align associated_apply associated_apply\n\n",
+ "anisotropic":
+ "theorem pos_def.anisotropic {Q : quadratic_form R₂ M} (hQ : Q.pos_def) : Q.anisotropic := fun x hQx =>\n  by_contradiction fun hx =>\n    lt_irrefl (0 : R₂) <| by\n      have := hQ _ hx\n      rw [hQx] at this\n      exact this\n#align pos_def.anisotropic pos_def.anisotropic\n\n",
+ "add_lin_mul_lin":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₗ[ ] » -/\n@[simp]\ntheorem add_lin_mul_lin (f g h : «expr →ₗ[ ] » M R R) : lin_mul_lin (f + g) h = lin_mul_lin f h + lin_mul_lin g h :=\n  ext fun x => add_mul _ _ _\n#align add_lin_mul_lin add_lin_mul_lin\n\n",
+ "add_apply":
+ "@[simp]\ntheorem add_apply (Q Q' : quadratic_form R M) (x : M) : (Q + Q') x = Q x + Q' x :=\n  rfl\n#align add_apply add_apply\n\n",
+ "add":
+ "theorem pos_def.add (Q Q' : quadratic_form R₂ M) (hQ : pos_def Q) (hQ' : pos_def Q') : pos_def (Q + Q') := fun x hx =>\n  add_pos (hQ x hx) (hQ' x hx)\n#align pos_def.add pos_def.add\n\n"}

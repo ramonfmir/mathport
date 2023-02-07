@@ -1,0 +1,330 @@
+{"top_adj":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n@[simp]\ntheorem top_adj (v w : V) : («expr⊤» : simple_graph V).adj v w ↔ v ≠ w :=\n  iff.rfl\n#align top_adj top_adj\n\n",
+ "top":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\ntheorem is_regular_of_degree.top [decidable_eq V] :\n    («expr⊤» : simple_graph V).is_regular_of_degree (fintype.card V - 1) :=\n  by\n  intro v\n  simp\n#align is_regular_of_degree.top is_regular_of_degree.top\n\n",
+ "to_prod_injective":
+ "theorem dart.to_prod_injective : function.injective (dart.to_prod : G.dart → V × V) :=\n  dart.ext\n#align dart.to_prod_injective dart.to_prod_injective\n\n",
+ "to_embedding_complete_graph":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ » -/\ntheorem to_embedding_complete_graph {α β : Type _} (f : «expr ≃ » α β) :\n    (iso.complete_graph f).to_embedding = embedding.complete_graph f.to_embedding :=\n  rfl\n#align to_embedding_complete_graph to_embedding_complete_graph\n\n",
+ "symm_symm":
+ "@[simp]\ntheorem dart.symm_symm (d : G.dart) : d.symm.symm = d :=\n  dart.ext _ _ <| prod.swap_swap _\n#align dart.symm_symm dart.symm_symm\n\n",
+ "symm_ne":
+ "theorem dart.symm_ne (d : G.dart) : d.symm ≠ d :=\n  ne_of_apply_ne (prod.snd ∘ dart.to_prod) d.is_adj.ne\n#align dart.symm_ne dart.symm_ne\n\n",
+ "symm_mk":
+ "@[simp]\ntheorem dart.symm_mk {p : V × V} (h : G.adj p.1 p.2) : (dart.mk p h).symm = dart.mk p.swap h.symm :=\n  rfl\n#align dart.symm_mk dart.symm_mk\n\n",
+ "symm_involutive":
+ "@[simp]\ntheorem dart.symm_involutive : function.involutive (dart.symm : G.dart → G.dart) :=\n  dart.symm_symm\n#align dart.symm_involutive dart.symm_involutive\n\n",
+ "symm":
+ "theorem adj.symm {G : simple_graph V} {u v : V} (h : G.adj u v) : G.adj v u :=\n  G.symm h\n#align adj.symm adj.symm\n\n",
+ "support_mono":
+ "theorem support_mono {G G' : simple_graph V} (h : G ≤ G') : G.support ⊆ G'.support :=\n  Rel.dom_mono h\n#align support_mono support_mono\n\n",
+ "sup_adj":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊔ » -/\n@[simp]\ntheorem sup_adj (x y : simple_graph V) (v w : V) : («expr ⊔ » x y).adj v w ↔ x.adj v w ∨ y.adj v w :=\n  iff.rfl\n#align sup_adj sup_adj\n\n",
+ "spanning_coe_induce_le":
+ "theorem spanning_coe_induce_le (s : set V) : (G.induce s).spanning_coe ≤ G :=\n  map_comap_le _ _\n#align spanning_coe_induce_le spanning_coe_induce_le\n\n",
+ "singleton_disjoint_neighbor_finset":
+ "theorem singleton_disjoint_neighbor_finset : Disjoint {v} (G.neighbor_finset v) :=\n  Finset.disjoint_singleton_left.mpr <| not_mem_neighbor_finset_self _ _\n#align singleton_disjoint_neighbor_finset singleton_disjoint_neighbor_finset\n\n",
+ "sdiff_eq_delete_edges":
+ "theorem sdiff_eq_delete_edges (G G' : simple_graph V) : G \\ G' = G.delete_edges G'.edge_set :=\n  by\n  ext\n  simp\n#align sdiff_eq_delete_edges sdiff_eq_delete_edges\n\n",
+ "sdiff_adj":
+ "@[simp]\ntheorem sdiff_adj (x y : simple_graph V) (v w : V) : (x \\ y).adj v w ↔ x.adj v w ∧ ¬y.adj v w :=\n  iff.rfl\n#align sdiff_adj sdiff_adj\n\n",
+ "not_mem_neighbor_finset_self":
+ "@[simp]\ntheorem not_mem_neighbor_finset_self : v ∉ G.neighbor_finset v :=\n  (mem_neighbor_finset _ _ _).not.mpr <| G.loopless _\n#align not_mem_neighbor_finset_self not_mem_neighbor_finset_self\n\n",
+ "not_mem_common_neighbors_right":
+ "theorem not_mem_common_neighbors_right (v w : V) : w ∉ G.common_neighbors v w := fun h => ne_of_adj G h.2 rfl\n#align not_mem_common_neighbors_right not_mem_common_neighbors_right\n\n",
+ "not_mem_common_neighbors_left":
+ "theorem not_mem_common_neighbors_left (v w : V) : v ∉ G.common_neighbors v w := fun h => ne_of_adj G h.1 rfl\n#align not_mem_common_neighbors_left not_mem_common_neighbors_left\n\n",
+ "not_is_diag_of_mem_edge_set":
+ "theorem not_is_diag_of_mem_edge_set : e ∈ G.edge_set → ¬e.is_diag :=\n  sym2.ind (fun v w => adj.ne) e\n#align not_is_diag_of_mem_edge_set not_is_diag_of_mem_edge_set\n\n",
+ "not_is_diag_of_mem_edge_finset":
+ "theorem not_is_diag_of_mem_edge_finset : e ∈ G.edge_finset → ¬e.is_diag :=\n  not_is_diag_of_mem_edge_set _ ∘ mem_edge_finset.1\n#align not_is_diag_of_mem_edge_finset not_is_diag_of_mem_edge_finset\n\n",
+ "neighbor_set_union_compl_neighbor_set_eq":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\ntheorem neighbor_set_union_compl_neighbor_set_eq (G : simple_graph V) (v : V) :\n    G.neighbor_set v ∪ («expr ᶜ» G).neighbor_set v = «expr ᶜ» {v} :=\n  by\n  ext w\n  have h := @ne_of_adj _ G\n  simp_rw [Set.mem_union, mem_neighbor_set, compl_adj, Set.mem_compl_iff, Set.mem_singleton_iff]\n  tauto\n#align neighbor_set_union_compl_neighbor_set_eq neighbor_set_union_compl_neighbor_set_eq\n\n",
+ "neighbor_set_compl":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\ntheorem neighbor_set_compl (G : simple_graph V) (v : V) :\n    («expr ᶜ» G).neighbor_set v = «expr ᶜ» (G.neighbor_set v) \\ {v} :=\n  by\n  ext w\n  simp [and_comm', eq_comm]\n#align neighbor_set_compl neighbor_set_compl\n\n",
+ "neighbor_finset_eq_filter":
+ "theorem neighbor_finset_eq_filter {v : V} [decidable_rel G.adj] : G.neighbor_finset v = finset.univ.filter (G.adj v) :=\n  by\n  ext\n  simp\n#align neighbor_finset_eq_filter neighbor_finset_eq_filter\n\n",
+ "neighbor_finset_disjoint_singleton":
+ "theorem neighbor_finset_disjoint_singleton : Disjoint (G.neighbor_finset v) {v} :=\n  Finset.disjoint_singleton_right.mpr <| not_mem_neighbor_finset_self _ _\n#align neighbor_finset_disjoint_singleton neighbor_finset_disjoint_singleton\n\n",
+ "neighbor_finset_def":
+ "theorem neighbor_finset_def : G.neighbor_finset v = (G.neighbor_set v).to_finset :=\n  rfl\n#align neighbor_finset_def neighbor_finset_def\n\n",
+ "neighbor_finset_compl":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\ntheorem neighbor_finset_compl [decidable_eq V] [decidable_rel G.adj] (v : V) :\n    («expr ᶜ» G).neighbor_finset v = «expr ᶜ» (G.neighbor_finset v) \\ {v} := by\n  simp only [neighbor_finset, neighbor_set_compl, set.to_finset_diff, set.to_finset_compl, set.to_finset_singleton]\n#align neighbor_finset_compl neighbor_finset_compl\n\n",
+ "ne_of_adj_of_not_adj":
+ "theorem ne_of_adj_of_not_adj {v w x : V} (h : G.adj v x) (hn : ¬G.adj w x) : v ≠ w := fun h' => hn (h' ▸ h)\n#align ne_of_adj_of_not_adj ne_of_adj_of_not_adj\n\n",
+ "ne_of_adj":
+ "theorem ne_of_adj (h : G.adj a b) : a ≠ b := by\n  rintro rfl\n  exact G.irrefl h\n#align ne_of_adj ne_of_adj\n\n",
+ "ne'":
+ "protected theorem adj.ne' {G : simple_graph V} {a b : V} (h : G.adj a b) : b ≠ a :=\n  h.ne.symm\n#align adj.ne' adj.ne'\n\n",
+ "ne":
+ "protected theorem adj.ne {G : simple_graph V} {a b : V} (h : G.adj a b) : a ≠ b :=\n  G.ne_of_adj h\n#align adj.ne adj.ne\n\n",
+ "mono":
+ "theorem delete_far.mono (h : G.delete_far p r₂) (hr : r₁ ≤ r₂) : G.delete_far p r₁ := fun s hs hG => hr.trans <| h hs hG\n#align delete_far.mono delete_far.mono\n\n",
+ "mk_mem_incidence_set_right_iff":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⟦ ⟧» -/\ntheorem mk_mem_incidence_set_right_iff : «expr⟦ ⟧» (a, b) ∈ G.incidence_set b ↔ G.adj a b :=\n  and_iff_left <| sym2.mem_mk_right _ _\n#align mk_mem_incidence_set_right_iff mk_mem_incidence_set_right_iff\n\n",
+ "mk_mem_incidence_set_left_iff":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⟦ ⟧» -/\ntheorem mk_mem_incidence_set_left_iff : «expr⟦ ⟧» (a, b) ∈ G.incidence_set a ↔ G.adj a b :=\n  and_iff_left <| sym2.mem_mk_left _ _\n#align mk_mem_incidence_set_left_iff mk_mem_incidence_set_left_iff\n\n",
+ "mk_mem_incidence_set_iff":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⟦ ⟧» -/\ntheorem mk_mem_incidence_set_iff : «expr⟦ ⟧» (b, c) ∈ G.incidence_set a ↔ G.adj b c ∧ (a = b ∨ a = c) :=\n  and_congr_right' sym2.mem_iff\n#align mk_mem_incidence_set_iff mk_mem_incidence_set_iff\n\n",
+ "min_degree_le_degree":
+ "/-- The minimum degree in the graph is at most the degree of any particular vertex. -/\ntheorem min_degree_le_degree [decidable_rel G.adj] (v : V) : G.min_degree ≤ G.degree v :=\n  by\n  obtain ⟨t, ht⟩ := finset.min_of_mem (mem_image_of_mem (fun v => G.degree v) (mem_univ v))\n  have := finset.min_le_of_eq (mem_image_of_mem _ (mem_univ v)) ht\n  rwa [min_degree, ht]\n#align min_degree_le_degree min_degree_le_degree\n\n",
+ "mem_support":
+ "theorem mem_support {v : V} : v ∈ G.support ↔ ∃ w, G.adj v w :=\n  iff.rfl\n#align mem_support mem_support\n\n",
+ "mem_neighbor_set":
+ "@[simp]\ntheorem mem_neighbor_set (v w : V) : w ∈ G.neighbor_set v ↔ G.adj v w :=\n  iff.rfl\n#align mem_neighbor_set mem_neighbor_set\n\n",
+ "mem_neighbor_finset":
+ "@[simp]\ntheorem mem_neighbor_finset (w : V) : w ∈ G.neighbor_finset v ↔ G.adj v w :=\n  set.mem_to_finset\n#align mem_neighbor_finset mem_neighbor_finset\n\n",
+ "mem_incidence_set":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⟦ ⟧» -/\n@[simp]\ntheorem mem_incidence_set (v w : V) : «expr⟦ ⟧» (v, w) ∈ G.incidence_set v ↔ G.adj v w := by simp [incidence_set]\n#align mem_incidence_set mem_incidence_set\n\n",
+ "mem_incidence_iff_neighbor":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⟦ ⟧» -/\ntheorem mem_incidence_iff_neighbor {v w : V} : «expr⟦ ⟧» (v, w) ∈ G.incidence_set v ↔ w ∈ G.neighbor_set v := by\n  simp only [mem_incidence_set, mem_neighbor_set]\n#align mem_incidence_iff_neighbor mem_incidence_iff_neighbor\n\n",
+ "mem_incidence_finset":
+ "@[simp]\ntheorem mem_incidence_finset [decidable_eq V] (e : sym2 V) : e ∈ G.incidence_finset v ↔ e ∈ G.incidence_set v :=\n  set.mem_to_finset\n#align mem_incidence_finset mem_incidence_finset\n\n",
+ "mem_edge_set":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⟦ ⟧» -/\n@[simp]\ntheorem mem_edge_set : «expr⟦ ⟧» (v, w) ∈ G.edge_set ↔ G.adj v w :=\n  iff.rfl\n#align mem_edge_set mem_edge_set\n\n",
+ "mem_edge_finset":
+ "@[simp]\ntheorem mem_edge_finset : e ∈ G.edge_finset ↔ e ∈ G.edge_set :=\n  set.mem_to_finset\n#align mem_edge_finset mem_edge_finset\n\n",
+ "mem_common_neighbors":
+ "theorem mem_common_neighbors {u v w : V} : u ∈ G.common_neighbors v w ↔ G.adj v u ∧ G.adj w u :=\n  iff.rfl\n#align mem_common_neighbors mem_common_neighbors\n\n",
+ "max_degree_lt_card_verts":
+ "/-- The maximum degree of a nonempty graph is less than the number of vertices. Note that the assumption\nthat `V` is nonempty is necessary, as otherwise this would assert the existence of a\nnatural number less than zero.\n-/\ntheorem max_degree_lt_card_verts [decidable_rel G.adj] [nonempty V] : G.max_degree < fintype.card V :=\n  by\n  cases' G.exists_maximal_degree_vertex with v hv\n  rw [hv]\n  apply G.degree_lt_card_verts v\n#align max_degree_lt_card_verts max_degree_lt_card_verts\n\n",
+ "max_degree_le_of_forall_degree_le":
+ "/-- In a graph, if `k` is at least the degree of every vertex, then it is at least the maximum\ndegree.\n-/\ntheorem max_degree_le_of_forall_degree_le [decidable_rel G.adj] (k : ℕ) (h : ∀ v, G.degree v ≤ k) : G.max_degree ≤ k :=\n  by\n  by_cases hV : (univ : Finset V).nonempty\n  · haveI : nonempty V := univ_nonempty_iff.mp hV\n    obtain ⟨v, hv⟩ := G.exists_maximal_degree_vertex\n    rw [hv]\n    apply h\n  · rw [not_nonempty_iff_eq_empty] at hV\n    rw [max_degree, hV, image_empty]\n    exact zero_le k\n#align max_degree_le_of_forall_degree_le max_degree_le_of_forall_degree_le\n\n",
+ "map_monotone":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ↪ » -/\ntheorem map_monotone (f : «expr ↪ » V W) : monotone (simple_graph.map f) :=\n  by\n  rintro G G' h _ _ ⟨u, v, ha, rfl, rfl⟩\n  exact ⟨_, _, h ha, rfl, rfl⟩\n#align map_monotone map_monotone\n\n",
+ "map_mem_edge_set_iff":
+ "theorem map_mem_edge_set_iff {e : sym2 V} : e.map f ∈ G'.edge_set ↔ e ∈ G.edge_set :=\n  quotient.ind (fun ⟨v, w⟩ => f.map_adj_iff) e\n#align map_mem_edge_set_iff map_mem_edge_set_iff\n\n",
+ "map_mem_edge_set":
+ "theorem map_mem_edge_set {e : sym2 V} (h : e ∈ G.edge_set) : e.map f ∈ G'.edge_set :=\n  quotient.ind (fun e h => sym2.from_rel_prop.mpr (f.map_rel' h)) e h\n#align map_mem_edge_set map_mem_edge_set\n\n",
+ "map_le_iff_le_comap":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ↪ » -/\ntheorem map_le_iff_le_comap (f : «expr ↪ » V W) (G : simple_graph V) (G' : simple_graph W) :\n    G.map f ≤ G' ↔ G ≤ G'.comap f :=\n  ⟨fun h u v ha => h ⟨_, _, ha, rfl, rfl⟩, by\n    rintro h _ _ ⟨u, v, ha, rfl, rfl⟩\n    exact h ha⟩\n#align map_le_iff_le_comap map_le_iff_le_comap\n\n",
+ "map_injective":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ↪ » -/\ntheorem map_injective (f : «expr ↪ » V W) : function.injective (simple_graph.map f) :=\n  (left_inverse_comap_map f).injective\n#align map_injective map_injective\n\n",
+ "map_dart_apply":
+ "@[simp]\ntheorem map_dart_apply (d : G.dart) : f.map_dart d = ⟨d.1.map f f, f.map_adj d.2⟩ :=\n  rfl\n#align map_dart_apply map_dart_apply\n\n",
+ "map_comap_le":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ↪ » -/\ntheorem map_comap_le (f : «expr ↪ » V W) (G : simple_graph W) : (G.comap f).map f ≤ G :=\n  by\n  rw [map_le_iff_le_comap]\n  exact le_refl _\n#align map_comap_le map_comap_le\n\n",
+ "map_adj_iff":
+ "theorem map_adj_iff {v w : V} : G'.adj (f v) (f w) ↔ G.adj v w :=\n  f.map_rel_iff\n#align map_adj_iff map_adj_iff\n\n",
+ "map_adj":
+ "theorem map_adj {v w : V} (h : G.adj v w) : G'.adj (f v) (f w) :=\n  f.map_rel' h\n#align map_adj map_adj\n\n",
+ "left_inverse_comap_map":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ↪ » -/\ntheorem left_inverse_comap_map (f : «expr ↪ » V W) :\n    function.left_inverse (simple_graph.comap f) (simple_graph.map f) :=\n  comap_map_eq f\n#align left_inverse_comap_map left_inverse_comap_map\n\n",
+ "le_min_degree_of_forall_le_degree":
+ "/-- In a nonempty graph, if `k` is at most the degree of every vertex, it is at most the minimum\ndegree. Note the assumption that the graph is nonempty is necessary as long as `G.min_degree` is\ndefined to be a natural.\n-/\ntheorem le_min_degree_of_forall_le_degree [decidable_rel G.adj] [nonempty V] (k : ℕ) (h : ∀ v, k ≤ G.degree v) :\n    k ≤ G.min_degree := by\n  rcases G.exists_minimal_degree_vertex with ⟨v, hv⟩\n  rw [hv]\n  apply h\n#align le_min_degree_of_forall_le_degree le_min_degree_of_forall_le_degree\n\n",
+ "is_subgraph_eq_le":
+ "@[simp]\ntheorem is_subgraph_eq_le : (is_subgraph : simple_graph V → simple_graph V → Prop) = (· ≤ ·) :=\n  rfl\n#align is_subgraph_eq_le is_subgraph_eq_le\n\n",
+ "irrefl":
+ "#print irrefl /-\n@[simp]\nprotected theorem irrefl {v : V} : ¬G.adj v v :=\n  G.loopless v\n#align irrefl irrefl\n-/\n\n",
+ "injective_of_top_hom":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →g » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n/-- Every graph homomomorphism from a complete graph is injective. -/\ntheorem injective_of_top_hom (f : «expr →g » («expr⊤» : simple_graph V) G') : function.injective f :=\n  by\n  intro v w h\n  contrapose! h\n  exact G'.ne_of_adj (map_adj _ ((top_adj _ _).mpr h))\n#align injective_of_top_hom injective_of_top_hom\n\n",
+ "injective":
+ "theorem map_edge_set.injective (hinj : function.injective f) : function.injective f.map_edge_set :=\n  by\n  rintro ⟨e₁, h₁⟩ ⟨e₂, h₂⟩\n  dsimp [hom.map_edge_set]\n  repeat' rw [subtype.mk_eq_mk]\n  apply sym2.map.injective hinj\n#align map_edge_set.injective map_edge_set.injective\n\n",
+ "inf_adj":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊓ » -/\n@[simp]\ntheorem inf_adj (x y : simple_graph V) (v w : V) : («expr ⊓ » x y).adj v w ↔ x.adj v w ∧ y.adj v w :=\n  iff.rfl\n#align inf_adj inf_adj\n\n",
+ "induce_spanning_coe":
+ "/- Given a set `s` of vertices, we can restrict a graph to those vertices by restricting its\nadjacency relation. This gives a map between `simple_graph V` and `simple_graph s`.\n\nThere is also a notion of induced subgraphs (see `simple_graph.subgraph.induce`). -/\ntheorem induce_spanning_coe {s : set V} {G : simple_graph s} : G.spanning_coe.induce s = G :=\n  comap_map_eq _ _\n#align induce_spanning_coe induce_spanning_coe\n\n",
+ "incidence_set_subset":
+ "theorem incidence_set_subset (v : V) : G.incidence_set v ⊆ G.edge_set := fun _ h => h.1\n#align incidence_set_subset incidence_set_subset\n\n",
+ "incidence_set_inter_incidence_set_subset":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⟦ ⟧» -/\ntheorem incidence_set_inter_incidence_set_subset (h : a ≠ b) :\n    G.incidence_set a ∩ G.incidence_set b ⊆ {«expr⟦ ⟧» (a, b)} := fun e he =>\n  (sym2.mem_and_mem_iff h).1 ⟨he.1.2, he.2.2⟩\n#align incidence_set_inter_incidence_set_subset incidence_set_inter_incidence_set_subset\n\n",
+ "incidence_set_inter_incidence_set_of_not_adj":
+ "theorem incidence_set_inter_incidence_set_of_not_adj (h : ¬G.adj a b) (hn : a ≠ b) :\n    G.incidence_set a ∩ G.incidence_set b = ∅ :=\n  by\n  simp_rw [Set.eq_empty_iff_forall_not_mem, Set.mem_inter_iff, not_and]\n  intro u ha hb\n  exact h (G.adj_of_mem_incidence_set hn ha hb)\n#align incidence_set_inter_incidence_set_of_not_adj incidence_set_inter_incidence_set_of_not_adj\n\n",
+ "incidence_set_inter_incidence_set_of_adj":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⟦ ⟧» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⟦ ⟧» -/\ntheorem incidence_set_inter_incidence_set_of_adj (h : G.adj a b) :\n    G.incidence_set a ∩ G.incidence_set b = {«expr⟦ ⟧» (a, b)} :=\n  by\n  refine' (G.incidence_set_inter_incidence_set_subset <| h.ne).antisymm _\n  rintro _ (rfl : _ = «expr⟦ ⟧» (a, b))\n  exact ⟨G.mk_mem_incidence_set_left_iff.2 h, G.mk_mem_incidence_set_right_iff.2 h⟩\n#align incidence_set_inter_incidence_set_of_adj incidence_set_inter_incidence_set_of_adj\n\n",
+ "incidence_other_prop":
+ "theorem incidence_other_prop {v : V} {e : sym2 V} (h : e ∈ G.incidence_set v) :\n    G.other_vertex_of_incident h ∈ G.neighbor_set v :=\n  by\n  cases' h with he hv\n  rwa [← sym2.other_spec' hv, mem_edge_set] at he\n#align incidence_other_prop incidence_other_prop\n\n",
+ "incidence_other_neighbor_edge":
+ "@[simp]\ntheorem incidence_other_neighbor_edge {v w : V} (h : w ∈ G.neighbor_set v) :\n    G.other_vertex_of_incident (G.mem_incidence_iff_neighbor.mpr h) = w :=\n  sym2.congr_right.mp (sym2.other_spec' (G.mem_incidence_iff_neighbor.mpr h).right)\n#align incidence_other_neighbor_edge incidence_other_neighbor_edge\n\n",
+ "incidence_finset_eq_filter":
+ "theorem incidence_finset_eq_filter [decidable_eq V] [fintype G.edge_set] :\n    G.incidence_finset v = G.edge_finset.filter (has_mem.mem v) :=\n  by\n  ext e\n  refine' sym2.ind (fun x y => _) e\n  simp [mk_mem_incidence_set_iff]\n#align incidence_finset_eq_filter incidence_finset_eq_filter\n\n",
+ "from_rel_adj":
+ "/-\nCopyright (c) 2020 Aaron Anderson, Jalex Stark, Kyle Miller. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Aaron Anderson, Jalex Stark, Kyle Miller, Alena Gusakov, Hunter Monroe\n-/\n@[simp]\ntheorem simple_graph.from_rel_adj {V : Type u} (r : V → V → Prop) (v w : V) :\n    (simple_graph.from_rel r).adj v w ↔ v ≠ w ∧ (r v w ∨ r w v) :=\n  iff.rfl\n#align simple_graph.from_rel_adj simple_graph.from_rel_adj\n\n",
+ "from_edge_set_univ":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n@[simp]\ntheorem from_edge_set_univ : from_edge_set (Set.univ : set (sym2 V)) = «expr⊤» :=\n  by\n  ext (v w)\n  simp only [from_edge_set_adj, Set.mem_univ, true_and_iff, top_adj]\n#align from_edge_set_univ from_edge_set_univ\n\n",
+ "from_edge_set_sup":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊔ » -/\n@[simp]\ntheorem from_edge_set_sup (s t : set (sym2 V)) :\n    «expr ⊔ » (from_edge_set s) (from_edge_set t) = from_edge_set (s ∪ t) :=\n  by\n  ext (v w)\n  simp [Set.mem_union, or_and_right]\n#align from_edge_set_sup from_edge_set_sup\n\n",
+ "from_edge_set_sdiff":
+ "@[simp]\ntheorem from_edge_set_sdiff (s t : set (sym2 V)) : from_edge_set s \\ from_edge_set t = from_edge_set (s \\ t) :=\n  by\n  ext (v w)\n  constructor <;> simp (config := { contextual := true })\n#align from_edge_set_sdiff from_edge_set_sdiff\n\n",
+ "from_edge_set_mono":
+ "@[mono]\ntheorem from_edge_set_mono {s t : set (sym2 V)} (h : s ⊆ t) : from_edge_set s ≤ from_edge_set t :=\n  by\n  rintro v w\n  simp (config := { contextual := true }) only [from_edge_set_adj, ne.def, not_false_iff, and_true_iff, and_imp]\n  exact fun vws _ => h vws\n#align from_edge_set_mono from_edge_set_mono\n\n",
+ "from_edge_set_inf":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊓ » -/\n@[simp]\ntheorem from_edge_set_inf (s t : set (sym2 V)) :\n    «expr ⊓ » (from_edge_set s) (from_edge_set t) = from_edge_set (s ∩ t) :=\n  by\n  ext (v w)\n  simp only [from_edge_set_adj, Set.mem_inter_iff, ne.def, inf_adj]\n  tauto\n#align from_edge_set_inf from_edge_set_inf\n\n",
+ "from_edge_set_empty":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n@[simp]\ntheorem from_edge_set_empty : from_edge_set (∅ : set (sym2 V)) = «expr⊥» :=\n  by\n  ext (v w)\n  simp only [from_edge_set_adj, Set.mem_empty_iff_false, false_and_iff, bot_adj]\n#align from_edge_set_empty from_edge_set_empty\n\n",
+ "from_edge_set_edge_set":
+ "@[simp]\ntheorem from_edge_set_edge_set : from_edge_set G.edge_set = G :=\n  by\n  ext (v w)\n  exact ⟨fun h => h.1, fun h => ⟨h, G.ne_of_adj h⟩⟩\n#align from_edge_set_edge_set from_edge_set_edge_set\n\n",
+ "from_edge_set_adj":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⟦ ⟧» -/\n@[simp]\ntheorem from_edge_set_adj : (from_edge_set s).adj v w ↔ «expr⟦ ⟧» (v, w) ∈ s ∧ v ≠ w :=\n  iff.rfl\n#align from_edge_set_adj from_edge_set_adj\n\n",
+ "exists_minimal_degree_vertex":
+ "/-- There exists a vertex of minimal degree. Note the assumption of being nonempty is necessary, as\nthe lemma implies there exists a vertex.\n-/\ntheorem exists_minimal_degree_vertex [decidable_rel G.adj] [nonempty V] : ∃ v, G.min_degree = G.degree v :=\n  by\n  obtain ⟨t, ht : _ = _⟩ := min_of_nonempty (univ_nonempty.image fun v => G.degree v)\n  obtain ⟨v, _, rfl⟩ := mem_image.mp (mem_of_min ht)\n  refine' ⟨v, by simp [min_degree, ht]⟩\n#align exists_minimal_degree_vertex exists_minimal_degree_vertex\n\n",
+ "exists_maximal_degree_vertex":
+ "/-- There exists a vertex of maximal degree. Note the assumption of being nonempty is necessary, as\nthe lemma implies there exists a vertex.\n-/\ntheorem exists_maximal_degree_vertex [decidable_rel G.adj] [nonempty V] : ∃ v, G.max_degree = G.degree v :=\n  by\n  obtain ⟨t, ht⟩ := max_of_nonempty (univ_nonempty.image fun v => G.degree v)\n  have ht₂ := mem_of_max ht\n  simp only [mem_image, mem_univ, exists_prop_of_true] at ht₂\n  rcases ht₂ with ⟨v, rfl⟩\n  refine' ⟨v, _⟩\n  rw [max_degree, ht]\n  rfl\n#align exists_maximal_degree_vertex exists_maximal_degree_vertex\n\n",
+ "empty_graph_eq_bot":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n@[simp]\ntheorem empty_graph_eq_bot (V : Type u) : empty_graph V = «expr⊥» :=\n  rfl\n#align empty_graph_eq_bot empty_graph_eq_bot\n\n",
+ "edge_symm":
+ "@[simp]\ntheorem dart.edge_symm (d : G.dart) : d.symm.edge = d.edge :=\n  sym2.mk_prod_swap_eq\n#align dart.edge_symm dart.edge_symm\n\n",
+ "edge_set_univ_card":
+ "@[simp]\ntheorem edge_set_univ_card : (univ : Finset G.edge_set).card = G.edge_finset.card :=\n  fintype.card_of_subtype G.edge_finset fun _ => mem_edge_finset\n#align edge_set_univ_card edge_set_univ_card\n\n",
+ "edge_set_sup":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊔ » -/\n@[simp]\ntheorem edge_set_sup : («expr ⊔ » G₁ G₂).edge_set = G₁.edge_set ∪ G₂.edge_set :=\n  by\n  ext ⟨x, y⟩\n  rfl\n#align edge_set_sup edge_set_sup\n\n",
+ "edge_set_subset_edge_set":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ↪o » -/\n@[simp]\ntheorem edge_set_subset_edge_set : G₁.edge_set ⊆ G₂.edge_set ↔ G₁ ≤ G₂ :=\n  (edge_set : «expr ↪o » (simple_graph V) (set (sym2 V))).le_iff_le\n#align edge_set_subset_edge_set edge_set_subset_edge_set\n\n",
+ "edge_set_ssubset_edge_set":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ↪o » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊂ » -/\n@[simp]\ntheorem edge_set_ssubset_edge_set : «expr ⊂ » G₁.edge_set G₂.edge_set ↔ G₁ < G₂ :=\n  (edge_set : «expr ↪o » (simple_graph V) (set (sym2 V))).lt_iff_lt\n#align edge_set_ssubset_edge_set edge_set_ssubset_edge_set\n\n",
+ "edge_set_sdiff_sdiff_is_diag":
+ "/-- This lemma, combined with `edge_set_sdiff` and `edge_set_from_edge_set`,\nallows proving `(G \\ from_edge_set s).edge_set = G.edge_set \\ s` by `simp`.\n-/\n@[simp]\ntheorem edge_set_sdiff_sdiff_is_diag (G : simple_graph V) (s : set (sym2 V)) :\n    G.edge_set \\ (s \\ { e | e.is_diag }) = G.edge_set \\ s :=\n  by\n  ext e\n  simp only [Set.mem_diff, Set.mem_setOf_eq, not_and, not_not, and_congr_right_iff]\n  intro h\n  simp only [G.not_is_diag_of_mem_edge_set h, imp_false]\n#align edge_set_sdiff_sdiff_is_diag edge_set_sdiff_sdiff_is_diag\n\n",
+ "edge_set_sdiff":
+ "@[simp]\ntheorem edge_set_sdiff : (G₁ \\ G₂).edge_set = G₁.edge_set \\ G₂.edge_set :=\n  by\n  ext ⟨x, y⟩\n  rfl\n#align edge_set_sdiff edge_set_sdiff\n\n",
+ "edge_set_injective":
+ "theorem edge_set_injective : injective (edge_set : simple_graph V → set (sym2 V)) :=\n  edge_set.injective\n#align edge_set_injective edge_set_injective\n\n",
+ "edge_set_inj":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ↪o » -/\n@[simp]\ntheorem edge_set_inj : G₁.edge_set = G₂.edge_set ↔ G₁ = G₂ :=\n  (edge_set : «expr ↪o » (simple_graph V) (set (sym2 V))).eq_iff_eq\n#align edge_set_inj edge_set_inj\n\n",
+ "edge_set_inf":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊓ » -/\n@[simp]\ntheorem edge_set_inf : («expr ⊓ » G₁ G₂).edge_set = G₁.edge_set ∩ G₂.edge_set :=\n  by\n  ext ⟨x, y⟩\n  rfl\n#align edge_set_inf edge_set_inf\n\n",
+ "edge_set_from_edge_set":
+ "-- Note: we need to make sure `from_edge_set_adj` and this lemma are confluent.\n-- In particular, both yield `⟦(u, v)⟧ ∈ (from_edge_set s).edge_set` ==> `⟦(v, w)⟧ ∈ s ∧ v ≠ w`.\n@[simp]\ntheorem edge_set_from_edge_set : (from_edge_set s).edge_set = s \\ { e | e.is_diag } :=\n  by\n  ext e\n  exact sym2.ind (by simp) e\n#align edge_set_from_edge_set edge_set_from_edge_set\n\n",
+ "edge_set_delete_edges":
+ "theorem edge_set_delete_edges (s : set (sym2 V)) : (G.delete_edges s).edge_set = G.edge_set \\ s :=\n  by\n  ext e\n  refine' sym2.ind _ e\n  simp\n#align edge_set_delete_edges edge_set_delete_edges\n\n",
+ "edge_set_bot":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n@[simp]\ntheorem edge_set_bot : («expr⊥» : simple_graph V).edge_set = ∅ :=\n  sym2.from_rel_bot\n#align edge_set_bot edge_set_bot\n\n",
+ "edge_other_ne":
+ "theorem edge_other_ne {e : sym2 V} (he : e ∈ G.edge_set) {v : V} (h : v ∈ e) : h.other ≠ v :=\n  by\n  erw [← sym2.other_spec h, sym2.eq_swap] at he\n  exact G.ne_of_adj he\n#align edge_other_ne edge_other_ne\n\n",
+ "edge_other_incident_set":
+ "theorem edge_other_incident_set {v : V} {e : sym2 V} (h : e ∈ G.incidence_set v) :\n    e ∈ G.incidence_set (G.other_vertex_of_incident h) :=\n  by\n  use h.1\n  simp [other_vertex_of_incident, sym2.other_mem']\n#align edge_other_incident_set edge_other_incident_set\n\n",
+ "edge_mk":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⟦ ⟧» -/\n@[simp]\ntheorem dart.edge_mk {p : V × V} (h : G.adj p.1 p.2) : (dart.mk p h).edge = «expr⟦ ⟧» p :=\n  rfl\n#align dart.edge_mk dart.edge_mk\n\n",
+ "edge_mem_incidence_set_iff":
+ "theorem edge_mem_incidence_set_iff {e : G.edge_set} : ↑e ∈ G.incidence_set a ↔ a ∈ (e : sym2 V) :=\n  and_iff_right e.2\n#align edge_mem_incidence_set_iff edge_mem_incidence_set_iff\n\n",
+ "edge_mem":
+ "@[simp]\ntheorem dart.edge_mem (d : G.dart) : d.edge ∈ G.edge_set :=\n  d.is_adj\n#align dart.edge_mem dart.edge_mem\n\n",
+ "edge_finset_sup":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊔ » -/\n@[simp]\ntheorem edge_finset_sup : («expr ⊔ » G₁ G₂).edge_finset = G₁.edge_finset ∪ G₂.edge_finset := by simp [edge_finset]\n#align edge_finset_sup edge_finset_sup\n\n",
+ "edge_finset_subset_edge_finset":
+ "@[simp]\ntheorem edge_finset_subset_edge_finset : G₁.edge_finset ⊆ G₂.edge_finset ↔ G₁ ≤ G₂ := by simp [edge_finset]\n#align edge_finset_subset_edge_finset edge_finset_subset_edge_finset\n\n",
+ "edge_finset_ssubset_edge_finset":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊂ » -/\n@[simp]\ntheorem edge_finset_ssubset_edge_finset : «expr ⊂ » G₁.edge_finset G₂.edge_finset ↔ G₁ < G₂ := by simp [edge_finset]\n#align edge_finset_ssubset_edge_finset edge_finset_ssubset_edge_finset\n\n",
+ "edge_finset_sdiff":
+ "@[simp]\ntheorem edge_finset_sdiff : (G₁ \\ G₂).edge_finset = G₁.edge_finset \\ G₂.edge_finset := by simp [edge_finset]\n#align edge_finset_sdiff edge_finset_sdiff\n\n",
+ "edge_finset_inj":
+ "@[simp]\ntheorem edge_finset_inj : G₁.edge_finset = G₂.edge_finset ↔ G₁ = G₂ := by simp [edge_finset]\n#align edge_finset_inj edge_finset_inj\n\n",
+ "edge_finset_inf":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊓ » -/\n@[simp]\ntheorem edge_finset_inf : («expr ⊓ » G₁ G₂).edge_finset = G₁.edge_finset ∩ G₂.edge_finset := by simp [edge_finset]\n#align edge_finset_inf edge_finset_inf\n\n",
+ "edge_finset_delete_edges":
+ "theorem edge_finset_delete_edges [fintype V] [decidable_eq V] [decidable_rel G.adj] (s : Finset (sym2 V))\n    [decidable_rel (G.delete_edges s).adj] : (G.delete_edges s).edge_finset = G.edge_finset \\ s :=\n  by\n  ext e\n  simp [edge_set_delete_edges]\n#align edge_finset_delete_edges edge_finset_delete_edges\n\n",
+ "edge_finset_card":
+ "theorem edge_finset_card : G.edge_finset.card = fintype.card G.edge_set :=\n  set.to_finset_card _\n#align edge_finset_card edge_finset_card\n\n",
+ "edge_finset_bot":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n@[simp]\ntheorem edge_finset_bot : («expr⊥» : simple_graph V).edge_finset = ∅ := by simp [edge_finset]\n#align edge_finset_bot edge_finset_bot\n\n",
+ "edge_comp_symm":
+ "@[simp]\ntheorem dart.edge_comp_symm : dart.edge ∘ dart.symm = (dart.edge : G.dart → sym2 V) :=\n  funext dart.edge_symm\n#align dart.edge_comp_symm dart.edge_comp_symm\n\n",
+ "delete_far_iff":
+ "theorem delete_far_iff : G.delete_far p r ↔ ∀ ⦃H⦄, H ≤ G → p H → r ≤ G.edge_finset.card - H.edge_finset.card :=\n  by\n  refine' ⟨fun h H hHG hH => _, fun h s hs hG => _⟩\n  · have := h (sdiff_subset G.edge_finset H.edge_finset)\n    simp only [delete_edges_sdiff_eq_of_le _ hHG, edge_finset_mono hHG, card_sdiff, card_le_of_subset, coe_sdiff,\n      coe_edge_finset, Nat.cast_sub] at this\n    exact this hH\n  ·\n    simpa [card_sdiff hs, edge_finset_delete_edges, -set.to_finset_card, Nat.cast_sub, card_le_of_subset hs] using\n      h (G.delete_edges_le s) hG\n#align delete_far_iff delete_far_iff\n\n",
+ "delete_edges_univ_eq":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n@[simp]\ntheorem delete_edges_univ_eq : G.delete_edges Set.univ = «expr⊥» :=\n  by\n  ext\n  simp\n#align delete_edges_univ_eq delete_edges_univ_eq\n\n",
+ "delete_edges_sdiff_eq_of_le":
+ "theorem delete_edges_sdiff_eq_of_le {H : simple_graph V} (h : H ≤ G) : G.delete_edges (G.edge_set \\ H.edge_set) = H :=\n  by\n  ext (v w)\n  constructor <;> simp (config := { contextual := true }) [@h v w]\n#align delete_edges_sdiff_eq_of_le delete_edges_sdiff_eq_of_le\n\n",
+ "delete_edges_le_of_le":
+ "theorem delete_edges_le_of_le {s s' : set (sym2 V)} (h : s ⊆ s') : G.delete_edges s' ≤ G.delete_edges s := fun v w =>\n  by\n  simp (config := { contextual := true }) only [delete_edges_adj, and_imp, true_and_iff]\n  exact fun ha hn hs => hn (h hs)\n#align delete_edges_le_of_le delete_edges_le_of_le\n\n",
+ "delete_edges_le":
+ "theorem delete_edges_le (s : set (sym2 V)) : G.delete_edges s ≤ G :=\n  by\n  intro\n  simp (config := { contextual := true })\n#align delete_edges_le delete_edges_le\n\n",
+ "delete_edges_eq_sdiff_from_edge_set":
+ "theorem delete_edges_eq_sdiff_from_edge_set (s : set (sym2 V)) : G.delete_edges s = G \\ from_edge_set s :=\n  by\n  ext\n  exact ⟨fun h => ⟨h.1, not_and_of_not_left _ h.2⟩, fun h => ⟨h.1, not_and'.mp h.2 h.ne⟩⟩\n#align delete_edges_eq_sdiff_from_edge_set delete_edges_eq_sdiff_from_edge_set\n\n",
+ "delete_edges_eq_inter_edge_set":
+ "theorem delete_edges_eq_inter_edge_set (s : set (sym2 V)) : G.delete_edges s = G.delete_edges (s ∩ G.edge_set) :=\n  by\n  ext\n  simp (config := { contextual := true }) [imp_false]\n#align delete_edges_eq_inter_edge_set delete_edges_eq_inter_edge_set\n\n",
+ "delete_edges_empty_eq":
+ "@[simp]\ntheorem delete_edges_empty_eq : G.delete_edges ∅ = G := by\n  ext\n  simp\n#align delete_edges_empty_eq delete_edges_empty_eq\n\n",
+ "delete_edges_delete_edges":
+ "@[simp]\ntheorem delete_edges_delete_edges (s s' : set (sym2 V)) :\n    (G.delete_edges s).delete_edges s' = G.delete_edges (s ∪ s') :=\n  by\n  ext\n  simp [and_assoc', not_or]\n#align delete_edges_delete_edges delete_edges_delete_edges\n\n",
+ "delete_edges_adj":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⟦ ⟧» -/\n@[simp]\ntheorem delete_edges_adj (s : set (sym2 V)) (v w : V) :\n    (G.delete_edges s).adj v w ↔ G.adj v w ∧ ¬«expr⟦ ⟧» (v, w) ∈ s :=\n  iff.rfl\n#align delete_edges_adj delete_edges_adj\n\n",
+ "degree_pos_iff_exists_adj":
+ "theorem degree_pos_iff_exists_adj : 0 < G.degree v ↔ ∃ w, G.adj v w := by\n  simp only [degree, card_pos, Finset.Nonempty, mem_neighbor_finset]\n#align degree_pos_iff_exists_adj degree_pos_iff_exists_adj\n\n",
+ "degree_lt_card_verts":
+ "theorem degree_lt_card_verts [decidable_rel G.adj] (v : V) : G.degree v < fintype.card V := by\n  classical\n    apply finset.card_lt_card\n    rw [Finset.ssubset_iff]\n    exact ⟨v, by simp, finset.subset_univ _⟩\n#align degree_lt_card_verts degree_lt_card_verts\n\n",
+ "degree_le_max_degree":
+ "/-- The maximum degree in the graph is at least the degree of any particular vertex. -/\ntheorem degree_le_max_degree [decidable_rel G.adj] (v : V) : G.degree v ≤ G.max_degree :=\n  by\n  obtain ⟨t, ht : _ = _⟩ := finset.max_of_mem (mem_image_of_mem (fun v => G.degree v) (mem_univ v))\n  have := finset.le_max_of_eq (mem_image_of_mem _ (mem_univ v)) ht\n  rwa [max_degree, ht]\n#align degree_le_max_degree degree_le_max_degree\n\n",
+ "degree_eq":
+ "theorem is_regular_of_degree.degree_eq {d : ℕ} (h : G.is_regular_of_degree d) (v : V) : G.degree v = d :=\n  h v\n#align is_regular_of_degree.degree_eq is_regular_of_degree.degree_eq\n\n",
+ "degree_compl":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\ntheorem degree_compl [fintype ((«expr ᶜ» G).neighbor_set v)] [fintype V] :\n    («expr ᶜ» G).degree v = fintype.card V - 1 - G.degree v := by\n  classical\n    rw [← card_neighbor_set_union_compl_neighbor_set G v, set.to_finset_union]\n    simp [card_disjoint_union (set.disjoint_to_finset.mpr (compl_neighbor_set_disjoint G v))]\n#align degree_compl degree_compl\n\n",
+ "dart_of_neighbor_set_injective":
+ "theorem dart_of_neighbor_set_injective (v : V) : function.injective (G.dart_of_neighbor_set v) := fun e₁ e₂ h =>\n  subtype.ext <| by\n    injection h with h'\n    convert congr_arg prod.snd h'\n#align dart_of_neighbor_set_injective dart_of_neighbor_set_injective\n\n",
+ "dart_edge_eq_mk_iff'":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⟦ ⟧» -/\ntheorem dart_edge_eq_mk_iff' :\n    ∀ {d : G.dart} {u v : V}, d.edge = «expr⟦ ⟧» (u, v) ↔ d.fst = u ∧ d.snd = v ∨ d.fst = v ∧ d.snd = u :=\n  by\n  rintro ⟨⟨a, b⟩, h⟩ u v\n  rw [dart_edge_eq_mk_iff]\n  simp\n#align dart_edge_eq_mk_iff' dart_edge_eq_mk_iff'\n\n",
+ "dart_edge_eq_mk_iff":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⟦ ⟧» -/\ntheorem dart_edge_eq_mk_iff : ∀ {d : G.dart} {p : V × V}, d.edge = «expr⟦ ⟧» p ↔ d.to_prod = p ∨ d.to_prod = p.swap :=\n  by\n  rintro ⟨p, h⟩\n  apply sym2.mk_eq_mk_iff\n#align dart_edge_eq_mk_iff dart_edge_eq_mk_iff\n\n",
+ "dart_edge_eq_iff":
+ "theorem dart_edge_eq_iff : ∀ d₁ d₂ : G.dart, d₁.edge = d₂.edge ↔ d₁ = d₂ ∨ d₁ = d₂.symm :=\n  by\n  rintro ⟨p, hp⟩ ⟨q, hq⟩\n  simp [sym2.mk_eq_mk_iff]\n#align dart_edge_eq_iff dart_edge_eq_iff\n\n",
+ "complete_graph_eq_top":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n@[simp]\ntheorem complete_graph_eq_top (V : Type u) : complete_graph V = «expr⊤» :=\n  rfl\n#align complete_graph_eq_top complete_graph_eq_top\n\n",
+ "complete_graph_degree":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n@[simp]\ntheorem complete_graph_degree [decidable_eq V] (v : V) : («expr⊤» : simple_graph V).degree v = fintype.card V - 1 := by\n  erw [degree, neighbor_finset_eq_filter, filter_ne, card_erase_of_mem (mem_univ v), card_univ]\n#align complete_graph_degree complete_graph_degree\n\n",
+ "compl_neighbor_set_disjoint":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\ntheorem compl_neighbor_set_disjoint (G : simple_graph V) (v : V) :\n    Disjoint (G.neighbor_set v) ((«expr ᶜ» G).neighbor_set v) :=\n  by\n  rw [Set.disjoint_iff]\n  rintro w ⟨h, h'⟩\n  rw [mem_neighbor_set, compl_adj] at h'\n  exact h'.2 h\n#align compl_neighbor_set_disjoint compl_neighbor_set_disjoint\n\n",
+ "compl_eq_delete_edges":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\ntheorem compl_eq_delete_edges : «expr ᶜ» G = («expr⊤» : simple_graph V).delete_edges G.edge_set :=\n  by\n  ext\n  simp\n#align compl_eq_delete_edges compl_eq_delete_edges\n\n",
+ "compl_adj":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\n@[simp]\ntheorem compl_adj (G : simple_graph V) (v w : V) : («expr ᶜ» G).adj v w ↔ v ≠ w ∧ ¬G.adj v w :=\n  iff.rfl\n#align compl_adj compl_adj\n\n",
+ "compl":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\ntheorem is_regular_of_degree.compl [fintype V] [decidable_eq V] {G : simple_graph V} [decidable_rel G.adj] {k : ℕ}\n    (h : G.is_regular_of_degree k) : («expr ᶜ» G).is_regular_of_degree (fintype.card V - 1 - k) :=\n  by\n  intro v\n  rw [degree_compl, h v]\n#align is_regular_of_degree.compl is_regular_of_degree.compl\n\n",
+ "common_neighbors_top_eq":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\ntheorem common_neighbors_top_eq {v w : V} : («expr⊤» : simple_graph V).common_neighbors v w = Set.univ \\ {v, w} :=\n  by\n  ext u\n  simp [common_neighbors, eq_comm, not_or_distrib.symm]\n#align common_neighbors_top_eq common_neighbors_top_eq\n\n",
+ "common_neighbors_symm":
+ "theorem common_neighbors_symm (v w : V) : G.common_neighbors v w = G.common_neighbors w v :=\n  Set.inter_comm _ _\n#align common_neighbors_symm common_neighbors_symm\n\n",
+ "common_neighbors_subset_neighbor_set_right":
+ "theorem common_neighbors_subset_neighbor_set_right (v w : V) : G.common_neighbors v w ⊆ G.neighbor_set w :=\n  Set.inter_subset_right _ _\n#align common_neighbors_subset_neighbor_set_right common_neighbors_subset_neighbor_set_right\n\n",
+ "common_neighbors_subset_neighbor_set_left":
+ "theorem common_neighbors_subset_neighbor_set_left (v w : V) : G.common_neighbors v w ⊆ G.neighbor_set v :=\n  Set.inter_subset_left _ _\n#align common_neighbors_subset_neighbor_set_left common_neighbors_subset_neighbor_set_left\n\n",
+ "common_neighbors_eq":
+ "theorem common_neighbors_eq (v w : V) : G.common_neighbors v w = G.neighbor_set v ∩ G.neighbor_set w :=\n  rfl\n#align common_neighbors_eq common_neighbors_eq\n\n",
+ "comap_surjective":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ↪ » -/\ntheorem comap_surjective (f : «expr ↪ » V W) : function.surjective (simple_graph.comap f) :=\n  (left_inverse_comap_map f).surjective\n#align comap_surjective comap_surjective\n\n",
+ "comap_monotone":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ↪ » -/\ntheorem comap_monotone (f : «expr ↪ » V W) : monotone (simple_graph.comap f) :=\n  by\n  intro G G' h _ _ ha\n  exact h ha\n#align comap_monotone comap_monotone\n\n",
+ "comap_map_eq":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ↪ » -/\n@[simp]\ntheorem comap_map_eq (f : «expr ↪ » V W) (G : simple_graph V) : (G.map f).comap f = G :=\n  by\n  ext\n  simp\n#align comap_map_eq comap_map_eq\n\n",
+ "coe_edge_finset":
+ "@[simp, norm_cast]\ntheorem coe_edge_finset : (G.edge_finset : set (sym2 V)) = G.edge_set :=\n  set.coe_to_finset _\n#align coe_edge_finset coe_edge_finset\n\n",
+ "coe_comp":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃g » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃g » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n@[simp]\ntheorem coe_comp (f' : «expr ≃g » G' G'') (f : «expr ≃g » G G') : «expr⇑ » (f'.comp f) = f' ∘ f :=\n  rfl\n#align coe_comp coe_comp\n\n",
+ "card_neighbor_set_union_compl_neighbor_set":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\n-- TODO find out why TC inference has `h` failing a defeq check for `to_finset`\ntheorem card_neighbor_set_union_compl_neighbor_set [fintype V] (G : simple_graph V) (v : V)\n    [h : fintype (G.neighbor_set v ∪ («expr ᶜ» G).neighbor_set v : set V)] :\n    (@set.to_finset _ (G.neighbor_set v ∪ («expr ᶜ» G).neighbor_set v) h).card = fintype.card V - 1 := by\n  classical simp_rw [neighbor_set_union_compl_neighbor_set_eq, set.to_finset_compl, finset.card_compl,\n      set.to_finset_card, set.card_singleton]\n#align card_neighbor_set_union_compl_neighbor_set card_neighbor_set_union_compl_neighbor_set\n\n",
+ "card_neighbor_set_eq_degree":
+ "@[simp]\ntheorem card_neighbor_set_eq_degree : fintype.card (G.neighbor_set v) = G.degree v :=\n  (set.to_finset_card _).symm\n#align card_neighbor_set_eq_degree card_neighbor_set_eq_degree\n\n",
+ "card_incidence_set_eq_degree":
+ "@[simp]\ntheorem card_incidence_set_eq_degree [decidable_eq V] : fintype.card (G.incidence_set v) = G.degree v :=\n  by\n  rw [fintype.card_congr (G.incidence_set_equiv_neighbor_set v)]\n  simp\n#align card_incidence_set_eq_degree card_incidence_set_eq_degree\n\n",
+ "card_incidence_finset_eq_degree":
+ "@[simp]\ntheorem card_incidence_finset_eq_degree [decidable_eq V] : (G.incidence_finset v).card = G.degree v :=\n  by\n  rw [← G.card_incidence_set_eq_degree]\n  apply set.to_finset_card\n#align card_incidence_finset_eq_degree card_incidence_finset_eq_degree\n\n",
+ "card_eq_of_iso":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃g » -/\ntheorem card_eq_of_iso [fintype V] [fintype W] (f : «expr ≃g » G G') : fintype.card V = fintype.card W := by\n  convert (fintype.of_equiv_card f.to_equiv).symm\n#align card_eq_of_iso card_eq_of_iso\n\n",
+ "card_common_neighbors_top":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\ntheorem card_common_neighbors_top [decidable_eq V] {v w : V} (h : v ≠ w) :\n    fintype.card ((«expr⊤» : simple_graph V).common_neighbors v w) = fintype.card V - 2 :=\n  by\n  simp only [common_neighbors_top_eq, ← set.to_finset_card, set.to_finset_diff]\n  rw [finset.card_sdiff]\n  · simp [finset.card_univ, h]\n  · simp only [set.to_finset_subset_to_finset, Set.subset_univ]\n#align card_common_neighbors_top card_common_neighbors_top\n\n",
+ "card_common_neighbors_lt_degree":
+ "/-- If the condition `G.adj v w` fails, then `card_common_neighbors_le_degree` is\nthe best we can do in general.\n-/\ntheorem adj.card_common_neighbors_lt_degree {G : simple_graph V} [decidable_rel G.adj] {v w : V} (h : G.adj v w) :\n    fintype.card (G.common_neighbors v w) < G.degree v := by\n  classical\n    erw [← set.to_finset_card]\n    apply finset.card_lt_card\n    rw [Finset.ssubset_iff]\n    use w\n    constructor\n    · rw [set.mem_to_finset]\n      apply not_mem_common_neighbors_right\n    · rw [Finset.insert_subset]\n      constructor\n      · simpa\n      · rw [neighbor_finset, set.to_finset_subset_to_finset]\n        exact G.common_neighbors_subset_neighbor_set_left _ _\n#align adj.card_common_neighbors_lt_degree adj.card_common_neighbors_lt_degree\n\n",
+ "card_common_neighbors_lt_card_verts":
+ "theorem card_common_neighbors_lt_card_verts [decidable_rel G.adj] (v w : V) :\n    fintype.card (G.common_neighbors v w) < fintype.card V :=\n  nat.lt_of_le_of_lt (G.card_common_neighbors_le_degree_left _ _) (G.degree_lt_card_verts v)\n#align card_common_neighbors_lt_card_verts card_common_neighbors_lt_card_verts\n\n",
+ "card_common_neighbors_le_degree_right":
+ "theorem card_common_neighbors_le_degree_right [decidable_rel G.adj] (v w : V) :\n    fintype.card (G.common_neighbors v w) ≤ G.degree w := by\n  simp_rw [common_neighbors_symm _ v w, card_common_neighbors_le_degree_left]\n#align card_common_neighbors_le_degree_right card_common_neighbors_le_degree_right\n\n",
+ "card_common_neighbors_le_degree_left":
+ "theorem card_common_neighbors_le_degree_left [decidable_rel G.adj] (v w : V) :\n    fintype.card (G.common_neighbors v w) ≤ G.degree v :=\n  by\n  rw [← card_neighbor_set_eq_degree]\n  exact set.card_le_of_subset (Set.inter_subset_left _ _)\n#align card_common_neighbors_le_degree_left card_common_neighbors_le_degree_left\n\n",
+ "bot_degree":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\ntheorem bot_degree (v : V) : («expr⊥» : simple_graph V).degree v = 0 :=\n  by\n  erw [degree, neighbor_finset_eq_filter, filter_false]\n  exact finset.card_empty\n#align bot_degree bot_degree\n\n",
+ "bot_adj":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n@[simp]\ntheorem bot_adj (v w : V) : («expr⊥» : simple_graph V).adj v w ↔ false :=\n  iff.rfl\n#align bot_adj bot_adj\n\n",
+ "apply_mem_neighbor_set_iff":
+ "theorem apply_mem_neighbor_set_iff {v w : V} : f w ∈ G'.neighbor_set (f v) ↔ w ∈ G.neighbor_set v :=\n  map_adj_iff f\n#align apply_mem_neighbor_set_iff apply_mem_neighbor_set_iff\n\n",
+ "apply_mem_neighbor_set":
+ "theorem apply_mem_neighbor_set {v w : V} (h : w ∈ G.neighbor_set v) : f w ∈ G'.neighbor_set (f v) :=\n  map_adj f h\n#align apply_mem_neighbor_set apply_mem_neighbor_set\n\n",
+ "adj_symm":
+ "@[symm]\ntheorem adj_symm (h : G.adj u v) : G.adj v u :=\n  G.symm h\n#align adj_symm adj_symm\n\n",
+ "adj_of_mem_incidence_set":
+ "theorem adj_of_mem_incidence_set (h : a ≠ b) (ha : e ∈ G.incidence_set a) (hb : e ∈ G.incidence_set b) : G.adj a b := by\n  rwa [← mk_mem_incidence_set_left_iff, ←\n    Set.mem_singleton_iff.1 <| G.incidence_set_inter_incidence_set_subset h ⟨ha, hb⟩]\n#align adj_of_mem_incidence_set adj_of_mem_incidence_set\n\n",
+ "adj_incidence_set_inter":
+ "theorem adj_incidence_set_inter {v : V} {e : sym2 V} (he : e ∈ G.edge_set) (h : v ∈ e) :\n    G.incidence_set v ∩ G.incidence_set h.other = {e} :=\n  by\n  ext e'\n  simp only [incidence_set, Set.mem_sep_iff, Set.mem_inter_iff, Set.mem_singleton_iff]\n  refine' ⟨fun h' => _, _⟩\n  · rw [← sym2.other_spec h]\n    exact (sym2.mem_and_mem_iff (edge_other_ne G he h).symm).mp ⟨h'.1.2, h'.2.2⟩\n  · rintro rfl\n    exact ⟨⟨he, h⟩, he, sym2.other_mem _⟩\n#align adj_incidence_set_inter adj_incidence_set_inter\n\n",
+ "adj_iff_exists_edge_coe":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⟦ ⟧» -/\ntheorem adj_iff_exists_edge_coe : G.adj a b ↔ ∃ e : G.edge_set, ↑e = «expr⟦ ⟧» (a, b) := by\n  simp only [mem_edge_set, exists_prop, SetCoe.exists, exists_eq_right, subtype.coe_mk]\n#align adj_iff_exists_edge_coe adj_iff_exists_edge_coe\n\n",
+ "adj_iff_exists_edge":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⟦ ⟧» -/\n/-- Two vertices are adjacent iff there is an edge between them. The\ncondition `v ≠ w` ensures they are different endpoints of the edge,\nwhich is necessary since when `v = w` the existential\n`∃ (e ∈ G.edge_set), v ∈ e ∧ w ∈ e` is satisfied by every edge\nincident to `v`.\n-/\ntheorem adj_iff_exists_edge {v w : V} : G.adj v w ↔ v ≠ w ∧ ∃ e ∈ G.edge_set, v ∈ e ∧ w ∈ e :=\n  by\n  refine' ⟨fun _ => ⟨G.ne_of_adj ‹_›, «expr⟦ ⟧» (v, w), _⟩, _⟩\n  · simpa\n  · rintro ⟨hne, e, he, hv⟩\n    rw [sym2.mem_and_mem_iff hne] at hv\n    subst e\n    rwa [mem_edge_set] at he\n#align adj_iff_exists_edge adj_iff_exists_edge\n\n",
+ "adj_comm":
+ "theorem adj_comm (u v : V) : G.adj u v ↔ G.adj v u :=\n  ⟨fun x => G.symm x, fun x => G.symm x⟩\n#align adj_comm adj_comm\n\n"}

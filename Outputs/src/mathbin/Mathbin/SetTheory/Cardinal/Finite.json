@@ -1,0 +1,40 @@
+{"finite_of_card_ne_zero":
+ "theorem finite_of_card_ne_zero (h : nat.card α ≠ 0) : Finite α :=\n  not_infinite_iff_finite.mp <| h ∘ @nat.card_eq_zero_of_infinite α\n#align finite_of_card_ne_zero finite_of_card_ne_zero\n\n",
+ "card_zmod":
+ "@[simp]\ntheorem card_zmod (n : ℕ) : nat.card (zmod n) = n := by\n  cases n\n  · exact nat.card_eq_zero_of_infinite\n  · rw [nat.card_eq_fintype_card, zmod.card]\n#align card_zmod card_zmod\n\n",
+ "card_unique":
+ "@[simp]\ntheorem card_unique [unique α] : nat.card α = 1 :=\n  card_of_subsingleton default\n#align card_unique card_unique\n\n",
+ "card_ulift":
+ "@[simp]\ntheorem card_ulift (α : Type _) : nat.card (ULift α) = nat.card α :=\n  card_congr equiv.ulift\n#align card_ulift card_ulift\n\n",
+ "card_prod":
+ "@[simp]\ntheorem card_prod (α β : Type _) : nat.card (α × β) = nat.card α * nat.card β := by\n  simp only [nat.card, mk_prod, to_nat_mul, to_nat_lift]\n#align card_prod card_prod\n\n",
+ "card_plift":
+ "@[simp]\ntheorem card_plift (α : Type _) : nat.card (PLift α) = nat.card α :=\n  card_congr equiv.plift\n#align card_plift card_plift\n\n",
+ "card_pi":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `finset.prod_univ -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.prod_univ -/\ntheorem card_pi {β : α → Type _} [fintype α] :\n    nat.card (∀ a, β a) =\n      finset.prod_univ \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.prod_univ\"\n        (nat.card (β a)) :=\n  by simp_rw [nat.card, mk_pi, prod_eq_of_fintype, to_nat_lift, to_nat_finset_prod]\n#align card_pi card_pi\n\n",
+ "card_of_subsingleton":
+ "theorem card_of_subsingleton (a : α) [subsingleton α] : nat.card α = 1 :=\n  by\n  letI := fintype.of_subsingleton a\n  rw [card_eq_fintype_card, fintype.card_of_subsingleton a]\n#align card_of_subsingleton card_of_subsingleton\n\n",
+ "card_of_is_empty":
+ "theorem card_of_is_empty [is_empty α] : nat.card α = 0 := by simp\n#align card_of_is_empty card_of_is_empty\n\n",
+ "card_fun":
+ "theorem card_fun [Finite α] : nat.card (α → β) = nat.card β ^ nat.card α :=\n  by\n  haveI := fintype.of_finite α\n  rw [nat.card_pi, finset.prod_const, finset.card_univ, ← nat.card_eq_fintype_card]\n#align card_fun card_fun\n\n",
+ "card_eq_zero_of_infinite":
+ "@[simp]\ntheorem card_eq_zero_of_infinite [Infinite α] : nat.card α = 0 :=\n  mk_to_nat_of_infinite\n#align card_eq_zero_of_infinite card_eq_zero_of_infinite\n\n",
+ "card_eq_two_iff'":
+ "theorem card_eq_two_iff' (x : α) : nat.card α = 2 ↔ ∃! y, y ≠ x :=\n  (to_nat_eq_iff two_ne_zero).trans <| iff.trans (by rw [Nat.cast_two]) (mk_eq_two_iff' x)\n#align card_eq_two_iff' card_eq_two_iff'\n\n",
+ "card_eq_two_iff":
+ "theorem card_eq_two_iff : nat.card α = 2 ↔ ∃ x y : α, x ≠ y ∧ {x, y} = @Set.univ α :=\n  (to_nat_eq_iff two_ne_zero).trans <| iff.trans (by rw [Nat.cast_two]) mk_eq_two_iff\n#align card_eq_two_iff card_eq_two_iff\n\n",
+ "card_eq_top_of_infinite":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n@[simp]\ntheorem card_eq_top_of_infinite [Infinite α] : card α = «expr⊤» :=\n  mk_to_part_enat_of_infinite\n#align card_eq_top_of_infinite card_eq_top_of_infinite\n\n",
+ "card_eq_one_iff_unique":
+ "theorem card_eq_one_iff_unique : nat.card α = 1 ↔ subsingleton α ∧ nonempty α :=\n  cardinal.to_nat_eq_one_iff_unique\n#align card_eq_one_iff_unique card_eq_one_iff_unique\n\n",
+ "card_eq_of_equiv_fin":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ » -/\ntheorem card_eq_of_equiv_fin {α : Type _} {n : ℕ} (f : «expr ≃ » α (fin n)) : nat.card α = n := by\n  simpa using card_congr f\n#align card_eq_of_equiv_fin card_eq_of_equiv_fin\n\n",
+ "card_eq_of_bijective":
+ "theorem card_eq_of_bijective (f : α → β) (hf : function.bijective f) : nat.card α = nat.card β :=\n  card_congr (Equiv.ofBijective f hf)\n#align card_eq_of_bijective card_eq_of_bijective\n\n",
+ "card_eq_fintype_card":
+ "/-\nCopyright (c) 2021 Aaron Anderson. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Aaron Anderson\n-/\n@[simp]\ntheorem card_eq_fintype_card [fintype α] : nat.card α = fintype.card α :=\n  mk_to_nat_eq_card\n#align card_eq_fintype_card card_eq_fintype_card\n\n",
+ "card_eq_coe_fintype_card":
+ "@[simp]\ntheorem card_eq_coe_fintype_card [fintype α] : card α = fintype.card α :=\n  mk_to_part_enat_eq_coe_card\n#align card_eq_coe_fintype_card card_eq_coe_fintype_card\n\n",
+ "card_congr":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ » -/\ntheorem card_congr (f : «expr ≃ » α β) : nat.card α = nat.card β :=\n  cardinal.to_nat_congr f\n#align card_congr card_congr\n\n"}

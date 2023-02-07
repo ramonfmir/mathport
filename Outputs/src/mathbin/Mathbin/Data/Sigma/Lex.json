@@ -1,0 +1,10 @@
+{"mono_right":
+ "theorem lex.mono_right {r : ι → ι → Prop} {s₁ s₂ : ∀ i, α i → α i → Prop} (hs : ∀ i a b, s₁ i a b → s₂ i a b)\n    {a b : Σ'i, α i} (h : lex r s₁ a b) : lex r s₂ a b :=\n  h.mono (fun _ _ => id) hs\n#align lex.mono_right lex.mono_right\n\n",
+ "mono_left":
+ "theorem lex.mono_left {r₁ r₂ : ι → ι → Prop} {s : ∀ i, α i → α i → Prop} (hr : ∀ a b, r₁ a b → r₂ a b) {a b : Σ'i, α i}\n    (h : lex r₁ s a b) : lex r₂ s a b :=\n  h.mono hr fun _ _ _ => id\n#align lex.mono_left lex.mono_left\n\n",
+ "mono":
+ "theorem lex.mono {r₁ r₂ : ι → ι → Prop} {s₁ s₂ : ∀ i, α i → α i → Prop} (hr : ∀ a b, r₁ a b → r₂ a b)\n    (hs : ∀ i a b, s₁ i a b → s₂ i a b) {a b : Σ'i, α i} (h : lex r₁ s₁ a b) : lex r₂ s₂ a b :=\n  by\n  obtain ⟨a, b, hij⟩ | ⟨i, hab⟩ := h\n  · exact lex.left _ _ (hr _ _ hij)\n  · exact lex.right _ (hs _ _ _ hab)\n#align lex.mono lex.mono\n\n",
+ "lex_swap":
+ "theorem lex_swap : Lex r.swap s a b ↔ Lex r (fun i => (s i).swap) b a := by\n  constructor <;>\n    · rintro (⟨a, b, h⟩ | ⟨a, b, h⟩)\n      exacts[lex.left _ _ h, lex.right _ _ h]\n#align lex_swap lex_swap\n\n",
+ "lex_iff":
+ "theorem lex_iff {a b : Σ'i, α i} : lex r s a b ↔ r a.1 b.1 ∨ ∃ h : a.1 = b.1, s _ (h.rec a.2) b.2 :=\n  by\n  constructor\n  · rintro (⟨a, b, hij⟩ | ⟨i, hab⟩)\n    · exact or.inl hij\n    · exact or.inr ⟨rfl, hab⟩\n  · obtain ⟨i, a⟩ := a\n    obtain ⟨j, b⟩ := b\n    dsimp only\n    rintro (h | ⟨rfl, h⟩)\n    · exact lex.left _ _ h\n    · exact lex.right _ h\n#align lex_iff lex_iff\n\n"}

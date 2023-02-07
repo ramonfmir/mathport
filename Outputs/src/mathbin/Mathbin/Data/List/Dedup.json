@@ -1,0 +1,36 @@
+{"sum_map_count_dedup_filter_eq_countp":
+ "/-- Summing the count of `x` over a list filtered by some `p` is just `countp` applied to `p` -/\ntheorem sum_map_count_dedup_filter_eq_countp (p : α → Prop) [decidable_pred p] (l : list α) :\n    ((l.dedup.filter p).map fun x => l.count x).sum = l.countp p :=\n  by\n  induction' l with a as h\n  · simp\n  · simp_rw [List.countp_cons, List.count_cons', list.sum_map_add]\n    congr 1\n    · refine' trans _ h\n      by_cases ha : a ∈ as\n      · simp [dedup_cons_of_mem ha]\n      · simp only [dedup_cons_of_not_mem ha, List.filter]\n        split_ifs with hp <;> simp [list.map_cons, list.sum_cons, List.count_eq_zero.2 ha, zero_add]\n    · by_cases hp : p a\n      · refine' trans (sum_map_eq_nsmul_single a _ fun _ h _ => by simp [h]) _\n        simp [hp, count_dedup]\n      · refine' trans (list.sum_eq_zero fun n hn => _) (by simp [hp])\n        obtain ⟨a', ha'⟩ := List.mem_map'.1 hn\n        simp only [(fun h => hp (h ▸ (List.mem_filter.1 ha'.1).2) : a' ≠ a), if_false] at ha'\n        exact ha'.2.symm\n#align sum_map_count_dedup_filter_eq_countp sum_map_count_dedup_filter_eq_countp\n\n",
+ "sum_map_count_dedup_eq_length":
+ "theorem sum_map_count_dedup_eq_length (l : list α) : (l.dedup.map fun x => l.count x).sum = l.length := by\n  simpa using sum_map_count_dedup_filter_eq_countp (fun _ => true) l\n#align sum_map_count_dedup_eq_length sum_map_count_dedup_eq_length\n\n",
+ "subset_dedup":
+ "theorem subset_dedup (l : list α) : l ⊆ dedup l := fun a => mem_dedup.2\n#align subset_dedup subset_dedup\n\n",
+ "replicate_dedup":
+ "theorem replicate_dedup {x : α} : ∀ {k}, k ≠ 0 → (replicate k x).dedup = [x]\n  | 0, h => (h rfl).elim\n  | 1, _ => rfl\n  | n + 2, _ => by\n    rw [replicate_succ, dedup_cons_of_mem (mem_replicate.2 ⟨n.succ_ne_zero, rfl⟩), replicate_dedup n.succ_ne_zero]\n#align replicate_dedup replicate_dedup\n\n",
+ "nodup_dedup":
+ "theorem nodup_dedup : ∀ l : list α, Nodup (dedup l) :=\n  pairwise_pw_filter\n#align nodup_dedup nodup_dedup\n\n",
+ "mem_dedup":
+ "@[simp]\ntheorem mem_dedup {a : α} {l : list α} : a ∈ dedup l ↔ a ∈ l := by\n  simpa only [dedup, forall_mem_ne, not_not] using\n    not_congr\n      (@forall_mem_pw_filter α (· ≠ ·) _ (fun x y z xz => not_and_or.1 <| mt (fun h => eq.trans h.1 h.2) xz) a l)\n#align mem_dedup mem_dedup\n\n",
+ "dedup_subset":
+ "theorem dedup_subset : ∀ l : list α, dedup l ⊆ l :=\n  pw_filter_subset\n#align dedup_subset dedup_subset\n\n",
+ "dedup_sublist":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr <+ » -/\ntheorem dedup_sublist : ∀ l : list α, «expr <+ » (dedup l) l :=\n  pw_filter_sublist\n#align dedup_sublist dedup_sublist\n\n",
+ "dedup_nil":
+ "/-\nCopyright (c) 2018 Mario Carneiro. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Mario Carneiro\n-/\n@[simp]\ntheorem dedup_nil : dedup [] = ([] : list α) :=\n  rfl\n#align dedup_nil dedup_nil\n\n",
+ "dedup_idempotent":
+ "@[simp]\ntheorem dedup_idempotent {l : list α} : dedup (dedup l) = dedup l :=\n  pw_filter_idempotent\n#align dedup_idempotent dedup_idempotent\n\n",
+ "dedup_eq_self":
+ "theorem dedup_eq_self {l : list α} : dedup l = l ↔ Nodup l :=\n  pw_filter_eq_self\n#align dedup_eq_self dedup_eq_self\n\n",
+ "dedup_cons_of_not_mem'":
+ "theorem dedup_cons_of_not_mem' {a : α} {l : list α} (h : a ∉ dedup l) : dedup (a :: l) = a :: dedup l :=\n  pw_filter_cons_of_pos <| by simpa only [forall_mem_ne] using h\n#align dedup_cons_of_not_mem' dedup_cons_of_not_mem'\n\n",
+ "dedup_cons_of_not_mem":
+ "@[simp]\ntheorem dedup_cons_of_not_mem {a : α} {l : list α} (h : a ∉ l) : dedup (a :: l) = a :: dedup l :=\n  dedup_cons_of_not_mem' <| mt mem_dedup.1 h\n#align dedup_cons_of_not_mem dedup_cons_of_not_mem\n\n",
+ "dedup_cons_of_mem'":
+ "theorem dedup_cons_of_mem' {a : α} {l : list α} (h : a ∈ dedup l) : dedup (a :: l) = dedup l :=\n  pw_filter_cons_of_neg <| by simpa only [forall_mem_ne] using h\n#align dedup_cons_of_mem' dedup_cons_of_mem'\n\n",
+ "dedup_cons_of_mem":
+ "@[simp]\ntheorem dedup_cons_of_mem {a : α} {l : list α} (h : a ∈ l) : dedup (a :: l) = dedup l :=\n  dedup_cons_of_mem' <| mem_dedup.2 h\n#align dedup_cons_of_mem dedup_cons_of_mem\n\n",
+ "dedup_append":
+ "theorem dedup_append (l₁ l₂ : list α) : dedup (l₁ ++ l₂) = l₁ ∪ dedup l₂ :=\n  by\n  induction' l₁ with a l₁ IH; · rfl; rw [cons_union, ← IH]\n  show dedup (a :: (l₁ ++ l₂)) = insert a (dedup (l₁ ++ l₂))\n  by_cases a ∈ dedup (l₁ ++ l₂) <;> [rw [dedup_cons_of_mem' h, insert_of_mem h],\n    rw [dedup_cons_of_not_mem' h, insert_of_not_mem h]]\n#align dedup_append dedup_append\n\n",
+ "dedup":
+ "protected theorem nodup.dedup {l : list α} (h : l.nodup) : l.dedup = l :=\n  List.dedup_eq_self.2 h\n#align nodup.dedup nodup.dedup\n\n",
+ "count_dedup":
+ "theorem count_dedup (l : list α) (a : α) : l.dedup.count a = if a ∈ l then 1 else 0 := by\n  simp_rw [count_eq_of_nodup <| nodup_dedup l, mem_dedup]\n#align count_dedup count_dedup\n\n"}

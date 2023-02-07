@@ -1,0 +1,2 @@
+{"is_sqrt":
+ "/-\nCopyright (c) 2022 Mario Carneiro. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Mario Carneiro\n-/\ntheorem is_sqrt {n a a2 b : ℕ} (ha2 : a * a = a2) (hb : a2 + b = n) (hle : b ≤ bit0 a) : sqrt n = a :=\n  by\n  rw [← hb, ← ha2, ← pow_two]\n  exact sqrt_add_eq' _ hle\n#align is_sqrt is_sqrt\n\n"}

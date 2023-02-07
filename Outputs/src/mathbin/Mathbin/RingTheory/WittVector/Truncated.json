@@ -1,0 +1,74 @@
+{"truncate_witt_vector_truncate":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `expr𝕎 -/\n@[simp]\ntheorem truncate_witt_vector_truncate {m : ℕ} (hm : n ≤ m) (x : (expr𝕎) R) :\n    truncate hm (witt_vector.truncate m x) = witt_vector.truncate n x :=\n  ring_hom.lift_of_right_inverse_comp_apply _ _ _ _ _\n#align truncate_witt_vector_truncate truncate_witt_vector_truncate\n\n",
+ "truncate_truncate":
+ "@[simp]\ntheorem truncate_truncate {n₁ n₂ n₃ : ℕ} (h1 : n₁ ≤ n₂) (h2 : n₂ ≤ n₃) (x : truncated_witt_vector p n₃ R) :\n    (truncate h1) (truncate h2 x) = truncate (h1.trans h2) x :=\n  by\n  obtain ⟨x, rfl⟩ := witt_vector.truncate_surjective p n₃ R x\n  simp only [truncate_witt_vector_truncate]\n#align truncate_truncate truncate_truncate\n\n",
+ "truncate_surjective":
+ "theorem truncate_surjective {m : ℕ} (hm : n ≤ m) : surjective (@truncate p _ _ R _ _ hm) :=\n  by\n  intro x\n  obtain ⟨x, rfl⟩ := witt_vector.truncate_surjective p _ R x\n  exact ⟨witt_vector.truncate _ x, truncate_witt_vector_truncate _ _⟩\n#align truncate_surjective truncate_surjective\n\n",
+ "truncate_mk":
+ "@[simp]\ntheorem truncate_mk (f : ℕ → R) : truncate n (mk p f) = truncated_witt_vector.mk _ fun k => f k :=\n  by\n  ext i\n  rw [coeff_truncate, coeff_mk, truncated_witt_vector.coeff_mk]\n#align truncate_mk truncate_mk\n\n",
+ "truncate_lift_fun":
+ "@[simp]\ntheorem truncate_lift_fun (s : S) : witt_vector.truncate n (lift_fun f s) = f n s :=\n  by\n  ext i\n  simp only [lift_fun, truncated_witt_vector.coeff_mk, witt_vector.truncate_mk]\n  rw [← f_compat (i + 1) n i.is_lt, RingHom.comp_apply, truncated_witt_vector.coeff_truncate]\n  -- this is a bit unfortunate\n  congr with _\n  simp only [Fin.val_last, Fin.coe_castLe]\n#align truncate_lift_fun truncate_lift_fun\n\n",
+ "truncate_lift":
+ "@[simp]\ntheorem truncate_lift (s : S) : witt_vector.truncate n (lift _ f_compat s) = f n s :=\n  truncate_lift_fun _ f_compat s\n#align truncate_lift truncate_lift\n\n",
+ "truncate_fun_zsmul":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `expr𝕎 -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\ntheorem truncate_fun_zsmul (x : (expr𝕎) R) (m : ℤ) : truncate_fun n («expr • » m x) = «expr • » m (truncate_fun n x) :=\n  by\n  witt_truncate_fun_tac\n  rw [init_zsmul]\n#align truncate_fun_zsmul truncate_fun_zsmul\n\n",
+ "truncate_fun_zero":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `expr𝕎 -/\n@[simp]\ntheorem truncate_fun_zero : truncate_fun n (0 : (expr𝕎) R) = 0 :=\n  rfl\n#align truncate_fun_zero truncate_fun_zero\n\n",
+ "truncate_fun_surjective":
+ "theorem truncate_fun_surjective : surjective (@truncate_fun p n R) :=\n  function.right_inverse.surjective truncated_witt_vector.truncate_fun_out\n#align truncate_fun_surjective truncate_fun_surjective\n\n",
+ "truncate_fun_sub":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `expr𝕎 -/\ntheorem truncate_fun_sub (x y : (expr𝕎) R) : truncate_fun n (x - y) = truncate_fun n x - truncate_fun n y :=\n  by\n  witt_truncate_fun_tac\n  rw [init_sub]\n#align truncate_fun_sub truncate_fun_sub\n\n",
+ "truncate_fun_pow":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `expr𝕎 -/\ntheorem truncate_fun_pow (x : (expr𝕎) R) (m : ℕ) : truncate_fun n (x ^ m) = truncate_fun n x ^ m :=\n  by\n  witt_truncate_fun_tac\n  rw [init_pow]\n#align truncate_fun_pow truncate_fun_pow\n\n",
+ "truncate_fun_out":
+ "@[simp]\ntheorem truncate_fun_out (x : truncated_witt_vector p n R) : x.out.truncate_fun n = x := by\n  simp only [witt_vector.truncate_fun, coeff_out, mk_coeff]\n#align truncate_fun_out truncate_fun_out\n\n",
+ "truncate_fun_one":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `expr𝕎 -/\n@[simp]\ntheorem truncate_fun_one : truncate_fun n (1 : (expr𝕎) R) = 1 :=\n  rfl\n#align truncate_fun_one truncate_fun_one\n\n",
+ "truncate_fun_nsmul":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `expr𝕎 -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\ntheorem truncate_fun_nsmul (x : (expr𝕎) R) (m : ℕ) : truncate_fun n («expr • » m x) = «expr • » m (truncate_fun n x) :=\n  by\n  witt_truncate_fun_tac\n  rw [init_nsmul]\n#align truncate_fun_nsmul truncate_fun_nsmul\n\n",
+ "truncate_fun_neg":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `expr𝕎 -/\ntheorem truncate_fun_neg (x : (expr𝕎) R) : truncate_fun n (-x) = -truncate_fun n x :=\n  by\n  witt_truncate_fun_tac\n  rw [init_neg]\n#align truncate_fun_neg truncate_fun_neg\n\n",
+ "truncate_fun_nat_cast":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `expr𝕎 -/\ntheorem truncate_fun_nat_cast (m : ℕ) : truncate_fun n (m : (expr𝕎) R) = m :=\n  rfl\n#align truncate_fun_nat_cast truncate_fun_nat_cast\n\n",
+ "truncate_fun_mul":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `expr𝕎 -/\n@[simp]\ntheorem truncate_fun_mul (x y : (expr𝕎) R) : truncate_fun n (x * y) = truncate_fun n x * truncate_fun n y :=\n  by\n  witt_truncate_fun_tac\n  rw [init_mul]\n#align truncate_fun_mul truncate_fun_mul\n\n",
+ "truncate_fun_int_cast":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `expr𝕎 -/\ntheorem truncate_fun_int_cast (m : ℤ) : truncate_fun n (m : (expr𝕎) R) = m :=\n  rfl\n#align truncate_fun_int_cast truncate_fun_int_cast\n\n",
+ "truncate_fun_add":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `expr𝕎 -/\n@[simp]\ntheorem truncate_fun_add (x y : (expr𝕎) R) : truncate_fun n (x + y) = truncate_fun n x + truncate_fun n y :=\n  by\n  witt_truncate_fun_tac\n  rw [init_add]\n#align truncate_fun_add truncate_fun_add\n\n",
+ "truncate_comp_witt_vector_truncate":
+ "@[simp]\ntheorem truncate_comp_witt_vector_truncate {m : ℕ} (hm : n ≤ m) :\n    (@truncate p _ n R _ m hm).comp (witt_vector.truncate m) = witt_vector.truncate n :=\n  ring_hom.lift_of_right_inverse_comp _ _ _ _\n#align truncate_comp_witt_vector_truncate truncate_comp_witt_vector_truncate\n\n",
+ "truncate_comp_lift":
+ "@[simp]\ntheorem truncate_comp_lift : (witt_vector.truncate n).comp (lift _ f_compat) = f n :=\n  by\n  ext1\n  rw [RingHom.comp_apply, truncate_lift]\n#align truncate_comp_lift truncate_comp_lift\n\n",
+ "truncate_comp":
+ "@[simp]\ntheorem truncate_comp {n₁ n₂ n₃ : ℕ} (h1 : n₁ ≤ n₂) (h2 : n₂ ≤ n₃) :\n    (@truncate p _ _ R _ _ h1).comp (truncate h2) = truncate (h1.trans h2) := by ext1 x;\n  simp only [truncate_truncate, Function.comp_apply, RingHom.coe_comp]\n#align truncate_comp truncate_comp\n\n",
+ "out_truncate_fun":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `expr𝕎 -/\n@[simp]\ntheorem out_truncate_fun (x : (expr𝕎) R) : (truncate_fun n x).out = init n x :=\n  by\n  ext i\n  dsimp [truncated_witt_vector.out, init, select]\n  split_ifs with hi; swap; · rfl\n  rw [coeff_truncate_fun, Fin.val_mk]\n#align out_truncate_fun out_truncate_fun\n\n",
+ "out_injective":
+ "theorem out_injective : injective (@out p n R _) := by\n  intro x y h\n  ext i\n  rw [witt_vector.ext_iff] at h\n  simpa only [coeff_out] using h ↑i\n#align out_injective out_injective\n\n",
+ "mk_coeff":
+ "@[simp]\ntheorem mk_coeff (x : truncated_witt_vector p n R) : (mk p fun i => x.coeff i) = x :=\n  by\n  ext i\n  rw [coeff_mk]\n#align mk_coeff mk_coeff\n\n",
+ "mem_ker_truncate":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `expr𝕎 -/\ntheorem mem_ker_truncate (x : (expr𝕎) R) : x ∈ (@truncate p _ n R _).ker ↔ ∀ i < n, x.coeff i = 0 :=\n  by\n  simp only [ring_hom.mem_ker, truncate, truncate_fun, RingHom.coe_mk, truncated_witt_vector.ext_iff,\n    truncated_witt_vector.coeff_mk, coeff_zero]\n  exact Fin.forall_iff\n#align mem_ker_truncate mem_ker_truncate\n\n",
+ "lift_unique":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →+* » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `expr𝕎 -/\n/-- The uniqueness part of the universal property of `𝕎 R`. -/\ntheorem lift_unique (g : «expr →+* » S ((expr𝕎) R)) (g_compat : ∀ k, (witt_vector.truncate k).comp g = f k) :\n    lift _ f_compat = g := by\n  ext1 x\n  rw [← sub_eq_zero, ← ideal.mem_bot, ← infi_ker_truncate, ideal.mem_infi]\n  intro i\n  simp only [ring_hom.mem_ker, g_compat, ← RingHom.comp_apply, truncate_comp_lift, RingHom.map_sub, sub_self]\n#align lift_unique lift_unique\n\n",
+ "infi_ker_truncate":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⨅ , » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⨅ , » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\ntheorem infi_ker_truncate :\n    «expr⨅ , » \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⨅ , »\"\n        (@witt_vector.truncate p _ i R _).ker =\n      «expr⊥» :=\n  by\n  rw [submodule.eq_bot_iff]\n  intro x hx\n  ext\n  simp only [witt_vector.mem_ker_truncate, ideal.mem_infi, witt_vector.zero_coeff] at hx⊢\n  exact hx _ _ (nat.lt_succ_self _)\n#align infi_ker_truncate infi_ker_truncate\n\n",
+ "hom_ext":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →+* » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `expr𝕎 -/\ntheorem hom_ext (g₁ g₂ : «expr →+* » S ((expr𝕎) R)) (h : ∀ k, (truncate k).comp g₁ = (truncate k).comp g₂) : g₁ = g₂ :=\n  lift_equiv.symm.injective <| subtype.ext <| funext h\n#align hom_ext hom_ext\n\n",
+ "ext_iff":
+ "theorem ext_iff {x y : truncated_witt_vector p n R} : x = y ↔ ∀ i, x.coeff i = y.coeff i :=\n  ⟨fun h i => by rw [h], ext⟩\n#align ext_iff ext_iff\n\n",
+ "ext":
+ "/-\nCopyright (c) 2020 Johan Commelin. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Johan Commelin, Robert Y. Lewis\n-/\n-- type as `\\bbW`\n@[ext]\ntheorem ext {x y : truncated_witt_vector p n R} (h : ∀ i, x.coeff i = y.coeff i) : x = y :=\n  funext h\n#align ext ext\n\n",
+ "coeff_zero":
+ "@[simp]\ntheorem coeff_zero (i : fin n) : (0 : truncated_witt_vector p n R).coeff i = 0 :=\n  by\n  show coeff i (truncate_fun _ 0 : truncated_witt_vector p n R) = 0\n  rw [coeff_truncate_fun, witt_vector.zero_coeff]\n#align coeff_zero coeff_zero\n\n",
+ "coeff_truncate_fun":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `expr𝕎 -/\n@[simp]\ntheorem coeff_truncate_fun (x : (expr𝕎) R) (i : fin n) : (truncate_fun n x).coeff i = x.coeff i := by\n  rw [truncate_fun, truncated_witt_vector.coeff_mk]\n#align coeff_truncate_fun coeff_truncate_fun\n\n",
+ "coeff_truncate":
+ "@[simp]\ntheorem coeff_truncate {m : ℕ} (hm : n ≤ m) (i : fin n) (x : truncated_witt_vector p m R) :\n    (truncate hm x).coeff i = x.coeff (Fin.castLe hm i) :=\n  by\n  obtain ⟨y, rfl⟩ := witt_vector.truncate_surjective p _ _ x\n  simp only [truncate_witt_vector_truncate, witt_vector.coeff_truncate, Fin.coe_castLe]\n#align coeff_truncate coeff_truncate\n\n",
+ "coeff_out":
+ "@[simp]\ntheorem coeff_out (x : truncated_witt_vector p n R) (i : fin n) : x.out.coeff i = x.coeff i := by\n  rw [out, witt_vector.coeff_mk, dif_pos i.is_lt, Fin.eta]\n#align coeff_out coeff_out\n\n",
+ "coeff_mk":
+ "@[simp]\ntheorem coeff_mk (x : fin n → R) (i : fin n) : (mk p x).coeff i = x i :=\n  rfl\n#align coeff_mk coeff_mk\n\n",
+ "card":
+ "theorem card {R : Type _} [fintype R] : fintype.card (truncated_witt_vector p n R) = fintype.card R ^ n := by\n  simp only [truncated_witt_vector, fintype.card_fin, fintype.card_fun]\n#align card card\n\n"}

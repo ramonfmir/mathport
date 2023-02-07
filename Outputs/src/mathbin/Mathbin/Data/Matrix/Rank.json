@@ -1,0 +1,20 @@
+{"rank_zero":
+ "@[simp]\ntheorem rank_zero : rank (0 : matrix n n K) = 0 := by\n  rw [rank, linear_equiv.map_zero, linear_map.range_zero, finrank_bot]\n#align rank_zero rank_zero\n\n",
+ "rank_unit":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ˣ» -/\ntheorem rank_unit (A : «expr ˣ» (matrix n n K)) : (A : matrix n n K).rank = fintype.card n :=\n  by\n  refine' le_antisymm (rank_le_card_width A) _\n  have := rank_mul_le (A : matrix n n K) (↑A⁻¹ : matrix n n K)\n  rwa [← mul_eq_mul, ← Units.val_mul, mul_inv_self, Units.val_one, rank_one] at this\n#align rank_unit rank_unit\n\n",
+ "rank_one":
+ "/-\nCopyright (c) 2021 Johan Commelin. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Johan Commelin\n-/\n@[simp]\ntheorem rank_one : rank (1 : matrix n n K) = fintype.card n := by\n  rw [rank, to_lin'_one, linear_map.range_id, finrank_top, module.free.finrank_pi]\n#align rank_one rank_one\n\n",
+ "rank_of_is_unit":
+ "theorem rank_of_is_unit (A : matrix n n K) (h : is_unit A) : A.rank = fintype.card n :=\n  by\n  obtain ⟨A, rfl⟩ := h\n  exact rank_unit A\n#align rank_of_is_unit rank_of_is_unit\n\n",
+ "rank_mul_le":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `matrix.mul -/\ntheorem rank_mul_le (B : matrix n o K) : (matrix.mul A B).rank ≤ A.rank :=\n  by\n  refine' linear_map.finrank_le_finrank_of_injective (submodule.of_le_injective _)\n  rw [to_lin'_mul]\n  exact linear_map.range_comp_le_range _ _\n#align rank_mul_le rank_mul_le\n\n",
+ "rank_le_width":
+ "theorem rank_le_width {m n : ℕ} (A : matrix (fin m) (fin n) K) : A.rank ≤ n :=\n  A.rank_le_card_width.trans <| (fintype.card_fin n).le\n#align rank_le_width rank_le_width\n\n",
+ "rank_le_height":
+ "theorem rank_le_height {m n : ℕ} (A : matrix (fin m) (fin n) K) : A.rank ≤ m :=\n  A.rank_le_card_height.trans <| (fintype.card_fin m).le\n#align rank_le_height rank_le_height\n\n",
+ "rank_le_card_width":
+ "theorem rank_le_card_width : A.rank ≤ fintype.card n :=\n  by\n  convert le_of_add_le_left A.to_lin'.finrank_range_add_finrank_ker.le\n  exact (module.free.finrank_pi K).symm\n#align rank_le_card_width rank_le_card_width\n\n",
+ "rank_le_card_height":
+ "theorem rank_le_card_height : A.rank ≤ fintype.card m :=\n  (submodule.finrank_le _).trans (module.free.finrank_pi K).le\n#align rank_le_card_height rank_le_card_height\n\n",
+ "rank_eq_finrank_range_to_lin":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₗ[ ] » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\ntheorem rank_eq_finrank_range_to_lin {M₁ M₂ : Type _} [add_comm_group M₁] [add_comm_group M₂] [Module K M₁]\n    [Module K M₂] (v₁ : basis m K M₁) (v₂ : basis n K M₂) : A.rank = finrank K (to_lin v₂ v₁ A).range :=\n  by\n  let e₁ := (pi.basis_fun K m).equiv v₁ (equiv.refl _)\n  let e₂ := (pi.basis_fun K n).equiv v₂ (equiv.refl _)\n  have range_e₂ : (e₂ : «expr →ₗ[ ] » (n → K) K M₂).range = «expr⊤» :=\n    by\n    rw [linear_map.range_eq_top]\n    exact e₂.surjective\n  refine' linear_equiv.finrank_eq (e₁.of_submodules _ _ _)\n  rw [← linear_map.range_comp, ← linear_map.range_comp_of_range_eq_top (to_lin v₂ v₁ A) range_e₂]\n  congr 1\n  apply linear_map.pi_ext'\n  rintro i\n  apply linear_map.ext_ring\n  have aux₁ := to_lin_self (pi.basis_fun K n) (pi.basis_fun K m) A i\n  have aux₂ := basis.equiv_apply (pi.basis_fun K n) i v₂\n  rw [to_lin_eq_to_lin'] at aux₁\n  rw [pi.basis_fun_apply, linear_map.coe_std_basis] at aux₁ aux₂\n  simp only [linear_map.comp_apply, e₁, e₂, linear_equiv.coe_coe, equiv.refl_apply, aux₁, aux₂, linear_map.coe_single,\n    to_lin_self, linear_equiv.map_sum, linear_equiv.map_smul, basis.equiv_apply]\n#align rank_eq_finrank_range_to_lin rank_eq_finrank_range_to_lin\n\n"}

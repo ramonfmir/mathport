@@ -1,0 +1,22 @@
+{"map_zero_apply":
+ "theorem map_zero_apply (x : α) : ϕ 0 x = x :=\n  ϕ.map_zero' x\n#align map_zero_apply map_zero_apply\n\n",
+ "map_zero":
+ "#print map_zero /-\n@[simp]\ntheorem map_zero : ϕ 0 = id :=\n  funext ϕ.map_zero'\n#align map_zero map_zero\n-/\n\n",
+ "map_add":
+ "#print map_add /-\ntheorem map_add (t₁ t₂ : τ) (x : α) : ϕ (t₁ + t₂) x = ϕ t₁ (ϕ t₂ x) :=\n  ϕ.map_add' _ _ _\n#align map_add map_add\n-/\n\n",
+ "is_invariant_iff_image_eq":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\ntheorem is_invariant_iff_image_eq (s : set α) : is_invariant ϕ s ↔ ∀ t, «expr '' » (ϕ t) s = s :=\n  (is_invariant_iff_image _ _).trans\n    (iff.intro (fun h t => Subset.antisymm (h t) fun _ hx => ⟨_, h (-t) ⟨_, hx, rfl⟩, by simp [← map_add]⟩) fun h t =>\n      by rw [h t])\n#align is_invariant_iff_image_eq is_invariant_iff_image_eq\n\n",
+ "is_invariant_iff_image":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\n/-\nCopyright (c) 2020 Jean Lo. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Jean Lo\n-/\ntheorem is_invariant_iff_image : is_invariant ϕ s ↔ ∀ t, «expr '' » (ϕ t) s ⊆ s := by simp_rw [is_invariant, maps_to']\n#align is_invariant_iff_image is_invariant_iff_image\n\n",
+ "is_invariant":
+ "/-- If `τ` is a `canonically_ordered_add_monoid` (e.g., `ℕ` or `ℝ≥0`), then the notions\n`is_fw_invariant` and `is_invariant` are equivalent. -/\ntheorem is_fw_invariant.is_invariant [CanonicallyOrderedAddMonoid τ] {ϕ : τ → α → α} {s : set α}\n    (h : is_fw_invariant ϕ s) : is_invariant ϕ s := fun t => h (zero_le t)\n#align is_fw_invariant.is_invariant is_fw_invariant.is_invariant\n\n",
+ "is_fw_invariant_iff_is_invariant":
+ "/-- If `τ` is a `canonically_ordered_add_monoid` (e.g., `ℕ` or `ℝ≥0`), then the notions\n`is_fw_invariant` and `is_invariant` are equivalent. -/\ntheorem is_fw_invariant_iff_is_invariant [CanonicallyOrderedAddMonoid τ] {ϕ : τ → α → α} {s : set α} :\n    is_fw_invariant ϕ s ↔ is_invariant ϕ s :=\n  ⟨is_fw_invariant.is_invariant, is_invariant.is_fw_invariant⟩\n#align is_fw_invariant_iff_is_invariant is_fw_invariant_iff_is_invariant\n\n",
+ "is_fw_invariant":
+ "theorem is_invariant.is_fw_invariant [preorder τ] [Zero τ] {ϕ : τ → α → α} {s : set α} (h : is_invariant ϕ s) :\n    is_fw_invariant ϕ s := fun t ht => h t\n#align is_invariant.is_fw_invariant is_invariant.is_fw_invariant\n\n",
+ "image_eq_preimage":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\ntheorem image_eq_preimage (t : τ) (s : set α) : «expr '' » (ϕ t) s = «expr ⁻¹' » (ϕ (-t)) s :=\n  (ϕ.to_homeomorph t).to_equiv.image_eq_preimage s\n#align image_eq_preimage image_eq_preimage\n\n",
+ "ext":
+ "@[ext]\ntheorem ext : ∀ {ϕ₁ ϕ₂ : flow τ α}, (∀ t x, ϕ₁ t x = ϕ₂ t x) → ϕ₁ = ϕ₂\n  | ⟨f₁, _, _, _⟩, ⟨f₂, _, _, _⟩, h => by\n    congr\n    funext\n    exact h _ _\n#align ext ext\n\n",
+ "continuous":
+ "@[continuity]\nprotected theorem continuous {β : Type _} [topological_space β] {t : β → τ} (ht : continuous t) {f : β → α}\n    (hf : continuous f) : continuous fun x => ϕ (t x) (f x) :=\n  ϕ.cont'.comp (ht.prod_mk hf)\n#align continuous continuous\n\n"}

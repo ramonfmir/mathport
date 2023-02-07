@@ -1,0 +1,8 @@
+{"val_of_nat_eq_of_not_is_valid":
+ "theorem val_of_nat_eq_of_not_is_valid {n : nat} : ¬is_valid_char n → (of_nat n).val = 0 := by\n  intro h <;> unfold of_nat <;> rw [dif_neg h]\n#align val_of_nat_eq_of_not_is_valid val_of_nat_eq_of_not_is_valid\n\n",
+ "val_of_nat_eq_of_is_valid":
+ "theorem val_of_nat_eq_of_is_valid {n : nat} : is_valid_char n → (of_nat n).val = n := by\n  intro h <;> unfold of_nat <;> rw [dif_pos h]\n#align val_of_nat_eq_of_is_valid val_of_nat_eq_of_is_valid\n\n",
+ "of_nat_ne_of_ne":
+ "theorem of_nat_ne_of_ne {n₁ n₂ : nat} (h₁ : n₁ ≠ n₂) (h₂ : is_valid_char n₁) (h₃ : is_valid_char n₂) :\n    of_nat n₁ ≠ of_nat n₂ := by\n  apply ne_of_vne\n  rw [val_of_nat_eq_of_is_valid h₂, val_of_nat_eq_of_is_valid h₃]\n  assumption\n#align of_nat_ne_of_ne of_nat_ne_of_ne\n\n",
+ "of_nat_eq_of_not_is_valid":
+ "theorem of_nat_eq_of_not_is_valid {n : nat} : ¬is_valid_char n → of_nat n = of_nat 0 := by\n  intro h <;> apply eq_of_veq <;> rw [val_of_nat_eq_of_not_is_valid h] <;> rfl\n#align of_nat_eq_of_not_is_valid of_nat_eq_of_not_is_valid\n\n"}

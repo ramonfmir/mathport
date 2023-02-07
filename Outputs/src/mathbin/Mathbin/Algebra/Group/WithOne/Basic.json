@@ -1,0 +1,20 @@
+{"with_one_congr_trans":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃* » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃* » -/\n#print MulEquiv.withOneCongr_trans /-\n@[simp]\ntheorem MulEquiv.withOneCongr_trans (e₁ : «expr ≃* » α β) (e₂ : «expr ≃* » β γ) :\n    e₁.with_one_congr.trans e₂.with_one_congr = (e₁.trans e₂).with_one_congr :=\n  MulEquiv.toMonoidHom_injective (map_comp _ _).symm\n#align mul_equiv.with_one_congr_trans MulEquiv.withOneCongr_trans\n-/\n\n",
+ "with_one_congr_symm":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃* » -/\n#print MulEquiv.withOneCongr_symm /-\n@[simp]\ntheorem MulEquiv.withOneCongr_symm (e : «expr ≃* » α β) : e.with_one_congr.symm = e.symm.with_one_congr :=\n  rfl\n#align mul_equiv.with_one_congr_symm MulEquiv.withOneCongr_symm\n-/\n\n",
+ "with_one_congr_refl":
+ "#print MulEquiv.withOneCongr_refl /-\n@[simp]\ntheorem MulEquiv.withOneCongr_refl : (MulEquiv.refl α).with_one_congr = MulEquiv.refl _ :=\n  MulEquiv.toMonoidHom_injective map_id\n#align mul_equiv.with_one_congr_refl MulEquiv.withOneCongr_refl\n-/\n\n",
+ "map_map":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₙ* » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₙ* » -/\n@[to_additive]\ntheorem map_map (f : «expr →ₙ* » α β) (g : «expr →ₙ* » β γ) (x) : map g (map f x) = map (g.comp f) x := by\n  induction x using WithOne.cases_on <;> rfl\n#align map_map map_map\n\n",
+ "map_id":
+ "@[simp, to_additive]\ntheorem map_id : map (MulHom.id α) = MonoidHom.id (WithOne α) :=\n  by\n  ext\n  induction x using WithOne.cases_on <;> rfl\n#align map_id map_id\n\n",
+ "map_comp":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₙ* » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₙ* » -/\n@[simp, to_additive]\ntheorem map_comp (f : «expr →ₙ* » α β) (g : «expr →ₙ* » β γ) : map (g.comp f) = (map g).comp (map f) :=\n  MonoidHom.ext fun x => (map_map f g x).symm\n#align map_comp map_comp\n\n",
+ "map_coe":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₙ* » -/\n@[simp, to_additive]\ntheorem map_coe (f : «expr →ₙ* » α β) (a : α) : map f (a : WithOne α) = f a :=\n  lift_coe _ _\n#align map_coe map_coe\n\n",
+ "lift_unique":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →* » -/\n@[to_additive]\ntheorem lift_unique (f : «expr →* » (WithOne α) β) : f = lift (f.to_mul_hom.comp coeMulHom) :=\n  (lift.apply_symm_apply f).symm\n#align lift_unique lift_unique\n\n",
+ "lift_one":
+ "@[simp, to_additive]\ntheorem lift_one : lift f 1 = 1 :=\n  rfl\n#align lift_one lift_one\n\n",
+ "lift_coe":
+ "/-\nCopyright (c) 2018 Mario Carneiro. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Mario Carneiro, Johan Commelin\n-/\n-- workaround: we make `with_one`/`with_zero` irreducible for this definition, otherwise `simps`\n-- will unfold it in the statement of the lemma it generates.\n@[simp, to_additive]\ntheorem lift_coe (x : α) : lift f x = f x :=\n  rfl\n#align lift_coe lift_coe\n\n"}

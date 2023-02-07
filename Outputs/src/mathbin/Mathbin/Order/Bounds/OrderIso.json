@@ -1,0 +1,20 @@
+{"upper_bounds_image":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\n/-\nCopyright (c) 2017 Johannes Hölzl. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Johannes Hölzl, Yury Kudryashov\n-/\ntheorem upper_bounds_image {s : set α} : upperBounds («expr '' » f s) = «expr '' » f (upperBounds s) :=\n  Subset.antisymm\n    (fun x hx => ⟨f.symm x, fun y hy => f.le_symm_apply.2 (hx <| mem_image_of_mem _ hy), f.apply_symm_apply x⟩)\n    f.monotone.image_upper_bounds_subset_upper_bounds_image\n#align upper_bounds_image upper_bounds_image\n\n",
+ "lower_bounds_image":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵈ» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵈ» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\ntheorem lower_bounds_image {s : set α} : lowerBounds («expr '' » f s) = «expr '' » f (lowerBounds s) :=\n  @upperBounds_image («expr ᵒᵈ» α) («expr ᵒᵈ» β) _ _ f.dual _\n#align lower_bounds_image lower_bounds_image\n\n",
+ "is_lub_preimage'":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\ntheorem is_lub_preimage' {s : set β} {x : β} : IsLUB («expr ⁻¹' » f s) (f.symm x) ↔ IsLUB s x := by\n  rw [is_lub_preimage, f.apply_symm_apply]\n#align is_lub_preimage' is_lub_preimage'\n\n",
+ "is_lub_preimage":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\n@[simp]\ntheorem is_lub_preimage {s : set β} {x : α} : IsLUB («expr ⁻¹' » f s) x ↔ IsLUB s (f x) := by\n  rw [← f.symm_symm, ← image_eq_preimage, is_lub_image]\n#align is_lub_preimage is_lub_preimage\n\n",
+ "is_lub_image'":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\ntheorem is_lub_image' {s : set α} {x : α} : IsLUB («expr '' » f s) (f x) ↔ IsLUB s x := by\n  rw [is_lub_image, f.symm_apply_apply]\n#align is_lub_image' is_lub_image'\n\n",
+ "is_lub_image":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\n@[simp]\ntheorem is_lub_image {s : set α} {x : β} : IsLUB («expr '' » f s) x ↔ IsLUB s (f.symm x) :=\n  ⟨fun h => IsLUB.of_image (fun _ _ => f.le_iff_le) ((f.apply_symm_apply x).symm ▸ h), fun h =>\n    (IsLUB.of_image fun _ _ => f.symm.le_iff_le) <| (f.symm_image_image s).symm ▸ h⟩\n#align is_lub_image is_lub_image\n\n",
+ "is_glb_preimage'":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\ntheorem is_glb_preimage' {s : set β} {x : β} : IsGLB («expr ⁻¹' » f s) (f.symm x) ↔ IsGLB s x :=\n  f.dual.is_lub_preimage'\n#align is_glb_preimage' is_glb_preimage'\n\n",
+ "is_glb_preimage":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\n@[simp]\ntheorem is_glb_preimage {s : set β} {x : α} : IsGLB («expr ⁻¹' » f s) x ↔ IsGLB s (f x) :=\n  f.dual.is_lub_preimage\n#align is_glb_preimage is_glb_preimage\n\n",
+ "is_glb_image'":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\ntheorem is_glb_image' {s : set α} {x : α} : IsGLB («expr '' » f s) (f x) ↔ IsGLB s x :=\n  f.dual.is_lub_image'\n#align is_glb_image' is_glb_image'\n\n",
+ "is_glb_image":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\n@[simp]\ntheorem is_glb_image {s : set α} {x : β} : IsGLB («expr '' » f s) x ↔ IsGLB s (f.symm x) :=\n  f.dual.is_lub_image\n#align is_glb_image is_glb_image\n\n"}

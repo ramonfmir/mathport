@@ -1,0 +1,62 @@
+{"minimals_upper_closure":
+ "theorem is_antichain.minimals_upper_closure (hs : IsAntichain (· ≤ ·) s) :\n    minimals (· ≤ ·) (upper_closure s : set α) = s :=\n  hs.max_minimals (fun a ⟨⟨b, hb, hba⟩, h⟩ => by rwa [eq_of_mem_minimals ‹a ∈ _› (subset_upper_closure hb) hba])\n    fun a ha => ⟨a, ⟨subset_upper_closure ha, fun b ⟨c, hc, hcb⟩ hba => by rwa [hs.eq' ha hc (hcb.trans hba)]⟩, le_rfl⟩\n#align is_antichain.minimals_upper_closure is_antichain.minimals_upper_closure\n\n",
+ "minimals_union":
+ "theorem minimals_union : minimals r (s ∪ t) ⊆ minimals r s ∪ minimals r t :=\n  maximals_union\n#align minimals_union minimals_union\n\n",
+ "minimals_swap":
+ "theorem minimals_swap : minimals (swap r) s = maximals r s :=\n  rfl\n#align minimals_swap minimals_swap\n\n",
+ "minimals_subset":
+ "theorem minimals_subset : minimals r s ⊆ s :=\n  sep_subset _ _\n#align minimals_subset minimals_subset\n\n",
+ "minimals_singleton":
+ "@[simp]\ntheorem minimals_singleton : minimals r {a} = {a} :=\n  maximals_singleton _ _\n#align minimals_singleton minimals_singleton\n\n",
+ "minimals_mono":
+ "theorem minimals_mono [is_antisymm α r₂] (h : ∀ a b, r₁ a b → r₂ a b) : minimals r₂ s ⊆ minimals r₁ s := fun a ha =>\n  ⟨ha.1, fun b hb hab => by\n    have := eq_of_mem_minimals ha hb (h _ _ hab)\n    subst this\n    exact hab⟩\n#align minimals_mono minimals_mono\n\n",
+ "minimals_inter_subset":
+ "theorem minimals_inter_subset : minimals r s ∩ t ⊆ minimals r (s ∩ t) :=\n  maximals_inter_subset\n#align minimals_inter_subset minimals_inter_subset\n\n",
+ "minimals_idem":
+ "@[simp]\ntheorem minimals_idem : minimals r (minimals r s) = minimals r s :=\n  maximals_idem\n#align minimals_idem minimals_idem\n\n",
+ "minimals_eq":
+ "theorem is_least.minimals_eq (h : IsLeast s a) : minimals (· ≤ ·) s = {a} :=\n  eq_singleton_iff_unique_mem.2 ⟨h.mem_minimals, fun b hb => eq_of_mem_minimals hb h.1 <| h.2 hb.1⟩\n#align is_least.minimals_eq is_least.minimals_eq\n\n",
+ "minimals_empty":
+ "@[simp]\ntheorem minimals_empty : minimals r ∅ = ∅ :=\n  sep_empty _\n#align minimals_empty minimals_empty\n\n",
+ "minimals_antichain":
+ "theorem minimals_antichain : IsAntichain r (minimals r s) :=\n  haveI := is_antisymm.swap r\n  (maximals_antichain _ _).swap\n#align minimals_antichain minimals_antichain\n\n",
+ "mem_minimals":
+ "theorem is_least.mem_minimals (h : IsLeast s a) : a ∈ minimals (· ≤ ·) s :=\n  ⟨h.1, fun b hb _ => h.2 hb⟩\n#align is_least.mem_minimals is_least.mem_minimals\n\n",
+ "mem_maximals":
+ "theorem is_greatest.mem_maximals (h : IsGreatest s a) : a ∈ maximals (· ≤ ·) s :=\n  ⟨h.1, fun b hb _ => h.2 hb⟩\n#align is_greatest.mem_maximals is_greatest.mem_maximals\n\n",
+ "maximals_union":
+ "theorem maximals_union : maximals r (s ∪ t) ⊆ maximals r s ∪ maximals r t :=\n  by\n  intro a ha\n  obtain h | h := ha.1\n  · exact or.inl ⟨h, fun b hb => ha.2 <| or.inl hb⟩\n  · exact or.inr ⟨h, fun b hb => ha.2 <| or.inr hb⟩\n#align maximals_union maximals_union\n\n",
+ "maximals_swap":
+ "theorem maximals_swap : maximals (swap r) s = minimals r s :=\n  rfl\n#align maximals_swap maximals_swap\n\n",
+ "maximals_subset":
+ "/-\nCopyright (c) 2022 Yaël Dillies. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Yaël Dillies\n-/\ntheorem maximals_subset : maximals r s ⊆ s :=\n  sep_subset _ _\n#align maximals_subset maximals_subset\n\n",
+ "maximals_singleton":
+ "@[simp]\ntheorem maximals_singleton : maximals r {a} = {a} :=\n  (maximals_subset _ _).antisymm <|\n    singleton_subset_iff.2 <|\n      ⟨rfl, by\n        rintro b (rfl : b = a)\n        exact id⟩\n#align maximals_singleton maximals_singleton\n\n",
+ "maximals_mono":
+ "theorem maximals_mono [is_antisymm α r₂] (h : ∀ a b, r₁ a b → r₂ a b) : maximals r₂ s ⊆ maximals r₁ s := fun a ha =>\n  ⟨ha.1, fun b hb hab => by\n    have := eq_of_mem_maximals ha hb (h _ _ hab)\n    subst this\n    exact hab⟩\n#align maximals_mono maximals_mono\n\n",
+ "maximals_lower_closure":
+ "theorem is_antichain.maximals_lower_closure (hs : IsAntichain (· ≤ ·) s) :\n    maximals (· ≤ ·) (lower_closure s : set α) = s :=\n  hs.to_dual.minimals_upper_closure\n#align is_antichain.maximals_lower_closure is_antichain.maximals_lower_closure\n\n",
+ "maximals_inter_subset":
+ "theorem maximals_inter_subset : maximals r s ∩ t ⊆ maximals r (s ∩ t) := fun a ha =>\n  ⟨⟨ha.1.1, ha.2⟩, fun b hb => ha.1.2 hb.1⟩\n#align maximals_inter_subset maximals_inter_subset\n\n",
+ "maximals_idem":
+ "@[simp]\ntheorem maximals_idem : maximals r (maximals r s) = maximals r s :=\n  (maximals_subset _ _).antisymm fun a ha => ⟨ha, fun b hb => ha.2 hb.1⟩\n#align maximals_idem maximals_idem\n\n",
+ "maximals_eq_minimals":
+ "theorem maximals_eq_minimals [is_symm α r] : maximals r s = minimals r s :=\n  by\n  congr\n  ext (a b)\n  exact comm\n#align maximals_eq_minimals maximals_eq_minimals\n\n",
+ "maximals_eq":
+ "theorem is_greatest.maximals_eq (h : IsGreatest s a) : maximals (· ≤ ·) s = {a} :=\n  eq_singleton_iff_unique_mem.2 ⟨h.mem_maximals, fun b hb => eq_of_mem_maximals hb h.1 <| h.2 hb.1⟩\n#align is_greatest.maximals_eq is_greatest.maximals_eq\n\n",
+ "maximals_empty":
+ "@[simp]\ntheorem maximals_empty : maximals r ∅ = ∅ :=\n  sep_empty _\n#align maximals_empty maximals_empty\n\n",
+ "maximals_antichain":
+ "theorem maximals_antichain : IsAntichain r (maximals r s) := fun a ha b hb hab h => hab <| eq_of_mem_maximals ha hb.1 h\n#align maximals_antichain maximals_antichain\n\n",
+ "max_minimals":
+ "/-- If `minimals r s` is included in but *shadows* the antichain `t`, then it is actually\nequal to `t`. -/\ntheorem is_antichain.max_minimals (ht : IsAntichain r t) (h : minimals r s ⊆ t)\n    (hs : ∀ ⦃a⦄, a ∈ t → ∃ b ∈ minimals r s, r a b) : minimals r s = t :=\n  by\n  refine' h.antisymm fun a ha => _\n  obtain ⟨b, hb, hr⟩ := hs ha\n  rwa [of_not_not fun hab => ht ha (h hb) hab hr]\n#align is_antichain.max_minimals is_antichain.max_minimals\n\n",
+ "max_maximals":
+ "/-- If `maximals r s` is included in but *shadows* the antichain `t`, then it is actually\nequal to `t`. -/\ntheorem is_antichain.max_maximals (ht : IsAntichain r t) (h : maximals r s ⊆ t)\n    (hs : ∀ ⦃a⦄, a ∈ t → ∃ b ∈ maximals r s, r b a) : maximals r s = t :=\n  by\n  refine' h.antisymm fun a ha => _\n  obtain ⟨b, hb, hr⟩ := hs ha\n  rwa [of_not_not fun hab => ht (h hb) ha (ne.symm hab) hr]\n#align is_antichain.max_maximals is_antichain.max_maximals\n\n",
+ "inter_minimals_subset":
+ "theorem inter_minimals_subset : s ∩ minimals r t ⊆ minimals r (s ∩ t) :=\n  inter_maximals_subset\n#align inter_minimals_subset inter_minimals_subset\n\n",
+ "inter_maximals_subset":
+ "theorem inter_maximals_subset : s ∩ maximals r t ⊆ maximals r (s ∩ t) := fun a ha =>\n  ⟨⟨ha.1, ha.2.1⟩, fun b hb => ha.2.2 hb.2⟩\n#align inter_maximals_subset inter_maximals_subset\n\n",
+ "eq_of_mem_minimals":
+ "theorem eq_of_mem_minimals (ha : a ∈ minimals r s) (hb : b ∈ s) (h : r b a) : a = b :=\n  antisymm (ha.2 hb h) h\n#align eq_of_mem_minimals eq_of_mem_minimals\n\n",
+ "eq_of_mem_maximals":
+ "theorem eq_of_mem_maximals (ha : a ∈ maximals r s) (hb : b ∈ s) (h : r a b) : a = b :=\n  antisymm h <| ha.2 hb h\n#align eq_of_mem_maximals eq_of_mem_maximals\n\n"}

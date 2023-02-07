@@ -1,0 +1,20 @@
+{"range_Icc_support":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →₀ » -/\n@[simp]\ntheorem range_Icc_support [decidable_eq ι] (f g : «expr →₀ » ι α) : (range_Icc f g).support = f.support ∪ g.support :=\n  by convert rfl\n#align range_Icc_support range_Icc_support\n\n",
+ "mem_range_singleton_apply_iff":
+ "/-\nCopyright (c) 2022 Yaël Dillies. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Yaël Dillies\n-/\ntheorem mem_range_singleton_apply_iff : a ∈ f.range_singleton i ↔ a = f i :=\n  mem_singleton\n#align mem_range_singleton_apply_iff mem_range_singleton_apply_iff\n\n",
+ "mem_range_Icc_apply_iff":
+ "theorem mem_range_Icc_apply_iff : a ∈ f.range_Icc g i ↔ f i ≤ a ∧ a ≤ g i :=\n  mem_Icc\n#align mem_range_Icc_apply_iff mem_range_Icc_apply_iff\n\n",
+ "card_Ioo":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `finset.prod -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.prod -/\ntheorem card_Ioo [decidable_eq ι] :\n    (Ioo f g).card =\n      finset.prod \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.prod\"\n          (f.support ∪ g.support) (Icc (f i) (g i)).card -\n        2 :=\n  by rw [card_Ioo_eq_card_Icc_sub_two, card_Icc]\n#align card_Ioo card_Ioo\n\n",
+ "card_Ioc":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `finset.prod -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.prod -/\ntheorem card_Ioc [decidable_eq ι] :\n    (Ioc f g).card =\n      finset.prod \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.prod\"\n          (f.support ∪ g.support) (Icc (f i) (g i)).card -\n        1 :=\n  by rw [card_Ioc_eq_card_Icc_sub_one, card_Icc]\n#align card_Ioc card_Ioc\n\n",
+ "card_Iio":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `finset.prod -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.prod -/\ntheorem card_Iio :\n    (Iio f).card =\n      finset.prod \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.prod\" f.support\n          (Iic (f i)).card -\n        1 :=\n  by rw [card_Iio_eq_card_Iic_sub_one, card_Iic]\n#align card_Iio card_Iio\n\n",
+ "card_Iic":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `finset.prod -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.prod -/\ntheorem card_Iic :\n    (Iic f).card =\n      finset.prod \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.prod\" f.support\n        (Iic (f i)).card :=\n  by simp_rw [Iic_eq_Icc, card_Icc, finsupp.bot_eq_zero, support_zero, empty_union, zero_apply, bot_eq_zero]\n#align card_Iic card_Iic\n\n",
+ "card_Ico":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `finset.prod -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.prod -/\ntheorem card_Ico [decidable_eq ι] :\n    (Ico f g).card =\n      finset.prod \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.prod\"\n          (f.support ∪ g.support) (Icc (f i) (g i)).card -\n        1 :=\n  by rw [card_Ico_eq_card_Icc_sub_one, card_Icc]\n#align card_Ico card_Ico\n\n",
+ "card_Icc":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `finset.prod -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.prod -/\ntheorem card_Icc [decidable_eq ι] :\n    (Icc f g).card =\n      finset.prod \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.prod\"\n        (f.support ∪ g.support) (Icc (f i) (g i)).card :=\n  by simp_rw [Icc_eq, card_finsupp, range_Icc_to_fun]\n#align card_Icc card_Icc\n\n",
+ "Icc_eq":
+ "theorem Icc_eq [decidable_eq ι] : Icc f g = (f.support ∪ g.support).finsupp (f.range_Icc g) := by convert rfl\n#align Icc_eq Icc_eq\n\n"}

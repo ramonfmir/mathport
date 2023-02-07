@@ -1,0 +1,146 @@
+{"unique_mdiff_on_preimage":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `diffeomorph -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\n@[simp]\ntheorem unique_mdiff_on_preimage (h : diffeomorph M n I J N) (hn : 1 ≤ n) {s : set N} :\n    unique_mdiff_on I («expr ⁻¹' » h s) ↔ unique_mdiff_on J s :=\n  h.symm_image_eq_preimage s ▸ h.symm.unique_mdiff_on_image hn\n#align unique_mdiff_on_preimage unique_mdiff_on_preimage\n\n",
+ "unique_mdiff_on_image_aux":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `diffeomorph -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\ntheorem unique_mdiff_on_image_aux (h : diffeomorph M n I J N) (hn : 1 ≤ n) {s : set M} (hs : unique_mdiff_on I s) :\n    unique_mdiff_on J («expr '' » h s) :=\n  by\n  convert hs.unique_mdiff_on_preimage (h.to_local_homeomorph_mdifferentiable hn)\n  simp [h.image_eq_preimage]\n#align unique_mdiff_on_image_aux unique_mdiff_on_image_aux\n\n",
+ "unique_mdiff_on_image":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `diffeomorph -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\n@[simp]\ntheorem unique_mdiff_on_image (h : diffeomorph M n I J N) (hn : 1 ≤ n) {s : set M} :\n    unique_mdiff_on J («expr '' » h s) ↔ unique_mdiff_on I s :=\n  ⟨fun hs => h.symm_image_image s ▸ h.symm.unique_mdiff_on_image_aux hn hs, h.unique_mdiff_on_image_aux hn⟩\n#align unique_mdiff_on_image unique_mdiff_on_image\n\n",
+ "unique_diff_on_preimage":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `diffeomorph.self -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\n@[simp]\ntheorem unique_diff_on_preimage (h : diffeomorph.self E n 𝕜 F) (hn : 1 ≤ n) {s : set F} :\n    unique_diff_on 𝕜 («expr ⁻¹' » h s) ↔ unique_diff_on 𝕜 s :=\n  h.symm_image_eq_preimage s ▸ h.symm.unique_diff_on_image hn\n#align unique_diff_on_preimage unique_diff_on_preimage\n\n",
+ "unique_diff_on_image":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `diffeomorph.self -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\n@[simp]\ntheorem unique_diff_on_image (h : diffeomorph.self E n 𝕜 F) (hn : 1 ≤ n) {s : set E} :\n    unique_diff_on 𝕜 («expr '' » h s) ↔ unique_diff_on 𝕜 s := by\n  simp only [← unique_mdiff_on_iff_unique_diff_on, unique_mdiff_on_image, hn]\n#align unique_diff_on_image unique_diff_on_image\n\n",
+ "trans_refl":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `diffeomorph -/\n@[simp]\ntheorem trans_refl (h : diffeomorph M n I I' M') : h.trans (diffeomorph.refl I' M' n) = h :=\n  ext fun _ => rfl\n#align trans_refl trans_refl\n\n",
+ "trans_diffeomorph_range":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\ntheorem trans_diffeomorph_range : range (I.trans_diffeomorph e) = «expr '' » e (range I) :=\n  range_comp e I\n#align trans_diffeomorph_range trans_diffeomorph_range\n\n",
+ "to_local_homeomorph_mdifferentiable":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `diffeomorph -/\ntheorem to_local_homeomorph_mdifferentiable (h : diffeomorph M n I J N) (hn : 1 ≤ n) :\n    h.to_homeomorph.to_local_homeomorph.mdifferentiable I J :=\n  ⟨h.mdifferentiable_on _ hn, h.symm.mdifferentiable_on _ hn⟩\n#align to_local_homeomorph_mdifferentiable to_local_homeomorph_mdifferentiable\n\n",
+ "to_homeomorph_to_equiv":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `diffeomorph -/\n@[simp]\ntheorem to_homeomorph_to_equiv (h : diffeomorph M n I J N) : h.to_homeomorph.to_equiv = h.to_equiv :=\n  rfl\n#align to_homeomorph_to_equiv to_homeomorph_to_equiv\n\n",
+ "to_equiv_injective":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `diffeomorph -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ » -/\ntheorem to_equiv_injective : injective (diffeomorph.to_equiv : diffeomorph M n I I' M' → «expr ≃ » M M')\n  | ⟨e, _, _⟩, ⟨e', _, _⟩, rfl => rfl\n#align to_equiv_injective to_equiv_injective\n\n",
+ "to_equiv_inj":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `diffeomorph -/\n@[simp]\ntheorem to_equiv_inj {h h' : diffeomorph M n I I' M'} : h.to_equiv = h'.to_equiv ↔ h = h' :=\n  to_equiv_injective.eq_iff\n#align to_equiv_inj to_equiv_inj\n\n",
+ "to_equiv_coe_symm":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `diffeomorph -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n@[simp, mfld_simps]\ntheorem to_equiv_coe_symm (h : diffeomorph M n I J N) : «expr⇑ » h.to_equiv.symm = h.symm :=\n  rfl\n#align to_equiv_coe_symm to_equiv_coe_symm\n\n",
+ "symm_trans_self":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `diffeomorph -/\n@[simp]\ntheorem symm_trans_self (h : diffeomorph M n I J N) : h.symm.trans h = diffeomorph.refl J N n :=\n  ext h.apply_symm_apply\n#align symm_trans_self symm_trans_self\n\n",
+ "symm_trans'":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `diffeomorph -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `diffeomorph -/\n@[simp]\ntheorem symm_trans' (h₁ : diffeomorph M n I I' M') (h₂ : diffeomorph M' n I' J N) :\n    (h₁.trans h₂).symm = h₂.symm.trans h₁.symm :=\n  rfl\n#align symm_trans' symm_trans'\n\n",
+ "symm_to_homeomorph":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `diffeomorph -/\n@[simp]\ntheorem symm_to_homeomorph (h : diffeomorph M n I J N) : h.symm.to_homeomorph = h.to_homeomorph.symm :=\n  rfl\n#align symm_to_homeomorph symm_to_homeomorph\n\n",
+ "symm_to_equiv":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `diffeomorph -/\n@[simp]\ntheorem symm_to_equiv (h : diffeomorph M n I J N) : h.symm.to_equiv = h.to_equiv.symm :=\n  rfl\n#align symm_to_equiv symm_to_equiv\n\n",
+ "symm_to_diffeomorph":
+ "@[simp]\ntheorem symm_to_diffeomorph : e.symm.to_diffeomorph = e.to_diffeomorph.symm :=\n  rfl\n#align symm_to_diffeomorph symm_to_diffeomorph\n\n",
+ "symm_refl":
+ "@[simp]\ntheorem symm_refl : (diffeomorph.refl I M n).symm = diffeomorph.refl I M n :=\n  ext fun _ => rfl\n#align symm_refl symm_refl\n\n",
+ "symm_image_image":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `diffeomorph -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\n@[simp]\ntheorem symm_image_image (h : diffeomorph M n I J N) (s : set M) : «expr '' » h.symm («expr '' » h s) = s :=\n  h.to_equiv.symm_image_image s\n#align symm_image_image symm_image_image\n\n",
+ "symm_image_eq_preimage":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `diffeomorph -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\ntheorem symm_image_eq_preimage (h : diffeomorph M n I J N) (s : set N) : «expr '' » h.symm s = «expr ⁻¹' » h s :=\n  h.symm.image_eq_preimage s\n#align symm_image_eq_preimage symm_image_eq_preimage\n\n",
+ "symm_apply_apply":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `diffeomorph -/\n@[simp]\ntheorem symm_apply_apply (h : diffeomorph M n I J N) (x : M) : h.symm (h x) = x :=\n  h.to_equiv.symm_apply_apply x\n#align symm_apply_apply symm_apply_apply\n\n",
+ "smooth_trans_diffeomorph_right":
+ "@[simp]\ntheorem smooth_trans_diffeomorph_right {f : M' → M} : smooth I' (I.trans_diffeomorph e) f ↔ smooth I' I f :=\n  cont_mdiff_trans_diffeomorph_right e\n#align smooth_trans_diffeomorph_right smooth_trans_diffeomorph_right\n\n",
+ "smooth_trans_diffeomorph_left":
+ "@[simp]\ntheorem smooth_trans_diffeomorph_left {f : M → M'} : smooth (I.trans_diffeomorph e) I' f ↔ smooth I I' f :=\n  e.cont_mdiff_trans_diffeomorph_left\n#align smooth_trans_diffeomorph_left smooth_trans_diffeomorph_left\n\n",
+ "smooth":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `diffeomorph.top -/\nprotected theorem smooth (h : diffeomorph.top M I I' M') : smooth I I' h :=\n  h.cont_mdiff_to_fun\n#align smooth smooth\n\n",
+ "self_trans_symm":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `diffeomorph -/\n@[simp]\ntheorem self_trans_symm (h : diffeomorph M n I J N) : h.trans h.symm = diffeomorph.refl I M n :=\n  ext h.symm_apply_apply\n#align self_trans_symm self_trans_symm\n\n",
+ "refl_trans":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `diffeomorph -/\n@[simp]\ntheorem refl_trans (h : diffeomorph M n I I' M') : (diffeomorph.refl I M n).trans h = h :=\n  ext fun _ => rfl\n#align refl_trans refl_trans\n\n",
+ "refl_to_equiv":
+ "@[simp]\ntheorem refl_to_equiv : (diffeomorph.refl I M n).to_equiv = equiv.refl _ :=\n  rfl\n#align refl_to_equiv refl_to_equiv\n\n",
+ "range_comp":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `diffeomorph -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\n@[simp, mfld_simps]\ntheorem range_comp {α} (h : diffeomorph M n I J N) (f : α → M) : range (h ∘ f) = «expr ⁻¹' » h.symm (range f) := by\n  rw [range_comp, image_eq_preimage]\n#align range_comp range_comp\n\n",
+ "prod_congr_symm":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `diffeomorph -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `diffeomorph -/\n@[simp]\ntheorem prod_congr_symm (h₁ : diffeomorph M n I I' M') (h₂ : diffeomorph N n J J' N') :\n    (h₁.prod_congr h₂).symm = h₁.symm.prod_congr h₂.symm :=\n  rfl\n#align prod_congr_symm prod_congr_symm\n\n",
+ "prod_comm_symm":
+ "@[simp]\ntheorem prod_comm_symm : (prod_comm I J M N n).symm = prod_comm J I N M n :=\n  rfl\n#align prod_comm_symm prod_comm_symm\n\n",
+ "mdifferentiable_on":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `diffeomorph -/\nprotected theorem mdifferentiable_on (h : diffeomorph M n I I' M') (s : set M) (hn : 1 ≤ n) :\n    mdifferentiable_on I I' h s :=\n  (h.mdifferentiable hn).mdifferentiable_on\n#align mdifferentiable_on mdifferentiable_on\n\n",
+ "mdifferentiable":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `diffeomorph -/\nprotected theorem mdifferentiable (h : diffeomorph M n I I' M') (hn : 1 ≤ n) : mdifferentiable I I' h :=\n  h.cont_mdiff.mdifferentiable hn\n#align mdifferentiable mdifferentiable\n\n",
+ "image_symm_image":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `diffeomorph -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\n@[simp]\ntheorem image_symm_image (h : diffeomorph M n I J N) (s : set N) : «expr '' » h («expr '' » h.symm s) = s :=\n  h.to_equiv.image_symm_image s\n#align image_symm_image image_symm_image\n\n",
+ "image_eq_preimage":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `diffeomorph -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\ntheorem image_eq_preimage (h : diffeomorph M n I J N) (s : set M) : «expr '' » h s = «expr ⁻¹' » h.symm s :=\n  h.to_equiv.image_eq_preimage s\n#align image_eq_preimage image_eq_preimage\n\n",
+ "ext_chart_at_trans_diffeomorph_target":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\ntheorem ext_chart_at_trans_diffeomorph_target (x : M) :\n    (ext_chart_at (I.trans_diffeomorph e) x).target = «expr ⁻¹' » e.symm (ext_chart_at I x).target := by\n  simp only [range_comp e, e.image_eq_preimage, preimage_preimage, mfld_simps]\n#align ext_chart_at_trans_diffeomorph_target ext_chart_at_trans_diffeomorph_target\n\n",
+ "ext":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `diffeomorph -/\n@[ext]\ntheorem ext {h h' : diffeomorph M n I I' M'} (Heq : ∀ x, h x = h' x) : h = h' :=\n  coe_fn_injective <| funext Heq\n#align ext ext\n\n",
+ "continuous":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `diffeomorph -/\n/-\nCopyright © 2020 Nicolò Cavalleri. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Nicolò Cavalleri, Yury Kudryashov\n-/\n@[continuity]\nprotected theorem continuous (h : diffeomorph M n I I' M') : continuous h :=\n  h.cont_mdiff_to_fun.continuous\n#align continuous continuous\n\n",
+ "cont_mdiff_within_at_trans_diffeomorph_right":
+ "@[simp]\ntheorem cont_mdiff_within_at_trans_diffeomorph_right {f : M' → M} {x s} :\n    cont_mdiff_within_at I' (I.trans_diffeomorph e) n f s x ↔ cont_mdiff_within_at I' I n f s x :=\n  (to_trans_diffeomorph I M e).cont_mdiff_within_at_diffeomorph_comp_iff le_top\n#align cont_mdiff_within_at_trans_diffeomorph_right cont_mdiff_within_at_trans_diffeomorph_right\n\n",
+ "cont_mdiff_within_at_trans_diffeomorph_left":
+ "@[simp]\ntheorem cont_mdiff_within_at_trans_diffeomorph_left {f : M → M'} {x s} :\n    cont_mdiff_within_at (I.trans_diffeomorph e) I' n f s x ↔ cont_mdiff_within_at I I' n f s x :=\n  ((to_trans_diffeomorph I M e).cont_mdiff_within_at_comp_diffeomorph_iff le_top).symm\n#align cont_mdiff_within_at_trans_diffeomorph_left cont_mdiff_within_at_trans_diffeomorph_left\n\n",
+ "cont_mdiff_within_at_diffeomorph_comp_iff":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `diffeomorph -/\n@[simp]\ntheorem cont_mdiff_within_at_diffeomorph_comp_iff {m} (h : diffeomorph M n I J N) {f : M' → M} (hm : m ≤ n) {s x} :\n    cont_mdiff_within_at I' J m (h ∘ f) s x ↔ cont_mdiff_within_at I' I m f s x :=\n  ⟨fun Hhf => by\n    simpa only [(· ∘ ·), h.symm_apply_apply] using (h.symm.cont_mdiff_at.of_le hm).comp_cont_mdiff_within_at _ Hhf,\n    fun Hf => (h.cont_mdiff_at.of_le hm).comp_cont_mdiff_within_at _ Hf⟩\n#align cont_mdiff_within_at_diffeomorph_comp_iff cont_mdiff_within_at_diffeomorph_comp_iff\n\n",
+ "cont_mdiff_within_at_comp_diffeomorph_iff":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `diffeomorph -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\n@[simp]\ntheorem cont_mdiff_within_at_comp_diffeomorph_iff {m} (h : diffeomorph M n I J N) {f : N → M'} {s x} (hm : m ≤ n) :\n    cont_mdiff_within_at I I' m (f ∘ h) s x ↔ cont_mdiff_within_at J I' m f («expr ⁻¹' » h.symm s) (h x) :=\n  by\n  constructor\n  · intro Hfh\n    rw [← h.symm_apply_apply x] at Hfh\n    simpa only [(· ∘ ·), h.apply_symm_apply] using\n      Hfh.comp (h x) (h.symm.cont_mdiff_within_at.of_le hm) (maps_to_preimage _ _)\n  · rw [← h.image_eq_preimage]\n    exact fun hf => hf.comp x (h.cont_mdiff_within_at.of_le hm) (maps_to_image _ _)\n#align cont_mdiff_within_at_comp_diffeomorph_iff cont_mdiff_within_at_comp_diffeomorph_iff\n\n",
+ "cont_mdiff_within_at":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `diffeomorph -/\nprotected theorem cont_mdiff_within_at (h : diffeomorph M n I I' M') {s x} : cont_mdiff_within_at I I' n h s x :=\n  h.cont_mdiff_at.cont_mdiff_within_at\n#align cont_mdiff_within_at cont_mdiff_within_at\n\n",
+ "cont_mdiff_trans_diffeomorph_right":
+ "@[simp]\ntheorem cont_mdiff_trans_diffeomorph_right {f : M' → M} :\n    cont_mdiff I' (I.trans_diffeomorph e) n f ↔ cont_mdiff I' I n f :=\n  (to_trans_diffeomorph I M e).cont_mdiff_diffeomorph_comp_iff le_top\n#align cont_mdiff_trans_diffeomorph_right cont_mdiff_trans_diffeomorph_right\n\n",
+ "cont_mdiff_trans_diffeomorph_left":
+ "@[simp]\ntheorem cont_mdiff_trans_diffeomorph_left {f : M → M'} :\n    cont_mdiff (I.trans_diffeomorph e) I' n f ↔ cont_mdiff I I' n f :=\n  ((to_trans_diffeomorph I M e).cont_mdiff_comp_diffeomorph_iff le_top).symm\n#align cont_mdiff_trans_diffeomorph_left cont_mdiff_trans_diffeomorph_left\n\n",
+ "cont_mdiff_on_trans_diffeomorph_right":
+ "@[simp]\ntheorem cont_mdiff_on_trans_diffeomorph_right {f : M' → M} {s} :\n    cont_mdiff_on I' (I.trans_diffeomorph e) n f s ↔ cont_mdiff_on I' I n f s :=\n  (to_trans_diffeomorph I M e).cont_mdiff_on_diffeomorph_comp_iff le_top\n#align cont_mdiff_on_trans_diffeomorph_right cont_mdiff_on_trans_diffeomorph_right\n\n",
+ "cont_mdiff_on_trans_diffeomorph_left":
+ "@[simp]\ntheorem cont_mdiff_on_trans_diffeomorph_left {f : M → M'} {s} :\n    cont_mdiff_on (I.trans_diffeomorph e) I' n f s ↔ cont_mdiff_on I I' n f s :=\n  ((to_trans_diffeomorph I M e).cont_mdiff_on_comp_diffeomorph_iff le_top).symm\n#align cont_mdiff_on_trans_diffeomorph_left cont_mdiff_on_trans_diffeomorph_left\n\n",
+ "cont_mdiff_on_diffeomorph_comp_iff":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `diffeomorph -/\n@[simp]\ntheorem cont_mdiff_on_diffeomorph_comp_iff {m} (h : diffeomorph M n I J N) {f : M' → M} (hm : m ≤ n) {s} :\n    cont_mdiff_on I' J m (h ∘ f) s ↔ cont_mdiff_on I' I m f s :=\n  forall₂_congr fun x hx => h.cont_mdiff_within_at_diffeomorph_comp_iff hm\n#align cont_mdiff_on_diffeomorph_comp_iff cont_mdiff_on_diffeomorph_comp_iff\n\n",
+ "cont_mdiff_on_comp_diffeomorph_iff":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `diffeomorph -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\n@[simp]\ntheorem cont_mdiff_on_comp_diffeomorph_iff {m} (h : diffeomorph M n I J N) {f : N → M'} {s} (hm : m ≤ n) :\n    cont_mdiff_on I I' m (f ∘ h) s ↔ cont_mdiff_on J I' m f («expr ⁻¹' » h.symm s) :=\n  h.to_equiv.forall_congr fun x => by\n    simp only [hm, coe_to_equiv, symm_apply_apply, cont_mdiff_within_at_comp_diffeomorph_iff, mem_preimage]\n#align cont_mdiff_on_comp_diffeomorph_iff cont_mdiff_on_comp_diffeomorph_iff\n\n",
+ "cont_mdiff_diffeomorph_comp_iff":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `diffeomorph -/\n@[simp]\ntheorem cont_mdiff_diffeomorph_comp_iff {m} (h : diffeomorph M n I J N) {f : M' → M} (hm : m ≤ n) :\n    cont_mdiff I' J m (h ∘ f) ↔ cont_mdiff I' I m f :=\n  forall_congr' fun x => h.cont_mdiff_within_at_diffeomorph_comp_iff hm\n#align cont_mdiff_diffeomorph_comp_iff cont_mdiff_diffeomorph_comp_iff\n\n",
+ "cont_mdiff_comp_diffeomorph_iff":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `diffeomorph -/\n@[simp]\ntheorem cont_mdiff_comp_diffeomorph_iff {m} (h : diffeomorph M n I J N) {f : N → M'} (hm : m ≤ n) :\n    cont_mdiff I I' m (f ∘ h) ↔ cont_mdiff J I' m f :=\n  h.to_equiv.forall_congr fun x => h.cont_mdiff_at_comp_diffeomorph_iff hm\n#align cont_mdiff_comp_diffeomorph_iff cont_mdiff_comp_diffeomorph_iff\n\n",
+ "cont_mdiff_at_trans_diffeomorph_right":
+ "@[simp]\ntheorem cont_mdiff_at_trans_diffeomorph_right {f : M' → M} {x} :\n    cont_mdiff_at I' (I.trans_diffeomorph e) n f x ↔ cont_mdiff_at I' I n f x :=\n  (to_trans_diffeomorph I M e).cont_mdiff_at_diffeomorph_comp_iff le_top\n#align cont_mdiff_at_trans_diffeomorph_right cont_mdiff_at_trans_diffeomorph_right\n\n",
+ "cont_mdiff_at_trans_diffeomorph_left":
+ "@[simp]\ntheorem cont_mdiff_at_trans_diffeomorph_left {f : M → M'} {x} :\n    cont_mdiff_at (I.trans_diffeomorph e) I' n f x ↔ cont_mdiff_at I I' n f x :=\n  ((to_trans_diffeomorph I M e).cont_mdiff_at_comp_diffeomorph_iff le_top).symm\n#align cont_mdiff_at_trans_diffeomorph_left cont_mdiff_at_trans_diffeomorph_left\n\n",
+ "cont_mdiff_at_diffeomorph_comp_iff":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `diffeomorph -/\n@[simp]\ntheorem cont_mdiff_at_diffeomorph_comp_iff {m} (h : diffeomorph M n I J N) {f : M' → M} (hm : m ≤ n) {x} :\n    cont_mdiff_at I' J m (h ∘ f) x ↔ cont_mdiff_at I' I m f x :=\n  h.cont_mdiff_within_at_diffeomorph_comp_iff hm\n#align cont_mdiff_at_diffeomorph_comp_iff cont_mdiff_at_diffeomorph_comp_iff\n\n",
+ "cont_mdiff_at_comp_diffeomorph_iff":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `diffeomorph -/\n@[simp]\ntheorem cont_mdiff_at_comp_diffeomorph_iff {m} (h : diffeomorph M n I J N) {f : N → M'} {x} (hm : m ≤ n) :\n    cont_mdiff_at I I' m (f ∘ h) x ↔ cont_mdiff_at J I' m f (h x) :=\n  h.cont_mdiff_within_at_comp_diffeomorph_iff hm\n#align cont_mdiff_at_comp_diffeomorph_iff cont_mdiff_at_comp_diffeomorph_iff\n\n",
+ "cont_mdiff_at":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `diffeomorph -/\nprotected theorem cont_mdiff_at (h : diffeomorph M n I I' M') {x} : cont_mdiff_at I I' n h x :=\n  h.cont_mdiff.cont_mdiff_at\n#align cont_mdiff_at cont_mdiff_at\n\n",
+ "cont_mdiff":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `diffeomorph -/\nprotected theorem cont_mdiff (h : diffeomorph M n I I' M') : cont_mdiff I I' n h :=\n  h.cont_mdiff_to_fun\n#align cont_mdiff cont_mdiff\n\n",
+ "cont_diff":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `diffeomorph.self -/\nprotected theorem cont_diff (h : diffeomorph.self E n 𝕜 E') : cont_diff 𝕜 n h :=\n  h.cont_mdiff.cont_diff\n#align cont_diff cont_diff\n\n",
+ "coe_trans_diffeomorph_symm":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n@[simp, mfld_simps]\ntheorem coe_trans_diffeomorph_symm : «expr⇑ » (I.trans_diffeomorph e).symm = I.symm ∘ e.symm :=\n  rfl\n#align coe_trans_diffeomorph_symm coe_trans_diffeomorph_symm\n\n",
+ "coe_trans_diffeomorph":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n@[simp, mfld_simps]\ntheorem coe_trans_diffeomorph : «expr⇑ » (I.trans_diffeomorph e) = e ∘ I :=\n  rfl\n#align coe_trans_diffeomorph coe_trans_diffeomorph\n\n",
+ "coe_trans":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `diffeomorph -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `diffeomorph -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n@[simp]\ntheorem coe_trans (h₁ : diffeomorph M n I I' M') (h₂ : diffeomorph M' n I' J N) : «expr⇑ » (h₁.trans h₂) = h₂ ∘ h₁ :=\n  rfl\n#align coe_trans coe_trans\n\n",
+ "coe_to_homeomorph_symm":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `diffeomorph -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n@[simp]\ntheorem coe_to_homeomorph_symm (h : diffeomorph M n I J N) : «expr⇑ » h.to_homeomorph.symm = h.symm :=\n  rfl\n#align coe_to_homeomorph_symm coe_to_homeomorph_symm\n\n",
+ "coe_to_homeomorph":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `diffeomorph -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n@[simp]\ntheorem coe_to_homeomorph (h : diffeomorph M n I J N) : «expr⇑ » h.to_homeomorph = h :=\n  rfl\n#align coe_to_homeomorph coe_to_homeomorph\n\n",
+ "coe_to_equiv":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `diffeomorph -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n@[simp]\ntheorem coe_to_equiv (h : diffeomorph M n I I' M') : «expr⇑ » h.to_equiv = h :=\n  rfl\n#align coe_to_equiv coe_to_equiv\n\n",
+ "coe_to_diffeomorph_symm":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n@[simp]\ntheorem coe_to_diffeomorph_symm : «expr⇑ » e.to_diffeomorph.symm = e.symm :=\n  rfl\n#align coe_to_diffeomorph_symm coe_to_diffeomorph_symm\n\n",
+ "coe_to_diffeomorph":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n@[simp]\ntheorem coe_to_diffeomorph : «expr⇑ » e.to_diffeomorph = e :=\n  rfl\n#align coe_to_diffeomorph coe_to_diffeomorph\n\n",
+ "coe_refl":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n@[simp]\ntheorem coe_refl : «expr⇑ » (diffeomorph.refl I M n) = id :=\n  rfl\n#align coe_refl coe_refl\n\n",
+ "coe_prod_congr":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `diffeomorph -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `diffeomorph -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n@[simp]\ntheorem coe_prod_congr (h₁ : diffeomorph M n I I' M') (h₂ : diffeomorph N n J J' N') :\n    «expr⇑ » (h₁.prod_congr h₂) = prod.map h₁ h₂ :=\n  rfl\n#align coe_prod_congr coe_prod_congr\n\n",
+ "coe_prod_comm":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n@[simp]\ntheorem coe_prod_comm : «expr⇑ » (prod_comm I J M N n) = prod.swap :=\n  rfl\n#align coe_prod_comm coe_prod_comm\n\n",
+ "coe_fn_injective":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `diffeomorph -/\n/-- Coercion to function `λ h : M ≃ₘ^n⟮I, I'⟯ M', (h : M → M')` is injective. -/\ntheorem coe_fn_injective : injective fun (h : diffeomorph M n I I' M') (x : M) => h x :=\n  equiv.coe_fn_injective.comp to_equiv_injective\n#align coe_fn_injective coe_fn_injective\n\n",
+ "coe_ext_chart_at_trans_diffeomorph_symm":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\ntheorem coe_ext_chart_at_trans_diffeomorph_symm (x : M) :\n    «expr⇑ » (ext_chart_at (I.trans_diffeomorph e) x).symm = (ext_chart_at I x).symm ∘ e.symm :=\n  rfl\n#align coe_ext_chart_at_trans_diffeomorph_symm coe_ext_chart_at_trans_diffeomorph_symm\n\n",
+ "coe_ext_chart_at_trans_diffeomorph":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\ntheorem coe_ext_chart_at_trans_diffeomorph (x : M) :\n    «expr⇑ » (ext_chart_at (I.trans_diffeomorph e) x) = e ∘ ext_chart_at I x :=\n  rfl\n#align coe_ext_chart_at_trans_diffeomorph coe_ext_chart_at_trans_diffeomorph\n\n",
+ "coe_coe":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `diffeomorph -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `cont_mdiff_map -/\n@[simp, norm_cast]\ntheorem coe_coe (h : diffeomorph M n I I' M') : «expr⇑ » (h : cont_mdiff_map n I M I' M') = h :=\n  rfl\n#align coe_coe coe_coe\n\n",
+ "apply_symm_apply":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `diffeomorph -/\n@[simp]\ntheorem apply_symm_apply (h : diffeomorph M n I J N) (x : N) : h (h.symm x) = x :=\n  h.to_equiv.apply_symm_apply x\n#align apply_symm_apply apply_symm_apply\n\n"}

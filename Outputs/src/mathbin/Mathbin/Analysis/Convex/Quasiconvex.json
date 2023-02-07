@@ -1,0 +1,32 @@
+{"sup":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊔ » -/\ntheorem quasiconvex_on.sup (hf : quasiconvex_on 𝕜 s f) (hg : quasiconvex_on 𝕜 s g) :\n    quasiconvex_on 𝕜 s («expr ⊔ » f g) := by\n  intro r\n  simp_rw [Pi.sup_def, sup_le_iff, Set.sep_and]\n  exact (hf r).inter (hg r)\n#align quasiconvex_on.sup quasiconvex_on.sup\n\n",
+ "quasilinear_on_iff_monotone_on_or_antitone_on":
+ "theorem quasilinear_on_iff_monotone_on_or_antitone_on (hs : convex 𝕜 s) :\n    quasilinear_on 𝕜 s f ↔ monotone_on f s ∨ antitone_on f s :=\n  ⟨fun h => h.monotone_on_or_antitone_on, fun h => h.elim (fun h => h.quasilinear_on hs) fun h => h.quasilinear_on hs⟩\n#align quasilinear_on_iff_monotone_on_or_antitone_on quasilinear_on_iff_monotone_on_or_antitone_on\n\n",
+ "quasilinear_on_iff_mem_uIcc":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\ntheorem quasilinear_on_iff_mem_uIcc :\n    quasilinear_on 𝕜 s f ↔\n      convex 𝕜 s ∧\n        ∀ ⦃x⦄,\n          x ∈ s →\n            ∀ ⦃y⦄,\n              y ∈ s → ∀ ⦃a b : 𝕜⦄, 0 ≤ a → 0 ≤ b → a + b = 1 → f («expr • » a x + «expr • » b y) ∈ uIcc (f x) (f y) :=\n  by\n  rw [quasilinear_on, quasiconvex_on_iff_le_max, quasiconcave_on_iff_min_le, and_and_and_comm, and_self_iff]\n  apply and_congr_right'\n  simp_rw [← forall_and, ← Icc_min_max, mem_Icc, and_comm']\n#align quasilinear_on_iff_mem_uIcc quasilinear_on_iff_mem_uIcc\n\n",
+ "quasilinear_on":
+ "theorem antitone.quasilinear_on (hf : antitone f) : quasilinear_on 𝕜 univ f :=\n  ⟨hf.quasiconvex_on, hf.quasiconcave_on⟩\n#align antitone.quasilinear_on antitone.quasilinear_on\n\n",
+ "quasiconvex_on_of_convex_le":
+ "theorem convex.quasiconvex_on_of_convex_le (hs : convex 𝕜 s) (h : ∀ r, convex 𝕜 { x | f x ≤ r }) :\n    quasiconvex_on 𝕜 s f := fun r => hs.inter (h r)\n#align convex.quasiconvex_on_of_convex_le convex.quasiconvex_on_of_convex_le\n\n",
+ "quasiconvex_on_iff_le_max":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\ntheorem quasiconvex_on_iff_le_max :\n    quasiconvex_on 𝕜 s f ↔\n      convex 𝕜 s ∧\n        ∀ ⦃x⦄,\n          x ∈ s →\n            ∀ ⦃y⦄,\n              y ∈ s → ∀ ⦃a b : 𝕜⦄, 0 ≤ a → 0 ≤ b → a + b = 1 → f («expr • » a x + «expr • » b y) ≤ max (f x) (f y) :=\n  ⟨fun hf =>\n    ⟨hf.convex, fun x hx y hy a b ha hb hab => (hf _ ⟨hx, le_max_left _ _⟩ ⟨hy, le_max_right _ _⟩ ha hb hab).2⟩,\n    fun hf r x hx y hy a b ha hb hab =>\n    ⟨hf.1 hx.1 hy.1 ha hb hab, (hf.2 hx.1 hy.1 ha hb hab).trans <| max_le hx.2 hy.2⟩⟩\n#align quasiconvex_on_iff_le_max quasiconvex_on_iff_le_max\n\n",
+ "quasiconvex_on":
+ "theorem antitone.quasiconvex_on (hf : antitone f) : quasiconvex_on 𝕜 univ f :=\n  (hf.antitone_on _).quasiconvex_on convex_univ\n#align antitone.quasiconvex_on antitone.quasiconvex_on\n\n",
+ "quasiconcave_on_of_convex_ge":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵈ» -/\ntheorem convex.quasiconcave_on_of_convex_ge (hs : convex 𝕜 s) (h : ∀ r, convex 𝕜 { x | r ≤ f x }) :\n    quasiconcave_on 𝕜 s f :=\n  @convex.quasiconvex_on_of_convex_le 𝕜 E («expr ᵒᵈ» β) _ _ _ _ _ _ hs h\n#align convex.quasiconcave_on_of_convex_ge convex.quasiconcave_on_of_convex_ge\n\n",
+ "quasiconcave_on_iff_min_le":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵈ» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\ntheorem quasiconcave_on_iff_min_le :\n    quasiconcave_on 𝕜 s f ↔\n      convex 𝕜 s ∧\n        ∀ ⦃x⦄,\n          x ∈ s →\n            ∀ ⦃y⦄,\n              y ∈ s → ∀ ⦃a b : 𝕜⦄, 0 ≤ a → 0 ≤ b → a + b = 1 → min (f x) (f y) ≤ f («expr • » a x + «expr • » b y) :=\n  @quasiconvex_on_iff_le_max 𝕜 E («expr ᵒᵈ» β) _ _ _ _ _ _\n#align quasiconcave_on_iff_min_le quasiconcave_on_iff_min_le\n\n",
+ "quasiconcave_on":
+ "theorem antitone.quasiconcave_on (hf : antitone f) : quasiconcave_on 𝕜 univ f :=\n  (hf.antitone_on _).quasiconcave_on convex_univ\n#align antitone.quasiconcave_on antitone.quasiconcave_on\n\n",
+ "monotone_on_or_antitone_on":
+ "theorem quasilinear_on.monotone_on_or_antitone_on (hf : quasilinear_on 𝕜 s f) : monotone_on f s ∨ antitone_on f s :=\n  by\n  simp_rw [monotone_on_or_antitone_on_iff_uIcc, ← segment_eq_uIcc]\n  rintro a ha b hb c hc h\n  refine' ⟨((hf.2 _).segment_subset _ _ h).2, ((hf.1 _).segment_subset _ _ h).2⟩ <;> simp [*]\n#align quasilinear_on.monotone_on_or_antitone_on quasilinear_on.monotone_on_or_antitone_on\n\n",
+ "inf":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊓ » -/\ntheorem quasiconcave_on.inf (hf : quasiconcave_on 𝕜 s f) (hg : quasiconcave_on 𝕜 s g) :\n    quasiconcave_on 𝕜 s («expr ⊓ » f g) :=\n  hf.dual.sup hg\n#align quasiconcave_on.inf quasiconcave_on.inf\n\n",
+ "dual":
+ "theorem quasilinear_on.dual : quasilinear_on 𝕜 s f → quasilinear_on 𝕜 s (to_dual ∘ f) :=\n  And.symm\n#align quasilinear_on.dual quasilinear_on.dual\n\n",
+ "convex_lt":
+ "theorem quasiconvex_on.convex_lt (hf : quasiconvex_on 𝕜 s f) (r : β) : convex 𝕜 ({ x ∈ s | f x < r }) :=\n  by\n  refine' fun x hx y hy a b ha hb hab => _\n  have h := hf _ ⟨hx.1, le_max_left _ _⟩ ⟨hy.1, le_max_right _ _⟩ ha hb hab\n  exact ⟨h.1, h.2.trans_lt <| max_lt hx.2 hy.2⟩\n#align quasiconvex_on.convex_lt quasiconvex_on.convex_lt\n\n",
+ "convex_gt":
+ "theorem quasiconcave_on.convex_gt (hf : quasiconcave_on 𝕜 s f) (r : β) : convex 𝕜 ({ x ∈ s | r < f x }) :=\n  hf.dual.convex_lt r\n#align quasiconcave_on.convex_gt quasiconcave_on.convex_gt\n\n",
+ "convex":
+ "theorem quasiconcave_on.convex [IsDirected β (· ≥ ·)] (hf : quasiconcave_on 𝕜 s f) : convex 𝕜 s :=\n  hf.dual.convex\n#align quasiconcave_on.convex quasiconcave_on.convex\n\n"}

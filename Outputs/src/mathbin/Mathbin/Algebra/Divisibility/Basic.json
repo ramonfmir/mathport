@@ -1,0 +1,44 @@
+{"pow_dvd_pow_of_dvd":
+ "#print pow_dvd_pow_of_dvd /-\ntheorem pow_dvd_pow_of_dvd {a b : α} (h : a ∣ b) : ∀ n : ℕ, a ^ n ∣ b ^ n\n  | 0 => by rw [pow_zero, pow_zero]\n  | n + 1 => by\n    rw [pow_succ, pow_succ]\n    exact mul_dvd_mul h (pow_dvd_pow_of_dvd n)\n#align pow_dvd_pow_of_dvd pow_dvd_pow_of_dvd\n-/\n\n",
+ "one_dvd":
+ "#print one_dvd /-\ntheorem one_dvd (a : α) : 1 ∣ a :=\n  Dvd.intro a (one_mul a)\n#align one_dvd one_dvd\n-/\n\n",
+ "mul_dvd_mul_right":
+ "#print mul_dvd_mul_right /-\ntheorem mul_dvd_mul_right (h : a ∣ b) (c : α) : a * c ∣ b * c :=\n  mul_dvd_mul h (dvd_refl c)\n#align mul_dvd_mul_right mul_dvd_mul_right\n-/\n\n",
+ "mul_dvd_mul_left":
+ "#print mul_dvd_mul_left /-\ntheorem mul_dvd_mul_left (a : α) {b c : α} (h : b ∣ c) : a * b ∣ a * c :=\n  mul_dvd_mul (dvd_refl a) h\n#align mul_dvd_mul_left mul_dvd_mul_left\n-/\n\n",
+ "mul_dvd_mul":
+ "#print mul_dvd_mul /-\ntheorem mul_dvd_mul : ∀ {a b c d : α}, a ∣ b → c ∣ d → a * c ∣ b * d\n  | a, _, c, _, ⟨e, rfl⟩, ⟨f, rfl⟩ => ⟨e * f, by simp⟩\n#align mul_dvd_mul mul_dvd_mul\n-/\n\n",
+ "map_dvd":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →* » -/\n#print MonoidHom.map_dvd /-\ntheorem MonoidHom.map_dvd (f : «expr →* » M N) {a b} : a ∣ b → f a ∣ f b :=\n  map_dvd f\n#align monoid_hom.map_dvd MonoidHom.map_dvd\n-/\n\n",
+ "intro_left":
+ "#print Dvd.intro_left /-\ntheorem Dvd.intro_left (c : α) (h : c * a = b) : a ∣ b :=\n  Dvd.intro _ (by rw [mul_comm] at h; apply h)\n#align dvd.intro_left Dvd.intro_left\n-/\n\n",
+ "intro":
+ "#print Dvd.intro /-\n/-\nCopyright (c) 2014 Jeremy Avigad. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Jeremy Avigad, Leonardo de Moura, Floris van Doorn, Amelia Livingston, Yury Kudryashov,\nNeil Strickland, Aaron Anderson\n-/\n-- TODO: this used to not have `c` explicit, but that seems to be important\n--       for use with tactics, similar to `exists.intro`\ntheorem Dvd.intro (c : α) (h : a * c = b) : a ∣ b :=\n  exists.intro c h\n#align dvd.intro Dvd.intro\n-/\n\n",
+ "exists_eq_mul_right_of_dvd":
+ "#print exists_eq_mul_right_of_dvd /-\ntheorem exists_eq_mul_right_of_dvd (h : a ∣ b) : ∃ c, b = a * c :=\n  h\n#align exists_eq_mul_right_of_dvd exists_eq_mul_right_of_dvd\n-/\n\n",
+ "exists_eq_mul_left_of_dvd":
+ "#print exists_eq_mul_left_of_dvd /-\ntheorem exists_eq_mul_left_of_dvd (h : a ∣ b) : ∃ c, b = c * a :=\n  Dvd.elim h fun c => fun H1 : b = a * c => exists.intro c (eq.trans H1 (mul_comm a c))\n#align exists_eq_mul_left_of_dvd exists_eq_mul_left_of_dvd\n-/\n\n",
+ "elim_left":
+ "#print Dvd.elim_left /-\ntheorem Dvd.elim_left {P : Prop} (h₁ : a ∣ b) (h₂ : ∀ c, b = c * a → P) : P :=\n  exists.elim (exists_eq_mul_left_of_dvd h₁) fun c => fun h₃ : b = c * a => h₂ c h₃\n#align dvd.elim_left Dvd.elim_left\n-/\n\n",
+ "elim":
+ "#print Dvd.elim /-\ntheorem Dvd.elim {P : Prop} {a b : α} (H₁ : a ∣ b) (H₂ : ∀ c, b = a * c → P) : P :=\n  exists.elim H₁ H₂\n#align dvd.elim Dvd.elim\n-/\n\n",
+ "dvd_trans":
+ "#print dvd_trans /-\n@[trans]\ntheorem dvd_trans : a ∣ b → b ∣ c → a ∣ c\n  | ⟨d, h₁⟩, ⟨e, h₂⟩ => ⟨d * e, h₁ ▸ h₂.trans <| mul_assoc a d e⟩\n#align dvd_trans dvd_trans\n-/\n\n",
+ "dvd_rfl":
+ "#print dvd_rfl /-\ntheorem dvd_rfl : ∀ {a : α}, a ∣ a :=\n  dvd_refl\n#align dvd_rfl dvd_rfl\n-/\n\n",
+ "dvd_refl":
+ "#print dvd_refl /-\n@[refl, simp]\ntheorem dvd_refl (a : α) : a ∣ a :=\n  Dvd.intro 1 (mul_one a)\n#align dvd_refl dvd_refl\n-/\n\n",
+ "dvd_of_mul_right_dvd":
+ "#print dvd_of_mul_right_dvd /-\ntheorem dvd_of_mul_right_dvd (h : a * b ∣ c) : a ∣ c :=\n  (dvd_mul_right a b).trans h\n#align dvd_of_mul_right_dvd dvd_of_mul_right_dvd\n-/\n\n",
+ "dvd_of_mul_left_dvd":
+ "#print dvd_of_mul_left_dvd /-\ntheorem dvd_of_mul_left_dvd (h : a * b ∣ c) : b ∣ c :=\n  Dvd.elim h fun d ceq => Dvd.intro (a * d) (by simp [ceq])\n#align dvd_of_mul_left_dvd dvd_of_mul_left_dvd\n-/\n\n",
+ "dvd_mul_right":
+ "#print dvd_mul_right /-\n@[simp]\ntheorem dvd_mul_right (a b : α) : a ∣ a * b :=\n  Dvd.intro b rfl\n#align dvd_mul_right dvd_mul_right\n-/\n\n",
+ "dvd_mul_of_dvd_right":
+ "#print dvd_mul_of_dvd_right /-\ntheorem dvd_mul_of_dvd_right (h : a ∣ b) (c : α) : a ∣ c * b := by rw [mul_comm]; exact h.mul_right _\n#align dvd_mul_of_dvd_right dvd_mul_of_dvd_right\n-/\n\n",
+ "dvd_mul_of_dvd_left":
+ "#print dvd_mul_of_dvd_left /-\ntheorem dvd_mul_of_dvd_left (h : a ∣ b) (c : α) : a ∣ b * c :=\n  h.trans (dvd_mul_right b c)\n#align dvd_mul_of_dvd_left dvd_mul_of_dvd_left\n-/\n\n",
+ "dvd_mul_left":
+ "#print dvd_mul_left /-\n@[simp]\ntheorem dvd_mul_left (a b : α) : a ∣ b * a :=\n  Dvd.intro b (mul_comm a b)\n#align dvd_mul_left dvd_mul_left\n-/\n\n",
+ "dvd_iff_exists_eq_mul_left":
+ "#print dvd_iff_exists_eq_mul_left /-\ntheorem dvd_iff_exists_eq_mul_left : a ∣ b ↔ ∃ c, b = c * a :=\n  ⟨exists_eq_mul_left_of_dvd, by\n    rintro ⟨c, rfl⟩\n    exact ⟨c, mul_comm _ _⟩⟩\n#align dvd_iff_exists_eq_mul_left dvd_iff_exists_eq_mul_left\n-/\n\n"}

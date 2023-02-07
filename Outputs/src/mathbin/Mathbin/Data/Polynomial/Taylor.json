@@ -1,0 +1,36 @@
+{"taylor_zero'":
+ "@[simp]\ntheorem taylor_zero' : taylor (0 : R) = linear_map.id := by\n  ext\n  simp only [taylor_apply, add_zero, comp_X, _root_.map_zero, linear_map.id_comp, Function.comp_apply,\n    linear_map.coe_comp]\n#align taylor_zero' taylor_zero'\n\n",
+ "taylor_zero":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `polynomial -/\ntheorem taylor_zero (f : polynomial R) : taylor 0 f = f := by rw [taylor_zero', linear_map.id_apply]\n#align taylor_zero taylor_zero\n\n",
+ "taylor_taylor":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `polynomial -/\ntheorem taylor_taylor {R} [CommSemiring R] (f : polynomial R) (r s : R) : taylor r (taylor s f) = taylor (r + s) f := by\n  simp only [taylor_apply, comp_assoc, map_add, add_comp, X_comp, C_comp, C_add, add_assoc]\n#align taylor_taylor taylor_taylor\n\n",
+ "taylor_one":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `polynomial -/\n@[simp]\ntheorem taylor_one : taylor r (1 : polynomial R) = C 1 := by rw [← C_1, taylor_C]\n#align taylor_one taylor_one\n\n",
+ "taylor_mul":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `polynomial -/\n@[simp]\ntheorem taylor_mul {R} [CommSemiring R] (r : R) (p q : polynomial R) : taylor r (p * q) = taylor r p * taylor r q := by\n  simp only [taylor_apply, mul_comp]\n#align taylor_mul taylor_mul\n\n",
+ "taylor_monomial":
+ "@[simp]\ntheorem taylor_monomial (i : ℕ) (k : R) : taylor r (monomial i k) = C k * (X + C r) ^ i := by simp [taylor_apply]\n#align taylor_monomial taylor_monomial\n\n",
+ "taylor_injective":
+ "theorem taylor_injective {R} [CommRing R] (r : R) : function.injective (taylor r) :=\n  by\n  intro f g h\n  apply_fun taylor (-r)  at h\n  simpa only [taylor_apply, comp_assoc, add_comp, X_comp, C_comp, C_neg, neg_add_cancel_right, comp_X] using h\n#align taylor_injective taylor_injective\n\n",
+ "taylor_eval_sub":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `polynomial -/\ntheorem taylor_eval_sub {R} [CommRing R] (r : R) (f : polynomial R) (s : R) : (taylor r f).eval (s - r) = f.eval s := by\n  rw [taylor_eval, sub_add_cancel]\n#align taylor_eval_sub taylor_eval_sub\n\n",
+ "taylor_eval":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `polynomial -/\ntheorem taylor_eval {R} [CommSemiring R] (r : R) (f : polynomial R) (s : R) : (taylor r f).eval s = f.eval (s + r) := by\n  simp only [taylor_apply, eval_comp, eval_C, eval_X, eval_add]\n#align taylor_eval taylor_eval\n\n",
+ "taylor_coeff_zero":
+ "@[simp]\ntheorem taylor_coeff_zero : (taylor r f).coeff 0 = f.eval r := by\n  rw [taylor_coeff, hasse_deriv_zero, linear_map.id_apply]\n#align taylor_coeff_zero taylor_coeff_zero\n\n",
+ "taylor_coeff_one":
+ "@[simp]\ntheorem taylor_coeff_one : (taylor r f).coeff 1 = f.derivative.eval r := by rw [taylor_coeff, hasse_deriv_one]\n#align taylor_coeff_one taylor_coeff_one\n\n",
+ "taylor_coeff":
+ "/-- The `k`th coefficient of `polynomial.taylor r f` is `(polynomial.hasse_deriv k f).eval r`. -/\ntheorem taylor_coeff (n : ℕ) : (taylor r f).coeff n = (hasse_deriv n f).eval r :=\n  show (lcoeff R n).comp (taylor r) f = (leval r).comp (hasse_deriv n) f\n    by\n    congr 1; clear f; ext i\n    simp only [leval_apply, mul_one, one_mul, eval_monomial, linear_map.comp_apply, coeff_C_mul, hasse_deriv_monomial,\n      taylor_apply, monomial_comp, C_1, (commute_X (C r)).add_pow i, linear_map.map_sum]\n    simp only [lcoeff_apply, ← C_eq_nat_cast, mul_assoc, ← C_pow, ← C_mul, coeff_mul_C, (nat.cast_commute _ _).eq,\n      coeff_X_pow, boole_mul, finset.sum_ite_eq, Finset.mem_range]\n    split_ifs with h; · rfl\n    push_neg  at h; rw [Nat.choose_eq_zero_of_lt h, Nat.cast_zero, mul_zero]\n#align taylor_coeff taylor_coeff\n\n",
+ "taylor_apply":
+ "/-\nCopyright (c) 2021 Johan Commelin. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Johan Commelin\n-/\ntheorem taylor_apply : taylor r f = f.comp (X + C r) :=\n  rfl\n#align taylor_apply taylor_apply\n\n",
+ "taylor_X":
+ "@[simp]\ntheorem taylor_X : taylor r X = X + C r := by simp only [taylor_apply, X_comp]\n#align taylor_X taylor_X\n\n",
+ "taylor_C":
+ "@[simp]\ntheorem taylor_C (x : R) : taylor r (C x) = C x := by simp only [taylor_apply, C_comp]\n#align taylor_C taylor_C\n\n",
+ "sum_taylor_eq":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `polynomial -/\n/-- Taylor's formula. -/\ntheorem sum_taylor_eq {R} [CommRing R] (f : polynomial R) (r : R) :\n    ((taylor r f).sum fun i a => C a * (X - C r) ^ i) = f := by\n  rw [← comp_eq_sum_left, sub_eq_add_neg, ← C_neg, ← taylor_apply, taylor_taylor, neg_add_self, taylor_zero]\n#align sum_taylor_eq sum_taylor_eq\n\n",
+ "nat_degree_taylor":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `polynomial -/\n@[simp]\ntheorem nat_degree_taylor (p : polynomial R) (r : R) : nat_degree (taylor r p) = nat_degree p :=\n  by\n  refine' map_nat_degree_eq_nat_degree _ _\n  nontriviality R\n  intro n c c0\n  simp [taylor_monomial, nat_degree_C_mul_eq_of_mul_ne_zero, nat_degree_pow_X_add_C, c0]\n#align nat_degree_taylor nat_degree_taylor\n\n",
+ "eq_zero_of_hasse_deriv_eq_zero":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `polynomial -/\ntheorem eq_zero_of_hasse_deriv_eq_zero {R} [CommRing R] (f : polynomial R) (r : R)\n    (h : ∀ k, (hasse_deriv k f).eval r = 0) : f = 0 :=\n  by\n  apply taylor_injective r\n  rw [linear_map.map_zero]\n  ext k\n  simp only [taylor_coeff, h, coeff_zero]\n#align eq_zero_of_hasse_deriv_eq_zero eq_zero_of_hasse_deriv_eq_zero\n\n"}

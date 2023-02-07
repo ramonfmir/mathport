@@ -1,0 +1,30 @@
+{"smul_apply":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\ntheorem smul_apply [SMul R Y] (r : R) (f : locally_constant X Y) (x : X) : («expr • » r f) x = «expr • » r (f x) :=\n  rfl\n#align smul_apply smul_apply\n\n",
+ "one_apply":
+ "@[to_additive]\ntheorem one_apply [One Y] (x : X) : (1 : locally_constant X Y) x = 1 :=\n  rfl\n#align one_apply one_apply\n\n",
+ "mul_apply":
+ "@[to_additive]\ntheorem mul_apply [Mul Y] (f g : locally_constant X Y) (x : X) : (f * g) x = f x * g x :=\n  rfl\n#align mul_apply mul_apply\n\n",
+ "inv_apply":
+ "@[to_additive]\ntheorem inv_apply [Inv Y] (f : locally_constant X Y) (x : X) : f⁻¹ x = (f x)⁻¹ :=\n  rfl\n#align inv_apply inv_apply\n\n",
+ "div_apply":
+ "@[to_additive]\ntheorem div_apply [Div Y] (f g : locally_constant X Y) (x : X) : (f / g) x = f x / g x :=\n  rfl\n#align div_apply div_apply\n\n",
+ "coe_smul":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n@[simp]\ntheorem coe_smul [SMul R Y] (r : R) (f : locally_constant X Y) : «expr⇑ » («expr • » r f) = «expr • » r f :=\n  rfl\n#align coe_smul coe_smul\n\n",
+ "coe_one":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n/-\nCopyright (c) 2021 Johan Commelin. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Johan Commelin\n-/\n@[simp, to_additive]\ntheorem coe_one [One Y] : «expr⇑ » (1 : locally_constant X Y) = (1 : X → Y) :=\n  rfl\n#align coe_one coe_one\n\n",
+ "coe_mul":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n@[simp, to_additive]\ntheorem coe_mul [Mul Y] (f g : locally_constant X Y) : «expr⇑ » (f * g) = f * g :=\n  rfl\n#align coe_mul coe_mul\n\n",
+ "coe_inv":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n@[simp, to_additive]\ntheorem coe_inv [Inv Y] (f : locally_constant X Y) : «expr⇑ » f⁻¹ = f⁻¹ :=\n  rfl\n#align coe_inv coe_inv\n\n",
+ "coe_div":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n@[to_additive]\ntheorem coe_div [Div Y] (f g : locally_constant X Y) : «expr⇑ » (f / g) = f / g :=\n  rfl\n#align coe_div coe_div\n\n",
+ "coe_char_fn":
+ "theorem coe_char_fn (hU : is_clopen U) : (char_fn Y hU : X → Y) = set.indicator U 1 :=\n  rfl\n#align coe_char_fn coe_char_fn\n\n",
+ "coe_algebra_map":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n@[simp]\ntheorem coe_algebra_map (r : R) : «expr⇑ » (algebra_map R (locally_constant X Y) r) = algebra_map R (X → Y) r :=\n  rfl\n#align coe_algebra_map coe_algebra_map\n\n",
+ "char_fn_inj":
+ "theorem char_fn_inj [nontrivial Y] (hU : is_clopen U) (hV : is_clopen V) (h : char_fn Y hU = char_fn Y hV) : U = V :=\n  set.indicator_one_inj Y <| coe_inj.mpr h\n#align char_fn_inj char_fn_inj\n\n",
+ "char_fn_eq_zero":
+ "theorem char_fn_eq_zero [nontrivial Y] (x : X) (hU : is_clopen U) : char_fn Y hU x = (0 : Y) ↔ x ∉ U :=\n  set.indicator_eq_zero_iff_not_mem _\n#align char_fn_eq_zero char_fn_eq_zero\n\n",
+ "char_fn_eq_one":
+ "theorem char_fn_eq_one [nontrivial Y] (x : X) (hU : is_clopen U) : char_fn Y hU x = (1 : Y) ↔ x ∈ U :=\n  set.indicator_eq_one_iff_mem _\n#align char_fn_eq_one char_fn_eq_one\n\n"}

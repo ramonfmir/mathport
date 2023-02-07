@@ -1,0 +1,44 @@
+{"sum_lift₂_nonempty":
+ "theorem sum_lift₂_nonempty :\n    (sum_lift₂ f g a b).nonempty ↔\n      (∃ a₁ b₁, a = inl a₁ ∧ b = inl b₁ ∧ (f a₁ b₁).nonempty) ∨ ∃ a₂ b₂, a = inr a₂ ∧ b = inr b₂ ∧ (g a₂ b₂).nonempty :=\n  by simp [nonempty_iff_ne_empty, sum_lift₂_eq_empty, not_and_or]\n#align sum_lift₂_nonempty sum_lift₂_nonempty\n\n",
+ "sum_lift₂_mono":
+ "theorem sum_lift₂_mono (h₁ : ∀ a b, f₁ a b ⊆ g₁ a b) (h₂ : ∀ a b, f₂ a b ⊆ g₂ a b) :\n    ∀ a b, sum_lift₂ f₁ f₂ a b ⊆ sum_lift₂ g₁ g₂ a b\n  | inl a, inl b => map_subset_map.2 (h₁ _ _)\n  | inl a, inr b => Subset.rfl\n  | inr a, inl b => Subset.rfl\n  | inr a, inr b => map_subset_map.2 (h₂ _ _)\n#align sum_lift₂_mono sum_lift₂_mono\n\n",
+ "sum_lift₂_eq_empty":
+ "theorem sum_lift₂_eq_empty :\n    sum_lift₂ f g a b = ∅ ↔\n      (∀ a₁ b₁, a = inl a₁ → b = inl b₁ → f a₁ b₁ = ∅) ∧ ∀ a₂ b₂, a = inr a₂ → b = inr b₂ → g a₂ b₂ = ∅ :=\n  by\n  refine' ⟨fun h => _, fun h => _⟩\n  ·\n    constructor <;>\n      · rintro a b rfl rfl\n        exact map_eq_empty.1 h\n  cases a <;> cases b\n  · exact map_eq_empty.2 (h.1 _ _ rfl rfl)\n  · rfl\n  · rfl\n  · exact map_eq_empty.2 (h.2 _ _ rfl rfl)\n#align sum_lift₂_eq_empty sum_lift₂_eq_empty\n\n",
+ "mem_sum_lift₂":
+ "/-\nCopyright (c) 2022 Yaël Dillies. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Yaël Dillies\n-/\ntheorem mem_sum_lift₂ :\n    c ∈ sum_lift₂ f g a b ↔\n      (∃ a₁ b₁ c₁, a = inl a₁ ∧ b = inl b₁ ∧ c = inl c₁ ∧ c₁ ∈ f a₁ b₁) ∨\n        ∃ a₂ b₂ c₂, a = inr a₂ ∧ b = inr b₂ ∧ c = inr c₂ ∧ c₂ ∈ g a₂ b₂ :=\n  by\n  constructor\n  · cases a <;> cases b\n    · rw [sum_lift₂, mem_map]\n      rintro ⟨c, hc, rfl⟩\n      exact or.inl ⟨a, b, c, rfl, rfl, rfl, hc⟩\n    · refine' fun h => (not_mem_empty _ h).elim\n    · refine' fun h => (not_mem_empty _ h).elim\n    · rw [sum_lift₂, mem_map]\n      rintro ⟨c, hc, rfl⟩\n      exact or.inr ⟨a, b, c, rfl, rfl, rfl, hc⟩\n  · rintro (⟨a, b, c, rfl, rfl, rfl, h⟩ | ⟨a, b, c, rfl, rfl, rfl, h⟩) <;> exact mem_map_of_mem _ h\n#align mem_sum_lift₂ mem_sum_lift₂\n\n",
+ "inr_mem_sum_lift₂":
+ "theorem inr_mem_sum_lift₂ {c₂ : γ₂} : inr c₂ ∈ sum_lift₂ f g a b ↔ ∃ a₂ b₂, a = inr a₂ ∧ b = inr b₂ ∧ c₂ ∈ g a₂ b₂ :=\n  by\n  rw [mem_sum_lift₂, or_iff_right]\n  simp only [exists_and_left, exists_eq_left']\n  rintro ⟨_, _, c₂, _, _, h, _⟩\n  exact inr_ne_inl h\n#align inr_mem_sum_lift₂ inr_mem_sum_lift₂\n\n",
+ "inl_mem_sum_lift₂":
+ "theorem inl_mem_sum_lift₂ {c₁ : γ₁} : inl c₁ ∈ sum_lift₂ f g a b ↔ ∃ a₁ b₁, a = inl a₁ ∧ b = inl b₁ ∧ c₁ ∈ f a₁ b₁ :=\n  by\n  rw [mem_sum_lift₂, or_iff_left]\n  simp only [exists_and_left, exists_eq_left']\n  rintro ⟨_, _, c₂, _, _, h, _⟩\n  exact inl_ne_inr h\n#align inl_mem_sum_lift₂ inl_mem_sum_lift₂\n\n",
+ "Ioo_inr_inr":
+ "theorem Ioo_inr_inr : Ioo (inr b₁ : Sum α β) (inr b₂) = (Ioo b₁ b₂).map Embedding.inr :=\n  rfl\n#align Ioo_inr_inr Ioo_inr_inr\n\n",
+ "Ioo_inr_inl":
+ "@[simp]\ntheorem Ioo_inr_inl : Ioo (inr b₁) (inl a₂) = ∅ :=\n  rfl\n#align Ioo_inr_inl Ioo_inr_inl\n\n",
+ "Ioo_inl_inr":
+ "@[simp]\ntheorem Ioo_inl_inr : Ioo (inl a₁) (inr b₂) = ∅ :=\n  rfl\n#align Ioo_inl_inr Ioo_inl_inr\n\n",
+ "Ioo_inl_inl":
+ "theorem Ioo_inl_inl : Ioo (inl a₁ : Sum α β) (inl a₂) = (Ioo a₁ a₂).map Embedding.inl :=\n  rfl\n#align Ioo_inl_inl Ioo_inl_inl\n\n",
+ "Ioc_inr_inr":
+ "theorem Ioc_inr_inr : Ioc (inr b₁ : Sum α β) (inr b₂) = (Ioc b₁ b₂).map Embedding.inr :=\n  rfl\n#align Ioc_inr_inr Ioc_inr_inr\n\n",
+ "Ioc_inr_inl":
+ "@[simp]\ntheorem Ioc_inr_inl : Ioc (inr b₁) (inl a₂) = ∅ :=\n  rfl\n#align Ioc_inr_inl Ioc_inr_inl\n\n",
+ "Ioc_inl_inr":
+ "@[simp]\ntheorem Ioc_inl_inr : Ioc (inl a₁) (inr b₂) = ∅ :=\n  rfl\n#align Ioc_inl_inr Ioc_inl_inr\n\n",
+ "Ioc_inl_inl":
+ "theorem Ioc_inl_inl : Ioc (inl a₁ : Sum α β) (inl a₂) = (Ioc a₁ a₂).map Embedding.inl :=\n  rfl\n#align Ioc_inl_inl Ioc_inl_inl\n\n",
+ "Ico_inr_inr":
+ "theorem Ico_inr_inr : Ico (inr b₁ : Sum α β) (inr b₂) = (Ico b₁ b₂).map Embedding.inr :=\n  rfl\n#align Ico_inr_inr Ico_inr_inr\n\n",
+ "Ico_inr_inl":
+ "@[simp]\ntheorem Ico_inr_inl : Ico (inr b₁) (inl a₂) = ∅ :=\n  rfl\n#align Ico_inr_inl Ico_inr_inl\n\n",
+ "Ico_inl_inr":
+ "@[simp]\ntheorem Ico_inl_inr : Ico (inl a₁) (inr b₂) = ∅ :=\n  rfl\n#align Ico_inl_inr Ico_inl_inr\n\n",
+ "Ico_inl_inl":
+ "theorem Ico_inl_inl : Ico (inl a₁ : Sum α β) (inl a₂) = (Ico a₁ a₂).map Embedding.inl :=\n  rfl\n#align Ico_inl_inl Ico_inl_inl\n\n",
+ "Icc_inr_inr":
+ "theorem Icc_inr_inr : Icc (inr b₁ : Sum α β) (inr b₂) = (Icc b₁ b₂).map Embedding.inr :=\n  rfl\n#align Icc_inr_inr Icc_inr_inr\n\n",
+ "Icc_inr_inl":
+ "@[simp]\ntheorem Icc_inr_inl : Icc (inr b₁) (inl a₂) = ∅ :=\n  rfl\n#align Icc_inr_inl Icc_inr_inl\n\n",
+ "Icc_inl_inr":
+ "@[simp]\ntheorem Icc_inl_inr : Icc (inl a₁) (inr b₂) = ∅ :=\n  rfl\n#align Icc_inl_inr Icc_inl_inr\n\n",
+ "Icc_inl_inl":
+ "theorem Icc_inl_inl : Icc (inl a₁ : Sum α β) (inl a₂) = (Icc a₁ a₂).map Embedding.inl :=\n  rfl\n#align Icc_inl_inl Icc_inl_inl\n\n"}

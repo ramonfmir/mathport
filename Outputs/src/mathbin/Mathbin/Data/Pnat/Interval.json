@@ -1,0 +1,32 @@
+{"map_subtype_embedding_Ioo":
+ "theorem map_subtype_embedding_Ioo : (Ioo a b).map (Function.Embedding.subtype _) = Ioo (a : ℕ) b :=\n  map_subtype_embedding_Ioo _ _ _ fun c _ x hx _ hc _ => hc.trans_le hx\n#align map_subtype_embedding_Ioo map_subtype_embedding_Ioo\n\n",
+ "map_subtype_embedding_Ioc":
+ "theorem map_subtype_embedding_Ioc : (Ioc a b).map (Function.Embedding.subtype _) = Ioc (a : ℕ) b :=\n  map_subtype_embedding_Ioc _ _ _ fun c _ x hx _ hc _ => hc.trans_le hx\n#align map_subtype_embedding_Ioc map_subtype_embedding_Ioc\n\n",
+ "map_subtype_embedding_Ico":
+ "theorem map_subtype_embedding_Ico : (Ico a b).map (Function.Embedding.subtype _) = Ico (a : ℕ) b :=\n  map_subtype_embedding_Ico _ _ _ fun c _ x hx _ hc _ => hc.trans_le hx\n#align map_subtype_embedding_Ico map_subtype_embedding_Ico\n\n",
+ "map_subtype_embedding_Icc":
+ "theorem map_subtype_embedding_Icc : (Icc a b).map (Function.Embedding.subtype _) = Icc (a : ℕ) b :=\n  map_subtype_embedding_Icc _ _ _ fun c _ x hx _ hc _ => hc.trans_le hx\n#align map_subtype_embedding_Icc map_subtype_embedding_Icc\n\n",
+ "card_fintype_Ioo":
+ "@[simp]\ntheorem card_fintype_Ioo : fintype.card (Set.Ioo a b) = b - a - 1 := by rw [← card_Ioo, fintype.card_of_finset]\n#align card_fintype_Ioo card_fintype_Ioo\n\n",
+ "card_fintype_Ioc":
+ "@[simp]\ntheorem card_fintype_Ioc : fintype.card (Set.Ioc a b) = b - a := by rw [← card_Ioc, fintype.card_of_finset]\n#align card_fintype_Ioc card_fintype_Ioc\n\n",
+ "card_fintype_Ico":
+ "@[simp]\ntheorem card_fintype_Ico : fintype.card (Set.Ico a b) = b - a := by rw [← card_Ico, fintype.card_of_finset]\n#align card_fintype_Ico card_fintype_Ico\n\n",
+ "card_fintype_Icc":
+ "@[simp]\ntheorem card_fintype_Icc : fintype.card (Set.Icc a b) = b + 1 - a := by rw [← card_Icc, fintype.card_of_finset]\n#align card_fintype_Icc card_fintype_Icc\n\n",
+ "card_Ioo":
+ "@[simp]\ntheorem card_Ioo : (Ioo a b).card = b - a - 1 := by rw [← nat.card_Ioo, ← map_subtype_embedding_Ioo, card_map]\n#align card_Ioo card_Ioo\n\n",
+ "card_Ioc":
+ "@[simp]\ntheorem card_Ioc : (Ioc a b).card = b - a := by rw [← nat.card_Ioc, ← map_subtype_embedding_Ioc, card_map]\n#align card_Ioc card_Ioc\n\n",
+ "card_Ico":
+ "@[simp]\ntheorem card_Ico : (Ico a b).card = b - a := by rw [← nat.card_Ico, ← map_subtype_embedding_Ico, card_map]\n#align card_Ico card_Ico\n\n",
+ "card_Icc":
+ "@[simp]\ntheorem card_Icc : (Icc a b).card = b + 1 - a := by rw [← nat.card_Icc, ← map_subtype_embedding_Icc, card_map]\n#align card_Icc card_Icc\n\n",
+ "Ioo_eq_finset_subtype":
+ "theorem Ioo_eq_finset_subtype : Ioo a b = (Ioo (a : ℕ) b).subtype fun n : ℕ => 0 < n :=\n  rfl\n#align Ioo_eq_finset_subtype Ioo_eq_finset_subtype\n\n",
+ "Ioc_eq_finset_subtype":
+ "theorem Ioc_eq_finset_subtype : Ioc a b = (Ioc (a : ℕ) b).subtype fun n : ℕ => 0 < n :=\n  rfl\n#align Ioc_eq_finset_subtype Ioc_eq_finset_subtype\n\n",
+ "Ico_eq_finset_subtype":
+ "theorem Ico_eq_finset_subtype : Ico a b = (Ico (a : ℕ) b).subtype fun n : ℕ => 0 < n :=\n  rfl\n#align Ico_eq_finset_subtype Ico_eq_finset_subtype\n\n",
+ "Icc_eq_finset_subtype":
+ "/-\nCopyright (c) 2021 Yaël Dillies. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Yaël Dillies\n-/\ntheorem Icc_eq_finset_subtype : Icc a b = (Icc (a : ℕ) b).subtype fun n : ℕ => 0 < n :=\n  rfl\n#align Icc_eq_finset_subtype Icc_eq_finset_subtype\n\n"}

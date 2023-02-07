@@ -1,0 +1,34 @@
+{"subsingleton_or_nontrivial":
+ "#print subsingleton_or_nontrivial /-\n/-- A type is either a subsingleton or nontrivial. -/\ntheorem subsingleton_or_nontrivial (α : Type _) : subsingleton α ∨ nontrivial α :=\n  by\n  rw [← not_nontrivial_iff_subsingleton, or_comm']\n  exact classical.em _\n#align subsingleton_or_nontrivial subsingleton_or_nontrivial\n-/\n\n",
+ "subsingleton_iff":
+ "#print subsingleton_iff /-\ntheorem subsingleton_iff : subsingleton α ↔ ∀ x y : α, x = y :=\n  ⟨by\n    intro h\n    exact subsingleton.elim, fun h => ⟨h⟩⟩\n#align subsingleton_iff subsingleton_iff\n-/\n\n",
+ "not_subsingleton":
+ "#print not_subsingleton /-\ntheorem not_subsingleton (α) [h : nontrivial α] : ¬subsingleton α :=\n  let ⟨⟨x, y, hxy⟩⟩ := h\n  fun ⟨h'⟩ => hxy <| h' x y\n#align not_subsingleton not_subsingleton\n-/\n\n",
+ "not_nontrivial_iff_subsingleton":
+ "#print not_nontrivial_iff_subsingleton /-\ntheorem not_nontrivial_iff_subsingleton : ¬nontrivial α ↔ subsingleton α :=\n  by\n  rw [nontrivial_iff, subsingleton_iff]\n  push_neg\n  rfl\n#align not_nontrivial_iff_subsingleton not_nontrivial_iff_subsingleton\n-/\n\n",
+ "not_nontrivial":
+ "#print not_nontrivial /-\ntheorem not_nontrivial (α) [subsingleton α] : ¬nontrivial α := fun ⟨⟨x, y, h⟩⟩ => h <| subsingleton.elim x y\n#align not_nontrivial not_nontrivial\n-/\n\n",
+ "nontrivial_of_ne":
+ "#print nontrivial_of_ne /-\n-- `x` and `y` are explicit here, as they are often needed to guide typechecking of `h`.\ntheorem nontrivial_of_ne (x y : α) (h : x ≠ y) : nontrivial α :=\n  ⟨⟨x, y, h⟩⟩\n#align nontrivial_of_ne nontrivial_of_ne\n-/\n\n",
+ "nontrivial_of_lt":
+ "#print nontrivial_of_lt /-\n-- `x` and `y` are explicit here, as they are often needed to guide typechecking of `h`.\ntheorem nontrivial_of_lt [preorder α] (x y : α) (h : x < y) : nontrivial α :=\n  ⟨⟨x, y, ne_of_lt h⟩⟩\n#align nontrivial_of_lt nontrivial_of_lt\n-/\n\n",
+ "nontrivial_iff_lt":
+ "#print nontrivial_iff_lt /-\ntheorem nontrivial_iff_lt [linear_order α] : nontrivial α ↔ ∃ x y : α, x < y :=\n  ⟨fun h => @exists_pair_lt α h _, fun ⟨x, y, h⟩ => nontrivial_of_lt x y h⟩\n#align nontrivial_iff_lt nontrivial_iff_lt\n-/\n\n",
+ "nontrivial_iff_exists_ne":
+ "theorem subtype.nontrivial_iff_exists_ne (p : α → Prop) (x : subtype p) :\n    nontrivial (subtype p) ↔ ∃ (y : α)(hy : p y), y ≠ x := by\n  simp only [nontrivial_iff_exists_ne x, subtype.exists, ne.def, subtype.ext_iff, subtype.coe_mk]\n#align subtype.nontrivial_iff_exists_ne subtype.nontrivial_iff_exists_ne\n\n",
+ "nontrivial_iff":
+ "#print nontrivial_iff /-\n/-\nCopyright (c) 2020 Sébastien Gouëzel. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Sébastien Gouëzel\n-/\ntheorem nontrivial_iff : nontrivial α ↔ ∃ x y : α, x ≠ y :=\n  ⟨fun h => h.exists_pair_ne, fun h => ⟨h⟩⟩\n#align nontrivial_iff nontrivial_iff\n-/\n\n",
+ "nontrivial_at":
+ "/-- A pi type is nontrivial if it's nonempty everywhere and nontrivial somewhere. -/\ntheorem nontrivial_at (i' : I) [inst : ∀ i, nonempty (f i)] [nontrivial (f i')] : nontrivial (∀ i : I, f i) := by\n  classical exact (function.update_injective (fun i => classical.choice (inst i)) i').nontrivial\n#align nontrivial_at nontrivial_at\n\n",
+ "nontrivial":
+ "/-- Pullback a `nontrivial` instance along a surjective function. -/\nprotected theorem function.surjective.nontrivial [nontrivial β] {f : α → β} (hf : function.surjective f) :\n    nontrivial α := by\n  rcases exists_pair_ne β with ⟨x, y, h⟩\n  rcases hf x with ⟨x', hx'⟩\n  rcases hf y with ⟨y', hy'⟩\n  have : x' ≠ y' := by\n    contrapose! h\n    rw [← hx', ← hy', h]\n  exact ⟨⟨x', y', this⟩⟩\n#align function.surjective.nontrivial function.surjective.nontrivial\n\n",
+ "le":
+ "protected theorem subsingleton.le [preorder α] [subsingleton α] (x y : α) : x ≤ y :=\n  le_of_eq (subsingleton.elim x y)\n#align subsingleton.le subsingleton.le\n\n",
+ "false_of_nontrivial_of_subsingleton":
+ "#print false_of_nontrivial_of_subsingleton /-\ntheorem false_of_nontrivial_of_subsingleton (α : Type _) [nontrivial α] [subsingleton α] : false :=\n  let ⟨x, y, h⟩ := exists_pair_ne α\n  h <| subsingleton.elim x y\n#align false_of_nontrivial_of_subsingleton false_of_nontrivial_of_subsingleton\n-/\n\n",
+ "exists_pair_ne":
+ "#print exists_pair_ne /-\ntheorem exists_pair_ne (α : Type _) [nontrivial α] : ∃ x y : α, x ≠ y :=\n  nontrivial.exists_pair_ne\n#align exists_pair_ne exists_pair_ne\n-/\n\n",
+ "exists_pair_lt":
+ "#print exists_pair_lt /-\ntheorem exists_pair_lt (α : Type _) [nontrivial α] [linear_order α] : ∃ x y : α, x < y :=\n  by\n  rcases exists_pair_ne α with ⟨x, y, hxy⟩\n  cases lt_or_gt_of_ne hxy <;> exact ⟨_, _, h⟩\n#align exists_pair_lt exists_pair_lt\n-/\n\n",
+ "exists_ne":
+ "/-- An injective function from a nontrivial type has an argument at\nwhich it does not take a given value. -/\nprotected theorem function.injective.exists_ne [nontrivial α] {f : α → β} (hf : function.injective f) (y : β) :\n    ∃ x, f x ≠ y := by\n  rcases exists_pair_ne α with ⟨x₁, x₂, hx⟩\n  by_cases h : f x₂ = y\n  · exact ⟨x₁, (hf.ne_iff' h).2 hx⟩\n  · exact ⟨x₂, h⟩\n#align function.injective.exists_ne function.injective.exists_ne\n\n"}

@@ -1,0 +1,154 @@
+{"to_subtype_apply":
+ "@[simp]\ntheorem to_subtype_apply (p : β → Prop) (f : α → β) (a : α) : to_subtype p f a = ⟨p (f a), subtype.mk _⟩ :=\n  rfl\n#align to_subtype_apply to_subtype_apply\n\n",
+ "res_univ":
+ "theorem res_univ (f : α → β) : pfun.res f Set.univ = f :=\n  rfl\n#align res_univ res_univ\n\n",
+ "pure_defined":
+ "theorem pure_defined (p : set α) (x : β) : p ⊆ (@pfun.pure α _ x).dom :=\n  p.subset_univ\n#align pure_defined pure_defined\n\n",
+ "prod_map_id_id":
+ "@[simp]\ntheorem prod_map_id_id : (pfun.id α).prod_map (pfun.id β) = pfun.id _ :=\n  ext fun _ _ => by simp [eq_comm]\n#align prod_map_id_id prod_map_id_id\n\n",
+ "prod_map_comp_comp":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →. » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →. » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →. » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →. » -/\n@[simp]\ntheorem prod_map_comp_comp (f₁ : «expr →. » α β) (f₂ : «expr →. » β γ) (g₁ : «expr →. » δ ε) (g₂ : «expr →. » ε ι) :\n    (f₂.comp f₁).prod_map (g₂.comp g₁) = (f₂.prod_map g₂).comp (f₁.prod_map g₁) :=\n  ext fun _ _ => by tidy\n#align prod_map_comp_comp prod_map_comp_comp\n\n",
+ "prod_map_apply":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →. » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →. » -/\n@[simp]\ntheorem prod_map_apply (f : «expr →. » α γ) (g : «expr →. » β δ) (x : α × β) :\n    f.prod_map g x = ⟨(f x.1).dom ∧ (g x.2).dom, fun h => ((f x.1).get h.1, (g x.2).get h.2)⟩ :=\n  rfl\n#align prod_map_apply prod_map_apply\n\n",
+ "prod_lift_fst_comp_snd_comp":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →. » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →. » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →. » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →. » -/\n@[simp]\ntheorem prod_lift_fst_comp_snd_comp (f : «expr →. » α γ) (g : «expr →. » β δ) :\n    prod_lift (f.comp ((prod.fst : α × β → α) : «expr →. » (α × β) α))\n        (g.comp ((prod.snd : α × β → β) : «expr →. » (α × β) β)) =\n      prod_map f g :=\n  ext fun a => by simp\n#align prod_lift_fst_comp_snd_comp prod_lift_fst_comp_snd_comp\n\n",
+ "prod_lift_apply":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →. » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →. » -/\n@[simp]\ntheorem prod_lift_apply (f : «expr →. » α β) (g : «expr →. » α γ) (x : α) :\n    f.prod_lift g x = ⟨(f x).dom ∧ (g x).dom, fun h => ((f x).get h.1, (g x).get h.2)⟩ :=\n  rfl\n#align prod_lift_apply prod_lift_apply\n\n",
+ "preimage_univ":
+ "theorem preimage_univ : f.preimage Set.univ = f.dom := by ext <;> simp [mem_preimage, mem_dom]\n#align preimage_univ preimage_univ\n\n",
+ "preimage_union":
+ "theorem preimage_union (s t : set β) : f.preimage (s ∪ t) = f.preimage s ∪ f.preimage t :=\n  Rel.preimage_union _ s t\n#align preimage_union preimage_union\n\n",
+ "preimage_subset_dom":
+ "theorem preimage_subset_dom (s : set β) : f.preimage s ⊆ f.dom := fun x ⟨y, ys, fxy⟩ => Part.dom_iff_mem.mpr ⟨y, fxy⟩\n#align preimage_subset_dom preimage_subset_dom\n\n",
+ "preimage_subset_core":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →. » -/\ntheorem preimage_subset_core (f : «expr →. » α β) (s : set β) : f.preimage s ⊆ f.core s := fun x ⟨y, ys, fxy⟩ y' fxy' =>\n  have : y = y' := Part.mem_unique fxy fxy'\n  this ▸ ys\n#align preimage_subset_core preimage_subset_core\n\n",
+ "preimage_mono":
+ "theorem preimage_mono {s t : set β} (h : s ⊆ t) : f.preimage s ⊆ f.preimage t :=\n  Rel.preimage_mono _ h\n#align preimage_mono preimage_mono\n\n",
+ "preimage_inter":
+ "theorem preimage_inter (s t : set β) : f.preimage (s ∩ t) ⊆ f.preimage s ∩ f.preimage t :=\n  Rel.preimage_inter _ s t\n#align preimage_inter preimage_inter\n\n",
+ "preimage_eq":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →. » -/\ntheorem preimage_eq (f : «expr →. » α β) (s : set β) : f.preimage s = f.core s ∩ f.dom :=\n  Set.eq_of_subset_of_subset (Set.subset_inter (f.preimage_subset_core s) (f.preimage_subset_dom s))\n    fun x ⟨xcore, xdom⟩ =>\n    let y := (f x).get xdom\n    have ys : y ∈ s := xcore _ (Part.get_mem _)\n    show x ∈ f.preimage s from ⟨(f x).get xdom, ys, Part.get_mem _⟩\n#align preimage_eq preimage_eq\n\n",
+ "preimage_def":
+ "theorem preimage_def (s : set β) : f.preimage s = { x | ∃ y ∈ s, y ∈ f x } :=\n  rfl\n#align preimage_def preimage_def\n\n",
+ "preimage_comp":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →. » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →. » -/\n@[simp]\ntheorem preimage_comp (f : «expr →. » β γ) (g : «expr →. » α β) (s : set γ) :\n    (f.comp g).preimage s = g.preimage (f.preimage s) := by\n  ext\n  simp_rw [mem_preimage, comp_apply, Part.mem_bind_iff, exists_prop, ← exists_and_right, ← exists_and_left]\n  rw [exists_comm]\n  simp_rw [and_assoc', and_comm]\n#align preimage_comp preimage_comp\n\n",
+ "preimage_as_subtype":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →. » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\ntheorem preimage_as_subtype (f : «expr →. » α β) (s : set β) :\n    «expr ⁻¹' » f.as_subtype s = «expr ⁻¹' » subtype.val (f.preimage s) :=\n  by\n  ext x\n  simp only [Set.mem_preimage, Set.mem_setOf_eq, pfun.as_subtype, pfun.mem_preimage]\n  show f.fn x.val _ ∈ s ↔ ∃ y ∈ s, y ∈ f x.val\n  exact\n    iff.intro (fun h => ⟨_, h, Part.get_mem _⟩) fun ⟨y, ys, fxy⟩ =>\n      have : f.fn x.val x.property ∈ f x.val := Part.get_mem _\n      Part.mem_unique fxy this ▸ ys\n#align preimage_as_subtype preimage_as_subtype\n\n",
+ "mem_to_subtype_iff":
+ "theorem mem_to_subtype_iff {p : β → Prop} {f : α → β} {a : α} {b : subtype p} : b ∈ to_subtype p f a ↔ ↑b = f a := by\n  rw [to_subtype_apply, Part.mem_mk_iff, exists_subtype_mk_eq_iff, eq_comm]\n#align mem_to_subtype_iff mem_to_subtype_iff\n\n",
+ "mem_restrict":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →. » -/\n@[simp]\ntheorem mem_restrict {f : «expr →. » α β} {s : set α} (h : s ⊆ f.dom) (a : α) (b : β) :\n    b ∈ f.restrict h a ↔ a ∈ s ∧ b ∈ f a := by simp [restrict]\n#align mem_restrict mem_restrict\n\n",
+ "mem_res":
+ "theorem mem_res (f : α → β) (s : set α) (a : α) (b : β) : b ∈ res f s a ↔ a ∈ s ∧ f a = b := by simp [res, @eq_comm _ b]\n#align mem_res mem_res\n\n",
+ "mem_prod_map":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →. » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →. » -/\ntheorem mem_prod_map {f : «expr →. » α γ} {g : «expr →. » β δ} {x : α × β} {y : γ × δ} :\n    y ∈ f.prod_map g x ↔ y.1 ∈ f x.1 ∧ y.2 ∈ g x.2 :=\n  by\n  trans ∃ hp hq, (f x.1).get hp = y.1 ∧ (g x.2).get hq = y.2\n  · simp only [Prod_map, Part.mem_mk_iff, and.exists, prod.ext_iff]\n  · simpa only [exists_and_left, exists_and_right]\n#align mem_prod_map mem_prod_map\n\n",
+ "mem_prod_lift":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →. » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →. » -/\ntheorem mem_prod_lift {f : «expr →. » α β} {g : «expr →. » α γ} {x : α} {y : β × γ} :\n    y ∈ f.prod_lift g x ↔ y.1 ∈ f x ∧ y.2 ∈ g x :=\n  by\n  trans ∃ hp hq, (f x).get hp = y.1 ∧ (g x).get hq = y.2\n  · simp only [prod_lift, Part.mem_mk_iff, and.exists, prod.ext_iff]\n  · simpa only [exists_and_left, exists_and_right]\n#align mem_prod_lift mem_prod_lift\n\n",
+ "mem_preimage":
+ "@[simp]\ntheorem mem_preimage (s : set β) (x : α) : x ∈ f.preimage s ↔ ∃ y ∈ s, y ∈ f x :=\n  iff.rfl\n#align mem_preimage mem_preimage\n\n",
+ "mem_image":
+ "theorem mem_image (y : β) (s : set α) : y ∈ f.image s ↔ ∃ x ∈ s, y ∈ f x :=\n  iff.rfl\n#align mem_image mem_image\n\n",
+ "mem_fix_iff":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →. » -/\ntheorem mem_fix_iff {f : «expr →. » α (Sum β α)} {a : α} {b : β} :\n    b ∈ f.fix a ↔ sum.inl b ∈ f a ∨ ∃ a', sum.inr a' ∈ f a ∧ b ∈ f.fix a' :=\n  ⟨fun h => by\n    let ⟨h₁, h₂⟩ := Part.mem_assert_iff.1 h\n    rw [well_founded.fix_F_eq] at h₂\n    simp at h₂\n    cases' h₂ with h₂ h₃\n    cases' e : (f a).get h₂ with b' a' <;> simp [e] at h₃\n    · subst b'\n      refine' or.inl ⟨h₂, e⟩\n    · exact or.inr ⟨a', ⟨_, e⟩, Part.mem_assert _ h₃⟩, fun h =>\n    by\n    simp [fix]\n    rcases h with (⟨h₁, h₂⟩ | ⟨a', h, h₃⟩)\n    · refine' ⟨⟨_, fun y h' => _⟩, _⟩\n      · injection Part.mem_unique ⟨h₁, h₂⟩ h'\n      · rw [well_founded.fix_F_eq]\n        simp [h₁, h₂]\n    · simp [fix] at h₃\n      cases' h₃ with h₃ h₄\n      refine' ⟨⟨_, fun y h' => _⟩, _⟩\n      · injection Part.mem_unique h h' with e\n        exact e ▸ h₃\n      · cases' h with h₁ h₂\n        rw [well_founded.fix_F_eq]\n        simp [h₁, h₂, h₄]⟩\n#align mem_fix_iff mem_fix_iff\n\n",
+ "mem_dom":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →. » -/\n/-\nCopyright (c) 2017 Mario Carneiro. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Mario Carneiro, Jeremy Avigad, Simon Hudon\n-/\n@[simp]\ntheorem mem_dom (f : «expr →. » α β) (x : α) : x ∈ dom f ↔ ∃ y, y ∈ f x := by simp [dom, Part.dom_iff_mem]\n#align mem_dom mem_dom\n\n",
+ "mem_core_res":
+ "theorem mem_core_res (f : α → β) (s : set α) (t : set β) (x : α) : x ∈ (res f s).core t ↔ x ∈ s → f x ∈ t := by\n  simp [mem_core, mem_res]\n#align mem_core_res mem_core_res\n\n",
+ "mem_core":
+ "@[simp]\ntheorem mem_core (x : α) (s : set β) : x ∈ f.core s ↔ ∀ y, y ∈ f x → y ∈ s :=\n  iff.rfl\n#align mem_core mem_core\n\n",
+ "lift_graph":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →. » -/\ntheorem lift_graph {f : α → β} {a b} : (a, b) ∈ (f : «expr →. » α β).graph ↔ f a = b :=\n  show (∃ h : true, f a = b) ↔ f a = b by simp\n#align lift_graph lift_graph\n\n",
+ "lift_eq_coe":
+ "@[simp]\ntheorem lift_eq_coe (f : α → β) : pfun.lift f = f :=\n  rfl\n#align lift_eq_coe lift_eq_coe\n\n",
+ "image_union":
+ "theorem image_union (s t : set α) : f.image (s ∪ t) = f.image s ∪ f.image t :=\n  Rel.image_union _ s t\n#align image_union image_union\n\n",
+ "image_mono":
+ "theorem image_mono {s t : set α} (h : s ⊆ t) : f.image s ⊆ f.image t :=\n  Rel.image_mono _ h\n#align image_mono image_mono\n\n",
+ "image_inter":
+ "theorem image_inter (s t : set α) : f.image (s ∩ t) ⊆ f.image s ∩ f.image t :=\n  Rel.image_inter _ s t\n#align image_inter image_inter\n\n",
+ "image_def":
+ "theorem image_def (s : set α) : f.image s = { y | ∃ x ∈ s, y ∈ f x } :=\n  rfl\n#align image_def image_def\n\n",
+ "id_comp":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →. » -/\n@[simp]\ntheorem id_comp (f : «expr →. » α β) : (pfun.id β).comp f = f :=\n  ext fun _ _ => by simp\n#align id_comp id_comp\n\n",
+ "id_apply":
+ "@[simp]\ntheorem id_apply (a : α) : pfun.id α a = Part.some a :=\n  rfl\n#align id_apply id_apply\n\n",
+ "get_prod_map":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →. » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →. » -/\ntheorem get_prod_map (f : «expr →. » α γ) (g : «expr →. » β δ) (x : α × β) (h) :\n    (f.prod_map g x).get h = ((f x.1).get h.1, (g x.2).get h.2) :=\n  rfl\n#align get_prod_map get_prod_map\n\n",
+ "get_prod_lift":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →. » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →. » -/\ntheorem get_prod_lift (f : «expr →. » α β) (g : «expr →. » α γ) (x : α) (h) :\n    (f.prod_lift g x).get h = ((f x).get h.1, (g x).get h.2) :=\n  rfl\n#align get_prod_lift get_prod_lift\n\n",
+ "fn_apply":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →. » -/\n@[simp]\ntheorem fn_apply (f : «expr →. » α β) (a : α) : f.fn a = (f a).get :=\n  rfl\n#align fn_apply fn_apply\n\n",
+ "fix_stop":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →. » -/\n/-- If advancing one step from `a` leads to `b : β`, then `f.fix a = b` -/\ntheorem fix_stop {f : «expr →. » α (Sum β α)} {b : β} {a : α} (hb : sum.inl b ∈ f a) : b ∈ f.fix a :=\n  by\n  rw [pfun.mem_fix_iff]\n  exact or.inl hb\n#align fix_stop fix_stop\n\n",
+ "fix_induction_spec":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →. » -/\ntheorem fix_induction_spec {C : α → Sort _} {f : «expr →. » α (Sum β α)} {b : β} {a : α} (h : b ∈ f.fix a)\n    (H : ∀ a', b ∈ f.fix a' → (∀ a'', sum.inr a'' ∈ f a' → C a'') → C a') :\n    @fix_induction _ _ C _ _ _ h H = H a h fun a' h' => fix_induction (fix_fwd h h') H :=\n  by\n  unfold fix_induction\n  generalize_proofs ha\n  induction ha\n  rfl\n#align fix_induction_spec fix_induction_spec\n\n",
+ "fix_induction'_stop":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →. » -/\ntheorem fix_induction'_stop {C : α → Sort _} {f : «expr →. » α (Sum β α)} {b : β} {a : α} (h : b ∈ f.fix a)\n    (fa : sum.inl b ∈ f a) (hbase : ∀ a_final : α, sum.inl b ∈ f a_final → C a_final)\n    (hind : ∀ a₀ a₁ : α, b ∈ f.fix a₁ → sum.inr a₁ ∈ f a₀ → C a₁ → C a₀) :\n    @fix_induction' _ _ C _ _ _ h hbase hind = hbase a fa :=\n  by\n  unfold fix_induction'\n  rw [fix_induction_spec]\n  simp [Part.get_eq_of_mem fa]\n#align fix_induction'_stop fix_induction'_stop\n\n",
+ "fix_induction'_fwd":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →. » -/\ntheorem fix_induction'_fwd {C : α → Sort _} {f : «expr →. » α (Sum β α)} {b : β} {a a' : α} (h : b ∈ f.fix a)\n    (h' : b ∈ f.fix a') (fa : sum.inr a' ∈ f a) (hbase : ∀ a_final : α, sum.inl b ∈ f a_final → C a_final)\n    (hind : ∀ a₀ a₁ : α, b ∈ f.fix a₁ → sum.inr a₁ ∈ f a₀ → C a₁ → C a₀) :\n    @fix_induction' _ _ C _ _ _ h hbase hind = hind a a' h' fa (fix_induction' h' hbase hind) :=\n  by\n  unfold fix_induction'\n  rw [fix_induction_spec]\n  simpa [Part.get_eq_of_mem fa]\n#align fix_induction'_fwd fix_induction'_fwd\n\n",
+ "fix_fwd_eq":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →. » -/\n/-- If advancing one step from `a` on `f` leads to `a' : α`, then `f.fix a = f.fix a'` -/\ntheorem fix_fwd_eq {f : «expr →. » α (Sum β α)} {a a' : α} (ha' : sum.inr a' ∈ f a) : f.fix a = f.fix a' :=\n  by\n  ext b; constructor\n  · intro h\n    obtain h' | ⟨a, h', e'⟩ := mem_fix_iff.1 h <;> cases Part.mem_unique ha' h'\n    exact e'\n  · intro h\n    rw [pfun.mem_fix_iff]\n    right\n    use a'\n    exact ⟨ha', h⟩\n#align fix_fwd_eq fix_fwd_eq\n\n",
+ "fix_fwd":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →. » -/\ntheorem fix_fwd {f : «expr →. » α (Sum β α)} {b : β} {a a' : α} (hb : b ∈ f.fix a) (ha' : sum.inr a' ∈ f a) :\n    b ∈ f.fix a' := by rwa [← fix_fwd_eq ha']\n#align fix_fwd fix_fwd\n\n",
+ "ext'":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →. » -/\n/-- Partial function extensionality -/\ntheorem ext' {f g : «expr →. » α β} (H1 : ∀ a, a ∈ dom f ↔ a ∈ dom g) (H2 : ∀ a p q, f.fn a p = g.fn a q) : f = g :=\n  funext fun a => Part.ext' (H1 a) (H2 a)\n#align ext' ext'\n\n",
+ "ext":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →. » -/\ntheorem ext {f g : «expr →. » α β} (H : ∀ a b, b ∈ f a ↔ b ∈ g a) : f = g :=\n  funext fun a => Part.ext (H a)\n#align ext ext\n\n",
+ "dom_to_subtype_apply_iff":
+ "theorem dom_to_subtype_apply_iff {p : β → Prop} {f : α → β} {a : α} : (to_subtype p f a).dom ↔ p (f a) :=\n  iff.rfl\n#align dom_to_subtype_apply_iff dom_to_subtype_apply_iff\n\n",
+ "dom_to_subtype":
+ "@[simp]\ntheorem dom_to_subtype (p : β → Prop) (f : α → β) : (to_subtype p f).dom = { a | p (f a) } :=\n  rfl\n#align dom_to_subtype dom_to_subtype\n\n",
+ "dom_prod_map":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →. » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →. » -/\n@[simp]\ntheorem dom_prod_map (f : «expr →. » α γ) (g : «expr →. » β δ) :\n    (f.prod_map g).dom = { x | (f x.1).dom ∧ (g x.2).dom } :=\n  rfl\n#align dom_prod_map dom_prod_map\n\n",
+ "dom_prod_lift":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →. » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →. » -/\n@[simp]\ntheorem dom_prod_lift (f : «expr →. » α β) (g : «expr →. » α γ) : (f.prod_lift g).dom = { x | (f x).dom ∧ (g x).dom } :=\n  rfl\n#align dom_prod_lift dom_prod_lift\n\n",
+ "dom_of_mem_fix":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →. » -/\ntheorem dom_of_mem_fix {f : «expr →. » α (Sum β α)} {a : α} {b : β} (h : b ∈ f.fix a) : (f a).dom :=\n  by\n  let ⟨h₁, h₂⟩ := Part.mem_assert_iff.1 h\n  rw [well_founded.fix_F_eq] at h₂ <;> exact h₂.fst.fst\n#align dom_of_mem_fix dom_of_mem_fix\n\n",
+ "dom_mk":
+ "@[simp]\ntheorem dom_mk (p : α → Prop) (f : ∀ a, p a → β) : (pfun.dom fun x => ⟨p x, f x⟩) = { x | p x } :=\n  rfl\n#align dom_mk dom_mk\n\n",
+ "dom_iff_graph":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →. » -/\ntheorem dom_iff_graph (f : «expr →. » α β) (x : α) : x ∈ f.dom ↔ ∃ y, (x, y) ∈ f.graph :=\n  Part.dom_iff_mem\n#align dom_iff_graph dom_iff_graph\n\n",
+ "dom_eq":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →. » -/\ntheorem dom_eq (f : «expr →. » α β) : dom f = { x | ∃ y, y ∈ f x } :=\n  Set.ext (mem_dom f)\n#align dom_eq dom_eq\n\n",
+ "dom_comp":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →. » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →. » -/\n@[simp]\ntheorem dom_comp (f : «expr →. » β γ) (g : «expr →. » α β) : (f.comp g).dom = g.preimage f.dom :=\n  by\n  ext\n  simp_rw [mem_preimage, mem_dom, comp_apply, Part.mem_bind_iff, exists_prop, ← exists_and_right]\n  rw [exists_comm]\n  simp_rw [and_comm]\n#align dom_comp dom_comp\n\n",
+ "dom_coe":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →. » -/\n@[simp]\ntheorem dom_coe (f : α → β) : (f : «expr →. » α β).dom = Set.univ :=\n  rfl\n#align dom_coe dom_coe\n\n",
+ "core_restrict":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →. » -/\ntheorem core_restrict (f : α → β) (s : set β) : (f : «expr →. » α β).core s = s.preimage f := by\n  ext x <;> simp [core_def]\n#align core_restrict core_restrict\n\n",
+ "core_res":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\ntheorem core_res (f : α → β) (s : set α) (t : set β) : (res f s).core t = «expr ᶜ» s ∪ «expr ⁻¹' » f t :=\n  by\n  ext\n  rw [mem_core_res]\n  by_cases h : x ∈ s <;> simp [h]\n#align core_res core_res\n\n",
+ "core_mono":
+ "theorem core_mono {s t : set β} (h : s ⊆ t) : f.core s ⊆ f.core t :=\n  Rel.core_mono _ h\n#align core_mono core_mono\n\n",
+ "core_inter":
+ "theorem core_inter (s t : set β) : f.core (s ∩ t) = f.core s ∩ f.core t :=\n  Rel.core_inter _ s t\n#align core_inter core_inter\n\n",
+ "core_eq":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →. » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\ntheorem core_eq (f : «expr →. » α β) (s : set β) : f.core s = f.preimage s ∪ «expr ᶜ» f.dom := by\n  rw [preimage_eq, Set.union_distrib_right, Set.union_comm (dom f), Set.compl_union_self, Set.inter_univ,\n    Set.union_eq_self_of_subset_right (f.compl_dom_subset_core s)]\n#align core_eq core_eq\n\n",
+ "core_def":
+ "theorem core_def (s : set β) : f.core s = { x | ∀ y, y ∈ f x → y ∈ s } :=\n  rfl\n#align core_def core_def\n\n",
+ "compl_dom_subset_core":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\ntheorem compl_dom_subset_core (s : set β) : «expr ᶜ» f.dom ⊆ f.core s := fun x hx y fxy =>\n  absurd ((mem_dom f x).mpr ⟨y, fxy⟩) hx\n#align compl_dom_subset_core compl_dom_subset_core\n\n",
+ "comp_id":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →. » -/\n@[simp]\ntheorem comp_id (f : «expr →. » α β) : f.comp (pfun.id α) = f :=\n  ext fun _ _ => by simp\n#align comp_id comp_id\n\n",
+ "comp_assoc":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →. » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →. » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →. » -/\n@[simp]\ntheorem comp_assoc (f : «expr →. » γ δ) (g : «expr →. » β γ) (h : «expr →. » α β) :\n    (f.comp g).comp h = f.comp (g.comp h) :=\n  ext fun _ _ => by simp only [comp_apply, part.bind_comp]\n#align comp_assoc comp_assoc\n\n",
+ "comp_apply":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →. » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →. » -/\n@[simp]\ntheorem comp_apply (f : «expr →. » β γ) (g : «expr →. » α β) (a : α) : f.comp g a = (g a).bind f :=\n  rfl\n#align comp_apply comp_apply\n\n",
+ "coe_val":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →. » -/\n@[simp]\ntheorem coe_val (f : α → β) (a : α) : (f : «expr →. » α β) a = Part.some (f a) :=\n  rfl\n#align coe_val coe_val\n\n",
+ "coe_preimage":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →. » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\ntheorem coe_preimage (f : α → β) (s : set β) : (f : «expr →. » α β).preimage s = «expr ⁻¹' » f s := by ext <;> simp\n#align coe_preimage coe_preimage\n\n",
+ "coe_injective":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →. » -/\ntheorem coe_injective : injective (coe : (α → β) → «expr →. » α β) := fun f g h =>\n  funext fun a => Part.some_injective <| congr_fun h a\n#align coe_injective coe_injective\n\n",
+ "coe_id":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →. » -/\n@[simp]\ntheorem coe_id (α : Type _) : ((id : α → α) : «expr →. » α α) = pfun.id α :=\n  rfl\n#align coe_id coe_id\n\n",
+ "coe_comp":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →. » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →. » -/\n-- This can't be `simp`\ntheorem coe_comp (g : β → γ) (f : α → β) : ((g ∘ f : α → γ) : «expr →. » α γ) = (g : «expr →. » β γ).comp f :=\n  ext fun _ _ => by simp only [coe_val, comp_apply, Part.bind_some]\n#align coe_comp coe_comp\n\n",
+ "bind_defined":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →. » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →. » -/\ntheorem bind_defined {α β γ} (p : set α) {f : «expr →. » α β} {g : β → «expr →. » α γ} (H1 : p ⊆ f.dom)\n    (H2 : ∀ x, p ⊆ (g x).dom) : p ⊆ (f >>= g).dom := fun a ha => (⟨H1 ha, H2 _ ha⟩ : (f >>= g).dom a)\n#align bind_defined bind_defined\n\n",
+ "bind_comp":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →. » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →. » -/\n@[simp]\ntheorem _root_.part.bind_comp (f : «expr →. » β γ) (g : «expr →. » α β) (a : Part α) :\n    a.bind (f.comp g) = (a.bind g).bind f := by\n  ext c\n  simp_rw [Part.mem_bind_iff, comp_apply, Part.mem_bind_iff, exists_prop, ← exists_and_right, ← exists_and_left]\n  rw [exists_comm]\n  simp_rw [and_assoc']\n#align part.bind_comp part.bind_comp\n\n",
+ "bind_apply":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →. » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →. » -/\n@[simp]\ntheorem bind_apply (f : «expr →. » α β) (g : β → «expr →. » α γ) (a : α) : f.bind g a = (f a).bind fun b => g b a :=\n  rfl\n#align bind_apply bind_apply\n\n",
+ "as_subtype_eq_of_mem":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →. » -/\ntheorem as_subtype_eq_of_mem {f : «expr →. » α β} {x : α} {y : β} (fxy : y ∈ f x) (domx : x ∈ f.dom) :\n    f.as_subtype ⟨x, domx⟩ = y :=\n  Part.mem_unique (Part.get_mem _) fxy\n#align as_subtype_eq_of_mem as_subtype_eq_of_mem\n\n"}

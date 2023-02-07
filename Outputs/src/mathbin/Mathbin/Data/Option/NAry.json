@@ -1,0 +1,62 @@
+{"mem_map₂_iff":
+ "@[simp]\ntheorem mem_map₂_iff {c : γ} : c ∈ map₂ f a b ↔ ∃ a' b', a' ∈ a ∧ b' ∈ b ∧ f a' b' = c := by simp [map₂]\n#align mem_map₂_iff mem_map₂_iff\n\n",
+ "map₂_swap":
+ "theorem map₂_swap (f : α → β → γ) (a : option α) (b : option β) : map₂ f a b = map₂ (fun a b => f b a) b a := by\n  cases a <;> cases b <;> rfl\n#align map₂_swap map₂_swap\n\n",
+ "map₂_some_some":
+ "@[simp]\ntheorem map₂_some_some (f : α → β → γ) (a : α) (b : β) : map₂ f (some a) (some b) = some (f a b) :=\n  rfl\n#align map₂_some_some map₂_some_some\n\n",
+ "map₂_right_identity":
+ "/-- If `b` is a right identity for a binary operation `f`, then `some b` is a right identity for\n`option.map₂ f`. -/\ntheorem map₂_right_identity {f : α → β → α} {b : β} (h : ∀ a, f a b = a) (o : option α) : map₂ f o (some b) = o := by\n  simp [h, map₂]\n#align map₂_right_identity map₂_right_identity\n\n",
+ "map₂_right_comm":
+ "theorem map₂_right_comm {f : δ → γ → ε} {g : α → β → δ} {f' : α → γ → δ'} {g' : δ' → β → ε}\n    (h_right_comm : ∀ a b c, f (g a b) c = g' (f' a c) b) : map₂ f (map₂ g a b) c = map₂ g' (map₂ f' a c) b := by\n  cases a <;> cases b <;> cases c <;> simp [h_right_comm]\n#align map₂_right_comm map₂_right_comm\n\n",
+ "map₂_none_right":
+ "@[simp]\ntheorem map₂_none_right (f : α → β → γ) (a : option α) : map₂ f a none = none := by cases a <;> rfl\n#align map₂_none_right map₂_none_right\n\n",
+ "map₂_none_left":
+ "@[simp]\ntheorem map₂_none_left (f : α → β → γ) (b : option β) : map₂ f none b = none :=\n  rfl\n#align map₂_none_left map₂_none_left\n\n",
+ "map₂_map_right":
+ "theorem map₂_map_right (f : α → γ → δ) (g : β → γ) : map₂ f a (b.map g) = map₂ (fun a b => f a (g b)) a b := by\n  cases b <;> rfl\n#align map₂_map_right map₂_map_right\n\n",
+ "map₂_map_left_comm":
+ "/-- Symmetric statement to `option.map_map₂_distrib_left`. -/\ntheorem map₂_map_left_comm {f : α' → β → γ} {g : α → α'} {f' : α → β → δ} {g' : δ → γ}\n    (h_left_comm : ∀ a b, f (g a) b = g' (f' a b)) : map₂ f (a.map g) b = (map₂ f' a b).map g' := by\n  cases a <;> cases b <;> simp [h_left_comm]\n#align map₂_map_left_comm map₂_map_left_comm\n\n",
+ "map₂_map_left_anticomm":
+ "/-- Symmetric statement to `option.map_map₂_antidistrib_left`. -/\ntheorem map₂_map_left_anticomm {f : α' → β → γ} {g : α → α'} {f' : β → α → δ} {g' : δ → γ}\n    (h_left_anticomm : ∀ a b, f (g a) b = g' (f' b a)) : map₂ f (a.map g) b = (map₂ f' b a).map g' := by\n  cases a <;> cases b <;> simp [h_left_anticomm]\n#align map₂_map_left_anticomm map₂_map_left_anticomm\n\n",
+ "map₂_map_left":
+ "theorem map₂_map_left (f : γ → β → δ) (g : α → γ) : map₂ f (a.map g) b = map₂ (fun a b => f (g a) b) a b := by\n  cases a <;> rfl\n#align map₂_map_left map₂_map_left\n\n",
+ "map₂_left_identity":
+ "/-- If `a` is a left identity for a binary operation `f`, then `some a` is a left identity for\n`option.map₂ f`. -/\ntheorem map₂_left_identity {f : α → β → β} {a : α} (h : ∀ b, f a b = b) (o : option β) : map₂ f (some a) o = o :=\n  by\n  cases o\n  exacts[rfl, congr_arg some (h _)]\n#align map₂_left_identity map₂_left_identity\n\n",
+ "map₂_left_comm":
+ "theorem map₂_left_comm {f : α → δ → ε} {g : β → γ → δ} {f' : α → γ → δ'} {g' : β → δ' → ε}\n    (h_left_comm : ∀ a b c, f a (g b c) = g' b (f' a c)) : map₂ f a (map₂ g b c) = map₂ g' b (map₂ f' a c) := by\n  cases a <;> cases b <;> cases c <;> simp [h_left_comm]\n#align map₂_left_comm map₂_left_comm\n\n",
+ "map₂_eq_none_iff":
+ "@[simp]\ntheorem map₂_eq_none_iff : map₂ f a b = none ↔ a = none ∨ b = none := by cases a <;> cases b <;> simp\n#align map₂_eq_none_iff map₂_eq_none_iff\n\n",
+ "map₂_def":
+ "/-\nCopyright (c) 2022 Yaël Dillies. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Yaël Dillies\n-/\n/-- `option.map₂` in terms of monadic operations. Note that this can't be taken as the definition\nbecause of the lack of universe polymorphism. -/\ntheorem map₂_def {α β γ : Type _} (f : α → β → γ) (a : option α) (b : option β) : map₂ f a b = f <$> a <*> b := by\n  cases a <;> rfl\n#align map₂_def map₂_def\n\n",
+ "map₂_curry":
+ "@[simp]\ntheorem map₂_curry (f : α × β → γ) (a : option α) (b : option β) :\n    map₂ (curry f) a b = option.map f (map₂ prod.mk a b) :=\n  (map_map₂ _ _).symm\n#align map₂_curry map₂_curry\n\n",
+ "map₂_comm":
+ "theorem map₂_comm {g : β → α → γ} (h_comm : ∀ a b, f a b = g b a) : map₂ f a b = map₂ g b a := by\n  cases a <;> cases b <;> simp [h_comm]\n#align map₂_comm map₂_comm\n\n",
+ "map₂_coe_right":
+ "@[simp]\ntheorem map₂_coe_right (f : α → β → γ) (a : option α) (b : β) : map₂ f a b = a.map fun a => f a b :=\n  rfl\n#align map₂_coe_right map₂_coe_right\n\n",
+ "map₂_coe_left":
+ "@[simp]\ntheorem map₂_coe_left (f : α → β → γ) (a : α) (b : option β) : map₂ f a b = b.map fun b => f a b :=\n  rfl\n#align map₂_coe_left map₂_coe_left\n\n",
+ "map₂_coe_coe":
+ "theorem map₂_coe_coe (f : α → β → γ) (a : α) (b : β) : map₂ f a b = f a b :=\n  rfl\n#align map₂_coe_coe map₂_coe_coe\n\n",
+ "map₂_assoc":
+ "theorem map₂_assoc {f : δ → γ → ε} {g : α → β → δ} {f' : α → ε' → ε} {g' : β → γ → ε'}\n    (h_assoc : ∀ a b c, f (g a b) c = f' a (g' b c)) : map₂ f (map₂ g a b) c = map₂ f' a (map₂ g' b c) := by\n  cases a <;> cases b <;> cases c <;> simp [h_assoc]\n#align map₂_assoc map₂_assoc\n\n",
+ "map_uncurry":
+ "@[simp]\ntheorem map_uncurry (f : α → β → γ) (x : option (α × β)) :\n    x.map (uncurry f) = map₂ f (x.map prod.fst) (x.map prod.snd) := by cases x <;> rfl\n#align map_uncurry map_uncurry\n\n",
+ "map_map₂_right_comm":
+ "/-- Symmetric statement to `option.map_map₂_distrib_right`. -/\ntheorem map_map₂_right_comm {f : α → β' → γ} {g : β → β'} {f' : α → β → δ} {g' : δ → γ}\n    (h_right_comm : ∀ a b, f a (g b) = g' (f' a b)) : map₂ f a (b.map g) = (map₂ f' a b).map g' := by\n  cases a <;> cases b <;> simp [h_right_comm]\n#align map_map₂_right_comm map_map₂_right_comm\n\n",
+ "map_map₂_right_anticomm":
+ "/-- Symmetric statement to `option.map_map₂_antidistrib_right`. -/\ntheorem map_map₂_right_anticomm {f : α → β' → γ} {g : β → β'} {f' : β → α → δ} {g' : δ → γ}\n    (h_right_anticomm : ∀ a b, f a (g b) = g' (f' b a)) : map₂ f a (b.map g) = (map₂ f' b a).map g' := by\n  cases a <;> cases b <;> simp [h_right_anticomm]\n#align map_map₂_right_anticomm map_map₂_right_anticomm\n\n",
+ "map_map₂_distrib_right":
+ "/-- Symmetric statement to `option.map_map₂_right_comm`. -/\ntheorem map_map₂_distrib_right {g : γ → δ} {f' : α → β' → δ} {g' : β → β'}\n    (h_distrib : ∀ a b, g (f a b) = f' a (g' b)) : (map₂ f a b).map g = map₂ f' a (b.map g') := by\n  cases a <;> cases b <;> simp [h_distrib]\n#align map_map₂_distrib_right map_map₂_distrib_right\n\n",
+ "map_map₂_distrib_left":
+ "/-- Symmetric statement to `option.map₂_map_left_comm`. -/\ntheorem map_map₂_distrib_left {g : γ → δ} {f' : α' → β → δ} {g' : α → α'} (h_distrib : ∀ a b, g (f a b) = f' (g' a) b) :\n    (map₂ f a b).map g = map₂ f' (a.map g') b := by cases a <;> cases b <;> simp [h_distrib]\n#align map_map₂_distrib_left map_map₂_distrib_left\n\n",
+ "map_map₂_distrib":
+ "theorem map_map₂_distrib {g : γ → δ} {f' : α' → β' → δ} {g₁ : α → α'} {g₂ : β → β'}\n    (h_distrib : ∀ a b, g (f a b) = f' (g₁ a) (g₂ b)) : (map₂ f a b).map g = map₂ f' (a.map g₁) (b.map g₂) := by\n  cases a <;> cases b <;> simp [h_distrib]\n#align map_map₂_distrib map_map₂_distrib\n\n",
+ "map_map₂_antidistrib_right":
+ "/-- Symmetric statement to `option.map_map₂_right_anticomm`. -/\ntheorem map_map₂_antidistrib_right {g : γ → δ} {f' : β → α' → δ} {g' : α → α'}\n    (h_antidistrib : ∀ a b, g (f a b) = f' b (g' a)) : (map₂ f a b).map g = map₂ f' b (a.map g') := by\n  cases a <;> cases b <;> simp [h_antidistrib]\n#align map_map₂_antidistrib_right map_map₂_antidistrib_right\n\n",
+ "map_map₂_antidistrib_left":
+ "/-- Symmetric statement to `option.map₂_map_left_anticomm`. -/\ntheorem map_map₂_antidistrib_left {g : γ → δ} {f' : β' → α → δ} {g' : β → β'}\n    (h_antidistrib : ∀ a b, g (f a b) = f' (g' b) a) : (map₂ f a b).map g = map₂ f' (b.map g') a := by\n  cases a <;> cases b <;> simp [h_antidistrib]\n#align map_map₂_antidistrib_left map_map₂_antidistrib_left\n\n",
+ "map_map₂_antidistrib":
+ "theorem map_map₂_antidistrib {g : γ → δ} {f' : β' → α' → δ} {g₁ : β → β'} {g₂ : α → α'}\n    (h_antidistrib : ∀ a b, g (f a b) = f' (g₁ b) (g₂ a)) : (map₂ f a b).map g = map₂ f' (b.map g₁) (a.map g₂) := by\n  cases a <;> cases b <;> simp [h_antidistrib]\n#align map_map₂_antidistrib map_map₂_antidistrib\n\n",
+ "map_map₂":
+ "theorem map_map₂ (f : α → β → γ) (g : γ → δ) : (map₂ f a b).map g = map₂ (fun a b => g (f a b)) a b := by\n  cases a <;> cases b <;> rfl\n#align map_map₂ map_map₂\n\n"}

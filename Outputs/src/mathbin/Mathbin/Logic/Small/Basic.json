@@ -1,0 +1,18 @@
+{"small_type":
+ "#print small_type /-\ntheorem small_type : Small.{max (u + 1) v} (Type u) :=\n  small_max.{max (u + 1) v} _\n#align small_type small_type\n-/\n\n",
+ "small_subset":
+ "#print small_subset /-\ntheorem small_subset {α : Type v} {s t : set α} (hts : t ⊆ s) [Small.{u} s] : Small.{u} t :=\n  let f : t → s := fun x => ⟨x, hts x.prop⟩\n  @small_of_injective _ _ _ f fun x y hxy => subtype.ext (subtype.mk.inj hxy)\n#align small_subset small_subset\n-/\n\n",
+ "small_of_surjective":
+ "#print small_of_surjective /-\ntheorem small_of_surjective {α : Type v} {β : Type w} [Small.{u} α] {f : α → β} (hf : function.surjective f) :\n    Small.{u} β :=\n  small_of_injective (Function.injective_surjInv hf)\n#align small_of_surjective small_of_surjective\n-/\n\n",
+ "small_of_injective":
+ "#print small_of_injective /-\ntheorem small_of_injective {α : Type v} {β : Type w} [Small.{u} β] {f : α → β} (hf : function.injective f) :\n    Small.{u} α :=\n  small_map (Equiv.ofInjective f hf)\n#align small_of_injective small_of_injective\n-/\n\n",
+ "small_map":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ » -/\n#print small_map /-\ntheorem small_map {α : Type _} {β : Type _} [hβ : Small.{w} β] (e : «expr ≃ » α β) : Small.{w} α :=\n  let ⟨γ, ⟨f⟩⟩ := hβ.equiv_small\n  Small.mk' (e.trans f)\n#align small_map small_map\n-/\n\n",
+ "small_lift":
+ "#print small_lift /-\ntheorem small_lift (α : Type u) [hα : Small.{v} α] : Small.{max v w} α :=\n  let ⟨⟨γ, ⟨f⟩⟩⟩ := hα\n  Small.mk' <| f.trans equiv.ulift.symm\n#align small_lift small_lift\n-/\n\n",
+ "small_congr":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ » -/\n#print small_congr /-\ntheorem small_congr {α : Type _} {β : Type _} (e : «expr ≃ » α β) : Small.{w} α ↔ Small.{w} β :=\n  ⟨fun h => @small_map _ _ h e.symm, fun h => @small_map _ _ h e⟩\n#align small_congr small_congr\n-/\n\n",
+ "not_small_type":
+ "#print not_small_type /-\ntheorem not_small_type : ¬Small.{u} (Type max u v)\n  | ⟨⟨S, ⟨e⟩⟩⟩ =>\n    @function.cantor_injective (Σα, e.symm α) (fun a => ⟨_, cast (e.3 _).symm a⟩) fun a b e =>\n      (cast_inj _).1 <| eq_of_heq (sigma.mk.inj e).2\n#align not_small_type not_small_type\n-/\n\n",
+ "mk'":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ » -/\n#print Small.mk' /-\n/-\nCopyright (c) 2021 Scott Morrison. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Scott Morrison\n-/\n/-- Constructor for `small α` from an explicit witness type and equivalence.\n-/\ntheorem Small.mk' {α : Type v} {S : Type w} (e : «expr ≃ » α S) : Small.{w} α :=\n  ⟨⟨S, ⟨e⟩⟩⟩\n#align small.mk' Small.mk'\n-/\n\n"}

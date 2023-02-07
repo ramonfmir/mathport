@@ -1,0 +1,48 @@
+{"upper_closure_smul":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n@[simp, to_additive]\ntheorem upper_closure_smul : upper_closure («expr • » a s) = «expr • » a (upper_closure s) :=\n  upper_closure_image <| OrderIso.mulLeft a\n#align upper_closure_smul upper_closure_smul\n\n",
+ "upper_closure_one":
+ "@[simp, to_additive]\ntheorem upper_closure_one : upper_closure (1 : set α) = 1 :=\n  upper_closure_singleton _\n#align upper_closure_one upper_closure_one\n\n",
+ "upper_closure_mul_distrib":
+ "@[simp, to_additive]\ntheorem upper_closure_mul_distrib : upper_closure (s * t) = upper_closure s * upper_closure t :=\n  SetLike.coe_injective <| by rw [upper_set.coe_mul, mul_upper_closure, upper_closure_mul, upper_set.upper_closure]\n#align upper_closure_mul_distrib upper_closure_mul_distrib\n\n",
+ "upper_closure_mul":
+ "@[to_additive]\ntheorem upper_closure_mul : ↑(upper_closure s) * t = upper_closure (s * t) :=\n  by\n  simp_rw [mul_comm _ t]\n  exact mul_upper_closure _ _\n#align upper_closure_mul upper_closure_mul\n\n",
+ "smul_subset":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n@[to_additive]\ntheorem is_lower_set.smul_subset (hs : is_lower_set s) (hx : x ≤ 1) : «expr • » x s ⊆ s :=\n  smul_set_subset_iff.2 fun y => hs <| mul_le_of_le_one_left' hx\n#align is_lower_set.smul_subset is_lower_set.smul_subset\n\n",
+ "smul":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n@[to_additive]\ntheorem set.ord_connected.smul (hs : s.ord_connected) : («expr • » a s).ord_connected :=\n  by\n  rw [← hs.upper_closure_inter_lower_closure, smul_set_inter]\n  exact (upper_closure _).upper.smul.ord_connected.inter (lower_closure _).lower.smul.ord_connected\n#align set.ord_connected.smul set.ord_connected.smul\n\n",
+ "one_mul":
+ "#print one_mul /-\n@[to_additive]\nprivate theorem one_mul (s : lower_set α) : 1 * s = s :=\n  SetLike.coe_injective <|\n    (subset_mul_right _ right_mem_Iic).antisymm' <|\n      by\n      rw [← smul_eq_mul, ← bUnion_smul_set]\n      exact Union₂_subset fun _ => s.lower.smul_subset\n#align one_mul one_mul\n-/\n\n",
+ "mul_upper_closure":
+ "@[to_additive]\ntheorem mul_upper_closure : s * upper_closure t = upper_closure (s * t) := by\n  simp_rw [← smul_eq_mul, ← bUnion_smul_set, upper_closure_Union, upper_closure_smul, upper_set.coe_infi₂,\n    upper_set.coe_smul]\n#align mul_upper_closure mul_upper_closure\n\n",
+ "mul_right":
+ "@[to_additive]\ntheorem is_lower_set.mul_right (hs : is_lower_set s) : is_lower_set (s * t) :=\n  hs.of_dual.mul_right\n#align is_lower_set.mul_right is_lower_set.mul_right\n\n",
+ "mul_lower_closure":
+ "@[to_additive]\ntheorem mul_lower_closure : s * lower_closure t = lower_closure (s * t) := by\n  simp_rw [← smul_eq_mul, ← bUnion_smul_set, lower_closure_Union, lower_closure_smul, lower_set.coe_supr₂,\n    lower_set.coe_smul]\n#align mul_lower_closure mul_lower_closure\n\n",
+ "mul_left":
+ "@[to_additive]\ntheorem is_lower_set.mul_left (ht : is_lower_set t) : is_lower_set (s * t) :=\n  ht.of_dual.mul_left\n#align is_lower_set.mul_left is_lower_set.mul_left\n\n",
+ "lower_closure_smul":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n@[simp, to_additive]\ntheorem lower_closure_smul : lower_closure («expr • » a s) = «expr • » a (lower_closure s) :=\n  lower_closure_image <| OrderIso.mulLeft a\n#align lower_closure_smul lower_closure_smul\n\n",
+ "lower_closure_one":
+ "@[simp, to_additive]\ntheorem lower_closure_one : lower_closure (1 : set α) = 1 :=\n  lower_closure_singleton _\n#align lower_closure_one lower_closure_one\n\n",
+ "lower_closure_mul_distrib":
+ "@[simp, to_additive]\ntheorem lower_closure_mul_distrib : lower_closure (s * t) = lower_closure s * lower_closure t :=\n  SetLike.coe_injective <| by rw [lower_set.coe_mul, mul_lower_closure, lower_closure_mul, lower_set.lower_closure]\n#align lower_closure_mul_distrib lower_closure_mul_distrib\n\n",
+ "lower_closure_mul":
+ "@[to_additive]\ntheorem lower_closure_mul : ↑(lower_closure s) * t = lower_closure (s * t) :=\n  by\n  simp_rw [mul_comm _ t]\n  exact mul_lower_closure _ _\n#align lower_closure_mul lower_closure_mul\n\n",
+ "inv":
+ "@[to_additive]\ntheorem is_lower_set.inv (hs : is_lower_set s) : is_upper_set s⁻¹ := fun x y h => hs <| inv_le_inv' h\n#align is_lower_set.inv is_lower_set.inv\n\n",
+ "div_right":
+ "@[to_additive]\ntheorem is_lower_set.div_right (hs : is_lower_set s) : is_lower_set (s / t) :=\n  hs.of_dual.div_right\n#align is_lower_set.div_right is_lower_set.div_right\n\n",
+ "div_left":
+ "@[to_additive]\ntheorem is_lower_set.div_left (ht : is_lower_set t) : is_upper_set (s / t) :=\n  ht.of_dual.div_left\n#align is_lower_set.div_left is_lower_set.div_left\n\n",
+ "coe_smul":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n@[simp, norm_cast, to_additive]\ntheorem coe_smul (a : α) (s : lower_set α) : (↑(«expr • » a s) : set α) = «expr • » a s :=\n  rfl\n#align coe_smul coe_smul\n\n",
+ "coe_one":
+ "@[simp, norm_cast, to_additive]\ntheorem coe_one : ((1 : upper_set α) : set α) = Set.Ici 1 :=\n  rfl\n#align coe_one coe_one\n\n",
+ "coe_mul":
+ "@[simp, norm_cast, to_additive]\ntheorem coe_mul (s t : lower_set α) : (↑(s * t) : set α) = s * t :=\n  rfl\n#align coe_mul coe_mul\n\n",
+ "coe_div":
+ "@[simp, norm_cast, to_additive]\ntheorem coe_div (s t : lower_set α) : (↑(s / t) : set α) = s / t :=\n  rfl\n#align coe_div coe_div\n\n",
+ "Iic_one":
+ "@[simp, to_additive]\ntheorem Iic_one : Iic (1 : α) = 1 :=\n  rfl\n#align Iic_one Iic_one\n\n",
+ "Ici_one":
+ "@[simp, to_additive]\ntheorem Ici_one : Ici (1 : α) = 1 :=\n  rfl\n#align Ici_one Ici_one\n\n"}

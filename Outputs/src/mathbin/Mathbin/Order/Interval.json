@@ -1,0 +1,94 @@
+{"to_prod_injective":
+ "/-\nCopyright (c) 2022 Yaël Dillies. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Yaël Dillies\n-/\ntheorem to_prod_injective : injective (to_prod : nonempty_interval α → α × α) := fun s t => (ext_iff _ _).2\n#align to_prod_injective to_prod_injective\n\n",
+ "to_dual_prod_injective":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵈ» -/\ntheorem to_dual_prod_injective : injective (to_dual_prod : nonempty_interval α → «expr ᵒᵈ» α × α) :=\n  to_prod_injective\n#align to_dual_prod_injective to_dual_prod_injective\n\n",
+ "to_dual_prod_apply":
+ "@[simp]\ntheorem to_dual_prod_apply (s : nonempty_interval α) : s.to_dual_prod = (toDual s.fst, s.snd) :=\n  prod.mk.eta.symm\n#align to_dual_prod_apply to_dual_prod_apply\n\n",
+ "subset_coe_map":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →o » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\ntheorem subset_coe_map (f : «expr →o » α β) : ∀ s : interval α, «expr '' » f s ⊆ s.map f\n  | «expr⊥» => by simp\n  | (s : nonempty_interval α) => s.subset_coe_map _\n#align subset_coe_map subset_coe_map\n\n",
+ "snd_sup":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊔ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊔ » -/\n@[simp]\ntheorem snd_sup (s t : nonempty_interval α) : («expr ⊔ » s t).snd = «expr ⊔ » s.snd t.snd :=\n  rfl\n#align snd_sup snd_sup\n\n",
+ "snd_dual":
+ "@[simp]\ntheorem snd_dual (s : nonempty_interval α) : s.dual.snd = toDual s.fst :=\n  rfl\n#align snd_dual snd_dual\n\n",
+ "pure_ne_bot":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n@[simp]\ntheorem pure_ne_bot {a : α} : pure a ≠ «expr⊥» :=\n  WithBot.coe_ne_bot\n#align pure_ne_bot pure_ne_bot\n\n",
+ "pure_injective":
+ "theorem pure_injective : injective (pure : α → interval α) :=\n  coe_injective.comp nonempty_interval.pure_injective\n#align pure_injective pure_injective\n\n",
+ "mem_pure_self":
+ "theorem mem_pure_self (a : α) : a ∈ pure a :=\n  mem_pure.2 rfl\n#align mem_pure_self mem_pure_self\n\n",
+ "mem_pure":
+ "@[simp]\ntheorem mem_pure : b ∈ pure a ↔ b = a := by rw [← SetLike.mem_coe, coe_pure, mem_singleton_iff]\n#align mem_pure mem_pure\n\n",
+ "mem_mk":
+ "@[simp]\ntheorem mem_mk {hx : x.1 ≤ x.2} : a ∈ mk x hx ↔ x.1 ≤ a ∧ a ≤ x.2 :=\n  iff.rfl\n#align mem_mk mem_mk\n\n",
+ "mem_def":
+ "theorem mem_def : a ∈ s ↔ s.fst ≤ a ∧ a ≤ s.snd :=\n  iff.rfl\n#align mem_def mem_def\n\n",
+ "mem_coe_interval":
+ "@[simp, norm_cast]\ntheorem mem_coe_interval [partial_order α] {s : nonempty_interval α} {x : α} : x ∈ (s : interval α) ↔ x ∈ s :=\n  iff.rfl\n#align mem_coe_interval mem_coe_interval\n\n",
+ "map₂_pure":
+ "@[simp]\ntheorem map₂_pure (f : α → β → γ) (h₀ h₁) (a : α) (b : β) : map₂ f h₀ h₁ (pure a) (pure b) = pure (f a b) :=\n  rfl\n#align map₂_pure map₂_pure\n\n",
+ "map_pure":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →o » -/\n@[simp]\ntheorem map_pure (f : «expr →o » α β) (a : α) : (pure a).map f = pure (f a) :=\n  rfl\n#align map_pure map_pure\n\n",
+ "map_map":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →o » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →o » -/\n@[simp]\ntheorem map_map (g : «expr →o » β γ) (f : «expr →o » α β) (s : interval α) : (s.map f).map g = s.map (g.comp f) :=\n  option.map_map _ _ _\n#align map_map map_map\n\n",
+ "le_def":
+ "theorem le_def : s ≤ t ↔ t.fst ≤ s.fst ∧ s.snd ≤ t.snd :=\n  iff.rfl\n#align le_def le_def\n\n",
+ "fst_sup":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊔ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊓ » -/\n@[simp]\ntheorem fst_sup (s t : nonempty_interval α) : («expr ⊔ » s t).fst = «expr ⊓ » s.fst t.fst :=\n  rfl\n#align fst_sup fst_sup\n\n",
+ "fst_dual":
+ "@[simp]\ntheorem fst_dual (s : nonempty_interval α) : s.dual.fst = toDual s.snd :=\n  rfl\n#align fst_dual fst_dual\n\n",
+ "forall":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n@[protected]\ntheorem forall {p : interval α → Prop} : (∀ s, p s) ↔ p («expr⊥») ∧ ∀ s : nonempty_interval α, p s :=\n  option.forall\n#align forall forall\n\n",
+ "exists":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n@[protected]\ntheorem exists {p : interval α → Prop} : (∃ s, p s) ↔ p («expr⊥») ∨ ∃ s : nonempty_interval α, p s :=\n  option.exists\n#align exists exists\n\n",
+ "dual_top":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n@[simp]\ntheorem dual_top : («expr⊤» : interval α).dual = «expr⊤» :=\n  rfl\n#align dual_top dual_top\n\n",
+ "dual_pure":
+ "@[simp]\ntheorem dual_pure (a : α) : (pure a).dual = pure (toDual a) :=\n  rfl\n#align dual_pure dual_pure\n\n",
+ "dual_map₂":
+ "@[simp]\ntheorem dual_map₂ (f : α → β → γ) (h₀ h₁ s t) :\n    (map₂ f h₀ h₁ s t).dual =\n      map₂ (fun a b => to_dual <| f (ofDual a) <| ofDual b) (fun _ => (h₀ _).dual) (fun _ => (h₁ _).dual) s.dual\n        t.dual :=\n  rfl\n#align dual_map₂ dual_map₂\n\n",
+ "dual_map":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →o » -/\n@[simp]\ntheorem dual_map (f : «expr →o » α β) (s : interval α) : (s.map f).dual = s.dual.map f.dual :=\n  by\n  cases s\n  · rfl\n  · exact WithBot.map_comm rfl _\n#align dual_map dual_map\n\n",
+ "dual_bot":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n@[simp]\ntheorem dual_bot : («expr⊥» : interval α).dual = «expr⊥» :=\n  rfl\n#align dual_bot dual_bot\n\n",
+ "disjoint_coe":
+ "@[simp, norm_cast]\ntheorem disjoint_coe (s t : interval α) : Disjoint (s : set α) t ↔ Disjoint s t := by\n  classical\n    rw [disjoint_iff_inf_le, disjoint_iff_inf_le, le_eq_subset, ← coe_subset_coe, coe_inf]\n    rfl\n#align disjoint_coe disjoint_coe\n\n",
+ "coe_top_interval":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n@[simp, norm_cast]\ntheorem coe_top_interval [BoundedOrder α] : ((«expr⊤» : nonempty_interval α) : interval α) = «expr⊤» :=\n  rfl\n#align coe_top_interval coe_top_interval\n\n",
+ "coe_top":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n@[simp, norm_cast]\ntheorem coe_top [BoundedOrder α] : ((«expr⊤» : interval α) : set α) = univ :=\n  Icc_bot_top\n#align coe_top coe_top\n\n",
+ "coe_sup_interval":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊔ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊔ » -/\n@[simp, norm_cast]\ntheorem coe_sup_interval [Lattice α] (s t : nonempty_interval α) : (↑(«expr ⊔ » s t) : interval α) = «expr ⊔ » s t :=\n  rfl\n#align coe_sup_interval coe_sup_interval\n\n",
+ "coe_subset_coe":
+ "@[simp, norm_cast]\ntheorem coe_subset_coe : (s : set α) ⊆ t ↔ s ≤ t :=\n  (@coe_hom α _).le_iff_le\n#align coe_subset_coe coe_subset_coe\n\n",
+ "coe_ssubset_coe":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊂ » -/\n@[simp, norm_cast]\ntheorem coe_ssubset_coe : «expr ⊂ » (s : set α) t ↔ s < t :=\n  (@coe_hom α _).lt_iff_lt\n#align coe_ssubset_coe coe_ssubset_coe\n\n",
+ "coe_pure_interval":
+ "@[simp, norm_cast]\ntheorem coe_pure_interval (a : α) : (pure a : interval α) = interval.pure a :=\n  rfl\n#align coe_pure_interval coe_pure_interval\n\n",
+ "coe_pure":
+ "@[simp, norm_cast]\ntheorem coe_pure (a : α) : (pure a : set α) = {a} :=\n  Icc_self _\n#align coe_pure coe_pure\n\n",
+ "coe_nonempty":
+ "@[simp]\ntheorem coe_nonempty (s : nonempty_interval α) : (s : set α).nonempty :=\n  nonempty_Icc.2 s.fst_le_snd\n#align coe_nonempty coe_nonempty\n\n",
+ "coe_injective":
+ "theorem coe_injective : injective (coe : nonempty_interval α → interval α) :=\n  WithBot.coe_injective\n#align coe_injective coe_injective\n\n",
+ "coe_inj":
+ "@[simp, norm_cast]\ntheorem coe_inj {s t : nonempty_interval α} : (s : interval α) = t ↔ s = t :=\n  WithBot.coe_inj\n#align coe_inj coe_inj\n\n",
+ "coe_infi₂":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⨅ , » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⨅ , » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⋂ , » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⋂ , » -/\n@[simp, norm_cast]\ntheorem coe_infi₂ (f : ∀ i, κ i → interval α) :\n    ↑(«expr⨅ , » \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⨅ , »\" (f i j)) =\n      «expr⋂ , » \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⋂ , »\" (f i j : set α) :=\n  by simp_rw [coe_infi]\n#align coe_infi₂ coe_infi₂\n\n",
+ "coe_infi":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⨅ , » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⨅ , » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⋂ , » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⋂ , » -/\n@[simp, norm_cast]\ntheorem coe_infi (f : ι → interval α) :\n    ↑(«expr⨅ , » \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⨅ , »\" (f i)) =\n      «expr⋂ , » \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⋂ , »\" (f i : set α) :=\n  by simp [infᵢ]\n#align coe_infi coe_infi\n\n",
+ "coe_inf":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊓ » -/\n@[simp, norm_cast]\ntheorem coe_inf (s t : interval α) : (↑(«expr ⊓ » s t) : set α) = s ∩ t :=\n  by\n  cases s\n  · rw [WithBot.none_eq_bot, bot_inf_eq]\n    exact (empty_inter _).symm\n  cases t\n  · rw [WithBot.none_eq_bot, inf_bot_eq]\n    exact (inter_empty _).symm\n  refine' (_ : coe (dite _ _ _) = _).trans Icc_inter_Icc.symm\n  split_ifs\n  · rfl\n  ·\n    exact\n      (Icc_eq_empty fun H =>\n          h ⟨le_sup_left.trans <| H.trans inf_le_right, le_sup_right.trans <| H.trans inf_le_left⟩).symm\n#align coe_inf coe_inf\n\n",
+ "coe_eq_pure":
+ "@[simp, norm_cast]\ntheorem coe_eq_pure : (s : interval α) = interval.pure a ↔ s = pure a := by rw [← interval.coe_inj, coe_pure_interval]\n#align coe_eq_pure coe_eq_pure\n\n",
+ "coe_dual":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵈ» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\n@[simp, norm_cast]\ntheorem coe_dual (s : interval α) : (s.dual : set («expr ᵒᵈ» α)) = «expr ⁻¹' » of_dual s :=\n  by\n  cases s\n  · rfl\n  exact s.coe_dual\n#align coe_dual coe_dual\n\n",
+ "coe_coe_hom":
+ "@[simp]\ntheorem coe_coe_hom : (coe_hom : nonempty_interval α → set α) = coe :=\n  rfl\n#align coe_coe_hom coe_coe_hom\n\n",
+ "coe_coe":
+ "@[simp, norm_cast]\ntheorem coe_coe (s : nonempty_interval α) : ((s : interval α) : set α) = s :=\n  rfl\n#align coe_coe coe_coe\n\n",
+ "coe_bot":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n@[simp, norm_cast]\ntheorem coe_bot : ((«expr⊥» : interval α) : set α) = ∅ :=\n  rfl\n#align coe_bot coe_bot\n\n",
+ "coe_Inf":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⋂ , » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⋂ , » -/\n@[simp, norm_cast]\ntheorem coe_Inf (S : set (interval α)) :\n    ↑(infₛ S) =\n      «expr⋂ , » \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⋂ , »\" (s : set α) :=\n  by\n  change coe (dite _ _ _) = _\n  split_ifs\n  · ext\n    simp [WithBot.some_eq_coe, interval.forall, h.1, ← forall_and, ← nonempty_interval.mem_def]\n  simp_rw [not_and_or, not_not] at h\n  cases h\n  · refine' (eq_empty_of_subset_empty _).symm\n    exact Inter₂_subset_of_subset _ h subset.rfl\n  · refine' (not_nonempty_iff_eq_empty.1 _).symm\n    rintro ⟨x, hx⟩\n    rw [mem_Inter₂] at hx\n    exact h fun s ha t hb => (hx _ ha).1.trans (hx _ hb).2\n#align coe_Inf coe_Inf\n\n",
+ "bot_ne_pure":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n@[simp]\ntheorem bot_ne_pure {a : α} : «expr⊥» ≠ pure a :=\n  WithBot.bot_ne_coe\n#align bot_ne_pure bot_ne_pure\n\n"}

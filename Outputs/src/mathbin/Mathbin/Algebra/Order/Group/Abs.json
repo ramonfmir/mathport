@@ -1,0 +1,128 @@
+{"sub_lt_of_abs_sub_lt_right":
+ "#print sub_lt_of_abs_sub_lt_right /-\ntheorem sub_lt_of_abs_sub_lt_right (h : |a - b| < c) : a - c < b :=\n  sub_lt_of_abs_sub_lt_left (abs_sub_comm a b ▸ h)\n#align sub_lt_of_abs_sub_lt_right sub_lt_of_abs_sub_lt_right\n-/\n\n",
+ "sub_lt_of_abs_sub_lt_left":
+ "#print sub_lt_of_abs_sub_lt_left /-\ntheorem sub_lt_of_abs_sub_lt_left (h : |a - b| < c) : b - c < a :=\n  sub_lt_comm.1 <| (abs_sub_lt_iff.1 h).2\n#align sub_lt_of_abs_sub_lt_left sub_lt_of_abs_sub_lt_left\n-/\n\n",
+ "sub_le_of_abs_sub_le_right":
+ "#print sub_le_of_abs_sub_le_right /-\ntheorem sub_le_of_abs_sub_le_right (h : |a - b| ≤ c) : a - c ≤ b :=\n  sub_le_of_abs_sub_le_left (abs_sub_comm a b ▸ h)\n#align sub_le_of_abs_sub_le_right sub_le_of_abs_sub_le_right\n-/\n\n",
+ "sub_le_of_abs_sub_le_left":
+ "#print sub_le_of_abs_sub_le_left /-\ntheorem sub_le_of_abs_sub_le_left (h : |a - b| ≤ c) : b - c ≤ a :=\n  sub_le_comm.1 <| (abs_sub_le_iff.1 h).2\n#align sub_le_of_abs_sub_le_left sub_le_of_abs_sub_le_left\n-/\n\n",
+ "neg_lt_of_abs_lt":
+ "#print neg_lt_of_abs_lt /-\ntheorem neg_lt_of_abs_lt (h : |a| < b) : -b < a :=\n  (abs_lt.mp h).1\n#align neg_lt_of_abs_lt neg_lt_of_abs_lt\n-/\n\n",
+ "neg_le_of_abs_le":
+ "#print neg_le_of_abs_le /-\ntheorem neg_le_of_abs_le (h : |a| ≤ b) : -b ≤ a :=\n  (abs_le.mp h).1\n#align neg_le_of_abs_le neg_le_of_abs_le\n-/\n\n",
+ "neg_le_abs_self":
+ "#print neg_le_abs_self /-\ntheorem neg_le_abs_self (a : α) : -a ≤ |a| :=\n  le_max_right _ _\n#align neg_le_abs_self neg_le_abs_self\n-/\n\n",
+ "neg_abs_le_self":
+ "#print neg_abs_le_self /-\ntheorem neg_abs_le_self (a : α) : -|a| ≤ a :=\n  by\n  cases' le_total 0 a with h h\n  ·\n    calc\n      -|a| = -a := congr_arg has_neg.neg (abs_of_nonneg h)\n      _ ≤ 0 := neg_nonpos.mpr h\n      _ ≤ a := h\n      \n  ·\n    calc\n      -|a| = - -a := congr_arg has_neg.neg (abs_of_nonpos h)\n      _ ≤ a := (neg_neg a).le\n      \n#align neg_abs_le_self neg_abs_le_self\n-/\n\n",
+ "neg_abs_le_neg":
+ "#print neg_abs_le_neg /-\ntheorem neg_abs_le_neg (a : α) : -|a| ≤ -a := by simpa using neg_abs_le_self (-a)\n#align neg_abs_le_neg neg_abs_le_neg\n-/\n\n",
+ "min_abs_abs_le_abs_min":
+ "#print min_abs_abs_le_abs_min /-\ntheorem min_abs_abs_le_abs_min : min (|a|) (|b|) ≤ |min a b| :=\n  (le_total a b).elim (fun h => (min_le_left _ _).trans_eq <| congr_arg _ (min_eq_left h).symm) fun h =>\n    (min_le_right _ _).trans_eq <| congr_arg _ (min_eq_right h).symm\n#align min_abs_abs_le_abs_min min_abs_abs_le_abs_min\n-/\n\n",
+ "min_abs_abs_le_abs_max":
+ "#print min_abs_abs_le_abs_max /-\ntheorem min_abs_abs_le_abs_max : min (|a|) (|b|) ≤ |max a b| :=\n  (le_total a b).elim (fun h => (min_le_right _ _).trans_eq <| congr_arg _ (max_eq_right h).symm) fun h =>\n    (min_le_left _ _).trans_eq <| congr_arg _ (max_eq_left h).symm\n#align min_abs_abs_le_abs_max min_abs_abs_le_abs_max\n-/\n\n",
+ "max_sub_min_eq_abs'":
+ "#print max_sub_min_eq_abs' /-\ntheorem max_sub_min_eq_abs' (a b : α) : max a b - min a b = |a - b| :=\n  by\n  cases' le_total a b with ab ba\n  · rw [max_eq_right ab, min_eq_left ab, abs_of_nonpos, neg_sub]\n    rwa [sub_nonpos]\n  · rw [max_eq_left ba, min_eq_right ba, abs_of_nonneg]\n    rwa [sub_nonneg]\n#align max_sub_min_eq_abs' max_sub_min_eq_abs'\n-/\n\n",
+ "max_sub_min_eq_abs":
+ "#print max_sub_min_eq_abs /-\ntheorem max_sub_min_eq_abs (a b : α) : max a b - min a b = |b - a| :=\n  by\n  rw [abs_sub_comm]\n  exact max_sub_min_eq_abs' _ _\n#align max_sub_min_eq_abs max_sub_min_eq_abs\n-/\n\n",
+ "lt_of_abs_lt":
+ "#print lt_of_abs_lt /-\ntheorem lt_of_abs_lt (h : |a| < b) : a < b :=\n  (abs_lt.mp h).2\n#align lt_of_abs_lt lt_of_abs_lt\n-/\n\n",
+ "lt_abs":
+ "#print lt_abs /-\ntheorem lt_abs : a < |b| ↔ a < b ∨ a < -b :=\n  lt_max_iff\n#align lt_abs lt_abs\n-/\n\n",
+ "le_of_abs_le":
+ "#print le_of_abs_le /-\ntheorem le_of_abs_le (h : |a| ≤ b) : a ≤ b :=\n  (abs_le.mp h).2\n#align le_of_abs_le le_of_abs_le\n-/\n\n",
+ "le_abs_self":
+ "#print le_abs_self /-\ntheorem le_abs_self (a : α) : a ≤ |a| :=\n  le_max_left _ _\n#align le_abs_self le_abs_self\n-/\n\n",
+ "le_abs'":
+ "#print le_abs' /-\ntheorem le_abs' : a ≤ |b| ↔ b ≤ -a ∨ a ≤ b := by rw [le_abs, or_comm, le_neg]\n#align le_abs' le_abs'\n-/\n\n",
+ "le_abs":
+ "#print le_abs /-\ntheorem le_abs : a ≤ |b| ↔ a ≤ b ∨ a ≤ -b :=\n  le_max_iff\n#align le_abs le_abs\n-/\n\n",
+ "eq_or_eq_neg_of_abs_eq":
+ "#print eq_or_eq_neg_of_abs_eq /-\ntheorem eq_or_eq_neg_of_abs_eq {a b : α} (h : |a| = b) : a = b ∨ a = -b := by\n  simpa only [← h, eq_comm, eq_neg_iff_eq_neg] using abs_choice a\n#align eq_or_eq_neg_of_abs_eq eq_or_eq_neg_of_abs_eq\n-/\n\n",
+ "eq_of_abs_sub_nonpos":
+ "#print eq_of_abs_sub_nonpos /-\ntheorem eq_of_abs_sub_nonpos (h : |a - b| ≤ 0) : a = b :=\n  eq_of_abs_sub_eq_zero (le_antisymm h (abs_nonneg (a - b)))\n#align eq_of_abs_sub_nonpos eq_of_abs_sub_nonpos\n-/\n\n",
+ "eq_of_abs_sub_eq_zero":
+ "#print eq_of_abs_sub_eq_zero /-\ntheorem eq_of_abs_sub_eq_zero {a b : α} (h : |a - b| = 0) : a = b :=\n  sub_eq_zero.1 <| abs_eq_zero.1 h\n#align eq_of_abs_sub_eq_zero eq_of_abs_sub_eq_zero\n-/\n\n",
+ "dist_bdd_within_interval":
+ "#print dist_bdd_within_interval /-\ntheorem dist_bdd_within_interval {a b lb ub : α} (hal : lb ≤ a) (hau : a ≤ ub) (hbl : lb ≤ b) (hbu : b ≤ ub) :\n    |a - b| ≤ ub - lb :=\n  abs_sub_le_iff.2 ⟨sub_le_sub hau hbl, sub_le_sub hbu hal⟩\n#align dist_bdd_within_interval dist_bdd_within_interval\n-/\n\n",
+ "apply_abs_le_mul_of_one_le'":
+ "#print apply_abs_le_mul_of_one_le' /-\n@[to_additive]\ntheorem apply_abs_le_mul_of_one_le' {β : Type _} [mul_one_class β] [preorder β] [covariant_class β β (· * ·) (· ≤ ·)]\n    [covariant_class β β (swap (· * ·)) (· ≤ ·)] {f : α → β} {a : α} (h₁ : 1 ≤ f a) (h₂ : 1 ≤ f (-a)) :\n    f (|a|) ≤ f a * f (-a) :=\n  (le_total a 0).by_cases (fun ha => (abs_of_nonpos ha).symm ▸ le_mul_of_one_le_left' h₁) fun ha =>\n    (abs_of_nonneg ha).symm ▸ le_mul_of_one_le_right' h₂\n#align apply_abs_le_mul_of_one_le' apply_abs_le_mul_of_one_le'\n-/\n\n",
+ "apply_abs_le_mul_of_one_le":
+ "#print apply_abs_le_mul_of_one_le /-\n@[to_additive]\ntheorem apply_abs_le_mul_of_one_le {β : Type _} [mul_one_class β] [preorder β] [covariant_class β β (· * ·) (· ≤ ·)]\n    [covariant_class β β (swap (· * ·)) (· ≤ ·)] {f : α → β} (h : ∀ x, 1 ≤ f x) (a : α) : f (|a|) ≤ f a * f (-a) :=\n  apply_abs_le_mul_of_one_le' (h _) (h _)\n#align apply_abs_le_mul_of_one_le apply_abs_le_mul_of_one_le\n-/\n\n",
+ "add_abs_nonneg":
+ "#print add_abs_nonneg /-\ntheorem add_abs_nonneg (a : α) : 0 ≤ a + |a| := by\n  rw [← add_right_neg a]\n  apply add_le_add_left\n  exact neg_le_abs_self a\n#align add_abs_nonneg add_abs_nonneg\n-/\n\n",
+ "abs_zero":
+ "#print abs_zero /-\n@[simp]\ntheorem abs_zero : |0| = (0 : α) :=\n  abs_of_nonneg le_rfl\n#align abs_zero abs_zero\n-/\n\n",
+ "abs_sub_lt_iff":
+ "#print abs_sub_lt_iff /-\ntheorem abs_sub_lt_iff : |a - b| < c ↔ a - b < c ∧ b - a < c := by\n  rw [abs_lt, neg_lt_sub_iff_lt_add', sub_lt_iff_lt_add', and_comm', sub_lt_iff_lt_add']\n#align abs_sub_lt_iff abs_sub_lt_iff\n-/\n\n",
+ "abs_sub_le_iff":
+ "#print abs_sub_le_iff /-\ntheorem abs_sub_le_iff : |a - b| ≤ c ↔ a - b ≤ c ∧ b - a ≤ c := by\n  rw [abs_le, neg_le_sub_iff_le_add, sub_le_iff_le_add', and_comm', sub_le_iff_le_add']\n#align abs_sub_le_iff abs_sub_le_iff\n-/\n\n",
+ "abs_sub_le":
+ "#print abs_sub_le /-\ntheorem abs_sub_le (a b c : α) : |a - c| ≤ |a - b| + |b - c| :=\n  calc\n    |a - c| = |a - b + (b - c)| := by rw [sub_add_sub_cancel]\n    _ ≤ |a - b| + |b - c| := abs_add _ _\n    \n#align abs_sub_le abs_sub_le\n-/\n\n",
+ "abs_sub_comm":
+ "#print abs_sub_comm /-\ntheorem abs_sub_comm (a b : α) : |a - b| = |b - a| :=\n  calc\n    |a - b| = |-(b - a)| := congr_arg _ (neg_sub b a).symm\n    _ = |b - a| := abs_neg (b - a)\n    \n#align abs_sub_comm abs_sub_comm\n-/\n\n",
+ "abs_sub_abs_le_abs_sub":
+ "#print abs_sub_abs_le_abs_sub /-\ntheorem abs_sub_abs_le_abs_sub (a b : α) : |a| - |b| ≤ |a - b| :=\n  sub_le_iff_le_add.2 <|\n    calc\n      |a| = |a - b + b| := by rw [sub_add_cancel]\n      _ ≤ |a - b| + |b| := abs_add _ _\n      \n#align abs_sub_abs_le_abs_sub abs_sub_abs_le_abs_sub\n-/\n\n",
+ "abs_sub":
+ "#print abs_sub /-\ntheorem abs_sub (a b : α) : |a - b| ≤ |a| + |b| :=\n  by\n  rw [sub_eq_add_neg, ← abs_neg b]\n  exact abs_add a _\n#align abs_sub abs_sub\n-/\n\n",
+ "abs_pos_of_pos":
+ "#print abs_pos_of_pos /-\ntheorem abs_pos_of_pos (h : 0 < a) : 0 < |a| :=\n  abs_pos.2 h.ne.symm\n#align abs_pos_of_pos abs_pos_of_pos\n-/\n\n",
+ "abs_pos_of_neg":
+ "#print abs_pos_of_neg /-\ntheorem abs_pos_of_neg (h : a < 0) : 0 < |a| :=\n  abs_pos.2 h.ne\n#align abs_pos_of_neg abs_pos_of_neg\n-/\n\n",
+ "abs_pos":
+ "#print abs_pos /-\n@[simp]\ntheorem abs_pos : 0 < |a| ↔ a ≠ 0 := by\n  rcases lt_trichotomy a 0 with (ha | rfl | ha)\n  · simp [abs_of_neg ha, neg_pos, ha.ne, ha]\n  · simp\n  · simp [abs_of_pos ha, ha, ha.ne.symm]\n#align abs_pos abs_pos\n-/\n\n",
+ "abs_of_pos":
+ "#print abs_of_pos /-\ntheorem abs_of_pos (h : 0 < a) : |a| = a :=\n  abs_of_nonneg h.le\n#align abs_of_pos abs_of_pos\n-/\n\n",
+ "abs_of_nonpos":
+ "#print abs_of_nonpos /-\ntheorem abs_of_nonpos (h : a ≤ 0) : |a| = -a :=\n  max_eq_right <| h.trans (neg_nonneg.2 h)\n#align abs_of_nonpos abs_of_nonpos\n-/\n\n",
+ "abs_of_nonneg":
+ "#print abs_of_nonneg /-\ntheorem abs_of_nonneg (h : 0 ≤ a) : |a| = a :=\n  max_eq_left <| (neg_nonpos.2 h).trans h\n#align abs_of_nonneg abs_of_nonneg\n-/\n\n",
+ "abs_of_neg":
+ "#print abs_of_neg /-\ntheorem abs_of_neg (h : a < 0) : |a| = -a :=\n  abs_of_nonpos h.le\n#align abs_of_neg abs_of_neg\n-/\n\n",
+ "abs_nonpos_iff":
+ "#print abs_nonpos_iff /-\n@[simp]\ntheorem abs_nonpos_iff {a : α} : |a| ≤ 0 ↔ a = 0 :=\n  (abs_nonneg a).le_iff_eq.trans abs_eq_zero\n#align abs_nonpos_iff abs_nonpos_iff\n-/\n\n",
+ "abs_nonneg":
+ "#print abs_nonneg /-\n@[simp]\ntheorem abs_nonneg (a : α) : 0 ≤ |a| :=\n  (le_total 0 a).elim (fun h => h.trans (le_abs_self a)) fun h => (neg_nonneg.2 h).trans <| neg_le_abs_self a\n#align abs_nonneg abs_nonneg\n-/\n\n",
+ "abs_neg":
+ "#print abs_neg /-\n@[simp]\ntheorem abs_neg (a : α) : |-a| = |a| := by rw [abs_eq_max_neg, max_comm, neg_neg, abs_eq_max_neg]\n#align abs_neg abs_neg\n-/\n\n",
+ "abs_min_le_max_abs_abs":
+ "#print abs_min_le_max_abs_abs /-\ntheorem abs_min_le_max_abs_abs : |min a b| ≤ max (|a|) (|b|) :=\n  (le_total a b).elim (fun h => (congr_arg _ <| min_eq_left h).trans_le <| le_max_left _ _) fun h =>\n    (congr_arg _ <| min_eq_right h).trans_le <| le_max_right _ _\n#align abs_min_le_max_abs_abs abs_min_le_max_abs_abs\n-/\n\n",
+ "abs_max_le_max_abs_abs":
+ "#print abs_max_le_max_abs_abs /-\ntheorem abs_max_le_max_abs_abs : |max a b| ≤ max (|a|) (|b|) :=\n  (le_total a b).elim (fun h => (congr_arg _ <| max_eq_right h).trans_le <| le_max_right _ _) fun h =>\n    (congr_arg _ <| max_eq_left h).trans_le <| le_max_left _ _\n#align abs_max_le_max_abs_abs abs_max_le_max_abs_abs\n-/\n\n",
+ "abs_lt":
+ "#print abs_lt /-\ntheorem abs_lt : |a| < b ↔ -b < a ∧ a < b :=\n  max_lt_iff.trans <| and_comm.trans <| by rw [neg_lt]\n#align abs_lt abs_lt\n-/\n\n",
+ "abs_le_max_abs_abs":
+ "#print abs_le_max_abs_abs /-\ntheorem abs_le_max_abs_abs (hab : a ≤ b) (hbc : b ≤ c) : |b| ≤ max (|a|) (|c|) :=\n  abs_le'.2 ⟨by simp [hbc.trans (le_abs_self c)], by simp [(neg_le_neg_iff.mpr hab).trans (neg_le_abs_self a)]⟩\n#align abs_le_max_abs_abs abs_le_max_abs_abs\n-/\n\n",
+ "abs_le_abs_of_nonpos":
+ "#print abs_le_abs_of_nonpos /-\ntheorem abs_le_abs_of_nonpos (ha : a ≤ 0) (hab : b ≤ a) : |a| ≤ |b| :=\n  by\n  rw [abs_of_nonpos ha, abs_of_nonpos (hab.trans ha)]\n  exact neg_le_neg_iff.mpr hab\n#align abs_le_abs_of_nonpos abs_le_abs_of_nonpos\n-/\n\n",
+ "abs_le_abs_of_nonneg":
+ "#print abs_le_abs_of_nonneg /-\ntheorem abs_le_abs_of_nonneg (ha : 0 ≤ a) (hab : a ≤ b) : |a| ≤ |b| := by\n  rwa [abs_of_nonneg ha, abs_of_nonneg (ha.trans hab)]\n#align abs_le_abs_of_nonneg abs_le_abs_of_nonneg\n-/\n\n",
+ "abs_le_abs":
+ "#print abs_le_abs /-\ntheorem abs_le_abs (h₀ : a ≤ b) (h₁ : -a ≤ b) : |a| ≤ |b| :=\n  (abs_le'.2 ⟨h₀, h₁⟩).trans (le_abs_self b)\n#align abs_le_abs abs_le_abs\n-/\n\n",
+ "abs_le'":
+ "#print abs_le' /-\ntheorem abs_le' : |a| ≤ b ↔ a ≤ b ∧ -a ≤ b :=\n  max_le_iff\n#align abs_le' abs_le'\n-/\n\n",
+ "abs_le":
+ "#print abs_le /-\ntheorem abs_le : |a| ≤ b ↔ -b ≤ a ∧ a ≤ b := by rw [abs_le', and_comm, neg_le]\n#align abs_le abs_le\n-/\n\n",
+ "abs_eq_zero":
+ "#print abs_eq_zero /-\n@[simp]\ntheorem abs_eq_zero : |a| = 0 ↔ a = 0 :=\n  decidable.not_iff_not.1 <| ne_comm.trans <| (abs_nonneg a).lt_iff_ne.symm.trans abs_pos\n#align abs_eq_zero abs_eq_zero\n-/\n\n",
+ "abs_eq_sup_inv":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊔ » -/\n#print abs_eq_sup_inv /-\n/-\nCopyright (c) 2016 Jeremy Avigad. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Jeremy Avigad, Leonardo de Moura, Mario Carneiro, Johannes Hölzl\n-/\n-- see Note [lower instance priority]\n@[to_additive]\ntheorem abs_eq_sup_inv [Inv α] [HasSup α] (a : α) : |a| = «expr ⊔ » a a⁻¹ :=\n  rfl\n#align abs_eq_sup_inv abs_eq_sup_inv\n-/\n\n",
+ "abs_eq_max_neg":
+ "#print abs_eq_max_neg /-\ntheorem abs_eq_max_neg : abs a = max a (-a) :=\n  rfl\n#align abs_eq_max_neg abs_eq_max_neg\n-/\n\n",
+ "abs_eq_abs":
+ "#print abs_eq_abs /-\ntheorem abs_eq_abs {a b : α} : |a| = |b| ↔ a = b ∨ a = -b :=\n  by\n  refine' ⟨fun h => _, fun h => _⟩\n  ·\n    obtain rfl | rfl := eq_or_eq_neg_of_abs_eq h <;>\n      simpa only [neg_eq_iff_neg_eq, neg_inj, or_comm, @eq_comm _ (-b)] using abs_choice b\n  · cases h <;> simp only [h, abs_neg]\n#align abs_eq_abs abs_eq_abs\n-/\n\n",
+ "abs_eq":
+ "#print abs_eq /-\ntheorem abs_eq (hb : 0 ≤ b) : |a| = b ↔ a = b ∨ a = -b :=\n  by\n  refine' ⟨eq_or_eq_neg_of_abs_eq, _⟩\n  rintro (rfl | rfl) <;> simp only [abs_neg, abs_of_nonneg hb]\n#align abs_eq abs_eq\n-/\n\n",
+ "abs_choice":
+ "#print abs_choice /-\ntheorem abs_choice (x : α) : |x| = x ∨ |x| = -x :=\n  max_choice _ _\n#align abs_choice abs_choice\n-/\n\n",
+ "abs_by_cases":
+ "#print abs_by_cases /-\ntheorem abs_by_cases (P : α → Prop) {a : α} (h1 : P a) (h2 : P (-a)) : P (|a|) :=\n  sup_ind _ _ h1 h2\n#align abs_by_cases abs_by_cases\n-/\n\n",
+ "abs_add_three":
+ "#print abs_add_three /-\ntheorem abs_add_three (a b c : α) : |a + b + c| ≤ |a| + |b| + |c| :=\n  (abs_add _ _).trans (add_le_add_right (abs_add _ _) _)\n#align abs_add_three abs_add_three\n-/\n\n",
+ "abs_add'":
+ "#print abs_add' /-\ntheorem abs_add' (a b : α) : |a| ≤ |b| + |b + a| := by simpa using abs_add (-b) (b + a)\n#align abs_add' abs_add'\n-/\n\n",
+ "abs_add":
+ "#print abs_add /-\n/-- The **triangle inequality** in `linear_ordered_add_comm_group`s.\n-/\ntheorem abs_add (a b : α) : |a + b| ≤ |a| + |b| :=\n  abs_le.2\n    ⟨(neg_add (|a|) (|b|)).symm ▸ add_le_add (neg_le.2 <| neg_le_abs_self _) (neg_le.2 <| neg_le_abs_self _),\n      add_le_add (le_abs_self _) (le_abs_self _)⟩\n#align abs_add abs_add\n-/\n\n",
+ "abs_abs_sub_abs_le_abs_sub":
+ "#print abs_abs_sub_abs_le_abs_sub /-\ntheorem abs_abs_sub_abs_le_abs_sub (a b : α) : ||a| - |b|| ≤ |a - b| :=\n  abs_sub_le_iff.2 ⟨abs_sub_abs_le_abs_sub _ _, by rw [abs_sub_comm] <;> apply abs_sub_abs_le_abs_sub⟩\n#align abs_abs_sub_abs_le_abs_sub abs_abs_sub_abs_le_abs_sub\n-/\n\n",
+ "abs_abs":
+ "#print abs_abs /-\n@[simp]\ntheorem abs_abs (a : α) : ||a|| = |a| :=\n  abs_of_nonneg <| abs_nonneg a\n#align abs_abs abs_abs\n-/\n\n"}

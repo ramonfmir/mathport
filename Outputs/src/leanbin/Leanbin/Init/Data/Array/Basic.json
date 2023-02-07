@@ -1,0 +1,26 @@
+{"write_eq_write'":
+ "theorem write_eq_write' (a : Array' n α) {i : nat} (h : i < n) (v : α) : write a ⟨i, h⟩ v = write' a i v := by\n  simp [write', h]\n#align write_eq_write' write_eq_write'\n\n",
+ "read_write_of_ne":
+ "@[simp]\ntheorem read_write_of_ne (a : Array' n α) {i j : fin n} (v : α) : i ≠ j → read (write a i v) j = read a j :=\n  d_array.read_write_of_ne a v\n#align read_write_of_ne read_write_of_ne\n\n",
+ "read_write":
+ "@[simp]\ntheorem read_write (a : Array' n α) (i : fin n) (v : α) : read (write a i v) i = v :=\n  d_array.read_write a i v\n#align read_write read_write\n\n",
+ "read_mem":
+ "theorem read_mem (a : Array' n α) (i) : read a i ∈ a :=\n  exists.intro i rfl\n#align read_mem read_mem\n\n",
+ "read_eq_read'":
+ "theorem read_eq_read' [inhabited α] (a : Array' n α) {i : nat} (h : i < n) : read a ⟨i, h⟩ = read' a i := by\n  simp [read', h]\n#align read_eq_read' read_eq_read'\n\n",
+ "push_back_idx":
+ "theorem push_back_idx {j n} (h₁ : j < n + 1) (h₂ : j ≠ n) : j < n :=\n  nat.lt_of_le_and_ne (nat.le_of_lt_succ h₁) h₂\n#align push_back_idx push_back_idx\n\n",
+ "pop_back_idx":
+ "theorem pop_back_idx {j n} (h : j < n) : j < n + 1 :=\n  nat.lt.step h\n#align pop_back_idx pop_back_idx\n\n",
+ "of_beq_eq_tt":
+ "theorem of_beq_eq_tt [∀ i, decidable_eq (α i)] {a b : d_array n α} : d_array.beq a b = tt → a = b :=\n  by\n  unfold d_array.beq\n  intro h\n  have : ∀ (j : nat) (h : j < n), a.read ⟨j, h⟩ = b.read ⟨j, h⟩ := of_beq_aux_eq_tt n (le_refl _) h\n  apply d_array.ext' this\n#align of_beq_eq_tt of_beq_eq_tt\n\n",
+ "of_beq_eq_ff":
+ "theorem of_beq_eq_ff [∀ i, decidable_eq (α i)] {a b : d_array n α} : d_array.beq a b = ff → a ≠ b :=\n  by\n  unfold d_array.beq\n  intro h hne\n  have : ∃ (j : nat)(h' : j < n), a.read ⟨j, h'⟩ ≠ b.read ⟨j, h'⟩ := of_beq_aux_eq_ff n (le_refl _) h\n  cases' this with j this\n  cases' this with h' this\n  subst hne\n  contradiction\n#align of_beq_eq_ff of_beq_eq_ff\n\n",
+ "of_beq_aux_eq_tt":
+ "theorem of_beq_aux_eq_tt [∀ i, decidable_eq (α i)] {a b : d_array n α} :\n    ∀ (i : nat) (h : i ≤ n),\n      d_array.beq_aux a b i h = tt →\n        ∀ (j : nat) (h' : j < i), a.read ⟨j, lt_of_lt_of_le h' h⟩ = b.read ⟨j, lt_of_lt_of_le h' h⟩\n  | 0, h₁, h₂, j, h₃ => absurd h₃ (nat.not_lt_zero _)\n  | i + 1, h₁, h₂, j, h₃ =>\n    by\n    have h₂' : read a ⟨i, h₁⟩ = read b ⟨i, h₁⟩ ∧ d_array.beq_aux a b i _ = tt :=\n      by\n      simp [d_array.beq_aux] at h₂\n      assumption\n    have h₁' : i ≤ n := le_of_lt h₁\n    have ih : ∀ (j : nat) (h' : j < i), a.read ⟨j, lt_of_lt_of_le h' h₁'⟩ = b.read ⟨j, lt_of_lt_of_le h' h₁'⟩ :=\n      of_beq_aux_eq_tt i h₁' h₂'.2\n    by_cases hji : j = i\n    · subst hji\n      exact h₂'.1\n    · have j_lt_i : j < i := lt_of_le_of_ne (nat.le_of_lt_succ h₃) hji\n      exact ih j j_lt_i\n#align of_beq_aux_eq_tt of_beq_aux_eq_tt\n\n",
+ "of_beq_aux_eq_ff":
+ "theorem of_beq_aux_eq_ff [∀ i, decidable_eq (α i)] {a b : d_array n α} :\n    ∀ (i : nat) (h : i ≤ n),\n      d_array.beq_aux a b i h = ff →\n        ∃ (j : nat)(h' : j < i), a.read ⟨j, lt_of_lt_of_le h' h⟩ ≠ b.read ⟨j, lt_of_lt_of_le h' h⟩\n  | 0, h₁, h₂ => by simp [d_array.beq_aux] at h₂; contradiction\n  | i + 1, h₁, h₂ =>\n    by\n    have h₂' : read a ⟨i, h₁⟩ ≠ read b ⟨i, h₁⟩ ∨ d_array.beq_aux a b i _ = ff :=\n      by\n      simp [d_array.beq_aux] at h₂\n      assumption\n    cases' h₂' with h h\n    · exists i\n      exists nat.lt_succ_self _\n      exact h\n    · have h₁' : i ≤ n := le_of_lt h₁\n      have ih : ∃ (j : nat)(h' : j < i), a.read ⟨j, lt_of_lt_of_le h' h₁'⟩ ≠ b.read ⟨j, lt_of_lt_of_le h' h₁'⟩ :=\n        of_beq_aux_eq_ff i h₁' h\n      cases' ih with j ih\n      cases' ih with h' ih\n      exists j\n      exists nat.lt_succ_of_lt h'\n      exact ih\n#align of_beq_aux_eq_ff of_beq_aux_eq_ff\n\n",
+ "ext'":
+ "protected theorem ext' {a b : Array' n α} (h : ∀ (i : nat) (h : i < n), read a ⟨i, h⟩ = read b ⟨i, h⟩) : a = b :=\n  d_array.ext' h\n#align ext' ext'\n\n",
+ "ext":
+ "protected theorem ext {a b : Array' n α} (h : ∀ i, read a i = read b i) : a = b :=\n  d_array.ext h\n#align ext ext\n\n"}

@@ -1,0 +1,46 @@
+{"zsmul_pow_two_pow_half":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\ntheorem zsmul_pow_two_pow_half (m : ℤ) (n k : ℕ) :\n    «expr • » (m * 2 ^ n) (pow_half (n + k)) = «expr • » m (pow_half k) :=\n  by\n  rw [mul_zsmul]\n  congr\n  norm_cast\n  exact nsmul_pow_two_pow_half' n k\n#align zsmul_pow_two_pow_half zsmul_pow_two_pow_half\n\n",
+ "zero_le_pow_half":
+ "theorem zero_le_pow_half (n : ℕ) : 0 ≤ pow_half n :=\n  (pow_half_pos n).le\n#align zero_le_pow_half zero_le_pow_half\n\n",
+ "pow_half_zero_right_moves":
+ "theorem pow_half_zero_right_moves : (pow_half 0).right_moves = PEmpty :=\n  rfl\n#align pow_half_zero_right_moves pow_half_zero_right_moves\n\n",
+ "pow_half_zero":
+ "@[simp]\ntheorem pow_half_zero : pow_half 0 = 1 :=\n  rfl\n#align pow_half_zero pow_half_zero\n\n",
+ "pow_half_succ_right_moves":
+ "theorem pow_half_succ_right_moves (n) : (pow_half (n + 1)).right_moves = PUnit :=\n  rfl\n#align pow_half_succ_right_moves pow_half_succ_right_moves\n\n",
+ "pow_half_succ_move_right":
+ "@[simp]\ntheorem pow_half_succ_move_right (n i) : (pow_half (n + 1)).move_right i = pow_half n :=\n  rfl\n#align pow_half_succ_move_right pow_half_succ_move_right\n\n",
+ "pow_half_succ_lt_pow_half":
+ "theorem pow_half_succ_lt_pow_half (n : ℕ) : pow_half (n + 1) < pow_half n :=\n  (numeric_pow_half (n + 1)).lt_move_right default\n#align pow_half_succ_lt_pow_half pow_half_succ_lt_pow_half\n\n",
+ "pow_half_succ_lt_one":
+ "theorem pow_half_succ_lt_one (n : ℕ) : pow_half (n + 1) < 1 :=\n  (pow_half_succ_lt_pow_half n).trans_le <| pow_half_le_one n\n#align pow_half_succ_lt_one pow_half_succ_lt_one\n\n",
+ "pow_half_succ_le_pow_half":
+ "theorem pow_half_succ_le_pow_half (n : ℕ) : pow_half (n + 1) ≤ pow_half n :=\n  (pow_half_succ_lt_pow_half n).le\n#align pow_half_succ_le_pow_half pow_half_succ_le_pow_half\n\n",
+ "pow_half_pos":
+ "theorem pow_half_pos (n : ℕ) : 0 < pow_half n :=\n  by\n  rw [← lf_iff_lt numeric_zero (numeric_pow_half n), zero_lf_le]\n  simp\n#align pow_half_pos pow_half_pos\n\n",
+ "pow_half_move_left":
+ "@[simp]\ntheorem pow_half_move_left (n i) : (pow_half n).move_left i = 0 := by cases n <;> cases i <;> rfl\n#align pow_half_move_left pow_half_move_left\n\n",
+ "pow_half_left_moves":
+ "theorem pow_half_left_moves (n) : (pow_half n).left_moves = PUnit := by cases n <;> rfl\n#align pow_half_left_moves pow_half_left_moves\n\n",
+ "pow_half_le_one":
+ "theorem pow_half_le_one (n : ℕ) : pow_half n ≤ 1 :=\n  by\n  induction' n with n hn\n  · exact le_rfl\n  · exact (pow_half_succ_le_pow_half n).trans hn\n#align pow_half_le_one pow_half_le_one\n\n",
+ "numeric_pow_half":
+ "/-- For all natural numbers `n`, the pre-games `pow_half n` are numeric. -/\ntheorem numeric_pow_half (n) : (pow_half n).numeric :=\n  by\n  induction' n with n hn\n  · exact numeric_one\n  · constructor\n    · simpa using hn.move_left_lt default\n    · exact ⟨fun _ => numeric_zero, fun _ => hn⟩\n#align numeric_pow_half numeric_pow_half\n\n",
+ "nsmul_pow_two_pow_half'":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n@[simp]\ntheorem nsmul_pow_two_pow_half' (n k : ℕ) : «expr • » (2 ^ n) (pow_half (n + k)) = pow_half k :=\n  by\n  induction' k with k hk\n  · simp only [add_zero, surreal.nsmul_pow_two_pow_half, Nat.zero_eq, eq_self_iff_true, surreal.pow_half_zero]\n  · rw [← double_pow_half_succ_eq_pow_half (n + k), ← double_pow_half_succ_eq_pow_half k, smul_algebra_smul_comm] at hk\n    rwa [← zsmul_eq_zsmul_iff' two_ne_zero]\n#align nsmul_pow_two_pow_half' nsmul_pow_two_pow_half'\n\n",
+ "nsmul_pow_two_pow_half":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n@[simp]\ntheorem nsmul_pow_two_pow_half (n : ℕ) : «expr • » (2 ^ n) (pow_half n) = 1 :=\n  by\n  induction' n with n hn\n  · simp only [nsmul_one, pow_half_zero, Nat.cast_one, pow_zero]\n  · rw [← hn, ← double_pow_half_succ_eq_pow_half n, smul_smul (2 ^ n) 2 (pow_half n.succ), mul_comm, pow_succ]\n#align nsmul_pow_two_pow_half nsmul_pow_two_pow_half\n\n",
+ "half_add_half_equiv_one":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `pgame.equiv -/\ntheorem half_add_half_equiv_one : pgame.equiv (pow_half 1 + pow_half 1) 1 :=\n  add_pow_half_succ_self_eq_pow_half 0\n#align half_add_half_equiv_one half_add_half_equiv_one\n\n",
+ "dyadic_map_apply_pow":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n@[simp]\ntheorem dyadic_map_apply_pow (m : ℤ) (n : ℕ) :\n    dyadic_map (is_localization.mk' (localization (submonoid.powers 2)) m (submonoid.pow 2 n)) =\n      «expr • » m (pow_half n) :=\n  by rw [dyadic_map_apply, @submonoid.log_pow_int_eq_self 2 one_lt_two]\n#align dyadic_map_apply_pow dyadic_map_apply_pow\n\n",
+ "dyadic_map_apply":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n@[simp]\ntheorem dyadic_map_apply (m : ℤ) (p : submonoid.powers (2 : ℤ)) :\n    dyadic_map (is_localization.mk' (localization (submonoid.powers 2)) m p) =\n      «expr • » m (pow_half (submonoid.log p)) :=\n  by\n  rw [← localization.mk_eq_mk']\n  rfl\n#align dyadic_map_apply dyadic_map_apply\n\n",
+ "dyadic_aux":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\ntheorem dyadic_aux {m₁ m₂ : ℤ} {y₁ y₂ : ℕ} (h₂ : m₁ * 2 ^ y₁ = m₂ * 2 ^ y₂) :\n    «expr • » m₁ (pow_half y₂) = «expr • » m₂ (pow_half y₁) :=\n  by\n  revert m₁ m₂\n  wlog h : y₁ ≤ y₂\n  intro m₁ m₂ h₂\n  obtain ⟨c, rfl⟩ := le_iff_exists_add.mp h\n  rw [add_comm, pow_add, ← mul_assoc, mul_eq_mul_right_iff] at h₂\n  cases h₂\n  · rw [h₂, add_comm, zsmul_pow_two_pow_half m₂ c y₁]\n  · have := Nat.one_le_pow y₁ 2 Nat.succ_pos'\n    norm_cast  at h₂\n    linarith\n#align dyadic_aux dyadic_aux\n\n",
+ "double_pow_half_succ_eq_pow_half":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n@[simp]\ntheorem double_pow_half_succ_eq_pow_half (n : ℕ) : «expr • » 2 (pow_half n.succ) = pow_half n :=\n  by\n  rw [two_nsmul]\n  exact quotient.sound (pgame.add_pow_half_succ_self_eq_pow_half n)\n#align double_pow_half_succ_eq_pow_half double_pow_half_succ_eq_pow_half\n\n",
+ "birthday_half":
+ "@[simp]\ntheorem birthday_half : birthday (pow_half 1) = 2 :=\n  by\n  rw [birthday_def]\n  dsimp\n  simpa using Order.le_succ (1 : ordinal)\n#align birthday_half birthday_half\n\n",
+ "add_pow_half_succ_self_eq_pow_half":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `pgame.equiv -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `pgame.equiv -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `pgame.equiv -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `pgame.equiv -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `pgame.equiv -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `pgame.equiv -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `pgame.equiv -/\ntheorem add_pow_half_succ_self_eq_pow_half (n) : pgame.equiv (pow_half (n + 1) + pow_half (n + 1)) (pow_half n) :=\n  by\n  induction' n using nat.strong_induction_on with n hn\n  · constructor <;> rw [le_iff_forall_lf] <;> constructor\n    · rintro (⟨⟨⟩⟩ | ⟨⟨⟩⟩) <;> apply lf_of_lt\n      ·\n        calc\n          pgame.equiv (0 + pow_half n.succ) (pow_half n.succ) := zero_add_equiv _\n          _ < pow_half n := pow_half_succ_lt_pow_half n\n          \n      ·\n        calc\n          pgame.equiv (pow_half n.succ + 0) (pow_half n.succ) := add_zero_equiv _\n          _ < pow_half n := pow_half_succ_lt_pow_half n\n          \n    · cases n\n      · rintro ⟨⟩\n      rintro ⟨⟩\n      apply lf_of_move_right_le\n      swap\n      exact sum.inl default\n      calc\n        pow_half n.succ + pow_half (n.succ + 1) ≤ pow_half n.succ + pow_half n.succ :=\n          add_le_add_left (pow_half_succ_le_pow_half _) _\n        pgame.equiv _ (pow_half n) := hn _ (nat.lt_succ_self n)\n        \n    · simp only [pow_half_move_left, forall_const]\n      apply lf_of_lt\n      calc\n        pgame.equiv 0 (0 + 0) := (add_zero_equiv 0).symm\n        _ ≤ pow_half n.succ + 0 := add_le_add_right (zero_le_pow_half _) _\n        _ < pow_half n.succ + pow_half n.succ := add_lt_add_left (pow_half_pos _) _\n        \n    · rintro (⟨⟨⟩⟩ | ⟨⟨⟩⟩) <;> apply lf_of_lt\n      ·\n        calc\n          pgame.equiv (pow_half n) (pow_half n + 0) := (add_zero_equiv _).symm\n          _ < pow_half n + pow_half n.succ := add_lt_add_left (pow_half_pos _) _\n          \n      ·\n        calc\n          pgame.equiv (pow_half n) (0 + pow_half n) := (zero_add_equiv _).symm\n          _ < pow_half n.succ + pow_half n := add_lt_add_right (pow_half_pos _) _\n          \n#align add_pow_half_succ_self_eq_pow_half add_pow_half_succ_self_eq_pow_half\n\n"}

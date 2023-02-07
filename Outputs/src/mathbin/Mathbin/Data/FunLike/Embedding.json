@@ -1,0 +1,6 @@
+{"injective":
+ "/-\nCopyright (c) 2021 Anne Baanen. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Anne Baanen\n-/\nprotected theorem injective (f : F) : function.injective f :=\n  injective' f\n#align injective injective\n\n",
+ "comp_injective":
+ "@[simp]\ntheorem comp_injective {F : Sort _} [embedding_like F β γ] (f : α → β) (e : F) :\n    function.injective (e ∘ f) ↔ function.injective f :=\n  (embedding_like.injective e).of_comp_iff f\n#align comp_injective comp_injective\n\n",
+ "apply_eq_iff_eq":
+ "@[simp]\ntheorem apply_eq_iff_eq (f : F) {x y : α} : f x = f y ↔ x = y :=\n  (embedding_like.injective f).eq_iff\n#align apply_eq_iff_eq apply_eq_iff_eq\n\n"}

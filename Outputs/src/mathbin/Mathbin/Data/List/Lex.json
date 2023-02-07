@@ -1,0 +1,16 @@
+{"to_ne":
+ "theorem to_ne : ∀ {l₁ l₂ : list α}, Lex (· ≠ ·) l₁ l₂ → l₁ ≠ l₂\n  | _, _, cons h, e => to_ne h (list.cons.inj e).2\n  | _, _, Rel r, e => r (list.cons.inj e).1\n#align to_ne to_ne\n\n",
+ "not_nil_right":
+ "@[simp]\ntheorem not_nil_right (r : α → α → Prop) (l : list α) : ¬Lex r l [] :=\n  fun.\n#align not_nil_right not_nil_right\n\n",
+ "nil_lt_cons":
+ "--Note: this overrides an instance in core lean\ntheorem nil_lt_cons [LT α] (a : α) (l : list α) : [] < a :: l :=\n  lex.nil\n#align nil_lt_cons nil_lt_cons\n\n",
+ "ne_iff":
+ "theorem ne_iff {l₁ l₂ : list α} (H : length l₁ ≤ length l₂) : Lex (· ≠ ·) l₁ l₂ ↔ l₁ ≠ l₂ := by\n  classical exact Decidable.List.Lex.ne_iff H\n#align ne_iff ne_iff\n\n",
+ "imp":
+ "theorem imp {r s : α → α → Prop} (H : ∀ a b, r a b → s a b) : ∀ l₁ l₂, Lex r l₁ l₂ → Lex s l₁ l₂\n  | _, _, nil => nil\n  | _, _, cons h => cons (imp _ _ h)\n  | _, _, Rel r => rel (H _ _ r)\n#align imp imp\n\n",
+ "cons_iff":
+ "/-\nCopyright (c) 2018 Mario Carneiro. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Mario Carneiro\n-/\ntheorem cons_iff {r : α → α → Prop} [is_irrefl α r] {a l₁ l₂} : Lex r (a :: l₁) (a :: l₂) ↔ Lex r l₁ l₂ :=\n  ⟨fun h => by cases' h with _ _ _ _ _ h _ _ _ _ h <;> [exact h, exact (irrefl_of r a h).elim], Lex.cons⟩\n#align cons_iff cons_iff\n\n",
+ "append_right":
+ "theorem append_right (r : α → α → Prop) : ∀ {s₁ s₂} (t), Lex r s₁ s₂ → Lex r s₁ (s₂ ++ t)\n  | _, _, t, nil => nil\n  | _, _, t, cons h => cons (append_right _ h)\n  | _, _, t, Rel r => rel r\n#align append_right append_right\n\n",
+ "append_left":
+ "theorem append_left (R : α → α → Prop) {t₁ t₂} (h : Lex R t₁ t₂) : ∀ s, Lex R (s ++ t₁) (s ++ t₂)\n  | [] => h\n  | a :: l => cons (append_left l)\n#align append_left append_left\n\n"}

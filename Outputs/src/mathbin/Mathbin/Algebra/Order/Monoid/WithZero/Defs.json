@@ -1,0 +1,16 @@
+{"zero_lt_coe":
+ "theorem zero_lt_coe [preorder α] (a : α) : (0 : WithZero α) < a :=\n  WithBot.bot_lt_coe a\n#align zero_lt_coe zero_lt_coe\n\n",
+ "zero_le":
+ "#print zero_le /-\n/-\nCopyright (c) 2016 Jeremy Avigad. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Jeremy Avigad, Leonardo de Moura, Mario Carneiro, Johannes Hölzl\n-/\ntheorem zero_le [preorder α] (a : WithZero α) : 0 ≤ a :=\n  bot_le\n#align zero_le zero_le\n-/\n\n",
+ "zero_eq_bot":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\ntheorem zero_eq_bot [preorder α] : (0 : WithZero α) = «expr⊥» :=\n  rfl\n#align zero_eq_bot zero_eq_bot\n\n",
+ "min_le_iff":
+ "#print min_le_iff /-\n@[simp]\ntheorem min_le_iff [linear_order α] {a b c : α} : min (a : WithZero α) b ≤ c ↔ min a b ≤ c := by\n  simp only [WithZero.coe_le_coe, min_le_iff]\n#align min_le_iff min_le_iff\n-/\n\n",
+ "le_max_iff":
+ "#print le_max_iff /-\n@[simp]\ntheorem le_max_iff [linear_order α] {a b c : α} : (a : WithZero α) ≤ max b c ↔ a ≤ max b c := by\n  simp only [WithZero.coe_le_coe, le_max_iff]\n#align le_max_iff le_max_iff\n-/\n\n",
+ "covariant_class_add_le":
+ "protected theorem covariant_class_add_le [add_zero_class α] [preorder α] [covariant_class α α (· + ·) (· ≤ ·)]\n    (h : ∀ a : α, 0 ≤ a) : covariant_class (WithZero α) (WithZero α) (· + ·) (· ≤ ·) :=\n  by\n  refine' ⟨fun a b c hbc => _⟩\n  induction a using WithZero.recZeroCoe\n  · rwa [zero_add, zero_add]\n  induction b using WithZero.recZeroCoe\n  · rw [add_zero]\n    induction c using WithZero.recZeroCoe\n    · rw [add_zero]\n      exact le_rfl\n    · rw [← coe_add, coe_le_coe]\n      exact le_add_of_nonneg_right (h _)\n  · rcases WithBot.coe_le_iff.1 hbc with ⟨c, rfl, hbc'⟩\n    rw [← coe_add, ← coe_add, coe_le_coe]\n    exact add_le_add_left hbc' a\n#align covariant_class_add_le covariant_class_add_le\n\n",
+ "coe_lt_coe":
+ "@[simp, norm_cast]\ntheorem coe_lt_coe [preorder α] {a b : α} : (a : WithZero α) < b ↔ a < b :=\n  WithBot.coe_lt_coe\n#align coe_lt_coe coe_lt_coe\n\n",
+ "coe_le_coe":
+ "@[simp, norm_cast]\ntheorem coe_le_coe [preorder α] {a b : α} : (a : WithZero α) ≤ b ↔ a ≤ b :=\n  WithBot.coe_le_coe\n#align coe_le_coe coe_le_coe\n\n"}

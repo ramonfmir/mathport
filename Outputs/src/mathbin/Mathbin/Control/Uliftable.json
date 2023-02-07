@@ -1,0 +1,4 @@
+{"up_down":
+ "/-\nCopyright (c) 2020 Simon Hudon. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Simon Hudon\n-/\n@[simp]\ntheorem up_down {f : Type u₀ → Type u₁} {g : Type max u₀ v₀ → Type v₁} [uliftable f g] {α} (x : g (ULift α)) :\n    up (down x : f α) = x :=\n  (uliftable.congr f g equiv.ulift.symm).right_inv _\n#align up_down up_down\n\n",
+ "down_up":
+ "@[simp]\ntheorem down_up {f : Type u₀ → Type u₁} {g : Type max u₀ v₀ → Type v₁} [uliftable f g] {α} (x : f α) :\n    down (up x : g _) = x :=\n  (uliftable.congr f g equiv.ulift.symm).left_inv _\n#align down_up down_up\n\n"}

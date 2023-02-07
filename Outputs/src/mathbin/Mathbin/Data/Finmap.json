@@ -1,0 +1,146 @@
+{"union_to_finmap":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `to_finmap -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `to_finmap -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `to_finmap -/\n@[simp]\ntheorem union_to_finmap (s₁ s₂ : AList β) : to_finmap s₁ ∪ to_finmap s₂ = to_finmap (s₁ ∪ s₂) := by\n  simp [(· ∪ ·), union]\n#align union_to_finmap union_to_finmap\n\n",
+ "union_empty":
+ "@[simp]\ntheorem union_empty {s₁ : finmap β} : s₁ ∪ ∅ = s₁ :=\n  induction_on s₁ fun s₁ => by\n    rw [← empty_to_finmap] <;> simp [-empty_to_finmap, alist.to_finmap_eq, union_to_finmap, AList.union_assoc]\n#align union_empty union_empty\n\n",
+ "union_comm_of_disjoint":
+ "theorem union_comm_of_disjoint {s₁ s₂ : finmap β} : disjoint s₁ s₂ → s₁ ∪ s₂ = s₂ ∪ s₁ :=\n  induction_on₂ s₁ s₂ fun s₁ s₂ => by\n    intro h\n    simp only [alist.to_finmap_eq, union_to_finmap, AList.union_comm_of_disjoint h]\n#align union_comm_of_disjoint union_comm_of_disjoint\n\n",
+ "union_cancel":
+ "theorem union_cancel {s₁ s₂ s₃ : finmap β} (h : disjoint s₁ s₃) (h' : disjoint s₂ s₃) : s₁ ∪ s₃ = s₂ ∪ s₃ ↔ s₁ = s₂ :=\n  ⟨fun h'' => by\n    apply ext_lookup\n    intro x\n    have : (s₁ ∪ s₃).lookup x = (s₂ ∪ s₃).lookup x := h'' ▸ rfl\n    by_cases hs₁ : x ∈ s₁\n    · rwa [lookup_union_left hs₁, lookup_union_left_of_not_in (h _ hs₁)] at this\n    · by_cases hs₂ : x ∈ s₂\n      · rwa [lookup_union_left_of_not_in (h' _ hs₂), lookup_union_left hs₂] at this\n      · rw [lookup_eq_none.mpr hs₁, lookup_eq_none.mpr hs₂], fun h => h ▸ rfl⟩\n#align union_cancel union_cancel\n\n",
+ "union_assoc":
+ "theorem union_assoc {s₁ s₂ s₃ : finmap β} : s₁ ∪ s₂ ∪ s₃ = s₁ ∪ (s₂ ∪ s₃) :=\n  induction_on₃ s₁ s₂ s₃ fun s₁ s₂ s₃ => by simp only [alist.to_finmap_eq, union_to_finmap, AList.union_assoc]\n#align union_assoc union_assoc\n\n",
+ "to_finmap_nil":
+ "@[simp]\ntheorem to_finmap_nil [decidable_eq α] : ([].to_finmap : finmap β) = ∅ :=\n  rfl\n#align to_finmap_nil to_finmap_nil\n\n",
+ "to_finmap_eq":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `to_finmap -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `to_finmap -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `list.perm -/\ntheorem alist.to_finmap_eq {s₁ s₂ : AList β} : to_finmap s₁ = to_finmap s₂ ↔ list.perm s₁.entries s₂.entries := by\n  cases s₁ <;> cases s₂ <;> simp [alist.to_finmap]\n#align alist.to_finmap_eq alist.to_finmap_eq\n\n",
+ "to_finmap_entries":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `to_finmap -/\n@[simp]\ntheorem alist.to_finmap_entries (s : AList β) : (to_finmap s).entries = s.entries :=\n  rfl\n#align alist.to_finmap_entries alist.to_finmap_entries\n\n",
+ "to_finmap_cons":
+ "theorem to_finmap_cons (a : α) (b : β a) (xs : list (sigma β)) :\n    list.to_finmap (⟨a, b⟩ :: xs) = insert a b xs.to_finmap :=\n  rfl\n#align to_finmap_cons to_finmap_cons\n\n",
+ "symm_iff":
+ "theorem disjoint.symm_iff (x y : finmap β) : disjoint x y ↔ disjoint y x :=\n  ⟨disjoint.symm x y, disjoint.symm y x⟩\n#align disjoint.symm_iff disjoint.symm_iff\n\n",
+ "symm":
+ "#print Disjoint.symm /-\n@[symm]\ntheorem Disjoint.symm (x y : finmap β) (h : disjoint x y) : disjoint y x := fun p hy hx => h p hx hy\n#align disjoint.symm Disjoint.symm\n-/\n\n",
+ "replace_to_finmap":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `to_finmap -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `to_finmap -/\n@[simp]\ntheorem replace_to_finmap (a : α) (b : β a) (s : AList β) : replace a b (to_finmap s) = to_finmap (s.replace a b) := by\n  simp [replace]\n#align replace_to_finmap replace_to_finmap\n\n",
+ "not_mem_erase_self":
+ "theorem not_mem_erase_self {a : α} {s : finmap β} : ¬a ∈ erase a s := by\n  rw [mem_erase, not_and_or, not_not] <;> left <;> rfl\n#align not_mem_erase_self not_mem_erase_self\n\n",
+ "not_mem_empty":
+ "theorem not_mem_empty {a : α} : a ∉ (∅ : finmap β) :=\n  Multiset.not_mem_zero a\n#align not_mem_empty not_mem_empty\n\n",
+ "mem_union":
+ "@[simp]\ntheorem mem_union {a} {s₁ s₂ : finmap β} : a ∈ s₁ ∪ s₂ ↔ a ∈ s₁ ∨ a ∈ s₂ :=\n  induction_on₂ s₁ s₂ fun _ _ => mem_union\n#align mem_union mem_union\n\n",
+ "mem_to_finmap":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `to_finmap -/\n@[simp]\ntheorem mem_to_finmap {a : α} {s : AList β} : a ∈ to_finmap s ↔ a ∈ s :=\n  iff.rfl\n#align mem_to_finmap mem_to_finmap\n\n",
+ "mem_singleton":
+ "@[simp]\ntheorem mem_singleton (x y : α) (b : β y) : x ∈ singleton y b ↔ x = y := by\n  simp only [singleton] <;> erw [mem_cons_eq, mem_nil_iff, or_false_iff]\n#align mem_singleton mem_singleton\n\n",
+ "mem_replace":
+ "@[simp]\ntheorem mem_replace {a a' : α} {b : β a} {s : finmap β} : a' ∈ replace a b s ↔ a' ∈ s :=\n  induction_on s fun s => by simp\n#align mem_replace mem_replace\n\n",
+ "mem_of_lookup_eq_some":
+ "theorem mem_of_lookup_eq_some {a : α} {b : β a} {s : finmap β} (h : s.lookup a = some b) : a ∈ s :=\n  mem_iff.mpr ⟨_, h⟩\n#align mem_of_lookup_eq_some mem_of_lookup_eq_some\n\n",
+ "mem_lookup_union_middle":
+ "theorem mem_lookup_union_middle {a} {b : β a} {s₁ s₂ s₃ : finmap β} :\n    b ∈ lookup a (s₁ ∪ s₃) → a ∉ s₂ → b ∈ lookup a (s₁ ∪ s₂ ∪ s₃) :=\n  induction_on₃ s₁ s₂ s₃ fun s₁ s₂ s₃ => mem_lookup_union_middle\n#align mem_lookup_union_middle mem_lookup_union_middle\n\n",
+ "mem_lookup_union":
+ "@[simp]\ntheorem mem_lookup_union {a} {b : β a} {s₁ s₂ : finmap β} :\n    b ∈ lookup a (s₁ ∪ s₂) ↔ b ∈ lookup a s₁ ∨ a ∉ s₁ ∧ b ∈ lookup a s₂ :=\n  induction_on₂ s₁ s₂ fun s₁ s₂ => mem_lookup_union\n#align mem_lookup_union mem_lookup_union\n\n",
+ "mem_list_to_finmap":
+ "theorem mem_list_to_finmap (a : α) (xs : list (sigma β)) : a ∈ xs.to_finmap ↔ ∃ b : β a, sigma.mk a b ∈ xs :=\n  by\n  induction' xs with x xs <;> [skip, cases x] <;>\n      simp only [to_finmap_cons, *, not_mem_empty, exists_or, not_mem_nil, to_finmap_nil, exists_false, mem_cons_iff,\n        mem_insert, exists_and_left] <;>\n    apply or_congr _ iff.rfl\n  conv =>\n    lhs\n    rw [← and_true_iff (a = x_fst)]\n  apply and_congr_right\n  rintro ⟨⟩\n  simp only [exists_eq, heq_iff_eq]\n#align mem_list_to_finmap mem_list_to_finmap\n\n",
+ "mem_keys":
+ "theorem mem_keys {a : α} {s : finmap β} : a ∈ s.keys ↔ a ∈ s :=\n  induction_on s fun s => AList.mem_keys\n#align mem_keys mem_keys\n\n",
+ "mem_insert":
+ "@[simp]\ntheorem mem_insert {a a' : α} {b' : β a'} {s : finmap β} : a ∈ insert a' b' s ↔ a = a' ∨ a ∈ s :=\n  induction_on s mem_insert\n#align mem_insert mem_insert\n\n",
+ "mem_iff":
+ "theorem mem_iff {a : α} {s : finmap β} : a ∈ s ↔ ∃ b, s.lookup a = some b :=\n  induction_on s fun s => iff.trans List.mem_keys <| exists_congr fun b => (mem_lookup_iff s.nodupkeys).symm\n#align mem_iff mem_iff\n\n",
+ "mem_erase":
+ "@[simp]\ntheorem mem_erase {a a' : α} {s : finmap β} : a' ∈ erase a s ↔ a' ≠ a ∧ a' ∈ s :=\n  induction_on s fun s => by simp\n#align mem_erase mem_erase\n\n",
+ "mem_def":
+ "theorem mem_def {a : α} {s : finmap β} : a ∈ s ↔ a ∈ s.entries.keys :=\n  iff.rfl\n#align mem_def mem_def\n\n",
+ "lookup_union_right":
+ "@[simp]\ntheorem lookup_union_right {a} {s₁ s₂ : finmap β} : a ∉ s₁ → lookup a (s₁ ∪ s₂) = lookup a s₂ :=\n  induction_on₂ s₁ s₂ fun s₁ s₂ => lookup_union_right\n#align lookup_union_right lookup_union_right\n\n",
+ "lookup_union_left_of_not_in":
+ "theorem lookup_union_left_of_not_in {a} {s₁ s₂ : finmap β} (h : a ∉ s₂) : lookup a (s₁ ∪ s₂) = lookup a s₁ :=\n  by\n  by_cases h' : a ∈ s₁\n  · rw [lookup_union_left h']\n  · rw [lookup_union_right h', lookup_eq_none.mpr h, lookup_eq_none.mpr h']\n#align lookup_union_left_of_not_in lookup_union_left_of_not_in\n\n",
+ "lookup_union_left":
+ "@[simp]\ntheorem lookup_union_left {a} {s₁ s₂ : finmap β} : a ∈ s₁ → lookup a (s₁ ∪ s₂) = lookup a s₁ :=\n  induction_on₂ s₁ s₂ fun s₁ s₂ => lookup_union_left\n#align lookup_union_left lookup_union_left\n\n",
+ "lookup_to_finmap":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `to_finmap -/\n@[simp]\ntheorem lookup_to_finmap (a : α) (s : AList β) : lookup a (to_finmap s) = s.lookup a :=\n  rfl\n#align lookup_to_finmap lookup_to_finmap\n\n",
+ "lookup_singleton_eq":
+ "@[simp]\ntheorem lookup_singleton_eq {a : α} {b : β a} : (singleton a b).lookup a = some b := by\n  rw [singleton, lookup_to_finmap, AList.singleton, AList.lookup, lookup_cons_eq]\n#align lookup_singleton_eq lookup_singleton_eq\n\n",
+ "lookup_list_to_finmap":
+ "@[simp]\ntheorem lookup_list_to_finmap (a : α) (s : list (sigma β)) : lookup a s.to_finmap = s.lookup a := by\n  rw [list.to_finmap, lookup_to_finmap, lookup_to_alist]\n#align lookup_list_to_finmap lookup_list_to_finmap\n\n",
+ "lookup_is_some":
+ "theorem lookup_is_some {a : α} {s : finmap β} : (s.lookup a).is_some ↔ a ∈ s :=\n  induction_on s fun s => AList.lookup_is_some\n#align lookup_is_some lookup_is_some\n\n",
+ "lookup_insert_of_ne":
+ "@[simp]\ntheorem lookup_insert_of_ne {a a'} {b : β a} (s : finmap β) (h : a' ≠ a) : lookup a' (insert a b s) = lookup a' s :=\n  induction_on s fun s => by simp only [insert_to_finmap, lookup_to_finmap, lookup_insert_ne h]\n#align lookup_insert_of_ne lookup_insert_of_ne\n\n",
+ "lookup_insert":
+ "@[simp]\ntheorem lookup_insert {a} {b : β a} (s : finmap β) : lookup a (insert a b s) = some b :=\n  induction_on s fun s => by simp only [insert_to_finmap, lookup_to_finmap, lookup_insert]\n#align lookup_insert lookup_insert\n\n",
+ "lookup_erase_ne":
+ "@[simp]\ntheorem lookup_erase_ne {a a'} {s : finmap β} (h : a ≠ a') : lookup a (erase a' s) = lookup a s :=\n  induction_on s fun s => lookup_erase_ne h\n#align lookup_erase_ne lookup_erase_ne\n\n",
+ "lookup_erase":
+ "@[simp]\ntheorem lookup_erase (a) (s : finmap β) : lookup a (erase a s) = none :=\n  induction_on s <| lookup_erase a\n#align lookup_erase lookup_erase\n\n",
+ "lookup_eq_none":
+ "theorem lookup_eq_none {a} {s : finmap β} : lookup a s = none ↔ a ∉ s :=\n  induction_on s fun s => AList.lookup_eq_none\n#align lookup_eq_none lookup_eq_none\n\n",
+ "lookup_empty":
+ "@[simp]\ntheorem lookup_empty (a) : lookup a (∅ : finmap β) = none :=\n  rfl\n#align lookup_empty lookup_empty\n\n",
+ "lift_on₂_to_finmap":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `to_finmap -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `to_finmap -/\n@[simp]\ntheorem lift_on₂_to_finmap {γ} (s₁ s₂ : AList β) (f : AList β → AList β → γ) (H) :\n    lift_on₂ (to_finmap s₁) (to_finmap s₂) f H = f s₁ s₂ := by cases s₁ <;> cases s₂ <;> rfl\n#align lift_on₂_to_finmap lift_on₂_to_finmap\n\n",
+ "lift_on_to_finmap":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `to_finmap -/\n@[simp]\ntheorem lift_on_to_finmap {γ} (s : AList β) (f : AList β → γ) (H) : lift_on (to_finmap s) f H = f s := by\n  cases s <;> rfl\n#align lift_on_to_finmap lift_on_to_finmap\n\n",
+ "keys_val":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `to_finmap -/\n@[simp]\ntheorem keys_val (s : AList β) : (keys (to_finmap s)).val = s.keys :=\n  rfl\n#align keys_val keys_val\n\n",
+ "keys_union":
+ "theorem keys_union {s₁ s₂ : finmap β} : (s₁ ∪ s₂).keys = s₁.keys ∪ s₂.keys :=\n  induction_on₂ s₁ s₂ fun s₁ s₂ => Finset.ext <| by simp [keys]\n#align keys_union keys_union\n\n",
+ "keys_singleton":
+ "@[simp]\ntheorem keys_singleton (a : α) (b : β a) : (singleton a b).keys = {a} :=\n  rfl\n#align keys_singleton keys_singleton\n\n",
+ "keys_replace":
+ "@[simp]\ntheorem keys_replace (a : α) (b : β a) (s : finmap β) : (replace a b s).keys = s.keys :=\n  induction_on s fun s => by simp\n#align keys_replace keys_replace\n\n",
+ "keys_ext":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `to_finmap -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `to_finmap -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `list.perm -/\n@[simp]\ntheorem keys_ext {s₁ s₂ : AList β} : keys (to_finmap s₁) = keys (to_finmap s₂) ↔ list.perm s₁.keys s₂.keys := by\n  simp [keys, AList.keys]\n#align keys_ext keys_ext\n\n",
+ "keys_erase_to_finset":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `to_finmap -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `to_finmap -/\n@[simp]\ntheorem keys_erase_to_finset (a : α) (s : AList β) : keys (to_finmap (s.erase a)) = (keys (to_finmap s)).erase a := by\n  simp [Finset.erase, keys, AList.erase, keys_kerase]\n#align keys_erase_to_finset keys_erase_to_finset\n\n",
+ "keys_erase":
+ "@[simp]\ntheorem keys_erase (a : α) (s : finmap β) : (erase a s).keys = s.keys.erase a :=\n  induction_on s fun s => by simp\n#align keys_erase keys_erase\n\n",
+ "keys_empty":
+ "@[simp]\ntheorem keys_empty : (∅ : finmap β).keys = ∅ :=\n  rfl\n#align keys_empty keys_empty\n\n",
+ "insert_union":
+ "theorem insert_union {a} {b : β a} {s₁ s₂ : finmap β} : insert a b (s₁ ∪ s₂) = insert a b s₁ ∪ s₂ :=\n  induction_on₂ s₁ s₂ fun a₁ a₂ => by simp [insert_union]\n#align insert_union insert_union\n\n",
+ "insert_to_finmap":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `to_finmap -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `to_finmap -/\n@[simp]\ntheorem insert_to_finmap (a : α) (b : β a) (s : AList β) : insert a b (to_finmap s) = to_finmap (s.insert a b) := by\n  simp [insert]\n#align insert_to_finmap insert_to_finmap\n\n",
+ "insert_singleton_eq":
+ "@[simp]\ntheorem insert_singleton_eq {a : α} {b b' : β a} : insert a b (singleton a b') = singleton a b := by\n  simp only [singleton, finmap.insert_to_finmap, AList.insert_singleton_eq]\n#align insert_singleton_eq insert_singleton_eq\n\n",
+ "insert_insert_of_ne":
+ "theorem insert_insert_of_ne {a a'} {b : β a} {b' : β a'} (s : finmap β) (h : a ≠ a') :\n    (s.insert a b).insert a' b' = (s.insert a' b').insert a b :=\n  induction_on s fun s => by simp only [insert_to_finmap, alist.to_finmap_eq, insert_insert_of_ne _ h]\n#align insert_insert_of_ne insert_insert_of_ne\n\n",
+ "insert_insert":
+ "@[simp]\ntheorem insert_insert {a} {b b' : β a} (s : finmap β) : (s.insert a b).insert a b' = s.insert a b' :=\n  induction_on s fun s => by simp only [insert_to_finmap, insert_insert]\n#align insert_insert insert_insert\n\n",
+ "insert_entries_of_neg":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ::ₘ » -/\ntheorem insert_entries_of_neg {a : α} {b : β a} {s : finmap β} :\n    a ∉ s → (insert a b s).entries = «expr ::ₘ » ⟨a, b⟩ s.entries :=\n  induction_on s fun s h => by simp [insert_entries_of_neg (mt mem_to_finmap.1 h)]\n#align insert_entries_of_neg insert_entries_of_neg\n\n",
+ "induction_on₃":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `to_finmap -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `to_finmap -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `to_finmap -/\n@[elab_as_elim]\ntheorem induction_on₃ {C : finmap β → finmap β → finmap β → Prop} (s₁ s₂ s₃ : finmap β)\n    (H : ∀ a₁ a₂ a₃ : AList β, C (to_finmap a₁) (to_finmap a₂) (to_finmap a₃)) : C s₁ s₂ s₃ :=\n  induction_on₂ s₁ s₂ fun l₁ l₂ => induction_on s₃ fun l₃ => H l₁ l₂ l₃\n#align induction_on₃ induction_on₃\n\n",
+ "induction_on₂":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `to_finmap -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `to_finmap -/\n@[elab_as_elim]\ntheorem induction_on₂ {C : finmap β → finmap β → Prop} (s₁ s₂ : finmap β)\n    (H : ∀ a₁ a₂ : AList β, C (to_finmap a₁) (to_finmap a₂)) : C s₁ s₂ :=\n  induction_on s₁ fun l₁ => induction_on s₂ fun l₂ => H l₁ l₂\n#align induction_on₂ induction_on₂\n\n",
+ "induction_on":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `to_finmap -/\n@[elab_as_elim]\ntheorem induction_on {C : finmap β → Prop} (s : finmap β) (H : ∀ a : AList β, C (to_finmap a)) : C s := by\n  rcases s with ⟨⟨a⟩, h⟩ <;> exact H ⟨a, h⟩\n#align induction_on induction_on\n\n",
+ "extract_eq_lookup_erase":
+ "@[simp]\ntheorem extract_eq_lookup_erase (a : α) (s : finmap β) : extract a s = (lookup a s, erase a s) :=\n  induction_on s fun s => by simp [extract]\n#align extract_eq_lookup_erase extract_eq_lookup_erase\n\n",
+ "ext_lookup":
+ "theorem ext_lookup {s₁ s₂ : finmap β} : (∀ x, s₁.lookup x = s₂.lookup x) → s₁ = s₂ :=\n  induction_on₂ s₁ s₂ fun s₁ s₂ h => by\n    simp only [AList.lookup, lookup_to_finmap] at h\n    rw [alist.to_finmap_eq]\n    apply lookup_ext s₁.nodupkeys s₂.nodupkeys\n    intro x y\n    rw [h]\n#align ext_lookup ext_lookup\n\n",
+ "ext_iff":
+ "@[simp]\ntheorem ext_iff {s t : finmap β} : s.entries = t.entries ↔ s = t :=\n  ⟨ext, congr_arg _⟩\n#align ext_iff ext_iff\n\n",
+ "ext":
+ "@[ext]\ntheorem ext : ∀ {s t : finmap β}, s.entries = t.entries → s = t\n  | ⟨l₁, h₁⟩, ⟨l₂, h₂⟩, H => by congr\n#align ext ext\n\n",
+ "erase_union_singleton":
+ "theorem erase_union_singleton (a : α) (b : β a) (s : finmap β) (h : s.lookup a = some b) :\n    s.erase a ∪ singleton a b = s :=\n  ext_lookup fun x => by\n    by_cases h' : x = a\n    · subst a\n      rw [lookup_union_right not_mem_erase_self, lookup_singleton_eq, h]\n    · have : x ∉ singleton a b := by rwa [mem_singleton]\n      rw [lookup_union_left_of_not_in this, lookup_erase_ne h']\n#align erase_union_singleton erase_union_singleton\n\n",
+ "erase_to_finmap":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `to_finmap -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `to_finmap -/\n@[simp]\ntheorem erase_to_finmap (a : α) (s : AList β) : erase a (to_finmap s) = to_finmap (s.erase a) := by simp [erase]\n#align erase_to_finmap erase_to_finmap\n\n",
+ "erase_erase":
+ "theorem erase_erase {a a' : α} {s : finmap β} : erase a (erase a' s) = erase a' (erase a s) :=\n  induction_on s fun s => ext (by simp only [erase_erase, erase_to_finmap])\n#align erase_erase erase_erase\n\n",
+ "empty_union":
+ "@[simp]\ntheorem empty_union {s₁ : finmap β} : ∅ ∪ s₁ = s₁ :=\n  induction_on s₁ fun s₁ => by\n    rw [← empty_to_finmap] <;> simp [-empty_to_finmap, alist.to_finmap_eq, union_to_finmap, AList.union_assoc]\n#align empty_union empty_union\n\n",
+ "empty_to_finmap":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `to_finmap -/\n@[simp]\ntheorem empty_to_finmap : (to_finmap ∅ : finmap β) = ∅ :=\n  rfl\n#align empty_to_finmap empty_to_finmap\n\n",
+ "disjoint_union_right":
+ "theorem disjoint_union_right (x y z : finmap β) : disjoint x (y ∪ z) ↔ disjoint x y ∧ disjoint x z := by\n  rw [disjoint.symm_iff, disjoint_union_left, disjoint.symm_iff _ x, disjoint.symm_iff _ x]\n#align disjoint_union_right disjoint_union_right\n\n",
+ "disjoint_union_left":
+ "theorem disjoint_union_left (x y z : finmap β) : disjoint (x ∪ y) z ↔ disjoint x z ∧ disjoint y z := by\n  simp [Disjoint, finmap.mem_union, or_imp, forall_and]\n#align disjoint_union_left disjoint_union_left\n\n",
+ "disjoint_empty":
+ "theorem disjoint_empty (x : finmap β) : disjoint ∅ x :=\n  fun.\n#align disjoint_empty disjoint_empty\n\n",
+ "coe_nodupkeys":
+ "@[simp]\ntheorem coe_nodupkeys {l : list (sigma β)} : @nodupkeys α β l ↔ l.nodupkeys :=\n  iff.rfl\n#align coe_nodupkeys coe_nodupkeys\n\n",
+ "coe_keys":
+ "/-\nCopyright (c) 2018 Sean Leather. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Sean Leather, Mario Carneiro\n-/\n@[simp]\ntheorem coe_keys {l : list (sigma β)} : keys (l : Multiset (sigma β)) = (l.keys : Multiset α) :=\n  rfl\n#align coe_keys coe_keys\n\n"}

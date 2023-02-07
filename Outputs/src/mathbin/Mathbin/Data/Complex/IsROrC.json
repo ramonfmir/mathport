@@ -1,0 +1,358 @@
+{"zero_re'":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n@[simp, is_R_or_C_simps]\ntheorem zero_re' : re (0 : K) = (0 : exprℝ) :=\n  re.map_zero\n#align zero_re' zero_re'\n\n",
+ "sub_conj":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `star_ring_end -/\ntheorem sub_conj (z : K) : z - (star_ring_end) z = 2 * im z * I := by\n  simp only [ext_iff, two_mul, sub_eq_add_neg, add_mul, map_add, add_zero, add_left_inj, zero_mul, map_add_neg,\n    eq_self_iff_true, add_right_neg, and_self_iff, neg_neg, mul_zero, neg_zero, is_R_or_C_simps]\n#align sub_conj sub_conj\n\n",
+ "star_def":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `star_ring_end -/\n@[simp]\ntheorem star_def : (has_star.star : K → K) = star_ring_end :=\n  rfl\n#align star_def star_def\n\n",
+ "sqrt_norm_sq_eq_norm":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr‖ ‖» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr‖ ‖» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr‖ ‖» -/\ntheorem sqrt_norm_sq_eq_norm {z : K} : real.sqrt (norm_sq z) = «expr‖ ‖» z :=\n  by\n  have h₂ : «expr‖ ‖» z = real.sqrt («expr‖ ‖» z ^ 2) := (real.sqrt_sq (norm_nonneg z)).symm\n  rw [h₂]\n  exact congr_arg real.sqrt (norm_sq_eq_def' z)\n#align sqrt_norm_sq_eq_norm sqrt_norm_sq_eq_norm\n\n",
+ "smul_re":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n@[is_R_or_C_simps]\ntheorem smul_re : ∀ (r : exprℝ) (z : K), re («expr • » r z) = r * re z := fun r z =>\n  by\n  rw [algebra.smul_def]\n  apply of_real_mul_re\n#align smul_re smul_re\n\n",
+ "smul_im":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n@[is_R_or_C_simps]\ntheorem smul_im : ∀ (r : exprℝ) (z : K), im («expr • » r z) = r * im z := fun r z =>\n  by\n  rw [algebra.smul_def]\n  apply of_real_mul_im\n#align smul_im smul_im\n\n",
+ "real_smul_eq_coe_smul":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\ntheorem real_smul_eq_coe_smul [add_comm_group E] [Module K E] [Module (exprℝ) E] [IsScalarTower (exprℝ) K E] (r : exprℝ)\n    (x : E) : «expr • » r x = «expr • » (r : K) x := by rw [is_R_or_C.of_real_alg, smul_one_smul]\n#align real_smul_eq_coe_smul real_smul_eq_coe_smul\n\n",
+ "real_smul_eq_coe_mul":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\ntheorem real_smul_eq_coe_mul (r : exprℝ) (z : K) : «expr • » r z = (r : K) * z := by\n  rw [is_R_or_C.of_real_alg, ← smul_eq_mul, smul_assoc, smul_eq_mul, one_mul]\n#align real_smul_eq_coe_mul real_smul_eq_coe_mul\n\n",
+ "re_to_real":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprreR -/\n@[simp, is_R_or_C_simps]\ntheorem re_to_real {x : exprℝ} : (exprreR) x = x :=\n  rfl\n#align re_to_real re_to_real\n\n",
+ "re_sq_le_norm_sq":
+ "theorem re_sq_le_norm_sq (z : K) : re z * re z ≤ norm_sq z :=\n  le_add_of_nonneg_right (mul_self_nonneg _)\n#align re_sq_le_norm_sq re_sq_le_norm_sq\n\n",
+ "re_lm_coe":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n@[simp, is_R_or_C_simps]\ntheorem re_lm_coe : (re_lm : K → exprℝ) = re :=\n  rfl\n#align re_lm_coe re_lm_coe\n\n",
+ "re_le_abs":
+ "theorem re_le_abs (z : K) : re z ≤ abs z :=\n  (abs_le.1 (abs_re_le_abs _)).2\n#align re_le_abs re_le_abs\n\n",
+ "re_eq_self_of_le":
+ "theorem re_eq_self_of_le {a : K} (h : abs a ≤ re a) : (re a : K) = a :=\n  by\n  rw [← re_add_im a]\n  simp only [im_eq_zero_of_le h, add_zero, zero_mul, algebra_map.coe_zero, is_R_or_C_simps]\n#align re_eq_self_of_le re_eq_self_of_le\n\n",
+ "re_eq_add_conj":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `star_ring_end -/\n-- see Note [lower instance priority]\ntheorem re_eq_add_conj (z : K) : ↑(re z) = (z + (star_ring_end) z) / 2 := by\n  rw [add_conj, mul_div_cancel_left (re z : K) two_ne_zero]\n#align re_eq_add_conj re_eq_add_conj\n\n",
+ "re_eq_abs_of_mul_conj":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `star_ring_end -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `star_ring_end -/\ntheorem re_eq_abs_of_mul_conj (x : K) : re (x * (star_ring_end) x) = abs (x * (star_ring_end) x) := by\n  rw [mul_conj, of_real_re, abs_of_real, norm_sq_eq_abs, sq, _root_.abs_mul, abs_abs]\n#align re_eq_abs_of_mul_conj re_eq_abs_of_mul_conj\n\n",
+ "re_clm_norm":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr‖ ‖» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →L[ ] » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n@[simp, is_R_or_C_simps]\ntheorem re_clm_norm : «expr‖ ‖» (re_clm : «expr →L[ ] » K (exprℝ) (exprℝ)) = 1 :=\n  by\n  apply le_antisymm (linear_map.mk_continuous_norm_le _ zero_le_one _)\n  convert continuous_linear_map.ratio_le_op_norm _ (1 : K)\n  · simp\n  · infer_instance\n#align re_clm_norm re_clm_norm\n\n",
+ "re_clm_coe":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →L[ ] » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₗ[ ] » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n@[simp, is_R_or_C_simps, norm_cast]\ntheorem re_clm_coe : ((re_clm : «expr →L[ ] » K (exprℝ) (exprℝ)) : «expr →ₗ[ ] » K (exprℝ) (exprℝ)) = re_lm :=\n  rfl\n#align re_clm_coe re_clm_coe\n\n",
+ "re_clm_apply":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →L[ ] » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n@[simp, is_R_or_C_simps]\ntheorem re_clm_apply : ((re_clm : «expr →L[ ] » K (exprℝ) (exprℝ)) : K → exprℝ) = re :=\n  rfl\n#align re_clm_apply re_clm_apply\n\n",
+ "re_add_im":
+ "@[simp, is_R_or_C_simps]\ntheorem re_add_im (z : K) : (re z : K) + im z * I = z :=\n  is_R_or_C.re_add_im_ax z\n#align re_add_im re_add_im\n\n",
+ "rat_cast_re":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℚ -/\n@[simp, is_R_or_C_simps, norm_cast]\ntheorem rat_cast_re (q : exprℚ) : re (q : K) = q := by rw [← of_real_rat_cast, of_real_re]\n#align rat_cast_re rat_cast_re\n\n",
+ "rat_cast_im":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℚ -/\n@[simp, is_R_or_C_simps, norm_cast]\ntheorem rat_cast_im (q : exprℚ) : im (q : K) = 0 := by rw [← of_real_rat_cast, of_real_im]\n#align rat_cast_im rat_cast_im\n\n",
+ "proper_is_R_or_C":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n/-- A finite dimensional vector space over an `is_R_or_C` is a proper metric space.\n\nThis is not an instance because it would cause a search for `finite_dimensional ?x E` before\n`is_R_or_C ?x`. -/\ntheorem proper_is_R_or_C [finite_dimensional K E] : proper_space E :=\n  by\n  letI : normed_space (exprℝ) E := restrict_scalars.normed_space (exprℝ) K E\n  letI : finite_dimensional (exprℝ) E := finite_dimensional.trans (exprℝ) K E\n  infer_instance\n#align proper_is_R_or_C proper_is_R_or_C\n\n",
+ "one_re":
+ "@[simp, is_R_or_C_simps]\ntheorem one_re : re (1 : K) = 1 := by rw [← of_real_one, of_real_re]\n#align one_re one_re\n\n",
+ "one_im":
+ "@[simp, is_R_or_C_simps]\ntheorem one_im : im (1 : K) = 0 := by rw [← of_real_one, of_real_im]\n#align one_im one_im\n\n",
+ "of_real_zpow":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n@[simp, norm_cast, is_R_or_C_simps]\ntheorem of_real_zpow (r : exprℝ) (n : ℤ) : ((r ^ n : exprℝ) : K) = r ^ n :=\n  map_zpow₀ (@is_R_or_C.coe_hom K _) r n\n#align of_real_zpow of_real_zpow\n\n",
+ "of_real_zero":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n@[norm_cast]\ntheorem of_real_zero : ((0 : exprℝ) : K) = 0 := by rw [of_real_alg, zero_smul]\n#align of_real_zero of_real_zero\n\n",
+ "of_real_sum":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `finset.sum -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.sum -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `finset.sum -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.sum -/\n@[simp, is_R_or_C_simps, norm_cast]\ntheorem of_real_sum {α : Type _} (s : Finset α) (f : α → exprℝ) :\n    ((finset.sum \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.sum\" s (f i) : exprℝ) :\n        K) =\n      finset.sum \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.sum\" s (f i : K) :=\n  ring_hom.map_sum _ _ _\n#align of_real_sum of_real_sum\n\n",
+ "of_real_sub":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n@[simp, norm_cast, is_R_or_C_simps]\ntheorem of_real_sub (r s : exprℝ) : ((r - s : exprℝ) : K) = r - s :=\n  ext_iff.2 <| by simp only [of_real_im, of_real_re, eq_self_iff_true, sub_zero, and_self_iff, map_sub]\n#align of_real_sub of_real_sub\n\n",
+ "of_real_smul":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n@[simp, norm_cast, is_R_or_C_simps]\ntheorem of_real_smul (r x : exprℝ) : «expr • » r (x : K) = (r : K) * (x : K) :=\n  by\n  simp_rw [← smul_eq_mul, of_real_alg r]\n  simp only [algebra.id.smul_eq_mul, one_mul, algebra.smul_mul_assoc]\n#align of_real_smul of_real_smul\n\n",
+ "of_real_re":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n@[simp, norm_cast, is_R_or_C_simps]\ntheorem of_real_re : ∀ r : exprℝ, re (r : K) = r :=\n  is_R_or_C.of_real_re_ax\n#align of_real_re of_real_re\n\n",
+ "of_real_rat_cast":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℚ -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n@[simp, is_R_or_C_simps, norm_cast]\ntheorem of_real_rat_cast (n : exprℚ) : ((n : exprℝ) : K) = n :=\n  map_ratCast (@is_R_or_C.of_real_hom K _) n\n#align of_real_rat_cast of_real_rat_cast\n\n",
+ "of_real_prod":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `finset.prod -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.prod -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `finset.prod -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.prod -/\n@[simp, is_R_or_C_simps, norm_cast]\ntheorem of_real_prod {α : Type _} (s : Finset α) (f : α → exprℝ) :\n    ((finset.prod \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.prod\" s (f i) :\n          exprℝ) :\n        K) =\n      finset.prod \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.prod\" s (f i : K) :=\n  ring_hom.map_prod _ _ _\n#align of_real_prod of_real_prod\n\n",
+ "of_real_pow":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n@[simp, norm_cast, is_R_or_C_simps]\ntheorem of_real_pow (r : exprℝ) (n : ℕ) : ((r ^ n : exprℝ) : K) = r ^ n :=\n  by\n  induction n\n  · simp only [of_real_one, pow_zero]\n  · simp only [*, of_real_mul, pow_succ]\n#align of_real_pow of_real_pow\n\n",
+ "of_real_one":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n@[norm_cast]\ntheorem of_real_one : ((1 : exprℝ) : K) = 1 := by rw [of_real_alg, one_smul]\n#align of_real_one of_real_one\n\n",
+ "of_real_neg":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n@[simp, norm_cast, is_R_or_C_simps]\ntheorem of_real_neg (r : exprℝ) : ((-r : exprℝ) : K) = -r :=\n  ext_iff.2 <| by simp\n#align of_real_neg of_real_neg\n\n",
+ "of_real_ne_zero":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\ntheorem of_real_ne_zero {z : exprℝ} : (z : K) ≠ 0 ↔ z ≠ 0 :=\n  of_real_eq_zero.not\n#align of_real_ne_zero of_real_ne_zero\n\n",
+ "of_real_nat_cast":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n@[simp, is_R_or_C_simps, norm_cast]\ntheorem of_real_nat_cast (n : ℕ) : ((n : exprℝ) : K) = n :=\n  map_nat_cast (@of_real_hom K _) n\n#align of_real_nat_cast of_real_nat_cast\n\n",
+ "of_real_mul_re":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n@[is_R_or_C_simps]\ntheorem of_real_mul_re (r : exprℝ) (z : K) : re (↑r * z) = r * re z := by\n  simp only [mul_re, of_real_im, zero_mul, of_real_re, sub_zero]\n#align of_real_mul_re of_real_mul_re\n\n",
+ "of_real_mul_im":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n@[is_R_or_C_simps]\ntheorem of_real_mul_im (r : exprℝ) (z : K) : im (↑r * z) = r * im z := by\n  simp only [add_zero, of_real_im, zero_mul, of_real_re, mul_im]\n#align of_real_mul_im of_real_mul_im\n\n",
+ "of_real_mul":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n@[simp, norm_cast, is_R_or_C_simps]\ntheorem of_real_mul (r s : exprℝ) : ((r * s : exprℝ) : K) = r * s :=\n  ext_iff.2 <| by simp [is_R_or_C_simps]\n#align of_real_mul of_real_mul\n\n",
+ "of_real_li_apply":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n@[simp, is_R_or_C_simps]\ntheorem of_real_li_apply : (of_real_li : exprℝ → K) = coe :=\n  rfl\n#align of_real_li_apply of_real_li_apply\n\n",
+ "of_real_inv":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n@[simp, norm_cast, is_R_or_C_simps]\ntheorem of_real_inv (r : exprℝ) : ((r⁻¹ : exprℝ) : K) = r⁻¹ :=\n  by\n  rw [ext_iff]\n  by_cases r = 0\n  · simp only [h, of_real_zero, inv_zero, and_self_iff, map_zero]\n  · simp only [is_R_or_C_simps]\n    field_simp [h, norm_sq]\n#align of_real_inv of_real_inv\n\n",
+ "of_real_int_cast":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n@[simp, is_R_or_C_simps, norm_cast]\ntheorem of_real_int_cast (n : ℤ) : ((n : exprℝ) : K) = n :=\n  map_intCast (@of_real_hom K _) n\n#align of_real_int_cast of_real_int_cast\n\n",
+ "of_real_inj":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n@[norm_cast]\ntheorem of_real_inj {z w : exprℝ} : (z : K) = (w : K) ↔ z = w :=\n  { mp := fun h => by convert congr_arg re h <;> simp only [of_real_re]\n    mpr := fun h => by rw [h] }\n#align of_real_inj of_real_inj\n\n",
+ "of_real_im":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n@[simp, norm_cast, is_R_or_C_simps]\ntheorem of_real_im : ∀ r : exprℝ, im (r : K) = 0 :=\n  is_R_or_C.of_real_im_ax\n#align of_real_im of_real_im\n\n",
+ "of_real_finsupp_sum":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →₀ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n@[simp, is_R_or_C_simps, norm_cast]\ntheorem of_real_finsupp_sum {α M : Type _} [Zero M] (f : «expr →₀ » α M) (g : α → M → exprℝ) :\n    ((f.sum fun a b => g a b : exprℝ) : K) = f.sum fun a b => (g a b : K) :=\n  ring_hom.map_finsupp_sum _ f g\n#align of_real_finsupp_sum of_real_finsupp_sum\n\n",
+ "of_real_finsupp_prod":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →₀ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n@[simp, is_R_or_C_simps, norm_cast]\ntheorem of_real_finsupp_prod {α M : Type _} [Zero M] (f : «expr →₀ » α M) (g : α → M → exprℝ) :\n    ((f.prod fun a b => g a b : exprℝ) : K) = f.prod fun a b => (g a b : K) :=\n  ring_hom.map_finsupp_prod _ f g\n#align of_real_finsupp_prod of_real_finsupp_prod\n\n",
+ "of_real_eval":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `polynomial -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\ntheorem of_real_eval (p : polynomial (exprℝ)) (x : exprℝ) : (p.eval x : K) = aeval (↑x) p :=\n  (@aeval_algebra_map_apply_eq_algebra_map_eval (exprℝ) K _ _ _ x p).symm\n#align of_real_eval of_real_eval\n\n",
+ "of_real_eq_zero":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\ntheorem of_real_eq_zero {z : exprℝ} : (z : K) = 0 ↔ z = 0 := by rw [← of_real_zero] <;> exact of_real_inj\n#align of_real_eq_zero of_real_eq_zero\n\n",
+ "of_real_div":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n@[simp, norm_cast, is_R_or_C_simps]\ntheorem of_real_div (r s : exprℝ) : ((r / s : exprℝ) : K) = r / s :=\n  map_div₀ (@is_R_or_C.coe_hom K _) r s\n#align of_real_div of_real_div\n\n",
+ "of_real_clm_norm":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr‖ ‖» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →L[ ] » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n@[simp, is_R_or_C_simps]\ntheorem of_real_clm_norm : «expr‖ ‖» (of_real_clm : «expr →L[ ] » (exprℝ) (exprℝ) K) = 1 :=\n  linear_isometry.norm_to_continuous_linear_map of_real_li\n#align of_real_clm_norm of_real_clm_norm\n\n",
+ "of_real_clm_coe":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₗ[ ] » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n@[simp, is_R_or_C_simps]\ntheorem of_real_clm_coe : (@of_real_clm K _ : «expr →ₗ[ ] » (exprℝ) (exprℝ) K) = of_real_am.to_linear_map :=\n  rfl\n#align of_real_clm_coe of_real_clm_coe\n\n",
+ "of_real_clm_apply":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n@[simp, is_R_or_C_simps]\ntheorem of_real_clm_apply : (of_real_clm : exprℝ → K) = coe :=\n  rfl\n#align of_real_clm_apply of_real_clm_apply\n\n",
+ "of_real_bit1":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n@[simp, is_R_or_C_simps, norm_cast]\ntheorem of_real_bit1 (r : exprℝ) : ((bit1 r : exprℝ) : K) = bit1 (r : K) :=\n  ext_iff.2 <| by simp [bit1]\n#align of_real_bit1 of_real_bit1\n\n",
+ "of_real_bit0":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n@[simp, is_R_or_C_simps, norm_cast]\ntheorem of_real_bit0 (r : exprℝ) : ((bit0 r : exprℝ) : K) = bit0 (r : K) :=\n  ext_iff.2 <| by simp [bit0]\n#align of_real_bit0 of_real_bit0\n\n",
+ "of_real_am_coe":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n@[simp, is_R_or_C_simps]\ntheorem of_real_am_coe : (of_real_am : exprℝ → K) = coe :=\n  rfl\n#align of_real_am_coe of_real_am_coe\n\n",
+ "of_real_alg":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/-\nCopyright (c) 2020 Frédéric Dupuis. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Frédéric Dupuis\n-/\n-- Meant to be set to 0 for K=ℝ\n/- The priority must be set at 900 to ensure that coercions are tried in the right order.\nSee Note [coercion into rings], or `data/nat/cast.lean` for more details. -/\ntheorem of_real_alg (x : exprℝ) : (x : K) = «expr • » x (1 : K) :=\n  algebra.algebra_map_eq_smul_one x\n#align of_real_alg of_real_alg\n\n",
+ "of_real_add":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n@[simp, is_R_or_C_simps, norm_cast]\ntheorem of_real_add ⦃r s : exprℝ⦄ : ((r + s : exprℝ) : K) = r + s :=\n  by\n  apply (@is_R_or_C.ext_iff K _ ((r + s : exprℝ) : K) (r + s)).mpr\n  simp\n#align of_real_add of_real_add\n\n",
+ "norm_sq_zero":
+ "@[is_R_or_C_simps]\ntheorem norm_sq_zero : norm_sq (0 : K) = 0 :=\n  norm_sq.map_zero\n#align norm_sq_zero norm_sq_zero\n\n",
+ "norm_sq_to_real":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n@[simp, is_R_or_C_simps]\ntheorem norm_sq_to_real {x : exprℝ} : norm_sq x = x * x := by simp [is_R_or_C.norm_sq]\n#align norm_sq_to_real norm_sq_to_real\n\n",
+ "norm_sq_sub":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `star_ring_end -/\ntheorem norm_sq_sub (z w : K) : norm_sq (z - w) = norm_sq z + norm_sq w - 2 * re (z * (star_ring_end) w) := by\n  simp only [norm_sq_add, sub_eq_add_neg, RingEquiv.map_neg, mul_neg, norm_sq_neg, map_neg]\n#align norm_sq_sub norm_sq_sub\n\n",
+ "norm_sq_pos":
+ "@[simp, is_R_or_C_simps]\ntheorem norm_sq_pos {z : K} : 0 < norm_sq z ↔ z ≠ 0 := by rw [lt_iff_le_and_ne, ne, eq_comm] <;> simp [norm_sq_nonneg]\n#align norm_sq_pos norm_sq_pos\n\n",
+ "norm_sq_one":
+ "@[is_R_or_C_simps]\ntheorem norm_sq_one : norm_sq (1 : K) = 1 :=\n  norm_sq.map_one\n#align norm_sq_one norm_sq_one\n\n",
+ "norm_sq_nonneg":
+ "theorem norm_sq_nonneg (z : K) : 0 ≤ norm_sq z :=\n  add_nonneg (mul_self_nonneg _) (mul_self_nonneg _)\n#align norm_sq_nonneg norm_sq_nonneg\n\n",
+ "norm_sq_neg":
+ "@[simp, is_R_or_C_simps]\ntheorem norm_sq_neg (z : K) : norm_sq (-z) = norm_sq z := by simp only [norm_sq_eq_def', norm_neg]\n#align norm_sq_neg norm_sq_neg\n\n",
+ "norm_sq_mul":
+ "@[simp, is_R_or_C_simps]\ntheorem norm_sq_mul (z w : K) : norm_sq (z * w) = norm_sq z * norm_sq w :=\n  norm_sq.map_mul z w\n#align norm_sq_mul norm_sq_mul\n\n",
+ "norm_sq_inv":
+ "@[simp, is_R_or_C_simps]\ntheorem norm_sq_inv (z : K) : norm_sq z⁻¹ = (norm_sq z)⁻¹ :=\n  map_inv₀ (@norm_sq K _) z\n#align norm_sq_inv norm_sq_inv\n\n",
+ "norm_sq_eq_zero":
+ "@[simp, is_R_or_C_simps]\ntheorem norm_sq_eq_zero {z : K} : norm_sq z = 0 ↔ z = 0 :=\n  by\n  rw [norm_sq_eq_def']\n  simp [sq]\n#align norm_sq_eq_zero norm_sq_eq_zero\n\n",
+ "norm_sq_eq_def'":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr‖ ‖» -/\ntheorem norm_sq_eq_def' (z : K) : norm_sq z = «expr‖ ‖» z ^ 2 :=\n  by\n  rw [norm_sq_eq_def]\n  rfl\n#align norm_sq_eq_def' norm_sq_eq_def'\n\n",
+ "norm_sq_eq_def":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr‖ ‖» -/\ntheorem norm_sq_eq_def {z : K} : «expr‖ ‖» z ^ 2 = re z * re z + im z * im z :=\n  norm_sq_eq_def_ax z\n#align norm_sq_eq_def norm_sq_eq_def\n\n",
+ "norm_sq_eq_abs":
+ "theorem norm_sq_eq_abs (x : K) : norm_sq x = abs x ^ 2 := by rw [abs, sq, real.mul_self_sqrt (norm_sq_nonneg _)]\n#align norm_sq_eq_abs norm_sq_eq_abs\n\n",
+ "norm_sq_div":
+ "@[simp, is_R_or_C_simps]\ntheorem norm_sq_div (z w : K) : norm_sq (z / w) = norm_sq z / norm_sq w :=\n  map_div₀ (@norm_sq K _) z w\n#align norm_sq_div norm_sq_div\n\n",
+ "norm_sq_conj":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `star_ring_end -/\n@[simp, is_R_or_C_simps]\ntheorem norm_sq_conj (z : K) : norm_sq ((star_ring_end) z) = norm_sq z := by\n  simp only [norm_sq, neg_mul, MonoidWithZeroHom.coe_mk, mul_neg, neg_neg, is_R_or_C_simps]\n#align norm_sq_conj norm_sq_conj\n\n",
+ "norm_sq_add":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `star_ring_end -/\ntheorem norm_sq_add (z w : K) : norm_sq (z + w) = norm_sq z + norm_sq w + 2 * re (z * (star_ring_end) w) :=\n  by\n  simp only [norm_sq, map_add, MonoidWithZeroHom.coe_mk, mul_neg, sub_neg_eq_add, is_R_or_C_simps]\n  ring\n#align norm_sq_add norm_sq_add\n\n",
+ "norm_real":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr‖ ‖» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr‖ ‖» -/\n@[simp, is_R_or_C_simps]\ntheorem norm_real (r : exprℝ) : «expr‖ ‖» (r : K) = «expr‖ ‖» r := by\n  rw [is_R_or_C.of_real_alg, norm_smul, norm_one, mul_one]\n#align norm_real norm_real\n\n",
+ "norm_re_le_norm":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr‖ ‖» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr‖ ‖» -/\ntheorem norm_re_le_norm (z : K) : «expr‖ ‖» (re z) ≤ «expr‖ ‖» z :=\n  by\n  rw [is_R_or_C.norm_eq_abs, real.norm_eq_abs]\n  exact is_R_or_C.abs_re_le_abs _\n#align norm_re_le_norm norm_re_le_norm\n\n",
+ "norm_of_real":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr‖ ‖» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr‖ ‖» -/\n@[is_R_or_C_simps, norm_cast]\ntheorem norm_of_real (z : exprℝ) : «expr‖ ‖» (z : K) = «expr‖ ‖» z := by\n  rw [is_R_or_C.norm_eq_abs, is_R_or_C.abs_of_real, real.norm_eq_abs]\n#align norm_of_real norm_of_real\n\n",
+ "norm_of_nonneg":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr‖ ‖» -/\ntheorem norm_of_nonneg {r : exprℝ} (r_nn : 0 ≤ r) : «expr‖ ‖» (r : K) = r :=\n  by\n  rw [norm_of_real]\n  exact abs_eq_self.mpr r_nn\n#align norm_of_nonneg norm_of_nonneg\n\n",
+ "norm_im_le_norm":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr‖ ‖» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr‖ ‖» -/\ntheorem norm_im_le_norm (z : K) : «expr‖ ‖» (im z) ≤ «expr‖ ‖» z :=\n  by\n  rw [is_R_or_C.norm_eq_abs, real.norm_eq_abs]\n  exact is_R_or_C.abs_im_le_abs _\n#align norm_im_le_norm norm_im_le_norm\n\n",
+ "norm_eq_abs":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr‖ ‖» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprabsK -/\ntheorem norm_eq_abs (z : K) : «expr‖ ‖» z = (exprabsK) z := by\n  simp only [abs, norm_sq_eq_def', norm_nonneg, real.sqrt_sq]\n#align norm_eq_abs norm_eq_abs\n\n",
+ "norm_conj":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr‖ ‖» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `star_ring_end -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr‖ ‖» -/\n@[is_R_or_C_simps]\ntheorem norm_conj {z : K} : «expr‖ ‖» ((star_ring_end) z) = «expr‖ ‖» z := by\n  simp only [← sqrt_norm_sq_eq_norm, norm_sq_conj]\n#align norm_conj norm_conj\n\n",
+ "nat_cast_re":
+ "@[simp, is_R_or_C_simps, norm_cast]\ntheorem nat_cast_re (n : ℕ) : re (n : K) = n := by rw [← of_real_nat_cast, of_real_re]\n#align nat_cast_re nat_cast_re\n\n",
+ "nat_cast_im":
+ "@[simp, is_R_or_C_simps, norm_cast]\ntheorem nat_cast_im (n : ℕ) : im (n : K) = 0 := by rw [← of_real_nat_cast, of_real_im]\n#align nat_cast_im nat_cast_im\n\n",
+ "mul_self_abs":
+ "theorem mul_self_abs (z : K) : abs z * abs z = norm_sq z :=\n  real.mul_self_sqrt (norm_sq_nonneg _)\n#align mul_self_abs mul_self_abs\n\n",
+ "mul_re":
+ "@[simp, is_R_or_C_simps]\ntheorem mul_re : ∀ z w : K, re (z * w) = re z * re w - im z * im w :=\n  is_R_or_C.mul_re_ax\n#align mul_re mul_re\n\n",
+ "mul_inv_cancel":
+ "#print mul_inv_cancel /-\nprotected theorem mul_inv_cancel {z : K} (h : z ≠ 0) : z * z⁻¹ = 1 := by\n  rw [inv_def, ← mul_assoc, mul_conj, ← of_real_mul, ← norm_sq_eq_def', mul_inv_cancel (mt norm_sq_eq_zero.1 h),\n    of_real_one]\n#align mul_inv_cancel mul_inv_cancel\n-/\n\n",
+ "mul_im":
+ "@[simp, is_R_or_C_simps]\ntheorem mul_im : ∀ z w : K, im (z * w) = re z * im w + im z * re w :=\n  is_R_or_C.mul_im_ax\n#align mul_im mul_im\n\n",
+ "mul_conj":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `star_ring_end -/\ntheorem mul_conj (z : K) : z * (star_ring_end) z = (norm_sq z : K) := by\n  simp only [map_add, add_zero, ext_iff, MonoidWithZeroHom.coe_mk, add_left_inj, mul_eq_mul_left_iff, zero_mul,\n    add_comm, true_or_iff, eq_self_iff_true, mul_neg, add_right_neg, zero_add, norm_sq, mul_comm, and_self_iff, neg_neg,\n    mul_zero, sub_eq_neg_add, neg_zero, is_R_or_C_simps]\n#align mul_conj mul_conj\n\n",
+ "is_cau_seq_re":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprabs' -/\ntheorem is_cau_seq_re (f : CauSeq K abs) : IsCauSeq (exprabs') fun n => re (f n) := fun ε ε0 =>\n  (f.cauchy ε0).imp fun i H j ij => lt_of_le_of_lt (by simpa using abs_re_le_abs (f j - f i)) (H _ ij)\n#align is_cau_seq_re is_cau_seq_re\n\n",
+ "is_cau_seq_im":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprabs' -/\ntheorem is_cau_seq_im (f : CauSeq K abs) : IsCauSeq (exprabs') fun n => im (f n) := fun ε ε0 =>\n  (f.cauchy ε0).imp fun i H j ij => lt_of_le_of_lt (by simpa using abs_im_le_abs (f j - f i)) (H _ ij)\n#align is_cau_seq_im is_cau_seq_im\n\n",
+ "is_cau_seq_abs":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprabs' -/\ntheorem is_cau_seq_abs {f : ℕ → K} (hf : IsCauSeq abs f) : IsCauSeq (exprabs') (abs ∘ f) := fun ε ε0 =>\n  let ⟨i, hi⟩ := hf ε ε0\n  ⟨i, fun j hj => lt_of_le_of_lt (abs_abs_sub_le_abs_sub _ _) (hi j hj)⟩\n#align is_cau_seq_abs is_cau_seq_abs\n\n",
+ "inv_zero":
+ "protected theorem inv_zero : (0⁻¹ : K) = 0 := by rw [← of_real_zero, ← of_real_inv, inv_zero]\n#align inv_zero inv_zero\n\n",
+ "inv_re":
+ "@[simp, is_R_or_C_simps]\ntheorem inv_re (z : K) : re z⁻¹ = re z / norm_sq z := by\n  simp only [inv_def, norm_sq_eq_def, norm_sq, division_def, MonoidWithZeroHom.coe_mk, sub_zero, mul_zero,\n    is_R_or_C_simps]\n#align inv_re inv_re\n\n",
+ "inv_im":
+ "@[simp, is_R_or_C_simps]\ntheorem inv_im (z : K) : im z⁻¹ = im (-z) / norm_sq z := by\n  simp only [inv_def, norm_sq_eq_def, norm_sq, division_def, of_real_im, MonoidWithZeroHom.coe_mk, of_real_re, zero_add,\n    map_neg, mul_zero, is_R_or_C_simps]\n#align inv_im inv_im\n\n",
+ "inv_def":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `star_ring_end -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr‖ ‖» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\ntheorem inv_def (z : K) : z⁻¹ = (star_ring_end) z * ((«expr‖ ‖» z ^ 2)⁻¹ : exprℝ) :=\n  is_R_or_C.inv_def_ax z\n#align inv_def inv_def\n\n",
+ "inv_I":
+ "@[simp, is_R_or_C_simps]\ntheorem inv_I : (I : K)⁻¹ = -I := by field_simp\n#align inv_I inv_I\n\n",
+ "int_cast_re":
+ "@[simp, is_R_or_C_simps, norm_cast]\ntheorem int_cast_re (n : ℤ) : re (n : K) = n := by rw [← of_real_int_cast, of_real_re]\n#align int_cast_re int_cast_re\n\n",
+ "int_cast_im":
+ "@[simp, is_R_or_C_simps, norm_cast]\ntheorem int_cast_im (n : ℤ) : im (n : K) = 0 := by rw [← of_real_int_cast, of_real_im]\n#align int_cast_im int_cast_im\n\n",
+ "im_to_real":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprimR -/\n@[simp, is_R_or_C_simps]\ntheorem im_to_real {x : exprℝ} : (exprimR) x = 0 :=\n  rfl\n#align im_to_real im_to_real\n\n",
+ "im_sq_le_norm_sq":
+ "theorem im_sq_le_norm_sq (z : K) : im z * im z ≤ norm_sq z :=\n  le_add_of_nonneg_left (mul_self_nonneg _)\n#align im_sq_le_norm_sq im_sq_le_norm_sq\n\n",
+ "im_lm_coe":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n@[simp, is_R_or_C_simps]\ntheorem im_lm_coe : (im_lm : K → exprℝ) = im :=\n  rfl\n#align im_lm_coe im_lm_coe\n\n",
+ "im_le_abs":
+ "theorem im_le_abs (z : K) : im z ≤ abs z :=\n  (abs_le.1 (abs_im_le_abs _)).2\n#align im_le_abs im_le_abs\n\n",
+ "im_eq_zero_of_le":
+ "theorem im_eq_zero_of_le {a : K} (h : abs a ≤ re a) : im a = 0 :=\n  by\n  rw [← zero_eq_mul_self]\n  have : re a * re a = re a * re a + im a * im a := by convert is_R_or_C.mul_self_abs a <;> linarith [re_le_abs a]\n  linarith\n#align im_eq_zero_of_le im_eq_zero_of_le\n\n",
+ "im_eq_conj_sub":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `star_ring_end -/\ntheorem im_eq_conj_sub (z : K) : ↑(im z) = I * ((star_ring_end) z - z) / 2 :=\n  by\n  rw [← neg_inj, ← of_real_neg, ← I_mul_re, re_eq_add_conj]\n  simp only [mul_add, sub_eq_add_neg, neg_div', neg_mul, conj_I, mul_neg, neg_add_rev, neg_neg, RingHom.map_mul]\n#align im_eq_conj_sub im_eq_conj_sub\n\n",
+ "im_clm_coe":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →L[ ] » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₗ[ ] » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n@[simp, is_R_or_C_simps, norm_cast]\ntheorem im_clm_coe : ((im_clm : «expr →L[ ] » K (exprℝ) (exprℝ)) : «expr →ₗ[ ] » K (exprℝ) (exprℝ)) = im_lm :=\n  rfl\n#align im_clm_coe im_clm_coe\n\n",
+ "im_clm_apply":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →L[ ] » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n@[simp, is_R_or_C_simps]\ntheorem im_clm_apply : ((im_clm : «expr →L[ ] » K (exprℝ) (exprℝ)) : K → exprℝ) = im :=\n  rfl\n#align im_clm_apply im_clm_apply\n\n",
+ "ext_iff":
+ "theorem ext_iff : ∀ {z w : K}, z = w ↔ re z = re w ∧ im z = im w := fun z w =>\n  { mp := by\n      rintro rfl\n      cc\n    mpr := by\n      rintro ⟨h₁, h₂⟩\n      rw [← re_add_im z, ← re_add_im w, h₁, h₂] }\n#align ext_iff ext_iff\n\n",
+ "ext":
+ "theorem ext : ∀ {z w : K}, re z = re w → im z = im w → z = w :=\n  by\n  simp_rw [ext_iff]\n  cc\n#align ext ext\n\n",
+ "eq_conj_iff_real":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `star_ring_end -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\ntheorem eq_conj_iff_real {z : K} : (star_ring_end) z = z ↔ ∃ r : exprℝ, z = (r : K) :=\n  by\n  constructor\n  · intro h\n    suffices im z = 0 by\n      use re z\n      rw [← add_zero (coe _)]\n      convert (re_add_im z).symm\n      simp [this]\n    contrapose! h\n    rw [← re_add_im z]\n    simp only [conj_of_real, RingHom.map_add, RingHom.map_mul, conj_I_ax]\n    rw [add_left_cancel_iff, ext_iff]\n    simpa [neg_eq_iff_add_eq_zero, add_self_eq_zero]\n  · rintro ⟨r, rfl⟩\n    apply conj_of_real\n#align eq_conj_iff_real eq_conj_iff_real\n\n",
+ "eq_conj_iff_re":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `star_ring_end -/\ntheorem eq_conj_iff_re {z : K} : (star_ring_end) z = z ↔ (re z : K) = z :=\n  eq_conj_iff_real.trans ⟨by rintro ⟨r, rfl⟩ <;> simp, fun h => ⟨_, h.symm⟩⟩\n#align eq_conj_iff_re eq_conj_iff_re\n\n",
+ "div_re_of_real":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\ntheorem div_re_of_real {z : K} {r : exprℝ} : re (z / r) = re z / r :=\n  by\n  by_cases h : r = 0\n  · simp only [h, of_real_zero, div_zero, zero_re']\n  · change r ≠ 0 at h\n    rw [div_eq_mul_inv, ← of_real_inv, div_eq_mul_inv]\n    simp only [one_div, of_real_im, of_real_re, sub_zero, mul_re, mul_zero]\n#align div_re_of_real div_re_of_real\n\n",
+ "div_re":
+ "theorem div_re (z w : K) : re (z / w) = re z * re w / norm_sq w + im z * im w / norm_sq w := by\n  simp only [div_eq_mul_inv, mul_assoc, sub_eq_add_neg, neg_mul, mul_neg, neg_neg, map_neg, is_R_or_C_simps]\n#align div_re div_re\n\n",
+ "div_im":
+ "theorem div_im (z w : K) : im (z / w) = im z * re w / norm_sq w - re z * im w / norm_sq w := by\n  simp only [div_eq_mul_inv, mul_assoc, sub_eq_add_neg, add_comm, neg_mul, mul_neg, map_neg, is_R_or_C_simps]\n#align div_im div_im\n\n",
+ "div_I":
+ "@[simp, is_R_or_C_simps]\ntheorem div_I (z : K) : z / I = -(z * I) := by\n  by_cases h : (I : K) = 0\n  · simp [h]\n  · field_simp [mul_assoc, I_mul_I_of_nonzero h]\n#align div_I div_I\n\n",
+ "continuous_re":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n@[continuity]\ntheorem continuous_re : continuous (re : K → exprℝ) :=\n  re_clm.continuous\n#align continuous_re continuous_re\n\n",
+ "continuous_of_real":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n@[continuity]\ntheorem continuous_of_real : continuous (coe : exprℝ → K) :=\n  of_real_li.continuous\n#align continuous_of_real continuous_of_real\n\n",
+ "continuous_norm_sq":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n@[continuity]\ntheorem continuous_norm_sq : continuous (@is_R_or_C.norm_sq K _) :=\n  by\n  have : (@is_R_or_C.norm_sq K _ : K → exprℝ) = fun x => is_R_or_C.abs x ^ 2 :=\n    by\n    ext\n    exact norm_sq_eq_abs _\n  simp only [this, continuous_abs.pow 2]\n#align continuous_norm_sq continuous_norm_sq\n\n",
+ "continuous_im":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n@[continuity]\ntheorem continuous_im : continuous (im : K → exprℝ) :=\n  im_clm.continuous\n#align continuous_im continuous_im\n\n",
+ "continuous_conj":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `star_ring_end -/\n@[continuity]\ntheorem continuous_conj : continuous (star_ring_end : K → K) :=\n  continuous_star\n#align continuous_conj continuous_conj\n\n",
+ "continuous_abs":
+ "@[continuity]\ntheorem continuous_abs : continuous (@is_R_or_C.abs K _) := by\n  simp only [show @is_R_or_C.abs K _ = has_norm.norm by\n      ext\n      exact (norm_eq_abs _).symm,\n    continuous_norm]\n#align continuous_abs continuous_abs\n\n",
+ "conj_to_real":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `star_ring_end -/\n@[simp, is_R_or_C_simps]\ntheorem conj_to_real {x : exprℝ} : (star_ring_end) x = x :=\n  rfl\n#align conj_to_real conj_to_real\n\n",
+ "conj_smul":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `star_ring_end -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `star_ring_end -/\n@[is_R_or_C_simps]\ntheorem conj_smul (r : exprℝ) (z : K) : (star_ring_end) («expr • » r z) = «expr • » r ((star_ring_end) z) :=\n  by\n  simp_rw [conj_eq_re_sub_im]\n  simp only [smul_re, smul_im, of_real_mul]\n  rw [smul_sub]\n  simp_rw [of_real_alg]\n  simp only [one_mul, algebra.smul_mul_assoc]\n#align conj_smul conj_smul\n\n",
+ "conj_re":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `star_ring_end -/\n@[simp, is_R_or_C_simps]\ntheorem conj_re (z : K) : re ((star_ring_end) z) = re z :=\n  is_R_or_C.conj_re_ax z\n#align conj_re conj_re\n\n",
+ "conj_of_real":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `star_ring_end -/\n@[simp, is_R_or_C_simps]\ntheorem conj_of_real (r : exprℝ) : (star_ring_end) (r : K) = (r : K) :=\n  by\n  rw [ext_iff]\n  simp only [of_real_im, conj_im, eq_self_iff_true, conj_re, and_self_iff, neg_zero]\n#align conj_of_real conj_of_real\n\n",
+ "conj_neg_I":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `star_ring_end -/\n@[simp, is_R_or_C_simps]\ntheorem conj_neg_I : (star_ring_end) (-I) = (I : K) := by simp only [conj_I, RingHom.map_neg, eq_self_iff_true, neg_neg]\n#align conj_neg_I conj_neg_I\n\n",
+ "conj_mul_eq_norm_sq_left":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `star_ring_end -/\ntheorem conj_mul_eq_norm_sq_left (x : K) : (star_ring_end) x * x = (norm_sq x : K) :=\n  by\n  rw [ext_iff]\n  refine'\n    ⟨by\n      simp only [norm_sq, neg_mul, MonoidWithZeroHom.coe_mk, sub_neg_eq_add, map_add, sub_zero, mul_zero,\n        is_R_or_C_simps],\n      _⟩\n  simp only [mul_comm, mul_neg, add_left_neg, is_R_or_C_simps]\n#align conj_mul_eq_norm_sq_left conj_mul_eq_norm_sq_left\n\n",
+ "conj_lie_apply":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `star_ring_end -/\n@[simp, is_R_or_C_simps]\ntheorem conj_lie_apply : (conj_lie : K → K) = star_ring_end :=\n  rfl\n#align conj_lie_apply conj_lie_apply\n\n",
+ "conj_inv":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `star_ring_end -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `star_ring_end -/\n#print conj_inv /-\n@[simp, is_R_or_C_simps]\ntheorem conj_inv (x : K) : (star_ring_end) x⁻¹ = ((star_ring_end) x)⁻¹ :=\n  star_inv' _\n#align conj_inv conj_inv\n-/\n\n",
+ "conj_im":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `star_ring_end -/\n@[simp, is_R_or_C_simps]\ntheorem conj_im (z : K) : im ((star_ring_end) z) = -im z :=\n  is_R_or_C.conj_im_ax z\n#align conj_im conj_im\n\n",
+ "conj_eq_re_sub_im":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `star_ring_end -/\ntheorem conj_eq_re_sub_im (z : K) : (star_ring_end) z = re z - im z * I :=\n  by\n  rw [ext_iff]\n  simp only [add_zero, I_re, of_real_im, I_im, zero_sub, zero_mul, conj_im, of_real_re, eq_self_iff_true, sub_zero,\n    conj_re, mul_im, neg_inj, and_self_iff, mul_re, mul_zero, map_sub]\n#align conj_eq_re_sub_im conj_eq_re_sub_im\n\n",
+ "conj_cle_norm":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr‖ ‖» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →L[ ] » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n@[simp, is_R_or_C_simps]\ntheorem conj_cle_norm : «expr‖ ‖» (@conj_cle K _ : «expr →L[ ] » K (exprℝ) K) = 1 :=\n  (@conj_lie K _).to_linear_isometry.norm_to_continuous_linear_map\n#align conj_cle_norm conj_cle_norm\n\n",
+ "conj_cle_coe":
+ "@[simp, is_R_or_C_simps]\ntheorem conj_cle_coe : (@conj_cle K _).to_linear_equiv = conj_ae.to_linear_equiv :=\n  rfl\n#align conj_cle_coe conj_cle_coe\n\n",
+ "conj_cle_apply":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `star_ring_end -/\n@[simp, is_R_or_C_simps]\ntheorem conj_cle_apply : (conj_cle : K → K) = star_ring_end :=\n  rfl\n#align conj_cle_apply conj_cle_apply\n\n",
+ "conj_bit1":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `star_ring_end -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `star_ring_end -/\n@[simp, is_R_or_C_simps]\ntheorem conj_bit1 (z : K) : (star_ring_end) (bit1 z) = bit1 ((star_ring_end) z) := by\n  simp only [bit0, ext_iff, bit1_re, conj_im, eq_self_iff_true, conj_re, neg_add_rev, and_self_iff, bit1_im]\n#align conj_bit1 conj_bit1\n\n",
+ "conj_bit0":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `star_ring_end -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `star_ring_end -/\n@[simp, is_R_or_C_simps]\ntheorem conj_bit0 (z : K) : (star_ring_end) (bit0 z) = bit0 ((star_ring_end) z) := by\n  simp only [bit0, RingHom.map_add, eq_self_iff_true]\n#align conj_bit0 conj_bit0\n\n",
+ "conj_ae_coe":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `star_ring_end -/\n@[simp, is_R_or_C_simps]\ntheorem conj_ae_coe : (conj_ae : K → K) = star_ring_end :=\n  rfl\n#align conj_ae_coe conj_ae_coe\n\n",
+ "conj_I":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `star_ring_end -/\n@[simp, is_R_or_C_simps]\ntheorem conj_I : (star_ring_end) (I : K) = -I :=\n  is_R_or_C.conj_I_ax\n#align conj_I conj_I\n\n",
+ "coe_real_eq_id":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n@[simp]\ntheorem coe_real_eq_id : @coe (exprℝ) (exprℝ) _ = id :=\n  rfl\n#align coe_real_eq_id coe_real_eq_id\n\n",
+ "bit1_re":
+ "@[simp, is_R_or_C_simps]\ntheorem bit1_re (z : K) : re (bit1 z) = bit1 (re z) := by\n  simp only [bit1, AddMonoidHom.map_add, bit0_re, add_right_inj, one_re]\n#align bit1_re bit1_re\n\n",
+ "bit1_im":
+ "@[simp, is_R_or_C_simps]\ntheorem bit1_im (z : K) : im (bit1 z) = bit0 (im z) := by\n  simp only [bit1, add_right_eq_self, AddMonoidHom.map_add, bit0_im, one_im]\n#align bit1_im bit1_im\n\n",
+ "bit0_re":
+ "@[simp, is_R_or_C_simps]\ntheorem bit0_re (z : K) : re (bit0 z) = bit0 (re z) := by simp only [bit0, map_add]\n#align bit0_re bit0_re\n\n",
+ "bit0_im":
+ "@[simp, is_R_or_C_simps]\ntheorem bit0_im (z : K) : im (bit0 z) = bit0 (im z) := by simp only [bit0, map_add]\n#align bit0_im bit0_im\n\n",
+ "algebra_map_eq_of_real":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\ntheorem algebra_map_eq_of_real : «expr⇑ » (algebra_map (exprℝ) K) = coe :=\n  rfl\n#align algebra_map_eq_of_real algebra_map_eq_of_real\n\n",
+ "add_conj":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `star_ring_end -/\ntheorem add_conj (z : K) : z + (star_ring_end) z = 2 * re z := by\n  simp only [ext_iff, two_mul, map_add, add_zero, of_real_im, conj_im, of_real_re, eq_self_iff_true, add_right_neg,\n    conj_re, and_self_iff]\n#align add_conj add_conj\n\n",
+ "abs_zero":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprabsK -/\n#print abs_zero /-\n@[simp, is_R_or_C_simps]\ntheorem abs_zero : (exprabsK) 0 = 0 := by simp only [abs, real.sqrt_zero, map_zero]\n#align abs_zero abs_zero\n-/\n\n",
+ "abs_two":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprabsK -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprabsK -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprabsK -/\n#print abs_two /-\n@[simp, is_R_or_C_simps]\ntheorem abs_two : (exprabsK) 2 = 2 :=\n  calc\n    (exprabsK) 2 = (exprabsK) (2 : exprℝ) := by rw [of_real_bit0, of_real_one]\n    _ = (2 : exprℝ) := abs_of_nonneg (by norm_num)\n    \n#align abs_two abs_two\n-/\n\n",
+ "abs_to_real":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprabsR -/\n@[simp, is_R_or_C_simps]\ntheorem abs_to_real {x : exprℝ} : (exprabsR) x = has_abs.abs x := by\n  simp [is_R_or_C.abs, abs, real.sqrt_mul_self_eq_abs]\n#align abs_to_real abs_to_real\n\n",
+ "abs_sub_le":
+ "#print abs_sub_le /-\ntheorem abs_sub_le : ∀ a b c : K, abs (a - c) ≤ abs (a - b) + abs (b - c) :=\n  abv_sub_le abs\n#align abs_sub_le abs_sub_le\n-/\n\n",
+ "abs_sub":
+ "#print abs_sub /-\ntheorem abs_sub : ∀ z w : K, abs (z - w) = abs (w - z) :=\n  abv_sub abs\n#align abs_sub abs_sub\n-/\n\n",
+ "abs_sq_re_add_conj'":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `star_ring_end -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `star_ring_end -/\ntheorem abs_sq_re_add_conj' (x : K) : abs ((star_ring_end) x + x) ^ 2 = re ((star_ring_end) x + x) ^ 2 := by\n  simp only [sq, ← norm_sq_eq_abs, norm_sq, map_add, add_zero, MonoidWithZeroHom.coe_mk, add_left_neg, mul_zero,\n    is_R_or_C_simps]\n#align abs_sq_re_add_conj' abs_sq_re_add_conj'\n\n",
+ "abs_sq_re_add_conj":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `star_ring_end -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `star_ring_end -/\ntheorem abs_sq_re_add_conj (x : K) : abs (x + (star_ring_end) x) ^ 2 = re (x + (star_ring_end) x) ^ 2 := by\n  simp only [sq, ← norm_sq_eq_abs, norm_sq, map_add, add_zero, MonoidWithZeroHom.coe_mk, add_right_neg, mul_zero,\n    is_R_or_C_simps]\n#align abs_sq_re_add_conj abs_sq_re_add_conj\n\n",
+ "abs_re_le_abs":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprabs' -/\ntheorem abs_re_le_abs (z : K) : (exprabs') (re z) ≤ abs z := by\n  rw [mul_self_le_mul_self_iff (_root_.abs_nonneg (re z)) (abs_nonneg _), abs_mul_abs_self, mul_self_abs] <;>\n    apply re_sq_le_norm_sq\n#align abs_re_le_abs abs_re_le_abs\n\n",
+ "abs_re_div_abs_le_one":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprabs' -/\ntheorem abs_re_div_abs_le_one (z : K) : (exprabs') (re z / abs z) ≤ 1 :=\n  by\n  by_cases hz : z = 0\n  · simp [hz, zero_le_one]\n  · simp_rw [_root_.abs_div, abs_abs, div_le_iff (abs_pos.2 hz), one_mul, abs_re_le_abs]\n#align abs_re_div_abs_le_one abs_re_div_abs_le_one\n\n",
+ "abs_pos":
+ "#print abs_pos /-\n@[simp, is_R_or_C_simps]\ntheorem abs_pos {z : K} : 0 < abs z ↔ z ≠ 0 :=\n  abv_pos abs\n#align abs_pos abs_pos\n-/\n\n",
+ "abs_one":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprabsK -/\n#print abs_one /-\n@[simp, is_R_or_C_simps]\ntheorem abs_one : (exprabsK) 1 = 1 := by simp only [abs, map_one, real.sqrt_one]\n#align abs_one abs_one\n-/\n\n",
+ "abs_of_real":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprabsK -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprabs' -/\n@[simp, norm_cast]\ntheorem abs_of_real (r : exprℝ) : (exprabsK) r = (exprabs') r := by\n  simp only [abs, norm_sq, real.sqrt_mul_self_eq_abs, add_zero, of_real_im, MonoidWithZeroHom.coe_mk, of_real_re,\n    mul_zero]\n#align abs_of_real abs_of_real\n\n",
+ "abs_of_nonneg":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprabsK -/\n#print abs_of_nonneg /-\ntheorem abs_of_nonneg {r : exprℝ} (h : 0 ≤ r) : (exprabsK) r = r :=\n  (abs_of_real _).trans (abs_of_nonneg h)\n#align abs_of_nonneg abs_of_nonneg\n-/\n\n",
+ "abs_of_nat":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprabsK -/\ntheorem abs_of_nat (n : ℕ) : (exprabsK) n = n :=\n  by\n  rw [← of_real_nat_cast]\n  exact abs_of_nonneg (nat.cast_nonneg n)\n#align abs_of_nat abs_of_nat\n\n",
+ "abs_nonneg":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprabsK -/\n#print abs_nonneg /-\ntheorem abs_nonneg (z : K) : 0 ≤ (exprabsK) z :=\n  real.sqrt_nonneg _\n#align abs_nonneg abs_nonneg\n-/\n\n",
+ "abs_neg":
+ "#print abs_neg /-\n@[simp, is_R_or_C_simps]\ntheorem abs_neg : ∀ z : K, abs (-z) = abs z :=\n  abv_neg abs\n#align abs_neg abs_neg\n-/\n\n",
+ "abs_ne_zero":
+ "theorem abs_ne_zero {z : K} : abs z ≠ 0 ↔ z ≠ 0 :=\n  not_congr abs_eq_zero\n#align abs_ne_zero abs_ne_zero\n\n",
+ "abs_mul":
+ "#print abs_mul /-\n@[simp, is_R_or_C_simps]\ntheorem abs_mul (z w : K) : abs (z * w) = abs z * abs w := by\n  rw [abs, norm_sq_mul, real.sqrt_mul (norm_sq_nonneg _)] <;> rfl\n#align abs_mul abs_mul\n-/\n\n",
+ "abs_inv":
+ "#print abs_inv /-\n@[simp, is_R_or_C_simps]\ntheorem abs_inv : ∀ z : K, abs z⁻¹ = (abs z)⁻¹ :=\n  abv_inv abs\n#align abs_inv abs_inv\n-/\n\n",
+ "abs_im_le_abs":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprabs' -/\ntheorem abs_im_le_abs (z : K) : (exprabs') (im z) ≤ abs z := by\n  rw [mul_self_le_mul_self_iff (_root_.abs_nonneg (im z)) (abs_nonneg _), abs_mul_abs_self, mul_self_abs] <;>\n    apply im_sq_le_norm_sq\n#align abs_im_le_abs abs_im_le_abs\n\n",
+ "abs_im_div_abs_le_one":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprabs' -/\ntheorem abs_im_div_abs_le_one (z : K) : (exprabs') (im z / abs z) ≤ 1 :=\n  by\n  by_cases hz : z = 0\n  · simp [hz, zero_le_one]\n  · simp_rw [_root_.abs_div, abs_abs, div_le_iff (abs_pos.2 hz), one_mul, abs_im_le_abs]\n#align abs_im_div_abs_le_one abs_im_div_abs_le_one\n\n",
+ "abs_eq_zero":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprabsK -/\n#print abs_eq_zero /-\n@[simp, is_R_or_C_simps]\ntheorem abs_eq_zero {z : K} : (exprabsK) z = 0 ↔ z = 0 :=\n  (real.sqrt_eq_zero <| norm_sq_nonneg _).trans norm_sq_eq_zero\n#align abs_eq_zero abs_eq_zero\n-/\n\n",
+ "abs_div":
+ "#print abs_div /-\n@[simp, is_R_or_C_simps]\ntheorem abs_div : ∀ z w : K, abs (z / w) = abs z / abs w :=\n  abv_div abs\n#align abs_div abs_div\n-/\n\n",
+ "abs_conj":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `star_ring_end -/\n@[simp, is_R_or_C_simps]\ntheorem abs_conj (z : K) : abs ((star_ring_end) z) = abs z := by simp only [abs, norm_sq_conj]\n#align abs_conj abs_conj\n\n",
+ "abs_cast_nat":
+ "@[simp, is_R_or_C_simps, norm_cast]\ntheorem abs_cast_nat (n : ℕ) : abs (n : K) = n := by rw [← of_real_nat_cast, abs_of_nonneg (nat.cast_nonneg n)]\n#align abs_cast_nat abs_cast_nat\n\n",
+ "abs_add":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `star_ring_end -/\n#print abs_add /-\ntheorem abs_add (z w : K) : abs (z + w) ≤ abs z + abs w :=\n  (mul_self_le_mul_self_iff (abs_nonneg _) (add_nonneg (abs_nonneg _) (abs_nonneg _))).2 <|\n    by\n    rw [mul_self_abs, add_mul_self_eq, mul_self_abs, mul_self_abs, add_right_comm, norm_sq_add, add_le_add_iff_left,\n      mul_assoc, mul_le_mul_left (zero_lt_two' (exprℝ))]\n    simpa [-mul_re, is_R_or_C_simps] using re_le_abs (z * (star_ring_end) w)\n#align abs_add abs_add\n-/\n\n",
+ "abs_abs_sub_le_abs_sub":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprabs' -/\ntheorem abs_abs_sub_le_abs_sub : ∀ z w : K, (exprabs') (abs z - abs w) ≤ abs (z - w) :=\n  abs_abv_sub_le_abv_sub abs\n#align abs_abs_sub_le_abs_sub abs_abs_sub_le_abs_sub\n\n",
+ "abs_abs":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprabs' -/\n#print abs_abs /-\n@[simp, is_R_or_C_simps]\ntheorem abs_abs (z : K) : (exprabs') (abs z) = abs z :=\n  abs_of_nonneg (abs_nonneg _)\n#align abs_abs abs_abs\n-/\n\n",
+ "I_to_real":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprIR -/\n@[simp, is_R_or_C_simps]\ntheorem I_to_real : exprIR = 0 :=\n  rfl\n#align I_to_real I_to_real\n\n",
+ "I_re":
+ "/-- The imaginary unit. -/\n@[simp, is_R_or_C_simps]\ntheorem I_re : re (I : K) = 0 :=\n  I_re_ax\n#align I_re I_re\n\n",
+ "I_mul_re":
+ "@[simp, is_R_or_C_simps]\ntheorem I_mul_re (z : K) : re (I * z) = -im z := by simp only [I_re, zero_sub, I_im', zero_mul, mul_re]\n#align I_mul_re I_mul_re\n\n",
+ "I_mul_I_of_nonzero":
+ "theorem I_mul_I_of_nonzero : (I : K) ≠ 0 → (I : K) * I = -1 :=\n  by\n  have := I_mul_I_ax\n  tauto\n#align I_mul_I_of_nonzero I_mul_I_of_nonzero\n\n",
+ "I_mul_I":
+ "theorem I_mul_I : (I : K) = 0 ∨ (I : K) * I = -1 :=\n  I_mul_I_ax\n#align I_mul_I I_mul_I\n\n",
+ "I_im'":
+ "@[simp, is_R_or_C_simps]\ntheorem I_im' (z : K) : im (I : K) * im z = im z := by rw [mul_comm, I_im _]\n#align I_im' I_im'\n\n",
+ "I_im":
+ "@[simp, is_R_or_C_simps]\ntheorem I_im (z : K) : im z * im (I : K) = im z :=\n  mul_im_I_ax z\n#align I_im I_im\n\n"}

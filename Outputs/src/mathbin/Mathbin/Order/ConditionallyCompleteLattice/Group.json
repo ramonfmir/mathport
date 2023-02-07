@@ -1,0 +1,12 @@
+{"mul_csupᵢ_le":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵈ» -/\n#print mul_csupᵢ_le /-\n@[to_additive]\ntheorem mul_csupᵢ_le [covariant_class α α (· * ·) (· ≤ ·)] {a : α} {g : α} {h : ι → α} (H : ∀ j, g * h j ≤ a) :\n    g * supᵢ h ≤ a :=\n  @le_mul_cinfᵢ («expr ᵒᵈ» α) _ _ _ _ _ _ _ _ H\n#align mul_csupr_le mul_csupᵢ_le\n-/\n\n",
+ "le_mul_cinfᵢ":
+ "#print le_mul_cinfᵢ /-\n/-\nCopyright (c) 2018 Sébastien Gouëzel. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Sébastien Gouëzel\n-/\n@[to_additive]\ntheorem le_mul_cinfᵢ [covariant_class α α (· * ·) (· ≤ ·)] {a : α} {g : α} {h : ι → α} (H : ∀ j, a ≤ g * h j) :\n    a ≤ g * infᵢ h :=\n  inv_mul_le_iff_le_mul.mp <| le_cinfᵢ fun hi => inv_mul_le_iff_le_mul.mpr <| H _\n#align le_mul_cinfi le_mul_cinfᵢ\n-/\n\n",
+ "le_cinfᵢ_mul_cinfᵢ":
+ "#print le_cinfᵢ_mul_cinfᵢ /-\n@[to_additive]\ntheorem le_cinfᵢ_mul_cinfᵢ [covariant_class α α (· * ·) (· ≤ ·)] [covariant_class α α (function.swap (· * ·)) (· ≤ ·)]\n    {a : α} {g : ι → α} {h : ι' → α} (H : ∀ i j, a ≤ g i * h j) : a ≤ infᵢ g * infᵢ h :=\n  le_cinfᵢ_mul fun i => le_mul_cinfᵢ <| H _\n#align le_cinfi_mul_cinfi le_cinfᵢ_mul_cinfᵢ\n-/\n\n",
+ "le_cinfᵢ_mul":
+ "#print le_cinfᵢ_mul /-\n@[to_additive]\ntheorem le_cinfᵢ_mul [covariant_class α α (function.swap (· * ·)) (· ≤ ·)] {a : α} {g : ι → α} {h : α}\n    (H : ∀ i, a ≤ g i * h) : a ≤ infᵢ g * h :=\n  mul_inv_le_iff_le_mul.mp <| le_cinfᵢ fun gi => mul_inv_le_iff_le_mul.mpr <| H _\n#align le_cinfi_mul le_cinfᵢ_mul\n-/\n\n",
+ "csupᵢ_mul_le":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵈ» -/\n#print csupᵢ_mul_le /-\n@[to_additive]\ntheorem csupᵢ_mul_le [covariant_class α α (function.swap (· * ·)) (· ≤ ·)] {a : α} {g : ι → α} {h : α}\n    (H : ∀ i, g i * h ≤ a) : supᵢ g * h ≤ a :=\n  @le_cinfᵢ_mul («expr ᵒᵈ» α) _ _ _ _ _ _ _ _ H\n#align csupr_mul_le csupᵢ_mul_le\n-/\n\n",
+ "csupᵢ_mul_csupᵢ_le":
+ "#print csupᵢ_mul_csupᵢ_le /-\n@[to_additive]\ntheorem csupᵢ_mul_csupᵢ_le [covariant_class α α (· * ·) (· ≤ ·)] [covariant_class α α (function.swap (· * ·)) (· ≤ ·)]\n    {a : α} {g : ι → α} {h : ι' → α} (H : ∀ i j, g i * h j ≤ a) : supᵢ g * supᵢ h ≤ a :=\n  csupᵢ_mul_le fun i => mul_csupᵢ_le <| H _\n#align csupr_mul_csupr_le csupᵢ_mul_csupᵢ_le\n-/\n\n"}

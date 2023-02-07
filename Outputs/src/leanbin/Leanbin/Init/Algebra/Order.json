@@ -1,0 +1,96 @@
+{"not_lt_of_gt":
+ "#print not_lt_of_gt /-\ntheorem not_lt_of_gt {a b : α} (h : a > b) : ¬a < b :=\n  lt_asymm h\n#align not_lt_of_gt not_lt_of_gt\n-/\n\n",
+ "not_lt_of_ge":
+ "#print not_lt_of_ge /-\ntheorem not_lt_of_ge {a b : α} (h : a ≥ b) : ¬a < b := fun hab => not_le_of_gt hab h\n#align not_lt_of_ge not_lt_of_ge\n-/\n\n",
+ "not_lt":
+ "#print not_lt /-\n@[simp]\ntheorem not_lt {a b : α} : ¬a < b ↔ b ≤ a :=\n  ⟨le_of_not_gt, not_lt_of_ge⟩\n#align not_lt not_lt\n-/\n\n",
+ "not_le_of_gt":
+ "#print not_le_of_gt /-\ntheorem not_le_of_gt {a b : α} (h : a > b) : ¬a ≤ b :=\n  (le_not_le_of_lt h).right\n#align not_le_of_gt not_le_of_gt\n-/\n\n",
+ "not_le":
+ "#print not_le /-\n@[simp]\ntheorem not_le {a b : α} : ¬a ≤ b ↔ b < a :=\n  (lt_iff_not_ge _ _).symm\n#align not_le not_le\n-/\n\n",
+ "ne_of_lt":
+ "#print ne_of_lt /-\ntheorem ne_of_lt {a b : α} (h : a < b) : a ≠ b := fun he => absurd h (he ▸ lt_irrefl a)\n#align ne_of_lt ne_of_lt\n-/\n\n",
+ "ne_of_gt":
+ "#print ne_of_gt /-\ntheorem ne_of_gt {a b : α} (h : b < a) : a ≠ b := fun he => absurd h (he ▸ lt_irrefl a)\n#align ne_of_gt ne_of_gt\n-/\n\n",
+ "ne_iff_lt_or_gt":
+ "#print ne_iff_lt_or_gt /-\ntheorem ne_iff_lt_or_gt {a b : α} : a ≠ b ↔ a < b ∨ a > b :=\n  ⟨lt_or_gt_of_ne, fun o => or.elim o ne_of_lt ne_of_gt⟩\n#align ne_iff_lt_or_gt ne_iff_lt_or_gt\n-/\n\n",
+ "lt_trichotomy":
+ "#print lt_trichotomy /-\ntheorem lt_trichotomy (a b : α) : a < b ∨ a = b ∨ b < a :=\n  or.elim (le_total a b)\n    (fun h : a ≤ b =>\n      or.elim (decidable.lt_or_eq_of_le h) (fun h : a < b => or.inl h) fun h : a = b => or.inr (or.inl h))\n    fun h : b ≤ a =>\n    or.elim (decidable.lt_or_eq_of_le h) (fun h : b < a => or.inr (or.inr h)) fun h : b = a => or.inr (or.inl h.symm)\n#align lt_trichotomy lt_trichotomy\n-/\n\n",
+ "lt_trans":
+ "#print lt_trans /-\n@[trans]\ntheorem lt_trans : ∀ {a b c : α}, a < b → b < c → a < c\n  | a, b, c, hab, hbc =>\n    match le_not_le_of_lt hab, le_not_le_of_lt hbc with\n    | ⟨hab, hba⟩, ⟨hbc, hcb⟩ => lt_of_le_not_le (le_trans hab hbc) fun hca => hcb (le_trans hca hab)\n#align lt_trans lt_trans\n-/\n\n",
+ "lt_or_le":
+ "#print lt_or_le /-\ntheorem lt_or_le (a b : α) : a < b ∨ b ≤ a :=\n  if hba : b ≤ a then or.inr hba else or.inl <| lt_of_not_ge hba\n#align lt_or_le lt_or_le\n-/\n\n",
+ "lt_or_gt_of_ne":
+ "#print lt_or_gt_of_ne /-\ntheorem lt_or_gt_of_ne {a b : α} (h : a ≠ b) : a < b ∨ a > b :=\n  match lt_trichotomy a b with\n  | or.inl hlt => or.inl hlt\n  | or.inr (or.inl HEq) => absurd HEq h\n  | or.inr (or.inr hgt) => or.inr hgt\n#align lt_or_gt_of_ne lt_or_gt_of_ne\n-/\n\n",
+ "lt_or_ge":
+ "#print lt_or_ge /-\ntheorem lt_or_ge : ∀ a b : α, a < b ∨ a ≥ b :=\n  lt_or_le\n#align lt_or_ge lt_or_ge\n-/\n\n",
+ "lt_or_eq_of_le":
+ "#print lt_or_eq_of_le /-\ntheorem lt_or_eq_of_le {a b : α} : a ≤ b → a < b ∨ a = b :=\n  decidable.lt_or_eq_of_le\n#align lt_or_eq_of_le lt_or_eq_of_le\n-/\n\n",
+ "lt_of_not_ge":
+ "#print lt_of_not_ge /-\ntheorem lt_of_not_ge {a b : α} (h : ¬a ≥ b) : a < b :=\n  lt_of_le_not_le ((le_total _ _).resolve_right h) h\n#align lt_of_not_ge lt_of_not_ge\n-/\n\n",
+ "lt_of_lt_of_le":
+ "#print lt_of_lt_of_le /-\n@[trans]\ntheorem lt_of_lt_of_le : ∀ {a b c : α}, a < b → b ≤ c → a < c\n  | a, b, c, hab, hbc =>\n    let ⟨hab, hba⟩ := le_not_le_of_lt hab\n    lt_of_le_not_le (le_trans hab hbc) fun hca => hba (le_trans hbc hca)\n#align lt_of_lt_of_le lt_of_lt_of_le\n-/\n\n",
+ "lt_of_le_of_ne":
+ "#print lt_of_le_of_ne /-\ntheorem lt_of_le_of_ne {a b : α} : a ≤ b → a ≠ b → a < b := fun h₁ h₂ => lt_of_le_not_le h₁ <| mt (le_antisymm h₁) h₂\n#align lt_of_le_of_ne lt_of_le_of_ne\n-/\n\n",
+ "lt_of_le_of_lt":
+ "#print lt_of_le_of_lt /-\n@[trans]\ntheorem lt_of_le_of_lt : ∀ {a b c : α}, a ≤ b → b < c → a < c\n  | a, b, c, hab, hbc =>\n    let ⟨hbc, hcb⟩ := le_not_le_of_lt hbc\n    lt_of_le_not_le (le_trans hab hbc) fun hca => hcb (le_trans hca hab)\n#align lt_of_le_of_lt lt_of_le_of_lt\n-/\n\n",
+ "lt_of_le_not_le":
+ "#print lt_of_le_not_le /-\ntheorem lt_of_le_not_le : ∀ {a b : α}, a ≤ b → ¬b ≤ a → a < b\n  | a, b, hab, hba => lt_iff_le_not_le.mpr ⟨hab, hba⟩\n#align lt_of_le_not_le lt_of_le_not_le\n-/\n\n",
+ "lt_irrefl":
+ "#print lt_irrefl /-\ntheorem lt_irrefl : ∀ a : α, ¬a < a\n  | a, haa =>\n    match le_not_le_of_lt haa with\n    | ⟨h1, h2⟩ => false.rec _ (h2 h1)\n#align lt_irrefl lt_irrefl\n-/\n\n",
+ "lt_iff_not_ge":
+ "#print lt_iff_not_ge /-\ntheorem lt_iff_not_ge (x y : α) : x < y ↔ ¬x ≥ y :=\n  ⟨not_le_of_gt, lt_of_not_ge⟩\n#align lt_iff_not_ge lt_iff_not_ge\n-/\n\n",
+ "lt_iff_le_not_le":
+ "#print lt_iff_le_not_le /-\ntheorem lt_iff_le_not_le : ∀ {a b : α}, a < b ↔ a ≤ b ∧ ¬b ≤ a :=\n  preorder.lt_iff_le_not_le\n#align lt_iff_le_not_le lt_iff_le_not_le\n-/\n\n",
+ "lt_asymm":
+ "#print lt_asymm /-\ntheorem lt_asymm {a b : α} (h : a < b) : ¬b < a := fun h1 : b < a => lt_irrefl a (lt_trans h h1)\n#align lt_asymm lt_asymm\n-/\n\n",
+ "le_trans":
+ "#print le_trans /-\n/-- The relation `≤` on a preorder is transitive. -/\n@[trans]\ntheorem le_trans : ∀ {a b c : α}, a ≤ b → b ≤ c → a ≤ c :=\n  preorder.le_trans\n#align le_trans le_trans\n-/\n\n",
+ "le_total":
+ "#print le_total /-\ntheorem le_total : ∀ a b : α, a ≤ b ∨ b ≤ a :=\n  linear_order.le_total\n#align le_total le_total\n-/\n\n",
+ "le_refl":
+ "#print le_refl /-\n/-\nCopyright (c) 2016 Microsoft Corporation. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Leonardo de Moura\n-/\n/- Make sure instances defined in this file have lower priority than the ones\n   defined for concrete structures -/\n/- Make sure instances defined in this file have lower priority than the ones\n   defined for concrete structures -/\n/-- The relation `≤` on a preorder is reflexive. -/\n@[refl]\ntheorem le_refl : ∀ a : α, a ≤ a :=\n  preorder.le_refl\n#align le_refl le_refl\n-/\n\n",
+ "le_or_lt":
+ "#print le_or_lt /-\ntheorem le_or_lt (a b : α) : a ≤ b ∨ b < a :=\n  (lt_or_le b a).swap\n#align le_or_lt le_or_lt\n-/\n\n",
+ "le_or_gt":
+ "#print le_or_gt /-\ntheorem le_or_gt : ∀ a b : α, a ≤ b ∨ a > b :=\n  le_or_lt\n#align le_or_gt le_or_gt\n-/\n\n",
+ "le_of_not_lt":
+ "#print le_of_not_lt /-\ntheorem le_of_not_lt {a b : α} (h : ¬b < a) : a ≤ b :=\n  match lt_trichotomy a b with\n  | or.inl hlt => le_of_lt hlt\n  | or.inr (or.inl HEq) => HEq ▸ le_refl a\n  | or.inr (or.inr hgt) => absurd hgt h\n#align le_of_not_lt le_of_not_lt\n-/\n\n",
+ "le_of_not_le":
+ "#print le_of_not_le /-\ntheorem le_of_not_le {a b : α} : ¬a ≤ b → b ≤ a :=\n  or.resolve_left (le_total a b)\n#align le_of_not_le le_of_not_le\n-/\n\n",
+ "le_of_not_gt":
+ "#print le_of_not_gt /-\ntheorem le_of_not_gt {a b : α} : ¬a > b → a ≤ b :=\n  le_of_not_lt\n#align le_of_not_gt le_of_not_gt\n-/\n\n",
+ "le_of_not_ge":
+ "#print le_of_not_ge /-\ntheorem le_of_not_ge {a b : α} : ¬a ≥ b → a ≤ b :=\n  or.resolve_left (le_total b a)\n#align le_of_not_ge le_of_not_ge\n-/\n\n",
+ "le_of_lt_or_eq":
+ "#print le_of_lt_or_eq /-\ntheorem le_of_lt_or_eq : ∀ {a b : α}, a < b ∨ a = b → a ≤ b\n  | a, b, or.inl hab => le_of_lt hab\n  | a, b, or.inr hab => hab ▸ le_refl _\n#align le_of_lt_or_eq le_of_lt_or_eq\n-/\n\n",
+ "le_of_lt":
+ "#print le_of_lt /-\ntheorem le_of_lt : ∀ {a b : α}, a < b → a ≤ b\n  | a, b, hab => (le_not_le_of_lt hab).left\n#align le_of_lt le_of_lt\n-/\n\n",
+ "le_of_eq_or_lt":
+ "#print le_of_eq_or_lt /-\ntheorem le_of_eq_or_lt {a b : α} (h : a = b ∨ a < b) : a ≤ b :=\n  or.elim h le_of_eq le_of_lt\n#align le_of_eq_or_lt le_of_eq_or_lt\n-/\n\n",
+ "le_of_eq":
+ "#print le_of_eq /-\ntheorem le_of_eq {a b : α} : a = b → a ≤ b := fun h => h ▸ le_refl a\n#align le_of_eq le_of_eq\n-/\n\n",
+ "le_not_le_of_lt":
+ "#print le_not_le_of_lt /-\ntheorem le_not_le_of_lt : ∀ {a b : α}, a < b → a ≤ b ∧ ¬b ≤ a\n  | a, b, hab => lt_iff_le_not_le.mp hab\n#align le_not_le_of_lt le_not_le_of_lt\n-/\n\n",
+ "le_imp_le_of_lt_imp_lt":
+ "#print le_imp_le_of_lt_imp_lt /-\n-- TODO(Leo): decide whether we should keep this instance or not \n-- TODO(Leo): decide whether we should keep this instance or not\ntheorem le_imp_le_of_lt_imp_lt {β} [preorder α] [linear_order β] {a b : α} {c d : β} (H : d < c → b < a) (h : a ≤ b) :\n    c ≤ d :=\n  le_of_not_lt fun h' => not_le_of_gt (H h') h\n#align le_imp_le_of_lt_imp_lt le_imp_le_of_lt_imp_lt\n-/\n\n",
+ "le_iff_lt_or_eq":
+ "#print le_iff_lt_or_eq /-\ntheorem le_iff_lt_or_eq {a b : α} : a ≤ b ↔ a < b ∨ a = b :=\n  decidable.le_iff_lt_or_eq\n#align le_iff_lt_or_eq le_iff_lt_or_eq\n-/\n\n",
+ "le_antisymm_iff":
+ "#print le_antisymm_iff /-\ntheorem le_antisymm_iff {a b : α} : a = b ↔ a ≤ b ∧ b ≤ a :=\n  ⟨fun e => ⟨le_of_eq e, le_of_eq e.symm⟩, fun ⟨h1, h2⟩ => le_antisymm h1 h2⟩\n#align le_antisymm_iff le_antisymm_iff\n-/\n\n",
+ "le_antisymm":
+ "#print le_antisymm /-\ntheorem le_antisymm : ∀ {a b : α}, a ≤ b → b ≤ a → a = b :=\n  partial_order.le_antisymm\n#align le_antisymm le_antisymm\n-/\n\n",
+ "gt_trans":
+ "#print gt_trans /-\n@[trans]\ntheorem gt_trans : ∀ {a b c : α}, a > b → b > c → a > c := fun a b c h₁ h₂ => lt_trans h₂ h₁\n#align gt_trans gt_trans\n-/\n\n",
+ "gt_of_gt_of_ge":
+ "#print gt_of_gt_of_ge /-\n@[trans]\ntheorem gt_of_gt_of_ge {a b c : α} (h₁ : a > b) (h₂ : b ≥ c) : a > c :=\n  lt_of_le_of_lt h₂ h₁\n#align gt_of_gt_of_ge gt_of_gt_of_ge\n-/\n\n",
+ "gt_of_ge_of_gt":
+ "#print gt_of_ge_of_gt /-\n@[trans]\ntheorem gt_of_ge_of_gt {a b c : α} (h₁ : a ≥ b) (h₂ : b > c) : a > c :=\n  lt_of_lt_of_le h₂ h₁\n#align gt_of_ge_of_gt gt_of_ge_of_gt\n-/\n\n",
+ "gt_irrefl":
+ "#print gt_irrefl /-\ntheorem gt_irrefl : ∀ a : α, ¬a > a :=\n  lt_irrefl\n#align gt_irrefl gt_irrefl\n-/\n\n",
+ "ge_trans":
+ "#print ge_trans /-\n@[trans]\ntheorem ge_trans : ∀ {a b c : α}, a ≥ b → b ≥ c → a ≥ c := fun a b c h₁ h₂ => le_trans h₂ h₁\n#align ge_trans ge_trans\n-/\n\n",
+ "eq_or_lt_of_not_lt":
+ "#print eq_or_lt_of_not_lt /-\ntheorem eq_or_lt_of_not_lt {a b : α} (h : ¬a < b) : a = b ∨ b < a :=\n  if h₁ : a = b then or.inl h₁ else or.inr (lt_of_not_ge fun hge => h (lt_of_le_of_ne hge h₁))\n#align eq_or_lt_of_not_lt eq_or_lt_of_not_lt\n-/\n\n",
+ "eq_or_lt_of_le":
+ "#print eq_or_lt_of_le /-\ntheorem eq_or_lt_of_le {a b : α} (hab : a ≤ b) : a = b ∨ a < b :=\n  (lt_or_eq_of_le hab).swap\n#align eq_or_lt_of_le eq_or_lt_of_le\n-/\n\n"}

@@ -1,0 +1,14 @@
+{"top_eq_true":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n#print Prop.top_eq_true /-\ntheorem Prop.top_eq_true : («expr⊤» : Prop) = true :=\n  rfl\n#align Prop.top_eq_true Prop.top_eq_true\n-/\n\n",
+ "sup_Prop_eq":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:219:4: warning: unsupported binary notation `«expr ⊔ » -/\n#print sup_Prop_eq /-\n@[simp]\ntheorem sup_Prop_eq : («expr ⊔ » · ·) = (· ∨ ·) :=\n  rfl\n#align sup_Prop_eq sup_Prop_eq\n-/\n\n",
+ "isCompl_iff":
+ "#print Prop.isCompl_iff /-\n@[simp]\ntheorem Prop.isCompl_iff {P Q : Prop} : IsCompl P Q ↔ ¬(P ↔ Q) :=\n  by\n  rw [isCompl_iff, Prop.disjoint_iff, Prop.codisjoint_iff, not_iff]\n  tauto\n#align Prop.is_compl_iff Prop.isCompl_iff\n-/\n\n",
+ "inf_Prop_eq":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:219:4: warning: unsupported binary notation `«expr ⊓ » -/\n#print inf_Prop_eq /-\n@[simp]\ntheorem inf_Prop_eq : («expr ⊓ » · ·) = (· ∧ ·) :=\n  rfl\n#align inf_Prop_eq inf_Prop_eq\n-/\n\n",
+ "disjoint_iff":
+ "#print Prop.disjoint_iff /-\n@[simp]\ntheorem Prop.disjoint_iff {P Q : Prop} : Disjoint P Q ↔ ¬(P ∧ Q) :=\n  disjoint_iff_inf_le\n#align Prop.disjoint_iff Prop.disjoint_iff\n-/\n\n",
+ "codisjoint_iff":
+ "#print Prop.codisjoint_iff /-\n@[simp]\ntheorem Prop.codisjoint_iff {P Q : Prop} : Codisjoint P Q ↔ P ∨ Q :=\n  codisjoint_iff_le_sup.trans <| forall_const _\n#align Prop.codisjoint_iff Prop.codisjoint_iff\n-/\n\n",
+ "bot_eq_false":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n#print Prop.bot_eq_false /-\n/-\nCopyright (c) 2017 Johannes Hölzl. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Johannes Hölzl\n-/\ntheorem Prop.bot_eq_false : («expr⊥» : Prop) = false :=\n  rfl\n#align Prop.bot_eq_false Prop.bot_eq_false\n-/\n\n"}

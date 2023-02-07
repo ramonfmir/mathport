@@ -1,0 +1,94 @@
+{"xor_true":
+ "#print Bool.xor_true /-\n@[simp]\ntheorem Bool.xor_true (b : bool) : xor b true = not b := by cases b <;> simp\n#align bxor_tt Bool.xor_true\n-/\n\n",
+ "xor_self":
+ "#print Bool.xor_self /-\n@[simp]\ntheorem Bool.xor_self (b : bool) : xor b b = ff := by cases b <;> simp\n#align bxor_self Bool.xor_self\n-/\n\n",
+ "xor_false":
+ "#print Bool.xor_false /-\ntheorem Bool.xor_false (b : bool) : xor b false = b := by cases b <;> simp\n#align bxor_ff Bool.xor_false\n-/\n\n",
+ "xor_coe_iff":
+ "#print Bool.xor_coe_iff /-\n@[simp]\ntheorem Bool.xor_coe_iff (a b : bool) : xor a b ↔ Xor' a b := by cases a <;> cases b <;> exact by decide\n#align bxor_coe_iff Bool.xor_coe_iff\n-/\n\n",
+ "true_xor":
+ "#print Bool.true_xor /-\n@[simp]\ntheorem Bool.true_xor (b : bool) : xor true b = not b := by cases b <;> simp\n#align tt_bxor Bool.true_xor\n-/\n\n",
+ "true_or":
+ "#print Bool.true_or /-\n@[simp]\ntheorem Bool.true_or (b : bool) : (tt || b) = tt := by cases b <;> simp\n#align tt_bor Bool.true_or\n-/\n\n",
+ "true_eq_false_eq_False":
+ "#print Bool.true_eq_false_eq_False /-\ntheorem Bool.true_eq_false_eq_False : ¬tt = ff := by contradiction\n#align tt_eq_ff_eq_false Bool.true_eq_false_eq_False\n-/\n\n",
+ "true_and":
+ "#print Bool.true_and /-\n@[simp]\ntheorem Bool.true_and (b : bool) : (tt && b) = b := by cases b <;> simp\n#align tt_band Bool.true_and\n-/\n\n",
+ "or_true":
+ "#print Bool.or_true /-\n@[simp]\ntheorem Bool.or_true (b : bool) : (b || tt) = tt := by cases b <;> simp\n#align bor_tt Bool.or_true\n-/\n\n",
+ "or_self":
+ "#print Bool.or_self /-\n@[simp]\ntheorem Bool.or_self (b : bool) : (b || b) = b := by cases b <;> simp\n#align bor_self Bool.or_self\n-/\n\n",
+ "or_false":
+ "#print Bool.or_false /-\n@[simp]\ntheorem Bool.or_false (b : bool) : (b || ff) = b := by cases b <;> simp\n#align bor_ff Bool.or_false\n-/\n\n",
+ "or_eq_true_eq_eq_true_or_eq_true":
+ "#print Bool.or_eq_true_eq_eq_true_or_eq_true /-\n@[simp]\ntheorem Bool.or_eq_true_eq_eq_true_or_eq_true (a b : bool) : ((a || b) = tt) = (a = tt ∨ b = tt) := by\n  cases a <;> cases b <;> simp\n#align bor_eq_true_eq_eq_tt_or_eq_tt Bool.or_eq_true_eq_eq_true_or_eq_true\n-/\n\n",
+ "or_eq_false_eq_eq_false_and_eq_false":
+ "#print Bool.or_eq_false_eq_eq_false_and_eq_false /-\n@[simp]\ntheorem Bool.or_eq_false_eq_eq_false_and_eq_false (a b : bool) : ((a || b) = ff) = (a = ff ∧ b = ff) := by\n  cases a <;> cases b <;> simp\n#align bor_eq_false_eq_eq_ff_and_eq_ff Bool.or_eq_false_eq_eq_false_and_eq_false\n-/\n\n",
+ "or_coe_iff":
+ "#print Bool.or_coe_iff /-\n@[simp]\ntheorem Bool.or_coe_iff (a b : bool) : a || b ↔ a ∨ b := by cases a <;> cases b <;> exact by decide\n#align bor_coe_iff Bool.or_coe_iff\n-/\n\n",
+ "of_decide_true":
+ "#print Bool.of_decide_true /-\ntheorem Bool.of_decide_true {p : Prop} [decidable p] : decide p → p :=\n  (Bool.decide_iff p).1\n#align of_to_bool_true Bool.of_decide_true\n-/\n\n",
+ "of_decide_false":
+ "#print Bool.of_decide_false /-\ntheorem Bool.of_decide_false {p : Prop} [decidable p] : decide p = ff → ¬p :=\n  (Bool.decide_false_iff p).1\n#align of_to_bool_ff Bool.of_decide_false\n-/\n\n",
+ "not_not":
+ "#print Bool.not_not /-\n@[simp]\ntheorem Bool.not_not (b : bool) : not (not b) = b := by cases b <;> simp\n#align bnot_bnot Bool.not_not\n-/\n\n",
+ "not_eq_true_eq_eq_false":
+ "#print Bool.not_eq_true_eq_eq_false /-\n@[simp]\ntheorem Bool.not_eq_true_eq_eq_false (a : bool) : (not a = tt) = (a = ff) := by cases a <;> simp\n#align bnot_eq_true_eq_eq_ff Bool.not_eq_true_eq_eq_false\n-/\n\n",
+ "not_eq_false_eq_eq_true":
+ "#print Bool.not_eq_false_eq_eq_true /-\n@[simp]\ntheorem Bool.not_eq_false_eq_eq_true (a : bool) : (not a = ff) = (a = tt) := by cases a <;> simp\n#align bnot_eq_ff_eq_eq_tt Bool.not_eq_false_eq_eq_true\n-/\n\n",
+ "ite_eq_true_distrib":
+ "#print Bool.ite_eq_true_distrib /-\n@[simp]\ntheorem Bool.ite_eq_true_distrib (c : Prop) [decidable c] (a b : bool) :\n    ((if c then a else b) = tt) = if c then a = tt else b = tt := by by_cases c <;> simp [*]\n#align ite_eq_tt_distrib Bool.ite_eq_true_distrib\n-/\n\n",
+ "ite_eq_false_distrib":
+ "#print Bool.ite_eq_false_distrib /-\n@[simp]\ntheorem Bool.ite_eq_false_distrib (c : Prop) [decidable c] (a b : bool) :\n    ((if c then a else b) = ff) = if c then a = ff else b = ff := by by_cases c <;> simp [*]\n#align ite_eq_ff_distrib Bool.ite_eq_false_distrib\n-/\n\n",
+ "false_xor":
+ "#print Bool.false_xor /-\ntheorem Bool.false_xor (b : bool) : xor false b = b := by cases b <;> simp\n#align ff_bxor Bool.false_xor\n-/\n\n",
+ "false_or":
+ "#print Bool.false_or /-\n@[simp]\ntheorem Bool.false_or (b : bool) : (ff || b) = b := by cases b <;> simp\n#align ff_bor Bool.false_or\n-/\n\n",
+ "false_eq_true_eq_False":
+ "#print Bool.false_eq_true_eq_False /-\ntheorem Bool.false_eq_true_eq_False : ¬ff = tt := by contradiction\n#align ff_eq_tt_eq_false Bool.false_eq_true_eq_False\n-/\n\n",
+ "false_and":
+ "#print Bool.false_and /-\n@[simp]\ntheorem Bool.false_and (b : bool) : (ff && b) = ff := by cases b <;> simp\n#align ff_band Bool.false_and\n-/\n\n",
+ "eq_tt_eq_not_eq_ff":
+ "@[simp]\ntheorem eq_tt_eq_not_eq_ff (b : bool) : (¬b = ff) = (b = tt) := by cases b <;> simp\n#align eq_tt_eq_not_eq_ff eq_tt_eq_not_eq_ff\n\n",
+ "eq_true_of_not_eq_false":
+ "#print Bool.eq_true_of_not_eq_false /-\ntheorem Bool.eq_true_of_not_eq_false {b : bool} : ¬b = ff → b = tt :=\n  eq.mp (eq_tt_eq_not_eq_ff b)\n#align eq_tt_of_not_eq_ff Bool.eq_true_of_not_eq_false\n-/\n\n",
+ "eq_false_of_not_eq_true":
+ "#print Bool.eq_false_of_not_eq_true /-\ntheorem Bool.eq_false_of_not_eq_true {b : bool} : ¬b = tt → b = ff :=\n  eq.mp (Bool.eq_false_eq_not_eq_true b)\n#align eq_ff_of_not_eq_tt Bool.eq_false_of_not_eq_true\n-/\n\n",
+ "eq_false_eq_not_eq_true":
+ "#print Bool.eq_false_eq_not_eq_true /-\n@[simp]\ntheorem Bool.eq_false_eq_not_eq_true (b : bool) : (¬b = tt) = (b = ff) := by cases b <;> simp\n#align eq_ff_eq_not_eq_tt Bool.eq_false_eq_not_eq_true\n-/\n\n",
+ "decide_true":
+ "/- warning: to_bool_tt clashes with to_bool_true -> Bool.decide_true\nCase conversion may be inaccurate. Consider using '#align to_bool_tt Bool.decide_trueₓ'. -/\n#print Bool.decide_true /-\ntheorem Bool.decide_true {p : Prop} [decidable p] : p → decide p = tt :=\n  Bool.decide_true\n#align to_bool_tt Bool.decide_true\n-/\n\n",
+ "decide_iff":
+ "#print Bool.decide_iff /-\n@[simp]\ntheorem Bool.decide_iff (p : Prop) [d : decidable p] : decide p = tt ↔ p :=\n  match d with\n  | is_true hp => ⟨fun h => hp, fun _ => rfl⟩\n  | is_false hnp => ⟨fun h => bool.no_confusion h, fun hp => absurd hp hnp⟩\n#align to_bool_iff Bool.decide_iff\n-/\n\n",
+ "decide_false_iff":
+ "#print Bool.decide_false_iff /-\n@[simp]\ntheorem Bool.decide_false_iff (p : Prop) [decidable p] : decide p = ff ↔ ¬p :=\n  Bool.bool_iff_false.symm.trans (not_congr (Bool.decide_iff _))\n#align to_bool_ff_iff Bool.decide_false_iff\n-/\n\n",
+ "decide_false":
+ "#print Bool.decide_false /-\ntheorem Bool.decide_false {p : Prop} [decidable p] : ¬p → decide p = ff :=\n  (Bool.decide_false_iff p).2\n#align to_bool_ff Bool.decide_false\n-/\n\n",
+ "decide_congr":
+ "#print Bool.decide_congr /-\ntheorem Bool.decide_congr {p q : Prop} [decidable p] [decidable q] (h : p ↔ q) : decide p = decide q :=\n  by\n  induction' h' : to_bool q with\n  exact Bool.decide_false (mt h.1 <| Bool.of_decide_false h')\n  exact Bool.decide_true (h.2 <| Bool.of_decide_true h')\n#align to_bool_congr Bool.decide_congr\n-/\n\n",
+ "cond_self":
+ "#print Bool.cond_self /-\n/-\nCopyright (c) 2017 Microsoft Corporation. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Leonardo de Moura\n-/\n@[simp]\ntheorem Bool.cond_self.{u} {α : Type u} (b : bool) (a : α) : cond b a a = a := by cases b <;> simp\n#align cond_a_a Bool.cond_self\n-/\n\n",
+ "coe_true":
+ "#print Bool.coe_true /-\n@[simp]\ntheorem Bool.coe_true : ↑tt = true :=\n  show (tt = tt) = true by simp\n#align coe_tt Bool.coe_true\n-/\n\n",
+ "coe_sort_true":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr↥ » -/\n#print Bool.coe_sort_true /-\n@[simp]\ntheorem Bool.coe_sort_true : «expr↥ » tt = true :=\n  show (tt = tt) = true by simp\n#align coe_sort_tt Bool.coe_sort_true\n-/\n\n",
+ "coe_sort_false":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr↥ » -/\n#print Bool.coe_sort_false /-\n@[simp]\ntheorem Bool.coe_sort_false : «expr↥ » ff = false :=\n  show (ff = tt) = false by simp\n#align coe_sort_ff Bool.coe_sort_false\n-/\n\n",
+ "coe_false":
+ "#print Bool.coe_false /-\n@[simp]\ntheorem Bool.coe_false : ↑ff = false :=\n  show (ff = tt) = false by simp\n#align coe_ff Bool.coe_false\n-/\n\n",
+ "bool_iff_false":
+ "#print Bool.bool_iff_false /-\ntheorem Bool.bool_iff_false {b : bool} : ¬b ↔ b = ff := by cases b <;> exact by decide\n#align bool_iff_false Bool.bool_iff_false\n-/\n\n",
+ "bool_eq_false":
+ "#print Bool.bool_eq_false /-\ntheorem Bool.bool_eq_false {b : bool} : ¬b → b = ff :=\n  Bool.bool_iff_false.1\n#align bool_eq_false Bool.bool_eq_false\n-/\n\n",
+ "and_true":
+ "#print Bool.and_true /-\n@[simp]\ntheorem Bool.and_true (b : bool) : (b && tt) = b := by cases b <;> simp\n#align band_tt Bool.and_true\n-/\n\n",
+ "and_self":
+ "#print Bool.and_self /-\n@[simp]\ntheorem Bool.and_self (b : bool) : (b && b) = b := by cases b <;> simp\n#align band_self Bool.and_self\n-/\n\n",
+ "and_false":
+ "#print Bool.and_false /-\n@[simp]\ntheorem Bool.and_false (b : bool) : (b && ff) = ff := by cases b <;> simp\n#align band_ff Bool.and_false\n-/\n\n",
+ "and_eq_true_eq_eq_true_and_eq_true":
+ "#print Bool.and_eq_true_eq_eq_true_and_eq_true /-\n@[simp]\ntheorem Bool.and_eq_true_eq_eq_true_and_eq_true (a b : bool) : ((a && b) = tt) = (a = tt ∧ b = tt) := by\n  cases a <;> cases b <;> simp\n#align band_eq_true_eq_eq_tt_and_eq_tt Bool.and_eq_true_eq_eq_true_and_eq_true\n-/\n\n",
+ "and_eq_false_eq_eq_false_or_eq_false":
+ "#print Bool.and_eq_false_eq_eq_false_or_eq_false /-\n@[simp]\ntheorem Bool.and_eq_false_eq_eq_false_or_eq_false (a b : bool) : ((a && b) = ff) = (a = ff ∨ b = ff) := by\n  cases a <;> cases b <;> simp\n#align band_eq_false_eq_eq_ff_or_eq_ff Bool.and_eq_false_eq_eq_false_or_eq_false\n-/\n\n",
+ "and_coe_iff":
+ "#print Bool.and_coe_iff /-\n@[simp]\ntheorem Bool.and_coe_iff (a b : bool) : a && b ↔ a ∧ b := by cases a <;> cases b <;> exact by decide\n#align band_coe_iff Bool.and_coe_iff\n-/\n\n"}

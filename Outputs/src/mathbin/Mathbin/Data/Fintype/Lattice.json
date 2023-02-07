@@ -1,0 +1,12 @@
+{"sup_univ_eq_supr":
+ "/-\nCopyright (c) 2017 Mario Carneiro. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Mario Carneiro\n-/\n/-- A special case of `finset.sup_eq_supr` that omits the useless `x ∈ univ` binder. -/\ntheorem sup_univ_eq_supr [CompleteLattice β] (f : α → β) : finset.univ.sup f = supᵢ f :=\n  (sup_eq_supr _ f).trans <| congr_arg _ <| funext fun a => supᵢ_pos (mem_univ _)\n#align sup_univ_eq_supr sup_univ_eq_supr\n\n",
+ "inf_univ_eq_infi":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵈ» -/\n/-- A special case of `finset.inf_eq_infi` that omits the useless `x ∈ univ` binder. -/\ntheorem inf_univ_eq_infi [CompleteLattice β] (f : α → β) : finset.univ.inf f = infᵢ f :=\n  sup_univ_eq_supr (f : α → «expr ᵒᵈ» β)\n#align inf_univ_eq_infi inf_univ_eq_infi\n\n",
+ "fold_sup_univ":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵈ» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:219:4: warning: unsupported binary notation `«expr ⊔ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n@[simp]\ntheorem fold_sup_univ [SemilatticeSup α] [OrderTop α] (a : α) :\n    (finset.univ.fold («expr ⊔ » · ·) a fun x => x) = «expr⊤» :=\n  @fold_inf_univ («expr ᵒᵈ» α) ‹fintype α› _ _ _\n#align fold_sup_univ fold_sup_univ\n\n",
+ "fold_inf_univ":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:219:4: warning: unsupported binary notation `«expr ⊓ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n@[simp]\ntheorem fold_inf_univ [SemilatticeInf α] [OrderBot α] (a : α) :\n    (finset.univ.fold («expr ⊓ » · ·) a fun x => x) = «expr⊥» :=\n  eq_bot_iff.2 <| ((finset.fold_op_rel_iff_and <| @le_inf_iff α _).1 le_rfl).2 («expr⊥») <| finset.mem_univ _\n#align fold_inf_univ fold_inf_univ\n\n",
+ "exists_min":
+ "theorem finite.exists_min [Finite α] [nonempty α] [linear_order β] (f : α → β) : ∃ x₀ : α, ∀ x, f x₀ ≤ f x :=\n  by\n  cases nonempty_fintype α\n  simpa using exists_min_image univ f univ_nonempty\n#align finite.exists_min finite.exists_min\n\n",
+ "exists_max":
+ "theorem finite.exists_max [Finite α] [nonempty α] [linear_order β] (f : α → β) : ∃ x₀ : α, ∀ x, f x ≤ f x₀ :=\n  by\n  cases nonempty_fintype α\n  simpa using exists_max_image univ f univ_nonempty\n#align finite.exists_max finite.exists_max\n\n"}

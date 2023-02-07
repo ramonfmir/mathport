@@ -1,0 +1,12 @@
+{"unique_lift":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →* » -/\n/-- The universal property of a free group: A functions from the generators of `G` to another\ngroup extends in a unique way to a homomorphism from `G`.\n\nNote that since `is_free_group.lift` is expressed as a bijection, it already\nexpresses the universal property.  -/\ntheorem unique_lift (f : generators G → H) : ∃! F : «expr →* » G H, ∀ a, F (of a) = f a := by\n  simpa only [function.funext_iff] using lift.symm.bijective.exists_unique f\n#align unique_lift unique_lift\n\n",
+ "of_eq_free_group_of":
+ "/-\nCopyright (c) 2021 David Wärn. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: David Wärn, Eric Wieser, Joachim Breitner\n-/\n@[simp]\ntheorem of_eq_free_group_of {A : Type u} : @of (free_group A) _ _ = free_group.of :=\n  rfl\n#align of_eq_free_group_of of_eq_free_group_of\n\n",
+ "lift_symm_apply":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →* » -/\n@[simp]\ntheorem lift_symm_apply (f : «expr →* » G H) (a : generators G) : (lift.symm f) a = f (of a) :=\n  rfl\n#align lift_symm_apply lift_symm_apply\n\n",
+ "lift_of":
+ "@[simp]\ntheorem lift_of (f : generators G → H) (a : generators G) : lift f (of a) = f a :=\n  congr_fun (lift.symm_apply_apply f) a\n#align lift_of lift_of\n\n",
+ "lift'_eq_free_group_lift":
+ "@[simp]\ntheorem lift'_eq_free_group_lift {A : Type u} : @lift (free_group A) _ _ H _ = free_group.lift :=\n  rfl\n#align lift'_eq_free_group_lift lift'_eq_free_group_lift\n\n",
+ "ext_hom":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →* » -/\n@[ext]\ntheorem ext_hom ⦃f g : «expr →* » G H⦄ (h : ∀ a : generators G, f (of a) = g (of a)) : f = g :=\n  lift.symm.injective (funext h)\n#align ext_hom ext_hom\n\n"}

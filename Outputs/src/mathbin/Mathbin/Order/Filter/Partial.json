@@ -1,0 +1,50 @@
+{"tendsto_iff_rtendsto'":
+ "theorem tendsto_iff_rtendsto' (l₁ : filter α) (l₂ : filter β) (f : α → β) :\n    tendsto f l₁ l₂ ↔ rtendsto' (Function.graph f) l₁ l₂ := by\n  simp [tendsto_def, Function.graph, rtendsto'_def, Rel.preimage_def, Set.preimage]\n#align tendsto_iff_rtendsto' tendsto_iff_rtendsto'\n\n",
+ "tendsto_iff_rtendsto":
+ "theorem tendsto_iff_rtendsto (l₁ : filter α) (l₂ : filter β) (f : α → β) :\n    tendsto f l₁ l₂ ↔ rtendsto (Function.graph f) l₁ l₂ := by\n  simp [tendsto_def, Function.graph, rtendsto_def, Rel.core, Set.preimage]\n#align tendsto_iff_rtendsto tendsto_iff_rtendsto\n\n",
+ "tendsto_iff_ptendsto_univ":
+ "theorem tendsto_iff_ptendsto_univ (l₁ : filter α) (l₂ : filter β) (f : α → β) :\n    tendsto f l₁ l₂ ↔ ptendsto (pfun.res f Set.univ) l₁ l₂ :=\n  by\n  rw [← tendsto_iff_ptendsto]\n  simp [principal_univ]\n#align tendsto_iff_ptendsto_univ tendsto_iff_ptendsto_univ\n\n",
+ "tendsto_iff_ptendsto":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊓ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `filter.principal -/\ntheorem tendsto_iff_ptendsto (l₁ : filter α) (l₂ : filter β) (s : set α) (f : α → β) :\n    tendsto f («expr ⊓ » l₁ ((filter.principal) s)) l₂ ↔ ptendsto (pfun.res f s) l₁ l₂ := by\n  simp only [tendsto, ptendsto, pmap_res]\n#align tendsto_iff_ptendsto tendsto_iff_ptendsto\n\n",
+ "rtendsto_iff_le_rcomap":
+ "theorem rtendsto_iff_le_rcomap (r : Rel α β) (l₁ : filter α) (l₂ : filter β) : rtendsto r l₁ l₂ ↔ l₁ ≤ l₂.rcomap r :=\n  by\n  rw [rtendsto_def]\n  change (∀ s : set β, s ∈ l₂.sets → r.core s ∈ l₁) ↔ l₁ ≤ rcomap r l₂\n  simp [filter.le_def, rcomap, Rel.mem_image]; constructor\n  · exact fun h s t tl₂ => mem_of_superset (h t tl₂)\n  · exact fun h t tl₂ => h _ t tl₂ Set.Subset.rfl\n#align rtendsto_iff_le_rcomap rtendsto_iff_le_rcomap\n\n",
+ "rtendsto_def":
+ "theorem rtendsto_def (r : Rel α β) (l₁ : filter α) (l₂ : filter β) : rtendsto r l₁ l₂ ↔ ∀ s ∈ l₂, r.core s ∈ l₁ :=\n  iff.rfl\n#align rtendsto_def rtendsto_def\n\n",
+ "rtendsto'_def":
+ "theorem rtendsto'_def (r : Rel α β) (l₁ : filter α) (l₂ : filter β) : rtendsto' r l₁ l₂ ↔ ∀ s ∈ l₂, r.preimage s ∈ l₁ :=\n  by\n  unfold rtendsto' rcomap'; simp [le_def, Rel.mem_image]; constructor\n  · exact fun h s hs => h _ _ hs Set.Subset.rfl\n  · exact fun h s t ht => mem_of_superset (h t ht)\n#align rtendsto'_def rtendsto'_def\n\n",
+ "rmap_sets":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\n/-\nCopyright (c) 2019 Jeremy Avigad. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Jeremy Avigad\n-/\ntheorem rmap_sets (r : Rel α β) (l : filter α) : (l.rmap r).sets = «expr ⁻¹' » r.core l.sets :=\n  rfl\n#align rmap_sets rmap_sets\n\n",
+ "rmap_rmap":
+ "@[simp]\ntheorem rmap_rmap (r : Rel α β) (s : Rel β γ) (l : filter α) : rmap s (rmap r l) = rmap (r.comp s) l :=\n  filter_eq <| by simp [rmap_sets, Set.preimage, Rel.core_comp]\n#align rmap_rmap rmap_rmap\n\n",
+ "rmap_compose":
+ "@[simp]\ntheorem rmap_compose (r : Rel α β) (s : Rel β γ) : rmap s ∘ rmap r = rmap (r.comp s) :=\n  funext <| rmap_rmap _ _\n#align rmap_compose rmap_compose\n\n",
+ "rcomap_sets":
+ "theorem rcomap_sets (r : Rel α β) (f : filter β) : (rcomap r f).sets = Rel.image (fun s t => r.core s ⊆ t) f.sets :=\n  rfl\n#align rcomap_sets rcomap_sets\n\n",
+ "rcomap_rcomap":
+ "theorem rcomap_rcomap (r : Rel α β) (s : Rel β γ) (l : filter γ) : rcomap r (rcomap s l) = rcomap (r.comp s) l :=\n  filter_eq <| by\n    ext t; simp [rcomap_sets, Rel.image, Rel.core_comp]; constructor\n    · rintro ⟨u, ⟨v, vsets, hv⟩, h⟩\n      exact ⟨v, vsets, Set.Subset.trans (Rel.core_mono _ hv) h⟩\n    rintro ⟨t, tsets, ht⟩\n    exact ⟨Rel.core s t, ⟨t, tsets, Set.Subset.rfl⟩, ht⟩\n#align rcomap_rcomap rcomap_rcomap\n\n",
+ "rcomap_compose":
+ "@[simp]\ntheorem rcomap_compose (r : Rel α β) (s : Rel β γ) : rcomap r ∘ rcomap s = rcomap (r.comp s) :=\n  funext <| rcomap_rcomap _ _\n#align rcomap_compose rcomap_compose\n\n",
+ "rcomap'_sets":
+ "theorem rcomap'_sets (r : Rel α β) (f : filter β) :\n    (rcomap' r f).sets = Rel.image (fun s t => r.preimage s ⊆ t) f.sets :=\n  rfl\n#align rcomap'_sets rcomap'_sets\n\n",
+ "rcomap'_rcomap'":
+ "@[simp]\ntheorem rcomap'_rcomap' (r : Rel α β) (s : Rel β γ) (l : filter γ) : rcomap' r (rcomap' s l) = rcomap' (r.comp s) l :=\n  filter.ext fun t => by\n    simp [rcomap'_sets, Rel.image, Rel.preimage_comp]; constructor\n    · rintro ⟨u, ⟨v, vsets, hv⟩, h⟩\n      exact ⟨v, vsets, (Rel.preimage_mono _ hv).trans h⟩\n    rintro ⟨t, tsets, ht⟩\n    exact ⟨s.preimage t, ⟨t, tsets, Set.Subset.rfl⟩, ht⟩\n#align rcomap'_rcomap' rcomap'_rcomap'\n\n",
+ "rcomap'_compose":
+ "@[simp]\ntheorem rcomap'_compose (r : Rel α β) (s : Rel β γ) : rcomap' r ∘ rcomap' s = rcomap' (r.comp s) :=\n  funext <| rcomap'_rcomap' _ _\n#align rcomap'_compose rcomap'_compose\n\n",
+ "ptendsto_of_ptendsto'":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →. » -/\ntheorem ptendsto_of_ptendsto' {f : «expr →. » α β} {l₁ : filter α} {l₂ : filter β} :\n    ptendsto' f l₁ l₂ → ptendsto f l₁ l₂ :=\n  by\n  rw [ptendsto_def, ptendsto'_def]\n  exact fun h s sl₂ => mem_of_superset (h s sl₂) (pfun.preimage_subset_core _ _)\n#align ptendsto_of_ptendsto' ptendsto_of_ptendsto'\n\n",
+ "ptendsto_iff_rtendsto":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →. » -/\ntheorem ptendsto_iff_rtendsto (l₁ : filter α) (l₂ : filter β) (f : «expr →. » α β) :\n    ptendsto f l₁ l₂ ↔ rtendsto f.graph' l₁ l₂ :=\n  iff.rfl\n#align ptendsto_iff_rtendsto ptendsto_iff_rtendsto\n\n",
+ "ptendsto_def":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →. » -/\ntheorem ptendsto_def (f : «expr →. » α β) (l₁ : filter α) (l₂ : filter β) :\n    ptendsto f l₁ l₂ ↔ ∀ s ∈ l₂, f.core s ∈ l₁ :=\n  iff.rfl\n#align ptendsto_def ptendsto_def\n\n",
+ "ptendsto'_of_ptendsto":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →. » -/\ntheorem ptendsto'_of_ptendsto {f : «expr →. » α β} {l₁ : filter α} {l₂ : filter β} (h : f.dom ∈ l₁) :\n    ptendsto f l₁ l₂ → ptendsto' f l₁ l₂ :=\n  by\n  rw [ptendsto_def, ptendsto'_def]\n  intro h' s sl₂\n  rw [pfun.preimage_eq]\n  exact inter_mem (h' s sl₂) h\n#align ptendsto'_of_ptendsto ptendsto'_of_ptendsto\n\n",
+ "ptendsto'_def":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →. » -/\ntheorem ptendsto'_def (f : «expr →. » α β) (l₁ : filter α) (l₂ : filter β) :\n    ptendsto' f l₁ l₂ ↔ ∀ s ∈ l₂, f.preimage s ∈ l₁ :=\n  rtendsto'_def _ _ _\n#align ptendsto'_def ptendsto'_def\n\n",
+ "pmap_res":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊓ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `filter.principal -/\ntheorem pmap_res (l : filter α) (s : set α) (f : α → β) :\n    pmap (pfun.res f s) l = map f («expr ⊓ » l ((filter.principal) s)) :=\n  by\n  ext t\n  simp only [pfun.core_res, mem_pmap, mem_map, mem_inf_principal, imp_iff_not_or]\n  rfl\n#align pmap_res pmap_res\n\n",
+ "mem_rmap":
+ "@[simp]\ntheorem mem_rmap (r : Rel α β) (l : filter α) (s : set β) : s ∈ l.rmap r ↔ r.core s ∈ l :=\n  iff.rfl\n#align mem_rmap mem_rmap\n\n",
+ "mem_rcomap'":
+ "-- Interestingly, there does not seem to be a way to express this relation using a forward map.\n-- Given a filter `f` on `α`, we want a filter `f'` on `β` such that `r.preimage s ∈ f` if\n-- and only if `s ∈ f'`. But the intersection of two sets satisfying the lhs may be empty.\n@[simp]\ntheorem mem_rcomap' (r : Rel α β) (l : filter β) (s : set α) : s ∈ l.rcomap' r ↔ ∃ t ∈ l, r.preimage t ⊆ s :=\n  iff.rfl\n#align mem_rcomap' mem_rcomap'\n\n",
+ "mem_pmap":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →. » -/\n@[simp]\ntheorem mem_pmap (f : «expr →. » α β) (l : filter α) (s : set β) : s ∈ l.pmap f ↔ f.core s ∈ l :=\n  iff.rfl\n#align mem_pmap mem_pmap\n\n"}

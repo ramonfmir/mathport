@@ -1,0 +1,192 @@
+{"ι_norm_noninc":
+ "theorem ι_norm_noninc : (ι f g).norm_noninc := fun v => le_rfl\n#align ι_norm_noninc ι_norm_noninc\n\n",
+ "ι_comp_map":
+ "@[simp]\ntheorem ι_comp_map (hf : ψ.comp f₁ = f₂.comp φ) (hg : ψ.comp g₁ = g₂.comp φ) :\n    (ι f₂ g₂).comp (map φ ψ hf hg) = φ.comp (ι _ _) :=\n  ι_comp_lift _ _\n#align ι_comp_map ι_comp_map\n\n",
+ "ι_comp_lift":
+ "@[simp]\ntheorem ι_comp_lift (φ : normed_add_group_hom V₁ V) (h : f.comp φ = g.comp φ) : (ι _ _).comp (lift φ h) = φ :=\n  by\n  ext\n  rfl\n#align ι_comp_lift ι_comp_lift\n\n",
+ "zsmul_apply":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n@[simp]\ntheorem zsmul_apply (r : ℤ) (f : normed_add_group_hom V₁ V₂) (v : V₁) : («expr • » r f) v = «expr • » r (f v) :=\n  rfl\n#align zsmul_apply zsmul_apply\n\n",
+ "zero_comp":
+ "@[simp]\ntheorem zero_comp (f : normed_add_group_hom V₁ V₂) : (0 : normed_add_group_hom V₂ V₃).comp f = 0 :=\n  by\n  ext\n  rfl\n#align zero_comp zero_comp\n\n",
+ "zero_apply":
+ "@[simp]\ntheorem zero_apply (v : V₁) : (0 : normed_add_group_hom V₁ V₂) v = 0 :=\n  rfl\n#align zero_apply zero_apply\n\n",
+ "zero":
+ "theorem zero : (0 : normed_add_group_hom V₁ V₂).norm_noninc := fun v => by simp\n#align zero zero\n\n",
+ "uniform_continuous":
+ "protected theorem uniform_continuous (f : normed_add_group_hom V₁ V₂) : uniform_continuous f :=\n  f.lipschitz.uniform_continuous\n#align uniform_continuous uniform_continuous\n\n",
+ "to_fun_eq_coe":
+ "@[simp]\ntheorem to_fun_eq_coe : f.to_fun = f :=\n  rfl\n#align to_fun_eq_coe to_fun_eq_coe\n\n",
+ "to_add_monoid_hom_injective":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\ntheorem to_add_monoid_hom_injective : function.injective (@normed_add_group_hom.to_add_monoid_hom V₁ V₂ _ _) :=\n  fun f g h =>\n  coe_inj <|\n    show «expr⇑ » f.to_add_monoid_hom = g by\n      rw [h]\n      rfl\n#align to_add_monoid_hom_injective to_add_monoid_hom_injective\n\n",
+ "surj_on":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\ntheorem surjective_on_with.surj_on {f : normed_add_group_hom V₁ V₂} {K : add_subgroup V₂} {C : exprℝ}\n    (h : f.surjective_on_with K C) : Set.SurjOn f Set.univ K := fun x hx =>\n  (h x hx).imp fun a ⟨ha, _⟩ => ⟨Set.mem_univ _, ha⟩\n#align surjective_on_with.surj_on surjective_on_with.surj_on\n\n",
+ "sum_apply":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `finset.sum -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.sum -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `finset.sum -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.sum -/\ntheorem sum_apply {ι : Type _} (s : Finset ι) (f : ι → normed_add_group_hom V₁ V₂) (v : V₁) :\n    (finset.sum \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.sum\" s (f i)) v =\n      finset.sum \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.sum\" s (f i v) :=\n  by simp only [coe_sum, finset.sum_apply]\n#align sum_apply sum_apply\n\n",
+ "sub_apply":
+ "@[simp]\ntheorem sub_apply (f g : normed_add_group_hom V₁ V₂) (v : V₁) : (f - g : normed_add_group_hom V₁ V₂) v = f v - g v :=\n  rfl\n#align sub_apply sub_apply\n\n",
+ "smul_apply":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n@[simp]\ntheorem smul_apply (r : R) (f : normed_add_group_hom V₁ V₂) (v : V₁) : («expr • » r f) v = «expr • » r (f v) :=\n  rfl\n#align smul_apply smul_apply\n\n",
+ "ratio_le_op_norm":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr‖ ‖» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr‖ ‖» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr‖ ‖» -/\ntheorem ratio_le_op_norm (x : V₁) : «expr‖ ‖» (f x) / «expr‖ ‖» x ≤ «expr‖ ‖» f :=\n  div_le_of_nonneg_of_le_mul (norm_nonneg _) f.op_norm_nonneg (le_op_norm _ _)\n#align ratio_le_op_norm ratio_le_op_norm\n\n",
+ "range_comp_incl_top":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n@[simp]\ntheorem range_comp_incl_top : (f.comp (incl («expr⊤» : add_subgroup V₁))).range = f.range := by\n  simpa [comp_range, incl_range, ← add_monoid_hom.range_eq_map]\n#align range_comp_incl_top range_comp_incl_top\n\n",
+ "op_norm_zero_iff":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr‖ ‖» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr‖ ‖» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr‖ ‖» -/\n/-- For normed groups, an operator is zero iff its norm vanishes. -/\ntheorem op_norm_zero_iff {V₁ V₂ : Type _} [normed_add_comm_group V₁] [normed_add_comm_group V₂]\n    {f : normed_add_group_hom V₁ V₂} : «expr‖ ‖» f = 0 ↔ f = 0 :=\n  iff.intro\n    (fun hn =>\n      ext fun x =>\n        norm_le_zero_iff.1\n          (calc\n            _ ≤ «expr‖ ‖» f * «expr‖ ‖» x := le_op_norm _ _\n            _ = _ := by rw [hn, zero_mul]\n            ))\n    fun hf => by rw [hf, op_norm_zero]\n#align op_norm_zero_iff op_norm_zero_iff\n\n",
+ "op_norm_zero":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr‖ ‖» -/\n/-- The norm of the `0` operator is `0`. -/\ntheorem op_norm_zero : «expr‖ ‖» (0 : normed_add_group_hom V₁ V₂) = 0 :=\n  le_antisymm\n    (cinfₛ_le bounds_bdd_below\n      ⟨ge_of_eq rfl, fun _ =>\n        le_of_eq\n          (by\n            rw [zero_mul]\n            exact norm_zero)⟩)\n    (op_norm_nonneg _)\n#align op_norm_zero op_norm_zero\n\n",
+ "op_norm_nonneg":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr‖ ‖» -/\ntheorem op_norm_nonneg : 0 ≤ «expr‖ ‖» f :=\n  le_cinfₛ bounds_nonempty fun _ ⟨hx, _⟩ => hx\n#align op_norm_nonneg op_norm_nonneg\n\n",
+ "op_norm_neg":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr‖ ‖» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr‖ ‖» -/\ntheorem op_norm_neg (f : normed_add_group_hom V₁ V₂) : «expr‖ ‖» (-f) = «expr‖ ‖» f := by\n  simp only [norm_def, coe_neg, norm_neg, pi.neg_apply]\n#align op_norm_neg op_norm_neg\n\n",
+ "op_norm_le_of_lipschitz":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `nnreal -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr‖ ‖» -/\ntheorem op_norm_le_of_lipschitz {f : normed_add_group_hom V₁ V₂} {K : nnreal} (hf : lipschitz_with K f) :\n    «expr‖ ‖» f ≤ K :=\n  f.op_norm_le_bound K.2 fun x => by simpa only [dist_zero_right, map_zero] using hf.dist_le_mul x 0\n#align op_norm_le_of_lipschitz op_norm_le_of_lipschitz\n\n",
+ "op_norm_le_bound":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr‖ ‖» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr‖ ‖» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr‖ ‖» -/\n/-- If one controls the norm of every `f x`, then one controls the norm of `f`. -/\ntheorem op_norm_le_bound {M : exprℝ} (hMp : 0 ≤ M) (hM : ∀ x, «expr‖ ‖» (f x) ≤ M * «expr‖ ‖» x) : «expr‖ ‖» f ≤ M :=\n  cinfₛ_le bounds_bdd_below ⟨hMp, hM⟩\n#align op_norm_le_bound op_norm_le_bound\n\n",
+ "op_norm_eq_of_bounds":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr‖ ‖» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr‖ ‖» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr‖ ‖» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr‖ ‖» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr‖ ‖» -/\ntheorem op_norm_eq_of_bounds {M : exprℝ} (M_nonneg : 0 ≤ M) (h_above : ∀ x, «expr‖ ‖» (f x) ≤ M * «expr‖ ‖» x)\n    (h_below : ∀ N ≥ 0, (∀ x, «expr‖ ‖» (f x) ≤ N * «expr‖ ‖» x) → M ≤ N) : «expr‖ ‖» f = M :=\n  le_antisymm (f.op_norm_le_bound M_nonneg h_above)\n    ((le_cinfₛ_iff normed_add_group_hom.bounds_bdd_below ⟨M, M_nonneg, h_above⟩).mpr fun N ⟨N_nonneg, hN⟩ =>\n      h_below N N_nonneg hN)\n#align op_norm_eq_of_bounds op_norm_eq_of_bounds\n\n",
+ "op_norm_add_le":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr‖ ‖» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr‖ ‖» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr‖ ‖» -/\n/-- The operator norm satisfies the triangle inequality. -/\ntheorem op_norm_add_le : «expr‖ ‖» (f + g) ≤ «expr‖ ‖» f + «expr‖ ‖» g :=\n  mk_normed_add_group_hom_norm_le _ (add_nonneg (op_norm_nonneg _) (op_norm_nonneg _)) _\n#align op_norm_add_le op_norm_add_le\n\n",
+ "nsmul_apply":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n@[simp]\ntheorem nsmul_apply (r : ℕ) (f : normed_add_group_hom V₁ V₂) (v : V₁) : («expr • » r f) v = «expr • » r (f v) :=\n  rfl\n#align nsmul_apply nsmul_apply\n\n",
+ "norm_noninc_of_isometry":
+ "theorem norm_noninc_of_isometry (hf : isometry f) : f.norm_noninc := fun v => le_of_eq <| norm_eq_of_isometry hf v\n#align norm_noninc_of_isometry norm_noninc_of_isometry\n\n",
+ "norm_noninc_iff_norm_le_one":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr‖ ‖» -/\ntheorem norm_noninc_iff_norm_le_one : f.norm_noninc ↔ «expr‖ ‖» f ≤ 1 :=\n  by\n  refine' ⟨fun h => _, fun h => fun v => _⟩\n  · refine' op_norm_le_bound _ zero_le_one fun v => _\n    simpa [one_mul] using h v\n  · simpa using le_of_op_norm_le f h v\n#align norm_noninc_iff_norm_le_one norm_noninc_iff_norm_le_one\n\n",
+ "norm_map_le":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr‖ ‖» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr‖ ‖» -/\ntheorem norm_map_le (hf : ψ.comp f₁ = f₂.comp φ) (hg : ψ.comp g₁ = g₂.comp φ) (C : exprℝ)\n    (hφ : «expr‖ ‖» (φ.comp (ι f₁ g₁)) ≤ C) : «expr‖ ‖» (map φ ψ hf hg) ≤ C :=\n  norm_lift_le _ _ _ hφ\n#align norm_map_le norm_map_le\n\n",
+ "norm_lift_le":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr‖ ‖» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr‖ ‖» -/\n/-- If `φ` satisfies `‖φ‖ ≤ C`, then the same is true for the lifted morphism. -/\ntheorem norm_lift_le (φ : normed_add_group_hom V₁ V) (h : f.comp φ = g.comp φ) (C : exprℝ) (hφ : «expr‖ ‖» φ ≤ C) :\n    «expr‖ ‖» (lift φ h) ≤ C :=\n  hφ\n#align norm_lift_le norm_lift_le\n\n",
+ "norm_incl":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr‖ ‖» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr‖ ‖» -/\ntheorem norm_incl {V' : add_subgroup V} (x : V') : «expr‖ ‖» (incl _ x) = «expr‖ ‖» x :=\n  rfl\n#align norm_incl norm_incl\n\n",
+ "norm_id_of_nontrivial_seminorm":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr‖ ‖» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr‖ ‖» -/\n/-- If there is an element with norm different from `0`, then the norm of the identity equals `1`.\n(Since we are working with seminorms supposing that the space is non-trivial is not enough.) -/\ntheorem norm_id_of_nontrivial_seminorm (h : ∃ x : V, «expr‖ ‖» x ≠ 0) : «expr‖ ‖» (id V) = 1 :=\n  le_antisymm (norm_id_le V) <| by\n    let ⟨x, hx⟩ := h\n    have := (id V).ratio_le_op_norm x\n    rwa [id_apply, div_self hx] at this\n#align norm_id_of_nontrivial_seminorm norm_id_of_nontrivial_seminorm\n\n",
+ "norm_id_le":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr‖ ‖» -/\n/-- The norm of the identity is at most `1`. It is in fact `1`, except when the norm of every\nelement vanishes, where it is `0`. (Since we are working with seminorms this can happen even if the\nspace is non-trivial.) It means that one can not do better than an inequality in general. -/\ntheorem norm_id_le : «expr‖ ‖» (id V : normed_add_group_hom V V) ≤ 1 :=\n  op_norm_le_bound _ zero_le_one fun x => by simp\n#align norm_id_le norm_id_le\n\n",
+ "norm_id":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr‖ ‖» -/\n/-- If a normed space is non-trivial, then the norm of the identity equals `1`. -/\ntheorem norm_id {V : Type _} [normed_add_comm_group V] [nontrivial V] : «expr‖ ‖» (id V) = 1 :=\n  by\n  refine' norm_id_of_nontrivial_seminorm V _\n  obtain ⟨x, hx⟩ := exists_ne (0 : V)\n  exact ⟨x, ne_of_gt (norm_pos_iff.2 hx)⟩\n#align norm_id norm_id\n\n",
+ "norm_eq_of_isometry":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr‖ ‖» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr‖ ‖» -/\ntheorem norm_eq_of_isometry {f : normed_add_group_hom V W} (hf : isometry f) (v : V) : «expr‖ ‖» (f v) = «expr‖ ‖» v :=\n  (add_monoid_hom_class.isometry_iff_norm f).mp hf v\n#align norm_eq_of_isometry norm_eq_of_isometry\n\n",
+ "norm_def":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr‖ ‖» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr‖ ‖» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr‖ ‖» -/\ntheorem norm_def : «expr‖ ‖» f = infₛ { c | 0 ≤ c ∧ ∀ x, «expr‖ ‖» (f x) ≤ c * «expr‖ ‖» x } :=\n  rfl\n#align norm_def norm_def\n\n",
+ "norm_comp_le_of_le'":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr‖ ‖» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr‖ ‖» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr‖ ‖» -/\ntheorem norm_comp_le_of_le' {g : normed_add_group_hom V₂ V₃} (C₁ C₂ C₃ : exprℝ) (h : C₃ = C₂ * C₁)\n    (hg : «expr‖ ‖» g ≤ C₂) (hf : «expr‖ ‖» f ≤ C₁) : «expr‖ ‖» (g.comp f) ≤ C₃ :=\n  by\n  rw [h]\n  exact norm_comp_le_of_le hg hf\n#align norm_comp_le_of_le' norm_comp_le_of_le'\n\n",
+ "norm_comp_le_of_le":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr‖ ‖» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr‖ ‖» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr‖ ‖» -/\ntheorem norm_comp_le_of_le {g : normed_add_group_hom V₂ V₃} {C₁ C₂ : exprℝ} (hg : «expr‖ ‖» g ≤ C₂)\n    (hf : «expr‖ ‖» f ≤ C₁) : «expr‖ ‖» (g.comp f) ≤ C₂ * C₁ :=\n  le_trans (norm_comp_le g f) <| mul_le_mul hg hf (norm_nonneg _) (le_trans (norm_nonneg _) hg)\n#align norm_comp_le_of_le norm_comp_le_of_le\n\n",
+ "norm_comp_le":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr‖ ‖» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr‖ ‖» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr‖ ‖» -/\ntheorem norm_comp_le (g : normed_add_group_hom V₂ V₃) (f : normed_add_group_hom V₁ V₂) :\n    «expr‖ ‖» (g.comp f) ≤ «expr‖ ‖» g * «expr‖ ‖» f :=\n  mk_normed_add_group_hom_norm_le _ (mul_nonneg (op_norm_nonneg _) (op_norm_nonneg _)) _\n#align norm_comp_le norm_comp_le\n\n",
+ "neg_iff":
+ "@[simp]\ntheorem neg_iff {f : normed_add_group_hom V₁ V₂} : (-f).norm_noninc ↔ f.norm_noninc :=\n  ⟨fun h x => by simpa using h x, fun h x => (norm_neg (f x)).le.trans (h x)⟩\n#align neg_iff neg_iff\n\n",
+ "neg_apply":
+ "@[simp]\ntheorem neg_apply (f : normed_add_group_hom V₁ V₂) (v : V₁) : (-f : normed_add_group_hom V₁ V₂) v = -f v :=\n  rfl\n#align neg_apply neg_apply\n\n",
+ "mono":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr‖ ‖» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\ntheorem surjective_on_with.mono {f : normed_add_group_hom V₁ V₂} {K : add_subgroup V₂} {C C' : exprℝ}\n    (h : f.surjective_on_with K C) (H : C ≤ C') : f.surjective_on_with K C' :=\n  by\n  intro k k_in\n  rcases h k k_in with ⟨g, rfl, hg⟩\n  use g, rfl\n  by_cases Hg : «expr‖ ‖» (f g) = 0\n  · simpa [Hg] using hg\n  · exact hg.trans ((mul_le_mul_right <| (ne.symm Hg).le_iff_lt.mp (norm_nonneg _)).mpr H)\n#align surjective_on_with.mono surjective_on_with.mono\n\n",
+ "mk_to_add_monoid_hom":
+ "@[simp]\ntheorem mk_to_add_monoid_hom (f) (h₁) (h₂) :\n    (⟨f, h₁, h₂⟩ : normed_add_group_hom V₁ V₂).to_add_monoid_hom = AddMonoidHom.mk' f h₁ :=\n  rfl\n#align mk_to_add_monoid_hom mk_to_add_monoid_hom\n\n",
+ "mk_normed_add_group_hom_norm_le'":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →+ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr‖ ‖» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr‖ ‖» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr‖ ‖» -/\n/-- If a bounded group homomorphism map is constructed from a group homomorphism\nvia the constructor `mk_normed_add_group_hom`, then its norm is bounded by the bound\ngiven to the constructor or zero if this bound is negative. -/\ntheorem mk_normed_add_group_hom_norm_le' (f : «expr →+ » V₁ V₂) {C : exprℝ}\n    (h : ∀ x, «expr‖ ‖» (f x) ≤ C * «expr‖ ‖» x) : «expr‖ ‖» (f.mk_normed_add_group_hom C h) ≤ max C 0 :=\n  op_norm_le_bound _ (le_max_right _ _) fun x =>\n    (h x).trans <| mul_le_mul_of_nonneg_right (le_max_left _ _) (norm_nonneg x)\n#align mk_normed_add_group_hom_norm_le' mk_normed_add_group_hom_norm_le'\n\n",
+ "mk_normed_add_group_hom_norm_le":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →+ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr‖ ‖» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr‖ ‖» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr‖ ‖» -/\n/-- If a bounded group homomorphism map is constructed from a group homomorphism via the constructor\n`mk_normed_add_group_hom`, then its norm is bounded by the bound given to the constructor if it is\nnonnegative. -/\ntheorem mk_normed_add_group_hom_norm_le (f : «expr →+ » V₁ V₂) {C : exprℝ} (hC : 0 ≤ C)\n    (h : ∀ x, «expr‖ ‖» (f x) ≤ C * «expr‖ ‖» x) : «expr‖ ‖» (f.mk_normed_add_group_hom C h) ≤ C :=\n  op_norm_le_bound _ hC h\n#align mk_normed_add_group_hom_norm_le mk_normed_add_group_hom_norm_le\n\n",
+ "mem_range_self":
+ "@[simp]\ntheorem mem_range_self (v : V₁) : f v ∈ f.range :=\n  ⟨v, rfl⟩\n#align mem_range_self mem_range_self\n\n",
+ "mem_range":
+ "theorem mem_range (v : V₂) : v ∈ f.range ↔ ∃ w, f w = v :=\n  by\n  rw [range, add_monoid_hom.mem_range]\n  rfl\n#align mem_range mem_range\n\n",
+ "mem_ker":
+ "theorem mem_ker (v : V₁) : v ∈ f.ker ↔ f v = 0 :=\n  by\n  erw [f.to_add_monoid_hom.mem_ker]\n  rfl\n#align mem_ker mem_ker\n\n",
+ "map_norm_noninc":
+ "theorem map_norm_noninc (hf : ψ.comp f₁ = f₂.comp φ) (hg : ψ.comp g₁ = g₂.comp φ) (hφ : φ.norm_noninc) :\n    (map φ ψ hf hg).norm_noninc :=\n  lift_norm_noninc _ _ <| hφ.comp ι_norm_noninc\n#align map_norm_noninc map_norm_noninc\n\n",
+ "map_id":
+ "@[simp]\ntheorem map_id : map (id V₁) (id W₁) rfl rfl = id (f₁.equalizer g₁) :=\n  by\n  ext\n  rfl\n#align map_id map_id\n\n",
+ "map_comp_map":
+ "theorem map_comp_map (hf : ψ.comp f₁ = f₂.comp φ) (hg : ψ.comp g₁ = g₂.comp φ) (hf' : ψ'.comp f₂ = f₃.comp φ')\n    (hg' : ψ'.comp g₂ = g₃.comp φ') :\n    (map φ' ψ' hf' hg').comp (map φ ψ hf hg) = map (φ'.comp φ) (ψ'.comp ψ) (comm_sq₂ hf hf') (comm_sq₂ hg hg') :=\n  by\n  ext\n  rfl\n#align map_comp_map map_comp_map\n\n",
+ "lipschitz":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr‖ ‖» -/\n/-- continuous linear maps are Lipschitz continuous. -/\ntheorem lipschitz : lipschitz_with ⟨«expr‖ ‖» f, op_norm_nonneg f⟩ f :=\n  lipschitz_with.of_dist_le_mul fun x y =>\n    by\n    rw [dist_eq_norm, dist_eq_norm, ← map_sub]\n    apply le_op_norm\n#align lipschitz lipschitz\n\n",
+ "lift_norm_noninc":
+ "/-- The lifting of a norm nonincreasing morphism is norm nonincreasing. -/\ntheorem lift_norm_noninc (φ : normed_add_group_hom V₁ V) (h : f.comp φ = g.comp φ) (hφ : φ.norm_noninc) :\n    (lift φ h).norm_noninc :=\n  hφ\n#align lift_norm_noninc lift_norm_noninc\n\n",
+ "le_op_norm_of_le":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr‖ ‖» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr‖ ‖» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr‖ ‖» -/\ntheorem le_op_norm_of_le {c : exprℝ} {x} (h : «expr‖ ‖» x ≤ c) : «expr‖ ‖» (f x) ≤ «expr‖ ‖» f * c :=\n  le_trans (f.le_op_norm x) (mul_le_mul_of_nonneg_left h f.op_norm_nonneg)\n#align le_op_norm_of_le le_op_norm_of_le\n\n",
+ "le_op_norm":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr‖ ‖» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr‖ ‖» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr‖ ‖» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr‖ ‖» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr‖ ‖» -/\n/-- The fundamental property of the operator norm: `‖f x‖ ≤ ‖f‖ * ‖x‖`. -/\ntheorem le_op_norm (x : V₁) : «expr‖ ‖» (f x) ≤ «expr‖ ‖» f * «expr‖ ‖» x :=\n  by\n  obtain ⟨C, Cpos, hC⟩ := f.bound\n  replace hC := hC x\n  by_cases h : «expr‖ ‖» x = 0\n  · rwa [h, mul_zero] at hC⊢\n  have hlt : 0 < «expr‖ ‖» x := lt_of_le_of_ne (norm_nonneg x) (ne.symm h)\n  exact (div_le_iff hlt).mp (le_cinfₛ bounds_nonempty fun c ⟨_, hc⟩ => (div_le_iff hlt).mpr <| by apply hc)\n#align le_op_norm le_op_norm\n\n",
+ "le_of_op_norm_le":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr‖ ‖» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr‖ ‖» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr‖ ‖» -/\ntheorem le_of_op_norm_le {c : exprℝ} (h : «expr‖ ‖» f ≤ c) (x : V₁) : «expr‖ ‖» (f x) ≤ c * «expr‖ ‖» x :=\n  (f.le_op_norm x).trans (mul_le_mul_of_nonneg_right h (norm_nonneg x))\n#align le_of_op_norm_le le_of_op_norm_le\n\n",
+ "ker_zero":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n@[simp]\ntheorem ker_zero : (0 : normed_add_group_hom V₁ V₂).ker = «expr⊤» :=\n  by\n  ext\n  simp [mem_ker]\n#align ker_zero ker_zero\n\n",
+ "isometry_id":
+ "theorem isometry_id : @isometry V V _ _ (id V) :=\n  isometry_id\n#align isometry_id isometry_id\n\n",
+ "isometry_comp":
+ "theorem isometry_comp {g : normed_add_group_hom V₂ V₃} {f : normed_add_group_hom V₁ V₂} (hg : isometry g)\n    (hf : isometry f) : isometry (g.comp f) :=\n  hg.comp hf\n#align isometry_comp isometry_comp\n\n",
+ "is_closed_ker":
+ "theorem is_closed_ker {V₂ : Type _} [normed_add_comm_group V₂] (f : normed_add_group_hom V₁ V₂) :\n    is_closed (f.ker : set V₁) :=\n  f.coe_ker ▸ is_closed.preimage f.continuous (t1_space.t1 0)\n#align is_closed_ker is_closed_ker\n\n",
+ "incl_range":
+ "theorem incl_range (s : add_subgroup V₁) : (incl s).range = s :=\n  by\n  ext x\n  exact ⟨fun ⟨y, hy⟩ => by rw [← hy] <;> simp, fun hx => ⟨⟨x, hx⟩, by simp⟩⟩\n#align incl_range incl_range\n\n",
+ "incl_comp_lift":
+ "@[simp]\ntheorem ker.incl_comp_lift (h : g.comp f = 0) : (incl g.ker).comp (ker.lift f g h) = f :=\n  by\n  ext\n  rfl\n#align ker.incl_comp_lift ker.incl_comp_lift\n\n",
+ "id":
+ "#print id /-\ntheorem id : (id V).norm_noninc := fun v => le_rfl\n#align id id\n-/\n\n",
+ "ext_iff":
+ "theorem ext_iff : f = g ↔ ∀ x, f x = g x :=\n  ⟨by rintro rfl x <;> rfl, ext⟩\n#align ext_iff ext_iff\n\n",
+ "ext":
+ "@[ext]\ntheorem ext (H : ∀ x, f x = g x) : f = g :=\n  coe_inj <| funext H\n#align ext ext\n\n",
+ "exists_pos_bound_of_bound":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr‖ ‖» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr‖ ‖» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr‖ ‖» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr‖ ‖» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr‖ ‖» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr‖ ‖» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr‖ ‖» -/\n/-\nCopyright (c) 2021 Johan Commelin. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Johan Commelin\n-/\ntheorem exists_pos_bound_of_bound {V W : Type _} [seminormed_add_comm_group V] [seminormed_add_comm_group W] {f : V → W}\n    (M : exprℝ) (h : ∀ x, «expr‖ ‖» (f x) ≤ M * «expr‖ ‖» x) : ∃ N, 0 < N ∧ ∀ x, «expr‖ ‖» (f x) ≤ N * «expr‖ ‖» x :=\n  ⟨max M 1, lt_of_lt_of_le zero_lt_one (le_max_right _ _), fun x =>\n    calc\n      «expr‖ ‖» (f x) ≤ M * «expr‖ ‖» x := h x\n      _ ≤ max M 1 * «expr‖ ‖» x := mul_le_mul_of_nonneg_right (le_max_left _ _) (norm_nonneg _)\n      ⟩\n#align exists_pos_bound_of_bound exists_pos_bound_of_bound\n\n",
+ "exists_pos":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\ntheorem surjective_on_with.exists_pos {f : normed_add_group_hom V₁ V₂} {K : add_subgroup V₂} {C : exprℝ}\n    (h : f.surjective_on_with K C) : ∃ C' > 0, f.surjective_on_with K C' :=\n  by\n  refine' ⟨|C| + 1, _, _⟩\n  · linarith [abs_nonneg C]\n  · apply h.mono\n    linarith [le_abs_self C]\n#align surjective_on_with.exists_pos surjective_on_with.exists_pos\n\n",
+ "continuous":
+ "@[continuity]\nprotected theorem continuous (f : normed_add_group_hom V₁ V₂) : continuous f :=\n  f.uniform_continuous.continuous\n#align continuous continuous\n\n",
+ "comp_ι_eq":
+ "theorem comp_ι_eq : f.comp (ι f g) = g.comp (ι f g) := by\n  ext\n  rw [comp_apply, comp_apply, ← sub_eq_zero, ← normed_add_group_hom.sub_apply]\n  exact x.2\n#align comp_ι_eq comp_ι_eq\n\n",
+ "comp_zero":
+ "@[simp]\ntheorem comp_zero (f : normed_add_group_hom V₂ V₃) : f.comp (0 : normed_add_group_hom V₁ V₂) = 0 :=\n  by\n  ext\n  exact map_zero f\n#align comp_zero comp_zero\n\n",
+ "comp_range":
+ "theorem comp_range : (g.comp f).range = add_subgroup.map g.to_add_monoid_hom f.range :=\n  by\n  erw [add_monoid_hom.map_range]\n  rfl\n#align comp_range comp_range\n\n",
+ "comp_assoc":
+ "theorem comp_assoc {V₄ : Type _} [seminormed_add_comm_group V₄] (h : normed_add_group_hom V₃ V₄)\n    (g : normed_add_group_hom V₂ V₃) (f : normed_add_group_hom V₁ V₂) : (h.comp g).comp f = h.comp (g.comp f) :=\n  by\n  ext\n  rfl\n#align comp_assoc comp_assoc\n\n",
+ "comp":
+ "theorem comp {g : normed_add_group_hom V₂ V₃} {f : normed_add_group_hom V₁ V₂} (hg : g.norm_noninc)\n    (hf : f.norm_noninc) : (g.comp f).norm_noninc := fun v => (hg (f v)).trans (hf v)\n#align comp comp\n\n",
+ "comm_sq₂":
+ "theorem comm_sq₂ (hf : ψ.comp f₁ = f₂.comp φ) (hf' : ψ'.comp f₂ = f₃.comp φ') :\n    (ψ'.comp ψ).comp f₁ = f₃.comp (φ'.comp φ) := by rw [comp_assoc, hf, ← comp_assoc, hf', comp_assoc]\n#align comm_sq₂ comm_sq₂\n\n",
+ "coe_zsmul":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n@[simp]\ntheorem coe_zsmul (r : ℤ) (f : normed_add_group_hom V₁ V₂) : «expr⇑ » («expr • » r f) = «expr • » r f :=\n  rfl\n#align coe_zsmul coe_zsmul\n\n",
+ "coe_zero":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n-- see Note [addition on function coercions]\n@[simp]\ntheorem coe_zero : «expr⇑ » (0 : normed_add_group_hom V₁ V₂) = (0 : V₁ → V₂) :=\n  rfl\n#align coe_zero coe_zero\n\n",
+ "coe_to_add_monoid_hom":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n@[simp]\ntheorem coe_to_add_monoid_hom : «expr⇑ » f.to_add_monoid_hom = f :=\n  rfl\n#align coe_to_add_monoid_hom coe_to_add_monoid_hom\n\n",
+ "coe_sum":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →+ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `finset.sum -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.sum -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `finset.sum -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.sum -/\n@[simp]\ntheorem coe_sum {ι : Type _} (s : Finset ι) (f : ι → normed_add_group_hom V₁ V₂) :\n    «expr⇑ » (finset.sum \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.sum\" s (f i)) =\n      finset.sum \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.sum\" s (f i) :=\n  (coe_fn_add_hom : «expr →+ » _ (V₁ → V₂)).map_sum f s\n#align coe_sum coe_sum\n\n",
+ "coe_sub":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n-- see Note [addition on function coercions]\n@[simp]\ntheorem coe_sub (f g : normed_add_group_hom V₁ V₂) : «expr⇑ » (f - g) = (f - g : V₁ → V₂) :=\n  rfl\n#align coe_sub coe_sub\n\n",
+ "coe_smul":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n@[simp]\ntheorem coe_smul (r : R) (f : normed_add_group_hom V₁ V₂) : «expr⇑ » («expr • » r f) = «expr • » r f :=\n  rfl\n#align coe_smul coe_smul\n\n",
+ "coe_nsmul":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n@[simp]\ntheorem coe_nsmul (r : ℕ) (f : normed_add_group_hom V₁ V₂) : «expr⇑ » («expr • » r f) = «expr • » r f :=\n  rfl\n#align coe_nsmul coe_nsmul\n\n",
+ "coe_neg":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n-- see Note [addition on function coercions]\n@[simp]\ntheorem coe_neg (f : normed_add_group_hom V₁ V₂) : «expr⇑ » (-f) = (-f : V₁ → V₂) :=\n  rfl\n#align coe_neg coe_neg\n\n",
+ "coe_mk_normed_add_group_hom'":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →+ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n@[simp]\ntheorem coe_mk_normed_add_group_hom' (f : «expr →+ » V₁ V₂) (C) (hC) : «expr⇑ » (f.mk_normed_add_group_hom' C hC) = f :=\n  rfl\n#align coe_mk_normed_add_group_hom' coe_mk_normed_add_group_hom'\n\n",
+ "coe_mk_normed_add_group_hom":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →+ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n@[simp]\ntheorem coe_mk_normed_add_group_hom (f : «expr →+ » V₁ V₂) (C) (hC) : «expr⇑ » (f.mk_normed_add_group_hom C hC) = f :=\n  rfl\n#align coe_mk_normed_add_group_hom coe_mk_normed_add_group_hom\n\n",
+ "coe_mk":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n@[simp]\ntheorem coe_mk (f) (h₁) (h₂) (h₃) : «expr⇑ » (⟨f, h₁, h₂, h₃⟩ : normed_add_group_hom V₁ V₂) = f :=\n  rfl\n#align coe_mk coe_mk\n\n",
+ "coe_ker":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\ntheorem coe_ker : (f.ker : set V₁) = «expr ⁻¹' » (f : V₁ → V₂) {0} :=\n  rfl\n#align coe_ker coe_ker\n\n",
+ "coe_injective":
+ "theorem coe_injective : @function.injective (normed_add_group_hom V₁ V₂) (V₁ → V₂) coe_fn := by apply coe_inj\n#align coe_injective coe_injective\n\n",
+ "coe_inj_iff":
+ "theorem coe_inj_iff : f = g ↔ (f : V₁ → V₂) = g :=\n  ⟨congr_arg _, coe_inj⟩\n#align coe_inj_iff coe_inj_iff\n\n",
+ "coe_inj":
+ "theorem coe_inj (H : (f : V₁ → V₂) = g) : f = g := by cases f <;> cases g <;> congr <;> exact funext H\n#align coe_inj coe_inj\n\n",
+ "coe_id":
+ "theorem coe_id : (normed_add_group_hom.id V : V → V) = (id : V → V) :=\n  rfl\n#align coe_id coe_id\n\n",
+ "coe_comp":
+ "theorem coe_comp (f : normed_add_group_hom V₁ V₂) (g : normed_add_group_hom V₂ V₃) :\n    (g.comp f : V₁ → V₃) = (g : V₂ → V₃) ∘ (f : V₁ → V₂) :=\n  rfl\n#align coe_comp coe_comp\n\n",
+ "coe_add":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n-- see Note [addition on function coercions]\n@[simp]\ntheorem coe_add (f g : normed_add_group_hom V₁ V₂) : «expr⇑ » (f + g) = (f + g : V₁ → V₂) :=\n  rfl\n#align coe_add coe_add\n\n",
+ "bounds_nonempty":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr‖ ‖» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr‖ ‖» -/\n-- So that invocations of `le_cInf` make sense: we show that the set of\n-- bounds is nonempty and bounded below.\ntheorem bounds_nonempty {f : normed_add_group_hom V₁ V₂} :\n    ∃ c, c ∈ { c | 0 ≤ c ∧ ∀ x, «expr‖ ‖» (f x) ≤ c * «expr‖ ‖» x } :=\n  let ⟨M, hMp, hMb⟩ := f.bound\n  ⟨M, le_of_lt hMp, hMb⟩\n#align bounds_nonempty bounds_nonempty\n\n",
+ "bounds_bdd_below":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr‖ ‖» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr‖ ‖» -/\ntheorem bounds_bdd_below {f : normed_add_group_hom V₁ V₂} :\n    BddBelow { c | 0 ≤ c ∧ ∀ x, «expr‖ ‖» (f x) ≤ c * «expr‖ ‖» x } :=\n  ⟨0, fun _ ⟨hn, _⟩ => hn⟩\n#align bounds_bdd_below bounds_bdd_below\n\n",
+ "bound":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr‖ ‖» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr‖ ‖» -/\ntheorem bound : ∃ C, 0 < C ∧ ∀ x, «expr‖ ‖» (f x) ≤ C * «expr‖ ‖» x :=\n  let ⟨C, hC⟩ := f.bound'\n  exists_pos_bound_of_bound _ hC\n#align bound bound\n\n",
+ "antilipschitz_of_norm_ge":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `nnreal -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr‖ ‖» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr‖ ‖» -/\ntheorem antilipschitz_of_norm_ge {K : nnreal} (h : ∀ x, «expr‖ ‖» x ≤ K * «expr‖ ‖» (f x)) : antilipschitz_with K f :=\n  antilipschitz_with.of_le_mul_dist fun x y => by simpa only [dist_eq_norm, map_sub] using h (x - y)\n#align antilipschitz_of_norm_ge antilipschitz_of_norm_ge\n\n",
+ "add_apply":
+ "@[simp]\ntheorem add_apply (f g : normed_add_group_hom V₁ V₂) (v : V₁) : (f + g : normed_add_group_hom V₁ V₂) v = f v + g v :=\n  rfl\n#align add_apply add_apply\n\n"}

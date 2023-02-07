@@ -1,0 +1,112 @@
+{"to_boolring_top":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n@[simp]\ntheorem to_boolring_top : to_boolring («expr⊤» : α) = 1 :=\n  rfl\n#align to_boolring_top to_boolring_top\n\n",
+ "to_boolring_symm_eq":
+ "@[simp]\ntheorem to_boolring_symm_eq : (@to_boolring α).symm = of_boolring :=\n  rfl\n#align to_boolring_symm_eq to_boolring_symm_eq\n\n",
+ "to_boolring_symm_diff":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ∆ » -/\n@[simp]\ntheorem to_boolring_symm_diff (a b : α) : to_boolring («expr ∆ » a b) = to_boolring a + to_boolring b :=\n  rfl\n#align to_boolring_symm_diff to_boolring_symm_diff\n\n",
+ "to_boolring_of_boolring":
+ "@[simp]\ntheorem to_boolring_of_boolring (a : as_boolring α) : to_boolring (of_boolring a) = a :=\n  rfl\n#align to_boolring_of_boolring to_boolring_of_boolring\n\n",
+ "to_boolring_inj":
+ "@[simp]\ntheorem to_boolring_inj {a b : α} : to_boolring a = to_boolring b ↔ a = b :=\n  iff.rfl\n#align to_boolring_inj to_boolring_inj\n\n",
+ "to_boolring_inf":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊓ » -/\n@[simp]\ntheorem to_boolring_inf (a b : α) : to_boolring («expr ⊓ » a b) = to_boolring a * to_boolring b :=\n  rfl\n#align to_boolring_inf to_boolring_inf\n\n",
+ "to_boolring_bot":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n@[simp]\ntheorem to_boolring_bot : to_boolring («expr⊥» : α) = 0 :=\n  rfl\n#align to_boolring_bot to_boolring_bot\n\n",
+ "to_boolalg_zero":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n@[simp]\ntheorem to_boolalg_zero : to_boolalg (0 : α) = «expr⊥» :=\n  rfl\n#align to_boolalg_zero to_boolalg_zero\n\n",
+ "to_boolalg_symm_eq":
+ "-- Note [lower instance priority]\n@[simp]\ntheorem to_boolalg_symm_eq : (@to_boolalg α).symm = of_boolalg :=\n  rfl\n#align to_boolalg_symm_eq to_boolalg_symm_eq\n\n",
+ "to_boolalg_one":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n@[simp]\ntheorem to_boolalg_one : to_boolalg (1 : α) = «expr⊤» :=\n  rfl\n#align to_boolalg_one to_boolalg_one\n\n",
+ "to_boolalg_of_boolalg":
+ "@[simp]\ntheorem to_boolalg_of_boolalg (a : as_boolalg α) : to_boolalg (of_boolalg a) = a :=\n  rfl\n#align to_boolalg_of_boolalg to_boolalg_of_boolalg\n\n",
+ "to_boolalg_mul":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊓ » -/\n@[simp]\ntheorem to_boolalg_mul (a b : α) : to_boolalg (a * b) = «expr ⊓ » (to_boolalg a) (to_boolalg b) :=\n  rfl\n#align to_boolalg_mul to_boolalg_mul\n\n",
+ "to_boolalg_inj":
+ "@[simp]\ntheorem to_boolalg_inj {a b : α} : to_boolalg a = to_boolalg b ↔ a = b :=\n  iff.rfl\n#align to_boolalg_inj to_boolalg_inj\n\n",
+ "to_boolalg_add_add_mul":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊔ » -/\n-- `to_boolalg_add` simplifies the LHS but this lemma is eligible to `dsimp`\n@[simp, nolint simp_nf]\ntheorem to_boolalg_add_add_mul (a b : α) : to_boolalg (a + b + a * b) = «expr ⊔ » (to_boolalg a) (to_boolalg b) :=\n  rfl\n#align to_boolalg_add_add_mul to_boolalg_add_add_mul\n\n",
+ "to_boolalg_add":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ∆ » -/\n@[simp]\ntheorem to_boolalg_add (a b : α) : to_boolalg (a + b) = «expr ∆ » (to_boolalg a) (to_boolalg b) :=\n  (of_boolalg_symm_diff _ _).symm\n#align to_boolalg_add to_boolalg_add\n\n",
+ "sup_inf_self":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:219:4: warning: unsupported binary notation `«expr ⊔ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:219:4: warning: unsupported binary notation `«expr ⊓ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊔ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊓ » -/\n#print sup_inf_self /-\ntheorem sup_inf_self (a b : α) : «expr ⊔ » a («expr ⊓ » a b) = a :=\n  by\n  dsimp only [(«expr ⊔ » · ·), («expr ⊓ » · ·)]\n  assoc_rw [mul_self, add_self, add_zero]\n#align sup_inf_self sup_inf_self\n-/\n\n",
+ "sup_comm":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:219:4: warning: unsupported binary notation `«expr ⊔ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊔ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊔ » -/\n#print sup_comm /-\n-- Note [lower instance priority]\ntheorem sup_comm (a b : α) : «expr ⊔ » a b = «expr ⊔ » b a :=\n  by\n  dsimp only [(«expr ⊔ » · ·)]\n  ring\n#align sup_comm sup_comm\n-/\n\n",
+ "sup_assoc":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:219:4: warning: unsupported binary notation `«expr ⊔ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊔ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊔ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊔ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊔ » -/\n#print sup_assoc /-\ntheorem sup_assoc (a b c : α) : «expr ⊔ » («expr ⊔ » a b) c = «expr ⊔ » a («expr ⊔ » b c) :=\n  by\n  dsimp only [(«expr ⊔ » · ·)]\n  ring\n#align sup_assoc sup_assoc\n-/\n\n",
+ "sub_eq_add":
+ "@[simp]\ntheorem sub_eq_add : a - b = a + b := by rw [sub_eq_add_neg, add_right_inj, neg_eq]\n#align sub_eq_add sub_eq_add\n\n",
+ "of_boolring_zero":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n-- See note [reducible non-instances]\n-- See note [reducible non-instances]\n@[simp]\ntheorem of_boolring_zero : of_boolring (0 : as_boolring α) = «expr⊥» :=\n  rfl\n#align of_boolring_zero of_boolring_zero\n\n",
+ "of_boolring_to_boolring":
+ "@[simp]\ntheorem of_boolring_to_boolring (a : α) : of_boolring (to_boolring a) = a :=\n  rfl\n#align of_boolring_to_boolring of_boolring_to_boolring\n\n",
+ "of_boolring_symm_eq":
+ "@[simp]\ntheorem of_boolring_symm_eq : (@of_boolring α).symm = to_boolring :=\n  rfl\n#align of_boolring_symm_eq of_boolring_symm_eq\n\n",
+ "of_boolring_sub":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ∆ » -/\n-- `sub_eq_add` simplifies the LHS but this lemma is eligible for `dsimp`\n@[simp, nolint simp_nf]\ntheorem of_boolring_sub (a b : as_boolring α) : of_boolring (a - b) = «expr ∆ » (of_boolring a) (of_boolring b) :=\n  rfl\n#align of_boolring_sub of_boolring_sub\n\n",
+ "of_boolring_one":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n@[simp]\ntheorem of_boolring_one : of_boolring (1 : as_boolring α) = «expr⊤» :=\n  rfl\n#align of_boolring_one of_boolring_one\n\n",
+ "of_boolring_neg":
+ "-- `sub_eq_add` proves this lemma but it is eligible for `dsimp`\n@[simp, nolint simp_nf]\ntheorem of_boolring_neg (a : as_boolring α) : of_boolring (-a) = of_boolring a :=\n  rfl\n#align of_boolring_neg of_boolring_neg\n\n",
+ "of_boolring_mul":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊓ » -/\n@[simp]\ntheorem of_boolring_mul (a b : as_boolring α) : of_boolring (a * b) = «expr ⊓ » (of_boolring a) (of_boolring b) :=\n  rfl\n#align of_boolring_mul of_boolring_mul\n\n",
+ "of_boolring_le_of_boolring_iff":
+ "@[simp]\ntheorem of_boolring_le_of_boolring_iff {a b : as_boolring α} : of_boolring a ≤ of_boolring b ↔ a * b = a :=\n  inf_eq_left.symm\n#align of_boolring_le_of_boolring_iff of_boolring_le_of_boolring_iff\n\n",
+ "of_boolring_inj":
+ "@[simp]\ntheorem of_boolring_inj {a b : as_boolring α} : of_boolring a = of_boolring b ↔ a = b :=\n  iff.rfl\n#align of_boolring_inj of_boolring_inj\n\n",
+ "of_boolring_add":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ∆ » -/\n@[simp]\ntheorem of_boolring_add (a b : as_boolring α) : of_boolring (a + b) = «expr ∆ » (of_boolring a) (of_boolring b) :=\n  rfl\n#align of_boolring_add of_boolring_add\n\n",
+ "of_boolalg_top":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n@[simp]\ntheorem of_boolalg_top : of_boolalg («expr⊤» : as_boolalg α) = 1 :=\n  rfl\n#align of_boolalg_top of_boolalg_top\n\n",
+ "of_boolalg_to_boolalg":
+ "@[simp]\ntheorem of_boolalg_to_boolalg (a : α) : of_boolalg (to_boolalg a) = a :=\n  rfl\n#align of_boolalg_to_boolalg of_boolalg_to_boolalg\n\n",
+ "of_boolalg_symm_eq":
+ "@[simp]\ntheorem of_boolalg_symm_eq : (@of_boolalg α).symm = to_boolalg :=\n  rfl\n#align of_boolalg_symm_eq of_boolalg_symm_eq\n\n",
+ "of_boolalg_symm_diff_aux":
+ "private theorem of_boolalg_symm_diff_aux (a b : α) : (a + b + a * b) * (1 + a * b) = a + b :=\n  calc\n    (a + b + a * b) * (1 + a * b) = a + b + (a * b + a * b * (a * b)) + (a * (b * b) + a * a * b) := by ring\n    _ = a + b := by simp only [mul_self, add_self, add_zero]\n    \n#align of_boolalg_symm_diff_aux of_boolalg_symm_diff_aux\n\n",
+ "of_boolalg_symm_diff":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ∆ » -/\n@[simp]\ntheorem of_boolalg_symm_diff (a b : as_boolalg α) : of_boolalg («expr ∆ » a b) = of_boolalg a + of_boolalg b :=\n  by\n  rw [symmDiff_eq_sup_sdiff_inf]\n  exact of_boolalg_symm_diff_aux _ _\n#align of_boolalg_symm_diff of_boolalg_symm_diff\n\n",
+ "of_boolalg_sup":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊔ » -/\n@[simp]\ntheorem of_boolalg_sup (a b : as_boolalg α) :\n    of_boolalg («expr ⊔ » a b) = of_boolalg a + of_boolalg b + of_boolalg a * of_boolalg b :=\n  rfl\n#align of_boolalg_sup of_boolalg_sup\n\n",
+ "of_boolalg_sdiff":
+ "@[simp]\ntheorem of_boolalg_sdiff (a b : as_boolalg α) : of_boolalg (a \\ b) = of_boolalg a * (1 + of_boolalg b) :=\n  rfl\n#align of_boolalg_sdiff of_boolalg_sdiff\n\n",
+ "of_boolalg_mul_of_boolalg_eq_left_iff":
+ "@[simp]\ntheorem of_boolalg_mul_of_boolalg_eq_left_iff {a b : as_boolalg α} :\n    of_boolalg a * of_boolalg b = of_boolalg a ↔ a ≤ b :=\n  @inf_eq_left (as_boolalg α) _ _ _\n#align of_boolalg_mul_of_boolalg_eq_left_iff of_boolalg_mul_of_boolalg_eq_left_iff\n\n",
+ "of_boolalg_inj":
+ "@[simp]\ntheorem of_boolalg_inj {a b : as_boolalg α} : of_boolalg a = of_boolalg b ↔ a = b :=\n  iff.rfl\n#align of_boolalg_inj of_boolalg_inj\n\n",
+ "of_boolalg_inf":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊓ » -/\n@[simp]\ntheorem of_boolalg_inf (a b : as_boolalg α) : of_boolalg («expr ⊓ » a b) = of_boolalg a * of_boolalg b :=\n  rfl\n#align of_boolalg_inf of_boolalg_inf\n\n",
+ "of_boolalg_compl":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\n@[simp]\ntheorem of_boolalg_compl (a : as_boolalg α) : of_boolalg («expr ᶜ» a) = 1 + of_boolalg a :=\n  rfl\n#align of_boolalg_compl of_boolalg_compl\n\n",
+ "of_boolalg_bot":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n@[simp]\ntheorem of_boolalg_bot : of_boolalg («expr⊥» : as_boolalg α) = 0 :=\n  rfl\n#align of_boolalg_bot of_boolalg_bot\n\n",
+ "neg_eq":
+ "@[simp]\ntheorem neg_eq : -a = a :=\n  calc\n    -a = -a + 0 := by rw [add_zero]\n    _ = -a + -a + a := by rw [← neg_add_self, add_assoc]\n    _ = a := by rw [add_self, zero_add]\n    \n#align neg_eq neg_eq\n\n",
+ "mul_self":
+ "/-\nCopyright (c) 2021 Bryan Gin-ge Chen. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Bryan Gin-ge Chen, Yaël Dillies\n-/\n@[simp]\ntheorem mul_self : a * a = a :=\n  boolean_ring.mul_self _\n#align mul_self mul_self\n\n",
+ "mul_one_add_self":
+ "@[simp]\ntheorem mul_one_add_self : a * (1 + a) = 0 := by rw [mul_add, mul_one, mul_self, add_self]\n#align mul_one_add_self mul_one_add_self\n\n",
+ "mul_add_mul":
+ "@[simp]\ntheorem mul_add_mul : a * b + b * a = 0 :=\n  by\n  have : a + b = a + b + (a * b + b * a) :=\n    calc\n      a + b = (a + b) * (a + b) := by rw [mul_self]\n      _ = a * a + a * b + (b * a + b * b) := by rw [add_mul, mul_add, mul_add]\n      _ = a + a * b + (b * a + b) := by simp only [mul_self]\n      _ = a + b + (a * b + b * a) := by abel\n      \n  rwa [self_eq_add_right] at this\n#align mul_add_mul mul_add_mul\n\n",
+ "le_sup_inf_aux":
+ "theorem le_sup_inf_aux (a b c : α) : (a + b + a * b) * (a + c + a * c) = a + b * c + a * (b * c) :=\n  calc\n    (a + b + a * b) * (a + c + a * c) =\n        a * a + b * c + a * (b * c) + (a * b + a * a * b) + (a * c + a * a * c) + (a * b * c + a * a * b * c) :=\n      by ring\n    _ = a + b * c + a * (b * c) := by simp only [mul_self, add_self, add_zero]\n    \n#align le_sup_inf_aux le_sup_inf_aux\n\n",
+ "le_sup_inf":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:219:4: warning: unsupported binary notation `«expr ⊔ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:219:4: warning: unsupported binary notation `«expr ⊓ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊔ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊓ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊔ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊔ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊔ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊓ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊔ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊓ » -/\n#print le_sup_inf /-\ntheorem le_sup_inf (a b c : α) :\n    «expr ⊔ » («expr ⊓ » («expr ⊔ » a b) («expr ⊔ » a c)) («expr ⊔ » a («expr ⊓ » b c)) = «expr ⊔ » a («expr ⊓ » b c) :=\n  by\n  dsimp only [(«expr ⊔ » · ·), («expr ⊓ » · ·)]\n  rw [le_sup_inf_aux, add_self, mul_self, zero_add]\n#align le_sup_inf le_sup_inf\n-/\n\n",
+ "inf_sup_self":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:219:4: warning: unsupported binary notation `«expr ⊔ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:219:4: warning: unsupported binary notation `«expr ⊓ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊓ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊔ » -/\n#print inf_sup_self /-\ntheorem inf_sup_self (a b : α) : «expr ⊓ » a («expr ⊔ » a b) = a :=\n  by\n  dsimp only [(«expr ⊔ » · ·), («expr ⊓ » · ·)]\n  rw [mul_add, mul_add, mul_self, ← mul_assoc, mul_self, add_assoc, add_self, add_zero]\n#align inf_sup_self inf_sup_self\n-/\n\n",
+ "inf_comm":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:219:4: warning: unsupported binary notation `«expr ⊓ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊓ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊓ » -/\n#print inf_comm /-\ntheorem inf_comm (a b : α) : «expr ⊓ » a b = «expr ⊓ » b a :=\n  by\n  dsimp only [(«expr ⊓ » · ·)]\n  ring\n#align inf_comm inf_comm\n-/\n\n",
+ "inf_assoc":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:219:4: warning: unsupported binary notation `«expr ⊓ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊓ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊓ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊓ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊓ » -/\n#print inf_assoc /-\ntheorem inf_assoc (a b c : α) : «expr ⊓ » («expr ⊓ » a b) c = «expr ⊓ » a («expr ⊓ » b c) :=\n  by\n  dsimp only [(«expr ⊓ » · ·)]\n  ring\n#align inf_assoc inf_assoc\n-/\n\n",
+ "as_boolring_id":
+ "@[simp]\ntheorem bounded_lattice_hom.as_boolring_id : (bounded_lattice_hom.id α).as_boolring = RingHom.id _ :=\n  rfl\n#align bounded_lattice_hom.as_boolring_id bounded_lattice_hom.as_boolring_id\n\n",
+ "as_boolring_comp":
+ "@[simp]\ntheorem bounded_lattice_hom.as_boolring_comp (g : bounded_lattice_hom β γ) (f : bounded_lattice_hom α β) :\n    (g.comp f).as_boolring = g.as_boolring.comp f.as_boolring :=\n  rfl\n#align bounded_lattice_hom.as_boolring_comp bounded_lattice_hom.as_boolring_comp\n\n",
+ "as_boolalg_id":
+ "@[simp]\ntheorem ring_hom.as_boolalg_id : (RingHom.id α).as_boolalg = bounded_lattice_hom.id _ :=\n  rfl\n#align ring_hom.as_boolalg_id ring_hom.as_boolalg_id\n\n",
+ "as_boolalg_comp":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →+* » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →+* » -/\n@[simp]\ntheorem ring_hom.as_boolalg_comp (g : «expr →+* » β γ) (f : «expr →+* » α β) :\n    (g.comp f).as_boolalg = g.as_boolalg.comp f.as_boolalg :=\n  rfl\n#align ring_hom.as_boolalg_comp ring_hom.as_boolalg_comp\n\n",
+ "add_self":
+ "@[simp]\ntheorem add_self : a + a = 0 :=\n  by\n  have : a + a = a + a + (a + a) :=\n    calc\n      a + a = (a + a) * (a + a) := by rw [mul_self]\n      _ = a * a + a * a + (a * a + a * a) := by rw [add_mul, mul_add]\n      _ = a + a + (a + a) := by rw [mul_self]\n      \n  rwa [self_eq_add_left] at this\n#align add_self add_self\n\n",
+ "add_eq_zero":
+ "theorem add_eq_zero : a + b = 0 ↔ a = b :=\n  calc\n    a + b = 0 ↔ a = -b := add_eq_zero_iff_eq_neg\n    _ ↔ a = b := by rw [neg_eq]\n    \n#align add_eq_zero add_eq_zero\n\n"}

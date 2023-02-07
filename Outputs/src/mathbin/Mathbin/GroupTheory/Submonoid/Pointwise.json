@@ -1,0 +1,116 @@
+{"sup_eq_closure":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊔ » -/\n@[to_additive]\ntheorem sup_eq_closure (H K : Submonoid M) : «expr ⊔ » H K = closure (H * K) :=\n  le_antisymm\n    (sup_le (fun h hh => subset_closure ⟨h, 1, hh, K.one_mem, mul_one h⟩) fun k hk =>\n      subset_closure ⟨1, k, H.one_mem, hk, one_mul k⟩)\n    (by conv_rhs => rw [← closure_eq H, ← closure_eq K] <;> apply closure_mul_le)\n#align sup_eq_closure sup_eq_closure\n\n",
+ "subset_pointwise_smul_iff":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\ntheorem subset_pointwise_smul_iff {a : α} {S T : Submonoid M} : S ≤ «expr • » a T ↔ «expr • » a⁻¹ S ≤ T :=\n  subset_set_smul_iff\n#align subset_pointwise_smul_iff subset_pointwise_smul_iff\n\n",
+ "submonoid_closure":
+ "@[to_additive]\ntheorem submonoid_closure (hpos : ∀ x : α, x ∈ s → 1 ≤ x) (h : s.is_pwo) : is_pwo (Submonoid.closure s : set α) :=\n  by\n  rw [submonoid.closure_eq_image_prod]\n  refine' (h.partially_well_ordered_on_sublist_forall₂ (· ≤ ·)).image_of_monotone_on _\n  exact fun l1 hl1 l2 hl2 h12 => h12.prod_le_prod' fun x hx => hpos x <| hl2 x hx\n#align submonoid_closure submonoid_closure\n\n",
+ "smul_sup":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊔ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊔ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\ntheorem smul_sup (a : α) (S T : AddSubmonoid A) :\n    «expr • » a («expr ⊔ » S T) = «expr ⊔ » («expr • » a S) («expr • » a T) :=\n  map_sup _ _ _\n#align smul_sup smul_sup\n\n",
+ "smul_mem_pointwise_smul_iff₀":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n@[simp]\ntheorem smul_mem_pointwise_smul_iff₀ {a : α} (ha : a ≠ 0) (S : AddSubmonoid A) (x : A) :\n    «expr • » a x ∈ «expr • » a S ↔ x ∈ S :=\n  smul_mem_smul_set_iff₀ ha (S : set A) x\n#align smul_mem_pointwise_smul_iff₀ smul_mem_pointwise_smul_iff₀\n\n",
+ "smul_mem_pointwise_smul_iff":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n@[simp]\ntheorem smul_mem_pointwise_smul_iff {a : α} {S : AddSubmonoid A} {x : A} : «expr • » a x ∈ «expr • » a S ↔ x ∈ S :=\n  smul_mem_smul_set_iff\n#align smul_mem_pointwise_smul_iff smul_mem_pointwise_smul_iff\n\n",
+ "smul_mem_pointwise_smul":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\ntheorem smul_mem_pointwise_smul (m : A) (a : α) (S : AddSubmonoid A) : m ∈ S → «expr • » a m ∈ «expr • » a S :=\n  (Set.smul_mem_smul_set : _ → _ ∈ «expr • » a (S : set A))\n#align smul_mem_pointwise_smul smul_mem_pointwise_smul\n\n",
+ "smul_closure":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n@[simp]\ntheorem smul_closure (a : α) (s : set A) : «expr • » a (closure s) = closure («expr • » a s) :=\n  AddMonoidHom.map_mclosure _ _\n#align smul_closure smul_closure\n\n",
+ "smul_bot":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n@[simp]\ntheorem smul_bot (a : α) : «expr • » a («expr⊥» : AddSubmonoid A) = «expr⊥» :=\n  map_bot _\n#align smul_bot smul_bot\n\n",
+ "pow_subset_pow":
+ "theorem pow_subset_pow {s : AddSubmonoid R} {n : ℕ} : (↑s : set R) ^ n ⊆ ↑(s ^ n) :=\n  (pow_eq_closure_pow_set s n).symm ▸ subset_closure\n#align pow_subset_pow pow_subset_pow\n\n",
+ "pow_smul_mem_closure_smul":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n@[to_additive]\ntheorem pow_smul_mem_closure_smul {N : Type _} [comm_monoid N] [MulAction M N] [IsScalarTower M N N] (r : M) (s : set N)\n    {x : N} (hx : x ∈ closure s) : ∃ n : ℕ, «expr • » (r ^ n) x ∈ closure («expr • » r s) :=\n  by\n  apply @closure_induction N _ s (fun x : N => ∃ n : ℕ, «expr • » (r ^ n) x ∈ closure («expr • » r s)) _ hx\n  · intro x hx\n    exact ⟨1, subset_closure ⟨_, hx, by rw [pow_one]⟩⟩\n  · exact ⟨0, by simpa using one_mem _⟩\n  · rintro x y ⟨nx, hx⟩ ⟨ny, hy⟩\n    use nx + ny\n    convert mul_mem hx hy\n    rw [pow_add, smul_mul_assoc, mul_smul, mul_comm, ← smul_mul_assoc, mul_comm]\n#align pow_smul_mem_closure_smul pow_smul_mem_closure_smul\n\n",
+ "pow_eq_closure_pow_set":
+ "theorem pow_eq_closure_pow_set (s : AddSubmonoid R) (n : ℕ) : s ^ n = closure ((s : set R) ^ n) := by\n  rw [← closure_pow, closure_eq]\n#align pow_eq_closure_pow_set pow_eq_closure_pow_set\n\n",
+ "pointwise_smul_subset_iff":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\ntheorem pointwise_smul_subset_iff {a : α} {S T : Submonoid M} : «expr • » a S ≤ T ↔ S ≤ «expr • » a⁻¹ T :=\n  set_smul_subset_iff\n#align pointwise_smul_subset_iff pointwise_smul_subset_iff\n\n",
+ "pointwise_smul_le_pointwise_smul_iff₀":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n@[simp]\ntheorem pointwise_smul_le_pointwise_smul_iff₀ {a : α} (ha : a ≠ 0) {S T : AddSubmonoid A} :\n    «expr • » a S ≤ «expr • » a T ↔ S ≤ T :=\n  set_smul_subset_set_smul_iff₀ ha\n#align pointwise_smul_le_pointwise_smul_iff₀ pointwise_smul_le_pointwise_smul_iff₀\n\n",
+ "pointwise_smul_le_pointwise_smul_iff":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n@[simp]\ntheorem pointwise_smul_le_pointwise_smul_iff {a : α} {S T : AddSubmonoid A} : «expr • » a S ≤ «expr • » a T ↔ S ≤ T :=\n  set_smul_subset_set_smul_iff\n#align pointwise_smul_le_pointwise_smul_iff pointwise_smul_le_pointwise_smul_iff\n\n",
+ "pointwise_smul_le_iff₀":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\ntheorem pointwise_smul_le_iff₀ {a : α} (ha : a ≠ 0) {S T : AddSubmonoid A} : «expr • » a S ≤ T ↔ S ≤ «expr • » a⁻¹ T :=\n  set_smul_subset_iff₀ ha\n#align pointwise_smul_le_iff₀ pointwise_smul_le_iff₀\n\n",
+ "pointwise_smul_le_iff":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\ntheorem pointwise_smul_le_iff {a : α} {S T : AddSubmonoid A} : «expr • » a S ≤ T ↔ S ≤ «expr • » a⁻¹ T :=\n  set_smul_subset_iff\n#align pointwise_smul_le_iff pointwise_smul_le_iff\n\n",
+ "one_eq_mrange":
+ "theorem one_eq_mrange : (1 : AddSubmonoid R) = (nat.cast_add_monoid_hom R).mrange :=\n  rfl\n#align one_eq_mrange one_eq_mrange\n\n",
+ "one_eq_closure_one_set":
+ "theorem one_eq_closure_one_set : (1 : AddSubmonoid R) = closure 1 :=\n  one_eq_closure\n#align one_eq_closure_one_set one_eq_closure_one_set\n\n",
+ "one_eq_closure":
+ "theorem one_eq_closure : (1 : AddSubmonoid R) = closure {1} :=\n  by\n  simp only [closure_singleton_eq, mul_one, one_eq_mrange]\n  congr 1 with n\n  simp\n#align one_eq_closure one_eq_closure\n\n",
+ "nat_cast_mem_one":
+ "theorem nat_cast_mem_one (n : ℕ) : (n : R) ∈ (1 : AddSubmonoid R) :=\n  ⟨_, rfl⟩\n#align nat_cast_mem_one nat_cast_mem_one\n\n",
+ "mul_subset_mul":
+ "theorem mul_subset_mul {M N : AddSubmonoid R} : (↑M : set R) * (↑N : set R) ⊆ (↑(M * N) : set R) :=\n  by\n  rintro _ ⟨i, j, hi, hj, rfl⟩\n  exact mul_mem_mul hi hj\n#align mul_subset_mul mul_subset_mul\n\n",
+ "mul_subset_closure":
+ "@[to_additive]\ntheorem mul_subset_closure (hs : s ⊆ u) (ht : t ⊆ u) : s * t ⊆ Submonoid.closure u :=\n  mul_subset (Subset.trans hs Submonoid.subset_closure) (Subset.trans ht Submonoid.subset_closure)\n#align mul_subset_closure mul_subset_closure\n\n",
+ "mul_subset":
+ "/-\nCopyright (c) 2021 Eric Wieser. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Eric Wieser\n-/\n@[to_additive]\ntheorem mul_subset {S : Submonoid M} (hs : s ⊆ S) (ht : t ⊆ S) : s * t ⊆ S :=\n  by\n  rintro _ ⟨p, q, hp, hq, rfl⟩\n  exact Submonoid.mul_mem _ (hs hp) (ht hq)\n#align mul_subset mul_subset\n\n",
+ "mul_mem_mul":
+ "theorem mul_mem_mul {M N : AddSubmonoid R} {m n : R} (hm : m ∈ M) (hn : n ∈ N) : m * n ∈ M * N :=\n  (le_supᵢ _ ⟨m, hm⟩ : _ ≤ M * N) ⟨n, hn, rfl⟩\n#align mul_mem_mul mul_mem_mul\n\n",
+ "mul_le_mul_right":
+ "#print mul_le_mul_right /-\ntheorem mul_le_mul_right {M N P : AddSubmonoid R} (h : N ≤ P) : M * N ≤ M * P :=\n  mul_le_mul (le_refl M) h\n#align mul_le_mul_right mul_le_mul_right\n-/\n\n",
+ "mul_le_mul_left":
+ "#print mul_le_mul_left /-\ntheorem mul_le_mul_left {M N P : AddSubmonoid R} (h : M ≤ N) : M * P ≤ N * P :=\n  mul_le_mul h (le_refl P)\n#align mul_le_mul_left mul_le_mul_left\n-/\n\n",
+ "mul_le_mul":
+ "#print mul_le_mul /-\n@[mono]\ntheorem mul_le_mul {M N P Q : AddSubmonoid R} (hmp : M ≤ P) (hnq : N ≤ Q) : M * N ≤ P * Q :=\n  mul_le.2 fun m hm n hn => mul_mem_mul (hmp hm) (hnq hn)\n#align mul_le_mul mul_le_mul\n-/\n\n",
+ "mul_le":
+ "theorem mul_le {M N P : AddSubmonoid R} : M * N ≤ P ↔ ∀ m ∈ M, ∀ n ∈ N, m * n ∈ P :=\n  ⟨fun H m hm n hn => H <| mul_mem_mul hm hn, fun H =>\n    supᵢ_le fun ⟨m, hm⟩ => map_le_iff_le_comap.2 fun n hn => H m hm n hn⟩\n#align mul_le mul_le\n\n",
+ "mul_induction_on":
+ "@[elab_as_elim]\nprotected theorem mul_induction_on {M N : AddSubmonoid R} {C : R → Prop} {r : R} (hr : r ∈ M * N)\n    (hm : ∀ m ∈ M, ∀ n ∈ N, C (m * n)) (ha : ∀ x y, C x → C y → C (x + y)) : C r :=\n  (@mul_le _ _ _ _ ⟨C, ha, by simpa only [zero_mul] using hm _ (zero_mem _) _ (zero_mem _)⟩).2 hm hr\n#align mul_induction_on mul_induction_on\n\n",
+ "mul_eq_closure_mul_set":
+ "theorem mul_eq_closure_mul_set (M N : AddSubmonoid R) : M * N = closure (M * N) := by\n  rw [← closure_mul_closure, closure_eq, closure_eq]\n#align mul_eq_closure_mul_set mul_eq_closure_mul_set\n\n",
+ "mul_bot":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n@[simp]\ntheorem mul_bot (S : AddSubmonoid R) : S * «expr⊥» = «expr⊥» :=\n  eq_bot_iff.2 <| mul_le.2 fun m hm n hn => by rw [add_submonoid.mem_bot] at hn⊢ <;> rw [hn, mul_zero]\n#align mul_bot mul_bot\n\n",
+ "mem_smul_pointwise_iff_exists":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\ntheorem mem_smul_pointwise_iff_exists (m : A) (a : α) (S : AddSubmonoid A) :\n    m ∈ «expr • » a S ↔ ∃ s : A, s ∈ S ∧ «expr • » a s = m :=\n  (Set.mem_smul_set : m ∈ «expr • » a (S : set A) ↔ _)\n#align mem_smul_pointwise_iff_exists mem_smul_pointwise_iff_exists\n\n",
+ "mem_pointwise_smul_iff_inv_smul_mem₀":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\ntheorem mem_pointwise_smul_iff_inv_smul_mem₀ {a : α} (ha : a ≠ 0) (S : AddSubmonoid A) (x : A) :\n    x ∈ «expr • » a S ↔ «expr • » a⁻¹ x ∈ S :=\n  mem_smul_set_iff_inv_smul_mem₀ ha (S : set A) x\n#align mem_pointwise_smul_iff_inv_smul_mem₀ mem_pointwise_smul_iff_inv_smul_mem₀\n\n",
+ "mem_pointwise_smul_iff_inv_smul_mem":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\ntheorem mem_pointwise_smul_iff_inv_smul_mem {a : α} {S : AddSubmonoid A} {x : A} :\n    x ∈ «expr • » a S ↔ «expr • » a⁻¹ x ∈ S :=\n  mem_smul_set_iff_inv_smul_mem\n#align mem_pointwise_smul_iff_inv_smul_mem mem_pointwise_smul_iff_inv_smul_mem\n\n",
+ "mem_one":
+ "@[simp]\ntheorem mem_one {x : R} : x ∈ (1 : AddSubmonoid R) ↔ ∃ n : ℕ, ↑n = x :=\n  iff.rfl\n#align mem_one mem_one\n\n",
+ "mem_inv_pointwise_smul_iff₀":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\ntheorem mem_inv_pointwise_smul_iff₀ {a : α} (ha : a ≠ 0) (S : AddSubmonoid A) (x : A) :\n    x ∈ «expr • » a⁻¹ S ↔ «expr • » a x ∈ S :=\n  mem_inv_smul_set_iff₀ ha (S : set A) x\n#align mem_inv_pointwise_smul_iff₀ mem_inv_pointwise_smul_iff₀\n\n",
+ "mem_inv_pointwise_smul_iff":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\ntheorem mem_inv_pointwise_smul_iff {a : α} {S : AddSubmonoid A} {x : A} : x ∈ «expr • » a⁻¹ S ↔ «expr • » a x ∈ S :=\n  mem_inv_smul_set_iff\n#align mem_inv_pointwise_smul_iff mem_inv_pointwise_smul_iff\n\n",
+ "mem_inv":
+ "@[simp, to_additive]\ntheorem mem_inv {g : G} {S : Submonoid G} : g ∈ S⁻¹ ↔ g⁻¹ ∈ S :=\n  iff.rfl\n#align mem_inv mem_inv\n\n",
+ "mem_closure_inv":
+ "@[to_additive]\ntheorem mem_closure_inv {G : Type _} [group G] (S : set G) (x : G) :\n    x ∈ Submonoid.closure S⁻¹ ↔ x⁻¹ ∈ Submonoid.closure S := by rw [closure_inv, mem_inv]\n#align mem_closure_inv mem_closure_inv\n\n",
+ "le_pointwise_smul_iff₀":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\ntheorem le_pointwise_smul_iff₀ {a : α} (ha : a ≠ 0) {S T : AddSubmonoid A} : S ≤ «expr • » a T ↔ «expr • » a⁻¹ S ≤ T :=\n  subset_set_smul_iff₀ ha\n#align le_pointwise_smul_iff₀ le_pointwise_smul_iff₀\n\n",
+ "le_pointwise_smul_iff":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\ntheorem le_pointwise_smul_iff {a : α} {S T : AddSubmonoid A} : S ≤ «expr • » a T ↔ «expr • » a⁻¹ S ≤ T :=\n  subset_set_smul_iff\n#align le_pointwise_smul_iff le_pointwise_smul_iff\n\n",
+ "inv_top":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n@[simp, to_additive]\ntheorem inv_top : («expr⊤» : Submonoid G)⁻¹ = «expr⊤» :=\n  SetLike.coe_injective <| Set.inv_univ\n#align inv_top inv_top\n\n",
+ "inv_supr":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃o » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⨆ , » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⨆ , » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⨆ , » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⨆ , » -/\n@[simp, to_additive]\ntheorem inv_supr {ι : Sort _} (S : ι → Submonoid G) :\n    («expr⨆ , » \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⨆ , »\" (S i))⁻¹ =\n      «expr⨆ , » \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⨆ , »\" (S i)⁻¹ :=\n  (inv_order_iso : «expr ≃o » (Submonoid G) (Submonoid G)).map_supr _\n#align inv_supr inv_supr\n\n",
+ "inv_sup":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃o » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊔ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊔ » -/\n@[simp, to_additive]\ntheorem inv_sup (S T : Submonoid G) : («expr ⊔ » S T)⁻¹ = «expr ⊔ » S⁻¹ T⁻¹ :=\n  (inv_order_iso : «expr ≃o » (Submonoid G) (Submonoid G)).map_sup S T\n#align inv_sup inv_sup\n\n",
+ "inv_le_inv":
+ "#print inv_le_inv /-\n@[simp, to_additive]\ntheorem inv_le_inv (S T : Submonoid G) : S⁻¹ ≤ T⁻¹ ↔ S ≤ T :=\n  SetLike.coe_subset_coe.symm.trans Set.inv_subset_inv\n#align inv_le_inv inv_le_inv\n-/\n\n",
+ "inv_le":
+ "#print inv_le /-\n@[to_additive]\ntheorem inv_le (S T : Submonoid G) : S⁻¹ ≤ T ↔ S ≤ T⁻¹ :=\n  SetLike.coe_subset_coe.symm.trans Set.inv_subset\n#align inv_le inv_le\n-/\n\n",
+ "inv_infi":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃o » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⨅ , » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⨅ , » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⨅ , » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⨅ , » -/\n@[simp, to_additive]\ntheorem inv_infi {ι : Sort _} (S : ι → Submonoid G) :\n    («expr⨅ , » \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⨅ , »\" (S i))⁻¹ =\n      «expr⨅ , » \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⨅ , »\" (S i)⁻¹ :=\n  (inv_order_iso : «expr ≃o » (Submonoid G) (Submonoid G)).map_infi _\n#align inv_infi inv_infi\n\n",
+ "inv_inf":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊓ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊓ » -/\n@[simp, to_additive]\ntheorem inv_inf (S T : Submonoid G) : («expr ⊓ » S T)⁻¹ = «expr ⊓ » S⁻¹ T⁻¹ :=\n  SetLike.coe_injective Set.inter_inv\n#align inv_inf inv_inf\n\n",
+ "inv_bot":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n@[simp, to_additive]\ntheorem inv_bot : («expr⊥» : Submonoid G)⁻¹ = «expr⊥» :=\n  SetLike.coe_injective <| (Set.inv_singleton 1).trans <| congr_arg _ inv_one\n#align inv_bot inv_bot\n\n",
+ "coe_pointwise_smul":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n@[simp]\ntheorem coe_pointwise_smul (a : α) (S : AddSubmonoid A) : ↑(«expr • » a S) = «expr • » a (S : set A) :=\n  rfl\n#align coe_pointwise_smul coe_pointwise_smul\n\n",
+ "coe_mul_self_eq":
+ "@[to_additive]\ntheorem coe_mul_self_eq (s : Submonoid M) : (s : set M) * s = s :=\n  by\n  ext x\n  refine' ⟨_, fun h => ⟨x, 1, h, s.one_mem, mul_one x⟩⟩\n  rintro ⟨a, b, ha, hb, rfl⟩\n  exact s.mul_mem ha hb\n#align coe_mul_self_eq coe_mul_self_eq\n\n",
+ "coe_inv":
+ "@[simp, to_additive]\ntheorem coe_inv (S : Submonoid G) : ↑S⁻¹ = (S : set G)⁻¹ :=\n  rfl\n#align coe_inv coe_inv\n\n",
+ "closure_pow":
+ "theorem closure_pow (s : set R) : ∀ n : ℕ, closure s ^ n = closure (s ^ n)\n  | 0 => by rw [pow_zero, pow_zero, one_eq_closure_one_set]\n  | n + 1 => by rw [pow_succ, pow_succ, closure_pow, closure_mul_closure]\n#align closure_pow closure_pow\n\n",
+ "closure_mul_le":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊔ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊔ » -/\n@[to_additive]\ntheorem closure_mul_le (S T : set M) : closure (S * T) ≤ «expr ⊔ » (closure S) (closure T) :=\n  infₛ_le fun x ⟨s, t, hs, ht, hx⟩ =>\n    hx ▸\n      («expr ⊔ » (closure S) (closure T)).mul_mem (SetLike.le_def.mp le_sup_left <| subset_closure hs)\n        (SetLike.le_def.mp le_sup_right <| subset_closure ht)\n#align closure_mul_le closure_mul_le\n\n",
+ "closure_mul_closure":
+ "-- this proof is copied directly from `submodule.span_mul_span`\ntheorem closure_mul_closure (S T : set R) : closure S * closure T = closure (S * T) :=\n  by\n  apply le_antisymm\n  · rw [mul_le]\n    intro a ha b hb\n    apply closure_induction ha\n    on_goal 1 =>\n      intros ; apply closure_induction hb\n      on_goal 1 => intros ; exact subset_closure ⟨_, _, ‹_›, ‹_›, rfl⟩\n    all_goals\n      intros ; simp only [mul_zero, zero_mul, zero_mem, left_distrib, right_distrib, mul_smul_comm, smul_mul_assoc]\n      solve_by_elim (config :=\n        { max_depth := 4\n          discharger := tactic.interactive.apply_instance }) [add_mem _ _, zero_mem _]\n  · rw [closure_le]\n    rintro _ ⟨a, b, ha, hb, rfl⟩\n    exact mul_mem_mul (subset_closure ha) (subset_closure hb)\n#align closure_mul_closure closure_mul_closure\n\n",
+ "closure_inv":
+ "@[to_additive]\ntheorem closure_inv (s : set G) : closure s⁻¹ = (closure s)⁻¹ :=\n  by\n  apply le_antisymm\n  · rw [closure_le, coe_inv, ← Set.inv_subset, inv_inv]\n    exact subset_closure\n  · rw [inv_le, closure_le, coe_inv, ← Set.inv_subset]\n    exact subset_closure\n#align closure_inv closure_inv\n\n",
+ "bot_mul":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n@[simp]\ntheorem bot_mul (S : AddSubmonoid R) : «expr⊥» * S = «expr⊥» :=\n  eq_bot_iff.2 <| mul_le.2 fun m hm n hn => by rw [add_submonoid.mem_bot] at hm⊢ <;> rw [hm, zero_mul]\n#align bot_mul bot_mul\n\n"}

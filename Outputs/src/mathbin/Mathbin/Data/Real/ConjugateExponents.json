@@ -1,0 +1,38 @@
+{"symm":
+ "#print symm /-\n@[symm]\nprotected theorem symm : q.is_conjugate_exponent p :=\n  { one_lt := by\n      rw [h.conj_eq]\n      exact (one_lt_div h.sub_one_pos).mpr (sub_one_lt p)\n    inv_add_inv_conj := by simpa [add_comm] using h.inv_add_inv_conj }\n#align symm symm\n-/\n\n",
+ "sub_one_pos":
+ "theorem sub_one_pos : 0 < p - 1 :=\n  sub_pos.2 h.one_lt\n#align sub_one_pos sub_one_pos\n\n",
+ "sub_one_ne_zero":
+ "theorem sub_one_ne_zero : p - 1 ≠ 0 :=\n  ne_of_gt h.sub_one_pos\n#align sub_one_ne_zero sub_one_ne_zero\n\n",
+ "sub_one_mul_conj":
+ "theorem sub_one_mul_conj : (p - 1) * q = p :=\n  mul_comm q (p - 1) ▸ (eq_div_iff h.sub_one_ne_zero).1 h.conj_eq\n#align sub_one_mul_conj sub_one_mul_conj\n\n",
+ "pos":
+ "/-\nCopyright (c) 2020 Sébastien Gouëzel. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Sébastien Gouëzel, Yury Kudryashov\n-/\n/- Register several non-vanishing results following from the fact that `p` has a conjugate exponent\n`q`: many computations using these exponents require clearing out denominators, which can be done\nwith `field_simp` given a proof that these denominators are non-zero, so we record the most usual\nones. -/\ntheorem pos : 0 < p :=\n  lt_trans zero_lt_one h.one_lt\n#align pos pos\n\n",
+ "one_lt_nnreal":
+ "theorem one_lt_nnreal : 1 < real.to_nnreal p :=\n  by\n  rw [← real.to_nnreal_one, real.to_nnreal_lt_to_nnreal_iff h.pos]\n  exact h.one_lt\n#align one_lt_nnreal one_lt_nnreal\n\n",
+ "one_div_pos":
+ "#print one_div_pos /-\ntheorem one_div_pos : 0 < 1 / p :=\n  one_div_pos.2 h.pos\n#align one_div_pos one_div_pos\n-/\n\n",
+ "one_div_nonneg":
+ "#print one_div_nonneg /-\ntheorem one_div_nonneg : 0 ≤ 1 / p :=\n  le_of_lt h.one_div_pos\n#align one_div_nonneg one_div_nonneg\n-/\n\n",
+ "one_div_ne_zero":
+ "#print one_div_ne_zero /-\ntheorem one_div_ne_zero : 1 / p ≠ 0 :=\n  ne_of_gt h.one_div_pos\n#align one_div_ne_zero one_div_ne_zero\n-/\n\n",
+ "nonneg":
+ "theorem nonneg : 0 ≤ p :=\n  le_of_lt h.pos\n#align nonneg nonneg\n\n",
+ "ne_zero":
+ "theorem ne_zero : p ≠ 0 :=\n  ne_of_gt h.pos\n#align ne_zero ne_zero\n\n",
+ "mul_eq_add":
+ "theorem mul_eq_add : p * q = p + q := by simpa only [sub_mul, sub_eq_iff_eq_add, one_mul] using h.sub_one_mul_conj\n#align mul_eq_add mul_eq_add\n\n",
+ "is_conjugate_exponent_iff":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\ntheorem is_conjugate_exponent_iff {p q : exprℝ} (h : 1 < p) : p.is_conjugate_exponent q ↔ q = p / (p - 1) :=\n  ⟨fun H => H.conj_eq, fun H => ⟨h, by field_simp [H, ne_of_gt (lt_trans zero_lt_one h)] ⟩⟩\n#align is_conjugate_exponent_iff is_conjugate_exponent_iff\n\n",
+ "is_conjugate_exponent_conjugate_exponent":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\ntheorem is_conjugate_exponent_conjugate_exponent {p : exprℝ} (h : 1 < p) :\n    p.is_conjugate_exponent (conjugate_exponent p) :=\n  (is_conjugate_exponent_iff h).2 rfl\n#align is_conjugate_exponent_conjugate_exponent is_conjugate_exponent_conjugate_exponent\n\n",
+ "inv_add_inv_conj_nnreal":
+ "theorem inv_add_inv_conj_nnreal : 1 / real.to_nnreal p + 1 / real.to_nnreal q = 1 := by\n  rw [← real.to_nnreal_one, ← real.to_nnreal_div' h.nonneg, ← real.to_nnreal_div' h.symm.nonneg, ←\n    real.to_nnreal_add h.one_div_nonneg h.symm.one_div_nonneg, h.inv_add_inv_conj]\n#align inv_add_inv_conj_nnreal inv_add_inv_conj_nnreal\n\n",
+ "inv_add_inv_conj_ennreal":
+ "theorem inv_add_inv_conj_ennreal : 1 / ennreal.of_real p + 1 / ennreal.of_real q = 1 := by\n  rw [← ennreal.of_real_one, ← ennreal.of_real_div_of_pos h.pos, ← ennreal.of_real_div_of_pos h.symm.pos, ←\n    ennreal.of_real_add h.one_div_nonneg h.symm.one_div_nonneg, h.inv_add_inv_conj]\n#align inv_add_inv_conj_ennreal inv_add_inv_conj_ennreal\n\n",
+ "div_conj_eq_sub_one":
+ "theorem div_conj_eq_sub_one : p / q = p - 1 :=\n  by\n  field_simp [h.symm.ne_zero]\n  rw [h.sub_one_mul_conj]\n#align div_conj_eq_sub_one div_conj_eq_sub_one\n\n",
+ "conjugate_eq":
+ "theorem conjugate_eq : conjugate_exponent p = q :=\n  h.conj_eq.symm\n#align conjugate_eq conjugate_eq\n\n",
+ "conj_eq":
+ "theorem conj_eq : q = p / (p - 1) := by\n  have := h.inv_add_inv_conj\n  rw [← eq_sub_iff_add_eq', one_div, inv_eq_iff_inv_eq] at this\n  field_simp [← this, h.ne_zero]\n#align conj_eq conj_eq\n\n"}

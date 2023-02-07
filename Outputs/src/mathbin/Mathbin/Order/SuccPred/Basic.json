@@ -1,0 +1,296 @@
+{"wcovby_succ":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⩿ » -/\ntheorem wcovby_succ (a : α) : «expr ⩿ » a (succ a) :=\n  ⟨le_succ a, fun b hb => (succ_le_of_lt hb).not_lt⟩\n#align wcovby_succ wcovby_succ\n\n",
+ "succ_top":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n@[simp]\ntheorem succ_top : succ («expr⊤» : α) = «expr⊤» :=\n  isMax_top.succ_eq\n#align succ_top succ_top\n\n",
+ "succ_strict_mono":
+ "theorem succ_strict_mono : strict_mono (succ : α → α) := fun a b => succ_lt_succ\n#align succ_strict_mono succ_strict_mono\n\n",
+ "succ_pred_of_not_is_min":
+ "@[simp]\ntheorem succ_pred_of_not_is_min (h : ¬is_min a) : succ (pred a) = a :=\n  (pred_covby_of_not_isMin h).succ_eq\n#align succ_pred_of_not_is_min succ_pred_of_not_is_min\n\n",
+ "succ_pred_iterate_of_not_is_min":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵈ» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ^[ ]» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ^[ ]» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ^[ ]» -/\ntheorem succ_pred_iterate_of_not_is_min (i : α) (n : ℕ) (hin : ¬is_min ((«expr ^[ ]» pred (n - 1)) i)) :\n    («expr ^[ ]» succ n) ((«expr ^[ ]» pred n) i) = i :=\n  @pred_succ_iterate_of_not_isMax («expr ᵒᵈ» α) _ _ _ i n hin\n#align succ_pred_iterate_of_not_is_min succ_pred_iterate_of_not_is_min\n\n",
+ "succ_pred":
+ "@[simp]\ntheorem succ_pred [NoMinOrder α] (a : α) : succ (pred a) = a :=\n  (pred_covby _).succ_eq\n#align succ_pred succ_pred\n\n",
+ "succ_ne_succ_iff":
+ "theorem succ_ne_succ_iff : succ a ≠ succ b ↔ a ≠ b :=\n  succ_injective.ne_iff\n#align succ_ne_succ_iff succ_ne_succ_iff\n\n",
+ "succ_ne_bot":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\ntheorem succ_ne_bot (a : α) : succ a ≠ «expr⊥» :=\n  (bot_lt_succ a).ne'\n#align succ_ne_bot succ_ne_bot\n\n",
+ "succ_mono":
+ "theorem succ_mono : monotone (succ : α → α) := fun a b => succ_le_succ\n#align succ_mono succ_mono\n\n",
+ "succ_lt_succ_iff_of_not_is_max":
+ "theorem succ_lt_succ_iff_of_not_is_max (ha : ¬is_max a) (hb : ¬is_max b) : succ a < succ b ↔ a < b := by\n  rw [lt_succ_iff_of_not_is_max hb, succ_le_iff_of_not_is_max ha]\n#align succ_lt_succ_iff_of_not_is_max succ_lt_succ_iff_of_not_is_max\n\n",
+ "succ_lt_succ_iff":
+ "theorem succ_lt_succ_iff : succ a < succ b ↔ a < b := by simp\n#align succ_lt_succ_iff succ_lt_succ_iff\n\n",
+ "succ_le_succ_iff_of_not_is_max":
+ "theorem succ_le_succ_iff_of_not_is_max (ha : ¬is_max a) (hb : ¬is_max b) : succ a ≤ succ b ↔ a ≤ b := by\n  rw [succ_le_iff_of_not_is_max ha, lt_succ_iff_of_not_is_max hb]\n#align succ_le_succ_iff_of_not_is_max succ_le_succ_iff_of_not_is_max\n\n",
+ "succ_le_succ_iff":
+ "theorem succ_le_succ_iff : succ a ≤ succ b ↔ a ≤ b := by simp\n#align succ_le_succ_iff succ_le_succ_iff\n\n",
+ "succ_le_succ":
+ "@[simp, mono]\ntheorem succ_le_succ (h : a ≤ b) : succ a ≤ succ b :=\n  by\n  by_cases hb : is_max b\n  · by_cases hba : b ≤ a\n    · exact (hb <| hba.trans <| le_succ _).trans (le_succ _)\n    · exact succ_le_of_lt ((h.lt_of_not_le hba).trans_le <| le_succ b)\n  · rwa [succ_le_iff_of_not_is_max fun ha => hb <| ha.mono h, lt_succ_iff_of_not_is_max hb]\n#align succ_le_succ succ_le_succ\n\n",
+ "succ_le_of_lt":
+ "theorem succ_le_of_lt {a b : α} : a < b → succ a ≤ b :=\n  succ_order.succ_le_of_lt\n#align succ_le_of_lt succ_le_of_lt\n\n",
+ "succ_le_iff_of_not_is_max":
+ "theorem succ_le_iff_of_not_is_max (ha : ¬is_max a) : succ a ≤ b ↔ a < b :=\n  ⟨(lt_succ_of_not_isMax ha).trans_le, succ_le_of_lt⟩\n#align succ_le_iff_of_not_is_max succ_le_iff_of_not_is_max\n\n",
+ "succ_le_iff_is_max":
+ "@[simp]\ntheorem succ_le_iff_is_max : succ a ≤ a ↔ is_max a :=\n  ⟨max_of_succ_le, fun h => h <| le_succ _⟩\n#align succ_le_iff_is_max succ_le_iff_is_max\n\n",
+ "succ_le_iff_eq_top":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n@[simp]\ntheorem succ_le_iff_eq_top : succ a ≤ a ↔ a = «expr⊤» :=\n  succ_le_iff_isMax.trans isMax_iff_eq_top\n#align succ_le_iff_eq_top succ_le_iff_eq_top\n\n",
+ "succ_le_iff":
+ "@[simp]\ntheorem succ_le_iff : succ a ≤ b ↔ a < b :=\n  succ_le_iff_of_not_is_max <| not_isMax a\n#align succ_le_iff succ_le_iff\n\n",
+ "succ_injective":
+ "theorem succ_injective : injective (succ : α → α) := fun a b => succ_eq_succ_iff.1\n#align succ_injective succ_injective\n\n",
+ "succ_eq_succ_iff_of_not_is_max":
+ "theorem succ_eq_succ_iff_of_not_is_max (ha : ¬is_max a) (hb : ¬is_max b) : succ a = succ b ↔ a = b := by\n  rw [eq_iff_le_not_lt, eq_iff_le_not_lt, succ_le_succ_iff_of_not_is_max ha hb, succ_lt_succ_iff_of_not_is_max ha hb]\n#align succ_eq_succ_iff_of_not_is_max succ_eq_succ_iff_of_not_is_max\n\n",
+ "succ_eq_succ_iff":
+ "@[simp]\ntheorem succ_eq_succ_iff : succ a = succ b ↔ a = b :=\n  succ_eq_succ_iff_of_not_isMax (not_isMax a) (not_isMax b)\n#align succ_eq_succ_iff succ_eq_succ_iff\n\n",
+ "succ_eq_infi":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⨅ , » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⨅ , » -/\ntheorem succ_eq_infi (a : α) :\n    succ a = «expr⨅ , » \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⨅ , »\" b :=\n  by\n  refine' le_antisymm (le_infᵢ fun b => le_infᵢ succ_le_of_lt) _\n  obtain rfl | ha := eq_or_ne a («expr⊤»)\n  · rw [succ_top]\n    exact le_top\n  exact infᵢ₂_le _ (lt_succ_iff_ne_top.2 ha)\n#align succ_eq_infi succ_eq_infi\n\n",
+ "succ_eq_iff_is_max":
+ "@[simp]\ntheorem succ_eq_iff_is_max : succ a = a ↔ is_max a :=\n  ⟨fun h => max_of_succ_le h.le, fun h => h.eq_of_ge <| le_succ _⟩\n#align succ_eq_iff_is_max succ_eq_iff_is_max\n\n",
+ "succ_eq_iff_covby":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⋖ » -/\ntheorem succ_eq_iff_covby : succ a = b ↔ «expr ⋖ » a b :=\n  ⟨by\n    rintro rfl\n    exact covby_succ _, Order.Covby.succ_eq⟩\n#align succ_eq_iff_covby succ_eq_iff_covby\n\n",
+ "succ_eq":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⋖ » -/\n#print Order.Covby.succ_eq /-\ntheorem Order.Covby.succ_eq (h : «expr ⋖ » a b) : succ a = b :=\n  (succ_le_of_lt h.lt).eq_of_not_lt fun h' => h.2 (lt_succ_of_not_isMax h.lt.not_is_max) h'\n#align covby.succ_eq Order.Covby.succ_eq\n-/\n\n",
+ "succ_coe_top":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n@[simp]\ntheorem succ_coe_top : succ ↑(«expr⊤» : α) = («expr⊤» : WithTop α) :=\n  dif_pos rfl\n#align succ_coe_top succ_coe_top\n\n",
+ "succ_coe_of_ne_top":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\ntheorem succ_coe_of_ne_top {a : α} (h : a ≠ «expr⊤») : succ (↑a : WithTop α) = ↑(succ a) :=\n  dif_neg h\n#align succ_coe_of_ne_top succ_coe_of_ne_top\n\n",
+ "succ_coe":
+ "@[simp]\ntheorem succ_coe (a : α) : succ (↑a : WithBot α) = ↑(succ a) :=\n  rfl\n#align succ_coe succ_coe\n\n",
+ "succ_bot":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n@[simp]\ntheorem succ_bot : succ («expr⊥» : WithBot α) = ↑(«expr⊥» : α) :=\n  rfl\n#align succ_bot succ_bot\n\n",
+ "rec_top":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n#print Pred.rec_top /-\ntheorem Pred.rec_top (p : α → Prop) (htop : p («expr⊤»)) (hpred : ∀ a, p a → p (pred a)) (a : α) : p a :=\n  Pred.rec htop (fun x _ h => hpred x h) (le_top : a ≤ «expr⊤»)\n#align pred.rec_top Pred.rec_top\n-/\n\n",
+ "rec_linear":
+ "#print Pred.rec_linear /-\ntheorem Pred.rec_linear {p : α → Prop} (hsucc : ∀ a, p a ↔ p (pred a)) (a b : α) : p a ↔ p b :=\n  (le_total a b).elim (Pred.rec_iff hsucc) fun h => (Pred.rec_iff hsucc h).symm\n#align pred.rec_linear Pred.rec_linear\n-/\n\n",
+ "rec_iff":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵈ» -/\n#print Pred.rec_iff /-\ntheorem Pred.rec_iff {p : α → Prop} (hsucc : ∀ a, p a ↔ p (pred a)) {a b : α} (h : a ≤ b) : p a ↔ p b :=\n  (@Succ.rec_iff («expr ᵒᵈ» α) _ _ _ _ hsucc _ _ h).symm\n#align pred.rec_iff Pred.rec_iff\n-/\n\n",
+ "rec_bot":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n#print Succ.rec_bot /-\ntheorem Succ.rec_bot (p : α → Prop) (hbot : p («expr⊥»)) (hsucc : ∀ a, p a → p (succ a)) (a : α) : p a :=\n  Succ.rec hbot (fun x _ h => hsucc x h) (bot_le : «expr⊥» ≤ a)\n#align succ.rec_bot Succ.rec_bot\n-/\n\n",
+ "rec":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵈ» -/\n#print Pred.rec /-\n/-- Induction principle on a type with a `pred_order` for all elements below a given element `m`. -/\n@[elab_as_elim]\ntheorem Pred.rec {P : α → Prop} {m : α} (h0 : P m) (h1 : ∀ n, n ≤ m → P n → P (pred n)) ⦃n : α⦄ (hmn : n ≤ m) : P n :=\n  @Succ.rec («expr ᵒᵈ» α) _ _ _ _ _ h0 h1 _ hmn\n#align pred.rec Pred.rec\n-/\n\n",
+ "pred_wcovby":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⩿ » -/\ntheorem pred_wcovby (a : α) : «expr ⩿ » (pred a) a :=\n  ⟨pred_le a, fun b hb => (le_of_pred_lt hb).not_lt⟩\n#align pred_wcovby pred_wcovby\n\n",
+ "pred_top_lt_iff":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵈ» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n@[simp]\ntheorem pred_top_lt_iff [NoMinOrder α] : pred («expr⊤») < a ↔ a = «expr⊤» :=\n  @lt_succ_bot_iff («expr ᵒᵈ» α) _ _ _ _ _\n#align pred_top_lt_iff pred_top_lt_iff\n\n",
+ "pred_top_le_iff":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵈ» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\ntheorem pred_top_le_iff : pred («expr⊤») ≤ a ↔ a = «expr⊤» ∨ a = pred («expr⊤») :=\n  @le_succ_bot_iff («expr ᵒᵈ» α) _ _ _ _\n#align pred_top_le_iff pred_top_le_iff\n\n",
+ "pred_top":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n@[simp]\ntheorem pred_top : pred («expr⊤» : WithTop α) = ↑(«expr⊤» : α) :=\n  rfl\n#align pred_top pred_top\n\n",
+ "pred_succ_of_not_is_max":
+ "@[simp]\ntheorem pred_succ_of_not_is_max (h : ¬is_max a) : pred (succ a) = a :=\n  (covby_succ_of_not_isMax h).pred_eq\n#align pred_succ_of_not_is_max pred_succ_of_not_is_max\n\n",
+ "pred_succ_iterate_of_not_is_max":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ^[ ]» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ^[ ]» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ^[ ]» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ^[ ]» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ^[ ]» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ^[ ]» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ^[ ]» -/\ntheorem pred_succ_iterate_of_not_is_max (i : α) (n : ℕ) (hin : ¬is_max ((«expr ^[ ]» succ (n - 1)) i)) :\n    («expr ^[ ]» pred n) ((«expr ^[ ]» succ n) i) = i :=\n  by\n  induction' n with n hn\n  · simp only [function.iterate_zero, id.def]\n  rw [nat.succ_sub_succ_eq_sub, nat.sub_zero] at hin\n  have h_not_max : ¬is_max ((«expr ^[ ]» succ (n - 1)) i) :=\n    by\n    cases n\n    · simpa using hin\n    rw [nat.succ_sub_succ_eq_sub, nat.sub_zero] at hn⊢\n    have h_sub_le : («expr ^[ ]» succ n) i ≤ («expr ^[ ]» succ n.succ) i :=\n      by\n      rw [function.iterate_succ']\n      exact le_succ _\n    refine' fun h_max => hin fun j hj => _\n    have hj_le : j ≤ («expr ^[ ]» succ n) i := h_max (h_sub_le.trans hj)\n    exact hj_le.trans h_sub_le\n  rw [function.iterate_succ, function.iterate_succ']\n  simp only [Function.comp_apply]\n  rw [pred_succ_of_not_is_max hin]\n  exact hn h_not_max\n#align pred_succ_iterate_of_not_is_max pred_succ_iterate_of_not_is_max\n\n",
+ "pred_succ":
+ "@[simp]\ntheorem pred_succ [NoMaxOrder α] (a : α) : pred (succ a) = a :=\n  (covby_succ _).pred_eq\n#align pred_succ pred_succ\n\n",
+ "pred_strict_mono":
+ "theorem pred_strict_mono : strict_mono (pred : α → α) := fun a b => pred_lt_pred\n#align pred_strict_mono pred_strict_mono\n\n",
+ "pred_ne_top":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\ntheorem pred_ne_top (a : α) : pred a ≠ «expr⊤» :=\n  (pred_lt_top a).ne\n#align pred_ne_top pred_ne_top\n\n",
+ "pred_ne_pred_iff":
+ "theorem pred_ne_pred_iff : pred a ≠ pred b ↔ a ≠ b :=\n  pred_injective.ne_iff\n#align pred_ne_pred_iff pred_ne_pred_iff\n\n",
+ "pred_mono":
+ "theorem pred_mono : monotone (pred : α → α) := fun a b => pred_le_pred\n#align pred_mono pred_mono\n\n",
+ "pred_lt_top":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\ntheorem pred_lt_top (a : α) : pred a < «expr⊤» :=\n  (pred_mono le_top).trans_lt <| pred_lt_of_not_isMin not_isMin_top\n#align pred_lt_top pred_lt_top\n\n",
+ "pred_lt_pred_iff":
+ "theorem pred_lt_pred_iff : pred a < pred b ↔ a < b := by simp\n#align pred_lt_pred_iff pred_lt_pred_iff\n\n",
+ "pred_lt_iff_of_not_is_min":
+ "theorem pred_lt_iff_of_not_is_min (ha : ¬is_min a) : pred a < b ↔ a ≤ b :=\n  ⟨le_of_pred_lt, (pred_lt_of_not_isMin ha).trans_le⟩\n#align pred_lt_iff_of_not_is_min pred_lt_iff_of_not_is_min\n\n",
+ "pred_lt_iff_not_is_min":
+ "@[simp]\ntheorem pred_lt_iff_not_is_min : pred a < a ↔ ¬is_min a :=\n  ⟨not_isMin_of_lt, fun ha => (pred_le a).lt_of_not_le fun h => ha <| min_of_le_pred h⟩\n#align pred_lt_iff_not_is_min pred_lt_iff_not_is_min\n\n",
+ "pred_lt_iff_ne_bot":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵈ» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n@[simp]\ntheorem pred_lt_iff_ne_bot : pred a < a ↔ a ≠ «expr⊥» :=\n  @lt_succ_iff_ne_top («expr ᵒᵈ» α) _ _ _ _\n#align pred_lt_iff_ne_bot pred_lt_iff_ne_bot\n\n",
+ "pred_lt_iff_eq_or_lt_of_not_is_min":
+ "theorem pred_lt_iff_eq_or_lt_of_not_is_min (ha : ¬is_min a) : pred a < b ↔ a = b ∨ a < b :=\n  (pred_lt_iff_of_not_isMin ha).trans le_iff_eq_or_lt\n#align pred_lt_iff_eq_or_lt_of_not_is_min pred_lt_iff_eq_or_lt_of_not_is_min\n\n",
+ "pred_lt_iff_eq_or_lt":
+ "theorem pred_lt_iff_eq_or_lt : pred a < b ↔ a = b ∨ a < b :=\n  pred_lt_iff.trans le_iff_eq_or_lt\n#align pred_lt_iff_eq_or_lt pred_lt_iff_eq_or_lt\n\n",
+ "pred_lt_iff":
+ "@[simp]\ntheorem pred_lt_iff : pred a < b ↔ a ≤ b :=\n  pred_lt_iff_of_not_is_min <| not_isMin a\n#align pred_lt_iff pred_lt_iff\n\n",
+ "pred_lt":
+ "theorem pred_lt (a : α) : pred a < a :=\n  pred_lt_of_not_is_min <| not_isMin a\n#align pred_lt pred_lt\n\n",
+ "pred_le_pred_iff":
+ "theorem pred_le_pred_iff : pred a ≤ pred b ↔ a ≤ b := by simp\n#align pred_le_pred_iff pred_le_pred_iff\n\n",
+ "pred_le_pred":
+ "@[simp, mono]\ntheorem pred_le_pred {a b : α} (h : a ≤ b) : pred a ≤ pred b :=\n  succ_le_succ h.dual\n#align pred_le_pred pred_le_pred\n\n",
+ "pred_le_le_iff":
+ "theorem pred_le_le_iff {a b : α} : pred a ≤ b ∧ b ≤ a ↔ b = a ∨ b = pred a :=\n  by\n  refine' ⟨fun h => or_iff_not_imp_left.2 fun hba : b ≠ a => (le_pred_of_lt <| h.2.lt_of_ne hba).antisymm h.1, _⟩\n  rintro (rfl | rfl)\n  · exact ⟨pred_le b, le_rfl⟩\n  · exact ⟨le_rfl, pred_le a⟩\n#align pred_le_le_iff pred_le_le_iff\n\n",
+ "pred_le_iff_eq_or_le":
+ "theorem pred_le_iff_eq_or_le : pred a ≤ b ↔ b = pred a ∨ a ≤ b :=\n  by\n  by_cases ha : is_min a\n  · rw [ha.pred_eq, or_iff_right_of_imp ge_of_eq]\n  · rw [← pred_lt_iff_of_not_is_min ha, le_iff_eq_or_lt, eq_comm]\n#align pred_le_iff_eq_or_le pred_le_iff_eq_or_le\n\n",
+ "pred_le":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⩿ » -/\n#print Order.Wcovby.pred_le /-\ntheorem Order.Wcovby.pred_le (h : «expr ⩿ » a b) : pred b ≤ a :=\n  by\n  obtain h | rfl := h.covby_or_eq\n  · exact h.pred_eq.le\n  · exact pred_le _\n#align wcovby.pred_le Order.Wcovby.pred_le\n-/\n\n",
+ "pred_iterate_le":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ^[ ]» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ^[ ]» -/\ntheorem pred_iterate_le (k : ℕ) (x : α) : («expr ^[ ]» pred k) x ≤ x :=\n  by\n  conv_rhs => rw [(by simp only [function.iterate_id, id.def] : x = («expr ^[ ]» id k) x)]\n  exact Monotone.iterate_le_of_le pred_mono pred_le k x\n#align pred_iterate_le pred_iterate_le\n\n",
+ "pred_injective":
+ "theorem pred_injective : injective (pred : α → α) := fun a b => pred_eq_pred_iff.1\n#align pred_injective pred_injective\n\n",
+ "pred_eq_supr":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⨆ , » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⨆ , » -/\ntheorem pred_eq_supr (a : α) :\n    pred a = «expr⨆ , » \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⨆ , »\" b :=\n  by\n  refine' le_antisymm _ (supᵢ_le fun b => supᵢ_le le_pred_of_lt)\n  obtain rfl | ha := eq_or_ne a («expr⊥»)\n  · rw [pred_bot]\n    exact bot_le\n  · exact @le_supᵢ₂ _ _ (fun b => b < a) _ (fun a _ => a) (pred a) (pred_lt_iff_ne_bot.2 ha)\n#align pred_eq_supr pred_eq_supr\n\n",
+ "pred_eq_pred_iff":
+ "@[simp]\ntheorem pred_eq_pred_iff : pred a = pred b ↔ a = b := by simp_rw [eq_iff_le_not_lt, pred_le_pred_iff, pred_lt_pred_iff]\n#align pred_eq_pred_iff pred_eq_pred_iff\n\n",
+ "pred_eq_iff_is_min":
+ "@[simp]\ntheorem pred_eq_iff_is_min : pred a = a ↔ is_min a :=\n  ⟨fun h => min_of_le_pred h.ge, fun h => h.eq_of_le <| pred_le _⟩\n#align pred_eq_iff_is_min pred_eq_iff_is_min\n\n",
+ "pred_eq_iff_covby":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⋖ » -/\ntheorem pred_eq_iff_covby : pred b = a ↔ «expr ⋖ » a b :=\n  ⟨by\n    rintro rfl\n    exact pred_covby _, Order.Covby.pred_eq⟩\n#align pred_eq_iff_covby pred_eq_iff_covby\n\n",
+ "pred_eq":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⋖ » -/\n#print Order.Covby.pred_eq /-\ntheorem Order.Covby.pred_eq {a b : α} (h : «expr ⋖ » a b) : pred b = a :=\n  (le_pred_of_lt h.lt).eq_of_not_gt fun h' => h.2 h' <| pred_lt_of_not_isMin h.lt.not_is_min\n#align covby.pred_eq Order.Covby.pred_eq\n-/\n\n",
+ "pred_covby_of_not_is_min":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⋖ » -/\ntheorem pred_covby_of_not_is_min (h : ¬is_min a) : «expr ⋖ » (pred a) a :=\n  (pred_wcovby a).covby_of_lt <| pred_lt_of_not_isMin h\n#align pred_covby_of_not_is_min pred_covby_of_not_is_min\n\n",
+ "pred_covby":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⋖ » -/\ntheorem pred_covby (a : α) : «expr ⋖ » (pred a) a :=\n  pred_covby_of_not_is_min <| not_isMin a\n#align pred_covby pred_covby\n\n",
+ "pred_coe_of_ne_bot":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\ntheorem pred_coe_of_ne_bot {a : α} (h : a ≠ «expr⊥») : pred (↑a : WithBot α) = ↑(pred a) :=\n  dif_neg h\n#align pred_coe_of_ne_bot pred_coe_of_ne_bot\n\n",
+ "pred_coe_bot":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n@[simp]\ntheorem pred_coe_bot : pred ↑(«expr⊥» : α) = («expr⊥» : WithBot α) :=\n  dif_pos rfl\n#align pred_coe_bot pred_coe_bot\n\n",
+ "pred_coe":
+ "@[simp]\ntheorem pred_coe (a : α) : pred (↑a : WithBot α) = ↑(pred a) :=\n  rfl\n#align pred_coe pred_coe\n\n",
+ "pred_bot":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n@[simp]\ntheorem pred_bot : pred («expr⊥» : α) = «expr⊥» :=\n  isMin_bot.pred_eq\n#align pred_bot pred_bot\n\n",
+ "min_of_le_pred":
+ "theorem min_of_le_pred {a : α} : a ≤ pred a → is_min a :=\n  pred_order.min_of_le_pred\n#align min_of_le_pred min_of_le_pred\n\n",
+ "max_of_succ_le":
+ "theorem max_of_succ_le {a : α} : succ a ≤ a → is_max a :=\n  succ_order.max_of_succ_le\n#align max_of_succ_le max_of_succ_le\n\n",
+ "lt_succ_iff_of_not_is_max":
+ "theorem lt_succ_iff_of_not_is_max (ha : ¬is_max a) : b < succ a ↔ b ≤ a :=\n  ⟨le_of_lt_succ, fun h => h.trans_lt <| lt_succ_of_not_isMax ha⟩\n#align lt_succ_iff_of_not_is_max lt_succ_iff_of_not_is_max\n\n",
+ "lt_succ_iff_not_is_max":
+ "@[simp]\ntheorem lt_succ_iff_not_is_max : a < succ a ↔ ¬is_max a :=\n  ⟨not_isMax_of_lt, fun ha => (le_succ a).lt_of_not_le fun h => ha <| max_of_succ_le h⟩\n#align lt_succ_iff_not_is_max lt_succ_iff_not_is_max\n\n",
+ "lt_succ_iff_ne_top":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n@[simp]\ntheorem lt_succ_iff_ne_top : a < succ a ↔ a ≠ «expr⊤» :=\n  lt_succ_iff_not_isMax.trans not_isMax_iff_ne_top\n#align lt_succ_iff_ne_top lt_succ_iff_ne_top\n\n",
+ "lt_succ_iff_eq_or_lt_of_not_is_max":
+ "theorem lt_succ_iff_eq_or_lt_of_not_is_max (hb : ¬is_max b) : a < succ b ↔ a = b ∨ a < b :=\n  (lt_succ_iff_of_not_isMax hb).trans le_iff_eq_or_lt\n#align lt_succ_iff_eq_or_lt_of_not_is_max lt_succ_iff_eq_or_lt_of_not_is_max\n\n",
+ "lt_succ_iff_eq_or_lt":
+ "theorem lt_succ_iff_eq_or_lt : a < succ b ↔ a = b ∨ a < b :=\n  lt_succ_iff.trans le_iff_eq_or_lt\n#align lt_succ_iff_eq_or_lt lt_succ_iff_eq_or_lt\n\n",
+ "lt_succ_iff":
+ "@[simp]\ntheorem lt_succ_iff : a < succ b ↔ a ≤ b :=\n  lt_succ_iff_of_not_is_max <| not_isMax b\n#align lt_succ_iff lt_succ_iff\n\n",
+ "lt_succ_bot_iff":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n@[simp]\ntheorem lt_succ_bot_iff [NoMaxOrder α] : a < succ («expr⊥») ↔ a = «expr⊥» := by rw [lt_succ_iff, le_bot_iff]\n#align lt_succ_bot_iff lt_succ_bot_iff\n\n",
+ "lt_succ":
+ "theorem lt_succ (a : α) : a < succ a :=\n  lt_succ_of_not_is_max <| not_isMax a\n#align lt_succ lt_succ\n\n",
+ "le_succ_iterate":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ^[ ]» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ^[ ]» -/\ntheorem le_succ_iterate (k : ℕ) (x : α) : x ≤ («expr ^[ ]» succ k) x :=\n  by\n  conv_lhs => rw [(by simp only [function.iterate_id, id.def] : x = («expr ^[ ]» id k) x)]\n  exact Monotone.le_iterate_of_le succ_mono le_succ k x\n#align le_succ_iterate le_succ_iterate\n\n",
+ "le_succ_iff_eq_or_le":
+ "theorem le_succ_iff_eq_or_le : a ≤ succ b ↔ a = succ b ∨ a ≤ b :=\n  by\n  by_cases hb : is_max b\n  · rw [hb.succ_eq, or_iff_right_of_imp le_of_eq]\n  · rw [← lt_succ_iff_of_not_is_max hb, le_iff_eq_or_lt]\n#align le_succ_iff_eq_or_le le_succ_iff_eq_or_le\n\n",
+ "le_succ_bot_iff":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\ntheorem le_succ_bot_iff : a ≤ succ («expr⊥») ↔ a = «expr⊥» ∨ a = succ («expr⊥») := by\n  rw [le_succ_iff_eq_or_le, le_bot_iff, or_comm']\n#align le_succ_bot_iff le_succ_bot_iff\n\n",
+ "le_succ":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⩿ » -/\n#print Order.Wcovby.le_succ /-\ntheorem Order.Wcovby.le_succ (h : «expr ⩿ » a b) : b ≤ succ a :=\n  by\n  obtain h | rfl := h.covby_or_eq\n  · exact h.succ_eq.ge\n  · exact le_succ _\n#align wcovby.le_succ Order.Wcovby.le_succ\n-/\n\n",
+ "le_pred_of_lt":
+ "theorem le_pred_of_lt {a b : α} : a < b → a ≤ pred b :=\n  pred_order.le_pred_of_lt\n#align le_pred_of_lt le_pred_of_lt\n\n",
+ "le_pred_iff_of_not_is_min":
+ "theorem le_pred_iff_of_not_is_min (ha : ¬is_min a) : b ≤ pred a ↔ b < a :=\n  ⟨fun h => h.trans_lt <| pred_lt_of_not_isMin ha, le_pred_of_lt⟩\n#align le_pred_iff_of_not_is_min le_pred_iff_of_not_is_min\n\n",
+ "le_pred_iff_is_min":
+ "@[simp]\ntheorem le_pred_iff_is_min : a ≤ pred a ↔ is_min a :=\n  ⟨min_of_le_pred, fun h => h <| pred_le _⟩\n#align le_pred_iff_is_min le_pred_iff_is_min\n\n",
+ "le_pred_iff_eq_bot":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵈ» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n@[simp]\ntheorem le_pred_iff_eq_bot : a ≤ pred a ↔ a = «expr⊥» :=\n  @succ_le_iff_eq_top («expr ᵒᵈ» α) _ _ _ _\n#align le_pred_iff_eq_bot le_pred_iff_eq_bot\n\n",
+ "le_pred_iff":
+ "@[simp]\ntheorem le_pred_iff : a ≤ pred b ↔ a < b :=\n  le_pred_iff_of_not_is_min <| not_isMin b\n#align le_pred_iff le_pred_iff\n\n",
+ "le_of_pred_lt":
+ "theorem le_of_pred_lt {a b : α} : pred a < b → a ≤ b :=\n  pred_order.le_of_pred_lt\n#align le_of_pred_lt le_of_pred_lt\n\n",
+ "le_of_lt_succ":
+ "theorem le_of_lt_succ {a b : α} : a < succ b → a ≤ b :=\n  succ_order.le_of_lt_succ\n#align le_of_lt_succ le_of_lt_succ\n\n",
+ "le_le_succ_iff":
+ "theorem le_le_succ_iff : a ≤ b ∧ b ≤ succ a ↔ b = a ∨ b = succ a :=\n  by\n  refine'\n    ⟨fun h => or_iff_not_imp_left.2 fun hba : b ≠ a => h.2.antisymm (succ_le_of_lt <| h.1.lt_of_ne <| hba.symm), _⟩\n  rintro (rfl | rfl)\n  · exact ⟨le_rfl, le_succ b⟩\n  · exact ⟨le_succ a, le_rfl⟩\n#align le_le_succ_iff le_le_succ_iff\n\n",
+ "is_min_iterate_pred_of_eq_of_ne":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵈ» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ^[ ]» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ^[ ]» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ^[ ]» -/\ntheorem is_min_iterate_pred_of_eq_of_ne {n m : ℕ} (h_eq : («expr ^[ ]» pred n) a = («expr ^[ ]» pred m) a)\n    (h_ne : n ≠ m) : is_min ((«expr ^[ ]» pred n) a) :=\n  @isMax_iterate_succ_of_eq_of_ne («expr ᵒᵈ» α) _ _ _ _ _ h_eq h_ne\n#align is_min_iterate_pred_of_eq_of_ne is_min_iterate_pred_of_eq_of_ne\n\n",
+ "is_min_iterate_pred_of_eq_of_lt":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵈ» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ^[ ]» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ^[ ]» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ^[ ]» -/\ntheorem is_min_iterate_pred_of_eq_of_lt {n m : ℕ} (h_eq : («expr ^[ ]» pred n) a = («expr ^[ ]» pred m) a)\n    (h_lt : n < m) : is_min ((«expr ^[ ]» pred n) a) :=\n  @isMax_iterate_succ_of_eq_of_lt («expr ᵒᵈ» α) _ _ _ _ _ h_eq h_lt\n#align is_min_iterate_pred_of_eq_of_lt is_min_iterate_pred_of_eq_of_lt\n\n",
+ "is_max_iterate_succ_of_eq_of_ne":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ^[ ]» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ^[ ]» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ^[ ]» -/\ntheorem is_max_iterate_succ_of_eq_of_ne {n m : ℕ} (h_eq : («expr ^[ ]» succ n) a = («expr ^[ ]» succ m) a)\n    (h_ne : n ≠ m) : is_max ((«expr ^[ ]» succ n) a) :=\n  by\n  cases le_total n m\n  · exact is_max_iterate_succ_of_eq_of_lt h_eq (lt_of_le_of_ne h h_ne)\n  · rw [h_eq]\n    exact is_max_iterate_succ_of_eq_of_lt h_eq.symm (lt_of_le_of_ne h h_ne.symm)\n#align is_max_iterate_succ_of_eq_of_ne is_max_iterate_succ_of_eq_of_ne\n\n",
+ "is_max_iterate_succ_of_eq_of_lt":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ^[ ]» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ^[ ]» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ^[ ]» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ^[ ]» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ^[ ]» -/\ntheorem is_max_iterate_succ_of_eq_of_lt {n m : ℕ} (h_eq : («expr ^[ ]» succ n) a = («expr ^[ ]» succ m) a)\n    (h_lt : n < m) : is_max ((«expr ^[ ]» succ n) a) :=\n  by\n  refine' max_of_succ_le (le_trans _ h_eq.symm.le)\n  have : succ ((«expr ^[ ]» succ n) a) = («expr ^[ ]» succ (n + 1)) a := by rw [function.iterate_succ']\n  rw [this]\n  have h_le : n + 1 ≤ m := nat.succ_le_of_lt h_lt\n  exact Monotone.monotone_iterate_of_le_map succ_mono (le_succ a) h_le\n#align is_max_iterate_succ_of_eq_of_lt is_max_iterate_succ_of_eq_of_lt\n\n",
+ "exists_succ_iterate_or":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ^[ ]» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ^[ ]» -/\n#print exists_succ_iterate_or /-\ntheorem exists_succ_iterate_or : (∃ n, («expr ^[ ]» succ n) a = b) ∨ ∃ n, («expr ^[ ]» succ n) b = a :=\n  (le_total a b).imp exists_succ_iterate_of_le exists_succ_iterate_of_le\n#align exists_succ_iterate_or exists_succ_iterate_or\n-/\n\n",
+ "exists_succ_iterate_iff_le":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ^[ ]» -/\n#print exists_succ_iterate_iff_le /-\ntheorem exists_succ_iterate_iff_le : (∃ n, («expr ^[ ]» succ n) a = b) ↔ a ≤ b :=\n  by\n  refine' ⟨_, exists_succ_iterate_of_le⟩\n  rintro ⟨n, rfl⟩\n  exact id_le_iterate_of_id_le le_succ n a\n#align exists_succ_iterate_iff_le exists_succ_iterate_iff_le\n-/\n\n",
+ "exists_succ_iterate":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ^[ ]» -/\n#print LE.le.exists_succ_iterate /-\ntheorem LE.le.exists_succ_iterate (h : a ≤ b) : ∃ n, («expr ^[ ]» succ n) a = b :=\n  exists_succ_iterate_of_le h\n#align has_le.le.exists_succ_iterate LE.le.exists_succ_iterate\n-/\n\n",
+ "exists_pred_iterate_or":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ^[ ]» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ^[ ]» -/\n#print exists_pred_iterate_or /-\ntheorem exists_pred_iterate_or : (∃ n, («expr ^[ ]» pred n) b = a) ∨ ∃ n, («expr ^[ ]» pred n) a = b :=\n  (le_total a b).imp exists_pred_iterate_of_le exists_pred_iterate_of_le\n#align exists_pred_iterate_or exists_pred_iterate_or\n-/\n\n",
+ "exists_pred_iterate_iff_le":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵈ» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ^[ ]» -/\n#print exists_pred_iterate_iff_le /-\ntheorem exists_pred_iterate_iff_le : (∃ n, («expr ^[ ]» pred n) b = a) ↔ a ≤ b :=\n  @exists_succ_iterate_iff_le («expr ᵒᵈ» α) _ _ _ _ _\n#align exists_pred_iterate_iff_le exists_pred_iterate_iff_le\n-/\n\n",
+ "exists_pred_iterate":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ^[ ]» -/\n#print LE.le.exists_pred_iterate /-\ntheorem LE.le.exists_pred_iterate (h : a ≤ b) : ∃ n, («expr ^[ ]» pred n) b = a :=\n  exists_pred_iterate_of_le h\n#align has_le.le.exists_pred_iterate LE.le.exists_pred_iterate\n-/\n\n",
+ "covby_succ_of_not_is_max":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⋖ » -/\ntheorem covby_succ_of_not_is_max (h : ¬is_max a) : «expr ⋖ » a (succ a) :=\n  (wcovby_succ a).covby_of_lt <| lt_succ_of_not_isMax h\n#align covby_succ_of_not_is_max covby_succ_of_not_is_max\n\n",
+ "covby_succ":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⋖ » -/\ntheorem covby_succ (a : α) : «expr ⋖ » a (succ a) :=\n  covby_succ_of_not_is_max <| not_isMax a\n#align covby_succ covby_succ\n\n",
+ "bot_lt_succ":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\ntheorem bot_lt_succ (a : α) : «expr⊥» < succ a :=\n  (lt_succ_of_not_isMax not_isMax_bot).trans_le <| succ_mono bot_le\n#align bot_lt_succ bot_lt_succ\n\n",
+ "Ioo_succ_right_of_not_is_max":
+ "theorem Ioo_succ_right_of_not_is_max (hb : ¬is_max b) : Ioo a (succ b) = Ioc a b := by\n  rw [← Ioi_inter_Iio, Iio_succ_of_not_is_max hb, Ioi_inter_Iic]\n#align Ioo_succ_right_of_not_is_max Ioo_succ_right_of_not_is_max\n\n",
+ "Ioo_succ_right_eq_insert_of_not_is_max":
+ "theorem Ioo_succ_right_eq_insert_of_not_is_max (h₁ : a < b) (h₂ : ¬is_max b) : Ioo a (succ b) = insert b (Ioo a b) := by\n  simp_rw [← Iio_inter_Ioi, Iio_succ_eq_insert_of_not_is_max h₂, insert_inter_of_mem (mem_Ioi.2 h₁)]\n#align Ioo_succ_right_eq_insert_of_not_is_max Ioo_succ_right_eq_insert_of_not_is_max\n\n",
+ "Ioo_succ_right_eq_insert":
+ "theorem Ioo_succ_right_eq_insert (h : a < b) : Ioo a (succ b) = insert b (Ioo a b) :=\n  Ioo_succ_right_eq_insert_of_not_isMax h <| not_isMax b\n#align Ioo_succ_right_eq_insert Ioo_succ_right_eq_insert\n\n",
+ "Ioo_succ_right":
+ "@[simp]\ntheorem Ioo_succ_right (a b : α) : Ioo a (succ b) = Ioc a b :=\n  Ioo_succ_right_of_not_is_max <| not_isMax _\n#align Ioo_succ_right Ioo_succ_right\n\n",
+ "Ioo_pred_right_eq_insert":
+ "theorem Ioo_pred_right_eq_insert (h : a < b) : Ioo (pred a) b = insert a (Ioo a b) := by\n  simp_rw [← Ioi_inter_Iio, Ioi_pred_eq_insert, insert_inter_of_mem (mem_Iio.2 h)]\n#align Ioo_pred_right_eq_insert Ioo_pred_right_eq_insert\n\n",
+ "Ioo_pred_left_of_not_is_min":
+ "theorem Ioo_pred_left_of_not_is_min (ha : ¬is_min a) : Ioo (pred a) b = Ico a b := by\n  rw [← Ioi_inter_Iio, Ioi_pred_of_not_is_min ha, Ici_inter_Iio]\n#align Ioo_pred_left_of_not_is_min Ioo_pred_left_of_not_is_min\n\n",
+ "Ioo_pred_left":
+ "@[simp]\ntheorem Ioo_pred_left (a b : α) : Ioo (pred a) b = Ico a b :=\n  Ioo_pred_left_of_not_is_min <| not_isMin _\n#align Ioo_pred_left Ioo_pred_left\n\n",
+ "Ioi_pred_of_not_is_min":
+ "theorem Ioi_pred_of_not_is_min (ha : ¬is_min a) : Ioi (pred a) = Ici a :=\n  Set.ext fun x => pred_lt_iff_of_not_isMin ha\n#align Ioi_pred_of_not_is_min Ioi_pred_of_not_is_min\n\n",
+ "Ioi_pred_eq_insert_of_not_is_min":
+ "theorem Ioi_pred_eq_insert_of_not_is_min (ha : ¬is_min a) : Ioi (pred a) = insert a (Ioi a) :=\n  by\n  ext x; simp only [insert, mem_set_of, @eq_comm _ x a]\n  exact pred_lt_iff_eq_or_lt_of_not_is_min ha\n#align Ioi_pred_eq_insert_of_not_is_min Ioi_pred_eq_insert_of_not_is_min\n\n",
+ "Ioi_pred_eq_insert":
+ "theorem Ioi_pred_eq_insert (a : α) : Ioi (pred a) = insert a (Ioi a) :=\n  ext fun _ => pred_lt_iff_eq_or_lt.trans <| or_congr_left eq_comm\n#align Ioi_pred_eq_insert Ioi_pred_eq_insert\n\n",
+ "Ioi_pred":
+ "@[simp]\ntheorem Ioi_pred (a : α) : Ioi (pred a) = Ici a :=\n  Ioi_pred_of_not_is_min <| not_isMin a\n#align Ioi_pred Ioi_pred\n\n",
+ "Ioc_succ_right":
+ "theorem Ioc_succ_right (h : a < succ b) : Ioc a (succ b) = insert (succ b) (Ioc a b) := by\n  simp_rw [← Ioi_inter_Iic, Iic_succ, inter_insert_of_mem (mem_Ioi.2 h)]\n#align Ioc_succ_right Ioc_succ_right\n\n",
+ "Ioc_pred_right_of_not_is_min":
+ "theorem Ioc_pred_right_of_not_is_min (ha : ¬is_min b) : Ioc a (pred b) = Ioo a b := by\n  rw [← Ioi_inter_Iic, Iic_pred_of_not_is_min ha, Ioi_inter_Iio]\n#align Ioc_pred_right_of_not_is_min Ioc_pred_right_of_not_is_min\n\n",
+ "Ioc_pred_right":
+ "@[simp]\ntheorem Ioc_pred_right (a b : α) : Ioc a (pred b) = Ioo a b :=\n  Ioc_pred_right_of_not_is_min <| not_isMin _\n#align Ioc_pred_right Ioc_pred_right\n\n",
+ "Ioc_pred_left_of_not_is_min":
+ "theorem Ioc_pred_left_of_not_is_min (ha : ¬is_min a) : Ioc (pred a) b = Icc a b := by\n  rw [← Ioi_inter_Iic, Ioi_pred_of_not_is_min ha, Ici_inter_Iic]\n#align Ioc_pred_left_of_not_is_min Ioc_pred_left_of_not_is_min\n\n",
+ "Ioc_pred_left":
+ "@[simp]\ntheorem Ioc_pred_left (a b : α) : Ioc (pred a) b = Icc a b :=\n  Ioc_pred_left_of_not_is_min <| not_isMin _\n#align Ioc_pred_left Ioc_pred_left\n\n",
+ "Iio_succ_of_not_is_max":
+ "theorem Iio_succ_of_not_is_max (ha : ¬is_max a) : Iio (succ a) = Iic a :=\n  Set.ext fun x => lt_succ_iff_of_not_isMax ha\n#align Iio_succ_of_not_is_max Iio_succ_of_not_is_max\n\n",
+ "Iio_succ_eq_insert_of_not_is_max":
+ "theorem Iio_succ_eq_insert_of_not_is_max (h : ¬is_max a) : Iio (succ a) = insert a (Iio a) :=\n  ext fun _ => lt_succ_iff_eq_or_lt_of_not_isMax h\n#align Iio_succ_eq_insert_of_not_is_max Iio_succ_eq_insert_of_not_is_max\n\n",
+ "Iio_succ_eq_insert":
+ "theorem Iio_succ_eq_insert (a : α) : Iio (succ a) = insert a (Iio a) :=\n  Iio_succ_eq_insert_of_not_is_max <| not_isMax a\n#align Iio_succ_eq_insert Iio_succ_eq_insert\n\n",
+ "Iio_succ":
+ "@[simp]\ntheorem Iio_succ (a : α) : Iio (succ a) = Iic a :=\n  Iio_succ_of_not_is_max <| not_isMax _\n#align Iio_succ Iio_succ\n\n",
+ "Iic_succ":
+ "theorem Iic_succ (a : α) : Iic (succ a) = insert (succ a) (Iic a) :=\n  ext fun _ => le_succ_iff_eq_or_le\n#align Iic_succ Iic_succ\n\n",
+ "Iic_pred_of_not_is_min":
+ "theorem Iic_pred_of_not_is_min (ha : ¬is_min a) : Iic (pred a) = Iio a :=\n  Set.ext fun x => le_pred_iff_of_not_isMin ha\n#align Iic_pred_of_not_is_min Iic_pred_of_not_is_min\n\n",
+ "Iic_pred":
+ "@[simp]\ntheorem Iic_pred (a : α) : Iic (pred a) = Iio a :=\n  Iic_pred_of_not_is_min <| not_isMin a\n#align Iic_pred Iic_pred\n\n",
+ "Ico_succ_right_of_not_is_max":
+ "theorem Ico_succ_right_of_not_is_max (hb : ¬is_max b) : Ico a (succ b) = Icc a b := by\n  rw [← Ici_inter_Iio, Iio_succ_of_not_is_max hb, Ici_inter_Iic]\n#align Ico_succ_right_of_not_is_max Ico_succ_right_of_not_is_max\n\n",
+ "Ico_succ_right_eq_insert_of_not_is_max":
+ "theorem Ico_succ_right_eq_insert_of_not_is_max (h₁ : a ≤ b) (h₂ : ¬is_max b) : Ico a (succ b) = insert b (Ico a b) := by\n  simp_rw [← Iio_inter_Ici, Iio_succ_eq_insert_of_not_is_max h₂, insert_inter_of_mem (mem_Ici.2 h₁)]\n#align Ico_succ_right_eq_insert_of_not_is_max Ico_succ_right_eq_insert_of_not_is_max\n\n",
+ "Ico_succ_right_eq_insert":
+ "theorem Ico_succ_right_eq_insert (h : a ≤ b) : Ico a (succ b) = insert b (Ico a b) :=\n  Ico_succ_right_eq_insert_of_not_isMax h <| not_isMax b\n#align Ico_succ_right_eq_insert Ico_succ_right_eq_insert\n\n",
+ "Ico_succ_right":
+ "@[simp]\ntheorem Ico_succ_right (a b : α) : Ico a (succ b) = Icc a b :=\n  Ico_succ_right_of_not_is_max <| not_isMax _\n#align Ico_succ_right Ico_succ_right\n\n",
+ "Ico_succ_left_of_not_is_max":
+ "theorem Ico_succ_left_of_not_is_max (ha : ¬is_max a) : Ico (succ a) b = Ioo a b := by\n  rw [← Ici_inter_Iio, Ici_succ_of_not_is_max ha, Ioi_inter_Iio]\n#align Ico_succ_left_of_not_is_max Ico_succ_left_of_not_is_max\n\n",
+ "Ico_succ_left":
+ "@[simp]\ntheorem Ico_succ_left (a b : α) : Ico (succ a) b = Ioo a b :=\n  Ico_succ_left_of_not_is_max <| not_isMax _\n#align Ico_succ_left Ico_succ_left\n\n",
+ "Ico_pred_right_eq_insert":
+ "theorem Ico_pred_right_eq_insert (h : a ≤ b) : Ioc (pred a) b = insert a (Ioc a b) := by\n  simp_rw [← Ioi_inter_Iic, Ioi_pred_eq_insert, insert_inter_of_mem (mem_Iic.2 h)]\n#align Ico_pred_right_eq_insert Ico_pred_right_eq_insert\n\n",
+ "Ico_pred_left":
+ "theorem Ico_pred_left (h : pred a < b) : Ico (pred a) b = insert (pred a) (Ico a b) := by\n  simp_rw [← Ici_inter_Iio, Ici_pred, insert_inter_of_mem (mem_Iio.2 h)]\n#align Ico_pred_left Ico_pred_left\n\n",
+ "Ici_succ_of_not_is_max":
+ "theorem Ici_succ_of_not_is_max (ha : ¬is_max a) : Ici (succ a) = Ioi a :=\n  Set.ext fun x => succ_le_iff_of_not_isMax ha\n#align Ici_succ_of_not_is_max Ici_succ_of_not_is_max\n\n",
+ "Ici_succ":
+ "@[simp]\ntheorem Ici_succ (a : α) : Ici (succ a) = Ioi a :=\n  Ici_succ_of_not_is_max <| not_isMax _\n#align Ici_succ Ici_succ\n\n",
+ "Ici_pred":
+ "theorem Ici_pred (a : α) : Ici (pred a) = insert (pred a) (Ici a) :=\n  ext fun _ => pred_le_iff_eq_or_le\n#align Ici_pred Ici_pred\n\n",
+ "Icc_succ_right":
+ "theorem Icc_succ_right (h : a ≤ succ b) : Icc a (succ b) = insert (succ b) (Icc a b) := by\n  simp_rw [← Ici_inter_Iic, Iic_succ, inter_insert_of_mem (mem_Ici.2 h)]\n#align Icc_succ_right Icc_succ_right\n\n",
+ "Icc_succ_left_of_not_is_max":
+ "theorem Icc_succ_left_of_not_is_max (ha : ¬is_max a) : Icc (succ a) b = Ioc a b := by\n  rw [← Ici_inter_Iic, Ici_succ_of_not_is_max ha, Ioi_inter_Iic]\n#align Icc_succ_left_of_not_is_max Icc_succ_left_of_not_is_max\n\n",
+ "Icc_succ_left":
+ "@[simp]\ntheorem Icc_succ_left (a b : α) : Icc (succ a) b = Ioc a b :=\n  Icc_succ_left_of_not_is_max <| not_isMax _\n#align Icc_succ_left Icc_succ_left\n\n",
+ "Icc_pred_right_of_not_is_min":
+ "theorem Icc_pred_right_of_not_is_min (ha : ¬is_min b) : Icc a (pred b) = Ico a b := by\n  rw [← Ici_inter_Iic, Iic_pred_of_not_is_min ha, Ici_inter_Iio]\n#align Icc_pred_right_of_not_is_min Icc_pred_right_of_not_is_min\n\n",
+ "Icc_pred_right":
+ "@[simp]\ntheorem Icc_pred_right (a b : α) : Icc a (pred b) = Ico a b :=\n  Icc_pred_right_of_not_is_min <| not_isMin _\n#align Icc_pred_right Icc_pred_right\n\n",
+ "Icc_pred_left":
+ "theorem Icc_pred_left (h : pred a ≤ b) : Icc (pred a) b = insert (pred a) (Icc a b) := by\n  simp_rw [← Ici_inter_Iic, Ici_pred, insert_inter_of_mem (mem_Iic.2 h)]\n#align Icc_pred_left Icc_pred_left\n\n"}

@@ -1,0 +1,6 @@
+{"exists_clopen_upper_or_lower_of_ne":
+ "theorem exists_clopen_upper_or_lower_of_ne (h : x ≠ y) :\n    ∃ U : set α, is_clopen U ∧ (is_upper_set U ∨ is_lower_set U) ∧ x ∈ U ∧ y ∉ U :=\n  by\n  obtain h | h := h.not_le_or_not_le\n  · exact (exists_clopen_upper_of_not_le h).imp fun U => and.imp_right <| and.imp_left or.inl\n  · obtain ⟨U, hU, hU', hy, hx⟩ := exists_clopen_lower_of_not_le h\n    exact ⟨U, hU, or.inr hU', hx, hy⟩\n#align exists_clopen_upper_or_lower_of_ne exists_clopen_upper_or_lower_of_ne\n\n",
+ "exists_clopen_upper_of_not_le":
+ "/-\nCopyright (c) 2022 Yaël Dillies. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Yaël Dillies\n-/\ntheorem exists_clopen_upper_of_not_le : ¬x ≤ y → ∃ U : set α, is_clopen U ∧ is_upper_set U ∧ x ∈ U ∧ y ∉ U :=\n  priestley_space.priestley\n#align exists_clopen_upper_of_not_le exists_clopen_upper_of_not_le\n\n",
+ "exists_clopen_lower_of_not_le":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\ntheorem exists_clopen_lower_of_not_le (h : ¬x ≤ y) : ∃ U : set α, is_clopen U ∧ is_lower_set U ∧ x ∉ U ∧ y ∈ U :=\n  let ⟨U, hU, hU', hx, hy⟩ := exists_clopen_upper_of_not_le h\n  ⟨«expr ᶜ» U, hU.compl, hU'.compl, not_not.2 hx, hy⟩\n#align exists_clopen_lower_of_not_le exists_clopen_lower_of_not_le\n\n"}

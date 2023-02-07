@@ -1,0 +1,36 @@
+{"xgcd_zero_left":
+ "@[simp]\ntheorem xgcd_zero_left {s t r' s' t' : R} : xgcdAux 0 s t r' s' t' = (r', s', t') :=\n  by\n  unfold xgcd_aux\n  exact if_pos rfl\n#align xgcd_zero_left xgcd_zero_left\n\n",
+ "xgcd_val":
+ "theorem xgcd_val (x y : R) : xgcd x y = (gcdA x y, gcdB x y) :=\n  prod.mk.eta.symm\n#align xgcd_val xgcd_val\n\n",
+ "xgcd_aux_rec":
+ "theorem xgcd_aux_rec {r s t r' s' t' : R} (h : r ≠ 0) :\n    xgcdAux r s t r' s' t' = xgcdAux (r' % r) (s' - r' / r * s) (t' - r' / r * t) r s t :=\n  by\n  conv =>\n    lhs\n    rw [xgcd_aux]\n  exact if_neg h\n#align xgcd_aux_rec xgcd_aux_rec\n\n",
+ "val_dvd_le":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≺ » -/\ntheorem val_dvd_le : ∀ a b : R, b ∣ a → a ≠ 0 → ¬«expr ≺ » a b\n  | _, b, ⟨d, rfl⟩, ha =>\n    mul_left_not_lt b\n      (mt\n        (by\n          rintro rfl\n          exact mul_zero _)\n        ha)\n#align val_dvd_le val_dvd_le\n\n",
+ "mul_right_not_lt":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≺ » -/\ntheorem mul_right_not_lt {a : R} (b) (h : a ≠ 0) : ¬«expr ≺ » (a * b) b :=\n  by\n  rw [mul_comm]\n  exact mul_left_not_lt b h\n#align mul_right_not_lt mul_right_not_lt\n\n",
+ "mod_zero":
+ "@[simp]\ntheorem mod_zero (a : R) : a % 0 = a := by simpa only [zero_mul, zero_add] using div_add_mod a 0\n#align mod_zero mod_zero\n\n",
+ "mod_lt":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≺ » -/\ntheorem mod_lt : ∀ (a) {b : R}, b ≠ 0 → «expr ≺ » (a % b) b :=\n  EuclideanDomain.remainder_lt\n#align mod_lt mod_lt\n\n",
+ "mod_eq_sub_mul_div":
+ "theorem mod_eq_sub_mul_div {R : Type _} [EuclideanDomain R] (a b : R) : a % b = a - b * (a / b) :=\n  calc\n    a % b = b * (a / b) + a % b - b * (a / b) := (add_sub_cancel' _ _).symm\n    _ = a - b * (a / b) := by rw [div_add_mod]\n    \n#align mod_eq_sub_mul_div mod_eq_sub_mul_div\n\n",
+ "mod_add_div'":
+ "theorem mod_add_div' (m k : R) : m % k + m / k * k = m :=\n  by\n  rw [mul_comm]\n  exact mod_add_div _ _\n#align mod_add_div' mod_add_div'\n\n",
+ "mod_add_div":
+ "theorem mod_add_div (a b : R) : a % b + b * (a / b) = a :=\n  (add_comm _ _).trans (div_add_mod _ _)\n#align mod_add_div mod_add_div\n\n",
+ "lt_one":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≺ » -/\ntheorem lt_one (a : R) : «expr ≺ » a (1 : R) → a = 0 :=\n  haveI := classical.dec\n  not_imp_not.1 fun h => by simpa only [one_mul] using mul_left_not_lt 1 h\n#align lt_one lt_one\n\n",
+ "induction":
+ "@[elab_as_elim]\ntheorem gcd.induction {P : R → R → Prop} : ∀ a b : R, (∀ x, P 0 x) → (∀ a b, a ≠ 0 → P (b % a) a → P a b) → P a b\n  | a => fun b H0 H1 =>\n    if a0 : a = 0 then a0.symm ▸ H0 _\n    else\n      have h := mod_lt b a0\n      H1 _ _ a0 (gcd.induction (b % a) a H0 H1)termination_by'\n  ⟨_, r_well_founded⟩\n#align gcd.induction gcd.induction\n\n",
+ "gcd_zero_left":
+ "#print gcd_zero_left /-\n@[simp]\ntheorem gcd_zero_left (a : R) : gcd 0 a = a := by\n  rw [gcd]\n  exact if_pos rfl\n#align gcd_zero_left gcd_zero_left\n-/\n\n",
+ "gcd_b_zero_left":
+ "@[simp]\ntheorem gcd_b_zero_left {s : R} : gcdB 0 s = 1 := by\n  unfold gcd_b\n  rw [xgcd, xgcd_zero_left]\n#align gcd_b_zero_left gcd_b_zero_left\n\n",
+ "gcd_a_zero_left":
+ "@[simp]\ntheorem gcd_a_zero_left {s : R} : gcdA 0 s = 0 := by\n  unfold gcd_a\n  rw [xgcd, xgcd_zero_left]\n#align gcd_a_zero_left gcd_a_zero_left\n\n",
+ "div_zero":
+ "#print div_zero /-\n@[simp]\ntheorem div_zero (a : R) : a / 0 = 0 :=\n  EuclideanDomain.quotient_zero a\n#align div_zero div_zero\n-/\n\n",
+ "div_add_mod'":
+ "theorem div_add_mod' (m k : R) : m / k * k + m % k = m :=\n  by\n  rw [mul_comm]\n  exact div_add_mod _ _\n#align div_add_mod' div_add_mod'\n\n",
+ "div_add_mod":
+ "/-\nCopyright (c) 2018 Louis Carlin. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Louis Carlin, Mario Carneiro\n-/\n-- see Note [lower instance priority]\n-- see Note [lower instance priority]\ntheorem div_add_mod (a b : R) : b * (a / b) + a % b = a :=\n  EuclideanDomain.quotient_mul_add_remainder_eq _ _\n#align div_add_mod div_add_mod\n\n"}

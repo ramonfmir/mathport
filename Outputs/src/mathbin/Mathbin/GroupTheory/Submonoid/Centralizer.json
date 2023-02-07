@@ -1,0 +1,12 @@
+{"mem_centralizer_iff":
+ "@[to_additive]\ntheorem mem_centralizer_iff {z : M} : z ∈ centralizer S ↔ ∀ g ∈ S, g * z = z * g :=\n  iff.rfl\n#align mem_centralizer_iff mem_centralizer_iff\n\n",
+ "coe_centralizer":
+ "/-\nCopyright (c) 2021 Thomas Browning. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Thomas Browning\n-/\n@[simp, norm_cast, to_additive]\ntheorem coe_centralizer : ↑(centralizer S) = S.centralizer :=\n  rfl\n#align coe_centralizer coe_centralizer\n\n",
+ "centralizer_univ":
+ "@[simp, to_additive]\ntheorem centralizer_univ : centralizer Set.univ = center M :=\n  SetLike.ext' (Set.centralizer_univ M)\n#align centralizer_univ centralizer_univ\n\n",
+ "centralizer_to_subsemigroup":
+ "theorem centralizer_to_subsemigroup : (centralizer S).to_subsemigroup = Subsemigroup.centralizer S :=\n  rfl\n#align centralizer_to_subsemigroup centralizer_to_subsemigroup\n\n",
+ "centralizer_to_add_subsemigroup":
+ "#print AddSubmonoid.centralizer_toAddSubsemigroup /-\ntheorem AddSubmonoid.centralizer_toAddSubsemigroup {M} [add_monoid M] (S : set M) :\n    (AddSubmonoid.centralizer S).to_add_subsemigroup = AddSubsemigroup.centralizer S :=\n  rfl\n#align add_submonoid.centralizer_to_add_subsemigroup AddSubmonoid.centralizer_toAddSubsemigroup\n-/\n\n",
+ "centralizer_le":
+ "@[to_additive]\ntheorem centralizer_le (h : S ⊆ T) : centralizer T ≤ centralizer S :=\n  Set.centralizer_subset h\n#align centralizer_le centralizer_le\n\n"}

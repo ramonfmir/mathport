@@ -1,0 +1,64 @@
+{"zpow_zero_pos":
+ "private theorem zpow_zero_pos [LinearOrderedSemifield R] (a : R) : 0 < a ^ (0 : ℤ) :=\n  zero_lt_one.trans_le (zpow_zero a).ge\n#align zpow_zero_pos zpow_zero_pos\n\n",
+ "rat_cast_pos":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℚ -/\nprivate theorem rat_cast_pos [LinearOrderedField α] {q : exprℚ} : 0 < q → 0 < (q : α) :=\n  Rat.cast_pos.2\n#align rat_cast_pos rat_cast_pos\n\n",
+ "rat_cast_nonneg":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℚ -/\nprivate theorem rat_cast_nonneg [LinearOrderedField α] {q : exprℚ} : 0 ≤ q → 0 ≤ (q : α) :=\n  Rat.cast_nonneg.2\n#align rat_cast_nonneg rat_cast_nonneg\n\n",
+ "rat_cast_ne_zero":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℚ -/\nprivate theorem rat_cast_ne_zero [DivisionRing α] [CharZero α] {q : exprℚ} : q ≠ 0 → (q : α) ≠ 0 :=\n  Rat.cast_ne_zero.2\n#align rat_cast_ne_zero rat_cast_ne_zero\n\n",
+ "pow_zero_pos":
+ "-- Only attempts to prove `0 < a / a`, otherwise falls back to `0 ≤ a / b`\nprivate theorem pow_zero_pos [OrderedSemiring R] [nontrivial R] (a : R) : 0 < a ^ 0 :=\n  zero_lt_one.trans_le (pow_zero a).ge\n#align pow_zero_pos pow_zero_pos\n\n",
+ "ne_of_ne_of_eq'":
+ "#print ne_of_ne_of_eq' /-\n-- `0 ≤ a`\n-- `0 < a`\n-- `a ≠ 0`\n-- `0 ≠ a`\nprivate theorem ne_of_ne_of_eq' {α : Type _} {a b c : α} (ha : a ≠ c) (h : a = b) : b ≠ c := by rwa [← h]\n#align ne_of_ne_of_eq' ne_of_ne_of_eq'\n-/\n\n",
+ "nat_cast_pos":
+ "private theorem nat_cast_pos [OrderedSemiring α] [nontrivial α] {n : ℕ} : 0 < n → 0 < (n : α) :=\n  nat.cast_pos.2\n#align nat_cast_pos nat_cast_pos\n\n",
+ "mul_nonneg_of_pos_of_nonneg":
+ "-- If `a ≠ 0`, we might prove `max a b ≠ 0` if `b ≠ 0` but we don't want to evaluate\n-- `b` before having ruled out `0 < a`, for performance. So we do that in the second branch\n-- of the `orelse'`.\nprivate theorem mul_nonneg_of_pos_of_nonneg (ha : 0 < a) (hb : 0 ≤ b) : 0 ≤ a * b :=\n  mul_nonneg ha.le hb\n#align mul_nonneg_of_pos_of_nonneg mul_nonneg_of_pos_of_nonneg\n\n",
+ "mul_nonneg_of_nonneg_of_pos":
+ "private theorem mul_nonneg_of_nonneg_of_pos (ha : 0 ≤ a) (hb : 0 < b) : 0 ≤ a * b :=\n  mul_nonneg ha hb.le\n#align mul_nonneg_of_nonneg_of_pos mul_nonneg_of_nonneg_of_pos\n\n",
+ "mul_ne_zero_of_pos_of_ne_zero":
+ "private theorem mul_ne_zero_of_pos_of_ne_zero [no_zero_divisors R] (ha : 0 < a) (hb : b ≠ 0) : a * b ≠ 0 :=\n  mul_ne_zero ha.ne' hb\n#align mul_ne_zero_of_pos_of_ne_zero mul_ne_zero_of_pos_of_ne_zero\n\n",
+ "mul_ne_zero_of_ne_zero_of_pos":
+ "private theorem mul_ne_zero_of_ne_zero_of_pos [no_zero_divisors R] (ha : a ≠ 0) (hb : 0 < b) : a * b ≠ 0 :=\n  mul_ne_zero ha hb.ne'\n#align mul_ne_zero_of_ne_zero_of_pos mul_ne_zero_of_ne_zero_of_pos\n\n",
+ "min_ne_of_ne_of_lt":
+ "private theorem min_ne_of_ne_of_lt (ha : a ≠ c) (hb : c < b) : min a b ≠ c :=\n  min_ne ha hb.ne'\n#align min_ne_of_ne_of_lt min_ne_of_ne_of_lt\n\n",
+ "min_ne_of_lt_of_ne":
+ "private theorem min_ne_of_lt_of_ne (ha : c < a) (hb : b ≠ c) : min a b ≠ c :=\n  min_ne ha.ne' hb\n#align min_ne_of_lt_of_ne min_ne_of_lt_of_ne\n\n",
+ "min_ne":
+ "private theorem min_ne (ha : a ≠ c) (hb : b ≠ c) : min a b ≠ c :=\n  by\n  rw [min_def]\n  split_ifs <;> assumption\n#align min_ne min_ne\n\n",
+ "max_ne":
+ "private theorem max_ne (ha : a ≠ c) (hb : b ≠ c) : max a b ≠ c :=\n  by\n  rw [max_def]\n  split_ifs <;> assumption\n#align max_ne max_ne\n\n",
+ "lt_of_eq_of_lt''":
+ "/-\nCopyright (c) 2022 Mario Carneiro, Heather Macbeth. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Mario Carneiro, Heather Macbeth, Yaël Dillies\n-/\nprivate theorem lt_of_eq_of_lt'' {α} [preorder α] {b b' a : α} : b = b' → a < b' → a < b := fun h1 h2 =>\n  lt_of_lt_of_eq h2 h1.symm\n#align lt_of_eq_of_lt'' lt_of_eq_of_lt''\n\n",
+ "le_min_of_lt_of_le":
+ "-- run all the extensions on `e`\n-- directly try `norm_num` on `e`\n-- try showing nonnegativity from canonicity of the order\n-- loop over hypotheses and try to compare with `e`\nprivate theorem le_min_of_lt_of_le (ha : a < b) (hb : a ≤ c) : a ≤ min b c :=\n  le_min ha.le hb\n#align le_min_of_lt_of_le le_min_of_lt_of_le\n\n",
+ "le_min_of_le_of_lt":
+ "private theorem le_min_of_le_of_lt (ha : a ≤ b) (hb : a < c) : a ≤ min b c :=\n  le_min ha hb.le\n#align le_min_of_le_of_lt le_min_of_le_of_lt\n\n",
+ "int_nat_abs_pos":
+ "-- even powers are nonnegative\n-- Note this is automatically strengthened to `0 < a ^ n` when `a ≠ 0` thanks to the `orelse'`\n-- TODO: Decision procedure for parity\n-- `a ^ n` is positive if `a` is, and nonnegative if `a` is\n-- even powers are nonnegative\n-- Note this is automatically strengthened to `0 < a ^ n` when `a ≠ 0` thanks to the `orelse'`\n-- TODO: Decision procedure for parity\n-- `a ^ n` is positive if `a` is, and nonnegative if `a` is\n-- The nonzero never happens because of `tactic.positivity_canon`\n-- if can prove `0 < a` or `a ≠ 0`, report positivity\n-- else report nonnegativity\nprivate theorem int_nat_abs_pos {n : ℤ} (hn : 0 < n) : 0 < n.nat_abs :=\n  Int.natAbs_pos_of_ne_zero hn.ne'\n#align int_nat_abs_pos int_nat_abs_pos\n\n",
+ "int_div_self_pos":
+ "private theorem int_div_self_pos {a : ℤ} (ha : 0 < a) : 0 < a / a :=\n  by\n  rw [Int.ediv_self ha.ne']\n  exact zero_lt_one\n#align int_div_self_pos int_div_self_pos\n\n",
+ "int_div_nonneg_of_pos_of_pos":
+ "private theorem int_div_nonneg_of_pos_of_pos {a b : ℤ} (ha : 0 < a) (hb : 0 < b) : 0 ≤ a / b :=\n  Int.div_nonneg ha.le hb.le\n#align int_div_nonneg_of_pos_of_pos int_div_nonneg_of_pos_of_pos\n\n",
+ "int_div_nonneg_of_pos_of_nonneg":
+ "private theorem int_div_nonneg_of_pos_of_nonneg {a b : ℤ} (ha : 0 < a) (hb : 0 ≤ b) : 0 ≤ a / b :=\n  Int.div_nonneg ha.le hb\n#align int_div_nonneg_of_pos_of_nonneg int_div_nonneg_of_pos_of_nonneg\n\n",
+ "int_div_nonneg_of_nonneg_of_pos":
+ "private theorem int_div_nonneg_of_nonneg_of_pos {a b : ℤ} (ha : 0 ≤ a) (hb : 0 < b) : 0 ≤ a / b :=\n  Int.div_nonneg ha hb.le\n#align int_div_nonneg_of_nonneg_of_pos int_div_nonneg_of_nonneg_of_pos\n\n",
+ "int_coe_nat_pos":
+ "private theorem int_coe_nat_pos {n : ℕ} : 0 < n → 0 < (n : ℤ) :=\n  nat.cast_pos.2\n#align int_coe_nat_pos int_coe_nat_pos\n\n",
+ "int_coe_nat_nonneg":
+ "private theorem int_coe_nat_nonneg (n : ℕ) : 0 ≤ (n : ℤ) :=\n  n.cast_nonneg\n#align int_coe_nat_nonneg int_coe_nat_nonneg\n\n",
+ "int_cast_pos":
+ "private theorem int_cast_pos [OrderedRing α] [nontrivial α] {n : ℤ} : 0 < n → 0 < (n : α) :=\n  Int.cast_pos.2\n#align int_cast_pos int_cast_pos\n\n",
+ "int_cast_nonneg":
+ "private theorem int_cast_nonneg [OrderedRing α] {n : ℤ} (hn : 0 ≤ n) : 0 ≤ (n : α) :=\n  by\n  rw [← Int.cast_zero]\n  exact Int.cast_mono hn\n#align int_cast_nonneg int_cast_nonneg\n\n",
+ "int_cast_ne_zero":
+ "private theorem int_cast_ne_zero [AddGroupWithOne α] [CharZero α] {n : ℤ} : n ≠ 0 → (n : α) ≠ 0 :=\n  Int.cast_ne_zero.2\n#align int_cast_ne_zero int_cast_ne_zero\n\n",
+ "div_nonneg_of_pos_of_nonneg":
+ "private theorem div_nonneg_of_pos_of_nonneg (ha : 0 < a) (hb : 0 ≤ b) : 0 ≤ a / b :=\n  div_nonneg ha.le hb\n#align div_nonneg_of_pos_of_nonneg div_nonneg_of_pos_of_nonneg\n\n",
+ "div_nonneg_of_nonneg_of_pos":
+ "private theorem div_nonneg_of_nonneg_of_pos (ha : 0 ≤ a) (hb : 0 < b) : 0 ≤ a / b :=\n  div_nonneg ha hb.le\n#align div_nonneg_of_nonneg_of_pos div_nonneg_of_nonneg_of_pos\n\n",
+ "div_ne_zero_of_pos_of_ne_zero":
+ "private theorem div_ne_zero_of_pos_of_ne_zero (ha : 0 < a) (hb : b ≠ 0) : a / b ≠ 0 :=\n  div_ne_zero ha.ne' hb\n#align div_ne_zero_of_pos_of_ne_zero div_ne_zero_of_pos_of_ne_zero\n\n",
+ "div_ne_zero_of_ne_zero_of_pos":
+ "private theorem div_ne_zero_of_ne_zero_of_pos (ha : a ≠ 0) (hb : 0 < b) : a / b ≠ 0 :=\n  div_ne_zero ha hb.ne'\n#align div_ne_zero_of_ne_zero_of_pos div_ne_zero_of_ne_zero_of_pos\n\n"}

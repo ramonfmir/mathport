@@ -1,0 +1,166 @@
+{"with_top_equiv_zero":
+ "@[simp]\ntheorem with_top_equiv_zero : with_top_equiv 0 = 0 := by simpa only [Nat.cast_zero] using with_top_equiv_coe 0\n#align with_top_equiv_zero with_top_equiv_zero\n\n",
+ "with_top_equiv_top":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n@[simp]\ntheorem with_top_equiv_top : with_top_equiv («expr⊤») = «expr⊤» :=\n  to_with_top_top'\n#align with_top_equiv_top with_top_equiv_top\n\n",
+ "with_top_equiv_symm_zero":
+ "@[simp]\ntheorem with_top_equiv_symm_zero : with_top_equiv.symm 0 = 0 :=\n  rfl\n#align with_top_equiv_symm_zero with_top_equiv_symm_zero\n\n",
+ "with_top_equiv_symm_top":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n@[simp]\ntheorem with_top_equiv_symm_top : with_top_equiv.symm («expr⊤») = «expr⊤» :=\n  rfl\n#align with_top_equiv_symm_top with_top_equiv_symm_top\n\n",
+ "with_top_equiv_symm_lt":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«exprℕ∞» -/\n@[simp]\ntheorem with_top_equiv_symm_lt {x y : «exprℕ∞»} : with_top_equiv.symm x < with_top_equiv.symm y ↔ x < y := by\n  rw [← with_top_equiv_lt] <;> simp\n#align with_top_equiv_symm_lt with_top_equiv_symm_lt\n\n",
+ "with_top_equiv_symm_le":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«exprℕ∞» -/\n@[simp]\ntheorem with_top_equiv_symm_le {x y : «exprℕ∞»} : with_top_equiv.symm x ≤ with_top_equiv.symm y ↔ x ≤ y := by\n  rw [← with_top_equiv_le] <;> simp\n#align with_top_equiv_symm_le with_top_equiv_symm_le\n\n",
+ "with_top_equiv_symm_coe":
+ "@[simp]\ntheorem with_top_equiv_symm_coe (n : nat) : with_top_equiv.symm n = n :=\n  rfl\n#align with_top_equiv_symm_coe with_top_equiv_symm_coe\n\n",
+ "with_top_equiv_lt":
+ "@[simp]\ntheorem with_top_equiv_lt {x y : part_enat} : with_top_equiv x < with_top_equiv y ↔ x < y :=\n  to_with_top_lt\n#align with_top_equiv_lt with_top_equiv_lt\n\n",
+ "with_top_equiv_le":
+ "@[simp]\ntheorem with_top_equiv_le {x y : part_enat} : with_top_equiv x ≤ with_top_equiv y ↔ x ≤ y :=\n  to_with_top_le\n#align with_top_equiv_le with_top_equiv_le\n\n",
+ "with_top_equiv_coe":
+ "@[simp]\ntheorem with_top_equiv_coe (n : nat) : with_top_equiv n = n :=\n  to_with_top_coe' _\n#align with_top_equiv_coe with_top_equiv_coe\n\n",
+ "top_eq_none":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\ntheorem top_eq_none : («expr⊤» : part_enat) = none :=\n  rfl\n#align top_eq_none top_eq_none\n\n",
+ "top_add":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n#print top_add /-\n@[simp]\ntheorem top_add (x : part_enat) : «expr⊤» + x = «expr⊤» :=\n  Part.ext' (false_and_iff _) fun h => h.left.elim\n#align top_add top_add\n-/\n\n",
+ "to_with_top_zero'":
+ "@[simp]\ntheorem to_with_top_zero' {h : decidable (0 : part_enat).dom} : to_with_top 0 = 0 := by convert to_with_top_zero\n#align to_with_top_zero' to_with_top_zero'\n\n",
+ "to_with_top_zero":
+ "theorem to_with_top_zero : to_with_top 0 = 0 :=\n  rfl\n#align to_with_top_zero to_with_top_zero\n\n",
+ "to_with_top_top'":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n@[simp]\ntheorem to_with_top_top' {h : decidable («expr⊤» : part_enat).dom} : to_with_top («expr⊤») = «expr⊤» := by\n  convert to_with_top_top\n#align to_with_top_top' to_with_top_top'\n\n",
+ "to_with_top_top":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\ntheorem to_with_top_top : to_with_top («expr⊤») = «expr⊤» :=\n  rfl\n#align to_with_top_top to_with_top_top\n\n",
+ "to_with_top_some":
+ "theorem to_with_top_some (n : ℕ) : to_with_top (some n) = n :=\n  rfl\n#align to_with_top_some to_with_top_some\n\n",
+ "to_with_top_lt":
+ "@[simp]\ntheorem to_with_top_lt {x y : part_enat} [decidable x.dom] [decidable y.dom] : to_with_top x < to_with_top y ↔ x < y :=\n  lt_iff_lt_of_le_iff_le to_with_top_le\n#align to_with_top_lt to_with_top_lt\n\n",
+ "to_with_top_le":
+ "@[simp]\ntheorem to_with_top_le {x y : part_enat} :\n    ∀ [decidable x.dom] [decidable y.dom], to_with_top x ≤ to_with_top y ↔ x ≤ y :=\n  part_enat.cases_on y (by simp) (part_enat.cases_on x (by simp) (by intros <;> simp))\n#align to_with_top_le to_with_top_le\n\n",
+ "to_with_top_coe'":
+ "@[simp]\ntheorem to_with_top_coe' (n : ℕ) {h : decidable (n : part_enat).dom} : to_with_top (n : part_enat) = n := by\n  convert to_with_top_coe n\n#align to_with_top_coe' to_with_top_coe'\n\n",
+ "to_with_top_coe":
+ "theorem to_with_top_coe (n : ℕ) {_ : decidable (n : part_enat).dom} : to_with_top n = n := by\n  simp only [← some_eq_coe, ← to_with_top_some]\n#align to_with_top_coe to_with_top_coe\n\n",
+ "to_with_top_add":
+ "@[simp]\ntheorem to_with_top_add {x y : part_enat} : to_with_top (x + y) = to_with_top x + to_with_top y := by\n  apply part_enat.cases_on y <;> apply part_enat.cases_on x <;> simp [← Nat.cast_add, ← enat.coe_add]\n#align to_with_top_add to_with_top_add\n\n",
+ "some_eq_coe":
+ "theorem some_eq_coe (n : ℕ) : some n = n :=\n  rfl\n#align some_eq_coe some_eq_coe\n\n",
+ "pos_iff_one_le":
+ "theorem pos_iff_one_le {x : part_enat} : 0 < x ↔ 1 ≤ x :=\n  part_enat.cases_on x (by simp only [iff_true_iff, le_top, coe_lt_top, ← @Nat.cast_zero part_enat]) fun n =>\n    by\n    rw [← Nat.cast_zero, ← Nat.cast_one, part_enat.coe_lt_coe, part_enat.coe_le_coe]\n    rfl\n#align pos_iff_one_le pos_iff_one_le\n\n",
+ "not_is_max_coe":
+ "theorem not_is_max_coe (x : ℕ) : ¬is_max (x : part_enat) :=\n  not_isMax_of_lt (coe_lt_top x)\n#align not_is_max_coe not_is_max_coe\n\n",
+ "not_dom_iff_eq_top":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\ntheorem not_dom_iff_eq_top {x : part_enat} : ¬x.dom ↔ x = «expr⊤» :=\n  iff.not_left ne_top_iff_dom.symm\n#align not_dom_iff_eq_top not_dom_iff_eq_top\n\n",
+ "ne_top_of_lt":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n#print ne_top_of_lt /-\ntheorem ne_top_of_lt {x y : part_enat} (h : x < y) : x ≠ «expr⊤» :=\n  ne_of_lt <| lt_of_lt_of_le h le_top\n#align ne_top_of_lt ne_top_of_lt\n-/\n\n",
+ "ne_top_iff_dom":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\ntheorem ne_top_iff_dom {x : part_enat} : x ≠ «expr⊤» ↔ x.dom := by classical exact not_iff_comm.1 part.eq_none_iff'.symm\n#align ne_top_iff_dom ne_top_iff_dom\n\n",
+ "ne_top_iff":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\ntheorem ne_top_iff {x : part_enat} : x ≠ «expr⊤» ↔ ∃ n : ℕ, x = n := by\n  simpa only [← some_eq_coe] using Part.ne_none_iff\n#align ne_top_iff ne_top_iff\n\n",
+ "neZero_iff":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n#print neZero_iff /-\ntheorem neZero_iff {x : part_enat} : x ≠ 0 ↔ «expr⊥» < x :=\n  bot_lt_iff_ne_bot.symm\n#align ne_zero_iff neZero_iff\n-/\n\n",
+ "lt_wf":
+ "theorem lt_wf : @well_founded part_enat (· < ·) := by\n  classical\n    change well_founded fun a b : part_enat => a < b\n    simp_rw [← to_with_top_lt]\n    exact inv_image.wf _ (WithTop.wellFounded_lt Nat.lt_wfRel)\n#align lt_wf lt_wf\n\n",
+ "lt_find_iff":
+ "theorem lt_find_iff (n : ℕ) : (n : part_enat) < find P ↔ ∀ m ≤ n, ¬P m :=\n  by\n  refine' ⟨_, lt_find P n⟩\n  intro h m hm\n  by_cases H : (find P).dom\n  · apply nat.find_min H\n    rw [coe_lt_iff] at h\n    specialize h H\n    exact lt_of_le_of_lt hm h\n  · exact not_exists.mp H m\n#align lt_find_iff lt_find_iff\n\n",
+ "lt_find":
+ "theorem lt_find (n : ℕ) (h : ∀ m ≤ n, ¬P m) : (n : part_enat) < find P :=\n  by\n  rw [coe_lt_iff]; intro h'; rw [find_get]\n  have := @nat.find_spec P _ h'\n  contrapose! this\n  exact h _ this\n#align lt_find lt_find\n\n",
+ "lt_def":
+ "theorem lt_def (x y : part_enat) : x < y ↔ ∃ hx : x.dom, ∀ hy : y.dom, x.get hx < y.get hy :=\n  by\n  rw [lt_iff_le_not_le, le_def, le_def, not_exists]\n  constructor\n  · rintro ⟨⟨hyx, H⟩, h⟩\n    by_cases hx : x.dom\n    · use hx\n      intro hy\n      specialize H hy\n      specialize h fun _ => hy\n      rw [not_forall] at h\n      cases' h with hx' h\n      rw [not_le] at h\n      exact h\n    · specialize h fun hx' => (hx hx').elim\n      rw [not_forall] at h\n      cases' h with hx' h\n      exact (hx hx').elim\n  · rintro ⟨hx, H⟩\n    exact ⟨⟨fun _ => hx, fun hy => (H hy).le⟩, fun hxy h => not_lt_of_le (h _) (H _)⟩\n#align lt_def lt_def\n\n",
+ "lt_coe_iff":
+ "theorem lt_coe_iff (x : part_enat) (n : ℕ) : x < n ↔ ∃ h : x.dom, x.get h < n := by\n  simp only [lt_def, forall_prop_of_true, get_coe', dom_coe]\n#align lt_coe_iff lt_coe_iff\n\n",
+ "lt_add_one_iff_lt":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\ntheorem lt_add_one_iff_lt {x y : part_enat} (hx : x ≠ «expr⊤») : x < y + 1 ↔ x ≤ y :=\n  by\n  constructor; exact le_of_lt_add_one\n  intro h; rcases ne_top_iff.mp hx with ⟨m, rfl⟩\n  induction' y using part_enat.cases_on with n;\n  · rw [top_add]\n    apply coe_lt_top\n  apply_mod_cast nat.lt_succ_of_le; apply_mod_cast h\n#align lt_add_one_iff_lt lt_add_one_iff_lt\n\n",
+ "lt_add_one":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n#print lt_add_one /-\ntheorem lt_add_one {x : part_enat} (hx : x ≠ «expr⊤») : x < x + 1 :=\n  by\n  rw [part_enat.lt_add_iff_pos_right hx]\n  norm_cast\n  norm_num\n#align lt_add_one lt_add_one\n-/\n\n",
+ "lt_add_iff_pos_right":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n#print lt_add_iff_pos_right /-\nprotected theorem lt_add_iff_pos_right {x y : part_enat} (hx : x ≠ «expr⊤») : x < x + y ↔ 0 < y :=\n  by\n  conv_rhs => rw [← part_enat.add_lt_add_iff_left hx]\n  rw [add_zero]\n#align lt_add_iff_pos_right lt_add_iff_pos_right\n-/\n\n",
+ "le_of_lt_add_one":
+ "theorem le_of_lt_add_one {x y : part_enat} (h : x < y + 1) : x ≤ y :=\n  by\n  induction' y using part_enat.cases_on with n; apply le_top\n  rcases ne_top_iff.mp (ne_top_of_lt h) with ⟨m, rfl⟩\n  apply_mod_cast nat.le_of_lt_succ; apply_mod_cast h\n#align le_of_lt_add_one le_of_lt_add_one\n\n",
+ "le_def":
+ "theorem le_def (x y : part_enat) : x ≤ y ↔ ∃ h : y.dom → x.dom, ∀ hy : y.dom, x.get (h hy) ≤ y.get hy :=\n  iff.rfl\n#align le_def le_def\n\n",
+ "le_coe_iff":
+ "theorem le_coe_iff (x : part_enat) (n : ℕ) : x ≤ n ↔ ∃ h : x.dom, x.get h ≤ n :=\n  by\n  rw [← some_eq_coe]\n  show (∃ h : true → x.dom, _) ↔ ∃ h : x.dom, x.get h ≤ n\n  simp only [forall_prop_of_true, some_eq_coe, dom_coe, get_coe']\n#align le_coe_iff le_coe_iff\n\n",
+ "get_zero":
+ "@[simp]\ntheorem get_zero (h : (0 : part_enat).dom) : (0 : part_enat).get h = 0 :=\n  rfl\n#align get_zero get_zero\n\n",
+ "get_one":
+ "@[simp]\ntheorem get_one (h : (1 : part_enat).dom) : (1 : part_enat).get h = 1 :=\n  rfl\n#align get_one get_one\n\n",
+ "get_le_get":
+ "@[simp]\ntheorem get_le_get {x y : part_enat} {hx : x.dom} {hy : y.dom} : x.get hx ≤ y.get hy ↔ x ≤ y := by\n  conv =>\n    lhs\n    rw [← coe_le_coe, coe_get, coe_get]\n#align get_le_get get_le_get\n\n",
+ "get_eq_iff_eq_some":
+ "theorem get_eq_iff_eq_some {a : part_enat} {ha : a.dom} {b : ℕ} : a.get ha = b ↔ a = some b :=\n  get_eq_iff_eq_some\n#align get_eq_iff_eq_some get_eq_iff_eq_some\n\n",
+ "get_eq_iff_eq_coe":
+ "theorem get_eq_iff_eq_coe {a : part_enat} {ha : a.dom} {b : ℕ} : a.get ha = b ↔ a = b := by\n  rw [get_eq_iff_eq_some, some_eq_coe]\n#align get_eq_iff_eq_coe get_eq_iff_eq_coe\n\n",
+ "get_coe'":
+ "@[simp, norm_cast]\ntheorem get_coe' (x : ℕ) (h : (x : part_enat).dom) : get (x : part_enat) h = x := by rw [← coe_inj, coe_get]\n#align get_coe' get_coe'\n\n",
+ "get_coe":
+ "theorem get_coe {x : ℕ} : get (x : part_enat) (dom_coe x) = x :=\n  get_coe' _ _\n#align get_coe get_coe\n\n",
+ "get_add":
+ "@[simp]\ntheorem get_add {x y : part_enat} (h : (x + y).dom) : get (x + y) h = x.get h.1 + y.get h.2 :=\n  rfl\n#align get_add get_add\n\n",
+ "find_le":
+ "theorem find_le (n : ℕ) (h : P n) : find P ≤ n := by\n  rw [le_coe_iff]\n  refine' ⟨⟨_, h⟩, @nat.find_min' P _ _ _ h⟩\n#align find_le find_le\n\n",
+ "find_get":
+ "@[simp]\ntheorem find_get (h : (find P).dom) : (find P).get h = nat.find h :=\n  rfl\n#align find_get find_get\n\n",
+ "find_eq_top_iff":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\ntheorem find_eq_top_iff : find P = «expr⊤» ↔ ∀ n, ¬P n :=\n  (eq_top_iff_forall_lt _).trans ⟨fun h n => (lt_find_iff P n).mp (h n) _ le_rfl, fun h n => lt_find P n fun _ _ => h _⟩\n#align find_eq_top_iff find_eq_top_iff\n\n",
+ "find_dom":
+ "theorem find_dom (h : ∃ n, P n) : (find P).dom :=\n  h\n#align find_dom find_dom\n\n",
+ "eq_zero_iff":
+ "theorem eq_zero_iff {x : part_enat} : x = 0 ↔ x ≤ 0 :=\n  eq_bot_iff\n#align eq_zero_iff eq_zero_iff\n\n",
+ "eq_top_iff_forall_lt":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\ntheorem eq_top_iff_forall_lt (x : part_enat) : x = «expr⊤» ↔ ∀ n : ℕ, (n : part_enat) < x :=\n  by\n  constructor\n  · rintro rfl n\n    exact coe_lt_top _\n  · contrapose!\n    rw [ne_top_iff]\n    rintro ⟨n, rfl⟩\n    exact ⟨n, irrefl _⟩\n#align eq_top_iff_forall_lt eq_top_iff_forall_lt\n\n",
+ "eq_top_iff_forall_le":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\ntheorem eq_top_iff_forall_le (x : part_enat) : x = «expr⊤» ↔ ∀ n : ℕ, (n : part_enat) ≤ x :=\n  (eq_top_iff_forall_lt x).trans\n    ⟨fun h n => (h n).le, fun h n => lt_of_lt_of_le (coe_lt_coe.mpr n.lt_succ_self) (h (n + 1))⟩\n#align eq_top_iff_forall_le eq_top_iff_forall_le\n\n",
+ "dom_some":
+ "/-\nCopyright (c) 2018 Chris Hughes. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Chris Hughes\n-/\n@[simp]\ntheorem dom_some (x : ℕ) : (some x).dom :=\n  trivial\n#align dom_some dom_some\n\n",
+ "dom_of_lt":
+ "theorem dom_of_lt {x y : part_enat} : x < y → x.dom :=\n  part_enat.cases_on x not_top_lt fun _ _ => dom_coe _\n#align dom_of_lt dom_of_lt\n\n",
+ "dom_of_le_some":
+ "theorem dom_of_le_some {x : part_enat} {y : ℕ} (h : x ≤ some y) : x.dom :=\n  dom_of_le_of_dom h trivial\n#align dom_of_le_some dom_of_le_some\n\n",
+ "dom_of_le_of_dom":
+ "theorem dom_of_le_of_dom {x y : part_enat} : x ≤ y → y.dom → x.dom := fun ⟨h, _⟩ => h\n#align dom_of_le_of_dom dom_of_le_of_dom\n\n",
+ "dom_of_le_coe":
+ "theorem dom_of_le_coe {x : part_enat} {y : ℕ} (h : x ≤ y) : x.dom :=\n  by\n  rw [← some_eq_coe] at h\n  exact dom_of_le_some h\n#align dom_of_le_coe dom_of_le_coe\n\n",
+ "dom_coe":
+ "@[simp]\ntheorem dom_coe (x : ℕ) : (x : part_enat).dom :=\n  trivial\n#align dom_coe dom_coe\n\n",
+ "coe_ne_top":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n@[simp]\ntheorem coe_ne_top (x : ℕ) : (x : part_enat) ≠ «expr⊤» :=\n  ne_of_lt (coe_lt_top x)\n#align coe_ne_top coe_ne_top\n\n",
+ "coe_lt_top":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n@[simp]\ntheorem coe_lt_top (x : ℕ) : (x : part_enat) < «expr⊤» :=\n  Ne.lt_top fun h => absurd (congr_arg dom h) <| by simpa only [dom_coe] using true_ne_false\n#align coe_lt_top coe_lt_top\n\n",
+ "coe_lt_iff":
+ "theorem coe_lt_iff (n : ℕ) (x : part_enat) : (n : part_enat) < x ↔ ∀ h : x.dom, n < x.get h :=\n  by\n  rw [← some_eq_coe]\n  simp only [lt_def, exists_prop_of_true, dom_some, forall_true_iff]\n  rfl\n#align coe_lt_iff coe_lt_iff\n\n",
+ "coe_lt_coe":
+ "@[simp, norm_cast]\ntheorem coe_lt_coe {x y : ℕ} : (x : part_enat) < y ↔ x < y := by\n  rw [lt_iff_le_not_le, lt_iff_le_not_le, coe_le_coe, coe_le_coe]\n#align coe_lt_coe coe_lt_coe\n\n",
+ "coe_le_iff":
+ "theorem coe_le_iff (n : ℕ) (x : part_enat) : (n : part_enat) ≤ x ↔ ∀ h : x.dom, n ≤ x.get h :=\n  by\n  rw [← some_eq_coe]\n  simp only [le_def, exists_prop_of_true, dom_some, forall_true_iff]\n  rfl\n#align coe_le_iff coe_le_iff\n\n",
+ "coe_le_coe":
+ "@[simp, norm_cast]\ntheorem coe_le_coe {x y : ℕ} : (x : part_enat) ≤ y ↔ x ≤ y :=\n  by\n  rw [← some_eq_coe, ← some_eq_coe]\n  exact ⟨fun ⟨_, h⟩ => h trivial, fun h => ⟨fun _ => trivial, fun _ => h⟩⟩\n#align coe_le_coe coe_le_coe\n\n",
+ "coe_inj":
+ "@[simp, norm_cast]\ntheorem coe_inj {x y : ℕ} : (x : part_enat) = y ↔ x = y :=\n  Part.some_inj\n#align coe_inj coe_inj\n\n",
+ "coe_get":
+ "@[simp]\ntheorem coe_get {x : part_enat} (h : x.dom) : (x.get h : part_enat) = x :=\n  by\n  rw [← some_eq_coe]\n  exact Part.ext' (iff_of_true trivial h) fun _ _ => rfl\n#align coe_get coe_get\n\n",
+ "coe_coe_hom":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n@[simp]\ntheorem coe_coe_hom : «expr⇑ » coe_hom = coe :=\n  rfl\n#align coe_coe_hom coe_coe_hom\n\n",
+ "coe_add_get":
+ "theorem coe_add_get {x : ℕ} {y : part_enat} (h : ((x : part_enat) + y).dom) :\n    get ((x : part_enat) + y) h = x + get y h.2 :=\n  by\n  simp only [← some_eq_coe] at h⊢\n  rfl\n#align coe_add_get coe_add_get\n\n",
+ "cases_on'":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n@[elab_as_elim]\nprotected theorem cases_on' {P : part_enat → Prop} : ∀ a : part_enat, P («expr⊤») → (∀ n : ℕ, P (some n)) → P a :=\n  Part.induction_on\n#align cases_on' cases_on'\n\n",
+ "cases_on":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n@[elab_as_elim]\nprotected theorem cases_on {P : part_enat → Prop} : ∀ a : part_enat, P («expr⊤») → (∀ n : ℕ, P n) → P a :=\n  by\n  simp only [← some_eq_coe]\n  exact part_enat.cases_on'\n#align cases_on cases_on\n\n",
+ "add_top":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n#print add_top /-\n@[simp]\ntheorem add_top (x : part_enat) : x + «expr⊤» = «expr⊤» := by rw [add_comm, top_add]\n#align add_top add_top\n-/\n\n",
+ "add_right_cancel_iff":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n#print add_right_cancel_iff /-\nprotected theorem add_right_cancel_iff {a b c : part_enat} (hc : c ≠ «expr⊤») : a + c = b + c ↔ a = b :=\n  by\n  rcases ne_top_iff.1 hc with ⟨c, rfl⟩\n  apply part_enat.cases_on a <;> apply part_enat.cases_on b <;>\n        simp [add_eq_top_iff, coe_ne_top, @eq_comm _ («expr⊤» : part_enat)] <;>\n      simp only [(Nat.cast_add _ _).symm, add_left_cancel_iff, part_enat.coe_inj, add_comm] <;>\n    tauto\n#align add_right_cancel_iff add_right_cancel_iff\n-/\n\n",
+ "add_one_le_of_lt":
+ "theorem add_one_le_of_lt {x y : part_enat} (h : x < y) : x + 1 ≤ y :=\n  by\n  induction' y using part_enat.cases_on with n; apply le_top\n  rcases ne_top_iff.mp (ne_top_of_lt h) with ⟨m, rfl⟩\n  apply_mod_cast nat.succ_le_of_lt; apply_mod_cast h\n#align add_one_le_of_lt add_one_le_of_lt\n\n",
+ "add_one_le_iff_lt":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\ntheorem add_one_le_iff_lt {x y : part_enat} (hx : x ≠ «expr⊤») : x + 1 ≤ y ↔ x < y :=\n  by\n  constructor; swap; exact add_one_le_of_lt\n  intro h; rcases ne_top_iff.mp hx with ⟨m, rfl⟩\n  induction' y using part_enat.cases_on with n; apply coe_lt_top\n  apply_mod_cast nat.lt_of_succ_le; apply_mod_cast h\n#align add_one_le_iff_lt add_one_le_iff_lt\n\n",
+ "add_lt_add_right":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n#print add_lt_add_right /-\nprotected theorem add_lt_add_right {x y z : part_enat} (h : x < y) (hz : z ≠ «expr⊤») : x + z < y + z :=\n  by\n  rcases ne_top_iff.mp (ne_top_of_lt h) with ⟨m, rfl⟩\n  rcases ne_top_iff.mp hz with ⟨k, rfl⟩\n  induction' y using part_enat.cases_on with n\n  · rw [top_add]\n    apply_mod_cast coe_lt_top\n  norm_cast  at h; apply_mod_cast add_lt_add_right h\n#align add_lt_add_right add_lt_add_right\n-/\n\n",
+ "add_lt_add_iff_right":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n#print add_lt_add_iff_right /-\nprotected theorem add_lt_add_iff_right {x y z : part_enat} (hz : z ≠ «expr⊤») : x + z < y + z ↔ x < y :=\n  ⟨lt_of_add_lt_add_right, fun h => part_enat.add_lt_add_right h hz⟩\n#align add_lt_add_iff_right add_lt_add_iff_right\n-/\n\n",
+ "add_lt_add_iff_left":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n#print add_lt_add_iff_left /-\nprotected theorem add_lt_add_iff_left {x y z : part_enat} (hz : z ≠ «expr⊤») : z + x < z + y ↔ x < y := by\n  rw [add_comm z, add_comm z, part_enat.add_lt_add_iff_right hz]\n#align add_lt_add_iff_left add_lt_add_iff_left\n-/\n\n",
+ "add_left_cancel_iff":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n#print add_left_cancel_iff /-\nprotected theorem add_left_cancel_iff {a b c : part_enat} (ha : a ≠ «expr⊤») : a + b = a + c ↔ b = c := by\n  rw [add_comm a, add_comm a, part_enat.add_right_cancel_iff ha]\n#align add_left_cancel_iff add_left_cancel_iff\n-/\n\n",
+ "add_eq_top_iff":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\ntheorem add_eq_top_iff {a b : part_enat} : a + b = «expr⊤» ↔ a = «expr⊤» ∨ b = «expr⊤» := by\n  apply part_enat.cases_on a <;> apply part_enat.cases_on b <;> simp <;>\n      simp only [(Nat.cast_add _ _).symm, part_enat.coe_ne_top] <;>\n    simp\n#align add_eq_top_iff add_eq_top_iff\n\n"}

@@ -1,0 +1,20 @@
+{"unop_op":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵖ» -/\n@[simp]\ntheorem unop_op (s : set («expr ᵒᵖ» α)) : s.unop.op = s :=\n  ext (by simp only [mem_op, unop_mem_unop, iff_self_iff, imp_true_iff])\n#align unop_op unop_op\n\n",
+ "unop_mem_unop":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵖ» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵖ» -/\n@[simp]\ntheorem unop_mem_unop {s : set («expr ᵒᵖ» α)} {a : «expr ᵒᵖ» α} : unop a ∈ s.unop ↔ a ∈ s := by rw [mem_unop, op_unop]\n#align unop_mem_unop unop_mem_unop\n\n",
+ "singleton_unop_op":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵖ» -/\n@[simp]\ntheorem singleton_unop_op (x : «expr ᵒᵖ» α) : ({unop x} : set α).op = {x} := by\n  simp only [singleton_op, opposite.op_unop]\n#align singleton_unop_op singleton_unop_op\n\n",
+ "singleton_unop":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵖ» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵖ» -/\n@[simp]\ntheorem singleton_unop (x : «expr ᵒᵖ» α) : ({x} : set («expr ᵒᵖ» α)).unop = {unop x} :=\n  ext fun y => by simpa only [mem_unop, mem_singleton_iff] using op_eq_iff_eq_unop\n#align singleton_unop singleton_unop\n\n",
+ "singleton_op_unop":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵖ» -/\n@[simp]\ntheorem singleton_op_unop (x : α) : ({op x} : set («expr ᵒᵖ» α)).unop = {x} := by\n  simp only [singleton_unop, opposite.unop_op]\n#align singleton_op_unop singleton_op_unop\n\n",
+ "singleton_op":
+ "@[simp]\ntheorem singleton_op (x : α) : ({x} : set α).op = {op x} :=\n  ext fun y => by simpa only [mem_op, mem_singleton_iff] using unop_eq_iff_eq_op\n#align singleton_op singleton_op\n\n",
+ "op_unop":
+ "@[simp]\ntheorem op_unop (s : set α) : s.op.unop = s :=\n  ext (by simp only [mem_unop, op_mem_op, iff_self_iff, imp_true_iff])\n#align op_unop op_unop\n\n",
+ "op_mem_op":
+ "@[simp]\ntheorem op_mem_op {s : set α} {a : α} : op a ∈ s.op ↔ a ∈ s := by rw [mem_op, unop_op]\n#align op_mem_op op_mem_op\n\n",
+ "mem_unop":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵖ» -/\n@[simp]\ntheorem mem_unop {s : set («expr ᵒᵖ» α)} {a : α} : a ∈ s.unop ↔ op a ∈ s :=\n  iff.rfl\n#align mem_unop mem_unop\n\n",
+ "mem_op":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵖ» -/\n/-\nCopyright (c) 2022 Markus Himmel. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Markus Himmel\n-/\n@[simp]\ntheorem mem_op {s : set α} {a : «expr ᵒᵖ» α} : a ∈ s.op ↔ unop a ∈ s :=\n  iff.rfl\n#align mem_op mem_op\n\n"}

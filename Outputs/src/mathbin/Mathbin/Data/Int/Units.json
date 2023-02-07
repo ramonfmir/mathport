@@ -1,0 +1,30 @@
+{"units_nat_abs":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ˣ» -/\n/-\nCopyright (c) 2016 Jeremy Avigad. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Jeremy Avigad\n-/\n@[simp]\ntheorem units_nat_abs (u : «expr ˣ» ℤ) : natAbs u = 1 :=\n  Units.ext_iff.1 <|\n    Nat.units_eq_one\n      ⟨natAbs u, natAbs ↑u⁻¹, by rw [← nat_abs_mul, Units.mul_inv] <;> rfl, by\n        rw [← nat_abs_mul, Units.inv_mul] <;> rfl⟩\n#align units_nat_abs units_nat_abs\n\n",
+ "units_eq_one_or":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ˣ» -/\ntheorem units_eq_one_or (u : «expr ˣ» ℤ) : u = 1 ∨ u = -1 := by\n  simpa only [Units.ext_iff, units_nat_abs] using nat_abs_eq u\n#align units_eq_one_or units_eq_one_or\n\n",
+ "of_nat_is_unit":
+ "@[norm_cast]\ntheorem of_nat_is_unit {n : ℕ} : is_unit (n : ℤ) ↔ is_unit n := by\n  rw [Nat.isUnit_iff, is_unit_iff_nat_abs_eq, nat_abs_of_nat]\n#align of_nat_is_unit of_nat_is_unit\n\n",
+ "mul_eq_one_iff_eq_one_or_neg_one":
+ "theorem mul_eq_one_iff_eq_one_or_neg_one {z w : ℤ} : z * w = 1 ↔ z = 1 ∧ w = 1 ∨ z = -1 ∧ w = -1 := by\n  refine' ⟨eq_one_or_neg_one_of_mul_eq_one', fun h => or.elim h (fun H => _) fun H => _⟩ <;>\n      rcases H with ⟨rfl, rfl⟩ <;>\n    rfl\n#align mul_eq_one_iff_eq_one_or_neg_one mul_eq_one_iff_eq_one_or_neg_one\n\n",
+ "mul_eq_neg_one_iff_eq_one_or_neg_one":
+ "theorem mul_eq_neg_one_iff_eq_one_or_neg_one {z w : ℤ} : z * w = -1 ↔ z = 1 ∧ w = -1 ∨ z = -1 ∧ w = 1 := by\n  refine' ⟨eq_one_or_neg_one_of_mul_eq_neg_one', fun h => or.elim h (fun H => _) fun H => _⟩ <;>\n      rcases H with ⟨rfl, rfl⟩ <;>\n    rfl\n#align mul_eq_neg_one_iff_eq_one_or_neg_one mul_eq_neg_one_iff_eq_one_or_neg_one\n\n",
+ "is_unit_mul_self":
+ "theorem is_unit_mul_self {a : ℤ} (ha : is_unit a) : a * a = 1 :=\n  (isUnit_eq_one_or ha).elim (fun h => h.symm ▸ rfl) fun h => h.symm ▸ rfl\n#align is_unit_mul_self is_unit_mul_self\n\n",
+ "is_unit_iff_nat_abs_eq":
+ "theorem is_unit_iff_nat_abs_eq {n : ℤ} : is_unit n ↔ n.nat_abs = 1 := by\n  simp [nat_abs_eq_iff, is_unit_iff, Nat.cast_zero]\n#align is_unit_iff_nat_abs_eq is_unit_iff_nat_abs_eq\n\n",
+ "is_unit_iff":
+ "theorem is_unit_iff {a : ℤ} : is_unit a ↔ a = 1 ∨ a = -1 :=\n  by\n  refine' ⟨fun h => is_unit_eq_one_or h, fun h => _⟩\n  rcases h with (rfl | rfl)\n  · exact isUnit_one\n  · exact is_unit_one.neg\n#align is_unit_iff is_unit_iff\n\n",
+ "is_unit_eq_or_eq_neg":
+ "theorem is_unit_eq_or_eq_neg {a b : ℤ} (ha : is_unit a) (hb : is_unit b) : a = b ∨ a = -b :=\n  by\n  rcases is_unit_eq_one_or hb with (rfl | rfl)\n  · exact is_unit_eq_one_or ha\n  · rwa [or_comm', neg_neg, ← is_unit_iff]\n#align is_unit_eq_or_eq_neg is_unit_eq_or_eq_neg\n\n",
+ "is_unit_eq_one_or":
+ "theorem is_unit_eq_one_or {a : ℤ} : is_unit a → a = 1 ∨ a = -1\n  | ⟨x, hx⟩ => hx ▸ (units_eq_one_or _).imp (congr_arg coe) (congr_arg coe)\n#align is_unit_eq_one_or is_unit_eq_one_or\n\n",
+ "is_unit_add_is_unit_eq_is_unit_add_is_unit":
+ "theorem is_unit_add_is_unit_eq_is_unit_add_is_unit {a b c d : ℤ} (ha : is_unit a) (hb : is_unit b) (hc : is_unit c)\n    (hd : is_unit d) : a + b = c + d ↔ a = c ∧ b = d ∨ a = d ∧ b = c :=\n  by\n  rw [is_unit_iff] at ha hb hc hd\n  cases ha <;> cases hb <;> cases hc <;> cases hd <;> subst ha <;> subst hb <;> subst hc <;> subst hd <;> tidy\n#align is_unit_add_is_unit_eq_is_unit_add_is_unit is_unit_add_is_unit_eq_is_unit_add_is_unit\n\n",
+ "eq_one_or_neg_one_of_mul_eq_one'":
+ "theorem eq_one_or_neg_one_of_mul_eq_one' {z w : ℤ} (h : z * w = 1) : z = 1 ∧ w = 1 ∨ z = -1 ∧ w = -1 :=\n  by\n  have h' : w * z = 1 := mul_comm z w ▸ h\n  rcases eq_one_or_neg_one_of_mul_eq_one h with (rfl | rfl) <;>\n      rcases eq_one_or_neg_one_of_mul_eq_one h' with (rfl | rfl) <;>\n    tauto\n#align eq_one_or_neg_one_of_mul_eq_one' eq_one_or_neg_one_of_mul_eq_one'\n\n",
+ "eq_one_or_neg_one_of_mul_eq_one":
+ "theorem eq_one_or_neg_one_of_mul_eq_one {z w : ℤ} (h : z * w = 1) : z = 1 ∨ z = -1 :=\n  isUnit_iff.mp (isUnit_of_mul_eq_one z w h)\n#align eq_one_or_neg_one_of_mul_eq_one eq_one_or_neg_one_of_mul_eq_one\n\n",
+ "eq_one_or_neg_one_of_mul_eq_neg_one'":
+ "theorem eq_one_or_neg_one_of_mul_eq_neg_one' {z w : ℤ} (h : z * w = -1) : z = 1 ∧ w = -1 ∨ z = -1 ∧ w = 1 :=\n  by\n  rcases is_unit_eq_one_or (is_unit.mul_iff.mp (int.is_unit_iff.mpr (or.inr h))).1 with (rfl | rfl)\n  · exact or.inl ⟨rfl, one_mul w ▸ h⟩\n  · exact or.inr ⟨rfl, neg_inj.mp (neg_one_mul w ▸ h)⟩\n#align eq_one_or_neg_one_of_mul_eq_neg_one' eq_one_or_neg_one_of_mul_eq_neg_one'\n\n",
+ "eq_one_or_neg_one_of_mul_eq_neg_one":
+ "theorem eq_one_or_neg_one_of_mul_eq_neg_one {z w : ℤ} (h : z * w = -1) : z = 1 ∨ z = -1 :=\n  or.elim (eq_one_or_neg_one_of_mul_eq_neg_one' h) (fun H => or.inl H.1) fun H => or.inr H.1\n#align eq_one_or_neg_one_of_mul_eq_neg_one eq_one_or_neg_one_of_mul_eq_neg_one\n\n"}

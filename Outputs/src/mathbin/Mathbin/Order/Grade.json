@@ -1,0 +1,34 @@
+{"is_min_grade_iff":
+ "@[simp]\ntheorem is_min_grade_iff : is_min (grade 𝕆 a) ↔ is_min a :=\n  ⟨grade_strict_mono.is_min_of_apply, is_min.grade _⟩\n#align is_min_grade_iff is_min_grade_iff\n\n",
+ "is_max_grade_iff":
+ "@[simp]\ntheorem is_max_grade_iff : is_max (grade 𝕆 a) ↔ is_max a :=\n  ⟨grade_strict_mono.is_max_of_apply, is_max.grade _⟩\n#align is_max_grade_iff is_max_grade_iff\n\n",
+ "grade_top":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n@[simp]\ntheorem grade_top [OrderTop 𝕆] [OrderTop α] [grade_max_order 𝕆 α] : grade 𝕆 («expr⊤» : α) = «expr⊤» :=\n  (isMax_top.grade _).eq_top\n#align grade_top grade_top\n\n",
+ "grade_to_dual":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵈ» -/\n@[simp]\ntheorem grade_to_dual [grade_order 𝕆 α] (a : α) : grade («expr ᵒᵈ» 𝕆) (toDual a) = toDual (grade 𝕆 a) :=\n  rfl\n#align grade_to_dual grade_to_dual\n\n",
+ "grade_strict_mono":
+ "theorem grade_strict_mono : strict_mono (grade 𝕆 : α → 𝕆) :=\n  grade_order.grade_strict_mono\n#align grade_strict_mono grade_strict_mono\n\n",
+ "grade_self":
+ "@[simp]\ntheorem grade_self (a : α) : grade α a = a :=\n  rfl\n#align grade_self grade_self\n\n",
+ "grade_of_dual":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵈ» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵈ» -/\n@[simp]\ntheorem grade_of_dual [grade_order 𝕆 α] (a : «expr ᵒᵈ» α) : grade 𝕆 (ofDual a) = ofDual (grade («expr ᵒᵈ» 𝕆) a) :=\n  rfl\n#align grade_of_dual grade_of_dual\n\n",
+ "grade_ne_grade_iff":
+ "theorem grade_ne_grade_iff : grade 𝕆 a ≠ grade 𝕆 b ↔ a ≠ b :=\n  grade_injective.ne_iff\n#align grade_ne_grade_iff grade_ne_grade_iff\n\n",
+ "grade_mono":
+ "-- graded order\ntheorem grade_mono [partial_order α] [grade_order 𝕆 α] : monotone (grade 𝕆 : α → 𝕆) :=\n  grade_strict_mono.monotone\n#align grade_mono grade_mono\n\n",
+ "grade_lt_grade_iff":
+ "@[simp]\ntheorem grade_lt_grade_iff : grade 𝕆 a < grade 𝕆 b ↔ a < b :=\n  grade_strict_mono.lt_iff_lt\n#align grade_lt_grade_iff grade_lt_grade_iff\n\n",
+ "grade_le_grade_iff":
+ "@[simp]\ntheorem grade_le_grade_iff : grade 𝕆 a ≤ grade 𝕆 b ↔ a ≤ b :=\n  grade_strict_mono.le_iff_le\n#align grade_le_grade_iff grade_le_grade_iff\n\n",
+ "grade_injective":
+ "-- graded order\ntheorem grade_injective : function.injective (grade 𝕆 : α → 𝕆) :=\n  grade_strict_mono.injective\n#align grade_injective grade_injective\n\n",
+ "grade_eq_grade_iff":
+ "@[simp]\ntheorem grade_eq_grade_iff : grade 𝕆 a = grade 𝕆 b ↔ a = b :=\n  grade_injective.eq_iff\n#align grade_eq_grade_iff grade_eq_grade_iff\n\n",
+ "grade_covby_grade_iff":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⋖ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⋖ » -/\ntheorem grade_covby_grade_iff : «expr ⋖ » (grade 𝕆 a) (grade 𝕆 b) ↔ «expr ⋖ » a b :=\n  (covby_iff_lt_covby_grade.trans <| and_iff_right_of_imp fun h => grade_lt_grade_iff.1 h.1).symm\n#align grade_covby_grade_iff grade_covby_grade_iff\n\n",
+ "grade_bot":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n-- graded order\n-- grading\n@[simp]\ntheorem grade_bot [OrderBot 𝕆] [OrderBot α] [grade_min_order 𝕆 α] : grade 𝕆 («expr⊥» : α) = «expr⊥» :=\n  (isMin_bot.grade _).eq_bot\n#align grade_bot grade_bot\n\n",
+ "grade":
+ "protected theorem is_max.grade (h : is_max a) : is_max (grade 𝕆 a) :=\n  grade_max_order.is_max_grade h\n#align is_max.grade is_max.grade\n\n",
+ "covby_iff_lt_covby_grade":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⋖ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⋖ » -/\ntheorem covby_iff_lt_covby_grade : «expr ⋖ » a b ↔ a < b ∧ «expr ⋖ » (grade 𝕆 a) (grade 𝕆 b) :=\n  ⟨fun h => ⟨h.1, h.grade _⟩, and.imp_right fun h c ha hb => h.2 (grade_strict_mono ha) <| grade_strict_mono hb⟩\n#align covby_iff_lt_covby_grade covby_iff_lt_covby_grade\n\n"}

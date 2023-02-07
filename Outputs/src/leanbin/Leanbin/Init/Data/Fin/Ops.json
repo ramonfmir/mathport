@@ -1,0 +1,26 @@
+{"val_zero":
+ "theorem val_zero : (0 : fin (succ n)).val = 0 :=\n  rfl\n#align val_zero val_zero\n\n",
+ "sublt":
+ "private theorem sublt {a b n : nat} (h : a < n) : a - b < n :=\n  lt_of_le_of_lt (nat.sub_le a b) h\n#align sublt sublt\n\n",
+ "sub_def":
+ "theorem sub_def (a b : fin n) : (a - b).val = (a.val + (n - b.val)) % n := by cases a <;> cases b <;> rfl\n#align sub_def sub_def\n\n",
+ "of_nat_zero":
+ "theorem of_nat_zero : @of_nat n 0 = 0 :=\n  rfl\n#align of_nat_zero of_nat_zero\n\n",
+ "mul_def":
+ "theorem mul_def (a b : fin n) : (a * b).val = a.val * b.val % n :=\n  show (fin.mul a b).val = a.val * b.val % n by cases a <;> cases b <;> simp [fin.mul]\n#align mul_def mul_def\n\n",
+ "modlt":
+ "private theorem modlt {a b n : nat} (h₁ : a < n) (h₂ : b < n) : a % b < n :=\n  by\n  cases' b with b\n  · simp [mod_zero]\n    assumption\n  · have h : a % succ b < succ b\n    apply nat.mod_lt _ (nat.zero_lt_succ _)\n    exact lt_trans h h₂\n#align modlt modlt\n\n",
+ "mod_def":
+ "theorem mod_def (a b : fin n) : (a % b).val = a.val % b.val :=\n  show (fin.mod a b).val = a.val % b.val by cases a <;> cases b <;> simp [fin.mod]\n#align mod_def mod_def\n\n",
+ "mlt":
+ "/-\nCopyright (c) 2017 Microsoft Corporation. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthor: Leonardo de Moura\n-/\nprivate theorem mlt {n b : nat} : ∀ {a}, n > a → b % n < n\n  | 0, h => nat.mod_lt _ h\n  | a + 1, h =>\n    have : n > 0 := lt_trans (nat.zero_lt_succ _) h\n    nat.mod_lt _ this\n#align mlt mlt\n\n",
+ "lt_def":
+ "theorem lt_def (a b : fin n) : (a < b) = (a.val < b.val) :=\n  show fin.lt a b = (a.val < b.val) by cases a <;> cases b <;> simp [fin.lt]\n#align lt_def lt_def\n\n",
+ "le_def":
+ "theorem le_def (a b : fin n) : (a ≤ b) = (a.val ≤ b.val) :=\n  show fin.le a b = (a.val ≤ b.val) by cases a <;> cases b <;> simp [fin.le]\n#align le_def le_def\n\n",
+ "divlt":
+ "private theorem divlt {a b n : nat} (h : a < n) : a / b < n :=\n  lt_of_le_of_lt (nat.div_le_self a b) h\n#align divlt divlt\n\n",
+ "div_def":
+ "theorem div_def (a b : fin n) : (a / b).val = a.val / b.val :=\n  show (fin.div a b).val = a.val / b.val by cases a <;> cases b <;> simp [fin.div]\n#align div_def div_def\n\n",
+ "add_def":
+ "theorem add_def (a b : fin n) : (a + b).val = (a.val + b.val) % n :=\n  show (fin.add a b).val = (a.val + b.val) % n by cases a <;> cases b <;> simp [fin.add]\n#align add_def add_def\n\n"}

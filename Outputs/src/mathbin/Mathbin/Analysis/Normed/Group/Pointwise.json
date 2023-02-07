@@ -1,0 +1,86 @@
+{"smul_closed_ball_one":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n@[simp, to_additive]\ntheorem smul_closed_ball_one : «expr • » x (closed_ball 1 δ) = closed_ball x δ :=\n  by\n  ext\n  simp [mem_smul_set_iff_inv_smul_mem, inv_mul_eq_div, dist_eq_norm_div]\n#align smul_closed_ball_one smul_closed_ball_one\n\n",
+ "smul_ball_one":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n@[to_additive]\ntheorem smul_ball_one : «expr • » x (ball 1 δ) = ball x δ :=\n  by\n  ext\n  simp [mem_smul_set_iff_inv_smul_mem, inv_mul_eq_div, dist_eq_norm_div]\n#align smul_ball_one smul_ball_one\n\n",
+ "singleton_mul_closed_ball_one":
+ "@[to_additive]\ntheorem singleton_mul_closed_ball_one : {x} * closed_ball 1 δ = closed_ball x δ := by simp\n#align singleton_mul_closed_ball_one singleton_mul_closed_ball_one\n\n",
+ "singleton_mul_closed_ball":
+ "@[simp, to_additive]\ntheorem singleton_mul_closed_ball : {x} * closed_ball y δ = closed_ball (x * y) δ := by\n  simp only [mul_comm y x, preimage_mul_closed_ball, image_mul_left, singleton_mul, div_inv_eq_mul]\n#align singleton_mul_closed_ball singleton_mul_closed_ball\n\n",
+ "singleton_mul_ball_one":
+ "@[to_additive]\ntheorem singleton_mul_ball_one : {x} * ball 1 δ = ball x δ := by simp\n#align singleton_mul_ball_one singleton_mul_ball_one\n\n",
+ "singleton_mul_ball":
+ "@[to_additive]\ntheorem singleton_mul_ball : {x} * ball y δ = ball (x * y) δ := by\n  simp only [preimage_mul_ball, image_mul_left, singleton_mul, div_inv_eq_mul, mul_comm y x]\n#align singleton_mul_ball singleton_mul_ball\n\n",
+ "singleton_div_closed_ball_one":
+ "@[to_additive]\ntheorem singleton_div_closed_ball_one : {x} / closed_ball 1 δ = closed_ball x δ := by simp\n#align singleton_div_closed_ball_one singleton_div_closed_ball_one\n\n",
+ "singleton_div_closed_ball":
+ "@[simp, to_additive]\ntheorem singleton_div_closed_ball : {x} / closed_ball y δ = closed_ball (x / y) δ := by\n  simp_rw [div_eq_mul_inv, inv_closed_ball, singleton_mul_closed_ball]\n#align singleton_div_closed_ball singleton_div_closed_ball\n\n",
+ "singleton_div_ball_one":
+ "@[to_additive]\ntheorem singleton_div_ball_one : {x} / ball 1 δ = ball x δ := by simp [singleton_div_ball]\n#align singleton_div_ball_one singleton_div_ball_one\n\n",
+ "singleton_div_ball":
+ "@[to_additive]\ntheorem singleton_div_ball : {x} / ball y δ = ball (x / y) δ := by\n  simp_rw [div_eq_mul_inv, inv_ball, singleton_mul_ball]\n#align singleton_div_ball singleton_div_ball\n\n",
+ "mul_closed_ball_one":
+ "@[to_additive]\ntheorem is_compact.mul_closed_ball_one (hs : is_compact s) (hδ : 0 ≤ δ) : s * closed_ball 1 δ = cthickening δ s :=\n  by\n  rw [hs.cthickening_eq_bUnion_closed_ball hδ]\n  ext x\n  simp only [mem_mul, dist_eq_norm_div, exists_prop, mem_Union, mem_closed_ball, exists_and_left,\n    mem_closed_ball_one_iff, ← eq_div_iff_mul_eq'', exists_eq_right]\n#align is_compact.mul_closed_ball_one is_compact.mul_closed_ball_one\n\n",
+ "mul_closed_ball":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n@[to_additive]\ntheorem is_compact.mul_closed_ball (hs : is_compact s) (hδ : 0 ≤ δ) (x : E) :\n    s * closed_ball x δ = «expr • » x (cthickening δ s) := by\n  rw [← smul_closed_ball_one, mul_smul_comm, hs.mul_closed_ball_one hδ]\n#align is_compact.mul_closed_ball is_compact.mul_closed_ball\n\n",
+ "mul_ball_one":
+ "@[to_additive]\ntheorem mul_ball_one : s * ball 1 δ = thickening δ s :=\n  by\n  rw [thickening_eq_bUnion_ball]\n  convert Union₂_mul (fun x (_ : x ∈ s) => {x}) (ball (1 : E) δ)\n  exact s.bUnion_of_singleton.symm\n  ext (x y)\n  simp_rw [singleton_mul_ball, mul_one]\n#align mul_ball_one mul_ball_one\n\n",
+ "mul_ball":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n@[simp, to_additive]\ntheorem mul_ball : s * ball x δ = «expr • » x (thickening δ s) := by rw [← smul_ball_one, mul_smul_comm, mul_ball_one]\n#align mul_ball mul_ball\n\n",
+ "mul":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr‖ ‖» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr‖ ‖» -/\n/-\nCopyright (c) 2021 Sébastien Gouëzel. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Sébastien Gouëzel, Yaël Dillies\n-/\n@[to_additive]\ntheorem metric.bounded.mul (hs : bounded s) (ht : bounded t) : bounded (s * t) :=\n  by\n  obtain ⟨Rs, hRs⟩ : ∃ R, ∀ x ∈ s, «expr‖ ‖» x ≤ R := hs.exists_norm_le'\n  obtain ⟨Rt, hRt⟩ : ∃ R, ∀ x ∈ t, «expr‖ ‖» x ≤ R := ht.exists_norm_le'\n  refine' bounded_iff_forall_norm_le'.2 ⟨Rs + Rt, _⟩\n  rintro z ⟨x, y, hx, hy, rfl⟩\n  exact norm_mul_le_of_le (hRs x hx) (hRt y hy)\n#align metric.bounded.mul metric.bounded.mul\n\n",
+ "inv_thickening":
+ "@[simp, to_additive]\ntheorem inv_thickening : (thickening δ s)⁻¹ = thickening δ s⁻¹ :=\n  by\n  simp_rw [thickening, ← inf_edist_inv]\n  rfl\n#align inv_thickening inv_thickening\n\n",
+ "inv_cthickening":
+ "@[simp, to_additive]\ntheorem inv_cthickening : (cthickening δ s)⁻¹ = cthickening δ s⁻¹ :=\n  by\n  simp_rw [cthickening, ← inf_edist_inv]\n  rfl\n#align inv_cthickening inv_cthickening\n\n",
+ "inv_closed_ball":
+ "@[simp, to_additive]\ntheorem inv_closed_ball : (closed_ball x δ)⁻¹ = closed_ball x⁻¹ δ :=\n  by\n  simp_rw [closed_ball, ← dist_inv]\n  rfl\n#align inv_closed_ball inv_closed_ball\n\n",
+ "inv_ball":
+ "@[simp, to_additive]\ntheorem inv_ball : (ball x δ)⁻¹ = ball x⁻¹ δ :=\n  by\n  simp_rw [ball, ← dist_inv]\n  rfl\n#align inv_ball inv_ball\n\n",
+ "inv":
+ "@[to_additive]\ntheorem metric.bounded.inv : bounded s → bounded s⁻¹ :=\n  by\n  simp_rw [bounded_iff_forall_norm_le', ← image_inv, ball_image_iff, norm_inv']\n  exact id\n#align metric.bounded.inv metric.bounded.inv\n\n",
+ "inf_edist_inv_inv":
+ "@[simp, to_additive]\ntheorem inf_edist_inv_inv (x : E) (s : set E) : inf_edist x⁻¹ s⁻¹ = inf_edist x s := by rw [inf_edist_inv, inv_inv]\n#align inf_edist_inv_inv inf_edist_inv_inv\n\n",
+ "inf_edist_inv":
+ "@[to_additive]\ntheorem inf_edist_inv (x : E) (s : set E) : inf_edist x⁻¹ s = inf_edist x s⁻¹ :=\n  eq_of_forall_le_iff fun r => by simp_rw [le_inf_edist, ← image_inv, ball_image_iff, edist_inv]\n#align inf_edist_inv inf_edist_inv\n\n",
+ "div_closed_ball_one":
+ "@[to_additive]\ntheorem is_compact.div_closed_ball_one (hs : is_compact s) (hδ : 0 ≤ δ) : s / closed_ball 1 δ = cthickening δ s := by\n  simp [div_eq_mul_inv, hs.mul_closed_ball_one hδ]\n#align is_compact.div_closed_ball_one is_compact.div_closed_ball_one\n\n",
+ "div_closed_ball":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n@[to_additive]\ntheorem is_compact.div_closed_ball (hs : is_compact s) (hδ : 0 ≤ δ) (x : E) :\n    s / closed_ball x δ = «expr • » x⁻¹ (cthickening δ s) := by simp [div_eq_mul_inv, mul_comm, hs.mul_closed_ball hδ]\n#align is_compact.div_closed_ball is_compact.div_closed_ball\n\n",
+ "div_ball_one":
+ "@[to_additive]\ntheorem div_ball_one : s / ball 1 δ = thickening δ s := by simp [div_eq_mul_inv, mul_ball_one]\n#align div_ball_one div_ball_one\n\n",
+ "div_ball":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n@[simp, to_additive]\ntheorem div_ball : s / ball x δ = «expr • » x⁻¹ (thickening δ s) := by simp [div_eq_mul_inv]\n#align div_ball div_ball\n\n",
+ "div":
+ "@[to_additive]\ntheorem metric.bounded.div (hs : bounded s) (ht : bounded t) : bounded (s / t) :=\n  (div_eq_mul_inv _ _).symm.subst <| hs.mul ht.inv\n#align metric.bounded.div metric.bounded.div\n\n",
+ "closed_ball_one_mul_singleton":
+ "@[to_additive]\ntheorem closed_ball_one_mul_singleton : closed_ball 1 δ * {x} = closed_ball x δ := by simp\n#align closed_ball_one_mul_singleton closed_ball_one_mul_singleton\n\n",
+ "closed_ball_one_mul":
+ "@[to_additive]\ntheorem is_compact.closed_ball_one_mul (hs : is_compact s) (hδ : 0 ≤ δ) : closed_ball 1 δ * s = cthickening δ s := by\n  rw [mul_comm, hs.mul_closed_ball_one hδ]\n#align is_compact.closed_ball_one_mul is_compact.closed_ball_one_mul\n\n",
+ "closed_ball_one_div_singleton":
+ "@[to_additive]\ntheorem closed_ball_one_div_singleton : closed_ball 1 δ / {x} = closed_ball x⁻¹ δ := by simp\n#align closed_ball_one_div_singleton closed_ball_one_div_singleton\n\n",
+ "closed_ball_one_div":
+ "@[to_additive]\ntheorem is_compact.closed_ball_one_div (hs : is_compact s) (hδ : 0 ≤ δ) : closed_ball 1 δ / s = cthickening δ s⁻¹ := by\n  simp [div_eq_mul_inv, mul_comm, hs.inv.mul_closed_ball_one hδ]\n#align is_compact.closed_ball_one_div is_compact.closed_ball_one_div\n\n",
+ "closed_ball_mul_singleton":
+ "@[simp, to_additive]\ntheorem closed_ball_mul_singleton : closed_ball x δ * {y} = closed_ball (x * y) δ := by\n  simp [mul_comm _ {y}, mul_comm y]\n#align closed_ball_mul_singleton closed_ball_mul_singleton\n\n",
+ "closed_ball_mul":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n@[to_additive]\ntheorem is_compact.closed_ball_mul (hs : is_compact s) (hδ : 0 ≤ δ) (x : E) :\n    closed_ball x δ * s = «expr • » x (cthickening δ s) := by rw [mul_comm, hs.mul_closed_ball hδ]\n#align is_compact.closed_ball_mul is_compact.closed_ball_mul\n\n",
+ "closed_ball_div_singleton":
+ "@[simp, to_additive]\ntheorem closed_ball_div_singleton : closed_ball x δ / {y} = closed_ball (x / y) δ := by simp [div_eq_mul_inv]\n#align closed_ball_div_singleton closed_ball_div_singleton\n\n",
+ "closed_ball_div":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n@[to_additive]\ntheorem is_compact.closed_ball_div (hs : is_compact s) (hδ : 0 ≤ δ) (x : E) :\n    closed_ball x δ * s = «expr • » x (cthickening δ s) := by simp [div_eq_mul_inv, mul_comm, hs.closed_ball_mul hδ]\n#align is_compact.closed_ball_div is_compact.closed_ball_div\n\n",
+ "ball_one_mul_singleton":
+ "@[to_additive]\ntheorem ball_one_mul_singleton : ball 1 δ * {x} = ball x δ := by simp [ball_mul_singleton]\n#align ball_one_mul_singleton ball_one_mul_singleton\n\n",
+ "ball_one_div_singleton":
+ "@[to_additive]\ntheorem ball_one_div_singleton : ball 1 δ / {x} = ball x⁻¹ δ := by simp [ball_div_singleton]\n#align ball_one_div_singleton ball_one_div_singleton\n\n",
+ "ball_mul_singleton":
+ "@[to_additive]\ntheorem ball_mul_singleton : ball x δ * {y} = ball (x * y) δ := by rw [mul_comm, singleton_mul_ball, mul_comm y]\n#align ball_mul_singleton ball_mul_singleton\n\n",
+ "ball_mul_one":
+ "@[to_additive]\ntheorem ball_mul_one : ball 1 δ * s = thickening δ s := by rw [mul_comm, mul_ball_one]\n#align ball_mul_one ball_mul_one\n\n",
+ "ball_mul":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n@[simp, to_additive]\ntheorem ball_mul : ball x δ * s = «expr • » x (thickening δ s) := by rw [mul_comm, mul_ball]\n#align ball_mul ball_mul\n\n",
+ "ball_div_singleton":
+ "@[to_additive]\ntheorem ball_div_singleton : ball x δ / {y} = ball (x / y) δ := by\n  simp_rw [div_eq_mul_inv, inv_singleton, ball_mul_singleton]\n#align ball_div_singleton ball_div_singleton\n\n",
+ "ball_div_one":
+ "@[to_additive]\ntheorem ball_div_one : ball 1 δ / s = thickening δ s⁻¹ := by simp [div_eq_mul_inv, ball_mul_one]\n#align ball_div_one ball_div_one\n\n",
+ "ball_div":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n@[simp, to_additive]\ntheorem ball_div : ball x δ / s = «expr • » x (thickening δ s⁻¹) := by simp [div_eq_mul_inv]\n#align ball_div ball_div\n\n"}

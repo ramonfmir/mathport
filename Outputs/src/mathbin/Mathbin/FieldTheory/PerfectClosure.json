@@ -1,0 +1,74 @@
+{"zero_def":
+ "theorem zero_def : (0 : perfect_closure K p) = mk K p (0, 0) :=\n  rfl\n#align zero_def zero_def\n\n",
+ "sound":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ^[ ]» -/\ntheorem r.sound (m n : ℕ) (x y : K) (H : («expr ^[ ]» (frobenius K p) m) x = y) : mk K p (n, x) = mk K p (m + n, y) :=\n  by\n  subst H <;> induction' m with m ih <;> [simp only [zero_add, iterate_zero_apply],\n        rw [ih, nat.succ_add, iterate_succ']] <;>\n      apply quot.sound <;>\n    apply r.intro\n#align r.sound r.sound\n\n",
+ "right_inverse_pth_root_frobenius":
+ "theorem right_inverse_pth_root_frobenius : function.right_inverse (pth_root R p) (frobenius R p) :=\n  frobenius_pth_root\n#align right_inverse_pth_root_frobenius right_inverse_pth_root_frobenius\n\n",
+ "quot_mk_eq_mk":
+ "@[simp]\ntheorem quot_mk_eq_mk (x : ℕ × K) : (Quot.mk (r K p) x : perfect_closure K p) = mk K p x :=\n  rfl\n#align quot_mk_eq_mk quot_mk_eq_mk\n\n",
+ "pth_root_pow_p'":
+ "@[simp]\ntheorem pth_root_pow_p' (x : R) : pth_root R p (x ^ p) = x :=\n  pth_root_frobenius x\n#align pth_root_pow_p' pth_root_pow_p'\n\n",
+ "pth_root_pow_p":
+ "@[simp]\ntheorem pth_root_pow_p (x : R) : pth_root R p x ^ p = x :=\n  frobenius_pth_root x\n#align pth_root_pow_p pth_root_pow_p\n\n",
+ "pth_root_frobenius":
+ "@[simp]\ntheorem pth_root_frobenius (x : R) : pth_root R p (frobenius R p x) = x :=\n  (frobenius_equiv R p).symm_apply_apply x\n#align pth_root_frobenius pth_root_frobenius\n\n",
+ "pth_root_eq_iff":
+ "theorem pth_root_eq_iff {x y : R} : pth_root R p x = y ↔ x = frobenius R p y :=\n  (frobenius_equiv R p).to_equiv.symm_apply_eq\n#align pth_root_eq_iff pth_root_eq_iff\n\n",
+ "one_def":
+ "theorem one_def : (1 : perfect_closure K p) = mk K p (0, 1) :=\n  rfl\n#align one_def one_def\n\n",
+ "of_apply":
+ "theorem of_apply (x : K) : of K p x = mk _ _ (0, x) :=\n  rfl\n#align of_apply of_apply\n\n",
+ "neg_mk":
+ "@[simp]\ntheorem neg_mk (x : ℕ × K) : -mk K p x = mk K p (x.1, -x.2) :=\n  rfl\n#align neg_mk neg_mk\n\n",
+ "nat_cast_eq_iff":
+ "theorem nat_cast_eq_iff (x y : ℕ) : (x : perfect_closure K p) = y ↔ (x : K) = y :=\n  by\n  constructor <;> intro H\n  · rw [nat_cast K p 0, nat_cast K p 0, eq_iff'] at H\n    cases' H with z H\n    simpa only [zero_add, iterate_fixed (frobenius_nat_cast K p _)] using H\n  rw [nat_cast K p 0, nat_cast K p 0, H]\n#align nat_cast_eq_iff nat_cast_eq_iff\n\n",
+ "nat_cast":
+ "theorem nat_cast (n x : ℕ) : (x : perfect_closure K p) = mk K p (n, x) :=\n  by\n  induction' n with n ih\n  · induction' x with x ih\n    · simp\n    rw [Nat.cast_succ, Nat.cast_succ, ih]\n    rfl\n  rw [ih]; apply quot.sound\n  conv =>\n    congr\n    skip\n    skip\n    rw [← frobenius_nat_cast K p x]\n  apply r.intro\n#align nat_cast nat_cast\n\n",
+ "mul_aux_right":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ^[ ]» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ^[ ]» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ^[ ]» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ^[ ]» -/\nprivate theorem mul_aux_right (x y1 y2 : ℕ × K) (H : r K p y1 y2) :\n    mk K p (x.1 + y1.1, («expr ^[ ]» (frobenius K p) y1.1) x.2 * («expr ^[ ]» (frobenius K p) x.1) y1.2) =\n      mk K p (x.1 + y2.1, («expr ^[ ]» (frobenius K p) y2.1) x.2 * («expr ^[ ]» (frobenius K p) x.1) y2.2) :=\n  match y1, y2, H with\n  | _, _, r.intro n y =>\n    quot.sound <| by rw [← iterate_succ_apply, iterate_succ', iterate_succ', ← frobenius_mul] <;> apply r.intro\n#align mul_aux_right mul_aux_right\n\n",
+ "mul_aux_left":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ^[ ]» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ^[ ]» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ^[ ]» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ^[ ]» -/\nprivate theorem mul_aux_left (x1 x2 y : ℕ × K) (H : r K p x1 x2) :\n    mk K p (x1.1 + y.1, («expr ^[ ]» (frobenius K p) y.1) x1.2 * («expr ^[ ]» (frobenius K p) x1.1) y.2) =\n      mk K p (x2.1 + y.1, («expr ^[ ]» (frobenius K p) y.1) x2.2 * («expr ^[ ]» (frobenius K p) x2.1) y.2) :=\n  match x1, x2, H with\n  | _, _, r.intro n x =>\n    quot.sound <| by\n      rw [← iterate_succ_apply, iterate_succ', iterate_succ', ← frobenius_mul, nat.succ_add] <;> apply r.intro\n#align mul_aux_left mul_aux_left\n\n",
+ "mk_zero_zero":
+ "@[simp]\ntheorem mk_zero_zero : mk K p (0, 0) = 0 :=\n  rfl\n#align mk_zero_zero mk_zero_zero\n\n",
+ "mk_zero":
+ "theorem mk_zero (n : ℕ) : mk K p (n, 0) = 0 := by\n  induction' n with n ih <;> [rfl, rw [← ih]] <;> symm <;> apply quot.sound <;> have := r.intro n (0 : K) <;>\n    rwa [frobenius_zero K p] at this\n#align mk_zero mk_zero\n\n",
+ "mk_mul_mk":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ^[ ]» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ^[ ]» -/\n@[simp]\ntheorem mk_mul_mk (x y : ℕ × K) :\n    mk K p x * mk K p y =\n      mk K p (x.1 + y.1, («expr ^[ ]» (frobenius K p) y.1) x.2 * («expr ^[ ]» (frobenius K p) x.1) y.2) :=\n  rfl\n#align mk_mul_mk mk_mul_mk\n\n",
+ "mk_add_mk":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ^[ ]» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ^[ ]» -/\n@[simp]\ntheorem mk_add_mk (x y : ℕ × K) :\n    mk K p x + mk K p y =\n      mk K p (x.1 + y.1, («expr ^[ ]» (frobenius K p) y.1) x.2 + («expr ^[ ]» (frobenius K p) x.1) y.2) :=\n  rfl\n#align mk_add_mk mk_add_mk\n\n",
+ "map_pth_root":
+ "theorem ring_hom.map_pth_root (x : R) : g (pth_root R p x) = pth_root S p (g x) :=\n  g.to_monoid_hom.map_pth_root x\n#align ring_hom.map_pth_root ring_hom.map_pth_root\n\n",
+ "map_iterate_pth_root":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ^[ ]» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ^[ ]» -/\ntheorem ring_hom.map_iterate_pth_root (x : R) (n : ℕ) :\n    g ((«expr ^[ ]» (pth_root R p) n) x) = («expr ^[ ]» (pth_root S p) n) (g x) :=\n  g.to_monoid_hom.map_iterate_pth_root x n\n#align ring_hom.map_iterate_pth_root ring_hom.map_iterate_pth_root\n\n",
+ "lift_on_mk":
+ "@[simp]\ntheorem lift_on_mk {L : Sort _} (f : ℕ × K → L) (hf : ∀ x y, r K p x y → f x = f y) (x : ℕ × K) :\n    (mk K p x).lift_on f hf = f x :=\n  rfl\n#align lift_on_mk lift_on_mk\n\n",
+ "left_inverse_pth_root_frobenius":
+ "theorem left_inverse_pth_root_frobenius : left_inverse (pth_root R p) (frobenius R p) :=\n  pth_root_frobenius\n#align left_inverse_pth_root_frobenius left_inverse_pth_root_frobenius\n\n",
+ "int_cast":
+ "theorem int_cast (x : ℤ) : (x : perfect_closure K p) = mk K p (0, x) := by\n  induction x <;> simp only [int.cast_of_nat, Int.cast_negSucc, nat_cast K p 0] <;> rfl\n#align int_cast int_cast\n\n",
+ "injective_pow_p":
+ "theorem injective_pow_p {x y : R} (hxy : x ^ p = y ^ p) : x = y :=\n  left_inverse_pth_root_frobenius.injective hxy\n#align injective_pow_p injective_pow_p\n\n",
+ "induction_on":
+ "@[elab_as_elim]\ntheorem induction_on (x : perfect_closure K p) {q : perfect_closure K p → Prop} (h : ∀ x, q (mk K p x)) : q x :=\n  Quot.inductionOn x h\n#align induction_on induction_on\n\n",
+ "frobenius_pth_root":
+ "@[simp]\ntheorem frobenius_pth_root (x : R) : frobenius R p (pth_root R p x) = x :=\n  (frobenius_equiv R p).apply_symm_apply x\n#align frobenius_pth_root frobenius_pth_root\n\n",
+ "frobenius_mk":
+ "theorem frobenius_mk (x : ℕ × K) :\n    (frobenius (perfect_closure K p) p : perfect_closure K p → perfect_closure K p) (mk K p x) =\n      mk _ _ (x.1, x.2 ^ p) :=\n  by\n  simp only [frobenius_def]\n  cases' x with n x\n  dsimp only\n  suffices ∀ p' : ℕ, mk K p (n, x) ^ p' = mk K p (n, x ^ p') by apply this\n  intro p\n  induction' p with p ih\n  case zero => apply r.sound; rw [(frobenius _ _).iterate_map_one, pow_zero]\n  case succ =>\n    rw [pow_succ, ih]\n    symm\n    apply r.sound\n    simp only [pow_succ, (frobenius _ _).iterate_map_mul]\n#align frobenius_mk frobenius_mk\n\n",
+ "eq_pth_root_iff":
+ "theorem eq_pth_root_iff {x y : R} : x = pth_root R p y ↔ frobenius R p x = y :=\n  (frobenius_equiv R p).to_equiv.eq_symm_apply\n#align eq_pth_root_iff eq_pth_root_iff\n\n",
+ "eq_pth_root":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ^[ ]» -/\ntheorem eq_pth_root (x : ℕ × K) : mk K p x = («expr ^[ ]» (pth_root (perfect_closure K p) p) x.1) (of K p x.2) :=\n  by\n  rcases x with ⟨m, x⟩\n  induction' m with m ih; · rfl\n  rw [iterate_succ_apply', ← ih] <;> rfl\n#align eq_pth_root eq_pth_root\n\n",
+ "eq_iff'":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ^[ ]» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ^[ ]» -/\ntheorem eq_iff' (x y : ℕ × K) :\n    mk K p x = mk K p y ↔\n      ∃ z, («expr ^[ ]» (frobenius K p) (y.1 + z)) x.2 = («expr ^[ ]» (frobenius K p) (x.1 + z)) y.2 :=\n  by\n  constructor\n  · intro H\n    replace H := Quot.exact _ H\n    induction H\n    case rel x y H => cases' H with n x; exact ⟨0, rfl⟩\n    case refl H => exact ⟨0, rfl⟩\n    case symm x y H ih => cases' ih with w ih; exact ⟨w, ih.symm⟩\n    case trans x y z H1 H2 ih1 ih2 =>\n      cases' ih1 with z1 ih1\n      cases' ih2 with z2 ih2\n      exists z2 + (y.1 + z1)\n      rw [← add_assoc, iterate_add_apply, ih1]\n      rw [← iterate_add_apply, add_comm, iterate_add_apply, ih2]\n      rw [← iterate_add_apply]\n      simp only [add_comm, add_left_comm]\n  intro H\n  cases' x with m x\n  cases' y with n y\n  cases' H with z H; dsimp only at H\n  rw [r.sound K p (n + z) m x _ rfl, r.sound K p (m + z) n y _ rfl, H]\n  rw [add_assoc, add_comm, add_comm z]\n#align eq_iff' eq_iff'\n\n",
+ "eq_iff":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ^[ ]» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ^[ ]» -/\ntheorem eq_iff [CommRing K] [IsDomain K] (p : ℕ) [fact p.prime] [char_p K p] (x y : ℕ × K) :\n    Quot.mk (r K p) x = Quot.mk (r K p) y ↔\n      («expr ^[ ]» (frobenius K p) y.1) x.2 = («expr ^[ ]» (frobenius K p) x.1) y.2 :=\n  (eq_iff' K p x y).trans\n    ⟨fun ⟨z, H⟩ => (frobenius_inj K p).iterate z <| by simpa only [add_comm, iterate_add] using H, fun H => ⟨0, H⟩⟩\n#align eq_iff eq_iff\n\n",
+ "commute_frobenius_pth_root":
+ "theorem commute_frobenius_pth_root : function.commute (frobenius R p) (pth_root R p) := fun x =>\n  (frobenius_pth_root x).trans (pth_root_frobenius x).symm\n#align commute_frobenius_pth_root commute_frobenius_pth_root\n\n",
+ "coe_frobenius_equiv_symm":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n@[simp]\ntheorem coe_frobenius_equiv_symm : «expr⇑ » (frobenius_equiv R p).symm = pth_root R p :=\n  rfl\n#align coe_frobenius_equiv_symm coe_frobenius_equiv_symm\n\n",
+ "coe_frobenius_equiv":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n/-\nCopyright (c) 2018 Kenny Lau. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Kenny Lau, Yury Kudryashov\n-/\n@[simp]\ntheorem coe_frobenius_equiv : «expr⇑ » (frobenius_equiv R p) = frobenius R p :=\n  rfl\n#align coe_frobenius_equiv coe_frobenius_equiv\n\n",
+ "add_aux_right":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ^[ ]» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ^[ ]» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ^[ ]» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ^[ ]» -/\nprivate theorem add_aux_right (x y1 y2 : ℕ × K) (H : r K p y1 y2) :\n    mk K p (x.1 + y1.1, («expr ^[ ]» (frobenius K p) y1.1) x.2 + («expr ^[ ]» (frobenius K p) x.1) y1.2) =\n      mk K p (x.1 + y2.1, («expr ^[ ]» (frobenius K p) y2.1) x.2 + («expr ^[ ]» (frobenius K p) x.1) y2.2) :=\n  match y1, y2, H with\n  | _, _, r.intro n y =>\n    quot.sound <| by rw [← iterate_succ_apply, iterate_succ', iterate_succ', ← frobenius_add] <;> apply r.intro\n#align add_aux_right add_aux_right\n\n",
+ "add_aux_left":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ^[ ]» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ^[ ]» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ^[ ]» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ^[ ]» -/\nprivate theorem add_aux_left (x1 x2 y : ℕ × K) (H : r K p x1 x2) :\n    mk K p (x1.1 + y.1, («expr ^[ ]» (frobenius K p) y.1) x1.2 + («expr ^[ ]» (frobenius K p) x1.1) y.2) =\n      mk K p (x2.1 + y.1, («expr ^[ ]» (frobenius K p) y.1) x2.2 + («expr ^[ ]» (frobenius K p) x2.1) y.2) :=\n  match x1, x2, H with\n  | _, _, r.intro n x =>\n    quot.sound <| by\n      rw [← iterate_succ_apply, iterate_succ', iterate_succ', ← frobenius_add, nat.succ_add] <;> apply r.intro\n#align add_aux_left add_aux_left\n\n"}

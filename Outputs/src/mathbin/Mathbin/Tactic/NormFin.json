@@ -1,0 +1,44 @@
+{"zero":
+ "theorem normalize_fin_lt.zero (n : ℕ) [ne_zero n] : normalize_fin_lt n 0 0 :=\n  refl _\n#align normalize_fin_lt.zero normalize_fin_lt.zero\n\n",
+ "succ":
+ "theorem normalize_fin_lt.succ {n} {a : fin n} {a' b : ℕ} (h : normalize_fin_lt n a a') (e : a' + 1 = b) :\n    normalize_fin_lt n.succ (fin.succ a) b := by simpa [normalize_fin_lt, ← e] using h\n#align normalize_fin_lt.succ normalize_fin_lt.succ\n\n",
+ "reduce":
+ "theorem normalize_fin_lt.reduce {n} {a : fin n} {n' a' b k nk : ℕ} (hn : n = n') (h : normalize_fin n a a')\n    (e1 : n' * k = nk) (e2 : nk + b = a') (hl : b < n') : normalize_fin_lt n a b :=\n  normalize_fin_lt.mk hn (h.reduce hn e1 e2) hl\n#align normalize_fin_lt.reduce normalize_fin_lt.reduce\n\n",
+ "one":
+ "theorem normalize_fin.one (n : ℕ) [ne_zero n] : normalize_fin n 1 1 :=\n  refl _\n#align normalize_fin.one normalize_fin.one\n\n",
+ "of":
+ "theorem normalize_fin_lt.of {n a b} (h : normalize_fin_lt n a b) : normalize_fin n a b :=\n  h.trans <| eq.symm <| nat.mod_eq_of_lt h.lt\n#align normalize_fin_lt.of normalize_fin_lt.of\n\n",
+ "normalize_fin_iff":
+ "theorem normalize_fin_iff {n : ℕ} [ne_zero n] {a b} : normalize_fin n a b ↔ a = Fin.ofNat'' b :=\n  iff.symm (Fin.eq_iff_veq _ _)\n#align normalize_fin_iff normalize_fin_iff\n\n",
+ "nat_add":
+ "theorem normalize_fin_lt.nat_add {n m n'} (hn : n = n') {a : fin m} {a' b : ℕ} (h : normalize_fin_lt m a a')\n    (e : n' + a' = b) : normalize_fin_lt (n + m) (@Fin.natAdd n m a) b := by simpa [normalize_fin_lt, ← e, ← hn] using h\n#align normalize_fin_lt.nat_add normalize_fin_lt.nat_add\n\n",
+ "mul":
+ "theorem normalize_fin.mul {n} {a b : fin n} {a' b' c' : ℕ} (ha : normalize_fin n a a') (hb : normalize_fin n b b')\n    (h : a' * b' = c') : normalize_fin n (a * b) c' := by\n  simp only [normalize_fin, ← h] at * <;> rw [Nat.mul_mod, ← ha, ← hb, fin.mul_def]\n#align normalize_fin.mul normalize_fin.mul\n\n",
+ "mk":
+ "theorem normalize_fin_lt.mk {n a b n'} (hn : n = n') (h : normalize_fin n a b) (h2 : b < n') : normalize_fin_lt n a b :=\n  h.trans <| nat.mod_eq_of_lt <| by rw [hn] <;> exact h2\n#align normalize_fin_lt.mk normalize_fin_lt.mk\n\n",
+ "lt":
+ "theorem normalize_fin.lt {n} {a b : fin n} {a' b' : ℕ} (ha : normalize_fin n a a') (hb : normalize_fin_lt n b b')\n    (h : a' < b') : a < b := by\n  have ha' := normalize_fin_lt.mk rfl ha (h.trans hb.lt) <;> rwa [← hb.coe, ← ha'.coe] at h\n#align normalize_fin.lt normalize_fin.lt\n\n",
+ "le":
+ "theorem normalize_fin.le {n} {a b : fin n} {a' b' : ℕ} (ha : normalize_fin n a a') (hb : normalize_fin_lt n b b')\n    (h : a' ≤ b') : a ≤ b := by\n  have ha' := normalize_fin_lt.mk rfl ha (h.trans_lt hb.lt) <;> rwa [← hb.coe, ← ha'.coe] at h\n#align normalize_fin.le normalize_fin.le\n\n",
+ "eq":
+ "theorem normalize_fin.eq {n} {a b : fin n} {c : ℕ} (ha : normalize_fin n a c) (hb : normalize_fin n b c) : a = b :=\n  fin.eq_of_veq <| ha.trans hb.symm\n#align normalize_fin.eq normalize_fin.eq\n\n",
+ "coe":
+ "/-\nCopyright (c) 2021 Yakov Pechersky All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Yakov Pechersky, Mario Carneiro\n-/\ntheorem normalize_fin_lt.coe {n} {a : fin n} {b : ℕ} (h : normalize_fin_lt n a b) : ↑a = b :=\n  h\n#align normalize_fin_lt.coe normalize_fin_lt.coe\n\n",
+ "cast_succ":
+ "theorem normalize_fin_lt.cast_succ {n} {a : fin n} {a' : ℕ} (h : normalize_fin_lt n a a') :\n    normalize_fin_lt (n + 1) (Fin.castSucc a) a' :=\n  normalize_fin_lt.cast_add h\n#align normalize_fin_lt.cast_succ normalize_fin_lt.cast_succ\n\n",
+ "cast_lt":
+ "theorem normalize_fin_lt.cast_lt {n m} {a : fin m} {ha} {a' : ℕ} (h : normalize_fin_lt m a a') :\n    normalize_fin_lt n (Fin.castLt a ha) a' := by simpa [normalize_fin_lt] using h\n#align normalize_fin_lt.cast_lt normalize_fin_lt.cast_lt\n\n",
+ "cast_le":
+ "theorem normalize_fin_lt.cast_le {n m} {nm} {a : fin m} {a' : ℕ} (h : normalize_fin_lt m a a') :\n    normalize_fin_lt n (Fin.castLe nm a) a' := by simpa [normalize_fin_lt] using h\n#align normalize_fin_lt.cast_le normalize_fin_lt.cast_le\n\n",
+ "cast_add":
+ "theorem normalize_fin_lt.cast_add {n m} {a : fin n} {a' : ℕ} (h : normalize_fin_lt n a a') :\n    normalize_fin_lt (n + m) (Fin.castAdd m a) a' := by simpa [normalize_fin_lt] using h\n#align normalize_fin_lt.cast_add normalize_fin_lt.cast_add\n\n",
+ "cast":
+ "theorem normalize_fin.cast {n m} {nm} {a : fin m} {a' : ℕ} (h : normalize_fin m a a') :\n    normalize_fin n (Fin.cast nm a) a' := by convert ← normalize_fin_lt.cast h\n#align normalize_fin.cast normalize_fin.cast\n\n",
+ "bit1":
+ "theorem normalize_fin.bit1 {n : ℕ} [ne_zero n] {a : fin n} {a' : ℕ} (h : normalize_fin n a a') :\n    normalize_fin n (bit1 a) (bit1 a') :=\n  h.bit0.add (normalize_fin.one _) rfl\n#align normalize_fin.bit1 normalize_fin.bit1\n\n",
+ "bit0":
+ "theorem normalize_fin.bit0 {n} {a : fin n} {a' : ℕ} (h : normalize_fin n a a') : normalize_fin n (bit0 a) (bit0 a') :=\n  h.add h rfl\n#align normalize_fin.bit0 normalize_fin.bit0\n\n",
+ "add_nat":
+ "theorem normalize_fin_lt.add_nat {n m m'} (hm : m = m') {a : fin n} {a' b : ℕ} (h : normalize_fin_lt n a a')\n    (e : a' + m' = b) : normalize_fin_lt (n + m) (@Fin.addNat n m a) b := by simpa [normalize_fin_lt, ← e, ← hm] using h\n#align normalize_fin_lt.add_nat normalize_fin_lt.add_nat\n\n",
+ "add":
+ "theorem normalize_fin.add {n} {a b : fin n} {a' b' c' : ℕ} (ha : normalize_fin n a a') (hb : normalize_fin n b b')\n    (h : a' + b' = c') : normalize_fin n (a + b) c' := by\n  simp only [normalize_fin, ← h] at * <;> rw [Nat.add_mod, ← ha, ← hb, fin.add_def]\n#align normalize_fin.add normalize_fin.add\n\n"}

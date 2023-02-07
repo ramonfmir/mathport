@@ -1,0 +1,30 @@
+{"unop_map_list_prod":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →* » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵐᵒᵖ» -/\n#print unop_map_list_prod /-\n/-- A morphism into the opposite monoid acts on the product by acting on the reversed elements.\n\nDeprecated, use `_root_.unop_map_list_prod` instead. -/\nprotected theorem unop_map_list_prod (f : «expr →* » M («expr ᵐᵒᵖ» N)) (l : list M) :\n    (f l.prod).unop = (l.map (mul_opposite.unop ∘ f)).reverse.prod :=\n  unop_map_list_prod f l\n#align unop_map_list_prod unop_map_list_prod\n-/\n\n",
+ "unop_list_prod":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵐᵒᵖ» -/\n#print MulOpposite.unop_list_prod /-\ntheorem MulOpposite.unop_list_prod (l : list («expr ᵐᵒᵖ» M)) : l.prod.unop = (l.map unop).reverse.prod := by\n  rw [← op_inj, op_unop, MulOpposite.op_list_prod, map_reverse, map_map, reverse_reverse, op_comp_unop, map_id]\n#align mul_opposite.unop_list_prod MulOpposite.unop_list_prod\n-/\n\n",
+ "sum_map_mul_right":
+ "theorem sum_map_mul_right [NonUnitalNonAssocSemiring R] (L : list ι) (f : ι → R) (r : R) :\n    (L.map fun b => f b * r).sum = (L.map f).sum * r :=\n  sum_map_hom L f <| AddMonoidHom.mulRight r\n#align sum_map_mul_right sum_map_mul_right\n\n",
+ "sum_map_mul_left":
+ "theorem sum_map_mul_left [NonUnitalNonAssocSemiring R] (L : list ι) (f : ι → R) (r : R) :\n    (L.map fun b => r * f b).sum = r * (L.map f).sum :=\n  sum_map_hom L f <| AddMonoidHom.mulLeft r\n#align sum_map_mul_left sum_map_mul_left\n\n",
+ "prod_eq_one_iff":
+ "@[to_additive]\ntheorem prod_eq_one_iff [CanonicallyOrderedMonoid M] (l : list M) : l.prod = 1 ↔ ∀ x ∈ l, x = (1 : M) :=\n  ⟨all_one_of_le_one_le_of_prod_eq_one fun _ _ => one_le _, fun h => by\n    rw [eq_replicate.2 ⟨rfl, h⟩, prod_replicate, one_pow]⟩\n#align prod_eq_one_iff prod_eq_one_iff\n\n",
+ "pow_card_le_prod":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵈ» -/\n@[to_additive card_nsmul_le_sum]\ntheorem pow_card_le_prod [monoid M] [preorder M] [covariant_class M M (function.swap (· * ·)) (· ≤ ·)]\n    [covariant_class M M (· * ·) (· ≤ ·)] (l : list M) (n : M) (h : ∀ x ∈ l, n ≤ x) : n ^ l.length ≤ l.prod :=\n  @prod_le_pow_card («expr ᵒᵈ» M) _ _ _ _ l n h\n#align pow_card_le_prod pow_card_le_prod\n\n",
+ "op_list_prod":
+ "theorem op_list_prod : ∀ l : list M, op l.prod = (l.map op).reverse.prod\n  | [] => rfl\n  | x :: xs => by rw [List.prod_cons, list.map_cons, List.reverse_cons', List.prod_concat, op_mul, op_list_prod]\n#align op_list_prod op_list_prod\n\n",
+ "neg_one_mem_of_prod_eq_neg_one":
+ "/-- If a product of integers is `-1`, then at least one factor must be `-1`. -/\ntheorem neg_one_mem_of_prod_eq_neg_one {l : list ℤ} (h : l.prod = -1) : (-1 : ℤ) ∈ l :=\n  by\n  obtain ⟨x, h₁, h₂⟩ := exists_mem_ne_one_of_prod_ne_one (ne_of_eq_of_ne h (by decide))\n  exact\n    or.resolve_left (int.is_unit_iff.mp (prod_is_unit_iff.mp (h.symm ▸ IsUnit.neg isUnit_one : is_unit l.prod) x h₁))\n        h₂ ▸\n      h₁\n#align neg_one_mem_of_prod_eq_neg_one neg_one_mem_of_prod_eq_neg_one\n\n",
+ "list_sum_right":
+ "/-\nCopyright (c) 2017 Johannes Hölzl. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Johannes Hölzl, Floris van Doorn, Sébastien Gouëzel, Alex J. Best\n-/\ntheorem list_sum_right [NonUnitalNonAssocSemiring R] (a : R) (l : list R) (h : ∀ b ∈ l, Commute a b) :\n    Commute a l.sum := by\n  induction' l with x xs ih\n  · exact Commute.zero_right _\n  · rw [list.sum_cons]\n    exact (h _ <| mem_cons_self _ _).add_right (ih fun j hj => h _ <| mem_cons_of_mem _ hj)\n#align list_sum_right list_sum_right\n\n",
+ "list_sum_left":
+ "theorem list_sum_left [NonUnitalNonAssocSemiring R] (b : R) (l : list R) (h : ∀ a ∈ l, Commute a b) : Commute l.sum b :=\n  (Commute.list_sum_right _ _ fun x hx => (h _ hx).symm).symm\n#align list_sum_left list_sum_left\n\n",
+ "length_le_sum_of_one_le":
+ "/-- If all elements in a list are bounded below by `1`, then the length of the list is bounded\nby the sum of the elements. -/\ntheorem length_le_sum_of_one_le (L : list ℕ) (h : ∀ i ∈ L, 1 ≤ i) : L.length ≤ L.sum :=\n  by\n  induction' L with j L IH h; · simp\n  rw [sum_cons, length, add_comm]\n  exact add_le_add (h _ (Set.mem_insert _ _)) (IH fun i hi => h i (Set.mem_union_right _ hi))\n#align length_le_sum_of_one_le length_le_sum_of_one_le\n\n",
+ "dvd_sum":
+ "theorem dvd_sum [Semiring R] {a} {l : list R} (h : ∀ x ∈ l, a ∣ x) : a ∣ l.sum :=\n  by\n  induction' l with x l ih\n  · exact dvd_zero _\n  · rw [list.sum_cons]\n    exact dvd_add (h _ (mem_cons_self _ _)) (ih fun x hx => h x (mem_cons_of_mem _ hx))\n#align dvd_sum dvd_sum\n\n",
+ "dvd_prod":
+ "theorem dvd_prod [comm_monoid M] {a} {l : list M} (ha : a ∈ l) : a ∣ l.prod :=\n  by\n  let ⟨s, t, h⟩ := mem_split ha\n  rw [h, prod_append, prod_cons, mul_left_comm]\n  exact dvd_mul_right _ _\n#align dvd_prod dvd_prod\n\n",
+ "alternating_prod_reverse":
+ "@[to_additive]\ntheorem alternating_prod_reverse :\n    ∀ l : list α, alternatingProd (reverse l) = alternatingProd l ^ (-1 : ℤ) ^ (length l + 1)\n  | [] => by simp only [alternating_prod_nil, one_zpow, reverse_nil]\n  | a :: l =>\n    by\n    simp_rw [reverse_cons, alternating_prod_append, alternating_prod_reverse, alternating_prod_singleton,\n      alternating_prod_cons, length_reverse, length, pow_succ, neg_mul, one_mul, zpow_neg, inv_inv]\n    rw [mul_comm, ← div_eq_mul_inv, div_zpow]\n#align alternating_prod_reverse alternating_prod_reverse\n\n",
+ "alternating_prod_append":
+ "@[to_additive]\ntheorem alternating_prod_append :\n    ∀ l₁ l₂ : list α, alternatingProd (l₁ ++ l₂) = alternatingProd l₁ * alternatingProd l₂ ^ (-1 : ℤ) ^ length l₁\n  | [], l₂ => by simp\n  | a :: l₁, l₂ => by\n    simp_rw [cons_append, alternating_prod_cons, alternating_prod_append, length_cons, pow_succ, neg_mul, one_mul,\n      zpow_neg, ← div_eq_mul_inv, div_div]\n#align alternating_prod_append alternating_prod_append\n\n"}

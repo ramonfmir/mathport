@@ -1,0 +1,24 @@
+{"to_is_semiring_hom":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →+* » -/\ntheorem to_is_semiring_hom (f : «expr →+* » α β) : IsSemiringHom f :=\n  { map_zero := f.map_zero\n    map_one := f.map_one\n    map_add := f.map_add\n    map_mul := f.map_mul }\n#align to_is_semiring_hom to_is_semiring_hom\n\n",
+ "to_is_ring_hom":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →+* » -/\ntheorem to_is_ring_hom {α γ} [Ring α] [Ring γ] (g : «expr →+* » α γ) : IsRingHom g :=\n  IsRingHom.of_semiring g.to_is_semiring_hom\n#align to_is_ring_hom to_is_ring_hom\n\n",
+ "to_is_monoid_hom":
+ "/-- A semiring homomorphism is a monoid homomorphism. -/\ntheorem to_is_monoid_hom (hf : IsSemiringHom f) : is_monoid_hom f :=\n  { ‹IsSemiringHom f› with }\n#align to_is_monoid_hom to_is_monoid_hom\n\n",
+ "to_is_add_monoid_hom":
+ "/-- A semiring homomorphism is an additive monoid homomorphism. -/\ntheorem to_is_add_monoid_hom (hf : IsSemiringHom f) : IsAddMonoidHom f :=\n  { ‹IsSemiringHom f› with }\n#align to_is_add_monoid_hom to_is_add_monoid_hom\n\n",
+ "to_is_add_group_hom":
+ "theorem to_is_add_group_hom (hf : IsRingHom f) : IsAddGroupHom f :=\n  { map_add := fun _ _ => hf.map_add }\n#align to_is_add_group_hom to_is_add_group_hom\n\n",
+ "of_semiring":
+ "/-- A map of rings that is a semiring homomorphism is also a ring homomorphism. -/\ntheorem of_semiring {f : α → β} (H : IsSemiringHom f) : IsRingHom f :=\n  { H with }\n#align of_semiring of_semiring\n\n",
+ "map_zero":
+ "#print map_zero /-\n/-- Ring homomorphisms map zero to zero. -/\ntheorem map_zero (hf : IsRingHom f) : f 0 = 0 :=\n  calc\n    f 0 = f (0 + 0) - f 0 := by rw [hf.map_add] <;> simp\n    _ = 0 := by simp\n    \n#align map_zero map_zero\n-/\n\n",
+ "map_sub":
+ "#print map_sub /-\n/-- Ring homomorphisms preserve subtraction. -/\ntheorem map_sub (hf : IsRingHom f) : f (x - y) = f x - f y := by simp [sub_eq_add_neg, hf.map_add, hf.map_neg]\n#align map_sub map_sub\n-/\n\n",
+ "map_neg":
+ "#print map_neg /-\n/-- Ring homomorphisms preserve additive inverses. -/\ntheorem map_neg (hf : IsRingHom f) : f (-x) = -f x :=\n  calc\n    f (-x) = f (-x + x) - f x := by rw [hf.map_add] <;> simp\n    _ = -f x := by simp [hf.map_zero]\n    \n#align map_neg map_neg\n-/\n\n",
+ "id":
+ "#print id /-\n/-- The identity map is a ring homomorphism. -/\ntheorem id : IsRingHom (@id α) := by refine' { .. } <;> intros <;> rfl\n#align id id\n-/\n\n",
+ "comp":
+ "-- see Note [no instance on morphisms]\n/-- The composition of two ring homomorphisms is a ring homomorphism. -/\ntheorem comp (hf : IsRingHom f) {γ} [Ring γ] {g : β → γ} (hg : IsRingHom g) : IsRingHom (g ∘ f) :=\n  { map_add := fun x y => by simp [map_add hf] <;> rw [map_add hg] <;> rfl\n    map_mul := fun x y => by simp [map_mul hf] <;> rw [map_mul hg] <;> rfl\n    map_one := by simp [map_one hf] <;> exact map_one hg }\n#align comp comp\n\n",
+ "coe_of":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n@[simp]\ntheorem coe_of {f : α → β} (hf : IsSemiringHom f) : «expr⇑ » (of hf) = f :=\n  rfl\n#align coe_of coe_of\n\n"}

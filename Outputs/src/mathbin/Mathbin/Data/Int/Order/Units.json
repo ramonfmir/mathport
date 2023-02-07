@@ -1,0 +1,20 @@
+{"units_sq":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ˣ» -/\n@[simp]\ntheorem units_sq (u : «expr ˣ» ℤ) : u ^ 2 = 1 := by\n  rw [Units.ext_iff, Units.val_pow_eq_pow_val, Units.val_one, is_unit_sq u.is_unit]\n#align units_sq units_sq\n\n",
+ "units_pow_eq_pow_mod_two":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ˣ» -/\ntheorem units_pow_eq_pow_mod_two (u : «expr ˣ» ℤ) (n : ℕ) : u ^ n = u ^ (n % 2) := by\n  conv =>\n      lhs\n      rw [← nat.mod_add_div n 2] <;>\n    rw [pow_add, pow_mul, units_sq, one_pow, mul_one]\n#align units_pow_eq_pow_mod_two units_pow_eq_pow_mod_two\n\n",
+ "units_mul_self":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ˣ» -/\n@[simp]\ntheorem units_mul_self (u : «expr ˣ» ℤ) : u * u = 1 := by rw [← sq, units_sq]\n#align units_mul_self units_mul_self\n\n",
+ "units_inv_eq_self":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ˣ» -/\n@[simp]\ntheorem units_inv_eq_self (u : «expr ˣ» ℤ) : u⁻¹ = u := by rw [inv_eq_iff_mul_eq_one, units_mul_self]\n#align units_inv_eq_self units_inv_eq_self\n\n",
+ "units_coe_mul_self":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ˣ» -/\n-- `units.coe_mul` is a \"wrong turn\" for the simplifier, this undoes it and simplifies further\n@[simp]\ntheorem units_coe_mul_self (u : «expr ˣ» ℤ) : (u * u : ℤ) = 1 := by rw [← Units.val_mul, units_mul_self, Units.val_one]\n#align units_coe_mul_self units_coe_mul_self\n\n",
+ "sq_eq_one_of_sq_lt_four":
+ "theorem sq_eq_one_of_sq_lt_four {x : ℤ} (h1 : x ^ 2 < 4) (h2 : x ≠ 0) : x ^ 2 = 1 :=\n  sq_eq_one_iff.mpr\n    ((abs_eq (zero_le_one' ℤ)).mp\n      (le_antisymm (lt_add_one_iff.mp (abs_lt_of_sq_lt_sq h1 zero_le_two)) (sub_one_lt_iff.mp (abs_pos.mpr h2))))\n#align sq_eq_one_of_sq_lt_four sq_eq_one_of_sq_lt_four\n\n",
+ "sq_eq_one_of_sq_le_three":
+ "theorem sq_eq_one_of_sq_le_three {x : ℤ} (h1 : x ^ 2 ≤ 3) (h2 : x ≠ 0) : x ^ 2 = 1 :=\n  sq_eq_one_of_sq_lt_four (lt_of_le_of_lt h1 (lt_add_one 3)) h2\n#align sq_eq_one_of_sq_le_three sq_eq_one_of_sq_le_three\n\n",
+ "neg_one_pow_ne_zero":
+ "@[simp]\ntheorem neg_one_pow_ne_zero {n : ℕ} : (-1 : ℤ) ^ n ≠ 0 :=\n  pow_ne_zero _ (abs_pos.mp (by simp))\n#align neg_one_pow_ne_zero neg_one_pow_ne_zero\n\n",
+ "is_unit_sq":
+ "theorem is_unit_sq {a : ℤ} (ha : is_unit a) : a ^ 2 = 1 := by rw [sq, is_unit_mul_self ha]\n#align is_unit_sq is_unit_sq\n\n",
+ "is_unit_iff_abs_eq":
+ "/-\nCopyright (c) 2016 Jeremy Avigad. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Jeremy Avigad\n-/\ntheorem is_unit_iff_abs_eq {x : ℤ} : is_unit x ↔ abs x = 1 := by\n  rw [is_unit_iff_nat_abs_eq, abs_eq_nat_abs, ← Int.ofNat_one, coe_nat_inj']\n#align is_unit_iff_abs_eq is_unit_iff_abs_eq\n\n"}

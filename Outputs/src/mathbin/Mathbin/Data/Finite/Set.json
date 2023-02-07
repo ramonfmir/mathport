@@ -1,0 +1,4 @@
+{"of_injective_finite_range":
+ "theorem finite.of_injective_finite_range {f : ι → α} (hf : function.injective f) [Finite (range f)] : Finite ι :=\n  finite.of_injective (Set.rangeFactorization f) (hf.cod_restrict _)\n#align finite.of_injective_finite_range finite.of_injective_finite_range\n\n",
+ "finite_of_finite_image":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\n/-\nCopyright (c) 2022 Kyle Miller. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Kyle Miller\n-/\ntheorem finite.set.finite_of_finite_image (s : set α) {f : α → β} (h : s.inj_on f) [Finite («expr '' » f s)] :\n    Finite s :=\n  Finite.of_equiv _ (Equiv.ofBijective _ h.bij_on_image.bijective).symm\n#align finite.set.finite_of_finite_image finite.set.finite_of_finite_image\n\n"}

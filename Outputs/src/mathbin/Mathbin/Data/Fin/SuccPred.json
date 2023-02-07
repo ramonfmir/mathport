@@ -1,0 +1,8 @@
+{"succ_eq":
+ "/-\nCopyright (c) 2022 Eric Rodriguez. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Eric Rodriguez\n-/\n@[simp]\ntheorem succ_eq {n : ℕ} : succ_order.succ = fun a => if a < Fin.last n then a + 1 else a :=\n  rfl\n#align succ_eq succ_eq\n\n",
+ "succ_apply":
+ "@[simp]\ntheorem succ_apply {n : ℕ} (a) : succ_order.succ a = if a < Fin.last n then a + 1 else a :=\n  rfl\n#align succ_apply succ_apply\n\n",
+ "pred_eq":
+ "@[simp]\ntheorem pred_eq {n} : pred_order.pred = fun a : fin (n + 1) => if a = 0 then 0 else a - 1 :=\n  rfl\n#align pred_eq pred_eq\n\n",
+ "pred_apply":
+ "@[simp]\ntheorem pred_apply {n : ℕ} (a : fin (n + 1)) : pred_order.pred a = if a = 0 then 0 else a - 1 :=\n  rfl\n#align pred_apply pred_apply\n\n"}

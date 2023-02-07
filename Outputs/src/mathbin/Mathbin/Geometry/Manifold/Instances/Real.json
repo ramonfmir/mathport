@@ -1,0 +1,4 @@
+{"range_quadrant":
+ "theorem range_quadrant (n : ℕ) : (range fun x : euclidean_quadrant n => x.val) = { y | ∀ i : fin n, 0 ≤ y i } := by simp\n#align range_quadrant range_quadrant\n\n",
+ "range_half_space":
+ "/-\nCopyright (c) 2019 Sébastien Gouëzel. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Sébastien Gouëzel\n-/\n/- Register class instances for euclidean half-space and quadrant, that can not be noticed\nwithout the following reducibility attribute (which is only set in this section). -/\ntheorem range_half_space (n : ℕ) [Zero (fin n)] : (range fun x : euclidean_half_space n => x.val) = { y | 0 ≤ y 0 } :=\n  by simp\n#align range_half_space range_half_space\n\n"}

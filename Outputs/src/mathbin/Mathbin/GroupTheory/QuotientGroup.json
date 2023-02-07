@@ -1,0 +1,92 @@
+{"subsingleton_quotient_top":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⧸ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n@[to_additive]\ntheorem subsingleton_quotient_top : subsingleton («expr ⧸ » G («expr⊤» : subgroup G)) :=\n  by\n  dsimp [HasQuotient.Quotient, subgroup.has_quotient, quotient]\n  rw [left_rel_eq]\n  exact @trunc.subsingleton G\n#align subsingleton_quotient_top subsingleton_quotient_top\n\n",
+ "subgroup_eq_top_of_subsingleton":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⧸ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n/-- If the quotient by a subgroup gives a singleton then the subgroup is the whole group. -/\n@[to_additive\n      \"If the quotient by an additive subgroup gives a singleton then the additive subgroup\\nis the whole additive group.\"]\ntheorem subgroup_eq_top_of_subsingleton (H : subgroup G) (h : subsingleton («expr ⧸ » G H)) : H = «expr⊤» :=\n  top_unique fun x _ => by\n    have this : 1⁻¹ * x ∈ H := quotient_group.eq.1 (subsingleton.elim _ _)\n    rwa [inv_one, one_mul] at this\n#align subgroup_eq_top_of_subsingleton subgroup_eq_top_of_subsingleton\n\n",
+ "range_ker_lift_surjective":
+ "@[to_additive]\ntheorem range_ker_lift_surjective : surjective (range_ker_lift φ) :=\n  by\n  rintro ⟨_, g, rfl⟩\n  use mk g\n  rfl\n#align range_ker_lift_surjective range_ker_lift_surjective\n\n",
+ "range_ker_lift_injective":
+ "-- Note that `ker φ` isn't definitionally `ker (φ.range_restrict)`\n-- so there is a bit of annoying code duplication here\n@[to_additive]\ntheorem range_ker_lift_injective : injective (range_ker_lift φ) := fun a b =>\n  Quotient.inductionOn₂' a b fun a b (h : φ.range_restrict a = φ.range_restrict b) =>\n    quotient.sound' <| by\n      rw [left_rel_apply, ← ker_range_restrict, mem_ker, φ.range_restrict.map_mul, ← h, φ.range_restrict.map_inv,\n        inv_mul_self]\n#align range_ker_lift_injective range_ker_lift_injective\n\n",
+ "quotient_quotient_equiv_quotient_aux_coe_coe":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⧸ » -/\n@[to_additive]\ntheorem quotient_quotient_equiv_quotient_aux_coe_coe (x : G) :\n    quotient_quotient_equiv_quotient_aux N M h (x : «expr ⧸ » G N) = x :=\n  quotient_group.lift_mk' _ _ x\n#align quotient_quotient_equiv_quotient_aux_coe_coe quotient_quotient_equiv_quotient_aux_coe_coe\n\n",
+ "quotient_quotient_equiv_quotient_aux_coe":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⧸ » -/\n-- φ is the natural homomorphism H →* (HN)/N.\n@[simp, to_additive]\ntheorem quotient_quotient_equiv_quotient_aux_coe (x : «expr ⧸ » G N) :\n    quotient_quotient_equiv_quotient_aux N M h x = quotient_group.map N M (MonoidHom.id G) h x :=\n  quotient_group.lift_mk' _ _ x\n#align quotient_quotient_equiv_quotient_aux_coe quotient_quotient_equiv_quotient_aux_coe\n\n",
+ "quotient_mul_equiv_of_eq_mk":
+ "@[simp, to_additive]\ntheorem quotient_mul_equiv_of_eq_mk {M N : subgroup G} [M.normal] [N.normal] (h : M = N) (x : G) :\n    quotient_group.quotient_mul_equiv_of_eq h (quotient_group.mk x) = quotient_group.mk x :=\n  rfl\n#align quotient_mul_equiv_of_eq_mk quotient_mul_equiv_of_eq_mk\n\n",
+ "quotient_map_subgroup_of_of_le_coe":
+ "@[simp, to_additive]\ntheorem quotient_map_subgroup_of_of_le_coe {A' A B' B : subgroup G} [hAN : (A'.subgroup_of A).normal]\n    [hBN : (B'.subgroup_of B).normal] (h' : A' ≤ B') (h : A ≤ B) (x : A) :\n    quotient_map_subgroup_of_of_le h' h x = ↑(subgroup.inclusion h x : B) :=\n  rfl\n#align quotient_map_subgroup_of_of_le_coe quotient_map_subgroup_of_of_le_coe\n\n",
+ "monoid_hom_ext":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →* » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⧸ » -/\n/-- Two `monoid_hom`s from a quotient group are equal if their compositions with\n`quotient_group.mk'` are equal.\n\nSee note [partially-applied ext lemmas]. -/\n@[ext,\n  to_additive\n      \" Two `add_monoid_hom`s from an additive quotient group are equal if their\\ncompositions with `add_quotient_group.mk'` are equal.\\n\\nSee note [partially-applied ext lemmas]. \"]\ntheorem monoid_hom_ext ⦃f g : «expr →* » («expr ⧸ » G N) H⦄ (h : f.comp (mk' N) = g.comp (mk' N)) : f = g :=\n  MonoidHom.ext fun x => quotient_group.induction_on x <| (MonoidHom.congr_fun h : _)\n#align monoid_hom_ext monoid_hom_ext\n\n",
+ "mk'_surjective":
+ "@[to_additive]\ntheorem mk'_surjective : surjective <| mk' N :=\n  @mk_surjective _ _ N\n#align mk'_surjective mk'_surjective\n\n",
+ "mk'_eq_mk'":
+ "@[to_additive]\ntheorem mk'_eq_mk' {x y : G} : mk' N x = mk' N y ↔ ∃ z ∈ N, x * z = y :=\n  quotient_group.eq'.trans <| by simp only [← _root_.eq_inv_mul_iff_mul_eq, exists_prop, exists_eq_right]\n#align mk'_eq_mk' mk'_eq_mk'\n\n",
+ "mk'_apply":
+ "@[simp, to_additive]\ntheorem mk'_apply (x : G) : mk' N x = x :=\n  rfl\n#align mk'_apply mk'_apply\n\n",
+ "map_mk'":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →* » -/\n@[to_additive]\ntheorem map_mk' (M : subgroup H) [M.normal] (f : «expr →* » G H) (h : N ≤ M.comap f) (x : G) :\n    map N M f h (mk' _ x) = ↑(f x) :=\n  rfl\n#align map_mk' map_mk'\n\n",
+ "map_map":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →* » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →* » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⧸ » -/\n@[simp, to_additive]\ntheorem map_map {I : Type _} [group I] (M : subgroup H) (O : subgroup I) [M.normal] [O.normal] (f : «expr →* » G H)\n    (g : «expr →* » H I) (hf : N ≤ subgroup.comap f M) (hg : M ≤ subgroup.comap g O)\n    (hgf : N ≤ subgroup.comap (g.comp f) O := hf.trans ((subgroup.comap_mono hg).trans_eq (subgroup.comap_comap _ _ _)))\n    (x : «expr ⧸ » G N) : map M O g hg (map N M f hf x) = map N O (g.comp f) hgf x :=\n  by\n  refine' induction_on' x fun x => _\n  simp only [map_coe, MonoidHom.comp_apply]\n#align map_map map_map\n\n",
+ "map_id_apply":
+ "@[to_additive]\ntheorem map_id_apply (h : N ≤ subgroup.comap (MonoidHom.id _) N := (subgroup.comap_id N).le) (x) :\n    map N N (MonoidHom.id _) h x = x :=\n  induction_on' x fun x => rfl\n#align map_id_apply map_id_apply\n\n",
+ "map_id":
+ "@[simp, to_additive]\ntheorem map_id (h : N ≤ subgroup.comap (MonoidHom.id _) N := (subgroup.comap_id N).le) :\n    map N N (MonoidHom.id _) h = MonoidHom.id _ :=\n  MonoidHom.ext (map_id_apply N h)\n#align map_id map_id\n\n",
+ "map_comp_map":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →* » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →* » -/\n@[simp, to_additive]\ntheorem map_comp_map {I : Type _} [group I] (M : subgroup H) (O : subgroup I) [M.normal] [O.normal] (f : «expr →* » G H)\n    (g : «expr →* » H I) (hf : N ≤ subgroup.comap f M) (hg : M ≤ subgroup.comap g O)\n    (hgf : N ≤ subgroup.comap (g.comp f) O :=\n      hf.trans ((subgroup.comap_mono hg).trans_eq (subgroup.comap_comap _ _ _))) :\n    (map M O g hg).comp (map N M f hf) = map N O (g.comp f) hgf :=\n  MonoidHom.ext (map_map N M O f g hf hg hgf)\n#align map_comp_map map_comp_map\n\n",
+ "map_coe":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →* » -/\n@[simp, to_additive]\ntheorem map_coe (M : subgroup H) [M.normal] (f : «expr →* » G H) (h : N ≤ M.comap f) (x : G) :\n    map N M f h ↑x = ↑(f x) :=\n  rfl\n#align map_coe map_coe\n\n",
+ "lift_quot_mk":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →* » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprQ -/\n@[simp, to_additive]\ntheorem lift_quot_mk {φ : «expr →* » G H} (HN : ∀ x ∈ N, φ x = 1) (g : G) : lift N φ HN (Quot.mk _ g : exprQ) = φ g :=\n  rfl\n#align lift_quot_mk lift_quot_mk\n\n",
+ "lift_mk'":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →* » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprQ -/\n@[simp, to_additive]\ntheorem lift_mk' {φ : «expr →* » G H} (HN : ∀ x ∈ N, φ x = 1) (g : G) : lift N φ HN (mk g : exprQ) = φ g :=\n  rfl\n#align lift_mk' lift_mk'\n\n",
+ "lift_mk":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →* » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprQ -/\n@[simp, to_additive]\ntheorem lift_mk {φ : «expr →* » G H} (HN : ∀ x ∈ N, φ x = 1) (g : G) : lift N φ HN (g : exprQ) = φ g :=\n  rfl\n#align lift_mk lift_mk\n\n",
+ "ker_mk":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →* » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⧸ » -/\n@[simp, to_additive]\ntheorem ker_mk : monoid_hom.ker (quotient_group.mk' N : «expr →* » G («expr ⧸ » G N)) = N :=\n  subgroup.ext eq_one_iff\n#align ker_mk ker_mk\n\n",
+ "ker_lift_mk'":
+ "@[simp, to_additive]\ntheorem ker_lift_mk' (g : G) : (ker_lift φ) (mk g) = φ g :=\n  lift_mk' _ _ _\n#align ker_lift_mk' ker_lift_mk'\n\n",
+ "ker_lift_mk":
+ "@[simp, to_additive]\ntheorem ker_lift_mk (g : G) : (ker_lift φ) g = φ g :=\n  lift_mk _ _ _\n#align ker_lift_mk ker_lift_mk\n\n",
+ "ker_lift_injective":
+ "@[to_additive]\ntheorem ker_lift_injective : injective (ker_lift φ) := fun a b =>\n  Quotient.inductionOn₂' a b fun a b (h : φ a = φ b) =>\n    quotient.sound' <| by rw [left_rel_apply, mem_ker, φ.map_mul, ← h, φ.map_inv, inv_mul_self]\n#align ker_lift_injective ker_lift_injective\n\n",
+ "hom_quotient_zpow_of_hom_id":
+ "@[simp, to_additive]\ntheorem hom_quotient_zpow_of_hom_id : hom_quotient_zpow_of_hom (MonoidHom.id A) n = MonoidHom.id _ :=\n  monoid_hom_ext _ rfl\n#align hom_quotient_zpow_of_hom_id hom_quotient_zpow_of_hom_id\n\n",
+ "hom_quotient_zpow_of_hom_comp_of_right_inverse":
+ "@[simp, to_additive]\ntheorem hom_quotient_zpow_of_hom_comp_of_right_inverse (i : function.right_inverse g f) :\n    (hom_quotient_zpow_of_hom f n).comp (hom_quotient_zpow_of_hom g n) = MonoidHom.id _ :=\n  monoid_hom_ext _ <| MonoidHom.ext fun x => congr_arg coe <| i x\n#align hom_quotient_zpow_of_hom_comp_of_right_inverse hom_quotient_zpow_of_hom_comp_of_right_inverse\n\n",
+ "hom_quotient_zpow_of_hom_comp":
+ "@[simp, to_additive]\ntheorem hom_quotient_zpow_of_hom_comp :\n    hom_quotient_zpow_of_hom (f.comp g) n = (hom_quotient_zpow_of_hom f n).comp (hom_quotient_zpow_of_hom g n) :=\n  monoid_hom_ext _ rfl\n#align hom_quotient_zpow_of_hom_comp hom_quotient_zpow_of_hom_comp\n\n",
+ "equiv_quotient_zpow_of_equiv_trans":
+ "@[simp, to_additive]\ntheorem equiv_quotient_zpow_of_equiv_trans :\n    (equiv_quotient_zpow_of_equiv e n).trans (equiv_quotient_zpow_of_equiv d n) =\n      equiv_quotient_zpow_of_equiv (e.trans d) n :=\n  by\n  ext x\n  rw [← quotient.out_eq' x]\n  rfl\n#align equiv_quotient_zpow_of_equiv_trans equiv_quotient_zpow_of_equiv_trans\n\n",
+ "equiv_quotient_zpow_of_equiv_symm":
+ "@[simp, to_additive]\ntheorem equiv_quotient_zpow_of_equiv_symm :\n    (equiv_quotient_zpow_of_equiv e n).symm = equiv_quotient_zpow_of_equiv e.symm n :=\n  rfl\n#align equiv_quotient_zpow_of_equiv_symm equiv_quotient_zpow_of_equiv_symm\n\n",
+ "equiv_quotient_zpow_of_equiv_refl":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⧸ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →* » -/\n@[simp, to_additive]\ntheorem equiv_quotient_zpow_of_equiv_refl :\n    MulEquiv.refl («expr ⧸ » A (zpowGroupHom n : «expr →* » A A).range) =\n      equiv_quotient_zpow_of_equiv (MulEquiv.refl A) n :=\n  by\n  ext x\n  rw [← quotient.out_eq' x]\n  rfl\n#align equiv_quotient_zpow_of_equiv_refl equiv_quotient_zpow_of_equiv_refl\n\n",
+ "eq_one_iff":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⧸ » -/\n@[simp, to_additive]\ntheorem eq_one_iff {N : subgroup G} [nN : N.normal] (x : G) : (x : «expr ⧸ » G N) = 1 ↔ x ∈ N :=\n  by\n  refine' quotient_group.eq.trans _\n  rw [mul_one, subgroup.inv_mem_iff]\n#align eq_one_iff eq_one_iff\n\n",
+ "eq_iff_div_mem":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⧸ » -/\n@[to_additive]\ntheorem eq_iff_div_mem {N : subgroup G} [nN : N.normal] {x y : G} : (x : «expr ⧸ » G N) = y ↔ x / y ∈ N :=\n  by\n  refine' eq_comm.trans (quotient_group.eq.trans _)\n  rw [nN.mem_comm_iff, div_eq_mul_inv]\n#align eq_iff_div_mem eq_iff_div_mem\n\n",
+ "congr_symm":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃* » -/\n@[simp]\ntheorem congr_symm (e : «expr ≃* » G H) (he : G'.map ↑e = H') :\n    (congr G' H' e he).symm = congr H' G' e.symm ((subgroup.map_symm_eq_iff_map_eq _).mpr he) :=\n  rfl\n#align congr_symm congr_symm\n\n",
+ "congr_refl":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →* » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⧸ » -/\n@[simp]\ntheorem congr_refl (he : G'.map (MulEquiv.refl G : «expr →* » G G) = G' := subgroup.map_id G') :\n    congr G' G' (MulEquiv.refl G) he = MulEquiv.refl («expr ⧸ » G G') :=\n  by\n  ext ⟨x⟩\n  rfl\n#align congr_refl congr_refl\n\n",
+ "congr_mk'":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃* » -/\ntheorem congr_mk' (e : «expr ≃* » G H) (he : G'.map ↑e = H') (x) : congr G' H' e he (mk' G' x) = mk' H' (e x) :=\n  rfl\n#align congr_mk' congr_mk'\n\n",
+ "congr_mk":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃* » -/\n-- `simp` doesn't like this lemma...\n-- `simp` doesn't like this lemma...\n@[simp]\ntheorem congr_mk (e : «expr ≃* » G H) (he : G'.map ↑e = H') (x) : congr G' H' e he (mk x) = e x :=\n  rfl\n#align congr_mk congr_mk\n\n",
+ "congr_apply":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃* » -/\n@[simp]\ntheorem congr_apply (e : «expr ≃* » G H) (he : G'.map ↑e = H') (x : G) : congr G' H' e he x = mk' H' (e x) :=\n  rfl\n#align congr_apply congr_apply\n\n",
+ "comap_comap_center":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⧸ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⧸ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⧸ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⧸ » -/\n@[to_additive]\ntheorem comap_comap_center {H₁ : subgroup G} [H₁.normal] {H₂ : subgroup («expr ⧸ » G H₁)} [H₂.normal] :\n    ((subgroup.center («expr ⧸ » («expr ⧸ » G H₁) H₂)).comap (mk' H₂)).comap (mk' H₁) =\n      (subgroup.center («expr ⧸ » G (H₂.comap (mk' H₁)))).comap (mk' (H₂.comap (mk' H₁))) :=\n  by\n  ext x\n  simp only [mk'_apply, subgroup.mem_comap, subgroup.mem_center_iff, forall_coe, ← coe_mul, eq_iff_div_mem, coe_div]\n#align comap_comap_center comap_comap_center\n\n",
+ "coe_zpow":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprQ -/\n@[simp, to_additive]\ntheorem coe_zpow (a : G) (n : ℤ) : ((a ^ n : G) : exprQ) = a ^ n :=\n  rfl\n#align coe_zpow coe_zpow\n\n",
+ "coe_pow":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprQ -/\n@[simp, to_additive]\ntheorem coe_pow (a : G) (n : ℕ) : ((a ^ n : G) : exprQ) = a ^ n :=\n  rfl\n#align coe_pow coe_pow\n\n",
+ "coe_one":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprQ -/\n-- for commutative groups we don't need normality assumption\n@[simp, to_additive]\ntheorem coe_one : ((1 : G) : exprQ) = 1 :=\n  rfl\n#align coe_one coe_one\n\n",
+ "coe_mul":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprQ -/\n@[simp, to_additive]\ntheorem coe_mul (a b : G) : ((a * b : G) : exprQ) = a * b :=\n  rfl\n#align coe_mul coe_mul\n\n",
+ "coe_mk'":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⧸ » -/\n/-\nCopyright (c) 2018 Kevin Buzzard, Patrick Massot. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Kevin Buzzard, Patrick Massot\n\nThis file is to a certain extent based on `quotient_module.lean` by Johannes Hölzl.\n-/\n@[simp, to_additive]\ntheorem coe_mk' : (mk' N : G → «expr ⧸ » G N) = coe :=\n  rfl\n#align coe_mk' coe_mk'\n\n",
+ "coe_inv":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprQ -/\n@[simp, to_additive]\ntheorem coe_inv (a : G) : ((a⁻¹ : G) : exprQ) = a⁻¹ :=\n  rfl\n#align coe_inv coe_inv\n\n",
+ "coe_div":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprQ -/\n@[simp, to_additive]\ntheorem coe_div (a b : G) : ((a / b : G) : exprQ) = a / b :=\n  rfl\n#align coe_div coe_div\n\n"}

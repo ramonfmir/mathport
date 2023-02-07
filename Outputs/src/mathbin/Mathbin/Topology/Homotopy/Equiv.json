@@ -1,0 +1,16 @@
+{"trans_to_homotopy_equiv":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ₜ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ₜ » -/\n@[simp]\ntheorem trans_to_homotopy_equiv (h₀ : «expr ≃ₜ » X Y) (h₁ : «expr ≃ₜ » Y Z) :\n    (h₀.trans h₁).to_homotopy_equiv = h₀.to_homotopy_equiv.trans h₁.to_homotopy_equiv :=\n  rfl\n#align trans_to_homotopy_equiv trans_to_homotopy_equiv\n\n",
+ "to_fun_eq_coe":
+ "/-\nCopyright (c) 2021 Shing Tak Lam. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Shing Tak Lam\n-/\n@[simp]\ntheorem to_fun_eq_coe (h : homotopy_equiv X Y) : (h.to_fun : X → Y) = h :=\n  rfl\n#align to_fun_eq_coe to_fun_eq_coe\n\n",
+ "symm_trans":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `continuous_map.homotopy_equiv -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `continuous_map.homotopy_equiv -/\n-- simp,\ntheorem symm_trans (h₁ : continuous_map.homotopy_equiv X Y) (h₂ : continuous_map.homotopy_equiv Y Z) :\n    (h₁.trans h₂).symm = h₂.symm.trans h₁.symm := by ext <;> rfl\n#align symm_trans symm_trans\n\n",
+ "symm_to_homotopy_equiv":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ₜ » -/\n@[simp]\ntheorem symm_to_homotopy_equiv (h : «expr ≃ₜ » X Y) : h.symm.to_homotopy_equiv = h.to_homotopy_equiv.symm :=\n  rfl\n#align symm_to_homotopy_equiv symm_to_homotopy_equiv\n\n",
+ "refl_to_homotopy_equiv":
+ "@[simp]\ntheorem refl_to_homotopy_equiv (X : Type u) [topological_space X] :\n    (homeomorph.refl X).to_homotopy_equiv = homotopy_equiv.refl X :=\n  rfl\n#align refl_to_homotopy_equiv refl_to_homotopy_equiv\n\n",
+ "continuous":
+ "@[continuity]\ntheorem continuous (h : homotopy_equiv X Y) : continuous h :=\n  h.to_fun.continuous\n#align continuous continuous\n\n",
+ "coe_to_homotopy_equiv":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ₜ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n@[simp]\ntheorem coe_to_homotopy_equiv (h : «expr ≃ₜ » X Y) : «expr⇑ » h.to_homotopy_equiv = h :=\n  rfl\n#align coe_to_homotopy_equiv coe_to_homotopy_equiv\n\n",
+ "coe_inv_fun":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n@[simp]\ntheorem coe_inv_fun (h : homotopy_equiv X Y) : («expr⇑ » h.inv_fun : Y → X) = «expr⇑ » h.symm :=\n  rfl\n#align coe_inv_fun coe_inv_fun\n\n"}

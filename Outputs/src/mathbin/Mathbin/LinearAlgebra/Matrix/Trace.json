@@ -1,0 +1,40 @@
+{"trace_zero":
+ "/-\nCopyright (c) 2019 Johannes Hölzl. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Johannes Hölzl, Patrick Massot, Casper Putz, Anne Baanen\n-/\n@[simp]\ntheorem trace_zero : trace (0 : matrix n n R) = 0 :=\n  (finset.sum_const (0 : R)).trans <| smul_zero _\n#align trace_zero trace_zero\n\n",
+ "trace_transpose_mul":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `matrix.mul -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `matrix.transpose -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `matrix.transpose -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `matrix.mul -/\n@[simp]\ntheorem trace_transpose_mul [add_comm_monoid R] [Mul R] (A : matrix m n R) (B : matrix n m R) :\n    trace (matrix.mul (matrix.transpose A) (matrix.transpose B)) = trace (matrix.mul A B) :=\n  finset.sum_comm\n#align trace_transpose_mul trace_transpose_mul\n\n",
+ "trace_transpose":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `matrix.transpose -/\n@[simp]\ntheorem trace_transpose (A : matrix n n R) : trace (matrix.transpose A) = trace A :=\n  rfl\n#align trace_transpose trace_transpose\n\n",
+ "trace_sum":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `finset.sum -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.sum -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `finset.sum -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.sum -/\n@[simp]\ntheorem trace_sum (s : Finset ι) (f : ι → matrix n n R) :\n    trace (finset.sum \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.sum\" s (f i)) =\n      finset.sum \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.sum\" s (trace (f i)) :=\n  map_sum (trace_add_monoid_hom n R) f s\n#align trace_sum trace_sum\n\n",
+ "trace_sub":
+ "@[simp]\ntheorem trace_sub (A B : matrix n n R) : trace (A - B) = trace A - trace B :=\n  finset.sum_sub_distrib\n#align trace_sub trace_sub\n\n",
+ "trace_smul":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n@[simp]\ntheorem trace_smul [monoid α] [DistribMulAction α R] (r : α) (A : matrix n n R) :\n    trace («expr • » r A) = «expr • » r (trace A) :=\n  finset.smul_sum.symm\n#align trace_smul trace_smul\n\n",
+ "trace_one":
+ "@[simp]\ntheorem trace_one : trace (1 : matrix n n R) = fintype.card n := by\n  simp_rw [trace, diag_one, pi.one_def, finset.sum_const, nsmul_one, finset.card_univ]\n#align trace_one trace_one\n\n",
+ "trace_neg":
+ "@[simp]\ntheorem trace_neg (A : matrix n n R) : trace (-A) = -trace A :=\n  finset.sum_neg_distrib\n#align trace_neg trace_neg\n\n",
+ "trace_multiset_sum":
+ "@[simp]\ntheorem trace_multiset_sum (s : Multiset (matrix n n R)) : trace s.sum = (s.map trace).sum :=\n  map_multiset_sum (trace_add_monoid_hom n R) s\n#align trace_multiset_sum trace_multiset_sum\n\n",
+ "trace_mul_cycle'":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `matrix.mul -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `matrix.mul -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `matrix.mul -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `matrix.mul -/\ntheorem trace_mul_cycle' [NonUnitalCommSemiring R] (A : matrix m n R) (B : matrix n p R) (C : matrix p m R) :\n    trace (matrix.mul A (matrix.mul B C)) = trace (matrix.mul C (matrix.mul A B)) := by\n  rw [← matrix.mul_assoc, trace_mul_comm]\n#align trace_mul_cycle' trace_mul_cycle'\n\n",
+ "trace_mul_cycle":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `matrix.mul -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `matrix.mul -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `matrix.mul -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `matrix.mul -/\ntheorem trace_mul_cycle [NonUnitalCommSemiring R] (A : matrix m n R) (B : matrix n p R) (C : matrix p m R) :\n    trace (matrix.mul (matrix.mul A B) C) = trace (matrix.mul (matrix.mul C A) B) := by\n  rw [trace_mul_comm, matrix.mul_assoc]\n#align trace_mul_cycle trace_mul_cycle\n\n",
+ "trace_mul_comm":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `matrix.mul -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `matrix.mul -/\ntheorem trace_mul_comm [add_comm_monoid R] [comm_semigroup R] (A : matrix m n R) (B : matrix n m R) :\n    trace (matrix.mul A B) = trace (matrix.mul B A) := by rw [← trace_transpose, ← trace_transpose_mul, transpose_mul]\n#align trace_mul_comm trace_mul_comm\n\n",
+ "trace_list_sum":
+ "@[simp]\ntheorem trace_list_sum (l : list (matrix n n R)) : trace l.sum = (l.map trace).sum :=\n  map_list_sum (trace_add_monoid_hom n R) l\n#align trace_list_sum trace_list_sum\n\n",
+ "trace_fin_zero":
+ "@[simp]\ntheorem trace_fin_zero (A : matrix (fin 0) (fin 0) R) : trace A = 0 :=\n  rfl\n#align trace_fin_zero trace_fin_zero\n\n",
+ "trace_fin_two":
+ "theorem trace_fin_two (A : matrix (fin 2) (fin 2) R) : trace A = A 0 0 + A 1 1 :=\n  congr_arg ((· + ·) _) (add_zero (A 1 1))\n#align trace_fin_two trace_fin_two\n\n",
+ "trace_fin_three":
+ "theorem trace_fin_three (A : matrix (fin 3) (fin 3) R) : trace A = A 0 0 + A 1 1 + A 2 2 :=\n  by\n  rw [← add_zero (A 2 2), add_assoc]\n  rfl\n#align trace_fin_three trace_fin_three\n\n",
+ "trace_fin_one":
+ "theorem trace_fin_one (A : matrix (fin 1) (fin 1) R) : trace A = A 0 0 :=\n  add_zero _\n#align trace_fin_one trace_fin_one\n\n",
+ "trace_conj_transpose":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `matrix.conj_transpose -/\n@[simp]\ntheorem trace_conj_transpose [StarAddMonoid R] (A : matrix n n R) : trace (matrix.conj_transpose A) = star (trace A) :=\n  (star_sum _ _).symm\n#align trace_conj_transpose trace_conj_transpose\n\n",
+ "trace_col_mul_row":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `matrix.mul -/\n@[simp]\ntheorem trace_col_mul_row [NonUnitalNonAssocSemiring R] (a b : n → R) :\n    trace (matrix.mul (col a) (row b)) = dot_product a b := by simp [dot_product, trace]\n#align trace_col_mul_row trace_col_mul_row\n\n",
+ "trace_add":
+ "@[simp]\ntheorem trace_add (A B : matrix n n R) : trace (A + B) = trace A + trace B :=\n  finset.sum_add_distrib\n#align trace_add trace_add\n\n"}

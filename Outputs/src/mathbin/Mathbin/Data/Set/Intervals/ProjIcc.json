@@ -1,0 +1,44 @@
+{"strict_mono_on_proj_Icc":
+ "theorem strict_mono_on_proj_Icc : strict_mono_on (projIcc a b h) (Icc a b) := fun x hx y hy hxy => by\n  simpa only [proj_Icc_of_mem, hx, hy]\n#align strict_mono_on_proj_Icc strict_mono_on_proj_Icc\n\n",
+ "strictMonoOn_IccExtend":
+ "#print StrictMono.strictMonoOn_IccExtend /-\ntheorem StrictMono.strictMonoOn_IccExtend (hf : strict_mono f) : strict_mono_on (IccExtend h f) (Icc a b) :=\n  hf.comp_strict_mono_on (strictMonoOn_projIcc h)\n#align strict_mono.strict_mono_on_Icc_extend StrictMono.strictMonoOn_IccExtend\n-/\n\n",
+ "range_proj_Icc":
+ "@[simp]\ntheorem range_proj_Icc : range (projIcc a b h) = univ :=\n  (projIcc_surjective h).range_eq\n#align range_proj_Icc range_proj_Icc\n\n",
+ "proj_Icc_surjective":
+ "theorem proj_Icc_surjective : surjective (projIcc a b h) := fun x => ⟨x, projIcc_val h x⟩\n#align proj_Icc_surjective proj_Icc_surjective\n\n",
+ "proj_Icc_surj_on":
+ "theorem proj_Icc_surj_on : SurjOn (projIcc a b h) (Icc a b) univ := fun x _ => ⟨x, x.2, projIcc_val h x⟩\n#align proj_Icc_surj_on proj_Icc_surj_on\n\n",
+ "proj_Icc_right":
+ "@[simp]\ntheorem proj_Icc_right : projIcc a b h b = ⟨b, right_mem_Icc.2 h⟩ :=\n  projIcc_of_right_le h le_rfl\n#align proj_Icc_right proj_Icc_right\n\n",
+ "proj_Icc_of_right_le":
+ "theorem proj_Icc_of_right_le (hx : b ≤ x) : projIcc a b h x = ⟨b, right_mem_Icc.2 h⟩ := by simp [proj_Icc, hx, h]\n#align proj_Icc_of_right_le proj_Icc_of_right_le\n\n",
+ "proj_Icc_of_mem":
+ "theorem proj_Icc_of_mem (hx : x ∈ Icc a b) : projIcc a b h x = ⟨x, hx⟩ := by simp [proj_Icc, hx.1, hx.2]\n#align proj_Icc_of_mem proj_Icc_of_mem\n\n",
+ "proj_Icc_of_le_left":
+ "/-\nCopyright (c) 2020 Yury G. Kudryashov. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Yury G. Kudryashov, Patrick Massot\n-/\ntheorem proj_Icc_of_le_left (hx : x ≤ a) : projIcc a b h x = ⟨a, left_mem_Icc.2 h⟩ := by simp [proj_Icc, hx, hx.trans h]\n#align proj_Icc_of_le_left proj_Icc_of_le_left\n\n",
+ "proj_Icc_left":
+ "@[simp]\ntheorem proj_Icc_left : projIcc a b h a = ⟨a, left_mem_Icc.2 h⟩ :=\n  projIcc_of_le_left h le_rfl\n#align proj_Icc_left proj_Icc_left\n\n",
+ "proj_Icc_eq_right":
+ "theorem proj_Icc_eq_right (h : a < b) : projIcc a b h.le x = ⟨b, right_mem_Icc.mpr h.le⟩ ↔ b ≤ x :=\n  by\n  refine' ⟨fun h' => _, proj_Icc_of_right_le _⟩\n  simp_rw [subtype.ext_iff_val, proj_Icc] at h'\n  have := ((max_choice _ _).resolve_left (by simp [h.ne', h'])).symm.trans h'\n  exact min_eq_left_iff.mp this\n#align proj_Icc_eq_right proj_Icc_eq_right\n\n",
+ "proj_Icc_eq_left":
+ "theorem proj_Icc_eq_left (h : a < b) : projIcc a b h.le x = ⟨a, left_mem_Icc.mpr h.le⟩ ↔ x ≤ a :=\n  by\n  refine' ⟨fun h' => _, proj_Icc_of_le_left _⟩\n  simp_rw [subtype.ext_iff_val, proj_Icc, max_eq_left_iff, min_le_iff, h.not_le, false_or_iff] at h'\n  exact h'\n#align proj_Icc_eq_left proj_Icc_eq_left\n\n",
+ "proj_Icc_coe":
+ "@[simp]\ntheorem proj_Icc_coe (x : Icc a b) : projIcc a b h x = x :=\n  by\n  cases x\n  apply proj_Icc_of_mem\n#align proj_Icc_coe proj_Icc_coe\n\n",
+ "monotone_proj_Icc":
+ "theorem monotone_proj_Icc : monotone (projIcc a b h) := fun x y hxy => max_le_max le_rfl <| min_le_min le_rfl hxy\n#align monotone_proj_Icc monotone_proj_Icc\n\n",
+ "Icc_extend_right":
+ "@[simp]\ntheorem Icc_extend_right (f : Icc a b → β) : IccExtend h f b = f ⟨b, right_mem_Icc.2 h⟩ :=\n  IccExtend_of_right_le h f le_rfl\n#align Icc_extend_right Icc_extend_right\n\n",
+ "Icc_extend_range":
+ "@[simp]\ntheorem Icc_extend_range (f : Icc a b → β) : range (IccExtend h f) = range f := by\n  simp only [Icc_extend, range_comp f, range_proj_Icc, range_id']\n#align Icc_extend_range Icc_extend_range\n\n",
+ "Icc_extend_of_right_le":
+ "theorem Icc_extend_of_right_le (f : Icc a b → β) (hx : b ≤ x) : IccExtend h f x = f ⟨b, right_mem_Icc.2 h⟩ :=\n  congr_arg f <| projIcc_of_right_le h hx\n#align Icc_extend_of_right_le Icc_extend_of_right_le\n\n",
+ "Icc_extend_of_mem":
+ "theorem Icc_extend_of_mem (f : Icc a b → β) (hx : x ∈ Icc a b) : IccExtend h f x = f ⟨x, hx⟩ :=\n  congr_arg f <| projIcc_of_mem h hx\n#align Icc_extend_of_mem Icc_extend_of_mem\n\n",
+ "Icc_extend_of_le_left":
+ "theorem Icc_extend_of_le_left (f : Icc a b → β) (hx : x ≤ a) : IccExtend h f x = f ⟨a, left_mem_Icc.2 h⟩ :=\n  congr_arg f <| projIcc_of_le_left h hx\n#align Icc_extend_of_le_left Icc_extend_of_le_left\n\n",
+ "Icc_extend_left":
+ "@[simp]\ntheorem Icc_extend_left (f : Icc a b → β) : IccExtend h f a = f ⟨a, left_mem_Icc.2 h⟩ :=\n  IccExtend_of_le_left h f le_rfl\n#align Icc_extend_left Icc_extend_left\n\n",
+ "Icc_extend_coe":
+ "@[simp]\ntheorem Icc_extend_coe (f : Icc a b → β) (x : Icc a b) : IccExtend h f x = f x :=\n  congr_arg f <| projIcc_val h x\n#align Icc_extend_coe Icc_extend_coe\n\n",
+ "IccExtend":
+ "#print Monotone.IccExtend /-\ntheorem Monotone.IccExtend (hf : monotone f) : monotone (IccExtend h f) :=\n  hf.comp <| monotone_projIcc h\n#align monotone.Icc_extend Monotone.IccExtend\n-/\n\n"}

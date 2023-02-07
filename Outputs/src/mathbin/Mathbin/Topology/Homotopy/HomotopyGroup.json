@@ -1,0 +1,18 @@
+{"trans":
+ "#print trans /-\n@[trans]\ntheorem trans (H0 : f.homotopic g) (H1 : g.homotopic h) : f.homotopic h :=\n  H0.trans H1\n#align trans trans\n-/\n\n",
+ "symm":
+ "#print symm /-\n@[symm]\ntheorem symm (H : f.homotopic g) : g.homotopic f :=\n  H.symm\n#align symm symm\n-/\n\n",
+ "refl":
+ "#print refl /-\n@[refl]\ntheorem refl (f : gen_loop n x) : homotopic f f :=\n  continuous_map.homotopic_rel.refl _\n#align refl refl\n-/\n\n",
+ "proj_continuous":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«exprI^» -/\n/-\nCopyright (c) 2021 Roberto Alvarez. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Roberto Alvarez\n-/\n@[continuity]\ntheorem proj_continuous (i : fin n) : continuous fun f : («exprI^») n => f i :=\n  continuous_apply i\n#align proj_continuous proj_continuous\n\n",
+ "one_char":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«exprI^» -/\ntheorem one_char (f : («exprI^») 1) : f = fun _ => f 0 := by convert eq_const_of_unique f\n#align one_char one_char\n\n",
+ "mk_apply":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«exprC( , )» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«exprI^» -/\n@[simp]\ntheorem mk_apply (f : «exprC( , )» ((«exprI^») n) X) (H y) : (⟨f, H⟩ : gen_loop n x) y = f y :=\n  rfl\n#align mk_apply mk_apply\n\n",
+ "ext":
+ "@[ext]\ntheorem ext (f g : gen_loop n x) (H : ∀ y, f y = g y) : f = g :=\n  fun_like.ext f g H\n#align ext ext\n\n",
+ "equiv":
+ "theorem equiv : equivalence (@homotopic X _ n x) :=\n  ⟨homotopic.refl, fun _ _ => homotopic.symm, fun _ _ _ => homotopic.trans⟩\n#align equiv equiv\n\n",
+ "continuous":
+ "@[continuity]\ntheorem head.continuous {n} : continuous (@head n) :=\n  proj_continuous 0\n#align head.continuous head.continuous\n\n"}

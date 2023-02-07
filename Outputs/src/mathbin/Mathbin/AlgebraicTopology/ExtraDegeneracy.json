@@ -1,0 +1,10 @@
+{"shift_fun_succ":
+ "@[simp]\ntheorem shift_fun_succ {n : ℕ} {X : Type _} [Zero X] (f : fin n → X) (i : fin n) : shift_fun f i.succ = f i :=\n  by\n  dsimp [shift_fun]\n  split_ifs\n  · exfalso\n    simpa only [Fin.ext_iff, Fin.val_succ] using h\n  · simp only [Fin.pred_succ]\n#align shift_fun_succ shift_fun_succ\n\n",
+ "shift_fun_0":
+ "/-\nCopyright (c) 2022 Joël Riou. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Joël Riou\n-/\n@[simp]\ntheorem shift_fun_0 {n : ℕ} {X : Type _} [Zero X] (f : fin n → X) : shift_fun f 0 = 0 :=\n  rfl\n#align shift_fun_0 shift_fun_0\n\n",
+ "s_comp_π_succ":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≫ » -/\n@[simp]\ntheorem extra_degeneracy.s_comp_π_succ (n : ℕ) (i : fin (n + 1)) :\n    «expr ≫ » (extra_degeneracy.s f S n) (wide_pullback.π _ i.succ) = wide_pullback.π _ i :=\n  by\n  dsimp [extra_degeneracy.s]\n  simp only [wide_pullback.lift_π]\n  split_ifs\n  · exfalso\n    simpa only [Fin.ext_iff, Fin.val_succ, Fin.val_zero, nat.succ_ne_zero] using h\n  · congr\n    apply Fin.pred_succ\n#align extra_degeneracy.s_comp_π_succ extra_degeneracy.s_comp_π_succ\n\n",
+ "s_comp_π_0":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≫ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≫ » -/\n@[simp]\ntheorem extra_degeneracy.s_comp_π_0 (n : ℕ) :\n    «expr ≫ » (extra_degeneracy.s f S n) (wide_pullback.π _ 0) = «expr ≫ » (wide_pullback.base _) S.section_ :=\n  by\n  dsimp [extra_degeneracy.s]\n  simpa only [wide_pullback.lift_π]\n#align extra_degeneracy.s_comp_π_0 extra_degeneracy.s_comp_π_0\n\n",
+ "s_comp_base":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≫ » -/\n@[simp]\ntheorem extra_degeneracy.s_comp_base (n : ℕ) :\n    «expr ≫ » (extra_degeneracy.s f S n) (wide_pullback.base _) = wide_pullback.base _ := by\n  apply wide_pullback.lift_base\n#align extra_degeneracy.s_comp_base extra_degeneracy.s_comp_base\n\n"}

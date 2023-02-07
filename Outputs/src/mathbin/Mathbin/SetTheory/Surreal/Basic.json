@@ -1,0 +1,70 @@
+{"zero_to_game":
+ "theorem zero_to_game : to_game 0 = 0 :=\n  rfl\n#align zero_to_game zero_to_game\n\n",
+ "sub":
+ "theorem sub {x y : pgame} (ox : numeric x) (oy : numeric y) : numeric (x - y) :=\n  ox.add oy.neg\n#align sub sub\n\n",
+ "one_to_game":
+ "@[simp]\ntheorem one_to_game : to_game 1 = 1 :=\n  rfl\n#align one_to_game one_to_game\n\n",
+ "numeric_zero":
+ "theorem numeric_zero : numeric 0 :=\n  numeric_of_is_empty 0\n#align numeric_zero numeric_zero\n\n",
+ "numeric_to_pgame":
+ "/-- Ordinal games are numeric. -/\ntheorem numeric_to_pgame (o : ordinal) : o.to_pgame.numeric :=\n  by\n  induction' o using ordinal.induction with o IH\n  apply numeric_of_is_empty_right_moves\n  simpa using fun i => IH _ (ordinal.to_left_moves_to_pgame_symm_lt i)\n#align numeric_to_pgame numeric_to_pgame\n\n",
+ "numeric_rec":
+ "@[elab_as_elim]\ntheorem numeric_rec {C : pgame → Prop}\n    (H :\n      ∀ (l r) (L : l → pgame) (R : r → pgame),\n        (∀ i j, L i < R j) →\n          (∀ i, numeric (L i)) → (∀ i, numeric (R i)) → (∀ i, C (L i)) → (∀ i, C (R i)) → C ⟨l, r, L, R⟩) :\n    ∀ x, numeric x → C x\n  | ⟨l, r, L, R⟩, ⟨h, hl, hr⟩ => H _ _ _ _ h hl hr (fun i => numeric_rec _ (hl i)) fun i => numeric_rec _ (hr i)\n#align numeric_rec numeric_rec\n\n",
+ "numeric_one":
+ "theorem numeric_one : numeric 1 :=\n  numeric_of_is_empty_right_moves 1 fun _ => numeric_zero\n#align numeric_one numeric_one\n\n",
+ "numeric_of_is_empty_right_moves":
+ "theorem numeric_of_is_empty_right_moves (x : pgame) [is_empty x.right_moves] (H : ∀ i, numeric (x.move_left i)) :\n    numeric x :=\n  numeric.mk (fun _ => is_empty_elim) H is_empty_elim\n#align numeric_of_is_empty_right_moves numeric_of_is_empty_right_moves\n\n",
+ "numeric_of_is_empty_left_moves":
+ "theorem numeric_of_is_empty_left_moves (x : pgame) [is_empty x.left_moves] :\n    (∀ j, numeric (x.move_right j)) → numeric x :=\n  numeric.mk is_empty_elim is_empty_elim\n#align numeric_of_is_empty_left_moves numeric_of_is_empty_left_moves\n\n",
+ "numeric_of_is_empty":
+ "theorem numeric_of_is_empty (x : pgame) [is_empty x.left_moves] [is_empty x.right_moves] : numeric x :=\n  numeric.mk is_empty_elim is_empty_elim is_empty_elim\n#align numeric_of_is_empty numeric_of_is_empty\n\n",
+ "numeric_nat":
+ "/-- Pre-games defined by natural numbers are numeric. -/\ntheorem numeric_nat : ∀ n : ℕ, numeric n\n  | 0 => numeric_zero\n  | n + 1 => (numeric_nat n).add numeric_one\n#align numeric_nat numeric_nat\n\n",
+ "numeric_imp":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `pgame.relabelling -/\ntheorem relabelling.numeric_imp {x y : pgame} (r : pgame.relabelling x y) (ox : numeric x) : numeric y :=\n  by\n  induction' x using pgame.move_rec_on with x IHl IHr generalizing y\n  apply numeric.mk (fun i j => _) (fun i => _) fun j => _\n  · rw [← lt_congr (r.move_left_symm i).equiv (r.move_right_symm j).equiv]\n    apply ox.left_lt_right\n  · exact IHl _ (ox.move_left _) (r.move_left_symm i)\n  · exact IHr _ (ox.move_right _) (r.move_right_symm j)\n#align relabelling.numeric_imp relabelling.numeric_imp\n\n",
+ "numeric_def":
+ "/-\nCopyright (c) 2019 Mario Carneiro. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Mario Carneiro, Scott Morrison\n-/\ntheorem numeric_def {x : pgame} :\n    numeric x ↔\n      (∀ i j, x.move_left i < x.move_right j) ∧ (∀ i, numeric (x.move_left i)) ∧ ∀ j, numeric (x.move_right j) :=\n  by\n  cases x\n  rfl\n#align numeric_def numeric_def\n\n",
+ "numeric_congr":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `pgame.relabelling -/\n/-- Relabellings preserve being numeric. -/\ntheorem relabelling.numeric_congr {x y : pgame} (r : pgame.relabelling x y) : numeric x ↔ numeric y :=\n  ⟨r.numeric_imp, r.symm.numeric_imp⟩\n#align relabelling.numeric_congr relabelling.numeric_congr\n\n",
+ "not_fuzzy":
+ "theorem not_fuzzy {x y : pgame} (ox : numeric x) (oy : numeric y) : ¬fuzzy x y := fun h =>\n  not_lf.2 ((lf_of_fuzzy h).le ox oy) h.2\n#align not_fuzzy not_fuzzy\n\n",
+ "neg":
+ "theorem numeric.neg : ∀ {x : pgame} (o : numeric x), numeric (-x)\n  | ⟨l, r, L, R⟩, o => ⟨fun j i => neg_lt_neg_iff.2 (o.1 i j), fun j => (o.2.2 j).neg, fun i => (o.2.1 i).neg⟩\n#align numeric.neg numeric.neg\n\n",
+ "nat_to_game":
+ "@[simp]\ntheorem nat_to_game : ∀ n : ℕ, to_game n = n :=\n  map_nat_cast' _ one_to_game\n#align nat_to_game nat_to_game\n\n",
+ "move_right":
+ "theorem move_right {x : pgame} (o : numeric x) (j : x.right_moves) : numeric (x.move_right j) :=\n  by\n  cases x\n  exact o.2.2 j\n#align move_right move_right\n\n",
+ "move_left_lt":
+ "theorem move_left_lt {x : pgame} (o : numeric x) (i) : x.move_left i < x :=\n  (move_left_lf i).lt (o.move_left i) o\n#align move_left_lt move_left_lt\n\n",
+ "move_left_le":
+ "theorem move_left_le {x : pgame} (o : numeric x) (i) : x.move_left i ≤ x :=\n  (o.move_left_lt i).le\n#align move_left_le move_left_le\n\n",
+ "move_left":
+ "theorem move_left {x : pgame} (o : numeric x) (i : x.left_moves) : numeric (x.move_left i) :=\n  by\n  cases x\n  exact o.2.1 i\n#align move_left move_left\n\n",
+ "mk":
+ "theorem mk {x : pgame} (h₁ : ∀ i j, x.move_left i < x.move_right j) (h₂ : ∀ i, numeric (x.move_left i))\n    (h₃ : ∀ j, numeric (x.move_right j)) : numeric x :=\n  numeric_def.2 ⟨h₁, h₂, h₃⟩\n#align mk mk\n\n",
+ "lt_or_equiv_or_gt":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `pgame.equiv -/\ntheorem lt_or_equiv_or_gt {x y : pgame} (ox : numeric x) (oy : numeric y) : x < y ∨ pgame.equiv x y ∨ y < x :=\n  ((lf_or_equiv_or_gf x y).imp fun h => h.lt ox oy) <| or.imp_right fun h => h.lt oy ox\n#align lt_or_equiv_or_gt lt_or_equiv_or_gt\n\n",
+ "lt_of_lf":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `pgame.lf -/\ntheorem lt_of_lf {x y : pgame} (h : pgame.lf x y) (ox : numeric x) (oy : numeric y) : x < y :=\n  (lt_or_fuzzy_of_lf h).resolve_right (not_fuzzy_of_le (h.le ox oy))\n#align lt_of_lf lt_of_lf\n\n",
+ "lt_of_exists_le":
+ "theorem lt_of_exists_le {x y : pgame} (ox : x.numeric) (oy : y.numeric) :\n    ((∃ i, x ≤ y.move_left i) ∨ ∃ j, x.move_right j ≤ y) → x < y :=\n  (lt_iff_exists_le ox oy).2\n#align lt_of_exists_le lt_of_exists_le\n\n",
+ "lt_move_right":
+ "theorem lt_move_right {x : pgame} (o : numeric x) (j) : x < x.move_right j :=\n  (lf_move_right j).lt o (o.move_right j)\n#align lt_move_right lt_move_right\n\n",
+ "lt_iff_exists_le":
+ "/-- Definition of `x < y` on numeric pre-games, in terms of `≤` -/\ntheorem lt_iff_exists_le {x y : pgame} (ox : x.numeric) (oy : y.numeric) :\n    x < y ↔ (∃ i, x ≤ y.move_left i) ∨ ∃ j, x.move_right j ≤ y := by rw [← lf_iff_lt ox oy, lf_iff_exists_le]\n#align lt_iff_exists_le lt_iff_exists_le\n\n",
+ "lt_def":
+ "/- ./././Mathport/Syntax/Translate/Tactic/Builtin.lean:75:38: in apply_rules #[[\"[\", expr numeric.move_left, \",\", expr numeric.move_right, \"]\"], []]: ./././Mathport/Syntax/Translate/Basic.lean:349:22: unsupported: parse error -/\n/-- The definition of `x < y` on numeric pre-games, in terms of `<` two moves later. -/\ntheorem lt_def {x y : pgame} (ox : x.numeric) (oy : y.numeric) :\n    x < y ↔\n      (∃ i, (∀ i', x.move_left i' < y.move_left i) ∧ ∀ j, x < (y.move_left i).move_right j) ∨\n        ∃ j, (∀ i, (x.move_right j).move_left i < y) ∧ ∀ j', x.move_right j < y.move_right j' :=\n  by\n  rw [← lf_iff_lt ox oy, lf_def]\n  refine' or_congr _ _ <;> refine' exists_congr fun x_1 => _ <;> refine' and_congr _ _ <;>\n      refine' forall_congr' fun i => lf_iff_lt _ _ <;>\n    trace\n      \"./././Mathport/Syntax/Translate/Tactic/Builtin.lean:75:38: in apply_rules #[[\\\"[\\\", expr numeric.move_left, \\\",\\\", expr numeric.move_right, \\\"]\\\"], []]: ./././Mathport/Syntax/Translate/Basic.lean:349:22: unsupported: parse error\"\n#align lt_def lt_def\n\n",
+ "lf_iff_lt":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `pgame.lf -/\ntheorem lf_iff_lt {x y : pgame} (ox : numeric x) (oy : numeric y) : pgame.lf x y ↔ x < y :=\n  ⟨fun h => h.lt ox oy, lf_of_lt⟩\n#align lf_iff_lt lf_iff_lt\n\n",
+ "lf_asymm":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `pgame.lf -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `pgame.lf -/\ntheorem lf_asymm {x y : pgame} (ox : numeric x) (oy : numeric y) : pgame.lf x y → ¬pgame.lf y x :=\n  by\n  refine' numeric_rec (fun xl xr xL xR hx oxl oxr IHxl IHxr => _) x ox y oy\n  refine' numeric_rec fun yl yr yL yR hy oyl oyr IHyl IHyr => _\n  rw [mk_lf_mk, mk_lf_mk]; rintro (⟨i, h₁⟩ | ⟨j, h₁⟩) (⟨i, h₂⟩ | ⟨j, h₂⟩)\n  · exact IHxl _ _ (oyl _) (h₁.move_left_lf _) (h₂.move_left_lf _)\n  · exact (le_trans h₂ h₁).not_gf (lf_of_lt (hy _ _))\n  · exact (le_trans h₁ h₂).not_gf (lf_of_lt (hx _ _))\n  · exact IHxr _ _ (oyr _) (h₁.lf_move_right _) (h₂.lf_move_right _)\n#align lf_asymm lf_asymm\n\n",
+ "left_lt_right":
+ "theorem left_lt_right {x : pgame} (o : numeric x) (i : x.left_moves) (j : x.right_moves) :\n    x.move_left i < x.move_right j := by\n  cases x\n  exact o.1 i j\n#align left_lt_right left_lt_right\n\n",
+ "le_of_lf":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `pgame.lf -/\ntheorem le_of_lf {x y : pgame} (h : pgame.lf x y) (ox : numeric x) (oy : numeric y) : x ≤ y :=\n  not_lf.1 (lf_asymm ox oy h)\n#align le_of_lf le_of_lf\n\n",
+ "le_move_right":
+ "theorem le_move_right {x : pgame} (o : numeric x) (j) : x ≤ x.move_right j :=\n  (o.lt_move_right j).le\n#align le_move_right le_move_right\n\n",
+ "le_iff_forall_lt":
+ "/- ./././Mathport/Syntax/Translate/Tactic/Builtin.lean:75:38: in apply_rules #[[\"[\", expr numeric.move_left, \",\", expr numeric.move_right, \"]\"], []]: ./././Mathport/Syntax/Translate/Basic.lean:349:22: unsupported: parse error -/\n/-- Definition of `x ≤ y` on numeric pre-games, in terms of `<` -/\ntheorem le_iff_forall_lt {x y : pgame} (ox : x.numeric) (oy : y.numeric) :\n    x ≤ y ↔ (∀ i, x.move_left i < y) ∧ ∀ j, x < y.move_right j := by\n  refine' le_iff_forall_lf.trans (and_congr _ _) <;> refine' forall_congr' fun i => lf_iff_lt _ _ <;>\n    trace\n      \"./././Mathport/Syntax/Translate/Tactic/Builtin.lean:75:38: in apply_rules #[[\\\"[\\\", expr numeric.move_left, \\\",\\\", expr numeric.move_right, \\\"]\\\"], []]: ./././Mathport/Syntax/Translate/Basic.lean:349:22: unsupported: parse error\"\n#align le_iff_forall_lt le_iff_forall_lt\n\n",
+ "add":
+ "theorem add : ∀ {x y : pgame} (ox : numeric x) (oy : numeric y), numeric (x + y)\n  | ⟨xl, xr, xL, xR⟩, ⟨yl, yr, yL, yR⟩, ox, oy =>\n    ⟨by\n      rintro (ix | iy) (jx | jy)\n      · exact add_lt_add_right (ox.1 ix jx) _\n      ·\n        exact\n          (add_lf_add_of_lf_of_le (lf_mk _ _ ix) (oy.le_move_right jy)).lt ((ox.move_left ix).add oy)\n            (ox.add (oy.move_right jy))\n      ·\n        exact\n          (add_lf_add_of_lf_of_le (mk_lf _ _ jx) (oy.move_left_le iy)).lt (ox.add (oy.move_left iy))\n            ((ox.move_right jx).add oy)\n      · exact add_lt_add_left (oy.1 iy jy) ⟨xl, xr, xL, xR⟩,\n      by\n      constructor\n      · rintro (ix | iy)\n        · exact (ox.move_left ix).add oy\n        · exact ox.add (oy.move_left iy)\n      · rintro (jx | jy)\n        · apply (ox.move_right jx).add oy\n        · apply ox.add (oy.move_right jy)⟩decreasing_by\n  pgame_wf_tac\n#align add add\n\n"}

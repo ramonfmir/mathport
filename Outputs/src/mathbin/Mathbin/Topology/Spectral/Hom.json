@@ -1,0 +1,36 @@
+{"to_fun_eq_coe":
+ "-- See note [lower instance priority]\n@[simp]\ntheorem to_fun_eq_coe {f : spectral_map α β} : f.to_fun = (f : α → β) :=\n  rfl\n#align to_fun_eq_coe to_fun_eq_coe\n\n",
+ "preimage_of_is_open":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\n/-\nCopyright (c) 2022 Yaël Dillies. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Yaël Dillies\n-/\ntheorem is_compact.preimage_of_is_open (hf : is_spectral_map f) (h₀ : is_compact s) (h₁ : is_open s) :\n    is_compact («expr ⁻¹' » f s) :=\n  hf.is_compact_preimage_of_is_open h₁ h₀\n#align is_compact.preimage_of_is_open is_compact.preimage_of_is_open\n\n",
+ "is_spectral_map_id":
+ "theorem is_spectral_map_id : is_spectral_map (@id α) :=\n  ⟨continuous_id, fun s _ => id⟩\n#align is_spectral_map_id is_spectral_map_id\n\n",
+ "id_comp":
+ "@[simp]\ntheorem id_comp (f : spectral_map α β) : (spectral_map.id β).comp f = f :=\n  ext fun a => rfl\n#align id_comp id_comp\n\n",
+ "id_apply":
+ "@[simp]\ntheorem id_apply (a : α) : spectral_map.id α a = a :=\n  rfl\n#align id_apply id_apply\n\n",
+ "ext":
+ "@[ext]\ntheorem ext {f g : spectral_map α β} (h : ∀ a, f a = g a) : f = g :=\n  fun_like.ext f g h\n#align ext ext\n\n",
+ "copy_eq":
+ "theorem copy_eq (f : spectral_map α β) (f' : α → β) (h : f' = f) : f.copy f' h = f :=\n  fun_like.ext' h\n#align copy_eq copy_eq\n\n",
+ "continuous":
+ "theorem is_spectral_map.continuous {f : α → β} (hf : is_spectral_map f) : continuous f :=\n  hf.to_continuous\n#align is_spectral_map.continuous is_spectral_map.continuous\n\n",
+ "comp_id":
+ "@[simp]\ntheorem comp_id (f : spectral_map α β) : f.comp (spectral_map.id α) = f :=\n  ext fun a => rfl\n#align comp_id comp_id\n\n",
+ "comp_assoc":
+ "@[simp]\ntheorem comp_assoc (f : spectral_map γ δ) (g : spectral_map β γ) (h : spectral_map α β) :\n    (f.comp g).comp h = f.comp (g.comp h) :=\n  rfl\n#align comp_assoc comp_assoc\n\n",
+ "comp_apply":
+ "@[simp]\ntheorem comp_apply (f : spectral_map β γ) (g : spectral_map α β) (a : α) : (f.comp g) a = f (g a) :=\n  rfl\n#align comp_apply comp_apply\n\n",
+ "comp":
+ "theorem is_spectral_map.comp {f : β → γ} {g : α → β} (hf : is_spectral_map f) (hg : is_spectral_map g) :\n    is_spectral_map (f ∘ g) :=\n  ⟨hf.continuous.comp hg.continuous, fun s hs₀ hs₁ =>\n    (hs₁.preimage_of_is_open hf hs₀).preimage_of_is_open hg (hs₀.preimage hf.continuous)⟩\n#align is_spectral_map.comp is_spectral_map.comp\n\n",
+ "coe_id":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n@[simp]\ntheorem coe_id : «expr⇑ » (spectral_map.id α) = id :=\n  rfl\n#align coe_id coe_id\n\n",
+ "coe_copy":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n@[simp]\ntheorem coe_copy (f : spectral_map α β) (f' : α → β) (h : f' = f) : «expr⇑ » (f.copy f' h) = f' :=\n  rfl\n#align coe_copy coe_copy\n\n",
+ "coe_comp_continuous_map":
+ "@[simp]\ntheorem coe_comp_continuous_map (f : spectral_map β γ) (g : spectral_map α β) :\n    (f.comp g : continuous_map α γ) = (f : continuous_map β γ).comp g :=\n  rfl\n#align coe_comp_continuous_map coe_comp_continuous_map\n\n",
+ "coe_comp":
+ "@[simp]\ntheorem coe_comp (f : spectral_map β γ) (g : spectral_map α β) : (f.comp g : α → γ) = f ∘ g :=\n  rfl\n#align coe_comp coe_comp\n\n",
+ "cancel_right":
+ "theorem cancel_right {g₁ g₂ : spectral_map β γ} {f : spectral_map α β} (hf : surjective f) :\n    g₁.comp f = g₂.comp f ↔ g₁ = g₂ :=\n  ⟨fun h => ext <| hf.forall.2 <| fun_like.ext_iff.1 h, congr_arg _⟩\n#align cancel_right cancel_right\n\n",
+ "cancel_left":
+ "theorem cancel_left {g : spectral_map β γ} {f₁ f₂ : spectral_map α β} (hg : injective g) :\n    g.comp f₁ = g.comp f₂ ↔ f₁ = f₂ :=\n  ⟨fun h => ext fun a => hg <| by rw [← comp_apply, h, comp_apply], congr_arg _⟩\n#align cancel_left cancel_left\n\n"}

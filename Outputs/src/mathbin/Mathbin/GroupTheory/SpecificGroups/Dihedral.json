@@ -1,0 +1,26 @@
+{"sr_mul_sr":
+ "@[simp]\ntheorem sr_mul_sr (i j : zmod n) : sr i * sr j = r (j - i) :=\n  rfl\n#align sr_mul_sr sr_mul_sr\n\n",
+ "sr_mul_self":
+ "@[simp]\ntheorem sr_mul_self (i : zmod n) : sr i * sr i = 1 := by rw [sr_mul_sr, sub_self, one_def]\n#align sr_mul_self sr_mul_self\n\n",
+ "sr_mul_r":
+ "@[simp]\ntheorem sr_mul_r (i j : zmod n) : sr i * r j = sr (i + j) :=\n  rfl\n#align sr_mul_r sr_mul_r\n\n",
+ "r_one_pow_n":
+ "@[simp]\ntheorem r_one_pow_n : r (1 : zmod n) ^ n = 1 := by\n  rw [r_one_pow, one_def]\n  congr 1\n  exact zmod.nat_cast_self _\n#align r_one_pow_n r_one_pow_n\n\n",
+ "r_one_pow":
+ "@[simp]\ntheorem r_one_pow (k : ℕ) : (r 1 : dihedral_group n) ^ k = r k :=\n  by\n  induction' k with k IH\n  · rw [Nat.cast_zero]\n    rfl\n  · rw [pow_succ, IH, r_mul_r]\n    congr 1\n    norm_cast\n    rw [Nat.one_add]\n#align r_one_pow r_one_pow\n\n",
+ "r_mul_sr":
+ "@[simp]\ntheorem r_mul_sr (i j : zmod n) : r i * sr j = sr (j - i) :=\n  rfl\n#align r_mul_sr r_mul_sr\n\n",
+ "r_mul_r":
+ "/-\nCopyright (c) 2020 Shing Tak Lam. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Shing Tak Lam\n-/\n@[simp]\ntheorem r_mul_r (i j : zmod n) : r i * r j = r (i + j) :=\n  rfl\n#align r_mul_r r_mul_r\n\n",
+ "order_of_sr":
+ "/-- If `0 < n`, then `sr i` has order 2.\n-/\n@[simp]\ntheorem order_of_sr (i : zmod n) : order_of (sr i) = 2 :=\n  by\n  rw [order_of_eq_prime _ _]\n  · exact ⟨Nat.prime_two⟩\n  rw [sq, sr_mul_self]\n  decide\n#align order_of_sr order_of_sr\n\n",
+ "order_of_r_one":
+ "/-- If `0 < n`, then `r 1` has order `n`.\n-/\n@[simp]\ntheorem order_of_r_one : order_of (r 1 : dihedral_group n) = n :=\n  by\n  rcases eq_zero_or_neZero n with (rfl | hn)\n  · rw [order_of_eq_zero_iff']\n    intro n hn\n    rw [r_one_pow, one_def]\n    apply mt r.inj\n    simpa using hn.ne'\n  · skip\n    apply (nat.le_of_dvd (NeZero.pos n) <| order_of_dvd_of_pow_eq_one <| @r_one_pow_n n).lt_or_eq.resolve_left\n    intro h\n    have h1 : (r 1 : dihedral_group n) ^ order_of (r 1) = 1 := pow_order_of_eq_one _\n    rw [r_one_pow] at h1\n    injection h1 with h2\n    rw [← zmod.val_eq_zero, zmod.val_nat_cast, nat.mod_eq_of_lt h] at h2\n    exact absurd h2.symm (order_of_pos _).ne\n#align order_of_r_one order_of_r_one\n\n",
+ "order_of_r":
+ "/-- If `0 < n`, then `i : zmod n` has order `n / gcd n i`.\n-/\ntheorem order_of_r [ne_zero n] (i : zmod n) : order_of (r i) = n / nat.gcd n i.val :=\n  by\n  conv_lhs => rw [← zmod.nat_cast_zmod_val i]\n  rw [← r_one_pow, order_of_pow, order_of_r_one]\n#align order_of_r order_of_r\n\n",
+ "one_def":
+ "theorem one_def : (1 : dihedral_group n) = r 0 :=\n  rfl\n#align one_def one_def\n\n",
+ "exponent":
+ "theorem exponent : monoid.exponent (dihedral_group n) = lcm n 2 :=\n  by\n  rcases eq_zero_or_neZero n with (rfl | hn)\n  · exact monoid.exponent_eq_zero_of_order_zero order_of_r_one\n  skip\n  apply nat.dvd_antisymm\n  · apply monoid.exponent_dvd_of_forall_pow_eq_one\n    rintro (m | m)\n    · rw [← order_of_dvd_iff_pow_eq_one, order_of_r]\n      refine' nat.dvd_trans ⟨gcd n m.val, _⟩ (dvd_lcm_left n 2)\n      · exact (Nat.div_mul_cancel (nat.gcd_dvd_left n m.val)).symm\n    · rw [← order_of_dvd_iff_pow_eq_one, order_of_sr]\n      exact dvd_lcm_right n 2\n  · apply lcm_dvd\n    · convert monoid.order_dvd_exponent (r 1)\n      exact order_of_r_one.symm\n    · convert monoid.order_dvd_exponent (sr 0)\n      exact (order_of_sr 0).symm\n#align exponent exponent\n\n",
+ "card":
+ "/-- If `0 < n`, then `dihedral_group n` has `2n` elements.\n-/\ntheorem card [ne_zero n] : fintype.card (dihedral_group n) = 2 * n := by\n  rw [← fintype.card_eq.mpr ⟨fintype_helper⟩, fintype.card_sum, zmod.card, two_mul]\n#align card card\n\n"}

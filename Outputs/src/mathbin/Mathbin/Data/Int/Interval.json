@@ -1,0 +1,42 @@
+{"image_Ico_mod":
+ "theorem image_Ico_mod (n a : ℤ) (h : 0 ≤ a) : (Ico n (n + a)).image (· % a) = Ico 0 a :=\n  by\n  obtain rfl | ha := eq_or_lt_of_le h\n  · simp\n  ext i\n  simp only [mem_image, exists_prop, mem_range, mem_Ico]\n  constructor\n  · rintro ⟨i, h, rfl⟩\n    exact ⟨mod_nonneg i (ne_of_gt ha), mod_lt_of_pos i ha⟩\n  intro hia\n  have hn := Int.mod_add_div n a\n  obtain hi | hi := lt_or_le i (n % a)\n  · refine' ⟨i + a * (n / a + 1), ⟨_, _⟩, _⟩\n    · rw [add_comm (n / a), mul_add, mul_one, ← add_assoc]\n      refine' hn.symm.le.trans (add_le_add_right _ _)\n      simpa only [zero_add] using add_le_add hia.left (Int.emod_lt_of_pos n ha).le\n    · refine' lt_of_lt_of_le (add_lt_add_right hi (a * (n / a + 1))) _\n      rw [mul_add, mul_one, ← add_assoc, hn]\n    · rw [Int.add_mul_emod_self_left, Int.emod_eq_of_lt hia.left hia.right]\n  · refine' ⟨i + a * (n / a), ⟨_, _⟩, _⟩\n    · exact hn.symm.le.trans (add_le_add_right hi _)\n    · rw [add_comm n a]\n      refine' add_lt_add_of_lt_of_le hia.right (le_trans _ hn.le)\n      simp only [zero_le, le_add_iff_nonneg_left]\n      exact Int.emod_nonneg n (ne_of_gt ha)\n    · rw [Int.add_mul_emod_self_left, Int.emod_eq_of_lt hia.left hia.right]\n#align image_Ico_mod image_Ico_mod\n\n",
+ "card_fintype_Ioo_of_lt":
+ "theorem card_fintype_Ioo_of_lt (h : a < b) : (fintype.card (Set.Ioo a b) : ℤ) = b - a - 1 := by\n  rw [card_fintype_Ioo, sub_sub, to_nat_sub_of_le h]\n#align card_fintype_Ioo_of_lt card_fintype_Ioo_of_lt\n\n",
+ "card_fintype_Ioo":
+ "@[simp]\ntheorem card_fintype_Ioo : fintype.card (Set.Ioo a b) = (b - a - 1).to_nat := by rw [← card_Ioo, fintype.card_of_finset]\n#align card_fintype_Ioo card_fintype_Ioo\n\n",
+ "card_fintype_Ioc_of_le":
+ "theorem card_fintype_Ioc_of_le (h : a ≤ b) : (fintype.card (Set.Ioc a b) : ℤ) = b - a := by\n  rw [card_fintype_Ioc, to_nat_sub_of_le h]\n#align card_fintype_Ioc_of_le card_fintype_Ioc_of_le\n\n",
+ "card_fintype_Ioc":
+ "@[simp]\ntheorem card_fintype_Ioc : fintype.card (Set.Ioc a b) = (b - a).to_nat := by rw [← card_Ioc, fintype.card_of_finset]\n#align card_fintype_Ioc card_fintype_Ioc\n\n",
+ "card_fintype_Ico_of_le":
+ "theorem card_fintype_Ico_of_le (h : a ≤ b) : (fintype.card (Set.Ico a b) : ℤ) = b - a := by\n  rw [card_fintype_Ico, to_nat_sub_of_le h]\n#align card_fintype_Ico_of_le card_fintype_Ico_of_le\n\n",
+ "card_fintype_Ico":
+ "@[simp]\ntheorem card_fintype_Ico : fintype.card (Set.Ico a b) = (b - a).to_nat := by rw [← card_Ico, fintype.card_of_finset]\n#align card_fintype_Ico card_fintype_Ico\n\n",
+ "card_fintype_Icc_of_le":
+ "theorem card_fintype_Icc_of_le (h : a ≤ b + 1) : (fintype.card (Set.Icc a b) : ℤ) = b + 1 - a := by\n  rw [card_fintype_Icc, to_nat_sub_of_le h]\n#align card_fintype_Icc_of_le card_fintype_Icc_of_le\n\n",
+ "card_fintype_Icc":
+ "@[simp]\ntheorem card_fintype_Icc : fintype.card (Set.Icc a b) = (b + 1 - a).to_nat := by rw [← card_Icc, fintype.card_of_finset]\n#align card_fintype_Icc card_fintype_Icc\n\n",
+ "card_Ioo_of_lt":
+ "theorem card_Ioo_of_lt (h : a < b) : ((Ioo a b).card : ℤ) = b - a - 1 := by rw [card_Ioo, sub_sub, to_nat_sub_of_le h]\n#align card_Ioo_of_lt card_Ioo_of_lt\n\n",
+ "card_Ioo":
+ "@[simp]\ntheorem card_Ioo : (Ioo a b).card = (b - a - 1).to_nat :=\n  by\n  change (Finset.map _ _).card = _\n  rw [finset.card_map, finset.card_range]\n#align card_Ioo card_Ioo\n\n",
+ "card_Ioc_of_le":
+ "theorem card_Ioc_of_le (h : a ≤ b) : ((Ioc a b).card : ℤ) = b - a := by rw [card_Ioc, to_nat_sub_of_le h]\n#align card_Ioc_of_le card_Ioc_of_le\n\n",
+ "card_Ioc":
+ "@[simp]\ntheorem card_Ioc : (Ioc a b).card = (b - a).to_nat :=\n  by\n  change (Finset.map _ _).card = _\n  rw [finset.card_map, finset.card_range]\n#align card_Ioc card_Ioc\n\n",
+ "card_Ico_of_le":
+ "theorem card_Ico_of_le (h : a ≤ b) : ((Ico a b).card : ℤ) = b - a := by rw [card_Ico, to_nat_sub_of_le h]\n#align card_Ico_of_le card_Ico_of_le\n\n",
+ "card_Ico":
+ "@[simp]\ntheorem card_Ico : (Ico a b).card = (b - a).to_nat :=\n  by\n  change (Finset.map _ _).card = _\n  rw [finset.card_map, finset.card_range]\n#align card_Ico card_Ico\n\n",
+ "card_Icc_of_le":
+ "theorem card_Icc_of_le (h : a ≤ b + 1) : ((Icc a b).card : ℤ) = b + 1 - a := by rw [card_Icc, to_nat_sub_of_le h]\n#align card_Icc_of_le card_Icc_of_le\n\n",
+ "card_Icc":
+ "@[simp]\ntheorem card_Icc : (Icc a b).card = (b + 1 - a).to_nat :=\n  by\n  change (Finset.map _ _).card = _\n  rw [finset.card_map, finset.card_range]\n#align card_Icc card_Icc\n\n",
+ "Ioo_eq_finset_map":
+ "theorem Ioo_eq_finset_map :\n    Ioo a b = (Finset.range (b - a - 1).to_nat).map (Nat.castEmbedding.trans <| addLeftEmbedding (a + 1)) :=\n  rfl\n#align Ioo_eq_finset_map Ioo_eq_finset_map\n\n",
+ "Ioc_eq_finset_map":
+ "theorem Ioc_eq_finset_map :\n    Ioc a b = (Finset.range (b - a).to_nat).map (Nat.castEmbedding.trans <| addLeftEmbedding (a + 1)) :=\n  rfl\n#align Ioc_eq_finset_map Ioc_eq_finset_map\n\n",
+ "Ico_eq_finset_map":
+ "theorem Ico_eq_finset_map :\n    Ico a b = (Finset.range (b - a).to_nat).map (Nat.castEmbedding.trans <| addLeftEmbedding a) :=\n  rfl\n#align Ico_eq_finset_map Ico_eq_finset_map\n\n",
+ "Icc_eq_finset_map":
+ "/-\nCopyright (c) 2021 Yaël Dillies. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Yaël Dillies\n-/\ntheorem Icc_eq_finset_map :\n    Icc a b = (Finset.range (b + 1 - a).to_nat).map (Nat.castEmbedding.trans <| addLeftEmbedding a) :=\n  rfl\n#align Icc_eq_finset_map Icc_eq_finset_map\n\n"}

@@ -1,0 +1,94 @@
+{"transitive_one_one_reducible":
+ "theorem transitive_one_one_reducible {α} [primcodable α] : transitive (@one_one_reducible α α _ _) := fun p q r =>\n  one_one_reducible.trans\n#align transitive_one_one_reducible transitive_one_one_reducible\n\n",
+ "transitive_many_one_reducible":
+ "theorem transitive_many_one_reducible {α} [primcodable α] : transitive (@many_one_reducible α α _ _) := fun p q r =>\n  many_one_reducible.trans\n#align transitive_many_one_reducible transitive_many_one_reducible\n\n",
+ "trans":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ » -/\ntheorem equiv.computable.trans {α β γ} [primcodable α] [primcodable β] [primcodable γ] {e₁ : «expr ≃ » α β}\n    {e₂ : «expr ≃ » β γ} : e₁.computable → e₂.computable → (e₁.trans e₂).computable\n  | ⟨l₁, r₁⟩, ⟨l₂, r₂⟩ => ⟨l₂.comp l₁, r₁.comp r₂⟩\n#align equiv.computable.trans equiv.computable.trans\n\n",
+ "to_nat_many_one_reducible":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≤₀ » -/\n@[simp]\ntheorem to_nat_many_one_reducible {p : set α} : «expr ≤₀ » (to_nat p) p :=\n  ⟨fun n => (encodable.decode α n).get_or_else default,\n    computable.option_get_or_else computable.decode (computable.const _), fun _ => iff.rfl⟩\n#align to_nat_many_one_reducible to_nat_many_one_reducible\n\n",
+ "to_nat_many_one_equiv":
+ "@[simp]\ntheorem to_nat_many_one_equiv {p : set α} : many_one_equiv (to_nat p) p := by simp [many_one_equiv]\n#align to_nat_many_one_equiv to_nat_many_one_equiv\n\n",
+ "to_many_one":
+ "theorem one_one_equiv.to_many_one {α β} [primcodable α] [primcodable β] {p : α → Prop} {q : β → Prop} :\n    one_one_equiv p q → many_one_equiv p q\n  | ⟨pq, qp⟩ => ⟨pq.to_many_one, qp.to_many_one⟩\n#align one_one_equiv.to_many_one one_one_equiv.to_many_one\n\n",
+ "symm":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ » -/\ntheorem equiv.computable.symm {α β} [primcodable α] [primcodable β] {e : «expr ≃ » α β} :\n    e.computable → e.symm.computable :=\n  And.symm\n#align equiv.computable.symm equiv.computable.symm\n\n",
+ "reflexive_one_one_reducible":
+ "theorem reflexive_one_one_reducible {α} [primcodable α] : reflexive (@one_one_reducible α α _ _) :=\n  one_one_reducible_refl\n#align reflexive_one_one_reducible reflexive_one_one_reducible\n\n",
+ "reflexive_many_one_reducible":
+ "theorem reflexive_many_one_reducible {α} [primcodable α] : reflexive (@many_one_reducible α α _ _) :=\n  many_one_reducible_refl\n#align reflexive_many_one_reducible reflexive_many_one_reducible\n\n",
+ "one_one_reducible_refl":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≤₁ » -/\n@[refl]\ntheorem one_one_reducible_refl {α} [primcodable α] (p : α → Prop) : «expr ≤₁ » p p :=\n  ⟨id, computable.id, injective_id, by simp⟩\n#align one_one_reducible_refl one_one_reducible_refl\n\n",
+ "one_one_equiv_refl":
+ "@[refl]\ntheorem one_one_equiv_refl {α} [primcodable α] (p : α → Prop) : one_one_equiv p p :=\n  ⟨one_one_reducible_refl _, one_one_reducible_refl _⟩\n#align one_one_equiv_refl one_one_equiv_refl\n\n",
+ "of_le_of":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≤₀ » -/\n@[simp]\ntheorem of_le_of {p : α → Prop} {q : β → Prop} : of p ≤ of q ↔ «expr ≤₀ » p q :=\n  many_one_reducible_to_nat_to_nat\n#align of_le_of of_le_of\n\n",
+ "of_equiv_symm":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≤₁ » -/\ntheorem one_one_reducible.of_equiv_symm {α β} [primcodable α] [primcodable β] {e : «expr ≃ » α β} (q : β → Prop)\n    (h : computable e.symm) : «expr ≤₁ » q (q ∘ e) := by convert one_one_reducible.of_equiv _ h <;> funext <;> simp\n#align one_one_reducible.of_equiv_symm one_one_reducible.of_equiv_symm\n\n",
+ "of_equiv":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ » -/\ntheorem many_one_equiv.of_equiv {α β} [primcodable α] [primcodable β] {e : «expr ≃ » α β} (h : e.computable) {p} :\n    many_one_equiv (p ∘ e) p :=\n  (one_one_equiv.of_equiv h).to_many_one\n#align many_one_equiv.of_equiv many_one_equiv.of_equiv\n\n",
+ "of_eq_of":
+ "@[simp]\ntheorem of_eq_of {p : α → Prop} {q : β → Prop} : of p = of q ↔ many_one_equiv p q := by simp [of, quotient.eq']\n#align of_eq_of of_eq_of\n\n",
+ "mk":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≤₁ » -/\ntheorem one_one_reducible.mk {α β} [primcodable α] [primcodable β] {f : α → β} (q : β → Prop) (h : computable f)\n    (i : injective f) : «expr ≤₁ » (fun a => q (f a)) q :=\n  ⟨f, h, i, fun a => iff.rfl⟩\n#align one_one_reducible.mk one_one_reducible.mk\n\n",
+ "many_one_reducible_to_nat_to_nat":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≤₀ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≤₀ » -/\n@[simp]\ntheorem many_one_reducible_to_nat_to_nat {p : set α} {q : set β} : «expr ≤₀ » (to_nat p) (to_nat q) ↔ «expr ≤₀ » p q :=\n  ⟨fun h => many_one_reducible_to_nat.trans (h.trans to_nat_many_one_reducible), fun h =>\n    to_nat_many_one_reducible.trans (h.trans many_one_reducible_to_nat)⟩\n#align many_one_reducible_to_nat_to_nat many_one_reducible_to_nat_to_nat\n\n",
+ "many_one_reducible_to_nat":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≤₀ » -/\n@[simp]\ntheorem many_one_reducible_to_nat {p : set α} : «expr ≤₀ » p (to_nat p) :=\n  ⟨encodable.encode, computable.encode, by simp [to_nat, set_of]⟩\n#align many_one_reducible_to_nat many_one_reducible_to_nat\n\n",
+ "many_one_reducible_refl":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≤₀ » -/\n@[refl]\ntheorem many_one_reducible_refl {α} [primcodable α] (p : α → Prop) : «expr ≤₀ » p p :=\n  ⟨id, computable.id, by simp⟩\n#align many_one_reducible_refl many_one_reducible_refl\n\n",
+ "many_one_equiv_up":
+ "theorem many_one_equiv_up {α} [primcodable α] {p : α → Prop} : many_one_equiv (p ∘ Ulower.up) p :=\n  many_one_equiv.of_equiv ulower.down_computable.symm\n#align many_one_equiv_up many_one_equiv_up\n\n",
+ "many_one_equiv_to_nat":
+ "@[simp]\ntheorem many_one_equiv_to_nat (p : set α) (q : set β) : many_one_equiv (to_nat p) (to_nat q) ↔ many_one_equiv p q := by\n  simp [many_one_equiv]\n#align many_one_equiv_to_nat many_one_equiv_to_nat\n\n",
+ "many_one_equiv_refl":
+ "@[refl]\ntheorem many_one_equiv_refl {α} [primcodable α] (p : α → Prop) : many_one_equiv p p :=\n  ⟨many_one_reducible_refl _, many_one_reducible_refl _⟩\n#align many_one_equiv_refl many_one_equiv_refl\n\n",
+ "lift_on₂_eq":
+ "@[simp]\nprotected theorem lift_on₂_eq {φ} (p q : set ℕ) (f : set ℕ → set ℕ → φ)\n    (h : ∀ p₁ p₂ q₁ q₂, many_one_equiv p₁ p₂ → many_one_equiv q₁ q₂ → f p₁ q₁ = f p₂ q₂) :\n    (of p).lift_on₂ (of q) f h = f p q :=\n  rfl\n#align lift_on₂_eq lift_on₂_eq\n\n",
+ "lift_on_eq":
+ "@[simp]\nprotected theorem lift_on_eq {φ} (p : set ℕ) (f : set ℕ → φ) (h : ∀ p q, many_one_equiv p q → f p = f q) :\n    (of p).lift_on f h = f p :=\n  rfl\n#align lift_on_eq lift_on_eq\n\n",
+ "le_trans":
+ "#print le_trans /-\nprivate theorem le_trans {d₁ d₂ d₃ : many_one_degree} : d₁ ≤ d₂ → d₂ ≤ d₃ → d₁ ≤ d₃ :=\n  by\n  induction d₁ using many_one_degree.ind_on\n  induction d₂ using many_one_degree.ind_on\n  induction d₃ using many_one_degree.ind_on\n  apply many_one_reducible.trans\n#align le_trans le_trans\n-/\n\n",
+ "le_refl":
+ "#print le_refl /-\nprivate theorem le_refl (d : many_one_degree) : d ≤ d := by induction d using many_one_degree.ind_on <;> simp\n#align le_refl le_refl\n-/\n\n",
+ "le_congr_right":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≤₁ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≤₁ » -/\ntheorem one_one_equiv.le_congr_right {α β γ} [primcodable α] [primcodable β] [primcodable γ] {p : α → Prop}\n    {q : β → Prop} {r : γ → Prop} (h : one_one_equiv q r) : «expr ≤₁ » p q ↔ «expr ≤₁ » p r :=\n  ⟨fun h' => h'.trans h.1, fun h' => h'.trans h.2⟩\n#align one_one_equiv.le_congr_right one_one_equiv.le_congr_right\n\n",
+ "le_congr_left":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≤₁ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≤₁ » -/\ntheorem one_one_equiv.le_congr_left {α β γ} [primcodable α] [primcodable β] [primcodable γ] {p : α → Prop}\n    {q : β → Prop} {r : γ → Prop} (h : one_one_equiv p q) : «expr ≤₁ » p r ↔ «expr ≤₁ » q r :=\n  ⟨h.2.trans, h.1.trans⟩\n#align one_one_equiv.le_congr_left one_one_equiv.le_congr_left\n\n",
+ "le_antisymm":
+ "#print le_antisymm /-\nprivate theorem le_antisymm {d₁ d₂ : many_one_degree} : d₁ ≤ d₂ → d₂ ≤ d₁ → d₁ = d₂ :=\n  by\n  induction d₁ using many_one_degree.ind_on\n  induction d₂ using many_one_degree.ind_on\n  intro hp hq\n  simp_all only [many_one_equiv, of_le_of, of_eq_of, true_and_iff]\n#align le_antisymm le_antisymm\n-/\n\n",
+ "le_add_right":
+ "#print le_add_right /-\n@[simp]\nprotected theorem le_add_right (d₁ d₂ : many_one_degree) : d₂ ≤ d₁ + d₂ :=\n  (many_one_degree.add_le.1 (by rfl)).2\n#align le_add_right le_add_right\n-/\n\n",
+ "le_add_left":
+ "#print le_add_left /-\n@[simp]\nprotected theorem le_add_left (d₁ d₂ : many_one_degree) : d₁ ≤ d₁ + d₂ :=\n  (many_one_degree.add_le.1 (by rfl)).1\n#align le_add_left le_add_left\n-/\n\n",
+ "ind_on":
+ "@[elab_as_elim]\nprotected theorem ind_on {C : many_one_degree → Prop} (d : many_one_degree) (h : ∀ p : set ℕ, C (of p)) : C d :=\n  Quotient.inductionOn' d h\n#align ind_on ind_on\n\n",
+ "eqv":
+ "theorem computable.eqv (α) [denumerable α] : (denumerable.eqv α).computable :=\n  ⟨computable.encode, computable.of_nat _⟩\n#align computable.eqv computable.eqv\n\n",
+ "equiv₂":
+ "theorem computable.equiv₂ (α β) [denumerable α] [denumerable β] : (denumerable.equiv₂ α β).computable :=\n  (computable.eqv _).trans (computable.eqv _).symm\n#align computable.equiv₂ computable.equiv₂\n\n",
+ "equivalence_of_one_one_equiv":
+ "theorem equivalence_of_one_one_equiv {α} [primcodable α] : equivalence (@one_one_equiv α α _ _) :=\n  ⟨one_one_equiv_refl, fun x y => one_one_equiv.symm, fun x y z => one_one_equiv.trans⟩\n#align equivalence_of_one_one_equiv equivalence_of_one_one_equiv\n\n",
+ "equivalence_of_many_one_equiv":
+ "theorem equivalence_of_many_one_equiv {α} [primcodable α] : equivalence (@many_one_equiv α α _ _) :=\n  ⟨many_one_equiv_refl, fun x y => many_one_equiv.symm, fun x y z => many_one_equiv.trans⟩\n#align equivalence_of_many_one_equiv equivalence_of_many_one_equiv\n\n",
+ "down_computable":
+ "@[simp]\ntheorem ulower.down_computable {α} [primcodable α] : (Ulower.equiv α).computable :=\n  ⟨primrec.ulower_down.to_comp, primrec.ulower_up.to_comp⟩\n#align ulower.down_computable ulower.down_computable\n\n",
+ "disjoin_right":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≤₁ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊕' » -/\ntheorem one_one_reducible.disjoin_right {α β} [primcodable α] [primcodable β] {p : α → Prop} {q : β → Prop} :\n    «expr ≤₁ » q («expr ⊕' » p q) :=\n  ⟨sum.inr, computable.sum_inr, fun x y => Sum.inr.inj_iff.1, fun a => iff.rfl⟩\n#align one_one_reducible.disjoin_right one_one_reducible.disjoin_right\n\n",
+ "disjoin_many_one_reducible":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≤₀ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≤₀ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≤₀ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊕' » -/\ntheorem disjoin_many_one_reducible {α β γ} [primcodable α] [primcodable β] [primcodable γ] {p : α → Prop} {q : β → Prop}\n    {r : γ → Prop} : «expr ≤₀ » p r → «expr ≤₀ » q r → «expr ≤₀ » («expr ⊕' » p q) r\n  | ⟨f, c₁, h₁⟩, ⟨g, c₂, h₂⟩ =>\n    ⟨sum.elim f g, computable.id.sum_cases (c₁.comp computable.snd).to₂ (c₂.comp computable.snd).to₂, fun x => by\n      cases x <;> [apply h₁, apply h₂]⟩\n#align disjoin_many_one_reducible disjoin_many_one_reducible\n\n",
+ "disjoin_left":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≤₁ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊕' » -/\ntheorem one_one_reducible.disjoin_left {α β} [primcodable α] [primcodable β] {p : α → Prop} {q : β → Prop} :\n    «expr ≤₁ » p («expr ⊕' » p q) :=\n  ⟨sum.inl, computable.sum_inl, fun x y => Sum.inl.inj_iff.1, fun a => iff.rfl⟩\n#align one_one_reducible.disjoin_left one_one_reducible.disjoin_left\n\n",
+ "disjoin_le":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≤₀ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊕' » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≤₀ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≤₀ » -/\ntheorem disjoin_le {α β γ} [primcodable α] [primcodable β] [primcodable γ] {p : α → Prop} {q : β → Prop}\n    {r : γ → Prop} : «expr ≤₀ » («expr ⊕' » p q) r ↔ «expr ≤₀ » p r ∧ «expr ≤₀ » q r :=\n  ⟨fun h => ⟨one_one_reducible.disjoin_left.to_many_one.trans h, one_one_reducible.disjoin_right.to_many_one.trans h⟩,\n    fun ⟨h₁, h₂⟩ => disjoin_many_one_reducible h₁ h₂⟩\n#align disjoin_le disjoin_le\n\n",
+ "congr_right":
+ "theorem one_one_equiv.congr_right {α β γ} [primcodable α] [primcodable β] [primcodable γ] {p : α → Prop} {q : β → Prop}\n    {r : γ → Prop} (h : one_one_equiv q r) : one_one_equiv p q ↔ one_one_equiv p r :=\n  and_congr h.le_congr_right h.le_congr_left\n#align one_one_equiv.congr_right one_one_equiv.congr_right\n\n",
+ "congr_left":
+ "theorem one_one_equiv.congr_left {α β γ} [primcodable α] [primcodable β] [primcodable γ] {p : α → Prop} {q : β → Prop}\n    {r : γ → Prop} (h : one_one_equiv p q) : one_one_equiv p r ↔ one_one_equiv q r :=\n  and_congr h.le_congr_left h.le_congr_right\n#align one_one_equiv.congr_left one_one_equiv.congr_left\n\n",
+ "computable_of_one_one_reducible":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≤₁ » -/\ntheorem computable_of_one_one_reducible {p : α → Prop} {q : β → Prop} (h : «expr ≤₁ » p q) :\n    computable_pred q → computable_pred p :=\n  computable_of_many_one_reducible h.to_many_one\n#align computable_of_one_one_reducible computable_of_one_one_reducible\n\n",
+ "computable_of_many_one_reducible":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≤₀ » -/\ntheorem computable_of_many_one_reducible {p : α → Prop} {q : β → Prop} (h₁ : «expr ≤₀ » p q) (h₂ : computable_pred q) :\n    computable_pred p := by\n  rcases h₁ with ⟨f, c, hf⟩\n  rw [show p = fun a => q (f a) from Set.ext hf]\n  rcases computable_iff.1 h₂ with ⟨g, hg, rfl⟩\n  exact ⟨by infer_instance, by simpa using hg.comp c⟩\n#align computable_of_many_one_reducible computable_of_many_one_reducible\n\n",
+ "add_of":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊕' » -/\n@[simp]\ntheorem add_of (p : set α) (q : set β) : of («expr ⊕' » p q) = of p + of q :=\n  of_eq_of.mpr\n    ⟨disjoin_many_one_reducible (many_one_reducible_to_nat.trans one_one_reducible.disjoin_left.to_many_one)\n        (many_one_reducible_to_nat.trans one_one_reducible.disjoin_right.to_many_one),\n      disjoin_many_one_reducible (to_nat_many_one_reducible.trans one_one_reducible.disjoin_left.to_many_one)\n        (to_nat_many_one_reducible.trans one_one_reducible.disjoin_right.to_many_one)⟩\n#align add_of add_of\n\n",
+ "add_le":
+ "@[simp]\nprotected theorem add_le {d₁ d₂ d₃ : many_one_degree} : d₁ + d₂ ≤ d₃ ↔ d₁ ≤ d₃ ∧ d₂ ≤ d₃ :=\n  by\n  induction d₁ using many_one_degree.ind_on\n  induction d₂ using many_one_degree.ind_on\n  induction d₃ using many_one_degree.ind_on\n  simpa only [← add_of, of_le_of] using disjoin_le\n#align add_le add_le\n\n"}

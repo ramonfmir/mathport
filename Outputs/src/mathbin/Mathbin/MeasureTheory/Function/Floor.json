@@ -1,0 +1,18 @@
+{"nat_floor":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌊ ⌋₊» -/\n@[measurability]\ntheorem measurable.nat_floor (hf : measurable f) : measurable fun x => «expr⌊ ⌋₊» (f x) :=\n  nat.measurable_floor.comp hf\n#align measurable.nat_floor measurable.nat_floor\n\n",
+ "nat_ceil":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌈ ⌉₊» -/\n@[measurability]\ntheorem measurable.nat_ceil (hf : measurable f) : measurable fun x => «expr⌈ ⌉₊» (f x) :=\n  nat.measurable_ceil.comp hf\n#align measurable.nat_ceil measurable.nat_ceil\n\n",
+ "measurable_fract":
+ "theorem measurable_fract [borel_space R] : measurable (Int.fract : R → R) :=\n  by\n  intro s hs\n  rw [Int.preimage_fract]\n  exact measurable_set.Union fun z => measurable_id.sub_const _ (hs.inter measurable_set_Ico)\n#align measurable_fract measurable_fract\n\n",
+ "measurable_floor":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌊ ⌋₊» -/\ntheorem nat.measurable_floor : measurable (Nat.floor : R → ℕ) :=\n  measurable_to_countable fun n => by cases eq_or_ne («expr⌊ ⌋₊» n) 0 <;> simp [*, Nat.preimage_floor_of_ne_zero]\n#align nat.measurable_floor nat.measurable_floor\n\n",
+ "measurable_ceil":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌈ ⌉₊» -/\ntheorem nat.measurable_ceil : measurable (Nat.ceil : R → ℕ) :=\n  measurable_to_countable fun n => by cases eq_or_ne («expr⌈ ⌉₊» n) 0 <;> simp [*, Nat.preimage_ceil_of_ne_zero]\n#align nat.measurable_ceil nat.measurable_ceil\n\n",
+ "image_fract":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\ntheorem measurable_set.image_fract [borel_space R] {s : set R} (hs : measurable_set s) :\n    measurable_set («expr '' » Int.fract s) :=\n  by\n  simp only [Int.image_fract, sub_eq_add_neg, image_add_right']\n  exact measurable_set.Union fun m => (measurable_add_const _ hs).inter measurable_set_Ico\n#align measurable_set.image_fract measurable_set.image_fract\n\n",
+ "fract":
+ "@[measurability]\ntheorem measurable.fract [borel_space R] {f : α → R} (hf : measurable f) : measurable fun x => Int.fract (f x) :=\n  measurable_fract.comp hf\n#align measurable.fract measurable.fract\n\n",
+ "floor":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌊ ⌋» -/\n@[measurability]\ntheorem measurable.floor [opens_measurable_space R] {f : α → R} (hf : measurable f) :\n    measurable fun x => «expr⌊ ⌋» (f x) :=\n  int.measurable_floor.comp hf\n#align measurable.floor measurable.floor\n\n",
+ "ceil":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌈ ⌉» -/\n@[measurability]\ntheorem measurable.ceil [opens_measurable_space R] {f : α → R} (hf : measurable f) :\n    measurable fun x => «expr⌈ ⌉» (f x) :=\n  int.measurable_ceil.comp hf\n#align measurable.ceil measurable.ceil\n\n"}

@@ -1,0 +1,34 @@
+{"zero_compl":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\n@[simp]\ntheorem zero_compl : «expr ᶜ» (0 : { p : R // IsIdempotentElem p }) = 1 :=\n  subtype.ext <| sub_zero _\n#align zero_compl zero_compl\n\n",
+ "zero":
+ "theorem zero : IsIdempotentElem (0 : M₀) :=\n  mul_zero _\n#align zero zero\n\n",
+ "pow_succ_eq":
+ "theorem pow_succ_eq {p : N} (n : ℕ) (h : IsIdempotentElem p) : p ^ (n + 1) = p :=\n  nat.rec_on n ((nat.zero_add 1).symm ▸ pow_one p) fun n ih => by rw [pow_succ, ih, h.eq]\n#align pow_succ_eq pow_succ_eq\n\n",
+ "pow":
+ "theorem pow {p : N} (n : ℕ) (h : IsIdempotentElem p) : IsIdempotentElem (p ^ n) :=\n  nat.rec_on n ((pow_zero p).symm ▸ one) fun n ih =>\n    show p ^ n.succ * p ^ n.succ = p ^ n.succ by\n      nth_rw 3 [← h.eq]\n      rw [← sq, ← sq, ← pow_mul, ← pow_mul']\n#align pow pow\n\n",
+ "one_sub_iff":
+ "@[simp]\ntheorem one_sub_iff {p : R} : IsIdempotentElem (1 - p) ↔ IsIdempotentElem p :=\n  ⟨fun h => sub_sub_cancel 1 p ▸ h.one_sub, IsIdempotentElem.one_sub⟩\n#align one_sub_iff one_sub_iff\n\n",
+ "one_sub":
+ "theorem one_sub {p : R} (h : IsIdempotentElem p) : IsIdempotentElem (1 - p) := by\n  rw [IsIdempotentElem, mul_sub, mul_one, sub_mul, one_mul, h.eq, sub_self, sub_zero]\n#align one_sub one_sub\n\n",
+ "one_compl":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\n@[simp]\ntheorem one_compl : «expr ᶜ» (1 : { p : R // IsIdempotentElem p }) = 0 :=\n  subtype.ext <| sub_self _\n#align one_compl one_compl\n\n",
+ "one":
+ "theorem one : IsIdempotentElem (1 : M₁) :=\n  mul_one _\n#align one one\n\n",
+ "of_is_idempotent":
+ "/-\nCopyright (c) 2022 Christopher Hoskin. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Christopher Hoskin\n-/\ntheorem of_is_idempotent [is_idempotent M (· * ·)] (a : M) : IsIdempotentElem a :=\n  is_idempotent.idempotent a\n#align of_is_idempotent of_is_idempotent\n\n",
+ "mul_of_commute":
+ "theorem mul_of_commute {p q : S} (h : Commute p q) (h₁ : IsIdempotentElem p) (h₂ : IsIdempotentElem q) :\n    IsIdempotentElem (p * q) := by\n  rw [IsIdempotentElem, mul_assoc, ← mul_assoc q, ← h.eq, mul_assoc p, h₂.eq, ← mul_assoc, h₁.eq]\n#align mul_of_commute mul_of_commute\n\n",
+ "iff_eq_zero_or_one":
+ "@[simp]\ntheorem iff_eq_zero_or_one {p : G₀} : IsIdempotentElem p ↔ p = 0 ∨ p = 1 :=\n  by\n  refine'\n    iff.intro (fun h => or_iff_not_imp_left.mpr fun hp => _) fun h =>\n      h.elim (fun hp => hp.symm ▸ zero) fun hp => hp.symm ▸ one\n  exact mul_left_cancel₀ hp (h.trans (mul_one p).symm)\n#align iff_eq_zero_or_one iff_eq_zero_or_one\n\n",
+ "iff_eq_one":
+ "@[simp]\ntheorem iff_eq_one {p : G} : IsIdempotentElem p ↔ p = 1 :=\n  iff.intro (fun h => mul_left_cancel ((mul_one p).symm ▸ h.eq : p * p = p * 1)) fun h => h.symm ▸ one\n#align iff_eq_one iff_eq_one\n\n",
+ "eq":
+ "theorem eq {p : M} (h : IsIdempotentElem p) : p * p = p :=\n  h\n#align eq eq\n\n",
+ "compl_compl":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\n#print compl_compl /-\n@[simp]\ntheorem compl_compl (p : { p : R // IsIdempotentElem p }) : «expr ᶜ» («expr ᶜ» p) = p :=\n  subtype.ext <| sub_sub_cancel _ _\n#align compl_compl compl_compl\n-/\n\n",
+ "coe_zero":
+ "@[simp]\ntheorem coe_zero : ↑(0 : { p : M₀ // IsIdempotentElem p }) = (0 : M₀) :=\n  rfl\n#align coe_zero coe_zero\n\n",
+ "coe_one":
+ "@[simp]\ntheorem coe_one : ↑(1 : { p : M₁ // IsIdempotentElem p }) = (1 : M₁) :=\n  rfl\n#align coe_one coe_one\n\n",
+ "coe_compl":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\n@[simp]\ntheorem coe_compl (p : { p : R // IsIdempotentElem p }) : ↑(«expr ᶜ» p) = (1 : R) - ↑p :=\n  rfl\n#align coe_compl coe_compl\n\n"}

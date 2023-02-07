@@ -1,0 +1,26 @@
+{"tendsto_of_forall_preimage":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\ntheorem tendsto_of_forall_preimage {f : α → β} (h : ∀ s, is_compact s → is_compact («expr ⁻¹' » f s)) :\n    tendsto f (cocompact α) (cocompact β) := fun s hs =>\n  match mem_cocompact.mp hs with\n  | ⟨t, ht, hts⟩ => mem_map.mpr (mem_cocompact.mpr ⟨«expr ⁻¹' » f t, h t ht, by simpa using preimage_mono hts⟩)\n#align tendsto_of_forall_preimage tendsto_of_forall_preimage\n\n",
+ "is_compact_preimage":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\n/-- If the codomain is Hausdorff, preimages of compact sets are compact under a cocompact\ncontinuous map. -/\ntheorem is_compact_preimage [t2_space β] (f : cocompact_map α β) ⦃s : set β⦄ (hs : is_compact s) :\n    is_compact («expr ⁻¹' » f s) :=\n  by\n  obtain ⟨t, ht, hts⟩ :=\n    mem_cocompact'.mp\n      (by\n        simpa only [preimage_image_preimage, preimage_compl] using\n          mem_map.mp\n            (cocompact_tendsto f <| mem_cocompact.mpr ⟨s, hs, compl_subset_compl.mpr (image_preimage_subset f _)⟩))\n  exact is_compact_of_is_closed_subset ht (hs.is_closed.preimage <| map_continuous f) (by simpa using hts)\n#align is_compact_preimage is_compact_preimage\n\n",
+ "id_comp":
+ "@[simp]\ntheorem id_comp (f : cocompact_map α β) : (cocompact_map.id _).comp f = f :=\n  ext fun _ => rfl\n#align id_comp id_comp\n\n",
+ "ext":
+ "@[ext]\ntheorem ext {f g : cocompact_map α β} (h : ∀ x, f x = g x) : f = g :=\n  fun_like.ext _ _ h\n#align ext ext\n\n",
+ "copy_eq":
+ "theorem copy_eq (f : cocompact_map α β) (f' : α → β) (h : f' = f) : f.copy f' h = f :=\n  fun_like.ext' h\n#align copy_eq copy_eq\n\n",
+ "comp_id":
+ "@[simp]\ntheorem comp_id (f : cocompact_map α β) : f.comp (cocompact_map.id _) = f :=\n  ext fun _ => rfl\n#align comp_id comp_id\n\n",
+ "comp_assoc":
+ "@[simp]\ntheorem comp_assoc (f : cocompact_map γ δ) (g : cocompact_map β γ) (h : cocompact_map α β) :\n    (f.comp g).comp h = f.comp (g.comp h) :=\n  rfl\n#align comp_assoc comp_assoc\n\n",
+ "comp_apply":
+ "@[simp]\ntheorem comp_apply (f : cocompact_map β γ) (g : cocompact_map α β) (a : α) : comp f g a = f (g a) :=\n  rfl\n#align comp_apply comp_apply\n\n",
+ "coe_to_continuous_fun":
+ "/-\nCopyright (c) 2022 Jireh Loreaux. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Jireh Loreaux\n-/\n@[simp]\ntheorem coe_to_continuous_fun {f : cocompact_map α β} : (f.to_continuous_map : α → β) = f :=\n  rfl\n#align coe_to_continuous_fun coe_to_continuous_fun\n\n",
+ "coe_mk":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«exprC( , )» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n@[simp]\ntheorem coe_mk (f : «exprC( , )» α β) (h : tendsto f (cocompact α) (cocompact β)) :\n    «expr⇑ » (⟨f, h⟩ : cocompact_map α β) = f :=\n  rfl\n#align coe_mk coe_mk\n\n",
+ "coe_id":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n@[simp]\ntheorem coe_id : «expr⇑ » (cocompact_map.id α) = id :=\n  rfl\n#align coe_id coe_id\n\n",
+ "coe_copy":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n@[simp]\ntheorem coe_copy (f : cocompact_map α β) (f' : α → β) (h : f' = f) : «expr⇑ » (f.copy f' h) = f' :=\n  rfl\n#align coe_copy coe_copy\n\n",
+ "coe_comp":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n@[simp]\ntheorem coe_comp (f : cocompact_map β γ) (g : cocompact_map α β) : «expr⇑ » (comp f g) = f ∘ g :=\n  rfl\n#align coe_comp coe_comp\n\n"}

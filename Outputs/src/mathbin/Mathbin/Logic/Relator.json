@@ -1,0 +1,22 @@
+{"rel_or":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⇒ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⇒ » -/\ntheorem rel_or : («expr ⇒ » (· ↔ ·) («expr ⇒ » (· ↔ ·) (· ↔ ·))) (· ∨ ·) (· ∨ ·) := fun a b h₁ c d h₂ => or_congr h₁ h₂\n#align rel_or rel_or\n\n",
+ "rel_not":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⇒ » -/\ntheorem rel_not : («expr ⇒ » iff iff) not not := fun p q h => not_congr h\n#align rel_not rel_not\n\n",
+ "rel_imp":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⇒ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⇒ » -/\ntheorem rel_imp : («expr ⇒ » iff («expr ⇒ » iff iff)) implies implies := fun p q h r s l => imp_congr h l\n#align rel_imp rel_imp\n\n",
+ "rel_iff":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⇒ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⇒ » -/\ntheorem rel_iff : («expr ⇒ » (· ↔ ·) («expr ⇒ » (· ↔ ·) (· ↔ ·))) (· ↔ ·) (· ↔ ·) := fun a b h₁ c d h₂ =>\n  iff_congr h₁ h₂\n#align rel_iff rel_iff\n\n",
+ "rel_forall":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⇒ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⇒ » -/\ntheorem bi_total.rel_forall (h : bi_total R) :\n    («expr ⇒ » («expr ⇒ » R iff) iff) (fun p => ∀ i, p i) fun q => ∀ i, q i := fun p q Hrel =>\n  ⟨fun H b => exists.elim (h.right b) fun a Rab => (Hrel Rab).mp (H _), fun H a =>\n    exists.elim (h.left a) fun b Rab => (Hrel Rab).mpr (H _)⟩\n#align bi_total.rel_forall bi_total.rel_forall\n\n",
+ "rel_exists":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⇒ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⇒ » -/\ntheorem bi_total.rel_exists (h : bi_total R) :\n    («expr ⇒ » («expr ⇒ » R iff) iff) (fun p => ∃ i, p i) fun q => ∃ i, q i := fun p q Hrel =>\n  ⟨fun ⟨a, pa⟩ => (h.left a).imp fun b Rab => (Hrel Rab).1 pa, fun ⟨b, qb⟩ =>\n    (h.right b).imp fun a Rab => (Hrel Rab).2 qb⟩\n#align bi_total.rel_exists bi_total.rel_exists\n\n",
+ "rel_eq":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⇒ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⇒ » -/\ntheorem rel_eq {r : α → β → Prop} (hr : bi_unique r) : («expr ⇒ » r («expr ⇒ » r (· ↔ ·))) (· = ·) (· = ·) :=\n  fun a b h₁ c d h₂ => ⟨fun h => hr.right h₁ <| h.symm ▸ h₂, fun h => hr.left h₁ <| h.symm ▸ h₂⟩\n#align rel_eq rel_eq\n\n",
+ "rel_and":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⇒ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⇒ » -/\ntheorem rel_and : («expr ⇒ » (· ↔ ·) («expr ⇒ » (· ↔ ·) (· ↔ ·))) (· ∧ ·) (· ∧ ·) := fun a b h₁ c d h₂ =>\n  and_congr h₁ h₂\n#align rel_and rel_and\n\n",
+ "left_unique_of_rel_eq":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⇒ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⇒ » -/\ntheorem left_unique_of_rel_eq {eq' : β → β → Prop} (he : («expr ⇒ » R («expr ⇒ » R iff)) eq eq') : left_unique R :=\n  fun a b c (ac : R a c) (bc : R b c) => (he ac bc).mpr ((he bc bc).mp rfl)\n#align left_unique_of_rel_eq left_unique_of_rel_eq\n\n",
+ "flip":
+ "theorem left_unique.flip (h : left_unique r) : right_unique (flip r) := fun a b c h₁ h₂ => h h₁ h₂\n#align left_unique.flip left_unique.flip\n\n",
+ "bi_total_eq":
+ "theorem bi_total_eq {α : Type u₁} : relator.bi_total (@eq α) :=\n  { left := fun a => ⟨a, rfl⟩\n    right := fun a => ⟨a, rfl⟩ }\n#align bi_total_eq bi_total_eq\n\n"}

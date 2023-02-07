@@ -1,0 +1,18 @@
+{"num_mul_denom_eq_num_mul_denom_iff_eq":
+ "theorem num_mul_denom_eq_num_mul_denom_iff_eq {x y : K} : num A y * denom A x = num A x * denom A y ↔ x = y :=\n  ⟨fun h => by simpa only [mk'_num_denom] using mk'_eq_of_eq h, fun h => by rw [h]⟩\n#align num_mul_denom_eq_num_mul_denom_iff_eq num_mul_denom_eq_num_mul_denom_iff_eq\n\n",
+ "num_mul_denom_eq_num_iff_eq'":
+ "theorem num_mul_denom_eq_num_iff_eq' {x y : K} : y * algebra_map A K (denom A x) = algebra_map A K (num A x) ↔ x = y :=\n  ⟨fun h => by simpa only [eq_comm, mk'_num_denom] using eq_mk'_iff_mul_eq.mpr h, fun h =>\n    eq_mk'_iff_mul_eq.mp (by rw [h, mk'_num_denom])⟩\n#align num_mul_denom_eq_num_iff_eq' num_mul_denom_eq_num_iff_eq'\n\n",
+ "num_mul_denom_eq_num_iff_eq":
+ "theorem num_mul_denom_eq_num_iff_eq {x y : K} : x * algebra_map A K (denom A y) = algebra_map A K (num A y) ↔ x = y :=\n  ⟨fun h => by simpa only [mk'_num_denom] using eq_mk'_iff_mul_eq.mpr h, fun h =>\n    eq_mk'_iff_mul_eq.mp (by rw [h, mk'_num_denom])⟩\n#align num_mul_denom_eq_num_iff_eq num_mul_denom_eq_num_iff_eq\n\n",
+ "num_denom_reduced":
+ "theorem num_denom_reduced (x : K) {d} : d ∣ num A x → d ∣ denom A x → is_unit d :=\n  (Classical.choose_spec (Classical.choose_spec (exists_reduced_fraction A x))).1\n#align num_denom_reduced num_denom_reduced\n\n",
+ "mk'_num_denom":
+ "@[simp]\ntheorem mk'_num_denom (x : K) : mk' K (num A x) (denom A x) = x :=\n  (Classical.choose_spec (Classical.choose_spec (exists_reduced_fraction A x))).2\n#align mk'_num_denom mk'_num_denom\n\n",
+ "is_unit_denom_of_num_eq_zero":
+ "theorem is_unit_denom_of_num_eq_zero {x : K} (h : num A x = 0) : is_unit (denom A x : A) :=\n  num_denom_reduced A x (h.symm ▸ dvd_zero _) dvd_rfl\n#align is_unit_denom_of_num_eq_zero is_unit_denom_of_num_eq_zero\n\n",
+ "is_integer_of_is_unit_denom":
+ "theorem is_integer_of_is_unit_denom {x : K} (h : is_unit (denom A x : A)) : is_integer A x :=\n  by\n  cases' h with d hd\n  have d_ne_zero : algebra_map A K (denom A x) ≠ 0 :=\n    is_fraction_ring.to_map_ne_zero_of_mem_non_zero_divisors (denom A x).2\n  use ↑d⁻¹ * Num A x\n  refine' trans _ (mk'_num_denom A x)\n  rw [map_mul, map_units_inv, hd]\n  apply mul_left_cancel₀ d_ne_zero\n  rw [← mul_assoc, mul_inv_cancel d_ne_zero, one_mul, mk'_spec']\n#align is_integer_of_is_unit_denom is_integer_of_is_unit_denom\n\n",
+ "exists_reduced_fraction":
+ "/-\nCopyright (c) 2018 Kenny Lau. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Kenny Lau, Mario Carneiro, Johan Commelin, Amelia Livingston, Anne Baanen\n-/\ntheorem exists_reduced_fraction (x : K) :\n    ∃ (a : A)(b : non_zero_divisors A), (∀ {d}, d ∣ a → d ∣ b → is_unit d) ∧ mk' K a b = x :=\n  by\n  obtain ⟨⟨b, b_nonzero⟩, a, hab⟩ := exists_integer_multiple (non_zero_divisors A) x\n  obtain ⟨a', b', c', no_factor, rfl, rfl⟩ :=\n    unique_factorization_monoid.exists_reduced_factors' a b (mem_non_zero_divisors_iff_ne_zero.mp b_nonzero)\n  obtain ⟨c'_nonzero, b'_nonzero⟩ := mul_mem_non_zero_divisors.mp b_nonzero\n  refine' ⟨a', ⟨b', b'_nonzero⟩, @no_factor, _⟩\n  refine' mul_left_cancel₀ (is_fraction_ring.to_map_ne_zero_of_mem_non_zero_divisors b_nonzero) _\n  simp only [subtype.coe_mk, RingHom.map_mul, algebra.smul_def] at *\n  erw [← hab, mul_assoc, mk'_spec' _ a' ⟨b', b'_nonzero⟩]\n#align exists_reduced_fraction exists_reduced_fraction\n\n",
+ "eq_zero_of_num_eq_zero":
+ "theorem eq_zero_of_num_eq_zero {x : K} (h : num A x = 0) : x = 0 :=\n  num_mul_denom_eq_num_iff_eq'.mp (by rw [zero_mul, h, RingHom.map_zero])\n#align eq_zero_of_num_eq_zero eq_zero_of_num_eq_zero\n\n"}

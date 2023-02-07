@@ -1,0 +1,134 @@
+{"transitive_trans_gen":
+ "theorem transitive_trans_gen : transitive (trans_gen r) := fun a b c => trans_gen.trans\n#align transitive_trans_gen transitive_trans_gen\n\n",
+ "transitive_refl_trans_gen":
+ "theorem transitive_refl_trans_gen : transitive (refl_trans_gen r) := fun a b c => trans\n#align transitive_refl_trans_gen transitive_refl_trans_gen\n\n",
+ "transitive_join":
+ "theorem transitive_join (ht : transitive r) (h : ∀ a b c, r a b → r a c → join r b c) : transitive (join r) :=\n  fun a b c ⟨x, hax, hbx⟩ ⟨y, hby, hcy⟩ =>\n  let ⟨z, hxz, hyz⟩ := h b x y hbx hby\n  ⟨z, ht hax hxz, ht hcy hyz⟩\n#align transitive_join transitive_join\n\n",
+ "trans_right":
+ "@[trans]\ntheorem trans_right (hab : refl_trans_gen r a b) (hbc : trans_gen r b c) : trans_gen r a c :=\n  by\n  induction hbc\n  case single c hbc => exact tail' hab hbc\n  case tail c d hbc hcd hac => exact hac.tail hcd\n#align trans_right trans_right\n\n",
+ "trans_left":
+ "@[trans]\ntheorem trans_left (hab : trans_gen r a b) (hbc : refl_trans_gen r b c) : trans_gen r a c :=\n  by\n  induction hbc\n  case refl => assumption\n  case tail c d hbc hcd hac => exact hac.tail hcd\n#align trans_left trans_left\n\n",
+ "trans_induction_on":
+ "@[elab_as_elim]\ntheorem trans_induction_on {P : ∀ {a b : α}, trans_gen r a b → Prop} {a b : α} (h : trans_gen r a b)\n    (base : ∀ {a b} (h : r a b), P (single h))\n    (ih : ∀ {a b c} (h₁ : trans_gen r a b) (h₂ : trans_gen r b c), P h₁ → P h₂ → P (h₁.trans h₂)) : P h :=\n  by\n  induction h\n  case single a h => exact base h\n  case tail b c hab hbc h_ih => exact ih hab (single hbc) h_ih (base hbc)\n#align trans_induction_on trans_induction_on\n\n",
+ "trans_gen_swap":
+ "theorem trans_gen_swap : trans_gen (swap r) a b ↔ trans_gen r b a :=\n  ⟨trans_gen.swap, trans_gen.swap⟩\n#align trans_gen_swap trans_gen_swap\n\n",
+ "trans_gen_idem":
+ "theorem trans_gen_idem : trans_gen (trans_gen r) = trans_gen r :=\n  transGen_eq_self transitive_transGen\n#align trans_gen_idem trans_gen_idem\n\n",
+ "trans_gen_eq_self":
+ "theorem trans_gen_eq_self (trans : transitive r) : trans_gen r = r :=\n  funext fun a =>\n    funext fun b =>\n      propext <|\n        ⟨fun h => by\n          induction h\n          case single c hc => exact hc\n          case tail c d hac hcd hac => exact trans hac hcd, trans_gen.single⟩\n#align trans_gen_eq_self trans_gen_eq_self\n\n",
+ "trans_gen":
+ "#print WellFounded.transGen /-\ntheorem WellFounded.transGen (h : well_founded r) : well_founded (trans_gen r) :=\n  ⟨fun a => (h.apply a).trans_gen⟩\n#align well_founded.trans_gen WellFounded.transGen\n-/\n\n",
+ "trans":
+ "#print trans /-\n@[trans]\ntheorem trans (hab : trans_gen r a b) (hbc : trans_gen r b c) : trans_gen r a c :=\n  trans_left hab hbc.to_refl\n#align trans trans\n-/\n\n",
+ "total_of_right_unique":
+ "theorem total_of_right_unique (U : relator.right_unique r) (ab : refl_trans_gen r a b) (ac : refl_trans_gen r a c) :\n    refl_trans_gen r b c ∨ refl_trans_gen r c b :=\n  by\n  induction' ab with b d ab bd IH\n  · exact or.inl ac\n  · rcases IH with (IH | IH)\n    · rcases cases_head IH with (rfl | ⟨e, be, ec⟩)\n      · exact or.inr (single bd)\n      · cases U bd be\n        exact or.inl ec\n    · exact or.inr (IH.tail bd)\n#align total_of_right_unique total_of_right_unique\n\n",
+ "to_refl_trans_gen":
+ "theorem to_refl_trans_gen : ∀ {a b}, refl_gen r a b → refl_trans_gen r a b\n  | a, _, refl => by rfl\n  | a, b, single h => refl_trans_gen.tail refl_trans_gen.refl h\n#align to_refl_trans_gen to_refl_trans_gen\n\n",
+ "to_refl":
+ "theorem to_refl {a b} (h : trans_gen r a b) : refl_trans_gen r a b :=\n  by\n  induction' h with b h b c _ bc ab\n  exact refl_trans_gen.single h\n  exact refl_trans_gen.tail ab bc\n#align to_refl to_refl\n\n",
+ "tail'_iff":
+ "theorem tail'_iff : trans_gen r a c ↔ ∃ b, refl_trans_gen r a b ∧ r b c :=\n  by\n  refine' ⟨fun h => _, fun ⟨b, hab, hbc⟩ => tail' hab hbc⟩\n  cases' h with _ hac b _ hab hbc\n  · exact ⟨_, by rfl, hac⟩\n  · exact ⟨_, hab.to_refl, hbc⟩\n#align tail'_iff tail'_iff\n\n",
+ "tail'":
+ "theorem tail' (hab : refl_trans_gen r a b) (hbc : r b c) : trans_gen r a c :=\n  by\n  induction hab generalizing c\n  case refl c hac => exact single hac\n  case tail d b hab hdb IH => exact tail (IH hdb) hbc\n#align tail' tail'\n\n",
+ "symmetric_join":
+ "theorem symmetric_join : symmetric (join r) := fun a b ⟨c, hac, hcb⟩ => ⟨c, hcb, hac⟩\n#align symmetric_join symmetric_join\n\n",
+ "symmetric":
+ "theorem symmetric (h : symmetric r) : symmetric (refl_trans_gen r) :=\n  by\n  intro x y h\n  induction' h with z w a b c\n  · rfl\n  · apply relation.refl_trans_gen.head (h b) c\n#align symmetric symmetric\n\n",
+ "swap_eq_iff":
+ "#print swap_eq_iff /-\ntheorem swap_eq_iff : swap r = r ↔ symmetric r :=\n  flip_eq_iff\n#align swap_eq_iff swap_eq_iff\n-/\n\n",
+ "swap_eq":
+ "theorem symmetric.swap_eq : symmetric r → swap r = r :=\n  symmetric.flip_eq\n#align symmetric.swap_eq symmetric.swap_eq\n\n",
+ "swap":
+ "theorem refl_trans_gen.swap (h : refl_trans_gen r b a) : refl_trans_gen (swap r) a b :=\n  by\n  induction' h with b c hab hbc ih\n  · rfl\n  exact ih.head hbc\n#align refl_trans_gen.swap refl_trans_gen.swap\n\n",
+ "single":
+ "theorem single (hab : r a b) : refl_trans_gen r a b :=\n  refl.tail hab\n#align single single\n\n",
+ "rel_of_ne_imp":
+ "/-- To show a reflexive relation `r : α → α → Prop` holds over `x y : α`,\nit suffices to show it holds when `x ≠ y`. -/\ntheorem reflexive.rel_of_ne_imp (h : reflexive r) {x y : α} (hr : x ≠ y → r x y) : r x y :=\n  by\n  by_cases hxy : x = y\n  · exact hxy ▸ h x\n  · exact hr hxy\n#align reflexive.rel_of_ne_imp reflexive.rel_of_ne_imp\n\n",
+ "reflexive_refl_trans_gen":
+ "theorem reflexive_refl_trans_gen : reflexive (refl_trans_gen r) := fun a => refl\n#align reflexive_refl_trans_gen reflexive_refl_trans_gen\n\n",
+ "reflexive_ne_imp_iff":
+ "#print reflexive_ne_imp_iff /-\n/-- If a reflexive relation `r : α → α → Prop` holds over `x y : α`,\nthen it holds whether or not `x ≠ y`. Unlike `reflexive.ne_imp_iff`, this uses `[is_refl α r]`. -/\ntheorem reflexive_ne_imp_iff [is_refl α r] {x y : α} : x ≠ y → r x y ↔ r x y :=\n  is_refl.reflexive.ne_imp_iff\n#align reflexive_ne_imp_iff reflexive_ne_imp_iff\n-/\n\n",
+ "reflexive_join":
+ "theorem reflexive_join (h : reflexive r) : reflexive (join r) := fun a => ⟨a, h a, h a⟩\n#align reflexive_join reflexive_join\n\n",
+ "reflexive":
+ "/-\nCopyright (c) 2018 Johannes Hölzl. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Johannes Hölzl\n-/\ntheorem is_refl.reflexive [is_refl α r] : reflexive r := fun x => is_refl.refl x\n#align is_refl.reflexive is_refl.reflexive\n\n",
+ "refl_trans_gen_swap":
+ "theorem refl_trans_gen_swap : refl_trans_gen (swap r) a b ↔ refl_trans_gen r b a :=\n  ⟨refl_trans_gen.swap, refl_trans_gen.swap⟩\n#align refl_trans_gen_swap refl_trans_gen_swap\n\n",
+ "refl_trans_gen_of_transitive_reflexive":
+ "theorem refl_trans_gen_of_transitive_reflexive {r' : α → α → Prop} (hr : reflexive r) (ht : transitive r)\n    (h : ∀ a b, r' a b → r a b) (h' : refl_trans_gen r' a b) : r a b :=\n  by\n  induction' h' with b c hab hbc ih\n  · exact hr _\n  · exact ht ih (h _ _ hbc)\n#align refl_trans_gen_of_transitive_reflexive refl_trans_gen_of_transitive_reflexive\n\n",
+ "refl_trans_gen_of_equivalence":
+ "theorem refl_trans_gen_of_equivalence {r' : α → α → Prop} (hr : equivalence r) :\n    (∀ a b, r' a b → r a b) → refl_trans_gen r' a b → r a b :=\n  reflTransGen_of_transitive_reflexive hr.1 hr.2.2\n#align refl_trans_gen_of_equivalence refl_trans_gen_of_equivalence\n\n",
+ "refl_trans_gen_iff_eq_or_trans_gen":
+ "theorem refl_trans_gen_iff_eq_or_trans_gen : refl_trans_gen r a b ↔ b = a ∨ trans_gen r a b :=\n  by\n  refine' ⟨fun h => _, fun h => _⟩\n  · cases' h with c _ hac hcb\n    · exact or.inl rfl\n    · exact or.inr (trans_gen.tail' hac hcb)\n  · rcases h with (rfl | h)\n    · rfl\n    · exact h.to_refl\n#align refl_trans_gen_iff_eq_or_trans_gen refl_trans_gen_iff_eq_or_trans_gen\n\n",
+ "refl_trans_gen_iff_eq":
+ "theorem refl_trans_gen_iff_eq (h : ∀ b, ¬r a b) : refl_trans_gen r a b ↔ b = a := by\n  rw [cases_head_iff] <;> simp [h, eq_comm]\n#align refl_trans_gen_iff_eq refl_trans_gen_iff_eq\n\n",
+ "refl_trans_gen_idem":
+ "theorem refl_trans_gen_idem : refl_trans_gen (refl_trans_gen r) = refl_trans_gen r :=\n  reflTransGen_eq_self reflexive_reflTransGen transitive_reflTransGen\n#align refl_trans_gen_idem refl_trans_gen_idem\n\n",
+ "refl_trans_gen_eq_self":
+ "theorem refl_trans_gen_eq_self (refl : reflexive r) (trans : transitive r) : refl_trans_gen r = r :=\n  funext fun a =>\n    funext fun b =>\n      propext <|\n        ⟨fun h => by\n          induction' h with b c h₁ h₂ IH; · apply refl\n          exact trans IH h₂, single⟩\n#align refl_trans_gen_eq_self refl_trans_gen_eq_self\n\n",
+ "refl_trans_gen_closed":
+ "theorem refl_trans_gen_closed {p : α → α → Prop} :\n    (∀ a b, r a b → refl_trans_gen p a b) → refl_trans_gen r a b → refl_trans_gen p a b :=\n  refl_trans_gen.lift' id\n#align refl_trans_gen_closed refl_trans_gen_closed\n\n",
+ "of_fibration":
+ "/-- If `f : α → β` is a fibration between relations `rα` and `rβ`, and `a : α` is\n  accessible under `rα`, then `f a` is accessible under `rβ`. -/\ntheorem _root_.acc.of_fibration (fib : fibration rα rβ f) {a} (ha : acc rα a) : acc rβ (f a) :=\n  by\n  induction' ha with a ha ih\n  refine' acc.intro (f a) fun b hr => _\n  obtain ⟨a', hr', rfl⟩ := fib hr\n  exact ih a' hr'\n#align acc.of_fibration acc.of_fibration\n\n",
+ "of_downward_closed":
+ "theorem _root_.acc.of_downward_closed (dc : ∀ {a b}, rβ b (f a) → ∃ c, f c = b) (a : α) (ha : acc (inv_image rβ f) a) :\n    acc rβ (f a) :=\n  ha.of_fibration f fun a b h =>\n    let ⟨a', he⟩ := dc h\n    ⟨a', he.substr h, he⟩\n#align acc.of_downward_closed acc.of_downward_closed\n\n",
+ "ne_imp_iff":
+ "/-- If a reflexive relation `r : α → α → Prop` holds over `x y : α`,\nthen it holds whether or not `x ≠ y`. -/\ntheorem reflexive.ne_imp_iff (h : reflexive r) {x y : α} : x ≠ y → r x y ↔ r x y :=\n  ⟨h.rel_of_ne_imp, fun hr _ => hr⟩\n#align reflexive.ne_imp_iff reflexive.ne_imp_iff\n\n",
+ "mono":
+ "theorem eqv_gen.mono {r p : α → α → Prop} (hrp : ∀ a b, r a b → p a b) (h : EqvGen r a b) : EqvGen p a b :=\n  by\n  induction h\n  case rel a b h => exact eqv_gen.rel _ _ (hrp _ _ h)\n  case refl => exact eqv_gen.refl _\n  case symm a b h ih => exact eqv_gen.symm _ _ ih\n  case trans a b c ih1 ih2 hab hbc => exact eqv_gen.trans _ _ _ hab hbc\n#align eqv_gen.mono eqv_gen.mono\n\n",
+ "lift'":
+ "theorem refl_trans_gen.lift' {p : β → β → Prop} {a b : α} (f : α → β) (h : ∀ a b, r a b → refl_trans_gen p (f a) (f b))\n    (hab : refl_trans_gen r a b) : refl_trans_gen p (f a) (f b) := by simpa [refl_trans_gen_idem] using hab.lift f h\n#align refl_trans_gen.lift' refl_trans_gen.lift'\n\n",
+ "lift":
+ "theorem refl_trans_gen.lift {p : β → β → Prop} {a b : α} (f : α → β) (h : ∀ a b, r a b → p (f a) (f b))\n    (hab : refl_trans_gen r a b) : refl_trans_gen p (f a) (f b) :=\n  refl_trans_gen.trans_induction_on hab (fun a => refl) (fun a b => refl_trans_gen.single ∘ h _ _) fun a b c _ _ =>\n    trans\n#align refl_trans_gen.lift refl_trans_gen.lift\n\n",
+ "join_of_single":
+ "theorem join_of_single (h : reflexive r) (hab : r a b) : join r a b :=\n  ⟨b, hab, h b⟩\n#align join_of_single join_of_single\n\n",
+ "join_of_equivalence":
+ "theorem join_of_equivalence {r' : α → α → Prop} (hr : equivalence r) (h : ∀ a b, r' a b → r a b) : join r' a b → r a b\n  | ⟨c, hac, hbc⟩ => hr.2.2 (h _ _ hac) (hr.2.1 <| h _ _ hbc)\n#align join_of_equivalence join_of_equivalence\n\n",
+ "iff_comp":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ∘r » -/\ntheorem iff_comp {r : Prop → α → Prop} : «expr ∘r » (· ↔ ·) r = r :=\n  by\n  have : (· ↔ ·) = (· = ·) := by funext a b <;> exact iff_eq_eq\n  rw [this, eq_comp]\n#align iff_comp iff_comp\n\n",
+ "iff":
+ "protected theorem symmetric.iff (H : symmetric r) (x y : α) : r x y ↔ r y x :=\n  ⟨fun h => H h, fun h => H h⟩\n#align symmetric.iff symmetric.iff\n\n",
+ "head_induction_on":
+ "@[elab_as_elim]\ntheorem head_induction_on {P : ∀ a : α, trans_gen r a b → Prop} {a : α} (h : trans_gen r a b)\n    (base : ∀ {a} (h : r a b), P a (single h))\n    (ih : ∀ {a c} (h' : r a c) (h : trans_gen r c b), P c h → P a (h.head h')) : P a h :=\n  by\n  induction h generalizing P\n  case single a h => exact base h\n  case tail b c hab hbc h_ih =>\n    apply h_ih\n    show ∀ a, r a b → P a _; exact fun a h => ih h (single hbc) (base hbc)\n    show ∀ a a', r a a' → trans_gen r a' b → P a' _ → P a _; exact fun a a' hab hbc => ih hab _\n#align head_induction_on head_induction_on\n\n",
+ "head'_iff":
+ "theorem head'_iff : trans_gen r a c ↔ ∃ b, r a b ∧ refl_trans_gen r b c :=\n  by\n  refine' ⟨fun h => _, fun ⟨b, hab, hbc⟩ => head' hab hbc⟩\n  induction h\n  case single c hac => exact ⟨_, hac, by rfl⟩\n  case tail b c hab hbc IH => rcases IH with ⟨d, had, hdb⟩; exact ⟨_, had, hdb.tail hbc⟩\n#align head'_iff head'_iff\n\n",
+ "head'":
+ "theorem head' (hab : r a b) (hbc : refl_trans_gen r b c) : trans_gen r a c :=\n  trans_left (single hab) hbc\n#align head' head'\n\n",
+ "head":
+ "theorem head (hab : r a b) (hbc : trans_gen r b c) : trans_gen r a c :=\n  head' hab hbc.to_refl\n#align head head\n\n",
+ "flip_eq_iff":
+ "#print flip_eq_iff /-\ntheorem flip_eq_iff : flip r = r ↔ symmetric r :=\n  ⟨fun h x y => (congr_fun₂ h _ _).mp, symmetric.flip_eq⟩\n#align flip_eq_iff flip_eq_iff\n-/\n\n",
+ "flip_eq":
+ "theorem symmetric.flip_eq (h : symmetric r) : flip r = r :=\n  funext₂ fun _ _ => propext <| h.iff _ _\n#align symmetric.flip_eq symmetric.flip_eq\n\n",
+ "flip_comp":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ∘r » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ∘r » -/\ntheorem flip_comp : flip («expr ∘r » r p) = «expr ∘r » (flip p) (flip r) :=\n  by\n  funext c a; apply propext\n  constructor\n  exact fun ⟨b, hab, hbc⟩ => ⟨b, hbc, hab⟩\n  exact fun ⟨b, hbc, hab⟩ => ⟨b, hab, hbc⟩\n#align flip_comp flip_comp\n\n",
+ "eqvGen_iff":
+ "#print Equivalence.eqvGen_iff /-\ntheorem Equivalence.eqvGen_iff (h : equivalence r) : EqvGen r a b ↔ r a b :=\n  iff.intro\n    (by\n      intro h\n      induction h\n      case rel => assumption\n      case refl => exact h.1 _\n      case symm => apply h.2.1; assumption\n      case trans a b c _ _ hab hbc => exact h.2.2 hab hbc)\n    (eqv_gen.rel a b)\n#align equivalence.eqv_gen_iff Equivalence.eqvGen_iff\n-/\n\n",
+ "eqvGen_eq":
+ "#print Equivalence.eqvGen_eq /-\ntheorem Equivalence.eqvGen_eq (h : equivalence r) : EqvGen r = r :=\n  funext fun _ => funext fun _ => propext <| h.eqv_gen_iff\n#align equivalence.eqv_gen_eq Equivalence.eqvGen_eq\n-/\n\n",
+ "equivalence_join_refl_trans_gen":
+ "theorem equivalence_join_refl_trans_gen (h : ∀ a b c, r a b → r a c → ∃ d, refl_gen r b d ∧ refl_trans_gen r c d) :\n    equivalence (join (refl_trans_gen r)) :=\n  equivalence_join reflexive_reflTransGen transitive_reflTransGen fun a b c => church_rosser h\n#align equivalence_join_refl_trans_gen equivalence_join_refl_trans_gen\n\n",
+ "equivalence_join":
+ "theorem equivalence_join (hr : reflexive r) (ht : transitive r) (h : ∀ a b c, r a b → r a c → join r b c) :\n    equivalence (join r) :=\n  ⟨reflexive_join hr, symmetric_join, transitive_join ht h⟩\n#align equivalence_join equivalence_join\n\n",
+ "eq_comp":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ∘r » -/\ntheorem eq_comp : «expr ∘r » (· = ·) r = r :=\n  funext fun a => funext fun b => propext <| iff.intro (fun ⟨c, eq, h⟩ => eq.symm ▸ h) fun h => ⟨a, rfl, h⟩\n#align eq_comp eq_comp\n\n",
+ "comp_iff":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ∘r » -/\ntheorem comp_iff {r : α → Prop → Prop} : «expr ∘r » r (· ↔ ·) = r :=\n  by\n  have : (· ↔ ·) = (· = ·) := by funext a b <;> exact iff_eq_eq\n  rw [this, comp_eq]\n#align comp_iff comp_iff\n\n",
+ "comp_eq":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ∘r » -/\ntheorem comp_eq : «expr ∘r » r (· = ·) = r :=\n  funext fun a => funext fun b => propext <| iff.intro (fun ⟨c, h, eq⟩ => eq ▸ h) fun h => ⟨b, h, rfl⟩\n#align comp_eq comp_eq\n\n",
+ "comp_assoc":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ∘r » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ∘r » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ∘r » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ∘r » -/\ntheorem comp_assoc : «expr ∘r » («expr ∘r » r p) q = «expr ∘r » r («expr ∘r » p q) :=\n  by\n  funext a d; apply propext\n  constructor\n  exact fun ⟨c, ⟨b, hab, hbc⟩, hcd⟩ => ⟨b, hab, c, hbc, hcd⟩\n  exact fun ⟨b, hab, c, hbc, hcd⟩ => ⟨c, ⟨b, hab, hbc⟩, hcd⟩\n#align comp_assoc comp_assoc\n\n",
+ "comap":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr on » -/\ntheorem equivalence.comap (h : equivalence r) (f : α → β) : equivalence («expr on » r f) :=\n  ⟨h.1.comap f, h.2.1.comap f, h.2.2.comap f⟩\n#align equivalence.comap equivalence.comap\n\n",
+ "closed":
+ "theorem trans_gen.closed {p : α → α → Prop} : (∀ a b, r a b → trans_gen p a b) → trans_gen r a b → trans_gen p a b :=\n  trans_gen.lift' id\n#align trans_gen.closed trans_gen.closed\n\n",
+ "church_rosser":
+ "/-- A sufficient condition for the Church-Rosser property. -/\ntheorem church_rosser (h : ∀ a b c, r a b → r a c → ∃ d, refl_gen r b d ∧ refl_trans_gen r c d)\n    (hab : refl_trans_gen r a b) (hac : refl_trans_gen r a c) : join (refl_trans_gen r) b c :=\n  by\n  induction hab\n  case refl => exact ⟨c, hac, refl⟩\n  case tail d e had hde ih =>\n    clear hac had a\n    rcases ih with ⟨b, hdb, hcb⟩\n    have : ∃ a, refl_trans_gen r e a ∧ refl_gen r b a := by\n      clear hcb\n      induction hdb\n      case refl => exact ⟨e, refl, refl_gen.single hde⟩\n      case tail f b hdf hfb ih =>\n        rcases ih with ⟨a, hea, hfa⟩\n        cases' hfa with _ hfa\n        · exact ⟨b, hea.tail hfb, refl_gen.refl⟩\n        · rcases h _ _ _ hfb hfa with ⟨c, hbc, hac⟩\n          exact ⟨c, hea.trans hac, hbc⟩\n    rcases this with ⟨a, hea, hba⟩\n    cases' hba with _ hba\n    · exact ⟨b, hea, hcb⟩\n    · exact ⟨a, hea, hcb.tail hba⟩\n#align church_rosser church_rosser\n\n",
+ "cases_tail":
+ "theorem cases_tail : refl_trans_gen r a b → b = a ∨ ∃ c, refl_trans_gen r a c ∧ r c b :=\n  (cases_tail_iff r a b).1\n#align cases_tail cases_tail\n\n",
+ "cases_head_iff":
+ "theorem cases_head_iff : refl_trans_gen r a b ↔ a = b ∨ ∃ c, r a c ∧ refl_trans_gen r c b :=\n  by\n  use cases_head\n  rintro (rfl | ⟨c, hac, hcb⟩)\n  · rfl\n  · exact head hac hcb\n#align cases_head_iff cases_head_iff\n\n",
+ "cases_head":
+ "theorem cases_head (h : refl_trans_gen r a b) : a = b ∨ ∃ c, r a c ∧ refl_trans_gen r c b :=\n  by\n  induction h using relation.refl_trans_gen.head_induction_on\n  · left\n    rfl\n  · right\n    exists _\n    constructor <;> assumption\n#align cases_head cases_head\n\n",
+ "acc_trans_gen_iff":
+ "#print acc_transGen_iff /-\ntheorem acc_transGen_iff : acc (trans_gen r) a ↔ acc r a :=\n  ⟨Subrelation.accessible fun _ _ => trans_gen.single, acc.trans_gen⟩\n#align acc_trans_gen_iff acc_transGen_iff\n-/\n\n"}

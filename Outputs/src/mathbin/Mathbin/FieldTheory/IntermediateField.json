@@ -1,0 +1,162 @@
+{"zsmul_mem":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\nprotected theorem zsmul_mem {x : L} (hx : x ∈ S) (n : ℤ) : «expr • » n x ∈ S :=\n  zsmul_mem hx n\n#align zsmul_mem zsmul_mem\n\n",
+ "zero_mem":
+ "/-- An intermediate field contains the ring's 0. -/\nprotected theorem zero_mem : (0 : L) ∈ S :=\n  zero_mem S\n#align zero_mem zero_mem\n\n",
+ "val_mk":
+ "@[simp]\ntheorem val_mk {x : L} (hx : x ∈ S) : S.val ⟨x, hx⟩ = x :=\n  rfl\n#align val_mk val_mk\n\n",
+ "to_subalgebra_to_intermediate_field'":
+ "@[simp]\ntheorem to_subalgebra_to_intermediate_field' (S : subalgebra K L) (hS : IsField S) :\n    (S.to_intermediate_field' hS).to_subalgebra = S := by\n  ext\n  rfl\n#align to_subalgebra_to_intermediate_field' to_subalgebra_to_intermediate_field'\n\n",
+ "to_subalgebra_to_intermediate_field":
+ "@[simp]\ntheorem to_subalgebra_to_intermediate_field (S : subalgebra K L) (inv_mem : ∀ x ∈ S, x⁻¹ ∈ S) :\n    (S.to_intermediate_field inv_mem).to_subalgebra = S :=\n  by\n  ext\n  rfl\n#align to_subalgebra_to_intermediate_field to_subalgebra_to_intermediate_field\n\n",
+ "to_subalgebra_lt_to_subalgebra":
+ "@[simp]\ntheorem to_subalgebra_lt_to_subalgebra {S S' : intermediate_field K L} : S.to_subalgebra < S'.to_subalgebra ↔ S < S' :=\n  iff.rfl\n#align to_subalgebra_lt_to_subalgebra to_subalgebra_lt_to_subalgebra\n\n",
+ "to_subalgebra_le_to_subalgebra":
+ "@[simp]\ntheorem to_subalgebra_le_to_subalgebra {S S' : intermediate_field K L} : S.to_subalgebra ≤ S'.to_subalgebra ↔ S ≤ S' :=\n  iff.rfl\n#align to_subalgebra_le_to_subalgebra to_subalgebra_le_to_subalgebra\n\n",
+ "to_subalgebra_injective":
+ "theorem to_subalgebra_injective {S S' : intermediate_field K L} (h : S.to_subalgebra = S'.to_subalgebra) : S = S' :=\n  by\n  ext\n  rw [← mem_to_subalgebra, ← mem_to_subalgebra, h]\n#align to_subalgebra_injective to_subalgebra_injective\n\n",
+ "to_subalgebra_eq_iff":
+ "@[simp]\ntheorem to_subalgebra_eq_iff : F.to_subalgebra = E.to_subalgebra ↔ F = E :=\n  by\n  rw [SetLike.ext_iff, SetLike.ext'_iff, Set.ext_iff]\n  rfl\n#align to_subalgebra_eq_iff to_subalgebra_eq_iff\n\n",
+ "to_intermediate_field_to_subalgebra":
+ "@[simp]\ntheorem to_intermediate_field_to_subalgebra (S : intermediate_field K L) :\n    (S.to_subalgebra.to_intermediate_field fun x => S.inv_mem) = S :=\n  by\n  ext\n  rfl\n#align to_intermediate_field_to_subalgebra to_intermediate_field_to_subalgebra\n\n",
+ "to_intermediate_field'_to_subalgebra":
+ "@[simp]\ntheorem to_intermediate_field'_to_subalgebra (S : intermediate_field K L) :\n    S.to_subalgebra.to_intermediate_field' (Field.toIsField S) = S :=\n  by\n  ext\n  rfl\n#align to_intermediate_field'_to_subalgebra to_intermediate_field'_to_subalgebra\n\n",
+ "sum_mem":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `finset.sum -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.sum -/\n/-- Sum of elements in a `intermediate_field` indexed by a `finset` is in the `intermediate_field`.\n-/\nprotected theorem sum_mem {ι : Type _} {t : Finset ι} {f : ι → L} (h : ∀ c ∈ t, f c ∈ S) :\n    finset.sum \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.sum\" t (f i) ∈ S :=\n  sum_mem h\n#align sum_mem sum_mem\n\n",
+ "sub_mem":
+ "/-- An intermediate field is closed under subtraction -/\nprotected theorem sub_mem {x y : L} : x ∈ S → y ∈ S → x - y ∈ S :=\n  sub_mem\n#align sub_mem sub_mem\n\n",
+ "smul_mem":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n#print smul_mem /-\n/-- An intermediate field is closed under scalar multiplication. -/\ntheorem smul_mem {y : L} : y ∈ S → ∀ {x : K}, «expr • » x y ∈ S :=\n  S.to_subalgebra.smul_mem\n#align smul_mem smul_mem\n-/\n\n",
+ "set_range_subset":
+ "theorem set_range_subset : Set.range (algebra_map K L) ⊆ S :=\n  S.to_subalgebra.range_subset\n#align set_range_subset set_range_subset\n\n",
+ "restrict_scalars_to_subfield":
+ "@[simp]\ntheorem restrict_scalars_to_subfield {E : intermediate_field L' L} :\n    (E.restrict_scalars K).to_subfield = E.to_subfield :=\n  SetLike.coe_injective rfl\n#align restrict_scalars_to_subfield restrict_scalars_to_subfield\n\n",
+ "restrict_scalars_to_subalgebra":
+ "@[simp]\ntheorem restrict_scalars_to_subalgebra {E : intermediate_field L' L} :\n    (E.restrict_scalars K).to_subalgebra = E.to_subalgebra.restrict_scalars K :=\n  SetLike.coe_injective rfl\n#align restrict_scalars_to_subalgebra restrict_scalars_to_subalgebra\n\n",
+ "restrict_scalars_injective":
+ "theorem restrict_scalars_injective :\n    function.injective (restrict_scalars K : intermediate_field L' L → intermediate_field K L) := fun U V H =>\n  ext fun x => by rw [← mem_restrict_scalars K, H, mem_restrict_scalars]\n#align restrict_scalars_injective restrict_scalars_injective\n\n",
+ "range_val":
+ "theorem range_val : S.val.range = S.to_subalgebra :=\n  S.to_subalgebra.range_val\n#align range_val range_val\n\n",
+ "prod_mem":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `finset.prod -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.prod -/\n/-- Product of elements of an intermediate field indexed by a `finset` is in the intermediate_field.\n-/\nprotected theorem prod_mem {ι : Type _} {t : Finset ι} {f : ι → L} (h : ∀ c ∈ t, f c ∈ S) :\n    finset.prod \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.prod\" t (f i) ∈ S :=\n  prod_mem h\n#align prod_mem prod_mem\n\n",
+ "pow_mem":
+ "#print pow_mem /-\nprotected theorem pow_mem {x : L} (hx : x ∈ S) (n : ℤ) : x ^ n ∈ S :=\n  zpow_mem hx n\n#align pow_mem pow_mem\n-/\n\n",
+ "one_mem":
+ "/-- An intermediate field contains the ring's 1. -/\nprotected theorem one_mem : (1 : L) ∈ S :=\n  one_mem S\n#align one_mem one_mem\n\n",
+ "neg_mem":
+ "/-- An intermediate field is closed under negation. -/\nprotected theorem neg_mem {x : L} : x ∈ S → -x ∈ S :=\n  neg_mem\n#align neg_mem neg_mem\n\n",
+ "multiset_sum_mem":
+ "/-- Sum of a multiset of elements in a `intermediate_field` is in the `intermediate_field`. -/\nprotected theorem multiset_sum_mem (m : Multiset L) : (∀ a ∈ m, a ∈ S) → m.sum ∈ S :=\n  multiset_sum_mem m\n#align multiset_sum_mem multiset_sum_mem\n\n",
+ "multiset_prod_mem":
+ "/-- Product of a multiset of elements in an intermediate field is in the intermediate_field. -/\nprotected theorem multiset_prod_mem (m : Multiset L) : (∀ a ∈ m, a ∈ S) → m.prod ∈ S :=\n  multiset_prod_mem m\n#align multiset_prod_mem multiset_prod_mem\n\n",
+ "mul_mem":
+ "/-- An intermediate field is closed under multiplication. -/\nprotected theorem mul_mem {x y : L} : x ∈ S → y ∈ S → x * y ∈ S :=\n  mul_mem\n#align mul_mem mul_mem\n\n",
+ "minpoly_eq":
+ "theorem minpoly_eq (x : S) : minpoly K x = minpoly K (x : L) :=\n  by\n  by_cases hx : is_integral K x\n  · exact minpoly.eq_of_algebra_map_eq (algebra_map S L).injective hx rfl\n  · exact (minpoly.eq_zero hx).trans (minpoly.eq_zero (mt is_integral_iff.mpr hx)).symm\n#align minpoly_eq minpoly_eq\n\n",
+ "mem_to_subfield":
+ "@[simp]\ntheorem mem_to_subfield (s : intermediate_field K L) (x : L) : x ∈ s.to_subfield ↔ x ∈ s :=\n  iff.rfl\n#align mem_to_subfield mem_to_subfield\n\n",
+ "mem_to_subalgebra":
+ "@[simp]\ntheorem mem_to_subalgebra (s : intermediate_field K L) (x : L) : x ∈ s.to_subalgebra ↔ x ∈ s :=\n  iff.rfl\n#align mem_to_subalgebra mem_to_subalgebra\n\n",
+ "mem_subalgebra_equiv_intermediate_field_symm":
+ "@[simp]\ntheorem mem_subalgebra_equiv_intermediate_field_symm (alg : algebra.is_algebraic K L) {S : intermediate_field K L}\n    {x : L} : x ∈ (subalgebra_equiv_intermediate_field alg).symm S ↔ x ∈ S :=\n  iff.rfl\n#align mem_subalgebra_equiv_intermediate_field_symm mem_subalgebra_equiv_intermediate_field_symm\n\n",
+ "mem_subalgebra_equiv_intermediate_field":
+ "@[simp]\ntheorem mem_subalgebra_equiv_intermediate_field (alg : algebra.is_algebraic K L) {S : subalgebra K L} {x : L} :\n    x ∈ subalgebra_equiv_intermediate_field alg S ↔ x ∈ S :=\n  iff.rfl\n#align mem_subalgebra_equiv_intermediate_field mem_subalgebra_equiv_intermediate_field\n\n",
+ "mem_restrict_scalars":
+ "@[simp]\ntheorem mem_restrict_scalars {E : intermediate_field L' L} {x : L} : x ∈ restrict_scalars K E ↔ x ∈ E :=\n  iff.rfl\n#align mem_restrict_scalars mem_restrict_scalars\n\n",
+ "mem_mk":
+ "@[simp]\ntheorem mem_mk (s : set L) (hK : ∀ x, algebra_map K L x ∈ s) (ho hm hz ha hn hi) (x : L) :\n    x ∈ intermediate_field.mk (subalgebra.mk s ho hm hz ha hK) hn hi ↔ x ∈ s :=\n  iff.rfl\n#align mem_mk mem_mk\n\n",
+ "mem_field_range":
+ "@[simp]\ntheorem mem_field_range {y : L'} : y ∈ f.field_range ↔ ∃ x, f x = y :=\n  iff.rfl\n#align mem_field_range mem_field_range\n\n",
+ "mem_carrier":
+ "/-\nCopyright (c) 2020 Anne Baanen. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Anne Baanen\n-/\n@[simp]\ntheorem mem_carrier {s : intermediate_field K L} {x : L} : x ∈ s.carrier ↔ x ∈ s :=\n  iff.rfl\n#align mem_carrier mem_carrier\n\n",
+ "map_map":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₐ[ ] » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₐ[ ] » -/\ntheorem map_map {K L₁ L₂ L₃ : Type _} [Field K] [Field L₁] [algebra K L₁] [Field L₂] [algebra K L₂] [Field L₃]\n    [algebra K L₃] (E : intermediate_field K L₁) (f : «expr →ₐ[ ] » L₁ K L₂) (g : «expr →ₐ[ ] » L₂ K L₃) :\n    (E.map f).map g = E.map (g.comp f) :=\n  SetLike.coe_injective <| Set.image_image _ _ _\n#align map_map map_map\n\n",
+ "list_sum_mem":
+ "/-- Sum of a list of elements in an intermediate field is in the intermediate_field. -/\nprotected theorem list_sum_mem {l : list L} : (∀ x ∈ l, x ∈ S) → l.sum ∈ S :=\n  list_sum_mem\n#align list_sum_mem list_sum_mem\n\n",
+ "list_prod_mem":
+ "/-- Product of a list of elements in an intermediate_field is in the intermediate_field. -/\nprotected theorem list_prod_mem {l : list L} : (∀ x ∈ l, x ∈ S) → l.prod ∈ S :=\n  list_prod_mem\n#align list_prod_mem list_prod_mem\n\n",
+ "is_integral_iff":
+ "theorem is_integral_iff {x : S} : is_integral K x ↔ is_integral K (x : L) := by\n  rw [← is_algebraic_iff_is_integral, is_algebraic_iff, is_algebraic_iff_is_integral]\n#align is_integral_iff is_integral_iff\n\n",
+ "is_algebraic_iff":
+ "theorem is_algebraic_iff {x : S} : is_algebraic K x ↔ is_algebraic K (x : L) :=\n  (is_algebraic_algebra_map_iff (algebra_map S L).injective).symm\n#align is_algebraic_iff is_algebraic_iff\n\n",
+ "inv_mem":
+ "/-- An intermediate field is closed under inverses. -/\nprotected theorem inv_mem {x : L} : x ∈ S → x⁻¹ ∈ S :=\n  inv_mem\n#align inv_mem inv_mem\n\n",
+ "intermediate_field_map_symm_apply_coe":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ₐ[ ] » -/\n@[simp]\ntheorem intermediate_field_map_symm_apply_coe (e : «expr ≃ₐ[ ] » L K L') (E : intermediate_field K L)\n    (a : E.map e.to_alg_hom) : ↑((intermediate_field_map e E).symm a) = e.symm a :=\n  rfl\n#align intermediate_field_map_symm_apply_coe intermediate_field_map_symm_apply_coe\n\n",
+ "intermediate_field_map_apply_coe":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ₐ[ ] » -/\n/- We manually add these two simp lemmas because `@[simps]` before `intermediate_field_map`\n  led to a timeout. -/\n@[simp]\ntheorem intermediate_field_map_apply_coe (e : «expr ≃ₐ[ ] » L K L') (E : intermediate_field K L) (a : E) :\n    ↑(intermediate_field_map e E a) = e a :=\n  rfl\n#align intermediate_field_map_apply_coe intermediate_field_map_apply_coe\n\n",
+ "inclusion_self":
+ "@[simp]\ntheorem inclusion_self {E : intermediate_field K L} : inclusion (le_refl E) = alg_hom.id K E :=\n  subalgebra.inclusion_self\n#align inclusion_self inclusion_self\n\n",
+ "inclusion_injective":
+ "theorem inclusion_injective {E F : intermediate_field K L} (hEF : E ≤ F) : function.injective (inclusion hEF) :=\n  subalgebra.inclusion_injective hEF\n#align inclusion_injective inclusion_injective\n\n",
+ "inclusion_inclusion":
+ "@[simp]\ntheorem inclusion_inclusion {E F G : intermediate_field K L} (hEF : E ≤ F) (hFG : F ≤ G) (x : E) :\n    inclusion hFG (inclusion hEF x) = inclusion (le_trans hEF hFG) x :=\n  subalgebra.inclusion_inclusion hEF hFG x\n#align inclusion_inclusion inclusion_inclusion\n\n",
+ "finrank_eq_finrank_subalgebra":
+ "@[simp]\ntheorem finrank_eq_finrank_subalgebra : finrank K F.to_subalgebra = finrank K F :=\n  rfl\n#align finrank_eq_finrank_subalgebra finrank_eq_finrank_subalgebra\n\n",
+ "field_range_to_subfield":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →+* » -/\n@[simp]\ntheorem field_range_to_subfield : f.field_range.to_subfield = (f : «expr →+* » L L').field_range :=\n  rfl\n#align field_range_to_subfield field_range_to_subfield\n\n",
+ "field_range_le":
+ "theorem field_range_le : (algebra_map K L).field_range ≤ S.to_subfield := fun x hx =>\n  S.to_subalgebra.range_subset (by rwa [Set.mem_range, ← ring_hom.mem_field_range])\n#align field_range_le field_range_le\n\n",
+ "ext":
+ "/-- Two intermediate fields are equal if they have the same elements. -/\n@[ext]\ntheorem ext {S T : intermediate_field K L} (h : ∀ x, x ∈ S ↔ x ∈ T) : S = T :=\n  SetLike.ext h\n#align ext ext\n\n",
+ "eq_of_le_of_finrank_le'":
+ "theorem eq_of_le_of_finrank_le' [finite_dimensional K L] (h_le : F ≤ E) (h_finrank : finrank F L ≤ finrank E L) :\n    F = E := by\n  apply eq_of_le_of_finrank_le h_le\n  have h1 := finrank_mul_finrank K F L\n  have h2 := finrank_mul_finrank K E L\n  have h3 : 0 < finrank E L := finrank_pos\n  nlinarith\n#align eq_of_le_of_finrank_le' eq_of_le_of_finrank_le'\n\n",
+ "eq_of_le_of_finrank_le":
+ "theorem eq_of_le_of_finrank_le [finite_dimensional K L] (h_le : F ≤ E) (h_finrank : finrank K E ≤ finrank K F) :\n    F = E :=\n  to_subalgebra_injective <| subalgebra.to_submodule.injective <| eq_of_le_of_finrank_le h_le h_finrank\n#align eq_of_le_of_finrank_le eq_of_le_of_finrank_le\n\n",
+ "eq_of_le_of_finrank_eq'":
+ "theorem eq_of_le_of_finrank_eq' [finite_dimensional K L] (h_le : F ≤ E) (h_finrank : finrank F L = finrank E L) :\n    F = E :=\n  eq_of_le_of_finrank_le' h_le h_finrank.le\n#align eq_of_le_of_finrank_eq' eq_of_le_of_finrank_eq'\n\n",
+ "eq_of_le_of_finrank_eq":
+ "theorem eq_of_le_of_finrank_eq [finite_dimensional K L] (h_le : F ≤ E) (h_finrank : finrank K F = finrank K E) :\n    F = E :=\n  eq_of_le_of_finrank_le h_le h_finrank.ge\n#align eq_of_le_of_finrank_eq eq_of_le_of_finrank_eq\n\n",
+ "div_mem":
+ "/-- An intermediate field is closed under division. -/\nprotected theorem div_mem {x y : L} : x ∈ S → y ∈ S → x / y ∈ S :=\n  div_mem\n#align div_mem div_mem\n\n",
+ "dim_eq_dim_subalgebra":
+ "@[simp]\ntheorem dim_eq_dim_subalgebra : module.rank K F.to_subalgebra = module.rank K F :=\n  rfl\n#align dim_eq_dim_subalgebra dim_eq_dim_subalgebra\n\n",
+ "copy_eq":
+ "theorem copy_eq (S : intermediate_field K L) (s : set L) (hs : s = ↑S) : S.copy s hs = S :=\n  SetLike.coe_injective hs\n#align copy_eq copy_eq\n\n",
+ "coe_zero":
+ "protected theorem coe_zero : ((0 : S) : L) = 0 :=\n  rfl\n#align coe_zero coe_zero\n\n",
+ "coe_val":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n@[simp]\ntheorem coe_val : «expr⇑ » S.val = coe :=\n  rfl\n#align coe_val coe_val\n\n",
+ "coe_to_subfield":
+ "@[simp]\ntheorem coe_to_subfield : (S.to_subfield : set L) = S :=\n  rfl\n#align coe_to_subfield coe_to_subfield\n\n",
+ "coe_to_subalgebra":
+ "@[simp]\ntheorem coe_to_subalgebra : (S.to_subalgebra : set L) = S :=\n  rfl\n#align coe_to_subalgebra coe_to_subalgebra\n\n",
+ "coe_sum":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `finset.sum_univ -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.sum_univ -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `finset.sum_univ -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.sum_univ -/\n@[simp, norm_cast]\ntheorem coe_sum {ι : Type _} [fintype ι] (f : ι → S) :\n    (↑(finset.sum_univ \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.sum_univ\"\n            (f i)) :\n        L) =\n      finset.sum_univ \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.sum_univ\"\n        (f i : L) :=\n  by\n  classical\n    induction' finset.univ using Finset.induction_on with i s hi H\n    · simp\n    · rw [finset.sum_insert hi, AddMemClass.coe_add, H, finset.sum_insert hi]\n#align coe_sum coe_sum\n\n",
+ "coe_smul":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n@[simp]\ntheorem coe_smul {R} [Semiring R] [SMul R K] [Module R L] [IsScalarTower R K L] (r : R) (x : S) :\n    ↑(«expr • » r x) = («expr • » r x : L) :=\n  rfl\n#align coe_smul coe_smul\n\n",
+ "coe_restrict_scalars":
+ "@[simp]\ntheorem coe_restrict_scalars {E : intermediate_field L' L} : (restrict_scalars K E : set L) = (E : set L) :=\n  rfl\n#align coe_restrict_scalars coe_restrict_scalars\n\n",
+ "coe_prod":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `finset.prod_univ -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.prod_univ -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `finset.prod_univ -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.prod_univ -/\n@[simp, norm_cast]\ntheorem coe_prod {ι : Type _} [fintype ι] (f : ι → S) :\n    (↑(finset.prod_univ \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.prod_univ\"\n            (f i)) :\n        L) =\n      finset.prod_univ \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.prod_univ\"\n        (f i : L) :=\n  by\n  classical\n    induction' finset.univ using Finset.induction_on with i s hi H\n    · simp\n    · rw [finset.prod_insert hi, MulMemClass.coe_mul, H, finset.prod_insert hi]\n#align coe_prod coe_prod\n\n",
+ "coe_pow":
+ "protected theorem coe_pow (x : S) (n : ℕ) : (↑(x ^ n) : L) = ↑x ^ n :=\n  SubmonoidClass.coe_pow x n\n#align coe_pow coe_pow\n\n",
+ "coe_one":
+ "protected theorem coe_one : ((1 : S) : L) = 1 :=\n  rfl\n#align coe_one coe_one\n\n",
+ "coe_neg":
+ "protected theorem coe_neg (x : S) : (↑(-x) : L) = -↑x :=\n  rfl\n#align coe_neg coe_neg\n\n",
+ "coe_nat_mem":
+ "theorem coe_nat_mem (n : ℕ) : (n : L) ∈ S := by simpa using coe_int_mem S n\n#align coe_nat_mem coe_nat_mem\n\n",
+ "coe_mul":
+ "protected theorem coe_mul (x y : S) : (↑(x * y) : L) = ↑x * ↑y :=\n  rfl\n#align coe_mul coe_mul\n\n",
+ "coe_map":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₐ[ ] » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\n@[simp]\ntheorem coe_map (f : «expr →ₐ[ ] » L K L') : (S.map f : set L') = «expr '' » f S :=\n  rfl\n#align coe_map coe_map\n\n",
+ "coe_is_integral_iff":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr↥ » -/\ntheorem coe_is_integral_iff {R : Type _} [CommRing R] [algebra R K] [algebra R L] [IsScalarTower R K L] {x : S} :\n    is_integral R (x : L) ↔ _root_.is_integral R x :=\n  by\n  refine' ⟨fun h => _, fun h => _⟩\n  · obtain ⟨P, hPmo, hProot⟩ := h\n    refine' ⟨P, hPmo, (injective_iff_map_eq_zero _).1 (algebra_map («expr↥ » S) L).injective _ _⟩\n    letI : IsScalarTower R S L := is_scalar_tower.of_algebra_map_eq (congr_fun rfl)\n    rwa [eval₂_eq_eval_map, ← eval₂_at_apply, eval₂_eq_eval_map, polynomial.map_map, ← is_scalar_tower.algebra_map_eq, ←\n      eval₂_eq_eval_map]\n  · obtain ⟨P, hPmo, hProot⟩ := h\n    refine' ⟨P, hPmo, _⟩\n    rw [← aeval_def, aeval_coe, aeval_def, hProot, ZeroMemClass.coe_zero]\n#align coe_is_integral_iff coe_is_integral_iff\n\n",
+ "coe_inv":
+ "protected theorem coe_inv (x : S) : (↑x⁻¹ : L) = (↑x)⁻¹ :=\n  rfl\n#align coe_inv coe_inv\n\n",
+ "coe_int_mem":
+ "protected theorem coe_int_mem (n : ℤ) : (n : L) ∈ S :=\n  coe_int_mem S n\n#align coe_int_mem coe_int_mem\n\n",
+ "coe_inclusion":
+ "@[simp]\ntheorem coe_inclusion {E F : intermediate_field K L} (hEF : E ≤ F) (e : E) : (inclusion hEF e : L) = e :=\n  rfl\n#align coe_inclusion coe_inclusion\n\n",
+ "coe_field_range":
+ "@[simp]\ntheorem coe_field_range : ↑f.field_range = Set.range f :=\n  rfl\n#align coe_field_range coe_field_range\n\n",
+ "coe_copy":
+ "@[simp]\ntheorem coe_copy (S : intermediate_field K L) (s : set L) (hs : s = ↑S) : (S.copy s hs : set L) = s :=\n  rfl\n#align coe_copy coe_copy\n\n",
+ "coe_add":
+ "protected theorem coe_add (x y : S) : (↑(x + y) : L) = ↑x + ↑y :=\n  rfl\n#align coe_add coe_add\n\n",
+ "algebra_map_mem":
+ "/-- An intermediate field contains the image of the smaller field. -/\ntheorem algebra_map_mem (x : K) : algebra_map K L x ∈ S :=\n  S.algebra_map_mem' x\n#align algebra_map_mem algebra_map_mem\n\n",
+ "aeval_coe":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `polynomial -/\ntheorem aeval_coe {R : Type _} [CommRing R] [algebra R K] [algebra R L] [IsScalarTower R K L] (x : S)\n    (P : polynomial R) : aeval (x : L) P = aeval x P :=\n  by\n  refine' polynomial.induction_on' P (fun f g hf hg => _) fun n r => _\n  · rw [aeval_add, aeval_add, AddMemClass.coe_add, hf, hg]\n  · simp only [MulMemClass.coe_mul, aeval_monomial, SubmonoidClass.coe_pow, mul_eq_mul_right_iff]\n    left\n    rfl\n#align aeval_coe aeval_coe\n\n",
+ "add_mem":
+ "/-- An intermediate field is closed under addition. -/\nprotected theorem add_mem {x y : L} : x ∈ S → y ∈ S → x + y ∈ S :=\n  add_mem\n#align add_mem add_mem\n\n"}

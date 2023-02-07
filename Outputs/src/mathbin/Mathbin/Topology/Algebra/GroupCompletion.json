@@ -1,0 +1,24 @@
+{"extension_coe":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →+ » -/\ntheorem add_monoid_hom.extension_coe [complete_space β] [separated_space β] (f : «expr →+ » α β) (hf : continuous f)\n    (a : α) : f.extension hf a = f a :=\n  extension_coe (uniform_continuous_add_monoid_hom_of_continuous hf) a\n#align add_monoid_hom.extension_coe add_monoid_hom.extension_coe\n\n",
+ "dense_inducing_to_compl":
+ "theorem dense_inducing_to_compl : dense_inducing (to_compl : α → completion α) :=\n  dense_inducing_coe\n#align dense_inducing_to_compl dense_inducing_to_compl\n\n",
+ "continuous_to_compl":
+ "theorem continuous_to_compl : continuous (to_compl : α → completion α) :=\n  continuous_coe α\n#align continuous_to_compl continuous_to_compl\n\n",
+ "continuous_extension":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →+ » -/\n@[continuity]\ntheorem add_monoid_hom.continuous_extension [complete_space β] [separated_space β] (f : «expr →+ » α β)\n    (hf : continuous f) : continuous (f.extension hf) :=\n  continuous_extension\n#align add_monoid_hom.continuous_extension add_monoid_hom.continuous_extension\n\n",
+ "continuous_completion":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →+ » -/\n@[continuity]\ntheorem add_monoid_hom.continuous_completion (f : «expr →+ » α β) (hf : continuous f) :\n    continuous (f.completion hf : completion α → completion β) :=\n  continuous_map\n#align add_monoid_hom.continuous_completion add_monoid_hom.continuous_completion\n\n",
+ "completion_zero":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →+ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →+ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →+ » -/\ntheorem add_monoid_hom.completion_zero : (0 : «expr →+ » α β).completion continuous_const = 0 :=\n  by\n  ext x\n  apply completion.induction_on x\n  · apply is_closed_eq ((0 : «expr →+ » α β).continuous_completion continuous_const)\n    simp [continuous_const]\n  · intro a\n    simp [(0 : «expr →+ » α β).completion_coe continuous_const, coe_zero]\n#align add_monoid_hom.completion_zero add_monoid_hom.completion_zero\n\n",
+ "completion_coe":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →+ » -/\ntheorem add_monoid_hom.completion_coe (f : «expr →+ » α β) (hf : continuous f) (a : α) : f.completion hf a = f a :=\n  map_coe (uniform_continuous_add_monoid_hom_of_continuous hf) a\n#align add_monoid_hom.completion_coe add_monoid_hom.completion_coe\n\n",
+ "completion_add":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →+ » -/\ntheorem add_monoid_hom.completion_add {γ : Type _} [add_comm_group γ] [uniform_space γ] [uniform_add_group γ]\n    (f g : «expr →+ » α γ) (hf : continuous f) (hg : continuous g) :\n    (f + g).completion (hf.add hg) = f.completion hf + g.completion hg :=\n  by\n  have hfg := hf.add hg\n  ext x\n  apply completion.induction_on x\n  ·\n    exact\n      is_closed_eq ((f + g).continuous_completion hfg) ((f.continuous_completion hf).add (g.continuous_completion hg))\n  · intro a\n    simp [(f + g).completion_coe hfg, coe_add, f.completion_coe hf, g.completion_coe hg]\n#align add_monoid_hom.completion_add add_monoid_hom.completion_add\n\n",
+ "coe_zero":
+ "/-\nCopyright (c) 2018 Patrick Massot. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Patrick Massot, Johannes Hölzl\n-/\n@[norm_cast]\ntheorem uniform_space.completion.coe_zero [Zero α] : ((0 : α) : completion α) = 0 :=\n  rfl\n#align uniform_space.completion.coe_zero uniform_space.completion.coe_zero\n\n",
+ "coe_sub":
+ "@[norm_cast]\ntheorem coe_sub (a b : α) : ((a - b : α) : completion α) = a - b :=\n  (map₂_coe_coe a b has_sub.sub uniform_continuous_sub).symm\n#align coe_sub coe_sub\n\n",
+ "coe_neg":
+ "@[norm_cast]\ntheorem coe_neg (a : α) : ((-a : α) : completion α) = -a :=\n  (map_coe uniform_continuous_neg a).symm\n#align coe_neg coe_neg\n\n",
+ "coe_add":
+ "@[norm_cast]\ntheorem coe_add (a b : α) : ((a + b : α) : completion α) = a + b :=\n  (map₂_coe_coe a b (· + ·) uniform_continuous_add).symm\n#align coe_add coe_add\n\n"}

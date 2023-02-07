@@ -1,0 +1,92 @@
+{"test_bit_zero":
+ "@[simp]\ntheorem test_bit_zero (b n) : testBit (bit b n) 0 = b :=\n  bodd_bit _ _\n#align test_bit_zero test_bit_zero\n\n",
+ "test_bit_succ":
+ "theorem test_bit_succ (m b n) : testBit (bit b n) (succ m) = testBit n m :=\n  by\n  have : bodd (shiftr (shiftr (bit b n) 1) m) = bodd (shiftr n m) := by dsimp [shiftr] <;> rw [div2_bit]\n  rw [← shiftr_add, nat.add_comm] at this <;> exact this\n#align test_bit_succ test_bit_succ\n\n",
+ "test_bit_lxor":
+ "@[simp]\ntheorem test_bit_lxor : ∀ m n k, testBit (lxor' m n) k = xor (testBit m k) (testBit n k) :=\n  testBit_bitwise' rfl\n#align test_bit_lxor test_bit_lxor\n\n",
+ "test_bit_lor":
+ "@[simp]\ntheorem test_bit_lor : ∀ m n k, testBit (lor m n) k = (testBit m k || testBit n k) :=\n  testBit_bitwise' rfl\n#align test_bit_lor test_bit_lor\n\n",
+ "test_bit_ldiff":
+ "@[simp]\ntheorem test_bit_ldiff : ∀ m n k, testBit (ldiff' m n) k = (testBit m k && not (testBit n k)) :=\n  testBit_bitwise' rfl\n#align test_bit_ldiff test_bit_ldiff\n\n",
+ "test_bit_land":
+ "@[simp]\ntheorem test_bit_land : ∀ m n k, testBit (land m n) k = (testBit m k && testBit n k) :=\n  testBit_bitwise' rfl\n#align test_bit_land test_bit_land\n\n",
+ "test_bit_bitwise":
+ "@[simp]\ntheorem test_bit_bitwise {f : bool → bool → bool} (h : f false false = ff) (m n k) :\n    testBit (bitwise f m n) k = f (testBit m k) (testBit n k) :=\n  by\n  revert m n <;> induction' k with k IH <;> intro m n <;> apply bit_cases_on m <;> intro a m' <;>\n        apply bit_cases_on n <;>\n      intro b n' <;>\n    rw [bitwise_bit h]\n  · simp [test_bit_zero]\n  · simp [test_bit_succ, IH]\n#align test_bit_bitwise test_bit_bitwise\n\n",
+ "shiftr_add":
+ "theorem shiftr_add (m n) : ∀ k, shiftr m (n + k) = shiftr (shiftr m n) k\n  | 0 => rfl\n  | k + 1 => congr_arg div2 (shiftr_add k)\n#align shiftr_add shiftr_add\n\n",
+ "shiftl_zero":
+ "@[simp]\ntheorem shiftl_zero (m) : shiftl m 0 = m :=\n  rfl\n#align shiftl_zero shiftl_zero\n\n",
+ "shiftl_succ":
+ "@[simp]\ntheorem shiftl_succ (m n) : shiftl m (n + 1) = bit0 (shiftl m n) :=\n  rfl\n#align shiftl_succ shiftl_succ\n\n",
+ "shiftl_sub":
+ "theorem shiftl_sub : ∀ (m) {n k}, k ≤ n → shiftl m (n - k) = shiftr (shiftl m n) k :=\n  shiftl'_sub _\n#align shiftl_sub shiftl_sub\n\n",
+ "shiftl_add":
+ "theorem shiftl_add : ∀ m n k, shiftl m (n + k) = shiftl (shiftl m n) k :=\n  shiftl'_add _\n#align shiftl_add shiftl_add\n\n",
+ "shiftl'_sub":
+ "theorem shiftl'_sub (b m) : ∀ {n k}, k ≤ n → shiftl' b m (n - k) = shiftr (shiftl' b m n) k\n  | n, 0, h => rfl\n  | n + 1, k + 1, h => by\n    simp [shiftl']; rw [nat.add_comm, shiftr_add]\n    simp [shiftr, div2_bit]\n    apply shiftl'_sub (nat.le_of_succ_le_succ h)\n#align shiftl'_sub shiftl'_sub\n\n",
+ "shiftl'_add":
+ "theorem shiftl'_add (b m n) : ∀ k, shiftl' b m (n + k) = shiftl' b (shiftl' b m n) k\n  | 0 => rfl\n  | k + 1 => congr_arg (bit b) (shiftl'_add k)\n#align shiftl'_add shiftl'_add\n\n",
+ "mod_two_of_bodd":
+ "theorem mod_two_of_bodd (n : ℕ) : n % 2 = cond (bodd n) 1 0 :=\n  by\n  have := congr_arg bodd (mod_add_div n 2)\n  simp [not] at this\n  rw [show ∀ b, (ff && b) = ff by intros <;> cases b <;> rfl, show ∀ b, xor b ff = b by intros <;> cases b <;> rfl] at\n    this\n  rw [← this]\n  cases' mod_two_eq_zero_or_one n with h h <;> rw [h] <;> rfl\n#align mod_two_of_bodd mod_two_of_bodd\n\n",
+ "lxor_bit":
+ "@[simp]\ntheorem lxor_bit : ∀ a m b n, lxor' (bit a m) (bit b n) = bit (xor a b) (lxor' m n) :=\n  bitwise'_bit rfl\n#align lxor_bit lxor_bit\n\n",
+ "lor_bit":
+ "@[simp]\ntheorem lor_bit : ∀ a m b n, lor (bit a m) (bit b n) = bit (a || b) (lor m n) :=\n  bitwise'_bit rfl\n#align lor_bit lor_bit\n\n",
+ "ldiff_bit":
+ "@[simp]\ntheorem ldiff_bit : ∀ a m b n, ldiff' (bit a m) (bit b n) = bit (a && not b) (ldiff' m n) :=\n  bitwise'_bit rfl\n#align ldiff_bit ldiff_bit\n\n",
+ "land_bit":
+ "@[simp]\ntheorem land_bit : ∀ a m b n, land (bit a m) (bit b n) = bit (a && b) (land m n) :=\n  bitwise'_bit rfl\n#align land_bit land_bit\n\n",
+ "div2_zero":
+ "@[simp]\ntheorem div2_zero : div2 0 = 0 :=\n  rfl\n#align div2_zero div2_zero\n\n",
+ "div2_val":
+ "theorem div2_val (n) : div2 n = n / 2 :=\n  by\n  refine' nat.eq_of_mul_eq_mul_left (by decide) (nat.add_left_cancel (eq.trans _ (nat.mod_add_div n 2).symm))\n  rw [mod_two_of_bodd, bodd_add_div2]\n#align div2_val div2_val\n\n",
+ "div2_two":
+ "theorem div2_two : div2 2 = 1 :=\n  rfl\n#align div2_two div2_two\n\n",
+ "div2_succ":
+ "@[simp]\ntheorem div2_succ (n : ℕ) : div2 (succ n) = cond (bodd n) (succ (div2 n)) (div2 n) := by\n  unfold bodd div2 bodd_div2 <;> cases bodd_div2 n <;> cases fst <;> rfl\n#align div2_succ div2_succ\n\n",
+ "div2_one":
+ "theorem div2_one : div2 1 = 0 :=\n  rfl\n#align div2_one div2_one\n\n",
+ "div2_bit":
+ "theorem div2_bit (b n) : div2 (bit b n) = n := by\n  rw [bit_val, div2_val, nat.add_comm, add_mul_div_left, div_eq_of_lt, nat.zero_add] <;> cases b <;> exact by decide\n#align div2_bit div2_bit\n\n",
+ "bodd_zero":
+ "/-\nCopyright (c) 2017 Microsoft Corporation. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthor: Mario Carneiro\n-/\n@[simp]\ntheorem bodd_zero : bodd 0 = ff :=\n  rfl\n#align bodd_zero bodd_zero\n\n",
+ "bodd_two":
+ "theorem bodd_two : bodd 2 = ff :=\n  rfl\n#align bodd_two bodd_two\n\n",
+ "bodd_succ":
+ "@[simp]\ntheorem bodd_succ (n : ℕ) : bodd (succ n) = not (bodd n) := by\n  unfold bodd bodd_div2 <;> cases bodd_div2 n <;> cases fst <;> rfl\n#align bodd_succ bodd_succ\n\n",
+ "bodd_one":
+ "theorem bodd_one : bodd 1 = tt :=\n  rfl\n#align bodd_one bodd_one\n\n",
+ "bodd_mul":
+ "@[simp]\ntheorem bodd_mul (m n : ℕ) : bodd (m * n) = (bodd m && bodd n) :=\n  by\n  induction' n with n IH\n  · simp\n    cases bodd m <;> rfl\n  · simp [mul_succ, IH]\n    cases bodd m <;> cases bodd n <;> rfl\n#align bodd_mul bodd_mul\n\n",
+ "bodd_bit":
+ "theorem bodd_bit (b n) : bodd (bit b n) = b := by rw [bit_val] <;> simp <;> cases b <;> cases bodd n <;> rfl\n#align bodd_bit bodd_bit\n\n",
+ "bodd_add_div2":
+ "theorem bodd_add_div2 : ∀ n, cond (bodd n) 1 0 + 2 * div2 n = n\n  | 0 => rfl\n  | succ n => by\n    simp\n    refine' eq.trans _ (congr_arg succ (bodd_add_div2 n))\n    cases bodd n <;> simp [cond, not]\n    · rw [nat.add_comm, nat.zero_add]\n    · rw [succ_mul, nat.add_comm 1, nat.zero_add]\n#align bodd_add_div2 bodd_add_div2\n\n",
+ "bodd_add":
+ "@[simp]\ntheorem bodd_add (m n : ℕ) : bodd (m + n) = xor (bodd m) (bodd n) :=\n  by\n  induction' n with n IH\n  · simp\n    cases bodd m <;> rfl\n  · simp [add_succ, IH]\n    cases bodd m <;> cases bodd n <;> rfl\n#align bodd_add bodd_add\n\n",
+ "bitwise_zero_right":
+ "@[simp]\ntheorem bitwise_zero_right (f : bool → bool → bool) (h : f false false = ff) (m) :\n    bitwise f m 0 = cond (f true false) m 0 := by\n  unfold bitwise <;> apply bit_cases_on m <;> intros <;> rw [binary_rec_eq, binary_rec_zero] <;> exact bitwise_bit_aux h\n#align bitwise_zero_right bitwise_zero_right\n\n",
+ "bitwise_zero_left":
+ "@[simp]\ntheorem bitwise_zero_left (f : bool → bool → bool) (n) : bitwise f 0 n = cond (f false true) n 0 := by\n  unfold bitwise <;> rw [binary_rec_zero]\n#align bitwise_zero_left bitwise_zero_left\n\n",
+ "bitwise_zero":
+ "@[simp]\ntheorem bitwise_zero (f : bool → bool → bool) : bitwise f 0 0 = 0 := by rw [bitwise_zero_left] <;> cases f ff tt <;> rfl\n#align bitwise_zero bitwise_zero\n\n",
+ "bitwise_swap":
+ "theorem bitwise_swap {f : bool → bool → bool} (h : f false false = ff) :\n    bitwise (function.swap f) = function.swap (bitwise f) :=\n  by\n  funext m n; revert n\n  dsimp [function.swap]\n  apply binary_rec _ (fun a m' IH => _) m <;> intro n\n  · rw [bitwise_zero_left, bitwise_zero_right]\n    exact h\n  apply bit_cases_on n <;> intro b n'\n  rw [bitwise_bit, bitwise_bit, IH] <;> exact h\n#align bitwise_swap bitwise_swap\n\n",
+ "bitwise_bit_aux":
+ "theorem bitwise_bit_aux {f : bool → bool → bool} (h : f false false = ff) :\n    (@binary_rec (fun _ => ℕ) (cond (f true false) (bit false 0) 0) fun b n _ =>\n        bit (f false b) (cond (f false true) n 0)) =\n      fun n : ℕ => cond (f false true) n 0 :=\n  by\n  funext n\n  apply bit_cases_on n; intro b n; rw [binary_rec_eq]\n  · cases b <;> try rw [h] <;> induction' fft : f ff tt with <;> simp [cond] <;> rfl\n  ·\n    rw [h, show cond (f ff tt) 0 0 = 0 by cases f ff tt <;> rfl,\n        show cond (f tt ff) (bit ff 0) 0 = 0 by cases f tt ff <;> rfl] <;>\n      rfl\n#align bitwise_bit_aux bitwise_bit_aux\n\n",
+ "bitwise_bit":
+ "/- ./././Mathport/Syntax/Translate/Tactic/Builtin.lean:72:18: unsupported non-interactive tactic tactic.swap -/\n@[simp]\ntheorem bitwise_bit {f : bool → bool → bool} (h : f false false = ff) (a m b n) :\n    bitwise f (bit a m) (bit b n) = bit (f a b) (bitwise f m n) :=\n  by\n  unfold bitwise\n  rw [binary_rec_eq, binary_rec_eq]\n  · induction' ftf : f tt ff with <;> dsimp [cond]\n    rw [show f a ff = ff by cases a <;> assumption]\n    apply @congr_arg _ _ _ 0 (bit ff)\n    run_tac\n      tactic.swap\n    rw [show f a ff = a by cases a <;> assumption]\n    apply congr_arg (bit a)\n    all_goals\n      apply bit_cases_on m; intro a m\n      rw [binary_rec_eq, binary_rec_zero]\n      rw [← bitwise_bit_aux h, ftf]; rfl\n  · exact bitwise_bit_aux h\n#align bitwise_bit bitwise_bit\n\n",
+ "bit_zero":
+ "theorem bit_zero : bit false 0 = 0 :=\n  rfl\n#align bit_zero bit_zero\n\n",
+ "bit_val":
+ "theorem bit_val (b n) : bit b n = 2 * n + cond b 1 0 := by\n  cases b\n  apply bit0_val\n  apply bit1_val\n#align bit_val bit_val\n\n",
+ "bit_decomp":
+ "theorem bit_decomp (n : nat) : bit (bodd n) (div2 n) = n :=\n  (bit_val _ _).trans <| (nat.add_comm _ _).trans <| bodd_add_div2 _\n#align bit_decomp bit_decomp\n\n",
+ "bit1_val":
+ "theorem bit1_val (n : nat) : bit1 n = 2 * n + 1 :=\n  congr_arg succ (bit0_val _)\n#align bit1_val bit1_val\n\n",
+ "bit0_val":
+ "theorem bit0_val (n : nat) : bit0 n = 2 * n :=\n  calc\n    n + n = 0 + n + n := by rw [nat.zero_add]\n    _ = n * 2 := rfl\n    _ = 2 * n := nat.mul_comm _ _\n    \n#align bit0_val bit0_val\n\n",
+ "binary_rec_zero":
+ "@[simp]\ntheorem binary_rec_zero {C : nat → Sort u} (z : C 0) (f : ∀ b n, C n → C (bit b n)) : binary_rec z f 0 = z :=\n  by\n  rw [binary_rec]\n  rfl\n#align binary_rec_zero binary_rec_zero\n\n",
+ "binary_rec_eq":
+ "/- ./././Mathport/Syntax/Translate/Tactic/Lean3.lean:145:2: warning: unsupported: with_cases -/\ntheorem binary_rec_eq {C : nat → Sort u} {z : C 0} {f : ∀ b n, C n → C (bit b n)} (h : f false 0 z = z) (b n) :\n    binary_rec z f (bit b n) = f b n (binary_rec z f n) :=\n  by\n  rw [binary_rec]\n  by_cases bit b n = 0\n  case pos h' =>\n    simp [dif_pos h']\n    generalize binary_rec._main._pack._proof_1 (bit b n) h' = e\n    revert e\n    have bf := bodd_bit b n\n    have n0 := div2_bit b n\n    rw [h'] at bf n0\n    simp at bf n0\n    rw [← bf, ← n0, binary_rec_zero]\n    intros ; exact h.symm\n  case neg h' =>\n    simp [dif_neg h']\n    generalize binary_rec._main._pack._proof_2 (bit b n) = e\n    revert e\n    rw [bodd_bit, div2_bit]\n    intros ; rfl\n#align binary_rec_eq binary_rec_eq\n\n"}

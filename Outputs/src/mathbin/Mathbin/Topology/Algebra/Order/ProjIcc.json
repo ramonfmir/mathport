@@ -1,0 +1,10 @@
+{"quotient_map_proj_Icc":
+ "theorem quotient_map_proj_Icc : quotient_map (projIcc a b h) :=\n  quotient_map_iff.2\n    ⟨projIcc_surjective h, fun s =>\n      ⟨fun hs => hs.preimage continuous_proj_Icc, fun hs =>\n        ⟨_, hs, by\n          ext\n          simp⟩⟩⟩\n#align quotient_map_proj_Icc quotient_map_proj_Icc\n\n",
+ "continuous_proj_Icc":
+ "@[continuity]\ntheorem continuous_proj_Icc : continuous (projIcc a b h) :=\n  (continuous_const.max <| continuous_const.min continuous_id).subtype_mk _\n#align continuous_proj_Icc continuous_proj_Icc\n\n",
+ "continuous_Icc_extend_iff":
+ "@[simp]\ntheorem continuous_Icc_extend_iff {f : Icc a b → β} : continuous (IccExtend h f) ↔ continuous f :=\n  quotient_map_proj_Icc.continuous_iff.symm\n#align continuous_Icc_extend_iff continuous_Icc_extend_iff\n\n",
+ "Icc_extend'":
+ "/-- A useful special case of `continuous.Icc_extend`. -/\n@[continuity]\ntheorem continuous.Icc_extend' {f : Icc a b → β} (hf : continuous f) : continuous (IccExtend h f) :=\n  hf.comp continuous_proj_Icc\n#align continuous.Icc_extend' continuous.Icc_extend'\n\n",
+ "Icc_extend":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `uncurry -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `uncurry -/\ntheorem continuous_at.Icc_extend {x : γ} (f : γ → Icc a b → β) {g : γ → α}\n    (hf : continuous_at (uncurry f) (x, projIcc a b h (g x))) (hg : continuous_at g x) :\n    continuous_at (fun a => IccExtend h (f a) (g a)) x :=\n  show continuous_at (uncurry f ∘ fun x => (x, projIcc a b h (g x))) x from\n    continuous_at.comp hf <| continuous_at_id.prod <| continuous_proj_Icc.continuous_at.comp hg\n#align continuous_at.Icc_extend continuous_at.Icc_extend\n\n"}

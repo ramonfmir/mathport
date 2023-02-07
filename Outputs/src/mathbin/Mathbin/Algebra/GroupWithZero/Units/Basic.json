@@ -1,0 +1,74 @@
+{"ring_inverse":
+ "#print IsUnit.ring_inverse /-\ntheorem IsUnit.ring_inverse {a : M₀} : is_unit a → is_unit (Ring.inverse a)\n  | ⟨u, hu⟩ => hu ▸ ⟨u⁻¹, (Ring.inverse_unit u).symm⟩\n#align is_unit.ring_inverse IsUnit.ring_inverse\n-/\n\n",
+ "not_isUnit_zero":
+ "#print not_isUnit_zero /-\n@[simp]\ntheorem not_isUnit_zero [nontrivial M₀] : ¬is_unit (0 : M₀) :=\n  mt isUnit_zero_iff.1 zero_ne_one\n#align not_is_unit_zero not_isUnit_zero\n-/\n\n",
+ "ne_zero":
+ "theorem ne_zero [nontrivial M₀] {a : M₀} (ha : is_unit a) : a ≠ 0 :=\n  let ⟨u, hu⟩ := ha\n  hu ▸ u.ne_zero\n#align ne_zero ne_zero\n\n",
+ "mul_right_eq_zero":
+ "theorem mul_right_eq_zero {a b : M₀} (ha : is_unit a) : a * b = 0 ↔ b = 0 :=\n  let ⟨u, hu⟩ := ha\n  hu ▸ u.mul_right_eq_zero\n#align mul_right_eq_zero mul_right_eq_zero\n\n",
+ "mul_left_eq_zero":
+ "theorem mul_left_eq_zero {a b : M₀} (hb : is_unit b) : a * b = 0 ↔ a = 0 :=\n  let ⟨u, hu⟩ := hb\n  hu ▸ u.mul_left_eq_zero\n#align mul_left_eq_zero mul_left_eq_zero\n\n",
+ "mul_inverse_cancel_right":
+ "theorem mul_inverse_cancel_right (x y : M₀) (h : is_unit x) : y * x * inverse x = y := by\n  rw [mul_assoc, mul_inverse_cancel x h, mul_one]\n#align mul_inverse_cancel_right mul_inverse_cancel_right\n\n",
+ "mul_inverse_cancel_left":
+ "theorem mul_inverse_cancel_left (x y : M₀) (h : is_unit x) : x * (inverse x * y) = y := by\n  rw [← mul_assoc, mul_inverse_cancel x h, one_mul]\n#align mul_inverse_cancel_left mul_inverse_cancel_left\n\n",
+ "mul_inverse_cancel":
+ "theorem mul_inverse_cancel (x : M₀) (h : is_unit x) : x * inverse x = 1 :=\n  by\n  rcases h with ⟨u, rfl⟩\n  rw [inverse_unit, Units.mul_inv]\n#align mul_inverse_cancel mul_inverse_cancel\n\n",
+ "mul_inv'":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ˣ» -/\n@[simp]\ntheorem mul_inv' (u : «expr ˣ» G₀) : (u : G₀) * u⁻¹ = 1 :=\n  mul_inv_cancel u.ne_zero\n#align mul_inv' mul_inv'\n\n",
+ "mk0_one":
+ "@[simp]\ntheorem mk0_one (h := one_ne_zero) : mk0 (1 : G₀) h = 1 :=\n  by\n  ext\n  rfl\n#align mk0_one mk0_one\n\n",
+ "mk0_mul":
+ "#print Units.mk0_mul /-\n-- see Note [lower instance priority]\n-- see Note [lower instance priority]\n-- Can't be put next to the other `mk0` lemmas because it depends on the\n-- `no_zero_divisors` instance, which depends on `mk0`.\n@[simp]\ntheorem Units.mk0_mul (x y : G₀) (hxy) :\n    Units.mk0 (x * y) hxy = Units.mk0 x (mul_ne_zero_iff.mp hxy).1 * Units.mk0 y (mul_ne_zero_iff.mp hxy).2 :=\n  by\n  ext\n  rfl\n#align units.mk0_mul Units.mk0_mul\n-/\n\n",
+ "mk0_inj":
+ "@[simp]\ntheorem mk0_inj {a b : G₀} (ha : a ≠ 0) (hb : b ≠ 0) : Units.mk0 a ha = Units.mk0 b hb ↔ a = b :=\n  ⟨fun h => by injection h, fun h => Units.ext h⟩\n#align mk0_inj mk0_inj\n\n",
+ "mk0_coe":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ˣ» -/\n@[simp]\ntheorem mk0_coe (u : «expr ˣ» G₀) (h : (u : G₀) ≠ 0) : mk0 (u : G₀) h = u :=\n  Units.ext rfl\n#align mk0_coe mk0_coe\n\n",
+ "mk0":
+ "#print IsUnit.mk0 /-\ntheorem IsUnit.mk0 (x : G₀) (hx : x ≠ 0) : is_unit x :=\n  (Units.mk0 x hx).is_unit\n#align is_unit.mk0 IsUnit.mk0\n-/\n\n",
+ "isUnit_zero_iff":
+ "#print isUnit_zero_iff /-\n@[simp]\ntheorem isUnit_zero_iff : is_unit (0 : M₀) ↔ (0 : M₀) = 1 :=\n  ⟨fun ⟨⟨_, a, (a0 : 0 * a = 1), _⟩, rfl⟩ => by rwa [zero_mul] at a0, fun h =>\n    @isUnit_of_subsingleton _ _ (subsingleton_of_zero_eq_one h) 0⟩\n#align is_unit_zero_iff isUnit_zero_iff\n-/\n\n",
+ "isUnit_ring_inverse":
+ "#print isUnit_ring_inverse /-\n@[simp]\ntheorem isUnit_ring_inverse {a : M₀} : is_unit (Ring.inverse a) ↔ is_unit a :=\n  ⟨fun h => by\n    cases subsingleton_or_nontrivial M₀\n    · convert h\n    · contrapose h\n      rw [Ring.inverse_non_unit _ h]\n      exact not_isUnit_zero, IsUnit.ring_inverse⟩\n#align is_unit_ring_inverse isUnit_ring_inverse\n-/\n\n",
+ "isUnit_iff_ne_zero":
+ "#print isUnit_iff_ne_zero /-\ntheorem isUnit_iff_ne_zero : is_unit a ↔ a ≠ 0 :=\n  Units.exists_iff_ne_zero\n#align is_unit_iff_ne_zero isUnit_iff_ne_zero\n-/\n\n",
+ "inverse_zero":
+ "@[simp]\ntheorem inverse_zero : inverse (0 : M₀) = 0 := by\n  nontriviality\n  exact inverse_non_unit _ not_isUnit_zero\n#align inverse_zero inverse_zero\n\n",
+ "inverse_unit":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ˣ» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ˣ» -/\n/-- By definition, if `x` is invertible then `inverse x = x⁻¹`. -/\n@[simp]\ntheorem inverse_unit (u : «expr ˣ» M₀) : inverse (u : M₀) = (u⁻¹ : «expr ˣ» M₀) :=\n  by\n  simp only [Units.isUnit, inverse, dif_pos]\n  exact units.inv_unique rfl\n#align inverse_unit inverse_unit\n\n",
+ "inverse_one":
+ "@[simp]\ntheorem inverse_one : inverse (1 : M₀) = 1 :=\n  inverse_unit 1\n#align inverse_one inverse_one\n\n",
+ "inverse_non_unit":
+ "/-- By definition, if `x` is not invertible then `inverse x = 0`. -/\n@[simp]\ntheorem inverse_non_unit (x : M₀) (h : ¬is_unit x) : inverse x = 0 :=\n  dif_neg h\n#align inverse_non_unit inverse_non_unit\n\n",
+ "inverse_mul_eq_iff_eq_mul":
+ "theorem inverse_mul_eq_iff_eq_mul (x y z : M₀) (h : is_unit x) : inverse x * y = z ↔ y = x * z :=\n  ⟨fun h1 => by rw [← h1, mul_inverse_cancel_left _ _ h], fun h1 => by rw [h1, inverse_mul_cancel_left _ _ h]⟩\n#align inverse_mul_eq_iff_eq_mul inverse_mul_eq_iff_eq_mul\n\n",
+ "inverse_mul_cancel_right":
+ "theorem inverse_mul_cancel_right (x y : M₀) (h : is_unit x) : y * inverse x * x = y := by\n  rw [mul_assoc, inverse_mul_cancel x h, mul_one]\n#align inverse_mul_cancel_right inverse_mul_cancel_right\n\n",
+ "inverse_mul_cancel_left":
+ "theorem inverse_mul_cancel_left (x y : M₀) (h : is_unit x) : inverse x * (x * y) = y := by\n  rw [← mul_assoc, inverse_mul_cancel x h, one_mul]\n#align inverse_mul_cancel_left inverse_mul_cancel_left\n\n",
+ "inverse_mul_cancel":
+ "theorem inverse_mul_cancel (x : M₀) (h : is_unit x) : inverse x * x = 1 :=\n  by\n  rcases h with ⟨u, rfl⟩\n  rw [inverse_unit, Units.inv_mul]\n#align inverse_mul_cancel inverse_mul_cancel\n\n",
+ "inverse_eq_inv'":
+ "#print Ring.inverse_eq_inv' /-\n@[simp]\ntheorem Ring.inverse_eq_inv' : (Ring.inverse : G₀ → G₀) = has_inv.inv :=\n  funext Ring.inverse_eq_inv\n#align ring.inverse_eq_inv' Ring.inverse_eq_inv'\n-/\n\n",
+ "inverse_eq_inv":
+ "#print Ring.inverse_eq_inv /-\ntheorem Ring.inverse_eq_inv (a : G₀) : Ring.inverse a = a⁻¹ :=\n  by\n  obtain rfl | ha := eq_or_ne a 0\n  · simp\n  · exact Ring.inverse_unit (Units.mk0 a ha)\n#align ring.inverse_eq_inv Ring.inverse_eq_inv\n-/\n\n",
+ "inv_mul'":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ˣ» -/\n#print inv_mul' /-\n@[simp]\ntheorem inv_mul' (u : «expr ˣ» G₀) : (u⁻¹ : G₀) * u = 1 :=\n  inv_mul_cancel u.ne_zero\n#align inv_mul' inv_mul'\n-/\n\n",
+ "exists_iff_ne_zero":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ˣ» -/\n@[simp]\ntheorem exists_iff_ne_zero {x : G₀} : (∃ u : «expr ˣ» G₀, ↑u = x) ↔ x ≠ 0 := by simp [exists0]\n#align exists_iff_ne_zero exists_iff_ne_zero\n\n",
+ "exists0'":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ˣ» -/\n/-- An alternative version of `units.exists0`. This one is useful if Lean cannot\nfigure out `p` when using `units.exists0` from right to left. -/\ntheorem exists0' {p : ∀ g : G₀, g ≠ 0 → Prop} : (∃ (g : G₀)(hg : g ≠ 0), p g hg) ↔ ∃ g : «expr ˣ» G₀, p g g.ne_zero :=\n  iff.trans (by simp_rw [coe_mk0]) exists0.symm\n#align exists0' exists0'\n\n",
+ "exists0":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ˣ» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ˣ» -/\n/-- In a group with zero, an existential over a unit can be rewritten in terms of `units.mk0`. -/\ntheorem exists0 {p : «expr ˣ» G₀ → Prop} : (∃ g : «expr ˣ» G₀, p g) ↔ ∃ (g : G₀)(hg : g ≠ 0), p (Units.mk0 g hg) :=\n  ⟨fun ⟨g, pg⟩ => ⟨g, g.ne_zero, (g.mk0_coe g.ne_zero).symm ▸ pg⟩, fun ⟨g, hg, pg⟩ => ⟨Units.mk0 g hg, pg⟩⟩\n#align exists0 exists0\n\n",
+ "eq_zero_or_unit":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ˣ» -/\n#print GroupWithZero.eq_zero_or_unit /-\ntheorem GroupWithZero.eq_zero_or_unit (a : G₀) : a = 0 ∨ ∃ u : «expr ˣ» G₀, a = u :=\n  by\n  by_cases h : a = 0\n  · left\n    exact h\n  · right\n    simpa only [eq_comm] using units.exists_iff_ne_zero.mpr h\n#align group_with_zero.eq_zero_or_unit GroupWithZero.eq_zero_or_unit\n-/\n\n",
+ "eq_mul_inverse_iff_mul_eq":
+ "theorem eq_mul_inverse_iff_mul_eq (x y z : M₀) (h : is_unit z) : x = y * inverse z ↔ x * z = y :=\n  ⟨fun h1 => by rw [h1, inverse_mul_cancel_right _ _ h], fun h1 => by rw [← h1, mul_inverse_cancel_right _ _ h]⟩\n#align eq_mul_inverse_iff_mul_eq eq_mul_inverse_iff_mul_eq\n\n",
+ "div_ne_zero_iff":
+ "#print div_ne_zero_iff /-\ntheorem div_ne_zero_iff : a / b ≠ 0 ↔ a ≠ 0 ∧ b ≠ 0 :=\n  div_eq_zero_iff.not.trans not_or\n#align div_ne_zero_iff div_ne_zero_iff\n-/\n\n",
+ "div_ne_zero":
+ "#print div_ne_zero /-\ntheorem div_ne_zero (ha : a ≠ 0) (hb : b ≠ 0) : a / b ≠ 0 :=\n  by\n  rw [div_eq_mul_inv]\n  exact mul_ne_zero ha (inv_ne_zero hb)\n#align div_ne_zero div_ne_zero\n-/\n\n",
+ "div_eq_zero_iff":
+ "#print div_eq_zero_iff /-\n@[simp]\ntheorem div_eq_zero_iff : a / b = 0 ↔ a = 0 ∨ b = 0 := by simp [div_eq_mul_inv]\n#align div_eq_zero_iff div_eq_zero_iff\n-/\n\n",
+ "coe_mk0":
+ "@[simp]\ntheorem coe_mk0 {a : G₀} (h : a ≠ 0) : (mk0 a h : G₀) = a :=\n  rfl\n#align coe_mk0 coe_mk0\n\n"}

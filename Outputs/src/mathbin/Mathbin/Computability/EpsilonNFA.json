@@ -1,0 +1,48 @@
+{"ε_closure_univ":
+ "@[simp]\ntheorem ε_closure_univ : M.ε_closure univ = univ :=\n  eq_univ_of_univ_subset <| subset_ε_closure _ _\n#align ε_closure_univ ε_closure_univ\n\n",
+ "ε_closure_empty":
+ "@[simp]\ntheorem ε_closure_empty : M.ε_closure ∅ = ∅ :=\n  eq_empty_of_forall_not_mem fun s hs => by induction' hs with t ht _ _ _ _ ih <;> assumption\n#align ε_closure_empty ε_closure_empty\n\n",
+ "to_ε_NFA_ε_closure":
+ "@[simp]\ntheorem to_ε_NFA_ε_closure (M : NFA α σ) (S : set σ) : M.to_ε_NFA.ε_closure S = S :=\n  by\n  ext a\n  refine' ⟨_, ε_NFA.ε_closure.base _⟩\n  rintro (⟨_, h⟩ | ⟨_, _, h, _⟩)\n  · exact h\n  · cases h\n#align to_ε_NFA_ε_closure to_ε_NFA_ε_closure\n\n",
+ "to_ε_NFA_eval_from_match":
+ "@[simp]\ntheorem to_ε_NFA_eval_from_match (M : NFA α σ) (start : set σ) : M.to_ε_NFA.eval_from start = M.eval_from start :=\n  by\n  rw [eval_from, ε_NFA.eval_from, to_ε_NFA_ε_closure]\n  congr\n  ext (S s)\n  simp only [step_set, ε_NFA.step_set, exists_prop, Set.mem_unionᵢ]\n  apply exists_congr\n  simp only [and_congr_right_iff]\n  intro t ht\n  rw [M.to_ε_NFA_ε_closure]\n  rfl\n#align to_ε_NFA_eval_from_match to_ε_NFA_eval_from_match\n\n",
+ "to_ε_NFA_correct":
+ "@[simp]\ntheorem to_ε_NFA_correct (M : NFA α σ) : M.to_ε_NFA.accepts = M.accepts :=\n  by\n  rw [accepts, ε_NFA.accepts, eval, ε_NFA.eval, to_ε_NFA_eval_from_match]\n  rfl\n#align to_ε_NFA_correct to_ε_NFA_correct\n\n",
+ "to_NFA_eval_from_match":
+ "@[simp]\ntheorem to_NFA_eval_from_match (start : set σ) : M.to_NFA.eval_from (M.ε_closure start) = M.eval_from start :=\n  rfl\n#align to_NFA_eval_from_match to_NFA_eval_from_match\n\n",
+ "to_NFA_correct":
+ "@[simp]\ntheorem to_NFA_correct : M.to_NFA.accepts = M.accepts := by\n  ext x\n  rw [accepts, NFA.accepts, eval, NFA.eval, ← to_NFA_eval_from_match]\n  rfl\n#align to_NFA_correct to_NFA_correct\n\n",
+ "subset_ε_closure":
+ "/-\nCopyright (c) 2021 Fox Thomson. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Fox Thomson, Yaël Dillies\n-/\n@[simp]\ntheorem subset_ε_closure (S : set σ) : S ⊆ M.ε_closure S :=\n  ε_closure.base\n#align subset_ε_closure subset_ε_closure\n\n",
+ "step_zero":
+ "@[simp]\ntheorem step_zero (s a) : (0 : ε_NFA α σ).step s a = ∅ :=\n  rfl\n#align step_zero step_zero\n\n",
+ "step_set_empty":
+ "@[simp]\ntheorem step_set_empty (a : α) : M.step_set ∅ a = ∅ := by simp_rw [step_set, Union_false, Union_empty]\n#align step_set_empty step_set_empty\n\n",
+ "step_one":
+ "@[simp]\ntheorem step_one (s a) : (1 : ε_NFA α σ).step s a = ∅ :=\n  rfl\n#align step_one step_one\n\n",
+ "start_zero":
+ "@[simp]\ntheorem start_zero : (0 : ε_NFA α σ).start = ∅ :=\n  rfl\n#align start_zero start_zero\n\n",
+ "start_one":
+ "@[simp]\ntheorem start_one : (1 : ε_NFA α σ).start = univ :=\n  rfl\n#align start_one start_one\n\n",
+ "pumping_lemma":
+ "theorem pumping_lemma [fintype σ] {x : list α} (hx : x ∈ M.accepts) (hlen : fintype.card (set σ) ≤ list.length x) :\n    ∃ a b c,\n      x = a ++ b ++ c ∧\n        a.length + b.length ≤ fintype.card (set σ) ∧ b ≠ [] ∧ {a} * language.star {b} * {c} ≤ M.accepts :=\n  by\n  rw [← to_NFA_correct] at hx⊢\n  exact M.to_NFA.pumping_lemma hx hlen\n#align pumping_lemma pumping_lemma\n\n",
+ "mem_step_set_iff":
+ "@[simp]\ntheorem mem_step_set_iff : s ∈ M.step_set S a ↔ ∃ t ∈ S, s ∈ M.ε_closure (M.step t a) :=\n  mem_Union₂\n#align mem_step_set_iff mem_step_set_iff\n\n",
+ "eval_singleton":
+ "@[simp]\ntheorem eval_singleton (a : α) : M.eval [a] = M.step_set (M.ε_closure M.start) a :=\n  rfl\n#align eval_singleton eval_singleton\n\n",
+ "eval_nil":
+ "@[simp]\ntheorem eval_nil : M.eval [] = M.ε_closure M.start :=\n  rfl\n#align eval_nil eval_nil\n\n",
+ "eval_from_singleton":
+ "@[simp]\ntheorem eval_from_singleton (S : set σ) (a : α) : M.eval_from S [a] = M.step_set (M.ε_closure S) a :=\n  rfl\n#align eval_from_singleton eval_from_singleton\n\n",
+ "eval_from_nil":
+ "@[simp]\ntheorem eval_from_nil (S : set σ) : M.eval_from S [] = M.ε_closure S :=\n  rfl\n#align eval_from_nil eval_from_nil\n\n",
+ "eval_from_empty":
+ "@[simp]\ntheorem eval_from_empty (x : list α) : M.eval_from ∅ x = ∅ :=\n  by\n  induction' x using List.reverseRecOn with x a ih\n  · rw [eval_from_nil, ε_closure_empty]\n  · rw [eval_from_append_singleton, ih, step_set_empty]\n#align eval_from_empty eval_from_empty\n\n",
+ "eval_from_append_singleton":
+ "@[simp]\ntheorem eval_from_append_singleton (S : set σ) (x : list α) (a : α) :\n    M.eval_from S (x ++ [a]) = M.step_set (M.eval_from S x) a := by\n  simp only [eval_from, List.foldl_append, List.foldl_cons, List.foldl_nil]\n#align eval_from_append_singleton eval_from_append_singleton\n\n",
+ "eval_append_singleton":
+ "@[simp]\ntheorem eval_append_singleton (x : list α) (a : α) : M.eval (x ++ [a]) = M.step_set (M.eval x) a :=\n  eval_from_append_singleton _ _ _ _\n#align eval_append_singleton eval_append_singleton\n\n",
+ "accept_zero":
+ "@[simp]\ntheorem accept_zero : (0 : ε_NFA α σ).accept = ∅ :=\n  rfl\n#align accept_zero accept_zero\n\n",
+ "accept_one":
+ "@[simp]\ntheorem accept_one : (1 : ε_NFA α σ).accept = univ :=\n  rfl\n#align accept_one accept_one\n\n"}

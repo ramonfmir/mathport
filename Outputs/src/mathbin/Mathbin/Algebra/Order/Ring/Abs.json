@@ -1,0 +1,38 @@
+{"self_dvd_abs":
+ "#print self_dvd_abs /-\ntheorem self_dvd_abs (a : α) : a ∣ |a| :=\n  (dvd_abs a a).mpr (dvd_refl a)\n#align self_dvd_abs self_dvd_abs\n-/\n\n",
+ "max_zero_add_max_neg_zero_eq_abs_self":
+ "#print max_zero_add_max_neg_zero_eq_abs_self /-\n@[simp]\ntheorem max_zero_add_max_neg_zero_eq_abs_self (a : α) : max a 0 + max (-a) 0 = |a| :=\n  by\n  symm\n  rcases le_total 0 a with (ha | ha) <;> simp [ha]\n#align max_zero_add_max_neg_zero_eq_abs_self max_zero_add_max_neg_zero_eq_abs_self\n-/\n\n",
+ "dvd_abs":
+ "#print dvd_abs /-\n@[simp]\ntheorem dvd_abs (a b : α) : a ∣ |b| ↔ a ∣ b := by cases' abs_choice b with h h <;> simp only [h, dvd_neg]\n#align dvd_abs dvd_abs\n-/\n\n",
+ "abs_two":
+ "#print abs_two /-\n@[simp]\ntheorem abs_two : |(2 : α)| = 2 :=\n  abs_of_pos zero_lt_two\n#align abs_two abs_two\n-/\n\n",
+ "abs_sub_sq":
+ "#print abs_sub_sq /-\ntheorem abs_sub_sq (a b : α) : |a - b| * |a - b| = a * a + b * b - (1 + 1) * a * b :=\n  by\n  rw [abs_mul_abs_self]\n  simp only [mul_add, add_comm, add_left_comm, mul_comm, sub_eq_add_neg, mul_one, mul_neg, neg_add_rev, neg_neg]\n#align abs_sub_sq abs_sub_sq\n-/\n\n",
+ "abs_one":
+ "#print abs_one /-\n/-\nCopyright (c) 2016 Jeremy Avigad. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Jeremy Avigad, Leonardo de Moura, Mario Carneiro\n-/\n@[simp]\ntheorem abs_one : |(1 : α)| = 1 :=\n  abs_of_pos zero_lt_one\n#align abs_one abs_one\n-/\n\n",
+ "abs_mul_self":
+ "#print abs_mul_self /-\n@[simp]\ntheorem abs_mul_self (a : α) : |a * a| = a * a := by rw [abs_mul, abs_mul_abs_self]\n#align abs_mul_self abs_mul_self\n-/\n\n",
+ "abs_mul_abs_self":
+ "#print abs_mul_abs_self /-\n@[simp]\ntheorem abs_mul_abs_self (a : α) : |a| * |a| = a * a :=\n  abs_by_cases (fun x => x * x = a * a) rfl (neg_mul_neg a a)\n#align abs_mul_abs_self abs_mul_abs_self\n-/\n\n",
+ "abs_mul":
+ "#print abs_mul /-\ntheorem abs_mul (a b : α) : |a * b| = |a| * |b| :=\n  by\n  rw [abs_eq (mul_nonneg (abs_nonneg a) (abs_nonneg b))]\n  cases' le_total a 0 with ha ha <;> cases' le_total b 0 with hb hb <;>\n    simp only [abs_of_nonpos, abs_of_nonneg, true_or_iff, or_true_iff, eq_self_iff_true, neg_mul, mul_neg, neg_neg, *]\n#align abs_mul abs_mul\n-/\n\n",
+ "abs_lt_iff_mul_self_lt":
+ "#print abs_lt_iff_mul_self_lt /-\ntheorem abs_lt_iff_mul_self_lt : |a| < |b| ↔ a * a < b * b :=\n  by\n  rw [← abs_mul_abs_self, ← abs_mul_abs_self b]\n  exact mul_self_lt_mul_self_iff (abs_nonneg a) (abs_nonneg b)\n#align abs_lt_iff_mul_self_lt abs_lt_iff_mul_self_lt\n-/\n\n",
+ "abs_le_one_iff_mul_self_le_one":
+ "#print abs_le_one_iff_mul_self_le_one /-\ntheorem abs_le_one_iff_mul_self_le_one : |a| ≤ 1 ↔ a * a ≤ 1 := by\n  simpa only [abs_one, one_mul] using @abs_le_iff_mul_self_le α _ a 1\n#align abs_le_one_iff_mul_self_le_one abs_le_one_iff_mul_self_le_one\n-/\n\n",
+ "abs_le_iff_mul_self_le":
+ "#print abs_le_iff_mul_self_le /-\ntheorem abs_le_iff_mul_self_le : |a| ≤ |b| ↔ a * a ≤ b * b :=\n  by\n  rw [← abs_mul_abs_self, ← abs_mul_abs_self b]\n  exact mul_self_le_mul_self_iff (abs_nonneg a) (abs_nonneg b)\n#align abs_le_iff_mul_self_le abs_le_iff_mul_self_le\n-/\n\n",
+ "abs_eq_self":
+ "#print abs_eq_self /-\n@[simp]\ntheorem abs_eq_self : |a| = a ↔ 0 ≤ a := by simp [abs_eq_max_neg]\n#align abs_eq_self abs_eq_self\n-/\n\n",
+ "abs_eq_neg_self":
+ "#print abs_eq_neg_self /-\n@[simp]\ntheorem abs_eq_neg_self : |a| = -a ↔ a ≤ 0 := by simp [abs_eq_max_neg]\n#align abs_eq_neg_self abs_eq_neg_self\n-/\n\n",
+ "abs_eq_iff_mul_self_eq":
+ "#print abs_eq_iff_mul_self_eq /-\ntheorem abs_eq_iff_mul_self_eq : |a| = |b| ↔ a * a = b * b :=\n  by\n  rw [← abs_mul_abs_self, ← abs_mul_abs_self b]\n  exact (mul_self_inj (abs_nonneg a) (abs_nonneg b)).symm\n#align abs_eq_iff_mul_self_eq abs_eq_iff_mul_self_eq\n-/\n\n",
+ "abs_dvd_self":
+ "#print abs_dvd_self /-\ntheorem abs_dvd_self (a : α) : |a| ∣ a :=\n  (abs_dvd a a).mpr (dvd_refl a)\n#align abs_dvd_self abs_dvd_self\n-/\n\n",
+ "abs_dvd_abs":
+ "#print abs_dvd_abs /-\ntheorem abs_dvd_abs (a b : α) : |a| ∣ |b| ↔ a ∣ b :=\n  (abs_dvd _ _).trans (dvd_abs _ _)\n#align abs_dvd_abs abs_dvd_abs\n-/\n\n",
+ "abs_dvd":
+ "#print abs_dvd /-\n@[simp]\ntheorem abs_dvd (a b : α) : |a| ∣ b ↔ a ∣ b := by cases' abs_choice a with h h <;> simp only [h, neg_dvd]\n#align abs_dvd abs_dvd\n-/\n\n",
+ "abs_cases":
+ "#print abs_cases /-\n/-- For an element `a` of a linear ordered ring, either `abs a = a` and `0 ≤ a`,\n    or `abs a = -a` and `a < 0`.\n    Use cases on this lemma to automate linarith in inequalities -/\ntheorem abs_cases (a : α) : |a| = a ∧ 0 ≤ a ∨ |a| = -a ∧ a < 0 :=\n  by\n  by_cases 0 ≤ a\n  · left\n    exact ⟨abs_eq_self.mpr h, h⟩\n  · right\n    push_neg  at h\n    exact ⟨abs_eq_neg_self.mpr (le_of_lt h), h⟩\n#align abs_cases abs_cases\n-/\n\n"}

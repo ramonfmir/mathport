@@ -1,0 +1,14 @@
+{"smul_right":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⟶ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≫ » -/\ntheorem smul_right {X Y : C} {r : End Y} {f : «expr ⟶ » X Y} : «expr • » r f = «expr ≫ » f r :=\n  rfl\n#align smul_right smul_right\n\n",
+ "smul_left":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵖ» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⟶ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≫ » -/\ntheorem smul_left {X : «expr ᵒᵖ» C} {Y : C} {r : End X} {f : «expr ⟶ » (unop X) Y} :\n    «expr • » r f = «expr ≫ » r.unop f :=\n  rfl\n#align smul_left smul_left\n\n",
+ "one_def":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr𝟙» -/\n/-\nCopyright (c) 2019 Yury Kudryashov. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Yury Kudryashov, Scott Morrison, Simon Hudon\n-/\n@[simp]\ntheorem one_def : (1 : End X) = («expr𝟙») X :=\n  rfl\n#align one_def one_def\n\n",
+ "mul_def":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≫ » -/\n@[simp]\ntheorem mul_def (xs ys : End X) : xs * ys = «expr ≫ » ys xs :=\n  rfl\n#align mul_def mul_def\n\n",
+ "is_unit_iff_is_iso":
+ "theorem is_unit_iff_is_iso {C : Type u} [Category.{v} C] {X : C} (f : End X) : is_unit (f : End X) ↔ IsIso f :=\n  ⟨fun h => { out := ⟨h.unit.inv, ⟨h.unit.inv_val, h.unit.val_inv⟩⟩ }, fun h => ⟨⟨f, inv f, by simp, by simp⟩, rfl⟩⟩\n#align is_unit_iff_is_iso is_unit_iff_is_iso\n\n",
+ "Aut_mul_def":
+ "theorem Aut_mul_def (f g : Aut X) : f * g = g.trans f :=\n  rfl\n#align Aut_mul_def Aut_mul_def\n\n",
+ "Aut_inv_def":
+ "theorem Aut_inv_def (f : Aut X) : f⁻¹ = f.symm :=\n  rfl\n#align Aut_inv_def Aut_inv_def\n\n"}

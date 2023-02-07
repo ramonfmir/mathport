@@ -1,0 +1,46 @@
+{"zero_horner":
+ "/-\nCopyright (c) 2018 Mario Carneiro. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Mario Carneiro\n-/\ntheorem zero_horner {α} [CommSemiring α] (x n b) : @horner α _ 0 x n b = b := by simp [horner]\n#align zero_horner zero_horner\n\n",
+ "unfold_sub":
+ "theorem unfold_sub {α} [add_group α] (a b c : α) (h : a + -b = c) : a - b = c := by rw [sub_eq_add_neg, h]\n#align unfold_sub unfold_sub\n\n",
+ "unfold_div":
+ "theorem unfold_div {α} [DivisionRing α] (a b c : α) (h : a * b⁻¹ = c) : a / b = c := by rw [div_eq_mul_inv, h]\n#align unfold_div unfold_div\n\n",
+ "subst_into_pow":
+ "theorem subst_into_pow {α} [monoid α] (l r tl tr t) (prl : (l : α) = tl) (prr : (r : ℕ) = tr) (prt : tl ^ tr = t) :\n    l ^ r = t := by rw [prl, prr, prt]\n#align subst_into_pow subst_into_pow\n\n",
+ "pow_succ":
+ "#print pow_succ /-\ntheorem pow_succ {α} [CommSemiring α] (a n b c) (h₁ : (a : α) ^ n = b) (h₂ : b * a = c) : a ^ (n + 1) = c := by\n  rw [← h₂, ← h₁, pow_succ']\n#align pow_succ pow_succ\n-/\n\n",
+ "pow_add_rev_right":
+ "theorem pow_add_rev_right {α} [monoid α] (a b : α) (m n : ℕ) : b * a ^ m * a ^ n = b * a ^ (m + n) := by\n  simp [pow_add, mul_assoc]\n#align pow_add_rev_right pow_add_rev_right\n\n",
+ "pow_add_rev":
+ "theorem pow_add_rev {α} [monoid α] (a : α) (m n : ℕ) : a ^ m * a ^ n = a ^ (m + n) := by simp [pow_add]\n#align pow_add_rev pow_add_rev\n\n",
+ "mul_assoc_rev":
+ "theorem mul_assoc_rev {α} [semigroup α] (a b c : α) : a * (b * c) = a * b * c := by simp [mul_assoc]\n#align mul_assoc_rev mul_assoc_rev\n\n",
+ "horner_pow":
+ "theorem horner_pow {α} [CommSemiring α] (a x n m n' a') (h₁ : n * m = n') (h₂ : a ^ m = a') :\n    @horner α _ a x n 0 ^ m = horner a' x n' 0 := by simp [h₁.symm, h₂.symm, horner, mul_pow, pow_mul]\n#align horner_pow horner_pow\n\n",
+ "horner_neg":
+ "theorem horner_neg {α} [CommRing α] (a x n b a' b') (h₁ : -a = a') (h₂ : -b = b') :\n    -@horner α _ a x n b = horner a' x n b' := by simp [h₂.symm, h₁.symm, horner] <;> cc\n#align horner_neg horner_neg\n\n",
+ "horner_mul_horner_zero":
+ "theorem horner_mul_horner_zero {α} [CommSemiring α] (a₁ x n₁ b₁ a₂ n₂ aa t) (h₁ : @horner α _ a₁ x n₁ b₁ * a₂ = aa)\n    (h₂ : horner aa x n₂ 0 = t) : horner a₁ x n₁ b₁ * horner a₂ x n₂ 0 = t := by\n  rw [← h₂, ← h₁] <;> simp [horner, mul_add, mul_comm, mul_left_comm, mul_assoc]\n#align horner_mul_horner_zero horner_mul_horner_zero\n\n",
+ "horner_mul_horner":
+ "theorem horner_mul_horner {α} [CommSemiring α] (a₁ x n₁ b₁ a₂ n₂ b₂ aa haa ab bb t)\n    (h₁ : @horner α _ a₁ x n₁ b₁ * a₂ = aa) (h₂ : horner aa x n₂ 0 = haa) (h₃ : a₁ * b₂ = ab) (h₄ : b₁ * b₂ = bb)\n    (H : haa + horner ab x n₁ bb = t) : horner a₁ x n₁ b₁ * horner a₂ x n₂ b₂ = t := by\n  rw [← H, ← h₂, ← h₁, ← h₃, ← h₄] <;> simp [horner, mul_add, mul_comm, mul_left_comm, mul_assoc]\n#align horner_mul_horner horner_mul_horner\n\n",
+ "horner_mul_const":
+ "theorem horner_mul_const {α} [CommSemiring α] (a x n b c a' b') (h₁ : a * c = a') (h₂ : b * c = b') :\n    @horner α _ a x n b * c = horner a' x n b' := by simp [h₂.symm, h₁.symm, horner, add_mul, mul_right_comm]\n#align horner_mul_const horner_mul_const\n\n",
+ "horner_horner":
+ "theorem horner_horner {α} [CommSemiring α] (a₁ x n₁ n₂ b n') (h : n₁ + n₂ = n') :\n    @horner α _ (horner a₁ x n₁ 0) x n₂ b = horner a₁ x n' b := by simp [h.symm, horner, pow_add, mul_assoc]\n#align horner_horner horner_horner\n\n",
+ "horner_def'":
+ "theorem horner_def' {α} [CommSemiring α] (a x n b) : @horner α _ a x n b = x ^ n * a + b := by simp [horner, mul_comm]\n#align horner_def' horner_def'\n\n",
+ "horner_const_mul":
+ "theorem horner_const_mul {α} [CommSemiring α] (c a x n b a' b') (h₁ : c * a = a') (h₂ : c * b = b') :\n    c * @horner α _ a x n b = horner a' x n b' := by simp [h₂.symm, h₁.symm, horner, mul_add, mul_assoc]\n#align horner_const_mul horner_const_mul\n\n",
+ "horner_atom":
+ "theorem horner_atom {α} [CommSemiring α] (x : α) : x = horner 1 x 1 0 := by simp [horner]\n#align horner_atom horner_atom\n\n",
+ "horner_add_horner_lt":
+ "theorem horner_add_horner_lt {α} [CommSemiring α] (a₁ x n₁ b₁ a₂ n₂ b₂ k a' b') (h₁ : n₁ + k = n₂)\n    (h₂ : (a₁ + horner a₂ x k 0 : α) = a') (h₃ : b₁ + b₂ = b') :\n    @horner α _ a₁ x n₁ b₁ + horner a₂ x n₂ b₂ = horner a' x n₁ b' := by\n  simp [h₂.symm, h₃.symm, h₁.symm, horner, pow_add, mul_add, mul_comm, mul_left_comm] <;> cc\n#align horner_add_horner_lt horner_add_horner_lt\n\n",
+ "horner_add_horner_gt":
+ "theorem horner_add_horner_gt {α} [CommSemiring α] (a₁ x n₁ b₁ a₂ n₂ b₂ k a' b') (h₁ : n₂ + k = n₁)\n    (h₂ : (horner a₁ x k 0 + a₂ : α) = a') (h₃ : b₁ + b₂ = b') :\n    @horner α _ a₁ x n₁ b₁ + horner a₂ x n₂ b₂ = horner a' x n₂ b' := by\n  simp [h₂.symm, h₃.symm, h₁.symm, horner, pow_add, mul_add, mul_comm, mul_left_comm] <;> cc\n#align horner_add_horner_gt horner_add_horner_gt\n\n",
+ "horner_add_horner_eq":
+ "theorem horner_add_horner_eq {α} [CommSemiring α] (a₁ x n b₁ a₂ b₂ a' b' t) (h₁ : a₁ + a₂ = a') (h₂ : b₁ + b₂ = b')\n    (h₃ : horner a' x n b' = t) : @horner α _ a₁ x n b₁ + horner a₂ x n b₂ = t := by\n  simp [h₃.symm, h₂.symm, h₁.symm, horner, add_mul, mul_comm (x ^ n)] <;> cc\n#align horner_add_horner_eq horner_add_horner_eq\n\n",
+ "horner_add_const":
+ "theorem horner_add_const {α} [CommSemiring α] (a x n b k b') (h : b + k = b') :\n    @horner α _ a x n b + k = horner a x n b' := by simp [h.symm, horner, add_assoc]\n#align horner_add_const horner_add_const\n\n",
+ "const_add_horner":
+ "theorem const_add_horner {α} [CommSemiring α] (k a x n b b') (h : k + b = b') :\n    k + @horner α _ a x n b = horner a x n b' := by simp [h.symm, horner] <;> cc\n#align const_add_horner const_add_horner\n\n",
+ "add_neg_eq_sub":
+ "theorem add_neg_eq_sub {α} [add_group α] (a b : α) : a + -b = a - b :=\n  (sub_eq_add_neg a b).symm\n#align add_neg_eq_sub add_neg_eq_sub\n\n"}

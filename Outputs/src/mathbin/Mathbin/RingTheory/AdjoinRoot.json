@@ -1,0 +1,122 @@
+{"to_adjoin_apply'":
+ "theorem minpoly.to_adjoin_apply' (a : adjoin_root (minpoly R x)) :\n    minpoly.to_adjoin R x a =\n      lift_hom (minpoly R x) (⟨x, self_mem_adjoin_singleton R x⟩ : adjoin R ({x} : set S))\n        (by simp [← subalgebra.coe_eq_zero, aeval_subalgebra_coe]) a :=\n  rfl\n#align minpoly.to_adjoin_apply' minpoly.to_adjoin_apply'\n\n",
+ "surjective":
+ "theorem minpoly.to_adjoin.surjective : function.surjective (minpoly.to_adjoin R x) :=\n  by\n  rw [← range_top_iff_surjective, _root_.eq_top_iff, ← adjoin_adjoin_coe_preimage]\n  refine' adjoin_le _\n  simp only [alg_hom.coe_range, Set.mem_range]\n  rintro ⟨y₁, y₂⟩ h\n  refine' ⟨mk (minpoly R x) X, by simpa using h.symm⟩\n#align minpoly.to_adjoin.surjective minpoly.to_adjoin.surjective\n\n",
+ "root_is_inv":
+ "@[simp]\ntheorem root_is_inv (r : R) : of _ r * root (C r * X - 1) = 1 := by\n  convert sub_eq_zero.1 ((eval₂_sub _).symm.trans <| eval₂_root <| C r * X - 1) <;>\n    simp only [eval₂_mul, eval₂_C, eval₂_X, eval₂_one]\n#align root_is_inv root_is_inv\n\n",
+ "quotient_equiv_quotient_minpoly_map_symm_apply_mk":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `polynomial -/\n@[simp]\ntheorem quotient_equiv_quotient_minpoly_map_symm_apply_mk (pb : power_basis R S) (I : ideal R) (g : polynomial R) :\n    (pb.quotient_equiv_quotient_minpoly_map I).symm (ideal.quotient.mk _ (g.map I)) =\n      ideal.quotient.mk _ (aeval pb.gen g) :=\n  by\n  simp only [quotient_equiv_quotient_minpoly_map, to_ring_equiv_eq_coe, symm_trans_apply,\n    quot_equiv_quot_map_symm_apply_mk, of_ring_equiv_symm_apply, quotient_equiv_symm_mk, to_ring_equiv_symm,\n    RingEquiv.symm_symm, adjoin_root.equiv'_apply, coe_ring_equiv, lift_hom_mk, symm_to_ring_equiv]\n#align quotient_equiv_quotient_minpoly_map_symm_apply_mk quotient_equiv_quotient_minpoly_map_symm_apply_mk\n\n",
+ "quotient_equiv_quotient_minpoly_map_apply_mk":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `polynomial -/\n@[simp]\ntheorem quotient_equiv_quotient_minpoly_map_apply_mk (pb : power_basis R S) (I : ideal R) (g : polynomial R) :\n    pb.quotient_equiv_quotient_minpoly_map I (ideal.quotient.mk _ (aeval pb.gen g)) = ideal.quotient.mk _ (g.map I) :=\n  by\n  rw [power_basis.quotient_equiv_quotient_minpoly_map, alg_equiv.trans_apply, alg_equiv.of_ring_equiv_apply,\n    quotient_equiv_mk, alg_equiv.coe_ring_equiv', adjoin_root.equiv'_symm_apply, power_basis.lift_aeval,\n    adjoin_root.aeval_eq, adjoin_root.quot_equiv_quot_map_apply_mk]\n#align quotient_equiv_quotient_minpoly_map_apply_mk quotient_equiv_quotient_minpoly_map_apply_mk\n\n",
+ "quot_quot_equiv_comm_symm_mk_mk":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `polynomial -/\n@[simp]\ntheorem polynomial.quot_quot_equiv_comm_symm_mk_mk (p : polynomial R) :\n    (polynomial.quot_quot_equiv_comm I f).symm (ideal.quotient.mk _ (ideal.quotient.mk _ p)) =\n      ideal.quotient.mk _ (p.map I) :=\n  by\n  simp only [polynomial.quot_quot_equiv_comm, quotient_equiv_symm_mk,\n    polynomial_quotient_equiv_quotient_polynomial_symm_mk]\n#align polynomial.quot_quot_equiv_comm_symm_mk_mk polynomial.quot_quot_equiv_comm_symm_mk_mk\n\n",
+ "quot_quot_equiv_comm_mk":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `polynomial -/\n@[simp]\ntheorem polynomial.quot_quot_equiv_comm_mk (p : polynomial R) :\n    (polynomial.quot_quot_equiv_comm I f) (ideal.quotient.mk _ (p.map I)) =\n      ideal.quotient.mk _ (ideal.quotient.mk _ p) :=\n  by\n  simp only [polynomial.quot_quot_equiv_comm, quotient_equiv_mk, polynomial_quotient_equiv_quotient_polynomial_map_mk]\n#align polynomial.quot_quot_equiv_comm_mk polynomial.quot_quot_equiv_comm_mk\n\n",
+ "quot_map_of_equiv_quot_map_C_map_span_mk_symm_mk":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →+* » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `polynomial -/\n--this lemma should have the simp tag but this causes a lint issue\ntheorem quot_map_of_equiv_quot_map_C_map_span_mk_symm_mk (x : adjoin_root f) :\n    (quot_map_of_equiv_quot_map_C_map_span_mk I f).symm\n        (ideal.quotient.mk ((I.map (C : «expr →+* » R (polynomial R))).map (span {f})) x) =\n      ideal.quotient.mk (I.map (of f)) x :=\n  by rw [quot_map_of_equiv_quot_map_C_map_span_mk, ideal.quot_equiv_of_eq_symm, quot_equiv_of_eq_mk]\n#align quot_map_of_equiv_quot_map_C_map_span_mk_symm_mk quot_map_of_equiv_quot_map_C_map_span_mk_symm_mk\n\n",
+ "quot_map_of_equiv_quot_map_C_map_span_mk_mk":
+ "@[simp]\ntheorem quot_map_of_equiv_quot_map_C_map_span_mk_mk (x : adjoin_root f) :\n    quot_map_of_equiv_quot_map_C_map_span_mk I f (ideal.quotient.mk (I.map (of f)) x) = ideal.quotient.mk _ x :=\n  rfl\n#align quot_map_of_equiv_quot_map_C_map_span_mk_mk quot_map_of_equiv_quot_map_C_map_span_mk_mk\n\n",
+ "quot_map_C_map_span_mk_equiv_quot_map_C_quot_map_span_mk_symm_quot_quot_mk":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `polynomial -/\n@[simp]\ntheorem quot_map_C_map_span_mk_equiv_quot_map_C_quot_map_span_mk_symm_quot_quot_mk (p : polynomial R) :\n    (quot_map_C_map_span_mk_equiv_quot_map_C_quot_map_span_mk I f).symm (quot_quot_mk (I.map C) (span {f}) p) =\n      ideal.quotient.mk _ (mk f p) :=\n  rfl\n#align\n  quot_map_C_map_span_mk_equiv_quot_map_C_quot_map_span_mk_symm_quot_quot_mk quot_map_C_map_span_mk_equiv_quot_map_C_quot_map_span_mk_symm_quot_quot_mk\n\n",
+ "quot_map_C_map_span_mk_equiv_quot_map_C_quot_map_span_mk_mk":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `polynomial -/\n@[simp]\ntheorem quot_map_C_map_span_mk_equiv_quot_map_C_quot_map_span_mk_mk (p : polynomial R) :\n    quot_map_C_map_span_mk_equiv_quot_map_C_quot_map_span_mk I f (ideal.quotient.mk _ (mk f p)) =\n      quot_quot_mk (I.map C) (span {f}) p :=\n  rfl\n#align\n  quot_map_C_map_span_mk_equiv_quot_map_C_quot_map_span_mk_mk quot_map_C_map_span_mk_equiv_quot_map_C_quot_map_span_mk_mk\n\n",
+ "quot_equiv_quot_map_symm_apply_mk":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `polynomial -/\n@[simp]\ntheorem quot_equiv_quot_map_symm_apply_mk (f g : polynomial R) (I : ideal R) :\n    (adjoin_root.quot_equiv_quot_map f I).symm (ideal.quotient.mk _ (map (ideal.quotient.mk I) g)) =\n      ideal.quotient.mk _ (adjoin_root.mk f g) :=\n  by rw [adjoin_root.quot_equiv_quot_map_symm_apply, adjoin_root.quot_adjoin_root_equiv_quot_polynomial_quot_symm_mk_mk]\n#align quot_equiv_quot_map_symm_apply_mk quot_equiv_quot_map_symm_apply_mk\n\n",
+ "quot_equiv_quot_map_apply_mk":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `polynomial -/\n@[simp]\ntheorem quot_equiv_quot_map_apply_mk (f g : polynomial R) (I : ideal R) :\n    adjoin_root.quot_equiv_quot_map f I (ideal.quotient.mk _ (adjoin_root.mk f g)) = ideal.quotient.mk _ (g.map I) := by\n  rw [adjoin_root.quot_equiv_quot_map_apply, adjoin_root.quot_adjoin_root_equiv_quot_polynomial_quot_mk_of]\n#align quot_equiv_quot_map_apply_mk quot_equiv_quot_map_apply_mk\n\n",
+ "quot_adjoin_root_equiv_quot_polynomial_quot_symm_mk_mk":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `polynomial -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `polynomial -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⧸ » -/\n@[simp]\ntheorem quot_adjoin_root_equiv_quot_polynomial_quot_symm_mk_mk (p : polynomial R) :\n    (quot_adjoin_root_equiv_quot_polynomial_quot I f).symm\n        (ideal.quotient.mk (span ({f.map I} : set (polynomial («expr ⧸ » R I)))) (p.map I)) =\n      ideal.quotient.mk (I.map (of f)) (mk f p) :=\n  by\n  rw [quot_adjoin_root_equiv_quot_polynomial_quot, RingEquiv.symm_trans_apply, RingEquiv.symm_trans_apply,\n    RingEquiv.symm_trans_apply, RingEquiv.symm_symm, polynomial.quot_quot_equiv_comm_mk, ideal.quot_equiv_of_eq_symm,\n    ideal.quot_equiv_of_eq_mk, ← RingHom.comp_apply, ← double_quot.quot_quot_mk,\n    quot_map_C_map_span_mk_equiv_quot_map_C_quot_map_span_mk_symm_quot_quot_mk,\n    quot_map_of_equiv_quot_map_C_map_span_mk_symm_mk]\n#align quot_adjoin_root_equiv_quot_polynomial_quot_symm_mk_mk quot_adjoin_root_equiv_quot_polynomial_quot_symm_mk_mk\n\n",
+ "quot_adjoin_root_equiv_quot_polynomial_quot_mk_of":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `polynomial -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `polynomial -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⧸ » -/\n@[simp]\ntheorem quot_adjoin_root_equiv_quot_polynomial_quot_mk_of (p : polynomial R) :\n    quot_adjoin_root_equiv_quot_polynomial_quot I f (ideal.quotient.mk (I.map (of f)) (mk f p)) =\n      ideal.quotient.mk (span ({f.map I} : set (polynomial («expr ⧸ » R I)))) (p.map I) :=\n  by\n  rw [quot_adjoin_root_equiv_quot_polynomial_quot, RingEquiv.trans_apply, RingEquiv.trans_apply, RingEquiv.trans_apply,\n    quot_map_of_equiv_quot_map_C_map_span_mk_mk, quot_map_C_map_span_mk_equiv_quot_map_C_quot_map_span_mk_mk,\n    quot_quot_mk, RingHom.comp_apply, quot_equiv_of_eq_mk, polynomial.quot_quot_equiv_comm_symm_mk_mk]\n#align quot_adjoin_root_equiv_quot_polynomial_quot_mk_of quot_adjoin_root_equiv_quot_polynomial_quot_mk_of\n\n",
+ "power_basis_aux'_repr_symm_apply":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →₀ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `finset.sum_univ -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.sum_univ -/\n/-- This lemma could be autogenerated by `@[simps]` but unfortunately that would require\nunfolding that causes a timeout. -/\n@[simp]\ntheorem power_basis_aux'_repr_symm_apply (hg : g.monic) (c : «expr →₀ » (fin g.nat_degree) R) :\n    (power_basis_aux' hg).repr.symm c =\n      mk g\n        (finset.sum_univ \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.sum_univ\"\n          (monomial i (c i))) :=\n  rfl\n#align power_basis_aux'_repr_symm_apply power_basis_aux'_repr_symm_apply\n\n",
+ "power_basis_aux'_repr_apply_to_fun":
+ "/-- This lemma could be autogenerated by `@[simps]` but unfortunately that would require\nunfolding that causes a timeout. -/\n@[simp]\ntheorem power_basis_aux'_repr_apply_to_fun (hg : g.monic) (f : adjoin_root g) (i : fin g.nat_degree) :\n    (power_basis_aux' hg).repr f i = (mod_by_monic_hom hg f).coeff ↑i :=\n  rfl\n#align power_basis_aux'_repr_apply_to_fun power_basis_aux'_repr_apply_to_fun\n\n",
+ "nontrivial":
+ "/-\nCopyright (c) 2018 Mario Carneiro. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Mario Carneiro, Chris Hughes\n-/\nprotected theorem nontrivial [IsDomain R] (h : degree f ≠ 0) : nontrivial (adjoin_root f) :=\n  ideal.quotient.nontrivial\n    (by\n      simp_rw [ne.def, span_singleton_eq_top, polynomial.is_unit_iff, not_exists, not_and]\n      rintro x hx rfl\n      exact h (degree_C hx.ne_zero))\n#align nontrivial nontrivial\n\n",
+ "mul_div_root_cancel":
+ "theorem mul_div_root_cancel [fact (Irreducible f)] :\n    (X - C (root f)) * (f.map (of f) / (X - C (root f))) = f.map (of f) :=\n  mul_div_eq_iff_is_root.2 <| is_root_root _\n#align mul_div_root_cancel mul_div_root_cancel\n\n",
+ "mod_by_monic_hom_mk":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `polynomial -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr %ₘ » -/\n@[simp]\ntheorem mod_by_monic_hom_mk (hg : g.monic) (f : polynomial R) : mod_by_monic_hom hg (mk g f) = «expr %ₘ » f g :=\n  rfl\n#align mod_by_monic_hom_mk mod_by_monic_hom_mk\n\n",
+ "mk_surjective":
+ "theorem mk_surjective (hg : g.monic) : function.surjective (mk g) :=\n  (mk_left_inverse hg).surjective\n#align mk_surjective mk_surjective\n\n",
+ "mk_self":
+ "@[simp]\ntheorem mk_self : mk f f = 0 :=\n  quotient.sound' <| quotient_add_group.left_rel_apply.mpr (mem_span_singleton.2 <| by simp)\n#align mk_self mk_self\n\n",
+ "mk_ne_zero_of_nat_degree_lt":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `polynomial -/\ntheorem mk_ne_zero_of_nat_degree_lt (hf : monic f) {g : polynomial R} (h0 : g ≠ 0) (hd : nat_degree g < nat_degree f) :\n    mk f g ≠ 0 :=\n  mk_eq_zero.not.2 <| hf.not_dvd_of_nat_degree_lt h0 hd\n#align mk_ne_zero_of_nat_degree_lt mk_ne_zero_of_nat_degree_lt\n\n",
+ "mk_ne_zero_of_degree_lt":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `polynomial -/\ntheorem mk_ne_zero_of_degree_lt (hf : monic f) {g : polynomial R} (h0 : g ≠ 0) (hd : degree g < degree f) :\n    mk f g ≠ 0 :=\n  mk_eq_zero.not.2 <| hf.not_dvd_of_degree_lt h0 hd\n#align mk_ne_zero_of_degree_lt mk_ne_zero_of_degree_lt\n\n",
+ "mk_left_inverse":
+ "theorem mk_left_inverse (hg : g.monic) : function.left_inverse (mk g) (mod_by_monic_hom hg) := fun f =>\n  induction_on g f fun f =>\n    by\n    rw [mod_by_monic_hom_mk hg, mk_eq_mk, mod_by_monic_eq_sub_mul_div _ hg, sub_sub_cancel_left, dvd_neg]\n    apply dvd_mul_right\n#align mk_left_inverse mk_left_inverse\n\n",
+ "mk_eq_zero":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `polynomial -/\n@[simp]\ntheorem mk_eq_zero {g : polynomial R} : mk f g = 0 ↔ f ∣ g :=\n  mk_eq_mk.trans <| by rw [sub_zero]\n#align mk_eq_zero mk_eq_zero\n\n",
+ "mk_eq_mk":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `polynomial -/\n@[simp]\ntheorem mk_eq_mk {g h : polynomial R} : mk f g = mk f h ↔ f ∣ g - h :=\n  ideal.quotient.eq.trans ideal.mem_span_singleton\n#align mk_eq_mk mk_eq_mk\n\n",
+ "mk_X":
+ "@[simp]\ntheorem mk_X : mk f X = root f :=\n  rfl\n#align mk_X mk_X\n\n",
+ "mk_C":
+ "@[simp]\ntheorem mk_C (x : R) : mk f (C x) = x :=\n  rfl\n#align mk_C mk_C\n\n",
+ "minpoly_root":
+ "theorem minpoly_root (hf : f ≠ 0) : minpoly K (root f) = f * C f.leading_coeff⁻¹ :=\n  by\n  have f'_monic : monic _ := monic_mul_leading_coeff_inv hf\n  refine' (minpoly.unique K _ f'_monic _ _).symm\n  · rw [alg_hom.map_mul, aeval_eq, mk_self, zero_mul]\n  intro q q_monic q_aeval\n  have commutes : (lift (algebra_map K (adjoin_root f)) (root f) q_aeval).comp (mk q) = mk f :=\n    by\n    ext\n    · simp only [RingHom.comp_apply, mk_C, lift_of]\n      rfl\n    · simp only [RingHom.comp_apply, mk_X, lift_root]\n  rw [degree_eq_nat_degree f'_monic.ne_zero, degree_eq_nat_degree q_monic.ne_zero, WithBot.coe_le_coe,\n    nat_degree_mul hf, nat_degree_C, add_zero]\n  apply nat_degree_le_of_dvd\n  · have : mk f q = 0 := by rw [← commutes, RingHom.comp_apply, mk_self, RingHom.map_zero]\n    rwa [← ideal.mem_span_singleton, ← ideal.quotient.eq_zero_iff_mem]\n  · exact q_monic.ne_zero\n  · rwa [ne.def, C_eq_zero, inv_eq_zero, leading_coeff_eq_zero]\n#align minpoly_root minpoly_root\n\n",
+ "minpoly_power_basis_gen_of_monic":
+ "theorem minpoly_power_basis_gen_of_monic (hf : f.monic) (hf' : f ≠ 0 := hf.ne_zero) :\n    minpoly K (power_basis hf').gen = f := by\n  rw [minpoly_power_basis_gen hf', hf.leading_coeff, inv_one, C.map_one, mul_one]\n#align minpoly_power_basis_gen_of_monic minpoly_power_basis_gen_of_monic\n\n",
+ "minpoly_power_basis_gen":
+ "theorem minpoly_power_basis_gen (hf : f ≠ 0) : minpoly K (power_basis hf).gen = f * C f.leading_coeff⁻¹ := by\n  rw [power_basis_gen, minpoly_root hf]\n#align minpoly_power_basis_gen minpoly_power_basis_gen\n\n",
+ "lift_root":
+ "@[simp]\ntheorem lift_root : lift i a h (root f) = a := by rw [root, lift_mk, eval₂_X]\n#align lift_root lift_root\n\n",
+ "lift_of":
+ "@[simp]\ntheorem lift_of {x : R} : lift i a h x = i x := by rw [← mk_C x, lift_mk, eval₂_C]\n#align lift_of lift_of\n\n",
+ "lift_mk":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `polynomial -/\n@[simp]\ntheorem lift_mk (g : polynomial R) : lift i a h (mk f g) = g.eval₂ i a :=\n  ideal.quotient.lift_mk _ _ _\n#align lift_mk lift_mk\n\n",
+ "lift_hom_root":
+ "@[simp]\ntheorem lift_hom_root : lift_hom f a hfx (root f) = a :=\n  lift_root hfx\n#align lift_hom_root lift_hom_root\n\n",
+ "lift_hom_of":
+ "@[simp]\ntheorem lift_hom_of {x : R} : lift_hom f a hfx (of f x) = algebra_map _ _ x :=\n  lift_of hfx\n#align lift_hom_of lift_hom_of\n\n",
+ "lift_hom_mk":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `polynomial -/\n@[simp]\ntheorem lift_hom_mk {g : polynomial R} : lift_hom f a hfx (mk f g) = aeval a g :=\n  lift_mk hfx g\n#align lift_hom_mk lift_hom_mk\n\n",
+ "lift_hom_eq_alg_hom":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `polynomial -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₐ[ ] » -/\n@[simp]\ntheorem lift_hom_eq_alg_hom (f : polynomial R) (ϕ : «expr →ₐ[ ] » (adjoin_root f) R S) :\n    lift_hom f (ϕ (root f)) (aeval_alg_hom_eq_zero f ϕ) = ϕ :=\n  by\n  suffices ϕ.equalizer (lift_hom f (ϕ (root f)) (aeval_alg_hom_eq_zero f ϕ)) = «expr⊤» by\n    exact (alg_hom.ext fun x => (set_like.ext_iff.mp this x).mpr algebra.mem_top).symm\n  rw [eq_top_iff, ← adjoin_root_eq_top, algebra.adjoin_le_iff, Set.singleton_subset_iff]\n  exact (@lift_root _ _ _ _ _ _ _ (aeval_alg_hom_eq_zero f ϕ)).symm\n#align lift_hom_eq_alg_hom lift_hom_eq_alg_hom\n\n",
+ "lift_comp_of":
+ "@[simp]\ntheorem lift_comp_of : (lift i a h).comp (of f) = i :=\n  RingHom.ext fun _ => @lift_of _ _ _ _ _ _ _ h _\n#align lift_comp_of lift_comp_of\n\n",
+ "is_root_root":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `polynomial -/\ntheorem is_root_root (f : polynomial R) : is_root (f.map (of f)) (root f) := by rw [is_root, eval_map, eval₂_root]\n#align is_root_root is_root_root\n\n",
+ "is_integral_root'":
+ "theorem is_integral_root' (hg : g.monic) : is_integral R (root g) :=\n  ⟨g, hg, eval₂_root g⟩\n#align is_integral_root' is_integral_root'\n\n",
+ "is_integral_root":
+ "-- Fix `decidable_eq` mismatch\ntheorem is_integral_root (hf : f ≠ 0) : is_integral K (root f) :=\n  is_algebraic_iff_is_integral.mp (is_algebraic_root hf)\n#align is_integral_root is_integral_root\n\n",
+ "is_algebraic_root":
+ "theorem is_algebraic_root (hf : f ≠ 0) : is_algebraic R (root f) :=\n  ⟨f, hf, eval₂_root f⟩\n#align is_algebraic_root is_algebraic_root\n\n",
+ "induction_on":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `polynomial -/\n@[elab_as_elim]\ntheorem induction_on {C : adjoin_root f → Prop} (x : adjoin_root f) (ih : ∀ p : polynomial R, C (mk f p)) : C x :=\n  Quotient.inductionOn' x ih\n#align induction_on induction_on\n\n",
+ "finite_type":
+ "theorem finite_type : algebra.finite_type R (adjoin_root f) :=\n  (algebra.finite_type.polynomial R).of_surjective _ (ideal.quotient.mkₐ_surjective R _)\n#align finite_type finite_type\n\n",
+ "finite_presentation":
+ "theorem finite_presentation : algebra.finite_presentation R (adjoin_root f) :=\n  (algebra.finite_presentation.polynomial R).quotient (submodule.fg_span_singleton f)\n#align finite_presentation finite_presentation\n\n",
+ "eval₂_root":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `polynomial -/\n@[simp]\ntheorem eval₂_root (f : polynomial R) : f.eval₂ (of f) (root f) = 0 := by\n  rw [← algebra_map_eq, ← aeval_def, aeval_eq, mk_self]\n#align eval₂_root eval₂_root\n\n",
+ "equiv'_to_alg_hom":
+ "@[simp]\ntheorem equiv'_to_alg_hom (h₁ : aeval (root g) (minpoly R pb.gen) = 0) (h₂ : aeval pb.gen g = 0) :\n    (equiv' g pb h₁ h₂).to_alg_hom = adjoin_root.lift_hom g pb.gen h₂ :=\n  rfl\n#align equiv'_to_alg_hom equiv'_to_alg_hom\n\n",
+ "equiv'_symm_to_alg_hom":
+ "@[simp]\ntheorem equiv'_symm_to_alg_hom (h₁ : aeval (root g) (minpoly R pb.gen) = 0) (h₂ : aeval pb.gen g = 0) :\n    (equiv' g pb h₁ h₂).symm.to_alg_hom = pb.lift (root g) h₁ :=\n  rfl\n#align equiv'_symm_to_alg_hom equiv'_symm_to_alg_hom\n\n",
+ "coe_lift_hom":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →+* » -/\n@[simp]\ntheorem coe_lift_hom (x : S) (hfx : aeval x f = 0) :\n    (lift_hom f x hfx : «expr →+* » (adjoin_root f) S) = lift (algebra_map R S) x hfx :=\n  rfl\n#align coe_lift_hom coe_lift_hom\n\n",
+ "coe_injective'":
+ "theorem coe_injective' [fact (Irreducible f)] : function.injective (coe : K → adjoin_root f) :=\n  (of f).injective\n#align coe_injective' coe_injective'\n\n",
+ "coe_injective":
+ "theorem coe_injective (h : degree f ≠ 0) : function.injective (coe : K → adjoin_root f) :=\n  have := adjoin_root.nontrivial f h\n  (of f).injective\n#align coe_injective coe_injective\n\n",
+ "apply_X":
+ "theorem minpoly.to_adjoin.apply_X : minpoly.to_adjoin R x (mk (minpoly R x) X) = ⟨x, self_mem_adjoin_singleton R x⟩ :=\n  by simp\n#align minpoly.to_adjoin.apply_X minpoly.to_adjoin.apply_X\n\n",
+ "algebra_map_eq'":
+ "theorem algebra_map_eq' [CommSemiring S] [algebra S R] :\n    algebra_map S (adjoin_root f) = (of f).comp (algebra_map S R) :=\n  rfl\n#align algebra_map_eq' algebra_map_eq'\n\n",
+ "algebra_map_eq":
+ "@[simp]\ntheorem algebra_map_eq : algebra_map R (adjoin_root f) = of f :=\n  rfl\n#align algebra_map_eq algebra_map_eq\n\n",
+ "alg_hom_subsingleton":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₐ[ ] » -/\ntheorem alg_hom_subsingleton {S : Type _} [CommRing S] [algebra R S] {r : R} :\n    subsingleton («expr →ₐ[ ] » (adjoin_root (C r * X - 1)) R S) :=\n  ⟨fun f g =>\n    alg_hom_ext\n      (@inv_unique _ _ (algebra_map R S r) _ _ (by rw [← f.commutes, ← f.map_mul, algebra_map_eq, root_is_inv, map_one])\n        (by rw [← g.commutes, ← g.map_mul, algebra_map_eq, root_is_inv, map_one]))⟩\n#align alg_hom_subsingleton alg_hom_subsingleton\n\n",
+ "alg_hom_ext":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₐ[ ] » -/\n/-- Two `R`-`alg_hom` from `adjoin_root f` to the same `R`-algebra are the same iff\n    they agree on `root f`. -/\n@[ext]\ntheorem alg_hom_ext [Semiring S] [algebra R S] {g₁ g₂ : «expr →ₐ[ ] » (adjoin_root f) R S}\n    (h : g₁ (root f) = g₂ (root f)) : g₁ = g₂ :=\n  ideal.quotient.alg_hom_ext R <| polynomial.alg_hom_ext h\n#align alg_hom_ext alg_hom_ext\n\n",
+ "aeval_eq":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `polynomial -/\n@[simp]\ntheorem aeval_eq (p : polynomial R) : aeval (root f) p = mk f p :=\n  polynomial.induction_on p\n    (fun x => by\n      rw [aeval_C]\n      rfl)\n    (fun p q ihp ihq => by rw [alg_hom.map_add, RingHom.map_add, ihp, ihq]) fun n x ih =>\n    by\n    rw [alg_hom.map_mul, aeval_C, alg_hom.map_pow, aeval_X, RingHom.map_mul, mk_C, RingHom.map_pow, mk_X]\n    rfl\n#align aeval_eq aeval_eq\n\n",
+ "aeval_alg_hom_eq_zero":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₐ[ ] » -/\n@[simp]\ntheorem aeval_alg_hom_eq_zero (ϕ : «expr →ₐ[ ] » (adjoin_root f) R S) : aeval (ϕ (root f)) f = 0 :=\n  by\n  have h : ϕ.to_ring_hom.comp (of f) = algebra_map R S := ring_hom.ext_iff.mpr ϕ.commutes\n  rw [aeval_def, ← h, ← RingHom.map_zero ϕ.to_ring_hom, ← eval₂_root f, hom_eval₂]\n  rfl\n#align aeval_alg_hom_eq_zero aeval_alg_hom_eq_zero\n\n",
+ "adjoin_root_eq_top":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\ntheorem adjoin_root_eq_top : algebra.adjoin R ({root f} : set (adjoin_root f)) = «expr⊤» :=\n  algebra.eq_top_iff.2 fun x =>\n    induction_on f x fun p => (algebra.adjoin_singleton_eq_range_aeval R (root f)).symm ▸ ⟨p, aeval_eq p⟩\n#align adjoin_root_eq_top adjoin_root_eq_top\n\n"}

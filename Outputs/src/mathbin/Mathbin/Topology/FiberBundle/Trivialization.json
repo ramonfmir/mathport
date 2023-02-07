@@ -1,0 +1,128 @@
+{"trans_source":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:177:8: unsupported: ambiguous notation -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `lower_set.prod -/\ntheorem trans_source (e f : pretrivialization F proj) :\n    (f.to_local_equiv.symm.trans e.to_local_equiv).source = lower_set.prod (e.base_set ∩ f.base_set) univ := by\n  rw [LocalEquiv.trans_source, LocalEquiv.symm_source, e.target_inter_preimage_symm_source_eq]\n#align trans_source trans_source\n\n",
+ "trans_fiber_homeomorph_apply":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ₜ » -/\n@[simp]\ntheorem trans_fiber_homeomorph_apply {F' : Type _} [topological_space F'] (e : trivialization F proj)\n    (h : «expr ≃ₜ » F F') (x : Z) : e.trans_fiber_homeomorph h x = ((e x).1, h (e x).2) :=\n  rfl\n#align trans_fiber_homeomorph_apply trans_fiber_homeomorph_apply\n\n",
+ "to_pretrivialization_injective":
+ "theorem to_pretrivialization_injective : function.injective fun e : trivialization F proj => e.to_pretrivialization :=\n  by\n  intro e e'\n  rw [pretrivialization.ext_iff, trivialization.ext_iff, ← local_homeomorph.to_local_equiv_injective.eq_iff]\n  exact id\n#align to_pretrivialization_injective to_pretrivialization_injective\n\n",
+ "target_inter_preimage_symm_source_eq":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:177:8: unsupported: ambiguous notation -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `lower_set.prod -/\ntheorem target_inter_preimage_symm_source_eq (e f : pretrivialization F proj) :\n    f.target ∩ «expr ⁻¹' » f.to_local_equiv.symm e.source = lower_set.prod (e.base_set ∩ f.base_set) univ := by\n  rw [inter_comm, f.target_eq, e.source_eq, f.preimage_symm_proj_inter]\n#align target_inter_preimage_symm_source_eq target_inter_preimage_symm_source_eq\n\n",
+ "symm_trans_target_eq":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:177:8: unsupported: ambiguous notation -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `lower_set.prod -/\ntheorem symm_trans_target_eq (e e' : trivialization F proj) :\n    (e.to_local_equiv.symm.trans e'.to_local_equiv).target = lower_set.prod (e.base_set ∩ e'.base_set) univ :=\n  pretrivialization.symm_trans_target_eq e.to_pretrivialization e'\n#align symm_trans_target_eq symm_trans_target_eq\n\n",
+ "symm_trans_symm":
+ "theorem symm_trans_symm (e e' : pretrivialization F proj) :\n    (e.to_local_equiv.symm.trans e'.to_local_equiv).symm = e'.to_local_equiv.symm.trans e.to_local_equiv := by\n  rw [LocalEquiv.trans_symm_eq_symm_trans_symm, LocalEquiv.symm_symm]\n#align symm_trans_symm symm_trans_symm\n\n",
+ "symm_trans_source_eq":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:177:8: unsupported: ambiguous notation -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `lower_set.prod -/\ntheorem symm_trans_source_eq (e e' : trivialization F proj) :\n    (e.to_local_equiv.symm.trans e'.to_local_equiv).source = lower_set.prod (e.base_set ∩ e'.base_set) univ :=\n  pretrivialization.symm_trans_source_eq e.to_pretrivialization e'\n#align symm_trans_source_eq symm_trans_source_eq\n\n",
+ "symm_proj_apply":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprπ -/\ntheorem symm_proj_apply (e : trivialization F ((exprπ) E)) (z : TotalSpace E) (hz : z.proj ∈ e.base_set) :\n    e.symm z.proj (e z).2 = z.2 :=\n  e.to_pretrivialization.symm_proj_apply z hz\n#align symm_proj_apply symm_proj_apply\n\n",
+ "symm_coe_proj":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprπ -/\n@[simp, mfld_simps]\ntheorem symm_coe_proj {x : B} {y : F} (e : trivialization F ((exprπ) E)) (h : x ∈ e.base_set) :\n    (e.to_local_homeomorph.symm (x, y)).1 = x :=\n  e.proj_symm_apply' h\n#align symm_coe_proj symm_coe_proj\n\n",
+ "symm_apply_of_not_mem":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprπ -/\ntheorem symm_apply_of_not_mem (e : trivialization F ((exprπ) E)) {b : B} (hb : b ∉ e.base_set) (y : F) :\n    e.symm b y = 0 :=\n  dif_neg hb\n#align symm_apply_of_not_mem symm_apply_of_not_mem\n\n",
+ "symm_apply_mk_proj":
+ "@[simp, mfld_simps]\ntheorem symm_apply_mk_proj (ex : x ∈ e.source) : e.to_local_homeomorph.symm (proj x, (e x).2) = x :=\n  e.to_pretrivialization.symm_apply_mk_proj ex\n#align symm_apply_mk_proj symm_apply_mk_proj\n\n",
+ "symm_apply_apply_mk":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprπ -/\ntheorem symm_apply_apply_mk (e : trivialization F ((exprπ) E)) {b : B} (hb : b ∈ e.base_set) (y : E b) :\n    e.symm b (e (totalSpaceMk b y)).2 = y :=\n  e.symm_proj_apply (totalSpaceMk b y) hb\n#align symm_apply_apply_mk symm_apply_apply_mk\n\n",
+ "symm_apply_apply":
+ "theorem symm_apply_apply {x : TotalSpace E} (hx : x ∈ e'.source) : e'.to_local_homeomorph.symm (e' x) = x :=\n  e'.to_local_equiv.left_inv hx\n#align symm_apply_apply symm_apply_apply\n\n",
+ "symm_apply":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprπ -/\ntheorem symm_apply (e : trivialization F ((exprπ) E)) {b : B} (hb : b ∈ e.base_set) (y : F) :\n    e.symm b y = cast (congr_arg E (e.symm_coe_proj hb)) (e.to_local_homeomorph.symm (b, y)).2 :=\n  dif_pos hb\n#align symm_apply symm_apply\n\n",
+ "source_inter_preimage_target_inter":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\ntheorem source_inter_preimage_target_inter (s : set (B × F)) :\n    e.source ∩ «expr ⁻¹' » e (e.target ∩ s) = e.source ∩ «expr ⁻¹' » e s :=\n  e.to_local_homeomorph.source_inter_preimage_target_inter s\n#align source_inter_preimage_target_inter source_inter_preimage_target_inter\n\n",
+ "source_homeomorph_base_set_prod_symm_apply":
+ "@[simp]\ntheorem source_homeomorph_base_set_prod_symm_apply (p : e.base_set × F) :\n    e.source_homeomorph_base_set_prod.symm p = ⟨e.symm (p.1, p.2), (e.source_homeomorph_base_set_prod.symm p).2⟩ :=\n  rfl\n#align source_homeomorph_base_set_prod_symm_apply source_homeomorph_base_set_prod_symm_apply\n\n",
+ "source_homeomorph_base_set_prod_apply":
+ "@[simp]\ntheorem source_homeomorph_base_set_prod_apply (p : e.source) :\n    e.source_homeomorph_base_set_prod p = (⟨proj p, e.mem_source.mp p.2⟩, (e p).2) :=\n  e.preimage_homeomorph_apply subset_rfl ⟨p, e.mem_source.mp p.2⟩\n#align source_homeomorph_base_set_prod_apply source_homeomorph_base_set_prod_apply\n\n",
+ "proj_symm_apply'":
+ "theorem proj_symm_apply' {b : B} {x : F} (hx : b ∈ e.base_set) : proj (e.to_local_homeomorph.symm (b, x)) = b :=\n  e.to_pretrivialization.proj_symm_apply' hx\n#align proj_symm_apply' proj_symm_apply'\n\n",
+ "proj_symm_apply":
+ "theorem proj_symm_apply {x : B × F} (hx : x ∈ e.target) : proj (e.to_local_homeomorph.symm x) = x.1 :=\n  e.to_pretrivialization.proj_symm_apply hx\n#align proj_symm_apply proj_symm_apply\n\n",
+ "proj_surj_on_base_set":
+ "theorem proj_surj_on_base_set [nonempty F] : Set.SurjOn proj e.source e.base_set :=\n  e.to_pretrivialization.proj_surj_on_base_set\n#align proj_surj_on_base_set proj_surj_on_base_set\n\n",
+ "preimage_symm_proj_inter":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:177:8: unsupported: ambiguous notation -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `lower_set.prod -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:177:8: unsupported: ambiguous notation -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `lower_set.prod -/\n@[simp, mfld_simps]\ntheorem preimage_symm_proj_inter (s : set B) :\n    «expr ⁻¹' » e.to_local_equiv.symm («expr ⁻¹' » proj s) ∩ lower_set.prod e.base_set univ =\n      lower_set.prod (s ∩ e.base_set) univ :=\n  by\n  ext ⟨x, y⟩\n  suffices x ∈ e.base_set → (proj (e.to_local_equiv.symm (x, y)) ∈ s ↔ x ∈ s) by\n    simpa only [prod_mk_mem_set_prod_eq, mem_inter_iff, and_true_iff, mem_univ, and_congr_left_iff]\n  intro h\n  rw [e.proj_symm_apply' h]\n#align preimage_symm_proj_inter preimage_symm_proj_inter\n\n",
+ "preimage_symm_proj_base_set":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\n@[simp, mfld_simps]\ntheorem preimage_symm_proj_base_set :\n    «expr ⁻¹' » e.to_local_equiv.symm («expr ⁻¹' » proj e.base_set) ∩ e.target = e.target :=\n  by\n  refine' inter_eq_right_iff_subset.mpr fun x hx => _\n  simp only [mem_preimage, LocalEquiv.invFun_as_coe, e.proj_symm_apply hx]\n  exact e.mem_target.mp hx\n#align preimage_symm_proj_base_set preimage_symm_proj_base_set\n\n",
+ "preimage_subset_source":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\ntheorem preimage_subset_source {s : set B} (hb : s ⊆ e.base_set) : «expr ⁻¹' » proj s ⊆ e.source := fun p hp =>\n  e.mem_source.mpr (hb hp)\n#align preimage_subset_source preimage_subset_source\n\n",
+ "preimage_singleton_homeomorph_symm_apply":
+ "@[simp]\ntheorem preimage_singleton_homeomorph_symm_apply {b : B} (hb : b ∈ e.base_set) (p : F) :\n    (e.preimage_singleton_homeomorph hb).symm p =\n      ⟨e.symm (b, p), by rw [mem_preimage, e.proj_symm_apply' hb, mem_singleton_iff]⟩ :=\n  rfl\n#align preimage_singleton_homeomorph_symm_apply preimage_singleton_homeomorph_symm_apply\n\n",
+ "preimage_singleton_homeomorph_apply":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\n@[simp]\ntheorem preimage_singleton_homeomorph_apply {b : B} (hb : b ∈ e.base_set) (p : «expr ⁻¹' » proj {b}) :\n    e.preimage_singleton_homeomorph hb p = (e p).2 :=\n  rfl\n#align preimage_singleton_homeomorph_apply preimage_singleton_homeomorph_apply\n\n",
+ "preimage_homeomorph_symm_apply":
+ "@[simp]\ntheorem preimage_homeomorph_symm_apply {s : set B} (hb : s ⊆ e.base_set) (p : s × F) :\n    (e.preimage_homeomorph hb).symm p = ⟨e.symm (p.1, p.2), ((e.preimage_homeomorph hb).symm p).2⟩ :=\n  rfl\n#align preimage_homeomorph_symm_apply preimage_homeomorph_symm_apply\n\n",
+ "preimage_homeomorph_apply":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\n@[simp]\ntheorem preimage_homeomorph_apply {s : set B} (hb : s ⊆ e.base_set) (p : «expr ⁻¹' » proj s) :\n    e.preimage_homeomorph hb p = (⟨proj p, p.2⟩, (e p).2) :=\n  Prod.ext (subtype.ext (e.proj_to_fun p (e.mem_source.mpr (hb p.2)))) rfl\n#align preimage_homeomorph_apply preimage_homeomorph_apply\n\n",
+ "open_target":
+ "theorem open_target : is_open e'.target := by\n  rw [e'.target_eq]\n  exact e'.open_base_set.prod is_open_univ\n#align open_target open_target\n\n",
+ "mk_symm":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprπ -/\ntheorem mk_symm (e : trivialization F ((exprπ) E)) {b : B} (hb : b ∈ e.base_set) (y : F) :\n    totalSpaceMk b (e.symm b y) = e.to_local_homeomorph.symm (b, y) :=\n  e.to_pretrivialization.mk_symm hb y\n#align mk_symm mk_symm\n\n",
+ "mk_proj_snd'":
+ "theorem mk_proj_snd' (ex : proj x ∈ e.base_set) : (proj x, (e x).2) = e x :=\n  Prod.ext (e.coe_fst' ex).symm rfl\n#align mk_proj_snd' mk_proj_snd'\n\n",
+ "mk_proj_snd":
+ "theorem mk_proj_snd (ex : x ∈ e.source) : (proj x, (e x).2) = e x :=\n  Prod.ext (e.coe_fst ex).symm rfl\n#align mk_proj_snd mk_proj_snd\n\n",
+ "mk_mem_target":
+ "theorem mk_mem_target {y : F} : (b, y) ∈ e'.target ↔ b ∈ e'.base_set :=\n  e'.to_pretrivialization.mem_target\n#align mk_mem_target mk_mem_target\n\n",
+ "mk_coord_change":
+ "theorem mk_coord_change (e₁ e₂ : trivialization F proj) {b : B} (h₁ : b ∈ e₁.base_set) (h₂ : b ∈ e₂.base_set) (x : F) :\n    (b, e₁.coord_change e₂ b x) = e₂ (e₁.to_local_homeomorph.symm (b, x)) :=\n  by\n  refine' Prod.ext _ rfl\n  rw [e₂.coe_fst', ← e₁.coe_fst', e₁.apply_symm_apply' h₁]\n  · rwa [e₁.proj_symm_apply' h₁]\n  · rwa [e₁.proj_symm_apply' h₁]\n#align mk_coord_change mk_coord_change\n\n",
+ "mem_target":
+ "theorem mem_target {x : B × F} : x ∈ e.target ↔ x.1 ∈ e.base_set :=\n  e.to_pretrivialization.mem_target\n#align mem_target mem_target\n\n",
+ "mem_source":
+ "theorem mem_source : x ∈ e.source ↔ proj x ∈ e.base_set := by rw [e.source_eq, mem_preimage]\n#align mem_source mem_source\n\n",
+ "map_target":
+ "theorem map_target {x : B × F} (hx : x ∈ e.target) : e.to_local_homeomorph.symm x ∈ e.source :=\n  e.to_local_homeomorph.map_target hx\n#align map_target map_target\n\n",
+ "map_proj_nhds":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `nhds -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `nhds -/\ntheorem map_proj_nhds (ex : x ∈ e.source) : map proj ((nhds) x) = (nhds) (proj x) := by\n  rw [← e.coe_fst ex, ← map_congr (e.coe_fst_eventually_eq_proj ex), ← map_map, ← e.coe_coe,\n    e.to_local_homeomorph.map_nhds_eq ex, map_fst_nhds]\n#align map_proj_nhds map_proj_nhds\n\n",
+ "is_image_preimage_prod":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:177:8: unsupported: ambiguous notation -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `lower_set.prod -/\ntheorem is_image_preimage_prod (e : trivialization F proj) (s : set B) :\n    e.to_local_homeomorph.is_image («expr ⁻¹' » proj s) (lower_set.prod s univ) := fun x hx => by simp [e.coe_fst', hx]\n#align is_image_preimage_prod is_image_preimage_prod\n\n",
+ "image_preimage_eq_prod_univ":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:177:8: unsupported: ambiguous notation -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `lower_set.prod -/\ntheorem image_preimage_eq_prod_univ {s : set B} (hb : s ⊆ e.base_set) :\n    «expr '' » e («expr ⁻¹' » proj s) = lower_set.prod s univ :=\n  Subset.antisymm\n    (image_subset_iff.mpr fun p hp => ⟨(e.proj_to_fun p (e.preimage_subset_source hb hp)).symm ▸ hp, trivial⟩)\n    fun p hp =>\n    let hp' : p ∈ e.target := e.mem_target.mpr (hb hp.1)\n    ⟨e.inv_fun p, mem_preimage.mpr ((e.proj_symm_apply hp').symm ▸ hp.1), e.apply_symm_apply hp'⟩\n#align image_preimage_eq_prod_univ image_preimage_eq_prod_univ\n\n",
+ "frontier_preimage":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\ntheorem frontier_preimage (e : trivialization F proj) (s : set B) :\n    e.source ∩ frontier («expr ⁻¹' » proj s) = «expr ⁻¹' » proj (e.base_set ∩ frontier s) := by\n  rw [← (e.is_image_preimage_prod s).frontier.preimage_eq, frontier_prod_univ_eq,\n    (e.is_image_preimage_prod _).preimage_eq, e.source_eq, preimage_inter]\n#align frontier_preimage frontier_preimage\n\n",
+ "eq_on":
+ "protected theorem eq_on : EqOn (prod.fst ∘ e) proj e.source := fun x hx => e.coe_fst hx\n#align eq_on eq_on\n\n",
+ "coord_change_same_apply":
+ "theorem coord_change_same_apply (e : trivialization F proj) {b : B} (h : b ∈ e.base_set) (x : F) :\n    e.coord_change e b x = x := by rw [coord_change, e.apply_symm_apply' h]\n#align coord_change_same_apply coord_change_same_apply\n\n",
+ "coord_change_same":
+ "theorem coord_change_same (e : trivialization F proj) {b : B} (h : b ∈ e.base_set) : e.coord_change e b = id :=\n  funext <| e.coord_change_same_apply h\n#align coord_change_same coord_change_same\n\n",
+ "coord_change_homeomorph_coe":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n@[simp]\ntheorem coord_change_homeomorph_coe (e₁ e₂ : trivialization F proj) {b : B} (h₁ : b ∈ e₁.base_set)\n    (h₂ : b ∈ e₂.base_set) : «expr⇑ » (e₁.coord_change_homeomorph e₂ h₁ h₂) = e₁.coord_change e₂ b :=\n  rfl\n#align coord_change_homeomorph_coe coord_change_homeomorph_coe\n\n",
+ "coord_change_coord_change":
+ "theorem coord_change_coord_change (e₁ e₂ e₃ : trivialization F proj) {b : B} (h₁ : b ∈ e₁.base_set)\n    (h₂ : b ∈ e₂.base_set) (x : F) : e₂.coord_change e₃ b (e₁.coord_change e₂ b x) = e₁.coord_change e₃ b x :=\n  by\n  rw [coord_change, e₁.mk_coord_change _ h₁ h₂, ← e₂.coe_coe, e₂.to_local_homeomorph.left_inv, coord_change]\n  rwa [e₂.mem_source, e₁.proj_symm_apply' h₁]\n#align coord_change_coord_change coord_change_coord_change\n\n",
+ "coord_change_apply_snd":
+ "theorem coord_change_apply_snd (e₁ e₂ : trivialization F proj) {p : Z} (h : proj p ∈ e₁.base_set) :\n    e₁.coord_change e₂ (proj p) (e₁ p).snd = (e₂ p).snd := by\n  rw [coord_change, e₁.symm_apply_mk_proj (e₁.mem_source.2 h)]\n#align coord_change_apply_snd coord_change_apply_snd\n\n",
+ "continuous_on_symm":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:177:8: unsupported: ambiguous notation -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `lower_set.prod -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprπ -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:177:8: unsupported: ambiguous notation -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `lower_set.prod -/\ntheorem continuous_on_symm (e : trivialization F ((exprπ) E)) :\n    continuous_on (fun z : B × F => totalSpaceMk z.1 (e.symm z.1 z.2)) (lower_set.prod e.base_set univ) :=\n  by\n  have :\n    ∀ (z : B × F) (hz : z ∈ lower_set.prod e.base_set (univ : set F)),\n      total_space_mk z.1 (e.symm z.1 z.2) = e.to_local_homeomorph.symm z :=\n    by\n    rintro x ⟨hx : x.1 ∈ e.base_set, _⟩\n    simp_rw [e.mk_symm hx, prod.mk.eta]\n  refine' continuous_on.congr _ this\n  rw [← e.target_eq]\n  exact e.to_local_homeomorph.continuous_on_symm\n#align continuous_on_symm continuous_on_symm\n\n",
+ "continuous_on":
+ "protected theorem continuous_on : continuous_on e' e'.source :=\n  e'.continuous_to_fun\n#align continuous_on continuous_on\n\n",
+ "continuous_coord_change":
+ "theorem continuous_coord_change (e₁ e₂ : trivialization F proj) {b : B} (h₁ : b ∈ e₁.base_set) (h₂ : b ∈ e₂.base_set) :\n    continuous (e₁.coord_change e₂ b) :=\n  by\n  refine'\n    continuous_snd.comp\n      (e₂.to_local_homeomorph.continuous_on.comp_continuous\n        (e₁.to_local_homeomorph.continuous_on_symm.comp_continuous _ _) _)\n  · exact continuous_const.prod_mk continuous_id\n  · exact fun x => e₁.mem_target.2 h₁\n  · intro x\n    rwa [e₂.mem_source, e₁.proj_symm_apply' h₁]\n#align continuous_coord_change continuous_coord_change\n\n",
+ "continuous_at_proj":
+ "/-- In the domain of a bundle trivialization, the projection is continuous-/\ntheorem continuous_at_proj (ex : x ∈ e.source) : continuous_at proj x :=\n  (e.map_proj_nhds ex).le\n#align continuous_at_proj continuous_at_proj\n\n",
+ "continuous_at_of_comp_right":
+ "/-- Read off the continuity of a function `f : Z → X` at `z : Z` by transferring via a\ntrivialization of `Z` containing `z`. -/\ntheorem continuous_at_of_comp_right {X : Type _} [topological_space X] {f : Z → X} {z : Z} (e : trivialization F proj)\n    (he : proj z ∈ e.base_set) (hf : continuous_at (f ∘ e.to_local_equiv.symm) (e z)) : continuous_at f z :=\n  by\n  have hez : z ∈ e.to_local_equiv.symm.target :=\n    by\n    rw [LocalEquiv.symm_target, e.mem_source]\n    exact he\n  rwa [e.to_local_homeomorph.symm.continuous_at_iff_continuous_at_comp_right hez, local_homeomorph.symm_symm]\n#align continuous_at_of_comp_right continuous_at_of_comp_right\n\n",
+ "continuous_at_of_comp_left":
+ "/-- Read off the continuity of a function `f : X → Z` at `x : X` by transferring via a\ntrivialization of `Z` containing `f x`. -/\ntheorem continuous_at_of_comp_left {X : Type _} [topological_space X] {f : X → Z} {x : X} (e : trivialization F proj)\n    (hf_proj : continuous_at (proj ∘ f) x) (he : proj (f x) ∈ e.base_set) (hf : continuous_at (e ∘ f) x) :\n    continuous_at f x := by\n  rw [e.to_local_homeomorph.continuous_at_iff_continuous_at_comp_left]\n  · exact hf\n  rw [e.source_eq, ← preimage_comp]\n  exact hf_proj.preimage_mem_nhds (e.open_base_set.mem_nhds he)\n#align continuous_at_of_comp_left continuous_at_of_comp_left\n\n",
+ "coe_symm_of_not_mem":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprπ -/\ntheorem coe_symm_of_not_mem (e : pretrivialization F ((exprπ) E)) {b : B} (hb : b ∉ e.base_set) :\n    (e.symm b : F → E b) = 0 :=\n  funext fun y => dif_neg hb\n#align coe_symm_of_not_mem coe_symm_of_not_mem\n\n",
+ "coe_mk":
+ "@[simp, mfld_simps]\ntheorem coe_mk (e : local_homeomorph Z (B × F)) (i j k l m) (x : Z) :\n    (trivialization.mk e i j k l m : trivialization F proj) x = e x :=\n  rfl\n#align coe_mk coe_mk\n\n",
+ "coe_mem_source":
+ "theorem coe_mem_source : ↑y ∈ e'.source ↔ b ∈ e'.base_set :=\n  e'.mem_source\n#align coe_mem_source coe_mem_source\n\n",
+ "coe_fst_eventually_eq_proj'":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr =ᶠ[ ] » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `nhds -/\ntheorem coe_fst_eventually_eq_proj' (ex : proj x ∈ e.base_set) : «expr =ᶠ[ ] » (prod.fst ∘ e) ((nhds) x) proj :=\n  e.coe_fst_eventually_eq_proj (e.mem_source.2 ex)\n#align coe_fst_eventually_eq_proj' coe_fst_eventually_eq_proj'\n\n",
+ "coe_fst_eventually_eq_proj":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr =ᶠ[ ] » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `nhds -/\ntheorem coe_fst_eventually_eq_proj (ex : x ∈ e.source) : «expr =ᶠ[ ] » (prod.fst ∘ e) ((nhds) x) proj :=\n  mem_nhds_iff.2 ⟨e.source, fun y hy => e.coe_fst hy, e.open_source, ex⟩\n#align coe_fst_eventually_eq_proj coe_fst_eventually_eq_proj\n\n",
+ "coe_fst'":
+ "theorem coe_fst' (ex : proj x ∈ e.base_set) : (e x).1 = proj x :=\n  e.coe_fst (e.mem_source.2 ex)\n#align coe_fst' coe_fst'\n\n",
+ "coe_fst":
+ "@[simp, mfld_simps]\ntheorem coe_fst (ex : x ∈ e.source) : (e x).1 = proj x :=\n  e.proj_to_fun x ex\n#align coe_fst coe_fst\n\n",
+ "coe_coe_fst":
+ "@[simp, mfld_simps]\ntheorem coe_coe_fst (hb : b ∈ e'.base_set) : (e' y).1 = b :=\n  e'.coe_fst (e'.mem_source.2 hb)\n#align coe_coe_fst coe_coe_fst\n\n",
+ "coe_coe":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n@[simp, mfld_simps]\ntheorem coe_coe : «expr⇑ » e.to_local_homeomorph = e :=\n  rfl\n#align coe_coe coe_coe\n\n",
+ "apply_symm_apply'":
+ "theorem apply_symm_apply' {b : B} {x : F} (hx : b ∈ e.base_set) : e (e.to_local_homeomorph.symm (b, x)) = (b, x) :=\n  e.to_pretrivialization.apply_symm_apply' hx\n#align apply_symm_apply' apply_symm_apply'\n\n",
+ "apply_symm_apply":
+ "theorem apply_symm_apply {x : B × F} (hx : x ∈ e.target) : e (e.to_local_homeomorph.symm x) = x :=\n  e.to_local_homeomorph.right_inv hx\n#align apply_symm_apply apply_symm_apply\n\n",
+ "apply_mk_symm":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprπ -/\ntheorem apply_mk_symm (e : trivialization F ((exprπ) E)) {b : B} (hb : b ∈ e.base_set) (y : F) :\n    e (totalSpaceMk b (e.symm b y)) = (b, y) :=\n  e.to_pretrivialization.apply_mk_symm hb y\n#align apply_mk_symm apply_mk_symm\n\n"}

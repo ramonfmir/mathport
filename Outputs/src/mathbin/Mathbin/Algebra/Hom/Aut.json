@@ -1,0 +1,26 @@
+{"smul_def":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n@[simp]\nprotected theorem smul_def {A} [add_monoid A] (f : add_aut A) (a : A) : «expr • » f a = f a :=\n  rfl\n#align smul_def smul_def\n\n",
+ "one_def":
+ "theorem one_def : (1 : add_aut A) = AddEquiv.refl _ :=\n  rfl\n#align one_def one_def\n\n",
+ "one_apply":
+ "@[simp]\ntheorem one_apply (a : A) : (1 : add_aut A) a = a :=\n  rfl\n#align one_apply one_apply\n\n",
+ "mul_def":
+ "theorem mul_def (e₁ e₂ : add_aut A) : e₁ * e₂ = e₂.trans e₁ :=\n  rfl\n#align mul_def mul_def\n\n",
+ "mul_apply":
+ "@[simp]\ntheorem mul_apply (e₁ e₂ : add_aut A) (a : A) : (e₁ * e₂) a = e₁ (e₂ a) :=\n  rfl\n#align mul_apply mul_apply\n\n",
+ "inv_def":
+ "theorem inv_def (e₁ : add_aut A) : e₁⁻¹ = e₁.symm :=\n  rfl\n#align inv_def inv_def\n\n",
+ "inv_apply_self":
+ "@[simp]\ntheorem inv_apply_self (e : add_aut A) (a : A) : e (e⁻¹ a) = a :=\n  AddEquiv.apply_symm_apply _ _\n#align inv_apply_self inv_apply_self\n\n",
+ "conj_symm_apply":
+ "@[simp]\ntheorem conj_symm_apply [add_group G] (g h : G) : (conj g).symm h = -g + h + g :=\n  rfl\n#align conj_symm_apply conj_symm_apply\n\n",
+ "conj_inv_apply":
+ "@[simp]\ntheorem conj_inv_apply [add_group G] (g h : G) : (-conj g) h = -g + h + g :=\n  rfl\n#align conj_inv_apply conj_inv_apply\n\n",
+ "conj_apply":
+ "-- this definition is chosen to match `mul_aut.conj`\n@[simp]\ntheorem conj_apply [add_group G] (g h : G) : conj g h = g + h + -g :=\n  rfl\n#align conj_apply conj_apply\n\n",
+ "coe_one":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n@[simp]\ntheorem coe_one : «expr⇑ » (1 : add_aut A) = id :=\n  rfl\n#align coe_one coe_one\n\n",
+ "coe_mul":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n@[simp]\ntheorem coe_mul (e₁ e₂ : add_aut A) : «expr⇑ » (e₁ * e₂) = e₁ ∘ e₂ :=\n  rfl\n#align coe_mul coe_mul\n\n",
+ "apply_inv_self":
+ "@[simp]\ntheorem apply_inv_self (e : add_aut A) (a : A) : e⁻¹ (e a) = a :=\n  AddEquiv.apply_symm_apply _ _\n#align apply_inv_self apply_inv_self\n\n"}

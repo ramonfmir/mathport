@@ -1,0 +1,14 @@
+{"not_far_from_triangle_free":
+ "theorem clique_free.not_far_from_triangle_free (hG : G.clique_free 3) (hε : 0 < ε) : ¬G.far_from_triangle_free ε :=\n  fun h => (h.nonpos hG).not_lt hε\n#align clique_free.not_far_from_triangle_free clique_free.not_far_from_triangle_free\n\n",
+ "not_clique_free":
+ "theorem far_from_triangle_free.not_clique_free (hG : G.far_from_triangle_free ε) (hε : 0 < ε) : ¬G.clique_free 3 :=\n  fun h => (hG.nonpos h).not_lt hε\n#align far_from_triangle_free.not_clique_free far_from_triangle_free.not_clique_free\n\n",
+ "nonpos":
+ "theorem far_from_triangle_free.nonpos (h₀ : G.far_from_triangle_free ε) (h₁ : G.clique_free 3) : ε ≤ 0 :=\n  by\n  have := h₀ (empty_subset _)\n  rw [coe_empty, finset.card_empty, cast_zero, delete_edges_empty_eq] at this\n  exact nonpos_of_mul_nonpos_left (this h₁) (cast_pos.2 <| sq_pos_of_pos fintype.card_pos)\n#align far_from_triangle_free.nonpos far_from_triangle_free.nonpos\n\n",
+ "mono":
+ "theorem far_from_triangle_free.mono (hε : G.far_from_triangle_free ε) (h : δ ≤ ε) : G.far_from_triangle_free δ :=\n  hε.mono <| mul_le_mul_of_nonneg_right h <| cast_nonneg _\n#align far_from_triangle_free.mono far_from_triangle_free.mono\n\n",
+ "far_from_triangle_free_iff":
+ "/-\nCopyright (c) 2022 Yaël Dillies, Bhavik Mehta. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Yaël Dillies, Bhavik Mehta\n-/\ntheorem far_from_triangle_free_iff :\n    G.far_from_triangle_free ε ↔\n      ∀ ⦃H⦄, H ≤ G → H.clique_free 3 → ε * (card α ^ 2 : ℕ) ≤ G.edge_finset.card - H.edge_finset.card :=\n  delete_far_iff\n#align far_from_triangle_free_iff far_from_triangle_free_iff\n\n",
+ "clique_finset_nonempty'":
+ "theorem far_from_triangle_free.clique_finset_nonempty' (hH : H ≤ G) (hG : G.far_from_triangle_free ε)\n    (hcard : (G.edge_finset.card - H.edge_finset.card : 𝕜) < ε * (card α ^ 2 : ℕ)) : (H.clique_finset 3).nonempty :=\n  nonempty_of_ne_empty <| H.clique_finset_eq_empty_iff.not.2 fun hH' => (hG.le_card_sub_card hH hH').not_lt hcard\n#align far_from_triangle_free.clique_finset_nonempty' far_from_triangle_free.clique_finset_nonempty'\n\n",
+ "clique_finset_nonempty":
+ "theorem far_from_triangle_free.clique_finset_nonempty (hG : G.far_from_triangle_free ε) (hε : 0 < ε) :\n    (G.clique_finset 3).nonempty :=\n  nonempty_of_ne_empty <| G.clique_finset_eq_empty_iff.not.2 <| hG.not_clique_free hε\n#align far_from_triangle_free.clique_finset_nonempty far_from_triangle_free.clique_finset_nonempty\n\n"}

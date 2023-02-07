@@ -1,0 +1,2 @@
+{"card_range":
+ "@[simp]\ntheorem subtype_congr_hom.card_range {α : Type _} (p : α → Prop) [decidable_pred p] [fintype (subtypeCongrHom p).range]\n    [fintype (perm { a // p a } × perm { a // ¬p a })] :\n    fintype.card (subtypeCongrHom p).range = fintype.card (perm { a // p a } × perm { a // ¬p a }) :=\n  fintype.card_eq.mpr ⟨(ofInjective (subtypeCongrHom p) (subtypeCongrHom_injective p)).symm⟩\n#align subtype_congr_hom.card_range subtype_congr_hom.card_range\n\n"}

@@ -1,0 +1,142 @@
+{"subsingleton_of_einfsep_eq_top":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `ennreal.top -/\ntheorem subsingleton_of_einfsep_eq_top (hs : s.einfsep = ennreal.top) : s.subsingleton :=\n  by\n  rw [einfsep_top] at hs\n  exact fun _ hx _ hy => of_not_not fun hxy => edist_ne_top _ _ (hs _ hx _ hy hxy)\n#align subsingleton_of_einfsep_eq_top subsingleton_of_einfsep_eq_top\n\n",
+ "relatively_discrete_of_finite":
+ "/- ./././Mathport/Syntax/Translate/Basic.lean:632:2: warning: expanding binder collection (x y «expr ∈ » s) -/\ntheorem relatively_discrete_of_finite [Finite s] :\n    ∃ (C : _)(hC : 0 < C), ∀ (x) (_ : x ∈ s) (y) (_ : y ∈ s) (hxy : x ≠ y), C ≤ edist x y :=\n  by\n  rw [← einfsep_pos]\n  exact einfsep_pos_of_finite\n#align relatively_discrete_of_finite relatively_discrete_of_finite\n\n",
+ "relatively_discrete":
+ "/- ./././Mathport/Syntax/Translate/Basic.lean:632:2: warning: expanding binder collection (x y «expr ∈ » s) -/\ntheorem finite.relatively_discrete (hs : s.finite) :\n    ∃ (C : _)(hC : 0 < C), ∀ (x) (_ : x ∈ s) (y) (_ : y ∈ s) (hxy : x ≠ y), C ≤ edist x y :=\n  letI := hs.fintype\n  relatively_discrete_of_finite\n#align finite.relatively_discrete finite.relatively_discrete\n\n",
+ "nontrivial_of_infsep_pos":
+ "theorem nontrivial_of_infsep_pos (hs : 0 < s.infsep) : s.nontrivial :=\n  by\n  contrapose hs\n  rw [not_nontrivial_iff] at hs\n  exact hs.infsep_zero ▸ lt_irrefl _\n#align nontrivial_of_infsep_pos nontrivial_of_infsep_pos\n\n",
+ "nontrivial_of_einfsep_ne_top":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `ennreal.top -/\ntheorem nontrivial_of_einfsep_ne_top (hs : s.einfsep ≠ ennreal.top) : s.nontrivial :=\n  nontrivial_of_einfsep_lt_top (lt_top_iff_ne_top.mpr hs)\n#align nontrivial_of_einfsep_ne_top nontrivial_of_einfsep_ne_top\n\n",
+ "nontrivial_of_einfsep_lt_top":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `ennreal.top -/\ntheorem nontrivial_of_einfsep_lt_top (hs : s.einfsep < ennreal.top) : s.nontrivial :=\n  by\n  rcases einfsep_lt_top.1 hs with ⟨_, hx, _, hy, hxy, _⟩\n  exact ⟨_, hx, _, hy, hxy⟩\n#align nontrivial_of_einfsep_lt_top nontrivial_of_einfsep_lt_top\n\n",
+ "le_infsep_iff":
+ "/- ./././Mathport/Syntax/Translate/Basic.lean:632:2: warning: expanding binder collection (x y «expr ∈ » s) -/\ntheorem nontrivial.le_infsep_iff {d} (hs : s.nontrivial) :\n    d ≤ s.infsep ↔ ∀ (x) (_ : x ∈ s) (y) (_ : y ∈ s) (hxy : x ≠ y), d ≤ dist x y := by\n  simp_rw [infsep, ← ennreal.of_real_le_iff_le_to_real hs.einfsep_ne_top, le_einfsep_iff, edist_dist,\n    ennreal.of_real_le_of_real_iff dist_nonneg]\n#align nontrivial.le_infsep_iff nontrivial.le_infsep_iff\n\n",
+ "le_infsep":
+ "/- ./././Mathport/Syntax/Translate/Basic.lean:632:2: warning: expanding binder collection (x y «expr ∈ » s) -/\ntheorem nontrivial.le_infsep {d} (hs : s.nontrivial)\n    (h : ∀ (x) (_ : x ∈ s) (y) (_ : y ∈ s) (hxy : x ≠ y), d ≤ dist x y) : d ≤ s.infsep :=\n  hs.le_infsep_iff.2 h\n#align nontrivial.le_infsep nontrivial.le_infsep\n\n",
+ "le_einfsep_pi_of_le":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `ennreal -/\ntheorem le_einfsep_pi_of_le {π : β → Type _} [fintype β] [∀ b, pseudo_emetric_space (π b)] {s : ∀ b : β, set (π b)}\n    {c : ennreal} (h : ∀ b, c ≤ einfsep (s b)) : c ≤ einfsep (Set.pi univ s) :=\n  by\n  refine' le_einfsep fun x hx y hy hxy => _\n  rw [mem_univ_pi] at hx hy\n  rcases function.ne_iff.mp hxy with ⟨i, hi⟩\n  exact le_trans (le_einfsep_iff.1 (h i) _ (hx _) _ (hy _) hi) (edist_le_pi_edist _ _ i)\n#align le_einfsep_pi_of_le le_einfsep_pi_of_le\n\n",
+ "le_einfsep_pair":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊓ » -/\ntheorem le_einfsep_pair : «expr ⊓ » (edist x y) (edist y x) ≤ ({x, y} : set α).einfsep :=\n  by\n  simp_rw [le_einfsep_iff, inf_le_iff, mem_insert_iff, mem_singleton_iff]\n  rintro a (rfl | rfl) b (rfl | rfl) hab <;> finish\n#align le_einfsep_pair le_einfsep_pair\n\n",
+ "le_einfsep_of_forall_dist_le":
+ "/- ./././Mathport/Syntax/Translate/Basic.lean:632:2: warning: expanding binder collection (x y «expr ∈ » s) -/\ntheorem le_einfsep_of_forall_dist_le {d} (h : ∀ (x) (_ : x ∈ s) (y) (_ : y ∈ s) (hxy : x ≠ y), d ≤ dist x y) :\n    ennreal.of_real d ≤ s.einfsep :=\n  le_einfsep fun x hx y hy hxy => (edist_dist x y).symm ▸ ennreal.of_real_le_of_real (h x hx y hy hxy)\n#align le_einfsep_of_forall_dist_le le_einfsep_of_forall_dist_le\n\n",
+ "le_einfsep_image_iff":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\n/- ./././Mathport/Syntax/Translate/Basic.lean:632:2: warning: expanding binder collection (x y «expr ∈ » s) -/\ntheorem le_einfsep_image_iff {d} {f : β → α} {s : set β} :\n    d ≤ einfsep («expr '' » f s) ↔ ∀ (x) (_ : x ∈ s) (y) (_ : y ∈ s), f x ≠ f y → d ≤ edist (f x) (f y) := by\n  simp_rw [le_einfsep_iff, ball_image_iff]\n#align le_einfsep_image_iff le_einfsep_image_iff\n\n",
+ "le_einfsep_iff":
+ "/- ./././Mathport/Syntax/Translate/Basic.lean:632:2: warning: expanding binder collection (x y «expr ∈ » s) -/\n/-\nCopyright (c) 2022 Wrenna Robson. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Wrenna Robson\n-/\ntheorem le_einfsep_iff {d} : d ≤ s.einfsep ↔ ∀ (x) (_ : x ∈ s) (y) (_ : y ∈ s) (hxy : x ≠ y), d ≤ edist x y := by\n  simp_rw [einfsep, le_infᵢ_iff]\n#align le_einfsep_iff le_einfsep_iff\n\n",
+ "le_einfsep":
+ "/- ./././Mathport/Syntax/Translate/Basic.lean:632:2: warning: expanding binder collection (x y «expr ∈ » s) -/\ntheorem le_einfsep {d} (h : ∀ (x) (_ : x ∈ s) (y) (_ : y ∈ s) (hxy : x ≠ y), d ≤ edist x y) : d ≤ s.einfsep :=\n  le_einfsep_iff.2 h\n#align le_einfsep le_einfsep\n\n",
+ "le_edist_of_le_infsep":
+ "theorem le_edist_of_le_infsep {d x} (hx : x ∈ s) {y} (hy : y ∈ s) (hxy : x ≠ y) (hd : d ≤ s.infsep) : d ≤ dist x y :=\n  by\n  by_cases hs : s.nontrivial\n  · exact hs.le_infsep_iff.1 hd x hx y hy hxy\n  · rw [not_nontrivial_iff] at hs\n    rw [hs.infsep_zero] at hd\n    exact le_trans hd dist_nonneg\n#align le_edist_of_le_infsep le_edist_of_le_infsep\n\n",
+ "le_edist_of_le_einfsep":
+ "theorem le_edist_of_le_einfsep {d x} (hx : x ∈ s) {y} (hy : y ∈ s) (hxy : x ≠ y) (hd : d ≤ s.einfsep) : d ≤ edist x y :=\n  le_einfsep_iff.1 hd x hx y hy hxy\n#align le_edist_of_le_einfsep le_edist_of_le_einfsep\n\n",
+ "infsep_zero_iff_subsingleton_of_finite":
+ "theorem infsep_zero_iff_subsingleton_of_finite [Finite s] : s.infsep = 0 ↔ s.subsingleton :=\n  by\n  rw [infsep_zero, einfsep_eq_top_iff, or_iff_right_iff_imp]\n  exact fun H => (einfsep_pos_of_finite.ne' H).elim\n#align infsep_zero_iff_subsingleton_of_finite infsep_zero_iff_subsingleton_of_finite\n\n",
+ "infsep_zero_iff_subsingleton":
+ "theorem _root_.finset.infsep_zero_iff_subsingleton (s : Finset α) : (s : set α).infsep = 0 ↔ (s : set α).subsingleton :=\n  infsep_zero_iff_subsingleton_of_finite\n#align finset.infsep_zero_iff_subsingleton finset.infsep_zero_iff_subsingleton\n\n",
+ "infsep_zero":
+ "theorem subsingleton.infsep_zero (hs : s.subsingleton) : s.infsep = 0 :=\n  by\n  rw [infsep_zero, hs.einfsep]\n  right\n  rfl\n#align subsingleton.infsep_zero subsingleton.infsep_zero\n\n",
+ "infsep_triple":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊓ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊓ » -/\ntheorem infsep_triple (hxy : x ≠ y) (hyz : y ≠ z) (hxz : x ≠ z) :\n    ({x, y, z} : set α).infsep = «expr ⊓ » («expr ⊓ » (dist x y) (dist x z)) (dist y z) := by\n  simp only [infsep, einfsep_triple hxy hyz hxz, ennreal.to_real_inf, edist_ne_top x y, edist_ne_top x z,\n    edist_ne_top y z, dist_edist, ne.def, inf_eq_top_iff, and_self_iff, not_false_iff]\n#align infsep_triple infsep_triple\n\n",
+ "infsep_singleton":
+ "theorem infsep_singleton : ({x} : set α).infsep = 0 :=\n  subsingleton_singleton.infsep_zero\n#align infsep_singleton infsep_singleton\n\n",
+ "infsep_pos_iff_nontrivial_of_finite":
+ "theorem infsep_pos_iff_nontrivial_of_finite [Finite s] : 0 < s.infsep ↔ s.nontrivial :=\n  by\n  rw [infsep_pos, einfsep_lt_top_iff, and_iff_right_iff_imp]\n  exact fun _ => einfsep_pos_of_finite\n#align infsep_pos_iff_nontrivial_of_finite infsep_pos_iff_nontrivial_of_finite\n\n",
+ "infsep_pos_iff_nontrivial":
+ "theorem _root_.finset.infsep_pos_iff_nontrivial (s : Finset α) : 0 < (s : set α).infsep ↔ (s : set α).nontrivial :=\n  infsep_pos_iff_nontrivial_of_finite\n#align finset.infsep_pos_iff_nontrivial finset.infsep_pos_iff_nontrivial\n\n",
+ "infsep_pos":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `ennreal.top -/\ntheorem infsep_pos : 0 < s.infsep ↔ 0 < s.einfsep ∧ s.einfsep < ennreal.top := by\n  simp_rw [infsep, ennreal.to_real_pos_iff]\n#align infsep_pos infsep_pos\n\n",
+ "infsep_pair_le_to_real_inf":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊓ » -/\ntheorem infsep_pair_le_to_real_inf (hxy : x ≠ y) :\n    ({x, y} : set α).infsep ≤ («expr ⊓ » (edist x y) (edist y x)).to_real := by\n  simp_rw [infsep, einfsep_pair_eq_inf hxy]\n#align infsep_pair_le_to_real_inf infsep_pair_le_to_real_inf\n\n",
+ "infsep_pair_eq_to_real":
+ "theorem infsep_pair_eq_to_real : ({x, y} : set α).infsep = (edist x y).to_real :=\n  by\n  by_cases hxy : x = y\n  · rw [hxy]\n    simp only [infsep_singleton, pair_eq_singleton, edist_self, ennreal.zero_to_real]\n  · rw [infsep, einfsep_pair hxy]\n#align infsep_pair_eq_to_real infsep_pair_eq_to_real\n\n",
+ "infsep_pair":
+ "theorem infsep_pair : ({x, y} : set α).infsep = dist x y :=\n  by\n  rw [infsep_pair_eq_to_real, edist_dist]\n  exact ennreal.to_real_of_real dist_nonneg\n#align infsep_pair infsep_pair\n\n",
+ "infsep_of_nontrivial":
+ "theorem finite.infsep_of_nontrivial (hsf : s.finite) (hs : s.nontrivial) :\n    s.infsep = hsf.off_diag.to_finset.inf' (by simpa) (uncurry dist) := by classical simp_rw [hsf.infsep, dif_pos hs]\n#align finite.infsep_of_nontrivial finite.infsep_of_nontrivial\n\n",
+ "infsep_of_fintype":
+ "theorem nontrivial.infsep_of_fintype [decidable_eq α] [fintype s] (hs : s.nontrivial) :\n    s.infsep = s.off_diag.to_finset.inf' (by simpa) (uncurry dist) := by classical rw [infsep_of_fintype, dif_pos hs]\n#align nontrivial.infsep_of_fintype nontrivial.infsep_of_fintype\n\n",
+ "infsep_nonneg":
+ "theorem infsep_nonneg : 0 ≤ s.infsep :=\n  ennreal.to_real_nonneg\n#align infsep_nonneg infsep_nonneg\n\n",
+ "infsep_lt_iff":
+ "/- ./././Mathport/Syntax/Translate/Basic.lean:632:2: warning: expanding binder collection (x y «expr ∈ » s) -/\ntheorem nontrivial.infsep_lt_iff {d} (hs : s.nontrivial) :\n    s.infsep < d ↔ ∃ (x : _)(_ : x ∈ s)(y : _)(_ : y ∈ s)(hxy : x ≠ y), dist x y < d :=\n  by\n  rw [← not_iff_not]\n  push_neg\n  exact hs.le_infsep_iff\n#align nontrivial.infsep_lt_iff nontrivial.infsep_lt_iff\n\n",
+ "infsep_le_of_mem_of_edist_le":
+ "theorem infsep_le_of_mem_of_edist_le {d x} (hx : x ∈ s) {y} (hy : y ∈ s) (hxy : x ≠ y) (hxy' : dist x y ≤ d) :\n    s.infsep ≤ d :=\n  le_trans (infsep_le_dist_of_mem hx hy hxy) hxy'\n#align infsep_le_of_mem_of_edist_le infsep_le_of_mem_of_edist_le\n\n",
+ "infsep_le_dist_of_mem":
+ "theorem infsep_le_dist_of_mem (hx : x ∈ s) (hy : y ∈ s) (hxy : x ≠ y) : s.infsep ≤ dist x y :=\n  le_edist_of_le_infsep hx hy hxy le_rfl\n#align infsep_le_dist_of_mem infsep_le_dist_of_mem\n\n",
+ "infsep_exists_of_nontrivial":
+ "/- ./././Mathport/Syntax/Translate/Basic.lean:632:2: warning: expanding binder collection (x y «expr ∈ » s) -/\ntheorem finite.infsep_exists_of_nontrivial (hsf : s.finite) (hs : s.nontrivial) :\n    ∃ (x : _)(_ : x ∈ s)(y : _)(_ : y ∈ s)(hxy : x ≠ y), s.infsep = dist x y :=\n  letI := hsf.fintype\n  hs.infsep_exists_of_finite\n#align finite.infsep_exists_of_nontrivial finite.infsep_exists_of_nontrivial\n\n",
+ "infsep_exists_of_finite":
+ "/- ./././Mathport/Syntax/Translate/Basic.lean:632:2: warning: expanding binder collection (x y «expr ∈ » s) -/\ntheorem nontrivial.infsep_exists_of_finite [Finite s] (hs : s.nontrivial) :\n    ∃ (x : _)(_ : x ∈ s)(y : _)(_ : y ∈ s)(hxy : x ≠ y), s.infsep = dist x y := by\n  classical\n    cases nonempty_fintype s\n    simp_rw [hs.infsep_of_fintype]\n    rcases@finset.exists_mem_eq_inf' _ _ _ s.off_diag.to_finset (by simpa) (uncurry dist) with ⟨_, hxy, hed⟩\n    simp_rw [mem_to_finset] at hxy\n    exact ⟨w.fst, hxy.1, w.snd, hxy.2.1, hxy.2.2, hed⟩\n#align nontrivial.infsep_exists_of_finite nontrivial.infsep_exists_of_finite\n\n",
+ "infsep_eq_infi":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⨅ , » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⨅ , » -/\ntheorem nontrivial.infsep_eq_infi (hs : s.nontrivial) :\n    s.infsep =\n      «expr⨅ , » \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⨅ , »\"\n        ((uncurry dist) (d : α × α)) :=\n  by classical rw [infsep_eq_infi, if_pos hs]\n#align nontrivial.infsep_eq_infi nontrivial.infsep_eq_infi\n\n",
+ "infsep_empty":
+ "theorem infsep_empty : (∅ : set α).infsep = 0 :=\n  subsingleton_empty.infsep_zero\n#align infsep_empty infsep_empty\n\n",
+ "infsep_anti":
+ "theorem nontrivial.infsep_anti (hs : s.nontrivial) (hst : s ⊆ t) : t.infsep ≤ s.infsep :=\n  ennreal.to_real_mono hs.einfsep_ne_top (einfsep_anti hst)\n#align nontrivial.infsep_anti nontrivial.infsep_anti\n\n",
+ "infsep":
+ "theorem finite.infsep [decidable s.nontrivial] (hsf : s.finite) :\n    s.infsep = if hs : s.nontrivial then hsf.off_diag.to_finset.inf' (by simpa) (uncurry dist) else 0 :=\n  by\n  split_ifs with hs\n  · refine' eq_of_forall_le_iff fun _ => _\n    simp_rw [hs.le_infsep_iff, imp_forall_iff, finset.le_inf'_iff, finite.mem_to_finset, mem_off_diag, prod.forall,\n      uncurry_apply_pair, and_imp]\n  · rw [not_nontrivial_iff] at hs\n    exact hs.infsep_zero\n#align finite.infsep finite.infsep\n\n",
+ "einfsep_zero":
+ "/- ./././Mathport/Syntax/Translate/Basic.lean:632:2: warning: expanding binder collection (x y «expr ∈ » s) -/\ntheorem einfsep_zero :\n    s.einfsep = 0 ↔ ∀ (C) (hC : 0 < C), ∃ (x : _)(_ : x ∈ s)(y : _)(_ : y ∈ s)(hxy : x ≠ y), edist x y < C := by\n  simp_rw [einfsep, ← bot_eq_zero, infᵢ_eq_bot, infᵢ_lt_iff]\n#align einfsep_zero einfsep_zero\n\n",
+ "einfsep_triple":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊓ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊓ » -/\ntheorem einfsep_triple (hxy : x ≠ y) (hyz : y ≠ z) (hxz : x ≠ z) :\n    einfsep ({x, y, z} : set α) = «expr ⊓ » («expr ⊓ » (edist x y) (edist x z)) (edist y z) := by\n  simp_rw [einfsep_insert, infᵢ_insert, infᵢ_singleton, einfsep_singleton, inf_top_eq, cinfᵢ_pos hxy, cinfᵢ_pos hyz,\n    cinfᵢ_pos hxz]\n#align einfsep_triple einfsep_triple\n\n",
+ "einfsep_top":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `ennreal.top -/\n/- ./././Mathport/Syntax/Translate/Basic.lean:632:2: warning: expanding binder collection (x y «expr ∈ » s) -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `ennreal.top -/\ntheorem einfsep_top :\n    s.einfsep = ennreal.top ↔ ∀ (x) (_ : x ∈ s) (y) (_ : y ∈ s) (hxy : x ≠ y), edist x y = ennreal.top := by\n  simp_rw [einfsep, infᵢ_eq_top]\n#align einfsep_top einfsep_top\n\n",
+ "einfsep_singleton":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `ennreal.top -/\n@[simp]\ntheorem einfsep_singleton : ({x} : set α).einfsep = ennreal.top :=\n  subsingleton_singleton.einfsep\n#align einfsep_singleton einfsep_singleton\n\n",
+ "einfsep_pos_of_finite":
+ "theorem einfsep_pos_of_finite [Finite s] : 0 < s.einfsep :=\n  by\n  cases nonempty_fintype s\n  by_cases hs : s.nontrivial\n  · rcases hs.einfsep_exists_of_finite with ⟨x, hx, y, hy, hxy, hxy'⟩\n    exact hxy'.symm ▸ edist_pos.2 hxy\n  · rw [not_nontrivial_iff] at hs\n    exact hs.einfsep.symm ▸ WithTop.zero_lt_top\n#align einfsep_pos_of_finite einfsep_pos_of_finite\n\n",
+ "einfsep_pos":
+ "theorem finite.einfsep_pos (hs : s.finite) : 0 < s.einfsep :=\n  letI := hs.fintype\n  einfsep_pos_of_finite\n#align finite.einfsep_pos finite.einfsep_pos\n\n",
+ "einfsep_pair_le_right":
+ "theorem einfsep_pair_le_right (hxy : x ≠ y) : ({x, y} : set α).einfsep ≤ edist y x := by\n  rw [pair_comm] <;> exact einfsep_pair_le_left hxy.symm\n#align einfsep_pair_le_right einfsep_pair_le_right\n\n",
+ "einfsep_pair_le_left":
+ "theorem einfsep_pair_le_left (hxy : x ≠ y) : ({x, y} : set α).einfsep ≤ edist x y :=\n  einfsep_le_edist_of_mem (mem_insert _ _) (mem_insert_of_mem _ (mem_singleton _)) hxy\n#align einfsep_pair_le_left einfsep_pair_le_left\n\n",
+ "einfsep_pair_eq_inf":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊓ » -/\ntheorem einfsep_pair_eq_inf (hxy : x ≠ y) : ({x, y} : set α).einfsep = «expr ⊓ » (edist x y) (edist y x) :=\n  le_antisymm (le_inf (einfsep_pair_le_left hxy) (einfsep_pair_le_right hxy)) le_einfsep_pair\n#align einfsep_pair_eq_inf einfsep_pair_eq_inf\n\n",
+ "einfsep_pair":
+ "theorem einfsep_pair (hxy : x ≠ y) : ({x, y} : set α).einfsep = edist x y :=\n  by\n  nth_rw 1 [← min_self (edist x y)]\n  convert einfsep_pair_eq_inf hxy using 2\n  rw [edist_comm]\n#align einfsep_pair einfsep_pair\n\n",
+ "einfsep_of_fintype":
+ "theorem einfsep_of_fintype [decidable_eq α] [fintype s] : s.einfsep = s.off_diag.to_finset.inf (uncurry edist) :=\n  by\n  refine' eq_of_forall_le_iff fun _ => _\n  simp_rw [le_einfsep_iff, imp_forall_iff, finset.le_inf_iff, mem_to_finset, mem_off_diag, prod.forall,\n    uncurry_apply_pair, and_imp]\n#align einfsep_of_fintype einfsep_of_fintype\n\n",
+ "einfsep_ne_top_iff":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `ennreal.top -/\ntheorem einfsep_ne_top_iff : s.einfsep ≠ ennreal.top ↔ s.nontrivial :=\n  ⟨nontrivial_of_einfsep_ne_top, nontrivial.einfsep_ne_top⟩\n#align einfsep_ne_top_iff einfsep_ne_top_iff\n\n",
+ "einfsep_ne_top":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `ennreal.top -/\ntheorem nontrivial.einfsep_ne_top (hs : s.nontrivial) : s.einfsep ≠ ennreal.top :=\n  by\n  contrapose! hs\n  rw [not_nontrivial_iff]\n  exact subsingleton_of_einfsep_eq_top hs\n#align nontrivial.einfsep_ne_top nontrivial.einfsep_ne_top\n\n",
+ "einfsep_lt_top_iff":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `ennreal.top -/\ntheorem einfsep_lt_top_iff : s.einfsep < ennreal.top ↔ s.nontrivial :=\n  ⟨nontrivial_of_einfsep_lt_top, nontrivial.einfsep_lt_top⟩\n#align einfsep_lt_top_iff einfsep_lt_top_iff\n\n",
+ "einfsep_lt_top":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `ennreal.top -/\ntheorem nontrivial.einfsep_lt_top (hs : s.nontrivial) : s.einfsep < ennreal.top :=\n  by\n  rw [lt_top_iff_ne_top]\n  exact hs.einfsep_ne_top\n#align nontrivial.einfsep_lt_top nontrivial.einfsep_lt_top\n\n",
+ "einfsep_lt_iff":
+ "/- ./././Mathport/Syntax/Translate/Basic.lean:632:2: warning: expanding binder collection (x y «expr ∈ » s) -/\ntheorem einfsep_lt_iff {d} : s.einfsep < d ↔ ∃ (x : _)(_ : x ∈ s)(y : _)(_ : y ∈ s)(h : x ≠ y), edist x y < d := by\n  simp_rw [einfsep, infᵢ_lt_iff]\n#align einfsep_lt_iff einfsep_lt_iff\n\n",
+ "einfsep_le_of_mem_of_edist_le":
+ "theorem einfsep_le_of_mem_of_edist_le {d x} (hx : x ∈ s) {y} (hy : y ∈ s) (hxy : x ≠ y) (hxy' : edist x y ≤ d) :\n    s.einfsep ≤ d :=\n  le_trans (einfsep_le_edist_of_mem hx hy hxy) hxy'\n#align einfsep_le_of_mem_of_edist_le einfsep_le_of_mem_of_edist_le\n\n",
+ "einfsep_le_edist_of_mem":
+ "theorem einfsep_le_edist_of_mem {x} (hx : x ∈ s) {y} (hy : y ∈ s) (hxy : x ≠ y) : s.einfsep ≤ edist x y :=\n  le_edist_of_le_einfsep hx hy hxy le_rfl\n#align einfsep_le_edist_of_mem einfsep_le_edist_of_mem\n\n",
+ "einfsep_insert_le":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⨅ , » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⨅ , » -/\ntheorem einfsep_insert_le :\n    (insert x s).einfsep ≤\n      «expr⨅ , » \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⨅ , »\" (edist x y) :=\n  by\n  simp_rw [le_infᵢ_iff]\n  refine' fun _ hy hxy => einfsep_le_edist_of_mem (mem_insert _ _) (mem_insert_of_mem _ hy) hxy\n#align einfsep_insert_le einfsep_insert_le\n\n",
+ "einfsep_insert":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊓ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⨅ , » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⨅ , » -/\ntheorem einfsep_insert :\n    einfsep (insert x s) =\n      «expr ⊓ »\n        («expr⨅ , » \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⨅ , »\" (edist x y))\n        s.einfsep :=\n  by\n  refine' le_antisymm (le_min einfsep_insert_le (einfsep_anti (subset_insert _ _))) _\n  simp_rw [le_einfsep_iff, inf_le_iff, mem_insert_iff]\n  rintro y (rfl | hy) z (rfl | hz) hyz\n  · exact false.elim (hyz rfl)\n  · exact or.inl (infᵢ_le_of_le _ (infᵢ₂_le hz hyz))\n  · rw [edist_comm]\n    exact or.inl (infᵢ_le_of_le _ (infᵢ₂_le hy hyz.symm))\n  · exact or.inr (einfsep_le_edist_of_mem hy hz hyz)\n#align einfsep_insert einfsep_insert\n\n",
+ "einfsep_exists_of_nontrivial":
+ "/- ./././Mathport/Syntax/Translate/Basic.lean:632:2: warning: expanding binder collection (x y «expr ∈ » s) -/\ntheorem finite.einfsep_exists_of_nontrivial (hsf : s.finite) (hs : s.nontrivial) :\n    ∃ (x : _)(_ : x ∈ s)(y : _)(_ : y ∈ s)(hxy : x ≠ y), s.einfsep = edist x y :=\n  letI := hsf.fintype\n  hs.einfsep_exists_of_finite\n#align finite.einfsep_exists_of_nontrivial finite.einfsep_exists_of_nontrivial\n\n",
+ "einfsep_exists_of_finite":
+ "/- ./././Mathport/Syntax/Translate/Basic.lean:632:2: warning: expanding binder collection (x y «expr ∈ » s) -/\ntheorem nontrivial.einfsep_exists_of_finite [Finite s] (hs : s.nontrivial) :\n    ∃ (x : _)(_ : x ∈ s)(y : _)(_ : y ∈ s)(hxy : x ≠ y), s.einfsep = edist x y := by\n  classical\n    cases nonempty_fintype s\n    simp_rw [einfsep_of_fintype]\n    rcases@finset.exists_mem_eq_inf _ _ _ _ s.off_diag.to_finset (by simpa) (uncurry edist) with ⟨_, hxy, hed⟩\n    simp_rw [mem_to_finset] at hxy\n    refine' ⟨w.fst, hxy.1, w.snd, hxy.2.1, hxy.2.2, hed⟩\n#align nontrivial.einfsep_exists_of_finite nontrivial.einfsep_exists_of_finite\n\n",
+ "einfsep_eq_top_iff":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `ennreal.top -/\ntheorem einfsep_eq_top_iff : s.einfsep = ennreal.top ↔ s.subsingleton :=\n  ⟨subsingleton_of_einfsep_eq_top, subsingleton.einfsep⟩\n#align einfsep_eq_top_iff einfsep_eq_top_iff\n\n",
+ "einfsep_eq_infi":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⨅ , » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⨅ , » -/\ntheorem einfsep_eq_infi :\n    s.einfsep =\n      «expr⨅ , » \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⨅ , »\"\n        ((uncurry edist) (d : α × α)) :=\n  by\n  refine' eq_of_forall_le_iff fun _ => _\n  simp_rw [le_einfsep_iff, le_infᵢ_iff, imp_forall_iff, SetCoe.forall, subtype.coe_mk, mem_off_diag, prod.forall,\n    uncurry_apply_pair, and_imp]\n#align einfsep_eq_infi einfsep_eq_infi\n\n",
+ "einfsep_empty":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `ennreal.top -/\n@[simp]\ntheorem einfsep_empty : (∅ : set α).einfsep = ennreal.top :=\n  subsingleton_empty.einfsep\n#align einfsep_empty einfsep_empty\n\n",
+ "einfsep_anti":
+ "theorem einfsep_anti (hst : s ⊆ t) : t.einfsep ≤ s.einfsep :=\n  le_einfsep fun x hx y hy => einfsep_le_edist_of_mem (hst hx) (hst hy)\n#align einfsep_anti einfsep_anti\n\n",
+ "einfsep_Union_mem_option":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⋃ , » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⋃ , » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⨅ , » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⨅ , » -/\ntheorem einfsep_Union_mem_option {ι : Type _} (o : option ι) (s : ι → set α) :\n    («expr⋃ , » \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⋃ , »\" (s i)).einfsep =\n      «expr⨅ , » \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⨅ , »\" (s i).einfsep :=\n  by cases o <;> simp\n#align einfsep_Union_mem_option einfsep_Union_mem_option\n\n",
+ "einfsep":
+ "theorem finite.einfsep (hs : s.finite) : s.einfsep = hs.off_diag.to_finset.inf (uncurry edist) :=\n  by\n  refine' eq_of_forall_le_iff fun _ => _\n  simp_rw [le_einfsep_iff, imp_forall_iff, finset.le_inf_iff, finite.mem_to_finset, mem_off_diag, prod.forall,\n    uncurry_apply_pair, and_imp]\n#align finite.einfsep finite.einfsep\n\n",
+ "coe_infsep_of_off_diag_nonempty":
+ "theorem _root_.finset.coe_infsep_of_off_diag_nonempty [decidable_eq α] {s : Finset α} (hs : s.off_diag.nonempty) :\n    (s : set α).infsep = s.off_diag.inf' hs (uncurry dist) := by rw [finset.coe_infsep, dif_pos hs]\n#align finset.coe_infsep_of_off_diag_nonempty finset.coe_infsep_of_off_diag_nonempty\n\n",
+ "coe_infsep_of_off_diag_empty":
+ "theorem _root_.finset.coe_infsep_of_off_diag_empty [decidable_eq α] {s : Finset α} (hs : s.off_diag = ∅) :\n    (s : set α).infsep = 0 := by\n  rw [← Finset.not_nonempty_iff_eq_empty] at hs\n  rw [finset.coe_infsep, dif_neg hs]\n#align finset.coe_infsep_of_off_diag_empty finset.coe_infsep_of_off_diag_empty\n\n",
+ "coe_infsep":
+ "theorem _root_.finset.coe_infsep [decidable_eq α] (s : Finset α) :\n    (s : set α).infsep = if hs : s.off_diag.nonempty then s.off_diag.inf' hs (uncurry dist) else 0 :=\n  by\n  have H : (s : set α).nontrivial ↔ s.off_diag.nonempty := by\n    rwa [← Set.offDiag_nonempty, ← finset.coe_off_diag, Finset.coe_nonempty]\n  split_ifs with hs\n  · simp_rw [(H.mpr hs).infsep_of_fintype, ← finset.coe_off_diag, finset.to_finset_coe]\n  · exact (not_nontrivial_iff.mp (H.mp.mt hs)).infsep_zero\n#align finset.coe_infsep finset.coe_infsep\n\n",
+ "coe_einfsep":
+ "theorem finset.coe_einfsep [decidable_eq α] {s : Finset α} : (s : set α).einfsep = s.off_diag.inf (uncurry edist) := by\n  simp_rw [einfsep_of_fintype, ← finset.coe_off_diag, finset.to_finset_coe]\n#align finset.coe_einfsep finset.coe_einfsep\n\n"}

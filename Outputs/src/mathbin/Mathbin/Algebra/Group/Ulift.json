@@ -1,0 +1,16 @@
+{"smul_down":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n@[simp, to_additive]\ntheorem smul_down [SMul α β] (a : α) (b : ULift.{v} β) : («expr • » a b).down = «expr • » a b.down :=\n  rfl\n#align smul_down smul_down\n\n",
+ "pow_down":
+ "@[simp, to_additive smul_down, to_additive_reorder 1]\ntheorem pow_down [Pow α β] (a : ULift.{v} α) (b : β) : (a ^ b).down = a.down ^ b :=\n  rfl\n#align pow_down pow_down\n\n",
+ "one_down":
+ "/-\nCopyright (c) 2020 Scott Morrison. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Scott Morrison\n-/\n@[simp, to_additive]\ntheorem one_down [One α] : (1 : ULift α).down = 1 :=\n  rfl\n#align one_down one_down\n\n",
+ "nat_cast_down":
+ "@[simp]\ntheorem nat_cast_down [AddMonoidWithOne α] (n : ℕ) : (n : ULift α).down = n :=\n  rfl\n#align nat_cast_down nat_cast_down\n\n",
+ "mul_down":
+ "@[simp, to_additive]\ntheorem mul_down [Mul α] : (x * y).down = x.down * y.down :=\n  rfl\n#align mul_down mul_down\n\n",
+ "inv_down":
+ "@[simp, to_additive]\ntheorem inv_down [Inv α] : x⁻¹.down = x.down⁻¹ :=\n  rfl\n#align inv_down inv_down\n\n",
+ "int_cast_down":
+ "@[simp]\ntheorem int_cast_down [AddGroupWithOne α] (n : ℤ) : (n : ULift α).down = n :=\n  rfl\n#align int_cast_down int_cast_down\n\n",
+ "div_down":
+ "@[simp, to_additive]\ntheorem div_down [Div α] : (x / y).down = x.down / y.down :=\n  rfl\n#align div_down div_down\n\n"}

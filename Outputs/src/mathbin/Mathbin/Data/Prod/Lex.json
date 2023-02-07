@@ -1,0 +1,8 @@
+{"to_lex_strict_mono":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ×ₗ » -/\ntheorem to_lex_strict_mono : strict_mono (to_lex : α × β → «expr ×ₗ » α β) :=\n  by\n  rintro ⟨a₁, b₁⟩ ⟨a₂, b₂⟩ h\n  obtain rfl | ha : a₁ = a₂ ∨ _ := h.le.1.eq_or_lt\n  · exact right _ (Prod.mk_lt_mk_iff_right.1 h)\n  · exact left _ _ ha\n#align to_lex_strict_mono to_lex_strict_mono\n\n",
+ "to_lex_mono":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ×ₗ » -/\ntheorem to_lex_mono : monotone (to_lex : α × β → «expr ×ₗ » α β) :=\n  by\n  rintro ⟨a₁, b₁⟩ ⟨a₂, b₂⟩ ⟨ha, hb⟩\n  obtain rfl | ha : a₁ = a₂ ∨ _ := ha.eq_or_lt\n  · exact right _ hb\n  · exact left _ _ ha\n#align to_lex_mono to_lex_mono\n\n",
+ "lt_iff":
+ "theorem lt_iff [LT α] [LT β] (a b : α × β) : to_lex a < to_lex b ↔ a.1 < b.1 ∨ a.1 = b.1 ∧ a.2 < b.2 :=\n  prod.lex_def (· < ·) (· < ·)\n#align lt_iff lt_iff\n\n",
+ "le_iff":
+ "/-\nCopyright (c) 2019 Scott Morrison. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Scott Morrison, Minchao Wu\n-/\ntheorem le_iff [LT α] [LE β] (a b : α × β) : to_lex a ≤ to_lex b ↔ a.1 < b.1 ∨ a.1 = b.1 ∧ a.2 ≤ b.2 :=\n  prod.lex_def (· < ·) (· ≤ ·)\n#align le_iff le_iff\n\n"}

@@ -1,0 +1,18 @@
+{"one_lt_const":
+ "@[simp, to_additive const_pos]\ntheorem one_lt_const : 1 < const β a ↔ 1 < a :=\n  @const_lt_const _ _ _ _ 1 a\n#align one_lt_const one_lt_const\n\n",
+ "one_le_const_of_one_le":
+ "/-\nCopyright (c) 2018 Simon Hudon. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Simon Hudon, Patrick Massot\n-/\n-- The indexing type\n-- The family of types already equipped with instances\n@[to_additive const_nonneg_of_nonneg]\ntheorem one_le_const_of_one_le (ha : 1 ≤ a) : 1 ≤ const β a := fun _ => ha\n#align one_le_const_of_one_le one_le_const_of_one_le\n\n",
+ "one_le_const":
+ "@[simp, to_additive const_nonneg]\ntheorem one_le_const : 1 ≤ const β a ↔ 1 ≤ a :=\n  @const_le_const _ _ _ _ 1 _\n#align one_le_const one_le_const\n\n",
+ "function_const_pos":
+ "private theorem function_const_pos [preorder α] : 0 < a → 0 < const ι a :=\n  const_pos.2\n#align function_const_pos function_const_pos\n\n",
+ "function_const_nonneg_of_pos":
+ "private theorem function_const_nonneg_of_pos [preorder α] (ha : 0 < a) : 0 ≤ const ι a :=\n  const_nonneg_of_nonneg _ ha.le\n#align function_const_nonneg_of_pos function_const_nonneg_of_pos\n\n",
+ "function_const_ne_zero":
+ "private theorem function_const_ne_zero : a ≠ 0 → const ι a ≠ 0 :=\n  const_ne_zero.2\n#align function_const_ne_zero function_const_ne_zero\n\n",
+ "const_lt_one":
+ "@[simp, to_additive]\ntheorem const_lt_one : const β a < 1 ↔ a < 1 :=\n  @const_lt_const _ _ _ _ _ 1\n#align const_lt_one const_lt_one\n\n",
+ "const_le_one_of_le_one":
+ "@[to_additive]\ntheorem const_le_one_of_le_one (ha : a ≤ 1) : const β a ≤ 1 := fun _ => ha\n#align const_le_one_of_le_one const_le_one_of_le_one\n\n",
+ "const_le_one":
+ "@[simp, to_additive]\ntheorem const_le_one : const β a ≤ 1 ↔ a ≤ 1 :=\n  @const_le_const _ _ _ _ _ 1\n#align const_le_one const_le_one\n\n"}

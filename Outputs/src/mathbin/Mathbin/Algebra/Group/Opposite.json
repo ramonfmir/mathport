@@ -1,0 +1,30 @@
+{"unop_pow":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵃᵒᵖ» -/\n@[simp]\ntheorem unop_pow {β} [Pow α β] (a : «expr ᵃᵒᵖ» α) (b : β) : unop (a ^ b) = unop a ^ b :=\n  rfl\n#align unop_pow unop_pow\n\n",
+ "unop_div":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵐᵒᵖ» -/\n/-\nCopyright (c) 2018 Kenny Lau. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Kenny Lau\n-/\n@[simp, to_additive]\ntheorem unop_div [div_inv_monoid α] (x y : «expr ᵐᵒᵖ» α) : unop (x / y) = (unop y)⁻¹ * unop x :=\n  rfl\n#align unop_div unop_div\n\n",
+ "unop":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵐᵒᵖ» -/\n@[to_additive]\ntheorem commute.unop [Mul α] {x y : «expr ᵐᵒᵖ» α} (h : Commute x y) : Commute (unop x) (unop y) :=\n  h.unop\n#align commute.unop commute.unop\n\n",
+ "semiconj_by_unop":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵐᵒᵖ» -/\n@[simp, to_additive]\ntheorem semiconj_by_unop [Mul α] {a x y : «expr ᵐᵒᵖ» α} : SemiconjBy (unop a) (unop y) (unop x) ↔ SemiconjBy a x y := by\n  conv_rhs => rw [← op_unop a, ← op_unop x, ← op_unop y, semiconj_by_op]\n#align semiconj_by_unop semiconj_by_unop\n\n",
+ "semiconj_by_op":
+ "@[simp, to_additive]\ntheorem semiconj_by_op [Mul α] {a x y : α} : SemiconjBy (op a) (op y) (op x) ↔ SemiconjBy a x y := by\n  simp only [SemiconjBy, ← op_mul, op_inj, eq_comm]\n#align semiconj_by_op semiconj_by_op\n\n",
+ "op_pow":
+ "@[simp]\ntheorem op_pow {β} [Pow α β] (a : α) (b : β) : op (a ^ b) = op a ^ b :=\n  rfl\n#align op_pow op_pow\n\n",
+ "op_mul_equiv_to_equiv":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃* » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵃᵒᵖ» -/\n@[simp]\ntheorem op_mul_equiv_to_equiv [Mul α] : (opMulEquiv : «expr ≃* » α («expr ᵃᵒᵖ» α)).to_equiv = op_equiv :=\n  rfl\n#align op_mul_equiv_to_equiv op_mul_equiv_to_equiv\n\n",
+ "op_div":
+ "@[simp, to_additive]\ntheorem op_div [div_inv_monoid α] (x y : α) : op (x / y) = (op y)⁻¹ * op x := by simp [div_eq_mul_inv]\n#align op_div op_div\n\n",
+ "op_add_equiv_to_equiv":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃+ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵐᵒᵖ» -/\n@[simp]\ntheorem op_add_equiv_to_equiv [Add α] : (opAddEquiv : «expr ≃+ » α («expr ᵐᵒᵖ» α)).to_equiv = op_equiv :=\n  rfl\n#align op_add_equiv_to_equiv op_add_equiv_to_equiv\n\n",
+ "op":
+ "#print Commute.op /-\n@[to_additive]\ntheorem Commute.op [Mul α] {x y : α} (h : Commute x y) : Commute (op x) (op y) :=\n  h.op\n#align commute.op Commute.op\n-/\n\n",
+ "mul_op_ext":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →+ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵐᵒᵖ» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃+ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵐᵒᵖ» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃+ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵐᵒᵖ» -/\n#print AddMonoidHom.mul_op_ext /-\n/-- This ext lemma change equalities on `αᵐᵒᵖ →+ β` to equalities on `α →+ β`.\nThis is useful because there are often ext lemmas for specific `α`s that will apply\nto an equality of `α →+ β` such as `finsupp.add_hom_ext'`. -/\n@[ext]\ntheorem AddMonoidHom.mul_op_ext {α β} [add_zero_class α] [add_zero_class β] (f g : «expr →+ » («expr ᵐᵒᵖ» α) β)\n    (h :\n      f.comp (opAddEquiv : «expr ≃+ » α («expr ᵐᵒᵖ» α)).to_add_monoid_hom =\n        g.comp (opAddEquiv : «expr ≃+ » α («expr ᵐᵒᵖ» α)).to_add_monoid_hom) :\n    f = g :=\n  AddMonoidHom.ext <| MulOpposite.rec' fun x => (AddMonoidHom.congr_fun h : _) x\n#align add_monoid_hom.mul_op_ext AddMonoidHom.mul_op_ext\n-/\n\n",
+ "commute_unop":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵐᵒᵖ» -/\n@[simp, to_additive]\ntheorem commute_unop [Mul α] {x y : «expr ᵐᵒᵖ» α} : Commute (unop x) (unop y) ↔ Commute x y :=\n  semiconj_by_unop\n#align commute_unop commute_unop\n\n",
+ "commute_op":
+ "@[simp, to_additive]\ntheorem commute_op [Mul α] {x y : α} : Commute (op x) (op y) ↔ Commute x y :=\n  semiconj_by_op\n#align commute_op commute_op\n\n",
+ "coe_unop_opEquiv":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ˣ» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵐᵒᵖ» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵐᵒᵖ» -/\n#print Units.coe_unop_opEquiv /-\n@[simp, to_additive]\ntheorem Units.coe_unop_opEquiv {M} [monoid M] (u : «expr ˣ» («expr ᵐᵒᵖ» M)) :\n    ((Units.opEquiv u).unop : M) = unop (u : «expr ᵐᵒᵖ» M) :=\n  rfl\n#align units.coe_unop_op_equiv Units.coe_unop_opEquiv\n-/\n\n",
+ "coe_opEquiv_symm":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵐᵒᵖ» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ˣ» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵐᵒᵖ» -/\n#print Units.coe_opEquiv_symm /-\n@[simp, to_additive]\ntheorem Units.coe_opEquiv_symm {M} [monoid M] (u : «expr ᵐᵒᵖ» («expr ˣ» M)) :\n    (Units.opEquiv.symm u : «expr ᵐᵒᵖ» M) = op (u.unop : M) :=\n  rfl\n#align units.coe_op_equiv_symm Units.coe_opEquiv_symm\n-/\n\n"}

@@ -1,0 +1,160 @@
+{"uIcc_mk_mk":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:177:8: unsupported: ambiguous notation -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `finset.product -/\n@[simp]\ntheorem uIcc_mk_mk [locally_finite_order α] [locally_finite_order β] [decidable_rel ((· ≤ ·) : α × β → α × β → Prop)]\n    (a₁ a₂ : α) (b₁ b₂ : β) : finset.uIcc (a₁, b₁) (a₂, b₂) = finset.product (finset.uIcc a₁ a₂) (finset.uIcc b₁ b₂) :=\n  rfl\n#align uIcc_mk_mk uIcc_mk_mk\n\n",
+ "uIcc_eq":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:177:8: unsupported: ambiguous notation -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `finset.product -/\ntheorem uIcc_eq [locally_finite_order α] [locally_finite_order β] [decidable_rel ((· ≤ ·) : α × β → α × β → Prop)]\n    (p q : α × β) : finset.uIcc p q = finset.product (finset.uIcc p.1 q.1) (finset.uIcc p.2 q.2) :=\n  rfl\n#align uIcc_eq uIcc_eq\n\n",
+ "subtype_Ioo_eq":
+ "theorem subtype_Ioo_eq : Ioo a b = (Ioo (a : α) b).subtype p :=\n  rfl\n#align subtype_Ioo_eq subtype_Ioo_eq\n\n",
+ "subtype_Ioi_eq":
+ "theorem subtype_Ioi_eq : Ioi a = (Ioi (a : α)).subtype p :=\n  rfl\n#align subtype_Ioi_eq subtype_Ioi_eq\n\n",
+ "subtype_Ioc_eq":
+ "theorem subtype_Ioc_eq : Ioc a b = (Ioc (a : α) b).subtype p :=\n  rfl\n#align subtype_Ioc_eq subtype_Ioc_eq\n\n",
+ "subtype_Iio_eq":
+ "theorem subtype_Iio_eq : Iio a = (Iio (a : α)).subtype p :=\n  rfl\n#align subtype_Iio_eq subtype_Iio_eq\n\n",
+ "subtype_Iic_eq":
+ "theorem subtype_Iic_eq : Iic a = (Iic (a : α)).subtype p :=\n  rfl\n#align subtype_Iic_eq subtype_Iic_eq\n\n",
+ "subtype_Ico_eq":
+ "theorem subtype_Ico_eq : Ico a b = (Ico (a : α) b).subtype p :=\n  rfl\n#align subtype_Ico_eq subtype_Ico_eq\n\n",
+ "subtype_Ici_eq":
+ "theorem subtype_Ici_eq : Ici a = (Ici (a : α)).subtype p :=\n  rfl\n#align subtype_Ici_eq subtype_Ici_eq\n\n",
+ "subtype_Icc_eq":
+ "-- See note [reducible non-instances]\n-- See note [reducible non-instances]\n-- See note [reducible non-instances]\ntheorem subtype_Icc_eq : Icc a b = (Icc (a : α) b).subtype p :=\n  rfl\n#align subtype_Icc_eq subtype_Icc_eq\n\n",
+ "mem_uIcc":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊓ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊔ » -/\n@[simp]\ntheorem mem_uIcc : x ∈ uIcc a b ↔ «expr ⊓ » a b ≤ x ∧ x ≤ «expr ⊔ » a b :=\n  mem_Icc\n#align mem_uIcc mem_uIcc\n\n",
+ "mem_Ioo":
+ "@[simp]\ntheorem mem_Ioo {a b x : α} : x ∈ Ioo a b ↔ a < x ∧ x < b := by rw [Ioo, ← Finset.mem_def, finset.mem_Ioo]\n#align mem_Ioo mem_Ioo\n\n",
+ "mem_Ioi":
+ "@[simp]\ntheorem mem_Ioi {a x : α} : x ∈ Ioi a ↔ a < x := by rw [Ioi, ← Finset.mem_def, finset.mem_Ioi]\n#align mem_Ioi mem_Ioi\n\n",
+ "mem_Ioc":
+ "@[simp]\ntheorem mem_Ioc {a b x : α} : x ∈ Ioc a b ↔ a < x ∧ x ≤ b := by rw [Ioc, ← Finset.mem_def, finset.mem_Ioc]\n#align mem_Ioc mem_Ioc\n\n",
+ "mem_Iio":
+ "@[simp]\ntheorem mem_Iio {b x : α} : x ∈ Iio b ↔ x < b := by rw [Iio, ← Finset.mem_def, finset.mem_Iio]\n#align mem_Iio mem_Iio\n\n",
+ "mem_Iic":
+ "@[simp]\ntheorem mem_Iic {b x : α} : x ∈ Iic b ↔ x ≤ b := by rw [Iic, ← Finset.mem_def, finset.mem_Iic]\n#align mem_Iic mem_Iic\n\n",
+ "mem_Ico":
+ "@[simp]\ntheorem mem_Ico {a b x : α} : x ∈ Ico a b ↔ a ≤ x ∧ x < b := by rw [Ico, ← Finset.mem_def, finset.mem_Ico]\n#align mem_Ico mem_Ico\n\n",
+ "mem_Ici":
+ "@[simp]\ntheorem mem_Ici {a x : α} : x ∈ Ici a ↔ a ≤ x := by rw [Ici, ← Finset.mem_def, finset.mem_Ici]\n#align mem_Ici mem_Ici\n\n",
+ "mem_Icc":
+ "@[simp]\ntheorem mem_Icc {a b x : α} : x ∈ Icc a b ↔ a ≤ x ∧ x ≤ b := by rw [Icc, ← Finset.mem_def, finset.mem_Icc]\n#align mem_Icc mem_Icc\n\n",
+ "map_subtype_embedding_Ioo":
+ "theorem map_subtype_embedding_Ioo : (Ioo a b).map (Embedding.subtype p) = Ioo a b :=\n  by\n  rw [subtype_Ioo_eq]\n  refine' Finset.subtype_map_of_mem fun x hx => _\n  rw [mem_Ioo] at hx\n  exact hp hx.1.le hx.2.le a.prop b.prop\n#align map_subtype_embedding_Ioo map_subtype_embedding_Ioo\n\n",
+ "map_subtype_embedding_Ioi":
+ "theorem map_subtype_embedding_Ioi : (Ioi a).map (Embedding.subtype p) = Ioi a :=\n  by\n  rw [subtype_Ioi_eq]\n  exact Finset.subtype_map_of_mem fun x hx => hp (mem_Ioi.1 hx).le a.prop\n#align map_subtype_embedding_Ioi map_subtype_embedding_Ioi\n\n",
+ "map_subtype_embedding_Ioc":
+ "theorem map_subtype_embedding_Ioc : (Ioc a b).map (Embedding.subtype p) = Ioc a b :=\n  by\n  rw [subtype_Ioc_eq]\n  refine' Finset.subtype_map_of_mem fun x hx => _\n  rw [mem_Ioc] at hx\n  exact hp hx.1.le hx.2 a.prop b.prop\n#align map_subtype_embedding_Ioc map_subtype_embedding_Ioc\n\n",
+ "map_subtype_embedding_Iio":
+ "theorem map_subtype_embedding_Iio : (Iio a).map (Embedding.subtype p) = Iio a :=\n  by\n  rw [subtype_Iio_eq]\n  exact Finset.subtype_map_of_mem fun x hx => hp (mem_Iio.1 hx).le a.prop\n#align map_subtype_embedding_Iio map_subtype_embedding_Iio\n\n",
+ "map_subtype_embedding_Iic":
+ "theorem map_subtype_embedding_Iic : (Iic a).map (Embedding.subtype p) = Iic a :=\n  by\n  rw [subtype_Iic_eq]\n  exact Finset.subtype_map_of_mem fun x hx => hp (mem_Iic.1 hx) a.prop\n#align map_subtype_embedding_Iic map_subtype_embedding_Iic\n\n",
+ "map_subtype_embedding_Ico":
+ "theorem map_subtype_embedding_Ico : (Ico a b).map (Embedding.subtype p) = Ico a b :=\n  by\n  rw [subtype_Ico_eq]\n  refine' Finset.subtype_map_of_mem fun x hx => _\n  rw [mem_Ico] at hx\n  exact hp hx.1 hx.2.le a.prop b.prop\n#align map_subtype_embedding_Ico map_subtype_embedding_Ico\n\n",
+ "map_subtype_embedding_Ici":
+ "theorem map_subtype_embedding_Ici : (Ici a).map (Embedding.subtype p) = Ici a :=\n  by\n  rw [subtype_Ici_eq]\n  exact Finset.subtype_map_of_mem fun x hx => hp (mem_Ici.1 hx) a.prop\n#align map_subtype_embedding_Ici map_subtype_embedding_Ici\n\n",
+ "map_subtype_embedding_Icc":
+ "theorem map_subtype_embedding_Icc : (Icc a b).map (Embedding.subtype p) = Icc a b :=\n  by\n  rw [subtype_Icc_eq]\n  refine' Finset.subtype_map_of_mem fun x hx => _\n  rw [mem_Icc] at hx\n  exact hp hx.1 hx.2 a.prop b.prop\n#align map_subtype_embedding_Icc map_subtype_embedding_Icc\n\n",
+ "finite_Ioo":
+ "theorem finite_Ioo : (Ioo a b).finite :=\n  (Ioo a b).to_finite\n#align finite_Ioo finite_Ioo\n\n",
+ "finite_Ioi":
+ "theorem finite_Ioi : (Ioi a).finite :=\n  (Ioi a).to_finite\n#align finite_Ioi finite_Ioi\n\n",
+ "finite_Ioc":
+ "theorem finite_Ioc : (Ioc a b).finite :=\n  (Ioc a b).to_finite\n#align finite_Ioc finite_Ioc\n\n",
+ "finite_Iio":
+ "theorem finite_Iio : (Iio b).finite :=\n  (Iio b).to_finite\n#align finite_Iio finite_Iio\n\n",
+ "finite_Iic":
+ "theorem finite_Iic : (Iic b).finite :=\n  (Iic b).to_finite\n#align finite_Iic finite_Iic\n\n",
+ "finite_Ico":
+ "theorem finite_Ico : (Ico a b).finite :=\n  (Ico a b).to_finite\n#align finite_Ico finite_Ico\n\n",
+ "finite_Ici":
+ "theorem finite_Ici : (Ici a).finite :=\n  (Ici a).to_finite\n#align finite_Ici finite_Ici\n\n",
+ "finite_Icc":
+ "theorem finite_Icc : (Icc a b).finite :=\n  (Icc a b).to_finite\n#align finite_Icc finite_Icc\n\n",
+ "coe_uIcc":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `finset.uIcc -/\n@[simp, norm_cast]\ntheorem coe_uIcc (a b : α) : (finset.uIcc a b : set α) = set.uIcc a b :=\n  coe_Icc _ _\n#align coe_uIcc coe_uIcc\n\n",
+ "coe_Ioo":
+ "@[simp, norm_cast]\ntheorem coe_Ioo (a b : α) : (Ioo a b : set α) = Set.Ioo a b :=\n  Set.ext fun _ => mem_Ioo\n#align coe_Ioo coe_Ioo\n\n",
+ "coe_Ioi":
+ "@[simp, norm_cast]\ntheorem coe_Ioi (a : α) : (Ioi a : set α) = Set.Ioi a :=\n  Set.ext fun _ => mem_Ioi\n#align coe_Ioi coe_Ioi\n\n",
+ "coe_Ioc":
+ "@[simp, norm_cast]\ntheorem coe_Ioc (a b : α) : (Ioc a b : set α) = Set.Ioc a b :=\n  Set.ext fun _ => mem_Ioc\n#align coe_Ioc coe_Ioc\n\n",
+ "coe_Iio":
+ "@[simp, norm_cast]\ntheorem coe_Iio (a : α) : (Iio a : set α) = Set.Iio a :=\n  Set.ext fun _ => mem_Iio\n#align coe_Iio coe_Iio\n\n",
+ "coe_Iic":
+ "@[simp, norm_cast]\ntheorem coe_Iic (a : α) : (Iic a : set α) = Set.Iic a :=\n  Set.ext fun _ => mem_Iic\n#align coe_Iic coe_Iic\n\n",
+ "coe_Ico":
+ "@[simp, norm_cast]\ntheorem coe_Ico (a b : α) : (Ico a b : set α) = Set.Ico a b :=\n  Set.ext fun _ => mem_Ico\n#align coe_Ico coe_Ico\n\n",
+ "coe_Ici":
+ "@[simp, norm_cast]\ntheorem coe_Ici (a : α) : (Ici a : set α) = Set.Ici a :=\n  Set.ext fun _ => mem_Ici\n#align coe_Ici coe_Ici\n\n",
+ "coe_Icc":
+ "@[simp, norm_cast]\ntheorem coe_Icc (a b : α) : (Icc a b : set α) = Set.Icc a b :=\n  Set.ext fun _ => mem_Icc\n#align coe_Icc coe_Icc\n\n",
+ "card_uIcc":
+ "theorem card_uIcc [locally_finite_order α] [locally_finite_order β] [decidable_rel ((· ≤ ·) : α × β → α × β → Prop)]\n    (p q : α × β) : (finset.uIcc p q).card = (finset.uIcc p.1 q.1).card * (finset.uIcc p.2 q.2).card :=\n  prod.card_Icc _ _\n#align card_uIcc card_uIcc\n\n",
+ "card_Icc":
+ "theorem card_Icc [locally_finite_order α] [locally_finite_order β] [decidable_rel ((· ≤ ·) : α × β → α × β → Prop)]\n    (p q : α × β) : (finset.Icc p q).card = (finset.Icc p.1 q.1).card * (finset.Icc p.2 q.2).card :=\n  finset.card_product _ _\n#align card_Icc card_Icc\n\n",
+ "Ioo_to_dual":
+ "theorem Ioo_to_dual : Ioo (toDual a) (toDual b) = (Ioo b a).map toDual.to_embedding :=\n  by\n  refine' eq.trans _ map_refl.symm\n  ext c\n  rw [mem_Ioo, mem_Ioo]\n  exact and_comm' _ _\n#align Ioo_to_dual Ioo_to_dual\n\n",
+ "Ioo_of_dual":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵈ» -/\ntheorem Ioo_of_dual (a b : «expr ᵒᵈ» α) : Ioo (ofDual a) (ofDual b) = (Ioo b a).map ofDual.to_embedding :=\n  by\n  refine' eq.trans _ map_refl.symm\n  ext c\n  rw [mem_Ioo, mem_Ioo]\n  exact and_comm' _ _\n#align Ioo_of_dual Ioo_of_dual\n\n",
+ "Ioo_coe_top":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\ntheorem Ioo_coe_top : Ioo (a : WithTop α) («expr⊤») = (Ioi a).map Embedding.some :=\n  rfl\n#align Ioo_coe_top Ioo_coe_top\n\n",
+ "Ioo_coe_coe":
+ "theorem Ioo_coe_coe : Ioo (a : WithBot α) b = (Ioo a b).map Embedding.some :=\n  rfl\n#align Ioo_coe_coe Ioo_coe_coe\n\n",
+ "Ioo_bot_coe":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\ntheorem Ioo_bot_coe : Ioo («expr⊥» : WithBot α) b = (Iio b).map Embedding.some :=\n  rfl\n#align Ioo_bot_coe Ioo_bot_coe\n\n",
+ "Ioi_to_dual":
+ "theorem Ioi_to_dual (a : α) : Ioi (toDual a) = (Iio a).map toDual.to_embedding :=\n  map_refl.symm\n#align Ioi_to_dual Ioi_to_dual\n\n",
+ "Ioi_of_dual":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵈ» -/\ntheorem Ioi_of_dual (a : «expr ᵒᵈ» α) : Ioi (ofDual a) = (Iio a).map ofDual.to_embedding :=\n  map_refl.symm\n#align Ioi_of_dual Ioi_of_dual\n\n",
+ "Ioi_eq_Ioc":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\ntheorem Ioi_eq_Ioc (a : α) : Ioi a = Ioc a («expr⊤») :=\n  rfl\n#align Ioi_eq_Ioc Ioi_eq_Ioc\n\n",
+ "Ioc_to_dual":
+ "theorem Ioc_to_dual : Ioc (toDual a) (toDual b) = (Ico b a).map toDual.to_embedding :=\n  by\n  refine' eq.trans _ map_refl.symm\n  ext c\n  rw [mem_Ioc, mem_Ico]\n  exact and_comm' _ _\n#align Ioc_to_dual Ioc_to_dual\n\n",
+ "Ioc_of_dual":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵈ» -/\ntheorem Ioc_of_dual (a b : «expr ᵒᵈ» α) : Ioc (ofDual a) (ofDual b) = (Ico b a).map ofDual.to_embedding :=\n  by\n  refine' eq.trans _ map_refl.symm\n  ext c\n  rw [mem_Ioc, mem_Ico]\n  exact and_comm' _ _\n#align Ioc_of_dual Ioc_of_dual\n\n",
+ "Ioc_coe_top":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\ntheorem Ioc_coe_top : Ioc (a : WithTop α) («expr⊤») = insert_none (Ioi a) :=\n  rfl\n#align Ioc_coe_top Ioc_coe_top\n\n",
+ "Ioc_coe_coe":
+ "theorem Ioc_coe_coe : Ioc (a : WithBot α) b = (Ioc a b).map Embedding.some :=\n  rfl\n#align Ioc_coe_coe Ioc_coe_coe\n\n",
+ "Ioc_bot_coe":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\ntheorem Ioc_bot_coe : Ioc («expr⊥» : WithBot α) b = (Iic b).map Embedding.some :=\n  rfl\n#align Ioc_bot_coe Ioc_bot_coe\n\n",
+ "Iio_to_dual":
+ "theorem Iio_to_dual (a : α) : Iio (toDual a) = (Ioi a).map toDual.to_embedding :=\n  map_refl.symm\n#align Iio_to_dual Iio_to_dual\n\n",
+ "Iio_of_dual":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵈ» -/\ntheorem Iio_of_dual (a : «expr ᵒᵈ» α) : Iio (ofDual a) = (Ioi a).map ofDual.to_embedding :=\n  map_refl.symm\n#align Iio_of_dual Iio_of_dual\n\n",
+ "Iio_eq_Ico":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\ntheorem Iio_eq_Ico : Iio = Ico («expr⊥» : α) :=\n  rfl\n#align Iio_eq_Ico Iio_eq_Ico\n\n",
+ "Iic_to_dual":
+ "theorem Iic_to_dual (a : α) : Iic (toDual a) = (Ici a).map toDual.to_embedding :=\n  map_refl.symm\n#align Iic_to_dual Iic_to_dual\n\n",
+ "Iic_of_dual":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵈ» -/\ntheorem Iic_of_dual (a : «expr ᵒᵈ» α) : Iic (ofDual a) = (Ici a).map ofDual.to_embedding :=\n  map_refl.symm\n#align Iic_of_dual Iic_of_dual\n\n",
+ "Iic_eq_Icc":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n-- See note [lower priority instance]\ntheorem Iic_eq_Icc : Iic = Icc («expr⊥» : α) :=\n  rfl\n#align Iic_eq_Icc Iic_eq_Icc\n\n",
+ "Ico_to_dual":
+ "theorem Ico_to_dual : Ico (toDual a) (toDual b) = (Ioc b a).map toDual.to_embedding :=\n  by\n  refine' eq.trans _ map_refl.symm\n  ext c\n  rw [mem_Ico, mem_Ioc]\n  exact and_comm' _ _\n#align Ico_to_dual Ico_to_dual\n\n",
+ "Ico_of_dual":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵈ» -/\ntheorem Ico_of_dual (a b : «expr ᵒᵈ» α) : Ico (ofDual a) (ofDual b) = (Ioc b a).map ofDual.to_embedding :=\n  by\n  refine' eq.trans _ map_refl.symm\n  ext c\n  rw [mem_Ico, mem_Ioc]\n  exact and_comm' _ _\n#align Ico_of_dual Ico_of_dual\n\n",
+ "Ico_coe_top":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\ntheorem Ico_coe_top : Ico (a : WithTop α) («expr⊤») = (Ici a).map Embedding.some :=\n  rfl\n#align Ico_coe_top Ico_coe_top\n\n",
+ "Ico_coe_coe":
+ "theorem Ico_coe_coe : Ico (a : WithBot α) b = (Ico a b).map Embedding.some :=\n  rfl\n#align Ico_coe_coe Ico_coe_coe\n\n",
+ "Ico_bot_coe":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\ntheorem Ico_bot_coe : Ico («expr⊥» : WithBot α) b = insert_none (Iio b) :=\n  rfl\n#align Ico_bot_coe Ico_bot_coe\n\n",
+ "Ici_to_dual":
+ "theorem Ici_to_dual (a : α) : Ici (toDual a) = (Iic a).map toDual.to_embedding :=\n  map_refl.symm\n#align Ici_to_dual Ici_to_dual\n\n",
+ "Ici_of_dual":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵈ» -/\ntheorem Ici_of_dual (a : «expr ᵒᵈ» α) : Ici (ofDual a) = (Iic a).map ofDual.to_embedding :=\n  map_refl.symm\n#align Ici_of_dual Ici_of_dual\n\n",
+ "Ici_eq_Icc":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n-- See note [lower priority instance]\ntheorem Ici_eq_Icc (a : α) : Ici a = Icc a («expr⊤») :=\n  rfl\n#align Ici_eq_Icc Ici_eq_Icc\n\n",
+ "Icc_to_dual":
+ "-- Should this be called `locally_finite_order.lift`?\ntheorem Icc_to_dual : Icc (toDual a) (toDual b) = (Icc b a).map toDual.to_embedding :=\n  by\n  refine' eq.trans _ map_refl.symm\n  ext c\n  rw [mem_Icc, mem_Icc]\n  exact and_comm' _ _\n#align Icc_to_dual Icc_to_dual\n\n",
+ "Icc_of_dual":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵈ» -/\ntheorem Icc_of_dual (a b : «expr ᵒᵈ» α) : Icc (ofDual a) (ofDual b) = (Icc b a).map ofDual.to_embedding :=\n  by\n  refine' eq.trans _ map_refl.symm\n  ext c\n  rw [mem_Icc, mem_Icc]\n  exact and_comm' _ _\n#align Icc_of_dual Icc_of_dual\n\n",
+ "Icc_mk_mk":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:177:8: unsupported: ambiguous notation -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `finset.product -/\n@[simp]\ntheorem Icc_mk_mk [locally_finite_order α] [locally_finite_order β] [decidable_rel ((· ≤ ·) : α × β → α × β → Prop)]\n    (a₁ a₂ : α) (b₁ b₂ : β) : finset.Icc (a₁, b₁) (a₂, b₂) = finset.product (finset.Icc a₁ a₂) (finset.Icc b₁ b₂) :=\n  rfl\n#align Icc_mk_mk Icc_mk_mk\n\n",
+ "Icc_eq":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:177:8: unsupported: ambiguous notation -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `finset.product -/\ntheorem Icc_eq [locally_finite_order α] [locally_finite_order β] [decidable_rel ((· ≤ ·) : α × β → α × β → Prop)]\n    (p q : α × β) : finset.Icc p q = finset.product (finset.Icc p.1 q.1) (finset.Icc p.2 q.2) :=\n  rfl\n#align Icc_eq Icc_eq\n\n",
+ "Icc_coe_top":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\ntheorem Icc_coe_top : Icc (a : WithTop α) («expr⊤») = insert_none (Ici a) :=\n  rfl\n#align Icc_coe_top Icc_coe_top\n\n",
+ "Icc_coe_coe":
+ "theorem Icc_coe_coe : Icc (a : WithBot α) b = (Icc a b).map Embedding.some :=\n  rfl\n#align Icc_coe_coe Icc_coe_coe\n\n",
+ "Icc_bot_coe":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\ntheorem Icc_bot_coe : Icc («expr⊥» : WithBot α) b = insert_none (Iic b) :=\n  rfl\n#align Icc_bot_coe Icc_bot_coe\n\n"}

@@ -1,0 +1,26 @@
+{"pos_of_ne_zero_coe":
+ "theorem pos_of_ne_zero_coe (R) [AddMonoidWithOne R] {n : ℕ} [ne_zero (n : R)] : 0 < n :=\n  nat.pos_of_ne_zero (of_neZero_natCast R).out\n#align pos_of_ne_zero_coe pos_of_ne_zero_coe\n\n",
+ "of_ne_zero_coe":
+ "theorem of_ne_zero_coe (R) [AddMonoidWithOne R] {n : ℕ} [h : ne_zero (n : R)] : ne_zero n :=\n  ⟨by\n    cases h\n    rintro rfl\n    · simpa using h⟩\n#align of_ne_zero_coe of_ne_zero_coe\n\n",
+ "nat_cast_ne":
+ "theorem nat_cast_ne (n : ℕ) (R) [AddMonoidWithOne R] [h : ne_zero (n : R)] : (n : R) ≠ 0 :=\n  h.out\n#align nat_cast_ne nat_cast_ne\n\n",
+ "cast_zero":
+ "/-\nCopyright (c) 2014 Mario Carneiro. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Mario Carneiro, Gabriel Ebner\n-/\n-- see note [coercion into rings]\n@[simp, norm_cast]\ntheorem cast_zero : ((0 : ℕ) : R) = 0 :=\n  AddMonoidWithOne.natCast_zero\n#align cast_zero cast_zero\n\n",
+ "cast_two":
+ "theorem cast_two [AddMonoidWithOne R] : ((2 : ℕ) : R) = 2 := by rw [cast_add_one, cast_one, bit0]\n#align cast_two cast_two\n\n",
+ "cast_succ":
+ "-- Lemmas about nat.succ need to get a low priority, so that they are tried last.\n-- This is because `nat.succ _` matches `1`, `3`, `x+1`, etc.\n-- Rewriting would then produce really wrong terms.\n@[simp, norm_cast]\ntheorem cast_succ (n : ℕ) : ((succ n : ℕ) : R) = n + 1 :=\n  AddMonoidWithOne.natCast_succ _\n#align cast_succ cast_succ\n\n",
+ "cast_one":
+ "@[simp, norm_cast]\ntheorem cast_one [AddMonoidWithOne R] : ((1 : ℕ) : R) = 1 := by rw [cast_succ, cast_zero, zero_add]\n#align cast_one cast_one\n\n",
+ "cast_ite":
+ "@[simp, norm_cast]\ntheorem cast_ite (P : Prop) [decidable P] (m n : ℕ) : ((ite P m n : ℕ) : R) = ite P (m : R) (n : R) := by\n  split_ifs <;> rfl\n#align cast_ite cast_ite\n\n",
+ "cast_bit1":
+ "@[simp, norm_cast]\ntheorem cast_bit1 [AddMonoidWithOne R] (n : ℕ) : ((bit1 n : ℕ) : R) = bit1 n := by\n  rw [bit1, cast_add_one, cast_bit0] <;> rfl\n#align cast_bit1 cast_bit1\n\n",
+ "cast_bit0":
+ "@[simp, norm_cast]\ntheorem cast_bit0 [AddMonoidWithOne R] (n : ℕ) : ((bit0 n : ℕ) : R) = bit0 n :=\n  cast_add _ _\n#align cast_bit0 cast_bit0\n\n",
+ "cast_add_one":
+ "theorem cast_add_one (n : ℕ) : ((n + 1 : ℕ) : R) = n + 1 :=\n  cast_succ _\n#align cast_add_one cast_add_one\n\n",
+ "cast_add":
+ "@[simp, norm_cast]\ntheorem cast_add [AddMonoidWithOne R] (m n : ℕ) : ((m + n : ℕ) : R) = m + n := by\n  induction n <;> simp [add_succ, add_assoc, nat.add_zero, *]\n#align cast_add cast_add\n\n",
+ "bin_cast_eq":
+ "@[simp]\ntheorem bin_cast_eq [AddMonoidWithOne R] (n : ℕ) : (Nat.binCast n : R) = ((n : ℕ) : R) :=\n  by\n  rw [Nat.binCast]\n  apply binary_rec _ _ n\n  · rw [binary_rec_zero, cast_zero]\n  · intro b k h\n    rw [binary_rec_eq, h]\n    · cases b <;> simp [bit, bit0, bit1]\n    · simp\n#align bin_cast_eq bin_cast_eq\n\n"}

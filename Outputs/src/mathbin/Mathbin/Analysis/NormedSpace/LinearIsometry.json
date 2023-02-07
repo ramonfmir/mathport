@@ -1,0 +1,242 @@
+{"trans_refl":
+ "@[simp]\ntheorem trans_refl : e.trans (refl R₂ E₂) = e :=\n  ext fun x => rfl\n#align trans_refl trans_refl\n\n",
+ "trans_one":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ₗᵢ[ ] » -/\n@[simp]\ntheorem trans_one : e.trans (1 : «expr ≃ₗᵢ[ ] » E₂ R₂ E₂) = e :=\n  trans_refl _\n#align trans_one trans_one\n\n",
+ "trans_assoc":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ₛₗᵢ[ ] » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ₛₗᵢ[ ] » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ₛₗᵢ[ ] » -/\ntheorem trans_assoc (eEE₂ : «expr ≃ₛₗᵢ[ ] » E σ₁₂ E₂) (eE₂E₃ : «expr ≃ₛₗᵢ[ ] » E₂ σ₂₃ E₃)\n    (eE₃E₄ : «expr ≃ₛₗᵢ[ ] » E₃ σ₃₄ E₄) : eEE₂.trans (eE₂E₃.trans eE₃E₄) = (eEE₂.trans eE₂E₃).trans eE₃E₄ :=\n  rfl\n#align trans_assoc trans_assoc\n\n",
+ "trans_apply":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ₛₗᵢ[ ] » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ₛₗᵢ[ ] » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ₛₗᵢ[ ] » -/\n@[simp]\ntheorem trans_apply (e₁ : «expr ≃ₛₗᵢ[ ] » E σ₁₂ E₂) (e₂ : «expr ≃ₛₗᵢ[ ] » E₂ σ₂₃ E₃) (c : E) :\n    (e₁.trans e₂ : «expr ≃ₛₗᵢ[ ] » E σ₁₃ E₃) c = e₂ (e₁ c) :=\n  rfl\n#align trans_apply trans_apply\n\n",
+ "to_linear_map_injective":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₛₗᵢ[ ] » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₛₗ[ ] » -/\ntheorem to_linear_map_injective : injective (to_linear_map : «expr →ₛₗᵢ[ ] » E σ₁₂ E₂ → «expr →ₛₗ[ ] » E σ₁₂ E₂)\n  | ⟨f, _⟩, ⟨g, _⟩, rfl => rfl\n#align to_linear_map_injective to_linear_map_injective\n\n",
+ "to_linear_map_inj":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₛₗᵢ[ ] » -/\n@[simp]\ntheorem to_linear_map_inj {f g : «expr →ₛₗᵢ[ ] » E σ₁₂ E₂} : f.to_linear_map = g.to_linear_map ↔ f = g :=\n  to_linear_map_injective.eq_iff\n#align to_linear_map_inj to_linear_map_inj\n\n",
+ "to_linear_isometry_injective":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₛₗᵢ[ ] » -/\ntheorem to_linear_isometry_injective : function.injective (to_linear_isometry : _ → «expr →ₛₗᵢ[ ] » E σ₁₂ E₂) :=\n  fun x y h => coe_injective (congr_arg _ h : «expr⇑ » x.to_linear_isometry = _)\n#align to_linear_isometry_injective to_linear_isometry_injective\n\n",
+ "to_linear_isometry_inj":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ₛₗᵢ[ ] » -/\n@[simp]\ntheorem to_linear_isometry_inj {f g : «expr ≃ₛₗᵢ[ ] » E σ₁₂ E₂} : f.to_linear_isometry = g.to_linear_isometry ↔ f = g :=\n  to_linear_isometry_injective.eq_iff\n#align to_linear_isometry_inj to_linear_isometry_inj\n\n",
+ "to_linear_equiv_trans":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ₛₗᵢ[ ] » -/\n@[simp]\ntheorem to_linear_equiv_trans (e' : «expr ≃ₛₗᵢ[ ] » E₂ σ₂₃ E₃) :\n    (e.trans e').to_linear_equiv = e.to_linear_equiv.trans e'.to_linear_equiv :=\n  rfl\n#align to_linear_equiv_trans to_linear_equiv_trans\n\n",
+ "to_linear_equiv_symm":
+ "@[simp]\ntheorem to_linear_equiv_symm : e.to_linear_equiv.symm = e.symm.to_linear_equiv :=\n  rfl\n#align to_linear_equiv_symm to_linear_equiv_symm\n\n",
+ "to_linear_equiv_injective":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ₛₗᵢ[ ] » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ₛₗ[ ] » -/\n-- `σ₂₁` becomes a metavariable, but it's OK since it's an outparam\ntheorem to_linear_equiv_injective : injective (to_linear_equiv : «expr ≃ₛₗᵢ[ ] » E σ₁₂ E₂ → «expr ≃ₛₗ[ ] » E σ₁₂ E₂)\n  | ⟨e, _⟩, ⟨_, _⟩, rfl => rfl\n#align to_linear_equiv_injective to_linear_equiv_injective\n\n",
+ "to_linear_equiv_inj":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ₛₗᵢ[ ] » -/\n@[simp]\ntheorem to_linear_equiv_inj {f g : «expr ≃ₛₗᵢ[ ] » E σ₁₂ E₂} : f.to_linear_equiv = g.to_linear_equiv ↔ f = g :=\n  to_linear_equiv_injective.eq_iff\n#align to_linear_equiv_inj to_linear_equiv_inj\n\n",
+ "to_isometry_equiv_symm":
+ "@[simp]\ntheorem to_isometry_equiv_symm : e.to_isometry_equiv.symm = e.symm.to_isometry_equiv :=\n  rfl\n#align to_isometry_equiv_symm to_isometry_equiv_symm\n\n",
+ "to_isometry_equiv_injective":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ₛₗᵢ[ ] » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ᵢ » -/\ntheorem to_isometry_equiv_injective :\n    function.injective (to_isometry_equiv : «expr ≃ₛₗᵢ[ ] » E σ₁₂ E₂ → «expr ≃ᵢ » E E₂) := fun x y h =>\n  coe_injective (congr_arg _ h : «expr⇑ » x.to_isometry_equiv = _)\n#align to_isometry_equiv_injective to_isometry_equiv_injective\n\n",
+ "to_isometry_equiv_inj":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ₛₗᵢ[ ] » -/\n@[simp]\ntheorem to_isometry_equiv_inj {f g : «expr ≃ₛₗᵢ[ ] » E σ₁₂ E₂} : f.to_isometry_equiv = g.to_isometry_equiv ↔ f = g :=\n  to_isometry_equiv_injective.eq_iff\n#align to_isometry_equiv_inj to_isometry_equiv_inj\n\n",
+ "to_homeomorph_symm":
+ "@[simp]\ntheorem to_homeomorph_symm : e.to_homeomorph.symm = e.symm.to_homeomorph :=\n  rfl\n#align to_homeomorph_symm to_homeomorph_symm\n\n",
+ "to_homeomorph_injective":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ₛₗᵢ[ ] » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ₜ » -/\ntheorem to_homeomorph_injective : function.injective (to_homeomorph : «expr ≃ₛₗᵢ[ ] » E σ₁₂ E₂ → «expr ≃ₜ » E E₂) :=\n  fun x y h => coe_injective (congr_arg _ h : «expr⇑ » x.to_homeomorph = _)\n#align to_homeomorph_injective to_homeomorph_injective\n\n",
+ "to_homeomorph_inj":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ₛₗᵢ[ ] » -/\n@[simp]\ntheorem to_homeomorph_inj {f g : «expr ≃ₛₗᵢ[ ] » E σ₁₂ E₂} : f.to_homeomorph = g.to_homeomorph ↔ f = g :=\n  to_homeomorph_injective.eq_iff\n#align to_homeomorph_inj to_homeomorph_inj\n\n",
+ "to_continuous_linear_map_injective":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →SL[ ] » -/\ntheorem to_continuous_linear_map_injective :\n    function.injective (to_continuous_linear_map : _ → «expr →SL[ ] » E σ₁₂ E₂) := fun x y h =>\n  coe_injective (congr_arg _ h : «expr⇑ » x.to_continuous_linear_map = _)\n#align to_continuous_linear_map_injective to_continuous_linear_map_injective\n\n",
+ "to_continuous_linear_map_inj":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₛₗᵢ[ ] » -/\n@[simp]\ntheorem to_continuous_linear_map_inj {f g : «expr →ₛₗᵢ[ ] » E σ₁₂ E₂} :\n    f.to_continuous_linear_map = g.to_continuous_linear_map ↔ f = g :=\n  to_continuous_linear_map_injective.eq_iff\n#align to_continuous_linear_map_inj to_continuous_linear_map_inj\n\n",
+ "to_continuous_linear_equiv_injective":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃SL[ ] » -/\ntheorem to_continuous_linear_equiv_injective :\n    function.injective (to_continuous_linear_equiv : _ → «expr ≃SL[ ] » E σ₁₂ E₂) := fun x y h =>\n  coe_injective (congr_arg _ h : «expr⇑ » x.to_continuous_linear_equiv = _)\n#align to_continuous_linear_equiv_injective to_continuous_linear_equiv_injective\n\n",
+ "to_continuous_linear_equiv_inj":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ₛₗᵢ[ ] » -/\n@[simp]\ntheorem to_continuous_linear_equiv_inj {f g : «expr ≃ₛₗᵢ[ ] » E σ₁₂ E₂} :\n    f.to_continuous_linear_equiv = g.to_continuous_linear_equiv ↔ f = g :=\n  to_continuous_linear_equiv_injective.eq_iff\n#align to_continuous_linear_equiv_inj to_continuous_linear_equiv_inj\n\n",
+ "symm_trans_self":
+ "@[simp]\ntheorem symm_trans_self : e.symm.trans e = refl R₂ E₂ :=\n  ext e.apply_symm_apply\n#align symm_trans_self symm_trans_self\n\n",
+ "symm_trans":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ₛₗᵢ[ ] » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ₛₗᵢ[ ] » -/\n@[simp]\ntheorem symm_trans (e₁ : «expr ≃ₛₗᵢ[ ] » E σ₁₂ E₂) (e₂ : «expr ≃ₛₗᵢ[ ] » E₂ σ₂₃ E₃) :\n    (e₁.trans e₂).symm = e₂.symm.trans e₁.symm :=\n  rfl\n#align symm_trans symm_trans\n\n",
+ "symm_symm":
+ "@[simp]\ntheorem symm_symm : e.symm.symm = e :=\n  ext fun x => rfl\n#align symm_symm symm_symm\n\n",
+ "symm_neg":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ₗᵢ[ ] » -/\n@[simp]\ntheorem symm_neg : (neg R : «expr ≃ₗᵢ[ ] » E R E).symm = neg R :=\n  rfl\n#align symm_neg symm_neg\n\n",
+ "symm_comp_self":
+ "@[simp]\ntheorem symm_comp_self : e.symm ∘ e = id :=\n  funext e.symm_apply_apply\n#align symm_comp_self symm_comp_self\n\n",
+ "symm_apply_apply":
+ "@[simp]\ntheorem symm_apply_apply (x : E) : e.symm (e x) = x :=\n  e.to_linear_equiv.symm_apply_apply x\n#align symm_apply_apply symm_apply_apply\n\n",
+ "surjective":
+ "protected theorem surjective : surjective e :=\n  e.1.surjective\n#align surjective surjective\n\n",
+ "subtypeₗᵢ_to_linear_map":
+ "@[simp]\ntheorem subtypeₗᵢ_to_linear_map : p.subtypeₗᵢ.to_linear_map = p.subtype :=\n  rfl\n#align subtypeₗᵢ_to_linear_map subtypeₗᵢ_to_linear_map\n\n",
+ "subtypeₗᵢ_to_continuous_linear_map":
+ "@[simp]\ntheorem subtypeₗᵢ_to_continuous_linear_map : p.subtypeₗᵢ.to_continuous_linear_map = p.subtypeL :=\n  rfl\n#align subtypeₗᵢ_to_continuous_linear_map subtypeₗᵢ_to_continuous_linear_map\n\n",
+ "self_trans_symm":
+ "@[simp]\ntheorem self_trans_symm : e.trans e.symm = refl R E :=\n  ext e.symm_apply_apply\n#align self_trans_symm self_trans_symm\n\n",
+ "self_comp_symm":
+ "@[simp]\ntheorem self_comp_symm : e ∘ e.symm = id :=\n  e.symm.symm_comp_self\n#align self_comp_symm self_comp_symm\n\n",
+ "refl_trans":
+ "@[simp]\ntheorem refl_trans : (refl R E).trans e = e :=\n  ext fun x => rfl\n#align refl_trans refl_trans\n\n",
+ "refl_mul":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ₗᵢ[ ] » -/\n@[simp]\ntheorem refl_mul (e : «expr ≃ₗᵢ[ ] » E R E) : refl _ _ * e = e :=\n  trans_refl _\n#align refl_mul refl_mul\n\n",
+ "range_eq_univ":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ₛₗᵢ[ ] » -/\ntheorem range_eq_univ (e : «expr ≃ₛₗᵢ[ ] » E σ₁₂ E₂) : Set.range e = Set.univ :=\n  by\n  rw [← coe_to_isometry_equiv]\n  exact isometry_equiv.range_eq_univ _\n#align range_eq_univ range_eq_univ\n\n",
+ "preimage_sphere":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\n@[simp]\ntheorem preimage_sphere (x : E₂) (r : exprℝ) : «expr ⁻¹' » e (metric.sphere x r) = metric.sphere (e.symm x) r :=\n  e.to_isometry_equiv.preimage_sphere x r\n#align preimage_sphere preimage_sphere\n\n",
+ "preimage_closed_ball":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\n@[simp]\ntheorem preimage_closed_ball (x : E₂) (r : exprℝ) :\n    «expr ⁻¹' » e (metric.closed_ball x r) = metric.closed_ball (e.symm x) r :=\n  e.to_isometry_equiv.preimage_closed_ball x r\n#align preimage_closed_ball preimage_closed_ball\n\n",
+ "preimage_ball":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\n@[simp]\ntheorem preimage_ball (x : E₂) (r : exprℝ) : «expr ⁻¹' » e (metric.ball x r) = metric.ball (e.symm x) r :=\n  e.to_isometry_equiv.preimage_ball x r\n#align preimage_ball preimage_ball\n\n",
+ "one_trans":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ₗᵢ[ ] » -/\n@[simp]\ntheorem one_trans : (1 : «expr ≃ₗᵢ[ ] » E R E).trans e = e :=\n  refl_trans _\n#align one_trans one_trans\n\n",
+ "one_def":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ₗᵢ[ ] » -/\ntheorem one_def : (1 : «expr ≃ₗᵢ[ ] » E R E) = refl _ _ :=\n  rfl\n#align one_def one_def\n\n",
+ "of_eq_symm":
+ "@[simp]\ntheorem of_eq_symm (h : p = q) : (of_eq p q h).symm = of_eq q p h.symm :=\n  rfl\n#align of_eq_symm of_eq_symm\n\n",
+ "of_eq_rfl":
+ "@[simp]\ntheorem of_eq_rfl : of_eq p p rfl = linear_isometry_equiv.refl R' p := by ext <;> rfl\n#align of_eq_rfl of_eq_rfl\n\n",
+ "norm_map":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr‖ ‖» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr‖ ‖» -/\n@[simp]\ntheorem norm_map (x : E) : «expr‖ ‖» (e x) = «expr‖ ‖» x :=\n  e.norm_map' x\n#align norm_map norm_map\n\n",
+ "nnnorm_map":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr‖ ‖₊» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr‖ ‖₊» -/\n@[simp]\ntheorem nnnorm_map (x : E) : «expr‖ ‖₊» (e x) = «expr‖ ‖₊» x :=\n  semilinear_isometry_class.nnnorm_map e x\n#align nnnorm_map nnnorm_map\n\n",
+ "mul_refl":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ₗᵢ[ ] » -/\n@[simp]\ntheorem mul_refl (e : «expr ≃ₗᵢ[ ] » E R E) : e * refl _ _ = e :=\n  refl_trans _\n#align mul_refl mul_refl\n\n",
+ "mul_def":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ₗᵢ[ ] » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ₗᵢ[ ] » -/\ntheorem mul_def (e e' : «expr ≃ₗᵢ[ ] » E R E) : (e * e' : «expr ≃ₗᵢ[ ] » E R E) = e'.trans e :=\n  rfl\n#align mul_def mul_def\n\n",
+ "map_zero":
+ "#print map_zero /-\n@[simp]\ntheorem map_zero : e 0 = 0 :=\n  e.1.map_zero\n#align map_zero map_zero\n-/\n\n",
+ "map_sub":
+ "#print map_sub /-\n@[simp]\ntheorem map_sub (x y : E) : e (x - y) = e x - e y :=\n  e.1.map_sub x y\n#align map_sub map_sub\n-/\n\n",
+ "map_smulₛₗ":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n@[simp]\ntheorem map_smulₛₗ (c : R) (x : E) : e («expr • » c x) = «expr • » (σ₁₂ c) (e x) :=\n  e.1.map_smulₛₗ c x\n#align map_smulₛₗ map_smulₛₗ\n\n",
+ "map_smul":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ₗᵢ[ ] » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n@[simp]\ntheorem map_smul [Module R E₂] {e : «expr ≃ₗᵢ[ ] » E R E₂} (c : R) (x : E) : e («expr • » c x) = «expr • » c (e x) :=\n  e.1.map_smul c x\n#align map_smul map_smul\n\n",
+ "map_neg":
+ "#print map_neg /-\n@[simp]\nprotected theorem map_neg (x : E) : f (-x) = -f x :=\n  f.to_linear_map.map_neg x\n#align map_neg map_neg\n-/\n\n",
+ "map_ne":
+ "theorem map_ne {x y : E} (h : x ≠ y) : e x ≠ e y :=\n  e.injective.ne h\n#align map_ne map_ne\n\n",
+ "map_eq_zero_iff":
+ "#print map_eq_zero_iff /-\n@[simp]\ntheorem map_eq_zero_iff {x : E} : e x = 0 ↔ x = 0 :=\n  e.to_linear_equiv.map_eq_zero_iff\n#align map_eq_zero_iff map_eq_zero_iff\n-/\n\n",
+ "map_eq_iff":
+ "@[simp]\ntheorem map_eq_iff {x y : E} : e x = e y ↔ x = y :=\n  e.injective.eq_iff\n#align map_eq_iff map_eq_iff\n\n",
+ "map_add":
+ "#print map_add /-\n@[simp]\ntheorem map_add (x y : E) : e (x + y) = e x + e y :=\n  e.1.map_add x y\n#align map_add map_add\n-/\n\n",
+ "lipschitz":
+ "protected theorem lipschitz : lipschitz_with 1 e :=\n  e.isometry.lipschitz\n#align lipschitz lipschitz\n\n",
+ "isometry":
+ "protected theorem isometry : isometry e :=\n  e.to_linear_isometry.isometry\n#align isometry isometry\n\n",
+ "is_complete_map_iff'":
+ "theorem is_complete_map_iff' [semilinear_isometry_class 𝓕 σ₁₂ E E₂] (f : 𝓕) [RingHomSurjective σ₁₂]\n    {p : submodule R E} : is_complete (p.map f : set E₂) ↔ is_complete (p : set E) :=\n  is_complete_image_iff f\n#align is_complete_map_iff' is_complete_map_iff'\n\n",
+ "is_complete_map_iff":
+ "theorem is_complete_map_iff [RingHomSurjective σ₁₂] {p : submodule R E} :\n    is_complete (p.map f.to_linear_map : set E₂) ↔ is_complete (p : set E) :=\n  f.is_complete_image_iff\n#align is_complete_map_iff is_complete_map_iff\n\n",
+ "is_complete_image_iff":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\n@[simp]\ntheorem is_complete_image_iff [semilinear_isometry_class 𝓕 σ₁₂ E E₂] (f : 𝓕) {s : set E} :\n    is_complete («expr '' » f s) ↔ is_complete s :=\n  is_complete_image_iff (semilinear_isometry_class.isometry f).uniform_inducing\n#align is_complete_image_iff is_complete_image_iff\n\n",
+ "inv_def":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ₗᵢ[ ] » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ₗᵢ[ ] » -/\ntheorem inv_def (e : «expr ≃ₗᵢ[ ] » E R E) : (e⁻¹ : «expr ≃ₗᵢ[ ] » E R E) = e.symm :=\n  rfl\n#align inv_def inv_def\n\n",
+ "injective":
+ "protected theorem injective : injective e :=\n  e.1.injective\n#align injective injective\n\n",
+ "image_sphere":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\n@[simp]\ntheorem image_sphere (x : E) (r : exprℝ) : «expr '' » e (metric.sphere x r) = metric.sphere (e x) r :=\n  e.to_isometry_equiv.image_sphere x r\n#align image_sphere image_sphere\n\n",
+ "image_eq_preimage":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\ntheorem image_eq_preimage (s : set E) : «expr '' » e s = «expr ⁻¹' » e.symm s :=\n  e.to_linear_equiv.image_eq_preimage s\n#align image_eq_preimage image_eq_preimage\n\n",
+ "image_closed_ball":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\n@[simp]\ntheorem image_closed_ball (x : E) (r : exprℝ) : «expr '' » e (metric.closed_ball x r) = metric.closed_ball (e x) r :=\n  e.to_isometry_equiv.image_closed_ball x r\n#align image_closed_ball image_closed_ball\n\n",
+ "image_ball":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\n@[simp]\ntheorem image_ball (x : E) (r : exprℝ) : «expr '' » e (metric.ball x r) = metric.ball (e x) r :=\n  e.to_isometry_equiv.image_ball x r\n#align image_ball image_ball\n\n",
+ "id_to_linear_map":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₗ[ ] » -/\n@[simp]\ntheorem id_to_linear_map : (id.to_linear_map : «expr →ₗ[ ] » E R E) = linear_map.id :=\n  rfl\n#align id_to_linear_map id_to_linear_map\n\n",
+ "id_to_continuous_linear_map":
+ "@[simp]\ntheorem id_to_continuous_linear_map : id.to_continuous_linear_map = continuous_linear_map.id R E :=\n  rfl\n#align id_to_continuous_linear_map id_to_continuous_linear_map\n\n",
+ "id_comp":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₗᵢ[ ] » -/\n@[simp]\ntheorem id_comp : (id : «expr →ₗᵢ[ ] » E₂ R₂ E₂).comp f = f :=\n  ext fun x => rfl\n#align id_comp id_comp\n\n",
+ "id_apply":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₗᵢ[ ] » -/\n@[simp]\ntheorem id_apply (x : E) : (id : «expr →ₗᵢ[ ] » E R E) x = x :=\n  rfl\n#align id_apply id_apply\n\n",
+ "ext_linear_isometry_equiv":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ₛₗᵢ[ ] » -/\n/-- Two linear isometric equivalences are equal if they are equal on basis vectors. -/\ntheorem basis.ext_linear_isometry_equiv {ι : Type _} (b : basis ι R E) {f₁ f₂ : «expr ≃ₛₗᵢ[ ] » E σ₁₂ E₂}\n    (h : ∀ i, f₁ (b i) = f₂ (b i)) : f₁ = f₂ :=\n  linear_isometry_equiv.to_linear_equiv_injective <| b.ext' h\n#align basis.ext_linear_isometry_equiv basis.ext_linear_isometry_equiv\n\n",
+ "ext_linear_isometry":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₛₗᵢ[ ] » -/\n/-- Two linear isometries are equal if they are equal on basis vectors. -/\ntheorem basis.ext_linear_isometry {ι : Type _} (b : basis ι R E) {f₁ f₂ : «expr →ₛₗᵢ[ ] » E σ₁₂ E₂}\n    (h : ∀ i, f₁ (b i) = f₂ (b i)) : f₁ = f₂ :=\n  linear_isometry.to_linear_map_injective <| b.ext h\n#align basis.ext_linear_isometry basis.ext_linear_isometry\n\n",
+ "ext":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ₛₗᵢ[ ] » -/\n@[ext]\ntheorem ext {e e' : «expr ≃ₛₗᵢ[ ] » E σ₁₂ E₂} (h : ∀ x, e x = e' x) : e = e' :=\n  to_linear_equiv_injective <| linear_equiv.ext h\n#align ext ext\n\n",
+ "edist_map":
+ "@[simp]\ntheorem edist_map (x y : E) : edist (e x) (e y) = edist x y :=\n  e.to_linear_isometry.edist_map x y\n#align edist_map edist_map\n\n",
+ "ediam_range":
+ "theorem ediam_range : emetric.diam (range f) = emetric.diam (univ : set E) :=\n  f.isometry.ediam_range\n#align ediam_range ediam_range\n\n",
+ "ediam_image":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\n@[simp]\ntheorem ediam_image (s : set E) : emetric.diam («expr '' » e s) = emetric.diam s :=\n  e.isometry.ediam_image s\n#align ediam_image ediam_image\n\n",
+ "dist_map":
+ "@[simp]\ntheorem dist_map (x y : E) : dist (e x) (e y) = dist x y :=\n  e.to_linear_isometry.dist_map x y\n#align dist_map dist_map\n\n",
+ "diam_range":
+ "theorem diam_range : metric.diam (range f) = metric.diam (univ : set E) :=\n  isometry.diam_range (linear_isometry.isometry f)\n#align diam_range diam_range\n\n",
+ "diam_image":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\n@[simp]\ntheorem diam_image (s : set E) : metric.diam («expr '' » e s) = metric.diam s :=\n  e.isometry.diam_image s\n#align diam_image diam_image\n\n",
+ "continuous_within_at":
+ "protected theorem continuous_within_at {s x} : continuous_within_at e s x :=\n  e.continuous.continuous_within_at\n#align continuous_within_at continuous_within_at\n\n",
+ "continuous_on":
+ "protected theorem continuous_on {s} : continuous_on e s :=\n  e.continuous.continuous_on\n#align continuous_on continuous_on\n\n",
+ "continuous_at":
+ "protected theorem continuous_at {x} : continuous_at e x :=\n  e.continuous.continuous_at\n#align continuous_at continuous_at\n\n",
+ "continuous":
+ "protected theorem continuous : continuous e :=\n  e.isometry.continuous\n#align continuous continuous\n\n",
+ "congr_fun":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ₛₗᵢ[ ] » -/\n#print congr_fun /-\nprotected theorem congr_fun {f g : «expr ≃ₛₗᵢ[ ] » E σ₁₂ E₂} (h : f = g) (x : E) : f x = g x :=\n  h ▸ rfl\n#align congr_fun congr_fun\n-/\n\n",
+ "congr_arg":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ₛₗᵢ[ ] » -/\n#print congr_arg /-\nprotected theorem congr_arg {f : «expr ≃ₛₗᵢ[ ] » E σ₁₂ E₂} : ∀ {x x' : E}, x = x' → f x = f x'\n  | _, _, rfl => rfl\n#align congr_arg congr_arg\n-/\n\n",
+ "comp_id":
+ "@[simp]\ntheorem comp_id : f.comp id = f :=\n  ext fun x => rfl\n#align comp_id comp_id\n\n",
+ "comp_continuous_on_iff":
+ "@[simp]\ntheorem comp_continuous_on_iff {f : α → E} {s : set α} : continuous_on (e ∘ f) s ↔ continuous_on f s :=\n  e.isometry.comp_continuous_on_iff\n#align comp_continuous_on_iff comp_continuous_on_iff\n\n",
+ "comp_continuous_iff":
+ "@[simp]\ntheorem comp_continuous_iff {f : α → E} : continuous (e ∘ f) ↔ continuous f :=\n  e.isometry.comp_continuous_iff\n#align comp_continuous_iff comp_continuous_iff\n\n",
+ "comp_assoc":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₛₗᵢ[ ] » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₛₗᵢ[ ] » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₛₗᵢ[ ] » -/\ntheorem comp_assoc (f : «expr →ₛₗᵢ[ ] » E₃ σ₃₄ E₄) (g : «expr →ₛₗᵢ[ ] » E₂ σ₂₃ E₃) (h : «expr →ₛₗᵢ[ ] » E σ₁₂ E₂) :\n    (f.comp g).comp h = f.comp (g.comp h) :=\n  rfl\n#align comp_assoc comp_assoc\n\n",
+ "coe_trans":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ₛₗᵢ[ ] » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ₛₗᵢ[ ] » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n@[simp]\ntheorem coe_trans (e₁ : «expr ≃ₛₗᵢ[ ] » E σ₁₂ E₂) (e₂ : «expr ≃ₛₗᵢ[ ] » E₂ σ₂₃ E₃) : «expr⇑ » (e₁.trans e₂) = e₂ ∘ e₁ :=\n  rfl\n#align coe_trans coe_trans\n\n",
+ "coe_to_linear_map":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n@[simp]\ntheorem coe_to_linear_map : «expr⇑ » f.to_linear_map = f :=\n  rfl\n#align coe_to_linear_map coe_to_linear_map\n\n",
+ "coe_to_linear_isometry":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n@[simp]\ntheorem coe_to_linear_isometry : «expr⇑ » e.to_linear_isometry = e :=\n  rfl\n#align coe_to_linear_isometry coe_to_linear_isometry\n\n",
+ "coe_to_linear_equiv":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ₛₗᵢ[ ] » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n@[simp]\ntheorem coe_to_linear_equiv (e : «expr ≃ₛₗᵢ[ ] » E σ₁₂ E₂) : «expr⇑ » e.to_linear_equiv = e :=\n  rfl\n#align coe_to_linear_equiv coe_to_linear_equiv\n\n",
+ "coe_to_isometry_equiv":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n@[simp]\ntheorem coe_to_isometry_equiv : «expr⇑ » e.to_isometry_equiv = e :=\n  rfl\n#align coe_to_isometry_equiv coe_to_isometry_equiv\n\n",
+ "coe_to_homeomorph":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n@[simp]\ntheorem coe_to_homeomorph : «expr⇑ » e.to_homeomorph = e :=\n  rfl\n#align coe_to_homeomorph coe_to_homeomorph\n\n",
+ "coe_to_continuous_linear_map":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n@[simp]\ntheorem coe_to_continuous_linear_map : «expr⇑ » f.to_continuous_linear_map = f :=\n  rfl\n#align coe_to_continuous_linear_map coe_to_continuous_linear_map\n\n",
+ "coe_to_continuous_linear_equiv":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n@[simp]\ntheorem coe_to_continuous_linear_equiv : «expr⇑ » e.to_continuous_linear_equiv = e :=\n  rfl\n#align coe_to_continuous_linear_equiv coe_to_continuous_linear_equiv\n\n",
+ "coe_symm_trans":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ₛₗᵢ[ ] » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ₛₗᵢ[ ] » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\ntheorem coe_symm_trans (e₁ : «expr ≃ₛₗᵢ[ ] » E σ₁₂ E₂) (e₂ : «expr ≃ₛₗᵢ[ ] » E₂ σ₂₃ E₃) :\n    «expr⇑ » (e₁.trans e₂).symm = e₁.symm ∘ e₂.symm :=\n  rfl\n#align coe_symm_trans coe_symm_trans\n\n",
+ "coe_subtypeₗᵢ":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n@[simp]\ntheorem coe_subtypeₗᵢ : «expr⇑ » p.subtypeₗᵢ = p.subtype :=\n  rfl\n#align coe_subtypeₗᵢ coe_subtypeₗᵢ\n\n",
+ "coe_refl":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n@[simp]\ntheorem coe_refl : «expr⇑ » (refl R E) = id :=\n  rfl\n#align coe_refl coe_refl\n\n",
+ "coe_prod_assoc_symm":
+ "@[simp]\ntheorem coe_prod_assoc_symm [Module R E₂] [Module R E₃] :\n    ((prod_assoc R E E₂ E₃).symm : E × E₂ × E₃ → (E × E₂) × E₃) = (Equiv.prodAssoc E E₂ E₃).symm :=\n  rfl\n#align coe_prod_assoc_symm coe_prod_assoc_symm\n\n",
+ "coe_prod_assoc":
+ "@[simp]\ntheorem coe_prod_assoc [Module R E₂] [Module R E₃] :\n    (prod_assoc R E E₂ E₃ : (E × E₂) × E₃ → E × E₂ × E₃) = Equiv.prodAssoc E E₂ E₃ :=\n  rfl\n#align coe_prod_assoc coe_prod_assoc\n\n",
+ "coe_one":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ₗᵢ[ ] » -/\n@[simp]\ntheorem coe_one : «expr⇑ » (1 : «expr ≃ₗᵢ[ ] » E R E) = id :=\n  rfl\n#align coe_one coe_one\n\n",
+ "coe_of_surjective":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₛₗᵢ[ ] » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n@[simp]\ntheorem coe_of_surjective (f : «expr →ₛₗᵢ[ ] » F σ₁₂ E₂) (hfr : function.surjective f) :\n    «expr⇑ » (linear_isometry_equiv.of_surjective f hfr) = f :=\n  by\n  ext\n  rfl\n#align coe_of_surjective coe_of_surjective\n\n",
+ "coe_of_linear_isometry_symm":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₛₗᵢ[ ] » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₛₗ[ ] » -/\n@[simp]\ntheorem coe_of_linear_isometry_symm (f : «expr →ₛₗᵢ[ ] » E σ₁₂ E₂) (g : «expr →ₛₗ[ ] » E₂ σ₂₁ E)\n    (h₁ : f.to_linear_map.comp g = linear_map.id) (h₂ : g.comp f.to_linear_map = linear_map.id) :\n    ((of_linear_isometry f g h₁ h₂).symm : E₂ → E) = (g : E₂ → E) :=\n  rfl\n#align coe_of_linear_isometry_symm coe_of_linear_isometry_symm\n\n",
+ "coe_of_linear_isometry":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₛₗᵢ[ ] » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₛₗ[ ] » -/\n@[simp]\ntheorem coe_of_linear_isometry (f : «expr →ₛₗᵢ[ ] » E σ₁₂ E₂) (g : «expr →ₛₗ[ ] » E₂ σ₂₁ E)\n    (h₁ : f.to_linear_map.comp g = linear_map.id) (h₂ : g.comp f.to_linear_map = linear_map.id) :\n    (of_linear_isometry f g h₁ h₂ : E → E₂) = (f : E → E₂) :=\n  rfl\n#align coe_of_linear_isometry coe_of_linear_isometry\n\n",
+ "coe_of_eq_apply":
+ "@[simp]\ntheorem coe_of_eq_apply (h : p = q) (x : p) : (of_eq p q h x : E) = x :=\n  rfl\n#align coe_of_eq_apply coe_of_eq_apply\n\n",
+ "coe_neg":
+ "@[simp]\ntheorem coe_neg : (neg R : E → E) = fun x => -x :=\n  rfl\n#align coe_neg coe_neg\n\n",
+ "coe_mul":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ₗᵢ[ ] » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n@[simp]\ntheorem coe_mul (e e' : «expr ≃ₗᵢ[ ] » E R E) : «expr⇑ » (e * e') = e ∘ e' :=\n  rfl\n#align coe_mul coe_mul\n\n",
+ "coe_mk":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ₛₗ[ ] » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr‖ ‖» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr‖ ‖» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n@[simp]\ntheorem coe_mk (e : «expr ≃ₛₗ[ ] » E σ₁₂ E₂) (he : ∀ x, «expr‖ ‖» (e x) = «expr‖ ‖» x) : «expr⇑ » (mk e he) = e :=\n  rfl\n#align coe_mk coe_mk\n\n",
+ "coe_inv":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ₗᵢ[ ] » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n@[simp]\ntheorem coe_inv (e : «expr ≃ₗᵢ[ ] » E R E) : «expr⇑ » e⁻¹ = e.symm :=\n  rfl\n#align coe_inv coe_inv\n\n",
+ "coe_injective":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ₛₗᵢ[ ] » -/\ntheorem coe_injective : @function.injective («expr ≃ₛₗᵢ[ ] » E σ₁₂ E₂) (E → E₂) coe_fn :=\n  fun_like.coe_injective\n#align coe_injective coe_injective\n\n",
+ "coe_id":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₗᵢ[ ] » -/\n@[simp]\ntheorem coe_id : ((id : «expr →ₗᵢ[ ] » E R E) : E → E) = _root_.id :=\n  rfl\n#align coe_id coe_id\n\n",
+ "coe_comp":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₛₗᵢ[ ] » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₛₗᵢ[ ] » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n@[simp]\ntheorem coe_comp (g : «expr →ₛₗᵢ[ ] » E₂ σ₂₃ E₃) (f : «expr →ₛₗᵢ[ ] » E σ₁₂ E₂) : «expr⇑ » (g.comp f) = g ∘ f :=\n  rfl\n#align coe_comp coe_comp\n\n",
+ "coe_coe''":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →SL[ ] » -/\n@[simp]\ntheorem coe_coe'' : «expr⇑ » (e : «expr →SL[ ] » E σ₁₂ E₂) = e :=\n  rfl\n#align coe_coe'' coe_coe''\n\n",
+ "coe_coe'":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃SL[ ] » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →SL[ ] » -/\n@[simp]\ntheorem coe_coe' : ((e : «expr ≃SL[ ] » E σ₁₂ E₂) : «expr →SL[ ] » E σ₁₂ E₂) = e :=\n  rfl\n#align coe_coe' coe_coe'\n\n",
+ "coe_coe":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃SL[ ] » -/\n@[simp]\ntheorem coe_coe : «expr⇑ » (e : «expr ≃SL[ ] » E σ₁₂ E₂) = e :=\n  rfl\n#align coe_coe coe_coe\n\n",
+ "bijective":
+ "protected theorem bijective : bijective e :=\n  e.1.bijective\n#align bijective bijective\n\n",
+ "apply_symm_apply":
+ "@[simp]\ntheorem apply_symm_apply (x : E₂) : e (e.symm x) = x :=\n  e.to_linear_equiv.apply_symm_apply x\n#align apply_symm_apply apply_symm_apply\n\n",
+ "antilipschitz":
+ "protected theorem antilipschitz : antilipschitz_with 1 e :=\n  e.isometry.antilipschitz\n#align antilipschitz antilipschitz\n\n"}

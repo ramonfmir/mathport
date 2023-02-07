@@ -1,0 +1,22 @@
+{"unop":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵖ» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⟶ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⟶ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⟶ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⟶ » -/\n/-- The commutative square associated to a commutative square in the opposite category. -/\ntheorem unop {W X Y Z : «expr ᵒᵖ» C} {f : «expr ⟶ » W X} {g : «expr ⟶ » W Y} {h : «expr ⟶ » X Z} {i : «expr ⟶ » Y Z}\n    (p : comm_sq f g h i) : comm_sq i.unop h.unop g.unop f.unop :=\n  ⟨by simp only [← unop_comp, p.w]⟩\n#align unop unop\n\n",
+ "op":
+ "/-- The commutative square in the opposite category associated to a commutative square. -/\ntheorem op (p : comm_sq f g h i) : comm_sq i.op h.op g.op f.op :=\n  ⟨by simp only [← op_comp, p.w]⟩\n#align op op\n\n",
+ "of_arrow":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⟶ » -/\ntheorem of_arrow {f g : arrow C} (h : «expr ⟶ » f g) : comm_sq f.hom h.left h.right g.hom :=\n  ⟨h.w.symm⟩\n#align of_arrow of_arrow\n\n",
+ "mk'":
+ "theorem mk' (l : sq.lift_struct) : has_lift sq :=\n  ⟨nonempty.intro l⟩\n#align mk' mk'\n\n",
+ "map_comm_sq":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⟶ » -/\ntheorem map_comm_sq (s : comm_sq f g h i) : comm_sq (F.map f) (F.map g) (F.map h) (F.map i) :=\n  ⟨by simpa using congr_arg (fun k : «expr ⟶ » W Z => F.map k) s.w⟩\n#align map_comm_sq map_comm_sq\n\n",
+ "iff_unop":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵖ» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⟶ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⟶ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⟶ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⟶ » -/\ntheorem iff_unop {A B X Y : «expr ᵒᵖ» C} {f : «expr ⟶ » A X} {i : «expr ⟶ » A B} {p : «expr ⟶ » X Y} {g : «expr ⟶ » B Y}\n    (sq : comm_sq f i p g) : has_lift sq ↔ has_lift sq.unop :=\n  by\n  rw [iff, iff]\n  exact nonempty.congr (lift_struct.unop_equiv sq).to_fun (lift_struct.unop_equiv sq).inv_fun\n#align iff_unop iff_unop\n\n",
+ "iff_op":
+ "theorem iff_op : has_lift sq ↔ has_lift sq.op := by\n  rw [iff, iff]\n  exact nonempty.congr (lift_struct.op_equiv sq).to_fun (lift_struct.op_equiv sq).inv_fun\n#align iff_op iff_op\n\n",
+ "iff":
+ "theorem iff : has_lift sq ↔ nonempty sq.lift_struct :=\n  by\n  constructor\n  exacts[fun h => h.exists_lift, fun h => mk h]\n#align iff iff\n\n",
+ "flip":
+ "#print flip /-\n/-\nCopyright (c) 2022 Scott Morrison. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Scott Morrison, Joël Riou\n-/\ntheorem flip (p : comm_sq f g h i) : comm_sq g f i h :=\n  ⟨p.w.symm⟩\n#align flip flip\n-/\n\n",
+ "fac_right":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≫ » -/\n@[simp, reassoc.1]\ntheorem fac_right [hsq : has_lift sq] : «expr ≫ » sq.lift p = g :=\n  hsq.exists_lift.some.fac_right\n#align fac_right fac_right\n\n",
+ "fac_left":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≫ » -/\n@[simp, reassoc.1]\ntheorem fac_left [hsq : has_lift sq] : «expr ≫ » i sq.lift = f :=\n  hsq.exists_lift.some.fac_left\n#align fac_left fac_left\n\n"}

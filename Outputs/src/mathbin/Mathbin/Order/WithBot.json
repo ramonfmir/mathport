@@ -1,0 +1,188 @@
+{"with_top":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵈ» -/\n#print IsMin.withTop /-\nprotected theorem IsMin.withTop (h : is_min a) : is_min (a : WithTop α) :=\n  by\n  -- defeq to is_max_to_dual_iff.mp (is_max.with_bot _), but that breaks API boundary\n  intro _ hb\n  rw [← to_dual_le_to_dual_iff] at hb\n  simpa [to_dual_le_iff] using (IsMax.withBot h : is_max (to_dual a : WithBot («expr ᵒᵈ» α))) hb\n#align is_min.with_top IsMin.withTop\n-/\n\n",
+ "with_bot":
+ "#print IsMax.withBot /-\nprotected theorem IsMax.withBot (h : is_max a) : is_max (a : WithBot α)\n  | none, _ => bot_le\n  | some b, hb => some_le_some.2 <| h <| some_le_some.1 hb\n#align is_max.with_bot IsMax.withBot\n-/\n\n",
+ "well_founded_lt":
+ "theorem well_founded_lt [preorder α] (h : @well_founded α (· < ·)) : @well_founded (WithTop α) (· < ·) :=\n  have acc_some : ∀ a : α, acc ((· < ·) : WithTop α → WithTop α → Prop) (some a) := fun a =>\n    acc.intro _\n      (well_founded.induction h a\n        (show\n          ∀ b, (∀ c, c < b → ∀ d : WithTop α, d < some c → acc (· < ·) d) → ∀ y : WithTop α, y < some b → acc (· < ·) y\n          from fun b ih c =>\n          option.rec_on c (fun hc => (not_lt_of_ge le_top hc).elim) fun c hc => acc.intro _ (ih _ (some_lt_some.1 hc))))\n  ⟨fun a =>\n    option.rec_on a (acc.intro _ fun y => option.rec_on y (fun h => (lt_irrefl _ h).elim) fun _ _ => acc_some _)\n      acc_some⟩\n#align well_founded_lt well_founded_lt\n\n",
+ "well_founded_gt":
+ "#print WithBot.wellFounded_gt /-\ntheorem WithBot.wellFounded_gt [preorder α] (h : @well_founded α (· > ·)) : @well_founded (WithBot α) (· > ·) :=\n  ⟨fun a =>\n    by\n    -- ideally, use rel_hom_class.acc, but that is defined later\n    have : acc (· < ·) a.to_dual := well_founded.apply (WithTop.wellFounded_lt h) _\n    revert this\n    generalize ha : a.to_dual = b; intro ac\n    induction' ac with _ H IH generalizing a; subst ha\n    exact ⟨_, fun a' h => IH a'.to_dual (to_dual_lt_to_dual.mpr h) _ rfl⟩⟩\n#align with_bot.well_founded_gt WithBot.wellFounded_gt\n-/\n\n",
+ "untop_coe":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n@[simp]\ntheorem untop_coe (x : α) (h : (x : WithTop α) ≠ «expr⊤» := coe_ne_top) : (x : WithTop α).untop h = x :=\n  rfl\n#align untop_coe untop_coe\n\n",
+ "untop'_top":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n@[simp]\ntheorem untop'_top {α} (d : α) : untop' d («expr⊤») = d :=\n  rfl\n#align untop'_top untop'_top\n\n",
+ "untop'_coe":
+ "@[simp]\ntheorem untop'_coe {α} (d x : α) : untop' d x = x :=\n  rfl\n#align untop'_coe untop'_coe\n\n",
+ "unbot_coe":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n@[simp]\ntheorem unbot_coe (x : α) (h : (x : WithBot α) ≠ «expr⊥» := coe_ne_bot) : (x : WithBot α).unbot h = x :=\n  rfl\n#align unbot_coe unbot_coe\n\n",
+ "unbot'_lt_iff":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\ntheorem unbot'_lt_iff [LT α] {a : WithBot α} {b c : α} (ha : a ≠ «expr⊥») : a.unbot' b < c ↔ a < c :=\n  by\n  lift a to α using ha\n  rw [unbot'_coe, coe_lt_coe]\n#align unbot'_lt_iff unbot'_lt_iff\n\n",
+ "unbot'_coe":
+ "@[simp]\ntheorem unbot'_coe {α} (d x : α) : unbot' d x = x :=\n  rfl\n#align unbot'_coe unbot'_coe\n\n",
+ "unbot'_bot_le_iff":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\ntheorem unbot'_bot_le_iff [LE α] [OrderBot α] {a : WithBot α} {b : α} : a.unbot' («expr⊥») ≤ b ↔ a ≤ b := by\n  cases a <;> simp [none_eq_bot, some_eq_coe]\n#align unbot'_bot_le_iff unbot'_bot_le_iff\n\n",
+ "unbot'_bot":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n@[simp]\ntheorem unbot'_bot {α} (d : α) : unbot' d («expr⊥») = d :=\n  rfl\n#align unbot'_bot unbot'_bot\n\n",
+ "top_ne_coe":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n@[simp]\ntheorem top_ne_coe : «expr⊤» ≠ (a : WithTop α) :=\n  fun.\n#align top_ne_coe top_ne_coe\n\n",
+ "to_dual_symm_apply":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵈ» -/\n@[simp]\ntheorem to_dual_symm_apply (a : WithTop («expr ᵒᵈ» α)) : WithBot.toDual.symm a = a.of_dual :=\n  rfl\n#align to_dual_symm_apply to_dual_symm_apply\n\n",
+ "to_dual_map":
+ "theorem to_dual_map (f : α → β) (a : WithBot α) :\n    WithBot.toDual (WithBot.map f a) = map (to_dual ∘ f ∘ of_dual) a.to_dual :=\n  rfl\n#align to_dual_map to_dual_map\n\n",
+ "to_dual_lt_to_dual_iff":
+ "@[simp]\ntheorem to_dual_lt_to_dual_iff {a b : WithBot α} : WithBot.toDual a < WithBot.toDual b ↔ b < a :=\n  iff.rfl\n#align to_dual_lt_to_dual_iff to_dual_lt_to_dual_iff\n\n",
+ "to_dual_lt_iff":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵈ» -/\ntheorem to_dual_lt_iff {a : WithBot α} {b : WithTop («expr ᵒᵈ» α)} : WithBot.toDual a < b ↔ WithTop.ofDual b < a :=\n  iff.rfl\n#align to_dual_lt_iff to_dual_lt_iff\n\n",
+ "to_dual_le_to_dual_iff":
+ "@[simp]\ntheorem to_dual_le_to_dual_iff {a b : WithBot α} : WithBot.toDual a ≤ WithBot.toDual b ↔ b ≤ a :=\n  iff.rfl\n#align to_dual_le_to_dual_iff to_dual_le_to_dual_iff\n\n",
+ "to_dual_le_iff":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵈ» -/\ntheorem to_dual_le_iff {a : WithBot α} {b : WithTop («expr ᵒᵈ» α)} : WithBot.toDual a ≤ b ↔ WithTop.ofDual b ≤ a :=\n  iff.rfl\n#align to_dual_le_iff to_dual_le_iff\n\n",
+ "to_dual_apply_top":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n@[simp]\ntheorem to_dual_apply_top : WithTop.toDual («expr⊤» : WithTop α) = «expr⊥» :=\n  rfl\n#align to_dual_apply_top to_dual_apply_top\n\n",
+ "to_dual_apply_coe":
+ "@[simp]\ntheorem to_dual_apply_coe (a : α) : WithBot.toDual (a : WithBot α) = toDual a :=\n  rfl\n#align to_dual_apply_coe to_dual_apply_coe\n\n",
+ "to_dual_apply_bot":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n@[simp]\ntheorem to_dual_apply_bot : WithBot.toDual («expr⊥» : WithBot α) = «expr⊤» :=\n  rfl\n#align to_dual_apply_bot to_dual_apply_bot\n\n",
+ "strict_mono_map_iff":
+ "@[simp]\ntheorem strict_mono_map_iff [preorder α] [preorder β] {f : α → β} : strict_mono (WithTop.map f) ↔ strict_mono f :=\n  strictMono_iff.trans <| by simp [strict_mono, coe_lt_top]\n#align strict_mono_map_iff strict_mono_map_iff\n\n",
+ "strict_mono_iff":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\ntheorem strict_mono_iff [preorder α] [preorder β] {f : WithTop α → β} :\n    strict_mono f ↔ strict_mono (f ∘ coe : α → β) ∧ ∀ x : α, f x < f («expr⊤») :=\n  ⟨fun h => ⟨h.comp WithTop.coe_strictMono, fun x => h (coe_lt_top _)⟩, fun h =>\n    WithTop.forall.2\n      ⟨WithTop.forall.2 ⟨flip absurd (lt_irrefl _), fun x h => (not_top_lt h).elim⟩, fun x =>\n        WithTop.forall.2 ⟨fun _ => h.2 x, fun y hle => h.1 (coe_lt_coe.1 hle)⟩⟩⟩\n#align strict_mono_iff strict_mono_iff\n\n",
+ "some_lt_some":
+ "@[simp]\ntheorem some_lt_some : @LT.lt (WithTop α) _ (some a) (some b) ↔ a < b :=\n  coe_lt_coe\n#align some_lt_some some_lt_some\n\n",
+ "some_lt_none":
+ "@[simp]\ntheorem some_lt_none (a : α) : @LT.lt (WithTop α) _ (some a) none :=\n  coe_lt_top a\n#align some_lt_none some_lt_none\n\n",
+ "some_le_some":
+ "@[simp]\ntheorem some_le_some : @LE.le (WithTop α) _ (some a) (some b) ↔ a ≤ b :=\n  coe_le_coe\n#align some_le_some some_le_some\n\n",
+ "some_eq_coe":
+ "theorem some_eq_coe (a : α) : (some a : WithTop α) = (↑a : WithTop α) :=\n  rfl\n#align some_eq_coe some_eq_coe\n\n",
+ "rec_top_coe_top":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n@[simp]\ntheorem rec_top_coe_top {C : WithTop α → Sort _} (d : C («expr⊤»)) (f : ∀ a : α, C a) :\n    @recTopCoe _ C d f («expr⊤») = d :=\n  rfl\n#align rec_top_coe_top rec_top_coe_top\n\n",
+ "rec_top_coe_coe":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n@[simp]\ntheorem rec_top_coe_coe {C : WithTop α → Sort _} (d : C («expr⊤»)) (f : ∀ a : α, C a) (x : α) :\n    @recTopCoe _ C d f ↑x = f x :=\n  rfl\n#align rec_top_coe_coe rec_top_coe_coe\n\n",
+ "rec_bot_coe_coe":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n@[simp]\ntheorem rec_bot_coe_coe {C : WithBot α → Sort _} (d : C («expr⊥»)) (f : ∀ a : α, C a) (x : α) :\n    @recBotCoe _ C d f ↑x = f x :=\n  rfl\n#align rec_bot_coe_coe rec_bot_coe_coe\n\n",
+ "rec_bot_coe_bot":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n@[simp]\ntheorem rec_bot_coe_bot {C : WithBot α → Sort _} (d : C («expr⊥»)) (f : ∀ a : α, C a) :\n    @recBotCoe _ C d f («expr⊥») = d :=\n  rfl\n#align rec_bot_coe_bot rec_bot_coe_bot\n\n",
+ "of_dual_symm_apply":
+ "@[simp]\ntheorem of_dual_symm_apply (a : WithTop α) : WithBot.ofDual.symm a = a.to_dual :=\n  rfl\n#align of_dual_symm_apply of_dual_symm_apply\n\n",
+ "of_dual_map":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵈ» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵈ» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵈ» -/\ntheorem of_dual_map (f : «expr ᵒᵈ» α → «expr ᵒᵈ» β) (a : WithBot («expr ᵒᵈ» α)) :\n    WithBot.ofDual (WithBot.map f a) = map (of_dual ∘ f ∘ to_dual) a.of_dual :=\n  rfl\n#align of_dual_map of_dual_map\n\n",
+ "of_dual_lt_of_dual_iff":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵈ» -/\n@[simp]\ntheorem of_dual_lt_of_dual_iff {a b : WithBot («expr ᵒᵈ» α)} : WithBot.ofDual a < WithBot.ofDual b ↔ b < a :=\n  iff.rfl\n#align of_dual_lt_of_dual_iff of_dual_lt_of_dual_iff\n\n",
+ "of_dual_lt_iff":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵈ» -/\ntheorem of_dual_lt_iff {a : WithBot («expr ᵒᵈ» α)} {b : WithTop α} : WithBot.ofDual a < b ↔ WithTop.toDual b < a :=\n  iff.rfl\n#align of_dual_lt_iff of_dual_lt_iff\n\n",
+ "of_dual_le_of_dual_iff":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵈ» -/\n@[simp]\ntheorem of_dual_le_of_dual_iff {a b : WithBot («expr ᵒᵈ» α)} : WithBot.ofDual a ≤ WithBot.ofDual b ↔ b ≤ a :=\n  iff.rfl\n#align of_dual_le_of_dual_iff of_dual_le_of_dual_iff\n\n",
+ "of_dual_le_iff":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵈ» -/\ntheorem of_dual_le_iff {a : WithBot («expr ᵒᵈ» α)} {b : WithTop α} : WithBot.ofDual a ≤ b ↔ WithTop.toDual b ≤ a :=\n  iff.rfl\n#align of_dual_le_iff of_dual_le_iff\n\n",
+ "of_dual_apply_top":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n@[simp]\ntheorem of_dual_apply_top : WithTop.ofDual («expr⊤» : WithTop α) = «expr⊥» :=\n  rfl\n#align of_dual_apply_top of_dual_apply_top\n\n",
+ "of_dual_apply_coe":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵈ» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵈ» -/\n@[simp]\ntheorem of_dual_apply_coe (a : «expr ᵒᵈ» α) : WithBot.ofDual (a : WithBot («expr ᵒᵈ» α)) = ofDual a :=\n  rfl\n#align of_dual_apply_coe of_dual_apply_coe\n\n",
+ "of_dual_apply_bot":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n@[simp]\ntheorem of_dual_apply_bot : WithBot.ofDual («expr⊥» : WithBot α) = «expr⊤» :=\n  rfl\n#align of_dual_apply_bot of_dual_apply_bot\n\n",
+ "not_top_le_coe":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\ntheorem not_top_le_coe (a : α) : ¬(«expr⊤» : WithTop α) ≤ ↑a :=\n  WithBot.not_coe_le_bot (toDual a)\n#align not_top_le_coe not_top_le_coe\n\n",
+ "not_none_lt":
+ "@[simp]\ntheorem not_none_lt (a : WithTop α) : ¬@LT.lt (WithTop α) _ none a :=\n  by\n  rw [← to_dual_lt_to_dual_iff]\n  exact WithBot.not_lt_none _\n#align not_none_lt not_none_lt\n\n",
+ "not_lt_none":
+ "@[simp]\ntheorem not_lt_none (a : WithBot α) : ¬@LT.lt (WithBot α) _ a none := fun ⟨_, h, _⟩ => option.not_mem_none _ h\n#align not_lt_none not_lt_none\n\n",
+ "not_coe_le_bot":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\ntheorem not_coe_le_bot (a : α) : ¬(a : WithBot α) ≤ «expr⊥» := fun h =>\n  let ⟨b, hb, _⟩ := h _ rfl\n  option.not_mem_none _ hb\n#align not_coe_le_bot not_coe_le_bot\n\n",
+ "none_lt_some":
+ "@[simp]\ntheorem none_lt_some (a : α) : @LT.lt (WithBot α) _ none (some a) :=\n  ⟨a, rfl, fun b hb => (option.not_mem_none _ hb).elim⟩\n#align none_lt_some none_lt_some\n\n",
+ "none_le":
+ "@[simp]\ntheorem none_le {a : WithBot α} : @LE.le (WithBot α) _ none a := fun b h => option.no_confusion h\n#align none_le none_le\n\n",
+ "none_eq_top":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\ntheorem none_eq_top : (none : WithTop α) = («expr⊤» : WithTop α) :=\n  rfl\n#align none_eq_top none_eq_top\n\n",
+ "none_eq_bot":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\ntheorem none_eq_bot : (none : WithBot α) = («expr⊥» : WithBot α) :=\n  rfl\n#align none_eq_bot none_eq_bot\n\n",
+ "ne_top_iff_exists":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\ntheorem ne_top_iff_exists {x : WithTop α} : x ≠ «expr⊤» ↔ ∃ a : α, ↑a = x :=\n  option.ne_none_iff_exists\n#align ne_top_iff_exists ne_top_iff_exists\n\n",
+ "ne_bot_iff_exists":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\ntheorem ne_bot_iff_exists {x : WithBot α} : x ≠ «expr⊥» ↔ ∃ a : α, ↑a = x :=\n  option.ne_none_iff_exists\n#align ne_bot_iff_exists ne_bot_iff_exists\n\n",
+ "monotone_map_iff":
+ "@[simp]\ntheorem monotone_map_iff [preorder α] [preorder β] {f : α → β} : monotone (WithTop.map f) ↔ monotone f :=\n  monotone_iff.trans <| by simp [monotone]\n#align monotone_map_iff monotone_map_iff\n\n",
+ "monotone_iff":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\ntheorem monotone_iff [preorder α] [preorder β] {f : WithTop α → β} :\n    monotone f ↔ monotone (f ∘ coe : α → β) ∧ ∀ x : α, f x ≤ f («expr⊤») :=\n  ⟨fun h => ⟨h.comp WithTop.coe_mono, fun x => h le_top⟩, fun h =>\n    WithTop.forall.2\n      ⟨WithTop.forall.2 ⟨fun _ => le_rfl, fun x h => (not_top_le_coe _ h).elim⟩, fun x =>\n        WithTop.forall.2 ⟨fun _ => h.2 x, fun y hle => h.1 (coe_le_coe.1 hle)⟩⟩⟩\n#align monotone_iff monotone_iff\n\n",
+ "map_top":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n@[simp]\ntheorem map_top (f : α → β) : map f («expr⊤») = «expr⊤» :=\n  rfl\n#align map_top map_top\n\n",
+ "map_to_dual":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵈ» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵈ» -/\ntheorem map_to_dual (f : «expr ᵒᵈ» α → «expr ᵒᵈ» β) (a : WithTop α) :\n    WithBot.map f (WithTop.toDual a) = a.map (to_dual ∘ f) :=\n  rfl\n#align map_to_dual map_to_dual\n\n",
+ "map_of_dual":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵈ» -/\ntheorem map_of_dual (f : α → β) (a : WithTop («expr ᵒᵈ» α)) : WithBot.map f (WithTop.ofDual a) = a.map (of_dual ∘ f) :=\n  rfl\n#align map_of_dual map_of_dual\n\n",
+ "map_le_iff":
+ "theorem map_le_iff [preorder α] [preorder β] (f : α → β) (a b : WithTop α) (mono_iff : ∀ {a b}, f a ≤ f b ↔ a ≤ b) :\n    a.map f ≤ b.map f ↔ a ≤ b :=\n  by\n  rw [← to_dual_le_to_dual_iff, to_dual_map, to_dual_map, WithBot.map_le_iff, to_dual_le_to_dual_iff]\n  simp [mono_iff]\n#align map_le_iff map_le_iff\n\n",
+ "map_comm":
+ "theorem map_comm {f₁ : α → β} {f₂ : α → γ} {g₁ : β → δ} {g₂ : γ → δ} (h : g₁ ∘ f₁ = g₂ ∘ f₂) (a : α) :\n    map g₁ (map f₁ a) = map g₂ (map f₂ a) :=\n  option.map_comm h _\n#align map_comm map_comm\n\n",
+ "map_coe":
+ "@[simp]\ntheorem map_coe (f : α → β) (a : α) : map f a = f a :=\n  rfl\n#align map_coe map_coe\n\n",
+ "map_bot":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n@[simp]\ntheorem map_bot (f : α → β) : map f («expr⊥») = «expr⊥» :=\n  rfl\n#align map_bot map_bot\n\n",
+ "lt_to_dual_iff":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵈ» -/\ntheorem lt_to_dual_iff {a : WithTop («expr ᵒᵈ» α)} {b : WithBot α} : a < WithBot.toDual b ↔ b < WithTop.ofDual a :=\n  iff.rfl\n#align lt_to_dual_iff lt_to_dual_iff\n\n",
+ "lt_of_dual_iff":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵈ» -/\ntheorem lt_of_dual_iff {a : WithTop α} {b : WithBot («expr ᵒᵈ» α)} : a < WithBot.ofDual b ↔ b < WithTop.toDual a :=\n  iff.rfl\n#align lt_of_dual_iff lt_of_dual_iff\n\n",
+ "lt_iff_exists_coe_btwn":
+ "theorem lt_iff_exists_coe_btwn [preorder α] [DenselyOrdered α] [NoMaxOrder α] {a b : WithTop α} :\n    a < b ↔ ∃ x : α, a < ↑x ∧ ↑x < b :=\n  ⟨fun h =>\n    let ⟨y, hy⟩ := exists_between h\n    let ⟨x, hx⟩ := lt_iff_exists_coe.1 hy.2\n    ⟨x, hx.1 ▸ hy⟩,\n    fun ⟨x, hx⟩ => lt_trans hx.1 hx.2⟩\n#align lt_iff_exists_coe_btwn lt_iff_exists_coe_btwn\n\n",
+ "lt_iff_exists_coe":
+ "theorem lt_iff_exists_coe {a b : WithTop α} : a < b ↔ ∃ p : α, a = p ∧ ↑p < b :=\n  by\n  rw [← to_dual_lt_to_dual_iff, WithBot.lt_iff_exists_coe, order_dual.exists]\n  exact exists_congr fun _ => and_congr_left' iff.rfl\n#align lt_iff_exists_coe lt_iff_exists_coe\n\n",
+ "lt_coe_iff":
+ "theorem lt_coe_iff : ∀ {x : WithBot α}, x < b ↔ ∀ a, x = ↑a → a < b\n  | some b => by simp [some_eq_coe, coe_eq_coe, coe_lt_coe]\n  | none => by simp [none_eq_bot, bot_lt_coe]\n#align lt_coe_iff lt_coe_iff\n\n",
+ "le_to_dual_iff":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵈ» -/\ntheorem le_to_dual_iff {a : WithTop («expr ᵒᵈ» α)} {b : WithBot α} : a ≤ WithBot.toDual b ↔ b ≤ WithTop.ofDual a :=\n  iff.rfl\n#align le_to_dual_iff le_to_dual_iff\n\n",
+ "le_of_dual_iff":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵈ» -/\ntheorem le_of_dual_iff {a : WithTop α} {b : WithBot («expr ᵒᵈ» α)} : a ≤ WithBot.ofDual b ↔ b ≤ WithTop.toDual a :=\n  iff.rfl\n#align le_of_dual_iff le_of_dual_iff\n\n",
+ "le_none":
+ "@[simp]\ntheorem le_none {a : WithTop α} : @LE.le (WithTop α) _ a none :=\n  toDual_le_toDual_iff.mp WithBot.none_le\n#align le_none le_none\n\n",
+ "le_coe_unbot'":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\ntheorem le_coe_unbot' [preorder α] : ∀ (a : WithBot α) (b : α), a ≤ a.unbot' b\n  | (a : α), b => le_rfl\n  | «expr⊥», b => bot_le\n#align le_coe_unbot' le_coe_unbot'\n\n",
+ "le_coe_iff":
+ "theorem le_coe_iff {x : WithTop α} : x ≤ b ↔ ∃ a : α, x = a ∧ a ≤ b := by\n  simpa [← to_dual_le_to_dual_iff, WithBot.coe_le_iff]\n#align le_coe_iff le_coe_iff\n\n",
+ "le_coe":
+ "theorem le_coe : ∀ {o : option α}, a ∈ o → (@LE.le (WithTop α) _ o b ↔ a ≤ b)\n  | _, rfl => coe_le_coe\n#align le_coe le_coe\n\n",
+ "forall":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n--TODO(Mario): Construct using order dual on with_bot\nprotected theorem forall {p : WithTop α → Prop} : (∀ x, p x) ↔ p («expr⊤») ∧ ∀ x : α, p x :=\n  option.forall\n#align forall forall\n\n",
+ "exists":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\nprotected theorem exists {p : WithTop α → Prop} : (∃ x, p x) ↔ p («expr⊤») ∨ ∃ x : α, p x :=\n  option.exists\n#align exists exists\n\n",
+ "coe_untop":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n@[simp]\ntheorem coe_untop (x : WithTop α) (h : x ≠ «expr⊤») : (x.untop h : WithTop α) = x :=\n  WithBot.coe_unbot x h\n#align coe_untop coe_untop\n\n",
+ "coe_unbot":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n@[simp]\ntheorem coe_unbot (x : WithBot α) (h : x ≠ «expr⊥») : (x.unbot h : WithBot α) = x :=\n  by\n  cases x\n  simpa using h\n  rfl\n#align coe_unbot coe_unbot\n\n",
+ "coe_sup":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊔ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊔ » -/\ntheorem coe_sup [SemilatticeSup α] (a b : α) : ((«expr ⊔ » a b : α) : WithTop α) = «expr ⊔ » a b :=\n  rfl\n#align coe_sup coe_sup\n\n",
+ "coe_strict_mono":
+ "theorem coe_strict_mono [preorder α] : strict_mono (coe : α → WithTop α) := fun a b => some_lt_some.2\n#align coe_strict_mono coe_strict_mono\n\n",
+ "coe_ne_top":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n@[simp]\ntheorem coe_ne_top : (a : WithTop α) ≠ «expr⊤» :=\n  fun.\n#align coe_ne_top coe_ne_top\n\n",
+ "coe_ne_bot":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n@[simp]\ntheorem coe_ne_bot : (a : WithBot α) ≠ «expr⊥» :=\n  fun.\n#align coe_ne_bot coe_ne_bot\n\n",
+ "coe_mono":
+ "theorem coe_mono [preorder α] : monotone (coe : α → WithTop α) := fun a b => coe_le_coe.2\n#align coe_mono coe_mono\n\n",
+ "coe_min":
+ "@[simp, norm_cast]\ntheorem coe_min [linear_order α] (x y : α) : (↑(min x y) : WithTop α) = min x y :=\n  rfl\n#align coe_min coe_min\n\n",
+ "coe_max":
+ "@[simp, norm_cast]\ntheorem coe_max [linear_order α] (x y : α) : (↑(max x y) : WithTop α) = max x y :=\n  rfl\n#align coe_max coe_max\n\n",
+ "coe_lt_top":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\ntheorem coe_lt_top (a : α) : (a : WithTop α) < «expr⊤» := by simpa [← to_dual_lt_to_dual_iff] using WithBot.bot_lt_coe _\n#align coe_lt_top coe_lt_top\n\n",
+ "coe_lt_iff":
+ "theorem coe_lt_iff {x : WithTop α} : ↑a < x ↔ ∀ b, x = ↑b → a < b :=\n  by\n  simp only [← to_dual_lt_to_dual_iff, WithBot.lt_coe_iff, to_dual_apply_coe, order_dual.forall, to_dual_lt_to_dual]\n  exact forall₂_congr fun _ _ => iff.rfl\n#align coe_lt_iff coe_lt_iff\n\n",
+ "coe_lt_coe":
+ "@[simp, norm_cast]\ntheorem coe_lt_coe : (a : WithTop α) < b ↔ a < b := by\n  simp only [← to_dual_lt_to_dual_iff, to_dual_apply_coe, WithBot.coe_lt_coe, to_dual_lt_to_dual]\n#align coe_lt_coe coe_lt_coe\n\n",
+ "coe_le_iff":
+ "theorem coe_le_iff {x : WithTop α} : ↑a ≤ x ↔ ∀ b, x = ↑b → a ≤ b :=\n  by\n  simp only [← to_dual_le_to_dual_iff, to_dual_apply_coe, WithBot.le_coe_iff, order_dual.forall, to_dual_le_to_dual]\n  exact forall₂_congr fun _ _ => iff.rfl\n#align coe_le_iff coe_le_iff\n\n",
+ "coe_le_coe":
+ "@[simp, norm_cast]\ntheorem coe_le_coe : (a : WithTop α) ≤ b ↔ a ≤ b := by\n  simp only [← to_dual_le_to_dual_iff, to_dual_apply_coe, WithBot.coe_le_coe, to_dual_le_to_dual]\n#align coe_le_coe coe_le_coe\n\n",
+ "coe_le":
+ "theorem coe_le : ∀ {o : option α}, b ∈ o → ((a : WithBot α) ≤ o ↔ a ≤ b)\n  | _, rfl => coe_le_coe\n#align coe_le coe_le\n\n",
+ "coe_injective":
+ "/-\nCopyright (c) 2017 Johannes Hölzl. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Johannes Hölzl\n-/\ntheorem coe_injective : injective (coe : α → WithBot α) :=\n  option.some_injective _\n#align coe_injective coe_injective\n\n",
+ "coe_inj":
+ "@[norm_cast]\ntheorem coe_inj : (a : WithBot α) = b ↔ a = b :=\n  option.some_inj\n#align coe_inj coe_inj\n\n",
+ "coe_inf":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊓ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊓ » -/\ntheorem coe_inf [SemilatticeInf α] (a b : α) : ((«expr ⊓ » a b : α) : WithTop α) = «expr ⊓ » a b :=\n  rfl\n#align coe_inf coe_inf\n\n",
+ "coe_eq_coe":
+ "@[norm_cast]\ntheorem coe_eq_coe : (a : WithTop α) = b ↔ a = b :=\n  option.some_inj\n#align coe_eq_coe coe_eq_coe\n\n",
+ "bot_ne_coe":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n@[simp]\ntheorem bot_ne_coe : «expr⊥» ≠ (a : WithBot α) :=\n  fun.\n#align bot_ne_coe bot_ne_coe\n\n",
+ "bot_lt_coe":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\ntheorem bot_lt_coe (a : α) : («expr⊥» : WithBot α) < a :=\n  none_lt_some a\n#align bot_lt_coe bot_lt_coe\n\n"}

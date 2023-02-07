@@ -1,0 +1,58 @@
+{"uniform_inducing":
+ "protected theorem uniform_inducing (hf : antilipschitz_with K f) (hfc : uniform_continuous f) : uniform_inducing f :=\n  ⟨le_antisymm hf.comap_uniformity_le hfc.le_comap⟩\n#align uniform_inducing uniform_inducing\n\n",
+ "uniform_embedding":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `nnreal -/\nprotected theorem uniform_embedding {α : Type _} {β : Type _} [emetric_space α] [pseudo_emetric_space β] {K : nnreal}\n    {f : α → β} (hf : antilipschitz_with K f) (hfc : uniform_continuous f) : uniform_embedding f :=\n  ⟨hf.uniform_inducing hfc, hf.injective⟩\n#align uniform_embedding uniform_embedding\n\n",
+ "to_right_inverse":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `nnreal -/\ntheorem lipschitz_with.to_right_inverse [pseudo_emetric_space α] [pseudo_emetric_space β] {K : nnreal} {f : α → β}\n    (hf : lipschitz_with K f) {g : β → α} (hg : function.right_inverse g f) : antilipschitz_with K g := fun x y => by\n  simpa only [hg _] using hf (g x) (g y)\n#align lipschitz_with.to_right_inverse lipschitz_with.to_right_inverse\n\n",
+ "to_right_inv_on'":
+ "theorem to_right_inv_on' {s : set α} (hf : antilipschitz_with K (s.restrict f)) {g : β → α} {t : set β}\n    (g_maps : MapsTo g t s) (g_inv : RightInvOn g f t) : lipschitz_with K (t.restrict g) := fun x y => by\n  simpa only [restrict_apply, g_inv x.mem, g_inv y.mem, subtype.edist_eq, subtype.coe_mk] using\n    hf ⟨g x, g_maps x.mem⟩ ⟨g y, g_maps y.mem⟩\n#align to_right_inv_on' to_right_inv_on'\n\n",
+ "to_right_inv_on":
+ "theorem to_right_inv_on (hf : antilipschitz_with K f) {g : β → α} {t : set β} (h : RightInvOn g f t) :\n    lipschitz_with K (t.restrict g) :=\n  (hf.restrict univ).to_right_inv_on' (mapsTo_univ g t) h\n#align to_right_inv_on to_right_inv_on\n\n",
+ "tendsto_cobounded":
+ "theorem tendsto_cobounded (hf : antilipschitz_with K f) : tendsto f (cobounded α) (cobounded β) :=\n  compl_surjective.forall.2 fun s (hs : is_bounded s) =>\n    metric.is_bounded_iff.2 <| hf.bounded_preimage <| metric.is_bounded_iff.1 hs\n#align tendsto_cobounded tendsto_cobounded\n\n",
+ "subtype_coe":
+ "theorem subtype_coe (s : set α) : antilipschitz_with 1 (coe : s → α) :=\n  antilipschitz_with.id.restrict s\n#align subtype_coe subtype_coe\n\n",
+ "subsingleton":
+ "/-- If `f : α → β` is `0`-antilipschitz, then `α` is a `subsingleton`. -/\nprotected theorem subsingleton {α β} [emetric_space α] [pseudo_emetric_space β] {f : α → β}\n    (h : antilipschitz_with 0 f) : subsingleton α :=\n  ⟨fun x y => edist_le_zero.1 <| (h x y).trans_eq <| zero_mul _⟩\n#align subsingleton subsingleton\n\n",
+ "restrict":
+ "theorem restrict (hf : antilipschitz_with K f) (s : set α) : antilipschitz_with K (s.restrict f) := fun x y => hf x y\n#align restrict restrict\n\n",
+ "proper_space":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `nnreal -/\n/-- The image of a proper space under an expanding onto map is proper. -/\nprotected theorem proper_space {α : Type _} [metric_space α] {K : nnreal} {f : α → β} [proper_space α]\n    (hK : antilipschitz_with K f) (f_cont : continuous f) (hf : function.surjective f) : proper_space β :=\n  by\n  apply proper_space_of_compact_closed_ball_of_le 0 fun x₀ r hr => _\n  let K := «expr ⁻¹' » f (closed_ball x₀ r)\n  have A : is_closed K := is_closed_ball.preimage f_cont\n  have B : bounded K := hK.bounded_preimage bounded_closed_ball\n  have : is_compact K := is_compact_iff_is_closed_bounded.2 ⟨A, B⟩\n  convert this.image f_cont\n  exact (hf.image_preimage _).symm\n#align proper_space proper_space\n\n",
+ "of_subsingleton":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `nnreal -/\ntheorem of_subsingleton [subsingleton α] {K : nnreal} : antilipschitz_with K f := fun x y => by\n  simp only [subsingleton.elim x y, edist_self, zero_le]\n#align of_subsingleton of_subsingleton\n\n",
+ "mul_le_nndist":
+ "theorem mul_le_nndist (hf : antilipschitz_with K f) (x y : α) : K⁻¹ * nndist x y ≤ nndist (f x) (f y) := by\n  simpa only [div_eq_inv_mul] using nnreal.div_le_of_le_mul' (hf.le_mul_nndist x y)\n#align mul_le_nndist mul_le_nndist\n\n",
+ "mul_le_edist":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `ennreal -/\ntheorem mul_le_edist (hf : antilipschitz_with K f) (x y : α) : (K⁻¹ * edist x y : ennreal) ≤ edist (f x) (f y) :=\n  by\n  rw [mul_comm, ← div_eq_mul_inv]\n  exact ennreal.div_le_of_le_mul' (hf x y)\n#align mul_le_edist mul_le_edist\n\n",
+ "mul_le_dist":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\ntheorem mul_le_dist (hf : antilipschitz_with K f) (x y : α) : (K⁻¹ * dist x y : exprℝ) ≤ dist (f x) (f y) := by\n  exact_mod_cast hf.mul_le_nndist x y\n#align mul_le_dist mul_le_dist\n\n",
+ "le_mul_ediam_image":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\ntheorem le_mul_ediam_image (hf : antilipschitz_with K f) (s : set α) : diam s ≤ K * diam («expr '' » f s) :=\n  (diam_mono (subset_preimage_image _ _)).trans (hf.ediam_preimage_le («expr '' » f s))\n#align le_mul_ediam_image le_mul_ediam_image\n\n",
+ "is_complete_range":
+ "theorem is_complete_range [complete_space α] (hf : antilipschitz_with K f) (hfc : uniform_continuous f) :\n    is_complete (range f) :=\n  (hf.uniform_inducing hfc).is_complete_range\n#align is_complete_range is_complete_range\n\n",
+ "is_closed_range":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `nnreal -/\ntheorem is_closed_range {α β : Type _} [pseudo_emetric_space α] [emetric_space β] [complete_space α] {f : α → β}\n    {K : nnreal} (hf : antilipschitz_with K f) (hfc : uniform_continuous f) : is_closed (range f) :=\n  (hf.is_complete_range hfc).is_closed\n#align is_closed_range is_closed_range\n\n",
+ "injective":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `nnreal -/\n-- uses neither `f` nor `hf`\nprotected theorem injective {α : Type _} {β : Type _} [emetric_space α] [pseudo_emetric_space β] {K : nnreal}\n    {f : α → β} (hf : antilipschitz_with K f) : function.injective f := fun x y h => by\n  simpa only [h, edist_self, mul_zero, edist_le_zero] using hf x y\n#align injective injective\n\n",
+ "id":
+ "#print id /-\nprotected theorem id : antilipschitz_with 1 (id : α → α) := fun x y => by\n  simp only [ennreal.coe_one, one_mul, id, le_refl]\n#align id id\n-/\n\n",
+ "edist_ne_top":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `nnreal -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\ntheorem antilipschitz_with.edist_ne_top [pseudo_emetric_space α] [pseudo_metric_space β] {K : nnreal} {f : α → β}\n    (h : antilipschitz_with K f) (x y : α) : edist x y ≠ «expr⊤» :=\n  (h.edist_lt_top x y).ne\n#align antilipschitz_with.edist_ne_top antilipschitz_with.edist_ne_top\n\n",
+ "edist_lt_top":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `nnreal -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n/-\nCopyright (c) 2020 Yury Kudryashov. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Yury Kudryashov\n-/\ntheorem antilipschitz_with.edist_lt_top [pseudo_emetric_space α] [pseudo_metric_space β] {K : nnreal} {f : α → β}\n    (h : antilipschitz_with K f) (x y : α) : edist x y < «expr⊤» :=\n  (h x y).trans_lt <| ennreal.mul_lt_top ennreal.coe_ne_top (edist_ne_top _ _)\n#align antilipschitz_with.edist_lt_top antilipschitz_with.edist_lt_top\n\n",
+ "ediam_preimage_le":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\ntheorem ediam_preimage_le (hf : antilipschitz_with K f) (s : set β) : diam («expr ⁻¹' » f s) ≤ K * diam s :=\n  diam_le fun x hx y hy => (hf x y).trans <| mul_le_mul_left' (edist_le_diam_of_mem hx hy) K\n#align ediam_preimage_le ediam_preimage_le\n\n",
+ "comp":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `nnreal -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `nnreal -/\ntheorem comp {Kg : nnreal} {g : β → γ} (hg : antilipschitz_with Kg g) {Kf : nnreal} {f : α → β}\n    (hf : antilipschitz_with Kf f) : antilipschitz_with (Kf * Kg) (g ∘ f) := fun x y =>\n  calc\n    edist x y ≤ Kf * edist (f x) (f y) := hf x y\n    _ ≤ Kf * (Kg * edist (g (f x)) (g (f y))) := ennreal.mul_left_mono (hg _ _)\n    _ = _ := by rw [ennreal.coe_mul, mul_assoc]\n    \n#align comp comp\n\n",
+ "comap_uniformity_le":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `uniformity -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `uniformity -/\ntheorem comap_uniformity_le (hf : antilipschitz_with K f) : ((uniformity) β).comap (prod.map f f) ≤ (uniformity) α :=\n  by\n  refine' ((uniformity_basis_edist.comap _).le_basis_iff uniformity_basis_edist).2 fun ε h₀ => _\n  refine' ⟨K⁻¹ * ε, ennreal.mul_pos (ennreal.inv_ne_zero.2 ennreal.coe_ne_top) h₀.ne', _⟩\n  refine' fun x hx => (hf x.1 x.2).trans_lt _\n  rw [mul_comm, ← div_eq_mul_inv] at hx\n  rw [mul_comm]\n  exact ennreal.mul_lt_of_lt_div hx\n#align comap_uniformity_le comap_uniformity_le\n\n",
+ "cod_restrict":
+ "theorem cod_restrict (hf : antilipschitz_with K f) {s : set β} (hs : ∀ x, f x ∈ s) :\n    antilipschitz_with K (s.cod_restrict f hs) := fun x y => hf x y\n#align cod_restrict cod_restrict\n\n",
+ "closed_embedding":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `nnreal -/\ntheorem closed_embedding {α : Type _} {β : Type _} [emetric_space α] [emetric_space β] {K : nnreal} {f : α → β}\n    [complete_space α] (hf : antilipschitz_with K f) (hfc : uniform_continuous f) : closed_embedding f :=\n  { (hf.uniform_embedding hfc).embedding with closed_range := hf.is_closed_range hfc }\n#align closed_embedding closed_embedding\n\n",
+ "bounded_preimage":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\ntheorem bounded_preimage (hf : antilipschitz_with K f) {s : set β} (hs : bounded s) : bounded («expr ⁻¹' » f s) :=\n  exists.intro (K * diam s) fun x hx y hy =>\n    calc\n      dist x y ≤ K * dist (f x) (f y) := hf.le_mul_dist x y\n      _ ≤ K * diam s := mul_le_mul_of_nonneg_left (dist_le_diam_of_mem hs hx hy) K.2\n      \n#align bounded_preimage bounded_preimage\n\n",
+ "antilipschitz_with_iff_le_mul_nndist":
+ "theorem antilipschitz_with_iff_le_mul_nndist : antilipschitz_with K f ↔ ∀ x y, nndist x y ≤ K * nndist (f x) (f y) :=\n  by\n  simp only [antilipschitz_with, edist_nndist]\n  norm_cast\n#align antilipschitz_with_iff_le_mul_nndist antilipschitz_with_iff_le_mul_nndist\n\n",
+ "antilipschitz_with_iff_le_mul_dist":
+ "theorem antilipschitz_with_iff_le_mul_dist : antilipschitz_with K f ↔ ∀ x y, dist x y ≤ K * dist (f x) (f y) :=\n  by\n  simp only [antilipschitz_with_iff_le_mul_nndist, dist_nndist]\n  norm_cast\n#align antilipschitz_with_iff_le_mul_dist antilipschitz_with_iff_le_mul_dist\n\n"}

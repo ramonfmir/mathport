@@ -1,0 +1,10 @@
+{"of_equiv":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ » -/\ntheorem countable.of_equiv (α : Sort _) [countable α] (e : «expr ≃ » α β) : countable β :=\n  e.symm.injective.countable\n#align countable.of_equiv countable.of_equiv\n\n",
+ "exists_surjective_nat":
+ "#print exists_surjective_nat /-\ntheorem exists_surjective_nat (α : Sort u) [nonempty α] [countable α] : ∃ f : ℕ → α, surjective f :=\n  let ⟨f, hf⟩ := exists_injective_nat α\n  ⟨inv_fun f, invFun_surjective hf⟩\n#align exists_surjective_nat exists_surjective_nat\n-/\n\n",
+ "countable_iff_exists_surjective":
+ "#print countable_iff_exists_surjective /-\ntheorem countable_iff_exists_surjective [nonempty α] : countable α ↔ ∃ f : ℕ → α, surjective f :=\n  ⟨@exists_surjective_nat _ _, fun ⟨f, hf⟩ => hf.countable⟩\n#align countable_iff_exists_surjective countable_iff_exists_surjective\n-/\n\n",
+ "countable_iff":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ » -/\ntheorem equiv.countable_iff (e : «expr ≃ » α β) : countable α ↔ countable β :=\n  ⟨fun h => @countable.of_equiv _ _ h e, fun h => @countable.of_equiv _ _ h e.symm⟩\n#align equiv.countable_iff equiv.countable_iff\n\n",
+ "countable":
+ "protected theorem function.surjective.countable [countable α] {f : α → β} (hf : surjective f) : countable β :=\n  (injective_surjInv hf).countable\n#align function.surjective.countable function.surjective.countable\n\n"}

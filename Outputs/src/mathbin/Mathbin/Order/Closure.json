@@ -1,0 +1,73 @@
+{"top_mem_closed":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\ntheorem top_mem_closed : «expr⊤» ∈ c.closed :=\n  c.closure_top\n#align top_mem_closed top_mem_closed\n\n",
+ "subset_closure":
+ "-- Lemmas for `lower_adjoint (coe : α → set β)`, where `set_like α β`\ntheorem subset_closure (s : set β) : s ⊆ l s :=\n  l.le_closure s\n#align subset_closure subset_closure\n\n",
+ "not_mem_of_not_mem_closure":
+ "theorem not_mem_of_not_mem_closure {s : set β} {P : β} (hP : P ∉ l s) : P ∉ s := fun h => hP (subset_closure _ s h)\n#align not_mem_of_not_mem_closure not_mem_of_not_mem_closure\n\n",
+ "monotone":
+ "@[mono]\ntheorem monotone : monotone (u ∘ l) :=\n  l.gc.monotone_u.comp l.gc.monotone_l\n#align monotone monotone\n\n",
+ "mem_mk₃_closed":
+ "/-- The property `p` fed into the `mk₃` constructor implies being closed. -/\ntheorem mem_mk₃_closed {f : α → α} {p : α → Prop} {hf : ∀ x, x ≤ f x} {hfp : ∀ x, p (f x)}\n    {hmin : ∀ ⦃x y⦄, x ≤ y → p y → f x ≤ y} {x : α} (hx : p x) : x ∈ (mk₃ f p hf hfp hmin).closed :=\n  (hmin le_rfl hx).antisymm (hf _)\n#align mem_mk₃_closed mem_mk₃_closed\n\n",
+ "mem_iff":
+ "theorem mem_iff (s : set β) (x : β) : x ∈ l s ↔ ∀ S : α, s ⊆ S → x ∈ S :=\n  by\n  simp_rw [← SetLike.mem_coe, ← Set.singleton_subset_iff, ← l.le_iff_subset]\n  exact ⟨fun h S => h.trans, fun h => h _ le_rfl⟩\n#align mem_iff mem_iff\n\n",
+ "mem_closed_iff_closure_le":
+ "theorem mem_closed_iff_closure_le (x : α) : x ∈ l.closed ↔ u (l x) ≤ x :=\n  l.closure_operator.mem_closed_iff_closure_le _\n#align mem_closed_iff_closure_le mem_closed_iff_closure_le\n\n",
+ "mem_closed_iff":
+ "theorem mem_closed_iff (x : α) : x ∈ l.closed ↔ u (l x) = x :=\n  iff.rfl\n#align mem_closed_iff mem_closed_iff\n\n",
+ "le_iff_subset":
+ "theorem le_iff_subset (s : set β) (S : α) : l s ≤ S ↔ s ⊆ S :=\n  l.gc s S\n#align le_iff_subset le_iff_subset\n\n",
+ "le_closure_iff":
+ "theorem le_closure_iff (x y : α) : x ≤ u (l y) ↔ u (l x) ≤ u (l y) :=\n  l.closure_operator.le_closure_iff _ _\n#align le_closure_iff le_closure_iff\n\n",
+ "le_closure":
+ "/-- Every element is less than its closure. This property is sometimes referred to as extensivity or\ninflationarity. -/\ntheorem le_closure (x : α) : x ≤ u (l x) :=\n  l.gc.le_u_l _\n#align le_closure le_closure\n\n",
+ "idempotent":
+ "theorem idempotent (x : α) : u (l (u (l x))) = u (l x) :=\n  l.closure_operator.idempotent _\n#align idempotent idempotent\n\n",
+ "gc": "theorem gc : GaloisConnection l u :=\n  l.gc'\n#align gc gc\n\n",
+ "ext":
+ "@[ext]\ntheorem ext : ∀ l₁ l₂ : LowerAdjoint u, (l₁ : α → β) = (l₂ : α → β) → l₁ = l₂\n  | ⟨l₁, _⟩, ⟨l₂, _⟩, h => by\n    congr\n    exact h\n#align ext ext\n\n",
+ "eq_of_le":
+ "theorem eq_of_le {s : set β} {S : α} (h₁ : s ⊆ S) (h₂ : S ≤ l s) : l s = S :=\n  ((l.le_iff_subset _ _).2 h₁).antisymm h₂\n#align eq_of_le eq_of_le\n\n",
+ "eq_mk₃_closed":
+ "/-- A closure operator is equal to the closure operator obtained by feeding `c.closed` into the\n`mk₃` constructor. -/\ntheorem eq_mk₃_closed (c : ClosureOperator α) :\n    c = mk₃ c c.closed c.le_closure c.closure_is_closed fun x y hxy hy => (c.closure_le_closed_iff_le x hy).2 hxy :=\n  by\n  ext\n  rfl\n#align eq_mk₃_closed eq_mk₃_closed\n\n",
+ "closure_union_closure_subset":
+ "theorem closure_union_closure_subset (x y : α) : (l x : set β) ∪ l y ⊆ l (x ∪ y) :=\n  l.closure_sup_closure_le x y\n#align closure_union_closure_subset closure_union_closure_subset\n\n",
+ "closure_union_closure_right":
+ "@[simp]\ntheorem closure_union_closure_right (x y : α) : l (x ∪ l y) = l (x ∪ y) :=\n  SetLike.coe_injective (l.closure_sup_closure_right x y)\n#align closure_union_closure_right closure_union_closure_right\n\n",
+ "closure_union_closure_left":
+ "@[simp]\ntheorem closure_union_closure_left (x y : α) : l (l x ∪ y) = l (x ∪ y) :=\n  SetLike.coe_injective (l.closure_sup_closure_left x y)\n#align closure_union_closure_left closure_union_closure_left\n\n",
+ "closure_union_closure":
+ "theorem closure_union_closure (x y : α) : l (l x ∪ l y) = l (x ∪ y) :=\n  SetLike.coe_injective (l.closure_operator.closure_sup_closure x y)\n#align closure_union_closure closure_union_closure\n\n",
+ "closure_top":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\ntheorem closure_top [partial_order α] [OrderTop α] [preorder β] {u : β → α} (l : LowerAdjoint u) :\n    u (l («expr⊤»)) = «expr⊤» :=\n  l.closure_operator.closure_top\n#align closure_top closure_top\n\n",
+ "closure_supr₂_closure":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⨆ , » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⨆ , » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⨆ , » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⨆ , » -/\ntheorem closure_supr₂_closure (f : ∀ i, κ i → α) :\n    u\n        (l <|\n          «expr⨆ , » \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⨆ , »\"\n            (u (l <| f i j))) =\n      u\n        (l <|\n          «expr⨆ , » \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⨆ , »\" (f i j)) :=\n  l.closure_operator.closure_supr₂_closure _\n#align closure_supr₂_closure closure_supr₂_closure\n\n",
+ "closure_supr_closure":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⨆ , » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⨆ , » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⨆ , » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⨆ , » -/\ntheorem closure_supr_closure (f : ι → α) :\n    u\n        (l\n          («expr⨆ , » \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⨆ , »\"\n            (u (l (f i))))) =\n      u (l («expr⨆ , » \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⨆ , »\" (f i))) :=\n  l.closure_operator.closure_supr_closure _\n#align closure_supr_closure closure_supr_closure\n\n",
+ "closure_sup_closure_right":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊔ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊔ » -/\ntheorem closure_sup_closure_right (x y : α) : u (l («expr ⊔ » x (u (l y)))) = u (l («expr ⊔ » x y)) :=\n  l.closure_operator.closure_sup_closure_right x y\n#align closure_sup_closure_right closure_sup_closure_right\n\n",
+ "closure_sup_closure_left":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊔ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊔ » -/\ntheorem closure_sup_closure_left (x y : α) : u (l («expr ⊔ » (u (l x)) y)) = u (l («expr ⊔ » x y)) :=\n  l.closure_operator.closure_sup_closure_left x y\n#align closure_sup_closure_left closure_sup_closure_left\n\n",
+ "closure_sup_closure_le":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊔ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊔ » -/\ntheorem closure_sup_closure_le (x y : α) : «expr ⊔ » (u (l x)) (u (l y)) ≤ u (l («expr ⊔ » x y)) :=\n  l.closure_operator.closure_sup_closure_le x y\n#align closure_sup_closure_le closure_sup_closure_le\n\n",
+ "closure_sup_closure":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊔ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊔ » -/\ntheorem closure_sup_closure (x y : α) : u (l («expr ⊔ » (u (l x)) (u (l y)))) = u (l («expr ⊔ » x y)) :=\n  l.closure_operator.closure_sup_closure x y\n#align closure_sup_closure closure_sup_closure\n\n",
+ "closure_mem_mk₃":
+ "/-- This lemma shows that the image of `x` of a closure operator built from the `mk₃` constructor\nrespects `p`, the property that was fed into it. -/\ntheorem closure_mem_mk₃ {f : α → α} {p : α → Prop} {hf : ∀ x, x ≤ f x} {hfp : ∀ x, p (f x)}\n    {hmin : ∀ ⦃x y⦄, x ≤ y → p y → f x ≤ y} (x : α) : p (mk₃ f p hf hfp hmin x) :=\n  hfp x\n#align closure_mem_mk₃ closure_mem_mk₃\n\n",
+ "closure_le_mk₃_iff":
+ "/-- Analogue of `closure_le_closed_iff_le` but with the `p` that was fed into the `mk₃` constructor.\n-/\ntheorem closure_le_mk₃_iff {f : α → α} {p : α → Prop} {hf : ∀ x, x ≤ f x} {hfp : ∀ x, p (f x)}\n    {hmin : ∀ ⦃x y⦄, x ≤ y → p y → f x ≤ y} {x y : α} (hxy : x ≤ y) (hy : p y) : mk₃ f p hf hfp hmin x ≤ y :=\n  hmin hxy hy\n#align closure_le_mk₃_iff closure_le_mk₃_iff\n\n",
+ "closure_le_closed_iff_le":
+ "@[simp]\ntheorem closure_le_closed_iff_le (x : α) {y : α} (hy : l.closed y) : u (l x) ≤ y ↔ x ≤ y :=\n  l.closure_operator.closure_le_closed_iff_le x hy\n#align closure_le_closed_iff_le closure_le_closed_iff_le\n\n",
+ "closure_is_closed":
+ "@[simp]\ntheorem closure_is_closed (x : α) : u (l x) ∈ l.closed :=\n  l.idempotent x\n#align closure_is_closed closure_is_closed\n\n",
+ "closure_inf_le":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊓ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊓ » -/\ntheorem closure_inf_le [SemilatticeInf α] [preorder β] {u : β → α} (l : LowerAdjoint u) (x y : α) :\n    u (l («expr ⊓ » x y)) ≤ «expr ⊓ » (u (l x)) (u (l y)) :=\n  l.closure_operator.closure_inf_le x y\n#align closure_inf_le closure_inf_le\n\n",
+ "closure_eq_self_of_mem_closed":
+ "theorem closure_eq_self_of_mem_closed {x : α} (h : x ∈ l.closed) : u (l x) = x :=\n  h\n#align closure_eq_self_of_mem_closed closure_eq_self_of_mem_closed\n\n",
+ "closure_Union₂_closure":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⋃ , » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⋃ , » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⋃ , » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⋃ , » -/\n@[simp]\ntheorem closure_Union₂_closure (f : ∀ i, κ i → α) :\n    l («expr⋃ , » \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⋃ , »\" (l (f i j))) =\n      l («expr⋃ , » \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⋃ , »\" (f i j)) :=\n  SetLike.coe_injective <| l.closure_supr₂_closure _\n#align closure_Union₂_closure closure_Union₂_closure\n\n",
+ "closure_Union_closure":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⋃ , » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⋃ , » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⋃ , » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⋃ , » -/\n@[simp]\ntheorem closure_Union_closure (f : ι → α) :\n    l («expr⋃ , » \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⋃ , »\" (l (f i))) =\n      l («expr⋃ , » \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⋃ , »\" (f i)) :=\n  SetLike.coe_injective <| l.closure_supr_closure _\n#align closure_Union_closure closure_Union_closure\n\n",
+ "closureOperator_gi_self":
+ "#print closureOperator_gi_self /-\n/-- The Galois insertion associated to a closure operator can be used to reconstruct the closure\noperator.\nNote that the inverse in the opposite direction does not hold in general. -/\n@[simp]\ntheorem closureOperator_gi_self [partial_order α] (c : ClosureOperator α) : c.gi.gc.closure_operator = c :=\n  by\n  ext x\n  rfl\n#align closure_operator_gi_self closureOperator_gi_self\n-/\n\n",
+ "closed_eq_range_close":
+ "/-- The set of closed elements for `l` is the range of `u ∘ l`. -/\ntheorem closed_eq_range_close : l.closed = Set.range (u ∘ l) :=\n  l.closure_operator.closed_eq_range_close\n#align closed_eq_range_close closed_eq_range_close\n\n"}

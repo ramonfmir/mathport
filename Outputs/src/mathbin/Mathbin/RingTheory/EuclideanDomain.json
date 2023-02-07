@@ -1,0 +1,16 @@
+{"span_gcd":
+ "theorem span_gcd {α} [EuclideanDomain α] (x y : α) : span ({gcd x y} : set α) = span ({x, y} : set α) :=\n  letI := euclidean_domain.gcd_monoid α\n  span_gcd x y\n#align span_gcd span_gcd\n\n",
+ "right_div_gcd_ne_zero":
+ "/- ./././Mathport/Syntax/Translate/Tactic/Lean3.lean:132:4: warning: unsupported: rw with cfg: { occs := occurrences.pos[occurrences.pos] «expr[ ,]»([1]) } -/\ntheorem right_div_gcd_ne_zero {p q : R} (hq : q ≠ 0) : q / gcd_monoid.gcd p q ≠ 0 :=\n  by\n  obtain ⟨r, hr⟩ := gcd_monoid.gcd_dvd_right p q\n  obtain ⟨pq0, r0⟩ : gcd_monoid.gcd p q ≠ 0 ∧ r ≠ 0 := mul_ne_zero_iff.mp (hr ▸ hq)\n  rw [hr, mul_comm, mul_div_cancel _ pq0]\n  exact r0\n#align right_div_gcd_ne_zero right_div_gcd_ne_zero\n\n",
+ "left_div_gcd_ne_zero":
+ "/- ./././Mathport/Syntax/Translate/Tactic/Lean3.lean:132:4: warning: unsupported: rw with cfg: { occs := occurrences.pos[occurrences.pos] «expr[ ,]»([1]) } -/\ntheorem left_div_gcd_ne_zero {p q : R} (hp : p ≠ 0) : p / gcd_monoid.gcd p q ≠ 0 :=\n  by\n  obtain ⟨r, hr⟩ := gcd_monoid.gcd_dvd_left p q\n  obtain ⟨pq0, r0⟩ : gcd_monoid.gcd p q ≠ 0 ∧ r ≠ 0 := mul_ne_zero_iff.mp (hr ▸ hp)\n  rw [hr, mul_comm, mul_div_cancel _ pq0]\n  exact r0\n#align left_div_gcd_ne_zero left_div_gcd_ne_zero\n\n",
+ "is_coprime_of_dvd":
+ "-- this should be proved for UFDs surely?\ntheorem is_coprime_of_dvd {α} [EuclideanDomain α] {x y : α} (nonzero : ¬(x = 0 ∧ y = 0))\n    (H : ∀ z ∈ nonunits α, z ≠ 0 → z ∣ x → ¬z ∣ y) : IsCoprime x y :=\n  letI := euclidean_domain.gcd_monoid α\n  is_coprime_of_dvd x y nonzero H\n#align is_coprime_of_dvd is_coprime_of_dvd\n\n",
+ "gcd_ne_zero_of_right":
+ "theorem gcd_ne_zero_of_right (p q : R) (hp : q ≠ 0) : gcd_monoid.gcd p q ≠ 0 := fun h =>\n  hp <| eq_zero_of_zero_dvd (h ▸ gcd_dvd_right p q)\n#align gcd_ne_zero_of_right gcd_ne_zero_of_right\n\n",
+ "gcd_ne_zero_of_left":
+ "/-\nCopyright (c) 2018 Mario Carneiro. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Mario Carneiro, Chris Hughes\n-/\ntheorem gcd_ne_zero_of_left (p q : R) (hp : p ≠ 0) : gcd_monoid.gcd p q ≠ 0 := fun h =>\n  hp <| eq_zero_of_zero_dvd (h ▸ gcd_dvd_left p q)\n#align gcd_ne_zero_of_left gcd_ne_zero_of_left\n\n",
+ "gcd_is_unit_iff":
+ "theorem gcd_is_unit_iff {α} [EuclideanDomain α] {x y : α} : is_unit (gcd x y) ↔ IsCoprime x y :=\n  letI := euclidean_domain.gcd_monoid α\n  gcd_is_unit_iff x y\n#align gcd_is_unit_iff gcd_is_unit_iff\n\n",
+ "dvd_or_coprime":
+ "-- this should be proved for UFDs surely?\ntheorem dvd_or_coprime {α} [EuclideanDomain α] (x y : α) (h : Irreducible x) : x ∣ y ∨ IsCoprime x y :=\n  letI := euclidean_domain.gcd_monoid α\n  dvd_or_coprime x y h\n#align dvd_or_coprime dvd_or_coprime\n\n"}

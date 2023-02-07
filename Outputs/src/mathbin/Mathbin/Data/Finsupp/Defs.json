@@ -1,0 +1,262 @@
+{"zip_with_apply":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →₀ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →₀ » -/\n@[simp]\ntheorem zip_with_apply {f : M → N → P} {hf : f 0 0 = 0} {g₁ : «expr →₀ » α M} {g₂ : «expr →₀ » α N} {a : α} :\n    zip_with f hf g₁ g₂ a = f (g₁ a) (g₂ a) :=\n  rfl\n#align zip_with_apply zip_with_apply\n\n",
+ "zero_update":
+ "@[simp]\ntheorem zero_update : update 0 a b = single a b := by\n  ext\n  rw [single_eq_update]\n  rfl\n#align zero_update zero_update\n\n",
+ "zero_apply":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →₀ » -/\ntheorem zero_apply {a : α} : (0 : «expr →₀ » α M) a = 0 :=\n  rfl\n#align zero_apply zero_apply\n\n",
+ "update_self":
+ "@[simp]\ntheorem update_self : f.update a (f a) = f := by\n  ext\n  simp\n#align update_self update_self\n\n",
+ "update_eq_sub_add_single":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →₀ » -/\ntheorem update_eq_sub_add_single [add_group G] (f : «expr →₀ » α G) (a : α) (b : G) :\n    f.update a b = f - single a (f a) + single a b := by rw [update_eq_erase_add_single, erase_eq_sub_single]\n#align update_eq_sub_add_single update_eq_sub_add_single\n\n",
+ "update_eq_single_add_erase":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →₀ » -/\ntheorem update_eq_single_add_erase (f : «expr →₀ » α M) (a : α) (b : M) : f.update a b = single a b + f.erase a :=\n  by\n  ext j\n  rcases eq_or_ne a j with (rfl | h)\n  · simp\n  · simp [function.update_noteq h.symm, single_apply, h, erase_ne, h.symm]\n#align update_eq_single_add_erase update_eq_single_add_erase\n\n",
+ "update_eq_erase_add_single":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →₀ » -/\ntheorem update_eq_erase_add_single (f : «expr →₀ » α M) (a : α) (b : M) : f.update a b = f.erase a + single a b :=\n  by\n  ext j\n  rcases eq_or_ne a j with (rfl | h)\n  · simp\n  · simp [function.update_noteq h.symm, single_apply, h, erase_ne, h.symm]\n#align update_eq_erase_add_single update_eq_erase_add_single\n\n",
+ "unique_single_eq_iff":
+ "@[simp]\ntheorem unique_single_eq_iff [unique α] {b' : M} : single a b = single a' b' ↔ b = b' := by\n  rw [unique_ext_iff, unique.eq_default a, unique.eq_default a', single_eq_same, single_eq_same]\n#align unique_single_eq_iff unique_single_eq_iff\n\n",
+ "unique_single":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →₀ » -/\ntheorem unique_single [unique α] (x : «expr →₀ » α M) : x = single default (x default) :=\n  ext <| unique.forall_iff.2 single_eq_same.symm\n#align unique_single unique_single\n\n",
+ "unique_ext_iff":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →₀ » -/\ntheorem unique_ext_iff [unique α] {f g : «expr →₀ » α M} : f = g ↔ f default = g default :=\n  ⟨fun h => h ▸ rfl, unique_ext⟩\n#align unique_ext_iff unique_ext_iff\n\n",
+ "unique_ext":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →₀ » -/\n@[ext]\ntheorem unique_ext [unique α] {f g : «expr →₀ » α M} (h : f default = g default) : f = g :=\n  ext fun a => by rwa [unique.eq_default a]\n#align unique_ext unique_ext\n\n",
+ "support_zip_with":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →₀ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →₀ » -/\ntheorem support_zip_with [D : decidable_eq α] {f : M → N → P} {hf : f 0 0 = 0} {g₁ : «expr →₀ » α M}\n    {g₂ : «expr →₀ » α N} : (zip_with f hf g₁ g₂).support ⊆ g₁.support ∪ g₂.support := by\n  rw [subsingleton.elim D] <;> exact support_on_finset_subset\n#align support_zip_with support_zip_with\n\n",
+ "support_zero":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →₀ » -/\n@[simp]\ntheorem support_zero : (0 : «expr →₀ » α M).support = ∅ :=\n  rfl\n#align support_zero support_zero\n\n",
+ "support_update_zero":
+ "@[simp]\ntheorem support_update_zero [decidable_eq α] : support (f.update a 0) = f.support.erase a := by convert if_pos rfl\n#align support_update_zero support_update_zero\n\n",
+ "support_update_ne_zero":
+ "theorem support_update_ne_zero [decidable_eq α] (h : b ≠ 0) : support (f.update a b) = insert a f.support := by\n  convert if_neg h\n#align support_update_ne_zero support_update_ne_zero\n\n",
+ "support_update":
+ "theorem support_update [decidable_eq α] :\n    support (f.update a b) = if b = 0 then f.support.erase a else insert a f.support := by convert rfl\n#align support_update support_update\n\n",
+ "support_subset_singleton'":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →₀ » -/\ntheorem support_subset_singleton' {f : «expr →₀ » α M} {a : α} : f.support ⊆ {a} ↔ ∃ b, f = single a b :=\n  ⟨fun h => ⟨f a, support_subset_singleton.mp h⟩, fun ⟨b, hb⟩ => by rw [hb, support_subset_singleton, single_eq_same]⟩\n#align support_subset_singleton' support_subset_singleton'\n\n",
+ "support_subset_singleton":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →₀ » -/\ntheorem support_subset_singleton {f : «expr →₀ » α M} {a : α} : f.support ⊆ {a} ↔ f = single a (f a) :=\n  ⟨fun h => eq_single_iff.mpr ⟨h, rfl⟩, fun h => (eq_single_iff.mp h).left⟩\n#align support_subset_singleton support_subset_singleton\n\n",
+ "support_subset_iff":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →₀ » -/\n/- ./././Mathport/Syntax/Translate/Basic.lean:632:2: warning: expanding binder collection (a «expr ∉ » s) -/\ntheorem support_subset_iff {s : set α} {f : «expr →₀ » α M} : ↑f.support ⊆ s ↔ ∀ (a) (_ : a ∉ s), f a = 0 := by\n  simp only [Set.subset_def, mem_coe, mem_support_iff] <;> exact forall_congr' fun a => not_imp_comm\n#align support_subset_iff support_subset_iff\n\n",
+ "support_sub":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →₀ » -/\ntheorem support_sub [decidable_eq α] [add_group G] {f g : «expr →₀ » α G} : support (f - g) ⊆ support f ∪ support g :=\n  by\n  rw [sub_eq_add_neg, ← support_neg g]\n  exact support_add\n#align support_sub support_sub\n\n",
+ "support_single_subset":
+ "theorem support_single_subset : (single a b).support ⊆ {a} :=\n  show ite _ _ _ ⊆ _ by split_ifs <;> [exact empty_subset _, exact subset.refl _]\n#align support_single_subset support_single_subset\n\n",
+ "support_single_ne_zero":
+ "theorem support_single_ne_zero (a : α) (hb : b ≠ 0) : (single a b).support = {a} :=\n  if_neg hb\n#align support_single_ne_zero support_single_ne_zero\n\n",
+ "support_single_ne_bot":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\ntheorem support_single_ne_bot (i : α) (h : b ≠ 0) : (single i b).support ≠ «expr⊥» := by\n  simpa only [support_single_ne_zero _ h] using singleton_ne_empty _\n#align support_single_ne_bot support_single_ne_bot\n\n",
+ "support_single_disjoint":
+ "theorem support_single_disjoint {b' : M} (hb : b ≠ 0) (hb' : b' ≠ 0) {i j : α} :\n    Disjoint (single i b).support (single j b').support ↔ i ≠ j := by\n  rw [support_single_ne_zero _ hb, support_single_ne_zero _ hb', disjoint_singleton]\n#align support_single_disjoint support_single_disjoint\n\n",
+ "support_on_finset_subset":
+ "@[simp]\ntheorem support_on_finset_subset {s : Finset α} {f : α → M} {hf} : (on_finset s f hf).support ⊆ s :=\n  filter_subset _ _\n#align support_on_finset_subset support_on_finset_subset\n\n",
+ "support_on_finset":
+ "theorem support_on_finset {s : Finset α} {f : α → M} (hf : ∀ a : α, f a ≠ 0 → a ∈ s) :\n    (finsupp.on_finset s f hf).support = s.filter fun a => f a ≠ 0 :=\n  rfl\n#align support_on_finset support_on_finset\n\n",
+ "support_nonempty_iff":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →₀ » -/\ntheorem support_nonempty_iff {f : «expr →₀ » α M} : f.support.nonempty ↔ f ≠ 0 := by\n  simp only [finsupp.support_eq_empty, Finset.nonempty_iff_ne_empty, ne.def]\n#align support_nonempty_iff support_nonempty_iff\n\n",
+ "support_neg":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →₀ » -/\n@[simp]\ntheorem support_neg [add_group G] (f : «expr →₀ » α G) : support (-f) = support f :=\n  Finset.Subset.antisymm support_map_range\n    (calc\n      support f = support (- -f) := congr_arg support (neg_neg _).symm\n      _ ⊆ support (-f) := support_map_range\n      )\n#align support_neg support_neg\n\n",
+ "support_map_range_of_injective":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →₀ » -/\ntheorem support_map_range_of_injective {e : M → N} (he0 : e 0 = 0) (f : «expr →₀ » ι M) (he : function.injective e) :\n    (finsupp.map_range e he0 f).support = f.support := by\n  ext\n  simp only [finsupp.mem_support_iff, ne.def, finsupp.map_range_apply]\n  exact he.ne_iff' he0\n#align support_map_range_of_injective support_map_range_of_injective\n\n",
+ "support_map_range":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →₀ » -/\ntheorem support_map_range {f : M → N} {hf : f 0 = 0} {g : «expr →₀ » α M} : (map_range f hf g).support ⊆ g.support :=\n  support_on_finset_subset\n#align support_map_range support_map_range\n\n",
+ "support_erase":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →₀ » -/\n@[simp]\ntheorem support_erase [decidable_eq α] {a : α} {f : «expr →₀ » α M} : (f.erase a).support = f.support.erase a := by\n  convert rfl\n#align support_erase support_erase\n\n",
+ "support_eq_singleton'":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →₀ » -/\n/- ./././Mathport/Syntax/Translate/Basic.lean:632:2: warning: expanding binder collection (b «expr ≠ » 0) -/\ntheorem support_eq_singleton' {f : «expr →₀ » α M} {a : α} : f.support = {a} ↔ ∃ (b : _)(_ : b ≠ 0), f = single a b :=\n  ⟨fun h =>\n    let h := support_eq_singleton.1 h\n    ⟨_, h.1, h.2⟩,\n    fun ⟨b, hb, hf⟩ => hf.symm ▸ support_single_ne_zero _ hb⟩\n#align support_eq_singleton' support_eq_singleton'\n\n",
+ "support_eq_singleton":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →₀ » -/\ntheorem support_eq_singleton {f : «expr →₀ » α M} {a : α} : f.support = {a} ↔ f a ≠ 0 ∧ f = single a (f a) :=\n  ⟨fun h => ⟨mem_support_iff.1 <| h.symm ▸ Finset.mem_singleton_self a, eq_single_iff.2 ⟨subset_of_eq h, rfl⟩⟩, fun h =>\n    h.2.symm ▸ support_single_ne_zero _ h.1⟩\n#align support_eq_singleton support_eq_singleton\n\n",
+ "support_eq_empty":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →₀ » -/\n@[simp]\ntheorem support_eq_empty {f : «expr →₀ » α M} : f.support = ∅ ↔ f = 0 := by\n  exact_mod_cast @function.support_eq_empty_iff _ _ _ f\n#align support_eq_empty support_eq_empty\n\n",
+ "support_emb_domain":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ↪ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →₀ » -/\n@[simp]\ntheorem support_emb_domain (f : «expr ↪ » α β) (v : «expr →₀ » α M) : (emb_domain f v).support = v.support.map f :=\n  rfl\n#align support_emb_domain support_emb_domain\n\n",
+ "support_add_eq":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →₀ » -/\ntheorem support_add_eq [decidable_eq α] {g₁ g₂ : «expr →₀ » α M} (h : Disjoint g₁.support g₂.support) :\n    (g₁ + g₂).support = g₁.support ∪ g₂.support :=\n  le_antisymm support_zip_with fun a ha =>\n    (Finset.mem_union.1 ha).elim\n      (fun ha => by\n        have : a ∉ g₂.support := disjoint_left.1 h ha\n        simp only [mem_support_iff, not_not] at * <;> simpa only [add_apply, this, add_zero] )\n      fun ha => by\n      have : a ∉ g₁.support := disjoint_right.1 h ha\n      simp only [mem_support_iff, not_not] at * <;> simpa only [add_apply, this, zero_add]\n#align support_add_eq support_add_eq\n\n",
+ "support_add":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →₀ » -/\ntheorem support_add [decidable_eq α] {g₁ g₂ : «expr →₀ » α M} : (g₁ + g₂).support ⊆ g₁.support ∪ g₂.support :=\n  support_zip_with\n#align support_add support_add\n\n",
+ "sub_apply":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →₀ » -/\ntheorem sub_apply [sub_neg_zero_monoid G] (g₁ g₂ : «expr →₀ » α G) (a : α) : (g₁ - g₂) a = g₁ a - g₂ a :=\n  rfl\n#align sub_apply sub_apply\n\n",
+ "single_zero":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →₀ » -/\n@[simp]\ntheorem single_zero (a : α) : (single a 0 : «expr →₀ » α M) = 0 :=\n  coe_fn_injective <| by simpa only [single_eq_update, coe_zero] using function.update_eq_self a (0 : α → M)\n#align single_zero single_zero\n\n",
+ "single_swap":
+ "theorem single_swap (a₁ a₂ : α) (b : M) : single a₁ b a₂ = single a₂ b a₁ := by simp only [single_apply] <;> ac_rfl\n#align single_swap single_swap\n\n",
+ "single_of_single_apply":
+ "theorem single_of_single_apply (a a' : α) (b : M) : single a ((single a' b) a) = single a' (single a' b) a :=\n  by\n  rw [single_apply, single_apply]\n  ext\n  split_ifs\n  · rw [h]\n  · rw [zero_apply, single_apply, if_t_t]\n#align single_of_single_apply single_of_single_apply\n\n",
+ "single_of_emb_domain_single":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →₀ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ↪ » -/\ntheorem single_of_emb_domain_single (l : «expr →₀ » α M) (f : «expr ↪ » α β) (a : β) (b : M) (hb : b ≠ 0)\n    (h : l.emb_domain f = single a b) : ∃ x, l = single x b ∧ f x = a :=\n  by\n  have h_map_support : Finset.map f l.support = {a} := by\n    rw [← support_emb_domain, h, support_single_ne_zero _ hb] <;> rfl\n  have ha : a ∈ Finset.map f l.support := by simp only [h_map_support, Finset.mem_singleton]\n  rcases Finset.mem_map.1 ha with ⟨c, hc₁, hc₂⟩\n  use c\n  constructor\n  · ext d\n    rw [← emb_domain_apply f l, h]\n    by_cases h_cases : c = d\n    · simp only [eq.symm h_cases, hc₂, single_eq_same]\n    · rw [single_apply, single_apply, if_neg, if_neg h_cases]\n      by_contra hfd\n      exact h_cases (f.injective (hc₂.trans hfd))\n  · exact hc₂\n#align single_of_emb_domain_single single_of_emb_domain_single\n\n",
+ "single_left_injective":
+ "/-- `finsupp.single a b` is injective in `a`. For the statement that it is injective in `b`, see\n`finsupp.single_injective` -/\ntheorem single_left_injective (h : b ≠ 0) : function.injective fun a : α => single a b := fun a a' H =>\n  (((single_eq_single_iff _ _ _ _).mp H).resolve_right fun hb => h hb.1).left\n#align single_left_injective single_left_injective\n\n",
+ "single_left_inj":
+ "theorem single_left_inj (h : b ≠ 0) : single a b = single a' b ↔ a = a' :=\n  (single_left_injective h).eq_iff\n#align single_left_inj single_left_inj\n\n",
+ "single_injective":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →₀ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →₀ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →₀ » -/\n/-- `finsupp.single a b` is injective in `b`. For the statement that it is injective in `a`, see\n`finsupp.single_left_injective` -/\ntheorem single_injective (a : α) : function.injective (single a : M → «expr →₀ » α M) := fun b₁ b₂ eq =>\n  by\n  have : (single a b₁ : «expr →₀ » α M) a = (single a b₂ : «expr →₀ » α M) a := by rw [eq]\n  rwa [single_eq_same, single_eq_same] at this\n#align single_injective single_injective\n\n",
+ "single_eq_zero":
+ "@[simp]\ntheorem single_eq_zero : single a b = 0 ↔ b = 0 := by simp [ext_iff, single_eq_indicator]\n#align single_eq_zero single_eq_zero\n\n",
+ "single_eq_update":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\ntheorem single_eq_update [decidable_eq α] (a : α) (b : M) : «expr⇑ » (single a b) = function.update 0 a b := by\n  rw [single_eq_indicator, ← set.piecewise_eq_indicator, Set.piecewise_singleton]\n#align single_eq_update single_eq_update\n\n",
+ "single_eq_single_iff":
+ "theorem single_eq_single_iff (a₁ a₂ : α) (b₁ b₂ : M) :\n    single a₁ b₁ = single a₂ b₂ ↔ a₁ = a₂ ∧ b₁ = b₂ ∨ b₁ = 0 ∧ b₂ = 0 :=\n  by\n  constructor\n  · intro eq\n    by_cases a₁ = a₂\n    · refine' or.inl ⟨h, _⟩\n      rwa [h, (single_injective a₂).eq_iff] at eq\n    · rw [ext_iff] at eq\n      have h₁ := eq a₁\n      have h₂ := eq a₂\n      simp only [single_eq_same, single_eq_of_ne h, single_eq_of_ne (ne.symm h)] at h₁ h₂\n      exact or.inr ⟨h₁, h₂.symm⟩\n  · rintro (⟨rfl, rfl⟩ | ⟨rfl, rfl⟩)\n    · rfl\n    · rw [single_zero, single_zero]\n#align single_eq_single_iff single_eq_single_iff\n\n",
+ "single_eq_same":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →₀ » -/\n@[simp]\ntheorem single_eq_same : (single a b : «expr →₀ » α M) a = b :=\n  Pi.single_eq_same a b\n#align single_eq_same single_eq_same\n\n",
+ "single_eq_pi_single":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\ntheorem single_eq_pi_single [decidable_eq α] (a : α) (b : M) : «expr⇑ » (single a b) = Pi.single a b :=\n  single_eq_update a b\n#align single_eq_pi_single single_eq_pi_single\n\n",
+ "single_eq_of_ne":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →₀ » -/\n@[simp]\ntheorem single_eq_of_ne (h : a ≠ a') : (single a b : «expr →₀ » α M) a' = 0 :=\n  Pi.single_eq_of_ne' h _\n#align single_eq_of_ne single_eq_of_ne\n\n",
+ "single_eq_indicator":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\ntheorem single_eq_indicator : «expr⇑ » (single a b) = set.indicator {a} fun _ => b :=\n  by\n  ext\n  simp [single_apply, set.indicator, @eq_comm _ a]\n#align single_eq_indicator single_eq_indicator\n\n",
+ "single_apply_ne_zero":
+ "theorem single_apply_ne_zero {a x : α} {b : M} : single a b x ≠ 0 ↔ x = a ∧ b ≠ 0 := by simp [single_apply_eq_zero]\n#align single_apply_ne_zero single_apply_ne_zero\n\n",
+ "single_apply_mem":
+ "theorem single_apply_mem (x) : single a b x ∈ ({0, b} : set M) := by\n  rcases em (a = x) with (rfl | hx) <;> [simp, simp [single_eq_of_ne hx]]\n#align single_apply_mem single_apply_mem\n\n",
+ "single_apply_left":
+ "theorem single_apply_left {f : α → β} (hf : function.injective f) (x z : α) (y : M) :\n    single (f x) y (f z) = single x y z := by simp only [single_apply, hf.eq_iff]\n#align single_apply_left single_apply_left\n\n",
+ "single_apply_eq_zero":
+ "theorem single_apply_eq_zero {a x : α} {b : M} : single a b x = 0 ↔ x = a → b = 0 := by simp [single_eq_indicator]\n#align single_apply_eq_zero single_apply_eq_zero\n\n",
+ "single_apply":
+ "theorem single_apply [decidable (a = a')] : single a b a' = if a = a' then b else 0 :=\n  by\n  simp_rw [@eq_comm _ a a']\n  convert Pi.single_apply _ _ _\n#align single_apply single_apply\n\n",
+ "single_add_single_eq_single_add_single":
+ "theorem single_add_single_eq_single_add_single [add_comm_monoid M] {k l m n : α} {u v : M} (hu : u ≠ 0) (hv : v ≠ 0) :\n    single k u + single l v = single m u + single n v ↔\n      k = m ∧ l = n ∨ u = v ∧ k = n ∧ l = m ∨ u + v = 0 ∧ k = l ∧ m = n :=\n  by\n  simp_rw [fun_like.ext_iff, coe_add, single_eq_pi_single, ← funext_iff]\n  exact Pi.single_add_single_eq_single_add_single hu hv\n#align single_add_single_eq_single_add_single single_add_single_eq_single_add_single\n\n",
+ "single_add_erase":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →₀ » -/\ntheorem single_add_erase (a : α) (f : «expr →₀ » α M) : single a (f a) + f.erase a = f := by\n  rw [← update_eq_single_add_erase, update_self]\n#align single_add_erase single_add_erase\n\n",
+ "single_add":
+ "@[simp]\ntheorem single_add (a : α) (b₁ b₂ : M) : single a (b₁ + b₂) = single a b₁ + single a b₂ :=\n  ext fun a' => by\n    by_cases h : a = a'\n    · rw [h, add_apply, single_eq_same, single_eq_same, single_eq_same]\n    · rw [add_apply, single_eq_of_ne h, single_eq_of_ne h, single_eq_of_ne h, zero_add]\n#align single_add single_add\n\n",
+ "range_single_subset":
+ "theorem range_single_subset : Set.range (single a b) ⊆ {0, b} :=\n  Set.range_subset_iff.2 single_apply_mem\n#align range_single_subset range_single_subset\n\n",
+ "on_finset_apply":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →₀ » -/\n@[simp]\ntheorem on_finset_apply {s : Finset α} {f : α → M} {hf a} : (on_finset s f hf : «expr →₀ » α M) a = f a :=\n  rfl\n#align on_finset_apply on_finset_apply\n\n",
+ "of_support_finite_coe":
+ "theorem of_support_finite_coe {f : α → M} {hf : (function.support f).finite} : (of_support_finite f hf : α → M) = f :=\n  rfl\n#align of_support_finite_coe of_support_finite_coe\n\n",
+ "not_mem_support_iff":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →₀ » -/\ntheorem not_mem_support_iff {f : «expr →₀ » α M} {a} : a ∉ f.support ↔ f a = 0 :=\n  not_iff_comm.1 mem_support_iff.symm\n#align not_mem_support_iff not_mem_support_iff\n\n",
+ "nonzero_iff_exists":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →₀ » -/\ntheorem nonzero_iff_exists {f : «expr →₀ » α M} : f ≠ 0 ↔ ∃ a : α, f a ≠ 0 := by\n  simp [← finsupp.support_eq_empty, Finset.eq_empty_iff_forall_not_mem]\n#align nonzero_iff_exists nonzero_iff_exists\n\n",
+ "neg_apply":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →₀ » -/\ntheorem neg_apply [neg_zero_class G] (g : «expr →₀ » α G) (a : α) : (-g) a = -g a :=\n  rfl\n#align neg_apply neg_apply\n\n",
+ "mul_hom_ext'":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →* » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →₀ » -/\n@[ext]\ntheorem mul_hom_ext' [mul_one_class N] {f g : «expr →* » (Multiplicative («expr →₀ » α M)) N}\n    (H : ∀ x, f.comp (single_add_hom x).to_multiplicative = g.comp (single_add_hom x).to_multiplicative) : f = g :=\n  mul_hom_ext fun x => MonoidHom.congr_fun (H x)\n#align mul_hom_ext' mul_hom_ext'\n\n",
+ "mul_hom_ext":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →* » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →₀ » -/\ntheorem mul_hom_ext [mul_one_class N] ⦃f g : «expr →* » (Multiplicative («expr →₀ » α M)) N⦄\n    (H : ∀ x y, f (Multiplicative.ofAdd <| single x y) = g (Multiplicative.ofAdd <| single x y)) : f = g :=\n  MonoidHom.ext <| AddMonoidHom.congr_fun <| @add_hom_ext α M (Additive N) _ _ f.to_additive'' g.to_additive'' H\n#align mul_hom_ext mul_hom_ext\n\n",
+ "mem_support_single":
+ "theorem mem_support_single (a a' : α) (b : M) : a ∈ (single a' b).support ↔ a = a' ∧ b ≠ 0 := by\n  simp [single_apply_eq_zero, not_or]\n#align mem_support_single mem_support_single\n\n",
+ "mem_support_on_finset":
+ "@[simp]\ntheorem mem_support_on_finset {s : Finset α} {f : α → M} (hf : ∀ a : α, f a ≠ 0 → a ∈ s) {a : α} :\n    a ∈ (finsupp.on_finset s f hf).support ↔ f a ≠ 0 := by rw [finsupp.mem_support_iff, finsupp.on_finset_apply]\n#align mem_support_on_finset mem_support_on_finset\n\n",
+ "mem_support_iff":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →₀ » -/\n@[simp]\ntheorem mem_support_iff {f : «expr →₀ » α M} : ∀ {a : α}, a ∈ f.support ↔ f a ≠ 0 :=\n  f.mem_support_to_fun\n#align mem_support_iff mem_support_iff\n\n",
+ "map_range_zero":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →₀ » -/\n@[simp]\ntheorem map_range_zero {f : M → N} {hf : f 0 = 0} : map_range f hf (0 : «expr →₀ » α M) = 0 :=\n  ext fun a => by simp only [hf, zero_apply, map_range_apply]\n#align map_range_zero map_range_zero\n\n",
+ "map_range_sub'":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →₀ » -/\ntheorem map_range_sub' [add_group G] [subtraction_monoid H] [AddMonoidHomClass β G H] {f : β} (v₁ v₂ : «expr →₀ » α G) :\n    map_range f (map_zero f) (v₁ - v₂) = map_range f (map_zero f) v₁ - map_range f (map_zero f) v₂ :=\n  map_range_sub (map_sub f) v₁ v₂\n#align map_range_sub' map_range_sub'\n\n",
+ "map_range_sub":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →₀ » -/\ntheorem map_range_sub [sub_neg_zero_monoid G] [sub_neg_zero_monoid H] {f : G → H} {hf : f 0 = 0}\n    (hf' : ∀ x y, f (x - y) = f x - f y) (v₁ v₂ : «expr →₀ » α G) :\n    map_range f hf (v₁ - v₂) = map_range f hf v₁ - map_range f hf v₂ :=\n  ext fun _ => by simp only [hf', sub_apply, map_range_apply]\n#align map_range_sub map_range_sub\n\n",
+ "map_range_single":
+ "@[simp]\ntheorem map_range_single {f : M → N} {hf : f 0 = 0} {a : α} {b : M} : map_range f hf (single a b) = single a (f b) :=\n  ext fun a' => by simpa only [single_eq_pi_single] using Pi.apply_single _ (fun _ => hf) a _ a'\n#align map_range_single map_range_single\n\n",
+ "map_range_neg'":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →₀ » -/\ntheorem map_range_neg' [add_group G] [subtraction_monoid H] [AddMonoidHomClass β G H] {f : β} (v : «expr →₀ » α G) :\n    map_range f (map_zero f) (-v) = -map_range f (map_zero f) v :=\n  map_range_neg (map_neg f) v\n#align map_range_neg' map_range_neg'\n\n",
+ "map_range_neg":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →₀ » -/\ntheorem map_range_neg [neg_zero_class G] [neg_zero_class H] {f : G → H} {hf : f 0 = 0} (hf' : ∀ x, f (-x) = -f x)\n    (v : «expr →₀ » α G) : map_range f hf (-v) = -map_range f hf v :=\n  ext fun _ => by simp only [hf', neg_apply, map_range_apply]\n#align map_range_neg map_range_neg\n\n",
+ "map_range_id":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →₀ » -/\n@[simp]\ntheorem map_range_id (g : «expr →₀ » α M) : map_range id rfl g = g :=\n  ext fun _ => rfl\n#align map_range_id map_range_id\n\n",
+ "map_range_comp":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →₀ » -/\ntheorem map_range_comp (f : N → P) (hf : f 0 = 0) (f₂ : M → N) (hf₂ : f₂ 0 = 0) (h : (f ∘ f₂) 0 = 0)\n    (g : «expr →₀ » α M) : map_range (f ∘ f₂) h g = map_range f hf (map_range f₂ hf₂ g) :=\n  ext fun _ => rfl\n#align map_range_comp map_range_comp\n\n",
+ "map_range_apply":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →₀ » -/\n@[simp]\ntheorem map_range_apply {f : M → N} {hf : f 0 = 0} {g : «expr →₀ » α M} {a : α} : map_range f hf g a = f (g a) :=\n  rfl\n#align map_range_apply map_range_apply\n\n",
+ "map_range_add'":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →₀ » -/\ntheorem map_range_add' [add_zero_class N] [AddMonoidHomClass β M N] {f : β} (v₁ v₂ : «expr →₀ » α M) :\n    map_range f (map_zero f) (v₁ + v₂) = map_range f (map_zero f) v₁ + map_range f (map_zero f) v₂ :=\n  map_range_add (map_add f) v₁ v₂\n#align map_range_add' map_range_add'\n\n",
+ "map_range_add":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →₀ » -/\ntheorem map_range_add [add_zero_class N] {f : M → N} {hf : f 0 = 0} (hf' : ∀ x y, f (x + y) = f x + f y)\n    (v₁ v₂ : «expr →₀ » α M) : map_range f hf (v₁ + v₂) = map_range f hf v₁ + map_range f hf v₂ :=\n  ext fun _ => by simp only [hf', add_apply, map_range_apply]\n#align map_range_add map_range_add\n\n",
+ "induction₂":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →₀ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →₀ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →₀ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →₀ » -/\ntheorem induction₂ {p : «expr →₀ » α M → Prop} (f : «expr →₀ » α M) (h0 : p 0)\n    (ha : ∀ (a b) (f : «expr →₀ » α M), a ∉ f.support → b ≠ 0 → p f → p (f + single a b)) : p f :=\n  suffices ∀ (s) (f : «expr →₀ » α M), f.support = s → p f from this _ _ rfl\n  fun s =>\n  Finset.induction_on s (fun f hf => by rwa [support_eq_empty.1 hf]) fun a s has ih f hf =>\n    by\n    suffices p (f.erase a + single a (f a)) by rwa [erase_add_single] at this\n    apply ha\n    · rw [support_erase, mem_erase]\n      exact fun H => H.1 rfl\n    · rw [← mem_support_iff, hf]\n      exact mem_insert_self _ _\n    · apply ih _ _\n      rw [support_erase, hf, Finset.erase_insert has]\n#align induction₂ induction₂\n\n",
+ "induction_linear":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →₀ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →₀ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →₀ » -/\ntheorem induction_linear {p : «expr →₀ » α M → Prop} (f : «expr →₀ » α M) (h0 : p 0)\n    (hadd : ∀ f g : «expr →₀ » α M, p f → p g → p (f + g)) (hsingle : ∀ a b, p (single a b)) : p f :=\n  induction₂ f h0 fun a b f _ _ w => hadd _ _ w (hsingle _ _)\n#align induction_linear induction_linear\n\n",
+ "induction":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →₀ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →₀ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →₀ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →₀ » -/\n@[elab_as_elim]\nprotected theorem induction {p : «expr →₀ » α M → Prop} (f : «expr →₀ » α M) (h0 : p 0)\n    (ha : ∀ (a b) (f : «expr →₀ » α M), a ∉ f.support → b ≠ 0 → p f → p (single a b + f)) : p f :=\n  suffices ∀ (s) (f : «expr →₀ » α M), f.support = s → p f from this _ _ rfl\n  fun s =>\n  Finset.induction_on s (fun f hf => by rwa [support_eq_empty.1 hf]) fun a s has ih f hf =>\n    by\n    suffices p (single a (f a) + f.erase a) by rwa [single_add_erase] at this\n    apply ha\n    · rw [support_erase, mem_erase]\n      exact fun H => H.1 rfl\n    · rw [← mem_support_iff, hf]\n      exact mem_insert_self _ _\n    · apply ih _ _\n      rw [support_erase, hf, Finset.erase_insert has]\n#align induction induction\n\n",
+ "fun_support_eq":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →₀ » -/\n@[simp, norm_cast]\ntheorem fun_support_eq (f : «expr →₀ » α M) : function.support f = f.support :=\n  Set.ext fun x => mem_support_iff.symm\n#align fun_support_eq fun_support_eq\n\n",
+ "finite_support":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →₀ » -/\ntheorem finite_support (f : «expr →₀ » α M) : set.finite (function.support f) :=\n  f.fun_support_eq.symm ▸ f.support.finite_to_set\n#align finite_support finite_support\n\n",
+ "ext_iff'":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →₀ » -/\ntheorem ext_iff' {f g : «expr →₀ » α M} : f = g ↔ f.support = g.support ∧ ∀ x ∈ f.support, f x = g x :=\n  ⟨fun h => h ▸ ⟨rfl, fun _ _ => rfl⟩, fun ⟨h₁, h₂⟩ =>\n    ext fun a =>\n      if h : a ∈ f.support then h₂ a h\n      else by\n        have hf : f a = 0 := not_mem_support_iff.1 h\n        have hg : g a = 0 := by rwa [h₁, not_mem_support_iff] at h\n        rw [hf, hg]⟩\n#align ext_iff' ext_iff'\n\n",
+ "ext_iff":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →₀ » -/\n/-- Deprecated. Use `fun_like.ext_iff` instead. -/\ntheorem ext_iff {f g : «expr →₀ » α M} : f = g ↔ ∀ a, f a = g a :=\n  fun_like.ext_iff\n#align ext_iff ext_iff\n\n",
+ "ext":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →₀ » -/\n/-\nCopyright (c) 2017 Johannes Hölzl. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Johannes Hölzl, Scott Morrison\n-/\n@[ext]\ntheorem ext {f g : «expr →₀ » α M} (h : ∀ a, f a = g a) : f = g :=\n  fun_like.ext _ _ h\n#align ext ext\n\n",
+ "erase_zero":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →₀ » -/\n@[simp]\ntheorem erase_zero (a : α) : erase a (0 : «expr →₀ » α M) = 0 := by\n  rw [← support_eq_empty, support_erase, support_zero, erase_empty]\n#align erase_zero erase_zero\n\n",
+ "erase_single_ne":
+ "theorem erase_single_ne {a a' : α} {b : M} (h : a ≠ a') : erase a (single a' b) = single a' b :=\n  by\n  ext s; by_cases hs : s = a\n  · rw [hs, erase_same, single_eq_of_ne h.symm]\n  · rw [erase_ne hs]\n#align erase_single_ne erase_single_ne\n\n",
+ "erase_single":
+ "@[simp]\ntheorem erase_single {a : α} {b : M} : erase a (single a b) = 0 :=\n  by\n  ext s; by_cases hs : s = a\n  · rw [hs, erase_same]\n    rfl\n  · rw [erase_ne hs]\n    exact single_eq_of_ne (ne.symm hs)\n#align erase_single erase_single\n\n",
+ "erase_same":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →₀ » -/\n@[simp]\ntheorem erase_same {a : α} {f : «expr →₀ » α M} : (f.erase a) a = 0 :=\n  if_pos rfl\n#align erase_same erase_same\n\n",
+ "erase_of_not_mem_support":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →₀ » -/\n@[simp]\ntheorem erase_of_not_mem_support {f : «expr →₀ » α M} {a} (haf : a ∉ f.support) : erase a f = f :=\n  by\n  ext b; by_cases hab : b = a\n  · rwa [hab, erase_same, eq_comm, ← not_mem_support_iff]\n  · rw [erase_ne hab]\n#align erase_of_not_mem_support erase_of_not_mem_support\n\n",
+ "erase_ne":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →₀ » -/\n@[simp]\ntheorem erase_ne {a a' : α} {f : «expr →₀ » α M} (h : a' ≠ a) : (f.erase a) a' = f a' :=\n  if_neg h\n#align erase_ne erase_ne\n\n",
+ "erase_eq_sub_single":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →₀ » -/\ntheorem erase_eq_sub_single [add_group G] (f : «expr →₀ » α G) (a : α) : f.erase a = f - single a (f a) :=\n  by\n  ext a'\n  rcases eq_or_ne a a' with (rfl | h)\n  · simp\n  · simp [erase_ne h.symm, single_eq_of_ne h]\n#align erase_eq_sub_single erase_eq_sub_single\n\n",
+ "erase_add_single":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →₀ » -/\ntheorem erase_add_single (a : α) (f : «expr →₀ » α M) : f.erase a + single a (f a) = f := by\n  rw [← update_eq_erase_add_single, update_self]\n#align erase_add_single erase_add_single\n\n",
+ "erase_add":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →₀ » -/\n@[simp]\ntheorem erase_add (a : α) (f f' : «expr →₀ » α M) : erase a (f + f') = erase a f + erase a f' :=\n  by\n  ext s; by_cases hs : s = a\n  · rw [hs, add_apply, erase_same, erase_same, erase_same, add_zero]\n  rw [add_apply, erase_ne hs, erase_ne hs, erase_ne hs, add_apply]\n#align erase_add erase_add\n\n",
+ "equiv_fun_on_finite_symm_single":
+ "@[simp]\ntheorem equiv_fun_on_finite_symm_single [decidable_eq α] [Finite α] (x : α) (m : M) :\n    finsupp.equiv_fun_on_finite.symm (Pi.single x m) = finsupp.single x m := by\n  rw [← equiv_fun_on_finite_single, equiv.symm_apply_apply]\n#align equiv_fun_on_finite_symm_single equiv_fun_on_finite_symm_single\n\n",
+ "equiv_fun_on_finite_symm_coe":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →₀ » -/\n@[simp]\ntheorem equiv_fun_on_finite_symm_coe {α} [Finite α] (f : «expr →₀ » α M) : equiv_fun_on_finite.symm f = f :=\n  equiv_fun_on_finite.symm_apply_apply f\n#align equiv_fun_on_finite_symm_coe equiv_fun_on_finite_symm_coe\n\n",
+ "equiv_fun_on_finite_single":
+ "@[simp]\ntheorem equiv_fun_on_finite_single [decidable_eq α] [Finite α] (x : α) (m : M) :\n    finsupp.equiv_fun_on_finite (finsupp.single x m) = Pi.single x m :=\n  by\n  ext\n  simp [finsupp.single_eq_pi_single]\n#align equiv_fun_on_finite_single equiv_fun_on_finite_single\n\n",
+ "eq_single_iff":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →₀ » -/\ntheorem eq_single_iff {f : «expr →₀ » α M} {a b} : f = single a b ↔ f.support ⊆ {a} ∧ f a = b :=\n  by\n  refine' ⟨fun h => h.symm ▸ ⟨support_single_subset, single_eq_same⟩, _⟩\n  rintro ⟨h, rfl⟩\n  ext x\n  by_cases hx : a = x <;> simp only [hx, single_eq_same, single_eq_of_ne, ne.def, not_false_iff]\n  exact not_mem_support_iff.1 (mt (fun hx => (mem_singleton.1 (h hx)).symm) hx)\n#align eq_single_iff eq_single_iff\n\n",
+ "emb_domain_zero":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ↪ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →₀ » -/\n@[simp]\ntheorem emb_domain_zero (f : «expr ↪ » α β) : (emb_domain f 0 : «expr →₀ » β M) = 0 :=\n  rfl\n#align emb_domain_zero emb_domain_zero\n\n",
+ "emb_domain_single":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ↪ » -/\n@[simp]\ntheorem emb_domain_single (f : «expr ↪ » α β) (a : α) (m : M) : emb_domain f (single a m) = single (f a) m :=\n  by\n  ext b\n  by_cases h : b ∈ Set.range f\n  · rcases h with ⟨a', rfl⟩\n    simp [single_apply]\n  · simp only [emb_domain_notin_range, h, single_apply, not_false_iff]\n    rw [if_neg]\n    rintro rfl\n    simpa using h\n#align emb_domain_single emb_domain_single\n\n",
+ "emb_domain_notin_range":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ↪ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →₀ » -/\ntheorem emb_domain_notin_range (f : «expr ↪ » α β) (v : «expr →₀ » α M) (a : β) (h : a ∉ Set.range f) :\n    emb_domain f v a = 0 := by\n  refine' dif_neg (mt (fun h => _) h)\n  rcases Finset.mem_map.1 h with ⟨a, h, rfl⟩\n  exact Set.mem_range_self a\n#align emb_domain_notin_range emb_domain_notin_range\n\n",
+ "emb_domain_map_range":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ↪ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →₀ » -/\ntheorem emb_domain_map_range (f : «expr ↪ » α β) (g : M → N) (p : «expr →₀ » α M) (hg : g 0 = 0) :\n    emb_domain f (map_range g hg p) = map_range g hg (emb_domain f p) :=\n  by\n  ext a\n  by_cases a ∈ Set.range f\n  · rcases h with ⟨a', rfl⟩\n    rw [map_range_apply, emb_domain_apply, emb_domain_apply, map_range_apply]\n  · rw [map_range_apply, emb_domain_notin_range, emb_domain_notin_range, ← hg] <;> assumption\n#align emb_domain_map_range emb_domain_map_range\n\n",
+ "emb_domain_injective":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ↪ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →₀ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →₀ » -/\ntheorem emb_domain_injective (f : «expr ↪ » α β) :\n    function.injective (emb_domain f : «expr →₀ » α M → «expr →₀ » β M) := fun l₁ l₂ h =>\n  ext fun a => by simpa only [emb_domain_apply] using ext_iff.1 h (f a)\n#align emb_domain_injective emb_domain_injective\n\n",
+ "emb_domain_inj":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ↪ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →₀ » -/\n@[simp]\ntheorem emb_domain_inj {f : «expr ↪ » α β} {l₁ l₂ : «expr →₀ » α M} : emb_domain f l₁ = emb_domain f l₂ ↔ l₁ = l₂ :=\n  (emb_domain_injective f).eq_iff\n#align emb_domain_inj emb_domain_inj\n\n",
+ "emb_domain_eq_zero":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ↪ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →₀ » -/\n@[simp]\ntheorem emb_domain_eq_zero {f : «expr ↪ » α β} {l : «expr →₀ » α M} : emb_domain f l = 0 ↔ l = 0 :=\n  (emb_domain_injective f).eq_iff' <| emb_domain_zero f\n#align emb_domain_eq_zero emb_domain_eq_zero\n\n",
+ "emb_domain_apply":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ↪ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →₀ » -/\n@[simp]\ntheorem emb_domain_apply (f : «expr ↪ » α β) (v : «expr →₀ » α M) (a : α) : emb_domain f v (f a) = v a :=\n  by\n  change dite _ _ _ = _\n  split_ifs <;> rw [Finset.mem_map' f] at h\n  · refine' congr_arg (v : α → M) (f.inj' _)\n    exact Finset.choose_property (fun a₁ => f a₁ = f a) _ _\n  · exact (not_mem_support_iff.1 h).symm\n#align emb_domain_apply emb_domain_apply\n\n",
+ "emb_domain_add":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ↪ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →₀ » -/\n@[simp]\ntheorem emb_domain_add (f : «expr ↪ » α β) (v w : «expr →₀ » α M) :\n    emb_domain f (v + w) = emb_domain f v + emb_domain f w :=\n  (emb_domain.add_monoid_hom f).map_add v w\n#align emb_domain_add emb_domain_add\n\n",
+ "congr_fun":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →₀ » -/\n#print congr_fun /-\n/-- Deprecated. Use `fun_like.congr_fun` instead. -/\ntheorem congr_fun {f g : «expr →₀ » α M} (h : f = g) (a : α) : f a = g a :=\n  fun_like.congr_fun h _\n#align congr_fun congr_fun\n-/\n\n",
+ "coe_zero":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →₀ » -/\n@[simp]\ntheorem coe_zero : «expr⇑ » (0 : «expr →₀ » α M) = 0 :=\n  rfl\n#align coe_zero coe_zero\n\n",
+ "coe_update":
+ "@[simp]\ntheorem coe_update [decidable_eq α] : (f.update a b : α → M) = function.update f a b := by convert rfl\n#align coe_update coe_update\n\n",
+ "coe_sub":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →₀ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n@[simp]\ntheorem coe_sub [sub_neg_zero_monoid G] (g₁ g₂ : «expr →₀ » α G) : «expr⇑ » (g₁ - g₂) = g₁ - g₂ :=\n  rfl\n#align coe_sub coe_sub\n\n",
+ "coe_neg":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →₀ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n@[simp]\ntheorem coe_neg [neg_zero_class G] (g : «expr →₀ » α G) : «expr⇑ » (-g) = -g :=\n  rfl\n#align coe_neg coe_neg\n\n",
+ "coe_mk":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →₀ » -/\n@[simp]\ntheorem coe_mk (f : α → M) (s : Finset α) (h : ∀ a, a ∈ s ↔ f a ≠ 0) : «expr⇑ » (⟨s, f, h⟩ : «expr →₀ » α M) = f :=\n  rfl\n#align coe_mk coe_mk\n\n",
+ "coe_fn_injective":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →₀ » -/\n/-- Deprecated. Use `fun_like.coe_injective` instead. -/\ntheorem coe_fn_injective : @function.injective («expr →₀ » α M) (α → M) coe_fn :=\n  fun_like.coe_injective\n#align coe_fn_injective coe_fn_injective\n\n",
+ "coe_fn_inj":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →₀ » -/\n/-- Deprecated. Use `fun_like.coe_fn_eq` instead. -/\ntheorem coe_fn_inj {f g : «expr →₀ » α M} : (f : α → M) = g ↔ f = g :=\n  fun_like.coe_fn_eq\n#align coe_fn_inj coe_fn_inj\n\n",
+ "coe_eq_zero":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →₀ » -/\n@[simp, norm_cast]\ntheorem coe_eq_zero {f : «expr →₀ » α M} : (f : α → M) = 0 ↔ f = 0 := by rw [← coe_zero, coe_fn_inj]\n#align coe_eq_zero coe_eq_zero\n\n",
+ "coe_add":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →₀ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n@[simp]\ntheorem coe_add (f g : «expr →₀ » α M) : «expr⇑ » (f + g) = f + g :=\n  rfl\n#align coe_add coe_add\n\n",
+ "card_support_le_one'":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →₀ » -/\ntheorem card_support_le_one' [nonempty α] {f : «expr →₀ » α M} : card f.support ≤ 1 ↔ ∃ a b, f = single a b := by\n  simp only [card_le_one_iff_subset_singleton, support_subset_singleton']\n#align card_support_le_one' card_support_le_one'\n\n",
+ "card_support_le_one":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →₀ » -/\ntheorem card_support_le_one [nonempty α] {f : «expr →₀ » α M} : card f.support ≤ 1 ↔ ∃ a, f = single a (f a) := by\n  simp only [card_le_one_iff_subset_singleton, support_subset_singleton]\n#align card_support_le_one card_support_le_one\n\n",
+ "card_support_eq_zero":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →₀ » -/\ntheorem card_support_eq_zero {f : «expr →₀ » α M} : card f.support = 0 ↔ f = 0 := by simp\n#align card_support_eq_zero card_support_eq_zero\n\n",
+ "card_support_eq_one'":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →₀ » -/\n/- ./././Mathport/Syntax/Translate/Basic.lean:632:2: warning: expanding binder collection (b «expr ≠ » 0) -/\ntheorem card_support_eq_one' {f : «expr →₀ » α M} : card f.support = 1 ↔ ∃ (a : _)(b : _)(_ : b ≠ 0), f = single a b :=\n  by simp only [card_eq_one, support_eq_singleton']\n#align card_support_eq_one' card_support_eq_one'\n\n",
+ "card_support_eq_one":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →₀ » -/\ntheorem card_support_eq_one {f : «expr →₀ » α M} : card f.support = 1 ↔ ∃ a, f a ≠ 0 ∧ f = single a (f a) := by\n  simp only [card_eq_one, support_eq_singleton]\n#align card_support_eq_one card_support_eq_one\n\n",
+ "add_hom_ext'":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →+ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →₀ » -/\n/-- If two additive homomorphisms from `α →₀ M` are equal on each `single a b`,\nthen they are equal.\n\nWe formulate this using equality of `add_monoid_hom`s so that `ext` tactic can apply a type-specific\nextensionality lemma after this one.  E.g., if the fiber `M` is `ℕ` or `ℤ`, then it suffices to\nverify `f (single a 1) = g (single a 1)`. -/\n@[ext]\ntheorem add_hom_ext' [add_zero_class N] ⦃f g : «expr →+ » («expr →₀ » α M) N⦄\n    (H : ∀ x, f.comp (single_add_hom x) = g.comp (single_add_hom x)) : f = g :=\n  add_hom_ext fun x => AddMonoidHom.congr_fun (H x)\n#align add_hom_ext' add_hom_ext'\n\n",
+ "add_hom_ext":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →+ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →₀ » -/\n/-- If two additive homomorphisms from `α →₀ M` are equal on each `single a b`,\nthen they are equal. -/\ntheorem add_hom_ext [add_zero_class N] ⦃f g : «expr →+ » («expr →₀ » α M) N⦄\n    (H : ∀ x y, f (single x y) = g (single x y)) : f = g :=\n  by\n  refine' add_monoid_hom.eq_of_eq_on_mdense add_closure_set_of_eq_single _\n  rintro _ ⟨x, y, rfl⟩\n  apply H\n#align add_hom_ext add_hom_ext\n\n",
+ "add_closure_set_of_eq_single":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →₀ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n@[simp]\ntheorem add_closure_set_of_eq_single : add_submonoid.closure { f : «expr →₀ » α M | ∃ a b, f = single a b } = «expr⊤» :=\n  top_unique fun x hx =>\n    finsupp.induction x (add_submonoid.zero_mem _) fun a b f ha hb hf =>\n      add_submonoid.add_mem _ (add_submonoid.subset_closure <| ⟨a, b, rfl⟩) hf\n#align add_closure_set_of_eq_single add_closure_set_of_eq_single\n\n",
+ "add_apply":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →₀ » -/\ntheorem add_apply (g₁ g₂ : «expr →₀ » α M) (a : α) : (g₁ + g₂) a = g₁ a + g₂ a :=\n  rfl\n#align add_apply add_apply\n\n"}

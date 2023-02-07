@@ -1,0 +1,16 @@
+{"nodup_antidiagonal":
+ "/-- The antidiagonal of `n` does not contain duplicate entries. -/\n@[simp]\ntheorem nodup_antidiagonal (n : ℕ) : Nodup (antidiagonal n) :=\n  coe_nodup.2 <| List.Nat.nodup_antidiagonal n\n#align nodup_antidiagonal nodup_antidiagonal\n\n",
+ "mem_antidiagonal":
+ "/-\nCopyright (c) 2019 Johan Commelin. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Johan Commelin\n-/\n/-- A pair (i, j) is contained in the antidiagonal of `n` if and only if `i + j = n`. -/\n@[simp]\ntheorem mem_antidiagonal {n : ℕ} {x : ℕ × ℕ} : x ∈ antidiagonal n ↔ x.1 + x.2 = n := by\n  rw [antidiagonal, mem_coe, List.Nat.mem_antidiagonal]\n#align mem_antidiagonal mem_antidiagonal\n\n",
+ "map_swap_antidiagonal":
+ "theorem map_swap_antidiagonal {n : ℕ} : (antidiagonal n).map prod.swap = antidiagonal n := by\n  rw [antidiagonal, coe_map, List.Nat.map_swap_antidiagonal, coe_reverse]\n#align map_swap_antidiagonal map_swap_antidiagonal\n\n",
+ "card_antidiagonal":
+ "/-- The cardinality of the antidiagonal of `n` is `n+1`. -/\n@[simp]\ntheorem card_antidiagonal (n : ℕ) : (antidiagonal n).card = n + 1 := by\n  rw [antidiagonal, coe_card, List.Nat.length_antidiagonal]\n#align card_antidiagonal card_antidiagonal\n\n",
+ "antidiagonal_zero":
+ "/-- The antidiagonal of `0` is the list `[(0, 0)]` -/\n@[simp]\ntheorem antidiagonal_zero : antidiagonal 0 = {(0, 0)} :=\n  rfl\n#align antidiagonal_zero antidiagonal_zero\n\n",
+ "antidiagonal_succ_succ'":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ::ₘ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ::ₘ » -/\ntheorem antidiagonal_succ_succ' {n : ℕ} :\n    antidiagonal (n + 2) =\n      «expr ::ₘ » (0, n + 2) («expr ::ₘ » (n + 2, 0) ((antidiagonal n).map (prod.map nat.succ nat.succ))) :=\n  by\n  rw [antidiagonal_succ, antidiagonal_succ', map_cons, map_map, Prod_map]\n  rfl\n#align antidiagonal_succ_succ' antidiagonal_succ_succ'\n\n",
+ "antidiagonal_succ'":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ::ₘ » -/\ntheorem antidiagonal_succ' {n : ℕ} :\n    antidiagonal (n + 1) = «expr ::ₘ » (n + 1, 0) ((antidiagonal n).map (prod.map id nat.succ)) := by\n  rw [antidiagonal, List.Nat.antidiagonal_succ', ← coe_add, add_comm, antidiagonal, coe_map, coe_add,\n    List.singleton_append, cons_coe]\n#align antidiagonal_succ' antidiagonal_succ'\n\n",
+ "antidiagonal_succ":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ::ₘ » -/\n@[simp]\ntheorem antidiagonal_succ {n : ℕ} :\n    antidiagonal (n + 1) = «expr ::ₘ » (0, n + 1) ((antidiagonal n).map (prod.map nat.succ id)) := by\n  simp only [antidiagonal, List.Nat.antidiagonal_succ, coe_map, cons_coe]\n#align antidiagonal_succ antidiagonal_succ\n\n"}

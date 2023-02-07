@@ -1,0 +1,44 @@
+{"to_pnat'_coe":
+ "theorem to_pnat'_coe {n : ℕ} : 0 < n → (n.to_pnat' : ℕ) = n :=\n  succ_pred_eq_of_pos\n#align to_pnat'_coe to_pnat'_coe\n\n",
+ "succ_pnat_nat_pred":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«exprℕ+» -/\n@[simp]\ntheorem _root_.pnat.succ_pnat_nat_pred (n : «exprℕ+») : n.nat_pred.succ_pnat = n :=\n  subtype.eq <| succ_pred_eq_of_pos n.2\n#align pnat.succ_pnat_nat_pred pnat.succ_pnat_nat_pred\n\n",
+ "succ_pnat_coe":
+ "@[simp]\ntheorem succ_pnat_coe (n : ℕ) : (succPNat n : ℕ) = succ n :=\n  rfl\n#align succ_pnat_coe succ_pnat_coe\n\n",
+ "pos":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«exprℕ+» -/\n@[simp]\ntheorem pos (n : «exprℕ+») : 0 < (n : ℕ) :=\n  n.2\n#align pos pos\n\n",
+ "one_le":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«exprℕ+» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«exprℕ+» -/\n#print one_le /-\n@[simp]\ntheorem one_le (n : «exprℕ+») : (1 : «exprℕ+») ≤ n :=\n  n.2\n#align one_le one_le\n-/\n\n",
+ "one_coe":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«exprℕ+» -/\n@[norm_cast]\ntheorem one_coe : ((1 : «exprℕ+») : ℕ) = 1 :=\n  rfl\n#align one_coe one_coe\n\n",
+ "not_lt_one":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«exprℕ+» -/\n@[simp]\ntheorem not_lt_one (n : «exprℕ+») : ¬n < 1 :=\n  not_lt_of_le n.one_le\n#align not_lt_one not_lt_one\n\n",
+ "ne_zero":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«exprℕ+» -/\n@[simp]\ntheorem ne_zero (n : «exprℕ+») : (n : ℕ) ≠ 0 :=\n  n.2.ne'\n#align ne_zero ne_zero\n\n",
+ "nat_pred_succ_pnat":
+ "@[simp]\ntheorem nat_pred_succ_pnat (n : ℕ) : n.succ_pnat.nat_pred = n :=\n  rfl\n#align nat_pred_succ_pnat nat_pred_succ_pnat\n\n",
+ "nat_pred_eq_pred":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«exprℕ+» -/\n@[simp]\ntheorem nat_pred_eq_pred {n : ℕ} (h : 0 < n) : natPred (⟨n, h⟩ : «exprℕ+») = n.pred :=\n  rfl\n#align nat_pred_eq_pred nat_pred_eq_pred\n\n",
+ "mod_coe":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«exprℕ+» -/\ntheorem mod_coe (m k : «exprℕ+») : (mod m k : ℕ) = ite ((m : ℕ) % (k : ℕ) = 0) (k : ℕ) ((m : ℕ) % (k : ℕ)) :=\n  by\n  dsimp [mod, mod_div]\n  cases (m : ℕ) % (k : ℕ)\n  · rw [if_pos rfl]\n    rfl\n  · rw [if_neg n.succ_ne_zero]\n    rfl\n#align mod_coe mod_coe\n\n",
+ "mk_one":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«exprℕ+» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«exprℕ+» -/\n-- Some lemmas that rewrite `pnat.mk n h`, for `n` an explicit numeral, into explicit numerals.\n@[simp]\ntheorem mk_one {h} : (⟨1, h⟩ : «exprℕ+») = (1 : «exprℕ+») :=\n  rfl\n#align mk_one mk_one\n\n",
+ "mk_lt_mk":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«exprℕ+» -/\n@[simp]\ntheorem mk_lt_mk (n k : ℕ) (hn : 0 < n) (hk : 0 < k) : (⟨n, hn⟩ : «exprℕ+») < ⟨k, hk⟩ ↔ n < k :=\n  iff.rfl\n#align mk_lt_mk mk_lt_mk\n\n",
+ "mk_le_mk":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«exprℕ+» -/\n/-- We now define a long list of structures on ℕ+ induced by\n similar structures on ℕ. Most of these behave in a completely\n obvious way, but there are a few things to be said about\n subtraction, division and powers.\n-/\n@[simp]\ntheorem mk_le_mk (n k : ℕ) (hn : 0 < n) (hk : 0 < k) : (⟨n, hn⟩ : «exprℕ+») ≤ ⟨k, hk⟩ ↔ n ≤ k :=\n  iff.rfl\n#align mk_le_mk mk_le_mk\n\n",
+ "mk_coe":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«exprℕ+» -/\n/-\nCopyright (c) 2017 Microsoft Corporation. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Mario Carneiro, Neil Strickland\n-/\n@[simp]\ntheorem mk_coe (n h) : ((⟨n, h⟩ : «exprℕ+») : ℕ) = n :=\n  rfl\n#align mk_coe mk_coe\n\n",
+ "eq":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«exprℕ+» -/\ntheorem eq {m n : «exprℕ+»} : (m : ℕ) = n → m = n :=\n  subtype.eq\n#align eq eq\n\n",
+ "div_coe":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«exprℕ+» -/\ntheorem div_coe (m k : «exprℕ+») :\n    (div m k : ℕ) = ite ((m : ℕ) % (k : ℕ) = 0) ((m : ℕ) / (k : ℕ)).pred ((m : ℕ) / (k : ℕ)) :=\n  by\n  dsimp [div, mod_div]\n  cases (m : ℕ) % (k : ℕ)\n  · rw [if_pos rfl]\n    rfl\n  · rw [if_neg n.succ_ne_zero]\n    rfl\n#align div_coe div_coe\n\n",
+ "coe_to_pnat'":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«exprℕ+» -/\n@[simp]\ntheorem coe_to_pnat' (n : «exprℕ+») : (n : ℕ).to_pnat' = n :=\n  eq (toPNat'_coe n.pos)\n#align coe_to_pnat' coe_to_pnat'\n\n",
+ "coe_lt_coe":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«exprℕ+» -/\n@[simp, norm_cast]\ntheorem coe_lt_coe (n k : «exprℕ+») : (n : ℕ) < k ↔ n < k :=\n  iff.rfl\n#align coe_lt_coe coe_lt_coe\n\n",
+ "coe_le_coe":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«exprℕ+» -/\n@[simp, norm_cast]\ntheorem coe_le_coe (n k : «exprℕ+») : (n : ℕ) ≤ k ↔ n ≤ k :=\n  iff.rfl\n#align coe_le_coe coe_le_coe\n\n",
+ "coe_injective":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«exprℕ+» -/\ntheorem coe_injective : function.injective (coe : «exprℕ+» → ℕ) :=\n  subtype.coe_injective\n#align coe_injective coe_injective\n\n",
+ "coe_eq_one_iff":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«exprℕ+» -/\n@[simp, norm_cast]\ntheorem coe_eq_one_iff {m : «exprℕ+»} : (m : ℕ) = 1 ↔ m = 1 :=\n  subtype.coe_injective.eq_iff' one_coe\n#align coe_eq_one_iff coe_eq_one_iff\n\n"}

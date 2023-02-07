@@ -1,0 +1,14 @@
+{"restrict_scalars_top":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n@[simp]\ntheorem restrict_scalars_top : restrict_scalars R («expr⊤» : subalgebra S A) = «expr⊤» :=\n  SetLike.coe_injective rfl\n#align restrict_scalars_top restrict_scalars_top\n\n",
+ "restrict_scalars_to_submodule":
+ "@[simp]\ntheorem restrict_scalars_to_submodule {U : subalgebra S A} :\n    (U.restrict_scalars R).to_submodule = U.to_submodule.restrict_scalars R :=\n  SetLike.coe_injective rfl\n#align restrict_scalars_to_submodule restrict_scalars_to_submodule\n\n",
+ "restrict_scalars_injective":
+ "theorem restrict_scalars_injective : function.injective (restrict_scalars R : subalgebra S A → subalgebra R A) :=\n  fun U V H => ext fun x => by rw [← mem_restrict_scalars R, H, mem_restrict_scalars]\n#align restrict_scalars_injective restrict_scalars_injective\n\n",
+ "mem_restrict_scalars":
+ "@[simp]\ntheorem mem_restrict_scalars {U : subalgebra S A} {x : A} : x ∈ restrict_scalars R U ↔ x ∈ U :=\n  iff.rfl\n#align mem_restrict_scalars mem_restrict_scalars\n\n",
+ "lmul_algebra_map":
+ "/-\nCopyright (c) 2020 Kenny Lau. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Kenny Lau, Anne Baanen\n-/\ntheorem lmul_algebra_map (x : R) : algebra.lmul R A (algebra_map R A x) = algebra.lsmul R A x :=\n  eq.symm <| linear_map.ext <| smul_def x\n#align lmul_algebra_map lmul_algebra_map\n\n",
+ "coe_restrict_scalars":
+ "@[simp]\ntheorem coe_restrict_scalars {U : subalgebra S A} : (restrict_scalars R U : set A) = (U : set A) :=\n  rfl\n#align coe_restrict_scalars coe_restrict_scalars\n\n",
+ "adjoin_range_to_alg_hom":
+ "theorem adjoin_range_to_alg_hom (t : set A) :\n    (algebra.adjoin (to_alg_hom R S A).range t).restrict_scalars R = (algebra.adjoin S t).restrict_scalars R :=\n  subalgebra.ext fun z =>\n    show\n      z ∈ subsemiring.closure (Set.range (algebra_map (to_alg_hom R S A).range A) ∪ t : set A) ↔\n        z ∈ subsemiring.closure (Set.range (algebra_map S A) ∪ t : set A)\n      by\n      suffices Set.range (algebra_map (to_alg_hom R S A).range A) = Set.range (algebra_map S A) by rw [this]\n      ext z\n      exact ⟨fun ⟨⟨x, y, h1⟩, h2⟩ => ⟨y, h2 ▸ h1⟩, fun ⟨y, hy⟩ => ⟨⟨z, y, hy⟩, rfl⟩⟩\n#align adjoin_range_to_alg_hom adjoin_range_to_alg_hom\n\n"}

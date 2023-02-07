@@ -1,0 +1,14 @@
+{"to_list_singleton":
+ "theorem to_list_singleton (x : α) : to_list (singleton x) = [x] := by simp\n#align to_list_singleton to_list_singleton\n\n",
+ "to_list_of_list":
+ "/-\nCopyright (c) 2017 Microsoft Corporation. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthor: Leonardo de Moura\n-/\ntheorem to_list_of_list (l : list α) : to_list (of_list l) = l := by cases l <;> simp\n#align to_list_of_list to_list_of_list\n\n",
+ "to_list_empty":
+ "theorem to_list_empty : to_list (@empty α) = [] := by simp\n#align to_list_empty to_list_empty\n\n",
+ "to_list_cons":
+ "theorem to_list_cons (x : α) (l : dlist α) : to_list (cons x l) = x :: to_list l := by cases l <;> simp\n#align to_list_cons to_list_cons\n\n",
+ "to_list_concat":
+ "theorem to_list_concat (x : α) (l : dlist α) : to_list (concat x l) = to_list l ++ [x] := by\n  cases l <;> simp <;> rw [l_invariant]\n#align to_list_concat to_list_concat\n\n",
+ "to_list_append":
+ "theorem to_list_append (l₁ l₂ : dlist α) : to_list (l₁ ++ l₂) = to_list l₁ ++ to_list l₂ :=\n  show to_list (dlist.append l₁ l₂) = to_list l₁ ++ to_list l₂ by cases l₁ <;> cases l₂ <;> simp <;> rw [l₁_invariant]\n#align to_list_append to_list_append\n\n",
+ "of_list_to_list":
+ "theorem of_list_to_list (l : dlist α) : of_list (to_list l) = l :=\n  by\n  cases' l with xs\n  have h : append (xs []) = xs := by\n    intros\n    funext x\n    simp [l_invariant x]\n  simp [h]\n#align of_list_to_list of_list_to_list\n\n"}

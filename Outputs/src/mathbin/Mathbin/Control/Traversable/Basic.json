@@ -1,0 +1,30 @@
+{"preserves_seq":
+ "@[functor_norm]\ntheorem preserves_seq {α β : Type u} : ∀ (x : F (α → β)) (y : F α), η (x <*> y) = η x <*> η y :=\n  η.preserves_seq'\n#align preserves_seq preserves_seq\n\n",
+ "preserves_pure":
+ "@[functor_norm]\ntheorem preserves_pure {α} : ∀ x : α, η (pure x) = pure x :=\n  η.preserves_pure'\n#align preserves_pure preserves_pure\n\n",
+ "preserves_map'":
+ "theorem preserves_map' {α β} (x : α → β) : @η _ ∘ functor.map x = functor.map x ∘ @η _ :=\n  by\n  ext y\n  exact preserves_map η x y\n#align preserves_map' preserves_map'\n\n",
+ "preserves_map":
+ "@[functor_norm]\ntheorem preserves_map {α β} (x : α → β) (y : F α) : η (x <$> y) = x <$> η y := by\n  rw [← pure_seq_eq_map, η.preserves_seq] <;> simp [functor_norm]\n#align preserves_map preserves_map\n\n",
+ "id_comp":
+ "@[simp]\ntheorem id_comp (η : ApplicativeTransformation F G) : idTransformation.comp η = η :=\n  ext fun α x => rfl\n#align id_comp id_comp\n\n",
+ "ext_iff":
+ "theorem ext_iff {η η' : ApplicativeTransformation F G} : η = η' ↔ ∀ (α : Type u) (x : F α), η x = η' x :=\n  ⟨fun h α x => h ▸ rfl, fun h => ext h⟩\n#align ext_iff ext_iff\n\n",
+ "ext":
+ "@[ext]\ntheorem ext ⦃η η' : ApplicativeTransformation F G⦄ (h : ∀ (α : Type u) (x : F α), η x = η' x) : η = η' :=\n  by\n  apply coe_inj\n  ext1 α\n  exact funext (h α)\n#align ext ext\n\n",
+ "congr_fun":
+ "#print congr_fun /-\nprotected theorem congr_fun (η η' : ApplicativeTransformation F G) (h : η = η') {α : Type u} (x : F α) : η x = η' x :=\n  congr_arg (fun η'' : ApplicativeTransformation F G => η'' x) h\n#align congr_fun congr_fun\n-/\n\n",
+ "congr_arg":
+ "#print congr_arg /-\nprotected theorem congr_arg (η : ApplicativeTransformation F G) {α : Type u} {x y : F α} (h : x = y) : η x = η y :=\n  congr_arg (fun z : F α => η z) h\n#align congr_arg congr_arg\n-/\n\n",
+ "comp_id":
+ "@[simp]\ntheorem comp_id (η : ApplicativeTransformation F G) : η.comp idTransformation = η :=\n  ext fun α x => rfl\n#align comp_id comp_id\n\n",
+ "comp_assoc":
+ "theorem comp_assoc {I : Type u → Type t} [applicative I] [LawfulApplicative I] (η'' : ApplicativeTransformation H I)\n    (η' : ApplicativeTransformation G H) (η : ApplicativeTransformation F G) :\n    (η''.comp η').comp η = η''.comp (η'.comp η) :=\n  rfl\n#align comp_assoc comp_assoc\n\n",
+ "comp_apply":
+ "@[simp]\ntheorem comp_apply (η' : ApplicativeTransformation G H) (η : ApplicativeTransformation F G) {α : Type u} (x : F α) :\n    η'.comp η x = η' (η x) :=\n  rfl\n#align comp_apply comp_apply\n\n",
+ "coe_mk":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n@[simp]\ntheorem coe_mk (f : ∀ α : Type u, F α → G α) (pp ps) : «expr⇑ » (applicative_transformation.mk f pp ps) = f :=\n  rfl\n#align coe_mk coe_mk\n\n",
+ "coe_inj":
+ "theorem coe_inj ⦃η η' : ApplicativeTransformation F G⦄ (h : (η : ∀ α, F α → G α) = η') : η = η' :=\n  by\n  cases η\n  cases η'\n  congr\n  exact h\n#align coe_inj coe_inj\n\n",
+ "app_eq_coe":
+ "/-\nCopyright (c) 2018 Simon Hudon. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Simon Hudon\n-/\n@[simp]\ntheorem app_eq_coe (η : ApplicativeTransformation F G) : η.app = η :=\n  rfl\n#align app_eq_coe app_eq_coe\n\n"}

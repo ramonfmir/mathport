@@ -1,0 +1,172 @@
+{"top_prod_top":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n@[simp, to_additive top_prod_top]\ntheorem top_prod_top : («expr⊤» : Subsemigroup M).prod («expr⊤» : Subsemigroup N) = «expr⊤» :=\n  (top_prod _).trans <| comap_top _\n#align top_prod_top top_prod_top\n\n",
+ "top_prod":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n@[to_additive top_prod]\ntheorem top_prod (s : Subsemigroup N) : («expr⊤» : Subsemigroup M).prod s = s.comap (MulHom.snd M N) :=\n  ext fun x => by simp [mem_prod, MulHom.coe_snd]\n#align top_prod top_prod\n\n",
+ "top_equiv_to_mul_hom":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃* » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n@[simp, to_additive]\ntheorem top_equiv_to_mul_hom :\n    (topEquiv : «expr ≃* » _ M).to_mul_hom = MulMemClass.subtype («expr⊤» : Subsemigroup M) :=\n  rfl\n#align top_equiv_to_mul_hom top_equiv_to_mul_hom\n\n",
+ "toSubsemigroup_closure":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\n#print AddSubsemigroup.toSubsemigroup_closure /-\ntheorem AddSubsemigroup.toSubsemigroup_closure (S : set A) :\n    (AddSubsemigroup.closure S).to_subsemigroup = Subsemigroup.closure («expr ⁻¹' » Multiplicative.toAdd S) :=\n  le_antisymm\n    (AddSubsemigroup.toSubsemigroup.to_galois_connection.l_le <|\n      AddSubsemigroup.closure_le.2 Subsemigroup.subset_closure)\n    (Subsemigroup.closure_le.2 AddSubsemigroup.subset_closure)\n#align add_subsemigroup.to_subsemigroup_closure AddSubsemigroup.toSubsemigroup_closure\n-/\n\n",
+ "toSubsemigroup'_closure":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\n#print AddSubsemigroup.toSubsemigroup'_closure /-\ntheorem AddSubsemigroup.toSubsemigroup'_closure (S : set (Additive M)) :\n    (AddSubsemigroup.closure S).to_subsemigroup' = Subsemigroup.closure («expr ⁻¹' » Multiplicative.ofAdd S) :=\n  le_antisymm\n    (AddSubsemigroup.toSubsemigroup'.le_symm_apply.1 <| AddSubsemigroup.closure_le.2 Subsemigroup.subset_closure)\n    (Subsemigroup.closure_le.2 AddSubsemigroup.subset_closure)\n#align add_subsemigroup.to_subsemigroup'_closure AddSubsemigroup.toSubsemigroup'_closure\n-/\n\n",
+ "toAddSubsemigroup_closure":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\n#print Subsemigroup.toAddSubsemigroup_closure /-\n/-\nCopyright (c) 2022 Yakov Pechersky. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Johannes Hölzl, Kenny Lau, Johan Commelin, Mario Carneiro, Kevin Buzzard,\nAmelia Livingston, Yury Kudryashov, Yakov Pechersky, Jireh Loreaux\n-/\ntheorem Subsemigroup.toAddSubsemigroup_closure (S : set M) :\n    (Subsemigroup.closure S).to_add_subsemigroup = AddSubsemigroup.closure («expr ⁻¹' » Additive.toMul S) :=\n  le_antisymm\n    (Subsemigroup.toAddSubsemigroup.le_symm_apply.1 <| Subsemigroup.closure_le.2 AddSubsemigroup.subset_closure)\n    (AddSubsemigroup.closure_le.2 Subsemigroup.subset_closure)\n#align subsemigroup.to_add_subsemigroup_closure Subsemigroup.toAddSubsemigroup_closure\n-/\n\n",
+ "toAddSubsemigroup'_closure":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\n#print Subsemigroup.toAddSubsemigroup'_closure /-\ntheorem Subsemigroup.toAddSubsemigroup'_closure (S : set (Multiplicative A)) :\n    (Subsemigroup.closure S).to_add_subsemigroup' = AddSubsemigroup.closure («expr ⁻¹' » Additive.ofMul S) :=\n  le_antisymm\n    (Subsemigroup.toAddSubsemigroup'.to_galois_connection.l_le <|\n      Subsemigroup.closure_le.2 AddSubsemigroup.subset_closure)\n    (AddSubsemigroup.closure_le.2 Subsemigroup.subset_closure)\n#align subsemigroup.to_add_subsemigroup'_closure Subsemigroup.toAddSubsemigroup'_closure\n-/\n\n",
+ "subsemigroup_map_surjective":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₙ* » -/\n@[to_additive]\ntheorem subsemigroup_map_surjective (f : «expr →ₙ* » M N) (M' : Subsemigroup M) :\n    function.surjective (f.subsemigroup_map M') :=\n  by\n  rintro ⟨_, x, hx, rfl⟩\n  exact ⟨⟨x, hx⟩, rfl⟩\n#align subsemigroup_map_surjective subsemigroup_map_surjective\n\n",
+ "srange_top_of_surjective":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₙ* » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n/-- The range of a surjective semigroup hom is the whole of the codomain. -/\n@[to_additive \"The range of a surjective `add_semigroup` hom is the whole of the codomain.\"]\ntheorem srange_top_of_surjective {N} [Mul N] (f : «expr →ₙ* » M N) (hf : function.surjective f) :\n    f.srange = («expr⊤» : Subsemigroup N) :=\n  srange_top_iff_surjective.2 hf\n#align srange_top_of_surjective srange_top_of_surjective\n\n",
+ "srange_top_iff_surjective":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₙ* » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n@[to_additive]\ntheorem srange_top_iff_surjective {N} [Mul N] {f : «expr →ₙ* » M N} :\n    f.srange = («expr⊤» : Subsemigroup N) ↔ function.surjective f :=\n  SetLike.ext'_iff.trans <| iff.trans (by rw [coe_srange, coe_top]) Set.range_iff_surjective\n#align srange_top_iff_surjective srange_top_iff_surjective\n\n",
+ "srange_snd":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n@[simp, to_additive]\ntheorem srange_snd [nonempty M] : (snd M N).srange = «expr⊤» :=\n  (snd M N).srange_top_of_surjective <| prod.snd_surjective\n#align srange_snd srange_snd\n\n",
+ "srange_restrict_surjective":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₙ* » -/\n@[to_additive]\ntheorem srange_restrict_surjective (f : «expr →ₙ* » M N) : function.surjective f.srange_restrict := fun ⟨_, ⟨x, rfl⟩⟩ =>\n  ⟨x, rfl⟩\n#align srange_restrict_surjective srange_restrict_surjective\n\n",
+ "srange_fst":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n@[simp, to_additive]\ntheorem srange_fst [nonempty N] : (fst M N).srange = «expr⊤» :=\n  (fst M N).srange_top_of_surjective <| prod.fst_surjective\n#align srange_fst srange_fst\n\n",
+ "srange_eq_map":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₙ* » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n@[to_additive]\ntheorem srange_eq_map (f : «expr →ₙ* » M N) : f.srange = («expr⊤» : Subsemigroup M).map f :=\n  copy_eq _\n#align srange_eq_map srange_eq_map\n\n",
+ "restrict_apply":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₙ* » -/\n@[simp, to_additive]\ntheorem restrict_apply {N : Type _} [Mul N] [SetLike σ M] [MulMemClass σ M] (f : «expr →ₙ* » M N) {S : σ} (x : S) :\n    f.restrict S x = f x :=\n  rfl\n#align restrict_apply restrict_apply\n\n",
+ "range_subtype":
+ "@[simp, to_additive]\ntheorem range_subtype (s : Subsemigroup M) : (MulMemClass.subtype s).srange = s :=\n  SetLike.coe_injective <| (coe_srange _).trans <| Subtype.range_coe\n#align range_subtype range_subtype\n\n",
+ "prod_top":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n@[to_additive prod_top]\ntheorem prod_top (s : Subsemigroup M) : s.prod («expr⊤» : Subsemigroup N) = s.comap (MulHom.fst M N) :=\n  ext fun x => by simp [mem_prod, MulHom.coe_fst]\n#align prod_top prod_top\n\n",
+ "prod_mono":
+ "@[to_additive prod_mono]\ntheorem prod_mono {s₁ s₂ : Subsemigroup M} {t₁ t₂ : Subsemigroup N} (hs : s₁ ≤ s₂) (ht : t₁ ≤ t₂) :\n    s₁.prod t₁ ≤ s₂.prod t₂ :=\n  Set.prod_mono hs ht\n#align prod_mono prod_mono\n\n",
+ "prod_map_comap_prod'":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₙ* » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₙ* » -/\n@[to_additive]\ntheorem prod_map_comap_prod' {M' : Type _} {N' : Type _} [Mul M'] [Mul N'] (f : «expr →ₙ* » M N) (g : «expr →ₙ* » M' N')\n    (S : Subsemigroup N) (S' : Subsemigroup N') : (S.prod S').comap (prodMap f g) = (S.comap f).prod (S'.comap g) :=\n  SetLike.coe_injective <| Set.preimage_prod_map_prod f g _ _\n#align prod_map_comap_prod' prod_map_comap_prod'\n\n",
+ "prod_eq_top_iff":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n@[to_additive]\ntheorem prod_eq_top_iff [nonempty M] [nonempty N] {s : Subsemigroup M} {t : Subsemigroup N} :\n    s.prod t = «expr⊤» ↔ s = «expr⊤» ∧ t = «expr⊤» := by\n  simp only [eq_top_iff, le_prod_iff, ← (gc_map_comap _).le_iff_le, ← srange_eq_map, srange_fst, srange_snd]\n#align prod_eq_top_iff prod_eq_top_iff\n\n",
+ "mul_def":
+ "@[to_additive]\ntheorem mul_def (x y : S') : x * y = ⟨x * y, mul_mem x.2 y.2⟩ :=\n  rfl\n#align mul_def mul_def\n\n",
+ "monotone_map":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₙ* » -/\n@[to_additive]\ntheorem monotone_map {f : «expr →ₙ* » M N} : monotone (map f) :=\n  (gc_map_comap f).monotone_l\n#align monotone_map monotone_map\n\n",
+ "monotone_comap":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₙ* » -/\n@[to_additive]\ntheorem monotone_comap {f : «expr →ₙ* » M N} : monotone (comap f) :=\n  (gc_map_comap f).monotone_u\n#align monotone_comap monotone_comap\n\n",
+ "mk_mul_mk":
+ "-- lower priority so later simp lemmas are used first; to appease simp_nf\n@[simp, to_additive]\ntheorem mk_mul_mk (x y : M) (hx : x ∈ S') (hy : y ∈ S') : (⟨x, hx⟩ : S') * ⟨y, hy⟩ = ⟨x * y, mul_mem hx hy⟩ :=\n  rfl\n#align mk_mul_mk mk_mul_mk\n\n",
+ "mem_srange":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₙ* » -/\n@[simp, to_additive]\ntheorem mem_srange {f : «expr →ₙ* » M N} {y : N} : y ∈ f.srange ↔ ∃ x, f x = y :=\n  iff.rfl\n#align mem_srange mem_srange\n\n",
+ "mem_prod":
+ "@[to_additive mem_prod]\ntheorem mem_prod {s : Subsemigroup M} {t : Subsemigroup N} {p : M × N} : p ∈ s.prod t ↔ p.1 ∈ s ∧ p.2 ∈ t :=\n  iff.rfl\n#align mem_prod mem_prod\n\n",
+ "mem_map_of_mem":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₙ* » -/\n@[to_additive]\ntheorem mem_map_of_mem (f : «expr →ₙ* » M N) {S : Subsemigroup M} {x : M} (hx : x ∈ S) : f x ∈ S.map f :=\n  mem_image_of_mem f hx\n#align mem_map_of_mem mem_map_of_mem\n\n",
+ "mem_map_iff_mem":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₙ* » -/\n@[to_additive]\ntheorem mem_map_iff_mem {f : «expr →ₙ* » M N} (hf : function.injective f) {S : Subsemigroup M} {x : M} :\n    f x ∈ S.map f ↔ x ∈ S :=\n  hf.mem_set_image\n#align mem_map_iff_mem mem_map_iff_mem\n\n",
+ "mem_map_equiv":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃* » -/\n@[to_additive]\ntheorem mem_map_equiv {f : «expr ≃* » M N} {K : Subsemigroup M} {x : N} : x ∈ K.map f.to_mul_hom ↔ f.symm x ∈ K :=\n  @Set.mem_image_equiv _ _ (↑K) f.to_equiv x\n#align mem_map_equiv mem_map_equiv\n\n",
+ "mem_map":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₙ* » -/\n@[simp, to_additive]\ntheorem mem_map {f : «expr →ₙ* » M N} {S : Subsemigroup M} {y : N} : y ∈ S.map f ↔ ∃ x ∈ S, f x = y :=\n  mem_image_iff_bex\n#align mem_map mem_map\n\n",
+ "mem_comap":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₙ* » -/\n@[simp, to_additive]\ntheorem mem_comap {S : Subsemigroup N} {f : «expr →ₙ* » M N} {x : M} : x ∈ S.comap f ↔ f x ∈ S :=\n  iff.rfl\n#align mem_comap mem_comap\n\n",
+ "mclosure_preimage_le":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₙ* » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\n@[to_additive]\ntheorem mclosure_preimage_le (f : «expr →ₙ* » M N) (s : set N) : closure («expr ⁻¹' » f s) ≤ (closure s).comap f :=\n  closure_le.2 fun x hx => SetLike.mem_coe.2 <| mem_comap.2 <| subset_closure hx\n#align mclosure_preimage_le mclosure_preimage_le\n\n",
+ "map_surjective_of_surjective":
+ "@[to_additive]\ntheorem map_surjective_of_surjective : function.surjective (map f) :=\n  (giMapComap hf).l_surjective\n#align map_surjective_of_surjective map_surjective_of_surjective\n\n",
+ "map_supr_comap_of_surjective":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⨆ , » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⨆ , » -/\n@[to_additive]\ntheorem map_supr_comap_of_surjective (S : ι → Subsemigroup N) :\n    («expr⨆ , » \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⨆ , »\"\n            ((S i).comap f)).map\n        f =\n      supᵢ S :=\n  (giMapComap hf).l_supr_u _\n#align map_supr_comap_of_surjective map_supr_comap_of_surjective\n\n",
+ "map_supr":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₙ* » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⨆ , » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⨆ , » -/\n@[to_additive]\ntheorem map_supr {ι : Sort _} (f : «expr →ₙ* » M N) (s : ι → Subsemigroup M) :\n    (supᵢ s).map f =\n      «expr⨆ , » \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⨆ , »\" ((s i).map f) :=\n  (gc_map_comap f).l_supr\n#align map_supr map_supr\n\n",
+ "map_sup_comap_of_surjective":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊔ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊔ » -/\n@[to_additive]\ntheorem map_sup_comap_of_surjective (S T : Subsemigroup N) :\n    («expr ⊔ » (S.comap f) (T.comap f)).map f = «expr ⊔ » S T :=\n  (giMapComap hf).l_sup_u _ _\n#align map_sup_comap_of_surjective map_sup_comap_of_surjective\n\n",
+ "map_sup":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₙ* » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊔ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊔ » -/\n@[to_additive]\ntheorem map_sup (S T : Subsemigroup M) (f : «expr →ₙ* » M N) : («expr ⊔ » S T).map f = «expr ⊔ » (S.map f) (T.map f) :=\n  (gc_map_comap f).l_sup\n#align map_sup map_sup\n\n",
+ "map_strict_mono_of_injective":
+ "@[to_additive]\ntheorem map_strict_mono_of_injective : strict_mono (map f) :=\n  (gciMapComap hf).strict_mono_l\n#align map_strict_mono_of_injective map_strict_mono_of_injective\n\n",
+ "map_srange":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₙ* » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₙ* » -/\n@[to_additive]\ntheorem map_srange (g : «expr →ₙ* » N P) (f : «expr →ₙ* » M N) : f.srange.map g = (g.comp f).srange := by\n  simpa only [srange_eq_map] using («expr⊤» : Subsemigroup M).map_map g f\n#align map_srange map_srange\n\n",
+ "map_mclosure":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₙ* » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\n/-- The image under a semigroup hom of the subsemigroup generated by a set equals the subsemigroup\ngenerated by the image of the set. -/\n@[to_additive\n      \"The image under an `add_semigroup` hom of the `add_subsemigroup` generated by a set\\nequals the `add_subsemigroup` generated by the image of the set.\"]\ntheorem map_mclosure (f : «expr →ₙ* » M N) (s : set M) : (closure s).map f = closure («expr '' » f s) :=\n  le_antisymm\n    (map_le_iff_le_comap.2 <| le_trans (closure_mono <| Set.subset_preimage_image _ _) (mclosure_preimage_le _ _))\n    (closure_le.2 <| Set.image_subset _ subset_closure)\n#align map_mclosure map_mclosure\n\n",
+ "map_map":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₙ* » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₙ* » -/\n@[to_additive]\ntheorem map_map (g : «expr →ₙ* » N P) (f : «expr →ₙ* » M N) : (S.map f).map g = S.map (g.comp f) :=\n  SetLike.coe_injective <| image_image _ _ _\n#align map_map map_map\n\n",
+ "map_le_of_le_comap":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₙ* » -/\n@[to_additive]\ntheorem map_le_of_le_comap {T : Subsemigroup N} {f : «expr →ₙ* » M N} : S ≤ T.comap f → S.map f ≤ T :=\n  (gc_map_comap f).l_le\n#align map_le_of_le_comap map_le_of_le_comap\n\n",
+ "map_le_map_iff_of_injective":
+ "@[to_additive]\ntheorem map_le_map_iff_of_injective {S T : Subsemigroup M} : S.map f ≤ T.map f ↔ S ≤ T :=\n  (gciMapComap hf).l_le_l_iff\n#align map_le_map_iff_of_injective map_le_map_iff_of_injective\n\n",
+ "map_le_iff_le_comap":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₙ* » -/\n@[to_additive]\ntheorem map_le_iff_le_comap {f : «expr →ₙ* » M N} {S : Subsemigroup M} {T : Subsemigroup N} :\n    S.map f ≤ T ↔ S ≤ T.comap f :=\n  image_subset_iff\n#align map_le_iff_le_comap map_le_iff_le_comap\n\n",
+ "map_injective_of_injective":
+ "@[to_additive]\ntheorem map_injective_of_injective : function.injective (map f) :=\n  (gciMapComap hf).l_injective\n#align map_injective_of_injective map_injective_of_injective\n\n",
+ "map_infi_comap_of_surjective":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⨅ , » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⨅ , » -/\n@[to_additive]\ntheorem map_infi_comap_of_surjective (S : ι → Subsemigroup N) :\n    («expr⨅ , » \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⨅ , »\"\n            ((S i).comap f)).map\n        f =\n      infᵢ S :=\n  (giMapComap hf).l_infi_u _\n#align map_infi_comap_of_surjective map_infi_comap_of_surjective\n\n",
+ "map_inf_comap_of_surjective":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊓ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊓ » -/\n@[to_additive]\ntheorem map_inf_comap_of_surjective (S T : Subsemigroup N) :\n    («expr ⊓ » (S.comap f) (T.comap f)).map f = «expr ⊓ » S T :=\n  (giMapComap hf).l_inf_u _ _\n#align map_inf_comap_of_surjective map_inf_comap_of_surjective\n\n",
+ "map_id":
+ "@[simp, to_additive]\ntheorem map_id (S : Subsemigroup M) : S.map (MulHom.id M) = S :=\n  ext fun x => ⟨fun ⟨_, h, rfl⟩ => h, fun h => ⟨_, h, rfl⟩⟩\n#align map_id map_id\n\n",
+ "map_equiv_top":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃* » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n@[simp, to_additive]\ntheorem map_equiv_top (f : «expr ≃* » M N) : («expr⊤» : Subsemigroup M).map f.to_mul_hom = «expr⊤» :=\n  SetLike.coe_injective <| Set.image_univ.trans f.surjective.range_eq\n#align map_equiv_top map_equiv_top\n\n",
+ "map_equiv_eq_comap_symm":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃* » -/\n@[to_additive]\ntheorem map_equiv_eq_comap_symm (f : «expr ≃* » M N) (K : Subsemigroup M) :\n    K.map f.to_mul_hom = K.comap f.symm.to_mul_hom :=\n  SetLike.coe_injective (f.to_equiv.image_eq_preimage K)\n#align map_equiv_eq_comap_symm map_equiv_eq_comap_symm\n\n",
+ "map_comap_map":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₙ* » -/\n@[simp, to_additive]\ntheorem map_comap_map {f : «expr →ₙ* » M N} : ((S.map f).comap f).map f = S.map f :=\n  (gc_map_comap f).l_u_l_eq_l _\n#align map_comap_map map_comap_map\n\n",
+ "map_comap_le":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₙ* » -/\n@[to_additive]\ntheorem map_comap_le {S : Subsemigroup N} {f : «expr →ₙ* » M N} : (S.comap f).map f ≤ S :=\n  (gc_map_comap f).l_u_le _\n#align map_comap_le map_comap_le\n\n",
+ "map_comap_eq_of_surjective":
+ "@[to_additive]\ntheorem map_comap_eq_of_surjective (S : Subsemigroup N) : (S.comap f).map f = S :=\n  (giMapComap hf).l_u_eq _\n#align map_comap_eq_of_surjective map_comap_eq_of_surjective\n\n",
+ "map_bot":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₙ* » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n@[simp, to_additive]\ntheorem map_bot (f : «expr →ₙ* » M N) : («expr⊥» : Subsemigroup M).map f = «expr⊥» :=\n  (gc_map_comap f).l_bot\n#align map_bot map_bot\n\n",
+ "le_prod_iff":
+ "@[to_additive le_prod_iff]\ntheorem le_prod_iff {s : Subsemigroup M} {t : Subsemigroup N} {u : Subsemigroup (M × N)} :\n    u ≤ s.prod t ↔ u.map (fst M N) ≤ s ∧ u.map (snd M N) ≤ t :=\n  by\n  constructor\n  · intro h\n    constructor\n    · rintro x ⟨⟨y1, y2⟩, ⟨hy1, rfl⟩⟩\n      exact (h hy1).1\n    · rintro x ⟨⟨y1, y2⟩, ⟨hy1, rfl⟩⟩\n      exact (h hy1).2\n  · rintro ⟨hH, hK⟩ ⟨x1, x2⟩ h\n    exact ⟨hH ⟨_, h, rfl⟩, hK ⟨_, h, rfl⟩⟩\n#align le_prod_iff le_prod_iff\n\n",
+ "le_comap_of_map_le":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₙ* » -/\n@[to_additive]\ntheorem le_comap_of_map_le {T : Subsemigroup N} {f : «expr →ₙ* » M N} : S.map f ≤ T → S ≤ T.comap f :=\n  (gc_map_comap f).le_u\n#align le_comap_of_map_le le_comap_of_map_le\n\n",
+ "le_comap_map":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₙ* » -/\n@[to_additive]\ntheorem le_comap_map {f : «expr →ₙ* » M N} : S ≤ (S.map f).comap f :=\n  (gc_map_comap f).le_u_l _\n#align le_comap_map le_comap_map\n\n",
+ "gc_map_comap":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₙ* » -/\n@[to_additive]\ntheorem gc_map_comap (f : «expr →ₙ* » M N) : GaloisConnection (map f) (comap f) := fun S T => map_le_iff_le_comap\n#align gc_map_comap gc_map_comap\n\n",
+ "eq_top_iff'":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n@[to_additive]\ntheorem eq_top_iff' : S = «expr⊤» ↔ ∀ x : M, x ∈ S :=\n  eq_top_iff.trans ⟨fun h m => h <| mem_top m, fun h m _ => h m⟩\n#align eq_top_iff' eq_top_iff'\n\n",
+ "comap_top":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₙ* » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n@[simp, to_additive]\ntheorem comap_top (f : «expr →ₙ* » M N) : («expr⊤» : Subsemigroup N).comap f = «expr⊤» :=\n  (gc_map_comap f).u_top\n#align comap_top comap_top\n\n",
+ "comap_surjective_of_injective":
+ "@[to_additive]\ntheorem comap_surjective_of_injective : function.surjective (comap f) :=\n  (gciMapComap hf).u_surjective\n#align comap_surjective_of_injective comap_surjective_of_injective\n\n",
+ "comap_supr_map_of_injective":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⨆ , » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⨆ , » -/\n@[to_additive]\ntheorem comap_supr_map_of_injective (S : ι → Subsemigroup M) :\n    («expr⨆ , » \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⨆ , »\"\n            ((S i).map f)).comap\n        f =\n      supᵢ S :=\n  (gciMapComap hf).u_supr_l _\n#align comap_supr_map_of_injective comap_supr_map_of_injective\n\n",
+ "comap_sup_map_of_injective":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊔ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊔ » -/\n@[to_additive]\ntheorem comap_sup_map_of_injective (S T : Subsemigroup M) : («expr ⊔ » (S.map f) (T.map f)).comap f = «expr ⊔ » S T :=\n  (gciMapComap hf).u_sup_l _ _\n#align comap_sup_map_of_injective comap_sup_map_of_injective\n\n",
+ "comap_strict_mono_of_surjective":
+ "@[to_additive]\ntheorem comap_strict_mono_of_surjective : strict_mono (comap f) :=\n  (giMapComap hf).strict_mono_u\n#align comap_strict_mono_of_surjective comap_strict_mono_of_surjective\n\n",
+ "comap_map_eq_of_injective":
+ "@[to_additive]\ntheorem comap_map_eq_of_injective (S : Subsemigroup M) : (S.map f).comap f = S :=\n  (gciMapComap hf).u_l_eq _\n#align comap_map_eq_of_injective comap_map_eq_of_injective\n\n",
+ "comap_map_comap":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₙ* » -/\n@[simp, to_additive]\ntheorem comap_map_comap {S : Subsemigroup N} {f : «expr →ₙ* » M N} : ((S.comap f).map f).comap f = S.comap f :=\n  (gc_map_comap f).u_l_u_eq_u _\n#align comap_map_comap comap_map_comap\n\n",
+ "comap_le_comap_iff_of_surjective":
+ "@[to_additive]\ntheorem comap_le_comap_iff_of_surjective {S T : Subsemigroup N} : S.comap f ≤ T.comap f ↔ S ≤ T :=\n  (giMapComap hf).u_le_u_iff\n#align comap_le_comap_iff_of_surjective comap_le_comap_iff_of_surjective\n\n",
+ "comap_injective_of_surjective":
+ "@[to_additive]\ntheorem comap_injective_of_surjective : function.injective (comap f) :=\n  (giMapComap hf).u_injective\n#align comap_injective_of_surjective comap_injective_of_surjective\n\n",
+ "comap_infi_map_of_injective":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⨅ , » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⨅ , » -/\n@[to_additive]\ntheorem comap_infi_map_of_injective (S : ι → Subsemigroup M) :\n    («expr⨅ , » \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⨅ , »\"\n            ((S i).map f)).comap\n        f =\n      infᵢ S :=\n  (gciMapComap hf).u_infi_l _\n#align comap_infi_map_of_injective comap_infi_map_of_injective\n\n",
+ "comap_infi":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₙ* » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⨅ , » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⨅ , » -/\n@[to_additive]\ntheorem comap_infi {ι : Sort _} (f : «expr →ₙ* » M N) (s : ι → Subsemigroup N) :\n    (infᵢ s).comap f =\n      «expr⨅ , » \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⨅ , »\" ((s i).comap f) :=\n  (gc_map_comap f).u_infi\n#align comap_infi comap_infi\n\n",
+ "comap_inf_map_of_injective":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊓ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊓ » -/\n@[to_additive]\ntheorem comap_inf_map_of_injective (S T : Subsemigroup M) : («expr ⊓ » (S.map f) (T.map f)).comap f = «expr ⊓ » S T :=\n  (gciMapComap hf).u_inf_l _ _\n#align comap_inf_map_of_injective comap_inf_map_of_injective\n\n",
+ "comap_inf":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₙ* » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊓ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊓ » -/\n@[to_additive]\ntheorem comap_inf (S T : Subsemigroup N) (f : «expr →ₙ* » M N) :\n    («expr ⊓ » S T).comap f = «expr ⊓ » (S.comap f) (T.comap f) :=\n  (gc_map_comap f).u_inf\n#align comap_inf comap_inf\n\n",
+ "comap_id":
+ "@[simp, to_additive]\ntheorem comap_id (S : Subsemigroup P) : S.comap (MulHom.id _) = S :=\n  ext (by simp)\n#align comap_id comap_id\n\n",
+ "comap_equiv_eq_map_symm":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃* » -/\n@[to_additive]\ntheorem comap_equiv_eq_map_symm (f : «expr ≃* » N M) (K : Subsemigroup M) :\n    K.comap f.to_mul_hom = K.map f.symm.to_mul_hom :=\n  (map_equiv_eq_comap_symm f.symm K).symm\n#align comap_equiv_eq_map_symm comap_equiv_eq_map_symm\n\n",
+ "comap_comap":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₙ* » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₙ* » -/\n@[to_additive]\ntheorem comap_comap (S : Subsemigroup P) (g : «expr →ₙ* » N P) (f : «expr →ₙ* » M N) :\n    (S.comap g).comap f = S.comap (g.comp f) :=\n  rfl\n#align comap_comap comap_comap\n\n",
+ "coe_subtype":
+ "@[simp, to_additive]\ntheorem coe_subtype : (MulMemClass.subtype S' : S' → M) = coe :=\n  rfl\n#align coe_subtype coe_subtype\n\n",
+ "coe_srange_restrict":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₙ* » -/\n@[simp, to_additive]\ntheorem coe_srange_restrict {N} [Mul N] (f : «expr →ₙ* » M N) (x : M) : (f.srange_restrict x : N) = f x :=\n  rfl\n#align coe_srange_restrict coe_srange_restrict\n\n",
+ "coe_srange":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₙ* » -/\n@[simp, to_additive]\ntheorem coe_srange (f : «expr →ₙ* » M N) : (f.srange : set N) = Set.range f :=\n  rfl\n#align coe_srange coe_srange\n\n",
+ "coe_prod":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:177:8: unsupported: ambiguous notation -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `set.prod -/\n@[to_additive coe_prod]\ntheorem coe_prod (s : Subsemigroup M) (t : Subsemigroup N) : (s.prod t : set (M × N)) = set.prod s t :=\n  rfl\n#align coe_prod coe_prod\n\n",
+ "coe_mul":
+ "-- lower priority so other instances are found first\n-- lower priority so later simp lemmas are used first; to appease simp_nf\n@[simp, norm_cast, to_additive]\ntheorem coe_mul (x y : S') : (↑(x * y) : M) = ↑x * ↑y :=\n  rfl\n#align coe_mul coe_mul\n\n",
+ "coe_map":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₙ* » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\n@[simp, to_additive]\ntheorem coe_map (f : «expr →ₙ* » M N) (S : Subsemigroup M) : (S.map f : set N) = «expr '' » f S :=\n  rfl\n#align coe_map coe_map\n\n",
+ "coe_equiv_map_of_injective_apply":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₙ* » -/\n@[simp, to_additive]\ntheorem coe_equiv_map_of_injective_apply (f : «expr →ₙ* » M N) (hf : function.injective f) (x : S) :\n    (equivMapOfInjective S f hf x : N) = f x :=\n  rfl\n#align coe_equiv_map_of_injective_apply coe_equiv_map_of_injective_apply\n\n",
+ "coe_comap":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₙ* » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\n@[simp, to_additive]\ntheorem coe_comap (S : Subsemigroup N) (f : «expr →ₙ* » M N) : (S.comap f : set M) = «expr ⁻¹' » f S :=\n  rfl\n#align coe_comap coe_comap\n\n",
+ "closure_closure_coe_preimage":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n@[simp, to_additive]\ntheorem closure_closure_coe_preimage {s : set M} : closure («expr ⁻¹' » (coe : closure s → M) s) = «expr⊤» :=\n  eq_top_iff.2 fun x =>\n    subtype.rec_on x fun x hx _ =>\n      by\n      refine' closure_induction' _ (fun g hg => _) (fun g₁ g₂ hg₁ hg₂ => _) hx\n      · exact subset_closure hg\n      · exact Subsemigroup.mul_mem _\n#align closure_closure_coe_preimage closure_closure_coe_preimage\n\n",
+ "bot_prod_bot":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n@[to_additive]\ntheorem bot_prod_bot : («expr⊥» : Subsemigroup M).prod («expr⊥» : Subsemigroup N) = «expr⊥» :=\n  SetLike.coe_injective <| by simp [coe_prod, Prod.one_eq_mk]\n#align bot_prod_bot bot_prod_bot\n\n",
+ "apply_coe_mem_map":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₙ* » -/\n@[to_additive]\ntheorem apply_coe_mem_map (f : «expr →ₙ* » M N) (S : Subsemigroup M) (x : S) : f x ∈ S.map f :=\n  mem_map_of_mem f x.prop\n#align apply_coe_mem_map apply_coe_mem_map\n\n"}

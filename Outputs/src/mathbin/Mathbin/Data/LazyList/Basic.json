@@ -1,0 +1,12 @@
+{"mem_nil":
+ "@[simp]\ntheorem mem_nil {α} (x : α) : x ∈ @lazy_list.nil α ↔ false :=\n  iff.rfl\n#align mem_nil mem_nil\n\n",
+ "mem_cons":
+ "@[simp]\ntheorem mem_cons {α} (x y : α) (ys : Thunk (LazyList α)) : x ∈ @lazy_list.cons α y ys ↔ x = y ∨ x ∈ ys () :=\n  iff.rfl\n#align mem_cons mem_cons\n\n",
+ "forall_mem_cons":
+ "theorem forall_mem_cons {α} {p : α → Prop} {a : α} {l : Thunk (LazyList α)} :\n    (∀ x ∈ @lazy_list.cons _ a l, p x) ↔ p a ∧ ∀ x ∈ l (), p x := by\n  simp only [has_mem.mem, lazy_list.mem, or_imp, forall_and, forall_eq]\n#align forall_mem_cons forall_mem_cons\n\n",
+ "append_nil":
+ "/-\nCopyright (c) 2018 Simon Hudon. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Simon Hudon\n-/\ntheorem append_nil {α} (xs : LazyList α) : xs.append lazy_list.nil = xs :=\n  by\n  induction xs; rfl\n  simp [LazyList.append, xs_ih]\n  ext; congr\n#align append_nil append_nil\n\n",
+ "append_bind":
+ "theorem append_bind {α β} (xs : LazyList α) (ys : Thunk (LazyList α)) (f : α → LazyList β) :\n    (@LazyList.append _ xs ys).bind f = (xs.bind f).append ((ys ()).bind f) := by\n  induction xs <;> simp [lazy_list.bind, append, *, append_assoc, append, lazy_list.bind]\n#align append_bind append_bind\n\n",
+ "append_assoc":
+ "theorem append_assoc {α} (xs ys zs : LazyList α) : (xs.append ys).append zs = xs.append (ys.append zs) := by\n  induction xs <;> simp [append, *]\n#align append_assoc append_assoc\n\n"}

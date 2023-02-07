@@ -1,0 +1,24 @@
+{"map_unop_nhds":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵐᵒᵖ» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵐᵒᵖ» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `nhds -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `nhds -/\n@[simp, to_additive]\ntheorem map_unop_nhds (x : «expr ᵐᵒᵖ» M) : map (unop : «expr ᵐᵒᵖ» M → M) ((nhds) x) = (nhds) (unop x) :=\n  op_homeomorph.symm.map_nhds_eq x\n#align map_unop_nhds map_unop_nhds\n\n",
+ "map_op_nhds":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵐᵒᵖ» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `nhds -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `nhds -/\n@[simp, to_additive]\ntheorem map_op_nhds (x : M) : map (op : M → «expr ᵐᵒᵖ» M) ((nhds) x) = (nhds) (op x) :=\n  op_homeomorph.map_nhds_eq x\n#align map_op_nhds map_op_nhds\n\n",
+ "inducing_embed_product":
+ "@[to_additive]\ntheorem inducing_embed_product : inducing (embedProduct M) :=\n  ⟨rfl⟩\n#align inducing_embed_product inducing_embed_product\n\n",
+ "embedding_embed_product":
+ "@[to_additive]\ntheorem embedding_embed_product : embedding (embedProduct M) :=\n  ⟨inducing_embed_product, embedProduct_injective M⟩\n#align embedding_embed_product embedding_embed_product\n\n",
+ "continuous_unop":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵐᵒᵖ» -/\n/-\nCopyright (c) 2021 Nicolò Cavalleri. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Nicolò Cavalleri\n-/\n@[continuity, to_additive]\ntheorem continuous_unop : continuous (unop : «expr ᵐᵒᵖ» M → M) :=\n  continuous_induced_dom\n#align continuous_unop continuous_unop\n\n",
+ "continuous_op":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵐᵒᵖ» -/\n@[continuity, to_additive]\ntheorem continuous_op : continuous (op : M → «expr ᵐᵒᵖ» M) :=\n  continuous_induced_rng.2 continuous_id\n#align continuous_op continuous_op\n\n",
+ "continuous_iff":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ˣ» -/\n@[to_additive]\nprotected theorem continuous_iff {f : X → «expr ˣ» M} :\n    continuous f ↔ continuous (coe ∘ f : X → M) ∧ continuous (fun x => ↑(f x)⁻¹ : X → M) := by\n  simp only [inducing_embed_product.continuous_iff, embed_product_apply, (· ∘ ·), continuous_prod_mk,\n    op_homeomorph.symm.inducing.continuous_iff, op_homeomorph_symm_apply, unop_op]\n#align continuous_iff continuous_iff\n\n",
+ "continuous_embed_product":
+ "@[to_additive]\ntheorem continuous_embed_product : continuous (embedProduct M) :=\n  continuous_induced_dom\n#align continuous_embed_product continuous_embed_product\n\n",
+ "continuous_coe_inv":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ˣ» -/\n@[to_additive]\ntheorem continuous_coe_inv : continuous (fun u => ↑u⁻¹ : «expr ˣ» M → M) :=\n  (units.continuous_iff.1 continuous_id).2\n#align continuous_coe_inv continuous_coe_inv\n\n",
+ "continuous_coe":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ˣ» -/\n@[to_additive]\ntheorem continuous_coe : continuous (coe : «expr ˣ» M → M) :=\n  (@continuous_embed_product M _ _).fst\n#align continuous_coe continuous_coe\n\n",
+ "comap_unop_nhds":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵐᵒᵖ» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `nhds -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `nhds -/\n@[simp, to_additive]\ntheorem comap_unop_nhds (x : M) : comap (unop : «expr ᵐᵒᵖ» M → M) ((nhds) x) = (nhds) (op x) :=\n  op_homeomorph.symm.comap_nhds_eq x\n#align comap_unop_nhds comap_unop_nhds\n\n",
+ "comap_op_nhds":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵐᵒᵖ» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵐᵒᵖ» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `nhds -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `nhds -/\n@[simp, to_additive]\ntheorem comap_op_nhds (x : «expr ᵐᵒᵖ» M) : comap (op : M → «expr ᵐᵒᵖ» M) ((nhds) x) = (nhds) (unop x) :=\n  op_homeomorph.comap_nhds_eq x\n#align comap_op_nhds comap_op_nhds\n\n"}

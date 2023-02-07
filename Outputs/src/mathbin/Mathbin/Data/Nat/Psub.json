@@ -1,0 +1,20 @@
+{"sub_eq_psub":
+ "theorem sub_eq_psub (m : ℕ) : ∀ n, m - n = (psub m n).get_or_else 0\n  | 0 => rfl\n  | n + 1 => (pred_eq_ppred (m - n)).trans <| by rw [sub_eq_psub, psub] <;> cases psub m n <;> rfl\n#align sub_eq_psub sub_eq_psub\n\n",
+ "psub_eq_sub":
+ "theorem psub_eq_sub {m n} (h : n ≤ m) : psub m n = some (m - n) :=\n  psub_eq_some.2 <| nat.sub_add_cancel h\n#align psub_eq_sub psub_eq_sub\n\n",
+ "psub_eq_some":
+ "theorem psub_eq_some {m : ℕ} : ∀ {n k}, psub m n = some k ↔ k + n = m\n  | 0, k => by simp [eq_comm]\n  | n + 1, k => by\n    dsimp\n    apply option.bind_eq_some.trans\n    simp [psub_eq_some, add_comm, add_left_comm, nat.succ_eq_add_one]\n#align psub_eq_some psub_eq_some\n\n",
+ "psub_eq_none":
+ "theorem psub_eq_none {m n : ℕ} : psub m n = none ↔ m < n :=\n  by\n  cases s : psub m n <;> simp [eq_comm]\n  · show m < n\n    refine' lt_of_not_ge fun h => _\n    cases' le.dest h with k e\n    injection s.symm.trans (psub_eq_some.2 <| (add_comm _ _).trans e)\n  · show n ≤ m\n    rw [← psub_eq_some.1 s]\n    apply nat.le_add_left\n#align psub_eq_none psub_eq_none\n\n",
+ "psub_add":
+ "theorem psub_add (m n k) :\n    psub m (n + k) = do\n      let x ← psub m n\n      psub x k :=\n  by induction k <;> simp [*, add_succ, bind_assoc]\n#align psub_add psub_add\n\n",
+ "psub'_eq_psub":
+ "theorem psub'_eq_psub (m n) : psub' m n = psub m n := by\n  rw [psub'] <;> split_ifs <;> [exact (psub_eq_sub h).symm, exact (psub_eq_none.2 (not_le.1 h)).symm]\n#align psub'_eq_psub psub'_eq_psub\n\n",
+ "pred_eq_ppred":
+ "/-\nCopyright (c) 2017 Mario Carneiro. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Mario Carneiro\n-/\ntheorem pred_eq_ppred (n : ℕ) : pred n = (ppred n).get_or_else 0 := by cases n <;> rfl\n#align pred_eq_ppred pred_eq_ppred\n\n",
+ "ppred_eq_some":
+ "@[simp]\ntheorem ppred_eq_some {m : ℕ} : ∀ {n}, ppred n = some m ↔ succ m = n\n  | 0 => by constructor <;> intro h <;> contradiction\n  | n + 1 => by dsimp <;> constructor <;> intro h <;> injection h <;> subst n\n#align ppred_eq_some ppred_eq_some\n\n",
+ "ppred_eq_pred":
+ "theorem ppred_eq_pred {n} (h : 0 < n) : ppred n = some (pred n) :=\n  ppred_eq_some.2 <| succ_pred_eq_of_pos h\n#align ppred_eq_pred ppred_eq_pred\n\n",
+ "ppred_eq_none":
+ "@[simp]\ntheorem ppred_eq_none : ∀ {n : ℕ}, ppred n = none ↔ n = 0\n  | 0 => by simp\n  | n + 1 => by dsimp <;> constructor <;> contradiction\n#align ppred_eq_none ppred_eq_none\n\n"}

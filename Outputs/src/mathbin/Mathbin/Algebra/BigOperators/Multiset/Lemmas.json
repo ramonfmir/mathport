@@ -1,0 +1,8 @@
+{"prod_eq_one_iff":
+ "@[to_additive]\ntheorem prod_eq_one_iff [CanonicallyOrderedMonoid α] {m : Multiset α} : m.prod = 1 ↔ ∀ x ∈ m, x = (1 : α) :=\n  Quotient.inductionOn m fun l => by simpa using List.prod_eq_one_iff l\n#align prod_eq_one_iff prod_eq_one_iff\n\n",
+ "multiset_sum_right":
+ "theorem multiset_sum_right (s : Multiset α) (a : α) (h : ∀ b ∈ s, Commute a b) : Commute a s.sum :=\n  by\n  induction s using Quotient.inductionOn\n  rw [quot_mk_to_coe, coe_sum]\n  exact Commute.list_sum_right _ _ h\n#align multiset_sum_right multiset_sum_right\n\n",
+ "multiset_sum_left":
+ "theorem multiset_sum_left (s : Multiset α) (b : α) (h : ∀ a ∈ s, Commute a b) : Commute s.sum b :=\n  (Commute.multiset_sum_right _ _ fun a ha => (h _ ha).symm).symm\n#align multiset_sum_left multiset_sum_left\n\n",
+ "dvd_prod":
+ "/-\nCopyright (c) 2019 Chris Hughes. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Chris Hughes, Bhavik Mehta, Eric Wieser\n-/\ntheorem dvd_prod [comm_monoid α] {s : Multiset α} {a : α} : a ∈ s → a ∣ s.prod :=\n  Quotient.inductionOn s (fun l a h => by simpa using List.dvd_prod h) a\n#align dvd_prod dvd_prod\n\n"}

@@ -1,0 +1,36 @@
+{"unit_mem_left_inv":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ˣ» -/\n@[to_additive]\ntheorem unit_mem_left_inv (x : «expr ˣ» M) (hx : (x : M) ∈ S) : ((x⁻¹ : _) : M) ∈ S.left_inv :=\n  ⟨⟨x, hx⟩, x.inv_val⟩\n#align unit_mem_left_inv unit_mem_left_inv\n\n",
+ "mul_left_inv_equiv_symm":
+ "@[simp, to_additive]\ntheorem mul_left_inv_equiv_symm (x : S) : (x : M) * (S.left_inv_equiv hS).symm x = 1 :=\n  by\n  convert S.left_inv_equiv_mul hS ((S.left_inv_equiv hS).symm x)\n  simp\n#align mul_left_inv_equiv_symm mul_left_inv_equiv_symm\n\n",
+ "mul_left_inv_equiv":
+ "@[to_additive]\ntheorem mul_left_inv_equiv (x : S.left_inv) : (x : M) * S.left_inv_equiv hS x = 1 := by simp\n#align mul_left_inv_equiv mul_left_inv_equiv\n\n",
+ "mul_from_left_inv":
+ "@[simp, to_additive]\ntheorem mul_from_left_inv (x : S.left_inv) : (x : M) * S.from_left_inv x = 1 :=\n  x.prop.some_spec\n#align mul_from_left_inv mul_from_left_inv\n\n",
+ "left_inv_left_inv_le":
+ "@[to_additive]\ntheorem left_inv_left_inv_le : S.left_inv.left_inv ≤ S :=\n  by\n  rintro x ⟨⟨y, z, h₁⟩, h₂ : x * y = 1⟩\n  convert z.prop\n  rw [← mul_one x, ← h₁, ← mul_assoc, h₂, one_mul]\n#align left_inv_left_inv_le left_inv_left_inv_le\n\n",
+ "left_inv_left_inv_eq":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ˣ» -/\n@[to_additive]\ntheorem left_inv_left_inv_eq (hS : S ≤ IsUnit.submonoid M) : S.left_inv.left_inv = S :=\n  by\n  refine' le_antisymm S.left_inv_left_inv_le _\n  intro x hx\n  have : x = ((hS hx).unit⁻¹⁻¹ : «expr ˣ» M) := by\n    rw [inv_inv (hS hx).unit]\n    rfl\n  rw [this]\n  exact S.left_inv.unit_mem_left_inv _ (S.unit_mem_left_inv _ hx)\n#align left_inv_left_inv_eq left_inv_left_inv_eq\n\n",
+ "left_inv_le_is_unit":
+ "@[to_additive]\ntheorem left_inv_le_is_unit : S.left_inv ≤ IsUnit.submonoid M := fun x ⟨y, hx⟩ => ⟨⟨x, y, hx, mul_comm x y ▸ hx⟩, rfl⟩\n#align left_inv_le_is_unit left_inv_le_is_unit\n\n",
+ "left_inv_equiv_symm_mul":
+ "@[simp, to_additive]\ntheorem left_inv_equiv_symm_mul (x : S) : ((S.left_inv_equiv hS).symm x : M) * x = 1 :=\n  by\n  convert S.mul_left_inv_equiv hS ((S.left_inv_equiv hS).symm x)\n  simp\n#align left_inv_equiv_symm_mul left_inv_equiv_symm_mul\n\n",
+ "left_inv_equiv_symm_from_left_inv":
+ "@[simp, to_additive]\ntheorem left_inv_equiv_symm_from_left_inv (x : S.left_inv) : (S.left_inv_equiv hS).symm (S.from_left_inv x) = x :=\n  (S.left_inv_equiv hS).left_inv x\n#align left_inv_equiv_symm_from_left_inv left_inv_equiv_symm_from_left_inv\n\n",
+ "left_inv_equiv_symm_eq_inv":
+ "@[simp, to_additive]\ntheorem left_inv_equiv_symm_eq_inv (x : S) : ((S.left_inv_equiv hS).symm x : M) = x⁻¹ := by\n  rw [← mul_right_inj (x : M), mul_right_inv, mul_left_inv_equiv_symm]\n#align left_inv_equiv_symm_eq_inv left_inv_equiv_symm_eq_inv\n\n",
+ "left_inv_equiv_mul":
+ "@[to_additive]\ntheorem left_inv_equiv_mul (x : S.left_inv) : (S.left_inv_equiv hS x : M) * x = 1 := by simp\n#align left_inv_equiv_mul left_inv_equiv_mul\n\n",
+ "left_inv_eq_inv":
+ "@[to_additive]\ntheorem left_inv_eq_inv : S.left_inv = S⁻¹ :=\n  Submonoid.ext fun x =>\n    ⟨fun h => submonoid.mem_inv.mpr ((inv_eq_of_mul_eq_one_right h.some_spec).symm ▸ h.some.prop), fun h =>\n      ⟨⟨_, h⟩, mul_right_inv _⟩⟩\n#align left_inv_eq_inv left_inv_eq_inv\n\n",
+ "from_left_inv_one":
+ "@[simp, to_additive]\ntheorem from_left_inv_one : S.from_left_inv 1 = 1 :=\n  (one_mul _).symm.trans (subtype.eq <| S.mul_from_left_inv 1)\n#align from_left_inv_one from_left_inv_one\n\n",
+ "from_left_inv_mul":
+ "@[simp, to_additive]\ntheorem from_left_inv_mul (x : S.left_inv) : (S.from_left_inv x : M) * x = 1 := by rw [mul_comm, mul_from_left_inv]\n#align from_left_inv_mul from_left_inv_mul\n\n",
+ "from_left_inv_left_inv_equiv_symm":
+ "@[simp, to_additive]\ntheorem from_left_inv_left_inv_equiv_symm (x : S) : S.from_left_inv ((S.left_inv_equiv hS).symm x) = x :=\n  (S.left_inv_equiv hS).right_inv x\n#align from_left_inv_left_inv_equiv_symm from_left_inv_left_inv_equiv_symm\n\n",
+ "from_left_inv_eq_inv":
+ "@[simp, to_additive]\ntheorem from_left_inv_eq_inv (x : S.left_inv) : (S.from_left_inv x : M) = x⁻¹ := by\n  rw [← mul_right_inj (x : M), mul_right_inv, mul_from_left_inv]\n#align from_left_inv_eq_inv from_left_inv_eq_inv\n\n",
+ "from_left_inv_eq_iff":
+ "@[to_additive]\ntheorem from_left_inv_eq_iff (a : S.left_inv) (b : M) : (S.from_left_inv a : M) = b ↔ (a : M) * b = 1 := by\n  rw [← is_unit.mul_right_inj (left_inv_le_is_unit _ a.prop), S.mul_from_left_inv, eq_comm]\n#align from_left_inv_eq_iff from_left_inv_eq_iff\n\n",
+ "coe_inv":
+ "/-\nCopyright (c) 2021 Andrew Yang. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Andrew Yang\n-/\n@[to_additive]\ntheorem is_unit.submonoid.coe_inv [monoid M] (x : IsUnit.submonoid M) : ↑x⁻¹ = (↑x.prop.unit⁻¹ : M) :=\n  rfl\n#align is_unit.submonoid.coe_inv is_unit.submonoid.coe_inv\n\n"}

@@ -1,0 +1,74 @@
+{"trivial_eq_bot":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n@[simp]\ntheorem trivial_eq_bot : trivial C = «expr⊥» :=\n  rfl\n#align trivial_eq_bot trivial_eq_bot\n\n",
+ "trivial_covering":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\ntheorem trivial_covering : S ∈ trivial C X ↔ S = «expr⊤» :=\n  Set.mem_singleton_iff\n#align trivial_covering trivial_covering\n\n",
+ "transitive":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⟶ » -/\ntheorem transitive (hS : S ∈ J X) (R : sieve X) (h : ∀ ⦃Y⦄ ⦃f : «expr ⟶ » Y X⦄, S f → R.pullback f ∈ J Y) : R ∈ J X :=\n  J.transitive' hS R h\n#align transitive transitive\n\n",
+ "top_mem":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n-- Also known as the maximality axiom.\n@[simp]\ntheorem top_mem (X : C) : «expr⊤» ∈ J X :=\n  J.top_mem' X\n#align top_mem top_mem\n\n",
+ "top_covers":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⟶ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n@[simp]\ntheorem top_covers (S : sieve X) (f : «expr ⟶ » Y X) : («expr⊤» : grothendieck_topology C).covers S f := by\n  simp [covers_iff]\n#align top_covers top_covers\n\n",
+ "top_covering":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n@[simp]\ntheorem top_covering : S ∈ («expr⊤» : grothendieck_topology C) X :=\n  ⟨⟩\n#align top_covering top_covering\n\n",
+ "to_middle_condition":
+ "theorem arrow.to_middle_condition {X : C} {S : J.cover X} {T : ∀ I : S.arrow, J.cover I.Y} (I : (S.bind T).arrow) :\n    (T I.from_middle) I.to_middle_hom :=\n  I.hf.some_spec.some_spec.some_spec.some_spec.1\n#align arrow.to_middle_condition arrow.to_middle_condition\n\n",
+ "superset_covering":
+ "/-- If `S` is a subset of `R`, and `S` is covering, then `R` is covering as well.\n\nSee <https://stacks.math.columbia.edu/tag/00Z5> (2), or discussion after [MM92] Chapter III,\nSection 2, Definition 1.\n-/\ntheorem superset_covering (Hss : S ≤ R) (sjx : S ∈ J X) : R ∈ J X :=\n  by\n  apply J.transitive sjx R fun Y f hf => _\n  apply covering_of_eq_top\n  rw [← top_le_iff, ← S.pullback_eq_top_of_mem hf]\n  apply sieve.pullback_monotone _ Hss\n#align superset_covering superset_covering\n\n",
+ "right_ore_of_pullbacks":
+ "theorem right_ore_of_pullbacks [limits.has_pullbacks C] : right_ore_condition C := fun X Y Z yx zx =>\n  ⟨_, _, _, limits.pullback.condition⟩\n#align right_ore_of_pullbacks right_ore_of_pullbacks\n\n",
+ "pullback_stable":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⟶ » -/\n-- Also known as the stability axiom.\n@[simp]\ntheorem pullback_stable (f : «expr ⟶ » Y X) (hS : S ∈ J X) : S.pullback f ∈ J Y :=\n  J.pullback_stable' f hS\n#align pullback_stable pullback_stable\n\n",
+ "middle_spec":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≫ » -/\ntheorem arrow.middle_spec {X : C} {S : J.cover X} {T : ∀ I : S.arrow, J.cover I.Y} (I : (S.bind T).arrow) :\n    «expr ≫ » I.to_middle_hom I.from_middle_hom = I.f :=\n  I.hf.some_spec.some_spec.some_spec.some_spec.2\n#align arrow.middle_spec arrow.middle_spec\n\n",
+ "mem_sieves_iff_coe":
+ "@[simp]\ntheorem mem_sieves_iff_coe : S ∈ J.sieves X ↔ S ∈ J X :=\n  iff.rfl\n#align mem_sieves_iff_coe mem_sieves_iff_coe\n\n",
+ "map_snd":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⟶ » -/\n@[simp]\ntheorem relation.map_snd {S T : J.cover X} (I : S.relation) (f : «expr ⟶ » S T) : I.snd.map f = (I.map f).snd :=\n  rfl\n#align relation.map_snd relation.map_snd\n\n",
+ "map_fst":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⟶ » -/\n@[simp]\ntheorem relation.map_fst {S T : J.cover X} (I : S.relation) (f : «expr ⟶ » S T) : I.fst.map f = (I.map f).fst :=\n  rfl\n#align relation.map_fst relation.map_fst\n\n",
+ "le_def":
+ "theorem le_def {J₁ J₂ : grothendieck_topology C} : J₁ ≤ J₂ ↔ (J₁ : ∀ X : C, set (sieve X)) ≤ J₂ :=\n  iff.rfl\n#align le_def le_def\n\n",
+ "isGLB_infₛ":
+ "#print isGLB_infₛ /-\n/-- See <https://stacks.math.columbia.edu/tag/00Z7> -/\ntheorem isGLB_infₛ (s : set (grothendieck_topology C)) : IsGLB s (infₛ s) :=\n  by\n  refine' @IsGLB.of_image _ _ _ _ sieves _ _ _ _\n  · intros\n    rfl\n  · exact isGLB_infₛ _\n#align is_glb_Inf isGLB_infₛ\n-/\n\n",
+ "intersection_covering_iff":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊓ » -/\n@[simp]\ntheorem intersection_covering_iff : «expr ⊓ » R S ∈ J X ↔ R ∈ J X ∧ S ∈ J X :=\n  ⟨fun h => ⟨J.superset_covering inf_le_left h, J.superset_covering inf_le_right h⟩, fun t =>\n    intersection_covering _ t.1 t.2⟩\n#align intersection_covering_iff intersection_covering_iff\n\n",
+ "intersection_covering":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊓ » -/\n/-- The intersection of two covering sieves is covering.\n\nSee <https://stacks.math.columbia.edu/tag/00Z5> (1), or [MM92] Chapter III,\nSection 2, Definition 1 (iv).\n-/\ntheorem intersection_covering (rj : R ∈ J X) (sj : S ∈ J X) : «expr ⊓ » R S ∈ J X :=\n  by\n  apply J.transitive rj _ fun Y f Hf => _\n  rw [sieve.pullback_inter, R.pullback_eq_top_of_mem Hf]\n  simp [sj]\n#align intersection_covering intersection_covering\n\n",
+ "from_middle_condition":
+ "theorem arrow.from_middle_condition {X : C} {S : J.cover X} {T : ∀ I : S.arrow, J.cover I.Y} (I : (S.bind T).arrow) :\n    S I.from_middle_hom :=\n  I.hf.some_spec.some_spec.some_spec.some\n#align arrow.from_middle_condition arrow.from_middle_condition\n\n",
+ "ext":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⟶ » -/\n@[ext]\ntheorem ext (S T : J.cover X) (h : ∀ ⦃Y⦄ (f : «expr ⟶ » Y X), S f ↔ T f) : S = T :=\n  subtype.ext <| sieve.ext h\n#align ext ext\n\n",
+ "discrete_eq_top":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n@[simp]\ntheorem discrete_eq_top : discrete C = «expr⊤» :=\n  rfl\n#align discrete_eq_top discrete_eq_top\n\n",
+ "dense_covering":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⟶ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⟶ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≫ » -/\ntheorem dense_covering : S ∈ dense X ↔ ∀ {Y} (f : «expr ⟶ » Y X), ∃ (Z : _)(g : «expr ⟶ » Z Y), S («expr ≫ » g f) :=\n  iff.rfl\n#align dense_covering dense_covering\n\n",
+ "covers_iff":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⟶ » -/\ntheorem covers_iff (S : sieve X) (f : «expr ⟶ » Y X) : J.covers S f ↔ S.pullback f ∈ J Y :=\n  iff.rfl\n#align covers_iff covers_iff\n\n",
+ "covering_of_eq_top":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\ntheorem covering_of_eq_top : S = «expr⊤» → S ∈ J X := fun h => h.symm ▸ J.top_mem X\n#align covering_of_eq_top covering_of_eq_top\n\n",
+ "covering_iff_covers_id":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr𝟙» -/\ntheorem covering_iff_covers_id (S : sieve X) : S ∈ J X ↔ J.covers S ((«expr𝟙») X) := by simp [covers_iff]\n#align covering_iff_covers_id covering_iff_covers_id\n\n",
+ "condition":
+ "theorem condition (S : J.cover X) : (S : sieve X) ∈ J X :=\n  S.2\n#align condition condition\n\n",
+ "coe_pullback":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⟶ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⟶ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≫ » -/\n@[simp]\ntheorem coe_pullback {Z : C} (f : «expr ⟶ » Y X) (g : «expr ⟶ » Z Y) (S : J.cover X) :\n    (S.pullback f) g ↔ S («expr ≫ » g f) :=\n  iff.rfl\n#align coe_pullback coe_pullback\n\n",
+ "coe_fun_coe":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⟶ » -/\n@[simp]\ntheorem coe_fun_coe (S : J.cover X) (f : «expr ⟶ » Y X) : (S : sieve X) f = S f :=\n  rfl\n#align coe_fun_coe coe_fun_coe\n\n",
+ "bot_covers":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⟶ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\ntheorem bot_covers (S : sieve X) (f : «expr ⟶ » Y X) : («expr⊥» : grothendieck_topology C).covers S f ↔ S f := by\n  rw [covers_iff, bot_covering, ← sieve.pullback_eq_top_iff_mem]\n#align bot_covers bot_covers\n\n",
+ "bot_covering":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n@[simp]\ntheorem bot_covering : S ∈ («expr⊥» : grothendieck_topology C) X ↔ S = «expr⊤» :=\n  trivial_covering\n#align bot_covering bot_covering\n\n",
+ "bind_covering":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⟶ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⟶ » -/\ntheorem bind_covering {S : sieve X} {R : ∀ ⦃Y : C⦄ ⦃f : «expr ⟶ » Y X⦄, S f → sieve Y} (hS : S ∈ J X)\n    (hR : ∀ ⦃Y⦄ ⦃f : «expr ⟶ » Y X⦄ (H : S f), R H ∈ J Y) : sieve.bind S R ∈ J X :=\n  J.transitive hS _ fun Y f hf => superset_covering J (sieve.le_pullback_bind S R f hf) (hR hf)\n#align bind_covering bind_covering\n\n",
+ "base_snd":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⟶ » -/\n@[simp]\ntheorem relation.base_snd {f : «expr ⟶ » Y X} {S : J.cover X} (I : (S.pullback f).relation) : I.snd.base = I.base.snd :=\n  rfl\n#align relation.base_snd relation.base_snd\n\n",
+ "base_fst":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⟶ » -/\n@[simp]\ntheorem relation.base_fst {f : «expr ⟶ » Y X} {S : J.cover X} (I : (S.pullback f).relation) : I.fst.base = I.base.fst :=\n  rfl\n#align relation.base_fst relation.base_fst\n\n",
+ "arrow_trans":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≫ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⟶ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⟶ » -/\n/-- The transitivity axiom in 'arrow' form: If `S` covers `f` and every arrow in `S` is covered by\n`R`, then `R` covers `f`.\n-/\ntheorem arrow_trans (f : «expr ⟶ » Y X) (S R : sieve X) (h : J.covers S f) :\n    (∀ {Z : C} (g : «expr ⟶ » Z X), S g → J.covers R g) → J.covers R f :=\n  by\n  intro k\n  apply J.transitive h\n  intro Z g hg\n  rw [← sieve.pullback_comp]\n  apply k («expr ≫ » g f) hg\n#align arrow_trans arrow_trans\n\n",
+ "arrow_stable":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⟶ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⟶ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≫ » -/\n/-- The stability axiom in 'arrow' form: If `S` covers `f` then `S` covers `g ≫ f` for any `g`. -/\ntheorem arrow_stable (f : «expr ⟶ » Y X) (S : sieve X) (h : J.covers S f) {Z : C} (g : «expr ⟶ » Z Y) :\n    J.covers S («expr ≫ » g f) := by\n  rw [covers_iff] at h⊢\n  simp [h, sieve.pullback_comp]\n#align arrow_stable arrow_stable\n\n",
+ "arrow_max":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⟶ » -/\n/-- The maximality axiom in 'arrow' form: Any arrow `f` in `S` is covered by `S`. -/\ntheorem arrow_max (f : «expr ⟶ » Y X) (S : sieve X) (hf : S f) : J.covers S f :=\n  by\n  rw [covers, (sieve.pullback_eq_top_iff_mem f).1 hf]\n  apply J.top_mem\n#align arrow_max arrow_max\n\n",
+ "arrow_intersect":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⟶ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊓ » -/\ntheorem arrow_intersect (f : «expr ⟶ » Y X) (S R : sieve X) (hS : J.covers S f) (hR : J.covers R f) :\n    J.covers («expr ⊓ » S R) f := by simpa [covers_iff] using and.intro hS hR\n#align arrow_intersect arrow_intersect\n\n"}

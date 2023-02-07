@@ -1,0 +1,18 @@
+{"to_single₀_ext":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⟶ » -/\n@[ext]\ntheorem to_single₀_ext {C : chain_complex V ℕ} {X : V} (f g : «expr ⟶ » C ((single₀ V).obj X)) (h : f.f 0 = g.f 0) :\n    f = g :=\n  (to_single₀_equiv C X).injective\n    (by\n      ext\n      exact h)\n#align to_single₀_ext to_single₀_ext\n\n",
+ "single₀_obj_X_succ":
+ "@[simp]\ntheorem single₀_obj_X_succ (X : V) (n : ℕ) : ((single₀ V).obj X).X (n + 1) = 0 :=\n  rfl\n#align single₀_obj_X_succ single₀_obj_X_succ\n\n",
+ "single₀_obj_X_d_to":
+ "@[simp]\ntheorem single₀_obj_X_d_to (X : V) (i : ℕ) : ((single₀ V).obj X).d_to i = 0 :=\n  by\n  cases i\n  · rw [d_to_eq_zero]\n    simp\n  · rw [d_to_eq ((single₀ V).obj X) rfl]\n    simp\n#align single₀_obj_X_d_to single₀_obj_X_d_to\n\n",
+ "single₀_obj_X_d_from":
+ "@[simp]\ntheorem single₀_obj_X_d_from (X : V) (j : ℕ) : ((single₀ V).obj X).d_from j = 0 :=\n  by\n  rw [d_from_eq ((single₀ V).obj X) rfl]\n  simp\n#align single₀_obj_X_d_from single₀_obj_X_d_from\n\n",
+ "single₀_obj_X_d":
+ "@[simp]\ntheorem single₀_obj_X_d (X : V) (i j : ℕ) : ((single₀ V).obj X).d i j = 0 :=\n  rfl\n#align single₀_obj_X_d single₀_obj_X_d\n\n",
+ "single₀_obj_X_0":
+ "@[simp]\ntheorem single₀_obj_X_0 (X : V) : ((single₀ V).obj X).X 0 = X :=\n  rfl\n#align single₀_obj_X_0 single₀_obj_X_0\n\n",
+ "single₀_map_f_succ":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⟶ » -/\n@[simp]\ntheorem single₀_map_f_succ {X Y : V} (f : «expr ⟶ » X Y) (n : ℕ) : ((single₀ V).map f).f (n + 1) = 0 :=\n  rfl\n#align single₀_map_f_succ single₀_map_f_succ\n\n",
+ "single₀_map_f_0":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⟶ » -/\n@[simp]\ntheorem single₀_map_f_0 {X Y : V} (f : «expr ⟶ » X Y) : ((single₀ V).map f).f 0 = f :=\n  rfl\n#align single₀_map_f_0 single₀_map_f_0\n\n",
+ "single_map_f_self":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⟶ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≫ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≫ » -/\n/-\nCopyright (c) 2021 Scott Morrison. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Scott Morrison\n-/\n@[simp]\ntheorem single_map_f_self (j : ι) {A B : V} (f : «expr ⟶ » A B) :\n    ((single V c j).map f).f j =\n      «expr ≫ » (single_obj_X_self V c j A).hom («expr ≫ » f (single_obj_X_self V c j B).inv) :=\n  by\n  simp\n  rfl\n#align single_map_f_self single_map_f_self\n\n"}

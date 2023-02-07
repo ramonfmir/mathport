@@ -1,0 +1,2 @@
+{"map_eq_bind_pure_comp":
+ "#print map_eq_bind_pure_comp /-\n/-\nCopyright (c) 2019 Simon Hudon. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Simon Hudon\n-/\n@[monad_norm]\ntheorem map_eq_bind_pure_comp (m : Type u → Type v) [monad m] [LawfulMonad m] {α β : Type u} (f : α → β) (x : m α) :\n    f <$> x = x >>= pure ∘ f := by rw [bind_pure_comp_eq_map]\n#align map_eq_bind_pure_comp map_eq_bind_pure_comp\n-/\n\n"}

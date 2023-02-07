@@ -1,0 +1,78 @@
+{"to_list_symm":
+ "/-\nCopyright (c) 2019 Simon Hudon. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Simon Hudon, Yury Kudryashov\n-/\n@[simp, to_additive]\ntheorem to_list_symm : (@toList α).symm = of_list :=\n  rfl\n#align to_list_symm to_list_symm\n\n",
+ "to_list_prod":
+ "@[simp, to_additive]\ntheorem to_list_prod (xs : list (FreeMonoid α)) : toList xs.prod = (xs.map toList).join := by\n  induction xs <;> simp [*, list.join]\n#align to_list_prod to_list_prod\n\n",
+ "to_list_one":
+ "@[simp, to_additive]\ntheorem to_list_one : (1 : FreeMonoid α).to_list = [] :=\n  rfl\n#align to_list_one to_list_one\n\n",
+ "to_list_of_mul":
+ "@[to_additive]\ntheorem to_list_of_mul (x : α) (xs : FreeMonoid α) : toList (of x * xs) = x :: xs.to_list :=\n  rfl\n#align to_list_of_mul to_list_of_mul\n\n",
+ "to_list_of_list":
+ "@[simp, to_additive]\ntheorem to_list_of_list (l : list α) : toList (ofList l) = l :=\n  rfl\n#align to_list_of_list to_list_of_list\n\n",
+ "to_list_of":
+ "@[simp, to_additive]\ntheorem to_list_of (x : α) : toList (of x) = [x] :=\n  rfl\n#align to_list_of to_list_of\n\n",
+ "to_list_mul":
+ "@[simp, to_additive]\ntheorem to_list_mul (xs ys : FreeMonoid α) : (xs * ys).to_list = xs.to_list ++ ys.to_list :=\n  rfl\n#align to_list_mul to_list_mul\n\n",
+ "to_list_map":
+ "@[to_additive]\ntheorem to_list_map (f : α → β) (xs : FreeMonoid α) : (map f xs).to_list = xs.to_list.map f :=\n  rfl\n#align to_list_map to_list_map\n\n",
+ "to_list_comp_of_list":
+ "@[simp, to_additive]\ntheorem to_list_comp_of_list : @toList α ∘ of_list = id :=\n  rfl\n#align to_list_comp_of_list to_list_comp_of_list\n\n",
+ "smul_def":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n@[to_additive]\ntheorem smul_def (f : α → β → β) (l : FreeMonoid α) (b : β) :\n    haveI := mk_mul_action f\n    «expr • » l b = l.to_list.foldr f b :=\n  rfl\n#align smul_def smul_def\n\n",
+ "rec_on_one":
+ "@[simp, to_additive]\ntheorem rec_on_one {C : FreeMonoid α → Sort _} (h0 : C 1) (ih : ∀ x xs, C xs → C (of x * xs)) :\n    @recOn α C 1 h0 ih = h0 :=\n  rfl\n#align rec_on_one rec_on_one\n\n",
+ "rec_on_of_mul":
+ "@[simp, to_additive]\ntheorem rec_on_of_mul {C : FreeMonoid α → Sort _} (x : α) (xs : FreeMonoid α) (h0 : C 1)\n    (ih : ∀ x xs, C xs → C (of x * xs)) : @recOn α C (of x * xs) h0 ih = ih x xs (recOn xs h0 ih) :=\n  rfl\n#align rec_on_of_mul rec_on_of_mul\n\n",
+ "prod_aux_eq":
+ "@[to_additive]\ntheorem prod_aux_eq : ∀ l : list M, free_monoid.prod_aux l = l.prod\n  | [] => rfl\n  | x :: xs => congr_arg (fun x => list.foldl (· * ·) x xs) (one_mul _).symm\n#align prod_aux_eq prod_aux_eq\n\n",
+ "of_smul":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n@[simp, to_additive]\ntheorem of_smul (f : α → β → β) (x : α) (y : β) :\n    (haveI := mk_mul_action f\n      «expr • » (of x) y) =\n      f x y :=\n  rfl\n#align of_smul of_smul\n\n",
+ "of_list_to_list":
+ "@[simp, to_additive]\ntheorem of_list_to_list (xs : FreeMonoid α) : ofList (toList xs) = xs :=\n  rfl\n#align of_list_to_list of_list_to_list\n\n",
+ "of_list_symm":
+ "@[simp, to_additive]\ntheorem of_list_symm : (@ofList α).symm = to_list :=\n  rfl\n#align of_list_symm of_list_symm\n\n",
+ "of_list_smul":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n@[to_additive]\ntheorem of_list_smul (f : α → β → β) (l : list α) (b : β) :\n    haveI := mk_mul_action f\n    «expr • » (of_list l) b = l.foldr f b :=\n  rfl\n#align of_list_smul of_list_smul\n\n",
+ "of_list_singleton":
+ "@[to_additive]\ntheorem of_list_singleton (x : α) : ofList [x] = of x :=\n  rfl\n#align of_list_singleton of_list_singleton\n\n",
+ "of_list_nil":
+ "@[simp, to_additive]\ntheorem of_list_nil : ofList ([] : list α) = 1 :=\n  rfl\n#align of_list_nil of_list_nil\n\n",
+ "of_list_map":
+ "@[to_additive]\ntheorem of_list_map (f : α → β) (xs : list α) : ofList (xs.map f) = map f (ofList xs) :=\n  rfl\n#align of_list_map of_list_map\n\n",
+ "of_list_join":
+ "@[simp, to_additive]\ntheorem of_list_join (xs : list (list α)) : ofList xs.join = (xs.map ofList).prod :=\n  toList.injective <| by simp\n#align of_list_join of_list_join\n\n",
+ "of_list_cons":
+ "@[simp, to_additive]\ntheorem of_list_cons (x : α) (xs : list α) : ofList (x :: xs) = of x * ofList xs :=\n  rfl\n#align of_list_cons of_list_cons\n\n",
+ "of_list_comp_to_list":
+ "@[simp, to_additive]\ntheorem of_list_comp_to_list : @ofList α ∘ to_list = id :=\n  rfl\n#align of_list_comp_to_list of_list_comp_to_list\n\n",
+ "of_list_append":
+ "@[simp, to_additive]\ntheorem of_list_append (xs ys : list α) : ofList (xs ++ ys) = ofList xs * ofList ys :=\n  rfl\n#align of_list_append of_list_append\n\n",
+ "of_injective":
+ "@[to_additive]\ntheorem of_injective : function.injective (@of α) :=\n  List.singleton_injective\n#align of_injective of_injective\n\n",
+ "map_of":
+ "@[simp, to_additive]\ntheorem map_of (f : α → β) (x : α) : map f (of x) = of (f x) :=\n  rfl\n#align map_of map_of\n\n",
+ "map_id":
+ "@[simp, to_additive]\ntheorem map_id : map (@id α) = MonoidHom.id (FreeMonoid α) :=\n  hom_eq fun x => rfl\n#align map_id map_id\n\n",
+ "map_comp":
+ "@[to_additive]\ntheorem map_comp (g : β → γ) (f : α → β) : map (g ∘ f) = (map g).comp (map f) :=\n  hom_eq fun x => rfl\n#align map_comp map_comp\n\n",
+ "lift_symm_apply":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →* » -/\n@[simp, to_additive]\ntheorem lift_symm_apply (f : «expr →* » (FreeMonoid α) M) : lift.symm f = f ∘ of :=\n  rfl\n#align lift_symm_apply lift_symm_apply\n\n",
+ "lift_restrict":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →* » -/\n@[simp, to_additive]\ntheorem lift_restrict (f : «expr →* » (FreeMonoid α) M) : lift (f ∘ of) = f :=\n  lift.apply_symm_apply f\n#align lift_restrict lift_restrict\n\n",
+ "lift_of_comp_eq_map":
+ "@[to_additive]\ntheorem lift_of_comp_eq_map (f : α → β) : (lift fun x => of (f x)) = map f :=\n  hom_eq fun x => rfl\n#align lift_of_comp_eq_map lift_of_comp_eq_map\n\n",
+ "lift_eval_of":
+ "@[simp, to_additive]\ntheorem lift_eval_of (f : α → M) (x : α) : lift f (of x) = f x :=\n  rfl\n#align lift_eval_of lift_eval_of\n\n",
+ "lift_comp_of":
+ "@[to_additive]\ntheorem lift_comp_of (f : α → M) : lift f ∘ of = f :=\n  rfl\n#align lift_comp_of lift_comp_of\n\n",
+ "lift_apply":
+ "@[to_additive]\ntheorem lift_apply (f : α → M) (l : FreeMonoid α) : lift f l = (l.to_list.map f).prod :=\n  prod_aux_eq _\n#align lift_apply lift_apply\n\n",
+ "hom_map_lift":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →* » -/\n@[to_additive]\ntheorem hom_map_lift (g : «expr →* » M N) (f : α → M) (x : FreeMonoid α) : g (lift f x) = lift (g ∘ f) x :=\n  MonoidHom.ext_iff.1 (comp_lift g f) x\n#align hom_map_lift hom_map_lift\n\n",
+ "hom_eq":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →* » -/\n@[ext, to_additive]\ntheorem hom_eq ⦃f g : «expr →* » (FreeMonoid α) M⦄ (h : ∀ x, f (of x) = g (of x)) : f = g :=\n  MonoidHom.ext fun l =>\n    recOn l (f.map_one.trans g.map_one.symm) fun x xs hxs => by simp only [h, hxs, MonoidHom.map_mul]\n#align hom_eq hom_eq\n\n",
+ "comp_lift":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →* » -/\n@[to_additive]\ntheorem comp_lift (g : «expr →* » M N) (f : α → M) : g.comp (lift f) = lift (g ∘ f) :=\n  by\n  ext\n  simp\n#align comp_lift comp_lift\n\n",
+ "cases_on_one":
+ "@[simp, to_additive]\ntheorem cases_on_one {C : FreeMonoid α → Sort _} (h0 : C 1) (ih : ∀ x xs, C (of x * xs)) : @casesOn α C 1 h0 ih = h0 :=\n  rfl\n#align cases_on_one cases_on_one\n\n",
+ "cases_on_of_mul":
+ "@[simp, to_additive]\ntheorem cases_on_of_mul {C : FreeMonoid α → Sort _} (x : α) (xs : FreeMonoid α) (h0 : C 1)\n    (ih : ∀ x xs, C (of x * xs)) : @casesOn α C (of x * xs) h0 ih = ih x xs :=\n  rfl\n#align cases_on_of_mul cases_on_of_mul\n\n"}

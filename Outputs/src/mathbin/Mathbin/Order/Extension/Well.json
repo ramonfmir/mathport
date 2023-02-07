@@ -1,0 +1,4 @@
+{"to_well_order_extension_strict_mono":
+ "theorem to_well_order_extension_strict_mono [preorder α] [well_founded_lt α] :\n    strict_mono (to_well_order_extension : α → well_order_extension α) := fun a b h =>\n  prod.lex.left _ _ <| well_founded.rank_lt_of_rel _ h\n#align to_well_order_extension_strict_mono to_well_order_extension_strict_mono\n\n",
+ "exists_well_order_ge":
+ "/-\nCopyright (c) 2022 Yaël Dillies, Junyan Xu. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Yaël Dillies, Junyan Xu\n-/\n/-- Any well-founded relation can be extended to a well-ordering on that type. -/\ntheorem exists_well_order_ge : ∃ s, r ≤ s ∧ is_well_order α s :=\n  ⟨hwf.well_order_extension.lt, fun a b h => prod.lex.left _ _ (hwf.rank_lt_of_rel h), by constructor⟩\n#align exists_well_order_ge exists_well_order_ge\n\n"}

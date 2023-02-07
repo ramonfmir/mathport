@@ -1,0 +1,18 @@
+{"tendsto_iff_forall_eval_tendsto_top_dual_pairing":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `nhds -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `nhds -/\ntheorem tendsto_iff_forall_eval_tendsto_top_dual_pairing {l : filter α} {f : α → weak_dual 𝕜 E} {x : weak_dual 𝕜 E} :\n    tendsto f l ((nhds) x) ↔\n      ∀ y, tendsto (fun i => top_dual_pairing 𝕜 E (f i) y) l ((nhds) (top_dual_pairing 𝕜 E x y)) :=\n  weak_bilin.tendsto_iff_forall_eval_tendsto _ continuous_linear_map.coe_injective\n#align tendsto_iff_forall_eval_tendsto_top_dual_pairing tendsto_iff_forall_eval_tendsto_top_dual_pairing\n\n",
+ "tendsto_iff_forall_eval_tendsto":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `nhds -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `nhds -/\ntheorem tendsto_iff_forall_eval_tendsto {l : filter α} {f : α → weak_bilin B} {x : weak_bilin B}\n    (hB : function.injective B) : tendsto f l ((nhds) x) ↔ ∀ y, tendsto (fun i => B (f i) y) l ((nhds) (B x y)) := by\n  rw [← tendsto_pi_nhds, embedding.tendsto_nhds_iff (embedding hB)]\n#align tendsto_iff_forall_eval_tendsto tendsto_iff_forall_eval_tendsto\n\n",
+ "map_apply":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →L[ ] » -/\ntheorem map_apply (f : «expr →L[ ] » E 𝕜 F) (x : E) : weak_space.map f x = f x :=\n  rfl\n#align map_apply map_apply\n\n",
+ "eval_continuous":
+ "theorem eval_continuous (y : E) : continuous fun x : weak_dual 𝕜 E => x y :=\n  continuous_pi_iff.mp coe_fn_continuous y\n#align eval_continuous eval_continuous\n\n",
+ "embedding":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₗ[ ] » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₗ[ ] » -/\n/-- The coercion `(λ x y, B x y) : E → (F → 𝕜)` is an embedding. -/\ntheorem embedding {B : «expr →ₗ[ ] » E 𝕜 («expr →ₗ[ ] » F 𝕜 𝕜)} (hB : function.injective B) :\n    embedding fun (x : weak_bilin B) y => B x y :=\n  function.injective.embedding_induced <| linear_map.coe_injective.comp hB\n#align embedding embedding\n\n",
+ "dual_pairing_apply":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →L[ ] » -/\ntheorem dual_pairing_apply (v : «expr →L[ ] » E 𝕜 𝕜) (x : E) : top_dual_pairing 𝕜 E v x = v x :=\n  rfl\n#align dual_pairing_apply dual_pairing_apply\n\n",
+ "continuous_of_continuous_eval":
+ "theorem continuous_of_continuous_eval [topological_space α] {g : α → weak_dual 𝕜 E}\n    (h : ∀ y, continuous fun a => (g a) y) : continuous g :=\n  continuous_induced_rng.2 (continuous_pi_iff.mpr h)\n#align continuous_of_continuous_eval continuous_of_continuous_eval\n\n",
+ "coe_map":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →L[ ] » -/\n@[simp]\ntheorem coe_map (f : «expr →L[ ] » E 𝕜 F) : (weak_space.map f : E → F) = f :=\n  rfl\n#align coe_map coe_map\n\n",
+ "coe_fn_continuous":
+ "theorem coe_fn_continuous : continuous fun (x : weak_dual 𝕜 E) y => x y :=\n  continuous_induced_dom\n#align coe_fn_continuous coe_fn_continuous\n\n"}

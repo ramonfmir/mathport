@@ -1,0 +1,18 @@
+{"infinite":
+ "theorem Icc.infinite : Infinite (Icc a b) :=\n  infinite_coe_iff.2 <| Icc_infinite h\n#align Icc.infinite Icc.infinite\n\n",
+ "Ioo_infinite":
+ "theorem Ioo_infinite : (Ioo a b).infinite :=\n  infinite_coe_iff.1 <| Ioo.infinite h\n#align Ioo_infinite Ioo_infinite\n\n",
+ "Ioi_infinite":
+ "theorem Ioi_infinite [NoMaxOrder α] (a : α) : (Ioi a).infinite :=\n  infinite_coe_iff.1 Ioi.infinite\n#align Ioi_infinite Ioi_infinite\n\n",
+ "Ioc_infinite":
+ "theorem Ioc_infinite : (Ioc a b).infinite :=\n  (Ioo_infinite h).mono Ioo_subset_Ioc_self\n#align Ioc_infinite Ioc_infinite\n\n",
+ "Iio_infinite":
+ "theorem Iio_infinite [NoMinOrder α] (a : α) : (Iio a).infinite :=\n  infinite_coe_iff.1 Iio.infinite\n#align Iio_infinite Iio_infinite\n\n",
+ "Iic_infinite":
+ "theorem Iic_infinite [NoMinOrder α] (a : α) : (Iic a).infinite :=\n  infinite_coe_iff.1 Iic.infinite\n#align Iic_infinite Iic_infinite\n\n",
+ "Ico_infinite":
+ "theorem Ico_infinite : (Ico a b).infinite :=\n  (Ioo_infinite h).mono Ioo_subset_Ico_self\n#align Ico_infinite Ico_infinite\n\n",
+ "Ici_infinite":
+ "theorem Ici_infinite [NoMaxOrder α] (a : α) : (Ici a).infinite :=\n  infinite_coe_iff.1 Ici.infinite\n#align Ici_infinite Ici_infinite\n\n",
+ "Icc_infinite":
+ "theorem Icc_infinite : (Icc a b).infinite :=\n  (Ioo_infinite h).mono Ioo_subset_Icc_self\n#align Icc_infinite Icc_infinite\n\n"}

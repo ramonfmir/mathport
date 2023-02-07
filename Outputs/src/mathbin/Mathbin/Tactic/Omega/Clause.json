@@ -1,0 +1,6 @@
+{"unsat_nil":
+ "theorem clauses.unsat_nil : clauses.unsat [] := by intro h1; rcases h1 with ⟨c, h1, h2⟩; cases h1\n#align clauses.unsat_nil clauses.unsat_nil\n\n",
+ "unsat_cons":
+ "theorem clauses.unsat_cons (c : clause) (cs : list clause) : clause.unsat c → clauses.unsat cs → clauses.unsat (c :: cs)\n  | h1, h2, h3 => by\n    unfold clauses.sat at h3\n    rw [List.exists_mem_cons_iff] at h3\n    cases h3 <;> contradiction\n#align clauses.unsat_cons clauses.unsat_cons\n\n",
+ "holds_append":
+ "/-\nCopyright (c) 2019 Seul Baek. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Seul Baek\n-/\n/-\nDefinition of linear constrain clauses.\n-/\ntheorem holds_append {v : nat → int} {c1 c2 : clause} : holds v c1 → holds v c2 → holds v (append c1 c2) :=\n  by\n  intro h1 h2\n  cases' c1 with eqs1 les1\n  cases' c2 with eqs2 les2\n  cases h1; cases h2\n  constructor <;> rw [List.forall_mem_append] <;> constructor <;> assumption\n#align holds_append holds_append\n\n"}

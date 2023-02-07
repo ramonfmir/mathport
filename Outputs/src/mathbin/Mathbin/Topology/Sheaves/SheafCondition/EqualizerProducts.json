@@ -1,0 +1,14 @@
+{"w":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≫ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≫ » -/\n@[elementwise]\ntheorem w : «expr ≫ » (res F U) (left_res F U) = «expr ≫ » (res F U) (right_res F U) :=\n  by\n  dsimp [res, left_res, right_res]\n  ext\n  simp only [limit.lift_π, limit.lift_π_assoc, fan.mk_π_app, category.assoc]\n  rw [← F.map_comp]\n  rw [← F.map_comp]\n  congr\n#align w w\n\n",
+ "res_π":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≫ » -/\n/-\nCopyright (c) 2020 Scott Morrison. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Scott Morrison\n-/\n@[simp, elementwise]\ntheorem res_π (i : ι) : «expr ≫ » (res F U) (limit.π _ ⟨i⟩) = F.map (opens.le_supr U i).op := by\n  rw [res, limit.lift_π, fan.mk_π_app]\n#align res_π res_π\n\n",
+ "is_sheaf_iff_is_sheaf_equalizer_products":
+ "-- Ugh, `simp` can't unfold abbreviations.\n/-- The sheaf condition in terms of an equalizer diagram is equivalent\nto the default sheaf condition.\n-/\ntheorem is_sheaf_iff_is_sheaf_equalizer_products (F : presheaf C X) : F.is_sheaf ↔ F.is_sheaf_equalizer_products :=\n  (is_sheaf_iff_is_sheaf_pairwise_intersections F).trans <|\n    iff.intro (fun h ι U => ⟨is_limit_sheaf_condition_fork_of_is_limit_map_cone F U (h U).some⟩) fun h ι U =>\n      ⟨is_limit_map_cone_of_is_limit_sheaf_condition_fork F U (h U).some⟩\n#align is_sheaf_iff_is_sheaf_equalizer_products is_sheaf_iff_is_sheaf_equalizer_products\n\n",
+ "fork_π_app_walking_parallel_pair_zero":
+ "@[simp]\ntheorem fork_π_app_walking_parallel_pair_zero : (fork F U).π.app walking_parallel_pair.zero = res F U :=\n  rfl\n#align fork_π_app_walking_parallel_pair_zero fork_π_app_walking_parallel_pair_zero\n\n",
+ "fork_π_app_walking_parallel_pair_one":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≫ » -/\n@[simp]\ntheorem fork_π_app_walking_parallel_pair_one :\n    (fork F U).π.app walking_parallel_pair.one = «expr ≫ » (res F U) (left_res F U) :=\n  rfl\n#align fork_π_app_walking_parallel_pair_one fork_π_app_walking_parallel_pair_one\n\n",
+ "fork_ι":
+ "@[simp]\ntheorem fork_ι : (fork F U).ι = res F U :=\n  rfl\n#align fork_ι fork_ι\n\n",
+ "fork_X":
+ "@[simp]\ntheorem fork_X : (fork F U).X = F.obj (op (supᵢ U)) :=\n  rfl\n#align fork_X fork_X\n\n"}

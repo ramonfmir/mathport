@@ -1,0 +1,2 @@
+{"ext":
+ "/-\nCopyright (c) 2019 Microsoft Corporation. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Simon Hudon\n\nThe writer monad transformer for passing immutable state.\n-/\n@[ext]\nprotected theorem ext (x x' : writer_t ω m α) (h : x.run = x'.run) : x = x' := by\n  cases x <;> cases x' <;> congr <;> apply h\n#align ext ext\n\n"}

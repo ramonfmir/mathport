@@ -1,0 +1,18 @@
+{"counit_surjective":
+ "theorem counit_surjective : surjective (counit R) :=\n  acounit_surjective ℤ R\n#align counit_surjective counit_surjective\n\n",
+ "counit_nat_surjective":
+ "theorem counit_nat_surjective : surjective (counit_nat A) :=\n  acounit_surjective ℕ A\n#align counit_nat_surjective counit_nat_surjective\n\n",
+ "counit_nat_X":
+ "@[simp]\ntheorem counit_nat_X (a : A) : counit_nat A (X a) = a :=\n  acounit_X _ _\n#align counit_nat_X counit_nat_X\n\n",
+ "counit_nat_C":
+ "theorem counit_nat_C (n : ℕ) : counit_nat A (C n) = n :=\n  acounit_C _ _\n#align counit_nat_C counit_nat_C\n\n",
+ "counit_X":
+ "@[simp]\ntheorem counit_X (r : R) : counit R (X r) = r :=\n  acounit_X _ _\n#align counit_X counit_X\n\n",
+ "counit_C":
+ "theorem counit_C (n : ℤ) : counit R (C n) = n :=\n  acounit_C _ _\n#align counit_C counit_C\n\n",
+ "acounit_surjective":
+ "theorem acounit_surjective : surjective (acounit A B) := fun b => ⟨X b, acounit_X A b⟩\n#align acounit_surjective acounit_surjective\n\n",
+ "acounit_X":
+ "/-\nCopyright (c) 2020 Johan Commelin. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Johan Commelin\n-/\n@[simp]\ntheorem acounit_X (b : B) : acounit A B (X b) = b :=\n  aeval_X _ b\n#align acounit_X acounit_X\n\n",
+ "acounit_C":
+ "@[simp]\ntheorem acounit_C (a : A) : acounit A B (C a) = algebra_map A B a :=\n  aeval_C _ a\n#align acounit_C acounit_C\n\n"}

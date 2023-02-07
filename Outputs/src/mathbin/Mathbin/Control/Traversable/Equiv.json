@@ -1,0 +1,16 @@
+{"traverse_eq_map_id":
+ "protected theorem traverse_eq_map_id (f : α → β) (x : t' α) :\n    Equiv.traverse eqv (id.mk ∘ f) x = id.mk (Equiv.map eqv f x) := by\n  simp [Equiv.traverse, traverse_eq_map_id, functor_norm] <;> rfl\n#align traverse_eq_map_id traverse_eq_map_id\n\n",
+ "naturality":
+ "protected theorem naturality (f : α → F β) (x : t' α) : η (Equiv.traverse eqv f x) = Equiv.traverse eqv (@η _ ∘ f) x :=\n  by simp only [Equiv.traverse, functor_norm]\n#align naturality naturality\n\n",
+ "is_lawful_functor'":
+ "protected theorem is_lawful_functor' [F : _root_.functor t']\n    (h₀ : ∀ {α β} (f : α → β), _root_.functor.map f = Equiv.map f)\n    (h₁ : ∀ {α β} (f : β), _root_.functor.map_const f = (Equiv.map ∘ function.const α) f) : LawfulFunctor t' :=\n  by\n  have : F = Equiv.functor := by\n    cases F\n    dsimp [Equiv.functor]\n    congr <;> ext <;> [rw [← h₀], rw [← h₁]]\n  subst this\n  exact Equiv.lawfulFunctor\n#align is_lawful_functor' is_lawful_functor'\n\n",
+ "id_traverse":
+ "protected theorem id_traverse (x : t' α) : Equiv.traverse eqv id.mk x = x := by\n  simp! [Equiv.traverse, id_bind, id_traverse, functor.map, functor_norm]\n#align id_traverse id_traverse\n\n",
+ "id_map":
+ "/-\nCopyright (c) 2018 Simon Hudon. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Simon Hudon\n-/\nprotected theorem id_map {α : Type u} (x : t' α) : Equiv.map id x = x := by simp [Equiv.map, id_map]\n#align id_map id_map\n\n",
+ "comp_traverse":
+ "protected theorem comp_traverse (f : β → F γ) (g : α → G β) (x : t' α) :\n    Equiv.traverse eqv (comp.mk ∘ functor.map f ∘ g) x = Comp.mk (Equiv.traverse eqv f <$> Equiv.traverse eqv g x) := by\n  simp [Equiv.traverse, comp_traverse, functor_norm] <;> congr <;> ext <;> simp\n#align comp_traverse comp_traverse\n\n",
+ "comp_map":
+ "protected theorem comp_map {α β γ : Type u} (g : α → β) (h : β → γ) (x : t' α) :\n    Equiv.map (h ∘ g) x = Equiv.map h (Equiv.map g x) := by simp [Equiv.map] <;> apply comp_map\n#align comp_map comp_map\n\n",
+ "LawfulFunctor":
+ "#print LawfulFunctor /-\nprotected theorem LawfulFunctor : @LawfulFunctor _ Equiv.functor :=\n  { id_map := @Equiv.id_map _ _\n    comp_map := @Equiv.comp_map _ _ }\n#align is_lawful_functor LawfulFunctor\n-/\n\n"}

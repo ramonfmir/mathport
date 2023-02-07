@@ -1,0 +1,458 @@
+{"zero_nmem_multiset_map_X_sub_C":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `polynomial -/\ntheorem zero_nmem_multiset_map_X_sub_C {α : Type _} (m : Multiset α) (f : α → R) :\n    (0 : polynomial R) ∉ m.map fun a => X - C (f a) := fun mem =>\n  let ⟨a, _, ha⟩ := Multiset.mem_map.mp mem\n  X_sub_C_ne_zero _ ha\n#align zero_nmem_multiset_map_X_sub_C zero_nmem_multiset_map_X_sub_C\n\n",
+ "zero_nmem_multiset_map_X_add_C":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `polynomial -/\ntheorem zero_nmem_multiset_map_X_add_C {α : Type _} (m : Multiset α) (f : α → R) :\n    (0 : polynomial R) ∉ m.map fun a => X + C (f a) := fun mem =>\n  let ⟨a, _, ha⟩ := Multiset.mem_map.mp mem\n  X_add_C_ne_zero _ ha\n#align zero_nmem_multiset_map_X_add_C zero_nmem_multiset_map_X_add_C\n\n",
+ "zero_le_degree_iff":
+ "theorem zero_le_degree_iff : 0 ≤ degree p ↔ p ≠ 0 := by rw [← not_lt, Nat.WithBot.lt_zero_iff, degree_eq_bot]\n#align zero_le_degree_iff zero_le_degree_iff\n\n",
+ "supp_subset_range_nat_degree_succ":
+ "theorem supp_subset_range_nat_degree_succ : p.support ⊆ Finset.range (nat_degree p + 1) :=\n  supp_subset_range (nat.lt_succ_self _)\n#align supp_subset_range_nat_degree_succ supp_subset_range_nat_degree_succ\n\n",
+ "supp_subset_range":
+ "theorem supp_subset_range (h : nat_degree p < m) : p.support ⊆ Finset.range m := fun n hn =>\n  mem_range.2 <| (le_nat_degree_of_mem_supp _ hn).trans_lt h\n#align supp_subset_range supp_subset_range\n\n",
+ "sum_over_range'":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `polynomial -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `finset.sum -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.sum -/\n/-- We can reexpress a sum over `p.support` as a sum over `range n`,\nfor any `n` satisfying `p.nat_degree < n`.\n-/\ntheorem sum_over_range' [add_comm_monoid S] (p : polynomial R) {f : ℕ → R → S} (h : ∀ n, f n 0 = 0) (n : ℕ)\n    (w : p.nat_degree < n) :\n    p.sum f =\n      finset.sum \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.sum\" (range n)\n        (f a (coeff p a)) :=\n  by\n  rcases p with ⟨⟩\n  have := supp_subset_range w\n  simp only [polynomial.sum, support, coeff, nat_degree, degree] at this⊢\n  exact finsupp.sum_of_support_subset _ this _ fun n hn => h n\n#align sum_over_range' sum_over_range'\n\n",
+ "sum_over_range":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `polynomial -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `finset.sum -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.sum -/\n/-- We can reexpress a sum over `p.support` as a sum over `range (p.nat_degree + 1)`.\n-/\ntheorem sum_over_range [add_comm_monoid S] (p : polynomial R) {f : ℕ → R → S} (h : ∀ n, f n 0 = 0) :\n    p.sum f =\n      finset.sum \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.sum\"\n        (range (p.nat_degree + 1)) (f a (coeff p a)) :=\n  sum_over_range' p h (p.nat_degree + 1) (lt_add_one _)\n#align sum_over_range sum_over_range\n\n",
+ "sum_fin":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `polynomial -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `finset.sum_univ -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.sum_univ -/\n-- TODO this is essentially a duplicate of `sum_over_range`, and should be removed.\ntheorem sum_fin [add_comm_monoid S] (f : ℕ → R → S) (hf : ∀ i, f i 0 = 0) {n : ℕ} {p : polynomial R}\n    (hn : p.degree < n) :\n    finset.sum_univ \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.sum_univ\"\n        (f i (p.coeff i)) =\n      p.sum f :=\n  by\n  by_cases hp : p = 0\n  · rw [hp, sum_zero_index, finset.sum_eq_zero]\n    intro i _\n    exact hf i\n  rw [sum_over_range' _ hf n ((nat_degree_lt_iff_degree_lt hp).mpr hn),\n    fin.sum_univ_eq_sum_range fun i => f i (p.coeff i)]\n#align sum_fin sum_fin\n\n",
+ "not_is_unit_X":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `polynomial -/\ntheorem not_is_unit_X : ¬is_unit (X : polynomial R) := fun ⟨⟨_, g, hfg, hgf⟩, rfl⟩ =>\n  zero_ne_one' R <| by\n    change g * monomial 1 1 = 1 at hgf\n    rw [← coeff_one_zero, ← hgf]\n    simp\n#align not_is_unit_X not_is_unit_X\n\n",
+ "nonempty_support_iff":
+ "theorem nonempty_support_iff : p.support.nonempty ↔ p ≠ 0 := by\n  rw [ne.def, nonempty_iff_ne_empty, ne.def, ← support_eq_empty]\n#align nonempty_support_iff nonempty_support_iff\n\n",
+ "next_coeff_of_pos_nat_degree":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `polynomial -/\ntheorem next_coeff_of_pos_nat_degree (p : polynomial R) (hp : 0 < p.nat_degree) :\n    next_coeff p = p.coeff (p.nat_degree - 1) :=\n  by\n  rw [next_coeff, if_neg]\n  contrapose! hp\n  simpa\n#align next_coeff_of_pos_nat_degree next_coeff_of_pos_nat_degree\n\n",
+ "next_coeff_X_sub_C":
+ "@[simp]\ntheorem next_coeff_X_sub_C [Ring S] (c : S) : next_coeff (X - C c) = -c := by\n  rw [sub_eq_add_neg, ← map_neg C c, next_coeff_X_add_C]\n#align next_coeff_X_sub_C next_coeff_X_sub_C\n\n",
+ "next_coeff_X_add_C":
+ "@[simp]\ntheorem next_coeff_X_add_C [Semiring S] (c : S) : next_coeff (X + C c) = c :=\n  by\n  nontriviality S\n  simp [next_coeff_of_pos_nat_degree]\n#align next_coeff_X_add_C next_coeff_X_add_C\n\n",
+ "next_coeff_C_eq_zero":
+ "@[simp]\ntheorem next_coeff_C_eq_zero (c : R) : next_coeff (C c) = 0 :=\n  by\n  rw [next_coeff]\n  simp\n#align next_coeff_C_eq_zero next_coeff_C_eq_zero\n\n",
+ "ne_zero_of_polynomial_ne":
+ "theorem monic.ne_zero_of_polynomial_ne {r} (hp : monic p) (hne : q ≠ r) : p ≠ 0 :=\n  haveI := nontrivial.of_polynomial_ne hne\n  hp.ne_zero\n#align monic.ne_zero_of_polynomial_ne monic.ne_zero_of_polynomial_ne\n\n",
+ "ne_zero_of_ne":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `polynomial -/\ntheorem monic.ne_zero_of_ne (h : (0 : R) ≠ 1) {p : polynomial R} (hp : p.monic) : p ≠ 0 :=\n  by\n  nontriviality R\n  exact hp.ne_zero\n#align monic.ne_zero_of_ne monic.ne_zero_of_ne\n\n",
+ "ne_zero_of_nat_degree_gt":
+ "theorem ne_zero_of_nat_degree_gt {n : ℕ} (h : n < nat_degree p) : p ≠ 0 := fun H => by\n  simpa [H, nat.not_lt_zero] using h\n#align ne_zero_of_nat_degree_gt ne_zero_of_nat_degree_gt\n\n",
+ "ne_zero_of_degree_gt":
+ "theorem ne_zero_of_degree_gt {n : WithBot ℕ} (h : n < degree p) : p ≠ 0 :=\n  mt degree_eq_bot.2 (ne.symm (ne_of_lt (lt_of_le_of_lt bot_le h)))\n#align ne_zero_of_degree_gt ne_zero_of_degree_gt\n\n",
+ "ne_zero_of_degree_ge_degree":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\ntheorem ne_zero_of_degree_ge_degree (hpq : p.degree ≤ q.degree) (hp : p ≠ 0) : q ≠ 0 :=\n  polynomial.ne_zero_of_degree_gt\n    (lt_of_lt_of_le (bot_lt_iff_ne_bot.mpr (by rwa [ne.def, polynomial.degree_eq_bot])) hpq : q.degree > «expr⊥»)\n#align ne_zero_of_degree_ge_degree ne_zero_of_degree_ge_degree\n\n",
+ "ne_zero_of_coe_le_degree":
+ "theorem ne_zero_of_coe_le_degree (hdeg : ↑n ≤ p.degree) : p ≠ 0 :=\n  zero_le_degree_iff.mp <| (WithBot.coe_le_coe.mpr n.zero_le).trans hdeg\n#align ne_zero_of_coe_le_degree ne_zero_of_coe_le_degree\n\n",
+ "ne_zero":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `polynomial -/\ntheorem monic.ne_zero {R : Type _} [Semiring R] [nontrivial R] {p : polynomial R} (hp : p.monic) : p ≠ 0 :=\n  by\n  rintro rfl\n  simpa [monic] using hp\n#align monic.ne_zero monic.ne_zero\n\n",
+ "nat_degree_zero":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `polynomial -/\n@[simp]\ntheorem nat_degree_zero : nat_degree (0 : polynomial R) = 0 :=\n  rfl\n#align nat_degree_zero nat_degree_zero\n\n",
+ "nat_degree_sub_eq_right_of_nat_degree_lt":
+ "theorem nat_degree_sub_eq_right_of_nat_degree_lt (h : nat_degree p < nat_degree q) :\n    nat_degree (p - q) = nat_degree q :=\n  nat_degree_eq_of_degree_eq (degree_sub_eq_right_of_degree_lt (degree_lt_degree h))\n#align nat_degree_sub_eq_right_of_nat_degree_lt nat_degree_sub_eq_right_of_nat_degree_lt\n\n",
+ "nat_degree_sub_eq_left_of_nat_degree_lt":
+ "theorem nat_degree_sub_eq_left_of_nat_degree_lt (h : nat_degree q < nat_degree p) : nat_degree (p - q) = nat_degree p :=\n  nat_degree_eq_of_degree_eq (degree_sub_eq_left_of_degree_lt (degree_lt_degree h))\n#align nat_degree_sub_eq_left_of_nat_degree_lt nat_degree_sub_eq_left_of_nat_degree_lt\n\n",
+ "nat_degree_smul_le":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `polynomial -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\ntheorem nat_degree_smul_le (a : R) (p : polynomial R) : nat_degree («expr • » a p) ≤ nat_degree p :=\n  nat_degree_le_nat_degree (degree_smul_le a p)\n#align nat_degree_smul_le nat_degree_smul_le\n\n",
+ "nat_degree_quadratic_le":
+ "theorem nat_degree_quadratic_le : nat_degree (C a * X ^ 2 + C b * X + C c) ≤ 2 :=\n  nat_degree_le_of_degree_le degree_quadratic_le\n#align nat_degree_quadratic_le nat_degree_quadratic_le\n\n",
+ "nat_degree_quadratic":
+ "@[simp]\ntheorem nat_degree_quadratic (ha : a ≠ 0) : nat_degree (C a * X ^ 2 + C b * X + C c) = 2 :=\n  nat_degree_eq_of_degree_eq_some <| degree_quadratic ha\n#align nat_degree_quadratic nat_degree_quadratic\n\n",
+ "nat_degree_pow_le":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `polynomial -/\ntheorem nat_degree_pow_le {p : polynomial R} {n : ℕ} : (p ^ n).nat_degree ≤ n * p.nat_degree :=\n  by\n  induction' n with i hi\n  · simp\n  · rw [pow_succ, nat.succ_mul, add_comm]\n    apply le_trans nat_degree_mul_le\n    exact add_le_add_left hi _\n#align nat_degree_pow_le nat_degree_pow_le\n\n",
+ "nat_degree_pow'":
+ "theorem nat_degree_pow' {n : ℕ} (h : leading_coeff p ^ n ≠ 0) : nat_degree (p ^ n) = n * nat_degree p :=\n  if hp0 : p = 0 then if hn0 : n = 0 then by simp [*] else by rw [hp0, zero_pow (nat.pos_of_ne_zero hn0)] <;> simp\n  else\n    have hpn : p ^ n ≠ 0 := fun hpn0 => by\n      have h1 := h\n      rw [← leading_coeff_pow' h1, hpn0, leading_coeff_zero] at h <;> exact h rfl\n    option.some_inj.1 <|\n      show (nat_degree (p ^ n) : WithBot ℕ) = (n * nat_degree p : ℕ) by\n        rw [← degree_eq_nat_degree hpn, degree_pow' h, degree_eq_nat_degree hp0, ← WithBot.coe_nsmul] <;> simp\n#align nat_degree_pow' nat_degree_pow'\n\n",
+ "nat_degree_pos_iff_degree_pos":
+ "theorem nat_degree_pos_iff_degree_pos : 0 < nat_degree p ↔ 0 < degree p :=\n  lt_iff_lt_of_le_iff_le nat_degree_le_iff_degree_le\n#align nat_degree_pos_iff_degree_pos nat_degree_pos_iff_degree_pos\n\n",
+ "nat_degree_one":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `polynomial -/\n@[simp]\ntheorem nat_degree_one : nat_degree (1 : polynomial R) = 0 :=\n  nat_degree_C 1\n#align nat_degree_one nat_degree_one\n\n",
+ "nat_degree_of_subsingleton":
+ "@[nontriviality]\ntheorem nat_degree_of_subsingleton [subsingleton R] : nat_degree p = 0 := by rw [subsingleton.elim p 0, nat_degree_zero]\n#align nat_degree_of_subsingleton nat_degree_of_subsingleton\n\n",
+ "nat_degree_neg":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `polynomial -/\n@[simp]\ntheorem nat_degree_neg (p : polynomial R) : nat_degree (-p) = nat_degree p := by simp [nat_degree]\n#align nat_degree_neg nat_degree_neg\n\n",
+ "nat_degree_nat_cast":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `polynomial -/\n@[simp]\ntheorem nat_degree_nat_cast (n : ℕ) : nat_degree (n : polynomial R) = 0 := by simp only [← C_eq_nat_cast, nat_degree_C]\n#align nat_degree_nat_cast nat_degree_nat_cast\n\n",
+ "nat_degree_mul_le":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `polynomial -/\ntheorem nat_degree_mul_le {p q : polynomial R} : nat_degree (p * q) ≤ nat_degree p + nat_degree q :=\n  by\n  apply nat_degree_le_of_degree_le\n  apply le_trans (degree_mul_le p q)\n  rw [WithBot.coe_add]\n  refine' add_le_add _ _ <;> apply degree_le_nat_degree\n#align nat_degree_mul_le nat_degree_mul_le\n\n",
+ "nat_degree_mul'":
+ "theorem nat_degree_mul' (h : leading_coeff p * leading_coeff q ≠ 0) :\n    nat_degree (p * q) = nat_degree p + nat_degree q :=\n  have hp : p ≠ 0 := mt leading_coeff_eq_zero.2 fun h₁ => h <| by rw [h₁, zero_mul]\n  have hq : q ≠ 0 := mt leading_coeff_eq_zero.2 fun h₁ => h <| by rw [h₁, mul_zero]\n  nat_degree_eq_of_degree_eq_some <| by\n    rw [degree_mul' h, WithBot.coe_add, degree_eq_nat_degree hp, degree_eq_nat_degree hq]\n#align nat_degree_mul' nat_degree_mul'\n\n",
+ "nat_degree_monomial_le":
+ "theorem nat_degree_monomial_le (a : R) {m : ℕ} : (monomial m a).nat_degree ≤ m :=\n  by\n  rw [polynomial.nat_degree_monomial]\n  split_ifs\n  exacts[nat.zero_le _, rfl.le]\n#align nat_degree_monomial_le nat_degree_monomial_le\n\n",
+ "nat_degree_monomial_eq":
+ "theorem nat_degree_monomial_eq (i : ℕ) {r : R} (r0 : r ≠ 0) : (monomial i r).nat_degree = i :=\n  eq.trans (nat_degree_monomial _ _) (if_neg r0)\n#align nat_degree_monomial_eq nat_degree_monomial_eq\n\n",
+ "nat_degree_monomial":
+ "@[simp]\ntheorem nat_degree_monomial [decidable_eq R] (i : ℕ) (r : R) : nat_degree (monomial i r) = if r = 0 then 0 else i :=\n  by\n  split_ifs with hr\n  · simp [hr]\n  · rw [← C_mul_X_pow_eq_monomial, nat_degree_C_mul_X_pow i r hr]\n#align nat_degree_monomial nat_degree_monomial\n\n",
+ "nat_degree_mem_support_of_nonzero":
+ "theorem nat_degree_mem_support_of_nonzero (H : p ≠ 0) : p.nat_degree ∈ p.support :=\n  by\n  rw [mem_support_iff]\n  exact (not_congr leading_coeff_eq_zero).mpr H\n#align nat_degree_mem_support_of_nonzero nat_degree_mem_support_of_nonzero\n\n",
+ "nat_degree_lt_nat_degree_iff":
+ "theorem nat_degree_lt_nat_degree_iff (hp : p ≠ 0) : nat_degree p < nat_degree q ↔ degree p < degree q :=\n  ⟨degree_lt_degree, by\n    intro h\n    have hq : q ≠ 0 := ne_zero_of_degree_gt h\n    rw [degree_eq_nat_degree hp, degree_eq_nat_degree hq] at h\n    exact_mod_cast h⟩\n#align nat_degree_lt_nat_degree_iff nat_degree_lt_nat_degree_iff\n\n",
+ "nat_degree_lt_nat_degree":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `polynomial -/\ntheorem nat_degree_lt_nat_degree {p q : polynomial R} (hp : p ≠ 0) (hpq : p.degree < q.degree) :\n    p.nat_degree < q.nat_degree := by\n  by_cases hq : q = 0; · exact (not_lt_bot <| hq.subst hpq).elim\n  rwa [degree_eq_nat_degree hp, degree_eq_nat_degree hq, WithBot.coe_lt_coe] at hpq\n#align nat_degree_lt_nat_degree nat_degree_lt_nat_degree\n\n",
+ "nat_degree_lt_iff_degree_lt":
+ "theorem nat_degree_lt_iff_degree_lt (hp : p ≠ 0) : p.nat_degree < n ↔ p.degree < ↑n :=\n  WithBot.unbot'_lt_iff <| degree_eq_bot.not.mpr hp\n#align nat_degree_lt_iff_degree_lt nat_degree_lt_iff_degree_lt\n\n",
+ "nat_degree_linear_le":
+ "theorem nat_degree_linear_le : nat_degree (C a * X + C b) ≤ 1 :=\n  nat_degree_le_of_degree_le degree_linear_le\n#align nat_degree_linear_le nat_degree_linear_le\n\n",
+ "nat_degree_linear":
+ "@[simp]\ntheorem nat_degree_linear (ha : a ≠ 0) : nat_degree (C a * X + C b) = 1 :=\n  nat_degree_eq_of_degree_eq_some <| degree_linear ha\n#align nat_degree_linear nat_degree_linear\n\n",
+ "nat_degree_le_nat_degree":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `polynomial -/\ntheorem nat_degree_le_nat_degree [Semiring S] {q : polynomial S} (hpq : p.degree ≤ q.degree) :\n    p.nat_degree ≤ q.nat_degree :=\n  WithBot.giUnbot'Bot.gc.monotone_l hpq\n#align nat_degree_le_nat_degree nat_degree_le_nat_degree\n\n",
+ "nat_degree_le_iff_degree_le":
+ "theorem nat_degree_le_iff_degree_le {n : ℕ} : nat_degree p ≤ n ↔ degree p ≤ n :=\n  WithBot.unbot'_bot_le_iff\n#align nat_degree_le_iff_degree_le nat_degree_le_iff_degree_le\n\n",
+ "nat_degree_int_cast":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `polynomial -/\n@[simp]\ntheorem nat_degree_int_cast (n : ℤ) : nat_degree (n : polynomial R) = 0 := by rw [← C_eq_int_cast, nat_degree_C]\n#align nat_degree_int_cast nat_degree_int_cast\n\n",
+ "nat_degree_eq_zero_iff_degree_le_zero":
+ "theorem nat_degree_eq_zero_iff_degree_le_zero : p.nat_degree = 0 ↔ p.degree ≤ 0 := by\n  rw [← nonpos_iff_eq_zero, nat_degree_le_iff_degree_le, with_bot.coe_zero]\n#align nat_degree_eq_zero_iff_degree_le_zero nat_degree_eq_zero_iff_degree_le_zero\n\n",
+ "nat_degree_eq_support_max'":
+ "theorem nat_degree_eq_support_max' (h : p ≠ 0) : p.nat_degree = p.support.max' (nonempty_support_iff.mpr h) :=\n  (le_max' _ _ <| nat_degree_mem_support_of_nonzero h).antisymm <| max'_le _ _ _ le_nat_degree_of_mem_supp\n#align nat_degree_eq_support_max' nat_degree_eq_support_max'\n\n",
+ "nat_degree_eq_of_le_of_coeff_ne_zero":
+ "theorem nat_degree_eq_of_le_of_coeff_ne_zero (pn : p.nat_degree ≤ n) (p1 : p.coeff n ≠ 0) : p.nat_degree = n :=\n  pn.antisymm (le_nat_degree_of_ne_zero p1)\n#align nat_degree_eq_of_le_of_coeff_ne_zero nat_degree_eq_of_le_of_coeff_ne_zero\n\n",
+ "nat_degree_eq_of_degree_eq_some":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `polynomial -/\ntheorem nat_degree_eq_of_degree_eq_some {p : polynomial R} {n : ℕ} (h : degree p = n) : nat_degree p = n :=\n  have hp0 : p ≠ 0 := fun hp0 => by rw [hp0] at h <;> exact option.no_confusion h\n  option.some_inj.1 <| show (nat_degree p : WithBot ℕ) = n by rwa [← degree_eq_nat_degree hp0]\n#align nat_degree_eq_of_degree_eq_some nat_degree_eq_of_degree_eq_some\n\n",
+ "nat_degree_eq_of_degree_eq":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `polynomial -/\ntheorem nat_degree_eq_of_degree_eq [Semiring S] {q : polynomial S} (h : degree p = degree q) :\n    nat_degree p = nat_degree q := by unfold nat_degree <;> rw [h]\n#align nat_degree_eq_of_degree_eq nat_degree_eq_of_degree_eq\n\n",
+ "nat_degree_cubic_le":
+ "theorem nat_degree_cubic_le : nat_degree (C a * X ^ 3 + C b * X ^ 2 + C c * X + C d) ≤ 3 :=\n  nat_degree_le_of_degree_le degree_cubic_le\n#align nat_degree_cubic_le nat_degree_cubic_le\n\n",
+ "nat_degree_cubic":
+ "@[simp]\ntheorem nat_degree_cubic (ha : a ≠ 0) : nat_degree (C a * X ^ 3 + C b * X ^ 2 + C c * X + C d) = 3 :=\n  nat_degree_eq_of_degree_eq_some <| degree_cubic ha\n#align nat_degree_cubic nat_degree_cubic\n\n",
+ "nat_degree_add_le_of_degree_le":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `polynomial -/\ntheorem nat_degree_add_le_of_degree_le {p q : polynomial R} {n : ℕ} (hp : nat_degree p ≤ n) (hq : nat_degree q ≤ n) :\n    nat_degree (p + q) ≤ n :=\n  (nat_degree_add_le p q).trans <| max_le hp hq\n#align nat_degree_add_le_of_degree_le nat_degree_add_le_of_degree_le\n\n",
+ "nat_degree_add_le":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `polynomial -/\ntheorem nat_degree_add_le (p q : polynomial R) : nat_degree (p + q) ≤ max (nat_degree p) (nat_degree q) := by\n  cases le_max_iff.1 (degree_add_le p q) <;> simp [nat_degree_le_nat_degree h]\n#align nat_degree_add_le nat_degree_add_le\n\n",
+ "nat_degree_add_eq_right_of_nat_degree_lt":
+ "theorem nat_degree_add_eq_right_of_nat_degree_lt (h : nat_degree p < nat_degree q) :\n    nat_degree (p + q) = nat_degree q :=\n  nat_degree_eq_of_degree_eq (degree_add_eq_right_of_degree_lt (degree_lt_degree h))\n#align nat_degree_add_eq_right_of_nat_degree_lt nat_degree_add_eq_right_of_nat_degree_lt\n\n",
+ "nat_degree_add_eq_left_of_nat_degree_lt":
+ "theorem nat_degree_add_eq_left_of_nat_degree_lt (h : nat_degree q < nat_degree p) : nat_degree (p + q) = nat_degree p :=\n  nat_degree_eq_of_degree_eq (degree_add_eq_left_of_degree_lt (degree_lt_degree h))\n#align nat_degree_add_eq_left_of_nat_degree_lt nat_degree_add_eq_left_of_nat_degree_lt\n\n",
+ "nat_degree_X_sub_C_le":
+ "theorem nat_degree_X_sub_C_le (r : R) : (X - C r).nat_degree ≤ 1 :=\n  nat_degree_le_iff_degree_le.2 <| degree_X_sub_C_le r\n#align nat_degree_X_sub_C_le nat_degree_X_sub_C_le\n\n",
+ "nat_degree_X_sub_C":
+ "@[simp]\ntheorem nat_degree_X_sub_C (x : R) : (X - C x).nat_degree = 1 :=\n  nat_degree_eq_of_degree_eq_some <| degree_X_sub_C x\n#align nat_degree_X_sub_C nat_degree_X_sub_C\n\n",
+ "nat_degree_X_pow_sub_C":
+ "theorem nat_degree_X_pow_sub_C {n : ℕ} {r : R} : (X ^ n - C r).nat_degree = n := by\n  rw [sub_eq_add_neg, ← map_neg C r, nat_degree_X_pow_add_C]\n#align nat_degree_X_pow_sub_C nat_degree_X_pow_sub_C\n\n",
+ "nat_degree_X_pow_le":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `polynomial -/\n--  This lemma explicitly does not require the `nontrivial R` assumption.\ntheorem nat_degree_X_pow_le {R : Type _} [Semiring R] (n : ℕ) : (X ^ n : polynomial R).nat_degree ≤ n :=\n  by\n  nontriviality R\n  rwa [polynomial.nat_degree_X_pow]\n#align nat_degree_X_pow_le nat_degree_X_pow_le\n\n",
+ "nat_degree_X_pow_add_C":
+ "theorem nat_degree_X_pow_add_C {n : ℕ} {r : R} : (X ^ n + C r).nat_degree = n :=\n  by\n  by_cases hn : n = 0\n  · rw [hn, pow_zero, ← C_1, ← RingHom.map_add, nat_degree_C]\n  · exact nat_degree_eq_of_degree_eq_some (degree_X_pow_add_C (pos_iff_ne_zero.mpr hn) r)\n#align nat_degree_X_pow_add_C nat_degree_X_pow_add_C\n\n",
+ "nat_degree_X_pow":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `polynomial -/\n@[simp]\ntheorem nat_degree_X_pow (n : ℕ) : nat_degree ((X : polynomial R) ^ n) = n :=\n  nat_degree_eq_of_degree_eq_some (degree_X_pow n)\n#align nat_degree_X_pow nat_degree_X_pow\n\n",
+ "nat_degree_X_le":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `polynomial -/\ntheorem nat_degree_X_le : (X : polynomial R).nat_degree ≤ 1 :=\n  nat_degree_le_of_degree_le degree_X_le\n#align nat_degree_X_le nat_degree_X_le\n\n",
+ "nat_degree_X_add_C":
+ "@[simp]\ntheorem nat_degree_X_add_C (x : R) : (X + C x).nat_degree = 1 :=\n  nat_degree_eq_of_degree_eq_some <| degree_X_add_C x\n#align nat_degree_X_add_C nat_degree_X_add_C\n\n",
+ "nat_degree_X":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `polynomial -/\n@[simp]\ntheorem nat_degree_X : (X : polynomial R).nat_degree = 1 :=\n  nat_degree_eq_of_degree_eq_some degree_X\n#align nat_degree_X nat_degree_X\n\n",
+ "nat_degree_C_mul_X_pow_le":
+ "theorem nat_degree_C_mul_X_pow_le (a : R) (n : ℕ) : nat_degree (C a * X ^ n) ≤ n :=\n  nat_degree_le_iff_degree_le.2 <| degree_C_mul_X_pow_le _ _\n#align nat_degree_C_mul_X_pow_le nat_degree_C_mul_X_pow_le\n\n",
+ "nat_degree_C_mul_X_pow":
+ "@[simp]\ntheorem nat_degree_C_mul_X_pow (n : ℕ) (a : R) (ha : a ≠ 0) : nat_degree (C a * X ^ n) = n :=\n  nat_degree_eq_of_degree_eq_some (degree_C_mul_X_pow n ha)\n#align nat_degree_C_mul_X_pow nat_degree_C_mul_X_pow\n\n",
+ "nat_degree_C_mul_X":
+ "@[simp]\ntheorem nat_degree_C_mul_X (a : R) (ha : a ≠ 0) : nat_degree (C a * X) = 1 := by\n  simpa only [pow_one] using nat_degree_C_mul_X_pow 1 a ha\n#align nat_degree_C_mul_X nat_degree_C_mul_X\n\n",
+ "nat_degree_C":
+ "@[simp]\ntheorem nat_degree_C (a : R) : nat_degree (C a) = 0 :=\n  by\n  by_cases ha : a = 0\n  · have : C a = 0 := by rw [ha, C_0]\n    rw [nat_degree, degree_eq_bot.2 this]\n    rfl\n  · rw [nat_degree, degree_C ha]\n    rfl\n#align nat_degree_C nat_degree_C\n\n",
+ "monomial_nat_degree_leading_coeff_eq_self":
+ "theorem monomial_nat_degree_leading_coeff_eq_self (h : p.support.card ≤ 1) :\n    monomial p.nat_degree p.leading_coeff = p :=\n  by\n  rcases card_support_le_one_iff_monomial.1 h with ⟨n, a, rfl⟩\n  by_cases ha : a = 0 <;> simp [ha]\n#align monomial_nat_degree_leading_coeff_eq_self monomial_nat_degree_leading_coeff_eq_self\n\n",
+ "monic_one":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `polynomial -/\n@[simp]\ntheorem monic_one : monic (1 : polynomial R) :=\n  leading_coeff_C _\n#align monic_one monic_one\n\n",
+ "monic_of_subsingleton":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `polynomial -/\n@[nontriviality]\ntheorem monic_of_subsingleton [subsingleton R] (p : polynomial R) : monic p :=\n  subsingleton.elim _ _\n#align monic_of_subsingleton monic_of_subsingleton\n\n",
+ "monic_of_nat_degree_le_of_coeff_eq_one":
+ "theorem monic_of_nat_degree_le_of_coeff_eq_one (n : ℕ) (pn : p.nat_degree ≤ n) (p1 : p.coeff n = 1) : monic p :=\n  by\n  nontriviality\n  refine' (congr_arg _ <| nat_degree_eq_of_le_of_coeff_ne_zero pn _).trans p1\n  exact ne_of_eq_of_ne p1 one_ne_zero\n#align monic_of_nat_degree_le_of_coeff_eq_one monic_of_nat_degree_le_of_coeff_eq_one\n\n",
+ "monic_of_degree_le_of_coeff_eq_one":
+ "theorem monic_of_degree_le_of_coeff_eq_one (n : ℕ) (pn : p.degree ≤ n) (p1 : p.coeff n = 1) : monic p :=\n  monic_of_nat_degree_le_of_coeff_eq_one n (nat_degree_le_of_degree_le pn) p1\n#align monic_of_degree_le_of_coeff_eq_one monic_of_degree_le_of_coeff_eq_one\n\n",
+ "monic_X_pow":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `polynomial -/\n@[simp]\ntheorem monic_X_pow (n : ℕ) : monic (X ^ n : polynomial R) :=\n  leading_coeff_X_pow n\n#align monic_X_pow monic_X_pow\n\n",
+ "monic_X":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `polynomial -/\n@[simp]\ntheorem monic_X : monic (X : polynomial R) :=\n  leading_coeff_X\n#align monic_X monic_X\n\n",
+ "mem_support_C_mul_X_pow":
+ "theorem mem_support_C_mul_X_pow {n a : ℕ} {c : R} (h : a ∈ (C c * X ^ n).support) : a = n :=\n  mem_singleton.1 <| support_C_mul_X_pow' n c h\n#align mem_support_C_mul_X_pow mem_support_C_mul_X_pow\n\n",
+ "leading_coeff_zero":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `polynomial -/\n@[simp]\ntheorem leading_coeff_zero : leading_coeff (0 : polynomial R) = 0 :=\n  rfl\n#align leading_coeff_zero leading_coeff_zero\n\n",
+ "leading_coeff_quadratic":
+ "@[simp]\ntheorem leading_coeff_quadratic (ha : a ≠ 0) : leading_coeff (C a * X ^ 2 + C b * X + C c) = a := by\n  rw [add_assoc, add_comm, leading_coeff_add_of_degree_lt <| degree_linear_lt_degree_C_mul_X_sq ha,\n    leading_coeff_C_mul_X_pow]\n#align leading_coeff_quadratic leading_coeff_quadratic\n\n",
+ "leading_coeff_pow_X_add_C":
+ "@[simp]\ntheorem leading_coeff_pow_X_add_C (r : R) (i : ℕ) : leading_coeff ((X + C r) ^ i) = 1 :=\n  by\n  nontriviality\n  rw [leading_coeff_pow'] <;> simp\n#align leading_coeff_pow_X_add_C leading_coeff_pow_X_add_C\n\n",
+ "leading_coeff_pow'":
+ "theorem leading_coeff_pow' : leading_coeff p ^ n ≠ 0 → leading_coeff (p ^ n) = leading_coeff p ^ n :=\n  nat.rec_on n (by simp) fun n ih h =>\n    by\n    have h₁ : leading_coeff p ^ n ≠ 0 := fun h₁ => h <| by rw [pow_succ, h₁, mul_zero]\n    have h₂ : leading_coeff p * leading_coeff (p ^ n) ≠ 0 := by rwa [pow_succ, ← ih h₁] at h\n    rw [pow_succ, pow_succ, leading_coeff_mul' h₂, ih h₁]\n#align leading_coeff_pow' leading_coeff_pow'\n\n",
+ "leading_coeff_pow":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →* » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `polynomial -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `polynomial -/\n@[simp]\ntheorem leading_coeff_pow (p : polynomial R) (n : ℕ) : leading_coeff (p ^ n) = leading_coeff p ^ n :=\n  (leading_coeff_hom : «expr →* » (polynomial R) R).map_pow p n\n#align leading_coeff_pow leading_coeff_pow\n\n",
+ "leading_coeff_one":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `polynomial -/\n@[simp]\ntheorem leading_coeff_one : leading_coeff (1 : polynomial R) = 1 :=\n  leading_coeff_C 1\n#align leading_coeff_one leading_coeff_one\n\n",
+ "leading_coeff_neg":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `polynomial -/\n@[simp]\ntheorem leading_coeff_neg (p : polynomial R) : (-p).leading_coeff = -p.leading_coeff := by\n  rw [leading_coeff, leading_coeff, nat_degree_neg, coeff_neg]\n#align leading_coeff_neg leading_coeff_neg\n\n",
+ "leading_coeff_ne_zero":
+ "theorem leading_coeff_ne_zero : leading_coeff p ≠ 0 ↔ p ≠ 0 := by rw [ne.def, leading_coeff_eq_zero]\n#align leading_coeff_ne_zero leading_coeff_ne_zero\n\n",
+ "leading_coeff_mul_monic":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `polynomial -/\ntheorem leading_coeff_mul_monic {p q : polynomial R} (hq : monic q) : leading_coeff (p * q) = leading_coeff p :=\n  decidable.by_cases (fun H : leading_coeff p = 0 => by rw [H, leading_coeff_eq_zero.1 H, zero_mul, leading_coeff_zero])\n    fun H : leading_coeff p ≠ 0 => by\n    rw [leading_coeff_mul', hq.leading_coeff, mul_one] <;> rwa [hq.leading_coeff, mul_one]\n#align leading_coeff_mul_monic leading_coeff_mul_monic\n\n",
+ "leading_coeff_mul_X_pow":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `polynomial -/\n@[simp]\ntheorem leading_coeff_mul_X_pow {p : polynomial R} {n : ℕ} : leading_coeff (p * X ^ n) = leading_coeff p :=\n  leading_coeff_mul_monic (monic_X_pow n)\n#align leading_coeff_mul_X_pow leading_coeff_mul_X_pow\n\n",
+ "leading_coeff_mul_X":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `polynomial -/\n@[simp]\ntheorem leading_coeff_mul_X {p : polynomial R} : leading_coeff (p * X) = leading_coeff p :=\n  leading_coeff_mul_monic monic_X\n#align leading_coeff_mul_X leading_coeff_mul_X\n\n",
+ "leading_coeff_mul'":
+ "theorem leading_coeff_mul' (h : leading_coeff p * leading_coeff q ≠ 0) :\n    leading_coeff (p * q) = leading_coeff p * leading_coeff q :=\n  by\n  unfold leading_coeff\n  rw [nat_degree_mul' h, coeff_mul_degree_add_degree]\n  rfl\n#align leading_coeff_mul' leading_coeff_mul'\n\n",
+ "leading_coeff_mul":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `polynomial -/\n@[simp]\ntheorem leading_coeff_mul (p q : polynomial R) : leading_coeff (p * q) = leading_coeff p * leading_coeff q :=\n  by\n  by_cases hp : p = 0\n  · simp only [hp, zero_mul, leading_coeff_zero]\n  · by_cases hq : q = 0\n    · simp only [hq, mul_zero, leading_coeff_zero]\n    · rw [leading_coeff_mul']\n      exact mul_ne_zero (mt leading_coeff_eq_zero.1 hp) (mt leading_coeff_eq_zero.1 hq)\n#align leading_coeff_mul leading_coeff_mul\n\n",
+ "leading_coeff_monomial":
+ "@[simp]\ntheorem leading_coeff_monomial (a : R) (n : ℕ) : leading_coeff (monomial n a) = a :=\n  by\n  by_cases ha : a = 0\n  · simp only [ha, (monomial n).map_zero, leading_coeff_zero]\n  · rw [leading_coeff, nat_degree_monomial, if_neg ha, coeff_monomial]\n    simp\n#align leading_coeff_monomial leading_coeff_monomial\n\n",
+ "leading_coeff_monic_mul":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `polynomial -/\ntheorem leading_coeff_monic_mul {p q : polynomial R} (hp : monic p) : leading_coeff (p * q) = leading_coeff q :=\n  by\n  rcases eq_or_ne q 0 with (rfl | H)\n  · simp\n  · rw [leading_coeff_mul', hp.leading_coeff, one_mul]\n    rwa [hp.leading_coeff, one_mul, ne.def, leading_coeff_eq_zero]\n#align leading_coeff_monic_mul leading_coeff_monic_mul\n\n",
+ "leading_coeff_linear":
+ "@[simp]\ntheorem leading_coeff_linear (ha : a ≠ 0) : leading_coeff (C a * X + C b) = a := by\n  rw [add_comm, leading_coeff_add_of_degree_lt (degree_C_lt_degree_C_mul_X ha), leading_coeff_C_mul_X]\n#align leading_coeff_linear leading_coeff_linear\n\n",
+ "leading_coeff_hom_apply":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `polynomial -/\n@[simp]\ntheorem leading_coeff_hom_apply (p : polynomial R) : leading_coeff_hom p = leading_coeff p :=\n  rfl\n#align leading_coeff_hom_apply leading_coeff_hom_apply\n\n",
+ "leading_coeff_eq_zero_iff_deg_eq_bot":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\ntheorem leading_coeff_eq_zero_iff_deg_eq_bot : leading_coeff p = 0 ↔ degree p = «expr⊥» := by\n  rw [leading_coeff_eq_zero, degree_eq_bot]\n#align leading_coeff_eq_zero_iff_deg_eq_bot leading_coeff_eq_zero_iff_deg_eq_bot\n\n",
+ "leading_coeff_eq_zero":
+ "@[simp]\ntheorem leading_coeff_eq_zero : leading_coeff p = 0 ↔ p = 0 :=\n  ⟨fun h => by_contradiction fun hp => mt mem_support_iff.1 (not_not.2 h) (mem_of_max (degree_eq_nat_degree hp)),\n    fun h => h.symm ▸ leading_coeff_zero⟩\n#align leading_coeff_eq_zero leading_coeff_eq_zero\n\n",
+ "leading_coeff_cubic":
+ "@[simp]\ntheorem leading_coeff_cubic (ha : a ≠ 0) : leading_coeff (C a * X ^ 3 + C b * X ^ 2 + C c * X + C d) = a := by\n  rw [add_assoc, add_assoc, ← add_assoc (C b * X ^ 2), add_comm,\n    leading_coeff_add_of_degree_lt <| degree_quadratic_lt_degree_C_mul_X_cb ha, leading_coeff_C_mul_X_pow]\n#align leading_coeff_cubic leading_coeff_cubic\n\n",
+ "leading_coeff_add_of_degree_lt":
+ "theorem leading_coeff_add_of_degree_lt (h : degree p < degree q) : leading_coeff (p + q) = leading_coeff q :=\n  by\n  have : coeff p (nat_degree q) = 0 := coeff_nat_degree_eq_zero_of_degree_lt h\n  simp only [leading_coeff, nat_degree_eq_of_degree_eq (degree_add_eq_right_of_degree_lt h), this, coeff_add, zero_add]\n#align leading_coeff_add_of_degree_lt leading_coeff_add_of_degree_lt\n\n",
+ "leading_coeff_add_of_degree_eq":
+ "theorem leading_coeff_add_of_degree_eq (h : degree p = degree q) (hlc : leading_coeff p + leading_coeff q ≠ 0) :\n    leading_coeff (p + q) = leading_coeff p + leading_coeff q :=\n  by\n  have : nat_degree (p + q) = nat_degree p := by\n    apply nat_degree_eq_of_degree_eq <;> rw [degree_add_eq_of_leading_coeff_add_ne_zero hlc, h, max_self]\n  simp only [leading_coeff, this, nat_degree_eq_of_degree_eq h, coeff_add]\n#align leading_coeff_add_of_degree_eq leading_coeff_add_of_degree_eq\n\n",
+ "leading_coeff_X_sub_C":
+ "@[simp]\ntheorem leading_coeff_X_sub_C [Ring S] (r : S) : (X - C r).leading_coeff = 1 := by\n  rw [sub_eq_add_neg, ← map_neg C r, leading_coeff_X_add_C]\n#align leading_coeff_X_sub_C leading_coeff_X_sub_C\n\n",
+ "leading_coeff_X_pow_sub_one":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `polynomial -/\n@[simp]\ntheorem leading_coeff_X_pow_sub_one {n : ℕ} (hn : 0 < n) : (X ^ n - 1 : polynomial R).leading_coeff = 1 :=\n  leading_coeff_X_pow_sub_C hn\n#align leading_coeff_X_pow_sub_one leading_coeff_X_pow_sub_one\n\n",
+ "leading_coeff_X_pow_sub_C":
+ "@[simp]\ntheorem leading_coeff_X_pow_sub_C {n : ℕ} (hn : 0 < n) {r : R} : (X ^ n - C r).leading_coeff = 1 := by\n  rw [sub_eq_add_neg, ← map_neg C r, leading_coeff_X_pow_add_C hn] <;> infer_instance\n#align leading_coeff_X_pow_sub_C leading_coeff_X_pow_sub_C\n\n",
+ "leading_coeff_X_pow_add_one":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `polynomial -/\n@[simp]\ntheorem leading_coeff_X_pow_add_one {n : ℕ} (hn : 0 < n) : (X ^ n + 1 : polynomial R).leading_coeff = 1 :=\n  leading_coeff_X_pow_add_C hn\n#align leading_coeff_X_pow_add_one leading_coeff_X_pow_add_one\n\n",
+ "leading_coeff_X_pow_add_C":
+ "@[simp]\ntheorem leading_coeff_X_pow_add_C {n : ℕ} (hn : 0 < n) {r : R} : (X ^ n + C r).leading_coeff = 1 :=\n  by\n  nontriviality R\n  rw [leading_coeff, nat_degree_X_pow_add_C, coeff_add, coeff_X_pow_self, coeff_C, if_neg (pos_iff_ne_zero.mp hn),\n    add_zero]\n#align leading_coeff_X_pow_add_C leading_coeff_X_pow_add_C\n\n",
+ "leading_coeff_X_pow":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `polynomial -/\n@[simp]\ntheorem leading_coeff_X_pow (n : ℕ) : leading_coeff ((X : polynomial R) ^ n) = 1 := by\n  simpa only [C_1, one_mul] using leading_coeff_C_mul_X_pow (1 : R) n\n#align leading_coeff_X_pow leading_coeff_X_pow\n\n",
+ "leading_coeff_X_add_C":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `polynomial -/\n@[simp]\ntheorem leading_coeff_X_add_C [Semiring S] (r : S) : (X + C r).leading_coeff = 1 := by\n  rw [← pow_one (X : polynomial S), leading_coeff_X_pow_add_C zero_lt_one]\n#align leading_coeff_X_add_C leading_coeff_X_add_C\n\n",
+ "leading_coeff_X":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `polynomial -/\n@[simp]\ntheorem leading_coeff_X : leading_coeff (X : polynomial R) = 1 := by\n  simpa only [pow_one] using @leading_coeff_X_pow R _ 1\n#align leading_coeff_X leading_coeff_X\n\n",
+ "leading_coeff_C_mul_X_pow":
+ "theorem leading_coeff_C_mul_X_pow (a : R) (n : ℕ) : leading_coeff (C a * X ^ n) = a := by\n  rw [C_mul_X_pow_eq_monomial, leading_coeff_monomial]\n#align leading_coeff_C_mul_X_pow leading_coeff_C_mul_X_pow\n\n",
+ "leading_coeff_C_mul_X":
+ "theorem leading_coeff_C_mul_X (a : R) : leading_coeff (C a * X) = a := by\n  simpa only [pow_one] using leading_coeff_C_mul_X_pow a 1\n#align leading_coeff_C_mul_X leading_coeff_C_mul_X\n\n",
+ "leading_coeff_C":
+ "@[simp]\ntheorem leading_coeff_C (a : R) : leading_coeff (C a) = a :=\n  leading_coeff_monomial a 0\n#align leading_coeff_C leading_coeff_C\n\n",
+ "leading_coeff":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `polynomial -/\n@[simp]\ntheorem monic.leading_coeff {p : polynomial R} (hp : p.monic) : leading_coeff p = 1 :=\n  hp\n#align monic.leading_coeff monic.leading_coeff\n\n",
+ "le_nat_degree_of_ne_zero":
+ "theorem le_nat_degree_of_ne_zero (h : coeff p n ≠ 0) : n ≤ nat_degree p :=\n  by\n  rw [← WithBot.coe_le_coe, ← degree_eq_nat_degree]\n  exact le_degree_of_ne_zero h\n  · intro h\n    subst h\n    exact h rfl\n#align le_nat_degree_of_ne_zero le_nat_degree_of_ne_zero\n\n",
+ "le_nat_degree_of_mem_supp":
+ "theorem le_nat_degree_of_mem_supp (a : ℕ) : a ∈ p.support → a ≤ nat_degree p :=\n  le_nat_degree_of_ne_zero ∘ mem_support_iff.mp\n#align le_nat_degree_of_mem_supp le_nat_degree_of_mem_supp\n\n",
+ "le_nat_degree_of_coe_le_degree":
+ "theorem le_nat_degree_of_coe_le_degree (hdeg : ↑n ≤ p.degree) : n ≤ p.nat_degree :=\n  WithBot.coe_le_coe.mp ((degree_eq_nat_degree <| ne_zero_of_coe_le_degree hdeg) ▸ hdeg)\n#align le_nat_degree_of_coe_le_degree le_nat_degree_of_coe_le_degree\n\n",
+ "le_degree_of_ne_zero":
+ "theorem le_degree_of_ne_zero (h : coeff p n ≠ 0) : (n : WithBot ℕ) ≤ degree p :=\n  show @LE.le (WithBot ℕ) _ (some n : WithBot ℕ) (p.support.sup some : WithBot ℕ) from\n    finset.le_sup (mem_support_iff.2 h)\n#align le_degree_of_ne_zero le_degree_of_ne_zero\n\n",
+ "le_degree_of_mem_supp":
+ "theorem le_degree_of_mem_supp (a : ℕ) : a ∈ p.support → ↑a ≤ degree p :=\n  le_degree_of_ne_zero ∘ mem_support_iff.mp\n#align le_degree_of_mem_supp le_degree_of_mem_supp\n\n",
+ "ite_le_nat_degree_coeff":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `polynomial -/\n-- We need the explicit `decidable` argument here because an exotic one shows up in a moment!\ntheorem ite_le_nat_degree_coeff (p : polynomial R) (n : ℕ) (I : decidable (n < 1 + nat_degree p)) :\n    @ite _ (n < 1 + nat_degree p) I (coeff p n) 0 = coeff p n :=\n  by\n  split_ifs\n  · rfl\n  · exact (coeff_eq_zero_of_nat_degree_lt (not_le.1 fun w => h (Nat.lt_one_add_iff.2 w))).symm\n#align ite_le_nat_degree_coeff ite_le_nat_degree_coeff\n\n",
+ "ext_iff_nat_degree_le":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `polynomial -/\ntheorem ext_iff_nat_degree_le {p q : polynomial R} {n : ℕ} (hp : p.nat_degree ≤ n) (hq : q.nat_degree ≤ n) :\n    p = q ↔ ∀ i ≤ n, p.coeff i = q.coeff i :=\n  by\n  refine' iff.trans polynomial.ext_iff _\n  refine' forall_congr' fun i => ⟨fun h _ => h, fun h => _⟩\n  refine' (le_or_lt i n).elim h fun k => _\n  refine' (coeff_eq_zero_of_nat_degree_lt (hp.trans_lt k)).trans (coeff_eq_zero_of_nat_degree_lt (hq.trans_lt k)).symm\n#align ext_iff_nat_degree_le ext_iff_nat_degree_le\n\n",
+ "ext_iff_degree_le":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `polynomial -/\ntheorem ext_iff_degree_le {p q : polynomial R} {n : ℕ} (hp : p.degree ≤ n) (hq : q.degree ≤ n) :\n    p = q ↔ ∀ i ≤ n, p.coeff i = q.coeff i :=\n  ext_iff_nat_degree_le (nat_degree_le_of_degree_le hp) (nat_degree_le_of_degree_le hq)\n#align ext_iff_degree_le ext_iff_degree_le\n\n",
+ "exists_eq_X_add_C_of_nat_degree_le_one":
+ "theorem exists_eq_X_add_C_of_nat_degree_le_one (h : nat_degree p ≤ 1) : ∃ a b, p = C a * X + C b :=\n  ⟨p.coeff 1, p.coeff 0, eq_X_add_C_of_nat_degree_le_one h⟩\n#align exists_eq_X_add_C_of_nat_degree_le_one exists_eq_X_add_C_of_nat_degree_le_one\n\n",
+ "eq_X_add_C_of_nat_degree_le_one":
+ "theorem eq_X_add_C_of_nat_degree_le_one (h : nat_degree p ≤ 1) : p = C (p.coeff 1) * X + C (p.coeff 0) :=\n  eq_X_add_C_of_degree_le_one <| degree_le_of_nat_degree_le h\n#align eq_X_add_C_of_nat_degree_le_one eq_X_add_C_of_nat_degree_le_one\n\n",
+ "eq_X_add_C_of_degree_le_one":
+ "theorem eq_X_add_C_of_degree_le_one (h : degree p ≤ 1) : p = C (p.coeff 1) * X + C (p.coeff 0) :=\n  ext fun n =>\n    nat.cases_on n (by simp) fun n =>\n      nat.cases_on n (by simp [coeff_C]) fun m =>\n        by\n        have : degree p < m.succ.succ := lt_of_le_of_lt h (by decide)\n        simp [coeff_eq_zero_of_degree_lt this, coeff_C, nat.succ_ne_zero, coeff_X, Nat.succ_inj', @eq_comm ℕ 0]\n#align eq_X_add_C_of_degree_le_one eq_X_add_C_of_degree_le_one\n\n",
+ "eq_X_add_C_of_degree_eq_one":
+ "theorem eq_X_add_C_of_degree_eq_one (h : degree p = 1) : p = C p.leading_coeff * X + C (p.coeff 0) :=\n  (eq_X_add_C_of_degree_le_one (show degree p ≤ 1 from h ▸ le_rfl)).trans\n    (by simp only [leading_coeff, nat_degree_eq_of_degree_eq_some h])\n#align eq_X_add_C_of_degree_eq_one eq_X_add_C_of_degree_eq_one\n\n",
+ "eq_X_add_C":
+ "theorem monic.eq_X_add_C (hm : p.monic) (hnd : p.nat_degree = 1) : p = X + C (p.coeff 0) := by\n  rw [← one_mul X, ← C_1, ← hm.coeff_nat_degree, hnd, ← eq_X_add_C_of_nat_degree_le_one hnd.le]\n#align monic.eq_X_add_C monic.eq_X_add_C\n\n",
+ "eq_C_of_nat_degree_le_zero":
+ "theorem eq_C_of_nat_degree_le_zero (h : nat_degree p ≤ 0) : p = C (coeff p 0) :=\n  eq_C_of_degree_le_zero <| degree_le_of_nat_degree_le h\n#align eq_C_of_nat_degree_le_zero eq_C_of_nat_degree_le_zero\n\n",
+ "eq_C_of_nat_degree_eq_zero":
+ "theorem eq_C_of_nat_degree_eq_zero (h : nat_degree p = 0) : p = C (coeff p 0) :=\n  eq_C_of_nat_degree_le_zero h.le\n#align eq_C_of_nat_degree_eq_zero eq_C_of_nat_degree_eq_zero\n\n",
+ "eq_C_of_degree_le_zero":
+ "theorem eq_C_of_degree_le_zero (h : degree p ≤ 0) : p = C (coeff p 0) :=\n  by\n  ext (_ | n); · simp\n  rw [coeff_C, if_neg (nat.succ_ne_zero _), coeff_eq_zero_of_degree_lt]\n  exact h.trans_lt (WithBot.some_lt_some.2 n.succ_pos)\n#align eq_C_of_degree_le_zero eq_C_of_degree_le_zero\n\n",
+ "eq_C_of_degree_eq_zero":
+ "theorem eq_C_of_degree_eq_zero (h : degree p = 0) : p = C (coeff p 0) :=\n  eq_C_of_degree_le_zero (h ▸ le_rfl)\n#align eq_C_of_degree_eq_zero eq_C_of_degree_eq_zero\n\n",
+ "degree_zero":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `polynomial -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n@[simp]\ntheorem degree_zero : degree (0 : polynomial R) = «expr⊥» :=\n  rfl\n#align degree_zero degree_zero\n\n",
+ "degree_update_le":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `polynomial -/\ntheorem degree_update_le (p : polynomial R) (n : ℕ) (a : R) : degree (p.update n a) ≤ max (degree p) n :=\n  by\n  rw [degree, support_update]\n  split_ifs\n  · exact (finset.max_mono (erase_subset _ _)).trans (le_max_left _ _)\n  · rw [max_insert, max_comm]\n    exact le_rfl\n#align degree_update_le degree_update_le\n\n",
+ "degree_sum_le":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `finset.sum -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.sum -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `finset.sum -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.sum -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `polynomial -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `finset.sum -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.sum -/\ntheorem degree_sum_le (s : Finset ι) (f : ι → polynomial R) :\n    degree (finset.sum \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.sum\" s (f i)) ≤\n      s.sup fun b => degree (f b) :=\n  Finset.induction_on s (by simp only [sum_empty, sup_empty, degree_zero, le_refl]) fun a s has ih =>\n    calc\n      degree\n            (finset.sum \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.sum\"\n              (insert a s) (f i)) ≤\n          max (degree (f a))\n            (degree\n              (finset.sum \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.sum\" s\n                (f i))) :=\n        by rw [sum_insert has] <;> exact degree_add_le _ _\n      _ ≤ _ := by rw [sup_insert, sup_eq_max] <;> exact max_le_max le_rfl ih\n      \n#align degree_sum_le degree_sum_le\n\n",
+ "degree_sum_fin_lt":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `finset.sum_univ -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.sum_univ -/\ntheorem degree_sum_fin_lt {n : ℕ} (f : fin n → R) :\n    degree\n        (finset.sum_univ \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.sum_univ\"\n          (C (f i) * X ^ (i : ℕ))) <\n      n :=\n  (degree_sum_le _ _).trans_lt <|\n    (finset.sup_lt_iff <| WithBot.bot_lt_coe n).2 fun k hk =>\n      (degree_C_mul_X_pow_le _ _).trans_lt <| WithBot.coe_lt_coe.2 k.is_lt\n#align degree_sum_fin_lt degree_sum_fin_lt\n\n",
+ "degree_sub_lt":
+ "theorem degree_sub_lt (hd : degree p = degree q) (hp0 : p ≠ 0) (hlc : leading_coeff p = leading_coeff q) :\n    degree (p - q) < degree p :=\n  have hp : monomial (nat_degree p) (leading_coeff p) + p.erase (nat_degree p) = p := monomial_add_erase _ _\n  have hq : monomial (nat_degree q) (leading_coeff q) + q.erase (nat_degree q) = q := monomial_add_erase _ _\n  have hd' : nat_degree p = nat_degree q := by unfold nat_degree <;> rw [hd]\n  have hq0 : q ≠ 0 := mt degree_eq_bot.2 (hd ▸ mt degree_eq_bot.1 hp0)\n  calc\n    degree (p - q) = degree (erase (nat_degree q) p + -erase (nat_degree q) q) := by\n      conv =>\n        lhs\n        rw [← hp, ← hq, hlc, hd', add_sub_add_left_eq_sub, sub_eq_add_neg]\n    _ ≤ max (degree (erase (nat_degree q) p)) (degree (erase (nat_degree q) q)) :=\n      degree_neg (erase (nat_degree q) q) ▸ degree_add_le _ _\n    _ < degree p := max_lt_iff.2 ⟨hd' ▸ degree_erase_lt hp0, hd.symm ▸ degree_erase_lt hq0⟩\n    \n#align degree_sub_lt degree_sub_lt\n\n",
+ "degree_sub_le":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `polynomial -/\ntheorem degree_sub_le (p q : polynomial R) : degree (p - q) ≤ max (degree p) (degree q) := by\n  simpa only [sub_eq_add_neg, degree_neg q] using degree_add_le p (-q)\n#align degree_sub_le degree_sub_le\n\n",
+ "degree_sub_eq_right_of_degree_lt":
+ "theorem degree_sub_eq_right_of_degree_lt (h : degree p < degree q) : degree (p - q) = degree q :=\n  by\n  rw [← degree_neg q] at h\n  rw [sub_eq_add_neg, degree_add_eq_right_of_degree_lt h, degree_neg]\n#align degree_sub_eq_right_of_degree_lt degree_sub_eq_right_of_degree_lt\n\n",
+ "degree_sub_eq_left_of_degree_lt":
+ "theorem degree_sub_eq_left_of_degree_lt (h : degree q < degree p) : degree (p - q) = degree p :=\n  by\n  rw [← degree_neg q] at h\n  rw [sub_eq_add_neg, degree_add_eq_left_of_degree_lt h]\n#align degree_sub_eq_left_of_degree_lt degree_sub_eq_left_of_degree_lt\n\n",
+ "degree_smul_le":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `polynomial -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\ntheorem degree_smul_le (a : R) (p : polynomial R) : degree («expr • » a p) ≤ degree p :=\n  by\n  apply (degree_le_iff_coeff_zero _ _).2 fun m hm => _\n  rw [degree_lt_iff_coeff_zero] at hm\n  simp [hm m le_rfl]\n#align degree_smul_le degree_smul_le\n\n",
+ "degree_quadratic_lt_degree_C_mul_X_cb":
+ "theorem degree_quadratic_lt_degree_C_mul_X_cb (ha : a ≠ 0) :\n    degree (C b * X ^ 2 + C c * X + C d) < degree (C a * X ^ 3) := by\n  simpa only [degree_C_mul_X_pow 3 ha] using degree_quadratic_lt\n#align degree_quadratic_lt_degree_C_mul_X_cb degree_quadratic_lt_degree_C_mul_X_cb\n\n",
+ "degree_quadratic_lt":
+ "theorem degree_quadratic_lt : degree (C a * X ^ 2 + C b * X + C c) < 3 :=\n  degree_quadratic_le.trans_lt <| WithBot.coe_lt_coe.mpr <| lt_add_one 2\n#align degree_quadratic_lt degree_quadratic_lt\n\n",
+ "degree_quadratic_le":
+ "theorem degree_quadratic_le : degree (C a * X ^ 2 + C b * X + C c) ≤ 2 := by\n  simpa only [add_assoc] using\n    degree_add_le_of_degree_le (degree_C_mul_X_pow_le 2 a)\n      (le_trans degree_linear_le <| with_bot.coe_le_coe.mpr one_le_two)\n#align degree_quadratic_le degree_quadratic_le\n\n",
+ "degree_quadratic":
+ "@[simp]\ntheorem degree_quadratic (ha : a ≠ 0) : degree (C a * X ^ 2 + C b * X + C c) = 2 :=\n  by\n  rw [add_assoc, degree_add_eq_left_of_degree_lt <| degree_linear_lt_degree_C_mul_X_sq ha, degree_C_mul_X_pow 2 ha]\n  rfl\n#align degree_quadratic degree_quadratic\n\n",
+ "degree_pow_le":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `polynomial -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\ntheorem degree_pow_le (p : polynomial R) : ∀ n : ℕ, degree (p ^ n) ≤ «expr • » n (degree p)\n  | 0 => by rw [pow_zero, zero_nsmul] <;> exact degree_one_le\n  | n + 1 =>\n    calc\n      degree (p ^ (n + 1)) ≤ degree p + degree (p ^ n) := by rw [pow_succ] <;> exact degree_mul_le _ _\n      _ ≤ _ := by rw [succ_nsmul] <;> exact add_le_add le_rfl (degree_pow_le _)\n      \n#align degree_pow_le degree_pow_le\n\n",
+ "degree_pow'":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\ntheorem degree_pow' : ∀ {n : ℕ}, leading_coeff p ^ n ≠ 0 → degree (p ^ n) = «expr • » n (degree p)\n  | 0 => fun h => by rw [pow_zero, ← C_1] at * <;> rw [degree_C h, zero_nsmul]\n  | n + 1 => fun h =>\n    by\n    have h₁ : leading_coeff p ^ n ≠ 0 := fun h₁ => h <| by rw [pow_succ, h₁, mul_zero]\n    have h₂ : leading_coeff p * leading_coeff (p ^ n) ≠ 0 := by rwa [pow_succ, ← leading_coeff_pow' h₁] at h\n    rw [pow_succ, degree_mul' h₂, succ_nsmul, degree_pow' h₁]\n#align degree_pow' degree_pow'\n\n",
+ "degree_pow":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `polynomial -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n@[simp]\ntheorem degree_pow [nontrivial R] (p : polynomial R) (n : ℕ) : degree (p ^ n) = «expr • » n (degree p) :=\n  map_pow (@degree_monoid_hom R _ _ _) _ _\n#align degree_pow degree_pow\n\n",
+ "degree_one_le":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `polynomial -/\ntheorem degree_one_le : degree (1 : polynomial R) ≤ (0 : WithBot ℕ) := by rw [← C_1] <;> exact degree_C_le\n#align degree_one_le degree_one_le\n\n",
+ "degree_one":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `polynomial -/\n@[simp]\ntheorem degree_one : degree (1 : polynomial R) = (0 : WithBot ℕ) :=\n  degree_C (show (1 : R) ≠ 0 from zero_ne_one.symm)\n#align degree_one degree_one\n\n",
+ "degree_of_subsingleton":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n@[nontriviality]\ntheorem degree_of_subsingleton [subsingleton R] : degree p = «expr⊥» := by rw [subsingleton.elim p 0, degree_zero]\n#align degree_of_subsingleton degree_of_subsingleton\n\n",
+ "degree_neg":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `polynomial -/\n@[simp]\ntheorem degree_neg (p : polynomial R) : degree (-p) = degree p := by unfold degree <;> rw [support_neg]\n#align degree_neg degree_neg\n\n",
+ "degree_ne_of_nat_degree_ne":
+ "theorem degree_ne_of_nat_degree_ne {n : ℕ} : p.nat_degree ≠ n → degree p ≠ n :=\n  mt fun h => by rw [nat_degree, h, WithBot.unbot'_coe]\n#align degree_ne_of_nat_degree_ne degree_ne_of_nat_degree_ne\n\n",
+ "degree_mul_le":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `polynomial -/\ntheorem degree_mul_le (p q : polynomial R) : degree (p * q) ≤ degree p + degree q :=\n  calc\n    degree (p * q) ≤ p.support.sup fun i => degree (sum q fun j a => C (coeff p i * a) * X ^ (i + j)) :=\n      by\n      simp only [← C_mul_X_pow_eq_monomial.symm]\n      convert degree_sum_le _ _\n      exact mul_eq_sum_sum\n    _ ≤ p.support.sup fun i => q.support.sup fun j => degree (C (coeff p i * coeff q j) * X ^ (i + j)) :=\n      finset.sup_mono_fun fun i hi => degree_sum_le _ _\n    _ ≤ degree p + degree q :=\n      by\n      refine' finset.sup_le fun a ha => finset.sup_le fun b hb => le_trans (degree_C_mul_X_pow_le _ _) _\n      rw [WithBot.coe_add]\n      rw [mem_support_iff] at ha hb\n      exact add_le_add (le_degree_of_ne_zero ha) (le_degree_of_ne_zero hb)\n    \n#align degree_mul_le degree_mul_le\n\n",
+ "degree_mul_X_pow":
+ "@[simp]\ntheorem degree_mul_X_pow : degree (p * X ^ n) = degree p + n := by simp [(monic_X_pow n).degree_mul]\n#align degree_mul_X_pow degree_mul_X_pow\n\n",
+ "degree_mul_X":
+ "@[simp]\ntheorem degree_mul_X : degree (p * X) = degree p + 1 := by simp [monic_X.degree_mul]\n#align degree_mul_X degree_mul_X\n\n",
+ "degree_mul'":
+ "theorem degree_mul' (h : leading_coeff p * leading_coeff q ≠ 0) : degree (p * q) = degree p + degree q :=\n  have hp : p ≠ 0 := by refine' mt _ h <;> exact fun hp => by rw [hp, leading_coeff_zero, zero_mul]\n  have hq : q ≠ 0 := by refine' mt _ h <;> exact fun hq => by rw [hq, leading_coeff_zero, mul_zero]\n  le_antisymm (degree_mul_le _ _)\n    (by\n      rw [degree_eq_nat_degree hp, degree_eq_nat_degree hq]\n      refine' le_degree_of_ne_zero _\n      rwa [coeff_mul_degree_add_degree])\n#align degree_mul' degree_mul'\n\n",
+ "degree_mul":
+ "@[simp]\ntheorem degree_mul : degree (p * q) = degree p + degree q :=\n  if hp0 : p = 0 then by simp only [hp0, degree_zero, zero_mul, WithBot.bot_add]\n  else\n    if hq0 : q = 0 then by simp only [hq0, degree_zero, mul_zero, WithBot.add_bot]\n    else degree_mul' <| mul_ne_zero (mt leading_coeff_eq_zero.1 hp0) (mt leading_coeff_eq_zero.1 hq0)\n#align degree_mul degree_mul\n\n",
+ "degree_monomial_le":
+ "theorem degree_monomial_le (n : ℕ) (a : R) : degree (monomial n a) ≤ n :=\n  if h : a = 0 then by rw [h, (monomial n).map_zero] <;> exact bot_le else le_of_eq (degree_monomial n h)\n#align degree_monomial_le degree_monomial_le\n\n",
+ "degree_monomial":
+ "@[simp]\ntheorem degree_monomial (n : ℕ) (ha : a ≠ 0) : degree (monomial n a) = n := by\n  rw [degree, support_monomial n ha] <;> rfl\n#align degree_monomial degree_monomial\n\n",
+ "degree_mono":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `polynomial -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `polynomial -/\ntheorem degree_mono [Semiring S] {f : polynomial R} {g : polynomial S} (h : f.support ⊆ g.support) :\n    f.degree ≤ g.degree :=\n  finset.sup_mono h\n#align degree_mono degree_mono\n\n",
+ "degree_lt_wf":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `polynomial -/\n/-\nCopyright (c) 2018 Chris Hughes. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Chris Hughes, Johannes Hölzl, Scott Morrison, Jens Wagemaker\n-/\ntheorem degree_lt_wf : well_founded fun p q : polynomial R => degree p < degree q :=\n  inv_image.wf degree (WithBot.wellFounded_lt Nat.lt_wfRel)\n#align degree_lt_wf degree_lt_wf\n\n",
+ "degree_lt_iff_coeff_zero":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `polynomial -/\ntheorem degree_lt_iff_coeff_zero (f : polynomial R) (n : ℕ) : degree f < n ↔ ∀ m : ℕ, n ≤ m → coeff f m = 0 :=\n  by\n  refine' ⟨fun hf m hm => coeff_eq_zero_of_degree_lt (lt_of_lt_of_le hf (WithBot.coe_le_coe.2 hm)), _⟩\n  simp only [degree, finset.sup_lt_iff (WithBot.bot_lt_coe n), mem_support_iff, WithBot.some_eq_coe, WithBot.coe_lt_coe,\n    ← @not_le ℕ, max_eq_sup_coe]\n  exact fun h m => mt (h m)\n#align degree_lt_iff_coeff_zero degree_lt_iff_coeff_zero\n\n",
+ "degree_lt_degree_mul_X":
+ "theorem degree_lt_degree_mul_X (hp : p ≠ 0) : p.degree < (p * X).degree :=\n  haveI := nontrivial.of_polynomial_ne hp\n  by\n  have : leading_coeff p * leading_coeff X ≠ 0 := by simpa\n  erw [degree_mul' this, degree_eq_nat_degree hp, degree_X, ← WithBot.coe_one, ← WithBot.coe_add,\n      WithBot.coe_lt_coe] <;>\n    exact nat.lt_succ_self _\n#align degree_lt_degree_mul_X degree_lt_degree_mul_X\n\n",
+ "degree_lt_degree":
+ "theorem degree_lt_degree (h : nat_degree p < nat_degree q) : degree p < degree q :=\n  by\n  by_cases hp : p = 0\n  · simp [hp]\n    rw [bot_lt_iff_ne_bot]\n    intro hq\n    simpa [hp, degree_eq_bot.mp hq, lt_irrefl] using h\n  · rw [degree_eq_nat_degree hp, degree_eq_nat_degree <| ne_zero_of_nat_degree_gt h]\n    exact_mod_cast h\n#align degree_lt_degree degree_lt_degree\n\n",
+ "degree_linear_lt_degree_C_mul_X_sq":
+ "theorem degree_linear_lt_degree_C_mul_X_sq (ha : a ≠ 0) : degree (C b * X + C c) < degree (C a * X ^ 2) := by\n  simpa only [degree_C_mul_X_pow 2 ha] using degree_linear_lt\n#align degree_linear_lt_degree_C_mul_X_sq degree_linear_lt_degree_C_mul_X_sq\n\n",
+ "degree_linear_lt":
+ "theorem degree_linear_lt : degree (C a * X + C b) < 2 :=\n  degree_linear_le.trans_lt <| WithBot.coe_lt_coe.mpr one_lt_two\n#align degree_linear_lt degree_linear_lt\n\n",
+ "degree_linear_le":
+ "theorem degree_linear_le : degree (C a * X + C b) ≤ 1 :=\n  degree_add_le_of_degree_le (degree_C_mul_X_le _) <| le_trans degree_C_le Nat.WithBot.coe_nonneg\n#align degree_linear_le degree_linear_le\n\n",
+ "degree_linear":
+ "@[simp]\ntheorem degree_linear (ha : a ≠ 0) : degree (C a * X + C b) = 1 := by\n  rw [degree_add_eq_left_of_degree_lt <| degree_C_lt_degree_C_mul_X ha, degree_C_mul_X ha]\n#align degree_linear degree_linear\n\n",
+ "degree_le_zero_iff":
+ "theorem degree_le_zero_iff : degree p ≤ 0 ↔ p = C (coeff p 0) :=\n  ⟨eq_C_of_degree_le_zero, fun h => h.symm ▸ degree_C_le⟩\n#align degree_le_zero_iff degree_le_zero_iff\n\n",
+ "degree_le_nat_degree":
+ "@[simp]\ntheorem degree_le_nat_degree : degree p ≤ nat_degree p :=\n  WithBot.giUnbot'Bot.gc.le_u_l _\n#align degree_le_nat_degree degree_le_nat_degree\n\n",
+ "degree_le_iff_coeff_zero":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `polynomial -/\ntheorem degree_le_iff_coeff_zero (f : polynomial R) (n : WithBot ℕ) : degree f ≤ n ↔ ∀ m : ℕ, n < m → coeff f m = 0 :=\n  by simp only [degree, finset.max, finset.sup_le_iff, mem_support_iff, ne.def, ← not_le, not_imp_comm]\n#align degree_le_iff_coeff_zero degree_le_iff_coeff_zero\n\n",
+ "degree_le_degree":
+ "theorem degree_le_degree (h : coeff q (nat_degree p) ≠ 0) : degree p ≤ degree q :=\n  by\n  by_cases hp : p = 0\n  · rw [hp]\n    exact bot_le\n  · rw [degree_eq_nat_degree hp]\n    exact le_degree_of_ne_zero h\n#align degree_le_degree degree_le_degree\n\n",
+ "degree_erase_lt":
+ "theorem degree_erase_lt (hp : p ≠ 0) : degree (p.erase (nat_degree p)) < degree p :=\n  by\n  apply lt_of_le_of_ne (degree_erase_le _ _)\n  rw [degree_eq_nat_degree hp, degree, support_erase]\n  exact fun h => not_mem_erase _ _ (mem_of_max h)\n#align degree_erase_lt degree_erase_lt\n\n",
+ "degree_erase_le":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `polynomial -/\ntheorem degree_erase_le (p : polynomial R) (n : ℕ) : degree (p.erase n) ≤ degree p :=\n  by\n  rcases p with ⟨⟩\n  simp only [erase, degree, coeff, support]\n  convert sup_mono (erase_subset _ _)\n#align degree_erase_le degree_erase_le\n\n",
+ "degree_eq_of_le_of_coeff_ne_zero":
+ "theorem degree_eq_of_le_of_coeff_ne_zero (pn : p.degree ≤ n) (p1 : p.coeff n ≠ 0) : p.degree = n :=\n  pn.antisymm (le_degree_of_ne_zero p1)\n#align degree_eq_of_le_of_coeff_ne_zero degree_eq_of_le_of_coeff_ne_zero\n\n",
+ "degree_eq_nat_degree":
+ "theorem degree_eq_nat_degree (hp : p ≠ 0) : degree p = (nat_degree p : WithBot ℕ) :=\n  by\n  let ⟨n, hn⟩ := not_forall.1 (mt option.eq_none_iff_forall_not_mem.2 (mt degree_eq_bot.1 hp))\n  have hn : degree p = some n := not_not.1 hn\n  rw [nat_degree, hn] <;> rfl\n#align degree_eq_nat_degree degree_eq_nat_degree\n\n",
+ "degree_eq_iff_nat_degree_eq_of_pos":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `polynomial -/\ntheorem degree_eq_iff_nat_degree_eq_of_pos {p : polynomial R} {n : ℕ} (hn : 0 < n) : p.degree = n ↔ p.nat_degree = n :=\n  by\n  constructor\n  · intro H\n    rwa [← degree_eq_iff_nat_degree_eq]\n    rintro rfl\n    rw [degree_zero] at H\n    exact option.no_confusion H\n  · intro H\n    rwa [degree_eq_iff_nat_degree_eq]\n    rintro rfl\n    rw [nat_degree_zero] at H\n    rw [H] at hn\n    exact lt_irrefl _ hn\n#align degree_eq_iff_nat_degree_eq_of_pos degree_eq_iff_nat_degree_eq_of_pos\n\n",
+ "degree_eq_iff_nat_degree_eq":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `polynomial -/\ntheorem degree_eq_iff_nat_degree_eq {p : polynomial R} {n : ℕ} (hp : p ≠ 0) : p.degree = n ↔ p.nat_degree = n := by\n  rw [degree_eq_nat_degree hp, WithBot.coe_eq_coe]\n#align degree_eq_iff_nat_degree_eq degree_eq_iff_nat_degree_eq\n\n",
+ "degree_eq_bot":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\ntheorem degree_eq_bot : degree p = «expr⊥» ↔ p = 0 :=\n  ⟨fun h => support_eq_empty.1 (finset.max_eq_bot.1 h), fun h => h.symm ▸ rfl⟩\n#align degree_eq_bot degree_eq_bot\n\n",
+ "degree_cubic_lt":
+ "theorem degree_cubic_lt : degree (C a * X ^ 3 + C b * X ^ 2 + C c * X + C d) < 4 :=\n  degree_cubic_le.trans_lt <| WithBot.coe_lt_coe.mpr <| lt_add_one 3\n#align degree_cubic_lt degree_cubic_lt\n\n",
+ "degree_cubic_le":
+ "theorem degree_cubic_le : degree (C a * X ^ 3 + C b * X ^ 2 + C c * X + C d) ≤ 3 := by\n  simpa only [add_assoc] using\n    degree_add_le_of_degree_le (degree_C_mul_X_pow_le 3 a)\n      (le_trans degree_quadratic_le <| with_bot.coe_le_coe.mpr <| nat.le_succ 2)\n#align degree_cubic_le degree_cubic_le\n\n",
+ "degree_cubic":
+ "@[simp]\ntheorem degree_cubic (ha : a ≠ 0) : degree (C a * X ^ 3 + C b * X ^ 2 + C c * X + C d) = 3 :=\n  by\n  rw [add_assoc, add_assoc, ← add_assoc (C b * X ^ 2),\n    degree_add_eq_left_of_degree_lt <| degree_quadratic_lt_degree_C_mul_X_cb ha, degree_C_mul_X_pow 3 ha]\n  rfl\n#align degree_cubic degree_cubic\n\n",
+ "degree_add_le_of_degree_le":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `polynomial -/\ntheorem degree_add_le_of_degree_le {p q : polynomial R} {n : ℕ} (hp : degree p ≤ n) (hq : degree q ≤ n) :\n    degree (p + q) ≤ n :=\n  (degree_add_le p q).trans <| max_le hp hq\n#align degree_add_le_of_degree_le degree_add_le_of_degree_le\n\n",
+ "degree_add_le":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊔ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `polynomial -/\ntheorem degree_add_le (p q : polynomial R) : degree (p + q) ≤ max (degree p) (degree q) :=\n  calc\n    degree (p + q) = (p + q).support.sup some := rfl\n    _ ≤ (p.support ∪ q.support).sup some := sup_mono support_add\n    _ = «expr ⊔ » (p.support.sup some) (q.support.sup some) := sup_union\n    \n#align degree_add_le degree_add_le\n\n",
+ "degree_add_eq_right_of_degree_lt":
+ "theorem degree_add_eq_right_of_degree_lt (h : degree p < degree q) : degree (p + q) = degree q := by\n  rw [add_comm, degree_add_eq_left_of_degree_lt h]\n#align degree_add_eq_right_of_degree_lt degree_add_eq_right_of_degree_lt\n\n",
+ "degree_add_eq_of_leading_coeff_add_ne_zero":
+ "theorem degree_add_eq_of_leading_coeff_add_ne_zero (h : leading_coeff p + leading_coeff q ≠ 0) :\n    degree (p + q) = max p.degree q.degree :=\n  le_antisymm (degree_add_le _ _) <|\n    match lt_trichotomy (degree p) (degree q) with\n    | or.inl hlt => by rw [degree_add_eq_right_of_degree_lt hlt, max_eq_right_of_lt hlt] <;> exact le_rfl\n    | or.inr (or.inl HEq) =>\n      le_of_not_gt fun hlt : max (degree p) (degree q) > degree (p + q) =>\n        h <|\n          show leading_coeff p + leading_coeff q = 0\n            by\n            rw [HEq, max_self] at hlt\n            rw [leading_coeff, leading_coeff, nat_degree_eq_of_degree_eq HEq, ← coeff_add]\n            exact coeff_nat_degree_eq_zero_of_degree_lt hlt\n    | or.inr (or.inr hlt) => by rw [degree_add_eq_left_of_degree_lt hlt, max_eq_left_of_lt hlt] <;> exact le_rfl\n#align degree_add_eq_of_leading_coeff_add_ne_zero degree_add_eq_of_leading_coeff_add_ne_zero\n\n",
+ "degree_add_eq_left_of_degree_lt":
+ "theorem degree_add_eq_left_of_degree_lt (h : degree q < degree p) : degree (p + q) = degree p :=\n  le_antisymm (max_eq_left_of_lt h ▸ degree_add_le _ _) <|\n    degree_le_degree <| by\n      rw [coeff_add, coeff_nat_degree_eq_zero_of_degree_lt h, add_zero]\n      exact mt leading_coeff_eq_zero.1 (ne_zero_of_degree_gt h)\n#align degree_add_eq_left_of_degree_lt degree_add_eq_left_of_degree_lt\n\n",
+ "degree_add_C":
+ "theorem degree_add_C (hp : 0 < degree p) : degree (p + C a) = degree p :=\n  add_comm (C a) p ▸ degree_add_eq_right_of_degree_lt <| lt_of_le_of_lt degree_C_le hp\n#align degree_add_C degree_add_C\n\n",
+ "degree_X_sub_C_le":
+ "theorem degree_X_sub_C_le (r : R) : (X - C r).degree ≤ 1 :=\n  (degree_sub_le _ _).trans (max_le degree_X_le (degree_C_le.trans zero_le_one))\n#align degree_X_sub_C_le degree_X_sub_C_le\n\n",
+ "degree_X_sub_C":
+ "@[simp]\ntheorem degree_X_sub_C (a : R) : degree (X - C a) = 1 := by rw [sub_eq_add_neg, ← map_neg C a, degree_X_add_C]\n#align degree_X_sub_C degree_X_sub_C\n\n",
+ "degree_X_pow_sub_C":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `polynomial -/\ntheorem degree_X_pow_sub_C {n : ℕ} (hn : 0 < n) (a : R) : degree ((X : polynomial R) ^ n - C a) = n := by\n  rw [sub_eq_add_neg, ← map_neg C a, degree_X_pow_add_C hn] <;> infer_instance\n#align degree_X_pow_sub_C degree_X_pow_sub_C\n\n",
+ "degree_X_pow_le":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `polynomial -/\ntheorem degree_X_pow_le (n : ℕ) : degree (X ^ n : polynomial R) ≤ n := by\n  simpa only [C_1, one_mul] using degree_C_mul_X_pow_le n (1 : R)\n#align degree_X_pow_le degree_X_pow_le\n\n",
+ "degree_X_pow_add_C":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `polynomial -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `polynomial -/\ntheorem degree_X_pow_add_C {n : ℕ} (hn : 0 < n) (a : R) : degree ((X : polynomial R) ^ n + C a) = n :=\n  by\n  have : degree (C a) < degree ((X : polynomial R) ^ n) :=\n    degree_C_le.trans_lt <| by rwa [degree_X_pow, with_bot.coe_pos]\n  rw [degree_add_eq_left_of_degree_lt this, degree_X_pow]\n#align degree_X_pow_add_C degree_X_pow_add_C\n\n",
+ "degree_X_pow":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `polynomial -/\n@[simp]\ntheorem degree_X_pow (n : ℕ) : degree ((X : polynomial R) ^ n) = n := by\n  rw [X_pow_eq_monomial, degree_monomial _ (one_ne_zero' R)]\n#align degree_X_pow degree_X_pow\n\n",
+ "degree_X_le":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `polynomial -/\ntheorem degree_X_le : degree (X : polynomial R) ≤ 1 :=\n  degree_monomial_le _ _\n#align degree_X_le degree_X_le\n\n",
+ "degree_X_add_C":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `polynomial -/\n@[simp]\ntheorem degree_X_add_C (a : R) : degree (X + C a) = 1 :=\n  by\n  have : degree (C a) < degree (X : polynomial R) :=\n    calc\n      degree (C a) ≤ 0 := degree_C_le\n      _ < 1 := WithBot.some_lt_some.mpr zero_lt_one\n      _ = degree X := degree_X.symm\n      \n  rw [degree_add_eq_left_of_degree_lt this, degree_X]\n#align degree_X_add_C degree_X_add_C\n\n",
+ "degree_X":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `polynomial -/\n@[simp]\ntheorem degree_X : degree (X : polynomial R) = 1 :=\n  degree_monomial _ one_ne_zero\n#align degree_X degree_X\n\n",
+ "degree_C_mul_X_pow_le":
+ "theorem degree_C_mul_X_pow_le (n : ℕ) (a : R) : degree (C a * X ^ n) ≤ n :=\n  by\n  rw [C_mul_X_pow_eq_monomial]\n  apply degree_monomial_le\n#align degree_C_mul_X_pow_le degree_C_mul_X_pow_le\n\n",
+ "degree_C_mul_X_pow":
+ "@[simp]\ntheorem degree_C_mul_X_pow (n : ℕ) (ha : a ≠ 0) : degree (C a * X ^ n) = n := by\n  rw [C_mul_X_pow_eq_monomial, degree_monomial n ha]\n#align degree_C_mul_X_pow degree_C_mul_X_pow\n\n",
+ "degree_C_mul_X_le":
+ "theorem degree_C_mul_X_le (a : R) : degree (C a * X) ≤ 1 := by simpa only [pow_one] using degree_C_mul_X_pow_le 1 a\n#align degree_C_mul_X_le degree_C_mul_X_le\n\n",
+ "degree_C_mul_X":
+ "theorem degree_C_mul_X (ha : a ≠ 0) : degree (C a * X) = 1 := by simpa only [pow_one] using degree_C_mul_X_pow 1 ha\n#align degree_C_mul_X degree_C_mul_X\n\n",
+ "degree_C_lt_degree_C_mul_X":
+ "theorem degree_C_lt_degree_C_mul_X (ha : a ≠ 0) : degree (C b) < degree (C a * X) := by\n  simpa only [degree_C_mul_X ha] using degree_C_lt\n#align degree_C_lt_degree_C_mul_X degree_C_lt_degree_C_mul_X\n\n",
+ "degree_C_lt":
+ "theorem degree_C_lt : degree (C a) < 1 :=\n  degree_C_le.trans_lt <| WithBot.coe_lt_coe.mpr zero_lt_one\n#align degree_C_lt degree_C_lt\n\n",
+ "degree_C_le":
+ "theorem degree_C_le : degree (C a) ≤ 0 := by\n  by_cases h : a = 0\n  · rw [h, C_0]\n    exact bot_le\n  · rw [degree_C h]\n    exact le_rfl\n#align degree_C_le degree_C_le\n\n",
+ "degree_C":
+ "@[simp]\ntheorem degree_C (ha : a ≠ 0) : degree (C a) = (0 : WithBot ℕ) := by\n  rw [degree, ← monomial_zero_left, support_monomial 0 ha, max_eq_sup_coe, sup_singleton, with_bot.coe_zero]\n#align degree_C degree_C\n\n",
+ "def":
+ "theorem monic.def : monic p ↔ leading_coeff p = 1 :=\n  iff.rfl\n#align monic.def monic.def\n\n",
+ "coeff_pow_mul_nat_degree":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `polynomial -/\n@[simp]\ntheorem coeff_pow_mul_nat_degree (p : polynomial R) (n : ℕ) : (p ^ n).coeff (n * p.nat_degree) = p.leading_coeff ^ n :=\n  by\n  induction' n with i hi\n  · simp\n  · rw [pow_succ', pow_succ', nat.succ_mul]\n    by_cases hp1 : p.leading_coeff ^ i = 0\n    · rw [hp1, zero_mul]\n      by_cases hp2 : p ^ i = 0\n      · rw [hp2, zero_mul, coeff_zero]\n      · apply coeff_eq_zero_of_nat_degree_lt\n        have h1 : (p ^ i).nat_degree < i * p.nat_degree :=\n          by\n          apply lt_of_le_of_ne nat_degree_pow_le fun h => hp2 _\n          rw [← h, hp1] at hi\n          exact leading_coeff_eq_zero.mp hi\n        calc\n          (p ^ i * p).nat_degree ≤ (p ^ i).nat_degree + p.nat_degree := nat_degree_mul_le\n          _ < i * p.nat_degree + p.nat_degree := add_lt_add_right h1 _\n          \n    · rw [← nat_degree_pow' hp1, ← leading_coeff_pow' hp1]\n      exact coeff_mul_degree_add_degree _ _\n#align coeff_pow_mul_nat_degree coeff_pow_mul_nat_degree\n\n",
+ "coeff_ne_zero_of_eq_degree":
+ "theorem coeff_ne_zero_of_eq_degree (hn : degree p = n) : coeff p n ≠ 0 := fun h => mem_support_iff.mp (mem_of_max hn) h\n#align coeff_ne_zero_of_eq_degree coeff_ne_zero_of_eq_degree\n\n",
+ "coeff_nat_degree_succ_eq_zero":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `polynomial -/\n@[simp]\ntheorem coeff_nat_degree_succ_eq_zero {p : polynomial R} : p.coeff (p.nat_degree + 1) = 0 :=\n  coeff_eq_zero_of_nat_degree_lt (lt_add_one _)\n#align coeff_nat_degree_succ_eq_zero coeff_nat_degree_succ_eq_zero\n\n",
+ "coeff_nat_degree_eq_zero_of_degree_lt":
+ "theorem coeff_nat_degree_eq_zero_of_degree_lt (h : degree p < degree q) : coeff p (nat_degree q) = 0 :=\n  coeff_eq_zero_of_degree_lt (lt_of_lt_of_le h degree_le_nat_degree)\n#align coeff_nat_degree_eq_zero_of_degree_lt coeff_nat_degree_eq_zero_of_degree_lt\n\n",
+ "coeff_nat_degree":
+ "@[simp]\ntheorem coeff_nat_degree : coeff p (nat_degree p) = leading_coeff p :=\n  rfl\n#align coeff_nat_degree coeff_nat_degree\n\n",
+ "coeff_mul_degree_add_degree":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `finset.sum -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.sum -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `polynomial -/\n@[simp]\ntheorem coeff_mul_degree_add_degree (p q : polynomial R) :\n    coeff (p * q) (nat_degree p + nat_degree q) = leading_coeff p * leading_coeff q :=\n  calc\n    coeff (p * q) (nat_degree p + nat_degree q) =\n        finset.sum \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.sum\"\n          (nat.antidiagonal (nat_degree p + nat_degree q)) (coeff p x.1 * coeff q x.2) :=\n      coeff_mul _ _ _\n    _ = coeff p (nat_degree p) * coeff q (nat_degree q) :=\n      by\n      refine' finset.sum_eq_single (nat_degree p, nat_degree q) _ _\n      · rintro ⟨i, j⟩ h₁ h₂\n        rw [nat.mem_antidiagonal] at h₁\n        by_cases H : nat_degree p < i\n        · rw [coeff_eq_zero_of_degree_lt (lt_of_le_of_lt degree_le_nat_degree (WithBot.coe_lt_coe.2 H)), zero_mul]\n        · rw [not_lt_iff_eq_or_lt] at H\n          cases H\n          · subst H\n            rw [add_left_cancel_iff] at h₁\n            dsimp at h₁\n            subst h₁\n            exfalso\n            exact h₂ rfl\n          · suffices nat_degree q < j by\n              rw [coeff_eq_zero_of_degree_lt (lt_of_le_of_lt degree_le_nat_degree (WithBot.coe_lt_coe.2 this)),\n                mul_zero]\n            · by_contra H'\n              rw [not_lt] at H'\n              exact ne_of_lt (nat.lt_of_lt_of_le (nat.add_lt_add_right H j) (nat.add_le_add_left H' _)) h₁\n      · intro H\n        exfalso\n        apply H\n        rw [nat.mem_antidiagonal]\n    \n#align coeff_mul_degree_add_degree coeff_mul_degree_add_degree\n\n",
+ "coeff_mul_X_sub_C":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `polynomial -/\ntheorem coeff_mul_X_sub_C {p : polynomial R} {r : R} {a : ℕ} :\n    coeff (p * (X - C r)) (a + 1) = coeff p a - coeff p (a + 1) * r := by simp [mul_sub]\n#align coeff_mul_X_sub_C coeff_mul_X_sub_C\n\n",
+ "coeff_eq_zero_of_nat_degree_lt":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `polynomial -/\ntheorem coeff_eq_zero_of_nat_degree_lt {p : polynomial R} {n : ℕ} (h : p.nat_degree < n) : p.coeff n = 0 :=\n  by\n  apply coeff_eq_zero_of_degree_lt\n  by_cases hp : p = 0\n  · subst hp\n    exact WithBot.bot_lt_coe n\n  · rwa [degree_eq_nat_degree hp, WithBot.coe_lt_coe]\n#align coeff_eq_zero_of_nat_degree_lt coeff_eq_zero_of_nat_degree_lt\n\n",
+ "coeff_eq_zero_of_degree_lt":
+ "theorem coeff_eq_zero_of_degree_lt (h : degree p < n) : coeff p n = 0 :=\n  not_not.1 (mt le_degree_of_ne_zero (not_le_of_gt h))\n#align coeff_eq_zero_of_degree_lt coeff_eq_zero_of_degree_lt\n\n",
+ "card_support_C_mul_X_pow_le_one":
+ "theorem card_support_C_mul_X_pow_le_one {c : R} {n : ℕ} : (C c * X ^ n).support.card ≤ 1 :=\n  by\n  rw [← card_singleton n]\n  apply card_le_of_subset (support_C_mul_X_pow' n c)\n#align card_support_C_mul_X_pow_le_one card_support_C_mul_X_pow_le_one\n\n",
+ "card_supp_le_succ_nat_degree":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `polynomial -/\ntheorem card_supp_le_succ_nat_degree (p : polynomial R) : p.support.card ≤ p.nat_degree + 1 :=\n  by\n  rw [← finset.card_range (p.nat_degree + 1)]\n  exact finset.card_le_of_subset supp_subset_range_nat_degree_succ\n#align card_supp_le_succ_nat_degree card_supp_le_succ_nat_degree\n\n",
+ "as_sum_support_C_mul_X_pow":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `polynomial -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `finset.sum -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.sum -/\ntheorem as_sum_support_C_mul_X_pow (p : polynomial R) :\n    p =\n      finset.sum \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.sum\" p.support\n        (C (p.coeff i) * X ^ i) :=\n  trans p.as_sum_support <| by simp only [C_mul_X_pow_eq_monomial]\n#align as_sum_support_C_mul_X_pow as_sum_support_C_mul_X_pow\n\n",
+ "as_sum_support":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `polynomial -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `finset.sum -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.sum -/\ntheorem as_sum_support (p : polynomial R) :\n    p =\n      finset.sum \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.sum\" p.support\n        (monomial i (p.coeff i)) :=\n  (sum_monomial_eq p).symm\n#align as_sum_support as_sum_support\n\n",
+ "as_sum_range_C_mul_X_pow":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `polynomial -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `finset.sum -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.sum -/\ntheorem as_sum_range_C_mul_X_pow (p : polynomial R) :\n    p =\n      finset.sum \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.sum\"\n        (range (p.nat_degree + 1)) (C (coeff p i) * X ^ i) :=\n  p.as_sum_range.trans <| by simp only [C_mul_X_pow_eq_monomial]\n#align as_sum_range_C_mul_X_pow as_sum_range_C_mul_X_pow\n\n",
+ "as_sum_range'":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `polynomial -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `finset.sum -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.sum -/\ntheorem as_sum_range' (p : polynomial R) (n : ℕ) (w : p.nat_degree < n) :\n    p =\n      finset.sum \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.sum\" (range n)\n        (monomial i (coeff p i)) :=\n  p.sum_monomial_eq.symm.trans <| p.sum_over_range' monomial_zero_right _ w\n#align as_sum_range' as_sum_range'\n\n",
+ "as_sum_range":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `polynomial -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `finset.sum -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.sum -/\ntheorem as_sum_range (p : polynomial R) :\n    p =\n      finset.sum \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.sum\"\n        (range (p.nat_degree + 1)) (monomial i (coeff p i)) :=\n  p.sum_monomial_eq.symm.trans <| p.sum_over_range <| monomial_zero_right\n#align as_sum_range as_sum_range\n\n",
+ "X_sub_C_ne_zero":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `polynomial -/\ntheorem X_sub_C_ne_zero (r : R) : X - C r ≠ 0 :=\n  pow_one (X : polynomial R) ▸ X_pow_sub_C_ne_zero zero_lt_one r\n#align X_sub_C_ne_zero X_sub_C_ne_zero\n\n",
+ "X_pow_sub_C_ne_zero":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `polynomial -/\ntheorem X_pow_sub_C_ne_zero {n : ℕ} (hn : 0 < n) (a : R) : (X : polynomial R) ^ n - C a ≠ 0 :=\n  by\n  rw [sub_eq_add_neg, ← map_neg C a]\n  exact X_pow_add_C_ne_zero hn _\n#align X_pow_sub_C_ne_zero X_pow_sub_C_ne_zero\n\n",
+ "X_pow_add_C_ne_zero":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `polynomial -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `polynomial -/\ntheorem X_pow_add_C_ne_zero {n : ℕ} (hn : 0 < n) (a : R) : (X : polynomial R) ^ n + C a ≠ 0 :=\n  mt degree_eq_bot.2\n    (show degree ((X : polynomial R) ^ n + C a) ≠ «expr⊥» by rw [degree_X_pow_add_C hn a] <;> exact by decide)\n#align X_pow_add_C_ne_zero X_pow_add_C_ne_zero\n\n",
+ "X_pow_add_C_ne_one":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `polynomial -/\ntheorem X_pow_add_C_ne_one {n : ℕ} (hn : 0 < n) (a : R) : (X : polynomial R) ^ n + C a ≠ 1 := fun h =>\n  hn.ne' <| by simpa only [nat_degree_X_pow_add_C, nat_degree_one] using congr_arg nat_degree h\n#align X_pow_add_C_ne_one X_pow_add_C_ne_one\n\n",
+ "X_add_C_ne_zero":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `polynomial -/\ntheorem X_add_C_ne_zero (r : R) : X + C r ≠ 0 :=\n  pow_one (X : polynomial R) ▸ X_pow_add_C_ne_zero zero_lt_one r\n#align X_add_C_ne_zero X_add_C_ne_zero\n\n",
+ "X_add_C_ne_one":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `polynomial -/\ntheorem X_add_C_ne_one (r : R) : X + C r ≠ 1 :=\n  pow_one (X : polynomial R) ▸ X_pow_add_C_ne_one zero_lt_one r\n#align X_add_C_ne_one X_add_C_ne_one\n\n",
+ "C_mul_X_pow_eq_self":
+ "theorem C_mul_X_pow_eq_self (h : p.support.card ≤ 1) : C p.leading_coeff * X ^ p.nat_degree = p := by\n  rw [C_mul_X_pow_eq_monomial, monomial_nat_degree_leading_coeff_eq_self h]\n#align C_mul_X_pow_eq_self C_mul_X_pow_eq_self\n\n"}

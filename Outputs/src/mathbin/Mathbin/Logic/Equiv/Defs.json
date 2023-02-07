@@ -1,0 +1,198 @@
+{"trans_refl":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ » -/\n@[simp]\ntheorem trans_refl (e : «expr ≃ » α β) : e.trans (equiv.refl β) = e :=\n  by\n  cases e\n  rfl\n#align trans_refl trans_refl\n\n",
+ "trans_assoc":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ » -/\ntheorem trans_assoc {δ} (ab : «expr ≃ » α β) (bc : «expr ≃ » β γ) (cd : «expr ≃ » γ δ) :\n    (ab.trans bc).trans cd = ab.trans (bc.trans cd) :=\n  equiv.ext fun a => rfl\n#align trans_assoc trans_assoc\n\n",
+ "trans_apply":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ » -/\ntheorem trans_apply (f : «expr ≃ » α β) (g : «expr ≃ » β γ) (a : α) : (f.trans g) a = g (f a) :=\n  rfl\n#align trans_apply trans_apply\n\n",
+ "to_fun_as_coe":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ » -/\n@[simp]\ntheorem to_fun_as_coe (e : «expr ≃ » α β) : e.to_fun = e :=\n  rfl\n#align to_fun_as_coe to_fun_as_coe\n\n",
+ "symm_trans_self":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ » -/\n@[simp]\ntheorem symm_trans_self (e : «expr ≃ » α β) : e.symm.trans e = equiv.refl β :=\n  ext (by simp)\n#align symm_trans_self symm_trans_self\n\n",
+ "symm_trans_apply":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ » -/\n@[simp]\ntheorem symm_trans_apply (f : «expr ≃ » α β) (g : «expr ≃ » β γ) (a : γ) : (f.trans g).symm a = f.symm (g.symm a) :=\n  rfl\n#align symm_trans_apply symm_trans_apply\n\n",
+ "symm_symm_apply":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ » -/\n-- The `simp` attribute is needed to make this a `dsimp` lemma.\n-- `simp` will always rewrite with `equiv.symm_symm` before this has a chance to fire.\n@[simp, nolint simp_nf]\ntheorem symm_symm_apply (f : «expr ≃ » α β) (b : α) : f.symm.symm b = f b :=\n  rfl\n#align symm_symm_apply symm_symm_apply\n\n",
+ "symm_symm":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ » -/\n@[simp]\ntheorem symm_symm (e : «expr ≃ » α β) : e.symm.symm = e :=\n  by\n  cases e\n  rfl\n#align symm_symm symm_symm\n\n",
+ "symm_comp_self":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ » -/\n@[simp]\ntheorem symm_comp_self (e : «expr ≃ » α β) : e.symm ∘ e = id :=\n  funext e.symm_apply_apply\n#align symm_comp_self symm_comp_self\n\n",
+ "symm_comp_eq":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ » -/\ntheorem symm_comp_eq {α β γ} (e : «expr ≃ » α β) (f : γ → α) (g : γ → β) : e.symm ∘ g = f ↔ g = e ∘ f :=\n  ((equiv.refl γ).arrow_congr e).symm_apply_eq\n#align symm_comp_eq symm_comp_eq\n\n",
+ "symm_apply_eq":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ » -/\ntheorem symm_apply_eq {α β} (e : «expr ≃ » α β) {x y} : e.symm x = y ↔ x = e y :=\n  ⟨fun H => by simp [H.symm], fun H => by simp [H]⟩\n#align symm_apply_eq symm_apply_eq\n\n",
+ "symm_apply_apply":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ » -/\n@[simp]\ntheorem symm_apply_apply (e : «expr ≃ » α β) (x : α) : e.symm (e x) = x :=\n  e.left_inv x\n#align symm_apply_apply symm_apply_apply\n\n",
+ "symm":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ » -/\nprotected theorem subsingleton.symm (e : «expr ≃ » α β) [subsingleton α] : subsingleton β :=\n  e.symm.injective.subsingleton\n#align subsingleton.symm subsingleton.symm\n\n",
+ "surjective_comp":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ » -/\ntheorem surjective_comp (e : «expr ≃ » α β) (f : β → γ) : surjective (f ∘ e) ↔ surjective f :=\n  equiv_like.surjective_comp e f\n#align surjective_comp surjective_comp\n\n",
+ "surjective":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ » -/\nprotected theorem surjective (e : «expr ≃ » α β) : surjective e :=\n  equiv_like.surjective e\n#align surjective surjective\n\n",
+ "subsingleton_eq_refl":
+ "theorem perm.subsingleton_eq_refl [subsingleton α] (e : perm α) : e = equiv.refl α :=\n  subsingleton.elim _ _\n#align perm.subsingleton_eq_refl perm.subsingleton_eq_refl\n\n",
+ "subsingleton_congr":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ » -/\ntheorem subsingleton_congr (e : «expr ≃ » α β) : subsingleton α ↔ subsingleton β :=\n  ⟨fun h => e.symm.subsingleton, fun h => e.subsingleton⟩\n#align subsingleton_congr subsingleton_congr\n\n",
+ "subsingleton":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ » -/\nprotected theorem subsingleton (e : «expr ≃ » α β) [subsingleton β] : subsingleton α :=\n  e.injective.subsingleton\n#align subsingleton subsingleton\n\n",
+ "sigma_congr_right_trans":
+ "@[simp]\ntheorem sigma_congr_right_trans {α} {β : α → Sort _} (F : ∀ a, perm (β a)) (G : ∀ a, perm (β a)) :\n    (sigma_congr_right F).trans (sigma_congr_right G) = sigma_congr_right fun a => (F a).trans (G a) :=\n  equiv.sigma_congr_right_trans F G\n#align sigma_congr_right_trans sigma_congr_right_trans\n\n",
+ "sigma_congr_right_symm":
+ "@[simp]\ntheorem sigma_congr_right_symm {α} {β : α → Sort _} (F : ∀ a, perm (β a)) :\n    (sigma_congr_right F).symm = sigma_congr_right fun a => (F a).symm :=\n  Equiv.sigmaCongrRight_symm F\n#align sigma_congr_right_symm sigma_congr_right_symm\n\n",
+ "sigma_congr_right_refl":
+ "@[simp]\ntheorem sigma_congr_right_refl {α} {β : α → Sort _} :\n    (sigma_congr_right fun a => equiv.refl (β a)) = equiv.refl (Σa, β a) :=\n  Equiv.sigmaCongrRight_refl\n#align sigma_congr_right_refl sigma_congr_right_refl\n\n",
+ "self_trans_symm":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ » -/\n@[simp]\ntheorem self_trans_symm (e : «expr ≃ » α β) : e.trans e.symm = equiv.refl α :=\n  ext (by simp)\n#align self_trans_symm self_trans_symm\n\n",
+ "self_comp_symm":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ » -/\n@[simp]\ntheorem self_comp_symm (e : «expr ≃ » α β) : e ∘ e.symm = id :=\n  funext e.apply_symm_apply\n#align self_comp_symm self_comp_symm\n\n",
+ "right_inverse_symm":
+ "theorem right_inverse_symm (f : equiv α β) : function.right_inverse f.symm f :=\n  f.right_inv\n#align right_inverse_symm right_inverse_symm\n\n",
+ "refl_trans":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ » -/\n@[simp]\ntheorem refl_trans (e : «expr ≃ » α β) : (equiv.refl α).trans e = e :=\n  by\n  cases e\n  rfl\n#align refl_trans refl_trans\n\n",
+ "refl_symm":
+ "@[simp]\ntheorem refl_symm : (equiv.refl α).symm = equiv.refl α :=\n  rfl\n#align refl_symm refl_symm\n\n",
+ "refl_apply":
+ "theorem refl_apply (x : α) : equiv.refl α x = x :=\n  rfl\n#align refl_apply refl_apply\n\n",
+ "psigma_congr_right_trans":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ » -/\n@[simp]\ntheorem psigma_congr_right_trans {α} {β₁ β₂ β₃ : α → Sort _} (F : ∀ a, «expr ≃ » (β₁ a) (β₂ a))\n    (G : ∀ a, «expr ≃ » (β₂ a) (β₃ a)) :\n    (psigma_congr_right F).trans (psigma_congr_right G) = psigma_congr_right fun a => (F a).trans (G a) :=\n  by\n  ext1 x\n  cases x\n  rfl\n#align psigma_congr_right_trans psigma_congr_right_trans\n\n",
+ "psigma_congr_right_symm":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ » -/\n@[simp]\ntheorem psigma_congr_right_symm {α} {β₁ β₂ : α → Sort _} (F : ∀ a, «expr ≃ » (β₁ a) (β₂ a)) :\n    (psigma_congr_right F).symm = psigma_congr_right fun a => (F a).symm :=\n  by\n  ext1 x\n  cases x\n  rfl\n#align psigma_congr_right_symm psigma_congr_right_symm\n\n",
+ "psigma_congr_right_refl":
+ "@[simp]\ntheorem psigma_congr_right_refl {α} {β : α → Sort _} :\n    (psigma_congr_right fun a => equiv.refl (β a)) = equiv.refl (Σ'a, β a) :=\n  by\n  ext1 x\n  cases x\n  rfl\n#align psigma_congr_right_refl psigma_congr_right_refl\n\n",
+ "perm_congr_trans":
+ "theorem perm_congr_trans (p p' : equiv.perm α') :\n    (e.perm_congr p).trans (e.perm_congr p') = e.perm_congr (p.trans p') :=\n  by\n  ext\n  simp\n#align perm_congr_trans perm_congr_trans\n\n",
+ "perm_congr_symm_apply":
+ "theorem perm_congr_symm_apply (p : equiv.perm β') (x) : e.perm_congr.symm p x = e.symm (p (e x)) :=\n  rfl\n#align perm_congr_symm_apply perm_congr_symm_apply\n\n",
+ "perm_congr_symm":
+ "@[simp]\ntheorem perm_congr_symm : e.perm_congr.symm = e.symm.perm_congr :=\n  rfl\n#align perm_congr_symm perm_congr_symm\n\n",
+ "perm_congr_refl":
+ "@[simp]\ntheorem perm_congr_refl : e.perm_congr (equiv.refl _) = equiv.refl _ := by simp [perm_congr_def]\n#align perm_congr_refl perm_congr_refl\n\n",
+ "perm_congr_def":
+ "theorem perm_congr_def (p : equiv.perm α') : e.perm_congr p = (e.symm.trans p).trans e :=\n  rfl\n#align perm_congr_def perm_congr_def\n\n",
+ "perm_congr_apply":
+ "@[simp]\ntheorem perm_congr_apply (p : equiv.perm α') (x) : e.perm_congr p x = e (p (e.symm x)) :=\n  rfl\n#align perm_congr_apply perm_congr_apply\n\n",
+ "nonempty_congr":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ » -/\ntheorem nonempty_congr (e : «expr ≃ » α β) : nonempty α ↔ nonempty β :=\n  nonempty.congr e e.symm\n#align nonempty_congr nonempty_congr\n\n",
+ "nonempty":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ » -/\nprotected theorem nonempty (e : «expr ≃ » α β) [nonempty β] : nonempty α :=\n  e.nonempty_congr.mpr ‹_›\n#align nonempty nonempty\n\n",
+ "left_inverse_symm":
+ "theorem left_inverse_symm (f : equiv α β) : left_inverse f.symm f :=\n  f.left_inv\n#align left_inverse_symm left_inverse_symm\n\n",
+ "inv_fun_as_coe":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ » -/\n@[simp]\ntheorem inv_fun_as_coe (e : «expr ≃ » α β) : e.inv_fun = e.symm :=\n  rfl\n#align inv_fun_as_coe inv_fun_as_coe\n\n",
+ "injective_comp":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ » -/\ntheorem injective_comp (e : «expr ≃ » α β) (f : β → γ) : injective (f ∘ e) ↔ injective f :=\n  equiv_like.injective_comp e f\n#align injective_comp injective_comp\n\n",
+ "injective":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ » -/\nprotected theorem injective (e : «expr ≃ » α β) : injective e :=\n  equiv_like.injective e\n#align injective injective\n\n",
+ "forall₃_congr'":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ » -/\nprotected theorem forall₃_congr' {p : α₁ → β₁ → γ₁ → Prop} {q : α₂ → β₂ → γ₂ → Prop} (eα : «expr ≃ » α₁ α₂)\n    (eβ : «expr ≃ » β₁ β₂) (eγ : «expr ≃ » γ₁ γ₂) (h : ∀ {x y z}, p (eα.symm x) (eβ.symm y) (eγ.symm z) ↔ q x y z) :\n    (∀ x y z, p x y z) ↔ ∀ x y z, q x y z :=\n  (equiv.forall₃_congr eα.symm eβ.symm eγ.symm fun x y z => h.symm).symm\n#align forall₃_congr' forall₃_congr'\n\n",
+ "forall₃_congr":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ » -/\n#print forall₃_congr /-\nprotected theorem forall₃_congr {p : α₁ → β₁ → γ₁ → Prop} {q : α₂ → β₂ → γ₂ → Prop} (eα : «expr ≃ » α₁ α₂)\n    (eβ : «expr ≃ » β₁ β₂) (eγ : «expr ≃ » γ₁ γ₂) (h : ∀ {x y z}, p x y z ↔ q (eα x) (eβ y) (eγ z)) :\n    (∀ x y z, p x y z) ↔ ∀ x y z, q x y z := by\n  apply equiv.forall₂_congr\n  intros\n  apply equiv.forall_congr\n  intros\n  apply h\n#align forall₃_congr forall₃_congr\n-/\n\n",
+ "forall₂_congr'":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ » -/\nprotected theorem forall₂_congr' {p : α₁ → β₁ → Prop} {q : α₂ → β₂ → Prop} (eα : «expr ≃ » α₁ α₂) (eβ : «expr ≃ » β₁ β₂)\n    (h : ∀ {x y}, p (eα.symm x) (eβ.symm y) ↔ q x y) : (∀ x y, p x y) ↔ ∀ x y, q x y :=\n  (equiv.forall₂_congr eα.symm eβ.symm fun x y => h.symm).symm\n#align forall₂_congr' forall₂_congr'\n\n",
+ "forall₂_congr":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ » -/\n#print forall₂_congr /-\n-- We next build some higher arity versions of `equiv.forall_congr`.\n-- Although they appear to just be repeated applications of `equiv.forall_congr`,\n-- unification of metavariables works better with these versions.\n-- In particular, they are necessary in `equiv_rw`.\n-- (Stopping at ternary functions seems reasonable: at least in 1-categorical mathematics,\n-- it's rare to have axioms involving more than 3 elements at once.)\nprotected theorem forall₂_congr {p : α₁ → β₁ → Prop} {q : α₂ → β₂ → Prop} (eα : «expr ≃ » α₁ α₂) (eβ : «expr ≃ » β₁ β₂)\n    (h : ∀ {x y}, p x y ↔ q (eα x) (eβ y)) : (∀ x y, p x y) ↔ ∀ x y, q x y :=\n  by\n  apply equiv.forall_congr\n  intros\n  apply equiv.forall_congr\n  intros\n  apply h\n#align forall₂_congr forall₂_congr\n-/\n\n",
+ "forall_congr_left'":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ » -/\nprotected theorem forall_congr_left' {p : α → Prop} (f : «expr ≃ » α β) : (∀ x, p x) ↔ ∀ y, p (f.symm y) :=\n  equiv.forall_congr f fun x => by simp\n#align forall_congr_left' forall_congr_left'\n\n",
+ "forall_congr_left":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ » -/\nprotected theorem forall_congr_left {p : β → Prop} (f : «expr ≃ » α β) : (∀ x, p (f x)) ↔ ∀ y, p y :=\n  (equiv.forall_congr_left' f.symm).symm\n#align forall_congr_left forall_congr_left\n\n",
+ "forall_congr'":
+ "/- warning: forall_congr' clashes with forall_congr -> forall_congr'\nCase conversion may be inaccurate. Consider using '#align forall_congr' forall_congr'ₓ'. -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ » -/\n#print forall_congr' /-\nprotected theorem forall_congr' {p : α → Prop} {q : β → Prop} (f : «expr ≃ » α β) (h : ∀ {x}, p (f.symm x) ↔ q x) :\n    (∀ x, p x) ↔ ∀ y, q y :=\n  (equiv.forall_congr f.symm fun x => h.symm).symm\n#align forall_congr' forall_congr'\n-/\n\n",
+ "ext_iff":
+ "theorem perm.ext_iff {σ τ : equiv.perm α} : σ = τ ↔ ∀ x, σ x = τ x :=\n  ext_iff\n#align perm.ext_iff perm.ext_iff\n\n",
+ "ext":
+ "@[ext]\ntheorem perm.ext {σ τ : equiv.perm α} (H : ∀ x, σ x = τ x) : σ = τ :=\n  equiv.ext H\n#align perm.ext perm.ext\n\n",
+ "exists_unique_congr_left'":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ » -/\nprotected theorem exists_unique_congr_left' {p : α → Prop} (f : «expr ≃ » α β) : (∃! x, p x) ↔ ∃! y, p (f.symm y) :=\n  equiv.exists_unique_congr f fun x => by simp\n#align exists_unique_congr_left' exists_unique_congr_left'\n\n",
+ "exists_unique_congr_left":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ » -/\nprotected theorem exists_unique_congr_left {p : β → Prop} (f : «expr ≃ » α β) : (∃! x, p (f x)) ↔ ∃! y, p y :=\n  (equiv.exists_unique_congr_left' f.symm).symm\n#align exists_unique_congr_left exists_unique_congr_left\n\n",
+ "exists_unique_congr":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ » -/\n#print exists_unique_congr /-\nprotected theorem exists_unique_congr {p : α → Prop} {q : β → Prop} (f : «expr ≃ » α β) (h : ∀ {x}, p x ↔ q (f x)) :\n    (∃! x, p x) ↔ ∃! y, q y := by\n  constructor\n  · rintro ⟨a, ha₁, ha₂⟩\n    exact ⟨f a, h.1 ha₁, fun b hb => f.symm_apply_eq.1 (ha₂ (f.symm b) (h.2 (by simpa using hb)))⟩\n  · rintro ⟨b, hb₁, hb₂⟩\n    exact ⟨f.symm b, h.2 (by simpa using hb₁), fun y hy => (eq_symm_apply f).2 (hb₂ _ (h.1 hy))⟩\n#align exists_unique_congr exists_unique_congr\n-/\n\n",
+ "exists_congr_left":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ » -/\nprotected theorem exists_congr_left {α β} (f : «expr ≃ » α β) {p : α → Prop} : (∃ a, p a) ↔ ∃ b, p (f.symm b) :=\n  ⟨fun ⟨a, h⟩ => ⟨f a, by simpa using h⟩, fun ⟨b, h⟩ => ⟨_, h⟩⟩\n#align exists_congr_left exists_congr_left\n\n",
+ "equiv_congr_trans":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ » -/\n@[simp]\ntheorem equiv_congr_trans {δ ε ζ} (ab : «expr ≃ » α β) (de : «expr ≃ » δ ε) (bc : «expr ≃ » β γ) (ef : «expr ≃ » ε ζ) :\n    (ab.equiv_congr de).trans (bc.equiv_congr ef) = (ab.trans bc).equiv_congr (de.trans ef) :=\n  by\n  ext\n  rfl\n#align equiv_congr_trans equiv_congr_trans\n\n",
+ "equiv_congr_symm":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ » -/\n@[simp]\ntheorem equiv_congr_symm {δ} (ab : «expr ≃ » α β) (cd : «expr ≃ » γ δ) :\n    (ab.equiv_congr cd).symm = ab.symm.equiv_congr cd.symm :=\n  by\n  ext\n  rfl\n#align equiv_congr_symm equiv_congr_symm\n\n",
+ "equiv_congr_refl_right":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ » -/\n@[simp]\ntheorem equiv_congr_refl_right {α β} (ab e : «expr ≃ » α β) : ab.equiv_congr (equiv.refl β) e = ab.symm.trans e :=\n  rfl\n#align equiv_congr_refl_right equiv_congr_refl_right\n\n",
+ "equiv_congr_refl_left":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ » -/\n@[simp]\ntheorem equiv_congr_refl_left {α β γ} (bg : «expr ≃ » β γ) (e : «expr ≃ » α β) :\n    (equiv.refl α).equiv_congr bg e = e.trans bg :=\n  rfl\n#align equiv_congr_refl_left equiv_congr_refl_left\n\n",
+ "equiv_congr_refl":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ » -/\n@[simp]\ntheorem equiv_congr_refl {α β} : (equiv.refl α).equiv_congr (equiv.refl β) = equiv.refl («expr ≃ » α β) :=\n  by\n  ext\n  rfl\n#align equiv_congr_refl equiv_congr_refl\n\n",
+ "equiv_congr_apply_apply":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ » -/\n@[simp]\ntheorem equiv_congr_apply_apply {δ} (ab : «expr ≃ » α β) (cd : «expr ≃ » γ δ) (e : «expr ≃ » α γ) (x) :\n    ab.equiv_congr cd e x = cd (e (ab.symm x)) :=\n  rfl\n#align equiv_congr_apply_apply equiv_congr_apply_apply\n\n",
+ "eq_symm_comp":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ » -/\ntheorem eq_symm_comp {α β γ} (e : «expr ≃ » α β) (f : γ → α) (g : γ → β) : f = e.symm ∘ g ↔ e ∘ f = g :=\n  ((equiv.refl γ).arrow_congr e).eq_symm_apply\n#align eq_symm_comp eq_symm_comp\n\n",
+ "eq_symm_apply":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ » -/\ntheorem eq_symm_apply {α β} (e : «expr ≃ » α β) {x y} : y = e.symm x ↔ e y = x :=\n  (eq_comm.trans e.symm_apply_eq).trans eq_comm\n#align eq_symm_apply eq_symm_apply\n\n",
+ "eq_comp_symm":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ » -/\ntheorem eq_comp_symm {α β γ} (e : «expr ≃ » α β) (f : β → γ) (g : α → γ) : f = g ∘ e.symm ↔ f ∘ e = g :=\n  (e.arrow_congr (equiv.refl γ)).symm_apply_eq.symm\n#align eq_comp_symm eq_comp_symm\n\n",
+ "conj_trans":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ » -/\n@[simp]\ntheorem conj_trans (e₁ : «expr ≃ » α β) (e₂ : «expr ≃ » β γ) : (e₁.trans e₂).conj = e₁.conj.trans e₂.conj :=\n  rfl\n#align conj_trans conj_trans\n\n",
+ "conj_symm":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ » -/\n@[simp]\ntheorem conj_symm (e : «expr ≃ » α β) : e.conj.symm = e.symm.conj :=\n  rfl\n#align conj_symm conj_symm\n\n",
+ "conj_refl":
+ "@[simp]\ntheorem conj_refl : conj (equiv.refl α) = equiv.refl (α → α) :=\n  rfl\n#align conj_refl conj_refl\n\n",
+ "conj_comp":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ » -/\n-- This should not be a simp lemma as long as `(∘)` is reducible:\n-- when `(∘)` is reducible, Lean can unify `f₁ ∘ f₂` with any `g` using\n-- `f₁ := g` and `f₂ := λ x, x`.  This causes nontermination.\ntheorem conj_comp (e : «expr ≃ » α β) (f₁ f₂ : α → α) : e.conj (f₁ ∘ f₂) = e.conj f₁ ∘ e.conj f₂ := by\n  apply arrow_congr_comp\n#align conj_comp conj_comp\n\n",
+ "congr_mk":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ » -/\n@[simp]\ntheorem congr_mk {ra : setoid α} {rb : setoid β} (e : «expr ≃ » α β)\n    (eq : ∀ a₁ a₂ : α, Setoid.r a₁ a₂ ↔ Setoid.r (e a₁) (e a₂)) (a : α) :\n    quotient.congr e eq (Quotient.mk'' a) = Quotient.mk'' (e a) :=\n  rfl\n#align congr_mk congr_mk\n\n",
+ "congr_fun":
+ "protected theorem perm.congr_fun {f g : equiv.perm α} (h : f = g) (x : α) : f x = g x :=\n  equiv.congr_fun h x\n#align perm.congr_fun perm.congr_fun\n\n",
+ "congr_arg":
+ "protected theorem perm.congr_arg {f : equiv.perm α} {x x' : α} : x = x' → f x = f x' :=\n  equiv.congr_arg\n#align perm.congr_arg perm.congr_arg\n\n",
+ "comp_symm_eq":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ » -/\ntheorem comp_symm_eq {α β γ} (e : «expr ≃ » α β) (f : β → γ) (g : α → γ) : g ∘ e.symm = f ↔ g = f ∘ e :=\n  (e.arrow_congr (equiv.refl γ)).eq_symm_apply.symm\n#align comp_symm_eq comp_symm_eq\n\n",
+ "comp_surjective":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ » -/\ntheorem comp_surjective (f : α → β) (e : «expr ≃ » β γ) : surjective (e ∘ f) ↔ surjective f :=\n  equiv_like.comp_surjective f e\n#align comp_surjective comp_surjective\n\n",
+ "comp_injective":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ » -/\ntheorem comp_injective (f : α → β) (e : «expr ≃ » β γ) : injective (e ∘ f) ↔ injective f :=\n  equiv_like.comp_injective f e\n#align comp_injective comp_injective\n\n",
+ "comp_bijective":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ » -/\ntheorem comp_bijective (f : α → β) (e : «expr ≃ » β γ) : bijective (e ∘ f) ↔ bijective f :=\n  equiv_like.comp_bijective f e\n#align comp_bijective comp_bijective\n\n",
+ "coe_trans":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n@[simp]\ntheorem coe_trans (f : «expr ≃ » α β) (g : «expr ≃ » β γ) : «expr⇑ » (f.trans g) = g ∘ f :=\n  rfl\n#align coe_trans coe_trans\n\n",
+ "coe_subsingleton":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n/-- This cannot be a `simp` lemmas as it incorrectly matches against `e : α ≃ synonym α`, when\n`synonym α` is semireducible. This makes a mess of `multiplicative.of_add` etc. -/\ntheorem perm.coe_subsingleton {α : Type _} [subsingleton α] (e : perm α) : «expr⇑ » e = id := by\n  rw [perm.subsingleton_eq_refl e, coe_refl]\n#align perm.coe_subsingleton perm.coe_subsingleton\n\n",
+ "coe_refl":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n@[simp]\ntheorem coe_refl : «expr⇑ » (equiv.refl α) = id :=\n  rfl\n#align coe_refl coe_refl\n\n",
+ "coe_inj":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ » -/\nprotected theorem coe_inj {e₁ e₂ : «expr ≃ » α β} : (e₁ : α → β) = e₂ ↔ e₁ = e₂ :=\n  fun_like.coe_fn_eq\n#align coe_inj coe_inj\n\n",
+ "coe_fn_symm_mk":
+ "@[simp]\ntheorem coe_fn_symm_mk (f : α → β) (g l r) : ((equiv.mk f g l r).symm : β → α) = g :=\n  rfl\n#align coe_fn_symm_mk coe_fn_symm_mk\n\n",
+ "coe_fn_mk":
+ "/-\nCopyright (c) 2015 Microsoft Corporation. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Leonardo de Moura, Mario Carneiro\n-/\n@[simp]\ntheorem coe_fn_mk (f : α → β) (g l r) : (equiv.mk f g l r : α → β) = f :=\n  rfl\n#align coe_fn_mk coe_fn_mk\n\n",
+ "coe_fn_injective":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ » -/\n/-- The map `coe_fn : (r ≃ s) → (r → s)` is injective. -/\ntheorem coe_fn_injective : @function.injective («expr ≃ » α β) (α → β) coe_fn :=\n  fun_like.coe_injective\n#align coe_fn_injective coe_fn_injective\n\n",
+ "cast_trans":
+ "@[simp]\ntheorem cast_trans {α β γ} (h : α = β) (h2 : β = γ) : (equiv.cast h).trans (equiv.cast h2) = equiv.cast (h.trans h2) :=\n  ext fun x => by\n    substs h h2\n    rfl\n#align cast_trans cast_trans\n\n",
+ "cast_symm":
+ "@[simp]\ntheorem cast_symm {α β} (h : α = β) : (equiv.cast h).symm = equiv.cast h.symm :=\n  rfl\n#align cast_symm cast_symm\n\n",
+ "cast_refl":
+ "@[simp]\ntheorem cast_refl {α} (h : α = α := rfl) : equiv.cast h = equiv.refl α :=\n  rfl\n#align cast_refl cast_refl\n\n",
+ "cast_eq_iff_heq":
+ "#print cast_eq_iff_heq /-\ntheorem cast_eq_iff_heq {α β} (h : α = β) {a : α} {b : β} : equiv.cast h a = b ↔ HEq a b :=\n  by\n  subst h\n  simp\n#align cast_eq_iff_heq cast_eq_iff_heq\n-/\n\n",
+ "cast_apply":
+ "@[simp]\ntheorem cast_apply {α β} (h : α = β) (x : α) : equiv.cast h x = cast h x :=\n  rfl\n#align cast_apply cast_apply\n\n",
+ "bijective_comp":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ » -/\ntheorem bijective_comp (e : «expr ≃ » α β) (f : β → γ) : bijective (f ∘ e) ↔ bijective f :=\n  equiv_like.bijective_comp e f\n#align bijective_comp bijective_comp\n\n",
+ "bijective":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ » -/\nprotected theorem bijective (e : «expr ≃ » α β) : bijective e :=\n  equiv_like.bijective e\n#align bijective bijective\n\n",
+ "arrow_congr_trans":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ » -/\n@[simp]\ntheorem arrow_congr_trans {α₁ β₁ α₂ β₂ α₃ β₃ : Sort _} (e₁ : «expr ≃ » α₁ α₂) (e₁' : «expr ≃ » β₁ β₂)\n    (e₂ : «expr ≃ » α₂ α₃) (e₂' : «expr ≃ » β₂ β₃) :\n    arrow_congr (e₁.trans e₂) (e₁'.trans e₂') = (arrow_congr e₁ e₁').trans (arrow_congr e₂ e₂') :=\n  rfl\n#align arrow_congr_trans arrow_congr_trans\n\n",
+ "arrow_congr_symm":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ » -/\n@[simp]\ntheorem arrow_congr_symm {α₁ β₁ α₂ β₂ : Sort _} (e₁ : «expr ≃ » α₁ α₂) (e₂ : «expr ≃ » β₁ β₂) :\n    (arrow_congr e₁ e₂).symm = arrow_congr e₁.symm e₂.symm :=\n  rfl\n#align arrow_congr_symm arrow_congr_symm\n\n",
+ "arrow_congr_refl":
+ "@[simp]\ntheorem arrow_congr_refl {α β : Sort _} : arrow_congr (equiv.refl α) (equiv.refl β) = equiv.refl (α → β) :=\n  rfl\n#align arrow_congr_refl arrow_congr_refl\n\n",
+ "arrow_congr_comp":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ » -/\ntheorem arrow_congr_comp {α₁ β₁ γ₁ α₂ β₂ γ₂ : Sort _} (ea : «expr ≃ » α₁ α₂) (eb : «expr ≃ » β₁ β₂)\n    (ec : «expr ≃ » γ₁ γ₂) (f : α₁ → β₁) (g : β₁ → γ₁) :\n    arrow_congr ea ec (g ∘ f) = arrow_congr eb ec g ∘ arrow_congr ea eb f :=\n  by\n  ext\n  simp only [comp, arrow_congr_apply, eb.symm_apply_apply]\n#align arrow_congr_comp arrow_congr_comp\n\n",
+ "arrow_congr'_trans":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ » -/\n@[simp]\ntheorem arrow_congr'_trans {α₁ β₁ α₂ β₂ α₃ β₃ : Type _} (e₁ : «expr ≃ » α₁ α₂) (e₁' : «expr ≃ » β₁ β₂)\n    (e₂ : «expr ≃ » α₂ α₃) (e₂' : «expr ≃ » β₂ β₃) :\n    arrow_congr' (e₁.trans e₂) (e₁'.trans e₂') = (arrow_congr' e₁ e₁').trans (arrow_congr' e₂ e₂') :=\n  rfl\n#align arrow_congr'_trans arrow_congr'_trans\n\n",
+ "arrow_congr'_symm":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ » -/\n@[simp]\ntheorem arrow_congr'_symm {α₁ β₁ α₂ β₂ : Type _} (e₁ : «expr ≃ » α₁ α₂) (e₂ : «expr ≃ » β₁ β₂) :\n    (arrow_congr' e₁ e₂).symm = arrow_congr' e₁.symm e₂.symm :=\n  rfl\n#align arrow_congr'_symm arrow_congr'_symm\n\n",
+ "arrow_congr'_refl":
+ "@[simp]\ntheorem arrow_congr'_refl {α β : Type _} : arrow_congr' (equiv.refl α) (equiv.refl β) = equiv.refl (α → β) :=\n  rfl\n#align arrow_congr'_refl arrow_congr'_refl\n\n",
+ "apply_symm_apply":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ » -/\n@[simp]\ntheorem apply_symm_apply (e : «expr ≃ » α β) (x : β) : e (e.symm x) = x :=\n  e.right_inv x\n#align apply_symm_apply apply_symm_apply\n\n",
+ "apply_eq_iff_eq_symm_apply":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ » -/\ntheorem apply_eq_iff_eq_symm_apply {α β : Sort _} (f : «expr ≃ » α β) {x : α} {y : β} : f x = y ↔ x = f.symm y :=\n  by\n  conv_lhs => rw [← apply_symm_apply f y]\n  rw [apply_eq_iff_eq]\n#align apply_eq_iff_eq_symm_apply apply_eq_iff_eq_symm_apply\n\n",
+ "apply_eq_iff_eq":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ » -/\ntheorem apply_eq_iff_eq (f : «expr ≃ » α β) {x y : α} : f x = f y ↔ x = y :=\n  equiv_like.apply_eq_iff_eq f\n#align apply_eq_iff_eq apply_eq_iff_eq\n\n"}

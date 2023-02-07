@@ -1,0 +1,10 @@
+{"ι_comp_lift":
+ "@[simp]\ntheorem ι_comp_lift : lift R f ∘ ι R = f :=\n  funext <| lie_hom.ext_iff.mp <| (lift R).symm_apply_apply f\n#align ι_comp_lift ι_comp_lift\n\n",
+ "lift_ι_apply":
+ "@[simp]\ntheorem lift_ι_apply (x : L) : lift R f (ι R x) = f x := by rw [← function.comp_apply (lift R f) (ι R) x, ι_comp_lift]\n#align lift_ι_apply lift_ι_apply\n\n",
+ "lift_unique":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₐ[ ] » -/\ntheorem lift_unique (g : «expr →ₐ[ ] » (universal_enveloping_algebra R L) R A) : g ∘ ι R = f ↔ g = lift R f :=\n  by\n  refine' iff.trans _ (lift R).symm_apply_eq\n  constructor <;>\n    · intro h\n      ext\n      simp [← h]\n#align lift_unique lift_unique\n\n",
+ "lift_symm_apply":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₐ[ ] » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₗ⁅ ⁆ » -/\n/-\nCopyright (c) 2020 Oliver Nash. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Oliver Nash\n-/\n@[simp]\ntheorem lift_symm_apply (F : «expr →ₐ[ ] » (universal_enveloping_algebra R L) R A) :\n    (lift R).symm F = (F : «expr →ₗ⁅ ⁆ » (universal_enveloping_algebra R L) R A).comp (ι R) :=\n  rfl\n#align lift_symm_apply lift_symm_apply\n\n",
+ "hom_ext":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₐ[ ] » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₗ⁅ ⁆ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₗ⁅ ⁆ » -/\n/-- See note [partially-applied ext lemmas]. -/\n@[ext]\ntheorem hom_ext {g₁ g₂ : «expr →ₐ[ ] » (universal_enveloping_algebra R L) R A}\n    (h :\n      (g₁ : «expr →ₗ⁅ ⁆ » (universal_enveloping_algebra R L) R A).comp (ι R) =\n        (g₂ : «expr →ₗ⁅ ⁆ » (universal_enveloping_algebra R L) R A).comp (ι R)) :\n    g₁ = g₂ :=\n  have h' : (lift R).symm g₁ = (lift R).symm g₂ := by ext; simp [h]\n  (lift R).symm.injective h'\n#align hom_ext hom_ext\n\n"}

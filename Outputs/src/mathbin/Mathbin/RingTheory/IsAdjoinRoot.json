@@ -1,0 +1,122 @@
+{"subsingleton":
+ "/-\nCopyright (c) 2022 Anne Baanen. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Anne Baanen\n-/\n-- This class doesn't really make sense on a predicate\n-- This class doesn't really make sense on a predicate\ntheorem subsingleton (h : is_adjoin_root S f) [subsingleton R] : subsingleton S :=\n  h.map_surjective.subsingleton\n#align subsingleton subsingleton\n\n",
+ "repr_zero_mem_span":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `polynomial -/\n/-- `repr` preserves zero, up to multiples of `f` -/\ntheorem repr_zero_mem_span (h : is_adjoin_root S f) : h.repr 0 ∈ ideal.span ({f} : set (polynomial R)) := by\n  rw [← h.ker_map, ring_hom.mem_ker, h.map_repr]\n#align repr_zero_mem_span repr_zero_mem_span\n\n",
+ "repr_add_sub_repr_add_repr_mem_span":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `polynomial -/\n/-- `repr` preserves addition, up to multiples of `f` -/\ntheorem repr_add_sub_repr_add_repr_mem_span (h : is_adjoin_root S f) (x y : S) :\n    h.repr (x + y) - (h.repr x + h.repr y) ∈ ideal.span ({f} : set (polynomial R)) := by\n  rw [← h.ker_map, ring_hom.mem_ker, map_sub, h.map_repr, map_add, h.map_repr, h.map_repr, sub_self]\n#align repr_add_sub_repr_add_repr_mem_span repr_add_sub_repr_add_repr_mem_span\n\n",
+ "of_equiv_root":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ₐ[ ] » -/\n@[simp]\ntheorem of_equiv_root (h : is_adjoin_root S f) (e : «expr ≃ₐ[ ] » S R T) : (h.of_equiv e).root = e h.root :=\n  rfl\n#align of_equiv_root of_equiv_root\n\n",
+ "of_equiv_aequiv":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ₐ[ ] » -/\n@[simp]\ntheorem of_equiv_aequiv {U : Type _} [CommRing U] [algebra R U] (h : is_adjoin_root S f) (h' : is_adjoin_root U f)\n    (e : «expr ≃ₐ[ ] » S R T) : (h.of_equiv e).aequiv h' = e.symm.trans (h.aequiv h') := by\n  ext a <;>\n    rw [← (h.of_equiv e).map_repr a, aequiv_map, alg_equiv.trans_apply, of_equiv_map_apply, e.symm_apply_apply,\n      aequiv_map]\n#align of_equiv_aequiv of_equiv_aequiv\n\n",
+ "mod_by_monic_repr_map":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `polynomial -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr %ₘ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr %ₘ » -/\ntheorem mod_by_monic_repr_map (h : is_adjoin_root_monic S f) (g : polynomial R) :\n    «expr %ₘ » (h.repr (h.map g)) f = «expr %ₘ » g f :=\n  mod_by_monic_eq_of_dvd_sub h.monic <| by rw [← h.mem_ker_map, ring_hom.sub_mem_ker_iff, map_repr]\n#align mod_by_monic_repr_map mod_by_monic_repr_map\n\n",
+ "mod_by_monic_hom_root_pow":
+ "@[simp]\ntheorem mod_by_monic_hom_root_pow (h : is_adjoin_root_monic S f) {n : ℕ} (hdeg : n < nat_degree f) :\n    h.mod_by_monic_hom (h.root ^ n) = X ^ n := by\n  nontriviality R\n  rwa [← h.map_X, ← map_pow, mod_by_monic_hom_map, mod_by_monic_eq_self_iff h.monic, degree_X_pow]\n  contrapose! hdeg\n  simpa [nat_degree_le_iff_degree_le] using hdeg\n#align mod_by_monic_hom_root_pow mod_by_monic_hom_root_pow\n\n",
+ "mod_by_monic_hom_root":
+ "@[simp]\ntheorem mod_by_monic_hom_root (h : is_adjoin_root_monic S f) (hdeg : 1 < nat_degree f) :\n    h.mod_by_monic_hom h.root = X := by simpa using mod_by_monic_hom_root_pow h hdeg\n#align mod_by_monic_hom_root mod_by_monic_hom_root\n\n",
+ "mod_by_monic_hom_map":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `polynomial -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr %ₘ » -/\n@[simp]\ntheorem mod_by_monic_hom_map (h : is_adjoin_root_monic S f) (g : polynomial R) :\n    h.mod_by_monic_hom (h.map g) = «expr %ₘ » g f :=\n  h.mod_by_monic_repr_map g\n#align mod_by_monic_hom_map mod_by_monic_hom_map\n\n",
+ "minpoly_eq":
+ "theorem minpoly_eq [IsDomain R] [IsDomain S] [NoZeroSMulDivisors R S] [NormalizedGCDMonoid R]\n    (h : is_adjoin_root_monic S f) (hirr : Irreducible f) : minpoly R h.root = f :=\n  let ⟨q, hq⟩ := minpoly.gcd_domain_dvd h.is_integral_root h.monic.ne_zero h.aeval_root\n  symm <|\n    eq_of_monic_of_associated h.monic (minpoly.monic h.is_integral_root) <| by\n      convert\n          Associated.mul_left (minpoly R h.root) <|\n            associated_one_iff_isUnit.2 <| (hirr.is_unit_or_is_unit hq).resolve_left <| minpoly.not_is_unit R h.root <;>\n        rw [mul_one]\n#align minpoly_eq minpoly_eq\n\n",
+ "mem_ker_map":
+ "@[simp]\ntheorem mem_ker_map (h : is_adjoin_root S f) {p} : p ∈ ring_hom.ker h.map ↔ f ∣ p := by\n  rw [h.ker_map, ideal.mem_span_singleton]\n#align mem_ker_map mem_ker_map\n\n",
+ "map_self":
+ "@[simp]\ntheorem map_self (h : is_adjoin_root S f) : h.map f = 0 :=\n  h.map_eq_zero_iff.mpr dvd_rfl\n#align map_self map_self\n\n",
+ "map_repr":
+ "theorem map_repr (h : is_adjoin_root S f) (x : S) : h.map (h.repr x) = x :=\n  (h.map_surjective x).some_spec\n#align map_repr map_repr\n\n",
+ "map_mod_by_monic_hom":
+ "@[simp]\ntheorem map_mod_by_monic_hom (h : is_adjoin_root_monic S f) (x : S) : h.map (h.mod_by_monic_hom x) = x := by\n  rw [mod_by_monic_hom, linear_map.coe_mk, map_mod_by_monic, map_repr]\n#align map_mod_by_monic_hom map_mod_by_monic_hom\n\n",
+ "map_mod_by_monic":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `polynomial -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr %ₘ » -/\ntheorem map_mod_by_monic (h : is_adjoin_root_monic S f) (g : polynomial R) : h.map («expr %ₘ » g f) = h.map g :=\n  by\n  rw [← ring_hom.sub_mem_ker_iff, mem_ker_map, mod_by_monic_eq_sub_mul_div _ h.monic, sub_right_comm, sub_self,\n    zero_sub, dvd_neg]\n  exact ⟨_, rfl⟩\n#align map_mod_by_monic map_mod_by_monic\n\n",
+ "map_eq_zero_iff":
+ "#print map_eq_zero_iff /-\ntheorem map_eq_zero_iff (h : is_adjoin_root S f) {p} : h.map p = 0 ↔ f ∣ p := by rw [← h.mem_ker_map, ring_hom.mem_ker]\n#align map_eq_zero_iff map_eq_zero_iff\n-/\n\n",
+ "map_X":
+ "@[simp]\ntheorem map_X (h : is_adjoin_root S f) : h.map X = h.root :=\n  rfl\n#align map_X map_X\n\n",
+ "lift_self_apply":
+ "@[simp]\ntheorem lift_self_apply (h : is_adjoin_root S f) (x : S) : h.lift (algebra_map R S) h.root h.aeval_root x = x := by\n  rw [← h.map_repr x, lift_map, ← aeval_def, h.aeval_eq]\n#align lift_self_apply lift_self_apply\n\n",
+ "lift_self":
+ "theorem lift_self (h : is_adjoin_root S f) : h.lift (algebra_map R S) h.root h.aeval_root = RingHom.id S :=\n  RingHom.ext h.lift_self_apply\n#align lift_self lift_self\n\n",
+ "lift_root":
+ "@[simp]\ntheorem lift_root (h : is_adjoin_root S f) : h.lift i x hx h.root = x := by rw [← h.map_X, lift_map, eval₂_X]\n#align lift_root lift_root\n\n",
+ "lift_map":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `polynomial -/\n-- To match `adjoin_root.lift`\n@[simp]\ntheorem lift_map (h : is_adjoin_root S f) (z : polynomial R) : h.lift i x hx (h.map z) = z.eval₂ i x := by\n  rw [lift, RingHom.coe_mk, h.eval₂_repr_eq_eval₂_of_map_eq hx _ _ rfl]\n#align lift_map lift_map\n\n",
+ "lift_hom_root":
+ "@[simp]\ntheorem lift_hom_root (h : is_adjoin_root S f) : h.lift_hom x hx' h.root = x := by\n  rw [← lift_algebra_map_apply, lift_root]\n#align lift_hom_root lift_hom_root\n\n",
+ "lift_hom_map":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `polynomial -/\n@[simp]\ntheorem lift_hom_map (h : is_adjoin_root S f) (z : polynomial R) : h.lift_hom x hx' (h.map z) = aeval x z := by\n  rw [← lift_algebra_map_apply, lift_map, aeval_def]\n#align lift_hom_map lift_hom_map\n\n",
+ "lift_hom_aequiv":
+ "@[simp]\ntheorem lift_hom_aequiv {U : Type _} [CommRing U] [algebra R U] (h : is_adjoin_root S f) (h' : is_adjoin_root T f)\n    (x : U) (hx z) : h'.lift_hom x hx (h.aequiv h' z) = h.lift_hom x hx z :=\n  h.lift_aequiv h' _ _ hx _\n#align lift_hom_aequiv lift_hom_aequiv\n\n",
+ "lift_algebra_map_apply":
+ "theorem lift_algebra_map_apply (h : is_adjoin_root S f) (z : S) :\n    h.lift (algebra_map R T) x hx' z = h.lift_hom x hx' z :=\n  rfl\n#align lift_algebra_map_apply lift_algebra_map_apply\n\n",
+ "lift_algebra_map":
+ "@[simp]\ntheorem lift_algebra_map (h : is_adjoin_root S f) (a : R) : h.lift i x hx (algebra_map R S a) = i a := by\n  rw [h.algebra_map_apply, lift_map, eval₂_C]\n#align lift_algebra_map lift_algebra_map\n\n",
+ "lift_aequiv":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →+* » -/\n@[simp]\ntheorem lift_aequiv {U : Type _} [CommRing U] (h : is_adjoin_root S f) (h' : is_adjoin_root T f) (i : «expr →+* » R U)\n    (x hx z) : h'.lift i x hx (h.aequiv h' z) = h.lift i x hx z := by\n  rw [← h.map_repr z, aequiv_map, lift_map, lift_map]\n#align lift_aequiv lift_aequiv\n\n",
+ "is_integral_root":
+ "theorem is_integral_root (h : is_adjoin_root_monic S f) : is_integral R h.root :=\n  ⟨f, h.monic, h.aeval_root⟩\n#align is_integral_root is_integral_root\n\n",
+ "ext_map":
+ "/-- Extensionality of the `is_adjoin_root` structure itself. See `is_adjoin_root_monic.ext_elem`\nfor extensionality of the ring elements. -/\ntheorem ext_map (h h' : is_adjoin_root S f) (eq : ∀ x, h.map x = h'.map x) : h = h' :=\n  by\n  cases h; cases h'; congr\n  exact RingHom.ext eq\n#align ext_map ext_map\n\n",
+ "ext_elem_iff":
+ "theorem ext_elem_iff (h : is_adjoin_root_monic S f) {x y : S} : x = y ↔ ∀ i < nat_degree f, h.coeff x i = h.coeff y i :=\n  ⟨fun hxy i hi => hxy ▸ rfl, fun hxy => h.ext_elem hxy⟩\n#align ext_elem_iff ext_elem_iff\n\n",
+ "ext_elem":
+ "theorem ext_elem (h : is_adjoin_root_monic S f) ⦃x y : S⦄ (hxy : ∀ i < nat_degree f, h.coeff x i = h.coeff y i) :\n    x = y :=\n  equiv_like.injective h.basis.equiv_fun <|\n    funext fun i =>\n      show h.basis.equiv_fun x i = h.basis.equiv_fun y i by\n        rw [basis.equiv_fun_apply, ← h.coeff_apply_coe, basis.equiv_fun_apply, ← h.coeff_apply_coe, hxy i i.prop]\n#align ext_elem ext_elem\n\n",
+ "ext":
+ "/-- Extensionality of the `is_adjoin_root` structure itself. See `is_adjoin_root_monic.ext_elem`\nfor extensionality of the ring elements. -/\n@[ext]\ntheorem ext (h h' : is_adjoin_root S f) (eq : h.root = h'.root) : h = h' :=\n  h.ext_map h' fun x => by rw [← h.aeval_eq, ← h'.aeval_eq, eq]\n#align ext ext\n\n",
+ "eval₂_repr_eq_eval₂_of_map_eq":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `polynomial -/\n/-- Auxiliary lemma for `is_adjoin_root.lift` -/\ntheorem eval₂_repr_eq_eval₂_of_map_eq (h : is_adjoin_root S f) (z : S) (w : polynomial R) (hzw : h.map w = z) :\n    (h.repr z).eval₂ i x = w.eval₂ i x :=\n  by\n  rw [eq_comm, ← sub_eq_zero, ← h.map_repr z, ← map_sub, h.map_eq_zero_iff] at hzw\n  obtain ⟨y, hy⟩ := hzw\n  rw [← sub_eq_zero, ← eval₂_sub, hy, eval₂_mul, hx, zero_mul]\n#align eval₂_repr_eq_eval₂_of_map_eq eval₂_repr_eq_eval₂_of_map_eq\n\n",
+ "eq_lift_hom":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₐ[ ] » -/\n/-- Unicity of `lift_hom`: a map that agrees on `h.root` agrees with `lift_hom` everywhere. -/\ntheorem eq_lift_hom (h : is_adjoin_root S f) (g : «expr →ₐ[ ] » S R T) (hroot : g h.root = x) : g = h.lift_hom x hx' :=\n  alg_hom.ext (h.apply_eq_lift hx' g g.commutes hroot)\n#align eq_lift_hom eq_lift_hom\n\n",
+ "eq_lift":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →+* » -/\n/-- Unicity of `lift`: a map that agrees on `R` and `h.root` agrees with `lift` everywhere. -/\ntheorem eq_lift (h : is_adjoin_root S f) (g : «expr →+* » S T) (hmap : ∀ a, g (algebra_map R S a) = i a)\n    (hroot : g h.root = x) : g = h.lift i x hx :=\n  RingHom.ext (h.apply_eq_lift hx g hmap hroot)\n#align eq_lift eq_lift\n\n",
+ "deg_pos":
+ "theorem deg_pos [nontrivial S] (h : is_adjoin_root_monic S f) : 0 < nat_degree f :=\n  by\n  rcases h.basis.index_nonempty with ⟨⟨i, hi⟩⟩\n  exact (nat.zero_le _).trans_lt hi\n#align deg_pos deg_pos\n\n",
+ "deg_ne_zero":
+ "theorem deg_ne_zero [nontrivial S] (h : is_adjoin_root_monic S f) : nat_degree f ≠ 0 :=\n  h.deg_pos.ne'\n#align deg_ne_zero deg_ne_zero\n\n",
+ "coeff_root_pow":
+ "theorem coeff_root_pow (h : is_adjoin_root_monic S f) {n} (hn : n < nat_degree f) :\n    h.coeff (h.root ^ n) = Pi.single n 1 := by\n  ext i\n  rw [coeff_apply]\n  split_ifs with hi\n  ·\n    calc\n      h.basis.repr (h.root ^ n) ⟨i, _⟩ = h.basis.repr (h.basis ⟨n, hn⟩) ⟨i, hi⟩ := by rw [h.basis_apply, Fin.val_mk]\n      _ = Pi.single ((⟨n, hn⟩ : fin _) : ℕ) (1 : (fun _ => R) _) ↑(⟨i, _⟩ : fin _) := by\n        rw [h.basis.repr_self, ← finsupp.single_eq_pi_single, finsupp.single_apply_left Fin.val_injective]\n      _ = Pi.single n 1 i := by rw [Fin.val_mk, Fin.val_mk]\n      \n  · refine' (Pi.single_eq_of_ne _ (1 : (fun _ => R) _)).symm\n    rintro rfl\n    simpa [hi] using hn\n#align coeff_root_pow coeff_root_pow\n\n",
+ "coeff_root":
+ "theorem coeff_root (h : is_adjoin_root_monic S f) (hdeg : 1 < nat_degree f) : h.coeff h.root = Pi.single 1 1 := by\n  rw [← h.coeff_root_pow hdeg, pow_one]\n#align coeff_root coeff_root\n\n",
+ "coeff_one":
+ "theorem coeff_one [nontrivial S] (h : is_adjoin_root_monic S f) : h.coeff 1 = Pi.single 0 1 := by\n  rw [← h.coeff_root_pow h.deg_pos, pow_zero]\n#align coeff_one coeff_one\n\n",
+ "coeff_injective":
+ "theorem coeff_injective (h : is_adjoin_root_monic S f) : function.injective h.coeff := fun x y hxy =>\n  h.ext_elem fun i hi => hxy ▸ rfl\n#align coeff_injective coeff_injective\n\n",
+ "coeff_apply_lt":
+ "theorem coeff_apply_lt (h : is_adjoin_root_monic S f) (z : S) (i : ℕ) (hi : i < nat_degree f) :\n    h.coeff z i = h.basis.repr z ⟨i, hi⟩ :=\n  by\n  simp only [coeff, linear_map.comp_apply, finsupp.lcoe_fun_apply, finsupp.lmap_domain_apply, linear_equiv.coe_coe,\n    lift_polyₗ_apply, linear_map.coe_mk, h.basis_repr]\n  rfl\n#align coeff_apply_lt coeff_apply_lt\n\n",
+ "coeff_apply_le":
+ "theorem coeff_apply_le (h : is_adjoin_root_monic S f) (z : S) (i : ℕ) (hi : nat_degree f ≤ i) : h.coeff z i = 0 :=\n  by\n  simp only [coeff, linear_map.comp_apply, finsupp.lcoe_fun_apply, finsupp.lmap_domain_apply, linear_equiv.coe_coe,\n    lift_polyₗ_apply, linear_map.coe_mk, h.basis_repr]\n  nontriviality R\n  exact\n    polynomial.coeff_eq_zero_of_degree_lt\n      ((degree_mod_by_monic_lt _ h.monic).trans_le (polynomial.degree_le_of_nat_degree_le hi))\n#align coeff_apply_le coeff_apply_le\n\n",
+ "coeff_apply_coe":
+ "theorem coeff_apply_coe (h : is_adjoin_root_monic S f) (z : S) (i : fin (nat_degree f)) :\n    h.coeff z i = h.basis.repr z i :=\n  h.coeff_apply_lt z i i.prop\n#align coeff_apply_coe coeff_apply_coe\n\n",
+ "coeff_apply":
+ "theorem coeff_apply (h : is_adjoin_root_monic S f) (z : S) (i : ℕ) :\n    h.coeff z i = if hi : i < nat_degree f then h.basis.repr z ⟨i, hi⟩ else 0 :=\n  by\n  split_ifs with hi\n  · exact h.coeff_apply_lt z i hi\n  · exact h.coeff_apply_le z i (le_of_not_lt hi)\n#align coeff_apply coeff_apply\n\n",
+ "coeff_algebra_map":
+ "theorem coeff_algebra_map [nontrivial S] (h : is_adjoin_root_monic S f) (x : R) :\n    h.coeff (algebra_map R S x) = Pi.single 0 x := by\n  ext i\n  rw [algebra.algebra_map_eq_smul_one, map_smul, coeff_one, pi.smul_apply, smul_eq_mul]\n  refine' (Pi.apply_single (fun _ y => x * y) _ 0 1 i).trans (by simp)\n  intros\n  simp\n#align coeff_algebra_map coeff_algebra_map\n\n",
+ "coe_lift_hom":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →+* » -/\n-- To match `adjoin_root.lift_hom`\n@[simp]\ntheorem coe_lift_hom (h : is_adjoin_root S f) : (h.lift_hom x hx' : «expr →+* » S T) = h.lift (algebra_map R T) x hx' :=\n  rfl\n#align coe_lift_hom coe_lift_hom\n\n",
+ "basis_repr":
+ "@[simp]\ntheorem basis_repr (h : is_adjoin_root_monic S f) (x : S) (i : fin (nat_degree f)) :\n    h.basis.repr x i = (h.mod_by_monic_hom x).coeff (i : ℕ) :=\n  by\n  change (h.mod_by_monic_hom x).to_finsupp.comap_domain coe (fin.coe_injective.inj_on _) i = _\n  rw [finsupp.comap_domain_apply, polynomial.to_finsupp_apply]\n#align basis_repr basis_repr\n\n",
+ "basis_one":
+ "theorem basis_one (h : is_adjoin_root_monic S f) (hdeg : 1 < nat_degree f) : h.basis ⟨1, hdeg⟩ = h.root := by\n  rw [h.basis_apply, Fin.val_mk, pow_one]\n#align basis_one basis_one\n\n",
+ "basis_apply":
+ "@[simp]\ntheorem basis_apply (h : is_adjoin_root_monic S f) (i) : h.basis i = h.root ^ (i : ℕ) :=\n  basis.apply_eq_iff.mpr <|\n    show\n      (h.mod_by_monic_hom (h.to_is_adjoin_root.root ^ (i : ℕ))).to_finsupp.comap_domain coe\n          (Fin.val_injective.inj_on _) =\n        finsupp.single _ _\n      by\n      ext j\n      rw [finsupp.comap_domain_apply, mod_by_monic_hom_root_pow]\n      · rw [X_pow_eq_monomial, to_finsupp_monomial, finsupp.single_apply_left Fin.val_injective]\n      · exact i.is_lt\n#align basis_apply basis_apply\n\n",
+ "apply_eq_lift":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →+* » -/\n/-- Auxiliary lemma for `apply_eq_lift` -/\ntheorem apply_eq_lift (h : is_adjoin_root S f) (g : «expr →+* » S T) (hmap : ∀ a, g (algebra_map R S a) = i a)\n    (hroot : g h.root = x) (a : S) : g a = h.lift i x hx a :=\n  by\n  rw [← h.map_repr a, polynomial.as_sum_range_C_mul_X_pow (h.repr a)]\n  simp only [map_sum, map_mul, map_pow, h.map_X, hroot, ← h.algebra_map_apply, hmap, lift_root, lift_algebra_map]\n#align apply_eq_lift apply_eq_lift\n\n",
+ "algebra_map_apply":
+ "theorem algebra_map_apply (h : is_adjoin_root S f) (x : R) : algebra_map R S x = h.map (polynomial.C x) := by\n  rw [h.algebra_map_eq, RingHom.comp_apply]\n#align algebra_map_apply algebra_map_apply\n\n",
+ "aeval_root":
+ "@[simp]\ntheorem aeval_root (h : is_adjoin_root S f) : aeval h.root f = 0 := by rw [aeval_eq, map_self]\n#align aeval_root aeval_root\n\n",
+ "aeval_eq":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `polynomial -/\n@[simp]\ntheorem aeval_eq (h : is_adjoin_root S f) (p : polynomial R) : aeval h.root p = h.map p :=\n  polynomial.induction_on p (fun x => by rw [aeval_C, h.algebra_map_apply])\n    (fun p q ihp ihq => by rw [alg_hom.map_add, RingHom.map_add, ihp, ihq]) fun n x ih => by\n    rw [alg_hom.map_mul, aeval_C, alg_hom.map_pow, aeval_X, RingHom.map_mul, ← h.algebra_map_apply, RingHom.map_pow,\n      map_X]\n#align aeval_eq aeval_eq\n\n",
+ "aequiv_trans":
+ "@[simp]\ntheorem aequiv_trans {U : Type _} [CommRing U] [algebra R U] (h : is_adjoin_root S f) (h' : is_adjoin_root T f)\n    (h'' : is_adjoin_root U f) : (h.aequiv h').trans (h'.aequiv h'') = h.aequiv h'' :=\n  by\n  ext z\n  exact h.aequiv_aequiv h' h'' z\n#align aequiv_trans aequiv_trans\n\n",
+ "aequiv_symm":
+ "@[simp]\ntheorem aequiv_symm (h : is_adjoin_root S f) (h' : is_adjoin_root T f) : (h.aequiv h').symm = h'.aequiv h :=\n  by\n  ext\n  rfl\n#align aequiv_symm aequiv_symm\n\n",
+ "aequiv_self":
+ "@[simp]\ntheorem aequiv_self (h : is_adjoin_root S f) : h.aequiv h = alg_equiv.refl :=\n  by\n  ext a\n  exact h.lift_self_apply a\n#align aequiv_self aequiv_self\n\n",
+ "aequiv_root":
+ "@[simp]\ntheorem aequiv_root (h : is_adjoin_root S f) (h' : is_adjoin_root T f) : h.aequiv h' h.root = h'.root := by\n  rw [aequiv, alg_equiv.coe_mk, lift_hom_root]\n#align aequiv_root aequiv_root\n\n",
+ "aequiv_of_equiv":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ₐ[ ] » -/\n@[simp]\ntheorem aequiv_of_equiv {U : Type _} [CommRing U] [algebra R U] (h : is_adjoin_root S f) (h' : is_adjoin_root T f)\n    (e : «expr ≃ₐ[ ] » T R U) : h.aequiv (h'.of_equiv e) = (h.aequiv h').trans e := by\n  ext a <;> rw [← h.map_repr a, aequiv_map, alg_equiv.trans_apply, aequiv_map, of_equiv_map_apply]\n#align aequiv_of_equiv aequiv_of_equiv\n\n",
+ "aequiv_map":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `polynomial -/\n@[simp]\ntheorem aequiv_map (h : is_adjoin_root S f) (h' : is_adjoin_root T f) (z : polynomial R) :\n    h.aequiv h' (h.map z) = h'.map z := by rw [aequiv, alg_equiv.coe_mk, lift_hom_map, aeval_eq]\n#align aequiv_map aequiv_map\n\n",
+ "aequiv_aequiv":
+ "@[simp]\ntheorem aequiv_aequiv {U : Type _} [CommRing U] [algebra R U] (h : is_adjoin_root S f) (h' : is_adjoin_root T f)\n    (h'' : is_adjoin_root U f) (x) : (h'.aequiv h'') (h.aequiv h' x) = h.aequiv h'' x :=\n  h.lift_hom_aequiv _ _ h''.aeval_root _\n#align aequiv_aequiv aequiv_aequiv\n\n"}

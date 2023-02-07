@@ -1,0 +1,120 @@
+{"to_ring_hom_to_rat_alg_hom":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℚ -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℚ -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₐ[ ] » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℚ -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →+* » -/\n@[simp]\ntheorem alg_hom.to_ring_hom_to_rat_alg_hom [Ring R] [Ring S] [algebra (exprℚ) R] [algebra (exprℚ) S]\n    (f : «expr →ₐ[ ] » R (exprℚ) S) : (f : «expr →+* » R S).to_rat_alg_hom = f :=\n  alg_hom.ext fun x => rfl\n#align alg_hom.to_ring_hom_to_rat_alg_hom alg_hom.to_ring_hom_to_rat_alg_hom\n\n",
+ "to_ring_hom_eq_coe":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₐ[ ] » -/\n-- make the coercion the simp-normal form\n@[simp]\ntheorem to_ring_hom_eq_coe (f : «expr →ₐ[ ] » A R B) : f.to_ring_hom = f :=\n  rfl\n#align to_ring_hom_eq_coe to_ring_hom_eq_coe\n\n",
+ "to_rat_alg_hom_to_ring_hom":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℚ -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℚ -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →+* » -/\n@[simp]\ntheorem to_rat_alg_hom_to_ring_hom [Ring R] [Ring S] [algebra (exprℚ) R] [algebra (exprℚ) S] (f : «expr →+* » R S) :\n    ↑f.to_rat_alg_hom = f :=\n  RingHom.ext fun x => rfl\n#align to_rat_alg_hom_to_ring_hom to_rat_alg_hom_to_ring_hom\n\n",
+ "to_linear_map_of_linear_map":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₗ[ ] » -/\n@[simp]\ntheorem to_linear_map_of_linear_map (f : «expr →ₗ[ ] » A R B) (map_one) (map_mul) :\n    to_linear_map (of_linear_map f map_one map_mul) = f :=\n  by\n  ext\n  rfl\n#align to_linear_map_of_linear_map to_linear_map_of_linear_map\n\n",
+ "to_linear_map_injective":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₗ[ ] » -/\ntheorem to_linear_map_injective : function.injective (to_linear_map : _ → «expr →ₗ[ ] » A R B) := fun φ₁ φ₂ h =>\n  ext <| linear_map.congr_fun h\n#align to_linear_map_injective to_linear_map_injective\n\n",
+ "to_linear_map_id":
+ "@[simp]\ntheorem to_linear_map_id : to_linear_map (alg_hom.id R A) = linear_map.id :=\n  linear_map.ext fun _ => rfl\n#align to_linear_map_id to_linear_map_id\n\n",
+ "to_linear_map_apply":
+ "@[simp]\ntheorem to_linear_map_apply (p : A) : φ.to_linear_map p = φ p :=\n  rfl\n#align to_linear_map_apply to_linear_map_apply\n\n",
+ "to_fun_eq_coe":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₐ[ ] » -/\n@[simp]\ntheorem to_fun_eq_coe (f : «expr →ₐ[ ] » A R B) : f.to_fun = f :=\n  rfl\n#align to_fun_eq_coe to_fun_eq_coe\n\n",
+ "to_alg_hom_injective":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₐ[ ] » -/\ntheorem to_alg_hom_injective [FaithfulSMul M A] :\n    function.injective (mul_semiring_action.to_alg_hom R A : M → «expr →ₐ[ ] » A R A) := fun m₁ m₂ h =>\n  eq_of_smul_eq_smul fun r => alg_hom.ext_iff.1 h r\n#align to_alg_hom_injective to_alg_hom_injective\n\n",
+ "one_apply":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₐ[ ] » -/\n@[simp]\ntheorem one_apply (x : A) : (1 : «expr →ₐ[ ] » A R A) x = x :=\n  rfl\n#align one_apply one_apply\n\n",
+ "of_linear_map_to_linear_map":
+ "@[simp]\ntheorem of_linear_map_to_linear_map (map_one) (map_mul) : of_linear_map φ.to_linear_map map_one map_mul = φ :=\n  by\n  ext\n  rfl\n#align of_linear_map_to_linear_map of_linear_map_to_linear_map\n\n",
+ "of_linear_map_id":
+ "@[simp]\ntheorem of_linear_map_id (map_one) (map_mul) : of_linear_map linear_map.id map_one map_mul = alg_hom.id R A :=\n  ext fun _ => rfl\n#align of_linear_map_id of_linear_map_id\n\n",
+ "of_id_apply":
+ "theorem of_id_apply (r) : of_id R A r = algebra_map R A r :=\n  rfl\n#align of_id_apply of_id_apply\n\n",
+ "mul_apply":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₐ[ ] » -/\n@[simp]\ntheorem mul_apply (φ ψ : «expr →ₐ[ ] » A R A) (x : A) : (φ * ψ) x = φ (ψ x) :=\n  rfl\n#align mul_apply mul_apply\n\n",
+ "mk_coe":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₐ[ ] » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₐ[ ] » -/\n@[simp]\ntheorem mk_coe {f : «expr →ₐ[ ] » A R B} (h₁ h₂ h₃ h₄ h₅) : (⟨f, h₁, h₂, h₃, h₄, h₅⟩ : «expr →ₐ[ ] » A R B) = f :=\n  ext fun _ => rfl\n#align mk_coe mk_coe\n\n",
+ "map_zero":
+ "#print map_zero /-\nprotected theorem map_zero : φ 0 = 0 :=\n  map_zero _\n#align map_zero map_zero\n-/\n\n",
+ "map_sum":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `finset.sum -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.sum -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `finset.sum -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.sum -/\nprotected theorem map_sum {ι : Type _} (f : ι → A) (s : Finset ι) :\n    φ (finset.sum \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.sum\" s (f x)) =\n      finset.sum \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.sum\" s (φ (f x)) :=\n  map_sum _ _ _\n#align map_sum map_sum\n\n",
+ "map_sub":
+ "#print map_sub /-\nprotected theorem map_sub (x y) : φ (x - y) = φ x - φ y :=\n  map_sub _ _ _\n#align map_sub map_sub\n-/\n\n",
+ "map_smul_of_tower":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\ntheorem map_smul_of_tower {R'} [SMul R' A] [SMul R' B] [linear_map.compatible_smul A B R' R] (r : R') (x : A) :\n    φ («expr • » r x) = «expr • » r (φ x) :=\n  φ.to_linear_map.map_smul_of_tower r x\n#align map_smul_of_tower map_smul_of_tower\n\n",
+ "map_smul":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n@[simp]\nprotected theorem map_smul (r : R) (x : A) : φ («expr • » r x) = «expr • » r (φ x) :=\n  map_smul _ _ _\n#align map_smul map_smul\n\n",
+ "map_prod":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `finset.prod -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.prod -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `finset.prod -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.prod -/\nprotected theorem map_prod {ι : Type _} (f : ι → A) (s : Finset ι) :\n    φ (finset.prod \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.prod\" s (f x)) =\n      finset.prod \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.prod\" s (φ (f x)) :=\n  map_prod _ _ _\n#align map_prod map_prod\n\n",
+ "map_pow":
+ "#print map_pow /-\nprotected theorem map_pow (x : A) (n : ℕ) : φ (x ^ n) = φ x ^ n :=\n  map_pow _ _ _\n#align map_pow map_pow\n-/\n\n",
+ "map_one":
+ "#print map_one /-\nprotected theorem map_one : φ 1 = 1 :=\n  map_one _\n#align map_one map_one\n-/\n\n",
+ "map_neg":
+ "#print map_neg /-\nprotected theorem map_neg (x) : φ (-x) = -φ x :=\n  map_neg _ _\n#align map_neg map_neg\n-/\n\n",
+ "map_multiset_prod":
+ "#print map_multiset_prod /-\nprotected theorem map_multiset_prod (s : Multiset A) : φ s.prod = (s.map φ).prod :=\n  map_multiset_prod _ _\n#align map_multiset_prod map_multiset_prod\n-/\n\n",
+ "map_mul":
+ "#print map_mul /-\nprotected theorem map_mul (x y) : φ (x * y) = φ x * φ y :=\n  map_mul _ _ _\n#align map_mul map_mul\n-/\n\n",
+ "map_list_prod":
+ "#print map_list_prod /-\ntheorem map_list_prod (s : list A) : φ s.prod = (s.map φ).prod :=\n  φ.to_ring_hom.map_list_prod s\n#align map_list_prod map_list_prod\n-/\n\n",
+ "map_finsupp_sum":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →₀ » -/\nprotected theorem map_finsupp_sum {α : Type _} [Zero α] {ι : Type _} (f : «expr →₀ » ι α) (g : ι → α → A) :\n    φ (f.sum g) = f.sum fun i a => φ (g i a) :=\n  map_finsupp_sum _ _ _\n#align map_finsupp_sum map_finsupp_sum\n\n",
+ "map_finsupp_prod":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →₀ » -/\nprotected theorem map_finsupp_prod {α : Type _} [Zero α] {ι : Type _} (f : «expr →₀ » ι α) (g : ι → α → A) :\n    φ (f.prod g) = f.prod fun i a => φ (g i a) :=\n  map_finsupp_prod _ _ _\n#align map_finsupp_prod map_finsupp_prod\n\n",
+ "map_bit1":
+ "protected theorem map_bit1 (x) : φ (bit1 x) = bit1 (φ x) :=\n  map_bit1 _ _\n#align map_bit1 map_bit1\n\n",
+ "map_bit0":
+ "#print map_bit0 /-\nprotected theorem map_bit0 (x) : φ (bit0 x) = bit0 (φ x) :=\n  map_bit0 _ _\n#align map_bit0 map_bit0\n-/\n\n",
+ "map_add":
+ "#print map_add /-\nprotected theorem map_add (r s : A) : φ (r + s) = φ r + φ s :=\n  map_add _ _ _\n#align map_add map_add\n-/\n\n",
+ "id_to_ring_hom":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →+* » -/\n@[simp]\ntheorem id_to_ring_hom : (alg_hom.id R A : «expr →+* » A A) = RingHom.id _ :=\n  rfl\n#align id_to_ring_hom id_to_ring_hom\n\n",
+ "id_comp":
+ "@[simp]\ntheorem id_comp : (alg_hom.id R B).comp φ = φ :=\n  ext fun x => rfl\n#align id_comp id_comp\n\n",
+ "id_apply":
+ "theorem id_apply (p : A) : alg_hom.id R A p = p :=\n  rfl\n#align id_apply id_apply\n\n",
+ "ext_iff":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₐ[ ] » -/\ntheorem ext_iff {φ₁ φ₂ : «expr →ₐ[ ] » A R B} : φ₁ = φ₂ ↔ ∀ x, φ₁ x = φ₂ x :=\n  fun_like.ext_iff\n#align ext_iff ext_iff\n\n",
+ "ext":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₐ[ ] » -/\n@[ext]\ntheorem ext {φ₁ φ₂ : «expr →ₐ[ ] » A R B} (H : ∀ x, φ₁ x = φ₂ x) : φ₁ = φ₂ :=\n  fun_like.ext _ _ H\n#align ext ext\n\n",
+ "congr_fun":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₐ[ ] » -/\n#print congr_fun /-\nprotected theorem congr_fun {φ₁ φ₂ : «expr →ₐ[ ] » A R B} (H : φ₁ = φ₂) (x : A) : φ₁ x = φ₂ x :=\n  fun_like.congr_fun H x\n#align congr_fun congr_fun\n-/\n\n",
+ "congr_arg":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₐ[ ] » -/\n#print congr_arg /-\nprotected theorem congr_arg (φ : «expr →ₐ[ ] » A R B) {x y : A} (h : x = y) : φ x = φ y :=\n  fun_like.congr_arg φ h\n#align congr_arg congr_arg\n-/\n\n",
+ "comp_to_ring_hom":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₐ[ ] » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₐ[ ] » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →+* » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →+* » -/\ntheorem comp_to_ring_hom (φ₁ : «expr →ₐ[ ] » B R C) (φ₂ : «expr →ₐ[ ] » A R B) :\n    (φ₁.comp φ₂ : «expr →+* » A C) = (φ₁ : «expr →+* » B C).comp ↑φ₂ :=\n  rfl\n#align comp_to_ring_hom comp_to_ring_hom\n\n",
+ "comp_to_linear_map":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₐ[ ] » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₐ[ ] » -/\n@[simp]\ntheorem comp_to_linear_map (f : «expr →ₐ[ ] » A R B) (g : «expr →ₐ[ ] » B R C) :\n    (g.comp f).to_linear_map = g.to_linear_map.comp f.to_linear_map :=\n  rfl\n#align comp_to_linear_map comp_to_linear_map\n\n",
+ "comp_id":
+ "@[simp]\ntheorem comp_id : φ.comp (alg_hom.id R A) = φ :=\n  ext fun x => rfl\n#align comp_id comp_id\n\n",
+ "comp_assoc":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₐ[ ] » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₐ[ ] » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₐ[ ] » -/\ntheorem comp_assoc (φ₁ : «expr →ₐ[ ] » C R D) (φ₂ : «expr →ₐ[ ] » B R C) (φ₃ : «expr →ₐ[ ] » A R B) :\n    (φ₁.comp φ₂).comp φ₃ = φ₁.comp (φ₂.comp φ₃) :=\n  ext fun x => rfl\n#align comp_assoc comp_assoc\n\n",
+ "comp_apply":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₐ[ ] » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₐ[ ] » -/\ntheorem comp_apply (φ₁ : «expr →ₐ[ ] » B R C) (φ₂ : «expr →ₐ[ ] » A R B) (p : A) : φ₁.comp φ₂ p = φ₁ (φ₂ p) :=\n  rfl\n#align comp_apply comp_apply\n\n",
+ "comp_algebra_map":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →+* » -/\ntheorem comp_algebra_map : (φ : «expr →+* » A B).comp (algebra_map R A) = algebra_map R B :=\n  RingHom.ext <| φ.commutes\n#align comp_algebra_map comp_algebra_map\n\n",
+ "commutes":
+ "@[simp]\ntheorem commutes (r : R) : φ (algebra_map R A r) = algebra_map R B r :=\n  φ.commutes' r\n#align commutes commutes\n\n",
+ "coe_to_ring_hom":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₐ[ ] » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →+* » -/\n@[simp, norm_cast]\ntheorem coe_to_ring_hom (f : «expr →ₐ[ ] » A R B) : «expr⇑ » (f : «expr →+* » A B) = f :=\n  rfl\n#align coe_to_ring_hom coe_to_ring_hom\n\n",
+ "coe_to_monoid_hom":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₐ[ ] » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →* » -/\n@[simp, norm_cast]\ntheorem coe_to_monoid_hom (f : «expr →ₐ[ ] » A R B) : «expr⇑ » (f : «expr →* » A B) = f :=\n  rfl\n#align coe_to_monoid_hom coe_to_monoid_hom\n\n",
+ "coe_to_add_monoid_hom":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₐ[ ] » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →+ » -/\n@[simp, norm_cast]\ntheorem coe_to_add_monoid_hom (f : «expr →ₐ[ ] » A R B) : «expr⇑ » (f : «expr →+ » A B) = f :=\n  rfl\n#align coe_to_add_monoid_hom coe_to_add_monoid_hom\n\n",
+ "coe_ring_hom_injective":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →+* » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →+* » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₐ[ ] » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →+* » -/\ntheorem coe_ring_hom_injective : function.injective (coe : «expr →ₐ[ ] » A R B → «expr →+* » A B) := fun φ₁ φ₂ H =>\n  coe_fn_injective <| show ((φ₁ : «expr →+* » A B) : A → B) = ((φ₂ : «expr →+* » A B) : A → B) from congr_arg _ H\n#align coe_ring_hom_injective coe_ring_hom_injective\n\n",
+ "coe_monoid_hom_injective":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₐ[ ] » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →* » -/\ntheorem coe_monoid_hom_injective : function.injective (coe : «expr →ₐ[ ] » A R B → «expr →* » A B) :=\n  RingHom.coe_monoidHom_injective.comp coe_ring_hom_injective\n#align coe_monoid_hom_injective coe_monoid_hom_injective\n\n",
+ "coe_mk'":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →+* » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n@[simp]\ntheorem coe_mk' (f : «expr →+* » A B) (h : ∀ (c : R) (x), f («expr • » c x) = «expr • » c (f x)) :\n    «expr⇑ » (mk' f h) = f :=\n  rfl\n#align coe_mk' coe_mk'\n\n",
+ "coe_mk":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₐ[ ] » -/\n@[simp, norm_cast]\ntheorem coe_mk {f : A → B} (h₁ h₂ h₃ h₄ h₅) : «expr⇑ » (⟨f, h₁, h₂, h₃, h₄, h₅⟩ : «expr →ₐ[ ] » A R B) = f :=\n  rfl\n#align coe_mk coe_mk\n\n",
+ "coe_id":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n@[simp]\ntheorem coe_id : «expr⇑ » (alg_hom.id R A) = id :=\n  rfl\n#align coe_id coe_id\n\n",
+ "coe_fn_injective":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₐ[ ] » -/\ntheorem coe_fn_injective : @function.injective («expr →ₐ[ ] » A R B) (A → B) coe_fn :=\n  fun_like.coe_injective\n#align coe_fn_injective coe_fn_injective\n\n",
+ "coe_fn_inj":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₐ[ ] » -/\ntheorem coe_fn_inj {φ₁ φ₂ : «expr →ₐ[ ] » A R B} : (φ₁ : A → B) = φ₂ ↔ φ₁ = φ₂ :=\n  fun_like.coe_fn_eq\n#align coe_fn_inj coe_fn_inj\n\n",
+ "coe_comp":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₐ[ ] » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₐ[ ] » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n@[simp]\ntheorem coe_comp (φ₁ : «expr →ₐ[ ] » B R C) (φ₂ : «expr →ₐ[ ] » A R B) : «expr⇑ » (φ₁.comp φ₂) = φ₁ ∘ φ₂ :=\n  rfl\n#align coe_comp coe_comp\n\n",
+ "coe_coe":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₐ[ ] » -/\n/-\nCopyright (c) 2018 Kenny Lau. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Kenny Lau, Yury Kudryashov\n-/\n-- `R` becomes a metavariable but that's fine because it's an `out_param`\n-- see Note [lower instance priority]\n@[simp, protected]\ntheorem coe_coe {F : Type _} [alg_hom_class F R A B] (f : F) : «expr⇑ » (f : «expr →ₐ[ ] » A R B) = f :=\n  rfl\n#align coe_coe coe_coe\n\n",
+ "coe_add_monoid_hom_injective":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₐ[ ] » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →+ » -/\ntheorem coe_add_monoid_hom_injective : function.injective (coe : «expr →ₐ[ ] » A R B → «expr →+ » A B) :=\n  RingHom.coe_addMonoidHom_injective.comp coe_ring_hom_injective\n#align coe_add_monoid_hom_injective coe_add_monoid_hom_injective\n\n",
+ "algebra_map_eq_apply":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₐ[ ] » -/\ntheorem algebra_map_eq_apply (f : «expr →ₐ[ ] » A R B) {y : R} {x : A} (h : algebra_map R A y = x) :\n    algebra_map R B y = f x :=\n  h ▸ (f.commutes _).symm\n#align algebra_map_eq_apply algebra_map_eq_apply\n\n"}

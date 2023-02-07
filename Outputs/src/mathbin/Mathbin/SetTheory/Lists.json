@@ -1,0 +1,42 @@
+{"trans":
+ "theorem subset.trans {l₁ l₂ l₃ : lists' α true} (h₁ : l₁ ⊆ l₂) (h₂ : l₂ ⊆ l₃) : l₁ ⊆ l₃ :=\n  subset_def.2 fun a₁ m₁ => mem_of_subset h₂ <| mem_of_subset' h₁ m₁\n#align subset.trans subset.trans\n\n",
+ "to_of_list":
+ "theorem to_of_list (l : list (lists α)) : to_list (of_list l) = l := by simp [of_list, of']\n#align to_of_list to_of_list\n\n",
+ "to_list_cons":
+ "/-\nCopyright (c) 2018 Mario Carneiro. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Mario Carneiro\n-/\n@[simp]\ntheorem to_list_cons (a : lists α) (l) : to_list (cons a l) = a :: l.to_list := by cases a <;> simp [cons]\n#align to_list_cons to_list_cons\n\n",
+ "symm":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ~ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ~ » -/\ntheorem equiv.symm {l₁ l₂ : lists α} (h : «expr ~ » l₁ l₂) : «expr ~ » l₂ l₁ := by\n  cases' h with _ _ _ h₁ h₂ <;> [rfl, exact equiv.antisymm h₂ h₁]\n#align equiv.symm equiv.symm\n\n",
+ "subset_nil":
+ "theorem subset_nil {l : lists' α true} : l ⊆ lists'.nil → l = lists'.nil :=\n  by\n  rw [← of_to_list l]\n  induction to_list l <;> intro h; · rfl\n  rcases cons_subset.1 h with ⟨⟨_, ⟨⟩, _⟩, _⟩\n#align subset_nil subset_nil\n\n",
+ "subset_def":
+ "theorem subset_def {l₁ l₂ : lists' α true} : l₁ ⊆ l₂ ↔ ∀ a ∈ l₁.to_list, a ∈ l₂ :=\n  ⟨fun H a => mem_of_subset' H, fun H => by\n    rw [← of_to_list l₁]\n    revert H; induction to_list l₁ <;> intro\n    · exact subset.nil\n    · simp at H\n      exact cons_subset.2 ⟨H.1, ih H.2⟩⟩\n#align subset_def subset_def\n\n",
+ "sizeof_pos":
+ "theorem sizeof_pos {b} (l : lists' α b) : 0 < SizeOf.sizeOf l := by\n  cases l <;>\n    run_tac\n      andthen unfold_sizeof trivial_nat_lt\n#align sizeof_pos sizeof_pos\n\n",
+ "refl":
+ "@[refl]\ntheorem subset.refl {l : lists' α true} : l ⊆ l := by\n  rw [← lists'.of_to_list l] <;> exact of_list_subset (list.subset.refl _)\n#align subset.refl subset.refl\n\n",
+ "of_to_list":
+ "theorem of_to_list : ∀ {l : lists α}, is_list l → of_list (to_list l) = l\n  | ⟨tt, l⟩, _ => by simp [of_list, of']\n#align of_to_list of_to_list\n\n",
+ "of_list_subset":
+ "theorem of_list_subset {l₁ l₂ : list (lists α)} (h : l₁ ⊆ l₂) : lists'.of_list l₁ ⊆ lists'.of_list l₂ :=\n  by\n  induction l₁; · exact subset.nil\n  refine' subset.cons (lists.equiv.refl _) _ (l₁_ih (list.subset_of_cons_subset h))\n  simp at h; simp [h]\n#align of_list_subset of_list_subset\n\n",
+ "mem_of_subset'":
+ "theorem mem_of_subset' {a} {l₁ l₂ : lists' α true} (s : l₁ ⊆ l₂) (h : a ∈ l₁.to_list) : a ∈ l₂ :=\n  by\n  induction' s with _ a a' l l' e m s IH; · cases h\n  simp at h; rcases h with (rfl | h)\n  exacts[⟨_, m, e⟩, IH h]\n#align mem_of_subset' mem_of_subset'\n\n",
+ "mem_of_subset":
+ "theorem mem_of_subset {a} {l₁ l₂ : lists' α true} (s : l₁ ⊆ l₂) : a ∈ l₁ → a ∈ l₂\n  | ⟨a', m, e⟩ => (mem_equiv_left e).2 (mem_of_subset' s m)\n#align mem_of_subset mem_of_subset\n\n",
+ "mem_equiv_left":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ~ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ~ » -/\ntheorem mem_equiv_left {l : lists' α true} : ∀ {a a'}, «expr ~ » a a' → (a ∈ l ↔ a' ∈ l) :=\n  suffices ∀ {a a'}, «expr ~ » a a' → a ∈ l → a' ∈ l from fun a a' e => ⟨this e, this e.symm⟩\n  fun a₁ a₂ e₁ ⟨a₃, m₃, e₂⟩ => ⟨_, m₃, e₁.symm.trans e₂⟩\n#align mem_equiv_left mem_equiv_left\n\n",
+ "mem_def":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ~ » -/\ntheorem mem_def {b a} {l : lists' α b} : a ∈ l ↔ ∃ a' ∈ l.to_list, «expr ~ » a a' :=\n  iff.rfl\n#align mem_def mem_def\n\n",
+ "mem_cons":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ~ » -/\n@[simp]\ntheorem mem_cons {a y l} : a ∈ @cons α y l ↔ «expr ~ » a y ∨ a ∈ l := by simp [mem_def, or_and_right, exists_or]\n#align mem_cons mem_cons\n\n",
+ "lt_sizeof_cons'":
+ "/- ./././Mathport/Syntax/Translate/Tactic/Builtin.lean:72:18: unsupported non-interactive tactic well_founded_tactics.unfold_sizeof -/\ntheorem lt_sizeof_cons' {b} (a : lists' α b) (l) :\n    SizeOf.sizeOf (⟨b, a⟩ : lists α) < SizeOf.sizeOf (lists'.cons' a l) :=\n  by\n  run_tac\n    unfold_sizeof\n  apply sizeof_pos\n#align lt_sizeof_cons' lt_sizeof_cons'\n\n",
+ "is_list_to_list":
+ "theorem is_list_to_list (l : list (lists α)) : is_list (of_list l) :=\n  eq.refl _\n#align is_list_to_list is_list_to_list\n\n",
+ "is_list_of_mem":
+ "theorem is_list_of_mem {a : lists α} : ∀ {l : lists α}, a ∈ l → is_list l\n  | ⟨_, lists'.nil⟩, _ => rfl\n  | ⟨_, lists'.cons' _ _⟩, _ => rfl\n#align is_list_of_mem is_list_of_mem\n\n",
+ "equiv_atom":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ~ » -/\ntheorem equiv_atom {a} {l : lists α} : «expr ~ » (atom a) l ↔ atom a = l :=\n  ⟨fun h => by cases h <;> rfl, fun h => h ▸ equiv.refl _⟩\n#align equiv_atom equiv_atom\n\n",
+ "cons_subset":
+ "theorem cons_subset {a} {l₁ l₂ : lists' α true} : lists'.cons a l₁ ⊆ l₂ ↔ a ∈ l₂ ∧ l₁ ⊆ l₂ :=\n  by\n  refine' ⟨fun h => _, fun ⟨⟨a', m, e⟩, s⟩ => subset.cons e m s⟩\n  generalize h' : lists'.cons a l₁ = l₁' at h\n  cases' h with l a' a'' l l' e m s;\n  · cases a\n    cases h'\n  cases a; cases a'; cases h'; exact ⟨⟨_, m, e⟩, s⟩\n#align cons_subset cons_subset\n\n",
+ "antisymm_iff":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ~ » -/\ntheorem equiv.antisymm_iff {l₁ l₂ : lists' α true} : «expr ~ » (of' l₁) (of' l₂) ↔ l₁ ⊆ l₂ ∧ l₂ ⊆ l₁ :=\n  by\n  refine' ⟨fun h => _, fun ⟨h₁, h₂⟩ => equiv.antisymm h₁ h₂⟩\n  cases' h with _ _ _ h₁ h₂\n  · simp [lists'.subset.refl]; · exact ⟨h₁, h₂⟩\n#align equiv.antisymm_iff equiv.antisymm_iff\n\n"}

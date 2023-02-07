@@ -1,0 +1,28 @@
+{"mul_right_symm_apply":
+ "/-- Extra simp lemma that `dsimp` can use. `simp` will never use this. -/\n@[simp, nolint simp_nf, to_additive \"Extra simp lemma that `dsimp` can use. `simp` will never use this.\"]\ntheorem mul_right_symm_apply (a : G) : ((Equiv.mulRight a).symm : G → G) = fun x => x * a⁻¹ :=\n  rfl\n#align mul_right_symm_apply mul_right_symm_apply\n\n",
+ "mul_right_symm":
+ "@[simp, to_additive]\ntheorem mul_right_symm (a : G) : (Equiv.mulRight a).symm = Equiv.mulRight a⁻¹ :=\n  ext fun x => rfl\n#align mul_right_symm mul_right_symm\n\n",
+ "mul_right_bijective":
+ "#print Group.mulRight_bijective /-\n@[to_additive]\ntheorem Group.mulRight_bijective (a : G) : function.bijective (· * a) :=\n  (Equiv.mulRight a).bijective\n#align group.mul_right_bijective Group.mulRight_bijective\n-/\n\n",
+ "mul_left_symm_apply":
+ "/-- Extra simp lemma that `dsimp` can use. `simp` will never use this. -/\n@[simp, nolint simp_nf, to_additive \"Extra simp lemma that `dsimp` can use. `simp` will never use this.\"]\ntheorem mul_left_symm_apply (a : G) : ((Equiv.mulLeft a).symm : G → G) = (· * ·) a⁻¹ :=\n  rfl\n#align mul_left_symm_apply mul_left_symm_apply\n\n",
+ "mul_left_symm":
+ "@[simp, to_additive]\ntheorem mul_left_symm (a : G) : (Equiv.mulLeft a).symm = Equiv.mulLeft a⁻¹ :=\n  ext fun x => rfl\n#align mul_left_symm mul_left_symm\n\n",
+ "mul_left_bijective":
+ "#print Group.mulLeft_bijective /-\n@[to_additive]\ntheorem Group.mulLeft_bijective (a : G) : function.bijective ((· * ·) a) :=\n  (Equiv.mulLeft a).bijective\n#align group.mul_left_bijective Group.mulLeft_bijective\n-/\n\n",
+ "map_equiv_symm":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃* » -/\n@[simp]\ntheorem map_equiv_symm (h : «expr ≃* » M N) : (mapEquiv h).symm = mapEquiv h.symm :=\n  rfl\n#align map_equiv_symm map_equiv_symm\n\n",
+ "inv_symm":
+ "#print MulEquiv.inv_symm /-\n@[simp]\ntheorem MulEquiv.inv_symm (G : Type _) [division_comm_monoid G] : (MulEquiv.inv G).symm = MulEquiv.inv G :=\n  rfl\n#align mul_equiv.inv_symm MulEquiv.inv_symm\n-/\n\n",
+ "div_right_eq_mul_right_inv":
+ "@[to_additive]\ntheorem div_right_eq_mul_right_inv (a : G) : Equiv.divRight a = Equiv.mulRight a⁻¹ :=\n  ext fun _ => div_eq_mul_inv _ _\n#align div_right_eq_mul_right_inv div_right_eq_mul_right_inv\n\n",
+ "div_left_eq_inv_trans_mul_left":
+ "@[to_additive]\ntheorem div_left_eq_inv_trans_mul_left (a : G) : Equiv.divLeft a = (Equiv.inv G).trans (Equiv.mulLeft a) :=\n  ext fun _ => div_eq_mul_inv _ _\n#align div_left_eq_inv_trans_mul_left div_left_eq_inv_trans_mul_left\n\n",
+ "coe_toUnits":
+ "#print coe_toUnits /-\n/-\nCopyright (c) 2018 Johannes Hölzl. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Johannes Hölzl, Callum Sutton, Yury Kudryashov\n-/\n@[simp, to_additive]\ntheorem coe_toUnits [group G] (g : G) : (toUnits g : G) = g :=\n  rfl\n#align coe_to_units coe_toUnits\n-/\n\n",
+ "coe_mul_right":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n@[simp, to_additive]\ntheorem coe_mul_right (a : G) : «expr⇑ » (Equiv.mulRight a) = fun x => x * a :=\n  rfl\n#align coe_mul_right coe_mul_right\n\n",
+ "coe_mul_left":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n@[simp, to_additive]\ntheorem coe_mul_left (a : G) : «expr⇑ » (Equiv.mulLeft a) = (· * ·) a :=\n  rfl\n#align coe_mul_left coe_mul_left\n\n",
+ "coe_map_equiv":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃* » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ˣ» -/\n@[simp]\ntheorem coe_map_equiv (h : «expr ≃* » M N) (x : «expr ˣ» M) : (mapEquiv h x : N) = h x :=\n  rfl\n#align coe_map_equiv coe_map_equiv\n\n"}

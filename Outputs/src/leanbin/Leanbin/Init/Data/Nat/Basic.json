@@ -1,0 +1,66 @@
+{"zero_lt_succ":
+ "theorem zero_lt_succ (n : ℕ) : 0 < succ n :=\n  succ_le_succ n.zero_le\n#align zero_lt_succ zero_lt_succ\n\n",
+ "zero_lt_bit1":
+ "protected theorem zero_lt_bit1 (n : nat) : 0 < bit1 n :=\n  zero_lt_succ _\n#align zero_lt_bit1 zero_lt_bit1\n\n",
+ "zero_lt_bit0":
+ "#print zero_lt_bit0 /-\nprotected theorem zero_lt_bit0 : ∀ {n : nat}, n ≠ 0 → 0 < bit0 n\n  | 0, h => absurd rfl h\n  | succ n, h =>\n    calc\n      0 < succ (succ (bit0 n)) := zero_lt_succ _\n      _ = bit0 (succ n) := (Nat.bit0_succ_eq n).symm\n      \n#align zero_lt_bit0 zero_lt_bit0\n-/\n\n",
+ "zero_le":
+ "#print zero_le /-\nprotected theorem zero_le : ∀ n : ℕ, 0 ≤ n\n  | 0 => nat.le_refl 0\n  | n + 1 => less_than_or_equal.step (zero_le n)\n#align zero_le zero_le\n-/\n\n",
+ "zero_add":
+ "#print zero_add /-\nprotected theorem zero_add : ∀ n : ℕ, 0 + n = n\n  | 0 => rfl\n  | n + 1 => congr_arg succ (zero_add n)\n#align zero_add zero_add\n-/\n\n",
+ "succ_sub_succ_eq_sub":
+ "@[simp]\ntheorem succ_sub_succ_eq_sub (a b : ℕ) : succ a - succ b = a - b :=\n  nat.rec_on b (show succ a - succ zero = a - zero from eq.refl (succ a - succ zero)) fun b => congr_arg pred\n#align succ_sub_succ_eq_sub succ_sub_succ_eq_sub\n\n",
+ "succ_pos":
+ "theorem succ_pos (n : ℕ) : 0 < succ n :=\n  zero_lt_succ n\n#align succ_pos succ_pos\n\n",
+ "succ_le_succ":
+ "theorem succ_le_succ {n m : ℕ} : n ≤ m → succ n ≤ succ m := fun h =>\n  less_than_or_equal.rec (nat.le_refl (succ n)) (fun a b => less_than_or_equal.step) h\n#align succ_le_succ succ_le_succ\n\n",
+ "succ_eq_add_one":
+ "theorem succ_eq_add_one (n : ℕ) : succ n = n + 1 :=\n  rfl\n#align succ_eq_add_one succ_eq_add_one\n\n",
+ "succ_add":
+ "theorem succ_add : ∀ n m : ℕ, succ n + m = succ (n + m)\n  | n, 0 => rfl\n  | n, m + 1 => congr_arg succ (succ_add n m)\n#align succ_add succ_add\n\n",
+ "sub_lt":
+ "protected theorem sub_lt : ∀ {a b : ℕ}, 0 < a → 0 < b → a - b < a\n  | 0, b, h1, h2 => absurd h1 (nat.lt_irrefl 0)\n  | a + 1, 0, h1, h2 => absurd h2 (nat.lt_irrefl 0)\n  | a + 1, b + 1, h1, h2 => eq.symm (succ_sub_succ_eq_sub a b) ▸ show a - b < succ a from lt_succ_of_le (a.sub_le b)\n#align sub_lt sub_lt\n\n",
+ "sub_le":
+ "protected theorem sub_le (a b : ℕ) : a - b ≤ a :=\n  nat.rec_on b (nat.le_refl (a - 0)) fun b₁ => nat.le_trans (pred_le (a - b₁))\n#align sub_le sub_le\n\n",
+ "pred_lt":
+ "theorem pred_lt : ∀ {n : ℕ}, n ≠ 0 → pred n < n\n  | 0, h => absurd rfl h\n  | succ a, h => lt_succ_of_le less_than_or_equal.refl\n#align pred_lt pred_lt\n\n",
+ "pred_le_pred":
+ "theorem pred_le_pred {n m : ℕ} : n ≤ m → pred n ≤ pred m := fun h =>\n  less_than_or_equal.rec_on h (nat.le_refl (pred n)) fun n =>\n    nat.rec (fun a b => b) (fun a b c => less_than_or_equal.step) n\n#align pred_le_pred pred_le_pred\n\n",
+ "pred_le":
+ "theorem pred_le : ∀ n : ℕ, pred n ≤ n\n  | 0 => less_than_or_equal.refl\n  | succ a => less_than_or_equal.step less_than_or_equal.refl\n#align pred_le pred_le\n\n",
+ "not_succ_le_zero":
+ "theorem not_succ_le_zero : ∀ n : ℕ, succ n ≤ 0 → false :=\n  fun.\n#align not_succ_le_zero not_succ_le_zero\n\n",
+ "not_succ_le_self":
+ "theorem not_succ_le_self : ∀ n : ℕ, ¬succ n ≤ n := fun n =>\n  nat.rec (not_succ_le_zero 0) (fun a b c => b (le_of_succ_le_succ c)) n\n#align not_succ_le_self not_succ_le_self\n\n",
+ "not_lt_zero":
+ "protected theorem not_lt_zero (a : ℕ) : ¬a < 0 :=\n  not_succ_le_zero a\n#align not_lt_zero not_lt_zero\n\n",
+ "nat_zero_eq_zero":
+ "/-\nCopyright (c) 2014 Microsoft Corporation. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Floris van Doorn, Leonardo de Moura\n-/\n-- defeq to the instance provided by comm_semiring\n@[simp]\ntheorem nat_zero_eq_zero : nat.zero = 0 :=\n  rfl\n#align nat_zero_eq_zero nat_zero_eq_zero\n\n",
+ "lt_succ_of_le":
+ "theorem lt_succ_of_le {a b : ℕ} : a ≤ b → a < succ b :=\n  succ_le_succ\n#align lt_succ_of_le lt_succ_of_le\n\n",
+ "lt_of_lt_of_le":
+ "#print lt_of_lt_of_le /-\nprotected theorem lt_of_lt_of_le {n m k : ℕ} : n < m → m ≤ k → n < k :=\n  nat.le_trans\n#align lt_of_lt_of_le lt_of_lt_of_le\n-/\n\n",
+ "lt_irrefl":
+ "#print lt_irrefl /-\nprotected theorem lt_irrefl (n : ℕ) : ¬n < n :=\n  not_succ_le_self n\n#align lt_irrefl lt_irrefl\n-/\n\n",
+ "le_trans":
+ "#print le_trans /-\nprotected theorem le_trans {n m k : ℕ} (h1 : n ≤ m) : m ≤ k → n ≤ k :=\n  less_than_or_equal.rec h1 fun p h2 => less_than_or_equal.step\n#align le_trans le_trans\n-/\n\n",
+ "le_succ":
+ "theorem le_succ (n : ℕ) : n ≤ succ n :=\n  less_than_or_equal.step (nat.le_refl n)\n#align le_succ le_succ\n\n",
+ "le_refl":
+ "#print le_refl /-\n@[refl]\nprotected theorem le_refl (a : ℕ) : a ≤ a :=\n  less_than_or_equal.refl\n#align le_refl le_refl\n-/\n\n",
+ "le_of_succ_le_succ":
+ "theorem le_of_succ_le_succ {n m : ℕ} : succ n ≤ succ m → n ≤ m :=\n  pred_le_pred\n#align le_of_succ_le_succ le_of_succ_le_succ\n\n",
+ "eq_or_lt_of_le":
+ "#print eq_or_lt_of_le /-\nprotected theorem eq_or_lt_of_le {a b : ℕ} (h : a ≤ b) : a = b ∨ a < b :=\n  less_than_or_equal.cases_on h (or.inl rfl) fun n h => or.inr (succ_le_succ h)\n#align eq_or_lt_of_le eq_or_lt_of_le\n-/\n\n",
+ "bit1_ne_zero":
+ "protected theorem bit1_ne_zero (n : ℕ) : bit1 n ≠ 0 :=\n  show succ (n + n) ≠ 0 from fun h => nat.no_confusion h\n#align bit1_ne_zero bit1_ne_zero\n\n",
+ "bit0_succ_eq":
+ "protected theorem bit0_succ_eq (n : ℕ) : bit0 (succ n) = succ (succ (bit0 n)) :=\n  show succ (succ n + n) = succ (succ (n + n)) from congr_arg succ (succ_add n n)\n#align bit0_succ_eq bit0_succ_eq\n\n",
+ "bit0_ne_zero":
+ "#print bit0_ne_zero /-\nprotected theorem bit0_ne_zero : ∀ {n : ℕ}, n ≠ 0 → bit0 n ≠ 0\n  | 0, h => absurd rfl h\n  | n + 1, h =>\n    suffices n + 1 + (n + 1) ≠ 0 from this\n    suffices succ (n + 1 + n) ≠ 0 from this\n    fun h => nat.no_confusion h\n#align bit0_ne_zero bit0_ne_zero\n-/\n\n",
+ "add_zero":
+ "#print add_zero /-\nprotected theorem add_zero (n : ℕ) : n + 0 = n :=\n  rfl\n#align add_zero add_zero\n-/\n\n",
+ "add_succ":
+ "theorem add_succ (n m : ℕ) : n + succ m = succ (n + m) :=\n  rfl\n#align add_succ add_succ\n\n",
+ "add_one":
+ "theorem add_one (n : ℕ) : n + 1 = succ n :=\n  rfl\n#align add_one add_one\n\n"}

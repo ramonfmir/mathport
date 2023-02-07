@@ -1,0 +1,12 @@
+{"vec_cons":
+ "theorem antitone.vec_cons (hf : antitone f) (ha : f 0 ≤ a) : antitone (vec_cons a f) :=\n  antitone_vec_cons.2 ⟨ha, hf⟩\n#align antitone.vec_cons antitone.vec_cons\n\n",
+ "strict_mono_vec_cons":
+ "@[simp]\ntheorem strict_mono_vec_cons : strict_mono (vec_cons a f) ↔ a < f 0 ∧ strict_mono f :=\n  lift_fun_vec_cons (· < ·)\n#align strict_mono_vec_cons strict_mono_vec_cons\n\n",
+ "strict_anti_vec_cons":
+ "@[simp]\ntheorem strict_anti_vec_cons : strict_anti (vec_cons a f) ↔ f 0 < a ∧ strict_anti f :=\n  lift_fun_vec_cons (· > ·)\n#align strict_anti_vec_cons strict_anti_vec_cons\n\n",
+ "monotone_vec_cons":
+ "@[simp]\ntheorem monotone_vec_cons : monotone (vec_cons a f) ↔ a ≤ f 0 ∧ monotone f := by\n  simpa only [monotone_iff_forall_lt] using @lift_fun_vec_cons α n (· ≤ ·) _ f a\n#align monotone_vec_cons monotone_vec_cons\n\n",
+ "lift_fun_vec_cons":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⇒ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⇒ » -/\n/-\nCopyright (c) 2022 Yury G. Kudryashov. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Yury G. Kudryashov\n-/\ntheorem lift_fun_vec_cons {n : ℕ} (r : α → α → Prop) [is_trans α r] {f : fin (n + 1) → α} {a : α} :\n    («expr ⇒ » (· < ·) r) (vec_cons a f) (vec_cons a f) ↔ r a (f 0) ∧ («expr ⇒ » (· < ·) r) f f := by\n  simp only [lift_fun_iff_succ r, forall_fin_succ, cons_val_succ, cons_val_zero, ← succ_cast_succ, cast_succ_zero]\n#align lift_fun_vec_cons lift_fun_vec_cons\n\n",
+ "antitone_vec_cons":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵈ» -/\n@[simp]\ntheorem antitone_vec_cons : antitone (vec_cons a f) ↔ f 0 ≤ a ∧ antitone f :=\n  @monotone_vec_cons («expr ᵒᵈ» α) _ _ _ _\n#align antitone_vec_cons antitone_vec_cons\n\n"}

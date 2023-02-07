@@ -1,0 +1,40 @@
+{"v_def":
+ "private theorem v_def : V v :=\n  choose_spec exV\n#align v_def v_def\n\n",
+ "u_def":
+ "private theorem u_def : U u :=\n  choose_spec exU\n#align u_def u_def\n\n",
+ "some_spec":
+ "/-\nCopyright (c) 2015 Microsoft Corporation. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Leonardo de Moura, Jeremy Avigad, Mario Carneiro\n-/\ntheorem some_spec {α : Sort u} {p : α → Prop} (h : ∃ x, p x) : p (choose h) :=\n  (indefinite_description p h).property\n#align some_spec some_spec\n\n",
+ "skolem":
+ "theorem skolem {α : Sort u} {b : α → Sort v} {p : ∀ x, b x → Prop} :\n    (∀ x, ∃ y, p x y) ↔ ∃ f : ∀ x, b x, ∀ x, p x (f x) :=\n  ⟨axiom_of_choice, fun ⟨f, hw⟩ x => ⟨f x, hw x⟩⟩\n#align skolem skolem\n\n",
+ "prop_complete":
+ "theorem prop_complete (a : Prop) : a = true ∨ a = false :=\n  or.elim (em a) (fun t => or.inl (eq_true t)) fun f => or.inr (eq_false f)\n#align prop_complete prop_complete\n\n",
+ "p_implies_uv":
+ "private theorem p_implies_uv (hp : p) : u = v :=\n  have hpred : U = V :=\n    funext fun x : Prop =>\n      have hl : x = true ∨ p → x = false ∨ p := fun a => or.inr hp\n      have hr : x = false ∨ p → x = true ∨ p := fun a => or.inr hp\n      show (x = true ∨ p) = (x = false ∨ p) from propext (iff.intro hl hr)\n  have h₀ : ∀ exU exV, @choose _ U exU = @choose _ V exV := hpred ▸ fun exU exV => rfl\n  show u = v from h₀ _ _\n#align p_implies_uv p_implies_uv\n\n",
+ "not_uv_or_p":
+ "private theorem not_uv_or_p : u ≠ v ∨ p :=\n  or.elim u_def\n    (fun hut : u = true =>\n      or.elim v_def\n        (fun hvf : v = false =>\n          have hne : u ≠ v := hvf.symm ▸ hut.symm ▸ true_ne_false\n          or.inl hne)\n        or.inr)\n    or.inr\n#align not_uv_or_p not_uv_or_p\n\n",
+ "exists_true_of_nonempty":
+ "theorem exists_true_of_nonempty {α : Sort u} : nonempty α → ∃ x : α, true\n  | ⟨x⟩ => ⟨x, trivial⟩\n#align exists_true_of_nonempty exists_true_of_nonempty\n\n",
+ "exV":
+ "private theorem exV : ∃ x, V x :=\n  ⟨false, or.inl rfl⟩\n#align exV exV\n\n",
+ "exU":
+ "/- Diaconescu's theorem: using function extensionality and propositional extensionality,\n   we can get excluded middle from this. -/\nprivate theorem exU : ∃ x, U x :=\n  ⟨true, or.inl rfl⟩\n#align exU exU\n\n",
+ "eq_false_or_eq_true":
+ "theorem eq_false_or_eq_true (a : Prop) : a = false ∨ a = true :=\n  (prop_complete a).symm\n#align eq_false_or_eq_true eq_false_or_eq_true\n\n",
+ "epsilon_spec_aux":
+ "theorem epsilon_spec_aux {α : Sort u} (h : nonempty α) (p : α → Prop) : (∃ y, p y) → p (@epsilon α h p) :=\n  (strong_indefinite_description p h).property\n#align epsilon_spec_aux epsilon_spec_aux\n\n",
+ "epsilon_spec":
+ "theorem epsilon_spec {α : Sort u} {p : α → Prop} (hex : ∃ y, p y) : p (@epsilon α (nonempty_of_exists hex) p) :=\n  epsilon_spec_aux (nonempty_of_exists hex) p hex\n#align epsilon_spec epsilon_spec\n\n",
+ "epsilon_singleton":
+ "theorem epsilon_singleton {α : Sort u} (x : α) : (@epsilon α ⟨x⟩ fun y => y = x) = x :=\n  @epsilon_spec α (fun y => y = x) ⟨x, rfl⟩\n#align epsilon_singleton epsilon_singleton\n\n",
+ "em":
+ "#print em /-\ntheorem em : p ∨ ¬p :=\n  or.elim not_uv_or_p (fun hne : u ≠ v => or.inr (mt p_implies_uv hne)) or.inl\n#align em em\n-/\n\n",
+ "cases_true_false":
+ "@[elab_as_elim]\ntheorem cases_true_false (p : Prop → Prop) (h1 : p true) (h2 : p false) (a : Prop) : p a :=\n  or.elim (prop_complete a) (fun ht : a = true => ht.symm ▸ h1) fun hf : a = false => hf.symm ▸ h2\n#align cases_true_false cases_true_false\n\n",
+ "cases_on":
+ "theorem cases_on (a : Prop) {p : Prop → Prop} (h1 : p true) (h2 : p false) : p a :=\n  cases_true_false p h1 h2 a\n#align cases_on cases_on\n\n",
+ "by_contradiction":
+ "/- warning: by_contradiction clashes with classical.by_contradiction -> by_contradiction\nCase conversion may be inaccurate. Consider using '#align by_contradiction by_contradictionₓ'. -/\n#print by_contradiction /-\n-- this supercedes by_contradiction in decidable\ntheorem by_contradiction {p : Prop} (h : ¬p → false) : p :=\n  decidable.by_contradiction h\n#align by_contradiction by_contradiction\n-/\n\n",
+ "by_cases":
+ "/- warning: by_cases clashes with classical.by_cases -> by_cases\nCase conversion may be inaccurate. Consider using '#align by_cases by_casesₓ'. -/\n#print by_cases /-\n-- this supercedes by_cases in decidable\ntheorem by_cases {p q : Prop} (hpq : p → q) (hnpq : ¬p → q) : q :=\n  decidable.by_cases hpq hnpq\n#align by_cases by_cases\n-/\n\n",
+ "axiom_of_choice":
+ "/-- The axiom of choice -/\ntheorem axiom_of_choice {α : Sort u} {β : α → Sort v} {r : ∀ x, β x → Prop} (h : ∀ x, ∃ y, r x y) :\n    ∃ f : ∀ x, β x, ∀ x, r x (f x) :=\n  ⟨_, fun x => choose_spec (h x)⟩\n#align axiom_of_choice axiom_of_choice\n\n"}

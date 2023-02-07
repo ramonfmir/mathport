@@ -1,0 +1,46 @@
+{"mem_destutter'":
+ "theorem mem_destutter' (a) : a ∈ l.destutter' R a :=\n  by\n  induction' l with b l hl\n  · simp\n  rw [destutter']\n  split_ifs\n  · simp\n  · assumption\n#align mem_destutter' mem_destutter'\n\n",
+ "destutter_sublist":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr <+ » -/\ntheorem destutter_sublist : ∀ l : list α, «expr <+ » (l.destutter R) l\n  | [] => sublist.slnil\n  | h :: l => l.destutter'_sublist R h\n#align destutter_sublist destutter_sublist\n\n",
+ "destutter_singleton":
+ "@[simp]\ntheorem destutter_singleton : destutter R [a] = [a] :=\n  rfl\n#align destutter_singleton destutter_singleton\n\n",
+ "destutter_pair":
+ "@[simp]\ntheorem destutter_pair : destutter R [a, b] = if R a b then [a, b] else [a] :=\n  destutter_cons_cons _ R\n#align destutter_pair destutter_pair\n\n",
+ "destutter_of_chain'":
+ "theorem destutter_of_chain' : ∀ l : list α, l.chain' R → l.destutter R = l\n  | [], h => rfl\n  | a :: l, h => l.destutter'_of_chain _ h\n#align destutter_of_chain' destutter_of_chain'\n\n",
+ "destutter_nil":
+ "@[simp]\ntheorem destutter_nil : ([] : list α).destutter R = [] :=\n  rfl\n#align destutter_nil destutter_nil\n\n",
+ "destutter_is_chain'":
+ "theorem destutter_is_chain' : ∀ l : list α, (l.destutter R).chain' R\n  | [] => List.chain'_nil\n  | h :: l => l.destutter'_is_chain' R h\n#align destutter_is_chain' destutter_is_chain'\n\n",
+ "destutter_idem":
+ "theorem destutter_idem : (l.destutter R).destutter R = l.destutter R :=\n  destutter_of_chain' R _ <| l.destutter_is_chain' R\n#align destutter_idem destutter_idem\n\n",
+ "destutter_eq_self_iff":
+ "@[simp]\ntheorem destutter_eq_self_iff : ∀ l : list α, l.destutter R = l ↔ l.chain' R\n  | [] => by simp\n  | a :: l => l.destutter'_eq_self_iff R a\n#align destutter_eq_self_iff destutter_eq_self_iff\n\n",
+ "destutter_eq_nil":
+ "@[simp]\ntheorem destutter_eq_nil : ∀ {l : list α}, destutter R l = [] ↔ l = []\n  | [] => iff.rfl\n  | a :: l => ⟨fun h => absurd h <| l.destutter'_ne_nil R, fun h => nomatch h⟩\n#align destutter_eq_nil destutter_eq_nil\n\n",
+ "destutter_cons_cons":
+ "theorem destutter_cons_cons : (a :: b :: l).destutter R = if R a b then a :: destutter' R b l else destutter' R a l :=\n  rfl\n#align destutter_cons_cons destutter_cons_cons\n\n",
+ "destutter_cons'":
+ "theorem destutter_cons' : (a :: l).destutter R = destutter' R a l :=\n  rfl\n#align destutter_cons' destutter_cons'\n\n",
+ "destutter'_sublist":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr <+ » -/\ntheorem destutter'_sublist (a) : «expr <+ » (l.destutter' R a) (a :: l) :=\n  by\n  induction' l with b l hl generalizing a\n  · simp\n  rw [destutter']\n  split_ifs\n  · exact sublist.cons2 _ _ _ (hl b)\n  · exact (hl a).trans ((l.sublist_cons b).cons_cons a)\n#align destutter'_sublist destutter'_sublist\n\n",
+ "destutter'_singleton":
+ "@[simp]\ntheorem destutter'_singleton : [b].destutter' R a = if R a b then [a, b] else [a] := by split_ifs <;> simp! [h]\n#align destutter'_singleton destutter'_singleton\n\n",
+ "destutter'_of_chain":
+ "theorem destutter'_of_chain (h : l.chain R a) : l.destutter' R a = a :: l :=\n  by\n  induction' l with b l hb generalizing a\n  · simp\n  obtain ⟨h, hc⟩ := chain_cons.mp h\n  rw [l.destutter'_cons_pos h, hb hc]\n#align destutter'_of_chain destutter'_of_chain\n\n",
+ "destutter'_nil":
+ "/-\nCopyright (c) 2022 Eric Rodriguez. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Eric Rodriguez, Eric Wieser\n-/\n@[simp]\ntheorem destutter'_nil : destutter' R a [] = [a] :=\n  rfl\n#align destutter'_nil destutter'_nil\n\n",
+ "destutter'_ne_nil":
+ "theorem destutter'_ne_nil : l.destutter' R a ≠ [] :=\n  ne_nil_of_mem <| l.mem_destutter' R a\n#align destutter'_ne_nil destutter'_ne_nil\n\n",
+ "destutter'_is_chain'":
+ "theorem destutter'_is_chain' (a) : (l.destutter' R a).chain' R :=\n  by\n  induction' l with b l hl generalizing a\n  · simp\n  rw [destutter']\n  split_ifs\n  · exact destutter'_is_chain R l h\n  · exact hl a\n#align destutter'_is_chain' destutter'_is_chain'\n\n",
+ "destutter'_is_chain":
+ "theorem destutter'_is_chain : ∀ l : list α, ∀ {a b}, R a b → (l.destutter' R b).chain R a\n  | [], a, b, h => chain_singleton.mpr h\n  | c :: l, a, b, h => by\n    rw [destutter']\n    split_ifs with hbc\n    · rw [chain_cons]\n      exact ⟨h, destutter'_is_chain l hbc⟩\n    · exact destutter'_is_chain l h\n#align destutter'_is_chain destutter'_is_chain\n\n",
+ "destutter'_eq_self_iff":
+ "@[simp]\ntheorem destutter'_eq_self_iff (a) : l.destutter' R a = a :: l ↔ l.chain R a :=\n  ⟨fun h => by\n    rw [← chain', ← h]\n    exact l.destutter'_is_chain' R a, destutter'_of_chain _ _⟩\n#align destutter'_eq_self_iff destutter'_eq_self_iff\n\n",
+ "destutter'_cons_pos":
+ "@[simp]\ntheorem destutter'_cons_pos (h : R b a) : (a :: l).destutter' R b = b :: l.destutter' R a := by\n  rw [destutter', if_pos h]\n#align destutter'_cons_pos destutter'_cons_pos\n\n",
+ "destutter'_cons_neg":
+ "@[simp]\ntheorem destutter'_cons_neg (h : ¬R b a) : (a :: l).destutter' R b = l.destutter' R b := by rw [destutter', if_neg h]\n#align destutter'_cons_neg destutter'_cons_neg\n\n",
+ "destutter'_cons":
+ "theorem destutter'_cons : (b :: l).destutter' R a = if R a b then a :: destutter' R b l else destutter' R a l :=\n  rfl\n#align destutter'_cons destutter'_cons\n\n"}

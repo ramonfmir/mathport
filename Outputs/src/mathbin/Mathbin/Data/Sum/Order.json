@@ -1,0 +1,116 @@
+{"trans":
+ "@[trans]\ntheorem lift_rel.trans [is_trans α r] [is_trans β s] : ∀ {a b c}, lift_rel r s a b → lift_rel r s b c → lift_rel r s a c\n  | _, _, _, lift_rel.inl hab, lift_rel.inl hbc => lift_rel.inl <| trans hab hbc\n  | _, _, _, lift_rel.inr hab, lift_rel.inr hbc => lift_rel.inr <| trans hab hbc\n#align lift_rel.trans lift_rel.trans\n\n",
+ "to_lex_strict_mono":
+ "theorem to_lex_strict_mono : strict_mono (@to_lex (Sum α β)) := fun a b h => h.lex\n#align to_lex_strict_mono to_lex_strict_mono\n\n",
+ "to_lex_mono":
+ "theorem to_lex_mono : monotone (@to_lex (Sum α β)) := fun a b h => h.lex\n#align to_lex_mono to_lex_mono\n\n",
+ "to_lex_lt_to_lex":
+ "@[simp]\ntheorem to_lex_lt_to_lex [LT α] [LT β] {a b : Sum α β} : to_lex a < to_lex b ↔ lex (· < ·) (· < ·) a b :=\n  iff.rfl\n#align to_lex_lt_to_lex to_lex_lt_to_lex\n\n",
+ "to_lex_le_to_lex":
+ "--TODO: Can we make `inlₗ`, `inrₗ` `local notation`?\n@[simp]\ntheorem to_lex_le_to_lex [LE α] [LE β] {a b : Sum α β} : to_lex a ≤ to_lex b ↔ lex (· ≤ ·) (· ≤ ·) a b :=\n  iff.rfl\n#align to_lex_le_to_lex to_lex_le_to_lex\n\n",
+ "swap_lt_swap_iff":
+ "@[simp]\ntheorem swap_lt_swap_iff [LT α] [LT β] {a b : Sum α β} : a.swap < b.swap ↔ a < b :=\n  lift_rel_swap_iff\n#align swap_lt_swap_iff swap_lt_swap_iff\n\n",
+ "swap_le_swap_iff":
+ "@[simp]\ntheorem swap_le_swap_iff [LE α] [LE β] {a b : Sum α β} : a.swap ≤ b.swap ↔ a ≤ b :=\n  lift_rel_swap_iff\n#align swap_le_swap_iff swap_le_swap_iff\n\n",
+ "sum_lex_dual_antidistrib_symm_inr":
+ "@[simp]\ntheorem sum_lex_dual_antidistrib_symm_inr : (sumLexDualAntidistrib α β).symm (inr (toDual a)) = toDual (inl a) :=\n  rfl\n#align sum_lex_dual_antidistrib_symm_inr sum_lex_dual_antidistrib_symm_inr\n\n",
+ "sum_lex_dual_antidistrib_symm_inl":
+ "@[simp]\ntheorem sum_lex_dual_antidistrib_symm_inl : (sumLexDualAntidistrib α β).symm (inl (toDual b)) = toDual (inr b) :=\n  rfl\n#align sum_lex_dual_antidistrib_symm_inl sum_lex_dual_antidistrib_symm_inl\n\n",
+ "sum_lex_dual_antidistrib_inr":
+ "@[simp]\ntheorem sum_lex_dual_antidistrib_inr : sumLexDualAntidistrib α β (toDual (inr b)) = inl (toDual b) :=\n  rfl\n#align sum_lex_dual_antidistrib_inr sum_lex_dual_antidistrib_inr\n\n",
+ "sum_lex_dual_antidistrib_inl":
+ "@[simp]\ntheorem sum_lex_dual_antidistrib_inl : sumLexDualAntidistrib α β (toDual (inl a)) = inr (toDual a) :=\n  rfl\n#align sum_lex_dual_antidistrib_inl sum_lex_dual_antidistrib_inl\n\n",
+ "sum_lex_assoc_symm_apply_inr_inr":
+ "@[simp]\ntheorem sum_lex_assoc_symm_apply_inr_inr : (sumLexAssoc α β γ).symm (inr (inr c)) = inr c :=\n  rfl\n#align sum_lex_assoc_symm_apply_inr_inr sum_lex_assoc_symm_apply_inr_inr\n\n",
+ "sum_lex_assoc_symm_apply_inr_inl":
+ "@[simp]\ntheorem sum_lex_assoc_symm_apply_inr_inl : (sumLexAssoc α β γ).symm (inr (inl b)) = inl (inr b) :=\n  rfl\n#align sum_lex_assoc_symm_apply_inr_inl sum_lex_assoc_symm_apply_inr_inl\n\n",
+ "sum_lex_assoc_symm_apply_inl":
+ "@[simp]\ntheorem sum_lex_assoc_symm_apply_inl : (sumLexAssoc α β γ).symm (inl a) = inl (inl a) :=\n  rfl\n#align sum_lex_assoc_symm_apply_inl sum_lex_assoc_symm_apply_inl\n\n",
+ "sum_lex_assoc_apply_inr":
+ "@[simp]\ntheorem sum_lex_assoc_apply_inr : sumLexAssoc α β γ (to_lex <| inr c) = to_lex (inr <| to_lex <| inr c) :=\n  rfl\n#align sum_lex_assoc_apply_inr sum_lex_assoc_apply_inr\n\n",
+ "sum_lex_assoc_apply_inl_inr":
+ "@[simp]\ntheorem sum_lex_assoc_apply_inl_inr :\n    sumLexAssoc α β γ (to_lex <| inl <| to_lex <| inr b) = to_lex (inr <| to_lex <| inl b) :=\n  rfl\n#align sum_lex_assoc_apply_inl_inr sum_lex_assoc_apply_inl_inr\n\n",
+ "sum_lex_assoc_apply_inl_inl":
+ "@[simp]\ntheorem sum_lex_assoc_apply_inl_inl : sumLexAssoc α β γ (to_lex <| inl <| to_lex <| inl a) = to_lex (inl a) :=\n  rfl\n#align sum_lex_assoc_apply_inl_inl sum_lex_assoc_apply_inl_inl\n\n",
+ "sum_dual_distrib_symm_inr":
+ "@[simp]\ntheorem sum_dual_distrib_symm_inr : (sumDualDistrib α β).symm (inr (toDual b)) = toDual (inr b) :=\n  rfl\n#align sum_dual_distrib_symm_inr sum_dual_distrib_symm_inr\n\n",
+ "sum_dual_distrib_symm_inl":
+ "@[simp]\ntheorem sum_dual_distrib_symm_inl : (sumDualDistrib α β).symm (inl (toDual a)) = toDual (inl a) :=\n  rfl\n#align sum_dual_distrib_symm_inl sum_dual_distrib_symm_inl\n\n",
+ "sum_dual_distrib_inr":
+ "@[simp]\ntheorem sum_dual_distrib_inr : sumDualDistrib α β (toDual (inr b)) = inr (toDual b) :=\n  rfl\n#align sum_dual_distrib_inr sum_dual_distrib_inr\n\n",
+ "sum_dual_distrib_inl":
+ "@[simp]\ntheorem sum_dual_distrib_inl : sumDualDistrib α β (toDual (inl a)) = inl (toDual a) :=\n  rfl\n#align sum_dual_distrib_inl sum_dual_distrib_inl\n\n",
+ "sum_comm_symm":
+ "@[simp]\ntheorem sum_comm_symm (α β : Type _) [LE α] [LE β] : (OrderIso.sumComm α β).symm = OrderIso.sumComm β α :=\n  rfl\n#align sum_comm_symm sum_comm_symm\n\n",
+ "sum_assoc_symm_apply_inr_inr":
+ "@[simp]\ntheorem sum_assoc_symm_apply_inr_inr : (sumAssoc α β γ).symm (inr (inr c)) = inr c :=\n  rfl\n#align sum_assoc_symm_apply_inr_inr sum_assoc_symm_apply_inr_inr\n\n",
+ "sum_assoc_symm_apply_inr_inl":
+ "@[simp]\ntheorem sum_assoc_symm_apply_inr_inl : (sumAssoc α β γ).symm (inr (inl b)) = inl (inr b) :=\n  rfl\n#align sum_assoc_symm_apply_inr_inl sum_assoc_symm_apply_inr_inl\n\n",
+ "sum_assoc_symm_apply_inl":
+ "@[simp]\ntheorem sum_assoc_symm_apply_inl : (sumAssoc α β γ).symm (inl a) = inl (inl a) :=\n  rfl\n#align sum_assoc_symm_apply_inl sum_assoc_symm_apply_inl\n\n",
+ "sum_assoc_apply_inr":
+ "@[simp]\ntheorem sum_assoc_apply_inr : sumAssoc α β γ (inr c) = inr (inr c) :=\n  rfl\n#align sum_assoc_apply_inr sum_assoc_apply_inr\n\n",
+ "sum_assoc_apply_inl_inr":
+ "@[simp]\ntheorem sum_assoc_apply_inl_inr : sumAssoc α β γ (inl (inr b)) = inr (inl b) :=\n  rfl\n#align sum_assoc_apply_inl_inr sum_assoc_apply_inl_inr\n\n",
+ "sum_assoc_apply_inl_inl":
+ "@[simp]\ntheorem sum_assoc_apply_inl_inl : sumAssoc α β γ (inl (inl a)) = inl a :=\n  rfl\n#align sum_assoc_apply_inl_inl sum_assoc_apply_inl_inl\n\n",
+ "refl":
+ "/-\nCopyright (c) 2021 Yaël Dillies. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Yaël Dillies\n-/\n@[refl]\ntheorem lift_rel.refl [is_refl α r] [is_refl β s] : ∀ x, lift_rel r s x x\n  | inl a => lift_rel.inl (refl _)\n  | inr a => lift_rel.inr (refl _)\n#align lift_rel.refl lift_rel.refl\n\n",
+ "order_iso_sum_lex_punit_top":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n@[simp]\ntheorem order_iso_sum_lex_punit_top : @orderIsoSumLexPUnit α _ («expr⊤») = to_lex (inr PUnit.unit) :=\n  rfl\n#align order_iso_sum_lex_punit_top order_iso_sum_lex_punit_top\n\n",
+ "order_iso_sum_lex_punit_symm_inr":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n@[simp]\ntheorem order_iso_sum_lex_punit_symm_inr (x : PUnit) : (@orderIsoSumLexPUnit α _).symm (to_lex <| inr x) = «expr⊤» :=\n  rfl\n#align order_iso_sum_lex_punit_symm_inr order_iso_sum_lex_punit_symm_inr\n\n",
+ "order_iso_sum_lex_punit_symm_inl":
+ "@[simp]\ntheorem order_iso_sum_lex_punit_symm_inl (a : α) : orderIsoSumLexPUnit.symm (to_lex <| inl a) = a :=\n  rfl\n#align order_iso_sum_lex_punit_symm_inl order_iso_sum_lex_punit_symm_inl\n\n",
+ "order_iso_sum_lex_punit_coe":
+ "@[simp]\ntheorem order_iso_sum_lex_punit_coe (a : α) : orderIsoSumLexPUnit ↑a = to_lex (inl a) :=\n  rfl\n#align order_iso_sum_lex_punit_coe order_iso_sum_lex_punit_coe\n\n",
+ "order_iso_punit_sum_lex_symm_inr":
+ "@[simp]\ntheorem order_iso_punit_sum_lex_symm_inr (a : α) : orderIsoPUnitSumLex.symm (to_lex <| inr a) = a :=\n  rfl\n#align order_iso_punit_sum_lex_symm_inr order_iso_punit_sum_lex_symm_inr\n\n",
+ "order_iso_punit_sum_lex_symm_inl":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n@[simp]\ntheorem order_iso_punit_sum_lex_symm_inl (x : PUnit) : (@orderIsoPUnitSumLex α _).symm (to_lex <| inl x) = «expr⊥» :=\n  rfl\n#align order_iso_punit_sum_lex_symm_inl order_iso_punit_sum_lex_symm_inl\n\n",
+ "order_iso_punit_sum_lex_coe":
+ "@[simp]\ntheorem order_iso_punit_sum_lex_coe (a : α) : orderIsoPUnitSumLex ↑a = to_lex (inr a) :=\n  rfl\n#align order_iso_punit_sum_lex_coe order_iso_punit_sum_lex_coe\n\n",
+ "order_iso_punit_sum_lex_bot":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n@[simp]\ntheorem order_iso_punit_sum_lex_bot : @orderIsoPUnitSumLex α _ («expr⊥») = to_lex (inl PUnit.unit) :=\n  rfl\n#align order_iso_punit_sum_lex_bot order_iso_punit_sum_lex_bot\n\n",
+ "not_inr_lt_inl":
+ "@[simp]\ntheorem not_inr_lt_inl [LT α] [LT β] {a : α} {b : β} : ¬to_lex (inr b) < to_lex (inl a) :=\n  lex_inr_inl\n#align not_inr_lt_inl not_inr_lt_inl\n\n",
+ "not_inr_le_inl":
+ "@[simp]\ntheorem not_inr_le_inl [LE α] [LE β] {a : α} {b : β} : ¬to_lex (inr b) ≤ to_lex (inl a) :=\n  lex_inr_inl\n#align not_inr_le_inl not_inr_le_inl\n\n",
+ "not_inl_lt_inr":
+ "@[simp]\ntheorem not_inl_lt_inr [LT α] [LT β] {a : α} {b : β} : ¬inl b < inr a :=\n  not_lift_rel_inl_inr\n#align not_inl_lt_inr not_inl_lt_inr\n\n",
+ "not_inl_le_inr":
+ "@[simp]\ntheorem not_inl_le_inr [LE α] [LE β] {a : α} {b : β} : ¬inl b ≤ inr a :=\n  not_lift_rel_inl_inr\n#align not_inl_le_inr not_inl_le_inr\n\n",
+ "no_min_order_iff":
+ "@[simp]\ntheorem no_min_order_iff [LT α] [LT β] : NoMinOrder (Sum α β) ↔ NoMinOrder α ∧ NoMinOrder β :=\n  ⟨fun _ =>\n    ⟨⟨fun a => by\n        obtain ⟨b | b, h⟩ := exists_lt (inl a : Sum α β)\n        · exact ⟨b, inl_lt_inl_iff.1 h⟩\n        · exact (not_inr_lt_inl h).elim⟩,\n      ⟨fun a => by\n        obtain ⟨b | b, h⟩ := exists_lt (inr a : Sum α β)\n        · exact (not_inl_lt_inr h).elim\n        · exact ⟨b, inr_lt_inr_iff.1 h⟩⟩⟩,\n    fun h => @Sum.noMinOrder _ _ _ _ h.1 h.2⟩\n#align no_min_order_iff no_min_order_iff\n\n",
+ "no_max_order_iff":
+ "@[simp]\ntheorem no_max_order_iff [LT α] [LT β] : NoMaxOrder (Sum α β) ↔ NoMaxOrder α ∧ NoMaxOrder β :=\n  ⟨fun _ =>\n    ⟨⟨fun a => by\n        obtain ⟨b | b, h⟩ := exists_gt (inl a : Sum α β)\n        · exact ⟨b, inl_lt_inl_iff.1 h⟩\n        · exact (not_inl_lt_inr h).elim⟩,\n      ⟨fun a => by\n        obtain ⟨b | b, h⟩ := exists_gt (inr a : Sum α β)\n        · exact (not_inr_lt_inl h).elim\n        · exact ⟨b, inr_lt_inr_iff.1 h⟩⟩⟩,\n    fun h => @Sum.noMaxOrder _ _ _ _ h.1 h.2⟩\n#align no_max_order_iff no_max_order_iff\n\n",
+ "lt_def":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊕ₗ » -/\ntheorem lt_def [LT α] [LT β] {a b : «expr ⊕ₗ » α β} : a < b ↔ lex (· < ·) (· < ·) (of_lex a) (of_lex b) :=\n  iff.rfl\n#align lt_def lt_def\n\n",
+ "le_def":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊕ₗ » -/\ntheorem le_def [LE α] [LE β] {a b : «expr ⊕ₗ » α β} : a ≤ b ↔ lex (· ≤ ·) (· ≤ ·) (of_lex a) (of_lex b) :=\n  iff.rfl\n#align le_def le_def\n\n",
+ "inr_top":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n@[simp]\ntheorem inr_top [LE α] [LE β] [OrderTop β] : to_lex (inr («expr⊤») : Sum α β) = «expr⊤» :=\n  rfl\n#align inr_top inr_top\n\n",
+ "inr_strict_mono":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊕ₗ » -/\ntheorem inr_strict_mono : strict_mono (to_lex ∘ inr : β → «expr ⊕ₗ » α β) :=\n  toLex_strictMono.comp inr_strictMono\n#align inr_strict_mono inr_strict_mono\n\n",
+ "inr_mono":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊕ₗ » -/\ntheorem inr_mono : monotone (to_lex ∘ inr : β → «expr ⊕ₗ » α β) :=\n  toLex_mono.comp inr_mono\n#align inr_mono inr_mono\n\n",
+ "inr_lt_inr_iff":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊕ₗ » -/\n@[simp]\ntheorem inr_lt_inr_iff [LT α] [LT β] {a b : β} : to_lex (inr a : «expr ⊕ₗ » α β) < to_lex (inr b) ↔ a < b :=\n  lex_inr_inr\n#align inr_lt_inr_iff inr_lt_inr_iff\n\n",
+ "inr_le_inr_iff":
+ "@[simp]\ntheorem inr_le_inr_iff [LE α] [LE β] {a b : β} : to_lex (inr a : Sum α β) ≤ to_lex (inr b) ↔ a ≤ b :=\n  lex_inr_inr\n#align inr_le_inr_iff inr_le_inr_iff\n\n",
+ "inl_strict_mono":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊕ₗ » -/\ntheorem inl_strict_mono : strict_mono (to_lex ∘ inl : α → «expr ⊕ₗ » α β) :=\n  toLex_strictMono.comp inl_strictMono\n#align inl_strict_mono inl_strict_mono\n\n",
+ "inl_mono":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊕ₗ » -/\ntheorem inl_mono : monotone (to_lex ∘ inl : α → «expr ⊕ₗ » α β) :=\n  toLex_mono.comp inl_mono\n#align inl_mono inl_mono\n\n",
+ "inl_lt_inr":
+ "@[simp]\ntheorem inl_lt_inr [LT α] [LT β] (a : α) (b : β) : to_lex (inl a) < to_lex (inr b) :=\n  Lex.sep _ _\n#align inl_lt_inr inl_lt_inr\n\n",
+ "inl_lt_inl_iff":
+ "@[simp]\ntheorem inl_lt_inl_iff [LT α] [LT β] {a b : α} : to_lex (inl a : Sum α β) < to_lex (inl b) ↔ a < b :=\n  lex_inl_inl\n#align inl_lt_inl_iff inl_lt_inl_iff\n\n",
+ "inl_le_inr":
+ "@[simp]\ntheorem inl_le_inr [LE α] [LE β] (a : α) (b : β) : to_lex (inl a) ≤ to_lex (inr b) :=\n  Lex.sep _ _\n#align inl_le_inr inl_le_inr\n\n",
+ "inl_le_inl_iff":
+ "@[simp]\ntheorem inl_le_inl_iff [LE α] [LE β] {a b : α} : to_lex (inl a : Sum α β) ≤ to_lex (inl b) ↔ a ≤ b :=\n  lex_inl_inl\n#align inl_le_inl_iff inl_le_inl_iff\n\n",
+ "inl_bot":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n@[simp]\ntheorem inl_bot [LE α] [OrderBot α] [LE β] : to_lex (inl («expr⊥») : Sum α β) = «expr⊥» :=\n  rfl\n#align inl_bot inl_bot\n\n",
+ "densely_ordered_iff":
+ "@[simp]\ntheorem densely_ordered_iff [LT α] [LT β] : DenselyOrdered (Sum α β) ↔ DenselyOrdered α ∧ DenselyOrdered β :=\n  ⟨fun _ =>\n    ⟨⟨fun a b h => by\n        obtain ⟨c | c, ha, hb⟩ := @exists_between (Sum α β) _ _ _ _ (inl_lt_inl_iff.2 h)\n        · exact ⟨c, inl_lt_inl_iff.1 ha, inl_lt_inl_iff.1 hb⟩\n        · exact (not_inl_lt_inr ha).elim⟩,\n      ⟨fun a b h => by\n        obtain ⟨c | c, ha, hb⟩ := @exists_between (Sum α β) _ _ _ _ (inr_lt_inr_iff.2 h)\n        · exact (not_inl_lt_inr hb).elim\n        · exact ⟨c, inr_lt_inr_iff.1 ha, inr_lt_inr_iff.1 hb⟩⟩⟩,\n    fun h => @Sum.denselyOrdered _ _ _ _ h.1 h.2⟩\n#align densely_ordered_iff densely_ordered_iff\n\n"}

@@ -1,0 +1,4 @@
+{"finite'":
+ "/-- All `fun_like`s are finite if their domain and codomain are.\n\nNon-dependent version of `fun_like.finite` that might be easier to infer.\nCan't be an instance because it can cause infinite loops.\n-/\ntheorem fun_like.finite' [Finite α] [Finite γ] : Finite G :=\n  fun_like.finite G\n#align fun_like.finite' fun_like.finite'\n\n",
+ "finite":
+ "/-\nCopyright (c) 2022 Anne Baanen. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Anne Baanen\n-/\n/-- All `fun_like`s are finite if their domain and codomain are.\n\nCan't be an instance because it can cause infinite loops.\n-/\ntheorem fun_like.finite [Finite α] [∀ i, Finite (β i)] : Finite F :=\n  finite.of_injective _ fun_like.coe_injective\n#align fun_like.finite fun_like.finite\n\n"}

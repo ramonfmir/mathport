@@ -1,0 +1,66 @@
+{"ulift_functor_map":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⟶ » -/\n@[simp]\ntheorem ulift_functor_map {X Y : Type u} (f : «expr ⟶ » X Y) (x : ULift.{v} X) :\n    ulift_functor.map f x = ulift.up (f x.down) :=\n  rfl\n#align ulift_functor_map ulift_functor_map\n\n",
+ "types_id_apply":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr𝟙» -/\n@[simp]\ntheorem types_id_apply (X : Type u) (x : X) : ((«expr𝟙») X : X → X) x = x :=\n  rfl\n#align types_id_apply types_id_apply\n\n",
+ "types_id":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr𝟙» -/\ntheorem types_id (X : Type u) : («expr𝟙») X = id :=\n  rfl\n#align types_id types_id\n\n",
+ "types_hom":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⟶ » -/\n/-\nCopyright (c) 2017 Scott Morrison. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Stephen Morgan, Scott Morrison, Johannes Hölzl\n-/\n-- morphism levels before object levels. See note [category_theory universes].\n/- The `@[to_additive]` attribute is just a hint that expressions involving this instance can\n  still be additivized. -/\ntheorem types_hom {α β : Type u} : «expr ⟶ » α β = (α → β) :=\n  rfl\n#align types_hom types_hom\n\n",
+ "types_comp_apply":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⟶ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⟶ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≫ » -/\n@[simp]\ntheorem types_comp_apply {X Y Z : Type u} (f : «expr ⟶ » X Y) (g : «expr ⟶ » Y Z) (x : X) :\n    («expr ≫ » f g) x = g (f x) :=\n  rfl\n#align types_comp_apply types_comp_apply\n\n",
+ "types_comp":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⟶ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⟶ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≫ » -/\ntheorem types_comp {X Y Z : Type u} (f : «expr ⟶ » X Y) (g : «expr ⟶ » Y Z) : «expr ≫ » f g = g ∘ f :=\n  rfl\n#align types_comp types_comp\n\n",
+ "to_iso_inv":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ » -/\n@[simp]\ntheorem to_iso_inv {e : «expr ≃ » X Y} : e.to_iso.inv = e.symm :=\n  rfl\n#align to_iso_inv to_iso_inv\n\n",
+ "to_iso_hom":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ » -/\n-- Isomorphisms in Type and equivalences.\n@[simp]\ntheorem to_iso_hom {e : «expr ≃ » X Y} : e.to_iso.hom = e :=\n  rfl\n#align to_iso_hom to_iso_hom\n\n",
+ "to_equiv_symm_fun":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≅ » -/\n@[simp]\ntheorem to_equiv_symm_fun (i : «expr ≅ » X Y) : (i.to_equiv.symm : Y → X) = i.inv :=\n  rfl\n#align to_equiv_symm_fun to_equiv_symm_fun\n\n",
+ "to_equiv_id":
+ "@[simp]\ntheorem to_equiv_id (X : Type u) : (Iso.refl X).to_equiv = equiv.refl X :=\n  rfl\n#align to_equiv_id to_equiv_id\n\n",
+ "to_equiv_fun":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≅ » -/\n@[simp]\ntheorem to_equiv_fun (i : «expr ≅ » X Y) : (i.to_equiv : X → Y) = i.hom :=\n  rfl\n#align to_equiv_fun to_equiv_fun\n\n",
+ "to_equiv_comp":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≅ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≅ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≪≫ » -/\n@[simp]\ntheorem to_equiv_comp {X Y Z : Type u} (f : «expr ≅ » X Y) (g : «expr ≅ » Y Z) :\n    («expr ≪≫ » f g).to_equiv = f.to_equiv.trans g.to_equiv :=\n  rfl\n#align to_equiv_comp to_equiv_comp\n\n",
+ "surjective_of_epi":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⟶ » -/\ntheorem surjective_of_epi {X Y : Type u} (f : «expr ⟶ » X Y) [hf : Epi f] : function.surjective f :=\n  (epi_iff_surjective f).1 hf\n#align surjective_of_epi surjective_of_epi\n\n",
+ "of_type_functor_obj":
+ "@[simp]\ntheorem of_type_functor_obj : (of_type_functor m).obj = m :=\n  rfl\n#align of_type_functor_obj of_type_functor_obj\n\n",
+ "of_type_functor_map":
+ "@[simp]\ntheorem of_type_functor_map {α β} (f : α → β) : (of_type_functor m).map f = (_root_.functor.map f : m α → m β) :=\n  rfl\n#align of_type_functor_map of_type_functor_map\n\n",
+ "naturality":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⟶ » -/\ntheorem naturality (f : «expr ⟶ » X Y) (x : F.obj X) : σ.app Y ((F.map f) x) = (G.map f) (σ.app X x) :=\n  congr_fun (σ.naturality f) x\n#align naturality naturality\n\n",
+ "mono_iff_injective":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⟶ » -/\n/-- A morphism in `Type` is a monomorphism if and only if it is injective.\n\nSee <https://stacks.math.columbia.edu/tag/003C>.\n-/\ntheorem mono_iff_injective {X Y : Type u} (f : «expr ⟶ » X Y) : Mono f ↔ function.injective f :=\n  by\n  constructor\n  · intro H x x' h\n    skip\n    rw [← hom_of_element_eq_iff] at h⊢\n    exact (cancel_mono f).mp h\n  · exact fun H => ⟨fun Z => H.comp_left⟩\n#align mono_iff_injective mono_iff_injective\n\n",
+ "map_inv_map_hom_apply":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≅ » -/\n@[simp]\ntheorem map_inv_map_hom_apply (f : «expr ≅ » X Y) (x : F.obj X) : F.map f.inv (F.map f.hom x) = x :=\n  congr_fun (F.map_iso f).hom_inv_id x\n#align map_inv_map_hom_apply map_inv_map_hom_apply\n\n",
+ "map_id_apply":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr𝟙» -/\n@[simp]\ntheorem map_id_apply (a : F.obj X) : (F.map ((«expr𝟙») X)) a = a := by simp [types_id]\n#align map_id_apply map_id_apply\n\n",
+ "map_hom_map_inv_apply":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≅ » -/\n@[simp]\ntheorem map_hom_map_inv_apply (f : «expr ≅ » X Y) (y : F.obj Y) : F.map f.hom (F.map f.inv y) = y :=\n  congr_fun (F.map_iso f).inv_hom_id y\n#align map_hom_map_inv_apply map_hom_map_inv_apply\n\n",
+ "map_comp_apply":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⟶ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⟶ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≫ » -/\n-- Unfortunately without this wrapper we can't use `category_theory` idioms, such as `is_iso f`.\n-- If you don't mind some notation you can use fewer keystrokes:\n-- type as \\upr in VScode\n-- We verify the expected type checking behaviour of `as_hom`.\n@[simp]\ntheorem map_comp_apply (f : «expr ⟶ » X Y) (g : «expr ⟶ » Y Z) (a : F.obj X) :\n    (F.map («expr ≫ » f g)) a = (F.map g) ((F.map f) a) := by simp [types_comp]\n#align map_comp_apply map_comp_apply\n\n",
+ "is_iso_iff_bijective":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≅ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⟶ » -/\n/-- A morphism in `Type u` is an isomorphism if and only if it is bijective. -/\ntheorem is_iso_iff_bijective {X Y : Type u} (f : «expr ⟶ » X Y) : IsIso f ↔ function.bijective f :=\n  iff.intro (fun i => (as_iso f : «expr ≅ » X Y).to_equiv.bijective) fun b =>\n    IsIso.of_iso (Equiv.ofBijective f b).to_iso\n#align is_iso_iff_bijective is_iso_iff_bijective\n\n",
+ "inv_hom_id_apply":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≅ » -/\n@[simp]\ntheorem inv_hom_id_apply {X Y : Type u} (f : «expr ≅ » X Y) (y : Y) : f.hom (f.inv y) = y :=\n  congr_fun f.inv_hom_id y\n#align inv_hom_id_apply inv_hom_id_apply\n\n",
+ "inv_hom_id_app_apply":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≅ » -/\n@[simp]\ntheorem inv_hom_id_app_apply (α : «expr ≅ » F G) (X) (x) : α.hom.app X (α.inv.app X x) = x :=\n  congr_fun (α.inv_hom_id_app X) x\n#align inv_hom_id_app_apply inv_hom_id_app_apply\n\n",
+ "injective_of_mono":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⟶ » -/\ntheorem injective_of_mono {X Y : Type u} (f : «expr ⟶ » X Y) [hf : Mono f] : function.injective f :=\n  (mono_iff_injective f).1 hf\n#align injective_of_mono injective_of_mono\n\n",
+ "hom_of_element_eq_iff":
+ "-- TODO We should connect this to a general story about concrete categories\n-- whose forgetful functor is representable.\ntheorem hom_of_element_eq_iff {X : Type u} (x y : X) : hom_of_element x = hom_of_element y ↔ x = y :=\n  ⟨fun H => congr_fun H PUnit.unit, by cc⟩\n#align hom_of_element_eq_iff hom_of_element_eq_iff\n\n",
+ "hom_inv_id_apply":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≅ » -/\n@[simp]\ntheorem hom_inv_id_apply {X Y : Type u} (f : «expr ≅ » X Y) (x : X) : f.inv (f.hom x) = x :=\n  congr_fun f.hom_inv_id x\n#align hom_inv_id_apply hom_inv_id_apply\n\n",
+ "hom_inv_id_app_apply":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≅ » -/\n@[simp]\ntheorem hom_inv_id_app_apply (α : «expr ≅ » F G) (X) (x) : α.inv.app X (α.hom.app X x) = x :=\n  congr_fun (α.hom_inv_id_app X) x\n#align hom_inv_id_app_apply hom_inv_id_app_apply\n\n",
+ "hcomp":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⋙ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ◫ » -/\n@[simp]\ntheorem hcomp (x : («expr ⋙ » I F).obj W) : («expr ◫ » ρ σ).app W x = (G.map (ρ.app W)) (σ.app (I.obj W) x) :=\n  rfl\n#align hcomp hcomp\n\n",
+ "equiv_equiv_iso_inv":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≅ » -/\n@[simp]\ntheorem equiv_equiv_iso_inv {X Y : Type u} (e : «expr ≅ » X Y) : equiv_equiv_iso.symm e = e.to_equiv :=\n  rfl\n#align equiv_equiv_iso_inv equiv_equiv_iso_inv\n\n",
+ "equiv_equiv_iso_hom":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ » -/\n-- We prove `equiv_iso_iso` and then use that to sneakily construct `equiv_equiv_iso`.\n-- (In this order the proofs are handled by `obviously`.)\n@[simp]\ntheorem equiv_equiv_iso_hom {X Y : Type u} (e : «expr ≃ » X Y) : equiv_equiv_iso e = e.to_iso :=\n  rfl\n#align equiv_equiv_iso_hom equiv_equiv_iso_hom\n\n",
+ "epi_iff_surjective":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⟶ » -/\n/-- A morphism in `Type` is an epimorphism if and only if it is surjective.\n\nSee <https://stacks.math.columbia.edu/tag/003C>.\n-/\ntheorem epi_iff_surjective {X Y : Type u} (f : «expr ⟶ » X Y) : Epi f ↔ function.surjective f :=\n  by\n  constructor\n  · rintro ⟨H⟩\n    refine' function.surjective_of_right_cancellable_Prop fun g₁ g₂ hg => _\n    rw [← equiv.ulift.symm.injective.comp_left.eq_iff]\n    apply H\n    change ulift.up ∘ g₁ ∘ f = ulift.up ∘ g₂ ∘ f\n    rw [hg]\n  · exact fun H => ⟨fun Z => H.injective_comp_right⟩\n#align epi_iff_surjective epi_iff_surjective\n\n",
+ "comp":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≫ » -/\n@[simp]\ntheorem comp (x : F.obj X) : («expr ≫ » σ τ).app X x = τ.app X (σ.app X x) :=\n  rfl\n#align comp comp\n\n"}

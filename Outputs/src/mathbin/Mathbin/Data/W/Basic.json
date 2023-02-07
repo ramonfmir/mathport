@@ -1,0 +1,12 @@
+{"to_sigma_of_sigma":
+ "@[simp]\ntheorem to_sigma_of_sigma : ∀ s : Σa : α, β a → W_type β, to_sigma (of_sigma s) = s\n  | ⟨a, f⟩ => rfl\n#align to_sigma_of_sigma to_sigma_of_sigma\n\n",
+ "of_sigma_to_sigma":
+ "/-\nCopyright (c) 2019 Jeremy Avigad. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Jeremy Avigad\n-/\n@[simp]\ntheorem of_sigma_to_sigma : ∀ w : W_type β, of_sigma (to_sigma w) = w\n  | ⟨a, f⟩ => rfl\n#align of_sigma_to_sigma of_sigma_to_sigma\n\n",
+ "infinite_of_nonempty_of_is_empty":
+ "theorem infinite_of_nonempty_of_is_empty (a b : α) [ha : nonempty (β a)] [he : is_empty (β b)] : Infinite (W_type β) :=\n  ⟨by\n    intro hf\n    have hba : b ≠ a := fun h => ha.elim (is_empty.elim' (show is_empty (β a) from h ▸ he))\n    refine'\n      not_injective_infinite_finite\n        (fun n : ℕ => show W_type β from nat.rec_on n ⟨b, is_empty.elim' he⟩ fun n ih => ⟨a, fun _ => ih⟩) _\n    intro n m h\n    induction' n with n ih generalizing m h\n    · cases' m with m <;> simp_all\n    · cases' m with m\n      · simp_all\n      · refine' congr_arg nat.succ (ih _)\n        simp_all [function.funext_iff]⟩\n#align infinite_of_nonempty_of_is_empty infinite_of_nonempty_of_is_empty\n\n",
+ "elim_injective":
+ "theorem elim_injective (γ : Type _) (fγ : (Σa : α, β a → γ) → γ) (fγ_injective : function.injective fγ) :\n    function.injective (elim γ fγ)\n  | ⟨a₁, f₁⟩, ⟨a₂, f₂⟩, h => by\n    obtain ⟨rfl, h⟩ := sigma.mk.inj (fγ_injective h)\n    congr with x\n    exact elim_injective (congr_fun (eq_of_heq h) x : _)\n#align elim_injective elim_injective\n\n",
+ "depth_pos":
+ "theorem depth_pos (t : W_type β) : 0 < t.depth := by\n  cases t\n  apply nat.succ_pos\n#align depth_pos depth_pos\n\n",
+ "depth_lt_depth_mk":
+ "theorem depth_lt_depth_mk (a : α) (f : β a → W_type β) (i : β a) : depth (f i) < depth ⟨a, f⟩ :=\n  nat.lt_succ_of_le (finset.le_sup (finset.mem_univ i))\n#align depth_lt_depth_mk depth_lt_depth_mk\n\n"}

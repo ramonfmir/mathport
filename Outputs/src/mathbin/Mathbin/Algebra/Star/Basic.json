@@ -1,0 +1,90 @@
+{"unop_star":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵐᵒᵖ» -/\n@[simp]\ntheorem unop_star [Star R] (r : «expr ᵐᵒᵖ» R) : unop (star r) = star (unop r) :=\n  rfl\n#align unop_star unop_star\n\n",
+ "star_zsmul":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃+ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n#print star_zsmul /-\n@[simp]\ntheorem star_zsmul [add_group R] [StarAddMonoid R] (x : R) (n : ℤ) : star («expr • » n x) = «expr • » n (star x) :=\n  (starAddEquiv : «expr ≃+ » R R).to_add_monoid_hom.map_zsmul _ _\n#align star_zsmul star_zsmul\n-/\n\n",
+ "star_zpow₀":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃+* » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵐᵒᵖ» -/\n#print star_zpow₀ /-\n@[simp]\ntheorem star_zpow₀ [DivisionRing R] [StarRing R] (x : R) (z : ℤ) : star (x ^ z) = star x ^ z :=\n  op_injective <| (map_zpow₀ (starRingEquiv : «expr ≃+* » R («expr ᵐᵒᵖ» R)) x z).trans (op_zpow (star x) z).symm\n#align star_zpow₀ star_zpow₀\n-/\n\n",
+ "star_zpow":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃* » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵐᵒᵖ» -/\n#print star_zpow /-\n@[simp]\ntheorem star_zpow [group R] [StarSemigroup R] (x : R) (z : ℤ) : star (x ^ z) = star x ^ z :=\n  op_injective <|\n    ((starMulEquiv : «expr ≃* » R («expr ᵐᵒᵖ» R)).to_monoid_hom.map_zpow x z).trans (op_zpow (star x) z).symm\n#align star_zpow star_zpow\n-/\n\n",
+ "star_zero":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃+ » -/\n#print star_zero /-\n@[simp]\ntheorem star_zero [add_monoid R] [StarAddMonoid R] : star (0 : R) = 0 :=\n  (starAddEquiv : «expr ≃+ » R R).map_zero\n#align star_zero star_zero\n-/\n\n",
+ "star_sub":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃+ » -/\n#print star_sub /-\n@[simp]\ntheorem star_sub [add_group R] [StarAddMonoid R] (r s : R) : star (r - s) = star r - star s :=\n  (starAddEquiv : «expr ≃+ » R R).map_sub _ _\n#align star_sub star_sub\n-/\n\n",
+ "star_star":
+ "#print star_star /-\n/-\nCopyright (c) 2020 Scott Morrison. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Scott Morrison\n-/\n@[simp]\ntheorem star_star [InvolutiveStar R] (r : R) : star (star r) = r :=\n  star_involutive _\n#align star_star star_star\n-/\n\n",
+ "star_ratCast":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃+* » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵐᵒᵖ» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℚ -/\n#print star_ratCast /-\n@[simp, norm_cast]\ntheorem star_ratCast [DivisionRing R] [StarRing R] (r : exprℚ) : star (r : R) = r :=\n  (congr_arg unop <| map_ratCast (starRingEquiv : «expr ≃+* » R («expr ᵐᵒᵖ» R)) r).trans (unop_ratCast _)\n#align star_rat_cast star_ratCast\n-/\n\n",
+ "star_pow":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃* » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵐᵒᵖ» -/\n#print star_pow /-\n@[simp]\ntheorem star_pow [monoid R] [StarSemigroup R] (x : R) (n : ℕ) : star (x ^ n) = star x ^ n :=\n  op_injective <|\n    ((starMulEquiv : «expr ≃* » R («expr ᵐᵒᵖ» R)).to_monoid_hom.map_pow x n).trans (op_pow (star x) n).symm\n#align star_pow star_pow\n-/\n\n",
+ "star_one":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃* » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵐᵒᵖ» -/\n#print star_one /-\n@[simp]\ntheorem star_one [monoid R] [StarSemigroup R] : star (1 : R) = 1 :=\n  op_injective <| (starMulEquiv : «expr ≃* » R («expr ᵐᵒᵖ» R)).map_one.trans (op_one _).symm\n#align star_one star_one\n-/\n\n",
+ "star_nsmul":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃+ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n#print star_nsmul /-\n@[simp]\ntheorem star_nsmul [add_monoid R] [StarAddMonoid R] (x : R) (n : ℕ) : star («expr • » n x) = «expr • » n (star x) :=\n  (starAddEquiv : «expr ≃+ » R R).to_add_monoid_hom.map_nsmul _ _\n#align star_nsmul star_nsmul\n-/\n\n",
+ "star_neg":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃+ » -/\n#print star_neg /-\n@[simp]\ntheorem star_neg [add_group R] [StarAddMonoid R] (r : R) : star (-r) = -star r :=\n  (starAddEquiv : «expr ≃+ » R R).map_neg _\n#align star_neg star_neg\n-/\n\n",
+ "star_ne_zero":
+ "#print star_ne_zero /-\ntheorem star_ne_zero [add_monoid R] [StarAddMonoid R] {x : R} : star x ≠ 0 ↔ x ≠ 0 :=\n  star_eq_zero.not\n#align star_ne_zero star_ne_zero\n-/\n\n",
+ "star_natCast":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃+* » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵐᵒᵖ» -/\n#print star_natCast /-\n@[simp, norm_cast]\ntheorem star_natCast [Semiring R] [StarRing R] (n : ℕ) : star (n : R) = n :=\n  (congr_arg unop (map_nat_cast (starRingEquiv : «expr ≃+* » R («expr ᵐᵒᵖ» R)) n)).trans (unop_nat_cast _)\n#align star_nat_cast star_natCast\n-/\n\n",
+ "star_mul_self_nonneg'":
+ "#print star_mul_self_nonneg' /-\ntheorem star_mul_self_nonneg' {r : R} : 0 ≤ r * star r :=\n  by\n  nth_rw_rhs 1 [← star_star r]\n  exact star_mul_self_nonneg\n#align star_mul_self_nonneg' star_mul_self_nonneg'\n-/\n\n",
+ "star_mul_self_nonneg":
+ "#print star_mul_self_nonneg /-\n-- see note [lower instance priority]\ntheorem star_mul_self_nonneg {r : R} : 0 ≤ star r * r :=\n  (star_ordered_ring.nonneg_iff _).mpr ⟨r, rfl⟩\n#align star_mul_self_nonneg star_mul_self_nonneg\n-/\n\n",
+ "star_mul'":
+ "#print star_mul' /-\n/-- In a commutative ring, make `simp` prefer leaving the order unchanged. -/\n@[simp]\ntheorem star_mul' [comm_semigroup R] [StarSemigroup R] (x y : R) : star (x * y) = star x * star y :=\n  (star_mul x y).trans (mul_comm _ _)\n#align star_mul' star_mul'\n-/\n\n",
+ "star_invOf":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⅟» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⅟» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⅟» -/\n#print star_invOf /-\ntheorem star_invOf {R : Type _} [monoid R] [StarSemigroup R] (r : R) [Invertible r] [Invertible (star r)] :\n    star ((«expr⅟») r) = («expr⅟») (star r) := by\n  letI := Invertible.star r\n  convert (rfl : star ((«expr⅟») r) = _)\n#align star_inv_of star_invOf\n-/\n\n",
+ "star_inv'":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃+* » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵐᵒᵖ» -/\n#print star_inv' /-\n-- A more convenient name for complex conjugation\n@[simp]\ntheorem star_inv' [DivisionRing R] [StarRing R] (x : R) : star x⁻¹ = (star x)⁻¹ :=\n  op_injective <| (map_inv₀ (starRingEquiv : «expr ≃+* » R («expr ᵐᵒᵖ» R)) x).trans (op_inv (star x)).symm\n#align star_inv' star_inv'\n-/\n\n",
+ "star_inv":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃* » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵐᵒᵖ» -/\n#print star_inv /-\n@[simp]\ntheorem star_inv [group R] [StarSemigroup R] (x : R) : star x⁻¹ = (star x)⁻¹ :=\n  op_injective <| ((starMulEquiv : «expr ≃* » R («expr ᵐᵒᵖ» R)).to_monoid_hom.map_inv x).trans (op_inv (star x)).symm\n#align star_inv star_inv\n-/\n\n",
+ "star_intCast":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃+* » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵐᵒᵖ» -/\n#print star_intCast /-\n@[simp, norm_cast]\ntheorem star_intCast [Ring R] [StarRing R] (z : ℤ) : star (z : R) = z :=\n  (congr_arg unop <| map_intCast (starRingEquiv : «expr ≃+* » R («expr ᵐᵒᵖ» R)) z).trans (unop_intCast _)\n#align star_int_cast star_intCast\n-/\n\n",
+ "star_injective":
+ "#print star_injective /-\ntheorem star_injective [InvolutiveStar R] : function.injective (star : R → R) :=\n  star_involutive.injective\n#align star_injective star_injective\n-/\n\n",
+ "star_id_of_comm":
+ "#print star_id_of_comm /-\n/-- Note that since `star_semigroup_of_comm` is reducible, `simp` can already prove this. -/\ntheorem star_id_of_comm {R : Type _} [CommSemiring R] {x : R} : star x = x :=\n  rfl\n#align star_id_of_comm star_id_of_comm\n-/\n\n",
+ "star_eq_zero":
+ "#print star_eq_zero /-\n@[simp]\ntheorem star_eq_zero [add_monoid R] [StarAddMonoid R] {x : R} : star x = 0 ↔ x = 0 :=\n  starAddEquiv.map_eq_zero_iff\n#align star_eq_zero star_eq_zero\n-/\n\n",
+ "star_eq_iff_star_eq":
+ "#print star_eq_iff_star_eq /-\ntheorem star_eq_iff_star_eq [InvolutiveStar R] {r s : R} : star r = s ↔ star s = r :=\n  eq_comm.trans <| eq_star_iff_eq_star.trans eq_comm\n#align star_eq_iff_star_eq star_eq_iff_star_eq\n-/\n\n",
+ "star_div'":
+ "#print star_div' /-\n/-- When multiplication is commutative, `star` preserves division. -/\n@[simp]\ntheorem star_div' [Field R] [StarRing R] (x y : R) : star (x / y) = star x / star y :=\n  map_div₀ (starRingEnd R) _ _\n#align star_div' star_div'\n-/\n\n",
+ "star_div":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃* » -/\n#print star_div /-\n/-- When multiplication is commutative, `star` preserves division. -/\n@[simp]\ntheorem star_div [comm_group R] [StarSemigroup R] (x y : R) : star (x / y) = star x / star y :=\n  map_div (starMulAut : «expr ≃* » R R) _ _\n#align star_div star_div\n-/\n\n",
+ "star_def":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →+* » -/\n#print RingHom.star_def /-\ntheorem RingHom.star_def {S : Type _} [NonAssocSemiring S] [CommSemiring R] [StarRing R] (f : «expr →+* » S R) :\n    has_star.star f = RingHom.comp (starRingEnd R) f :=\n  rfl\n#align ring_hom.star_def RingHom.star_def\n-/\n\n",
+ "star_bit1":
+ "#print star_bit1 /-\n@[simp]\ntheorem star_bit1 [Semiring R] [StarRing R] (r : R) : star (bit1 r) = bit1 (star r) := by simp [bit1]\n#align star_bit1 star_bit1\n-/\n\n",
+ "star_bit0":
+ "#print star_bit0 /-\n@[simp]\ntheorem star_bit0 [add_monoid R] [StarAddMonoid R] (r : R) : star (bit0 r) = bit0 (star r) := by simp [bit0]\n#align star_bit0 star_bit0\n-/\n\n",
+ "star_apply":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →+* » -/\n#print RingHom.star_apply /-\ntheorem RingHom.star_apply {S : Type _} [NonAssocSemiring S] [CommSemiring R] [StarRing R] (f : «expr →+* » S R)\n    (s : S) : star f s = star (f s) :=\n  rfl\n#align ring_hom.star_apply RingHom.star_apply\n-/\n\n",
+ "starRingEnd_self_apply":
+ "#print starRingEnd_self_apply /-\n@[simp]\ntheorem starRingEnd_self_apply [CommSemiring R] [StarRing R] (x : R) : starRingEnd R (starRingEnd R x) = x :=\n  star_star x\n#align star_ring_end_self_apply starRingEnd_self_apply\n-/\n\n",
+ "starRingEnd_apply":
+ "#print starRingEnd_apply /-\n/-- This is not a simp lemma, since we usually want simp to keep `star_ring_end` bundled.\n For example, for complex conjugation, we don't want simp to turn `conj x`\n into the bare function `star x` automatically since most lemmas are about `conj x`. -/\ntheorem starRingEnd_apply [CommSemiring R] [StarRing R] {x : R} : starRingEnd R x = star x :=\n  rfl\n#align star_ring_end_apply starRingEnd_apply\n-/\n\n",
+ "star":
+ "#print IsUnit.star /-\ntheorem IsUnit.star [monoid R] [StarSemigroup R] {a : R} : is_unit a → is_unit (star a)\n  | ⟨u, hu⟩ => ⟨star u, hu ▸ rfl⟩\n#align is_unit.star IsUnit.star\n-/\n\n",
+ "op_star":
+ "@[simp]\ntheorem op_star [Star R] (r : R) : op (star r) = star (op r) :=\n  rfl\n#align op_star op_star\n\n",
+ "isUnit_star":
+ "#print isUnit_star /-\n@[simp]\ntheorem isUnit_star [monoid R] [StarSemigroup R] {a : R} : is_unit (star a) ↔ is_unit a :=\n  ⟨fun h => star_star a ▸ h.star, IsUnit.star⟩\n#align is_unit_star isUnit_star\n-/\n\n",
+ "inverse_star":
+ "#print Ring.inverse_star /-\ntheorem Ring.inverse_star [Semiring R] [StarRing R] (a : R) : Ring.inverse (star a) = star (Ring.inverse a) :=\n  by\n  by_cases ha : is_unit a\n  · obtain ⟨u, rfl⟩ := ha\n    rw [Ring.inverse_unit, ← Units.coe_star, Ring.inverse_unit, ← Units.coe_star_inv]\n  rw [Ring.inverse_non_unit _ ha, Ring.inverse_non_unit _ (mt is_unit_star.mp ha), star_zero]\n#align ring.inverse_star Ring.inverse_star\n-/\n\n",
+ "eq_star_of_eq_star":
+ "#print eq_star_of_eq_star /-\ntheorem eq_star_of_eq_star [InvolutiveStar R] {r s : R} (h : r = star s) : s = star r := by simp [h]\n#align eq_star_of_eq_star eq_star_of_eq_star\n-/\n\n",
+ "eq_star_iff_eq_star":
+ "#print eq_star_iff_eq_star /-\ntheorem eq_star_iff_eq_star [InvolutiveStar R] {r s : R} : r = star s ↔ s = star r :=\n  ⟨eq_star_of_eq_star, eq_star_of_eq_star⟩\n#align eq_star_iff_eq_star eq_star_iff_eq_star\n-/\n\n",
+ "conjugate_nonneg'":
+ "#print conjugate_nonneg' /-\ntheorem conjugate_nonneg' {a : R} (ha : 0 ≤ a) (c : R) : 0 ≤ c * a * star c := by\n  simpa only [star_star] using conjugate_nonneg ha (star c)\n#align conjugate_nonneg' conjugate_nonneg'\n-/\n\n",
+ "conjugate_nonneg":
+ "#print conjugate_nonneg /-\ntheorem conjugate_nonneg {a : R} (ha : 0 ≤ a) (c : R) : 0 ≤ star c * a * c :=\n  by\n  obtain ⟨x, rfl⟩ := (star_ordered_ring.nonneg_iff _).1 ha\n  exact (star_ordered_ring.nonneg_iff _).2 ⟨x * c, by rw [star_mul, ← mul_assoc, mul_assoc _ _ c]⟩\n#align conjugate_nonneg conjugate_nonneg\n-/\n\n",
+ "conjugate_le_conjugate'":
+ "#print conjugate_le_conjugate' /-\ntheorem conjugate_le_conjugate' {a b : R} (hab : a ≤ b) (c : R) : c * a * star c ≤ c * b * star c := by\n  simpa only [star_star] using conjugate_le_conjugate hab (star c)\n#align conjugate_le_conjugate' conjugate_le_conjugate'\n-/\n\n",
+ "conjugate_le_conjugate":
+ "#print conjugate_le_conjugate /-\ntheorem conjugate_le_conjugate {a b : R} (hab : a ≤ b) (c : R) : star c * a * c ≤ star c * b * c :=\n  by\n  rw [← sub_nonneg] at hab⊢\n  convert conjugate_nonneg hab c\n  simp only [mul_sub, sub_mul]\n#align conjugate_le_conjugate conjugate_le_conjugate\n-/\n\n",
+ "coe_star_inv":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ˣ» -/\n@[simp]\ntheorem coe_star_inv (u : «expr ˣ» R) : ↑(star u)⁻¹ = (star ↑u⁻¹ : R) :=\n  rfl\n#align coe_star_inv coe_star_inv\n\n",
+ "coe_star":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ˣ» -/\n@[simp]\ntheorem coe_star (u : «expr ˣ» R) : ↑(star u) = (star ↑u : R) :=\n  rfl\n#align coe_star coe_star\n\n"}

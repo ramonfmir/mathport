@@ -1,0 +1,4 @@
+{"ext_iff":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℚ -/\n/-\nCopyright (c) 2019 Johannes Hölzl. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Johannes Hölzl, Mario Carneiro\n-/\ntheorem ext_iff {p q : exprℚ} : p = q ↔ p.num = q.num ∧ p.denom = q.denom :=\n  by\n  cases p\n  cases q\n  simp\n#align ext_iff ext_iff\n\n",
+ "ext":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℚ -/\n@[ext]\ntheorem ext {p q : exprℚ} (hn : p.num = q.num) (hd : p.denom = q.denom) : p = q :=\n  rat.ext_iff.mpr ⟨hn, hd⟩\n#align ext ext\n\n"}

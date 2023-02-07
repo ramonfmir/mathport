@@ -1,0 +1,18 @@
+{"set_pairwise_iff":
+ "#print Reflexive.set_pairwise_iff /-\ntheorem Reflexive.set_pairwise_iff (hr : reflexive r) : s.pairwise r ↔ ∀ ⦃a⦄, a ∈ s → ∀ ⦃b⦄, b ∈ s → r a b :=\n  forall₄_congr fun a _ b _ => or_iff_not_imp_left.symm.trans <| or_iff_right_of_imp <| eq.rec <| hr a\n#align reflexive.set_pairwise_iff Reflexive.set_pairwise_iff\n-/\n\n",
+ "set_pairwise":
+ "#print Pairwise.set_pairwise /-\ntheorem Pairwise.set_pairwise (h : Pairwise r) (s : set α) : s.pairwise r := fun x hx y hy w => h w\n#align pairwise.set_pairwise Pairwise.set_pairwise\n-/\n\n",
+ "pairwise_of_forall":
+ "theorem pairwise_of_forall (s : set α) (r : α → α → Prop) (h : ∀ a b, r a b) : s.pairwise r := fun a _ b _ _ => h a b\n#align pairwise_of_forall pairwise_of_forall\n\n",
+ "on_injective":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr on » -/\ntheorem pairwise.on_injective (hs : s.pairwise r) (hf : function.injective f) (hfs : ∀ x, f x ∈ s) :\n    Pairwise («expr on » r f) := fun i j hij => hs (hfs i) (hfs j) (hf.ne hij)\n#align pairwise.on_injective pairwise.on_injective\n\n",
+ "mono":
+ "#print Pairwise.mono /-\n/-\nCopyright (c) 2017 Johannes Hölzl. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Johannes Hölzl\n-/\ntheorem Pairwise.mono (hr : Pairwise r) (h : ∀ ⦃i j⦄, r i j → p i j) : Pairwise p := fun i j hij => h <| hr hij\n#align pairwise.mono Pairwise.mono\n-/\n\n",
+ "injective_iff_pairwise_ne":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr on » -/\n#print Function.injective_iff_pairwise_ne /-\ntheorem Function.injective_iff_pairwise_ne : injective f ↔ Pairwise («expr on » (· ≠ ·) f) :=\n  forall₂_congr fun i j => not_imp_not.symm\n#align function.injective_iff_pairwise_ne Function.injective_iff_pairwise_ne\n-/\n\n",
+ "imp_on":
+ "theorem pairwise.imp_on (h : s.pairwise r) (hrp : s.pairwise fun ⦃a b : α⦄ => r a b → p a b) : s.pairwise p :=\n  fun a ha b hb hab => hrp ha hb hab <| h ha hb hab\n#align pairwise.imp_on pairwise.imp_on\n\n",
+ "imp":
+ "theorem pairwise.imp (h : s.pairwise r) (hpq : ∀ ⦃a b : α⦄, r a b → p a b) : s.pairwise p :=\n  h.imp_on <| pairwise_of_forall s _ hpq\n#align pairwise.imp pairwise.imp\n\n",
+ "eq":
+ "#print Pairwise.eq /-\nprotected theorem Pairwise.eq (hs : s.pairwise r) (ha : a ∈ s) (hb : b ∈ s) (h : ¬r a b) : a = b :=\n  of_not_not fun hab => h <| hs ha hb hab\n#align pairwise.eq Pairwise.eq\n-/\n\n"}

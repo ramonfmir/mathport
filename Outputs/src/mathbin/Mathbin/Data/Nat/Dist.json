@@ -1,0 +1,42 @@
+{"triangle_inequality":
+ "theorem dist.triangle_inequality (n m k : ℕ) : dist n k ≤ dist n m + dist m k :=\n  by\n  have : dist n m + dist m k = n - m + (m - k) + (k - m + (m - n)) := by simp [dist.def, add_comm, add_left_comm]\n  rw [this, dist.def]\n  exact add_le_add tsub_le_tsub_add_tsub tsub_le_tsub_add_tsub\n#align dist.triangle_inequality dist.triangle_inequality\n\n",
+ "eq_of_dist_eq_zero":
+ "theorem eq_of_dist_eq_zero {n m : ℕ} (h : dist n m = 0) : n = m :=\n  have : n - m = 0 := nat.eq_zero_of_add_eq_zero_right h\n  have : n ≤ m := tsub_eq_zero_iff_le.mp this\n  have : m - n = 0 := nat.eq_zero_of_add_eq_zero_left h\n  have : m ≤ n := tsub_eq_zero_iff_le.mp this\n  le_antisymm ‹n ≤ m› ‹m ≤ n›\n#align eq_of_dist_eq_zero eq_of_dist_eq_zero\n\n",
+ "dist_zero_right":
+ "theorem dist_zero_right (n : ℕ) : dist n 0 = n :=\n  eq.trans (dist_eq_sub_of_le_right (zero_le n)) (tsub_zero n)\n#align dist_zero_right dist_zero_right\n\n",
+ "dist_zero_left":
+ "theorem dist_zero_left (n : ℕ) : dist 0 n = n :=\n  eq.trans (dist_eq_sub_of_le (zero_le n)) (tsub_zero n)\n#align dist_zero_left dist_zero_left\n\n",
+ "dist_tri_right'":
+ "theorem dist_tri_right' (n m : ℕ) : n ≤ m + dist n m := by rw [dist_comm] <;> apply dist_tri_right\n#align dist_tri_right' dist_tri_right'\n\n",
+ "dist_tri_right":
+ "theorem dist_tri_right (n m : ℕ) : m ≤ n + dist n m := by rw [add_comm] <;> apply dist_tri_left\n#align dist_tri_right dist_tri_right\n\n",
+ "dist_tri_left'":
+ "theorem dist_tri_left' (n m : ℕ) : n ≤ dist n m + m := by rw [dist_comm] <;> apply dist_tri_left\n#align dist_tri_left' dist_tri_left'\n\n",
+ "dist_tri_left":
+ "theorem dist_tri_left (n m : ℕ) : m ≤ dist n m + n :=\n  le_trans le_tsub_add (add_le_add_right (nat.le_add_left _ _) _)\n#align dist_tri_left dist_tri_left\n\n",
+ "dist_succ_succ":
+ "-- TODO(Jeremy): do when we have max and minx\n--theorem dist_eq_max_sub_min {i j : nat} : dist i j = (max i j) - min i j :=\n--sorry\n/-\nor.elim (lt_or_ge i j)\n  (assume : i < j,\n    by rw [max_eq_right_of_lt this, min_eq_left_of_lt this, dist_eq_sub_of_lt this])\n  (assume : i ≥ j,\n    by rw [max_eq_left this , min_eq_right this, dist_eq_sub_of_le_right this])\n-/\ntheorem dist_succ_succ {i j : nat} : dist (succ i) (succ j) = dist i j := by simp [dist.def, succ_sub_succ]\n#align dist_succ_succ dist_succ_succ\n\n",
+ "dist_self":
+ "@[simp]\ntheorem dist_self (n : ℕ) : dist n n = 0 := by simp [dist.def, tsub_self]\n#align dist_self dist_self\n\n",
+ "dist_pos_of_ne":
+ "theorem dist_pos_of_ne {i j : nat} : i ≠ j → 0 < dist i j := fun hne =>\n  nat.lt_by_cases (fun this : i < j => by rw [dist_eq_sub_of_le (le_of_lt this)]; apply tsub_pos_of_lt this)\n    (fun this : i = j => by contradiction) fun this : i > j => by rw [dist_eq_sub_of_le_right (le_of_lt this)];\n    apply tsub_pos_of_lt this\n#align dist_pos_of_ne dist_pos_of_ne\n\n",
+ "dist_mul_right":
+ "theorem dist_mul_right (n k m : ℕ) : dist (n * k) (m * k) = dist n m * k := by\n  rw [dist.def, dist.def, right_distrib, tsub_mul, tsub_mul]\n#align dist_mul_right dist_mul_right\n\n",
+ "dist_mul_left":
+ "theorem dist_mul_left (k n m : ℕ) : dist (k * n) (k * m) = k * dist n m := by\n  rw [mul_comm k n, mul_comm k m, dist_mul_right, mul_comm]\n#align dist_mul_left dist_mul_left\n\n",
+ "dist_eq_zero":
+ "theorem dist_eq_zero {n m : ℕ} (h : n = m) : dist n m = 0 := by rw [h, dist_self]\n#align dist_eq_zero dist_eq_zero\n\n",
+ "dist_eq_sub_of_le_right":
+ "theorem dist_eq_sub_of_le_right {n m : ℕ} (h : m ≤ n) : dist n m = n - m := by rw [dist_comm]; apply dist_eq_sub_of_le h\n#align dist_eq_sub_of_le_right dist_eq_sub_of_le_right\n\n",
+ "dist_eq_sub_of_le":
+ "theorem dist_eq_sub_of_le {n m : ℕ} (h : n ≤ m) : dist n m = m - n := by\n  rw [dist.def, tsub_eq_zero_iff_le.mpr h, zero_add]\n#align dist_eq_sub_of_le dist_eq_sub_of_le\n\n",
+ "dist_eq_intro":
+ "theorem dist_eq_intro {n m k l : ℕ} (h : n + m = k + l) : dist n k = dist l m :=\n  calc\n    dist n k = dist (n + m) (k + m) := by rw [dist_add_add_right]\n    _ = dist (k + l) (k + m) := by rw [h]\n    _ = dist l m := by rw [dist_add_add_left]\n    \n#align dist_eq_intro dist_eq_intro\n\n",
+ "dist_comm":
+ "theorem dist_comm (n m : ℕ) : dist n m = dist m n := by simp [dist.def, add_comm]\n#align dist_comm dist_comm\n\n",
+ "dist_add_add_right":
+ "theorem dist_add_add_right (n k m : ℕ) : dist (n + k) (m + k) = dist n m :=\n  calc\n    dist (n + k) (m + k) = n + k - (m + k) + (m + k - (n + k)) := rfl\n    _ = n - m + (m + k - (n + k)) := by rw [add_tsub_add_eq_tsub_right]\n    _ = n - m + (m - n) := by rw [add_tsub_add_eq_tsub_right]\n    \n#align dist_add_add_right dist_add_add_right\n\n",
+ "dist_add_add_left":
+ "theorem dist_add_add_left (k n m : ℕ) : dist (k + n) (k + m) = dist n m := by rw [add_comm k n, add_comm k m];\n  apply dist_add_add_right\n#align dist_add_add_left dist_add_add_left\n\n",
+ "def":
+ "/-\nCopyright (c) 2014 Floris van Doorn. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Floris van Doorn, Jeremy Avigad\n-/\ntheorem dist.def (n m : ℕ) : dist n m = n - m + (m - n) :=\n  rfl\n#align dist.def dist.def\n\n"}

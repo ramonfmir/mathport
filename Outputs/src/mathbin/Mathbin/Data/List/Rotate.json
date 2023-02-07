@@ -1,0 +1,166 @@
+{"zip_with_rotate_one":
+ "@[simp]\ntheorem zip_with_rotate_one {β : Type _} (f : α → α → β) (x y : α) (l : list α) :\n    zip_with f (x :: y :: l) ((x :: y :: l).rotate 1) = f x y :: zip_with f (y :: l) (l ++ [x]) := by simp\n#align zip_with_rotate_one zip_with_rotate_one\n\n",
+ "zip_with_rotate_distrib":
+ "theorem zip_with_rotate_distrib {α β γ : Type _} (f : α → β → γ) (l : list α) (l' : list β) (n : ℕ)\n    (h : l.length = l'.length) : (zip_with f l l').rotate n = zip_with f (l.rotate n) (l'.rotate n) :=\n  by\n  rw [rotate_eq_drop_append_take_mod, rotate_eq_drop_append_take_mod, rotate_eq_drop_append_take_mod, h,\n    zip_with_append, ← zip_with_distrib_drop, ← zip_with_distrib_take, list.length_zip_with, h, min_self]\n  rw [length_drop, length_drop, h]\n#align zip_with_rotate_distrib zip_with_rotate_distrib\n\n",
+ "trans":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ~r » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ~r » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ~r » -/\n@[trans]\ntheorem is_rotated.trans : ∀ {l l' l'' : list α}, «expr ~r » l l' → «expr ~r » l' l'' → «expr ~r » l l''\n  | _, _, _, ⟨n, rfl⟩, ⟨m, rfl⟩ => ⟨n + m, by rw [rotate_rotate]⟩\n#align is_rotated.trans is_rotated.trans\n\n",
+ "symm":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ~r » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ~r » -/\n@[symm]\ntheorem is_rotated.symm (h : «expr ~r » l l') : «expr ~r » l' l :=\n  by\n  obtain ⟨n, rfl⟩ := h\n  cases' l with hd tl\n  · simp\n  · use (hd :: tl).length * n - n\n    rw [rotate_rotate, add_tsub_cancel_of_le, rotate_length_mul]\n    exact Nat.le_mul_of_pos_left (by simp)\n#align is_rotated.symm is_rotated.symm\n\n",
+ "singleton_eq_rotate_iff":
+ "@[simp]\ntheorem singleton_eq_rotate_iff {l : list α} {n : ℕ} {x : α} : [x] = l.rotate n ↔ [x] = l := by\n  rw [eq_comm, rotate_eq_singleton_iff, eq_comm]\n#align singleton_eq_rotate_iff singleton_eq_rotate_iff\n\n",
+ "rotate_zero":
+ "@[simp]\ntheorem rotate_zero (l : list α) : l.rotate 0 = l := by simp [rotate]\n#align rotate_zero rotate_zero\n\n",
+ "rotate_singleton":
+ "@[simp]\ntheorem rotate_singleton (x : α) (n : ℕ) : [x].rotate n = [x] :=\n  rotate_replicate x 1 n\n#align rotate_singleton rotate_singleton\n\n",
+ "rotate_rotate":
+ "theorem rotate_rotate (l : list α) (n m : ℕ) : (l.rotate n).rotate m = l.rotate (n + m) := by\n  rw [rotate_eq_rotate', rotate_eq_rotate', rotate_eq_rotate', rotate'_rotate']\n#align rotate_rotate rotate_rotate\n\n",
+ "rotate_reverse":
+ "theorem rotate_reverse (l : list α) (n : ℕ) : l.reverse.rotate n = (l.rotate (l.length - n % l.length)).reverse :=\n  by\n  rw [← reverse_reverse l]\n  simp_rw [reverse_rotate, reverse_reverse, rotate_eq_iff, rotate_rotate, length_rotate, length_reverse]\n  rw [← length_reverse l]\n  set k := n % l.reverse.length with hk\n  cases' hk' : k with k'\n  · simp [-length_reverse, ← rotate_rotate]\n  · cases' l with x l\n    · simp\n    · have : k'.succ < (x :: l).length := by simp [← hk', hk, nat.mod_lt]\n      rw [nat.mod_eq_of_lt, tsub_add_cancel_of_le, rotate_length]\n      · exact tsub_le_self\n      · exact tsub_lt_self (by simp) Nat.succ_pos'\n#align rotate_reverse rotate_reverse\n\n",
+ "rotate_replicate":
+ "theorem rotate_replicate (a : α) (n : ℕ) (k : ℕ) : (replicate n a).rotate k = replicate n a :=\n  eq_replicate.2 ⟨by rw [length_rotate, length_replicate], fun b hb => eq_of_mem_replicate <| mem_rotate.1 hb⟩\n#align rotate_replicate rotate_replicate\n\n",
+ "rotate_perm":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `list.perm -/\ntheorem rotate_perm (l : list α) (n : ℕ) : list.perm (l.rotate n) l :=\n  by\n  rw [rotate_eq_rotate']\n  induction' n with n hn generalizing l\n  · simp\n  · cases' l with hd tl\n    · simp\n    · rw [rotate'_cons_succ]\n      exact (hn _).trans (perm_append_singleton _ _)\n#align rotate_perm rotate_perm\n\n",
+ "rotate_one_eq_self_iff_eq_replicate":
+ "theorem rotate_one_eq_self_iff_eq_replicate [nonempty α] {l : list α} :\n    l.rotate 1 = l ↔ ∃ a : α, l = list.replicate l.length a :=\n  ⟨fun h =>\n    rotate_eq_self_iff_eq_replicate.mp fun n =>\n      nat.rec l.rotate_zero (fun n hn => by rwa [nat.succ_eq_add_one, ← l.rotate_rotate, hn]) n,\n    fun h => rotate_eq_self_iff_eq_replicate.mpr h 1⟩\n#align rotate_one_eq_self_iff_eq_replicate rotate_one_eq_self_iff_eq_replicate\n\n",
+ "rotate_nil":
+ "@[simp]\ntheorem rotate_nil (n : ℕ) : ([] : list α).rotate n = [] := by simp [rotate]\n#align rotate_nil rotate_nil\n\n",
+ "rotate_mod":
+ "/-\nCopyright (c) 2019 Chris Hughes. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Chris Hughes, Yakov Pechersky\n-/\ntheorem rotate_mod (l : list α) (n : ℕ) : l.rotate (n % l.length) = l.rotate n := by simp [rotate]\n#align rotate_mod rotate_mod\n\n",
+ "rotate_length_mul":
+ "@[simp]\ntheorem rotate_length_mul (l : list α) (n : ℕ) : l.rotate (l.length * n) = l := by\n  rw [rotate_eq_rotate', rotate'_length_mul]\n#align rotate_length_mul rotate_length_mul\n\n",
+ "rotate_length":
+ "@[simp]\ntheorem rotate_length (l : list α) : rotate l l.length = l := by rw [rotate_eq_rotate', rotate'_length]\n#align rotate_length rotate_length\n\n",
+ "rotate_injective":
+ "theorem rotate_injective (n : ℕ) : function.injective fun l : list α => l.rotate n :=\n  by\n  rintro l₁ l₂ (h : l₁.rotate n = l₂.rotate n)\n  have : length l₁ = length l₂ := by simpa only [length_rotate] using congr_arg length h\n  refine' ext_le this fun k h₁ h₂ => _\n  rw [← nth_le_rotate' l₁ n, ← nth_le_rotate' l₂ n]\n  congr 1 <;> simp only [h, this]\n#align rotate_injective rotate_injective\n\n",
+ "rotate_eq_singleton_iff":
+ "@[simp]\ntheorem rotate_eq_singleton_iff {l : list α} {n : ℕ} {x : α} : l.rotate n = [x] ↔ l = [x] := by\n  rw [rotate_eq_iff, rotate_singleton]\n#align rotate_eq_singleton_iff rotate_eq_singleton_iff\n\n",
+ "rotate_eq_self_iff_eq_replicate":
+ "theorem rotate_eq_self_iff_eq_replicate [hα : nonempty α] :\n    ∀ {l : list α}, (∀ n, l.rotate n = l) ↔ ∃ a, l = replicate l.length a\n  | [] => by simp\n  | a :: l =>\n    ⟨fun h =>\n      ⟨a,\n        ext_nthLe (length_replicate _ _).symm fun n h₁ h₂ =>\n          by\n          inhabit α\n          rw [nth_le_replicate, ← option.some_inj, ← nth_le_nth, ← head'_rotate h₁, h, head']⟩,\n      fun ⟨b, hb⟩ n => by rw [hb, rotate_replicate]⟩\n#align rotate_eq_self_iff_eq_replicate rotate_eq_self_iff_eq_replicate\n\n",
+ "rotate_eq_self_iff":
+ "theorem nodup.rotate_eq_self_iff {l : list α} (hl : l.nodup) {n : ℕ} : l.rotate n = l ↔ n % l.length = 0 ∨ l = [] :=\n  by\n  constructor\n  · intro h\n    cases' l.length.zero_le.eq_or_lt with hl' hl'\n    · simp [← length_eq_zero, ← hl']\n    left\n    rw [nodup_iff_nth_le_inj] at hl\n    refine' hl _ _ (mod_lt _ hl') hl' _\n    rw [← nth_le_rotate' _ n]\n    simp_rw [h, tsub_add_cancel_of_le (mod_lt _ hl').le, mod_self]\n  · rintro (h | h)\n    · rw [← rotate_mod, h]\n      exact rotate_zero l\n    · simp [h]\n#align nodup.rotate_eq_self_iff nodup.rotate_eq_self_iff\n\n",
+ "rotate_eq_rotate'":
+ "theorem rotate_eq_rotate' (l : list α) (n : ℕ) : l.rotate n = l.rotate' n :=\n  if h : l.length = 0 then by simp_all [length_eq_zero]\n  else by\n    rw [← rotate'_mod, rotate'_eq_drop_append_take (le_of_lt (nat.mod_lt _ (nat.pos_of_ne_zero h)))] <;> simp [rotate]\n#align rotate_eq_rotate' rotate_eq_rotate'\n\n",
+ "rotate_eq_rotate":
+ "@[simp]\ntheorem rotate_eq_rotate {l l' : list α} {n : ℕ} : l.rotate n = l'.rotate n ↔ l = l' :=\n  (rotate_injective n).eq_iff\n#align rotate_eq_rotate rotate_eq_rotate\n\n",
+ "rotate_eq_nil_iff":
+ "@[simp]\ntheorem rotate_eq_nil_iff {l : list α} {n : ℕ} : l.rotate n = [] ↔ l = [] :=\n  by\n  induction' n with n hn generalizing l\n  · simp\n  · cases' l with hd tl\n    · simp\n    · simp [rotate_cons_succ, hn]\n#align rotate_eq_nil_iff rotate_eq_nil_iff\n\n",
+ "rotate_eq_iff":
+ "theorem rotate_eq_iff {l l' : list α} {n : ℕ} : l.rotate n = l' ↔ l = l'.rotate (l'.length - n % l'.length) :=\n  by\n  rw [← @rotate_eq_rotate _ l _ n, rotate_rotate, ← rotate_mod l', add_mod]\n  cases' l'.length.zero_le.eq_or_lt with hl hl\n  · rw [eq_nil_of_length_eq_zero hl.symm, rotate_nil, rotate_eq_nil_iff]\n  · cases' (nat.zero_le (n % l'.length)).eq_or_lt with hn hn\n    · simp [← hn]\n    · rw [mod_eq_of_lt (tsub_lt_self hl hn), tsub_add_cancel_of_le, mod_self, rotate_zero]\n      exact (nat.mod_lt _ hl).le\n#align rotate_eq_iff rotate_eq_iff\n\n",
+ "rotate_eq_drop_append_take_mod":
+ "theorem rotate_eq_drop_append_take_mod {l : list α} {n : ℕ} :\n    l.rotate n = l.drop (n % l.length) ++ l.take (n % l.length) :=\n  by\n  cases' l.length.zero_le.eq_or_lt with hl hl\n  · simp [eq_nil_of_length_eq_zero hl.symm]\n  rw [← rotate_eq_drop_append_take (n.mod_lt hl).le, rotate_mod]\n#align rotate_eq_drop_append_take_mod rotate_eq_drop_append_take_mod\n\n",
+ "rotate_eq_drop_append_take":
+ "theorem rotate_eq_drop_append_take {l : list α} {n : ℕ} : n ≤ l.length → l.rotate n = l.drop n ++ l.take n := by\n  rw [rotate_eq_rotate'] <;> exact rotate'_eq_drop_append_take\n#align rotate_eq_drop_append_take rotate_eq_drop_append_take\n\n",
+ "rotate_cons_succ":
+ "theorem rotate_cons_succ (l : list α) (a : α) (n : ℕ) : (a :: l : list α).rotate n.succ = (l ++ [a]).rotate n := by\n  rw [rotate_eq_rotate', rotate_eq_rotate', rotate'_cons_succ]\n#align rotate_cons_succ rotate_cons_succ\n\n",
+ "rotate_congr":
+ "theorem nodup.rotate_congr {l : list α} (hl : l.nodup) (hn : l ≠ []) (i j : ℕ) (h : l.rotate i = l.rotate j) :\n    i % l.length = j % l.length :=\n  by\n  have hi : i % l.length < l.length := mod_lt _ (length_pos_of_ne_nil hn)\n  have hj : j % l.length < l.length := mod_lt _ (length_pos_of_ne_nil hn)\n  refine' (nodup_iff_nth_le_inj.mp hl) _ _ hi hj _\n  rw [← nth_le_rotate' l i, ← nth_le_rotate' l j]\n  simp [tsub_add_cancel_of_le, hi.le, hj.le, h]\n#align nodup.rotate_congr nodup.rotate_congr\n\n",
+ "rotate_append_length_eq":
+ "@[simp]\ntheorem rotate_append_length_eq (l l' : list α) : (l ++ l').rotate l.length = l' ++ l :=\n  by\n  rw [rotate_eq_rotate']\n  induction l generalizing l'\n  · simp\n  · simp [rotate', l_ih]\n#align rotate_append_length_eq rotate_append_length_eq\n\n",
+ "rotate'_zero":
+ "@[simp]\ntheorem rotate'_zero (l : list α) : l.rotate' 0 = l := by cases l <;> rfl\n#align rotate'_zero rotate'_zero\n\n",
+ "rotate'_rotate'":
+ "theorem rotate'_rotate' : ∀ (l : list α) (n m : ℕ), (l.rotate' n).rotate' m = l.rotate' (n + m)\n  | a :: l, 0, m => by simp\n  | [], n, m => by simp\n  | a :: l, n + 1, m => by rw [rotate'_cons_succ, rotate'_rotate', add_right_comm, rotate'_cons_succ]\n#align rotate'_rotate' rotate'_rotate'\n\n",
+ "rotate'_nil":
+ "@[simp]\ntheorem rotate'_nil (n : ℕ) : ([] : list α).rotate' n = [] := by cases n <;> rfl\n#align rotate'_nil rotate'_nil\n\n",
+ "rotate'_mod":
+ "theorem rotate'_mod (l : list α) (n : ℕ) : l.rotate' (n % l.length) = l.rotate' n :=\n  calc\n    l.rotate' (n % l.length) =\n        (l.rotate' (n % l.length)).rotate' ((l.rotate' (n % l.length)).length * (n / l.length)) :=\n      by rw [rotate'_length_mul]\n    _ = l.rotate' n := by rw [rotate'_rotate', length_rotate', nat.mod_add_div]\n    \n#align rotate'_mod rotate'_mod\n\n",
+ "rotate'_length_mul":
+ "@[simp]\ntheorem rotate'_length_mul (l : list α) : ∀ n : ℕ, l.rotate' (l.length * n) = l\n  | 0 => by simp\n  | n + 1 =>\n    calc\n      l.rotate' (l.length * (n + 1)) = (l.rotate' (l.length * n)).rotate' (l.rotate' (l.length * n)).length := by\n        simp [-rotate'_length, nat.mul_succ, rotate'_rotate']\n      _ = l := by rw [rotate'_length, rotate'_length_mul]\n      \n#align rotate'_length_mul rotate'_length_mul\n\n",
+ "rotate'_length":
+ "@[simp]\ntheorem rotate'_length (l : list α) : rotate' l l.length = l := by rw [rotate'_eq_drop_append_take le_rfl] <;> simp\n#align rotate'_length rotate'_length\n\n",
+ "rotate'_eq_drop_append_take":
+ "theorem rotate'_eq_drop_append_take : ∀ {l : list α} {n : ℕ}, n ≤ l.length → l.rotate' n = l.drop n ++ l.take n\n  | [], n, h => by simp [drop_append_of_le_length h]\n  | l, 0, h => by simp [take_append_of_le_length h]\n  | a :: l, n + 1, h => by\n    have hnl : n ≤ l.length := le_of_succ_le_succ h\n    have hnl' : n ≤ (l ++ [a]).length := by\n      rw [length_append, length_cons, list.length, zero_add] <;> exact le_of_succ_le h\n    rw [rotate'_cons_succ, rotate'_eq_drop_append_take hnl', drop, take, drop_append_of_le_length hnl,\n        take_append_of_le_length hnl] <;>\n      simp\n#align rotate'_eq_drop_append_take rotate'_eq_drop_append_take\n\n",
+ "rotate'_cons_succ":
+ "theorem rotate'_cons_succ (l : list α) (a : α) (n : ℕ) : (a :: l : list α).rotate' n.succ = (l ++ [a]).rotate' n := by\n  simp [rotate']\n#align rotate'_cons_succ rotate'_cons_succ\n\n",
+ "reverse_rotate":
+ "theorem reverse_rotate (l : list α) (n : ℕ) : (l.rotate n).reverse = l.reverse.rotate (l.length - n % l.length) :=\n  by\n  rw [← length_reverse l, ← rotate_eq_iff]\n  induction' n with n hn generalizing l\n  · simp\n  · cases' l with hd tl\n    · simp\n    · rw [rotate_cons_succ, nat.succ_eq_add_one, ← rotate_rotate, hn]\n      simp\n#align reverse_rotate reverse_rotate\n\n",
+ "reverse":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ~r » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ~r » -/\ntheorem is_rotated.reverse (h : «expr ~r » l l') : «expr ~r » l.reverse l'.reverse :=\n  by\n  obtain ⟨n, rfl⟩ := h\n  exact ⟨_, (reverse_rotate _ _).symm⟩\n#align is_rotated.reverse is_rotated.reverse\n\n",
+ "refl":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ~r » -/\n@[refl]\ntheorem is_rotated.refl (l : list α) : «expr ~r » l l :=\n  ⟨0, by simp⟩\n#align is_rotated.refl is_rotated.refl\n\n",
+ "prod_rotate_eq_one_of_prod_eq_one":
+ "theorem prod_rotate_eq_one_of_prod_eq_one [group α] : ∀ {l : list α} (hl : l.prod = 1) (n : ℕ), (l.rotate n).prod = 1\n  | [], _, _ => by simp\n  | a :: l, hl, n =>\n    by\n    have : n % list.length (a :: l) ≤ list.length (a :: l) := le_of_lt (nat.mod_lt _ (by decide))\n    rw [← List.take_append_drop (n % list.length (a :: l)) (a :: l)] at hl <;>\n      rw [← rotate_mod, rotate_eq_drop_append_take this, List.prod_append, mul_eq_one_iff_inv_eq, ←\n        one_mul (List.prod _)⁻¹, ← hl, List.prod_append, mul_assoc, mul_inv_self, mul_one]\n#align prod_rotate_eq_one_of_prod_eq_one prod_rotate_eq_one_of_prod_eq_one\n\n",
+ "perm":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ~r » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `list.perm -/\ntheorem is_rotated.perm (h : «expr ~r » l l') : list.perm l l' :=\n  exists.elim h fun _ hl => hl ▸ (rotate_perm _ _).symm\n#align is_rotated.perm is_rotated.perm\n\n",
+ "nth_rotate":
+ "theorem nth_rotate {l : list α} {n m : ℕ} (hml : m < l.length) : (l.rotate n).nth m = l.nth ((m + n) % l.length) :=\n  by\n  rw [nth_le_nth, nth_le_nth (nat.mod_lt _ _), nth_le_rotate]\n  rwa [length_rotate]\n#align nth_rotate nth_rotate\n\n",
+ "nth_le_rotate_one":
+ "theorem nth_le_rotate_one (l : list α) (k : ℕ) (hk : k < (l.rotate 1).length) :\n    (l.rotate 1).nth_le k hk = l.nth_le ((k + 1) % l.length) (mod_lt _ (length_rotate l 1 ▸ k.zero_le.trans_lt hk)) :=\n  by\n  cases' l with hd tl\n  · simp\n  · have : k ≤ tl.length := by\n      refine' nat.le_of_lt_succ _\n      simpa using hk\n    rcases this.eq_or_lt with (rfl | hk')\n    · simp [nth_le_append_right le_rfl]\n    · simpa [nth_le_append _ hk', length_cons, nat.mod_eq_of_lt (nat.succ_lt_succ hk')]\n#align nth_le_rotate_one nth_le_rotate_one\n\n",
+ "nth_le_rotate'":
+ "/-- A variant of `nth_le_rotate` useful for rewrites. -/\ntheorem nth_le_rotate' (l : list α) (n k : ℕ) (hk : k < l.length) :\n    (l.rotate n).nth_le ((l.length - n % l.length + k) % l.length)\n        ((nat.mod_lt _ (k.zero_le.trans_lt hk)).trans_le (length_rotate _ _).ge) =\n      l.nth_le k hk :=\n  by\n  rw [nth_le_rotate]\n  congr\n  set m := l.length\n  rw [mod_add_mod, add_assoc, add_left_comm, add_comm, add_mod, add_mod _ n]\n  cases' (n % m).zero_le.eq_or_lt with hn hn\n  · simpa [← hn] using nat.mod_eq_of_lt hk\n  · have mpos : 0 < m := k.zero_le.trans_lt hk\n    have hm : m - n % m < m := tsub_lt_self mpos hn\n    have hn' : n % m < m := nat.mod_lt _ mpos\n    simpa [mod_eq_of_lt hm, tsub_add_cancel_of_le hn'.le] using nat.mod_eq_of_lt hk\n#align nth_le_rotate' nth_le_rotate'\n\n",
+ "nth_le_rotate":
+ "theorem nth_le_rotate (l : list α) (n k : ℕ) (hk : k < (l.rotate n).length) :\n    (l.rotate n).nth_le k hk = l.nth_le ((k + n) % l.length) (mod_lt _ (length_rotate l n ▸ k.zero_le.trans_lt hk)) :=\n  by\n  induction' n with n hn generalizing l k\n  · have hk' : k < l.length := by simpa using hk\n    simp [nat.mod_eq_of_lt hk']\n  · simp [nat.succ_eq_add_one, ← rotate_rotate, nth_le_rotate_one, hn l, add_comm, add_left_comm]\n#align nth_le_rotate nth_le_rotate\n\n",
+ "nth_le_cyclic_permutations":
+ "@[simp]\ntheorem nth_le_cyclic_permutations (l : list α) (n : ℕ) (hn : n < length (cyclicPermutations l)) :\n    nthLe (cyclicPermutations l) n hn = l.rotate n :=\n  by\n  obtain rfl | h := eq_or_ne l []\n  · simp\n  · rw [length_cyclic_permutations_of_ne_nil _ h] at hn\n    simp [init_eq_take, cyclic_permutations_of_ne_nil _ h, nth_le_take', rotate_eq_drop_append_take hn.le]\n#align nth_le_cyclic_permutations nth_le_cyclic_permutations\n\n",
+ "nodup_rotate":
+ "@[simp]\ntheorem nodup_rotate {l : list α} {n : ℕ} : Nodup (l.rotate n) ↔ Nodup l :=\n  (rotate_perm l n).nodup_iff\n#align nodup_rotate nodup_rotate\n\n",
+ "nodup_iff":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ~r » -/\ntheorem is_rotated.nodup_iff (h : «expr ~r » l l') : Nodup l ↔ Nodup l' :=\n  h.perm.nodup_iff\n#align is_rotated.nodup_iff is_rotated.nodup_iff\n\n",
+ "nil_eq_rotate_iff":
+ "@[simp]\ntheorem nil_eq_rotate_iff {l : list α} {n : ℕ} : [] = l.rotate n ↔ [] = l := by rw [eq_comm, rotate_eq_nil_iff, eq_comm]\n#align nil_eq_rotate_iff nil_eq_rotate_iff\n\n",
+ "mem_rotate":
+ "@[simp]\ntheorem mem_rotate : ∀ {l : list α} {a : α} {n : ℕ}, a ∈ l.rotate n ↔ a ∈ l\n  | [], _, n => by simp\n  | a :: l, _, 0 => by simp\n  | a :: l, _, n + 1 => by simp [rotate_cons_succ, mem_rotate, or_comm]\n#align mem_rotate mem_rotate\n\n",
+ "mem_iff":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ~r » -/\ntheorem is_rotated.mem_iff (h : «expr ~r » l l') {a : α} : a ∈ l ↔ a ∈ l' :=\n  h.perm.mem_iff\n#align is_rotated.mem_iff is_rotated.mem_iff\n\n",
+ "mem_cyclic_permutations_self":
+ "theorem mem_cyclic_permutations_self (l : list α) : l ∈ cyclicPermutations l :=\n  by\n  cases' l with x l\n  · simp\n  · rw [mem_iff_nth_le]\n    refine' ⟨0, by simp, _⟩\n    simp\n#align mem_cyclic_permutations_self mem_cyclic_permutations_self\n\n",
+ "mem_cyclic_permutations_iff":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ~r » -/\n@[simp]\ntheorem mem_cyclic_permutations_iff {l l' : list α} : l ∈ cyclicPermutations l' ↔ «expr ~r » l l' :=\n  by\n  constructor\n  · intro h\n    obtain ⟨k, hk, rfl⟩ := nth_le_of_mem h\n    simp\n  · intro h\n    obtain ⟨k, rfl⟩ := h.symm\n    rw [mem_iff_nth_le]\n    simp only [exists_prop, nth_le_cyclic_permutations]\n    cases' l' with x l\n    · simp\n    · refine' ⟨k % length (x :: l), _, rotate_mod _ _⟩\n      simpa using nat.mod_lt _ (zero_lt_succ _)\n#align mem_cyclic_permutations_iff mem_cyclic_permutations_iff\n\n",
+ "map_rotate":
+ "theorem map_rotate {β : Type _} (f : α → β) (l : list α) (n : ℕ) : map f (l.rotate n) = (map f l).rotate n :=\n  by\n  induction' n with n hn IH generalizing l\n  · simp\n  · cases' l with hd tl\n    · simp\n    · simp [hn]\n#align map_rotate map_rotate\n\n",
+ "map":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ~r » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ~r » -/\n@[congr]\ntheorem is_rotated.map {β : Type _} {l₁ l₂ : list α} (h : «expr ~r » l₁ l₂) (f : α → β) :\n    «expr ~r » (map f l₁) (map f l₂) := by\n  obtain ⟨n, rfl⟩ := h\n  rw [map_rotate]\n  use n\n#align is_rotated.map is_rotated.map\n\n",
+ "length_rotate'":
+ "@[simp]\ntheorem length_rotate' : ∀ (l : list α) (n : ℕ), (l.rotate' n).length = l.length\n  | [], n => rfl\n  | a :: l, 0 => rfl\n  | a :: l, n + 1 => by rw [List.rotate', length_rotate' (l ++ [a]) n] <;> simp\n#align length_rotate' length_rotate'\n\n",
+ "length_rotate":
+ "@[simp]\ntheorem length_rotate (l : list α) (n : ℕ) : (l.rotate n).length = l.length := by rw [rotate_eq_rotate', length_rotate']\n#align length_rotate length_rotate\n\n",
+ "length_mem_cyclic_permutations":
+ "theorem length_mem_cyclic_permutations (l : list α) (h : l' ∈ cyclicPermutations l) : length l' = length l :=\n  by\n  obtain ⟨k, hk, rfl⟩ := nth_le_of_mem h\n  simp\n#align length_mem_cyclic_permutations length_mem_cyclic_permutations\n\n",
+ "length_cyclic_permutations_of_ne_nil":
+ "@[simp]\ntheorem length_cyclic_permutations_of_ne_nil (l : list α) (h : l ≠ []) : length (cyclicPermutations l) = length l := by\n  simp [cyclic_permutations_of_ne_nil _ h]\n#align length_cyclic_permutations_of_ne_nil length_cyclic_permutations_of_ne_nil\n\n",
+ "length_cyclic_permutations_cons":
+ "theorem length_cyclic_permutations_cons (x : α) (l : list α) : length (cyclicPermutations (x :: l)) = length l + 1 := by\n  simp [cyclic_permutations_of_ne_nil]\n#align length_cyclic_permutations_cons length_cyclic_permutations_cons\n\n",
+ "is_rotated_singleton_iff'":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ~r » -/\n@[simp]\ntheorem is_rotated_singleton_iff' {x : α} : «expr ~r » [x] l ↔ [x] = l := by\n  rw [is_rotated_comm, is_rotated_singleton_iff, eq_comm]\n#align is_rotated_singleton_iff' is_rotated_singleton_iff'\n\n",
+ "is_rotated_singleton_iff":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ~r » -/\n@[simp]\ntheorem is_rotated_singleton_iff {x : α} : «expr ~r » l [x] ↔ l = [x] :=\n  ⟨fun ⟨n, hn⟩ => by simpa using hn, fun h => h ▸ by rfl⟩\n#align is_rotated_singleton_iff is_rotated_singleton_iff\n\n",
+ "is_rotated_reverse_iff":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ~r » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ~r » -/\n@[simp]\ntheorem is_rotated_reverse_iff : «expr ~r » l.reverse l'.reverse ↔ «expr ~r » l l' := by\n  simp [is_rotated_reverse_comm_iff]\n#align is_rotated_reverse_iff is_rotated_reverse_iff\n\n",
+ "is_rotated_reverse_comm_iff":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ~r » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ~r » -/\ntheorem is_rotated_reverse_comm_iff : «expr ~r » l.reverse l' ↔ «expr ~r » l l'.reverse := by\n  constructor <;>\n    · intro h\n      simpa using h.reverse\n#align is_rotated_reverse_comm_iff is_rotated_reverse_comm_iff\n\n",
+ "is_rotated_nil_iff'":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ~r » -/\n@[simp]\ntheorem is_rotated_nil_iff' : «expr ~r » [] l ↔ [] = l := by rw [is_rotated_comm, is_rotated_nil_iff, eq_comm]\n#align is_rotated_nil_iff' is_rotated_nil_iff'\n\n",
+ "is_rotated_nil_iff":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ~r » -/\n@[simp]\ntheorem is_rotated_nil_iff : «expr ~r » l [] ↔ l = [] :=\n  ⟨fun ⟨n, hn⟩ => by simpa using hn, fun h => h ▸ by rfl⟩\n#align is_rotated_nil_iff is_rotated_nil_iff\n\n",
+ "is_rotated_iff_mod":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ~r » -/\ntheorem is_rotated_iff_mod : «expr ~r » l l' ↔ ∃ n ≤ l.length, l.rotate n = l' :=\n  by\n  refine' ⟨fun h => _, fun ⟨n, _, h⟩ => ⟨n, h⟩⟩\n  obtain ⟨n, rfl⟩ := h\n  cases' l with hd tl\n  · simp\n  · refine' ⟨n % (hd :: tl).length, _, rotate_mod _ _⟩\n    refine' (nat.mod_lt _ _).le\n    simp\n#align is_rotated_iff_mod is_rotated_iff_mod\n\n",
+ "is_rotated_iff_mem_map_range":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ~r » -/\ntheorem is_rotated_iff_mem_map_range : «expr ~r » l l' ↔ l' ∈ (list.range (l.length + 1)).map l.rotate :=\n  by\n  simp_rw [mem_map, mem_range, is_rotated_iff_mod]\n  exact ⟨fun ⟨n, hn, h⟩ => ⟨n, nat.lt_succ_of_le hn, h⟩, fun ⟨n, hn, h⟩ => ⟨n, nat.le_of_lt_succ hn, h⟩⟩\n#align is_rotated_iff_mem_map_range is_rotated_iff_mem_map_range\n\n",
+ "is_rotated_cyclic_permutations_iff":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ~r » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ~r » -/\n@[simp]\ntheorem is_rotated_cyclic_permutations_iff {l l' : list α} :\n    «expr ~r » l.cyclic_permutations l'.cyclic_permutations ↔ «expr ~r » l l' :=\n  by\n  by_cases hl : l = []\n  · simp [hl, eq_comm]\n  have hl' : l.cyclic_permutations.length = l.length := length_cyclic_permutations_of_ne_nil _ hl\n  refine' ⟨fun h => _, is_rotated.cyclic_permutations⟩\n  obtain ⟨k, hk⟩ := h\n  refine' ⟨k % l.length, _⟩\n  have hk' : k % l.length < l.length := mod_lt _ (length_pos_of_ne_nil hl)\n  rw [← nth_le_cyclic_permutations _ _ (hk'.trans_le hl'.ge), ← nth_le_rotate' _ k]\n  simp [hk, hl', tsub_add_cancel_of_le hk'.le]\n#align is_rotated_cyclic_permutations_iff is_rotated_cyclic_permutations_iff\n\n",
+ "is_rotated_concat":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ~r » -/\ntheorem is_rotated_concat (hd : α) (tl : list α) : «expr ~r » (tl ++ [hd]) (hd :: tl) :=\n  IsRotated.symm ⟨1, by simp⟩\n#align is_rotated_concat is_rotated_concat\n\n",
+ "is_rotated_comm":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ~r » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ~r » -/\ntheorem is_rotated_comm : «expr ~r » l l' ↔ «expr ~r » l' l :=\n  ⟨IsRotated.symm, IsRotated.symm⟩\n#align is_rotated_comm is_rotated_comm\n\n",
+ "is_rotated_append":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ~r » -/\ntheorem is_rotated_append : «expr ~r » (l ++ l') (l' ++ l) :=\n  ⟨l.length, by simp⟩\n#align is_rotated_append is_rotated_append\n\n",
+ "head'_rotate":
+ "theorem head'_rotate {l : list α} {n : ℕ} (h : n < l.length) : head? (l.rotate n) = l.nth n := by\n  rw [← nth_zero, nth_rotate (n.zero_le.trans_lt h), zero_add, nat.mod_eq_of_lt h]\n#align head'_rotate head'_rotate\n\n",
+ "forall":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ~r » -/\n@[simp]\nprotected theorem is_rotated.forall (l : list α) (n : ℕ) : «expr ~r » (l.rotate n) l :=\n  IsRotated.symm ⟨n, rfl⟩\n#align is_rotated.forall is_rotated.forall\n\n",
+ "eqv":
+ "theorem is_rotated.eqv : equivalence (@IsRotated α) :=\n  Equivalence.mk _ IsRotated.refl (fun _ _ => IsRotated.symm) fun _ _ _ => IsRotated.trans\n#align is_rotated.eqv is_rotated.eqv\n\n",
+ "cyclic_permutations_rotate":
+ "@[simp]\ntheorem cyclic_permutations_rotate (l : list α) (k : ℕ) :\n    (l.rotate k).cyclic_permutations = l.cyclic_permutations.rotate k :=\n  by\n  have : (l.rotate k).cyclic_permutations.length = length (l.cyclic_permutations.rotate k) :=\n    by\n    cases l\n    · simp\n    · rw [length_cyclic_permutations_of_ne_nil] <;> simp\n  refine' ext_le this fun n hn hn' => _\n  rw [nth_le_cyclic_permutations, nth_le_rotate, nth_le_cyclic_permutations, rotate_rotate, ← rotate_mod, add_comm]\n  cases l <;> simp\n#align cyclic_permutations_rotate cyclic_permutations_rotate\n\n",
+ "cyclic_permutations_of_ne_nil":
+ "theorem cyclic_permutations_of_ne_nil (l : list α) (h : l ≠ []) :\n    cyclicPermutations l = dropLast (zip_with (· ++ ·) (tails l) (inits l)) :=\n  by\n  obtain ⟨hd, tl, rfl⟩ := exists_cons_of_ne_nil h\n  exact cyclic_permutations_cons _ _\n#align cyclic_permutations_of_ne_nil cyclic_permutations_of_ne_nil\n\n",
+ "cyclic_permutations_nil":
+ "@[simp]\ntheorem cyclic_permutations_nil : cyclicPermutations ([] : list α) = [[]] :=\n  rfl\n#align cyclic_permutations_nil cyclic_permutations_nil\n\n",
+ "cyclic_permutations_eq_singleton_iff":
+ "@[simp]\ntheorem cyclic_permutations_eq_singleton_iff {l : list α} {x : α} : cyclicPermutations l = [[x]] ↔ l = [x] :=\n  by\n  refine' ⟨fun h => _, fun h => by simp [cyclic_permutations, h, init_eq_take]⟩\n  rw [eq_comm, ← is_rotated_singleton_iff', ← mem_cyclic_permutations_iff, h, mem_singleton]\n#align cyclic_permutations_eq_singleton_iff cyclic_permutations_eq_singleton_iff\n\n",
+ "cyclic_permutations_eq_nil_iff":
+ "@[simp]\ntheorem cyclic_permutations_eq_nil_iff {l : list α} : cyclicPermutations l = [[]] ↔ l = [] :=\n  by\n  refine' ⟨fun h => _, fun h => by simp [h]⟩\n  rw [eq_comm, ← is_rotated_nil_iff', ← mem_cyclic_permutations_iff, h, mem_singleton]\n#align cyclic_permutations_eq_nil_iff cyclic_permutations_eq_nil_iff\n\n",
+ "cyclic_permutations_cons":
+ "theorem cyclic_permutations_cons (x : α) (l : list α) :\n    cyclicPermutations (x :: l) = dropLast (zip_with (· ++ ·) (tails (x :: l)) (inits (x :: l))) :=\n  rfl\n#align cyclic_permutations_cons cyclic_permutations_cons\n\n",
+ "cyclic_permutations":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ~r » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ~r » -/\ntheorem is_rotated.cyclic_permutations {l l' : list α} (h : «expr ~r » l l') :\n    «expr ~r » l.cyclic_permutations l'.cyclic_permutations :=\n  by\n  obtain ⟨k, rfl⟩ := h\n  exact ⟨k, by simp⟩\n#align is_rotated.cyclic_permutations is_rotated.cyclic_permutations\n\n"}

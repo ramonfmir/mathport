@@ -1,0 +1,104 @@
+{"succ_pnat_strict_mono":
+ "@[mono]\ntheorem succ_pnat_strict_mono : strict_mono succPNat := fun m n => nat.succ_lt_succ\n#align succ_pnat_strict_mono succ_pnat_strict_mono\n\n",
+ "succ_pnat_mono":
+ "@[mono]\ntheorem succ_pnat_mono : monotone succPNat :=\n  succPNat_strictMono.monotone\n#align succ_pnat_mono succ_pnat_mono\n\n",
+ "succ_pnat_lt_succ_pnat":
+ "@[simp]\ntheorem succ_pnat_lt_succ_pnat {m n : ℕ} : m.succ_pnat < n.succ_pnat ↔ m < n :=\n  succPNat_strictMono.lt_iff_lt\n#align succ_pnat_lt_succ_pnat succ_pnat_lt_succ_pnat\n\n",
+ "succ_pnat_le_succ_pnat":
+ "@[simp]\ntheorem succ_pnat_le_succ_pnat {m n : ℕ} : m.succ_pnat ≤ n.succ_pnat ↔ m ≤ n :=\n  succPNat_strictMono.le_iff_le\n#align succ_pnat_le_succ_pnat succ_pnat_le_succ_pnat\n\n",
+ "succ_pnat_injective":
+ "theorem succ_pnat_injective : function.injective succPNat :=\n  succPNat_strictMono.injective\n#align succ_pnat_injective succ_pnat_injective\n\n",
+ "succ_pnat_inj":
+ "@[simp]\ntheorem succ_pnat_inj {n m : ℕ} : succPNat n = succPNat m ↔ n = m :=\n  succPNat_injective.eq_iff\n#align succ_pnat_inj succ_pnat_inj\n\n",
+ "sub_coe":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«exprℕ+» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«exprℕ+» -/\ntheorem sub_coe (a b : «exprℕ+») : ((a - b : «exprℕ+») : ℕ) = ite (b < a) (a - b : ℕ) 1 :=\n  by\n  change (to_pnat' _ : ℕ) = ite _ _ _\n  split_ifs with h\n  · exact to_pnat'_coe (tsub_pos_of_lt h)\n  · rw [tsub_eq_zero_iff_le.mpr (le_of_not_gt h : (a : ℕ) ≤ b)]\n    rfl\n#align sub_coe sub_coe\n\n",
+ "rec_on_succ":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«exprℕ+» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«exprℕ+» -/\n@[simp]\ntheorem rec_on_succ (n : «exprℕ+») {p : «exprℕ+» → Sort _} (p1 hp) :\n    @PNat.recOn (n + 1) p p1 hp = hp n (@PNat.recOn n p p1 hp) :=\n  by\n  cases' n with n h\n  cases n <;> [exact absurd h (by decide), rfl]\n#align rec_on_succ rec_on_succ\n\n",
+ "rec_on_one":
+ "@[simp]\ntheorem rec_on_one {p} (p1 hp) : @PNat.recOn 1 p p1 hp = p1 :=\n  rfl\n#align rec_on_one rec_on_one\n\n",
+ "pow_coe":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«exprℕ+» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«exprℕ+» -/\n@[simp, norm_cast]\ntheorem pow_coe (m : «exprℕ+») (n : ℕ) : ((m ^ n : «exprℕ+») : ℕ) = (m : ℕ) ^ n :=\n  rfl\n#align pow_coe pow_coe\n\n",
+ "pos_of_div_pos":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«exprℕ+» -/\ntheorem pos_of_div_pos {n : «exprℕ+»} {a : ℕ} (h : a ∣ n) : 0 < a :=\n  by\n  apply pos_iff_ne_zero.2\n  intro hzero\n  rw [hzero] at h\n  exact PNat.ne_zero n (eq_zero_of_zero_dvd h)\n#align pos_of_div_pos pos_of_div_pos\n\n",
+ "pnat_iso_nat_symm_apply":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n#print OrderIso.pnatIsoNat_symm_apply /-\n@[simp]\ntheorem OrderIso.pnatIsoNat_symm_apply : «expr⇑ » OrderIso.pnatIsoNat.symm = Nat.succPNat :=\n  rfl\n#align order_iso.pnat_iso_nat_symm_apply OrderIso.pnatIsoNat_symm_apply\n-/\n\n",
+ "one_add_nat_pred":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«exprℕ+» -/\n/-\nCopyright (c) 2017 Microsoft Corporation. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Mario Carneiro, Neil Strickland\n-/\n@[simp]\ntheorem one_add_nat_pred (n : «exprℕ+») : 1 + n.nat_pred = n := by\n  rw [nat_pred, add_tsub_cancel_iff_le.mpr <| show 1 ≤ (n : ℕ) from n.2]\n#align one_add_nat_pred one_add_nat_pred\n\n",
+ "nat_pred_strict_mono":
+ "@[mono]\ntheorem nat_pred_strict_mono : strict_mono natPred := fun m n h => nat.pred_lt_pred m.2.ne' h\n#align nat_pred_strict_mono nat_pred_strict_mono\n\n",
+ "nat_pred_monotone":
+ "@[mono]\ntheorem nat_pred_monotone : monotone natPred :=\n  natPred_strictMono.monotone\n#align nat_pred_monotone nat_pred_monotone\n\n",
+ "nat_pred_lt_nat_pred":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«exprℕ+» -/\n@[simp]\ntheorem nat_pred_lt_nat_pred {m n : «exprℕ+»} : m.nat_pred < n.nat_pred ↔ m < n :=\n  natPred_strictMono.lt_iff_lt\n#align nat_pred_lt_nat_pred nat_pred_lt_nat_pred\n\n",
+ "nat_pred_le_nat_pred":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«exprℕ+» -/\n@[simp]\ntheorem nat_pred_le_nat_pred {m n : «exprℕ+»} : m.nat_pred ≤ n.nat_pred ↔ m ≤ n :=\n  natPred_strictMono.le_iff_le\n#align nat_pred_le_nat_pred nat_pred_le_nat_pred\n\n",
+ "nat_pred_injective":
+ "theorem nat_pred_injective : function.injective natPred :=\n  natPred_strictMono.injective\n#align nat_pred_injective nat_pred_injective\n\n",
+ "nat_pred_inj":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«exprℕ+» -/\n@[simp]\ntheorem nat_pred_inj {m n : «exprℕ+»} : m.nat_pred = n.nat_pred ↔ m = n :=\n  natPred_injective.eq_iff\n#align nat_pred_inj nat_pred_inj\n\n",
+ "nat_pred_add_one":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«exprℕ+» -/\n@[simp]\ntheorem nat_pred_add_one (n : «exprℕ+») : n.nat_pred + 1 = n :=\n  (add_comm _ _).trans n.one_add_nat_pred\n#align nat_pred_add_one nat_pred_add_one\n\n",
+ "mul_div_exact":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«exprℕ+» -/\ntheorem mul_div_exact {m k : «exprℕ+»} (h : k ∣ m) : k * divExact m k = m :=\n  by\n  apply eq; rw [mul_coe]\n  change (k : ℕ) * (div m k).succ = m\n  rw [← div_add_mod m k, dvd_iff'.mp h, nat.mul_succ]\n#align mul_div_exact mul_div_exact\n\n",
+ "mul_coe":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«exprℕ+» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«exprℕ+» -/\n@[simp, norm_cast]\ntheorem mul_coe (m n : «exprℕ+») : ((m * n : «exprℕ+») : ℕ) = m * n :=\n  rfl\n#align mul_coe mul_coe\n\n",
+ "mod_le":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«exprℕ+» -/\ntheorem mod_le (m k : «exprℕ+») : mod m k ≤ m ∧ mod m k ≤ k :=\n  by\n  change (mod m k : ℕ) ≤ (m : ℕ) ∧ (mod m k : ℕ) ≤ (k : ℕ)\n  rw [mod_coe]; split_ifs\n  · have hm : (m : ℕ) > 0 := m.pos\n    rw [← nat.mod_add_div (m : ℕ) (k : ℕ), h, zero_add] at hm⊢\n    by_cases h' : (m : ℕ) / (k : ℕ) = 0\n    · rw [h', mul_zero] at hm\n      exact (lt_irrefl _ hm).elim\n    · let h' := nat.mul_le_mul_left (k : ℕ) (nat.succ_le_of_lt (nat.pos_of_ne_zero h'))\n      rw [mul_one] at h'\n      exact ⟨h', le_refl (k : ℕ)⟩\n  · exact ⟨nat.mod_le (m : ℕ) (k : ℕ), (nat.mod_lt (m : ℕ) k.pos).le⟩\n#align mod_le mod_le\n\n",
+ "mod_div_aux_spec":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«exprℕ+» -/\ntheorem mod_div_aux_spec :\n    ∀ (k : «exprℕ+») (r q : ℕ) (h : ¬(r = 0 ∧ q = 0)), ((modDivAux k r q).1 : ℕ) + k * (modDivAux k r q).2 = r + k * q\n  | k, 0, 0, h => (h ⟨rfl, rfl⟩).elim\n  | k, 0, q + 1, h => by\n    change (k : ℕ) + (k : ℕ) * (q + 1).pred = 0 + (k : ℕ) * (q + 1)\n    rw [nat.pred_succ, nat.mul_succ, zero_add, add_comm]\n  | k, r + 1, q, h => rfl\n#align mod_div_aux_spec mod_div_aux_spec\n\n",
+ "mod_add_div'":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«exprℕ+» -/\ntheorem mod_add_div' (m k : «exprℕ+») : (mod m k + div m k * k : ℕ) = m :=\n  by\n  rw [mul_comm]\n  exact mod_add_div _ _\n#align mod_add_div' mod_add_div'\n\n",
+ "mod_add_div":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«exprℕ+» -/\ntheorem mod_add_div (m k : «exprℕ+») : (mod m k + k * div m k : ℕ) = m :=\n  by\n  let h₀ := nat.mod_add_div (m : ℕ) (k : ℕ)\n  have : ¬((m : ℕ) % (k : ℕ) = 0 ∧ (m : ℕ) / (k : ℕ) = 0) :=\n    by\n    rintro ⟨hr, hq⟩\n    rw [hr, hq, mul_zero, zero_add] at h₀\n    exact (m.ne_zero h₀.symm).elim\n  have := mod_div_aux_spec k ((m : ℕ) % (k : ℕ)) ((m : ℕ) / (k : ℕ)) this\n  exact this.trans h₀\n#align mod_add_div mod_add_div\n\n",
+ "mk_bit1":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«exprℕ+» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«exprℕ+» -/\n@[simp]\ntheorem mk_bit1 (n) {h} {k} : (⟨bit1 n, h⟩ : «exprℕ+») = (bit1 ⟨n, k⟩ : «exprℕ+») :=\n  rfl\n#align mk_bit1 mk_bit1\n\n",
+ "mk_bit0":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«exprℕ+» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«exprℕ+» -/\n-- Some lemmas that rewrite `pnat.mk n h`, for `n` an explicit numeral, into explicit numerals.\n@[simp]\ntheorem mk_bit0 (n) {h} : (⟨bit0 n, h⟩ : «exprℕ+») = (bit0 ⟨n, pos_of_bit0_pos h⟩ : «exprℕ+») :=\n  rfl\n#align mk_bit0 mk_bit0\n\n",
+ "lt_add_right":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«exprℕ+» -/\ntheorem lt_add_right (n m : «exprℕ+») : n < n + m :=\n  (lt_add_left n m).trans_eq (add_comm _ _)\n#align lt_add_right lt_add_right\n\n",
+ "lt_add_one_iff":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«exprℕ+» -/\ntheorem lt_add_one_iff : ∀ {a b : «exprℕ+»}, a < b + 1 ↔ a ≤ b := fun a b => Nat.lt_add_one_iff\n#align lt_add_one_iff lt_add_one_iff\n\n",
+ "lt_add_left":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«exprℕ+» -/\ntheorem lt_add_left (n m : «exprℕ+») : n < m + n :=\n  lt_add_of_pos_left _ m.2\n#align lt_add_left lt_add_left\n\n",
+ "le_one_iff":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«exprℕ+» -/\n@[simp]\ntheorem le_one_iff {n : «exprℕ+»} : n ≤ 1 ↔ n = 1 :=\n  le_bot_iff\n#align le_one_iff le_one_iff\n\n",
+ "le_of_dvd":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«exprℕ+» -/\ntheorem le_of_dvd {m n : «exprℕ+»} : m ∣ n → m ≤ n :=\n  by\n  rw [dvd_iff']\n  intro h\n  rw [← h]\n  apply (mod_le n m).left\n#align le_of_dvd le_of_dvd\n\n",
+ "exists_eq_succ_of_ne_one":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«exprℕ+» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«exprℕ+» -/\n/-- If `n : ℕ+` is different from `1`, then it is the successor of some `k : ℕ+`. -/\ntheorem exists_eq_succ_of_ne_one : ∀ {n : «exprℕ+»} (h1 : n ≠ 1), ∃ k : «exprℕ+», n = k + 1\n  | ⟨1, _⟩, h1 => false.elim <| h1 rfl\n  | ⟨n + 2, _⟩, _ => ⟨⟨n + 1, by simp⟩, rfl⟩\n#align exists_eq_succ_of_ne_one exists_eq_succ_of_ne_one\n\n",
+ "dvd_one_iff":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«exprℕ+» -/\ntheorem dvd_one_iff (n : «exprℕ+») : n ∣ 1 ↔ n = 1 :=\n  ⟨fun h => dvd_antisymm h (one_dvd n), fun h => h.symm ▸ dvd_refl 1⟩\n#align dvd_one_iff dvd_one_iff\n\n",
+ "dvd_iff'":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«exprℕ+» -/\ntheorem dvd_iff' {k m : «exprℕ+»} : k ∣ m ↔ mod m k = k :=\n  by\n  rw [dvd_iff]\n  rw [nat.dvd_iff_mod_eq_zero]; constructor\n  · intro h\n    apply eq\n    rw [mod_coe, if_pos h]\n  · intro h\n    by_cases h' : (m : ℕ) % (k : ℕ) = 0\n    · exact h'\n    · replace h : (mod m k : ℕ) = (k : ℕ) := congr_arg _ h\n      rw [mod_coe, if_neg h'] at h\n      exact ((nat.mod_lt (m : ℕ) k.pos).ne h).elim\n#align dvd_iff' dvd_iff'\n\n",
+ "dvd_iff":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«exprℕ+» -/\ntheorem dvd_iff {k m : «exprℕ+»} : k ∣ m ↔ (k : ℕ) ∣ (m : ℕ) :=\n  by\n  constructor <;> intro h; rcases h with ⟨_, rfl⟩; apply dvd_mul_right\n  rcases h with ⟨a, h⟩; cases a;\n  · contrapose h\n    apply ne_zero\n  use a.succ; apply nat.succ_pos; rw [← coe_inj, h, mul_coe, mk_coe]\n#align dvd_iff dvd_iff\n\n",
+ "dvd_antisymm":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«exprℕ+» -/\ntheorem dvd_antisymm {m n : «exprℕ+»} : m ∣ n → n ∣ m → m = n := fun hmn hnm => (le_of_dvd hmn).antisymm (le_of_dvd hnm)\n#align dvd_antisymm dvd_antisymm\n\n",
+ "div_add_mod'":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«exprℕ+» -/\ntheorem div_add_mod' (m k : «exprℕ+») : (div m k * k + mod m k : ℕ) = m :=\n  by\n  rw [mul_comm]\n  exact div_add_mod _ _\n#align div_add_mod' div_add_mod'\n\n",
+ "div_add_mod":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«exprℕ+» -/\ntheorem div_add_mod (m k : «exprℕ+») : (k * div m k + mod m k : ℕ) = m :=\n  (add_comm _ _).trans (mod_add_div _ _)\n#align div_add_mod div_add_mod\n\n",
+ "coe_inj":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«exprℕ+» -/\n/-- We now define a long list of structures on ℕ+ induced by\n similar structures on ℕ. Most of these behave in a completely\n obvious way, but there are a few things to be said about\n subtraction, division and powers.\n-/\n@[simp, norm_cast]\ntheorem coe_inj {m n : «exprℕ+»} : (m : ℕ) = n ↔ m = n :=\n  SetCoe.ext_iff\n#align coe_inj coe_inj\n\n",
+ "coe_coe_monoid_hom":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«exprℕ+» -/\n@[simp]\ntheorem coe_coe_monoid_hom : (coeMonoidHom : «exprℕ+» → ℕ) = coe :=\n  rfl\n#align coe_coe_monoid_hom coe_coe_monoid_hom\n\n",
+ "coe_bit1":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«exprℕ+» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«exprℕ+» -/\n@[simp, norm_cast]\ntheorem coe_bit1 (a : «exprℕ+») : ((bit1 a : «exprℕ+») : ℕ) = bit1 (a : ℕ) :=\n  rfl\n#align coe_bit1 coe_bit1\n\n",
+ "coe_bit0":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«exprℕ+» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«exprℕ+» -/\n@[simp, norm_cast]\ntheorem coe_bit0 (a : «exprℕ+») : ((bit0 a : «exprℕ+») : ℕ) = bit0 (a : ℕ) :=\n  rfl\n#align coe_bit0 coe_bit0\n\n",
+ "bot_eq_one":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«exprℕ+» -/\n#print bot_eq_one /-\n@[simp]\ntheorem bot_eq_one : («expr⊥» : «exprℕ+») = 1 :=\n  rfl\n#align bot_eq_one bot_eq_one\n-/\n\n",
+ "bit1_le_bit1":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«exprℕ+» -/\n#print bit1_le_bit1 /-\n@[simp]\ntheorem bit1_le_bit1 (n m : «exprℕ+») : bit1 n ≤ bit1 m ↔ bit1 (n : ℕ) ≤ bit1 (m : ℕ) :=\n  iff.rfl\n#align bit1_le_bit1 bit1_le_bit1\n-/\n\n",
+ "bit1_le_bit0":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«exprℕ+» -/\n@[simp]\ntheorem bit1_le_bit0 (n m : «exprℕ+») : bit1 n ≤ bit0 m ↔ bit1 (n : ℕ) ≤ bit0 (m : ℕ) :=\n  iff.rfl\n#align bit1_le_bit0 bit1_le_bit0\n\n",
+ "bit0_le_bit1":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«exprℕ+» -/\n@[simp]\ntheorem bit0_le_bit1 (n m : «exprℕ+») : bit0 n ≤ bit1 m ↔ bit0 (n : ℕ) ≤ bit1 (m : ℕ) :=\n  iff.rfl\n#align bit0_le_bit1 bit0_le_bit1\n\n",
+ "bit0_le_bit0":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«exprℕ+» -/\n#print bit0_le_bit0 /-\n-- Some lemmas that rewrite inequalities between explicit numerals in `ℕ+`\n-- into the corresponding inequalities in `ℕ`.\n-- TODO: perhaps this should not be attempted by `simp`,\n-- and instead we should expect `norm_num` to take care of these directly?\n-- TODO: these lemmas are perhaps incomplete:\n-- * 1 is not represented as a bit0 or bit1\n-- * strict inequalities?\n@[simp]\ntheorem bit0_le_bit0 (n m : «exprℕ+») : bit0 n ≤ bit0 m ↔ bit0 (n : ℕ) ≤ bit0 (m : ℕ) :=\n  iff.rfl\n#align bit0_le_bit0 bit0_le_bit0\n-/\n\n",
+ "add_sub_of_lt":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«exprℕ+» -/\ntheorem add_sub_of_lt {a b : «exprℕ+»} : a < b → a + (b - a) = b := fun h =>\n  eq <| by\n    rw [add_coe, sub_coe, if_pos h]\n    exact add_tsub_cancel_of_le h.le\n#align add_sub_of_lt add_sub_of_lt\n\n",
+ "add_one_le_iff":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«exprℕ+» -/\ntheorem add_one_le_iff : ∀ {a b : «exprℕ+»}, a + 1 ≤ b ↔ a < b := fun a b => Nat.add_one_le_iff\n#align add_one_le_iff add_one_le_iff\n\n",
+ "add_coe":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«exprℕ+» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«exprℕ+» -/\n@[simp, norm_cast]\ntheorem add_coe (m n : «exprℕ+») : ((m + n : «exprℕ+») : ℕ) = m + n :=\n  rfl\n#align add_coe add_coe\n\n"}

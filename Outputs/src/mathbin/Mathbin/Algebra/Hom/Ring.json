@@ -1,0 +1,132 @@
+{"zero_comp":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₙ+* » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₙ+* » -/\n@[simp]\ntheorem zero_comp (f : «expr →ₙ+* » α β) : (0 : «expr →ₙ+* » β γ).comp f = 0 :=\n  by\n  ext\n  rfl\n#align zero_comp zero_comp\n\n",
+ "zero_apply":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₙ+* » -/\n@[simp]\ntheorem zero_apply (x : α) : (0 : «expr →ₙ+* » α β) x = 0 :=\n  rfl\n#align zero_apply zero_apply\n\n",
+ "to_monoid_with_zero_hom_eq_coe":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →+* » -/\n@[simp]\ntheorem to_monoid_with_zero_hom_eq_coe (f : «expr →+* » α β) : (f.to_monoid_with_zero_hom : α → β) = f :=\n  rfl\n#align to_monoid_with_zero_hom_eq_coe to_monoid_with_zero_hom_eq_coe\n\n",
+ "to_monoid_hom_eq_coe":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →+* » -/\n@[simp]\ntheorem to_monoid_hom_eq_coe (f : «expr →+* » α β) : f.to_monoid_hom = f :=\n  rfl\n#align to_monoid_hom_eq_coe to_monoid_hom_eq_coe\n\n",
+ "to_fun_eq_coe":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →+* » -/\n@[simp]\ntheorem to_fun_eq_coe (f : «expr →+* » α β) : f.to_fun = f :=\n  rfl\n#align to_fun_eq_coe to_fun_eq_coe\n\n",
+ "to_add_monoid_hom_eq_coe":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →+* » -/\n@[simp]\ntheorem to_add_monoid_hom_eq_coe (f : «expr →+* » α β) : f.to_add_monoid_hom = f :=\n  rfl\n#align to_add_monoid_hom_eq_coe to_add_monoid_hom_eq_coe\n\n",
+ "one_def":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →+* » -/\ntheorem one_def : (1 : «expr →+* » α α) = id α :=\n  rfl\n#align one_def one_def\n\n",
+ "mul_def":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →+* » -/\ntheorem mul_def (f g : «expr →+* » α α) : f * g = f.comp g :=\n  rfl\n#align mul_def mul_def\n\n",
+ "mk_coe":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →+* » -/\n@[simp]\ntheorem mk_coe (f : «expr →+* » α β) (h₁ h₂ h₃ h₄) : ring_hom.mk f h₁ h₂ h₃ h₄ = f :=\n  ext fun _ => rfl\n#align mk_coe mk_coe\n\n",
+ "map_zero":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →+* » -/\n#print map_zero /-\n/-- Ring homomorphisms map zero to zero. -/\nprotected theorem map_zero (f : «expr →+* » α β) : f 0 = 0 :=\n  map_zero f\n#align map_zero map_zero\n-/\n\n",
+ "map_sub":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →+* » -/\n#print map_sub /-\n/-- Ring homomorphisms preserve subtraction. -/\nprotected theorem map_sub [NonAssocRing α] [NonAssocRing β] (f : «expr →+* » α β) (x y : α) : f (x - y) = f x - f y :=\n  map_sub f x y\n#align map_sub map_sub\n-/\n\n",
+ "map_one_ne_zero":
+ "/-- `f : α →+* β` doesn't map `1` to `0` if `β` is nontrivial -/\ntheorem map_one_ne_zero [nontrivial β] : f 1 ≠ 0 :=\n  mt f.codomain_trivial_iff_map_one_eq_zero.mpr zero_ne_one\n#align map_one_ne_zero map_one_ne_zero\n\n",
+ "map_one":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →+* » -/\n#print map_one /-\n/-- Ring homomorphisms map one to one. -/\nprotected theorem map_one (f : «expr →+* » α β) : f 1 = 1 :=\n  map_one f\n#align map_one map_one\n-/\n\n",
+ "map_neg":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →+* » -/\n#print map_neg /-\n/-- Ring homomorphisms preserve additive inverse. -/\nprotected theorem map_neg [NonAssocRing α] [NonAssocRing β] (f : «expr →+* » α β) (x : α) : f (-x) = -f x :=\n  map_neg f x\n#align map_neg map_neg\n-/\n\n",
+ "map_mul":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →+* » -/\n#print map_mul /-\n/-- Ring homomorphisms preserve multiplication. -/\nprotected theorem map_mul (f : «expr →+* » α β) : ∀ a b, f (a * b) = f a * f b :=\n  map_mul f\n#align map_mul map_mul\n-/\n\n",
+ "map_ite_zero_one":
+ "@[simp]\ntheorem map_ite_zero_one {F : Type _} [RingHomClass F α β] (f : F) (p : Prop) [decidable p] :\n    f (ite p 0 1) = ite p 0 1 := by split_ifs <;> simp [h]\n#align map_ite_zero_one map_ite_zero_one\n\n",
+ "map_ite_one_zero":
+ "@[simp]\ntheorem map_ite_one_zero {F : Type _} [RingHomClass F α β] (f : F) (p : Prop) [decidable p] :\n    f (ite p 1 0) = ite p 1 0 := by split_ifs <;> simp [h]\n#align map_ite_one_zero map_ite_one_zero\n\n",
+ "map_dvd":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →+* » -/\n#print map_dvd /-\nprotected theorem map_dvd (f : «expr →+* » α β) {a b : α} : a ∣ b → f a ∣ f b :=\n  map_dvd f\n#align map_dvd map_dvd\n-/\n\n",
+ "map_bit1":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →+* » -/\n/-- Ring homomorphisms preserve `bit1`. -/\nprotected theorem map_bit1 (f : «expr →+* » α β) : ∀ a, f (bit1 a) = bit1 (f a) :=\n  map_bit1 f\n#align map_bit1 map_bit1\n\n",
+ "map_bit0":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →+* » -/\n#print map_bit0 /-\n/-- Ring homomorphisms preserve `bit0`. -/\nprotected theorem map_bit0 (f : «expr →+* » α β) : ∀ a, f (bit0 a) = bit0 (f a) :=\n  map_bit0 f\n#align map_bit0 map_bit0\n-/\n\n",
+ "map_add":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →+* » -/\n#print map_add /-\n/-- Ring homomorphisms preserve addition. -/\nprotected theorem map_add (f : «expr →+* » α β) : ∀ a b, f (a + b) = f a + f b :=\n  map_add f\n#align map_add map_add\n-/\n\n",
+ "is_unit_map":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →+* » -/\ntheorem is_unit_map (f : «expr →+* » α β) {a : α} : is_unit a → is_unit (f a) :=\n  IsUnit.map f\n#align is_unit_map is_unit_map\n\n",
+ "isDomain":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →+* » -/\n#print Function.Injective.isDomain /-\n/-- Pullback `is_domain` instance along an injective function. -/\nprotected theorem Function.Injective.isDomain [Ring α] [IsDomain α] [Ring β] (f : «expr →+* » β α) (hf : injective f) :\n    IsDomain β := by\n  haveI := pullback_nonzero f f.map_zero f.map_one\n  haveI := IsRightCancelMulZero.to_noZeroDivisors α\n  haveI := hf.no_zero_divisors f f.map_zero f.map_mul\n  exact NoZeroDivisors.to_isDomain β\n#align function.injective.is_domain Function.Injective.isDomain\n-/\n\n",
+ "id_comp":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →+* » -/\n@[simp]\ntheorem id_comp (f : «expr →+* » α β) : (id β).comp f = f :=\n  ext fun x => rfl\n#align id_comp id_comp\n\n",
+ "id_apply":
+ "@[simp]\ntheorem id_apply (x : α) : RingHom.id α x = x :=\n  rfl\n#align id_apply id_apply\n\n",
+ "ext_iff":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →+* » -/\ntheorem ext_iff {f g : «expr →+* » α β} : f = g ↔ ∀ x, f x = g x :=\n  fun_like.ext_iff\n#align ext_iff ext_iff\n\n",
+ "ext":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →+* » -/\n@[ext]\ntheorem ext ⦃f g : «expr →+* » α β⦄ : (∀ x, f x = g x) → f = g :=\n  fun_like.ext _ _\n#align ext ext\n\n",
+ "domain_nontrivial":
+ "/-- If there is a homomorphism `f : α →+* β` and `β` is nontrivial, then `α` is nontrivial. -/\ntheorem domain_nontrivial [nontrivial β] : nontrivial α :=\n  ⟨⟨1, 0, mt (fun h => show f 1 = 0 by rw [h, map_zero]) f.map_one_ne_zero⟩⟩\n#align domain_nontrivial domain_nontrivial\n\n",
+ "copy_eq":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →+* » -/\ntheorem copy_eq (f : «expr →+* » α β) (f' : α → β) (h : f' = f) : f.copy f' h = f :=\n  fun_like.ext' h\n#align copy_eq copy_eq\n\n",
+ "congr_fun":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →+* » -/\n#print congr_fun /-\ntheorem congr_fun {f g : «expr →+* » α β} (h : f = g) (x : α) : f x = g x :=\n  fun_like.congr_fun h x\n#align congr_fun congr_fun\n-/\n\n",
+ "congr_arg":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →+* » -/\n#print congr_arg /-\ntheorem congr_arg (f : «expr →+* » α β) {x y : α} (h : x = y) : f x = f y :=\n  fun_like.congr_arg f h\n#align congr_arg congr_arg\n-/\n\n",
+ "comp_zero":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₙ+* » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₙ+* » -/\n@[simp]\ntheorem comp_zero (g : «expr →ₙ+* » β γ) : g.comp (0 : «expr →ₙ+* » α β) = 0 :=\n  by\n  ext\n  simp\n#align comp_zero comp_zero\n\n",
+ "comp_id":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →+* » -/\n@[simp]\ntheorem comp_id (f : «expr →+* » α β) : f.comp (id α) = f :=\n  ext fun x => rfl\n#align comp_id comp_id\n\n",
+ "comp_assoc":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →+* » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →+* » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →+* » -/\n/-- Composition of semiring homomorphisms is associative. -/\ntheorem comp_assoc {δ} {rδ : NonAssocSemiring δ} (f : «expr →+* » α β) (g : «expr →+* » β γ) (h : «expr →+* » γ δ) :\n    (h.comp g).comp f = h.comp (g.comp f) :=\n  rfl\n#align comp_assoc comp_assoc\n\n",
+ "comp_apply":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →+* » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →+* » -/\ntheorem comp_apply (hnp : «expr →+* » β γ) (hmn : «expr →+* » α β) (x : α) : (hnp.comp hmn : α → γ) x = hnp (hmn x) :=\n  rfl\n#align comp_apply comp_apply\n\n",
+ "coe_zero":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₙ+* » -/\n@[simp]\ntheorem coe_zero : «expr⇑ » (0 : «expr →ₙ+* » α β) = 0 :=\n  rfl\n#align coe_zero coe_zero\n\n",
+ "coe_to_mul_hom":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₙ+* » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n@[simp]\ntheorem coe_to_mul_hom (f : «expr →ₙ+* » α β) : «expr⇑ » f.to_mul_hom = f :=\n  rfl\n#align coe_to_mul_hom coe_to_mul_hom\n\n",
+ "coe_to_add_monoid_hom":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₙ+* » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n@[simp]\ntheorem coe_to_add_monoid_hom (f : «expr →ₙ+* » α β) : «expr⇑ » f.to_add_monoid_hom = f :=\n  rfl\n#align coe_to_add_monoid_hom coe_to_add_monoid_hom\n\n",
+ "coe_one":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →+* » -/\n@[simp]\ntheorem coe_one : «expr⇑ » (1 : «expr →+* » α α) = _root_.id :=\n  rfl\n#align coe_one coe_one\n\n",
+ "coe_mul_hom_mk":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₙ+* » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₙ* » -/\n@[simp]\ntheorem coe_mul_hom_mk (f : α → β) (h₁ h₂ h₃) : ((⟨f, h₁, h₂, h₃⟩ : «expr →ₙ+* » α β) : «expr →ₙ* » α β) = ⟨f, h₁⟩ :=\n  rfl\n#align coe_mul_hom_mk coe_mul_hom_mk\n\n",
+ "coe_mul_hom_injective":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₙ+* » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₙ* » -/\ntheorem coe_mul_hom_injective : injective (coe : «expr →ₙ+* » α β → «expr →ₙ* » α β) := fun f g h =>\n  ext <| MulHom.congr_fun h\n#align coe_mul_hom_injective coe_mul_hom_injective\n\n",
+ "coe_mul_hom_id":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₙ* » -/\n@[simp]\ntheorem coe_mul_hom_id : (NonUnitalRingHom.id α : «expr →ₙ* » α α) = MulHom.id α :=\n  rfl\n#align coe_mul_hom_id coe_mul_hom_id\n\n",
+ "coe_mul":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →+* » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n@[simp]\ntheorem coe_mul (f g : «expr →+* » α α) : «expr⇑ » (f * g) = f ∘ g :=\n  rfl\n#align coe_mul coe_mul\n\n",
+ "coe_monoid_hom_mk":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →+* » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →* » -/\n@[simp]\ntheorem coe_monoid_hom_mk (f : α → β) (h₁ h₂ h₃ h₄) :\n    ((⟨f, h₁, h₂, h₃, h₄⟩ : «expr →+* » α β) : «expr →* » α β) = ⟨f, h₁, h₂⟩ :=\n  rfl\n#align coe_monoid_hom_mk coe_monoid_hom_mk\n\n",
+ "coe_monoid_hom_injective":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →+* » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →* » -/\ntheorem coe_monoid_hom_injective : injective (coe : «expr →+* » α β → «expr →* » α β) := fun f g h =>\n  ext <| MonoidHom.congr_fun h\n#align coe_monoid_hom_injective coe_monoid_hom_injective\n\n",
+ "coe_monoid_hom_id":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →* » -/\n@[simp]\ntheorem coe_monoid_hom_id : (id α : «expr →* » α α) = MonoidHom.id α :=\n  rfl\n#align coe_monoid_hom_id coe_monoid_hom_id\n\n",
+ "coe_monoid_hom":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →+* » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →* » -/\n@[simp, norm_cast]\ntheorem coe_monoid_hom (f : «expr →+* » α β) : «expr⇑ » (f : «expr →* » α β) = f :=\n  rfl\n#align coe_monoid_hom coe_monoid_hom\n\n",
+ "coe_mk":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →+* » -/\n@[simp]\ntheorem coe_mk (f : α → β) (h₁ h₂ h₃ h₄) : «expr⇑ » (⟨f, h₁, h₂, h₃, h₄⟩ : «expr →+* » α β) = f :=\n  rfl\n#align coe_mk coe_mk\n\n",
+ "coe_inj":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →+* » -/\ntheorem coe_inj ⦃f g : «expr →+* » α β⦄ (h : (f : α → β) = g) : f = g :=\n  fun_like.coe_injective h\n#align coe_inj coe_inj\n\n",
+ "coe_fn_mk_ring_hom_of_mul_self_of_two_ne_zero":
+ "@[simp]\ntheorem coe_fn_mk_ring_hom_of_mul_self_of_two_ne_zero (h h_two h_one) :\n    (f.mk_ring_hom_of_mul_self_of_two_ne_zero h h_two h_one : β → α) = f :=\n  rfl\n#align coe_fn_mk_ring_hom_of_mul_self_of_two_ne_zero coe_fn_mk_ring_hom_of_mul_self_of_two_ne_zero\n\n",
+ "coe_copy":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →+* » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n@[simp]\ntheorem coe_copy (f : «expr →+* » α β) (f' : α → β) (h : f' = f) : «expr⇑ » (f.copy f' h) = f' :=\n  rfl\n#align coe_copy coe_copy\n\n",
+ "coe_comp_mul_hom":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₙ+* » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₙ+* » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₙ* » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₙ* » -/\n@[simp]\ntheorem coe_comp_mul_hom (g : «expr →ₙ+* » β γ) (f : «expr →ₙ+* » α β) :\n    (g.comp f : «expr →ₙ* » α γ) = (g : «expr →ₙ* » β γ).comp f :=\n  rfl\n#align coe_comp_mul_hom coe_comp_mul_hom\n\n",
+ "coe_comp_add_monoid_hom":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₙ+* » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₙ+* » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →+ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →+ » -/\n@[simp]\ntheorem coe_comp_add_monoid_hom (g : «expr →ₙ+* » β γ) (f : «expr →ₙ+* » α β) :\n    (g.comp f : «expr →+ » α γ) = (g : «expr →+ » β γ).comp f :=\n  rfl\n#align coe_comp_add_monoid_hom coe_comp_add_monoid_hom\n\n",
+ "coe_comp":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →+* » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →+* » -/\n@[simp]\ntheorem coe_comp (hnp : «expr →+* » β γ) (hmn : «expr →+* » α β) : (hnp.comp hmn : α → γ) = hnp ∘ hmn :=\n  rfl\n#align coe_comp coe_comp\n\n",
+ "coe_coe":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →+* » -/\n@[simp]\ntheorem coe_coe {F : Type _} [RingHomClass F α β] (f : F) : ((f : «expr →+* » α β) : α → β) = f :=\n  rfl\n#align coe_coe coe_coe\n\n",
+ "coe_add_monoid_hom_mk_ring_hom_of_mul_self_of_two_ne_zero":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →+ » -/\n@[simp]\ntheorem coe_add_monoid_hom_mk_ring_hom_of_mul_self_of_two_ne_zero (h h_two h_one) :\n    (f.mk_ring_hom_of_mul_self_of_two_ne_zero h h_two h_one : «expr →+ » β α) = f :=\n  by\n  ext\n  rfl\n#align\n  coe_add_monoid_hom_mk_ring_hom_of_mul_self_of_two_ne_zero coe_add_monoid_hom_mk_ring_hom_of_mul_self_of_two_ne_zero\n\n",
+ "coe_add_monoid_hom_mk":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →+* » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →+ » -/\n@[simp]\ntheorem coe_add_monoid_hom_mk (f : α → β) (h₁ h₂ h₃ h₄) :\n    ((⟨f, h₁, h₂, h₃, h₄⟩ : «expr →+* » α β) : «expr →+ » α β) = ⟨f, h₃, h₄⟩ :=\n  rfl\n#align coe_add_monoid_hom_mk coe_add_monoid_hom_mk\n\n",
+ "coe_add_monoid_hom_injective":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →+* » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →+ » -/\ntheorem coe_add_monoid_hom_injective : injective (coe : «expr →+* » α β → «expr →+ » α β) := fun f g h =>\n  ext <| AddMonoidHom.congr_fun h\n#align coe_add_monoid_hom_injective coe_add_monoid_hom_injective\n\n",
+ "coe_add_monoid_hom_id":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →+ » -/\n@[simp]\ntheorem coe_add_monoid_hom_id : (id α : «expr →+ » α α) = AddMonoidHom.id α :=\n  rfl\n#align coe_add_monoid_hom_id coe_add_monoid_hom_id\n\n",
+ "coe_add_monoid_hom":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →+* » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →+ » -/\n@[simp, norm_cast]\ntheorem coe_add_monoid_hom (f : «expr →+* » α β) : «expr⇑ » (f : «expr →+ » α β) = f :=\n  rfl\n#align coe_add_monoid_hom coe_add_monoid_hom\n\n",
+ "codomain_trivial_iff_range_trivial":
+ "/-- `f : α →+* β` has a trivial codomain iff it has a trivial range. -/\ntheorem codomain_trivial_iff_range_trivial : (0 : β) = 1 ↔ ∀ x, f x = 0 :=\n  f.codomain_trivial_iff_map_one_eq_zero.trans ⟨fun h x => by rw [← mul_one x, map_mul, h, mul_zero], fun h => h 1⟩\n#align codomain_trivial_iff_range_trivial codomain_trivial_iff_range_trivial\n\n",
+ "codomain_trivial_iff_range_eq_singleton_zero":
+ "/-- `f : α →+* β` has a trivial codomain iff its range is `{0}`. -/\ntheorem codomain_trivial_iff_range_eq_singleton_zero : (0 : β) = 1 ↔ Set.range f = {0} :=\n  f.codomain_trivial_iff_range_trivial.trans\n    ⟨fun h => Set.ext fun y => ⟨fun ⟨x, hx⟩ => by simp [← hx, h x], fun hy => ⟨0, by simpa using hy.symm⟩⟩, fun h x =>\n      Set.mem_singleton_iff.mp (h ▸ Set.mem_range_self x)⟩\n#align codomain_trivial_iff_range_eq_singleton_zero codomain_trivial_iff_range_eq_singleton_zero\n\n",
+ "codomain_trivial_iff_map_one_eq_zero":
+ "/-- `f : α →+* β` has a trivial codomain iff `f 1 = 0`. -/\ntheorem codomain_trivial_iff_map_one_eq_zero : (0 : β) = 1 ↔ f 1 = 0 := by rw [map_one, eq_comm]\n#align codomain_trivial_iff_map_one_eq_zero codomain_trivial_iff_map_one_eq_zero\n\n",
+ "codomain_trivial":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →+* » -/\ntheorem codomain_trivial (f : «expr →+* » α β) [h : subsingleton α] : subsingleton β :=\n  (subsingleton_or_nontrivial β).resolve_right fun _ => not_nontrivial_iff_subsingleton.mpr h f.domain_nontrivial\n#align codomain_trivial codomain_trivial\n\n",
+ "cancel_right":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →+* » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →+* » -/\ntheorem cancel_right {g₁ g₂ : «expr →+* » β γ} {f : «expr →+* » α β} (hf : surjective f) :\n    g₁.comp f = g₂.comp f ↔ g₁ = g₂ :=\n  ⟨fun h => RingHom.ext <| hf.forall.2 (ext_iff.1 h), fun h => h ▸ rfl⟩\n#align cancel_right cancel_right\n\n",
+ "cancel_left":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →+* » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →+* » -/\ntheorem cancel_left {g : «expr →+* » β γ} {f₁ f₂ : «expr →+* » α β} (hg : injective g) :\n    g.comp f₁ = g.comp f₂ ↔ f₁ = f₂ :=\n  ⟨fun h => RingHom.ext fun x => hg <| by rw [← comp_apply, h, comp_apply], fun h => h ▸ rfl⟩\n#align cancel_left cancel_left\n\n"}

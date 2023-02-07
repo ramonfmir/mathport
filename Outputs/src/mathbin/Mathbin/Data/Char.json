@@ -1,0 +1,2 @@
+{"ofNat_toNat":
+ "#print Char.ofNat_toNat /-\n/-\nCopyright (c) 2018 Mario Carneiro. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Mario Carneiro\n-/\ntheorem Char.ofNat_toNat {c : char} (h : is_valid_char c.to_nat) : char.of_nat c.to_nat = c :=\n  by\n  rw [char.of_nat, dif_pos h]\n  cases c\n  simp [char.to_nat]\n#align char.of_nat_to_nat Char.ofNat_toNat\n-/\n\n"}

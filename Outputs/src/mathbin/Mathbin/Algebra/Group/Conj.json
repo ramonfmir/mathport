@@ -1,0 +1,62 @@
+{"trans":
+ "#print IsConj.trans /-\n@[trans]\ntheorem IsConj.trans {a b c : α} : IsConj a b → IsConj b c → IsConj a c\n  | ⟨c₁, hc₁⟩, ⟨c₂, hc₂⟩ => ⟨c₂ * c₁, hc₂.mul_left hc₁⟩\n#align is_conj.trans IsConj.trans\n-/\n\n",
+ "symm":
+ "#print IsConj.symm /-\n@[symm]\ntheorem IsConj.symm {a b : α} : IsConj a b → IsConj b a\n  | ⟨c, hc⟩ => ⟨c⁻¹, hc.units_inv_symm_left⟩\n#align is_conj.symm IsConj.symm\n-/\n\n",
+ "refl":
+ "#print IsConj.refl /-\n/-\nCopyright (c) 2018 Patrick Massot. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Patrick Massot, Chris Hughes, Michael Howes\n-/\n@[refl]\ntheorem IsConj.refl (a : α) : IsConj a a :=\n  ⟨1, SemiconjBy.one_left a⟩\n#align is_conj.refl IsConj.refl\n-/\n\n",
+ "quotient_mk_eq_mk":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⟦ ⟧» -/\ntheorem quotient_mk_eq_mk (a : α) : «expr⟦ ⟧» a = ConjClasses.mk a :=\n  rfl\n#align quotient_mk_eq_mk quotient_mk_eq_mk\n\n",
+ "quot_mk_eq_mk":
+ "theorem quot_mk_eq_mk (a : α) : Quot.mk Setoid.r a = ConjClasses.mk a :=\n  rfl\n#align quot_mk_eq_mk quot_mk_eq_mk\n\n",
+ "one_eq_mk_one":
+ "theorem one_eq_mk_one : (1 : ConjClasses α) = ConjClasses.mk 1 :=\n  rfl\n#align one_eq_mk_one one_eq_mk_one\n\n",
+ "mk_surjective":
+ "theorem mk_surjective : function.surjective (@ConjClasses.mk α _) :=\n  forall_isConj.2 fun a => ⟨a, rfl⟩\n#align mk_surjective mk_surjective\n\n",
+ "mk_injective":
+ "-- see Note [slow-failing instance priority]\ntheorem mk_injective : function.injective (@ConjClasses.mk α _) := fun _ _ =>\n  (mk_eq_mk_iff_isConj.trans isConj_iff_eq).1\n#align mk_injective mk_injective\n\n",
+ "mk_eq_mk_iff_is_conj":
+ "/- This small quotient API is largely copied from the API of `associates`;\nwhere possible, try to keep them in sync -/\ntheorem mk_eq_mk_iff_is_conj {a b : α} : ConjClasses.mk a = ConjClasses.mk b ↔ IsConj a b :=\n  iff.intro quotient.exact quot.sound\n#align mk_eq_mk_iff_is_conj mk_eq_mk_iff_is_conj\n\n",
+ "mk_bijective":
+ "theorem mk_bijective : function.bijective (@ConjClasses.mk α _) :=\n  ⟨mk_injective, mk_surjective⟩\n#align mk_bijective mk_bijective\n\n",
+ "mem_conjugatesOf_self":
+ "#print mem_conjugatesOf_self /-\ntheorem mem_conjugatesOf_self {a : α} : a ∈ conjugatesOf a :=\n  IsConj.refl _\n#align mem_conjugates_of_self mem_conjugatesOf_self\n-/\n\n",
+ "mem_carrier_mk":
+ "theorem mem_carrier_mk {a : α} : a ∈ carrier (ConjClasses.mk a) :=\n  IsConj.refl _\n#align mem_carrier_mk mem_carrier_mk\n\n",
+ "mem_carrier_iff_mk_eq":
+ "theorem mem_carrier_iff_mk_eq {a : α} {b : ConjClasses α} : a ∈ carrier b ↔ ConjClasses.mk a = b :=\n  by\n  revert b\n  rw [forall_is_conj]\n  intro b\n  rw [carrier, eq_comm, mk_eq_mk_iff_is_conj, ← quotient_mk_eq_mk, quotient.lift_mk]\n  rfl\n#align mem_carrier_iff_mk_eq mem_carrier_iff_mk_eq\n\n",
+ "map_surjective":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →* » -/\ntheorem map_surjective {f : «expr →* » α β} (hf : function.surjective f) : function.surjective (ConjClasses.map f) :=\n  by\n  intro b\n  obtain ⟨b, rfl⟩ := ConjClasses.mk_surjective b\n  obtain ⟨a, rfl⟩ := hf b\n  exact ⟨ConjClasses.mk a, rfl⟩\n#align map_surjective map_surjective\n\n",
+ "map_isConj":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →* » -/\n#print MonoidHom.map_isConj /-\nprotected theorem MonoidHom.map_isConj (f : «expr →* » α β) {a b : α} : IsConj a b → IsConj (f a) (f b)\n  | ⟨c, hc⟩ => ⟨Units.map f c, by rw [Units.coe_map, SemiconjBy, ← f.map_mul, hc.eq, f.map_mul]⟩\n#align monoid_hom.map_is_conj MonoidHom.map_isConj\n-/\n\n",
+ "isConj_one_right":
+ "#print isConj_one_right /-\n-- These lemmas hold for `right_cancel_monoid` with the current proofs, but for the sake of\n-- not duplicating code (these lemmas also hold for `left_cancel_monoids`) we leave these\n-- not generalised.\n@[simp]\ntheorem isConj_one_right {a : α} : IsConj 1 a ↔ a = 1 :=\n  ⟨fun ⟨c, hc⟩ => mul_right_cancel (hc.symm.trans ((mul_one _).trans (one_mul _).symm)), fun h => by rw [h]⟩\n#align is_conj_one_right isConj_one_right\n-/\n\n",
+ "isConj_one_left":
+ "#print isConj_one_left /-\n@[simp]\ntheorem isConj_one_left {a : α} : IsConj a 1 ↔ a = 1 :=\n  calc\n    IsConj a 1 ↔ IsConj 1 a := ⟨IsConj.symm, IsConj.symm⟩\n    _ ↔ a = 1 := isConj_one_right\n    \n#align is_conj_one_left isConj_one_left\n-/\n\n",
+ "isConj_iff₀":
+ "#print isConj_iff₀ /-\n@[simp]\ntheorem isConj_iff₀ [group_with_zero α] {a b : α} : IsConj a b ↔ ∃ c : α, c ≠ 0 ∧ c * a * c⁻¹ = b :=\n  ⟨fun ⟨c, hc⟩ =>\n    ⟨c, by\n      rw [← Units.val_inv_eq_inv_val, units.mul_inv_eq_iff_eq_mul]\n      exact ⟨c.ne_zero, hc⟩⟩,\n    fun ⟨c, c0, hc⟩ =>\n    ⟨Units.mk0 c c0,\n      by\n      rw [SemiconjBy, ← units.mul_inv_eq_iff_eq_mul, Units.val_inv_eq_inv_val, Units.val_mk0]\n      exact hc⟩⟩\n#align is_conj_iff₀ isConj_iff₀\n-/\n\n",
+ "isConj_iff_eq":
+ "#print isConj_iff_eq /-\n@[simp]\ntheorem isConj_iff_eq {α : Type _} [comm_monoid α] {a b : α} : IsConj a b ↔ a = b :=\n  ⟨fun ⟨c, hc⟩ =>\n    by\n    rw [SemiconjBy, mul_comm, ← units.mul_inv_eq_iff_eq_mul, mul_assoc, c.mul_inv, mul_one] at hc\n    exact hc, fun h => by rw [h]⟩\n#align is_conj_iff_eq isConj_iff_eq\n-/\n\n",
+ "isConj_iff_conjugatesOf_eq":
+ "#print isConj_iff_conjugatesOf_eq /-\ntheorem isConj_iff_conjugatesOf_eq {a b : α} : IsConj a b ↔ conjugatesOf a = conjugatesOf b :=\n  ⟨IsConj.conjugatesOf_eq, fun h => by\n    have ha := mem_conjugatesOf_self\n    rwa [← h] at ha⟩\n#align is_conj_iff_conjugates_of_eq isConj_iff_conjugatesOf_eq\n-/\n\n",
+ "isConj_iff":
+ "#print isConj_iff /-\n@[simp]\ntheorem isConj_iff {a b : α} : IsConj a b ↔ ∃ c : α, c * a * c⁻¹ = b :=\n  ⟨fun ⟨c, hc⟩ => ⟨c, mul_inv_eq_iff_eq_mul.2 hc⟩, fun ⟨c, hc⟩ =>\n    ⟨⟨c, c⁻¹, mul_inv_self c, inv_mul_self c⟩, mul_inv_eq_iff_eq_mul.1 hc⟩⟩\n#align is_conj_iff isConj_iff\n-/\n\n",
+ "isConj_comm":
+ "#print isConj_comm /-\ntheorem isConj_comm {g h : α} : IsConj g h ↔ IsConj h g :=\n  ⟨IsConj.symm, IsConj.symm⟩\n#align is_conj_comm isConj_comm\n-/\n\n",
+ "forall_is_conj":
+ "theorem forall_is_conj {p : ConjClasses α → Prop} : (∀ a, p a) ↔ ∀ a, p (ConjClasses.mk a) :=\n  iff.intro (fun h a => h _) fun h a => Quotient.inductionOn a h\n#align forall_is_conj forall_is_conj\n\n",
+ "exists_rep":
+ "theorem exists_rep (a : ConjClasses α) : ∃ a0 : α, ConjClasses.mk a0 = a :=\n  quot.exists_rep a\n#align exists_rep exists_rep\n\n",
+ "conjugatesOf_eq":
+ "#print IsConj.conjugatesOf_eq /-\ntheorem IsConj.conjugatesOf_eq {a b : α} (ab : IsConj a b) : conjugatesOf a = conjugatesOf b :=\n  Set.ext fun g => ⟨fun ag => ab.symm.trans ag, fun bg => ab.trans bg⟩\n#align is_conj.conjugates_of_eq IsConj.conjugatesOf_eq\n-/\n\n",
+ "conj_zpow":
+ "#print conj_zpow /-\n@[simp]\ntheorem conj_zpow {i : ℤ} {a b : α} : (a * b * a⁻¹) ^ i = a * b ^ i * a⁻¹ :=\n  by\n  induction i\n  · simp\n  · simp [zpow_negSucc, conj_pow]\n#align conj_zpow conj_zpow\n-/\n\n",
+ "conj_pow":
+ "#print conj_pow /-\n@[simp]\ntheorem conj_pow {i : ℕ} {a b : α} : (a * b * a⁻¹) ^ i = a * b ^ i * a⁻¹ :=\n  by\n  induction' i with i hi\n  · simp\n  · simp [pow_succ, hi]\n#align conj_pow conj_pow\n-/\n\n",
+ "conj_mul":
+ "#print conj_mul /-\n@[simp]\ntheorem conj_mul {a b c : α} : b * a * b⁻¹ * (b * c * b⁻¹) = b * (a * c) * b⁻¹ :=\n  ((MulAut.conj b).map_mul a c).symm\n#align conj_mul conj_mul\n-/\n\n",
+ "conj_inv":
+ "#print conj_inv /-\n@[simp]\ntheorem conj_inv {a b : α} : (b * a * b⁻¹)⁻¹ = b * a⁻¹ * b⁻¹ :=\n  ((MulAut.conj b).map_inv a).symm\n#align conj_inv conj_inv\n-/\n\n",
+ "conj_injective":
+ "#print conj_injective /-\ntheorem conj_injective {x : α} : function.injective fun g : α => x * g * x⁻¹ :=\n  (MulAut.conj x).injective\n#align conj_injective conj_injective\n-/\n\n",
+ "carrier_eq_preimage_mk":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\ntheorem carrier_eq_preimage_mk {a : ConjClasses α} : a.carrier = «expr ⁻¹' » ConjClasses.mk {a} :=\n  Set.ext fun x => mem_carrier_iff_mk_eq\n#align carrier_eq_preimage_mk carrier_eq_preimage_mk\n\n"}

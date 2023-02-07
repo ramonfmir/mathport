@@ -1,0 +1,4 @@
+{"min_fac_to_nat":
+ "@[simp]\ntheorem min_fac_to_nat : ∀ n : Num, (min_fac n : ℕ) = Nat.minFac n\n  | 0 => rfl\n  | pos n => pos_num.min_fac_to_nat _\n#align min_fac_to_nat min_fac_to_nat\n\n",
+ "min_fac_aux_to_nat":
+ "/-\nCopyright (c) 2020 Mario Carneiro. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Mario Carneiro\n-/\ntheorem min_fac_aux_to_nat {fuel : ℕ} {n k : PosNum} (h : nat.sqrt n < fuel + k.bit1) :\n    (min_fac_aux n fuel k : ℕ) = Nat.minFacAux n k.bit1 :=\n  by\n  induction' fuel with fuel ih generalizing k <;> rw [min_fac_aux, Nat.minFacAux]\n  · rw [if_pos]\n    rwa [zero_add, Nat.sqrt_lt] at h\n  rw [← mul_to_nat]; simp only [cast_lt, dvd_to_nat, ite_cast]\n  congr 2\n  rw [ih] <;> [congr , convert nat.lt_succ_of_lt h using 1] <;>\n    simp only [_root_.bit1, _root_.bit0, cast_bit1, cast_succ, nat.succ_eq_add_one, add_assoc, add_left_comm]\n#align min_fac_aux_to_nat min_fac_aux_to_nat\n\n"}

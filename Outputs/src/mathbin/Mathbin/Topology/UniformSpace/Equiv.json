@@ -1,0 +1,64 @@
+{"uniform_inducing":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ᵤ » -/\nprotected theorem uniform_inducing (h : «expr ≃ᵤ » α β) : uniform_inducing h :=\n  uniform_inducing_of_compose h.uniform_continuous h.symm.uniform_continuous <| by\n    simp only [symm_comp_self, uniform_inducing_id]\n#align uniform_inducing uniform_inducing\n\n",
+ "uniform_equiv_mk_coe_symm":
+ "@[simp]\ntheorem uniform_equiv_mk_coe_symm (a : equiv α β) (b c) : ((uniform_equiv.mk a b c).symm : β → α) = a.symm :=\n  rfl\n#align uniform_equiv_mk_coe_symm uniform_equiv_mk_coe_symm\n\n",
+ "uniform_equiv_mk_coe":
+ "/-\nCopyright (c) 2022 Anatole Dedecker. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Johannes Hölzl, Patrick Massot, Sébastien Gouëzel, Zhouhang Zhou, Reid Barton,\nAnatole Dedecker\n-/\n-- not all spaces are homeomorphic to each other\n@[simp]\ntheorem uniform_equiv_mk_coe (a : equiv α β) (b c) : (uniform_equiv.mk a b c : α → β) = a :=\n  rfl\n#align uniform_equiv_mk_coe uniform_equiv_mk_coe\n\n",
+ "uniform_embedding":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ᵤ » -/\nprotected theorem uniform_embedding (h : «expr ≃ᵤ » α β) : uniform_embedding h :=\n  ⟨h.uniform_inducing, h.injective⟩\n#align uniform_embedding uniform_embedding\n\n",
+ "uniform_continuous_symm":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ᵤ » -/\nprotected theorem uniform_continuous_symm (h : «expr ≃ᵤ » α β) : uniform_continuous h.symm :=\n  h.uniform_continuous_inv_fun\n#align uniform_continuous_symm uniform_continuous_symm\n\n",
+ "uniform_continuous":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ᵤ » -/\nprotected theorem uniform_continuous (h : «expr ≃ᵤ » α β) : uniform_continuous h :=\n  h.uniform_continuous_to_fun\n#align uniform_continuous uniform_continuous\n\n",
+ "trans_apply":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ᵤ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ᵤ » -/\n@[simp]\ntheorem trans_apply (h₁ : «expr ≃ᵤ » α β) (h₂ : «expr ≃ᵤ » β γ) (a : α) : h₁.trans h₂ a = h₂ (h₁ a) :=\n  rfl\n#align trans_apply trans_apply\n\n",
+ "to_equiv_injective":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ᵤ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ » -/\ntheorem to_equiv_injective : function.injective (to_equiv : «expr ≃ᵤ » α β → «expr ≃ » α β)\n  | ⟨e, h₁, h₂⟩, ⟨e', h₁', h₂'⟩, rfl => rfl\n#align to_equiv_injective to_equiv_injective\n\n",
+ "symm_comp_self":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ᵤ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n@[simp]\ntheorem symm_comp_self (h : «expr ≃ᵤ » α β) : «expr⇑ » h.symm ∘ «expr⇑ » h = id :=\n  funext h.symm_apply_apply\n#align symm_comp_self symm_comp_self\n\n",
+ "symm_apply_apply":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ᵤ » -/\n@[simp]\ntheorem symm_apply_apply (h : «expr ≃ᵤ » α β) (x : α) : h.symm (h x) = x :=\n  h.to_equiv.symm_apply_apply x\n#align symm_apply_apply symm_apply_apply\n\n",
+ "surjective":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ᵤ » -/\nprotected theorem surjective (h : «expr ≃ᵤ » α β) : function.surjective h :=\n  h.to_equiv.surjective\n#align surjective surjective\n\n",
+ "self_comp_symm":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ᵤ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n@[simp]\ntheorem self_comp_symm (h : «expr ≃ᵤ » α β) : «expr⇑ » h ∘ «expr⇑ » h.symm = id :=\n  funext h.apply_symm_apply\n#align self_comp_symm self_comp_symm\n\n",
+ "refl_symm":
+ "@[simp]\ntheorem refl_symm : (uniform_equiv.refl α).symm = uniform_equiv.refl α :=\n  rfl\n#align refl_symm refl_symm\n\n",
+ "range_coe":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ᵤ » -/\n@[simp]\ntheorem range_coe (h : «expr ≃ᵤ » α β) : range h = univ :=\n  h.surjective.range_eq\n#align range_coe range_coe\n\n",
+ "prod_congr_symm":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ᵤ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ᵤ » -/\n@[simp]\ntheorem prod_congr_symm (h₁ : «expr ≃ᵤ » α β) (h₂ : «expr ≃ᵤ » γ δ) :\n    (h₁.prod_congr h₂).symm = h₁.symm.prod_congr h₂.symm :=\n  rfl\n#align prod_congr_symm prod_congr_symm\n\n",
+ "prod_comm_symm":
+ "@[simp]\ntheorem prod_comm_symm : (prod_comm α β).symm = prod_comm β α :=\n  rfl\n#align prod_comm_symm prod_comm_symm\n\n",
+ "preimage_symm":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ᵤ » -/\ntheorem preimage_symm (h : «expr ≃ᵤ » α β) : preimage h.symm = image h :=\n  (funext h.to_equiv.image_eq_preimage).symm\n#align preimage_symm preimage_symm\n\n",
+ "preimage_image":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ᵤ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\n@[simp]\ntheorem preimage_image (h : «expr ≃ᵤ » α β) (s : set α) : «expr ⁻¹' » h («expr '' » h s) = s :=\n  h.to_equiv.preimage_image s\n#align preimage_image preimage_image\n\n",
+ "injective":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ᵤ » -/\nprotected theorem injective (h : «expr ≃ᵤ » α β) : function.injective h :=\n  h.to_equiv.injective\n#align injective injective\n\n",
+ "image_symm":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ᵤ » -/\ntheorem image_symm (h : «expr ≃ᵤ » α β) : image h.symm = preimage h :=\n  funext h.symm.to_equiv.image_eq_preimage\n#align image_symm image_symm\n\n",
+ "image_preimage":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ᵤ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\n@[simp]\ntheorem image_preimage (h : «expr ≃ᵤ » α β) (s : set β) : «expr '' » h («expr ⁻¹' » h s) = s :=\n  h.to_equiv.image_preimage s\n#align image_preimage image_preimage\n\n",
+ "ext":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ᵤ » -/\n@[ext]\ntheorem ext {h h' : «expr ≃ᵤ » α β} (H : ∀ x, h x = h' x) : h = h' :=\n  to_equiv_injective <| equiv.ext H\n#align ext ext\n\n",
+ "continuous_symm":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ᵤ » -/\n-- otherwise `by continuity` can't prove continuity of `h.to_equiv.symm`\n@[continuity]\nprotected theorem continuous_symm (h : «expr ≃ᵤ » α β) : continuous h.symm :=\n  h.uniform_continuous_symm.continuous\n#align continuous_symm continuous_symm\n\n",
+ "continuous":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ᵤ » -/\n@[continuity]\nprotected theorem continuous (h : «expr ≃ᵤ » α β) : continuous h :=\n  h.uniform_continuous.continuous\n#align continuous continuous\n\n",
+ "comap_eq":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ᵤ » -/\ntheorem comap_eq (h : «expr ≃ᵤ » α β) : uniform_space.comap h ‹_› = ‹_› := by\n  ext : 1 <;> exact h.uniform_inducing.comap_uniformity\n#align comap_eq comap_eq\n\n",
+ "coe_to_equiv":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ᵤ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n@[simp]\ntheorem coe_to_equiv (h : «expr ≃ᵤ » α β) : «expr⇑ » h.to_equiv = h :=\n  rfl\n#align coe_to_equiv coe_to_equiv\n\n",
+ "coe_symm_to_equiv":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ᵤ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n@[simp]\ntheorem coe_symm_to_equiv (h : «expr ≃ᵤ » α β) : «expr⇑ » h.to_equiv.symm = h.symm :=\n  rfl\n#align coe_symm_to_equiv coe_symm_to_equiv\n\n",
+ "coe_punit_prod":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n@[simp]\ntheorem coe_punit_prod : «expr⇑ » (punit_prod α) = prod.snd :=\n  rfl\n#align coe_punit_prod coe_punit_prod\n\n",
+ "coe_prod_congr":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ᵤ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ᵤ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n@[simp]\ntheorem coe_prod_congr (h₁ : «expr ≃ᵤ » α β) (h₂ : «expr ≃ᵤ » γ δ) : «expr⇑ » (h₁.prod_congr h₂) = prod.map h₁ h₂ :=\n  rfl\n#align coe_prod_congr coe_prod_congr\n\n",
+ "coe_prod_comm":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n@[simp]\ntheorem coe_prod_comm : «expr⇑ » (prod_comm α β) = prod.swap :=\n  rfl\n#align coe_prod_comm coe_prod_comm\n\n",
+ "bijective":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ᵤ » -/\nprotected theorem bijective (h : «expr ≃ᵤ » α β) : function.bijective h :=\n  h.to_equiv.bijective\n#align bijective bijective\n\n",
+ "apply_symm_apply":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ᵤ » -/\n@[simp]\ntheorem apply_symm_apply (h : «expr ≃ᵤ » α β) (x : β) : h (h.symm x) = x :=\n  h.to_equiv.apply_symm_apply x\n#align apply_symm_apply apply_symm_apply\n\n"}

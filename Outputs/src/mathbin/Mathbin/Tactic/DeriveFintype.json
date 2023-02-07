@@ -1,0 +1,10 @@
+{"mem_union_right":
+ "theorem finset_above.mem_union_right {α} {enum : α → ℕ} {n s t a} (H : a ∈ (t : finset_above _ _ _).1) :\n    a ∈ (@finset_above.union α enum n s t).1 :=\n  Multiset.mem_add.2 (or.inr H)\n#align finset_above.mem_union_right finset_above.mem_union_right\n\n",
+ "mem_union_left":
+ "theorem finset_above.mem_union_left {α} {enum : α → ℕ} {n s t a} (H : a ∈ (s : finset_in _).1) :\n    a ∈ (@finset_above.union α enum n s t).1 :=\n  Multiset.mem_add.2 (or.inl H)\n#align finset_above.mem_union_left finset_above.mem_union_left\n\n",
+ "mem_mk":
+ "theorem finset_in.mem_mk {α} {P : α → Prop} {Γ} {s : fintype Γ} {f : Γ → α} {inj mem a} (b) (H : f b = a) :\n    a ∈ (@finset_in.mk α P Γ s f inj mem).1 :=\n  Finset.mem_map.2 ⟨_, finset.mem_univ _, H⟩\n#align finset_in.mem_mk finset_in.mem_mk\n\n",
+ "mem_cons_self":
+ "/-\nCopyright (c) 2020 Mario Carneiro. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Mario Carneiro\n-/\ntheorem finset_above.mem_cons_self {α} {enum : α → ℕ} {n a h s} : a ∈ (@finset_above.cons α enum n a h s).1 :=\n  Multiset.mem_cons_self _ _\n#align finset_above.mem_cons_self finset_above.mem_cons_self\n\n",
+ "mem_cons_of_mem":
+ "theorem finset_above.mem_cons_of_mem {α} {enum : α → ℕ} {n a h s b} :\n    b ∈ (s : finset_above _ _ _).1 → b ∈ (@finset_above.cons α enum n a h s).1 :=\n  Multiset.mem_cons_of_mem\n#align finset_above.mem_cons_of_mem finset_above.mem_cons_of_mem\n\n"}

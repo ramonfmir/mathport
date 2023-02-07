@@ -1,0 +1,154 @@
+{"zero_eq_arcsin_iff":
+ "@[simp]\ntheorem zero_eq_arcsin_iff {x} : 0 = arcsin x ↔ x = 0 :=\n  eq_comm.trans arcsin_eq_zero_iff\n#align zero_eq_arcsin_iff zero_eq_arcsin_iff\n\n",
+ "tan_arcsin":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n-- The junk values for `arcsin` and `sqrt` make this true even outside `[-1, 1]`.\ntheorem tan_arcsin (x : exprℝ) : tan (arcsin x) = x / sqrt (1 - x ^ 2) :=\n  by\n  rw [tan_eq_sin_div_cos, cos_arcsin]\n  by_cases hx₁ : -1 ≤ x; swap\n  · have h : sqrt (1 - x ^ 2) = 0 := sqrt_eq_zero_of_nonpos (by nlinarith)\n    rw [h]\n    simp\n  by_cases hx₂ : x ≤ 1; swap\n  · have h : sqrt (1 - x ^ 2) = 0 := sqrt_eq_zero_of_nonpos (by nlinarith)\n    rw [h]\n    simp\n  rw [sin_arcsin hx₁ hx₂]\n#align tan_arcsin tan_arcsin\n\n",
+ "tan_arccos":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n-- The junk values for `arccos` and `sqrt` make this true even outside `[-1, 1]`.\ntheorem tan_arccos (x : exprℝ) : tan (arccos x) = sqrt (1 - x ^ 2) / x := by\n  rw [arccos, tan_pi_div_two_sub, tan_arcsin, inv_div]\n#align tan_arccos tan_arccos\n\n",
+ "strict_mono_on_arcsin":
+ "theorem strict_mono_on_arcsin : strict_mono_on arcsin (Icc (-1) 1) :=\n  (Subtype.strictMono_coe _).comp_strict_mono_on <| sin_order_iso.symm.strict_mono.strict_mono_on_Icc_extend _\n#align strict_mono_on_arcsin strict_mono_on_arcsin\n\n",
+ "strict_anti_on_arccos":
+ "theorem strict_anti_on_arccos : strict_anti_on arccos (Icc (-1) 1) := fun x hx y hy h =>\n  sub_lt_sub_left (strict_mono_on_arcsin hx hy h) _\n#align strict_anti_on_arccos strict_anti_on_arccos\n\n",
+ "sin_arcsin'":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\ntheorem sin_arcsin' {x : exprℝ} (hx : x ∈ Icc (-1 : exprℝ) 1) : sin (arcsin x) = x := by\n  simpa [arcsin, Icc_extend_of_mem _ _ hx, -OrderIso.apply_symm_apply] using\n    subtype.ext_iff.1 (sin_order_iso.apply_symm_apply ⟨x, hx⟩)\n#align sin_arcsin' sin_arcsin'\n\n",
+ "sin_arcsin":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\ntheorem sin_arcsin {x : exprℝ} (hx₁ : -1 ≤ x) (hx₂ : x ≤ 1) : sin (arcsin x) = x :=\n  sin_arcsin' ⟨hx₁, hx₂⟩\n#align sin_arcsin sin_arcsin\n\n",
+ "sin_arccos":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n-- The junk values for `arccos` and `sqrt` make this true even outside `[-1, 1]`.\ntheorem sin_arccos (x : exprℝ) : sin (arccos x) = sqrt (1 - x ^ 2) :=\n  by\n  by_cases hx₁ : -1 ≤ x; swap\n  · rw [not_le] at hx₁\n    rw [arccos_of_le_neg_one hx₁.le, sin_pi, sqrt_eq_zero_of_nonpos]\n    nlinarith\n  by_cases hx₂ : x ≤ 1; swap\n  · rw [not_le] at hx₂\n    rw [arccos_of_one_le hx₂.le, sin_zero, sqrt_eq_zero_of_nonpos]\n    nlinarith\n  rw [arccos_eq_pi_div_two_sub_arcsin, sin_pi_div_two_sub, cos_arcsin]\n#align sin_arccos sin_arccos\n\n",
+ "range_arcsin":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `real.pi -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `real.pi -/\n@[simp]\ntheorem range_arcsin : range arcsin = Icc (-(real.pi / 2)) (real.pi / 2) :=\n  by\n  rw [arcsin, range_comp coe]\n  simp [Icc]\n#align range_arcsin range_arcsin\n\n",
+ "pi_div_two_le_arcsin":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `real.pi -/\n@[simp]\ntheorem pi_div_two_le_arcsin {x} : real.pi / 2 ≤ arcsin x ↔ 1 ≤ x :=\n  (arcsin_le_pi_div_two x).le_iff_eq.trans pi_div_two_eq_arcsin\n#align pi_div_two_le_arcsin pi_div_two_le_arcsin\n\n",
+ "pi_div_two_eq_arcsin":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `real.pi -/\n@[simp]\ntheorem pi_div_two_eq_arcsin {x} : real.pi / 2 = arcsin x ↔ 1 ≤ x :=\n  eq_comm.trans arcsin_eq_pi_div_two\n#align pi_div_two_eq_arcsin pi_div_two_eq_arcsin\n\n",
+ "pi_div_four_le_arcsin":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `real.pi -/\n@[simp]\ntheorem pi_div_four_le_arcsin {x} : real.pi / 4 ≤ arcsin x ↔ sqrt 2 / 2 ≤ x :=\n  by\n  rw [← sin_pi_div_four, le_arcsin_iff_sin_le']\n  have := pi_pos\n  constructor <;> linarith\n#align pi_div_four_le_arcsin pi_div_four_le_arcsin\n\n",
+ "neg_pi_div_two_lt_arcsin":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `real.pi -/\n@[simp]\ntheorem neg_pi_div_two_lt_arcsin {x : exprℝ} : -(real.pi / 2) < arcsin x ↔ -1 < x :=\n  (lt_arcsin_iff_sin_lt' <| left_mem_Ico.2 <| neg_lt_self pi_div_two_pos).trans <| by rw [sin_neg, sin_pi_div_two]\n#align neg_pi_div_two_lt_arcsin neg_pi_div_two_lt_arcsin\n\n",
+ "neg_pi_div_two_le_arcsin":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `real.pi -/\ntheorem neg_pi_div_two_le_arcsin (x : exprℝ) : -(real.pi / 2) ≤ arcsin x :=\n  (arcsin_mem_Icc x).1\n#align neg_pi_div_two_le_arcsin neg_pi_div_two_le_arcsin\n\n",
+ "neg_pi_div_two_eq_arcsin":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `real.pi -/\n@[simp]\ntheorem neg_pi_div_two_eq_arcsin {x} : -(real.pi / 2) = arcsin x ↔ x ≤ -1 :=\n  eq_comm.trans arcsin_eq_neg_pi_div_two\n#align neg_pi_div_two_eq_arcsin neg_pi_div_two_eq_arcsin\n\n",
+ "monotone_arcsin":
+ "theorem monotone_arcsin : monotone arcsin :=\n  (subtype.mono_coe _).comp <| sin_order_iso.symm.monotone.Icc_extend _\n#align monotone_arcsin monotone_arcsin\n\n",
+ "maps_to_sin_Ioo":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `real.pi -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `real.pi -/\ntheorem maps_to_sin_Ioo : MapsTo sin (Ioo (-(real.pi / 2)) (real.pi / 2)) (Ioo (-1) 1) := fun x h => by\n  rwa [mem_Ioo, ← arcsin_lt_pi_div_two, ← neg_pi_div_two_lt_arcsin, arcsin_sin h.1.le h.2.le]\n#align maps_to_sin_Ioo maps_to_sin_Ioo\n\n",
+ "lt_arcsin_iff_sin_lt'":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `real.pi -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `real.pi -/\ntheorem lt_arcsin_iff_sin_lt' {x y : exprℝ} (hx : x ∈ Ico (-(real.pi / 2)) (real.pi / 2)) : x < arcsin y ↔ sin x < y :=\n  not_le.symm.trans <| (not_congr <| arcsin_le_iff_le_sin' hx).trans not_le\n#align lt_arcsin_iff_sin_lt' lt_arcsin_iff_sin_lt'\n\n",
+ "lt_arcsin_iff_sin_lt":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `real.pi -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `real.pi -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\ntheorem lt_arcsin_iff_sin_lt {x y : exprℝ} (hx : x ∈ Icc (-(real.pi / 2)) (real.pi / 2)) (hy : y ∈ Icc (-1 : exprℝ) 1) :\n    x < arcsin y ↔ sin x < y :=\n  not_le.symm.trans <| (not_congr <| arcsin_le_iff_le_sin hy hx).trans not_le\n#align lt_arcsin_iff_sin_lt lt_arcsin_iff_sin_lt\n\n",
+ "le_arcsin_iff_sin_le'":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `real.pi -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `real.pi -/\ntheorem le_arcsin_iff_sin_le' {x y : exprℝ} (hx : x ∈ Ioc (-(real.pi / 2)) (real.pi / 2)) : x ≤ arcsin y ↔ sin x ≤ y :=\n  by\n  rw [← neg_le_neg_iff, ← arcsin_neg, arcsin_le_iff_le_sin' ⟨neg_le_neg hx.2, neg_lt.2 hx.1⟩, sin_neg, neg_le_neg_iff]\n#align le_arcsin_iff_sin_le' le_arcsin_iff_sin_le'\n\n",
+ "le_arcsin_iff_sin_le":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `real.pi -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `real.pi -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\ntheorem le_arcsin_iff_sin_le {x y : exprℝ} (hx : x ∈ Icc (-(real.pi / 2)) (real.pi / 2)) (hy : y ∈ Icc (-1 : exprℝ) 1) :\n    x ≤ arcsin y ↔ sin x ≤ y := by\n  rw [← neg_le_neg_iff, ← arcsin_neg,\n    arcsin_le_iff_le_sin ⟨neg_le_neg hy.2, neg_le.2 hy.1⟩ ⟨neg_le_neg hx.2, neg_le.2 hx.1⟩, sin_neg, neg_le_neg_iff]\n#align le_arcsin_iff_sin_le le_arcsin_iff_sin_le\n\n",
+ "inj_on_arcsin":
+ "theorem inj_on_arcsin : InjOn arcsin (Icc (-1) 1) :=\n  strict_mono_on_arcsin.inj_on\n#align inj_on_arcsin inj_on_arcsin\n\n",
+ "cos_arcsin_nonneg":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\ntheorem cos_arcsin_nonneg (x : exprℝ) : 0 ≤ cos (arcsin x) :=\n  cos_nonneg_of_mem_Icc ⟨neg_pi_div_two_le_arcsin _, arcsin_le_pi_div_two _⟩\n#align cos_arcsin_nonneg cos_arcsin_nonneg\n\n",
+ "cos_arcsin":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n-- The junk values for `arcsin` and `sqrt` make this true even outside `[-1, 1]`.\ntheorem cos_arcsin (x : exprℝ) : cos (arcsin x) = sqrt (1 - x ^ 2) :=\n  by\n  by_cases hx₁ : -1 ≤ x; swap\n  · rw [not_le] at hx₁\n    rw [arcsin_of_le_neg_one hx₁.le, cos_neg, cos_pi_div_two, sqrt_eq_zero_of_nonpos]\n    nlinarith\n  by_cases hx₂ : x ≤ 1; swap\n  · rw [not_le] at hx₂\n    rw [arcsin_of_one_le hx₂.le, cos_pi_div_two, sqrt_eq_zero_of_nonpos]\n    nlinarith\n  have : sin (arcsin x) ^ 2 + cos (arcsin x) ^ 2 = 1 := sin_sq_add_cos_sq (arcsin x)\n  rw [← eq_sub_iff_add_eq', ← sqrt_inj (sq_nonneg _) (sub_nonneg.2 (sin_sq_le_one (arcsin x))), sq,\n    sqrt_mul_self (cos_arcsin_nonneg _)] at this\n  rw [this, sin_arcsin hx₁ hx₂]\n#align cos_arcsin cos_arcsin\n\n",
+ "cos_arccos":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\ntheorem cos_arccos {x : exprℝ} (hx₁ : -1 ≤ x) (hx₂ : x ≤ 1) : cos (arccos x) = x := by\n  rw [arccos, cos_pi_div_two_sub, sin_arcsin hx₁ hx₂]\n#align cos_arccos cos_arccos\n\n",
+ "continuous_at_arcsin":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\ntheorem continuous_at_arcsin {x : exprℝ} : continuous_at arcsin x :=\n  continuous_arcsin.continuous_at\n#align continuous_at_arcsin continuous_at_arcsin\n\n",
+ "continuous_arcsin":
+ "@[continuity]\ntheorem continuous_arcsin : continuous arcsin :=\n  continuous_subtype_coe.comp sin_order_iso.symm.continuous.Icc_extend'\n#align continuous_arcsin continuous_arcsin\n\n",
+ "continuous_arccos":
+ "@[continuity]\ntheorem continuous_arccos : continuous arccos :=\n  continuous_const.sub continuous_arcsin\n#align continuous_arccos continuous_arccos\n\n",
+ "arcsin_zero":
+ "@[simp]\ntheorem arcsin_zero : arcsin 0 = 0 :=\n  arcsin_eq_of_sin_eq sin_zero ⟨neg_nonpos.2 pi_div_two_pos.le, pi_div_two_pos.le⟩\n#align arcsin_zero arcsin_zero\n\n",
+ "arcsin_sin'":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `real.pi -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `real.pi -/\ntheorem arcsin_sin' {x : exprℝ} (hx : x ∈ Icc (-(real.pi / 2)) (real.pi / 2)) : arcsin (sin x) = x :=\n  inj_on_sin (arcsin_mem_Icc _) hx <| by rw [sin_arcsin (neg_one_le_sin _) (sin_le_one _)]\n#align arcsin_sin' arcsin_sin'\n\n",
+ "arcsin_sin":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `real.pi -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `real.pi -/\ntheorem arcsin_sin {x : exprℝ} (hx₁ : -(real.pi / 2) ≤ x) (hx₂ : x ≤ real.pi / 2) : arcsin (sin x) = x :=\n  arcsin_sin' ⟨hx₁, hx₂⟩\n#align arcsin_sin arcsin_sin\n\n",
+ "arcsin_proj_Icc":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\ntheorem arcsin_proj_Icc (x : exprℝ) : arcsin (projIcc (-1) 1 (neg_le_self zero_le_one) x) = arcsin x := by\n  rw [arcsin, Function.comp_apply, Icc_extend_coe, Function.comp_apply, Icc_extend]\n#align arcsin_proj_Icc arcsin_proj_Icc\n\n",
+ "arcsin_pos":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n@[simp]\ntheorem arcsin_pos {x : exprℝ} : 0 < arcsin x ↔ 0 < x :=\n  lt_iff_lt_of_le_iff_le arcsin_nonpos\n#align arcsin_pos arcsin_pos\n\n",
+ "arcsin_one":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `real.pi -/\n@[simp]\ntheorem arcsin_one : arcsin 1 = real.pi / 2 :=\n  arcsin_eq_of_sin_eq sin_pi_div_two <| right_mem_Icc.2 (neg_le_self pi_div_two_pos.le)\n#align arcsin_one arcsin_one\n\n",
+ "arcsin_of_one_le":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `real.pi -/\ntheorem arcsin_of_one_le {x : exprℝ} (hx : 1 ≤ x) : arcsin x = real.pi / 2 := by\n  rw [← arcsin_proj_Icc, proj_Icc_of_right_le _ hx, subtype.coe_mk, arcsin_one]\n#align arcsin_of_one_le arcsin_of_one_le\n\n",
+ "arcsin_of_le_neg_one":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `real.pi -/\ntheorem arcsin_of_le_neg_one {x : exprℝ} (hx : x ≤ -1) : arcsin x = -(real.pi / 2) := by\n  rw [← arcsin_proj_Icc, proj_Icc_of_le_left _ hx, subtype.coe_mk, arcsin_neg_one]\n#align arcsin_of_le_neg_one arcsin_of_le_neg_one\n\n",
+ "arcsin_nonpos":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n@[simp]\ntheorem arcsin_nonpos {x : exprℝ} : arcsin x ≤ 0 ↔ x ≤ 0 :=\n  neg_nonneg.symm.trans <| arcsin_neg x ▸ arcsin_nonneg.trans neg_nonneg\n#align arcsin_nonpos arcsin_nonpos\n\n",
+ "arcsin_nonneg":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n@[simp]\ntheorem arcsin_nonneg {x : exprℝ} : 0 ≤ arcsin x ↔ 0 ≤ x :=\n  (le_arcsin_iff_sin_le' ⟨neg_lt_zero.2 pi_div_two_pos, pi_div_two_pos.le⟩).trans <| by rw [sin_zero]\n#align arcsin_nonneg arcsin_nonneg\n\n",
+ "arcsin_neg_one":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `real.pi -/\ntheorem arcsin_neg_one : arcsin (-1) = -(real.pi / 2) :=\n  arcsin_eq_of_sin_eq (by rw [sin_neg, sin_pi_div_two]) <| left_mem_Icc.2 (neg_le_self pi_div_two_pos.le)\n#align arcsin_neg_one arcsin_neg_one\n\n",
+ "arcsin_neg":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n@[simp]\ntheorem arcsin_neg (x : exprℝ) : arcsin (-x) = -arcsin x :=\n  by\n  cases' le_total x (-1) with hx₁ hx₁\n  · rw [arcsin_of_le_neg_one hx₁, neg_neg, arcsin_of_one_le (le_neg.2 hx₁)]\n  cases' le_total 1 x with hx₂ hx₂\n  · rw [arcsin_of_one_le hx₂, arcsin_of_le_neg_one (neg_le_neg hx₂)]\n  refine' arcsin_eq_of_sin_eq _ _\n  · rw [sin_neg, sin_arcsin hx₁ hx₂]\n  · exact ⟨neg_le_neg (arcsin_le_pi_div_two _), neg_le.2 (neg_pi_div_two_le_arcsin _)⟩\n#align arcsin_neg arcsin_neg\n\n",
+ "arcsin_mem_Icc":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `real.pi -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `real.pi -/\n/-\nCopyright (c) 2018 Chris Hughes. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Chris Hughes, Abhimanyu Pallavi Sudhir, Jean Lo, Calle Sönne, Benjamin Davidson\n-/\ntheorem arcsin_mem_Icc (x : exprℝ) : arcsin x ∈ Icc (-(real.pi / 2)) (real.pi / 2) :=\n  subtype.coe_prop _\n#align arcsin_mem_Icc arcsin_mem_Icc\n\n",
+ "arcsin_lt_zero":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n@[simp]\ntheorem arcsin_lt_zero {x : exprℝ} : arcsin x < 0 ↔ x < 0 :=\n  lt_iff_lt_of_le_iff_le arcsin_nonneg\n#align arcsin_lt_zero arcsin_lt_zero\n\n",
+ "arcsin_lt_pi_div_two":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `real.pi -/\n@[simp]\ntheorem arcsin_lt_pi_div_two {x : exprℝ} : arcsin x < real.pi / 2 ↔ x < 1 :=\n  (arcsin_lt_iff_lt_sin' (right_mem_Ioc.2 <| neg_lt_self pi_div_two_pos)).trans <| by rw [sin_pi_div_two]\n#align arcsin_lt_pi_div_two arcsin_lt_pi_div_two\n\n",
+ "arcsin_lt_iff_lt_sin'":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `real.pi -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `real.pi -/\ntheorem arcsin_lt_iff_lt_sin' {x y : exprℝ} (hy : y ∈ Ioc (-(real.pi / 2)) (real.pi / 2)) : arcsin x < y ↔ x < sin y :=\n  not_le.symm.trans <| (not_congr <| le_arcsin_iff_sin_le' hy).trans not_le\n#align arcsin_lt_iff_lt_sin' arcsin_lt_iff_lt_sin'\n\n",
+ "arcsin_lt_iff_lt_sin":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `real.pi -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `real.pi -/\ntheorem arcsin_lt_iff_lt_sin {x y : exprℝ} (hx : x ∈ Icc (-1 : exprℝ) 1) (hy : y ∈ Icc (-(real.pi / 2)) (real.pi / 2)) :\n    arcsin x < y ↔ x < sin y :=\n  not_le.symm.trans <| (not_congr <| le_arcsin_iff_sin_le hy hx).trans not_le\n#align arcsin_lt_iff_lt_sin arcsin_lt_iff_lt_sin\n\n",
+ "arcsin_le_pi_div_two":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `real.pi -/\ntheorem arcsin_le_pi_div_two (x : exprℝ) : arcsin x ≤ real.pi / 2 :=\n  (arcsin_mem_Icc x).2\n#align arcsin_le_pi_div_two arcsin_le_pi_div_two\n\n",
+ "arcsin_le_neg_pi_div_two":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `real.pi -/\n@[simp]\ntheorem arcsin_le_neg_pi_div_two {x} : arcsin x ≤ -(real.pi / 2) ↔ x ≤ -1 :=\n  (neg_pi_div_two_le_arcsin x).le_iff_eq.trans arcsin_eq_neg_pi_div_two\n#align arcsin_le_neg_pi_div_two arcsin_le_neg_pi_div_two\n\n",
+ "arcsin_le_iff_le_sin'":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `real.pi -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `real.pi -/\ntheorem arcsin_le_iff_le_sin' {x y : exprℝ} (hy : y ∈ Ico (-(real.pi / 2)) (real.pi / 2)) : arcsin x ≤ y ↔ x ≤ sin y :=\n  by\n  cases' le_total x (-1) with hx₁ hx₁\n  · simp [arcsin_of_le_neg_one hx₁, hy.1, hx₁.trans (neg_one_le_sin _)]\n  cases' lt_or_le 1 x with hx₂ hx₂\n  · simp [arcsin_of_one_le hx₂.le, hy.2.not_le, (sin_le_one y).trans_lt hx₂]\n  exact arcsin_le_iff_le_sin ⟨hx₁, hx₂⟩ (mem_Icc_of_Ico hy)\n#align arcsin_le_iff_le_sin' arcsin_le_iff_le_sin'\n\n",
+ "arcsin_le_iff_le_sin":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `real.pi -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `real.pi -/\ntheorem arcsin_le_iff_le_sin {x y : exprℝ} (hx : x ∈ Icc (-1 : exprℝ) 1) (hy : y ∈ Icc (-(real.pi / 2)) (real.pi / 2)) :\n    arcsin x ≤ y ↔ x ≤ sin y := by\n  rw [← arcsin_sin' hy, strict_mono_on_arcsin.le_iff_le hx (sin_mem_Icc _), arcsin_sin' hy]\n#align arcsin_le_iff_le_sin arcsin_le_iff_le_sin\n\n",
+ "arcsin_inj":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\ntheorem arcsin_inj {x y : exprℝ} (hx₁ : -1 ≤ x) (hx₂ : x ≤ 1) (hy₁ : -1 ≤ y) (hy₂ : y ≤ 1) :\n    arcsin x = arcsin y ↔ x = y :=\n  inj_on_arcsin.eq_iff ⟨hx₁, hx₂⟩ ⟨hy₁, hy₂⟩\n#align arcsin_inj arcsin_inj\n\n",
+ "arcsin_eq_zero_iff":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n@[simp]\ntheorem arcsin_eq_zero_iff {x : exprℝ} : arcsin x = 0 ↔ x = 0 := by simp [le_antisymm_iff]\n#align arcsin_eq_zero_iff arcsin_eq_zero_iff\n\n",
+ "arcsin_eq_pi_div_two_sub_arccos":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `real.pi -/\ntheorem arcsin_eq_pi_div_two_sub_arccos (x : exprℝ) : arcsin x = real.pi / 2 - arccos x := by simp [arccos]\n#align arcsin_eq_pi_div_two_sub_arccos arcsin_eq_pi_div_two_sub_arccos\n\n",
+ "arcsin_eq_pi_div_two":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `real.pi -/\n@[simp]\ntheorem arcsin_eq_pi_div_two {x : exprℝ} : arcsin x = real.pi / 2 ↔ 1 ≤ x :=\n  ⟨fun h => not_lt.1 fun h' => (arcsin_lt_pi_div_two.2 h').ne h, arcsin_of_one_le⟩\n#align arcsin_eq_pi_div_two arcsin_eq_pi_div_two\n\n",
+ "arcsin_eq_of_sin_eq":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `real.pi -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `real.pi -/\ntheorem arcsin_eq_of_sin_eq {x y : exprℝ} (h₁ : sin x = y) (h₂ : x ∈ Icc (-(real.pi / 2)) (real.pi / 2)) :\n    arcsin y = x := by\n  subst y\n  exact inj_on_sin (arcsin_mem_Icc _) h₂ (sin_arcsin' (sin_mem_Icc x))\n#align arcsin_eq_of_sin_eq arcsin_eq_of_sin_eq\n\n",
+ "arcsin_eq_neg_pi_div_two":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `real.pi -/\n@[simp]\ntheorem arcsin_eq_neg_pi_div_two {x : exprℝ} : arcsin x = -(real.pi / 2) ↔ x ≤ -1 :=\n  ⟨fun h => not_lt.1 fun h' => (neg_pi_div_two_lt_arcsin.2 h').ne' h, arcsin_of_le_neg_one⟩\n#align arcsin_eq_neg_pi_div_two arcsin_eq_neg_pi_div_two\n\n",
+ "arcsin_eq_iff_eq_sin":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `real.pi -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `real.pi -/\ntheorem arcsin_eq_iff_eq_sin {x y : exprℝ} (hy : y ∈ Ioo (-(real.pi / 2)) (real.pi / 2)) : arcsin x = y ↔ x = sin y :=\n  by simp only [le_antisymm_iff, arcsin_le_iff_le_sin' (mem_Ico_of_Ioo hy), le_arcsin_iff_sin_le' (mem_Ioc_of_Ioo hy)]\n#align arcsin_eq_iff_eq_sin arcsin_eq_iff_eq_sin\n\n",
+ "arcsin_eq_arccos":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n-- The junk values for `arcsin` and `sqrt` make this true even for `1 < x`.\ntheorem arcsin_eq_arccos {x : exprℝ} (h : 0 ≤ x) : arcsin x = arccos (sqrt (1 - x ^ 2)) :=\n  by\n  rw [eq_comm, ← cos_arcsin]\n  exact arccos_cos (arcsin_nonneg.2 h) ((arcsin_le_pi_div_two _).trans (div_le_self pi_pos.le one_le_two))\n#align arcsin_eq_arccos arcsin_eq_arccos\n\n",
+ "arccos_zero":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `real.pi -/\n@[simp]\ntheorem arccos_zero : arccos 0 = real.pi / 2 := by simp [arccos]\n#align arccos_zero arccos_zero\n\n",
+ "arccos_pos":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n@[simp]\ntheorem arccos_pos {x : exprℝ} : 0 < arccos x ↔ x < 1 := by simp [arccos]\n#align arccos_pos arccos_pos\n\n",
+ "arccos_one":
+ "@[simp]\ntheorem arccos_one : arccos 1 = 0 := by simp [arccos]\n#align arccos_one arccos_one\n\n",
+ "arccos_of_one_le":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\ntheorem arccos_of_one_le {x : exprℝ} (hx : 1 ≤ x) : arccos x = 0 := by rw [arccos, arcsin_of_one_le hx, sub_self]\n#align arccos_of_one_le arccos_of_one_le\n\n",
+ "arccos_of_le_neg_one":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `real.pi -/\ntheorem arccos_of_le_neg_one {x : exprℝ} (hx : x ≤ -1) : arccos x = real.pi := by\n  rw [arccos, arcsin_of_le_neg_one hx, sub_neg_eq_add, add_halves']\n#align arccos_of_le_neg_one arccos_of_le_neg_one\n\n",
+ "arccos_nonneg":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\ntheorem arccos_nonneg (x : exprℝ) : 0 ≤ arccos x := by unfold arccos <;> linarith [arcsin_le_pi_div_two x]\n#align arccos_nonneg arccos_nonneg\n\n",
+ "arccos_neg_one":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `real.pi -/\n@[simp]\ntheorem arccos_neg_one : arccos (-1) = real.pi := by simp [arccos, add_halves]\n#align arccos_neg_one arccos_neg_one\n\n",
+ "arccos_neg":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `real.pi -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `real.pi -/\ntheorem arccos_neg (x : exprℝ) : arccos (-x) = real.pi - arccos x := by\n  rw [← add_halves (real.pi), arccos, arcsin_neg, arccos, add_sub_assoc, sub_sub_self, sub_neg_eq_add]\n#align arccos_neg arccos_neg\n\n",
+ "arccos_lt_pi_div_two":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `real.pi -/\n@[simp]\ntheorem arccos_lt_pi_div_two {x : exprℝ} : arccos x < real.pi / 2 ↔ 0 < x := by simp [arccos]\n#align arccos_lt_pi_div_two arccos_lt_pi_div_two\n\n",
+ "arccos_le_pi_div_two":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `real.pi -/\n@[simp]\ntheorem arccos_le_pi_div_two {x} : arccos x ≤ real.pi / 2 ↔ 0 ≤ x := by simp [arccos]\n#align arccos_le_pi_div_two arccos_le_pi_div_two\n\n",
+ "arccos_le_pi_div_four":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `real.pi -/\n@[simp]\ntheorem arccos_le_pi_div_four {x} : arccos x ≤ real.pi / 4 ↔ sqrt 2 / 2 ≤ x :=\n  by\n  rw [arccos, ← pi_div_four_le_arcsin]\n  constructor <;>\n    · intro\n      linarith\n#align arccos_le_pi_div_four arccos_le_pi_div_four\n\n",
+ "arccos_le_pi":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `real.pi -/\ntheorem arccos_le_pi (x : exprℝ) : arccos x ≤ real.pi := by unfold arccos <;> linarith [neg_pi_div_two_le_arcsin x]\n#align arccos_le_pi arccos_le_pi\n\n",
+ "arccos_inj_on":
+ "theorem arccos_inj_on : InjOn arccos (Icc (-1) 1) :=\n  strict_anti_on_arccos.inj_on\n#align arccos_inj_on arccos_inj_on\n\n",
+ "arccos_inj":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\ntheorem arccos_inj {x y : exprℝ} (hx₁ : -1 ≤ x) (hx₂ : x ≤ 1) (hy₁ : -1 ≤ y) (hy₂ : y ≤ 1) :\n    arccos x = arccos y ↔ x = y :=\n  arccos_inj_on.eq_iff ⟨hx₁, hx₂⟩ ⟨hy₁, hy₂⟩\n#align arccos_inj arccos_inj\n\n",
+ "arccos_eq_zero":
+ "@[simp]\ntheorem arccos_eq_zero {x} : arccos x = 0 ↔ 1 ≤ x := by simp [arccos, sub_eq_zero]\n#align arccos_eq_zero arccos_eq_zero\n\n",
+ "arccos_eq_pi_div_two_sub_arcsin":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `real.pi -/\ntheorem arccos_eq_pi_div_two_sub_arcsin (x : exprℝ) : arccos x = real.pi / 2 - arcsin x :=\n  rfl\n#align arccos_eq_pi_div_two_sub_arcsin arccos_eq_pi_div_two_sub_arcsin\n\n",
+ "arccos_eq_pi_div_two":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `real.pi -/\n@[simp]\ntheorem arccos_eq_pi_div_two {x} : arccos x = real.pi / 2 ↔ x = 0 := by simp [arccos]\n#align arccos_eq_pi_div_two arccos_eq_pi_div_two\n\n",
+ "arccos_eq_pi":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `real.pi -/\n@[simp]\ntheorem arccos_eq_pi {x} : arccos x = real.pi ↔ x ≤ -1 := by\n  rw [arccos, sub_eq_iff_eq_add, ← sub_eq_iff_eq_add', div_two_sub_self, neg_pi_div_two_eq_arcsin]\n#align arccos_eq_pi arccos_eq_pi\n\n",
+ "arccos_eq_arcsin":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n-- The junk values for `arccos` and `sqrt` make this true even for `1 < x`.\ntheorem arccos_eq_arcsin {x : exprℝ} (h : 0 ≤ x) : arccos x = arcsin (sqrt (1 - x ^ 2)) :=\n  (arcsin_eq_of_sin_eq (sin_arccos _)\n      ⟨(left.neg_nonpos_iff.2 (div_nonneg pi_pos.le (by norm_num))).trans (arccos_nonneg _),\n        arccos_le_pi_div_two.2 h⟩).symm\n#align arccos_eq_arcsin arccos_eq_arcsin\n\n",
+ "arccos_cos":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `real.pi -/\ntheorem arccos_cos {x : exprℝ} (hx₁ : 0 ≤ x) (hx₂ : x ≤ real.pi) : arccos (cos x) = x := by\n  rw [arccos, ← sin_pi_div_two_sub, arcsin_sin] <;> simp [sub_eq_add_neg] <;> linarith\n#align arccos_cos arccos_cos\n\n"}

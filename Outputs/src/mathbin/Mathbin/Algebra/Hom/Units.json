@@ -1,0 +1,108 @@
+{"one_div_mul_cancel":
+ "#print one_div_mul_cancel /-\n@[to_additive]\nprotected theorem one_div_mul_cancel (h : is_unit a) : 1 / a * a = 1 := by simp [h]\n#align one_div_mul_cancel one_div_mul_cancel\n-/\n\n",
+ "of_left_inverse":
+ "@[to_additive]\ntheorem of_left_inverse [MonoidHomClass F M N] [MonoidHomClass G N M] {f : F} {x : M} (g : G)\n    (hfg : function.left_inverse g f) (h : is_unit (f x)) : is_unit x := by simpa only [hfg x] using h.map g\n#align of_left_inverse of_left_inverse\n\n",
+ "mul_one_div_cancel":
+ "#print mul_one_div_cancel /-\n@[to_additive]\nprotected theorem mul_one_div_cancel (h : is_unit a) : a * (1 / a) = 1 := by simp [h]\n#align mul_one_div_cancel mul_one_div_cancel\n-/\n\n",
+ "mul_mul_div":
+ "#print mul_mul_div /-\n@[to_additive]\nprotected theorem mul_mul_div (a : α) (h : is_unit b) : a * b * (1 / b) = a := by simp [h]\n#align mul_mul_div mul_mul_div\n-/\n\n",
+ "mul_lift_right_inv":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →* » -/\n@[simp, to_additive]\ntheorem mul_lift_right_inv (f : «expr →* » M N) (h : ∀ x, is_unit (f x)) (x) : f x * ↑(IsUnit.liftRight f h x)⁻¹ = 1 :=\n  Units.mul_liftRight_inv (fun y => rfl) x\n#align mul_lift_right_inv mul_lift_right_inv\n\n",
+ "mul_inv_eq_one":
+ "#print mul_inv_eq_one /-\n@[to_additive]\nprotected theorem mul_inv_eq_one (h : is_unit b) : a * b⁻¹ = 1 ↔ a = b :=\n  @units.mul_inv_eq_one _ _ h.unit' _\n#align mul_inv_eq_one mul_inv_eq_one\n-/\n\n",
+ "mul_inv_eq_iff_eq_mul":
+ "#print mul_inv_eq_iff_eq_mul /-\n@[to_additive]\nprotected theorem mul_inv_eq_iff_eq_mul (h : is_unit b) : a * b⁻¹ = c ↔ a = c * b :=\n  h.unit'.mul_inv_eq_iff_eq_mul\n#align mul_inv_eq_iff_eq_mul mul_inv_eq_iff_eq_mul\n-/\n\n",
+ "mul_inv_cancel_right":
+ "#print mul_inv_cancel_right /-\n@[simp, to_additive]\nprotected theorem mul_inv_cancel_right (h : is_unit b) (a : α) : a * b * b⁻¹ = a :=\n  h.unit'.mul_inv_cancel_right _\n#align mul_inv_cancel_right mul_inv_cancel_right\n-/\n\n",
+ "mul_inv_cancel_left":
+ "#print mul_inv_cancel_left /-\n@[simp, to_additive]\nprotected theorem mul_inv_cancel_left (h : is_unit a) : ∀ b, a * (a⁻¹ * b) = b :=\n  h.unit'.mul_inv_cancel_left\n#align mul_inv_cancel_left mul_inv_cancel_left\n-/\n\n",
+ "mul_eq_one_iff_inv_eq":
+ "#print mul_eq_one_iff_inv_eq /-\n@[to_additive]\nprotected theorem mul_eq_one_iff_inv_eq (h : is_unit a) : a * b = 1 ↔ a⁻¹ = b :=\n  @units.mul_eq_one_iff_inv_eq _ _ h.unit' _\n#align mul_eq_one_iff_inv_eq mul_eq_one_iff_inv_eq\n-/\n\n",
+ "mul_eq_one_iff_eq_inv":
+ "#print mul_eq_one_iff_eq_inv /-\n@[to_additive]\nprotected theorem mul_eq_one_iff_eq_inv (h : is_unit b) : a * b = 1 ↔ a = b⁻¹ :=\n  @units.mul_eq_one_iff_eq_inv _ _ h.unit' _\n#align mul_eq_one_iff_eq_inv mul_eq_one_iff_eq_inv\n-/\n\n",
+ "mul_eq_mul_of_div_eq_div":
+ "#print mul_eq_mul_of_div_eq_div /-\n@[to_additive]\nprotected theorem mul_eq_mul_of_div_eq_div (hb : is_unit b) (hd : is_unit d) (a c : α) (h : a / b = c / d) :\n    a * d = c * b := by rw [← mul_one a, ← hb.div_self, ← mul_comm_div, h, div_mul_eq_mul_div, hd.div_mul_cancel]\n#align mul_eq_mul_of_div_eq_div mul_eq_mul_of_div_eq_div\n-/\n\n",
+ "mul_div_mul_right":
+ "#print mul_div_mul_right /-\n@[to_additive]\nprotected theorem mul_div_mul_right (h : is_unit c) (a b : α) : a * c / (b * c) = a / b := by\n  simp only [div_eq_mul_inv, mul_inv_rev, mul_assoc, h.mul_inv_cancel_left]\n#align mul_div_mul_right mul_div_mul_right\n-/\n\n",
+ "mul_div_mul_left":
+ "#print mul_div_mul_left /-\n@[to_additive]\nprotected theorem mul_div_mul_left (h : is_unit c) (a b : α) : c * a / (c * b) = a / b := by\n  rw [mul_comm c, mul_comm c, h.mul_div_mul_right]\n#align mul_div_mul_left mul_div_mul_left\n-/\n\n",
+ "mul_div_cancel_left":
+ "#print mul_div_cancel_left /-\n@[to_additive]\nprotected theorem mul_div_cancel_left (h : is_unit a) (b : α) : a * b / a = b := by rw [mul_comm, h.mul_div_cancel]\n#align mul_div_cancel_left mul_div_cancel_left\n-/\n\n",
+ "mul_div_cancel'":
+ "#print mul_div_cancel' /-\n@[to_additive]\nprotected theorem mul_div_cancel' (h : is_unit a) (b : α) : a * (b / a) = b := by rw [mul_comm, h.div_mul_cancel]\n#align mul_div_cancel' mul_div_cancel'\n-/\n\n",
+ "mul_div_cancel":
+ "#print mul_div_cancel /-\n@[simp, to_additive]\nprotected theorem mul_div_cancel (h : is_unit b) (a : α) : a * b / b = a := by\n  rw [div_eq_mul_inv, h.mul_inv_cancel_right]\n#align mul_div_cancel mul_div_cancel\n-/\n\n",
+ "map_units_inv":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →* » -/\n#print map_units_inv /-\n@[simp, to_additive]\ntheorem map_units_inv {F : Type _} [MonoidHomClass F M α] (f : F) (u : Units M) : f ↑u⁻¹ = (f u)⁻¹ :=\n  ((f : «expr →* » M α).comp (Units.coeHom M)).map_inv u\n#align map_units_inv map_units_inv\n-/\n\n",
+ "map_id":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ˣ» -/\n@[simp, to_additive]\ntheorem map_id : map (MonoidHom.id M) = MonoidHom.id («expr ˣ» M) := by ext <;> rfl\n#align map_id map_id\n\n",
+ "map_comp":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →* » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →* » -/\n@[simp, to_additive]\ntheorem map_comp (f : «expr →* » M N) (g : «expr →* » N P) : map (g.comp f) = (map g).comp (map f) :=\n  rfl\n#align map_comp map_comp\n\n",
+ "map":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →* » -/\n@[to_additive]\ntheorem map [MonoidHomClass F M N] (f : F) {x : M} (h : is_unit x) : is_unit (f x) := by\n  rcases h with ⟨y, rfl⟩ <;> exact (Units.map (f : «expr →* » M N) y).is_unit\n#align map map\n\n",
+ "lift_right_inv_mul":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →* » -/\n@[simp, to_additive]\ntheorem lift_right_inv_mul (f : «expr →* » M N) (h : ∀ x, is_unit (f x)) (x) : ↑(IsUnit.liftRight f h x)⁻¹ * f x = 1 :=\n  Units.liftRight_inv_mul (fun y => rfl) x\n#align lift_right_inv_mul lift_right_inv_mul\n\n",
+ "is_unit_map_of_left_inverse":
+ "#print isUnit_map_of_leftInverse /-\n@[to_additive]\ntheorem isUnit_map_of_leftInverse [MonoidHomClass F M N] [MonoidHomClass G N M] {f : F} {x : M} (g : G)\n    (hfg : function.left_inverse g f) : is_unit (f x) ↔ is_unit x :=\n  ⟨of_leftInverse g hfg, map _⟩\n#align is_unit_map_of_left_inverse isUnit_map_of_leftInverse\n-/\n\n",
+ "isUnit":
+ "#print Group.isUnit /-\n/-\nCopyright (c) 2018 Johan Commelin All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Johan Commelin, Chris Hughes, Kevin Buzzard\n-/\n@[to_additive]\ntheorem Group.isUnit {G} [group G] (g : G) : is_unit g :=\n  ⟨⟨g, g⁻¹, mul_inv_self g, inv_mul_self g⟩, rfl⟩\n#align group.is_unit Group.isUnit\n-/\n\n",
+ "inv_mul_eq_one":
+ "#print inv_mul_eq_one /-\n@[to_additive]\nprotected theorem inv_mul_eq_one (h : is_unit a) : a⁻¹ * b = 1 ↔ a = b :=\n  @units.inv_mul_eq_one _ _ h.unit' _\n#align inv_mul_eq_one inv_mul_eq_one\n-/\n\n",
+ "inv_mul_eq_iff_eq_mul":
+ "#print inv_mul_eq_iff_eq_mul /-\n@[to_additive]\nprotected theorem inv_mul_eq_iff_eq_mul (h : is_unit a) : a⁻¹ * b = c ↔ b = a * c :=\n  h.unit'.inv_mul_eq_iff_eq_mul\n#align inv_mul_eq_iff_eq_mul inv_mul_eq_iff_eq_mul\n-/\n\n",
+ "inv_mul_cancel_right":
+ "#print inv_mul_cancel_right /-\n@[simp, to_additive]\nprotected theorem inv_mul_cancel_right (h : is_unit b) (a : α) : a * b⁻¹ * b = a :=\n  h.unit'.inv_mul_cancel_right _\n#align inv_mul_cancel_right inv_mul_cancel_right\n-/\n\n",
+ "inv_mul_cancel_left":
+ "#print inv_mul_cancel_left /-\n@[simp, to_additive]\nprotected theorem inv_mul_cancel_left (h : is_unit a) : ∀ b, a⁻¹ * (a * b) = b :=\n  h.unit'.inv_mul_cancel_left\n#align inv_mul_cancel_left inv_mul_cancel_left\n-/\n\n",
+ "inv":
+ "@[to_additive]\ntheorem inv : is_unit a → is_unit a⁻¹ := by\n  rintro ⟨u, rfl⟩\n  rw [← Units.val_inv_eq_inv_val]\n  exact Units.isUnit _\n#align inv inv\n\n",
+ "eq_on_inv":
+ "#print eq_on_inv /-\n/-- If two homomorphism from a group to a monoid are equal at `x`, then they are equal at `x⁻¹`. -/\n@[to_additive\n      \"If two homomorphism from an additive group to an additive monoid are equal at `x`,\\nthen they are equal at `-x`.\"]\ntheorem eq_on_inv {F G M} [group G] [monoid M] [MonoidHomClass F G M] (f g : F) {x : G} (h : f x = g x) :\n    f x⁻¹ = g x⁻¹ :=\n  (Group.isUnit x).eq_on_inv f g h\n#align eq_on_inv eq_on_inv\n-/\n\n",
+ "eq_mul_inv_iff_mul_eq":
+ "#print eq_mul_inv_iff_mul_eq /-\n@[to_additive]\nprotected theorem eq_mul_inv_iff_mul_eq (h : is_unit c) : a = b * c⁻¹ ↔ a * c = b :=\n  h.unit'.eq_mul_inv_iff_mul_eq\n#align eq_mul_inv_iff_mul_eq eq_mul_inv_iff_mul_eq\n-/\n\n",
+ "eq_inv_mul_iff_mul_eq":
+ "#print eq_inv_mul_iff_mul_eq /-\n@[to_additive]\nprotected theorem eq_inv_mul_iff_mul_eq (h : is_unit b) : a = b⁻¹ * c ↔ b * a = c :=\n  h.unit'.eq_inv_mul_iff_mul_eq\n#align eq_inv_mul_iff_mul_eq eq_inv_mul_iff_mul_eq\n-/\n\n",
+ "eq_div_of_mul_eq":
+ "#print eq_div_of_mul_eq /-\n@[to_additive]\nprotected theorem eq_div_of_mul_eq (h : is_unit c) : a * c = b → a = b / c :=\n  h.eq_div_iff.2\n#align eq_div_of_mul_eq eq_div_of_mul_eq\n-/\n\n",
+ "eq_div_iff":
+ "#print eq_div_iff /-\n@[to_additive]\nprotected theorem eq_div_iff (h : is_unit c) : a = b / c ↔ a * c = b := by rw [div_eq_mul_inv, h.eq_mul_inv_iff_mul_eq]\n#align eq_div_iff eq_div_iff\n-/\n\n",
+ "divp_eq_div":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ˣ» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr /ₚ » -/\n#print divp_eq_div /-\n@[field_simps]\ntheorem divp_eq_div (a : α) (u : «expr ˣ» α) : «expr /ₚ » a u = a / u := by rw [div_eq_mul_inv, divp, u.coe_inv]\n#align divp_eq_div divp_eq_div\n-/\n\n",
+ "div_self":
+ "#print div_self /-\n@[to_additive]\nprotected theorem div_self (h : is_unit a) : a / a = 1 := by rw [div_eq_mul_inv, h.mul_inv_cancel]\n#align div_self div_self\n-/\n\n",
+ "div_mul_right":
+ "#print div_mul_right /-\n@[to_additive]\nprotected theorem div_mul_right (h : is_unit a) (b : α) : a / (a * b) = 1 / b := by rw [mul_comm, h.div_mul_left]\n#align div_mul_right div_mul_right\n-/\n\n",
+ "div_mul_left":
+ "#print div_mul_left /-\n@[to_additive]\nprotected theorem div_mul_left (h : is_unit b) : b / (a * b) = 1 / a := by\n  rw [div_eq_mul_inv, mul_inv_rev, h.mul_inv_cancel_left, one_div]\n#align div_mul_left div_mul_left\n-/\n\n",
+ "div_mul_cancel":
+ "#print div_mul_cancel /-\n@[simp, to_additive]\nprotected theorem div_mul_cancel (h : is_unit b) (a : α) : a / b * b = a := by\n  rw [div_eq_mul_inv, h.inv_mul_cancel_right]\n#align div_mul_cancel div_mul_cancel\n-/\n\n",
+ "div_left_inj":
+ "#print div_left_inj /-\n@[to_additive]\nprotected theorem div_left_inj (h : is_unit c) : a / c = b / c ↔ a = b :=\n  by\n  simp_rw [div_eq_mul_inv]\n  exact units.mul_left_inj h.inv.unit'\n#align div_left_inj div_left_inj\n-/\n\n",
+ "div_eq_one_iff_eq":
+ "#print div_eq_one_iff_eq /-\n@[to_additive]\nprotected theorem div_eq_one_iff_eq (h : is_unit b) : a / b = 1 ↔ a = b :=\n  ⟨eq_of_div_eq_one, fun hab => hab.symm ▸ h.div_self⟩\n#align div_eq_one_iff_eq div_eq_one_iff_eq\n-/\n\n",
+ "div_eq_of_eq_mul":
+ "#print div_eq_of_eq_mul /-\n@[to_additive]\nprotected theorem div_eq_of_eq_mul (h : is_unit b) : a = c * b → a / b = c :=\n  h.div_eq_iff.2\n#align div_eq_of_eq_mul div_eq_of_eq_mul\n-/\n\n",
+ "div_eq_iff":
+ "#print div_eq_iff /-\n@[to_additive]\nprotected theorem div_eq_iff (h : is_unit b) : a / b = c ↔ a = c * b := by rw [div_eq_mul_inv, h.mul_inv_eq_iff_eq_mul]\n#align div_eq_iff div_eq_iff\n-/\n\n",
+ "div_eq_div_iff":
+ "#print div_eq_div_iff /-\n@[to_additive]\nprotected theorem div_eq_div_iff (hb : is_unit b) (hd : is_unit d) : a / b = c / d ↔ a * d = c * b := by\n  rw [← (hb.mul hd).mul_left_inj, ← mul_assoc, hb.div_mul_cancel, ← mul_assoc, mul_right_comm, hd.div_mul_cancel]\n#align div_eq_div_iff div_eq_div_iff\n-/\n\n",
+ "div_div_cancel":
+ "#print div_div_cancel /-\n@[to_additive]\nprotected theorem div_div_cancel (h : is_unit a) : a / (a / b) = b := by rw [div_div_eq_mul_div, h.mul_div_cancel_left]\n#align div_div_cancel div_div_cancel\n-/\n\n",
+ "div":
+ "@[to_additive]\ntheorem div (ha : is_unit a) (hb : is_unit b) : is_unit (a / b) :=\n  by\n  rw [div_eq_mul_inv]\n  exact ha.mul hb.inv\n#align div div\n\n",
+ "coe_zpow":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ˣ» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ˣ» -/\n@[simp, norm_cast, to_additive]\ntheorem coe_zpow : ∀ (u : «expr ˣ» α) (n : ℤ), ((u ^ n : «expr ˣ» α) : α) = u ^ n :=\n  (Units.coeHom α).map_zpow\n#align coe_zpow coe_zpow\n\n",
+ "coe_to_hom_units":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →* » -/\n@[simp, to_additive]\ntheorem coe_to_hom_units {G M : Type _} [group G] [monoid M] (f : «expr →* » G M) (g : G) :\n    (f.to_hom_units g : M) = f g :=\n  rfl\n#align coe_to_hom_units coe_to_hom_units\n\n",
+ "coe_pow":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ˣ» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ˣ» -/\n@[simp, norm_cast, to_additive]\ntheorem coe_pow (u : «expr ˣ» M) (n : ℕ) : ((u ^ n : «expr ˣ» M) : M) = u ^ n :=\n  (Units.coeHom M).map_pow u n\n#align coe_pow coe_pow\n\n",
+ "coe_map_inv":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →* » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ˣ» -/\n@[simp, to_additive]\ntheorem coe_map_inv (f : «expr →* » M N) (u : «expr ˣ» M) : ↑(map f u)⁻¹ = f ↑u⁻¹ :=\n  rfl\n#align coe_map_inv coe_map_inv\n\n",
+ "coe_map":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →* » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ˣ» -/\n@[simp, to_additive]\ntheorem coe_map (f : «expr →* » M N) (x : «expr ˣ» M) : ↑(map f x) = f x :=\n  rfl\n#align coe_map coe_map\n\n",
+ "coe_lift_right":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →* » -/\n@[to_additive]\ntheorem coe_lift_right (f : «expr →* » M N) (hf : ∀ x, is_unit (f x)) (x) : (IsUnit.liftRight f hf x : N) = f x :=\n  rfl\n#align coe_lift_right coe_lift_right\n\n",
+ "coe_hom_apply":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ˣ» -/\n@[simp, to_additive]\ntheorem coe_hom_apply (x : «expr ˣ» M) : coeHom M x = ↑x :=\n  rfl\n#align coe_hom_apply coe_hom_apply\n\n",
+ "coe_div":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ˣ» -/\n@[simp, norm_cast, to_additive]\ntheorem coe_div : ∀ u₁ u₂ : «expr ˣ» α, ↑(u₁ / u₂) = (u₁ / u₂ : α) :=\n  (Units.coeHom α).map_div\n#align coe_div coe_div\n\n"}

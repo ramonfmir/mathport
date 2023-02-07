@@ -1,0 +1,10 @@
+{"mem_center_iff":
+ "@[to_additive]\ntheorem mem_center_iff {z : M} : z ∈ center M ↔ ∀ g, g * z = z * g :=\n  iff.rfl\n#align mem_center_iff mem_center_iff\n\n",
+ "coe_center":
+ "/-\nCopyright (c) 2021 Eric Wieser. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Eric Wieser\n-/\n@[to_additive]\ntheorem coe_center : ↑(center M) = Set.center M :=\n  rfl\n#align coe_center coe_center\n\n",
+ "center_to_subsemigroup":
+ "@[simp]\ntheorem center_to_subsemigroup : (center M).to_subsemigroup = Subsemigroup.center M :=\n  rfl\n#align center_to_subsemigroup center_to_subsemigroup\n\n",
+ "center_to_add_subsemigroup":
+ "#print AddSubmonoid.center_toAddSubsemigroup /-\ntheorem AddSubmonoid.center_toAddSubsemigroup (M) [add_monoid M] :\n    (AddSubmonoid.center M).to_add_subsemigroup = AddSubsemigroup.center M :=\n  rfl\n#align add_submonoid.center_to_add_subsemigroup AddSubmonoid.center_toAddSubsemigroup\n-/\n\n",
+ "center_eq_top":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n@[simp]\ntheorem center_eq_top : center M = «expr⊤» :=\n  SetLike.coe_injective (Set.center_eq_univ M)\n#align center_eq_top center_eq_top\n\n"}

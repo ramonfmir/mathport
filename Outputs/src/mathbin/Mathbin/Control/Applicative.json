@@ -1,0 +1,20 @@
+{"seq_pure":
+ "theorem seq_pure (f : Comp F G (α → β)) (x : α) : f <*> pure x = (fun g : α → β => g x) <$> f :=\n  comp.ext <| by simp [(· ∘ ·), functor_norm]\n#align seq_pure seq_pure\n\n",
+ "seq_mk":
+ "#print Comp.seq_mk /-\n@[functor_norm]\ntheorem Comp.seq_mk {α β : Type w} {f : Type u → Type v} {g : Type w → Type u} [applicative f] [applicative g]\n    (h : f (g (α → β))) (x : f (g α)) : Comp.mk h <*> Comp.mk x = Comp.mk (has_seq.seq <$> h <*> x) :=\n  rfl\n#align comp.seq_mk Comp.seq_mk\n-/\n\n",
+ "seq_assoc":
+ "theorem seq_assoc (x : Comp F G α) (f : Comp F G (α → β)) (g : Comp F G (β → γ)) :\n    g <*> (f <*> x) = @function.comp α β γ <$> g <*> f <*> x :=\n  comp.ext <| by simp [(· ∘ ·), functor_norm]\n#align seq_assoc seq_assoc\n\n",
+ "pure_seq_eq_map'":
+ "#print Applicative.pure_seq_eq_map' /-\ntheorem Applicative.pure_seq_eq_map' (f : α → β) : (· <*> ·) (pure f : F (α → β)) = (· <$> ·) f := by\n  ext <;> simp [functor_norm]\n#align applicative.pure_seq_eq_map' Applicative.pure_seq_eq_map'\n-/\n\n",
+ "pure_seq_eq_map":
+ "theorem pure_seq_eq_map (f : α → β) (x : Comp F G α) : pure f <*> x = f <$> x :=\n  comp.ext <| by simp [Applicative.pure_seq_eq_map', functor_norm]\n#align pure_seq_eq_map pure_seq_eq_map\n\n",
+ "map_seq_map":
+ "#print Applicative.map_seq_map /-\n/-\nCopyright (c) 2017 Simon Hudon. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Simon Hudon\n-/\ntheorem Applicative.map_seq_map (f : α → β → γ) (g : σ → β) (x : F α) (y : F σ) :\n    f <$> x <*> g <$> y = (flip (· ∘ ·) g ∘ f) <$> x <*> y := by simp [flip, functor_norm]\n#align applicative.map_seq_map Applicative.map_seq_map\n-/\n\n",
+ "map_pure":
+ "theorem map_pure (f : α → β) (x : α) : (f <$> pure x : Comp F G β) = pure (f x) :=\n  comp.ext <| by simp\n#align map_pure map_pure\n\n",
+ "ext":
+ "#print Applicative.ext /-\ntheorem Applicative.ext {F} :\n    ∀ {A1 : applicative F} {A2 : applicative F} [@LawfulApplicative F A1] [@LawfulApplicative F A2]\n      (H1 : ∀ {α : Type u} (x : α), @has_pure.pure _ A1.to_has_pure _ x = @has_pure.pure _ A2.to_has_pure _ x)\n      (H2 :\n        ∀ {α β : Type u} (f : F (α → β)) (x : F α),\n          @has_seq.seq _ A1.to_has_seq _ _ f x = @has_seq.seq _ A2.to_has_seq _ _ f x),\n      A1 = A2\n  | { to_functor := F1\n      seq := s1\n      pure := p1\n      seq_left := sl1\n      seq_right := sr1 },\n    { to_functor := F2\n      seq := s2\n      pure := p2\n      seq_left := sl2\n      seq_right := sr2 }, L1, L2, H1, H2 =>\n    by\n    obtain rfl : @p1 = @p2 := by\n      funext α x\n      apply H1\n    obtain rfl : @s1 = @s2 := by\n      funext α β f x\n      apply H2\n    cases L1\n    cases L2\n    obtain rfl : F1 = F2 := by\n      skip\n      apply Functor.ext\n      intros\n      exact (L1_pure_seq_eq_map _ _).symm.trans (L2_pure_seq_eq_map _ _)\n    congr <;> funext α β x y\n    · exact (L1_seq_left_eq _ _).trans (L2_seq_left_eq _ _).symm\n    · exact (L1_seq_right_eq _ _).trans (L2_seq_right_eq _ _).symm\n#align applicative.ext Applicative.ext\n-/\n\n",
+ "applicative_id_comp":
+ "theorem applicative_id_comp {F} [AF : applicative F] [LF : LawfulApplicative F] : @comp.applicative id F _ _ = AF :=\n  @Applicative.ext F _ _ (@comp.is_lawful_applicative id F _ _ _ _) _ (fun α x => rfl) fun α β f x => rfl\n#align applicative_id_comp applicative_id_comp\n\n",
+ "applicative_comp_id":
+ "theorem applicative_comp_id {F} [AF : applicative F] [LF : LawfulApplicative F] : @comp.applicative F id _ _ = AF :=\n  @Applicative.ext F _ _ (@comp.is_lawful_applicative F id _ _ _ _) _ (fun α x => rfl) fun α β f x =>\n    show id <$> f <*> x = f <*> x by rw [id_map]\n#align applicative_comp_id applicative_comp_id\n\n"}

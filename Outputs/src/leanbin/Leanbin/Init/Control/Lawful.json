@@ -1,0 +1,34 @@
+{"run_read":
+ "@[simp]\ntheorem run_read : (reader_t.read : reader_t ρ m ρ).run r = pure r :=\n  rfl\n#align run_read run_read\n\n",
+ "run_put":
+ "@[simp]\ntheorem run_put (st') : (state_t.put st' : state_t σ m _).run st = pure (PUnit.unit, st') :=\n  rfl\n#align run_put run_put\n\n",
+ "run_pure":
+ "@[simp]\ntheorem run_pure (a) : (pure a : option_t m α).run = pure (some a) :=\n  rfl\n#align run_pure run_pure\n\n",
+ "run_monad_map":
+ "@[simp]\ntheorem run_monad_map {m' n n'} [monad m'] [monad_functor_t n n' m m'] (f : ∀ {α}, n α → n' α) :\n    (monad_map (@f) x : option_t m' α).run = monad_map (@f) x.run :=\n  rfl\n#align run_monad_map run_monad_map\n\n",
+ "run_monad_lift":
+ "@[simp]\ntheorem run_monad_lift {n} [has_monad_lift_t n m] (x : n α) :\n    (monad_lift x : option_t m α).run = some <$> (monad_lift x : m α) :=\n  rfl\n#align run_monad_lift run_monad_lift\n\n",
+ "run_map":
+ "@[simp]\ntheorem run_map (f : α → β) [LawfulMonad m] : (f <$> x).run = option.map f <$> x.run :=\n  by\n  rw [← bind_pure_comp_eq_map _ x.run]\n  change x.run >>= option_t.bind_cont (pure ∘ f) = _\n  apply bind_ext_congr\n  intro a <;> cases a <;> simp [option_t.bind_cont, option.map, option.bind]\n#align run_map run_map\n\n",
+ "run_get":
+ "@[simp]\ntheorem run_get : (state_t.get : state_t σ m σ).run st = pure (st, st) :=\n  rfl\n#align run_get run_get\n\n",
+ "run_bind":
+ "@[simp]\ntheorem run_bind (f : α → option_t m β) : (x >>= f).run = x.run >>= option_t.bind_cont f :=\n  rfl\n#align run_bind run_bind\n\n",
+ "run_adapt":
+ "@[simp]\ntheorem run_adapt {σ' σ''} (st : σ) (split : σ → σ' × σ'') (join : σ' → σ'' → σ) (x : state_t σ' m α) :\n    (state_t.adapt split join x : state_t σ m α).run st = do\n      let (st, ctx) := split st\n      let (a, st') ← x.run st\n      pure (a, join st' ctx) :=\n  by delta state_t.adapt <;> rfl\n#align run_adapt run_adapt\n\n",
+ "pure_id_seq":
+ "#print pure_id_seq /-\n/-\nCopyright (c) 2017 Microsoft Corporation. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Sebastian Ullrich\n-/\n-- `functor` is indeed a categorical functor\n-- `comp_map` does not make a good simp lemma\n-- applicative laws\n-- default functor law\n-- applicative \"law\" derivable from other laws\n@[simp]\ntheorem pure_id_seq {α : Type u} {f : Type u → Type v} [applicative f] [LawfulApplicative f] (x : f α) :\n    pure id <*> x = x := by simp [pure_seq_eq_map]\n#align pure_id_seq pure_id_seq\n-/\n\n",
+ "pure_eq":
+ "@[simp]\ntheorem pure_eq (a : α) : (pure a : id α) = a :=\n  rfl\n#align pure_eq pure_eq\n\n",
+ "map_ext_congr":
+ "theorem map_ext_congr {α β} {m : Type u → Type v} [functor m] {x : m α} {f g : α → β} :\n    (∀ a, f a = g a) → (f <$> x : m β) = g <$> x := fun h => by simp [show f = g from funext h]\n#align map_ext_congr map_ext_congr\n\n",
+ "map_eq":
+ "-- instances of previously defined monads\n@[simp]\ntheorem map_eq (x : id α) (f : α → β) : f <$> x = f x :=\n  rfl\n#align map_eq map_eq\n\n",
+ "ext":
+ "theorem ext {x x' : option_t m α} (h : x.run = x'.run) : x = x' := by cases x <;> cases x' <;> simp_all\n#align ext ext\n\n",
+ "bind_pure":
+ "#print bind_pure /-\n-- monad laws\n-- monad \"law\" derivable from other laws\n@[simp]\ntheorem bind_pure {α : Type u} {m : Type u → Type v} [monad m] [LawfulMonad m] (x : m α) : x >>= pure = x :=\n  show x >>= pure ∘ id = x by rw [bind_pure_comp_eq_map] <;> simp [id_map]\n#align bind_pure bind_pure\n-/\n\n",
+ "bind_ext_congr":
+ "theorem bind_ext_congr {α β} {m : Type u → Type v} [Bind m] {x : m α} {f g : α → m β} :\n    (∀ a, f a = g a) → x >>= f = x >>= g := fun h => by simp [show f = g from funext h]\n#align bind_ext_congr bind_ext_congr\n\n",
+ "bind_eq":
+ "@[simp]\ntheorem bind_eq (x : id α) (f : α → id β) : x >>= f = f x :=\n  rfl\n#align bind_eq bind_eq\n\n"}

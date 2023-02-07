@@ -1,0 +1,368 @@
+{"subsingleton_floorSemiring":
+ "#print subsingleton_floorSemiring /-\n/-- There exists at most one `floor_semiring` structure on a linear ordered semiring. -/\ntheorem subsingleton_floorSemiring {α} [LinearOrderedSemiring α] : subsingleton (FloorSemiring α) :=\n  by\n  refine' ⟨fun H₁ H₂ => _⟩\n  have : H₁.ceil = H₂.ceil := funext fun a => H₁.gc_ceil.l_unique H₂.gc_ceil fun n => rfl\n  have : H₁.floor = H₂.floor := by\n    ext a\n    cases lt_or_le a 0\n    · rw [H₁.floor_of_neg, H₂.floor_of_neg] <;> exact h\n    · refine' eq_of_forall_le_iff fun n => _\n      rw [H₁.gc_floor, H₂.gc_floor] <;> exact h\n  cases H₁\n  cases H₂\n  congr <;> assumption\n#align subsingleton_floor_semiring subsingleton_floorSemiring\n-/\n\n",
+ "subsingleton_floorRing":
+ "#print subsingleton_floorRing /-\n/-- There exists at most one `floor_ring` structure on a given linear ordered ring. -/\ntheorem subsingleton_floorRing {α} [LinearOrderedRing α] : subsingleton (FloorRing α) :=\n  by\n  refine' ⟨fun H₁ H₂ => _⟩\n  have : H₁.floor = H₂.floor := funext fun a => H₁.gc_coe_floor.u_unique H₂.gc_coe_floor fun _ => rfl\n  have : H₁.ceil = H₂.ceil := funext fun a => H₁.gc_ceil_coe.l_unique H₂.gc_ceil_coe fun _ => rfl\n  cases H₁; cases H₂; congr <;> assumption\n#align subsingleton_floor_ring subsingleton_floorRing\n-/\n\n",
+ "sub_one_lt_floor":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌊ ⌋» -/\n@[simp]\ntheorem sub_one_lt_floor (a : α) : a - 1 < «expr⌊ ⌋» a :=\n  sub_lt_iff_lt_add.2 (lt_floor_add_one a)\n#align sub_one_lt_floor sub_one_lt_floor\n\n",
+ "sub_floor_div_mul_nonneg":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌊ ⌋» -/\ntheorem sub_floor_div_mul_nonneg (a : k) (hb : 0 < b) : 0 ≤ a - «expr⌊ ⌋» (a / b) * b :=\n  sub_nonneg_of_le <| (le_div_iff hb).1 <| floor_le _\n#align sub_floor_div_mul_nonneg sub_floor_div_mul_nonneg\n\n",
+ "sub_floor_div_mul_lt":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌊ ⌋» -/\ntheorem sub_floor_div_mul_lt (a : k) (hb : 0 < b) : a - «expr⌊ ⌋» (a / b) * b < b :=\n  sub_lt_iff_lt_add.2 <| by\n    rw [← one_add_mul, ← div_lt_iff hb, add_comm]\n    exact lt_floor_add_one _\n#align sub_floor_div_mul_lt sub_floor_div_mul_lt\n\n",
+ "self_sub_fract":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌊ ⌋» -/\n@[simp]\ntheorem self_sub_fract (a : α) : a - fract a = «expr⌊ ⌋» a :=\n  sub_sub_cancel _ _\n#align self_sub_fract self_sub_fract\n\n",
+ "self_sub_floor":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌊ ⌋» -/\n@[simp]\ntheorem self_sub_floor (a : α) : a - «expr⌊ ⌋» a = fract a :=\n  rfl\n#align self_sub_floor self_sub_floor\n\n",
+ "round_zero":
+ "#print round_zero /-\n@[simp]\ntheorem round_zero : round (0 : α) = 0 := by simp [round]\n#align round_zero round_zero\n-/\n\n",
+ "round_two_inv":
+ "#print round_two_inv /-\n@[simp]\ntheorem round_two_inv : round (2⁻¹ : α) = 1 := by simp only [round_eq, ← one_div, add_halves', floor_one]\n#align round_two_inv round_two_inv\n-/\n\n",
+ "round_sub_one":
+ "#print round_sub_one /-\n@[simp]\ntheorem round_sub_one (a : α) : round (a - 1) = round a - 1 :=\n  by\n  convert round_sub_int a 1\n  exact int.cast_one.symm\n#align round_sub_one round_sub_one\n-/\n\n",
+ "round_sub_nat":
+ "#print round_sub_nat /-\n@[simp]\ntheorem round_sub_nat (x : α) (y : ℕ) : round (x - y) = round x - y :=\n  by\n  rw [sub_eq_add_neg, ← Int.cast_ofNat]\n  norm_cast\n  rw [round_add_int, sub_eq_add_neg]\n#align round_sub_nat round_sub_nat\n-/\n\n",
+ "round_sub_int":
+ "#print round_sub_int /-\n@[simp]\ntheorem round_sub_int (x : α) (y : ℤ) : round (x - y) = round x - y :=\n  by\n  rw [sub_eq_add_neg]\n  norm_cast\n  rw [round_add_int, sub_eq_add_neg]\n#align round_sub_int round_sub_int\n-/\n\n",
+ "round_one":
+ "#print round_one /-\n@[simp]\ntheorem round_one : round (1 : α) = 1 := by simp [round]\n#align round_one round_one\n-/\n\n",
+ "round_neg_two_inv":
+ "#print round_neg_two_inv /-\n@[simp]\ntheorem round_neg_two_inv : round (-2⁻¹ : α) = 0 := by simp only [round_eq, ← one_div, add_left_neg, floor_zero]\n#align round_neg_two_inv round_neg_two_inv\n-/\n\n",
+ "round_nat_add":
+ "#print round_nat_add /-\n@[simp]\ntheorem round_nat_add (x : α) (y : ℕ) : round ((y : α) + x) = y + round x := by rw [add_comm, round_add_nat, add_comm]\n#align round_nat_add round_nat_add\n-/\n\n",
+ "round_natCast":
+ "#print round_natCast /-\n@[simp]\ntheorem round_natCast (n : ℕ) : round (n : α) = n := by simp [round]\n#align round_nat_cast round_natCast\n-/\n\n",
+ "round_le":
+ "#print round_le /-\ntheorem round_le (x : α) (z : ℤ) : |x - round x| ≤ |x - z| :=\n  by\n  rw [abs_sub_round_eq_min, min_le_iff]\n  rcases le_or_lt (z : α) x with (hx | hx) <;> [left, right]\n  · conv_rhs => rw [abs_eq_self.mpr (sub_nonneg.mpr hx), ← fract_add_floor x, add_sub_assoc]\n    simpa only [le_add_iff_nonneg_right, sub_nonneg, cast_le] using le_floor.mpr hx\n  · rw [abs_eq_neg_self.mpr (sub_neg.mpr hx).le]\n    conv_rhs => rw [← fract_add_floor x]\n    rw [add_sub_assoc, add_comm, neg_add, neg_sub, le_add_neg_iff_add_le, sub_add_cancel, le_sub_comm]\n    norm_cast\n    exact floor_le_sub_one_iff.mpr hx\n#align round_le round_le\n-/\n\n",
+ "round_int_add":
+ "#print round_int_add /-\n@[simp]\ntheorem round_int_add (x : α) (y : ℤ) : round ((y : α) + x) = y + round x := by rw [add_comm, round_add_int, add_comm]\n#align round_int_add round_int_add\n-/\n\n",
+ "round_intCast":
+ "#print round_intCast /-\n@[simp]\ntheorem round_intCast (n : ℤ) : round (n : α) = n := by simp [round]\n#align round_int_cast round_intCast\n-/\n\n",
+ "round_eq_zero_iff":
+ "#print round_eq_zero_iff /-\n@[simp]\ntheorem round_eq_zero_iff {x : α} : round x = 0 ↔ x ∈ Ico (-(1 / 2)) ((1 : α) / 2) :=\n  by\n  rw [round_eq, floor_eq_zero_iff, add_mem_Ico_iff_left]\n  norm_num\n#align round_eq_zero_iff round_eq_zero_iff\n-/\n\n",
+ "round_eq":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌊ ⌋» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌊ ⌋» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌊ ⌋» -/\n#print round_eq /-\ntheorem round_eq (x : α) : round x = «expr⌊ ⌋» (x + 1 / 2) :=\n  by\n  simp_rw [round, (by simp only [lt_div_iff', two_pos] : 2 * fract x < 1 ↔ fract x < 1 / 2)]\n  cases' lt_or_ge (fract x) (1 / 2) with hx hx\n  · conv_rhs => rw [← fract_add_floor x, add_assoc, add_left_comm, floor_int_add]\n    rw [if_pos hx, self_eq_add_right, floor_eq_iff, cast_zero, zero_add]\n    constructor <;> linarith [fract_nonneg x]\n  · have : «expr⌊ ⌋» (fract x + 1 / 2) = 1 := by\n      rw [floor_eq_iff]\n      constructor <;> norm_num <;> linarith [fract_lt_one x]\n    rw [if_neg (not_lt.mpr hx), ← fract_add_floor x, add_assoc, add_left_comm, floor_int_add, ceil_add_int,\n      add_comm _ («expr⌊ ⌋» x), add_right_inj, ceil_eq_iff, this, cast_one, sub_self]\n    constructor <;> linarith [fract_lt_one x]\n#align round_eq round_eq\n-/\n\n",
+ "round_add_one":
+ "#print round_add_one /-\n@[simp]\ntheorem round_add_one (a : α) : round (a + 1) = round a + 1 :=\n  by\n  convert round_add_int a 1\n  exact int.cast_one.symm\n#align round_add_one round_add_one\n-/\n\n",
+ "round_add_nat":
+ "#print round_add_nat /-\n@[simp]\ntheorem round_add_nat (x : α) (y : ℕ) : round (x + y) = round x + y := by\n  rw [round, round, fract_add_nat, Int.floor_add_nat, Int.ceil_add_nat, ← apply_ite₂, if_t_t]\n#align round_add_nat round_add_nat\n-/\n\n",
+ "round_add_int":
+ "#print round_add_int /-\n@[simp]\ntheorem round_add_int (x : α) (y : ℤ) : round (x + y) = round x + y := by\n  rw [round, round, Int.fract_add_int, Int.floor_add_int, Int.ceil_add_int, ← apply_ite₂, if_t_t]\n#align round_add_int round_add_int\n-/\n\n",
+ "preimage_fract":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌊ ⌋» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌊ ⌋» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⋃ , » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⋃ , » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\ntheorem preimage_fract (s : set α) :\n    «expr ⁻¹' » fract s =\n      «expr⋃ , » \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⋃ , »\"\n        («expr ⁻¹' » (fun x => x - m) (s ∩ Ico (0 : α) 1)) :=\n  by\n  ext x\n  simp only [mem_preimage, mem_Union, mem_inter_iff]\n  refine' ⟨fun h => ⟨«expr⌊ ⌋» x, h, fract_nonneg x, fract_lt_one x⟩, _⟩\n  rintro ⟨m, hms, hm0, hm1⟩\n  obtain rfl : «expr⌊ ⌋» x = m; exact floor_eq_iff.2 ⟨sub_nonneg.1 hm0, sub_lt_iff_lt_add'.1 hm1⟩\n  exact hms\n#align preimage_fract preimage_fract\n\n",
+ "preimage_floor_zero":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\n@[simp]\ntheorem preimage_floor_zero : «expr ⁻¹' » (floor : α → ℕ) {0} = Iio 1 :=\n  ext fun a => floor_eq_zero\n#align preimage_floor_zero preimage_floor_zero\n\n",
+ "preimage_floor_singleton":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\n@[simp]\ntheorem preimage_floor_singleton (m : ℤ) : «expr ⁻¹' » (floor : α → ℤ) {m} = Ico m (m + 1) :=\n  ext fun x => floor_eq_iff\n#align preimage_floor_singleton preimage_floor_singleton\n\n",
+ "preimage_floor_of_ne_zero":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\ntheorem preimage_floor_of_ne_zero {n : ℕ} (hn : n ≠ 0) : «expr ⁻¹' » (floor : α → ℕ) {n} = Ico n (n + 1) :=\n  ext fun a => floor_eq_iff' hn\n#align preimage_floor_of_ne_zero preimage_floor_of_ne_zero\n\n",
+ "preimage_ceil_zero":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\n@[simp]\ntheorem preimage_ceil_zero : «expr ⁻¹' » (Nat.ceil : α → ℕ) {0} = Iic 0 :=\n  ext fun x => ceil_eq_zero\n#align preimage_ceil_zero preimage_ceil_zero\n\n",
+ "preimage_ceil_singleton":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\n@[simp]\ntheorem preimage_ceil_singleton (m : ℤ) : «expr ⁻¹' » (ceil : α → ℤ) {m} = Ioc (m - 1) m :=\n  ext fun x => ceil_eq_iff\n#align preimage_ceil_singleton preimage_ceil_singleton\n\n",
+ "preimage_ceil_of_ne_zero":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\ntheorem preimage_ceil_of_ne_zero (hn : n ≠ 0) : «expr ⁻¹' » (Nat.ceil : α → ℕ) {n} = Ioc (↑(n - 1)) n :=\n  ext fun x => ceil_eq_iff hn\n#align preimage_ceil_of_ne_zero preimage_ceil_of_ne_zero\n\n",
+ "preimage_Ioo":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌊ ⌋» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌈ ⌉» -/\n@[simp]\ntheorem preimage_Ioo {a b : α} : «expr ⁻¹' » (coe : ℤ → α) (Set.Ioo a b) = Set.Ioo («expr⌊ ⌋» a) («expr⌈ ⌉» b) :=\n  by\n  ext\n  simp [floor_lt, lt_ceil]\n#align preimage_Ioo preimage_Ioo\n\n",
+ "preimage_Ioi":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌊ ⌋» -/\n@[simp]\ntheorem preimage_Ioi : «expr ⁻¹' » (coe : ℤ → α) (Set.Ioi a) = Set.Ioi («expr⌊ ⌋» a) :=\n  by\n  ext\n  simp [floor_lt]\n#align preimage_Ioi preimage_Ioi\n\n",
+ "preimage_Ioc":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌊ ⌋» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌊ ⌋» -/\n@[simp]\ntheorem preimage_Ioc {a b : α} : «expr ⁻¹' » (coe : ℤ → α) (Set.Ioc a b) = Set.Ioc («expr⌊ ⌋» a) («expr⌊ ⌋» b) :=\n  by\n  ext\n  simp [floor_lt, le_floor]\n#align preimage_Ioc preimage_Ioc\n\n",
+ "preimage_Iio":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌈ ⌉» -/\n@[simp]\ntheorem preimage_Iio : «expr ⁻¹' » (coe : ℤ → α) (Set.Iio a) = Set.Iio («expr⌈ ⌉» a) :=\n  by\n  ext\n  simp [lt_ceil]\n#align preimage_Iio preimage_Iio\n\n",
+ "preimage_Iic":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌊ ⌋» -/\n@[simp]\ntheorem preimage_Iic : «expr ⁻¹' » (coe : ℤ → α) (Set.Iic a) = Set.Iic («expr⌊ ⌋» a) :=\n  by\n  ext\n  simp [le_floor]\n#align preimage_Iic preimage_Iic\n\n",
+ "preimage_Ico":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌈ ⌉» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌈ ⌉» -/\n@[simp]\ntheorem preimage_Ico {a b : α} : «expr ⁻¹' » (coe : ℤ → α) (Set.Ico a b) = Set.Ico («expr⌈ ⌉» a) («expr⌈ ⌉» b) :=\n  by\n  ext\n  simp [ceil_le, lt_ceil]\n#align preimage_Ico preimage_Ico\n\n",
+ "preimage_Ici":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌈ ⌉» -/\n@[simp]\ntheorem preimage_Ici : «expr ⁻¹' » (coe : ℤ → α) (Set.Ici a) = Set.Ici («expr⌈ ⌉» a) :=\n  by\n  ext\n  simp [ceil_le]\n#align preimage_Ici preimage_Ici\n\n",
+ "preimage_Icc":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌈ ⌉» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌊ ⌋» -/\n@[simp]\ntheorem preimage_Icc {a b : α} : «expr ⁻¹' » (coe : ℤ → α) (Set.Icc a b) = Set.Icc («expr⌈ ⌉» a) («expr⌊ ⌋» b) :=\n  by\n  ext\n  simp [ceil_le, le_floor]\n#align preimage_Icc preimage_Icc\n\n",
+ "pos_of_floor_pos":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌊ ⌋₊» -/\ntheorem pos_of_floor_pos (h : 0 < «expr⌊ ⌋₊» a) : 0 < a :=\n  (le_or_lt a 0).resolve_left fun ha => lt_irrefl 0 <| by rwa [floor_of_nonpos ha] at h\n#align pos_of_floor_pos pos_of_floor_pos\n\n",
+ "one_le_floor_iff":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌊ ⌋₊» -/\n@[simp]\ntheorem one_le_floor_iff (x : α) : 1 ≤ «expr⌊ ⌋₊» x ↔ 1 ≤ x := by exact_mod_cast @le_floor_iff' α _ _ x 1 one_ne_zero\n#align one_le_floor_iff one_le_floor_iff\n\n",
+ "one_le_ceil_iff":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌈ ⌉» -/\n@[simp]\ntheorem one_le_ceil_iff : 1 ≤ «expr⌈ ⌉» a ↔ 0 < a := by rw [← zero_add (1 : ℤ), add_one_le_ceil_iff, cast_zero]\n#align one_le_ceil_iff one_le_ceil_iff\n\n",
+ "nat_ceil_pos":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌈ ⌉₊» -/\nprivate theorem nat_ceil_pos [LinearOrderedSemiring α] [FloorSemiring α] {a : α} : 0 < a → 0 < «expr⌈ ⌉₊» a :=\n  Nat.ceil_pos.2\n#align nat_ceil_pos nat_ceil_pos\n\n",
+ "map_round":
+ "theorem map_round (f : F) (hf : strict_mono f) (a : α) : round (f a) = round a := by\n  simp_rw [round_eq, ← map_floor _ hf, map_add, one_div, map_inv₀, map_bit0, map_one]\n#align map_round map_round\n\n",
+ "map_fract":
+ "theorem map_fract (f : F) (hf : strict_mono f) (a : α) : fract (f a) = f (fract a) := by\n  simp_rw [fract, map_sub, map_intCast, map_floor _ hf]\n#align map_fract map_fract\n\n",
+ "map_floor":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌊ ⌋» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌊ ⌋» -/\ntheorem map_floor (f : F) (hf : strict_mono f) (a : α) : «expr⌊ ⌋» (f a) = «expr⌊ ⌋» a :=\n  floor_congr fun n => by rw [← map_intCast f, hf.le_iff_le]\n#align map_floor map_floor\n\n",
+ "map_ceil":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌈ ⌉» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌈ ⌉» -/\ntheorem map_ceil (f : F) (hf : strict_mono f) (a : α) : «expr⌈ ⌉» (f a) = «expr⌈ ⌉» a :=\n  ceil_congr fun n => by rw [← map_intCast f, hf.le_iff_le]\n#align map_ceil map_ceil\n\n",
+ "lt_succ_floor":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌊ ⌋» -/\ntheorem lt_succ_floor (a : α) : a < («expr⌊ ⌋» a).succ :=\n  floor_lt.1 <| Int.lt_succ_self _\n#align lt_succ_floor lt_succ_floor\n\n",
+ "lt_one_of_floor_lt_one":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌊ ⌋₊» -/\ntheorem lt_one_of_floor_lt_one (h : «expr⌊ ⌋₊» a < 1) : a < 1 := by exact_mod_cast lt_of_floor_lt h\n#align lt_one_of_floor_lt_one lt_one_of_floor_lt_one\n\n",
+ "lt_of_lt_floor":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌊ ⌋₊» -/\ntheorem lt_of_lt_floor (h : n < «expr⌊ ⌋₊» a) : ↑n < a :=\n  (nat.cast_lt.2 h).trans_le <| floor_le (pos_of_floor_pos <| (nat.zero_le n).trans_lt h).le\n#align lt_of_lt_floor lt_of_lt_floor\n\n",
+ "lt_of_floor_lt":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌊ ⌋₊» -/\ntheorem lt_of_floor_lt (h : «expr⌊ ⌋₊» a < n) : a < n :=\n  lt_of_not_le fun h' => (le_floor h').not_lt h\n#align lt_of_floor_lt lt_of_floor_lt\n\n",
+ "lt_of_ceil_lt":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌈ ⌉₊» -/\ntheorem lt_of_ceil_lt (h : «expr⌈ ⌉₊» a < n) : a < n :=\n  (le_ceil a).trans_lt (nat.cast_lt.2 h)\n#align lt_of_ceil_lt lt_of_ceil_lt\n\n",
+ "lt_floor_add_one":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌊ ⌋» -/\n@[simp]\ntheorem lt_floor_add_one (a : α) : a < «expr⌊ ⌋» a + 1 := by\n  simpa only [int.succ, Int.cast_add, Int.cast_one] using lt_succ_floor a\n#align lt_floor_add_one lt_floor_add_one\n\n",
+ "lt_ceil":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌈ ⌉» -/\ntheorem lt_ceil : z < «expr⌈ ⌉» a ↔ (z : α) < a :=\n  lt_iff_lt_of_le_iff_le ceil_le\n#align lt_ceil lt_ceil\n\n",
+ "le_of_ceil_le":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌈ ⌉₊» -/\ntheorem le_of_ceil_le (h : «expr⌈ ⌉₊» a ≤ n) : a ≤ n :=\n  (le_ceil a).trans (nat.cast_le.2 h)\n#align le_of_ceil_le le_of_ceil_le\n\n",
+ "le_floor_iff'":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌊ ⌋₊» -/\ntheorem le_floor_iff' (hn : n ≠ 0) : n ≤ «expr⌊ ⌋₊» a ↔ (n : α) ≤ a :=\n  by\n  obtain ha | ha := le_total a 0\n  · rw [floor_of_nonpos ha]\n    exact\n      iff_of_false (nat.pos_of_ne_zero hn).not_le (not_le_of_lt <| ha.trans_lt <| cast_pos.2 <| nat.pos_of_ne_zero hn)\n  · exact le_floor_iff ha\n#align le_floor_iff' le_floor_iff'\n\n",
+ "le_floor_iff":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌊ ⌋₊» -/\ntheorem le_floor_iff (ha : 0 ≤ a) : n ≤ «expr⌊ ⌋₊» a ↔ (n : α) ≤ a :=\n  floor_semiring.gc_floor ha\n#align le_floor_iff le_floor_iff\n\n",
+ "le_floor_add_floor":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌊ ⌋» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌊ ⌋» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌊ ⌋» -/\ntheorem le_floor_add_floor (a b : α) : «expr⌊ ⌋» (a + b) - 1 ≤ «expr⌊ ⌋» a + «expr⌊ ⌋» b :=\n  by\n  rw [← sub_le_iff_le_add, le_floor, Int.cast_sub, sub_le_comm, Int.cast_sub, Int.cast_one]\n  refine' le_trans _ (sub_one_lt_floor _).le\n  rw [sub_le_iff_le_add', ← add_sub_assoc, sub_le_sub_iff_right]\n  exact floor_le _\n#align le_floor_add_floor le_floor_add_floor\n\n",
+ "le_floor_add":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌊ ⌋» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌊ ⌋» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌊ ⌋» -/\ntheorem le_floor_add (a b : α) : «expr⌊ ⌋» a + «expr⌊ ⌋» b ≤ «expr⌊ ⌋» (a + b) :=\n  by\n  rw [le_floor, Int.cast_add]\n  exact add_le_add (floor_le _) (floor_le _)\n#align le_floor_add le_floor_add\n\n",
+ "le_floor":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌊ ⌋» -/\ntheorem le_floor : z ≤ «expr⌊ ⌋» a ↔ (z : α) ≤ a :=\n  (gc_coe_floor z a).symm\n#align le_floor le_floor\n\n",
+ "le_ceil":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌈ ⌉» -/\ntheorem le_ceil (a : α) : a ≤ «expr⌈ ⌉» a :=\n  gc_ceil_coe.le_u_l a\n#align le_ceil le_ceil\n\n",
+ "int_floor_nonneg_of_pos":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌊ ⌋» -/\nprivate theorem int_floor_nonneg_of_pos [LinearOrderedRing α] [FloorRing α] {a : α} (ha : 0 < a) : 0 ≤ «expr⌊ ⌋» a :=\n  int_floor_nonneg ha.le\n#align int_floor_nonneg_of_pos int_floor_nonneg_of_pos\n\n",
+ "int_floor_nonneg":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌊ ⌋» -/\nprivate theorem int_floor_nonneg [LinearOrderedRing α] [FloorRing α] {a : α} (ha : 0 ≤ a) : 0 ≤ «expr⌊ ⌋» a :=\n  Int.floor_nonneg.2 ha\n#align int_floor_nonneg int_floor_nonneg\n\n",
+ "int_ceil_pos":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌈ ⌉» -/\nprivate theorem int_ceil_pos [LinearOrderedRing α] [FloorRing α] {a : α} : 0 < a → 0 < «expr⌈ ⌉» a :=\n  Int.ceil_pos.2\n#align int_ceil_pos int_ceil_pos\n\n",
+ "image_fract":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌊ ⌋» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌊ ⌋» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⋃ , » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⋃ , » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\ntheorem image_fract (s : set α) :\n    «expr '' » fract s =\n      «expr⋃ , » \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⋃ , »\"\n        («expr '' » (fun x => x - m) s ∩ Ico 0 1) :=\n  by\n  ext x\n  simp only [mem_image, mem_inter_iff, mem_Union]; constructor\n  · rintro ⟨y, hy, rfl⟩\n    exact ⟨«expr⌊ ⌋» y, ⟨y, hy, rfl⟩, fract_nonneg y, fract_lt_one y⟩\n  · rintro ⟨m, ⟨y, hys, rfl⟩, h0, h1⟩\n    obtain rfl : «expr⌊ ⌋» y = m\n    exact floor_eq_iff.2 ⟨sub_nonneg.1 h0, sub_lt_iff_lt_add'.1 h1⟩\n    exact ⟨y, hys, rfl⟩\n#align image_fract image_fract\n\n",
+ "gc_coe_floor":
+ "theorem gc_coe_floor : GaloisConnection (coe : ℤ → α) floor :=\n  floor_ring.gc_coe_floor\n#align gc_coe_floor gc_coe_floor\n\n",
+ "gc_ceil_coe":
+ "theorem gc_ceil_coe : GaloisConnection ceil (coe : ℤ → α) :=\n  floor_ring.gc_ceil_coe\n#align gc_ceil_coe gc_ceil_coe\n\n",
+ "fract_zero":
+ "@[simp]\ntheorem fract_zero : fract (0 : α) = 0 := by rw [fract, floor_zero, cast_zero, sub_self]\n#align fract_zero fract_zero\n\n",
+ "fract_sub_self":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌊ ⌋» -/\n@[simp]\ntheorem fract_sub_self (a : α) : fract a - a = -«expr⌊ ⌋» a :=\n  sub_sub_cancel_left _ _\n#align fract_sub_self fract_sub_self\n\n",
+ "fract_sub_nat":
+ "@[simp]\ntheorem fract_sub_nat (a : α) (n : ℕ) : fract (a - n) = fract a :=\n  by\n  rw [fract]\n  simp\n#align fract_sub_nat fract_sub_nat\n\n",
+ "fract_sub_int":
+ "@[simp]\ntheorem fract_sub_int (a : α) (m : ℤ) : fract (a - m) = fract a :=\n  by\n  rw [fract]\n  simp\n#align fract_sub_int fract_sub_int\n\n",
+ "fract_one":
+ "@[simp]\ntheorem fract_one : fract (1 : α) = 0 := by simp [fract]\n#align fract_one fract_one\n\n",
+ "fract_nonneg":
+ "@[simp]\ntheorem fract_nonneg (a : α) : 0 ≤ fract a :=\n  sub_nonneg.2 <| floor_le _\n#align fract_nonneg fract_nonneg\n\n",
+ "fract_neg_eq_zero":
+ "@[simp]\ntheorem fract_neg_eq_zero {x : α} : fract (-x) = 0 ↔ fract x = 0 :=\n  by\n  simp only [fract_eq_iff, le_refl, zero_lt_one, tsub_zero, true_and_iff]\n  constructor <;> rintro ⟨z, hz⟩ <;> use -z <;> simp [← hz]\n#align fract_neg_eq_zero fract_neg_eq_zero\n\n",
+ "fract_neg":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌊ ⌋» -/\ntheorem fract_neg {x : α} (hx : fract x ≠ 0) : fract (-x) = 1 - fract x :=\n  by\n  rw [fract_eq_iff]\n  constructor\n  · rw [le_sub_iff_add_le, zero_add]\n    exact (fract_lt_one x).le\n  refine' ⟨sub_lt_self _ (lt_of_le_of_ne' (fract_nonneg x) hx), -«expr⌊ ⌋» x - 1, _⟩\n  simp only [sub_sub_eq_add_sub, cast_sub, cast_neg, cast_one, sub_left_inj]\n  conv in -x => rw [← floor_add_fract x]\n  simp [-floor_add_fract]\n#align fract_neg fract_neg\n\n",
+ "fract_nat_cast":
+ "@[simp]\ntheorem fract_nat_cast (n : ℕ) : fract (n : α) = 0 := by simp [fract]\n#align fract_nat_cast fract_nat_cast\n\n",
+ "fract_mul_nat":
+ "theorem fract_mul_nat (a : α) (b : ℕ) : ∃ z : ℤ, fract a * b - fract (a * b) = z :=\n  by\n  induction' b with c hc\n  use 0; simp\n  rcases hc with ⟨z, hz⟩\n  rw [nat.succ_eq_add_one, Nat.cast_add, mul_add, mul_add, Nat.cast_one, mul_one, mul_one]\n  rcases fract_add (a * c) a with ⟨y, hy⟩\n  use z - y\n  rw [Int.cast_sub, ← hz, ← hy]\n  abel\n#align fract_mul_nat fract_mul_nat\n\n",
+ "fract_lt_one":
+ "theorem fract_lt_one (a : α) : fract a < 1 :=\n  sub_lt_comm.1 <| sub_one_lt_floor _\n#align fract_lt_one fract_lt_one\n\n",
+ "fract_int_nat":
+ "@[simp]\ntheorem fract_int_nat (n : ℕ) (a : α) : fract (↑n + a) = fract a := by rw [add_comm, fract_add_nat]\n#align fract_int_nat fract_int_nat\n\n",
+ "fract_int_cast":
+ "@[simp]\ntheorem fract_int_cast (z : ℤ) : fract (z : α) = 0 :=\n  by\n  unfold fract\n  rw [floor_int_cast]\n  exact sub_self _\n#align fract_int_cast fract_int_cast\n\n",
+ "fract_int_add":
+ "@[simp]\ntheorem fract_int_add (m : ℤ) (a : α) : fract (↑m + a) = fract a := by rw [add_comm, fract_add_int]\n#align fract_int_add fract_int_add\n\n",
+ "fract_int":
+ "@[simp]\ntheorem fract_int : (Int.fract : ℤ → ℤ) = 0 :=\n  funext fun x => by simp [fract]\n#align fract_int fract_int\n\n",
+ "fract_fract":
+ "@[simp]\ntheorem fract_fract (a : α) : fract (fract a) = fract a :=\n  fract_eq_self.2 ⟨fract_nonneg _, fract_lt_one _⟩\n#align fract_fract fract_fract\n\n",
+ "fract_floor":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌊ ⌋» -/\n@[simp]\ntheorem fract_floor (a : α) : fract («expr⌊ ⌋» a : α) = 0 :=\n  fract_intCast _\n#align fract_floor fract_floor\n\n",
+ "fract_eq_zero_or_add_one_sub_ceil":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌈ ⌉» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌊ ⌋» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌈ ⌉» -/\ntheorem fract_eq_zero_or_add_one_sub_ceil (a : α) : fract a = 0 ∨ fract a = a + 1 - («expr⌈ ⌉» a : α) :=\n  by\n  cases' eq_or_ne (fract a) 0 with ha ha\n  · exact or.inl ha\n  right\n  suffices («expr⌈ ⌉» a : α) = «expr⌊ ⌋» a + 1 by\n    rw [this, ← self_sub_fract]\n    abel\n  norm_cast\n  rw [ceil_eq_iff]\n  refine' ⟨_, _root_.le_of_lt <| by simp⟩\n  rw [cast_add, cast_one, add_tsub_cancel_right, ← self_sub_fract a, sub_lt_self_iff]\n  exact ha.symm.lt_of_le (fract_nonneg a)\n#align fract_eq_zero_or_add_one_sub_ceil fract_eq_zero_or_add_one_sub_ceil\n\n",
+ "fract_eq_self":
+ "@[simp]\ntheorem fract_eq_self {a : α} : fract a = a ↔ 0 ≤ a ∧ a < 1 :=\n  fract_eq_iff.trans <| and_assoc.symm.trans <| and_iff_left ⟨0, by simp⟩\n#align fract_eq_self fract_eq_self\n\n",
+ "fract_eq_iff":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌊ ⌋» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌊ ⌋» -/\ntheorem fract_eq_iff {a b : α} : fract a = b ↔ 0 ≤ b ∧ b < 1 ∧ ∃ z : ℤ, a - b = z :=\n  ⟨fun h => by\n    rw [← h]\n    exact ⟨fract_nonneg _, fract_lt_one _, ⟨«expr⌊ ⌋» a, sub_sub_cancel _ _⟩⟩,\n    by\n    rintro ⟨h₀, h₁, z, hz⟩\n    show a - «expr⌊ ⌋» a = b; apply eq.symm\n    rw [eq_sub_iff_add_eq, add_comm, ← eq_sub_iff_add_eq]\n    rw [hz, Int.cast_inj, floor_eq_iff, ← hz]\n    clear hz; constructor <;> simpa [sub_eq_add_neg, add_assoc] ⟩\n#align fract_eq_iff fract_eq_iff\n\n",
+ "fract_eq_fract":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌊ ⌋» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌊ ⌋» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌊ ⌋» -/\ntheorem fract_eq_fract {a b : α} : fract a = fract b ↔ ∃ z : ℤ, a - b = z :=\n  ⟨fun h => ⟨«expr⌊ ⌋» a - «expr⌊ ⌋» b, by unfold fract at h; rw [Int.cast_sub, sub_eq_sub_iff_sub_eq_sub.1 h]⟩,\n    by\n    rintro ⟨z, hz⟩\n    refine' fract_eq_iff.2 ⟨fract_nonneg _, fract_lt_one _, z + «expr⌊ ⌋» b, _⟩\n    rw [eq_add_of_sub_eq hz, add_comm, Int.cast_add]\n    exact add_sub_sub_cancel _ _ _⟩\n#align fract_eq_fract fract_eq_fract\n\n",
+ "fract_div_nat_cast_eq_div_nat_cast_mod":
+ "theorem fract_div_nat_cast_eq_div_nat_cast_mod {m n : ℕ} : fract ((m : k) / n) = ↑(m % n) / n :=\n  by\n  rcases n.eq_zero_or_pos with (rfl | hn)\n  · simp\n  have hn' : 0 < (n : k) := by\n    norm_cast\n    assumption\n  refine' fract_eq_iff.mpr ⟨by positivity, _, m / n, _⟩\n  · simpa only [div_lt_one hn', nat.cast_lt] using m.mod_lt hn\n  · rw [sub_eq_iff_eq_add', ← mul_right_inj' hn'.ne.symm, mul_div_cancel' _ hn'.ne.symm, mul_add,\n      mul_div_cancel' _ hn'.ne.symm]\n    norm_cast\n    rw [← Nat.cast_add, nat.mod_add_div m n]\n#align fract_div_nat_cast_eq_div_nat_cast_mod fract_div_nat_cast_eq_div_nat_cast_mod\n\n",
+ "fract_div_mul_self_mem_Ico":
+ "theorem fract_div_mul_self_mem_Ico (a b : k) (ha : 0 < a) : fract (b / a) * a ∈ Ico 0 a :=\n  ⟨(zero_le_mul_right ha).2 (fract_nonneg (b / a)), (mul_lt_iff_lt_one_left ha).2 (fract_lt_one (b / a))⟩\n#align fract_div_mul_self_mem_Ico fract_div_mul_self_mem_Ico\n\n",
+ "fract_div_mul_self_add_zsmul_eq":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌊ ⌋» -/\ntheorem fract_div_mul_self_add_zsmul_eq (a b : k) (ha : a ≠ 0) :\n    fract (b / a) * a + «expr • » («expr⌊ ⌋» (b / a)) a = b := by\n  rw [zsmul_eq_mul, ← add_mul, fract_add_floor, div_mul_cancel b ha]\n#align fract_div_mul_self_add_zsmul_eq fract_div_mul_self_add_zsmul_eq\n\n",
+ "fract_div_int_cast_eq_div_int_cast_mod":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌈ ⌉» -/\n-- TODO Generalise this to allow `n : ℤ` using `int.fmod` instead of `int.mod`.\ntheorem fract_div_int_cast_eq_div_int_cast_mod {m : ℤ} {n : ℕ} : fract ((m : k) / n) = ↑(m % n) / n :=\n  by\n  rcases n.eq_zero_or_pos with (rfl | hn)\n  · simp\n  replace hn : 0 < (n : k)\n  · norm_cast\n    assumption\n  have : ∀ {l : ℤ} (hl : 0 ≤ l), fract ((l : k) / n) = ↑(l % n) / n :=\n    by\n    intros\n    obtain ⟨l₀, rfl | rfl⟩ := l.eq_coe_or_neg\n    · rw [cast_coe_nat, ← coe_nat_mod, cast_coe_nat, fract_div_nat_cast_eq_div_nat_cast_mod]\n    · rw [right.nonneg_neg_iff, coe_nat_nonpos_iff] at hl\n      simp [hl, zero_mod]\n  obtain ⟨m₀, rfl | rfl⟩ := m.eq_coe_or_neg\n  · exact this (of_nat_nonneg m₀)\n  let q := «expr⌈ ⌉» (↑m₀ / (n : k))\n  let m₁ := q * ↑n - (↑m₀ : ℤ)\n  have hm₁ : 0 ≤ m₁ := by simpa [← @cast_le k, ← div_le_iff hn] using floor_ring.gc_ceil_coe.le_u_l _\n  calc\n    fract (↑(-↑m₀) / ↑n) = fract (-(m₀ : k) / n) := by push_cast\n    _ = fract ((m₁ : k) / n) := _\n    _ = ↑(m₁ % (n : ℤ)) / ↑n := this hm₁\n    _ = ↑(-(↑m₀ : ℤ) % ↑n) / ↑n := _\n    \n  · rw [← fract_int_add q, ← mul_div_cancel (q : k) (ne_of_gt hn), ← add_div, ← sub_eq_add_neg]\n    push_cast\n  · congr 2\n    change (q * ↑n - (↑m₀ : ℤ)) % ↑n = _\n    rw [sub_eq_add_neg, add_comm (q * ↑n), add_mul_mod_self]\n#align fract_div_int_cast_eq_div_int_cast_mod fract_div_int_cast_eq_div_int_cast_mod\n\n",
+ "fract_add_nat":
+ "@[simp]\ntheorem fract_add_nat (a : α) (m : ℕ) : fract (a + m) = fract a :=\n  by\n  rw [fract]\n  simp\n#align fract_add_nat fract_add_nat\n\n",
+ "fract_add_le":
+ "theorem fract_add_le (a b : α) : fract (a + b) ≤ fract a + fract b :=\n  by\n  rw [fract, fract, fract, sub_add_sub_comm, sub_le_sub_iff_left, ← Int.cast_add, Int.cast_le]\n  exact le_floor_add _ _\n#align fract_add_le fract_add_le\n\n",
+ "fract_add_int":
+ "@[simp]\ntheorem fract_add_int (a : α) (m : ℤ) : fract (a + m) = fract a :=\n  by\n  rw [fract]\n  simp\n#align fract_add_int fract_add_int\n\n",
+ "fract_add_fract_le":
+ "theorem fract_add_fract_le (a b : α) : fract a + fract b ≤ fract (a + b) + 1 :=\n  by\n  rw [fract, fract, fract, sub_add_sub_comm, sub_add, sub_le_sub_iff_left]\n  exact_mod_cast le_floor_add_floor a b\n#align fract_add_fract_le fract_add_fract_le\n\n",
+ "fract_add_floor":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌊ ⌋» -/\n@[simp]\ntheorem fract_add_floor (a : α) : fract a + «expr⌊ ⌋» a = a :=\n  sub_add_cancel _ _\n#align fract_add_floor fract_add_floor\n\n",
+ "fract_add":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌊ ⌋» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌊ ⌋» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌊ ⌋» -/\ntheorem fract_add (a b : α) : ∃ z : ℤ, fract (a + b) - fract a - fract b = z :=\n  ⟨«expr⌊ ⌋» a + «expr⌊ ⌋» b - «expr⌊ ⌋» (a + b), by\n    unfold fract\n    simp [sub_eq_add_neg]\n    abel⟩\n#align fract_add fract_add\n\n",
+ "floor_zero":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌊ ⌋» -/\n@[simp]\ntheorem floor_zero : «expr⌊ ⌋» (0 : α) = 0 := by rw [← cast_zero, floor_int_cast]\n#align floor_zero floor_zero\n\n",
+ "floor_toNat":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌊ ⌋» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌊ ⌋₊» -/\n#print Int.floor_toNat /-\n-- see Note [lower instance priority]\ntheorem Int.floor_toNat (a : α) : («expr⌊ ⌋» a).to_nat = «expr⌊ ⌋₊» a :=\n  rfl\n#align int.floor_to_nat Int.floor_toNat\n-/\n\n",
+ "floor_sub_nat":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌊ ⌋» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌊ ⌋» -/\n@[simp]\ntheorem floor_sub_nat (a : α) (n : ℕ) : «expr⌊ ⌋» (a - n) = «expr⌊ ⌋» a - n := by rw [← Int.cast_ofNat, floor_sub_int]\n#align floor_sub_nat floor_sub_nat\n\n",
+ "floor_sub_int":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌊ ⌋» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌊ ⌋» -/\n@[simp]\ntheorem floor_sub_int (a : α) (z : ℤ) : «expr⌊ ⌋» (a - z) = «expr⌊ ⌋» a - z :=\n  eq.trans (by rw [Int.cast_neg, sub_eq_add_neg]) (floor_add_int _ _)\n#align floor_sub_int floor_sub_int\n\n",
+ "floor_ring_floor_eq":
+ "-- Mathematical notation for `fract a` is usually `{a}`. Let's not even go there.\n@[simp]\ntheorem floor_ring_floor_eq : @floor_ring.floor = @Int.floor :=\n  rfl\n#align floor_ring_floor_eq floor_ring_floor_eq\n\n",
+ "floor_ring_ceil_eq":
+ "@[simp]\ntheorem floor_ring_ceil_eq : @floor_ring.ceil = @Int.ceil :=\n  rfl\n#align floor_ring_ceil_eq floor_ring_ceil_eq\n\n",
+ "floor_pos":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌊ ⌋» -/\ntheorem floor_pos : 0 < «expr⌊ ⌋» a ↔ 1 ≤ a := by\n  convert le_floor\n  exact cast_one.symm\n#align floor_pos floor_pos\n\n",
+ "floor_one":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌊ ⌋» -/\n@[simp]\ntheorem floor_one : «expr⌊ ⌋» (1 : α) = 1 := by rw [← cast_one, floor_int_cast]\n#align floor_one floor_one\n\n",
+ "floor_of_nonpos":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌊ ⌋₊» -/\ntheorem floor_of_nonpos (ha : a ≤ 0) : «expr⌊ ⌋₊» a = 0 :=\n  ha.lt_or_eq.elim floor_semiring.floor_of_neg <| by\n    rintro rfl\n    exact floor_zero\n#align floor_of_nonpos floor_of_nonpos\n\n",
+ "floor_nonpos":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌊ ⌋» -/\ntheorem floor_nonpos (ha : a ≤ 0) : «expr⌊ ⌋» a ≤ 0 :=\n  by\n  rw [← @cast_le α, Int.cast_zero]\n  exact (floor_le a).trans ha\n#align floor_nonpos floor_nonpos\n\n",
+ "floor_nonneg":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌊ ⌋» -/\ntheorem floor_nonneg : 0 ≤ «expr⌊ ⌋» a ↔ 0 ≤ a := by rw [le_floor, Int.cast_zero]\n#align floor_nonneg floor_nonneg\n\n",
+ "floor_neg":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌊ ⌋» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌈ ⌉» -/\ntheorem floor_neg : «expr⌊ ⌋» (-a) = -«expr⌈ ⌉» a :=\n  eq_of_forall_le_iff fun z => by rw [le_neg, ceil_le, le_floor, Int.cast_neg, le_neg]\n#align floor_neg floor_neg\n\n",
+ "floor_nat_cast":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌊ ⌋» -/\n@[simp]\ntheorem floor_nat_cast (n : ℕ) : «expr⌊ ⌋» (n : α) = n :=\n  eq_of_forall_le_iff fun a => by rw [le_floor, ← cast_coe_nat, cast_le]\n#align floor_nat_cast floor_nat_cast\n\n",
+ "floor_nat_add":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌊ ⌋» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌊ ⌋» -/\n@[simp]\ntheorem floor_nat_add (n : ℕ) (a : α) : «expr⌊ ⌋» (↑n + a) = n + «expr⌊ ⌋» a := by rw [← Int.cast_ofNat, floor_int_add]\n#align floor_nat_add floor_nat_add\n\n",
+ "floor_nat":
+ "/-\nCopyright (c) 2018 Mario Carneiro. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Mario Carneiro, Kevin Kappelmann\n-/\n@[simp]\ntheorem floor_nat : (Nat.floor : ℕ → ℕ) = id :=\n  rfl\n#align floor_nat floor_nat\n\n",
+ "floor_mono":
+ "@[mono]\ntheorem floor_mono : monotone (floor : α → ℤ) :=\n  gc_coe_floor.monotone_u\n#align floor_mono floor_mono\n\n",
+ "floor_lt_one":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌊ ⌋₊» -/\ntheorem floor_lt_one (ha : 0 ≤ a) : «expr⌊ ⌋₊» a < 1 ↔ a < 1 :=\n  (floor_lt ha).trans <| by rw [Nat.cast_one]\n#align floor_lt_one floor_lt_one\n\n",
+ "floor_lt_ceil_of_lt_of_pos":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌊ ⌋₊» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌈ ⌉₊» -/\ntheorem floor_lt_ceil_of_lt_of_pos {a b : α} (h : a < b) (h' : 0 < b) : «expr⌊ ⌋₊» a < «expr⌈ ⌉₊» b :=\n  by\n  rcases le_or_lt 0 a with (ha | ha)\n  · rw [floor_lt ha]\n    exact h.trans_le (le_ceil _)\n  · rwa [floor_of_nonpos ha.le, lt_ceil, Nat.cast_zero]\n#align floor_lt_ceil_of_lt_of_pos floor_lt_ceil_of_lt_of_pos\n\n",
+ "floor_lt_ceil_of_lt":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌊ ⌋» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌈ ⌉» -/\ntheorem floor_lt_ceil_of_lt {a b : α} (h : a < b) : «expr⌊ ⌋» a < «expr⌈ ⌉» b :=\n  cast_lt.1 <| (floor_le a).trans_lt <| h.trans_le <| le_ceil b\n#align floor_lt_ceil_of_lt floor_lt_ceil_of_lt\n\n",
+ "floor_lt'":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌊ ⌋₊» -/\ntheorem floor_lt' (hn : n ≠ 0) : «expr⌊ ⌋₊» a < n ↔ a < n :=\n  lt_iff_lt_of_le_iff_le <| le_floor_iff' hn\n#align floor_lt' floor_lt'\n\n",
+ "floor_lt":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌊ ⌋» -/\ntheorem floor_lt : «expr⌊ ⌋» a < z ↔ a < z :=\n  lt_iff_lt_of_le_iff_le le_floor\n#align floor_lt floor_lt\n\n",
+ "floor_le_sub_one_iff":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌊ ⌋» -/\n@[simp]\ntheorem floor_le_sub_one_iff : «expr⌊ ⌋» a ≤ z - 1 ↔ a < z := by rw [← floor_lt, le_sub_one_iff]\n#align floor_le_sub_one_iff floor_le_sub_one_iff\n\n",
+ "floor_le_one_of_le_one":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌊ ⌋₊» -/\ntheorem floor_le_one_of_le_one (h : a ≤ 1) : «expr⌊ ⌋₊» a ≤ 1 :=\n  floor_le_of_le <| h.trans_eq <| Nat.cast_one.symm\n#align floor_le_one_of_le_one floor_le_one_of_le_one\n\n",
+ "floor_le_of_le":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌊ ⌋₊» -/\ntheorem floor_le_of_le (h : a ≤ n) : «expr⌊ ⌋₊» a ≤ n :=\n  le_imp_le_iff_lt_imp_lt.2 lt_of_lt_floor h\n#align floor_le_of_le floor_le_of_le\n\n",
+ "floor_le_neg_one_iff":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌊ ⌋» -/\n@[simp]\ntheorem floor_le_neg_one_iff : «expr⌊ ⌋» a ≤ -1 ↔ a < 0 := by rw [← zero_sub (1 : ℤ), floor_le_sub_one_iff, cast_zero]\n#align floor_le_neg_one_iff floor_le_neg_one_iff\n\n",
+ "floor_le_ceil":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌊ ⌋» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌈ ⌉» -/\ntheorem floor_le_ceil (a : α) : «expr⌊ ⌋» a ≤ «expr⌈ ⌉» a :=\n  cast_le.1 <| (floor_le _).trans <| le_ceil _\n#align floor_le_ceil floor_le_ceil\n\n",
+ "floor_le":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌊ ⌋» -/\ntheorem floor_le (a : α) : («expr⌊ ⌋» a : α) ≤ a :=\n  gc_coe_floor.l_u_le a\n#align floor_le floor_le\n\n",
+ "floor_int_cast":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌊ ⌋» -/\n@[simp]\ntheorem floor_int_cast (z : ℤ) : «expr⌊ ⌋» (z : α) = z :=\n  eq_of_forall_le_iff fun a => by rw [le_floor, Int.cast_le]\n#align floor_int_cast floor_int_cast\n\n",
+ "floor_int_add":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌊ ⌋» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌊ ⌋» -/\n@[simp]\ntheorem floor_int_add (z : ℤ) (a : α) : «expr⌊ ⌋» (↑z + a) = z + «expr⌊ ⌋» a := by\n  simpa only [add_comm] using floor_add_int a z\n#align floor_int_add floor_int_add\n\n",
+ "floor_int":
+ "#print Nat.floor_int /-\n@[simp]\ntheorem Nat.floor_int : (Nat.floor : ℤ → ℕ) = int.to_nat :=\n  rfl\n#align nat.floor_int Nat.floor_int\n-/\n\n",
+ "floor_fract":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌊ ⌋» -/\n@[simp]\ntheorem floor_fract (a : α) : «expr⌊ ⌋» (fract a) = 0 := by\n  rw [floor_eq_iff, Int.cast_zero, zero_add] <;> exact ⟨fract_nonneg _, fract_lt_one _⟩\n#align floor_fract floor_fract\n\n",
+ "floor_eq_zero_iff":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌊ ⌋» -/\n@[simp]\ntheorem floor_eq_zero_iff : «expr⌊ ⌋» a = 0 ↔ a ∈ Ico (0 : α) 1 := by simp [floor_eq_iff]\n#align floor_eq_zero_iff floor_eq_zero_iff\n\n",
+ "floor_eq_zero":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌊ ⌋₊» -/\n@[simp]\ntheorem floor_eq_zero : «expr⌊ ⌋₊» a = 0 ↔ a < 1 :=\n  by\n  rw [← lt_one_iff, ← @cast_one α]\n  exact floor_lt' nat.one_ne_zero\n#align floor_eq_zero floor_eq_zero\n\n",
+ "floor_eq_on_Ico'":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌊ ⌋» -/\ntheorem floor_eq_on_Ico' (n : ℤ) : ∀ a ∈ Set.Ico (n : α) (n + 1), («expr⌊ ⌋» a : α) = n := fun a ha =>\n  congr_arg _ <| floor_eq_on_Ico n a ha\n#align floor_eq_on_Ico' floor_eq_on_Ico'\n\n",
+ "floor_eq_on_Ico":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌊ ⌋» -/\ntheorem floor_eq_on_Ico (n : ℤ) : ∀ a ∈ Set.Ico (n : α) (n + 1), «expr⌊ ⌋» a = n := fun a ⟨h₀, h₁⟩ =>\n  floor_eq_iff.mpr ⟨h₀, h₁⟩\n#align floor_eq_on_Ico floor_eq_on_Ico\n\n",
+ "floor_eq_iff'":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌊ ⌋₊» -/\ntheorem floor_eq_iff' (hn : n ≠ 0) : «expr⌊ ⌋₊» a = n ↔ ↑n ≤ a ∧ a < ↑n + 1 := by\n  rw [← le_floor_iff' hn, ← Nat.cast_one, ← Nat.cast_add, ← floor_lt' (nat.add_one_ne_zero n), Nat.lt_add_one_iff,\n    le_antisymm_iff, and_comm]\n#align floor_eq_iff' floor_eq_iff'\n\n",
+ "floor_eq_iff":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌊ ⌋» -/\ntheorem floor_eq_iff : «expr⌊ ⌋» a = z ↔ ↑z ≤ a ∧ a < z + 1 := by\n  rw [le_antisymm_iff, le_floor, ← Int.lt_add_one_iff, floor_lt, Int.cast_add, Int.cast_one, and_comm]\n#align floor_eq_iff floor_eq_iff\n\n",
+ "floor_div_nat":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌊ ⌋₊» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌊ ⌋₊» -/\ntheorem floor_div_nat (a : α) (n : ℕ) : «expr⌊ ⌋₊» (a / n) = «expr⌊ ⌋₊» a / n :=\n  by\n  cases' le_total a 0 with ha ha\n  · rw [floor_of_nonpos, floor_of_nonpos ha]\n    · simp\n    apply div_nonpos_of_nonpos_of_nonneg ha n.cast_nonneg\n  obtain rfl | hn := n.eq_zero_or_pos\n  · rw [cast_zero, div_zero, nat.div_zero, floor_zero]\n  refine' (floor_eq_iff _).2 _\n  · exact div_nonneg ha n.cast_nonneg\n  constructor\n  · exact cast_div_le.trans (div_le_div_of_le_of_nonneg (floor_le ha) n.cast_nonneg)\n  rw [div_lt_iff, add_mul, one_mul, ← cast_mul, ← cast_add, ← floor_lt ha]\n  · exact lt_div_mul_add hn\n  · exact cast_pos.2 hn\n#align floor_div_nat floor_div_nat\n\n",
+ "floor_div_eq_div":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌊ ⌋₊» -/\n/-- Natural division is the floor of field division. -/\ntheorem floor_div_eq_div (m n : ℕ) : «expr⌊ ⌋₊» ((m : α) / n) = m / n :=\n  by\n  convert floor_div_nat (m : α) n\n  rw [m.floor_coe]\n#align floor_div_eq_div floor_div_eq_div\n\n",
+ "floor_congr":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌊ ⌋» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌊ ⌋» -/\ntheorem floor_congr (h : ∀ n : ℤ, (n : α) ≤ a ↔ (n : β) ≤ b) : «expr⌊ ⌋» a = «expr⌊ ⌋» b :=\n  (le_floor.2 <| (h _).1 <| floor_le _).antisymm <| le_floor.2 <| (h _).2 <| floor_le _\n#align floor_congr floor_congr\n\n",
+ "floor_coe":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌊ ⌋₊» -/\n@[simp]\ntheorem floor_coe (n : ℕ) : «expr⌊ ⌋₊» (n : α) = n :=\n  eq_of_forall_le_iff fun a => by\n    rw [le_floor_iff, nat.cast_le]\n    exact n.cast_nonneg\n#align floor_coe floor_coe\n\n",
+ "floor_add_one":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌊ ⌋» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌊ ⌋» -/\ntheorem floor_add_one (a : α) : «expr⌊ ⌋» (a + 1) = «expr⌊ ⌋» a + 1 :=\n  by\n  convert floor_add_int a 1\n  exact cast_one.symm\n#align floor_add_one floor_add_one\n\n",
+ "floor_add_nat":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌊ ⌋» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌊ ⌋» -/\n@[simp]\ntheorem floor_add_nat (a : α) (n : ℕ) : «expr⌊ ⌋» (a + n) = «expr⌊ ⌋» a + n := by rw [← Int.cast_ofNat, floor_add_int]\n#align floor_add_nat floor_add_nat\n\n",
+ "floor_add_int":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌊ ⌋» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌊ ⌋» -/\n@[simp]\ntheorem floor_add_int (a : α) (z : ℤ) : «expr⌊ ⌋» (a + z) = «expr⌊ ⌋» a + z :=\n  eq_of_forall_le_iff fun a => by rw [le_floor, ← sub_le_iff_le_add, ← sub_le_iff_le_add, le_floor, Int.cast_sub]\n#align floor_add_int floor_add_int\n\n",
+ "floor_add_fract":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌊ ⌋» -/\n@[simp]\ntheorem floor_add_fract (a : α) : («expr⌊ ⌋» a : α) + fract a = a :=\n  add_sub_cancel'_right _ _\n#align floor_add_fract floor_add_fract\n\n",
+ "ceil_zero":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌈ ⌉» -/\n@[simp]\ntheorem ceil_zero : «expr⌈ ⌉» (0 : α) = 0 := by rw [← cast_zero, ceil_int_cast]\n#align ceil_zero ceil_zero\n\n",
+ "ceil_toNat":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌈ ⌉» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌈ ⌉₊» -/\n#print Int.ceil_toNat /-\ntheorem Int.ceil_toNat (a : α) : («expr⌈ ⌉» a).to_nat = «expr⌈ ⌉₊» a :=\n  rfl\n#align int.ceil_to_nat Int.ceil_toNat\n-/\n\n",
+ "ceil_sub_self_eq":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌈ ⌉» -/\ntheorem ceil_sub_self_eq (ha : fract a ≠ 0) : («expr⌈ ⌉» a : α) - a = 1 - fract a :=\n  by\n  rw [(or_iff_right ha).mp (fract_eq_zero_or_add_one_sub_ceil a)]\n  abel\n#align ceil_sub_self_eq ceil_sub_self_eq\n\n",
+ "ceil_sub_one":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌈ ⌉» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌈ ⌉» -/\n@[simp]\ntheorem ceil_sub_one (a : α) : «expr⌈ ⌉» (a - 1) = «expr⌈ ⌉» a - 1 := by\n  rw [eq_sub_iff_add_eq, ← ceil_add_one, sub_add_cancel]\n#align ceil_sub_one ceil_sub_one\n\n",
+ "ceil_sub_nat":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌈ ⌉» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌈ ⌉» -/\n@[simp]\ntheorem ceil_sub_nat (a : α) (n : ℕ) : «expr⌈ ⌉» (a - n) = «expr⌈ ⌉» a - n := by\n  convert ceil_sub_int a n using 1 <;> simp\n#align ceil_sub_nat ceil_sub_nat\n\n",
+ "ceil_sub_int":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌈ ⌉» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌈ ⌉» -/\n@[simp]\ntheorem ceil_sub_int (a : α) (z : ℤ) : «expr⌈ ⌉» (a - z) = «expr⌈ ⌉» a - z :=\n  eq.trans (by rw [Int.cast_neg, sub_eq_add_neg]) (ceil_add_int _ _)\n#align ceil_sub_int ceil_sub_int\n\n",
+ "ceil_pos":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌈ ⌉» -/\n@[simp]\ntheorem ceil_pos : 0 < «expr⌈ ⌉» a ↔ 0 < a := by rw [lt_ceil, cast_zero]\n#align ceil_pos ceil_pos\n\n",
+ "ceil_one":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌈ ⌉» -/\n@[simp]\ntheorem ceil_one : «expr⌈ ⌉» (1 : α) = 1 := by rw [← cast_one, ceil_int_cast]\n#align ceil_one ceil_one\n\n",
+ "ceil_nonneg":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌈ ⌉» -/\ntheorem ceil_nonneg (ha : 0 ≤ a) : 0 ≤ «expr⌈ ⌉» a := by exact_mod_cast ha.trans (le_ceil a)\n#align ceil_nonneg ceil_nonneg\n\n",
+ "ceil_neg":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌈ ⌉» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌊ ⌋» -/\ntheorem ceil_neg : «expr⌈ ⌉» (-a) = -«expr⌊ ⌋» a :=\n  eq_of_forall_ge_iff fun z => by rw [neg_le, ceil_le, le_floor, Int.cast_neg, neg_le]\n#align ceil_neg ceil_neg\n\n",
+ "ceil_nat_cast":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌈ ⌉» -/\n@[simp]\ntheorem ceil_nat_cast (n : ℕ) : «expr⌈ ⌉» (n : α) = n :=\n  eq_of_forall_ge_iff fun a => by rw [ceil_le, ← cast_coe_nat, cast_le]\n#align ceil_nat_cast ceil_nat_cast\n\n",
+ "ceil_nat":
+ "@[simp]\ntheorem ceil_nat : (Nat.ceil : ℕ → ℕ) = id :=\n  rfl\n#align ceil_nat ceil_nat\n\n",
+ "ceil_mono":
+ "theorem ceil_mono : monotone (ceil : α → ℤ) :=\n  gc_ceil_coe.monotone_l\n#align ceil_mono ceil_mono\n\n",
+ "ceil_lt_add_one":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌈ ⌉» -/\ntheorem ceil_lt_add_one (a : α) : («expr⌈ ⌉» a : α) < a + 1 :=\n  by\n  rw [← lt_ceil, ← Int.cast_one, ceil_add_int]\n  apply lt_add_one\n#align ceil_lt_add_one ceil_lt_add_one\n\n",
+ "ceil_le_floor_add_one":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌈ ⌉» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌊ ⌋» -/\ntheorem ceil_le_floor_add_one (a : α) : «expr⌈ ⌉» a ≤ «expr⌊ ⌋» a + 1 :=\n  by\n  rw [ceil_le, Int.cast_add, Int.cast_one]\n  exact (lt_floor_add_one a).le\n#align ceil_le_floor_add_one ceil_le_floor_add_one\n\n",
+ "ceil_le":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌈ ⌉» -/\ntheorem ceil_le : «expr⌈ ⌉» a ≤ z ↔ a ≤ z :=\n  gc_ceil_coe a z\n#align ceil_le ceil_le\n\n",
+ "ceil_int_cast":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌈ ⌉» -/\n@[simp]\ntheorem ceil_int_cast (z : ℤ) : «expr⌈ ⌉» (z : α) = z :=\n  eq_of_forall_ge_iff fun a => by rw [ceil_le, Int.cast_le]\n#align ceil_int_cast ceil_int_cast\n\n",
+ "ceil_int":
+ "#print Nat.ceil_int /-\n@[simp]\ntheorem Nat.ceil_int : (Nat.ceil : ℤ → ℕ) = int.to_nat :=\n  rfl\n#align nat.ceil_int Nat.ceil_int\n-/\n\n",
+ "ceil_eq_zero_iff":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌈ ⌉» -/\n@[simp]\ntheorem ceil_eq_zero_iff : «expr⌈ ⌉» a = 0 ↔ a ∈ Ioc (-1 : α) 0 := by simp [ceil_eq_iff]\n#align ceil_eq_zero_iff ceil_eq_zero_iff\n\n",
+ "ceil_eq_zero":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌈ ⌉₊» -/\n@[simp]\ntheorem ceil_eq_zero : «expr⌈ ⌉₊» a = 0 ↔ a ≤ 0 := by rw [← le_zero_iff, ceil_le, Nat.cast_zero]\n#align ceil_eq_zero ceil_eq_zero\n\n",
+ "ceil_eq_on_Ioc'":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌈ ⌉» -/\ntheorem ceil_eq_on_Ioc' (z : ℤ) : ∀ a ∈ Set.Ioc (z - 1 : α) z, («expr⌈ ⌉» a : α) = z := fun a ha => by\n  exact_mod_cast ceil_eq_on_Ioc z a ha\n#align ceil_eq_on_Ioc' ceil_eq_on_Ioc'\n\n",
+ "ceil_eq_on_Ioc":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌈ ⌉» -/\ntheorem ceil_eq_on_Ioc (z : ℤ) : ∀ a ∈ Set.Ioc (z - 1 : α) z, «expr⌈ ⌉» a = z := fun a ⟨h₀, h₁⟩ =>\n  ceil_eq_iff.mpr ⟨h₀, h₁⟩\n#align ceil_eq_on_Ioc ceil_eq_on_Ioc\n\n",
+ "ceil_eq_iff":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌈ ⌉» -/\ntheorem ceil_eq_iff : «expr⌈ ⌉» a = z ↔ ↑z - 1 < a ∧ a ≤ z := by\n  rw [← ceil_le, ← Int.cast_one, ← Int.cast_sub, ← lt_ceil, Int.sub_one_lt_iff, le_antisymm_iff, and_comm]\n#align ceil_eq_iff ceil_eq_iff\n\n",
+ "ceil_eq_add_one_sub_fract":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌈ ⌉» -/\ntheorem ceil_eq_add_one_sub_fract (ha : fract a ≠ 0) : («expr⌈ ⌉» a : α) = a + 1 - fract a :=\n  by\n  rw [(or_iff_right ha).mp (fract_eq_zero_or_add_one_sub_ceil a)]\n  abel\n#align ceil_eq_add_one_sub_fract ceil_eq_add_one_sub_fract\n\n",
+ "ceil_congr":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌈ ⌉» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌈ ⌉» -/\ntheorem ceil_congr (h : ∀ n : ℤ, a ≤ n ↔ b ≤ n) : «expr⌈ ⌉» a = «expr⌈ ⌉» b :=\n  (ceil_le.2 <| (h _).2 <| le_ceil _).antisymm <| ceil_le.2 <| (h _).1 <| le_ceil _\n#align ceil_congr ceil_congr\n\n",
+ "ceil_add_one":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌈ ⌉» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌈ ⌉» -/\n@[simp]\ntheorem ceil_add_one (a : α) : «expr⌈ ⌉» (a + 1) = «expr⌈ ⌉» a + 1 :=\n  by\n  convert ceil_add_int a (1 : ℤ)\n  exact cast_one.symm\n#align ceil_add_one ceil_add_one\n\n",
+ "ceil_add_nat":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌈ ⌉» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌈ ⌉» -/\n@[simp]\ntheorem ceil_add_nat (a : α) (n : ℕ) : «expr⌈ ⌉» (a + n) = «expr⌈ ⌉» a + n := by rw [← Int.cast_ofNat, ceil_add_int]\n#align ceil_add_nat ceil_add_nat\n\n",
+ "ceil_add_le":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌈ ⌉» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌈ ⌉» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌈ ⌉» -/\ntheorem ceil_add_le (a b : α) : «expr⌈ ⌉» (a + b) ≤ «expr⌈ ⌉» a + «expr⌈ ⌉» b :=\n  by\n  rw [ceil_le, Int.cast_add]\n  exact add_le_add (le_ceil _) (le_ceil _)\n#align ceil_add_le ceil_add_le\n\n",
+ "ceil_add_int":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌈ ⌉» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌈ ⌉» -/\n@[simp]\ntheorem ceil_add_int (a : α) (z : ℤ) : «expr⌈ ⌉» (a + z) = «expr⌈ ⌉» a + z := by\n  rw [← neg_inj, neg_add', ← floor_neg, ← floor_neg, neg_add', floor_sub_int]\n#align ceil_add_int ceil_add_int\n\n",
+ "ceil_add_ceil_le":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌈ ⌉» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌈ ⌉» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌈ ⌉» -/\ntheorem ceil_add_ceil_le (a b : α) : «expr⌈ ⌉» a + «expr⌈ ⌉» b ≤ «expr⌈ ⌉» (a + b) + 1 :=\n  by\n  rw [← le_sub_iff_add_le, ceil_le, Int.cast_sub, Int.cast_add, Int.cast_one, le_sub_comm]\n  refine' (ceil_lt_add_one _).le.trans _\n  rw [le_sub_iff_add_le', ← add_assoc, add_le_add_iff_right]\n  exact le_ceil _\n#align ceil_add_ceil_le ceil_add_ceil_le\n\n",
+ "cast_floor_eq_int_floor":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌊ ⌋₊» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌊ ⌋» -/\n#print Nat.cast_floor_eq_int_floor /-\ntheorem Nat.cast_floor_eq_int_floor (ha : 0 ≤ a) : («expr⌊ ⌋₊» a : ℤ) = «expr⌊ ⌋» a := by\n  rw [← Int.floor_toNat, Int.toNat_of_nonneg (Int.floor_nonneg.2 ha)]\n#align nat.cast_floor_eq_int_floor Nat.cast_floor_eq_int_floor\n-/\n\n",
+ "cast_floor_eq_cast_int_floor":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌊ ⌋₊» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌊ ⌋» -/\n#print Nat.cast_floor_eq_cast_int_floor /-\ntheorem Nat.cast_floor_eq_cast_int_floor (ha : 0 ≤ a) : («expr⌊ ⌋₊» a : α) = «expr⌊ ⌋» a := by\n  rw [← Nat.cast_floor_eq_int_floor ha, Int.cast_ofNat]\n#align nat.cast_floor_eq_cast_int_floor Nat.cast_floor_eq_cast_int_floor\n-/\n\n",
+ "cast_ceil_eq_int_ceil":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌈ ⌉₊» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌈ ⌉» -/\n#print Nat.cast_ceil_eq_int_ceil /-\ntheorem Nat.cast_ceil_eq_int_ceil (ha : 0 ≤ a) : («expr⌈ ⌉₊» a : ℤ) = «expr⌈ ⌉» a := by\n  rw [← Int.ceil_toNat, Int.toNat_of_nonneg (Int.ceil_nonneg ha)]\n#align nat.cast_ceil_eq_int_ceil Nat.cast_ceil_eq_int_ceil\n-/\n\n",
+ "cast_ceil_eq_cast_int_ceil":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌈ ⌉₊» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌈ ⌉» -/\n#print Nat.cast_ceil_eq_cast_int_ceil /-\ntheorem Nat.cast_ceil_eq_cast_int_ceil (ha : 0 ≤ a) : («expr⌈ ⌉₊» a : α) = «expr⌈ ⌉» a := by\n  rw [← Nat.cast_ceil_eq_int_ceil ha, Int.cast_ofNat]\n#align nat.cast_ceil_eq_cast_int_ceil Nat.cast_ceil_eq_cast_int_ceil\n-/\n\n",
+ "add_one_le_ceil_iff":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌈ ⌉» -/\n@[simp]\ntheorem add_one_le_ceil_iff : z + 1 ≤ «expr⌈ ⌉» a ↔ (z : α) < a := by rw [← lt_ceil, add_one_le_iff]\n#align add_one_le_ceil_iff add_one_le_ceil_iff\n\n",
+ "abs_sub_round_eq_min":
+ "#print abs_sub_round_eq_min /-\ntheorem abs_sub_round_eq_min (x : α) : |x - round x| = min (fract x) (1 - fract x) :=\n  by\n  simp_rw [round, min_def_lt, two_mul, ← lt_tsub_iff_left]\n  cases' lt_or_ge (fract x) (1 - fract x) with hx hx\n  · rw [if_pos hx, if_pos hx, self_sub_floor, abs_fract]\n  · have : 0 < fract x :=\n      by\n      replace hx : 0 < fract x + fract x := lt_of_lt_of_le zero_lt_one (tsub_le_iff_left.mp hx)\n      simpa only [← two_mul, zero_lt_mul_left, zero_lt_two] using hx\n    rw [if_neg (not_lt.mpr hx), if_neg (not_lt.mpr hx), abs_sub_comm, ceil_sub_self_eq this.ne.symm, abs_one_sub_fract]\n#align abs_sub_round_eq_min abs_sub_round_eq_min\n-/\n\n",
+ "abs_sub_round_div_natCast_eq":
+ "#print abs_sub_round_div_natCast_eq /-\ntheorem abs_sub_round_div_natCast_eq {m n : ℕ} : |(m : α) / n - round ((m : α) / n)| = ↑(min (m % n) (n - m % n)) / n :=\n  by\n  rcases n.eq_zero_or_pos with (rfl | hn)\n  · simp\n  have hn' : 0 < (n : α) := by\n    norm_cast\n    assumption\n  rw [abs_sub_round_eq_min, nat.cast_min, ← min_div_div_right hn'.le, fract_div_nat_cast_eq_div_nat_cast_mod,\n    Nat.cast_sub (m.mod_lt hn).le, sub_div, div_self hn'.ne.symm]\n#align abs_sub_round_div_nat_cast_eq abs_sub_round_div_natCast_eq\n-/\n\n",
+ "abs_sub_round":
+ "#print abs_sub_round /-\ntheorem abs_sub_round (x : α) : |x - round x| ≤ 1 / 2 :=\n  by\n  rw [round_eq, abs_sub_le_iff]\n  have := floor_le (x + 1 / 2)\n  have := lt_floor_add_one (x + 1 / 2)\n  constructor <;> linarith\n#align abs_sub_round abs_sub_round\n-/\n\n",
+ "abs_sub_lt_one_of_floor_eq_floor":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌊ ⌋» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌊ ⌋» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌊ ⌋» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌊ ⌋» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌊ ⌋» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌊ ⌋» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌊ ⌋» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⌊ ⌋» -/\ntheorem abs_sub_lt_one_of_floor_eq_floor {α : Type _} [LinearOrderedCommRing α] [FloorRing α] {a b : α}\n    (h : «expr⌊ ⌋» a = «expr⌊ ⌋» b) : |a - b| < 1 :=\n  by\n  have : a < «expr⌊ ⌋» a + 1 := lt_floor_add_one a\n  have : b < «expr⌊ ⌋» b + 1 := lt_floor_add_one b\n  have : («expr⌊ ⌋» a : α) = «expr⌊ ⌋» b := Int.cast_inj.2 h\n  have : («expr⌊ ⌋» a : α) ≤ a := floor_le a\n  have : («expr⌊ ⌋» b : α) ≤ b := floor_le b\n  exact abs_sub_lt_iff.2 ⟨by linarith, by linarith⟩\n#align abs_sub_lt_one_of_floor_eq_floor abs_sub_lt_one_of_floor_eq_floor\n\n",
+ "abs_one_sub_fract":
+ "@[simp]\ntheorem abs_one_sub_fract : |1 - fract a| = 1 - fract a :=\n  abs_eq_self.mpr <| sub_nonneg.mpr (fract_lt_one a).le\n#align abs_one_sub_fract abs_one_sub_fract\n\n",
+ "abs_fract":
+ "theorem abs_fract : |Int.fract a| = Int.fract a :=\n  abs_eq_self.mpr <| fract_nonneg a\n#align abs_fract abs_fract\n\n"}

@@ -1,0 +1,4 @@
+{"ex_of_psig":
+ "#print ex_of_psig /-\n/-\nCopyright (c) 2014 Microsoft Corporation. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthor: Leonardo de Moura, Jeremy Avigad, Floris van Doorn\n-/\ntheorem ex_of_psig {α : Type u} {p : α → Prop} : (Σ'x, p x) → ∃ x, p x\n  | ⟨x, hx⟩ => ⟨x, hx⟩\n#align ex_of_psig ex_of_psig\n-/\n\n",
+ "eq":
+ "protected theorem psigma.eq : ∀ {p₁ p₂ : PSigma β} (h₁ : p₁.1 = p₂.1), (eq.rec_on h₁ p₁.2 : β p₂.1) = p₂.2 → p₁ = p₂\n  | ⟨a, b⟩, ⟨a, b⟩, rfl, rfl => rfl\n#align psigma.eq psigma.eq\n\n"}

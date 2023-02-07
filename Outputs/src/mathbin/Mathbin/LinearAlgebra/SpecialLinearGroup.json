@@ -1,0 +1,44 @@
+{"to_lin'_to_linear_map":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr↑ₘ » -/\ntheorem to_lin'_to_linear_map (A : special_linear_group n R) :\n    ↑(special_linear_group.to_lin' A) = matrix.to_lin' («expr↑ₘ » A) :=\n  rfl\n#align to_lin'_to_linear_map to_lin'_to_linear_map\n\n",
+ "to_lin'_symm_to_linear_map":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr↑ₘ » -/\ntheorem to_lin'_symm_to_linear_map (A : special_linear_group n R) : ↑A.to_lin'.symm = matrix.to_lin' («expr↑ₘ » A⁻¹) :=\n  rfl\n#align to_lin'_symm_to_linear_map to_lin'_symm_to_linear_map\n\n",
+ "to_lin'_symm_apply":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr↑ₘ » -/\ntheorem to_lin'_symm_apply (A : special_linear_group n R) (v : n → R) :\n    A.to_lin'.symm v = matrix.to_lin' («expr↑ₘ » A⁻¹) v :=\n  rfl\n#align to_lin'_symm_apply to_lin'_symm_apply\n\n",
+ "to_lin'_injective":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →* » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ₗ[ ] » -/\ntheorem to_lin'_injective :\n    function.injective («expr⇑ » (to_lin' : «expr →* » (special_linear_group n R) («expr ≃ₗ[ ] » (n → R) R (n → R)))) :=\n  fun A B h => subtype.coe_injective <| matrix.to_lin'.injective <| linear_equiv.to_linear_map_injective.eq_iff.mpr h\n#align to_lin'_injective to_lin'_injective\n\n",
+ "to_lin'_apply":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr↑ₘ » -/\ntheorem to_lin'_apply (A : special_linear_group n R) (v : n → R) :\n    special_linear_group.to_lin' A v = matrix.to_lin' («expr↑ₘ » A) v :=\n  rfl\n#align to_lin'_apply to_lin'_apply\n\n",
+ "row_ne_zero":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr↑ₘ » -/\ntheorem row_ne_zero [nontrivial R] (g : special_linear_group n R) (i : n) : («expr↑ₘ » g) i ≠ 0 := fun h =>\n  g.det_ne_zero <| det_eq_zero_of_row_eq_zero i <| by simp [h]\n#align row_ne_zero row_ne_zero\n\n",
+ "ext_iff":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr↑ₘ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr↑ₘ » -/\n/-\nCopyright (c) 2020 Anne Baanen. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Anne Baanen\n-/\n/- In this file, Lean often has a hard time working out the values of `n` and `R` for an expression\nlike `det ↑A`. Rather than writing `(A : matrix n n R)` everywhere in this file which is annoyingly\nverbose, or `A.val` which is not the simp-normal form for subtypes, we create a local notation\n`↑ₘA`. This notation references the local `n` and `R` variables, so is not valid as a global\nnotation. -/\ntheorem ext_iff (A B : special_linear_group n R) : A = B ↔ ∀ i j, («expr↑ₘ » A) i j = («expr↑ₘ » B) i j :=\n  subtype.ext_iff.trans matrix.ext_iff.symm\n#align ext_iff ext_iff\n\n",
+ "ext":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr↑ₘ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr↑ₘ » -/\n@[ext]\ntheorem ext (A B : special_linear_group n R) : (∀ i j, («expr↑ₘ » A) i j = («expr↑ₘ » B) i j) → A = B :=\n  (special_linear_group.ext_iff A B).mpr\n#align ext ext\n\n",
+ "det_ne_zero":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr↑ₘ » -/\ntheorem det_ne_zero [nontrivial R] (g : special_linear_group n R) : det («expr↑ₘ » g) ≠ 0 :=\n  by\n  rw [g.det_coe]\n  norm_num\n#align det_ne_zero det_ne_zero\n\n",
+ "det_coe":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr↑ₘ » -/\n@[simp]\ntheorem det_coe : det («expr↑ₘ » A) = 1 :=\n  A.2\n#align det_coe det_coe\n\n",
+ "coe_to_GL":
+ "theorem coe_to_GL (A : special_linear_group n R) : ↑A.to_GL = A.to_lin'.to_linear_map :=\n  rfl\n#align coe_to_GL coe_to_GL\n\n",
+ "coe_pow":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr↑ₘ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr↑ₘ » -/\n@[simp]\ntheorem coe_pow (m : ℕ) : «expr↑ₘ » (A ^ m) = «expr↑ₘ » A ^ m :=\n  rfl\n#align coe_pow coe_pow\n\n",
+ "coe_one":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr↑ₘ » -/\n@[simp]\ntheorem coe_one : «expr↑ₘ » (1 : special_linear_group n R) = (1 : matrix n n R) :=\n  rfl\n#align coe_one coe_one\n\n",
+ "coe_neg":
+ "@[simp]\ntheorem coe_neg (g : special_linear_group n R) : ↑(-g) = -(g : matrix n n R) :=\n  rfl\n#align coe_neg coe_neg\n\n",
+ "coe_mul":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr↑ₘ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `matrix.mul -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr↑ₘ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr↑ₘ » -/\n@[simp]\ntheorem coe_mul : «expr↑ₘ » (A * B) = matrix.mul («expr↑ₘ » A) («expr↑ₘ » B) :=\n  rfl\n#align coe_mul coe_mul\n\n",
+ "coe_mk":
+ "@[simp]\ntheorem coe_mk (A : matrix n n R) (h : det A = 1) : ↑(⟨A, h⟩ : special_linear_group n R) = A :=\n  rfl\n#align coe_mk coe_mk\n\n",
+ "coe_matrix_coe":
+ "@[simp]\ntheorem coe_matrix_coe (g : special_linear_group n ℤ) :\n    ↑(g : special_linear_group n R) = (↑g : matrix n n ℤ).map (Int.castRingHom R) :=\n  map_apply_coe (Int.castRingHom R) g\n#align coe_matrix_coe coe_matrix_coe\n\n",
+ "coe_inv":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr↑ₘ » -/\n@[simp]\ntheorem coe_inv : «expr↑ₘ » A⁻¹ = adjugate A :=\n  rfl\n#align coe_inv coe_inv\n\n",
+ "coe_int_neg":
+ "@[simp]\ntheorem coe_int_neg (g : special_linear_group n ℤ) : ↑(-g) = (-↑g : special_linear_group n R) :=\n  subtype.ext <| (@ring_hom.map_matrix n _ _ _ _ _ _ (Int.castRingHom R)).map_neg ↑g\n#align coe_int_neg coe_int_neg\n\n",
+ "coe_fn_eq_coe":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr↑ₘ » -/\n-- this section should be last to ensure we do not use it in lemmas\n@[simp]\ntheorem coe_fn_eq_coe (s : special_linear_group n R) : «expr⇑ » s = «expr↑ₘ » s :=\n  rfl\n#align coe_fn_eq_coe coe_fn_eq_coe\n\n",
+ "SL2_inv_expl_det":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `special_linear_group.fin -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr![ ,]» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr![ ,]» -/\ntheorem SL2_inv_expl_det (A : special_linear_group.fin 2 R) :\n    det («expr![ ,]» \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr![ ,]»\") = 1 :=\n  by\n  rw [matrix.det_fin_two, mul_comm]\n  simp only [subtype.val_eq_coe, cons_val_zero, cons_val_one, head_cons, mul_neg, neg_mul, neg_neg]\n  have := A.2\n  rw [matrix.det_fin_two] at this\n  convert this\n#align SL2_inv_expl_det SL2_inv_expl_det\n\n",
+ "SL2_inv_expl":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `special_linear_group.fin -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr![ ,]» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr![ ,]» -/\ntheorem SL2_inv_expl (A : special_linear_group.fin 2 R) :\n    A⁻¹ =\n      ⟨«expr![ ,]» \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr![ ,]»\",\n        SL2_inv_expl_det A⟩ :=\n  by\n  ext\n  have := matrix.adjugate_fin_two A.1\n  simp only [subtype.val_eq_coe] at this\n  rw [coe_inv, this]\n  rfl\n#align SL2_inv_expl SL2_inv_expl\n\n"}

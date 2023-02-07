@@ -1,0 +1,20 @@
+{"of_fn_id":
+ "theorem of_fn_id (n) : ofFn id = finRange n :=\n  of_fn_eq_pmap\n#align of_fn_id of_fn_id\n\n",
+ "of_fn_eq_pmap":
+ "theorem of_fn_eq_pmap {α n} {f : fin n → α} : ofFn f = pmap (fun i hi => f ⟨i, hi⟩) (range n) fun _ => mem_range.1 := by\n  rw [pmap_eq_map_attach] <;>\n    exact\n      ext_le (by simp) fun i hi1 hi2 => by\n        simp at hi1\n        simp [nth_le_of_fn f ⟨i, hi1⟩, -subtype.val_eq_coe]\n#align of_fn_eq_pmap of_fn_eq_pmap\n\n",
+ "of_fn_eq_map":
+ "theorem of_fn_eq_map {α n} {f : fin n → α} : ofFn f = (finRange n).map f := by\n  rw [← of_fn_id, map_of_fn, function.right_id]\n#align of_fn_eq_map of_fn_eq_map\n\n",
+ "of_fn_comp_perm":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `list.perm -/\n/-- The list obtained from a permutation of a tuple `f` is permutation equivalent to\nthe list obtained from `f`. -/\ntheorem equiv.perm.of_fn_comp_perm {n : ℕ} {α : Type u} (σ : equiv.perm (fin n)) (f : fin n → α) :\n    list.perm (ofFn (f ∘ σ)) (ofFn f) :=\n  by\n  rw [of_fn_eq_map, of_fn_eq_map, ← map_map]\n  exact σ.map_fin_range_perm.map f\n#align equiv.perm.of_fn_comp_perm equiv.perm.of_fn_comp_perm\n\n",
+ "nodup_of_fn_of_injective":
+ "theorem nodup_of_fn_of_injective {α n} {f : fin n → α} (hf : function.injective f) : Nodup (ofFn f) :=\n  by\n  rw [of_fn_eq_pmap]\n  exact (nodup_range n).pmap fun _ _ _ _ H => fin.veq_of_eq <| hf H\n#align nodup_of_fn_of_injective nodup_of_fn_of_injective\n\n",
+ "nodup_of_fn":
+ "theorem nodup_of_fn {α n} {f : fin n → α} : Nodup (ofFn f) ↔ function.injective f :=\n  by\n  refine' ⟨_, nodup_of_fn_of_injective⟩\n  refine' fin.cons_induction _ (fun n x₀ xs ih => _) f\n  · intro h\n    exact function.injective_of_subsingleton _\n  · intro h\n    rw [fin.cons_injective_iff]\n    simp_rw [of_fn_succ, fin.cons_succ, nodup_cons, fin.cons_zero, mem_of_fn] at h\n    exact h.imp_right ih\n#align nodup_of_fn nodup_of_fn\n\n",
+ "map_nth_le":
+ "@[simp]\ntheorem map_nth_le (l : list α) : ((finRange l.length).map fun n => l.nth_le n n.2) = l :=\n  ext_nthLe (by rw [length_map, length_fin_range]) fun n _ h =>\n    by\n    rw [← nth_le_map_rev]\n    congr\n    · rw [nth_le_fin_range]\n      rfl\n    · rw [length_fin_range]\n      exact h\n#align map_nth_le map_nth_le\n\n",
+ "map_fin_range_perm":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `list.perm -/\ntheorem equiv.perm.map_fin_range_perm {n : ℕ} (σ : equiv.perm (fin n)) : list.perm (map σ (finRange n)) (finRange n) :=\n  by\n  rw [perm_ext ((nodup_fin_range n).map σ.injective) <| nodup_fin_range n]\n  simpa only [mem_map, mem_fin_range, true_and_iff, iff_true_iff] using σ.surjective\n#align equiv.perm.map_fin_range_perm equiv.perm.map_fin_range_perm\n\n",
+ "map_coe_fin_range":
+ "/-\nCopyright (c) 2018 Mario Carneiro. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Mario Carneiro, Kenny Lau, Scott Morrison\n-/\n@[simp]\ntheorem map_coe_fin_range (n : ℕ) : (finRange n).map coe = list.range n :=\n  by\n  simp_rw [fin_range, map_pmap, Fin.val_mk, pmap_eq_map]\n  exact list.map_id _\n#align map_coe_fin_range map_coe_fin_range\n\n",
+ "fin_range_succ_eq_map":
+ "theorem fin_range_succ_eq_map (n : ℕ) : finRange n.succ = 0 :: (finRange n).map fin.succ :=\n  by\n  apply map_injective_iff.mpr Fin.val_injective\n  rw [map_cons, map_coe_fin_range, range_succ_eq_map, Fin.val_zero, ← map_coe_fin_range, map_map, map_map,\n    function.comp, function.comp]\n  congr 2 with x\n  exact (Fin.val_succ _).symm\n#align fin_range_succ_eq_map fin_range_succ_eq_map\n\n"}

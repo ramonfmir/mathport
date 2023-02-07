@@ -1,0 +1,64 @@
+{"union":
+ "theorem is_bounded.union (hs : is_bounded s) (ht : is_bounded t) : is_bounded (s ∪ t) :=\n  is_bounded_union.2 ⟨hs, ht⟩\n#align is_bounded.union is_bounded.union\n\n",
+ "superset":
+ "theorem is_cobounded.superset (hs : is_cobounded s) (ht : s ⊆ t) : is_cobounded t :=\n  mem_of_superset hs ht\n#align is_cobounded.superset is_cobounded.superset\n\n",
+ "subset":
+ "theorem is_bounded.subset (ht : is_bounded t) (hs : s ⊆ t) : is_bounded s :=\n  ht.superset (compl_subset_compl.mpr hs)\n#align is_bounded.subset is_bounded.subset\n\n",
+ "sUnion_bounded_univ":
+ "@[simp]\ntheorem sUnion_bounded_univ : ⋃₀ { s : set α | is_bounded s } = univ :=\n  unionₛ_eq_univ_iff.2 fun a => ⟨{a}, is_bounded_singleton, mem_singleton a⟩\n#align sUnion_bounded_univ sUnion_bounded_univ\n\n",
+ "is_cobounded_univ":
+ "@[simp]\ntheorem is_cobounded_univ : is_cobounded (univ : set α) :=\n  univ_mem\n#align is_cobounded_univ is_cobounded_univ\n\n",
+ "is_cobounded_sInter":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⋂₀ » -/\ntheorem is_cobounded_sInter {S : set (set α)} (hs : S.finite) : is_cobounded («expr⋂₀ » S) ↔ ∀ s ∈ S, is_cobounded s :=\n  sInter_mem hs\n#align is_cobounded_sInter is_cobounded_sInter\n\n",
+ "is_cobounded_of_bounded_iff":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\ntheorem is_cobounded_of_bounded_iff (B : set (set α)) {empty_mem subset_mem union_mem sUnion_univ} :\n    @is_cobounded _ (of_bounded B empty_mem subset_mem union_mem sUnion_univ) s ↔ «expr ᶜ» s ∈ B :=\n  iff.rfl\n#align is_cobounded_of_bounded_iff is_cobounded_of_bounded_iff\n\n",
+ "is_cobounded_inter":
+ "@[simp]\ntheorem is_cobounded_inter : is_cobounded (s ∩ t) ↔ is_cobounded s ∧ is_cobounded t :=\n  inter_mem_iff\n#align is_cobounded_inter is_cobounded_inter\n\n",
+ "is_cobounded_def":
+ "/-\nCopyright (c) 2022 Jireh Loreaux. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Jireh Loreaux\n-/\ntheorem is_cobounded_def {s : set α} : is_cobounded s ↔ s ∈ cobounded α :=\n  iff.rfl\n#align is_cobounded_def is_cobounded_def\n\n",
+ "is_cobounded_compl_iff":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\n@[simp]\ntheorem is_cobounded_compl_iff : is_cobounded («expr ᶜ» s) ↔ is_bounded s :=\n  iff.rfl\n#align is_cobounded_compl_iff is_cobounded_compl_iff\n\n",
+ "is_cobounded_bInter_finset":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⋂ , » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⋂ , » -/\n@[simp]\ntheorem is_cobounded_bInter_finset (s : Finset ι) {f : ι → set α} :\n    is_cobounded\n        («expr⋂ , » \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⋂ , »\" (f i)) ↔\n      ∀ i ∈ s, is_cobounded (f i) :=\n  bInter_finset_mem s\n#align is_cobounded_bInter_finset is_cobounded_bInter_finset\n\n",
+ "is_cobounded_bInter":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⋂ , » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⋂ , » -/\ntheorem is_cobounded_bInter {s : set ι} {f : ι → set α} (hs : s.finite) :\n    is_cobounded\n        («expr⋂ , » \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⋂ , »\" (f i)) ↔\n      ∀ i ∈ s, is_cobounded (f i) :=\n  bInter_mem hs\n#align is_cobounded_bInter is_cobounded_bInter\n\n",
+ "is_cobounded_Inter":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⋂ , » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⋂ , » -/\n@[simp]\ntheorem is_cobounded_Inter [Finite ι] {f : ι → set α} :\n    is_cobounded\n        («expr⋂ , » \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⋂ , »\" (f i)) ↔\n      ∀ i, is_cobounded (f i) :=\n  Inter_mem\n#align is_cobounded_Inter is_cobounded_Inter\n\n",
+ "is_bounded_univ":
+ "theorem is_bounded_univ : is_bounded (univ : set α) ↔ bounded_space α :=\n  ⟨fun h => ⟨h⟩, fun h => h.1⟩\n#align is_bounded_univ is_bounded_univ\n\n",
+ "is_bounded_union":
+ "@[simp]\ntheorem is_bounded_union : is_bounded (s ∪ t) ↔ is_bounded s ∧ is_bounded t := by\n  simp only [← is_cobounded_compl_iff, compl_union, is_cobounded_inter]\n#align is_bounded_union is_bounded_union\n\n",
+ "is_bounded_singleton":
+ "@[simp]\ntheorem is_bounded_singleton : is_bounded ({x} : set α) :=\n  by\n  rw [is_bounded_def]\n  exact le_cofinite _ (finite_singleton x).compl_mem_cofinite\n#align is_bounded_singleton is_bounded_singleton\n\n",
+ "is_bounded_sUnion":
+ "theorem is_bounded_sUnion {S : set (set α)} (hs : S.finite) : is_bounded (⋃₀ S) ↔ ∀ s ∈ S, is_bounded s := by\n  rw [sUnion_eq_bUnion, is_bounded_bUnion hs]\n#align is_bounded_sUnion is_bounded_sUnion\n\n",
+ "is_bounded_of_bounded_iff":
+ "theorem is_bounded_of_bounded_iff (B : set (set α)) {empty_mem subset_mem union_mem sUnion_univ} :\n    @is_bounded _ (of_bounded B empty_mem subset_mem union_mem sUnion_univ) s ↔ s ∈ B := by\n  rw [is_bounded_def, ← filter.mem_sets, of_bounded_cobounded_sets, Set.mem_setOf_eq, compl_compl]\n#align is_bounded_of_bounded_iff is_bounded_of_bounded_iff\n\n",
+ "is_bounded_empty":
+ "@[simp]\ntheorem is_bounded_empty : is_bounded (∅ : set α) :=\n  by\n  rw [is_bounded_def, compl_empty]\n  exact univ_mem\n#align is_bounded_empty is_bounded_empty\n\n",
+ "is_bounded_def":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\ntheorem is_bounded_def {s : set α} : is_bounded s ↔ «expr ᶜ» s ∈ cobounded α :=\n  iff.rfl\n#align is_bounded_def is_bounded_def\n\n",
+ "is_bounded_compl_iff":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\n@[simp]\ntheorem is_bounded_compl_iff : is_bounded («expr ᶜ» s) ↔ is_cobounded s := by\n  rw [is_bounded_def, is_cobounded_def, compl_compl]\n#align is_bounded_compl_iff is_bounded_compl_iff\n\n",
+ "is_bounded_bUnion_finset":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⋃ , » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⋃ , » -/\ntheorem is_bounded_bUnion_finset (s : Finset ι) {f : ι → set α} :\n    is_bounded («expr⋃ , » \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⋃ , »\" (f i)) ↔\n      ∀ i ∈ s, is_bounded (f i) :=\n  is_bounded_bUnion s.finite_to_set\n#align is_bounded_bUnion_finset is_bounded_bUnion_finset\n\n",
+ "is_bounded_bUnion":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⋃ , » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⋃ , » -/\ntheorem is_bounded_bUnion {s : set ι} {f : ι → set α} (hs : s.finite) :\n    is_bounded («expr⋃ , » \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⋃ , »\" (f i)) ↔\n      ∀ i ∈ s, is_bounded (f i) :=\n  by simp only [← is_cobounded_compl_iff, compl_Union, is_cobounded_bInter hs]\n#align is_bounded_bUnion is_bounded_bUnion\n\n",
+ "is_bounded_Union":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⋃ , » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⋃ , » -/\n@[simp]\ntheorem is_bounded_Union [Finite ι] {s : ι → set α} :\n    is_bounded («expr⋃ , » \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⋃ , »\" (s i)) ↔\n      ∀ i, is_bounded (s i) :=\n  by rw [← sUnion_range, is_bounded_sUnion (finite_range s), forall_range_iff]\n#align is_bounded_Union is_bounded_Union\n\n",
+ "is_bounded":
+ "theorem set.finite.is_bounded [bornology α] {s : set α} (hs : s.finite) : is_bounded s :=\n  bornology.le_cofinite α hs.compl_mem_cofinite\n#align set.finite.is_bounded set.finite.is_bounded\n\n",
+ "inter":
+ "theorem is_cobounded.inter (hs : is_cobounded s) (ht : is_cobounded t) : is_cobounded (s ∩ t) :=\n  is_cobounded_inter.2 ⟨hs, ht⟩\n#align is_cobounded.inter is_cobounded.inter\n\n",
+ "ext_iff_is_bounded":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\ntheorem ext_iff_is_bounded {t t' : bornology α} : t = t' ↔ ∀ s, @is_bounded α t s ↔ @is_bounded α t' s :=\n  ⟨fun h s => h ▸ iff.rfl, fun h => by\n    ext\n    simpa only [is_bounded_def, compl_compl] using h («expr ᶜ» s)⟩\n#align ext_iff_is_bounded ext_iff_is_bounded\n\n",
+ "ext_iff'":
+ "theorem ext_iff' {t t' : bornology α} : t = t' ↔ ∀ s, (@cobounded α t).sets s ↔ (@cobounded α t').sets s :=\n  (ext_iff _ _).trans filter.ext_iff\n#align ext_iff' ext_iff'\n\n",
+ "comap_cobounded_le_iff":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\ntheorem comap_cobounded_le_iff [bornology β] {f : α → β} :\n    (cobounded β).comap f ≤ cobounded α ↔ ∀ ⦃s⦄, is_bounded s → is_bounded («expr '' » f s) :=\n  by\n  refine'\n    ⟨fun h s hs => _, fun h t ht =>\n      ⟨«expr ᶜ» («expr '' » f («expr ᶜ» t)), h <| is_cobounded.compl ht,\n        compl_subset_comm.1 <| subset_preimage_image _ _⟩⟩\n  obtain ⟨t, ht, hts⟩ := h hs.compl\n  rw [subset_compl_comm, ← preimage_compl] at hts\n  exact (is_cobounded.compl ht).subset ((image_subset f hts).trans <| image_preimage_subset _ _)\n#align comap_cobounded_le_iff comap_cobounded_le_iff\n\n",
+ "cobounded_eq_bot_iff":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\ntheorem cobounded_eq_bot_iff : cobounded α = «expr⊥» ↔ bounded_space α := by\n  rw [← is_bounded_univ, is_bounded_def, compl_univ, empty_mem_iff_bot]\n#align cobounded_eq_bot_iff cobounded_eq_bot_iff\n\n",
+ "cobounded_eq_bot":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n@[simp]\ntheorem cobounded_eq_bot : cobounded α = «expr⊥» :=\n  cobounded_eq_bot_iff.2 ‹_›\n#align cobounded_eq_bot cobounded_eq_bot\n\n",
+ "all":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\ntheorem is_cobounded.all (s : set α) : is_cobounded s :=\n  compl_compl s ▸ is_bounded.all («expr ᶜ» s)\n#align is_cobounded.all is_cobounded.all\n\n"}

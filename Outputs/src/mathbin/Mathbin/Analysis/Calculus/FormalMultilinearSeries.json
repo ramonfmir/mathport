@@ -1,0 +1,52 @@
+{"remove_zero_of_pos":
+ "theorem remove_zero_of_pos (p : formal_multilinear_series 𝕜 E F) {n : ℕ} (h : 0 < n) : p.remove_zero n = p n :=\n  by\n  rw [← nat.succ_pred_eq_of_pos h]\n  rfl\n#align remove_zero_of_pos remove_zero_of_pos\n\n",
+ "remove_zero_coeff_zero":
+ "@[simp]\ntheorem remove_zero_coeff_zero (p : formal_multilinear_series 𝕜 E F) : p.remove_zero 0 = 0 :=\n  rfl\n#align remove_zero_coeff_zero remove_zero_coeff_zero\n\n",
+ "remove_zero_coeff_succ":
+ "@[simp]\ntheorem remove_zero_coeff_succ (p : formal_multilinear_series 𝕜 E F) (n : ℕ) : p.remove_zero (n + 1) = p (n + 1) :=\n  rfl\n#align remove_zero_coeff_succ remove_zero_coeff_succ\n\n",
+ "order_zero":
+ "@[simp]\ntheorem order_zero : (0 : formal_multilinear_series 𝕜 E F).order = 0 := by simp [order]\n#align order_zero order_zero\n\n",
+ "order_eq_zero_iff'":
+ "theorem order_eq_zero_iff' : p.order = 0 ↔ p = 0 ∨ p 0 ≠ 0 := by by_cases h : p = 0 <;> simp [h, order_eq_zero_iff]\n#align order_eq_zero_iff' order_eq_zero_iff'\n\n",
+ "order_eq_zero_iff":
+ "theorem order_eq_zero_iff (hp : p ≠ 0) : p.order = 0 ↔ p 0 ≠ 0 := by\n  classical\n    have : ∃ n, p n ≠ 0 := formal_multilinear_series.ne_iff.mp hp\n    simp [order_eq_find this, hp]\n#align order_eq_zero_iff order_eq_zero_iff\n\n",
+ "order_eq_find'":
+ "theorem order_eq_find' [decidable_pred fun n => p n ≠ 0] (hp : p ≠ 0) :\n    p.order = nat.find (formal_multilinear_series.ne_iff.mp hp) :=\n  order_eq_find _\n#align order_eq_find' order_eq_find'\n\n",
+ "order_eq_find":
+ "theorem order_eq_find [decidable_pred fun n => p n ≠ 0] (hp : ∃ n, p n ≠ 0) : p.order = nat.find hp := by\n  simp [order, Inf, hp]\n#align order_eq_find order_eq_find\n\n",
+ "norm_apply_eq_norm_coef":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr‖ ‖» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr‖ ‖» -/\n@[simp]\ntheorem norm_apply_eq_norm_coef : «expr‖ ‖» (p n) = «expr‖ ‖» (coeff p n) := by\n  rw [← mk_pi_field_coeff_eq p, continuous_multilinear_map.norm_mk_pi_field]\n#align norm_apply_eq_norm_coef norm_apply_eq_norm_coef\n\n",
+ "ne_zero_of_order_ne_zero":
+ "theorem ne_zero_of_order_ne_zero (hp : p.order ≠ 0) : p ≠ 0 := fun h => by simpa [h] using hp\n#align ne_zero_of_order_ne_zero ne_zero_of_order_ne_zero\n\n",
+ "ne_iff":
+ "protected theorem ne_iff {p q : formal_multilinear_series 𝕜 E F} : p ≠ q ↔ ∃ n, p n ≠ q n :=\n  function.ne_iff\n#align ne_iff ne_iff\n\n",
+ "mk_pi_field_coeff_eq":
+ "theorem mk_pi_field_coeff_eq (p : formal_multilinear_series 𝕜 𝕜 E) (n : ℕ) :\n    continuous_multilinear_map.mk_pi_field 𝕜 (fin n) (p.coeff n) = p n :=\n  (p n).mk_pi_field_apply_one_eq_self\n#align mk_pi_field_coeff_eq mk_pi_field_coeff_eq\n\n",
+ "ext_iff":
+ "/-\nCopyright (c) 2019 Sébastien Gouëzel. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Sébastien Gouëzel\n-/\n/- `derive` is not able to find the module structure, probably because Lean is confused by the\ndependent types. We register it explicitly. -/\nprotected theorem ext_iff {p q : formal_multilinear_series 𝕜 E F} : p = q ↔ ∀ n, p n = q n :=\n  function.funext_iff\n#align ext_iff ext_iff\n\n",
+ "const_formal_multilinear_series_apply":
+ "@[simp]\ntheorem const_formal_multilinear_series_apply [nontrivially_normed_field 𝕜] [normed_add_comm_group E]\n    [normed_add_comm_group F] [normed_space 𝕜 E] [normed_space 𝕜 F] {c : F} {n : ℕ} (hn : n ≠ 0) :\n    const_formal_multilinear_series 𝕜 E c n = 0 :=\n  nat.cases_on n (fun hn => (hn rfl).elim) (fun _ _ => rfl) hn\n#align const_formal_multilinear_series_apply const_formal_multilinear_series_apply\n\n",
+ "congr":
+ "#print congr /-\n/-- Convenience congruence lemma stating in a dependent setting that, if the arguments to a formal\nmultilinear series are equal, then the values are also equal. -/\ntheorem congr (p : formal_multilinear_series 𝕜 E F) {m n : ℕ} {v : fin m → E} {w : fin n → E} (h1 : m = n)\n    (h2 : ∀ (i : ℕ) (him : i < m) (hin : i < n), v ⟨i, him⟩ = w ⟨i, hin⟩) : p m v = p n w :=\n  by\n  cases h1\n  congr with ⟨i, hi⟩\n  exact h2 i hi hi\n#align congr congr\n-/\n\n",
+ "comp_formal_multilinear_series_apply'":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →L[ ] » -/\ntheorem comp_formal_multilinear_series_apply' (f : «expr →L[ ] » F 𝕜 G) (p : formal_multilinear_series 𝕜 E F) (n : ℕ)\n    (v : fin n → E) : (f.comp_formal_multilinear_series p) n v = f (p n v) :=\n  rfl\n#align comp_formal_multilinear_series_apply' comp_formal_multilinear_series_apply'\n\n",
+ "comp_formal_multilinear_series_apply":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →L[ ] » -/\n@[simp]\ntheorem comp_formal_multilinear_series_apply (f : «expr →L[ ] » F 𝕜 G) (p : formal_multilinear_series 𝕜 E F) (n : ℕ) :\n    (f.comp_formal_multilinear_series p) n = f.comp_continuous_multilinear_map (p n) :=\n  rfl\n#align comp_formal_multilinear_series_apply comp_formal_multilinear_series_apply\n\n",
+ "comp_continuous_linear_map_apply":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →L[ ] » -/\n@[simp]\ntheorem comp_continuous_linear_map_apply (p : formal_multilinear_series 𝕜 F G) (u : «expr →L[ ] » E 𝕜 F) (n : ℕ)\n    (v : fin n → E) : (p.comp_continuous_linear_map u) n v = p n (u ∘ v) :=\n  rfl\n#align comp_continuous_linear_map_apply comp_continuous_linear_map_apply\n\n",
+ "coeff_iterate_fslope":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ^[ ]» -/\n@[simp]\ntheorem coeff_iterate_fslope (k n : ℕ) : ((«expr ^[ ]» fslope k) p).coeff n = p.coeff (n + k) := by\n  induction' k with k ih generalizing p <;> first |rfl|simpa [ih]\n#align coeff_iterate_fslope coeff_iterate_fslope\n\n",
+ "coeff_fslope":
+ "@[simp]\ntheorem coeff_fslope : p.fslope.coeff n = p.coeff (n + 1) :=\n  by\n  have : @fin.cons n (fun _ => 𝕜) 1 (1 : fin n → 𝕜) = 1 := fin.cons_self_tail 1\n  simp only [fslope, coeff, continuous_multilinear_map.curry_left_apply, this]\n#align coeff_fslope coeff_fslope\n\n",
+ "coeff_eq_zero":
+ "theorem coeff_eq_zero : p.coeff n = 0 ↔ p n = 0 := by\n  rw [← mk_pi_field_coeff_eq p, continuous_multilinear_map.mk_pi_field_eq_zero_iff]\n#align coeff_eq_zero coeff_eq_zero\n\n",
+ "apply_order_ne_zero'":
+ "theorem apply_order_ne_zero' (hp : p.order ≠ 0) : p p.order ≠ 0 :=\n  apply_order_ne_zero (ne_zero_of_order_ne_zero hp)\n#align apply_order_ne_zero' apply_order_ne_zero'\n\n",
+ "apply_order_ne_zero":
+ "theorem apply_order_ne_zero (hp : p ≠ 0) : p p.order ≠ 0 := by\n  classical\n    let h := formal_multilinear_series.ne_iff.mp hp\n    exact (order_eq_find h).symm ▸ nat.find_spec h\n#align apply_order_ne_zero apply_order_ne_zero\n\n",
+ "apply_eq_zero_of_lt_order":
+ "theorem apply_eq_zero_of_lt_order (hp : n < p.order) : p n = 0 :=\n  by\n  by_cases p = 0\n  · simp [h]\n  ·\n    classical\n      rw [order_eq_find' h] at hp\n      simpa using nat.find_min _ hp\n#align apply_eq_zero_of_lt_order apply_eq_zero_of_lt_order\n\n",
+ "apply_eq_prod_smul_coeff":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `finset.prod_univ -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.prod_univ -/\n@[simp]\ntheorem apply_eq_prod_smul_coeff :\n    p n y =\n      «expr • »\n        (finset.prod_univ \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.prod_univ\"\n          (y i))\n        (p.coeff n) :=\n  by\n  convert (p n).to_multilinear_map.map_smul_univ y 1\n  funext <;> simp only [pi.one_apply, algebra.id.smul_eq_mul, mul_one]\n#align apply_eq_prod_smul_coeff apply_eq_prod_smul_coeff\n\n",
+ "apply_eq_pow_smul_coeff":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n@[simp]\ntheorem apply_eq_pow_smul_coeff : (p n fun _ => z) = «expr • » (z ^ n) (p.coeff n) := by simp\n#align apply_eq_pow_smul_coeff apply_eq_pow_smul_coeff\n\n"}

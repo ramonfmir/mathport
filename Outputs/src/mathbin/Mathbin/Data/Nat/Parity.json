@@ -1,0 +1,128 @@
+{"two_not_dvd_two_mul_sub_one":
+ "theorem two_not_dvd_two_mul_sub_one : ∀ {n} (w : 0 < n), ¬2 ∣ 2 * n - 1\n  | n + 1, _ => two_not_dvd_two_mul_add_one n\n#align two_not_dvd_two_mul_sub_one two_not_dvd_two_mul_sub_one\n\n",
+ "two_not_dvd_two_mul_add_one":
+ "theorem two_not_dvd_two_mul_add_one (n : ℕ) : ¬2 ∣ 2 * n + 1 := by simp [add_mod]\n#align two_not_dvd_two_mul_add_one two_not_dvd_two_mul_add_one\n\n",
+ "two_mul_div_two_of_even":
+ "theorem two_mul_div_two_of_even : Even n → 2 * (n / 2) = n := fun h => Nat.mul_div_cancel_left' (even_iff_two_dvd.mp h)\n#align two_mul_div_two_of_even two_mul_div_two_of_even\n\n",
+ "two_mul_div_two_add_one_of_odd":
+ "theorem two_mul_div_two_add_one_of_odd (h : Odd n) : 2 * (n / 2) + 1 = n :=\n  by\n  rw [mul_comm]\n  convert Nat.div_add_mod' n 2\n  rw [odd_iff.mp h]\n#align two_mul_div_two_add_one_of_odd two_mul_div_two_add_one_of_odd\n\n",
+ "two_dvd_ne_zero":
+ "@[simp]\ntheorem two_dvd_ne_zero : ¬2 ∣ n ↔ n % 2 = 1 :=\n  even_iff_two_dvd.symm.not.trans not_even_iff\n#align two_dvd_ne_zero two_dvd_ne_zero\n\n",
+ "succ_mod_two_add_mod_two":
+ "@[simp]\ntheorem succ_mod_two_add_mod_two (m : ℕ) : (m + 1) % 2 + m % 2 = 1 := by rw [add_comm, mod_two_add_succ_mod_two]\n#align succ_mod_two_add_mod_two succ_mod_two_add_mod_two\n\n",
+ "sub_odd":
+ "#print Even.sub_odd /-\ntheorem Even.sub_odd (h : n ≤ m) (hm : Even m) (hn : Odd n) : Odd (m - n) :=\n  (odd_sub' h).mpr <| iff_of_true hn hm\n#align even.sub_odd Even.sub_odd\n-/\n\n",
+ "sub_even":
+ "#print Odd.sub_even /-\ntheorem Odd.sub_even (h : n ≤ m) (hm : Odd m) (hn : Even n) : Odd (m - n) :=\n  (odd_sub h).mpr <| iff_of_true hm hn\n#align odd.sub_even Odd.sub_even\n-/\n\n",
+ "one_add_div_two_mul_two_of_odd":
+ "theorem one_add_div_two_mul_two_of_odd (h : Odd n) : 1 + n / 2 * 2 = n :=\n  by\n  rw [add_comm]\n  convert Nat.div_add_mod' n 2\n  rw [odd_iff.mp h]\n#align one_add_div_two_mul_two_of_odd one_add_div_two_mul_two_of_odd\n\n",
+ "of_mul_right":
+ "theorem odd.of_mul_right (h : Odd (m * n)) : Odd n :=\n  (odd_mul.mp h).2\n#align odd.of_mul_right odd.of_mul_right\n\n",
+ "of_mul_left":
+ "theorem odd.of_mul_left (h : Odd (m * n)) : Odd m :=\n  (odd_mul.mp h).1\n#align odd.of_mul_left odd.of_mul_left\n\n",
+ "odd_sub'":
+ "theorem odd_sub' (h : n ≤ m) : Odd (m - n) ↔ (Odd n ↔ Even m) := by\n  rw [odd_iff_not_even, even_sub h, not_iff, not_iff_comm, odd_iff_not_even]\n#align odd_sub' odd_sub'\n\n",
+ "odd_sub":
+ "@[parity_simps]\ntheorem odd_sub (h : n ≤ m) : Odd (m - n) ↔ (Odd m ↔ Even n) := by\n  rw [odd_iff_not_even, even_sub h, not_iff, odd_iff_not_even]\n#align odd_sub odd_sub\n\n",
+ "odd_mul":
+ "theorem odd_mul : Odd (m * n) ↔ Odd m ∧ Odd n := by simp [not_or, parity_simps]\n#align odd_mul odd_mul\n\n",
+ "odd_iff_not_even":
+ "@[simp]\ntheorem odd_iff_not_even : Odd n ↔ ¬Even n := by rw [not_even_iff, odd_iff]\n#align odd_iff_not_even odd_iff_not_even\n\n",
+ "odd_iff":
+ "theorem odd_iff : Odd n ↔ n % 2 = 1 :=\n  ⟨fun ⟨m, hm⟩ => by norm_num [hm, add_mod] , fun h => ⟨n / 2, (mod_add_div n 2).symm.trans (by rw [h, add_comm])⟩⟩\n#align odd_iff odd_iff\n\n",
+ "odd_add'":
+ "theorem odd_add' : Odd (m + n) ↔ (Odd n ↔ Even m) := by rw [add_comm, odd_add]\n#align odd_add' odd_add'\n\n",
+ "odd_add":
+ "@[parity_simps]\ntheorem odd_add : Odd (m + n) ↔ (Odd m ↔ Even n) := by rw [odd_iff_not_even, even_add, not_iff, odd_iff_not_even]\n#align odd_add odd_add\n\n",
+ "not_odd_iff":
+ "theorem not_odd_iff : ¬Odd n ↔ n % 2 = 0 := by rw [odd_iff, mod_two_ne_one]\n#align not_odd_iff not_odd_iff\n\n",
+ "not_even_one":
+ "@[simp]\ntheorem not_even_one : ¬Even 1 := by rw [even_iff] <;> norm_num\n#align not_even_one not_even_one\n\n",
+ "not_even_iff":
+ "theorem not_even_iff : ¬Even n ↔ n % 2 = 1 := by rw [even_iff, mod_two_ne_zero]\n#align not_even_iff not_even_iff\n\n",
+ "not_even_bit1":
+ "@[simp]\ntheorem not_even_bit1 (n : ℕ) : ¬Even (bit1 n) := by simp [bit1, parity_simps]\n#align not_even_bit1 not_even_bit1\n\n",
+ "neg_one_pow_eq_one_iff_even":
+ "theorem neg_one_pow_eq_one_iff_even (h : (-1 : R) ≠ 1) : (-1 : R) ^ n = 1 ↔ Even n :=\n  ⟨fun h' => of_not_not fun hn => h <| (Odd.neg_one_pow <| odd_iff_not_even.mpr hn).symm.trans h', Even.neg_one_pow⟩\n#align neg_one_pow_eq_one_iff_even neg_one_pow_eq_one_iff_even\n\n",
+ "ne_of_odd_add":
+ "theorem ne_of_odd_add (h : Odd (m + n)) : m ≠ n := fun hnot => by simpa [hnot, parity_simps] using h\n#align ne_of_odd_add ne_of_odd_add\n\n",
+ "mod_two_ne_zero":
+ "@[simp]\ntheorem mod_two_ne_zero : ¬n % 2 = 0 ↔ n % 2 = 1 := by cases' mod_two_eq_zero_or_one n with h h <;> simp [h]\n#align mod_two_ne_zero mod_two_ne_zero\n\n",
+ "mod_two_ne_one":
+ "/-\nCopyright (c) 2019 Jeremy Avigad. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Jeremy Avigad, Benjamin Davidson\n-/\n@[simp]\ntheorem mod_two_ne_one : ¬n % 2 = 1 ↔ n % 2 = 0 := by cases' mod_two_eq_zero_or_one n with h h <;> simp [h]\n#align mod_two_ne_one mod_two_ne_one\n\n",
+ "mod_two_add_succ_mod_two":
+ "@[simp]\ntheorem mod_two_add_succ_mod_two (m : ℕ) : m % 2 + (m + 1) % 2 = 1 :=\n  mod_two_add_add_odd_mod_two m odd_one\n#align mod_two_add_succ_mod_two mod_two_add_succ_mod_two\n\n",
+ "mod_two_add_add_odd_mod_two":
+ "theorem mod_two_add_add_odd_mod_two (m : ℕ) {n : ℕ} (hn : Odd n) : m % 2 + (m + n) % 2 = 1 :=\n  (even_or_odd m).elim (fun hm => by rw [even_iff.1 hm, odd_iff.1 (hm.add_odd hn)]) fun hm => by\n    rw [odd_iff.1 hm, even_iff.1 (hm.add_odd hn)]\n#align mod_two_add_add_odd_mod_two mod_two_add_add_odd_mod_two\n\n",
+ "mod_even_iff":
+ "/-- If `a` is even, then `n` is even iff `n % a` is even. -/\ntheorem even.mod_even_iff {n a : ℕ} (ha : Even a) : Even (n % a) ↔ Even n :=\n  ((even_sub <| mod_le n a).mp <| even_iff_two_dvd.mpr <| (even_iff_two_dvd.mp ha).trans <| dvd_sub_mod n).symm\n#align even.mod_even_iff even.mod_even_iff\n\n",
+ "mod_even":
+ "/-- If `n` is even and `a` is even, then `n % a` is even. -/\ntheorem even.mod_even {n a : ℕ} (hn : Even n) (ha : Even a) : Even (n % a) :=\n  (even.mod_even_iff ha).mpr hn\n#align even.mod_even even.mod_even\n\n",
+ "iterate_odd":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ^[ ]» -/\ntheorem iterate_odd (hf : involutive f) (hn : Odd n) : «expr ^[ ]» f n = f :=\n  let ⟨m, hm⟩ := odd_iff_exists_bit1.mp hn\n  hm.symm ▸ hf.iterate_bit1 m\n#align iterate_odd iterate_odd\n\n",
+ "iterate_even":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ^[ ]» -/\ntheorem iterate_even (hf : involutive f) (hn : Even n) : «expr ^[ ]» f n = id :=\n  let ⟨m, hm⟩ := hn\n  hm.symm ▸ hf.iterate_bit0 m\n#align iterate_even iterate_even\n\n",
+ "iterate_eq_self":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ^[ ]» -/\ntheorem iterate_eq_self (hf : involutive f) (hne : f ≠ id) : «expr ^[ ]» f n = f ↔ Odd n :=\n  ⟨fun H => odd_iff_not_even.2 fun hn => hne <| by rwa [hf.iterate_even hn, eq_comm] at H, hf.iterate_odd⟩\n#align iterate_eq_self iterate_eq_self\n\n",
+ "iterate_eq_id":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ^[ ]» -/\ntheorem iterate_eq_id (hf : involutive f) (hne : f ≠ id) : «expr ^[ ]» f n = id ↔ Even n :=\n  ⟨fun H => even_iff_not_odd.2 fun hn => hne <| by rwa [hf.iterate_odd hn] at H, hf.iterate_even⟩\n#align iterate_eq_id iterate_eq_id\n\n",
+ "iterate_bit1":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ^[ ]» -/\ntheorem iterate_bit1 (hf : involutive f) (n : ℕ) : «expr ^[ ]» f (bit1 n) = f := by\n  rw [bit1, iterate_succ, hf.iterate_bit0, comp.left_id]\n#align iterate_bit1 iterate_bit1\n\n",
+ "iterate_bit0":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ^[ ]» -/\n-- Here are examples of how `parity_simps` can be used with `nat`.\ntheorem iterate_bit0 (hf : involutive f) (n : ℕ) : «expr ^[ ]» f (bit0 n) = id := by\n  rw [bit0, ← two_mul, iterate_mul, involutive_iff_iter_2_eq_id.1 hf, iterate_id]\n#align iterate_bit0 iterate_bit0\n\n",
+ "is_compl_even_odd":
+ "theorem is_compl_even_odd : IsCompl { n : ℕ | Even n } { n | Odd n } := by\n  simp only [← Set.compl_setOf, isCompl_compl, odd_iff_not_even]\n#align is_compl_even_odd is_compl_even_odd\n\n",
+ "factors_ne_two":
+ "/-- `2` is not a prime factor of an odd natural number. -/\ntheorem odd.factors_ne_two {n p : ℕ} (hn : Odd n) (hp : p ∈ n.factors) : p ≠ 2 :=\n  by\n  rintro rfl\n  exact two_dvd_ne_zero.mpr (odd_iff.mp hn) (dvd_of_mem_factors hp)\n#align odd.factors_ne_two odd.factors_ne_two\n\n",
+ "even_xor_odd'":
+ "theorem even_xor_odd' (n : ℕ) : ∃ k, Xor' (n = 2 * k) (n = 2 * k + 1) :=\n  by\n  rcases even_or_odd n with (⟨k, rfl⟩ | ⟨k, rfl⟩) <;> use k\n  ·\n    simpa only [← two_mul, Xor', true_and_iff, eq_self_iff_true, not_true, or_false_iff, and_false_iff] using\n      (succ_ne_self (2 * k)).symm\n  ·\n    simp only [Xor', add_right_eq_self, false_or_iff, eq_self_iff_true, not_true, not_false_iff, one_ne_zero,\n      and_self_iff]\n#align even_xor_odd' even_xor_odd'\n\n",
+ "even_xor_odd":
+ "theorem even_xor_odd (n : ℕ) : Xor' (Even n) (Odd n) :=\n  by\n  cases' even_or_odd n with h\n  · exact or.inl ⟨h, even_iff_not_odd.mp h⟩\n  · exact or.inr ⟨h, odd_iff_not_even.mp h⟩\n#align even_xor_odd even_xor_odd\n\n",
+ "even_sub_one_of_prime_ne_two":
+ "theorem even_sub_one_of_prime_ne_two {p : ℕ} (hp : Prime p) (hodd : p ≠ 2) : Even (p - 1) :=\n  odd.sub_odd (odd_iff.2 <| hp.eq_two_or_odd.resolve_left hodd) (odd_iff.2 rfl)\n#align even_sub_one_of_prime_ne_two even_sub_one_of_prime_ne_two\n\n",
+ "even_sub'":
+ "theorem even_sub' (h : n ≤ m) : Even (m - n) ↔ (Odd m ↔ Odd n) := by\n  rw [even_sub h, even_iff_not_odd, even_iff_not_odd, not_iff_not]\n#align even_sub' even_sub'\n\n",
+ "even_sub":
+ "@[parity_simps]\ntheorem even_sub (h : n ≤ m) : Even (m - n) ↔ (Even m ↔ Even n) :=\n  by\n  conv =>\n    rhs\n    rw [← tsub_add_cancel_of_le h, even_add]\n  by_cases h : Even n <;> simp [h]\n#align even_sub even_sub\n\n",
+ "even_pow'":
+ "theorem even_pow' (h : n ≠ 0) : Even (m ^ n) ↔ Even m :=\n  even_pow.trans <| and_iff_left h\n#align even_pow' even_pow'\n\n",
+ "even_pow":
+ "/-- If `m` and `n` are natural numbers, then the natural number `m^n` is even\nif and only if `m` is even and `n` is positive. -/\n@[parity_simps]\ntheorem even_pow : Even (m ^ n) ↔ Even m ∧ n ≠ 0 :=\n  by\n  induction' n with n ih <;> simp [*, pow_succ', even_mul]\n  tauto\n#align even_pow even_pow\n\n",
+ "even_or_odd'":
+ "theorem even_or_odd' (n : ℕ) : ∃ k, n = 2 * k ∨ n = 2 * k + 1 := by\n  simpa only [← two_mul, exists_or, ← Odd, ← Even] using even_or_odd n\n#align even_or_odd' even_or_odd'\n\n",
+ "even_or_odd":
+ "theorem even_or_odd (n : ℕ) : Even n ∨ Odd n :=\n  or.imp_right odd_iff_not_even.2 <| em <| Even n\n#align even_or_odd even_or_odd\n\n",
+ "even_mul_succ_self":
+ "theorem even_mul_succ_self (n : ℕ) : Even (n * (n + 1)) :=\n  by\n  rw [even_mul]\n  convert n.even_or_odd\n  simp [parity_simps]\n#align even_mul_succ_self even_mul_succ_self\n\n",
+ "even_mul_self_pred":
+ "theorem even_mul_self_pred (n : ℕ) : Even (n * (n - 1)) :=\n  by\n  cases n\n  · exact even_zero\n  · rw [mul_comm]\n    apply even_mul_succ_self\n#align even_mul_self_pred even_mul_self_pred\n\n",
+ "even_mul":
+ "@[parity_simps]\ntheorem even_mul : Even (m * n) ↔ Even m ∨ Even n := by\n  cases' mod_two_eq_zero_or_one m with h₁ h₁ <;> cases' mod_two_eq_zero_or_one n with h₂ h₂ <;>\n      simp [even_iff, h₁, h₂, Nat.mul_mod] <;>\n    norm_num\n#align even_mul even_mul\n\n",
+ "even_iff_not_odd":
+ "theorem even_iff_not_odd : Even n ↔ ¬Odd n := by rw [not_odd_iff, even_iff]\n#align even_iff_not_odd even_iff_not_odd\n\n",
+ "even_iff":
+ "theorem even_iff : Even n ↔ n % 2 = 0 :=\n  ⟨fun ⟨m, hm⟩ => by simp [← two_mul, hm], fun h => ⟨n / 2, (mod_add_div n 2).symm.trans (by simp [← two_mul, h])⟩⟩\n#align even_iff even_iff\n\n",
+ "even_div":
+ "theorem even_div : Even (m / n) ↔ m % (2 * n) / n = 0 := by\n  rw [even_iff_two_dvd, dvd_iff_mod_eq_zero, Nat.div_mod_eq_mod_mul_div, mul_comm]\n#align even_div even_div\n\n",
+ "even_add_one":
+ "@[parity_simps]\ntheorem even_add_one : Even (n + 1) ↔ ¬Even n := by simp [even_add]\n#align even_add_one even_add_one\n\n",
+ "even_add'":
+ "theorem even_add' : Even (m + n) ↔ (Odd m ↔ Odd n) := by rw [even_add, even_iff_not_odd, even_iff_not_odd, not_iff_not]\n#align even_add' even_add'\n\n",
+ "even_add":
+ "@[parity_simps]\ntheorem even_add : Even (m + n) ↔ (Even m ↔ Even n) := by\n  cases' mod_two_eq_zero_or_one m with h₁ h₁ <;> cases' mod_two_eq_zero_or_one n with h₂ h₂ <;>\n      simp [even_iff, h₁, h₂, Nat.add_mod] <;>\n    norm_num\n#align even_add even_add\n\n",
+ "div_two_mul_two_of_even":
+ "theorem div_two_mul_two_of_even : Even n → n / 2 * 2 = n :=\n  fun\n    --nat.div_mul_cancel\n    h =>\n  Nat.div_mul_cancel (even_iff_two_dvd.mp h)\n#align div_two_mul_two_of_even div_two_mul_two_of_even\n\n",
+ "div_two_mul_two_add_one_of_odd":
+ "theorem div_two_mul_two_add_one_of_odd (h : Odd n) : n / 2 * 2 + 1 = n :=\n  by\n  convert Nat.div_add_mod' n 2\n  rw [odd_iff.mp h]\n#align div_two_mul_two_add_one_of_odd div_two_mul_two_add_one_of_odd\n\n",
+ "bit1_mod_bit0":
+ "@[simp]\ntheorem bit1_mod_bit0 : bit1 n % bit0 m = bit1 (n % m) :=\n  by\n  have h₁ := congr_arg bit1 (nat.div_add_mod n m)\n  -- `∀ m n : ℕ, bit0 m * n = bit0 (m * n)` seems to be missing...\n  rw [bit1_add, bit0_eq_two_mul, ← mul_assoc, ← bit0_eq_two_mul] at h₁\n  have h₂ := nat.div_add_mod (bit1 n) (bit0 m)\n  rw [bit1_div_bit0] at h₂\n  exact add_left_cancel (h₂.trans h₁.symm)\n#align bit1_mod_bit0 bit1_mod_bit0\n\n",
+ "bit1_div_two":
+ "theorem bit1_div_two : bit1 n / 2 = n := by\n  rw [← Nat.bit1_eq_bit1, bit1, bit0_eq_two_mul, nat.two_mul_div_two_add_one_of_odd (odd_bit1 n)]\n#align bit1_div_two bit1_div_two\n\n",
+ "bit1_div_bit0":
+ "@[simp]\ntheorem bit1_div_bit0 : bit1 n / bit0 m = n / m := by rw [bit0_eq_two_mul, ← nat.div_div_eq_div_mul, bit1_div_two]\n#align bit1_div_bit0 bit1_div_bit0\n\n",
+ "bit0_mod_bit0":
+ "@[simp]\ntheorem bit0_mod_bit0 : bit0 n % bit0 m = bit0 (n % m) := by\n  rw [bit0_eq_two_mul n, bit0_eq_two_mul m, bit0_eq_two_mul (n % m), nat.mul_mod_mul_left]\n#align bit0_mod_bit0 bit0_mod_bit0\n\n",
+ "bit0_div_two":
+ "theorem bit0_div_two : bit0 n / 2 = n := by\n  rw [← Nat.bit0_eq_bit0, bit0_eq_two_mul, two_mul_div_two_of_even (even_bit0 n)]\n#align bit0_div_two bit0_div_two\n\n",
+ "bit0_div_bit0":
+ "@[simp]\ntheorem bit0_div_bit0 : bit0 n / bit0 m = n / m := by rw [bit0_eq_two_mul m, ← nat.div_div_eq_div_mul, bit0_div_two]\n#align bit0_div_bit0 bit0_div_bit0\n\n"}

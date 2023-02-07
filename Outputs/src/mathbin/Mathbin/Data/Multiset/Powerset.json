@@ -1,0 +1,82 @@
+{"revzip_powerset_aux_perm_aux'":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `list.perm -/\ntheorem revzip_powerset_aux_perm_aux' {l : list α} : list.perm (revzip (powersetAux l)) (revzip (powersetAux' l)) :=\n  by\n  haveI := classical.dec_eq α\n  rw [revzip_powerset_aux_lemma l revzip_powerset_aux, revzip_powerset_aux_lemma l revzip_powerset_aux']\n  exact powerset_aux_perm_powerset_aux'.map _\n#align revzip_powerset_aux_perm_aux' revzip_powerset_aux_perm_aux'\n\n",
+ "revzip_powerset_aux_perm":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `list.perm -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `list.perm -/\ntheorem revzip_powerset_aux_perm {l₁ l₂ : list α} (p : list.perm l₁ l₂) :\n    list.perm (revzip (powersetAux l₁)) (revzip (powersetAux l₂)) :=\n  by\n  haveI := classical.dec_eq α\n  simp [fun l : list α => revzip_powerset_aux_lemma l revzip_powerset_aux, coe_eq_coe.2 p]\n  exact (powerset_aux_perm p).map _\n#align revzip_powerset_aux_perm revzip_powerset_aux_perm\n\n",
+ "revzip_powerset_aux_lemma":
+ "theorem revzip_powerset_aux_lemma [decidable_eq α] (l : list α) {l' : list (Multiset α)}\n    (H : ∀ ⦃x : _ × _⦄, x ∈ revzip l' → x.1 + x.2 = ↑l) : revzip l' = l'.map fun x => (x, ↑l - x) :=\n  by\n  have :\n    forall₂ (fun (p : Multiset α × Multiset α) (s : Multiset α) => p = (s, ↑l - s)) (revzip l')\n      ((revzip l').map prod.fst) :=\n    by\n    rw [forall₂_map_right_iff, forall₂_same]\n    rintro ⟨s, t⟩ h\n    dsimp\n    rw [← H h, add_tsub_cancel_left]\n  rw [← forall₂_eq_eq_eq, forall₂_map_right_iff]\n  simpa\n#align revzip_powerset_aux_lemma revzip_powerset_aux_lemma\n\n",
+ "revzip_powerset_aux'":
+ "theorem revzip_powerset_aux' {l : list α} ⦃x⦄ (h : x ∈ revzip (powersetAux' l)) : x.1 + x.2 = ↑l :=\n  by\n  rw [revzip, powerset_aux', ← map_reverse, zip_map, ← revzip] at h\n  simp at h; rcases h with ⟨l₁, l₂, h, rfl, rfl⟩\n  exact quot.sound (revzip_sublists' _ _ _ h)\n#align revzip_powerset_aux' revzip_powerset_aux'\n\n",
+ "revzip_powerset_aux":
+ "theorem revzip_powerset_aux {l : list α} ⦃x⦄ (h : x ∈ revzip (powersetAux l)) : x.1 + x.2 = ↑l :=\n  by\n  rw [revzip, powerset_aux_eq_map_coe, ← map_reverse, zip_map, ← revzip] at h\n  simp at h; rcases h with ⟨l₁, l₂, h, rfl, rfl⟩\n  exact quot.sound (revzip_sublists _ _ _ h)\n#align revzip_powerset_aux revzip_powerset_aux\n\n",
+ "powerset_zero":
+ "@[simp]\ntheorem powerset_zero : @powerset α 0 = {0} :=\n  rfl\n#align powerset_zero powerset_zero\n\n",
+ "powerset_len_zero_right":
+ "theorem powerset_len_zero_right (n : ℕ) : @powersetLen α (n + 1) 0 = 0 :=\n  rfl\n#align powerset_len_zero_right powerset_len_zero_right\n\n",
+ "powerset_len_zero_left":
+ "@[simp]\ntheorem powerset_len_zero_left (s : Multiset α) : powersetLen 0 s = {0} :=\n  Quotient.inductionOn s fun l => by simp [powerset_len_coe'] <;> rfl\n#align powerset_len_zero_left powerset_len_zero_left\n\n",
+ "powerset_len_mono":
+ "theorem powerset_len_mono (n : ℕ) {s t : Multiset α} (h : s ≤ t) : powersetLen n s ≤ powersetLen n t :=\n  leInductionOn h fun l₁ l₂ h => by\n    simp [powerset_len_coe] <;> exact ((sublists_len_sublist_of_sublist _ h).map _).subperm\n#align powerset_len_mono powerset_len_mono\n\n",
+ "powerset_len_map":
+ "theorem powerset_len_map {β : Type _} (f : α → β) (n : ℕ) (s : Multiset α) :\n    powersetLen n (s.map f) = (powersetLen n s).map (map f) :=\n  by\n  induction' s using Multiset.induction with t s ih generalizing n\n  · cases n <;> simp [powerset_len_zero_left, powerset_len_zero_right]\n  · cases n <;> simp [ih, map_comp_cons]\n#align powerset_len_map powerset_len_map\n\n",
+ "powerset_len_le_powerset":
+ "theorem powerset_len_le_powerset (n : ℕ) (s : Multiset α) : powersetLen n s ≤ powerset s :=\n  Quotient.inductionOn s fun l => by\n    simp [powerset_len_coe] <;> exact ((sublists_len_sublist_sublists' _ _).map _).subperm\n#align powerset_len_le_powerset powerset_len_le_powerset\n\n",
+ "powerset_len_empty":
+ "@[simp]\ntheorem powerset_len_empty {α : Type _} (n : ℕ) {s : Multiset α} (h : s.card < n) : powersetLen n s = 0 :=\n  card_eq_zero.mp (Nat.choose_eq_zero_of_lt h ▸ card_powersetLen _ _)\n#align powerset_len_empty powerset_len_empty\n\n",
+ "powerset_len_cons":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ::ₘ » -/\n@[simp]\ntheorem powerset_len_cons (n : ℕ) (a : α) (s) :\n    powersetLen (n + 1) («expr ::ₘ » a s) = powersetLen (n + 1) s + map (cons a) (powersetLen n s) :=\n  Quotient.inductionOn s fun l => by simp [powerset_len_coe'] <;> rfl\n#align powerset_len_cons powerset_len_cons\n\n",
+ "powerset_len_coe'":
+ "theorem powerset_len_coe' (n) (l : list α) : @powersetLen α n l = powersetLenAux n l :=\n  rfl\n#align powerset_len_coe' powerset_len_coe'\n\n",
+ "powerset_len_coe":
+ "theorem powerset_len_coe (n) (l : list α) : @powersetLen α n l = ((sublistsLen n l).map coe : list (Multiset α)) :=\n  congr_arg coe powersetLenAux_eq_map_coe\n#align powerset_len_coe powerset_len_coe\n\n",
+ "powerset_len_card_add":
+ "@[simp]\ntheorem powerset_len_card_add (s : Multiset α) {i : ℕ} (hi : 0 < i) : s.powerset_len (s.card + i) = 0 :=\n  powersetLen_empty _ (lt_add_of_pos_right (card s) hi)\n#align powerset_len_card_add powerset_len_card_add\n\n",
+ "powerset_len_aux_zero":
+ "@[simp]\ntheorem powerset_len_aux_zero (l : list α) : powersetLenAux 0 l = [0] := by simp [powerset_len_aux_eq_map_coe]\n#align powerset_len_aux_zero powerset_len_aux_zero\n\n",
+ "powerset_len_aux_perm":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `list.perm -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `list.perm -/\ntheorem powerset_len_aux_perm {n} {l₁ l₂ : list α} (p : list.perm l₁ l₂) :\n    list.perm (powersetLenAux n l₁) (powersetLenAux n l₂) :=\n  by\n  induction' n with n IHn generalizing l₁ l₂; · simp\n  induction' p with a l₁ l₂ p IH a b l l₁ l₂ l₃ p₁ p₂ IH₁ IH₂; · rfl\n  · simp\n    exact IH.append ((IHn p).map _)\n  · simp\n    apply perm.append_left\n    cases n\n    · simp\n      apply perm.swap\n    simp\n    rw [← append_assoc, ← append_assoc, (by funext s <;> simp [cons_swap] : cons b ∘ cons a = cons a ∘ cons b)]\n    exact perm_append_comm.append_right _\n  · exact IH₁.trans IH₂\n#align powerset_len_aux_perm powerset_len_aux_perm\n\n",
+ "powerset_len_aux_nil":
+ "@[simp]\ntheorem powerset_len_aux_nil (n : ℕ) : powersetLenAux (n + 1) (@nil α) = [] :=\n  rfl\n#align powerset_len_aux_nil powerset_len_aux_nil\n\n",
+ "powerset_len_aux_eq_map_coe":
+ "theorem powerset_len_aux_eq_map_coe {n} {l : list α} : powersetLenAux n l = (sublistsLen n l).map coe := by\n  rw [powerset_len_aux, sublists_len_aux_eq, append_nil]\n#align powerset_len_aux_eq_map_coe powerset_len_aux_eq_map_coe\n\n",
+ "powerset_len_aux_cons":
+ "@[simp]\ntheorem powerset_len_aux_cons (n : ℕ) (a : α) (l : list α) :\n    powersetLenAux (n + 1) (a :: l) = powersetLenAux (n + 1) l ++ list.map (cons a) (powersetLenAux n l) := by\n  simp [powerset_len_aux_eq_map_coe] <;> rfl\n#align powerset_len_aux_cons powerset_len_aux_cons\n\n",
+ "powerset_len":
+ "protected theorem nodup.powerset_len {n : ℕ} {s : Multiset α} (h : Nodup s) : Nodup (powersetLen n s) :=\n  nodup_of_le (powersetLen_le_powerset _ _) (nodup_powerset.2 h)\n#align nodup.powerset_len nodup.powerset_len\n\n",
+ "powerset_cons":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ::ₘ » -/\n@[simp]\ntheorem powerset_cons (a : α) (s) : powerset («expr ::ₘ » a s) = powerset s + map (cons a) (powerset s) :=\n  Quotient.inductionOn s fun l => by simp <;> rfl\n#align powerset_cons powerset_cons\n\n",
+ "powerset_coe'":
+ "@[simp]\ntheorem powerset_coe' (l : list α) : @powerset α l = ((sublists' l).map coe : list (Multiset α)) :=\n  quot.sound powersetAux_perm_powersetAux'\n#align powerset_coe' powerset_coe'\n\n",
+ "powerset_coe":
+ "theorem powerset_coe (l : list α) : @powerset α l = ((sublists l).map coe : list (Multiset α)) :=\n  congr_arg coe powersetAux_eq_map_coe\n#align powerset_coe powerset_coe\n\n",
+ "powerset_aux_perm_powerset_aux'":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `list.perm -/\ntheorem powerset_aux_perm_powerset_aux' {l : list α} : list.perm (powersetAux l) (powersetAux' l) := by\n  rw [powerset_aux_eq_map_coe] <;> exact (sublists_perm_sublists' _).map _\n#align powerset_aux_perm_powerset_aux' powerset_aux_perm_powerset_aux'\n\n",
+ "powerset_aux_perm":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `list.perm -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `list.perm -/\ntheorem powerset_aux_perm {l₁ l₂ : list α} (p : list.perm l₁ l₂) : list.perm (powersetAux l₁) (powersetAux l₂) :=\n  powersetAux_perm_powersetAux'.trans <| (powerset_aux'_perm p).trans powersetAux_perm_powersetAux'.symm\n#align powerset_aux_perm powerset_aux_perm\n\n",
+ "powerset_aux_eq_map_coe":
+ "/-\nCopyright (c) 2018 Mario Carneiro. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Mario Carneiro\n-/\ntheorem powerset_aux_eq_map_coe {l : list α} : powersetAux l = (sublists l).map coe := by\n  simp [powerset_aux, sublists] <;>\n      rw [←\n        show (@sublists_aux₁ α (Multiset α) l fun x => [↑x]) = sublists_aux l fun x => list.cons ↑x from\n          sublists_aux₁_eq_sublists_aux _ _,\n        sublists_aux_cons_eq_sublists_aux₁, ← bind_ret_eq_map, sublists_aux₁_bind] <;>\n    rfl\n#align powerset_aux_eq_map_coe powerset_aux_eq_map_coe\n\n",
+ "powerset_aux'_perm":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `list.perm -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `list.perm -/\ntheorem powerset_aux'_perm {l₁ l₂ : list α} (p : list.perm l₁ l₂) : list.perm (powersetAux' l₁) (powersetAux' l₂) :=\n  by\n  induction' p with a l₁ l₂ p IH a b l l₁ l₂ l₃ p₁ p₂ IH₁ IH₂; · simp\n  · simp\n    exact IH.append (IH.map _)\n  · simp\n    apply perm.append_left\n    rw [← append_assoc, ← append_assoc, (by funext s <;> simp [cons_swap] : cons b ∘ cons a = cons a ∘ cons b)]\n    exact perm_append_comm.append_right _\n  · exact IH₁.trans IH₂\n#align powerset_aux'_perm powerset_aux'_perm\n\n",
+ "powerset_aux'_nil":
+ "@[simp]\ntheorem powerset_aux'_nil : powersetAux' (@nil α) = [0] :=\n  rfl\n#align powerset_aux'_nil powerset_aux'_nil\n\n",
+ "powerset_aux'_cons":
+ "@[simp]\ntheorem powerset_aux'_cons (a : α) (l : list α) :\n    powersetAux' (a :: l) = powersetAux' l ++ list.map (cons a) (powersetAux' l) := by simp [powerset_aux'] <;> rfl\n#align powerset_aux'_cons powerset_aux'_cons\n\n",
+ "pairwise_disjoint_powerset_len":
+ "theorem pairwise_disjoint_powerset_len (s : Multiset α) :\n    Pairwise fun i j => Multiset.Disjoint (s.powerset_len i) (s.powerset_len j) := fun i j h x hi hj =>\n  h (eq.trans (Multiset.mem_powersetLen.mp hi).right.symm (Multiset.mem_powersetLen.mp hj).right)\n#align pairwise_disjoint_powerset_len pairwise_disjoint_powerset_len\n\n",
+ "nodup_powerset":
+ "@[simp]\ntheorem nodup_powerset {s : Multiset α} : Nodup (powerset s) ↔ Nodup s :=\n  ⟨fun h => (nodup_of_le (map_single_le_powerset _) h).of_map _,\n    Quotient.inductionOn s fun l h => by\n      simp <;> refine' (nodup_sublists'.2 h).map_on _ <;>\n        exact fun x sx y sy e => (h.sublist_ext (mem_sublists'.1 sx) (mem_sublists'.1 sy)).1 (quotient.exact e)⟩\n#align nodup_powerset nodup_powerset\n\n",
+ "mem_powerset_len_aux":
+ "@[simp]\ntheorem mem_powerset_len_aux {n} {l : list α} {s} : s ∈ powersetLenAux n l ↔ s ≤ ↑l ∧ card s = n :=\n  Quotient.inductionOn s <| by\n    simp [powerset_len_aux_eq_map_coe, subperm] <;>\n      exact fun l₁ =>\n        ⟨fun ⟨l₂, ⟨s, e⟩, p⟩ => ⟨⟨_, p, s⟩, p.symm.length_eq.trans e⟩, fun ⟨⟨l₂, p, s⟩, e⟩ =>\n          ⟨_, ⟨s, p.length_eq.trans e⟩, p⟩⟩\n#align mem_powerset_len_aux mem_powerset_len_aux\n\n",
+ "mem_powerset_len":
+ "@[simp]\ntheorem mem_powerset_len {n : ℕ} {s t : Multiset α} : s ∈ powersetLen n t ↔ s ≤ t ∧ card s = n :=\n  Quotient.inductionOn t fun l => by simp [powerset_len_coe']\n#align mem_powerset_len mem_powerset_len\n\n",
+ "mem_powerset_aux":
+ "@[simp]\ntheorem mem_powerset_aux {l : list α} {s} : s ∈ powersetAux l ↔ s ≤ ↑l :=\n  Quotient.inductionOn s <| by simp [powerset_aux_eq_map_coe, subperm, and_comm]\n#align mem_powerset_aux mem_powerset_aux\n\n",
+ "mem_powerset":
+ "@[simp]\ntheorem mem_powerset {s t : Multiset α} : s ∈ powerset t ↔ s ≤ t :=\n  quotient.induction_on₂ s t <| by simp [subperm, and_comm]\n#align mem_powerset mem_powerset\n\n",
+ "map_single_le_powerset":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr <+~ » -/\ntheorem map_single_le_powerset (s : Multiset α) : s.map singleton ≤ powerset s :=\n  Quotient.inductionOn s fun l =>\n    by\n    simp only [powerset_coe, quot_mk_to_coe, coe_le, coe_map]\n    show «expr <+~ » (l.map (coe ∘ List.ret)) ((sublists l).map coe)\n    rw [← list.map_map]\n    exact ((map_ret_sublist_sublists _).map _).subperm\n#align map_single_le_powerset map_single_le_powerset\n\n",
+ "card_powerset_len":
+ "@[simp]\ntheorem card_powerset_len (n : ℕ) (s : Multiset α) : card (powersetLen n s) = Nat.choose (card s) n :=\n  Quotient.inductionOn s <| by simp [powerset_len_coe]\n#align card_powerset_len card_powerset_len\n\n",
+ "card_powerset":
+ "@[simp]\ntheorem card_powerset (s : Multiset α) : card (powerset s) = 2 ^ card s :=\n  Quotient.inductionOn s <| by simp\n#align card_powerset card_powerset\n\n",
+ "bind_powerset_len":
+ "theorem bind_powerset_len {α : Type _} (S : Multiset α) :\n    (bind (Multiset.range (S.card + 1)) fun k => S.powerset_len k) = S.powerset :=\n  by\n  induction S using Quotient.inductionOn\n  simp_rw [quot_mk_to_coe, powerset_coe', powerset_len_coe, ← coe_range, coe_bind, ← List.bind_map, coe_card]\n  exact coe_eq_coe.mpr ((List.range_bind_sublistsLen_perm S).map _)\n#align bind_powerset_len bind_powerset_len\n\n"}

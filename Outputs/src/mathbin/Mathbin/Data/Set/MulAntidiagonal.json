@@ -1,0 +1,20 @@
+{"swap_mem_mul_antidiagonal":
+ "@[simp, to_additive]\ntheorem swap_mem_mul_antidiagonal [comm_semigroup α] {s t : set α} {a : α} {x : α × α} :\n    x.swap ∈ set.mul_antidiagonal s t a ↔ x ∈ set.mul_antidiagonal t s a := by simp [mul_comm, and_left_comm]\n#align swap_mem_mul_antidiagonal swap_mem_mul_antidiagonal\n\n",
+ "mul_antidiagonal_mono_right":
+ "@[to_additive]\ntheorem mul_antidiagonal_mono_right (h : t₁ ⊆ t₂) : mul_antidiagonal s t₁ a ⊆ mul_antidiagonal s t₂ a := fun x hx =>\n  ⟨hx.1, h hx.2.1, hx.2.2⟩\n#align mul_antidiagonal_mono_right mul_antidiagonal_mono_right\n\n",
+ "mul_antidiagonal_mono_left":
+ "@[to_additive]\ntheorem mul_antidiagonal_mono_left (h : s₁ ⊆ s₂) : mul_antidiagonal s₁ t a ⊆ mul_antidiagonal s₂ t a := fun x hx =>\n  ⟨h hx.1, hx.2.1, hx.2.2⟩\n#align mul_antidiagonal_mono_left mul_antidiagonal_mono_left\n\n",
+ "mem_mul_antidiagonal":
+ "/-\nCopyright (c) 2019 Johan Commelin. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Johan Commelin, Floris van Doorn\n-/\n@[simp, to_additive]\ntheorem mem_mul_antidiagonal : x ∈ mul_antidiagonal s t a ↔ x.1 ∈ s ∧ x.2 ∈ t ∧ x.1 * x.2 = a :=\n  iff.rfl\n#align mem_mul_antidiagonal mem_mul_antidiagonal\n\n",
+ "fst_eq_fst_iff_snd_eq_snd":
+ "@[to_additive]\ntheorem fst_eq_fst_iff_snd_eq_snd : (x : α × α).1 = (y : α × α).1 ↔ (x : α × α).2 = (y : α × α).2 :=\n  ⟨fun h =>\n    mul_left_cancel\n      (y.prop.2.2.trans <| by\n          rw [← h]\n          exact x.2.2.2.symm).symm,\n    fun h =>\n    mul_right_cancel\n      (y.prop.2.2.trans <| by\n          rw [← h]\n          exact x.2.2.2.symm).symm⟩\n#align fst_eq_fst_iff_snd_eq_snd fst_eq_fst_iff_snd_eq_snd\n\n",
+ "finite_of_is_wf":
+ "@[to_additive]\ntheorem finite_of_is_wf [LinearOrderedCancelCommMonoid α] {s t : set α} (hs : s.is_wf) (ht : t.is_wf) (a) :\n    (mul_antidiagonal s t a).finite :=\n  finite_of_is_pwo hs.is_pwo ht.is_pwo a\n#align finite_of_is_wf finite_of_is_wf\n\n",
+ "finite_of_is_pwo":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹'o » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹'o » -/\n@[to_additive]\ntheorem finite_of_is_pwo (hs : s.is_pwo) (ht : t.is_pwo) (a) : (mul_antidiagonal s t a).finite :=\n  by\n  refine' not_infinite.1 fun h => _\n  have h1 : (mul_antidiagonal s t a).partially_well_ordered_on («expr ⁻¹'o » prod.fst (· ≤ ·)) := fun f hf =>\n    hs (prod.fst ∘ f) fun n => (mem_mul_antidiagonal.1 (hf n)).1\n  have h2 : (mul_antidiagonal s t a).partially_well_ordered_on («expr ⁻¹'o » prod.snd (· ≤ ·)) := fun f hf =>\n    ht (prod.snd ∘ f) fun n => (mem_mul_antidiagonal.1 (hf n)).2.1\n  obtain ⟨g, hg⟩ := h1.exists_monotone_subseq (fun n => h.nat_embedding _ n) fun n => (h.nat_embedding _ n).2\n  obtain ⟨m, n, mn, h2'⟩ := h2 (fun x => (h.nat_embedding _) (g x)) fun n => (h.nat_embedding _ _).2\n  refine' mn.ne (g.injective <| (h.nat_embedding _).injective _)\n  exact eq_of_fst_le_fst_of_snd_le_snd _ _ _ (hg _ _ mn.le) h2'\n#align finite_of_is_pwo finite_of_is_pwo\n\n",
+ "eq_of_snd_eq_snd":
+ "@[to_additive]\ntheorem eq_of_snd_eq_snd (h : (x : α × α).snd = (y : α × α).snd) : x = y :=\n  subtype.ext <| Prod.ext (fst_eq_fst_iff_snd_eq_snd.2 h) h\n#align eq_of_snd_eq_snd eq_of_snd_eq_snd\n\n",
+ "eq_of_fst_le_fst_of_snd_le_snd":
+ "@[to_additive]\ntheorem eq_of_fst_le_fst_of_snd_le_snd (h₁ : (x : α × α).1 ≤ (y : α × α).1) (h₂ : (x : α × α).2 ≤ (y : α × α).2) :\n    x = y :=\n  eq_of_fst_eq_fst <|\n    h₁.eq_of_not_lt fun hlt =>\n      (mul_lt_mul_of_lt_of_le hlt h₂).ne <| (mem_mul_antidiagonal.1 x.2).2.2.trans (mem_mul_antidiagonal.1 y.2).2.2.symm\n#align eq_of_fst_le_fst_of_snd_le_snd eq_of_fst_le_fst_of_snd_le_snd\n\n",
+ "eq_of_fst_eq_fst":
+ "@[to_additive]\ntheorem eq_of_fst_eq_fst (h : (x : α × α).fst = (y : α × α).fst) : x = y :=\n  subtype.ext <| Prod.ext h <| fst_eq_fst_iff_snd_eq_snd.1 h\n#align eq_of_fst_eq_fst eq_of_fst_eq_fst\n\n"}

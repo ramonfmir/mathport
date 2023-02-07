@@ -1,0 +1,30 @@
+{"zero_mem_centralizer":
+ "@[simp]\ntheorem zero_mem_centralizer [mul_zero_class M] : (0 : M) ∈ centralizer S := by simp [mem_centralizer_iff]\n#align zero_mem_centralizer zero_mem_centralizer\n\n",
+ "one_mem_centralizer":
+ "@[simp, to_additive zero_mem_add_centralizer]\ntheorem one_mem_centralizer [mul_one_class M] : (1 : M) ∈ centralizer S := by simp [mem_centralizer_iff]\n#align one_mem_centralizer one_mem_centralizer\n\n",
+ "neg_mem_centralizer":
+ "@[simp]\ntheorem neg_mem_centralizer [Mul M] [HasDistribNeg M] (ha : a ∈ centralizer S) : -a ∈ centralizer S := fun c hc => by\n  rw [mul_neg, ha c hc, neg_mul]\n#align neg_mem_centralizer neg_mem_centralizer\n\n",
+ "mul_mem_centralizer":
+ "@[simp, to_additive add_mem_add_centralizer]\ntheorem mul_mem_centralizer [semigroup M] (ha : a ∈ centralizer S) (hb : b ∈ centralizer S) : a * b ∈ centralizer S :=\n  fun g hg => by rw [mul_assoc, ← hb g hg, ← mul_assoc, ha g hg, mul_assoc]\n#align mul_mem_centralizer mul_mem_centralizer\n\n",
+ "mem_centralizer_iff":
+ "@[to_additive]\ntheorem mem_centralizer_iff {z : M} : z ∈ centralizer S ↔ ∀ g ∈ S, g * z = z * g :=\n  iff.rfl\n#align mem_centralizer_iff mem_centralizer_iff\n\n",
+ "inv_mem_centralizer₀":
+ "@[simp]\ntheorem inv_mem_centralizer₀ [group_with_zero M] (ha : a ∈ centralizer S) : a⁻¹ ∈ centralizer S :=\n  (eq_or_ne a 0).elim\n    (fun h => by\n      rw [h, inv_zero]\n      exact zero_mem_centralizer S)\n    fun ha0 c hc => by rw [mul_inv_eq_iff_eq_mul₀ ha0, mul_assoc, eq_inv_mul_iff_mul_eq₀ ha0, ha c hc]\n#align inv_mem_centralizer₀ inv_mem_centralizer₀\n\n",
+ "inv_mem_centralizer":
+ "@[simp, to_additive neg_mem_add_centralizer]\ntheorem inv_mem_centralizer [group M] (ha : a ∈ centralizer S) : a⁻¹ ∈ centralizer S := fun g hg => by\n  rw [mul_inv_eq_iff_eq_mul, mul_assoc, eq_inv_mul_iff_mul_eq, ha g hg]\n#align inv_mem_centralizer inv_mem_centralizer\n\n",
+ "div_mem_centralizer₀":
+ "@[simp]\ntheorem div_mem_centralizer₀ [group_with_zero M] (ha : a ∈ centralizer S) (hb : b ∈ centralizer S) :\n    a / b ∈ centralizer S := by\n  rw [div_eq_mul_inv]\n  exact mul_mem_centralizer ha (inv_mem_centralizer₀ hb)\n#align div_mem_centralizer₀ div_mem_centralizer₀\n\n",
+ "div_mem_centralizer":
+ "@[simp, to_additive sub_mem_add_centralizer]\ntheorem div_mem_centralizer [group M] (ha : a ∈ centralizer S) (hb : b ∈ centralizer S) : a / b ∈ centralizer S :=\n  by\n  rw [div_eq_mul_inv]\n  exact mul_mem_centralizer ha (inv_mem_centralizer hb)\n#align div_mem_centralizer div_mem_centralizer\n\n",
+ "coe_centralizer":
+ "@[simp, norm_cast, to_additive]\ntheorem coe_centralizer : ↑(centralizer S) = S.centralizer :=\n  rfl\n#align coe_centralizer coe_centralizer\n\n",
+ "centralizer_univ":
+ "@[simp, to_additive]\ntheorem centralizer_univ : centralizer Set.univ = center M :=\n  SetLike.ext' (Set.centralizer_univ M)\n#align centralizer_univ centralizer_univ\n\n",
+ "centralizer_subset":
+ "@[to_additive add_centralizer_subset]\ntheorem centralizer_subset [Mul M] (h : S ⊆ T) : centralizer T ⊆ centralizer S := fun t ht s hs => ht s (h hs)\n#align centralizer_subset centralizer_subset\n\n",
+ "centralizer_le":
+ "@[to_additive]\ntheorem centralizer_le (h : S ⊆ T) : centralizer T ≤ centralizer S :=\n  Set.centralizer_subset h\n#align centralizer_le centralizer_le\n\n",
+ "centralizer_eq_univ":
+ "@[simp, to_additive add_centralizer_eq_univ]\ntheorem centralizer_eq_univ [comm_semigroup M] : centralizer S = univ :=\n  Subset.antisymm (subset_univ _) fun x hx y hy => mul_comm y x\n#align centralizer_eq_univ centralizer_eq_univ\n\n",
+ "add_mem_centralizer":
+ "@[simp]\ntheorem add_mem_centralizer [Distrib M] (ha : a ∈ centralizer S) (hb : b ∈ centralizer S) : a + b ∈ centralizer S :=\n  fun c hc => by rw [add_mul, mul_add, ha c hc, hb c hc]\n#align add_mem_centralizer add_mem_centralizer\n\n"}

@@ -1,0 +1,92 @@
+{"zero_apply":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →⋆ₙₐ[ ] » -/\ntheorem zero_apply (a : A) : (0 : «expr →⋆ₙₐ[ ] » A R B) a = 0 :=\n  rfl\n#align zero_apply zero_apply\n\n",
+ "trans_apply":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃⋆ₐ[ ] » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃⋆ₐ[ ] » -/\n@[simp]\ntheorem trans_apply (e₁ : «expr ≃⋆ₐ[ ] » A R B) (e₂ : «expr ≃⋆ₐ[ ] » B R C) (x : A) : (e₁.trans e₂) x = e₂ (e₁ x) :=\n  rfl\n#align trans_apply trans_apply\n\n",
+ "to_ring_equiv_symm":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃⋆ₐ[ ] » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃+* » -/\n-- should be a `simp` lemma, but causes a linter timeout\ntheorem to_ring_equiv_symm (f : «expr ≃⋆ₐ[ ] » A R B) : (f : «expr ≃+* » A B).symm = f.symm :=\n  rfl\n#align to_ring_equiv_symm to_ring_equiv_symm\n\n",
+ "symm_trans_apply":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃⋆ₐ[ ] » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃⋆ₐ[ ] » -/\n@[simp]\ntheorem symm_trans_apply (e₁ : «expr ≃⋆ₐ[ ] » A R B) (e₂ : «expr ≃⋆ₐ[ ] » B R C) (x : C) :\n    (e₁.trans e₂).symm x = e₁.symm (e₂.symm x) :=\n  rfl\n#align symm_trans_apply symm_trans_apply\n\n",
+ "symm_to_ring_equiv":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃⋆ₐ[ ] » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃+* » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃+* » -/\n@[simp]\ntheorem symm_to_ring_equiv (e : «expr ≃⋆ₐ[ ] » A R B) : (e.symm : «expr ≃+* » B A) = (e : «expr ≃+* » A B).symm :=\n  rfl\n#align symm_to_ring_equiv symm_to_ring_equiv\n\n",
+ "symm_symm":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃⋆ₐ[ ] » -/\n@[simp]\ntheorem symm_symm (e : «expr ≃⋆ₐ[ ] » A R B) : e.symm.symm = e :=\n  by\n  ext\n  rfl\n#align symm_symm symm_symm\n\n",
+ "symm_mk":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃⋆ₐ[ ] » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃⋆ₐ[ ] » -/\n@[simp]\ntheorem symm_mk (f f') (h₁ h₂ h₃ h₄ h₅ h₆) :\n    (⟨f, f', h₁, h₂, h₃, h₄, h₅, h₆⟩ : «expr ≃⋆ₐ[ ] » A R B).symm =\n      {\n        (⟨f, f', h₁, h₂, h₃, h₄, h₅, h₆⟩ :\n            «expr ≃⋆ₐ[ ] » A R B).symm with\n        to_fun := f'\n        inv_fun := f } :=\n  rfl\n#align symm_mk symm_mk\n\n",
+ "symm_bijective":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃⋆ₐ[ ] » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃⋆ₐ[ ] » -/\ntheorem symm_bijective : function.bijective (symm : «expr ≃⋆ₐ[ ] » A R B → «expr ≃⋆ₐ[ ] » B R A) :=\n  Equiv.bijective ⟨symm, symm, symm_symm, symm_symm⟩\n#align symm_bijective symm_bijective\n\n",
+ "symm_apply_apply":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃⋆ₐ[ ] » -/\n@[simp]\ntheorem symm_apply_apply (e : «expr ≃⋆ₐ[ ] » A R B) : ∀ x, e.symm (e x) = x :=\n  e.to_ring_equiv.symm_apply_apply\n#align symm_apply_apply symm_apply_apply\n\n",
+ "snd_prod":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →⋆ₐ[ ] » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →⋆ₐ[ ] » -/\n@[simp]\ntheorem snd_prod (f : «expr →⋆ₐ[ ] » A R B) (g : «expr →⋆ₐ[ ] » A R C) : (snd R B C).comp (prod f g) = g := by\n  ext <;> rfl\n#align snd_prod snd_prod\n\n",
+ "right_inverse_symm":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃⋆ₐ[ ] » -/\ntheorem right_inverse_symm (e : «expr ≃⋆ₐ[ ] » A R B) : function.right_inverse e.symm e :=\n  e.right_inv\n#align right_inverse_symm right_inverse_symm\n\n",
+ "refl_symm":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃⋆ₐ[ ] » -/\n@[simp]\ntheorem refl_symm : (star_alg_equiv.refl : «expr ≃⋆ₐ[ ] » A R A).symm = star_alg_equiv.refl :=\n  rfl\n#align refl_symm refl_symm\n\n",
+ "prod_fst_snd":
+ "@[simp]\ntheorem prod_fst_snd : prod (fst R A B) (snd R A B) = 1 :=\n  fun_like.coe_injective pi.prod_fst_snd\n#align prod_fst_snd prod_fst_snd\n\n",
+ "one_apply":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →⋆ₙₐ[ ] » -/\ntheorem one_apply (a : A) : (1 : «expr →⋆ₙₐ[ ] » A R A) a = a :=\n  rfl\n#align one_apply one_apply\n\n",
+ "of_bijective_apply":
+ "theorem of_bijective_apply {f : F} (hf : function.bijective f) (a : A) : (star_alg_equiv.of_bijective f hf) a = f a :=\n  rfl\n#align of_bijective_apply of_bijective_apply\n\n",
+ "mk_coe'":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃⋆ₐ[ ] » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃⋆ₐ[ ] » -/\n@[simp]\ntheorem mk_coe' (e : «expr ≃⋆ₐ[ ] » A R B) (f h₁ h₂ h₃ h₄ h₅ h₆) :\n    (⟨f, e, h₁, h₂, h₃, h₄, h₅, h₆⟩ : «expr ≃⋆ₐ[ ] » B R A) = e.symm :=\n  symm_bijective.injective <| ext fun x => rfl\n#align mk_coe' mk_coe'\n\n",
+ "mk_coe":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →⋆ₐ[ ] » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →⋆ₐ[ ] » -/\n@[simp]\ntheorem mk_coe (f : «expr →⋆ₐ[ ] » A R B) (h₁ h₂ h₃ h₄ h₅ h₆) :\n    (⟨f, h₁, h₂, h₃, h₄, h₅, h₆⟩ : «expr →⋆ₐ[ ] » A R B) = f :=\n  by\n  ext\n  rfl\n#align mk_coe mk_coe\n\n",
+ "left_inverse_symm":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃⋆ₐ[ ] » -/\ntheorem left_inverse_symm (e : «expr ≃⋆ₐ[ ] » A R B) : function.left_inverse e.symm e :=\n  e.left_inv\n#align left_inverse_symm left_inverse_symm\n\n",
+ "inv_fun_eq_symm":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃⋆ₐ[ ] » -/\n@[simp]\ntheorem inv_fun_eq_symm {e : «expr ≃⋆ₐ[ ] » A R B} : e.inv_fun = e.symm :=\n  rfl\n#align inv_fun_eq_symm inv_fun_eq_symm\n\n",
+ "inr_apply":
+ "theorem inr_apply (x : B) : inr R A B x = (0, x) :=\n  rfl\n#align inr_apply inr_apply\n\n",
+ "inl_apply":
+ "theorem inl_apply (x : A) : inl R A B x = (x, 0) :=\n  rfl\n#align inl_apply inl_apply\n\n",
+ "id_comp":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →⋆ₐ[ ] » -/\n@[simp]\ntheorem id_comp (f : «expr →⋆ₐ[ ] » A R B) : (star_alg_hom.id _ _).comp f = f :=\n  ext fun _ => rfl\n#align id_comp id_comp\n\n",
+ "fst_prod":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →⋆ₐ[ ] » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →⋆ₐ[ ] » -/\n@[simp]\ntheorem fst_prod (f : «expr →⋆ₐ[ ] » A R B) (g : «expr →⋆ₐ[ ] » A R C) : (fst R B C).comp (prod f g) = f := by\n  ext <;> rfl\n#align fst_prod fst_prod\n\n",
+ "ext_iff":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃⋆ₐ[ ] » -/\ntheorem ext_iff {f g : «expr ≃⋆ₐ[ ] » A R B} : f = g ↔ ∀ a, f a = g a :=\n  fun_like.ext_iff\n#align ext_iff ext_iff\n\n",
+ "ext":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃⋆ₐ[ ] » -/\n-- `R` becomes a metavariable but that's fine because it's an `out_param`\n-- See note [lower instance priority]\n-- `R` becomes a metavariable but that's fine because it's an `out_param`\n-- See note [lower instance priority]\n-- `R` becomes a metavariable but that's fine because it's an `out_param`\n-- See note [lower instance priority]\n-- See note [lower instance priority]\n@[ext]\ntheorem ext {f g : «expr ≃⋆ₐ[ ] » A R B} (h : ∀ a, f a = g a) : f = g :=\n  fun_like.ext f g h\n#align ext ext\n\n",
+ "copy_eq":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →⋆ₐ[ ] » -/\ntheorem copy_eq (f : «expr →⋆ₐ[ ] » A R B) (f' : A → B) (h : f' = f) : f.copy f' h = f :=\n  fun_like.ext' h\n#align copy_eq copy_eq\n\n",
+ "comp_id":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →⋆ₐ[ ] » -/\n@[simp]\ntheorem comp_id (f : «expr →⋆ₐ[ ] » A R B) : f.comp (star_alg_hom.id _ _) = f :=\n  ext fun _ => rfl\n#align comp_id comp_id\n\n",
+ "comp_assoc":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →⋆ₐ[ ] » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →⋆ₐ[ ] » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →⋆ₐ[ ] » -/\n@[simp]\ntheorem comp_assoc (f : «expr →⋆ₐ[ ] » C R D) (g : «expr →⋆ₐ[ ] » B R C) (h : «expr →⋆ₐ[ ] » A R B) :\n    (f.comp g).comp h = f.comp (g.comp h) :=\n  rfl\n#align comp_assoc comp_assoc\n\n",
+ "comp_apply":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →⋆ₐ[ ] » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →⋆ₐ[ ] » -/\n@[simp]\ntheorem comp_apply (f : «expr →⋆ₐ[ ] » B R C) (g : «expr →⋆ₐ[ ] » A R B) (a : A) : comp f g a = f (g a) :=\n  rfl\n#align comp_apply comp_apply\n\n",
+ "coe_zero":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →⋆ₙₐ[ ] » -/\n-- the `zero` requires extra type class assumptions because we need `star_zero`\n@[simp]\ntheorem coe_zero : ((0 : «expr →⋆ₙₐ[ ] » A R B) : A → B) = 0 :=\n  rfl\n#align coe_zero coe_zero\n\n",
+ "coe_trans":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃⋆ₐ[ ] » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃⋆ₐ[ ] » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n@[simp]\ntheorem coe_trans (e₁ : «expr ≃⋆ₐ[ ] » A R B) (e₂ : «expr ≃⋆ₐ[ ] » B R C) : «expr⇑ » (e₁.trans e₂) = e₂ ∘ e₁ :=\n  rfl\n#align coe_trans coe_trans\n\n",
+ "coe_to_non_unital_star_alg_hom":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →⋆ₐ[ ] » -/\n@[simp]\ntheorem coe_to_non_unital_star_alg_hom (f : «expr →⋆ₐ[ ] » A R B) : (f.to_non_unital_star_alg_hom : A → B) = f :=\n  rfl\n#align coe_to_non_unital_star_alg_hom coe_to_non_unital_star_alg_hom\n\n",
+ "coe_to_non_unital_alg_hom":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →⋆ₙₐ[ ] » -/\n@[simp]\ntheorem coe_to_non_unital_alg_hom {f : «expr →⋆ₙₐ[ ] » A R B} : (f.to_non_unital_alg_hom : A → B) = f :=\n  rfl\n#align coe_to_non_unital_alg_hom coe_to_non_unital_alg_hom\n\n",
+ "coe_to_alg_hom":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →⋆ₐ[ ] » -/\n@[simp]\ntheorem coe_to_alg_hom {f : «expr →⋆ₐ[ ] » A R B} : (f.to_alg_hom : A → B) = f :=\n  rfl\n#align coe_to_alg_hom coe_to_alg_hom\n\n",
+ "coe_refl":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃⋆ₐ[ ] » -/\n@[simp]\ntheorem coe_refl : «expr⇑ » (refl : «expr ≃⋆ₐ[ ] » A R A) = id :=\n  rfl\n#align coe_refl coe_refl\n\n",
+ "coe_prod":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →⋆ₐ[ ] » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →⋆ₐ[ ] » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\ntheorem coe_prod (f : «expr →⋆ₐ[ ] » A R B) (g : «expr →⋆ₐ[ ] » A R C) : «expr⇑ » (f.prod g) = pi.prod f g :=\n  rfl\n#align coe_prod coe_prod\n\n",
+ "coe_one":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →⋆ₙₐ[ ] » -/\n@[simp]\ntheorem coe_one : ((1 : «expr →⋆ₙₐ[ ] » A R A) : A → A) = id :=\n  rfl\n#align coe_one coe_one\n\n",
+ "coe_of_bijective":
+ "@[simp]\ntheorem coe_of_bijective {f : F} (hf : function.bijective f) : (star_alg_equiv.of_bijective f hf : A → B) = f :=\n  rfl\n#align coe_of_bijective coe_of_bijective\n\n",
+ "coe_mk":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →⋆ₐ[ ] » -/\n@[simp]\ntheorem coe_mk (f : A → B) (h₁ h₂ h₃ h₄ h₅ h₆) : ((⟨f, h₁, h₂, h₃, h₄, h₅, h₆⟩ : «expr →⋆ₐ[ ] » A R B) : A → B) = f :=\n  rfl\n#align coe_mk coe_mk\n\n",
+ "coe_inr":
+ "@[simp]\ntheorem coe_inr : (inr R A B : B → A × B) = prod.mk 0 :=\n  rfl\n#align coe_inr coe_inr\n\n",
+ "coe_inl":
+ "@[simp]\ntheorem coe_inl : (inl R A B : A → A × B) = fun x => (x, 0) :=\n  rfl\n#align coe_inl coe_inl\n\n",
+ "coe_id":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n@[simp]\ntheorem coe_id : «expr⇑ » (star_alg_hom.id R A) = id :=\n  rfl\n#align coe_id coe_id\n\n",
+ "coe_copy":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →⋆ₐ[ ] » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n@[simp]\ntheorem coe_copy (f : «expr →⋆ₐ[ ] » A R B) (f' : A → B) (h : f' = f) : «expr⇑ » (f.copy f' h) = f' :=\n  rfl\n#align coe_copy coe_copy\n\n",
+ "coe_comp":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →⋆ₐ[ ] » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →⋆ₐ[ ] » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n@[simp]\ntheorem coe_comp (f : «expr →⋆ₐ[ ] » B R C) (g : «expr →⋆ₐ[ ] » A R B) : «expr⇑ » (comp f g) = f ∘ g :=\n  rfl\n#align coe_comp coe_comp\n\n",
+ "coe_coe":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →⋆ₐ[ ] » -/\n-- `R` becomes a metavariable but that's fine because it's an `out_param`\n-- See note [lower instance priority]\n@[simp, protected]\ntheorem coe_coe {F : Type} [star_alg_hom_class F R A B] (f : F) : «expr⇑ » (f : «expr →⋆ₐ[ ] » A R B) = f :=\n  rfl\n#align coe_coe coe_coe\n\n",
+ "apply_symm_apply":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃⋆ₐ[ ] » -/\n@[simp]\ntheorem apply_symm_apply (e : «expr ≃⋆ₐ[ ] » A R B) : ∀ x, e (e.symm x) = x :=\n  e.to_ring_equiv.apply_symm_apply\n#align apply_symm_apply apply_symm_apply\n\n"}

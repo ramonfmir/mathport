@@ -1,0 +1,14 @@
+{"zero_lt_d800":
+ "/-\nWe cannot use tactics dec_trivial or comp_val here because the tactic framework has not been defined yet.\nWe also do not use `zero_lt_succ _` as a proof term because this proof may not be trivial to check by\nexternal type checkers. See discussion at: https://github.com/leanprover/tc/issues/8\n-/\ntheorem zero_lt_d800 : 0 < 55296 :=\n  Nat.zero_lt_bit0 <|\n    Nat.bit0_ne_zero <|\n      Nat.bit0_ne_zero <|\n        Nat.bit0_ne_zero <|\n          Nat.bit0_ne_zero <|\n            Nat.bit0_ne_zero <|\n              Nat.bit0_ne_zero <|\n                Nat.bit0_ne_zero <| Nat.bit0_ne_zero <| Nat.bit0_ne_zero <| Nat.bit0_ne_zero <| Nat.bit1_ne_zero 13\n#align zero_lt_d800 zero_lt_d800\n\n",
+ "vne_of_ne":
+ "theorem vne_of_ne {c d : char} (h : c ≠ d) : c.val ≠ d.val := fun h' => absurd (eq_of_veq h') h\n#align vne_of_ne vne_of_ne\n\n",
+ "veq_of_eq":
+ "theorem veq_of_eq : ∀ {c d : char}, c = d → c.val = d.val\n  | _, _, rfl => rfl\n#align veq_of_eq veq_of_eq\n\n",
+ "ne_of_vne":
+ "theorem ne_of_vne {c d : char} (h : c.val ≠ d.val) : c ≠ d := fun h' => absurd (veq_of_eq h') h\n#align ne_of_vne ne_of_vne\n\n",
+ "is_valid_char_range_2":
+ "theorem is_valid_char_range_2 (n : nat) (h₁ : 57343 < n) (h₂ : n < 1114112) : is_valid_char n :=\n  or.inr ⟨h₁, h₂⟩\n#align is_valid_char_range_2 is_valid_char_range_2\n\n",
+ "is_valid_char_range_1":
+ "/-\nCopyright (c) 2016 Microsoft Corporation. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthor: Leonardo de Moura\n-/\ntheorem is_valid_char_range_1 (n : nat) (h : n < 55296) : is_valid_char n :=\n  or.inl h\n#align is_valid_char_range_1 is_valid_char_range_1\n\n",
+ "eq_of_veq":
+ "theorem eq_of_veq : ∀ {c d : char}, c.val = d.val → c = d\n  | ⟨v, h⟩, ⟨_, _⟩, rfl => rfl\n#align eq_of_veq eq_of_veq\n\n"}

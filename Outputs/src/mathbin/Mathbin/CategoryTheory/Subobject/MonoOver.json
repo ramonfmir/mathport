@@ -1,0 +1,24 @@
+{"w":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⟶ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≫ » -/\n@[reassoc.1]\ntheorem w {f g : mono_over X} (k : «expr ⟶ » f g) : «expr ≫ » k.left g.arrow = f.arrow :=\n  over.w _\n#align w w\n\n",
+ "pullback_obj_left":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⟶ » -/\n@[simp]\ntheorem pullback_obj_left (f : «expr ⟶ » X Y) (g : mono_over Y) :\n    ((pullback f).obj g : C) = limits.pullback g.arrow f :=\n  rfl\n#align pullback_obj_left pullback_obj_left\n\n",
+ "pullback_obj_arrow":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⟶ » -/\n@[simp]\ntheorem pullback_obj_arrow (f : «expr ⟶ » X Y) (g : mono_over Y) : ((pullback f).obj g).arrow = pullback.snd :=\n  rfl\n#align pullback_obj_arrow pullback_obj_arrow\n\n",
+ "mk'_coe'":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⟶ » -/\n@[simp]\ntheorem mk'_coe' {X A : C} (f : «expr ⟶ » A X) [hf : Mono f] : (mk' f : C) = A :=\n  rfl\n#align mk'_coe' mk'_coe'\n\n",
+ "mk'_arrow":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⟶ » -/\n@[simp]\ntheorem mk'_arrow {X A : C} (f : «expr ⟶ » A X) [hf : Mono f] : (mk' f).arrow = f :=\n  rfl\n#align mk'_arrow mk'_arrow\n\n",
+ "map_obj_left":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⟶ » -/\n@[simp]\ntheorem map_obj_left (f : «expr ⟶ » X Y) [Mono f] (g : mono_over X) : ((map f).obj g : C) = g.obj.left :=\n  rfl\n#align map_obj_left map_obj_left\n\n",
+ "map_obj_arrow":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⟶ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≫ » -/\n@[simp]\ntheorem map_obj_arrow (f : «expr ⟶ » X Y) [Mono f] (g : mono_over X) : ((map f).obj g).arrow = «expr ≫ » g.arrow f :=\n  rfl\n#align map_obj_arrow map_obj_arrow\n\n",
+ "lift_obj_arrow":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⥤ » -/\n@[simp]\ntheorem lift_obj_arrow {Y : D} (F : «expr ⥤ » (over Y) (over X))\n    (h : ∀ f : mono_over Y, Mono (F.obj ((mono_over.forget Y).obj f)).hom) (f : mono_over Y) :\n    ((lift F h).obj f).arrow = (F.obj ((forget Y).obj f)).hom :=\n  rfl\n#align lift_obj_arrow lift_obj_arrow\n\n",
+ "lift_comm":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⥤ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⋙ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⋙ » -/\n@[simp]\ntheorem lift_comm (F : «expr ⥤ » (over Y) (over X))\n    (h : ∀ f : mono_over Y, Mono (F.obj ((mono_over.forget Y).obj f)).hom) :\n    «expr ⋙ » (lift F h) (mono_over.forget X) = «expr ⋙ » (mono_over.forget Y) F :=\n  rfl\n#align lift_comm lift_comm\n\n",
+ "image_mono_over_arrow":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⟶ » -/\n@[simp]\ntheorem image_mono_over_arrow (f : «expr ⟶ » X Y) [has_image f] : (image_mono_over f).arrow = image.ι f :=\n  rfl\n#align image_mono_over_arrow image_mono_over_arrow\n\n",
+ "forget_obj_left":
+ "/-\nCopyright (c) 2020 Bhavik Mehta. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Bhavik Mehta, Scott Morrison\n-/\n@[simp]\ntheorem forget_obj_left {f} : ((forget X).obj f).left = (f : C) :=\n  rfl\n#align forget_obj_left forget_obj_left\n\n",
+ "forget_obj_hom":
+ "@[simp]\ntheorem forget_obj_hom {f} : ((forget X).obj f).hom = f.arrow :=\n  rfl\n#align forget_obj_hom forget_obj_hom\n\n"}

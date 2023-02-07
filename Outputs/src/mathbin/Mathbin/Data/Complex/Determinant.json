@@ -1,0 +1,4 @@
+{"linear_equiv_det_conj_ae":
+ "/-- The determinant of `conj_ae`, as a linear equiv. -/\n@[simp]\ntheorem linear_equiv_det_conj_ae : conj_ae.to_linear_equiv.det = -1 := by\n  rw [← Units.eq_iff, linear_equiv.coe_det, ← linear_equiv.to_linear_map_eq_coe,\n    alg_equiv.to_linear_equiv_to_linear_map, det_conj_ae, Units.coe_neg_one]\n#align linear_equiv_det_conj_ae linear_equiv_det_conj_ae\n\n",
+ "det_conj_ae":
+ "/-\nCopyright (c) 2022 Joseph Myers. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Joseph Myers\n-/\n/-- The determinant of `conj_ae`, as a linear map. -/\n@[simp]\ntheorem det_conj_ae : conj_ae.to_linear_map.det = -1 :=\n  by\n  rw [← linear_map.det_to_matrix basis_one_I, to_matrix_conj_ae, matrix.det_fin_two_of]\n  simp\n#align det_conj_ae det_conj_ae\n\n"}

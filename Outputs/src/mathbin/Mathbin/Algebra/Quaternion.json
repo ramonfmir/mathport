@@ -1,0 +1,226 @@
+{"zero_re":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `quaternion -/\n@[simp]\ntheorem zero_re : (0 : quaternion R).re = 0 :=\n  rfl\n#align zero_re zero_re\n\n",
+ "zero_im_k":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `quaternion -/\n@[simp]\ntheorem zero_im_k : (0 : quaternion R).im_k = 0 :=\n  rfl\n#align zero_im_k zero_im_k\n\n",
+ "zero_im_j":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `quaternion -/\n@[simp]\ntheorem zero_im_j : (0 : quaternion R).im_j = 0 :=\n  rfl\n#align zero_im_j zero_im_j\n\n",
+ "zero_im_i":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `quaternion -/\n@[simp]\ntheorem zero_im_i : (0 : quaternion R).im_i = 0 :=\n  rfl\n#align zero_im_i zero_im_i\n\n",
+ "sub_re":
+ "@[simp]\ntheorem sub_re : (a - b).re = a.re - b.re :=\n  rfl\n#align sub_re sub_re\n\n",
+ "sub_im_k":
+ "@[simp]\ntheorem sub_im_k : (a - b).im_k = a.im_k - b.im_k :=\n  rfl\n#align sub_im_k sub_im_k\n\n",
+ "sub_im_j":
+ "@[simp]\ntheorem sub_im_j : (a - b).im_j = a.im_j - b.im_j :=\n  rfl\n#align sub_im_j sub_im_j\n\n",
+ "sub_im_i":
+ "@[simp]\ntheorem sub_im_i : (a - b).im_i = a.im_i - b.im_i :=\n  rfl\n#align sub_im_i sub_im_i\n\n",
+ "star_def":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `quaternion_algebra -/\n@[simp]\ntheorem star_def (a : quaternion_algebra R c₁ c₂) : star a = conj a :=\n  rfl\n#align star_def star_def\n\n",
+ "smul_re":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n@[simp]\ntheorem smul_re : («expr • » r a).re = «expr • » r a.re :=\n  rfl\n#align smul_re smul_re\n\n",
+ "smul_mk":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `quaternion_algebra -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n@[simp]\ntheorem smul_mk (re im_i im_j im_k : R) :\n    «expr • » r (⟨re, im_i, im_j, im_k⟩ : quaternion_algebra R c₁ c₂) =\n      ⟨«expr • » r re, «expr • » r im_i, «expr • » r im_j, «expr • » r im_k⟩ :=\n  rfl\n#align smul_mk smul_mk\n\n",
+ "smul_im_k":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n@[simp]\ntheorem smul_im_k : («expr • » r a).im_k = «expr • » r a.im_k :=\n  rfl\n#align smul_im_k smul_im_k\n\n",
+ "smul_im_j":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n@[simp]\ntheorem smul_im_j : («expr • » r a).im_j = «expr • » r a.im_j :=\n  rfl\n#align smul_im_j smul_im_j\n\n",
+ "smul_im_i":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n@[simp]\ntheorem smul_im_i : («expr • » r a).im_i = «expr • » r a.im_i :=\n  rfl\n#align smul_im_i smul_im_i\n\n",
+ "smul_coe":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `quaternion -/\ntheorem smul_coe : «expr • » x (y : quaternion R) = ↑(x * y) :=\n  quaternion_algebra.smul_coe x y\n#align smul_coe smul_coe\n\n",
+ "self_mul_conj":
+ "theorem self_mul_conj : a * a.conj = norm_sq a := by rw [mul_conj_eq_coe, norm_sq_def]\n#align self_mul_conj self_mul_conj\n\n",
+ "self_add_conj'":
+ "theorem self_add_conj' : a + a.conj = ↑(2 * a.re) :=\n  a.self_add_conj'\n#align self_add_conj' self_add_conj'\n\n",
+ "self_add_conj":
+ "theorem self_add_conj : a + a.conj = 2 * a.re :=\n  a.self_add_conj\n#align self_add_conj self_add_conj\n\n",
+ "re_conj":
+ "@[simp]\ntheorem re_conj : (conj a).re = a.re :=\n  rfl\n#align re_conj re_conj\n\n",
+ "pow_four":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `cardinal.mk -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `cardinal.mk -/\nprivate theorem pow_four [Infinite R] : cardinal.mk R ^ 4 = cardinal.mk R :=\n  power_nat_eq (aleph_0_le_mk R) <| by simp\n#align pow_four pow_four\n\n",
+ "one_re":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `quaternion -/\n@[simp]\ntheorem one_re : (1 : quaternion R).re = 1 :=\n  rfl\n#align one_re one_re\n\n",
+ "one_im_k":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `quaternion -/\n@[simp]\ntheorem one_im_k : (1 : quaternion R).im_k = 0 :=\n  rfl\n#align one_im_k one_im_k\n\n",
+ "one_im_j":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `quaternion -/\n@[simp]\ntheorem one_im_j : (1 : quaternion R).im_j = 0 :=\n  rfl\n#align one_im_j one_im_j\n\n",
+ "one_im_i":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `quaternion -/\n@[simp]\ntheorem one_im_i : (1 : quaternion R).im_i = 0 :=\n  rfl\n#align one_im_i one_im_i\n\n",
+ "norm_sq_nonneg":
+ "/- ./././Mathport/Syntax/Translate/Tactic/Builtin.lean:75:38: in apply_rules #[[\"[\", expr sq_nonneg, \",\", expr add_nonneg, \"]\"], []]: ./././Mathport/Syntax/Translate/Basic.lean:349:22: unsupported: parse error -/\n@[simp]\ntheorem norm_sq_nonneg : 0 ≤ norm_sq a := by\n  rw [norm_sq_def']\n  trace\n    \"./././Mathport/Syntax/Translate/Tactic/Builtin.lean:75:38: in apply_rules #[[\\\"[\\\", expr sq_nonneg, \\\",\\\", expr add_nonneg, \\\"]\\\"], []]: ./././Mathport/Syntax/Translate/Basic.lean:349:22: unsupported: parse error\"\n#align norm_sq_nonneg norm_sq_nonneg\n\n",
+ "norm_sq_neg":
+ "@[simp]\ntheorem norm_sq_neg : norm_sq (-a) = norm_sq a := by simp only [norm_sq_def, conj_neg, neg_mul_neg]\n#align norm_sq_neg norm_sq_neg\n\n",
+ "norm_sq_ne_zero":
+ "theorem norm_sq_ne_zero : norm_sq a ≠ 0 ↔ a ≠ 0 :=\n  not_congr norm_sq_eq_zero\n#align norm_sq_ne_zero norm_sq_ne_zero\n\n",
+ "norm_sq_le_zero":
+ "@[simp]\ntheorem norm_sq_le_zero : norm_sq a ≤ 0 ↔ a = 0 := by\n  simpa only [le_antisymm_iff, norm_sq_nonneg, and_true_iff] using @norm_sq_eq_zero _ _ a\n#align norm_sq_le_zero norm_sq_le_zero\n\n",
+ "norm_sq_inv":
+ "@[simp]\ntheorem norm_sq_inv : norm_sq a⁻¹ = (norm_sq a)⁻¹ :=\n  map_inv₀ norm_sq _\n#align norm_sq_inv norm_sq_inv\n\n",
+ "norm_sq_eq_zero":
+ "/- ./././Mathport/Syntax/Translate/Tactic/Builtin.lean:75:38: in apply_rules #[[\"[\", expr sq_nonneg, \",\", expr add_nonneg, \"]\"], []]: ./././Mathport/Syntax/Translate/Basic.lean:349:22: unsupported: parse error -/\n@[simp]\ntheorem norm_sq_eq_zero : norm_sq a = 0 ↔ a = 0 :=\n  by\n  refine' ⟨fun h => _, fun h => h.symm ▸ norm_sq.map_zero⟩\n  rw [norm_sq_def', add_eq_zero_iff', add_eq_zero_iff', add_eq_zero_iff'] at h\n  exact ext a 0 (pow_eq_zero h.1.1.1) (pow_eq_zero h.1.1.2) (pow_eq_zero h.1.2) (pow_eq_zero h.2)\n  all_goals\n    trace\n      \"./././Mathport/Syntax/Translate/Tactic/Builtin.lean:75:38: in apply_rules #[[\\\"[\\\", expr sq_nonneg, \\\",\\\", expr add_nonneg, \\\"]\\\"], []]: ./././Mathport/Syntax/Translate/Basic.lean:349:22: unsupported: parse error\"\n#align norm_sq_eq_zero norm_sq_eq_zero\n\n",
+ "norm_sq_div":
+ "@[simp]\ntheorem norm_sq_div : norm_sq (a / b) = norm_sq a / norm_sq b :=\n  map_div₀ norm_sq a b\n#align norm_sq_div norm_sq_div\n\n",
+ "norm_sq_def'":
+ "theorem norm_sq_def' : norm_sq a = a.1 ^ 2 + a.2 ^ 2 + a.3 ^ 2 + a.4 ^ 2 := by\n  simp only [norm_sq_def, sq, mul_neg, sub_neg_eq_add, mul_re, conj_re, conj_im_i, conj_im_j, conj_im_k]\n#align norm_sq_def' norm_sq_def'\n\n",
+ "norm_sq_def":
+ "theorem norm_sq_def : norm_sq a = (a * a.conj).re :=\n  rfl\n#align norm_sq_def norm_sq_def\n\n",
+ "norm_sq_coe":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `quaternion -/\ntheorem norm_sq_coe : norm_sq (x : quaternion R) = x ^ 2 := by rw [norm_sq_def, conj_coe, ← coe_mul, coe_re, sq]\n#align norm_sq_coe norm_sq_coe\n\n",
+ "neg_re":
+ "@[simp]\ntheorem neg_re : (-a).re = -a.re :=\n  rfl\n#align neg_re neg_re\n\n",
+ "neg_mk":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `quaternion_algebra -/\n@[simp]\ntheorem neg_mk (a₁ a₂ a₃ a₄ : R) : -(mk a₁ a₂ a₃ a₄ : quaternion_algebra R c₁ c₂) = ⟨-a₁, -a₂, -a₃, -a₄⟩ :=\n  rfl\n#align neg_mk neg_mk\n\n",
+ "neg_im_k":
+ "@[simp]\ntheorem neg_im_k : (-a).im_k = -a.im_k :=\n  rfl\n#align neg_im_k neg_im_k\n\n",
+ "neg_im_j":
+ "@[simp]\ntheorem neg_im_j : (-a).im_j = -a.im_j :=\n  rfl\n#align neg_im_j neg_im_j\n\n",
+ "neg_im_i":
+ "@[simp]\ntheorem neg_im_i : (-a).im_i = -a.im_i :=\n  rfl\n#align neg_im_i neg_im_i\n\n",
+ "mul_re":
+ "@[simp]\ntheorem mul_re : (a * b).re = a.re * b.re - a.im_i * b.im_i - a.im_j * b.im_j - a.im_k * b.im_k :=\n  (quaternion_algebra.has_mul_mul_re a b).trans <| by simp only [one_mul, neg_mul, sub_eq_add_neg, neg_neg]\n#align mul_re mul_re\n\n",
+ "mul_im_k":
+ "@[simp]\ntheorem mul_im_k : (a * b).im_k = a.re * b.im_k + a.im_i * b.im_j - a.im_j * b.im_i + a.im_k * b.re :=\n  (quaternion_algebra.has_mul_mul_im_k a b).trans <| by simp only [one_mul, neg_mul, sub_eq_add_neg, neg_neg]\n#align mul_im_k mul_im_k\n\n",
+ "mul_im_j":
+ "@[simp]\ntheorem mul_im_j : (a * b).im_j = a.re * b.im_j - a.im_i * b.im_k + a.im_j * b.re + a.im_k * b.im_i :=\n  (quaternion_algebra.has_mul_mul_im_j a b).trans <| by simp only [one_mul, neg_mul, sub_eq_add_neg, neg_neg]\n#align mul_im_j mul_im_j\n\n",
+ "mul_im_i":
+ "@[simp]\ntheorem mul_im_i : (a * b).im_i = a.re * b.im_i + a.im_i * b.re + a.im_j * b.im_k - a.im_k * b.im_j :=\n  (quaternion_algebra.has_mul_mul_im_i a b).trans <| by simp only [one_mul, neg_mul, sub_eq_add_neg, neg_neg]\n#align mul_im_i mul_im_i\n\n",
+ "mul_conj_eq_coe":
+ "theorem mul_conj_eq_coe : a * conj a = (a * conj a).re :=\n  a.mul_conj_eq_coe\n#align mul_conj_eq_coe mul_conj_eq_coe\n\n",
+ "mul_coe_eq_smul":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\ntheorem mul_coe_eq_smul : a * r = «expr • » r a :=\n  quaternion_algebra.mul_coe_eq_smul r a\n#align mul_coe_eq_smul mul_coe_eq_smul\n\n",
+ "mk_univ_quaternion_of_infinite":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `cardinal.mk -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `quaternion -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `cardinal.mk -/\n@[simp]\ntheorem mk_univ_quaternion_of_infinite [Infinite R] : cardinal.mk (Set.univ : set (quaternion R)) = cardinal.mk R := by\n  rw [mk_univ_quaternion, pow_four]\n#align mk_univ_quaternion_of_infinite mk_univ_quaternion_of_infinite\n\n",
+ "mk_univ_quaternion_algebra_of_infinite":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `cardinal.mk -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `quaternion_algebra -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `cardinal.mk -/\n@[simp]\ntheorem mk_univ_quaternion_algebra_of_infinite [Infinite R] :\n    cardinal.mk (Set.univ : set (quaternion_algebra R c₁ c₂)) = cardinal.mk R := by\n  rw [mk_univ_quaternion_algebra, pow_four]\n#align mk_univ_quaternion_algebra_of_infinite mk_univ_quaternion_algebra_of_infinite\n\n",
+ "mk_univ_quaternion_algebra":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `cardinal.mk -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `quaternion_algebra -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `cardinal.mk -/\n/-- The cardinality of a quaternion algebra, as a set. -/\ntheorem mk_univ_quaternion_algebra : cardinal.mk (Set.univ : set (quaternion_algebra R c₁ c₂)) = cardinal.mk R ^ 4 := by\n  rw [mk_univ, mk_quaternion_algebra]\n#align mk_univ_quaternion_algebra mk_univ_quaternion_algebra\n\n",
+ "mk_univ_quaternion":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `cardinal.mk -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `quaternion -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `cardinal.mk -/\n/-- The cardinality of the quaternions, as a set. -/\n@[simp]\ntheorem mk_univ_quaternion : cardinal.mk (Set.univ : set (quaternion R)) = cardinal.mk R ^ 4 :=\n  mk_univ_quaternion_algebra _ _\n#align mk_univ_quaternion mk_univ_quaternion\n\n",
+ "mk_sub_mk":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `quaternion_algebra -/\n@[simp]\ntheorem mk_sub_mk (a₁ a₂ a₃ a₄ b₁ b₂ b₃ b₄ : R) :\n    (mk a₁ a₂ a₃ a₄ : quaternion_algebra R c₁ c₂) - mk b₁ b₂ b₃ b₄ = mk (a₁ - b₁) (a₂ - b₂) (a₃ - b₃) (a₄ - b₄) :=\n  rfl\n#align mk_sub_mk mk_sub_mk\n\n",
+ "mk_quaternion_of_infinite":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `cardinal.mk -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `quaternion -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `cardinal.mk -/\n@[simp]\ntheorem mk_quaternion_of_infinite [Infinite R] : cardinal.mk (quaternion R) = cardinal.mk R := by\n  rw [mk_quaternion, pow_four]\n#align mk_quaternion_of_infinite mk_quaternion_of_infinite\n\n",
+ "mk_quaternion_algebra_of_infinite":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `cardinal.mk -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `quaternion_algebra -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `cardinal.mk -/\n@[simp]\ntheorem mk_quaternion_algebra_of_infinite [Infinite R] : cardinal.mk (quaternion_algebra R c₁ c₂) = cardinal.mk R := by\n  rw [mk_quaternion_algebra, pow_four]\n#align mk_quaternion_algebra_of_infinite mk_quaternion_algebra_of_infinite\n\n",
+ "mk_quaternion_algebra":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `cardinal.mk -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `quaternion_algebra -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `cardinal.mk -/\n/-- The cardinality of a quaternion algebra, as a type. -/\ntheorem mk_quaternion_algebra : cardinal.mk (quaternion_algebra R c₁ c₂) = cardinal.mk R ^ 4 :=\n  by\n  rw [mk_congr (quaternion_algebra.equiv_prod c₁ c₂)]\n  simp only [mk_prod, lift_id]\n  ring\n#align mk_quaternion_algebra mk_quaternion_algebra\n\n",
+ "mk_quaternion":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `cardinal.mk -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `quaternion -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `cardinal.mk -/\n/-- The cardinality of the quaternions, as a type. -/\n@[simp]\ntheorem mk_quaternion : cardinal.mk (quaternion R) = cardinal.mk R ^ 4 :=\n  mk_quaternion_algebra _ _\n#align mk_quaternion mk_quaternion\n\n",
+ "mk_mul_mk":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `quaternion_algebra -/\n@[simp]\ntheorem mk_mul_mk (a₁ a₂ a₃ a₄ b₁ b₂ b₃ b₄ : R) :\n    (mk a₁ a₂ a₃ a₄ : quaternion_algebra R c₁ c₂) * mk b₁ b₂ b₃ b₄ =\n      ⟨a₁ * b₁ + c₁ * a₂ * b₂ + c₂ * a₃ * b₃ - c₁ * c₂ * a₄ * b₄, a₁ * b₂ + a₂ * b₁ - c₂ * a₃ * b₄ + c₂ * a₄ * b₃,\n        a₁ * b₃ + c₁ * a₂ * b₄ + a₃ * b₁ - c₁ * a₄ * b₂, a₁ * b₄ + a₂ * b₃ - a₃ * b₂ + a₄ * b₁⟩ :=\n  rfl\n#align mk_mul_mk mk_mul_mk\n\n",
+ "mk_add_mk":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `quaternion_algebra -/\n@[simp]\ntheorem mk_add_mk (a₁ a₂ a₃ a₄ b₁ b₂ b₃ b₄ : R) :\n    (mk a₁ a₂ a₃ a₄ : quaternion_algebra R c₁ c₂) + mk b₁ b₂ b₃ b₄ = mk (a₁ + b₁) (a₂ + b₂) (a₃ + b₃) (a₄ + b₄) :=\n  rfl\n#align mk_add_mk mk_add_mk\n\n",
+ "im_k_conj":
+ "@[simp]\ntheorem im_k_conj : (conj a).im_k = -a.im_k :=\n  rfl\n#align im_k_conj im_k_conj\n\n",
+ "im_j_conj":
+ "@[simp]\ntheorem im_j_conj : (conj a).im_j = -a.im_j :=\n  rfl\n#align im_j_conj im_j_conj\n\n",
+ "im_i_conj":
+ "@[simp]\ntheorem im_i_conj : (conj a).im_i = -a.im_i :=\n  rfl\n#align im_i_conj im_i_conj\n\n",
+ "ext_iff":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `quaternion -/\ntheorem ext_iff {a b : quaternion R} : a = b ↔ a.re = b.re ∧ a.im_i = b.im_i ∧ a.im_j = b.im_j ∧ a.im_k = b.im_k :=\n  quaternion_algebra.ext_iff a b\n#align ext_iff ext_iff\n\n",
+ "ext":
+ "@[ext]\ntheorem ext : a.re = b.re → a.im_i = b.im_i → a.im_j = b.im_j → a.im_k = b.im_k → a = b :=\n  quaternion_algebra.ext a b\n#align ext ext\n\n",
+ "eta":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `quaternion_algebra -/\n/-\nCopyright (c) 2020 Yury Kudryashov. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Yury Kudryashov\n-/\n@[simp]\ntheorem mk.eta {R : Type _} {c₁ c₂} : ∀ a : quaternion_algebra R c₁ c₂, mk a.1 a.2 a.3 a.4 = a\n  | ⟨a₁, a₂, a₃, a₄⟩ => rfl\n#align mk.eta mk.eta\n\n",
+ "eq_re_of_eq_coe":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `quaternion -/\ntheorem eq_re_of_eq_coe {a : quaternion R} {x : R} (h : a = x) : a = a.re :=\n  quaternion_algebra.eq_re_of_eq_coe h\n#align eq_re_of_eq_coe eq_re_of_eq_coe\n\n",
+ "eq_re_iff_mem_range_coe":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `quaternion -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `quaternion -/\ntheorem eq_re_iff_mem_range_coe {a : quaternion R} : a = a.re ↔ a ∈ Set.range (coe : R → quaternion R) :=\n  quaternion_algebra.eq_re_iff_mem_range_coe\n#align eq_re_iff_mem_range_coe eq_re_iff_mem_range_coe\n\n",
+ "conj_zero":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `quaternion -/\n@[simp]\ntheorem conj_zero : conj (0 : quaternion R) = 0 :=\n  quaternion_algebra.conj_zero\n#align conj_zero conj_zero\n\n",
+ "conj_sub":
+ "@[simp]\ntheorem conj_sub : (a - b).conj = a.conj - b.conj :=\n  a.conj_sub b\n#align conj_sub conj_sub\n\n",
+ "conj_smul":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n@[simp]\ntheorem conj_smul : conj («expr • » r a) = «expr • » r (conj a) :=\n  a.conj_smul r\n#align conj_smul conj_smul\n\n",
+ "conj_re":
+ "@[simp]\ntheorem conj_re : a.conj.re = a.re :=\n  rfl\n#align conj_re conj_re\n\n",
+ "conj_one":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `quaternion -/\n@[simp]\ntheorem conj_one : conj (1 : quaternion R) = 1 :=\n  conj_coe 1\n#align conj_one conj_one\n\n",
+ "conj_neg":
+ "@[simp]\ntheorem conj_neg : (-a).conj = -a.conj :=\n  a.conj_neg\n#align conj_neg conj_neg\n\n",
+ "conj_mul_self":
+ "theorem conj_mul_self : a.conj * a = norm_sq a := by rw [← a.commute_self_conj.eq, self_mul_conj]\n#align conj_mul_self conj_mul_self\n\n",
+ "conj_mul_eq_coe":
+ "theorem conj_mul_eq_coe : conj a * a = (conj a * a).re :=\n  a.conj_mul_eq_coe\n#align conj_mul_eq_coe conj_mul_eq_coe\n\n",
+ "conj_mul_conj":
+ "theorem conj_mul_conj : (a * b.conj).conj = b * a.conj :=\n  a.conj_mul_conj b\n#align conj_mul_conj conj_mul_conj\n\n",
+ "conj_mul":
+ "#print conj_mul /-\n@[simp]\ntheorem conj_mul : (a * b).conj = b.conj * a.conj :=\n  a.conj_mul b\n#align conj_mul conj_mul\n-/\n\n",
+ "conj_mk":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `quaternion_algebra -/\n@[simp]\ntheorem conj_mk (a₁ a₂ a₃ a₄ : R) : conj (mk a₁ a₂ a₃ a₄ : quaternion_algebra R c₁ c₂) = ⟨a₁, -a₂, -a₃, -a₄⟩ :=\n  rfl\n#align conj_mk conj_mk\n\n",
+ "conj_im_k":
+ "@[simp]\ntheorem conj_im_k : a.conj.im_k = -a.im_k :=\n  rfl\n#align conj_im_k conj_im_k\n\n",
+ "conj_im_j":
+ "@[simp]\ntheorem conj_im_j : a.conj.im_j = -a.im_j :=\n  rfl\n#align conj_im_j conj_im_j\n\n",
+ "conj_im_i":
+ "@[simp]\ntheorem conj_im_i : a.conj.im_i = -a.im_i :=\n  rfl\n#align conj_im_i conj_im_i\n\n",
+ "conj_fixed":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `quaternion -/\n@[simp]\ntheorem conj_fixed {R : Type _} [CommRing R] [no_zero_divisors R] [CharZero R] {a : quaternion R} :\n    conj a = a ↔ a = a.re :=\n  quaternion_algebra.conj_fixed\n#align conj_fixed conj_fixed\n\n",
+ "conj_eq_two_re_sub":
+ "theorem conj_eq_two_re_sub : a.conj = ↑(2 * a.re) - a :=\n  a.conj_eq_two_re_sub\n#align conj_eq_two_re_sub conj_eq_two_re_sub\n\n",
+ "conj_conj_mul":
+ "theorem conj_conj_mul : (a.conj * b).conj = b.conj * a :=\n  a.conj_conj_mul b\n#align conj_conj_mul conj_conj_mul\n\n",
+ "conj_conj":
+ "@[simp]\ntheorem conj_conj : a.conj.conj = a :=\n  a.conj_conj\n#align conj_conj conj_conj\n\n",
+ "conj_coe":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `quaternion -/\n@[simp]\ntheorem conj_coe : conj (x : quaternion R) = x :=\n  quaternion_algebra.conj_coe x\n#align conj_coe conj_coe\n\n",
+ "conj_add_self'":
+ "theorem conj_add_self' : a.conj + a = ↑(2 * a.re) :=\n  a.conj_add_self'\n#align conj_add_self' conj_add_self'\n\n",
+ "conj_add_self":
+ "theorem conj_add_self : a.conj + a = 2 * a.re :=\n  a.conj_add_self\n#align conj_add_self conj_add_self\n\n",
+ "conj_add":
+ "@[simp]\ntheorem conj_add : (a + b).conj = a.conj + b.conj :=\n  a.conj_add b\n#align conj_add conj_add\n\n",
+ "commute_self_conj":
+ "theorem commute_self_conj : Commute a a.conj :=\n  a.commute_self_conj\n#align commute_self_conj commute_self_conj\n\n",
+ "commute_conj_self":
+ "theorem commute_conj_self : Commute a.conj a :=\n  a.commute_conj_self\n#align commute_conj_self commute_conj_self\n\n",
+ "commute_conj_conj":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `quaternion -/\ntheorem commute_conj_conj {a b : quaternion R} (h : Commute a b) : Commute a.conj b.conj :=\n  quaternion_algebra.commute_conj_conj h\n#align commute_conj_conj commute_conj_conj\n\n",
+ "coe_zero":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `quaternion -/\n@[simp, norm_cast]\ntheorem coe_zero : ((0 : R) : quaternion R) = 0 :=\n  rfl\n#align coe_zero coe_zero\n\n",
+ "coe_sub":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `quaternion -/\n@[simp, norm_cast]\ntheorem coe_sub : ((x - y : R) : quaternion R) = x - y :=\n  quaternion_algebra.coe_sub x y\n#align coe_sub coe_sub\n\n",
+ "coe_re":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `quaternion -/\n@[simp, norm_cast]\ntheorem coe_re : (x : quaternion R).re = x :=\n  rfl\n#align coe_re coe_re\n\n",
+ "coe_one":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `quaternion -/\n@[simp, norm_cast]\ntheorem coe_one : ((1 : R) : quaternion R) = 1 :=\n  rfl\n#align coe_one coe_one\n\n",
+ "coe_norm_sq_add":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `quaternion -/\ntheorem coe_norm_sq_add : (norm_sq (a + b) : quaternion R) = norm_sq a + a * b.conj + b * a.conj + norm_sq b := by\n  simp [← self_mul_conj, mul_add, add_mul, add_assoc]\n#align coe_norm_sq_add coe_norm_sq_add\n\n",
+ "coe_neg":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `quaternion -/\n@[simp, norm_cast]\ntheorem coe_neg : ((-x : R) : quaternion R) = -x :=\n  quaternion_algebra.coe_neg x\n#align coe_neg coe_neg\n\n",
+ "coe_mul_eq_smul":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\ntheorem coe_mul_eq_smul : ↑r * a = «expr • » r a :=\n  quaternion_algebra.coe_mul_eq_smul r a\n#align coe_mul_eq_smul coe_mul_eq_smul\n\n",
+ "coe_mul":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `quaternion -/\n@[simp, norm_cast]\ntheorem coe_mul : ((x * y : R) : quaternion R) = x * y :=\n  quaternion_algebra.coe_mul x y\n#align coe_mul coe_mul\n\n",
+ "coe_injective":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `quaternion -/\ntheorem coe_injective : function.injective (coe : R → quaternion R) :=\n  quaternion_algebra.coe_injective\n#align coe_injective coe_injective\n\n",
+ "coe_inj":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `quaternion -/\n@[simp]\ntheorem coe_inj {x y : R} : (x : quaternion R) = y ↔ x = y :=\n  coe_injective.eq_iff\n#align coe_inj coe_inj\n\n",
+ "coe_im_k":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `quaternion -/\n@[simp, norm_cast]\ntheorem coe_im_k : (x : quaternion R).im_k = 0 :=\n  rfl\n#align coe_im_k coe_im_k\n\n",
+ "coe_im_j":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `quaternion -/\n@[simp, norm_cast]\ntheorem coe_im_j : (x : quaternion R).im_j = 0 :=\n  rfl\n#align coe_im_j coe_im_j\n\n",
+ "coe_im_i":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `quaternion -/\n@[simp, norm_cast]\ntheorem coe_im_i : (x : quaternion R).im_i = 0 :=\n  rfl\n#align coe_im_i coe_im_i\n\n",
+ "coe_conj_ae":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ₐ[ ] » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `quaternion -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵐᵒᵖ» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `quaternion -/\n@[simp]\ntheorem coe_conj_ae : «expr⇑ » (conj_ae : «expr ≃ₐ[ ] » (quaternion R) R («expr ᵐᵒᵖ» (quaternion R))) = op ∘ conj :=\n  rfl\n#align coe_conj_ae coe_conj_ae\n\n",
+ "coe_commutes":
+ "theorem coe_commutes : ↑r * a = a * r :=\n  quaternion_algebra.coe_commutes r a\n#align coe_commutes coe_commutes\n\n",
+ "coe_commute":
+ "theorem coe_commute : Commute (↑r) a :=\n  quaternion_algebra.coe_commute r a\n#align coe_commute coe_commute\n\n",
+ "coe_algebra_map":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `quaternion_algebra -/\n@[norm_cast, simp]\ntheorem coe_algebra_map : «expr⇑ » (algebra_map R (quaternion_algebra R c₁ c₂)) = coe :=\n  rfl\n#align coe_algebra_map coe_algebra_map\n\n",
+ "coe_add":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `quaternion -/\n@[simp, norm_cast]\ntheorem coe_add : ((x + y : R) : quaternion R) = x + y :=\n  quaternion_algebra.coe_add x y\n#align coe_add coe_add\n\n",
+ "algebra_map_eq":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `quaternion_algebra -/\ntheorem algebra_map_eq (r : R) : algebra_map R (quaternion_algebra R c₁ c₂) r = ⟨r, 0, 0, 0⟩ :=\n  rfl\n#align algebra_map_eq algebra_map_eq\n\n",
+ "algebra_map_def":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `quaternion -/\n@[simp]\ntheorem algebra_map_def : «expr⇑ » (algebra_map R (quaternion R)) = coe :=\n  rfl\n#align algebra_map_def algebra_map_def\n\n",
+ "add_re":
+ "@[simp]\ntheorem add_re : (a + b).re = a.re + b.re :=\n  rfl\n#align add_re add_re\n\n",
+ "add_im_k":
+ "@[simp]\ntheorem add_im_k : (a + b).im_k = a.im_k + b.im_k :=\n  rfl\n#align add_im_k add_im_k\n\n",
+ "add_im_j":
+ "@[simp]\ntheorem add_im_j : (a + b).im_j = a.im_j + b.im_j :=\n  rfl\n#align add_im_j add_im_j\n\n",
+ "add_im_i":
+ "@[simp]\ntheorem add_im_i : (a + b).im_i = a.im_i + b.im_i :=\n  rfl\n#align add_im_i add_im_i\n\n"}

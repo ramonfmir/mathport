@@ -1,0 +1,338 @@
+{"zero_mul":
+ "protected theorem zero_mul : (0 : mv_power_series σ R) * φ = 0 :=\n  ext fun n => by simp [coeff_mul]\n#align zero_mul zero_mul\n\n",
+ "zero_inv":
+ "@[simp]\ntheorem zero_inv : (0 : power_series k)⁻¹ = 0 :=\n  mv_power_series.zero_inv\n#align zero_inv zero_inv\n\n",
+ "trunc_zero":
+ "@[simp]\ntheorem trunc_zero (n) : trunc n (0 : power_series R) = 0 :=\n  polynomial.ext fun m => by\n    rw [coeff_trunc, linear_map.map_zero, polynomial.coeff_zero]\n    split_ifs <;> rfl\n#align trunc_zero trunc_zero\n\n",
+ "trunc_one":
+ "@[simp]\ntheorem trunc_one (n) : trunc (n + 1) (1 : power_series R) = 1 :=\n  polynomial.ext fun m => by\n    rw [coeff_trunc, coeff_one]\n    split_ifs with H H' H' <;> rw [polynomial.coeff_one]\n    · subst m\n      rw [if_pos rfl]\n    · symm\n      exact if_neg (ne.elim (ne.symm H'))\n    · symm\n      refine' if_neg _\n      rintro rfl\n      apply H\n      exact nat.zero_lt_succ _\n#align trunc_one trunc_one\n\n",
+ "trunc_add":
+ "@[simp]\ntheorem trunc_add (n) (φ ψ : power_series R) : trunc n (φ + ψ) = trunc n φ + trunc n ψ :=\n  polynomial.ext fun m => by\n    simp only [coeff_trunc, AddMonoidHom.map_add, polynomial.coeff_add]\n    split_ifs with H; · rfl; · rw [zero_add]\n#align trunc_add trunc_add\n\n",
+ "trunc_C":
+ "@[simp]\ntheorem trunc_C (n) (a : R) : trunc (n + 1) (C R a) = polynomial.C a :=\n  polynomial.ext fun m => by\n    rw [coeff_trunc, coeff_C, polynomial.coeff_C]\n    split_ifs with H <;> first |rfl|try simp_all\n#align trunc_C trunc_C\n\n",
+ "sub_const_eq_shift_mul_X":
+ "/-- Two ways of removing the constant coefficient of a power series are the same. -/\ntheorem sub_const_eq_shift_mul_X (φ : power_series R) :\n    φ - C R (constant_coeff R φ) = (power_series.mk fun p => coeff R (p + 1) φ) * X :=\n  sub_eq_iff_eq_add.mpr (eq_shift_mul_X_add_const φ)\n#align sub_const_eq_shift_mul_X sub_const_eq_shift_mul_X\n\n",
+ "sub_const_eq_X_mul_shift":
+ "theorem sub_const_eq_X_mul_shift (φ : power_series R) :\n    φ - C R (constant_coeff R φ) = X * power_series.mk fun p => coeff R (p + 1) φ :=\n  sub_eq_iff_eq_add.mpr (eq_X_mul_shift_add_const φ)\n#align sub_const_eq_X_mul_shift sub_const_eq_X_mul_shift\n\n",
+ "span_X_is_prime":
+ "/-- The ideal spanned by the variable in the power series ring\n over an integral domain is a prime ideal.-/\ntheorem span_X_is_prime : (ideal.span ({X} : set (power_series R))).is_prime :=\n  by\n  suffices ideal.span ({X} : set (power_series R)) = (constant_coeff R).ker\n    by\n    rw [this]\n    exact ring_hom.ker_is_prime _\n  apply ideal.ext\n  intro φ\n  rw [ring_hom.mem_ker, ideal.mem_span_singleton, X_dvd_iff]\n#align span_X_is_prime span_X_is_prime\n\n",
+ "smul_inv":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n#print smul_inv /-\n@[simp]\ntheorem smul_inv (r : k) (φ : power_series k) : («expr • » r φ)⁻¹ = «expr • » r⁻¹ φ⁻¹ :=\n  mv_power_series.smul_inv _ _\n#align smul_inv smul_inv\n-/\n\n",
+ "smul_eq_C_mul":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\ntheorem smul_eq_C_mul (f : power_series R) (a : R) : «expr • » a f = C R a * f :=\n  by\n  ext\n  simp\n#align smul_eq_C_mul smul_eq_C_mul\n\n",
+ "ring_hom_apply":
+ "@[simp]\ntheorem coe_to_power_series.ring_hom_apply : coe_to_power_series.ring_hom φ = φ :=\n  rfl\n#align coe_to_power_series.ring_hom_apply coe_to_power_series.ring_hom_apply\n\n",
+ "rescale_zero_apply":
+ "theorem rescale_zero_apply : rescale 0 X = C R (constant_coeff R X) := by simp\n#align rescale_zero_apply rescale_zero_apply\n\n",
+ "rescale_zero":
+ "@[simp]\ntheorem rescale_zero : rescale 0 = (C R).comp (constant_coeff R) :=\n  by\n  ext\n  simp only [Function.comp_apply, RingHom.coe_comp, rescale, RingHom.coe_mk, power_series.coeff_mk _ _, coeff_C]\n  split_ifs\n  · simp only [h, one_mul, coeff_zero_eq_constant_coeff, pow_zero]\n  · rw [zero_pow' n h, zero_mul]\n#align rescale_zero rescale_zero\n\n",
+ "rescale_rescale":
+ "theorem rescale_rescale (f : power_series R) (a b : R) : rescale b (rescale a f) = rescale (a * b) f :=\n  by\n  ext\n  repeat' rw [coeff_rescale]\n  rw [mul_pow, mul_comm _ (b ^ n), mul_assoc]\n#align rescale_rescale rescale_rescale\n\n",
+ "rescale_one":
+ "@[simp]\ntheorem rescale_one : rescale 1 = RingHom.id (power_series R) :=\n  by\n  ext\n  simp only [RingHom.id_apply, rescale, one_pow, coeff_mk, one_mul, RingHom.coe_mk]\n#align rescale_one rescale_one\n\n",
+ "rescale_neg_one_X":
+ "theorem rescale_neg_one_X : rescale (-1 : A) X = -X := by rw [rescale_X, map_neg, map_one, neg_one_mul]\n#align rescale_neg_one_X rescale_neg_one_X\n\n",
+ "rescale_mul":
+ "theorem rescale_mul (a b : R) : rescale (a * b) = (rescale b).comp (rescale a) :=\n  by\n  ext\n  simp [← rescale_rescale]\n#align rescale_mul rescale_mul\n\n",
+ "rescale_mk":
+ "theorem rescale_mk (f : ℕ → R) (a : R) : rescale a (mk f) = mk fun n : ℕ => a ^ n * f n :=\n  by\n  ext\n  rw [coeff_rescale, coeff_mk, coeff_mk]\n#align rescale_mk rescale_mk\n\n",
+ "rescale_injective":
+ "theorem rescale_injective {a : R} (ha : a ≠ 0) : function.injective (rescale a) :=\n  by\n  intro p q h\n  rw [power_series.ext_iff] at *\n  intro n\n  specialize h n\n  rw [coeff_rescale, coeff_rescale, mul_eq_mul_left_iff] at h\n  apply h.resolve_right\n  intro h'\n  exact ha (pow_eq_zero h')\n#align rescale_injective rescale_injective\n\n",
+ "rescale_X":
+ "@[simp]\ntheorem rescale_X (a : A) : rescale a X = C A a * X := by\n  ext\n  simp only [coeff_rescale, coeff_C_mul, coeff_X]\n  split_ifs with h <;> simp [h]\n#align rescale_X rescale_X\n\n",
+ "order_zero":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n/-- The order of the `0` power series is infinite.-/\n@[simp]\ntheorem order_zero : order (0 : power_series R) = «expr⊤» :=\n  dif_pos rfl\n#align order_zero order_zero\n\n",
+ "order_one":
+ "/-- The order of the formal power series `1` is `0`.-/\n@[simp]\ntheorem order_one : order (1 : power_series R) = 0 := by simpa using order_monomial_of_ne_zero 0 (1 : R) one_ne_zero\n#align order_one order_one\n\n",
+ "order_mul_ge":
+ "/-- The order of the product of two formal power series\n is at least the sum of their orders.-/\ntheorem order_mul_ge (φ ψ : power_series R) : order φ + order ψ ≤ order (φ * ψ) :=\n  by\n  apply le_order\n  intro n hn; rw [coeff_mul, finset.sum_eq_zero]\n  rintro ⟨i, j⟩ hij\n  by_cases hi : ↑i < order φ\n  · rw [coeff_of_lt_order i hi, zero_mul]\n  by_cases hj : ↑j < order ψ\n  · rw [coeff_of_lt_order j hj, mul_zero]\n  rw [not_lt] at hi hj; rw [finset.nat.mem_antidiagonal] at hij\n  exfalso\n  apply ne_of_lt (lt_of_lt_of_le hn <| add_le_add hi hj)\n  rw [← Nat.cast_add, hij]\n#align order_mul_ge order_mul_ge\n\n",
+ "order_mul":
+ "-- TODO: generalize to `[semiring R] [no_zero_divisors R]`\n/-- The order of the product of two formal power series over an integral domain\n is the sum of their orders.-/\ntheorem order_mul (φ ψ : power_series R) : order (φ * ψ) = order φ + order ψ :=\n  by\n  simp_rw [order_eq_multiplicity_X]\n  exact multiplicity.mul X_prime\n#align order_mul order_mul\n\n",
+ "order_monomial_of_ne_zero":
+ "/-- The order of the monomial `a*X^n` is `n` if `a ≠ 0`.-/\ntheorem order_monomial_of_ne_zero (n : ℕ) (a : R) (h : a ≠ 0) : order (monomial R n a) = n := by\n  rw [order_monomial, if_neg h]\n#align order_monomial_of_ne_zero order_monomial_of_ne_zero\n\n",
+ "order_monomial":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n/-- The order of the monomial `a*X^n` is infinite if `a = 0` and `n` otherwise.-/\ntheorem order_monomial (n : ℕ) (a : R) [decidable (a = 0)] : order (monomial R n a) = if a = 0 then «expr⊤» else n :=\n  by\n  split_ifs with h\n  · rw [h, order_eq_top, linear_map.map_zero]\n  · rw [order_eq]\n    constructor <;> intro i hi\n    · rw [part_enat.coe_inj] at hi\n      rwa [hi, coeff_monomial_same]\n    · rw [part_enat.coe_lt_coe] at hi\n      rw [coeff_monomial, if_neg]\n      exact ne_of_lt hi\n#align order_monomial order_monomial\n\n",
+ "order_le":
+ "/-- If the `n`th coefficient of a formal power series is nonzero,\nthen the order of the power series is less than or equal to `n`.-/\ntheorem order_le (n : ℕ) (h : coeff R n φ ≠ 0) : order φ ≤ n :=\n  by\n  have := exists.intro n h\n  rw [order, dif_neg]\n  · simp only [part_enat.coe_le_coe, Nat.find_le_iff]\n    exact ⟨n, le_rfl, h⟩\n  · exact exists_coeff_ne_zero_iff_ne_zero.mp ⟨n, h⟩\n#align order_le order_le\n\n",
+ "order_finite_iff_ne_zero":
+ "theorem order_finite_iff_ne_zero : (order φ).dom ↔ φ ≠ 0 :=\n  by\n  simp only [order]\n  constructor\n  · split_ifs with h h <;> intro H\n    · contrapose! H\n      simpa [← Part.eq_none_iff']\n    · exact h\n  · intro h\n    simp [h]\n#align order_finite_iff_ne_zero order_finite_iff_ne_zero\n\n",
+ "order_eq_top":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n/-- The `0` power series is the unique power series with infinite order.-/\n@[simp]\ntheorem order_eq_top {φ : power_series R} : φ.order = «expr⊤» ↔ φ = 0 :=\n  by\n  constructor\n  · intro h\n    ext n\n    rw [(coeff R n).map_zero, coeff_of_lt_order]\n    simp [h]\n  · rintro rfl\n    exact order_zero\n#align order_eq_top order_eq_top\n\n",
+ "order_eq_nat":
+ "/-- The order of a formal power series is exactly `n` if the `n`th coefficient is nonzero,\nand the `i`th coefficient is `0` for all `i < n`.-/\ntheorem order_eq_nat {φ : power_series R} {n : ℕ} : order φ = n ↔ coeff R n φ ≠ 0 ∧ ∀ i, i < n → coeff R i φ = 0 :=\n  by\n  rcases eq_or_ne φ 0 with (rfl | hφ)\n  · simpa using (part_enat.coe_ne_top _).symm\n  simp [order, dif_neg hφ, Nat.find_eq_iff]\n#align order_eq_nat order_eq_nat\n\n",
+ "order_eq_multiplicity_X":
+ "theorem order_eq_multiplicity_X {R : Type _} [Semiring R] (φ : power_series R) : order φ = multiplicity X φ :=\n  by\n  rcases eq_or_ne φ 0 with (rfl | hφ)\n  · simp\n  induction' ho : order φ using part_enat.cases_on with n\n  · simpa [hφ] using ho\n  have hn : φ.order.get (order_finite_iff_ne_zero.mpr hφ) = n := by simp [ho]\n  rw [← hn]\n  refine'\n    le_antisymm (le_multiplicity_of_pow_dvd <| X_pow_order_dvd (order_finite_iff_ne_zero.mpr hφ))\n      (part_enat.find_le _ _ _)\n  rintro ⟨ψ, H⟩\n  have := congr_arg (coeff R n) H\n  rw [← (ψ.commute_X.pow_right _).eq, coeff_mul_of_lt_order, ← hn] at this\n  · exact coeff_order _ this\n  · rw [X_pow_eq, order_monomial]\n    split_ifs\n    · exact part_enat.coe_lt_top _\n    · rw [← hn, part_enat.coe_lt_coe]\n      exact nat.lt_succ_self _\n#align order_eq_multiplicity_X order_eq_multiplicity_X\n\n",
+ "order_eq":
+ "/-- The order of a formal power series is exactly `n` if the `n`th coefficient is nonzero,\nand the `i`th coefficient is `0` for all `i < n`.-/\ntheorem order_eq {φ : power_series R} {n : part_enat} :\n    order φ = n ↔ (∀ i : ℕ, ↑i = n → coeff R i φ ≠ 0) ∧ ∀ i : ℕ, ↑i < n → coeff R i φ = 0 :=\n  by\n  induction n using part_enat.cases_on\n  · rw [order_eq_top]\n    constructor\n    · rintro rfl\n      constructor <;> intros\n      · exfalso\n        exact part_enat.coe_ne_top ‹_› ‹_›\n      · exact (coeff _ _).map_zero\n    · rintro ⟨h₁, h₂⟩\n      ext i\n      exact h₂ i (part_enat.coe_lt_top i)\n  · simpa [part_enat.coe_inj] using order_eq_nat\n#align order_eq order_eq\n\n",
+ "order_add_of_order_eq":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊓ » -/\n/-- The order of the sum of two formal power series\n is the minimum of their orders if their orders differ.-/\ntheorem order_add_of_order_eq (φ ψ : power_series R) (h : order φ ≠ order ψ) :\n    order (φ + ψ) = «expr ⊓ » (order φ) (order ψ) :=\n  by\n  refine' le_antisymm _ (le_order_add _ _)\n  by_cases H₁ : order φ < order ψ\n  · apply order_add_of_order_eq.aux _ _ h H₁\n  by_cases H₂ : order ψ < order φ\n  · simpa only [add_comm, inf_comm] using order_add_of_order_eq.aux _ _ h.symm H₂\n  exfalso; exact h (le_antisymm (not_lt.1 H₂) (not_lt.1 H₁))\n#align order_add_of_order_eq order_add_of_order_eq\n\n",
+ "order_X_pow":
+ "/-- The order of the formal power series `X^n` is `n`.-/\n@[simp]\ntheorem order_X_pow (n : ℕ) : order ((X : power_series R) ^ n) = n :=\n  by\n  rw [X_pow_eq, order_monomial_of_ne_zero]\n  exact one_ne_zero\n#align order_X_pow order_X_pow\n\n",
+ "order_X":
+ "/-- The order of the formal power series `X` is `1`.-/\n@[simp]\ntheorem order_X : order (X : power_series R) = 1 := by\n  simpa only [Nat.cast_one] using order_monomial_of_ne_zero 1 (1 : R) one_ne_zero\n#align order_X order_X\n\n",
+ "one_mul":
+ "#print one_mul /-\nprotected theorem one_mul : (1 : mv_power_series σ R) * φ = φ :=\n  ext fun n => by simpa using coeff_add_monomial_mul 0 n φ 1\n#align one_mul one_mul\n-/\n\n",
+ "nat_le_order":
+ "/-- The order of a formal power series is at least `n` if\nthe `i`th coefficient is `0` for all `i < n`.-/\ntheorem nat_le_order (φ : power_series R) (n : ℕ) (h : ∀ i < n, coeff R i φ = 0) : ↑n ≤ order φ :=\n  by\n  by_contra H; rw [not_le] at H\n  have : (order φ).dom := part_enat.dom_of_le_coe H.le\n  rw [← part_enat.coe_get this, part_enat.coe_lt_coe] at H\n  exact coeff_order this (h _ H)\n#align nat_le_order nat_le_order\n\n",
+ "mul_zero":
+ "protected theorem mul_zero : φ * 0 = 0 :=\n  ext fun n => by simp [coeff_mul]\n#align mul_zero mul_zero\n\n",
+ "mul_one":
+ "#print mul_one /-\nprotected theorem mul_one : φ * 1 = φ :=\n  ext fun n => by simpa using coeff_add_mul_monomial n 0 φ 1\n#align mul_one mul_one\n-/\n\n",
+ "mul_inv_rev":
+ "#print mul_inv_rev /-\n@[simp]\nprotected theorem mul_inv_rev (φ ψ : power_series k) : (φ * ψ)⁻¹ = ψ⁻¹ * φ⁻¹ :=\n  mv_power_series.mul_inv_rev _ _\n#align mul_inv_rev mul_inv_rev\n-/\n\n",
+ "mul_inv_of_unit":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ˣ» -/\ntheorem mul_inv_of_unit (φ : power_series R) (u : «expr ˣ» R) (h : constant_coeff R φ = u) : φ * inv_of_unit φ u = 1 :=\n  mv_power_series.mul_inv_of_unit φ u <| h\n#align mul_inv_of_unit mul_inv_of_unit\n\n",
+ "mul_inv_cancel":
+ "#print mul_inv_cancel /-\n@[simp]\nprotected theorem mul_inv_cancel (φ : power_series k) (h : constant_coeff k φ ≠ 0) : φ * φ⁻¹ = 1 :=\n  mv_power_series.mul_inv_cancel φ h\n#align mul_inv_cancel mul_inv_cancel\n-/\n\n",
+ "mul_assoc":
+ "#print mul_assoc /-\nprotected theorem mul_assoc (φ₁ φ₂ φ₃ : mv_power_series σ R) : φ₁ * φ₂ * φ₃ = φ₁ * (φ₂ * φ₃) :=\n  by\n  ext1 n\n  simp only [coeff_mul, finset.sum_mul, finset.mul_sum, finset.sum_sigma']\n  refine' finset.sum_bij (fun p _ => ⟨(p.2.1, p.2.2 + p.1.2), (p.2.2, p.1.2)⟩) _ _ _ _ <;>\n    simp only [mem_antidiagonal, finset.mem_sigma, heq_iff_eq, prod.mk.inj_iff, and_imp, exists_prop]\n  · rintro ⟨⟨i, j⟩, ⟨k, l⟩⟩\n    dsimp only\n    rintro rfl rfl\n    simp [add_assoc]\n  · rintro ⟨⟨a, b⟩, ⟨c, d⟩⟩\n    dsimp only\n    rintro rfl rfl\n    apply mul_assoc\n  · rintro ⟨⟨a, b⟩, ⟨c, d⟩⟩ ⟨⟨i, j⟩, ⟨k, l⟩⟩\n    dsimp only\n    rintro rfl rfl - rfl rfl - rfl rfl\n    rfl\n  · rintro ⟨⟨i, j⟩, ⟨k, l⟩⟩\n    dsimp only\n    rintro rfl rfl\n    refine' ⟨⟨(i + k, l), (i, k)⟩, _, _⟩ <;> simp [add_assoc]\n#align mul_assoc mul_assoc\n-/\n\n",
+ "mul_add":
+ "#print mul_add /-\nprotected theorem mul_add (φ₁ φ₂ φ₃ : mv_power_series σ R) : φ₁ * (φ₂ + φ₃) = φ₁ * φ₂ + φ₁ * φ₃ :=\n  ext fun n => by simp only [coeff_mul, mul_add, finset.sum_add_distrib, linear_map.map_add]\n#align mul_add mul_add\n-/\n\n",
+ "monomial_zero_one":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →₀ » -/\ntheorem monomial_zero_one : monomial R (0 : «expr →₀ » σ ℕ) 1 = 1 :=\n  rfl\n#align monomial_zero_one monomial_zero_one\n\n",
+ "monomial_zero_eq_C_apply":
+ "theorem monomial_zero_eq_C_apply (a : R) : monomial R 0 a = C R a := by simp\n#align monomial_zero_eq_C_apply monomial_zero_eq_C_apply\n\n",
+ "monomial_zero_eq_C":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n@[simp]\ntheorem monomial_zero_eq_C : «expr⇑ » (monomial R 0) = C R := by\n  rw [monomial, finsupp.single_zero, mv_power_series.monomial_zero_eq_C, C]\n#align monomial_zero_eq_C monomial_zero_eq_C\n\n",
+ "monomial_mul_monomial":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →₀ » -/\ntheorem monomial_mul_monomial (m n : «expr →₀ » σ ℕ) (a b : R) :\n    monomial R m a * monomial R n b = monomial R (m + n) (a * b) :=\n  by\n  ext k\n  simp only [coeff_mul_monomial, coeff_monomial]\n  split_ifs with h₁ h₂ h₃ h₃ h₂ <;> try rfl\n  · rw [← h₂, tsub_add_cancel_of_le h₁] at h₃\n    exact (h₃ rfl).elim\n  · rw [h₃, add_tsub_cancel_right] at h₂\n    exact (h₂ rfl).elim\n  · exact zero_mul b\n  · rw [h₂] at h₁\n    exact (h₁ <| le_add_left le_rfl).elim\n#align monomial_mul_monomial monomial_mul_monomial\n\n",
+ "monomial_eq_mk":
+ "theorem monomial_eq_mk (n : ℕ) (a : R) : monomial R n a = mk fun m => if m = n then a else 0 :=\n  ext fun m => by rw [coeff_monomial, coeff_mk]\n#align monomial_eq_mk monomial_eq_mk\n\n",
+ "monomial_def":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →₀ » -/\ntheorem monomial_def [decidable_eq σ] (n : «expr →₀ » σ ℕ) : monomial R n = linear_map.std_basis R _ n := by convert rfl\n#align monomial_def monomial_def\n\n",
+ "map_monomial":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →₀ » -/\n@[simp]\ntheorem map_monomial (n : «expr →₀ » σ ℕ) (a : R) : map σ f (monomial R n a) = monomial S n (f a) :=\n  by\n  ext m\n  simp [coeff_monomial, apply_ite f]\n#align map_monomial map_monomial\n\n",
+ "map_id":
+ "@[simp]\ntheorem map_id : (map (RingHom.id R) : power_series R → power_series R) = id :=\n  rfl\n#align map_id map_id\n\n",
+ "map_comp":
+ "theorem map_comp : map (g.comp f) = (map g).comp (map f) :=\n  rfl\n#align map_comp map_comp\n\n",
+ "map_X":
+ "@[simp]\ntheorem map_X : map f X = X := by\n  ext\n  simp [coeff_X, apply_ite f]\n#align map_X map_X\n\n",
+ "map_C":
+ "@[simp]\ntheorem map_C (r : R) : map f (C _ r) = C _ (f r) := by\n  ext\n  simp [coeff_C, apply_ite f]\n#align map_C map_C\n\n",
+ "le_order_add":
+ "/-- The order of the sum of two formal power series\n is at least the minimum of their orders.-/\ntheorem le_order_add (φ ψ : power_series R) : min (order φ) (order ψ) ≤ order (φ + ψ) :=\n  by\n  refine' le_order _ _ _\n  simp (config := { contextual := true }) [coeff_of_lt_order]\n#align le_order_add le_order_add\n\n",
+ "le_order":
+ "/-- The order of a formal power series is at least `n` if\nthe `i`th coefficient is `0` for all `i < n`.-/\ntheorem le_order (φ : power_series R) (n : part_enat) (h : ∀ i : ℕ, ↑i < n → coeff R i φ = 0) : n ≤ order φ :=\n  by\n  induction n using part_enat.cases_on\n  · show _ ≤ _\n    rw [top_le_iff, order_eq_top]\n    ext i\n    exact h _ (part_enat.coe_lt_top i)\n  · apply nat_le_order\n    simpa only [part_enat.coe_lt_coe] using h\n#align le_order le_order\n\n",
+ "is_unit_constant_coeff":
+ "/-- If a formal power series is invertible, then so is its constant coefficient.-/\ntheorem is_unit_constant_coeff (φ : power_series R) (h : is_unit φ) : is_unit (constant_coeff R φ) :=\n  mv_power_series.is_unit_constant_coeff φ h\n#align is_unit_constant_coeff is_unit_constant_coeff\n\n",
+ "inv_of_unit_eq'":
+ "@[simp]\ntheorem inv_of_unit_eq' (φ : power_series k) (u : Units k) (h : constant_coeff k φ = u) : inv_of_unit φ u = φ⁻¹ :=\n  mv_power_series.inv_of_unit_eq' φ _ h\n#align inv_of_unit_eq' inv_of_unit_eq'\n\n",
+ "inv_of_unit_eq":
+ "@[simp]\ntheorem inv_of_unit_eq (φ : power_series k) (h : constant_coeff k φ ≠ 0) : inv_of_unit φ (Units.mk0 _ h) = φ⁻¹ :=\n  mv_power_series.inv_of_unit_eq _ _\n#align inv_of_unit_eq inv_of_unit_eq\n\n",
+ "inv_mul_cancel":
+ "#print inv_mul_cancel /-\n@[simp]\nprotected theorem inv_mul_cancel (φ : power_series k) (h : constant_coeff k φ ≠ 0) : φ⁻¹ * φ = 1 :=\n  mv_power_series.inv_mul_cancel φ h\n#align inv_mul_cancel inv_mul_cancel\n-/\n\n",
+ "inv_eq_zero":
+ "#print inv_eq_zero /-\ntheorem inv_eq_zero {φ : power_series k} : φ⁻¹ = 0 ↔ constant_coeff k φ = 0 :=\n  mv_power_series.inv_eq_zero\n#align inv_eq_zero inv_eq_zero\n-/\n\n",
+ "inv_eq_inv_aux":
+ "theorem inv_eq_inv_aux (φ : power_series k) : φ⁻¹ = inv.aux (constant_coeff k φ)⁻¹ φ :=\n  rfl\n#align inv_eq_inv_aux inv_eq_inv_aux\n\n",
+ "inv_eq_iff_mul_eq_one":
+ "#print inv_eq_iff_mul_eq_one /-\ntheorem inv_eq_iff_mul_eq_one {φ ψ : power_series k} (h : constant_coeff k ψ ≠ 0) : ψ⁻¹ = φ ↔ φ * ψ = 1 :=\n  mv_power_series.inv_eq_iff_mul_eq_one h\n#align inv_eq_iff_mul_eq_one inv_eq_iff_mul_eq_one\n-/\n\n",
+ "ext_iff":
+ "/-- Two formal power series are equal if all their coefficients are equal.-/\ntheorem ext_iff {φ ψ : power_series R} : φ = ψ ↔ ∀ n, coeff R n φ = coeff R n ψ :=\n  ⟨fun h n => congr_arg (coeff R n) h, ext⟩\n#align ext_iff ext_iff\n\n",
+ "ext":
+ "/-- Two formal power series are equal if all their coefficients are equal.-/\n@[ext]\ntheorem ext {φ ψ : power_series R} (h : ∀ n, coeff R n φ = coeff R n ψ) : φ = ψ :=\n  mv_power_series.ext fun n => by\n    rw [← coeff_def]\n    · apply h\n    rfl\n#align ext ext\n\n",
+ "exists_coeff_ne_zero_iff_ne_zero":
+ "theorem exists_coeff_ne_zero_iff_ne_zero : (∃ n : ℕ, coeff R n φ ≠ 0) ↔ φ ≠ 0 :=\n  by\n  refine' not_iff_not.mp _\n  push_neg\n  simp [power_series.ext_iff]\n#align exists_coeff_ne_zero_iff_ne_zero exists_coeff_ne_zero_iff_ne_zero\n\n",
+ "eval_neg_hom_X":
+ "@[simp]\ntheorem eval_neg_hom_X : eval_neg_hom (X : power_series A) = -X :=\n  rescale_neg_one_X\n#align eval_neg_hom_X eval_neg_hom_X\n\n",
+ "eq_zero_or_eq_zero_of_mul_eq_zero":
+ "theorem eq_zero_or_eq_zero_of_mul_eq_zero [no_zero_divisors R] (φ ψ : power_series R) (h : φ * ψ = 0) : φ = 0 ∨ ψ = 0 :=\n  by\n  rw [or_iff_not_imp_left]\n  intro H\n  have ex : ∃ m, coeff R m φ ≠ 0 := by\n    contrapose! H\n    exact ext H\n  let m := nat.find ex\n  have hm₁ : coeff R m φ ≠ 0 := nat.find_spec ex\n  have hm₂ : ∀ k < m, ¬coeff R k φ ≠ 0 := fun k => nat.find_min ex\n  ext n\n  rw [(coeff R n).map_zero]\n  apply nat.strong_induction_on n\n  clear n\n  intro n ih\n  replace h := congr_arg (coeff R (m + n)) h\n  rw [linear_map.map_zero, coeff_mul, finset.sum_eq_single (m, n)] at h\n  · replace h := eq_zero_or_eq_zero_of_mul_eq_zero h\n    rw [or_iff_not_imp_left] at h\n    exact h hm₁\n  · rintro ⟨i, j⟩ hij hne\n    by_cases hj : j < n\n    · rw [ih j hj, mul_zero]\n    by_cases hi : i < m\n    · specialize hm₂ _ hi\n      push_neg  at hm₂\n      rw [hm₂, zero_mul]\n    rw [finset.nat.mem_antidiagonal] at hij\n    push_neg  at hi hj\n    suffices m < i by\n      have : m + n < i + j := add_lt_add_of_lt_of_le this hj\n      exfalso\n      exact ne_of_lt this hij.symm\n    contrapose! hne\n    obtain rfl := le_antisymm hi hne\n    simpa [ne.def, prod.mk.inj_iff] using (add_right_inj m).mp hij\n  · contrapose!\n    intro h\n    rw [finset.nat.mem_antidiagonal]\n#align eq_zero_or_eq_zero_of_mul_eq_zero eq_zero_or_eq_zero_of_mul_eq_zero\n\n",
+ "eq_shift_mul_X_add_const":
+ "/-- Split off the constant coefficient. -/\ntheorem eq_shift_mul_X_add_const (φ : power_series R) :\n    φ = (mk fun p => coeff R (p + 1) φ) * X + C R (constant_coeff R φ) :=\n  by\n  ext (_ | n)\n  ·\n    simp only [RingHom.map_add, constant_coeff_C, constant_coeff_X, coeff_zero_eq_constant_coeff, zero_add, mul_zero,\n      RingHom.map_mul]\n  · simp only [coeff_succ_mul_X, coeff_mk, linear_map.map_add, coeff_C, n.succ_ne_zero, sub_zero, if_false, add_zero]\n#align eq_shift_mul_X_add_const eq_shift_mul_X_add_const\n\n",
+ "eq_of_coeff_monomial_ne_zero":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →₀ » -/\ntheorem eq_of_coeff_monomial_ne_zero {m n : «expr →₀ » σ ℕ} {a : R} (h : coeff R m (monomial R n a) ≠ 0) : m = n :=\n  by_contra fun h' => h <| coeff_monomial_ne h' a\n#align eq_of_coeff_monomial_ne_zero eq_of_coeff_monomial_ne_zero\n\n",
+ "eq_mul_inv_iff_mul_eq":
+ "#print eq_mul_inv_iff_mul_eq /-\ntheorem eq_mul_inv_iff_mul_eq {φ₁ φ₂ φ₃ : power_series k} (h : constant_coeff k φ₃ ≠ 0) :\n    φ₁ = φ₂ * φ₃⁻¹ ↔ φ₁ * φ₃ = φ₂ :=\n  mv_power_series.eq_mul_inv_iff_mul_eq h\n#align eq_mul_inv_iff_mul_eq eq_mul_inv_iff_mul_eq\n-/\n\n",
+ "eq_inv_iff_mul_eq_one":
+ "#print eq_inv_iff_mul_eq_one /-\ntheorem eq_inv_iff_mul_eq_one {φ ψ : power_series k} (h : constant_coeff k ψ ≠ 0) : φ = ψ⁻¹ ↔ φ * ψ = 1 :=\n  mv_power_series.eq_inv_iff_mul_eq_one h\n#align eq_inv_iff_mul_eq_one eq_inv_iff_mul_eq_one\n-/\n\n",
+ "eq_X_mul_shift_add_const":
+ "/-- Split off the constant coefficient. -/\ntheorem eq_X_mul_shift_add_const (φ : power_series R) :\n    φ = (X * mk fun p => coeff R (p + 1) φ) + C R (constant_coeff R φ) :=\n  by\n  ext (_ | n)\n  ·\n    simp only [RingHom.map_add, constant_coeff_C, constant_coeff_X, coeff_zero_eq_constant_coeff, zero_add, zero_mul,\n      RingHom.map_mul]\n  · simp only [coeff_succ_X_mul, coeff_mk, linear_map.map_add, coeff_C, n.succ_ne_zero, sub_zero, if_false, add_zero]\n#align eq_X_mul_shift_add_const eq_X_mul_shift_add_const\n\n",
+ "constant_coeff_zero":
+ "@[simp]\ntheorem constant_coeff_zero : constant_coeff R 0 = 0 :=\n  rfl\n#align constant_coeff_zero constant_coeff_zero\n\n",
+ "constant_coeff_one":
+ "@[simp]\ntheorem constant_coeff_one : constant_coeff R 1 = 1 :=\n  rfl\n#align constant_coeff_one constant_coeff_one\n\n",
+ "constant_coeff_map":
+ "@[simp]\ntheorem constant_coeff_map (φ : mv_power_series σ R) : constant_coeff σ S (map σ f φ) = f (constant_coeff σ R φ) :=\n  rfl\n#align constant_coeff_map constant_coeff_map\n\n",
+ "constant_coeff_inv_of_unit":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ˣ» -/\n@[simp]\ntheorem constant_coeff_inv_of_unit (φ : power_series R) (u : «expr ˣ» R) : constant_coeff R (inv_of_unit φ u) = ↑u⁻¹ :=\n  by rw [← coeff_zero_eq_constant_coeff_apply, coeff_inv_of_unit, if_pos rfl]\n#align constant_coeff_inv_of_unit constant_coeff_inv_of_unit\n\n",
+ "constant_coeff_inv":
+ "@[simp]\ntheorem constant_coeff_inv (φ : power_series k) : constant_coeff k φ⁻¹ = (constant_coeff k φ)⁻¹ :=\n  mv_power_series.constant_coeff_inv φ\n#align constant_coeff_inv constant_coeff_inv\n\n",
+ "constant_coeff_comp_C":
+ "@[simp]\ntheorem constant_coeff_comp_C : (constant_coeff R).comp (C R) = RingHom.id R :=\n  rfl\n#align constant_coeff_comp_C constant_coeff_comp_C\n\n",
+ "constant_coeff_coe":
+ "@[simp]\ntheorem constant_coeff_coe : power_series.constant_coeff R φ = φ.coeff 0 :=\n  rfl\n#align constant_coeff_coe constant_coeff_coe\n\n",
+ "constant_coeff_X":
+ "@[simp]\ntheorem constant_coeff_X : constant_coeff R X = 0 :=\n  mv_power_series.coeff_zero_X _\n#align constant_coeff_X constant_coeff_X\n\n",
+ "constant_coeff_C":
+ "@[simp]\ntheorem constant_coeff_C (a : R) : constant_coeff R (C R a) = a :=\n  rfl\n#align constant_coeff_C constant_coeff_C\n\n",
+ "commute_monomial":
+ "@[simp]\ntheorem commute_monomial {a : R} {n} : Commute φ (monomial R n a) ↔ ∀ m, Commute (coeff R m φ) a :=\n  by\n  refine' ext_iff.trans ⟨fun h m => _, fun h m => _⟩\n  · have := h (m + n)\n    rwa [coeff_add_mul_monomial, add_comm, coeff_add_monomial_mul] at this\n  · rw [coeff_mul_monomial, coeff_monomial_mul]\n    split_ifs <;> [apply h, rfl]\n#align commute_monomial commute_monomial\n\n",
+ "commute_X":
+ "theorem commute_X (φ : power_series R) : Commute φ X :=\n  φ.commute_X _\n#align commute_X commute_X\n\n",
+ "coeff_zero_one":
+ "theorem coeff_zero_one : coeff R 0 (1 : power_series R) = 1 :=\n  coeff_zero_C 1\n#align coeff_zero_one coeff_zero_one\n\n",
+ "coeff_zero_mul_X":
+ "theorem coeff_zero_mul_X (φ : power_series R) : coeff R 0 (φ * X) = 0 := by simp\n#align coeff_zero_mul_X coeff_zero_mul_X\n\n",
+ "coeff_zero_eq_constant_coeff_apply":
+ "theorem coeff_zero_eq_constant_coeff_apply (φ : power_series R) : coeff R 0 φ = constant_coeff R φ := by\n  rw [coeff_zero_eq_constant_coeff] <;> rfl\n#align coeff_zero_eq_constant_coeff_apply coeff_zero_eq_constant_coeff_apply\n\n",
+ "coeff_zero_eq_constant_coeff":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n@[simp]\ntheorem coeff_zero_eq_constant_coeff : «expr⇑ » (coeff R 0) = constant_coeff R :=\n  by\n  rw [coeff, finsupp.single_zero]\n  rfl\n#align coeff_zero_eq_constant_coeff coeff_zero_eq_constant_coeff\n\n",
+ "coeff_zero_X_mul":
+ "theorem coeff_zero_X_mul (φ : power_series R) : coeff R 0 (X * φ) = 0 := by simp\n#align coeff_zero_X_mul coeff_zero_X_mul\n\n",
+ "coeff_zero_X":
+ "@[simp]\ntheorem coeff_zero_X : coeff R 0 (X : power_series R) = 0 := by\n  rw [coeff, finsupp.single_zero, X, mv_power_series.coeff_zero_X]\n#align coeff_zero_X coeff_zero_X\n\n",
+ "coeff_zero_C":
+ "@[simp]\ntheorem coeff_zero_C (a : R) : coeff R 0 (C R a) = a := by rw [← monomial_zero_eq_C_apply, coeff_monomial_same 0 a]\n#align coeff_zero_C coeff_zero_C\n\n",
+ "coeff_zero":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →₀ » -/\n@[simp]\ntheorem coeff_zero (n : «expr →₀ » σ ℕ) : coeff R n (0 : mv_power_series σ R) = 0 :=\n  rfl\n#align coeff_zero coeff_zero\n\n",
+ "coeff_trunc_fun":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →₀ » -/\ntheorem coeff_trunc_fun (m : «expr →₀ » σ ℕ) (φ : mv_power_series σ R) :\n    (trunc_fun n φ).coeff m = if m < n then coeff R m φ else 0 := by simp [trunc_fun, mv_polynomial.coeff_sum]\n#align coeff_trunc_fun coeff_trunc_fun\n\n",
+ "coeff_trunc":
+ "theorem coeff_trunc (m) (n) (φ : power_series R) : (trunc n φ).coeff m = if m < n then coeff R m φ else 0 := by\n  simp [trunc, polynomial.coeff_sum, polynomial.coeff_monomial, Nat.lt_succ_iff]\n#align coeff_trunc coeff_trunc\n\n",
+ "coeff_succ_mul_X":
+ "@[simp]\ntheorem coeff_succ_mul_X (n : ℕ) (φ : power_series R) : coeff R (n + 1) (φ * X) = coeff R n φ :=\n  by\n  simp only [coeff, finsupp.single_add]\n  convert φ.coeff_add_mul_monomial (single () n) (single () 1) _\n  rw [mul_one]\n#align coeff_succ_mul_X coeff_succ_mul_X\n\n",
+ "coeff_succ_X_mul":
+ "@[simp]\ntheorem coeff_succ_X_mul (n : ℕ) (φ : power_series R) : coeff R (n + 1) (X * φ) = coeff R n φ :=\n  by\n  simp only [coeff, finsupp.single_add, add_comm n 1]\n  convert φ.coeff_add_monomial_mul (single () 1) (single () n) _\n  rw [one_mul]\n#align coeff_succ_X_mul coeff_succ_X_mul\n\n",
+ "coeff_smul":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n@[simp]\ntheorem coeff_smul {S : Type _} [Semiring S] [Module R S] (n : ℕ) (φ : power_series S) (a : R) :\n    coeff S n («expr • » a φ) = «expr • » a (coeff S n φ) :=\n  rfl\n#align coeff_smul coeff_smul\n\n",
+ "coeff_rescale":
+ "@[simp]\ntheorem coeff_rescale (f : power_series R) (a : R) (n : ℕ) : coeff R n (rescale a f) = a ^ n * coeff R n f :=\n  coeff_mk n _\n#align coeff_rescale coeff_rescale\n\n",
+ "coeff_order":
+ "/-- If the order of a formal power series is finite,\nthen the coefficient indexed by the order is nonzero.-/\ntheorem coeff_order (h : (order φ).dom) : coeff R (φ.order.get h) φ ≠ 0 :=\n  by\n  simp only [order, order_finite_iff_ne_zero.mp h, not_false_iff, dif_neg, part_enat.get_coe']\n  generalize_proofs h\n  exact nat.find_spec h\n#align coeff_order coeff_order\n\n",
+ "coeff_one_X":
+ "@[simp]\ntheorem coeff_one_X : coeff R 1 (X : power_series R) = 1 := by rw [coeff_X, if_pos rfl]\n#align coeff_one_X coeff_one_X\n\n",
+ "coeff_one":
+ "@[simp]\ntheorem coeff_one (n : ℕ) : coeff R n (1 : power_series R) = if n = 0 then 1 else 0 :=\n  coeff_C n 1\n#align coeff_one coeff_one\n\n",
+ "coeff_of_lt_order":
+ "/-- The `n`th coefficient of a formal power series is `0` if `n` is strictly\nsmaller than the order of the power series.-/\ntheorem coeff_of_lt_order (n : ℕ) (h : ↑n < order φ) : coeff R n φ = 0 :=\n  by\n  contrapose! h\n  exact order_le _ h\n#align coeff_of_lt_order coeff_of_lt_order\n\n",
+ "coeff_mul_prod_one_sub_of_lt_order":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `finset.prod -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.prod -/\ntheorem coeff_mul_prod_one_sub_of_lt_order {R ι : Type _} [CommRing R] (k : ℕ) (s : Finset ι) (φ : power_series R)\n    (f : ι → power_series R) :\n    (∀ i ∈ s, ↑k < (f i).order) →\n      coeff R k\n          (φ *\n            finset.prod \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.prod\" s\n              (1 - f i)) =\n        coeff R k φ :=\n  by\n  apply Finset.induction_on s\n  · simp\n  · intro a s ha ih t\n    simp only [Finset.mem_insert, forall_eq_or_imp] at t\n    rw [finset.prod_insert ha, ← mul_assoc, mul_right_comm, coeff_mul_one_sub_of_lt_order _ t.1]\n    exact ih t.2\n#align coeff_mul_prod_one_sub_of_lt_order coeff_mul_prod_one_sub_of_lt_order\n\n",
+ "coeff_mul_one_sub_of_lt_order":
+ "theorem coeff_mul_one_sub_of_lt_order {R : Type _} [CommRing R] {φ ψ : power_series R} (n : ℕ) (h : ↑n < ψ.order) :\n    coeff R n (φ * (1 - ψ)) = coeff R n φ := by simp [coeff_mul_of_lt_order h, mul_sub]\n#align coeff_mul_one_sub_of_lt_order coeff_mul_one_sub_of_lt_order\n\n",
+ "coeff_mul_of_lt_order":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `finset.sum -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.sum -/\n/-- If `n` is strictly smaller than the order of `ψ`, then the `n`th coefficient of its product\nwith any other power series is `0`. -/\ntheorem coeff_mul_of_lt_order {φ ψ : power_series R} {n : ℕ} (h : ↑n < ψ.order) : coeff R n (φ * ψ) = 0 :=\n  by\n  suffices :\n    coeff R n (φ * ψ) =\n      finset.sum \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.sum\"\n        (finset.nat.antidiagonal n) 0\n  rw [this, finset.sum_const_zero]\n  rw [coeff_mul]\n  apply finset.sum_congr rfl fun x hx => _\n  refine' mul_eq_zero_of_right (coeff R x.fst φ) (coeff_of_lt_order x.snd (lt_of_le_of_lt _ h))\n  rw [finset.nat.mem_antidiagonal] at hx\n  norm_cast\n  linarith\n#align coeff_mul_of_lt_order coeff_mul_of_lt_order\n\n",
+ "coeff_mul_monomial":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →₀ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →₀ » -/\ntheorem coeff_mul_monomial (a : R) : coeff R m (φ * monomial R n a) = if n ≤ m then coeff R (m - n) φ * a else 0 :=\n  by\n  have :\n    ∀ p ∈ antidiagonal m,\n      coeff R (p : «expr →₀ » σ ℕ × «expr →₀ » σ ℕ).1 φ * coeff R p.2 (monomial R n a) ≠ 0 → p.2 = n :=\n    fun p _ hp => eq_of_coeff_monomial_ne_zero (right_ne_zero_of_mul hp)\n  rw [coeff_mul, ← finset.sum_filter_of_ne this, antidiagonal_filter_snd_eq, finset.sum_ite_index]\n  simp only [finset.sum_singleton, coeff_monomial_same, finset.sum_empty]\n#align coeff_mul_monomial coeff_mul_monomial\n\n",
+ "coeff_mul_X_pow'":
+ "theorem coeff_mul_X_pow' (p : power_series R) (n d : ℕ) : coeff R d (p * X ^ n) = ite (n ≤ d) (coeff R (d - n) p) 0 :=\n  by\n  split_ifs\n  · rw [← tsub_add_cancel_of_le h, coeff_mul_X_pow, add_tsub_cancel_right]\n  · refine' (coeff_mul _ _ _).trans (finset.sum_eq_zero fun x hx => _)\n    rw [coeff_X_pow, if_neg, mul_zero]\n    exact ((le_of_add_le_right (finset.nat.mem_antidiagonal.mp hx).le).trans_lt <| not_le.mp h).ne\n#align coeff_mul_X_pow' coeff_mul_X_pow'\n\n",
+ "coeff_mul_X_pow":
+ "@[simp]\ntheorem coeff_mul_X_pow (p : power_series R) (n d : ℕ) : coeff R (d + n) (p * X ^ n) = coeff R d p :=\n  by\n  rw [coeff_mul, finset.sum_eq_single (d, n), coeff_X_pow, if_pos rfl, mul_one]\n  · rintro ⟨i, j⟩ h1 h2\n    rw [coeff_X_pow, if_neg, mul_zero]\n    rintro rfl\n    apply h2\n    rw [finset.nat.mem_antidiagonal, add_right_cancel_iff] at h1\n    subst h1\n  · exact fun h1 => (h1 (finset.nat.mem_antidiagonal.2 rfl)).elim\n#align coeff_mul_X_pow coeff_mul_X_pow\n\n",
+ "coeff_mul_C":
+ "@[simp]\ntheorem coeff_mul_C (n : ℕ) (φ : power_series R) (a : R) : coeff R n (φ * C R a) = coeff R n φ * a :=\n  mv_power_series.coeff_mul_C _ φ a\n#align coeff_mul_C coeff_mul_C\n\n",
+ "coeff_mul":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `finset.sum -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.sum -/\ntheorem coeff_mul (n : ℕ) (φ ψ : power_series R) :\n    coeff R n (φ * ψ) =\n      finset.sum \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.sum\"\n        (finset.nat.antidiagonal n) (coeff R p.1 φ * coeff R p.2 ψ) :=\n  by\n  symm\n  apply finset.sum_bij fun (p : ℕ × ℕ) h => (single () p.1, single () p.2)\n  · rintro ⟨i, j⟩ hij\n    rw [finset.nat.mem_antidiagonal] at hij\n    rw [finsupp.mem_antidiagonal, ← finsupp.single_add, hij]\n  · rintro ⟨i, j⟩ hij\n    rfl\n  · rintro ⟨i, j⟩ ⟨k, l⟩ hij hkl\n    simpa only [prod.mk.inj_iff, finsupp.unique_single_eq_iff] using id\n  · rintro ⟨f, g⟩ hfg\n    refine' ⟨(f (), g ()), _, _⟩\n    · rw [finsupp.mem_antidiagonal] at hfg\n      rw [finset.nat.mem_antidiagonal, ← finsupp.add_apply, hfg, finsupp.single_eq_same]\n    · rw [prod.mk.inj_iff]\n      dsimp\n      exact ⟨finsupp.unique_single f, finsupp.unique_single g⟩\n#align coeff_mul coeff_mul\n\n",
+ "coeff_monomial_same":
+ "@[simp]\ntheorem coeff_monomial_same (n : ℕ) (a : R) : coeff R n (monomial R n a) = a :=\n  mv_power_series.coeff_monomial_same _ _\n#align coeff_monomial_same coeff_monomial_same\n\n",
+ "coeff_monomial_ne":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →₀ » -/\ntheorem coeff_monomial_ne {m n : «expr →₀ » σ ℕ} (h : m ≠ n) (a : R) : coeff R m (monomial R n a) = 0 :=\n  linear_map.std_basis_ne R _ _ _ h a\n#align coeff_monomial_ne coeff_monomial_ne\n\n",
+ "coeff_monomial_mul":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →₀ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →₀ » -/\ntheorem coeff_monomial_mul (a : R) : coeff R m (monomial R n a * φ) = if n ≤ m then a * coeff R (m - n) φ else 0 :=\n  by\n  have :\n    ∀ p ∈ antidiagonal m,\n      coeff R (p : «expr →₀ » σ ℕ × «expr →₀ » σ ℕ).1 (monomial R n a) * coeff R p.2 φ ≠ 0 → p.1 = n :=\n    fun p _ hp => eq_of_coeff_monomial_ne_zero (left_ne_zero_of_mul hp)\n  rw [coeff_mul, ← finset.sum_filter_of_ne this, antidiagonal_filter_fst_eq, finset.sum_ite_index]\n  simp only [finset.sum_singleton, coeff_monomial_same, finset.sum_empty]\n#align coeff_monomial_mul coeff_monomial_mul\n\n",
+ "coeff_monomial":
+ "theorem coeff_monomial (m n : ℕ) (a : R) : coeff R m (monomial R n a) = if m = n then a else 0 :=\n  calc\n    coeff R m (monomial R n a) = _ := mv_power_series.coeff_monomial _ _ _\n    _ = if m = n then a else 0 := by simp only [finsupp.unique_single_eq_iff]\n    \n#align coeff_monomial coeff_monomial\n\n",
+ "coeff_mk":
+ "@[simp]\ntheorem coeff_mk (n : ℕ) (f : ℕ → R) : coeff R n (mk f) = f n :=\n  congr_arg f finsupp.single_eq_same\n#align coeff_mk coeff_mk\n\n",
+ "coeff_map":
+ "@[simp]\ntheorem coeff_map (n : ℕ) (φ : power_series R) : coeff S n (map f φ) = f (coeff R n φ) :=\n  rfl\n#align coeff_map coeff_map\n\n",
+ "coeff_inv_of_unit":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ˣ» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `finset.sum -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.sum -/\ntheorem coeff_inv_of_unit (n : ℕ) (φ : power_series R) (u : «expr ˣ» R) :\n    coeff R n (inv_of_unit φ u) =\n      if n = 0 then ↑u⁻¹\n      else\n        -↑u⁻¹ *\n          finset.sum \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.sum\"\n            (finset.nat.antidiagonal n) (if x.2 < n then coeff R x.1 φ * coeff R x.2 (inv_of_unit φ u) else 0) :=\n  coeff_inv_aux n (↑u⁻¹) φ\n#align coeff_inv_of_unit coeff_inv_of_unit\n\n",
+ "coeff_inv_aux":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `finset.sum -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.sum -/\ntheorem coeff_inv_aux (n : ℕ) (a : R) (φ : power_series R) :\n    coeff R n (inv.aux a φ) =\n      if n = 0 then a\n      else\n        -a *\n          finset.sum \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.sum\"\n            (finset.nat.antidiagonal n) (if x.2 < n then coeff R x.1 φ * coeff R x.2 (inv.aux a φ) else 0) :=\n  by\n  rw [coeff, inv.aux, mv_power_series.coeff_inv_aux]\n  simp only [finsupp.single_eq_zero]\n  split_ifs; · rfl\n  congr 1\n  symm\n  apply finset.sum_bij fun (p : ℕ × ℕ) h => (single () p.1, single () p.2)\n  · rintro ⟨i, j⟩ hij\n    rw [finset.nat.mem_antidiagonal] at hij\n    rw [finsupp.mem_antidiagonal, ← finsupp.single_add, hij]\n  · rintro ⟨i, j⟩ hij\n    by_cases H : j < n\n    · rw [if_pos H, if_pos]\n      · rfl\n      constructor\n      · rintro ⟨⟩\n        simpa [finsupp.single_eq_same] using le_of_lt H\n      · intro hh\n        rw [lt_iff_not_ge] at H\n        apply H\n        simpa [finsupp.single_eq_same] using hh ()\n    · rw [if_neg H, if_neg]\n      rintro ⟨h₁, h₂⟩\n      apply h₂\n      rintro ⟨⟩\n      simpa [finsupp.single_eq_same] using not_lt.1 H\n  · rintro ⟨i, j⟩ ⟨k, l⟩ hij hkl\n    simpa only [prod.mk.inj_iff, finsupp.unique_single_eq_iff] using id\n  · rintro ⟨f, g⟩ hfg\n    refine' ⟨(f (), g ()), _, _⟩\n    · rw [finsupp.mem_antidiagonal] at hfg\n      rw [finset.nat.mem_antidiagonal, ← finsupp.add_apply, hfg, finsupp.single_eq_same]\n    · rw [prod.mk.inj_iff]\n      dsimp\n      exact ⟨finsupp.unique_single f, finsupp.unique_single g⟩\n#align coeff_inv_aux coeff_inv_aux\n\n",
+ "coeff_inv":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `finset.sum -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.sum -/\ntheorem coeff_inv (n) (φ : power_series k) :\n    coeff k n φ⁻¹ =\n      if n = 0 then (constant_coeff k φ)⁻¹\n      else\n        -(constant_coeff k φ)⁻¹ *\n          finset.sum \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.sum\"\n            (finset.nat.antidiagonal n) (if x.2 < n then coeff k x.1 φ * coeff k x.2 φ⁻¹ else 0) :=\n  by rw [inv_eq_inv_aux, coeff_inv_aux n (constant_coeff k φ)⁻¹ φ]\n#align coeff_inv coeff_inv\n\n",
+ "coeff_index_single_self_X":
+ "@[simp]\ntheorem coeff_index_single_self_X (s : σ) : coeff R (single s 1) (X s : mv_power_series σ R) = 1 :=\n  coeff_monomial_same _ _\n#align coeff_index_single_self_X coeff_index_single_self_X\n\n",
+ "coeff_index_single_X":
+ "theorem coeff_index_single_X [decidable_eq σ] (s t : σ) :\n    coeff R (single t 1) (X s : mv_power_series σ R) = if t = s then 1 else 0 := by\n  simp only [coeff_X, single_left_inj one_ne_zero]\n#align coeff_index_single_X coeff_index_single_X\n\n",
+ "coeff_def":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →₀ » -/\ntheorem coeff_def {s : «expr →₀ » unit ℕ} {n : ℕ} (h : s () = n) : coeff R n = mv_power_series.coeff R s := by\n  erw [coeff, ← h, ← finsupp.unique_single s]\n#align coeff_def coeff_def\n\n",
+ "coeff_comp_monomial":
+ "@[simp]\ntheorem coeff_comp_monomial (n : ℕ) : (coeff R n).comp (monomial R n) = linear_map.id :=\n  linear_map.ext <| coeff_monomial_same n\n#align coeff_comp_monomial coeff_comp_monomial\n\n",
+ "coeff_coe":
+ "@[simp, norm_cast]\ntheorem coeff_coe (n) : power_series.coeff R n φ = coeff φ n :=\n  congr_arg (coeff φ) finsupp.single_eq_same\n#align coeff_coe coeff_coe\n\n",
+ "coeff_add_mul_monomial":
+ "theorem coeff_add_mul_monomial (a : R) : coeff R (m + n) (φ * monomial R n a) = coeff R m φ * a :=\n  by\n  rw [coeff_mul_monomial, if_pos, add_tsub_cancel_right]\n  exact le_add_left le_rfl\n#align coeff_add_mul_monomial coeff_add_mul_monomial\n\n",
+ "coeff_add_monomial_mul":
+ "theorem coeff_add_monomial_mul (a : R) : coeff R (m + n) (monomial R m a * φ) = a * coeff R n φ :=\n  by\n  rw [coeff_monomial_mul, if_pos, add_tsub_cancel_left]\n  exact le_add_right le_rfl\n#align coeff_add_monomial_mul coeff_add_monomial_mul\n\n",
+ "coeff_X_pow_self":
+ "@[simp]\ntheorem coeff_X_pow_self (n : ℕ) : coeff R n ((X : power_series R) ^ n) = 1 := by rw [coeff_X_pow, if_pos rfl]\n#align coeff_X_pow_self coeff_X_pow_self\n\n",
+ "coeff_X_pow_mul'":
+ "theorem coeff_X_pow_mul' (p : power_series R) (n d : ℕ) : coeff R d (X ^ n * p) = ite (n ≤ d) (coeff R (d - n) p) 0 :=\n  by\n  split_ifs\n  · rw [← tsub_add_cancel_of_le h, coeff_X_pow_mul]\n    simp\n  · refine' (coeff_mul _ _ _).trans (finset.sum_eq_zero fun x hx => _)\n    rw [coeff_X_pow, if_neg, zero_mul]\n    have := finset.nat.mem_antidiagonal.mp hx\n    rw [add_comm] at this\n    exact ((le_of_add_le_right this.le).trans_lt <| not_le.mp h).ne\n#align coeff_X_pow_mul' coeff_X_pow_mul'\n\n",
+ "coeff_X_pow_mul":
+ "@[simp]\ntheorem coeff_X_pow_mul (p : power_series R) (n d : ℕ) : coeff R (d + n) (X ^ n * p) = coeff R d p :=\n  by\n  rw [coeff_mul, finset.sum_eq_single (n, d), coeff_X_pow, if_pos rfl, one_mul]\n  · rintro ⟨i, j⟩ h1 h2\n    rw [coeff_X_pow, if_neg, zero_mul]\n    rintro rfl\n    apply h2\n    rw [finset.nat.mem_antidiagonal, add_comm, add_right_cancel_iff] at h1\n    subst h1\n  · rw [add_comm]\n    exact fun h1 => (h1 (finset.nat.mem_antidiagonal.2 rfl)).elim\n#align coeff_X_pow_mul coeff_X_pow_mul\n\n",
+ "coeff_X_pow":
+ "theorem coeff_X_pow (m n : ℕ) : coeff R m ((X : power_series R) ^ n) = if m = n then 1 else 0 := by\n  rw [X_pow_eq, coeff_monomial]\n#align coeff_X_pow coeff_X_pow\n\n",
+ "coeff_X":
+ "theorem coeff_X (n : ℕ) : coeff R n (X : power_series R) = if n = 1 then 1 else 0 := by rw [X_eq, coeff_monomial]\n#align coeff_X coeff_X\n\n",
+ "coeff_C_mul_X_pow":
+ "-- The following section duplicates the api of `data.polynomial.coeff` and should attempt to keep\n-- up to date with that\ntheorem coeff_C_mul_X_pow (x : R) (k n : ℕ) : coeff R n (C R x * X ^ k : power_series R) = if n = k then x else 0 := by\n  simp [X_pow_eq, coeff_monomial]\n#align coeff_C_mul_X_pow coeff_C_mul_X_pow\n\n",
+ "coeff_C_mul":
+ "@[simp]\ntheorem coeff_C_mul (n : ℕ) (φ : power_series R) (a : R) : coeff R n (C R a * φ) = a * coeff R n φ :=\n  mv_power_series.coeff_C_mul _ φ a\n#align coeff_C_mul coeff_C_mul\n\n",
+ "coeff_C":
+ "theorem coeff_C (n : ℕ) (a : R) : coeff R n (C R a : power_series R) = if n = 0 then a else 0 := by\n  rw [← monomial_zero_eq_C_apply, coeff_monomial]\n#align coeff_C coeff_C\n\n",
+ "coe_zero":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `polynomial -/\n@[simp, norm_cast]\ntheorem coe_zero : ((0 : polynomial R) : power_series R) = 0 :=\n  rfl\n#align coe_zero coe_zero\n\n",
+ "coe_pow":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `polynomial -/\n@[simp, norm_cast]\ntheorem coe_pow (n : ℕ) : ((φ ^ n : polynomial R) : power_series R) = (φ : power_series R) ^ n :=\n  coe_to_power_series.ring_hom.map_pow _ _\n#align coe_pow coe_pow\n\n",
+ "coe_one":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `polynomial -/\n@[simp, norm_cast]\ntheorem coe_one : ((1 : polynomial R) : power_series R) = 1 :=\n  by\n  have := coe_monomial 0 (1 : R)\n  rwa [power_series.monomial_zero_eq_C_apply] at this\n#align coe_one coe_one\n\n",
+ "coe_mul":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `polynomial -/\n@[simp, norm_cast]\ntheorem coe_mul : ((φ * ψ : polynomial R) : power_series R) = φ * ψ :=\n  power_series.ext fun n => by simp only [coeff_coe, power_series.coeff_mul, coeff_mul]\n#align coe_mul coe_mul\n\n",
+ "coe_monomial":
+ "@[simp, norm_cast]\ntheorem coe_monomial (n : ℕ) (a : R) : (monomial n a : power_series R) = power_series.monomial R n a :=\n  by\n  ext\n  simp [coeff_coe, power_series.coeff_monomial, polynomial.coeff_monomial, eq_comm]\n#align coe_monomial coe_monomial\n\n",
+ "coe_injective":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `polynomial -/\ntheorem coe_injective : function.injective (coe : polynomial R → power_series R) := fun x y h =>\n  by\n  ext\n  simp_rw [← coeff_coe, h]\n#align coe_injective coe_injective\n\n",
+ "coe_inj":
+ "@[simp, norm_cast]\ntheorem coe_inj : (φ : power_series R) = ψ ↔ φ = ψ :=\n  (coe_injective R).eq_iff\n#align coe_inj coe_inj\n\n",
+ "coe_eq_zero_iff":
+ "@[simp]\ntheorem coe_eq_zero_iff : (φ : power_series R) = 0 ↔ φ = 0 := by rw [← coe_zero, coe_inj]\n#align coe_eq_zero_iff coe_eq_zero_iff\n\n",
+ "coe_eq_one_iff":
+ "@[simp]\ntheorem coe_eq_one_iff : (φ : power_series R) = 1 ↔ φ = 1 := by rw [← coe_one, coe_inj]\n#align coe_eq_one_iff coe_eq_one_iff\n\n",
+ "coe_def":
+ "theorem coe_def : (φ : power_series R) = power_series.mk (coeff φ) :=\n  rfl\n#align coe_def coe_def\n\n",
+ "coe_bit1":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `polynomial -/\n@[simp, norm_cast]\ntheorem coe_bit1 : ((bit1 φ : polynomial R) : power_series R) = bit1 (φ : power_series R) := by\n  rw [bit1, bit1, coe_add, coe_one, coe_bit0]\n#align coe_bit1 coe_bit1\n\n",
+ "coe_bit0":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `polynomial -/\n@[simp, norm_cast]\ntheorem coe_bit0 : ((bit0 φ : polynomial R) : power_series R) = bit0 (φ : power_series R) :=\n  coe_add φ φ\n#align coe_bit0 coe_bit0\n\n",
+ "coe_add":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `polynomial -/\n@[simp, norm_cast]\ntheorem coe_add : ((φ + ψ : polynomial R) : power_series R) = φ + ψ :=\n  by\n  ext\n  simp\n#align coe_add coe_add\n\n",
+ "coe_X":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `polynomial -/\n@[simp, norm_cast]\ntheorem coe_X : ((X : polynomial R) : power_series R) = power_series.X :=\n  coe_monomial _ _\n#align coe_X coe_X\n\n",
+ "coe_C":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `polynomial -/\n@[simp, norm_cast]\ntheorem coe_C (a : R) : ((C a : polynomial R) : power_series R) = power_series.C R a :=\n  by\n  have := coe_monomial 0 a\n  rwa [power_series.monomial_zero_eq_C_apply] at this\n#align coe_C coe_C\n\n",
+ "aux":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊓ » -/\nprivate theorem order_add_of_order_eq.aux (φ ψ : power_series R) (h : order φ ≠ order ψ) (H : order φ < order ψ) :\n    order (φ + ψ) ≤ «expr ⊓ » (order φ) (order ψ) :=\n  by\n  suffices order (φ + ψ) = order φ by\n    rw [le_inf_iff, this]\n    exact ⟨le_rfl, le_of_lt H⟩\n  · rw [order_eq]\n    constructor\n    · intro i hi\n      rw [← hi] at H\n      rw [(coeff _ _).map_add, coeff_of_lt_order i H, add_zero]\n      exact (order_eq_nat.1 hi.symm).1\n    · intro i hi\n      rw [(coeff _ _).map_add, coeff_of_lt_order i hi, coeff_of_lt_order i (lt_trans hi H), zero_add]\n#align order_add_of_order_eq.aux order_add_of_order_eq.aux\n\n",
+ "algebra_map_apply''":
+ "theorem algebra_map_apply'' : algebra_map (power_series R) (power_series A) f = map (algebra_map R A) f :=\n  rfl\n#align algebra_map_apply'' algebra_map_apply''\n\n",
+ "algebra_map_apply'":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `polynomial -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `polynomial -/\n-- see Note [lower instance priority]\ntheorem algebra_map_apply' (p : polynomial R) :\n    algebra_map (polynomial R) (power_series A) p = map (algebra_map R A) p :=\n  rfl\n#align algebra_map_apply' algebra_map_apply'\n\n",
+ "algebra_map_apply":
+ "theorem algebra_map_apply {r : R} : algebra_map R (power_series A) r = C A (algebra_map R A r) :=\n  mv_power_series.algebra_map_apply\n#align algebra_map_apply algebra_map_apply\n\n",
+ "alg_hom_apply":
+ "@[simp]\ntheorem coe_to_power_series.alg_hom_apply : coe_to_power_series.alg_hom A φ = power_series.map (algebra_map R A) ↑φ :=\n  rfl\n#align coe_to_power_series.alg_hom_apply coe_to_power_series.alg_hom_apply\n\n",
+ "add_mul":
+ "#print add_mul /-\nprotected theorem add_mul (φ₁ φ₂ φ₃ : mv_power_series σ R) : (φ₁ + φ₂) * φ₃ = φ₁ * φ₃ + φ₂ * φ₃ :=\n  ext fun n => by simp only [coeff_mul, add_mul, finset.sum_add_distrib, linear_map.map_add]\n#align add_mul add_mul\n-/\n\n",
+ "X_prime":
+ "/-- The variable of the power series ring over an integral domain is prime.-/\ntheorem X_prime : Prime (X : power_series R) :=\n  by\n  rw [← ideal.span_singleton_prime]\n  · exact span_X_is_prime\n  · intro h\n    simpa using congr_arg (coeff R 1) h\n#align X_prime X_prime\n\n",
+ "X_pow_order_dvd":
+ "-- TODO: link with `X_pow_dvd_iff`\ntheorem X_pow_order_dvd (h : (order φ).dom) : X ^ (order φ).get h ∣ φ :=\n  by\n  refine' ⟨power_series.mk fun n => coeff R (n + (order φ).get h) φ, _⟩\n  ext n\n  simp only [coeff_mul, coeff_X_pow, coeff_mk, boole_mul, finset.sum_ite, finset.nat.filter_fst_eq_antidiagonal,\n    finset.sum_const_zero, add_zero]\n  split_ifs with hn hn\n  · simp [tsub_add_cancel_of_le hn]\n  · simp only [finset.sum_empty]\n    refine' coeff_of_lt_order _ _\n    simpa [part_enat.coe_lt_iff] using fun _ => hn\n#align X_pow_order_dvd X_pow_order_dvd\n\n",
+ "X_pow_eq":
+ "theorem X_pow_eq (n : ℕ) : (X : power_series R) ^ n = monomial R n 1 :=\n  mv_power_series.X_pow_eq _ n\n#align X_pow_eq X_pow_eq\n\n",
+ "X_pow_dvd_iff":
+ "theorem X_pow_dvd_iff {n : ℕ} {φ : power_series R} : (X : power_series R) ^ n ∣ φ ↔ ∀ m, m < n → coeff R m φ = 0 :=\n  by\n  convert @mv_power_series.X_pow_dvd_iff unit R _ () n φ; apply propext\n  classical\n    constructor <;> intro h m hm\n    · rw [finsupp.unique_single m]\n      convert h _ hm\n    · apply h\n      simpa only [finsupp.single_eq_same] using hm\n#align X_pow_dvd_iff X_pow_dvd_iff\n\n",
+ "X_ne_zero":
+ "@[simp]\ntheorem X_ne_zero [nontrivial R] : (X : power_series R) ≠ 0 := fun H => by\n  simpa only [coeff_one_X, one_ne_zero, map_zero] using congr_arg (coeff R 1) H\n#align X_ne_zero X_ne_zero\n\n",
+ "X_inv":
+ "@[simp]\ntheorem X_inv : (X : power_series k)⁻¹ = 0 :=\n  mv_power_series.X_inv _\n#align X_inv X_inv\n\n",
+ "X_inj":
+ "theorem X_inj [nontrivial R] {s t : σ} : (X s : mv_power_series σ R) = X t ↔ s = t :=\n  ⟨by\n    intro h; replace h := congr_arg (coeff R (single s 1)) h; rw [coeff_X, if_pos rfl, coeff_X] at h\n    split_ifs  at h with H\n    · rw [finsupp.single_eq_single_iff] at H\n      cases H\n      · exact H.1\n      · exfalso\n        exact one_ne_zero H.1\n    · exfalso\n      exact one_ne_zero h, congr_arg X⟩\n#align X_inj X_inj\n\n",
+ "X_eq":
+ "theorem X_eq : (X : power_series R) = monomial R 1 1 :=\n  rfl\n#align X_eq X_eq\n\n",
+ "X_dvd_iff":
+ "theorem X_dvd_iff {φ : power_series R} : (X : power_series R) ∣ φ ↔ constant_coeff R φ = 0 :=\n  by\n  rw [← pow_one (X : power_series R), X_pow_dvd_iff, ← coeff_zero_eq_constant_coeff_apply]\n  constructor <;> intro h\n  · exact h 0 zero_lt_one\n  · intro m hm\n    rwa [nat.eq_zero_of_le_zero (nat.le_of_succ_le_succ hm)]\n#align X_dvd_iff X_dvd_iff\n\n",
+ "X_def":
+ "theorem X_def (s : σ) : X s = monomial R (single s 1) 1 :=\n  rfl\n#align X_def X_def\n\n",
+ "C_inv":
+ "@[simp]\ntheorem C_inv (r : k) : (C k r)⁻¹ = C k r⁻¹ :=\n  mv_power_series.C_inv _\n#align C_inv C_inv\n\n",
+ "C_eq_algebra_map":
+ "theorem C_eq_algebra_map {r : R} : C R r = (algebra_map R (power_series R)) r :=\n  rfl\n#align C_eq_algebra_map C_eq_algebra_map\n\n"}

@@ -1,0 +1,6 @@
+{"simple_of_finrank_eq_one":
+ "/-- Any `k`-algebra module which is 1-dimensional over `k` is simple. -/\ntheorem simple_of_finrank_eq_one {k : Type _} [Field k] [algebra k R] {V : Module R} (h : finrank k V = 1) : simple V :=\n  (simple_iff_is_simple_module' V).mpr (is_simple_module_of_finrank_eq_one h)\n#align simple_of_finrank_eq_one simple_of_finrank_eq_one\n\n",
+ "simple_iff_is_simple_module'":
+ "theorem simple_iff_is_simple_module' (M : Module R) : simple M ↔ is_simple_module R M :=\n  (simple.iff_of_iso (of_self_iso M).symm).trans simple_iff_is_simple_module\n#align simple_iff_is_simple_module' simple_iff_is_simple_module'\n\n",
+ "simple_iff_is_simple_module":
+ "/-\nCopyright (c) 2022 Pierre-Alexandre Bazin. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Pierre-Alexandre Bazin, Scott Morrison\n-/\ntheorem simple_iff_is_simple_module : simple (of R M) ↔ is_simple_module R M :=\n  (simple_iff_subobject_is_simple_order _).trans (subobject_Module (of R M)).is_simple_order_iff\n#align simple_iff_is_simple_module simple_iff_is_simple_module\n\n"}

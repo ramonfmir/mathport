@@ -1,0 +1,96 @@
+{"tsub_zero":
+ "#print tsub_zero /-\n@[simp]\ntheorem tsub_zero (a : α) : a - 0 = a :=\n  AddLECancellable.tsub_eq_of_eq_add addLECancellable_zero (add_zero _).symm\n#align tsub_zero tsub_zero\n-/\n\n",
+ "tsub_tsub_tsub_le_tsub":
+ "#print tsub_tsub_tsub_le_tsub /-\ntheorem tsub_tsub_tsub_le_tsub : c - a - (c - b) ≤ b - a :=\n  by\n  rw [tsub_le_iff_left, tsub_le_iff_left, add_left_comm]\n  exact le_tsub_add.trans (add_le_add_left le_add_tsub _)\n#align tsub_tsub_tsub_le_tsub tsub_tsub_tsub_le_tsub\n-/\n\n",
+ "tsub_tsub_le_tsub_add":
+ "#print tsub_tsub_le_tsub_add /-\ntheorem tsub_tsub_le_tsub_add {a b c : α} : a - (b - c) ≤ a - b + c :=\n  tsub_le_iff_right.2 <|\n    calc\n      a ≤ a - b + b := le_tsub_add\n      _ ≤ a - b + (c + (b - c)) := add_le_add_left le_add_tsub _\n      _ = a - b + c + (b - c) := (add_assoc _ _ _).symm\n      \n#align tsub_tsub_le_tsub_add tsub_tsub_le_tsub_add\n-/\n\n",
+ "tsub_tsub_le":
+ "#print tsub_tsub_le /-\n/-- See `tsub_tsub_cancel_of_le` for the equality. -/\ntheorem tsub_tsub_le : b - (b - a) ≤ a :=\n  tsub_le_iff_right.mpr le_add_tsub\n#align tsub_tsub_le tsub_tsub_le\n-/\n\n",
+ "tsub_tsub":
+ "#print tsub_tsub /-\ntheorem tsub_tsub (b a c : α) : b - a - c = b - (a + c) :=\n  by\n  apply le_antisymm\n  · rw [tsub_le_iff_left, tsub_le_iff_left, ← add_assoc, ← tsub_le_iff_left]\n  · rw [tsub_le_iff_left, add_assoc, ← tsub_le_iff_left, ← tsub_le_iff_left]\n#align tsub_tsub tsub_tsub\n-/\n\n",
+ "tsub_right_comm":
+ "#print tsub_right_comm /-\ntheorem tsub_right_comm : a - b - c = a - c - b := by simp_rw [← tsub_add_eq_tsub_tsub, add_comm]\n#align tsub_right_comm tsub_right_comm\n-/\n\n",
+ "tsub_nonpos":
+ "#print tsub_nonpos /-\ntheorem tsub_nonpos : a - b ≤ 0 ↔ a ≤ b := by rw [tsub_le_iff_left, add_zero]\n#align tsub_nonpos tsub_nonpos\n-/\n\n",
+ "tsub_le_tsub_right":
+ "#print tsub_le_tsub_right /-\ntheorem tsub_le_tsub_right (h : a ≤ b) (c : α) : a - c ≤ b - c :=\n  tsub_le_iff_left.mpr <| h.trans le_add_tsub\n#align tsub_le_tsub_right tsub_le_tsub_right\n-/\n\n",
+ "tsub_le_tsub_left":
+ "#print tsub_le_tsub_left /-\ntheorem tsub_le_tsub_left (h : a ≤ b) (c : α) : c - b ≤ c - a :=\n  tsub_le_iff_left.mpr <| le_add_tsub.trans <| add_le_add_right h _\n#align tsub_le_tsub_left tsub_le_tsub_left\n-/\n\n",
+ "tsub_le_tsub_add_tsub":
+ "#print tsub_le_tsub_add_tsub /-\ntheorem tsub_le_tsub_add_tsub : a - c ≤ a - b + (b - c) :=\n  by\n  rw [tsub_le_iff_left, ← add_assoc, add_right_comm]\n  exact le_add_tsub.trans (add_le_add_right le_add_tsub _)\n#align tsub_le_tsub_add_tsub tsub_le_tsub_add_tsub\n-/\n\n",
+ "tsub_le_tsub":
+ "#print tsub_le_tsub /-\ntheorem tsub_le_tsub (hab : a ≤ b) (hcd : c ≤ d) : a - d ≤ b - c :=\n  (tsub_le_tsub_right hab _).trans <| tsub_le_tsub_left hcd _\n#align tsub_le_tsub tsub_le_tsub\n-/\n\n",
+ "tsub_le_iff_tsub_le":
+ "#print tsub_le_iff_tsub_le /-\ntheorem tsub_le_iff_tsub_le : a - b ≤ c ↔ a - c ≤ b := by rw [tsub_le_iff_left, tsub_le_iff_right]\n#align tsub_le_iff_tsub_le tsub_le_iff_tsub_le\n-/\n\n",
+ "tsub_le_iff_right":
+ "#print tsub_le_iff_right /-\n/-\nCopyright (c) 2021 Floris van Doorn. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Floris van Doorn\n-/\n@[simp]\ntheorem tsub_le_iff_right : a - b ≤ c ↔ a ≤ c + b :=\n  has_ordered_sub.tsub_le_iff_right a b c\n#align tsub_le_iff_right tsub_le_iff_right\n-/\n\n",
+ "tsub_le_iff_left":
+ "#print tsub_le_iff_left /-\ntheorem tsub_le_iff_left : a - b ≤ c ↔ a ≤ b + c := by rw [tsub_le_iff_right, add_comm]\n#align tsub_le_iff_left tsub_le_iff_left\n-/\n\n",
+ "tsub_eq_of_eq_add_rev":
+ "#print tsub_eq_of_eq_add_rev /-\ntheorem tsub_eq_of_eq_add_rev (h : a = b + c) : a - b = c :=\n  Contravariant.AddLECancellable.tsub_eq_of_eq_add_rev h\n#align tsub_eq_of_eq_add_rev tsub_eq_of_eq_add_rev\n-/\n\n",
+ "tsub_eq_of_eq_add":
+ "#print tsub_eq_of_eq_add /-\ntheorem tsub_eq_of_eq_add (h : a = c + b) : a - b = c :=\n  Contravariant.AddLECancellable.tsub_eq_of_eq_add h\n#align tsub_eq_of_eq_add tsub_eq_of_eq_add\n-/\n\n",
+ "tsub_add_eq_tsub_tsub_swap":
+ "#print tsub_add_eq_tsub_tsub_swap /-\ntheorem tsub_add_eq_tsub_tsub_swap (a b c : α) : a - (b + c) = a - c - b :=\n  by\n  rw [add_comm]\n  apply tsub_add_eq_tsub_tsub\n#align tsub_add_eq_tsub_tsub_swap tsub_add_eq_tsub_tsub_swap\n-/\n\n",
+ "tsub_add_eq_tsub_tsub":
+ "#print tsub_add_eq_tsub_tsub /-\ntheorem tsub_add_eq_tsub_tsub (a b c : α) : a - (b + c) = a - b - c :=\n  (tsub_tsub _ _ _).symm\n#align tsub_add_eq_tsub_tsub tsub_add_eq_tsub_tsub\n-/\n\n",
+ "lt_tsub_of_add_lt_right":
+ "#print lt_tsub_of_add_lt_right /-\ntheorem lt_tsub_of_add_lt_right : a + c < b → a < b - c :=\n  Contravariant.AddLECancellable.lt_tsub_of_add_lt_right\n#align lt_tsub_of_add_lt_right lt_tsub_of_add_lt_right\n-/\n\n",
+ "lt_tsub_of_add_lt_left":
+ "#print lt_tsub_of_add_lt_left /-\n/-- This lemma (and some of its corollaries) also holds for `ennreal`, but this proof doesn't work\nfor it. Maybe we should add this lemma as field to `has_ordered_sub`? -/\ntheorem lt_tsub_of_add_lt_left : a + c < b → c < b - a :=\n  Contravariant.AddLECancellable.lt_tsub_of_add_lt_left\n#align lt_tsub_of_add_lt_left lt_tsub_of_add_lt_left\n-/\n\n",
+ "lt_tsub_iff_right":
+ "#print lt_tsub_iff_right /-\n/-- See `lt_tsub_iff_right_of_le` for a weaker statement in a partial order. -/\ntheorem lt_tsub_iff_right : a < b - c ↔ a + c < b :=\n  lt_iff_lt_of_le_iff_le tsub_le_iff_right\n#align lt_tsub_iff_right lt_tsub_iff_right\n-/\n\n",
+ "lt_tsub_iff_left":
+ "#print lt_tsub_iff_left /-\n/-- See `lt_tsub_iff_left_of_le` for a weaker statement in a partial order. -/\ntheorem lt_tsub_iff_left : a < b - c ↔ c + a < b :=\n  lt_iff_lt_of_le_iff_le tsub_le_iff_left\n#align lt_tsub_iff_left lt_tsub_iff_left\n-/\n\n",
+ "lt_tsub_comm":
+ "#print lt_tsub_comm /-\ntheorem lt_tsub_comm : a < b - c ↔ c < b - a :=\n  lt_tsub_iff_left.trans lt_tsub_iff_right.symm\n#align lt_tsub_comm lt_tsub_comm\n-/\n\n",
+ "lt_of_tsub_lt_tsub_right":
+ "#print lt_of_tsub_lt_tsub_right /-\n/-- See `lt_of_tsub_lt_tsub_right_of_le` for a weaker statement in a partial order. -/\ntheorem lt_of_tsub_lt_tsub_right (h : a - c < b - c) : a < b :=\n  lt_imp_lt_of_le_imp_le (fun h => tsub_le_tsub_right h c) h\n#align lt_of_tsub_lt_tsub_right lt_of_tsub_lt_tsub_right\n-/\n\n",
+ "lt_of_tsub_lt_tsub_left":
+ "#print lt_of_tsub_lt_tsub_left /-\n/-- See `lt_of_tsub_lt_tsub_left_of_le` for a weaker statement in a partial order. -/\ntheorem lt_of_tsub_lt_tsub_left (h : a - b < a - c) : c < b :=\n  lt_imp_lt_of_le_imp_le (fun h => tsub_le_tsub_left h a) h\n#align lt_of_tsub_lt_tsub_left lt_of_tsub_lt_tsub_left\n-/\n\n",
+ "lt_add_of_tsub_lt_right":
+ "#print lt_add_of_tsub_lt_right /-\ntheorem lt_add_of_tsub_lt_right (h : a - c < b) : a < b + c :=\n  Contravariant.AddLECancellable.lt_add_of_tsub_lt_right h\n#align lt_add_of_tsub_lt_right lt_add_of_tsub_lt_right\n-/\n\n",
+ "lt_add_of_tsub_lt_left":
+ "#print lt_add_of_tsub_lt_left /-\ntheorem lt_add_of_tsub_lt_left (h : a - b < c) : a < b + c :=\n  Contravariant.AddLECancellable.lt_add_of_tsub_lt_left h\n#align lt_add_of_tsub_lt_left lt_add_of_tsub_lt_left\n-/\n\n",
+ "le_tsub_of_add_le_right":
+ "#print le_tsub_of_add_le_right /-\ntheorem le_tsub_of_add_le_right (h : a + b ≤ c) : a ≤ c - b :=\n  Contravariant.AddLECancellable.le_tsub_of_add_le_right h\n#align le_tsub_of_add_le_right le_tsub_of_add_le_right\n-/\n\n",
+ "le_tsub_of_add_le_left":
+ "#print le_tsub_of_add_le_left /-\ntheorem le_tsub_of_add_le_left (h : a + b ≤ c) : b ≤ c - a :=\n  Contravariant.AddLECancellable.le_tsub_of_add_le_left h\n#align le_tsub_of_add_le_left le_tsub_of_add_le_left\n-/\n\n",
+ "le_tsub_add_add":
+ "#print le_tsub_add_add /-\ntheorem le_tsub_add_add : a + b ≤ a - c + (b + c) :=\n  by\n  rw [add_comm a, add_comm (a - c)]\n  exact add_le_add_add_tsub\n#align le_tsub_add_add le_tsub_add_add\n-/\n\n",
+ "le_tsub_add":
+ "#print le_tsub_add /-\ntheorem le_tsub_add : b ≤ b - a + a :=\n  tsub_le_iff_right.mp le_rfl\n#align le_tsub_add le_tsub_add\n-/\n\n",
+ "le_add_tsub_swap":
+ "#print le_add_tsub_swap /-\ntheorem le_add_tsub_swap : a ≤ b + a - b :=\n  Contravariant.AddLECancellable.le_add_tsub_swap\n#align le_add_tsub_swap le_add_tsub_swap\n-/\n\n",
+ "le_add_tsub'":
+ "#print le_add_tsub' /-\ntheorem le_add_tsub' : a ≤ a + b - b :=\n  Contravariant.AddLECancellable.le_add_tsub\n#align le_add_tsub' le_add_tsub'\n-/\n\n",
+ "le_add_tsub":
+ "#print le_add_tsub /-\nprotected theorem le_add_tsub (hb : AddLECancellable b) : a ≤ a + b - b :=\n  by\n  rw [add_comm]\n  exact hb.le_add_tsub_swap\n#align le_add_tsub le_add_tsub\n-/\n\n",
+ "eq_tsub_of_add_eq":
+ "#print eq_tsub_of_add_eq /-\ntheorem eq_tsub_of_add_eq (h : a + c = b) : a = b - c :=\n  Contravariant.AddLECancellable.eq_tsub_of_add_eq h\n#align eq_tsub_of_add_eq eq_tsub_of_add_eq\n-/\n\n",
+ "antitone_const_tsub":
+ "#print antitone_const_tsub /-\ntheorem antitone_const_tsub : antitone fun x => c - x := fun x y hxy => tsub_le_tsub rfl.le hxy\n#align antitone_const_tsub antitone_const_tsub\n-/\n\n",
+ "add_tsub_le_tsub_add":
+ "#print add_tsub_le_tsub_add /-\n/-- See `tsub_add_eq_add_tsub` for the equality. -/\ntheorem add_tsub_le_tsub_add : a + b - c ≤ a - c + b :=\n  by\n  rw [add_comm, add_comm _ b]\n  exact add_tsub_le_assoc\n#align add_tsub_le_tsub_add add_tsub_le_tsub_add\n-/\n\n",
+ "add_tsub_le_right":
+ "#print add_tsub_le_right /-\n/-- See `add_tsub_cancel_right` for the equality if `contravariant_class α α (+) (≤)`. -/\ntheorem add_tsub_le_right : a + b - b ≤ a :=\n  tsub_le_iff_right.mpr le_rfl\n#align add_tsub_le_right add_tsub_le_right\n-/\n\n",
+ "add_tsub_le_left":
+ "#print add_tsub_le_left /-\n/-- See `add_tsub_cancel_left` for the equality if `contravariant_class α α (+) (≤)`. -/\ntheorem add_tsub_le_left : a + b - a ≤ b :=\n  tsub_le_iff_left.mpr le_rfl\n#align add_tsub_le_left add_tsub_le_left\n-/\n\n",
+ "add_tsub_le_assoc":
+ "#print add_tsub_le_assoc /-\n/-- See `add_tsub_assoc_of_le` for the equality. -/\ntheorem add_tsub_le_assoc : a + b - c ≤ a + (b - c) :=\n  by\n  rw [tsub_le_iff_left, add_left_comm]\n  exact add_le_add_left le_add_tsub a\n#align add_tsub_le_assoc add_tsub_le_assoc\n-/\n\n",
+ "add_tsub_cancel_right":
+ "#print add_tsub_cancel_right /-\n@[simp]\ntheorem add_tsub_cancel_right (a b : α) : a + b - b = a :=\n  Contravariant.AddLECancellable.add_tsub_cancel_right\n#align add_tsub_cancel_right add_tsub_cancel_right\n-/\n\n",
+ "add_tsub_cancel_left":
+ "#print add_tsub_cancel_left /-\n@[simp]\ntheorem add_tsub_cancel_left (a b : α) : a + b - a = b :=\n  Contravariant.AddLECancellable.add_tsub_cancel_left\n#align add_tsub_cancel_left add_tsub_cancel_left\n-/\n\n",
+ "add_tsub_add_le_tsub_right":
+ "#print add_tsub_add_le_tsub_right /-\n/-- See `add_tsub_add_eq_tsub_right` for the equality. -/\ntheorem add_tsub_add_le_tsub_right : a + c - (b + c) ≤ a - b :=\n  by\n  rw [tsub_le_iff_left, add_right_comm]\n  exact add_le_add_right le_add_tsub c\n#align add_tsub_add_le_tsub_right add_tsub_add_le_tsub_right\n-/\n\n",
+ "add_tsub_add_le_tsub_left":
+ "#print add_tsub_add_le_tsub_left /-\n/-- See `add_tsub_add_eq_tsub_left` for the equality. -/\ntheorem add_tsub_add_le_tsub_left : a + b - (a + c) ≤ b - c :=\n  by\n  rw [tsub_le_iff_left, add_assoc]\n  exact add_le_add_left le_add_tsub _\n#align add_tsub_add_le_tsub_left add_tsub_add_le_tsub_left\n-/\n\n",
+ "add_tsub_add_le_tsub_add_tsub":
+ "#print add_tsub_add_le_tsub_add_tsub /-\n/-- See `tsub_add_tsub_comm` for the equality. -/\ntheorem add_tsub_add_le_tsub_add_tsub : a + b - (c + d) ≤ a - c + (b - d) :=\n  by\n  rw [add_comm c, tsub_le_iff_left, add_assoc, ← tsub_le_iff_left, ← tsub_le_iff_left]\n  refine' (tsub_le_tsub_right add_tsub_le_assoc c).trans _\n  rw [add_comm a, add_comm (a - c)]\n  exact add_tsub_le_assoc\n#align add_tsub_add_le_tsub_add_tsub add_tsub_add_le_tsub_add_tsub\n-/\n\n",
+ "add_tsub_add_eq_tsub_right":
+ "#print add_tsub_add_eq_tsub_right /-\ntheorem add_tsub_add_eq_tsub_right (a c b : α) : a + c - (b + c) = a - b :=\n  by\n  refine' add_tsub_add_le_tsub_right.antisymm (tsub_le_iff_right.2 <| le_of_add_le_add_right _); swap\n  rw [add_assoc]\n  exact le_tsub_add\n#align add_tsub_add_eq_tsub_right add_tsub_add_eq_tsub_right\n-/\n\n",
+ "add_tsub_add_eq_tsub_left":
+ "#print add_tsub_add_eq_tsub_left /-\ntheorem add_tsub_add_eq_tsub_left (a b c : α) : a + b - (a + c) = b - c := by\n  rw [add_comm a b, add_comm a c, add_tsub_add_eq_tsub_right]\n#align add_tsub_add_eq_tsub_left add_tsub_add_eq_tsub_left\n-/\n\n",
+ "add_le_add_add_tsub":
+ "#print add_le_add_add_tsub /-\ntheorem add_le_add_add_tsub : a + b ≤ a + c + (b - c) :=\n  by\n  rw [add_assoc]\n  exact add_le_add_left le_add_tsub a\n#align add_le_add_add_tsub add_le_add_add_tsub\n-/\n\n"}

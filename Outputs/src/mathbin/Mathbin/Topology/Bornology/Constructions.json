@@ -1,0 +1,36 @@
+{"snd_of_prod":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:177:8: unsupported: ambiguous notation -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `finset.product -/\ntheorem is_bounded.snd_of_prod (h : is_bounded (finset.product s t)) (hs : s.nonempty) : is_bounded t :=\n  snd_image_prod hs t ▸ (is_bounded_image_fst_and_snd.2 h).2\n#align is_bounded.snd_of_prod is_bounded.snd_of_prod\n\n",
+ "prod":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:177:8: unsupported: ambiguous notation -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `finset.product -/\ntheorem is_bounded.prod (hs : is_bounded s) (ht : is_bounded t) : is_bounded (finset.product s t) :=\n  is_bounded_image_fst_and_snd.1 ⟨hs.subset <| fst_image_prod_subset _ _, ht.subset <| snd_image_prod_subset _ _⟩\n#align is_bounded.prod is_bounded.prod\n\n",
+ "pi":
+ "theorem is_bounded.pi (h : ∀ i, is_bounded (S i)) : is_bounded (pi univ S) :=\n  forall_is_bounded_image_eval_iff.1 fun i => (h i).subset eval_image_univ_pi_subset\n#align is_bounded.pi is_bounded.pi\n\n",
+ "is_bounded_prod_self":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:177:8: unsupported: ambiguous notation -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `finset.product -/\ntheorem is_bounded_prod_self : is_bounded (finset.product s s) ↔ is_bounded s :=\n  by\n  rcases s.eq_empty_or_nonempty with (rfl | hs); · simp\n  exact (is_bounded_prod_of_nonempty (hs.prod hs)).trans (and_self_iff _)\n#align is_bounded_prod_self is_bounded_prod_self\n\n",
+ "is_bounded_prod_of_nonempty":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:177:8: unsupported: ambiguous notation -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `finset.product -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:177:8: unsupported: ambiguous notation -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `finset.product -/\ntheorem is_bounded_prod_of_nonempty (hne : Set.Nonempty (finset.product s t)) :\n    is_bounded (finset.product s t) ↔ is_bounded s ∧ is_bounded t :=\n  ⟨fun h => ⟨h.fst_of_prod hne.snd, h.snd_of_prod hne.fst⟩, fun h => h.1.prod h.2⟩\n#align is_bounded_prod_of_nonempty is_bounded_prod_of_nonempty\n\n",
+ "is_bounded_prod":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:177:8: unsupported: ambiguous notation -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `finset.product -/\ntheorem is_bounded_prod : is_bounded (finset.product s t) ↔ s = ∅ ∨ t = ∅ ∨ is_bounded s ∧ is_bounded t :=\n  by\n  rcases s.eq_empty_or_nonempty with (rfl | hs); · simp\n  rcases t.eq_empty_or_nonempty with (rfl | ht); · simp\n  simp only [hs.ne_empty, ht.ne_empty, is_bounded_prod_of_nonempty (hs.prod ht), false_or_iff]\n#align is_bounded_prod is_bounded_prod\n\n",
+ "is_bounded_pi_of_nonempty":
+ "theorem is_bounded_pi_of_nonempty (hne : (pi univ S).nonempty) : is_bounded (pi univ S) ↔ ∀ i, is_bounded (S i) :=\n  ⟨fun H i => @eval_image_univ_pi _ _ _ i hne ▸ forall_is_bounded_image_eval_iff.2 H i, is_bounded.pi⟩\n#align is_bounded_pi_of_nonempty is_bounded_pi_of_nonempty\n\n",
+ "is_bounded_pi":
+ "theorem is_bounded_pi : is_bounded (pi univ S) ↔ (∃ i, S i = ∅) ∨ ∀ i, is_bounded (S i) :=\n  by\n  by_cases hne : ∃ i, S i = ∅\n  · simp [hne, univ_pi_eq_empty_iff.2 hne]\n  · simp only [hne, false_or_iff]\n    simp only [not_exists, ← ne.def, ← nonempty_iff_ne_empty, ← univ_pi_nonempty_iff] at hne\n    exact is_bounded_pi_of_nonempty hne\n#align is_bounded_pi is_bounded_pi\n\n",
+ "is_bounded_induced":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\ntheorem is_bounded_induced {α β : Type _} [bornology β] {f : α → β} {s : set α} :\n    @is_bounded α (bornology.induced f) s ↔ is_bounded («expr '' » f s) :=\n  compl_mem_comap\n#align is_bounded_induced is_bounded_induced\n\n",
+ "is_bounded_image_subtype_coe":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\ntheorem is_bounded_image_subtype_coe {p : α → Prop} {s : set { x // p x }} :\n    is_bounded («expr '' » coe s : set α) ↔ is_bounded s :=\n  is_bounded_induced.symm\n#align is_bounded_image_subtype_coe is_bounded_image_subtype_coe\n\n",
+ "is_bounded_image_fst_and_snd":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\ntheorem is_bounded_image_fst_and_snd {s : set (α × β)} :\n    is_bounded («expr '' » prod.fst s) ∧ is_bounded («expr '' » prod.snd s) ↔ is_bounded s :=\n  compl_mem_coprod.symm\n#align is_bounded_image_fst_and_snd is_bounded_image_fst_and_snd\n\n",
+ "fst_of_prod":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:177:8: unsupported: ambiguous notation -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `finset.product -/\ntheorem is_bounded.fst_of_prod (h : is_bounded (finset.product s t)) (ht : t.nonempty) : is_bounded s :=\n  fst_image_prod s ht ▸ (is_bounded_image_fst_and_snd.2 h).1\n#align is_bounded.fst_of_prod is_bounded.fst_of_prod\n\n",
+ "forall_is_bounded_image_eval_iff":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\ntheorem forall_is_bounded_image_eval_iff {s : set (∀ i, π i)} :\n    (∀ i, is_bounded («expr '' » (eval i) s)) ↔ is_bounded s :=\n  compl_mem_Coprod.symm\n#align forall_is_bounded_image_eval_iff forall_is_bounded_image_eval_iff\n\n",
+ "cobounded_prod":
+ "/-\nCopyright (c) 2022 Yury G. Kudryashov. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Yury G. Kudryashov\n-/\ntheorem cobounded_prod : cobounded (α × β) = (cobounded α).coprod (cobounded β) :=\n  rfl\n#align cobounded_prod cobounded_prod\n\n",
+ "cobounded_pi":
+ "theorem cobounded_pi : cobounded (∀ i, π i) = filter.Coprod fun i => cobounded (π i) :=\n  rfl\n#align cobounded_pi cobounded_pi\n\n",
+ "bounded_space_subtype_iff":
+ "theorem bounded_space_subtype_iff {p : α → Prop} : bounded_space (subtype p) ↔ is_bounded { x | p x } := by\n  rw [bounded_space_induced_iff, Subtype.range_coe_subtype]\n#align bounded_space_subtype_iff bounded_space_subtype_iff\n\n",
+ "bounded_space_induced_iff":
+ "theorem bounded_space_induced_iff {α β : Type _} [bornology β] {f : α → β} :\n    @bounded_space α (bornology.induced f) ↔ is_bounded (range f) := by\n  rw [← is_bounded_univ, is_bounded_induced, image_univ]\n#align bounded_space_induced_iff bounded_space_induced_iff\n\n",
+ "bounded_space_coe_set_iff":
+ "theorem bounded_space_coe_set_iff {s : set α} : bounded_space s ↔ is_bounded s :=\n  bounded_space_subtype_iff\n#align bounded_space_coe_set_iff bounded_space_coe_set_iff\n\n"}

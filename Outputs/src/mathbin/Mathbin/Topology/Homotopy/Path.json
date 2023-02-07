@@ -1,0 +1,38 @@
+{"trans_apply":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `unit_interval -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `unit_interval -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\ntheorem trans_apply (F : homotopy p₀ p₁) (G : homotopy p₁ p₂) (x : unit_interval × unit_interval) :\n    (F.trans G) x =\n      if h : (x.1 : exprℝ) ≤ 1 / 2 then F (⟨2 * x.1, (unit_interval.mul_pos_mem_iff zero_lt_two).2 ⟨x.1.2.1, h⟩⟩, x.2)\n      else G (⟨2 * x.1 - 1, unit_interval.two_mul_sub_one_mem_iff.2 ⟨(not_le.1 h).le, x.1.2.2⟩⟩, x.2) :=\n  continuous_map.homotopy_rel.trans_apply _ _ _\n#align trans_apply trans_apply\n\n",
+ "trans":
+ "#print trans /-\n@[trans]\ntheorem trans ⦃p₀ p₁ p₂ : path x₀ x₁⦄ (h₀ : p₀.homotopic p₁) (h₁ : p₁.homotopic p₂) : p₀.homotopic p₂ :=\n  h₀.map2 homotopy.trans h₁\n#align trans trans\n-/\n\n",
+ "target":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `unit_interval -/\n@[simp]\ntheorem target (F : homotopy p₀ p₁) (t : unit_interval) : F (t, 1) = x₁ :=\n  by\n  simp_rw [← p₁.target]\n  apply continuous_map.homotopy_rel.eq_snd\n  simp\n#align target target\n\n",
+ "symm_trans":
+ "theorem symm_trans (F : homotopy p₀ p₁) (G : homotopy p₁ p₂) : (F.trans G).symm = G.symm.trans F.symm :=\n  continuous_map.homotopy_rel.symm_trans _ _\n#align symm_trans symm_trans\n\n",
+ "symm_symm":
+ "@[simp]\ntheorem symm_symm (F : homotopy p₀ p₁) : F.symm.symm = F :=\n  continuous_map.homotopy_rel.symm_symm F\n#align symm_symm symm_symm\n\n",
+ "symm":
+ "#print symm /-\n@[symm]\ntheorem symm ⦃p₀ p₁ : path x₀ x₁⦄ (h : p₀.homotopic p₁) : p₁.homotopic p₀ :=\n  h.map homotopy.symm\n#align symm symm\n-/\n\n",
+ "source":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `unit_interval -/\n@[simp]\ntheorem source (F : homotopy p₀ p₁) (t : unit_interval) : F (t, 0) = x₀ :=\n  by\n  simp_rw [← p₀.source]\n  apply continuous_map.homotopy_rel.eq_fst\n  simp\n#align source source\n\n",
+ "refl":
+ "#print refl /-\n@[refl]\ntheorem refl (p : path x₀ x₁) : p.homotopic p :=\n  ⟨homotopy.refl p⟩\n#align refl refl\n-/\n\n",
+ "map_lift":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«exprC( , )» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⟦ ⟧» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⟦ ⟧» -/\ntheorem map_lift (P₀ : path x₀ x₁) (f : «exprC( , )» X Y) :\n    «expr⟦ ⟧» (P₀.map f.continuous) = quotient.map_fn («expr⟦ ⟧» P₀) f :=\n  rfl\n#align map_lift map_lift\n\n",
+ "map":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«exprC( , )» -/\ntheorem map {p q : path x₀ x₁} (h : p.homotopic q) (f : «exprC( , )» X Y) :\n    homotopic (p.map f.continuous) (q.map f.continuous) :=\n  h.map fun F => F.map f\n#align map map\n\n",
+ "hpath_hext":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⟦ ⟧» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⟦ ⟧» -/\ntheorem hpath_hext {p₁ : path x₀ x₁} {p₂ : path x₂ x₃} (hp : ∀ t, p₁ t = p₂ t) : HEq («expr⟦ ⟧» p₁) («expr⟦ ⟧» p₂) :=\n  by\n  obtain rfl : x₀ = x₂ := by convert hp 0 <;> simp\n  obtain rfl : x₁ = x₃ := by convert hp 1 <;> simp\n  rw [heq_iff_eq]; congr ; ext t; exact hp t\n#align hpath_hext hpath_hext\n\n",
+ "hcomp_half":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `unit_interval -/\ntheorem hcomp_half (F : homotopy p₀ q₀) (G : homotopy p₁ q₁) (t : unit_interval) :\n    F.hcomp G (t, ⟨1 / 2, by norm_num, by norm_num⟩) = x₁ :=\n  show ite _ _ _ = _ by norm_num\n#align hcomp_half hcomp_half\n\n",
+ "hcomp_apply":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `unit_interval -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `unit_interval -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\ntheorem hcomp_apply (F : homotopy p₀ q₀) (G : homotopy p₁ q₁) (x : unit_interval × unit_interval) :\n    F.hcomp G x =\n      if h : (x.2 : exprℝ) ≤ 1 / 2 then F.eval x.1 ⟨2 * x.2, (unit_interval.mul_pos_mem_iff zero_lt_two).2 ⟨x.2.2.1, h⟩⟩\n      else G.eval x.1 ⟨2 * x.2 - 1, unit_interval.two_mul_sub_one_mem_iff.2 ⟨(not_le.1 h).le, x.2.2.2⟩⟩ :=\n  show ite _ _ _ = _ by split_ifs <;> exact path.extend_extends _ _\n#align hcomp_apply hcomp_apply\n\n",
+ "hcomp":
+ "theorem hcomp {p₀ p₁ : path x₀ x₁} {q₀ q₁ : path x₁ x₂} (hp : p₀.homotopic p₁) (hq : q₀.homotopic q₁) :\n    (p₀.trans q₀).homotopic (p₁.trans q₁) :=\n  hp.map2 homotopy.hcomp hq\n#align hcomp hcomp\n\n",
+ "eval_zero":
+ "@[simp]\ntheorem eval_zero (F : homotopy p₀ p₁) : F.eval 0 = p₀ :=\n  by\n  ext t\n  simp [eval]\n#align eval_zero eval_zero\n\n",
+ "eval_one":
+ "@[simp]\ntheorem eval_one (F : homotopy p₀ p₁) : F.eval 1 = p₁ := by\n  ext t\n  simp [eval]\n#align eval_one eval_one\n\n",
+ "equivalence":
+ "theorem equivalence : equivalence (@homotopic X _ x₀ x₁) :=\n  ⟨refl, symm, trans⟩\n#align equivalence equivalence\n\n",
+ "comp_lift":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⟦ ⟧» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⟦ ⟧» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⟦ ⟧» -/\ntheorem comp_lift (P₀ : path x₀ x₁) (P₁ : path x₁ x₂) :\n    «expr⟦ ⟧» (P₀.trans P₁) = quotient.comp («expr⟦ ⟧» P₀) («expr⟦ ⟧» P₁) :=\n  rfl\n#align comp_lift comp_lift\n\n",
+ "coe_fn_injective":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `unit_interval -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `unit_interval -/\n/-\nCopyright (c) 2021 Shing Tak Lam. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Shing Tak Lam\n-/\ntheorem coe_fn_injective : @function.injective (homotopy p₀ p₁) (unit_interval × unit_interval → X) coe_fn :=\n  continuous_map.homotopy_with.coe_fn_injective\n#align coe_fn_injective coe_fn_injective\n\n"}

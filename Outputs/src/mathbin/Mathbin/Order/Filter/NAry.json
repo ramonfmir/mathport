@@ -1,0 +1,102 @@
+{"of_map₂_right":
+ "theorem ne_bot.of_map₂_right (h : (map₂ m f g).ne_bot) : g.ne_bot :=\n  (map₂_ne_bot_iff.1 h).2\n#align ne_bot.of_map₂_right ne_bot.of_map₂_right\n\n",
+ "of_map₂_left":
+ "theorem ne_bot.of_map₂_left (h : (map₂ m f g).ne_bot) : f.ne_bot :=\n  (map₂_ne_bot_iff.1 h).1\n#align ne_bot.of_map₂_left ne_bot.of_map₂_left\n\n",
+ "mem_map₂_iff":
+ "/-\nCopyright (c) 2022 Yaël Dillies. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Yaël Dillies\n-/\n@[simp]\ntheorem mem_map₂_iff : u ∈ map₂ m f g ↔ ∃ s t, s ∈ f ∧ t ∈ g ∧ image2 m s t ⊆ u :=\n  iff.rfl\n#align mem_map₂_iff mem_map₂_iff\n\n",
+ "map₂_swap":
+ "theorem map₂_swap (m : α → β → γ) (f : filter α) (g : filter β) : map₂ m f g = map₂ (fun a b => m b a) g f :=\n  by\n  ext u\n  constructor <;> rintro ⟨s, t, hs, ht, hu⟩ <;> refine' ⟨t, s, ht, hs, by rwa [image2_swap]⟩\n#align map₂_swap map₂_swap\n\n",
+ "map₂_sup_right":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊔ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊔ » -/\ntheorem map₂_sup_right : map₂ m f («expr ⊔ » g₁ g₂) = «expr ⊔ » (map₂ m f g₁) (map₂ m f g₂) :=\n  by\n  ext u\n  constructor\n  · rintro ⟨s, t, hs, ⟨h₁, h₂⟩, hu⟩\n    exact ⟨mem_of_superset (image2_mem_map₂ hs h₁) hu, mem_of_superset (image2_mem_map₂ hs h₂) hu⟩\n  · rintro ⟨⟨s₁, t₁, hs₁, ht₁, hu₁⟩, s₂, t₂, hs₂, ht₂, hu₂⟩\n    refine' ⟨s₁ ∩ s₂, t₁ ∪ t₂, inter_mem hs₁ hs₂, union_mem_sup ht₁ ht₂, _⟩\n    rw [image2_union_right]\n    exact\n      union_subset ((image2_subset_right <| inter_subset_left _ _).trans hu₁)\n        ((image2_subset_right <| inter_subset_right _ _).trans hu₂)\n#align map₂_sup_right map₂_sup_right\n\n",
+ "map₂_sup_left":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊔ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊔ » -/\ntheorem map₂_sup_left : map₂ m («expr ⊔ » f₁ f₂) g = «expr ⊔ » (map₂ m f₁ g) (map₂ m f₂ g) :=\n  by\n  ext u\n  constructor\n  · rintro ⟨s, t, ⟨h₁, h₂⟩, ht, hu⟩\n    exact ⟨mem_of_superset (image2_mem_map₂ h₁ ht) hu, mem_of_superset (image2_mem_map₂ h₂ ht) hu⟩\n  · rintro ⟨⟨s₁, t₁, hs₁, ht₁, hu₁⟩, s₂, t₂, hs₂, ht₂, hu₂⟩\n    refine' ⟨s₁ ∪ s₂, t₁ ∩ t₂, union_mem_sup hs₁ hs₂, inter_mem ht₁ ht₂, _⟩\n    rw [image2_union_left]\n    exact\n      union_subset ((image2_subset_left <| inter_subset_left _ _).trans hu₁)\n        ((image2_subset_left <| inter_subset_right _ _).trans hu₂)\n#align map₂_sup_left map₂_sup_left\n\n",
+ "map₂_right_identity":
+ "/-- If `b` is a right identity for `f : α → β → α`, then `pure b` is a right identity for\n`filter.map₂ f`. -/\ntheorem map₂_right_identity {f : α → β → α} {b : β} (h : ∀ a, f a b = a) (l : filter α) : map₂ f l (pure b) = l := by\n  rw [map₂_pure_right, funext h, map_id']\n#align map₂_right_identity map₂_right_identity\n\n",
+ "map₂_right_comm":
+ "theorem map₂_right_comm {m : δ → γ → ε} {n : α → β → δ} {m' : α → γ → δ'} {n' : δ' → β → ε}\n    (h_right_comm : ∀ a b c, m (n a b) c = n' (m' a c) b) : map₂ m (map₂ n f g) h = map₂ n' (map₂ m' f h) g :=\n  by\n  rw [map₂_swap n, map₂_swap n']\n  exact map₂_assoc fun _ _ _ => h_right_comm _ _ _\n#align map₂_right_comm map₂_right_comm\n\n",
+ "map₂_right":
+ "@[simp]\ntheorem map₂_right (h : f.ne_bot) : map₂ (fun x y => y) f g = g := by rw [map₂_swap, map₂_left h]\n#align map₂_right map₂_right\n\n",
+ "map₂_pure_right":
+ "@[simp]\ntheorem map₂_pure_right : map₂ m f (pure b) = f.map fun a => m a b :=\n  filter.ext fun u =>\n    ⟨fun ⟨s, t, hs, ht, hu⟩ =>\n      mem_of_superset (image_mem_map hs) ((image_subset_image2_left <| mem_pure.1 ht).trans hu), fun h =>\n      ⟨_, {b}, h, singleton_mem_pure, by rw [image2_singleton_right, image_subset_iff]⟩⟩\n#align map₂_pure_right map₂_pure_right\n\n",
+ "map₂_pure_left":
+ "@[simp]\ntheorem map₂_pure_left : map₂ m (pure a) g = g.map fun b => m a b :=\n  filter.ext fun u =>\n    ⟨fun ⟨s, t, hs, ht, hu⟩ =>\n      mem_of_superset (image_mem_map ht) ((image_subset_image2_right <| mem_pure.1 hs).trans hu), fun h =>\n      ⟨{a}, _, singleton_mem_pure, h, by rw [image2_singleton_left, image_subset_iff]⟩⟩\n#align map₂_pure_left map₂_pure_left\n\n",
+ "map₂_pure":
+ "theorem map₂_pure : map₂ m (pure a) (pure b) = pure (m a b) := by rw [map₂_pure_right, map_pure]\n#align map₂_pure map₂_pure\n\n",
+ "map₂_ne_bot_iff":
+ "@[simp]\ntheorem map₂_ne_bot_iff : (map₂ m f g).ne_bot ↔ f.ne_bot ∧ g.ne_bot :=\n  by\n  simp_rw [ne_bot_iff]\n  exact map₂_eq_bot_iff.not.trans not_or\n#align map₂_ne_bot_iff map₂_ne_bot_iff\n\n",
+ "map₂_mono_right":
+ "theorem map₂_mono_right (h : f₁ ≤ f₂) : map₂ m f₁ g ≤ map₂ m f₂ g :=\n  map₂_mono h Subset.rfl\n#align map₂_mono_right map₂_mono_right\n\n",
+ "map₂_mono_left":
+ "theorem map₂_mono_left (h : g₁ ≤ g₂) : map₂ m f g₁ ≤ map₂ m f g₂ :=\n  map₂_mono Subset.rfl h\n#align map₂_mono_left map₂_mono_left\n\n",
+ "map₂_mono":
+ "-- lemma image2_mem_map₂_iff (hm : injective2 m) : image2 m s t ∈ map₂ m f g ↔ s ∈ f ∧ t ∈ g :=\n-- ⟨by { rintro ⟨u, v, hu, hv, h⟩, rw image2_subset_image2_iff hm at h,\n--   exact ⟨mem_of_superset hu h.1, mem_of_superset hv h.2⟩ }, λ h, image2_mem_map₂ h.1 h.2⟩\ntheorem map₂_mono (hf : f₁ ≤ f₂) (hg : g₁ ≤ g₂) : map₂ m f₁ g₁ ≤ map₂ m f₂ g₂ := fun _ ⟨s, t, hs, ht, hst⟩ =>\n  ⟨s, t, hf hs, hg ht, hst⟩\n#align map₂_mono map₂_mono\n\n",
+ "map₂_mk_eq_prod":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `filter.prod -/\n@[simp]\ntheorem map₂_mk_eq_prod (f : filter α) (g : filter β) : map₂ prod.mk f g = filter.prod f g := by\n  ext <;> simp [mem_prod_iff]\n#align map₂_mk_eq_prod map₂_mk_eq_prod\n\n",
+ "map₂_map₂_right":
+ "theorem map₂_map₂_right (m : α → δ → ε) (n : β → γ → δ) :\n    map₂ m f (map₂ n g h) = map₃ (fun a b c => m a (n b c)) f g h :=\n  by\n  ext w\n  constructor\n  · rintro ⟨s, t, hs, ⟨u, v, hu, hv, ht⟩, hw⟩\n    refine' ⟨s, u, v, hs, hu, hv, _⟩\n    rw [← image2_image2_right]\n    exact (image2_subset_left ht).trans hw\n  · rintro ⟨s, t, u, hs, ht, hu, hw⟩\n    exact ⟨s, _, hs, image2_mem_map₂ ht hu, by rwa [image2_image2_right]⟩\n#align map₂_map₂_right map₂_map₂_right\n\n",
+ "map₂_map₂_left":
+ "theorem map₂_map₂_left (m : δ → γ → ε) (n : α → β → δ) :\n    map₂ m (map₂ n f g) h = map₃ (fun a b c => m (n a b) c) f g h :=\n  by\n  ext w\n  constructor\n  · rintro ⟨s, t, ⟨u, v, hu, hv, hs⟩, ht, hw⟩\n    refine' ⟨u, v, t, hu, hv, ht, _⟩\n    rw [← image2_image2_left]\n    exact (image2_subset_right hs).trans hw\n  · rintro ⟨s, t, u, hs, ht, hu, hw⟩\n    exact ⟨_, u, image2_mem_map₂ hs ht, hu, by rwa [image2_image2_left]⟩\n#align map₂_map₂_left map₂_map₂_left\n\n",
+ "map₂_map_right":
+ "theorem map₂_map_right (m : α → γ → δ) (n : β → γ) : map₂ m f (g.map n) = map₂ (fun a b => m a (n b)) f g := by\n  rw [map₂_swap, map₂_map_left, map₂_swap]\n#align map₂_map_right map₂_map_right\n\n",
+ "map₂_map_left_comm":
+ "/-- Symmetric statement to `filter.map_map₂_distrib_left`. -/\ntheorem map₂_map_left_comm {m : α' → β → γ} {n : α → α'} {m' : α → β → δ} {n' : δ → γ}\n    (h_left_comm : ∀ a b, m (n a) b = n' (m' a b)) : map₂ m (f.map n) g = (map₂ m' f g).map n' :=\n  (map_map₂_distrib_left fun a b => (h_left_comm a b).symm).symm\n#align map₂_map_left_comm map₂_map_left_comm\n\n",
+ "map₂_map_left_anticomm":
+ "/-- Symmetric statement to `filter.map_map₂_antidistrib_left`. -/\ntheorem map₂_map_left_anticomm {m : α' → β → γ} {n : α → α'} {m' : β → α → δ} {n' : δ → γ}\n    (h_left_anticomm : ∀ a b, m (n a) b = n' (m' b a)) : map₂ m (f.map n) g = (map₂ m' g f).map n' :=\n  (map_map₂_antidistrib_left fun a b => (h_left_anticomm b a).symm).symm\n#align map₂_map_left_anticomm map₂_map_left_anticomm\n\n",
+ "map₂_map_left":
+ "theorem map₂_map_left (m : γ → β → δ) (n : α → γ) : map₂ m (f.map n) g = map₂ (fun a b => m (n a) b) f g :=\n  by\n  ext u\n  constructor\n  · rintro ⟨s, t, hs, ht, hu⟩\n    refine' ⟨_, t, hs, ht, _⟩\n    rw [← image2_image_left]\n    exact (image2_subset_right <| image_preimage_subset _ _).trans hu\n  · rintro ⟨s, t, hs, ht, hu⟩\n    exact ⟨_, t, image_mem_map hs, ht, by rwa [image2_image_left]⟩\n#align map₂_map_left map₂_map_left\n\n",
+ "map₂_left_identity":
+ "/-- If `a` is a left identity for `f : α → β → β`, then `pure a` is a left identity for\n`filter.map₂ f`. -/\ntheorem map₂_left_identity {f : α → β → β} {a : α} (h : ∀ b, f a b = b) (l : filter β) : map₂ f (pure a) l = l := by\n  rw [map₂_pure_left, show f a = id from funext h, map_id]\n#align map₂_left_identity map₂_left_identity\n\n",
+ "map₂_left_comm":
+ "theorem map₂_left_comm {m : α → δ → ε} {n : β → γ → δ} {m' : α → γ → δ'} {n' : β → δ' → ε}\n    (h_left_comm : ∀ a b c, m a (n b c) = n' b (m' a c)) : map₂ m f (map₂ n g h) = map₂ n' g (map₂ m' f h) :=\n  by\n  rw [map₂_swap m', map₂_swap m]\n  exact map₂_assoc fun _ _ _ => h_left_comm _ _ _\n#align map₂_left_comm map₂_left_comm\n\n",
+ "map₂_left":
+ "@[simp]\ntheorem map₂_left (h : g.ne_bot) : map₂ (fun x y => x) f g = f :=\n  by\n  ext u\n  refine' ⟨_, fun hu => ⟨_, _, hu, univ_mem, (image2_left <| h.nonempty_of_mem univ_mem).subset⟩⟩\n  rintro ⟨s, t, hs, ht, hu⟩\n  rw [image2_left (h.nonempty_of_mem ht)] at hu\n  exact mem_of_superset hs hu\n#align map₂_left map₂_left\n\n",
+ "map₂_inf_subset_right":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊓ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊓ » -/\ntheorem map₂_inf_subset_right : map₂ m f («expr ⊓ » g₁ g₂) ≤ «expr ⊓ » (map₂ m f g₁) (map₂ m f g₂) :=\n  le_inf (map₂_mono_left inf_le_left) (map₂_mono_left inf_le_right)\n#align map₂_inf_subset_right map₂_inf_subset_right\n\n",
+ "map₂_inf_subset_left":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊓ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊓ » -/\ntheorem map₂_inf_subset_left : map₂ m («expr ⊓ » f₁ f₂) g ≤ «expr ⊓ » (map₂ m f₁ g) (map₂ m f₂ g) :=\n  le_inf (map₂_mono_right inf_le_left) (map₂_mono_right inf_le_right)\n#align map₂_inf_subset_left map₂_inf_subset_left\n\n",
+ "map₂_eq_bot_iff":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n@[simp]\ntheorem map₂_eq_bot_iff : map₂ m f g = «expr⊥» ↔ f = «expr⊥» ∨ g = «expr⊥» :=\n  by\n  simp only [← empty_mem_iff_bot, mem_map₂_iff, subset_empty_iff, image2_eq_empty_iff]\n  constructor\n  · rintro ⟨s, t, hs, ht, rfl | rfl⟩\n    · exact or.inl hs\n    · exact or.inr ht\n  · rintro (h | h)\n    · exact ⟨_, _, h, univ_mem, or.inl rfl⟩\n    · exact ⟨_, _, univ_mem, h, or.inr rfl⟩\n#align map₂_eq_bot_iff map₂_eq_bot_iff\n\n",
+ "map₂_distrib_le_right":
+ "/-- The other direction does not hold because of the `h`-`h` cross terms on the RHS. -/\ntheorem map₂_distrib_le_right {m : δ → γ → ε} {n : α → β → δ} {m₁ : α → γ → α'} {m₂ : β → γ → β'} {n' : α' → β' → ε}\n    (h_distrib : ∀ a b c, m (n a b) c = n' (m₁ a c) (m₂ b c)) :\n    map₂ m (map₂ n f g) h ≤ map₂ n' (map₂ m₁ f h) (map₂ m₂ g h) :=\n  by\n  rintro s ⟨t₁, t₂, ⟨u, w₁, hu, hw₁, ht₁⟩, ⟨v, w₂, hv, hw₂, ht₂⟩, hs⟩\n  refine' ⟨_, w₁ ∩ w₂, image2_mem_map₂ hu hv, inter_mem hw₁ hw₂, _⟩\n  refine' (image2_distrib_subset_right h_distrib).trans ((image2_subset _ _).trans hs)\n  · exact (image2_subset_left <| inter_subset_left _ _).trans ht₁\n  · exact (image2_subset_left <| inter_subset_right _ _).trans ht₂\n#align map₂_distrib_le_right map₂_distrib_le_right\n\n",
+ "map₂_distrib_le_left":
+ "/-- The other direction does not hold because of the `f`-`f` cross terms on the RHS. -/\ntheorem map₂_distrib_le_left {m : α → δ → ε} {n : β → γ → δ} {m₁ : α → β → β'} {m₂ : α → γ → γ'} {n' : β' → γ' → ε}\n    (h_distrib : ∀ a b c, m a (n b c) = n' (m₁ a b) (m₂ a c)) :\n    map₂ m f (map₂ n g h) ≤ map₂ n' (map₂ m₁ f g) (map₂ m₂ f h) :=\n  by\n  rintro s ⟨t₁, t₂, ⟨u₁, v, hu₁, hv, ht₁⟩, ⟨u₂, w, hu₂, hw, ht₂⟩, hs⟩\n  refine' ⟨u₁ ∩ u₂, _, inter_mem hu₁ hu₂, image2_mem_map₂ hv hw, _⟩\n  refine' (image2_distrib_subset_left h_distrib).trans ((image2_subset _ _).trans hs)\n  · exact (image2_subset_right <| inter_subset_left _ _).trans ht₁\n  · exact (image2_subset_right <| inter_subset_right _ _).trans ht₂\n#align map₂_distrib_le_left map₂_distrib_le_left\n\n",
+ "map₂_curry":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `filter.prod -/\n@[simp]\ntheorem map₂_curry (m : α × β → γ) (f : filter α) (g : filter β) : map₂ (curry m) f g = (filter.prod f g).map m := by\n  classical rw [← map₂_mk_eq_prod, map_map₂, curry]\n#align map₂_curry map₂_curry\n\n",
+ "map₂_comm":
+ "theorem map₂_comm {n : β → α → γ} (h_comm : ∀ a b, m a b = n b a) : map₂ m f g = map₂ n g f :=\n  (map₂_swap _ _ _).trans <| by simp_rw [h_comm]\n#align map₂_comm map₂_comm\n\n",
+ "map₂_bot_right":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n@[simp]\ntheorem map₂_bot_right : map₂ m f («expr⊥») = «expr⊥» :=\n  empty_mem_iff_bot.1 ⟨univ, ∅, univ_mem, trivial, image2_empty_right.subset⟩\n#align map₂_bot_right map₂_bot_right\n\n",
+ "map₂_bot_left":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n@[simp]\ntheorem map₂_bot_left : map₂ m («expr⊥») g = «expr⊥» :=\n  empty_mem_iff_bot.1 ⟨∅, univ, trivial, univ_mem, image2_empty_left.subset⟩\n#align map₂_bot_left map₂_bot_left\n\n",
+ "map₂_assoc":
+ "theorem map₂_assoc {m : δ → γ → ε} {n : α → β → δ} {m' : α → ε' → ε} {n' : β → γ → ε'} {h : filter γ}\n    (h_assoc : ∀ a b c, m (n a b) c = m' a (n' b c)) : map₂ m (map₂ n f g) h = map₂ m' f (map₂ n' g h) := by\n  simp only [map₂_map₂_left, map₂_map₂_right, h_assoc]\n#align map₂_assoc map₂_assoc\n\n",
+ "map₂":
+ "theorem ne_bot.map₂ (hf : f.ne_bot) (hg : g.ne_bot) : (map₂ m f g).ne_bot :=\n  map₂_ne_bot_iff.2 ⟨hf, hg⟩\n#align ne_bot.map₂ ne_bot.map₂\n\n",
+ "map_uncurry_prod":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `filter.prod -/\n@[simp]\ntheorem map_uncurry_prod (m : α → β → γ) (f : filter α) (g : filter β) :\n    (filter.prod f g).map (uncurry m) = map₂ m f g := by rw [← map₂_curry, curry_uncurry]\n#align map_uncurry_prod map_uncurry_prod\n\n",
+ "map_prod_eq_map₂'":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `filter.prod -/\ntheorem map_prod_eq_map₂' (m : α × β → γ) (f : filter α) (g : filter β) :\n    filter.map m (filter.prod f g) = map₂ (fun a b => m (a, b)) f g :=\n  by\n  refine' eq.trans _ (map_prod_eq_map₂ (curry m) f g)\n  ext\n  simp\n#align map_prod_eq_map₂' map_prod_eq_map₂'\n\n",
+ "map_prod_eq_map₂":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:177:8: unsupported: ambiguous notation -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `finset.product -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `filter.prod -/\ntheorem map_prod_eq_map₂ (m : α → β → γ) (f : filter α) (g : filter β) :\n    filter.map (fun p : α × β => m p.1 p.2) (filter.prod f g) = map₂ m f g :=\n  by\n  ext s\n  constructor\n  · intro hmem\n    rw [filter.mem_map_iff_exists_image] at hmem\n    obtain ⟨s', hs', hsub⟩ := hmem\n    rw [filter.mem_prod_iff] at hs'\n    obtain ⟨t, ht, t', ht', hsub'⟩ := hs'\n    refine' ⟨t, t', ht, ht', _⟩\n    rw [← Set.image_prod]\n    exact subset_trans (Set.image_subset (fun p : α × β => m p.fst p.snd) hsub') hsub\n  · intro hmem\n    rw [mem_map₂_iff] at hmem\n    obtain ⟨t, t', ht, ht', hsub⟩ := hmem\n    rw [← Set.image_prod] at hsub\n    rw [filter.mem_map_iff_exists_image]\n    exact ⟨finset.product t t', filter.prod_mem_prod ht ht', hsub⟩\n#align map_prod_eq_map₂ map_prod_eq_map₂\n\n",
+ "map_map₂_right_comm":
+ "/-- Symmetric statement to `filter.map_map₂_distrib_right`. -/\ntheorem map_map₂_right_comm {m : α → β' → γ} {n : β → β'} {m' : α → β → δ} {n' : δ → γ}\n    (h_right_comm : ∀ a b, m a (n b) = n' (m' a b)) : map₂ m f (g.map n) = (map₂ m' f g).map n' :=\n  (map_map₂_distrib_right fun a b => (h_right_comm a b).symm).symm\n#align map_map₂_right_comm map_map₂_right_comm\n\n",
+ "map_map₂_right_anticomm":
+ "/-- Symmetric statement to `filter.map_map₂_antidistrib_right`. -/\ntheorem map_map₂_right_anticomm {m : α → β' → γ} {n : β → β'} {m' : β → α → δ} {n' : δ → γ}\n    (h_right_anticomm : ∀ a b, m a (n b) = n' (m' b a)) : map₂ m f (g.map n) = (map₂ m' g f).map n' :=\n  (map_map₂_antidistrib_right fun a b => (h_right_anticomm b a).symm).symm\n#align map_map₂_right_anticomm map_map₂_right_anticomm\n\n",
+ "map_map₂_distrib_right":
+ "/-- Symmetric statement to `filter.map_map₂_right_comm`. -/\ntheorem map_map₂_distrib_right {n : γ → δ} {m' : α → β' → δ} {n' : β → β'}\n    (h_distrib : ∀ a b, n (m a b) = m' a (n' b)) : (map₂ m f g).map n = map₂ m' f (g.map n') :=\n  map_map₂_distrib h_distrib\n#align map_map₂_distrib_right map_map₂_distrib_right\n\n",
+ "map_map₂_distrib_left":
+ "/-- Symmetric statement to `filter.map₂_map_left_comm`. -/\ntheorem map_map₂_distrib_left {n : γ → δ} {m' : α' → β → δ} {n' : α → α'} (h_distrib : ∀ a b, n (m a b) = m' (n' a) b) :\n    (map₂ m f g).map n = map₂ m' (f.map n') g :=\n  map_map₂_distrib h_distrib\n#align map_map₂_distrib_left map_map₂_distrib_left\n\n",
+ "map_map₂_distrib":
+ "theorem map_map₂_distrib {n : γ → δ} {m' : α' → β' → δ} {n₁ : α → α'} {n₂ : β → β'}\n    (h_distrib : ∀ a b, n (m a b) = m' (n₁ a) (n₂ b)) : (map₂ m f g).map n = map₂ m' (f.map n₁) (g.map n₂) := by\n  simp_rw [map_map₂, map₂_map_left, map₂_map_right, h_distrib]\n#align map_map₂_distrib map_map₂_distrib\n\n",
+ "map_map₂_antidistrib_right":
+ "/-- Symmetric statement to `filter.map_map₂_right_anticomm`. -/\ntheorem map_map₂_antidistrib_right {n : γ → δ} {m' : β → α' → δ} {n' : α → α'}\n    (h_antidistrib : ∀ a b, n (m a b) = m' b (n' a)) : (map₂ m f g).map n = map₂ m' g (f.map n') :=\n  map_map₂_antidistrib h_antidistrib\n#align map_map₂_antidistrib_right map_map₂_antidistrib_right\n\n",
+ "map_map₂_antidistrib_left":
+ "/-- Symmetric statement to `filter.map₂_map_left_anticomm`. -/\ntheorem map_map₂_antidistrib_left {n : γ → δ} {m' : β' → α → δ} {n' : β → β'}\n    (h_antidistrib : ∀ a b, n (m a b) = m' (n' b) a) : (map₂ m f g).map n = map₂ m' (g.map n') f :=\n  map_map₂_antidistrib h_antidistrib\n#align map_map₂_antidistrib_left map_map₂_antidistrib_left\n\n",
+ "map_map₂_antidistrib":
+ "theorem map_map₂_antidistrib {n : γ → δ} {m' : β' → α' → δ} {n₁ : β → β'} {n₂ : α → α'}\n    (h_antidistrib : ∀ a b, n (m a b) = m' (n₁ b) (n₂ a)) : (map₂ m f g).map n = map₂ m' (g.map n₁) (f.map n₂) :=\n  by\n  rw [map₂_swap m]\n  exact map_map₂_distrib fun _ _ => h_antidistrib _ _\n#align map_map₂_antidistrib map_map₂_antidistrib\n\n",
+ "map_map₂":
+ "theorem map_map₂ (m : α → β → γ) (n : γ → δ) : (map₂ m f g).map n = map₂ (fun a b => n (m a b)) f g :=\n  filter.ext fun u => exists₂_congr fun s t => by rw [← image_subset_iff, image_image2]\n#align map_map₂ map_map₂\n\n",
+ "le_map₂_iff":
+ "@[simp]\ntheorem le_map₂_iff {h : filter γ} : h ≤ map₂ m f g ↔ ∀ ⦃s⦄, s ∈ f → ∀ ⦃t⦄, t ∈ g → image2 m s t ∈ h :=\n  ⟨fun H s hs t ht => H <| image2_mem_map₂ hs ht, fun H u ⟨s, t, hs, ht, hu⟩ => mem_of_superset (H hs ht) hu⟩\n#align le_map₂_iff le_map₂_iff\n\n",
+ "image2_mem_map₂":
+ "theorem image2_mem_map₂ (hs : s ∈ f) (ht : t ∈ g) : image2 m s t ∈ map₂ m f g :=\n  ⟨_, _, hs, ht, Subset.rfl⟩\n#align image2_mem_map₂ image2_mem_map₂\n\n"}

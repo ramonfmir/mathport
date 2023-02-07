@@ -1,0 +1,28 @@
+{"to_finset_some":
+ "@[simp]\ntheorem to_finset_some {a : α} [decidable (some a).dom] : (some a).to_finset = {a} := by simp [to_finset]\n#align to_finset_some to_finset_some\n\n",
+ "to_finset_none":
+ "@[simp]\ntheorem to_finset_none [decidable (none : Part α).dom] : none.to_finset = (∅ : Finset α) := by simp [to_finset]\n#align to_finset_none to_finset_none\n\n",
+ "pimage_union":
+ "theorem pimage_union [decidable_eq α] : (s ∪ t).pimage f = s.pimage f ∪ t.pimage f :=\n  coe_inj.1 <| by simp only [coe_pimage, pfun.image_union, coe_union]\n#align pimage_union pimage_union\n\n",
+ "pimage_subset":
+ "theorem pimage_subset {t : Finset β} : s.pimage f ⊆ t ↔ ∀ x ∈ s, ∀ y ∈ f x, y ∈ t := by\n  simp [subset_iff, @forall_swap _ β]\n#align pimage_subset pimage_subset\n\n",
+ "pimage_some":
+ "@[simp]\ntheorem pimage_some (s : Finset α) (f : α → β) [∀ x, decidable (Part.some <| f x).dom] :\n    (s.pimage fun x => Part.some (f x)) = s.image f := by\n  ext\n  simp [eq_comm]\n#align pimage_some pimage_some\n\n",
+ "pimage_mono":
+ "@[mono]\ntheorem pimage_mono (h : s ⊆ t) : s.pimage f ⊆ t.pimage f :=\n  pimage_subset.2 fun x hx y hy => mem_pimage.2 ⟨x, h hx, hy⟩\n#align pimage_mono pimage_mono\n\n",
+ "pimage_inter":
+ "theorem pimage_inter [decidable_eq α] : (s ∩ t).pimage f ⊆ s.pimage f ∩ t.pimage f := by\n  simp only [← coe_subset, coe_pimage, coe_inter, pfun.image_inter]\n#align pimage_inter pimage_inter\n\n",
+ "pimage_eq_image_filter":
+ "/-- Rewrite `s.pimage f` in terms of `finset.filter`, `finset.attach`, and `finset.image`. -/\ntheorem pimage_eq_image_filter :\n    s.pimage f = (filter (fun x => (f x).dom) s).attach.image fun x => (f x).get (mem_filter.1 x.coe_prop).2 :=\n  by\n  ext x\n  simp [Part.mem_eq, and.exists, -exists_prop]\n#align pimage_eq_image_filter pimage_eq_image_filter\n\n",
+ "pimage_empty":
+ "@[simp]\ntheorem pimage_empty : pimage f ∅ = ∅ := by\n  ext\n  simp\n#align pimage_empty pimage_empty\n\n",
+ "pimage_congr":
+ "theorem pimage_congr (h₁ : s = t) (h₂ : ∀ x ∈ t, f x = g x) : s.pimage f = t.pimage g :=\n  by\n  subst s\n  ext y\n  simp (config := { contextual := true }) [h₂]\n#align pimage_congr pimage_congr\n\n",
+ "mem_to_finset":
+ "/-\nCopyright (c) 2021 Yury Kudryashov. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Yury Kudryashov\n-/\n@[simp]\ntheorem mem_to_finset {o : Part α} [decidable o.dom] {x : α} : x ∈ o.to_finset ↔ x ∈ o := by simp [to_finset]\n#align mem_to_finset mem_to_finset\n\n",
+ "mem_pimage":
+ "@[simp]\ntheorem mem_pimage : b ∈ s.pimage f ↔ ∃ a ∈ s, b ∈ f a := by simp [pimage]\n#align mem_pimage mem_pimage\n\n",
+ "coe_to_finset":
+ "@[simp]\ntheorem coe_to_finset (o : Part α) [decidable o.dom] : (o.to_finset : set α) = { x | x ∈ o } :=\n  Set.ext fun x => mem_to_finset\n#align coe_to_finset coe_to_finset\n\n",
+ "coe_pimage":
+ "@[simp, norm_cast]\ntheorem coe_pimage : (s.pimage f : set β) = f.image s :=\n  Set.ext fun x => mem_pimage\n#align coe_pimage coe_pimage\n\n"}

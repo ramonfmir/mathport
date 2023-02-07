@@ -1,0 +1,10 @@
+{"update_star":
+ "theorem update_star [∀ i, Star (f i)] [decidable_eq I] (h : ∀ i : I, f i) (i : I) (a : f i) :\n    function.update (star h) i (star a) = star (function.update h i a) :=\n  funext fun j => (apply_update (fun i => star) h i a j).symm\n#align update_star update_star\n\n",
+ "star_sum_elim":
+ "theorem star_sum_elim {I J α : Type _} (x : I → α) (y : J → α) [Star α] :\n    star (sum.elim x y) = sum.elim (star x) (star y) := by\n  ext x\n  cases x <;> simp\n#align star_sum_elim star_sum_elim\n\n",
+ "star_def":
+ "theorem star_def [∀ i, Star (f i)] (x : ∀ i, f i) : star x = fun i => star (x i) :=\n  rfl\n#align star_def star_def\n\n",
+ "star_apply":
+ "/-\nCopyright (c) 2021 Eric Wieser. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Eric Wieser\n-/\n-- The indexing type\n-- The family of types already equipped with instances\n@[simp]\ntheorem star_apply [∀ i, Star (f i)] (x : ∀ i, f i) (i : I) : star x i = star (x i) :=\n  rfl\n#align star_apply star_apply\n\n",
+ "single_star":
+ "theorem single_star [∀ i, add_monoid (f i)] [∀ i, StarAddMonoid (f i)] [decidable_eq I] (i : I) (a : f i) :\n    Pi.single i (star a) = star (Pi.single i a) :=\n  single_op (fun i => @star (f i) _) (fun i => star_zero _) i a\n#align single_star single_star\n\n"}

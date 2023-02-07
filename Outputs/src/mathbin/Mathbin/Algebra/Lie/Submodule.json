@@ -1,0 +1,254 @@
+{"zero_mem":
+ "@[simp]\nprotected theorem zero_mem : (0 : M) ∈ N :=\n  zero_mem N\n#align zero_mem zero_mem\n\n",
+ "well_founded_of_noetherian":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →r » -/\ntheorem well_founded_of_noetherian [is_noetherian R M] :\n    well_founded ((· > ·) : lie_submodule R L M → lie_submodule R L M → Prop) :=\n  let f :\n    «expr →r » ((· > ·) : lie_submodule R L M → lie_submodule R L M → Prop)\n      ((· > ·) : submodule R M → submodule R M → Prop) :=\n    { to_fun := coe\n      map_rel' := fun N N' h => h }\n  RelHomClass.wellFounded f (is_noetherian_iff_well_founded.mp infer_instance)\n#align well_founded_of_noetherian well_founded_of_noetherian\n\n",
+ "top_equiv_apply":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n@[simp]\ntheorem lie_ideal.top_equiv_apply (x : («expr⊤» : lie_ideal R L)) : lie_ideal.top_equiv x = x :=\n  rfl\n#align lie_ideal.top_equiv_apply lie_ideal.top_equiv_apply\n\n",
+ "top_coe_submodule":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n@[simp]\ntheorem top_coe_submodule : ((«expr⊤» : lie_submodule R L M) : submodule R M) = «expr⊤» :=\n  rfl\n#align top_coe_submodule top_coe_submodule\n\n",
+ "top_coe_lie_subalgebra":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n@[simp]\ntheorem top_coe_lie_subalgebra : ((«expr⊤» : lie_ideal R L) : lie_subalgebra R L) = «expr⊤» :=\n  rfl\n#align top_coe_lie_subalgebra top_coe_lie_subalgebra\n\n",
+ "top_coe":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n@[simp]\ntheorem top_coe : ((«expr⊤» : lie_submodule R L M) : set M) = univ :=\n  rfl\n#align top_coe top_coe\n\n",
+ "to_submodule_eq_coe":
+ "/-\nCopyright (c) 2021 Oliver Nash. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Oliver Nash\n-/\n@[simp]\ntheorem to_submodule_eq_coe : N.to_submodule = N :=\n  rfl\n#align to_submodule_eq_coe to_submodule_eq_coe\n\n",
+ "sup_coe_to_submodule":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊔ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⁅ , ⁆» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊔ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⁅ , ⁆» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⁅ , ⁆» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊔ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊔ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊔ » -/\n@[norm_cast, simp]\ntheorem sup_coe_to_submodule :\n    (↑(«expr ⊔ » N N') : submodule R M) = «expr ⊔ » (N : submodule R M) (N' : submodule R M) :=\n  by\n  have aux : ∀ (x : L) (m), m ∈ («expr ⊔ » N N' : submodule R M) → «expr⁅ , ⁆» x m ∈ («expr ⊔ » N N' : submodule R M) :=\n    by\n    simp only [submodule.mem_sup]\n    rintro x m ⟨y, hy, z, hz, rfl⟩\n    refine' ⟨«expr⁅ , ⁆» x y, N.lie_mem hy, «expr⁅ , ⁆» x z, N'.lie_mem hz, (lie_add _ _ _).symm⟩\n  refine' le_antisymm (infₛ_le ⟨{ («expr ⊔ » N N' : submodule R M) with lie_mem := aux }, _⟩) _\n  ·\n    simp only [exists_prop, and_true_iff, mem_set_of_eq, eq_self_iff_true, coe_to_submodule_mk, ←\n      coe_submodule_le_coe_submodule, and_self_iff, le_sup_left, le_sup_right]\n  · simp\n#align sup_coe_to_submodule sup_coe_to_submodule\n\n",
+ "subsingleton_iff":
+ "#print subsingleton_iff /-\n@[simp]\ntheorem subsingleton_iff : subsingleton (lie_submodule R L M) ↔ subsingleton M :=\n  have h : subsingleton (lie_submodule R L M) ↔ subsingleton (submodule R M) := by\n    rw [← subsingleton_iff_bot_eq_top, ← subsingleton_iff_bot_eq_top, ← coe_to_submodule_eq_iff, top_coe_submodule,\n      bot_coe_submodule]\n  h.trans <| submodule.subsingleton_iff R\n#align subsingleton_iff subsingleton_iff\n-/\n\n",
+ "subset_lie_span":
+ "theorem subset_lie_span : s ⊆ lie_span R L s := by\n  intro m hm\n  erw [mem_lie_span]\n  intro N hN\n  exact hN hm\n#align subset_lie_span subset_lie_span\n\n",
+ "submodule_span_le_lie_span":
+ "theorem submodule_span_le_lie_span : submodule.span R s ≤ lie_span R L s :=\n  by\n  rw [submodule.span_le]\n  apply subset_lie_span\n#align submodule_span_le_lie_span submodule_span_le_lie_span\n\n",
+ "span_univ":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n@[simp]\ntheorem span_univ : lie_span R L (Set.univ : set M) = «expr⊤» :=\n  eq_top_iff.2 <| SetLike.le_def.2 <| subset_lie_span\n#align span_univ span_univ\n\n",
+ "span_union":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊔ » -/\ntheorem span_union (s t : set M) : lie_span R L (s ∪ t) = «expr ⊔ » (lie_span R L s) (lie_span R L t) :=\n  (lie_submodule.gi R L M).gc.l_sup\n#align span_union span_union\n\n",
+ "span_empty":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n@[simp]\ntheorem span_empty : lie_span R L (∅ : set M) = «expr⊥» :=\n  (lie_submodule.gi R L M).gc.l_bot\n#align span_empty span_empty\n\n",
+ "span_Union":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⋃ , » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⋃ , » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⨆ , » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⨆ , » -/\ntheorem span_Union {ι} (s : ι → set M) :\n    lie_span R L\n        («expr⋃ , » \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⋃ , »\" (s i)) =\n      «expr⨆ , » \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⨆ , »\"\n        (lie_span R L (s i)) :=\n  (lie_submodule.gi R L M).gc.l_supr\n#align span_Union span_Union\n\n",
+ "range_subset_ideal_range":
+ "theorem range_subset_ideal_range : (f.range : set L') ⊆ f.ideal_range :=\n  lie_submodule.subset_lie_span\n#align range_subset_ideal_range range_subset_ideal_range\n\n",
+ "range_incl":
+ "@[simp]\ntheorem range_incl : N.incl.range = N := by simp [← lie_submodule.coe_to_submodule_eq_iff]\n#align range_incl range_incl\n\n",
+ "range_eq_top":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\ntheorem range_eq_top : f.range = «expr⊤» ↔ function.surjective f :=\n  by\n  rw [← lie_subalgebra.coe_to_submodule_eq_iff, range_coe_submodule, lie_subalgebra.top_coe_submodule]\n  exact linear_map.range_eq_top\n#align range_eq_top range_eq_top\n\n",
+ "range_coe_submodule":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₗ[ ] » -/\n@[simp]\ntheorem range_coe_submodule : (f.range : submodule R L') = (f : «expr →ₗ[ ] » L R L').range :=\n  rfl\n#align range_coe_submodule range_coe_submodule\n\n",
+ "nontrivial_iff_ne_bot":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\ntheorem nontrivial_iff_ne_bot {N : lie_submodule R L M} : nontrivial N ↔ N ≠ «expr⊥» :=\n  by\n  constructor <;> contrapose!\n  · rintro rfl ⟨⟨m₁, h₁ : m₁ ∈ («expr⊥» : lie_submodule R L M)⟩, ⟨m₂, h₂ : m₂ ∈ («expr⊥» : lie_submodule R L M)⟩, h₁₂⟩\n    simpa [(lie_submodule.mem_bot _).mp h₁, (lie_submodule.mem_bot _).mp h₂] using h₁₂\n  · rw [not_nontrivial_iff_subsingleton, lie_submodule.eq_bot_iff]\n    rintro ⟨h⟩ m hm\n    simpa using h ⟨m, hm⟩ ⟨_, N.zero_mem⟩\n#align nontrivial_iff_ne_bot nontrivial_iff_ne_bot\n\n",
+ "nontrivial_iff":
+ "#print nontrivial_iff /-\n@[simp]\ntheorem nontrivial_iff : nontrivial (lie_submodule R L M) ↔ nontrivial M :=\n  not_iff_not.mp\n    ((not_nontrivial_iff_subsingleton.trans <| subsingleton_iff R L M).trans not_nontrivial_iff_subsingleton.symm)\n#align nontrivial_iff nontrivial_iff\n-/\n\n",
+ "mk_eq_zero":
+ "@[simp]\ntheorem mk_eq_zero {x} (h : x ∈ N) : (⟨x, h⟩ : N) = 0 ↔ x = 0 :=\n  subtype.ext_iff_val\n#align mk_eq_zero mk_eq_zero\n\n",
+ "mem_top":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n@[simp]\ntheorem mem_top (x : M) : x ∈ («expr⊤» : lie_submodule R L M) :=\n  mem_univ x\n#align mem_top mem_top\n\n",
+ "mem_to_lie_submodule":
+ "@[simp]\ntheorem mem_to_lie_submodule (x : L) : x ∈ K.to_lie_submodule ↔ x ∈ K :=\n  iff.rfl\n#align mem_to_lie_submodule mem_to_lie_submodule\n\n",
+ "mem_sup":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊔ » -/\ntheorem mem_sup (x : M) : x ∈ «expr ⊔ » N N' ↔ ∃ y ∈ N, ∃ z ∈ N', y + z = x :=\n  by\n  rw [← mem_coe_submodule, sup_coe_to_submodule, submodule.mem_sup]\n  exact iff.rfl\n#align mem_sup mem_sup\n\n",
+ "mem_range":
+ "@[simp]\ntheorem mem_range (n : N) : n ∈ f.range ↔ ∃ m, f m = n :=\n  iff.rfl\n#align mem_range mem_range\n\n",
+ "mem_mk_iff":
+ "@[simp]\ntheorem mem_mk_iff (S : set M) (h₁ h₂ h₃ h₄) {x : M} : x ∈ (⟨S, h₁, h₂, h₃, h₄⟩ : lie_submodule R L M) ↔ x ∈ S :=\n  iff.rfl\n#align mem_mk_iff mem_mk_iff\n\n",
+ "mem_map_of_surjective":
+ "theorem mem_map_of_surjective {y : L'} (h₁ : function.surjective f) (h₂ : y ∈ I.map f) : ∃ x : I, f x = y :=\n  by\n  rw [← lie_submodule.mem_coe_submodule, coe_map_of_surjective h₁, submodule.mem_map] at h₂\n  obtain ⟨x, hx, rfl⟩ := h₂\n  use ⟨x, hx⟩\n  rfl\n#align mem_map_of_surjective mem_map_of_surjective\n\n",
+ "mem_map":
+ "theorem mem_map {x : L} (hx : x ∈ I) : f x ∈ map f I :=\n  by\n  apply lie_submodule.subset_lie_span\n  use x\n  exact ⟨hx, rfl⟩\n#align mem_map mem_map\n\n",
+ "mem_lie_span":
+ "theorem mem_lie_span {x : M} : x ∈ lie_span R L s ↔ ∀ N : lie_submodule R L M, s ⊆ N → x ∈ N :=\n  by\n  change x ∈ (lie_span R L s : set M) ↔ _\n  erw [Inf_coe]\n  exact mem_Inter₂\n#align mem_lie_span mem_lie_span\n\n",
+ "mem_ker":
+ "@[simp]\ntheorem mem_ker (m : M) : m ∈ f.ker ↔ f m = 0 :=\n  iff.rfl\n#align mem_ker mem_ker\n\n",
+ "mem_inf":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊓ » -/\n@[simp]\ntheorem mem_inf (x : M) : x ∈ «expr ⊓ » N N' ↔ x ∈ N ∧ x ∈ N' := by\n  rw [← mem_coe_submodule, ← mem_coe_submodule, ← mem_coe_submodule, inf_coe_to_submodule, submodule.mem_inf]\n#align mem_inf mem_inf\n\n",
+ "mem_ideal_range_iff":
+ "@[simp]\ntheorem mem_ideal_range_iff (h : is_ideal_morphism f) {y : L'} : y ∈ ideal_range f ↔ ∃ x : L, f x = y :=\n  by\n  rw [f.is_ideal_morphism_def] at h\n  rw [← lie_submodule.mem_coe, ← lie_ideal.coe_to_subalgebra, h, f.range_coe, Set.mem_range]\n#align mem_ideal_range_iff mem_ideal_range_iff\n\n",
+ "mem_ideal_range":
+ "theorem mem_ideal_range {x : L} : f x ∈ ideal_range f :=\n  by\n  rw [ideal_range_eq_map]\n  exact lie_ideal.mem_map (lie_submodule.mem_top x)\n#align mem_ideal_range mem_ideal_range\n\n",
+ "mem_comap":
+ "@[simp]\ntheorem mem_comap {x : L} : x ∈ comap f J ↔ f x ∈ J :=\n  iff.rfl\n#align mem_comap mem_comap\n\n",
+ "mem_coe_submodule":
+ "@[simp]\ntheorem mem_coe_submodule {x : M} : x ∈ (N : submodule R M) ↔ x ∈ N :=\n  iff.rfl\n#align mem_coe_submodule mem_coe_submodule\n\n",
+ "mem_coe":
+ "theorem mem_coe {x : M} : x ∈ (N : set M) ↔ x ∈ N :=\n  iff.rfl\n#align mem_coe mem_coe\n\n",
+ "mem_carrier":
+ "@[simp]\ntheorem mem_carrier {x : M} : x ∈ N.carrier ↔ x ∈ (N : set M) :=\n  iff.rfl\n#align mem_carrier mem_carrier\n\n",
+ "mem_bot":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n@[simp]\ntheorem mem_bot (x : M) : x ∈ («expr⊥» : lie_submodule R L M) ↔ x = 0 :=\n  mem_singleton_iff\n#align mem_bot mem_bot\n\n",
+ "map_top":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\ntheorem map_top : lie_submodule.map f («expr⊤») = f.range :=\n  by\n  ext\n  simp [lie_submodule.mem_map]\n#align map_top map_top\n\n",
+ "map_sup_ker_eq_map":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊔ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊔ » -/\n@[simp]\ntheorem map_sup_ker_eq_map : lie_ideal.map f («expr ⊔ » I f.ker) = lie_ideal.map f I :=\n  by\n  suffices lie_ideal.map f («expr ⊔ » I f.ker) ≤ lie_ideal.map f I by\n    exact le_antisymm this (lie_ideal.map_mono le_sup_left)\n  apply lie_submodule.lie_span_mono\n  rintro x ⟨y, hy₁, hy₂⟩\n  rw [← hy₂]\n  erw [lie_submodule.mem_sup] at hy₁\n  obtain ⟨z₁, hz₁, z₂, hz₂, hy⟩ := hy₁\n  rw [← hy]\n  rw [f.coe_to_linear_map, f.map_add, f.mem_ker.mp hz₂, add_zero]\n  exact ⟨z₁, hz₁, rfl⟩\n#align map_sup_ker_eq_map map_sup_ker_eq_map\n\n",
+ "map_sup":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊔ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊔ » -/\n@[simp]\ntheorem map_sup : («expr ⊔ » I I₂).map f = «expr ⊔ » (I.map f) (I₂.map f) :=\n  (gc_map_comap f).l_sup\n#align map_sup map_sup\n\n",
+ "map_of_image":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\ntheorem map_of_image (h : «expr '' » f I = J) : I.map f = J :=\n  by\n  apply le_antisymm\n  · erw [lie_submodule.lie_span_le, submodule.map_coe, h]\n  · rw [← SetLike.coe_subset_coe, ← h]\n    exact lie_submodule.subset_lie_span\n#align map_of_image map_of_image\n\n",
+ "map_mono":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n@[mono]\ntheorem map_mono : monotone (map f) := fun I₁ I₂ h =>\n  by\n  rw [SetLike.le_def] at h\n  apply lie_submodule.lie_span_mono (Set.image_subset («expr⇑ » f) h)\n#align map_mono map_mono\n\n",
+ "map_le_iff_le_comap":
+ "theorem map_le_iff_le_comap : map f I ≤ J ↔ I ≤ comap f J :=\n  by\n  rw [map_le]\n  exact Set.image_subset_iff\n#align map_le_iff_le_comap map_le_iff_le_comap\n\n",
+ "map_le_ideal_range":
+ "theorem map_le_ideal_range : I.map f ≤ f.ideal_range :=\n  by\n  rw [f.ideal_range_eq_map]\n  exact lie_ideal.map_mono le_top\n#align map_le_ideal_range map_le_ideal_range\n\n",
+ "map_le":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\ntheorem map_le : map f I ≤ J ↔ «expr '' » f I ⊆ J :=\n  lie_submodule.lie_span_le\n#align map_le map_le\n\n",
+ "map_eq_bot_iff":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n@[simp]\ntheorem map_eq_bot_iff : I.map f = «expr⊥» ↔ I ≤ f.ker :=\n  by\n  rw [← le_bot_iff]\n  exact lie_ideal.map_le_iff_le_comap\n#align map_eq_bot_iff map_eq_bot_iff\n\n",
+ "map_comap_le":
+ "theorem map_comap_le : map f (comap f J) ≤ J :=\n  by\n  rw [map_le_iff_le_comap]\n  exact le_rfl\n#align map_comap_le map_comap_le\n\n",
+ "map_comap_eq":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊓ » -/\n@[simp]\ntheorem map_comap_eq (h : f.is_ideal_morphism) : map f (comap f J) = «expr ⊓ » f.ideal_range J :=\n  by\n  apply le_antisymm\n  · rw [le_inf_iff]\n    exact ⟨f.map_le_ideal_range _, map_comap_le⟩\n  · rw [f.is_ideal_morphism_def] at h\n    rw [← SetLike.coe_subset_coe, lie_submodule.inf_coe, ← coe_to_subalgebra, h]\n    rintro y ⟨⟨x, h₁⟩, h₂⟩\n    rw [← h₁] at h₂⊢\n    exact mem_map h₂\n#align map_comap_eq map_comap_eq\n\n",
+ "map_coe_submodule":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₗ[ ] » -/\n@[simp]\ntheorem map_coe_submodule (h : ↑(map f I) = «expr '' » f I) :\n    (map f I : submodule R L') = (I : submodule R L).map (f : «expr →ₗ[ ] » L R L') :=\n  by\n  rw [SetLike.ext'_iff, lie_submodule.coe_to_submodule, h, submodule.map_coe]\n  rfl\n#align map_coe_submodule map_coe_submodule\n\n",
+ "lie_span_mono":
+ "theorem lie_span_mono {t : set M} (h : s ⊆ t) : lie_span R L s ≤ lie_span R L t :=\n  by\n  rw [lie_span_le]\n  exact subset.trans h subset_lie_span\n#align lie_span_mono lie_span_mono\n\n",
+ "lie_span_le":
+ "theorem lie_span_le {N} : lie_span R L s ≤ N ↔ s ⊆ N :=\n  by\n  constructor\n  · exact subset.trans subset_lie_span\n  · intro hs m hm\n    rw [mem_lie_span] at hm\n    exact hm _ hs\n#align lie_span_le lie_span_le\n\n",
+ "lie_span_eq_bot_iff":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\ntheorem lie_span_eq_bot_iff : lie_span R L s = «expr⊥» ↔ ∀ m ∈ s, m = (0 : M) := by\n  rw [_root_.eq_bot_iff, lie_span_le, bot_coe, subset_singleton_iff]\n#align lie_span_eq_bot_iff lie_span_eq_bot_iff\n\n",
+ "lie_span_eq":
+ "theorem lie_span_eq : lie_span R L (N : set M) = N :=\n  le_antisymm (lie_span_le.mpr rfl.subset) subset_lie_span\n#align lie_span_eq lie_span_eq\n\n",
+ "lie_mem_right":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⁅ , ⁆» -/\ntheorem lie_mem_right (I : lie_ideal R L) (x y : L) (h : y ∈ I) : «expr⁅ , ⁆» x y ∈ I :=\n  I.lie_mem h\n#align lie_mem_right lie_mem_right\n\n",
+ "lie_mem_left":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⁅ , ⁆» -/\ntheorem lie_mem_left (I : lie_ideal R L) (x y : L) (h : x ∈ I) : «expr⁅ , ⁆» x y ∈ I :=\n  by\n  rw [← lie_skew, ← neg_lie]\n  apply lie_mem_right\n  assumption\n#align lie_mem_left lie_mem_left\n\n",
+ "le_ker_iff_map":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\ntheorem le_ker_iff_map (M' : lie_submodule R L M) : M' ≤ f.ker ↔ lie_submodule.map f M' = «expr⊥» := by\n  rw [ker, eq_bot_iff, lie_submodule.map_le_iff_le_comap]\n#align le_ker_iff_map le_ker_iff_map\n\n",
+ "le_ker_iff":
+ "theorem le_ker_iff : I ≤ f.ker ↔ ∀ x, x ∈ I → f x = 0 :=\n  by\n  constructor <;> intro h x hx\n  · specialize h hx\n    rw [mem_ker] at h\n    exact h\n  · rw [mem_ker]\n    apply h x hx\n#align le_ker_iff le_ker_iff\n\n",
+ "ker_le_comap":
+ "theorem ker_le_comap : f.ker ≤ J.comap f :=\n  lie_ideal.comap_mono bot_le\n#align ker_le_comap ker_le_comap\n\n",
+ "ker_incl":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n@[simp]\ntheorem ker_incl : N.incl.ker = «expr⊥» := by simp [← lie_submodule.coe_to_submodule_eq_iff]\n#align ker_incl ker_incl\n\n",
+ "ker_id":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₗ⁅ , ⁆ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n@[simp]\ntheorem ker_id : (lie_module_hom.id : «expr →ₗ⁅ , ⁆ » M R L M).ker = «expr⊥» :=\n  rfl\n#align ker_id ker_id\n\n",
+ "ker_eq_bot":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\ntheorem ker_eq_bot : f.ker = «expr⊥» ↔ function.injective f := by\n  rw [← lie_submodule.coe_to_submodule_eq_iff, ker_coe_submodule, lie_submodule.bot_coe_submodule,\n    linear_map.ker_eq_bot, coe_to_linear_map]\n#align ker_eq_bot ker_eq_bot\n\n",
+ "ker_coe_submodule":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₗ[ ] » -/\n@[simp]\ntheorem ker_coe_submodule : (f.ker : submodule R M) = (f : «expr →ₗ[ ] » M R N).ker :=\n  rfl\n#align ker_coe_submodule ker_coe_submodule\n\n",
+ "is_ideal_morphism_of_surjective":
+ "theorem is_ideal_morphism_of_surjective (h : function.surjective f) : f.is_ideal_morphism := by\n  rw [is_ideal_morphism_def, f.ideal_range_eq_top_of_surjective h, f.range_eq_top.mpr h,\n    lie_ideal.top_coe_lie_subalgebra]\n#align is_ideal_morphism_of_surjective is_ideal_morphism_of_surjective\n\n",
+ "is_ideal_morphism_iff":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⁅ , ⁆» -/\ntheorem is_ideal_morphism_iff : f.is_ideal_morphism ↔ ∀ (x : L') (y : L), ∃ z : L, «expr⁅ , ⁆» x (f y) = f z :=\n  by\n  simp only [is_ideal_morphism_def, ideal_range_eq_lie_span_range, ← lie_subalgebra.coe_to_submodule_eq_iff, ←\n    f.range.coe_to_submodule, lie_ideal.coe_to_lie_subalgebra_to_submodule, lie_submodule.coe_lie_span_submodule_eq_iff,\n    lie_subalgebra.mem_coe_submodule, mem_range, exists_imp, submodule.exists_lie_submodule_coe_eq_iff]\n  constructor\n  · intro h x y\n    obtain ⟨z, hz⟩ := h x (f y) y rfl\n    use z\n    exact hz.symm\n  · intro h x y z hz\n    obtain ⟨w, hw⟩ := h x z\n    use w\n    rw [← hw, hz]\n#align is_ideal_morphism_iff is_ideal_morphism_iff\n\n",
+ "is_ideal_morphism_def":
+ "@[simp]\ntheorem is_ideal_morphism_def : f.is_ideal_morphism ↔ (f.ideal_range : lie_subalgebra R L') = f.range :=\n  iff.rfl\n#align is_ideal_morphism_def is_ideal_morphism_def\n\n",
+ "inf_coe_to_submodule":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊓ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊓ » -/\n@[norm_cast, simp]\ntheorem inf_coe_to_submodule :\n    (↑(«expr ⊓ » N N') : submodule R M) = «expr ⊓ » (N : submodule R M) (N' : submodule R M) :=\n  rfl\n#align inf_coe_to_submodule inf_coe_to_submodule\n\n",
+ "inf_coe":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊓ » -/\n@[simp]\ntheorem inf_coe : (↑(«expr ⊓ » N N') : set M) = N ∩ N' :=\n  rfl\n#align inf_coe inf_coe\n\n",
+ "incl_range":
+ "@[simp]\ntheorem incl_range : I.incl.range = I :=\n  (I : lie_subalgebra R L).incl_range\n#align incl_range incl_range\n\n",
+ "incl_is_ideal_morphism":
+ "theorem incl_is_ideal_morphism : I.incl.is_ideal_morphism :=\n  by\n  rw [I.incl.is_ideal_morphism_def, incl_ideal_range]\n  exact (I : lie_subalgebra R L).incl_range.symm\n#align incl_is_ideal_morphism incl_is_ideal_morphism\n\n",
+ "incl_ideal_range":
+ "@[simp]\ntheorem incl_ideal_range : I.incl.ideal_range = I :=\n  by\n  rw [lie_hom.ideal_range_eq_lie_span_range, ← lie_subalgebra.coe_to_submodule, ← lie_submodule.coe_to_submodule_eq_iff,\n    incl_range, coe_to_lie_subalgebra_to_submodule, lie_submodule.coe_lie_span_submodule_eq_iff]\n  use I\n#align incl_ideal_range incl_ideal_range\n\n",
+ "incl_eq_val":
+ "theorem incl_eq_val : (N.incl : N → M) = subtype.val :=\n  rfl\n#align incl_eq_val incl_eq_val\n\n",
+ "incl_coe":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₗ[ ] » -/\n@[simp]\ntheorem incl_coe : (I.incl : «expr →ₗ[ ] » I R L) = (I : submodule R L).subtype :=\n  rfl\n#align incl_coe incl_coe\n\n",
+ "incl_apply":
+ "@[simp]\ntheorem incl_apply (x : I) : I.incl x = x :=\n  rfl\n#align incl_apply incl_apply\n\n",
+ "ideal_range_eq_top_of_surjective":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n@[simp]\ntheorem ideal_range_eq_top_of_surjective (h : function.surjective f) : f.ideal_range = «expr⊤» :=\n  by\n  rw [← f.range_eq_top] at h\n  rw [ideal_range_eq_lie_span_range, h, ← lie_subalgebra.coe_to_submodule, ← lie_submodule.coe_to_submodule_eq_iff,\n    lie_submodule.top_coe_submodule, lie_subalgebra.top_coe_submodule, lie_submodule.coe_lie_span_submodule_eq_iff]\n  use «expr⊤»\n  exact lie_submodule.top_coe_submodule\n#align ideal_range_eq_top_of_surjective ideal_range_eq_top_of_surjective\n\n",
+ "ideal_range_eq_map":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\ntheorem ideal_range_eq_map : f.ideal_range = lie_ideal.map f («expr⊤») :=\n  by\n  ext\n  simp only [ideal_range, range_eq_map]\n  rfl\n#align ideal_range_eq_map ideal_range_eq_map\n\n",
+ "ideal_range_eq_lie_span_range":
+ "theorem ideal_range_eq_lie_span_range : f.ideal_range = lie_submodule.lie_span R L' f.range :=\n  rfl\n#align ideal_range_eq_lie_span_range ideal_range_eq_lie_span_range\n\n",
+ "hom_of_le_injective":
+ "theorem hom_of_le_injective {I₁ I₂ : lie_ideal R L} (h : I₁ ≤ I₂) : function.injective (hom_of_le h) := fun x y => by\n  simp only [hom_of_le_apply, imp_self, subtype.mk_eq_mk, SetLike.coe_eq_coe, subtype.val_eq_coe]\n#align hom_of_le_injective hom_of_le_injective\n\n",
+ "hom_of_le_apply":
+ "theorem hom_of_le_apply {I₁ I₂ : lie_ideal R L} (h : I₁ ≤ I₂) (x : I₁) : hom_of_le h x = ⟨x.1, h x.2⟩ :=\n  rfl\n#align hom_of_le_apply hom_of_le_apply\n\n",
+ "gc_map_comap":
+ "theorem gc_map_comap : GaloisConnection (map f) (comap f) := fun I I' => map_le_iff_le_comap\n#align gc_map_comap gc_map_comap\n\n",
+ "ext":
+ "@[ext]\ntheorem ext (h : ∀ m, m ∈ N ↔ m ∈ N') : N = N' :=\n  SetLike.ext h\n#align ext ext\n\n",
+ "exists_nested_lie_ideal_coe_eq_iff":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⁅ , ⁆» -/\ntheorem exists_nested_lie_ideal_coe_eq_iff {K' : lie_subalgebra R L} (h : K ≤ K') :\n    (∃ I : lie_ideal R K', ↑I = of_le h) ↔ ∀ x y : L, x ∈ K' → y ∈ K → «expr⁅ , ⁆» x y ∈ K :=\n  by\n  simp only [exists_lie_ideal_coe_eq_iff, coe_bracket, mem_of_le]\n  constructor\n  · intro h' x y hx hy\n    exact h' ⟨x, hx⟩ ⟨y, h hy⟩ hy\n  · rintro h' ⟨x, hx⟩ ⟨y, hy⟩ hy'\n    exact h' x y hx hy'\n#align exists_nested_lie_ideal_coe_eq_iff exists_nested_lie_ideal_coe_eq_iff\n\n",
+ "exists_lie_submodule_coe_eq_iff":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⁅ , ⁆» -/\ntheorem submodule.exists_lie_submodule_coe_eq_iff (p : submodule R M) :\n    (∃ N : lie_submodule R L M, ↑N = p) ↔ ∀ (x : L) (m : M), m ∈ p → «expr⁅ , ⁆» x m ∈ p :=\n  by\n  constructor\n  · rintro ⟨N, rfl⟩ _ _\n    exact N.lie_mem\n  · intro h\n    use { p with lie_mem := h }\n    exact lie_submodule.coe_to_submodule_mk p _\n#align submodule.exists_lie_submodule_coe_eq_iff submodule.exists_lie_submodule_coe_eq_iff\n\n",
+ "exists_lie_ideal_coe_eq_iff":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⁅ , ⁆» -/\ntheorem exists_lie_ideal_coe_eq_iff : (∃ I : lie_ideal R L, ↑I = K) ↔ ∀ x y : L, y ∈ K → «expr⁅ , ⁆» x y ∈ K :=\n  by\n  simp only [← coe_to_submodule_eq_iff, lie_ideal.coe_to_lie_subalgebra_to_submodule,\n    submodule.exists_lie_submodule_coe_eq_iff L]\n  exact iff.rfl\n#align exists_lie_ideal_coe_eq_iff exists_lie_ideal_coe_eq_iff\n\n",
+ "eq_bot_iff":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n#print eq_bot_iff /-\ntheorem eq_bot_iff : N = «expr⊥» ↔ ∀ m : M, m ∈ N → m = 0 :=\n  by\n  rw [eq_bot_iff]\n  exact iff.rfl\n#align eq_bot_iff eq_bot_iff\n-/\n\n",
+ "copy_eq":
+ "theorem copy_eq (S : lie_submodule R L M) (s : set M) (hs : s = ↑S) : S.copy s hs = S :=\n  SetLike.coe_injective hs\n#align copy_eq copy_eq\n\n",
+ "comp_ker_incl":
+ "@[simp]\ntheorem comp_ker_incl : f.comp f.ker.incl = 0 := by\n  ext ⟨m, hm⟩\n  exact (mem_ker m).mp hm\n#align comp_ker_incl comp_ker_incl\n\n",
+ "comap_mono":
+ "@[mono]\ntheorem comap_mono : monotone (comap f) := fun J₁ J₂ h =>\n  by\n  rw [← SetLike.coe_subset_coe] at h⊢\n  exact Set.preimage_mono h\n#align comap_mono comap_mono\n\n",
+ "comap_map_le":
+ "/-- See also `lie_ideal.map_comap_eq`. -/\ntheorem comap_map_le : I ≤ comap f (map f I) :=\n  by\n  rw [← map_le_iff_le_comap]\n  exact le_rfl\n#align comap_map_le comap_map_le\n\n",
+ "comap_map_eq":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊔ » -/\n@[simp]\ntheorem comap_map_eq (h : ↑(map f I) = «expr '' » f I) : comap f (map f I) = «expr ⊔ » I f.ker := by\n  rw [← lie_submodule.coe_to_submodule_eq_iff, comap_coe_submodule, I.map_coe_submodule f h,\n    lie_submodule.sup_coe_to_submodule, f.ker_coe_submodule, submodule.comap_map_eq]\n#align comap_map_eq comap_map_eq\n\n",
+ "comap_incl_self":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n@[simp]\ntheorem comap_incl_self : comap N.incl N = «expr⊤» := by simp [← lie_submodule.coe_to_submodule_eq_iff]\n#align comap_incl_self comap_incl_self\n\n",
+ "comap_incl_eq_top":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\ntheorem comap_incl_eq_top : N₂.comap N.incl = «expr⊤» ↔ N ≤ N₂ := by\n  simpa only [← lie_submodule.coe_to_submodule_eq_iff, lie_submodule.coe_submodule_comap, lie_submodule.incl_coe,\n    lie_submodule.top_coe_submodule, submodule.comap_subtype_eq_top]\n#align comap_incl_eq_top comap_incl_eq_top\n\n",
+ "comap_incl_eq_bot":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊓ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\ntheorem comap_incl_eq_bot : N₂.comap N.incl = «expr⊥» ↔ «expr ⊓ » N N₂ = «expr⊥» := by\n  simpa only [_root_.eq_bot_iff, ← lie_submodule.coe_to_submodule_eq_iff, lie_submodule.coe_submodule_comap,\n    lie_submodule.incl_coe, lie_submodule.bot_coe_submodule, ← submodule.disjoint_iff_comap_eq_bot, disjoint_iff]\n#align comap_incl_eq_bot comap_incl_eq_bot\n\n",
+ "comap_coe_submodule":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₗ[ ] » -/\n@[simp]\ntheorem comap_coe_submodule : (comap f J : submodule R L) = (J : submodule R L').comap (f : «expr →ₗ[ ] » L R L') :=\n  rfl\n#align comap_coe_submodule comap_coe_submodule\n\n",
+ "coe_zero":
+ "@[simp, norm_cast]\ntheorem coe_zero : ((0 : N) : M) = (0 : M) :=\n  rfl\n#align coe_zero coe_zero\n\n",
+ "coe_to_submodule_mk":
+ "@[simp]\ntheorem coe_to_submodule_mk (p : submodule R M) (h) :\n    (({ p with lie_mem := h } : lie_submodule R L M) : submodule R M) = p :=\n  by\n  cases p\n  rfl\n#align coe_to_submodule_mk coe_to_submodule_mk\n\n",
+ "coe_to_submodule_eq_iff":
+ "@[simp]\ntheorem coe_to_submodule_eq_iff : (N : submodule R M) = (N' : submodule R M) ↔ N = N' :=\n  coe_submodule_injective.eq_iff\n#align coe_to_submodule_eq_iff coe_to_submodule_eq_iff\n\n",
+ "coe_to_submodule":
+ "@[norm_cast]\ntheorem coe_to_submodule : ((N : submodule R M) : set M) = N :=\n  rfl\n#align coe_to_submodule coe_to_submodule\n\n",
+ "coe_to_subalgebra":
+ "@[norm_cast]\ntheorem lie_ideal.coe_to_subalgebra (I : lie_ideal R L) : ((I : lie_subalgebra R L) : set L) = I :=\n  rfl\n#align lie_ideal.coe_to_subalgebra lie_ideal.coe_to_subalgebra\n\n",
+ "coe_to_set_mk":
+ "@[simp]\ntheorem coe_to_set_mk (S : set M) (h₁ h₂ h₃ h₄) : ((⟨S, h₁, h₂, h₃, h₄⟩ : lie_submodule R L M) : set M) = S :=\n  rfl\n#align coe_to_set_mk coe_to_set_mk\n\n",
+ "coe_to_lie_submodule":
+ "@[simp]\ntheorem coe_to_lie_submodule : (K.to_lie_submodule : submodule R L) = K :=\n  by\n  rcases K with ⟨⟨⟩⟩\n  rfl\n#align coe_to_lie_submodule coe_to_lie_submodule\n\n",
+ "coe_to_lie_subalgebra_to_submodule":
+ "@[norm_cast]\ntheorem lie_ideal.coe_to_lie_subalgebra_to_submodule (I : lie_ideal R L) :\n    ((I : lie_subalgebra R L) : submodule R L) = I :=\n  rfl\n#align lie_ideal.coe_to_lie_subalgebra_to_submodule lie_ideal.coe_to_lie_subalgebra_to_submodule\n\n",
+ "coe_submodule_range":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₗ[ ] » -/\n@[simp]\ntheorem coe_submodule_range : (f.range : submodule R N) = (f : «expr →ₗ[ ] » M R N).range :=\n  rfl\n#align coe_submodule_range coe_submodule_range\n\n",
+ "coe_submodule_map":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₗ[ ] » -/\n@[simp]\ntheorem coe_submodule_map : (N.map f : submodule R M') = (N : submodule R M).map (f : «expr →ₗ[ ] » M R M') :=\n  rfl\n#align coe_submodule_map coe_submodule_map\n\n",
+ "coe_submodule_le_coe_submodule":
+ "@[simp, norm_cast]\ntheorem coe_submodule_le_coe_submodule : (N : submodule R M) ≤ N' ↔ N ≤ N' :=\n  iff.rfl\n#align coe_submodule_le_coe_submodule coe_submodule_le_coe_submodule\n\n",
+ "coe_submodule_injective":
+ "theorem coe_submodule_injective : function.injective (to_submodule : lie_submodule R L M → submodule R M) :=\n  fun x y h => by\n  cases x\n  cases y\n  congr\n  injection h\n#align coe_submodule_injective coe_submodule_injective\n\n",
+ "coe_submodule_comap":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₗ[ ] » -/\n@[simp]\ntheorem coe_submodule_comap : (N'.comap f : submodule R M) = (N' : submodule R M').comap (f : «expr →ₗ[ ] » M R M') :=\n  rfl\n#align coe_submodule_comap coe_submodule_comap\n\n",
+ "coe_sub":
+ "@[simp, norm_cast]\ntheorem coe_sub (m m' : N) : (↑(m - m') : M) = (m : M) - (m' : M) :=\n  rfl\n#align coe_sub coe_sub\n\n",
+ "coe_smul":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n@[simp, norm_cast]\ntheorem coe_smul (t : R) (m : N) : (↑(«expr • » t m) : M) = «expr • » t (m : M) :=\n  rfl\n#align coe_smul coe_smul\n\n",
+ "coe_range":
+ "@[simp]\ntheorem coe_range : (f.range : set N) = Set.range f :=\n  rfl\n#align coe_range coe_range\n\n",
+ "coe_neg":
+ "@[simp, norm_cast]\ntheorem coe_neg (m : N) : (↑(-m) : M) = -(m : M) :=\n  rfl\n#align coe_neg coe_neg\n\n",
+ "coe_map_of_surjective":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₗ[ ] » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⁅ , ⁆» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₗ[ ] » -/\ntheorem coe_map_of_surjective (h : function.surjective f) :\n    (I.map f : submodule R L') = (I : submodule R L).map (f : «expr →ₗ[ ] » L R L') :=\n  by\n  let J : lie_ideal R L' :=\n    { (I : submodule R L).map (f : «expr →ₗ[ ] » L R L') with\n      lie_mem := fun x y hy => by\n        have hy' : ∃ x : L, x ∈ I ∧ f x = y := by simpa [hy]\n        obtain ⟨z₂, hz₂, rfl⟩ := hy'\n        obtain ⟨z₁, rfl⟩ := h x\n        simp only [lie_hom.coe_to_linear_map, SetLike.mem_coe, Set.mem_image, lie_submodule.mem_coe_submodule,\n          submodule.mem_carrier, submodule.map_coe]\n        use «expr⁅ , ⁆» z₁ z₂\n        exact ⟨I.lie_mem hz₂, f.map_lie z₁ z₂⟩ }\n  erw [lie_submodule.coe_lie_span_submodule_eq_iff]\n  use J\n  apply lie_submodule.coe_to_submodule_mk\n#align coe_map_of_surjective coe_map_of_surjective\n\n",
+ "coe_lie_span_submodule_eq_iff":
+ "theorem coe_lie_span_submodule_eq_iff {p : submodule R M} :\n    (lie_span R L (p : set M) : submodule R M) = p ↔ ∃ N : lie_submodule R L M, ↑N = p :=\n  by\n  rw [p.exists_lie_submodule_coe_eq_iff L]; constructor <;> intro h\n  · intro x m hm\n    rw [← h, mem_coe_submodule]\n    exact lie_mem _ (subset_lie_span hm)\n  · rw [← coe_to_submodule_mk p h, coe_to_submodule, coe_to_submodule_eq_iff, lie_span_eq]\n#align coe_lie_span_submodule_eq_iff coe_lie_span_submodule_eq_iff\n\n",
+ "coe_injective":
+ "theorem coe_injective : function.injective (coe : lie_submodule R L M → set M) :=\n  SetLike.coe_injective\n#align coe_injective coe_injective\n\n",
+ "coe_hom_of_le":
+ "@[simp]\ntheorem coe_hom_of_le {I₁ I₂ : lie_ideal R L} (h : I₁ ≤ I₂) (x : I₁) : (hom_of_le h x : L) = x :=\n  rfl\n#align coe_hom_of_le coe_hom_of_le\n\n",
+ "coe_copy":
+ "@[simp]\ntheorem coe_copy (S : lie_submodule R L M) (s : set M) (hs : s = ↑S) : (S.copy s hs : set M) = s :=\n  rfl\n#align coe_copy coe_copy\n\n",
+ "coe_bracket_of_module":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⁅ , ⁆» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⁅ , ⁆» -/\n@[simp]\ntheorem lie_ideal.coe_bracket_of_module {R L : Type _} [CommRing R] [lie_ring L] [lie_algebra R L] (I : lie_ideal R L)\n    [lie_ring_module L M] (x : I) (m : M) : «expr⁅ , ⁆» x m = «expr⁅ , ⁆» (↑x : L) m :=\n  lie_subalgebra.coe_bracket_of_module (I : lie_subalgebra R L) x m\n#align lie_ideal.coe_bracket_of_module lie_ideal.coe_bracket_of_module\n\n",
+ "coe_bracket":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⁅ , ⁆» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⁅ , ⁆» -/\n@[simp, norm_cast]\ntheorem coe_bracket (x : L) (m : N) : (↑(«expr⁅ , ⁆» x m) : M) = «expr⁅ , ⁆» x ↑m :=\n  rfl\n#align coe_bracket coe_bracket\n\n",
+ "coe_add":
+ "@[simp, norm_cast]\ntheorem coe_add (m m' : N) : (↑(m + m') : M) = (m : M) + (m' : M) :=\n  rfl\n#align coe_add coe_add\n\n",
+ "bot_of_map_eq_bot":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\ntheorem bot_of_map_eq_bot {I : lie_ideal R L} (h₁ : function.injective f) (h₂ : I.map f = «expr⊥») : I = «expr⊥» :=\n  by\n  rw [← f.ker_eq_bot] at h₁; change comap f («expr⊥») = «expr⊥» at h₁\n  rw [eq_bot_iff, map_le_iff_le_comap, h₁] at h₂\n  rw [eq_bot_iff]; exact h₂\n#align bot_of_map_eq_bot bot_of_map_eq_bot\n\n",
+ "bot_coe_submodule":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n@[simp]\ntheorem bot_coe_submodule : ((«expr⊥» : lie_submodule R L M) : submodule R M) = «expr⊥» :=\n  rfl\n#align bot_coe_submodule bot_coe_submodule\n\n",
+ "bot_coe":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n@[simp]\ntheorem bot_coe : ((«expr⊥» : lie_submodule R L M) : set M) = {0} :=\n  rfl\n#align bot_coe bot_coe\n\n",
+ "add_eq_sup":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊔ » -/\n@[simp]\ntheorem add_eq_sup : N + N' = «expr ⊔ » N N' :=\n  rfl\n#align add_eq_sup add_eq_sup\n\n",
+ "Inf_glb":
+ "theorem Inf_glb (S : set (lie_submodule R L M)) : IsGLB S (infₛ S) :=\n  by\n  have h : ∀ N N' : lie_submodule R L M, (N : set M) ≤ N' ↔ N ≤ N' :=\n    by\n    intros\n    rfl\n  apply IsGLB.of_image h\n  simp only [Inf_coe]\n  exact isGLB_binfᵢ\n#align Inf_glb Inf_glb\n\n",
+ "Inf_coe_to_submodule":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:369:4: unsupported set replacement {((s : submodule R M)) | s «expr ∈ » S} -/\n@[simp]\ntheorem Inf_coe_to_submodule (S : set (lie_submodule R L M)) :\n    (↑(infₛ S) : submodule R M) =\n      infₛ\n        \"./././Mathport/Syntax/Translate/Expr.lean:369:4: unsupported set replacement {((s : submodule R M)) | s «expr ∈ » S}\" :=\n  rfl\n#align Inf_coe_to_submodule Inf_coe_to_submodule\n\n",
+ "Inf_coe":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⋂ , » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⋂ , » -/\n@[simp]\ntheorem Inf_coe (S : set (lie_submodule R L M)) :\n    (↑(infₛ S) : set M) =\n      «expr⋂ , » \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⋂ , »\" (s : set M) :=\n  by\n  rw [← lie_submodule.coe_to_submodule, Inf_coe_to_submodule, submodule.Inf_coe]\n  ext m\n  simpa only [mem_Inter, mem_set_of_eq, forall_apply_eq_imp_iff₂, exists_imp]\n#align Inf_coe Inf_coe\n\n"}

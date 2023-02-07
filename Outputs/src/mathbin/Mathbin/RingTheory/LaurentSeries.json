@@ -1,0 +1,42 @@
+{"single_order_mul_power_series_part":
+ "@[simp]\ntheorem single_order_mul_power_series_part (x : laurent_series R) :\n    (single x.order 1 : laurent_series R) * x.power_series_part = x :=\n  by\n  ext n\n  rw [← sub_add_cancel n x.order, single_mul_coeff_add, sub_add_cancel, one_mul]\n  by_cases h : x.order ≤ n\n  ·\n    rw [Int.eq_natAbs_of_zero_le (sub_nonneg_of_le h), coeff_coe_power_series, power_series_part_coeff, ←\n      Int.eq_natAbs_of_zero_le (sub_nonneg_of_le h), add_sub_cancel'_right]\n  · rw [coe_power_series, of_power_series_apply, emb_domain_notin_range]\n    · contrapose! h\n      exact order_le_of_coeff_ne_zero h.symm\n    · contrapose! h\n      simp only [Set.mem_range, rel_embedding.coe_fn_mk, Function.Embedding.coeFn_mk] at h\n      obtain ⟨m, hm⟩ := h\n      rw [← sub_nonneg, ← hm]\n      exact int.zero_le_of_nat _\n#align single_order_mul_power_series_part single_order_mul_power_series_part\n\n",
+ "power_series_part_zero":
+ "@[simp]\ntheorem power_series_part_zero : power_series_part (0 : laurent_series R) = 0 :=\n  by\n  ext\n  simp\n#align power_series_part_zero power_series_part_zero\n\n",
+ "power_series_part_eq_zero":
+ "@[simp]\ntheorem power_series_part_eq_zero (x : laurent_series R) : x.power_series_part = 0 ↔ x = 0 :=\n  by\n  constructor\n  · contrapose!\n    intro h\n    rw [power_series.ext_iff, not_forall]\n    refine' ⟨0, _⟩\n    simp [coeff_order_ne_zero h]\n  · rintro rfl\n    simp\n#align power_series_part_eq_zero power_series_part_eq_zero\n\n",
+ "power_series_part_coeff":
+ "@[simp]\ntheorem power_series_part_coeff (x : laurent_series R) (n : ℕ) :\n    power_series.coeff R n x.power_series_part = x.coeff (x.order + n) :=\n  power_series.coeff_mk _ _\n#align power_series_part_coeff power_series_part_coeff\n\n",
+ "of_power_series_power_series_part":
+ "theorem of_power_series_power_series_part (x : laurent_series R) :\n    of_power_series ℤ R x.power_series_part = single (-x.order) 1 * x :=\n  by\n  refine' eq.trans _ (congr rfl x.single_order_mul_power_series_part)\n  rw [← mul_assoc, single_mul_single, neg_add_self, mul_one, ← C_apply, C_one, one_mul, coe_power_series]\n#align of_power_series_power_series_part of_power_series_power_series_part\n\n",
+ "coeff_coe_power_series":
+ "@[simp]\ntheorem coeff_coe_power_series (x : power_series R) (n : ℕ) :\n    hahn_series.coeff (x : laurent_series R) n = power_series.coeff R n x := by\n  rw [coe_power_series, of_power_series_apply_coeff]\n#align coeff_coe_power_series coeff_coe_power_series\n\n",
+ "coeff_coe":
+ "theorem coeff_coe (i : ℤ) :\n    ((f : power_series R) : laurent_series R).coeff i = if i < 0 then 0 else power_series.coeff R i.nat_abs f :=\n  by\n  cases i\n  · rw [int.nat_abs_of_nat_core, Int.ofNat_eq_coe, coeff_coe_power_series, if_neg (int.coe_nat_nonneg _).not_lt]\n  · rw [coe_power_series, of_power_series_apply, emb_domain_notin_image_support, if_pos (Int.negSucc_lt_zero _)]\n    simp only [not_exists, rel_embedding.coe_fn_mk, Set.mem_image, not_and, Function.Embedding.coeFn_mk, ne.def,\n      to_power_series_symm_apply_coeff, mem_support, int.coe_nat_eq, imp_true_iff, not_false_iff]\n#align coeff_coe coeff_coe\n\n",
+ "coe_zero":
+ "@[simp, norm_cast]\ntheorem coe_zero : ((0 : power_series R) : laurent_series R) = 0 :=\n  (of_power_series ℤ R).map_zero\n#align coe_zero coe_zero\n\n",
+ "coe_sub":
+ "@[simp, norm_cast]\ntheorem coe_sub : ((f' - g' : power_series R') : laurent_series R') = f' - g' :=\n  (of_power_series ℤ R').map_sub _ _\n#align coe_sub coe_sub\n\n",
+ "coe_smul":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n@[simp, norm_cast]\ntheorem coe_smul {S : Type _} [Semiring S] [Module R S] (r : R) (x : power_series S) :\n    ((«expr • » r x : power_series S) : laurent_series S) = «expr • » r x :=\n  by\n  ext\n  simp [coeff_coe, coeff_smul, smul_ite]\n#align coe_smul coe_smul\n\n",
+ "coe_power_series":
+ "/-\nCopyright (c) 2021 Aaron Anderson. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Aaron Anderson\n-/\ntheorem coe_power_series (x : power_series R) : (x : laurent_series R) = hahn_series.of_power_series ℤ R x :=\n  rfl\n#align coe_power_series coe_power_series\n\n",
+ "coe_pow":
+ "@[simp, norm_cast]\ntheorem coe_pow (n : ℕ) : ((f ^ n : power_series R) : laurent_series R) = f ^ n :=\n  (of_power_series ℤ R).map_pow _ _\n#align coe_pow coe_pow\n\n",
+ "coe_one":
+ "@[simp, norm_cast]\ntheorem coe_one : ((1 : power_series R) : laurent_series R) = 1 :=\n  (of_power_series ℤ R).map_one\n#align coe_one coe_one\n\n",
+ "coe_neg":
+ "@[simp, norm_cast]\ntheorem coe_neg : ((-f' : power_series R') : laurent_series R') = -f' :=\n  (of_power_series ℤ R').map_neg _\n#align coe_neg coe_neg\n\n",
+ "coe_mul":
+ "@[simp, norm_cast]\ntheorem coe_mul : ((f * g : power_series R) : laurent_series R) = f * g :=\n  (of_power_series ℤ R).map_mul _ _\n#align coe_mul coe_mul\n\n",
+ "coe_bit1":
+ "@[simp, norm_cast]\ntheorem coe_bit1 : ((bit1 f : power_series R) : laurent_series R) = bit1 f :=\n  (of_power_series ℤ R).map_bit1 _\n#align coe_bit1 coe_bit1\n\n",
+ "coe_bit0":
+ "@[simp, norm_cast]\ntheorem coe_bit0 : ((bit0 f : power_series R) : laurent_series R) = bit0 f :=\n  (of_power_series ℤ R).map_bit0 _\n#align coe_bit0 coe_bit0\n\n",
+ "coe_algebra_map":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n@[simp]\ntheorem coe_algebra_map [CommSemiring R] :\n    «expr⇑ » (algebra_map (power_series R) (laurent_series R)) = hahn_series.of_power_series ℤ R :=\n  rfl\n#align coe_algebra_map coe_algebra_map\n\n",
+ "coe_add":
+ "@[simp, norm_cast]\ntheorem coe_add : ((f + g : power_series R) : laurent_series R) = f + g :=\n  (of_power_series ℤ R).map_add _ _\n#align coe_add coe_add\n\n",
+ "coe_X":
+ "@[simp]\ntheorem coe_X : ((X : power_series R) : laurent_series R) = single 1 1 :=\n  of_power_series_X\n#align coe_X coe_X\n\n",
+ "coe_C":
+ "@[simp, norm_cast]\ntheorem coe_C (r : R) : ((C R r : power_series R) : laurent_series R) = hahn_series.C r :=\n  of_power_series_C _\n#align coe_C coe_C\n\n"}

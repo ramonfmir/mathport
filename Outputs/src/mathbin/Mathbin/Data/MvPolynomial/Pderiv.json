@@ -1,0 +1,20 @@
+{"pderiv_one":
+ "theorem pderiv_one {i : σ} : pderiv i (1 : mv_polynomial σ R) = 0 :=\n  pderiv_C\n#align pderiv_one pderiv_one\n\n",
+ "pderiv_mul":
+ "theorem pderiv_mul {i : σ} {f g : mv_polynomial σ R} : pderiv i (f * g) = pderiv i f * g + f * pderiv i g := by\n  simp only [(pderiv i).leibniz f g, smul_eq_mul, mul_comm, add_comm]\n#align pderiv_mul pderiv_mul\n\n",
+ "pderiv_monomial_single":
+ "theorem pderiv_monomial_single {i : σ} {n : ℕ} :\n    pderiv i (monomial (single i n) a) = monomial (single i (n - 1)) (a * n) := by simp\n#align pderiv_monomial_single pderiv_monomial_single\n\n",
+ "pderiv_monomial":
+ "/-\nCopyright (c) 2017 Johannes Hölzl. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Shing Tak Lam, Yury Kudryashov\n-/\n@[simp]\ntheorem pderiv_monomial {i : σ} : pderiv i (monomial s a) = monomial (s - single i 1) (a * s i) :=\n  by\n  simp only [pderiv, mk_derivation_monomial, finsupp.smul_sum, smul_eq_mul, ← smul_mul_assoc, ← (monomial _).map_smul]\n  refine' (finset.sum_eq_single i (fun j hj hne => _) fun hi => _).trans _\n  · simp [Pi.single_eq_of_ne hne]\n  · rw [finsupp.not_mem_support_iff] at hi\n    simp [hi]\n  · simp\n#align pderiv_monomial pderiv_monomial\n\n",
+ "pderiv_eq_zero_of_not_mem_vars":
+ "theorem pderiv_eq_zero_of_not_mem_vars {i : σ} {f : mv_polynomial σ R} (h : i ∉ f.vars) : pderiv i f = 0 :=\n  derivation_eq_zero_of_forall_mem_vars fun j hj => pderiv_X_of_ne <| ne_of_mem_of_not_mem hj h\n#align pderiv_eq_zero_of_not_mem_vars pderiv_eq_zero_of_not_mem_vars\n\n",
+ "pderiv_X_self":
+ "@[simp]\ntheorem pderiv_X_self (i : σ) : pderiv i (X i : mv_polynomial σ R) = 1 := by simp\n#align pderiv_X_self pderiv_X_self\n\n",
+ "pderiv_X_of_ne":
+ "@[simp]\ntheorem pderiv_X_of_ne {i j : σ} (h : j ≠ i) : pderiv i (X j : mv_polynomial σ R) = 0 := by simp [h]\n#align pderiv_X_of_ne pderiv_X_of_ne\n\n",
+ "pderiv_X":
+ "@[simp]\ntheorem pderiv_X [d : decidable_eq σ] (i j : σ) : pderiv i (X j : mv_polynomial σ R) = @Pi.single σ _ d _ i 1 j :=\n  (mk_derivation_X _ _ _).trans (by congr )\n#align pderiv_X pderiv_X\n\n",
+ "pderiv_C_mul":
+ "@[simp]\ntheorem pderiv_C_mul {f : mv_polynomial σ R} {i : σ} : pderiv i (C a * f) = C a * pderiv i f :=\n  (derivation_C_mul _ _ _).trans C_mul'.symm\n#align pderiv_C_mul pderiv_C_mul\n\n",
+ "pderiv_C":
+ "theorem pderiv_C {i : σ} : pderiv i (C a) = 0 :=\n  derivation_C _ _\n#align pderiv_C pderiv_C\n\n"}

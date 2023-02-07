@@ -1,0 +1,6 @@
+{"smul_mk":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n@[simp, to_additive]\ntheorem smul_mk : «expr • » a (mk i b) = ⟨i, «expr • » a b⟩ :=\n  rfl\n#align smul_mk smul_mk\n\n",
+ "smul_def":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:219:4: warning: unsupported binary notation `«expr • » -/\n/-\nCopyright (c) 2022 Yaël Dillies. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Yaël Dillies\n-/\n@[to_additive]\ntheorem smul_def : «expr • » a x = x.map id fun i => («expr • » · ·) a :=\n  rfl\n#align smul_def smul_def\n\n",
+ "has_faithful_smul'":
+ "/-- This is not an instance because `i` becomes a metavariable. -/\n@[to_additive \"This is not an instance because `i` becomes a metavariable.\"]\nprotected theorem has_faithful_smul' [FaithfulSMul M (α i)] : FaithfulSMul M (Σi, α i) :=\n  ⟨fun x y h => eq_of_smul_eq_smul fun a : α i => heq_iff_eq.1 (ext_iff.1 <| h <| mk i a).2⟩\n#align has_faithful_smul' has_faithful_smul'\n\n"}

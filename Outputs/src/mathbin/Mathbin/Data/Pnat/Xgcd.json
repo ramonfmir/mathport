@@ -1,0 +1,80 @@
+{"v_eq_succ_vp":
+ "/-\nCopyright (c) 2019 Neil Strickland. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Neil Strickland\n-/\ntheorem v_eq_succ_vp : u.v = succ₂ u.vp := by\n  ext <;> dsimp [v, vp, w, z, a, b, succ₂] <;> repeat' rw [nat.succ_eq_add_one] <;> ring\n#align v_eq_succ_vp v_eq_succ_vp\n\n",
+ "step_wf":
+ "/-- We will apply the above step recursively.  The following result\n is used to ensure that the process terminates. -/\ntheorem step_wf (hr : u.r ≠ 0) : SizeOf.sizeOf u.step < SizeOf.sizeOf u :=\n  by\n  change u.r - 1 < u.bp\n  have h₀ : u.r - 1 + 1 = u.r := nat.succ_pred_eq_of_pos (nat.pos_of_ne_zero hr)\n  have h₁ : u.r < u.bp + 1 := nat.mod_lt (u.ap + 1) u.bp.succ_pos\n  rw [← h₀] at h₁\n  exact lt_of_succ_lt_succ h₁\n#align step_wf step_wf\n\n",
+ "step_v":
+ "/-- The reduction step does not change the product vector. -/\ntheorem step_v (hr : u.r ≠ 0) : u.step.v = u.v.swap :=\n  by\n  let ha : u.r + u.b * u.q = u.a := u.rq_eq\n  let hr : u.r - 1 + 1 = u.r := (add_comm _ 1).trans (add_tsub_cancel_of_le (nat.pos_of_ne_zero hr))\n  ext\n  · change ((u.y * u.q + u.z) * u.b + u.y * (u.r - 1 + 1) : ℕ) = u.y * u.a + u.z * u.b\n    rw [← ha, hr]\n    ring\n  · change ((u.w * u.q + u.x) * u.b + u.w * (u.r - 1 + 1) : ℕ) = u.w * u.a + u.x * u.b\n    rw [← ha, hr]\n    ring\n#align step_v step_v\n\n",
+ "step_is_special":
+ "theorem step_is_special (hs : u.is_special) : u.step.is_special :=\n  by\n  dsimp [is_special, step] at hs⊢\n  rw [mul_add, mul_comm u.y u.x, ← hs]\n  ring\n#align step_is_special step_is_special\n\n",
+ "start_v":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«exprℕ+» -/\ntheorem start_v (a b : «exprℕ+») : (start a b).v = ⟨a, b⟩ :=\n  by\n  dsimp [start, v, xgcd_type.a, xgcd_type.b, w, z]\n  rw [one_mul, one_mul, zero_mul, zero_mul, zero_add, add_zero]\n  rw [← Nat.pred_eq_sub_one, ← Nat.pred_eq_sub_one]\n  rw [nat.succ_pred_eq_of_pos a.pos, nat.succ_pred_eq_of_pos b.pos]\n#align start_v start_v\n\n",
+ "start_is_special":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«exprℕ+» -/\ntheorem start_is_special (a b : «exprℕ+») : (start a b).is_special :=\n  by\n  dsimp [start, is_special]\n  rfl\n#align start_is_special start_is_special\n\n",
+ "rq_eq":
+ "/-- Properties of division with remainder for a / b.  -/\ntheorem rq_eq : u.r + (u.bp + 1) * u.q = u.ap + 1 :=\n  nat.mod_add_div (u.ap + 1) (u.bp + 1)\n#align rq_eq rq_eq\n\n",
+ "reduce_v":
+ "theorem reduce_v : ∀ u : XgcdType, u.reduce.v = u.v\n  | u =>\n    dite (u.r = 0) (fun h => by rw [reduce_a h, finish_v u h]) fun h =>\n      by\n      have : SizeOf.sizeOf u.step < SizeOf.sizeOf u := u.step_wf h\n      rw [reduce_b h, flip_v, reduce_v (step u), step_v u h, prod.swap_swap]\n#align reduce_v reduce_v\n\n",
+ "reduce_special'":
+ "theorem reduce_special' (u : XgcdType) (hs : u.is_special) : u.reduce.is_special' :=\n  (isSpecial_iff _).mp (u.reduce_special hs)\n#align reduce_special' reduce_special'\n\n",
+ "reduce_special":
+ "theorem reduce_special : ∀ u : XgcdType, u.is_special → u.reduce.is_special\n  | u =>\n    dite (u.r = 0)\n      (fun h hs => by\n        rw [reduce_a h]\n        exact u.finish_is_special hs)\n      fun h hs => by\n      have : SizeOf.sizeOf u.step < SizeOf.sizeOf u := u.step_wf h\n      rw [reduce_b h]\n      exact (flip_is_special _).mpr (reduce_special _ (u.step_is_special hs))\n#align reduce_special reduce_special\n\n",
+ "reduce_reduced'":
+ "theorem reduce_reduced' (u : XgcdType) : u.reduce.is_reduced' :=\n  (isReduced_iff _).mp u.reduce_reduced\n#align reduce_reduced' reduce_reduced'\n\n",
+ "reduce_reduced":
+ "theorem reduce_reduced : ∀ u : XgcdType, u.reduce.is_reduced\n  | u =>\n    dite (u.r = 0)\n      (fun h => by\n        rw [reduce_a h]\n        exact u.finish_is_reduced)\n      fun h => by\n      have : SizeOf.sizeOf u.step < SizeOf.sizeOf u := u.step_wf h\n      rw [reduce_b h, flip_is_reduced]\n      apply reduce_reduced\n#align reduce_reduced reduce_reduced\n\n",
+ "reduce_b":
+ "theorem reduce_b {u : XgcdType} (h : u.r ≠ 0) : u.reduce = u.step.reduce.flip :=\n  by\n  rw [reduce]\n  simp only\n  rw [if_neg h, step]\n#align reduce_b reduce_b\n\n",
+ "reduce_a":
+ "theorem reduce_a {u : XgcdType} (h : u.r = 0) : u.reduce = u.finish :=\n  by\n  rw [reduce]\n  simp only\n  rw [if_pos h]\n#align reduce_a reduce_a\n\n",
+ "qp_eq":
+ "theorem qp_eq (hr : u.r = 0) : u.q = u.qp + 1 := by\n  by_cases hq : u.q = 0\n  · let h := u.rq_eq\n    rw [hr, hq, mul_zero, add_zero] at h\n    cases h\n  · exact (nat.succ_pred_eq_of_pos (nat.pos_of_ne_zero hq)).symm\n#align qp_eq qp_eq\n\n",
+ "is_special_iff":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«exprℕ+» -/\ntheorem is_special_iff : u.is_special ↔ u.is_special' :=\n  by\n  dsimp [is_special, is_special']\n  constructor <;> intro h\n  · apply eq\n    dsimp [w, z, succ_pnat]\n    rw [← h]\n    repeat' rw [nat.succ_eq_add_one]\n    ring\n  · apply nat.succ.inj\n    replace h := congr_arg (coe : «exprℕ+» → ℕ) h\n    rw [mul_coe, w, z] at h\n    repeat' rw [succ_pnat_coe, nat.succ_eq_add_one] at h\n    repeat' rw [nat.succ_eq_add_one]\n    rw [← h]\n    ring\n#align is_special_iff is_special_iff\n\n",
+ "is_reduced_iff":
+ "theorem is_reduced_iff : u.is_reduced ↔ u.is_reduced' :=\n  succPNat_inj.symm\n#align is_reduced_iff is_reduced_iff\n\n",
+ "gcd_rel_right'":
+ "theorem gcd_rel_right' : gcdW a b * gcdB' a b = succPNat (gcdY a b * gcdA' a b) :=\n  (gcd_props a b).2.2.2.2.1\n#align gcd_rel_right' gcd_rel_right'\n\n",
+ "gcd_rel_right":
+ "theorem gcd_rel_right : (gcdW a b * b : ℕ) = gcdY a b * a + gcd a b :=\n  gcd_eq a b ▸ (gcd_props a b).2.2.2.2.2.2\n#align gcd_rel_right gcd_rel_right\n\n",
+ "gcd_rel_left'":
+ "theorem gcd_rel_left' : gcdZ a b * gcdA' a b = succPNat (gcdX a b * gcdB' a b) :=\n  (gcd_props a b).2.2.2.1\n#align gcd_rel_left' gcd_rel_left'\n\n",
+ "gcd_rel_left":
+ "theorem gcd_rel_left : (gcdZ a b * a : ℕ) = gcdX a b * b + gcd a b :=\n  gcd_eq a b ▸ (gcd_props a b).2.2.2.2.2.1\n#align gcd_rel_left gcd_rel_left\n\n",
+ "gcd_props":
+ "theorem gcd_props :\n    let d := gcdD a b\n    let w := gcdW a b\n    let x := gcdX a b\n    let y := gcdY a b\n    let z := gcdZ a b\n    let a' := gcdA' a b\n    let b' := gcdB' a b\n    w * z = succPNat (x * y) ∧\n      a = a' * d ∧\n        b = b' * d ∧\n          z * a' = succPNat (x * b') ∧ w * b' = succPNat (y * a') ∧ (z * a : ℕ) = x * b + d ∧ (w * b : ℕ) = y * a + d :=\n  by\n  intros\n  let u := xgcd_type.start a b\n  let ur := u.reduce\n  have ha : d = ur.a := rfl\n  have hb : d = ur.b := u.reduce_reduced'\n  have ha' : (a' : ℕ) = w + x := gcd_a'_coe a b\n  have hb' : (b' : ℕ) = y + z := gcd_b'_coe a b\n  have hdet : w * z = succ_pnat (x * y) := u.reduce_special' rfl\n  constructor\n  exact hdet\n  have hdet' : (w * z : ℕ) = x * y + 1 := by rw [← mul_coe, hdet, succ_pnat_coe]\n  have huv : u.v = ⟨a, b⟩ := xgcd_type.start_v a b\n  let hv : prod.mk (w * d + x * ur.b : ℕ) (y * d + z * ur.b : ℕ) = ⟨a, b⟩ := u.reduce_v.trans (xgcd_type.start_v a b)\n  rw [← hb, ← add_mul, ← add_mul, ← ha', ← hb'] at hv\n  have ha'' : (a : ℕ) = a' * d := (congr_arg prod.fst hv).symm\n  have hb'' : (b : ℕ) = b' * d := (congr_arg prod.snd hv).symm\n  constructor\n  exact eq ha''\n  constructor\n  exact eq hb''\n  have hza' : (z * a' : ℕ) = x * b' + 1 :=\n    by\n    rw [ha', hb', mul_add, mul_add, mul_comm (z : ℕ), hdet']\n    ring\n  have hwb' : (w * b' : ℕ) = y * a' + 1 :=\n    by\n    rw [ha', hb', mul_add, mul_add, hdet']\n    ring\n  constructor\n  · apply eq\n    rw [succ_pnat_coe, nat.succ_eq_add_one, mul_coe, hza']\n  constructor\n  · apply eq\n    rw [succ_pnat_coe, nat.succ_eq_add_one, mul_coe, hwb']\n  rw [ha'', hb'']\n  repeat' rw [← mul_assoc]\n  rw [hza', hwb']\n  constructor <;> ring\n#align gcd_props gcd_props\n\n",
+ "gcd_eq":
+ "theorem gcd_eq : gcdD a b = gcd a b :=\n  by\n  rcases gcd_props a b with ⟨h₀, h₁, h₂, h₃, h₄, h₅, h₆⟩\n  apply dvd_antisymm\n  · apply dvd_gcd\n    exact Dvd.intro (gcd_a' a b) (h₁.trans (mul_comm _ _)).symm\n    exact Dvd.intro (gcd_b' a b) (h₂.trans (mul_comm _ _)).symm\n  · have h₇ : (gcd a b : ℕ) ∣ gcd_z a b * a := (nat.gcd_dvd_left a b).trans (dvd_mul_left _ _)\n    have h₈ : (gcd a b : ℕ) ∣ gcd_x a b * b := (nat.gcd_dvd_right a b).trans (dvd_mul_left _ _)\n    rw [h₅] at h₇\n    rw [dvd_iff]\n    exact (nat.dvd_add_iff_right h₈).mpr h₇\n#align gcd_eq gcd_eq\n\n",
+ "gcd_det_eq":
+ "theorem gcd_det_eq : gcdW a b * gcdZ a b = succPNat (gcdX a b * gcdY a b) :=\n  (gcd_props a b).1\n#align gcd_det_eq gcd_det_eq\n\n",
+ "gcd_b_eq":
+ "theorem gcd_b_eq : b = gcdB' a b * gcd a b :=\n  gcd_eq a b ▸ (gcd_props a b).2.2.1\n#align gcd_b_eq gcd_b_eq\n\n",
+ "gcd_b'_coe":
+ "theorem gcd_b'_coe : (gcdB' a b : ℕ) = gcdY a b + gcdZ a b :=\n  by\n  dsimp [gcd_b', gcd_y, gcd_z, xgcd_type.z]\n  rw [nat.succ_eq_add_one, nat.succ_eq_add_one, add_assoc]\n#align gcd_b'_coe gcd_b'_coe\n\n",
+ "gcd_a_eq":
+ "theorem gcd_a_eq : a = gcdA' a b * gcd a b :=\n  gcd_eq a b ▸ (gcd_props a b).2.1\n#align gcd_a_eq gcd_a_eq\n\n",
+ "gcd_a'_coe":
+ "theorem gcd_a'_coe : (gcdA' a b : ℕ) = gcdW a b + gcdX a b :=\n  by\n  dsimp [gcd_a', gcd_x, gcd_w, xgcd_type.w]\n  rw [nat.succ_eq_add_one, nat.succ_eq_add_one, add_right_comm]\n#align gcd_a'_coe gcd_a'_coe\n\n",
+ "flip_z":
+ "@[simp]\ntheorem flip_z : (flip u).z = u.w :=\n  rfl\n#align flip_z flip_z\n\n",
+ "flip_y":
+ "@[simp]\ntheorem flip_y : (flip u).y = u.x :=\n  rfl\n#align flip_y flip_y\n\n",
+ "flip_x":
+ "@[simp]\ntheorem flip_x : (flip u).x = u.y :=\n  rfl\n#align flip_x flip_x\n\n",
+ "flip_w":
+ "@[simp]\ntheorem flip_w : (flip u).w = u.z :=\n  rfl\n#align flip_w flip_w\n\n",
+ "flip_v":
+ "theorem flip_v : (flip u).v = u.v.swap := by\n  dsimp [v]\n  ext\n  · simp only\n    ring\n  · simp only\n    ring\n#align flip_v flip_v\n\n",
+ "flip_is_special":
+ "theorem flip_is_special : (flip u).is_special ↔ u.is_special :=\n  by\n  dsimp [is_special, flip]\n  rw [mul_comm u.x, mul_comm u.zp, add_comm u.zp]\n#align flip_is_special flip_is_special\n\n",
+ "flip_is_reduced":
+ "theorem flip_is_reduced : (flip u).is_reduced ↔ u.is_reduced :=\n  by\n  dsimp [is_reduced, flip]\n  constructor <;> intro h <;> exact h.symm\n#align flip_is_reduced flip_is_reduced\n\n",
+ "flip_b":
+ "@[simp]\ntheorem flip_b : (flip u).b = u.a :=\n  rfl\n#align flip_b flip_b\n\n",
+ "flip_a":
+ "@[simp]\ntheorem flip_a : (flip u).a = u.b :=\n  rfl\n#align flip_a flip_a\n\n",
+ "finish_v":
+ "theorem finish_v (hr : u.r = 0) : u.finish.v = u.v :=\n  by\n  let ha : u.r + u.b * u.q = u.a := u.rq_eq\n  rw [hr, zero_add] at ha\n  ext\n  · change (u.wp + 1) * u.b + ((u.wp + 1) * u.qp + u.x) * u.b = u.w * u.a + u.x * u.b\n    have : u.wp + 1 = u.w := rfl\n    rw [this, ← ha, u.qp_eq hr]\n    ring\n  · change u.y * u.b + (u.y * u.qp + u.z) * u.b = u.y * u.a + u.z * u.b\n    rw [← ha, u.qp_eq hr]\n    ring\n#align finish_v finish_v\n\n",
+ "finish_is_special":
+ "theorem finish_is_special (hs : u.is_special) : u.finish.is_special :=\n  by\n  dsimp [is_special, finish] at hs⊢\n  rw [add_mul _ _ u.y, add_comm _ (u.x * u.y), ← hs]\n  ring\n#align finish_is_special finish_is_special\n\n",
+ "finish_is_reduced":
+ "theorem finish_is_reduced : u.finish.is_reduced :=\n  by\n  dsimp [is_reduced]\n  rfl\n#align finish_is_reduced finish_is_reduced\n\n"}

@@ -1,0 +1,36 @@
+{"neg_of_nat_eq":
+ "theorem neg_of_nat_eq (n : ℕ) : neg_of_nat n = -(n : ℤ) := by cases n <;> rfl\n#align neg_of_nat_eq neg_of_nat_eq\n\n",
+ "coe_nat_bit1":
+ "@[simp, norm_cast]\ntheorem coe_nat_bit1 (n : ℕ) : (↑(bit1 n) : ℤ) = bit1 ↑n :=\n  rfl\n#align coe_nat_bit1 coe_nat_bit1\n\n",
+ "coe_nat_bit0":
+ "@[simp, norm_cast]\ntheorem coe_nat_bit0 (n : ℕ) : (↑(bit0 n) : ℤ) = bit0 ↑n :=\n  rfl\n#align coe_nat_bit0 coe_nat_bit0\n\n",
+ "cast_zero":
+ "@[simp, norm_cast]\ntheorem cast_zero : ((0 : ℤ) : R) = 0 :=\n  (cast_of_nat 0).trans Nat.cast_zero\n#align cast_zero cast_zero\n\n",
+ "cast_two":
+ "theorem cast_two : ((2 : ℤ) : R) = 2 := by simp\n#align cast_two cast_two\n\n",
+ "cast_three":
+ "theorem cast_three : ((3 : ℤ) : R) = 3 := by simp\n#align cast_three cast_three\n\n",
+ "cast_sub_nat_nat":
+ "@[simp]\ntheorem cast_sub_nat_nat (m n) : ((int.sub_nat_nat m n : ℤ) : R) = m - n :=\n  by\n  unfold sub_nat_nat; cases e : n - m\n  · simp only [sub_nat_nat, cast_of_nat]\n    simp [e, nat.le_of_sub_eq_zero e]\n  ·\n    rw [sub_nat_nat, cast_neg_succ_of_nat, nat.add_one, ← e, Nat.cast_sub <| _root_.le_of_lt <| nat.lt_of_sub_eq_succ e,\n      neg_sub]\n#align cast_sub_nat_nat cast_sub_nat_nat\n\n",
+ "cast_sub":
+ "@[simp, norm_cast]\ntheorem cast_sub (m n) : ((m - n : ℤ) : R) = m - n := by simp [int.sub_eq_add_neg, sub_eq_add_neg]\n#align cast_sub cast_sub\n\n",
+ "cast_pred":
+ "@[simp, norm_cast]\ntheorem cast_pred : ∀ {n}, 0 < n → ((n - 1 : ℕ) : R) = n - 1\n  | 0, h => by cases h\n  | n + 1, h => by rw [cast_succ, add_sub_cancel] <;> rfl\n#align cast_pred cast_pred\n\n",
+ "cast_one":
+ "@[simp, norm_cast]\ntheorem cast_one : ((1 : ℤ) : R) = 1 :=\n  show (((1 : ℕ) : ℤ) : R) = 1 by simp\n#align cast_one cast_one\n\n",
+ "cast_neg_succ_of_nat":
+ "@[simp]\ntheorem cast_neg_succ_of_nat (n : ℕ) : (-[n+1] : R) = -(n + 1 : ℕ) :=\n  AddGroupWithOne.intCast_negSucc n\n#align cast_neg_succ_of_nat cast_neg_succ_of_nat\n\n",
+ "cast_neg_of_nat":
+ "@[simp]\ntheorem cast_neg_of_nat (n : ℕ) : ((neg_of_nat n : ℤ) : R) = -n := by simp [neg_of_nat_eq]\n#align cast_neg_of_nat cast_neg_of_nat\n\n",
+ "cast_neg":
+ "@[simp, norm_cast]\ntheorem cast_neg : ∀ n, ((-n : ℤ) : R) = -n\n  | (0 : ℕ) => by erw [cast_zero, neg_zero]\n  | (n + 1 : ℕ) => by erw [cast_of_nat, cast_neg_succ_of_nat] <;> rfl\n  | -[n+1] => by erw [cast_of_nat, cast_neg_succ_of_nat, neg_neg]\n#align cast_neg cast_neg\n\n",
+ "cast_four":
+ "theorem cast_four : ((4 : ℤ) : R) = 4 := by simp\n#align cast_four cast_four\n\n",
+ "cast_coe_nat":
+ "@[simp, norm_cast]\ntheorem cast_coe_nat (n : ℕ) : ((n : ℤ) : R) = n :=\n  cast_of_nat _\n#align cast_coe_nat cast_coe_nat\n\n",
+ "cast_bit1":
+ "@[simp, norm_cast]\ntheorem cast_bit1 (n : ℤ) : ((bit1 n : ℤ) : R) = bit1 n := by rw [bit1, cast_add, cast_one, cast_bit0] <;> rfl\n#align cast_bit1 cast_bit1\n\n",
+ "cast_bit0":
+ "@[simp, norm_cast]\ntheorem cast_bit0 (n : ℤ) : ((bit0 n : ℤ) : R) = bit0 n :=\n  cast_add _ _\n#align cast_bit0 cast_bit0\n\n",
+ "cast_add":
+ "@[simp, norm_cast]\ntheorem cast_add : ∀ m n, ((m + n : ℤ) : R) = m + n\n  | (m : ℕ), (n : ℕ) => by simp [← Int.ofNat_add]\n  | (m : ℕ), -[n+1] => by erw [cast_sub_nat_nat, cast_coe_nat, cast_neg_succ_of_nat, sub_eq_add_neg]\n  | -[m+1], (n : ℕ) => by\n    erw [cast_sub_nat_nat, cast_coe_nat, cast_neg_succ_of_nat, sub_eq_iff_eq_add, add_assoc, eq_neg_add_iff_add_eq, ←\n      Nat.cast_add, ← Nat.cast_add, nat.add_comm]\n  | -[m+1], -[n+1] =>\n    show (-[m + n + 1+1] : R) = _ by\n      rw [cast_neg_succ_of_nat, cast_neg_succ_of_nat, cast_neg_succ_of_nat, ← neg_add_rev, ← Nat.cast_add,\n        nat.add_right_comm m n 1, nat.add_assoc, nat.add_comm]\n#align cast_add cast_add\n\n"}

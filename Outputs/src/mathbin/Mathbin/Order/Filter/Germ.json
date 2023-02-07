@@ -1,0 +1,98 @@
+{"quot_mk_eq_coe":
+ "@[simp]\ntheorem quot_mk_eq_coe (l : filter α) (f : α → β) : Quot.mk _ f = (f : germ l β) :=\n  rfl\n#align quot_mk_eq_coe quot_mk_eq_coe\n\n",
+ "mk'_eq_coe":
+ "@[simp]\ntheorem mk'_eq_coe (l : filter α) (f : α → β) : quotient.mk' f = (f : germ l β) :=\n  rfl\n#align mk'_eq_coe mk'_eq_coe\n\n",
+ "map₂_const":
+ "@[simp]\ntheorem map₂_const (l : filter α) (b : β) (c : γ) (f : β → γ → δ) : map₂ f (↑b : germ l β) ↑c = ↑(f b c) :=\n  rfl\n#align map₂_const map₂_const\n\n",
+ "map₂_coe":
+ "@[simp]\ntheorem map₂_coe (op : β → γ → δ) (f : α → β) (g : α → γ) : map₂ op (f : germ l β) g = fun x => op (f x) (g x) :=\n  rfl\n#align map₂_coe map₂_coe\n\n",
+ "map_map":
+ "theorem map_map (op₁ : γ → δ) (op₂ : β → γ) (f : germ l β) : map op₁ (map op₂ f) = map (op₁ ∘ op₂) f :=\n  induction_on f fun f => rfl\n#align map_map map_map\n\n",
+ "map_id":
+ "@[simp]\ntheorem map_id : map id = (id : germ l β → germ l β) := by\n  ext ⟨f⟩\n  rfl\n#align map_id map_id\n\n",
+ "map_const":
+ "@[simp]\ntheorem map_const (l : filter α) (a : β) (f : β → γ) : (↑a : germ l β).map f = ↑(f a) :=\n  rfl\n#align map_const map_const\n\n",
+ "map_coe":
+ "@[simp]\ntheorem map_coe (op : β → γ) (f : α → β) : map op (f : germ l β) = op ∘ f :=\n  rfl\n#align map_coe map_coe\n\n",
+ "map'_coe":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⇒ » -/\n@[simp]\ntheorem map'_coe {lc : filter γ} (F : (α → β) → γ → δ) (hF : («expr ⇒ » l.eventually_eq lc.eventually_eq) F F)\n    (f : α → β) : map' F hF f = F f :=\n  rfl\n#align map'_coe map'_coe\n\n",
+ "lift_rel_const_iff":
+ "@[simp]\ntheorem lift_rel_const_iff [ne_bot l] {r : β → γ → Prop} {x : β} {y : γ} : lift_rel r (↑x : germ l β) ↑y ↔ r x y :=\n  @eventually_const _ _ _ (r x y)\n#align lift_rel_const_iff lift_rel_const_iff\n\n",
+ "lift_rel_const":
+ "theorem lift_rel_const {r : β → γ → Prop} {x : β} {y : γ} (h : r x y) : lift_rel r (↑x : germ l β) ↑y :=\n  eventually_of_forall fun _ => h\n#align lift_rel_const lift_rel_const\n\n",
+ "lift_rel_coe":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr∀ᶠ in , » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr∀ᶠ in , » -/\n@[simp]\ntheorem lift_rel_coe {r : β → γ → Prop} {f : α → β} {g : α → γ} :\n    lift_rel r (f : germ l β) g ↔\n      «expr∀ᶠ in , » \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr∀ᶠ in , »\" l\n        (r (f x) (g x)) :=\n  iff.rfl\n#align lift_rel_coe lift_rel_coe\n\n",
+ "lift_pred_const_iff":
+ "@[simp]\ntheorem lift_pred_const_iff [ne_bot l] {p : β → Prop} {x : β} : lift_pred p (↑x : germ l β) ↔ p x :=\n  @eventually_const _ _ _ (p x)\n#align lift_pred_const_iff lift_pred_const_iff\n\n",
+ "lift_pred_const":
+ "theorem lift_pred_const {p : β → Prop} {x : β} (hx : p x) : lift_pred p (↑x : germ l β) :=\n  eventually_of_forall fun y => hx\n#align lift_pred_const lift_pred_const\n\n",
+ "lift_pred_coe":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr∀ᶠ in , » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr∀ᶠ in , » -/\n@[simp]\ntheorem lift_pred_coe {p : β → Prop} {f : α → β} :\n    lift_pred p (f : germ l β) ↔\n      «expr∀ᶠ in , » \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr∀ᶠ in , »\" l\n        (p (f x)) :=\n  iff.rfl\n#align lift_pred_coe lift_pred_coe\n\n",
+ "le_def":
+ "theorem le_def [LE β] : ((· ≤ ·) : germ l β → germ l β → Prop) = lift_rel (· ≤ ·) :=\n  rfl\n#align le_def le_def\n\n",
+ "induction_on₃":
+ "@[elab_as_elim]\ntheorem induction_on₃ (f : germ l β) (g : germ l γ) (h : germ l δ) {p : germ l β → germ l γ → germ l δ → Prop}\n    (H : ∀ (f : α → β) (g : α → γ) (h : α → δ), p f g h) : p f g h :=\n  Quotient.inductionOn₃' f g h H\n#align induction_on₃ induction_on₃\n\n",
+ "induction_on₂":
+ "@[elab_as_elim]\ntheorem induction_on₂ (f : germ l β) (g : germ l γ) {p : germ l β → germ l γ → Prop}\n    (h : ∀ (f : α → β) (g : α → γ), p f g) : p f g :=\n  Quotient.inductionOn₂' f g h\n#align induction_on₂ induction_on₂\n\n",
+ "induction_on":
+ "@[elab_as_elim]\ntheorem induction_on (f : germ l β) {p : germ l β → Prop} (h : ∀ f : α → β, p f) : p f :=\n  Quotient.inductionOn' f h\n#align induction_on induction_on\n\n",
+ "const_top":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n@[simp, norm_cast]\ntheorem const_top [Top β] : (↑(«expr⊤» : β) : germ l β) = «expr⊤» :=\n  rfl\n#align const_top const_top\n\n",
+ "const_smul":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n@[simp, norm_cast, to_additive]\ntheorem const_smul [SMul M G] (n : M) (a : G) : (↑(«expr • » n a) : germ l G) = «expr • » n ↑a :=\n  rfl\n#align const_smul const_smul\n\n",
+ "const_pow":
+ "@[simp, norm_cast, to_additive const_smul]\ntheorem const_pow [Pow G M] (a : G) (n : M) : (↑(a ^ n) : germ l G) = ↑a ^ n :=\n  rfl\n#align const_pow const_pow\n\n",
+ "const_le_iff":
+ "@[simp, norm_cast]\ntheorem const_le_iff [LE β] [ne_bot l] {x y : β} : (↑x : germ l β) ≤ ↑y ↔ x ≤ y :=\n  lift_rel_const_iff\n#align const_le_iff const_le_iff\n\n",
+ "const_le":
+ "theorem const_le [LE β] {x y : β} : x ≤ y → (↑x : germ l β) ≤ ↑y :=\n  lift_rel_const\n#align const_le const_le\n\n",
+ "const_inv":
+ "@[simp, norm_cast, to_additive]\ntheorem const_inv [Inv G] (a : G) : (↑a⁻¹ : germ l G) = (↑a)⁻¹ :=\n  rfl\n#align const_inv const_inv\n\n",
+ "const_inj":
+ "@[simp, norm_cast]\ntheorem const_inj [ne_bot l] {a b : β} : (↑a : germ l β) = ↑b ↔ a = b :=\n  coe_eq.trans <| const_eventually_eq\n#align const_inj const_inj\n\n",
+ "const_eventually_eq'":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr∀ᶠ in , » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr∀ᶠ in , » -/\n/-\nCopyright (c) 2020 Yury G. Kudryashov. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Yury G. Kudryashov, Abhimanyu Pallavi Sudhir\n-/\ntheorem const_eventually_eq' [ne_bot l] {a b : β} :\n    «expr∀ᶠ in , » \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr∀ᶠ in , »\" l (a = b) ↔\n      a = b :=\n  eventually_const\n#align const_eventually_eq' const_eventually_eq'\n\n",
+ "const_eventually_eq":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr =ᶠ[ ] » -/\ntheorem const_eventually_eq [ne_bot l] {a b : β} : («expr =ᶠ[ ] » (fun _ => a) l fun _ => b) ↔ a = b :=\n  @const_eventually_eq' _ _ _ _ a b\n#align const_eventually_eq const_eventually_eq\n\n",
+ "const_div":
+ "@[simp, norm_cast, to_additive]\ntheorem const_div [Div M] (a b : M) : (↑(a / b) : germ l M) = ↑a / ↑b :=\n  rfl\n#align const_div const_div\n\n",
+ "const_comp_tendsto'":
+ "@[simp]\ntheorem const_comp_tendsto' {l : filter α} (b : β) {lc : filter γ} {g : germ lc α} (hg : g.tendsto l) :\n    (↑b : germ l β).comp_tendsto' g hg = ↑b :=\n  induction_on g (fun _ _ => rfl) hg\n#align const_comp_tendsto' const_comp_tendsto'\n\n",
+ "const_comp_tendsto":
+ "@[simp]\ntheorem const_comp_tendsto {l : filter α} (b : β) {lc : filter γ} {g : γ → α} (hg : tendsto g lc l) :\n    (↑b : germ l β).comp_tendsto g hg = ↑b :=\n  rfl\n#align const_comp_tendsto const_comp_tendsto\n\n",
+ "const_bot":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n@[simp, norm_cast]\ntheorem const_bot [Bot β] : (↑(«expr⊥» : β) : germ l β) = «expr⊥» :=\n  rfl\n#align const_bot const_bot\n\n",
+ "comp_tendsto'_coe":
+ "@[simp]\ntheorem comp_tendsto'_coe (f : germ l β) {lc : filter γ} {g : γ → α} (hg : tendsto g lc l) :\n    f.comp_tendsto' _ hg.germ_tendsto = f.comp_tendsto g hg :=\n  rfl\n#align comp_tendsto'_coe comp_tendsto'_coe\n\n",
+ "comp_tendsto":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr =ᶠ[ ] » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr =ᶠ[ ] » -/\ntheorem eventually_eq.comp_tendsto {f' : α → β} (H : «expr =ᶠ[ ] » f l f') {g : γ → α} {lc : filter γ}\n    (hg : tendsto g lc l) : «expr =ᶠ[ ] » (f ∘ g) lc (f' ∘ g) :=\n  hg.eventually H\n#align eventually_eq.comp_tendsto eventually_eq.comp_tendsto\n\n",
+ "coe_tendsto":
+ "@[simp, norm_cast]\ntheorem coe_tendsto {f : α → β} {lb : filter β} : (f : germ l β).tendsto lb ↔ tendsto f l lb :=\n  iff.rfl\n#align coe_tendsto coe_tendsto\n\n",
+ "coe_smul'":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n@[simp, norm_cast, to_additive]\ntheorem coe_smul' [SMul M β] (c : α → M) (f : α → β) : ↑(«expr • » c f) = «expr • » (c : germ l M) (f : germ l β) :=\n  rfl\n#align coe_smul' coe_smul'\n\n",
+ "coe_smul":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n@[simp, norm_cast, to_additive]\ntheorem coe_smul [SMul M G] (n : M) (f : α → G) : ↑(«expr • » n f) = («expr • » n f : germ l G) :=\n  rfl\n#align coe_smul coe_smul\n\n",
+ "coe_pow":
+ "@[simp, norm_cast, to_additive coe_smul]\ntheorem coe_pow [Pow G M] (f : α → G) (n : M) : ↑(f ^ n) = (f ^ n : germ l G) :=\n  rfl\n#align coe_pow coe_pow\n\n",
+ "coe_one":
+ "@[simp, norm_cast, to_additive]\ntheorem coe_one [One M] : ↑(1 : α → M) = (1 : germ l M) :=\n  rfl\n#align coe_one coe_one\n\n",
+ "coe_nonneg":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr∀ᶠ in , » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr∀ᶠ in , » -/\ntheorem coe_nonneg [LE β] [Zero β] {f : α → β} :\n    0 ≤ (f : germ l β) ↔\n      «expr∀ᶠ in , » \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr∀ᶠ in , »\" l\n        (0 ≤ f x) :=\n  iff.rfl\n#align coe_nonneg coe_nonneg\n\n",
+ "coe_mul":
+ "@[simp, norm_cast, to_additive]\ntheorem coe_mul [Mul M] (f g : α → M) : ↑(f * g) = (f * g : germ l M) :=\n  rfl\n#align coe_mul coe_mul\n\n",
+ "coe_le":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≤ᶠ[ ] » -/\n@[simp]\ntheorem coe_le [LE β] : (f : germ l β) ≤ g ↔ «expr ≤ᶠ[ ] » f l g :=\n  iff.rfl\n#align coe_le coe_le\n\n",
+ "coe_inv":
+ "@[simp, norm_cast, to_additive]\ntheorem coe_inv [Inv G] (f : α → G) : ↑f⁻¹ = (f⁻¹ : germ l G) :=\n  rfl\n#align coe_inv coe_inv\n\n",
+ "coe_eq":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr =ᶠ[ ] » -/\n@[simp, norm_cast]\ntheorem coe_eq : (f : germ l β) = g ↔ «expr =ᶠ[ ] » f l g :=\n  quotient.eq'\n#align coe_eq coe_eq\n\n",
+ "coe_div":
+ "@[simp, norm_cast, to_additive]\ntheorem coe_div [Div M] (f g : α → M) : ↑(f / g) = (f / g : germ l M) :=\n  rfl\n#align coe_div coe_div\n\n",
+ "coe_comp_tendsto'":
+ "@[simp]\ntheorem coe_comp_tendsto' (f : α → β) {lc : filter γ} {g : germ lc α} (hg : g.tendsto l) :\n    (f : germ l β).comp_tendsto' g hg = g.map f :=\n  rfl\n#align coe_comp_tendsto' coe_comp_tendsto'\n\n",
+ "coe_comp_tendsto":
+ "@[simp]\ntheorem coe_comp_tendsto (f : α → β) {lc : filter γ} {g : γ → α} (hg : tendsto g lc l) :\n    (f : germ l β).comp_tendsto g hg = f ∘ g :=\n  rfl\n#align coe_comp_tendsto coe_comp_tendsto\n\n",
+ "coe_coe_ring_hom":
+ "@[simp]\ntheorem coe_coe_ring_hom [Semiring R] : (coe_ring_hom l : (α → R) → germ l R) = coe :=\n  rfl\n#align coe_coe_ring_hom coe_coe_ring_hom\n\n",
+ "coe_coe_mul_hom":
+ "@[simp, to_additive]\ntheorem coe_coe_mul_hom [monoid M] : (coe_mul_hom l : (α → M) → germ l M) = coe :=\n  rfl\n#align coe_coe_mul_hom coe_coe_mul_hom\n\n"}

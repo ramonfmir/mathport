@@ -1,0 +1,42 @@
+{"to_pgame_birthday":
+ "@[simp]\ntheorem to_pgame_birthday (o : ordinal) : o.to_pgame.birthday = o :=\n  by\n  induction' o using ordinal.induction with o IH\n  rw [to_pgame_def, pgame.birthday]\n  simp only [lsub_empty, max_zero_right]\n  nth_rw 1 [← lsub_typein o]\n  congr with x\n  exact IH _ (typein_lt_self x)\n#align to_pgame_birthday to_pgame_birthday\n\n",
+ "neg_birthday_le":
+ "theorem neg_birthday_le : -x.birthday.to_pgame ≤ x := by simpa only [neg_birthday, ← neg_le_iff] using le_birthday (-x)\n#align neg_birthday_le neg_birthday_le\n\n",
+ "neg_birthday":
+ "@[simp]\ntheorem neg_birthday : ∀ x : pgame, (-x).birthday = x.birthday\n  | ⟨xl, xr, xL, xR⟩ => by\n    rw [birthday_def, birthday_def, max_comm]\n    congr <;> funext <;> apply neg_birthday\n#align neg_birthday neg_birthday\n\n",
+ "lt_birthday_iff":
+ "theorem lt_birthday_iff {x : pgame} {o : ordinal} :\n    o < x.birthday ↔\n      (∃ i : x.left_moves, o ≤ (x.move_left i).birthday) ∨ ∃ i : x.right_moves, o ≤ (x.move_right i).birthday :=\n  by\n  constructor\n  · rw [birthday_def]\n    intro h\n    cases' lt_max_iff.1 h with h' h'\n    · left\n      rwa [lt_lsub_iff] at h'\n    · right\n      rwa [lt_lsub_iff] at h'\n  · rintro (⟨i, hi⟩ | ⟨i, hi⟩)\n    · exact hi.trans_lt (birthday_move_left_lt i)\n    · exact hi.trans_lt (birthday_move_right_lt i)\n#align lt_birthday_iff lt_birthday_iff\n\n",
+ "le_birthday":
+ "theorem le_birthday : ∀ x : pgame, x ≤ x.birthday.to_pgame\n  | ⟨xl, _, xL, _⟩ =>\n    le_def.2\n      ⟨fun i => or.inl ⟨to_left_moves_to_pgame ⟨_, birthday_move_left_lt i⟩, by simp [le_birthday (xL i)]⟩,\n        is_empty_elim⟩\n#align le_birthday le_birthday\n\n",
+ "birthday_zero_add":
+ "theorem birthday_zero_add : (0 + a).birthday = a.birthday := by simp\n#align birthday_zero_add birthday_zero_add\n\n",
+ "birthday_zero":
+ "@[simp]\ntheorem birthday_zero : birthday 0 = 0 := by simp [pempty.is_empty]\n#align birthday_zero birthday_zero\n\n",
+ "birthday_star":
+ "@[simp]\ntheorem birthday_star : birthday star = 1 := by\n  rw [birthday_def]\n  simp\n#align birthday_star birthday_star\n\n",
+ "birthday_one_add":
+ "theorem birthday_one_add : (1 + a).birthday = Order.succ a.birthday := by simp\n#align birthday_one_add birthday_one_add\n\n",
+ "birthday_one":
+ "@[simp]\ntheorem birthday_one : birthday 1 = 1 := by\n  rw [birthday_def]\n  simp\n#align birthday_one birthday_one\n\n",
+ "birthday_nat_cast":
+ "@[simp]\ntheorem birthday_nat_cast : ∀ n : ℕ, birthday n = n\n  | 0 => birthday_zero\n  | n + 1 => by simp [birthday_nat_cast]\n#align birthday_nat_cast birthday_nat_cast\n\n",
+ "birthday_nat_add":
+ "theorem birthday_nat_add (n : ℕ) : (↑n + a).birthday = a.birthday + n := by simp\n#align birthday_nat_add birthday_nat_add\n\n",
+ "birthday_move_right_lt":
+ "theorem birthday_move_right_lt {x : pgame} (i : x.right_moves) : (x.move_right i).birthday < x.birthday :=\n  by\n  cases x\n  rw [birthday]\n  exact lt_max_of_lt_right (lt_lsub _ i)\n#align birthday_move_right_lt birthday_move_right_lt\n\n",
+ "birthday_move_left_lt":
+ "theorem birthday_move_left_lt {x : pgame} (i : x.left_moves) : (x.move_left i).birthday < x.birthday :=\n  by\n  cases x\n  rw [birthday]\n  exact lt_max_of_lt_left (lt_lsub _ i)\n#align birthday_move_left_lt birthday_move_left_lt\n\n",
+ "birthday_eq_zero":
+ "@[simp]\ntheorem birthday_eq_zero {x : pgame} : birthday x = 0 ↔ is_empty x.left_moves ∧ is_empty x.right_moves := by\n  rw [birthday_def, max_eq_zero, lsub_eq_zero_iff, lsub_eq_zero_iff]\n#align birthday_eq_zero birthday_eq_zero\n\n",
+ "birthday_def":
+ "/-\nCopyright (c) 2022 Violeta Hernández Palacios. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Violeta Hernández Palacios\n-/\ntheorem birthday_def (x : pgame) :\n    birthday x = max (lsub.{u, u} fun i => birthday (x.move_left i)) (lsub.{u, u} fun i => birthday (x.move_right i)) :=\n  by\n  cases x\n  rw [birthday]\n  rfl\n#align birthday_def birthday_def\n\n",
+ "birthday_congr":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `pgame.relabelling -/\ntheorem relabelling.birthday_congr : ∀ {x y : pgame.{u}}, pgame.relabelling x y → birthday x = birthday y\n  | ⟨xl, xr, xL, xR⟩, ⟨yl, yr, yL, yR⟩, r => by\n    unfold birthday\n    congr 1\n    all_goals\n      apply lsub_eq_of_range_eq.{u, u, u}\n      ext i; constructor\n    all_goals rintro ⟨j, rfl⟩\n    · exact ⟨_, (r.move_left j).birthday_congr.symm⟩\n    · exact ⟨_, (r.move_left_symm j).birthday_congr⟩\n    · exact ⟨_, (r.move_right j).birthday_congr.symm⟩\n    · exact ⟨_, (r.move_right_symm j).birthday_congr⟩decreasing_by pgame_wf_tac\n#align relabelling.birthday_congr relabelling.birthday_congr\n\n",
+ "birthday_add_zero":
+ "theorem birthday_add_zero : (a + 0).birthday = a.birthday := by simp\n#align birthday_add_zero birthday_add_zero\n\n",
+ "birthday_add_one":
+ "theorem birthday_add_one : (a + 1).birthday = Order.succ a.birthday := by simp\n#align birthday_add_one birthday_add_one\n\n",
+ "birthday_add_nat":
+ "theorem birthday_add_nat (n : ℕ) : (a + n).birthday = a.birthday + n := by simp\n#align birthday_add_nat birthday_add_nat\n\n",
+ "birthday_add":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `ordinal.nadd -/\n@[simp]\ntheorem birthday_add : ∀ x y : pgame.{u}, (x + y).birthday = ordinal.nadd x.birthday y.birthday\n  | ⟨xl, xr, xL, xR⟩, ⟨yl, yr, yL, yR⟩ => by\n    rw [birthday_def, nadd_def]\n    simp only [birthday_add, lsub_sum, mk_add_move_left_inl, move_left_mk, mk_add_move_left_inr, mk_add_move_right_inl,\n      move_right_mk, mk_add_move_right_inr]\n    rw [max_max_max_comm]\n    congr <;> apply le_antisymm\n    any_goals\n      exact\n        max_le_iff.2\n          ⟨lsub_le_iff.2 fun i => lt_blsub _ _ (birthday_move_left_lt i),\n            lsub_le_iff.2 fun i => lt_blsub _ _ (birthday_move_right_lt i)⟩\n    all_goals\n      apply blsub_le_iff.2 fun i hi => _\n      rcases lt_birthday_iff.1 hi with (⟨j, hj⟩ | ⟨j, hj⟩)\n    · exact lt_max_of_lt_left ((nadd_le_nadd_right hj _).trans_lt (lt_lsub _ _))\n    · exact lt_max_of_lt_right ((nadd_le_nadd_right hj _).trans_lt (lt_lsub _ _))\n    · exact lt_max_of_lt_left ((nadd_le_nadd_left hj _).trans_lt (lt_lsub _ _))\n    · exact lt_max_of_lt_right ((nadd_le_nadd_left hj _).trans_lt (lt_lsub _ _))decreasing_by pgame_wf_tac\n#align birthday_add birthday_add\n\n"}

@@ -1,0 +1,110 @@
+{"trans_apply":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃* » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃* » -/\n@[simp, to_additive]\ntheorem trans_apply (e₁ : «expr ≃* » M N) (e₂ : «expr ≃* » N P) (m : M) : e₁.trans e₂ m = e₂ (e₁ m) :=\n  rfl\n#align trans_apply trans_apply\n\n",
+ "to_monoid_hom_injective":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃* » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →* » -/\n@[to_additive]\ntheorem to_monoid_hom_injective {M N} [mul_one_class M] [mul_one_class N] :\n    function.injective (toMonoidHom : «expr ≃* » M N → «expr →* » M N) := fun f g h =>\n  MulEquiv.ext (MonoidHom.ext_iff.1 h)\n#align to_monoid_hom_injective to_monoid_hom_injective\n\n",
+ "to_fun_eq_coe":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃* » -/\n@[simp, to_additive]\ntheorem to_fun_eq_coe {f : «expr ≃* » M N} : f.to_fun = f :=\n  rfl\n#align to_fun_eq_coe to_fun_eq_coe\n\n",
+ "to_equiv_symm":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃* » -/\n-- we don't hyperlink the note in the additive version, since that breaks syntax highlighting\n-- in the whole file.\n@[simp, to_additive]\ntheorem to_equiv_symm (f : «expr ≃* » M N) : f.symm.to_equiv = f.to_equiv.symm :=\n  rfl\n#align to_equiv_symm to_equiv_symm\n\n",
+ "to_equiv_mk":
+ "@[simp, to_additive]\ntheorem to_equiv_mk (f : M → N) (g : N → M) (h₁ h₂ h₃) : (mk f g h₁ h₂ h₃).to_equiv = ⟨f, g, h₁, h₂⟩ :=\n  rfl\n#align to_equiv_mk to_equiv_mk\n\n",
+ "to_equiv_eq_coe":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃* » -/\n@[simp, to_additive]\ntheorem to_equiv_eq_coe (f : «expr ≃* » M N) : f.to_equiv = f :=\n  rfl\n#align to_equiv_eq_coe to_equiv_eq_coe\n\n",
+ "symm_trans_self":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃* » -/\n@[simp, to_additive]\ntheorem symm_trans_self (e : «expr ≃* » M N) : e.symm.trans e = refl N :=\n  fun_like.ext _ _ e.apply_symm_apply\n#align symm_trans_self symm_trans_self\n\n",
+ "symm_trans_apply":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃* » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃* » -/\n@[simp, to_additive]\ntheorem symm_trans_apply (e₁ : «expr ≃* » M N) (e₂ : «expr ≃* » N P) (p : P) :\n    (e₁.trans e₂).symm p = e₁.symm (e₂.symm p) :=\n  rfl\n#align symm_trans_apply symm_trans_apply\n\n",
+ "symm_symm":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃* » -/\n@[simp, to_additive]\ntheorem symm_symm : ∀ f : «expr ≃* » M N, f.symm.symm = f\n  | ⟨f, g, h₁, h₂, h₃⟩ => rfl\n#align symm_symm symm_symm\n\n",
+ "symm_mk":
+ "@[simp, to_additive]\ntheorem symm_mk (f : M → N) (g h₁ h₂ h₃) :\n    (mul_equiv.mk f g h₁ h₂ h₃).symm =\n      { (mul_equiv.mk f g h₁ h₂ h₃).symm with\n        to_fun := g\n        inv_fun := f } :=\n  rfl\n#align symm_mk symm_mk\n\n",
+ "symm_comp_self":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃* » -/\n@[simp, to_additive]\ntheorem symm_comp_self (e : «expr ≃* » M N) : e.symm ∘ e = id :=\n  funext e.symm_apply_apply\n#align symm_comp_self symm_comp_self\n\n",
+ "symm_comp_eq":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃* » -/\n@[to_additive]\ntheorem symm_comp_eq {α : Type _} (e : «expr ≃* » M N) (f : α → M) (g : α → N) : e.symm ∘ g = f ↔ g = e ∘ f :=\n  e.to_equiv.symm_comp_eq f g\n#align symm_comp_eq symm_comp_eq\n\n",
+ "symm_bijective":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃* » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃* » -/\n@[to_additive]\ntheorem symm_bijective : function.bijective (symm : «expr ≃* » M N → «expr ≃* » N M) :=\n  Equiv.bijective ⟨symm, symm, symm_symm, symm_symm⟩\n#align symm_bijective symm_bijective\n\n",
+ "symm_apply_eq":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃* » -/\n@[to_additive]\ntheorem symm_apply_eq (e : «expr ≃* » M N) {x y} : e.symm x = y ↔ x = e y :=\n  e.to_equiv.symm_apply_eq\n#align symm_apply_eq symm_apply_eq\n\n",
+ "symm_apply_apply":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃* » -/\n/-- `e.symm` is a left inverse of `e`, written as `e.symm (e y) = y`. -/\n@[simp, to_additive \"`e.symm` is a left inverse of `e`, written as `e.symm (e y) = y`.\"]\ntheorem symm_apply_apply (e : «expr ≃* » M N) (x : M) : e.symm (e x) = x :=\n  e.to_equiv.symm_apply_apply x\n#align symm_apply_apply symm_apply_apply\n\n",
+ "surjective":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃* » -/\n@[to_additive]\nprotected theorem surjective (e : «expr ≃* » M N) : function.surjective e :=\n  equiv_like.surjective e\n#align surjective surjective\n\n",
+ "self_trans_symm":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃* » -/\n@[simp, to_additive]\ntheorem self_trans_symm (e : «expr ≃* » M N) : e.trans e.symm = refl M :=\n  fun_like.ext _ _ e.symm_apply_apply\n#align self_trans_symm self_trans_symm\n\n",
+ "self_comp_symm":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃* » -/\n@[simp, to_additive]\ntheorem self_comp_symm (e : «expr ≃* » M N) : e ∘ e.symm = id :=\n  funext e.apply_symm_apply\n#align self_comp_symm self_comp_symm\n\n",
+ "refl_symm":
+ "@[simp, to_additive]\ntheorem refl_symm : (refl M).symm = refl M :=\n  rfl\n#align refl_symm refl_symm\n\n",
+ "refl_apply":
+ "@[simp, to_additive]\ntheorem refl_apply (m : M) : refl M m = m :=\n  rfl\n#align refl_apply refl_apply\n\n",
+ "of_bijective_apply_symm_apply":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →* » -/\n@[simp]\ntheorem of_bijective_apply_symm_apply {M N} [mul_one_class M] [mul_one_class N] {n : N} (f : «expr →* » M N)\n    (hf : function.bijective f) : f ((Equiv.ofBijective f hf).symm n) = n :=\n  (MulEquiv.ofBijective f hf).apply_symm_apply n\n#align of_bijective_apply_symm_apply of_bijective_apply_symm_apply\n\n",
+ "mk_coe'":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃* » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃* » -/\n@[simp, to_additive]\ntheorem mk_coe' (e : «expr ≃* » M N) (f h₁ h₂ h₃) : (mul_equiv.mk f («expr⇑ » e) h₁ h₂ h₃ : «expr ≃* » N M) = e.symm :=\n  symm_bijective.injective <| ext fun x => rfl\n#align mk_coe' mk_coe'\n\n",
+ "mk_coe":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃* » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃* » -/\n@[simp, to_additive]\ntheorem mk_coe (e : «expr ≃* » M N) (e' h₁ h₂ h₃) : (⟨e, e', h₁, h₂, h₃⟩ : «expr ≃* » M N) = e :=\n  ext fun _ => rfl\n#align mk_coe mk_coe\n\n",
+ "map_one":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃* » -/\n#print map_one /-\n/-- A multiplicative isomorphism of monoids sends `1` to `1` (and is hence a monoid isomorphism). -/\n@[to_additive\n      \"An additive isomorphism of additive monoids sends `0` to `0`\\n(and is hence an additive monoid isomorphism).\"]\nprotected theorem map_one {M N} [mul_one_class M] [mul_one_class N] (h : «expr ≃* » M N) : h 1 = 1 :=\n  map_one h\n#align map_one map_one\n-/\n\n",
+ "map_ne_one_iff":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃* » -/\n#print map_ne_one_iff /-\n@[to_additive]\ntheorem map_ne_one_iff {M N} [mul_one_class M] [mul_one_class N] (h : «expr ≃* » M N) {x : M} : h x ≠ 1 ↔ x ≠ 1 :=\n  MulEquivClass.map_ne_one_iff h\n#align map_ne_one_iff map_ne_one_iff\n-/\n\n",
+ "map_mul":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃* » -/\n#print map_mul /-\n/-- A multiplicative isomorphism preserves multiplication. -/\n@[to_additive \"An additive isomorphism preserves addition.\"]\nprotected theorem map_mul (f : «expr ≃* » M N) : ∀ x y, f (x * y) = f x * f y :=\n  map_mul f\n#align map_mul map_mul\n-/\n\n",
+ "map_inv":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃* » -/\n#print map_inv /-\n/-- A multiplicative equivalence of groups preserves inversion. -/\n@[to_additive \"An additive equivalence of additive groups preserves negation.\"]\nprotected theorem map_inv [group G] [division_monoid H] (h : «expr ≃* » G H) (x : G) : h x⁻¹ = (h x)⁻¹ :=\n  map_inv h x\n#align map_inv map_inv\n-/\n\n",
+ "map_eq_one_iff":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃* » -/\n#print map_eq_one_iff /-\n@[to_additive]\nprotected theorem map_eq_one_iff {M N} [mul_one_class M] [mul_one_class N] (h : «expr ≃* » M N) {x : M} :\n    h x = 1 ↔ x = 1 :=\n  MulEquivClass.map_eq_one_iff h\n#align map_eq_one_iff map_eq_one_iff\n-/\n\n",
+ "map_div":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃* » -/\n#print map_div /-\n/-- A multiplicative equivalence of groups preserves division. -/\n@[to_additive \"An additive equivalence of additive groups preserves subtractions.\"]\nprotected theorem map_div [group G] [division_monoid H] (h : «expr ≃* » G H) (x y : G) : h (x / y) = h x / h y :=\n  map_div h x y\n#align map_div map_div\n-/\n\n",
+ "inv_symm":
+ "@[simp, to_additive]\ntheorem inv_symm : (Equiv.inv G).symm = Equiv.inv G :=\n  rfl\n#align inv_symm inv_symm\n\n",
+ "inv_fun_eq_symm":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃* » -/\n@[simp, to_additive]\ntheorem inv_fun_eq_symm {f : «expr ≃* » M N} : f.inv_fun = f.symm :=\n  rfl\n#align inv_fun_eq_symm inv_fun_eq_symm\n\n",
+ "injective":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃* » -/\n@[to_additive]\nprotected theorem injective (e : «expr ≃* » M N) : function.injective e :=\n  equiv_like.injective e\n#align injective injective\n\n",
+ "ext_iff":
+ "@[to_additive]\ntheorem ext_iff {f g : MulEquiv M N} : f = g ↔ ∀ x, f x = g x :=\n  fun_like.ext_iff\n#align ext_iff ext_iff\n\n",
+ "ext":
+ "/-- Two multiplicative isomorphisms agree if they are defined by the\n    same underlying function. -/\n@[ext, to_additive \"Two additive isomorphisms agree if they are defined by the same underlying function.\"]\ntheorem ext {f g : MulEquiv M N} (h : ∀ x, f x = g x) : f = g :=\n  fun_like.ext f g h\n#align ext ext\n\n",
+ "eq_symm_comp":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃* » -/\n@[to_additive]\ntheorem eq_symm_comp {α : Type _} (e : «expr ≃* » M N) (f : α → M) (g : α → N) : f = e.symm ∘ g ↔ e ∘ f = g :=\n  e.to_equiv.eq_symm_comp f g\n#align eq_symm_comp eq_symm_comp\n\n",
+ "eq_symm_apply":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃* » -/\n@[to_additive]\ntheorem eq_symm_apply (e : «expr ≃* » M N) {x y} : y = e.symm x ↔ e y = x :=\n  e.to_equiv.eq_symm_apply\n#align eq_symm_apply eq_symm_apply\n\n",
+ "eq_comp_symm":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃* » -/\n@[to_additive]\ntheorem eq_comp_symm {α : Type _} (e : «expr ≃* » M N) (f : N → α) (g : M → α) : f = g ∘ e.symm ↔ f ∘ e = g :=\n  e.to_equiv.eq_comp_symm f g\n#align eq_comp_symm eq_comp_symm\n\n",
+ "congr_fun":
+ "#print congr_fun /-\n@[to_additive]\nprotected theorem congr_fun {f g : MulEquiv M N} (h : f = g) (x : M) : f x = g x :=\n  fun_like.congr_fun h x\n#align congr_fun congr_fun\n-/\n\n",
+ "congr_arg":
+ "#print congr_arg /-\n@[to_additive]\nprotected theorem congr_arg {f : MulEquiv M N} {x x' : M} : x = x' → f x = f x' :=\n  fun_like.congr_arg f\n#align congr_arg congr_arg\n-/\n\n",
+ "comp_symm_eq":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃* » -/\n@[to_additive]\ntheorem comp_symm_eq {α : Type _} (e : «expr ≃* » M N) (f : N → α) (g : M → α) : g ∘ e.symm = f ↔ g = f ∘ e :=\n  e.to_equiv.comp_symm_eq f g\n#align comp_symm_eq comp_symm_eq\n\n",
+ "coe_trans":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃* » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃* » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n@[simp, to_additive]\ntheorem coe_trans (e₁ : «expr ≃* » M N) (e₂ : «expr ≃* » N P) : «expr⇑ » (e₁.trans e₂) = e₂ ∘ e₁ :=\n  rfl\n#align coe_trans coe_trans\n\n",
+ "coe_to_mul_hom":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃* » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n@[simp, to_additive]\ntheorem coe_to_mul_hom {f : «expr ≃* » M N} : «expr⇑ » f.to_mul_hom = f :=\n  rfl\n#align coe_to_mul_hom coe_to_mul_hom\n\n",
+ "coe_to_monoid_hom":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃* » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n@[simp, to_additive]\ntheorem coe_to_monoid_hom {M N} [mul_one_class M] [mul_one_class N] (e : «expr ≃* » M N) :\n    «expr⇑ » e.to_monoid_hom = e :=\n  rfl\n#align coe_to_monoid_hom coe_to_monoid_hom\n\n",
+ "coe_to_equiv":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃* » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ » -/\n@[simp, to_additive]\ntheorem coe_to_equiv {f : «expr ≃* » M N} : «expr⇑ » (f : «expr ≃ » M N) = f :=\n  rfl\n#align coe_to_equiv coe_to_equiv\n\n",
+ "coe_refl":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n@[simp, to_additive]\ntheorem coe_refl : «expr⇑ » (refl M) = id :=\n  rfl\n#align coe_refl coe_refl\n\n",
+ "coe_monoid_hom_trans":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃* » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃* » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →* » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →* » -/\n@[to_additive, simp]\ntheorem coe_monoid_hom_trans {M N P} [mul_one_class M] [mul_one_class N] [mul_one_class P] (e₁ : «expr ≃* » M N)\n    (e₂ : «expr ≃* » N P) : (e₁.trans e₂ : «expr →* » M P) = (e₂ : «expr →* » N P).comp ↑e₁ :=\n  rfl\n#align coe_monoid_hom_trans coe_monoid_hom_trans\n\n",
+ "coe_monoid_hom_refl":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →* » -/\n@[to_additive, simp]\ntheorem coe_monoid_hom_refl {M} [mul_one_class M] : (refl M : «expr →* » M M) = MonoidHom.id M :=\n  rfl\n#align coe_monoid_hom_refl coe_monoid_hom_refl\n\n",
+ "coe_mk":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n@[simp, to_additive]\ntheorem coe_mk (f : M → N) (g h₁ h₂ h₃) : «expr⇑ » (mul_equiv.mk f g h₁ h₂ h₃) = f :=\n  rfl\n#align coe_mk coe_mk\n\n",
+ "bijective":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃* » -/\n@[to_additive]\nprotected theorem bijective (e : «expr ≃* » M N) : function.bijective e :=\n  equiv_like.bijective e\n#align bijective bijective\n\n",
+ "apply_symm_apply":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃* » -/\n/-- `e.symm` is a right inverse of `e`, written as `e (e.symm y) = y`. -/\n@[simp, to_additive \"`e.symm` is a right inverse of `e`, written as `e (e.symm y) = y`.\"]\ntheorem apply_symm_apply (e : «expr ≃* » M N) (y : N) : e (e.symm y) = y :=\n  e.to_equiv.apply_symm_apply y\n#align apply_symm_apply apply_symm_apply\n\n",
+ "apply_eq_iff_symm_apply":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃* » -/\n@[to_additive]\ntheorem apply_eq_iff_symm_apply (e : «expr ≃* » M N) {x : M} {y : N} : e x = y ↔ x = e.symm y :=\n  e.to_equiv.apply_eq_iff_eq_symm_apply\n#align apply_eq_iff_symm_apply apply_eq_iff_symm_apply\n\n",
+ "apply_eq_iff_eq":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃* » -/\n@[simp, to_additive]\ntheorem apply_eq_iff_eq (e : «expr ≃* » M N) {x y : M} : e x = e y ↔ x = y :=\n  e.injective.eq_iff\n#align apply_eq_iff_eq apply_eq_iff_eq\n\n",
+ "Pi_congr_right_trans":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃* » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃* » -/\n@[simp, to_additive]\ntheorem Pi_congr_right_trans {η : Type _} {Ms Ns Ps : η → Type _} [∀ j, Mul (Ms j)] [∀ j, Mul (Ns j)] [∀ j, Mul (Ps j)]\n    (es : ∀ j, «expr ≃* » (Ms j) (Ns j)) (fs : ∀ j, «expr ≃* » (Ns j) (Ps j)) :\n    (piCongrRight es).trans (piCongrRight fs) = Pi_congr_right fun i => (es i).trans (fs i) :=\n  rfl\n#align Pi_congr_right_trans Pi_congr_right_trans\n\n",
+ "Pi_congr_right_symm":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃* » -/\n@[simp, to_additive]\ntheorem Pi_congr_right_symm {η : Type _} {Ms Ns : η → Type _} [∀ j, Mul (Ms j)] [∀ j, Mul (Ns j)]\n    (es : ∀ j, «expr ≃* » (Ms j) (Ns j)) : (piCongrRight es).symm = Pi_congr_right fun i => (es i).symm :=\n  rfl\n#align Pi_congr_right_symm Pi_congr_right_symm\n\n",
+ "Pi_congr_right_refl":
+ "@[simp, to_additive]\ntheorem Pi_congr_right_refl {η : Type _} {Ms : η → Type _} [∀ j, Mul (Ms j)] :\n    (piCongrRight fun j => MulEquiv.refl (Ms j)) = MulEquiv.refl _ :=\n  rfl\n#align Pi_congr_right_refl Pi_congr_right_refl\n\n"}

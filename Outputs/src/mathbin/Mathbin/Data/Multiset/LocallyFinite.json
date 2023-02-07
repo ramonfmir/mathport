@@ -1,0 +1,110 @@
+{"right_not_mem_Ioo":
+ "@[simp]\ntheorem right_not_mem_Ioo : b ∉ Ioo a b :=\n  finset.right_not_mem_Ioo\n#align right_not_mem_Ioo right_not_mem_Ioo\n\n",
+ "right_not_mem_Ico":
+ "@[simp]\ntheorem right_not_mem_Ico : b ∉ Ico a b :=\n  finset.right_not_mem_Ico\n#align right_not_mem_Ico right_not_mem_Ico\n\n",
+ "right_mem_Ioc":
+ "theorem right_mem_Ioc : b ∈ Ioc a b ↔ a < b :=\n  finset.right_mem_Ioc\n#align right_mem_Ioc right_mem_Ioc\n\n",
+ "right_mem_Icc":
+ "theorem right_mem_Icc : b ∈ Icc a b ↔ a ≤ b :=\n  finset.right_mem_Icc\n#align right_mem_Icc right_mem_Icc\n\n",
+ "nodup_Ioo":
+ "theorem nodup_Ioo : (Ioo a b).nodup :=\n  finset.nodup _\n#align nodup_Ioo nodup_Ioo\n\n",
+ "nodup_Ioc":
+ "theorem nodup_Ioc : (Ioc a b).nodup :=\n  finset.nodup _\n#align nodup_Ioc nodup_Ioc\n\n",
+ "nodup_Ico":
+ "theorem nodup_Ico : (Ico a b).nodup :=\n  finset.nodup _\n#align nodup_Ico nodup_Ico\n\n",
+ "nodup_Icc":
+ "/-\nCopyright (c) 2021 Yaël Dillies. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Yaël Dillies\n-/\ntheorem nodup_Icc : (Icc a b).nodup :=\n  finset.nodup _\n#align nodup_Icc nodup_Icc\n\n",
+ "map_add_right_Ioo":
+ "theorem map_add_right_Ioo (a b c : α) : ((Ioo a b).map fun x => x + c) = Ioo (a + c) (b + c) :=\n  by\n  simp_rw [add_comm _ c]\n  exact map_add_left_Ioo _ _ _\n#align map_add_right_Ioo map_add_right_Ioo\n\n",
+ "map_add_right_Ioc":
+ "theorem map_add_right_Ioc (a b c : α) : ((Ioc a b).map fun x => x + c) = Ioc (a + c) (b + c) :=\n  by\n  simp_rw [add_comm _ c]\n  exact map_add_left_Ioc _ _ _\n#align map_add_right_Ioc map_add_right_Ioc\n\n",
+ "map_add_right_Ico":
+ "theorem map_add_right_Ico (a b c : α) : ((Ico a b).map fun x => x + c) = Ico (a + c) (b + c) :=\n  by\n  simp_rw [add_comm _ c]\n  exact map_add_left_Ico _ _ _\n#align map_add_right_Ico map_add_right_Ico\n\n",
+ "map_add_right_Icc":
+ "theorem map_add_right_Icc (a b c : α) : ((Icc a b).map fun x => x + c) = Icc (a + c) (b + c) :=\n  by\n  simp_rw [add_comm _ c]\n  exact map_add_left_Icc _ _ _\n#align map_add_right_Icc map_add_right_Icc\n\n",
+ "map_add_left_Ioo":
+ "theorem map_add_left_Ioo (a b c : α) : (Ioo a b).map ((· + ·) c) = Ioo (c + a) (c + b) := by\n  classical rw [Ioo, Ioo, ← finset.image_add_left_Ioo, Finset.image_val,\n      ((finset.nodup _).map <| add_right_injective c).dedup]\n#align map_add_left_Ioo map_add_left_Ioo\n\n",
+ "map_add_left_Ioc":
+ "theorem map_add_left_Ioc (a b c : α) : (Ioc a b).map ((· + ·) c) = Ioc (c + a) (c + b) := by\n  classical rw [Ioc, Ioc, ← finset.image_add_left_Ioc, Finset.image_val,\n      ((finset.nodup _).map <| add_right_injective c).dedup]\n#align map_add_left_Ioc map_add_left_Ioc\n\n",
+ "map_add_left_Ico":
+ "theorem map_add_left_Ico (a b c : α) : (Ico a b).map ((· + ·) c) = Ico (c + a) (c + b) := by\n  classical rw [Ico, Ico, ← finset.image_add_left_Ico, Finset.image_val,\n      ((finset.nodup _).map <| add_right_injective c).dedup]\n#align map_add_left_Ico map_add_left_Ico\n\n",
+ "map_add_left_Icc":
+ "theorem map_add_left_Icc (a b c : α) : (Icc a b).map ((· + ·) c) = Icc (c + a) (c + b) := by\n  classical rw [Icc, Icc, ← finset.image_add_left_Icc, Finset.image_val,\n      ((finset.nodup _).map <| add_right_injective c).dedup]\n#align map_add_left_Icc map_add_left_Icc\n\n",
+ "left_not_mem_Ioo":
+ "@[simp]\ntheorem left_not_mem_Ioo : a ∉ Ioo a b :=\n  finset.left_not_mem_Ioo\n#align left_not_mem_Ioo left_not_mem_Ioo\n\n",
+ "left_not_mem_Ioc":
+ "@[simp]\ntheorem left_not_mem_Ioc : a ∉ Ioc a b :=\n  finset.left_not_mem_Ioc\n#align left_not_mem_Ioc left_not_mem_Ioc\n\n",
+ "left_mem_Ico":
+ "theorem left_mem_Ico : a ∈ Ico a b ↔ a < b :=\n  finset.left_mem_Ico\n#align left_mem_Ico left_mem_Ico\n\n",
+ "left_mem_Icc":
+ "theorem left_mem_Icc : a ∈ Icc a b ↔ a ≤ b :=\n  finset.left_mem_Icc\n#align left_mem_Icc left_mem_Icc\n\n",
+ "card_Ioo_eq_card_Ico_sub_one":
+ "theorem card_Ioo_eq_card_Ico_sub_one (a b : α) : (Ioo a b).card = (Ico a b).card - 1 :=\n  finset.card_Ioo_eq_card_Ico_sub_one _ _\n#align card_Ioo_eq_card_Ico_sub_one card_Ioo_eq_card_Ico_sub_one\n\n",
+ "card_Ioo_eq_card_Icc_sub_two":
+ "theorem card_Ioo_eq_card_Icc_sub_two (a b : α) : (Ioo a b).card = (Icc a b).card - 2 :=\n  finset.card_Ioo_eq_card_Icc_sub_two _ _\n#align card_Ioo_eq_card_Icc_sub_two card_Ioo_eq_card_Icc_sub_two\n\n",
+ "card_Ioc_eq_card_Icc_sub_one":
+ "theorem card_Ioc_eq_card_Icc_sub_one (a b : α) : (Ioc a b).card = (Icc a b).card - 1 :=\n  finset.card_Ioc_eq_card_Icc_sub_one _ _\n#align card_Ioc_eq_card_Icc_sub_one card_Ioc_eq_card_Icc_sub_one\n\n",
+ "card_Ico_eq_card_Icc_sub_one":
+ "theorem card_Ico_eq_card_Icc_sub_one (a b : α) : (Ico a b).card = (Icc a b).card - 1 :=\n  finset.card_Ico_eq_card_Icc_sub_one _ _\n#align card_Ico_eq_card_Icc_sub_one card_Ico_eq_card_Icc_sub_one\n\n",
+ "Ioo_self":
+ "@[simp]\ntheorem Ioo_self : Ioo a a = 0 := by rw [Ioo, finset.Ioo_self, Finset.empty_val]\n#align Ioo_self Ioo_self\n\n",
+ "Ioo_eq_zero_of_le":
+ "@[simp]\ntheorem Ioo_eq_zero_of_le (h : b ≤ a) : Ioo a b = 0 :=\n  Ioo_eq_zero h.not_lt\n#align Ioo_eq_zero_of_le Ioo_eq_zero_of_le\n\n",
+ "Ioo_eq_zero_iff":
+ "@[simp]\ntheorem Ioo_eq_zero_iff [DenselyOrdered α] : Ioo a b = 0 ↔ ¬a < b := by\n  rw [Ioo, Finset.val_eq_zero, finset.Ioo_eq_empty_iff]\n#align Ioo_eq_zero_iff Ioo_eq_zero_iff\n\n",
+ "Ioo_eq_zero":
+ "@[simp]\ntheorem Ioo_eq_zero (h : ¬a < b) : Ioo a b = 0 :=\n  eq_zero_iff_forall_not_mem.2 fun x hx => h ((mem_Ioo.1 hx).1.trans (mem_Ioo.1 hx).2)\n#align Ioo_eq_zero Ioo_eq_zero\n\n",
+ "Ioo_cons_left":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ::ₘ » -/\ntheorem Ioo_cons_left (h : a < b) : «expr ::ₘ » a (Ioo a b) = Ico a b := by\n  classical\n    rw [Ioo, ← Finset.insert_val_of_not_mem left_not_mem_Ioo, finset.Ioo_insert_left h]\n    rfl\n#align Ioo_cons_left Ioo_cons_left\n\n",
+ "Ioc_self":
+ "@[simp]\ntheorem Ioc_self : Ioc a a = 0 := by rw [Ioc, finset.Ioc_self, Finset.empty_val]\n#align Ioc_self Ioc_self\n\n",
+ "Ioc_eq_zero_of_le":
+ "@[simp]\ntheorem Ioc_eq_zero_of_le (h : b ≤ a) : Ioc a b = 0 :=\n  Ioc_eq_zero h.not_lt\n#align Ioc_eq_zero_of_le Ioc_eq_zero_of_le\n\n",
+ "Ioc_eq_zero_iff":
+ "@[simp]\ntheorem Ioc_eq_zero_iff : Ioc a b = 0 ↔ ¬a < b := by rw [Ioc, Finset.val_eq_zero, finset.Ioc_eq_empty_iff]\n#align Ioc_eq_zero_iff Ioc_eq_zero_iff\n\n",
+ "Ico_subset_Ico_iff":
+ "theorem Ico_subset_Ico_iff {a₁ b₁ a₂ b₂ : α} (h : a₁ < b₁) : Ico a₁ b₁ ⊆ Ico a₂ b₂ ↔ a₂ ≤ a₁ ∧ b₁ ≤ b₂ :=\n  finset.Ico_subset_Ico_iff h\n#align Ico_subset_Ico_iff Ico_subset_Ico_iff\n\n",
+ "Ico_sub_Ico_right":
+ "@[simp]\ntheorem Ico_sub_Ico_right (a b c : α) : Ico a b - Ico c b = Ico a (min b c) := by\n  rw [Ico, Ico, Ico, ← Finset.sdiff_val, finset.Ico_diff_Ico_right]\n#align Ico_sub_Ico_right Ico_sub_Ico_right\n\n",
+ "Ico_sub_Ico_left":
+ "@[simp]\ntheorem Ico_sub_Ico_left (a b c : α) : Ico a b - Ico a c = Ico (max a c) b := by\n  rw [Ico, Ico, Ico, ← Finset.sdiff_val, finset.Ico_diff_Ico_left]\n#align Ico_sub_Ico_left Ico_sub_Ico_left\n\n",
+ "Ico_self":
+ "@[simp]\ntheorem Ico_self : Ico a a = 0 := by rw [Ico, finset.Ico_self, Finset.empty_val]\n#align Ico_self Ico_self\n\n",
+ "Ico_inter_Ico_of_le":
+ "@[simp]\ntheorem Ico_inter_Ico_of_le [decidable_eq α] {a b c d : α} (h : b ≤ c) : Ico a b ∩ Ico c d = 0 :=\n  Multiset.inter_eq_zero_iff_disjoint.2 <| Ico_disjoint_Ico h\n#align Ico_inter_Ico_of_le Ico_inter_Ico_of_le\n\n",
+ "Ico_inter_Ico":
+ "theorem Ico_inter_Ico : Ico a b ∩ Ico c d = Ico (max a c) (min b d) := by\n  rw [Ico, Ico, Ico, ← Finset.inter_val, finset.Ico_inter_Ico]\n#align Ico_inter_Ico Ico_inter_Ico\n\n",
+ "Ico_filter_lt_of_right_le":
+ "theorem Ico_filter_lt_of_right_le [decidable_pred (· < c)] (hbc : b ≤ c) :\n    ((Ico a b).filter fun x => x < c) = Ico a b := by\n  rw [Ico, ← Finset.filter_val, finset.Ico_filter_lt_of_right_le hbc]\n#align Ico_filter_lt_of_right_le Ico_filter_lt_of_right_le\n\n",
+ "Ico_filter_lt_of_le_right":
+ "theorem Ico_filter_lt_of_le_right [decidable_pred (· < c)] (hcb : c ≤ b) :\n    ((Ico a b).filter fun x => x < c) = Ico a c :=\n  by\n  rw [Ico, ← Finset.filter_val, finset.Ico_filter_lt_of_le_right hcb]\n  rfl\n#align Ico_filter_lt_of_le_right Ico_filter_lt_of_le_right\n\n",
+ "Ico_filter_lt_of_le_left":
+ "theorem Ico_filter_lt_of_le_left [decidable_pred (· < c)] (hca : c ≤ a) : ((Ico a b).filter fun x => x < c) = ∅ :=\n  by\n  rw [Ico, ← Finset.filter_val, finset.Ico_filter_lt_of_le_left hca]\n  rfl\n#align Ico_filter_lt_of_le_left Ico_filter_lt_of_le_left\n\n",
+ "Ico_filter_lt":
+ "@[simp]\ntheorem Ico_filter_lt (a b c : α) : ((Ico a b).filter fun x => x < c) = Ico a (min b c) := by\n  rw [Ico, Ico, ← Finset.filter_val, finset.Ico_filter_lt]\n#align Ico_filter_lt Ico_filter_lt\n\n",
+ "Ico_filter_le_of_right_le":
+ "theorem Ico_filter_le_of_right_le [decidable_pred ((· ≤ ·) b)] : ((Ico a b).filter fun x => b ≤ x) = ∅ :=\n  by\n  rw [Ico, ← Finset.filter_val, finset.Ico_filter_le_of_right_le]\n  rfl\n#align Ico_filter_le_of_right_le Ico_filter_le_of_right_le\n\n",
+ "Ico_filter_le_of_left_le":
+ "theorem Ico_filter_le_of_left_le [decidable_pred ((· ≤ ·) c)] (hac : a ≤ c) :\n    ((Ico a b).filter fun x => c ≤ x) = Ico c b :=\n  by\n  rw [Ico, ← Finset.filter_val, finset.Ico_filter_le_of_left_le hac]\n  rfl\n#align Ico_filter_le_of_left_le Ico_filter_le_of_left_le\n\n",
+ "Ico_filter_le_of_le_left":
+ "theorem Ico_filter_le_of_le_left [decidable_pred ((· ≤ ·) c)] (hca : c ≤ a) :\n    ((Ico a b).filter fun x => c ≤ x) = Ico a b := by rw [Ico, ← Finset.filter_val, finset.Ico_filter_le_of_le_left hca]\n#align Ico_filter_le_of_le_left Ico_filter_le_of_le_left\n\n",
+ "Ico_filter_le_left":
+ "theorem Ico_filter_le_left {a b : α} [decidable_pred (· ≤ a)] (hab : a < b) : ((Ico a b).filter fun x => x ≤ a) = {a} :=\n  by\n  rw [Ico, ← Finset.filter_val, finset.Ico_filter_le_left hab]\n  rfl\n#align Ico_filter_le_left Ico_filter_le_left\n\n",
+ "Ico_filter_le":
+ "@[simp]\ntheorem Ico_filter_le (a b c : α) : ((Ico a b).filter fun x => c ≤ x) = Ico (max a c) b := by\n  rw [Ico, Ico, ← Finset.filter_val, finset.Ico_filter_le]\n#align Ico_filter_le Ico_filter_le\n\n",
+ "Ico_eq_zero_of_le":
+ "@[simp]\ntheorem Ico_eq_zero_of_le (h : b ≤ a) : Ico a b = 0 :=\n  Ico_eq_zero h.not_lt\n#align Ico_eq_zero_of_le Ico_eq_zero_of_le\n\n",
+ "Ico_eq_zero_iff":
+ "@[simp]\ntheorem Ico_eq_zero_iff : Ico a b = 0 ↔ ¬a < b := by rw [Ico, Finset.val_eq_zero, finset.Ico_eq_empty_iff]\n#align Ico_eq_zero_iff Ico_eq_zero_iff\n\n",
+ "Ico_disjoint_Ico":
+ "theorem Ico_disjoint_Ico {a b c d : α} (h : b ≤ c) : (Ico a b).disjoint (Ico c d) := fun x hab hbc =>\n  by\n  rw [mem_Ico] at hab hbc\n  exact hab.2.not_le (h.trans hbc.1)\n#align Ico_disjoint_Ico Ico_disjoint_Ico\n\n",
+ "Ico_cons_right":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ::ₘ » -/\ntheorem Ico_cons_right (h : a ≤ b) : «expr ::ₘ » b (Ico a b) = Icc a b := by\n  classical\n    rw [Ico, ← Finset.insert_val_of_not_mem right_not_mem_Ico, finset.Ico_insert_right h]\n    rfl\n#align Ico_cons_right Ico_cons_right\n\n",
+ "Ico_add_Ico_eq_Ico":
+ "theorem Ico_add_Ico_eq_Ico {a b c : α} (hab : a ≤ b) (hbc : b ≤ c) : Ico a b + Ico b c = Ico a c := by\n  rw [add_eq_union_iff_disjoint.2 (Ico_disjoint_Ico le_rfl), Ico, Ico, Ico, ← Finset.union_val,\n    finset.Ico_union_Ico_eq_Ico hab hbc]\n#align Ico_add_Ico_eq_Ico Ico_add_Ico_eq_Ico\n\n",
+ "Icc_self":
+ "@[simp]\ntheorem Icc_self (a : α) : Icc a a = {a} := by rw [Icc, finset.Icc_self, Finset.singleton_val]\n#align Icc_self Icc_self\n\n",
+ "Icc_eq_zero_of_lt":
+ "@[simp]\ntheorem Icc_eq_zero_of_lt (h : b < a) : Icc a b = 0 :=\n  Icc_eq_zero h.not_le\n#align Icc_eq_zero_of_lt Icc_eq_zero_of_lt\n\n",
+ "Icc_eq_zero_iff":
+ "@[simp]\ntheorem Icc_eq_zero_iff : Icc a b = 0 ↔ ¬a ≤ b := by rw [Icc, Finset.val_eq_zero, finset.Icc_eq_empty_iff]\n#align Icc_eq_zero_iff Icc_eq_zero_iff\n\n"}

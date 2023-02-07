@@ -1,0 +1,108 @@
+{"not_of_mem_foldl_arg_aux":
+ "theorem not_of_mem_foldl_arg_aux (hr₀ : irreflexive r) (hr₁ : transitive r) :\n    ∀ {a m : α} {o : option α}, a ∈ l → m ∈ foldl (argAux r) o l → ¬r a m :=\n  by\n  induction' l using List.reverseRecOn with tl a ih\n  · exact fun _ _ _ h => absurd h <| not_mem_nil _\n  intro b m o hb ho\n  rw [foldl_append, foldl_cons, foldl_nil, arg_aux] at ho\n  cases' hf : foldl (arg_aux r) o tl with c\n  · rw [hf] at ho\n    rw [foldl_arg_aux_eq_none] at hf\n    simp_all [hf.1, hf.2, hr₀ _]\n  rw [hf, option.mem_def] at ho\n  dsimp only at ho\n  split_ifs  at ho with hac hac <;> cases' mem_append.1 hb with h h <;> subst ho\n  · exact fun hba => ih h hf (hr₁ hba hac)\n  · simp_all [hr₀ _]\n  · exact ih h hf\n  · simp_all\n#align not_of_mem_foldl_arg_aux not_of_mem_foldl_arg_aux\n\n",
+ "not_lt_of_mem_argmin":
+ "theorem not_lt_of_mem_argmin : a ∈ l → m ∈ argmin f l → ¬f a < f m :=\n  not_of_mem_foldl_argAux _ (fun _ => lt_irrefl _) fun _ _ _ => lt_trans\n#align not_lt_of_mem_argmin not_lt_of_mem_argmin\n\n",
+ "not_lt_of_mem_argmax":
+ "theorem not_lt_of_mem_argmax : a ∈ l → m ∈ argmax f l → ¬f m < f a :=\n  not_of_mem_foldl_argAux _ (fun _ => lt_irrefl _) fun _ _ _ => gt_trans\n#align not_lt_of_mem_argmax not_lt_of_mem_argmax\n\n",
+ "not_lt_minimum_of_mem'":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵈ» -/\ntheorem not_lt_minimum_of_mem' (ha : a ∈ l) : ¬(a : WithTop α) < minimum l :=\n  @not_lt_maximum_of_mem' («expr ᵒᵈ» α) _ _ _ _ ha\n#align not_lt_minimum_of_mem' not_lt_minimum_of_mem'\n\n",
+ "not_lt_maximum_of_mem'":
+ "theorem not_lt_maximum_of_mem' (ha : a ∈ l) : ¬maximum l < (a : WithBot α) :=\n  by\n  cases h : l.maximum\n  · simp_all\n  · simp_rw [WithBot.some_eq_coe, WithBot.coe_lt_coe, not_lt_maximum_of_mem ha h, not_false_iff]\n#align not_lt_maximum_of_mem' not_lt_maximum_of_mem'\n\n",
+ "not_lt_maximum_of_mem":
+ "theorem not_lt_maximum_of_mem : a ∈ l → (maximum l : WithBot α) = m → ¬m < a :=\n  not_lt_of_mem_argmax\n#align not_lt_maximum_of_mem not_lt_maximum_of_mem\n\n",
+ "minimum_singleton":
+ "@[simp]\ntheorem minimum_singleton (a : α) : minimum [a] = a :=\n  rfl\n#align minimum_singleton minimum_singleton\n\n",
+ "minimum_not_lt_of_mem":
+ "theorem minimum_not_lt_of_mem : a ∈ l → (minimum l : WithTop α) = m → ¬a < m :=\n  not_lt_of_mem_argmin\n#align minimum_not_lt_of_mem minimum_not_lt_of_mem\n\n",
+ "minimum_nil":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n@[simp]\ntheorem minimum_nil : minimum ([] : list α) = «expr⊤» :=\n  rfl\n#align minimum_nil minimum_nil\n\n",
+ "minimum_mem":
+ "theorem minimum_mem {l : list α} {m : α} : (minimum l : WithBot α) = m → m ∈ l :=\n  argmin_mem\n#align minimum_mem minimum_mem\n\n",
+ "minimum_le_of_mem":
+ "theorem minimum_le_of_mem : a ∈ l → (minimum l : WithTop α) = m → m ≤ a :=\n  le_of_mem_argmin\n#align minimum_le_of_mem minimum_le_of_mem\n\n",
+ "minimum_eq_none":
+ "@[simp]\ntheorem minimum_eq_none {l : list α} : l.minimum = none ↔ l = [] :=\n  argmin_eq_none\n#align minimum_eq_none minimum_eq_none\n\n",
+ "minimum_eq_coe_iff":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵈ» -/\ntheorem minimum_eq_coe_iff : minimum l = m ↔ m ∈ l ∧ ∀ a ∈ l, m ≤ a :=\n  @maximum_eq_coe_iff («expr ᵒᵈ» α) _ _ _\n#align minimum_eq_coe_iff minimum_eq_coe_iff\n\n",
+ "minimum_cons":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵈ» -/\ntheorem minimum_cons (a : α) (l : list α) : minimum (a :: l) = min a (minimum l) :=\n  @maximum_cons («expr ᵒᵈ» α) _ _ _\n#align minimum_cons minimum_cons\n\n",
+ "minimum_concat":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵈ» -/\ntheorem minimum_concat (a : α) (l : list α) : minimum (l ++ [a]) = min (minimum l) a :=\n  @maximum_concat («expr ᵒᵈ» α) _ _ _\n#align minimum_concat minimum_concat\n\n",
+ "min_le_of_le":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵈ» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\ntheorem min_le_of_le (l : list α) (a : α) {x : α} (hx : x ∈ l) (h : x ≤ a) : l.foldr min («expr⊤») ≤ a :=\n  @le_max_of_le («expr ᵒᵈ» α) _ _ _ _ _ hx h\n#align min_le_of_le min_le_of_le\n\n",
+ "mem_argmin_iff":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵈ» -/\ntheorem mem_argmin_iff :\n    m ∈ argmin f l ↔ m ∈ l ∧ (∀ a ∈ l, f m ≤ f a) ∧ ∀ a ∈ l, f a ≤ f m → l.index_of m ≤ l.index_of a :=\n  @mem_argmax_iff _ («expr ᵒᵈ» β) _ _ _ _ _\n#align mem_argmin_iff mem_argmin_iff\n\n",
+ "mem_argmax_iff":
+ "theorem mem_argmax_iff :\n    m ∈ argmax f l ↔ m ∈ l ∧ (∀ a ∈ l, f a ≤ f m) ∧ ∀ a ∈ l, f m ≤ f a → l.index_of m ≤ l.index_of a :=\n  ⟨fun hm => ⟨argmax_mem hm, fun a ha => le_of_mem_argmax ha hm, fun _ => index_of_argmax hm⟩,\n    by\n    rintro ⟨hml, ham, hma⟩\n    cases' harg : argmax f l with n\n    · simp_all\n    · have :=\n        le_antisymm (hma n (argmax_mem harg) (le_of_mem_argmax hml harg))\n          (index_of_argmax harg hml (ham _ (argmax_mem harg)))\n      rw [(index_of_inj hml (argmax_mem harg)).1 this, option.mem_def]⟩\n#align mem_argmax_iff mem_argmax_iff\n\n",
+ "maximum_singleton":
+ "@[simp]\ntheorem maximum_singleton (a : α) : maximum [a] = a :=\n  rfl\n#align maximum_singleton maximum_singleton\n\n",
+ "maximum_nil":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n@[simp]\ntheorem maximum_nil : maximum ([] : list α) = «expr⊥» :=\n  rfl\n#align maximum_nil maximum_nil\n\n",
+ "maximum_mem":
+ "theorem maximum_mem {l : list α} {m : α} : (maximum l : WithTop α) = m → m ∈ l :=\n  argmax_mem\n#align maximum_mem maximum_mem\n\n",
+ "maximum_eq_none":
+ "@[simp]\ntheorem maximum_eq_none {l : list α} : l.maximum = none ↔ l = [] :=\n  argmax_eq_none\n#align maximum_eq_none maximum_eq_none\n\n",
+ "maximum_eq_coe_iff":
+ "theorem maximum_eq_coe_iff : maximum l = m ↔ m ∈ l ∧ ∀ a ∈ l, a ≤ m :=\n  by\n  unfold_coes\n  simp only [maximum, argmax_eq_some_iff, id]\n  constructor\n  · simp (config := { contextual := true }) only [true_and_iff, forall_true_iff]\n  · simp (config := { contextual := true }) only [true_and_iff, forall_true_iff]\n    intro h a hal hma\n    rw [le_antisymm hma (h.2 a hal)]\n#align maximum_eq_coe_iff maximum_eq_coe_iff\n\n",
+ "maximum_cons":
+ "theorem maximum_cons (a : α) (l : list α) : maximum (a :: l) = max a (maximum l) :=\n  List.reverseRecOn l (by simp [@max_eq_left (WithBot α) _ _ _ bot_le]) fun tl hd ih => by\n    rw [← cons_append, maximum_concat, ih, maximum_concat, max_assoc]\n#align maximum_cons maximum_cons\n\n",
+ "maximum_concat":
+ "theorem maximum_concat (a : α) (l : list α) : maximum (l ++ [a]) = max (maximum l) a :=\n  by\n  simp only [maximum, argmax_concat, id]\n  cases h : argmax id l\n  · exact (max_eq_right bot_le).symm\n  · simp [option.coe_def, max_def_lt]\n#align maximum_concat maximum_concat\n\n",
+ "max_le_of_forall_le":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\ntheorem max_le_of_forall_le (l : list α) (a : α) (h : ∀ x ∈ l, x ≤ a) : l.foldr max («expr⊥») ≤ a :=\n  by\n  induction' l with y l IH\n  · simp\n  · simpa [h y (mem_cons_self _ _)] using IH fun x hx => h x <| mem_cons_of_mem _ hx\n#align max_le_of_forall_le max_le_of_forall_le\n\n",
+ "le_of_mem_argmin":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵈ» -/\ntheorem le_of_mem_argmin : a ∈ l → m ∈ argmin f l → f m ≤ f a :=\n  @le_of_mem_argmax _ («expr ᵒᵈ» β) _ _ _ _ _\n#align le_of_mem_argmin le_of_mem_argmin\n\n",
+ "le_of_mem_argmax":
+ "theorem le_of_mem_argmax : a ∈ l → m ∈ argmax f l → f a ≤ f m := fun ha hm => le_of_not_lt <| not_lt_of_mem_argmax ha hm\n#align le_of_mem_argmax le_of_mem_argmax\n\n",
+ "le_minimum_of_mem'":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵈ» -/\ntheorem le_minimum_of_mem' (ha : a ∈ l) : minimum l ≤ (a : WithTop α) :=\n  @le_maximum_of_mem' («expr ᵒᵈ» α) _ _ _ ha\n#align le_minimum_of_mem' le_minimum_of_mem'\n\n",
+ "le_min_of_forall_le":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵈ» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\ntheorem le_min_of_forall_le (l : list α) (a : α) (h : ∀ x ∈ l, a ≤ x) : a ≤ l.foldr min («expr⊤») :=\n  @max_le_of_forall_le («expr ᵒᵈ» α) _ _ _ _ h\n#align le_min_of_forall_le le_min_of_forall_le\n\n",
+ "le_maximum_of_mem'":
+ "theorem le_maximum_of_mem' (ha : a ∈ l) : (a : WithBot α) ≤ maximum l :=\n  le_of_not_lt <| not_lt_maximum_of_mem' ha\n#align le_maximum_of_mem' le_maximum_of_mem'\n\n",
+ "le_maximum_of_mem":
+ "theorem le_maximum_of_mem : a ∈ l → (maximum l : WithBot α) = m → a ≤ m :=\n  le_of_mem_argmax\n#align le_maximum_of_mem le_maximum_of_mem\n\n",
+ "le_max_of_le":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\ntheorem le_max_of_le {l : list α} {a x : α} (hx : x ∈ l) (h : a ≤ x) : a ≤ l.foldr max («expr⊥») :=\n  by\n  induction' l with y l IH\n  · exact absurd hx (not_mem_nil _)\n  · obtain rfl | hl := hx\n    simp only [foldr, foldr_cons]\n    · exact le_max_of_le_left h\n    · exact le_max_of_le_right (IH hl)\n#align le_max_of_le le_max_of_le\n\n",
+ "index_of_argmin":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵈ» -/\ntheorem index_of_argmin :\n    ∀ {l : list α} {m : α}, m ∈ argmin f l → ∀ {a}, a ∈ l → f a ≤ f m → l.index_of m ≤ l.index_of a :=\n  @index_of_argmax _ («expr ᵒᵈ» β) _ _ _\n#align index_of_argmin index_of_argmin\n\n",
+ "index_of_argmax":
+ "theorem index_of_argmax :\n    ∀ {l : list α} {m : α}, m ∈ argmax f l → ∀ {a}, a ∈ l → f m ≤ f a → l.index_of m ≤ l.index_of a\n  | [], m, _, _, _, _ => by simp\n  | hd :: tl, m, hm, a, ha, ham =>\n    by\n    simp only [index_of_cons, argmax_cons, option.mem_def] at hm⊢\n    cases h : argmax f tl\n    · rw [h] at hm\n      simp_all\n    rw [h] at hm\n    dsimp only at hm\n    obtain rfl | ha := ha <;> split_ifs  at hm <;> subst hm\n    · cases not_le_of_lt ‹_› ‹_›\n    · rw [if_neg, if_neg]\n      exact nat.succ_le_succ (index_of_argmax h ha ham)\n      · exact ne_of_apply_ne f (lt_of_lt_of_le ‹_› ‹_›).ne'\n      · exact ne_of_apply_ne _ ‹f hd < f val›.ne'\n    · rw [if_pos rfl]\n      exact bot_le\n#align index_of_argmax index_of_argmax\n\n",
+ "foldr_min_of_ne_nil":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵈ» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n@[simp]\ntheorem foldr_min_of_ne_nil (h : l ≠ []) : ↑(l.foldr min («expr⊤»)) = l.minimum :=\n  @foldr_max_of_ne_nil («expr ᵒᵈ» α) _ _ _ h\n#align foldr_min_of_ne_nil foldr_min_of_ne_nil\n\n",
+ "foldr_max_of_ne_nil":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n@[simp]\ntheorem foldr_max_of_ne_nil (h : l ≠ []) : ↑(l.foldr max («expr⊥»)) = l.maximum :=\n  by\n  induction' l with hd tl IH\n  · contradiction\n  · rw [maximum_cons, foldr, WithBot.coe_max]\n    by_cases h : tl = []\n    · simp [h]\n    · simp [IH h]\n#align foldr_max_of_ne_nil foldr_max_of_ne_nil\n\n",
+ "foldl_arg_aux_mem":
+ "private theorem foldl_arg_aux_mem (l) : ∀ a m : α, m ∈ foldl (argAux r) (some a) l → m ∈ a :: l :=\n  List.reverseRecOn l (by simp [eq_comm])\n    (by\n      intro tl hd ih a m\n      simp only [foldl_append, foldl_cons, foldl_nil, arg_aux]\n      cases hf : foldl (arg_aux r) (some a) tl\n      · simp (config := { contextual := true })\n      · dsimp only\n        split_ifs\n        · simp (config := { contextual := true })\n        · -- `finish [ih _ _ hf]` closes this goal\n          rcases ih _ _ hf with (rfl | H)\n          · simp only [mem_cons_iff, mem_append, mem_singleton, option.mem_def]\n            tauto\n          · apply fun hm => or.inr (list.mem_append.mpr <| or.inl _)\n            exact option.mem_some_iff.mp hm ▸ H)\n#align foldl_arg_aux_mem foldl_arg_aux_mem\n\n",
+ "foldl_arg_aux_eq_none":
+ "/-\nCopyright (c) 2019 Minchao Wu. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Minchao Wu, Chris Hughes, Mantas Bakšys\n-/\n@[simp]\ntheorem foldl_arg_aux_eq_none : l.foldl (argAux r) o = none ↔ l = [] ∧ o = none :=\n  List.reverseRecOn l (by simp) fun tl hd => by\n    simp [arg_aux] <;> cases foldl (arg_aux r) o tl <;> simp <;> try split_ifs <;> simp\n#align foldl_arg_aux_eq_none foldl_arg_aux_eq_none\n\n",
+ "argmin_singleton":
+ "@[simp]\ntheorem argmin_singleton {f : α → β} {a : α} : argmin f [a] = a :=\n  rfl\n#align argmin_singleton argmin_singleton\n\n",
+ "argmin_nil":
+ "@[simp]\ntheorem argmin_nil (f : α → β) : argmin f [] = none :=\n  rfl\n#align argmin_nil argmin_nil\n\n",
+ "argmin_mem":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵈ» -/\ntheorem argmin_mem : ∀ {l : list α} {m : α}, m ∈ argmin f l → m ∈ l :=\n  @argmax_mem _ («expr ᵒᵈ» β) _ _ _\n#align argmin_mem argmin_mem\n\n",
+ "argmin_eq_some_iff":
+ "theorem argmin_eq_some_iff :\n    argmin f l = some m ↔ m ∈ l ∧ (∀ a ∈ l, f m ≤ f a) ∧ ∀ a ∈ l, f a ≤ f m → l.index_of m ≤ l.index_of a :=\n  mem_argmin_iff\n#align argmin_eq_some_iff argmin_eq_some_iff\n\n",
+ "argmin_eq_none":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵈ» -/\n@[simp]\ntheorem argmin_eq_none : l.argmin f = none ↔ l = [] :=\n  @argmax_eq_none _ («expr ᵒᵈ» β) _ _ _ _\n#align argmin_eq_none argmin_eq_none\n\n",
+ "argmin_cons":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵈ» -/\ntheorem argmin_cons (f : α → β) (a : α) (l : list α) :\n    argmin f (a :: l) = option.cases_on (argmin f l) (some a) fun c => if f c < f a then some c else some a := by\n  convert @argmax_cons _ («expr ᵒᵈ» β) _ _ _ _\n#align argmin_cons argmin_cons\n\n",
+ "argmin_concat":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵈ» -/\ntheorem argmin_concat (f : α → β) (a : α) (l : list α) :\n    argmin f (l ++ [a]) = option.cases_on (argmin f l) (some a) fun c => if f a < f c then some a else some c :=\n  @argmax_concat _ («expr ᵒᵈ» β) _ _ _ _ _\n#align argmin_concat argmin_concat\n\n",
+ "argmax_singleton":
+ "@[simp]\ntheorem argmax_singleton {f : α → β} {a : α} : argmax f [a] = a :=\n  rfl\n#align argmax_singleton argmax_singleton\n\n",
+ "argmax_nil":
+ "@[simp]\ntheorem argmax_nil (f : α → β) : argmax f [] = none :=\n  rfl\n#align argmax_nil argmax_nil\n\n",
+ "argmax_mem":
+ "theorem argmax_mem : ∀ {l : list α} {m : α}, m ∈ argmax f l → m ∈ l\n  | [], m => by simp\n  | hd :: tl, m => by simpa [argmax, arg_aux] using foldl_arg_aux_mem _ tl hd m\n#align argmax_mem argmax_mem\n\n",
+ "argmax_eq_some_iff":
+ "theorem argmax_eq_some_iff :\n    argmax f l = some m ↔ m ∈ l ∧ (∀ a ∈ l, f a ≤ f m) ∧ ∀ a ∈ l, f m ≤ f a → l.index_of m ≤ l.index_of a :=\n  mem_argmax_iff\n#align argmax_eq_some_iff argmax_eq_some_iff\n\n",
+ "argmax_eq_none":
+ "@[simp]\ntheorem argmax_eq_none : l.argmax f = none ↔ l = [] := by simp [argmax]\n#align argmax_eq_none argmax_eq_none\n\n",
+ "argmax_cons":
+ "theorem argmax_cons (f : α → β) (a : α) (l : list α) :\n    argmax f (a :: l) = option.cases_on (argmax f l) (some a) fun c => if f a < f c then some c else some a :=\n  List.reverseRecOn l rfl fun hd tl ih =>\n    by\n    rw [← cons_append, argmax_concat, ih, argmax_concat]\n    cases' h : argmax f hd with m\n    · simp [h]\n    dsimp\n    rw [← apply_ite, ← apply_ite]\n    dsimp\n    split_ifs <;> try rfl\n    · exact absurd (lt_trans ‹f a < f m› ‹_›) ‹_›\n    · cases (‹f a < f tl›.lt_or_lt _).elim ‹_› ‹_›\n#align argmax_cons argmax_cons\n\n",
+ "argmax_concat":
+ "theorem argmax_concat (f : α → β) (a : α) (l : list α) :\n    argmax f (l ++ [a]) = option.cases_on (argmax f l) (some a) fun c => if f c < f a then some a else some c := by\n  rw [argmax, argmax] <;> simp [arg_aux]\n#align argmax_concat argmax_concat\n\n",
+ "arg_aux_self":
+ "@[simp]\ntheorem arg_aux_self (hr₀ : irreflexive r) (a : α) : argAux r (some a) a = a :=\n  if_neg <| hr₀ _\n#align arg_aux_self arg_aux_self\n\n"}

@@ -1,0 +1,100 @@
+{"variable_change_Δ":
+ "@[simp]\ntheorem variable_change_Δ : (W.variable_change u r s t).Δ = ↑u⁻¹ ^ 12 * W.Δ :=\n  by\n  dsimp\n  ring1\n#align variable_change_Δ variable_change_Δ\n\n",
+ "variable_change_j":
+ "@[simp]\ntheorem variable_change_j : (E.variable_change u r s t).j = E.j :=\n  by\n  rw [j, coe_inv_variable_change_Δ']\n  have hu : (u * ↑u⁻¹ : R) ^ 12 = 1 := by rw [u.mul_inv, one_pow]\n  linear_combination (norm := (dsimp; ring1)) E.j * hu\n#align variable_change_j variable_change_j\n\n",
+ "variable_change_c₆":
+ "@[simp]\ntheorem variable_change_c₆ : (W.variable_change u r s t).c₆ = ↑u⁻¹ ^ 6 * W.c₆ :=\n  by\n  simp only [c₆, variable_change_b₂, variable_change_b₄, variable_change_b₆]\n  ring1\n#align variable_change_c₆ variable_change_c₆\n\n",
+ "variable_change_c₄":
+ "@[simp]\ntheorem variable_change_c₄ : (W.variable_change u r s t).c₄ = ↑u⁻¹ ^ 4 * W.c₄ :=\n  by\n  simp only [c₄, variable_change_b₂, variable_change_b₄]\n  ring1\n#align variable_change_c₄ variable_change_c₄\n\n",
+ "variable_change_b₈":
+ "@[simp]\ntheorem variable_change_b₈ :\n    (W.variable_change u r s t).b₈ = ↑u⁻¹ ^ 8 * (W.b₈ + 3 * r * W.b₆ + 3 * r ^ 2 * W.b₄ + r ^ 3 * W.b₂ + 3 * r ^ 4) :=\n  by\n  simp only [b₂, b₄, b₆, b₈, variable_change_a₁, variable_change_a₂, variable_change_a₃, variable_change_a₄,\n    variable_change_a₆]\n  ring1\n#align variable_change_b₈ variable_change_b₈\n\n",
+ "variable_change_b₆":
+ "@[simp]\ntheorem variable_change_b₆ :\n    (W.variable_change u r s t).b₆ = ↑u⁻¹ ^ 6 * (W.b₆ + 2 * r * W.b₄ + r ^ 2 * W.b₂ + 4 * r ^ 3) :=\n  by\n  simp only [b₂, b₄, b₆, variable_change_a₃, variable_change_a₆]\n  ring1\n#align variable_change_b₆ variable_change_b₆\n\n",
+ "variable_change_b₄":
+ "@[simp]\ntheorem variable_change_b₄ : (W.variable_change u r s t).b₄ = ↑u⁻¹ ^ 4 * (W.b₄ + r * W.b₂ + 6 * r ^ 2) :=\n  by\n  simp only [b₂, b₄, variable_change_a₁, variable_change_a₃, variable_change_a₄]\n  ring1\n#align variable_change_b₄ variable_change_b₄\n\n",
+ "variable_change_b₂":
+ "@[simp]\ntheorem variable_change_b₂ : (W.variable_change u r s t).b₂ = ↑u⁻¹ ^ 2 * (W.b₂ + 12 * r) :=\n  by\n  simp only [b₂, variable_change_a₁, variable_change_a₂]\n  ring1\n#align variable_change_b₂ variable_change_b₂\n\n",
+ "two_torsion_polynomial_disc_ne_zero":
+ "theorem two_torsion_polynomial_disc_ne_zero [nontrivial R] [Invertible (2 : R)] : E.two_torsion_polynomial.disc ≠ 0 :=\n  E.two_torsion_polynomial_disc_ne_zero <| E.coe_Δ' ▸ E.Δ'.is_unit\n#align two_torsion_polynomial_disc_ne_zero two_torsion_polynomial_disc_ne_zero\n\n",
+ "two_torsion_polynomial_disc_is_unit":
+ "theorem two_torsion_polynomial_disc_is_unit [Invertible (2 : R)] :\n    is_unit W.two_torsion_polynomial.disc ↔ is_unit W.Δ :=\n  by\n  rw [two_torsion_polynomial_disc, IsUnit.mul_iff, show (16 : R) = 2 ^ 4 by norm_num1]\n  exact and_iff_right (isUnit_of_invertible <| 2 ^ 4)\n#align two_torsion_polynomial_disc_is_unit two_torsion_polynomial_disc_is_unit\n\n",
+ "two_torsion_polynomial_disc":
+ "theorem two_torsion_polynomial_disc : W.two_torsion_polynomial.disc = 16 * W.Δ :=\n  by\n  dsimp [two_torsion_polynomial, cubic.disc]\n  ring1\n#align two_torsion_polynomial_disc two_torsion_polynomial_disc\n\n",
+ "polynomial_ne_zero":
+ "theorem polynomial_ne_zero [nontrivial R] : W.polynomial ≠ 0 :=\n  by\n  rw [polynomial_eq]\n  exact cubic.ne_zero_of_b_ne_zero one_ne_zero\n#align polynomial_ne_zero polynomial_ne_zero\n\n",
+ "polynomial_eq":
+ "theorem polynomial_eq :\n    W.polynomial = cubic.to_poly ⟨0, 1, cubic.to_poly ⟨0, 0, W.a₁, W.a₃⟩, cubic.to_poly ⟨-1, -W.a₂, -W.a₄, -W.a₆⟩⟩ :=\n  by\n  simp only [weierstrass_curve.polynomial, cubic.to_poly, C_0, C_1, C_neg, C_add, C_mul]\n  ring1\n#align polynomial_eq polynomial_eq\n\n",
+ "nonsingular_zero_of_Δ_ne_zero":
+ "theorem nonsingular_zero_of_Δ_ne_zero (h : W.equation 0 0) (hΔ : W.Δ ≠ 0) : W.nonsingular 0 0 :=\n  by\n  simp only [equation_zero, nonsingular_zero] at *\n  contrapose! hΔ\n  simp [h, hΔ]\n#align nonsingular_zero_of_Δ_ne_zero nonsingular_zero_of_Δ_ne_zero\n\n",
+ "nonsingular_zero":
+ "@[simp]\ntheorem nonsingular_zero : W.nonsingular 0 0 ↔ W.a₃ ≠ 0 ∨ W.a₄ ≠ 0 := by\n  rw [nonsingular, C_0, eval_polynomial_X_zero, neg_ne_zero, eval_polynomial_Y_zero, or_comm']\n#align nonsingular_zero nonsingular_zero\n\n",
+ "nonsingular_of_Δ_ne_zero":
+ "/-- A Weierstrass curve is nonsingular at every point if its discriminant is non-zero. -/\ntheorem nonsingular_of_Δ_ne_zero {x y : R} (h : W.equation x y) (hΔ : W.Δ ≠ 0) : W.nonsingular x y :=\n  (W.nonsingular_iff_variable_change x y).mpr <|\n    nonsingular_zero_of_Δ_ne_zero _ ((W.equation_iff_variable_change x y).mp h) <| by\n      rwa [variable_change_Δ, inv_one, Units.val_one, one_pow, one_mul]\n#align nonsingular_of_Δ_ne_zero nonsingular_of_Δ_ne_zero\n\n",
+ "nonsingular_iff_variable_change":
+ "theorem nonsingular_iff_variable_change (x y : R) : W.nonsingular x y ↔ (W.variable_change 1 x 0 y).nonsingular 0 0 :=\n  by\n  rw [nonsingular_iff', ← neg_ne_zero, or_comm', nonsingular_zero, variable_change_a₃, variable_change_a₄, inv_one,\n    Units.val_one]\n  congr 3\n  all_goals ring1\n#align nonsingular_iff_variable_change nonsingular_iff_variable_change\n\n",
+ "nonsingular_iff'":
+ "theorem nonsingular_iff' (x y : R) :\n    W.nonsingular x y ↔ W.a₁ * y - (3 * x ^ 2 + 2 * W.a₂ * x + W.a₄) ≠ 0 ∨ 2 * y + W.a₁ * x + W.a₃ ≠ 0 := by\n  rw [nonsingular, eval_polynomial_X, eval_polynomial_Y]\n#align nonsingular_iff' nonsingular_iff'\n\n",
+ "nonsingular_iff":
+ "@[simp]\ntheorem nonsingular_iff (x y : R) :\n    W.nonsingular x y ↔ W.a₁ * y ≠ 3 * x ^ 2 + 2 * W.a₂ * x + W.a₄ ∨ y ≠ -y - W.a₁ * x - W.a₃ :=\n  by\n  rw [nonsingular_iff', sub_ne_zero, ← @sub_ne_zero _ _ y]\n  congr 3 <;> ring1\n#align nonsingular_iff nonsingular_iff\n\n",
+ "nonsingular":
+ "theorem nonsingular [nontrivial R] {x y : R} (h : E.equation x y) : E.nonsingular x y :=\n  E.nonsingular_of_Δ_ne_zero h <| E.coe_Δ' ▸ E.Δ'.ne_zero\n#align nonsingular nonsingular\n\n",
+ "nat_degree_polynomial":
+ "theorem nat_degree_polynomial [nontrivial R] : W.polynomial.nat_degree = 2 :=\n  by\n  rw [polynomial_eq]\n  exact cubic.nat_degree_of_b_ne_zero' one_ne_zero\n#align nat_degree_polynomial nat_degree_polynomial\n\n",
+ "monic_polynomial":
+ "theorem monic_polynomial : W.polynomial.monic := by\n  nontriviality R\n  simpa only [polynomial_eq] using cubic.monic_of_b_eq_one'\n#align monic_polynomial monic_polynomial\n\n",
+ "irreducible_polynomial":
+ "theorem irreducible_polynomial [nontrivial R] [no_zero_divisors R] : Irreducible W.polynomial :=\n  by\n  by_contra h\n  rcases(W.monic_polynomial.not_irreducible_iff_exists_add_mul_eq_coeff W.nat_degree_polynomial).mp h with\n    ⟨f, g, h0, h1⟩\n  simp only [polynomial_eq, cubic.coeff_eq_c, cubic.coeff_eq_d] at h0 h1\n  apply_fun degree  at h0 h1\n  rw [cubic.degree_of_a_ne_zero' <| neg_ne_zero.mpr <| one_ne_zero' R, degree_mul] at h0\n  apply (h1.symm.le.trans cubic.degree_of_b_eq_zero').not_lt\n  rcases nat.with_bot.add_eq_three_iff.mp h0.symm with (h | h | h | h)\n  any_goals rw [degree_add_eq_left_of_degree_lt] <;> simp only [h] <;> decide\n  any_goals rw [degree_add_eq_right_of_degree_lt] <;> simp only [h] <;> decide\n#align irreducible_polynomial irreducible_polynomial\n\n",
+ "eval_polynomial_zero":
+ "@[simp]\ntheorem eval_polynomial_zero : eval 0 (eval 0 W.polynomial) = -W.a₆ := by\n  simp only [← C_0, eval_polynomial, zero_add, zero_sub, mul_zero, zero_pow (nat.zero_lt_succ _)]\n#align eval_polynomial_zero eval_polynomial_zero\n\n",
+ "eval_polynomial_Y_zero":
+ "@[simp]\ntheorem eval_polynomial_Y_zero : eval 0 (eval 0 W.polynomial_Y) = W.a₃ := by\n  simp only [← C_0, eval_polynomial_Y, zero_add, mul_zero]\n#align eval_polynomial_Y_zero eval_polynomial_Y_zero\n\n",
+ "eval_polynomial_Y":
+ "/- ./././Mathport/Syntax/Translate/Tactic/Builtin.lean:72:18: unsupported non-interactive tactic _private.3261064521.eval_simp -/\n@[simp]\ntheorem eval_polynomial_Y (x y : R) : eval x (eval (C y) W.polynomial_Y) = 2 * y + W.a₁ * x + W.a₃ :=\n  by\n  simp only [polynomial_Y]\n  run_tac\n    eval_simp\n  rw [← add_assoc]\n#align eval_polynomial_Y eval_polynomial_Y\n\n",
+ "eval_polynomial_X_zero":
+ "@[simp]\ntheorem eval_polynomial_X_zero : eval 0 (eval 0 W.polynomial_X) = -W.a₄ := by\n  simp only [← C_0, eval_polynomial_X, zero_add, zero_sub, mul_zero, zero_pow zero_lt_two]\n#align eval_polynomial_X_zero eval_polynomial_X_zero\n\n",
+ "eval_polynomial_X":
+ "/- ./././Mathport/Syntax/Translate/Tactic/Builtin.lean:72:18: unsupported non-interactive tactic _private.3261064521.eval_simp -/\n@[simp]\ntheorem eval_polynomial_X (x y : R) :\n    eval x (eval (C y) W.polynomial_X) = W.a₁ * y - (3 * x ^ 2 + 2 * W.a₂ * x + W.a₄) :=\n  by\n  simp only [polynomial_X]\n  run_tac\n    eval_simp\n#align eval_polynomial_X eval_polynomial_X\n\n",
+ "eval_polynomial":
+ "/- ./././Mathport/Syntax/Translate/Tactic/Builtin.lean:72:18: unsupported non-interactive tactic _private.3261064521.eval_simp -/\n@[simp]\ntheorem eval_polynomial (x y : R) :\n    eval x (eval (C y) W.polynomial) = y ^ 2 + W.a₁ * x * y + W.a₃ * y - (x ^ 3 + W.a₂ * x ^ 2 + W.a₄ * x + W.a₆) :=\n  by\n  simp only [weierstrass_curve.polynomial]\n  run_tac\n    eval_simp\n  rw [add_mul, ← add_assoc]\n#align eval_polynomial eval_polynomial\n\n",
+ "equation_zero":
+ "@[simp]\ntheorem equation_zero : W.equation 0 0 ↔ W.a₆ = 0 := by rw [equation, C_0, eval_polynomial_zero, neg_eq_zero]\n#align equation_zero equation_zero\n\n",
+ "equation_iff_variable_change":
+ "theorem equation_iff_variable_change (x y : R) : W.equation x y ↔ (W.variable_change 1 x 0 y).equation 0 0 :=\n  by\n  rw [equation_iff', ← neg_eq_zero, equation_zero, variable_change_a₆, inv_one, Units.val_one]\n  congr 2\n  ring1\n#align equation_iff_variable_change equation_iff_variable_change\n\n",
+ "equation_iff'":
+ "theorem equation_iff' (x y : R) :\n    W.equation x y ↔ y ^ 2 + W.a₁ * x * y + W.a₃ * y - (x ^ 3 + W.a₂ * x ^ 2 + W.a₄ * x + W.a₆) = 0 := by\n  rw [equation, eval_polynomial]\n#align equation_iff' equation_iff'\n\n",
+ "equation_iff":
+ "@[simp]\ntheorem equation_iff (x y : R) :\n    W.equation x y ↔ y ^ 2 + W.a₁ * x * y + W.a₃ * y = x ^ 3 + W.a₂ * x ^ 2 + W.a₄ * x + W.a₆ := by\n  rw [equation_iff', sub_eq_zero]\n#align equation_iff equation_iff\n\n",
+ "degree_polynomial":
+ "theorem degree_polynomial [nontrivial R] : W.polynomial.degree = 2 :=\n  by\n  rw [polynomial_eq]\n  exact cubic.degree_of_b_ne_zero' one_ne_zero\n#align degree_polynomial degree_polynomial\n\n",
+ "coe_variable_change_Δ'":
+ "theorem coe_variable_change_Δ' : (↑(E.variable_change u r s t).Δ' : R) = ↑u⁻¹ ^ 12 * E.Δ' := by\n  rw [variable_change_Δ', Units.val_mul, Units.val_pow_eq_pow_val]\n#align coe_variable_change_Δ' coe_variable_change_Δ'\n\n",
+ "coe_inv_variable_change_Δ'":
+ "theorem coe_inv_variable_change_Δ' : (↑(E.variable_change u r s t).Δ'⁻¹ : R) = u ^ 12 * ↑E.Δ'⁻¹ := by\n  rw [variable_change_Δ', mul_inv, inv_pow, inv_inv, Units.val_mul, Units.val_pow_eq_pow_val]\n#align coe_inv_variable_change_Δ' coe_inv_variable_change_Δ'\n\n",
+ "coe_inv_base_change_Δ'":
+ "theorem coe_inv_base_change_Δ' : ↑(E.base_change A).Δ'⁻¹ = algebra_map R A ↑E.Δ'⁻¹ :=\n  rfl\n#align coe_inv_base_change_Δ' coe_inv_base_change_Δ'\n\n",
+ "coe_base_change_Δ'":
+ "theorem coe_base_change_Δ' : ↑(E.base_change A).Δ' = algebra_map R A E.Δ' :=\n  rfl\n#align coe_base_change_Δ' coe_base_change_Δ'\n\n",
+ "c_relation":
+ "theorem c_relation : 1728 * W.Δ = W.c₄ ^ 3 - W.c₆ ^ 2 :=\n  by\n  simp only [b₂, b₄, b₆, b₈, c₄, c₆, Δ]\n  ring1\n#align c_relation c_relation\n\n",
+ "base_change_Δ":
+ "/- ./././Mathport/Syntax/Translate/Tactic/Builtin.lean:72:18: unsupported non-interactive tactic _private.2953164177.map_simp -/\n@[simp, nolint simp_nf]\ntheorem base_change_Δ : (W.base_change A).Δ = algebra_map R A W.Δ :=\n  by\n  simp only [Δ, base_change_b₂, base_change_b₄, base_change_b₆, base_change_b₈]\n  run_tac\n    map_simp\n#align base_change_Δ base_change_Δ\n\n",
+ "base_change_j":
+ "/- ./././Mathport/Syntax/Translate/Tactic/Builtin.lean:72:18: unsupported non-interactive tactic _private.2953164177.map_simp -/\n@[simp]\ntheorem base_change_j : (E.base_change A).j = algebra_map R A E.j :=\n  by\n  simp only [j, coe_inv_base_change_Δ', base_change_to_weierstrass_curve, E.base_change_c₄]\n  run_tac\n    map_simp\n#align base_change_j base_change_j\n\n",
+ "base_change_c₆":
+ "/- ./././Mathport/Syntax/Translate/Tactic/Builtin.lean:72:18: unsupported non-interactive tactic _private.2953164177.map_simp -/\n@[simp]\ntheorem base_change_c₆ : (W.base_change A).c₆ = algebra_map R A W.c₆ :=\n  by\n  simp only [c₆, base_change_b₂, base_change_b₄, base_change_b₆]\n  run_tac\n    map_simp\n#align base_change_c₆ base_change_c₆\n\n",
+ "base_change_c₄":
+ "/- ./././Mathport/Syntax/Translate/Tactic/Builtin.lean:72:18: unsupported non-interactive tactic _private.2953164177.map_simp -/\n@[simp]\ntheorem base_change_c₄ : (W.base_change A).c₄ = algebra_map R A W.c₄ :=\n  by\n  simp only [c₄, base_change_b₂, base_change_b₄]\n  run_tac\n    map_simp\n#align base_change_c₄ base_change_c₄\n\n",
+ "base_change_b₈":
+ "/- ./././Mathport/Syntax/Translate/Tactic/Builtin.lean:72:18: unsupported non-interactive tactic _private.2953164177.map_simp -/\n@[simp]\ntheorem base_change_b₈ : (W.base_change A).b₈ = algebra_map R A W.b₈ :=\n  by\n  simp only [b₈, base_change_a₁, base_change_a₂, base_change_a₃, base_change_a₄, base_change_a₆]\n  run_tac\n    map_simp\n#align base_change_b₈ base_change_b₈\n\n",
+ "base_change_b₆":
+ "/- ./././Mathport/Syntax/Translate/Tactic/Builtin.lean:72:18: unsupported non-interactive tactic _private.2953164177.map_simp -/\n@[simp]\ntheorem base_change_b₆ : (W.base_change A).b₆ = algebra_map R A W.b₆ :=\n  by\n  simp only [b₆, base_change_a₃, base_change_a₆]\n  run_tac\n    map_simp\n#align base_change_b₆ base_change_b₆\n\n",
+ "base_change_b₄":
+ "/- ./././Mathport/Syntax/Translate/Tactic/Builtin.lean:72:18: unsupported non-interactive tactic _private.2953164177.map_simp -/\n@[simp]\ntheorem base_change_b₄ : (W.base_change A).b₄ = algebra_map R A W.b₄ :=\n  by\n  simp only [b₄, base_change_a₁, base_change_a₃, base_change_a₄]\n  run_tac\n    map_simp\n#align base_change_b₄ base_change_b₄\n\n",
+ "base_change_b₂":
+ "/- ./././Mathport/Syntax/Translate/Tactic/Builtin.lean:72:18: unsupported non-interactive tactic _private.2953164177.map_simp -/\n@[simp]\ntheorem base_change_b₂ : (W.base_change A).b₂ = algebra_map R A W.b₂ :=\n  by\n  simp only [b₂, base_change_a₁, base_change_a₂]\n  run_tac\n    map_simp\n#align base_change_b₂ base_change_b₂\n\n",
+ "b_relation":
+ "/-\nCopyright (c) 2021 Kevin Buzzard. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Kevin Buzzard, David Kurniadi Angdinata\n-/\ntheorem b_relation : 4 * W.b₈ = W.b₂ * W.b₆ - W.b₄ ^ 2 :=\n  by\n  simp only [b₂, b₄, b₆, b₈]\n  ring1\n#align b_relation b_relation\n\n",
+ "Y_class_ne_zero":
+ "theorem Y_class_ne_zero [nontrivial R] : W.Y_class y ≠ 0 :=\n  adjoin_root.mk_ne_zero_of_nat_degree_lt W.monic_polynomial (X_sub_C_ne_zero _) <|\n    by\n    rw [nat_degree_polynomial, nat_degree_X_sub_C]\n    norm_num1\n#align Y_class_ne_zero Y_class_ne_zero\n\n",
+ "X_class_ne_zero":
+ "theorem X_class_ne_zero [nontrivial R] : W.X_class x ≠ 0 :=\n  adjoin_root.mk_ne_zero_of_nat_degree_lt W.monic_polynomial (C_ne_zero.2 <| X_sub_C_ne_zero x) <|\n    by\n    rw [nat_degree_polynomial, nat_degree_C]\n    norm_num1\n#align X_class_ne_zero X_class_ne_zero\n\n"}

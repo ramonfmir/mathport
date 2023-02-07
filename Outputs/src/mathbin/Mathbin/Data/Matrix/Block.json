@@ -1,0 +1,172 @@
+{"vec_mul_from_blocks":
+ "theorem vec_mul_from_blocks [fintype n] [fintype o] [NonUnitalNonAssocSemiring α] (A : matrix n l α) (B : matrix n m α)\n    (C : matrix o l α) (D : matrix o m α) (x : Sum n o → α) :\n    vec_mul x (from_blocks A B C D) =\n      sum.elim (vec_mul (x ∘ sum.inl) A + vec_mul (x ∘ sum.inr) C)\n        (vec_mul (x ∘ sum.inl) B + vec_mul (x ∘ sum.inr) D) :=\n  by\n  ext i\n  cases i <;> simp [vec_mul, dot_product]\n#align vec_mul_from_blocks vec_mul_from_blocks\n\n",
+ "to_square_block_prop_def":
+ "theorem to_square_block_prop_def (M : matrix m m α) (p : m → Prop) : to_square_block_prop M p = fun i j => M ↑i ↑j :=\n  rfl\n#align to_square_block_prop_def to_square_block_prop_def\n\n",
+ "to_square_block_def":
+ "theorem to_square_block_def (M : matrix m m α) (b : m → β) (k : β) : to_square_block M b k = fun i j => M ↑i ↑j :=\n  rfl\n#align to_square_block_def to_square_block_def\n\n",
+ "to_blocks_from_blocks₂₂":
+ "@[simp]\ntheorem to_blocks_from_blocks₂₂ (A : matrix n l α) (B : matrix n m α) (C : matrix o l α) (D : matrix o m α) :\n    (from_blocks A B C D).to_blocks₂₂ = D :=\n  rfl\n#align to_blocks_from_blocks₂₂ to_blocks_from_blocks₂₂\n\n",
+ "to_blocks_from_blocks₂₁":
+ "@[simp]\ntheorem to_blocks_from_blocks₂₁ (A : matrix n l α) (B : matrix n m α) (C : matrix o l α) (D : matrix o m α) :\n    (from_blocks A B C D).to_blocks₂₁ = C :=\n  rfl\n#align to_blocks_from_blocks₂₁ to_blocks_from_blocks₂₁\n\n",
+ "to_blocks_from_blocks₁₂":
+ "@[simp]\ntheorem to_blocks_from_blocks₁₂ (A : matrix n l α) (B : matrix n m α) (C : matrix o l α) (D : matrix o m α) :\n    (from_blocks A B C D).to_blocks₁₂ = B :=\n  rfl\n#align to_blocks_from_blocks₁₂ to_blocks_from_blocks₁₂\n\n",
+ "to_blocks_from_blocks₁₁":
+ "@[simp]\ntheorem to_blocks_from_blocks₁₁ (A : matrix n l α) (B : matrix n m α) (C : matrix o l α) (D : matrix o m α) :\n    (from_blocks A B C D).to_blocks₁₁ = A :=\n  rfl\n#align to_blocks_from_blocks₁₁ to_blocks_from_blocks₁₁\n\n",
+ "to_block_one_self":
+ "@[simp]\ntheorem to_block_one_self (p : m → Prop) : matrix.to_block (1 : matrix m m α) p p = 1 :=\n  to_block_diagonal_self _ p\n#align to_block_one_self to_block_one_self\n\n",
+ "to_block_one_disjoint":
+ "theorem to_block_one_disjoint {p q : m → Prop} (hpq : Disjoint p q) : matrix.to_block (1 : matrix m m α) p q = 0 :=\n  to_block_diagonal_disjoint _ hpq\n#align to_block_one_disjoint to_block_one_disjoint\n\n",
+ "to_block_mul_eq_mul":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `matrix.mul -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `matrix.mul -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\ntheorem to_block_mul_eq_mul {m n k : Type _} [fintype n] (p : m → Prop) (q : k → Prop) (A : matrix m n R)\n    (B : matrix n k R) : (matrix.mul A B).to_block p q = matrix.mul (A.to_block p («expr⊤»)) (B.to_block («expr⊤») q) :=\n  by\n  ext (i k)\n  simp only [to_block_apply, mul_apply]\n  rw [finset.sum_subtype]\n  simp [has_top.top, complete_lattice.top, bounded_order.top]\n#align to_block_mul_eq_mul to_block_mul_eq_mul\n\n",
+ "to_block_mul_eq_add":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `matrix.mul -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `matrix.mul -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `matrix.mul -/\ntheorem to_block_mul_eq_add {m n k : Type _} [fintype n] (p : m → Prop) (q : n → Prop) [decidable_pred q] (r : k → Prop)\n    (A : matrix m n R) (B : matrix n k R) :\n    (matrix.mul A B).to_block p r =\n      matrix.mul (A.to_block p q) (B.to_block q r) +\n        matrix.mul (A.to_block p fun i => ¬q i) (B.to_block (fun i => ¬q i) r) :=\n  by\n  classical\n    ext (i k)\n    simp only [to_block_apply, mul_apply, pi.add_apply]\n    convert (fintype.sum_subtype_add_sum_subtype q fun x => A (↑i) x * B x ↑k).symm\n#align to_block_mul_eq_add to_block_mul_eq_add\n\n",
+ "to_block_diagonal_self":
+ "theorem to_block_diagonal_self (d : m → α) (p : m → Prop) :\n    matrix.to_block (diagonal d) p p = diagonal fun i : subtype p => d ↑i :=\n  by\n  ext (i j)\n  by_cases i = j\n  · simp [h]\n  · simp [has_one.one, h, fun h' => h <| subtype.ext h']\n#align to_block_diagonal_self to_block_diagonal_self\n\n",
+ "to_block_diagonal_disjoint":
+ "theorem to_block_diagonal_disjoint (d : m → α) {p q : m → Prop} (hpq : Disjoint p q) :\n    matrix.to_block (diagonal d) p q = 0 := by\n  ext (⟨i, hi⟩⟨j, hj⟩)\n  have : i ≠ j := fun heq => hpq.le_bot i ⟨hi, HEq.symm ▸ hj⟩\n  simp [diagonal_apply_ne d this]\n#align to_block_diagonal_disjoint to_block_diagonal_disjoint\n\n",
+ "to_block_apply":
+ "@[simp]\ntheorem to_block_apply (M : matrix m n α) (p : m → Prop) (q : n → Prop) (i : { a // p a }) (j : { a // q a }) :\n    to_block M p q i j = M ↑i ↑j :=\n  rfl\n#align to_block_apply to_block_apply\n\n",
+ "from_blocks_transpose":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `matrix.transpose -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `matrix.transpose -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `matrix.transpose -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `matrix.transpose -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `matrix.transpose -/\ntheorem from_blocks_transpose (A : matrix n l α) (B : matrix n m α) (C : matrix o l α) (D : matrix o m α) :\n    matrix.transpose (from_blocks A B C D) =\n      from_blocks (matrix.transpose A) (matrix.transpose C) (matrix.transpose B) (matrix.transpose D) :=\n  by ext (i j); rcases i with ⟨⟩ <;> rcases j with ⟨⟩ <;> simp [from_blocks]\n#align from_blocks_transpose from_blocks_transpose\n\n",
+ "from_blocks_to_blocks":
+ "theorem from_blocks_to_blocks (M : matrix (Sum n o) (Sum l m) α) :\n    from_blocks M.to_blocks₁₁ M.to_blocks₁₂ M.to_blocks₂₁ M.to_blocks₂₂ = M := by ext (i j);\n  rcases i with ⟨⟩ <;> rcases j with ⟨⟩ <;> rfl\n#align from_blocks_to_blocks from_blocks_to_blocks\n\n",
+ "from_blocks_submatrix_sum_swap_sum_swap":
+ "theorem from_blocks_submatrix_sum_swap_sum_swap {l m n o α : Type _} (A : matrix n l α) (B : matrix n m α)\n    (C : matrix o l α) (D : matrix o m α) : (from_blocks A B C D).submatrix sum.swap sum.swap = from_blocks D C B A :=\n  by simp\n#align from_blocks_submatrix_sum_swap_sum_swap from_blocks_submatrix_sum_swap_sum_swap\n\n",
+ "from_blocks_submatrix_sum_swap_right":
+ "@[simp]\ntheorem from_blocks_submatrix_sum_swap_right (A : matrix n l α) (B : matrix n m α) (C : matrix o l α) (D : matrix o m α)\n    (f : p → Sum n o) : (from_blocks A B C D).submatrix f sum.swap = (from_blocks B A D C).submatrix f id :=\n  by\n  ext (i j)\n  cases j <;> dsimp <;> cases f i <;> rfl\n#align from_blocks_submatrix_sum_swap_right from_blocks_submatrix_sum_swap_right\n\n",
+ "from_blocks_submatrix_sum_swap_left":
+ "@[simp]\ntheorem from_blocks_submatrix_sum_swap_left (A : matrix n l α) (B : matrix n m α) (C : matrix o l α) (D : matrix o m α)\n    (f : p → Sum l m) : (from_blocks A B C D).submatrix sum.swap f = (from_blocks C D A B).submatrix id f :=\n  by\n  ext (i j)\n  cases i <;> dsimp <;> cases f j <;> rfl\n#align from_blocks_submatrix_sum_swap_left from_blocks_submatrix_sum_swap_left\n\n",
+ "from_blocks_smul":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\ntheorem from_blocks_smul [SMul R α] (x : R) (A : matrix n l α) (B : matrix n m α) (C : matrix o l α)\n    (D : matrix o m α) :\n    «expr • » x (from_blocks A B C D) = from_blocks («expr • » x A) («expr • » x B) («expr • » x C) («expr • » x D) :=\n  by ext (i j); rcases i with ⟨⟩ <;> rcases j with ⟨⟩ <;> simp [from_blocks]\n#align from_blocks_smul from_blocks_smul\n\n",
+ "from_blocks_one":
+ "@[simp]\ntheorem from_blocks_one : from_blocks (1 : matrix l l α) 0 0 (1 : matrix m m α) = 1 :=\n  by\n  ext (i j)\n  rcases i with ⟨⟩ <;> rcases j with ⟨⟩ <;> simp [one_apply]\n#align from_blocks_one from_blocks_one\n\n",
+ "from_blocks_neg":
+ "theorem from_blocks_neg [Neg R] (A : matrix n l R) (B : matrix n m R) (C : matrix o l R) (D : matrix o m R) :\n    -from_blocks A B C D = from_blocks (-A) (-B) (-C) (-D) := by ext (i j); cases i <;> cases j <;> simp [from_blocks]\n#align from_blocks_neg from_blocks_neg\n\n",
+ "from_blocks_multiply":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `matrix.mul -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `matrix.mul -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `matrix.mul -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `matrix.mul -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `matrix.mul -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `matrix.mul -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `matrix.mul -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `matrix.mul -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `matrix.mul -/\ntheorem from_blocks_multiply [fintype l] [fintype m] [NonUnitalNonAssocSemiring α] (A : matrix n l α) (B : matrix n m α)\n    (C : matrix o l α) (D : matrix o m α) (A' : matrix l p α) (B' : matrix l q α) (C' : matrix m p α)\n    (D' : matrix m q α) :\n    matrix.mul (from_blocks A B C D) (from_blocks A' B' C' D') =\n      from_blocks (matrix.mul A A' + matrix.mul B C') (matrix.mul A B' + matrix.mul B D')\n        (matrix.mul C A' + matrix.mul D C') (matrix.mul C B' + matrix.mul D D') :=\n  by ext (i j);\n  rcases i with ⟨⟩ <;> rcases j with ⟨⟩ <;>\n    simp only [from_blocks, mul_apply, fintype.sum_sum_type, sum.elim_inl, sum.elim_inr, pi.add_apply, of_apply]\n#align from_blocks_multiply from_blocks_multiply\n\n",
+ "from_blocks_mul_vec":
+ "theorem from_blocks_mul_vec [fintype l] [fintype m] [NonUnitalNonAssocSemiring α] (A : matrix n l α) (B : matrix n m α)\n    (C : matrix o l α) (D : matrix o m α) (x : Sum l m → α) :\n    mul_vec (from_blocks A B C D) x =\n      sum.elim (mul_vec A (x ∘ sum.inl) + mul_vec B (x ∘ sum.inr))\n        (mul_vec C (x ∘ sum.inl) + mul_vec D (x ∘ sum.inr)) :=\n  by\n  ext i\n  cases i <;> simp [mul_vec, dot_product]\n#align from_blocks_mul_vec from_blocks_mul_vec\n\n",
+ "from_blocks_map":
+ "theorem from_blocks_map (A : matrix n l α) (B : matrix n m α) (C : matrix o l α) (D : matrix o m α) (f : α → β) :\n    (from_blocks A B C D).map f = from_blocks (A.map f) (B.map f) (C.map f) (D.map f) := by ext (i j);\n  rcases i with ⟨⟩ <;> rcases j with ⟨⟩ <;> simp [from_blocks]\n#align from_blocks_map from_blocks_map\n\n",
+ "from_blocks_diagonal":
+ "@[simp]\ntheorem from_blocks_diagonal (d₁ : l → α) (d₂ : m → α) :\n    from_blocks (diagonal d₁) 0 0 (diagonal d₂) = diagonal (sum.elim d₁ d₂) := by ext (i j);\n  rcases i with ⟨⟩ <;> rcases j with ⟨⟩ <;> simp [diagonal]\n#align from_blocks_diagonal from_blocks_diagonal\n\n",
+ "from_blocks_conj_transpose":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `matrix.conj_transpose -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `matrix.conj_transpose -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `matrix.conj_transpose -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `matrix.conj_transpose -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `matrix.conj_transpose -/\ntheorem from_blocks_conj_transpose [Star α] (A : matrix n l α) (B : matrix n m α) (C : matrix o l α)\n    (D : matrix o m α) :\n    matrix.conj_transpose (from_blocks A B C D) =\n      from_blocks (matrix.conj_transpose A) (matrix.conj_transpose C) (matrix.conj_transpose B)\n        (matrix.conj_transpose D) :=\n  by simp only [conj_transpose, from_blocks_transpose, from_blocks_map]\n#align from_blocks_conj_transpose from_blocks_conj_transpose\n\n",
+ "from_blocks_apply₂₂":
+ "@[simp]\ntheorem from_blocks_apply₂₂ (A : matrix n l α) (B : matrix n m α) (C : matrix o l α) (D : matrix o m α) (i : o)\n    (j : m) : from_blocks A B C D (sum.inr i) (sum.inr j) = D i j :=\n  rfl\n#align from_blocks_apply₂₂ from_blocks_apply₂₂\n\n",
+ "from_blocks_apply₂₁":
+ "@[simp]\ntheorem from_blocks_apply₂₁ (A : matrix n l α) (B : matrix n m α) (C : matrix o l α) (D : matrix o m α) (i : o)\n    (j : l) : from_blocks A B C D (sum.inr i) (sum.inl j) = C i j :=\n  rfl\n#align from_blocks_apply₂₁ from_blocks_apply₂₁\n\n",
+ "from_blocks_apply₁₂":
+ "@[simp]\ntheorem from_blocks_apply₁₂ (A : matrix n l α) (B : matrix n m α) (C : matrix o l α) (D : matrix o m α) (i : n)\n    (j : m) : from_blocks A B C D (sum.inl i) (sum.inr j) = B i j :=\n  rfl\n#align from_blocks_apply₁₂ from_blocks_apply₁₂\n\n",
+ "from_blocks_apply₁₁":
+ "/-\nCopyright (c) 2018 Ellen Arlt. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Ellen Arlt, Blair Shi, Sean Leather, Mario Carneiro, Johan Commelin\n-/\n@[simp]\ntheorem from_blocks_apply₁₁ (A : matrix n l α) (B : matrix n m α) (C : matrix o l α) (D : matrix o m α) (i : n)\n    (j : l) : from_blocks A B C D (sum.inl i) (sum.inl j) = A i j :=\n  rfl\n#align from_blocks_apply₁₁ from_blocks_apply₁₁\n\n",
+ "from_blocks_add":
+ "theorem from_blocks_add [Add α] (A : matrix n l α) (B : matrix n m α) (C : matrix o l α) (D : matrix o m α)\n    (A' : matrix n l α) (B' : matrix n m α) (C' : matrix o l α) (D' : matrix o m α) :\n    from_blocks A B C D + from_blocks A' B' C' D' = from_blocks (A + A') (B + B') (C + C') (D + D') := by ext (i j);\n  rcases i with ⟨⟩ <;> rcases j with ⟨⟩ <;> rfl\n#align from_blocks_add from_blocks_add\n\n",
+ "block_diagonal_zero":
+ "@[simp]\ntheorem block_diagonal_zero : block_diagonal (0 : o → matrix m n α) = 0 :=\n  by\n  ext\n  simp [block_diagonal_apply]\n#align block_diagonal_zero block_diagonal_zero\n\n",
+ "block_diagonal_transpose":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `matrix.transpose -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `matrix.transpose -/\n@[simp]\ntheorem block_diagonal_transpose (M : o → matrix m n α) :\n    matrix.transpose (block_diagonal M) = block_diagonal fun k => matrix.transpose (M k) :=\n  by\n  ext\n  simp only [transpose_apply, block_diagonal_apply, eq_comm]\n  split_ifs with h\n  · rw [h]\n  · rfl\n#align block_diagonal_transpose block_diagonal_transpose\n\n",
+ "block_diagonal_sub":
+ "@[simp]\ntheorem block_diagonal_sub [add_group α] (M N : o → matrix m n α) :\n    block_diagonal (M - N) = block_diagonal M - block_diagonal N :=\n  map_sub (block_diagonal_add_monoid_hom m n o α) M N\n#align block_diagonal_sub block_diagonal_sub\n\n",
+ "block_diagonal_smul":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n@[simp]\ntheorem block_diagonal_smul {R : Type _} [monoid R] [add_monoid α] [DistribMulAction R α] (x : R)\n    (M : o → matrix m n α) : block_diagonal («expr • » x M) = «expr • » x (block_diagonal M) :=\n  by\n  ext\n  simp only [block_diagonal_apply, pi.smul_apply]\n  split_ifs <;> simp\n#align block_diagonal_smul block_diagonal_smul\n\n",
+ "block_diagonal_pow":
+ "@[simp]\ntheorem block_diagonal_pow [decidable_eq m] [fintype o] [fintype m] [Semiring α] (M : o → matrix m m α) (n : ℕ) :\n    block_diagonal (M ^ n) = block_diagonal M ^ n :=\n  map_pow (block_diagonal_ring_hom m o α) M n\n#align block_diagonal_pow block_diagonal_pow\n\n",
+ "block_diagonal_one":
+ "@[simp]\ntheorem block_diagonal_one [decidable_eq m] [One α] : block_diagonal (1 : o → matrix m m α) = 1 :=\n  show (block_diagonal fun _ : o => diagonal fun _ : m => (1 : α)) = diagonal fun _ => 1 by rw [block_diagonal_diagonal]\n#align block_diagonal_one block_diagonal_one\n\n",
+ "block_diagonal_neg":
+ "@[simp]\ntheorem block_diagonal_neg [add_group α] (M : o → matrix m n α) : block_diagonal (-M) = -block_diagonal M :=\n  map_neg (block_diagonal_add_monoid_hom m n o α) M\n#align block_diagonal_neg block_diagonal_neg\n\n",
+ "block_diagonal_mul":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `matrix.mul -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `matrix.mul -/\n@[simp]\ntheorem block_diagonal_mul [fintype n] [fintype o] [NonUnitalNonAssocSemiring α] (M : o → matrix m n α)\n    (N : o → matrix n p α) :\n    (block_diagonal fun k => matrix.mul (M k) (N k)) = matrix.mul (block_diagonal M) (block_diagonal N) :=\n  by\n  ext (⟨i, k⟩⟨j, k'⟩)\n  simp only [block_diagonal_apply, mul_apply, ← finset.univ_product_univ, finset.sum_product]\n  split_ifs with h <;> simp [h]\n#align block_diagonal_mul block_diagonal_mul\n\n",
+ "block_diagonal_map":
+ "theorem block_diagonal_map (M : o → matrix m n α) (f : α → β) (hf : f 0 = 0) :\n    (block_diagonal M).map f = block_diagonal fun k => (M k).map f :=\n  by\n  ext\n  simp only [map_apply, block_diagonal_apply, eq_comm]\n  rw [apply_ite f, hf]\n#align block_diagonal_map block_diagonal_map\n\n",
+ "block_diagonal_diagonal":
+ "@[simp]\ntheorem block_diagonal_diagonal [decidable_eq m] (d : o → m → α) :\n    (block_diagonal fun k => diagonal (d k)) = diagonal fun ik => d ik.2 ik.1 :=\n  by\n  ext (⟨i, k⟩⟨j, k'⟩)\n  simp only [block_diagonal_apply, diagonal, prod.mk.inj_iff, ← ite_and]\n  congr 1\n  rw [and_comm']\n#align block_diagonal_diagonal block_diagonal_diagonal\n\n",
+ "block_diagonal_conj_transpose":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `matrix.conj_transpose -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `matrix.conj_transpose -/\n@[simp]\ntheorem block_diagonal_conj_transpose {α : Type _} [add_monoid α] [StarAddMonoid α] (M : o → matrix m n α) :\n    matrix.conj_transpose (block_diagonal M) = block_diagonal fun k => matrix.conj_transpose (M k) :=\n  by\n  simp only [conj_transpose, block_diagonal_transpose]\n  rw [block_diagonal_map _ star (star_zero α)]\n#align block_diagonal_conj_transpose block_diagonal_conj_transpose\n\n",
+ "block_diagonal_apply_ne":
+ "theorem block_diagonal_apply_ne (M : o → matrix m n α) (i j) {k k'} (h : k ≠ k') :\n    block_diagonal M (i, k) (j, k') = 0 :=\n  if_neg h\n#align block_diagonal_apply_ne block_diagonal_apply_ne\n\n",
+ "block_diagonal_apply_eq":
+ "@[simp]\ntheorem block_diagonal_apply_eq (M : o → matrix m n α) (i j k) : block_diagonal M (i, k) (j, k) = M k i j :=\n  if_pos rfl\n#align block_diagonal_apply_eq block_diagonal_apply_eq\n\n",
+ "block_diagonal_apply":
+ "theorem block_diagonal_apply (M : o → matrix m n α) (ik jk) :\n    block_diagonal M ik jk = if ik.2 = jk.2 then M ik.2 ik.1 jk.1 else 0 :=\n  by\n  cases ik\n  cases jk\n  rfl\n#align block_diagonal_apply block_diagonal_apply\n\n",
+ "block_diagonal_add":
+ "@[simp]\ntheorem block_diagonal_add [add_zero_class α] (M N : o → matrix m n α) :\n    block_diagonal (M + N) = block_diagonal M + block_diagonal N :=\n  by\n  ext\n  simp only [block_diagonal_apply, pi.add_apply]\n  split_ifs <;> simp\n#align block_diagonal_add block_diagonal_add\n\n",
+ "block_diagonal'_zero":
+ "@[simp]\ntheorem block_diagonal'_zero : block_diagonal' (0 : ∀ i, matrix (m' i) (n' i) α) = 0 :=\n  by\n  ext\n  simp [block_diagonal'_apply]\n#align block_diagonal'_zero block_diagonal'_zero\n\n",
+ "block_diagonal'_transpose":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `matrix.transpose -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `matrix.transpose -/\n@[simp]\ntheorem block_diagonal'_transpose (M : ∀ i, matrix (m' i) (n' i) α) :\n    matrix.transpose (block_diagonal' M) = block_diagonal' fun k => matrix.transpose (M k) :=\n  by\n  ext (⟨ii, ix⟩⟨ji, jx⟩)\n  simp only [transpose_apply, block_diagonal'_apply]\n  split_ifs <;> cc\n#align block_diagonal'_transpose block_diagonal'_transpose\n\n",
+ "block_diagonal'_submatrix_eq_block_diagonal":
+ "theorem block_diagonal'_submatrix_eq_block_diagonal (M : o → matrix m n α) :\n    (block_diagonal' M).submatrix (prod.to_sigma ∘ prod.swap) (prod.to_sigma ∘ prod.swap) = block_diagonal M :=\n  matrix.ext fun ⟨k, i⟩ ⟨k', j⟩ => rfl\n#align block_diagonal'_submatrix_eq_block_diagonal block_diagonal'_submatrix_eq_block_diagonal\n\n",
+ "block_diagonal'_sub":
+ "@[simp]\ntheorem block_diagonal'_sub [add_group α] (M N : ∀ i, matrix (m' i) (n' i) α) :\n    block_diagonal' (M - N) = block_diagonal' M - block_diagonal' N :=\n  map_sub (block_diagonal'_add_monoid_hom m' n' α) M N\n#align block_diagonal'_sub block_diagonal'_sub\n\n",
+ "block_diagonal'_smul":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n@[simp]\ntheorem block_diagonal'_smul {R : Type _} [Semiring R] [add_comm_monoid α] [Module R α] (x : R)\n    (M : ∀ i, matrix (m' i) (n' i) α) : block_diagonal' («expr • » x M) = «expr • » x (block_diagonal' M) :=\n  by\n  ext\n  simp only [block_diagonal'_apply, pi.smul_apply]\n  split_ifs <;> simp\n#align block_diagonal'_smul block_diagonal'_smul\n\n",
+ "block_diagonal'_pow":
+ "@[simp]\ntheorem block_diagonal'_pow [∀ i, decidable_eq (m' i)] [fintype o] [∀ i, fintype (m' i)] [Semiring α]\n    (M : ∀ i, matrix (m' i) (m' i) α) (n : ℕ) : block_diagonal' (M ^ n) = block_diagonal' M ^ n :=\n  map_pow (block_diagonal'_ring_hom m' α) M n\n#align block_diagonal'_pow block_diagonal'_pow\n\n",
+ "block_diagonal'_one":
+ "@[simp]\ntheorem block_diagonal'_one [∀ i, decidable_eq (m' i)] [One α] :\n    block_diagonal' (1 : ∀ i, matrix (m' i) (m' i) α) = 1 :=\n  show (block_diagonal' fun i : o => diagonal fun _ : m' i => (1 : α)) = diagonal fun _ => 1 by\n    rw [block_diagonal'_diagonal]\n#align block_diagonal'_one block_diagonal'_one\n\n",
+ "block_diagonal'_neg":
+ "@[simp]\ntheorem block_diagonal'_neg [add_group α] (M : ∀ i, matrix (m' i) (n' i) α) :\n    block_diagonal' (-M) = -block_diagonal' M :=\n  map_neg (block_diagonal'_add_monoid_hom m' n' α) M\n#align block_diagonal'_neg block_diagonal'_neg\n\n",
+ "block_diagonal'_mul":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `matrix.mul -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `matrix.mul -/\n@[simp]\ntheorem block_diagonal'_mul [NonUnitalNonAssocSemiring α] [∀ i, fintype (n' i)] [fintype o]\n    (M : ∀ i, matrix (m' i) (n' i) α) (N : ∀ i, matrix (n' i) (p' i) α) :\n    (block_diagonal' fun k => matrix.mul (M k) (N k)) = matrix.mul (block_diagonal' M) (block_diagonal' N) :=\n  by\n  ext (⟨k, i⟩⟨k', j⟩)\n  simp only [block_diagonal'_apply, mul_apply, ← finset.univ_sigma_univ, finset.sum_sigma]\n  rw [fintype.sum_eq_single k]\n  · split_ifs <;> simp\n  · intro j' hj'\n    exact finset.sum_eq_zero fun _ _ => by rw [dif_neg hj'.symm, zero_mul]\n#align block_diagonal'_mul block_diagonal'_mul\n\n",
+ "block_diagonal'_map":
+ "theorem block_diagonal'_map (M : ∀ i, matrix (m' i) (n' i) α) (f : α → β) (hf : f 0 = 0) :\n    (block_diagonal' M).map f = block_diagonal' fun k => (M k).map f :=\n  by\n  ext\n  simp only [map_apply, block_diagonal'_apply, eq_comm]\n  rw [apply_dite f, hf]\n#align block_diagonal'_map block_diagonal'_map\n\n",
+ "block_diagonal'_eq_block_diagonal":
+ "theorem block_diagonal'_eq_block_diagonal (M : o → matrix m n α) {k k'} (i j) :\n    block_diagonal M (i, k) (j, k') = block_diagonal' M ⟨k, i⟩ ⟨k', j⟩ :=\n  rfl\n#align block_diagonal'_eq_block_diagonal block_diagonal'_eq_block_diagonal\n\n",
+ "block_diagonal'_diagonal":
+ "@[simp]\ntheorem block_diagonal'_diagonal [∀ i, decidable_eq (m' i)] (d : ∀ i, m' i → α) :\n    (block_diagonal' fun k => diagonal (d k)) = diagonal fun ik => d ik.1 ik.2 :=\n  by\n  ext (⟨i, k⟩⟨j, k'⟩)\n  simp only [block_diagonal'_apply, diagonal]\n  obtain rfl | hij := decidable.eq_or_ne i j\n  · simp\n  · simp [hij]\n#align block_diagonal'_diagonal block_diagonal'_diagonal\n\n",
+ "block_diagonal'_conj_transpose":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `matrix.conj_transpose -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `matrix.conj_transpose -/\n@[simp]\ntheorem block_diagonal'_conj_transpose {α} [add_monoid α] [StarAddMonoid α] (M : ∀ i, matrix (m' i) (n' i) α) :\n    matrix.conj_transpose (block_diagonal' M) = block_diagonal' fun k => matrix.conj_transpose (M k) :=\n  by\n  simp only [conj_transpose, block_diagonal'_transpose]\n  exact block_diagonal'_map _ star (star_zero α)\n#align block_diagonal'_conj_transpose block_diagonal'_conj_transpose\n\n",
+ "block_diagonal'_apply_ne":
+ "theorem block_diagonal'_apply_ne (M : ∀ i, matrix (m' i) (n' i) α) {k k'} (i j) (h : k ≠ k') :\n    block_diagonal' M ⟨k, i⟩ ⟨k', j⟩ = 0 :=\n  dif_neg h\n#align block_diagonal'_apply_ne block_diagonal'_apply_ne\n\n",
+ "block_diagonal'_apply_eq":
+ "@[simp]\ntheorem block_diagonal'_apply_eq (M : ∀ i, matrix (m' i) (n' i) α) (k i j) :\n    block_diagonal' M ⟨k, i⟩ ⟨k, j⟩ = M k i j :=\n  dif_pos rfl\n#align block_diagonal'_apply_eq block_diagonal'_apply_eq\n\n",
+ "block_diagonal'_apply":
+ "theorem block_diagonal'_apply (M : ∀ i, matrix (m' i) (n' i) α) (ik jk) :\n    block_diagonal' M ik jk = if h : ik.1 = jk.1 then M ik.1 ik.2 (cast (congr_arg n' h.symm) jk.2) else 0 :=\n  by\n  cases ik\n  cases jk\n  rfl\n#align block_diagonal'_apply block_diagonal'_apply\n\n",
+ "block_diagonal'_add":
+ "@[simp]\ntheorem block_diagonal'_add [add_zero_class α] (M N : ∀ i, matrix (m' i) (n' i) α) :\n    block_diagonal' (M + N) = block_diagonal' M + block_diagonal' N :=\n  by\n  ext\n  simp only [block_diagonal'_apply, pi.add_apply]\n  split_ifs <;> simp\n#align block_diagonal'_add block_diagonal'_add\n\n",
+ "block_diag_zero":
+ "@[simp]\ntheorem block_diag_zero : block_diag (0 : matrix (m × o) (n × o) α) = 0 :=\n  rfl\n#align block_diag_zero block_diag_zero\n\n",
+ "block_diag_transpose":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `matrix.transpose -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `matrix.transpose -/\n@[simp]\ntheorem block_diag_transpose (M : matrix (m × o) (n × o) α) (k : o) :\n    block_diag (matrix.transpose M) k = matrix.transpose (block_diag M k) :=\n  ext fun i j => rfl\n#align block_diag_transpose block_diag_transpose\n\n",
+ "block_diag_sub":
+ "@[simp]\ntheorem block_diag_sub [add_group α] (M N : matrix (m × o) (n × o) α) :\n    block_diag (M - N) = block_diag M - block_diag N :=\n  map_sub (block_diag_add_monoid_hom m n o α) M N\n#align block_diag_sub block_diag_sub\n\n",
+ "block_diag_smul":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n@[simp]\ntheorem block_diag_smul {R : Type _} [monoid R] [add_monoid α] [DistribMulAction R α] (x : R)\n    (M : matrix (m × o) (n × o) α) : block_diag («expr • » x M) = «expr • » x (block_diag M) :=\n  rfl\n#align block_diag_smul block_diag_smul\n\n",
+ "block_diag_one":
+ "@[simp]\ntheorem block_diag_one [decidable_eq o] [decidable_eq m] [One α] : block_diag (1 : matrix (m × o) (m × o) α) = 1 :=\n  funext <| block_diag_diagonal _\n#align block_diag_one block_diag_one\n\n",
+ "block_diag_neg":
+ "@[simp]\ntheorem block_diag_neg [add_group α] (M : matrix (m × o) (n × o) α) : block_diag (-M) = -block_diag M :=\n  map_neg (block_diag_add_monoid_hom m n o α) M\n#align block_diag_neg block_diag_neg\n\n",
+ "block_diag_map":
+ "theorem block_diag_map (M : matrix (m × o) (n × o) α) (f : α → β) :\n    block_diag (M.map f) = fun k => (block_diag M k).map f :=\n  rfl\n#align block_diag_map block_diag_map\n\n",
+ "block_diag_diagonal":
+ "@[simp]\ntheorem block_diag_diagonal [decidable_eq o] [decidable_eq m] (d : m × o → α) (k : o) :\n    block_diag (diagonal d) k = diagonal fun i => d (i, k) :=\n  ext fun i j => by\n    obtain rfl | hij := decidable.eq_or_ne i j\n    · rw [block_diag, diagonal_apply_eq, diagonal_apply_eq]\n    · rw [block_diag, diagonal_apply_ne _ hij, diagonal_apply_ne _ (mt _ hij)]\n      exact prod.fst_eq_iff.mpr\n#align block_diag_diagonal block_diag_diagonal\n\n",
+ "block_diag_conj_transpose":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `matrix.conj_transpose -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `matrix.conj_transpose -/\n@[simp]\ntheorem block_diag_conj_transpose {α : Type _} [add_monoid α] [StarAddMonoid α] (M : matrix (m × o) (n × o) α) (k : o) :\n    block_diag (matrix.conj_transpose M) k = matrix.conj_transpose (block_diag M k) :=\n  ext fun i j => rfl\n#align block_diag_conj_transpose block_diag_conj_transpose\n\n",
+ "block_diag_block_diagonal":
+ "@[simp]\ntheorem block_diag_block_diagonal [decidable_eq o] (M : o → matrix m n α) : block_diag (block_diagonal M) = M :=\n  funext fun k => ext fun i j => block_diagonal_apply_eq _ _ _ _\n#align block_diag_block_diagonal block_diag_block_diagonal\n\n",
+ "block_diag_add":
+ "@[simp]\ntheorem block_diag_add [add_zero_class α] (M N : matrix (m × o) (n × o) α) :\n    block_diag (M + N) = block_diag M + block_diag N :=\n  rfl\n#align block_diag_add block_diag_add\n\n",
+ "block_diag'_zero":
+ "@[simp]\ntheorem block_diag'_zero : block_diag' (0 : matrix (Σi, m' i) (Σi, n' i) α) = 0 :=\n  rfl\n#align block_diag'_zero block_diag'_zero\n\n",
+ "block_diag'_transpose":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `matrix.transpose -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `matrix.transpose -/\n@[simp]\ntheorem block_diag'_transpose (M : matrix (Σi, m' i) (Σi, n' i) α) (k : o) :\n    block_diag' (matrix.transpose M) k = matrix.transpose (block_diag' M k) :=\n  ext fun i j => rfl\n#align block_diag'_transpose block_diag'_transpose\n\n",
+ "block_diag'_sub":
+ "@[simp]\ntheorem block_diag'_sub [add_group α] (M N : matrix (Σi, m' i) (Σi, n' i) α) :\n    block_diag' (M - N) = block_diag' M - block_diag' N :=\n  map_sub (block_diag'_add_monoid_hom m' n' α) M N\n#align block_diag'_sub block_diag'_sub\n\n",
+ "block_diag'_smul":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n@[simp]\ntheorem block_diag'_smul {R : Type _} [monoid R] [add_monoid α] [DistribMulAction R α] (x : R)\n    (M : matrix (Σi, m' i) (Σi, n' i) α) : block_diag' («expr • » x M) = «expr • » x (block_diag' M) :=\n  rfl\n#align block_diag'_smul block_diag'_smul\n\n",
+ "block_diag'_one":
+ "@[simp]\ntheorem block_diag'_one [decidable_eq o] [∀ i, decidable_eq (m' i)] [One α] :\n    block_diag' (1 : matrix (Σi, m' i) (Σi, m' i) α) = 1 :=\n  funext <| block_diag'_diagonal _\n#align block_diag'_one block_diag'_one\n\n",
+ "block_diag'_neg":
+ "@[simp]\ntheorem block_diag'_neg [add_group α] (M : matrix (Σi, m' i) (Σi, n' i) α) : block_diag' (-M) = -block_diag' M :=\n  map_neg (block_diag'_add_monoid_hom m' n' α) M\n#align block_diag'_neg block_diag'_neg\n\n",
+ "block_diag'_map":
+ "theorem block_diag'_map (M : matrix (Σi, m' i) (Σi, n' i) α) (f : α → β) :\n    block_diag' (M.map f) = fun k => (block_diag' M k).map f :=\n  rfl\n#align block_diag'_map block_diag'_map\n\n",
+ "block_diag'_diagonal":
+ "@[simp]\ntheorem block_diag'_diagonal [decidable_eq o] [∀ i, decidable_eq (m' i)] (d : (Σi, m' i) → α) (k : o) :\n    block_diag' (diagonal d) k = diagonal fun i => d ⟨k, i⟩ :=\n  ext fun i j => by\n    obtain rfl | hij := decidable.eq_or_ne i j\n    · rw [block_diag', diagonal_apply_eq, diagonal_apply_eq]\n    · rw [block_diag', diagonal_apply_ne _ hij, diagonal_apply_ne _ (mt (fun h => _) hij)]\n      cases h\n      rfl\n#align block_diag'_diagonal block_diag'_diagonal\n\n",
+ "block_diag'_conj_transpose":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `matrix.conj_transpose -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `matrix.conj_transpose -/\n@[simp]\ntheorem block_diag'_conj_transpose {α : Type _} [add_monoid α] [StarAddMonoid α] (M : matrix (Σi, m' i) (Σi, n' i) α)\n    (k : o) : block_diag' (matrix.conj_transpose M) k = matrix.conj_transpose (block_diag' M k) :=\n  ext fun i j => rfl\n#align block_diag'_conj_transpose block_diag'_conj_transpose\n\n",
+ "block_diag'_block_diagonal'":
+ "@[simp]\ntheorem block_diag'_block_diagonal' [decidable_eq o] (M : ∀ i, matrix (m' i) (n' i) α) :\n    block_diag' (block_diagonal' M) = M :=\n  funext fun k => ext fun i j => block_diagonal'_apply_eq _ _ _ _\n#align block_diag'_block_diagonal' block_diag'_block_diagonal'\n\n",
+ "block_diag'_add":
+ "@[simp]\ntheorem block_diag'_add [add_zero_class α] (M N : matrix (Σi, m' i) (Σi, n' i) α) :\n    block_diag' (M + N) = block_diag' M + block_diag' N :=\n  rfl\n#align block_diag'_add block_diag'_add\n\n"}

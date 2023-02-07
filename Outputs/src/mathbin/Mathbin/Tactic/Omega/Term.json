@@ -1,0 +1,10 @@
+{"val_sub":
+ "@[simp]\ntheorem val_sub {v : nat → int} {t1 t2 : term} : (sub t1 t2).val v = t1.val v - t2.val v :=\n  by\n  cases t1; cases t2\n  simp only [add_assoc, coeffs.val_sub, neg_add_rev, val, sub, add_comm, add_left_comm, sub_eq_add_neg]\n#align val_sub val_sub\n\n",
+ "val_neg":
+ "/-\nCopyright (c) 2019 Seul Baek. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Seul Baek\n-/\n/-\nNormalized linear integer arithmetic terms.\n-/\ntheorem val_neg {v : nat → int} {t : term} : (neg t).val v = -t.val v :=\n  by\n  cases' t with b as\n  simp only [val, neg_add, neg, val, coeffs.val_neg]\n#align val_neg val_neg\n\n",
+ "val_mul":
+ "@[simp]\ntheorem val_mul {v : nat → int} {i : int} {t : term} : val v (mul i t) = i * val v t :=\n  by\n  cases t\n  simp only [mul, mul_add, add_mul, list.length_map, coeffs.val, coeffs.val_between_map_mul, val, list.map]\n#align val_mul val_mul\n\n",
+ "val_div":
+ "theorem val_div {v : nat → int} {i b : int} {as : list int} :\n    i ∣ b → (∀ x ∈ as, i ∣ x) → (div i (b, as)).val v = val v (b, as) / i :=\n  by\n  intro h1 h2; simp only [val, div, list.map]\n  rw [Int.add_ediv_of_dvd_left h1]\n  apply fun_mono_2 rfl\n  rw [← coeffs.val_map_div h2]\n#align val_div val_div\n\n",
+ "val_add":
+ "@[simp]\ntheorem val_add {v : nat → int} {t1 t2 : term} : (add t1 t2).val v = t1.val v + t2.val v :=\n  by\n  cases t1; cases t2\n  simp only [coeffs.val_add, add, val, add_comm, add_left_comm]\n#align val_add val_add\n\n"}

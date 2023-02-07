@@ -1,0 +1,4 @@
+{"univ_eq":
+ "/-\nCopyright (c) 2021 Yury G. Kudryashov. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Yury G. Kudryashov\n-/\n@[simp]\ntheorem univ_eq : (univ : set bool) = {false, true} :=\n  (eq_univ_of_forall bool.dichotomy).symm\n#align univ_eq univ_eq\n\n",
+ "range_eq":
+ "@[simp]\ntheorem range_eq {α : Type _} (f : bool → α) : range f = {f false, f true} := by rw [← image_univ, univ_eq, image_pair]\n#align range_eq range_eq\n\n"}

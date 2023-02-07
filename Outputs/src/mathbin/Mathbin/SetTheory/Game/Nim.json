@@ -1,0 +1,80 @@
+{"to_right_moves_nim_symm_lt":
+ "@[simp]\ntheorem to_right_moves_nim_symm_lt {o : ordinal} (i : (nim o).right_moves) : ↑(to_right_moves_nim.symm i) < o :=\n  (to_right_moves_nim.symm i).prop\n#align to_right_moves_nim_symm_lt to_right_moves_nim_symm_lt\n\n",
+ "to_right_moves_nim_one_symm":
+ "@[simp]\ntheorem to_right_moves_nim_one_symm (i) : (@to_right_moves_nim 1).symm i = ⟨0, zero_lt_one⟩ := by simp\n#align to_right_moves_nim_one_symm to_right_moves_nim_one_symm\n\n",
+ "to_left_moves_nim_symm_lt":
+ "@[simp]\ntheorem to_left_moves_nim_symm_lt {o : ordinal} (i : (nim o).left_moves) : ↑(to_left_moves_nim.symm i) < o :=\n  (to_left_moves_nim.symm i).prop\n#align to_left_moves_nim_symm_lt to_left_moves_nim_symm_lt\n\n",
+ "to_left_moves_nim_one_symm":
+ "@[simp]\ntheorem to_left_moves_nim_one_symm (i) : (@to_left_moves_nim 1).symm i = ⟨0, zero_lt_one⟩ := by simp\n#align to_left_moves_nim_one_symm to_left_moves_nim_one_symm\n\n",
+ "right_moves_nim":
+ "theorem right_moves_nim (o : ordinal) : (nim o).right_moves = o.out.α :=\n  by\n  rw [nim_def]\n  rfl\n#align right_moves_nim right_moves_nim\n\n",
+ "nim_zero_equiv":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `pgame.equiv -/\ntheorem nim_zero_equiv : pgame.equiv (nim 0) 0 :=\n  equiv.is_empty _\n#align nim_zero_equiv nim_zero_equiv\n\n",
+ "nim_one_move_right":
+ "theorem nim_one_move_right (x) : (nim 1).move_right x = nim 0 := by simp\n#align nim_one_move_right nim_one_move_right\n\n",
+ "nim_one_move_left":
+ "theorem nim_one_move_left (x) : (nim 1).move_left x = nim 0 := by simp\n#align nim_one_move_left nim_one_move_left\n\n",
+ "nim_one_equiv":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `pgame.equiv -/\ntheorem nim_one_equiv : pgame.equiv (nim 1) star :=\n  nim_one_relabelling.equiv\n#align nim_one_equiv nim_one_equiv\n\n",
+ "nim_grundy_value":
+ "@[simp]\ntheorem nim_grundy_value (o : ordinal.{u}) : grundy_value (nim o) = o :=\n  grundy_value_eq_iff_equiv_nim.2 pgame.equiv_rfl\n#align nim_grundy_value nim_grundy_value\n\n",
+ "nim_fuzzy_zero_of_ne_zero":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `pgame.fuzzy -/\ntheorem nim_fuzzy_zero_of_ne_zero {o : ordinal} (ho : o ≠ 0) : pgame.fuzzy (nim o) 0 :=\n  by\n  rw [impartial.fuzzy_zero_iff_lf, nim_def, lf_zero_le]\n  rw [← ordinal.pos_iff_ne_zero] at ho\n  exact ⟨(ordinal.principal_seg_out ho).top, by simp⟩\n#align nim_fuzzy_zero_of_ne_zero nim_fuzzy_zero_of_ne_zero\n\n",
+ "nim_equiv_iff_eq":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `pgame.equiv -/\n@[simp]\ntheorem nim_equiv_iff_eq {o₁ o₂ : ordinal} : pgame.equiv (nim o₁) (nim o₂) ↔ o₁ = o₂ := by\n  rw [impartial.equiv_iff_add_equiv_zero, nim_add_equiv_zero_iff]\n#align nim_equiv_iff_eq nim_equiv_iff_eq\n\n",
+ "nim_def":
+ "/-\nCopyright (c) 2020 Fox Thomson. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Fox Thomson, Markus Himmel\n-/\n-- Uses `noncomputable!` to avoid `rec_fn_macro only allowed in meta definitions` VM error\ntheorem nim_def (o : ordinal) :\n    nim o =\n      pgame.mk o.out.α o.out.α (fun o₂ => nim (ordinal.typein (· < ·) o₂)) fun o₂ => nim (ordinal.typein (· < ·) o₂) :=\n  by\n  rw [nim]\n  rfl\n#align nim_def nim_def\n\n",
+ "nim_birthday":
+ "@[simp]\ntheorem nim_birthday (o : ordinal) : (nim o).birthday = o :=\n  by\n  induction' o using ordinal.induction with o IH\n  rw [nim_def, birthday_def]\n  dsimp\n  rw [max_eq_right le_rfl]\n  convert lsub_typein o\n  exact funext fun i => IH _ (typein_lt_self i)\n#align nim_birthday nim_birthday\n\n",
+ "nim_add_nim_equiv":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `pgame.equiv -/\ntheorem nim_add_nim_equiv {n m : ℕ} : pgame.equiv (nim n + nim m) (nim (Nat.lxor' n m)) := by\n  rw [← grundy_value_eq_iff_equiv_nim, grundy_value_nim_add_nim]\n#align nim_add_nim_equiv nim_add_nim_equiv\n\n",
+ "nim_add_fuzzy_zero_iff":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `pgame.fuzzy -/\n@[simp]\ntheorem nim_add_fuzzy_zero_iff {o₁ o₂ : ordinal} : pgame.fuzzy (nim o₁ + nim o₂) 0 ↔ o₁ ≠ o₂ := by\n  rw [iff_not_comm, impartial.not_fuzzy_zero_iff, nim_add_equiv_zero_iff]\n#align nim_add_fuzzy_zero_iff nim_add_fuzzy_zero_iff\n\n",
+ "nim_add_equiv_zero_iff":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `pgame.equiv -/\n@[simp]\ntheorem nim_add_equiv_zero_iff (o₁ o₂ : ordinal) : pgame.equiv (nim o₁ + nim o₂) 0 ↔ o₁ = o₂ :=\n  by\n  constructor\n  · refine' not_imp_not.1 fun h : _ ≠ _ => (impartial.not_equiv_zero_iff _).2 _\n    obtain h | h := h.lt_or_lt\n    · rw [impartial.fuzzy_zero_iff_gf, zero_lf_le, nim_def o₂]\n      refine' ⟨to_left_moves_add (sum.inr _), _⟩\n      · exact (ordinal.principal_seg_out h).top\n      · simpa using (impartial.add_self (nim o₁)).2\n    · rw [impartial.fuzzy_zero_iff_gf, zero_lf_le, nim_def o₁]\n      refine' ⟨to_left_moves_add (sum.inl _), _⟩\n      · exact (ordinal.principal_seg_out h).top\n      · simpa using (impartial.add_self (nim o₂)).2\n  · rintro rfl\n    exact impartial.add_self (nim o₁)\n#align nim_add_equiv_zero_iff nim_add_equiv_zero_iff\n\n",
+ "neg_nim":
+ "@[simp]\ntheorem neg_nim (o : ordinal) : -nim o = nim o :=\n  by\n  induction' o using ordinal.induction with o IH\n  rw [nim_def]; dsimp <;> congr <;> funext i <;> exact IH _ (ordinal.typein_lt_self i)\n#align neg_nim neg_nim\n\n",
+ "move_right_nim_heq":
+ "theorem move_right_nim_heq (o : ordinal) : HEq (nim o).move_right fun i : o.out.α => nim (typein (· < ·) i) :=\n  by\n  rw [nim_def]\n  rfl\n#align move_right_nim_heq move_right_nim_heq\n\n",
+ "move_right_nim'":
+ "@[simp]\ntheorem move_right_nim' {o : ordinal} (i) : (nim o).move_right i = nim (to_right_moves_nim.symm i).val :=\n  (congr_heq (move_right_nim_heq o).symm (cast_heq _ i)).symm\n#align move_right_nim' move_right_nim'\n\n",
+ "move_right_nim":
+ "theorem move_right_nim {o : ordinal} (i) : (nim o).move_right (to_right_moves_nim i) = nim i := by simp\n#align move_right_nim move_right_nim\n\n",
+ "move_left_nim_heq":
+ "theorem move_left_nim_heq (o : ordinal) : HEq (nim o).move_left fun i : o.out.α => nim (typein (· < ·) i) :=\n  by\n  rw [nim_def]\n  rfl\n#align move_left_nim_heq move_left_nim_heq\n\n",
+ "move_left_nim'":
+ "@[simp]\ntheorem move_left_nim' {o : ordinal.{u}} (i) : (nim o).move_left i = nim (to_left_moves_nim.symm i).val :=\n  (congr_heq (move_left_nim_heq o).symm (cast_heq _ i)).symm\n#align move_left_nim' move_left_nim'\n\n",
+ "move_left_nim":
+ "theorem move_left_nim {o : ordinal} (i) : (nim o).move_left (to_left_moves_nim i) = nim i := by simp\n#align move_left_nim move_left_nim\n\n",
+ "left_moves_nim":
+ "theorem left_moves_nim (o : ordinal) : (nim o).left_moves = o.out.α :=\n  by\n  rw [nim_def]\n  rfl\n#align left_moves_nim left_moves_nim\n\n",
+ "grundy_value_zero":
+ "@[simp]\ntheorem grundy_value_zero : grundy_value 0 = 0 :=\n  grundy_value_eq_iff_equiv_nim.2 nim_zero_equiv.symm\n#align grundy_value_zero grundy_value_zero\n\n",
+ "grundy_value_star":
+ "@[simp]\ntheorem grundy_value_star : grundy_value star = 1 :=\n  grundy_value_eq_iff_equiv_nim.2 nim_one_equiv.symm\n#align grundy_value_star grundy_value_star\n\n",
+ "grundy_value_nim_add_nim":
+ "@[simp]\ntheorem grundy_value_nim_add_nim (n m : ℕ) : grundy_value (nim.{u} n + nim.{u} m) = Nat.lxor' n m :=\n  by\n  induction' n using nat.strong_induction_on with n hn generalizing m\n  induction' m using nat.strong_induction_on with m hm\n  rw [grundy_value_eq_mex_left]\n  -- We want to show that `n xor m` is the smallest unreachable Grundy value. We will do this in two\n  -- steps:\n  -- h₀: `n xor m` is not a reachable grundy number.\n  -- h₁: every Grundy number strictly smaller than `n xor m` is reachable.\n  have h₀ : ∀ i, grundy_value ((nim n + nim m).move_left i) ≠ (Nat.lxor' n m : ordinal) :=\n    by\n    -- To show that `n xor m` is unreachable, we show that every move produces a Grundy number\n    -- different from `n xor m`.\n    intro i\n    -- The move operates either on the left pile or on the right pile.\n    apply left_moves_add_cases i\n    all_goals\n      -- One of the piles is reduced to `k` stones, with `k < n` or `k < m`.\n      intro a\n      obtain ⟨ok, hk, hk'⟩ := exists_ordinal_move_left_eq a\n      obtain ⟨k, rfl⟩ := ordinal.lt_omega.1 (lt_trans hk (ordinal.nat_lt_omega _))\n      replace hk := ordinal.nat_cast_lt.1 hk\n      -- Thus, the problem is reduced to computing the Grundy value of `nim n + nim k` or\n      -- `nim k + nim m`, both of which can be dealt with using an inductive hypothesis.\n      simp only [hk', add_move_left_inl, add_move_left_inr, id]\n      first |rw [hn _ hk]|rw [hm _ hk]\n      -- But of course xor is injective, so if we change one of the arguments, we will not get the\n      -- same value again.\n      intro h\n      rw [ordinal.nat_cast_inj] at h\n      try rw [Nat.lxor'_comm n k, Nat.lxor'_comm n m] at h\n      exact hk.ne (nat.lxor_left_injective h)\n  have h₁ : ∀ u : ordinal, u < Nat.lxor' n m → u ∈ Set.range fun i => grundy_value ((nim n + nim m).move_left i) :=\n    by\n    -- Take any natural number `u` less than `n xor m`.\n    intro ou hu\n    obtain ⟨u, rfl⟩ := ordinal.lt_omega.1 (lt_trans hu (ordinal.nat_lt_omega _))\n    replace hu := ordinal.nat_cast_lt.1 hu\n    -- Our goal is to produce a move that gives the Grundy value `u`.\n    rw [Set.mem_range]\n    -- By a lemma about xor, either `u xor m < n` or `u xor n < m`.\n    cases' Nat.lt_lxor'_cases hu with h h\n    -- Therefore, we can play the corresponding move, and by the inductive hypothesis the new state\n    -- is `(u xor m) xor m = u` or `n xor (u xor n) = u` as required.\n    · obtain ⟨i, hi⟩ := exists_move_left_eq (ordinal.nat_cast_lt.2 h)\n      refine' ⟨to_left_moves_add (sum.inl i), _⟩\n      simp only [hi, add_move_left_inl]\n      rw [hn _ h, Nat.lxor'_assoc, Nat.lxor'_self, Nat.lxor'_zero]\n    · obtain ⟨i, hi⟩ := exists_move_left_eq (ordinal.nat_cast_lt.2 h)\n      refine' ⟨to_left_moves_add (sum.inr i), _⟩\n      simp only [hi, add_move_left_inr]\n      rw [hm _ h, Nat.lxor'_comm, Nat.lxor'_assoc, Nat.lxor'_self, Nat.lxor'_zero]\n  -- We are done!\n  apply (ordinal.mex_le_of_ne.{u, u} h₀).antisymm\n  contrapose! h₁\n  exact ⟨_, ⟨h₁, ordinal.mex_not_mem_range _⟩⟩\n#align grundy_value_nim_add_nim grundy_value_nim_add_nim\n\n",
+ "grundy_value_neg":
+ "@[simp]\ntheorem grundy_value_neg (G : pgame) [G.impartial] : grundy_value (-G) = grundy_value G := by\n  rw [grundy_value_eq_iff_equiv_nim, neg_equiv_iff, neg_nim, ← grundy_value_eq_iff_equiv_nim]\n#align grundy_value_neg grundy_value_neg\n\n",
+ "grundy_value_iff_equiv_zero":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `pgame.equiv -/\ntheorem grundy_value_iff_equiv_zero (G : pgame) [G.impartial] : grundy_value G = 0 ↔ pgame.equiv G 0 := by\n  rw [← grundy_value_eq_iff_equiv, grundy_value_zero]\n#align grundy_value_iff_equiv_zero grundy_value_iff_equiv_zero\n\n",
+ "grundy_value_eq_mex_right":
+ "theorem grundy_value_eq_mex_right :\n    ∀ (G : pgame) [G.impartial], grundy_value G = ordinal.mex.{u, u} fun i => grundy_value (G.move_right i)\n  | ⟨l, r, L, R⟩ => by\n    intro H\n    rw [← grundy_value_neg, grundy_value_eq_mex_left]\n    congr\n    ext i\n    haveI : (R i).impartial := @impartial.move_right_impartial ⟨l, r, L, R⟩ _ i\n    apply grundy_value_neg\n#align grundy_value_eq_mex_right grundy_value_eq_mex_right\n\n",
+ "grundy_value_eq_mex_left":
+ "theorem grundy_value_eq_mex_left (G : pgame) :\n    grundy_value G = ordinal.mex.{u, u} fun i => grundy_value (G.move_left i) := by rw [grundy_value]\n#align grundy_value_eq_mex_left grundy_value_eq_mex_left\n\n",
+ "grundy_value_eq_iff_equiv_nim":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `pgame.equiv -/\ntheorem grundy_value_eq_iff_equiv_nim {G : pgame} [G.impartial] {o : ordinal} :\n    grundy_value G = o ↔ pgame.equiv G (nim o) :=\n  ⟨by\n    rintro rfl\n    exact equiv_nim_grundy_value G, by\n    intro h\n    rw [← nim_equiv_iff_eq]\n    exact (equiv_nim_grundy_value G).symm.trans h⟩\n#align grundy_value_eq_iff_equiv_nim grundy_value_eq_iff_equiv_nim\n\n",
+ "grundy_value_eq_iff_equiv":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `pgame.equiv -/\ntheorem grundy_value_eq_iff_equiv (G H : pgame) [G.impartial] [H.impartial] :\n    grundy_value G = grundy_value H ↔ pgame.equiv G H :=\n  grundy_value_eq_iff_equiv_nim.trans (equiv_congr_left.1 (equiv_nim_grundy_value H) _).symm\n#align grundy_value_eq_iff_equiv grundy_value_eq_iff_equiv\n\n",
+ "grundy_value_add":
+ "theorem grundy_value_add (G H : pgame) [G.impartial] [H.impartial] {n m : ℕ} (hG : grundy_value G = n)\n    (hH : grundy_value H = m) : grundy_value (G + H) = Nat.lxor' n m :=\n  by\n  rw [← nim_grundy_value (Nat.lxor' n m), grundy_value_eq_iff_equiv]\n  refine' equiv.trans _ nim_add_nim_equiv\n  convert add_congr (equiv_nim_grundy_value G) (equiv_nim_grundy_value H) <;> simp only [hG, hH]\n#align grundy_value_add grundy_value_add\n\n",
+ "exists_ordinal_move_left_eq":
+ "theorem exists_ordinal_move_left_eq {o : ordinal} (i) : ∃ o' < o, (nim o).move_left i = nim o' :=\n  ⟨_, typein_lt_self _, move_left_nim' i⟩\n#align exists_ordinal_move_left_eq exists_ordinal_move_left_eq\n\n",
+ "exists_move_left_eq":
+ "theorem exists_move_left_eq {o o' : ordinal} (h : o' < o) : ∃ i, (nim o).move_left i = nim o' :=\n  ⟨to_left_moves_nim ⟨o', h⟩, by simp⟩\n#align exists_move_left_eq exists_move_left_eq\n\n",
+ "equiv_nim_grundy_value":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `pgame.equiv -/\n/-- The Sprague-Grundy theorem which states that every impartial game is equivalent to a game of\n nim, namely the game of nim corresponding to the games Grundy value -/\ntheorem equiv_nim_grundy_value : ∀ (G : pgame.{u}) [G.impartial], pgame.equiv G (nim (grundy_value G))\n  | G => by\n    intro hG\n    rw [impartial.equiv_iff_add_equiv_zero, ← impartial.forall_left_moves_fuzzy_iff_equiv_zero]\n    intro i\n    apply left_moves_add_cases i\n    · intro i₁\n      rw [add_move_left_inl]\n      apply (fuzzy_congr_left (add_congr_left (equiv_nim_grundy_value (G.move_left i₁)).symm)).1\n      rw [nim_add_fuzzy_zero_iff]\n      intro heq\n      rw [eq_comm, grundy_value_eq_mex_left G] at heq\n      have h := ordinal.ne_mex _\n      rw [HEq] at h\n      exact (h i₁).irrefl\n    · intro i₂\n      rw [add_move_left_inr, ← impartial.exists_left_move_equiv_iff_fuzzy_zero]\n      revert i₂\n      rw [nim_def]\n      intro i₂\n      have h' :\n        ∃ i : G.left_moves, grundy_value (G.move_left i) = ordinal.typein (quotient.out (grundy_value G)).r i₂ :=\n        by\n        revert i₂\n        rw [grundy_value_eq_mex_left]\n        intro i₂\n        have hnotin : _ ∉ _ := fun hin => (le_not_le_of_lt (ordinal.typein_lt_self i₂)).2 (cinfₛ_le' hin)\n        simpa using hnotin\n      cases' h' with i hi\n      use to_left_moves_add (sum.inl i)\n      rw [add_move_left_inl, move_left_mk]\n      apply (add_congr_left (equiv_nim_grundy_value (G.move_left i))).trans\n      simpa only [hi] using impartial.add_self (nim (grundy_value (G.move_left i)))decreasing_by pgame_wf_tac\n#align equiv_nim_grundy_value equiv_nim_grundy_value\n\n",
+ "default_nim_one_right_moves_eq":
+ "@[simp]\ntheorem default_nim_one_right_moves_eq : (default : (nim 1).right_moves) = @to_right_moves_nim 1 ⟨0, zero_lt_one⟩ :=\n  rfl\n#align default_nim_one_right_moves_eq default_nim_one_right_moves_eq\n\n",
+ "default_nim_one_left_moves_eq":
+ "@[simp]\ntheorem default_nim_one_left_moves_eq : (default : (nim 1).left_moves) = @to_left_moves_nim 1 ⟨0, zero_lt_one⟩ :=\n  rfl\n#align default_nim_one_left_moves_eq default_nim_one_left_moves_eq\n\n"}

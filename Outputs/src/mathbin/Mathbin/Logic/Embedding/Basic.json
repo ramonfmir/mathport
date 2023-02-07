@@ -1,0 +1,58 @@
+{"trans_to_embedding":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ » -/\n@[simp]\ntheorem trans_to_embedding {α β γ : Type _} (e : «expr ≃ » α β) (f : «expr ≃ » β γ) :\n    (e.trans f).to_embedding = e.to_embedding.trans f.to_embedding :=\n  rfl\n#align trans_to_embedding trans_to_embedding\n\n",
+ "to_fun_eq_coe":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ↪ » -/\n@[simp]\ntheorem to_fun_eq_coe {α β} (f : «expr ↪ » α β) : to_fun f = f :=\n  rfl\n#align to_fun_eq_coe to_fun_eq_coe\n\n",
+ "toEmbedding_apply":
+ "#print Equiv.toEmbedding_apply /-\ntheorem Equiv.toEmbedding_apply (a : α) : f.to_embedding a = f a :=\n  rfl\n#align equiv.to_embedding_apply Equiv.toEmbedding_apply\n-/\n\n",
+ "swap_comp":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ↪ » -/\ntheorem swap_comp {α β : Type _} [decidable_eq α] [decidable_eq β] (f : «expr ↪ » α β) (x y : α) :\n    Equiv.swap (f x) (f y) ∘ f = f ∘ Equiv.swap x y :=\n  f.injective.swap_comp x y\n#align swap_comp swap_comp\n\n",
+ "swap_apply":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ↪ » -/\ntheorem swap_apply {α β : Type _} [decidable_eq α] [decidable_eq β] (f : «expr ↪ » α β) (x y z : α) :\n    Equiv.swap (f x) (f y) (f z) = f (Equiv.swap x y z) :=\n  f.injective.swap_apply x y z\n#align swap_apply swap_apply\n\n",
+ "subtypeOrLeftEmbedding_apply_right":
+ "#print subtypeOrLeftEmbedding_apply_right /-\ntheorem subtypeOrLeftEmbedding_apply_right {p q : α → Prop} [decidable_pred p] (x : { x // p x ∨ q x }) (hx : ¬p x) :\n    subtypeOrLeftEmbedding p q x = sum.inr ⟨x, x.prop.resolve_left hx⟩ :=\n  dif_neg hx\n#align subtype_or_left_embedding_apply_right subtypeOrLeftEmbedding_apply_right\n-/\n\n",
+ "subtypeOrLeftEmbedding_apply_left":
+ "#print subtypeOrLeftEmbedding_apply_left /-\ntheorem subtypeOrLeftEmbedding_apply_left {p q : α → Prop} [decidable_pred p] (x : { x // p x ∨ q x }) (hx : p x) :\n    subtypeOrLeftEmbedding p q x = sum.inl ⟨x, hx⟩ :=\n  dif_pos hx\n#align subtype_or_left_embedding_apply_left subtypeOrLeftEmbedding_apply_left\n-/\n\n",
+ "set_value_eq":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ↪ » -/\ntheorem set_value_eq {α β} (f : «expr ↪ » α β) (a : α) (b : β) [∀ a', decidable (a' = a)] [∀ a', decidable (f a' = b)] :\n    setValue f a b a = b := by simp [set_value]\n#align set_value_eq set_value_eq\n\n",
+ "refl_to_embedding":
+ "@[simp]\ntheorem refl_to_embedding {α : Type _} : (equiv.refl α).to_embedding = Function.Embedding.refl α :=\n  rfl\n#align refl_to_embedding refl_to_embedding\n\n",
+ "mk_coe":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ↪ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ↪ » -/\n@[simp]\ntheorem mk_coe {α β : Type _} (f : «expr ↪ » α β) (inj) : (⟨f, inj⟩ : «expr ↪ » α β) = f :=\n  by\n  ext\n  simp\n#align mk_coe mk_coe\n\n",
+ "injective":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ↪ » -/\nprotected theorem injective {α β} (f : «expr ↪ » α β) : injective f :=\n  embedding_like.injective f\n#align injective injective\n\n",
+ "ext_iff":
+ "theorem ext_iff {α β} {f g : Embedding α β} : (∀ x, f x = g x) ↔ f = g :=\n  fun_like.ext_iff.symm\n#align ext_iff ext_iff\n\n",
+ "ext":
+ "@[ext]\ntheorem ext {α β} {f g : Embedding α β} (h : ∀ x, f x = g x) : f = g :=\n  fun_like.ext f g h\n#align ext ext\n\n",
+ "equiv_to_embedding_trans_symm_to_embedding":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ » -/\n@[simp]\ntheorem equiv_to_embedding_trans_symm_to_embedding {α β : Sort _} (e : «expr ≃ » α β) :\n    e.to_embedding.trans e.symm.to_embedding = Embedding.refl _ :=\n  by\n  ext\n  simp\n#align equiv_to_embedding_trans_symm_to_embedding equiv_to_embedding_trans_symm_to_embedding\n\n",
+ "equiv_symm_to_embedding_trans_to_embedding":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ » -/\n@[simp]\ntheorem equiv_symm_to_embedding_trans_to_embedding {α β : Sort _} (e : «expr ≃ » α β) :\n    e.symm.to_embedding.trans e.to_embedding = Embedding.refl _ :=\n  by\n  ext\n  simp\n#align equiv_symm_to_embedding_trans_to_embedding equiv_symm_to_embedding_trans_to_embedding\n\n",
+ "embedding_congr_trans":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ » -/\n@[simp]\ntheorem embedding_congr_trans {α₁ β₁ α₂ β₂ α₃ β₃ : Sort _} (e₁ : «expr ≃ » α₁ α₂) (e₁' : «expr ≃ » β₁ β₂)\n    (e₂ : «expr ≃ » α₂ α₃) (e₂' : «expr ≃ » β₂ β₃) :\n    embeddingCongr (e₁.trans e₂) (e₁'.trans e₂') = (embeddingCongr e₁ e₁').trans (embeddingCongr e₂ e₂') :=\n  rfl\n#align embedding_congr_trans embedding_congr_trans\n\n",
+ "embedding_congr_symm":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ » -/\n@[simp]\ntheorem embedding_congr_symm {α₁ β₁ α₂ β₂ : Sort _} (e₁ : «expr ≃ » α₁ α₂) (e₂ : «expr ≃ » β₁ β₂) :\n    (embeddingCongr e₁ e₂).symm = embeddingCongr e₁.symm e₂.symm :=\n  rfl\n#align embedding_congr_symm embedding_congr_symm\n\n",
+ "embedding_congr_refl":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ↪ » -/\n@[simp]\ntheorem embedding_congr_refl {α β : Sort _} :\n    embeddingCongr (equiv.refl α) (equiv.refl β) = equiv.refl («expr ↪ » α β) :=\n  by\n  ext\n  rfl\n#align embedding_congr_refl embedding_congr_refl\n\n",
+ "embedding_congr_apply_trans":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ↪ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ↪ » -/\ntheorem embedding_congr_apply_trans {α₁ β₁ γ₁ α₂ β₂ γ₂ : Sort _} (ea : «expr ≃ » α₁ α₂) (eb : «expr ≃ » β₁ β₂)\n    (ec : «expr ≃ » γ₁ γ₂) (f : «expr ↪ » α₁ β₁) (g : «expr ↪ » β₁ γ₁) :\n    Equiv.embeddingCongr ea ec (f.trans g) = (Equiv.embeddingCongr ea eb f).trans (Equiv.embeddingCongr eb ec g) :=\n  by\n  ext\n  simp\n#align embedding_congr_apply_trans embedding_congr_apply_trans\n\n",
+ "coe_toEmbedding":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n#print Equiv.coe_toEmbedding /-\n/-\nCopyright (c) 2017 Johannes Hölzl. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Johannes Hölzl, Mario Carneiro\n-/\n-- depending on cardinalities, an injective function may not exist\n@[simp]\ntheorem Equiv.coe_toEmbedding : «expr⇑ » f.to_embedding = f :=\n  rfl\n#align equiv.coe_to_embedding Equiv.coe_toEmbedding\n-/\n\n",
+ "coe_sum_map":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ↪ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ↪ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n@[simp]\ntheorem coe_sum_map {α β γ δ} (e₁ : «expr ↪ » α β) (e₂ : «expr ↪ » γ δ) : «expr⇑ » (sumMap e₁ e₂) = sum.map e₁ e₂ :=\n  rfl\n#align coe_sum_map coe_sum_map\n\n",
+ "coe_subtype":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n@[simp]\ntheorem coe_subtype {α} (p : α → Prop) : «expr⇑ » (subtype p) = coe :=\n  rfl\n#align coe_subtype coe_subtype\n\n",
+ "coe_quotient_out":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n@[simp]\ntheorem coe_quotient_out (α) [s : setoid α] : «expr⇑ » (quotientOut α) = quotient.out :=\n  rfl\n#align coe_quotient_out coe_quotient_out\n\n",
+ "coe_prod_map":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ↪ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ↪ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n@[simp]\ntheorem coe_prod_map {α β γ δ : Type _} (e₁ : «expr ↪ » α β) (e₂ : «expr ↪ » γ δ) :\n    «expr⇑ » (e₁.prod_map e₂) = prod.map e₁ e₂ :=\n  rfl\n#align coe_prod_map coe_prod_map\n\n",
+ "coe_injective":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ↪ » -/\ntheorem coe_injective {α β} : @function.injective («expr ↪ » α β) (α → β) coe_fn :=\n  fun_like.coe_injective\n#align coe_injective coe_injective\n\n",
+ "coe_fn_mk":
+ "@[simp]\ntheorem coe_fn_mk {α β} (f : α → β) (i) : (@mk _ _ f i : α → β) = f :=\n  rfl\n#align coe_fn_mk coe_fn_mk\n\n",
+ "coe_eq_to_embedding":
+ "@[simp]\ntheorem equiv.coe_eq_to_embedding : ↑f = f.to_embedding :=\n  rfl\n#align equiv.coe_eq_to_embedding equiv.coe_eq_to_embedding\n\n",
+ "arrow_congr_right_apply":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ↪ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ↪ » -/\n@[simp]\ntheorem arrow_congr_right_apply {α : Sort u} {β : Sort v} {γ : Sort w} (e : «expr ↪ » α β) (f : «expr ↪ » γ α) :\n    arrowCongrRight e f = e ∘ f :=\n  rfl\n#align arrow_congr_right_apply arrow_congr_right_apply\n\n",
+ "apply_eq_iff_eq":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ↪ » -/\ntheorem apply_eq_iff_eq {α β} (f : «expr ↪ » α β) (x y : α) : f x = f y ↔ x = y :=\n  embedding_like.apply_eq_iff_eq f\n#align apply_eq_iff_eq apply_eq_iff_eq\n\n"}

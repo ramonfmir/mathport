@@ -1,0 +1,56 @@
+{"min_self":
+ "#print min_self /-\n@[simp]\ntheorem min_self (a : α) : min a a = a :=\n  minTac.1 a a\n#align min_self min_self\n-/\n\n",
+ "min_left_comm":
+ "#print min_left_comm /-\ntheorem min_left_comm : ∀ a b c : α, min a (min b c) = min b (min a c) :=\n  left_comm (@min α _) (@min_comm α _) (@min_assoc α _)\n#align min_left_comm min_left_comm\n-/\n\n",
+ "min_le_right":
+ "#print min_le_right /-\ntheorem min_le_right (a b : α) : min a b ≤ b :=\n  minTac.1 a b\n#align min_le_right min_le_right\n-/\n\n",
+ "min_le_left":
+ "#print min_le_left /-\ntheorem min_le_left (a b : α) : min a b ≤ a :=\n  minTac.1 a b\n#align min_le_left min_le_left\n-/\n\n",
+ "min_eq_right_of_lt":
+ "#print min_eq_right_of_lt /-\ntheorem min_eq_right_of_lt {a b : α} (h : b < a) : min a b = b :=\n  min_eq_right (le_of_lt h)\n#align min_eq_right_of_lt min_eq_right_of_lt\n-/\n\n",
+ "min_eq_right":
+ "#print min_eq_right /-\n@[ematch]\ntheorem min_eq_right {a b : α} (h : b ≤ a) : min a b = b :=\n  eq.subst (min_comm b a) (min_eq_left h)\n#align min_eq_right min_eq_right\n-/\n\n",
+ "min_eq_left_of_lt":
+ "#print min_eq_left_of_lt /-\n-- these rely on lt_of_lt\ntheorem min_eq_left_of_lt {a b : α} (h : a < b) : min a b = a :=\n  min_eq_left (le_of_lt h)\n#align min_eq_left_of_lt min_eq_left_of_lt\n-/\n\n",
+ "min_eq_left":
+ "#print min_eq_left /-\n@[ematch]\ntheorem min_eq_left {a b : α} (h : a ≤ b) : min a b = a := by apply eq.symm; apply eq_min (le_refl _) h; intros ;\n  assumption\n#align min_eq_left min_eq_left\n-/\n\n",
+ "min_def":
+ "#print min_def /-\n/-\nCopyright (c) 2016 Microsoft Corporation. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Jeremy Avigad, Leonardo de Moura\n-/\ntheorem min_def (a b : α) : min a b = if a ≤ b then a else b := by rw [congr_fun linear_order.min_def a, min_default]\n#align min_def min_def\n-/\n\n",
+ "min_comm":
+ "#print min_comm /-\ntheorem min_comm (a b : α) : min a b = min b a :=\n  eq_min (min_le_right a b) (min_le_left a b) fun c h₁ h₂ => le_min h₂ h₁\n#align min_comm min_comm\n-/\n\n",
+ "min_assoc":
+ "#print min_assoc /-\ntheorem min_assoc (a b c : α) : min (min a b) c = min a (min b c) :=\n  by\n  apply eq_min\n  · apply le_trans\n    apply min_le_left\n    apply min_le_left\n  · apply le_min\n    apply le_trans\n    apply min_le_left\n    apply min_le_right\n    apply min_le_right\n  · intro d h₁ h₂\n    apply le_min\n    apply le_min h₁\n    apply le_trans h₂\n    apply min_le_left\n    apply le_trans h₂\n    apply min_le_right\n#align min_assoc min_assoc\n-/\n\n",
+ "max_self":
+ "#print max_self /-\n@[simp]\ntheorem max_self (a : α) : max a a = a :=\n  minTac.1 a a\n#align max_self max_self\n-/\n\n",
+ "max_lt":
+ "#print max_lt /-\ntheorem max_lt {a b c : α} (h₁ : a < c) (h₂ : b < c) : max a b < c :=\n  or.elim (le_or_gt a b) (fun h : a ≤ b => minTac.1 b a) fun h : a > b => minTac.1 a b\n#align max_lt max_lt\n-/\n\n",
+ "max_left_comm":
+ "#print max_left_comm /-\ntheorem max_left_comm : ∀ a b c : α, max a (max b c) = max b (max a c) :=\n  left_comm (@max α _) (@max_comm α _) (@max_assoc α _)\n#align max_left_comm max_left_comm\n-/\n\n",
+ "max_le":
+ "#print max_le /-\ntheorem max_le {a b c : α} (h₁ : a ≤ c) (h₂ : b ≤ c) : max a b ≤ c :=\n  minTac.1 a b\n#align max_le max_le\n-/\n\n",
+ "max_eq_right_of_lt":
+ "#print max_eq_right_of_lt /-\ntheorem max_eq_right_of_lt {a b : α} (h : a < b) : max a b = b :=\n  max_eq_right (le_of_lt h)\n#align max_eq_right_of_lt max_eq_right_of_lt\n-/\n\n",
+ "max_eq_right":
+ "#print max_eq_right /-\ntheorem max_eq_right {a b : α} (h : a ≤ b) : max a b = b :=\n  eq.subst (max_comm b a) (max_eq_left h)\n#align max_eq_right max_eq_right\n-/\n\n",
+ "max_eq_left_of_lt":
+ "#print max_eq_left_of_lt /-\ntheorem max_eq_left_of_lt {a b : α} (h : b < a) : max a b = a :=\n  max_eq_left (le_of_lt h)\n#align max_eq_left_of_lt max_eq_left_of_lt\n-/\n\n",
+ "max_eq_left":
+ "#print max_eq_left /-\ntheorem max_eq_left {a b : α} (h : b ≤ a) : max a b = a := by apply eq.symm; apply eq_max (le_refl _) h; intros ;\n  assumption\n#align max_eq_left max_eq_left\n-/\n\n",
+ "max_def":
+ "#print max_def /-\ntheorem max_def (a b : α) : max a b = if a ≤ b then b else a := by rw [congr_fun linear_order.max_def a, max_default]\n#align max_def max_def\n-/\n\n",
+ "max_comm":
+ "#print max_comm /-\ntheorem max_comm (a b : α) : max a b = max b a :=\n  eq_max (le_max_right a b) (le_max_left a b) fun c h₁ h₂ => max_le h₂ h₁\n#align max_comm max_comm\n-/\n\n",
+ "max_assoc":
+ "#print max_assoc /-\ntheorem max_assoc (a b c : α) : max (max a b) c = max a (max b c) :=\n  by\n  apply eq_max\n  · apply le_trans\n    apply le_max_left a b\n    apply le_max_left\n  · apply max_le\n    apply le_trans\n    apply le_max_right a b\n    apply le_max_left\n    apply le_max_right\n  · intro d h₁ h₂\n    apply max_le\n    apply max_le h₁\n    apply le_trans (le_max_left _ _) h₂\n    apply le_trans (le_max_right _ _) h₂\n#align max_assoc max_assoc\n-/\n\n",
+ "lt_min":
+ "#print lt_min /-\n-- these use the fact that it is a linear ordering\ntheorem lt_min {a b c : α} (h₁ : a < b) (h₂ : a < c) : a < min b c :=\n  or.elim (le_or_gt b c) (fun h : b ≤ c => minTac.1 b c) fun h : b > c => minTac.1 b c\n#align lt_min lt_min\n-/\n\n",
+ "le_min":
+ "#print le_min /-\ntheorem le_min {a b c : α} (h₁ : c ≤ a) (h₂ : c ≤ b) : c ≤ min a b :=\n  minTac.1 a b\n#align le_min le_min\n-/\n\n",
+ "le_max_right":
+ "#print le_max_right /-\ntheorem le_max_right (a b : α) : b ≤ max a b :=\n  minTac.1 a b\n#align le_max_right le_max_right\n-/\n\n",
+ "le_max_left":
+ "#print le_max_left /-\ntheorem le_max_left (a b : α) : a ≤ max a b :=\n  minTac.1 a b\n#align le_max_left le_max_left\n-/\n\n",
+ "eq_min":
+ "#print eq_min /-\ntheorem eq_min {a b c : α} (h₁ : c ≤ a) (h₂ : c ≤ b) (h₃ : ∀ {d}, d ≤ a → d ≤ b → d ≤ c) : c = min a b :=\n  le_antisymm (le_min h₁ h₂) (h₃ (min_le_left a b) (min_le_right a b))\n#align eq_min eq_min\n-/\n\n",
+ "eq_max":
+ "#print eq_max /-\ntheorem eq_max {a b c : α} (h₁ : a ≤ c) (h₂ : b ≤ c) (h₃ : ∀ {d}, a ≤ d → b ≤ d → c ≤ d) : c = max a b :=\n  le_antisymm (h₃ (le_max_left a b) (le_max_right a b)) (max_le h₁ h₂)\n#align eq_max eq_max\n-/\n\n"}

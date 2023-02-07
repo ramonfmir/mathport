@@ -1,0 +1,100 @@
+{"succ_ne":
+ "theorem is_succ_limit.succ_ne (h : IsSuccLimit a) (b : α) : succ b ≠ a :=\n  by\n  rintro rfl\n  exact not_isMax _ h.is_max\n#align is_succ_limit.succ_ne is_succ_limit.succ_ne\n\n",
+ "succ_lt_iff":
+ "theorem is_succ_limit.succ_lt_iff (hb : IsSuccLimit b) : succ a < b ↔ a < b :=\n  ⟨fun h => (le_succ a).trans_lt h, hb.succ_lt⟩\n#align is_succ_limit.succ_lt_iff is_succ_limit.succ_lt_iff\n\n",
+ "succ_lt":
+ "theorem is_succ_limit.succ_lt (hb : IsSuccLimit b) (ha : a < b) : succ a < b :=\n  by\n  by_cases h : is_max a\n  · rwa [h.succ_eq]\n  · rw [lt_iff_le_and_ne, succ_le_iff_of_not_is_max h]\n    refine' ⟨ha, fun hab => _⟩\n    subst hab\n    exact (h hb.is_max).elim\n#align is_succ_limit.succ_lt is_succ_limit.succ_lt\n\n",
+ "pred_ne":
+ "theorem is_pred_limit.pred_ne (h : IsPredLimit a) (b : α) : pred b ≠ a :=\n  by\n  rintro rfl\n  exact not_isMin _ h.is_min\n#align is_pred_limit.pred_ne is_pred_limit.pred_ne\n\n",
+ "not_is_succ_limit_succ_of_not_is_max":
+ "theorem not_is_succ_limit_succ_of_not_is_max (ha : ¬is_max a) : ¬IsSuccLimit (succ a) :=\n  by\n  contrapose! ha\n  exact ha.is_max\n#align not_is_succ_limit_succ_of_not_is_max not_is_succ_limit_succ_of_not_is_max\n\n",
+ "not_is_succ_limit_succ":
+ "@[simp]\ntheorem not_is_succ_limit_succ (a : α) : ¬IsSuccLimit (succ a) := fun h => h.succ_ne _ rfl\n#align not_is_succ_limit_succ not_is_succ_limit_succ\n\n",
+ "not_is_succ_limit_of_no_max":
+ "theorem not_is_succ_limit_of_no_max [NoMinOrder α] [NoMaxOrder α] : ¬IsSuccLimit a := by simp\n#align not_is_succ_limit_of_no_max not_is_succ_limit_of_no_max\n\n",
+ "not_is_succ_limit_iff_exists_covby":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⋖ » -/\n/-\nCopyright (c) 2022 Violeta Hernández Palacios. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Violeta Hernández Palacios\n-/\ntheorem not_is_succ_limit_iff_exists_covby (a : α) : ¬IsSuccLimit a ↔ ∃ b, «expr ⋖ » b a := by simp [is_succ_limit]\n#align not_is_succ_limit_iff_exists_covby not_is_succ_limit_iff_exists_covby\n\n",
+ "not_is_succ_limit_iff'":
+ "theorem not_is_succ_limit_iff' : ¬IsSuccLimit a ↔ a ∈ range (@succ α _ _) :=\n  by\n  simp_rw [is_succ_limit_iff_succ_ne, not_forall, not_ne_iff]\n  rfl\n#align not_is_succ_limit_iff' not_is_succ_limit_iff'\n\n",
+ "not_is_succ_limit_iff":
+ "theorem not_is_succ_limit_iff : ¬IsSuccLimit a ↔ ∃ b, ¬is_max b ∧ succ b = a :=\n  by\n  rw [not_is_succ_limit_iff_exists_covby]\n  refine' exists_congr fun b => ⟨fun hba => ⟨hba.lt.not_is_max, hba.succ_eq⟩, _⟩\n  rintro ⟨h, rfl⟩\n  exact covby_succ_of_not_is_max h\n#align not_is_succ_limit_iff not_is_succ_limit_iff\n\n",
+ "not_is_succ_limit":
+ "theorem not_is_succ_limit [NoMinOrder α] : ¬IsSuccLimit a := by simp\n#align not_is_succ_limit not_is_succ_limit\n\n",
+ "not_is_pred_limit_pred_of_not_is_min":
+ "theorem not_is_pred_limit_pred_of_not_is_min (ha : ¬is_min a) : ¬IsPredLimit (pred a) :=\n  by\n  contrapose! ha\n  exact ha.is_min\n#align not_is_pred_limit_pred_of_not_is_min not_is_pred_limit_pred_of_not_is_min\n\n",
+ "not_is_pred_limit_pred":
+ "@[simp]\ntheorem not_is_pred_limit_pred (a : α) : ¬IsPredLimit (pred a) := fun h => h.pred_ne _ rfl\n#align not_is_pred_limit_pred not_is_pred_limit_pred\n\n",
+ "not_is_pred_limit_of_no_min":
+ "theorem not_is_pred_limit_of_no_min [NoMinOrder α] [NoMaxOrder α] : ¬IsPredLimit a := by simp\n#align not_is_pred_limit_of_no_min not_is_pred_limit_of_no_min\n\n",
+ "not_is_pred_limit_iff_exists_covby":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⋖ » -/\ntheorem not_is_pred_limit_iff_exists_covby (a : α) : ¬IsPredLimit a ↔ ∃ b, «expr ⋖ » a b := by simp [is_pred_limit]\n#align not_is_pred_limit_iff_exists_covby not_is_pred_limit_iff_exists_covby\n\n",
+ "not_is_pred_limit_iff":
+ "theorem not_is_pred_limit_iff : ¬IsPredLimit a ↔ ∃ b, ¬is_min b ∧ pred b = a :=\n  by\n  rw [← is_succ_limit_to_dual_iff]\n  exact not_is_succ_limit_iff\n#align not_is_pred_limit_iff not_is_pred_limit_iff\n\n",
+ "not_is_pred_limit":
+ "theorem not_is_pred_limit [NoMaxOrder α] : ¬IsPredLimit a := by simp\n#align not_is_pred_limit not_is_pred_limit\n\n",
+ "mem_range_succ_of_not_is_succ_limit":
+ "/-- See `not_is_succ_limit_iff` for a version that states that `a` is a successor of a value other\nthan itself. -/\ntheorem mem_range_succ_of_not_is_succ_limit (h : ¬IsSuccLimit a) : a ∈ range (@succ α _ _) :=\n  by\n  cases' not_is_succ_limit_iff.1 h with b hb\n  exact ⟨b, hb.2⟩\n#align mem_range_succ_of_not_is_succ_limit mem_range_succ_of_not_is_succ_limit\n\n",
+ "mem_range_pred_of_not_is_pred_limit":
+ "/-- See `not_is_pred_limit_iff` for a version that states that `a` is a successor of a value other\nthan itself. -/\ntheorem mem_range_pred_of_not_is_pred_limit (h : ¬IsPredLimit a) : a ∈ range (@pred α _ _) :=\n  by\n  cases' not_is_pred_limit_iff.1 h with b hb\n  exact ⟨b, hb.2⟩\n#align mem_range_pred_of_not_is_pred_limit mem_range_pred_of_not_is_pred_limit\n\n",
+ "lt_pred_iff":
+ "theorem is_pred_limit.lt_pred_iff (h : IsPredLimit a) : a < pred b ↔ a < b :=\n  h.dual.succ_lt_iff\n#align is_pred_limit.lt_pred_iff is_pred_limit.lt_pred_iff\n\n",
+ "lt_pred":
+ "theorem is_pred_limit.lt_pred (h : IsPredLimit a) : a < b → a < pred b :=\n  h.dual.succ_lt\n#align is_pred_limit.lt_pred is_pred_limit.lt_pred\n\n",
+ "is_succ_limit_to_dual_iff":
+ "@[simp]\ntheorem is_succ_limit_to_dual_iff : IsSuccLimit (toDual a) ↔ IsPredLimit a := by simp [is_succ_limit, is_pred_limit]\n#align is_succ_limit_to_dual_iff is_succ_limit_to_dual_iff\n\n",
+ "is_succ_limit_rec_on_succ'":
+ "theorem is_succ_limit_rec_on_succ' (hs : ∀ a, ¬is_max a → C (succ a)) (hl : ∀ a, IsSuccLimit a → C a) {b : α}\n    (hb : ¬is_max b) : @isSuccLimitRecOn α _ _ C (succ b) hs hl = hs b hb :=\n  by\n  have hb' := not_is_succ_limit_succ_of_not_is_max hb\n  have H := Classical.choose_spec (not_is_succ_limit_iff.1 hb')\n  rw [is_succ_limit_rec_on]\n  simp only [cast_eq_iff_heq, hb', not_false_iff, eq_mpr_eq_cast, dif_neg]\n  congr\n  · exact (succ_eq_succ_iff_of_not_is_max H.1 hb).1 H.2\n  · apply proof_irrel_heq\n#align is_succ_limit_rec_on_succ' is_succ_limit_rec_on_succ'\n\n",
+ "is_succ_limit_rec_on_succ":
+ "@[simp]\ntheorem is_succ_limit_rec_on_succ (hs : ∀ a, ¬is_max a → C (succ a)) (hl : ∀ a, IsSuccLimit a → C a) (b : α) :\n    @isSuccLimitRecOn α _ _ C (succ b) hs hl = hs b (not_isMax b) :=\n  isSuccLimitRecOn_succ' _ _ _\n#align is_succ_limit_rec_on_succ is_succ_limit_rec_on_succ\n\n",
+ "is_succ_limit_rec_on_limit":
+ "theorem is_succ_limit_rec_on_limit (hs : ∀ a, ¬is_max a → C (succ a)) (hl : ∀ a, IsSuccLimit a → C a)\n    (hb : IsSuccLimit b) : @isSuccLimitRecOn α _ _ C b hs hl = hl b hb := by classical exact dif_pos hb\n#align is_succ_limit_rec_on_limit is_succ_limit_rec_on_limit\n\n",
+ "is_succ_limit_of_succ_ne":
+ "theorem is_succ_limit_of_succ_ne (h : ∀ b, succ b ≠ a) : IsSuccLimit a := fun b hba => h b hba.succ_eq\n#align is_succ_limit_of_succ_ne is_succ_limit_of_succ_ne\n\n",
+ "is_succ_limit_of_succ_lt":
+ "theorem is_succ_limit_of_succ_lt (H : ∀ a < b, succ a < b) : IsSuccLimit b := fun a hab => (H a hab.lt).ne hab.succ_eq\n#align is_succ_limit_of_succ_lt is_succ_limit_of_succ_lt\n\n",
+ "is_succ_limit_of_dense":
+ "@[simp]\ntheorem is_succ_limit_of_dense [DenselyOrdered α] (a : α) : IsSuccLimit a := fun b => not_covby\n#align is_succ_limit_of_dense is_succ_limit_of_dense\n\n",
+ "is_succ_limit_iff_succ_ne":
+ "theorem is_succ_limit_iff_succ_ne : IsSuccLimit a ↔ ∀ b, succ b ≠ a :=\n  ⟨IsSuccLimit.succ_ne, isSuccLimit_of_succ_ne⟩\n#align is_succ_limit_iff_succ_ne is_succ_limit_iff_succ_ne\n\n",
+ "is_succ_limit_iff_succ_lt":
+ "theorem is_succ_limit_iff_succ_lt : IsSuccLimit b ↔ ∀ a < b, succ a < b :=\n  ⟨fun hb a => hb.succ_lt, isSuccLimit_of_succ_lt⟩\n#align is_succ_limit_iff_succ_lt is_succ_limit_iff_succ_lt\n\n",
+ "is_succ_limit_iff_of_no_max":
+ "@[simp]\ntheorem is_succ_limit_iff_of_no_max [NoMaxOrder α] : IsSuccLimit a ↔ is_min a :=\n  ⟨IsSuccLimit.isMin_of_noMax, Order.IsMin.isSuccLimit⟩\n#align is_succ_limit_iff_of_no_max is_succ_limit_iff_of_no_max\n\n",
+ "is_succ_limit_iff":
+ "@[simp]\ntheorem is_succ_limit_iff : IsSuccLimit a ↔ is_min a :=\n  ⟨IsSuccLimit.isMin, Order.IsMin.isSuccLimit⟩\n#align is_succ_limit_iff is_succ_limit_iff\n\n",
+ "is_succ_limit_bot":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\ntheorem is_succ_limit_bot [OrderBot α] : IsSuccLimit («expr⊥» : α) :=\n  isMin_bot.is_succ_limit\n#align is_succ_limit_bot is_succ_limit_bot\n\n",
+ "is_succ_limit":
+ "#print Order.IsMin.isSuccLimit /-\nprotected theorem Order.IsMin.isSuccLimit : is_min a → IsSuccLimit a := fun h b hab => not_isMin_of_lt hab.lt h\n#align is_min.is_succ_limit Order.IsMin.isSuccLimit\n-/\n\n",
+ "is_pred_limit_top":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\ntheorem is_pred_limit_top [OrderTop α] : IsPredLimit («expr⊤» : α) :=\n  isMax_top.is_pred_limit\n#align is_pred_limit_top is_pred_limit_top\n\n",
+ "is_pred_limit_to_dual_iff":
+ "@[simp]\ntheorem is_pred_limit_to_dual_iff : IsPredLimit (toDual a) ↔ IsSuccLimit a := by simp [is_succ_limit, is_pred_limit]\n#align is_pred_limit_to_dual_iff is_pred_limit_to_dual_iff\n\n",
+ "is_pred_limit_rec_on_pred'":
+ "theorem is_pred_limit_rec_on_pred' (hs : ∀ a, ¬is_min a → C (pred a)) (hl : ∀ a, IsPredLimit a → C a) {b : α}\n    (hb : ¬is_min b) : @isPredLimitRecOn α _ _ C (pred b) hs hl = hs b hb :=\n  isSuccLimitRecOn_succ' _ _ _\n#align is_pred_limit_rec_on_pred' is_pred_limit_rec_on_pred'\n\n",
+ "is_pred_limit_rec_on_pred":
+ "@[simp]\ntheorem is_pred_limit_rec_on_pred (hs : ∀ a, ¬is_min a → C (pred a)) (hl : ∀ a, IsPredLimit a → C a) (b : α) :\n    @isPredLimitRecOn α _ _ C (pred b) hs hl = hs b (not_isMin b) :=\n  isSuccLimitRecOn_succ _ _ _\n#align is_pred_limit_rec_on_pred is_pred_limit_rec_on_pred\n\n",
+ "is_pred_limit_rec_on_limit":
+ "theorem is_pred_limit_rec_on_limit (hs : ∀ a, ¬is_min a → C (pred a)) (hl : ∀ a, IsPredLimit a → C a)\n    (hb : IsPredLimit b) : @isPredLimitRecOn α _ _ C b hs hl = hl b hb :=\n  isSuccLimitRecOn_limit _ _ hb.dual\n#align is_pred_limit_rec_on_limit is_pred_limit_rec_on_limit\n\n",
+ "is_pred_limit_of_pred_ne":
+ "theorem is_pred_limit_of_pred_ne (h : ∀ b, pred b ≠ a) : IsPredLimit a := fun b hba => h b hba.pred_eq\n#align is_pred_limit_of_pred_ne is_pred_limit_of_pred_ne\n\n",
+ "is_pred_limit_of_pred_lt":
+ "theorem is_pred_limit_of_pred_lt (H : ∀ a > b, pred a < b) : IsPredLimit b := fun a hab => (H a hab.lt).ne hab.pred_eq\n#align is_pred_limit_of_pred_lt is_pred_limit_of_pred_lt\n\n",
+ "is_pred_limit_of_dense":
+ "theorem is_pred_limit_of_dense [DenselyOrdered α] (a : α) : IsPredLimit a := fun b => not_covby\n#align is_pred_limit_of_dense is_pred_limit_of_dense\n\n",
+ "is_pred_limit_iff_of_no_min":
+ "@[simp]\ntheorem is_pred_limit_iff_of_no_min [NoMinOrder α] : IsPredLimit a ↔ is_max a :=\n  isSuccLimit_toDual_iff.symm.trans isSuccLimit_iff_of_noMax\n#align is_pred_limit_iff_of_no_min is_pred_limit_iff_of_no_min\n\n",
+ "is_pred_limit_iff_lt_pred":
+ "theorem is_pred_limit_iff_lt_pred : IsPredLimit a ↔ ∀ ⦃b⦄, a < b → a < pred b :=\n  isSuccLimit_toDual_iff.symm.trans isSuccLimit_iff_succ_lt\n#align is_pred_limit_iff_lt_pred is_pred_limit_iff_lt_pred\n\n",
+ "is_pred_limit_iff":
+ "@[simp]\ntheorem is_pred_limit_iff : IsPredLimit a ↔ is_max a :=\n  isSuccLimit_toDual_iff.symm.trans isSuccLimit_iff\n#align is_pred_limit_iff is_pred_limit_iff\n\n",
+ "is_pred_limit":
+ "#print Order.IsMax.isPredLimit /-\nprotected theorem Order.IsMax.isPredLimit : is_max a → IsPredLimit a := fun h b hab => not_isMax_of_lt hab.lt h\n#align is_max.is_pred_limit Order.IsMax.isPredLimit\n-/\n\n",
+ "is_min_of_no_max":
+ "theorem is_succ_limit.is_min_of_no_max [NoMaxOrder α] (h : IsSuccLimit a) : is_min a := fun b hb =>\n  by\n  rcases hb.exists_succ_iterate with ⟨_ | n, rfl⟩\n  · exact le_rfl\n  · rw [iterate_succ_apply'] at h\n    exact (not_is_succ_limit_succ _ h).elim\n#align is_succ_limit.is_min_of_no_max is_succ_limit.is_min_of_no_max\n\n",
+ "is_min":
+ "protected theorem is_pred_limit.is_min (h : IsPredLimit (pred a)) : is_min a :=\n  by\n  by_contra H\n  exact h a (pred_covby_of_not_is_min H)\n#align is_pred_limit.is_min is_pred_limit.is_min\n\n",
+ "is_max_of_no_min":
+ "protected theorem is_pred_limit.is_max_of_no_min [NoMinOrder α] (h : IsPredLimit a) : is_max a :=\n  h.dual.is_min_of_no_max\n#align is_pred_limit.is_max_of_no_min is_pred_limit.is_max_of_no_min\n\n",
+ "is_max":
+ "protected theorem is_pred_limit.is_max (h : IsPredLimit a) : is_max a :=\n  h.dual.is_min\n#align is_pred_limit.is_max is_pred_limit.is_max\n\n"}

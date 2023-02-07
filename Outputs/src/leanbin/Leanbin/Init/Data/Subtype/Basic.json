@@ -1,0 +1,10 @@
+{"tag_irrelevant":
+ "theorem tag_irrelevant {a : α} (h1 h2 : p a) : mk a h1 = mk a h2 :=\n  rfl\n#align tag_irrelevant tag_irrelevant\n\n",
+ "ne_of_val_ne":
+ "theorem ne_of_val_ne {a1 a2 : { x // p x }} : val a1 ≠ val a2 → a1 ≠ a2 :=\n  mt <| congr_arg _\n#align ne_of_val_ne ne_of_val_ne\n\n",
+ "exists_of_subtype":
+ "/-\nCopyright (c) 2014 Microsoft Corporation. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthor: Leonardo de Moura, Jeremy Avigad\n-/\ntheorem exists_of_subtype {α : Type u} {p : α → Prop} : { x // p x } → ∃ x, p x\n  | ⟨a, h⟩ => ⟨a, h⟩\n#align exists_of_subtype exists_of_subtype\n\n",
+ "eta":
+ "theorem eta (a : { x // p x }) (h : p (val a)) : mk (val a) h = a :=\n  subtype.eq rfl\n#align eta eta\n\n",
+ "eq":
+ "protected theorem eq : ∀ {a1 a2 : { x // p x }}, val a1 = val a2 → a1 = a2\n  | ⟨x, h1⟩, ⟨x, h2⟩, rfl => rfl\n#align eq eq\n\n"}

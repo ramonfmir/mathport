@@ -1,0 +1,28 @@
+{"traverse_map'":
+ "-- @[functor_norm]\ntheorem traverse_map' (g : α → β) (h : β → G γ) : traverse (h ∘ g) = (traverse h ∘ map g : t α → G (t γ)) :=\n  by\n  ext\n  rw [comp_app, traverse_map]\n#align traverse_map' traverse_map'\n\n",
+ "traverse_map":
+ "theorem traverse_map (f : β → F γ) (g : α → β) (x : t α) : traverse f (g <$> x) = traverse (f ∘ g) x :=\n  by\n  rw [@map_eq_traverse_id t _ _ _ _ g]\n  refine' (comp_traverse f (id.mk ∘ g) x).symm.trans _\n  congr ; apply comp.applicative_id_comp\n#align traverse_map traverse_map\n\n",
+ "traverse_id":
+ "@[functor_norm]\ntheorem traverse_id : traverse id.mk = (id.mk : t α → id (t α)) :=\n  by\n  ext\n  exact id_traverse _\n#align traverse_id traverse_id\n\n",
+ "traverse_eq_map_id'":
+ "theorem traverse_eq_map_id' (f : β → γ) : traverse (id.mk ∘ f) = id.mk ∘ (map f : t β → t γ) :=\n  by\n  ext\n  exact traverse_eq_map_id _ _\n#align traverse_eq_map_id' traverse_eq_map_id'\n\n",
+ "traverse_comp":
+ "@[functor_norm]\ntheorem traverse_comp (g : α → F β) (h : β → G γ) :\n    traverse (comp.mk ∘ map h ∘ g) = (comp.mk ∘ map (traverse h) ∘ traverse g : t α → Comp F G (t γ)) :=\n  by\n  ext\n  exact comp_traverse _ _ _\n#align traverse_comp traverse_comp\n\n",
+ "pure_traverse":
+ "theorem pure_traverse (x : t α) : traverse pure x = (pure x : F (t α)) := by\n  have : traverse pure x = pure (traverse id.mk x) := (naturality (pure_transformation F) id.mk x).symm <;>\n    rwa [id_traverse] at this\n#align pure_traverse pure_traverse\n\n",
+ "pure_transformation_apply":
+ "/-\nCopyright (c) 2018 Simon Hudon. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Simon Hudon\n-/\n@[simp]\ntheorem pure_transformation_apply {α} (x : id α) : PureTransformation F x = pure x :=\n  rfl\n#align pure_transformation_apply pure_transformation_apply\n\n",
+ "naturality_pf":
+ "theorem naturality_pf (η : ApplicativeTransformation F G) (f : α → F β) :\n    traverse (@η _ ∘ f) = @η _ ∘ (traverse f : t α → F (t β)) :=\n  by\n  ext\n  rw [comp_app, naturality]\n#align naturality_pf naturality_pf\n\n",
+ "naturality'":
+ "theorem naturality' (η : ApplicativeTransformation F G) (x : t (F α)) : η (sequence x) = sequence (@η _ <$> x) := by\n  simp [sequence, naturality, traverse_map]\n#align naturality' naturality'\n\n",
+ "map_traverse'":
+ "theorem map_traverse' (g : α → G β) (h : β → γ) : traverse (map h ∘ g) = (map (map h) ∘ traverse g : t α → G (t γ)) :=\n  by\n  ext\n  rw [comp_app, map_traverse]\n#align map_traverse' map_traverse'\n\n",
+ "map_traverse":
+ "theorem map_traverse (x : t α) : map f <$> traverse g x = traverse (map f ∘ g) x :=\n  by\n  rw [@map_eq_traverse_id t _ _ _ _ f]\n  refine' (comp_traverse (id.mk ∘ f) g x).symm.trans _\n  congr ; apply comp.applicative_comp_id\n#align map_traverse map_traverse\n\n",
+ "map_eq_traverse_id":
+ "theorem map_eq_traverse_id : map f = @traverse t _ _ _ _ _ (id.mk ∘ f) :=\n  funext fun y => (traverse_eq_map_id f y).symm\n#align map_eq_traverse_id map_eq_traverse_id\n\n",
+ "id_sequence":
+ "theorem id_sequence (x : t α) : sequence (id.mk <$> x) = id.mk x := by\n  simp [sequence, traverse_map, id_traverse] <;> rfl\n#align id_sequence id_sequence\n\n",
+ "comp_sequence":
+ "theorem comp_sequence (x : t (F (G α))) : sequence (comp.mk <$> x) = Comp.mk (sequence <$> sequence x) := by\n  simp [sequence, traverse_map] <;> rw [← comp_traverse] <;> simp [map_id]\n#align comp_sequence comp_sequence\n\n"}

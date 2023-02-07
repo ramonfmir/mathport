@@ -1,0 +1,4 @@
+{"subsingleton":
+ "#print PUnit.subsingleton /-\n/-\nCopyright (c) 2016 Microsoft Corporation. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthor: Leonardo de Moura\n-/\ntheorem PUnit.subsingleton (a b : PUnit) : a = b :=\n  punit.rec_on a (punit.rec_on b rfl)\n#align punit_eq PUnit.subsingleton\n-/\n\n",
+ "eq_punit":
+ "#print PUnit.eq_punit /-\ntheorem PUnit.eq_punit (a : PUnit) : a = PUnit.unit :=\n  PUnit.subsingleton a PUnit.unit\n#align punit_eq_star PUnit.eq_punit\n-/\n\n"}

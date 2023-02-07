@@ -1,0 +1,60 @@
+{"lt_fold_min":
+ "theorem lt_fold_min : c < s.fold min b f ↔ c < b ∧ ∀ x ∈ s, c < f x :=\n  fold_op_rel_iff_and fun x y z => lt_min_iff\n#align lt_fold_min lt_fold_min\n\n",
+ "lt_fold_max":
+ "theorem lt_fold_max : c < s.fold max b f ↔ c < b ∨ ∃ x ∈ s, c < f x :=\n  fold_op_rel_iff_or fun x y z => lt_max_iff\n#align lt_fold_max lt_fold_max\n\n",
+ "le_fold_min":
+ "theorem le_fold_min : c ≤ s.fold min b f ↔ c ≤ b ∧ ∀ x ∈ s, c ≤ f x :=\n  fold_op_rel_iff_and fun x y z => le_min_iff\n#align le_fold_min le_fold_min\n\n",
+ "le_fold_max":
+ "theorem le_fold_max : c ≤ s.fold max b f ↔ c ≤ b ∨ ∃ x ∈ s, c ≤ f x :=\n  fold_op_rel_iff_or fun x y z => le_max_iff\n#align le_fold_max le_fold_max\n\n",
+ "fold_union_inter":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `op -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `op -/\ntheorem fold_union_inter [decidable_eq α] {s₁ s₂ : Finset α} {b₁ b₂ : β} :\n    op ((s₁ ∪ s₂).fold op b₁ f) ((s₁ ∩ s₂).fold op b₂ f) = op (s₁.fold op b₂ f) (s₂.fold op b₁ f) := by\n  unfold fold <;>\n    rw [← fold_add op, ← Multiset.map_add, union_val, inter_val, union_add_inter, Multiset.map_add, hc.comm, fold_add]\n#align fold_union_inter fold_union_inter\n\n",
+ "fold_union_empty_singleton":
+ "@[simp]\ntheorem fold_union_empty_singleton [decidable_eq α] (s : Finset α) : finset.fold (· ∪ ·) ∅ singleton s = s :=\n  by\n  apply Finset.induction_on s\n  · simp only [fold_empty]\n  · intro a s has ih\n    rw [fold_insert has, ih, insert_eq]\n#align fold_union_empty_singleton fold_union_empty_singleton\n\n",
+ "fold_sup_bot_singleton":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:219:4: warning: unsupported binary notation `«expr ⊔ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\ntheorem fold_sup_bot_singleton [decidable_eq α] (s : Finset α) :\n    finset.fold («expr ⊔ » · ·) («expr⊥») singleton s = s :=\n  fold_union_empty_singleton s\n#align fold_sup_bot_singleton fold_sup_bot_singleton\n\n",
+ "fold_singleton":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `op -/\n@[simp]\ntheorem fold_singleton : ({a} : Finset α).fold op b f = op (f a) b :=\n  rfl\n#align fold_singleton fold_singleton\n\n",
+ "fold_op_rel_iff_or":
+ "theorem fold_op_rel_iff_or {r : β → β → Prop} (hr : ∀ {x y z}, r x (op y z) ↔ r x y ∨ r x z) {c : β} :\n    r c (s.fold op b f) ↔ r c b ∨ ∃ x ∈ s, r c (f x) := by\n  classical\n    apply Finset.induction_on s\n    · simp\n    clear s\n    intro a s ha IH\n    rw [finset.fold_insert ha, hr, IH, ← or_assoc', or_comm' (r c (f a)), or_assoc']\n    apply or_congr iff.rfl\n    constructor\n    · rintro (h₁ | ⟨x, hx, h₂⟩)\n      · use a\n        simp [h₁]\n      · refine' ⟨x, by simp [hx], h₂⟩\n    · rintro ⟨x, hx, h⟩\n      rw [mem_insert] at hx\n      cases hx\n      · left\n        rwa [hx] at h\n      · right\n        exact ⟨x, hx, h⟩\n#align fold_op_rel_iff_or fold_op_rel_iff_or\n\n",
+ "fold_op_rel_iff_and":
+ "theorem fold_op_rel_iff_and {r : β → β → Prop} (hr : ∀ {x y z}, r x (op y z) ↔ r x y ∧ r x z) {c : β} :\n    r c (s.fold op b f) ↔ r c b ∧ ∀ x ∈ s, r c (f x) := by\n  classical\n    apply Finset.induction_on s\n    · simp\n    clear s\n    intro a s ha IH\n    rw [finset.fold_insert ha, hr, IH, ← and_assoc', and_comm' (r c (f a)), and_assoc']\n    apply and_congr iff.rfl\n    constructor\n    · rintro ⟨h₁, h₂⟩\n      intro b hb\n      rw [Finset.mem_insert] at hb\n      rcases hb with (rfl | hb) <;> solve_by_elim\n    · intro h\n      constructor\n      · exact h a (Finset.mem_insert_self _ _)\n      · intro b hb\n        apply h b\n        rw [Finset.mem_insert]\n        right\n        exact hb\n#align fold_op_rel_iff_and fold_op_rel_iff_and\n\n",
+ "fold_op_distrib":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `op -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `op -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `op -/\ntheorem fold_op_distrib {f g : α → β} {b₁ b₂ : β} :\n    (s.fold op (op b₁ b₂) fun x => op (f x) (g x)) = op (s.fold op b₁ f) (s.fold op b₂ g) := by\n  simp only [fold, fold_distrib]\n#align fold_op_distrib fold_op_distrib\n\n",
+ "fold_min_lt":
+ "theorem fold_min_lt : s.fold min b f < c ↔ b < c ∨ ∃ x ∈ s, f x < c :=\n  by\n  show _ > _ ↔ _\n  apply fold_op_rel_iff_or\n  intro x y z\n  show _ < _ ↔ _\n  exact min_lt_iff\n#align fold_min_lt fold_min_lt\n\n",
+ "fold_min_le":
+ "theorem fold_min_le : s.fold min b f ≤ c ↔ b ≤ c ∨ ∃ x ∈ s, f x ≤ c :=\n  by\n  show _ ≥ _ ↔ _\n  apply fold_op_rel_iff_or\n  intro x y z\n  show _ ≤ _ ↔ _\n  exact min_le_iff\n#align fold_min_le fold_min_le\n\n",
+ "fold_max_lt":
+ "theorem fold_max_lt : s.fold max b f < c ↔ b < c ∧ ∀ x ∈ s, f x < c :=\n  by\n  show _ > _ ↔ _\n  apply fold_op_rel_iff_and\n  intro x y z\n  show _ < _ ↔ _\n  exact max_lt_iff\n#align fold_max_lt fold_max_lt\n\n",
+ "fold_max_le":
+ "theorem fold_max_le : s.fold max b f ≤ c ↔ b ≤ c ∧ ∀ x ∈ s, f x ≤ c :=\n  by\n  show _ ≥ _ ↔ _\n  apply fold_op_rel_iff_and\n  intro x y z\n  show _ ≤ _ ↔ _\n  exact max_le_iff\n#align fold_max_le fold_max_le\n\n",
+ "fold_max_add":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\ntheorem fold_max_add [Add β] [covariant_class β β (function.swap (· + ·)) (· ≤ ·)] (n : WithBot β) (s : Finset α) :\n    (s.fold max («expr⊥») fun x : α => ↑(f x) + n) = s.fold max («expr⊥») (coe ∘ f) + n := by\n  classical apply s.induction_on <;> simp (config := { contextual := true }) [max_add_add_right]\n#align fold_max_add fold_max_add\n\n",
+ "fold_map":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ↪ » -/\n@[simp]\ntheorem fold_map {g : «expr ↪ » γ α} {s : Finset γ} : (s.map g).fold op b f = s.fold op b (f ∘ g) := by\n  simp only [fold, map, Multiset.map_map]\n#align fold_map fold_map\n\n",
+ "fold_ite'":
+ "/-- A stronger version of `finset.fold_ite`, but relies on\nan explicit proof of idempotency on the seed element, rather\nthan relying on typeclass idempotency over the whole type. -/\ntheorem fold_ite' {g : α → β} (hb : op b b = b) (p : α → Prop) [decidable_pred p] :\n    finset.fold op b (fun i => ite (p i) (f i) (g i)) s =\n      op (finset.fold op b f (s.filter p)) (finset.fold op b g (s.filter fun i => ¬p i)) :=\n  by\n  classical\n    induction' s using Finset.induction_on with x s hx IH\n    · simp [hb]\n    · simp only [[anonymous], finset.fold_insert hx]\n      split_ifs with h h\n      · have : x ∉ Finset.filter p s := by simp [hx]\n        simp [Finset.filter_insert, h, finset.fold_insert this, ha.assoc, IH]\n      · have : x ∉ Finset.filter (fun i => ¬p i) s := by simp [hx]\n        simp [Finset.filter_insert, h, finset.fold_insert this, IH, ← ha.assoc, hc.comm]\n#align fold_ite' fold_ite'\n\n",
+ "fold_ite":
+ "/-- A weaker version of `finset.fold_ite'`,\nrelying on typeclass idempotency over the whole type,\ninstead of solely on the seed element.\nHowever, this is easier to use because it does not generate side goals. -/\ntheorem fold_ite [is_idempotent β op] {g : α → β} (p : α → Prop) [decidable_pred p] :\n    finset.fold op b (fun i => ite (p i) (f i) (g i)) s =\n      op (finset.fold op b f (s.filter p)) (finset.fold op b g (s.filter fun i => ¬p i)) :=\n  fold_ite' (is_idempotent.idempotent _) _\n#align fold_ite fold_ite\n\n",
+ "fold_insert_idem":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `op -/\n@[simp]\ntheorem fold_insert_idem [decidable_eq α] [hi : is_idempotent β op] :\n    (insert a s).fold op b f = op (f a) (s.fold op b f) :=\n  by\n  by_cases a ∈ s\n  · rw [← insert_erase h]\n    simp [← ha.assoc, hi.idempotent]\n  · apply fold_insert h\n#align fold_insert_idem fold_insert_idem\n\n",
+ "fold_insert":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `op -/\n@[simp]\ntheorem fold_insert [decidable_eq α] (h : a ∉ s) : (insert a s).fold op b f = op (f a) (s.fold op b f) := by\n  unfold fold <;> rw [insert_val, ndinsert_of_not_mem h, Multiset.map_cons, fold_cons_left]\n#align fold_insert fold_insert\n\n",
+ "fold_image_idem":
+ "theorem fold_image_idem [decidable_eq α] {g : γ → α} {s : Finset γ} [hi : is_idempotent β op] :\n    (image g s).fold op b f = s.fold op b (f ∘ g) :=\n  by\n  induction' s using Finset.cons_induction with x xs hx ih\n  · rw [fold_empty, image_empty, fold_empty]\n  · haveI := classical.dec_eq γ\n    rw [fold_cons, cons_eq_insert, image_insert, fold_insert_idem, ih]\n#align fold_image_idem fold_image_idem\n\n",
+ "fold_image":
+ "@[simp]\ntheorem fold_image [decidable_eq α] {g : γ → α} {s : Finset γ} (H : ∀ x ∈ s, ∀ y ∈ s, g x = g y → x = y) :\n    (s.image g).fold op b f = s.fold op b (f ∘ g) := by simp only [fold, image_val_of_inj_on H, Multiset.map_map]\n#align fold_image fold_image\n\n",
+ "fold_hom":
+ "theorem fold_hom {op' : γ → γ → γ} [is_commutative γ op'] [is_associative γ op'] {m : β → γ}\n    (hm : ∀ x y, m (op x y) = op' (m x) (m y)) : (s.fold op' (m b) fun x => m (f x)) = m (s.fold op b f) := by\n  rw [fold, fold, ← fold_hom op hm, Multiset.map_map]\n#align fold_hom fold_hom\n\n",
+ "fold_empty":
+ "/-\nCopyright (c) 2017 Mario Carneiro. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Mario Carneiro\n-/\n@[simp]\ntheorem fold_empty : (∅ : Finset α).fold op b f = b :=\n  rfl\n#align fold_empty fold_empty\n\n",
+ "fold_disj_union":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `op -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `op -/\ntheorem fold_disj_union {s₁ s₂ : Finset α} {b₁ b₂ : β} (h) :\n    (s₁.disj_union s₂ h).fold op (op b₁ b₂) f = op (s₁.fold op b₁ f) (s₂.fold op b₂ f) :=\n  (congr_arg _ <| Multiset.map_add _ _ _).trans (Multiset.fold_add _ _ _ _ _)\n#align fold_disj_union fold_disj_union\n\n",
+ "fold_disj_Union":
+ "theorem fold_disj_Union {ι : Type _} {s : Finset ι} {t : ι → Finset α} {b : ι → β} {b₀ : β} (h) :\n    (s.disj_Union t h).fold op (s.fold op b₀ b) f = s.fold op b₀ fun i => (t i).fold op (b i) f :=\n  (congr_arg _ <| Multiset.map_bind _ _ _).trans (Multiset.fold_bind _ _ _ _ _)\n#align fold_disj_Union fold_disj_Union\n\n",
+ "fold_const":
+ "theorem fold_const [decidable (s = ∅)] (c : β) (h : op c (op b c) = op b c) :\n    finset.fold op b (fun _ => c) s = if s = ∅ then b else op b c := by\n  classical\n    induction' s using Finset.induction_on with x s hx IH\n    · simp\n    · simp only [finset.fold_insert hx, IH, if_false, Finset.insert_ne_empty]\n      split_ifs\n      · rw [hc.comm]\n      · exact h\n#align fold_const fold_const\n\n",
+ "fold_cons":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `op -/\n@[simp]\ntheorem fold_cons (h : a ∉ s) : (cons a s h).fold op b f = op (f a) (s.fold op b f) :=\n  by\n  dsimp only [fold]\n  rw [cons_val, Multiset.map_cons, fold_cons_left]\n#align fold_cons fold_cons\n\n",
+ "fold_congr":
+ "@[congr]\ntheorem fold_congr {g : α → β} (H : ∀ x ∈ s, f x = g x) : s.fold op b f = s.fold op b g := by\n  rw [fold, fold, map_congr rfl H]\n#align fold_congr fold_congr\n\n"}

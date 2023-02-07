@@ -1,0 +1,68 @@
+{"zero_def":
+ "/-\nCopyright (c) 2020 Fox Thomson. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Fox Thomson\n-/\ntheorem zero_def : (0 : language α) = (∅ : set _) :=\n  rfl\n#align zero_def zero_def\n\n",
+ "supr_mul":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⨆ , » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⨆ , » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⨆ , » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⨆ , » -/\ntheorem supr_mul {ι : Sort v} (l : ι → language α) (m : language α) :\n    «expr⨆ , » \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⨆ , »\" (l i) * m =\n      «expr⨆ , » \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⨆ , »\" (l i * m) :=\n  image2_unionᵢ_left _ _ _\n#align supr_mul supr_mul\n\n",
+ "supr_add":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⨆ , » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⨆ , » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⨆ , » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⨆ , » -/\ntheorem supr_add {ι : Sort v} [nonempty ι] (l : ι → language α) (m : language α) :\n    «expr⨆ , » \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⨆ , »\" (l i) + m =\n      «expr⨆ , » \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⨆ , »\" (l i + m) :=\n  supᵢ_sup\n#align supr_add supr_add\n\n",
+ "star_mul_le_right_of_mul_le_right":
+ "theorem star_mul_le_right_of_mul_le_right (l m : language α) : l * m ≤ m → l.star * m ≤ m :=\n  by\n  intro h\n  rw [star_eq_supr_pow, supr_mul]\n  refine' supᵢ_le _\n  intro n\n  induction' n with n ih\n  · simp\n  rw [pow_succ', mul_assoc (l ^ n) l m]\n  exact le_trans (le_mul_congr le_rfl h) ih\n#align star_mul_le_right_of_mul_le_right star_mul_le_right_of_mul_le_right\n\n",
+ "star_mul_le_left_of_mul_le_left":
+ "theorem star_mul_le_left_of_mul_le_left (l m : language α) : m * l ≤ m → m * l.star ≤ m :=\n  by\n  intro h\n  rw [star_eq_supr_pow, mul_supr]\n  refine' supᵢ_le _\n  intro n\n  induction' n with n ih\n  · simp\n  rw [pow_succ, ← mul_assoc m l (l ^ n)]\n  exact le_trans (le_mul_congr h le_rfl) ih\n#align star_mul_le_left_of_mul_le_left star_mul_le_left_of_mul_le_left\n\n",
+ "star_eq_supr_pow":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⨆ , » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⨆ , » -/\ntheorem star_eq_supr_pow (l : language α) :\n    l.star = «expr⨆ , » \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⨆ , »\" (l ^ i) :=\n  by\n  ext x\n  simp only [mem_star, mem_supr, mem_pow]\n  constructor\n  · rintro ⟨S, rfl, hS⟩\n    exact ⟨_, S, rfl, rfl, hS⟩\n  · rintro ⟨_, S, rfl, rfl, hS⟩\n    exact ⟨S, rfl, hS⟩\n#align star_eq_supr_pow star_eq_supr_pow\n\n",
+ "star_def_nonempty":
+ "theorem star_def_nonempty (l : language α) :\n    l.star = { x | ∃ S : list (list α), x = S.join ∧ ∀ y ∈ S, y ∈ l ∧ y ≠ [] } :=\n  by\n  ext x\n  constructor\n  · rintro ⟨S, rfl, h⟩\n    refine' ⟨S.filter fun l => ¬List.isEmpty l, by simp, fun y hy => _⟩\n    rw [mem_filter, empty_iff_eq_nil] at hy\n    exact ⟨h y hy.1, hy.2⟩\n  · rintro ⟨S, hx, h⟩\n    exact ⟨S, hx, fun y hy => (h y hy).1⟩\n#align star_def_nonempty star_def_nonempty\n\n",
+ "star_def":
+ "theorem star_def (l : language α) : l.star = { x | ∃ S : list (list α), x = S.join ∧ ∀ y ∈ S, y ∈ l } :=\n  rfl\n#align star_def star_def\n\n",
+ "one_def":
+ "theorem one_def : (1 : language α) = {[]} :=\n  rfl\n#align one_def one_def\n\n",
+ "one_add_star_mul_self_eq_star":
+ "@[simp]\ntheorem one_add_star_mul_self_eq_star (l : language α) : 1 + l.star * l = l.star := by\n  rw [mul_self_star_comm, one_add_self_mul_star_eq_star]\n#align one_add_star_mul_self_eq_star one_add_star_mul_self_eq_star\n\n",
+ "one_add_self_mul_star_eq_star":
+ "@[simp]\ntheorem one_add_self_mul_star_eq_star (l : language α) : 1 + l * l.star = l.star :=\n  by\n  simp only [star_eq_supr_pow, mul_supr, ← pow_succ, ← pow_zero l]\n  exact sup_supᵢ_nat_succ _\n#align one_add_self_mul_star_eq_star one_add_self_mul_star_eq_star\n\n",
+ "not_mem_zero":
+ "@[simp]\ntheorem not_mem_zero (x : list α) : x ∉ (0 : language α) :=\n  id\n#align not_mem_zero not_mem_zero\n\n",
+ "nil_mem_star":
+ "theorem nil_mem_star (l : language α) : [] ∈ l.star :=\n  ⟨[], rfl, fun _ => false.elim⟩\n#align nil_mem_star nil_mem_star\n\n",
+ "nil_mem_one":
+ "theorem nil_mem_one : [] ∈ (1 : language α) :=\n  Set.mem_singleton _\n#align nil_mem_one nil_mem_one\n\n",
+ "mul_supr":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⨆ , » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⨆ , » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⨆ , » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⨆ , » -/\ntheorem mul_supr {ι : Sort v} (l : ι → language α) (m : language α) :\n    m * «expr⨆ , » \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⨆ , »\" (l i) =\n      «expr⨆ , » \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⨆ , »\" (m * l i) :=\n  image2_unionᵢ_right _ _ _\n#align mul_supr mul_supr\n\n",
+ "mul_self_star_comm":
+ "theorem mul_self_star_comm (l : language α) : l.star * l = l * l.star := by\n  simp only [star_eq_supr_pow, mul_supr, supr_mul, ← pow_succ, ← pow_succ']\n#align mul_self_star_comm mul_self_star_comm\n\n",
+ "mul_def":
+ "theorem mul_def (l m : language α) : l * m = image2 (· ++ ·) l m :=\n  rfl\n#align mul_def mul_def\n\n",
+ "mem_supr":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⨆ , » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⨆ , » -/\ntheorem mem_supr {ι : Sort v} {l : ι → language α} {x : list α} :\n    x ∈ «expr⨆ , » \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⨆ , »\" (l i) ↔\n      ∃ i, x ∈ l i :=\n  mem_Union\n#align mem_supr mem_supr\n\n",
+ "mem_star":
+ "theorem mem_star : x ∈ l.star ↔ ∃ S : list (list α), x = S.join ∧ ∀ y ∈ S, y ∈ l :=\n  iff.rfl\n#align mem_star mem_star\n\n",
+ "mem_pow":
+ "theorem mem_pow {l : language α} {x : list α} {n : ℕ} :\n    x ∈ l ^ n ↔ ∃ S : list (list α), x = S.join ∧ S.length = n ∧ ∀ y ∈ S, y ∈ l :=\n  by\n  induction' n with n ihn generalizing x\n  · simp only [mem_one, pow_zero, length_eq_zero]\n    constructor\n    · rintro rfl\n      exact ⟨[], rfl, rfl, fun y h => h.elim⟩\n    · rintro ⟨_, rfl, rfl, _⟩\n      rfl\n  · simp only [pow_succ, mem_mul, ihn]\n    constructor\n    · rintro ⟨a, b, ha, ⟨S, rfl, rfl, hS⟩, rfl⟩\n      exact ⟨a :: S, rfl, rfl, forall_mem_cons.2 ⟨ha, hS⟩⟩\n    · rintro ⟨_ | ⟨a, S⟩, rfl, hn, hS⟩ <;> cases hn\n      rw [forall_mem_cons] at hS\n      exact ⟨a, _, hS.1, ⟨S, rfl, rfl, hS.2⟩, rfl⟩\n#align mem_pow mem_pow\n\n",
+ "mem_one":
+ "@[simp]\ntheorem mem_one (x : list α) : x ∈ (1 : language α) ↔ x = [] := by rfl\n#align mem_one mem_one\n\n",
+ "mem_mul":
+ "theorem mem_mul : x ∈ l * m ↔ ∃ a b, a ∈ l ∧ b ∈ m ∧ a ++ b = x :=\n  mem_image2\n#align mem_mul mem_mul\n\n",
+ "mem_add":
+ "@[simp]\ntheorem mem_add (l m : language α) (x : list α) : x ∈ l + m ↔ x ∈ l ∨ x ∈ m :=\n  iff.rfl\n#align mem_add mem_add\n\n",
+ "map_star":
+ "@[simp]\ntheorem map_star (f : α → β) (l : language α) : map f (star l) = star (map f l) :=\n  by\n  rw [star_eq_supr_pow, star_eq_supr_pow]\n  simp_rw [← map_pow]\n  exact image_Union\n#align map_star map_star\n\n",
+ "map_map":
+ "@[simp]\ntheorem map_map (g : β → γ) (f : α → β) (l : language α) : map g (map f l) = map (g ∘ f) l := by simp [map, image_image]\n#align map_map map_map\n\n",
+ "map_id":
+ "@[simp]\ntheorem map_id (l : language α) : map id l = l := by simp [map]\n#align map_id map_id\n\n",
+ "le_mul_congr":
+ "theorem le_mul_congr {l₁ l₂ m₁ m₂ : language α} : l₁ ≤ m₁ → l₂ ≤ m₂ → l₁ * l₂ ≤ m₁ * m₂ :=\n  by\n  intro h₁ h₂ x hx\n  simp only [mul_def, exists_and_left, mem_image2, image_prod] at hx⊢\n  tauto\n#align le_mul_congr le_mul_congr\n\n",
+ "le_iff":
+ "theorem le_iff (l m : language α) : l ≤ m ↔ l + m = m :=\n  sup_eq_right.symm\n#align le_iff le_iff\n\n",
+ "le_add_congr":
+ "theorem le_add_congr {l₁ l₂ m₁ m₂ : language α} : l₁ ≤ m₁ → l₂ ≤ m₂ → l₁ + l₂ ≤ m₁ + m₂ :=\n  sup_le_sup\n#align le_add_congr le_add_congr\n\n",
+ "join_mem_star":
+ "theorem join_mem_star {S : list (list α)} (h : ∀ y ∈ S, y ∈ l) : S.join ∈ l.star :=\n  ⟨S, rfl, h⟩\n#align join_mem_star join_mem_star\n\n",
+ "append_mem_mul":
+ "theorem append_mem_mul : a ∈ l → b ∈ m → a ++ b ∈ l * m :=\n  mem_image2_of_mem\n#align append_mem_mul append_mem_mul\n\n",
+ "add_supr":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⨆ , » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⨆ , » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⨆ , » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⨆ , » -/\ntheorem add_supr {ι : Sort v} [nonempty ι] (l : ι → language α) (m : language α) :\n    m + «expr⨆ , » \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⨆ , »\" (l i) =\n      «expr⨆ , » \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⨆ , »\" (m + l i) :=\n  sup_supᵢ\n#align add_supr add_supr\n\n",
+ "add_self":
+ "@[simp]\ntheorem add_self (l : language α) : l + l = l :=\n  sup_idem\n#align add_self add_self\n\n",
+ "add_def":
+ "theorem add_def (l m : language α) : l + m = l ∪ m :=\n  rfl\n#align add_def add_def\n\n"}

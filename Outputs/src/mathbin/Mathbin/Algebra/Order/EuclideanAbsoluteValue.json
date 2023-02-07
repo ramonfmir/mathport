@@ -1,0 +1,6 @@
+{"sub_mod_lt":
+ "theorem sub_mod_lt (h : abv.is_euclidean) (a : R) {b : R} (hb : b ≠ 0) : abv (a % b) < abv b :=\n  h.map_lt_map_iff.mpr (EuclideanDomain.mod_lt a hb)\n#align sub_mod_lt sub_mod_lt\n\n",
+ "map_lt_map_iff":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≺ » -/\n#print map_lt_map_iff /-\n/-\nCopyright (c) 2021 Anne Baanen. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Anne Baanen\n-/\n-- Rearrange the parameters to `map_lt_map_iff'` so it elaborates better.\ntheorem map_lt_map_iff {x y : R} (h : abv.is_euclidean) : abv x < abv y ↔ «expr ≺ » x y :=\n  map_lt_map_iff' h\n#align map_lt_map_iff map_lt_map_iff\n-/\n\n",
+ "abs_is_euclidean":
+ "-- TODO: generalize to `linear_ordered_euclidean_domain`s if we ever get a definition of those\n/-- `abs : ℤ → ℤ` is a Euclidean absolute value -/\nprotected theorem abs_is_euclidean : IsEuclidean (AbsoluteValue.abs : AbsoluteValue ℤ ℤ) :=\n  {\n    map_lt_map_iff' := fun x y =>\n      show abs x < abs y ↔ natAbs x < natAbs y by rw [abs_eq_nat_abs, abs_eq_nat_abs, coe_nat_lt] }\n#align abs_is_euclidean abs_is_euclidean\n\n"}

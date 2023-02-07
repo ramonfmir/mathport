@@ -1,0 +1,12 @@
+{"dot_product_std_basis_one":
+ "@[simp]\ntheorem dot_product_std_basis_one [decidable_eq n] (v : n → R) (i : n) :\n    dot_product v (linear_map.std_basis R (fun _ => R) i 1) = v i := by rw [dot_product_std_basis_eq_mul, mul_one]\n#align dot_product_std_basis_one dot_product_std_basis_one\n\n",
+ "dot_product_std_basis_eq_mul":
+ "/-\nCopyright (c) 2019 Johannes Hölzl. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Johannes Hölzl, Patrick Massot, Casper Putz, Anne Baanen\n-/\n@[simp]\ntheorem dot_product_std_basis_eq_mul [decidable_eq n] (v : n → R) (c : R) (i : n) :\n    dot_product v (linear_map.std_basis R (fun _ => R) i c) = v i * c :=\n  by\n  rw [dot_product, finset.sum_eq_single i, linear_map.std_basis_same]\n  exact fun _ _ hb => by rw [linear_map.std_basis_ne _ _ _ _ hb, mul_zero]\n  exact fun hi => false.elim (hi <| finset.mem_univ _)\n#align dot_product_std_basis_eq_mul dot_product_std_basis_eq_mul\n\n",
+ "dot_product_eq_zero_iff":
+ "theorem dot_product_eq_zero_iff {v : n → R} : (∀ w, dot_product v w = 0) ↔ v = 0 :=\n  ⟨fun h => dot_product_eq_zero v h, fun h w => h.symm ▸ zero_dot_product w⟩\n#align dot_product_eq_zero_iff dot_product_eq_zero_iff\n\n",
+ "dot_product_eq_zero":
+ "theorem dot_product_eq_zero (v : n → R) (h : ∀ w, dot_product v w = 0) : v = 0 :=\n  dot_product_eq _ _ fun u => (h u).symm ▸ (zero_dot_product u).symm\n#align dot_product_eq_zero dot_product_eq_zero\n\n",
+ "dot_product_eq_iff":
+ "theorem dot_product_eq_iff {v w : n → R} : (∀ u, dot_product v u = dot_product w u) ↔ v = w :=\n  ⟨fun h => dot_product_eq v w h, fun h _ => h ▸ rfl⟩\n#align dot_product_eq_iff dot_product_eq_iff\n\n",
+ "dot_product_eq":
+ "theorem dot_product_eq (v w : n → R) (h : ∀ u, dot_product v u = dot_product w u) : v = w :=\n  by\n  funext x\n  classical rw [← dot_product_std_basis_one v x, ← dot_product_std_basis_one w x, h]\n#align dot_product_eq dot_product_eq\n\n"}
