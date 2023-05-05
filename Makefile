@@ -42,10 +42,10 @@ MATHBIN_COMMIT=origin/master
 # Clone mathlib3 and create `all.lean`.
 mathbin-source:
 	mkdir -p sources
-	if [ ! -d "sources/mathlib" ]; then \
+	if [ ! -d "sources/mathlib/.git" ]; then \
 		cd sources && git clone https://github.com/leanprover-community/mathlib.git; \
 	fi
-	cd sources/mathlib && git clean -xfd && git fetch && git checkout $(MATHBIN_COMMIT)
+	cd sources/mathlib && git clean -xfd && git fetch && git checkout "$(MATHBIN_COMMIT)" --
 	cd sources/mathlib && echo -n 'mathlib commit: ' && git rev-parse HEAD
 	cd sources/mathlib && leanpkg configure && ./scripts/mk_all.sh
 
@@ -55,10 +55,10 @@ mathbin-source:
 # * Create `all.lean`.
 lean3-source: mathbin-source
 	mkdir -p sources
-	if [ ! -d "sources/lean" ]; then \
+	if [ ! -d "sources/lean/.git" ]; then \
 		cd sources && git clone https://github.com/leanprover-community/lean.git; \
 	fi
-	cd sources/lean && git clean -xfd && git checkout `cd ../mathlib && lean --version | sed -e "s/.*commit \([0-9a-f]*\).*/\1/"`
+	cd sources/lean && git clean -xfd && git checkout "`cd ../mathlib && lean --version | sed -e "s/.*commit \([0-9a-f]*\).*/\1/"`" --
 	mkdir -p sources/lean/build/release
 	# Run cmake, to create `version.lean` from `version.lean.in`.
 	cd sources/lean/build/release && cmake ../../src
@@ -80,20 +80,58 @@ mathbin-predata: mathbin-source
 	# By changing into the directory, `elan` automatically dispatches to the correct binary.
 	cd sources/mathlib && lean $(LEAN3_OPTS) --make --recursive --ast --tlean src
 	cd sources/mathlib && git rev-parse HEAD > upstream-rev
-
 predata: lean3-predata mathbin-predata
 
 init-logs:
 	mkdir -p Logs
 
-config.lean.json: config.json
-	jq --arg COMMITINFO "leanprover-community/lean commit $$(cat sources/lean/library/upstream-rev)" '.commitInfo = $$COMMITINFO' < config.json > config.lean.json
+config.lean.json: config.json sources/lean/library/upstream-rev sources/lean/library/file-revs.json
+	jq '.commitInfo = {repo: $$repo, commit: $$commit, fileRevs: $$revs[0]}' \
+			--arg repo leanprover-community/lean \
+			--arg commit "$$(cat sources/lean/library/upstream-rev)" \
+			--slurpfile revs sources/lean/library/file-revs.json \
+		< config.json > config.lean.json
 
 port-lean: init-logs build config.lean.json
 	./build/bin/mathport --make config.lean.json Leanbin::all >> Logs/mathport.out 2> >(tee -a Logs/mathport.err >&2)
 
-config.mathlib.json: config.json
-	jq --arg COMMITINFO "leanprover-community/mathlib commit $$(cat sources/mathlib/upstream-rev)" '.commitInfo = $$COMMITINFO' < config.json > config.mathlib.json
+sources/lean/library/file-revs.json: sources/lean/library/upstream-rev
+	REV=$$(cat $<); \
+	cd sources/lean; \
+	if [ ! -d ".git" ]; then \
+		git init -q \
+			&& git remote add origin https://github.com/leanprover-community/lean.git; \
+	fi; \
+	git fetch origin $$REV: --refmap= --no-tags; \
+	cd library && \
+		while IFS= read -r -d '' file; do \
+			printf "%s %s\0" $$(git rev-list -1 $$REV -- "$$file") "$$file"; \
+		done < <(git ls-tree -rz --name-only $$REV) \
+			| jq -Rs 'reduce (split("\u0000")[] | capture("^(?<sha>[a-z0-9]*) (?<path>.*)$$")) as $$i ({}; .[$$i.path] = $$i.sha)' \
+			> file-revs.json
+
+
+sources/mathlib/file-revs.json: sources/mathlib/upstream-rev
+	REV=$$(cat $<); \
+	cd sources/mathlib; \
+	if [ ! -d ".git" ]; then \
+		git init -q \
+			&& git remote add origin https://github.com/leanprover-community/mathlib.git; \
+	fi; \
+	git fetch origin $$REV: --refmap=; \
+	while IFS= read -r -d '' file; do \
+		printf "%s %s\0" $$(git rev-list -1 $$REV -- "src/$$file") "$$file"; \
+	done < <(cd src && git ls-tree -rz --name-only $$REV) \
+		| jq -Rs 'reduce (split("\u0000")[] | capture("^(?<sha>[a-z0-9]*) (?<path>.*)$$")) as $$i ({}; .[$$i.path] = $$i.sha)' \
+		> file-revs.json
+
+
+config.mathlib.json: config.json sources/mathlib/upstream-rev sources/mathlib/file-revs.json
+	jq '.commitInfo = {repo: $$repo, commit: $$commit, fileRevs: $$revs[0]}' \
+			--arg repo leanprover-community/mathlib \
+			--arg commit "$$(cat sources/mathlib/upstream-rev)" \
+			--slurpfile revs sources/mathlib/file-revs.json \
+		< config.json > config.mathlib.json
 
 port-mathbin: port-lean config.mathlib.json
 	./build/bin/mathport --make config.mathlib.json Leanbin::all Mathbin::all >> Logs/mathport.out 2> >(tee -a Logs/mathport.err >&2)
@@ -101,8 +139,8 @@ port-mathbin: port-lean config.mathlib.json
 port: port-lean port-mathbin
 
 predata-tarballs:
-	find sources/lean/library/ -name "*.ast.json" -o -name "*.tlean" -o -name upstream-rev | tar -czvf lean3-predata.tar.gz -T -
-	find sources/mathlib/ -name "*.ast.json" -o -name "*.tlean" -o -name upstream-rev | tar -czvf mathlib3-predata.tar.gz -T -
+	find sources/lean/library/ -name "*.ast.json" -o -name "*.tlean" -o -name upstream-rev -o -name file-revs.json | tar -czvf lean3-predata.tar.gz -T -
+	find sources/mathlib/ -name "*.ast.json" -o -name "*.tlean" -o -name upstream-rev -o -name file-revs.json | tar -czvf mathlib3-predata.tar.gz -T -
 
 mathport-tarballs:
 	mkdir -p Outputs/src/leanbin Outputs/src/mathbin Outputs/oleans/leanbin Outputs/oleans/mathbin

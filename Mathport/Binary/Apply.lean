@@ -66,6 +66,10 @@ where
     | _ => .zero
     mkConst ``PUnit [u]
 
+def addDecl (decl : Declaration) : CoreM Unit :=
+  withMaxHeartbeat (50000 * 1000) do
+    Lean.addDecl decl
+
 def refineAddDecl (decl : Declaration) : BinportM (Declaration × ClashKind) := do
   let path := (← read).path
   println! "[addDecl] START REFINE {path.mod3} {decl.toName}"
@@ -78,7 +82,9 @@ def refineAddDecl (decl : Declaration) : BinportM (Declaration × ClashKind) := 
   | ClashKind.freshDecl =>
     println! "[addDecl] START CHECK  {path.mod3} {decl.toName}"
     try
-      liftCoreM <| Lean.addDecl decl
+      if (← read).config.error2warning && decl matches .thmDecl .. then
+        throwError "skipping proof of theorem"
+      liftCoreM do addDecl decl
     catch ex =>
       println! "[kernel] {← ex.toMessageData.toString}"
       if (← read).config.error2warning then
@@ -86,13 +92,13 @@ def refineAddDecl (decl : Declaration) : BinportM (Declaration × ClashKind) := 
         try
           println! "[addDecl] stubbing value of {decl.toName}"
           let decl ← liftMetaM <| stubValue decl
-          liftCoreM <| Lean.addDecl decl
+          liftCoreM do addDecl decl
         catch _ =>
           println! "[addDecl] stubbing type of {decl.toName}"
           let decl ← liftMetaM <| stubType decl
           try
-            liftCoreM <| Lean.addDecl decl
-          catch _ =>
+            liftCoreM do addDecl decl
+          catch ex =>
             println! "[addDecl] failed to port {decl.toName}"
             throw ex
       else throw ex
@@ -374,6 +380,20 @@ def applyPosition (n : Name) (line col : Nat) : BinportM Unit := do
     if ← inCurrentModule n then
       Lean.addDeclarationRanges n range
 
+def applyToAdditive (src tgt : Name) : BinportM Unit := do
+  let src4 ← lookupNameExt! src
+  let tgt4 ← match ← lookupNameExt tgt with
+    | some tgt => pure tgt
+    | none =>
+      let n4 ← mkCandidateLean4Name tgt ((← getEnv).find? src4).get!.type
+      addNameAlignment tgt n4 (synthetic := true)
+      pure n4
+  if let some tgt' := ToAdditive.findTranslation? (← getEnv) src4 then
+    if tgt' != tgt4 then
+      println! "[applyToAdditive] ignoring to_additive {src4} => {tgt4} incompatible with {tgt'}"
+  else
+    liftCoreM $ ToAdditive.insertTranslation src4 tgt4
+
 def applyModification (mod : EnvModification) : BinportM Unit := withReader (fun ctx => { ctx with currDecl := mod.toName }) do
   println! "[apply] {mod}"
   match mod with
@@ -387,6 +407,7 @@ def applyModification (mod : EnvModification) : BinportM Unit := withReader (fun
   | EnvModification.projection proj     => applyProjection proj
   | EnvModification.class n             => applyClass n
   | EnvModification.instance nc ni prio => applyInstance nc ni prio
+  | EnvModification.toAdditive src tgt  => applyToAdditive src tgt
   | EnvModification.decl d              =>
     match d with
     | Declaration.axiomDecl ax                => applyAxiomVal ax

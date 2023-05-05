@@ -111,7 +111,7 @@ structure State where
   userAttrs : NameMap (Array (Spanned AST3.Param) → CommandElabM Syntax.Attr) := {}
   userCmds : NameMap (AST3.Modifiers → Array (Spanned AST3.Param) → CommandElabM Unit) := {}
   remainingComments : List Comment := {}
-  afterNextCommand : Array Syntax.Command := #[]
+  alignStatements : Array String := #[]
   deriving Inhabited
 
 def NotationEntries.insert (m : NotationEntries) : NotationData → NotationEntries
@@ -477,12 +477,12 @@ def commandToFmt (stx : Syntax.Command) : M Format := do
         pure f!"-- failed to format: {← e.toMessageData.toString}\n{reprint stx}")
 
 def push (stx : Syntax.Command) : M Unit := do
-  if (← get).afterNextCommand.isEmpty then
+  if (← get).alignStatements.isEmpty then
     printOutput f!"{← commandToFmt stx}\n\n"
   else
     printOutput f!"{← commandToFmt stx}\n"
-    for stx in ← modifyGet fun s => (s.afterNextCommand, { s with afterNextCommand := #[] }) do
-      printOutput f!"{← commandToFmt stx}\n"
+    for str in ← modifyGet fun s => (s.alignStatements, { s with alignStatements := #[] }) do
+      printOutput f!"{str}\n"
     printOutput f!"\n"
 
 def stripLastNewline : Format → Format
@@ -494,15 +494,15 @@ def stripLastNewline : Format → Format
 def pushM (stx : M Syntax.Command) : M Unit := stx >>= push
 
 def pushAlign (n3 n4 : Name) : M Unit := do
-  let stx ← `(command| #align $(mkIdent n3) $(mkIdent n4))
-  modify fun s => { s with afterNextCommand := s.afterNextCommand.push stx }
+  let str := s!"#align {n3} {n4}"
+  modify fun s => { s with alignStatements := s.alignStatements.push str }
 
 def withReplacement (name : Option Name) (x : M Unit) : M Unit :=
   match name with
   | none => x
   | some n => do
     match (← read).config.replacementStyle with
-    | .skip => modify fun s => { s with afterNextCommand := #[] }
+    | .skip => modify fun s => { s with alignStatements := #[] }
     | .comment =>
       printOutput f!"#print {n} /-\n"
       x
@@ -544,10 +544,6 @@ def trIdent_ : BinderName → Syntax.Ident_
   | .ident n => mkIdent n
   | .«_» => Id.run `(Parser.Term.hole| _)
 
-def trIdent_' : BinderName → Syntax.Ident_'
-  | .ident n => mkIdent n
-  | .«_» => ⟨mkAtom "_"⟩ -- TODO revisit after https://github.com/leanprover/lean4/issues/1275
-
 def trBinderIdent : BinderName → Syntax.BinderIdent
   | .ident n => Id.run `(binderIdent| $(mkIdent n):ident)
   | .«_» => Id.run `(binderIdent| _)
@@ -559,8 +555,15 @@ def trBinderIdentI : BinderName → M (Syntax.BinderIdent)
 def optTy (ty : Option Term) : M (Option (TSyntax ``Parser.Term.typeSpec)) :=
   ty.mapM fun stx => do `(Parser.Term.typeSpec| : $stx)
 
-def trCalcArg : Spanned Expr × Spanned Expr → M (TSyntax ``calcStep)
-  | (lhs, rhs) => do `(calcStep| $(← trExpr lhs) := $(← trExpr rhs))
+def trCalcSteps (steps : Array (Spanned Expr × Spanned Expr)) : M (TSyntax ``calcSteps) := do
+  if h : steps.size > 0 then
+    let restLhs ← steps[1:].toArray.mapM (trExpr ·.1)
+    let restRhs ← steps[1:].toArray.mapM (trExpr ·.2)
+    `(calcSteps|
+      $(← trExpr steps[0].1) := $(← trExpr steps[0].2)
+      $[$restLhs := $restRhs]*)
+  else
+    `(calcSteps| _)
 
 def blockTransform : SyntaxNodeKind := decl_name%
 

@@ -126,7 +126,12 @@ def trAttrInstance (attr : Attribute) (allowDel := false)
   | some (TrAttr.add stx) => do
     let stx ← `(Parser.Term.attrInstance| $(← trAttrKind kind) $stx)
     modify fun s => { s with 2 := s.2.push stx }
-  | some (TrAttr.prio prio) => modify fun s => { s with 1.prio := prio }
+  | some (TrAttr.prio prio) =>
+    if let some stx := (← get).2.back? then
+      if let `(Parser.Term.attrInstance| $kind instance) := stx then
+        let stx ← `(Parser.Term.attrInstance| $kind instance $(← trPrio prio))
+        modify fun s => { s with 2 := s.2.pop.push stx }
+    modify fun s => { s with 1.prio := prio }
   | some TrAttr.parsingOnly => modify fun s => { s with 1.parsingOnly := true }
   | some TrAttr.irreducible => modify fun s => { s with 1.irreducible := true }
   | some (TrAttr.derive ns) => modify fun s => { s with 1.derive := s.1.derive ++ ns }
@@ -235,12 +240,18 @@ def trExportCmd : Open → M Unit
     pushElab $ ← `(export $(← mkIdentN tgt.kind):ident ($args*))
   | _ => warn! "unsupported: advanced export style"
 
-def trDeclId (n : Name) (us : LevelDecl) : M (Option Name × TSyntax ``declId) := do
+def trDeclId (n : Name) (us : LevelDecl) (translateToAdditive : Bool) :
+    M (Option Name × TSyntax ``declId) := do
   let us := us.map $ Array.map fun u => mkIdent u.kind
   let orig := Elab.Command.resolveNamespace (← get).current.curNamespace n
   let ((dubious, n4), id) ← renameIdentCore n #[orig]
   if (← read).config.redundantAlign then
     pushAlign orig n4
+    if translateToAdditive then
+      if let some add4 := ToAdditive.findTranslation? (← getEnv) n4 then
+        if let some (add3, _) :=
+            (Mathlib.Prelude.Rename.getRenameMap (← getEnv)).toLean3.find? add4 then
+          pushAlign add3 add4
   let (n3, _) := Rename.getClashes (← getEnv) n4
   let mut msg := Format.nil
   let mut found := none
@@ -267,9 +278,10 @@ def trOptDeclSig (bis : Binders) (ty : Option (Spanned Expr)) : M (TSyntax ``opt
 
 def trAxiom (mods : Modifiers) (n : Name)
     (us : LevelDecl) (bis : Binders) (ty : Option (Spanned Expr)) : M Unit := do
+  let toAdd := mods.hasToAdditive
   let (s, mods) ← trModifiers mods
   unless s.derive.isEmpty do warn! "unsupported: @[derive] axiom"
-  let (found, id) ← trDeclId n us
+  let (found, id) ← trDeclId n us toAdd
   withReplacement found do
     pushM `(command| $mods:declModifiers axiom $id $(← trDeclSig bis ty))
 
@@ -297,8 +309,9 @@ def trUWF : Option (Spanned Expr) →
 def trDecl (dk : DeclKind) (mods : Modifiers) (attrs : Attributes)
     (n : Option (Spanned Name)) (us : LevelDecl) (bis : Binders) (ty : Option (Spanned Expr))
     (val : DeclVal) (uwf : Option (Spanned Expr)) : M (Option Name × Syntax.Command) := do
+  let toAdd := mods.hasToAdditive || attrs.hasToAdditive
   let (s, mods) ← trModifiers mods attrs
-  let id ← n.mapM fun n => trDeclId n.kind us
+  let id ← n.mapM fun n => trDeclId n.kind us toAdd
   (id >>= (·.1), ·) <$> do
   let id := (·.2) <$> id
   let val ← match val with
@@ -309,7 +322,7 @@ def trDecl (dk : DeclKind) (mods : Modifiers) (attrs : Attributes)
     unless dk matches DeclKind.def do warn! "unsupported irreducible non-definition"
     unless s.derive.isEmpty do warn! "unsupported: @[derive, irreducible] def"
     unless uwf.isNone do warn! "unsupported: @[irreducible] def + using_well_founded"
-    return ← `($mods:declModifiers irreducible_def $id.get! $(← trOptDeclSig bis ty) $val:declVal)
+    return ← `($mods:declModifiers irreducible_def $id.get! $(← trOptDeclSig bis ty):optDeclSig $val:declVal)
   match dk with
   | DeclKind.abbrev => do
     unless s.derive.isEmpty do warn! "unsupported: @[derive] abbrev"
@@ -346,8 +359,9 @@ set_option linter.unusedVariables false in -- FIXME(Mario): spurious warning on 
 def trInductive (cl : Bool) (mods : Modifiers) (attrs : Attributes)
   (n : Spanned Name) (us : LevelDecl) (bis : Binders) (ty : Option (Spanned Expr))
   (nota : Option Notation) (intros : Array (Spanned Intro)) : M (Option Name × Syntax.Command) := do
+  let toAdd := mods.hasToAdditive || attrs.hasToAdditive
   let (s, mods) ← trModifiers mods attrs
-  let (found, id) ← trDeclId n.kind us
+  let (found, id) ← trDeclId n.kind us toAdd
   (found, ·) <$> do
   let sig ← trOptDeclSig bis ty
   unless nota.isNone do warn! "unsupported: (notation) in inductive"
@@ -398,8 +412,9 @@ def trFields (flds : Array (Spanned Field)) : M (TSyntax ``structFields) := do
 def trStructure (cl : Bool) (mods : Modifiers) (n : Spanned Name) (us : LevelDecl)
   (bis : Binders) (exts : Array (Spanned Parent)) (ty : Option (Spanned Expr))
   (mk : Option (Spanned Mk)) (flds : Array (Spanned Field)) : M Unit := do
+  let toAdd := mods.hasToAdditive
   let (s, mods) ← trModifiers mods
-  let (found, id) ← trDeclId n.kind us
+  let (found, id) ← trDeclId n.kind us toAdd
   withReplacement found do
   let bis ← trBracketedBinders {} bis
   let exts ← exts.mapM fun

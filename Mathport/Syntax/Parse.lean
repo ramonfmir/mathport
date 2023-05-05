@@ -177,7 +177,7 @@ def getSym : AstId → M (Spanned Symbol) :=
 def getBinderName : AstId → M (Spanned BinderName) :=
   withNode fun
   | "_", _, _ => pure BinderName.«_»
-  | "ident", v, _ => pure $ BinderName.ident v.getString!
+  | "ident", v, _ => pure $ BinderName.ident v
   | k, _, _ => throw s!"getBinderName parse error, unknown kind {k}"
 
 def getChoice : AstId → M Choice :=
@@ -189,7 +189,7 @@ def getChoice : AstId → M Choice :=
 def getProj : AstId → M (Spanned Proj) :=
   withNode fun
   | "nat", v, _ => pure $ Proj.nat (decodeNat! v)
-  | "ident", v, _ => pure $ Proj.ident v.getString!
+  | "ident", v, _ => pure $ Proj.ident v
   | k, _, _ => throw s!"getSym parse error, unknown kind {k}"
 
 def getOptionVal : AstId → M (Spanned OptionVal) :=
@@ -244,7 +244,7 @@ def wrapperNotations : Lean.NameHashSet :=
   List.foldl (·.insert ·) {} [
     `by, `have, `assume, `show, `suffices, `if, `«(», `«⟨», `«{», `«{!», `«.(», `«._»,
     `«```(», `«``(», `«`(», `«`[», `«`», `«%%», `«#[», `«(:», `«()», `«(::)», `fun, `Type,
-    `«Type*», `Sort, `«Sort*», `let, `calc, `«@», `«@@», `begin, `sorry, `match, `do, `«^.»]
+    `«Type*», `Sort, `«Sort*», `let, `calc, `«@», `«@@», `begin, `sorry, `match, `do]
 
 mutual
 
@@ -295,17 +295,18 @@ mutual
       | none => throw s!"getBinder parse error, unknown kind {k}"
 
   partial def getArg : AstId → M (Spanned Arg) :=
-    withNode fun
-    | "exprs", _, args => Arg.exprs <$> args.mapM getExpr
-    | "binders", _, args => Arg.binders <$> args.mapM getBinder
-    | k, v, args => if k.startsWith "binder"
+    withNodeP fun
+    | "exprs", _, args, _ => Arg.exprs <$> args.mapM getExpr
+    | "binders", _, args, _ => Arg.binders <$> args.mapM getBinder
+    | k, v, args, pexpr => if k.startsWith "binder"
       then Arg.binder <$> getBinder_aux k v args
-      else Arg.expr <$> getExpr_aux k v args none
+      else Arg.expr <$> getExpr_aux k v args pexpr
 
   partial def getExpr_aux : String → Name → Array AstId → Option ExprId → M Expr
     | "notation", v, args, _ => match v with
       | `«->» => return Expr.«→» (← getExpr args[0]!) (← getExpr args[1]!)
       | `Pi => return Expr.«Pi» (← getBinders args[0]!) (← getExpr args[1]!)
+      | `«^.» => Spanned.kind <$> getExpr args[1]!
       | _ => if wrapperNotations.contains v
         then Spanned.kind <$> getExpr args[0]!
         else Expr.notation (Choice.one v) <$> args.mapM getArg
@@ -554,9 +555,9 @@ def getAttr : AstId → M (Spanned Attribute) := withNode fun
 
 open DeclVal in
 def getDeclVal : AstId → M (Spanned DeclVal) :=
-  withNode fun
-  | "eqns", _, args => eqns <$> args.mapM getArm
-  | k, v, args => expr <$> getExpr_aux k v args none
+  withNodeP fun
+  | "eqns", _, args, _ => eqns <$> args.mapM getArm
+  | k, v, args, pexpr => expr <$> getExpr_aux k v args pexpr
 
 open Modifier in
 def getModifier : AstId → M (Spanned Modifier) := withNode fun
