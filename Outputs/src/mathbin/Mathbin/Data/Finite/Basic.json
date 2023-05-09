@@ -1,8 +1,0 @@
-{"sum_right":
- "theorem sum_right (α) [Finite (Sum α β)] : Finite β :=\n  of_injective (sum.inr : β → Sum α β) sum.inr_injective\n#align sum_right sum_right\n\n",
- "sum_left":
- "theorem sum_left (β) [Finite (Sum α β)] : Finite α :=\n  of_injective (sum.inl : α → Sum α β) sum.inl_injective\n#align sum_left sum_left\n\n",
- "prod_right":
- "theorem prod_right (α) [Finite (α × β)] [nonempty α] : Finite β :=\n  of_surjective (prod.snd : α × β → β) prod.snd_surjective\n#align prod_right prod_right\n\n",
- "prod_left":
- "/-\nCopyright (c) 2022 Kyle Miller. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Kyle Miller\n-/\n-- see Note [lower instance priority]\n-- Higher priority for `Prop`s\ntheorem prod_left (β) [Finite (α × β)] [nonempty β] : Finite α :=\n  of_surjective (prod.fst : α × β → α) prod.fst_surjective\n#align prod_left prod_left\n\n"}

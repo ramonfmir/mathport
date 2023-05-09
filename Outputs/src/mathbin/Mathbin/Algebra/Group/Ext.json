@@ -1,8 +1,0 @@
-{"toMonoid_injective":
- "#print RightCancelMonoid.toMonoid_injective /-\n@[to_additive]\ntheorem RightCancelMonoid.toMonoid_injective {M : Type u} : function.injective (@right_cancel_monoid.to_monoid M) :=\n  by\n  rintro ⟨⟩ ⟨⟩ h\n  congr <;> injection h\n#align right_cancel_monoid.to_monoid_injective RightCancelMonoid.toMonoid_injective\n-/\n\n",
- "toLeftCancelMonoid_injective":
- "#print CancelMonoid.toLeftCancelMonoid_injective /-\n@[to_additive]\ntheorem CancelMonoid.toLeftCancelMonoid_injective {M : Type u} :\n    function.injective (@cancel_monoid.to_left_cancel_monoid M) :=\n  by\n  rintro ⟨⟩ ⟨⟩ h\n  congr <;> injection h\n#align cancel_monoid.to_left_cancel_monoid_injective CancelMonoid.toLeftCancelMonoid_injective\n-/\n\n",
- "toCommMonoid_injective":
- "#print CancelCommMonoid.toCommMonoid_injective /-\n@[to_additive]\ntheorem CancelCommMonoid.toCommMonoid_injective {M : Type u} :\n    function.injective (@cancel_comm_monoid.to_comm_monoid M) :=\n  by\n  rintro ⟨⟩ ⟨⟩ h\n  congr <;> injection h\n#align cancel_comm_monoid.to_comm_monoid_injective CancelCommMonoid.toCommMonoid_injective\n-/\n\n",
- "ext":
- "#print CommGroup.ext /-\n@[ext, to_additive]\ntheorem CommGroup.ext {G : Type _} ⦃g₁ g₂ : comm_group G⦄ (h_mul : g₁.mul = g₂.mul) : g₁ = g₂ :=\n  CommGroup.toGroup_injective <| Group.ext h_mul\n#align comm_group.ext CommGroup.ext\n-/\n\n"}

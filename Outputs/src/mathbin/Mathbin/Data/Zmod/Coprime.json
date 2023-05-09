@@ -1,6 +1,0 @@
-{"ne_zero_of_gcd_eq_one":
- "/-- If an integer `a` and a prime `p` satisfy `gcd a p = 1`, then `a : zmod p` is nonzero. -/\ntheorem ne_zero_of_gcd_eq_one {a : ℤ} {p : ℕ} (pp : p.prime) (h : a.gcd p = 1) : (a : zmod p) ≠ 0 :=\n  mt (@eq_zero_iff_gcd_ne_one a p ⟨pp⟩).mp (not_not.mpr h)\n#align ne_zero_of_gcd_eq_one ne_zero_of_gcd_eq_one\n\n",
- "eq_zero_of_gcd_ne_one":
- "/-- If an integer `a` and a prime `p` satisfy `gcd a p ≠ 1`, then `a : zmod p` is zero. -/\ntheorem eq_zero_of_gcd_ne_one {a : ℤ} {p : ℕ} (pp : p.prime) (h : a.gcd p ≠ 1) : (a : zmod p) = 0 :=\n  (@eq_zero_iff_gcd_ne_one a p ⟨pp⟩).mpr h\n#align eq_zero_of_gcd_ne_one eq_zero_of_gcd_ne_one\n\n",
- "eq_zero_iff_gcd_ne_one":
- "/-\nCopyright (c) 2022 Michael Stoll. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Michael Stoll\n-/\n/-- If `p` is a prime and `a` is an integer, then `a : zmod p` is zero if and only if\n`gcd a p ≠ 1`. -/\ntheorem eq_zero_iff_gcd_ne_one {a : ℤ} {p : ℕ} [pp : fact p.prime] : (a : zmod p) = 0 ↔ a.gcd p ≠ 1 := by\n  rw [ne, Int.gcd_comm, int.gcd_eq_one_iff_coprime, (Nat.prime_iff_prime_int.1 pp.1).coprime_iff_not_dvd, not_not,\n    int_coe_zmod_eq_zero_iff_dvd]\n#align eq_zero_iff_gcd_ne_one eq_zero_iff_gcd_ne_one\n\n"}

@@ -1,4 +1,0 @@
-{"pow_iff":
- "#print IsRegular.pow_iff /-\n/-- An element `a` is regular if and only if a positive power of `a` is regular. -/\ntheorem IsRegular.pow_iff {n : ℕ} (n0 : 0 < n) : IsRegular (a ^ n) ↔ IsRegular a :=\n  ⟨fun h => ⟨(IsLeftRegular.pow_iff n0).mp h.left, (IsRightRegular.pow_iff n0).mp h.right⟩, fun h =>\n    ⟨IsLeftRegular.pow n h.left, IsRightRegular.pow n h.right⟩⟩\n#align is_regular.pow_iff IsRegular.pow_iff\n-/\n\n",
- "pow":
- "#print IsRegular.pow /-\n/-- Any power of a regular element is regular. -/\ntheorem IsRegular.pow (n : ℕ) (ra : IsRegular a) : IsRegular (a ^ n) :=\n  ⟨IsLeftRegular.pow n ra.left, IsRightRegular.pow n ra.right⟩\n#align is_regular.pow IsRegular.pow\n-/\n\n"}

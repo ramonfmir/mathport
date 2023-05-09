@@ -1,6 +1,0 @@
-{"trans":
- "#print trans /-\n@[trans]\ntheorem trans {a b c : α} (hab : a ≈ b) (hbc : b ≈ c) : a ≈ c :=\n  match setoid.iseqv with\n  | ⟨h_refl, h_symm, h_trans⟩ => h_trans hab hbc\n#align trans trans\n-/\n\n",
- "symm":
- "#print symm /-\n@[symm]\ntheorem symm {a b : α} (hab : a ≈ b) : b ≈ a :=\n  match setoid.iseqv with\n  | ⟨h_refl, h_symm, h_trans⟩ => h_symm hab\n#align symm symm\n-/\n\n",
- "refl":
- "#print refl /-\n/-\nCopyright (c) 2015 Microsoft Corporation. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\n\nAuthors: Leonardo de Moura\n-/\n@[refl]\ntheorem refl (a : α) : a ≈ a :=\n  match setoid.iseqv with\n  | ⟨h_refl, h_symm, h_trans⟩ => h_refl a\n#align refl refl\n-/\n\n"}

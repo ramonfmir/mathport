@@ -1,8 +1,0 @@
-{"valid_of_unsat_not":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `preform.not -/\ntheorem valid_of_unsat_not {p : preform} : (preform.not p).unsat → p.valid :=\n  by\n  simp only [preform.sat, preform.unsat, preform.valid, preform.holds]\n  rw [not_exists_not]; intro h; assumption\n#align valid_of_unsat_not valid_of_unsat_not\n\n",
- "univ_close_of_valid":
- "theorem univ_close_of_valid {p : preform} : ∀ {m v}, p.valid → univ_close p v m\n  | 0, v, h1 => h1 _\n  | m + 1, v, h1 => fun i => univ_close_of_valid h1\n#align univ_close_of_valid univ_close_of_valid\n\n",
- "sat_or":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `preform.or -/\ntheorem sat_or {p q : preform} : sat (preform.or p q) ↔ sat p ∨ sat q :=\n  by\n  constructor <;> intro h1\n  · cases' h1 with v h1\n    cases' h1 with h1 h1 <;> [left, right] <;> refine' ⟨v, _⟩ <;> assumption\n  · cases' h1 with h1 h1 <;> cases' h1 with v h1 <;> refine' ⟨v, _⟩ <;> [left, right] <;> assumption\n#align sat_or sat_or\n\n",
- "sat_of_implies_of_sat":
- "/-\nCopyright (c) 2019 Seul Baek. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Seul Baek\n-/\n/-\nLinear integer arithmetic formulas in pre-normalized form.\n-/\ntheorem sat_of_implies_of_sat {p q : preform} : implies p q → sat p → sat q := by intro h1 h2; apply Exists.imp h1 h2\n#align sat_of_implies_of_sat sat_of_implies_of_sat\n\n"}

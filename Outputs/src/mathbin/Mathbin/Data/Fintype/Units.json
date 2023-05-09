@@ -1,6 +1,0 @@
-{"univ":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ˣ» -/\n/-\nCopyright (c) 2017 Mario Carneiro. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Mario Carneiro\n-/\n@[simp]\ntheorem units_int.univ : (finset.univ : Finset («expr ˣ» ℤ)) = {1, -1} :=\n  rfl\n#align units_int.univ units_int.univ\n\n",
- "card_units_int":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ˣ» -/\n@[simp]\ntheorem fintype.card_units_int : fintype.card («expr ˣ» ℤ) = 2 :=\n  rfl\n#align fintype.card_units_int fintype.card_units_int\n\n",
- "card_units":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ˣ» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ˣ» -/\ntheorem fintype.card_units [group_with_zero α] [fintype α] [fintype («expr ˣ» α)] :\n    fintype.card («expr ˣ» α) = fintype.card α - 1 := by\n  classical\n    rw [eq_comm, nat.sub_eq_iff_eq_add (fintype.card_pos_iff.2 ⟨(0 : α)⟩), fintype.card_congr (units_equiv_ne_zero α)]\n    have := fintype.card_congr (Equiv.sumCompl (· = (0 : α))).symm\n    rwa [fintype.card_sum, add_comm, fintype.card_subtype_eq] at this\n#align fintype.card_units fintype.card_units\n\n"}

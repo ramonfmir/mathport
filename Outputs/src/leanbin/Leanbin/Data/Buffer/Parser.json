@@ -1,4 +1,0 @@
-{"id_map":
- "/-\nCopyright (c) 2017 Microsoft Corporation. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Gabriel Ebner\n-/\nprivate theorem parser.id_map (p : parser α) : parser.bind p parser.pure = p :=\n  by\n  apply funext; intro input\n  apply funext; intro pos\n  dsimp only [parser.bind]\n  cases p input pos <;> exact rfl\n#align parser.id_map parser.id_map\n\n",
- "bind_assoc":
- "private theorem parser.bind_assoc (p : parser α) (q : α → parser β) (r : β → parser γ) :\n    parser.bind (parser.bind p q) r = parser.bind p fun a => parser.bind (q a) r :=\n  by\n  apply funext; intro input\n  apply funext; intro pos\n  dsimp only [parser.bind]\n  cases p input pos <;> try dsimp only [bind]\n  cases q result input pos_1 <;> try dsimp only [bind]\n  all_goals rfl\n#align parser.bind_assoc parser.bind_assoc\n\n"}

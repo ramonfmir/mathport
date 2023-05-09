@@ -1,4 +1,0 @@
-{"lt_eq_not_ge":
- "theorem lt_eq_not_ge [LT α] [decidable_rel ((· < ·) : α → α → Prop)] : ∀ l₁ l₂ : list α, (l₁ < l₂) = ¬l₂ ≤ l₁ :=\n  fun l₁ l₂ => show (l₁ < l₂) = ¬¬l₁ < l₂ from eq.subst (propext (not_not_iff (l₁ < l₂))).symm rfl\n#align lt_eq_not_ge lt_eq_not_ge\n\n",
- "le_eq_not_gt":
- "/-\nCopyright (c) 2016 Microsoft Corporation. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthor: Leonardo de Moura\n-/\ntheorem le_eq_not_gt [LT α] : ∀ l₁ l₂ : list α, (l₁ ≤ l₂) = ¬l₂ < l₁ := fun l₁ l₂ => rfl\n#align le_eq_not_gt le_eq_not_gt\n\n"}

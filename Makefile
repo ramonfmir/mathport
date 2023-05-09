@@ -71,14 +71,14 @@ source: mathbin-source lean3-source
 lean3-predata: lean3-source
 	find sources/lean/library -name "*.olean" -delete # ast only exported when oleans not present
 	cd sources/lean && elan override set `cat ../mathlib/leanpkg.toml | grep lean_version | cut -d '"' -f2`
-	cd sources/lean && lean $(LEAN3_OPTS) --make --recursive --ast --tlean library
+	cd sources/lean && lean $(LEAN3_OPTS) --make --recursive --ast --tlean --tsast library
 	cd sources/lean/library && git rev-parse HEAD > upstream-rev
 
 # Build .ast and .tlean files for Mathlib 3.
 mathbin-predata: mathbin-source
 	find sources/mathlib -name "*.olean" -delete # ast only exported when oleans not present
 	# By changing into the directory, `elan` automatically dispatches to the correct binary.
-	cd sources/mathlib && lean $(LEAN3_OPTS) --make --recursive --ast --tlean src
+	cd sources/mathlib && lean $(LEAN3_OPTS) --make --recursive --ast --tlean --tsast src
 	cd sources/mathlib && git rev-parse HEAD > upstream-rev
 predata: lean3-predata mathbin-predata
 
@@ -159,7 +159,7 @@ rm-tarballs:
 
 Oneshot/lean3-in/main.ast.json: Oneshot/lean3-in/*.lean
 	cd Oneshot/lean3-in && elan override set `cat ../../sources/mathlib/leanpkg.toml | grep lean_version | cut -d '"' -f2`
-	cd Oneshot/lean3-in && lean --make --recursive --ast --tlean . || true
+	cd Oneshot/lean3-in && lean --make --recursive --ast --tlean --tsast . || true
 
 Oneshot/lean4-in/build/lib/Oneshot.trace: Oneshot/lean4-in/*.lean
 	cd Oneshot/lean4-in && lake build

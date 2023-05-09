@@ -1,6 +1,0 @@
-{"units_eq_one":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ˣ» -/\n#print units_eq_one /-\n/-\nCopyright (c) 2014 Floris van Doorn (c) 2016 Microsoft Corporation. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Floris van Doorn, Leonardo de Moura, Jeremy Avigad, Mario Carneiro\n-/\ntheorem units_eq_one (u : «expr ˣ» ℕ) : u = 1 :=\n  Units.ext <| nat.eq_one_of_dvd_one ⟨u.inv, u.val_inv.symm⟩\n#align units_eq_one units_eq_one\n-/\n\n",
- "is_unit_iff":
- "@[simp]\nprotected theorem is_unit_iff {n : ℕ} : is_unit n ↔ n = 1 :=\n  iff.intro\n    (fun ⟨u, hu⟩ =>\n      match n, u, hu, Nat.units_eq_one u with\n      | _, _, rfl, rfl => rfl)\n    fun h => h.symm ▸ ⟨1, rfl⟩\n#align is_unit_iff is_unit_iff\n\n",
- "add_units_eq_zero":
- "theorem add_units_eq_zero (u : AddUnits ℕ) : u = 0 :=\n  AddUnits.ext <| (nat.eq_zero_of_add_eq_zero u.val_neg).1\n#align add_units_eq_zero add_units_eq_zero\n\n"}

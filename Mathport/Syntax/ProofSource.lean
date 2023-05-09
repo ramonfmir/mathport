@@ -38,11 +38,34 @@ def proofSource (ast : AST3) : Translate.M (Nat × Lean.Json) := do
   dbg_trace "Theorems: {noTheorems} | Total : {ast.commands.size}"
   return (noTheorems, Lean.Json.mkObj res)
 
+def invs (ti : AST3.TacticInvocation) : Translate.M (Nat × Lean.Json) := do
+  if let ⟨n, some t, b, e, s⟩ := ti then
+    let mut currOutput : Substring := (toString (← get).output).toSubstring
+    let mut res :  List (String × Lean.Json) := []
+    let tstx ← Translate.trTactic t
+    --dbg_trace s!"{tstx}"
+    let prevOutput := currOutput
+    currOutput := (toString (← get).output).toSubstring
+    let proofSource := 
+        currOutput.extract prevOutput.stopPos currOutput.stopPos
+    let proofSourceJson := Lean.toJson $ s!"{proofSource}"
+    res := ("tactic", proofSourceJson) :: res
+    return (0, Lean.Json.mkObj res)
+  else
+    return (0, Lean.Json.mkObj [])
+
 def synportProofSource (config : Config) (path : Path) 
   : Lean.Elab.Command.CommandElabM Nat := do
   let pcfg := config.pathConfig
-  let (ast3, _) ← parseAST3 (path.toLean3 pcfg ".ast.json") false
+  let p := path.toLean3 pcfg ".ast.json"
+  dbg_trace "path: {p}"
+  let (ast3, invocs) ← parseAST3 (path.toLean3 pcfg ".ast.json") true
+  for ti in invocs do
+    let invsRes ← (invs ti).run 
+      ast3.comments ast3.indexed_nota ast3.indexed_cmds config
+    dbg_trace "invsRes: {invsRes}"
   dbg_trace "path.mod3: {path.mod3}"
+  dbg_trace "invocs: {invocs.size}"
   let (noTheorems, ps) ← (proofSource ast3).run 
     ast3.comments ast3.indexed_nota ast3.indexed_cmds config
   IO.FS.writeFile (path.toLean4proofsource pcfg) (Lean.Json.pretty ps)

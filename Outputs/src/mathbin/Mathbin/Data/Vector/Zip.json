@@ -1,8 +1,0 @@
-{"zip_with_to_list":
- "/-\nCopyright (c) 2021 Scott Morrison. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Scott Morrison\n-/\n@[simp]\ntheorem zip_with_to_list (x : Vector α n) (y : Vector β n) :\n    (vector.zip_with f x y).to_list = list.zip_with f x.to_list y.to_list :=\n  rfl\n#align zip_with_to_list zip_with_to_list\n\n",
- "zip_with_tail":
- "@[simp]\ntheorem zip_with_tail (x : Vector α n) (y : Vector β n) :\n    (vector.zip_with f x y).tail = vector.zip_with f x.tail y.tail :=\n  by\n  ext\n  simp [nth_tail]\n#align zip_with_tail zip_with_tail\n\n",
- "zip_with_nth":
- "@[simp]\ntheorem zip_with_nth (x : Vector α n) (y : Vector β n) (i) : (vector.zip_with f x y).nth i = f (x.nth i) (y.nth i) :=\n  by\n  dsimp only [vector.zip_with, Vector.nth]\n  cases x; cases y\n  simp only [list.nth_le_zip_with, subtype.coe_mk]\n  congr\n#align zip_with_nth zip_with_nth\n\n",
- "prod_mul_prod_eq_prod_zip_with":
- "@[to_additive]\ntheorem prod_mul_prod_eq_prod_zip_with [comm_monoid α] (x y : Vector α n) :\n    x.to_list.prod * y.to_list.prod = (vector.zip_with (· * ·) x y).to_list.prod :=\n  List.prod_mul_prod_eq_prod_zipWith_of_length_eq x.to_list y.to_list ((toList_length x).trans (toList_length y).symm)\n#align prod_mul_prod_eq_prod_zip_with prod_mul_prod_eq_prod_zip_with\n\n"}

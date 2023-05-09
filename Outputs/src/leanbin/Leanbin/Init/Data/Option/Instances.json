@@ -1,6 +1,0 @@
-{"eq_some_of_isSome":
- "#print Option.eq_some_of_isSome /-\ntheorem Option.eq_some_of_isSome {α : Type u} : ∀ {o : option α} (h : option.is_some o), o = some (option.get h)\n  | some x, h => rfl\n#align option.eq_some_of_is_some Option.eq_some_of_isSome\n-/\n\n",
- "eq_of_eq_some":
- "/-\nCopyright (c) 2017 Microsoft Corporation. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Leonardo de Moura\n-/\ntheorem option.eq_of_eq_some {α : Type u} : ∀ {x y : option α}, (∀ z, x = some z ↔ y = some z) → x = y\n  | none, none, h => rfl\n  | none, some z, h => option.no_confusion ((h z).2 rfl)\n  | some z, none, h => option.no_confusion ((h z).1 rfl)\n  | some z, some w, h => option.no_confusion ((h w).2 rfl) (congr_arg some)\n#align option.eq_of_eq_some option.eq_of_eq_some\n\n",
- "eq_none_of_isNone":
- "#print Option.eq_none_of_isNone /-\ntheorem Option.eq_none_of_isNone {α : Type u} : ∀ {o : option α}, o.is_none → o = none\n  | none, h => rfl\n#align option.eq_none_of_is_none Option.eq_none_of_isNone\n-/\n\n"}

@@ -1,4 +1,0 @@
-{"univ":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n/-\nCopyright (c) 2020 Aaron Anderson. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Aaron Anderson\n-/\n/- It is important that `is_simple_order` is the last type-class argument of this instance,\nso that type-class inference fails quickly if it doesn't apply. -/\ntheorem univ : (finset.univ : Finset α) = {«expr⊤», «expr⊥»} :=\n  by\n  change Finset.map _ (finset.univ : Finset bool) = _\n  rw [fintype.univ_bool]\n  simp only [Finset.map_insert, Function.Embedding.coeFn_mk, Finset.map_singleton]\n  rfl\n#align univ univ\n\n",
- "card":
- "theorem card : fintype.card α = 2 :=\n  (fintype.of_equiv_card _).trans fintype.card_bool\n#align card card\n\n"}

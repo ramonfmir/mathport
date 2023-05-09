@@ -1,8 +1,0 @@
-{"zpow_trick_sub":
- "@[to_additive]\ntheorem tactic.group.zpow_trick_sub {G : Type _} [group G] (a b : G) (n m : ℤ) :\n    a * b ^ n * b ^ (-m) = a * b ^ (n - m) := by rw [mul_assoc, ← zpow_add] <;> rfl\n#align tactic.group.zpow_trick_sub tactic.group.zpow_trick_sub\n\n",
- "zpow_trick_one'":
- "@[to_additive]\ntheorem tactic.group.zpow_trick_one' {G : Type _} [group G] (a b : G) (n : ℤ) : a * b ^ n * b = a * b ^ (n + 1) := by\n  rw [mul_assoc, mul_zpow_self]\n#align tactic.group.zpow_trick_one' tactic.group.zpow_trick_one'\n\n",
- "zpow_trick_one":
- "@[to_additive]\ntheorem tactic.group.zpow_trick_one {G : Type _} [group G] (a b : G) (m : ℤ) : a * b * b ^ m = a * b ^ (m + 1) := by\n  rw [mul_assoc, mul_self_zpow]\n#align tactic.group.zpow_trick_one tactic.group.zpow_trick_one\n\n",
- "zpow_trick":
- "/-\nCopyright (c) 2020. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Patrick Massot\n-/\n-- The next four lemmas are not general purpose lemmas, they are intended for use only by\n-- the `group` tactic.\n@[to_additive]\ntheorem tactic.group.zpow_trick {G : Type _} [group G] (a b : G) (n m : ℤ) : a * b ^ n * b ^ m = a * b ^ (n + m) := by\n  rw [mul_assoc, ← zpow_add]\n#align tactic.group.zpow_trick tactic.group.zpow_trick\n\n"}

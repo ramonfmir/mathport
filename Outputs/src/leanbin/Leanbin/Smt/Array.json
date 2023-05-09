@@ -1,6 +1,0 @@
-{"select_store_ne":
- "@[simp]\ntheorem select_store_ne (a : array α β) (i j : α) (v : β) : j ≠ i → select (store a i v) j = select a j := by\n  intros <;> unfold smt.store smt.select <;> rw [if_neg] <;> assumption\n#align select_store_ne select_store_ne\n\n",
- "select_store":
- "@[simp]\ntheorem select_store (a : array α β) (i : α) (v : β) : select (store a i v) i = v := by\n  unfold smt.store smt.select <;> rw [if_pos] <;> rfl\n#align select_store select_store\n\n",
- "arrayext":
- "/-\nCopyright (c) 2016 Microsoft Corporation. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthor: Leonardo de Moura\n-/\ntheorem arrayext (a₁ a₂ : array α β) : (∀ i, select a₁ i = select a₂ i) → a₁ = a₂ :=\n  funext\n#align arrayext arrayext\n\n"}

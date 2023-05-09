@@ -1059,10 +1059,11 @@ def parseAST3 (filename : System.FilePath) (invocs :_:= true) :
   -- println! "Converting RawAST3 to AST3..."
   rawAST3.build invocs
 
--- #eval show IO Unit from do
---   let (_, invocs) ← parseAST3 "/home/mario/Documents/lean/lean/library/init/data/nat/lemmas.ast.json"
---   for i in invocs[0:10] do
---     println! "{repr i}\n\n"
+#eval show IO Unit from do
+  let fp : FilePath := "/Users/ramonfernandezmir/Documents/PhD-code/lean-other/mathport/Oneshot/lean3-in/main.ast.json" 
+  let (_, invocs) ← parseAST3 fp
+  println! "{invocs.size}"
+  for ti in invocs do IO.println (repr ti)
 
 -- #eval show IO Unit from do
 --   let s ← IO.FS.readFile "/home/mario/Documents/lean/lean/library/init/data/nat/lemmas.ast.json"

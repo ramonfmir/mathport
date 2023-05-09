@@ -1,6 +1,0 @@
-{"rprod_le_trans_gen_game_add":
- "/-- `prod.rprod` is a subrelation of the transitive closure of `game_add`. -/\ntheorem rprod_le_trans_gen_game_add : Prod.RProd rα rβ ≤ relation.trans_gen (GameAdd rα rβ) := fun _ _ h =>\n  h.rec\n    (by\n      intro _ _ _ _ hα hβ\n      exact relation.trans_gen.tail (relation.trans_gen.single <| game_add.fst hα) (game_add.snd hβ))\n#align rprod_le_trans_gen_game_add rprod_le_trans_gen_game_add\n\n",
- "prod_gameAdd":
- "#print WellFounded.prod_gameAdd /-\n/-- The sum of two well-founded games is well-founded. -/\ntheorem WellFounded.prod_gameAdd (hα : well_founded rα) (hβ : well_founded rβ) : well_founded (Prod.GameAdd rα rβ) :=\n  ⟨fun ⟨a, b⟩ => (hα.apply a).prod_game_add (hβ.apply b)⟩\n#align well_founded.prod_game_add WellFounded.prod_gameAdd\n-/\n\n",
- "game_add_le_lex":
- "/-\nCopyright (c) 2022 Junyan Xu. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Junyan Xu\n-/\n/-- `game_add` is a `subrelation` of `prod.lex`. -/\ntheorem game_add_le_lex : GameAdd rα rβ ≤ prod.lex rα rβ := fun _ _ h =>\n  h.rec (fun _ _ b => prod.lex.left b b) fun a _ _ => prod.lex.right a\n#align game_add_le_lex game_add_le_lex\n\n"}

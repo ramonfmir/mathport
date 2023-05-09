@@ -1,8 +1,0 @@
-{"seq_up":
- "@[simp]\ntheorem seq_up (f : α → β) (x : α) : (ulift.up f).seq (ulift.up x) = ulift.up (f x) :=\n  rfl\n#align seq_up seq_up\n\n",
- "map_up":
- "@[simp]\ntheorem map_up (f : α → β) (a : α) : (ulift.up a).map f = ulift.up (f a) :=\n  rfl\n#align map_up map_up\n\n",
- "constant":
- "@[simp]\ntheorem rec.constant {α : Type u} {β : Sort v} (b : β) : (@ulift.rec α (fun _ => β) fun _ => b) = fun _ => b :=\n  funext fun x => ulift.cases_on x fun a => eq.refl (ulift.rec (fun a' => b) { down := a })\n#align rec.constant rec.constant\n\n",
- "bind_up":
- "@[simp]\ntheorem bind_up (a : α) (f : α → ULift β) : (ulift.up a).bind f = f a :=\n  rfl\n#align bind_up bind_up\n\n"}

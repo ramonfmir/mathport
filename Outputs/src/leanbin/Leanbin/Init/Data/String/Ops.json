@@ -1,6 +1,0 @@
-{"zero_lt_length_next_to_string_of_has_next":
- "theorem zero_lt_length_next_to_string_of_has_next {it : iterator} : it.has_next → 0 < it.next_to_string.length := by\n  cases it <;> cases it_snd <;>\n    simp [iterator.has_next, iterator.next_to_string, string.length, Nat.zero_lt_one_add, nat.add_comm, false_imp_iff]\n#align zero_lt_length_next_to_string_of_has_next zero_lt_length_next_to_string_of_has_next\n\n",
- "next_to_string_mk_iterator":
- "/-\nCopyright (c) 2017 Microsoft Corporation. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Sebastian Ullrich\n-/\n@[simp]\ntheorem next_to_string_mk_iterator (s : string) : s.mk_iterator.next_to_string = s := by induction s <;> rfl\n#align next_to_string_mk_iterator next_to_string_mk_iterator\n\n",
- "length_next_to_string_next":
- "@[simp]\ntheorem length_next_to_string_next (it : iterator) : it.next.next_to_string.length = it.next_to_string.length - 1 := by\n  cases it <;> cases it_snd <;> simp [iterator.next, iterator.next_to_string, string.length, nat.add_sub_cancel_left]\n#align length_next_to_string_next length_next_to_string_next\n\n"}

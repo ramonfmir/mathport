@@ -1,2 +1,0 @@
-{"sub_sub_cancel":
- "#print sub_sub_cancel /-\n/-\nCopyright (c) 2017 Microsoft Corporation. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Gabriel Ebner\n-/\nprivate theorem sub_sub_cancel (m n : ℕ) (h : m ≤ n) : n - (n - m) = m :=\n  calc\n    n - (n - m) = n - m + m - (n - m) := by rw [nat.sub_add_cancel] <;> assumption\n    _ = m := nat.add_sub_cancel_left _ _\n    \n#align sub_sub_cancel sub_sub_cancel\n-/\n\n"}

@@ -1,8 +1,0 @@
-{"turn_bound_of_right":
- "theorem turn_bound_of_right {s t : S} (m : t ∈ R s) (n : ℕ) (h : turn_bound s ≤ n + 1) : turn_bound t ≤ n :=\n  nat.le_of_lt_succ (nat.lt_of_lt_of_le (right_bound m) h)\n#align turn_bound_of_right turn_bound_of_right\n\n",
- "turn_bound_of_left":
- "theorem turn_bound_of_left {s t : S} (m : t ∈ L s) (n : ℕ) (h : turn_bound s ≤ n + 1) : turn_bound t ≤ n :=\n  nat.le_of_lt_succ (nat.lt_of_lt_of_le (left_bound m) h)\n#align turn_bound_of_left turn_bound_of_left\n\n",
- "turn_bound_ne_zero_of_right_move":
- "theorem turn_bound_ne_zero_of_right_move {s t : S} (m : t ∈ R s) : turn_bound s ≠ 0 :=\n  by\n  intro h\n  have t := state.right_bound m\n  rw [h] at t\n  exact nat.not_succ_le_zero _ t\n#align turn_bound_ne_zero_of_right_move turn_bound_ne_zero_of_right_move\n\n",
- "turn_bound_ne_zero_of_left_move":
- "/-\nCopyright (c) 2019 Scott Morrison. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Scott Morrison\n-/\ntheorem turn_bound_ne_zero_of_left_move {s t : S} (m : t ∈ L s) : turn_bound s ≠ 0 :=\n  by\n  intro h\n  have t := state.left_bound m\n  rw [h] at t\n  exact nat.not_succ_le_zero _ t\n#align turn_bound_ne_zero_of_left_move turn_bound_ne_zero_of_left_move\n\n"}

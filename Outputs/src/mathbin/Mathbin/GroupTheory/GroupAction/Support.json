@@ -1,6 +1,0 @@
-{"supports_of_mem":
- "/-\nCopyright (c) 2022 Yaël Dillies. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Yaël Dillies\n-/\n@[to_additive]\ntheorem supports_of_mem (ha : a ∈ s) : Supports G s a := fun g h => h ha\n#align supports_of_mem supports_of_mem\n\n",
- "smul":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n-- TODO: This should work without `smul_comm_class`\n@[to_additive]\ntheorem supports.smul (g : H) (h : Supports G s b) : Supports G («expr • » g s) («expr • » g b) :=\n  by\n  rintro g' hg'\n  rw [smul_comm, h]\n  rintro a ha\n  have := Set.ball_image_iff.1 hg' a ha\n  rwa [smul_comm, smul_left_cancel_iff] at this\n#align supports.smul supports.smul\n\n",
- "mono":
- "@[to_additive]\ntheorem supports.mono (h : s ⊆ t) (hs : Supports G s b) : Supports G t b := fun g hg => hs _ fun a ha => hg <| h ha\n#align supports.mono supports.mono\n\n"}
