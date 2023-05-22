@@ -1,0 +1,58 @@
+{"snd_kstar":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ∗» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ∗» -/\n@[simp]\ntheorem snd_kstar (a : α × β) : («expr ∗» a).2 = «expr ∗» a.2 :=\n  rfl\n#align snd_kstar snd_kstar\n\n",
+ "pow_le_kstar":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ∗» -/\n#print pow_le_kstar /-\n@[simp]\ntheorem pow_le_kstar : ∀ {n : ℕ}, a ^ n ≤ «expr ∗» a\n  | 0 => (pow_zero _).trans_le one_le_kstar\n  | n + 1 => by\n    rw [pow_succ]\n    exact (mul_le_mul_left' pow_le_kstar _).trans mul_kstar_le_kstar\n#align pow_le_kstar pow_le_kstar\n-/\n\n",
+ "one_le_kstar":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ∗» -/\n#print one_le_kstar /-\n-- See note [lower instance priority]\n-- See note [lower instance priority]\n-- See note [lower instance priority]\n@[simp]\ntheorem one_le_kstar : 1 ≤ «expr ∗» a :=\n  kleene_algebra.one_le_kstar _\n#align one_le_kstar one_le_kstar\n-/\n\n",
+ "nsmul_eq_self":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n#print nsmul_eq_self /-\ntheorem nsmul_eq_self : ∀ {n : ℕ} (hn : n ≠ 0) (a : α), «expr • » n a = a\n  | 0, h => (h rfl).elim\n  | 1, h => one_nsmul\n  | n + 2, h => fun a => by rw [succ_nsmul, nsmul_eq_self n.succ_ne_zero, add_idem]\n#align nsmul_eq_self nsmul_eq_self\n-/\n\n",
+ "mul_kstar_le_self":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ∗» -/\n#print mul_kstar_le_self /-\ntheorem mul_kstar_le_self : b * a ≤ b → b * «expr ∗» a ≤ b :=\n  kleene_algebra.mul_kstar_le_self _ _\n#align mul_kstar_le_self mul_kstar_le_self\n-/\n\n",
+ "mul_kstar_le_kstar":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ∗» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ∗» -/\n#print mul_kstar_le_kstar /-\ntheorem mul_kstar_le_kstar : a * «expr ∗» a ≤ «expr ∗» a :=\n  kleene_algebra.mul_kstar_le_kstar _\n#align mul_kstar_le_kstar mul_kstar_le_kstar\n-/\n\n",
+ "mul_kstar_le":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ∗» -/\n#print mul_kstar_le /-\ntheorem mul_kstar_le (hb : b ≤ c) (ha : c * a ≤ c) : b * «expr ∗» a ≤ c :=\n  (mul_le_mul_right' hb _).trans <| mul_kstar_le_self ha\n#align mul_kstar_le mul_kstar_le\n-/\n\n",
+ "le_kstar":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ∗» -/\n#print le_kstar /-\n@[simp]\ntheorem le_kstar : a ≤ «expr ∗» a :=\n  le_trans (le_mul_of_one_le_left' one_le_kstar) kstar_mul_le_kstar\n#align le_kstar le_kstar\n-/\n\n",
+ "kstar_zero":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ∗» -/\n#print kstar_zero /-\n@[simp]\ntheorem kstar_zero : «expr ∗» (0 : α) = 1 :=\n  kstar_eq_one.2 zero_le_one\n#align kstar_zero kstar_zero\n-/\n\n",
+ "kstar_one":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ∗» -/\n#print kstar_one /-\n@[simp]\ntheorem kstar_one : «expr ∗» (1 : α) = 1 :=\n  kstar_eq_one.2 le_rfl\n#align kstar_one kstar_one\n-/\n\n",
+ "kstar_mul_le_self":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ∗» -/\n#print kstar_mul_le_self /-\ntheorem kstar_mul_le_self : a * b ≤ b → «expr ∗» a * b ≤ b :=\n  kleene_algebra.kstar_mul_le_self _ _\n#align kstar_mul_le_self kstar_mul_le_self\n-/\n\n",
+ "kstar_mul_le_kstar":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ∗» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ∗» -/\n#print kstar_mul_le_kstar /-\ntheorem kstar_mul_le_kstar : «expr ∗» a * a ≤ «expr ∗» a :=\n  kleene_algebra.kstar_mul_le_kstar _\n#align kstar_mul_le_kstar kstar_mul_le_kstar\n-/\n\n",
+ "kstar_mul_le":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ∗» -/\n#print kstar_mul_le /-\ntheorem kstar_mul_le (hb : b ≤ c) (ha : a * c ≤ c) : «expr ∗» a * b ≤ c :=\n  (mul_le_mul_left' hb _).trans <| kstar_mul_le_self ha\n#align kstar_mul_le kstar_mul_le\n-/\n\n",
+ "kstar_mul_kstar":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ∗» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ∗» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ∗» -/\n#print kstar_mul_kstar /-\n@[simp]\ntheorem kstar_mul_kstar (a : α) : «expr ∗» a * «expr ∗» a = «expr ∗» a :=\n  (mul_kstar_le le_rfl <| kstar_mul_le_kstar).antisymm <| le_mul_of_one_le_left' one_le_kstar\n#align kstar_mul_kstar kstar_mul_kstar\n-/\n\n",
+ "kstar_mono":
+ "#print kstar_mono /-\n@[mono]\ntheorem kstar_mono : Monotone (has_kstar.kstar : α → α) := fun a b h =>\n  kstar_le_of_mul_le_left one_le_kstar <| kstar_mul_le (h.trans le_kstar) <| mul_kstar_le_kstar\n#align kstar_mono kstar_mono\n-/\n\n",
+ "kstar_le_of_mul_le_right":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ∗» -/\n#print kstar_le_of_mul_le_right /-\ntheorem kstar_le_of_mul_le_right (hb : 1 ≤ b) : a * b ≤ b → «expr ∗» a ≤ b := by simpa using kstar_mul_le hb\n#align kstar_le_of_mul_le_right kstar_le_of_mul_le_right\n-/\n\n",
+ "kstar_le_of_mul_le_left":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ∗» -/\n#print kstar_le_of_mul_le_left /-\ntheorem kstar_le_of_mul_le_left (hb : 1 ≤ b) : b * a ≤ b → «expr ∗» a ≤ b := by simpa using mul_kstar_le hb\n#align kstar_le_of_mul_le_left kstar_le_of_mul_le_left\n-/\n\n",
+ "kstar_idem":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ∗» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ∗» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ∗» -/\n#print kstar_idem /-\n@[simp]\ntheorem kstar_idem (a : α) : «expr ∗» («expr ∗» a) = «expr ∗» a :=\n  kstar_eq_self.2 ⟨kstar_mul_kstar _, one_le_kstar⟩\n#align kstar_idem kstar_idem\n-/\n\n",
+ "kstar_eq_self":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ∗» -/\n#print kstar_eq_self /-\n@[simp]\ntheorem kstar_eq_self : «expr ∗» a = a ↔ a * a = a ∧ 1 ≤ a :=\n  ⟨fun h => ⟨by rw [← h, kstar_mul_kstar], one_le_kstar.trans_eq h⟩, fun h =>\n    (kstar_le_of_mul_le_left h.2 h.1.le).antisymm le_kstar⟩\n#align kstar_eq_self kstar_eq_self\n-/\n\n",
+ "kstar_eq_one":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ∗» -/\n#print kstar_eq_one /-\n@[simp]\ntheorem kstar_eq_one : «expr ∗» a = 1 ↔ a ≤ 1 :=\n  ⟨le_kstar.trans_eq, fun h => one_le_kstar.antisymm' <| kstar_le_of_mul_le_left le_rfl <| by rwa [one_mul]⟩\n#align kstar_eq_one kstar_eq_one\n-/\n\n",
+ "kstar_def":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ∗» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ∗» -/\ntheorem kstar_def (a : ∀ i, π i) : «expr ∗» a = fun i => «expr ∗» (a i) :=\n  rfl\n#align kstar_def kstar_def\n\n",
+ "kstar_apply":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ∗» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ∗» -/\n@[simp]\ntheorem kstar_apply (a : ∀ i, π i) (i : ι) : («expr ∗» a) i = «expr ∗» (a i) :=\n  rfl\n#align kstar_apply kstar_apply\n\n",
+ "fst_kstar":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ∗» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ∗» -/\n@[simp]\ntheorem fst_kstar (a : α × β) : («expr ∗» a).1 = «expr ∗» a.1 :=\n  rfl\n#align fst_kstar fst_kstar\n\n",
+ "add_le_iff":
+ "#print add_le_iff /-\ntheorem add_le_iff : a + b ≤ c ↔ a ≤ c ∧ b ≤ c := by simp\n#align add_le_iff add_le_iff\n-/\n\n",
+ "add_le":
+ "#print add_le /-\ntheorem add_le (ha : a ≤ c) (hb : b ≤ c) : a + b ≤ c :=\n  add_le_iff.2 ⟨ha, hb⟩\n#align add_le add_le\n-/\n\n",
+ "add_idem":
+ "#print add_idem /-\ntheorem add_idem (a : α) : a + a = a := by simp\n#align add_idem add_idem\n-/\n\n",
+ "add_eq_sup":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊔ » -/\n#print add_eq_sup /-\n/-\nCopyright (c) 2022 Siddhartha Prasad, Yaël Dillies. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Siddhartha Prasad, Yaël Dillies\n-/\n-- See note [lower instance priority]\n-- See note [reducible non-instances]\n@[simp]\ntheorem add_eq_sup (a b : α) : a + b = «expr ⊔ » a b :=\n  idem_semiring.add_eq_sup _ _\n#align add_eq_sup add_eq_sup\n-/\n\n",
+ "add_eq_right_iff_le":
+ "#print add_eq_right_iff_le /-\ntheorem add_eq_right_iff_le : a + b = b ↔ a ≤ b := by simp\n#align add_eq_right_iff_le add_eq_right_iff_le\n-/\n\n",
+ "add_eq_left_iff_le":
+ "#print add_eq_left_iff_le /-\ntheorem add_eq_left_iff_le : a + b = a ↔ b ≤ a := by simp\n#align add_eq_left_iff_le add_eq_left_iff_le\n-/\n\n"}

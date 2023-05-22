@@ -1,96 +1,96 @@
 {"tt_eq_to_bool_iff":
- "@[simp]\ntheorem tt_eq_to_bool_iff {p : Prop} [decidable p] : tt = decide p ↔ p :=\n  eq_comm.trans of_decide_iff\n#align tt_eq_to_bool_iff tt_eq_to_bool_iff\n\n",
+ "@[simp]\ntheorem tt_eq_to_bool_iff {p : Prop} [Decidable p] : true = decide p ↔ p :=\n  eq_comm.trans of_decide_iff\n#align tt_eq_to_bool_iff tt_eq_to_bool_iff\n\n",
  "to_nat_le_to_nat":
- "theorem to_nat_le_to_nat {b₀ b₁ : bool} (h : b₀ ≤ b₁) : toNat b₀ ≤ toNat b₁ := by\n  cases h <;> subst h <;> [cases b₁, cases b₀] <;> simp [to_nat, nat.zero_le]\n#align to_nat_le_to_nat to_nat_le_to_nat\n\n",
+ "theorem to_nat_le_to_nat {b₀ b₁ : Bool} (h : b₀ ≤ b₁) : toNat b₀ ≤ toNat b₁ := by\n  cases h <;> subst h <;> [cases b₁, cases b₀] <;> simp [toNat, nat.zero_le]\n#align to_nat_le_to_nat to_nat_le_to_nat\n\n",
  "to_bool_or":
- "@[simp]\ntheorem to_bool_or (p q : Prop) [decidable p] [decidable q] : decide (p ∨ q) = (p || q) := by\n  by_cases p <;> by_cases q <;> simp [*]\n#align to_bool_or to_bool_or\n\n",
+ "@[simp]\ntheorem to_bool_or (p q : Prop) [Decidable p] [Decidable q] : decide (p ∨ q) = (p || q) := by\n  by_cases p <;> by_cases q <;> simp [*]\n#align to_bool_or to_bool_or\n\n",
  "to_bool_not":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr! » -/\n@[simp]\ntheorem to_bool_not (p : Prop) [decidable p] : (decide ¬p) = «expr! » (decide p) := by by_cases p <;> simp [*]\n#align to_bool_not to_bool_not\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr! » -/\n@[simp]\ntheorem to_bool_not (p : Prop) [Decidable p] : (decide ¬p) = «expr! » (decide p) := by by_cases p <;> simp [*]\n#align to_bool_not to_bool_not\n\n",
  "to_bool_false":
- "-- TODO: duplicate of a lemma in core\ntheorem to_bool_false {h} : @decide false h = ff :=\n  decide_False' h\n#align to_bool_false to_bool_false\n\n",
+ "-- TODO: duplicate of a lemma in core\ntheorem to_bool_false {h} : @decide False h = false :=\n  decide_False' h\n#align to_bool_false to_bool_false\n\n",
  "to_bool_eq":
- "@[simp]\ntheorem to_bool_eq {p q : Prop} [decidable p] [decidable q] : decide p = decide q ↔ (p ↔ q) :=\n  ⟨fun h => (coe_decide p).symm.trans <| by simp [h], Bool.decide_congr⟩\n#align to_bool_eq to_bool_eq\n\n",
+ "@[simp]\ntheorem to_bool_eq {p q : Prop} [Decidable p] [Decidable q] : decide p = decide q ↔ (p ↔ q) :=\n  ⟨fun h => (coe_decide p).symm.trans <| by simp [h], Bool.decide_congr⟩\n#align to_bool_eq to_bool_eq\n\n",
  "to_bool_coe":
- "@[simp]\ntheorem to_bool_coe (b : bool) {h} : @decide b h = b :=\n  show _ = decide b by congr.trans (by cases b <;> rfl)\n#align to_bool_coe to_bool_coe\n\n",
+ "@[simp]\ntheorem to_bool_coe (b : Bool) {h} : @decide b h = b :=\n  show _ = decide b by congr.trans (by cases b <;> rfl)\n#align to_bool_coe to_bool_coe\n\n",
  "to_bool_and":
- "@[simp]\ntheorem to_bool_and (p q : Prop) [decidable p] [decidable q] : decide (p ∧ q) = (p && q) := by\n  by_cases p <;> by_cases q <;> simp [*]\n#align to_bool_and to_bool_and\n\n",
+ "@[simp]\ntheorem to_bool_and (p q : Prop) [Decidable p] [Decidable q] : decide (p ∧ q) = (p && q) := by\n  by_cases p <;> by_cases q <;> simp [*]\n#align to_bool_and to_bool_and\n\n",
  "self_ne_bnot":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr! » -/\ntheorem self_ne_bnot : ∀ b : bool, b ≠ «expr! » b := by decide\n#align self_ne_bnot self_ne_bnot\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr! » -/\ntheorem self_ne_bnot : ∀ b : Bool, b ≠ «expr! » b := by decide\n#align self_ne_bnot self_ne_bnot\n\n",
  "right_le_bor":
- "theorem right_le_bor : ∀ x y : bool, y ≤ (x || y) := by decide\n#align right_le_bor right_le_bor\n\n",
+ "theorem right_le_bor : ∀ x y : Bool, y ≤ (x || y) := by decide\n#align right_le_bor right_le_bor\n\n",
  "of_to_bool_iff":
- "@[simp]\ntheorem of_to_bool_iff {p : Prop} [decidable p] : decide p ↔ p :=\n  ⟨Bool.of_decide_true, Bool.decide_true⟩\n#align of_to_bool_iff of_to_bool_iff\n\n",
+ "@[simp]\ntheorem of_to_bool_iff {p : Prop} [Decidable p] : decide p ↔ p :=\n  ⟨Bool.of_decide_true, Bool.decide_true⟩\n#align of_to_bool_iff of_to_bool_iff\n\n",
  "of_nat_to_nat":
- "theorem of_nat_to_nat (b : bool) : ofNat (toNat b) = b := by cases b <;> simp only [of_nat, to_nat] <;> exact by decide\n#align of_nat_to_nat of_nat_to_nat\n\n",
+ "theorem of_nat_to_nat (b : Bool) : ofNat (toNat b) = b := by cases b <;> simp only [of_nat, toNat] <;> exact by decide\n#align of_nat_to_nat of_nat_to_nat\n\n",
  "of_nat_le_of_nat":
  "theorem of_nat_le_of_nat {n m : ℕ} (h : n ≤ m) : ofNat n ≤ ofNat m :=\n  by\n  simp [of_nat] <;> cases nat.decidable_eq n 0 <;> cases nat.decidable_eq m 0 <;> simp only [to_bool]\n  · subst m\n    have h := le_antisymm h (nat.zero_le _)\n    contradiction\n  · left\n    rfl\n#align of_nat_le_of_nat of_nat_le_of_nat\n\n",
- "not_ff": "theorem not_ff : ¬ff :=\n  ff_ne_tt\n#align not_ff not_ff\n\n",
+ "not_ff": "theorem not_ff : ¬false :=\n  ff_ne_tt\n#align not_ff not_ff\n\n",
  "not_eq_bnot":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr! » -/\n@[simp]\ntheorem not_eq_bnot : ∀ {a b : bool}, ¬a = «expr! » b ↔ a = b := by decide\n#align not_eq_bnot not_eq_bnot\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr! » -/\n@[simp]\ntheorem not_eq_bnot : ∀ {a b : Bool}, ¬a = «expr! » b ↔ a = b := by decide\n#align not_eq_bnot not_eq_bnot\n\n",
  "ne_bnot":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr! » -/\ntheorem ne_bnot {a b : bool} : a ≠ «expr! » b ↔ a = b :=\n  not_eq_bnot\n#align ne_bnot ne_bnot\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr! » -/\ntheorem ne_bnot {a b : Bool} : a ≠ «expr! » b ↔ a = b :=\n  not_eq_not\n#align ne_bnot ne_bnot\n\n",
  "lt_iff":
- "theorem lt_iff : ∀ {x y : bool}, x < y ↔ x = ff ∧ y = tt := by decide\n#align lt_iff lt_iff\n\n",
+ "theorem lt_iff : ∀ {x y : Bool}, x < y ↔ x = false ∧ y = true := by decide\n#align lt_iff lt_iff\n\n",
  "left_le_bor":
- "theorem left_le_bor : ∀ x y : bool, x ≤ (x || y) := by decide\n#align left_le_bor left_le_bor\n\n",
+ "theorem left_le_bor : ∀ x y : Bool, x ≤ (x || y) := by decide\n#align left_le_bor left_le_bor\n\n",
  "le_tt":
- "@[simp]\ntheorem le_tt {x : bool} : x ≤ tt :=\n  Or.intro_right _ rfl\n#align le_tt le_tt\n\n",
+ "@[simp]\ntheorem le_tt {x : Bool} : x ≤ true :=\n  Or.intro_right _ rfl\n#align le_tt le_tt\n\n",
  "le_iff_imp":
- "theorem le_iff_imp : ∀ {x y : bool}, x ≤ y ↔ x → y := by decide\n#align le_iff_imp le_iff_imp\n\n",
+ "theorem le_iff_imp : ∀ {x y : Bool}, x ≤ y ↔ x → y := by decide\n#align le_iff_imp le_iff_imp\n\n",
  "le_band":
- "theorem le_band : ∀ {x y z : bool}, x ≤ y → x ≤ z → x ≤ (y && z) := by decide\n#align le_band le_band\n\n",
+ "theorem le_band : ∀ {x y z : Bool}, x ≤ y → x ≤ z → x ≤ (y && z) := by decide\n#align le_band le_band\n\n",
  "injective_iff":
- "@[simp]\ntheorem injective_iff {α : Sort _} {f : bool → α} : function.injective f ↔ f false ≠ f true :=\n  ⟨fun Hinj Heq => ff_ne_tt (Hinj Heq), fun H x y hxy =>\n    by\n    cases x <;> cases y\n    exacts[rfl, (H hxy).elim, (H hxy.symm).elim, rfl]⟩\n#align injective_iff injective_iff\n\n",
+ "@[simp]\ntheorem injective_iff {α : Sort _} {f : Bool → α} : function.injective f ↔ f false ≠ f true :=\n  ⟨fun Hinj Heq => ff_ne_tt (Hinj Heq), fun H x y hxy =>\n    by\n    cases x <;> cases y\n    exacts[rfl, (H hxy).elim, (H hxy.symm).elim, rfl]⟩\n#align injective_iff injective_iff\n\n",
  "forall_bool":
- "@[simp]\ntheorem forall_bool {p : bool → Prop} : (∀ b, p b) ↔ p false ∧ p true :=\n  ⟨fun h => by simp [h], fun ⟨h₁, h₂⟩ b => by cases b <;> assumption⟩\n#align forall_bool forall_bool\n\n",
+ "@[simp]\ntheorem forall_bool {p : Bool → Prop} : (∀ b, p b) ↔ p false ∧ p true :=\n  ⟨fun h => by simp [h], fun ⟨h₁, h₂⟩ b => by cases b <;> assumption⟩\n#align forall_bool forall_bool\n\n",
  "ff_lt_tt":
- "@[simp]\ntheorem ff_lt_tt : ff < tt :=\n  lt_iff.2 ⟨rfl, rfl⟩\n#align ff_lt_tt ff_lt_tt\n\n",
+ "@[simp]\ntheorem ff_lt_tt : false < true :=\n  lt_iff.2 ⟨rfl, rfl⟩\n#align ff_lt_tt ff_lt_tt\n\n",
  "ff_le":
- "@[simp]\ntheorem ff_le {x : bool} : ff ≤ x :=\n  or.intro_left _ rfl\n#align ff_le ff_le\n\n",
+ "@[simp]\ntheorem ff_le {x : Bool} : false ≤ x :=\n  or.intro_left _ rfl\n#align ff_le ff_le\n\n",
  "ff_eq_to_bool_iff":
- "@[simp]\ntheorem ff_eq_to_bool_iff {p : Prop} [decidable p] : ff = decide p ↔ ¬p :=\n  eq_comm.trans (Bool.decide_false_iff _)\n#align ff_eq_to_bool_iff ff_eq_to_bool_iff\n\n",
+ "@[simp]\ntheorem ff_eq_to_bool_iff {p : Prop} [Decidable p] : false = decide p ↔ ¬p :=\n  eq_comm.trans (Bool.decide_false_iff _)\n#align ff_eq_to_bool_iff ff_eq_to_bool_iff\n\n",
  "exists_bool":
- "@[simp]\ntheorem exists_bool {p : bool → Prop} : (∃ b, p b) ↔ p false ∨ p true :=\n  ⟨fun ⟨b, h⟩ => by cases b <;> [exact or.inl h, exact or.inr h], fun h => by cases h <;> exact ⟨_, h⟩⟩\n#align exists_bool exists_bool\n\n",
+ "@[simp]\ntheorem exists_bool {p : Bool → Prop} : (∃ b, p b) ↔ p false ∨ p true :=\n  ⟨fun ⟨b, h⟩ => by cases b <;> [exact or.inl h, exact or.inr h], fun h => by cases h <;> exact ⟨_, h⟩⟩\n#align exists_bool exists_bool\n\n",
  "eq_tt_of_ne_ff":
- "theorem eq_tt_of_ne_ff : ∀ {a : bool}, a ≠ ff → a = tt := by decide\n#align eq_tt_of_ne_ff eq_tt_of_ne_ff\n\n",
+ "theorem eq_tt_of_ne_ff : ∀ {a : Bool}, a ≠ false → a = true := by decide\n#align eq_tt_of_ne_ff eq_tt_of_ne_ff\n\n",
  "eq_tt_of_bnot_eq_ff":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr! » -/\ntheorem eq_tt_of_bnot_eq_ff : ∀ {a : bool}, «expr! » a = ff → a = tt := by decide\n#align eq_tt_of_bnot_eq_ff eq_tt_of_bnot_eq_ff\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr! » -/\ntheorem eq_tt_of_bnot_eq_ff : ∀ {a : Bool}, «expr! » a = false → a = true := by decide\n#align eq_tt_of_bnot_eq_ff eq_tt_of_bnot_eq_ff\n\n",
  "eq_or_eq_bnot":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr! » -/\ntheorem eq_or_eq_bnot : ∀ a b, a = b ∨ a = «expr! » b := by decide\n#align eq_or_eq_bnot eq_or_eq_bnot\n\n",
  "eq_ff_of_ne_tt":
- "theorem eq_ff_of_ne_tt : ∀ {a : bool}, a ≠ tt → a = ff := by decide\n#align eq_ff_of_ne_tt eq_ff_of_ne_tt\n\n",
+ "theorem eq_ff_of_ne_tt : ∀ {a : Bool}, a ≠ true → a = false := by decide\n#align eq_ff_of_ne_tt eq_ff_of_ne_tt\n\n",
  "eq_ff_of_bnot_eq_tt":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr! » -/\ntheorem eq_ff_of_bnot_eq_tt : ∀ {a : bool}, «expr! » a = tt → a = ff := by decide\n#align eq_ff_of_bnot_eq_tt eq_ff_of_bnot_eq_tt\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr! » -/\ntheorem eq_ff_of_bnot_eq_tt : ∀ {a : Bool}, «expr! » a = true → a = false := by decide\n#align eq_ff_of_bnot_eq_tt eq_ff_of_bnot_eq_tt\n\n",
  "eq_bnot_iff":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr! » -/\ntheorem eq_bnot_iff : ∀ {a b : bool}, a = «expr! » b ↔ a ≠ b := by decide\n#align eq_bnot_iff eq_bnot_iff\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr! » -/\ntheorem eq_bnot_iff : ∀ {a b : Bool}, a = «expr! » b ↔ a ≠ b := by decide\n#align eq_bnot_iff eq_bnot_iff\n\n",
  "dichotomy":
- "theorem dichotomy (b : bool) : b = ff ∨ b = tt := by cases b <;> simp\n#align dichotomy dichotomy\n\n",
+ "theorem dichotomy (b : Bool) : b = false ∨ b = true := by cases b <;> simp\n#align dichotomy dichotomy\n\n",
  "default_bool":
- "@[simp]\ntheorem default_bool : default = ff :=\n  rfl\n#align default_bool default_bool\n\n",
+ "@[simp]\ntheorem default_bool : default = false :=\n  rfl\n#align default_bool default_bool\n\n",
  "decide_true":
- "#print Bool.decide_true /-\n-- TODO: duplicate of a lemma in core\ntheorem Bool.decide_true {h} : @decide true h = tt :=\n  decide_True' h\n#align to_bool_true Bool.decide_true\n-/\n\n",
+ "#print Bool.decide_true /-\n-- TODO: duplicate of a lemma in core\ntheorem Bool.decide_true {h} : @decide True h = true :=\n  decide_True' h\n#align to_bool_true Bool.decide_true\n-/\n\n",
  "cond_tt":
  "@[simp]\ntheorem cond_tt {α} (t e : α) : cond true t e = t :=\n  rfl\n#align cond_tt cond_tt\n\n",
  "cond_to_bool":
- "@[simp]\ntheorem cond_to_bool {α} (p : Prop) [decidable p] (t e : α) : cond (decide p) t e = if p then t else e := by\n  simp [cond_eq_ite]\n#align cond_to_bool cond_to_bool\n\n",
+ "@[simp]\ntheorem cond_to_bool {α} (p : Prop) [Decidable p] (t e : α) : cond (decide p) t e = if p then t else e := by\n  simp [cond_eq_ite]\n#align cond_to_bool cond_to_bool\n\n",
  "cond_ff":
  "@[simp]\ntheorem cond_ff {α} (t e : α) : cond false t e = e :=\n  rfl\n#align cond_ff cond_ff\n\n",
  "cond_eq_ite":
- "theorem cond_eq_ite {α} (b : bool) (t e : α) : cond b t e = if b then t else e := by cases b <;> simp\n#align cond_eq_ite cond_eq_ite\n\n",
+ "theorem cond_eq_ite {α} (b : Bool) (t e : α) : cond b t e = if b then t else e := by cases b <;> simp\n#align cond_eq_ite cond_eq_ite\n\n",
  "cond_bnot":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr! » -/\n@[simp]\ntheorem cond_bnot {α} (b : bool) (t e : α) : cond («expr! » b) t e = cond b e t := by cases b <;> rfl\n#align cond_bnot cond_bnot\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr! » -/\n@[simp]\ntheorem cond_bnot {α} (b : Bool) (t e : α) : cond («expr! » b) t e = cond b e t := by cases b <;> rfl\n#align cond_bnot cond_bnot\n\n",
  "coe_to_bool":
- "theorem coe_to_bool (p : Prop) [decidable p] : decide p ↔ p :=\n  Bool.decide_iff _\n#align coe_to_bool coe_to_bool\n\n",
+ "theorem coe_to_bool (p : Prop) [Decidable p] : decide p ↔ p :=\n  Bool.decide_iff _\n#align coe_to_bool coe_to_bool\n\n",
  "coe_sort_true":
- "#print Bool.coe_sort_true /-\n/-\nCopyright (c) 2014 Microsoft Corporation. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Leonardo de Moura, Jeremy Avigad\n-/\n-- TODO: duplicate of a lemma in core\ntheorem Bool.coe_sort_true : coe_sort.{1, 1} true = true :=\n  Bool.coe_sort_true\n#align coe_sort_tt Bool.coe_sort_true\n-/\n\n",
+ "#print Bool.coe_sort_true /-\n/-\nCopyright (c) 2014 Microsoft Corporation. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Leonardo de Moura, Jeremy Avigad\n-/\n-- TODO: duplicate of a lemma in core\ntheorem Bool.coe_sort_true : coe_sort.{1, 1} true = True :=\n  Bool.coe_sort_true\n#align coe_sort_tt Bool.coe_sort_true\n-/\n\n",
  "coe_sort_false":
- "#print Bool.coe_sort_false /-\n-- TODO: duplicate of a lemma in core\ntheorem Bool.coe_sort_false : coe_sort.{1, 1} false = false :=\n  Bool.coe_sort_false\n#align coe_sort_ff Bool.coe_sort_false\n-/\n\n",
+ "#print Bool.coe_sort_false /-\n-- TODO: duplicate of a lemma in core\ntheorem Bool.coe_sort_false : coe_sort.{1, 1} false = False :=\n  Bool.coe_sort_false\n#align coe_sort_ff Bool.coe_sort_false\n-/\n\n",
  "coe_bool_iff":
- "theorem coe_bool_iff : ∀ {a b : bool}, (a ↔ b) ↔ a = b := by decide\n#align coe_bool_iff coe_bool_iff\n\n",
+ "theorem coe_bool_iff : ∀ {a b : Bool}, (a ↔ b) ↔ a = b := by decide\n#align coe_bool_iff coe_bool_iff\n\n",
  "bxor_left_comm":
  "theorem bxor_left_comm : ∀ a b c, xor a (xor b c) = xor b (xor a c) := by decide\n#align bxor_left_comm bxor_left_comm\n\n",
  "bxor_iff_ne":
- "theorem bxor_iff_ne : ∀ {x y : bool}, xor x y = tt ↔ x ≠ y := by decide\n#align bxor_iff_ne bxor_iff_ne\n\n",
+ "theorem bxor_iff_ne : ∀ {x y : Bool}, xor x y = true ↔ x ≠ y := by decide\n#align bxor_iff_ne bxor_iff_ne\n\n",
  "bxor_ff_right":
  "@[simp]\ntheorem bxor_ff_right : ∀ a, xor a false = a := by decide\n#align bxor_ff_right bxor_ff_right\n\n",
  "bxor_ff_left":
@@ -98,9 +98,9 @@
  "bxor_comm":
  "theorem bxor_comm : ∀ a b, xor a b = xor b a := by decide\n#align bxor_comm bxor_comm\n\n",
  "bxor_bnot_right":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr! » -/\n@[simp]\ntheorem bxor_bnot_right : ∀ a, xor a («expr! » a) = tt := by decide\n#align bxor_bnot_right bxor_bnot_right\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr! » -/\n@[simp]\ntheorem bxor_bnot_right : ∀ a, xor a («expr! » a) = true := by decide\n#align bxor_bnot_right bxor_bnot_right\n\n",
  "bxor_bnot_left":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr! » -/\n@[simp]\ntheorem bxor_bnot_left : ∀ a, xor («expr! » a) a = tt := by decide\n#align bxor_bnot_left bxor_bnot_left\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr! » -/\n@[simp]\ntheorem bxor_bnot_left : ∀ a, xor («expr! » a) a = true := by decide\n#align bxor_bnot_left bxor_bnot_left\n\n",
  "bxor_bnot_bnot":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr! » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr! » -/\n@[simp]\ntheorem bxor_bnot_bnot : ∀ a b, xor («expr! » a) («expr! » b) = xor a b := by decide\n#align bxor_bnot_bnot bxor_bnot_bnot\n\n",
  "bxor_assoc":
@@ -110,70 +110,70 @@
  "bor_le":
  "theorem bor_le : ∀ {x y z}, x ≤ z → y ≤ z → (x || y) ≤ z := by decide\n#align bor_le bor_le\n\n",
  "bor_inr":
- "theorem bor_inr {a b : bool} (H : b) : a || b := by simp [H]\n#align bor_inr bor_inr\n\n",
+ "theorem bor_inr {a b : Bool} (H : b) : a || b := by simp [H]\n#align bor_inr bor_inr\n\n",
  "bor_inl":
- "theorem bor_inl {a b : bool} (H : a) : a || b := by simp [H]\n#align bor_inl bor_inl\n\n",
+ "theorem bor_inl {a b : Bool} (H : a) : a || b := by simp [H]\n#align bor_inl bor_inl\n\n",
  "bor_comm":
  "theorem bor_comm : ∀ a b, (a || b) = (b || a) := by decide\n#align bor_comm bor_comm\n\n",
  "bor_bnot_self":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr! » -/\n@[simp]\ntheorem bor_bnot_self : ∀ x, (x || «expr! » x) = tt := by decide\n#align bor_bnot_self bor_bnot_self\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr! » -/\n@[simp]\ntheorem bor_bnot_self : ∀ x, (x || «expr! » x) = true := by decide\n#align bor_bnot_self bor_bnot_self\n\n",
  "bor_band_distrib_right":
- "theorem bor_band_distrib_right (a b c : bool) : (a && b || c) = ((a || c) && (b || c)) := by cases c <;> simp\n#align bor_band_distrib_right bor_band_distrib_right\n\n",
+ "theorem bor_band_distrib_right (a b c : Bool) : (a && b || c) = ((a || c) && (b || c)) := by cases c <;> simp\n#align bor_band_distrib_right bor_band_distrib_right\n\n",
  "bor_band_distrib_left":
- "theorem bor_band_distrib_left (a b c : bool) : (a || b && c) = ((a || b) && (a || c)) := by cases a <;> simp\n#align bor_band_distrib_left bor_band_distrib_left\n\n",
+ "theorem bor_band_distrib_left (a b c : Bool) : (a || b && c) = ((a || b) && (a || c)) := by cases a <;> simp\n#align bor_band_distrib_left bor_band_distrib_left\n\n",
  "bor_assoc":
  "@[simp]\ntheorem bor_assoc : ∀ a b c, (a || b || c) = (a || (b || c)) := by decide\n#align bor_assoc bor_assoc\n\n",
  "bnot_tt":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr! » -/\n@[simp]\ntheorem bnot_tt : «expr! » tt = ff :=\n  rfl\n#align bnot_tt bnot_tt\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr! » -/\n@[simp]\ntheorem bnot_tt : «expr! » true = false :=\n  rfl\n#align bnot_tt bnot_tt\n\n",
  "bnot_not_eq":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr! » -/\n@[simp]\ntheorem bnot_not_eq : ∀ {a b : bool}, ¬«expr! » a = b ↔ a = b := by decide\n#align bnot_not_eq bnot_not_eq\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr! » -/\n@[simp]\ntheorem bnot_not_eq : ∀ {a b : Bool}, ¬«expr! » a = b ↔ a = b := by decide\n#align bnot_not_eq bnot_not_eq\n\n",
  "bnot_ne_self":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr! » -/\ntheorem bnot_ne_self : ∀ b : bool, «expr! » b ≠ b := by decide\n#align bnot_ne_self bnot_ne_self\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr! » -/\ntheorem bnot_ne_self : ∀ b : Bool, «expr! » b ≠ b := by decide\n#align bnot_ne_self bnot_ne_self\n\n",
  "bnot_ne_id":
  "theorem bnot_ne_id : not ≠ id := fun h => ff_ne_tt <| congr_fun h true\n#align bnot_ne_id bnot_ne_id\n\n",
  "bnot_ne":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr! » -/\ntheorem bnot_ne {a b : bool} : «expr! » a ≠ b ↔ a = b :=\n  bnot_not_eq\n#align bnot_ne bnot_ne\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr! » -/\ntheorem bnot_ne {a b : Bool} : «expr! » a ≠ b ↔ a = b :=\n  not_not_eq\n#align bnot_ne bnot_ne\n\n",
  "bnot_inj":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr! » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr! » -/\ntheorem bnot_inj : ∀ {a b : bool}, «expr! » a = «expr! » b → a = b := by decide\n#align bnot_inj bnot_inj\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr! » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr! » -/\ntheorem bnot_inj : ∀ {a b : Bool}, «expr! » a = «expr! » b → a = b := by decide\n#align bnot_inj bnot_inj\n\n",
  "bnot_iff_not":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr! » -/\n@[simp]\ntheorem bnot_iff_not : ∀ {b : bool}, «expr! » b ↔ ¬b := by decide\n#align bnot_iff_not bnot_iff_not\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr! » -/\n@[simp]\ntheorem bnot_iff_not : ∀ {b : Bool}, «expr! » b ↔ ¬b := by decide\n#align bnot_iff_not bnot_iff_not\n\n",
  "bnot_ff":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr! » -/\n@[simp]\ntheorem bnot_ff : «expr! » ff = tt :=\n  rfl\n#align bnot_ff bnot_ff\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr! » -/\n@[simp]\ntheorem bnot_ff : «expr! » false = true :=\n  rfl\n#align bnot_ff bnot_ff\n\n",
  "bnot_eq_iff":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr! » -/\ntheorem bnot_eq_iff : ∀ {a b : bool}, «expr! » a = b ↔ a ≠ b := by decide\n#align bnot_eq_iff bnot_eq_iff\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr! » -/\ntheorem bnot_eq_iff : ∀ {a b : Bool}, «expr! » a = b ↔ a ≠ b := by decide\n#align bnot_eq_iff bnot_eq_iff\n\n",
  "bnot_bor_self":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr! » -/\n@[simp]\ntheorem bnot_bor_self : ∀ x, («expr! » x || x) = tt := by decide\n#align bnot_bor_self bnot_bor_self\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr! » -/\n@[simp]\ntheorem bnot_bor_self : ∀ x, («expr! » x || x) = true := by decide\n#align bnot_bor_self bnot_bor_self\n\n",
  "bnot_bor":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr! » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr! » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr! » -/\n@[simp]\ntheorem bnot_bor : ∀ a b : bool, «expr! » (a || b) = («expr! » a && «expr! » b) := by decide\n#align bnot_bor bnot_bor\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr! » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr! » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr! » -/\n@[simp]\ntheorem bnot_bor : ∀ a b : Bool, «expr! » (a || b) = («expr! » a && «expr! » b) := by decide\n#align bnot_bor bnot_bor\n\n",
  "bnot_band_self":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr! » -/\n@[simp]\ntheorem bnot_band_self : ∀ x, («expr! » x && x) = ff := by decide\n#align bnot_band_self bnot_band_self\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr! » -/\n@[simp]\ntheorem bnot_band_self : ∀ x, («expr! » x && x) = false := by decide\n#align bnot_band_self bnot_band_self\n\n",
  "bnot_band":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr! » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr! » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr! » -/\n@[simp]\ntheorem bnot_band : ∀ a b : bool, «expr! » (a && b) = («expr! » a || «expr! » b) := by decide\n#align bnot_band bnot_band\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr! » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr! » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr! » -/\n@[simp]\ntheorem bnot_band : ∀ a b : Bool, «expr! » (a && b) = («expr! » a || «expr! » b) := by decide\n#align bnot_band bnot_band\n\n",
  "band_left_comm":
  "theorem band_left_comm : ∀ a b c, (a && (b && c)) = (b && (a && c)) := by decide\n#align band_left_comm band_left_comm\n\n",
  "band_le_right":
- "theorem band_le_right : ∀ x y : bool, (x && y) ≤ y := by decide\n#align band_le_right band_le_right\n\n",
+ "theorem band_le_right : ∀ x y : Bool, (x && y) ≤ y := by decide\n#align band_le_right band_le_right\n\n",
  "band_le_left":
- "theorem band_le_left : ∀ x y : bool, (x && y) ≤ x := by decide\n#align band_le_left band_le_left\n\n",
+ "theorem band_le_left : ∀ x y : Bool, (x && y) ≤ x := by decide\n#align band_le_left band_le_left\n\n",
  "band_intro":
- "theorem band_intro : ∀ {a b : bool}, a → b → a && b := by decide\n#align band_intro band_intro\n\n",
+ "theorem band_intro : ∀ {a b : Bool}, a → b → a && b := by decide\n#align band_intro band_intro\n\n",
  "band_elim_right":
- "theorem band_elim_right : ∀ {a b : bool}, a && b → b := by decide\n#align band_elim_right band_elim_right\n\n",
+ "theorem band_elim_right : ∀ {a b : Bool}, a && b → b := by decide\n#align band_elim_right band_elim_right\n\n",
  "band_elim_left":
- "theorem band_elim_left : ∀ {a b : bool}, a && b → a := by decide\n#align band_elim_left band_elim_left\n\n",
+ "theorem band_elim_left : ∀ {a b : Bool}, a && b → a := by decide\n#align band_elim_left band_elim_left\n\n",
  "band_comm":
  "theorem band_comm : ∀ a b, (a && b) = (b && a) := by decide\n#align band_comm band_comm\n\n",
  "band_bxor_distrib_right":
- "theorem band_bxor_distrib_right (a b c : bool) : (xor a b && c) = xor (a && c) (b && c) := by cases c <;> simp\n#align band_bxor_distrib_right band_bxor_distrib_right\n\n",
+ "theorem band_bxor_distrib_right (a b c : Bool) : (xor a b && c) = xor (a && c) (b && c) := by cases c <;> simp\n#align band_bxor_distrib_right band_bxor_distrib_right\n\n",
  "band_bxor_distrib_left":
- "theorem band_bxor_distrib_left (a b c : bool) : (a && xor b c) = xor (a && b) (a && c) := by cases a <;> simp\n#align band_bxor_distrib_left band_bxor_distrib_left\n\n",
+ "theorem band_bxor_distrib_left (a b c : Bool) : (a && xor b c) = xor (a && b) (a && c) := by cases a <;> simp\n#align band_bxor_distrib_left band_bxor_distrib_left\n\n",
  "band_bor_distrib_right":
- "theorem band_bor_distrib_right (a b c : bool) : ((a || b) && c) = (a && c || b && c) := by cases c <;> simp\n#align band_bor_distrib_right band_bor_distrib_right\n\n",
+ "theorem band_bor_distrib_right (a b c : Bool) : ((a || b) && c) = (a && c || b && c) := by cases c <;> simp\n#align band_bor_distrib_right band_bor_distrib_right\n\n",
  "band_bor_distrib_left":
- "theorem band_bor_distrib_left (a b c : bool) : (a && (b || c)) = (a && b || a && c) := by cases a <;> simp\n#align band_bor_distrib_left band_bor_distrib_left\n\n",
+ "theorem band_bor_distrib_left (a b c : Bool) : (a && (b || c)) = (a && b || a && c) := by cases a <;> simp\n#align band_bor_distrib_left band_bor_distrib_left\n\n",
  "band_bnot_self":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr! » -/\n@[simp]\ntheorem band_bnot_self : ∀ x, (x && «expr! » x) = ff := by decide\n#align band_bnot_self band_bnot_self\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr! » -/\n@[simp]\ntheorem band_bnot_self : ∀ x, (x && «expr! » x) = false := by decide\n#align band_bnot_self band_bnot_self\n\n",
  "band_assoc":
  "@[simp]\ntheorem band_assoc : ∀ a b c, (a && b && c) = (a && (b && c)) := by decide\n#align band_assoc band_assoc\n\n",
  "apply_apply_apply":
- "/-- **Kaminski's Equation** -/\ntheorem apply_apply_apply (f : bool → bool) (x : bool) : f (f (f x)) = f x := by\n  cases x <;> cases h₁ : f tt <;> cases h₂ : f ff <;> simp only [h₁, h₂]\n#align apply_apply_apply apply_apply_apply\n\n"}
+ "/-- **Kaminski's Equation** -/\ntheorem apply_apply_apply (f : Bool → Bool) (x : Bool) : f (f (f x)) = f x := by\n  cases x <;> cases h₁ : f tt <;> cases h₂ : f ff <;> simp only [h₁, h₂]\n#align apply_apply_apply apply_apply_apply\n\n"}

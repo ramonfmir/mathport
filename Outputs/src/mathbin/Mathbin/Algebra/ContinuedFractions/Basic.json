@@ -1,10 +1,10 @@
 {"ext_iff":
- "-- Fix a division ring for the computations.\n-- Now, some basic, general theorems\n/-- Two gcfs `g` and `g'` are equal if and only if their components are equal. -/\nprotected theorem ext_iff {g g' : generalized_continued_fraction α} : g = g' ↔ g.h = g'.h ∧ g.s = g'.s :=\n  by\n  cases g\n  cases g'\n  simp\n#align ext_iff ext_iff\n\n",
+ "-- Fix a division ring for the computations.\n-- Now, some basic, general theorems\n/-- Two gcfs `g` and `g'` are equal if and only if their components are equal. -/\nprotected theorem ext_iff {g g' : GeneralizedContinuedFraction α} : g = g' ↔ g.h = g'.h ∧ g.s = g'.s :=\n  by\n  cases g\n  cases g'\n  simp\n#align ext_iff ext_iff\n\n",
  "ext":
- "@[ext]\nprotected theorem ext {g g' : generalized_continued_fraction α} (hyp : g.h = g'.h ∧ g.s = g'.s) : g = g' :=\n  generalized_continued_fraction.ext_iff.elim_right hyp\n#align ext ext\n\n",
+ "@[ext]\nprotected theorem ext {g g' : GeneralizedContinuedFraction α} (hyp : g.h = g'.h ∧ g.s = g'.s) : g = g' :=\n  GeneralizedContinuedFraction.ext_iff.elim_right hyp\n#align ext ext\n\n",
  "coe_to_simple_continued_fraction":
- "theorem coe_to_simple_continued_fraction {c : continued_fraction α} : (↑c : simple_continued_fraction α) = c.val :=\n  rfl\n#align coe_to_simple_continued_fraction coe_to_simple_continued_fraction\n\n",
+ "theorem coe_to_simple_continued_fraction {c : ContinuedFraction α} : (↑c : SimpleContinuedFraction α) = c.val :=\n  rfl\n#align coe_to_simple_continued_fraction coe_to_simple_continued_fraction\n\n",
  "coe_to_generalized_continued_fraction_pair":
- "/-\nCopyright (c) 2019 Kevin Kappelmann. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Kevin Kappelmann\n-/\n-- Fix a carrier `α`.\n-- Fix another type `β` which we will convert to.\n@[simp, norm_cast]\ntheorem coe_to_generalized_continued_fraction_pair {a b : α} : (↑(pair.mk a b) : pair β) = pair.mk (a : β) (b : β) :=\n  rfl\n#align coe_to_generalized_continued_fraction_pair coe_to_generalized_continued_fraction_pair\n\n",
+ "/-\nCopyright (c) 2019 Kevin Kappelmann. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Kevin Kappelmann\n-/\n-- Fix a carrier `α`.\n-- Fix another type `β` which we will convert to.\n@[simp, norm_cast]\ntheorem coe_to_generalized_continued_fraction_pair {a b : α} : (↑(pair.mk a b) : Pair β) = pair.mk (a : β) (b : β) :=\n  rfl\n#align coe_to_generalized_continued_fraction_pair coe_to_generalized_continued_fraction_pair\n\n",
  "coe_to_generalized_continued_fraction":
- "theorem coe_to_generalized_continued_fraction {c : continued_fraction α} :\n    (↑c : generalized_continued_fraction α) = c.val :=\n  rfl\n#align coe_to_generalized_continued_fraction coe_to_generalized_continued_fraction\n\n"}
+ "theorem coe_to_generalized_continued_fraction {c : ContinuedFraction α} :\n    (↑c : GeneralizedContinuedFraction α) = c.val :=\n  rfl\n#align coe_to_generalized_continued_fraction coe_to_generalized_continued_fraction\n\n"}

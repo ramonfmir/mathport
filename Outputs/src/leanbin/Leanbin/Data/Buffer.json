@@ -1,10 +1,10 @@
 {"write_eq_write'":
- "theorem write_eq_write' (b : buffer α) (i : nat) (h : i < b.size) (v : α) : write b ⟨i, h⟩ v = write' b i v := by\n  cases b <;> unfold write write' <;> simp [array.write_eq_write']\n#align write_eq_write' write_eq_write'\n\n",
+ "theorem write_eq_write' (b : buffer α) (i : Nat) (h : i < b.size) (v : α) : write b ⟨i, h⟩ v = write' b i v := by\n  cases b <;> unfold write write' <;> simp [array.write_eq_write']\n#align write_eq_write' write_eq_write'\n\n",
  "read_eq_read'":
- "/-\nCopyright (c) 2017 Microsoft Corporation. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Leonardo de Moura\n-/\ntheorem read_eq_read' [inhabited α] (b : buffer α) (i : nat) (h : i < b.size) : read b ⟨i, h⟩ = read' b i := by\n  cases b <;> unfold read read' <;> simp [array.read_eq_read']\n#align read_eq_read' read_eq_read'\n\n",
+ "/-\nCopyright (c) 2017 Microsoft Corporation. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Leonardo de Moura\n-/\ntheorem read_eq_read' [Inhabited α] (b : buffer α) (i : Nat) (h : i < b.size) : read b ⟨i, h⟩ = read' b i := by\n  cases b <;> unfold read read' <;> simp [array.read_eq_read']\n#align read_eq_read' read_eq_read'\n\n",
  "lt_aux_3":
  "theorem lt_aux_3 {n i} (h : i + 1 < n) : n - 2 - i < n :=\n  have : n > 0 := lt_trans (nat.zero_lt_succ i) h\n  have : n - 2 < n := nat.sub_lt this (by decide)\n  lt_of_le_of_lt (nat.sub_le _ _) this\n#align lt_aux_3 lt_aux_3\n\n",
  "lt_aux_2":
- "theorem lt_aux_2 {n : nat} (h : 0 < n) : n - 1 < n :=\n  nat.sub_lt h (nat.succ_pos 0)\n#align lt_aux_2 lt_aux_2\n\n",
+ "theorem lt_aux_2 {n : Nat} (h : 0 < n) : n - 1 < n :=\n  nat.sub_lt h (nat.succ_pos 0)\n#align lt_aux_2 lt_aux_2\n\n",
  "lt_aux_1":
- "theorem lt_aux_1 {a b c : nat} (h : a + c < b) : a < b :=\n  lt_of_le_of_lt (nat.le_add_right a c) h\n#align lt_aux_1 lt_aux_1\n\n"}
+ "theorem lt_aux_1 {a b c : Nat} (h : a + c < b) : a < b :=\n  lt_of_le_of_lt (nat.le_add_right a c) h\n#align lt_aux_1 lt_aux_1\n\n"}

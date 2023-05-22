@@ -1,37 +1,39 @@
 {"zero_mem":
  "@[simp]\nprotected theorem zero_mem : (0 : M) ∈ p :=\n  zero_mem _\n#align zero_mem zero_mem\n\n",
+ "vadd_def":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr +ᵥ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr +ᵥ » -/\ntheorem vadd_def [VAdd M α] (g : p) (m : α) : «expr +ᵥ » g m = «expr +ᵥ » (g : M) m :=\n  rfl\n#align vadd_def vadd_def\n\n",
  "to_sub_mul_action_strict_mono":
- "@[mono]\ntheorem to_sub_mul_action_strict_mono : strict_mono (to_sub_mul_action : submodule R M → sub_mul_action R M) :=\n  fun _ _ => id\n#align to_sub_mul_action_strict_mono to_sub_mul_action_strict_mono\n\n",
+ "@[mono]\ntheorem to_sub_mul_action_strict_mono : StrictMono (toSubMulAction : Submodule R M → SubMulAction R M) := fun _ _ => id\n#align to_sub_mul_action_strict_mono to_sub_mul_action_strict_mono\n\n",
  "to_sub_mul_action_mono":
- "@[mono]\ntheorem to_sub_mul_action_mono : monotone (to_sub_mul_action : submodule R M → sub_mul_action R M) :=\n  to_sub_mul_action_strict_mono.monotone\n#align to_sub_mul_action_mono to_sub_mul_action_mono\n\n",
+ "@[mono]\ntheorem to_sub_mul_action_mono : Monotone (toSubMulAction : Submodule R M → SubMulAction R M) :=\n  toSubMulAction_strictMono.monotone\n#align to_sub_mul_action_mono to_sub_mul_action_mono\n\n",
  "to_sub_mul_action_injective":
- "theorem to_sub_mul_action_injective : injective (to_sub_mul_action : submodule R M → sub_mul_action R M) := fun p q h =>\n  SetLike.ext'_iff.2 (show _ from SetLike.ext'_iff.1 h)\n#align to_sub_mul_action_injective to_sub_mul_action_injective\n\n",
+ "theorem to_sub_mul_action_injective : injective (toSubMulAction : Submodule R M → SubMulAction R M) := fun p q h =>\n  SetLike.ext'_iff.2 (show _ from SetLike.ext'_iff.1 h)\n#align to_sub_mul_action_injective to_sub_mul_action_injective\n\n",
  "to_sub_mul_action_eq":
- "@[simp]\ntheorem to_sub_mul_action_eq : p.to_sub_mul_action = q.to_sub_mul_action ↔ p = q :=\n  to_sub_mul_action_injective.eq_iff\n#align to_sub_mul_action_eq to_sub_mul_action_eq\n\n",
+ "@[simp]\ntheorem to_sub_mul_action_eq : p.to_sub_mul_action = q.to_sub_mul_action ↔ p = q :=\n  toSubMulAction_injective.eq_iff\n#align to_sub_mul_action_eq to_sub_mul_action_eq\n\n",
  "to_add_submonoid_strict_mono":
- "@[mono]\ntheorem to_add_submonoid_strict_mono : strict_mono (to_add_submonoid : submodule R M → AddSubmonoid M) := fun _ _ => id\n#align to_add_submonoid_strict_mono to_add_submonoid_strict_mono\n\n",
+ "@[mono]\ntheorem to_add_submonoid_strict_mono : StrictMono (toAddSubmonoid : Submodule R M → AddSubmonoid M) := fun _ _ => id\n#align to_add_submonoid_strict_mono to_add_submonoid_strict_mono\n\n",
  "to_add_submonoid_mono":
- "@[mono]\ntheorem to_add_submonoid_mono : monotone (to_add_submonoid : submodule R M → AddSubmonoid M) :=\n  to_add_submonoid_strict_mono.monotone\n#align to_add_submonoid_mono to_add_submonoid_mono\n\n",
+ "@[mono]\ntheorem to_add_submonoid_mono : Monotone (toAddSubmonoid : Submodule R M → AddSubmonoid M) :=\n  toAddSubmonoid_strictMono.monotone\n#align to_add_submonoid_mono to_add_submonoid_mono\n\n",
  "to_add_submonoid_le":
  "theorem to_add_submonoid_le : p.to_add_submonoid ≤ q.to_add_submonoid ↔ p ≤ q :=\n  iff.rfl\n#align to_add_submonoid_le to_add_submonoid_le\n\n",
  "to_add_submonoid_injective":
- "theorem to_add_submonoid_injective : injective (to_add_submonoid : submodule R M → AddSubmonoid M) := fun p q h =>\n  SetLike.ext'_iff.2 (show _ from SetLike.ext'_iff.1 h)\n#align to_add_submonoid_injective to_add_submonoid_injective\n\n",
+ "theorem to_add_submonoid_injective : injective (toAddSubmonoid : Submodule R M → AddSubmonoid M) := fun p q h =>\n  SetLike.ext'_iff.2 (show _ from SetLike.ext'_iff.1 h)\n#align to_add_submonoid_injective to_add_submonoid_injective\n\n",
  "to_add_submonoid_eq":
- "@[simp]\ntheorem to_add_submonoid_eq : p.to_add_submonoid = q.to_add_submonoid ↔ p = q :=\n  to_add_submonoid_injective.eq_iff\n#align to_add_submonoid_eq to_add_submonoid_eq\n\n",
+ "@[simp]\ntheorem to_add_submonoid_eq : p.to_add_submonoid = q.to_add_submonoid ↔ p = q :=\n  toAddSubmonoid_injective.eq_iff\n#align to_add_submonoid_eq to_add_submonoid_eq\n\n",
  "to_add_subgroup_strict_mono":
- "@[mono]\ntheorem to_add_subgroup_strict_mono : strict_mono (to_add_subgroup : submodule R M → add_subgroup M) := fun _ _ => id\n#align to_add_subgroup_strict_mono to_add_subgroup_strict_mono\n\n",
+ "@[mono]\ntheorem to_add_subgroup_strict_mono : StrictMono (toAddSubgroup : Submodule R M → AddSubgroup M) := fun _ _ => id\n#align to_add_subgroup_strict_mono to_add_subgroup_strict_mono\n\n",
  "to_add_subgroup_mono":
- "@[mono]\ntheorem to_add_subgroup_mono : monotone (to_add_subgroup : submodule R M → add_subgroup M) :=\n  to_add_subgroup_strict_mono.monotone\n#align to_add_subgroup_mono to_add_subgroup_mono\n\n",
+ "@[mono]\ntheorem to_add_subgroup_mono : Monotone (toAddSubgroup : Submodule R M → AddSubgroup M) :=\n  toAddSubgroup_strictMono.monotone\n#align to_add_subgroup_mono to_add_subgroup_mono\n\n",
  "to_add_subgroup_le":
  "theorem to_add_subgroup_le : p.to_add_subgroup ≤ p'.to_add_subgroup ↔ p ≤ p' :=\n  iff.rfl\n#align to_add_subgroup_le to_add_subgroup_le\n\n",
  "to_add_subgroup_injective":
- "theorem to_add_subgroup_injective : injective (to_add_subgroup : submodule R M → add_subgroup M)\n  | p, q, h => SetLike.ext (SetLike.ext_iff.1 h : _)\n#align to_add_subgroup_injective to_add_subgroup_injective\n\n",
+ "theorem to_add_subgroup_injective : injective (toAddSubgroup : Submodule R M → AddSubgroup M)\n  | p, q, h => SetLike.ext (SetLike.ext_iff.1 h : _)\n#align to_add_subgroup_injective to_add_subgroup_injective\n\n",
  "to_add_subgroup_eq":
- "@[simp]\ntheorem to_add_subgroup_eq : p.to_add_subgroup = p'.to_add_subgroup ↔ p = p' :=\n  to_add_subgroup_injective.eq_iff\n#align to_add_subgroup_eq to_add_subgroup_eq\n\n",
+ "@[simp]\ntheorem to_add_subgroup_eq : p.to_add_subgroup = p'.to_add_subgroup ↔ p = p' :=\n  toAddSubgroup_injective.eq_iff\n#align to_add_subgroup_eq to_add_subgroup_eq\n\n",
  "sum_smul_mem":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `finset.sum -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.sum -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\ntheorem sum_smul_mem {t : Finset ι} {f : ι → M} (r : ι → R) (hyp : ∀ c ∈ t, f c ∈ p) :\n    finset.sum \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.sum\" t\n        («expr • » (r i) (f i)) ∈\n      p :=\n  sum_mem fun i hi => smul_mem _ _ (hyp i hi)\n#align sum_smul_mem sum_smul_mem\n\n",
  "sum_mem":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `finset.sum -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.sum -/\nprotected theorem sum_mem {t : Finset ι} {f : ι → M} :\n    (∀ c ∈ t, f c ∈ p) →\n      finset.sum \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.sum\" t (f i) ∈ p :=\n  sum_mem\n#align sum_mem sum_mem\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `finset.sum -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.sum -/\n#print sum_mem /-\nprotected theorem sum_mem {t : Finset ι} {f : ι → M} :\n    (∀ c ∈ t, f c ∈ p) →\n      finset.sum \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.sum\" t (f i) ∈ p :=\n  sum_mem\n#align sum_mem sum_mem\n-/\n\n",
  "subtype_apply":
  "theorem subtype_apply (x : p) : p.subtype x = x :=\n  rfl\n#align subtype_apply subtype_apply\n\n",
  "sub_mem_iff_right":
@@ -39,75 +41,73 @@
  "sub_mem_iff_left":
  "theorem sub_mem_iff_left (hy : y ∈ p) : x - y ∈ p ↔ x ∈ p := by rw [sub_eq_add_neg, p.add_mem_iff_left (p.neg_mem hy)]\n#align sub_mem_iff_left sub_mem_iff_left\n\n",
  "sub_mem":
- "protected theorem sub_mem : x ∈ p → y ∈ p → x - y ∈ p :=\n  sub_mem\n#align sub_mem sub_mem\n\n",
+ "#print sub_mem /-\nprotected theorem sub_mem : x ∈ p → y ∈ p → x - y ∈ p :=\n  sub_mem\n#align sub_mem sub_mem\n-/\n\n",
  "smul_of_tower_mem":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\ntheorem smul_of_tower_mem [SMul S R] [SMul S M] [IsScalarTower S R M] (r : S) (h : x ∈ p) : «expr • » r x ∈ p :=\n  p.to_sub_mul_action.smul_of_tower_mem r h\n#align smul_of_tower_mem smul_of_tower_mem\n\n",
  "smul_mem_iff'":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n@[simp]\ntheorem smul_mem_iff' [group G] [MulAction G M] [SMul G R] [IsScalarTower G R M] (g : G) : «expr • » g x ∈ p ↔ x ∈ p :=\n  p.to_sub_mul_action.smul_mem_iff' g\n#align smul_mem_iff' smul_mem_iff'\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n@[simp]\ntheorem smul_mem_iff' [Group G] [MulAction G M] [SMul G R] [IsScalarTower G R M] (g : G) : «expr • » g x ∈ p ↔ x ∈ p :=\n  p.to_sub_mul_action.smul_mem_iff' g\n#align smul_mem_iff' smul_mem_iff'\n\n",
  "smul_mem_iff":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\ntheorem smul_mem_iff (s0 : s ≠ 0) : «expr • » s x ∈ p ↔ x ∈ p :=\n  p.to_sub_mul_action.smul_mem_iff s0\n#align smul_mem_iff smul_mem_iff\n\n",
  "smul_mem":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n#print smul_mem /-\ntheorem smul_mem (r : R) (h : x ∈ p) : «expr • » r x ∈ p :=\n  p.smul_mem' r h\n#align smul_mem smul_mem\n-/\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\ntheorem smul_mem (r : R) (h : x ∈ p) : «expr • » r x ∈ p :=\n  p.smul_mem' r h\n#align smul_mem smul_mem\n\n",
  "restrict_scalars_self":
- "@[simp]\ntheorem restrict_scalars_self (V : submodule R M) : V.restrict_scalars R = V :=\n  SetLike.coe_injective rfl\n#align restrict_scalars_self restrict_scalars_self\n\n",
+ "@[simp]\ntheorem restrict_scalars_self (V : Submodule R M) : V.restrict_scalars R = V :=\n  SetLike.coe_injective rfl\n#align restrict_scalars_self restrict_scalars_self\n\n",
  "restrict_scalars_mem":
- "@[simp]\ntheorem restrict_scalars_mem (V : submodule R M) (m : M) : m ∈ V.restrict_scalars S ↔ m ∈ V :=\n  iff.refl _\n#align restrict_scalars_mem restrict_scalars_mem\n\n",
+ "@[simp]\ntheorem restrict_scalars_mem (V : Submodule R M) (m : M) : m ∈ V.restrict_scalars S ↔ m ∈ V :=\n  iff.refl _\n#align restrict_scalars_mem restrict_scalars_mem\n\n",
  "restrict_scalars_injective":
- "theorem restrict_scalars_injective : function.injective (restrict_scalars S : submodule R M → submodule S M) :=\n  fun V₁ V₂ h => ext <| Set.ext_iff.1 (SetLike.ext'_iff.1 h : _)\n#align restrict_scalars_injective restrict_scalars_injective\n\n",
+ "theorem restrict_scalars_injective : function.injective (restrictScalars S : Submodule R M → Submodule S M) :=\n  fun V₁ V₂ h => ext <| Set.ext_iff.1 (SetLike.ext'_iff.1 h : _)\n#align restrict_scalars_injective restrict_scalars_injective\n\n",
  "restrict_scalars_inj":
- "@[simp]\ntheorem restrict_scalars_inj {V₁ V₂ : submodule R M} : restrict_scalars S V₁ = restrict_scalars S V₂ ↔ V₁ = V₂ :=\n  (restrict_scalars_injective S _ _).eq_iff\n#align restrict_scalars_inj restrict_scalars_inj\n\n",
+ "@[simp]\ntheorem restrict_scalars_inj {V₁ V₂ : Submodule R M} : restrictScalars S V₁ = restrictScalars S V₂ ↔ V₁ = V₂ :=\n  (restrictScalars_injective S _ _).eq_iff\n#align restrict_scalars_inj restrict_scalars_inj\n\n",
  "not_mem_of_ortho":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\ntheorem not_mem_of_ortho {x : M} {N : submodule R M} (ortho : ∀ (c : R), ∀ y ∈ N, «expr • » c x + y = (0 : M) → c = 0) :\n    x ∉ N := by\n  intro hx\n  simpa using ortho (-1) x hx\n#align not_mem_of_ortho not_mem_of_ortho\n\n",
- "nonempty":
- "protected theorem nonempty : (p : set M).nonempty :=\n  ⟨0, p.zero_mem⟩\n#align nonempty nonempty\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\ntheorem not_mem_of_ortho {x : M} {N : Submodule R M} (ortho : ∀ (c : R), ∀ y ∈ N, «expr • » c x + y = (0 : M) → c = 0) :\n    x ∉ N := by\n  intro hx\n  simpa using ortho (-1) x hx\n#align not_mem_of_ortho not_mem_of_ortho\n\n",
  "neg_mem_iff":
- "protected theorem neg_mem_iff : -x ∈ p ↔ x ∈ p :=\n  neg_mem_iff\n#align neg_mem_iff neg_mem_iff\n\n",
+ "#print neg_mem_iff /-\nprotected theorem neg_mem_iff : -x ∈ p ↔ x ∈ p :=\n  neg_mem_iff\n#align neg_mem_iff neg_mem_iff\n-/\n\n",
  "neg_mem":
  "protected theorem neg_mem (hx : x ∈ p) : -x ∈ p :=\n  neg_mem hx\n#align neg_mem neg_mem\n\n",
  "ne_zero_of_ortho":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\ntheorem ne_zero_of_ortho {x : M} {N : submodule R M} (ortho : ∀ (c : R), ∀ y ∈ N, «expr • » c x + y = (0 : M) → c = 0) :\n    x ≠ 0 :=\n  mt (fun h => show x ∈ N from h.symm ▸ N.zero_mem) (not_mem_of_ortho ortho)\n#align ne_zero_of_ortho ne_zero_of_ortho\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\ntheorem ne_zero_of_ortho {x : M} {N : Submodule R M} (ortho : ∀ (c : R), ∀ y ∈ N, «expr • » c x + y = (0 : M) → c = 0) :\n    x ≠ 0 :=\n  mt (fun h => show x ∈ N from h.symm ▸ N.zero_mem) (not_mem_of_ortho ortho)\n#align ne_zero_of_ortho ne_zero_of_ortho\n\n",
  "mk_le_mk":
- "@[simp]\ntheorem mk_le_mk {S S' : set M} (h₁ h₂ h₃ h₁' h₂' h₃') :\n    (⟨S, h₁, h₂, h₃⟩ : submodule R M) ≤ (⟨S', h₁', h₂', h₃'⟩ : submodule R M) ↔ S ⊆ S' :=\n  iff.rfl\n#align mk_le_mk mk_le_mk\n\n",
+ "@[simp]\ntheorem mk_le_mk {S S' : Set M} (h₁ h₂ h₃ h₁' h₂' h₃') :\n    (⟨S, h₁, h₂, h₃⟩ : Submodule R M) ≤ (⟨S', h₁', h₂', h₃'⟩ : Submodule R M) ↔ S ⊆ S' :=\n  iff.rfl\n#align mk_le_mk mk_le_mk\n\n",
  "mk_eq_zero":
- "@[simp]\ntheorem mk_eq_zero {x} (h : x ∈ p) : (⟨x, h⟩ : p) = 0 ↔ x = 0 :=\n  subtype.ext_iff_val\n#align mk_eq_zero mk_eq_zero\n\n",
+ "@[simp]\ntheorem mk_eq_zero {x} (h : x ∈ p) : (⟨x, h⟩ : p) = 0 ↔ x = 0 :=\n  Subtype.ext_iff_val\n#align mk_eq_zero mk_eq_zero\n\n",
  "mem_to_add_submonoid":
- "/-\nCopyright (c) 2015 Nathaniel Thomas. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Nathaniel Thomas, Jeremy Avigad, Johannes Hölzl, Mario Carneiro\n-/\n@[simp]\ntheorem mem_to_add_submonoid (p : submodule R M) (x : M) : x ∈ p.to_add_submonoid ↔ x ∈ p :=\n  iff.rfl\n#align mem_to_add_submonoid mem_to_add_submonoid\n\n",
+ "/-\nCopyright (c) 2015 Nathaniel Thomas. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Nathaniel Thomas, Jeremy Avigad, Johannes Hölzl, Mario Carneiro\n-/\n@[simp]\ntheorem mem_to_add_submonoid (p : Submodule R M) (x : M) : x ∈ p.to_add_submonoid ↔ x ∈ p :=\n  iff.rfl\n#align mem_to_add_submonoid mem_to_add_submonoid\n\n",
  "mem_to_add_subgroup":
  "@[simp]\ntheorem mem_to_add_subgroup : x ∈ p.to_add_subgroup ↔ x ∈ p :=\n  iff.rfl\n#align mem_to_add_subgroup mem_to_add_subgroup\n\n",
  "mem_mk":
- "@[simp]\ntheorem mem_mk {S : set M} {x : M} (h₁ h₂ h₃) : x ∈ (⟨S, h₁, h₂, h₃⟩ : submodule R M) ↔ x ∈ S :=\n  iff.rfl\n#align mem_mk mem_mk\n\n",
+ "@[simp]\ntheorem mem_mk {S : Set M} {x : M} (h₁ h₂ h₃) : x ∈ (⟨S, h₁, h₂, h₃⟩ : Submodule R M) ↔ x ∈ S :=\n  iff.rfl\n#align mem_mk mem_mk\n\n",
  "mem_carrier":
- "-- We can infer the module structure implicitly from the bundled submodule,\n-- rather than via typeclass resolution.\n@[simp]\ntheorem mem_carrier : x ∈ p.carrier ↔ x ∈ (p : set M) :=\n  iff.rfl\n#align mem_carrier mem_carrier\n\n",
+ "-- We can infer the module structure implicitly from the bundled submodule,\n-- rather than via typeclass resolution.\n@[simp]\ntheorem mem_carrier : x ∈ p.carrier ↔ x ∈ (p : Set M) :=\n  iff.rfl\n#align mem_carrier mem_carrier\n\n",
  "injective_subtype":
- "theorem injective_subtype : injective p.subtype :=\n  subtype.coe_injective\n#align injective_subtype injective_subtype\n\n",
+ "theorem injective_subtype : injective p.subtype :=\n  Subtype.coe_injective\n#align injective_subtype injective_subtype\n\n",
  "ext":
  "@[ext]\ntheorem ext (h : ∀ x, x ∈ p ↔ x ∈ q) : p = q :=\n  SetLike.ext h\n#align ext ext\n\n",
  "copy_eq":
- "theorem copy_eq (S : submodule R M) (s : set M) (hs : s = ↑S) : S.copy s hs = S :=\n  SetLike.coe_injective hs\n#align copy_eq copy_eq\n\n",
+ "theorem copy_eq (S : Submodule R M) (s : Set M) (hs : s = ↑S) : S.copy s hs = S :=\n  SetLike.coe_injective hs\n#align copy_eq copy_eq\n\n",
  "coe_zero":
  "@[simp, norm_cast]\ntheorem coe_zero : ((0 : p) : M) = 0 :=\n  rfl\n#align coe_zero coe_zero\n\n",
  "coe_to_sub_mul_action":
- "@[simp]\ntheorem coe_to_sub_mul_action (p : submodule R M) : (p.to_sub_mul_action : set M) = p :=\n  rfl\n#align coe_to_sub_mul_action coe_to_sub_mul_action\n\n",
+ "@[simp]\ntheorem coe_to_sub_mul_action (p : Submodule R M) : (p.to_sub_mul_action : Set M) = p :=\n  rfl\n#align coe_to_sub_mul_action coe_to_sub_mul_action\n\n",
  "coe_to_add_submonoid":
- "@[simp]\ntheorem coe_to_add_submonoid (p : submodule R M) : (p.to_add_submonoid : set M) = p :=\n  rfl\n#align coe_to_add_submonoid coe_to_add_submonoid\n\n",
+ "@[simp]\ntheorem coe_to_add_submonoid (p : Submodule R M) : (p.to_add_submonoid : Set M) = p :=\n  rfl\n#align coe_to_add_submonoid coe_to_add_submonoid\n\n",
  "coe_to_add_subgroup":
- "@[simp]\ntheorem coe_to_add_subgroup : (p.to_add_subgroup : set M) = p :=\n  rfl\n#align coe_to_add_subgroup coe_to_add_subgroup\n\n",
+ "@[simp]\ntheorem coe_to_add_subgroup : (p.to_add_subgroup : Set M) = p :=\n  rfl\n#align coe_to_add_subgroup coe_to_add_subgroup\n\n",
  "coe_sum":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `finset.sum -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.sum -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `finset.sum -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.sum -/\n/-- Note the `add_submonoid` version of this lemma is called `add_submonoid.coe_finset_sum`. -/\n@[simp]\ntheorem coe_sum (x : ι → p) (s : Finset ι) :\n    ↑(finset.sum \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.sum\" s (x i)) =\n      finset.sum \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.sum\" s (x i : M) :=\n  map_sum p.subtype _ _\n#align coe_sum coe_sum\n\n",
  "coe_subtype":
- "@[simp]\ntheorem coe_subtype : (submodule.subtype p : p → M) = coe :=\n  rfl\n#align coe_subtype coe_subtype\n\n",
+ "@[simp]\ntheorem coe_subtype : (Submodule.subtype p : p → M) = coe :=\n  rfl\n#align coe_subtype coe_subtype\n\n",
  "coe_sub":
- "protected theorem coe_sub (x y : p) : (↑(x - y) : M) = ↑x - ↑y :=\n  add_subgroup_class.coe_sub _ _\n#align coe_sub coe_sub\n\n",
+ "protected theorem coe_sub (x y : p) : (↑(x - y) : M) = ↑x - ↑y :=\n  AddSubgroupClass.coe_sub _ _\n#align coe_sub coe_sub\n\n",
  "coe_smul_of_tower":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n@[simp, norm_cast]\ntheorem coe_smul_of_tower [SMul S R] [SMul S M] [IsScalarTower S R M] (r : S) (x : p) :\n    ((«expr • » r x : p) : M) = «expr • » r ↑x :=\n  rfl\n#align coe_smul_of_tower coe_smul_of_tower\n\n",
  "coe_smul":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n@[norm_cast]\ntheorem coe_smul (r : R) (x : p) : ((«expr • » r x : p) : M) = «expr • » r ↑x :=\n  rfl\n#align coe_smul coe_smul\n\n",
  "coe_set_mk":
- "@[simp]\ntheorem coe_set_mk (S : set M) (h₁ h₂ h₃) : ((⟨S, h₁, h₂, h₃⟩ : submodule R M) : set M) = S :=\n  rfl\n#align coe_set_mk coe_set_mk\n\n",
+ "@[simp]\ntheorem coe_set_mk (S : Set M) (h₁ h₂ h₃) : ((⟨S, h₁, h₂, h₃⟩ : Submodule R M) : Set M) = S :=\n  rfl\n#align coe_set_mk coe_set_mk\n\n",
  "coe_restrict_scalars":
- "@[simp]\ntheorem coe_restrict_scalars (V : submodule R M) : (V.restrict_scalars S : set M) = V :=\n  rfl\n#align coe_restrict_scalars coe_restrict_scalars\n\n",
+ "@[simp]\ntheorem coe_restrict_scalars (V : Submodule R M) : (V.restrict_scalars S : Set M) = V :=\n  rfl\n#align coe_restrict_scalars coe_restrict_scalars\n\n",
  "coe_neg":
- "protected theorem coe_neg (x : p) : ((-x : p) : M) = -x :=\n  add_subgroup_class.coe_neg _\n#align coe_neg coe_neg\n\n",
+ "protected theorem coe_neg (x : p) : ((-x : p) : M) = -x :=\n  AddSubgroupClass.coe_neg _\n#align coe_neg coe_neg\n\n",
  "coe_mk":
  "@[simp, norm_cast]\ntheorem coe_mk (x : M) (hx : x ∈ p) : ((⟨x, hx⟩ : p) : M) = x :=\n  rfl\n#align coe_mk coe_mk\n\n",
  "coe_mem":
@@ -115,7 +115,7 @@
  "coe_eq_zero":
  "@[simp, norm_cast]\ntheorem coe_eq_zero {x : p} : (x : M) = 0 ↔ x = 0 :=\n  (SetLike.coe_eq_coe : (x : M) = (0 : p) ↔ x = 0)\n#align coe_eq_zero coe_eq_zero\n\n",
  "coe_copy":
- "@[simp]\ntheorem coe_copy (S : submodule R M) (s : set M) (hs : s = ↑S) : (S.copy s hs : set M) = s :=\n  rfl\n#align coe_copy coe_copy\n\n",
+ "@[simp]\ntheorem coe_copy (S : Submodule R M) (s : Set M) (hs : s = ↑S) : (S.copy s hs : Set M) = s :=\n  rfl\n#align coe_copy coe_copy\n\n",
  "coe_add":
  "@[simp, norm_cast]\ntheorem coe_add (x y : p) : (↑(x + y) : M) = ↑x + ↑y :=\n  rfl\n#align coe_add coe_add\n\n",
  "add_mem_iff_right":
@@ -123,4 +123,6 @@
  "add_mem_iff_left":
  "protected theorem add_mem_iff_left : y ∈ p → (x + y ∈ p ↔ x ∈ p) :=\n  add_mem_cancel_right\n#align add_mem_iff_left add_mem_iff_left\n\n",
  "add_mem":
- "protected theorem add_mem (h₁ : x ∈ p) (h₂ : y ∈ p) : x + y ∈ p :=\n  add_mem h₁ h₂\n#align add_mem add_mem\n\n"}
+ "protected theorem add_mem (h₁ : x ∈ p) (h₂ : y ∈ p) : x + y ∈ p :=\n  add_mem h₁ h₂\n#align add_mem add_mem\n\n",
+ "Nonempty":
+ "#print Nonempty /-\nprotected theorem Nonempty : (p : Set M).nonempty :=\n  ⟨0, p.zero_mem⟩\n#align nonempty Nonempty\n-/\n\n"}

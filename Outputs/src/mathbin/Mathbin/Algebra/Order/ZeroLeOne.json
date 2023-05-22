@@ -1,7 +1,7 @@
 {"zero_lt_one'":
  "#print zero_lt_one' /-\n/-- See `zero_lt_one` for a version with the type implicit. -/\ntheorem zero_lt_one' : (0 : α) < 1 :=\n  zero_lt_one\n#align zero_lt_one' zero_lt_one'\n-/\n\n",
  "zero_lt_one":
- "#print zero_lt_one /-\n/-- See `zero_lt_one'` for a version with the type explicit. -/\n@[simp]\ntheorem zero_lt_one : (0 : α) < 1 :=\n  zero_le_one.lt_of_ne (ne_zero.ne' 1)\n#align zero_lt_one zero_lt_one\n-/\n\n",
+ "#print zero_lt_one /-\n/-- See `zero_lt_one'` for a version with the type explicit. -/\n@[simp]\ntheorem zero_lt_one : (0 : α) < 1 :=\n  zero_le_one.lt_of_ne (NeZero.ne' 1)\n#align zero_lt_one zero_lt_one\n-/\n\n",
  "zero_le_one'":
  "#print zero_le_one' /-\n/-- `zero_le_one` with the type argument explicit. -/\ntheorem zero_le_one' (α) [Zero α] [One α] [LE α] [ZeroLEOneClass α] : (0 : α) ≤ 1 :=\n  zero_le_one\n#align zero_le_one' zero_le_one'\n-/\n\n",
  "zero_le_one":

@@ -1,7 +1,7 @@
 {"not_or_eq":
  "theorem not_or_eq : (¬(p ∨ q)) = (¬p ∧ ¬q) :=\n  propext not_or\n#align not_or_eq not_or_eq\n\n",
  "not_not_eq":
- "/-\nCopyright (c) 2019 Patrick Massot All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Patrick Massot, Simon Hudon\n-/\n/- Enable the option `trace.push_neg.use_distrib` in order to have `¬ (p ∧ q)` normalized to\n`¬ p ∨ ¬ q`, rather than the default `p → ¬ q`. -/\ntheorem not_not_eq : (¬¬p) = p :=\n  propext not_not\n#align not_not_eq not_not_eq\n\n",
+ "/-\nCopyright (c) 2019 Patrick Massot All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Patrick Massot, Simon Hudon\n-/\n/- Enable the option `trace.push_neg.use_distrib` in order to have `¬ (p ∧ q)` normalized to\n`¬ p ∨ ¬ q`, rather than the default `p → ¬ q`. -/\ntheorem not_not_eq : (¬¬p) = p :=\n  propext Classical.not_not\n#align not_not_eq not_not_eq\n\n",
  "not_lt_eq":
  "theorem not_lt_eq (a b : β) : (¬a < b) = (b ≤ a) :=\n  propext not_lt\n#align not_lt_eq not_lt_eq\n\n",
  "not_le_eq":

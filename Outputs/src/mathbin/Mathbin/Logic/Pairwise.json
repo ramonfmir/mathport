@@ -1,9 +1,9 @@
 {"set_pairwise_iff":
  "#print Reflexive.set_pairwise_iff /-\ntheorem Reflexive.set_pairwise_iff (hr : reflexive r) : s.pairwise r ↔ ∀ ⦃a⦄, a ∈ s → ∀ ⦃b⦄, b ∈ s → r a b :=\n  forall₄_congr fun a _ b _ => or_iff_not_imp_left.symm.trans <| or_iff_right_of_imp <| eq.rec <| hr a\n#align reflexive.set_pairwise_iff Reflexive.set_pairwise_iff\n-/\n\n",
  "set_pairwise":
- "#print Pairwise.set_pairwise /-\ntheorem Pairwise.set_pairwise (h : Pairwise r) (s : set α) : s.pairwise r := fun x hx y hy w => h w\n#align pairwise.set_pairwise Pairwise.set_pairwise\n-/\n\n",
+ "#print Pairwise.set_pairwise /-\ntheorem Pairwise.set_pairwise (h : Pairwise r) (s : Set α) : s.pairwise r := fun x hx y hy w => h w\n#align pairwise.set_pairwise Pairwise.set_pairwise\n-/\n\n",
  "pairwise_of_forall":
- "theorem pairwise_of_forall (s : set α) (r : α → α → Prop) (h : ∀ a b, r a b) : s.pairwise r := fun a _ b _ _ => h a b\n#align pairwise_of_forall pairwise_of_forall\n\n",
+ "theorem pairwise_of_forall (s : Set α) (r : α → α → Prop) (h : ∀ a b, r a b) : s.pairwise r := fun a _ b _ _ => h a b\n#align pairwise_of_forall pairwise_of_forall\n\n",
  "on_injective":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr on » -/\ntheorem pairwise.on_injective (hs : s.pairwise r) (hf : function.injective f) (hfs : ∀ x, f x ∈ s) :\n    Pairwise («expr on » r f) := fun i j hij => hs (hfs i) (hfs j) (hf.ne hij)\n#align pairwise.on_injective pairwise.on_injective\n\n",
  "mono":

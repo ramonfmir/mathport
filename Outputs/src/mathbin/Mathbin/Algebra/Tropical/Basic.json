@@ -1,7 +1,7 @@
 {"zero_ne_trop_coe":
  "@[simp]\ntheorem zero_ne_trop_coe (x : R) : (0 : Tropical (WithTop R)) ≠ trop x :=\n  fun.\n#align zero_ne_trop_coe zero_ne_trop_coe\n\n",
  "untrop_zpow":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n@[simp]\ntheorem untrop_zpow [add_group R] (x : Tropical R) (n : ℤ) : untrop (x ^ n) = «expr • » n (untrop x) :=\n  rfl\n#align untrop_zpow untrop_zpow\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n@[simp]\ntheorem untrop_zpow [AddGroup R] (x : Tropical R) (n : ℤ) : untrop (x ^ n) = «expr • » n (untrop x) :=\n  rfl\n#align untrop_zpow untrop_zpow\n\n",
  "untrop_zero":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n@[simp]\ntheorem untrop_zero [Top R] : untrop (0 : Tropical R) = «expr⊤» :=\n  rfl\n#align untrop_zero untrop_zero\n\n",
  "untrop_trop":
@@ -15,7 +15,7 @@
  "untrop_mul":
  "@[simp]\ntheorem untrop_mul [Add R] (x y : Tropical R) : untrop (x * y) = untrop x + untrop y :=\n  rfl\n#align untrop_mul untrop_mul\n\n",
  "untrop_monotone":
- "theorem untrop_monotone [preorder R] : monotone (untrop : Tropical R → R) := fun _ _ => id\n#align untrop_monotone untrop_monotone\n\n",
+ "theorem untrop_monotone [preorder R] : Monotone (untrop : Tropical R → R) := fun _ _ => id\n#align untrop_monotone untrop_monotone\n\n",
  "untrop_max":
  "@[simp]\ntheorem untrop_max (x y : Tropical R) : untrop (max x y) = max (untrop x) (untrop y) :=\n  rfl\n#align untrop_max untrop_max\n\n",
  "untrop_lt_iff":
@@ -35,7 +35,7 @@
  "untrop_add":
  "@[simp]\ntheorem untrop_add (x y : Tropical R) : untrop (x + y) = min (untrop x) (untrop y) :=\n  rfl\n#align untrop_add untrop_add\n\n",
  "trop_zsmul":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n@[simp]\ntheorem trop_zsmul [add_group R] (x : R) (n : ℤ) : trop («expr • » n x) = trop x ^ n :=\n  rfl\n#align trop_zsmul trop_zsmul\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n@[simp]\ntheorem trop_zsmul [AddGroup R] (x : R) (n : ℤ) : trop («expr • » n x) = trop x ^ n :=\n  rfl\n#align trop_zsmul trop_zsmul\n\n",
  "trop_zero":
  "@[simp]\ntheorem trop_zero [Zero R] : trop (0 : R) = 1 :=\n  rfl\n#align trop_zero trop_zero\n\n",
  "trop_untrop":
@@ -51,11 +51,11 @@
  "trop_order_iso_coe_fn":
  "@[simp]\ntheorem trop_order_iso_coe_fn [preorder R] : (tropOrderIso : R → Tropical R) = trop :=\n  rfl\n#align trop_order_iso_coe_fn trop_order_iso_coe_fn\n\n",
  "trop_nsmul":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n@[simp]\ntheorem trop_nsmul [add_monoid R] (x : R) (n : ℕ) : trop («expr • » n x) = trop x ^ n :=\n  rfl\n#align trop_nsmul trop_nsmul\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n@[simp]\ntheorem trop_nsmul [AddMonoid R] (x : R) (n : ℕ) : trop («expr • » n x) = trop x ^ n :=\n  rfl\n#align trop_nsmul trop_nsmul\n\n",
  "trop_mul_def":
  "theorem trop_mul_def [Add R] (x y : Tropical R) : x * y = trop (untrop x + untrop y) :=\n  rfl\n#align trop_mul_def trop_mul_def\n\n",
  "trop_monotone":
- "theorem trop_monotone [preorder R] : monotone (trop : R → Tropical R) := fun _ _ => id\n#align trop_monotone trop_monotone\n\n",
+ "theorem trop_monotone [preorder R] : Monotone (trop : R → Tropical R) := fun _ _ => id\n#align trop_monotone trop_monotone\n\n",
  "trop_min":
  "@[simp]\ntheorem trop_min (x y : R) : trop (min x y) = trop x + trop y :=\n  rfl\n#align trop_min trop_min\n\n",
  "trop_max_def":
@@ -103,9 +103,9 @@
  "bit0":
  "#print bit0 /-\n@[simp]\ntheorem bit0 (x : Tropical R) : bit0 x = x :=\n  add_self x\n#align bit0 bit0\n-/\n\n",
  "add_self":
- "@[simp]\ntheorem add_self (x : Tropical R) : x + x = x :=\n  untrop_injective (min_eq_right le_rfl)\n#align add_self add_self\n\n",
+ "#print add_self /-\n@[simp]\ntheorem add_self (x : Tropical R) : x + x = x :=\n  untrop_injective (min_eq_right le_rfl)\n#align add_self add_self\n-/\n\n",
  "add_pow":
- "@[simp]\ntheorem add_pow [linear_order R] [add_monoid R] [covariant_class R R (· + ·) (· ≤ ·)]\n    [covariant_class R R (function.swap (· + ·)) (· ≤ ·)] (x y : Tropical R) (n : ℕ) : (x + y) ^ n = x ^ n + y ^ n :=\n  by\n  cases' le_total x y with h h\n  · rw [add_eq_left h, add_eq_left (pow_le_pow_of_le_left' h _)]\n  · rw [add_eq_right h, add_eq_right (pow_le_pow_of_le_left' h _)]\n#align add_pow add_pow\n\n",
+ "#print add_pow /-\n@[simp]\ntheorem add_pow [linear_order R] [AddMonoid R] [CovariantClass R R (· + ·) (· ≤ ·)]\n    [CovariantClass R R (function.swap (· + ·)) (· ≤ ·)] (x y : Tropical R) (n : ℕ) : (x + y) ^ n = x ^ n + y ^ n :=\n  by\n  cases' le_total x y with h h\n  · rw [add_eq_left h, add_eq_left (pow_le_pow_of_le_left' h _)]\n  · rw [add_eq_right h, add_eq_right (pow_le_pow_of_le_left' h _)]\n#align add_pow add_pow\n-/\n\n",
  "add_eq_zero_iff":
  "#print add_eq_zero_iff /-\n@[simp]\ntheorem add_eq_zero_iff {a b : Tropical (WithTop R)} : a + b = 0 ↔ a = 0 ∧ b = 0 :=\n  by\n  rw [add_eq_iff]\n  constructor\n  · rintro (⟨rfl, h⟩ | ⟨rfl, h⟩)\n    · exact ⟨rfl, le_antisymm (le_zero _) h⟩\n    · exact ⟨le_antisymm (le_zero _) h, rfl⟩\n  · rintro ⟨rfl, rfl⟩\n    simp\n#align add_eq_zero_iff add_eq_zero_iff\n-/\n\n",
  "add_eq_right_iff":

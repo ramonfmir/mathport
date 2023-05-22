@@ -1,13 +1,13 @@
 {"surj_on_exp_map_circle_neg_pi_pi":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `real.pi -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `real.pi -/\ntheorem surj_on_exp_map_circle_neg_pi_pi : SurjOn exp_map_circle (Ioc (-real.pi) (real.pi)) univ :=\n  circle.arg_local_equiv.symm.surj_on\n#align surj_on_exp_map_circle_neg_pi_pi surj_on_exp_map_circle_neg_pi_pi\n\n",
  "periodic_exp_map_circle":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `real.pi -/\ntheorem periodic_exp_map_circle : periodic exp_map_circle (2 * real.pi) := fun z =>\n  exp_map_circle_eq_exp_map_circle.2 ⟨1, by rw [Int.cast_one, one_mul]⟩\n#align periodic_exp_map_circle periodic_exp_map_circle\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `real.pi -/\ntheorem periodic_exp_map_circle : Periodic exp_map_circle (2 * real.pi) := fun z =>\n  exp_map_circle_eq_exp_map_circle.2 ⟨1, by rw [Int.cast_one, one_mul]⟩\n#align periodic_exp_map_circle periodic_exp_map_circle\n\n",
  "left_inverse_exp_map_circle_arg":
  "theorem left_inverse_exp_map_circle_arg : left_inverse exp_map_circle (arg ∘ coe) :=\n  exp_map_circle_arg\n#align left_inverse_exp_map_circle_arg left_inverse_exp_map_circle_arg\n\n",
  "inv_on_arg_exp_map_circle":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `real.pi -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `real.pi -/\ntheorem inv_on_arg_exp_map_circle : InvOn (arg ∘ coe) exp_map_circle (Ioc (-real.pi) (real.pi)) univ :=\n  circle.arg_local_equiv.symm.inv_on\n#align inv_on_arg_exp_map_circle inv_on_arg_exp_map_circle\n\n",
  "injective_arg":
- "/-\nCopyright (c) 2021 Yury G. Kudryashov. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Yury G. Kudryashov\n-/\ntheorem injective_arg : injective fun z : circle => arg z := fun z w h =>\n  subtype.ext <| ext_abs_arg ((abs_coe_circle z).trans (abs_coe_circle w).symm) h\n#align injective_arg injective_arg\n\n",
+ "/-\nCopyright (c) 2021 Yury G. Kudryashov. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Yury G. Kudryashov\n-/\ntheorem injective_arg : injective fun z : circle => arg z := fun z w h =>\n  Subtype.ext <| ext_abs_arg ((abs_coe_circle z).trans (abs_coe_circle w).symm) h\n#align injective_arg injective_arg\n\n",
  "exp_map_circle_zero":
  "@[simp]\ntheorem real.angle.exp_map_circle_zero : real.angle.exp_map_circle 0 = 1 := by\n  rw [← real.angle.coe_zero, real.angle.exp_map_circle_coe, exp_map_circle_zero]\n#align real.angle.exp_map_circle_zero real.angle.exp_map_circle_zero\n\n",
  "exp_map_circle_two_pi":
@@ -17,7 +17,7 @@
  "exp_map_circle_neg":
  "@[simp]\ntheorem real.angle.exp_map_circle_neg (θ : real.angle) :\n    real.angle.exp_map_circle (-θ) = (real.angle.exp_map_circle θ)⁻¹ :=\n  by\n  induction θ using real.angle.induction_on\n  simp_rw [← real.angle.coe_neg, real.angle.exp_map_circle_coe, exp_map_circle_neg]\n#align real.angle.exp_map_circle_neg real.angle.exp_map_circle_neg\n\n",
  "exp_map_circle_eq_exp_map_circle":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `real.pi -/\ntheorem exp_map_circle_eq_exp_map_circle {x y : exprℝ} :\n    exp_map_circle x = exp_map_circle y ↔ ∃ m : ℤ, x = y + m * (2 * real.pi) :=\n  by\n  rw [subtype.ext_iff, exp_map_circle_apply, exp_map_circle_apply, exp_eq_exp_iff_exists_int]\n  refine' exists_congr fun n => _\n  rw [← mul_assoc, ← add_mul, mul_left_inj' I_ne_zero, ← of_real_one, ← of_real_bit0, ← of_real_mul, ← of_real_int_cast,\n    ← of_real_mul, ← of_real_add, of_real_inj]\n#align exp_map_circle_eq_exp_map_circle exp_map_circle_eq_exp_map_circle\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `real.pi -/\ntheorem exp_map_circle_eq_exp_map_circle {x y : exprℝ} :\n    exp_map_circle x = exp_map_circle y ↔ ∃ m : ℤ, x = y + m * (2 * real.pi) :=\n  by\n  rw [Subtype.ext_iff, exp_map_circle_apply, exp_map_circle_apply, exp_eq_exp_iff_exists_int]\n  refine' exists_congr fun n => _\n  rw [← mul_assoc, ← add_mul, mul_left_inj' I_ne_zero, ← of_real_one, ← of_real_bit0, ← of_real_mul, ← of_real_int_cast,\n    ← of_real_mul, ← of_real_add, of_real_inj]\n#align exp_map_circle_eq_exp_map_circle exp_map_circle_eq_exp_map_circle\n\n",
  "exp_map_circle_coe":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n@[simp]\ntheorem real.angle.exp_map_circle_coe (x : exprℝ) : real.angle.exp_map_circle x = exp_map_circle x :=\n  rfl\n#align real.angle.exp_map_circle_coe real.angle.exp_map_circle_coe\n\n",
  "exp_map_circle_arg":
@@ -27,7 +27,7 @@
  "exp_map_circle_add":
  "@[simp]\ntheorem real.angle.exp_map_circle_add (θ₁ θ₂ : real.angle) :\n    real.angle.exp_map_circle (θ₁ + θ₂) = real.angle.exp_map_circle θ₁ * real.angle.exp_map_circle θ₂ :=\n  by\n  induction θ₁ using real.angle.induction_on\n  induction θ₂ using real.angle.induction_on\n  exact exp_map_circle_add θ₁ θ₂\n#align real.angle.exp_map_circle_add real.angle.exp_map_circle_add\n\n",
  "coe_exp_map_circle":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℂ -/\ntheorem real.angle.coe_exp_map_circle (θ : real.angle) : (θ.exp_map_circle : exprℂ) = θ.cos + θ.sin * I :=\n  by\n  induction θ using real.angle.induction_on\n  simp [complex.exp_mul_I]\n#align real.angle.coe_exp_map_circle real.angle.coe_exp_map_circle\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℂ -/\ntheorem real.angle.coe_exp_map_circle (θ : real.angle) : (θ.exp_map_circle : exprℂ) = θ.cos + θ.sin * I :=\n  by\n  induction θ using real.angle.induction_on\n  simp [Complex.exp_mul_I]\n#align real.angle.coe_exp_map_circle real.angle.coe_exp_map_circle\n\n",
  "arg_exp_map_circle":
  "@[simp]\ntheorem real.angle.arg_exp_map_circle (θ : real.angle) : (arg (real.angle.exp_map_circle θ) : real.angle) = θ :=\n  by\n  induction θ using real.angle.induction_on\n  rw [real.angle.exp_map_circle_coe, exp_map_circle_apply, exp_mul_I, ← of_real_cos, ← of_real_sin, ←\n    real.angle.cos_coe, ← real.angle.sin_coe, arg_cos_add_sin_mul_I_coe_angle]\n#align real.angle.arg_exp_map_circle real.angle.arg_exp_map_circle\n\n",
  "arg_eq_arg":

@@ -1,0 +1,22 @@
+{"of_hom_apply":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₗ[ ] » -/\n@[simp]\ntheorem of_hom_apply {R : Type u} [Ring R] {X Y : Type v} [AddCommGroup X] [Module R X] [AddCommGroup Y] [Module R Y]\n    (f : «expr →ₗ[ ] » X R Y) (x : X) : ofHom f x = f x :=\n  rfl\n#align of_hom_apply of_hom_apply\n\n",
+ "is_zero_of_subsingleton":
+ "theorem is_zero_of_subsingleton (M : ModuleCat R) [subsingleton M] : IsZero M :=\n  by\n  refine' ⟨fun X => ⟨⟨⟨0⟩, fun f => _⟩⟩, fun X => ⟨⟨⟨0⟩, fun f => _⟩⟩⟩\n  · ext\n    have : x = 0 := subsingleton.elim _ _\n    rw [this, map_zero, map_zero]\n  · ext\n    apply subsingleton.elim\n#align is_zero_of_subsingleton is_zero_of_subsingleton\n\n",
+ "id_apply":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr𝟙» -/\n@[simp]\ntheorem id_apply (m : M) : ((«expr𝟙») M : M → M) m = m :=\n  rfl\n#align id_apply id_apply\n\n",
+ "hom_congr_eq_arrow_congr":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≅ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≅ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⟶ » -/\ntheorem iso.hom_congr_eq_arrow_congr (i : «expr ≅ » X X') (j : «expr ≅ » Y Y') (f : «expr ⟶ » X Y) :\n    Iso.homCongr i j f = LinearEquiv.arrowCongr i.to_linear_equiv j.to_linear_equiv f :=\n  rfl\n#align iso.hom_congr_eq_arrow_congr iso.hom_congr_eq_arrow_congr\n\n",
+ "forget₂_obj_Module_of":
+ "@[simp]\ntheorem forget₂_obj_Module_of (X : Type v) [AddCommGroup X] [Module R X] :\n    (forget₂ (ModuleCat R) AddCommGroupCat).obj (of R X) = AddCommGroupCat.of X :=\n  rfl\n#align forget₂_obj_Module_of forget₂_obj_Module_of\n\n",
+ "forget₂_obj":
+ "/-\nCopyright (c) 2019 Robert A. Spencer. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Robert A. Spencer, Markus Himmel\n-/\n@[simp]\ntheorem forget₂_obj (X : ModuleCat R) : (forget₂ (ModuleCat R) AddCommGroupCat).obj X = AddCommGroupCat.of X :=\n  rfl\n#align forget₂_obj forget₂_obj\n\n",
+ "forget₂_map":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⟶ » -/\n@[simp]\ntheorem forget₂_map (X Y : ModuleCat R) (f : «expr ⟶ » X Y) :\n    (forget₂ (ModuleCat R) AddCommGroupCat).map f = LinearMap.toAddMonoidHom f :=\n  rfl\n#align forget₂_map forget₂_map\n\n",
+ "conj_eq_conj":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≅ » -/\ntheorem iso.conj_eq_conj (i : «expr ≅ » X X') (f : End X) : Iso.conj i f = LinearEquiv.conj i.to_linear_equiv f :=\n  rfl\n#align iso.conj_eq_conj iso.conj_eq_conj\n\n",
+ "comp_def":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⟶ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⟶ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≫ » -/\ntheorem comp_def (f : «expr ⟶ » M N) (g : «expr ⟶ » N U) : «expr ≫ » f g = g.comp f :=\n  rfl\n#align comp_def comp_def\n\n",
+ "coe_of":
+ "@[simp]\ntheorem coe_of (X : Type v) [AddCommGroup X] [Module R X] : (of R X : Type v) = X :=\n  rfl\n#align coe_of coe_of\n\n",
+ "coe_comp":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⟶ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⟶ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≫ » -/\n@[simp]\ntheorem coe_comp (f : «expr ⟶ » M N) (g : «expr ⟶ » N U) : («expr ≫ » f g : M → U) = g ∘ f :=\n  rfl\n#align coe_comp coe_comp\n\n"}

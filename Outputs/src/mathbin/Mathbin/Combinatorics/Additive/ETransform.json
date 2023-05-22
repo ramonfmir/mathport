@@ -1,0 +1,18 @@
+{"subset":
+ "/-\nCopyright (c) 2023 Yaël Dillies. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Yaël Dillies\n-/\n@[to_additive]\ntheorem mul_dyson_e_transform.subset : (mulDysonEtransform e x).1 * (mulDysonEtransform e x).2 ⊆ x.1 * x.2 :=\n  by\n  refine' union_mul_inter_subset_union.trans (union_subset subset.rfl _)\n  rw [mul_smul_comm, smul_mul_assoc, inv_smul_smul, mul_comm]\n  rfl\n#align mul_dyson_e_transform.subset mul_dyson_e_transform.subset\n\n",
+ "smul_finset_snd_subset_fst":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n@[to_additive]\ntheorem mul_dyson_e_transform.smul_finset_snd_subset_fst :\n    «expr • » e (mulDysonEtransform e x).2 ⊆ (mulDysonEtransform e x).1 :=\n  by\n  dsimp\n  rw [smul_finset_inter, smul_inv_smul, inter_comm]\n  exact inter_subset_union\n#align mul_dyson_e_transform.smul_finset_snd_subset_fst mul_dyson_e_transform.smul_finset_snd_subset_fst\n\n",
+ "mul_e_transform_right_one":
+ "@[simp, to_additive]\ntheorem mul_e_transform_right_one : mulEtransformRight 1 x = x := by simp [mul_e_transform_right]\n#align mul_e_transform_right_one mul_e_transform_right_one\n\n",
+ "mul_e_transform_right_inv":
+ "@[simp, to_additive]\ntheorem mul_e_transform_right_inv : mulEtransformRight e⁻¹ x = (mulEtransformLeft e x.swap).swap := by\n  simp [-op_inv, op_smul_eq_smul, mul_e_transform_left, mul_e_transform_right]\n#align mul_e_transform_right_inv mul_e_transform_right_inv\n\n",
+ "mul_e_transform_left_one":
+ "@[simp, to_additive]\ntheorem mul_e_transform_left_one : mulEtransformLeft 1 x = x := by simp [mul_e_transform_left]\n#align mul_e_transform_left_one mul_e_transform_left_one\n\n",
+ "mul_e_transform_left_inv":
+ "@[simp, to_additive]\ntheorem mul_e_transform_left_inv : mulEtransformLeft e⁻¹ x = (mulEtransformRight e x.swap).swap := by\n  simp [-op_inv, op_smul_eq_smul, mul_e_transform_left, mul_e_transform_right]\n#align mul_e_transform_left_inv mul_e_transform_left_inv\n\n",
+ "mul_dyson_e_transform_idem":
+ "@[simp, to_additive]\ntheorem mul_dyson_e_transform_idem : mulDysonEtransform e (mulDysonEtransform e x) = mulDysonEtransform e x :=\n  by\n  ext : 1 <;> dsimp\n  · rw [smul_finset_inter, smul_inv_smul, inter_comm, union_eq_left_iff_subset]\n    exact inter_subset_union\n  · rw [smul_finset_union, inv_smul_smul, union_comm, inter_eq_left_iff_subset]\n    exact inter_subset_union\n#align mul_dyson_e_transform_idem mul_dyson_e_transform_idem\n\n",
+ "fst_mul_snd_subset":
+ "@[to_additive]\ntheorem mul_e_transform_right.fst_mul_snd_subset :\n    (mulEtransformRight e x).1 * (mulEtransformRight e x).2 ⊆ x.1 * x.2 :=\n  by\n  refine' union_mul_inter_subset_union.trans (union_subset subset.rfl _)\n  rw [op_smul_finset_mul_eq_mul_smul_finset, smul_inv_smul]\n  rfl\n#align mul_e_transform_right.fst_mul_snd_subset mul_e_transform_right.fst_mul_snd_subset\n\n",
+ "card":
+ "/-- This statement is meant to be combined with `le_or_lt_of_add_le_add` and similar lemmas. -/\n@[to_additive add_e_transform.card\n      \"This statement is meant to be combined with\\n`le_or_lt_of_add_le_add` and similar lemmas.\"]\nprotected theorem mul_e_transform.card :\n    (mulEtransformLeft e x).1.card + (mulEtransformLeft e x).2.card +\n        ((mulEtransformRight e x).1.card + (mulEtransformRight e x).2.card) =\n      x.1.card + x.2.card + (x.1.card + x.2.card) :=\n  by rw [add_add_add_comm, mul_e_transform_left.card, mul_e_transform_right.card, ← mul_add, two_mul]\n#align mul_e_transform.card mul_e_transform.card\n\n"}

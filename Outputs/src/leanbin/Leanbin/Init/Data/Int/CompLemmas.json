@@ -19,7 +19,7 @@
  "neg_ne_of_pos":
  "protected theorem neg_ne_of_pos {a b : ℤ} : 0 < a → 0 < b → -a ≠ b := fun h₁ h₂ h =>\n  by\n  rw [← h] at h₂\n  change 0 < a at h₁\n  have := le_of_lt h₁\n  exact absurd (le_of_lt h₁) (not_le_of_gt (int.neg_of_neg_pos h₂))\n#align neg_ne_of_pos neg_ne_of_pos\n\n",
  "ne_of_nat_ne_nonneg_case":
- "protected theorem ne_of_nat_ne_nonneg_case {a b : ℤ} {n m : nat} (ha : 0 ≤ a) (hb : 0 ≤ b) (e1 : natAbs a = n)\n    (e2 : natAbs b = m) (h : n ≠ m) : a ≠ b :=\n  have : natAbs a ≠ natAbs b := by rwa [e1, e2]\n  ne_of_nat_abs_ne_nat_abs_of_nonneg ha hb this\n#align ne_of_nat_ne_nonneg_case ne_of_nat_ne_nonneg_case\n\n",
+ "protected theorem ne_of_nat_ne_nonneg_case {a b : ℤ} {n m : Nat} (ha : 0 ≤ a) (hb : 0 ≤ b) (e1 : natAbs a = n)\n    (e2 : natAbs b = m) (h : n ≠ m) : a ≠ b :=\n  have : natAbs a ≠ natAbs b := by rwa [e1, e2]\n  ne_of_nat_abs_ne_nat_abs_of_nonneg ha hb this\n#align ne_of_nat_ne_nonneg_case ne_of_nat_ne_nonneg_case\n\n",
  "ne_of_nat_abs_ne_nat_abs_of_nonneg":
  "theorem ne_of_nat_abs_ne_nat_abs_of_nonneg {a b : ℤ} (ha : 0 ≤ a) (hb : 0 ≤ b) (h : natAbs a ≠ natAbs b) : a ≠ b :=\n  fun h =>\n  by\n  have : of_nat (natAbs a) = of_nat (natAbs b) := by\n    rwa [of_nat_nat_abs_eq_of_nonneg ha, of_nat_nat_abs_eq_of_nonneg hb]\n  injection this\n  contradiction\n#align ne_of_nat_abs_ne_nat_abs_of_nonneg ne_of_nat_abs_ne_nat_abs_of_nonneg\n\n",
  "ne_neg_of_pos":
@@ -31,11 +31,11 @@
  "nat_abs_of_nat_core":
  "theorem nat_abs_of_nat_core (n : ℕ) : natAbs (of_nat n) = n :=\n  rfl\n#align nat_abs_of_nat_core nat_abs_of_nat_core\n\n",
  "nat_abs_bit1_nonneg_step":
- "protected theorem nat_abs_bit1_nonneg_step {a : int} {n : nat} (h₁ : 0 ≤ a) (h₂ : natAbs a = n) :\n    natAbs (bit1 a) = bit1 n := by rw [← h₂]; apply int.nat_abs_bit1_nonneg h₁\n#align nat_abs_bit1_nonneg_step nat_abs_bit1_nonneg_step\n\n",
+ "protected theorem nat_abs_bit1_nonneg_step {a : int} {n : Nat} (h₁ : 0 ≤ a) (h₂ : natAbs a = n) :\n    natAbs (bit1 a) = bit1 n := by rw [← h₂]; apply int.nat_abs_bit1_nonneg h₁\n#align nat_abs_bit1_nonneg_step nat_abs_bit1_nonneg_step\n\n",
  "nat_abs_bit1_nonneg":
  "protected theorem nat_abs_bit1_nonneg {a : int} (h : 0 ≤ a) : natAbs (bit1 a) = bit1 (natAbs a) :=\n  show natAbs (bit0 a + 1) = bit0 (natAbs a) + natAbs 1 by\n    rw [int.nat_abs_add_nonneg (int.bit0_nonneg h) (le_of_lt int.zero_lt_one), int.nat_abs_bit0]\n#align nat_abs_bit1_nonneg nat_abs_bit1_nonneg\n\n",
  "nat_abs_bit0_step":
- "protected theorem nat_abs_bit0_step {a : int} {n : nat} (h : natAbs a = n) : natAbs (bit0 a) = bit0 n := by rw [← h];\n  apply int.nat_abs_bit0\n#align nat_abs_bit0_step nat_abs_bit0_step\n\n",
+ "protected theorem nat_abs_bit0_step {a : int} {n : Nat} (h : natAbs a = n) : natAbs (bit0 a) = bit0 n := by rw [← h];\n  apply int.nat_abs_bit0\n#align nat_abs_bit0_step nat_abs_bit0_step\n\n",
  "nat_abs_bit0":
  "protected theorem nat_abs_bit0 : ∀ a : int, natAbs (bit0 a) = bit0 (natAbs a)\n  | of_nat n => int.nat_abs_add_nonneg (zero_le_of_nat n) (zero_le_of_nat n)\n  | neg_succ_of_nat n => int.nat_abs_add_neg (neg_succ_of_nat_lt_zero n) (neg_succ_of_nat_lt_zero n)\n#align nat_abs_bit0 nat_abs_bit0\n\n",
  "nat_abs_add_nonneg":

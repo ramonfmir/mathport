@@ -79,9 +79,9 @@
  "max_associative":
  "#print max_associative /-\ntheorem max_associative : associative (max : α → α → α) :=\n  max_assoc\n#align max_associative max_associative\n-/\n\n",
  "map_min":
- "#print Antitone.map_min /-\ntheorem Antitone.map_min (hf : antitone f) : f (min a b) = max (f a) (f b) :=\n  hf.dual.map_max\n#align antitone.map_min Antitone.map_min\n-/\n\n",
+ "#print Antitone.map_min /-\ntheorem Antitone.map_min (hf : Antitone f) : f (min a b) = max (f a) (f b) :=\n  hf.dual.map_max\n#align antitone.map_min Antitone.map_min\n-/\n\n",
  "map_max":
- "#print Antitone.map_max /-\ntheorem Antitone.map_max (hf : antitone f) : f (max a b) = min (f a) (f b) := by cases le_total a b <;> simp [h, hf h]\n#align antitone.map_max Antitone.map_max\n-/\n\n",
+ "#print Antitone.map_max /-\ntheorem Antitone.map_max (hf : Antitone f) : f (max a b) = min (f a) (f b) := by cases le_total a b <;> simp [h, hf h]\n#align antitone.map_max Antitone.map_max\n-/\n\n",
  "lt_min_iff":
  "#print lt_min_iff /-\n@[simp]\ntheorem lt_min_iff : a < min b c ↔ a < b ∧ a < c :=\n  lt_inf_iff\n#align lt_min_iff lt_min_iff\n-/\n\n",
  "lt_max_of_lt_right":

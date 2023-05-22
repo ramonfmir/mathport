@@ -23,11 +23,11 @@
  "mul_self_sub_mul_self":
  "#print mul_self_sub_mul_self /-\n/-- Representation of a difference of two squares in a commutative ring as a product. -/\ntheorem mul_self_sub_mul_self [CommRing R] (a b : R) : a * a - b * b = (a + b) * (a - b) :=\n  (Commute.all a b).mul_self_sub_mul_self_eq\n#align mul_self_sub_mul_self mul_self_sub_mul_self\n-/\n\n",
  "mul_self_eq_one_iff":
- "#print mul_self_eq_one_iff /-\ntheorem mul_self_eq_one_iff [NonAssocRing R] [no_zero_divisors R] {a : R} : a * a = 1 ↔ a = 1 ∨ a = -1 := by\n  rw [← (Commute.one_right a).mul_self_eq_mul_self_iff, mul_one]\n#align mul_self_eq_one_iff mul_self_eq_one_iff\n-/\n\n",
+ "#print mul_self_eq_one_iff /-\ntheorem mul_self_eq_one_iff [NonAssocRing R] [NoZeroDivisors R] {a : R} : a * a = 1 ↔ a = 1 ∨ a = -1 := by\n  rw [← (Commute.one_right a).mul_self_eq_mul_self_iff, mul_one]\n#align mul_self_eq_one_iff mul_self_eq_one_iff\n-/\n\n",
  "mul_self_eq_mul_self_iff":
- "#print mul_self_eq_mul_self_iff /-\ntheorem mul_self_eq_mul_self_iff [CommRing R] [no_zero_divisors R] {a b : R} : a * a = b * b ↔ a = b ∨ a = -b :=\n  (Commute.all a b).mul_self_eq_mul_self_iff\n#align mul_self_eq_mul_self_iff mul_self_eq_mul_self_iff\n-/\n\n",
+ "#print mul_self_eq_mul_self_iff /-\ntheorem mul_self_eq_mul_self_iff [CommRing R] [NoZeroDivisors R] {a b : R} : a * a = b * b ↔ a = b ∨ a = -b :=\n  (Commute.all a b).mul_self_eq_mul_self_iff\n#align mul_self_eq_mul_self_iff mul_self_eq_mul_self_iff\n-/\n\n",
  "inv_eq_self_iff":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ˣ» -/\n/-- In the unit group of an integral domain, a unit is its own inverse iff the unit is one or\n  one's additive inverse. -/\ntheorem inv_eq_self_iff [Ring R] [no_zero_divisors R] (u : «expr ˣ» R) : u⁻¹ = u ↔ u = 1 ∨ u = -1 :=\n  by\n  rw [inv_eq_iff_mul_eq_one]\n  simp only [ext_iff]\n  push_cast\n  exact mul_self_eq_one_iff\n#align inv_eq_self_iff inv_eq_self_iff\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ˣ» -/\n/-- In the unit group of an integral domain, a unit is its own inverse iff the unit is one or\n  one's additive inverse. -/\ntheorem inv_eq_self_iff [Ring R] [NoZeroDivisors R] (u : «expr ˣ» R) : u⁻¹ = u ↔ u = 1 ∨ u = -1 :=\n  by\n  rw [inv_eq_iff_mul_eq_one]\n  simp only [ext_iff]\n  push_cast\n  exact mul_self_eq_one_iff\n#align inv_eq_self_iff inv_eq_self_iff\n\n",
  "bit1_right":
  "theorem bit1_right [NonAssocSemiring R] {x y : R} (h : Commute x y) : Commute x (bit1 y) :=\n  h.bit0_right.add_right (Commute.one_right x)\n#align bit1_right bit1_right\n\n",
  "bit1_left":

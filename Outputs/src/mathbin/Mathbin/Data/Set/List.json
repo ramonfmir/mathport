@@ -1,0 +1,12 @@
+{"range_list_nthd":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\n@[simp]\ntheorem range_list_nthd (d : α) : (range fun n => l.nthd n d) = insert d { x | x ∈ l } :=\n  calc\n    (range fun n => l.nthd n d) = «expr '' » (fun o : Option α => o.get_or_else d) (range l.nth) := by\n      simp only [← range_comp, (· ∘ ·), nthd_eq_get_or_else_nth]\n    _ = insert d { x | x ∈ l } := by simp only [range_list_nth, image_insert_eq, Option.getD, image_image, image_id']\n    \n#align range_list_nthd range_list_nthd\n\n",
+ "range_list_nth_le":
+ "@[simp]\ntheorem range_list_nth_le : (range fun k : Fin l.length => l.nth_le k k.2) = { x | x ∈ l } :=\n  by\n  ext x\n  rw [mem_set_of_eq, mem_iff_nth_le]\n  exact ⟨fun ⟨⟨n, h₁⟩, h₂⟩ => ⟨n, h₁, h₂⟩, fun ⟨n, h₁, h₂⟩ => ⟨⟨n, h₁⟩, h₂⟩⟩\n#align range_list_nth_le range_list_nth_le\n\n",
+ "range_list_nth":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\ntheorem range_list_nth : range l.nth = insert none («expr '' » some { x | x ∈ l }) :=\n  by\n  rw [← range_list_nth_le, ← range_comp]\n  refine' (range_subset_iff.2 fun n => _).antisymm (insert_subset.2 ⟨_, _⟩)\n  exacts[(le_or_lt l.length n).imp nth_eq_none_iff.2 fun hlt => ⟨⟨_, _⟩, (nth_le_nth hlt).symm⟩,\n    ⟨_, nth_eq_none_iff.2 le_rfl⟩, range_subset_iff.2 fun k => ⟨_, nth_le_nth _⟩]\n#align range_list_nth range_list_nth\n\n",
+ "range_list_map_coe":
+ "theorem range_list_map_coe (s : Set α) : range (map (coe : s → α)) = { l | ∀ x ∈ l, x ∈ s } := by\n  rw [range_list_map, Subtype.range_coe]\n#align range_list_map_coe range_list_map_coe\n\n",
+ "range_list_map":
+ "/-\nCopyright (c) 2023 Yury Kudryashov. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Yury Kudryashov\n-/\ntheorem range_list_map (f : α → β) : range (map f) = { l | ∀ x ∈ l, x ∈ range f } :=\n  by\n  refine' subset.antisymm (range_subset_iff.2 fun l => forall_mem_map_iff.2 fun y _ => mem_range_self _) fun l hl => _\n  induction' l with a l ihl; · exact ⟨[], rfl⟩\n  rcases ihl fun x hx => hl x <| subset_cons _ _ hx with ⟨l, rfl⟩\n  rcases hl a (mem_cons_self _ _) with ⟨a, rfl⟩\n  exact ⟨a :: l, map_cons _ _ _⟩\n#align range_list_map range_list_map\n\n",
+ "range_list_inth":
+ "@[simp]\ntheorem range_list_inth [Inhabited α] (l : List α) : range l.inth = insert default { x | x ∈ l } :=\n  range_list_getD l default\n#align range_list_inth range_list_inth\n\n"}

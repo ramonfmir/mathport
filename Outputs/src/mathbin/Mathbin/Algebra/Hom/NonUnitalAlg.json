@@ -15,7 +15,7 @@
  "snd_prod":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₙₐ[ ] » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₙₐ[ ] » -/\n@[simp]\ntheorem snd_prod (f : «expr →ₙₐ[ ] » A R B) (g : «expr →ₙₐ[ ] » A R C) : (snd R B C).comp (prod f g) = g := by\n  ext <;> rfl\n#align snd_prod snd_prod\n\n",
  "prod_fst_snd":
- "@[simp]\ntheorem prod_fst_snd : prod (fst R A B) (snd R A B) = 1 :=\n  coe_injective pi.prod_fst_snd\n#align prod_fst_snd prod_fst_snd\n\n",
+ "@[simp]\ntheorem prod_fst_snd : prod (fst R A B) (snd R A B) = 1 :=\n  coe_injective Pi.prod_fst_snd\n#align prod_fst_snd prod_fst_snd\n\n",
  "one_apply":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₙₐ[ ] » -/\ntheorem one_apply (a : A) : (1 : «expr →ₙₐ[ ] » A R A) a = a :=\n  rfl\n#align one_apply one_apply\n\n",
  "mk_coe":
@@ -51,7 +51,7 @@
  "coe_to_distrib_mul_action_hom":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₙₐ[ ] » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →+[ ] » -/\n@[simp, norm_cast]\ntheorem coe_to_distrib_mul_action_hom (f : «expr →ₙₐ[ ] » A R B) : ((f : «expr →+[ ] » A R B) : A → B) = f :=\n  rfl\n#align coe_to_distrib_mul_action_hom coe_to_distrib_mul_action_hom\n\n",
  "coe_prod":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₙₐ[ ] » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₙₐ[ ] » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\ntheorem coe_prod (f : «expr →ₙₐ[ ] » A R B) (g : «expr →ₙₐ[ ] » A R C) : «expr⇑ » (f.prod g) = pi.prod f g :=\n  rfl\n#align coe_prod coe_prod\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₙₐ[ ] » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₙₐ[ ] » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\ntheorem coe_prod (f : «expr →ₙₐ[ ] » A R B) (g : «expr →ₙₐ[ ] » A R C) : «expr⇑ » (f.prod g) = Pi.prod f g :=\n  rfl\n#align coe_prod coe_prod\n\n",
  "coe_one":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₙₐ[ ] » -/\n@[simp]\ntheorem coe_one : ((1 : «expr →ₙₐ[ ] » A R A) : A → A) = id :=\n  rfl\n#align coe_one coe_one\n\n",
  "coe_mul_hom_mk":
@@ -71,4 +71,4 @@
  "coe_comp":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₙₐ[ ] » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₙₐ[ ] » -/\n@[simp, norm_cast]\ntheorem coe_comp (f : «expr →ₙₐ[ ] » B R C) (g : «expr →ₙₐ[ ] » A R B) :\n    (f.comp g : A → C) = (f : B → C) ∘ (g : A → B) :=\n  rfl\n#align coe_comp coe_comp\n\n",
  "coe_coe":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₙₐ[ ] » -/\n@[simp, protected]\ntheorem coe_coe {F : Type _} [non_unital_alg_hom_class F R A B] (f : F) : «expr⇑ » (f : «expr →ₙₐ[ ] » A R B) = f :=\n  rfl\n#align coe_coe coe_coe\n\n"}
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₙₐ[ ] » -/\n@[simp, protected]\ntheorem coe_coe {F : Type _} [NonUnitalAlgHomClass F R A B] (f : F) : «expr⇑ » (f : «expr →ₙₐ[ ] » A R B) = f :=\n  rfl\n#align coe_coe coe_coe\n\n"}

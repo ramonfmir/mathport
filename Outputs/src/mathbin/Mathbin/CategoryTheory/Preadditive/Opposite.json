@@ -3,7 +3,7 @@
  "unop_zero":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵖ» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⟶ » -/\n/-\nCopyright (c) 2021 Scott Morrison. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Scott Morrison, Adam Topaz, Johan Commelin, Joël Riou\n-/\n@[simp]\ntheorem unop_zero (X Y : «expr ᵒᵖ» C) : (0 : «expr ⟶ » X Y).unop = 0 :=\n  rfl\n#align unop_zero unop_zero\n\n",
  "unop_sum":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵖ» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⟶ » -/\n@[simp]\ntheorem unop_sum (X Y : «expr ᵒᵖ» C) {ι : Type _} (s : Finset ι) (f : ι → «expr ⟶ » X Y) :\n    (s.sum f).unop = s.sum fun i => (f i).unop :=\n  (unop_hom X Y).map_sum _ _\n#align unop_sum unop_sum\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵖ» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⟶ » -/\n@[simp]\ntheorem unop_sum (X Y : «expr ᵒᵖ» C) {ι : Type _} (s : Finset ι) (f : ι → «expr ⟶ » X Y) :\n    (s.sum f).unop = s.sum fun i => (f i).unop :=\n  (unopHom X Y).map_sum _ _\n#align unop_sum unop_sum\n\n",
  "unop_neg":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵖ» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⟶ » -/\n@[simp]\ntheorem unop_neg {X Y : «expr ᵒᵖ» C} (f : «expr ⟶ » X Y) : (-f).unop = -f.unop :=\n  rfl\n#align unop_neg unop_neg\n\n",
  "unop_add":
@@ -13,7 +13,7 @@
  "op_zero":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⟶ » -/\n@[simp]\ntheorem op_zero (X Y : C) : (0 : «expr ⟶ » X Y).op = 0 :=\n  rfl\n#align op_zero op_zero\n\n",
  "op_sum":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⟶ » -/\n@[simp]\ntheorem op_sum (X Y : C) {ι : Type _} (s : Finset ι) (f : ι → «expr ⟶ » X Y) : (s.sum f).op = s.sum fun i => (f i).op :=\n  (op_hom X Y).map_sum _ _\n#align op_sum op_sum\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⟶ » -/\n@[simp]\ntheorem op_sum (X Y : C) {ι : Type _} (s : Finset ι) (f : ι → «expr ⟶ » X Y) : (s.sum f).op = s.sum fun i => (f i).op :=\n  (opHom X Y).map_sum _ _\n#align op_sum op_sum\n\n",
  "op_neg":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⟶ » -/\n@[simp]\ntheorem op_neg {X Y : C} (f : «expr ⟶ » X Y) : (-f).op = -f.op :=\n  rfl\n#align op_neg op_neg\n\n",
  "op_add":

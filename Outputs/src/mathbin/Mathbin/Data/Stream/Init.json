@@ -9,9 +9,9 @@
  "take_zero":
  "@[simp]\ntheorem take_zero (s : Stream' α) : take 0 s = [] :=\n  rfl\n#align take_zero take_zero\n\n",
  "take_theorem":
- "-- Take theorem reduces a proof of equality of infinite streams to an\n-- induction over all their finite approximations.\ntheorem take_theorem (s₁ s₂ : Stream' α) : (∀ n : nat, take n s₁ = take n s₂) → s₁ = s₂ :=\n  by\n  intro h; apply Stream'.ext; intro n\n  induction' n with n ih\n  · have aux := h 1\n    simp [take] at aux\n    exact aux\n  · have h₁ : some (nth s₁ (succ n)) = some (nth s₂ (succ n)) := by\n      rw [← nth_take_succ, ← nth_take_succ, h (succ (succ n))]\n    injection h₁\n#align take_theorem take_theorem\n\n",
+ "-- Take theorem reduces a proof of equality of infinite streams to an\n-- induction over all their finite approximations.\ntheorem take_theorem (s₁ s₂ : Stream' α) : (∀ n : Nat, take n s₁ = take n s₂) → s₁ = s₂ :=\n  by\n  intro h; apply Stream'.ext; intro n\n  induction' n with n ih\n  · have aux := h 1\n    simp [take] at aux\n    exact aux\n  · have h₁ : some (nth s₁ (succ n)) = some (nth s₂ (succ n)) := by\n      rw [← nth_take_succ, ← nth_take_succ, h (succ (succ n))]\n    injection h₁\n#align take_theorem take_theorem\n\n",
  "take_succ":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:177:8: unsupported: ambiguous notation -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `stream.cons -/\n@[simp]\ntheorem take_succ (n : nat) (s : Stream' α) : take (succ n) s = stream.cons (head s) (take n (tail s)) :=\n  rfl\n#align take_succ take_succ\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:177:8: unsupported: ambiguous notation -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `stream.cons -/\n@[simp]\ntheorem take_succ (n : Nat) (s : Stream' α) : take (succ n) s = stream.cons (head s) (take n (tail s)) :=\n  rfl\n#align take_succ take_succ\n\n",
  "tails_eq_iterate":
  "theorem tails_eq_iterate (s : Stream' α) : tails s = iterate tail (tail s) :=\n  rfl\n#align tails_eq_iterate tails_eq_iterate\n\n",
  "tails_eq":
@@ -31,7 +31,7 @@
  "tail_eq_drop":
  "theorem tail_eq_drop (s : Stream' α) : tail s = drop 1 s :=\n  rfl\n#align tail_eq_drop tail_eq_drop\n\n",
  "tail_drop":
- "theorem tail_drop (n : nat) (s : Stream' α) : tail (drop n s) = drop n (tail s) :=\n  funext fun i => by unfold tail drop; simp [nth, nat.add_comm, nat.add_left_comm]\n#align tail_drop tail_drop\n\n",
+ "theorem tail_drop (n : Nat) (s : Stream' α) : tail (drop n s) = drop n (tail s) :=\n  funext fun i => by unfold tail drop; simp [nth, nat.add_comm, nat.add_left_comm]\n#align tail_drop tail_drop\n\n",
  "tail_const":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:177:8: unsupported: ambiguous notation -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `stream.cons -/\ntheorem tail_const (a : α) : tail (const a) = const a :=\n  suffices tail (stream.cons a (const a)) = const a by rwa [← const_eq] at this\n  rfl\n#align tail_const tail_const\n\n",
  "tail_cons":
@@ -39,51 +39,51 @@
  "odd_eq":
  "theorem odd_eq (s : Stream' α) : odd s = even (tail s) :=\n  rfl\n#align odd_eq odd_eq\n\n",
  "nth_zip":
- "theorem nth_zip (n : nat) (s₁ : Stream' α) (s₂ : Stream' β) : nth (zip f s₁ s₂) n = f (nth s₁ n) (nth s₂ n) :=\n  rfl\n#align nth_zip nth_zip\n\n",
+ "theorem nth_zip (n : Nat) (s₁ : Stream' α) (s₂ : Stream' β) : nth (zip f s₁ s₂) n = f (nth s₁ n) (nth s₂ n) :=\n  rfl\n#align nth_zip nth_zip\n\n",
  "nth_zero_iterate":
  "theorem nth_zero_iterate (f : α → α) (a : α) : nth (iterate f a) 0 = a :=\n  rfl\n#align nth_zero_iterate nth_zero_iterate\n\n",
  "nth_zero_cons":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:177:8: unsupported: ambiguous notation -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `stream.cons -/\n@[simp]\ntheorem nth_zero_cons (a : α) (s : Stream' α) : nth (stream.cons a s) 0 = a :=\n  rfl\n#align nth_zero_cons nth_zero_cons\n\n",
  "nth_unfolds_head_tail":
- "theorem nth_unfolds_head_tail : ∀ (n : nat) (s : Stream' α), nth (unfolds head tail s) n = nth s n :=\n  by\n  intro n; induction' n with n' ih\n  · intro s\n    rfl\n  · intro s\n    rw [nth_succ, nth_succ, unfolds_eq, tail_cons, ih]\n#align nth_unfolds_head_tail nth_unfolds_head_tail\n\n",
+ "theorem nth_unfolds_head_tail : ∀ (n : Nat) (s : Stream' α), nth (unfolds head tail s) n = nth s n :=\n  by\n  intro n; induction' n with n' ih\n  · intro s\n    rfl\n  · intro s\n    rw [nth_succ, nth_succ, unfolds_eq, tail_cons, ih]\n#align nth_unfolds_head_tail nth_unfolds_head_tail\n\n",
  "nth_take_succ":
- "theorem nth_take_succ : ∀ (n : nat) (s : Stream' α), List.get? (take (succ n) s) n = some (nth s n)\n  | 0, s => rfl\n  | n + 1, s => by rw [take_succ, add_one, List.get?, nth_take_succ]; rfl\n#align nth_take_succ nth_take_succ\n\n",
+ "theorem nth_take_succ : ∀ (n : Nat) (s : Stream' α), List.get? (take (succ n) s) n = some (nth s n)\n  | 0, s => rfl\n  | n + 1, s => by rw [take_succ, add_one, List.get?, nth_take_succ]; rfl\n#align nth_take_succ nth_take_succ\n\n",
  "nth_tails":
- "theorem nth_tails : ∀ (n : nat) (s : Stream' α), nth (tails s) n = drop n (tail s) :=\n  by\n  intro n; induction' n with n' ih\n  · intros\n    rfl\n  · intro s\n    rw [nth_succ, drop_succ, tails_eq, tail_cons, ih]\n#align nth_tails nth_tails\n\n",
+ "theorem nth_tails : ∀ (n : Nat) (s : Stream' α), nth (tails s) n = drop n (tail s) :=\n  by\n  intro n; induction' n with n' ih\n  · intros\n    rfl\n  · intro s\n    rw [nth_succ, drop_succ, tails_eq, tail_cons, ih]\n#align nth_tails nth_tails\n\n",
  "nth_succ_iterate":
- "theorem nth_succ_iterate (n : nat) (f : α → α) (a : α) : nth (iterate f a) (succ n) = nth (iterate f (f a)) n := by\n  rw [nth_succ, tail_iterate]\n#align nth_succ_iterate nth_succ_iterate\n\n",
+ "theorem nth_succ_iterate (n : Nat) (f : α → α) (a : α) : nth (iterate f a) (succ n) = nth (iterate f (f a)) n := by\n  rw [nth_succ, tail_iterate]\n#align nth_succ_iterate nth_succ_iterate\n\n",
  "nth_succ_cons":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:177:8: unsupported: ambiguous notation -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `stream.cons -/\n@[simp]\ntheorem nth_succ_cons (n : nat) (s : Stream' α) (x : α) : nth (stream.cons x s) n.succ = nth s n :=\n  rfl\n#align nth_succ_cons nth_succ_cons\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:177:8: unsupported: ambiguous notation -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `stream.cons -/\n@[simp]\ntheorem nth_succ_cons (n : Nat) (s : Stream' α) (x : α) : nth (stream.cons x s) n.succ = nth s n :=\n  rfl\n#align nth_succ_cons nth_succ_cons\n\n",
  "nth_succ":
- "theorem nth_succ (n : nat) (s : Stream' α) : nth s (succ n) = nth (tail s) n :=\n  rfl\n#align nth_succ nth_succ\n\n",
+ "theorem nth_succ (n : Nat) (s : Stream' α) : nth s (succ n) = nth (tail s) n :=\n  rfl\n#align nth_succ nth_succ\n\n",
  "nth_of_bisim":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ~ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ~ » -/\ntheorem nth_of_bisim (bisim : IsBisimulation R) :\n    ∀ {s₁ s₂} (n), «expr ~ » s₁ s₂ → nth s₁ n = nth s₂ n ∧ «expr ~ » (drop (n + 1) s₁) (drop (n + 1) s₂)\n  | s₁, s₂, 0, h => bisim h\n  | s₁, s₂, n + 1, h =>\n    match bisim h with\n    | ⟨h₁, trel⟩ => nth_of_bisim n trel\n#align nth_of_bisim nth_of_bisim\n\n",
  "nth_odd":
- "theorem nth_odd : ∀ (n : nat) (s : Stream' α), nth (odd s) n = nth s (2 * n + 1) := fun n s => by rw [odd_eq, nth_even];\n  rfl\n#align nth_odd nth_odd\n\n",
+ "theorem nth_odd : ∀ (n : Nat) (s : Stream' α), nth (odd s) n = nth s (2 * n + 1) := fun n s => by rw [odd_eq, nth_even];\n  rfl\n#align nth_odd nth_odd\n\n",
  "nth_nats":
- "theorem nth_nats (n : nat) : nth nats n = n :=\n  rfl\n#align nth_nats nth_nats\n\n",
+ "theorem nth_nats (n : Nat) : nth nats n = n :=\n  rfl\n#align nth_nats nth_nats\n\n",
  "nth_map":
- "theorem nth_map (n : nat) (s : Stream' α) : nth (map f s) n = f (nth s n) :=\n  rfl\n#align nth_map nth_map\n\n",
+ "theorem nth_map (n : Nat) (s : Stream' α) : nth (map f s) n = f (nth s n) :=\n  rfl\n#align nth_map nth_map\n\n",
  "nth_interleave_right":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⋈ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⋈ » -/\ntheorem nth_interleave_right : ∀ (n : nat) (s₁ s₂ : Stream' α), nth («expr ⋈ » s₁ s₂) (2 * n + 1) = nth s₂ n\n  | 0, s₁, s₂ => rfl\n  | succ n, s₁, s₂ => by\n    change nth («expr ⋈ » s₁ s₂) (succ (succ (2 * n + 1))) = nth s₂ (succ n)\n    rw [nth_succ, nth_succ, interleave_eq, tail_cons, tail_cons, nth_interleave_right]\n    rfl\n#align nth_interleave_right nth_interleave_right\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⋈ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⋈ » -/\ntheorem nth_interleave_right : ∀ (n : Nat) (s₁ s₂ : Stream' α), nth («expr ⋈ » s₁ s₂) (2 * n + 1) = nth s₂ n\n  | 0, s₁, s₂ => rfl\n  | succ n, s₁, s₂ => by\n    change nth («expr ⋈ » s₁ s₂) (succ (succ (2 * n + 1))) = nth s₂ (succ n)\n    rw [nth_succ, nth_succ, interleave_eq, tail_cons, tail_cons, nth_interleave_right]\n    rfl\n#align nth_interleave_right nth_interleave_right\n\n",
  "nth_interleave_left":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⋈ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⋈ » -/\ntheorem nth_interleave_left : ∀ (n : nat) (s₁ s₂ : Stream' α), nth («expr ⋈ » s₁ s₂) (2 * n) = nth s₁ n\n  | 0, s₁, s₂ => rfl\n  | succ n, s₁, s₂ => by\n    change nth («expr ⋈ » s₁ s₂) (succ (succ (2 * n))) = nth s₁ (succ n)\n    rw [nth_succ, nth_succ, interleave_eq, tail_cons, tail_cons, nth_interleave_left]\n    rfl\n#align nth_interleave_left nth_interleave_left\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⋈ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⋈ » -/\ntheorem nth_interleave_left : ∀ (n : Nat) (s₁ s₂ : Stream' α), nth («expr ⋈ » s₁ s₂) (2 * n) = nth s₁ n\n  | 0, s₁, s₂ => rfl\n  | succ n, s₁, s₂ => by\n    change nth («expr ⋈ » s₁ s₂) (succ (succ (2 * n))) = nth s₁ (succ n)\n    rw [nth_succ, nth_succ, interleave_eq, tail_cons, tail_cons, nth_interleave_left]\n    rfl\n#align nth_interleave_left nth_interleave_left\n\n",
  "nth_inits":
- "theorem nth_inits : ∀ (n : nat) (s : Stream' α), nth (inits s) n = take (succ n) s :=\n  by\n  intro n; induction' n with n' ih\n  · intros\n    rfl\n  · intros\n    rw [nth_succ, take_succ, ← ih, tail_inits, inits_tail, cons_nth_inits_core]\n#align nth_inits nth_inits\n\n",
+ "theorem nth_inits : ∀ (n : Nat) (s : Stream' α), nth (inits s) n = take (succ n) s :=\n  by\n  intro n; induction' n with n' ih\n  · intros\n    rfl\n  · intros\n    rw [nth_succ, take_succ, ← ih, tail_inits, inits_tail, cons_nth_inits_core]\n#align nth_inits nth_inits\n\n",
  "nth_even":
- "theorem nth_even : ∀ (n : nat) (s : Stream' α), nth (even s) n = nth s (2 * n)\n  | 0, s => rfl\n  | succ n, s => by\n    change nth (Even s) (succ n) = nth s (succ (succ (2 * n)))\n    rw [nth_succ, nth_succ, tail_even, nth_even]; rfl\n#align nth_even nth_even\n\n",
+ "theorem nth_even : ∀ (n : Nat) (s : Stream' α), nth (even s) n = nth s (2 * n)\n  | 0, s => rfl\n  | succ n, s => by\n    change nth (Even s) (succ n) = nth s (succ (succ (2 * n)))\n    rw [nth_succ, nth_succ, tail_even, nth_even]; rfl\n#align nth_even nth_even\n\n",
  "nth_enum":
  "@[simp]\ntheorem nth_enum (s : Stream' α) (n : ℕ) : nth (enum s) n = (n, s.nth n) :=\n  rfl\n#align nth_enum nth_enum\n\n",
  "nth_drop":
- "theorem nth_drop (n m : nat) (s : Stream' α) : nth (drop m s) n = nth s (n + m) :=\n  rfl\n#align nth_drop nth_drop\n\n",
+ "theorem nth_drop (n m : Nat) (s : Stream' α) : nth (drop m s) n = nth s (n + m) :=\n  rfl\n#align nth_drop nth_drop\n\n",
  "nth_const":
- "theorem nth_const (n : nat) (a : α) : nth (const a) n = a :=\n  rfl\n#align nth_const nth_const\n\n",
+ "theorem nth_const (n : Nat) (a : α) : nth (const a) n = a :=\n  rfl\n#align nth_const nth_const\n\n",
  "nil_append_stream":
  "theorem nil_append_stream (s : Stream' α) : appendStream' [] s = s :=\n  rfl\n#align nil_append_stream nil_append_stream\n\n",
  "nats_eq":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:177:8: unsupported: ambiguous notation -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `stream.cons -/\ntheorem nats_eq : nats = stream.cons 0 (map succ nats) :=\n  by\n  apply Stream'.ext; intro n\n  cases n; rfl; rw [nth_succ]; rfl\n#align nats_eq nats_eq\n\n",
  "mem_of_nth_eq":
- "theorem mem_of_nth_eq {n : nat} {s : Stream' α} {a : α} : a = nth s n → a ∈ s := fun h => exists.intro n h\n#align mem_of_nth_eq mem_of_nth_eq\n\n",
+ "theorem mem_of_nth_eq {n : Nat} {s : Stream' α} {a : α} : a = nth s n → a ∈ s := fun h => exists.intro n h\n#align mem_of_nth_eq mem_of_nth_eq\n\n",
  "mem_of_mem_odd":
  "theorem mem_of_mem_odd (a : α) (s : Stream' α) : a ∈ odd s → a ∈ s := fun ⟨n, h⟩ =>\n  exists.intro (2 * n + 1) (by rw [h, nth_odd])\n#align mem_of_mem_odd mem_of_mem_odd\n\n",
  "mem_of_mem_even":
@@ -95,7 +95,7 @@
  "mem_interleave_left":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⋈ » -/\ntheorem mem_interleave_left {a : α} {s₁ : Stream' α} (s₂ : Stream' α) : a ∈ s₁ → a ∈ «expr ⋈ » s₁ s₂ := fun ⟨n, h⟩ =>\n  exists.intro (2 * n) (by rw [h, nth_interleave_left])\n#align mem_interleave_left mem_interleave_left\n\n",
  "mem_cycle":
- "theorem mem_cycle {a : α} {l : list α} : ∀ h : l ≠ [], a ∈ l → a ∈ cycle l h := fun h ainl => by rw [cycle_eq];\n  exact mem_append_stream_left _ ainl\n#align mem_cycle mem_cycle\n\n",
+ "theorem mem_cycle {a : α} {l : List α} : ∀ h : l ≠ [], a ∈ l → a ∈ cycle l h := fun h ainl => by rw [cycle_eq];\n  exact mem_append_stream_left _ ainl\n#align mem_cycle mem_cycle\n\n",
  "mem_const":
  "theorem mem_const (a : α) : a ∈ const a :=\n  exists.intro 0 rfl\n#align mem_const mem_const\n\n",
  "mem_cons_of_mem":
@@ -103,9 +103,9 @@
  "mem_cons":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:177:8: unsupported: ambiguous notation -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `stream.cons -/\ntheorem mem_cons (a : α) (s : Stream' α) : a ∈ stream.cons a s :=\n  exists.intro 0 rfl\n#align mem_cons mem_cons\n\n",
  "mem_append_stream_right":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ++ₛ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ++ₛ » -/\ntheorem mem_append_stream_right : ∀ {a : α} (l : list α) {s : Stream' α}, a ∈ s → a ∈ «expr ++ₛ » l s\n  | a, [], s, h => h\n  | a, list.cons b l, s, h =>\n    have ih : a ∈ «expr ++ₛ » l s := mem_append_stream_right l h\n    mem_cons_of_mem _ ih\n#align mem_append_stream_right mem_append_stream_right\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ++ₛ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ++ₛ » -/\ntheorem mem_append_stream_right : ∀ {a : α} (l : List α) {s : Stream' α}, a ∈ s → a ∈ «expr ++ₛ » l s\n  | a, [], s, h => h\n  | a, List.cons b l, s, h =>\n    have ih : a ∈ «expr ++ₛ » l s := mem_append_stream_right l h\n    mem_cons_of_mem _ ih\n#align mem_append_stream_right mem_append_stream_right\n\n",
  "mem_append_stream_left":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ++ₛ » -/\ntheorem mem_append_stream_left : ∀ {a : α} {l : list α} (s : Stream' α), a ∈ l → a ∈ «expr ++ₛ » l s\n  | a, [], s, h => absurd h (list.not_mem_nil _)\n  | a, list.cons b l, s, h =>\n    or.elim (List.eq_or_mem_of_mem_cons h) (fun aeqb : a = b => exists.intro 0 aeqb) fun ainl : a ∈ l =>\n      mem_cons_of_mem b (mem_append_stream_left s ainl)\n#align mem_append_stream_left mem_append_stream_left\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ++ₛ » -/\ntheorem mem_append_stream_left : ∀ {a : α} {l : List α} (s : Stream' α), a ∈ l → a ∈ «expr ++ₛ » l s\n  | a, [], s, h => absurd h (list.not_mem_nil _)\n  | a, List.cons b l, s, h =>\n    or.elim (List.eq_or_mem_of_mem_cons h) (fun aeqb : a = b => exists.intro 0 aeqb) fun ainl : a ∈ l =>\n      mem_cons_of_mem b (mem_append_stream_left s ainl)\n#align mem_append_stream_left mem_append_stream_left\n\n",
  "map_tail":
  "theorem map_tail (s : Stream' α) : map f (tail s) = tail (map f s) :=\n  rfl\n#align map_tail map_tail\n\n",
  "map_map":
@@ -123,7 +123,7 @@
  "map_cons":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:177:8: unsupported: ambiguous notation -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `stream.cons -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:177:8: unsupported: ambiguous notation -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `stream.cons -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:177:8: unsupported: ambiguous notation -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `stream.cons -/\ntheorem map_cons (a : α) (s : Stream' α) : map f (stream.cons a s) = stream.cons (f a) (map f s) := by\n  rw [← Stream'.eta (map f (stream.cons a s)), map_eq]; rfl\n#align map_cons map_cons\n\n",
  "map_append_stream":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ++ₛ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ++ₛ » -/\ntheorem map_append_stream (f : α → β) :\n    ∀ (l : list α) (s : Stream' α), map f («expr ++ₛ » l s) = «expr ++ₛ » (list.map f l) (map f s)\n  | [], s => rfl\n  | list.cons a l, s => by rw [cons_append_stream, list.map_cons, map_cons, cons_append_stream, map_append_stream]\n#align map_append_stream map_append_stream\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ++ₛ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ++ₛ » -/\ntheorem map_append_stream (f : α → β) :\n    ∀ (l : List α) (s : Stream' α), map f («expr ++ₛ » l s) = «expr ++ₛ » (list.map f l) (map f s)\n  | [], s => rfl\n  | List.cons a l, s => by rw [cons_append_stream, list.map_cons, map_cons, cons_append_stream, map_append_stream]\n#align map_append_stream map_append_stream\n\n",
  "length_take":
  "@[simp]\ntheorem length_take (n : ℕ) (s : Stream' α) : (take n s).length = n := by induction n generalizing s <;> simp [*]\n#align length_take length_take\n\n",
  "iterate_id":
@@ -141,9 +141,9 @@
  "inits_tail":
  "theorem inits_tail (s : Stream' α) : inits (tail s) = initsCore [head (tail s)] (tail (tail s)) :=\n  rfl\n#align inits_tail inits_tail\n\n",
  "inits_eq":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:177:8: unsupported: ambiguous notation -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `stream.cons -/\ntheorem inits_eq (s : Stream' α) : inits s = stream.cons [head s] (map (list.cons (head s)) (inits (tail s))) :=\n  by\n  apply Stream'.ext; intro n\n  cases n\n  · rfl\n  · rw [nth_inits, nth_succ, tail_cons, nth_map, nth_inits]\n    rfl\n#align inits_eq inits_eq\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:177:8: unsupported: ambiguous notation -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `stream.cons -/\ntheorem inits_eq (s : Stream' α) : inits s = stream.cons [head s] (map (List.cons (head s)) (inits (tail s))) :=\n  by\n  apply Stream'.ext; intro n\n  cases n\n  · rfl\n  · rw [nth_inits, nth_succ, tail_cons, nth_map, nth_inits]\n    rfl\n#align inits_eq inits_eq\n\n",
  "inits_core_eq":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:177:8: unsupported: ambiguous notation -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `stream.cons -/\ntheorem inits_core_eq (l : list α) (s : Stream' α) :\n    initsCore l s = stream.cons l (initsCore (l ++ [head s]) (tail s)) := by unfold inits_core corec_on; rw [corec_eq];\n  rfl\n#align inits_core_eq inits_core_eq\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:177:8: unsupported: ambiguous notation -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `stream.cons -/\ntheorem inits_core_eq (l : List α) (s : Stream' α) :\n    initsCore l s = stream.cons l (initsCore (l ++ [head s]) (tail s)) := by unfold inits_core corec_on; rw [corec_eq];\n  rfl\n#align inits_core_eq inits_core_eq\n\n",
  "identity":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊛ » -/\ntheorem identity (s : Stream' α) : «expr ⊛ » (pure id) s = s :=\n  rfl\n#align identity identity\n\n",
  "homomorphism":
@@ -179,23 +179,23 @@
  "enum_eq_zip":
  "theorem enum_eq_zip (s : Stream' α) : enum s = zip prod.mk nats s :=\n  rfl\n#align enum_eq_zip enum_eq_zip\n\n",
  "drop_zip":
- "theorem drop_zip (n : nat) (s₁ : Stream' α) (s₂ : Stream' β) : drop n (zip f s₁ s₂) = zip f (drop n s₁) (drop n s₂) :=\n  Stream'.ext fun i => rfl\n#align drop_zip drop_zip\n\n",
+ "theorem drop_zip (n : Nat) (s₁ : Stream' α) (s₂ : Stream' β) : drop n (zip f s₁ s₂) = zip f (drop n s₁) (drop n s₂) :=\n  Stream'.ext fun i => rfl\n#align drop_zip drop_zip\n\n",
  "drop_succ":
- "theorem drop_succ (n : nat) (s : Stream' α) : drop (succ n) s = drop n (tail s) :=\n  rfl\n#align drop_succ drop_succ\n\n",
+ "theorem drop_succ (n : Nat) (s : Stream' α) : drop (succ n) s = drop n (tail s) :=\n  rfl\n#align drop_succ drop_succ\n\n",
  "drop_map":
- "theorem drop_map (n : nat) (s : Stream' α) : drop n (map f s) = map f (drop n s) :=\n  Stream'.ext fun i => rfl\n#align drop_map drop_map\n\n",
+ "theorem drop_map (n : Nat) (s : Stream' α) : drop n (map f s) = map f (drop n s) :=\n  Stream'.ext fun i => rfl\n#align drop_map drop_map\n\n",
  "drop_drop":
- "theorem drop_drop (n m : nat) (s : Stream' α) : drop n (drop m s) = drop (n + m) s :=\n  funext fun i => by unfold drop; rw [nat.add_assoc]\n#align drop_drop drop_drop\n\n",
+ "theorem drop_drop (n m : Nat) (s : Stream' α) : drop n (drop m s) = drop (n + m) s :=\n  funext fun i => by unfold drop; rw [nat.add_assoc]\n#align drop_drop drop_drop\n\n",
  "drop_const":
- "theorem drop_const (n : nat) (a : α) : drop n (const a) = const a :=\n  Stream'.ext fun i => rfl\n#align drop_const drop_const\n\n",
+ "theorem drop_const (n : Nat) (a : α) : drop n (const a) = const a :=\n  Stream'.ext fun i => rfl\n#align drop_const drop_const\n\n",
  "drop_append_stream":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ++ₛ » -/\ntheorem drop_append_stream : ∀ (l : list α) (s : Stream' α), drop l.length («expr ++ₛ » l s) = s\n  | [], s => by rfl\n  | list.cons a l, s => by rw [list.length_cons, add_one, drop_succ, cons_append_stream, tail_cons, drop_append_stream]\n#align drop_append_stream drop_append_stream\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ++ₛ » -/\ntheorem drop_append_stream : ∀ (l : List α) (s : Stream' α), drop l.length («expr ++ₛ » l s) = s\n  | [], s => by rfl\n  | List.cons a l, s => by rw [list.length_cons, add_one, drop_succ, cons_append_stream, tail_cons, drop_append_stream]\n#align drop_append_stream drop_append_stream\n\n",
  "cycle_singleton":
  "theorem cycle_singleton (a : α) (h : [a] ≠ []) : cycle [a] h = const a :=\n  coinduction rfl fun β fr ch => by rwa [cycle_eq, const_eq]\n#align cycle_singleton cycle_singleton\n\n",
  "cycle_g_cons":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:177:8: unsupported: ambiguous notation -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `stream.cons -/\nprotected theorem cycle_g_cons (a : α) (a₁ : α) (l₁ : list α) (a₀ : α) (l₀ : list α) :\n    Stream'.cycleG (a, stream.cons a₁ l₁, a₀, l₀) = (a₁, l₁, a₀, l₀) :=\n  rfl\n#align cycle_g_cons cycle_g_cons\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:177:8: unsupported: ambiguous notation -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `stream.cons -/\nprotected theorem cycle_g_cons (a : α) (a₁ : α) (l₁ : List α) (a₀ : α) (l₀ : List α) :\n    Stream'.cycleG (a, stream.cons a₁ l₁, a₀, l₀) = (a₁, l₁, a₀, l₀) :=\n  rfl\n#align cycle_g_cons cycle_g_cons\n\n",
  "cycle_eq":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ++ₛ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:177:8: unsupported: ambiguous notation -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `stream.cons -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ++ₛ » -/\ntheorem cycle_eq : ∀ (l : list α) (h : l ≠ []), cycle l h = «expr ++ₛ » l (cycle l h)\n  | [], h => absurd rfl h\n  | list.cons a l, h =>\n    have gen :\n      ∀ l' a',\n        corec Stream'.cycleF Stream'.cycleG (a', l', a, l) =\n          «expr ++ₛ » (stream.cons a' l') (corec Stream'.cycleF Stream'.cycleG (a, l, a, l)) :=\n      by\n      intro l'\n      induction' l' with a₁ l₁ ih\n      · intros\n        rw [corec_eq]\n        rfl\n      · intros\n        rw [corec_eq, Stream'.cycle_g_cons, ih a₁]\n        rfl\n    gen l a\n#align cycle_eq cycle_eq\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ++ₛ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:177:8: unsupported: ambiguous notation -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `stream.cons -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ++ₛ » -/\ntheorem cycle_eq : ∀ (l : List α) (h : l ≠ []), cycle l h = «expr ++ₛ » l (cycle l h)\n  | [], h => absurd rfl h\n  | List.cons a l, h =>\n    have gen :\n      ∀ l' a',\n        corec Stream'.cycleF Stream'.cycleG (a', l', a, l) =\n          «expr ++ₛ » (stream.cons a' l') (corec Stream'.cycleF Stream'.cycleG (a, l, a, l)) :=\n      by\n      intro l'\n      induction' l' with a₁ l₁ ih\n      · intros\n        rw [corec_eq]\n        rfl\n      · intros\n        rw [corec_eq, Stream'.cycle_g_cons, ih a₁]\n        rfl\n    gen l a\n#align cycle_eq cycle_eq\n\n",
  "corec_id_id_eq_const":
  "theorem corec_id_id_eq_const (a : α) : corec id id a = const a := by rw [corec_def, map_id, iterate_id]\n#align corec_id_id_eq_const corec_id_id_eq_const\n\n",
  "corec_id_f_eq_iterate":
@@ -209,28 +209,28 @@
  "const_eq":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:177:8: unsupported: ambiguous notation -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `stream.cons -/\ntheorem const_eq (a : α) : const a = stream.cons a (const a) :=\n  by\n  apply Stream'.ext; intro n\n  cases n <;> rfl\n#align const_eq const_eq\n\n",
  "cons_nth_inits_core":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:177:8: unsupported: ambiguous notation -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `stream.cons -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:177:8: unsupported: ambiguous notation -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `stream.cons -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:177:8: unsupported: ambiguous notation -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `stream.cons -/\ntheorem cons_nth_inits_core :\n    ∀ (a : α) (n : nat) (l : list α) (s : Stream' α),\n      stream.cons a (nth (initsCore l s) n) = nth (initsCore (stream.cons a l) s) n :=\n  by\n  intro a n\n  induction' n with n' ih\n  · intros\n    rfl\n  · intro l s\n    rw [nth_succ, inits_core_eq, tail_cons, ih, inits_core_eq (stream.cons a l) s]\n    rfl\n#align cons_nth_inits_core cons_nth_inits_core\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:177:8: unsupported: ambiguous notation -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `stream.cons -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:177:8: unsupported: ambiguous notation -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `stream.cons -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:177:8: unsupported: ambiguous notation -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `stream.cons -/\ntheorem cons_nth_inits_core :\n    ∀ (a : α) (n : Nat) (l : List α) (s : Stream' α),\n      stream.cons a (nth (initsCore l s) n) = nth (initsCore (stream.cons a l) s) n :=\n  by\n  intro a n\n  induction' n with n' ih\n  · intros\n    rfl\n  · intro l s\n    rw [nth_succ, inits_core_eq, tail_cons, ih, inits_core_eq (stream.cons a l) s]\n    rfl\n#align cons_nth_inits_core cons_nth_inits_core\n\n",
  "cons_injective_right":
  "theorem cons_injective_right (x : α) : function.injective (cons x) :=\n  cons_injective2.right _\n#align cons_injective_right cons_injective_right\n\n",
  "cons_injective_left":
  "theorem cons_injective_left (s : Stream' α) : function.injective fun x => cons x s :=\n  cons_injective2.left _\n#align cons_injective_left cons_injective_left\n\n",
  "cons_injective2":
- "theorem cons_injective2 : function.injective2 (cons : α → Stream' α → Stream' α) := fun x y s t h =>\n  ⟨by rw [← nth_zero_cons x s, h, nth_zero_cons], Stream'.ext fun n => by rw [← nth_succ_cons n _ x, h, nth_succ_cons]⟩\n#align cons_injective2 cons_injective2\n\n",
+ "theorem cons_injective2 : Function.Injective2 (cons : α → Stream' α → Stream' α) := fun x y s t h =>\n  ⟨by rw [← nth_zero_cons x s, h, nth_zero_cons], Stream'.ext fun n => by rw [← nth_succ_cons n _ x, h, nth_succ_cons]⟩\n#align cons_injective2 cons_injective2\n\n",
  "cons_append_stream":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:177:8: unsupported: ambiguous notation -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `stream.cons -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:177:8: unsupported: ambiguous notation -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `stream.cons -/\ntheorem cons_append_stream (a : α) (l : list α) (s : Stream' α) :\n    appendStream' (stream.cons a l) s = stream.cons a (appendStream' l s) :=\n  rfl\n#align cons_append_stream cons_append_stream\n\n",
- "composition":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊛ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊛ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊛ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊛ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊛ » -/\ntheorem composition (g : Stream' (β → δ)) (f : Stream' (α → β)) (s : Stream' α) :\n    «expr ⊛ » («expr ⊛ » («expr ⊛ » (pure comp) g) f) s = «expr ⊛ » g («expr ⊛ » f s) :=\n  rfl\n#align composition composition\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:177:8: unsupported: ambiguous notation -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `stream.cons -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:177:8: unsupported: ambiguous notation -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `stream.cons -/\ntheorem cons_append_stream (a : α) (l : List α) (s : Stream' α) :\n    appendStream' (stream.cons a l) s = stream.cons a (appendStream' l s) :=\n  rfl\n#align cons_append_stream cons_append_stream\n\n",
  "coinduction":
  "theorem coinduction {s₁ s₂ : Stream' α} :\n    head s₁ = head s₂ → (∀ (β : Type u) (fr : Stream' α → β), fr s₁ = fr s₂ → fr (tail s₁) = fr (tail s₂)) → s₁ = s₂ :=\n  fun hh ht =>\n  eq_of_bisim\n    (fun s₁ s₂ => head s₁ = head s₂ ∧ ∀ (β : Type u) (fr : Stream' α → β), fr s₁ = fr s₂ → fr (tail s₁) = fr (tail s₂))\n    (fun s₁ s₂ h =>\n      have h₁ : head s₁ = head s₂ := And.left h\n      have h₂ : head (tail s₁) = head (tail s₂) := And.right h α (@head α) h₁\n      have h₃ :\n        ∀ (β : Type u) (fr : Stream' α → β), fr (tail s₁) = fr (tail s₂) → fr (tail (tail s₁)) = fr (tail (tail s₂)) :=\n        fun β fr => And.right h β fun s => fr (tail s)\n      and.intro h₁ (and.intro h₂ h₃))\n    (and.intro hh ht)\n#align coinduction coinduction\n\n",
  "bisim_simple":
  "theorem bisim_simple (s₁ s₂ : Stream' α) : head s₁ = head s₂ → s₁ = tail s₁ → s₂ = tail s₂ → s₁ = s₂ :=\n  fun hh ht₁ ht₂ =>\n  eq_of_bisim (fun s₁ s₂ => head s₁ = head s₂ ∧ s₁ = tail s₁ ∧ s₂ = tail s₂)\n    (fun s₁ s₂ ⟨h₁, h₂, h₃⟩ => by constructor; exact h₁; rw [← h₂, ← h₃]; repeat' constructor <;> assumption)\n    (and.intro hh (and.intro ht₁ ht₂))\n#align bisim_simple bisim_simple\n\n",
  "append_take_drop":
- "theorem append_take_drop : ∀ (n : nat) (s : Stream' α), appendStream' (take n s) (drop n s) = s :=\n  by\n  intro n\n  induction' n with n' ih\n  · intro s\n    rfl\n  · intro s\n    rw [take_succ, drop_succ, cons_append_stream, ih (tail s), Stream'.eta]\n#align append_take_drop append_take_drop\n\n",
+ "theorem append_take_drop : ∀ (n : Nat) (s : Stream' α), appendStream' (take n s) (drop n s) = s :=\n  by\n  intro n\n  induction' n with n' ih\n  · intro s\n    rfl\n  · intro s\n    rw [take_succ, drop_succ, cons_append_stream, ih (tail s), Stream'.eta]\n#align append_take_drop append_take_drop\n\n",
  "append_stream_head_tail":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ++ₛ » -/\ntheorem append_stream_head_tail (s : Stream' α) : «expr ++ₛ » [head s] (tail s) = s := by\n  rw [cons_append_stream, nil_append_stream, Stream'.eta]\n#align append_stream_head_tail append_stream_head_tail\n\n",
  "append_append_stream":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ++ₛ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ++ₛ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ++ₛ » -/\ntheorem append_append_stream :\n    ∀ (l₁ l₂ : list α) (s : Stream' α), «expr ++ₛ » (l₁ ++ l₂) s = «expr ++ₛ » l₁ («expr ++ₛ » l₂ s)\n  | [], l₂, s => rfl\n  | list.cons a l₁, l₂, s => by rw [list.cons_append, cons_append_stream, cons_append_stream, append_append_stream]\n#align append_append_stream append_append_stream\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ++ₛ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ++ₛ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ++ₛ » -/\ntheorem append_append_stream :\n    ∀ (l₁ l₂ : List α) (s : Stream' α), «expr ++ₛ » (l₁ ++ l₂) s = «expr ++ₛ » l₁ («expr ++ₛ » l₂ s)\n  | [], l₂, s => rfl\n  | List.cons a l₁, l₂, s => by rw [list.cons_append, cons_append_stream, cons_append_stream, append_append_stream]\n#align append_append_stream append_append_stream\n\n",
  "any_def":
  "theorem any_def (p : α → Prop) (s : Stream' α) : Any p s = ∃ n, p (nth s n) :=\n  rfl\n#align any_def any_def\n\n",
  "all_def":
- "theorem all_def (p : α → Prop) (s : Stream' α) : All p s = ∀ n, p (nth s n) :=\n  rfl\n#align all_def all_def\n\n"}
+ "theorem all_def (p : α → Prop) (s : Stream' α) : All p s = ∀ n, p (nth s n) :=\n  rfl\n#align all_def all_def\n\n",
+ "Composition":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊛ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊛ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊛ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊛ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊛ » -/\n#print Composition /-\ntheorem Composition (g : Stream' (β → δ)) (f : Stream' (α → β)) (s : Stream' α) :\n    «expr ⊛ » («expr ⊛ » («expr ⊛ » (pure comp) g) f) s = «expr ⊛ » g («expr ⊛ » f s) :=\n  rfl\n#align composition Composition\n-/\n\n"}

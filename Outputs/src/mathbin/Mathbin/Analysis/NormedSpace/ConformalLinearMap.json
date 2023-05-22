@@ -1,16 +1,16 @@
 {"smul":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\ntheorem is_conformal_map.smul (hf : is_conformal_map f) {c : R} (hc : c ≠ 0) : is_conformal_map («expr • » c f) :=\n  by\n  rcases hf with ⟨c', hc', li, rfl⟩\n  exact ⟨c * c', mul_ne_zero hc hc', li, smul_smul _ _ _⟩\n#align is_conformal_map.smul is_conformal_map.smul\n\n",
- "ne_zero":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →L[ ] » -/\ntheorem ne_zero [nontrivial M'] {f' : «expr →L[ ] » M' R N} (hf' : is_conformal_map f') : f' ≠ 0 :=\n  by\n  rintro rfl\n  rcases exists_ne (0 : M') with ⟨a, ha⟩\n  exact ha (hf'.injective rfl)\n#align ne_zero ne_zero\n\n",
- "is_conformal_map_of_subsingleton":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →L[ ] » -/\n@[nontriviality]\ntheorem is_conformal_map_of_subsingleton [subsingleton M] (f' : «expr →L[ ] » M R N) : is_conformal_map f' :=\n  ⟨1, one_ne_zero, ⟨0, fun x => by simp [subsingleton.elim x 0]⟩, subsingleton.elim _ _⟩\n#align is_conformal_map_of_subsingleton is_conformal_map_of_subsingleton\n\n",
- "is_conformal_map_id":
- "/-\nCopyright (c) 2021 Yourong Zang. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Yourong Zang\n-/\ntheorem is_conformal_map_id : is_conformal_map (id R M) :=\n  ⟨1, one_ne_zero, id, by simp⟩\n#align is_conformal_map_id is_conformal_map_id\n\n",
- "is_conformal_map_const_smul":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\ntheorem is_conformal_map_const_smul (hc : c ≠ 0) : is_conformal_map («expr • » c (id R M)) :=\n  is_conformal_map_id.smul hc\n#align is_conformal_map_const_smul is_conformal_map_const_smul\n\n",
- "is_conformal_map":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₗᵢ[ ] » -/\nprotected theorem linear_isometry.is_conformal_map (f' : «expr →ₗᵢ[ ] » M R N) :\n    is_conformal_map f'.to_continuous_linear_map :=\n  ⟨1, one_ne_zero, f', (one_smul _ _).symm⟩\n#align linear_isometry.is_conformal_map linear_isometry.is_conformal_map\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n#print IsConformalMap.smul /-\ntheorem IsConformalMap.smul (hf : IsConformalMap f) {c : R} (hc : c ≠ 0) : IsConformalMap («expr • » c f) :=\n  by\n  rcases hf with ⟨c', hc', li, rfl⟩\n  exact ⟨c * c', mul_ne_zero hc hc', li, smul_smul _ _ _⟩\n#align is_conformal_map.smul IsConformalMap.smul\n-/\n\n",
+ "isConformalMap_of_subsingleton":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →L[ ] » -/\n#print isConformalMap_of_subsingleton /-\n@[nontriviality]\ntheorem isConformalMap_of_subsingleton [subsingleton M] (f' : «expr →L[ ] » M R N) : IsConformalMap f' :=\n  ⟨1, one_ne_zero, ⟨0, fun x => by simp [subsingleton.elim x 0]⟩, subsingleton.elim _ _⟩\n#align is_conformal_map_of_subsingleton isConformalMap_of_subsingleton\n-/\n\n",
+ "isConformalMap_id":
+ "#print isConformalMap_id /-\n/-\nCopyright (c) 2021 Yourong Zang. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Yourong Zang\n-/\ntheorem isConformalMap_id : IsConformalMap (id R M) :=\n  ⟨1, one_ne_zero, id, by simp⟩\n#align is_conformal_map_id isConformalMap_id\n-/\n\n",
+ "isConformalMap_const_smul":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n#print isConformalMap_const_smul /-\ntheorem isConformalMap_const_smul (hc : c ≠ 0) : IsConformalMap («expr • » c (id R M)) :=\n  isConformalMap_id.smul hc\n#align is_conformal_map_const_smul isConformalMap_const_smul\n-/\n\n",
+ "isConformalMap":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₗᵢ[ ] » -/\n#print LinearIsometry.isConformalMap /-\nprotected theorem LinearIsometry.isConformalMap (f' : «expr →ₗᵢ[ ] » M R N) :\n    IsConformalMap f'.to_continuous_linear_map :=\n  ⟨1, one_ne_zero, f', (one_smul _ _).symm⟩\n#align linear_isometry.is_conformal_map LinearIsometry.isConformalMap\n-/\n\n",
  "injective":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →L[ ] » -/\nprotected theorem injective {f : «expr →L[ ] » M' R N} (h : is_conformal_map f) : function.injective f :=\n  by\n  rcases h with ⟨c, hc, li, rfl⟩\n  exact (smul_right_injective _ hc).comp li.injective\n#align injective injective\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →L[ ] » -/\nprotected theorem injective {f : «expr →L[ ] » M' R N} (h : IsConformalMap f) : function.injective f :=\n  by\n  rcases h with ⟨c, hc, li, rfl⟩\n  exact (smul_right_injective _ hc).comp li.injective\n#align injective injective\n\n",
  "comp":
- "theorem comp (hg : is_conformal_map g) (hf : is_conformal_map f) : is_conformal_map (g.comp f) :=\n  by\n  rcases hf with ⟨cf, hcf, lif, rfl⟩\n  rcases hg with ⟨cg, hcg, lig, rfl⟩\n  refine' ⟨cg * cf, mul_ne_zero hcg hcf, lig.comp lif, _⟩\n  rw [smul_comp, comp_smul, mul_smul]\n  rfl\n#align comp comp\n\n"}
+ "theorem comp (hg : IsConformalMap g) (hf : IsConformalMap f) : IsConformalMap (g.comp f) :=\n  by\n  rcases hf with ⟨cf, hcf, lif, rfl⟩\n  rcases hg with ⟨cg, hcg, lig, rfl⟩\n  refine' ⟨cg * cf, mul_ne_zero hcg hcf, lig.comp lif, _⟩\n  rw [smul_comp, comp_smul, mul_smul]\n  rfl\n#align comp comp\n\n",
+ "NeZero":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →L[ ] » -/\n#print NeZero /-\ntheorem NeZero [Nontrivial M'] {f' : «expr →L[ ] » M' R N} (hf' : IsConformalMap f') : f' ≠ 0 :=\n  by\n  rintro rfl\n  rcases exists_ne (0 : M') with ⟨a, ha⟩\n  exact ha (hf'.injective rfl)\n#align ne_zero NeZero\n-/\n\n"}

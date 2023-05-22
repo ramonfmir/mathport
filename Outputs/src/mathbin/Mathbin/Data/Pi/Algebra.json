@@ -9,17 +9,17 @@
  "smul_apply":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n@[simp, to_additive]\ntheorem smul_apply [∀ i, SMul α <| f i] (s : α) (x : ∀ i, f i) (i : I) : («expr • » s x) i = «expr • » s (x i) :=\n  rfl\n#align smul_apply smul_apply\n\n",
  "prod_snd_fst":
- "@[simp]\ntheorem prod_snd_fst : pi.prod (prod.snd : α × β → β) (prod.fst : α × β → α) = prod.swap :=\n  rfl\n#align prod_snd_fst prod_snd_fst\n\n",
+ "@[simp]\ntheorem prod_snd_fst : Pi.prod (Prod.snd : α × β → β) (Prod.fst : α × β → α) = Prod.swap :=\n  rfl\n#align prod_snd_fst prod_snd_fst\n\n",
  "prod_fst_snd":
- "@[simp]\ntheorem prod_fst_snd : pi.prod (prod.fst : α × β → α) (prod.snd : α × β → β) = id :=\n  funext fun _ => prod.mk.eta\n#align prod_fst_snd prod_fst_snd\n\n",
+ "@[simp]\ntheorem prod_fst_snd : Pi.prod (Prod.fst : α × β → α) (Prod.snd : α × β → β) = id :=\n  funext fun _ => prod.mk.eta\n#align prod_fst_snd prod_fst_snd\n\n",
  "pow_def":
- "@[to_additive pi.smul_def, to_additive_reorder 5]\ntheorem pow_def [∀ i, Pow (f i) β] (x : ∀ i, f i) (b : β) : x ^ b = fun i => x i ^ b :=\n  rfl\n#align pow_def pow_def\n\n",
+ "@[to_additive Pi.smul_def, to_additive_reorder 5]\ntheorem pow_def [∀ i, Pow (f i) β] (x : ∀ i, f i) (b : β) : x ^ b = fun i => x i ^ b :=\n  rfl\n#align pow_def pow_def\n\n",
  "pow_comp":
  "@[to_additive smul_comp, to_additive_reorder 6]\ntheorem pow_comp [Pow γ α] (x : β → γ) (a : α) (y : I → β) : (x ^ a) ∘ y = x ∘ y ^ a :=\n  rfl\n#align pow_comp pow_comp\n\n",
  "pow_apply":
- "@[simp, to_additive pi.smul_apply, to_additive_reorder 5]\ntheorem pow_apply [∀ i, Pow (f i) β] (x : ∀ i, f i) (b : β) (i : I) : (x ^ b) i = x i ^ b :=\n  rfl\n#align pow_apply pow_apply\n\n",
+ "@[simp, to_additive Pi.smul_apply, to_additive_reorder 5]\ntheorem pow_apply [∀ i, Pow (f i) β] (x : ∀ i, f i) (b : β) (i : I) : (x ^ b) i = x i ^ b :=\n  rfl\n#align pow_apply pow_apply\n\n",
  "pi_mulSingle_eq":
- "#print Subsingleton.pi_mulSingle_eq /-\n@[to_additive Subsingleton.pi_single_eq]\ntheorem Subsingleton.pi_mulSingle_eq {α : Type _} [decidable_eq I] [subsingleton I] [One α] (i : I) (x : α) :\n    Pi.mulSingle i x = fun _ => x :=\n  funext fun j => by rw [subsingleton.elim j i, Pi.mulSingle_eq_same]\n#align subsingleton.pi_mul_single_eq Subsingleton.pi_mulSingle_eq\n-/\n\n",
+ "#print Subsingleton.pi_mulSingle_eq /-\n@[to_additive Subsingleton.pi_single_eq]\ntheorem Subsingleton.pi_mulSingle_eq {α : Type _} [DecidableEq I] [subsingleton I] [One α] (i : I) (x : α) :\n    Pi.mulSingle i x = fun _ => x :=\n  funext fun j => by rw [subsingleton.elim j i, Pi.mulSingle_eq_same]\n#align subsingleton.pi_mul_single_eq Subsingleton.pi_mulSingle_eq\n#align subsingleton.pi_single_eq Subsingleton.pi_single_eq\n-/\n\n",
  "one_def":
  "@[to_additive]\ntheorem one_def [∀ i, One <| f i] : (1 : ∀ i, f i) = fun i => 1 :=\n  rfl\n#align one_def one_def\n\n",
  "one_comp":
@@ -27,25 +27,25 @@
  "one_apply":
  "/-\nCopyright (c) 2020 Eric Wieser. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Simon Hudon, Patrick Massot, Eric Wieser\n-/\n-- The indexing type\n-- The families of types already equipped with instances\n@[simp, to_additive]\ntheorem one_apply [∀ i, One <| f i] : (1 : ∀ i, f i) i = 1 :=\n  rfl\n#align one_apply one_apply\n\n",
  "mul_single_op₂":
- "@[to_additive]\ntheorem mul_single_op₂ {g₁ g₂ : I → Type _} [∀ i, One (g₁ i)] [∀ i, One (g₂ i)] (op : ∀ i, g₁ i → g₂ i → f i)\n    (h : ∀ i, op i 1 1 = 1) (i : I) (x₁ : g₁ i) (x₂ : g₂ i) :\n    mulSingle i (op i x₁ x₂) = fun j => op j (mulSingle i x₁ j) (mulSingle i x₂ j) :=\n  eq.symm <| funext <| apply_mulSingle₂ op h i x₁ x₂\n#align mul_single_op₂ mul_single_op₂\n\n",
+ "@[to_additive]\ntheorem mul_single_op₂ {g₁ g₂ : I → Type _} [∀ i, One (g₁ i)] [∀ i, One (g₂ i)] (op : ∀ i, g₁ i → g₂ i → f i)\n    (h : ∀ i, op i 1 1 = 1) (i : I) (x₁ : g₁ i) (x₂ : g₂ i) :\n    mulSingle i (op i x₁ x₂) = fun j => op j (mulSingle i x₁ j) (mulSingle i x₂ j) :=\n  Eq.symm <| funext <| apply_mulSingle₂ op h i x₁ x₂\n#align mul_single_op₂ mul_single_op₂\n\n",
  "mul_single_op":
- "@[to_additive]\ntheorem mul_single_op {g : I → Type _} [∀ i, One (g i)] (op : ∀ i, f i → g i) (h : ∀ i, op i 1 = 1) (i : I) (x : f i) :\n    mulSingle i (op i x) = fun j => op j (mulSingle i x j) :=\n  eq.symm <| funext <| apply_mulSingle op h i x\n#align mul_single_op mul_single_op\n\n",
+ "@[to_additive]\ntheorem mul_single_op {g : I → Type _} [∀ i, One (g i)] (op : ∀ i, f i → g i) (h : ∀ i, op i 1 = 1) (i : I) (x : f i) :\n    mulSingle i (op i x) = fun j => op j (mulSingle i x j) :=\n  Eq.symm <| funext <| apply_mulSingle op h i x\n#align mul_single_op mul_single_op\n\n",
  "mul_single_one":
- "@[simp, to_additive]\ntheorem mul_single_one (i : I) : mulSingle i (1 : f i) = 1 :=\n  function.update_eq_self _ _\n#align mul_single_one mul_single_one\n\n",
+ "@[simp, to_additive]\ntheorem mul_single_one (i : I) : mulSingle i (1 : f i) = 1 :=\n  Function.update_eq_self _ _\n#align mul_single_one mul_single_one\n\n",
  "mul_single_injective":
- "@[to_additive]\ntheorem mul_single_injective (i : I) : function.injective (mulSingle i : f i → ∀ i, f i) :=\n  function.update_injective _ i\n#align mul_single_injective mul_single_injective\n\n",
+ "@[to_additive]\ntheorem mul_single_injective (i : I) : function.injective (mulSingle i : f i → ∀ i, f i) :=\n  Function.update_injective _ i\n#align mul_single_injective mul_single_injective\n\n",
  "mul_single_inj":
  "@[simp, to_additive]\ntheorem mul_single_inj (i : I) {x y : f i} : mulSingle i x = mulSingle i y ↔ x = y :=\n  (Pi.mulSingle_injective _ _).eq_iff\n#align mul_single_inj mul_single_inj\n\n",
  "mul_single_eq_same":
- "@[simp, to_additive]\ntheorem mul_single_eq_same (i : I) (x : f i) : mulSingle i x i = x :=\n  function.update_same i x _\n#align mul_single_eq_same mul_single_eq_same\n\n",
+ "@[simp, to_additive]\ntheorem mul_single_eq_same (i : I) (x : f i) : mulSingle i x i = x :=\n  Function.update_same i x _\n#align mul_single_eq_same mul_single_eq_same\n\n",
  "mul_single_eq_of_ne'":
  "/-- Abbreviation for `mul_single_eq_of_ne h.symm`, for ease of use by `simp`. -/\n@[simp, to_additive \"Abbreviation for `single_eq_of_ne h.symm`, for ease of\\nuse by `simp`.\"]\ntheorem mul_single_eq_of_ne' {i i' : I} (h : i ≠ i') (x : f i) : mulSingle i x i' = 1 :=\n  mulSingle_eq_of_ne h.symm x\n#align mul_single_eq_of_ne' mul_single_eq_of_ne'\n\n",
  "mul_single_eq_of_ne":
- "@[simp, to_additive]\ntheorem mul_single_eq_of_ne {i i' : I} (h : i' ≠ i) (x : f i) : mulSingle i x i' = 1 :=\n  function.update_noteq h x _\n#align mul_single_eq_of_ne mul_single_eq_of_ne\n\n",
+ "@[simp, to_additive]\ntheorem mul_single_eq_of_ne {i i' : I} (h : i' ≠ i) (x : f i) : mulSingle i x i' = 1 :=\n  Function.update_noteq h x _\n#align mul_single_eq_of_ne mul_single_eq_of_ne\n\n",
  "mul_single_comm":
  "/-- On non-dependent functions, `pi.mul_single` is symmetric in the two indices. -/\n@[to_additive \"On non-dependent functions, `pi.single` is symmetric in the two\\nindices.\"]\ntheorem mul_single_comm {β : Sort _} [One β] (i : I) (x : β) (i' : I) : mulSingle i x i' = mulSingle i' x i := by\n  simp [mul_single_apply, eq_comm]\n#align mul_single_comm mul_single_comm\n\n",
  "mul_single_apply":
- "/-- On non-dependent functions, `pi.mul_single` can be expressed as an `ite` -/\n@[to_additive \"On non-dependent functions, `pi.single` can be expressed as an `ite`\"]\ntheorem mul_single_apply {β : Sort _} [One β] (i : I) (x : β) (i' : I) : mulSingle i x i' = if i' = i then x else 1 :=\n  function.update_apply 1 i x i'\n#align mul_single_apply mul_single_apply\n\n",
+ "/-- On non-dependent functions, `pi.mul_single` can be expressed as an `ite` -/\n@[to_additive \"On non-dependent functions, `pi.single` can be expressed as an `ite`\"]\ntheorem mul_single_apply {β : Sort _} [One β] (i : I) (x : β) (i' : I) : mulSingle i x i' = if i' = i then x else 1 :=\n  Function.update_apply 1 i x i'\n#align mul_single_apply mul_single_apply\n\n",
  "mul_def":
  "@[to_additive]\ntheorem mul_def [∀ i, Mul <| f i] : x * y = fun i => x i * y i :=\n  rfl\n#align mul_def mul_def\n\n",
  "mul_comp":
@@ -61,25 +61,25 @@
  "injective_pi_map":
  "theorem injective_pi_map {F : ∀ i, f i → g i} (hF : ∀ i, injective (F i)) :\n    injective fun x : ∀ i, f i => fun i => F i (x i) := fun x y h => funext fun i => hF i <| (congr_fun h i : _)\n#align injective_pi_map injective_pi_map\n\n",
  "extend_one":
- "@[to_additive]\ntheorem extend_one [One γ] (f : α → β) : function.extend f (1 : α → γ) (1 : β → γ) = 1 :=\n  funext fun _ => by apply if_t_t _ _\n#align extend_one extend_one\n\n",
+ "@[to_additive]\ntheorem extend_one [One γ] (f : α → β) : Function.extend f (1 : α → γ) (1 : β → γ) = 1 :=\n  funext fun _ => by apply if_t_t _ _\n#align extend_one extend_one\n\n",
  "extend_mul":
- "@[to_additive]\ntheorem extend_mul [Mul γ] (f : α → β) (g₁ g₂ : α → γ) (e₁ e₂ : β → γ) :\n    function.extend f (g₁ * g₂) (e₁ * e₂) = function.extend f g₁ e₁ * function.extend f g₂ e₂ :=\n  funext fun _ => by convert (apply_dite₂ (· * ·) _ _ _ _ _).symm\n#align extend_mul extend_mul\n\n",
+ "@[to_additive]\ntheorem extend_mul [Mul γ] (f : α → β) (g₁ g₂ : α → γ) (e₁ e₂ : β → γ) :\n    Function.extend f (g₁ * g₂) (e₁ * e₂) = Function.extend f g₁ e₁ * Function.extend f g₂ e₂ :=\n  funext fun _ => by convert(apply_dite₂ (· * ·) _ _ _ _ _).symm\n#align extend_mul extend_mul\n\n",
  "extend_inv":
- "@[to_additive]\ntheorem extend_inv [Inv γ] (f : α → β) (g : α → γ) (e : β → γ) :\n    function.extend f g⁻¹ e⁻¹ = (function.extend f g e)⁻¹ :=\n  funext fun _ => by convert (apply_dite has_inv.inv _ _ _).symm\n#align extend_inv extend_inv\n\n",
+ "@[to_additive]\ntheorem extend_inv [Inv γ] (f : α → β) (g : α → γ) (e : β → γ) :\n    Function.extend f g⁻¹ e⁻¹ = (Function.extend f g e)⁻¹ :=\n  funext fun _ => by convert(apply_dite has_inv.inv _ _ _).symm\n#align extend_inv extend_inv\n\n",
  "extend_div":
- "@[to_additive]\ntheorem extend_div [Div γ] (f : α → β) (g₁ g₂ : α → γ) (e₁ e₂ : β → γ) :\n    function.extend f (g₁ / g₂) (e₁ / e₂) = function.extend f g₁ e₁ / function.extend f g₂ e₂ :=\n  funext fun _ => by convert (apply_dite₂ (· / ·) _ _ _ _ _).symm\n#align extend_div extend_div\n\n",
+ "@[to_additive]\ntheorem extend_div [Div γ] (f : α → β) (g₁ g₂ : α → γ) (e₁ e₂ : β → γ) :\n    Function.extend f (g₁ / g₂) (e₁ / e₂) = Function.extend f g₁ e₁ / Function.extend f g₂ e₂ :=\n  funext fun _ => by convert(apply_dite₂ (· / ·) _ _ _ _ _).symm\n#align extend_div extend_div\n\n",
  "elim_one_one":
- "@[simp, to_additive]\ntheorem elim_one_one [One γ] : sum.elim (1 : α → γ) (1 : β → γ) = 1 :=\n  sum.elim_const_const 1\n#align elim_one_one elim_one_one\n\n",
+ "@[simp, to_additive]\ntheorem elim_one_one [One γ] : Sum.elim (1 : α → γ) (1 : β → γ) = 1 :=\n  Sum.elim_const_const 1\n#align elim_one_one elim_one_one\n\n",
  "elim_one_mul_single":
- "@[simp, to_additive]\ntheorem elim_one_mul_single [decidable_eq α] [decidable_eq β] [One γ] (i : β) (c : γ) :\n    sum.elim (1 : α → γ) (Pi.mulSingle i c) = Pi.mulSingle (sum.inr i) c := by\n  simp only [Pi.mulSingle, sum.elim_update_right, elim_one_one]\n#align elim_one_mul_single elim_one_mul_single\n\n",
+ "@[simp, to_additive]\ntheorem elim_one_mul_single [DecidableEq α] [DecidableEq β] [One γ] (i : β) (c : γ) :\n    Sum.elim (1 : α → γ) (Pi.mulSingle i c) = Pi.mulSingle (Sum.inr i) c := by\n  simp only [Pi.mulSingle, Sum.elim_update_right, elim_one_one]\n#align elim_one_mul_single elim_one_mul_single\n\n",
  "elim_mul_single_one":
- "@[simp, to_additive]\ntheorem elim_mul_single_one [decidable_eq α] [decidable_eq β] [One γ] (i : α) (c : γ) :\n    sum.elim (Pi.mulSingle i c) (1 : β → γ) = Pi.mulSingle (sum.inl i) c := by\n  simp only [Pi.mulSingle, sum.elim_update_left, elim_one_one]\n#align elim_mul_single_one elim_mul_single_one\n\n",
+ "@[simp, to_additive]\ntheorem elim_mul_single_one [DecidableEq α] [DecidableEq β] [One γ] (i : α) (c : γ) :\n    Sum.elim (Pi.mulSingle i c) (1 : β → γ) = Pi.mulSingle (Sum.inl i) c := by\n  simp only [Pi.mulSingle, Sum.elim_update_left, elim_one_one]\n#align elim_mul_single_one elim_mul_single_one\n\n",
  "elim_mul_mul":
- "@[to_additive]\ntheorem elim_mul_mul [Mul γ] : sum.elim (a * a') (b * b') = sum.elim a b * sum.elim a' b' :=\n  by\n  ext x\n  cases x <;> rfl\n#align elim_mul_mul elim_mul_mul\n\n",
+ "@[to_additive]\ntheorem elim_mul_mul [Mul γ] : Sum.elim (a * a') (b * b') = Sum.elim a b * Sum.elim a' b' :=\n  by\n  ext x\n  cases x <;> rfl\n#align elim_mul_mul elim_mul_mul\n\n",
  "elim_inv_inv":
- "@[to_additive]\ntheorem elim_inv_inv [Inv γ] : sum.elim a⁻¹ b⁻¹ = (sum.elim a b)⁻¹ :=\n  (sum.comp_elim has_inv.inv a b).symm\n#align elim_inv_inv elim_inv_inv\n\n",
+ "@[to_additive]\ntheorem elim_inv_inv [Inv γ] : Sum.elim a⁻¹ b⁻¹ = (Sum.elim a b)⁻¹ :=\n  (Sum.comp_elim has_inv.inv a b).symm\n#align elim_inv_inv elim_inv_inv\n\n",
  "elim_div_div":
- "@[to_additive]\ntheorem elim_div_div [Div γ] : sum.elim (a / a') (b / b') = sum.elim a b / sum.elim a' b' :=\n  by\n  ext x\n  cases x <;> rfl\n#align elim_div_div elim_div_div\n\n",
+ "@[to_additive]\ntheorem elim_div_div [Div γ] : Sum.elim (a / a') (b / b') = Sum.elim a b / Sum.elim a' b' :=\n  by\n  ext x\n  cases x <;> rfl\n#align elim_div_div elim_div_div\n\n",
  "div_def":
  "@[to_additive]\ntheorem div_def [∀ i, Div <| f i] : x / y = fun i => x i / y i :=\n  rfl\n#align div_def div_def\n\n",
  "div_comp":
@@ -107,4 +107,4 @@
  "apply_mul_single₂":
  "@[to_additive apply_single₂]\ntheorem apply_mul_single₂ (f' : ∀ i, f i → g i → h i) (hf' : ∀ i, f' i 1 1 = 1) (i : I) (x : f i) (y : g i) (j : I) :\n    f' j (mulSingle i x j) (mulSingle i y j) = mulSingle i (f' i x y) j :=\n  by\n  by_cases h : j = i\n  · subst h\n    simp only [mul_single_eq_same]\n  · simp only [mul_single_eq_of_ne h, hf']\n#align apply_mul_single₂ apply_mul_single₂\n\n",
  "apply_mul_single":
- "@[to_additive]\ntheorem apply_mul_single (f' : ∀ i, f i → g i) (hf' : ∀ i, f' i 1 = 1) (i : I) (x : f i) (j : I) :\n    f' j (mulSingle i x j) = mulSingle i (f' i x) j := by\n  simpa only [pi.one_apply, hf', mul_single] using function.apply_update f' 1 i x j\n#align apply_mul_single apply_mul_single\n\n"}
+ "@[to_additive]\ntheorem apply_mul_single (f' : ∀ i, f i → g i) (hf' : ∀ i, f' i 1 = 1) (i : I) (x : f i) (j : I) :\n    f' j (mulSingle i x j) = mulSingle i (f' i x) j := by\n  simpa only [Pi.one_apply, hf', mul_single] using Function.apply_update f' 1 i x j\n#align apply_mul_single apply_mul_single\n\n"}

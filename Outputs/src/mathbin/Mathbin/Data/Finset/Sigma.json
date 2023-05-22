@@ -1,36 +1,36 @@
 {"sup_sigma":
- "theorem sup_sigma [SemilatticeSup β] [OrderBot β] : (s.sigma t).sup f = s.sup fun i => (t i).sup fun b => f ⟨i, b⟩ :=\n  by\n  simp only [le_antisymm_iff, finset.sup_le_iff, mem_sigma, and_imp, sigma.forall]\n  exact ⟨fun i a hi ha => (le_sup hi).trans' <| le_sup ha, fun i hi a ha => le_sup <| mem_sigma.2 ⟨hi, ha⟩⟩\n#align sup_sigma sup_sigma\n\n",
+ "theorem sup_sigma [SemilatticeSup β] [OrderBot β] : (s.sigma t).sup f = s.sup fun i => (t i).sup fun b => f ⟨i, b⟩ :=\n  by\n  simp only [le_antisymm_iff, Finset.sup_le_iff, mem_sigma, and_imp, Sigma.forall]\n  exact ⟨fun i a hi ha => (le_sup hi).trans' <| le_sup ha, fun i hi a ha => le_sup <| mem_sigma.2 ⟨hi, ha⟩⟩\n#align sup_sigma sup_sigma\n\n",
  "sigma_nonempty":
  "@[simp]\ntheorem sigma_nonempty : (s.sigma t).nonempty ↔ ∃ i ∈ s, (t i).nonempty := by simp [Finset.Nonempty]\n#align sigma_nonempty sigma_nonempty\n\n",
  "sigma_mono":
  "@[mono]\ntheorem sigma_mono (hs : s₁ ⊆ s₂) (ht : ∀ i, t₁ i ⊆ t₂ i) : s₁.sigma t₁ ⊆ s₂.sigma t₂ := fun ⟨i, a⟩ h =>\n  let ⟨hi, ha⟩ := mem_sigma.1 h\n  mem_sigma.2 ⟨hs hi, ht i ha⟩\n#align sigma_mono sigma_mono\n\n",
  "sigma_lift_nonempty":
- "theorem sigma_lift_nonempty : (sigma_lift f a b).nonempty ↔ ∃ h : a.1 = b.1, (f (h.rec a.2) b.2).nonempty :=\n  by\n  simp_rw [nonempty_iff_ne_empty]\n  convert dite_ne_right_iff\n  ext h\n  simp_rw [← nonempty_iff_ne_empty]\n  exact map_nonempty.symm\n#align sigma_lift_nonempty sigma_lift_nonempty\n\n",
+ "theorem sigma_lift_nonempty : (sigmaLift f a b).nonempty ↔ ∃ h : a.1 = b.1, (f (h.rec a.2) b.2).nonempty :=\n  by\n  simp_rw [nonempty_iff_ne_empty]\n  convert dite_ne_right_iff\n  ext h\n  simp_rw [← nonempty_iff_ne_empty]\n  exact map_nonempty.symm\n#align sigma_lift_nonempty sigma_lift_nonempty\n\n",
  "sigma_lift_mono":
- "theorem sigma_lift_mono (h : ∀ ⦃i⦄ ⦃a : α i⦄ ⦃b : β i⦄, f a b ⊆ g a b) (a : Σi, α i) (b : Σi, β i) :\n    sigma_lift f a b ⊆ sigma_lift g a b := by\n  rintro x hx\n  rw [mem_sigma_lift] at hx⊢\n  obtain ⟨ha, hb, hx⟩ := hx\n  exact ⟨ha, hb, h hx⟩\n#align sigma_lift_mono sigma_lift_mono\n\n",
+ "theorem sigma_lift_mono (h : ∀ ⦃i⦄ ⦃a : α i⦄ ⦃b : β i⦄, f a b ⊆ g a b) (a : Σi, α i) (b : Σi, β i) :\n    sigmaLift f a b ⊆ sigmaLift g a b := by\n  rintro x hx\n  rw [mem_sigma_lift] at hx⊢\n  obtain ⟨ha, hb, hx⟩ := hx\n  exact ⟨ha, hb, h hx⟩\n#align sigma_lift_mono sigma_lift_mono\n\n",
  "sigma_lift_eq_empty":
- "theorem sigma_lift_eq_empty : sigma_lift f a b = ∅ ↔ ∀ h : a.1 = b.1, f (h.rec a.2) b.2 = ∅ :=\n  by\n  convert dite_eq_right_iff\n  exact forall_congr fun h => propext map_eq_empty.symm\n#align sigma_lift_eq_empty sigma_lift_eq_empty\n\n",
+ "theorem sigma_lift_eq_empty : sigmaLift f a b = ∅ ↔ ∀ h : a.1 = b.1, f (h.rec a.2) b.2 = ∅ :=\n  by\n  convert dite_eq_right_iff\n  exact forall_congr fun h => propext map_eq_empty.symm\n#align sigma_lift_eq_empty sigma_lift_eq_empty\n\n",
  "sigma_eq_empty":
  "@[simp]\ntheorem sigma_eq_empty : s.sigma t = ∅ ↔ ∀ i ∈ s, t i = ∅ := by\n  simp only [← not_nonempty_iff_eq_empty, sigma_nonempty, not_exists]\n#align sigma_eq_empty sigma_eq_empty\n\n",
  "sigma_eq_bUnion":
- "theorem sigma_eq_bUnion [decidable_eq (Σi, α i)] (s : Finset ι) (t : ∀ i, Finset (α i)) :\n    s.sigma t = s.bUnion fun i => (t i).map <| Embedding.sigmaMk i :=\n  by\n  ext ⟨x, y⟩\n  simp [and_left_comm]\n#align sigma_eq_bUnion sigma_eq_bUnion\n\n",
+ "theorem sigma_eq_bUnion [DecidableEq (Σi, α i)] (s : Finset ι) (t : ∀ i, Finset (α i)) :\n    s.sigma t = s.bUnion fun i => (t i).map <| Embedding.sigmaMk i :=\n  by\n  ext ⟨x, y⟩\n  simp [and_left_comm]\n#align sigma_eq_bUnion sigma_eq_bUnion\n\n",
  "pairwise_disjoint_map_sigma_mk":
- "theorem pairwise_disjoint_map_sigma_mk : (s : set ι).pairwise_disjoint fun i => (t i).map (Embedding.sigmaMk i) :=\n  by\n  intro i hi j hj hij\n  rw [function.on_fun, disjoint_left]\n  simp_rw [mem_map, function.embedding.sigma_mk_apply]\n  rintro _ ⟨y, hy, rfl⟩ ⟨z, hz, hz'⟩\n  exact hij (congr_arg sigma.fst hz'.symm)\n#align pairwise_disjoint_map_sigma_mk pairwise_disjoint_map_sigma_mk\n\n",
+ "theorem pairwise_disjoint_map_sigma_mk : (s : Set ι).pairwise_disjoint fun i => (t i).map (Embedding.sigmaMk i) :=\n  by\n  intro i hi j hj hij\n  rw [function.on_fun, disjoint_left]\n  simp_rw [mem_map, Function.Embedding.sigmaMk_apply]\n  rintro _ ⟨y, hy, rfl⟩ ⟨z, hz, hz'⟩\n  exact hij (congr_arg Sigma.fst hz'.symm)\n#align pairwise_disjoint_map_sigma_mk pairwise_disjoint_map_sigma_mk\n\n",
  "not_mem_sigma_lift_of_ne_right":
- "theorem not_mem_sigma_lift_of_ne_right (f : ∀ ⦃i⦄, α i → β i → Finset (γ i)) {a : sigma α} (b : sigma β) {x : sigma γ}\n    (h : b.1 ≠ x.1) : x ∉ sigma_lift f a b := by\n  rw [mem_sigma_lift]\n  exact fun H => h H.snd.fst\n#align not_mem_sigma_lift_of_ne_right not_mem_sigma_lift_of_ne_right\n\n",
+ "theorem not_mem_sigma_lift_of_ne_right (f : ∀ ⦃i⦄, α i → β i → Finset (γ i)) {a : Sigma α} (b : Sigma β) {x : Sigma γ}\n    (h : b.1 ≠ x.1) : x ∉ sigmaLift f a b := by\n  rw [mem_sigma_lift]\n  exact fun H => h H.snd.fst\n#align not_mem_sigma_lift_of_ne_right not_mem_sigma_lift_of_ne_right\n\n",
  "not_mem_sigma_lift_of_ne_left":
- "theorem not_mem_sigma_lift_of_ne_left (f : ∀ ⦃i⦄, α i → β i → Finset (γ i)) (a : sigma α) (b : sigma β) (x : sigma γ)\n    (h : a.1 ≠ x.1) : x ∉ sigma_lift f a b := by\n  rw [mem_sigma_lift]\n  exact fun H => h H.fst\n#align not_mem_sigma_lift_of_ne_left not_mem_sigma_lift_of_ne_left\n\n",
+ "theorem not_mem_sigma_lift_of_ne_left (f : ∀ ⦃i⦄, α i → β i → Finset (γ i)) (a : Sigma α) (b : Sigma β) (x : Sigma γ)\n    (h : a.1 ≠ x.1) : x ∉ sigmaLift f a b := by\n  rw [mem_sigma_lift]\n  exact fun H => h H.fst\n#align not_mem_sigma_lift_of_ne_left not_mem_sigma_lift_of_ne_left\n\n",
  "mk_mem_sigma_lift":
- "theorem mk_mem_sigma_lift (f : ∀ ⦃i⦄, α i → β i → Finset (γ i)) (i : ι) (a : α i) (b : β i) (x : γ i) :\n    (⟨i, x⟩ : sigma γ) ∈ sigma_lift f ⟨i, a⟩ ⟨i, b⟩ ↔ x ∈ f a b :=\n  by\n  rw [sigma_lift, dif_pos rfl, mem_map]\n  refine' ⟨_, fun hx => ⟨_, hx, rfl⟩⟩\n  rintro ⟨x, hx, _, rfl⟩\n  exact hx\n#align mk_mem_sigma_lift mk_mem_sigma_lift\n\n",
+ "theorem mk_mem_sigma_lift (f : ∀ ⦃i⦄, α i → β i → Finset (γ i)) (i : ι) (a : α i) (b : β i) (x : γ i) :\n    (⟨i, x⟩ : Sigma γ) ∈ sigmaLift f ⟨i, a⟩ ⟨i, b⟩ ↔ x ∈ f a b :=\n  by\n  rw [sigma_lift, dif_pos rfl, mem_map]\n  refine' ⟨_, fun hx => ⟨_, hx, rfl⟩⟩\n  rintro ⟨x, hx, _, rfl⟩\n  exact hx\n#align mk_mem_sigma_lift mk_mem_sigma_lift\n\n",
  "mem_sigma_lift":
- "theorem mem_sigma_lift (f : ∀ ⦃i⦄, α i → β i → Finset (γ i)) (a : sigma α) (b : sigma β) (x : sigma γ) :\n    x ∈ sigma_lift f a b ↔ ∃ (ha : a.1 = x.1)(hb : b.1 = x.1), x.2 ∈ f (ha.rec a.2) (hb.rec b.2) :=\n  by\n  obtain ⟨⟨i, a⟩, j, b⟩ := a, b\n  obtain rfl | h := decidable.eq_or_ne i j\n  · constructor\n    · simp_rw [sigma_lift, dif_pos rfl, mem_map, embedding.sigma_mk_apply]\n      rintro ⟨x, hx, rfl⟩\n      exact ⟨rfl, rfl, hx⟩\n    · rintro ⟨⟨⟩, ⟨⟩, hx⟩\n      rw [sigma_lift, dif_pos rfl, mem_map]\n      exact ⟨_, hx, by simp [sigma.ext_iff]⟩\n  · rw [sigma_lift, dif_neg h]\n    refine' iff_of_false (not_mem_empty _) _\n    rintro ⟨⟨⟩, ⟨⟩, _⟩\n    exact h rfl\n#align mem_sigma_lift mem_sigma_lift\n\n",
+ "theorem mem_sigma_lift (f : ∀ ⦃i⦄, α i → β i → Finset (γ i)) (a : Sigma α) (b : Sigma β) (x : Sigma γ) :\n    x ∈ sigmaLift f a b ↔ ∃ (ha : a.1 = x.1)(hb : b.1 = x.1), x.2 ∈ f (ha.rec a.2) (hb.rec b.2) :=\n  by\n  obtain ⟨⟨i, a⟩, j, b⟩ := a, b\n  obtain rfl | h := Decidable.eq_or_ne i j\n  · constructor\n    · simp_rw [sigma_lift, dif_pos rfl, mem_map, embedding.sigma_mk_apply]\n      rintro ⟨x, hx, rfl⟩\n      exact ⟨rfl, rfl, hx⟩\n    · rintro ⟨⟨⟩, ⟨⟩, hx⟩\n      rw [sigma_lift, dif_pos rfl, mem_map]\n      exact ⟨_, hx, by simp [Sigma.ext_iff]⟩\n  · rw [sigma_lift, dif_neg h]\n    refine' iff_of_false (not_mem_empty _) _\n    rintro ⟨⟨⟩, ⟨⟩, _⟩\n    exact h rfl\n#align mem_sigma_lift mem_sigma_lift\n\n",
  "mem_sigma":
  "/-\nCopyright (c) 2017 Mario Carneiro. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Mario Carneiro, Yaël Dillies, Bhavik Mehta\n-/\n@[simp]\ntheorem mem_sigma {a : Σi, α i} : a ∈ s.sigma t ↔ a.1 ∈ s ∧ a.2 ∈ t a.1 :=\n  mem_sigma\n#align mem_sigma mem_sigma\n\n",
  "inf_sigma":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵈ» -/\ntheorem inf_sigma [SemilatticeInf β] [OrderTop β] : (s.sigma t).inf f = s.inf fun i => (t i).inf fun b => f ⟨i, b⟩ :=\n  @sup_sigma _ _ («expr ᵒᵈ» β) _ _ _ _ _\n#align inf_sigma inf_sigma\n\n",
  "disj_Union_map_sigma_mk":
- "@[simp]\ntheorem disj_Union_map_sigma_mk :\n    s.disj_Union (fun i => (t i).map (Embedding.sigmaMk i)) pairwise_disjoint_map_sigma_mk = s.sigma t :=\n  rfl\n#align disj_Union_map_sigma_mk disj_Union_map_sigma_mk\n\n",
+ "@[simp]\ntheorem disj_Union_map_sigma_mk :\n    s.disj_Union (fun i => (t i).map (Embedding.sigmaMk i)) pairwiseDisjoint_map_sigmaMk = s.sigma t :=\n  rfl\n#align disj_Union_map_sigma_mk disj_Union_map_sigma_mk\n\n",
  "coe_sigma":
- "@[simp, norm_cast]\ntheorem coe_sigma (s : Finset ι) (t : ∀ i, Finset (α i)) :\n    (s.sigma t : set (Σi, α i)) = (s : set ι).sigma fun i => t i :=\n  Set.ext fun _ => mem_sigma\n#align coe_sigma coe_sigma\n\n",
+ "@[simp, norm_cast]\ntheorem coe_sigma (s : Finset ι) (t : ∀ i, Finset (α i)) :\n    (s.sigma t : Set (Σi, α i)) = (s : Set ι).sigma fun i => t i :=\n  Set.ext fun _ => mem_sigma\n#align coe_sigma coe_sigma\n\n",
  "card_sigma_lift":
- "theorem card_sigma_lift : (sigma_lift f a b).card = dite (a.1 = b.1) (fun h => (f (h.rec a.2) b.2).card) fun _ => 0 :=\n  by\n  convert apply_dite _ _ _ _\n  ext h\n  exact (card_map _).symm\n#align card_sigma_lift card_sigma_lift\n\n"}
+ "theorem card_sigma_lift : (sigmaLift f a b).card = dite (a.1 = b.1) (fun h => (f (h.rec a.2) b.2).card) fun _ => 0 :=\n  by\n  convert apply_dite _ _ _ _\n  ext h\n  exact (card_map _).symm\n#align card_sigma_lift card_sigma_lift\n\n"}

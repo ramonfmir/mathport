@@ -11,35 +11,35 @@
  "one_minus_lt_one":
  "theorem one_minus_lt_one (x : Ioo (0 : β) 1) : 1 - (x : β) < 1 := by simpa using x.2.1\n#align one_minus_lt_one one_minus_lt_one\n\n",
  "nonneg":
- "/-- like `coe_nonneg`, but with the inequality in `Ico (0:α) 1`. -/\ntheorem nonneg [nontrivial α] {t : Ico (0 : α) 1} : 0 ≤ t :=\n  t.2.1\n#align nonneg nonneg\n\n",
+ "/-- like `coe_nonneg`, but with the inequality in `Ico (0:α) 1`. -/\ntheorem nonneg [Nontrivial α] {t : Ico (0 : α) 1} : 0 ≤ t :=\n  t.2.1\n#align nonneg nonneg\n\n",
  "mul_le_right":
  "theorem mul_le_right {x y : Icc (0 : α) 1} : x * y ≤ y :=\n  (mul_le_mul_of_nonneg_right x.2.2 y.2.1).trans_eq (one_mul y)\n#align mul_le_right mul_le_right\n\n",
  "mul_le_left":
  "theorem mul_le_left {x y : Icc (0 : α) 1} : x * y ≤ x :=\n  (mul_le_mul_of_nonneg_left y.2.2 x.2.1).trans_eq (mul_one x)\n#align mul_le_left mul_le_left\n\n",
  "mk_zero":
- "@[simp]\ntheorem mk_zero [nontrivial α] (h : (0 : α) ∈ Ico (0 : α) 1) : (⟨0, h⟩ : Ico (0 : α) 1) = 0 :=\n  rfl\n#align mk_zero mk_zero\n\n",
+ "@[simp]\ntheorem mk_zero [Nontrivial α] (h : (0 : α) ∈ Ico (0 : α) 1) : (⟨0, h⟩ : Ico (0 : α) 1) = 0 :=\n  rfl\n#align mk_zero mk_zero\n\n",
  "mk_one":
- "@[simp]\ntheorem mk_one [nontrivial α] (h : (1 : α) ∈ Ioc (0 : α) 1) : (⟨1, h⟩ : Ioc (0 : α) 1) = 1 :=\n  rfl\n#align mk_one mk_one\n\n",
+ "@[simp]\ntheorem mk_one [Nontrivial α] (h : (1 : α) ∈ Ioc (0 : α) 1) : (⟨1, h⟩ : Ioc (0 : α) 1) = 1 :=\n  rfl\n#align mk_one mk_one\n\n",
  "mem_iff_one_sub_mem":
  "theorem mem_iff_one_sub_mem {t : β} : t ∈ Ioo (0 : β) 1 ↔ 1 - t ∈ Ioo (0 : β) 1 :=\n  ⟨one_sub_mem, fun h => sub_sub_cancel 1 t ▸ one_sub_mem h⟩\n#align mem_iff_one_sub_mem mem_iff_one_sub_mem\n\n",
  "lt_one":
  "theorem lt_one (x : Ioo (0 : α) 1) : (x : α) < 1 :=\n  x.2.2\n#align lt_one lt_one\n\n",
  "le_one":
- "/-- like `coe_le_one`, but with the inequality in `Ioc (0:α) 1`. -/\ntheorem le_one [nontrivial α] {t : Ioc (0 : α) 1} : t ≤ 1 :=\n  t.2.2\n#align le_one le_one\n\n",
+ "/-- like `coe_le_one`, but with the inequality in `Ioc (0:α) 1`. -/\ntheorem le_one [Nontrivial α] {t : Ioc (0 : α) 1} : t ≤ 1 :=\n  t.2.2\n#align le_one le_one\n\n",
  "coe_zero":
- "@[simp, norm_cast]\ntheorem coe_zero [nontrivial α] : ↑(0 : Ico (0 : α) 1) = (0 : α) :=\n  rfl\n#align coe_zero coe_zero\n\n",
+ "@[simp, norm_cast]\ntheorem coe_zero [Nontrivial α] : ↑(0 : Ico (0 : α) 1) = (0 : α) :=\n  rfl\n#align coe_zero coe_zero\n\n",
  "coe_pow":
  "@[simp, norm_cast]\ntheorem coe_pow (x : Ioc (0 : α) 1) (n : ℕ) : ↑(x ^ n) = (x ^ n : α) :=\n  rfl\n#align coe_pow coe_pow\n\n",
  "coe_pos":
  "theorem coe_pos (x : Ioc (0 : α) 1) : 0 < (x : α) :=\n  x.2.1\n#align coe_pos coe_pos\n\n",
  "coe_one":
- "@[simp, norm_cast]\ntheorem coe_one [nontrivial α] : ↑(1 : Ioc (0 : α) 1) = (1 : α) :=\n  rfl\n#align coe_one coe_one\n\n",
+ "@[simp, norm_cast]\ntheorem coe_one [Nontrivial α] : ↑(1 : Ioc (0 : α) 1) = (1 : α) :=\n  rfl\n#align coe_one coe_one\n\n",
  "coe_nonneg":
  "theorem coe_nonneg (x : Ico (0 : α) 1) : 0 ≤ (x : α) :=\n  x.2.1\n#align coe_nonneg coe_nonneg\n\n",
  "coe_ne_zero":
- "theorem coe_ne_zero [nontrivial α] {x : Ico (0 : α) 1} : (x : α) ≠ 0 ↔ x ≠ 0 :=\n  not_iff_not.mpr coe_eq_zero\n#align coe_ne_zero coe_ne_zero\n\n",
+ "theorem coe_ne_zero [Nontrivial α] {x : Ico (0 : α) 1} : (x : α) ≠ 0 ↔ x ≠ 0 :=\n  not_iff_not.mpr coe_eq_zero\n#align coe_ne_zero coe_ne_zero\n\n",
  "coe_ne_one":
- "theorem coe_ne_one [nontrivial α] {x : Ioc (0 : α) 1} : (x : α) ≠ 1 ↔ x ≠ 1 :=\n  not_iff_not.mpr coe_eq_one\n#align coe_ne_one coe_ne_one\n\n",
+ "theorem coe_ne_one [Nontrivial α] {x : Ioc (0 : α) 1} : (x : α) ≠ 1 ↔ x ≠ 1 :=\n  not_iff_not.mpr coe_eq_one\n#align coe_ne_one coe_ne_one\n\n",
  "coe_mul":
  "@[simp, norm_cast]\ntheorem coe_mul (x y : Ioo (0 : α) 1) : ↑(x * y) = (x * y : α) :=\n  rfl\n#align coe_mul coe_mul\n\n",
  "coe_lt_one":
@@ -47,6 +47,6 @@
  "coe_le_one":
  "theorem coe_le_one (x : Ioc (0 : α) 1) : (x : α) ≤ 1 :=\n  x.2.2\n#align coe_le_one coe_le_one\n\n",
  "coe_eq_zero":
- "@[simp, norm_cast]\ntheorem coe_eq_zero [nontrivial α] {x : Ico (0 : α) 1} : (x : α) = 0 ↔ x = 0 :=\n  by\n  symm\n  exact subtype.ext_iff\n#align coe_eq_zero coe_eq_zero\n\n",
+ "@[simp, norm_cast]\ntheorem coe_eq_zero [Nontrivial α] {x : Ico (0 : α) 1} : (x : α) = 0 ↔ x = 0 :=\n  by\n  symm\n  exact Subtype.ext_iff\n#align coe_eq_zero coe_eq_zero\n\n",
  "coe_eq_one":
- "@[simp, norm_cast]\ntheorem coe_eq_one [nontrivial α] {x : Ioc (0 : α) 1} : (x : α) = 1 ↔ x = 1 :=\n  by\n  symm\n  exact subtype.ext_iff\n#align coe_eq_one coe_eq_one\n\n"}
+ "@[simp, norm_cast]\ntheorem coe_eq_one [Nontrivial α] {x : Ioc (0 : α) 1} : (x : α) = 1 ↔ x = 1 :=\n  by\n  symm\n  exact Subtype.ext_iff\n#align coe_eq_one coe_eq_one\n\n"}

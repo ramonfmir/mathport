@@ -1,252 +1,252 @@
 {"val_unique":
- "theorem results.val_unique {s : computation α} {a b m n} (h1 : results s a m) (h2 : results s b n) : a = b :=\n  mem_unique h1.mem h2.mem\n#align results.val_unique results.val_unique\n\n",
+ "theorem results.val_unique {s : Computation α} {a b m n} (h1 : Results s a m) (h2 : Results s b n) : a = b :=\n  mem_unique h1.mem h2.mem\n#align results.val_unique results.val_unique\n\n",
  "trans":
- "theorem lift_rel.trans (R : α → α → Prop) (H : transitive R) : transitive (lift_rel R) :=\n  fun s1 s2 s3 ⟨l1, r1⟩ ⟨l2, r2⟩ =>\n  ⟨fun a a1 =>\n    let ⟨b, b2, ab⟩ := l1 a1\n    let ⟨c, c3, bc⟩ := l2 b2\n    ⟨c, c3, H ab bc⟩,\n    fun c c3 =>\n    let ⟨b, b2, bc⟩ := r2 c3\n    let ⟨a, a1, ab⟩ := r1 b2\n    ⟨a, a1, H ab bc⟩⟩\n#align lift_rel.trans lift_rel.trans\n\n",
+ "theorem lift_rel.trans (R : α → α → Prop) (H : transitive R) : transitive (LiftRel R) :=\n  fun s1 s2 s3 ⟨l1, r1⟩ ⟨l2, r2⟩ =>\n  ⟨fun a a1 =>\n    let ⟨b, b2, ab⟩ := l1 a1\n    let ⟨c, c3, bc⟩ := l2 b2\n    ⟨c, c3, H ab bc⟩,\n    fun c c3 =>\n    let ⟨b, b2, bc⟩ := r2 c3\n    let ⟨a, a1, ab⟩ := r1 b2\n    ⟨a, a1, H ab bc⟩⟩\n#align lift_rel.trans lift_rel.trans\n\n",
  "think_mem":
- "theorem think_mem {s : computation α} {a} : a ∈ s → a ∈ think s\n  | ⟨n, h⟩ => ⟨n + 1, h⟩\n#align think_mem think_mem\n\n",
+ "theorem think_mem {s : Computation α} {a} : a ∈ s → a ∈ think s\n  | ⟨n, h⟩ => ⟨n + 1, h⟩\n#align think_mem think_mem\n\n",
  "think_equiv":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ~ » -/\ntheorem think_equiv (s : computation α) : «expr ~ » (think s) s := fun a => ⟨of_think_mem, think_mem⟩\n#align think_equiv think_equiv\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ~ » -/\ntheorem think_equiv (s : Computation α) : «expr ~ » (think s) s := fun a => ⟨of_think_mem, think_mem⟩\n#align think_equiv think_equiv\n\n",
  "think_empty":
  "theorem think_empty : empty α = think (empty α) :=\n  destruct_eq_think destruct_empty\n#align think_empty think_empty\n\n",
  "think_bind":
- "@[simp]\ntheorem think_bind (c) (f : α → computation β) : bind (think c) f = think (bind c f) :=\n  destruct_eq_think <| by simp [bind, bind.F]\n#align think_bind think_bind\n\n",
+ "@[simp]\ntheorem think_bind (c) (f : α → Computation β) : bind (think c) f = think (bind c f) :=\n  destruct_eq_think <| by simp [bind, bind.F]\n#align think_bind think_bind\n\n",
  "thinkN_mem":
- "theorem thinkN_mem {s : computation α} {a} : ∀ n, a ∈ thinkN s n ↔ a ∈ s\n  | 0 => iff.rfl\n  | n + 1 => iff.trans ⟨of_think_mem, think_mem⟩ (thinkN_mem n)\n#align thinkN_mem thinkN_mem\n\n",
+ "theorem thinkN_mem {s : Computation α} {a} : ∀ n, a ∈ thinkN s n ↔ a ∈ s\n  | 0 => iff.rfl\n  | n + 1 => iff.trans ⟨of_think_mem, think_mem⟩ (thinkN_mem n)\n#align thinkN_mem thinkN_mem\n\n",
  "thinkN_equiv":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ~ » -/\ntheorem thinkN_equiv (s : computation α) (n) : «expr ~ » (thinkN s n) s := fun a => thinkN_mem n\n#align thinkN_equiv thinkN_equiv\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ~ » -/\ntheorem thinkN_equiv (s : Computation α) (n) : «expr ~ » (thinkN s n) s := fun a => thinkN_mem n\n#align thinkN_equiv thinkN_equiv\n\n",
  "terminates_of_mem":
- "theorem terminates_of_mem {s : computation α} {a : α} (h : a ∈ s) : terminates s :=\n  ⟨⟨a, h⟩⟩\n#align terminates_of_mem terminates_of_mem\n\n",
+ "theorem terminates_of_mem {s : Computation α} {a : α} (h : a ∈ s) : Terminates s :=\n  ⟨⟨a, h⟩⟩\n#align terminates_of_mem terminates_of_mem\n\n",
  "terminates_of_lift_rel":
- "theorem terminates_of_lift_rel {R : α → β → Prop} {s t} : lift_rel R s t → (terminates s ↔ terminates t)\n  | ⟨l, r⟩ =>\n    ⟨fun ⟨⟨a, as⟩⟩ =>\n      let ⟨b, bt, ab⟩ := l as\n      ⟨⟨b, bt⟩⟩,\n      fun ⟨⟨b, bt⟩⟩ =>\n      let ⟨a, as, ab⟩ := r bt\n      ⟨⟨a, as⟩⟩⟩\n#align terminates_of_lift_rel terminates_of_lift_rel\n\n",
+ "theorem terminates_of_lift_rel {R : α → β → Prop} {s t} : LiftRel R s t → (Terminates s ↔ Terminates t)\n  | ⟨l, r⟩ =>\n    ⟨fun ⟨⟨a, as⟩⟩ =>\n      let ⟨b, bt, ab⟩ := l as\n      ⟨⟨b, bt⟩⟩,\n      fun ⟨⟨b, bt⟩⟩ =>\n      let ⟨a, as, ab⟩ := r bt\n      ⟨⟨a, as⟩⟩⟩\n#align terminates_of_lift_rel terminates_of_lift_rel\n\n",
  "terminates_map_iff":
- "theorem terminates_map_iff (f : α → β) (s : computation α) : terminates (map f s) ↔ terminates s :=\n  ⟨fun ⟨⟨a, h⟩⟩ =>\n    let ⟨b, h1, _⟩ := exists_of_mem_map h\n    ⟨⟨_, h1⟩⟩,\n    @computation.terminates_map _ _ _ _⟩\n#align terminates_map_iff terminates_map_iff\n\n",
+ "theorem terminates_map_iff (f : α → β) (s : Computation α) : Terminates (map f s) ↔ Terminates s :=\n  ⟨fun ⟨⟨a, h⟩⟩ =>\n    let ⟨b, h1, _⟩ := exists_of_mem_map h\n    ⟨⟨_, h1⟩⟩,\n    @Computation.terminates_map _ _ _ _⟩\n#align terminates_map_iff terminates_map_iff\n\n",
  "terminates_iff":
- "theorem terminates_iff (s : computation α) : terminates s ↔ ∃ a, a ∈ s :=\n  ⟨fun h => h.1, terminates.mk⟩\n#align terminates_iff terminates_iff\n\n",
+ "theorem terminates_iff (s : Computation α) : Terminates s ↔ ∃ a, a ∈ s :=\n  ⟨fun h => h.1, terminates.mk⟩\n#align terminates_iff terminates_iff\n\n",
  "terminates_def":
- "theorem terminates_def (s : computation α) : terminates s ↔ ∃ n, (s.1 n).is_some :=\n  ⟨fun ⟨⟨a, n, h⟩⟩ =>\n    ⟨n, by\n      dsimp [Stream'.nth] at h\n      rw [← h]\n      exact rfl⟩,\n    fun ⟨n, h⟩ => ⟨⟨option.get h, n, (Option.eq_some_of_isSome h).symm⟩⟩⟩\n#align terminates_def terminates_def\n\n",
+ "theorem terminates_def (s : Computation α) : Terminates s ↔ ∃ n, (s.1 n).is_some :=\n  ⟨fun ⟨⟨a, n, h⟩⟩ =>\n    ⟨n, by\n      dsimp [Stream'.nth] at h\n      rw [← h]\n      exact rfl⟩,\n    fun ⟨n, h⟩ => ⟨⟨option.get h, n, (Option.eq_some_of_isSome h).symm⟩⟩⟩\n#align terminates_def terminates_def\n\n",
  "terminates_congr":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ~ » -/\ntheorem terminates_congr {c₁ c₂ : computation α} (h : «expr ~ » c₁ c₂) : terminates c₁ ↔ terminates c₂ := by\n  simp only [terminates_iff, exists_congr h]\n#align terminates_congr terminates_congr\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ~ » -/\ntheorem terminates_congr {c₁ c₂ : Computation α} (h : «expr ~ » c₁ c₂) : Terminates c₁ ↔ Terminates c₂ := by\n  simp only [terminates_iff, exists_congr h]\n#align terminates_congr terminates_congr\n\n",
  "terminates":
- "theorem results.terminates {s : computation α} {a n} (h : results s a n) : terminates s :=\n  terminates_of_mem h.mem\n#align results.terminates results.terminates\n\n",
+ "theorem results.terminates {s : Computation α} {a n} (h : Results s a n) : Terminates s :=\n  terminates_of_mem h.mem\n#align results.terminates results.terminates\n\n",
  "tail_think":
- "@[simp]\ntheorem tail_think (s : computation α) : tail (think s) = s := by\n  cases' s with f al <;> apply subtype.eq <;> dsimp [tail, think] <;> rw [Stream'.tail_cons]\n#align tail_think tail_think\n\n",
+ "@[simp]\ntheorem tail_think (s : Computation α) : tail (think s) = s := by\n  cases' s with f al <;> apply Subtype.eq <;> dsimp [tail, think] <;> rw [Stream'.tail_cons]\n#align tail_think tail_think\n\n",
  "tail_ret":
- "@[simp]\ntheorem tail_ret (a : α) : tail (return a) = return a :=\n  rfl\n#align tail_ret tail_ret\n\n",
+ "@[simp]\ntheorem tail_ret (a : α) : tail (pure a) = pure a :=\n  rfl\n#align tail_ret tail_ret\n\n",
  "tail_empty":
  "@[simp]\ntheorem tail_empty : tail (empty α) = empty α :=\n  rfl\n#align tail_empty tail_empty\n\n",
  "symm":
- "theorem lift_rel.symm (R : α → α → Prop) (H : symmetric R) : symmetric (lift_rel R) := fun s1 s2 ⟨l, r⟩ =>\n  ⟨fun a a2 =>\n    let ⟨b, b1, ab⟩ := r a2\n    ⟨b, b1, H ab⟩,\n    fun a a1 =>\n    let ⟨b, b2, ab⟩ := l a1\n    ⟨b, b2, H ab⟩⟩\n#align lift_rel.symm lift_rel.symm\n\n",
+ "theorem lift_rel.symm (R : α → α → Prop) (H : symmetric R) : symmetric (LiftRel R) := fun s1 s2 ⟨l, r⟩ =>\n  ⟨fun a a2 =>\n    let ⟨b, b1, ab⟩ := r a2\n    ⟨b, b1, H ab⟩,\n    fun a a1 =>\n    let ⟨b, b2, ab⟩ := l a1\n    ⟨b, b2, H ab⟩⟩\n#align lift_rel.symm lift_rel.symm\n\n",
  "swap":
- "theorem lift_rel_aux.swap (R : α → β → Prop) (C) (a b) : lift_rel_aux (swap R) (swap C) b a = lift_rel_aux R C a b := by\n  cases' a with a ca <;> cases' b with b cb <;> simp only [lift_rel_aux]\n#align lift_rel_aux.swap lift_rel_aux.swap\n\n",
+ "theorem lift_rel_aux.swap (R : α → β → Prop) (C) (a b) : LiftRelAux (swap R) (swap C) b a = LiftRelAux R C a b := by\n  cases' a with a ca <;> cases' b with b cb <;> simp only [lift_rel_aux]\n#align lift_rel_aux.swap lift_rel_aux.swap\n\n",
  "return_def":
- "@[simp]\ntheorem return_def (a) : (_root_.return a : computation α) = return a :=\n  rfl\n#align return_def return_def\n\n",
+ "@[simp]\ntheorem return_def (a) : (_root_.return a : Computation α) = pure a :=\n  rfl\n#align return_def return_def\n\n",
  "ret_right":
- "@[simp]\ntheorem lift_rel_aux.ret_right (R : α → β → Prop) (C : computation α → computation β → Prop) (b ca) :\n    lift_rel_aux R C (destruct ca) (sum.inl b) ↔ ∃ a, a ∈ ca ∧ R a b := by\n  rw [← lift_rel_aux.swap, lift_rel_aux.ret_left]\n#align lift_rel_aux.ret_right lift_rel_aux.ret_right\n\n",
+ "@[simp]\ntheorem lift_rel_aux.ret_right (R : α → β → Prop) (C : Computation α → Computation β → Prop) (b ca) :\n    LiftRelAux R C (destruct ca) (Sum.inl b) ↔ ∃ a, a ∈ ca ∧ R a b := by rw [← lift_rel_aux.swap, lift_rel_aux.ret_left]\n#align lift_rel_aux.ret_right lift_rel_aux.ret_right\n\n",
  "ret_orelse":
- "-- Parallel computation\n@[simp]\ntheorem ret_orelse (a : α) (c₂ : computation α) : (return a <|> c₂) = return a :=\n  destruct_eq_ret <| by unfold has_orelse.orelse <;> simp [orelse]\n#align ret_orelse ret_orelse\n\n",
+ "-- Parallel computation\n@[simp]\ntheorem ret_orelse (a : α) (c₂ : Computation α) : (pure a <|> c₂) = pure a :=\n  destruct_eq_pure <| by unfold has_orelse.orelse <;> simp [orelse]\n#align ret_orelse ret_orelse\n\n",
  "ret_mem":
- "theorem ret_mem (a : α) : a ∈ return a :=\n  exists.intro 0 rfl\n#align ret_mem ret_mem\n\n",
+ "theorem ret_mem (a : α) : a ∈ pure a :=\n  exists.intro 0 rfl\n#align ret_mem ret_mem\n\n",
  "ret_left":
- "@[simp]\ntheorem lift_rel_aux.ret_left (R : α → β → Prop) (C : computation α → computation β → Prop) (a cb) :\n    lift_rel_aux R C (sum.inl a) (destruct cb) ↔ ∃ b, b ∈ cb ∧ R a b :=\n  by\n  apply cb.rec_on (fun b => _) fun cb => _\n  · exact ⟨fun h => ⟨_, ret_mem _, h⟩, fun ⟨b', mb, h⟩ => by rw [mem_unique (ret_mem _) mb] <;> exact h⟩\n  · rw [destruct_think]\n    exact ⟨fun ⟨b, h, r⟩ => ⟨b, think_mem h, r⟩, fun ⟨b, h, r⟩ => ⟨b, of_think_mem h, r⟩⟩\n#align lift_rel_aux.ret_left lift_rel_aux.ret_left\n\n",
+ "@[simp]\ntheorem lift_rel_aux.ret_left (R : α → β → Prop) (C : Computation α → Computation β → Prop) (a cb) :\n    LiftRelAux R C (Sum.inl a) (destruct cb) ↔ ∃ b, b ∈ cb ∧ R a b :=\n  by\n  apply cb.rec_on (fun b => _) fun cb => _\n  · exact ⟨fun h => ⟨_, ret_mem _, h⟩, fun ⟨b', mb, h⟩ => by rw [mem_unique (ret_mem _) mb] <;> exact h⟩\n  · rw [destruct_think]\n    exact ⟨fun ⟨b, h, r⟩ => ⟨b, think_mem h, r⟩, fun ⟨b, h, r⟩ => ⟨b, of_think_mem h, r⟩⟩\n#align lift_rel_aux.ret_left lift_rel_aux.ret_left\n\n",
  "ret_bind":
- "@[simp]\ntheorem ret_bind (a) (f : α → computation β) : bind (return a) f = f a :=\n  by\n  apply eq_of_bisim fun c₁ c₂ => c₁ = bind (return a) f ∧ c₂ = f a ∨ c₁ = corec (bind.F f) (sum.inr c₂)\n  · intro c₁ c₂ h\n    exact\n      match c₁, c₂, h with\n      | _, _, or.inl ⟨rfl, rfl⟩ => by\n        simp [bind, bind.F]\n        cases' destruct (f a) with b cb <;> simp [bind.G]\n      | _, c, or.inr rfl => by\n        simp [bind.F]\n        cases' destruct c with b cb <;> simp [bind.G]\n  · simp\n#align ret_bind ret_bind\n\n",
+ "@[simp]\ntheorem ret_bind (a) (f : α → Computation β) : bind (pure a) f = f a :=\n  by\n  apply eq_of_bisim fun c₁ c₂ => c₁ = bind (return a) f ∧ c₂ = f a ∨ c₁ = corec (bind.F f) (Sum.inr c₂)\n  · intro c₁ c₂ h\n    exact\n      match c₁, c₂, h with\n      | _, _, or.inl ⟨rfl, rfl⟩ => by\n        simp [bind, bind.F]\n        cases' destruct (f a) with b cb <;> simp [bind.G]\n      | _, c, or.inr rfl => by\n        simp [bind.F]\n        cases' destruct c with b cb <;> simp [bind.G]\n  · simp\n#align ret_bind ret_bind\n\n",
  "results_think_iff":
- "@[simp]\ntheorem results_think_iff {s : computation α} {a n} : results (think s) a (n + 1) ↔ results s a n :=\n  ⟨fun h => by\n    let ⟨n', r, e⟩ := of_results_think h\n    injection e with h' <;> rwa [h'], results_think⟩\n#align results_think_iff results_think_iff\n\n",
+ "@[simp]\ntheorem results_think_iff {s : Computation α} {a n} : Results (think s) a (n + 1) ↔ Results s a n :=\n  ⟨fun h => by\n    let ⟨n', r, e⟩ := of_results_think h\n    injection e with h' <;> rwa [h'], results_think⟩\n#align results_think_iff results_think_iff\n\n",
  "results_thinkN_ret":
- "theorem results_thinkN_ret (a : α) (n) : results (thinkN (return a) n) a n := by\n  have := results_thinkN n (results_ret a) <;> rwa [nat.zero_add] at this\n#align results_thinkN_ret results_thinkN_ret\n\n",
+ "theorem results_thinkN_ret (a : α) (n) : Results (thinkN (pure a) n) a n := by\n  have := results_thinkN n (results_ret a) <;> rwa [nat.zero_add] at this\n#align results_thinkN_ret results_thinkN_ret\n\n",
  "results_thinkN":
- "theorem results_thinkN {s : computation α} {a m} : ∀ n, results s a m → results (thinkN s n) a (m + n)\n  | 0, h => h\n  | n + 1, h => results_think (results_thinkN n h)\n#align results_thinkN results_thinkN\n\n",
+ "theorem results_thinkN {s : Computation α} {a m} : ∀ n, Results s a m → Results (thinkN s n) a (m + n)\n  | 0, h => h\n  | n + 1, h => results_think (results_thinkN n h)\n#align results_thinkN results_thinkN\n\n",
  "results_think":
- "theorem results_think {s : computation α} {a n} (h : results s a n) : results (think s) a (n + 1) :=\n  haveI := h.terminates\n  ⟨think_mem h.mem, by rw [length_think, h.length]⟩\n#align results_think results_think\n\n",
+ "theorem results_think {s : Computation α} {a n} (h : Results s a n) : Results (think s) a (n + 1) :=\n  haveI := h.terminates\n  ⟨think_mem h.mem, by rw [length_think, h.length]⟩\n#align results_think results_think\n\n",
  "results_ret":
- "theorem results_ret (a : α) : results (return a) a 0 :=\n  ⟨_, length_ret _⟩\n#align results_ret results_ret\n\n",
+ "theorem results_ret (a : α) : Results (pure a) a 0 :=\n  ⟨_, length_pure _⟩\n#align results_ret results_ret\n\n",
  "results_of_terminates'":
- "theorem results_of_terminates' (s : computation α) [T : terminates s] {a} (h : a ∈ s) : results s a (length s) := by\n  rw [← get_eq_of_mem _ h] <;> apply results_of_terminates\n#align results_of_terminates' results_of_terminates'\n\n",
+ "theorem results_of_terminates' (s : Computation α) [T : Terminates s] {a} (h : a ∈ s) : Results s a (length s) := by\n  rw [← get_eq_of_mem _ h] <;> apply results_of_terminates\n#align results_of_terminates' results_of_terminates'\n\n",
  "results_of_terminates":
- "theorem results_of_terminates (s : computation α) [T : terminates s] : results s (get s) (length s) :=\n  ⟨get_mem _, rfl⟩\n#align results_of_terminates results_of_terminates\n\n",
+ "theorem results_of_terminates (s : Computation α) [T : Terminates s] : Results s (get s) (length s) :=\n  ⟨get_mem _, rfl⟩\n#align results_of_terminates results_of_terminates\n\n",
  "results_bind":
- "theorem results_bind {s : computation α} {f : α → computation β} {a b m n} (h1 : results s a m)\n    (h2 : results (f a) b n) : results (bind s f) b (n + m) :=\n  by\n  have := h1.mem; revert m\n  apply mem_rec_on this _ fun s IH => _ <;> intro m h1\n  · rw [ret_bind]\n    rw [h1.len_unique (results_ret _)]\n    exact h2\n  · rw [think_bind]\n    cases' of_results_think h1 with m' h\n    cases' h with h1 e\n    rw [e]\n    exact results_think (IH h1)\n#align results_bind results_bind\n\n",
+ "theorem results_bind {s : Computation α} {f : α → Computation β} {a b m n} (h1 : Results s a m)\n    (h2 : Results (f a) b n) : Results (bind s f) b (n + m) :=\n  by\n  have := h1.mem; revert m\n  apply mem_rec_on this _ fun s IH => _ <;> intro m h1\n  · rw [ret_bind]\n    rw [h1.len_unique (results_ret _)]\n    exact h2\n  · rw [think_bind]\n    cases' of_results_think h1 with m' h\n    cases' h with h1 e\n    rw [e]\n    exact results_think (IH h1)\n#align results_bind results_bind\n\n",
  "rel_of_lift_rel":
- "theorem rel_of_lift_rel {R : α → β → Prop} {ca cb} : lift_rel R ca cb → ∀ {a b}, a ∈ ca → b ∈ cb → R a b\n  | ⟨l, r⟩, a, b, ma, mb => by\n    let ⟨b', mb', ab'⟩ := l ma\n    rw [mem_unique mb mb'] <;> exact ab'\n#align rel_of_lift_rel rel_of_lift_rel\n\n",
+ "theorem rel_of_lift_rel {R : α → β → Prop} {ca cb} : LiftRel R ca cb → ∀ {a b}, a ∈ ca → b ∈ cb → R a b\n  | ⟨l, r⟩, a, b, ma, mb => by\n    let ⟨b', mb', ab'⟩ := l ma\n    rw [mem_unique mb mb'] <;> exact ab'\n#align rel_of_lift_rel rel_of_lift_rel\n\n",
  "refl":
- "theorem lift_rel.refl (R : α → α → Prop) (H : reflexive R) : reflexive (lift_rel R) := fun s =>\n  ⟨fun a as => ⟨a, as, H a⟩, fun b bs => ⟨b, bs, H b⟩⟩\n#align lift_rel.refl lift_rel.refl\n\n",
+ "theorem lift_rel.refl (R : α → α → Prop) (H : reflexive R) : reflexive (LiftRel R) := fun s =>\n  ⟨fun a as => ⟨a, as, H a⟩, fun b bs => ⟨b, bs, H b⟩⟩\n#align lift_rel.refl lift_rel.refl\n\n",
  "promises_congr":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ~ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ~> » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ~> » -/\ntheorem promises_congr {c₁ c₂ : computation α} (h : «expr ~ » c₁ c₂) (a) : «expr ~> » c₁ a ↔ «expr ~> » c₂ a :=\n  forall_congr' fun a' => imp_congr (h a') iff.rfl\n#align promises_congr promises_congr\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ~ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ~> » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ~> » -/\ntheorem promises_congr {c₁ c₂ : Computation α} (h : «expr ~ » c₁ c₂) (a) : «expr ~> » c₁ a ↔ «expr ~> » c₂ a :=\n  forall_congr' fun a' => imp_congr (h a') iff.rfl\n#align promises_congr promises_congr\n\n",
  "orelse_think":
- "@[simp]\ntheorem orelse_think (c₁ c₂ : computation α) : (think c₁ <|> think c₂) = think (c₁ <|> c₂) :=\n  destruct_eq_think <| by unfold has_orelse.orelse <;> simp [orelse]\n#align orelse_think orelse_think\n\n",
+ "@[simp]\ntheorem orelse_think (c₁ c₂ : Computation α) : (think c₁ <|> think c₂) = think (c₁ <|> c₂) :=\n  destruct_eq_think <| by unfold has_orelse.orelse <;> simp [orelse]\n#align orelse_think orelse_think\n\n",
  "orelse_ret":
- "@[simp]\ntheorem orelse_ret (c₁ : computation α) (a : α) : (think c₁ <|> return a) = return a :=\n  destruct_eq_ret <| by unfold has_orelse.orelse <;> simp [orelse]\n#align orelse_ret orelse_ret\n\n",
+ "@[simp]\ntheorem orelse_ret (c₁ : Computation α) (a : α) : (think c₁ <|> pure a) = pure a :=\n  destruct_eq_pure <| by unfold has_orelse.orelse <;> simp [orelse]\n#align orelse_ret orelse_ret\n\n",
  "orelse_empty":
- "@[simp]\ntheorem orelse_empty (c : computation α) : (c <|> empty α) = c :=\n  by\n  apply eq_of_bisim (fun c₁ c₂ => (c₂ <|> empty α) = c₁) _ rfl\n  intro s' s h; rw [← h]\n  apply rec_on s <;> intro s <;> rw [think_empty] <;> simp\n  rw [← think_empty]\n#align orelse_empty orelse_empty\n\n",
+ "@[simp]\ntheorem orelse_empty (c : Computation α) : (c <|> empty α) = c :=\n  by\n  apply eq_of_bisim (fun c₁ c₂ => (c₂ <|> Empty α) = c₁) _ rfl\n  intro s' s h; rw [← h]\n  apply rec_on s <;> intro s <;> rw [think_empty] <;> simp\n  rw [← think_empty]\n#align orelse_empty orelse_empty\n\n",
  "of_think_terminates":
- "theorem of_think_terminates {s : computation α} : terminates (think s) → terminates s\n  | ⟨⟨a, h⟩⟩ => ⟨⟨a, of_think_mem h⟩⟩\n#align of_think_terminates of_think_terminates\n\n",
+ "theorem of_think_terminates {s : Computation α} : Terminates (think s) → Terminates s\n  | ⟨⟨a, h⟩⟩ => ⟨⟨a, of_think_mem h⟩⟩\n#align of_think_terminates of_think_terminates\n\n",
  "of_think_mem":
- "theorem of_think_mem {s : computation α} {a} : a ∈ think s → a ∈ s\n  | ⟨n, h⟩ => by\n    cases' n with n'\n    contradiction\n    exact ⟨n', h⟩\n#align of_think_mem of_think_mem\n\n",
+ "theorem of_think_mem {s : Computation α} {a} : a ∈ think s → a ∈ s\n  | ⟨n, h⟩ => by\n    cases' n with n'\n    contradiction\n    exact ⟨n', h⟩\n#align of_think_mem of_think_mem\n\n",
  "of_thinkN_terminates":
- "theorem of_thinkN_terminates (s : computation α) (n) : terminates (thinkN s n) → terminates s\n  | ⟨⟨a, h⟩⟩ => ⟨⟨a, (thinkN_mem _).1 h⟩⟩\n#align of_thinkN_terminates of_thinkN_terminates\n\n",
+ "theorem of_thinkN_terminates (s : Computation α) (n) : Terminates (thinkN s n) → Terminates s\n  | ⟨⟨a, h⟩⟩ => ⟨⟨a, (thinkN_mem _).1 h⟩⟩\n#align of_thinkN_terminates of_thinkN_terminates\n\n",
  "of_results_think":
- "theorem of_results_think {s : computation α} {a n} (h : results (think s) a n) : ∃ m, results s a m ∧ n = m + 1 :=\n  by\n  haveI := of_think_terminates h.terminates\n  have := results_of_terminates' _ (of_think_mem h.mem)\n  exact ⟨_, this, results.len_unique h (results_think this)⟩\n#align of_results_think of_results_think\n\n",
+ "theorem of_results_think {s : Computation α} {a n} (h : Results (think s) a n) : ∃ m, Results s a m ∧ n = m + 1 :=\n  by\n  haveI := of_think_terminates h.terminates\n  have := results_of_terminates' _ (of_think_mem h.mem)\n  exact ⟨_, this, results.len_unique h (results_think this)⟩\n#align of_results_think of_results_think\n\n",
  "of_results_bind":
- "theorem of_results_bind {s : computation α} {f : α → computation β} {b k} :\n    results (bind s f) b k → ∃ a m n, results s a m ∧ results (f a) b n ∧ k = n + m :=\n  by\n  induction' k with n IH generalizing s <;> apply rec_on s (fun a => _) fun s' => _ <;> intro e\n  · simp [thinkN] at e\n    refine' ⟨a, _, _, results_ret _, e, rfl⟩\n  · have := congr_arg head (eq_thinkN e)\n    contradiction\n  · simp at e\n    refine' ⟨a, _, n + 1, results_ret _, e, rfl⟩\n  · simp at e\n    exact by\n      let ⟨a, m, n', h1, h2, e'⟩ := IH e\n      rw [e'] <;> exact ⟨a, m.succ, n', results_think h1, h2, rfl⟩\n#align of_results_bind of_results_bind\n\n",
+ "theorem of_results_bind {s : Computation α} {f : α → Computation β} {b k} :\n    Results (bind s f) b k → ∃ a m n, Results s a m ∧ Results (f a) b n ∧ k = n + m :=\n  by\n  induction' k with n IH generalizing s <;> apply rec_on s (fun a => _) fun s' => _ <;> intro e\n  · simp [thinkN] at e\n    refine' ⟨a, _, _, results_ret _, e, rfl⟩\n  · have := congr_arg head (eq_thinkN e)\n    contradiction\n  · simp at e\n    refine' ⟨a, _, n + 1, results_ret _, e, rfl⟩\n  · simp at e\n    exact by\n      let ⟨a, m, n', h1, h2, e'⟩ := IH e\n      rw [e'] <;> exact ⟨a, m.succ, n', results_think h1, h2, rfl⟩\n#align of_results_bind of_results_bind\n\n",
  "not_terminates_empty":
- "theorem not_terminates_empty : ¬terminates (empty α) := fun ⟨⟨a, h⟩⟩ => not_mem_empty a h\n#align not_terminates_empty not_terminates_empty\n\n",
+ "theorem not_terminates_empty : ¬Terminates (empty α) := fun ⟨⟨a, h⟩⟩ => not_mem_empty a h\n#align not_terminates_empty not_terminates_empty\n\n",
  "not_mem_empty":
  "theorem not_mem_empty (a : α) : a ∉ empty α := fun ⟨n, h⟩ => by clear _fun_match <;> contradiction\n#align not_mem_empty not_mem_empty\n\n",
  "mem_unique":
- "theorem mem_unique {s : computation α} {a b : α} : a ∈ s → b ∈ s → a = b\n  | ⟨m, ha⟩, ⟨n, hb⟩ => by\n    injection (le_stable s (le_max_left m n) ha.symm).symm.trans (le_stable s (le_max_right m n) hb.symm)\n#align mem_unique mem_unique\n\n",
+ "theorem mem_unique {s : Computation α} {a b : α} : a ∈ s → b ∈ s → a = b\n  | ⟨m, ha⟩, ⟨n, hb⟩ => by\n    injection (le_stable s (le_max_left m n) ha.symm).symm.trans (le_stable s (le_max_right m n) hb.symm)\n#align mem_unique mem_unique\n\n",
  "mem_promises":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ~> » -/\ntheorem mem_promises {s : computation α} {a : α} : a ∈ s → «expr ~> » s a := fun h a' => mem_unique h\n#align mem_promises mem_promises\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ~> » -/\ntheorem mem_promises {s : Computation α} {a : α} : a ∈ s → «expr ~> » s a := fun h a' => mem_unique h\n#align mem_promises mem_promises\n\n",
  "mem_of_promises":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ~> » -/\ntheorem mem_of_promises {a} (p : «expr ~> » s a) : a ∈ s :=\n  by\n  cases h\n  cases' h with a' h\n  rw [p h]\n  exact h\n#align mem_of_promises mem_of_promises\n\n",
  "mem_of_get_eq":
  "theorem mem_of_get_eq {a} : get s = a → a ∈ s := by intro h <;> rw [← h] <;> apply get_mem\n#align mem_of_get_eq mem_of_get_eq\n\n",
  "mem_map":
- "theorem mem_map (f : α → β) {a} {s : computation α} (m : a ∈ s) : f a ∈ map f s := by\n  rw [← bind_ret] <;> apply mem_bind m <;> apply ret_mem\n#align mem_map mem_map\n\n",
+ "theorem mem_map (f : α → β) {a} {s : Computation α} (m : a ∈ s) : f a ∈ map f s := by\n  rw [← bind_ret] <;> apply mem_bind m <;> apply ret_mem\n#align mem_map mem_map\n\n",
  "mem_bind":
- "theorem mem_bind {s : computation α} {f : α → computation β} {a b} (h1 : a ∈ s) (h2 : b ∈ f a) : b ∈ bind s f :=\n  let ⟨m, h1⟩ := exists_results_of_mem h1\n  let ⟨n, h2⟩ := exists_results_of_mem h2\n  (results_bind h1 h2).mem\n#align mem_bind mem_bind\n\n",
+ "theorem mem_bind {s : Computation α} {f : α → Computation β} {a b} (h1 : a ∈ s) (h2 : b ∈ f a) : b ∈ bind s f :=\n  let ⟨m, h1⟩ := exists_results_of_mem h1\n  let ⟨n, h2⟩ := exists_results_of_mem h2\n  (results_bind h1 h2).mem\n#align mem_bind mem_bind\n\n",
  "mem":
- "theorem results.mem {s : computation α} {a n} : results s a n → a ∈ s\n  | ⟨m, _⟩ => m\n#align results.mem results.mem\n\n",
+ "theorem results.mem {s : Computation α} {a n} : Results s a n → a ∈ s\n  | ⟨m, _⟩ => m\n#align results.mem results.mem\n\n",
  "map_think'":
  "@[simp]\ntheorem map_think' {α β} : ∀ (f : α → β) (s), f <$> think s = think (f <$> s) :=\n  map_think\n#align map_think' map_think'\n\n",
  "map_think":
- "@[simp]\ntheorem map_think (f : α → β) : ∀ s, map f (think s) = think (map f s)\n  | ⟨s, al⟩ => by apply subtype.eq <;> dsimp [think, map] <;> rw [Stream'.map_cons]\n#align map_think map_think\n\n",
+ "@[simp]\ntheorem map_think (f : α → β) : ∀ s, map f (think s) = think (map f s)\n  | ⟨s, al⟩ => by apply Subtype.eq <;> dsimp [think, map] <;> rw [Stream'.map_cons]\n#align map_think map_think\n\n",
  "map_ret'":
- "@[simp]\ntheorem map_ret' {α β} : ∀ (f : α → β) (a), f <$> return a = return (f a) :=\n  map_ret\n#align map_ret' map_ret'\n\n",
+ "@[simp]\ntheorem map_ret' {α β} : ∀ (f : α → β) (a), f <$> pure a = pure (f a) :=\n  map_pure\n#align map_ret' map_ret'\n\n",
  "map_ret":
- "@[simp]\ntheorem map_ret (f : α → β) (a) : map f (return a) = return (f a) :=\n  rfl\n#align map_ret map_ret\n\n",
+ "@[simp]\ntheorem map_ret (f : α → β) (a) : map f (pure a) = pure (f a) :=\n  rfl\n#align map_ret map_ret\n\n",
  "map_id":
- "@[simp]\ntheorem map_id : ∀ s : computation α, map id s = s\n  | ⟨f, al⟩ => by\n    apply subtype.eq <;> simp [map, function.comp]\n    have e : @option.rec α (fun _ => option α) none some = id := by ext ⟨⟩ <;> rfl\n    simp [e, Stream'.map_id]\n#align map_id map_id\n\n",
+ "@[simp]\ntheorem map_id : ∀ s : Computation α, map id s = s\n  | ⟨f, al⟩ => by\n    apply Subtype.eq <;> simp [map, Function.comp]\n    have e : @option.rec α (fun _ => Option α) none some = id := by ext ⟨⟩ <;> rfl\n    simp [e, Stream'.map_id]\n#align map_id map_id\n\n",
  "map_congr":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ~ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ~ » -/\n#print map_congr /-\ntheorem map_congr (R : α → α → Prop) (S : β → β → Prop) {s1 s2 : computation α} {f : α → β} (h1 : «expr ~ » s1 s2) :\n    «expr ~ » (map f s1) (map f s2) := by\n  rw [← lift_eq_iff_equiv] <;> exact lift_rel_map eq _ ((lift_eq_iff_equiv _ _).2 h1) fun a b => congr_arg _\n#align map_congr map_congr\n-/\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ~ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ~ » -/\n#print map_congr /-\ntheorem map_congr (R : α → α → Prop) (S : β → β → Prop) {s1 s2 : Computation α} {f : α → β} (h1 : «expr ~ » s1 s2) :\n    «expr ~ » (map f s1) (map f s2) := by\n  rw [← lift_eq_iff_equiv] <;> exact lift_rel_map Eq _ ((lift_eq_iff_equiv _ _).2 h1) fun a b => congr_arg _\n#align map_congr map_congr\n-/\n\n",
  "map_comp":
- "theorem map_comp (f : α → β) (g : β → γ) : ∀ s : computation α, map (g ∘ f) s = map g (map f s)\n  | ⟨s, al⟩ => by\n    apply subtype.eq <;> dsimp [map]\n    rw [Stream'.map_map]\n    apply congr_arg fun f : _ → option γ => Stream'.map f s\n    ext ⟨⟩ <;> rfl\n#align map_comp map_comp\n\n",
+ "theorem map_comp (f : α → β) (g : β → γ) : ∀ s : Computation α, map (g ∘ f) s = map g (map f s)\n  | ⟨s, al⟩ => by\n    apply Subtype.eq <;> dsimp [map]\n    rw [Stream'.map_map]\n    apply congr_arg fun f : _ → Option γ => Stream'.map f s\n    ext ⟨⟩ <;> rfl\n#align map_comp map_comp\n\n",
  "lift_rel_think_right":
- "@[simp]\ntheorem lift_rel_think_right (R : α → β → Prop) (ca : computation α) (cb : computation β) :\n    lift_rel R ca (think cb) ↔ lift_rel R ca cb := by\n  rw [← lift_rel.swap R, ← lift_rel.swap R] <;> apply lift_rel_think_left\n#align lift_rel_think_right lift_rel_think_right\n\n",
+ "@[simp]\ntheorem lift_rel_think_right (R : α → β → Prop) (ca : Computation α) (cb : Computation β) :\n    LiftRel R ca (think cb) ↔ LiftRel R ca cb := by\n  rw [← lift_rel.swap R, ← lift_rel.swap R] <;> apply lift_rel_think_left\n#align lift_rel_think_right lift_rel_think_right\n\n",
  "lift_rel_think_left":
- "@[simp]\ntheorem lift_rel_think_left (R : α → β → Prop) (ca : computation α) (cb : computation β) :\n    lift_rel R (think ca) cb ↔ lift_rel R ca cb :=\n  and_congr (forall_congr' fun b => imp_congr ⟨of_think_mem, think_mem⟩ iff.rfl)\n    (forall_congr' fun b => imp_congr iff.rfl <| exists_congr fun b => and_congr ⟨of_think_mem, think_mem⟩ iff.rfl)\n#align lift_rel_think_left lift_rel_think_left\n\n",
+ "@[simp]\ntheorem lift_rel_think_left (R : α → β → Prop) (ca : Computation α) (cb : Computation β) :\n    LiftRel R (think ca) cb ↔ LiftRel R ca cb :=\n  and_congr (forall_congr' fun b => imp_congr ⟨of_think_mem, think_mem⟩ iff.rfl)\n    (forall_congr' fun b => imp_congr iff.rfl <| exists_congr fun b => and_congr ⟨of_think_mem, think_mem⟩ iff.rfl)\n#align lift_rel_think_left lift_rel_think_left\n\n",
  "lift_rel_return_right":
- "@[simp]\ntheorem lift_rel_return_right (R : α → β → Prop) (ca : computation α) (b : β) :\n    lift_rel R ca (return b) ↔ ∃ a, a ∈ ca ∧ R a b := by rw [lift_rel.swap, lift_rel_return_left]\n#align lift_rel_return_right lift_rel_return_right\n\n",
+ "@[simp]\ntheorem lift_rel_return_right (R : α → β → Prop) (ca : Computation α) (b : β) :\n    LiftRel R ca (pure b) ↔ ∃ a, a ∈ ca ∧ R a b := by rw [lift_rel.swap, lift_rel_return_left]\n#align lift_rel_return_right lift_rel_return_right\n\n",
  "lift_rel_return_left":
- "@[simp]\ntheorem lift_rel_return_left (R : α → β → Prop) (a : α) (cb : computation β) :\n    lift_rel R (return a) cb ↔ ∃ b, b ∈ cb ∧ R a b :=\n  ⟨fun ⟨l, r⟩ => l (ret_mem _), fun ⟨b, mb, ab⟩ =>\n    ⟨fun a' ma' => by rw [eq_of_ret_mem ma'] <;> exact ⟨b, mb, ab⟩, fun b' mb' =>\n      ⟨_, ret_mem _, by rw [mem_unique mb' mb] <;> exact ab⟩⟩⟩\n#align lift_rel_return_left lift_rel_return_left\n\n",
+ "@[simp]\ntheorem lift_rel_return_left (R : α → β → Prop) (a : α) (cb : Computation β) :\n    LiftRel R (pure a) cb ↔ ∃ b, b ∈ cb ∧ R a b :=\n  ⟨fun ⟨l, r⟩ => l (ret_mem _), fun ⟨b, mb, ab⟩ =>\n    ⟨fun a' ma' => by rw [eq_of_ret_mem ma'] <;> exact ⟨b, mb, ab⟩, fun b' mb' =>\n      ⟨_, ret_mem _, by rw [mem_unique mb' mb] <;> exact ab⟩⟩⟩\n#align lift_rel_return_left lift_rel_return_left\n\n",
  "lift_rel_return":
- "@[simp]\ntheorem lift_rel_return (R : α → β → Prop) (a : α) (b : β) : lift_rel R (return a) (return b) ↔ R a b := by\n  rw [lift_rel_return_left] <;>\n    exact ⟨fun ⟨b', mb', ab'⟩ => by rwa [eq_of_ret_mem mb'] at ab', fun ab => ⟨_, ret_mem _, ab⟩⟩\n#align lift_rel_return lift_rel_return\n\n",
+ "@[simp]\ntheorem lift_rel_return (R : α → β → Prop) (a : α) (b : β) : LiftRel R (pure a) (pure b) ↔ R a b := by\n  rw [lift_rel_return_left] <;>\n    exact ⟨fun ⟨b', mb', ab'⟩ => by rwa [eq_of_ret_mem mb'] at ab', fun ab => ⟨_, ret_mem _, ab⟩⟩\n#align lift_rel_return lift_rel_return\n\n",
  "lift_rel_rec":
- "theorem lift_rel_rec {R : α → β → Prop} (C : computation α → computation β → Prop)\n    (H : ∀ {ca cb}, C ca cb → lift_rel_aux R C (destruct ca) (destruct cb)) (ca cb) (Hc : C ca cb) : lift_rel R ca cb :=\n  lift_rel_mem_cases (lift_rel_rec.lem C (@H) ca cb Hc) fun b hb =>\n    (lift_rel.swap _ _ _).2 <|\n      lift_rel_rec.lem (swap C) (fun cb ca h => cast (lift_rel_aux.swap _ _ _ _).symm <| H h) cb ca Hc b hb\n#align lift_rel_rec lift_rel_rec\n\n",
+ "theorem lift_rel_rec {R : α → β → Prop} (C : Computation α → Computation β → Prop)\n    (H : ∀ {ca cb}, C ca cb → LiftRelAux R C (destruct ca) (destruct cb)) (ca cb) (Hc : C ca cb) : LiftRel R ca cb :=\n  liftRel_mem_cases (LiftRelRec.lem C (@H) ca cb Hc) fun b hb =>\n    (LiftRel.swap _ _ _).2 <|\n      LiftRelRec.lem (swap C) (fun cb ca h => cast (LiftRelAux.swap _ _ _ _).symm <| H h) cb ca Hc b hb\n#align lift_rel_rec lift_rel_rec\n\n",
  "lift_rel_of_mem":
- "theorem lift_rel_of_mem {R : α → β → Prop} {a b ca cb} (ma : a ∈ ca) (mb : b ∈ cb) (ab : R a b) : lift_rel R ca cb :=\n  ⟨fun a' ma' => by rw [mem_unique ma' ma] <;> exact ⟨b, mb, ab⟩, fun b' mb' => by\n    rw [mem_unique mb' mb] <;> exact ⟨a, ma, ab⟩⟩\n#align lift_rel_of_mem lift_rel_of_mem\n\n",
+ "theorem lift_rel_of_mem {R : α → β → Prop} {a b ca cb} (ma : a ∈ ca) (mb : b ∈ cb) (ab : R a b) : LiftRel R ca cb :=\n  ⟨fun a' ma' => by rw [mem_unique ma' ma] <;> exact ⟨b, mb, ab⟩, fun b' mb' => by\n    rw [mem_unique mb' mb] <;> exact ⟨a, ma, ab⟩⟩\n#align lift_rel_of_mem lift_rel_of_mem\n\n",
  "lift_rel_mem_cases":
- "theorem lift_rel_mem_cases {R : α → β → Prop} {ca cb} (Ha : ∀ a ∈ ca, lift_rel R ca cb)\n    (Hb : ∀ b ∈ cb, lift_rel R ca cb) : lift_rel R ca cb :=\n  ⟨fun a ma => (Ha _ ma).left ma, fun b mb => (Hb _ mb).right mb⟩\n#align lift_rel_mem_cases lift_rel_mem_cases\n\n",
+ "theorem lift_rel_mem_cases {R : α → β → Prop} {ca cb} (Ha : ∀ a ∈ ca, LiftRel R ca cb)\n    (Hb : ∀ b ∈ cb, LiftRel R ca cb) : LiftRel R ca cb :=\n  ⟨fun a ma => (Ha _ ma).left ma, fun b mb => (Hb _ mb).right mb⟩\n#align lift_rel_mem_cases lift_rel_mem_cases\n\n",
  "lift_rel_map":
- "theorem lift_rel_map {δ} (R : α → β → Prop) (S : γ → δ → Prop) {s1 : computation α} {s2 : computation β} {f1 : α → γ}\n    {f2 : β → δ} (h1 : lift_rel R s1 s2) (h2 : ∀ {a b}, R a b → S (f1 a) (f2 b)) : lift_rel S (map f1 s1) (map f2 s2) :=\n  by rw [← bind_ret, ← bind_ret] <;> apply lift_rel_bind _ _ h1 <;> simp <;> exact @h2\n#align lift_rel_map lift_rel_map\n\n",
+ "theorem lift_rel_map {δ} (R : α → β → Prop) (S : γ → δ → Prop) {s1 : Computation α} {s2 : Computation β} {f1 : α → γ}\n    {f2 : β → δ} (h1 : LiftRel R s1 s2) (h2 : ∀ {a b}, R a b → S (f1 a) (f2 b)) : LiftRel S (map f1 s1) (map f2 s2) :=\n  by rw [← bind_ret, ← bind_ret] <;> apply lift_rel_bind _ _ h1 <;> simp <;> exact @h2\n#align lift_rel_map lift_rel_map\n\n",
  "lift_rel_def":
- "theorem lift_rel_def {R : α → β → Prop} {ca cb} :\n    lift_rel R ca cb ↔ (terminates ca ↔ terminates cb) ∧ ∀ {a b}, a ∈ ca → b ∈ cb → R a b :=\n  ⟨fun h =>\n    ⟨terminates_of_lift_rel h, fun a b ma mb =>\n      by\n      let ⟨b', mb', ab⟩ := h.left ma\n      rwa [mem_unique mb mb']⟩,\n    fun ⟨l, r⟩ =>\n    ⟨fun a ma =>\n      let ⟨⟨b, mb⟩⟩ := l.1 ⟨⟨_, ma⟩⟩\n      ⟨b, mb, r ma mb⟩,\n      fun b mb =>\n      let ⟨⟨a, ma⟩⟩ := l.2 ⟨⟨_, mb⟩⟩\n      ⟨a, ma, r ma mb⟩⟩⟩\n#align lift_rel_def lift_rel_def\n\n",
+ "theorem lift_rel_def {R : α → β → Prop} {ca cb} :\n    LiftRel R ca cb ↔ (Terminates ca ↔ Terminates cb) ∧ ∀ {a b}, a ∈ ca → b ∈ cb → R a b :=\n  ⟨fun h =>\n    ⟨terminates_of_LiftRel h, fun a b ma mb =>\n      by\n      let ⟨b', mb', ab⟩ := h.left ma\n      rwa [mem_unique mb mb']⟩,\n    fun ⟨l, r⟩ =>\n    ⟨fun a ma =>\n      let ⟨⟨b, mb⟩⟩ := l.1 ⟨⟨_, ma⟩⟩\n      ⟨b, mb, r ma mb⟩,\n      fun b mb =>\n      let ⟨⟨a, ma⟩⟩ := l.2 ⟨⟨_, mb⟩⟩\n      ⟨a, ma, r ma mb⟩⟩⟩\n#align lift_rel_def lift_rel_def\n\n",
  "lift_rel_congr":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ~ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ~ » -/\ntheorem lift_rel_congr {R : α → β → Prop} {ca ca' : computation α} {cb cb' : computation β} (ha : «expr ~ » ca ca')\n    (hb : «expr ~ » cb cb') : lift_rel R ca cb ↔ lift_rel R ca' cb' :=\n  and_congr (forall_congr' fun a => imp_congr (ha _) <| exists_congr fun b => and_congr (hb _) iff.rfl)\n    (forall_congr' fun b => imp_congr (hb _) <| exists_congr fun a => and_congr (ha _) iff.rfl)\n#align lift_rel_congr lift_rel_congr\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ~ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ~ » -/\ntheorem lift_rel_congr {R : α → β → Prop} {ca ca' : Computation α} {cb cb' : Computation β} (ha : «expr ~ » ca ca')\n    (hb : «expr ~ » cb cb') : LiftRel R ca cb ↔ LiftRel R ca' cb' :=\n  and_congr (forall_congr' fun a => imp_congr (ha _) <| exists_congr fun b => and_congr (hb _) iff.rfl)\n    (forall_congr' fun b => imp_congr (hb _) <| exists_congr fun a => and_congr (ha _) iff.rfl)\n#align lift_rel_congr lift_rel_congr\n\n",
  "lift_rel_bind":
- "theorem lift_rel_bind {δ} (R : α → β → Prop) (S : γ → δ → Prop) {s1 : computation α} {s2 : computation β}\n    {f1 : α → computation γ} {f2 : β → computation δ} (h1 : lift_rel R s1 s2)\n    (h2 : ∀ {a b}, R a b → lift_rel S (f1 a) (f2 b)) : lift_rel S (bind s1 f1) (bind s2 f2) :=\n  let ⟨l1, r1⟩ := h1\n  ⟨fun c cB =>\n    let ⟨a, a1, c₁⟩ := exists_of_mem_bind cB\n    let ⟨b, b2, ab⟩ := l1 a1\n    let ⟨l2, r2⟩ := h2 ab\n    let ⟨d, d2, cd⟩ := l2 c₁\n    ⟨_, mem_bind b2 d2, cd⟩,\n    fun d dB =>\n    let ⟨b, b1, d1⟩ := exists_of_mem_bind dB\n    let ⟨a, a2, ab⟩ := r1 b1\n    let ⟨l2, r2⟩ := h2 ab\n    let ⟨c, c₂, cd⟩ := r2 d1\n    ⟨_, mem_bind a2 c₂, cd⟩⟩\n#align lift_rel_bind lift_rel_bind\n\n",
+ "theorem lift_rel_bind {δ} (R : α → β → Prop) (S : γ → δ → Prop) {s1 : Computation α} {s2 : Computation β}\n    {f1 : α → Computation γ} {f2 : β → Computation δ} (h1 : LiftRel R s1 s2)\n    (h2 : ∀ {a b}, R a b → LiftRel S (f1 a) (f2 b)) : LiftRel S (bind s1 f1) (bind s2 f2) :=\n  let ⟨l1, r1⟩ := h1\n  ⟨fun c cB =>\n    let ⟨a, a1, c₁⟩ := exists_of_mem_bind cB\n    let ⟨b, b2, ab⟩ := l1 a1\n    let ⟨l2, r2⟩ := h2 ab\n    let ⟨d, d2, cd⟩ := l2 c₁\n    ⟨_, mem_bind b2 d2, cd⟩,\n    fun d dB =>\n    let ⟨b, b1, d1⟩ := exists_of_mem_bind dB\n    let ⟨a, a2, ab⟩ := r1 b1\n    let ⟨l2, r2⟩ := h2 ab\n    let ⟨c, c₂, cd⟩ := r2 d1\n    ⟨_, mem_bind a2 c₂, cd⟩⟩\n#align lift_rel_bind lift_rel_bind\n\n",
  "lift_eq_iff_equiv":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ~ » -/\ntheorem lift_eq_iff_equiv (c₁ c₂ : computation α) : lift_rel (· = ·) c₁ c₂ ↔ «expr ~ » c₁ c₂ :=\n  ⟨fun ⟨h1, h2⟩ a =>\n    ⟨fun a1 => by\n      let ⟨b, b2, ab⟩ := h1 a1\n      rwa [ab], fun a2 => by\n      let ⟨b, b1, ab⟩ := h2 a2\n      rwa [← ab]⟩,\n    fun e => ⟨fun a a1 => ⟨a, (e _).1 a1, rfl⟩, fun a a2 => ⟨a, (e _).2 a2, rfl⟩⟩⟩\n#align lift_eq_iff_equiv lift_eq_iff_equiv\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ~ » -/\ntheorem lift_eq_iff_equiv (c₁ c₂ : Computation α) : LiftRel (· = ·) c₁ c₂ ↔ «expr ~ » c₁ c₂ :=\n  ⟨fun ⟨h1, h2⟩ a =>\n    ⟨fun a1 => by\n      let ⟨b, b2, ab⟩ := h1 a1\n      rwa [ab], fun a2 => by\n      let ⟨b, b1, ab⟩ := h2 a2\n      rwa [← ab]⟩,\n    fun e => ⟨fun a a1 => ⟨a, (e _).1 a1, rfl⟩, fun a a2 => ⟨a, (e _).2 a2, rfl⟩⟩⟩\n#align lift_eq_iff_equiv lift_eq_iff_equiv\n\n",
  "length_thinkN":
- "@[simp]\ntheorem length_thinkN (s : computation α) [h : terminates s] (n) : length (thinkN s n) = length s + n :=\n  (results_thinkN n (results_of_terminates _)).length\n#align length_thinkN length_thinkN\n\n",
+ "@[simp]\ntheorem length_thinkN (s : Computation α) [h : Terminates s] (n) : length (thinkN s n) = length s + n :=\n  (results_thinkN n (results_of_terminates _)).length\n#align length_thinkN length_thinkN\n\n",
  "length_think":
- "@[simp]\ntheorem length_think (s : computation α) [h : terminates s] : length (think s) = length s + 1 :=\n  by\n  apply le_antisymm\n  · exact nat.find_min' _ (nat.find_spec ((terminates_def _).1 h))\n  · have : (option.is_some ((think s).val (length (think s))) : Prop) :=\n      nat.find_spec ((terminates_def _).1 s.think_terminates)\n    cases' length (think s) with n\n    · contradiction\n    · apply nat.succ_le_succ\n      apply nat.find_min'\n      apply this\n#align length_think length_think\n\n",
+ "@[simp]\ntheorem length_think (s : Computation α) [h : Terminates s] : length (think s) = length s + 1 :=\n  by\n  apply le_antisymm\n  · exact nat.find_min' _ (nat.find_spec ((terminates_def _).1 h))\n  · have : (option.is_some ((think s).val (length (think s))) : Prop) :=\n      nat.find_spec ((terminates_def _).1 s.think_terminates)\n    cases' length (think s) with n\n    · contradiction\n    · apply nat.succ_le_succ\n      apply nat.find_min'\n      apply this\n#align length_think length_think\n\n",
  "length_ret":
- "@[simp]\ntheorem length_ret (a : α) : length (return a) = 0 :=\n  let h := computation.ret_terminates a\n  nat.eq_zero_of_le_zero <| nat.find_min' ((terminates_def (return a)).1 h) rfl\n#align length_ret length_ret\n\n",
+ "@[simp]\ntheorem length_ret (a : α) : length (pure a) = 0 :=\n  let h := Computation.ret_terminates a\n  nat.eq_zero_of_le_zero <| nat.find_min' ((terminates_def (pure a)).1 h) rfl\n#align length_ret length_ret\n\n",
  "length_bind":
- "@[simp]\ntheorem length_bind (s : computation α) (f : α → computation β) [T1 : terminates s] [T2 : terminates (f (get s))] :\n    length (bind s f) = length (f (get s)) + length s :=\n  (results_of_terminates _).len_unique <| results_bind (results_of_terminates _) (results_of_terminates _)\n#align length_bind length_bind\n\n",
+ "@[simp]\ntheorem length_bind (s : Computation α) (f : α → Computation β) [T1 : Terminates s] [T2 : Terminates (f (get s))] :\n    length (bind s f) = length (f (get s)) + length s :=\n  (results_of_terminates _).len_unique <| results_bind (results_of_terminates _) (results_of_terminates _)\n#align length_bind length_bind\n\n",
  "length":
- "theorem results.length {s : computation α} {a n} [T : terminates s] : results s a n → length s = n\n  | ⟨_, h⟩ => h\n#align results.length results.length\n\n",
+ "theorem results.length {s : Computation α} {a n} [T : Terminates s] : Results s a n → length s = n\n  | ⟨_, h⟩ => h\n#align results.length results.length\n\n",
  "len_unique":
- "theorem results.len_unique {s : computation α} {a b m n} (h1 : results s a m) (h2 : results s b n) : m = n := by\n  haveI := h1.terminates <;> haveI := h2.terminates <;> rw [← h1.length, h2.length]\n#align results.len_unique results.len_unique\n\n",
+ "theorem results.len_unique {s : Computation α} {a b m n} (h1 : Results s a m) (h2 : Results s b n) : m = n := by\n  haveI := h1.terminates <;> haveI := h2.terminates <;> rw [← h1.length, h2.length]\n#align results.len_unique results.len_unique\n\n",
  "lem":
- "theorem lift_rel_rec.lem {R : α → β → Prop} (C : computation α → computation β → Prop)\n    (H : ∀ {ca cb}, C ca cb → lift_rel_aux R C (destruct ca) (destruct cb)) (ca cb) (Hc : C ca cb) (a) (ha : a ∈ ca) :\n    lift_rel R ca cb := by\n  revert cb; refine' mem_rec_on ha _ fun ca' IH => _ <;> intro cb Hc <;> have h := H Hc\n  · simp at h\n    simp [h]\n  · have h := H Hc\n    simp\n    revert h\n    apply cb.rec_on (fun b => _) fun cb' => _ <;> intro h <;> simp at h <;> simp [h]\n    exact IH _ h\n#align lift_rel_rec.lem lift_rel_rec.lem\n\n",
+ "theorem lift_rel_rec.lem {R : α → β → Prop} (C : Computation α → Computation β → Prop)\n    (H : ∀ {ca cb}, C ca cb → LiftRelAux R C (destruct ca) (destruct cb)) (ca cb) (Hc : C ca cb) (a) (ha : a ∈ ca) :\n    LiftRel R ca cb := by\n  revert cb; refine' mem_rec_on ha _ fun ca' IH => _ <;> intro cb Hc <;> have h := H Hc\n  · simp at h\n    simp [h]\n  · have h := H Hc\n    simp\n    revert h\n    apply cb.rec_on (fun b => _) fun cb' => _ <;> intro h <;> simp at h <;> simp [h]\n    exact IH _ h\n#align lift_rel_rec.lem lift_rel_rec.lem\n\n",
  "left_unique":
- "theorem mem.left_unique : relator.left_unique ((· ∈ ·) : α → computation α → Prop) := fun a s b => mem_unique\n#align mem.left_unique mem.left_unique\n\n",
+ "theorem mem.left_unique : Relator.LeftUnique ((· ∈ ·) : α → Computation α → Prop) := fun a s b => mem_unique\n#align mem.left_unique mem.left_unique\n\n",
  "le_stable":
- "-- It's more of a stretch to use ∈ for this relation, but it\n-- asserts that the computation limits to the given value.\ntheorem le_stable (s : computation α) {a m n} (h : m ≤ n) : s.1 m = some a → s.1 n = some a :=\n  by\n  cases' s with f al\n  induction' h with n h IH\n  exacts[id, fun h2 => al (IH h2)]\n#align le_stable le_stable\n\n",
+ "-- It's more of a stretch to use ∈ for this relation, but it\n-- asserts that the computation limits to the given value.\ntheorem le_stable (s : Computation α) {a m n} (h : m ≤ n) : s.1 m = some a → s.1 n = some a :=\n  by\n  cases' s with f al\n  induction' h with n h IH\n  exacts[id, fun h2 => al (IH h2)]\n#align le_stable le_stable\n\n",
  "imp":
- "theorem lift_rel.imp {R S : α → β → Prop} (H : ∀ {a b}, R a b → S a b) (s t) : lift_rel R s t → lift_rel S s t\n  | ⟨l, r⟩ =>\n    ⟨fun a as =>\n      let ⟨b, bt, ab⟩ := l as\n      ⟨b, bt, H ab⟩,\n      fun b bt =>\n      let ⟨a, as, ab⟩ := r bt\n      ⟨a, as, H ab⟩⟩\n#align lift_rel.imp lift_rel.imp\n\n",
+ "theorem lift_rel.imp {R S : α → β → Prop} (H : ∀ {a b}, R a b → S a b) (s t) : LiftRel R s t → LiftRel S s t\n  | ⟨l, r⟩ =>\n    ⟨fun a as =>\n      let ⟨b, bt, ab⟩ := l as\n      ⟨b, bt, H ab⟩,\n      fun b bt =>\n      let ⟨a, as, ab⟩ := r bt\n      ⟨a, as, H ab⟩⟩\n#align lift_rel.imp lift_rel.imp\n\n",
  "head_think":
- "@[simp]\ntheorem head_think (s : computation α) : head (think s) = none :=\n  rfl\n#align head_think head_think\n\n",
+ "@[simp]\ntheorem head_think (s : Computation α) : head (think s) = none :=\n  rfl\n#align head_think head_think\n\n",
  "head_ret":
- "@[simp]\ntheorem head_ret (a : α) : head (return a) = some a :=\n  rfl\n#align head_ret head_ret\n\n",
+ "@[simp]\ntheorem head_ret (a : α) : head (pure a) = some a :=\n  rfl\n#align head_ret head_ret\n\n",
  "head_empty":
  "@[simp]\ntheorem head_empty : head (empty α) = none :=\n  rfl\n#align head_empty head_empty\n\n",
  "has_map_eq_map":
- "theorem has_map_eq_map {β} (f : α → β) (c : computation α) : f <$> c = map f c :=\n  rfl\n#align has_map_eq_map has_map_eq_map\n\n",
+ "theorem has_map_eq_map {β} (f : α → β) (c : Computation α) : f <$> c = map f c :=\n  rfl\n#align has_map_eq_map has_map_eq_map\n\n",
  "has_bind_eq_bind":
- "theorem has_bind_eq_bind {β} (c : computation α) (f : α → computation β) : c >>= f = bind c f :=\n  rfl\n#align has_bind_eq_bind has_bind_eq_bind\n\n",
+ "theorem has_bind_eq_bind {β} (c : Computation α) (f : α → Computation β) : c >>= f = bind c f :=\n  rfl\n#align has_bind_eq_bind has_bind_eq_bind\n\n",
  "get_thinkN":
  "@[simp]\ntheorem get_thinkN (n) : get (thinkN s n) = get s :=\n  get_eq_of_mem _ <| (thinkN_mem _).2 (get_mem _)\n#align get_thinkN get_thinkN\n\n",
  "get_think":
  "@[simp]\ntheorem get_think : get (think s) = get s :=\n  get_eq_of_mem _ <|\n    let ⟨n, h⟩ := get_mem s\n    ⟨n + 1, h⟩\n#align get_think get_think\n\n",
  "get_ret":
- "@[simp]\ntheorem get_ret (a : α) : get (return a) = a :=\n  get_eq_of_mem _ ⟨0, rfl⟩\n#align get_ret get_ret\n\n",
+ "@[simp]\ntheorem get_ret (a : α) : get (pure a) = a :=\n  get_eq_of_mem _ ⟨0, rfl⟩\n#align get_ret get_ret\n\n",
  "get_promises":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ~> » -/\ntheorem get_promises : «expr ~> » s (get s) := fun a => get_eq_of_mem _\n#align get_promises get_promises\n\n",
  "get_mem":
  "theorem get_mem : get s ∈ s :=\n  exists.intro (length s) (Option.eq_some_of_isSome _).symm\n#align get_mem get_mem\n\n",
  "get_equiv":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ~ » -/\ntheorem get_equiv {c₁ c₂ : computation α} (h : «expr ~ » c₁ c₂) [terminates c₁] [terminates c₂] : get c₁ = get c₂ :=\n  get_eq_of_mem _ <| (h _).2 <| get_mem _\n#align get_equiv get_equiv\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ~ » -/\ntheorem get_equiv {c₁ c₂ : Computation α} (h : «expr ~ » c₁ c₂) [Terminates c₁] [Terminates c₂] : get c₁ = get c₂ :=\n  get_eq_of_mem _ <| (h _).2 <| get_mem _\n#align get_equiv get_equiv\n\n",
  "get_eq_of_promises":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ~> » -/\ntheorem get_eq_of_promises {a} : «expr ~> » s a → get s = a :=\n  get_eq_of_mem _ ∘ mem_of_promises _\n#align get_eq_of_promises get_eq_of_promises\n\n",
  "get_eq_of_mem":
  "theorem get_eq_of_mem {a} : a ∈ s → get s = a :=\n  mem_unique (get_mem _)\n#align get_eq_of_mem get_eq_of_mem\n\n",
  "get_bind":
- "@[simp]\ntheorem get_bind (s : computation α) (f : α → computation β) [terminates s] [terminates (f (get s))] :\n    get (bind s f) = get (f (get s)) :=\n  get_eq_of_mem _ (mem_bind (get_mem s) (get_mem (f (get s))))\n#align get_bind get_bind\n\n",
+ "@[simp]\ntheorem get_bind (s : Computation α) (f : α → Computation β) [Terminates s] [Terminates (f (get s))] :\n    get (bind s f) = get (f (get s)) :=\n  get_eq_of_mem _ (mem_bind (get_mem s) (get_mem (f (get s))))\n#align get_bind get_bind\n\n",
  "exists_results_of_mem":
- "theorem exists_results_of_mem {s : computation α} {a} (h : a ∈ s) : ∃ n, results s a n :=\n  haveI := terminates_of_mem h\n  ⟨_, results_of_terminates' s h⟩\n#align exists_results_of_mem exists_results_of_mem\n\n",
+ "theorem exists_results_of_mem {s : Computation α} {a} (h : a ∈ s) : ∃ n, Results s a n :=\n  haveI := terminates_of_mem h\n  ⟨_, results_of_terminates' s h⟩\n#align exists_results_of_mem exists_results_of_mem\n\n",
  "exists_of_mem_map":
- "theorem exists_of_mem_map {f : α → β} {b : β} {s : computation α} (h : b ∈ map f s) : ∃ a, a ∈ s ∧ f a = b := by\n  rw [← bind_ret] at h <;>\n    exact\n      let ⟨a, as, fb⟩ := exists_of_mem_bind h\n      ⟨a, as, mem_unique (ret_mem _) fb⟩\n#align exists_of_mem_map exists_of_mem_map\n\n",
+ "theorem exists_of_mem_map {f : α → β} {b : β} {s : Computation α} (h : b ∈ map f s) : ∃ a, a ∈ s ∧ f a = b := by\n  rw [← bind_ret] at h <;>\n    exact\n      let ⟨a, as, fb⟩ := exists_of_mem_bind h\n      ⟨a, as, mem_unique (ret_mem _) fb⟩\n#align exists_of_mem_map exists_of_mem_map\n\n",
  "exists_of_mem_bind":
- "theorem exists_of_mem_bind {s : computation α} {f : α → computation β} {b} (h : b ∈ bind s f) : ∃ a ∈ s, b ∈ f a :=\n  let ⟨k, h⟩ := exists_results_of_mem h\n  let ⟨a, m, n, h1, h2, e⟩ := of_results_bind h\n  ⟨a, h1.mem, h2.mem⟩\n#align exists_of_mem_bind exists_of_mem_bind\n\n",
+ "theorem exists_of_mem_bind {s : Computation α} {f : α → Computation β} {b} (h : b ∈ bind s f) : ∃ a ∈ s, b ∈ f a :=\n  let ⟨k, h⟩ := exists_results_of_mem h\n  let ⟨a, m, n, h1, h2, e⟩ := of_results_bind h\n  ⟨a, h1.mem, h2.mem⟩\n#align exists_of_mem_bind exists_of_mem_bind\n\n",
  "exists_of_lift_rel_right":
- "theorem exists_of_lift_rel_right {R : α → β → Prop} {ca cb} (H : lift_rel R ca cb) {b} (h : b ∈ cb) :\n    ∃ a, a ∈ ca ∧ R a b :=\n  H.right h\n#align exists_of_lift_rel_right exists_of_lift_rel_right\n\n",
+ "theorem exists_of_lift_rel_right {R : α → β → Prop} {ca cb} (H : LiftRel R ca cb) {b} (h : b ∈ cb) :\n    ∃ a, a ∈ ca ∧ R a b :=\n  H.right h\n#align exists_of_lift_rel_right exists_of_lift_rel_right\n\n",
  "exists_of_lift_rel_left":
- "theorem exists_of_lift_rel_left {R : α → β → Prop} {ca cb} (H : lift_rel R ca cb) {a} (h : a ∈ ca) :\n    ∃ b, b ∈ cb ∧ R a b :=\n  H.left h\n#align exists_of_lift_rel_left exists_of_lift_rel_left\n\n",
+ "theorem exists_of_lift_rel_left {R : α → β → Prop} {ca cb} (H : LiftRel R ca cb) {a} (h : a ∈ ca) :\n    ∃ b, b ∈ cb ∧ R a b :=\n  H.left h\n#align exists_of_lift_rel_left exists_of_lift_rel_left\n\n",
  "equivalence":
- "theorem equiv.equivalence : equivalence (@equiv α) :=\n  ⟨@equiv.refl _, @equiv.symm _, @equiv.trans _⟩\n#align equiv.equivalence equiv.equivalence\n\n",
+ "theorem equiv.equivalence : equivalence (@Equiv α) :=\n  ⟨@Equiv.refl _, @Equiv.symm _, @Equiv.trans _⟩\n#align equiv.equivalence equiv.equivalence\n\n",
  "equiv_ret_of_mem":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ~ » -/\ntheorem equiv_ret_of_mem {s : computation α} {a} (h : a ∈ s) : «expr ~ » s (return a) :=\n  equiv_of_mem h (ret_mem _)\n#align equiv_ret_of_mem equiv_ret_of_mem\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ~ » -/\ntheorem equiv_ret_of_mem {s : Computation α} {a} (h : a ∈ s) : «expr ~ » s (pure a) :=\n  equiv_of_mem h (ret_mem _)\n#align equiv_ret_of_mem equiv_ret_of_mem\n\n",
  "equiv_of_mem":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ~ » -/\ntheorem equiv_of_mem {s t : computation α} {a} (h1 : a ∈ s) (h2 : a ∈ t) : «expr ~ » s t := fun a' =>\n  ⟨fun ma => by rw [mem_unique ma h1] <;> exact h2, fun ma => by rw [mem_unique ma h2] <;> exact h1⟩\n#align equiv_of_mem equiv_of_mem\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ~ » -/\ntheorem equiv_of_mem {s t : Computation α} {a} (h1 : a ∈ s) (h2 : a ∈ t) : «expr ~ » s t := fun a' =>\n  ⟨fun ma => by rw [mem_unique ma h1] <;> exact h2, fun ma => by rw [mem_unique ma h2] <;> exact h1⟩\n#align equiv_of_mem equiv_of_mem\n\n",
  "equiv":
- "theorem lift_rel.equiv (R : α → α → Prop) : equivalence R → equivalence (lift_rel R)\n  | ⟨refl, symm, trans⟩ => ⟨lift_rel.refl R refl, lift_rel.symm R symm, lift_rel.trans R trans⟩\n#align lift_rel.equiv lift_rel.equiv\n\n",
+ "theorem lift_rel.equiv (R : α → α → Prop) : equivalence R → equivalence (LiftRel R)\n  | ⟨refl, symm, trans⟩ => ⟨LiftRel.refl R refl, LiftRel.symm R symm, LiftRel.trans R trans⟩\n#align lift_rel.equiv lift_rel.equiv\n\n",
  "eq_thinkN'":
- "theorem eq_thinkN' (s : computation α) [h : terminates s] : s = thinkN (return (get s)) (length s) :=\n  eq_thinkN (results_of_terminates _)\n#align eq_thinkN' eq_thinkN'\n\n",
+ "theorem eq_thinkN' (s : Computation α) [h : Terminates s] : s = thinkN (pure (get s)) (length s) :=\n  eq_thinkN (results_of_terminates _)\n#align eq_thinkN' eq_thinkN'\n\n",
  "eq_thinkN":
- "theorem eq_thinkN {s : computation α} {a n} (h : results s a n) : s = thinkN (return a) n :=\n  by\n  revert s\n  induction' n with n IH <;> intro s <;> apply rec_on s (fun a' => _) fun s => _ <;> intro h\n  · rw [← eq_of_ret_mem h.mem]\n    rfl\n  · cases' of_results_think h with n h\n    cases h\n    contradiction\n  · have := h.len_unique (results_ret _)\n    contradiction\n  · rw [IH (results_think_iff.1 h)]\n    rfl\n#align eq_thinkN eq_thinkN\n\n",
+ "theorem eq_thinkN {s : Computation α} {a n} (h : Results s a n) : s = thinkN (pure a) n :=\n  by\n  revert s\n  induction' n with n IH <;> intro s <;> apply rec_on s (fun a' => _) fun s => _ <;> intro h\n  · rw [← eq_of_ret_mem h.mem]\n    rfl\n  · cases' of_results_think h with n h\n    cases h\n    contradiction\n  · have := h.len_unique (results_ret _)\n    contradiction\n  · rw [IH (results_think_iff.1 h)]\n    rfl\n#align eq_thinkN eq_thinkN\n\n",
  "eq_of_ret_mem":
- "theorem eq_of_ret_mem {a a' : α} (h : a' ∈ return a) : a' = a :=\n  mem_unique h (ret_mem _)\n#align eq_of_ret_mem eq_of_ret_mem\n\n",
+ "theorem eq_of_ret_mem {a a' : α} (h : a' ∈ pure a) : a' = a :=\n  mem_unique h (ret_mem _)\n#align eq_of_ret_mem eq_of_ret_mem\n\n",
  "eq_of_bisim":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ~ » -/\n-- If two computations are bisimilar, then they are equal\ntheorem eq_of_bisim (bisim : is_bisimulation R) {s₁ s₂} (r : «expr ~ » s₁ s₂) : s₁ = s₂ :=\n  by\n  apply subtype.eq\n  apply Stream'.eq_of_bisim fun x y => ∃ s s' : computation α, s.1 = x ∧ s'.1 = y ∧ R s s'\n  dsimp [Stream'.IsBisimulation]\n  intro t₁ t₂ e\n  exact\n    match t₁, t₂, e with\n    | _, _, ⟨s, s', rfl, rfl, r⟩ =>\n      by\n      suffices head s = head s' ∧ R (tail s) (tail s') from\n        and.imp id (fun r => ⟨tail s, tail s', by cases s <;> rfl, by cases s' <;> rfl, r⟩) this\n      have := bisim r; revert r this\n      apply rec_on s _ _ <;> intros <;> apply rec_on s' _ _ <;> intros <;> intro r this\n      · constructor\n        dsimp at this\n        rw [this]\n        assumption\n      · rw [destruct_ret, destruct_think] at this\n        exact false.elim this\n      · rw [destruct_ret, destruct_think] at this\n        exact false.elim this\n      · simp at this\n        simp [*]\n  exact ⟨s₁, s₂, rfl, rfl, r⟩\n#align eq_of_bisim eq_of_bisim\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ~ » -/\n-- If two computations are bisimilar, then they are equal\ntheorem eq_of_bisim (bisim : IsBisimulation R) {s₁ s₂} (r : «expr ~ » s₁ s₂) : s₁ = s₂ :=\n  by\n  apply Subtype.eq\n  apply Stream'.eq_of_bisim fun x y => ∃ s s' : Computation α, s.1 = x ∧ s'.1 = y ∧ R s s'\n  dsimp [Stream'.IsBisimulation]\n  intro t₁ t₂ e\n  exact\n    match t₁, t₂, e with\n    | _, _, ⟨s, s', rfl, rfl, r⟩ =>\n      by\n      suffices head s = head s' ∧ R (tail s) (tail s') from\n        and.imp id (fun r => ⟨tail s, tail s', by cases s <;> rfl, by cases s' <;> rfl, r⟩) this\n      have := bisim r; revert r this\n      apply rec_on s _ _ <;> intros <;> apply rec_on s' _ _ <;> intros <;> intro r this\n      · constructor\n        dsimp at this\n        rw [this]\n        assumption\n      · rw [destruct_ret, destruct_think] at this\n        exact false.elim this\n      · rw [destruct_ret, destruct_think] at this\n        exact false.elim this\n      · simp at this\n        simp [*]\n  exact ⟨s₁, s₂, rfl, rfl, r⟩\n#align eq_of_bisim eq_of_bisim\n\n",
  "eq_empty_of_not_terminates":
- "theorem eq_empty_of_not_terminates {s} (H : ¬terminates s) : s = empty α :=\n  by\n  apply subtype.eq; funext n\n  induction' h : s.val n with ; · rfl\n  refine' absurd _ H; exact ⟨⟨_, _, h.symm⟩⟩\n#align eq_empty_of_not_terminates eq_empty_of_not_terminates\n\n",
+ "theorem eq_empty_of_not_terminates {s} (H : ¬Terminates s) : s = empty α :=\n  by\n  apply Subtype.eq; funext n\n  induction' h : s.val n with ; · rfl\n  refine' absurd _ H; exact ⟨⟨_, _, h.symm⟩⟩\n#align eq_empty_of_not_terminates eq_empty_of_not_terminates\n\n",
  "empty_promises":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ~> » -/\ntheorem empty_promises (a : α) : «expr ~> » (empty α) a := fun a' h => absurd h (not_mem_empty _)\n#align empty_promises empty_promises\n\n",
  "empty_orelse":
- "@[simp]\ntheorem empty_orelse (c) : (empty α <|> c) = c :=\n  by\n  apply eq_of_bisim (fun c₁ c₂ => (empty α <|> c₂) = c₁) _ rfl\n  intro s' s h; rw [← h]\n  apply rec_on s <;> intro s <;> rw [think_empty] <;> simp\n  rw [← think_empty]\n#align empty_orelse empty_orelse\n\n",
+ "@[simp]\ntheorem empty_orelse (c) : (empty α <|> c) = c :=\n  by\n  apply eq_of_bisim (fun c₁ c₂ => (Empty α <|> c₂) = c₁) _ rfl\n  intro s' s h; rw [← h]\n  apply rec_on s <;> intro s <;> rw [think_empty] <;> simp\n  rw [← think_empty]\n#align empty_orelse empty_orelse\n\n",
  "destruct_think":
- "@[simp]\ntheorem destruct_think : ∀ s : computation α, destruct (think s) = sum.inr s\n  | ⟨f, al⟩ => rfl\n#align destruct_think destruct_think\n\n",
+ "@[simp]\ntheorem destruct_think : ∀ s : Computation α, destruct (think s) = Sum.inr s\n  | ⟨f, al⟩ => rfl\n#align destruct_think destruct_think\n\n",
  "destruct_ret":
- "@[simp]\ntheorem destruct_ret (a : α) : destruct (return a) = sum.inl a :=\n  rfl\n#align destruct_ret destruct_ret\n\n",
+ "@[simp]\ntheorem destruct_ret (a : α) : destruct (pure a) = Sum.inl a :=\n  rfl\n#align destruct_ret destruct_ret\n\n",
  "destruct_map":
  "@[simp]\ntheorem destruct_map (f : α → β) (s) : destruct (map f s) = lmap f (rmap (map f) (destruct s)) := by\n  apply s.rec_on <;> intro <;> simp\n#align destruct_map destruct_map\n\n",
  "destruct_eq_think":
- "theorem destruct_eq_think {s : computation α} {s'} : destruct s = sum.inr s' → s = think s' :=\n  by\n  dsimp [destruct]\n  induction' f0 : s.1 0 with a' <;> intro h\n  · injection h with h'\n    rw [← h']\n    cases' s with f al\n    apply subtype.eq\n    dsimp [think, tail]\n    rw [← f0]\n    exact (Stream'.eta f).symm\n  · contradiction\n#align destruct_eq_think destruct_eq_think\n\n",
+ "theorem destruct_eq_think {s : Computation α} {s'} : destruct s = Sum.inr s' → s = think s' :=\n  by\n  dsimp [destruct]\n  induction' f0 : s.1 0 with a' <;> intro h\n  · injection h with h'\n    rw [← h']\n    cases' s with f al\n    apply Subtype.eq\n    dsimp [think, tail]\n    rw [← f0]\n    exact (Stream'.eta f).symm\n  · contradiction\n#align destruct_eq_think destruct_eq_think\n\n",
  "destruct_eq_ret":
- "/-\nCopyright (c) 2017 Microsoft Corporation. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Mario Carneiro\n\nCoinductive formalization of unbounded computations.\n-/\n/-\ncoinductive computation (α : Type u) : Type u\n| return : α → computation α\n| think : computation α → computation α\n-/\n-- constructors\n-- note [use has_coe_t]\n-- check for immediate result\n-- one step of computation\ntheorem destruct_eq_ret {s : computation α} {a : α} : destruct s = sum.inl a → s = return a :=\n  by\n  dsimp [destruct]\n  induction' f0 : s.1 0 with <;> intro h\n  · contradiction\n  · apply subtype.eq\n    funext n\n    induction' n with n IH\n    · injection h with h'\n      rwa [h'] at f0\n    · exact s.2 IH\n#align destruct_eq_ret destruct_eq_ret\n\n",
+ "/-\nCopyright (c) 2017 Microsoft Corporation. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Mario Carneiro\n\nCoinductive formalization of unbounded computations.\n-/\n/-\ncoinductive computation (α : Type u) : Type u\n| return : α → computation α\n| think : computation α → computation α\n-/\n-- constructors\n-- note [use has_coe_t]\n-- check for immediate result\n-- one step of computation\ntheorem destruct_eq_ret {s : Computation α} {a : α} : destruct s = Sum.inl a → s = pure a :=\n  by\n  dsimp [destruct]\n  induction' f0 : s.1 0 with <;> intro h\n  · contradiction\n  · apply Subtype.eq\n    funext n\n    induction' n with n IH\n    · injection h with h'\n      rwa [h'] at f0\n    · exact s.2 IH\n#align destruct_eq_ret destruct_eq_ret\n\n",
  "destruct_empty":
- "@[simp]\ntheorem destruct_empty : destruct (empty α) = sum.inr (empty α) :=\n  rfl\n#align destruct_empty destruct_empty\n\n",
+ "@[simp]\ntheorem destruct_empty : destruct (empty α) = Sum.inr (empty α) :=\n  rfl\n#align destruct_empty destruct_empty\n\n",
  "corec_eq":
- "@[simp]\ntheorem corec_eq (f : β → Sum α β) (b : β) : destruct (corec f b) = rmap (corec f) (f b) :=\n  by\n  dsimp [corec, destruct]\n  change Stream'.corec' (corec.F f) (sum.inr b) 0 with corec.F._match_1 (f b)\n  induction' h : f b with a b'; · rfl\n  dsimp [corec.F, destruct]\n  apply congr_arg; apply subtype.eq\n  dsimp [corec, tail]\n  rw [Stream'.corec'_eq, Stream'.tail_cons]\n  dsimp [corec.F]; rw [h]\n#align corec_eq corec_eq\n\n",
+ "@[simp]\ntheorem corec_eq (f : β → Sum α β) (b : β) : destruct (corec f b) = rmap (corec f) (f b) :=\n  by\n  dsimp [corec, destruct]\n  change Stream'.corec' (corec.F f) (Sum.inr b) 0 with corec.F._match_1 (f b)\n  induction' h : f b with a b'; · rfl\n  dsimp [corec.F, destruct]\n  apply congr_arg; apply Subtype.eq\n  dsimp [corec, tail]\n  rw [Stream'.corec'_eq, Stream'.tail_cons]\n  dsimp [corec.F]; rw [h]\n#align corec_eq corec_eq\n\n",
  "bind_ret'":
- "@[simp]\ntheorem bind_ret' (s : computation α) : bind s return = s := by\n  rw [bind_ret] <;> change fun x : α => x with @id α <;> rw [map_id]\n#align bind_ret' bind_ret'\n\n",
+ "@[simp]\ntheorem bind_ret' (s : Computation α) : bind s pure = s := by\n  rw [bind_ret] <;> change fun x : α => x with @id α <;> rw [map_id]\n#align bind_ret' bind_ret'\n\n",
  "bind_ret":
- "@[simp]\ntheorem bind_ret (f : α → β) (s) : bind s (return ∘ f) = map f s :=\n  by\n  apply eq_of_bisim fun c₁ c₂ => c₁ = c₂ ∨ ∃ s, c₁ = bind s (return ∘ f) ∧ c₂ = map f s\n  · intro c₁ c₂ h\n    exact\n      match c₁, c₂, h with\n      | _, _, or.inl (eq.refl c) => by cases' destruct c with b cb <;> simp\n      | _, _, or.inr ⟨s, rfl, rfl⟩ => by\n        apply rec_on s <;> intro s <;> simp\n        exact or.inr ⟨s, rfl, rfl⟩\n  · exact or.inr ⟨s, rfl, rfl⟩\n#align bind_ret bind_ret\n\n",
+ "@[simp]\ntheorem bind_ret (f : α → β) (s) : bind s (pure ∘ f) = map f s :=\n  by\n  apply eq_of_bisim fun c₁ c₂ => c₁ = c₂ ∨ ∃ s, c₁ = bind s (return ∘ f) ∧ c₂ = map f s\n  · intro c₁ c₂ h\n    exact\n      match c₁, c₂, h with\n      | _, _, or.inl (Eq.refl c) => by cases' destruct c with b cb <;> simp\n      | _, _, or.inr ⟨s, rfl, rfl⟩ => by\n        apply rec_on s <;> intro s <;> simp\n        exact or.inr ⟨s, rfl, rfl⟩\n  · exact or.inr ⟨s, rfl, rfl⟩\n#align bind_ret bind_ret\n\n",
  "bind_promises":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ~> » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ~> » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ~> » -/\ntheorem bind_promises {s : computation α} {f : α → computation β} {a b} (h1 : «expr ~> » s a)\n    (h2 : «expr ~> » (f a) b) : «expr ~> » (bind s f) b := fun b' bB =>\n  by\n  rcases exists_of_mem_bind bB with ⟨a', a's, ba'⟩\n  rw [← h1 a's] at ba'; exact h2 ba'\n#align bind_promises bind_promises\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ~> » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ~> » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ~> » -/\ntheorem bind_promises {s : Computation α} {f : α → Computation β} {a b} (h1 : «expr ~> » s a)\n    (h2 : «expr ~> » (f a) b) : «expr ~> » (bind s f) b := fun b' bB =>\n  by\n  rcases exists_of_mem_bind bB with ⟨a', a's, ba'⟩\n  rw [← h1 a's] at ba'; exact h2 ba'\n#align bind_promises bind_promises\n\n",
  "bind_congr":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ~ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ~ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ~ » -/\n#print bind_congr /-\ntheorem bind_congr {s1 s2 : computation α} {f1 f2 : α → computation β} (h1 : «expr ~ » s1 s2)\n    (h2 : ∀ a, «expr ~ » (f1 a) (f2 a)) : «expr ~ » (bind s1 f1) (bind s2 f2) := fun b =>\n  ⟨fun h =>\n    let ⟨a, ha, hb⟩ := exists_of_mem_bind h\n    mem_bind ((h1 a).1 ha) ((h2 a b).1 hb),\n    fun h =>\n    let ⟨a, ha, hb⟩ := exists_of_mem_bind h\n    mem_bind ((h1 a).2 ha) ((h2 a b).2 hb)⟩\n#align bind_congr bind_congr\n-/\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ~ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ~ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ~ » -/\n#print bind_congr /-\ntheorem bind_congr {s1 s2 : Computation α} {f1 f2 : α → Computation β} (h1 : «expr ~ » s1 s2)\n    (h2 : ∀ a, «expr ~ » (f1 a) (f2 a)) : «expr ~ » (bind s1 f1) (bind s2 f2) := fun b =>\n  ⟨fun h =>\n    let ⟨a, ha, hb⟩ := exists_of_mem_bind h\n    mem_bind ((h1 a).1 ha) ((h2 a b).1 hb),\n    fun h =>\n    let ⟨a, ha, hb⟩ := exists_of_mem_bind h\n    mem_bind ((h1 a).2 ha) ((h2 a b).2 hb)⟩\n#align bind_congr bind_congr\n-/\n\n",
  "bind_assoc":
- "@[simp]\ntheorem bind_assoc (s : computation α) (f : α → computation β) (g : β → computation γ) :\n    bind (bind s f) g = bind s fun x : α => bind (f x) g :=\n  by\n  apply eq_of_bisim fun c₁ c₂ => c₁ = c₂ ∨ ∃ s, c₁ = bind (bind s f) g ∧ c₂ = bind s fun x : α => bind (f x) g\n  · intro c₁ c₂ h\n    exact\n      match c₁, c₂, h with\n      | _, _, or.inl (eq.refl c) => by cases' destruct c with b cb <;> simp\n      | _, _, or.inr ⟨s, rfl, rfl⟩ => by\n        apply rec_on s <;> intro s <;> simp\n        · generalize f s = fs\n          apply rec_on fs <;> intro t <;> simp\n          · cases' destruct (g t) with b cb <;> simp\n        · exact or.inr ⟨s, rfl, rfl⟩\n  · exact or.inr ⟨s, rfl, rfl⟩\n#align bind_assoc bind_assoc\n\n"}
+ "@[simp]\ntheorem bind_assoc (s : Computation α) (f : α → Computation β) (g : β → Computation γ) :\n    bind (bind s f) g = bind s fun x : α => bind (f x) g :=\n  by\n  apply eq_of_bisim fun c₁ c₂ => c₁ = c₂ ∨ ∃ s, c₁ = bind (bind s f) g ∧ c₂ = bind s fun x : α => bind (f x) g\n  · intro c₁ c₂ h\n    exact\n      match c₁, c₂, h with\n      | _, _, or.inl (Eq.refl c) => by cases' destruct c with b cb <;> simp\n      | _, _, or.inr ⟨s, rfl, rfl⟩ => by\n        apply rec_on s <;> intro s <;> simp\n        · generalize f s = fs\n          apply rec_on fs <;> intro t <;> simp\n          · cases' destruct (g t) with b cb <;> simp\n        · exact or.inr ⟨s, rfl, rfl⟩\n  · exact or.inr ⟨s, rfl, rfl⟩\n#align bind_assoc bind_assoc\n\n"}

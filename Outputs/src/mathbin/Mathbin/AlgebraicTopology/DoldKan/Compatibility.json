@@ -1,0 +1,14 @@
+{"equivalence₂_unit_iso_eq":
+ "theorem equivalence₂_unit_iso_eq : (equivalence₂ eB hF).unit_iso = equivalence₂UnitIso eB hF :=\n  by\n  ext X\n  dsimp [equivalence₂]\n  simpa only [equivalence₂_unit_iso_hom_app, equivalence₁_unit_iso_eq, equivalence₁_unit_iso_hom_app, assoc,\n    nat_iso.cancel_nat_iso_hom_left]\n#align equivalence₂_unit_iso_eq equivalence₂_unit_iso_eq\n\n",
+ "equivalence₂_inverse":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⋙ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⋙ » -/\ntheorem equivalence₂_inverse : (equivalence₂ eB hF).inverse = «expr ⋙ » eB.functor («expr ⋙ » e'.inverse eA.inverse) :=\n  rfl\n#align equivalence₂_inverse equivalence₂_inverse\n\n",
+ "equivalence₂_counit_iso_eq":
+ "theorem equivalence₂_counit_iso_eq : (equivalence₂ eB hF).counit_iso = equivalence₂CounitIso eB hF :=\n  by\n  ext Y'\n  dsimp [equivalence₂, iso.refl]\n  simp only [equivalence₁_counit_iso_eq, equivalence₂_counit_iso_hom_app, equivalence₁_counit_iso_hom_app,\n    functor.map_comp, assoc]\n#align equivalence₂_counit_iso_eq equivalence₂_counit_iso_eq\n\n",
+ "equivalence₁_unit_iso_eq":
+ "theorem equivalence₁_unit_iso_eq : (equivalence₁ hF).unit_iso = equivalence₁UnitIso hF :=\n  by\n  ext X\n  dsimp [equivalence₀, equivalence₁, nat_iso.hcomp, is_equivalence.of_equivalence]\n  simp only [id_comp, assoc, equivalence₁_unit_iso_hom_app]\n#align equivalence₁_unit_iso_eq equivalence₁_unit_iso_eq\n\n",
+ "equivalence₁_inverse":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⋙ » -/\n/-\nCopyright (c) 2022 Joël Riou. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Joël Riou\n-/\ntheorem equivalence₁_inverse : (equivalence₁ hF).inverse = «expr ⋙ » e'.inverse eA.inverse :=\n  rfl\n#align equivalence₁_inverse equivalence₁_inverse\n\n",
+ "equivalence₁_counit_iso_eq":
+ "theorem equivalence₁_counit_iso_eq : (equivalence₁ hF).counit_iso = equivalence₁CounitIso hF :=\n  by\n  ext Y\n  dsimp [equivalence₀, equivalence₁, is_equivalence.inverse, is_equivalence.of_equivalence]\n  simp only [equivalence₁_counit_iso_hom_app, CategoryTheory.Functor.map_id, comp_id]\n#align equivalence₁_counit_iso_eq equivalence₁_counit_iso_eq\n\n",
+ "equivalence_functor":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⋙ » -/\ntheorem equivalence_functor : (equivalence hF hG).functor = «expr ⋙ » F eB.inverse :=\n  rfl\n#align equivalence_functor equivalence_functor\n\n"}

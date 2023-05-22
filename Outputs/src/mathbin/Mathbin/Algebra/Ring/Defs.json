@@ -1,5 +1,5 @@
 {"two_mul":
- "#print two_mul /-\ntheorem two_mul [RightDistribClass α] (n : α) : 2 * n = n + n :=\n  eq.trans (right_distrib 1 1 n) (by simp)\n#align two_mul two_mul\n-/\n\n",
+ "#print two_mul /-\ntheorem two_mul [RightDistribClass α] (n : α) : 2 * n = n + n :=\n  Eq.trans (right_distrib 1 1 n) (by simp)\n#align two_mul two_mul\n-/\n\n",
  "sub_one_mul":
  "#print sub_one_mul /-\ntheorem sub_one_mul (a b : α) : (a - 1) * b = a * b - b := by rw [sub_mul, one_mul]\n#align sub_one_mul sub_one_mul\n-/\n\n",
  "sub_mul_add_eq_of_mul_add_eq_mul_add":
@@ -43,27 +43,27 @@
  "mul_neg":
  "#print mul_neg /-\n@[simp]\ntheorem mul_neg (a b : α) : a * -b = -(a * b) :=\n  has_distrib_neg.mul_neg _ _\n#align mul_neg mul_neg\n-/\n\n",
  "mul_ite":
- "#print mul_ite /-\n@[to_additive]\ntheorem mul_ite {α} [Mul α] (P : Prop) [decidable P] (a b c : α) :\n    (a * if P then b else c) = if P then a * b else a * c := by split_ifs <;> rfl\n#align mul_ite mul_ite\n-/\n\n",
+ "#print mul_ite /-\n@[to_additive]\ntheorem mul_ite {α} [Mul α] (P : Prop) [Decidable P] (a b c : α) :\n    (a * if P then b else c) = if P then a * b else a * c := by split_ifs <;> rfl\n#align mul_ite mul_ite\n#align add_ite add_ite\n-/\n\n",
  "mul_boole":
- "#print mul_boole /-\n-- We make `mul_ite` and `ite_mul` simp lemmas,\n-- but not `add_ite` or `ite_add`.\n-- The problem we're trying to avoid is dealing with\n-- summations of the form `∑ x in s, (f x + ite P 1 0)`,\n-- in which `add_ite` followed by `sum_ite` would needlessly slice up\n-- the `f x` terms according to whether `P` holds at `x`.\n-- There doesn't appear to be a corresponding difficulty so far with\n-- `mul_ite` and `ite_mul`.\n@[simp]\ntheorem mul_boole {α} [mul_zero_one_class α] (P : Prop) [decidable P] (a : α) :\n    (a * if P then 1 else 0) = if P then a else 0 := by simp\n#align mul_boole mul_boole\n-/\n\n",
+ "#print mul_boole /-\n-- We make `mul_ite` and `ite_mul` simp lemmas,\n-- but not `add_ite` or `ite_add`.\n-- The problem we're trying to avoid is dealing with\n-- summations of the form `∑ x in s, (f x + ite P 1 0)`,\n-- in which `add_ite` followed by `sum_ite` would needlessly slice up\n-- the `f x` terms according to whether `P` holds at `x`.\n-- There doesn't appear to be a corresponding difficulty so far with\n-- `mul_ite` and `ite_mul`.\n@[simp]\ntheorem mul_boole {α} [MulZeroOneClass α] (P : Prop) [Decidable P] (a : α) :\n    (a * if P then 1 else 0) = if P then a else 0 := by simp\n#align mul_boole mul_boole\n-/\n\n",
  "mul_add_one":
  "#print mul_add_one /-\ntheorem mul_add_one [LeftDistribClass α] (a b : α) : a * (b + 1) = a * b + a := by rw [mul_add, mul_one]\n#align mul_add_one mul_add_one\n-/\n\n",
  "mul_add_eq_mul_add_iff_sub_mul_add_eq":
- "#print mul_add_eq_mul_add_iff_sub_mul_add_eq /-\n/-- An iff statement following from right distributivity in rings and the definition\n  of subtraction. -/\ntheorem mul_add_eq_mul_add_iff_sub_mul_add_eq : a * e + c = b * e + d ↔ (a - b) * e + c = d :=\n  calc\n    a * e + c = b * e + d ↔ a * e + c = d + b * e := by simp [add_comm]\n    _ ↔ a * e + c - b * e = d := iff.intro (fun h => by rw [h]; simp) fun h => by rw [← h]; simp\n    _ ↔ (a - b) * e + c = d := by simp [sub_mul, sub_add_eq_add_sub]\n    \n#align mul_add_eq_mul_add_iff_sub_mul_add_eq mul_add_eq_mul_add_iff_sub_mul_add_eq\n-/\n\n",
+ "#print mul_add_eq_mul_add_iff_sub_mul_add_eq /-\n/-- An iff statement following from right distributivity in rings and the definition\n  of subtraction. -/\ntheorem mul_add_eq_mul_add_iff_sub_mul_add_eq : a * e + c = b * e + d ↔ (a - b) * e + c = d :=\n  calc\n    a * e + c = b * e + d ↔ a * e + c = d + b * e := by simp [add_comm]\n    _ ↔ a * e + c - b * e = d := (iff.intro (fun h => by rw [h]; simp) fun h => by rw [← h]; simp)\n    _ ↔ (a - b) * e + c = d := by simp [sub_mul, sub_add_eq_add_sub]\n    \n#align mul_add_eq_mul_add_iff_sub_mul_add_eq mul_add_eq_mul_add_iff_sub_mul_add_eq\n-/\n\n",
  "left_distrib":
  "#print left_distrib /-\n/-\nCopyright (c) 2014 Jeremy Avigad. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Jeremy Avigad, Leonardo de Moura, Floris van Doorn, Yury Kudryashov, Neil Strickland\n-/\n-- see Note [lower instance priority]\n-- see Note [lower instance priority]\ntheorem left_distrib [Mul R] [Add R] [LeftDistribClass R] (a b c : R) : a * (b + c) = a * b + a * c :=\n  left_distrib_class.left_distrib a b c\n#align left_distrib left_distrib\n-/\n\n",
  "ite_mul_zero_right":
- "#print ite_mul_zero_right /-\ntheorem ite_mul_zero_right {α : Type _} [mul_zero_class α] (P : Prop) [decidable P] (a b : α) :\n    ite P (a * b) 0 = a * ite P b 0 := by by_cases h : P <;> simp [h]\n#align ite_mul_zero_right ite_mul_zero_right\n-/\n\n",
+ "#print ite_mul_zero_right /-\ntheorem ite_mul_zero_right {α : Type _} [MulZeroClass α] (P : Prop) [Decidable P] (a b : α) :\n    ite P (a * b) 0 = a * ite P b 0 := by by_cases h : P <;> simp [h]\n#align ite_mul_zero_right ite_mul_zero_right\n-/\n\n",
  "ite_mul_zero_left":
- "#print ite_mul_zero_left /-\ntheorem ite_mul_zero_left {α : Type _} [mul_zero_class α] (P : Prop) [decidable P] (a b : α) :\n    ite P (a * b) 0 = ite P a 0 * b := by by_cases h : P <;> simp [h]\n#align ite_mul_zero_left ite_mul_zero_left\n-/\n\n",
+ "#print ite_mul_zero_left /-\ntheorem ite_mul_zero_left {α : Type _} [MulZeroClass α] (P : Prop) [Decidable P] (a b : α) :\n    ite P (a * b) 0 = ite P a 0 * b := by by_cases h : P <;> simp [h]\n#align ite_mul_zero_left ite_mul_zero_left\n-/\n\n",
  "ite_mul":
- "#print ite_mul /-\n@[to_additive]\ntheorem ite_mul {α} [Mul α] (P : Prop) [decidable P] (a b c : α) :\n    (if P then a else b) * c = if P then a * c else b * c := by split_ifs <;> rfl\n#align ite_mul ite_mul\n-/\n\n",
+ "#print ite_mul /-\n@[to_additive]\ntheorem ite_mul {α} [Mul α] (P : Prop) [Decidable P] (a b c : α) :\n    (if P then a else b) * c = if P then a * c else b * c := by split_ifs <;> rfl\n#align ite_mul ite_mul\n#align ite_add ite_add\n-/\n\n",
  "ite_and_mul_zero":
- "#print ite_and_mul_zero /-\ntheorem ite_and_mul_zero {α : Type _} [mul_zero_class α] (P Q : Prop) [decidable P] [decidable Q] (a b : α) :\n    ite (P ∧ Q) (a * b) 0 = ite P a 0 * ite Q b 0 := by\n  simp only [← ite_and, ite_mul, mul_ite, mul_zero, zero_mul, and_comm']\n#align ite_and_mul_zero ite_and_mul_zero\n-/\n\n",
+ "#print ite_and_mul_zero /-\ntheorem ite_and_mul_zero {α : Type _} [MulZeroClass α] (P Q : Prop) [Decidable P] [Decidable Q] (a b : α) :\n    ite (P ∧ Q) (a * b) 0 = ite P a 0 * ite Q b 0 := by\n  simp only [← ite_and, ite_mul, mul_ite, MulZeroClass.mul_zero, MulZeroClass.zero_mul, and_comm']\n#align ite_and_mul_zero ite_and_mul_zero\n-/\n\n",
  "distrib_three_right":
  "#print distrib_three_right /-\ntheorem distrib_three_right [Mul R] [Add R] [RightDistribClass R] (a b c d : R) :\n    (a + b + c) * d = a * d + b * d + c * d := by simp [right_distrib]\n#align distrib_three_right distrib_three_right\n-/\n\n",
  "boole_mul":
- "#print boole_mul /-\n@[simp]\ntheorem boole_mul {α} [mul_zero_one_class α] (P : Prop) [decidable P] (a : α) :\n    (if P then 1 else 0) * a = if P then a else 0 := by simp\n#align boole_mul boole_mul\n-/\n\n",
+ "#print boole_mul /-\n@[simp]\ntheorem boole_mul {α} [MulZeroOneClass α] (P : Prop) [Decidable P] (a : α) :\n    (if P then 1 else 0) * a = if P then a else 0 := by simp\n#align boole_mul boole_mul\n-/\n\n",
  "bit0_eq_two_mul":
  "#print bit0_eq_two_mul /-\ntheorem bit0_eq_two_mul [RightDistribClass α] (n : α) : bit0 n = 2 * n :=\n  (two_mul _).symm\n#align bit0_eq_two_mul bit0_eq_two_mul\n-/\n\n",
  "add_one_mul":

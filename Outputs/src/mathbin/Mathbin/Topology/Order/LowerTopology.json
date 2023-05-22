@@ -1,0 +1,32 @@
+{"to_with_lower_topology_symm_eq":
+ "/-\nCopyright (c) 2023 Christopher Hoskin. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Christopher Hoskin\n-/\n@[simp]\ntheorem to_with_lower_topology_symm_eq : (@toLower α).symm = ofLower :=\n  rfl\n#align to_with_lower_topology_symm_eq to_with_lower_topology_symm_eq\n\n",
+ "to_lower_of_lower":
+ "@[simp]\ntheorem to_lower_of_lower (a : WithLowerTopology α) : toLower (ofLower a) = a :=\n  rfl\n#align to_lower_of_lower to_lower_of_lower\n\n",
+ "to_lower_inj":
+ "@[simp]\ntheorem to_lower_inj {a b : α} : toLower a = toLower b ↔ a = b :=\n  iff.rfl\n#align to_lower_inj to_lower_inj\n\n",
+ "of_with_lower_topology_symm_eq":
+ "@[simp]\ntheorem of_with_lower_topology_symm_eq : (@ofLower α).symm = toLower :=\n  rfl\n#align of_with_lower_topology_symm_eq of_with_lower_topology_symm_eq\n\n",
+ "of_lower_to_lower":
+ "@[simp]\ntheorem of_lower_to_lower (a : α) : ofLower (toLower a) = a :=\n  rfl\n#align of_lower_to_lower of_lower_to_lower\n\n",
+ "of_lower_inj":
+ "@[simp]\ntheorem of_lower_inj {a b : WithLowerTopology α} : ofLower a = ofLower b ↔ a = b :=\n  iff.rfl\n#align of_lower_inj of_lower_inj\n\n",
+ "is_upper_set_of_is_closed":
+ "theorem is_upper_set_of_is_closed (h : IsClosed s) : IsUpperSet s :=\n  isLowerSet_compl.1 <| isLowerSet_of_isOpen h.is_open_compl\n#align is_upper_set_of_is_closed is_upper_set_of_is_closed\n\n",
+ "is_topological_basis":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\nprotected theorem is_topological_basis : IsTopologicalBasis (lowerBasis α) :=\n  by\n  convert is_topological_basis_of_subbasis (topology_eq_lower_topology α)\n  simp_rw [lower_basis, coe_upperClosure, compl_Union]\n  ext s\n  constructor\n  · rintro ⟨F, hF, rfl⟩\n    refine' ⟨«expr '' » (fun a => «expr ᶜ» (Ici a)) F, ⟨hF.image _, image_subset_iff.2 fun _ _ => ⟨_, rfl⟩⟩, _⟩\n    rw [sInter_image]\n  · rintro ⟨F, ⟨hF, hs⟩, rfl⟩\n    haveI := hF.to_subtype\n    rw [subset_def, Subtype.forall'] at hs\n    choose f hf using hs\n    exact ⟨_, finite_range f, by simp_rw [bInter_range, hf, sInter_eq_Inter]⟩\n#align is_topological_basis is_topological_basis\n\n",
+ "is_open_preimage_of_lower":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\ntheorem is_open_preimage_of_lower (S : Set α) :\n    IsOpen («expr ⁻¹' » WithLowerTopology.ofLower S) ↔\n      (generateFrom { s : Set α | ∃ a : α, «expr ᶜ» (Ici a) = s }).is_open S :=\n  iff.rfl\n#align is_open_preimage_of_lower is_open_preimage_of_lower\n\n",
+ "is_open_iff_generate_Ici_compl":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\ntheorem is_open_iff_generate_Ici_compl : IsOpen s ↔ GenerateOpen { t | ∃ a, «expr ᶜ» (Ici a) = t } s := by\n  rw [topology_eq_lower_topology α] <;> rfl\n#align is_open_iff_generate_Ici_compl is_open_iff_generate_Ici_compl\n\n",
+ "is_open_def":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\ntheorem is_open_def (T : Set (WithLowerTopology α)) :\n    IsOpen T ↔\n      (generateFrom { s : Set α | ∃ a : α, «expr ᶜ» (Ici a) = s }).is_open («expr ⁻¹' » WithLowerTopology.toLower T) :=\n  iff.rfl\n#align is_open_def is_open_def\n\n",
+ "is_lower_set_of_is_open":
+ "/-- Every set open in the lower topology is a lower set. -/\ntheorem is_lower_set_of_is_open (h : IsOpen s) : IsLowerSet s :=\n  by\n  rw [is_open_iff_generate_Ici_compl] at h\n  induction h\n  case basic u h => obtain ⟨a, rfl⟩ := h; exact (isUpperSet_Ici a).compl\n  case univ => exact isLowerSet_univ\n  case inter u v hu1 hv1 hu2 hv2 => exact hu2.inter hv2\n  case sUnion _ _ ih => exact isLowerSet_unionₛ ih\n#align is_lower_set_of_is_open is_lower_set_of_is_open\n\n",
+ "is_closed_upper_closure":
+ "/-- The upper closure of a finite set is closed in the lower topology. -/\ntheorem is_closed_upper_closure (h : s.finite) : IsClosed (upperClosure s : Set α) :=\n  by\n  simp only [← UpperSet.infᵢ_Ici, UpperSet.coe_infᵢ]\n  exact isClosed_bunionᵢ h fun a h₁ => isClosed_Ici a\n#align is_closed_upper_closure is_closed_upper_closure\n\n",
+ "isClosed_Ici":
+ "#print isClosed_Ici /-\n/-- Left-closed right-infinite intervals [a, ∞) are closed in the lower topology. -/\ntheorem isClosed_Ici (a : α) : IsClosed (Ici a) :=\n  isOpen_compl_iff.1 <| isOpen_iff_generate_Ici_compl.2 <| generate_open.basic _ ⟨a, rfl⟩\n#align is_closed_Ici isClosed_Ici\n-/\n\n",
+ "continuous":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\n#print InfₛHom.continuous /-\n-- see Note [lower instance priority]\n-- Note: `refine` doesn't work here because it tries using `prod.topological_space`.\ntheorem InfₛHom.continuous (f : InfₛHom α β) : Continuous f :=\n  by\n  convert continuous_generateFrom _\n  · exact lower_topology.topology_eq_lower_topology β\n  rintro _ ⟨b, rfl⟩\n  rw [preimage_compl, isOpen_compl_iff]\n  convert LowerTopology.isClosed_Ici (Inf <| «expr ⁻¹' » f (Ici b))\n  refine' subset_antisymm (fun a => infₛ_le) fun a ha => le_trans _ <| OrderHomClass.mono f ha\n  simp [map_Inf]\n#align Inf_hom.continuous InfₛHom.continuous\n-/\n\n",
+ "closure_singleton":
+ "#print closure_singleton /-\n/-- The closure of a singleton `{a}` in the lower topology is the left-closed right-infinite interval\n[a, ∞).\n-/\n@[simp]\ntheorem closure_singleton (a : α) : closure {a} = Ici a :=\n  subset_antisymm ((closure_minimal fun b h => h.ge) <| isClosed_Ici a) <|\n    (isUpperSet_of_isClosed isClosed_closure).Ici_subset <| subset_closure rfl\n#align closure_singleton closure_singleton\n-/\n\n"}

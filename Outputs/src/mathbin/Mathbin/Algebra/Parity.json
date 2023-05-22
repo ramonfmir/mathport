@@ -1,13 +1,15 @@
 {"zpow":
- "#print IsSquare.zpow /-\n@[to_additive Even.zsmul]\ntheorem IsSquare.zpow (n : ℤ) : IsSquare a → IsSquare (a ^ n) :=\n  by\n  rintro ⟨a, rfl⟩\n  exact ⟨a ^ n, (Commute.refl _).mul_zpow _⟩\n#align is_square.zpow IsSquare.zpow\n-/\n\n",
+ "#print IsSquare.zpow /-\n@[to_additive Even.zsmul]\ntheorem IsSquare.zpow (n : ℤ) : IsSquare a → IsSquare (a ^ n) :=\n  by\n  rintro ⟨a, rfl⟩\n  exact ⟨a ^ n, (Commute.refl _).mul_zpow _⟩\n#align is_square.zpow IsSquare.zpow\n#align even.zsmul Even.zsmul\n-/\n\n",
  "tsub":
- "#print Even.tsub /-\n-- `odd.tsub` requires `canonically_linear_ordered_semiring`, which we don't have\ntheorem Even.tsub [CanonicallyLinearOrderedAddMonoid α] [Sub α] [OrderedSub α] [contravariant_class α α (· + ·) (· ≤ ·)]\n    {m n : α} (hm : Even m) (hn : Even n) : Even (m - n) :=\n  by\n  obtain ⟨a, rfl⟩ := hm\n  obtain ⟨b, rfl⟩ := hn\n  refine' ⟨a - b, _⟩\n  obtain h | h := le_total a b\n  · rw [tsub_eq_zero_of_le h, tsub_eq_zero_of_le (add_le_add h h), add_zero]\n  · exact (tsub_add_tsub_comm h h).symm\n#align even.tsub Even.tsub\n-/\n\n",
+ "#print Even.tsub /-\n-- `odd.tsub` requires `canonically_linear_ordered_semiring`, which we don't have\ntheorem Even.tsub [CanonicallyLinearOrderedAddMonoid α] [Sub α] [OrderedSub α] [ContravariantClass α α (· + ·) (· ≤ ·)]\n    {m n : α} (hm : Even m) (hn : Even n) : Even (m - n) :=\n  by\n  obtain ⟨a, rfl⟩ := hm\n  obtain ⟨b, rfl⟩ := hn\n  refine' ⟨a - b, _⟩\n  obtain h | h := le_total a b\n  · rw [tsub_eq_zero_of_le h, tsub_eq_zero_of_le (add_le_add h h), add_zero]\n  · exact (tsub_add_tsub_comm h h).symm\n#align even.tsub Even.tsub\n-/\n\n",
+ "trans_dvd":
+ "#print Even.trans_dvd /-\ntheorem Even.trans_dvd (hm : Even m) (hn : m ∣ n) : Even n :=\n  even_iff_two_dvd.2 <| hm.two_dvd.trans hn\n#align even.trans_dvd Even.trans_dvd\n-/\n\n",
  "sub_odd":
  "#print Odd.sub_odd /-\ntheorem Odd.sub_odd (ha : Odd a) (hb : Odd b) : Even (a - b) :=\n  by\n  rw [sub_eq_add_neg]\n  exact ha.add_odd hb.neg\n#align odd.sub_odd Odd.sub_odd\n-/\n\n",
  "sub_even":
  "#print Odd.sub_even /-\ntheorem Odd.sub_even (ha : Odd a) (hb : Even b) : Odd (a - b) :=\n  by\n  rw [sub_eq_add_neg]\n  exact ha.add_even hb.neg\n#align odd.sub_even Odd.sub_even\n-/\n\n",
  "strictMono_pow":
- "#print Odd.strictMono_pow /-\ntheorem Odd.strictMono_pow (hn : Odd n) : strict_mono fun a : R => a ^ n := by\n  cases' hn with k hk <;> simpa only [hk, two_mul] using strictMono_pow_bit1 _\n#align odd.strict_mono_pow Odd.strictMono_pow\n-/\n\n",
+ "#print Odd.strictMono_pow /-\ntheorem Odd.strictMono_pow (hn : Odd n) : StrictMono fun a : R => a ^ n := by\n  cases' hn with k hk <;> simpa only [hk, two_mul] using strictMono_pow_bit1 _\n#align odd.strict_mono_pow Odd.strictMono_pow\n-/\n\n",
  "range_two_mul_add_one":
  "#print range_two_mul_add_one /-\n@[simp]\ntheorem range_two_mul_add_one (α : Type _) [Semiring α] : (Set.range fun x : α => 2 * x + 1) = { a | Odd a } :=\n  by\n  ext x\n  simp [Odd, eq_comm]\n#align range_two_mul_add_one range_two_mul_add_one\n-/\n\n",
  "range_two_mul":
@@ -37,11 +39,11 @@
  "pow":
  "#print Odd.pow /-\ntheorem Odd.pow (hm : Odd m) : ∀ {a : ℕ}, Odd (m ^ a)\n  | 0 => by\n    rw [pow_zero]\n    exact odd_one\n  | a + 1 => by\n    rw [pow_succ]\n    exact hm.mul Odd.pow\n#align odd.pow Odd.pow\n-/\n\n",
  "pos":
- "#print Odd.pos /-\n-- this holds more generally in a `canonically_ordered_add_monoid` if we refactor `odd` to use\n-- either `2 • t` or `t + t` instead of `2 * t`.\ntheorem Odd.pos [nontrivial α] {n : α} (hn : Odd n) : 0 < n :=\n  by\n  obtain ⟨k, rfl⟩ := hn\n  rw [pos_iff_ne_zero, ne.def, add_eq_zero_iff, not_and']\n  exact fun h => (one_ne_zero h).elim\n#align odd.pos Odd.pos\n-/\n\n",
+ "#print Odd.pos /-\n-- this holds more generally in a `canonically_ordered_add_monoid` if we refactor `odd` to use\n-- either `2 • t` or `t + t` instead of `2 * t`.\ntheorem Odd.pos [Nontrivial α] {n : α} (hn : Odd n) : 0 < n :=\n  by\n  obtain ⟨k, rfl⟩ := hn\n  rw [pos_iff_ne_zero, ne.def, add_eq_zero_iff, not_and']\n  exact fun h => (one_ne_zero h).elim\n#align odd.pos Odd.pos\n-/\n\n",
  "odd_two_mul_add_one":
  "#print odd_two_mul_add_one /-\n@[simp]\ntheorem odd_two_mul_add_one (m : α) : Odd (2 * m + 1) :=\n  ⟨m, rfl⟩\n#align odd_two_mul_add_one odd_two_mul_add_one\n-/\n\n",
  "odd_one":
- "#print odd_one /-\n@[simp]\ntheorem odd_one : Odd (1 : α) :=\n  ⟨0, (zero_add _).symm.trans (congr_arg (· + (1 : α)) (mul_zero _).symm)⟩\n#align odd_one odd_one\n-/\n\n",
+ "#print odd_one /-\n@[simp]\ntheorem odd_one : Odd (1 : α) :=\n  ⟨0, (zero_add _).symm.trans (congr_arg (· + (1 : α)) (MulZeroClass.mul_zero _).symm)⟩\n#align odd_one odd_one\n-/\n\n",
  "odd_neg_one":
  "#print odd_neg_one /-\n@[simp]\ntheorem odd_neg_one : Odd (-1 : α) := by simp\n#align odd_neg_one odd_neg_one\n-/\n\n",
  "odd_neg":
@@ -67,25 +69,25 @@
  "mul_left":
  "#print Even.mul_left /-\n@[simp]\ntheorem Even.mul_left (hm : Even m) (n) : Even (n * m) :=\n  hm.map (AddMonoidHom.mulLeft n)\n#align even.mul_left Even.mul_left\n-/\n\n",
  "mul":
- "#print Odd.mul /-\n@[simp]\ntheorem Odd.mul : Odd m → Odd n → Odd (m * n) :=\n  by\n  rintro ⟨m, rfl⟩ ⟨n, rfl⟩\n  refine' ⟨2 * m * n + n + m, _⟩\n  rw [mul_add, add_mul, mul_one, ← add_assoc, one_mul, mul_assoc, ← mul_add, ← mul_add, ← mul_assoc, ← Nat.cast_two, ←\n    nat.cast_comm]\n#align odd.mul Odd.mul\n-/\n\n",
+ "#print Odd.mul /-\n@[simp]\ntheorem Odd.mul : Odd m → Odd n → Odd (m * n) :=\n  by\n  rintro ⟨m, rfl⟩ ⟨n, rfl⟩\n  refine' ⟨2 * m * n + n + m, _⟩\n  rw [mul_add, add_mul, mul_one, ← add_assoc, one_mul, mul_assoc, ← mul_add, ← mul_add, ← mul_assoc, ← Nat.cast_two, ←\n    Nat.cast_comm]\n#align odd.mul Odd.mul\n-/\n\n",
  "map":
  "#print Odd.map /-\ntheorem Odd.map [RingHomClass F α β] (f : F) : Odd m → Odd (f m) :=\n  by\n  rintro ⟨m, rfl⟩\n  exact ⟨f m, by simp [two_mul]⟩\n#align odd.map Odd.map\n-/\n\n",
  "isSquare_zpow":
- "#print Even.isSquare_zpow /-\n@[simp, to_additive Even.zsmul']\ntheorem Even.isSquare_zpow [group α] {n : ℤ} : Even n → ∀ a : α, IsSquare (a ^ n) :=\n  by\n  rintro ⟨n, rfl⟩ a\n  exact ⟨a ^ n, zpow_add _ _ _⟩\n#align even.is_square_zpow Even.isSquare_zpow\n-/\n\n",
+ "#print Even.isSquare_zpow /-\n@[simp, to_additive Even.zsmul']\ntheorem Even.isSquare_zpow [Group α] {n : ℤ} : Even n → ∀ a : α, IsSquare (a ^ n) :=\n  by\n  rintro ⟨n, rfl⟩ a\n  exact ⟨a ^ n, zpow_add _ _ _⟩\n#align even.is_square_zpow Even.isSquare_zpow\n#align even.zsmul' Even.zsmul'\n-/\n\n",
  "isSquare_zero":
- "#print isSquare_zero /-\n@[simp]\ntheorem isSquare_zero [mul_zero_class α] : IsSquare (0 : α) :=\n  ⟨0, (mul_zero _).symm⟩\n#align is_square_zero isSquare_zero\n-/\n\n",
+ "#print isSquare_zero /-\n@[simp]\ntheorem isSquare_zero [MulZeroClass α] : IsSquare (0 : α) :=\n  ⟨0, (MulZeroClass.mul_zero _).symm⟩\n#align is_square_zero isSquare_zero\n-/\n\n",
  "isSquare_pow":
- "#print Even.isSquare_pow /-\n@[simp, to_additive Even.nsmul']\ntheorem Even.isSquare_pow : Even n → ∀ a : α, IsSquare (a ^ n) :=\n  by\n  rintro ⟨n, rfl⟩ a\n  exact ⟨a ^ n, pow_add _ _ _⟩\n#align even.is_square_pow Even.isSquare_pow\n-/\n\n",
+ "#print Even.isSquare_pow /-\n@[simp, to_additive Even.nsmul']\ntheorem Even.isSquare_pow : Even n → ∀ a : α, IsSquare (a ^ n) :=\n  by\n  rintro ⟨n, rfl⟩ a\n  exact ⟨a ^ n, pow_add _ _ _⟩\n#align even.is_square_pow Even.isSquare_pow\n#align even.nsmul' Even.nsmul'\n-/\n\n",
  "isSquare_op_iff":
- "#print isSquare_op_iff /-\n@[to_additive]\ntheorem isSquare_op_iff (a : α) : IsSquare (op a) ↔ IsSquare a :=\n  ⟨fun ⟨c, hc⟩ => ⟨unop c, by rw [← unop_mul, ← hc, unop_op]⟩, fun ⟨c, hc⟩ => by simp [hc]⟩\n#align is_square_op_iff isSquare_op_iff\n-/\n\n",
+ "#print isSquare_op_iff /-\n@[to_additive]\ntheorem isSquare_op_iff (a : α) : IsSquare (op a) ↔ IsSquare a :=\n  ⟨fun ⟨c, hc⟩ => ⟨unop c, by rw [← unop_mul, ← hc, unop_op]⟩, fun ⟨c, hc⟩ => by simp [hc]⟩\n#align is_square_op_iff isSquare_op_iff\n#align even_op_iff even_op_iff\n-/\n\n",
  "isSquare_one":
- "#print isSquare_one /-\n@[simp, to_additive]\ntheorem isSquare_one [mul_one_class α] : IsSquare (1 : α) :=\n  ⟨1, (mul_one _).symm⟩\n#align is_square_one isSquare_one\n-/\n\n",
+ "#print isSquare_one /-\n@[simp, to_additive]\ntheorem isSquare_one [MulOneClass α] : IsSquare (1 : α) :=\n  ⟨1, (mul_one _).symm⟩\n#align is_square_one isSquare_one\n#align even_zero even_zero\n-/\n\n",
  "isSquare_mul_self":
- "#print isSquare_mul_self /-\n/-\nCopyright (c) 2022 Damiano Testa. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Damiano Testa\n-/\n@[simp, to_additive]\ntheorem isSquare_mul_self (m : α) : IsSquare (m * m) :=\n  ⟨m, rfl⟩\n#align is_square_mul_self isSquare_mul_self\n-/\n\n",
+ "#print isSquare_mul_self /-\n/-\nCopyright (c) 2022 Damiano Testa. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Damiano Testa\n-/\n@[simp, to_additive]\ntheorem isSquare_mul_self (m : α) : IsSquare (m * m) :=\n  ⟨m, rfl⟩\n#align is_square_mul_self isSquare_mul_self\n#align even_add_self even_add_self\n-/\n\n",
  "isSquare_inv":
- "#print isSquare_inv /-\n@[simp, to_additive]\ntheorem isSquare_inv : IsSquare a⁻¹ ↔ IsSquare a :=\n  by\n  refine' ⟨fun h => _, fun h => _⟩\n  · rw [← isSquare_op_iff, ← inv_inv a]\n    exact h.map (MulEquiv.inv' α)\n  · exact ((isSquare_op_iff a).mpr h).map (MulEquiv.inv' α).symm\n#align is_square_inv isSquare_inv\n-/\n\n",
+ "#print isSquare_inv /-\n@[simp, to_additive]\ntheorem isSquare_inv : IsSquare a⁻¹ ↔ IsSquare a :=\n  by\n  refine' ⟨fun h => _, fun h => _⟩\n  · rw [← isSquare_op_iff, ← inv_inv a]\n    exact h.map (MulEquiv.inv' α)\n  · exact ((isSquare_op_iff a).mpr h).map (MulEquiv.inv' α).symm\n#align is_square_inv isSquare_inv\n#align even_neg even_neg\n-/\n\n",
  "isSquare_iff_exists_sq":
- "#print isSquare_iff_exists_sq /-\n@[to_additive even_iff_exists_two_nsmul]\ntheorem isSquare_iff_exists_sq (m : α) : IsSquare m ↔ ∃ c, m = c ^ 2 := by simp [IsSquare, pow_two]\n#align is_square_iff_exists_sq isSquare_iff_exists_sq\n-/\n\n",
+ "#print isSquare_iff_exists_sq /-\n@[to_additive even_iff_exists_two_nsmul]\ntheorem isSquare_iff_exists_sq (m : α) : IsSquare m ↔ ∃ c, m = c ^ 2 := by simp [IsSquare, pow_two]\n#align is_square_iff_exists_sq isSquare_iff_exists_sq\n#align even_iff_exists_two_nsmul even_iff_exists_two_nsmul\n-/\n\n",
  "even_two_mul":
  "#print even_two_mul /-\ntheorem even_two_mul (m : α) : Even (2 * m) :=\n  ⟨m, two_mul _⟩\n#align even_two_mul even_two_mul\n-/\n\n",
  "even_two":
@@ -101,12 +103,14 @@
  "even_bit0":
  "#print even_bit0 /-\n@[simp]\ntheorem even_bit0 (a : α) : Even (bit0 a) :=\n  ⟨a, rfl⟩\n#align even_bit0 even_bit0\n-/\n\n",
  "even_abs":
- "#print even_abs /-\ntheorem even_abs [subtraction_monoid α] [linear_order α] {a : α} : Even (|a|) ↔ Even a := by\n  cases abs_choice a <;> simp only [h, even_neg]\n#align even_abs even_abs\n-/\n\n",
+ "#print even_abs /-\ntheorem even_abs [SubtractionMonoid α] [linear_order α] {a : α} : Even (|a|) ↔ Even a := by\n  cases abs_choice a <;> simp only [h, even_neg]\n#align even_abs even_abs\n-/\n\n",
+ "even":
+ "#print Dvd.dvd.even /-\ntheorem Dvd.dvd.even (hn : m ∣ n) (hm : Even m) : Even n :=\n  hm.trans_dvd hn\n#align has_dvd.dvd.even Dvd.dvd.even\n-/\n\n",
  "div":
- "#print IsSquare.div /-\n@[to_additive]\ntheorem IsSquare.div [division_comm_monoid α] {a b : α} (ha : IsSquare a) (hb : IsSquare b) : IsSquare (a / b) :=\n  by\n  rw [div_eq_mul_inv]\n  exact ha.mul hb.inv\n#align is_square.div IsSquare.div\n-/\n\n",
+ "#print IsSquare.div /-\n@[to_additive]\ntheorem IsSquare.div [DivisionCommMonoid α] {a b : α} (ha : IsSquare a) (hb : IsSquare b) : IsSquare (a / b) :=\n  by\n  rw [div_eq_mul_inv]\n  exact ha.mul hb.inv\n#align is_square.div IsSquare.div\n#align even.sub Even.sub\n-/\n\n",
  "add_odd":
- "#print Odd.add_odd /-\ntheorem Odd.add_odd : Odd m → Odd n → Even (m + n) :=\n  by\n  rintro ⟨m, rfl⟩ ⟨n, rfl⟩\n  refine' ⟨n + m + 1, _⟩\n  rw [← two_mul, ← add_assoc, add_comm _ (2 * n), ← add_assoc, ← mul_add, add_assoc, mul_add _ (n + m), mul_one]\n  rfl\n#align odd.add_odd Odd.add_odd\n-/\n\n",
+ "#print Odd.add_odd /-\ntheorem Odd.add_odd : Odd m → Odd n → Even (m + n) :=\n  by\n  rintro ⟨m, rfl⟩ ⟨n, rfl⟩\n  refine' ⟨n + m + 1, _⟩\n  rw [two_mul, two_mul]\n  ac_rfl\n#align odd.add_odd Odd.add_odd\n-/\n\n",
  "add_even":
  "#print Odd.add_even /-\ntheorem Odd.add_even (hm : Odd m) (hn : Even n) : Odd (m + n) :=\n  by\n  rw [add_comm]\n  exact hn.add_odd hm\n#align odd.add_even Odd.add_even\n-/\n\n",
  "IsSquare_sq":
- "#print IsSquare_sq /-\n@[simp, to_additive even_two_nsmul]\ntheorem IsSquare_sq (a : α) : IsSquare (a ^ 2) :=\n  ⟨a, pow_two _⟩\n#align is_square_sq IsSquare_sq\n-/\n\n"}
+ "#print IsSquare_sq /-\n@[simp, to_additive even_two_nsmul]\ntheorem IsSquare_sq (a : α) : IsSquare (a ^ 2) :=\n  ⟨a, pow_two _⟩\n#align is_square_sq IsSquare_sq\n#align even_two_nsmul even_two_nsmul\n-/\n\n"}

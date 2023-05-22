@@ -1,34 +1,34 @@
 {"top_σ":
- "@[simp]\ntheorem top_σ : (@realizer.top α).σ = unit :=\n  rfl\n#align top_σ top_σ\n\n",
+ "@[simp]\ntheorem top_σ : (@Realizer.top α).σ = Unit :=\n  rfl\n#align top_σ top_σ\n\n",
  "top_F":
- "@[simp]\ntheorem top_F (u : unit) : (@realizer.top α).F u = univ :=\n  rfl\n#align top_F top_F\n\n",
+ "@[simp]\ntheorem top_F (u : Unit) : (@Realizer.top α).F u = univ :=\n  rfl\n#align top_F top_F\n\n",
  "tendsto_iff":
- "theorem tendsto_iff (f : α → β) {l₁ : filter α} {l₂ : filter β} (L₁ : l₁.realizer) (L₂ : l₂.realizer) :\n    tendsto f l₁ l₂ ↔ ∀ b, ∃ a, ∀ x ∈ L₁.F a, f x ∈ L₂.F b :=\n  (le_iff (L₁.map f) L₂).trans <| forall_congr' fun b => exists_congr fun a => image_subset_iff\n#align tendsto_iff tendsto_iff\n\n",
+ "theorem tendsto_iff (f : α → β) {l₁ : Filter α} {l₂ : Filter β} (L₁ : l₁.realizer) (L₂ : l₂.realizer) :\n    Tendsto f l₁ l₂ ↔ ∀ b, ∃ a, ∀ x ∈ L₁.F a, f x ∈ L₂.F b :=\n  (le_iff (L₁.map f) L₂).trans <| forall_congr' fun b => exists_congr fun a => image_subset_iff\n#align tendsto_iff tendsto_iff\n\n",
  "principal_σ":
- "@[simp]\ntheorem principal_σ (s : set α) : (realizer.principal s).σ = unit :=\n  rfl\n#align principal_σ principal_σ\n\n",
+ "@[simp]\ntheorem principal_σ (s : Set α) : (Realizer.principal s).σ = Unit :=\n  rfl\n#align principal_σ principal_σ\n\n",
  "principal_F":
- "@[simp]\ntheorem principal_F (s : set α) (u : unit) : (realizer.principal s).F u = s :=\n  rfl\n#align principal_F principal_F\n\n",
+ "@[simp]\ntheorem principal_F (s : Set α) (u : Unit) : (Realizer.principal s).F u = s :=\n  rfl\n#align principal_F principal_F\n\n",
  "of_equiv_σ":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ » -/\n@[simp]\ntheorem of_equiv_σ {f : filter α} (F : f.realizer) (E : «expr ≃ » F.σ τ) : (F.of_equiv E).σ = τ :=\n  rfl\n#align of_equiv_σ of_equiv_σ\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ » -/\n@[simp]\ntheorem of_equiv_σ {f : Filter α} (F : f.realizer) (E : «expr ≃ » F.σ τ) : (F.of_equiv E).σ = τ :=\n  rfl\n#align of_equiv_σ of_equiv_σ\n\n",
  "of_equiv_val":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ » -/\n@[simp]\ntheorem of_equiv_val (E : «expr ≃ » σ τ) (F : cfilter α σ) (a : τ) : F.of_equiv E a = F (E.symm a) := by cases F <;> rfl\n#align of_equiv_val of_equiv_val\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ » -/\n@[simp]\ntheorem of_equiv_val (E : «expr ≃ » σ τ) (F : CFilter α σ) (a : τ) : F.of_equiv E a = F (E.symm a) := by cases F <;> rfl\n#align of_equiv_val of_equiv_val\n\n",
  "of_equiv_F":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ » -/\n@[simp]\ntheorem of_equiv_F {f : filter α} (F : f.realizer) (E : «expr ≃ » F.σ τ) (s : τ) :\n    (F.of_equiv E).F s = F.F (E.symm s) := by delta of_equiv <;> simp\n#align of_equiv_F of_equiv_F\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ » -/\n@[simp]\ntheorem of_equiv_F {f : Filter α} (F : f.realizer) (E : «expr ≃ » F.σ τ) (s : τ) :\n    (F.of_equiv E).F s = F.F (E.symm s) := by delta of_equiv <;> simp\n#align of_equiv_F of_equiv_F\n\n",
  "ne_bot_iff":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\ntheorem ne_bot_iff {f : filter α} (F : f.realizer) : f ≠ «expr⊥» ↔ ∀ a : F.σ, (F.F a).nonempty := by\n  classical\n    rw [not_iff_comm, ← le_bot_iff, F.le_iff realizer.bot, not_forall]\n    simp only [Set.not_nonempty_iff_eq_empty]\n    exact\n      ⟨fun ⟨x, e⟩ _ => ⟨x, le_of_eq e⟩, fun h =>\n        let ⟨x, h⟩ := h ()\n        ⟨x, le_bot_iff.1 h⟩⟩\n#align ne_bot_iff ne_bot_iff\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\ntheorem ne_bot_iff {f : Filter α} (F : f.realizer) : f ≠ «expr⊥» ↔ ∀ a : F.σ, (F.F a).nonempty := by\n  classical\n    rw [not_iff_comm, ← le_bot_iff, F.le_iff realizer.bot, not_forall]\n    simp only [Set.not_nonempty_iff_eq_empty]\n    exact\n      ⟨fun ⟨x, e⟩ _ => ⟨x, le_of_eq e⟩, fun h =>\n        let ⟨x, h⟩ := h ()\n        ⟨x, le_bot_iff.1 h⟩⟩\n#align ne_bot_iff ne_bot_iff\n\n",
  "mem_to_filter_sets":
- "@[simp]\ntheorem mem_to_filter_sets (F : cfilter (set α) σ) {a : set α} : a ∈ F.to_filter ↔ ∃ b, F b ⊆ a :=\n  iff.rfl\n#align mem_to_filter_sets mem_to_filter_sets\n\n",
+ "@[simp]\ntheorem mem_to_filter_sets (F : CFilter (Set α) σ) {a : Set α} : a ∈ F.to_filter ↔ ∃ b, F b ⊆ a :=\n  iff.rfl\n#align mem_to_filter_sets mem_to_filter_sets\n\n",
  "mem_sets":
- "theorem mem_sets {f : filter α} (F : f.realizer) {a : set α} : a ∈ f ↔ ∃ b, F.F b ⊆ a := by cases F <;> subst f <;> simp\n#align mem_sets mem_sets\n\n",
+ "theorem mem_sets {f : Filter α} (F : f.realizer) {a : Set α} : a ∈ f ↔ ∃ b, F.F b ⊆ a := by cases F <;> subst f <;> simp\n#align mem_sets mem_sets\n\n",
  "map_σ":
- "@[simp]\ntheorem map_σ (m : α → β) {f : filter α} (F : f.realizer) : (F.map m).σ = F.σ :=\n  rfl\n#align map_σ map_σ\n\n",
+ "@[simp]\ntheorem map_σ (m : α → β) {f : Filter α} (F : f.realizer) : (F.map m).σ = F.σ :=\n  rfl\n#align map_σ map_σ\n\n",
  "map_F":
- "@[simp]\ntheorem map_F (m : α → β) {f : filter α} (F : f.realizer) (s) : (F.map m).F s = image m (F.F s) :=\n  rfl\n#align map_F map_F\n\n",
+ "@[simp]\ntheorem map_F (m : α → β) {f : Filter α} (F : f.realizer) (s) : (F.map m).F s = image m (F.F s) :=\n  rfl\n#align map_F map_F\n\n",
  "le_iff":
- "theorem le_iff {f g : filter α} (F : f.realizer) (G : g.realizer) : f ≤ g ↔ ∀ b : G.σ, ∃ a : F.σ, F.F a ≤ G.F b :=\n  ⟨fun H t => F.mem_sets.1 (H (G.mem_sets.2 ⟨t, Subset.refl _⟩)), fun H x h =>\n    F.mem_sets.2 <|\n      let ⟨s, h₁⟩ := G.mem_sets.1 h\n      let ⟨t, h₂⟩ := H s\n      ⟨t, Subset.trans h₂ h₁⟩⟩\n#align le_iff le_iff\n\n",
+ "theorem le_iff {f g : Filter α} (F : f.realizer) (G : g.realizer) : f ≤ g ↔ ∀ b : G.σ, ∃ a : F.σ, F.F a ≤ G.F b :=\n  ⟨fun H t => F.mem_sets.1 (H (G.mem_sets.2 ⟨t, Subset.refl _⟩)), fun H x h =>\n    F.mem_sets.2 <|\n      let ⟨s, h₁⟩ := G.mem_sets.1 h\n      let ⟨t, h₂⟩ := H s\n      ⟨t, Subset.trans h₂ h₁⟩⟩\n#align le_iff le_iff\n\n",
  "coe_mk":
  "/-\nCopyright (c) 2017 Mario Carneiro. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Mario Carneiro\n-/\n@[simp]\ntheorem coe_mk (f pt inf h₁ h₂ a) : (@cfilter.mk α σ _ f pt inf h₁ h₂) a = f a :=\n  rfl\n#align coe_mk coe_mk\n\n",
  "bot_σ":
- "@[simp]\ntheorem bot_σ : (@realizer.bot α).σ = unit :=\n  rfl\n#align bot_σ bot_σ\n\n",
+ "@[simp]\ntheorem bot_σ : (@Realizer.bot α).σ = Unit :=\n  rfl\n#align bot_σ bot_σ\n\n",
  "bot_F":
- "@[simp]\ntheorem bot_F (u : unit) : (@realizer.bot α).F u = ∅ :=\n  rfl\n#align bot_F bot_F\n\n"}
+ "@[simp]\ntheorem bot_F (u : Unit) : (@Realizer.bot α).F u = ∅ :=\n  rfl\n#align bot_F bot_F\n\n"}

@@ -1,0 +1,50 @@
+{"supp_injective":
+ "/-\nCopyright (c) 2022 Anand Rao, Rémi Bottinelli. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Anand Rao, Rémi Bottinelli\n-/\n@[ext]\ntheorem component_compl.supp_injective : function.injective (component_compl.supp : G.component_compl K → Set V) :=\n  by\n  refine' connected_component.ind₂ _\n  rintro ⟨v, hv⟩ ⟨w, hw⟩ h\n  simp only [Set.ext_iff, connected_component.eq, Set.mem_setOf_eq, component_compl.supp] at h⊢\n  exact ((h v).mp ⟨hv, reachable.refl _⟩).some_spec\n#align component_compl.supp_injective component_compl.supp_injective\n\n",
+ "supp_inj":
+ "theorem component_compl.supp_inj {C D : G.component_compl K} : C.supp = D.supp ↔ C = D :=\n  component_compl.supp_injective.eq_iff\n#align component_compl.supp_inj component_compl.supp_inj\n\n",
+ "subset_hom":
+ "theorem subset_hom (C : G.component_compl L) (h : K ⊆ L) : (C : Set V) ⊆ (C.hom h : Set V) :=\n  by\n  rintro c ⟨cL, rfl⟩\n  exact ⟨fun h' => cL (h h'), rfl⟩\n#align subset_hom subset_hom\n\n",
+ "pairwise_disjoint":
+ "protected theorem pairwise_disjoint : Pairwise fun C D : G.component_compl K => Disjoint (C : Set V) (D : Set V) :=\n  by\n  rintro C D ne\n  rw [Set.disjoint_iff]\n  exact fun u ⟨uC, uD⟩ => ne (uC.some_spec.symm.trans uD.some_spec)\n#align pairwise_disjoint pairwise_disjoint\n\n",
+ "not_mem_of_mem":
+ "theorem not_mem_of_mem {C : G.component_compl K} {c : V} (cC : c ∈ C) : c ∉ K := fun cK =>\n  Set.disjoint_iff.mp C.disjoint_right ⟨cK, cC⟩\n#align not_mem_of_mem not_mem_of_mem\n\n",
+ "mem_supp_iff":
+ "@[simp]\ntheorem component_compl.mem_supp_iff {v : V} {C : component_compl G K} :\n    v ∈ C ↔ ∃ vK : v ∉ K, G.component_compl_mk vK = C :=\n  iff.rfl\n#align component_compl.mem_supp_iff component_compl.mem_supp_iff\n\n",
+ "mem_of_adj":
+ "/-- Any vertex adjacent to a vertex of `C` and not lying in `K` must lie in `C`.\n-/\ntheorem mem_of_adj : ∀ {C : G.component_compl K} (c d : V), c ∈ C → d ∉ K → G.adj c d → d ∈ C :=\n  fun C c d ⟨cnK, h⟩ dnK cd =>\n  ⟨dnK, by\n    rw [← h, connected_component.eq]\n    exact adj.reachable cd.symm⟩\n#align mem_of_adj mem_of_adj\n\n",
+ "infinite_iff_in_eventual_range":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵖ» -/\ntheorem infinite_iff_in_eventual_range {K : «expr ᵒᵖ» (Finset V)} (C : G.component_compl_functor.obj K) :\n    C.supp.infinite ↔ C ∈ G.component_compl_functor.eventual_range K :=\n  by\n  simp only [C.infinite_iff_in_all_ranges, category_theory.functor.eventual_range, Set.mem_interᵢ, Set.mem_range,\n    component_compl_functor_map]\n  exact ⟨fun h Lop KL => h Lop.unop (le_of_op_hom KL), fun h L KL => h (Opposite.op L) (op_hom_of_le KL)⟩\n#align infinite_iff_in_eventual_range infinite_iff_in_eventual_range\n\n",
+ "infinite_iff_in_all_ranges":
+ "theorem infinite_iff_in_all_ranges {K : Finset V} (C : G.component_compl K) :\n    C.supp.infinite ↔ ∀ (L) (h : K ⊆ L), ∃ D : G.component_compl L, D.hom h = C := by\n  classical\n    constructor\n    · rintro Cinf L h\n      obtain ⟨v, ⟨vK, rfl⟩, vL⟩ := Set.Infinite.nonempty (Set.Infinite.diff Cinf L.finite_to_set)\n      exact ⟨component_compl_mk _ vL, rfl⟩\n    · rintro h Cfin\n      obtain ⟨D, e⟩ := h (K ∪ Cfin.to_finset) (Finset.subset_union_left K Cfin.to_finset)\n      obtain ⟨v, vD⟩ := D.nonempty\n      let Ddis := D.disjoint_right\n      simp_rw [Finset.coe_union, Set.Finite.coe_toFinset, Set.disjoint_union_left, Set.disjoint_iff] at Ddis\n      exact Ddis.right ⟨(component_compl.hom_eq_iff_le _ _ _).mp e vD, vD⟩\n#align infinite_iff_in_all_ranges infinite_iff_in_all_ranges\n\n",
+ "ind":
+ "protected theorem ind {β : G.component_compl K → Prop} (f : ∀ ⦃v⦄ (hv : v ∉ K), β (G.component_compl_mk hv)) :\n    ∀ C : G.component_compl K, β C := by\n  apply connected_component.ind\n  exact fun ⟨v, vnK⟩ => f vnK\n#align ind ind\n\n",
+ "hom_trans":
+ "theorem hom_trans (C : G.component_compl L) (h : K ⊆ L) (h' : M ⊆ K) : C.hom (h'.trans h) = (C.hom h).hom h' :=\n  by\n  change C.map _ = (C.map _).map _\n  erw [connected_component.map_comp, induce_hom_comp]\n  rfl\n#align hom_trans hom_trans\n\n",
+ "hom_refl":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\ntheorem hom_refl (C : G.component_compl L) : C.hom (subset_refl L) = C :=\n  by\n  change C.map _ = C\n  erw [induce_hom_id G («expr ᶜ» L), connected_component.map_id]\n#align hom_refl hom_refl\n\n",
+ "hom_mk":
+ "theorem hom_mk {v : V} (vnL : v ∉ L) (h : K ⊆ L) :\n    (G.component_compl_mk vnL).hom h = G.component_compl_mk (Set.not_mem_subset h vnL) :=\n  rfl\n#align hom_mk hom_mk\n\n",
+ "hom_infinite":
+ "theorem hom_infinite (C : G.component_compl L) (h : K ⊆ L) (Cinf : (C : Set V).infinite) : (C.hom h : Set V).infinite :=\n  Set.Infinite.mono (C.subset_hom h) Cinf\n#align hom_infinite hom_infinite\n\n",
+ "hom_eq_iff_not_disjoint":
+ "theorem hom_eq_iff_not_disjoint (C : G.component_compl L) (h : K ⊆ L) (D : G.component_compl K) :\n    C.hom h = D ↔ ¬Disjoint (C : Set V) (D : Set V) :=\n  by\n  rw [Set.not_disjoint_iff]\n  constructor\n  · rintro rfl\n    apply C.ind fun x xnL => _\n    exact ⟨x, ⟨xnL, rfl⟩, ⟨fun xK => xnL (h xK), rfl⟩⟩\n  · apply C.ind fun x xnL => _\n    rintro ⟨x, ⟨_, e₁⟩, _, rfl⟩\n    rw [← e₁]\n    rfl\n#align hom_eq_iff_not_disjoint hom_eq_iff_not_disjoint\n\n",
+ "hom_eq_iff_le":
+ "theorem hom_eq_iff_le (C : G.component_compl L) (h : K ⊆ L) (D : G.component_compl K) :\n    C.hom h = D ↔ (C : Set V) ⊆ (D : Set V) :=\n  ⟨fun h' => h' ▸ C.subset_hom h, C.ind fun v vnL vD => (vD ⟨vnL, rfl⟩).some_spec⟩\n#align hom_eq_iff_le hom_eq_iff_le\n\n",
+ "exists_eq_mk":
+ "protected theorem exists_eq_mk (C : G.component_compl K) : ∃ (v : _)(h : v ∉ K), G.component_compl_mk h = C :=\n  C.nonempty\n#align exists_eq_mk exists_eq_mk\n\n",
+ "exists_adj_boundary_pair":
+ "/-- Assuming `G` is preconnected and `K` not empty, given any connected component `C` outside of `K`,\nthere exists a vertex `k ∈ K` adjacent to a vertex `v ∈ C`.\n-/\ntheorem exists_adj_boundary_pair (Gc : G.preconnected) (hK : K.nonempty) :\n    ∀ C : G.component_compl K, ∃ ck : V × V, ck.1 ∈ C ∧ ck.2 ∈ K ∧ G.adj ck.1 ck.2 :=\n  by\n  refine' component_compl.ind fun v vnK => _\n  let C : G.component_compl K := G.component_compl_mk vnK\n  let dis := set.disjoint_iff.mp C.disjoint_right\n  by_contra' h\n  suffices Set.univ = (C : Set V) by exact dis ⟨hK.some_spec, this ▸ Set.mem_univ hK.some⟩\n  symm\n  rw [Set.eq_univ_iff_forall]\n  rintro u\n  by_contra unC\n  obtain ⟨p⟩ := Gc v u\n  obtain ⟨⟨⟨x, y⟩, xy⟩, d, xC, ynC⟩ := p.exists_boundary_dart (C : Set V) (G.component_compl_mk_mem vnK) unC\n  exact ynC (mem_of_adj x y xC (fun yK : y ∈ K => h ⟨x, y⟩ xC yK xy) xy)\n#align exists_adj_boundary_pair exists_adj_boundary_pair\n\n",
+ "end_hom_mk_of_mk":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵖ» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⟶ » -/\ntheorem end_hom_mk_of_mk {s} (sec : s ∈ G.end) {K L : «expr ᵒᵖ» (Finset V)} (h : «expr ⟶ » L K) {v : V}\n    (vnL : v ∉ L.unop) (hs : s L = G.component_compl_mk vnL) :\n    s K = G.component_compl_mk (Set.not_mem_subset (le_of_op_hom h) vnL) :=\n  by\n  rw [← sec h, hs]\n  apply component_compl.hom_mk\n#align end_hom_mk_of_mk end_hom_mk_of_mk\n\n",
+ "disjoint_right":
+ "protected theorem disjoint_right (C : G.component_compl K) : Disjoint K C :=\n  by\n  rw [Set.disjoint_iff]\n  exact fun v ⟨vK, vC⟩ => vC.some vK\n#align disjoint_right disjoint_right\n\n",
+ "component_compl_mk_mem_hom":
+ "theorem _root_.simple_graph.component_compl_mk_mem_hom (G : SimpleGraph V) {v : V} (vK : v ∉ K) (h : L ⊆ K) :\n    v ∈ (G.component_compl_mk vK).hom h :=\n  subset_hom (G.component_compl_mk vK) h (G.component_compl_mk_mem vK)\n#align simple_graph.component_compl_mk_mem_hom simple_graph.component_compl_mk_mem_hom\n\n",
+ "component_compl_mk_mem":
+ "theorem component_compl_mk_mem (G : SimpleGraph V) {v : V} (vK : v ∉ K) : v ∈ G.component_compl_mk vK :=\n  ⟨vK, rfl⟩\n#align component_compl_mk_mem component_compl_mk_mem\n\n",
+ "component_compl_mk_eq_of_adj":
+ "theorem component_compl_mk_eq_of_adj (G : SimpleGraph V) {v w : V} (vK : v ∉ K) (wK : w ∉ K) (a : G.adj v w) :\n    G.component_compl_mk vK = G.component_compl_mk wK :=\n  by\n  rw [connected_component.eq]\n  apply adj.reachable\n  exact a\n#align component_compl_mk_eq_of_adj component_compl_mk_eq_of_adj\n\n",
+ "coe_inj":
+ "theorem coe_inj {C D : G.component_compl K} : (C : Set V) = (D : Set V) ↔ C = D :=\n  SetLike.coe_set_eq\n#align coe_inj coe_inj\n\n",
+ "Nonempty":
+ "#print Nonempty /-\n@[simp]\nprotected theorem Nonempty (C : G.component_compl K) : (C : Set V).nonempty :=\n  C.ind fun v vnK => ⟨v, vnK, rfl⟩\n#align nonempty Nonempty\n-/\n\n"}

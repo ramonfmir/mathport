@@ -1,48 +1,48 @@
 {"units_smul_def":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ˣ» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\ntheorem units_smul_def (g : conj_act («expr ˣ» M)) (h : M) : «expr • » g h = of_conj_act g * h * ↑(of_conj_act g)⁻¹ :=\n  rfl\n#align units_smul_def units_smul_def\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ˣ» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\ntheorem units_smul_def (g : ConjAct («expr ˣ» M)) (h : M) : «expr • » g h = ofConjAct g * h * ↑(ofConjAct g)⁻¹ :=\n  rfl\n#align units_smul_def units_smul_def\n\n",
  "to_mul_symm_eq":
- "@[simp]\ntheorem to_mul_symm_eq : (@to_conj_act G _).symm = of_conj_act :=\n  rfl\n#align to_mul_symm_eq to_mul_symm_eq\n\n",
+ "@[simp]\ntheorem to_mul_symm_eq : (@toConjAct G _).symm = ofConjAct :=\n  rfl\n#align to_mul_symm_eq to_mul_symm_eq\n\n",
  "to_conj_act_zero":
- "@[simp]\ntheorem to_conj_act_zero : to_conj_act (0 : G₀) = 0 :=\n  rfl\n#align to_conj_act_zero to_conj_act_zero\n\n",
+ "@[simp]\ntheorem to_conj_act_zero : toConjAct (0 : G₀) = 0 :=\n  rfl\n#align to_conj_act_zero to_conj_act_zero\n\n",
  "to_conj_act_one":
- "@[simp]\ntheorem to_conj_act_one : to_conj_act (1 : G) = 1 :=\n  rfl\n#align to_conj_act_one to_conj_act_one\n\n",
+ "@[simp]\ntheorem to_conj_act_one : toConjAct (1 : G) = 1 :=\n  rfl\n#align to_conj_act_one to_conj_act_one\n\n",
  "to_conj_act_of_conj_act":
- "@[simp]\ntheorem to_conj_act_of_conj_act (x : conj_act G) : to_conj_act (of_conj_act x) = x :=\n  rfl\n#align to_conj_act_of_conj_act to_conj_act_of_conj_act\n\n",
+ "@[simp]\ntheorem to_conj_act_of_conj_act (x : ConjAct G) : toConjAct (ofConjAct x) = x :=\n  rfl\n#align to_conj_act_of_conj_act to_conj_act_of_conj_act\n\n",
  "to_conj_act_mul":
- "@[simp]\ntheorem to_conj_act_mul (x y : G) : to_conj_act (x * y) = to_conj_act x * to_conj_act y :=\n  rfl\n#align to_conj_act_mul to_conj_act_mul\n\n",
+ "@[simp]\ntheorem to_conj_act_mul (x y : G) : toConjAct (x * y) = toConjAct x * toConjAct y :=\n  rfl\n#align to_conj_act_mul to_conj_act_mul\n\n",
  "to_conj_act_inv":
- "@[simp]\ntheorem to_conj_act_inv (x : G) : to_conj_act x⁻¹ = (to_conj_act x)⁻¹ :=\n  rfl\n#align to_conj_act_inv to_conj_act_inv\n\n",
+ "@[simp]\ntheorem to_conj_act_inv (x : G) : toConjAct x⁻¹ = (toConjAct x)⁻¹ :=\n  rfl\n#align to_conj_act_inv to_conj_act_inv\n\n",
  "stabilizer_eq_centralizer":
- "theorem stabilizer_eq_centralizer (g : G) : stabilizer (conj_act G) g = (zpowers g).centralizer :=\n  le_antisymm (le_centralizer_iff.mp (zpowers_le.mpr fun x => mul_inv_eq_iff_eq_mul.mp)) fun x h =>\n    mul_inv_eq_of_eq_mul (h g (mem_zpowers g)).symm\n#align stabilizer_eq_centralizer stabilizer_eq_centralizer\n\n",
+ "theorem stabilizer_eq_centralizer (g : G) : stabilizer (ConjAct G) g = (zpowers g).centralizer :=\n  le_antisymm (le_centralizer_iff.mp (zpowers_le.mpr fun x => mul_inv_eq_iff_eq_mul.mp)) fun x h =>\n    mul_inv_eq_of_eq_mul (h g (mem_zpowers g)).symm\n#align stabilizer_eq_centralizer stabilizer_eq_centralizer\n\n",
  "smul_eq_mul_aut_conj":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\ntheorem smul_eq_mul_aut_conj (g : conj_act G) (h : G) : «expr • » g h = MulAut.conj (of_conj_act g) h :=\n  rfl\n#align smul_eq_mul_aut_conj smul_eq_mul_aut_conj\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\ntheorem smul_eq_mul_aut_conj (g : ConjAct G) (h : G) : «expr • » g h = MulAut.conj (ofConjAct g) h :=\n  rfl\n#align smul_eq_mul_aut_conj smul_eq_mul_aut_conj\n\n",
  "smul_def":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\ntheorem smul_def (g : conj_act G) (h : G) : «expr • » g h = of_conj_act g * h * (of_conj_act g)⁻¹ :=\n  rfl\n#align smul_def smul_def\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\ntheorem smul_def (g : ConjAct G) (h : G) : «expr • » g h = ofConjAct g * h * (ofConjAct g)⁻¹ :=\n  rfl\n#align smul_def smul_def\n\n",
  "of_mul_symm_eq":
- "@[simp]\ntheorem of_mul_symm_eq : (@of_conj_act G _).symm = to_conj_act :=\n  rfl\n#align of_mul_symm_eq of_mul_symm_eq\n\n",
+ "@[simp]\ntheorem of_mul_symm_eq : (@ofConjAct G _).symm = toConjAct :=\n  rfl\n#align of_mul_symm_eq of_mul_symm_eq\n\n",
  "of_conj_act_zero":
- "@[simp]\ntheorem of_conj_act_zero : of_conj_act (0 : conj_act G₀) = 0 :=\n  rfl\n#align of_conj_act_zero of_conj_act_zero\n\n",
+ "@[simp]\ntheorem of_conj_act_zero : ofConjAct (0 : ConjAct G₀) = 0 :=\n  rfl\n#align of_conj_act_zero of_conj_act_zero\n\n",
  "of_conj_act_to_conj_act":
- "@[simp]\ntheorem of_conj_act_to_conj_act (x : G) : of_conj_act (to_conj_act x) = x :=\n  rfl\n#align of_conj_act_to_conj_act of_conj_act_to_conj_act\n\n",
+ "@[simp]\ntheorem of_conj_act_to_conj_act (x : G) : ofConjAct (toConjAct x) = x :=\n  rfl\n#align of_conj_act_to_conj_act of_conj_act_to_conj_act\n\n",
  "of_conj_act_one":
- "@[simp]\ntheorem of_conj_act_one : of_conj_act (1 : conj_act G) = 1 :=\n  rfl\n#align of_conj_act_one of_conj_act_one\n\n",
+ "@[simp]\ntheorem of_conj_act_one : ofConjAct (1 : ConjAct G) = 1 :=\n  rfl\n#align of_conj_act_one of_conj_act_one\n\n",
  "of_conj_act_mul":
- "@[simp]\ntheorem of_conj_act_mul (x y : conj_act G) : of_conj_act (x * y) = of_conj_act x * of_conj_act y :=\n  rfl\n#align of_conj_act_mul of_conj_act_mul\n\n",
+ "@[simp]\ntheorem of_conj_act_mul (x y : ConjAct G) : ofConjAct (x * y) = ofConjAct x * ofConjAct y :=\n  rfl\n#align of_conj_act_mul of_conj_act_mul\n\n",
  "of_conj_act_inv":
- "@[simp]\ntheorem of_conj_act_inv (x : conj_act G) : of_conj_act x⁻¹ = (of_conj_act x)⁻¹ :=\n  rfl\n#align of_conj_act_inv of_conj_act_inv\n\n",
+ "@[simp]\ntheorem of_conj_act_inv (x : ConjAct G) : ofConjAct x⁻¹ = (ofConjAct x)⁻¹ :=\n  rfl\n#align of_conj_act_inv of_conj_act_inv\n\n",
  "forall":
- "@[simp]\ntheorem forall (p : conj_act G → Prop) : (∀ x : conj_act G, p x) ↔ ∀ x : G, p (to_conj_act x) :=\n  iff.rfl\n#align forall forall\n\n",
+ "@[simp]\ntheorem forall (p : ConjAct G → Prop) : (∀ x : ConjAct G, p x) ↔ ∀ x : G, p (toConjAct x) :=\n  iff.rfl\n#align forall forall\n\n",
  "fixed_points_eq_center":
- "/-- The set of fixed points of the conjugation action of `G` on itself is the center of `G`. -/\ntheorem fixed_points_eq_center : fixed_points (conj_act G) G = center G :=\n  by\n  ext x\n  simp [mem_center_iff, smul_def, mul_inv_eq_iff_eq_mul]\n#align fixed_points_eq_center fixed_points_eq_center\n\n",
+ "/-- The set of fixed points of the conjugation action of `G` on itself is the center of `G`. -/\ntheorem fixed_points_eq_center : fixedPoints (ConjAct G) G = center G :=\n  by\n  ext x\n  simp [mem_center_iff, smul_def, mul_inv_eq_iff_eq_mul]\n#align fixed_points_eq_center fixed_points_eq_center\n\n",
  "conj_normal_symm_apply":
- "@[simp]\ntheorem _root_.mul_aut.conj_normal_symm_apply {H : subgroup G} [H.normal] (g : G) (h : H) :\n    ↑((mul_aut.conj_normal g).symm h) = g⁻¹ * h * g :=\n  by\n  change _ * _⁻¹⁻¹ = _\n  rw [inv_inv]\n  rfl\n#align mul_aut.conj_normal_symm_apply mul_aut.conj_normal_symm_apply\n\n",
+ "#print MulAut.conjNormal_symm_apply /-\n@[simp]\ntheorem MulAut.conjNormal_symm_apply {H : Subgroup G} [H.normal] (g : G) (h : H) :\n    ↑((MulAut.conjNormal g).symm h) = g⁻¹ * h * g :=\n  by\n  change _ * _⁻¹⁻¹ = _\n  rw [inv_inv]\n  rfl\n#align mul_aut.conj_normal_symm_apply MulAut.conjNormal_symm_apply\n-/\n\n",
  "conj_normal_inv_apply":
- "@[simp]\ntheorem _root_.mul_aut.conj_normal_inv_apply {H : subgroup G} [H.normal] (g : G) (h : H) :\n    ↑((mul_aut.conj_normal g)⁻¹ h) = g⁻¹ * h * g :=\n  mul_aut.conj_normal_symm_apply g h\n#align mul_aut.conj_normal_inv_apply mul_aut.conj_normal_inv_apply\n\n",
+ "#print MulAut.conjNormal_inv_apply /-\n@[simp]\ntheorem MulAut.conjNormal_inv_apply {H : Subgroup G} [H.normal] (g : G) (h : H) :\n    ↑((MulAut.conjNormal g)⁻¹ h) = g⁻¹ * h * g :=\n  MulAut.conjNormal_symm_apply g h\n#align mul_aut.conj_normal_inv_apply MulAut.conjNormal_inv_apply\n-/\n\n",
  "conj_normal_coe":
- "theorem _root_.mul_aut.conj_normal_coe {H : subgroup G} [H.normal] {h : H} : mul_aut.conj_normal ↑h = MulAut.conj h :=\n  MulEquiv.ext fun x => rfl\n#align mul_aut.conj_normal_coe mul_aut.conj_normal_coe\n\n",
+ "#print MulAut.conjNormal_val /-\ntheorem MulAut.conjNormal_val {H : Subgroup G} [H.normal] {h : H} : MulAut.conjNormal ↑h = MulAut.conj h :=\n  MulEquiv.ext fun x => rfl\n#align mul_aut.conj_normal_coe MulAut.conjNormal_val\n-/\n\n",
  "conj_normal_apply":
- "@[simp]\ntheorem _root_.mul_aut.conj_normal_apply {H : subgroup G} [H.normal] (g : G) (h : H) :\n    ↑(mul_aut.conj_normal g h) = g * h * g⁻¹ :=\n  rfl\n#align mul_aut.conj_normal_apply mul_aut.conj_normal_apply\n\n",
+ "#print MulAut.conjNormal_apply /-\n@[simp]\ntheorem MulAut.conjNormal_apply {H : Subgroup G} [H.normal] (g : G) (h : H) : ↑(MulAut.conjNormal g h) = g * h * g⁻¹ :=\n  rfl\n#align mul_aut.conj_normal_apply MulAut.conjNormal_apply\n-/\n\n",
  "coe_conj_smul":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\ntheorem subgroup.coe_conj_smul {H : subgroup G} [hH : H.normal] (g : conj_act G) (h : H) :\n    ↑(«expr • » g h) = «expr • » g (h : G) :=\n  rfl\n#align subgroup.coe_conj_smul subgroup.coe_conj_smul\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\ntheorem subgroup.coe_conj_smul {H : Subgroup G} [hH : H.normal] (g : ConjAct G) (h : H) :\n    ↑(«expr • » g h) = «expr • » g (h : G) :=\n  rfl\n#align subgroup.coe_conj_smul subgroup.coe_conj_smul\n\n",
  "card":
- "/-\nCopyright (c) 2021 . All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Chris Hughes\n-/\n@[simp]\ntheorem card [fintype G] : fintype.card (conj_act G) = fintype.card G :=\n  rfl\n#align card card\n\n"}
+ "/-\nCopyright (c) 2021 . All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Chris Hughes\n-/\n@[simp]\ntheorem card [Fintype G] : Fintype.card (ConjAct G) = Fintype.card G :=\n  rfl\n#align card card\n\n"}

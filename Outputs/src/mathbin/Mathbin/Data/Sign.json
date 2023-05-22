@@ -1,86 +1,86 @@
 {"zero_eq_zero":
  "/-\nCopyright (c) 2022 Eric Rodriguez. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Eric Rodriguez\n-/\n@[simp]\ntheorem zero_eq_zero : zero = 0 :=\n  rfl\n#align zero_eq_zero zero_eq_zero\n\n",
  "sign_zero":
- "@[simp]\ntheorem sign_zero : sign (0 : α) = 0 := by simp [sign_apply]\n#align sign_zero sign_zero\n\n",
+ "#print sign_zero /-\n@[simp]\ntheorem sign_zero : SignType.sign (0 : α) = 0 := by simp [sign_apply]\n#align sign_zero sign_zero\n-/\n\n",
  "sign_sum":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `finset.sum -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.sum -/\n/- I'm not sure why this is necessary, see\nhttps://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Decidable.20vs.20decidable_rel -/\ntheorem sign_sum {ι : Type _} {s : Finset ι} {f : ι → α} (hs : s.nonempty) (t : sign_type)\n    (h : ∀ i ∈ s, sign (f i) = t) :\n    sign (finset.sum \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.sum\" s (f i)) =\n      t :=\n  by\n  cases t\n  · simp_rw [zero_eq_zero, sign_eq_zero_iff] at h⊢\n    exact finset.sum_eq_zero h\n  · simp_rw [neg_eq_neg_one, sign_eq_neg_one_iff] at h⊢\n    exact finset.sum_neg h hs\n  · simp_rw [pos_eq_one, sign_eq_one_iff] at h⊢\n    exact finset.sum_pos h hs\n#align sign_sum sign_sum\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `finset.sum -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.sum -/\n#print sign_sum /-\n/- I'm not sure why this is necessary, see\nhttps://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Decidable.20vs.20decidable_rel -/\ntheorem sign_sum {ι : Type _} {s : Finset ι} {f : ι → α} (hs : s.nonempty) (t : SignType)\n    (h : ∀ i ∈ s, SignType.sign (f i) = t) :\n    SignType.sign\n        (finset.sum \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.sum\" s (f i)) =\n      t :=\n  by\n  cases t\n  · simp_rw [zero_eq_zero, sign_eq_zero_iff] at h⊢\n    exact Finset.sum_eq_zero h\n  · simp_rw [neg_eq_neg_one, sign_eq_neg_one_iff] at h⊢\n    exact Finset.sum_neg h hs\n  · simp_rw [pos_eq_one, sign_eq_one_iff] at h⊢\n    exact Finset.sum_pos h hs\n#align sign_sum sign_sum\n-/\n\n",
  "sign_pow":
- "theorem sign_pow (x : α) (n : ℕ) : sign (x ^ n) = sign x ^ n :=\n  by\n  change sign_hom (x ^ n) = sign_hom x ^ n\n  exact map_pow _ _ _\n#align sign_pow sign_pow\n\n",
+ "#print sign_pow /-\ntheorem sign_pow (x : α) (n : ℕ) : SignType.sign (x ^ n) = SignType.sign x ^ n :=\n  by\n  change signHom (x ^ n) = signHom x ^ n\n  exact map_pow _ _ _\n#align sign_pow sign_pow\n-/\n\n",
  "sign_pos":
- "@[simp]\ntheorem sign_pos (ha : 0 < a) : sign a = 1 := by rwa [sign_apply, if_pos]\n#align sign_pos sign_pos\n\n",
+ "#print sign_pos /-\n@[simp]\ntheorem sign_pos (ha : 0 < a) : SignType.sign a = 1 := by rwa [sign_apply, if_pos]\n#align sign_pos sign_pos\n-/\n\n",
  "sign_one":
- "@[simp]\ntheorem sign_one : sign (1 : α) = 1 :=\n  sign_pos zero_lt_one\n#align sign_one sign_one\n\n",
+ "#print sign_one /-\n@[simp]\ntheorem sign_one : SignType.sign (1 : α) = 1 :=\n  sign_pos zero_lt_one\n#align sign_one sign_one\n-/\n\n",
  "sign_nonpos_iff":
- "@[simp]\ntheorem sign_nonpos_iff : sign a ≤ 0 ↔ a ≤ 0 :=\n  by\n  rcases lt_trichotomy 0 a with (h | rfl | h)\n  · simp [h, h.not_le]\n  · simp\n  · simp [h, h.le]\n#align sign_nonpos_iff sign_nonpos_iff\n\n",
+ "#print sign_nonpos_iff /-\n@[simp]\ntheorem sign_nonpos_iff : SignType.sign a ≤ 0 ↔ a ≤ 0 :=\n  by\n  rcases lt_trichotomy 0 a with (h | rfl | h)\n  · simp [h, h.not_le]\n  · simp\n  · simp [h, h.le]\n#align sign_nonpos_iff sign_nonpos_iff\n-/\n\n",
  "sign_nonneg_iff":
- "@[simp]\ntheorem sign_nonneg_iff : 0 ≤ sign a ↔ 0 ≤ a :=\n  by\n  rcases lt_trichotomy 0 a with (h | rfl | h)\n  · simp [h, h.le]\n  · simp\n  · simpa [h, h.not_le]\n#align sign_nonneg_iff sign_nonneg_iff\n\n",
+ "#print sign_nonneg_iff /-\n@[simp]\ntheorem sign_nonneg_iff : 0 ≤ SignType.sign a ↔ 0 ≤ a :=\n  by\n  rcases lt_trichotomy 0 a with (h | rfl | h)\n  · simp [h, h.le]\n  · simp\n  · simpa [h, h.not_le]\n#align sign_nonneg_iff sign_nonneg_iff\n-/\n\n",
  "sign_neg":
- "theorem right.sign_neg [covariant_class α α (function.swap (· + ·)) (· < ·)] (a : α) : sign (-a) = -sign a :=\n  by\n  simp_rw [sign_apply, right.neg_pos_iff, right.neg_neg_iff]\n  split_ifs with h h'\n  · exact false.elim (lt_asymm h h')\n  · simp\n  · simp\n  · simp\n#align right.sign_neg right.sign_neg\n\n",
+ "#print Right.sign_neg /-\ntheorem Right.sign_neg [CovariantClass α α (function.swap (· + ·)) (· < ·)] (a : α) :\n    SignType.sign (-a) = -SignType.sign a :=\n  by\n  simp_rw [sign_apply, Right.neg_pos_iff, Right.neg_neg_iff]\n  split_ifs with h h'\n  · exact false.elim (lt_asymm h h')\n  · simp\n  · simp\n  · simp\n#align right.sign_neg Right.sign_neg\n-/\n\n",
  "sign_ne_zero":
- "theorem sign_ne_zero : sign a ≠ 0 ↔ a ≠ 0 :=\n  sign_eq_zero_iff.not\n#align sign_ne_zero sign_ne_zero\n\n",
+ "#print sign_ne_zero /-\ntheorem sign_ne_zero : SignType.sign a ≠ 0 ↔ a ≠ 0 :=\n  sign_eq_zero_iff.not\n#align sign_ne_zero sign_ne_zero\n-/\n\n",
  "sign_mul":
- "/- I'm not sure why this is necessary, see https://leanprover.zulipchat.com/#narrow/stream/\n113488-general/topic/type.20class.20inference.20issues/near/276937942 -/\ntheorem sign_mul (x y : α) : sign (x * y) = sign x * sign y := by\n  rcases lt_trichotomy x 0 with (hx | hx | hx) <;> rcases lt_trichotomy y 0 with (hy | hy | hy) <;>\n    simp only [sign_zero, mul_zero, zero_mul, sign_pos, sign_neg, hx, hy, mul_one, neg_one_mul, neg_neg, one_mul,\n      mul_pos_of_neg_of_neg, mul_neg_of_neg_of_pos, neg_zero, mul_neg_of_pos_of_neg, mul_pos]\n#align sign_mul sign_mul\n\n",
+ "#print sign_mul /-\n/- I'm not sure why this is necessary, see https://leanprover.zulipchat.com/#narrow/stream/\n113488-general/topic/type.20class.20inference.20issues/near/276937942 -/\ntheorem sign_mul (x y : α) : SignType.sign (x * y) = SignType.sign x * SignType.sign y := by\n  rcases lt_trichotomy x 0 with (hx | hx | hx) <;> rcases lt_trichotomy y 0 with (hy | hy | hy) <;>\n    simp only [sign_zero, MulZeroClass.mul_zero, MulZeroClass.zero_mul, sign_pos, sign_neg, hx, hy, mul_one,\n      neg_one_mul, neg_neg, one_mul, mul_pos_of_neg_of_neg, mul_neg_of_neg_of_pos, neg_zero, mul_neg_of_pos_of_neg,\n      mul_pos]\n#align sign_mul sign_mul\n-/\n\n",
  "sign_eq_zero_iff":
- "@[simp]\ntheorem sign_eq_zero_iff : sign a = 0 ↔ a = 0 :=\n  by\n  refine' ⟨fun h => _, fun h => h.symm ▸ sign_zero⟩\n  rw [sign_apply] at h\n  split_ifs  at h <;> cases h\n  exact (le_of_not_lt h_1).eq_of_not_lt h_2\n#align sign_eq_zero_iff sign_eq_zero_iff\n\n",
+ "#print sign_eq_zero_iff /-\n@[simp]\ntheorem sign_eq_zero_iff : SignType.sign a = 0 ↔ a = 0 :=\n  by\n  refine' ⟨fun h => _, fun h => h.symm ▸ sign_zero⟩\n  rw [sign_apply] at h\n  split_ifs  at h <;> cases h\n  exact (le_of_not_lt h_1).eq_of_not_lt h_2\n#align sign_eq_zero_iff sign_eq_zero_iff\n-/\n\n",
  "sign_eq_sign":
- "theorem sign_eq_sign (n : ℤ) : n.sign = _root_.sign n :=\n  by\n  obtain (_ | _) | _ := n\n  · exact congr_arg coe sign_zero.symm\n  · exact congr_arg coe (sign_pos <| Int.succ_coe_nat_pos _).symm\n  · exact congr_arg coe (_root_.sign_neg <| neg_succ_lt_zero _).symm\n#align sign_eq_sign sign_eq_sign\n\n",
+ "theorem sign_eq_sign (n : ℤ) : n.sign = SignType.sign n :=\n  by\n  obtain (_ | _) | _ := n\n  · exact congr_arg coe sign_zero.symm\n  · exact congr_arg coe (sign_pos <| Int.succ_coe_nat_pos _).symm\n  · exact congr_arg coe (_root_.sign_neg <| neg_succ_lt_zero _).symm\n#align sign_eq_sign sign_eq_sign\n\n",
  "sign_eq_one_iff":
- "theorem sign_eq_one_iff : sign a = 1 ↔ 0 < a :=\n  by\n  refine' ⟨fun h => _, fun h => sign_pos h⟩\n  by_contra hn\n  rw [sign_apply, if_neg hn] at h\n  split_ifs  at h <;> simpa using h\n#align sign_eq_one_iff sign_eq_one_iff\n\n",
+ "#print sign_eq_one_iff /-\ntheorem sign_eq_one_iff : SignType.sign a = 1 ↔ 0 < a :=\n  by\n  refine' ⟨fun h => _, fun h => sign_pos h⟩\n  by_contra hn\n  rw [sign_apply, if_neg hn] at h\n  split_ifs  at h <;> simpa using h\n#align sign_eq_one_iff sign_eq_one_iff\n-/\n\n",
  "sign_eq_neg_one_iff":
- "theorem sign_eq_neg_one_iff : sign a = -1 ↔ a < 0 :=\n  by\n  refine' ⟨fun h => _, fun h => sign_neg h⟩\n  rw [sign_apply] at h\n  split_ifs  at h\n  · simpa using h\n  · exact h_2\n  · simpa using h\n#align sign_eq_neg_one_iff sign_eq_neg_one_iff\n\n",
+ "#print sign_eq_neg_one_iff /-\ntheorem sign_eq_neg_one_iff : SignType.sign a = -1 ↔ a < 0 :=\n  by\n  refine' ⟨fun h => _, fun h => sign_neg h⟩\n  rw [sign_apply] at h\n  split_ifs  at h\n  · simpa using h\n  · exact h_2\n  · simpa using h\n#align sign_eq_neg_one_iff sign_eq_neg_one_iff\n-/\n\n",
  "sign_apply":
- "theorem sign_apply : sign a = ite (0 < a) 1 (ite (a < 0) (-1) 0) :=\n  rfl\n#align sign_apply sign_apply\n\n",
+ "#print sign_apply /-\ntheorem sign_apply : SignType.sign a = ite (0 < a) 1 (ite (a < 0) (-1) 0) :=\n  rfl\n#align sign_apply sign_apply\n-/\n\n",
  "self_eq_neg_iff":
- "@[simp]\ntheorem self_eq_neg_iff (a : sign_type) : a = -a ↔ a = 0 := by decide!\n#align self_eq_neg_iff self_eq_neg_iff\n\n",
+ "@[simp]\ntheorem self_eq_neg_iff (a : SignType) : a = -a ↔ a = 0 := by decide!\n#align self_eq_neg_iff self_eq_neg_iff\n\n",
  "range_eq":
- "theorem range_eq {α} (f : sign_type → α) : Set.range f = {f zero, f neg, f pos} := by\n  classical simpa only [← Finset.coe_singleton, ← Finset.image_singleton, ← fintype.coe_image_univ, Finset.coe_image, ←\n      Set.image_insert_eq]\n#align range_eq range_eq\n\n",
+ "theorem range_eq {α} (f : SignType → α) : Set.range f = {f zero, f neg, f pos} := by\n  classical simpa only [← Finset.coe_singleton, ← Finset.image_singleton, ← Fintype.coe_image_univ, Finset.coe_image, ←\n      Set.image_insert_eq]\n#align range_eq range_eq\n\n",
  "pos_iff":
- "@[simp]\ntheorem pos_iff {a : sign_type} : 0 < a ↔ a = 1 := by decide!\n#align pos_iff pos_iff\n\n",
+ "@[simp]\ntheorem pos_iff {a : SignType} : 0 < a ↔ a = 1 := by decide!\n#align pos_iff pos_iff\n\n",
  "pos_eq_one":
  "@[simp]\ntheorem pos_eq_one : pos = 1 :=\n  rfl\n#align pos_eq_one pos_eq_one\n\n",
  "one_le_iff":
- "@[simp]\ntheorem one_le_iff {a : sign_type} : 1 ≤ a ↔ a = 1 :=\n  top_le_iff\n#align one_le_iff one_le_iff\n\n",
+ "@[simp]\ntheorem one_le_iff {a : SignType} : 1 ≤ a ↔ a = 1 :=\n  top_le_iff\n#align one_le_iff one_le_iff\n\n",
  "not_one_lt":
- "@[simp]\ntheorem not_one_lt (a : sign_type) : ¬1 < a :=\n  not_top_lt\n#align not_one_lt not_one_lt\n\n",
+ "@[simp]\ntheorem not_one_lt (a : SignType) : ¬1 < a :=\n  not_top_lt\n#align not_one_lt not_one_lt\n\n",
  "not_lt_neg_one":
- "@[simp]\ntheorem not_lt_neg_one (a : sign_type) : ¬a < -1 :=\n  not_lt_bot\n#align not_lt_neg_one not_lt_neg_one\n\n",
+ "@[simp]\ntheorem not_lt_neg_one (a : SignType) : ¬a < -1 :=\n  not_lt_bot\n#align not_lt_neg_one not_lt_neg_one\n\n",
  "nonpos_iff_ne_one":
- "theorem nonpos_iff_ne_one {a : sign_type} : a ≤ 0 ↔ a ≠ 1 := by decide!\n#align nonpos_iff_ne_one nonpos_iff_ne_one\n\n",
+ "theorem nonpos_iff_ne_one {a : SignType} : a ≤ 0 ↔ a ≠ 1 := by decide!\n#align nonpos_iff_ne_one nonpos_iff_ne_one\n\n",
  "nonpos_iff":
- "theorem nonpos_iff {a : sign_type} : a ≤ 0 ↔ a = -1 ∨ a = 0 := by decide!\n#align nonpos_iff nonpos_iff\n\n",
+ "theorem nonpos_iff {a : SignType} : a ≤ 0 ↔ a = -1 ∨ a = 0 := by decide!\n#align nonpos_iff nonpos_iff\n\n",
  "nonneg_iff_ne_neg_one":
- "theorem nonneg_iff_ne_neg_one {a : sign_type} : 0 ≤ a ↔ a ≠ -1 := by decide!\n#align nonneg_iff_ne_neg_one nonneg_iff_ne_neg_one\n\n",
+ "theorem nonneg_iff_ne_neg_one {a : SignType} : 0 ≤ a ↔ a ≠ -1 := by decide!\n#align nonneg_iff_ne_neg_one nonneg_iff_ne_neg_one\n\n",
  "nonneg_iff":
- "/- We can define a `field` instance on `sign_type`, but it's not mathematically sensible,\nso we only define the `comm_group_with_zero`. -/\ntheorem nonneg_iff {a : sign_type} : 0 ≤ a ↔ a = 0 ∨ a = 1 := by decide!\n#align nonneg_iff nonneg_iff\n\n",
+ "/- We can define a `field` instance on `sign_type`, but it's not mathematically sensible,\nso we only define the `comm_group_with_zero`. -/\ntheorem nonneg_iff {a : SignType} : 0 ≤ a ↔ a = 0 ∨ a = 1 := by decide!\n#align nonneg_iff nonneg_iff\n\n",
  "neg_one_lt_one":
- "@[simp]\ntheorem neg_one_lt_one : (-1 : sign_type) < 1 :=\n  bot_lt_top\n#align neg_one_lt_one neg_one_lt_one\n\n",
+ "@[simp]\ntheorem neg_one_lt_one : (-1 : SignType) < 1 :=\n  bot_lt_top\n#align neg_one_lt_one neg_one_lt_one\n\n",
  "neg_one_lt_iff":
- "theorem neg_one_lt_iff {a : sign_type} : -1 < a ↔ 0 ≤ a := by decide!\n#align neg_one_lt_iff neg_one_lt_iff\n\n",
+ "theorem neg_one_lt_iff {a : SignType} : -1 < a ↔ 0 ≤ a := by decide!\n#align neg_one_lt_iff neg_one_lt_iff\n\n",
  "neg_one_le":
- "@[simp]\ntheorem neg_one_le (a : sign_type) : -1 ≤ a :=\n  bot_le\n#align neg_one_le neg_one_le\n\n",
+ "@[simp]\ntheorem neg_one_le (a : SignType) : -1 ≤ a :=\n  bot_le\n#align neg_one_le neg_one_le\n\n",
  "neg_iff":
- "@[simp]\ntheorem neg_iff {a : sign_type} : a < 0 ↔ a = -1 := by decide!\n#align neg_iff neg_iff\n\n",
+ "@[simp]\ntheorem neg_iff {a : SignType} : a < 0 ↔ a = -1 := by decide!\n#align neg_iff neg_iff\n\n",
  "neg_eq_self_iff":
- "#print neg_eq_self_iff /-\n@[simp]\ntheorem neg_eq_self_iff (a : sign_type) : -a = a ↔ a = 0 := by decide!\n#align neg_eq_self_iff neg_eq_self_iff\n-/\n\n",
+ "#print neg_eq_self_iff /-\n@[simp]\ntheorem neg_eq_self_iff (a : SignType) : -a = a ↔ a = 0 := by decide!\n#align neg_eq_self_iff neg_eq_self_iff\n-/\n\n",
  "neg_eq_neg_one":
  "@[simp]\ntheorem neg_eq_neg_one : neg = -1 :=\n  rfl\n#align neg_eq_neg_one neg_eq_neg_one\n\n",
  "lt_one_iff":
- "theorem lt_one_iff {a : sign_type} : a < 1 ↔ a ≤ 0 := by decide!\n#align lt_one_iff lt_one_iff\n\n",
+ "theorem lt_one_iff {a : SignType} : a < 1 ↔ a ≤ 0 := by decide!\n#align lt_one_iff lt_one_iff\n\n",
  "le_one":
- "@[simp]\ntheorem le_one (a : sign_type) : a ≤ 1 :=\n  le_top\n#align le_one le_one\n\n",
+ "@[simp]\ntheorem le_one (a : SignType) : a ≤ 1 :=\n  le_top\n#align le_one le_one\n\n",
  "le_neg_one_iff":
- "@[simp]\ntheorem le_neg_one_iff {a : sign_type} : a ≤ -1 ↔ a = -1 :=\n  le_bot_iff\n#align le_neg_one_iff le_neg_one_iff\n\n",
+ "@[simp]\ntheorem le_neg_one_iff {a : SignType} : a ≤ -1 ↔ a = -1 :=\n  le_bot_iff\n#align le_neg_one_iff le_neg_one_iff\n\n",
  "exists_signed_sum_aux":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `finset.sum -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.sum -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `finset.sum -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.sum -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `finset.sum -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.sum -/\nprivate theorem exists_signed_sum_aux [decidable_eq α] (s : Finset α) (f : α → ℤ) :\n    ∃ (β : Type u_1)(t : Finset β)(sgn : β → sign_type)(g : β → α),\n      (∀ b, g b ∈ s) ∧\n        t.card =\n            finset.sum \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.sum\" s\n              (f a).nat_abs ∧\n          ∀ a ∈ s,\n            finset.sum \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.sum\" t\n                (if g b = a then (sgn b : ℤ) else 0) =\n              f a :=\n  by\n  refine'\n    ⟨Σa : { x // x ∈ s }, ℕ, finset.univ.sigma fun a => range (f a).nat_abs, fun a => sign (f a.1), fun a => a.1,\n      fun a => a.1.prop, _, _⟩\n  · simp [@sum_attach _ _ _ _ fun a => (f a).nat_abs]\n  · intro x hx\n    simp [sum_sigma, hx, ← int.sign_eq_sign, Int.sign_mul_abs, mul_comm (|f _|),\n      @sum_attach _ _ _ _ fun a =>\n        finset.sum \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.sum\"\n          (range (f a).nat_abs) (if a = x then (f a).sign else 0)]\n#align exists_signed_sum_aux exists_signed_sum_aux\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `finset.sum -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.sum -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `finset.sum -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.sum -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `finset.sum -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.sum -/\nprivate theorem exists_signed_sum_aux [DecidableEq α] (s : Finset α) (f : α → ℤ) :\n    ∃ (β : Type u_1)(t : Finset β)(sgn : β → SignType)(g : β → α),\n      (∀ b, g b ∈ s) ∧\n        t.card =\n            finset.sum \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.sum\" s\n              (f a).nat_abs ∧\n          ∀ a ∈ s,\n            finset.sum \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.sum\" t\n                (if g b = a then (sgn b : ℤ) else 0) =\n              f a :=\n  by\n  refine'\n    ⟨Σa : { x // x ∈ s }, ℕ, finset.univ.sigma fun a => range (f a).nat_abs, fun a => SignType.sign (f a.1), fun a =>\n      a.1, fun a => a.1.prop, _, _⟩\n  · simp [@sum_attach _ _ _ _ fun a => (f a).nat_abs]\n  · intro x hx\n    simp [sum_sigma, hx, ← Int.sign_eq_sign, Int.sign_mul_abs, mul_comm (|f _|),\n      @sum_attach _ _ _ _ fun a =>\n        finset.sum \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.sum\"\n          (range (f a).nat_abs) (if a = x then (f a).sign else 0)]\n#align exists_signed_sum_aux exists_signed_sum_aux\n\n",
  "exists_signed_sum'":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `finset.sum -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.sum -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `finset.sum -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.sum -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `finset.sum_univ -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.sum_univ -/\n/-- We can decompose a sum of absolute value less than `n` into a sum of at most `n` signs. -/\ntheorem exists_signed_sum' [nonempty α] [decidable_eq α] (s : Finset α) (f : α → ℤ) (n : ℕ)\n    (h :\n      finset.sum \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.sum\" s (f i).nat_abs ≤\n        n) :\n    ∃ (β : Type u_1)(_ : fintype β)(sgn : β → sign_type)(g : β → α),\n      (∀ b, g b ∉ s → sgn b = 0) ∧\n        fintype.card β = n ∧\n          ∀ a ∈ s,\n            finset.sum_univ \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.sum_univ\"\n                (if g i = a then (sgn i : ℤ) else 0) =\n              f a :=\n  by\n  obtain ⟨β, _, sgn, g, hg, hβ, hf⟩ := exists_signed_sum s f\n  skip\n  refine'\n    ⟨Sum β\n        (fin\n          (n -\n            finset.sum \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.sum\" s\n              (f i).nat_abs)),\n      infer_instance, sum.elim sgn 0, sum.elim g <| classical.arbitrary _, _, by simp [hβ, h], fun a ha => by\n      simp [hf _ ha]⟩\n  rintro (b | b) hb\n  · cases hb (hg _)\n  · rfl\n#align exists_signed_sum' exists_signed_sum'\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `finset.sum -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.sum -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `finset.sum -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.sum -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `finset.sum_univ -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.sum_univ -/\n#print exists_signed_sum' /-\n/-- We can decompose a sum of absolute value less than `n` into a sum of at most `n` signs. -/\ntheorem exists_signed_sum' [Nonempty α] [DecidableEq α] (s : Finset α) (f : α → ℤ) (n : ℕ)\n    (h :\n      finset.sum \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.sum\" s (f i).nat_abs ≤\n        n) :\n    ∃ (β : Type u_1)(_ : Fintype β)(sgn : β → SignType)(g : β → α),\n      (∀ b, g b ∉ s → sgn b = 0) ∧\n        Fintype.card β = n ∧\n          ∀ a ∈ s,\n            finset.sum_univ \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.sum_univ\"\n                (if g i = a then (sgn i : ℤ) else 0) =\n              f a :=\n  by\n  obtain ⟨β, _, sgn, g, hg, hβ, hf⟩ := exists_signed_sum s f\n  skip\n  refine'\n    ⟨Sum β\n        (Fin\n          (n -\n            finset.sum \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.sum\" s\n              (f i).nat_abs)),\n      inferInstance, Sum.elim sgn 0, Sum.elim g <| Classical.arbitrary _, _, by simp [hβ, h], fun a ha => by\n      simp [hf _ ha]⟩\n  rintro (b | b) hb\n  · cases hb (hg _)\n  · rfl\n#align exists_signed_sum' exists_signed_sum'\n-/\n\n",
  "exists_signed_sum":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `finset.sum -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.sum -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `finset.sum_univ -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.sum_univ -/\n/-- We can decompose a sum of absolute value `n` into a sum of `n` signs. -/\ntheorem exists_signed_sum [decidable_eq α] (s : Finset α) (f : α → ℤ) :\n    ∃ (β : Type u_1)(_ : fintype β)(sgn : β → sign_type)(g : β → α),\n      (∀ b, g b ∈ s) ∧\n        fintype.card β =\n            finset.sum \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.sum\" s\n              (f a).nat_abs ∧\n          ∀ a ∈ s,\n            finset.sum_univ \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.sum_univ\"\n                (if g b = a then (sgn b : ℤ) else 0) =\n              f a :=\n  let ⟨β, t, sgn, g, hg, ht, hf⟩ := exists_signed_sum_aux s f\n  ⟨t, infer_instance, fun b => sgn b, fun b => g b, fun b => hg b, by simp [ht], fun a ha =>\n    (@sum_attach _ _ t _ fun b => ite (g b = a) (sgn b : ℤ) 0).trans <| hf _ ha⟩\n#align exists_signed_sum exists_signed_sum\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `finset.sum -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.sum -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `finset.sum_univ -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.sum_univ -/\n#print exists_signed_sum /-\n/-- We can decompose a sum of absolute value `n` into a sum of `n` signs. -/\ntheorem exists_signed_sum [DecidableEq α] (s : Finset α) (f : α → ℤ) :\n    ∃ (β : Type u_1)(_ : Fintype β)(sgn : β → SignType)(g : β → α),\n      (∀ b, g b ∈ s) ∧\n        Fintype.card β =\n            finset.sum \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.sum\" s\n              (f a).nat_abs ∧\n          ∀ a ∈ s,\n            finset.sum_univ \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.sum_univ\"\n                (if g b = a then (sgn b : ℤ) else 0) =\n              f a :=\n  let ⟨β, t, sgn, g, hg, ht, hf⟩ := exists_signed_sum_aux s f\n  ⟨t, inferInstance, fun b => sgn b, fun b => g b, fun b => hg b, by simp [ht], fun a ha =>\n    (@sum_attach _ _ t _ fun b => ite (g b = a) (sgn b : ℤ) 0).trans <| hf _ ha⟩\n#align exists_signed_sum exists_signed_sum\n-/\n\n",
  "coe_zero":
- "@[simp]\ntheorem coe_zero : ↑(0 : sign_type) = (0 : α) :=\n  rfl\n#align coe_zero coe_zero\n\n",
+ "@[simp]\ntheorem coe_zero : ↑(0 : SignType) = (0 : α) :=\n  rfl\n#align coe_zero coe_zero\n\n",
  "coe_one":
- "@[simp]\ntheorem coe_one : ↑(1 : sign_type) = (1 : α) :=\n  rfl\n#align coe_one coe_one\n\n",
+ "@[simp]\ntheorem coe_one : ↑(1 : SignType) = (1 : α) :=\n  rfl\n#align coe_one coe_one\n\n",
  "coe_neg_one":
- "@[simp]\ntheorem coe_neg_one : ↑(-1 : sign_type) = (-1 : α) :=\n  rfl\n#align coe_neg_one coe_neg_one\n\n",
+ "@[simp]\ntheorem coe_neg_one : ↑(-1 : SignType) = (-1 : α) :=\n  rfl\n#align coe_neg_one coe_neg_one\n\n",
  "cast_eq_coe":
- "@[simp]\ntheorem cast_eq_coe (a : sign_type) : (cast a : α) = a :=\n  rfl\n#align cast_eq_coe cast_eq_coe\n\n"}
+ "@[simp]\ntheorem cast_eq_coe (a : SignType) : (cast a : α) = a :=\n  rfl\n#align cast_eq_coe cast_eq_coe\n\n"}

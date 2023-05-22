@@ -1,11 +1,13 @@
 {"one_le_iff_zero_lt":
  "theorem one_le_iff_zero_lt {x : WithBot ℕ} : 1 ≤ x ↔ 0 < x :=\n  by\n  refine' ⟨fun h => lt_of_lt_of_le (with_bot.coe_lt_coe.mpr zero_lt_one) h, fun h => _⟩\n  induction x using WithBot.recBotCoe\n  · exact (not_lt_bot h).elim\n  · exact with_bot.coe_le_coe.mpr (nat.succ_le_iff.mpr (with_bot.coe_lt_coe.mp h))\n#align one_le_iff_zero_lt one_le_iff_zero_lt\n\n",
  "lt_zero_iff":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n@[simp]\ntheorem lt_zero_iff (n : WithBot ℕ) : n < 0 ↔ n = «expr⊥» :=\n  option.cases_on n (by decide) fun n => iff_of_false (by simp [WithBot.some_eq_coe]) fun h => option.no_confusion h\n#align lt_zero_iff lt_zero_iff\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n@[simp]\ntheorem lt_zero_iff (n : WithBot ℕ) : n < 0 ↔ n = «expr⊥» :=\n  option.cases_on n (by decide) fun n =>\n    iff_of_false (by simp [WithBot.some_eq_coe, coe_nonneg]) fun h => option.no_confusion h\n#align lt_zero_iff lt_zero_iff\n\n",
  "lt_one_iff_le_zero":
  "theorem lt_one_iff_le_zero {x : WithBot ℕ} : x < 1 ↔ x ≤ 0 :=\n  not_iff_not.mp (by simpa using one_le_iff_zero_lt)\n#align lt_one_iff_le_zero lt_one_iff_le_zero\n\n",
  "coe_nonneg":
- "@[simp]\ntheorem coe_nonneg {n : ℕ} : 0 ≤ (n : WithBot ℕ) :=\n  by\n  rw [← with_bot.coe_zero, WithBot.coe_le_coe]\n  exact nat.zero_le _\n#align coe_nonneg coe_nonneg\n\n",
+ "theorem coe_nonneg {n : ℕ} : 0 ≤ (n : WithBot ℕ) :=\n  by\n  rw [← WithBot.coe_zero, WithBot.coe_le_coe]\n  exact nat.zero_le _\n#align coe_nonneg coe_nonneg\n\n",
+ "add_one_le_of_lt":
+ "theorem add_one_le_of_lt {n m : WithBot ℕ} (h : n < m) : n + 1 ≤ m :=\n  by\n  cases n; · exact bot_le\n  cases m; exacts[(not_lt_bot h).elim, WithBot.some_le_some.2 (WithBot.some_lt_some.1 h)]\n#align add_one_le_of_lt add_one_le_of_lt\n\n",
  "add_eq_zero_iff":
  "#print add_eq_zero_iff /-\n/-\nCopyright (c) 2018 Chris Hughes. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Chris Hughes\n-/\ntheorem add_eq_zero_iff {n m : WithBot ℕ} : n + m = 0 ↔ n = 0 ∧ m = 0 :=\n  by\n  rcases n, m with ⟨_ | _, _ | _⟩\n  any_goals tauto\n  repeat' erw [WithBot.coe_eq_coe]\n  exact add_eq_zero_iff\n#align add_eq_zero_iff add_eq_zero_iff\n-/\n\n",
  "add_eq_two_iff":

@@ -1,5 +1,5 @@
 {"sigma":
- "protected theorem nodup.sigma {σ : α → Type _} {t : ∀ a, Multiset (σ a)} :\n    Nodup s → (∀ a, Nodup (t a)) → Nodup (s.sigma t) :=\n  Quot.inductionOn s fun l₁ => by\n    choose f hf using fun a => quotient.exists_rep (t a)\n    rw [show t = fun a => f a from eq.symm <| funext fun a => hf a]\n    simpa using nodup.sigma\n#align nodup.sigma nodup.sigma\n\n",
+ "protected theorem nodup.sigma {σ : α → Type _} {t : ∀ a, Multiset (σ a)} :\n    Nodup s → (∀ a, Nodup (t a)) → Nodup (s.sigma t) :=\n  Quot.inductionOn s fun l₁ => by\n    choose f hf using fun a => quotient.exists_rep (t a)\n    rw [show t = fun a => f a from Eq.symm <| funext fun a => hf a]\n    simpa using nodup.sigma\n#align nodup.sigma nodup.sigma\n\n",
  "range_le":
  "theorem range_le {m n : ℕ} : range m ≤ range n ↔ m ≤ n :=\n  (le_iff_subset (nodup_range _)).trans range_subset\n#align range_le range_le\n\n",
  "product":
@@ -15,13 +15,13 @@
  "not_nodup_pair":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ::ₘ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ::ₘ » -/\ntheorem not_nodup_pair : ∀ a : α, ¬Nodup («expr ::ₘ » a («expr ::ₘ » a 0)) :=\n  not_nodup_pair\n#align not_nodup_pair not_nodup_pair\n\n",
  "not_mem_erase":
- "theorem nodup.not_mem_erase [decidable_eq α] {a : α} {s} (h : Nodup s) : a ∉ s.erase a := fun ha =>\n  (h.mem_erase_iff.1 ha).1 rfl\n#align nodup.not_mem_erase nodup.not_mem_erase\n\n",
+ "theorem nodup.not_mem_erase [DecidableEq α] {a : α} {s} (h : Nodup s) : a ∉ s.erase a := fun ha =>\n  (h.mem_erase_iff.1 ha).1 rfl\n#align nodup.not_mem_erase nodup.not_mem_erase\n\n",
  "not_mem":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ::ₘ » -/\ntheorem nodup.not_mem (h : Nodup («expr ::ₘ » a s)) : a ∉ s :=\n  (nodup_cons.1 h).1\n#align nodup.not_mem nodup.not_mem\n\n",
  "nodup_zero":
- "@[simp]\ntheorem nodup_zero : @Nodup α 0 :=\n  pairwise.nil\n#align nodup_zero nodup_zero\n\n",
+ "@[simp]\ntheorem nodup_zero : @Nodup α 0 :=\n  Pairwise.nil\n#align nodup_zero nodup_zero\n\n",
  "nodup_union":
- "@[simp]\ntheorem nodup_union [decidable_eq α] {s t : Multiset α} : Nodup (s ∪ t) ↔ Nodup s ∧ Nodup t :=\n  ⟨fun h => ⟨nodup_of_le (le_union_left _ _) h, nodup_of_le (le_union_right _ _) h⟩, fun ⟨h₁, h₂⟩ =>\n    nodup_iff_count_le_one.2 fun a => by\n      rw [count_union] <;> exact max_le (nodup_iff_count_le_one.1 h₁ a) (nodup_iff_count_le_one.1 h₂ a)⟩\n#align nodup_union nodup_union\n\n",
+ "@[simp]\ntheorem nodup_union [DecidableEq α] {s t : Multiset α} : Nodup (s ∪ t) ↔ Nodup s ∧ Nodup t :=\n  ⟨fun h => ⟨nodup_of_le (le_union_left _ _) h, nodup_of_le (le_union_right _ _) h⟩, fun ⟨h₁, h₂⟩ =>\n    nodup_iff_count_le_one.2 fun a => by\n      rw [count_union] <;> exact max_le (nodup_iff_count_le_one.1 h₁ a) (nodup_iff_count_le_one.1 h₂ a)⟩\n#align nodup_union nodup_union\n\n",
  "nodup_singleton":
  "@[simp]\ntheorem nodup_singleton : ∀ a : α, Nodup ({a} : Multiset α) :=\n  nodup_singleton\n#align nodup_singleton nodup_singleton\n\n",
  "nodup_range":
@@ -37,54 +37,54 @@
  "nodup_iff_le":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ::ₘ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ::ₘ » -/\ntheorem nodup_iff_le {s : Multiset α} : Nodup s ↔ ∀ a : α, ¬«expr ::ₘ » a («expr ::ₘ » a 0) ≤ s :=\n  Quot.inductionOn s fun l => nodup_iff_sublist.trans <| forall_congr' fun a => (@replicate_le_coe _ a 2 _).symm.not\n#align nodup_iff_le nodup_iff_le\n\n",
  "nodup_iff_count_le_one":
- "theorem nodup_iff_count_le_one [decidable_eq α] {s : Multiset α} : Nodup s ↔ ∀ a, count a s ≤ 1 :=\n  Quot.inductionOn s fun l => nodup_iff_count_le_one\n#align nodup_iff_count_le_one nodup_iff_count_le_one\n\n",
+ "theorem nodup_iff_count_le_one [DecidableEq α] {s : Multiset α} : Nodup s ↔ ∀ a, count a s ≤ 1 :=\n  Quot.inductionOn s fun l => nodup_iff_count_le_one\n#align nodup_iff_count_le_one nodup_iff_count_le_one\n\n",
  "nodup_cons":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ::ₘ » -/\n@[simp]\ntheorem nodup_cons {a : α} {s : Multiset α} : Nodup («expr ::ₘ » a s) ↔ a ∉ s ∧ Nodup s :=\n  Quot.inductionOn s fun l => nodup_cons\n#align nodup_cons nodup_cons\n\n",
  "nodup_bind":
- "@[simp]\ntheorem nodup_bind {s : Multiset α} {t : α → Multiset β} :\n    Nodup (bind s t) ↔ (∀ a ∈ s, Nodup (t a)) ∧ s.pairwise fun a b => Disjoint (t a) (t b) :=\n  have h₁ : ∀ a, ∃ l : list β, t a = l := fun a => Quot.inductionOn (t a) fun l => ⟨l, rfl⟩\n  let ⟨t', h'⟩ := classical.axiom_of_choice h₁\n  have : t = fun a => t' a := funext h'\n  have hd : symmetric fun a b => List.Disjoint (t' a) (t' b) := fun a b h => h.symm\n  Quot.inductionOn s <| by simp [this, List.nodup_bind, pairwise_coe_iff_pairwise hd]\n#align nodup_bind nodup_bind\n\n",
+ "@[simp]\ntheorem nodup_bind {s : Multiset α} {t : α → Multiset β} :\n    Nodup (bind s t) ↔ (∀ a ∈ s, Nodup (t a)) ∧ s.pairwise fun a b => Disjoint (t a) (t b) :=\n  have h₁ : ∀ a, ∃ l : List β, t a = l := fun a => Quot.inductionOn (t a) fun l => ⟨l, rfl⟩\n  let ⟨t', h'⟩ := classical.axiom_of_choice h₁\n  have : t = fun a => t' a := funext h'\n  have hd : symmetric fun a b => List.Disjoint (t' a) (t' b) := fun a b h => h.symm\n  Quot.inductionOn s <| by simp [this, List.nodup_bind, pairwise_coe_iff_pairwise hd]\n#align nodup_bind nodup_bind\n\n",
  "nodup_attach":
  "@[simp]\ntheorem nodup_attach {s : Multiset α} : Nodup (attach s) ↔ Nodup s :=\n  Quot.inductionOn s fun l => nodup_attach\n#align nodup_attach nodup_attach\n\n",
  "nodup_add":
  "theorem nodup_add {s t : Multiset α} : Nodup (s + t) ↔ Nodup s ∧ Nodup t ∧ Disjoint s t :=\n  quotient.induction_on₂ s t fun l₁ l₂ => nodup_append\n#align nodup_add nodup_add\n\n",
  "mem_sub_of_nodup":
- "theorem mem_sub_of_nodup [decidable_eq α] {a : α} {s t : Multiset α} (d : Nodup s) : a ∈ s - t ↔ a ∈ s ∧ a ∉ t :=\n  ⟨fun h =>\n    ⟨mem_of_le tsub_le_self h, fun h' => by\n      refine' count_eq_zero.1 _ h <;> rw [count_sub a s t, tsub_eq_zero_iff_le] <;>\n        exact le_trans (nodup_iff_count_le_one.1 d _) (count_pos.2 h')⟩,\n    fun ⟨h₁, h₂⟩ => or.resolve_right (mem_add.1 <| mem_of_le le_tsub_add h₁) h₂⟩\n#align mem_sub_of_nodup mem_sub_of_nodup\n\n",
+ "theorem mem_sub_of_nodup [DecidableEq α] {a : α} {s t : Multiset α} (d : Nodup s) : a ∈ s - t ↔ a ∈ s ∧ a ∉ t :=\n  ⟨fun h =>\n    ⟨mem_of_le tsub_le_self h, fun h' => by\n      refine' count_eq_zero.1 _ h <;> rw [count_sub a s t, tsub_eq_zero_iff_le] <;>\n        exact le_trans (nodup_iff_count_le_one.1 d _) (count_pos.2 h')⟩,\n    fun ⟨h₁, h₂⟩ => or.resolve_right (mem_add.1 <| mem_of_le le_tsub_add h₁) h₂⟩\n#align mem_sub_of_nodup mem_sub_of_nodup\n\n",
  "mem_erase_iff":
- "theorem nodup.mem_erase_iff [decidable_eq α] {a b : α} {l} (d : Nodup l) : a ∈ l.erase b ↔ a ≠ b ∧ a ∈ l := by\n  rw [d.erase_eq_filter b, mem_filter, and_comm']\n#align nodup.mem_erase_iff nodup.mem_erase_iff\n\n",
+ "theorem nodup.mem_erase_iff [DecidableEq α] {a b : α} {l} (d : Nodup l) : a ∈ l.erase b ↔ a ≠ b ∧ a ∈ l := by\n  rw [d.erase_eq_filter b, mem_filter, and_comm']\n#align nodup.mem_erase_iff nodup.mem_erase_iff\n\n",
  "map_on":
  "theorem nodup.map_on {f : α → β} : (∀ x ∈ s, ∀ y ∈ s, f x = f y → x = y) → Nodup s → Nodup (map f s) :=\n  Quot.inductionOn s fun l => Nodup.map_on\n#align nodup.map_on nodup.map_on\n\n",
  "map_eq_map_of_bij_of_nodup":
- "theorem map_eq_map_of_bij_of_nodup (f : α → γ) (g : β → γ) {s : Multiset α} {t : Multiset β} (hs : s.nodup)\n    (ht : t.nodup) (i : ∀ a ∈ s, β) (hi : ∀ a ha, i a ha ∈ t) (h : ∀ a ha, f a = g (i a ha))\n    (i_inj : ∀ a₁ a₂ ha₁ ha₂, i a₁ ha₁ = i a₂ ha₂ → a₁ = a₂) (i_surj : ∀ b ∈ t, ∃ a ha, b = i a ha) :\n    s.map f = t.map g :=\n  have : t = s.attach.map fun x => i x x.2 :=\n    (ht.ext <|\n          (nodup_attach.2 hs).map <|\n            show injective fun x : { x // x ∈ s } => i x x.2 from fun x y hxy => subtype.ext <| i_inj x y x.2 y.2 hxy).2\n      fun x => by\n      simp only [mem_map, true_and_iff, subtype.exists, eq_comm, mem_attach] <;>\n        exact ⟨i_surj _, fun ⟨y, hy⟩ => hy.snd.symm ▸ hi _ _⟩\n  calc\n    s.map f = s.pmap (fun x _ => f x) fun _ => id := by rw [pmap_eq_map]\n    _ = s.attach.map fun x => f x := by rw [pmap_eq_map_attach]\n    _ = t.map g := by rw [this, Multiset.map_map] <;> exact map_congr rfl fun x _ => h _ _\n    \n#align map_eq_map_of_bij_of_nodup map_eq_map_of_bij_of_nodup\n\n",
+ "theorem map_eq_map_of_bij_of_nodup (f : α → γ) (g : β → γ) {s : Multiset α} {t : Multiset β} (hs : s.nodup)\n    (ht : t.nodup) (i : ∀ a ∈ s, β) (hi : ∀ a ha, i a ha ∈ t) (h : ∀ a ha, f a = g (i a ha))\n    (i_inj : ∀ a₁ a₂ ha₁ ha₂, i a₁ ha₁ = i a₂ ha₂ → a₁ = a₂) (i_surj : ∀ b ∈ t, ∃ a ha, b = i a ha) :\n    s.map f = t.map g :=\n  have : t = s.attach.map fun x => i x x.2 :=\n    (ht.ext <|\n          (nodup_attach.2 hs).map <|\n            show injective fun x : { x // x ∈ s } => i x x.2 from fun x y hxy => Subtype.ext <| i_inj x y x.2 y.2 hxy).2\n      fun x => by\n      simp only [mem_map, true_and_iff, Subtype.exists, eq_comm, mem_attach] <;>\n        exact ⟨i_surj _, fun ⟨y, hy⟩ => hy.snd.symm ▸ hi _ _⟩\n  calc\n    s.map f = s.pmap (fun x _ => f x) fun _ => id := by rw [pmap_eq_map]\n    _ = s.attach.map fun x => f x := by rw [pmap_eq_map_attach]\n    _ = t.map g := by rw [this, Multiset.map_map] <;> exact map_congr rfl fun x _ => h _ _\n    \n#align map_eq_map_of_bij_of_nodup map_eq_map_of_bij_of_nodup\n\n",
  "map":
  "theorem nodup.map {f : α → β} {s : Multiset α} (hf : injective f) : Nodup s → Nodup (map f s) :=\n  Nodup.map_on fun x _ y _ h => hf h\n#align nodup.map nodup.map\n\n",
  "le_iff_subset":
  "theorem le_iff_subset {s t : Multiset α} : Nodup s → (s ≤ t ↔ s ⊆ t) :=\n  quotient.induction_on₂ s t fun l₁ l₂ d => ⟨subset_of_le, d.subperm⟩\n#align le_iff_subset le_iff_subset\n\n",
  "inter_right":
- "theorem nodup.inter_right [decidable_eq α] (s) : Nodup t → Nodup (s ∩ t) :=\n  nodup_of_le <| inter_le_right _ _\n#align nodup.inter_right nodup.inter_right\n\n",
+ "theorem nodup.inter_right [DecidableEq α] (s) : Nodup t → Nodup (s ∩ t) :=\n  nodup_of_le <| inter_le_right _ _\n#align nodup.inter_right nodup.inter_right\n\n",
  "inter_left":
- "theorem nodup.inter_left [decidable_eq α] (t) : Nodup s → Nodup (s ∩ t) :=\n  nodup_of_le <| inter_le_left _ _\n#align nodup.inter_left nodup.inter_left\n\n",
+ "theorem nodup.inter_left [DecidableEq α] (t) : Nodup s → Nodup (s ∩ t) :=\n  nodup_of_le <| inter_le_left _ _\n#align nodup.inter_left nodup.inter_left\n\n",
  "inj_on_of_nodup_map":
  "theorem inj_on_of_nodup_map {f : α → β} {s : Multiset α} : Nodup (map f s) → ∀ x ∈ s, ∀ y ∈ s, f x = f y → x = y :=\n  Quot.inductionOn s fun l => inj_on_of_nodup_map\n#align inj_on_of_nodup_map inj_on_of_nodup_map\n\n",
  "forall":
  "theorem pairwise.forall (H : symmetric r) (hs : Pairwise r s) : ∀ ⦃a⦄, a ∈ s → ∀ ⦃b⦄, b ∈ s → a ≠ b → r a b :=\n  let ⟨l, hl₁, hl₂⟩ := hs\n  hl₁.symm ▸ hl₂.forall H\n#align pairwise.forall pairwise.forall\n\n",
  "filter_map":
- "protected theorem nodup.filter_map (f : α → option β) (H : ∀ a a' b, b ∈ f a → b ∈ f a' → a = a') :\n    Nodup s → Nodup (filterMap f s) :=\n  Quot.inductionOn s fun l => Nodup.filterMap H\n#align nodup.filter_map nodup.filter_map\n\n",
+ "protected theorem nodup.filter_map (f : α → Option β) (H : ∀ a a' b, b ∈ f a → b ∈ f a' → a = a') :\n    Nodup s → Nodup (filterMap f s) :=\n  Quot.inductionOn s fun l => Nodup.filterMap H\n#align nodup.filter_map nodup.filter_map\n\n",
  "filter":
- "theorem nodup.filter (p : α → Prop) [decidable_pred p] {s} : Nodup s → Nodup (filter p s) :=\n  Quot.inductionOn s fun l => Nodup.filter p\n#align nodup.filter nodup.filter\n\n",
+ "theorem nodup.filter (p : α → Prop) [DecidablePred p] {s} : Nodup s → Nodup (filter p s) :=\n  Quot.inductionOn s fun l => Nodup.filter p\n#align nodup.filter nodup.filter\n\n",
  "ext":
- "theorem nodup.ext {s t : Multiset α} : Nodup s → Nodup t → (s = t ↔ ∀ a, a ∈ s ↔ a ∈ t) :=\n  quotient.induction_on₂ s t fun l₁ l₂ d₁ d₂ => quotient.eq.trans <| perm_ext d₁ d₂\n#align nodup.ext nodup.ext\n\n",
+ "theorem nodup.ext {s t : Multiset α} : Nodup s → Nodup t → (s = t ↔ ∀ a, a ∈ s ↔ a ∈ t) :=\n  quotient.induction_on₂ s t fun l₁ l₂ d₁ d₂ => Quotient.eq'.trans <| perm_ext d₁ d₂\n#align nodup.ext nodup.ext\n\n",
  "erase_eq_filter":
- "theorem nodup.erase_eq_filter [decidable_eq α] (a : α) {s} : Nodup s → s.erase a = filter (· ≠ a) s :=\n  Quot.inductionOn s fun l d => congr_arg coe <| d.erase_eq_filter a\n#align nodup.erase_eq_filter nodup.erase_eq_filter\n\n",
+ "theorem nodup.erase_eq_filter [DecidableEq α] (a : α) {s} : Nodup s → s.erase a = filter (· ≠ a) s :=\n  Quot.inductionOn s fun l d => congr_arg coe <| d.erase_eq_filter a\n#align nodup.erase_eq_filter nodup.erase_eq_filter\n\n",
  "erase":
- "theorem nodup.erase [decidable_eq α] (a : α) {l} : Nodup l → Nodup (l.erase a) :=\n  nodup_of_le (erase_le _ _)\n#align nodup.erase nodup.erase\n\n",
+ "theorem nodup.erase [DecidableEq α] (a : α) {l} : Nodup l → Nodup (l.erase a) :=\n  nodup_of_le (erase_le _ _)\n#align nodup.erase nodup.erase\n\n",
  "disjoint_of_nodup_add":
  "theorem disjoint_of_nodup_add {s t : Multiset α} (d : Nodup (s + t)) : Disjoint s t :=\n  (nodup_add.1 d).2.2\n#align disjoint_of_nodup_add disjoint_of_nodup_add\n\n",
  "count_eq_one_of_mem":
- "@[simp]\ntheorem count_eq_one_of_mem [decidable_eq α] {a : α} {s : Multiset α} (d : Nodup s) (h : a ∈ s) : count a s = 1 :=\n  le_antisymm (nodup_iff_count_le_one.1 d a) (count_pos.2 h)\n#align count_eq_one_of_mem count_eq_one_of_mem\n\n",
+ "@[simp]\ntheorem count_eq_one_of_mem [DecidableEq α] {a : α} {s : Multiset α} (d : Nodup s) (h : a ∈ s) : count a s = 1 :=\n  le_antisymm (nodup_iff_count_le_one.1 d a) (count_pos.2 h)\n#align count_eq_one_of_mem count_eq_one_of_mem\n\n",
  "count_eq_of_nodup":
- "theorem count_eq_of_nodup [decidable_eq α] {a : α} {s : Multiset α} (d : Nodup s) :\n    count a s = if a ∈ s then 1 else 0 := by\n  split_ifs with h\n  · exact count_eq_one_of_mem d h\n  · exact count_eq_zero_of_not_mem h\n#align count_eq_of_nodup count_eq_of_nodup\n\n",
+ "theorem count_eq_of_nodup [DecidableEq α] {a : α} {s : Multiset α} (d : Nodup s) : count a s = if a ∈ s then 1 else 0 :=\n  by\n  split_ifs with h\n  · exact count_eq_one_of_mem d h\n  · exact count_eq_zero_of_not_mem h\n#align count_eq_of_nodup count_eq_of_nodup\n\n",
  "cons":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ::ₘ » -/\ntheorem nodup.cons (m : a ∉ s) (n : Nodup s) : Nodup («expr ::ₘ » a s) :=\n  nodup_cons.2 ⟨m, n⟩\n#align nodup.cons nodup.cons\n\n",
  "coe_nodup":
- "/-\nCopyright (c) 2015 Microsoft Corporation. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Mario Carneiro\n-/\n-- nodup\n@[simp]\ntheorem coe_nodup {l : list α} : @Nodup α l ↔ l.nodup :=\n  iff.rfl\n#align coe_nodup coe_nodup\n\n",
+ "/-\nCopyright (c) 2015 Microsoft Corporation. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Mario Carneiro\n-/\n-- nodup\n@[simp]\ntheorem coe_nodup {l : List α} : @Nodup α l ↔ l.nodup :=\n  iff.rfl\n#align coe_nodup coe_nodup\n\n",
  "add_iff":
  "theorem nodup.add_iff (d₁ : Nodup s) (d₂ : Nodup t) : Nodup (s + t) ↔ Disjoint s t := by simp [nodup_add, d₁, d₂]\n#align nodup.add_iff nodup.add_iff\n\n"}

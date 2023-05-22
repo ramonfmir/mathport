@@ -1,9 +1,9 @@
 {"ite_eq_lt_distrib":
- "/-\nCopyright (c) 2017 Microsoft Corporation. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Leonardo de Moura\n-/\n@[simp]\ntheorem ite_eq_lt_distrib (c : Prop) [decidable c] (a b : ordering) :\n    ((if c then a else b) = ordering.lt) = if c then a = ordering.lt else b = ordering.lt := by by_cases c <;> simp [*]\n#align ite_eq_lt_distrib ite_eq_lt_distrib\n\n",
+ "/-\nCopyright (c) 2017 Microsoft Corporation. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Leonardo de Moura\n-/\n@[simp]\ntheorem ite_eq_lt_distrib (c : Prop) [Decidable c] (a b : ordering) :\n    ((if c then a else b) = ordering.lt) = if c then a = ordering.lt else b = ordering.lt := by by_cases c <;> simp [*]\n#align ite_eq_lt_distrib ite_eq_lt_distrib\n\n",
  "ite_eq_gt_distrib":
- "@[simp]\ntheorem ite_eq_gt_distrib (c : Prop) [decidable c] (a b : ordering) :\n    ((if c then a else b) = ordering.gt) = if c then a = ordering.gt else b = ordering.gt := by by_cases c <;> simp [*]\n#align ite_eq_gt_distrib ite_eq_gt_distrib\n\n",
+ "@[simp]\ntheorem ite_eq_gt_distrib (c : Prop) [Decidable c] (a b : ordering) :\n    ((if c then a else b) = ordering.gt) = if c then a = ordering.gt else b = ordering.gt := by by_cases c <;> simp [*]\n#align ite_eq_gt_distrib ite_eq_gt_distrib\n\n",
  "ite_eq_eq_distrib":
- "@[simp]\ntheorem ite_eq_eq_distrib (c : Prop) [decidable c] (a b : ordering) :\n    ((if c then a else b) = ordering.eq) = if c then a = ordering.eq else b = ordering.eq := by by_cases c <;> simp [*]\n#align ite_eq_eq_distrib ite_eq_eq_distrib\n\n",
+ "@[simp]\ntheorem ite_eq_eq_distrib (c : Prop) [Decidable c] (a b : ordering) :\n    ((if c then a else b) = ordering.eq) = if c then a = ordering.eq else b = ordering.eq := by by_cases c <;> simp [*]\n#align ite_eq_eq_distrib ite_eq_eq_distrib\n\n",
  "cmp_using_eq_lt":
  "-- ------------------------------------------------------------------\n@[simp]\ntheorem cmp_using_eq_lt (a b : α) : (cmpUsing lt a b = ordering.lt) = lt a b := by simp\n#align cmp_using_eq_lt cmp_using_eq_lt\n\n",
  "cmp_using_eq_gt":

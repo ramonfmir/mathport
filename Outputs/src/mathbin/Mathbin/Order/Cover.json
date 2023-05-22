@@ -3,7 +3,7 @@
  "wcovby_of_eq_or_eq":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⩿ » -/\n#print wcovby_of_eq_or_eq /-\ntheorem wcovby_of_eq_or_eq (hab : a ≤ b) (h : ∀ c, a ≤ c → c ≤ b → c = a ∨ c = b) : «expr ⩿ » a b :=\n  ⟨hab, fun c ha hb => (h c ha.le hb.le).elim ha.ne' hb.ne⟩\n#align wcovby_of_eq_or_eq wcovby_of_eq_or_eq\n-/\n\n",
  "wcovby_insert":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⩿ » -/\ntheorem wcovby_insert (x : α) (s : set α) : «expr ⩿ » s (insert x s) :=\n  by\n  refine' wcovby_of_eq_or_eq (subset_insert x s) fun t hst h2t => _\n  by_cases h : x ∈ t\n  · exact or.inr (subset_antisymm h2t <| insert_subset.mpr ⟨h, hst⟩)\n  · refine' or.inl (subset_antisymm _ hst)\n    rwa [← diff_singleton_eq_self h, diff_singleton_subset_iff]\n#align wcovby_insert wcovby_insert\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⩿ » -/\ntheorem wcovby_insert (x : α) (s : Set α) : «expr ⩿ » s (insert x s) :=\n  by\n  refine' wcovby_of_eq_or_eq (subset_insert x s) fun t hst h2t => _\n  by_cases h : x ∈ t\n  · exact or.inr (subset_antisymm h2t <| insert_subset.mpr ⟨h, hst⟩)\n  · refine' or.inl (subset_antisymm _ hst)\n    rwa [← diff_singleton_eq_self h, diff_singleton_subset_iff]\n#align wcovby_insert wcovby_insert\n\n",
  "wcovby_iff_le_and_eq_or_eq":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⩿ » -/\n#print wcovby_iff_le_and_eq_or_eq /-\n/-- An `iff` version of `wcovby.eq_or_eq` and `wcovby_of_eq_or_eq`. -/\ntheorem wcovby_iff_le_and_eq_or_eq : «expr ⩿ » a b ↔ a ≤ b ∧ ∀ c, a ≤ c → c ≤ b → c = a ∨ c = b :=\n  ⟨fun h => ⟨h.le, fun c => h.eq_or_eq⟩, and.rec wcovby_of_eq_or_eq⟩\n#align wcovby_iff_le_and_eq_or_eq wcovby_iff_le_and_eq_or_eq\n-/\n\n",
  "wcovby_iff_le":
@@ -59,11 +59,11 @@
  "ofDual_covby_ofDual_iff":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵈ» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⋖ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⋖ » -/\n#print ofDual_covby_ofDual_iff /-\n@[simp]\ntheorem ofDual_covby_ofDual_iff {a b : «expr ᵒᵈ» α} : «expr ⋖ » (ofDual a) (ofDual b) ↔ «expr ⋖ » b a :=\n  and_congr_right' <| forall_congr' fun c => forall_swap\n#align of_dual_covby_of_dual_iff ofDual_covby_ofDual_iff\n-/\n\n",
  "not_wcovby_iff":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⩿ » -/\n#print not_wcovby_iff /-\n/-- If `a ≤ b`, then `b` does not cover `a` iff there's an element in between. -/\ntheorem not_wcovby_iff (h : a ≤ b) : ¬«expr ⩿ » a b ↔ ∃ c, a < c ∧ c < b := by\n  simp_rw [Wcovby, h, true_and_iff, not_forall, exists_prop, not_not]\n#align not_wcovby_iff not_wcovby_iff\n-/\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⩿ » -/\n#print not_wcovby_iff /-\n/-- If `a ≤ b`, then `b` does not cover `a` iff there's an element in between. -/\ntheorem not_wcovby_iff (h : a ≤ b) : ¬«expr ⩿ » a b ↔ ∃ c, a < c ∧ c < b := by\n  simp_rw [Wcovby, h, true_and_iff, not_forall, exists_prop, Classical.not_not]\n#align not_wcovby_iff not_wcovby_iff\n-/\n\n",
  "not_covby_of_lt_of_lt":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⋖ » -/\n#print not_covby_of_lt_of_lt /-\ntheorem not_covby_of_lt_of_lt (h₁ : a < b) (h₂ : b < c) : ¬«expr ⋖ » a c :=\n  (not_covby_iff (h₁.trans h₂)).2 ⟨b, h₁, h₂⟩\n#align not_covby_of_lt_of_lt not_covby_of_lt_of_lt\n-/\n\n",
  "not_covby_iff":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⋖ » -/\n#print not_covby_iff /-\n/-- If `a < b`, then `b` does not cover `a` iff there's an element in between. -/\ntheorem not_covby_iff (h : a < b) : ¬«expr ⋖ » a b ↔ ∃ c, a < c ∧ c < b := by\n  simp_rw [Covby, h, true_and_iff, not_forall, exists_prop, not_not]\n#align not_covby_iff not_covby_iff\n-/\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⋖ » -/\n#print not_covby_iff /-\n/-- If `a < b`, then `b` does not cover `a` iff there's an element in between. -/\ntheorem not_covby_iff (h : a < b) : ¬«expr ⋖ » a b ↔ ∃ c, a < c ∧ c < b := by\n  simp_rw [Covby, h, true_and_iff, not_forall, exists_prop, Classical.not_not]\n#align not_covby_iff not_covby_iff\n-/\n\n",
  "not_covby":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⋖ » -/\n#print not_covby /-\n/-- In a dense order, nothing covers anything. -/\ntheorem not_covby [DenselyOrdered α] : ¬«expr ⋖ » a b := fun h =>\n  let ⟨c, hc⟩ := exists_between h.1\n  h.2 hc.1 hc.2\n#align not_covby not_covby\n-/\n\n",
  "ne'":
@@ -115,7 +115,7 @@
  "covby_of_eq_or_eq":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⋖ » -/\n#print covby_of_eq_or_eq /-\ntheorem covby_of_eq_or_eq (hab : a < b) (h : ∀ c, a ≤ c → c ≤ b → c = a ∨ c = b) : «expr ⋖ » a b :=\n  ⟨hab, fun c ha hb => (h c ha.le hb.le).elim ha.ne' hb.ne⟩\n#align covby_of_eq_or_eq covby_of_eq_or_eq\n-/\n\n",
  "covby_insert":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⋖ » -/\ntheorem covby_insert {x : α} {s : set α} (hx : x ∉ s) : «expr ⋖ » s (insert x s) :=\n  (wcovby_insert x s).covby_of_lt <| ssubset_insert hx\n#align covby_insert covby_insert\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⋖ » -/\ntheorem covby_insert {x : α} {s : Set α} (hx : x ∉ s) : «expr ⋖ » s (insert x s) :=\n  (wcovby_insert x s).covby_of_lt <| ssubset_insert hx\n#align covby_insert covby_insert\n\n",
  "covby_iff_wcovby_and_not_le":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⋖ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⩿ » -/\n#print covby_iff_wcovby_and_not_le /-\ntheorem covby_iff_wcovby_and_not_le : «expr ⋖ » a b ↔ «expr ⩿ » a b ∧ ¬b ≤ a :=\n  ⟨fun h => ⟨h.wcovby, h.lt.not_le⟩, fun h => h.1.covby_of_not_le h.2⟩\n#align covby_iff_wcovby_and_not_le covby_iff_wcovby_and_not_le\n-/\n\n",
  "covby_iff_wcovby_and_ne":

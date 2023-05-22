@@ -1,44 +1,44 @@
 {"subsingleton_of_not_nonempty":
- "#print subsingleton_of_not_nonempty /-\ntheorem subsingleton_of_not_nonempty {α : Sort _} (h : ¬nonempty α) : subsingleton α :=\n  ⟨fun x => false.elim <| not_nonempty_iff_imp_false.mp h x⟩\n#align subsingleton_of_not_nonempty subsingleton_of_not_nonempty\n-/\n\n",
+ "#print subsingleton_of_not_nonempty /-\ntheorem subsingleton_of_not_nonempty {α : Sort _} (h : ¬Nonempty α) : subsingleton α :=\n  ⟨fun x => false.elim <| not_nonempty_iff_imp_false.mp h x⟩\n#align subsingleton_of_not_nonempty subsingleton_of_not_nonempty\n-/\n\n",
  "not_nonempty_iff_imp_false":
- "#print not_nonempty_iff_imp_false /-\ntheorem not_nonempty_iff_imp_false {α : Sort _} : ¬nonempty α ↔ α → false :=\n  ⟨fun h a => h ⟨a⟩, fun h ⟨a⟩ => h a⟩\n#align not_nonempty_iff_imp_false not_nonempty_iff_imp_false\n-/\n\n",
+ "#print not_nonempty_iff_imp_false /-\ntheorem not_nonempty_iff_imp_false {α : Sort _} : ¬Nonempty α ↔ α → False :=\n  ⟨fun h a => h ⟨a⟩, fun h ⟨a⟩ => h a⟩\n#align not_nonempty_iff_imp_false not_nonempty_iff_imp_false\n-/\n\n",
  "nonempty_ulift":
- "#print nonempty_ulift /-\n@[simp]\ntheorem nonempty_ulift : nonempty (ULift α) ↔ nonempty α :=\n  iff.intro (fun ⟨⟨a⟩⟩ => ⟨a⟩) fun ⟨a⟩ => ⟨⟨a⟩⟩\n#align nonempty_ulift nonempty_ulift\n-/\n\n",
+ "#print nonempty_ulift /-\n@[simp]\ntheorem nonempty_ulift : Nonempty (ULift α) ↔ Nonempty α :=\n  iff.intro (fun ⟨⟨a⟩⟩ => ⟨a⟩) fun ⟨a⟩ => ⟨⟨a⟩⟩\n#align nonempty_ulift nonempty_ulift\n-/\n\n",
  "nonempty_sum":
- "#print nonempty_sum /-\n@[simp]\ntheorem nonempty_sum : nonempty (Sum α β) ↔ nonempty α ∨ nonempty β :=\n  iff.intro\n    (fun ⟨h⟩ =>\n      match h with\n      | sum.inl a => or.inl ⟨a⟩\n      | sum.inr b => or.inr ⟨b⟩)\n    fun h =>\n    match h with\n    | or.inl ⟨a⟩ => ⟨sum.inl a⟩\n    | or.inr ⟨b⟩ => ⟨sum.inr b⟩\n#align nonempty_sum nonempty_sum\n-/\n\n",
+ "#print nonempty_sum /-\n@[simp]\ntheorem nonempty_sum : Nonempty (Sum α β) ↔ Nonempty α ∨ Nonempty β :=\n  iff.intro\n    (fun ⟨h⟩ =>\n      match h with\n      | Sum.inl a => or.inl ⟨a⟩\n      | Sum.inr b => or.inr ⟨b⟩)\n    fun h =>\n    match h with\n    | or.inl ⟨a⟩ => ⟨Sum.inl a⟩\n    | or.inr ⟨b⟩ => ⟨Sum.inr b⟩\n#align nonempty_sum nonempty_sum\n-/\n\n",
  "nonempty_subtype":
- "#print nonempty_subtype /-\n@[simp]\ntheorem nonempty_subtype {α} {p : α → Prop} : nonempty (subtype p) ↔ ∃ a : α, p a :=\n  iff.intro (fun ⟨⟨a, h⟩⟩ => ⟨a, h⟩) fun ⟨a, h⟩ => ⟨⟨a, h⟩⟩\n#align nonempty_subtype nonempty_subtype\n-/\n\n",
+ "#print nonempty_subtype /-\n@[simp]\ntheorem nonempty_subtype {α} {p : α → Prop} : Nonempty (Subtype p) ↔ ∃ a : α, p a :=\n  iff.intro (fun ⟨⟨a, h⟩⟩ => ⟨a, h⟩) fun ⟨a, h⟩ => ⟨⟨a, h⟩⟩\n#align nonempty_subtype nonempty_subtype\n-/\n\n",
  "nonempty_sigma":
- "#print nonempty_sigma /-\n@[simp]\ntheorem nonempty_sigma : nonempty (Σa : α, γ a) ↔ ∃ a : α, nonempty (γ a) :=\n  iff.intro (fun ⟨⟨a, c⟩⟩ => ⟨a, ⟨c⟩⟩) fun ⟨a, ⟨c⟩⟩ => ⟨⟨a, c⟩⟩\n#align nonempty_sigma nonempty_sigma\n-/\n\n",
+ "#print nonempty_sigma /-\n@[simp]\ntheorem nonempty_sigma : Nonempty (Σa : α, γ a) ↔ ∃ a : α, Nonempty (γ a) :=\n  iff.intro (fun ⟨⟨a, c⟩⟩ => ⟨a, ⟨c⟩⟩) fun ⟨a, ⟨c⟩⟩ => ⟨⟨a, c⟩⟩\n#align nonempty_sigma nonempty_sigma\n-/\n\n",
  "nonempty_psum":
- "#print nonempty_psum /-\n@[simp]\ntheorem nonempty_psum {α β} : nonempty (PSum α β) ↔ nonempty α ∨ nonempty β :=\n  iff.intro\n    (fun ⟨h⟩ =>\n      match h with\n      | psum.inl a => or.inl ⟨a⟩\n      | psum.inr b => or.inr ⟨b⟩)\n    fun h =>\n    match h with\n    | or.inl ⟨a⟩ => ⟨psum.inl a⟩\n    | or.inr ⟨b⟩ => ⟨psum.inr b⟩\n#align nonempty_psum nonempty_psum\n-/\n\n",
+ "#print nonempty_psum /-\n@[simp]\ntheorem nonempty_psum {α β} : Nonempty (PSum α β) ↔ Nonempty α ∨ Nonempty β :=\n  iff.intro\n    (fun ⟨h⟩ =>\n      match h with\n      | PSum.inl a => or.inl ⟨a⟩\n      | PSum.inr b => or.inr ⟨b⟩)\n    fun h =>\n    match h with\n    | or.inl ⟨a⟩ => ⟨PSum.inl a⟩\n    | or.inr ⟨b⟩ => ⟨PSum.inr b⟩\n#align nonempty_psum nonempty_psum\n-/\n\n",
  "nonempty_psigma":
- "#print nonempty_psigma /-\n@[simp]\ntheorem nonempty_psigma {α} {β : α → Sort _} : nonempty (PSigma β) ↔ ∃ a : α, nonempty (β a) :=\n  iff.intro (fun ⟨⟨a, c⟩⟩ => ⟨a, ⟨c⟩⟩) fun ⟨a, ⟨c⟩⟩ => ⟨⟨a, c⟩⟩\n#align nonempty_psigma nonempty_psigma\n-/\n\n",
+ "#print nonempty_psigma /-\n@[simp]\ntheorem nonempty_psigma {α} {β : α → Sort _} : Nonempty (PSigma β) ↔ ∃ a : α, Nonempty (β a) :=\n  iff.intro (fun ⟨⟨a, c⟩⟩ => ⟨a, ⟨c⟩⟩) fun ⟨a, ⟨c⟩⟩ => ⟨⟨a, c⟩⟩\n#align nonempty_psigma nonempty_psigma\n-/\n\n",
  "nonempty_prod":
- "#print nonempty_prod /-\n@[simp]\ntheorem nonempty_prod : nonempty (α × β) ↔ nonempty α ∧ nonempty β :=\n  iff.intro (fun ⟨⟨a, b⟩⟩ => ⟨⟨a⟩, ⟨b⟩⟩) fun ⟨⟨a⟩, ⟨b⟩⟩ => ⟨⟨a, b⟩⟩\n#align nonempty_prod nonempty_prod\n-/\n\n",
+ "#print nonempty_prod /-\n@[simp]\ntheorem nonempty_prod : Nonempty (α × β) ↔ Nonempty α ∧ Nonempty β :=\n  iff.intro (fun ⟨⟨a, b⟩⟩ => ⟨⟨a⟩, ⟨b⟩⟩) fun ⟨⟨a⟩, ⟨b⟩⟩ => ⟨⟨a, b⟩⟩\n#align nonempty_prod nonempty_prod\n-/\n\n",
  "nonempty_pprod":
- "#print nonempty_pprod /-\n@[simp]\ntheorem nonempty_pprod {α β} : nonempty (PProd α β) ↔ nonempty α ∧ nonempty β :=\n  iff.intro (fun ⟨⟨a, b⟩⟩ => ⟨⟨a⟩, ⟨b⟩⟩) fun ⟨⟨a⟩, ⟨b⟩⟩ => ⟨⟨a, b⟩⟩\n#align nonempty_pprod nonempty_pprod\n-/\n\n",
+ "#print nonempty_pprod /-\n@[simp]\ntheorem nonempty_pprod {α β} : Nonempty (PProd α β) ↔ Nonempty α ∧ Nonempty β :=\n  iff.intro (fun ⟨⟨a, b⟩⟩ => ⟨⟨a⟩, ⟨b⟩⟩) fun ⟨⟨a⟩, ⟨b⟩⟩ => ⟨⟨a, b⟩⟩\n#align nonempty_pprod nonempty_pprod\n-/\n\n",
  "nonempty_plift":
- "#print nonempty_plift /-\n@[simp]\ntheorem nonempty_plift {α} : nonempty (PLift α) ↔ nonempty α :=\n  iff.intro (fun ⟨⟨a⟩⟩ => ⟨a⟩) fun ⟨a⟩ => ⟨⟨a⟩⟩\n#align nonempty_plift nonempty_plift\n-/\n\n",
+ "#print nonempty_plift /-\n@[simp]\ntheorem nonempty_plift {α} : Nonempty (PLift α) ↔ Nonempty α :=\n  iff.intro (fun ⟨⟨a⟩⟩ => ⟨a⟩) fun ⟨a⟩ => ⟨⟨a⟩⟩\n#align nonempty_plift nonempty_plift\n-/\n\n",
  "nonempty_pi":
- "theorem classical.nonempty_pi {ι} {α : ι → Sort _} : nonempty (∀ i, α i) ↔ ∀ i, nonempty (α i) :=\n  ⟨fun ⟨f⟩ a => ⟨f a⟩, @pi.nonempty _ _⟩\n#align classical.nonempty_pi classical.nonempty_pi\n\n",
+ "#print Classical.nonempty_pi /-\ntheorem Classical.nonempty_pi {ι} {α : ι → Sort _} : Nonempty (∀ i, α i) ↔ ∀ i, Nonempty (α i) :=\n  ⟨fun ⟨f⟩ a => ⟨f a⟩, @pi.nonempty _ _⟩\n#align classical.nonempty_pi Classical.nonempty_pi\n-/\n\n",
  "nonempty_empty":
- "@[simp]\ntheorem nonempty_empty : ¬nonempty empty := fun ⟨h⟩ => h.elim\n#align nonempty_empty nonempty_empty\n\n",
+ "@[simp]\ntheorem nonempty_empty : ¬Nonempty Empty := fun ⟨h⟩ => h.elim\n#align nonempty_empty nonempty_empty\n\n",
  "nonempty_Prop":
- "#print nonempty_Prop /-\n@[simp]\ntheorem nonempty_Prop {p : Prop} : nonempty p ↔ p :=\n  iff.intro (fun ⟨h⟩ => h) fun h => ⟨h⟩\n#align nonempty_Prop nonempty_Prop\n-/\n\n",
+ "#print nonempty_Prop /-\n@[simp]\ntheorem nonempty_Prop {p : Prop} : Nonempty p ↔ p :=\n  iff.intro (fun ⟨h⟩ => h) fun h => ⟨h⟩\n#align nonempty_Prop nonempty_Prop\n-/\n\n",
  "nonempty":
- "theorem function.surjective.nonempty [h : nonempty β] {f : α → β} (hf : function.surjective f) : nonempty α :=\n  let ⟨y⟩ := h\n  let ⟨x, hx⟩ := hf y\n  ⟨x⟩\n#align function.surjective.nonempty function.surjective.nonempty\n\n",
+ "#print Function.Surjective.nonempty /-\ntheorem Function.Surjective.nonempty {α β : Sort _} [h : Nonempty β] {f : α → β} (hf : function.surjective f) :\n    Nonempty α :=\n  let ⟨y⟩ := h\n  let ⟨x, hx⟩ := hf y\n  ⟨x⟩\n#align function.surjective.nonempty Function.Surjective.nonempty\n-/\n\n",
  "map2":
- "protected theorem nonempty.map2 {α β γ : Sort _} (f : α → β → γ) : nonempty α → nonempty β → nonempty γ\n  | ⟨x⟩, ⟨y⟩ => ⟨f x y⟩\n#align nonempty.map2 nonempty.map2\n\n",
+ "#print Nonempty.map2 /-\nprotected theorem Nonempty.map2 {α β γ : Sort _} (f : α → β → γ) : Nonempty α → Nonempty β → Nonempty γ\n  | ⟨x⟩, ⟨y⟩ => ⟨f x y⟩\n#align nonempty.map2 Nonempty.map2\n-/\n\n",
  "map":
- "/-- Given `f : α → β`, if `α` is nonempty then `β` is also nonempty.\n  `nonempty` cannot be a `functor`, because `functor` is restricted to `Type`. -/\ntheorem nonempty.map {α β} (f : α → β) : nonempty α → nonempty β\n  | ⟨h⟩ => ⟨f h⟩\n#align nonempty.map nonempty.map\n\n",
+ "#print Nonempty.map /-\n/-- Given `f : α → β`, if `α` is nonempty then `β` is also nonempty.\n  `nonempty` cannot be a `functor`, because `functor` is restricted to `Type`. -/\ntheorem Nonempty.map {α β} (f : α → β) : Nonempty α → Nonempty β\n  | ⟨h⟩ => ⟨f h⟩\n#align nonempty.map Nonempty.map\n-/\n\n",
  "forall":
- "@[simp]\ntheorem nonempty.forall {α} {p : nonempty α → Prop} : (∀ h : nonempty α, p h) ↔ ∀ a, p ⟨a⟩ :=\n  iff.intro (fun h a => h _) fun h ⟨a⟩ => h _\n#align nonempty.forall nonempty.forall\n\n",
+ "#print Nonempty.forall /-\n@[simp]\ntheorem Nonempty.forall {α} {p : Nonempty α → Prop} : (∀ h : Nonempty α, p h) ↔ ∀ a, p ⟨a⟩ :=\n  iff.intro (fun h a => h _) fun h ⟨a⟩ => h _\n#align nonempty.forall Nonempty.forall\n-/\n\n",
  "exists_true_iff_nonempty":
- "#print exists_true_iff_nonempty /-\n/-\nCopyright (c) 2017 Johannes Hölzl. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Johannes Hölzl\n-/\ntheorem exists_true_iff_nonempty {α : Sort _} : (∃ a : α, true) ↔ nonempty α :=\n  iff.intro (fun ⟨a, _⟩ => ⟨a⟩) fun ⟨a⟩ => ⟨a, trivial⟩\n#align exists_true_iff_nonempty exists_true_iff_nonempty\n-/\n\n",
+ "#print exists_true_iff_nonempty /-\n/-\nCopyright (c) 2017 Johannes Hölzl. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Johannes Hölzl\n-/\ntheorem exists_true_iff_nonempty {α : Sort _} : (∃ a : α, True) ↔ Nonempty α :=\n  iff.intro (fun ⟨a, _⟩ => ⟨a⟩) fun ⟨a⟩ => ⟨a, trivial⟩\n#align exists_true_iff_nonempty exists_true_iff_nonempty\n-/\n\n",
  "exists":
- "@[simp]\ntheorem nonempty.exists {α} {p : nonempty α → Prop} : (∃ h : nonempty α, p h) ↔ ∃ a, p ⟨a⟩ :=\n  iff.intro (fun ⟨⟨a⟩, h⟩ => ⟨a, h⟩) fun ⟨a, h⟩ => ⟨⟨a⟩, h⟩\n#align nonempty.exists nonempty.exists\n\n",
+ "#print Nonempty.exists /-\n@[simp]\ntheorem Nonempty.exists {α} {p : Nonempty α → Prop} : (∃ h : Nonempty α, p h) ↔ ∃ a, p ⟨a⟩ :=\n  iff.intro (fun ⟨⟨a⟩, h⟩ => ⟨a, h⟩) fun ⟨a, h⟩ => ⟨⟨a⟩, h⟩\n#align nonempty.exists Nonempty.exists\n-/\n\n",
  "elim_to_inhabited":
- "theorem nonempty.elim_to_inhabited {α : Sort _} [h : nonempty α] {p : Prop} (f : inhabited α → p) : p :=\n  h.elim <| f ∘ inhabited.mk\n#align nonempty.elim_to_inhabited nonempty.elim_to_inhabited\n\n",
+ "#print Nonempty.elim_to_inhabited /-\ntheorem Nonempty.elim_to_inhabited {α : Sort _} [h : Nonempty α] {p : Prop} (f : Inhabited α → p) : p :=\n  h.elim <| f ∘ inhabited.mk\n#align nonempty.elim_to_inhabited Nonempty.elim_to_inhabited\n-/\n\n",
  "congr":
- "protected theorem nonempty.congr {α β} (f : α → β) (g : β → α) : nonempty α ↔ nonempty β :=\n  ⟨nonempty.map f, nonempty.map g⟩\n#align nonempty.congr nonempty.congr\n\n"}
+ "#print Nonempty.congr /-\nprotected theorem Nonempty.congr {α β} (f : α → β) (g : β → α) : Nonempty α ↔ Nonempty β :=\n  ⟨Nonempty.map f, Nonempty.map g⟩\n#align nonempty.congr Nonempty.congr\n-/\n\n"}

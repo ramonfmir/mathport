@@ -1,20 +1,20 @@
 {"zeros":
- "theorem zeros {μ : young_diagram} (T : ssyt μ) {i j : ℕ} (not_cell : (i, j) ∉ μ) : T i j = 0 :=\n  T.zeros' not_cell\n#align zeros zeros\n\n",
+ "theorem zeros {μ : YoungDiagram} (T : Ssyt μ) {i j : ℕ} (not_cell : (i, j) ∉ μ) : T i j = 0 :=\n  T.zeros' not_cell\n#align zeros zeros\n\n",
  "to_fun_eq_coe":
- "/-\nCopyright (c) 2022 Jake Levinson. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Jake Levinson\n-/\n@[simp]\ntheorem to_fun_eq_coe {μ : young_diagram} {T : ssyt μ} : T.entry = (T : ℕ → ℕ → ℕ) :=\n  rfl\n#align to_fun_eq_coe to_fun_eq_coe\n\n",
+ "/-\nCopyright (c) 2022 Jake Levinson. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Jake Levinson\n-/\n@[simp]\ntheorem to_fun_eq_coe {μ : YoungDiagram} {T : Ssyt μ} : T.entry = (T : ℕ → ℕ → ℕ) :=\n  rfl\n#align to_fun_eq_coe to_fun_eq_coe\n\n",
  "row_weak_of_le":
- "theorem row_weak_of_le {μ : young_diagram} (T : ssyt μ) {i j1 j2 : ℕ} (hj : j1 ≤ j2) (cell : (i, j2) ∈ μ) :\n    T i j1 ≤ T i j2 := by\n  cases eq_or_lt_of_le hj\n  subst h\n  exact T.row_weak h cell\n#align row_weak_of_le row_weak_of_le\n\n",
+ "theorem row_weak_of_le {μ : YoungDiagram} (T : Ssyt μ) {i j1 j2 : ℕ} (hj : j1 ≤ j2) (cell : (i, j2) ∈ μ) :\n    T i j1 ≤ T i j2 := by\n  cases eq_or_lt_of_le hj\n  subst h\n  exact T.row_weak h cell\n#align row_weak_of_le row_weak_of_le\n\n",
  "row_weak":
- "theorem row_weak {μ : young_diagram} (T : ssyt μ) {i j1 j2 : ℕ} (hj : j1 < j2) (hcell : (i, j2) ∈ μ) :\n    T i j1 ≤ T i j2 :=\n  T.row_weak' hj hcell\n#align row_weak row_weak\n\n",
+ "theorem row_weak {μ : YoungDiagram} (T : Ssyt μ) {i j1 j2 : ℕ} (hj : j1 < j2) (hcell : (i, j2) ∈ μ) : T i j1 ≤ T i j2 :=\n  T.row_weak' hj hcell\n#align row_weak row_weak\n\n",
  "highest_weight_apply":
- "@[simp]\ntheorem highest_weight_apply {μ : young_diagram} {i j : ℕ} : highest_weight μ i j = if (i, j) ∈ μ then i else 0 :=\n  rfl\n#align highest_weight_apply highest_weight_apply\n\n",
+ "@[simp]\ntheorem highest_weight_apply {μ : YoungDiagram} {i j : ℕ} : highestWeight μ i j = if (i, j) ∈ μ then i else 0 :=\n  rfl\n#align highest_weight_apply highest_weight_apply\n\n",
  "ext":
- "@[ext]\ntheorem ext {μ : young_diagram} {T T' : ssyt μ} (h : ∀ i j, T i j = T' i j) : T = T' :=\n  fun_like.ext T T' fun x => by\n    funext\n    apply h\n#align ext ext\n\n",
+ "@[ext]\ntheorem ext {μ : YoungDiagram} {T T' : Ssyt μ} (h : ∀ i j, T i j = T' i j) : T = T' :=\n  FunLike.ext T T' fun x => by\n    funext\n    apply h\n#align ext ext\n\n",
  "copy_eq":
- "theorem copy_eq {μ : young_diagram} (T : ssyt μ) (entry' : ℕ → ℕ → ℕ) (h : entry' = T) : T.copy entry' h = T :=\n  fun_like.ext' h\n#align copy_eq copy_eq\n\n",
+ "theorem copy_eq {μ : YoungDiagram} (T : Ssyt μ) (entry' : ℕ → ℕ → ℕ) (h : entry' = T) : T.copy entry' h = T :=\n  FunLike.ext' h\n#align copy_eq copy_eq\n\n",
  "col_weak":
- "theorem col_weak {μ : young_diagram} (T : ssyt μ) {i1 i2 j : ℕ} (hi : i1 ≤ i2) (cell : (i2, j) ∈ μ) : T i1 j ≤ T i2 j :=\n  by\n  cases eq_or_lt_of_le hi\n  subst h\n  exact le_of_lt (T.col_strict h cell)\n#align col_weak col_weak\n\n",
+ "theorem col_weak {μ : YoungDiagram} (T : Ssyt μ) {i1 i2 j : ℕ} (hi : i1 ≤ i2) (cell : (i2, j) ∈ μ) : T i1 j ≤ T i2 j :=\n  by\n  cases eq_or_lt_of_le hi\n  subst h\n  exact le_of_lt (T.col_strict h cell)\n#align col_weak col_weak\n\n",
  "col_strict":
- "theorem col_strict {μ : young_diagram} (T : ssyt μ) {i1 i2 j : ℕ} (hi : i1 < i2) (hcell : (i2, j) ∈ μ) :\n    T i1 j < T i2 j :=\n  T.col_strict' hi hcell\n#align col_strict col_strict\n\n",
+ "theorem col_strict {μ : YoungDiagram} (T : Ssyt μ) {i1 i2 j : ℕ} (hi : i1 < i2) (hcell : (i2, j) ∈ μ) :\n    T i1 j < T i2 j :=\n  T.col_strict' hi hcell\n#align col_strict col_strict\n\n",
  "coe_copy":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n@[simp]\ntheorem coe_copy {μ : young_diagram} (T : ssyt μ) (entry' : ℕ → ℕ → ℕ) (h : entry' = T) :\n    «expr⇑ » (T.copy entry' h) = entry' :=\n  rfl\n#align coe_copy coe_copy\n\n"}
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n@[simp]\ntheorem coe_copy {μ : YoungDiagram} (T : Ssyt μ) (entry' : ℕ → ℕ → ℕ) (h : entry' = T) :\n    «expr⇑ » (T.copy entry' h) = entry' :=\n  rfl\n#align coe_copy coe_copy\n\n"}

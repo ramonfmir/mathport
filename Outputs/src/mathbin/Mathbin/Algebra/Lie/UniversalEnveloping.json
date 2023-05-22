@@ -1,7 +1,7 @@
 {"ι_comp_lift":
- "@[simp]\ntheorem ι_comp_lift : lift R f ∘ ι R = f :=\n  funext <| lie_hom.ext_iff.mp <| (lift R).symm_apply_apply f\n#align ι_comp_lift ι_comp_lift\n\n",
+ "@[simp]\ntheorem ι_comp_lift : lift R f ∘ ι R = f :=\n  funext <| LieHom.ext_iff.mp <| (lift R).symm_apply_apply f\n#align ι_comp_lift ι_comp_lift\n\n",
  "lift_ι_apply":
- "@[simp]\ntheorem lift_ι_apply (x : L) : lift R f (ι R x) = f x := by rw [← function.comp_apply (lift R f) (ι R) x, ι_comp_lift]\n#align lift_ι_apply lift_ι_apply\n\n",
+ "@[simp]\ntheorem lift_ι_apply (x : L) : lift R f (ι R x) = f x := by rw [← Function.comp_apply (lift R f) (ι R) x, ι_comp_lift]\n#align lift_ι_apply lift_ι_apply\n\n",
  "lift_unique":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₐ[ ] » -/\ntheorem lift_unique (g : «expr →ₐ[ ] » (universal_enveloping_algebra R L) R A) : g ∘ ι R = f ↔ g = lift R f :=\n  by\n  refine' iff.trans _ (lift R).symm_apply_eq\n  constructor <;>\n    · intro h\n      ext\n      simp [← h]\n#align lift_unique lift_unique\n\n",
  "lift_symm_apply":

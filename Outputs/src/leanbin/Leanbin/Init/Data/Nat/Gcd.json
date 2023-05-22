@@ -3,9 +3,9 @@
  "gcd_zero_right":
  "#print gcd_zero_right /-\n@[simp]\ntheorem gcd_zero_right (n : ℕ) : gcd n 0 = n := by cases n <;> simp [gcd]\n#align gcd_zero_right gcd_zero_right\n-/\n\n",
  "gcd_zero_left":
- "#print gcd_zero_left /-\n/-\nCopyright (c) 2014 Jeremy Avigad. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Jeremy Avigad, Leonardo de Moura, Mario Carneiro\n\n-/\n@[simp]\ntheorem gcd_zero_left (x : nat) : gcd 0 x = x := by simp [gcd]\n#align gcd_zero_left gcd_zero_left\n-/\n\n",
+ "#print gcd_zero_left /-\n/-\nCopyright (c) 2014 Jeremy Avigad. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Jeremy Avigad, Leonardo de Moura, Mario Carneiro\n\n-/\n@[simp]\ntheorem gcd_zero_left (x : Nat) : gcd 0 x = x := by simp [gcd]\n#align gcd_zero_left gcd_zero_left\n-/\n\n",
  "gcd_succ":
- "@[simp]\ntheorem gcd_succ (x y : nat) : gcd (succ x) y = gcd (y % succ x) (succ x) := by simp [gcd]\n#align gcd_succ gcd_succ\n\n",
+ "@[simp]\ntheorem gcd_succ (x y : Nat) : gcd (succ x) y = gcd (y % succ x) (succ x) := by simp [gcd]\n#align gcd_succ gcd_succ\n\n",
  "gcd_self":
  "@[simp]\ntheorem gcd_self (n : ℕ) : gcd n n = n := by cases n <;> simp [gcd, mod_self]\n#align gcd_self gcd_self\n\n",
  "gcd_rec":

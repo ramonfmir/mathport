@@ -1,18 +1,26 @@
-{"nonempty":
- "theorem nonempty (K : convex_body V) : (K : set V).nonempty :=\n  K.nonempty'\n#align nonempty nonempty\n\n",
- "is_compact":
- "theorem is_compact (K : convex_body V) : is_compact (K : set V) :=\n  K.is_compact'\n#align is_compact is_compact\n\n",
- "ext":
- "@[ext]\nprotected theorem ext {K L : convex_body V} (h : (K : set V) = L) : K = L :=\n  SetLike.ext' h\n#align ext ext\n\n",
- "convex":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n/-\nCopyright (c) 2022 Paul A. Reichert. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Paul A. Reichert\n-/\ntheorem convex (K : convex_body V) : convex (exprℝ) (K : set V) :=\n  K.convex'\n#align convex convex\n\n",
+{"ext":
+ "@[ext]\nprotected theorem ext {K L : ConvexBody V} (h : (K : Set V) = L) : K = L :=\n  SetLike.ext' h\n#align ext ext\n\n",
  "coe_zero":
- "@[simp]\ntheorem coe_zero : (↑(0 : convex_body V) : set V) = 0 :=\n  rfl\n#align coe_zero coe_zero\n\n",
+ "@[simp]\ntheorem coe_zero : (↑(0 : ConvexBody V) : Set V) = 0 :=\n  rfl\n#align coe_zero coe_zero\n\n",
  "coe_smul'":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `nnreal -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n@[simp]\ntheorem coe_smul' (c : nnreal) (K : convex_body V) : (↑(«expr • » c K) : set V) = «expr • » c (K : set V) :=\n  rfl\n#align coe_smul' coe_smul'\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `nnreal -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n@[simp]\ntheorem coe_smul' (c : nnreal) (K : ConvexBody V) : (↑(«expr • » c K) : Set V) = «expr • » c (K : Set V) :=\n  rfl\n#align coe_smul' coe_smul'\n\n",
  "coe_smul":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n@[simp]\ntheorem coe_smul (c : exprℝ) (K : convex_body V) : (↑(«expr • » c K) : set V) = «expr • » c (K : set V) :=\n  rfl\n#align coe_smul coe_smul\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n@[simp]\ntheorem coe_smul (c : exprℝ) (K : ConvexBody V) : (↑(«expr • » c K) : Set V) = «expr • » c (K : Set V) :=\n  rfl\n#align coe_smul coe_smul\n\n",
  "coe_mk":
- "@[simp]\ntheorem coe_mk (s : set V) (h₁ h₂ h₃) : (mk s h₁ h₂ h₃ : set V) = s :=\n  rfl\n#align coe_mk coe_mk\n\n",
+ "@[simp]\ntheorem coe_mk (s : Set V) (h₁ h₂ h₃) : (mk s h₁ h₂ h₃ : Set V) = s :=\n  rfl\n#align coe_mk coe_mk\n\n",
  "coe_add":
- "-- we cannot write K + L to avoid reducibility issues with the set.has_add instance\n@[simp]\ntheorem coe_add (K L : convex_body V) : (↑(K + L) : set V) = (K : set V) + L :=\n  rfl\n#align coe_add coe_add\n\n"}
+ "-- we cannot write K + L to avoid reducibility issues with the set.has_add instance\n@[simp]\ntheorem coe_add (K L : ConvexBody V) : (↑(K + L) : Set V) = (K : Set V) + L :=\n  rfl\n#align coe_add coe_add\n\n",
+ "bounded":
+ "protected theorem bounded : Metric.Bounded (K : Set V) :=\n  K.is_compact.bounded\n#align bounded bounded\n\n",
+ "Nonempty":
+ "#print Nonempty /-\nprotected theorem Nonempty (K : ConvexBody V) : (K : Set V).nonempty :=\n  K.nonempty'\n#align nonempty Nonempty\n-/\n\n",
+ "IsCompact":
+ "#print IsCompact /-\nprotected theorem IsCompact (K : ConvexBody V) : IsCompact (K : Set V) :=\n  K.is_compact'\n#align is_compact IsCompact\n-/\n\n",
+ "Hausdorff_edist_ne_top":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\ntheorem Hausdorff_edist_ne_top {K L : ConvexBody V} : EMetric.hausdorffEdist (K : Set V) L ≠ «expr⊤» := by\n  apply_rules [Metric.hausdorffEdist_ne_top_of_nonempty_of_bounded, ConvexBody.nonempty, ConvexBody.bounded]\n#align Hausdorff_edist_ne_top Hausdorff_edist_ne_top\n\n",
+ "Hausdorff_edist_coe":
+ "@[simp, norm_cast]\ntheorem Hausdorff_edist_coe : EMetric.hausdorffEdist (K : Set V) L = edist K L :=\n  by\n  rw [edist_dist]\n  exact (ENNReal.ofReal_toReal Hausdorff_edist_ne_top).symm\n#align Hausdorff_edist_coe Hausdorff_edist_coe\n\n",
+ "Hausdorff_dist_coe":
+ "@[simp, norm_cast]\ntheorem Hausdorff_dist_coe : Metric.hausdorffDist (K : Set V) L = dist K L :=\n  rfl\n#align Hausdorff_dist_coe Hausdorff_dist_coe\n\n",
+ "Convex":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n#print Convex /-\n/-\nCopyright (c) 2022 Paul A. Reichert. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Paul A. Reichert\n-/\nprotected theorem Convex (K : ConvexBody V) : Convex (exprℝ) (K : Set V) :=\n  K.convex'\n#align convex Convex\n-/\n\n"}

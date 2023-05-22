@@ -1,14 +1,14 @@
 {"subset_coe_pow":
- "theorem subset_coe_pow (p : sub_mul_action R M) : ∀ {n : ℕ}, (p ^ n : set M) ⊆ ↑(p ^ n)\n  | 0 => by\n    rw [pow_zero, pow_zero]\n    exact subset_coe_one\n  | n + 1 => (coe_pow p n.succ_ne_zero).superset\n#align subset_coe_pow subset_coe_pow\n\n",
+ "theorem subset_coe_pow (p : SubMulAction R M) : ∀ {n : ℕ}, (p ^ n : Set M) ⊆ ↑(p ^ n)\n  | 0 => by\n    rw [pow_zero, pow_zero]\n    exact subset_coe_one\n  | n + 1 => (coe_pow p n.succ_ne_zero).superset\n#align subset_coe_pow subset_coe_pow\n\n",
  "subset_coe_one":
- "theorem subset_coe_one : (1 : set M) ⊆ (1 : sub_mul_action R M) := fun x hx => ⟨1, (one_smul _ _).trans hx.symm⟩\n#align subset_coe_one subset_coe_one\n\n",
+ "theorem subset_coe_one : (1 : Set M) ⊆ (1 : SubMulAction R M) := fun x hx => ⟨1, (one_smul _ _).trans hx.symm⟩\n#align subset_coe_one subset_coe_one\n\n",
  "mem_one":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n@[simp]\ntheorem mem_one {x : M} : x ∈ (1 : sub_mul_action R M) ↔ ∃ r : R, «expr • » r 1 = x :=\n  iff.rfl\n#align mem_one mem_one\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n@[simp]\ntheorem mem_one {x : M} : x ∈ (1 : SubMulAction R M) ↔ ∃ r : R, «expr • » r 1 = x :=\n  iff.rfl\n#align mem_one mem_one\n\n",
  "mem_mul":
- "theorem mem_mul {p q : sub_mul_action R M} {x : M} : x ∈ p * q ↔ ∃ y z, y ∈ p ∧ z ∈ q ∧ y * z = x :=\n  Set.mem_mul\n#align mem_mul mem_mul\n\n",
+ "theorem mem_mul {p q : SubMulAction R M} {x : M} : x ∈ p * q ↔ ∃ y z, y ∈ p ∧ z ∈ q ∧ y * z = x :=\n  Set.mem_mul\n#align mem_mul mem_mul\n\n",
  "coe_pow":
- "theorem coe_pow (p : sub_mul_action R M) : ∀ {n : ℕ} (hn : n ≠ 0), ↑(p ^ n) = (p ^ n : set M)\n  | 0, hn => (hn rfl).elim\n  | 1, hn => by rw [pow_one, pow_one]\n  | n + 2, hn => by rw [pow_succ _ (n + 1), pow_succ _ (n + 1), coe_mul, coe_pow n.succ_ne_zero]\n#align coe_pow coe_pow\n\n",
+ "theorem coe_pow (p : SubMulAction R M) : ∀ {n : ℕ} (hn : n ≠ 0), ↑(p ^ n) = (p ^ n : Set M)\n  | 0, hn => (hn rfl).elim\n  | 1, hn => by rw [pow_one, pow_one]\n  | n + 2, hn => by rw [pow_succ _ (n + 1), pow_succ _ (n + 1), coe_mul, coe_pow n.succ_ne_zero]\n#align coe_pow coe_pow\n\n",
  "coe_one":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/-\nCopyright (c) 2022 Eric Wieser. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Eric Wieser\n-/\ntheorem coe_one : ↑(1 : sub_mul_action R M) = Set.range fun r : R => «expr • » r (1 : M) :=\n  rfl\n#align coe_one coe_one\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/-\nCopyright (c) 2022 Eric Wieser. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Eric Wieser\n-/\ntheorem coe_one : ↑(1 : SubMulAction R M) = Set.range fun r : R => «expr • » r (1 : M) :=\n  rfl\n#align coe_one coe_one\n\n",
  "coe_mul":
- "@[norm_cast]\ntheorem coe_mul (p q : sub_mul_action R M) : ↑(p * q) = (p * q : set M) :=\n  rfl\n#align coe_mul coe_mul\n\n"}
+ "@[norm_cast]\ntheorem coe_mul (p q : SubMulAction R M) : ↑(p * q) = (p * q : Set M) :=\n  rfl\n#align coe_mul coe_mul\n\n"}

@@ -1,11 +1,11 @@
 {"verts_to_subgraph":
  "@[simp]\ntheorem verts_to_subgraph (p : G.walk u v) : p.to_subgraph.verts = { w | w ∈ p.support } :=\n  Set.ext fun _ => p.mem_verts_to_subgraph\n#align verts_to_subgraph verts_to_subgraph\n\n",
  "transfer_transfer":
- "@[simp]\ntheorem transfer_transfer {K : simple_graph V} (hp' : ∀ e, e ∈ p.edges → e ∈ K.edge_set) :\n    (p.transfer H hp).transfer K\n        (by\n          rw [p.edges_transfer hp]\n          exact hp') =\n      p.transfer K hp' :=\n  by\n  induction p <;> simp only [transfer, eq_self_iff_true, heq_iff_eq, true_and_iff]\n  apply p_ih\n#align transfer_transfer transfer_transfer\n\n",
+ "@[simp]\ntheorem transfer_transfer {K : SimpleGraph V} (hp' : ∀ e, e ∈ p.edges → e ∈ K.edge_set) :\n    (p.transfer H hp).transfer K\n        (by\n          rw [p.edges_transfer hp]\n          exact hp') =\n      p.transfer K hp' :=\n  by\n  induction p <;> simp only [transfer, eq_self_iff_true, heq_iff_eq, true_and_iff]\n  apply p_ih\n#align transfer_transfer transfer_transfer\n\n",
  "transfer_self":
  "theorem transfer_self : p.transfer G p.edges_subset_edge_set = p := by\n  induction p <;> simp only [*, transfer, eq_self_iff_true, heq_iff_eq, and_self_iff]\n#align transfer_self transfer_self\n\n",
  "transfer_eq_map_of_le":
- "theorem transfer_eq_map_of_le (GH : G ≤ H) : p.transfer H hp = p.map (simple_graph.hom.map_spanning_subgraphs GH) := by\n  induction p <;>\n    simp only [*, transfer, map_cons, hom.map_spanning_subgraphs_apply, eq_self_iff_true, heq_iff_eq, and_self_iff,\n      map_nil]\n#align transfer_eq_map_of_le transfer_eq_map_of_le\n\n",
+ "theorem transfer_eq_map_of_le (GH : G ≤ H) : p.transfer H hp = p.map (SimpleGraph.Hom.mapSpanningSubgraphs GH) := by\n  induction p <;>\n    simp only [*, transfer, map_cons, hom.map_spanning_subgraphs_apply, eq_self_iff_true, heq_iff_eq, and_self_iff,\n      map_nil]\n#align transfer_eq_map_of_le transfer_eq_map_of_le\n\n",
  "transfer_append":
  "@[simp]\ntheorem transfer_append (hpq) :\n    (p.append q).transfer H hpq =\n      (p.transfer H fun e he => by\n            apply hpq\n            simp [he]).append\n        (q.transfer H fun e he => by\n          apply hpq\n          simp [he]) :=\n  by\n  induction p <;> simp only [transfer, nil_append, cons_append, eq_self_iff_true, heq_iff_eq, true_and_iff]\n  apply p_ih\n#align transfer_append transfer_append\n\n",
  "transfer":
@@ -13,7 +13,7 @@
  "trans":
  "@[trans]\nprotected theorem reachable.trans {u v w : V} (huv : G.reachable u v) (hvw : G.reachable v w) : G.reachable u w :=\n  huv.elim fun puv => hvw.elim fun pvw => ⟨puv.append pvw⟩\n#align reachable.trans reachable.trans\n\n",
  "to_subgraph_rotate":
- "@[simp]\ntheorem to_subgraph_rotate [decidable_eq V] (c : G.walk v v) (h : u ∈ c.support) :\n    (c.rotate h).to_subgraph = c.to_subgraph := by\n  rw [rotate, to_subgraph_append, sup_comm, ← to_subgraph_append, take_spec]\n#align to_subgraph_rotate to_subgraph_rotate\n\n",
+ "@[simp]\ntheorem to_subgraph_rotate [DecidableEq V] (c : G.walk v v) (h : u ∈ c.support) :\n    (c.rotate h).to_subgraph = c.to_subgraph := by\n  rw [rotate, to_subgraph_append, sup_comm, ← to_subgraph_append, take_spec]\n#align to_subgraph_rotate to_subgraph_rotate\n\n",
  "to_subgraph_reverse":
  "@[simp]\ntheorem to_subgraph_reverse (p : G.walk u v) : p.reverse.to_subgraph = p.to_subgraph :=\n  by\n  induction p\n  · simp\n  · simp only [*, walk.to_subgraph, reverse_cons, to_subgraph_append, subgraph_of_adj_symm]\n    rw [sup_comm]\n    congr\n    ext <;> simp [-Set.bot_eq_empty]\n#align to_subgraph_reverse to_subgraph_reverse\n\n",
  "to_subgraph_map":
@@ -23,21 +23,23 @@
  "to_subgraph_append":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊔ » -/\n@[simp]\ntheorem to_subgraph_append (p : G.walk u v) (q : G.walk v w) :\n    (p.append q).to_subgraph = «expr ⊔ » p.to_subgraph q.to_subgraph := by induction p <;> simp [*, sup_assoc]\n#align to_subgraph_append to_subgraph_append\n\n",
  "to_delete_edges_nil":
- "@[simp]\ntheorem to_delete_edges_nil (s : set (sym2 V)) {v : V} (hp) : (walk.nil : G.walk v v).to_delete_edges s hp = walk.nil :=\n  rfl\n#align to_delete_edges_nil to_delete_edges_nil\n\n",
+ "@[simp]\ntheorem to_delete_edges_nil (s : Set (Sym2 V)) {v : V} (hp) : (walk.nil : G.walk v v).to_delete_edges s hp = walk.nil :=\n  rfl\n#align to_delete_edges_nil to_delete_edges_nil\n\n",
  "to_delete_edges_copy":
- "@[simp]\ntheorem to_delete_edges_copy (s : set (sym2 V)) {u v u' v'} (p : G.walk u v) (hu : u = u') (hv : v = v') (h) :\n    (p.copy hu hv).to_delete_edges s h =\n      (p.to_delete_edges s\n            (by\n              subst_vars\n              exact h)).copy\n        hu hv :=\n  by\n  subst_vars\n  rfl\n#align to_delete_edges_copy to_delete_edges_copy\n\n",
+ "@[simp]\ntheorem to_delete_edges_copy (s : Set (Sym2 V)) {u v u' v'} (p : G.walk u v) (hu : u = u') (hv : v = v') (h) :\n    (p.copy hu hv).to_delete_edges s h =\n      (p.to_delete_edges s\n            (by\n              subst_vars\n              exact h)).copy\n        hu hv :=\n  by\n  subst_vars\n  rfl\n#align to_delete_edges_copy to_delete_edges_copy\n\n",
  "to_delete_edges_cons":
- "@[simp]\ntheorem to_delete_edges_cons (s : set (sym2 V)) {u v w : V} (h : G.adj u v) (p : G.walk v w) (hp) :\n    (walk.cons h p).to_delete_edges s hp =\n      walk.cons ⟨h, hp _ (or.inl rfl)⟩ (p.to_delete_edges s fun _ he => hp _ <| or.inr he) :=\n  rfl\n#align to_delete_edges_cons to_delete_edges_cons\n\n",
+ "@[simp]\ntheorem to_delete_edges_cons (s : Set (Sym2 V)) {u v w : V} (h : G.adj u v) (p : G.walk v w) (hp) :\n    (walk.cons h p).to_delete_edges s hp =\n      walk.cons ⟨h, hp _ (or.inl rfl)⟩ (p.to_delete_edges s fun _ he => hp _ <| or.inr he) :=\n  rfl\n#align to_delete_edges_cons to_delete_edges_cons\n\n",
  "to_delete_edges":
- "protected theorem is_cycle.to_delete_edges (s : set (sym2 V)) {v : V} {p : G.walk v v} (h : p.is_cycle) (hp) :\n    (p.to_delete_edges s hp).is_cycle :=\n  h.transfer _\n#align is_cycle.to_delete_edges is_cycle.to_delete_edges\n\n",
+ "protected theorem is_cycle.to_delete_edges (s : Set (Sym2 V)) {v : V} {p : G.walk v v} (h : p.is_cycle) (hp) :\n    (p.to_delete_edges s hp).is_cycle :=\n  h.transfer _\n#align is_cycle.to_delete_edges is_cycle.to_delete_edges\n\n",
  "take_until_copy":
  "@[simp]\ntheorem take_until_copy {u v w v' w'} (p : G.walk v w) (hv : v = v') (hw : w = w') (h : u ∈ (p.copy hv hw).support) :\n    (p.copy hv hw).take_until u h =\n      (p.take_until u\n            (by\n              subst_vars\n              exact h)).copy\n        hv rfl :=\n  by\n  subst_vars\n  rfl\n#align take_until_copy take_until_copy\n\n",
  "take_until":
- "protected theorem is_path.take_until {u v w : V} {p : G.walk v w} (hc : p.is_path) (h : u ∈ p.support) :\n    (p.take_until u h).is_path :=\n  is_path.of_append_left (by rwa [← take_spec _ h] at hc)\n#align is_path.take_until is_path.take_until\n\n",
+ "protected theorem is_path.take_until {u v w : V} {p : G.walk v w} (hc : p.is_path) (h : u ∈ p.support) :\n    (p.take_until u h).is_path :=\n  IsPath.of_append_left (by rwa [← take_spec _ h] at hc)\n#align is_path.take_until is_path.take_until\n\n",
  "take_spec":
  "/-- The `take_until` and `drop_until` functions split a walk into two pieces.\nThe lemma `count_support_take_until_eq_one` specifies where this split occurs. -/\n@[simp]\ntheorem take_spec {u v w : V} (p : G.walk v w) (h : u ∈ p.support) : (p.take_until u h).append (p.drop_until u h) = p :=\n  by\n  induction p\n  · rw [mem_support_nil_iff] at h\n    subst u\n    rfl\n  · obtain rfl | h := h\n    · simp!\n    · simp! only\n      split_ifs with h' <;> subst_vars <;> simp [*]\n#align take_spec take_spec\n\n",
  "tail_support_append":
  "theorem tail_support_append {u v w : V} (p : G.walk u v) (p' : G.walk v w) :\n    (p.append p').support.tail = p.support.tail ++ p'.support.tail := by\n  rw [support_append, List.tail_append_of_ne_nil _ _ (support_ne_nil _)]\n#align tail_support_append tail_support_append\n\n",
+ "symm_apply_reachable":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃g » -/\ntheorem iso.symm_apply_reachable {G : SimpleGraph V} {G' : SimpleGraph V'} {φ : «expr ≃g » G G'} {u : V} {v : V'} :\n    G.reachable (φ.symm v) u ↔ G'.reachable v (φ u) := by rw [← iso.reachable_iff, RelIso.apply_symm_apply]\n#align iso.symm_apply_reachable iso.symm_apply_reachable\n\n",
  "symm":
  "@[symm]\nprotected theorem reachable.symm {u v : V} (huv : G.reachable u v) : G.reachable v u :=\n  huv.elim fun p => ⟨p.reverse⟩\n#align reachable.symm reachable.symm\n\n",
  "support_transfer":
@@ -66,24 +68,30 @@
  "@[simp]\ntheorem support_copy {u v u' v'} (p : G.walk u v) (hu : u = u') (hv : v = v') : (p.copy hu hv).support = p.support :=\n  by\n  subst_vars\n  rfl\n#align support_copy support_copy\n\n",
  "support_cons":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:177:8: unsupported: ambiguous notation -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `sym.cons' -/\n@[simp]\ntheorem support_cons {u v w : V} (h : G.adj u v) (p : G.walk v w) : (cons h p).support = sym.cons' u p.support :=\n  rfl\n#align support_cons support_cons\n\n",
+ "support_concat":
+ "@[simp]\ntheorem support_concat {u v w : V} (p : G.walk u v) (h : G.adj v w) : (p.concat h).support = p.support.concat w := by\n  induction p <;> simp [*, concat_nil]\n#align support_concat support_concat\n\n",
  "support_bypass_subset":
  "theorem support_bypass_subset {u v : V} (p : G.walk u v) : p.bypass.support ⊆ p.support :=\n  by\n  induction p\n  · simp!\n  · simp! only\n    split_ifs\n    · apply list.subset.trans (support_drop_until_subset _ _)\n      apply list.subset_cons_of_subset\n      assumption\n    · rw [support_cons]\n      apply list.cons_subset_cons\n      assumption\n#align support_bypass_subset support_bypass_subset\n\n",
  "support_append":
  "theorem support_append {u v w : V} (p : G.walk u v) (p' : G.walk v w) :\n    (p.append p').support = p.support ++ p'.support.tail := by induction p <;> cases p' <;> simp [*]\n#align support_append support_append\n\n",
+ "supp_injective":
+ "@[ext]\ntheorem supp_injective : function.injective (ConnectedComponent.supp : G.connected_component → Set V) :=\n  by\n  refine' connected_component.ind₂ _\n  intro v w\n  simp only [connected_component.supp, Set.ext_iff, connected_component.eq, Set.mem_setOf_eq]\n  intro h\n  rw [reachable_comm, h]\n#align supp_injective supp_injective\n\n",
+ "supp_inj":
+ "@[simp]\ntheorem supp_inj {C D : G.connected_component} : C.supp = D.supp ↔ C = D :=\n  ConnectedComponent.supp_injective.eq_iff\n#align supp_inj supp_inj\n\n",
  "subsingleton_connected_component":
- "theorem preconnected.subsingleton_connected_component (h : G.preconnected) : subsingleton G.connected_component :=\n  ⟨connected_component.ind₂ fun v w => connected_component.sound (h v w)⟩\n#align preconnected.subsingleton_connected_component preconnected.subsingleton_connected_component\n\n",
+ "#print SimpleGraph.Preconnected.subsingleton_connectedComponent /-\ntheorem SimpleGraph.Preconnected.subsingleton_connectedComponent (h : G.preconnected) :\n    subsingleton G.connected_component :=\n  ⟨ConnectedComponent.ind₂ fun v w => ConnectedComponent.sound (h v w)⟩\n#align simple_graph.preconnected.subsingleton_connected_component SimpleGraph.Preconnected.subsingleton_connectedComponent\n-/\n\n",
  "subset_support_append_right":
- "@[simp]\ntheorem subset_support_append_right {V : Type u} {G : simple_graph V} {u v w : V} (p : G.walk u v) (q : G.walk v w) :\n    q.support ⊆ (p.append q).support := by\n  intro h\n  simp (config := { contextual := true }) only [mem_support_append_iff, or_true_iff, imp_true_iff]\n#align subset_support_append_right subset_support_append_right\n\n",
+ "@[simp]\ntheorem subset_support_append_right {V : Type u} {G : SimpleGraph V} {u v w : V} (p : G.walk u v) (q : G.walk v w) :\n    q.support ⊆ (p.append q).support := by\n  intro h\n  simp (config := { contextual := true }) only [mem_support_append_iff, or_true_iff, imp_true_iff]\n#align subset_support_append_right subset_support_append_right\n\n",
  "subset_support_append_left":
- "@[simp]\ntheorem subset_support_append_left {V : Type u} {G : simple_graph V} {u v w : V} (p : G.walk u v) (q : G.walk v w) :\n    p.support ⊆ (p.append q).support := by simp only [walk.support_append, list.subset_append_left]\n#align subset_support_append_left subset_support_append_left\n\n",
+ "@[simp]\ntheorem subset_support_append_left {V : Type u} {G : SimpleGraph V} {u v w : V} (p : G.walk u v) (q : G.walk v w) :\n    p.support ⊆ (p.append q).support := by simp only [walk.support_append, list.subset_append_left]\n#align subset_support_append_left subset_support_append_left\n\n",
  "subgraph_of_adj_connected":
  "@[simp]\ntheorem subgraph_of_adj_connected {v w : V} (hvw : G.adj v w) : (G.subgraph_of_adj hvw).connected :=\n  by\n  constructor\n  rintro ⟨a, ha⟩ ⟨b, hb⟩\n  simp only [subgraph_of_adj_verts, Set.mem_insert_iff, Set.mem_singleton_iff] at ha hb\n  obtain rfl | rfl := ha <;> obtain rfl | rfl := hb <;>\n    first\n      |rfl|·\n        apply adj.reachable\n        simp\n#align subgraph_of_adj_connected subgraph_of_adj_connected\n\n",
  "start_mem_support":
  "@[simp]\ntheorem start_mem_support {u v : V} (p : G.walk u v) : u ∈ p.support := by cases p <;> simp\n#align start_mem_support start_mem_support\n\n",
  "sound":
- "protected theorem connected_component.sound {v w : V} :\n    G.reachable v w → G.connected_component_mk v = G.connected_component_mk w :=\n  quot.sound\n#align connected_component.sound connected_component.sound\n\n",
+ "protected theorem sound {v w : V} : G.reachable v w → G.connected_component_mk v = G.connected_component_mk w :=\n  quot.sound\n#align sound sound\n\n",
  "snd_mem_support_of_mem_edges":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⟦ ⟧» -/\ntheorem snd_mem_support_of_mem_edges {t u v w : V} (p : G.walk v w) (he : «expr⟦ ⟧» (t, u) ∈ p.edges) : u ∈ p.support :=\n  by\n  rw [sym2.eq_swap] at he\n  exact p.fst_mem_support_of_mem_edges he\n#align snd_mem_support_of_mem_edges snd_mem_support_of_mem_edges\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⟦ ⟧» -/\ntheorem snd_mem_support_of_mem_edges {t u v w : V} (p : G.walk v w) (he : «expr⟦ ⟧» (t, u) ∈ p.edges) : u ∈ p.support :=\n  by\n  rw [Sym2.eq_swap] at he\n  exact p.fst_mem_support_of_mem_edges he\n#align snd_mem_support_of_mem_edges snd_mem_support_of_mem_edges\n\n",
  "singleton_subgraph_connected":
  "theorem singleton_subgraph_connected {v : V} : (G.singleton_subgraph v).connected :=\n  by\n  constructor\n  rintro ⟨a, ha⟩ ⟨b, hb⟩\n  simp only [singleton_subgraph_verts, Set.mem_singleton_iff] at ha hb\n  subst_vars\n#align singleton_subgraph_connected singleton_subgraph_connected\n\n",
  "set_walk_self_length_zero_eq":
@@ -95,7 +103,7 @@
  "set_walk_length_succ_eq":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⋃ , » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⋃ , » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\ntheorem set_walk_length_succ_eq (u v : V) (n : ℕ) :\n    { p : G.walk u v | p.length = n.succ } =\n      «expr⋃ , » \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⋃ , »\"\n        («expr '' » (walk.cons h) { p' : G.walk w v | p'.length = n }) :=\n  by\n  ext p\n  cases' p with _ _ w _ huw pwv\n  · simp [eq_comm]\n  · simp only [nat.succ_eq_add_one, Set.mem_setOf_eq, walk.length_cons, add_left_inj, Set.mem_unionᵢ, Set.mem_image,\n      exists_prop]\n    constructor\n    · rintro rfl\n      exact ⟨w, huw, pwv, rfl, rfl, heq.rfl⟩\n    · rintro ⟨w, huw, pwv, rfl, rfl, rfl⟩\n      rfl\n#align set_walk_length_succ_eq set_walk_length_succ_eq\n\n",
  "set_univ_walk_nonempty":
- "theorem connected.set_univ_walk_nonempty (hconn : G.connected) (u v : V) : (Set.univ : set (G.walk u v)).nonempty :=\n  hconn.preconnected.set_univ_walk_nonempty u v\n#align connected.set_univ_walk_nonempty connected.set_univ_walk_nonempty\n\n",
+ "theorem connected.set_univ_walk_nonempty (hconn : G.connected) (u v : V) : (Set.univ : Set (G.walk u v)).nonempty :=\n  hconn.preconnected.set_univ_walk_nonempty u v\n#align connected.set_univ_walk_nonempty connected.set_univ_walk_nonempty\n\n",
  "rotate_edges":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ~r » -/\ntheorem rotate_edges {u v : V} (c : G.walk v v) (h : u ∈ c.support) : «expr ~r » (c.rotate h).edges c.edges :=\n  (rotate_darts c h).map _\n#align rotate_edges rotate_edges\n\n",
  "rotate_darts":
@@ -103,7 +111,7 @@
  "rotate":
  "protected theorem is_cycle.rotate {u v : V} {c : G.walk v v} (hc : c.is_cycle) (h : u ∈ c.support) :\n    (c.rotate h).is_cycle := by\n  refine' ⟨hc.to_circuit.rotate _, _⟩\n  rw [List.IsRotated.nodup_iff (support_rotate _ _)]\n  exact hc.support_nodup\n#align is_cycle.rotate is_cycle.rotate\n\n",
  "rfl":
- "protected theorem reachable.rfl {u : V} : G.reachable u u :=\n  reachable.refl _\n#align reachable.rfl reachable.rfl\n\n",
+ "protected theorem reachable.rfl {u : V} : G.reachable u u :=\n  Reachable.refl _\n#align reachable.rfl reachable.rfl\n\n",
  "reverse_transfer":
  "@[simp]\ntheorem reverse_transfer :\n    (p.transfer H hp).reverse =\n      p.reverse.transfer H\n        (by\n          simp only [edges_reverse, List.mem_reverse']\n          exact hp) :=\n  by\n  induction p <;> simp only [*, transfer_append, transfer, reverse_nil, reverse_cons]\n  rfl\n#align reverse_transfer reverse_transfer\n\n",
  "reverse_singleton":
@@ -120,6 +128,8 @@
  "@[simp]\ntheorem reverse_copy {u v u' v'} (p : G.walk u v) (hu : u = u') (hv : v = v') :\n    (p.copy hu hv).reverse = p.reverse.copy hv hu := by\n  subst_vars\n  rfl\n#align reverse_copy reverse_copy\n\n",
  "reverse_cons":
  "@[simp]\ntheorem reverse_cons {u v w : V} (h : G.adj u v) (p : G.walk v w) :\n    (cons h p).reverse = p.reverse.append (cons (G.symm h) nil) := by simp [reverse]\n#align reverse_cons reverse_cons\n\n",
+ "reverse_concat":
+ "@[simp]\ntheorem reverse_concat {u v w : V} (p : G.walk u v) (h : G.adj v w) :\n    (p.concat h).reverse = cons (G.symm h) p.reverse := by simp [concat_eq_append]\n#align reverse_concat reverse_concat\n\n",
  "reverse_aux_eq_reverse_append":
  "protected theorem reverse_aux_eq_reverse_append {u v w : V} (p : G.walk u v) (q : G.walk u w) :\n    p.reverse_aux q = p.reverse.append q := by simp [reverse]\n#align reverse_aux_eq_reverse_append reverse_aux_eq_reverse_append\n\n",
  "reverse_aux_append":
@@ -131,21 +141,23 @@
  "refl":
  "@[refl]\nprotected theorem reachable.refl (u : V) : G.reachable u u :=\n  by\n  fconstructor\n  rfl\n#align reachable.refl reachable.refl\n\n",
  "reachable_is_equivalence":
- "theorem reachable_is_equivalence : equivalence G.reachable :=\n  Equivalence.mk _ (@reachable.refl _ G) (@reachable.symm _ G) (@reachable.trans _ G)\n#align reachable_is_equivalence reachable_is_equivalence\n\n",
+ "theorem reachable_is_equivalence : equivalence G.reachable :=\n  Equivalence.mk _ (@Reachable.refl _ G) (@Reachable.symm _ G) (@Reachable.trans _ G)\n#align reachable_is_equivalence reachable_is_equivalence\n\n",
  "reachable_iff_refl_trans_gen":
- "theorem reachable_iff_refl_trans_gen (u v : V) : G.reachable u v ↔ relation.refl_trans_gen G.adj u v :=\n  by\n  constructor\n  · rintro ⟨h⟩\n    induction h\n    · rfl\n    · exact (relation.refl_trans_gen.single h_h).trans h_ih\n  · intro h\n    induction' h with _ _ _ ha hr\n    · rfl\n    · exact reachable.trans hr ⟨walk.cons ha walk.nil⟩\n#align reachable_iff_refl_trans_gen reachable_iff_refl_trans_gen\n\n",
+ "theorem reachable_iff_refl_trans_gen (u v : V) : G.reachable u v ↔ Relation.ReflTransGen G.adj u v :=\n  by\n  constructor\n  · rintro ⟨h⟩\n    induction h\n    · rfl\n    · exact (Relation.ReflTransGen.single h_h).trans h_ih\n  · intro h\n    induction' h with _ _ _ ha hr\n    · rfl\n    · exact reachable.trans hr ⟨walk.cons ha walk.nil⟩\n#align reachable_iff_refl_trans_gen reachable_iff_refl_trans_gen\n\n",
  "reachable_iff_nonempty_univ":
- "theorem reachable_iff_nonempty_univ {u v : V} : G.reachable u v ↔ (Set.univ : set (G.walk u v)).nonempty :=\n  Set.nonempty_iff_univ_nonempty\n#align reachable_iff_nonempty_univ reachable_iff_nonempty_univ\n\n",
+ "theorem reachable_iff_nonempty_univ {u v : V} : G.reachable u v ↔ (Set.univ : Set (G.walk u v)).nonempty :=\n  Set.nonempty_iff_univ_nonempty\n#align reachable_iff_nonempty_univ reachable_iff_nonempty_univ\n\n",
  "reachable_iff_exists_finset_walk_length_nonempty":
- "theorem reachable_iff_exists_finset_walk_length_nonempty (u v : V) :\n    G.reachable u v ↔ ∃ n : fin (fintype.card V), (G.finset_walk_length n u v).nonempty :=\n  by\n  constructor\n  · intro r\n    refine' r.elim_path fun p => _\n    refine' ⟨⟨_, p.is_path.length_lt⟩, p, _⟩\n    simp [walk.mem_finset_walk_length_iff_length_eq]\n  · rintro ⟨_, p, _⟩\n    use p\n#align reachable_iff_exists_finset_walk_length_nonempty reachable_iff_exists_finset_walk_length_nonempty\n\n",
+ "theorem reachable_iff_exists_finset_walk_length_nonempty (u v : V) :\n    G.reachable u v ↔ ∃ n : Fin (Fintype.card V), (G.finset_walk_length n u v).nonempty :=\n  by\n  constructor\n  · intro r\n    refine' r.elim_path fun p => _\n    refine' ⟨⟨_, p.is_path.length_lt⟩, p, _⟩\n    simp [walk.mem_finset_walk_length_iff_length_eq]\n  · rintro ⟨_, p, _⟩\n    use p\n#align reachable_iff_exists_finset_walk_length_nonempty reachable_iff_exists_finset_walk_length_nonempty\n\n",
+ "reachable_iff":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃g » -/\ntheorem iso.reachable_iff {G : SimpleGraph V} {G' : SimpleGraph V'} {φ : «expr ≃g » G G'} {u v : V} :\n    G'.reachable (φ u) (φ v) ↔ G.reachable u v :=\n  ⟨fun r => φ.left_inv u ▸ φ.left_inv v ▸ r.map φ.symm.to_hom, Reachable.map φ.to_hom⟩\n#align iso.reachable_iff iso.reachable_iff\n\n",
  "reachable_delete_edges_iff_exists_walk":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⟦ ⟧» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⟦ ⟧» -/\ntheorem reachable_delete_edges_iff_exists_walk {v w : V} :\n    (G \\ from_edge_set {«expr⟦ ⟧» (v, w)}).reachable v w ↔ ∃ p : G.walk v w, ¬«expr⟦ ⟧» (v, w) ∈ p.edges :=\n  by\n  constructor\n  · rintro ⟨p⟩\n    use p.map (hom.map_spanning_subgraphs (by simp))\n    simp_rw [walk.edges_map, List.mem_map', hom.map_spanning_subgraphs_apply, sym2.map_id', id.def]\n    rintro ⟨e, h, rfl⟩\n    simpa using p.edges_subset_edge_set h\n  · rintro ⟨p, h⟩\n    refine' ⟨p.transfer _ fun e ep => _⟩\n    simp only [edge_set_sdiff, edge_set_from_edge_set, edge_set_sdiff_sdiff_is_diag, Set.mem_diff,\n      Set.mem_singleton_iff]\n    exact ⟨p.edges_subset_edge_set ep, fun h' => h (h' ▸ ep)⟩\n#align reachable_delete_edges_iff_exists_walk reachable_delete_edges_iff_exists_walk\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⟦ ⟧» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⟦ ⟧» -/\ntheorem reachable_delete_edges_iff_exists_walk {v w : V} :\n    (G \\ fromEdgeSet {«expr⟦ ⟧» (v, w)}).reachable v w ↔ ∃ p : G.walk v w, ¬«expr⟦ ⟧» (v, w) ∈ p.edges :=\n  by\n  constructor\n  · rintro ⟨p⟩\n    use p.map (hom.map_spanning_subgraphs (by simp))\n    simp_rw [walk.edges_map, List.mem_map, hom.map_spanning_subgraphs_apply, Sym2.map_id', id.def]\n    rintro ⟨e, h, rfl⟩\n    simpa using p.edges_subset_edge_set h\n  · rintro ⟨p, h⟩\n    refine' ⟨p.transfer _ fun e ep => _⟩\n    simp only [edge_set_sdiff, edge_set_from_edge_set, edge_set_sdiff_sdiff_is_diag, Set.mem_diff,\n      Set.mem_singleton_iff]\n    exact ⟨p.edges_subset_edge_set ep, fun h' => h (h' ▸ ep)⟩\n#align reachable_delete_edges_iff_exists_walk reachable_delete_edges_iff_exists_walk\n\n",
  "reachable_comm":
- "theorem reachable_comm {u v : V} : G.reachable u v ↔ G.reachable v u :=\n  ⟨reachable.symm, reachable.symm⟩\n#align reachable_comm reachable_comm\n\n",
+ "theorem reachable_comm {u v : V} : G.reachable u v ↔ G.reachable v u :=\n  ⟨Reachable.symm, Reachable.symm⟩\n#align reachable_comm reachable_comm\n\n",
  "reachable":
  "protected theorem adj.reachable {u v : V} (h : G.adj u v) : G.reachable u v :=\n  h.to_walk.reachable\n#align adj.reachable adj.reachable\n\n",
  "preconnected_iff":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃g » -/\ntheorem iso.preconnected_iff {G : simple_graph V} {H : simple_graph V'} (e : «expr ≃g » G H) :\n    G.preconnected ↔ H.preconnected :=\n  ⟨preconnected.map e.to_hom e.to_equiv.surjective, preconnected.map e.symm.to_hom e.symm.to_equiv.surjective⟩\n#align iso.preconnected_iff iso.preconnected_iff\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃g » -/\ntheorem iso.preconnected_iff {G : SimpleGraph V} {H : SimpleGraph V'} (e : «expr ≃g » G H) :\n    G.preconnected ↔ H.preconnected :=\n  ⟨Preconnected.map e.to_hom e.to_equiv.surjective, Preconnected.map e.symm.to_hom e.symm.to_equiv.surjective⟩\n#align iso.preconnected_iff iso.preconnected_iff\n\n",
  "of_map":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →g » -/\nprotected theorem is_path.of_map {f : «expr →g » G G'} (hp : (p.map f).is_path) : p.is_path :=\n  by\n  induction' p with w u v w huv hvw ih\n  · simp\n  · rw [map_cons, walk.cons_is_path_iff, support_map] at hp\n    rw [walk.cons_is_path_iff]\n    cases' hp with hp1 hp2\n    refine' ⟨ih hp1, _⟩\n    contrapose! hp2\n    exact List.mem_map_of_mem f hp2\n#align is_path.of_map is_path.of_map\n\n",
  "of_cons":
@@ -157,9 +169,9 @@
  "not_of_nil":
  "@[simp]\ntheorem is_cycle.not_of_nil {u : V} : ¬(nil : G.walk u u).is_cycle := fun h => h.ne_nil rfl\n#align is_cycle.not_of_nil is_cycle.not_of_nil\n\n",
  "not_mem_edges_of_loop":
- "theorem not_mem_edges_of_loop {v : V} {e : sym2 V} {p : G.path v v} : ¬e ∈ (p : G.walk v v).edges := by simp [p.loop_eq]\n#align not_mem_edges_of_loop not_mem_edges_of_loop\n\n",
+ "theorem not_mem_edges_of_loop {v : V} {e : Sym2 V} {p : G.path v v} : ¬e ∈ (p : G.walk v v).edges := by simp [p.loop_eq]\n#align not_mem_edges_of_loop not_mem_edges_of_loop\n\n",
  "nodup_support":
- "@[simp]\ntheorem nodup_support {u v : V} (p : G.path u v) : (p : G.walk u v).support.nodup :=\n  (walk.is_path_def _).mp p.property\n#align nodup_support nodup_support\n\n",
+ "@[simp]\ntheorem nodup_support {u v : V} (p : G.path u v) : (p : G.walk u v).support.nodup :=\n  (Walk.isPath_def _).mp p.property\n#align nodup_support nodup_support\n\n",
  "nil_append":
  "@[simp]\ntheorem nil_append {u v : V} (p : G.walk u v) : nil.append p = p :=\n  rfl\n#align nil_append nil_append\n\n",
  "nil":
@@ -167,7 +179,7 @@
  "mk_mem_edges_singleton":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⟦ ⟧» -/\ntheorem mk_mem_edges_singleton {u v : V} (h : G.adj u v) : «expr⟦ ⟧» (u, v) ∈ (singleton h : G.walk u v).edges := by\n  simp [singleton]\n#align mk_mem_edges_singleton mk_mem_edges_singleton\n\n",
  "mk'":
- "theorem is_path.mk' {u v : V} {p : G.walk u v} (h : p.support.nodup) : is_path p :=\n  ⟨⟨edges_nodup_of_support_nodup h⟩, h⟩\n#align is_path.mk' is_path.mk'\n\n",
+ "theorem is_path.mk' {u v : V} {p : G.walk u v} (h : p.support.nodup) : IsPath p :=\n  ⟨⟨edges_nodup_of_support_nodup h⟩, h⟩\n#align is_path.mk' is_path.mk'\n\n",
  "mem_verts_to_subgraph":
  "theorem mem_verts_to_subgraph (p : G.walk u v) : w ∈ p.to_subgraph.verts ↔ w ∈ p.support :=\n  by\n  induction' p with _ x y z h p' ih\n  · simp\n  · have : w = y ∨ w ∈ p'.support ↔ w ∈ p'.support :=\n      ⟨by rintro (rfl | h) <;> simp [*], by simp (config := { contextual := true })⟩\n    simp [ih, or_assoc', this]\n#align mem_verts_to_subgraph mem_verts_to_subgraph\n\n",
  "mem_tail_support_append_iff":
@@ -175,45 +187,49 @@
  "mem_support_nil_iff":
  "theorem mem_support_nil_iff {u v : V} : u ∈ (nil : G.walk v v).support ↔ u = v := by simp\n#align mem_support_nil_iff mem_support_nil_iff\n\n",
  "mem_support_iff_exists_append":
- "theorem mem_support_iff_exists_append {V : Type u} {G : simple_graph V} {u v w : V} {p : G.walk u v} :\n    w ∈ p.support ↔ ∃ (q : G.walk u w)(r : G.walk w v), p = q.append r := by\n  classical\n    constructor\n    · exact fun h => ⟨_, _, (p.take_spec h).symm⟩\n    · rintro ⟨q, r, rfl⟩\n      simp only [mem_support_append_iff, end_mem_support, start_mem_support, or_self_iff]\n#align mem_support_iff_exists_append mem_support_iff_exists_append\n\n",
+ "theorem mem_support_iff_exists_append {V : Type u} {G : SimpleGraph V} {u v w : V} {p : G.walk u v} :\n    w ∈ p.support ↔ ∃ (q : G.walk u w)(r : G.walk w v), p = q.append r := by\n  classical\n    constructor\n    · exact fun h => ⟨_, _, (p.take_spec h).symm⟩\n    · rintro ⟨q, r, rfl⟩\n      simp only [mem_support_append_iff, end_mem_support, start_mem_support, or_self_iff]\n#align mem_support_iff_exists_append mem_support_iff_exists_append\n\n",
  "mem_support_iff":
  "theorem mem_support_iff {u v w : V} (p : G.walk u v) : w ∈ p.support ↔ w = u ∨ w ∈ p.support.tail := by cases p <;> simp\n#align mem_support_iff mem_support_iff\n\n",
  "mem_support_append_iff":
  "@[simp]\ntheorem mem_support_append_iff {t u v w : V} (p : G.walk u v) (p' : G.walk v w) :\n    t ∈ (p.append p').support ↔ t ∈ p.support ∨ t ∈ p'.support :=\n  by\n  simp only [mem_support_iff, mem_tail_support_append_iff]\n  by_cases h : t = v <;> by_cases h' : t = u <;> subst_vars <;> try have := ne.symm h' <;> simp [*]\n#align mem_support_append_iff mem_support_append_iff\n\n",
+ "mem_supp_iff":
+ "@[simp]\ntheorem mem_supp_iff (C : G.connected_component) (v : V) : v ∈ C.supp ↔ G.connected_component_mk v = C :=\n  iff.rfl\n#align mem_supp_iff mem_supp_iff\n\n",
  "mem_finset_walk_length_iff_length_eq":
  "theorem walk.mem_finset_walk_length_iff_length_eq {n : ℕ} {u v : V} (p : G.walk u v) :\n    p ∈ G.finset_walk_length n u v ↔ p.length = n :=\n  Set.ext_iff.mp (G.coe_finset_walk_length_eq n u v) p\n#align walk.mem_finset_walk_length_iff_length_eq walk.mem_finset_walk_length_iff_length_eq\n\n",
  "mem_edges_to_subgraph":
- "theorem mem_edges_to_subgraph (p : G.walk u v) {e : sym2 V} : e ∈ p.to_subgraph.edge_set ↔ e ∈ p.edges := by\n  induction p <;> simp [*]\n#align mem_edges_to_subgraph mem_edges_to_subgraph\n\n",
+ "theorem mem_edges_to_subgraph (p : G.walk u v) {e : Sym2 V} : e ∈ p.to_subgraph.edge_set ↔ e ∈ p.edges := by\n  induction p <;> simp [*]\n#align mem_edges_to_subgraph mem_edges_to_subgraph\n\n",
  "mem_darts_reverse":
  "theorem mem_darts_reverse {u v : V} {d : G.dart} {p : G.walk u v} : d ∈ p.reverse.darts ↔ d.symm ∈ p.darts := by simp\n#align mem_darts_reverse mem_darts_reverse\n\n",
  "map_to_delete_edges_eq":
- "@[simp]\ntheorem map_to_delete_edges_eq (s : set (sym2 V)) {v w : V} {p : G.walk v w} (hp) :\n    walk.map (hom.map_spanning_subgraphs (G.delete_edges_le s)) (p.to_delete_edges s hp) = p := by\n  rw [← transfer_eq_map_of_le, transfer_transfer, transfer_self]\n#align map_to_delete_edges_eq map_to_delete_edges_eq\n\n",
+ "@[simp]\ntheorem map_to_delete_edges_eq (s : Set (Sym2 V)) {v w : V} {p : G.walk v w} (hp) :\n    Walk.map (Hom.mapSpanningSubgraphs (G.delete_edges_le s)) (p.to_delete_edges s hp) = p := by\n  rw [← transfer_eq_map_of_le, transfer_transfer, transfer_self]\n#align map_to_delete_edges_eq map_to_delete_edges_eq\n\n",
  "map_snd_darts":
  "theorem map_snd_darts {u v : V} (p : G.walk u v) : p.darts.map dart.snd = p.support.tail := by\n  simpa using congr_arg list.tail (cons_map_snd_darts p)\n#align map_snd_darts map_snd_darts\n\n",
  "map_nil":
  "@[simp]\ntheorem map_nil : (nil : G.walk u u).map f = nil :=\n  rfl\n#align map_nil map_nil\n\n",
+ "map_mk":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →g » -/\n@[simp]\ntheorem map_mk (φ : «expr →g » G G') (v : V) : (G.connected_component_mk v).map φ = G'.connected_component_mk (φ v) :=\n  rfl\n#align map_mk map_mk\n\n",
  "map_map":
  "@[simp]\ntheorem map_map : (p.map f).map f' = p.map (f'.comp f) := by induction p <;> simp [*]\n#align map_map map_map\n\n",
  "map_le_is_trail":
- "@[simp]\ntheorem map_le_is_trail {G G' : simple_graph V} (h : G ≤ G') {u v : V} {p : G.walk u v} :\n    (p.map_le h).is_trail ↔ p.is_trail :=\n  map_is_trail_iff_of_injective function.injective_id\n#align map_le_is_trail map_le_is_trail\n\n",
+ "@[simp]\ntheorem map_le_is_trail {G G' : SimpleGraph V} (h : G ≤ G') {u v : V} {p : G.walk u v} :\n    (p.map_le h).is_trail ↔ p.is_trail :=\n  map_isTrail_iff_of_injective function.injective_id\n#align map_le_is_trail map_le_is_trail\n\n",
  "map_le_is_path":
- "@[simp]\ntheorem map_le_is_path {G G' : simple_graph V} (h : G ≤ G') {u v : V} {p : G.walk u v} :\n    (p.map_le h).is_path ↔ p.is_path :=\n  map_is_path_iff_of_injective function.injective_id\n#align map_le_is_path map_le_is_path\n\n",
+ "@[simp]\ntheorem map_le_is_path {G G' : SimpleGraph V} (h : G ≤ G') {u v : V} {p : G.walk u v} :\n    (p.map_le h).is_path ↔ p.is_path :=\n  map_isPath_iff_of_injective function.injective_id\n#align map_le_is_path map_le_is_path\n\n",
  "map_le_is_cycle":
- "@[simp]\ntheorem map_le_is_cycle {G G' : simple_graph V} (h : G ≤ G') {u : V} {p : G.walk u u} :\n    (p.map_le h).is_cycle ↔ p.is_cycle :=\n  map_is_cycle_iff_of_injective function.injective_id\n#align map_le_is_cycle map_le_is_cycle\n\n",
+ "@[simp]\ntheorem map_le_is_cycle {G G' : SimpleGraph V} (h : G ≤ G') {u : V} {p : G.walk u u} :\n    (p.map_le h).is_cycle ↔ p.is_cycle :=\n  map_isCycle_iff_of_injective function.injective_id\n#align map_le_is_cycle map_le_is_cycle\n\n",
  "map_is_trail_iff_of_injective":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⟦ ⟧» -/\ntheorem map_is_trail_iff_of_injective (hinj : function.injective f) : (p.map f).is_trail ↔ p.is_trail :=\n  by\n  induction' p with w u v w huv hvw ih\n  · simp\n  · rw [map_cons, cons_is_trail_iff, cons_is_trail_iff, edges_map]\n    change _ ∧ sym2.map f («expr⟦ ⟧» (u, v)) ∉ _ ↔ _\n    rw [List.mem_map_of_injective (sym2.map.injective hinj)]\n    exact and_congr_left' ih\n#align map_is_trail_iff_of_injective map_is_trail_iff_of_injective\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⟦ ⟧» -/\ntheorem map_is_trail_iff_of_injective (hinj : function.injective f) : (p.map f).is_trail ↔ p.is_trail :=\n  by\n  induction' p with w u v w huv hvw ih\n  · simp\n  · rw [map_cons, cons_is_trail_iff, cons_is_trail_iff, edges_map]\n    change _ ∧ Sym2.map f («expr⟦ ⟧» (u, v)) ∉ _ ↔ _\n    rw [List.mem_map_of_injective (Sym2.map.injective hinj)]\n    exact and_congr_left' ih\n#align map_is_trail_iff_of_injective map_is_trail_iff_of_injective\n\n",
  "map_is_path_of_injective":
  "theorem map_is_path_of_injective (hinj : function.injective f) (hp : p.is_path) : (p.map f).is_path :=\n  by\n  induction' p with w u v w huv hvw ih\n  · simp\n  · rw [walk.cons_is_path_iff] at hp\n    simp [ih hp.1]\n    intro x hx hf\n    cases hinj hf\n    exact hp.2 hx\n#align map_is_path_of_injective map_is_path_of_injective\n\n",
  "map_is_path_iff_of_injective":
- "theorem map_is_path_iff_of_injective (hinj : function.injective f) : (p.map f).is_path ↔ p.is_path :=\n  ⟨is_path.of_map, map_is_path_of_injective hinj⟩\n#align map_is_path_iff_of_injective map_is_path_iff_of_injective\n\n",
+ "theorem map_is_path_iff_of_injective (hinj : function.injective f) : (p.map f).is_path ↔ p.is_path :=\n  ⟨IsPath.of_map, map_isPath_of_injective hinj⟩\n#align map_is_path_iff_of_injective map_is_path_iff_of_injective\n\n",
  "map_is_cycle_iff_of_injective":
  "theorem map_is_cycle_iff_of_injective {p : G.walk u u} (hinj : function.injective f) :\n    (p.map f).is_cycle ↔ p.is_cycle := by\n  rw [is_cycle_def, is_cycle_def, map_is_trail_iff_of_injective hinj, ne.def, map_eq_nil_iff, support_map, ←\n    List.map_tail, List.nodup_map_iff hinj]\n#align map_is_cycle_iff_of_injective map_is_cycle_iff_of_injective\n\n",
  "map_injective_of_injective":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →g » -/\ntheorem map_injective_of_injective {f : «expr →g » G G'} (hinj : function.injective f) (u v : V) :\n    function.injective (walk.map f : G.walk u v → G'.walk (f u) (f v)) :=\n  by\n  intro p p' h\n  induction' p with _ _ _ _ _ _ ih generalizing p'\n  · cases p'\n    · rfl\n    simpa using h\n  · induction p'\n    · simpa using h\n    · simp only [map_cons] at h\n      cases hinj h.1\n      simp only [eq_self_iff_true, heq_iff_eq, true_and_iff]\n      apply ih\n      simpa using h.2\n#align map_injective_of_injective map_injective_of_injective\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →g » -/\ntheorem map_injective_of_injective {f : «expr →g » G G'} (hinj : function.injective f) (u v : V) :\n    function.injective (Walk.map f : G.walk u v → G'.walk (f u) (f v)) :=\n  by\n  intro p p' h\n  induction' p with _ _ _ _ _ _ ih generalizing p'\n  · cases p'\n    · rfl\n    simpa using h\n  · induction p'\n    · simpa using h\n    · simp only [map_cons] at h\n      cases hinj h.1\n      simp only [eq_self_iff_true, heq_iff_eq, true_and_iff]\n      apply ih\n      simpa using h.2\n#align map_injective_of_injective map_injective_of_injective\n\n",
  "map_injective":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →g » -/\ntheorem map_injective {f : «expr →g » G G'} (hinj : function.injective f) (u v : V) :\n    function.injective (path.map f hinj : G.path u v → G'.path (f u) (f v)) :=\n  by\n  rintro ⟨p, hp⟩ ⟨p', hp'⟩ h\n  simp only [path.map, subtype.coe_mk] at h\n  simp [walk.map_injective_of_injective hinj u v h]\n#align map_injective map_injective\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →g » -/\ntheorem map_injective {f : «expr →g » G G'} (hinj : function.injective f) (u v : V) :\n    function.injective (Path.map f hinj : G.path u v → G'.path (f u) (f v)) :=\n  by\n  rintro ⟨p, hp⟩ ⟨p', hp'⟩ h\n  simp only [Path.map, Subtype.coe_mk] at h\n  simp [walk.map_injective_of_injective hinj u v h]\n#align map_injective map_injective\n\n",
  "map_id":
- "@[simp]\ntheorem map_id (p : G.walk u v) : p.map hom.id = p := by induction p <;> simp [*]\n#align map_id map_id\n\n",
+ "@[simp]\ntheorem map_id (C : ConnectedComponent G) : C.map Hom.id = C :=\n  by\n  refine' C.ind _\n  exact fun _ => rfl\n#align map_id map_id\n\n",
  "map_fst_darts_append":
  "theorem map_fst_darts_append {u v : V} (p : G.walk u v) : p.darts.map dart.fst ++ [v] = p.support := by\n  induction p <;> simp! [*]\n#align map_fst_darts_append map_fst_darts_append\n\n",
  "map_fst_darts":
@@ -223,19 +239,21 @@
  "map_eq_nil_iff":
  "@[simp]\ntheorem map_eq_nil_iff {p : G.walk u u} : p.map f = nil ↔ p = nil := by cases p <;> simp\n#align map_eq_nil_iff map_eq_nil_iff\n\n",
  "map_embedding_injective":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ↪g » -/\ntheorem map_embedding_injective (f : «expr ↪g » G G') (u v : V) :\n    function.injective (path.map_embedding f : G.path u v → G'.path (f u) (f v)) :=\n  map_injective f.injective u v\n#align map_embedding_injective map_embedding_injective\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ↪g » -/\ntheorem map_embedding_injective (f : «expr ↪g » G G') (u v : V) :\n    function.injective (Path.mapEmbedding f : G.path u v → G'.path (f u) (f v)) :=\n  map_injective f.injective u v\n#align map_embedding_injective map_embedding_injective\n\n",
  "map_copy":
  "@[simp]\ntheorem map_copy (hu : u = u') (hv : v = v') : (p.copy hu hv).map f = (p.map f).copy (by rw [hu]) (by rw [hv]) :=\n  by\n  subst_vars\n  rfl\n#align map_copy map_copy\n\n",
  "map_cons":
  "@[simp]\ntheorem map_cons {w : V} (h : G.adj w u) : (cons h p).map f = cons (f.map_adj h) (p.map f) :=\n  rfl\n#align map_cons map_cons\n\n",
+ "map_comp":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →g » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →g » -/\n@[simp]\ntheorem map_comp (C : G.connected_component) (φ : «expr →g » G G') (ψ : «expr →g » G' G'') :\n    (C.map φ).map ψ = C.map (ψ.comp φ) := by\n  refine' C.ind _\n  exact fun _ => rfl\n#align map_comp map_comp\n\n",
  "map_append":
  "theorem map_append {u v w : V} (p : G.walk u v) (q : G.walk v w) : (p.append q).map f = (p.map f).append (q.map f) := by\n  induction p <;> simp [*]\n#align map_append map_append\n\n",
  "map":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →g » -/\ntheorem connected.map {G : simple_graph V} {H : simple_graph V'} (f : «expr →g » G H) (hf : surjective f)\n    (hG : G.connected) : H.connected :=\n  haveI := hG.nonempty.map f\n  ⟨hG.preconnected.map f hf⟩\n#align connected.map connected.map\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →g » -/\ntheorem connected.map {G : SimpleGraph V} {H : SimpleGraph V'} (f : «expr →g » G H) (hf : surjective f)\n    (hG : G.connected) : H.connected :=\n  haveI := hG.nonempty.map f\n  ⟨hG.preconnected.map f hf⟩\n#align connected.map connected.map\n\n",
  "loop_eq":
- "theorem loop_eq {v : V} (p : G.path v v) : p = path.nil :=\n  by\n  obtain ⟨_ | _, this⟩ := p\n  · rfl\n  · simpa\n#align loop_eq loop_eq\n\n",
+ "theorem loop_eq {v : V} (p : G.path v v) : p = Path.nil :=\n  by\n  obtain ⟨_ | _, this⟩ := p\n  · rfl\n  · simpa\n#align loop_eq loop_eq\n\n",
  "lift_mk":
- "@[simp]\nprotected theorem connected_component.lift_mk {β : Sort _} {f : V → β}\n    {h : ∀ (v w : V) (p : G.walk v w), p.is_path → f v = f w} {v : V} :\n    connected_component.lift f h (G.connected_component_mk v) = f v :=\n  rfl\n#align connected_component.lift_mk connected_component.lift_mk\n\n",
+ "@[simp]\nprotected theorem lift_mk {β : Sort _} {f : V → β} {h : ∀ (v w : V) (p : G.walk v w), p.is_path → f v = f w} {v : V} :\n    ConnectedComponent.lift f h (G.connected_component_mk v) = f v :=\n  rfl\n#align lift_mk lift_mk\n\n",
  "length_transfer":
  "@[simp]\ntheorem length_transfer : (p.transfer H hp).length = p.length := by induction p <;> simp [*]\n#align length_transfer length_transfer\n\n",
  "length_take_until_le":
@@ -251,7 +269,7 @@
  "length_map":
  "@[simp]\ntheorem length_map : (p.map f).length = p.length := by induction p <;> simp [*]\n#align length_map length_map\n\n",
  "length_lt":
- "theorem is_path.length_lt [fintype V] {u v : V} {p : G.walk u v} (hp : p.is_path) : p.length < fintype.card V :=\n  by\n  rw [Nat.lt_iff_add_one_le, ← length_support]\n  exact hp.support_nodup.length_le_card\n#align is_path.length_lt is_path.length_lt\n\n",
+ "theorem is_path.length_lt [Fintype V] {u v : V} {p : G.walk u v} (hp : p.is_path) : p.length < Fintype.card V :=\n  by\n  rw [Nat.lt_iff_add_one_le, ← length_support]\n  exact hp.support_nodup.length_le_card\n#align is_path.length_lt is_path.length_lt\n\n",
  "length_eq_zero_iff":
  "@[simp]\ntheorem length_eq_zero_iff {u : V} {p : G.walk u u} : p.length = 0 ↔ p = nil := by cases p <;> simp\n#align length_eq_zero_iff length_eq_zero_iff\n\n",
  "length_edges":
@@ -264,10 +282,16 @@
  "@[simp]\ntheorem length_copy {u v u' v'} (p : G.walk u v) (hu : u = u') (hv : v = v') : (p.copy hu hv).length = p.length :=\n  by\n  subst_vars\n  rfl\n#align length_copy length_copy\n\n",
  "length_cons":
  "@[simp]\ntheorem length_cons {u v w : V} (h : G.adj u v) (p : G.walk v w) : (cons h p).length = p.length + 1 :=\n  rfl\n#align length_cons length_cons\n\n",
+ "length_concat":
+ "@[simp]\ntheorem length_concat {u v w : V} (p : G.walk u v) (h : G.adj v w) : (p.concat h).length = p.length + 1 :=\n  length_append _ _\n#align length_concat length_concat\n\n",
  "length_bypass_le":
  "theorem length_bypass_le {u v : V} (p : G.walk u v) : p.bypass.length ≤ p.length :=\n  by\n  induction p\n  · rfl\n  · simp only [bypass]\n    split_ifs\n    · trans\n      apply length_drop_until_le\n      rw [length_cons]\n      exact le_add_right p_ih\n    · rw [length_cons, length_cons]\n      exact add_le_add_right p_ih 1\n#align length_bypass_le length_bypass_le\n\n",
  "length_append":
  "@[simp]\ntheorem length_append : ∀ {u v w : V} (p : G.walk u v) (q : G.walk v w), (p.append q).length = p.length + q.length\n  | _, _, _, nil, _ => by simp\n  | _, _, _, cons _ _, _ => by simp [length_append, add_left_comm, add_comm]\n#align length_append length_append\n\n",
+ "iso_inv_image_comp_eq_iff_eq_map":
+ "@[simp]\ntheorem iso_inv_image_comp_eq_iff_eq_map {C : G.connected_component} :\n    G.connected_component_mk (φ.symm v') = C ↔ G'.connected_component_mk v' = C.map φ :=\n  by\n  refine' C.ind fun u => _\n  simp only [iso.symm_apply_reachable, connected_component.eq, coe_coe, connected_component.map_mk,\n    rel_embedding.coe_coe_fn, rel_iso.coe_coe_fn]\n#align iso_inv_image_comp_eq_iff_eq_map iso_inv_image_comp_eq_iff_eq_map\n\n",
+ "iso_image_comp_eq_map_iff_eq_comp":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ↪g » -/\n@[simp]\ntheorem iso_image_comp_eq_map_iff_eq_comp {C : G.connected_component} :\n    G'.connected_component_mk (φ v) = C.map ↑(↑φ : «expr ↪g » G G') ↔ G.connected_component_mk v = C :=\n  by\n  refine' C.ind fun u => _\n  simp only [iso.reachable_iff, connected_component.map_mk, rel_embedding.coe_coe_fn, rel_iso.coe_coe_fn,\n    connected_component.eq]\n#align iso_image_comp_eq_map_iff_eq_comp iso_image_comp_eq_map_iff_eq_comp\n\n",
  "is_trail_def":
  "theorem is_trail_def {u v : V} (p : G.walk u v) : p.is_trail ↔ p.edges.nodup :=\n  ⟨is_trail.edges_nodup, fun h => ⟨h⟩⟩\n#align is_trail_def is_trail_def\n\n",
  "is_trail_copy":
@@ -279,55 +303,59 @@
  "is_path_iff_eq_nil":
  "@[simp]\ntheorem is_path_iff_eq_nil {u : V} (p : G.walk u u) : p.is_path ↔ p = nil := by cases p <;> simp [is_path.nil]\n#align is_path_iff_eq_nil is_path_iff_eq_nil\n\n",
  "is_path_def":
- "theorem is_path_def {u v : V} (p : G.walk u v) : p.is_path ↔ p.support.nodup :=\n  ⟨is_path.support_nodup, is_path.mk'⟩\n#align is_path_def is_path_def\n\n",
+ "theorem is_path_def {u v : V} (p : G.walk u v) : p.is_path ↔ p.support.nodup :=\n  ⟨is_path.support_nodup, IsPath.mk'⟩\n#align is_path_def is_path_def\n\n",
  "is_path_copy":
  "@[simp]\ntheorem is_path_copy {u v u' v'} (p : G.walk u v) (hu : u = u') (hv : v = v') : (p.copy hu hv).is_path ↔ p.is_path :=\n  by\n  subst_vars\n  rfl\n#align is_path_copy is_path_copy\n\n",
  "is_path":
  "@[simp]\nprotected theorem is_path {u v : V} (p : G.path u v) : (p : G.walk u v).is_path :=\n  p.property\n#align is_path is_path\n\n",
  "is_cycle_def":
- "theorem is_cycle_def {u : V} (p : G.walk u u) : p.is_cycle ↔ is_trail p ∧ p ≠ nil ∧ p.support.tail.nodup :=\n  iff.intro (fun h => ⟨h.1.1, h.1.2, h.2⟩) fun h => ⟨⟨h.1, h.2.1⟩, h.2.2⟩\n#align is_cycle_def is_cycle_def\n\n",
+ "theorem is_cycle_def {u : V} (p : G.walk u u) : p.is_cycle ↔ IsTrail p ∧ p ≠ nil ∧ p.support.tail.nodup :=\n  iff.intro (fun h => ⟨h.1.1, h.1.2, h.2⟩) fun h => ⟨⟨h.1, h.2.1⟩, h.2.2⟩\n#align is_cycle_def is_cycle_def\n\n",
  "is_cycle_copy":
  "@[simp]\ntheorem is_cycle_copy {u u'} (p : G.walk u u) (hu : u = u') : (p.copy hu hu).is_cycle ↔ p.is_cycle :=\n  by\n  subst_vars\n  rfl\n#align is_cycle_copy is_cycle_copy\n\n",
  "is_circuit_def":
- "theorem is_circuit_def {u : V} (p : G.walk u u) : p.is_circuit ↔ is_trail p ∧ p ≠ nil :=\n  iff.intro (fun h => ⟨h.1, h.2⟩) fun h => ⟨h.1, h.2⟩\n#align is_circuit_def is_circuit_def\n\n",
+ "theorem is_circuit_def {u : V} (p : G.walk u u) : p.is_circuit ↔ IsTrail p ∧ p ≠ nil :=\n  iff.intro (fun h => ⟨h.1, h.2⟩) fun h => ⟨h.1, h.2⟩\n#align is_circuit_def is_circuit_def\n\n",
  "is_circuit_copy":
  "@[simp]\ntheorem is_circuit_copy {u u'} (p : G.walk u u) (hu : u = u') : (p.copy hu hu).is_circuit ↔ p.is_circuit :=\n  by\n  subst_vars\n  rfl\n#align is_circuit_copy is_circuit_copy\n\n",
  "is_bridge_iff_mem_and_forall_cycle_not_mem":
- "theorem is_bridge_iff_mem_and_forall_cycle_not_mem {e : sym2 V} :\n    G.is_bridge e ↔ e ∈ G.edge_set ∧ ∀ ⦃u : V⦄ (p : G.walk u u), p.is_cycle → e ∉ p.edges :=\n  sym2.ind (fun v w => is_bridge_iff_adj_and_forall_cycle_not_mem) e\n#align is_bridge_iff_mem_and_forall_cycle_not_mem is_bridge_iff_mem_and_forall_cycle_not_mem\n\n",
+ "theorem is_bridge_iff_mem_and_forall_cycle_not_mem {e : Sym2 V} :\n    G.is_bridge e ↔ e ∈ G.edge_set ∧ ∀ ⦃u : V⦄ (p : G.walk u u), p.is_cycle → e ∉ p.edges :=\n  Sym2.ind (fun v w => isBridge_iff_adj_and_forall_cycle_not_mem) e\n#align is_bridge_iff_mem_and_forall_cycle_not_mem is_bridge_iff_mem_and_forall_cycle_not_mem\n\n",
  "is_bridge_iff_adj_and_forall_walk_mem_edges":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⟦ ⟧» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⟦ ⟧» -/\ntheorem is_bridge_iff_adj_and_forall_walk_mem_edges {v w : V} :\n    G.is_bridge («expr⟦ ⟧» (v, w)) ↔ G.adj v w ∧ ∀ p : G.walk v w, «expr⟦ ⟧» (v, w) ∈ p.edges :=\n  by\n  rw [is_bridge_iff, and_congr_right']\n  rw [reachable_delete_edges_iff_exists_walk, not_exists_not]\n#align is_bridge_iff_adj_and_forall_walk_mem_edges is_bridge_iff_adj_and_forall_walk_mem_edges\n\n",
  "is_bridge_iff_adj_and_forall_cycle_not_mem":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⟦ ⟧» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⟦ ⟧» -/\ntheorem is_bridge_iff_adj_and_forall_cycle_not_mem {v w : V} :\n    G.is_bridge («expr⟦ ⟧» (v, w)) ↔ G.adj v w ∧ ∀ ⦃u : V⦄ (p : G.walk u u), p.is_cycle → «expr⟦ ⟧» (v, w) ∉ p.edges :=\n  by\n  rw [is_bridge_iff, and_congr_right_iff]\n  intro h\n  rw [← not_iff_not]\n  push_neg\n  rw [← adj_and_reachable_delete_edges_iff_exists_cycle]\n  simp only [h, true_and_iff]\n#align is_bridge_iff_adj_and_forall_cycle_not_mem is_bridge_iff_adj_and_forall_cycle_not_mem\n\n",
  "is_bridge_iff":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⟦ ⟧» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⟦ ⟧» -/\ntheorem is_bridge_iff {u v : V} :\n    G.is_bridge («expr⟦ ⟧» (u, v)) ↔ G.adj u v ∧ ¬(G \\ from_edge_set {«expr⟦ ⟧» (u, v)}).reachable u v :=\n  iff.rfl\n#align is_bridge_iff is_bridge_iff\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⟦ ⟧» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⟦ ⟧» -/\ntheorem is_bridge_iff {u v : V} :\n    G.is_bridge («expr⟦ ⟧» (u, v)) ↔ G.adj u v ∧ ¬(G \\ fromEdgeSet {«expr⟦ ⟧» (u, v)}).reachable u v :=\n  iff.rfl\n#align is_bridge_iff is_bridge_iff\n\n",
  "ind₂":
- "@[elab_as_elim]\nprotected theorem connected_component.ind₂ {β : G.connected_component → G.connected_component → Prop}\n    (h : ∀ v w : V, β (G.connected_component_mk v) (G.connected_component_mk w)) (c d : G.connected_component) :\n    β c d :=\n  quot.induction_on₂ c d h\n#align connected_component.ind₂ connected_component.ind₂\n\n",
+ "@[elab_as_elim]\nprotected theorem ind₂ {β : G.connected_component → G.connected_component → Prop}\n    (h : ∀ v w : V, β (G.connected_component_mk v) (G.connected_component_mk w)) (c d : G.connected_component) :\n    β c d :=\n  Quot.induction_on₂ c d h\n#align ind₂ ind₂\n\n",
  "ind":
- "@[elab_as_elim]\nprotected theorem connected_component.ind {β : G.connected_component → Prop}\n    (h : ∀ v : V, β (G.connected_component_mk v)) (c : G.connected_component) : β c :=\n  Quot.ind h c\n#align connected_component.ind connected_component.ind\n\n",
+ "@[elab_as_elim]\nprotected theorem ind {β : G.connected_component → Prop} (h : ∀ v : V, β (G.connected_component_mk v))\n    (c : G.connected_component) : β c :=\n  Quot.ind h c\n#align ind ind\n\n",
  "get_vert_zero":
  "@[simp]\ntheorem get_vert_zero {u v} (w : G.walk u v) : w.get_vert 0 = u := by cases w <;> rfl\n#align get_vert_zero get_vert_zero\n\n",
  "get_vert_of_length_le":
- "theorem get_vert_of_length_le {u v} (w : G.walk u v) {i : ℕ} (hi : w.length ≤ i) : w.get_vert i = v :=\n  by\n  induction' w with _ x y z hxy wyz IH generalizing i\n  · rfl\n  · cases i\n    · cases hi\n    · exact IH (nat.succ_le_succ_iff.1 hi)\n#align get_vert_of_length_le get_vert_of_length_le\n\n",
+ "theorem get_vert_of_length_le {u v} (w : G.walk u v) {i : ℕ} (hi : w.length ≤ i) : w.get_vert i = v :=\n  by\n  induction' w with _ x y z hxy wyz IH generalizing i\n  · rfl\n  · cases i\n    · cases hi\n    · exact IH (Nat.succ_le_succ_iff.1 hi)\n#align get_vert_of_length_le get_vert_of_length_le\n\n",
  "get_vert_length":
  "@[simp]\ntheorem get_vert_length {u v} (w : G.walk u v) : w.get_vert w.length = v :=\n  w.get_vert_of_length_le rfl.le\n#align get_vert_length get_vert_length\n\n",
  "fst_mem_support_of_mem_edges":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⟦ ⟧» -/\ntheorem fst_mem_support_of_mem_edges {t u v w : V} (p : G.walk v w) (he : «expr⟦ ⟧» (t, u) ∈ p.edges) : t ∈ p.support :=\n  by\n  obtain ⟨d, hd, he⟩ := list.mem_map.mp he\n  rw [dart_edge_eq_mk_iff'] at he\n  rcases he with (⟨rfl, rfl⟩ | ⟨rfl, rfl⟩)\n  · exact dart_fst_mem_support_of_mem_darts _ hd\n  · exact dart_snd_mem_support_of_mem_darts _ hd\n#align fst_mem_support_of_mem_edges fst_mem_support_of_mem_edges\n\n",
  "forall":
- "protected theorem connected_component.forall {p : G.connected_component → Prop} :\n    (∀ c : G.connected_component, p c) ↔ ∀ v, p (G.connected_component_mk v) :=\n  (surjective_quot_mk G.reachable).forall\n#align connected_component.forall connected_component.forall\n\n",
+ "protected theorem forall {p : G.connected_component → Prop} :\n    (∀ c : G.connected_component, p c) ↔ ∀ v, p (G.connected_component_mk v) :=\n  (surjective_quot_mk G.reachable).forall\n#align forall forall\n\n",
  "finite_neighbor_set_to_subgraph":
- "@[simp]\ntheorem finite_neighbor_set_to_subgraph (p : G.walk u v) : (p.to_subgraph.neighbor_set w).finite :=\n  by\n  induction p\n  · rw [walk.to_subgraph, neighbor_set_singleton_subgraph]\n    apply set.to_finite\n  · rw [walk.to_subgraph, subgraph.neighbor_set_sup]\n    refine' set.finite.union _ p_ih\n    refine' set.finite.subset _ (neighbor_set_subgraph_of_adj_subset p_h)\n    apply set.to_finite\n#align finite_neighbor_set_to_subgraph finite_neighbor_set_to_subgraph\n\n",
+ "@[simp]\ntheorem finite_neighbor_set_to_subgraph (p : G.walk u v) : (p.to_subgraph.neighbor_set w).finite :=\n  by\n  induction p\n  · rw [walk.to_subgraph, neighbor_set_singleton_subgraph]\n    apply Set.toFinite\n  · rw [walk.to_subgraph, subgraph.neighbor_set_sup]\n    refine' Set.Finite.union _ p_ih\n    refine' Set.Finite.subset _ (neighbor_set_subgraph_of_adj_subset p_h)\n    apply Set.toFinite\n#align finite_neighbor_set_to_subgraph finite_neighbor_set_to_subgraph\n\n",
  "exists_length_eq_zero_iff":
  "@[simp]\ntheorem exists_length_eq_zero_iff {u v : V} : (∃ p : G.walk u v, p.length = 0) ↔ u = v :=\n  by\n  constructor\n  · rintro ⟨p, hp⟩\n    exact eq_of_length_eq_zero hp\n  · rintro rfl\n    exact ⟨nil, rfl⟩\n#align exists_length_eq_zero_iff exists_length_eq_zero_iff\n\n",
  "exists_eq_cons_of_ne":
  "theorem exists_eq_cons_of_ne :\n    ∀ {u v : V} (hne : u ≠ v) (p : G.walk u v), ∃ (w : V)(h : G.adj u w)(p' : G.walk w v), p = cons h p'\n  | _, _, hne, nil => (hne rfl).elim\n  | _, _, _, cons h p' => ⟨_, h, p', rfl⟩\n#align exists_eq_cons_of_ne exists_eq_cons_of_ne\n\n",
+ "exists_cons_eq_concat":
+ "/-- A non-trivial `cons` walk is representable as a `concat` walk. -/\ntheorem exists_cons_eq_concat :\n    ∀ {u v w : V} (h : G.adj u v) (p : G.walk v w), ∃ (x : V)(q : G.walk u x)(h' : G.adj x w), cons h p = q.concat h'\n  | _, _, _, h, nil => ⟨_, nil, h, rfl⟩\n  | _, _, _, h, cons h' p => by\n    obtain ⟨y, q, h'', hc⟩ := exists_cons_eq_concat h' p\n    refine' ⟨y, cons h q, h'', _⟩\n    rw [concat_cons, hc]\n#align exists_cons_eq_concat exists_cons_eq_concat\n\n",
+ "exists_concat_eq_cons":
+ "/-- A non-trivial `concat` walk is representable as a `cons` walk. -/\ntheorem exists_concat_eq_cons :\n    ∀ {u v w : V} (p : G.walk u v) (h : G.adj v w), ∃ (x : V)(h' : G.adj u x)(q : G.walk x w), p.concat h = cons h' q\n  | _, _, _, nil, h => ⟨_, h, nil, rfl⟩\n  | _, _, _, cons h' p, h => ⟨_, h', Walk.concat p h, concat_cons _ _ _⟩\n#align exists_concat_eq_cons exists_concat_eq_cons\n\n",
+ "exists_boundary_dart":
+ "/-- Given a set `S` and a walk `w` from `u` to `v` such that `u ∈ S` but `v ∉ S`,\nthere exists a dart in the walk whose start is in `S` but whose end is not.\n-/\ntheorem exists_boundary_dart {u v : V} (p : G.walk u v) (S : Set V) (uS : u ∈ S) (vS : v ∉ S) :\n    ∃ d : G.dart, d ∈ p.darts ∧ d.fst ∈ S ∧ d.snd ∉ S :=\n  by\n  induction' p with _ x y w a p' ih\n  · exact absurd uS vS\n  · by_cases h : y ∈ S\n    · obtain ⟨d, hd, hcd⟩ := ih h vS\n      exact ⟨d, or.inr hd, hcd⟩\n    · exact ⟨⟨(x, y), a⟩, or.inl rfl, uS, h⟩\n#align exists_boundary_dart exists_boundary_dart\n\n",
  "exists":
- "protected theorem connected_component.exists {p : G.connected_component → Prop} :\n    (∃ c : G.connected_component, p c) ↔ ∃ v, p (G.connected_component_mk v) :=\n  (surjective_quot_mk G.reachable).exists\n#align connected_component.exists connected_component.exists\n\n",
+ "protected theorem exists {p : G.connected_component → Prop} :\n    (∃ c : G.connected_component, p c) ↔ ∃ v, p (G.connected_component_mk v) :=\n  (surjective_quot_mk G.reachable).exists\n#align exists exists\n\n",
  "exact":
- "protected theorem connected_component.exact {v w : V} :\n    G.connected_component_mk v = G.connected_component_mk w → G.reachable v w :=\n  @quotient.exact _ G.reachable_setoid _ _\n#align connected_component.exact connected_component.exact\n\n",
+ "protected theorem exact {v w : V} : G.connected_component_mk v = G.connected_component_mk w → G.reachable v w :=\n  @quotient.exact _ G.reachable_setoid _ _\n#align exact exact\n\n",
  "eq_of_length_eq_zero":
  "theorem eq_of_length_eq_zero : ∀ {u v : V} {p : G.walk u v}, p.length = 0 → u = v\n  | _, _, nil, _ => rfl\n#align eq_of_length_eq_zero eq_of_length_eq_zero\n\n",
- "eq":
- "@[simp]\nprotected theorem connected_component.eq {v w : V} :\n    G.connected_component_mk v = G.connected_component_mk w ↔ G.reachable v w :=\n  @quotient.eq _ G.reachable_setoid _ _\n#align connected_component.eq connected_component.eq\n\n",
  "end_mem_tail_support_of_ne":
  "@[simp]\ntheorem end_mem_tail_support_of_ne {u v : V} (h : u ≠ v) (p : G.walk u v) : v ∈ p.support.tail :=\n  by\n  obtain ⟨_, _, _, rfl⟩ := exists_eq_cons_of_ne h p\n  simp\n#align end_mem_tail_support_of_ne end_mem_tail_support_of_ne\n\n",
  "end_mem_support":
@@ -335,7 +363,7 @@
  "elim_path":
  "protected theorem reachable.elim_path {p : Prop} {u v : V} (h : G.reachable u v) (hp : G.path u v → p) : p := by\n  classical exact h.elim fun q => hp q.to_path\n#align reachable.elim_path reachable.elim_path\n\n",
  "elim":
- "protected theorem reachable.elim {p : Prop} {u v : V} (h : G.reachable u v) (hp : G.walk u v → p) : p :=\n  nonempty.elim h hp\n#align reachable.elim reachable.elim\n\n",
+ "protected theorem reachable.elim {p : Prop} {u v : V} (h : G.reachable u v) (hp : G.walk u v → p) : p :=\n  Nonempty.elim h hp\n#align reachable.elim reachable.elim\n\n",
  "edges_transfer":
  "@[simp]\ntheorem edges_transfer : (p.transfer H hp).edges = p.edges := by\n  induction p <;> simp only [*, transfer, edges_nil, edges_cons, eq_self_iff_true, and_self_iff]\n#align edges_transfer edges_transfer\n\n",
  "edges_to_path_subset":
@@ -343,7 +371,7 @@
  "edges_take_until_subset":
  "theorem edges_take_until_subset {u v w : V} (p : G.walk v w) (h : u ∈ p.support) : (p.take_until u h).edges ⊆ p.edges :=\n  List.map_subset _ (p.darts_take_until_subset h)\n#align edges_take_until_subset edges_take_until_subset\n\n",
  "edges_subset_edge_set":
- "/-- Every edge in a walk's edge list is an edge of the graph.\nIt is written in this form (rather than using `⊆`) to avoid unsightly coercions. -/\ntheorem edges_subset_edge_set : ∀ {u v : V} (p : G.walk u v) ⦃e : sym2 V⦄ (h : e ∈ p.edges), e ∈ G.edge_set\n  | _, _, cons h' p', e, h => by rcases h with ⟨rfl, h⟩ <;> solve_by_elim\n#align edges_subset_edge_set edges_subset_edge_set\n\n",
+ "/-- Every edge in a walk's edge list is an edge of the graph.\nIt is written in this form (rather than using `⊆`) to avoid unsightly coercions. -/\ntheorem edges_subset_edge_set : ∀ {u v : V} (p : G.walk u v) ⦃e : Sym2 V⦄ (h : e ∈ p.edges), e ∈ G.edge_set\n  | _, _, cons h' p', e, h => by rcases h with ⟨rfl, h⟩ <;> solve_by_elim\n#align edges_subset_edge_set edges_subset_edge_set\n\n",
  "edges_reverse":
  "@[simp]\ntheorem edges_reverse {u v : V} (p : G.walk u v) : p.reverse.edges = p.edges.reverse := by simp [edges]\n#align edges_reverse edges_reverse\n\n",
  "edges_nodup_of_support_nodup":
@@ -351,13 +379,15 @@
  "edges_nil":
  "@[simp]\ntheorem edges_nil {u : V} : (nil : G.walk u u).edges = [] :=\n  rfl\n#align edges_nil edges_nil\n\n",
  "edges_map":
- "@[simp]\ntheorem edges_map : (p.map f).edges = p.edges.map (sym2.map f) := by induction p <;> simp [*]\n#align edges_map edges_map\n\n",
+ "@[simp]\ntheorem edges_map : (p.map f).edges = p.edges.map (Sym2.map f) := by induction p <;> simp [*]\n#align edges_map edges_map\n\n",
  "edges_drop_until_subset":
  "theorem edges_drop_until_subset {u v w : V} (p : G.walk v w) (h : u ∈ p.support) : (p.drop_until u h).edges ⊆ p.edges :=\n  List.map_subset _ (p.darts_drop_until_subset h)\n#align edges_drop_until_subset edges_drop_until_subset\n\n",
  "edges_copy":
  "@[simp]\ntheorem edges_copy {u v u' v'} (p : G.walk u v) (hu : u = u') (hv : v = v') : (p.copy hu hv).edges = p.edges :=\n  by\n  subst_vars\n  rfl\n#align edges_copy edges_copy\n\n",
  "edges_cons":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:177:8: unsupported: ambiguous notation -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `sym.cons' -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⟦ ⟧» -/\n@[simp]\ntheorem edges_cons {u v w : V} (h : G.adj u v) (p : G.walk v w) :\n    (cons h p).edges = sym.cons' («expr⟦ ⟧» (u, v)) p.edges :=\n  rfl\n#align edges_cons edges_cons\n\n",
+ "edges_concat":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⟦ ⟧» -/\n@[simp]\ntheorem edges_concat {u v w : V} (p : G.walk u v) (h : G.adj v w) :\n    (p.concat h).edges = p.edges.concat («expr⟦ ⟧» (v, w)) := by simp [edges]\n#align edges_concat edges_concat\n\n",
  "edges_bypass_subset":
  "theorem edges_bypass_subset {u v : V} (p : G.walk u v) : p.bypass.edges ⊆ p.edges :=\n  List.map_subset _ p.darts_bypass_subset\n#align edges_bypass_subset edges_bypass_subset\n\n",
  "edges_append":
@@ -367,13 +397,13 @@
  "drop_until_copy":
  "@[simp]\ntheorem drop_until_copy {u v w v' w'} (p : G.walk v w) (hv : v = v') (hw : w = w') (h : u ∈ (p.copy hv hw).support) :\n    (p.copy hv hw).drop_until u h =\n      (p.drop_until u\n            (by\n              subst_vars\n              exact h)).copy\n        rfl hw :=\n  by\n  subst_vars\n  rfl\n#align drop_until_copy drop_until_copy\n\n",
  "drop_until":
- "protected theorem is_path.drop_until {u v w : V} (p : G.walk v w) (hc : p.is_path) (h : u ∈ p.support) :\n    (p.drop_until u h).is_path :=\n  is_path.of_append_right (by rwa [← take_spec _ h] at hc)\n#align is_path.drop_until is_path.drop_until\n\n",
+ "protected theorem is_path.drop_until {u v w : V} (p : G.walk v w) (hc : p.is_path) (h : u ∈ p.support) :\n    (p.drop_until u h).is_path :=\n  IsPath.of_append_right (by rwa [← take_spec _ h] at hc)\n#align is_path.drop_until is_path.drop_until\n\n",
  "darts_to_path_subset":
  "theorem darts_to_path_subset {u v : V} (p : G.walk u v) : (p.to_path : G.walk u v).darts ⊆ p.darts :=\n  darts_bypass_subset _\n#align darts_to_path_subset darts_to_path_subset\n\n",
  "darts_take_until_subset":
  "theorem darts_take_until_subset {u v w : V} (p : G.walk v w) (h : u ∈ p.support) : (p.take_until u h).darts ⊆ p.darts :=\n  fun x hx => by\n  rw [← take_spec p h, darts_append, list.mem_append]\n  exact or.inl hx\n#align darts_take_until_subset darts_take_until_subset\n\n",
  "darts_reverse":
- "@[simp]\ntheorem darts_reverse {u v : V} (p : G.walk u v) : p.reverse.darts = (p.darts.map dart.symm).reverse := by\n  induction p <;> simp [*, sym2.eq_swap]\n#align darts_reverse darts_reverse\n\n",
+ "@[simp]\ntheorem darts_reverse {u v : V} (p : G.walk u v) : p.reverse.darts = (p.darts.map Dart.symm).reverse := by\n  induction p <;> simp [*, Sym2.eq_swap]\n#align darts_reverse darts_reverse\n\n",
  "darts_nodup_of_support_nodup":
  "theorem darts_nodup_of_support_nodup {u v : V} {p : G.walk u v} (h : p.support.nodup) : p.darts.nodup :=\n  by\n  induction p\n  · simp\n  · simp only [darts_cons, support_cons, List.nodup_cons] at h⊢\n    refine' ⟨fun h' => h.1 (dart_fst_mem_support_of_mem_darts p_p h'), p_ih h.2⟩\n#align darts_nodup_of_support_nodup darts_nodup_of_support_nodup\n\n",
  "darts_nil":
@@ -386,6 +416,8 @@
  "@[simp]\ntheorem darts_copy {u v u' v'} (p : G.walk u v) (hu : u = u') (hv : v = v') : (p.copy hu hv).darts = p.darts :=\n  by\n  subst_vars\n  rfl\n#align darts_copy darts_copy\n\n",
  "darts_cons":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:177:8: unsupported: ambiguous notation -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `sym.cons' -/\n@[simp]\ntheorem darts_cons {u v w : V} (h : G.adj u v) (p : G.walk v w) : (cons h p).darts = sym.cons' ⟨(u, v), h⟩ p.darts :=\n  rfl\n#align darts_cons darts_cons\n\n",
+ "darts_concat":
+ "@[simp]\ntheorem darts_concat {u v w : V} (p : G.walk u v) (h : G.adj v w) : (p.concat h).darts = p.darts.concat ⟨(v, w), h⟩ :=\n  by induction p <;> simp [*, concat_nil]\n#align darts_concat darts_concat\n\n",
  "darts_bypass_subset":
  "theorem darts_bypass_subset {u v : V} (p : G.walk u v) : p.bypass.darts ⊆ p.darts :=\n  by\n  induction p\n  · simp!\n  · simp! only\n    split_ifs\n    · apply list.subset.trans (darts_drop_until_subset _ _)\n      apply list.subset_cons_of_subset _ p_ih\n    · rw [darts_cons]\n      exact list.cons_subset_cons _ p_ih\n#align darts_bypass_subset darts_bypass_subset\n\n",
  "darts_append":
@@ -397,13 +429,13 @@
  "count_support_take_until_eq_one":
  "@[simp]\ntheorem count_support_take_until_eq_one {u v w : V} (p : G.walk v w) (h : u ∈ p.support) :\n    (p.take_until u h).support.count u = 1 := by\n  induction p\n  · rw [mem_support_nil_iff] at h\n    subst u\n    simp!\n  · obtain rfl | h := h\n    · simp!\n    · simp! only\n      split_ifs with h' <;> rw [eq_comm] at h' <;> subst_vars <;> simp! [*, List.count_cons]\n#align count_support_take_until_eq_one count_support_take_until_eq_one\n\n",
  "count_support_eq_one":
- "theorem count_support_eq_one [decidable_eq V] {u v w : V} {p : G.path u v} (hw : w ∈ (p : G.walk u v).support) :\n    (p : G.walk u v).support.count w = 1 :=\n  List.count_eq_one_of_mem p.property.support_nodup hw\n#align count_support_eq_one count_support_eq_one\n\n",
+ "theorem count_support_eq_one [DecidableEq V] {u v w : V} {p : G.path u v} (hw : w ∈ (p : G.walk u v).support) :\n    (p : G.walk u v).support.count w = 1 :=\n  List.count_eq_one_of_mem p.property.support_nodup hw\n#align count_support_eq_one count_support_eq_one\n\n",
  "count_edges_take_until_le_one":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⟦ ⟧» -/\ntheorem count_edges_take_until_le_one {u v w : V} (p : G.walk v w) (h : u ∈ p.support) (x : V) :\n    (p.take_until u h).edges.count («expr⟦ ⟧» (u, x)) ≤ 1 :=\n  by\n  induction' p with u' u' v' w' ha p' ih\n  · rw [mem_support_nil_iff] at h\n    subst u\n    simp!\n  · obtain rfl | h := h\n    · simp!\n    · simp! only\n      split_ifs with h'\n      · subst h'\n        simp\n      · rw [edges_cons, List.count_cons]\n        split_ifs with h''\n        · rw [sym2.eq_iff] at h''\n          obtain ⟨rfl, rfl⟩ | ⟨rfl, rfl⟩ := h''\n          · exact (h' rfl).elim\n          · cases p' <;> simp!\n        · apply ih\n#align count_edges_take_until_le_one count_edges_take_until_le_one\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⟦ ⟧» -/\ntheorem count_edges_take_until_le_one {u v w : V} (p : G.walk v w) (h : u ∈ p.support) (x : V) :\n    (p.take_until u h).edges.count («expr⟦ ⟧» (u, x)) ≤ 1 :=\n  by\n  induction' p with u' u' v' w' ha p' ih\n  · rw [mem_support_nil_iff] at h\n    subst u\n    simp!\n  · obtain rfl | h := h\n    · simp!\n    · simp! only\n      split_ifs with h'\n      · subst h'\n        simp\n      · rw [edges_cons, List.count_cons]\n        split_ifs with h''\n        · rw [Sym2.eq_iff] at h''\n          obtain ⟨rfl, rfl⟩ | ⟨rfl, rfl⟩ := h''\n          · exact (h' rfl).elim\n          · cases p' <;> simp!\n        · apply ih\n#align count_edges_take_until_le_one count_edges_take_until_le_one\n\n",
  "count_edges_le_one":
- "theorem is_trail.count_edges_le_one [decidable_eq V] {u v : V} {p : G.walk u v} (h : p.is_trail) (e : sym2 V) :\n    p.edges.count e ≤ 1 :=\n  List.nodup_iff_count_le_one.mp h.edges_nodup e\n#align is_trail.count_edges_le_one is_trail.count_edges_le_one\n\n",
+ "theorem is_trail.count_edges_le_one [DecidableEq V] {u v : V} {p : G.walk u v} (h : p.is_trail) (e : Sym2 V) :\n    p.edges.count e ≤ 1 :=\n  List.nodup_iff_count_le_one.mp h.edges_nodup e\n#align is_trail.count_edges_le_one is_trail.count_edges_le_one\n\n",
  "count_edges_eq_one":
- "theorem count_edges_eq_one [decidable_eq V] {u v : V} {p : G.path u v} (e : sym2 V) (hw : e ∈ (p : G.walk u v).edges) :\n    (p : G.walk u v).edges.count e = 1 :=\n  List.count_eq_one_of_mem p.property.to_trail.edges_nodup hw\n#align count_edges_eq_one count_edges_eq_one\n\n",
+ "theorem count_edges_eq_one [DecidableEq V] {u v : V} {p : G.path u v} (e : Sym2 V) (hw : e ∈ (p : G.walk u v).edges) :\n    (p : G.walk u v).edges.count e = 1 :=\n  List.count_eq_one_of_mem p.property.to_trail.edges_nodup hw\n#align count_edges_eq_one count_edges_eq_one\n\n",
  "copy_rfl_rfl":
  "/-\nCopyright (c) 2021 Kyle Miller. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Kyle Miller\n-/\n@[simp]\ntheorem copy_rfl_rfl {u v} (p : G.walk u v) : p.copy rfl rfl = p :=\n  rfl\n#align copy_rfl_rfl copy_rfl_rfl\n\n",
  "copy_nil":
@@ -431,42 +463,72 @@
  "cons_append":
  "@[simp]\ntheorem cons_append {u v w x : V} (h : G.adj u v) (p : G.walk v w) (q : G.walk w x) :\n    (cons h p).append q = cons h (p.append q) :=\n  rfl\n#align cons_append cons_append\n\n",
  "connected_iff":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃g » -/\ntheorem iso.connected_iff {G : simple_graph V} {H : simple_graph V'} (e : «expr ≃g » G H) : G.connected ↔ H.connected :=\n  ⟨connected.map e.to_hom e.to_equiv.surjective, connected.map e.symm.to_hom e.symm.to_equiv.surjective⟩\n#align iso.connected_iff iso.connected_iff\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃g » -/\ntheorem iso.connected_iff {G : SimpleGraph V} {H : SimpleGraph V'} (e : «expr ≃g » G H) : G.connected ↔ H.connected :=\n  ⟨Connected.map e.to_hom e.to_equiv.surjective, Connected.map e.symm.to_hom e.symm.to_equiv.surjective⟩\n#align iso.connected_iff iso.connected_iff\n\n",
+ "connected_component_mk_mem":
+ "theorem connected_component_mk_mem {v : V} : v ∈ G.connected_component_mk v :=\n  rfl\n#align connected_component_mk_mem connected_component_mk_mem\n\n",
+ "connected_component_mk_eq_of_adj":
+ "theorem connected_component_mk_eq_of_adj {v w : V} (a : G.adj v w) :\n    G.connected_component_mk v = G.connected_component_mk w :=\n  ConnectedComponent.sound a.reachable\n#align connected_component_mk_eq_of_adj connected_component_mk_eq_of_adj\n\n",
+ "connected_component_equiv_trans":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃g » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃g » -/\n@[simp]\ntheorem connected_component_equiv_trans (φ : «expr ≃g » G G') (φ' : «expr ≃g » G' G'') :\n    connectedComponentEquiv (φ.trans φ') = φ.connected_component_equiv.trans φ'.connected_component_equiv :=\n  by\n  ext ⟨_⟩\n  rfl\n#align connected_component_equiv_trans connected_component_equiv_trans\n\n",
+ "connected_component_equiv_symm":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃g » -/\n@[simp]\ntheorem connected_component_equiv_symm (φ : «expr ≃g » G G') :\n    φ.symm.connected_component_equiv = φ.connected_component_equiv.symm :=\n  by\n  ext ⟨_⟩\n  rfl\n#align connected_component_equiv_symm connected_component_equiv_symm\n\n",
+ "connected_component_equiv_refl":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃g » -/\n@[simp]\ntheorem connected_component_equiv_refl : (Iso.refl : «expr ≃g » G G).connected_component_equiv = Equiv.refl _ :=\n  by\n  ext ⟨v⟩\n  rfl\n#align connected_component_equiv_refl connected_component_equiv_refl\n\n",
+ "concat_rec_nil":
+ "@[simp]\ntheorem concat_rec_nil (u : V) : @concatRec _ _ motive @Hnil @Hconcat _ _ (nil : G.walk u u) = Hnil :=\n  rfl\n#align concat_rec_nil concat_rec_nil\n\n",
+ "concat_rec_concat":
+ "@[simp]\ntheorem concat_rec_concat {u v w : V} (p : G.walk u v) (h : G.adj v w) :\n    @concatRec _ _ motive @Hnil @Hconcat _ _ (p.concat h) = Hconcat p h (concatRec (@Hnil) (@Hconcat) p) :=\n  by\n  simp only [concat_rec]\n  apply eq_of_heq\n  apply rec_heq_of_heq\n  trans concat_rec_aux (@Hnil) (@Hconcat) (cons h.symm p.reverse)\n  · congr\n    simp\n  · rw [concat_rec_aux, rec_heq_iff_heq]\n    congr <;> simp [heq_rec_iff_heq]\n#align concat_rec_concat concat_rec_concat\n\n",
+ "concat_nil":
+ "theorem concat_nil {u v : V} (h : G.adj u v) : nil.concat h = cons h nil :=\n  rfl\n#align concat_nil concat_nil\n\n",
+ "concat_ne_nil":
+ "theorem concat_ne_nil {u v : V} (p : G.walk u v) (h : G.adj v u) : p.concat h ≠ nil := by cases p <;> simp [concat]\n#align concat_ne_nil concat_ne_nil\n\n",
+ "concat_inj":
+ "theorem concat_inj {u v v' w : V} {p : G.walk u v} {h : G.adj v w} {p' : G.walk u v'} {h' : G.adj v' w}\n    (he : p.concat h = p'.concat h') : ∃ hv : v = v', p.copy rfl hv = p' :=\n  by\n  induction p\n  · cases p'\n    · exact ⟨rfl, rfl⟩\n    · exfalso\n      simp only [concat_nil, concat_cons] at he\n      obtain ⟨rfl, he⟩ := he\n      simp only [heq_iff_eq] at he\n      exact concat_ne_nil _ _ he.symm\n  · rw [concat_cons] at he\n    cases p'\n    · exfalso\n      simp only [concat_nil] at he\n      obtain ⟨rfl, he⟩ := he\n      rw [heq_iff_eq] at he\n      exact concat_ne_nil _ _ he\n    · rw [concat_cons] at he\n      simp only at he\n      obtain ⟨rfl, he⟩ := he\n      rw [heq_iff_eq] at he\n      obtain ⟨rfl, rfl⟩ := p_ih he\n      exact ⟨rfl, rfl⟩\n#align concat_inj concat_inj\n\n",
+ "concat_eq_append":
+ "theorem concat_eq_append {u v w : V} (p : G.walk u v) (h : G.adj v w) : p.concat h = p.append (cons h nil) :=\n  rfl\n#align concat_eq_append concat_eq_append\n\n",
+ "concat_cons":
+ "@[simp]\ntheorem concat_cons {u v w x : V} (h : G.adj u v) (p : G.walk v w) (h' : G.adj w x) :\n    (cons h p).concat h' = cons h (p.concat h') :=\n  rfl\n#align concat_cons concat_cons\n\n",
+ "concat_append":
+ "theorem concat_append {u v w x : V} (p : G.walk u v) (h : G.adj v w) (q : G.walk w x) :\n    (p.concat h).append q = p.append (cons h q) := by rw [concat_eq_append, ← append_assoc, cons_nil_append]\n#align concat_append concat_append\n\n",
  "coe_support_append'":
- "theorem coe_support_append' [decidable_eq V] {u v w : V} (p : G.walk u v) (p' : G.walk v w) :\n    ((p.append p').support : Multiset V) = p.support + p'.support - {v} :=\n  by\n  rw [support_append, ← Multiset.coe_add]\n  simp only [coe_support]\n  rw [add_comm {v}]\n  simp only [← add_assoc, add_tsub_cancel_right]\n#align coe_support_append' coe_support_append'\n\n",
+ "theorem coe_support_append' [DecidableEq V] {u v w : V} (p : G.walk u v) (p' : G.walk v w) :\n    ((p.append p').support : Multiset V) = p.support + p'.support - {v} :=\n  by\n  rw [support_append, ← Multiset.coe_add]\n  simp only [coe_support]\n  rw [add_comm {v}]\n  simp only [← add_assoc, add_tsub_cancel_right]\n#align coe_support_append' coe_support_append'\n\n",
  "coe_support_append":
  "theorem coe_support_append {u v w : V} (p : G.walk u v) (p' : G.walk v w) :\n    ((p.append p').support : Multiset V) = {u} + p.support.tail + p'.support.tail := by\n  rw [support_append, ← Multiset.coe_add, coe_support]\n#align coe_support_append coe_support_append\n\n",
  "coe_support":
  "theorem coe_support {u v : V} (p : G.walk u v) : (p.support : Multiset V) = {u} + p.support.tail := by cases p <;> rfl\n#align coe_support coe_support\n\n",
  "coe_finset_walk_length_eq":
- "theorem coe_finset_walk_length_eq (n : ℕ) (u v : V) :\n    (G.finset_walk_length n u v : set (G.walk u v)) = { p : G.walk u v | p.length = n } :=\n  by\n  induction' n with n ih generalizing u v\n  · obtain rfl | huv := eq_or_ne u v <;> simp [finset_walk_length, set_walk_length_zero_eq_of_ne, *]\n  · simp only [finset_walk_length, set_walk_length_succ_eq, Finset.coe_bunionᵢ, Finset.mem_coe, finset.mem_univ,\n      Set.unionᵢ_true]\n    ext p\n    simp only [mem_neighbor_set, Finset.coe_map, embedding.coe_fn_mk, Set.unionᵢ_coe_set, Set.mem_unionᵢ, Set.mem_image,\n      Finset.mem_coe, Set.mem_setOf_eq]\n    congr with w\n    congr with h\n    congr with q\n    have := set.ext_iff.mp (ih w v) q\n    simp only [Finset.mem_coe, Set.mem_setOf_eq] at this\n    rw [← this]\n    rfl\n#align coe_finset_walk_length_eq coe_finset_walk_length_eq\n\n",
+ "theorem coe_finset_walk_length_eq (n : ℕ) (u v : V) :\n    (G.finset_walk_length n u v : Set (G.walk u v)) = { p : G.walk u v | p.length = n } :=\n  by\n  induction' n with n ih generalizing u v\n  · obtain rfl | huv := eq_or_ne u v <;> simp [finset_walk_length, set_walk_length_zero_eq_of_ne, *]\n  · simp only [finset_walk_length, set_walk_length_succ_eq, Finset.coe_bunionᵢ, Finset.mem_coe, Finset.mem_univ,\n      Set.unionᵢ_true]\n    ext p\n    simp only [mem_neighbor_set, Finset.coe_map, embedding.coe_fn_mk, Set.unionᵢ_coe_set, Set.mem_unionᵢ, Set.mem_image,\n      Finset.mem_coe, Set.mem_setOf_eq]\n    congr with w\n    congr with h\n    congr with q\n    have := set.ext_iff.mp (ih w v) q\n    simp only [Finset.mem_coe, Set.mem_setOf_eq] at this\n    rw [← this]\n    rfl\n#align coe_finset_walk_length_eq coe_finset_walk_length_eq\n\n",
  "chain_dart_adj_darts":
  "theorem chain_dart_adj_darts :\n    ∀ {d : G.dart} {v w : V} (h : d.snd = v) (p : G.walk v w), List.Chain G.dart_adj d p.darts\n  | _, _, _, h, nil => List.Chain.nil\n  | _, _, _, h, cons h' p => List.Chain.cons h (chain_dart_adj_darts rfl p)\n#align chain_dart_adj_darts chain_dart_adj_darts\n\n",
  "chain_adj_support":
  "theorem chain_adj_support : ∀ {u v w : V} (h : G.adj u v) (p : G.walk v w), List.Chain G.adj u p.support\n  | _, _, _, h, nil => List.Chain.cons h List.Chain.nil\n  | _, _, _, h, cons h' p => List.Chain.cons h (chain_adj_support h' p)\n#align chain_adj_support chain_adj_support\n\n",
  "chain'_dart_adj_darts":
- "theorem chain'_dart_adj_darts : ∀ {u v : V} (p : G.walk u v), List.Chain' G.dart_adj p.darts\n  | _, _, nil => trivial\n  | _, _, cons h p => chain_dart_adj_darts rfl p\n#align chain'_dart_adj_darts chain'_dart_adj_darts\n\n",
+ "theorem chain'_dart_adj_darts : ∀ {u v : V} (p : G.walk u v), List.Chain' G.dart_adj p.darts\n  | _, _, nil => trivial\n  | _, _, cons h p => chain_dartAdj_darts rfl p\n#align chain'_dart_adj_darts chain'_dart_adj_darts\n\n",
  "chain'_adj_support":
  "theorem chain'_adj_support : ∀ {u v : V} (p : G.walk u v), List.Chain' G.adj p.support\n  | _, _, nil => List.Chain.nil\n  | _, _, cons h p => chain_adj_support h p\n#align chain'_adj_support chain'_adj_support\n\n",
  "card_set_walk_length_eq":
- "/- See `simple_graph.adj_matrix_pow_apply_eq_card_walk` for the cardinality in terms of the `n`th\npower of the adjacency matrix. -/\ntheorem card_set_walk_length_eq (u v : V) (n : ℕ) :\n    fintype.card { p : G.walk u v | p.length = n } = (G.finset_walk_length n u v).card :=\n  fintype.card_of_finset (G.finset_walk_length n u v) fun p => by rw [← Finset.mem_coe, coe_finset_walk_length_eq]\n#align card_set_walk_length_eq card_set_walk_length_eq\n\n",
+ "/- See `simple_graph.adj_matrix_pow_apply_eq_card_walk` for the cardinality in terms of the `n`th\npower of the adjacency matrix. -/\ntheorem card_set_walk_length_eq (u v : V) (n : ℕ) :\n    Fintype.card { p : G.walk u v | p.length = n } = (G.finset_walk_length n u v).card :=\n  Fintype.card_ofFinset (G.finset_walk_length n u v) fun p => by rw [← Finset.mem_coe, coe_finset_walk_length_eq]\n#align card_set_walk_length_eq card_set_walk_length_eq\n\n",
  "bypass_is_path":
  "theorem bypass_is_path {u v : V} (p : G.walk u v) : p.bypass.is_path :=\n  by\n  induction p\n  · simp!\n  · simp only [bypass]\n    split_ifs\n    · apply is_path.drop_until\n      assumption\n    · simp [*, cons_is_path_iff]\n#align bypass_is_path bypass_is_path\n\n",
  "bypass_copy":
  "@[simp]\ntheorem bypass_copy {u v u' v'} (p : G.walk u v) (hu : u = u') (hv : v = v') :\n    (p.copy hu hv).bypass = p.bypass.copy hu hv := by\n  subst_vars\n  rfl\n#align bypass_copy bypass_copy\n\n",
  "aux":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⟦ ⟧» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⟦ ⟧» -/\ntheorem reachable_delete_edges_iff_exists_cycle.aux [decidable_eq V] {u v w : V}\n    (hb : ∀ p : G.walk v w, «expr⟦ ⟧» (v, w) ∈ p.edges) (c : G.walk u u) (hc : c.is_trail)\n    (he : «expr⟦ ⟧» (v, w) ∈ c.edges) (hw : w ∈ (c.take_until v (c.fst_mem_support_of_mem_edges he)).support) : false :=\n  by\n  have hv := c.fst_mem_support_of_mem_edges he\n  -- decompose c into\n  --      puw     pwv     pvu\n  --   u ----> w ----> v ----> u\n  let puw := (c.take_until v hv).take_until w hw\n  let pwv := (c.take_until v hv).drop_until w hw\n  let pvu := c.drop_until v hv\n  have : c = (puw.append pwv).append pvu := by simp\n  -- We have two walks from v to w\n  --      pvu     puw\n  --   v ----> u ----> w\n  --   |               ^\n  --    `-------------'\n  --      pwv.reverse\n  -- so they both contain the edge ⟦(v, w)⟧, but that's a contradiction since c is a trail.\n  have hbq := hb (pvu.append puw)\n  have hpq' := hb pwv.reverse\n  rw [walk.edges_reverse, List.mem_reverse'] at hpq'\n  rw [walk.is_trail_def, this, walk.edges_append, walk.edges_append, List.nodup_append_comm, ← list.append_assoc, ←\n    walk.edges_append] at hc\n  exact List.disjoint_of_nodup_append hc hbq hpq'\n#align reachable_delete_edges_iff_exists_cycle.aux reachable_delete_edges_iff_exists_cycle.aux\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⟦ ⟧» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⟦ ⟧» -/\ntheorem reachable_delete_edges_iff_exists_cycle.aux [DecidableEq V] {u v w : V}\n    (hb : ∀ p : G.walk v w, «expr⟦ ⟧» (v, w) ∈ p.edges) (c : G.walk u u) (hc : c.is_trail)\n    (he : «expr⟦ ⟧» (v, w) ∈ c.edges) (hw : w ∈ (c.take_until v (c.fst_mem_support_of_mem_edges he)).support) : False :=\n  by\n  have hv := c.fst_mem_support_of_mem_edges he\n  -- decompose c into\n  --      puw     pwv     pvu\n  --   u ----> w ----> v ----> u\n  let puw := (c.take_until v hv).take_until w hw\n  let pwv := (c.take_until v hv).drop_until w hw\n  let pvu := c.drop_until v hv\n  have : c = (puw.append pwv).append pvu := by simp\n  -- We have two walks from v to w\n  --      pvu     puw\n  --   v ----> u ----> w\n  --   |               ^\n  --    `-------------'\n  --      pwv.reverse\n  -- so they both contain the edge ⟦(v, w)⟧, but that's a contradiction since c is a trail.\n  have hbq := hb (pvu.append puw)\n  have hpq' := hb pwv.reverse\n  rw [walk.edges_reverse, List.mem_reverse'] at hpq'\n  rw [walk.is_trail_def, this, walk.edges_append, walk.edges_append, List.nodup_append_comm, ← list.append_assoc, ←\n    walk.edges_append] at hc\n  exact List.disjoint_of_nodup_append hc hbq hpq'\n#align reachable_delete_edges_iff_exists_cycle.aux reachable_delete_edges_iff_exists_cycle.aux\n\n",
  "append_reverse_aux":
  "@[simp]\nprotected theorem append_reverse_aux :\n    ∀ {u v w x : V} (p : G.walk u v) (q : G.walk v w) (r : G.walk u x),\n      (p.append q).reverse_aux r = q.reverse_aux (p.reverse_aux r)\n  | _, _, _, _, nil, _, _ => rfl\n  | _, _, _, _, cons h p', q, r => append_reverse_aux p' q (cons (G.symm h) r)\n#align append_reverse_aux append_reverse_aux\n\n",
  "append_nil":
  "@[simp]\ntheorem append_nil : ∀ {u v : V} (p : G.walk u v), p.append nil = p\n  | _, _, nil => rfl\n  | _, _, cons h p => by rw [cons_append, append_nil]\n#align append_nil append_nil\n\n",
  "append_copy_copy":
  "@[simp]\ntheorem append_copy_copy {u v w u' v' w'} (p : G.walk u v) (q : G.walk v w) (hu : u = u') (hv : v = v') (hw : w = w') :\n    (p.copy hu hv).append (q.copy hv hw) = (p.append q).copy hu hw :=\n  by\n  subst_vars\n  rfl\n#align append_copy_copy append_copy_copy\n\n",
+ "append_concat":
+ "theorem append_concat {u v w x : V} (p : G.walk u v) (q : G.walk v w) (h : G.adj w x) :\n    p.append (q.concat h) = (p.append q).concat h :=\n  append_assoc _ _ _\n#align append_concat append_concat\n\n",
  "append_assoc":
  "theorem append_assoc :\n    ∀ {u v w x : V} (p : G.walk u v) (q : G.walk v w) (r : G.walk w x), p.append (q.append r) = (p.append q).append r\n  | _, _, _, _, nil, _, _ => rfl\n  | _, _, _, _, cons h p', q, r => by\n    dsimp only [append]\n    rw [append_assoc]\n#align append_assoc append_assoc\n\n",
  "adj_of_mem_edges":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⟦ ⟧» -/\ntheorem adj_of_mem_edges {u v x y : V} (p : G.walk u v) (h : «expr⟦ ⟧» (x, y) ∈ p.edges) : G.adj x y :=\n  edges_subset_edge_set p h\n#align adj_of_mem_edges adj_of_mem_edges\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⟦ ⟧» -/\ntheorem adj_of_mem_edges {u v x y : V} (p : G.walk u v) (h : «expr⟦ ⟧» (x, y) ∈ p.edges) : G.adj x y :=\n  edges_subset_edgeSet p h\n#align adj_of_mem_edges adj_of_mem_edges\n\n",
  "adj_get_vert_succ":
  "theorem adj_get_vert_succ {u v} (w : G.walk u v) {i : ℕ} (hi : i < w.length) :\n    G.adj (w.get_vert i) (w.get_vert (i + 1)) :=\n  by\n  induction' w with _ x y z hxy wyz IH generalizing i\n  · cases hi\n  · cases i\n    · simp [get_vert, hxy]\n    · exact IH (Nat.succ_lt_succ_iff.1 hi)\n#align adj_get_vert_succ adj_get_vert_succ\n\n",
  "adj_and_reachable_delete_edges_iff_exists_cycle":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⟦ ⟧» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⟦ ⟧» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⟦ ⟧» -/\ntheorem adj_and_reachable_delete_edges_iff_exists_cycle {v w : V} :\n    G.adj v w ∧ (G \\ from_edge_set {«expr⟦ ⟧» (v, w)}).reachable v w ↔\n      ∃ (u : V)(p : G.walk u u), p.is_cycle ∧ «expr⟦ ⟧» (v, w) ∈ p.edges :=\n  by\n  classical\n    rw [reachable_delete_edges_iff_exists_walk]\n    constructor\n    · rintro ⟨h, p, hp⟩\n      refine' ⟨w, walk.cons h.symm p.to_path, _, _⟩\n      · apply path.cons_is_cycle\n        rw [sym2.eq_swap]\n        intro h\n        exact absurd (walk.edges_to_path_subset p h) hp\n      simp only [sym2.eq_swap, walk.edges_cons, List.mem_cons, eq_self_iff_true, true_or_iff]\n    · rintro ⟨u, c, hc, he⟩\n      have hvc : v ∈ c.support := walk.fst_mem_support_of_mem_edges c he\n      have hwc : w ∈ c.support := walk.snd_mem_support_of_mem_edges c he\n      let puv := c.take_until v hvc\n      let pvu := c.drop_until v hvc\n      obtain hw | hw' : w ∈ puv.support ∨ w ∈ pvu.support := by rwa [← walk.mem_support_append_iff, walk.take_spec]\n      · by_contra' h\n        specialize h (c.adj_of_mem_edges he)\n        exact reachable_delete_edges_iff_exists_cycle.aux h c hc.to_trail he hw\n      · by_contra' hb\n        specialize hb (c.adj_of_mem_edges he)\n        have hb' : ∀ p : G.walk w v, «expr⟦ ⟧» (w, v) ∈ p.edges :=\n          by\n          intro p\n          simpa [sym2.eq_swap] using hb p.reverse\n        apply\n          reachable_delete_edges_iff_exists_cycle.aux hb' (pvu.append puv) (hc.to_trail.rotate hvc) _\n            (walk.start_mem_support _)\n        rwa [walk.edges_append, list.mem_append, or_comm', ← list.mem_append, ← walk.edges_append, walk.take_spec,\n          sym2.eq_swap]\n#align adj_and_reachable_delete_edges_iff_exists_cycle adj_and_reachable_delete_edges_iff_exists_cycle\n\n"}
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⟦ ⟧» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⟦ ⟧» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⟦ ⟧» -/\ntheorem adj_and_reachable_delete_edges_iff_exists_cycle {v w : V} :\n    G.adj v w ∧ (G \\ fromEdgeSet {«expr⟦ ⟧» (v, w)}).reachable v w ↔\n      ∃ (u : V)(p : G.walk u u), p.is_cycle ∧ «expr⟦ ⟧» (v, w) ∈ p.edges :=\n  by\n  classical\n    rw [reachable_delete_edges_iff_exists_walk]\n    constructor\n    · rintro ⟨h, p, hp⟩\n      refine' ⟨w, walk.cons h.symm p.to_path, _, _⟩\n      · apply path.cons_is_cycle\n        rw [Sym2.eq_swap]\n        intro h\n        exact absurd (walk.edges_to_path_subset p h) hp\n      simp only [Sym2.eq_swap, walk.edges_cons, List.mem_cons, eq_self_iff_true, true_or_iff]\n    · rintro ⟨u, c, hc, he⟩\n      have hvc : v ∈ c.support := walk.fst_mem_support_of_mem_edges c he\n      have hwc : w ∈ c.support := walk.snd_mem_support_of_mem_edges c he\n      let puv := c.take_until v hvc\n      let pvu := c.drop_until v hvc\n      obtain hw | hw' : w ∈ puv.support ∨ w ∈ pvu.support := by rwa [← walk.mem_support_append_iff, walk.take_spec]\n      · by_contra' h\n        specialize h (c.adj_of_mem_edges he)\n        exact reachable_delete_edges_iff_exists_cycle.aux h c hc.to_trail he hw\n      · by_contra' hb\n        specialize hb (c.adj_of_mem_edges he)\n        have hb' : ∀ p : G.walk w v, «expr⟦ ⟧» (w, v) ∈ p.edges :=\n          by\n          intro p\n          simpa [Sym2.eq_swap] using hb p.reverse\n        apply\n          reachable_delete_edges_iff_exists_cycle.aux hb' (pvu.append puv) (hc.to_trail.rotate hvc) _\n            (walk.start_mem_support _)\n        rwa [walk.edges_append, list.mem_append, or_comm', ← list.mem_append, ← walk.edges_append, walk.take_spec,\n          Sym2.eq_swap]\n#align adj_and_reachable_delete_edges_iff_exists_cycle adj_and_reachable_delete_edges_iff_exists_cycle\n\n",
+ "Eq":
+ "#print Eq /-\n@[simp]\nprotected theorem Eq {v w : V} : G.connected_component_mk v = G.connected_component_mk w ↔ G.reachable v w :=\n  @Quotient.eq' _ G.reachable_setoid _ _\n#align eq Eq\n-/\n\n"}

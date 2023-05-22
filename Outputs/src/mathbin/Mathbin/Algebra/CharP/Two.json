@@ -1,5 +1,5 @@
 {"two_eq_zero":
- "/-\nCopyright (c) 2021 Eric Wieser. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Eric Wieser\n-/\ntheorem two_eq_zero : (2 : R) = 0 := by rw [← Nat.cast_two, char_p.cast_eq_zero]\n#align two_eq_zero two_eq_zero\n\n",
+ "/-\nCopyright (c) 2021 Eric Wieser. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Eric Wieser\n-/\ntheorem two_eq_zero : (2 : R) = 0 := by rw [← Nat.cast_two, CharP.cast_eq_zero]\n#align two_eq_zero two_eq_zero\n\n",
  "sum_sq":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `finset.sum -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.sum -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `finset.sum -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.sum -/\ntheorem sum_sq (s : Finset ι) (f : ι → R) :\n    finset.sum \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.sum\" s (f i) ^ 2 =\n      finset.sum \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.sum\" s (f i ^ 2) :=\n  sum_pow_char _ _ _\n#align sum_sq sum_sq\n\n",
  "sum_mul_self":
@@ -7,23 +7,23 @@
  "sub_eq_add'":
  "theorem sub_eq_add' : has_sub.sub = ((· + ·) : R → R → R) :=\n  funext fun x => funext fun y => sub_eq_add x y\n#align sub_eq_add' sub_eq_add'\n\n",
  "sub_eq_add":
- "@[simp]\ntheorem sub_eq_add (x y : R) : x - y = x + y := by rw [sub_eq_add_neg, neg_eq]\n#align sub_eq_add sub_eq_add\n\n",
- "order_of_neg_one":
- "@[simp]\ntheorem order_of_neg_one [nontrivial R] : order_of (-1 : R) = if ring_char R = 2 then 1 else 2 :=\n  by\n  split_ifs\n  · rw [neg_one_eq_one_iff.2 h, order_of_one]\n  apply order_of_eq_prime\n  · simp\n  simpa [neg_one_eq_one_iff] using h\n#align order_of_neg_one order_of_neg_one\n\n",
+ "#print sub_eq_add /-\n@[simp]\ntheorem sub_eq_add (x y : R) : x - y = x + y := by rw [sub_eq_add_neg, neg_eq]\n#align sub_eq_add sub_eq_add\n-/\n\n",
+ "orderOf_neg_one":
+ "#print orderOf_neg_one /-\n@[simp]\ntheorem orderOf_neg_one [Nontrivial R] : orderOf (-1 : R) = if ringChar R = 2 then 1 else 2 :=\n  by\n  split_ifs\n  · rw [neg_one_eq_one_iff.2 h, orderOf_one]\n  apply orderOf_eq_prime\n  · simp\n  simpa [neg_one_eq_one_iff] using h\n#align order_of_neg_one orderOf_neg_one\n-/\n\n",
  "neg_one_eq_one_iff":
- "theorem neg_one_eq_one_iff [nontrivial R] : (-1 : R) = 1 ↔ ring_char R = 2 :=\n  by\n  refine' ⟨fun h => _, fun h => @char_two.neg_eq _ (ring_char.of_eq h) 1⟩\n  rw [eq_comm, ← sub_eq_zero, sub_neg_eq_add, ← Nat.cast_one, ← Nat.cast_add] at h\n  exact ((Nat.dvd_prime Nat.prime_two).mp (ring_char.dvd h)).resolve_left char_p.ring_char_ne_one\n#align neg_one_eq_one_iff neg_one_eq_one_iff\n\n",
+ "#print neg_one_eq_one_iff /-\ntheorem neg_one_eq_one_iff [Nontrivial R] : (-1 : R) = 1 ↔ ringChar R = 2 :=\n  by\n  refine' ⟨fun h => _, fun h => @CharTwo.neg_eq _ (ringChar.of_eq h) 1⟩\n  rw [eq_comm, ← sub_eq_zero, sub_neg_eq_add, ← Nat.cast_one, ← Nat.cast_add] at h\n  exact ((Nat.dvd_prime Nat.prime_two).mp (ringChar.dvd h)).resolve_left CharP.ringChar_ne_one\n#align neg_one_eq_one_iff neg_one_eq_one_iff\n-/\n\n",
  "neg_eq'":
  "theorem neg_eq' : has_neg.neg = (id : R → R) :=\n  funext neg_eq\n#align neg_eq' neg_eq'\n\n",
  "neg_eq":
- "@[simp]\ntheorem neg_eq (x : R) : -x = x := by rw [neg_eq_iff_add_eq_zero, ← two_smul R x, two_eq_zero, zero_smul]\n#align neg_eq neg_eq\n\n",
+ "#print neg_eq /-\n@[simp]\ntheorem neg_eq (x : R) : -x = x := by rw [neg_eq_iff_add_eq_zero, ← two_smul R x, two_eq_zero, zero_smul]\n#align neg_eq neg_eq\n-/\n\n",
  "multiset_sum_sq":
  "theorem multiset_sum_sq (l : Multiset R) : l.sum ^ 2 = (l.map (· ^ 2)).sum :=\n  multiset_sum_pow_char _ _\n#align multiset_sum_sq multiset_sum_sq\n\n",
  "multiset_sum_mul_self":
  "theorem multiset_sum_mul_self (l : Multiset R) : l.sum * l.sum = (Multiset.map (fun x => x * x) l).sum := by\n  simp_rw [← pow_two, multiset_sum_sq]\n#align multiset_sum_mul_self multiset_sum_mul_self\n\n",
  "list_sum_sq":
- "theorem list_sum_sq (l : list R) : l.sum ^ 2 = (l.map (· ^ 2)).sum :=\n  list_sum_pow_char _ _\n#align list_sum_sq list_sum_sq\n\n",
+ "theorem list_sum_sq (l : List R) : l.sum ^ 2 = (l.map (· ^ 2)).sum :=\n  list_sum_pow_char _ _\n#align list_sum_sq list_sum_sq\n\n",
  "list_sum_mul_self":
- "theorem list_sum_mul_self (l : list R) : l.sum * l.sum = (list.map (fun x => x * x) l).sum := by\n  simp_rw [← pow_two, list_sum_sq]\n#align list_sum_mul_self list_sum_mul_self\n\n",
+ "theorem list_sum_mul_self (l : List R) : l.sum * l.sum = (list.map (fun x => x * x) l).sum := by\n  simp_rw [← pow_two, list_sum_sq]\n#align list_sum_mul_self list_sum_mul_self\n\n",
  "bit1_eq_one":
  "#print bit1_eq_one /-\n@[simp]\ntheorem bit1_eq_one : (bit1 : R → R) = 1 := by\n  funext\n  simp [bit1]\n#align bit1_eq_one bit1_eq_one\n-/\n\n",
  "bit1_apply_eq_one":

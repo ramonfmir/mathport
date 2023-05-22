@@ -1,16 +1,16 @@
-{"to_multiset_to_dfinsupp":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«exprΠ₀ , » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«exprΠ₀ , » -/\n@[simp]\ntheorem dfinsupp.to_multiset_to_dfinsupp [decidable_eq α]\n    (f : «exprΠ₀ , » \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«exprΠ₀ , »\" ℕ) :\n    f.to_multiset.to_dfinsupp = f :=\n  multiset.equiv_dfinsupp.apply_symm_apply f\n#align dfinsupp.to_multiset_to_dfinsupp dfinsupp.to_multiset_to_dfinsupp\n\n",
- "to_multiset_single":
- "/-\nCopyright (c) 2022 Eric Wieser. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Eric Wieser\n-/\n@[simp]\ntheorem to_multiset_single (a : α) (n : ℕ) : to_multiset (dfinsupp.single a n) = multiset.replicate n a :=\n  dfinsupp.sum_add_hom_single _ _ _\n#align to_multiset_single to_multiset_single\n\n",
+{"to_multiset_single":
+ "/-\nCopyright (c) 2022 Eric Wieser. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Eric Wieser\n-/\n@[simp]\ntheorem to_multiset_single (a : α) (n : ℕ) : toMultiset (Dfinsupp.single a n) = Multiset.replicate n a :=\n  Dfinsupp.sumAddHom_single _ _ _\n#align to_multiset_single to_multiset_single\n\n",
  "to_dfinsupp_to_multiset":
- "@[simp]\ntheorem to_dfinsupp_to_multiset (s : Multiset α) : s.to_dfinsupp.to_multiset = s :=\n  equiv_dfinsupp.symm_apply_apply s\n#align to_dfinsupp_to_multiset to_dfinsupp_to_multiset\n\n",
- "to_dfinsupp_support":
- "@[simp]\ntheorem to_dfinsupp_support (s : Multiset α) : s.to_dfinsupp.support = s.to_finset :=\n  (Finset.filter_eq_self _).mpr fun x hx => count_ne_zero.mpr <| Multiset.mem_toFinset.1 hx\n#align to_dfinsupp_support to_dfinsupp_support\n\n",
+ "@[simp]\ntheorem to_dfinsupp_to_multiset (s : Multiset α) : s.to_dfinsupp.to_multiset = s :=\n  equivDfinsupp.symm_apply_apply s\n#align to_dfinsupp_to_multiset to_dfinsupp_to_multiset\n\n",
  "to_dfinsupp_singleton":
- "@[simp]\ntheorem to_dfinsupp_singleton (a : α) : to_dfinsupp {a} = dfinsupp.single a 1 := by\n  rw [← replicate_one, to_dfinsupp_replicate]\n#align to_dfinsupp_singleton to_dfinsupp_singleton\n\n",
+ "@[simp]\ntheorem to_dfinsupp_singleton (a : α) : toDfinsupp {a} = Dfinsupp.single a 1 := by\n  rw [← replicate_one, to_dfinsupp_replicate]\n#align to_dfinsupp_singleton to_dfinsupp_singleton\n\n",
  "to_dfinsupp_replicate":
- "@[simp]\ntheorem to_dfinsupp_replicate (a : α) (n : ℕ) : to_dfinsupp (multiset.replicate n a) = dfinsupp.single a n :=\n  by\n  ext i\n  dsimp [to_dfinsupp]\n  simp [count_replicate, eq_comm]\n#align to_dfinsupp_replicate to_dfinsupp_replicate\n\n",
+ "@[simp]\ntheorem to_dfinsupp_replicate (a : α) (n : ℕ) : toDfinsupp (Multiset.replicate n a) = Dfinsupp.single a n :=\n  by\n  ext i\n  dsimp [to_dfinsupp]\n  simp [count_replicate, eq_comm]\n#align to_dfinsupp_replicate to_dfinsupp_replicate\n\n",
  "to_dfinsupp_le_to_dfinsupp":
- "@[simp]\ntheorem to_dfinsupp_le_to_dfinsupp (s t : Multiset α) : to_dfinsupp s ≤ to_dfinsupp t ↔ s ≤ t := by\n  simp [Multiset.le_iff_count, dfinsupp.le_def]\n#align to_dfinsupp_le_to_dfinsupp to_dfinsupp_le_to_dfinsupp\n\n",
+ "@[simp]\ntheorem to_dfinsupp_le_to_dfinsupp (s t : Multiset α) : toDfinsupp s ≤ toDfinsupp t ↔ s ≤ t := by\n  simp [Multiset.le_iff_count, Dfinsupp.le_def]\n#align to_dfinsupp_le_to_dfinsupp to_dfinsupp_le_to_dfinsupp\n\n",
  "to_dfinsupp_apply":
- "@[simp]\ntheorem to_dfinsupp_apply (s : Multiset α) (a : α) : s.to_dfinsupp a = s.count a :=\n  rfl\n#align to_dfinsupp_apply to_dfinsupp_apply\n\n"}
+ "@[simp]\ntheorem to_dfinsupp_apply (s : Multiset α) (a : α) : s.to_dfinsupp a = s.count a :=\n  rfl\n#align to_dfinsupp_apply to_dfinsupp_apply\n\n",
+ "toMultiset_toDfinsupp":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«exprΠ₀ , » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«exprΠ₀ , » -/\n#print Dfinsupp.toMultiset_toDfinsupp /-\n@[simp]\ntheorem Dfinsupp.toMultiset_toDfinsupp [DecidableEq α]\n    (f : «exprΠ₀ , » \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«exprΠ₀ , »\" ℕ) :\n    f.to_multiset.to_dfinsupp = f :=\n  Multiset.equivDfinsupp.apply_symm_apply f\n#align dfinsupp.to_multiset_to_dfinsupp Dfinsupp.toMultiset_toDfinsupp\n-/\n\n",
+ "toDfinsupp_support":
+ "#print toDfinsupp_support /-\n@[simp]\ntheorem toDfinsupp_support (s : Multiset α) : s.to_dfinsupp.support = s.to_finset :=\n  (Finset.filter_eq_self _).mpr fun x hx => count_ne_zero.mpr <| Multiset.mem_toFinset.1 hx\n#align to_dfinsupp_support toDfinsupp_support\n-/\n\n"}

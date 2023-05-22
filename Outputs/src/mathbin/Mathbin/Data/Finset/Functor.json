@@ -7,13 +7,13 @@
  "pure_def":
  "@[simp]\ntheorem pure_def {α} : (pure : α → Finset α) = singleton :=\n  rfl\n#align pure_def pure_def\n\n",
  "map_traverse":
- "theorem map_traverse (g : α → G β) (h : β → γ) (s : Finset α) :\n    functor.map h <$> traverse g s = traverse (functor.map h ∘ g) s :=\n  by\n  unfold traverse\n  simp only [map_comp_coe, functor_norm]\n  rw [is_lawful_functor.comp_map, multiset.map_traverse]\n#align map_traverse map_traverse\n\n",
+ "theorem map_traverse (g : α → G β) (h : β → γ) (s : Finset α) :\n    functor.map h <$> traverse g s = traverse (functor.map h ∘ g) s :=\n  by\n  unfold traverse\n  simp only [map_comp_coe, functor_norm]\n  rw [is_lawful_functor.comp_map, Multiset.map_traverse]\n#align map_traverse map_traverse\n\n",
  "map_comp_coe":
  "@[simp]\ntheorem map_comp_coe (h : α → β) : functor.map h ∘ Multiset.toFinset = Multiset.toFinset ∘ functor.map h :=\n  funext fun s => image_toFinset\n#align map_comp_coe map_comp_coe\n\n",
  "image₂_def":
  "/-- `finset.image₂` in terms of monadic operations. Note that this can't be taken as the definition\nbecause of the lack of universe polymorphism. -/\ntheorem image₂_def {α β γ : Type _} (f : α → β → γ) (s : Finset α) (t : Finset β) : image₂ f s t = f <$> s <*> t :=\n  by\n  ext\n  simp [mem_sup]\n#align image₂_def image₂_def\n\n",
  "id_traverse":
- "@[simp]\ntheorem id_traverse [decidable_eq α] (s : Finset α) : traverse id.mk s = s :=\n  by\n  rw [traverse, multiset.id_traverse]\n  exact s.val_to_finset\n#align id_traverse id_traverse\n\n",
+ "@[simp]\ntheorem id_traverse [DecidableEq α] (s : Finset α) : traverse id.mk s = s :=\n  by\n  rw [traverse, Multiset.id_traverse]\n  exact s.val_to_finset\n#align id_traverse id_traverse\n\n",
  "fmap_def":
  "/-\nCopyright (c) 2021 Yaël Dillies. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Yaël Dillies, Scott Morrison\n-/\n@[simp]\ntheorem fmap_def {s : Finset α} (f : α → β) : f <$> s = s.image f :=\n  rfl\n#align fmap_def fmap_def\n\n",
  "bind_def":

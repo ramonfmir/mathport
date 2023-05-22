@@ -1,43 +1,43 @@
 {"to_fun_eq_coe":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«exprC( , )» -/\n@[simp]\ntheorem to_fun_eq_coe {f : «exprC( , )» α β} : f.to_fun = (f : α → β) :=\n  rfl\n#align to_fun_eq_coe to_fun_eq_coe\n\n",
  "to_continuous_map_comp_symm":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«exprC( , )» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«exprC( , )» -/\n/-- Right inverse to a continuous map from a homeomorphism, mirroring `equiv.self_comp_symm`. -/\n@[simp]\ntheorem to_continuous_map_comp_symm : (f : «exprC( , )» α β).comp (f.symm : «exprC( , )» β α) = continuous_map.id β :=\n  by rw [← coe_trans, symm_trans_self, coe_refl]\n#align to_continuous_map_comp_symm to_continuous_map_comp_symm\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«exprC( , )» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«exprC( , )» -/\n/-- Right inverse to a continuous map from a homeomorphism, mirroring `equiv.self_comp_symm`. -/\n@[simp]\ntheorem to_continuous_map_comp_symm : (f : «exprC( , )» α β).comp (f.symm : «exprC( , )» β α) = ContinuousMap.id β := by\n  rw [← coe_trans, symm_trans_self, coe_refl]\n#align to_continuous_map_comp_symm to_continuous_map_comp_symm\n\n",
  "to_continuous_map_as_coe":
  "theorem to_continuous_map_as_coe : f.to_continuous_map = f :=\n  rfl\n#align to_continuous_map_as_coe to_continuous_map_as_coe\n\n",
  "symm_comp_to_continuous_map":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«exprC( , )» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«exprC( , )» -/\n/-- Left inverse to a continuous map from a homeomorphism, mirroring `equiv.symm_comp_self`. -/\n@[simp]\ntheorem symm_comp_to_continuous_map : (f.symm : «exprC( , )» β α).comp (f : «exprC( , )» α β) = continuous_map.id α :=\n  by rw [← coe_trans, self_trans_symm, coe_refl]\n#align symm_comp_to_continuous_map symm_comp_to_continuous_map\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«exprC( , )» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«exprC( , )» -/\n/-- Left inverse to a continuous map from a homeomorphism, mirroring `equiv.symm_comp_self`. -/\n@[simp]\ntheorem symm_comp_to_continuous_map : (f.symm : «exprC( , )» β α).comp (f : «exprC( , )» α β) = ContinuousMap.id α := by\n  rw [← coe_trans, self_trans_symm, coe_refl]\n#align symm_comp_to_continuous_map symm_comp_to_continuous_map\n\n",
+ "restrict_apply_mk":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«exprC( , )» -/\n@[simp]\ntheorem restrict_apply_mk (f : «exprC( , )» α β) (s : Set α) (x : α) (hx : x ∈ s) : f.restrict s ⟨x, hx⟩ = f x :=\n  rfl\n#align restrict_apply_mk restrict_apply_mk\n\n",
+ "restrict_apply":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«exprC( , )» -/\n@[simp]\ntheorem restrict_apply (f : «exprC( , )» α β) (s : Set α) (x : s) : f.restrict s x = f x :=\n  rfl\n#align restrict_apply restrict_apply\n\n",
  "prod_eval":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«exprC( , )» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«exprC( , )» -/\n@[simp]\ntheorem prod_eval (f : «exprC( , )» α β₁) (g : «exprC( , )» α β₂) (a : α) : (prod_mk f g) a = (f a, g a) :=\n  rfl\n#align prod_eval prod_eval\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«exprC( , )» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«exprC( , )» -/\n@[simp]\ntheorem prod_eval (f : «exprC( , )» α β₁) (g : «exprC( , )» α β₂) (a : α) : (prodMk f g) a = (f a, g a) :=\n  rfl\n#align prod_eval prod_eval\n\n",
  "pi_eval":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«exprC( , )» -/\n@[simp]\ntheorem pi_eval (f : ∀ i, «exprC( , )» A (X i)) (a : A) : (pi f) a = fun i : I => (f i) a :=\n  rfl\n#align pi_eval pi_eval\n\n",
  "map_specializes":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«exprC( , )» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⤳ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⤳ » -/\ntheorem map_specializes (f : «exprC( , )» α β) {x y : α} (h : «expr ⤳ » x y) : «expr ⤳ » (f x) (f y) :=\n  h.map f.2\n#align map_specializes map_specializes\n\n",
- "map_continuous_within_at":
- "theorem map_continuous_within_at (f : F) (s : set α) (a : α) : continuous_within_at f s a :=\n  (map_continuous f).continuous_within_at\n#align map_continuous_within_at map_continuous_within_at\n\n",
- "map_continuous_at":
- "/-\nCopyright © 2020 Nicolò Cavalleri. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Nicolò Cavalleri\n-/\ntheorem map_continuous_at (f : F) (a : α) : continuous_at f a :=\n  (map_continuous f).continuous_at\n#align map_continuous_at map_continuous_at\n\n",
+ "map_continuousWithinAt":
+ "#print map_continuousWithinAt /-\ntheorem map_continuousWithinAt (f : F) (s : Set α) (a : α) : ContinuousWithinAt f s a :=\n  (map_continuous f).continuous_within_at\n#align map_continuous_within_at map_continuousWithinAt\n-/\n\n",
+ "map_continuousAt":
+ "#print map_continuousAt /-\n/-\nCopyright © 2020 Nicolò Cavalleri. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Nicolò Cavalleri\n-/\ntheorem map_continuousAt (f : F) (a : α) : ContinuousAt f a :=\n  (map_continuous f).continuous_at\n#align map_continuous_at map_continuousAt\n-/\n\n",
  "lift_cover_restrict'":
- "@[simp]\ntheorem lift_cover_restrict' {s : set α} {hs : s ∈ A} : (lift_cover' A F hF hA).restrict s = F s hs :=\n  ext <| lift_cover_coe'\n#align lift_cover_restrict' lift_cover_restrict'\n\n",
+ "@[simp]\ntheorem lift_cover_restrict' {s : Set α} {hs : s ∈ A} : (liftCover' A F hF hA).restrict s = F s hs :=\n  ext <| liftCover_coe'\n#align lift_cover_restrict' lift_cover_restrict'\n\n",
  "lift_cover_restrict":
- "@[simp]\ntheorem lift_cover_restrict {i : ι} : (lift_cover S φ hφ hS).restrict (S i) = φ i :=\n  ext <| lift_cover_coe\n#align lift_cover_restrict lift_cover_restrict\n\n",
+ "@[simp]\ntheorem lift_cover_restrict {i : ι} : (liftCover S φ hφ hS).restrict (S i) = φ i :=\n  ext <| liftCover_coe\n#align lift_cover_restrict lift_cover_restrict\n\n",
  "lift_cover_coe'":
- "@[simp]\ntheorem lift_cover_coe' {s : set α} {hs : s ∈ A} (x : s) : lift_cover' A F hF hA x = F s hs x :=\n  let x' : (coe : A → set α) ⟨s, hs⟩ := x\n  lift_cover_coe x'\n#align lift_cover_coe' lift_cover_coe'\n\n",
+ "@[simp]\ntheorem lift_cover_coe' {s : Set α} {hs : s ∈ A} (x : s) : liftCover' A F hF hA x = F s hs x :=\n  let x' : (coe : A → Set α) ⟨s, hs⟩ := x\n  liftCover_coe x'\n#align lift_cover_coe' lift_cover_coe'\n\n",
  "lift_cover_coe":
- "@[simp]\ntheorem lift_cover_coe {i : ι} (x : S i) : lift_cover S φ hφ hS x = φ i x :=\n  Set.liftCover_coe _\n#align lift_cover_coe lift_cover_coe\n\n",
+ "@[simp]\ntheorem lift_cover_coe {i : ι} (x : S i) : liftCover S φ hφ hS x = φ i x :=\n  Set.liftCover_coe _\n#align lift_cover_coe lift_cover_coe\n\n",
  "id_comp":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«exprC( , )» -/\n@[simp]\ntheorem id_comp (f : «exprC( , )» α β) : (continuous_map.id _).comp f = f :=\n  ext fun _ => rfl\n#align id_comp id_comp\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«exprC( , )» -/\n@[simp]\ntheorem id_comp (f : «exprC( , )» α β) : (ContinuousMap.id _).comp f = f :=\n  ext fun _ => rfl\n#align id_comp id_comp\n\n",
  "id_apply":
- "@[simp]\ntheorem id_apply (a : α) : continuous_map.id α a = a :=\n  rfl\n#align id_apply id_apply\n\n",
+ "@[simp]\ntheorem id_apply (a : α) : ContinuousMap.id α a = a :=\n  rfl\n#align id_apply id_apply\n\n",
  "ext":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«exprC( , )» -/\n@[ext]\ntheorem ext {f g : «exprC( , )» α β} (h : ∀ a, f a = g a) : f = g :=\n  fun_like.ext _ _ h\n#align ext ext\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«exprC( , )» -/\n@[ext]\ntheorem ext {f g : «exprC( , )» α β} (h : ∀ a, f a = g a) : f = g :=\n  FunLike.ext _ _ h\n#align ext ext\n\n",
  "copy_eq":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«exprC( , )» -/\ntheorem copy_eq (f : «exprC( , )» α β) (f' : α → β) (h : f' = f) : f.copy f' h = f :=\n  fun_like.ext' h\n#align copy_eq copy_eq\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«exprC( , )» -/\ntheorem copy_eq (f : «exprC( , )» α β) (f' : α → β) (h : f' = f) : f.copy f' h = f :=\n  FunLike.ext' h\n#align copy_eq copy_eq\n\n",
  "continuous_set_coe":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«exprC( , )» -/\n@[continuity]\ntheorem continuous_set_coe (s : set («exprC( , )» α β)) (f : s) : continuous f :=\n  f.1.continuous\n#align continuous_set_coe continuous_set_coe\n\n",
- "continuous_at":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«exprC( , )» -/\n/-- Deprecated. Use `map_continuous_at` instead. -/\nprotected theorem continuous_at (f : «exprC( , )» α β) (x : α) : continuous_at f x :=\n  f.continuous.continuous_at\n#align continuous_at continuous_at\n\n",
- "continuous":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«exprC( , )» -/\n/-- Deprecated. Use `map_continuous` instead. -/\nprotected theorem continuous (f : «exprC( , )» α β) : continuous f :=\n  f.continuous_to_fun\n#align continuous continuous\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«exprC( , )» -/\n@[continuity]\ntheorem continuous_set_coe (s : Set («exprC( , )» α β)) (f : s) : Continuous f :=\n  f.1.continuous\n#align continuous_set_coe continuous_set_coe\n\n",
  "const_comp":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«exprC( , )» -/\n@[simp]\ntheorem const_comp (c : γ) (f : «exprC( , )» α β) : (const β c).comp f = const α c :=\n  ext fun _ => rfl\n#align const_comp const_comp\n\n",
  "const_apply":
@@ -47,7 +47,7 @@
  "congr_arg":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«exprC( , )» -/\n#print congr_arg /-\n/-- Deprecated. Use `fun_like.congr_arg` instead. -/\nprotected theorem congr_arg (f : «exprC( , )» α β) {x y : α} (h : x = y) : f x = f y :=\n  h ▸ rfl\n#align congr_arg congr_arg\n-/\n\n",
  "comp_id":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«exprC( , )» -/\n@[simp]\ntheorem comp_id (f : «exprC( , )» α β) : f.comp (continuous_map.id _) = f :=\n  ext fun _ => rfl\n#align comp_id comp_id\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«exprC( , )» -/\n@[simp]\ntheorem comp_id (f : «exprC( , )» α β) : f.comp (ContinuousMap.id _) = f :=\n  ext fun _ => rfl\n#align comp_id comp_id\n\n",
  "comp_const":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«exprC( , )» -/\n@[simp]\ntheorem comp_const (f : «exprC( , )» β γ) (b : β) : f.comp (const α b) = const α (f b) :=\n  ext fun _ => rfl\n#align comp_const comp_const\n\n",
  "comp_assoc":
@@ -59,22 +59,26 @@
  "coe_restrict":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«exprC( , )» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n@[simp]\ntheorem coe_restrict (f : «exprC( , )» α β) : «expr⇑ » (f.restrict s) = f ∘ coe :=\n  rfl\n#align coe_restrict coe_restrict\n\n",
  "coe_refl":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«exprC( , )» -/\n@[simp]\ntheorem coe_refl : (homeomorph.refl α : «exprC( , )» α α) = continuous_map.id α :=\n  rfl\n#align coe_refl coe_refl\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«exprC( , )» -/\n@[simp]\ntheorem coe_refl : (Homeomorph.refl α : «exprC( , )» α α) = ContinuousMap.id α :=\n  rfl\n#align coe_refl coe_refl\n\n",
  "coe_mk":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«exprC( , )» -/\n@[simp]\ntheorem coe_mk (f : α → β) (h : continuous f) : «expr⇑ » (⟨f, h⟩ : «exprC( , )» α β) = f :=\n  rfl\n#align coe_mk coe_mk\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«exprC( , )» -/\n@[simp]\ntheorem coe_mk (f : α → β) (h : Continuous f) : «expr⇑ » (⟨f, h⟩ : «exprC( , )» α β) = f :=\n  rfl\n#align coe_mk coe_mk\n\n",
  "coe_injective":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«exprC( , )» -/\ntheorem coe_injective : @function.injective («exprC( , )» α β) (α → β) coe_fn := fun f g h => by\n  cases f <;> cases g <;> congr\n#align coe_injective coe_injective\n\n",
  "coe_id":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n@[simp]\ntheorem coe_id : «expr⇑ » (continuous_map.id α) = id :=\n  rfl\n#align coe_id coe_id\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n@[simp]\ntheorem coe_id : «expr⇑ » (ContinuousMap.id α) = id :=\n  rfl\n#align coe_id coe_id\n\n",
  "coe_copy":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«exprC( , )» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n@[simp]\ntheorem coe_copy (f : «exprC( , )» α β) (f' : α → β) (h : f' = f) : «expr⇑ » (f.copy f' h) = f' :=\n  rfl\n#align coe_copy coe_copy\n\n",
  "coe_const":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n@[simp]\ntheorem coe_const (b : β) : «expr⇑ » (const α b) = function.const α b :=\n  rfl\n#align coe_const coe_const\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n@[simp]\ntheorem coe_const (b : β) : «expr⇑ » (const α b) = Function.const α b :=\n  rfl\n#align coe_const coe_const\n\n",
  "coe_comp":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«exprC( , )» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«exprC( , )» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n@[simp]\ntheorem coe_comp (f : «exprC( , )» β γ) (g : «exprC( , )» α β) : «expr⇑ » (comp f g) = f ∘ g :=\n  rfl\n#align coe_comp coe_comp\n\n",
  "coe_coe":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«exprC( , )» -/\n-- this must come after the coe_to_fun definition\n@[protected, simp, norm_cast]\ntheorem coe_coe {F : Type _} [continuous_map_class F α β] (f : F) : «expr⇑ » (f : «exprC( , )» α β) = f :=\n  rfl\n#align coe_coe coe_coe\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«exprC( , )» -/\n-- this must come after the coe_to_fun definition\n@[protected, simp, norm_cast]\ntheorem coe_coe {F : Type _} [ContinuousMapClass F α β] (f : F) : «expr⇑ » (f : «exprC( , )» α β) = f :=\n  rfl\n#align coe_coe coe_coe\n\n",
  "cancel_right":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«exprC( , )» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«exprC( , )» -/\ntheorem cancel_right {f₁ f₂ : «exprC( , )» β γ} {g : «exprC( , )» α β} (hg : surjective g) :\n    f₁.comp g = f₂.comp g ↔ f₁ = f₂ :=\n  ⟨fun h => ext <| hg.forall.2 <| fun_like.ext_iff.1 h, congr_arg _⟩\n#align cancel_right cancel_right\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«exprC( , )» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«exprC( , )» -/\ntheorem cancel_right {f₁ f₂ : «exprC( , )» β γ} {g : «exprC( , )» α β} (hg : surjective g) :\n    f₁.comp g = f₂.comp g ↔ f₁ = f₂ :=\n  ⟨fun h => ext <| hg.forall.2 <| FunLike.ext_iff.1 h, congr_arg _⟩\n#align cancel_right cancel_right\n\n",
  "cancel_left":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«exprC( , )» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«exprC( , )» -/\ntheorem cancel_left {f : «exprC( , )» β γ} {g₁ g₂ : «exprC( , )» α β} (hf : injective f) :\n    f.comp g₁ = f.comp g₂ ↔ g₁ = g₂ :=\n  ⟨fun h => ext fun a => hf <| by rw [← comp_apply, h, comp_apply], congr_arg _⟩\n#align cancel_left cancel_left\n\n"}
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«exprC( , )» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«exprC( , )» -/\ntheorem cancel_left {f : «exprC( , )» β γ} {g₁ g₂ : «exprC( , )» α β} (hf : injective f) :\n    f.comp g₁ = f.comp g₂ ↔ g₁ = g₂ :=\n  ⟨fun h => ext fun a => hf <| by rw [← comp_apply, h, comp_apply], congr_arg _⟩\n#align cancel_left cancel_left\n\n",
+ "ContinuousAt":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«exprC( , )» -/\n#print ContinuousAt /-\n/-- Deprecated. Use `map_continuous_at` instead. -/\nprotected theorem ContinuousAt (f : «exprC( , )» α β) (x : α) : ContinuousAt f x :=\n  f.continuous.continuous_at\n#align continuous_at ContinuousAt\n-/\n\n",
+ "Continuous":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«exprC( , )» -/\n#print Continuous /-\n/-- Deprecated. Use `map_continuous` instead. -/\nprotected theorem Continuous (f : «exprC( , )» α β) : Continuous f :=\n  f.continuous_to_fun\n#align continuous Continuous\n-/\n\n"}

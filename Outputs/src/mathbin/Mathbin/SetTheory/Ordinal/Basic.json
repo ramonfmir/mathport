@@ -1,297 +1,297 @@
 {"zero_le":
- "#print zero_le /-\nprotected theorem zero_le (o : ordinal) : 0 ≤ o :=\n  induction_on o fun α r _ => (InitialSeg.ofIsEmpty _ r).ordinal_type_le\n#align zero_le zero_le\n-/\n\n",
+ "#print zero_le /-\nprotected theorem zero_le (o : Ordinal) : 0 ≤ o :=\n  inductionOn o fun α r _ => (InitialSeg.ofIsEmpty _ r).ordinal_type_le\n#align zero_le zero_le\n-/\n\n",
  "univ_umax":
  "theorem univ_umax : univ.{u, max (u + 1) v} = univ.{u, v} :=\n  congr_fun lift_umax _\n#align univ_umax univ_umax\n\n",
  "univ_id":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `cardinal.mk -/\n-- intended to be used with explicit universe parameters\ntheorem univ_id : univ.{u, u + 1} = cardinal.mk ordinal :=\n  lift_id _\n#align univ_id univ_id\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `cardinal.mk -/\n-- intended to be used with explicit universe parameters\ntheorem univ_id : univ.{u, u + 1} = cardinal.mk Ordinal :=\n  lift_id _\n#align univ_id univ_id\n\n",
  "typein_top":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `principal_seg -/\n@[simp]\ntheorem typein_top {α β} {r : α → α → Prop} {s : β → β → Prop} [is_well_order α r] [is_well_order β s]\n    (f : principal_seg r s) : typein s f.top = type r :=\n  eq.symm <|\n    quot.sound\n      ⟨RelIso.ofSurjective (RelEmbedding.codRestrict _ f f.lt_top) fun ⟨a, h⟩ => by\n          rcases f.down.1 h with ⟨b, rfl⟩ <;> exact ⟨b, rfl⟩⟩\n#align typein_top typein_top\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `principal_seg -/\n@[simp]\ntheorem typein_top {α β} {r : α → α → Prop} {s : β → β → Prop} [IsWellOrder α r] [IsWellOrder β s]\n    (f : principal_seg r s) : typein s f.top = type r :=\n  Eq.symm <|\n    quot.sound\n      ⟨RelIso.ofSurjective (RelEmbedding.codRestrict _ f f.lt_top) fun ⟨a, h⟩ => by\n          rcases f.down.1 h with ⟨b, rfl⟩ <;> exact ⟨b, rfl⟩⟩\n#align typein_top typein_top\n\n",
  "typein_surj":
- "theorem typein_surj (r : α → α → Prop) [is_well_order α r] {o} (h : o < type r) : ∃ a, typein r a = o :=\n  induction_on o (fun β s _ ⟨f⟩ => ⟨f.top, typein_top _⟩) h\n#align typein_surj typein_surj\n\n",
+ "theorem typein_surj (r : α → α → Prop) [IsWellOrder α r] {o} (h : o < type r) : ∃ a, typein r a = o :=\n  inductionOn o (fun β s _ ⟨f⟩ => ⟨f.top, typein_top _⟩) h\n#align typein_surj typein_surj\n\n",
  "typein_one_out":
- "@[simp]\ntheorem typein_one_out (x : (1 : ordinal).out.α) : typein (· < ·) x = 0 := by rw [one_out_eq x, typein_enum]\n#align typein_one_out typein_one_out\n\n",
+ "@[simp]\ntheorem typein_one_out (x : (1 : Ordinal).out.α) : typein (· < ·) x = 0 := by rw [one_out_eq x, typein_enum]\n#align typein_one_out typein_one_out\n\n",
  "typein_lt_typein":
- "@[simp]\ntheorem typein_lt_typein (r : α → α → Prop) [is_well_order α r] {a b : α} : typein r a < typein r b ↔ r a b :=\n  ⟨fun ⟨f⟩ =>\n    by\n    have : f.top.1 = a := by\n      let f' := PrincipalSeg.ofElement r a\n      let g' := f.trans (PrincipalSeg.ofElement r b)\n      have : g'.top = f'.top := by rw [subsingleton.elim f' g']\n      exact this\n    rw [← this]\n    exact f.top.2, fun h =>\n    ⟨PrincipalSeg.codRestrict _ (PrincipalSeg.ofElement r a) (fun x => @trans _ r _ _ _ _ x.2 h) h⟩⟩\n#align typein_lt_typein typein_lt_typein\n\n",
+ "@[simp]\ntheorem typein_lt_typein (r : α → α → Prop) [IsWellOrder α r] {a b : α} : typein r a < typein r b ↔ r a b :=\n  ⟨fun ⟨f⟩ =>\n    by\n    have : f.top.1 = a := by\n      let f' := PrincipalSeg.ofElement r a\n      let g' := f.trans (PrincipalSeg.ofElement r b)\n      have : g'.top = f'.top := by rw [subsingleton.elim f' g']\n      exact this\n    rw [← this]\n    exact f.top.2, fun h =>\n    ⟨PrincipalSeg.codRestrict _ (PrincipalSeg.ofElement r a) (fun x => @trans _ r _ _ _ _ x.2 h) h⟩⟩\n#align typein_lt_typein typein_lt_typein\n\n",
  "typein_lt_type":
- "theorem typein_lt_type (r : α → α → Prop) [is_well_order α r] (a : α) : typein r a < type r :=\n  ⟨PrincipalSeg.ofElement _ _⟩\n#align typein_lt_type typein_lt_type\n\n",
+ "theorem typein_lt_type (r : α → α → Prop) [IsWellOrder α r] (a : α) : typein r a < type r :=\n  ⟨PrincipalSeg.ofElement _ _⟩\n#align typein_lt_type typein_lt_type\n\n",
  "typein_lt_self":
- "theorem typein_lt_self {o : ordinal} (i : o.out.α) : typein (· < ·) i < o :=\n  by\n  simp_rw [← type_lt o]\n  apply typein_lt_type\n#align typein_lt_self typein_lt_self\n\n",
+ "theorem typein_lt_self {o : Ordinal} (i : o.out.α) : typein (· < ·) i < o :=\n  by\n  simp_rw [← type_lt o]\n  apply typein_lt_type\n#align typein_lt_self typein_lt_self\n\n",
  "typein_le_typein'":
- "@[simp]\ntheorem typein_le_typein' (o : ordinal) {x x' : o.out.α} : typein (· < ·) x ≤ typein (· < ·) x' ↔ x ≤ x' :=\n  by\n  rw [typein_le_typein]\n  exact not_lt\n#align typein_le_typein' typein_le_typein'\n\n",
+ "@[simp]\ntheorem typein_le_typein' (o : Ordinal) {x x' : o.out.α} : typein (· < ·) x ≤ typein (· < ·) x' ↔ x ≤ x' :=\n  by\n  rw [typein_le_typein]\n  exact not_lt\n#align typein_le_typein' typein_le_typein'\n\n",
  "typein_le_typein":
- "@[simp]\ntheorem typein_le_typein (r : α → α → Prop) [is_well_order α r] {x x' : α} : typein r x ≤ typein r x' ↔ ¬r x' x := by\n  rw [← not_lt, typein_lt_typein]\n#align typein_le_typein typein_le_typein\n\n",
+ "@[simp]\ntheorem typein_le_typein (r : α → α → Prop) [IsWellOrder α r] {x x' : α} : typein r x ≤ typein r x' ↔ ¬r x' x := by\n  rw [← not_lt, typein_lt_typein]\n#align typein_le_typein typein_le_typein\n\n",
  "typein_injective":
- "theorem typein_injective (r : α → α → Prop) [is_well_order α r] : injective (typein r) :=\n  injective_of_increasing r (· < ·) (typein r) fun x y => (typein_lt_typein r).2\n#align typein_injective typein_injective\n\n",
+ "theorem typein_injective (r : α → α → Prop) [IsWellOrder α r] : injective (typein r) :=\n  injective_of_increasing r (· < ·) (typein r) fun x y => (typein_lt_typein r).2\n#align typein_injective typein_injective\n\n",
  "typein_inj":
- "@[simp]\ntheorem typein_inj (r : α → α → Prop) [is_well_order α r] {a b} : typein r a = typein r b ↔ a = b :=\n  (typein_injective r).eq_iff\n#align typein_inj typein_inj\n\n",
+ "@[simp]\ntheorem typein_inj (r : α → α → Prop) [IsWellOrder α r] {a b} : typein r a = typein r b ↔ a = b :=\n  (typein_injective r).eq_iff\n#align typein_inj typein_inj\n\n",
  "typein_enum":
- "@[simp]\ntheorem typein_enum (r : α → α → Prop) [is_well_order α r] {o} (h : o < type r) : typein r (enum r o h) = o :=\n  by\n  let ⟨a, e⟩ := typein_surj r h\n  clear _let_match <;> subst e <;> rw [enum_typein]\n#align typein_enum typein_enum\n\n",
+ "@[simp]\ntheorem typein_enum (r : α → α → Prop) [IsWellOrder α r] {o} (h : o < type r) : typein r (enum r o h) = o :=\n  by\n  let ⟨a, e⟩ := typein_surj r h\n  clear _let_match <;> subst e <;> rw [enum_typein]\n#align typein_enum typein_enum\n\n",
  "typein_apply":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `initial_seg -/\n@[simp]\ntheorem typein_apply {α β} {r : α → α → Prop} {s : β → β → Prop} [is_well_order α r] [is_well_order β s]\n    (f : initial_seg r s) (a : α) : ordinal.typein s (f a) = ordinal.typein r a :=\n  eq.symm <|\n    quotient.sound\n      ⟨RelIso.ofSurjective\n          (RelEmbedding.codRestrict _ ((Subrel.relEmbedding _ _).trans f) fun ⟨x, h⟩ => by\n            rw [RelEmbedding.trans_apply] <;> exact f.to_rel_embedding.map_rel_iff.2 h)\n          fun ⟨y, h⟩ => by\n          rcases f.init' h with ⟨a, rfl⟩ <;>\n            exact ⟨⟨a, f.to_rel_embedding.map_rel_iff.1 h⟩, subtype.eq <| RelEmbedding.trans_apply _ _ _⟩⟩\n#align typein_apply typein_apply\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `initial_seg -/\n@[simp]\ntheorem typein_apply {α β} {r : α → α → Prop} {s : β → β → Prop} [IsWellOrder α r] [IsWellOrder β s]\n    (f : initial_seg r s) (a : α) : Ordinal.typein s (f a) = Ordinal.typein r a :=\n  Eq.symm <|\n    quotient.sound\n      ⟨RelIso.ofSurjective\n          (RelEmbedding.codRestrict _ ((Subrel.relEmbedding _ _).trans f) fun ⟨x, h⟩ => by\n            rw [RelEmbedding.trans_apply] <;> exact f.to_rel_embedding.map_rel_iff.2 h)\n          fun ⟨y, h⟩ => by\n          rcases f.init h with ⟨a, rfl⟩ <;>\n            exact ⟨⟨a, f.to_rel_embedding.map_rel_iff.1 h⟩, Subtype.eq <| RelEmbedding.trans_apply _ _ _⟩⟩\n#align typein_apply typein_apply\n\n",
  "type_unit":
- "theorem type_unit : type (@empty_relation unit) = 1 :=\n  rfl\n#align type_unit type_unit\n\n",
+ "theorem type_unit : type (@empty_relation Unit) = 1 :=\n  rfl\n#align type_unit type_unit\n\n",
  "type_ulift":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹'o » -/\n@[simp]\ntheorem type_ulift (r : α → α → Prop) [is_well_order α r] : type («expr ⁻¹'o » ulift.down r) = lift.{v} (type r) :=\n  rfl\n#align type_ulift type_ulift\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹'o » -/\n@[simp]\ntheorem type_ulift (r : α → α → Prop) [IsWellOrder α r] : type («expr ⁻¹'o » ULift.down r) = lift.{v} (type r) :=\n  rfl\n#align type_ulift type_ulift\n\n",
  "type_sum_lex":
- "@[simp]\ntheorem type_sum_lex {α β : Type u} (r : α → α → Prop) (s : β → β → Prop) [is_well_order α r] [is_well_order β s] :\n    type (sum.lex r s) = type r + type s :=\n  rfl\n#align type_sum_lex type_sum_lex\n\n",
+ "@[simp]\ntheorem type_sum_lex {α β : Type u} (r : α → α → Prop) (s : β → β → Prop) [IsWellOrder α r] [IsWellOrder β s] :\n    type (Sum.Lex r s) = type r + type s :=\n  rfl\n#align type_sum_lex type_sum_lex\n\n",
  "type_punit":
  "theorem type_punit : type (@empty_relation PUnit) = 1 :=\n  rfl\n#align type_punit type_punit\n\n",
  "type_preimage":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹'o » -/\n@[simp]\ntheorem type_preimage {α β : Type u} (r : α → α → Prop) [is_well_order α r] (f : «expr ≃ » β α) :\n    type («expr ⁻¹'o » f r) = type r :=\n  (RelIso.preimage f r).ordinal_type_eq\n#align type_preimage type_preimage\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹'o » -/\n@[simp]\ntheorem type_preimage {α β : Type u} (r : α → α → Prop) [IsWellOrder α r] (f : «expr ≃ » β α) :\n    type («expr ⁻¹'o » f r) = type r :=\n  (RelIso.preimage f r).ordinal_type_eq\n#align type_preimage type_preimage\n\n",
  "type_pempty":
  "theorem type_pempty : type (@empty_relation PEmpty) = 0 :=\n  rfl\n#align type_pempty type_pempty\n\n",
  "type_out":
- "@[simp]\ntheorem type_out (o : ordinal) : ordinal.type o.out.r = o := by rw [ordinal.type, Well_order.eta, quotient.out_eq]\n#align type_out type_out\n\n",
+ "@[simp]\ntheorem type_out (o : Ordinal) : Ordinal.type o.out.r = o := by rw [Ordinal.type, WellOrder.eta, Quotient.out_eq]\n#align type_out type_out\n\n",
  "type_ne_zero_of_nonempty":
- "theorem type_ne_zero_of_nonempty (r) [is_well_order α r] [h : nonempty α] : type r ≠ 0 :=\n  type_ne_zero_iff_nonempty.2 h\n#align type_ne_zero_of_nonempty type_ne_zero_of_nonempty\n\n",
+ "theorem type_ne_zero_of_nonempty (r) [IsWellOrder α r] [h : Nonempty α] : type r ≠ 0 :=\n  type_ne_zero_iff_nonempty.2 h\n#align type_ne_zero_of_nonempty type_ne_zero_of_nonempty\n\n",
  "type_ne_zero_iff_nonempty":
- "theorem type_ne_zero_iff_nonempty [is_well_order α r] : type r ≠ 0 ↔ nonempty α := by simp\n#align type_ne_zero_iff_nonempty type_ne_zero_iff_nonempty\n\n",
+ "theorem type_ne_zero_iff_nonempty [IsWellOrder α r] : type r ≠ 0 ↔ Nonempty α := by simp\n#align type_ne_zero_iff_nonempty type_ne_zero_iff_nonempty\n\n",
  "type_nat_lt":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `ordinal.omega -/\n/-- Note that the presence of this lemma makes `simp [omega]` form a loop. -/\n@[simp]\ntheorem type_nat_lt : @type ℕ (· < ·) _ = ordinal.omega :=\n  (lift_id _).symm\n#align type_nat_lt type_nat_lt\n\n",
  "type_lt_iff":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `principal_seg -/\n@[simp]\ntheorem type_lt_iff {α β} {r : α → α → Prop} {s : β → β → Prop} [is_well_order α r] [is_well_order β s] :\n    type r < type s ↔ nonempty (principal_seg r s) :=\n  iff.rfl\n#align type_lt_iff type_lt_iff\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `principal_seg -/\n@[simp]\ntheorem type_lt_iff {α β} {r : α → α → Prop} {s : β → β → Prop} [IsWellOrder α r] [IsWellOrder β s] :\n    type r < type s ↔ Nonempty (principal_seg r s) :=\n  iff.rfl\n#align type_lt_iff type_lt_iff\n\n",
  "type_lt":
- "@[simp]\ntheorem type_lt (o : ordinal) : type ((· < ·) : o.out.α → o.out.α → Prop) = o :=\n  (type_def' _).symm.trans <| quotient.out_eq o\n#align type_lt type_lt\n\n",
+ "@[simp]\ntheorem type_lt (o : Ordinal) : type ((· < ·) : o.out.α → o.out.α → Prop) = o :=\n  (type_def' _).symm.trans <| Quotient.out_eq o\n#align type_lt type_lt\n\n",
  "type_lift_preimage":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹'o » -/\n@[simp]\ntheorem type_lift_preimage {α : Type u} {β : Type v} (r : α → α → Prop) [is_well_order α r] (f : «expr ≃ » β α) :\n    lift.{u} (type («expr ⁻¹'o » f r)) = lift.{v} (type r) :=\n  (RelIso.preimage f r).ordinal_lift_type_eq\n#align type_lift_preimage type_lift_preimage\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹'o » -/\n@[simp]\ntheorem type_lift_preimage {α : Type u} {β : Type v} (r : α → α → Prop) [IsWellOrder α r] (f : «expr ≃ » β α) :\n    lift.{u} (type («expr ⁻¹'o » f r)) = lift.{v} (type r) :=\n  (RelIso.preimage f r).ordinal_lift_type_eq\n#align type_lift_preimage type_lift_preimage\n\n",
  "type_le_iff'":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ↪r » -/\ntheorem type_le_iff' {α β} {r : α → α → Prop} {s : β → β → Prop} [is_well_order α r] [is_well_order β s] :\n    type r ≤ type s ↔ nonempty («expr ↪r » r s) :=\n  ⟨fun ⟨f⟩ => ⟨f⟩, fun ⟨f⟩ => ⟨f.collapse⟩⟩\n#align type_le_iff' type_le_iff'\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ↪r » -/\ntheorem type_le_iff' {α β} {r : α → α → Prop} {s : β → β → Prop} [IsWellOrder α r] [IsWellOrder β s] :\n    type r ≤ type s ↔ Nonempty («expr ↪r » r s) :=\n  ⟨fun ⟨f⟩ => ⟨f⟩, fun ⟨f⟩ => ⟨f.collapse⟩⟩\n#align type_le_iff' type_le_iff'\n\n",
  "type_le_iff":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `initial_seg -/\ntheorem type_le_iff {α β} {r : α → α → Prop} {s : β → β → Prop} [is_well_order α r] [is_well_order β s] :\n    type r ≤ type s ↔ nonempty (initial_seg r s) :=\n  iff.rfl\n#align type_le_iff type_le_iff\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `initial_seg -/\ntheorem type_le_iff {α β} {r : α → α → Prop} {s : β → β → Prop} [IsWellOrder α r] [IsWellOrder β s] :\n    type r ≤ type s ↔ Nonempty (initial_seg r s) :=\n  iff.rfl\n#align type_le_iff type_le_iff\n\n",
  "type_fintype":
- "@[simp]\ntheorem type_fintype (r : α → α → Prop) [is_well_order α r] [fintype α] : type r = fintype.card α := by\n  rw [← card_eq_nat, card_type, mk_fintype]\n#align type_fintype type_fintype\n\n",
+ "@[simp]\ntheorem type_fintype (r : α → α → Prop) [IsWellOrder α r] [Fintype α] : type r = Fintype.card α := by\n  rw [← card_eq_nat, card_type, mk_fintype]\n#align type_fintype type_fintype\n\n",
  "type_fin":
- "theorem type_fin (n : ℕ) : @type (fin n) (· < ·) _ = n := by simp\n#align type_fin type_fin\n\n",
+ "theorem type_fin (n : ℕ) : @type (Fin n) (· < ·) _ = n := by simp\n#align type_fin type_fin\n\n",
  "type_eq_zero_of_empty":
- "theorem type_eq_zero_of_empty (r) [is_well_order α r] [is_empty α] : type r = 0 :=\n  (RelIso.relIsoOfIsEmpty r _).ordinal_type_eq\n#align type_eq_zero_of_empty type_eq_zero_of_empty\n\n",
+ "theorem type_eq_zero_of_empty (r) [IsWellOrder α r] [IsEmpty α] : type r = 0 :=\n  (RelIso.relIsoOfIsEmpty r _).ordinal_type_eq\n#align type_eq_zero_of_empty type_eq_zero_of_empty\n\n",
  "type_eq_zero_iff_is_empty":
- "@[simp]\ntheorem type_eq_zero_iff_is_empty [is_well_order α r] : type r = 0 ↔ is_empty α :=\n  ⟨fun h =>\n    let ⟨s⟩ := type_eq.1 h\n    s.to_equiv.is_empty,\n    @type_eq_zero_of_empty α r _⟩\n#align type_eq_zero_iff_is_empty type_eq_zero_iff_is_empty\n\n",
+ "@[simp]\ntheorem type_eq_zero_iff_is_empty [IsWellOrder α r] : type r = 0 ↔ IsEmpty α :=\n  ⟨fun h =>\n    let ⟨s⟩ := type_eq.1 h\n    s.to_equiv.is_empty,\n    @type_eq_zero_of_empty α r _⟩\n#align type_eq_zero_iff_is_empty type_eq_zero_iff_is_empty\n\n",
  "type_eq_one_of_unique":
- "theorem type_eq_one_of_unique (r) [is_well_order α r] [unique α] : type r = 1 :=\n  (RelIso.relIsoOfUniqueOfIrrefl r _).ordinal_type_eq\n#align type_eq_one_of_unique type_eq_one_of_unique\n\n",
+ "theorem type_eq_one_of_unique (r) [IsWellOrder α r] [Unique α] : type r = 1 :=\n  (RelIso.relIsoOfUniqueOfIrrefl r _).ordinal_type_eq\n#align type_eq_one_of_unique type_eq_one_of_unique\n\n",
  "type_eq_one_iff_unique":
- "@[simp]\ntheorem type_eq_one_iff_unique [is_well_order α r] : type r = 1 ↔ nonempty (unique α) :=\n  ⟨fun h =>\n    let ⟨s⟩ := type_eq.1 h\n    ⟨s.to_equiv.unique⟩,\n    fun ⟨h⟩ => @type_eq_one_of_unique α r _ h⟩\n#align type_eq_one_iff_unique type_eq_one_iff_unique\n\n",
+ "@[simp]\ntheorem type_eq_one_iff_unique [IsWellOrder α r] : type r = 1 ↔ Nonempty (Unique α) :=\n  ⟨fun h =>\n    let ⟨s⟩ := type_eq.1 h\n    ⟨s.to_equiv.unique⟩,\n    fun ⟨h⟩ => @type_eq_one_of_unique α r _ h⟩\n#align type_eq_one_iff_unique type_eq_one_iff_unique\n\n",
  "type_eq":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃r » -/\ntheorem type_eq {α β} {r : α → α → Prop} {s : β → β → Prop} [is_well_order α r] [is_well_order β s] :\n    type r = type s ↔ nonempty («expr ≃r » r s) :=\n  quotient.eq\n#align type_eq type_eq\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃r » -/\ntheorem type_eq {α β} {r : α → α → Prop} {s : β → β → Prop} [IsWellOrder α r] [IsWellOrder β s] :\n    type r = type s ↔ Nonempty («expr ≃r » r s) :=\n  Quotient.eq'\n#align type_eq type_eq\n\n",
  "type_empty":
- "theorem type_empty : type (@empty_relation empty) = 0 :=\n  type_eq_zero_of_empty _\n#align type_empty type_empty\n\n",
+ "theorem type_empty : type (@empty_relation Empty) = 0 :=\n  type_eq_zero_of_empty _\n#align type_empty type_empty\n\n",
  "type_def'":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⟦ ⟧» -/\n-- ### Basic properties of the order type\n@[simp]\ntheorem type_def' (w : Well_order) : «expr⟦ ⟧» w = type w.r :=\n  by\n  cases w\n  rfl\n#align type_def' type_def'\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⟦ ⟧» -/\n-- ### Basic properties of the order type\n@[simp]\ntheorem type_def' (w : WellOrder) : «expr⟦ ⟧» w = type w.r :=\n  by\n  cases w\n  rfl\n#align type_def' type_def'\n\n",
  "type_def":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⟦ ⟧» -/\n@[simp]\ntheorem type_def (r) [wo : is_well_order α r] : («expr⟦ ⟧» ⟨α, r, wo⟩ : ordinal) = type r :=\n  rfl\n#align type_def type_def\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⟦ ⟧» -/\n@[simp]\ntheorem type_def (r) [wo : IsWellOrder α r] : («expr⟦ ⟧» ⟨α, r, wo⟩ : Ordinal) = type r :=\n  rfl\n#align type_def type_def\n\n",
  "succ_zero":
- "@[simp]\ntheorem succ_zero : succ (0 : ordinal) = 1 :=\n  zero_add 1\n#align succ_zero succ_zero\n\n",
+ "@[simp]\ntheorem succ_zero : succ (0 : Ordinal) = 1 :=\n  zero_add 1\n#align succ_zero succ_zero\n\n",
  "succ_pos":
- "theorem succ_pos (o : ordinal) : 0 < succ o :=\n  bot_lt_succ o\n#align succ_pos succ_pos\n\n",
+ "theorem succ_pos (o : Ordinal) : 0 < succ o :=\n  bot_lt_succ o\n#align succ_pos succ_pos\n\n",
  "succ_one":
- "@[simp]\ntheorem succ_one : succ (1 : ordinal) = 2 :=\n  rfl\n#align succ_one succ_one\n\n",
+ "@[simp]\ntheorem succ_one : succ (1 : Ordinal) = 2 :=\n  rfl\n#align succ_one succ_one\n\n",
  "succ_ne_zero":
- "theorem succ_ne_zero (o : ordinal) : succ o ≠ 0 :=\n  ne_of_gt <| succ_pos o\n#align succ_ne_zero succ_ne_zero\n\n",
+ "theorem succ_ne_zero (o : Ordinal) : succ o ≠ 0 :=\n  ne_of_gt <| succ_pos o\n#align succ_ne_zero succ_ne_zero\n\n",
  "succ_le_iff'":
- "-- ### Successor order properties\nprivate theorem succ_le_iff' {a b : ordinal} : a + 1 ≤ b ↔ a < b :=\n  ⟨lt_of_lt_of_le\n      (induction_on a fun α r _ =>\n        ⟨⟨⟨⟨fun x => sum.inl x, fun _ _ => sum.inl.inj⟩, fun _ _ => sum.lex_inl_inl⟩, sum.inr PUnit.unit, fun b =>\n            sum.rec_on b (fun x => ⟨fun _ => ⟨x, rfl⟩, fun _ => Sum.Lex.sep _ _⟩) fun x =>\n              sum.lex_inr_inr.trans ⟨false.elim, fun ⟨x, H⟩ => sum.inl_ne_inr H⟩⟩⟩),\n    induction_on a fun α r hr =>\n      induction_on b fun β s hs ⟨⟨f, t, hf⟩⟩ => by\n        haveI := hs\n        refine' ⟨⟨@RelEmbedding.ofMonotone (Sum α PUnit) β _ _ _ _ (sum.rec _ _) fun a b => _, fun a b => _⟩⟩\n        · exact f; · exact fun _ => t\n        · rcases a with (a | _) <;> rcases b with (b | _)\n          · simpa only [sum.lex_inl_inl] using f.map_rel_iff.2\n          · intro\n            rw [hf]\n            exact ⟨_, rfl⟩\n          · exact false.elim ∘ sum.lex_inr_inl\n          · exact false.elim ∘ sum.lex_inr_inr.1\n        · rcases a with (a | _)\n          · intro h\n            have := @PrincipalSeg.init _ _ _ _ _ ⟨f, t, hf⟩ _ _ h\n            cases' this with w h\n            exact ⟨sum.inl w, h⟩\n          · intro h\n            cases' (hf b).1 h with w h\n            exact ⟨sum.inl w, h⟩⟩\n#align succ_le_iff' succ_le_iff'\n\n",
+ "-- ### Successor order properties\nprivate theorem succ_le_iff' {a b : Ordinal} : a + 1 ≤ b ↔ a < b :=\n  ⟨lt_of_lt_of_le\n      (inductionOn a fun α r _ =>\n        ⟨⟨⟨⟨fun x => Sum.inl x, fun _ _ => sum.inl.inj⟩, fun _ _ => Sum.lex_inl_inl⟩, Sum.inr PUnit.unit, fun b =>\n            sum.rec_on b (fun x => ⟨fun _ => ⟨x, rfl⟩, fun _ => Sum.Lex.sep _ _⟩) fun x =>\n              Sum.lex_inr_inr.trans ⟨false.elim, fun ⟨x, H⟩ => Sum.inl_ne_inr H⟩⟩⟩),\n    inductionOn a fun α r hr =>\n      inductionOn b fun β s hs ⟨⟨f, t, hf⟩⟩ => by\n        haveI := hs\n        refine' ⟨⟨@RelEmbedding.ofMonotone (Sum α PUnit) β _ _ _ _ (sum.rec _ _) fun a b => _, fun a b => _⟩⟩\n        · exact f; · exact fun _ => t\n        · rcases a with (a | _) <;> rcases b with (b | _)\n          · simpa only [Sum.lex_inl_inl] using f.map_rel_iff.2\n          · intro\n            rw [hf]\n            exact ⟨_, rfl⟩\n          · exact false.elim ∘ Sum.lex_inr_inl\n          · exact false.elim ∘ Sum.lex_inr_inr.1\n        · rcases a with (a | _)\n          · intro h\n            have := @PrincipalSeg.init _ _ _ _ _ ⟨f, t, hf⟩ _ _ h\n            cases' this with w h\n            exact ⟨Sum.inl w, h⟩\n          · intro h\n            cases' (hf b).1 h with w h\n            exact ⟨Sum.inl w, h⟩⟩\n#align succ_le_iff' succ_le_iff'\n\n",
  "small_iff_lift_mk_lt_univ":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `cardinal.mk -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `cardinal.mk -/\ntheorem small_iff_lift_mk_lt_univ {α : Type u} :\n    Small.{v} α ↔ cardinal.lift (cardinal.mk α) < univ.{v, max u (v + 1)} :=\n  by\n  rw [lt_univ']\n  constructor\n  · rintro ⟨β, e⟩\n    exact ⟨cardinal.mk β, lift_mk_eq.{u, _, v + 1}.2 e⟩\n  · rintro ⟨c, hc⟩\n    exact ⟨⟨c.out, lift_mk_eq.{u, _, v + 1}.1 (hc.trans (congr rfl c.mk_out.symm))⟩⟩\n#align small_iff_lift_mk_lt_univ small_iff_lift_mk_lt_univ\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `cardinal.mk -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `cardinal.mk -/\ntheorem small_iff_lift_mk_lt_univ {α : Type u} :\n    Small.{v} α ↔ Cardinal.lift (cardinal.mk α) < univ.{v, max u (v + 1)} :=\n  by\n  rw [lt_univ']\n  constructor\n  · rintro ⟨β, e⟩\n    exact ⟨cardinal.mk β, lift_mk_eq.{u, _, v + 1}.2 e⟩\n  · rintro ⟨c, hc⟩\n    exact ⟨⟨c.out, lift_mk_eq.{u, _, v + 1}.1 (hc.trans (congr rfl c.mk_out.symm))⟩⟩\n#align small_iff_lift_mk_lt_univ small_iff_lift_mk_lt_univ\n\n",
  "rel_iso_enum'":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃r » -/\ntheorem rel_iso_enum' {α β : Type u} {r : α → α → Prop} {s : β → β → Prop} [is_well_order α r] [is_well_order β s]\n    (f : «expr ≃r » r s) (o : ordinal) : ∀ (hr : o < type r) (hs : o < type s), f (enum r o hr) = enum s o hs :=\n  by\n  refine' induction_on o _; rintro γ t wo ⟨g⟩ ⟨h⟩\n  skip; rw [enum_type g, enum_type (PrincipalSeg.ltEquiv g f)]; rfl\n#align rel_iso_enum' rel_iso_enum'\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃r » -/\ntheorem rel_iso_enum' {α β : Type u} {r : α → α → Prop} {s : β → β → Prop} [IsWellOrder α r] [IsWellOrder β s]\n    (f : «expr ≃r » r s) (o : Ordinal) : ∀ (hr : o < type r) (hs : o < type s), f (enum r o hr) = enum s o hs :=\n  by\n  refine' induction_on o _; rintro γ t wo ⟨g⟩ ⟨h⟩\n  skip; rw [enum_type g, enum_type (PrincipalSeg.ltEquiv g f)]; rfl\n#align rel_iso_enum' rel_iso_enum'\n\n",
  "rel_iso_enum":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃r » -/\ntheorem rel_iso_enum {α β : Type u} {r : α → α → Prop} {s : β → β → Prop} [is_well_order α r] [is_well_order β s]\n    (f : «expr ≃r » r s) (o : ordinal) (hr : o < type r) :\n    f (enum r o hr) =\n      enum s o\n        (by\n          convert hr using 1\n          apply quotient.sound\n          exact ⟨f.symm⟩) :=\n  rel_iso_enum' _ _ _ _\n#align rel_iso_enum rel_iso_enum\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃r » -/\ntheorem rel_iso_enum {α β : Type u} {r : α → α → Prop} {s : β → β → Prop} [IsWellOrder α r] [IsWellOrder β s]\n    (f : «expr ≃r » r s) (o : Ordinal) (hr : o < type r) :\n    f (enum r o hr) =\n      enum s o\n        (by\n          convert hr using 1\n          apply quotient.sound\n          exact ⟨f.symm⟩) :=\n  relIso_enum' _ _ _ _\n#align rel_iso_enum rel_iso_enum\n\n",
  "principal_seg_top'":
- "theorem lift.principal_seg_top' : lift.principal_seg.{u, u + 1}.top = @type ordinal (· < ·) _ := by\n  simp only [lift.principal_seg_top, univ_id]\n#align lift.principal_seg_top' lift.principal_seg_top'\n\n",
+ "theorem lift.principal_seg_top' : lift.principalSeg.{u, u + 1}.top = @type Ordinal (· < ·) _ := by\n  simp only [lift.principal_seg_top, univ_id]\n#align lift.principal_seg_top' lift.principal_seg_top'\n\n",
  "principal_seg_top":
- "@[simp]\ntheorem lift.principal_seg_top : lift.principal_seg.top = univ :=\n  rfl\n#align lift.principal_seg_top lift.principal_seg_top\n\n",
+ "@[simp]\ntheorem lift.principal_seg_top : lift.principalSeg.top = univ :=\n  rfl\n#align lift.principal_seg_top lift.principal_seg_top\n\n",
  "principal_seg_coe":
- "@[simp]\ntheorem lift.principal_seg_coe : (lift.principal_seg.{u, v} : ordinal → ordinal) = lift.{max (u + 1) v} :=\n  rfl\n#align lift.principal_seg_coe lift.principal_seg_coe\n\n",
+ "@[simp]\ntheorem lift.principal_seg_coe : (lift.principalSeg.{u, v} : Ordinal → Ordinal) = lift.{max (u + 1) v} :=\n  rfl\n#align lift.principal_seg_coe lift.principal_seg_coe\n\n",
  "pos_iff_ne_zero":
- "#print pos_iff_ne_zero /-\nprotected theorem pos_iff_ne_zero {o : ordinal} : 0 < o ↔ o ≠ 0 :=\n  bot_lt_iff_ne_bot\n#align pos_iff_ne_zero pos_iff_ne_zero\n-/\n\n",
+ "#print pos_iff_ne_zero /-\nprotected theorem pos_iff_ne_zero {o : Ordinal} : 0 < o ↔ o ≠ 0 :=\n  bot_lt_iff_ne_bot\n#align pos_iff_ne_zero pos_iff_ne_zero\n-/\n\n",
  "out_nonempty_iff_ne_zero":
- "@[simp]\ntheorem out_nonempty_iff_ne_zero {o : ordinal} : nonempty o.out.α ↔ o ≠ 0 := by\n  rw [← @type_ne_zero_iff_nonempty o.out.α (· < ·), type_lt]\n#align out_nonempty_iff_ne_zero out_nonempty_iff_ne_zero\n\n",
+ "@[simp]\ntheorem out_nonempty_iff_ne_zero {o : Ordinal} : Nonempty o.out.α ↔ o ≠ 0 := by\n  rw [← @type_ne_zero_iff_nonempty o.out.α (· < ·), type_lt]\n#align out_nonempty_iff_ne_zero out_nonempty_iff_ne_zero\n\n",
  "out_empty_iff_eq_zero":
- "@[simp]\ntheorem out_empty_iff_eq_zero {o : ordinal} : is_empty o.out.α ↔ o = 0 := by\n  rw [← @type_eq_zero_iff_is_empty o.out.α (· < ·), type_lt]\n#align out_empty_iff_eq_zero out_empty_iff_eq_zero\n\n",
+ "@[simp]\ntheorem out_empty_iff_eq_zero {o : Ordinal} : IsEmpty o.out.α ↔ o = 0 := by\n  rw [← @type_eq_zero_iff_is_empty o.out.α (· < ·), type_lt]\n#align out_empty_iff_eq_zero out_empty_iff_eq_zero\n\n",
  "ordinal_type_lt":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `principal_seg -/\ntheorem _root_.principal_seg.ordinal_type_lt {α β} {r : α → α → Prop} {s : β → β → Prop} [is_well_order α r]\n    [is_well_order β s] (h : principal_seg r s) : type r < type s :=\n  ⟨h⟩\n#align principal_seg.ordinal_type_lt principal_seg.ordinal_type_lt\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `principal_seg -/\n#print PrincipalSeg.ordinal_type_lt /-\ntheorem PrincipalSeg.ordinal_type_lt {α β} {r : α → α → Prop} {s : β → β → Prop} [IsWellOrder α r] [IsWellOrder β s]\n    (h : principal_seg r s) : type r < type s :=\n  ⟨h⟩\n#align principal_seg.ordinal_type_lt PrincipalSeg.ordinal_type_lt\n-/\n\n",
  "ordinal_type_le":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ↪r » -/\ntheorem _root_.rel_embedding.ordinal_type_le {α β} {r : α → α → Prop} {s : β → β → Prop} [is_well_order α r]\n    [is_well_order β s] (h : «expr ↪r » r s) : type r ≤ type s :=\n  ⟨h.collapse⟩\n#align rel_embedding.ordinal_type_le rel_embedding.ordinal_type_le\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ↪r » -/\n#print RelEmbedding.ordinal_type_le /-\ntheorem RelEmbedding.ordinal_type_le {α β} {r : α → α → Prop} {s : β → β → Prop} [IsWellOrder α r] [IsWellOrder β s]\n    (h : «expr ↪r » r s) : type r ≤ type s :=\n  ⟨h.collapse⟩\n#align rel_embedding.ordinal_type_le RelEmbedding.ordinal_type_le\n-/\n\n",
  "ordinal_type_eq":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃r » -/\ntheorem _root_.rel_iso.ordinal_type_eq {α β} {r : α → α → Prop} {s : β → β → Prop} [is_well_order α r]\n    [is_well_order β s] (h : «expr ≃r » r s) : type r = type s :=\n  type_eq.2 ⟨h⟩\n#align rel_iso.ordinal_type_eq rel_iso.ordinal_type_eq\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃r » -/\n#print RelIso.ordinal_type_eq /-\ntheorem RelIso.ordinal_type_eq {α β} {r : α → α → Prop} {s : β → β → Prop} [IsWellOrder α r] [IsWellOrder β s]\n    (h : «expr ≃r » r s) : type r = type s :=\n  type_eq.2 ⟨h⟩\n#align rel_iso.ordinal_type_eq RelIso.ordinal_type_eq\n-/\n\n",
  "ordinal_lift_type_eq":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃r » -/\ntheorem _root_.rel_iso.ordinal_lift_type_eq {α : Type u} {β : Type v} {r : α → α → Prop} {s : β → β → Prop}\n    [is_well_order α r] [is_well_order β s] (f : «expr ≃r » r s) : lift.{v} (type r) = lift.{u} (type s) :=\n  ((RelIso.preimage equiv.ulift r).trans <| f.trans (RelIso.preimage equiv.ulift s).symm).ordinal_type_eq\n#align rel_iso.ordinal_lift_type_eq rel_iso.ordinal_lift_type_eq\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃r » -/\n#print RelIso.ordinal_lift_type_eq /-\ntheorem RelIso.ordinal_lift_type_eq {α : Type u} {β : Type v} {r : α → α → Prop} {s : β → β → Prop} [IsWellOrder α r]\n    [IsWellOrder β s] (f : «expr ≃r » r s) : lift.{v} (type r) = lift.{u} (type s) :=\n  ((RelIso.preimage Equiv.ulift r).trans <| f.trans (RelIso.preimage Equiv.ulift s).symm).ordinal_type_eq\n#align rel_iso.ordinal_lift_type_eq RelIso.ordinal_lift_type_eq\n-/\n\n",
  "order_embedding_coe":
- "@[simp]\ntheorem ord.order_embedding_coe : (ord.order_embedding : cardinal → ordinal) = ord :=\n  rfl\n#align ord.order_embedding_coe ord.order_embedding_coe\n\n",
+ "@[simp]\ntheorem ord.order_embedding_coe : (ord.orderEmbedding : Cardinal → Ordinal) = ord :=\n  rfl\n#align ord.order_embedding_coe ord.order_embedding_coe\n\n",
  "ord_zero":
  "@[simp]\ntheorem ord_zero : ord 0 = 0 :=\n  gc_ord_card.l_bot\n#align ord_zero ord_zero\n\n",
  "ord_univ":
- "@[simp]\ntheorem ord_univ : ord univ.{u, v} = ordinal.univ.{u, v} :=\n  le_antisymm (ord_card_le _) <|\n    le_of_forall_lt fun o h =>\n      lt_ord.2\n        (by\n          rcases lift.principal_seg.{u, v}.down.1 (by simpa only [lift.principal_seg_coe] using h) with ⟨o', rfl⟩\n          simp only [lift.principal_seg_coe]; rw [← lift_card]\n          apply lift_lt_univ')\n#align ord_univ ord_univ\n\n",
+ "@[simp]\ntheorem ord_univ : ord univ.{u, v} = Ordinal.univ.{u, v} :=\n  le_antisymm (ord_card_le _) <|\n    le_of_forall_lt fun o h =>\n      lt_ord.2\n        (by\n          rcases lift.principalSeg.{u, v}.down.1 (by simpa only [lift.principal_seg_coe] using h) with ⟨o', rfl⟩\n          simp only [lift.principal_seg_coe]; rw [← lift_card]\n          apply lift_lt_univ')\n#align ord_univ ord_univ\n\n",
  "ord_strict_mono":
- "@[mono]\ntheorem ord_strict_mono : strict_mono ord :=\n  gci_ord_card.strict_mono_l\n#align ord_strict_mono ord_strict_mono\n\n",
+ "@[mono]\ntheorem ord_strict_mono : StrictMono ord :=\n  gciOrdCard.strict_mono_l\n#align ord_strict_mono ord_strict_mono\n\n",
  "ord_one":
  "@[simp]\ntheorem ord_one : ord 1 = 1 := by simpa using ord_nat 1\n#align ord_one ord_one\n\n",
  "ord_nat":
- "@[simp]\ntheorem ord_nat (n : ℕ) : ord n = n :=\n  (ord_le.2 (card_nat n).ge).antisymm\n    (by\n      induction' n with n IH\n      · apply ordinal.zero_le\n      · exact succ_le_of_lt (IH.trans_lt <| ord_lt_ord.2 <| nat_cast_lt.2 (nat.lt_succ_self n)))\n#align ord_nat ord_nat\n\n",
+ "@[simp]\ntheorem ord_nat (n : ℕ) : ord n = n :=\n  (ord_le.2 (card_nat n).ge).antisymm\n    (by\n      induction' n with n IH\n      · apply Ordinal.zero_le\n      · exact succ_le_of_lt (IH.trans_lt <| ord_lt_ord.2 <| nat_cast_lt.2 (nat.lt_succ_self n)))\n#align ord_nat ord_nat\n\n",
  "ord_mono":
- "@[mono]\ntheorem ord_mono : monotone ord :=\n  gc_ord_card.monotone_l\n#align ord_mono ord_mono\n\n",
+ "@[mono]\ntheorem ord_mono : Monotone ord :=\n  gc_ord_card.monotone_l\n#align ord_mono ord_mono\n\n",
  "ord_lt_ord":
- "@[simp]\ntheorem ord_lt_ord {c₁ c₂} : ord c₁ < ord c₂ ↔ c₁ < c₂ :=\n  ord_strict_mono.lt_iff_lt\n#align ord_lt_ord ord_lt_ord\n\n",
+ "@[simp]\ntheorem ord_lt_ord {c₁ c₂} : ord c₁ < ord c₂ ↔ c₁ < c₂ :=\n  ord_strictMono.lt_iff_lt\n#align ord_lt_ord ord_lt_ord\n\n",
  "ord_le_type":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `cardinal.mk -/\ntheorem ord_le_type (r : α → α → Prop) [h : is_well_order α r] : ord (cardinal.mk α) ≤ type r :=\n  cinfᵢ_le' _ (subtype.mk r h)\n#align ord_le_type ord_le_type\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `cardinal.mk -/\ntheorem ord_le_type (r : α → α → Prop) [h : IsWellOrder α r] : ord (cardinal.mk α) ≤ type r :=\n  cinfᵢ_le' _ (subtype.mk r h)\n#align ord_le_type ord_le_type\n\n",
  "ord_le_ord":
- "@[simp]\ntheorem ord_le_ord {c₁ c₂} : ord c₁ ≤ ord c₂ ↔ c₁ ≤ c₂ :=\n  gci_ord_card.l_le_l_iff\n#align ord_le_ord ord_le_ord\n\n",
+ "@[simp]\ntheorem ord_le_ord {c₁ c₂} : ord c₁ ≤ ord c₂ ↔ c₁ ≤ c₂ :=\n  gciOrdCard.l_le_l_iff\n#align ord_le_ord ord_le_ord\n\n",
  "ord_le":
- "theorem ord_le {c o} : ord c ≤ o ↔ c ≤ o.card :=\n  induction_on c fun α =>\n    ordinal.induction_on o fun β s _ => by\n      let ⟨r, _, e⟩ := ord_eq α\n      skip; simp only [card_type]; constructor <;> intro h\n      · rw [e] at h\n        exact\n          let ⟨f⟩ := h\n          ⟨f.to_embedding⟩\n      · cases' h with f\n        have g := RelEmbedding.preimage f s\n        haveI := RelEmbedding.isWellOrder g\n        exact le_trans (ord_le_type _) g.ordinal_type_le\n#align ord_le ord_le\n\n",
+ "theorem ord_le {c o} : ord c ≤ o ↔ c ≤ o.card :=\n  inductionOn c fun α =>\n    Ordinal.inductionOn o fun β s _ => by\n      let ⟨r, _, e⟩ := ord_eq α\n      skip; simp only [card_type]; constructor <;> intro h\n      · rw [e] at h\n        exact\n          let ⟨f⟩ := h\n          ⟨f.to_embedding⟩\n      · cases' h with f\n        have g := RelEmbedding.preimage f s\n        haveI := RelEmbedding.isWellOrder g\n        exact le_trans (ord_le_type _) g.ordinal_type_le\n#align ord_le ord_le\n\n",
  "ord_injective":
  "theorem ord_injective : injective ord := by\n  intro c c' h\n  rw [← card_ord c, ← card_ord c', h]\n#align ord_injective ord_injective\n\n",
  "ord_eq_Inf":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `cardinal.mk -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⨅ , » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⨅ , » -/\ntheorem ord_eq_Inf (α : Type u) :\n    ord (cardinal.mk α) =\n      «expr⨅ , » \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⨅ , »\"\n        (@type α r.1 r.2) :=\n  rfl\n#align ord_eq_Inf ord_eq_Inf\n\n",
  "ord_eq":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `cardinal.mk -/\ntheorem ord_eq (α) : ∃ (r : α → α → Prop)(wo : is_well_order α r), ord (cardinal.mk α) = @type α r wo :=\n  let ⟨r, wo⟩ := cinfᵢ_mem fun r : { r // is_well_order α r } => @type α r.1 r.2\n  ⟨r.1, r.2, wo.symm⟩\n#align ord_eq ord_eq\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `cardinal.mk -/\ntheorem ord_eq (α) : ∃ (r : α → α → Prop)(wo : IsWellOrder α r), ord (cardinal.mk α) = @type α r wo :=\n  let ⟨r, wo⟩ := cinfᵢ_mem fun r : { r // IsWellOrder α r } => @type α r.1 r.2\n  ⟨r.1, r.2, wo.symm⟩\n#align ord_eq ord_eq\n\n",
  "ord_card_le":
- "theorem ord_card_le (o : ordinal) : o.card.ord ≤ o :=\n  gc_ord_card.l_u_le _\n#align ord_card_le ord_card_le\n\n",
+ "theorem ord_card_le (o : Ordinal) : o.card.ord ≤ o :=\n  gc_ord_card.l_u_le _\n#align ord_card_le ord_card_le\n\n",
  "one_out_eq":
- "theorem one_out_eq (x : (1 : ordinal).out.α) : x = enum (· < ·) 0 (by simp) :=\n  unique.eq_default x\n#align one_out_eq one_out_eq\n\n",
+ "theorem one_out_eq (x : (1 : Ordinal).out.α) : x = enum (· < ·) 0 (by simp) :=\n  Unique.eq_default x\n#align one_out_eq one_out_eq\n\n",
  "one_ne_zero":
- "#print one_ne_zero /-\nprotected theorem one_ne_zero : (1 : ordinal) ≠ 0 :=\n  type_ne_zero_of_nonempty _\n#align one_ne_zero one_ne_zero\n-/\n\n",
+ "#print one_ne_zero /-\nprotected theorem one_ne_zero : (1 : Ordinal) ≠ 0 :=\n  type_ne_zero_of_nonempty _\n#align one_ne_zero one_ne_zero\n-/\n\n",
  "one_le_iff_pos":
- "theorem one_le_iff_pos {o : ordinal} : 1 ≤ o ↔ 0 < o := by rw [← succ_zero, succ_le_iff]\n#align one_le_iff_pos one_le_iff_pos\n\n",
+ "theorem one_le_iff_pos {o : Ordinal} : 1 ≤ o ↔ 0 < o := by rw [← succ_zero, succ_le_iff]\n#align one_le_iff_pos one_le_iff_pos\n\n",
  "one_le_iff_ne_zero":
- "theorem one_le_iff_ne_zero {o : ordinal} : 1 ≤ o ↔ o ≠ 0 := by rw [one_le_iff_pos, ordinal.pos_iff_ne_zero]\n#align one_le_iff_ne_zero one_le_iff_ne_zero\n\n",
+ "theorem one_le_iff_ne_zero {o : Ordinal} : 1 ≤ o ↔ o ≠ 0 := by rw [one_le_iff_pos, Ordinal.pos_iff_ne_zero]\n#align one_le_iff_ne_zero one_le_iff_ne_zero\n\n",
  "not_lt_zero":
- "protected theorem not_lt_zero (o : ordinal) : ¬o < 0 :=\n  not_lt_bot\n#align not_lt_zero not_lt_zero\n\n",
+ "protected theorem not_lt_zero (o : Ordinal) : ¬o < 0 :=\n  not_lt_bot\n#align not_lt_zero not_lt_zero\n\n",
  "nonempty_embedding_to_cardinal":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ↪ » -/\n/-\nCopyright (c) 2017 Johannes Hölzl. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Mario Carneiro, Floris van Doorn\n-/\ntheorem nonempty_embedding_to_cardinal : nonempty («expr ↪ » σ cardinal.{u}) :=\n  (Embedding.total _ _).resolve_left fun ⟨⟨f, hf⟩⟩ =>\n    let g : σ → cardinal.{u} := inv_fun f\n    let ⟨x, (hx : g x = 2 ^ sum g)⟩ := invFun_surjective hf (2 ^ sum g)\n    have : g x ≤ sum g := le_sum.{u, u} g x\n    not_le_of_gt (by rw [hx] <;> exact cantor _) this\n#align nonempty_embedding_to_cardinal nonempty_embedding_to_cardinal\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ↪ » -/\n#print nonempty_embedding_to_cardinal /-\n/-\nCopyright (c) 2017 Johannes Hölzl. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Mario Carneiro, Floris van Doorn\n-/\ntheorem nonempty_embedding_to_cardinal : Nonempty («expr ↪ » σ Cardinal.{u}) :=\n  (Embedding.total _ _).resolve_left fun ⟨⟨f, hf⟩⟩ =>\n    let g : σ → Cardinal.{u} := invFun f\n    let ⟨x, (hx : g x = 2 ^ Sum g)⟩ := invFun_surjective hf (2 ^ Sum g)\n    have : g x ≤ Sum g := le_sum.{u, u} g x\n    not_le_of_gt (by rw [hx] <;> exact cantor _) this\n#align nonempty_embedding_to_cardinal nonempty_embedding_to_cardinal\n-/\n\n",
  "ne_zero_of_out_nonempty":
- "theorem ne_zero_of_out_nonempty (o : ordinal) [h : nonempty o.out.α] : o ≠ 0 :=\n  out_nonempty_iff_ne_zero.1 h\n#align ne_zero_of_out_nonempty ne_zero_of_out_nonempty\n\n",
+ "theorem ne_zero_of_out_nonempty (o : Ordinal) [h : Nonempty o.out.α] : o ≠ 0 :=\n  out_nonempty_iff_ne_zero.1 h\n#align ne_zero_of_out_nonempty ne_zero_of_out_nonempty\n\n",
  "nat_lt_card":
- "@[simp]\ntheorem nat_lt_card {o} {n : ℕ} : (n : cardinal) < card o ↔ (n : ordinal) < o :=\n  by\n  rw [← succ_le_iff, ← succ_le_iff, ← nat_succ, nat_le_card]\n  rfl\n#align nat_lt_card nat_lt_card\n\n",
+ "@[simp]\ntheorem nat_lt_card {o} {n : ℕ} : (n : Cardinal) < card o ↔ (n : Ordinal) < o :=\n  by\n  rw [← succ_le_iff, ← succ_le_iff, ← nat_succ, nat_le_card]\n  rfl\n#align nat_lt_card nat_lt_card\n\n",
  "nat_le_card":
- "@[simp]\ntheorem nat_le_card {o} {n : ℕ} : (n : cardinal) ≤ card o ↔ (n : ordinal) ≤ o := by\n  rw [← cardinal.ord_le, cardinal.ord_nat]\n#align nat_le_card nat_le_card\n\n",
+ "@[simp]\ntheorem nat_le_card {o} {n : ℕ} : (n : Cardinal) ≤ card o ↔ (n : Ordinal) ≤ o := by\n  rw [← Cardinal.ord_le, Cardinal.ord_nat]\n#align nat_le_card nat_le_card\n\n",
  "nat_cast_succ":
- "theorem nat_cast_succ (n : ℕ) : ↑n.succ = succ (n : ordinal) :=\n  rfl\n#align nat_cast_succ nat_cast_succ\n\n",
+ "theorem nat_cast_succ (n : ℕ) : ↑n.succ = succ (n : Ordinal) :=\n  rfl\n#align nat_cast_succ nat_cast_succ\n\n",
  "mk_ordinal_out":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `cardinal.mk -/\n@[simp]\ntheorem mk_ordinal_out (o : ordinal) : cardinal.mk o.out.α = o.card :=\n  (ordinal.card_type _).symm.trans <| by rw [ordinal.type_lt]\n#align mk_ordinal_out mk_ordinal_out\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `cardinal.mk -/\n@[simp]\ntheorem mk_ordinal_out (o : Ordinal) : cardinal.mk o.out.α = o.card :=\n  (Ordinal.card_type _).symm.trans <| by rw [Ordinal.type_lt]\n#align mk_ordinal_out mk_ordinal_out\n\n",
  "mk_ord_out":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `cardinal.mk -/\ntheorem mk_ord_out (c : cardinal) : cardinal.mk c.ord.out.α = c := by simp\n#align mk_ord_out mk_ord_out\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `cardinal.mk -/\ntheorem mk_ord_out (c : Cardinal) : cardinal.mk c.ord.out.α = c := by simp\n#align mk_ord_out mk_ord_out\n\n",
  "max_zero_right":
- "@[simp]\ntheorem max_zero_right : ∀ a : ordinal, max a 0 = a :=\n  max_bot_right\n#align max_zero_right max_zero_right\n\n",
+ "@[simp]\ntheorem max_zero_right : ∀ a : Ordinal, max a 0 = a :=\n  max_bot_right\n#align max_zero_right max_zero_right\n\n",
  "max_zero_left":
- "@[simp]\ntheorem max_zero_left : ∀ a : ordinal, max 0 a = a :=\n  max_bot_left\n#align max_zero_left max_zero_left\n\n",
+ "@[simp]\ntheorem max_zero_left : ∀ a : Ordinal, max 0 a = a :=\n  max_bot_left\n#align max_zero_left max_zero_left\n\n",
  "max_eq_zero":
- "@[simp]\ntheorem max_eq_zero {a b : ordinal} : max a b = 0 ↔ a = 0 ∧ b = 0 :=\n  max_eq_bot\n#align max_eq_zero max_eq_zero\n\n",
+ "@[simp]\ntheorem max_eq_zero {a b : Ordinal} : max a b = 0 ↔ a = 0 ∧ b = 0 :=\n  max_eq_bot\n#align max_eq_zero max_eq_zero\n\n",
  "lt_wf":
- "theorem lt_wf : @well_founded ordinal (· < ·) :=\n  ⟨fun a =>\n    induction_on a fun α r wo =>\n      suffices ∀ a, acc (· < ·) (typein r a) from\n        ⟨_, fun o h =>\n          let ⟨a, e⟩ := typein_surj r h\n          e ▸ this a⟩\n      fun a =>\n      acc.rec_on (wo.wf.apply a) fun x H IH =>\n        ⟨_, fun o h => by\n          rcases typein_surj r (lt_trans h (typein_lt_type r _)) with ⟨b, rfl⟩\n          exact IH _ ((typein_lt_typein r).1 h)⟩⟩\n#align lt_wf lt_wf\n\n",
+ "theorem lt_wf : @well_founded Ordinal (· < ·) :=\n  ⟨fun a =>\n    inductionOn a fun α r wo =>\n      suffices ∀ a, acc (· < ·) (typein r a) from\n        ⟨_, fun o h =>\n          let ⟨a, e⟩ := typein_surj r h\n          e ▸ this a⟩\n      fun a =>\n      acc.rec_on (wo.wf.apply a) fun x H IH =>\n        ⟨_, fun o h => by\n          rcases typein_surj r (lt_trans h (typein_lt_type r _)) with ⟨b, rfl⟩\n          exact IH _ ((typein_lt_typein r).1 h)⟩⟩\n#align lt_wf lt_wf\n\n",
  "lt_univ'":
  "theorem lt_univ' {c} : c < univ.{u, v} ↔ ∃ c', c = lift.{max (u + 1) v, u} c' :=\n  ⟨fun h => by\n    let ⟨a, e, h'⟩ := lt_lift_iff.1 h\n    rw [← univ_id] at h'\n    rcases lt_univ.{u}.1 h' with ⟨c', rfl⟩\n    exact ⟨c', by simp only [e.symm, lift_lift]⟩, fun ⟨c', e⟩ => e.symm ▸ lift_lt_univ' _⟩\n#align lt_univ' lt_univ'\n\n",
  "lt_univ":
- "theorem lt_univ {c} : c < univ.{u, u + 1} ↔ ∃ c', c = lift.{u + 1, u} c' :=\n  ⟨fun h => by\n    have := ord_lt_ord.2 h\n    rw [ord_univ] at this\n    cases' lift.principal_seg.{u, u + 1}.down.1 (by simpa only [lift.principal_seg_top] ) with o e\n    have := card_ord c\n    rw [← e, lift.principal_seg_coe, ← lift_card] at this\n    exact ⟨_, this.symm⟩, fun ⟨c', e⟩ => e.symm ▸ lift_lt_univ _⟩\n#align lt_univ lt_univ\n\n",
+ "theorem lt_univ {c} : c < univ.{u, u + 1} ↔ ∃ c', c = lift.{u + 1, u} c' :=\n  ⟨fun h => by\n    have := ord_lt_ord.2 h\n    rw [ord_univ] at this\n    cases' lift.principalSeg.{u, u + 1}.down.1 (by simpa only [lift.principal_seg_top] ) with o e\n    have := card_ord c\n    rw [← e, lift.principal_seg_coe, ← lift_card] at this\n    exact ⟨_, this.symm⟩, fun ⟨c', e⟩ => e.symm ▸ lift_lt_univ _⟩\n#align lt_univ lt_univ\n\n",
  "lt_ord_succ_card":
- "theorem lt_ord_succ_card (o : ordinal) : o < (succ o.card).ord :=\n  lt_ord.2 <| lt_succ _\n#align lt_ord_succ_card lt_ord_succ_card\n\n",
+ "theorem lt_ord_succ_card (o : Ordinal) : o < (succ o.card).ord :=\n  lt_ord.2 <| lt_succ _\n#align lt_ord_succ_card lt_ord_succ_card\n\n",
  "lt_ord":
  "theorem lt_ord {c o} : o < ord c ↔ o.card < c :=\n  gc_ord_card.lt_iff_lt\n#align lt_ord lt_ord\n\n",
  "lt_one_iff_zero":
- "theorem lt_one_iff_zero {a : ordinal} : a < 1 ↔ a = 0 := by simpa using @lt_succ_bot_iff _ _ _ a _ _\n#align lt_one_iff_zero lt_one_iff_zero\n\n",
+ "theorem lt_one_iff_zero {a : Ordinal} : a < 1 ↔ a = 0 := by simpa using @lt_succ_bot_iff _ _ _ a _ _\n#align lt_one_iff_zero lt_one_iff_zero\n\n",
  "lt_lift_iff":
- "theorem lt_lift_iff {a : ordinal.{u}} {b : ordinal.{max u v}} : b < lift a ↔ ∃ a', lift a' = b ∧ a' < a :=\n  ⟨fun h =>\n    let ⟨a', e⟩ := lift_down (le_of_lt h)\n    ⟨a', e, lift_lt.1 <| e.symm ▸ h⟩,\n    fun ⟨a', e, h⟩ => e ▸ lift_lt.2 h⟩\n#align lt_lift_iff lt_lift_iff\n\n",
+ "theorem lt_lift_iff {a : Ordinal.{u}} {b : Ordinal.{max u v}} : b < lift a ↔ ∃ a', lift a' = b ∧ a' < a :=\n  ⟨fun h =>\n    let ⟨a', e⟩ := lift_down (le_of_lt h)\n    ⟨a', e, lift_lt.1 <| e.symm ▸ h⟩,\n    fun ⟨a', e, h⟩ => e ▸ lift_lt.2 h⟩\n#align lt_lift_iff lt_lift_iff\n\n",
  "lift_zero":
  "@[simp]\ntheorem lift_zero : lift 0 = 0 :=\n  type_eq_zero_of_empty _\n#align lift_zero lift_zero\n\n",
  "lift_uzero":
- "/-- An ordinal lifted to the zero universe equals itself. -/\n@[simp]\ntheorem lift_uzero (a : ordinal.{u}) : lift.{0} a = a :=\n  lift_id'.{0, u} a\n#align lift_uzero lift_uzero\n\n",
+ "/-- An ordinal lifted to the zero universe equals itself. -/\n@[simp]\ntheorem lift_uzero (a : Ordinal.{u}) : lift.{0} a = a :=\n  lift_id'.{0, u} a\n#align lift_uzero lift_uzero\n\n",
  "lift_univ":
  "@[simp]\ntheorem lift_univ : lift.{w} univ.{u, v} = univ.{u, max v w} :=\n  lift_lift _\n#align lift_univ lift_univ\n\n",
  "lift_umax'":
  "/-- `lift.{(max v u) u}` equals `lift.{v u}`. Using `set_option pp.universes true` will make it much\n    easier to understand what's happening when using this lemma. -/\n@[simp]\ntheorem lift_umax' : lift.{max v u, u} = lift.{v, u} :=\n  lift_umax\n#align lift_umax' lift_umax'\n\n",
  "lift_umax":
- "/-- `lift.{(max u v) u}` equals `lift.{v u}`. Using `set_option pp.universes true` will make it much\n    easier to understand what's happening when using this lemma. -/\n@[simp]\ntheorem lift_umax : lift.{max u v, u} = lift.{v, u} :=\n  funext fun a =>\n    induction_on a fun α r _ =>\n      quotient.sound ⟨(RelIso.preimage equiv.ulift r).trans (RelIso.preimage equiv.ulift r).symm⟩\n#align lift_umax lift_umax\n\n",
+ "/-- `lift.{(max u v) u}` equals `lift.{v u}`. Using `set_option pp.universes true` will make it much\n    easier to understand what's happening when using this lemma. -/\n@[simp]\ntheorem lift_umax : lift.{max u v, u} = lift.{v, u} :=\n  funext fun a =>\n    inductionOn a fun α r _ =>\n      quotient.sound ⟨(RelIso.preimage Equiv.ulift r).trans (RelIso.preimage Equiv.ulift r).symm⟩\n#align lift_umax lift_umax\n\n",
  "lift_type_lt":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹'o » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹'o » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `principal_seg -/\ntheorem lift_type_lt {α : Type u} {β : Type v} {r s} [is_well_order α r] [is_well_order β s] :\n    lift.{max v w} (type r) < lift.{max u w} (type s) ↔ nonempty (principal_seg r s) := by\n  haveI :=\n        @RelEmbedding.isWellOrder _ _ («expr ⁻¹'o » (@equiv.ulift.{max v w} α) r) r\n          (RelIso.preimage equiv.ulift.{max v w} r) _ <;>\n      haveI :=\n        @RelEmbedding.isWellOrder _ _ («expr ⁻¹'o » (@equiv.ulift.{max u w} β) s) s\n          (RelIso.preimage equiv.ulift.{max u w} s) _ <;>\n    exact\n      ⟨fun ⟨f⟩ =>\n        ⟨(f.equiv_lt (RelIso.preimage equiv.ulift r).symm).lt_le (InitialSeg.ofIso (RelIso.preimage equiv.ulift s))⟩,\n        fun ⟨f⟩ =>\n        ⟨(f.equiv_lt (RelIso.preimage equiv.ulift r)).lt_le (InitialSeg.ofIso (RelIso.preimage equiv.ulift s).symm)⟩⟩\n#align lift_type_lt lift_type_lt\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹'o » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹'o » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `principal_seg -/\ntheorem lift_type_lt {α : Type u} {β : Type v} {r s} [IsWellOrder α r] [IsWellOrder β s] :\n    lift.{max v w} (type r) < lift.{max u w} (type s) ↔ Nonempty (principal_seg r s) := by\n  haveI :=\n        @RelEmbedding.isWellOrder _ _ («expr ⁻¹'o » (@Equiv.ulift.{max v w} α) r) r\n          (RelIso.preimage Equiv.ulift.{max v w} r) _ <;>\n      haveI :=\n        @RelEmbedding.isWellOrder _ _ («expr ⁻¹'o » (@Equiv.ulift.{max u w} β) s) s\n          (RelIso.preimage Equiv.ulift.{max u w} s) _ <;>\n    exact\n      ⟨fun ⟨f⟩ =>\n        ⟨(f.equiv_lt (RelIso.preimage Equiv.ulift r).symm).lt_le (InitialSeg.ofIso (RelIso.preimage Equiv.ulift s))⟩,\n        fun ⟨f⟩ =>\n        ⟨(f.equiv_lt (RelIso.preimage Equiv.ulift r)).lt_le (InitialSeg.ofIso (RelIso.preimage Equiv.ulift s).symm)⟩⟩\n#align lift_type_lt lift_type_lt\n\n",
  "lift_type_le":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `initial_seg -/\ntheorem lift_type_le {α : Type u} {β : Type v} {r s} [is_well_order α r] [is_well_order β s] :\n    lift.{max v w} (type r) ≤ lift.{max u w} (type s) ↔ nonempty (initial_seg r s) :=\n  ⟨fun ⟨f⟩ =>\n    ⟨(InitialSeg.ofIso (RelIso.preimage equiv.ulift r).symm).trans <|\n        f.trans (InitialSeg.ofIso (RelIso.preimage equiv.ulift s))⟩,\n    fun ⟨f⟩ =>\n    ⟨(InitialSeg.ofIso (RelIso.preimage equiv.ulift r)).trans <|\n        f.trans (InitialSeg.ofIso (RelIso.preimage equiv.ulift s).symm)⟩⟩\n#align lift_type_le lift_type_le\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `initial_seg -/\ntheorem lift_type_le {α : Type u} {β : Type v} {r s} [IsWellOrder α r] [IsWellOrder β s] :\n    lift.{max v w} (type r) ≤ lift.{max u w} (type s) ↔ Nonempty (initial_seg r s) :=\n  ⟨fun ⟨f⟩ =>\n    ⟨(InitialSeg.ofIso (RelIso.preimage Equiv.ulift r).symm).trans <|\n        f.trans (InitialSeg.ofIso (RelIso.preimage Equiv.ulift s))⟩,\n    fun ⟨f⟩ =>\n    ⟨(InitialSeg.ofIso (RelIso.preimage Equiv.ulift r)).trans <|\n        f.trans (InitialSeg.ofIso (RelIso.preimage Equiv.ulift s).symm)⟩⟩\n#align lift_type_le lift_type_le\n\n",
  "lift_type_eq":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃r » -/\ntheorem lift_type_eq {α : Type u} {β : Type v} {r s} [is_well_order α r] [is_well_order β s] :\n    lift.{max v w} (type r) = lift.{max u w} (type s) ↔ nonempty («expr ≃r » r s) :=\n  quotient.eq.trans\n    ⟨fun ⟨f⟩ => ⟨(RelIso.preimage equiv.ulift r).symm.trans <| f.trans (RelIso.preimage equiv.ulift s)⟩, fun ⟨f⟩ =>\n      ⟨(RelIso.preimage equiv.ulift r).trans <| f.trans (RelIso.preimage equiv.ulift s).symm⟩⟩\n#align lift_type_eq lift_type_eq\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃r » -/\ntheorem lift_type_eq {α : Type u} {β : Type v} {r s} [IsWellOrder α r] [IsWellOrder β s] :\n    lift.{max v w} (type r) = lift.{max u w} (type s) ↔ Nonempty («expr ≃r » r s) :=\n  Quotient.eq'.trans\n    ⟨fun ⟨f⟩ => ⟨(RelIso.preimage Equiv.ulift r).symm.trans <| f.trans (RelIso.preimage Equiv.ulift s)⟩, fun ⟨f⟩ =>\n      ⟨(RelIso.preimage Equiv.ulift r).trans <| f.trans (RelIso.preimage Equiv.ulift s).symm⟩⟩\n#align lift_type_eq lift_type_eq\n\n",
  "lift_ord":
- "@[simp]\ntheorem lift_ord (c) : (ord c).lift = ord (lift c) :=\n  by\n  refine' le_antisymm (le_of_forall_lt fun a ha => _) _\n  · rcases ordinal.lt_lift_iff.1 ha with ⟨a, rfl, h⟩\n    rwa [lt_ord, ← lift_card, lift_lt, ← lt_ord, ← ordinal.lift_lt]\n  · rw [ord_le, ← lift_card, card_ord]\n#align lift_ord lift_ord\n\n",
+ "@[simp]\ntheorem lift_ord (c) : (ord c).lift = ord (lift c) :=\n  by\n  refine' le_antisymm (le_of_forall_lt fun a ha => _) _\n  · rcases Ordinal.lt_lift_iff.1 ha with ⟨a, rfl, h⟩\n    rwa [lt_ord, ← lift_card, lift_lt, ← lt_ord, ← Ordinal.lift_lt]\n  · rw [ord_le, ← lift_card, card_ord]\n#align lift_ord lift_ord\n\n",
  "lift_one":
  "@[simp]\ntheorem lift_one : lift 1 = 1 :=\n  type_eq_one_of_unique _\n#align lift_one lift_one\n\n",
  "lift_omega":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `ordinal.omega -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `ordinal.omega -/\n@[simp]\ntheorem lift_omega : lift (ordinal.omega) = ordinal.omega :=\n  lift_lift _\n#align lift_omega lift_omega\n\n",
  "lift_lt_univ'":
- "theorem lift_lt_univ' (c : cardinal) : lift.{max (u + 1) v, u} c < univ.{u, v} := by\n  simpa only [lift_lift, lift_univ, univ_umax] using lift_lt.{_, max (u + 1) v}.2 (lift_lt_univ c)\n#align lift_lt_univ' lift_lt_univ'\n\n",
+ "theorem lift_lt_univ' (c : Cardinal) : lift.{max (u + 1) v, u} c < univ.{u, v} := by\n  simpa only [lift_lift, lift_univ, univ_umax] using lift_lt.{_, max (u + 1) v}.2 (lift_lt_univ c)\n#align lift_lt_univ' lift_lt_univ'\n\n",
  "lift_lt_univ":
- "theorem lift_lt_univ (c : cardinal) : lift.{u + 1, u} c < univ.{u, u + 1} := by\n  simpa only [lift.principal_seg_coe, lift_ord, lift_succ, ord_le, succ_le_iff] using\n    le_of_lt (lift.principal_seg.{u, u + 1}.lt_top (succ c).ord)\n#align lift_lt_univ lift_lt_univ\n\n",
+ "theorem lift_lt_univ (c : Cardinal) : lift.{u + 1, u} c < univ.{u, u + 1} := by\n  simpa only [lift.principal_seg_coe, lift_ord, lift_succ, ord_le, succ_le_iff] using\n    le_of_lt (lift.principalSeg.{u, u + 1}.lt_top (succ c).ord)\n#align lift_lt_univ lift_lt_univ\n\n",
  "lift_lt":
- "@[simp]\ntheorem lift_lt {a b : ordinal} : lift a < lift b ↔ a < b := by simp only [lt_iff_le_not_le, lift_le]\n#align lift_lt lift_lt\n\n",
+ "@[simp]\ntheorem lift_lt {a b : Ordinal} : lift a < lift b ↔ a < b := by simp only [lt_iff_le_not_le, lift_le]\n#align lift_lt lift_lt\n\n",
  "lift_lift":
- "@[simp]\ntheorem lift_lift (a : ordinal) : lift.{w} (lift.{v} a) = lift.{max v w} a :=\n  induction_on a fun α r _ =>\n    quotient.sound\n      ⟨(RelIso.preimage equiv.ulift _).trans <|\n          (RelIso.preimage equiv.ulift _).trans (RelIso.preimage equiv.ulift _).symm⟩\n#align lift_lift lift_lift\n\n",
+ "@[simp]\ntheorem lift_lift (a : Ordinal) : lift.{w} (lift.{v} a) = lift.{max v w} a :=\n  inductionOn a fun α r _ =>\n    quotient.sound\n      ⟨(RelIso.preimage Equiv.ulift _).trans <|\n          (RelIso.preimage Equiv.ulift _).trans (RelIso.preimage Equiv.ulift _).symm⟩\n#align lift_lift lift_lift\n\n",
  "lift_le":
- "@[simp]\ntheorem lift_le {a b : ordinal} : lift.{u, v} a ≤ lift b ↔ a ≤ b :=\n  induction_on a fun α r _ =>\n    induction_on b fun β s _ => by\n      rw [← lift_umax]\n      exact lift_type_le\n#align lift_le lift_le\n\n",
+ "@[simp]\ntheorem lift_le {a b : Ordinal} : lift.{u, v} a ≤ lift b ↔ a ≤ b :=\n  inductionOn a fun α r _ =>\n    inductionOn b fun β s _ => by\n      rw [← lift_umax]\n      exact lift_type_le\n#align lift_le lift_le\n\n",
  "lift_inj":
- "@[simp]\ntheorem lift_inj {a b : ordinal} : lift a = lift b ↔ a = b := by simp only [le_antisymm_iff, lift_le]\n#align lift_inj lift_inj\n\n",
+ "@[simp]\ntheorem lift_inj {a b : Ordinal} : lift a = lift b ↔ a = b := by simp only [le_antisymm_iff, lift_le]\n#align lift_inj lift_inj\n\n",
  "lift_id'":
- "/-- An ordinal lifted to a lower or equal universe equals itself. -/\n@[simp]\ntheorem lift_id' (a : ordinal) : lift a = a :=\n  induction_on a fun α r _ => quotient.sound ⟨RelIso.preimage equiv.ulift r⟩\n#align lift_id' lift_id'\n\n",
+ "/-- An ordinal lifted to a lower or equal universe equals itself. -/\n@[simp]\ntheorem lift_id' (a : Ordinal) : lift a = a :=\n  inductionOn a fun α r _ => quotient.sound ⟨RelIso.preimage Equiv.ulift r⟩\n#align lift_id' lift_id'\n\n",
  "lift_id":
  "/-- An ordinal lifted to the same universe equals itself. -/\n@[simp]\ntheorem lift_id : ∀ a, lift.{u, u} a = a :=\n  lift_id'.{u, u}\n#align lift_id lift_id\n\n",
  "lift_down'":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `cardinal.mk -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ↪r » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹'o » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\ntheorem lift_down' {a : cardinal.{u}} {b : ordinal.{max u v}} (h : card b ≤ a.lift) : ∃ a', lift a' = b :=\n  let ⟨c, e⟩ := cardinal.lift_down h\n  cardinal.induction_on c\n    (fun α =>\n      induction_on b fun β s _ e' => by\n        skip\n        rw [card_type, ← cardinal.lift_id'.{max u v, u} (cardinal.mk β), ← cardinal.lift_umax.{u, v},\n          lift_mk_eq.{u, max u v, max u v}] at e'\n        cases' e' with f\n        have g := RelIso.preimage f s\n        haveI := (g : «expr ↪r » («expr ⁻¹'o » («expr⇑ » f) s) s).is_well_order\n        have := lift_type_eq.{u, max u v, max u v}.2 ⟨g⟩\n        rw [lift_id, lift_umax.{u, v}] at this\n        exact ⟨_, this⟩)\n    e\n#align lift_down' lift_down'\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `cardinal.mk -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ↪r » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹'o » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\ntheorem lift_down' {a : Cardinal.{u}} {b : Ordinal.{max u v}} (h : card b ≤ a.lift) : ∃ a', lift a' = b :=\n  let ⟨c, e⟩ := Cardinal.lift_down h\n  Cardinal.inductionOn c\n    (fun α =>\n      inductionOn b fun β s _ e' => by\n        skip\n        rw [card_type, ← Cardinal.lift_id'.{max u v, u} (cardinal.mk β), ← Cardinal.lift_umax.{u, v},\n          lift_mk_eq.{u, max u v, max u v}] at e'\n        cases' e' with f\n        have g := RelIso.preimage f s\n        haveI := (g : «expr ↪r » («expr ⁻¹'o » («expr⇑ » f) s) s).is_well_order\n        have := lift_type_eq.{u, max u v, max u v}.2 ⟨g⟩\n        rw [lift_id, lift_umax.{u, v}] at this\n        exact ⟨_, this⟩)\n    e\n#align lift_down' lift_down'\n\n",
  "lift_down":
- "theorem lift_down {a : ordinal.{u}} {b : ordinal.{max u v}} (h : b ≤ lift a) : ∃ a', lift a' = b :=\n  @lift_down' (card a) _ (by rw [lift_card] <;> exact card_le_card h)\n#align lift_down lift_down\n\n",
+ "theorem lift_down {a : Ordinal.{u}} {b : Ordinal.{max u v}} (h : b ≤ lift a) : ∃ a', lift a' = b :=\n  @lift_down' (card a) _ (by rw [lift_card] <;> exact card_le_card h)\n#align lift_down lift_down\n\n",
  "lift_card":
- "@[simp]\ntheorem lift_card (a) : (card a).lift = card (lift a) :=\n  induction_on a fun α r _ => rfl\n#align lift_card lift_card\n\n",
+ "@[simp]\ntheorem lift_card (a) : (card a).lift = card (lift a) :=\n  inductionOn a fun α r _ => rfl\n#align lift_card lift_card\n\n",
  "le_zero":
- "@[simp]\nprotected theorem le_zero {o : ordinal} : o ≤ 0 ↔ o = 0 :=\n  le_bot_iff\n#align le_zero le_zero\n\n",
+ "@[simp]\nprotected theorem le_zero {o : Ordinal} : o ≤ 0 ↔ o = 0 :=\n  le_bot_iff\n#align le_zero le_zero\n\n",
  "le_one_iff":
- "theorem le_one_iff {a : ordinal} : a ≤ 1 ↔ a = 0 ∨ a = 1 := by simpa using @le_succ_bot_iff _ _ _ a _\n#align le_one_iff le_one_iff\n\n",
+ "theorem le_one_iff {a : Ordinal} : a ≤ 1 ↔ a = 0 ∨ a = 1 := by simpa using @le_succ_bot_iff _ _ _ a _\n#align le_one_iff le_one_iff\n\n",
  "le_lift_iff":
- "theorem le_lift_iff {a : ordinal.{u}} {b : ordinal.{max u v}} : b ≤ lift a ↔ ∃ a', lift a' = b ∧ a' ≤ a :=\n  ⟨fun h =>\n    let ⟨a', e⟩ := lift_down h\n    ⟨a', e, lift_le.1 <| e.symm ▸ h⟩,\n    fun ⟨a', e, h⟩ => e ▸ lift_le.2 h⟩\n#align le_lift_iff le_lift_iff\n\n",
+ "theorem le_lift_iff {a : Ordinal.{u}} {b : Ordinal.{max u v}} : b ≤ lift a ↔ ∃ a', lift a' = b ∧ a' ≤ a :=\n  ⟨fun h =>\n    let ⟨a', e⟩ := lift_down h\n    ⟨a', e, lift_le.1 <| e.symm ▸ h⟩,\n    fun ⟨a', e, h⟩ => e ▸ lift_le.2 h⟩\n#align le_lift_iff le_lift_iff\n\n",
  "le_enum_succ":
- "theorem le_enum_succ {o : ordinal} (a : (succ o).out.α) :\n    a ≤\n      @enum (succ o).out.α (· < ·) _ o\n        (by\n          rw [type_lt]\n          exact lt_succ o) :=\n  by\n  rw [← enum_typein (· < ·) a, enum_le_enum', ← lt_succ_iff]\n  apply typein_lt_self\n#align le_enum_succ le_enum_succ\n\n",
+ "theorem le_enum_succ {o : Ordinal} (a : (succ o).out.α) :\n    a ≤\n      @enum (succ o).out.α (· < ·) _ o\n        (by\n          rw [type_lt]\n          exact lt_succ o) :=\n  by\n  rw [← enum_typein (· < ·) a, enum_le_enum', ← lt_succ_iff]\n  apply typein_lt_self\n#align le_enum_succ le_enum_succ\n\n",
  "le_add_right":
- "#print le_add_right /-\ntheorem le_add_right (a b : ordinal) : a ≤ a + b := by simpa only [add_zero] using add_le_add_left (ordinal.zero_le b) a\n#align le_add_right le_add_right\n-/\n\n",
+ "#print le_add_right /-\ntheorem le_add_right (a b : Ordinal) : a ≤ a + b := by simpa only [add_zero] using add_le_add_left (Ordinal.zero_le b) a\n#align le_add_right le_add_right\n-/\n\n",
  "le_add_left":
- "#print le_add_left /-\ntheorem le_add_left (a b : ordinal) : a ≤ b + a := by simpa only [zero_add] using add_le_add_right (ordinal.zero_le b) a\n#align le_add_left le_add_left\n-/\n\n",
+ "#print le_add_left /-\ntheorem le_add_left (a b : Ordinal) : a ≤ b + a := by simpa only [zero_add] using add_le_add_right (Ordinal.zero_le b) a\n#align le_add_left le_add_left\n-/\n\n",
  "initial_seg_coe":
- "@[simp]\ntheorem lift.initial_seg_coe : (lift.initial_seg : ordinal → ordinal) = lift :=\n  rfl\n#align lift.initial_seg_coe lift.initial_seg_coe\n\n",
+ "@[simp]\ntheorem lift.initial_seg_coe : (lift.initialSeg : Ordinal → Ordinal) = lift :=\n  rfl\n#align lift.initial_seg_coe lift.initial_seg_coe\n\n",
  "infₛ_empty":
- "#print infₛ_empty /-\n@[simp]\ntheorem infₛ_empty : infₛ (∅ : set ordinal) = 0 :=\n  dif_neg not_nonempty_empty\n#align Inf_empty infₛ_empty\n-/\n\n",
+ "#print infₛ_empty /-\n@[simp]\ntheorem infₛ_empty : infₛ (∅ : Set Ordinal) = 0 :=\n  dif_neg not_nonempty_empty\n#align Inf_empty infₛ_empty\n-/\n\n",
  "induction_on":
- "@[elab_as_elim]\ntheorem induction_on {C : ordinal → Prop} (o : ordinal) (H : ∀ (α r) [is_well_order α r], C (type r)) : C o :=\n  Quot.inductionOn o fun ⟨α, r, wo⟩ => @H α r wo\n#align induction_on induction_on\n\n",
+ "@[elab_as_elim]\ntheorem induction_on {C : Ordinal → Prop} (o : Ordinal) (H : ∀ (α r) [IsWellOrder α r], C (type r)) : C o :=\n  Quot.inductionOn o fun ⟨α, r, wo⟩ => @H α r wo\n#align induction_on induction_on\n\n",
  "induction":
- "/-- Reformulation of well founded induction on ordinals as a lemma that works with the\n`induction` tactic, as in `induction i using ordinal.induction with i IH`. -/\ntheorem induction {p : ordinal.{u} → Prop} (i : ordinal.{u}) (h : ∀ j, (∀ k, k < j → p k) → p j) : p i :=\n  lt_wf.induction i h\n#align induction induction\n\n",
+ "/-- Reformulation of well founded induction on ordinals as a lemma that works with the\n`induction` tactic, as in `induction i using ordinal.induction with i IH`. -/\ntheorem induction {p : Ordinal.{u} → Prop} (i : Ordinal.{u}) (h : ∀ j, (∀ k, k < j → p k) → p j) : p i :=\n  lt_wf.induction i h\n#align induction induction\n\n",
  "gc_ord_card":
  "theorem gc_ord_card : GaloisConnection ord card := fun _ _ => ord_le\n#align gc_ord_card gc_ord_card\n\n",
  "eta":
- "@[simp]\ntheorem eta (o : Well_order) : mk o.α o.r o.wo = o := by\n  cases o\n  rfl\n#align eta eta\n\n",
+ "@[simp]\ntheorem eta (o : WellOrder) : mk o.α o.r o.wo = o := by\n  cases o\n  rfl\n#align eta eta\n\n",
  "eq_zero_or_pos":
- "#print eq_zero_or_pos /-\ntheorem eq_zero_or_pos : ∀ a : ordinal, a = 0 ∨ 0 < a :=\n  eq_bot_or_bot_lt\n#align eq_zero_or_pos eq_zero_or_pos\n-/\n\n",
+ "#print eq_zero_or_pos /-\ntheorem eq_zero_or_pos : ∀ a : Ordinal, a = 0 ∨ 0 < a :=\n  eq_bot_or_bot_lt\n#align eq_zero_or_pos eq_zero_or_pos\n-/\n\n",
  "eq_zero_of_out_empty":
- "theorem eq_zero_of_out_empty (o : ordinal) [h : is_empty o.out.α] : o = 0 :=\n  out_empty_iff_eq_zero.1 h\n#align eq_zero_of_out_empty eq_zero_of_out_empty\n\n",
+ "theorem eq_zero_of_out_empty (o : Ordinal) [h : IsEmpty o.out.α] : o = 0 :=\n  out_empty_iff_eq_zero.1 h\n#align eq_zero_of_out_empty eq_zero_of_out_empty\n\n",
  "enum_zero_le'":
- "theorem enum_zero_le' {o : ordinal} (h0 : 0 < o) (a : o.out.α) : @enum o.out.α (· < ·) _ 0 (by rwa [type_lt]) ≤ a :=\n  by\n  rw [← not_lt]\n  apply enum_zero_le\n#align enum_zero_le' enum_zero_le'\n\n",
+ "theorem enum_zero_le' {o : Ordinal} (h0 : 0 < o) (a : o.out.α) : @enum o.out.α (· < ·) _ 0 (by rwa [type_lt]) ≤ a :=\n  by\n  rw [← not_lt]\n  apply enum_zero_le\n#align enum_zero_le' enum_zero_le'\n\n",
  "enum_zero_le":
- "theorem enum_zero_le {r : α → α → Prop} [is_well_order α r] (h0 : 0 < type r) (a : α) : ¬r a (enum r 0 h0) :=\n  by\n  rw [← enum_typein r a, enum_le_enum r]\n  apply ordinal.zero_le\n#align enum_zero_le enum_zero_le\n\n",
+ "theorem enum_zero_le {r : α → α → Prop} [IsWellOrder α r] (h0 : 0 < type r) (a : α) : ¬r a (enum r 0 h0) :=\n  by\n  rw [← enum_typein r a, enum_le_enum r]\n  apply Ordinal.zero_le\n#align enum_zero_le enum_zero_le\n\n",
  "enum_zero_eq_bot":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\ntheorem enum_zero_eq_bot {o : ordinal} (ho : 0 < o) :\n    enum (· < ·) 0 (by rwa [type_lt]) =\n      haveI H := out_order_bot_of_pos ho\n      «expr⊥» :=\n  rfl\n#align enum_zero_eq_bot enum_zero_eq_bot\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\ntheorem enum_zero_eq_bot {o : Ordinal} (ho : 0 < o) :\n    enum (· < ·) 0 (by rwa [type_lt]) =\n      haveI H := out_order_bot_of_pos ho\n      «expr⊥» :=\n  rfl\n#align enum_zero_eq_bot enum_zero_eq_bot\n\n",
  "enum_typein":
- "@[simp]\ntheorem enum_typein (r : α → α → Prop) [is_well_order α r] (a : α) : enum r (typein r a) (typein_lt_type r a) = a :=\n  enum_type (PrincipalSeg.ofElement r a)\n#align enum_typein enum_typein\n\n",
+ "@[simp]\ntheorem enum_typein (r : α → α → Prop) [IsWellOrder α r] (a : α) : enum r (typein r a) (typein_lt_type r a) = a :=\n  enum_type (PrincipalSeg.ofElement r a)\n#align enum_typein enum_typein\n\n",
  "enum_type":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `principal_seg -/\ntheorem enum_type {α β} {r : α → α → Prop} {s : β → β → Prop} [is_well_order α r] [is_well_order β s]\n    (f : principal_seg s r) {h : type s < type r} : enum r (type s) h = f.top :=\n  PrincipalSeg.top_eq (RelIso.refl _) _ _\n#align enum_type enum_type\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `principal_seg -/\ntheorem enum_type {α β} {r : α → α → Prop} {s : β → β → Prop} [IsWellOrder α r] [IsWellOrder β s]\n    (f : principal_seg s r) {h : type s < type r} : enum r (type s) h = f.top :=\n  PrincipalSeg.top_eq (RelIso.refl _) _ _\n#align enum_type enum_type\n\n",
  "enum_lt_enum":
- "theorem enum_lt_enum {r : α → α → Prop} [is_well_order α r] {o₁ o₂ : ordinal} (h₁ : o₁ < type r) (h₂ : o₂ < type r) :\n    r (enum r o₁ h₁) (enum r o₂ h₂) ↔ o₁ < o₂ := by rw [← typein_lt_typein r, typein_enum, typein_enum]\n#align enum_lt_enum enum_lt_enum\n\n",
+ "theorem enum_lt_enum {r : α → α → Prop} [IsWellOrder α r] {o₁ o₂ : Ordinal} (h₁ : o₁ < type r) (h₂ : o₂ < type r) :\n    r (enum r o₁ h₁) (enum r o₂ h₂) ↔ o₁ < o₂ := by rw [← typein_lt_typein r, typein_enum, typein_enum]\n#align enum_lt_enum enum_lt_enum\n\n",
  "enum_le_enum'":
- "@[simp]\ntheorem enum_le_enum' (a : ordinal) {o o' : ordinal} (ho : o < type (· < ·)) (ho' : o' < type (· < ·)) :\n    enum (· < ·) o ho ≤ @enum a.out.α (· < ·) _ o' ho' ↔ o ≤ o' := by rw [← enum_le_enum (· < ·), ← not_lt]\n#align enum_le_enum' enum_le_enum'\n\n",
+ "@[simp]\ntheorem enum_le_enum' (a : Ordinal) {o o' : Ordinal} (ho : o < type (· < ·)) (ho' : o' < type (· < ·)) :\n    enum (· < ·) o ho ≤ @enum a.out.α (· < ·) _ o' ho' ↔ o ≤ o' := by rw [← enum_le_enum (· < ·), ← not_lt]\n#align enum_le_enum' enum_le_enum'\n\n",
  "enum_le_enum":
- "@[simp]\ntheorem enum_le_enum (r : α → α → Prop) [is_well_order α r] {o o' : ordinal} (ho : o < type r) (ho' : o' < type r) :\n    ¬r (enum r o' ho') (enum r o ho) ↔ o ≤ o' := by rw [← @not_lt _ _ o' o, enum_lt_enum ho']\n#align enum_le_enum enum_le_enum\n\n",
+ "@[simp]\ntheorem enum_le_enum (r : α → α → Prop) [IsWellOrder α r] {o o' : Ordinal} (ho : o < type r) (ho' : o' < type r) :\n    ¬r (enum r o' ho') (enum r o ho) ↔ o ≤ o' := by rw [← @not_lt _ _ o' o, enum_lt_enum ho']\n#align enum_le_enum enum_le_enum\n\n",
  "enum_inj":
- "@[simp]\ntheorem enum_inj {r : α → α → Prop} [is_well_order α r] {o₁ o₂ : ordinal} (h₁ : o₁ < type r) (h₂ : o₂ < type r) :\n    enum r o₁ h₁ = enum r o₂ h₂ ↔ o₁ = o₂ :=\n  ⟨fun h => by\n    by_contra hne\n    cases' lt_or_gt_of_ne hne with hlt hlt <;> apply (is_well_order.is_irrefl r).1\n    · rwa [← @enum_lt_enum α r _ o₁ o₂ h₁ h₂, h] at hlt\n    · change _ < _ at hlt\n      rwa [← @enum_lt_enum α r _ o₂ o₁ h₂ h₁, h] at hlt, fun h => by simp_rw [h]⟩\n#align enum_inj enum_inj\n\n",
+ "@[simp]\ntheorem enum_inj {r : α → α → Prop} [IsWellOrder α r] {o₁ o₂ : Ordinal} (h₁ : o₁ < type r) (h₂ : o₂ < type r) :\n    enum r o₁ h₁ = enum r o₂ h₂ ↔ o₁ = o₂ :=\n  ⟨fun h => by\n    by_contra hne\n    cases' lt_or_gt_of_ne hne with hlt hlt <;> apply (is_well_order.is_irrefl r).1\n    · rwa [← @enum_lt_enum α r _ o₁ o₂ h₁ h₂, h] at hlt\n    · change _ < _ at hlt\n      rwa [← @enum_lt_enum α r _ o₂ o₁ h₂ h₁, h] at hlt, fun h => by simp_rw [h]⟩\n#align enum_inj enum_inj\n\n",
  "card_zero":
  "@[simp]\ntheorem card_zero : card 0 = 0 :=\n  rfl\n#align card_zero card_zero\n\n",
  "card_univ":
- "@[simp]\ntheorem card_univ : card univ = cardinal.univ :=\n  rfl\n#align card_univ card_univ\n\n",
+ "@[simp]\ntheorem card_univ : card univ = Cardinal.univ :=\n  rfl\n#align card_univ card_univ\n\n",
  "card_typein_out_lt":
- "theorem card_typein_out_lt (c : cardinal) (x : c.ord.out.α) : card (typein (· < ·) x) < c :=\n  by\n  rw [← lt_ord]\n  apply typein_lt_self\n#align card_typein_out_lt card_typein_out_lt\n\n",
+ "theorem card_typein_out_lt (c : Cardinal) (x : c.ord.out.α) : card (typein (· < ·) x) < c :=\n  by\n  rw [← lt_ord]\n  apply typein_lt_self\n#align card_typein_out_lt card_typein_out_lt\n\n",
  "card_typein_lt":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `cardinal.mk -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `cardinal.mk -/\ntheorem card_typein_lt (r : α → α → Prop) [is_well_order α r] (x : α) (h : ord (cardinal.mk α) = type r) :\n    card (typein r x) < cardinal.mk α := by\n  rw [← lt_ord, h]\n  apply typein_lt_type\n#align card_typein_lt card_typein_lt\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `cardinal.mk -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `cardinal.mk -/\ntheorem card_typein_lt (r : α → α → Prop) [IsWellOrder α r] (x : α) (h : ord (cardinal.mk α) = type r) :\n    card (typein r x) < cardinal.mk α := by\n  rw [← lt_ord, h]\n  apply typein_lt_type\n#align card_typein_lt card_typein_lt\n\n",
  "card_typein":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `cardinal.mk -/\n@[simp]\ntheorem card_typein {r : α → α → Prop} [wo : is_well_order α r] (x : α) :\n    cardinal.mk { y // r y x } = (typein r x).card :=\n  rfl\n#align card_typein card_typein\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `cardinal.mk -/\n@[simp]\ntheorem card_typein {r : α → α → Prop} [wo : IsWellOrder α r] (x : α) :\n    cardinal.mk { y // r y x } = (typein r x).card :=\n  rfl\n#align card_typein card_typein\n\n",
  "card_type":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `cardinal.mk -/\n@[simp]\ntheorem card_type (r : α → α → Prop) [is_well_order α r] : card (type r) = cardinal.mk α :=\n  rfl\n#align card_type card_type\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `cardinal.mk -/\n@[simp]\ntheorem card_type (r : α → α → Prop) [IsWellOrder α r] : card (type r) = cardinal.mk α :=\n  rfl\n#align card_type card_type\n\n",
  "card_succ":
- "@[simp]\ntheorem card_succ (o : ordinal) : card (succ o) = card o + 1 := by simp only [← add_one_eq_succ, card_add, card_one]\n#align card_succ card_succ\n\n",
+ "@[simp]\ntheorem card_succ (o : Ordinal) : card (succ o) = card o + 1 := by simp only [← add_one_eq_succ, card_add, card_one]\n#align card_succ card_succ\n\n",
  "card_ord":
  "@[simp]\ntheorem card_ord (c) : (ord c).card = c :=\n  Quotient.inductionOn c fun α => by\n    let ⟨r, _, e⟩ := ord_eq α\n    simp only [mk_def, e, card_type]\n#align card_ord card_ord\n\n",
  "card_one":
@@ -305,16 +305,16 @@
  "card_le_nat":
  "@[simp]\ntheorem card_le_nat {o} {n : ℕ} : card o ≤ n ↔ o ≤ n :=\n  le_iff_le_iff_lt_iff_lt.2 nat_lt_card\n#align card_le_nat card_le_nat\n\n",
  "card_le_card":
- "theorem card_le_card {o₁ o₂ : ordinal} : o₁ ≤ o₂ → card o₁ ≤ card o₂ :=\n  induction_on o₁ fun α r _ => induction_on o₂ fun β s _ ⟨⟨⟨f, _⟩, _⟩⟩ => ⟨f⟩\n#align card_le_card card_le_card\n\n",
+ "theorem card_le_card {o₁ o₂ : Ordinal} : o₁ ≤ o₂ → card o₁ ≤ card o₂ :=\n  inductionOn o₁ fun α r _ => inductionOn o₂ fun β s _ ⟨⟨⟨f, _⟩, _⟩⟩ => ⟨f⟩\n#align card_le_card card_le_card\n\n",
  "card_eq_zero":
- "@[simp]\ntheorem card_eq_zero {o} : card o = 0 ↔ o = 0 :=\n  ⟨induction_on o fun α r _ h => by\n      haveI := cardinal.mk_eq_zero_iff.1 h\n      apply type_eq_zero_of_empty,\n    fun e => by simp only [e, card_zero]⟩\n#align card_eq_zero card_eq_zero\n\n",
+ "@[simp]\ntheorem card_eq_zero {o} : card o = 0 ↔ o = 0 :=\n  ⟨inductionOn o fun α r _ h => by\n      haveI := Cardinal.mk_eq_zero_iff.1 h\n      apply type_eq_zero_of_empty,\n    fun e => by simp only [e, card_zero]⟩\n#align card_eq_zero card_eq_zero\n\n",
  "card_eq_nat":
  "@[simp]\ntheorem card_eq_nat {o} {n : ℕ} : card o = n ↔ o = n := by simp only [le_antisymm_iff, card_le_nat, nat_le_card]\n#align card_eq_nat card_eq_nat\n\n",
  "card_add":
- "@[simp]\ntheorem card_add (o₁ o₂ : ordinal) : card (o₁ + o₂) = card o₁ + card o₂ :=\n  induction_on o₁ fun α r _ => induction_on o₂ fun β s _ => rfl\n#align card_add card_add\n\n",
+ "@[simp]\ntheorem card_add (o₁ o₂ : Ordinal) : card (o₁ + o₂) = card o₁ + card o₂ :=\n  inductionOn o₁ fun α r _ => inductionOn o₂ fun β s _ => rfl\n#align card_add card_add\n\n",
  "bot_eq_zero":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n#print bot_eq_zero /-\n@[simp]\ntheorem bot_eq_zero : («expr⊥» : ordinal) = 0 :=\n  rfl\n#align bot_eq_zero bot_eq_zero\n-/\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n#print bot_eq_zero /-\n@[simp]\ntheorem bot_eq_zero : («expr⊥» : Ordinal) = 0 :=\n  rfl\n#align bot_eq_zero bot_eq_zero\n-/\n\n",
  "add_succ":
- "theorem add_succ (o₁ o₂ : ordinal) : o₁ + succ o₂ = succ (o₁ + o₂) :=\n  (add_assoc _ _ _).symm\n#align add_succ add_succ\n\n",
+ "theorem add_succ (o₁ o₂ : Ordinal) : o₁ + succ o₂ = succ (o₁ + o₂) :=\n  (add_assoc _ _ _).symm\n#align add_succ add_succ\n\n",
  "add_one_eq_succ":
- "@[simp]\ntheorem add_one_eq_succ (o : ordinal) : o + 1 = succ o :=\n  rfl\n#align add_one_eq_succ add_one_eq_succ\n\n"}
+ "@[simp]\ntheorem add_one_eq_succ (o : Ordinal) : o + 1 = succ o :=\n  rfl\n#align add_one_eq_succ add_one_eq_succ\n\n"}

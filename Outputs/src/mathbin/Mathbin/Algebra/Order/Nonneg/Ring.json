@@ -1,17 +1,17 @@
 {"to_nonneg_of_nonneg":
- "@[simp]\ntheorem to_nonneg_of_nonneg {a : α} (h : 0 ≤ a) : to_nonneg a = ⟨a, h⟩ := by simp [to_nonneg, h]\n#align to_nonneg_of_nonneg to_nonneg_of_nonneg\n\n",
+ "@[simp]\ntheorem to_nonneg_of_nonneg {a : α} (h : 0 ≤ a) : toNonneg a = ⟨a, h⟩ := by simp [to_nonneg, h]\n#align to_nonneg_of_nonneg to_nonneg_of_nonneg\n\n",
  "to_nonneg_lt":
- "@[simp]\ntheorem to_nonneg_lt {a : { x : α // 0 ≤ x }} {b : α} : a < to_nonneg b ↔ ↑a < b :=\n  by\n  cases' a with a ha\n  simp [to_nonneg, ha.not_lt]\n#align to_nonneg_lt to_nonneg_lt\n\n",
+ "@[simp]\ntheorem to_nonneg_lt {a : { x : α // 0 ≤ x }} {b : α} : a < toNonneg b ↔ ↑a < b :=\n  by\n  cases' a with a ha\n  simp [to_nonneg, ha.not_lt]\n#align to_nonneg_lt to_nonneg_lt\n\n",
  "to_nonneg_le":
- "@[simp]\ntheorem to_nonneg_le {a : α} {b : { x : α // 0 ≤ x }} : to_nonneg a ≤ b ↔ a ≤ b :=\n  by\n  cases' b with b hb\n  simp [to_nonneg, hb]\n#align to_nonneg_le to_nonneg_le\n\n",
+ "@[simp]\ntheorem to_nonneg_le {a : α} {b : { x : α // 0 ≤ x }} : toNonneg a ≤ b ↔ a ≤ b :=\n  by\n  cases' b with b hb\n  simp [to_nonneg, hb]\n#align to_nonneg_le to_nonneg_le\n\n",
  "to_nonneg_coe":
- "@[simp]\ntheorem to_nonneg_coe {a : { x : α // 0 ≤ x }} : to_nonneg (a : α) = a :=\n  by\n  cases' a with a ha\n  exact to_nonneg_of_nonneg ha\n#align to_nonneg_coe to_nonneg_coe\n\n",
+ "@[simp]\ntheorem to_nonneg_coe {a : { x : α // 0 ≤ x }} : toNonneg (a : α) = a :=\n  by\n  cases' a with a ha\n  exact to_nonneg_of_nonneg ha\n#align to_nonneg_coe to_nonneg_coe\n\n",
  "nsmul_mk":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n@[simp]\ntheorem nsmul_mk [add_monoid α] [preorder α] [covariant_class α α (· + ·) (· ≤ ·)] (n : ℕ) {x : α} (hx : 0 ≤ x) :\n    («expr • » n ⟨x, hx⟩ : { x : α // 0 ≤ x }) = ⟨«expr • » n x, nsmul_nonneg hx n⟩ :=\n  rfl\n#align nsmul_mk nsmul_mk\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n@[simp]\ntheorem nsmul_mk [AddMonoid α] [preorder α] [CovariantClass α α (· + ·) (· ≤ ·)] (n : ℕ) {x : α} (hx : 0 ≤ x) :\n    («expr • » n ⟨x, hx⟩ : { x : α // 0 ≤ x }) = ⟨«expr • » n x, nsmul_nonneg hx n⟩ :=\n  rfl\n#align nsmul_mk nsmul_mk\n\n",
  "nsmul_coe":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n@[norm_cast]\ntheorem nsmul_coe [OrderedAddCommMonoid α] (n : ℕ) (r : { x : α // 0 ≤ x }) : ↑(«expr • » n r) = «expr • » n (r : α) :=\n  nonneg.coe_add_monoid_hom.map_nsmul _ _\n#align nsmul_coe nsmul_coe\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n@[norm_cast]\ntheorem nsmul_coe [OrderedAddCommMonoid α] (n : ℕ) (r : { x : α // 0 ≤ x }) : ↑(«expr • » n r) = «expr • » n (r : α) :=\n  Nonneg.coeAddMonoidHom.map_nsmul _ _\n#align nsmul_coe nsmul_coe\n\n",
  "mk_sub_mk":
- "@[simp]\ntheorem mk_sub_mk [Sub α] {x y : α} (hx : 0 ≤ x) (hy : 0 ≤ y) :\n    (⟨x, hx⟩ : { x : α // 0 ≤ x }) - ⟨y, hy⟩ = to_nonneg (x - y) :=\n  rfl\n#align mk_sub_mk mk_sub_mk\n\n",
+ "@[simp]\ntheorem mk_sub_mk [Sub α] {x y : α} (hx : 0 ≤ x) (hy : 0 ≤ y) :\n    (⟨x, hx⟩ : { x : α // 0 ≤ x }) - ⟨y, hy⟩ = toNonneg (x - y) :=\n  rfl\n#align mk_sub_mk mk_sub_mk\n\n",
  "mk_pow":
  "@[simp]\ntheorem mk_pow [OrderedSemiring α] {x : α} (hx : 0 ≤ x) (n : ℕ) :\n    (⟨x, hx⟩ : { x : α // 0 ≤ x }) ^ n = ⟨x ^ n, pow_nonneg hx n⟩ :=\n  rfl\n#align mk_pow mk_pow\n\n",
  "mk_nat_cast":
@@ -19,26 +19,26 @@
  "mk_mul_mk":
  "@[simp]\ntheorem mk_mul_mk [OrderedSemiring α] {x y : α} (hx : 0 ≤ x) (hy : 0 ≤ y) :\n    (⟨x, hx⟩ : { x : α // 0 ≤ x }) * ⟨y, hy⟩ = ⟨x * y, mul_nonneg hx hy⟩ :=\n  rfl\n#align mk_mul_mk mk_mul_mk\n\n",
  "mk_eq_zero":
- "@[simp]\ntheorem mk_eq_zero [Zero α] [preorder α] {x : α} (hx : 0 ≤ x) : (⟨x, hx⟩ : { x : α // 0 ≤ x }) = 0 ↔ x = 0 :=\n  subtype.ext_iff\n#align mk_eq_zero mk_eq_zero\n\n",
+ "@[simp]\ntheorem mk_eq_zero [Zero α] [preorder α] {x : α} (hx : 0 ≤ x) : (⟨x, hx⟩ : { x : α // 0 ≤ x }) = 0 ↔ x = 0 :=\n  Subtype.ext_iff\n#align mk_eq_zero mk_eq_zero\n\n",
  "mk_eq_one":
- "@[simp]\ntheorem mk_eq_one [OrderedSemiring α] {x : α} (hx : 0 ≤ x) : (⟨x, hx⟩ : { x : α // 0 ≤ x }) = 1 ↔ x = 1 :=\n  subtype.ext_iff\n#align mk_eq_one mk_eq_one\n\n",
+ "@[simp]\ntheorem mk_eq_one [OrderedSemiring α] {x : α} (hx : 0 ≤ x) : (⟨x, hx⟩ : { x : α // 0 ≤ x }) = 1 ↔ x = 1 :=\n  Subtype.ext_iff\n#align mk_eq_one mk_eq_one\n\n",
  "mk_add_mk":
- "@[simp]\ntheorem mk_add_mk [add_zero_class α] [preorder α] [covariant_class α α (· + ·) (· ≤ ·)] {x y : α} (hx : 0 ≤ x)\n    (hy : 0 ≤ y) : (⟨x, hx⟩ : { x : α // 0 ≤ x }) + ⟨y, hy⟩ = ⟨x + y, add_nonneg hx hy⟩ :=\n  rfl\n#align mk_add_mk mk_add_mk\n\n",
+ "@[simp]\ntheorem mk_add_mk [AddZeroClass α] [preorder α] [CovariantClass α α (· + ·) (· ≤ ·)] {x y : α} (hx : 0 ≤ x)\n    (hy : 0 ≤ y) : (⟨x, hx⟩ : { x : α // 0 ≤ x }) + ⟨y, hy⟩ = ⟨x + y, add_nonneg hx hy⟩ :=\n  rfl\n#align mk_add_mk mk_add_mk\n\n",
  "coe_zero":
  "@[simp, norm_cast]\nprotected theorem coe_zero [Zero α] [preorder α] : ((0 : { x : α // 0 ≤ x }) : α) = 0 :=\n  rfl\n#align coe_zero coe_zero\n\n",
  "coe_to_nonneg":
- "-- These prevent noncomputable instances being found, as it does not require `linear_order` which\n-- is frequently non-computable.\n@[simp]\ntheorem coe_to_nonneg {a : α} : (to_nonneg a : α) = max a 0 :=\n  rfl\n#align coe_to_nonneg coe_to_nonneg\n\n",
+ "-- These prevent noncomputable instances being found, as it does not require `linear_order` which\n-- is frequently non-computable.\n@[simp]\ntheorem coe_to_nonneg {a : α} : (toNonneg a : α) = max a 0 :=\n  rfl\n#align coe_to_nonneg coe_to_nonneg\n\n",
  "coe_pow":
  "@[simp, norm_cast]\nprotected theorem coe_pow [OrderedSemiring α] (a : { x : α // 0 ≤ x }) (n : ℕ) : (↑(a ^ n) : α) = a ^ n :=\n  rfl\n#align coe_pow coe_pow\n\n",
  "coe_one":
  "@[simp, norm_cast]\nprotected theorem coe_one [OrderedSemiring α] : ((1 : { x : α // 0 ≤ x }) : α) = 1 :=\n  rfl\n#align coe_one coe_one\n\n",
  "coe_nsmul":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n@[simp, norm_cast]\nprotected theorem coe_nsmul [add_monoid α] [preorder α] [covariant_class α α (· + ·) (· ≤ ·)] (n : ℕ)\n    (a : { x : α // 0 ≤ x }) : ((«expr • » n a : { x : α // 0 ≤ x }) : α) = «expr • » n a :=\n  rfl\n#align coe_nsmul coe_nsmul\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n@[simp, norm_cast]\nprotected theorem coe_nsmul [AddMonoid α] [preorder α] [CovariantClass α α (· + ·) (· ≤ ·)] (n : ℕ)\n    (a : { x : α // 0 ≤ x }) : ((«expr • » n a : { x : α // 0 ≤ x }) : α) = «expr • » n a :=\n  rfl\n#align coe_nsmul coe_nsmul\n\n",
  "coe_nat_cast":
  "@[simp, norm_cast]\nprotected theorem coe_nat_cast [OrderedSemiring α] (n : ℕ) : ((↑n : { x : α // 0 ≤ x }) : α) = n :=\n  rfl\n#align coe_nat_cast coe_nat_cast\n\n",
  "coe_mul":
  "@[simp, norm_cast]\nprotected theorem coe_mul [OrderedSemiring α] (a b : { x : α // 0 ≤ x }) : ((a * b : { x : α // 0 ≤ x }) : α) = a * b :=\n  rfl\n#align coe_mul coe_mul\n\n",
  "coe_add":
- "@[simp, norm_cast]\nprotected theorem coe_add [add_zero_class α] [preorder α] [covariant_class α α (· + ·) (· ≤ ·)]\n    (a b : { x : α // 0 ≤ x }) : ((a + b : { x : α // 0 ≤ x }) : α) = a + b :=\n  rfl\n#align coe_add coe_add\n\n",
+ "@[simp, norm_cast]\nprotected theorem coe_add [AddZeroClass α] [preorder α] [CovariantClass α α (· + ·) (· ≤ ·)]\n    (a b : { x : α // 0 ≤ x }) : ((a + b : { x : α // 0 ≤ x }) : α) = a + b :=\n  rfl\n#align coe_add coe_add\n\n",
  "bot_eq":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n/-\nCopyright (c) 2021 Floris van Doorn. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Floris van Doorn\n-/\ntheorem bot_eq [preorder α] {a : α} : («expr⊥» : { x : α // a ≤ x }) = ⟨a, le_rfl⟩ :=\n  rfl\n#align bot_eq bot_eq\n\n"}

@@ -1,20 +1,16 @@
-{"of_nat_dvd_of_dvd_nat_abs":
- "theorem of_nat_dvd_of_dvd_nat_abs {a : ℕ} : ∀ {z : ℤ} (haz : a ∣ z.nat_abs), ↑a ∣ z\n  | int.of_nat _, haz => Int.coe_nat_dvd.2 haz\n  | -[k+1], haz => by\n    change ↑a ∣ -(k + 1 : ℤ)\n    apply dvd_neg_of_dvd\n    apply Int.coe_nat_dvd.2\n    exact haz\n#align of_nat_dvd_of_dvd_nat_abs of_nat_dvd_of_dvd_nat_abs\n\n",
- "le_of_dvd":
- "theorem le_of_dvd {a b : ℤ} (bpos : 0 < b) (H : a ∣ b) : a ≤ b :=\n  match a, b, eq_succ_of_zero_lt bpos, H with\n  | (m : ℕ), _, ⟨n, rfl⟩, H => coe_nat_le_coe_nat_of_le <| nat.le_of_dvd n.succ_pos <| coe_nat_dvd.1 H\n  | -[m+1], _, ⟨n, rfl⟩, _ => le_trans (le_of_lt <| negSucc_lt_zero _) (ofNat_zero_le _)\n#align le_of_dvd le_of_dvd\n\n",
+{"le_of_dvd":
+ "theorem le_of_dvd {a b : ℤ} (bpos : 0 < b) (H : a ∣ b) : a ≤ b :=\n  match a, b, eq_succ_of_zero_lt bpos, H with\n  | (m : ℕ), _, ⟨n, rfl⟩, H => ofNat_le_ofNat_of_le <| nat.le_of_dvd n.succ_pos <| coe_nat_dvd.1 H\n  | -[m+1], _, ⟨n, rfl⟩, _ => le_trans (le_of_lt <| negSucc_lt_zero _) (ofNat_zero_le _)\n#align le_of_dvd le_of_dvd\n\n",
  "eq_one_of_mul_eq_one_right":
  "theorem eq_one_of_mul_eq_one_right {a b : ℤ} (H : 0 ≤ a) (H' : a * b = 1) : a = 1 :=\n  eq_one_of_dvd_one H ⟨b, H'.symm⟩\n#align eq_one_of_mul_eq_one_right eq_one_of_mul_eq_one_right\n\n",
  "eq_one_of_mul_eq_one_left":
  "theorem eq_one_of_mul_eq_one_left {a b : ℤ} (H : 0 ≤ b) (H' : a * b = 1) : b = 1 :=\n  eq_one_of_mul_eq_one_right H (by rw [mul_comm, H'])\n#align eq_one_of_mul_eq_one_left eq_one_of_mul_eq_one_left\n\n",
  "eq_one_of_dvd_one":
  "theorem eq_one_of_dvd_one {a : ℤ} (H : 0 ≤ a) (H' : a ∣ 1) : a = 1 :=\n  match a, eq_ofNat_of_zero_le H, H' with\n  | _, ⟨n, rfl⟩, H' => congr_arg coe <| nat.eq_one_of_dvd_one <| coe_nat_dvd.1 H'\n#align eq_one_of_dvd_one eq_one_of_dvd_one\n\n",
- "dvd_nat_abs_of_of_nat_dvd":
- "theorem dvd_nat_abs_of_of_nat_dvd {a : ℕ} : ∀ {z : ℤ} (haz : ↑a ∣ z), a ∣ z.nat_abs\n  | int.of_nat _, haz => Int.coe_nat_dvd.1 (Int.dvd_natAbs.2 haz)\n  | -[k+1], haz =>\n    have haz' : (↑a : ℤ) ∣ (↑(k + 1) : ℤ) := dvd_of_dvd_neg haz\n    Int.coe_nat_dvd.1 haz'\n#align dvd_nat_abs_of_of_nat_dvd dvd_nat_abs_of_of_nat_dvd\n\n",
  "dvd_antisymm":
- "theorem dvd_antisymm {a b : ℤ} (H1 : 0 ≤ a) (H2 : 0 ≤ b) : a ∣ b → b ∣ a → a = b :=\n  by\n  rw [← abs_of_nonneg H1, ← abs_of_nonneg H2, abs_eq_nat_abs, abs_eq_nat_abs]\n  rw [coe_nat_dvd, coe_nat_dvd, coe_nat_inj']\n  apply nat.dvd_antisymm\n#align dvd_antisymm dvd_antisymm\n\n",
+ "#print dvd_antisymm /-\ntheorem dvd_antisymm {a b : ℤ} (H1 : 0 ≤ a) (H2 : 0 ≤ b) : a ∣ b → b ∣ a → a = b :=\n  by\n  rw [← abs_of_nonneg H1, ← abs_of_nonneg H2, abs_eq_nat_abs, abs_eq_nat_abs]\n  rw [coe_nat_dvd, coe_nat_dvd, coe_nat_inj']\n  apply nat.dvd_antisymm\n#align dvd_antisymm dvd_antisymm\n-/\n\n",
  "coe_nat_dvd_right":
- "theorem coe_nat_dvd_right {n : ℕ} {z : ℤ} : z ∣ (↑n : ℤ) ↔ z.nat_abs ∣ n := by\n  rcases nat_abs_eq z with (eq | eq) <;> rw [eq] <;> simp [← coe_nat_dvd]\n#align coe_nat_dvd_right coe_nat_dvd_right\n\n",
+ "theorem coe_nat_dvd_right {n : ℕ} {z : ℤ} : z ∣ (↑n : ℤ) ↔ z.nat_abs ∣ n := by\n  rcases nat_abs_eq z with (eq | eq) <;> rw [Eq] <;> simp [← coe_nat_dvd]\n#align coe_nat_dvd_right coe_nat_dvd_right\n\n",
  "coe_nat_dvd_left":
- "theorem coe_nat_dvd_left {n : ℕ} {z : ℤ} : (↑n : ℤ) ∣ z ↔ n ∣ z.nat_abs := by\n  rcases nat_abs_eq z with (eq | eq) <;> rw [eq] <;> simp [← coe_nat_dvd]\n#align coe_nat_dvd_left coe_nat_dvd_left\n\n",
+ "theorem coe_nat_dvd_left {n : ℕ} {z : ℤ} : (↑n : ℤ) ∣ z ↔ n ∣ z.nat_abs := by\n  rcases nat_abs_eq z with (eq | eq) <;> rw [Eq] <;> simp [← coe_nat_dvd]\n#align coe_nat_dvd_left coe_nat_dvd_left\n\n",
  "coe_nat_dvd":
  "/-\nCopyright (c) 2016 Jeremy Avigad. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Jeremy Avigad\n-/\n@[norm_cast]\ntheorem coe_nat_dvd {m n : ℕ} : (↑m : ℤ) ∣ ↑n ↔ m ∣ n :=\n  ⟨fun ⟨a, ae⟩ =>\n    m.eq_zero_or_pos.elim (fun m0 => by simp [m0] at ae <;> simp [ae, m0]) fun m0l =>\n      by\n      cases' eq_coe_of_zero_le (@nonneg_of_mul_nonneg_right ℤ _ m a (by simp [ae.symm]) (by simpa using m0l)) with k e\n      subst a\n      exact ⟨k, Int.ofNat.inj ae⟩,\n    fun ⟨k, e⟩ => Dvd.intro k <| by rw [e, Int.ofNat_mul]⟩\n#align coe_nat_dvd coe_nat_dvd\n\n"}

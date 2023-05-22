@@ -7,11 +7,11 @@
  "one_add_coe_ne_zero":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `expr𝔻 -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℂ -/\ntheorem one_add_coe_ne_zero (z : expr𝔻) : (1 + z : exprℂ) ≠ 0 :=\n  mt neg_eq_iff_add_eq_zero.2 z.coe_ne_neg_one.symm\n#align one_add_coe_ne_zero one_add_coe_ne_zero\n\n",
  "norm_sq_lt_one":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `expr𝔻 -/\ntheorem norm_sq_lt_one (z : expr𝔻) : norm_sq z < 1 :=\n  @one_pow (exprℝ) _ 2 ▸ (real.sqrt_lt' one_pos).1 z.abs_lt_one\n#align norm_sq_lt_one norm_sq_lt_one\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `expr𝔻 -/\ntheorem norm_sq_lt_one (z : expr𝔻) : normSq z < 1 :=\n  @one_pow (exprℝ) _ 2 ▸ (Real.sqrt_lt' one_pos).1 z.abs_lt_one\n#align norm_sq_lt_one norm_sq_lt_one\n\n",
  "mk_neg":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℂ -/\n@[simp]\ntheorem mk_neg (z : exprℂ) (hz : abs (-z) < 1) : mk (-z) hz = -mk z (abs.map_neg z ▸ hz) :=\n  rfl\n#align mk_neg mk_neg\n\n",
  "mk_coe":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `expr𝔻 -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℂ -/\n@[simp]\ntheorem mk_coe (z : expr𝔻) (hz : abs (z : exprℂ) < 1 := z.abs_lt_one) : mk z hz = z :=\n  subtype.eta _ _\n#align mk_coe mk_coe\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `expr𝔻 -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℂ -/\n@[simp]\ntheorem mk_coe (z : expr𝔻) (hz : abs (z : exprℂ) < 1 := z.abs_lt_one) : mk z hz = z :=\n  Subtype.eta _ _\n#align mk_coe mk_coe\n\n",
  "im_neg":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `expr𝔻 -/\n@[simp]\ntheorem im_neg (z : expr𝔻) : (-z).im = -z.im :=\n  rfl\n#align im_neg im_neg\n\n",
  "im_conj":
@@ -23,13 +23,13 @@
  "conj_neg":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `expr𝔻 -/\n@[simp]\ntheorem conj_neg (z : expr𝔻) : (-z).conj = -z.conj :=\n  rfl\n#align conj_neg conj_neg\n\n",
  "conj_mul":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `expr𝔻 -/\n#print conj_mul /-\n@[simp]\ntheorem conj_mul (z w : expr𝔻) : (z * w).conj = z.conj * w.conj :=\n  subtype.ext <| map_mul _ _ _\n#align conj_mul conj_mul\n-/\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `expr𝔻 -/\n#print conj_mul /-\n@[simp]\ntheorem conj_mul (z w : expr𝔻) : (z * w).conj = z.conj * w.conj :=\n  Subtype.ext <| map_mul _ _ _\n#align conj_mul conj_mul\n-/\n\n",
  "conj_conj":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `expr𝔻 -/\n@[simp]\ntheorem conj_conj (z : expr𝔻) : conj (conj z) = z :=\n  coe_injective <| complex.conj_conj z\n#align conj_conj conj_conj\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `expr𝔻 -/\n@[simp]\ntheorem conj_conj (z : expr𝔻) : conj (conj z) = z :=\n  coe_injective <| Complex.conj_conj z\n#align conj_conj conj_conj\n\n",
  "coe_zero":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `expr𝔻 -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℂ -/\n@[simp]\ntheorem coe_zero : ((0 : expr𝔻) : exprℂ) = 0 :=\n  rfl\n#align coe_zero coe_zero\n\n",
  "coe_smul_closed_ball":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℂ -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `expr𝔻 -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℂ -/\n@[simp, norm_cast]\ntheorem coe_smul_closed_ball (z : closed_ball (0 : exprℂ) 1) (w : expr𝔻) : ↑(«expr • » z w) = (z * w : exprℂ) :=\n  rfl\n#align coe_smul_closed_ball coe_smul_closed_ball\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℂ -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `expr𝔻 -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℂ -/\n@[simp, norm_cast]\ntheorem coe_smul_closed_ball (z : closedBall (0 : exprℂ) 1) (w : expr𝔻) : ↑(«expr • » z w) = (z * w : exprℂ) :=\n  rfl\n#align coe_smul_closed_ball coe_smul_closed_ball\n\n",
  "coe_smul_circle":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `expr𝔻 -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℂ -/\n@[simp, norm_cast]\ntheorem coe_smul_circle (z : circle) (w : expr𝔻) : ↑(«expr • » z w) = (z * w : exprℂ) :=\n  rfl\n#align coe_smul_circle coe_smul_circle\n\n",
  "coe_ne_one":
@@ -41,7 +41,7 @@
  "coe_mk":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℂ -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℂ -/\n@[simp]\ntheorem coe_mk (z : exprℂ) (hz : abs z < 1) : (mk z hz : exprℂ) = z :=\n  rfl\n#align coe_mk coe_mk\n\n",
  "coe_injective":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `expr𝔻 -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℂ -/\n/-\nCopyright (c) 2022 Yury Kudryashov. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Yury Kudryashov\n-/\ntheorem coe_injective : injective (coe : expr𝔻 → exprℂ) :=\n  subtype.coe_injective\n#align coe_injective coe_injective\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `expr𝔻 -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℂ -/\n/-\nCopyright (c) 2022 Yury Kudryashov. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Yury Kudryashov\n-/\ntheorem coe_injective : injective (coe : expr𝔻 → exprℂ) :=\n  Subtype.coe_injective\n#align coe_injective coe_injective\n\n",
  "coe_eq_zero":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `expr𝔻 -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℂ -/\n@[simp]\ntheorem coe_eq_zero {z : expr𝔻} : (z : exprℂ) = 0 ↔ z = 0 :=\n  coe_injective.eq_iff' coe_zero\n#align coe_eq_zero coe_eq_zero\n\n",
  "coe_conj":

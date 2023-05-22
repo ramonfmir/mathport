@@ -1,80 +1,86 @@
 {"trans":
- "#print trans /-\ntheorem trans : ∀ x y z : X, S.rel x y → S.rel y z → S.rel x z :=\n  S.equiv.2.2\n#align trans trans\n-/\n\n",
+ "#print trans /-\ntheorem trans {x y z} : S.rel x y → S.rel y z → S.rel x z :=\n  S.trans'\n#align trans trans\n-/\n\n",
  "symm":
- "#print symm /-\ntheorem symm : ∀ x y : X, S.rel x y → S.rel y x :=\n  S.equiv.2.1\n#align symm symm\n-/\n\n",
+ "#print symm /-\ntheorem symm {x y : X} : S.rel x y → S.rel y x :=\n  S.symm'\n#align symm symm\n-/\n\n",
  "refl":
- "#print refl /-\n/-\nCopyright (c) 2021 Adam Topaz. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Calle Sönne, Adam Topaz\n-/\ntheorem refl : ∀ x : X, S.rel x x :=\n  S.equiv.1\n#align refl refl\n-/\n\n",
+ "#print refl /-\n/-\nCopyright (c) 2021 Adam Topaz. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Calle Sönne, Adam Topaz\n-/\ntheorem refl : ∀ x, S.rel x x :=\n  S.refl'\n#align refl refl\n-/\n\n",
  "proj_surjective":
  "theorem proj_surjective : function.surjective S.proj :=\n  Quotient.surjective_Quotient_mk''\n#align proj_surjective proj_surjective\n\n",
+ "proj_quotient_map":
+ "theorem proj_quotient_map : QuotientMap S.proj :=\n  quotientMap_quot_mk\n#align proj_quotient_map proj_quotient_map\n\n",
  "proj_is_locally_constant":
- "theorem proj_is_locally_constant : is_locally_constant S.proj :=\n  by\n  rw [(is_locally_constant.tfae S.proj).out 0 3]\n  intro x\n  rcases S.proj_surjective x with ⟨x, rfl⟩\n  simp [fiber_eq, (S.clopen x).1]\n#align proj_is_locally_constant proj_is_locally_constant\n\n",
+ "theorem proj_is_locally_constant : IsLocallyConstant S.proj :=\n  (IsLocallyConstant.iff_continuous S.proj).2 S.proj_continuous\n#align proj_is_locally_constant proj_is_locally_constant\n\n",
  "proj_continuous":
- "theorem proj_continuous : continuous S.proj :=\n  is_locally_constant.continuous <| proj_is_locally_constant _\n#align proj_continuous proj_continuous\n\n",
+ "theorem proj_continuous : Continuous S.proj :=\n  S.proj_quotient_map.continuous\n#align proj_continuous proj_continuous\n\n",
  "proj_bot_injective":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\ntheorem proj_bot_injective [discrete_topology X] : function.injective («expr⊥» : discrete_quotient X).proj :=\n  fun a b h => quotient.exact' h\n#align proj_bot_injective proj_bot_injective\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\ntheorem proj_bot_injective [DiscreteTopology X] : injective («expr⊥» : DiscreteQuotient X).proj := fun _ _ =>\n  proj_bot_inj.1\n#align proj_bot_injective proj_bot_injective\n\n",
+ "proj_bot_inj":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\ntheorem proj_bot_inj [DiscreteTopology X] {x y : X} : proj («expr⊥») x = proj («expr⊥») y ↔ x = y := by simp\n#align proj_bot_inj proj_bot_inj\n\n",
+ "proj_bot_eq":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n@[simp]\ntheorem proj_bot_eq [LocallyConnectedSpace X] {x y : X} :\n    proj («expr⊥») x = proj («expr⊥») y ↔ connectedComponent x = connectedComponent y :=\n  Quotient.eq''\n#align proj_bot_eq proj_bot_eq\n\n",
  "proj_bot_bijective":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\ntheorem proj_bot_bijective [discrete_topology X] : function.bijective («expr⊥» : discrete_quotient X).proj :=\n  ⟨proj_bot_injective, proj_surjective _⟩\n#align proj_bot_bijective proj_bot_bijective\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\ntheorem proj_bot_bijective [DiscreteTopology X] : bijective («expr⊥» : DiscreteQuotient X).proj :=\n  ⟨proj_bot_injective, proj_surjective _⟩\n#align proj_bot_bijective proj_bot_bijective\n\n",
  "of_le_refl_apply":
- "theorem of_le_refl_apply {A : discrete_quotient X} (a : A) : of_le (le_refl A) a = a := by simp\n#align of_le_refl_apply of_le_refl_apply\n\n",
+ "theorem of_le_refl_apply (a : A) : ofLE (le_refl A) a = a := by simp\n#align of_le_refl_apply of_le_refl_apply\n\n",
  "of_le_refl":
- "@[simp]\ntheorem of_le_refl {A : discrete_quotient X} : of_le (le_refl A) = id :=\n  by\n  ext ⟨⟩\n  rfl\n#align of_le_refl of_le_refl\n\n",
- "of_le_proj_apply":
- "@[simp]\ntheorem of_le_proj_apply {A B : discrete_quotient X} (h : A ≤ B) (x : X) : of_le h (A.proj x) = B.proj x :=\n  by\n  change (of_le h ∘ A.proj) x = _\n  simp\n#align of_le_proj_apply of_le_proj_apply\n\n",
+ "@[simp]\ntheorem of_le_refl : ofLE (le_refl A) = id := by\n  ext ⟨⟩\n  rfl\n#align of_le_refl of_le_refl\n\n",
  "of_le_proj":
- "@[simp]\ntheorem of_le_proj {A B : discrete_quotient X} (h : A ≤ B) : of_le h ∘ A.proj = B.proj :=\n  by\n  ext\n  exact quotient.sound' (B.refl _)\n#align of_le_proj of_le_proj\n\n",
- "of_le_map_apply":
- "@[simp]\ntheorem of_le_map_apply {C : discrete_quotient X} (cond : le_comap cont A B) (h : B ≤ C) (a : A) :\n    map (le_comap_trans cond h) a = of_le h (map cond a) :=\n  by\n  rcases a with ⟨⟩\n  rfl\n#align of_le_map_apply of_le_map_apply\n\n",
+ "@[simp]\ntheorem of_le_proj (h : A ≤ B) (x : X) : ofLE h (A.proj x) = B.proj x :=\n  Quotient.sound' (B.refl _)\n#align of_le_proj of_le_proj\n\n",
+ "of_le_of_le":
+ "@[simp]\ntheorem of_le_of_le (h₁ : A ≤ B) (h₂ : B ≤ C) (x : A) : ofLE h₂ (ofLE h₁ x) = ofLE (h₁.trans h₂) x :=\n  by\n  rcases x with ⟨⟩\n  rfl\n#align of_le_of_le of_le_of_le\n\n",
  "of_le_map":
- "@[simp]\ntheorem of_le_map {C : discrete_quotient X} (cond : le_comap cont A B) (h : B ≤ C) :\n    map (le_comap_trans cond h) = of_le h ∘ map cond := by\n  ext ⟨⟩\n  rfl\n#align of_le_map of_le_map\n\n",
+ "@[simp]\ntheorem of_le_map (cond : LEComap f A B) (h : B ≤ B') (a : A) : ofLE h (map f cond a) = map f (cond.mono le_rfl h) a :=\n  by\n  rcases a with ⟨⟩\n  rfl\n#align of_le_map of_le_map\n\n",
  "of_le_continuous":
- "theorem of_le_continuous {A B : discrete_quotient X} (h : A ≤ B) : continuous (of_le h) :=\n  continuous_of_discrete_topology\n#align of_le_continuous of_le_continuous\n\n",
- "of_le_comp_apply":
- "theorem of_le_comp_apply {A B C : discrete_quotient X} (h1 : A ≤ B) (h2 : B ≤ C) (a : A) :\n    of_le (le_trans h1 h2) a = of_le h2 (of_le h1 a) := by simp\n#align of_le_comp_apply of_le_comp_apply\n\n",
- "of_le_comp":
- "@[simp]\ntheorem of_le_comp {A B C : discrete_quotient X} (h1 : A ≤ B) (h2 : B ≤ C) :\n    of_le (le_trans h1 h2) = of_le h2 ∘ of_le h1 := by\n  ext ⟨⟩\n  rfl\n#align of_le_comp of_le_comp\n\n",
- "map_proj_apply":
- "@[simp]\ntheorem map_proj_apply (cond : le_comap cont A B) (y : Y) : map cond (A.proj y) = B.proj (f y) :=\n  rfl\n#align map_proj_apply map_proj_apply\n\n",
+ "theorem of_le_continuous (h : A ≤ B) : Continuous (ofLE h) :=\n  continuous_of_discreteTopology\n#align of_le_continuous of_le_continuous\n\n",
+ "of_le_comp_proj":
+ "@[simp]\ntheorem of_le_comp_proj (h : A ≤ B) : ofLE h ∘ A.proj = B.proj :=\n  funext <| ofLE_proj _\n#align of_le_comp_proj of_le_comp_proj\n\n",
+ "of_le_comp_of_le":
+ "@[simp]\ntheorem of_le_comp_of_le (h₁ : A ≤ B) (h₂ : B ≤ C) : ofLE h₂ ∘ ofLE h₁ = ofLE (le_trans h₁ h₂) :=\n  funext <| ofLE_ofLE _ _\n#align of_le_comp_of_le of_le_comp_of_le\n\n",
+ "of_le_comp_map":
+ "@[simp]\ntheorem of_le_comp_map (cond : LEComap f A B) (h : B ≤ B') : ofLE h ∘ map f cond = map f (cond.mono le_rfl h) :=\n  funext <| ofLE_map cond h\n#align of_le_comp_map of_le_comp_map\n\n",
+ "mono":
+ "theorem le_comap.mono (h : LEComap f A B) (hA : A' ≤ A) (hB : B ≤ B') : LEComap f A' B' :=\n  hA.trans <| le_trans h <| comap_mono _ hB\n#align le_comap.mono le_comap.mono\n\n",
  "map_proj":
- "@[simp]\ntheorem map_proj (cond : le_comap cont A B) : map cond ∘ A.proj = B.proj ∘ f :=\n  rfl\n#align map_proj map_proj\n\n",
- "map_of_le_apply":
- "@[simp]\ntheorem map_of_le_apply {C : discrete_quotient Y} (cond : le_comap cont A B) (h : C ≤ A) (c : C) :\n    map (le_trans h cond) c = map cond (of_le h c) :=\n  by\n  rcases c with ⟨⟩\n  rfl\n#align map_of_le_apply map_of_le_apply\n\n",
+ "@[simp]\ntheorem map_proj (cond : LEComap f A B) (x : X) : map f cond (A.proj x) = B.proj (f x) :=\n  rfl\n#align map_proj map_proj\n\n",
  "map_of_le":
- "@[simp]\ntheorem map_of_le {C : discrete_quotient Y} (cond : le_comap cont A B) (h : C ≤ A) :\n    map (le_trans h cond) = map cond ∘ of_le h := by\n  ext ⟨⟩\n  rfl\n#align map_of_le map_of_le\n\n",
+ "@[simp]\ntheorem map_of_le (cond : LEComap f A B) (h : A' ≤ A) (c : A') : map f cond (ofLE h c) = map f (cond.mono h le_rfl) c :=\n  by\n  rcases c with ⟨⟩\n  rfl\n#align map_of_le map_of_le\n\n",
  "map_id":
- "@[simp]\ntheorem map_id : map (le_comap_id A) = id := by\n  ext ⟨⟩\n  rfl\n#align map_id map_id\n\n",
+ "@[simp]\ntheorem map_id : map _ (leComap_id A) = id := by ext ⟨⟩ <;> rfl\n#align map_id map_id\n\n",
  "map_continuous":
- "theorem map_continuous (cond : le_comap cont A B) : continuous (map cond) :=\n  continuous_of_discrete_topology\n#align map_continuous map_continuous\n\n",
+ "theorem map_continuous (cond : LEComap f A B) : Continuous (map f cond) :=\n  continuous_of_discreteTopology\n#align map_continuous map_continuous\n\n",
+ "map_comp_proj":
+ "@[simp]\ntheorem map_comp_proj (cond : LEComap f A B) : map f cond ∘ A.proj = B.proj ∘ f :=\n  rfl\n#align map_comp_proj map_comp_proj\n\n",
+ "map_comp_of_le":
+ "@[simp]\ntheorem map_comp_of_le (cond : LEComap f A B) (h : A' ≤ A) : map f cond ∘ ofLE h = map f (cond.mono h le_rfl) :=\n  funext <| map_ofLE cond h\n#align map_comp_of_le map_comp_of_le\n\n",
  "map_comp":
- "@[simp]\ntheorem map_comp {Z : Type _} [topological_space Z] {g : Z → Y} {cont' : continuous g} {C : discrete_quotient Z}\n    (h1 : le_comap cont' C A) (h2 : le_comap cont A B) : map (le_comap_comp h1 h2) = map h2 ∘ map h1 :=\n  by\n  ext ⟨⟩\n  rfl\n#align map_comp map_comp\n\n",
- "lift_is_locally_constant":
- "theorem lift_is_locally_constant : _root_.is_locally_constant f.lift := fun A => trivial\n#align lift_is_locally_constant lift_is_locally_constant\n\n",
- "lift_eq_coe":
- "@[simp]\ntheorem lift_eq_coe : f.lift = f.locally_constant_lift :=\n  rfl\n#align lift_eq_coe lift_eq_coe\n\n",
- "le_comap_trans":
- "theorem le_comap_trans {C : discrete_quotient X} : le_comap cont A B → B ≤ C → le_comap cont A C := fun h1 h2 =>\n  le_trans h1 <| comap_mono _ h2\n#align le_comap_trans le_comap_trans\n\n",
+ "@[simp]\ntheorem map_comp (h1 : LEComap g B C) (h2 : LEComap f A B) : map (g.comp f) (h1.comp h2) = map g h1 ∘ map f h2 :=\n  by\n  ext ⟨⟩\n  rfl\n#align map_comp map_comp\n\n",
+ "lift_comp_proj":
+ "@[simp]\ntheorem lift_comp_proj : f.lift ∘ f.discrete_quotient.proj = f :=\n  by\n  ext\n  rfl\n#align lift_comp_proj lift_comp_proj\n\n",
+ "le_comap_id_iff":
+ "@[simp]\ntheorem le_comap_id_iff : LEComap (ContinuousMap.id X) A A' ↔ A ≤ A' :=\n  iff.rfl\n#align le_comap_id_iff le_comap_id_iff\n\n",
  "le_comap_id":
- "theorem le_comap_id (A : discrete_quotient X) : le_comap continuous_id A A := by tauto\n#align le_comap_id le_comap_id\n\n",
- "le_comap_comp":
- "theorem le_comap_comp {Z : Type _} [topological_space Z] {g : Z → Y} {cont' : continuous g} {C : discrete_quotient Z} :\n    le_comap cont' C A → le_comap cont A B → le_comap (continuous.comp cont cont') C B := by tauto\n#align le_comap_comp le_comap_comp\n\n",
- "fiber_open":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\ntheorem fiber_open (A : set S) : is_open («expr ⁻¹' » S.proj A) :=\n  is_open.preimage S.proj_continuous trivial\n#align fiber_open fiber_open\n\n",
- "fiber_le_of_le":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\ntheorem fiber_le_of_le {A B : discrete_quotient X} (h : A ≤ B) (a : A) :\n    «expr ⁻¹' » A.proj {a} ≤ «expr ⁻¹' » B.proj {of_le h a} :=\n  by\n  induction a\n  erw [fiber_eq, fiber_eq]\n  tidy\n#align fiber_le_of_le fiber_le_of_le\n\n",
+ "theorem le_comap_id : LEComap (ContinuousMap.id X) A A := fun _ _ => id\n#align le_comap_id le_comap_id\n\n",
+ "is_open_preimage":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\ntheorem is_open_preimage (A : Set S) : IsOpen («expr ⁻¹' » S.proj A) :=\n  (S.is_clopen_preimage A).1\n#align is_open_preimage is_open_preimage\n\n",
+ "is_closed_preimage":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\ntheorem is_closed_preimage (A : Set S) : IsClosed («expr ⁻¹' » S.proj A) :=\n  (S.is_clopen_preimage A).2\n#align is_closed_preimage is_closed_preimage\n\n",
+ "is_clopen_set_of_rel":
+ "theorem is_clopen_set_of_rel (x : X) : IsClopen (setOf (S.rel x)) :=\n  by\n  rw [← fiber_eq]\n  apply is_clopen_preimage\n#align is_clopen_set_of_rel is_clopen_set_of_rel\n\n",
+ "is_clopen_preimage":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\ntheorem is_clopen_preimage (A : Set S) : IsClopen («expr ⁻¹' » S.proj A) :=\n  (isClopen_discrete A).preimage S.proj_continuous\n#align is_clopen_preimage is_clopen_preimage\n\n",
+ "fiber_subset_of_le":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\ntheorem fiber_subset_of_le {A B : DiscreteQuotient X} (h : A ≤ B) (a : A) :\n    «expr ⁻¹' » A.proj {a} ⊆ «expr ⁻¹' » B.proj {ofLE h a} :=\n  by\n  rcases A.proj_surjective a with ⟨a, rfl⟩\n  rw [fiber_eq, of_le_proj, fiber_eq]\n  exact fun _ h' => h h'\n#align fiber_subset_of_le fiber_subset_of_le\n\n",
  "fiber_eq":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\ntheorem fiber_eq (x : X) : «expr ⁻¹' » S.proj {S.proj x} = set_of (S.rel x) :=\n  by\n  ext1 y\n  simp only [Set.mem_preimage, Set.mem_singleton_iff, quotient.eq', discrete_quotient.proj.equations._eqn_1,\n    Set.mem_setOf_eq]\n  exact ⟨fun h => S.symm _ _ h, fun h => S.symm _ _ h⟩\n#align fiber_eq fiber_eq\n\n",
- "fiber_closed":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\ntheorem fiber_closed (A : set S) : is_closed («expr ⁻¹' » S.proj A) :=\n  is_closed.preimage S.proj_continuous ⟨trivial⟩\n#align fiber_closed fiber_closed\n\n",
- "fiber_clopen":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\ntheorem fiber_clopen (A : set S) : is_clopen («expr ⁻¹' » S.proj A) :=\n  ⟨fiber_open _ _, fiber_closed _ _⟩\n#align fiber_clopen fiber_clopen\n\n",
- "factors":
- "@[simp]\ntheorem factors : f.locally_constant_lift ∘ f.discrete_quotient.proj = f :=\n  by\n  ext\n  rfl\n#align factors factors\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\ntheorem fiber_eq (x : X) : «expr ⁻¹' » S.proj {S.proj x} = setOf (S.rel x) :=\n  Set.ext fun y => eq_comm.trans Quotient.eq''\n#align fiber_eq fiber_eq\n\n",
  "exists_of_compat":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊓ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊓ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊓ » -/\ntheorem exists_of_compat [compact_space X] (Qs : ∀ Q : discrete_quotient X, Q)\n    (compat : ∀ (A B : discrete_quotient X) (h : A ≤ B), of_le h (Qs _) = Qs _) :\n    ∃ x : X, ∀ Q : discrete_quotient X, Q.proj x = Qs _ :=\n  by\n  obtain ⟨x, hx⟩ :=\n    is_compact.nonempty_Inter_of_directed_nonempty_compact_closed\n      (fun Q : discrete_quotient X => «expr ⁻¹' » Q.proj {Qs _}) (fun A B => _) (fun i => _)\n      (fun i => (fiber_closed _ _).is_compact) fun i => fiber_closed _ _\n  · refine' ⟨x, fun Q => _⟩\n    exact hx _ ⟨Q, rfl⟩\n  · refine' ⟨«expr ⊓ » A B, fun a ha => _, fun a ha => _⟩\n    · dsimp only\n      erw [← compat («expr ⊓ » A B) A inf_le_left]\n      exact fiber_le_of_le _ _ ha\n    · dsimp only\n      erw [← compat («expr ⊓ » A B) B inf_le_right]\n      exact fiber_le_of_le _ _ ha\n  · obtain ⟨x, hx⟩ := i.proj_surjective (Qs i)\n    refine' ⟨x, _⟩\n    dsimp only\n    rw [← hx, fiber_eq]\n    apply i.refl\n#align exists_of_compat exists_of_compat\n\n",
- "eq_of_proj_eq":
- "theorem eq_of_proj_eq [t2_space X] [compact_space X] [disc : totally_disconnected_space X] {x y : X} :\n    (∀ Q : discrete_quotient X, Q.proj x = Q.proj y) → x = y :=\n  by\n  intro h\n  change x ∈ ({y} : set X)\n  rw [totally_disconnected_space_iff_connected_component_singleton] at disc\n  rw [← disc y, connected_component_eq_Inter_clopen]\n  rintro U ⟨⟨U, hU1, hU2⟩, rfl⟩\n  replace h : _ ∨ _ := quotient.exact' (h (of_clopen hU1))\n  tauto\n#align eq_of_proj_eq eq_of_proj_eq\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⋂ , » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⋂ , » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\ntheorem exists_of_compat [CompactSpace X] (Qs : ∀ Q : DiscreteQuotient X, Q)\n    (compat : ∀ (A B : DiscreteQuotient X) (h : A ≤ B), ofLE h (Qs _) = Qs _) :\n    ∃ x : X, ∀ Q : DiscreteQuotient X, Q.proj x = Qs _ :=\n  by\n  obtain ⟨x, hx⟩ :\n    («expr⋂ , » \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⋂ , »\"\n        («expr ⁻¹' » (proj Q) {Qs Q})).nonempty :=\n    IsCompact.nonempty_interᵢ_of_directed_nonempty_compact_closed\n      (fun Q : DiscreteQuotient X => «expr ⁻¹' » Q.proj {Qs _}) (directed_of_inf fun A B h => _)\n      (fun Q => (singleton_nonempty _).preimage Q.proj_surjective) (fun i => (is_closed_preimage _ _).is_compact)\n      fun i => is_closed_preimage _ _\n  · refine' ⟨x, fun Q => _⟩\n    exact hx _ ⟨Q, rfl⟩\n  · rw [← compat _ _ h]\n    exact fiber_subset_of_le _ _\n#align exists_of_compat exists_of_compat\n\n",
+ "eq_of_forall_proj_eq":
+ "theorem eq_of_forall_proj_eq [T2Space X] [CompactSpace X] [disc : TotallyDisconnectedSpace X] {x y : X}\n    (h : ∀ Q : DiscreteQuotient X, Q.proj x = Q.proj y) : x = y :=\n  by\n  rw [← mem_singleton_iff, ← connectedComponent_eq_singleton, connectedComponent_eq_interᵢ_clopen, mem_Inter]\n  rintro ⟨U, hU1, hU2⟩\n  exact (Quotient.exact' (h (of_clopen hU1))).mpr hU2\n#align eq_of_forall_proj_eq eq_of_forall_proj_eq\n\n",
+ "comp":
+ "theorem le_comap.comp : LEComap g B C → LEComap f A B → LEComap (g.comp f) A C := by tauto\n#align le_comap.comp le_comap.comp\n\n",
  "comap_mono":
- "theorem comap_mono {A B : discrete_quotient X} (h : A ≤ B) : A.comap cont ≤ B.comap cont := by tauto\n#align comap_mono comap_mono\n\n",
+ "@[mono]\ntheorem comap_mono {A B : DiscreteQuotient Y} (h : A ≤ B) : A.comap f ≤ B.comap f := by tauto\n#align comap_mono comap_mono\n\n",
  "comap_id":
- "@[simp]\ntheorem comap_id : S.comap (continuous_id : continuous (id : X → X)) = S :=\n  by\n  ext\n  rfl\n#align comap_id comap_id\n\n",
+ "@[simp]\ntheorem comap_id : S.comap (ContinuousMap.id X) = S := by\n  ext\n  rfl\n#align comap_id comap_id\n\n",
  "comap_comp":
- "@[simp]\ntheorem comap_comp {Z : Type _} [topological_space Z] {g : Z → Y} (cont' : continuous g) :\n    S.comap (continuous.comp cont cont') = (S.comap cont).comap cont' :=\n  by\n  ext\n  rfl\n#align comap_comp comap_comp\n\n"}
+ "@[simp]\ntheorem comap_comp (S : DiscreteQuotient Z) : S.comap (g.comp f) = (S.comap g).comap f :=\n  rfl\n#align comap_comp comap_comp\n\n"}

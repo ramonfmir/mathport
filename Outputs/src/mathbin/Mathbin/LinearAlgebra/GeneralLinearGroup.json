@@ -1,38 +1,4 @@
-{"to_linear_apply":
- "@[simp]\ntheorem to_linear_apply (v : n → R) : (@to_linear n ‹_› ‹_› _ _ A) v = matrix.mul_vec_lin (↑A) v :=\n  rfl\n#align to_linear_apply to_linear_apply\n\n",
- "to_GL_pos_injective":
- "theorem to_GL_pos_injective : function.injective (to_GL_pos : special_linear_group n R → GL_pos n R) :=\n  (show function.injective ((coe : GL_pos n R → matrix n n R) ∘ to_GL_pos) from subtype.coe_injective).of_comp\n#align to_GL_pos_injective to_GL_pos_injective\n\n",
- "mem_GL_pos":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprGL -/\n@[simp]\ntheorem mem_GL_pos (A : (exprGL) n R) : A ∈ GL_pos n R ↔ 0 < (A.det : R) :=\n  iff.rfl\n#align mem_GL_pos mem_GL_pos\n\n",
- "ext_iff":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprGL -/\n/-\nCopyright (c) 2021 Chris Birkbeck. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Chris Birkbeck\n-/\n-- disable this instance so we do not accidentally use it in lemmas.\ntheorem ext_iff (A B : (exprGL) n R) : A = B ↔ ∀ i j, (A : matrix n n R) i j = (B : matrix n n R) i j :=\n  Units.ext_iff.trans matrix.ext_iff.symm\n#align ext_iff ext_iff\n\n",
- "ext":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprGL -/\n/-- Not marked `@[ext]` as the `ext` tactic already solves this. -/\ntheorem ext ⦃A B : (exprGL) n R⦄ (h : ∀ i j, (A : matrix n n R) i j = (B : matrix n n R) i j) : A = B :=\n  Units.ext <| matrix.ext h\n#align ext ext\n\n",
- "det_ne_zero":
- "theorem GL_pos.det_ne_zero (A : GL_pos n R) : (A : matrix n n R).det ≠ 0 :=\n  ne_of_gt A.prop\n#align GL_pos.det_ne_zero GL_pos.det_ne_zero\n\n",
- "coe_to_linear":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₗ[ ] » -/\n-- Note that without the `@` and `‹_›`, lean infers `λ a b, _inst a b` instead of `_inst` as the\n-- decidability argument, which prevents `simp` from obtaining the instance by unification.\n-- These `λ a b, _inst a b` terms also appear in the type of `A`, but simp doesn't get confused by\n-- them so for now we do not care.\n@[simp]\ntheorem coe_to_linear : (@to_linear n ‹_› ‹_› _ _ A : «expr →ₗ[ ] » (n → R) R (n → R)) = matrix.mul_vec_lin A :=\n  rfl\n#align coe_to_linear coe_to_linear\n\n",
- "coe_to_GL_pos_to_GL_det":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprGL -/\n@[simp]\ntheorem coe_to_GL_pos_to_GL_det (g : special_linear_group n R) : ((g : GL_pos n R) : (exprGL) n R).det = 1 :=\n  Units.ext g.prop\n#align coe_to_GL_pos_to_GL_det coe_to_GL_pos_to_GL_det\n\n",
- "coe_to_GL_det":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprGL -/\n@[simp]\ntheorem coe_to_GL_det (g : special_linear_group n R) : (g : (exprGL) n R).det = 1 :=\n  Units.ext g.prop\n#align coe_to_GL_det coe_to_GL_det\n\n",
- "coe_one":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprGL -/\n@[simp]\ntheorem coe_one : ↑(1 : (exprGL) n R) = (1 : matrix n n R) :=\n  rfl\n#align coe_one coe_one\n\n",
- "coe_neg_apply":
- "@[simp]\ntheorem GL_pos.coe_neg_apply (g : GL_pos n R) (i j : n) : (↑(-g) : matrix n n R) i j = -(↑g : matrix n n R) i j :=\n  rfl\n#align GL_pos.coe_neg_apply GL_pos.coe_neg_apply\n\n",
- "coe_neg_GL":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprGL -/\n@[simp]\ntheorem GL_pos.coe_neg_GL (g : GL_pos n R) : ↑(-g) = -(g : (exprGL) n R) :=\n  rfl\n#align GL_pos.coe_neg_GL GL_pos.coe_neg_GL\n\n",
- "coe_neg":
- "@[simp]\ntheorem GL_pos.coe_neg (g : GL_pos n R) : ↑(-g) = -(g : matrix n n R) :=\n  rfl\n#align GL_pos.coe_neg GL_pos.coe_neg\n\n",
- "coe_mul":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `matrix.mul -/\n@[simp]\ntheorem coe_mul : ↑(A * B) = matrix.mul (↑A : matrix n n R) (↑B : matrix n n R) :=\n  rfl\n#align coe_mul coe_mul\n\n",
- "coe_inv":
- "theorem coe_inv : ↑A⁻¹ = (↑A : matrix n n R)⁻¹ :=\n  letI := A.invertible\n  inv_of_eq_nonsing_inv (↑A : matrix n n R)\n#align coe_inv coe_inv\n\n",
- "coe_fn_eq_coe":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprGL -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n/- TODO: Add Iwasawa matrices `n_x=!![1,x; 0,1]`, `a_t=!![exp(t/2),0;0,exp(-t/2)]` and\n  `k_θ=!![cos θ, sin θ; -sin θ, cos θ]`\n-/\n-- this section should be last to ensure we do not use it in lemmas\n@[simp]\ntheorem coe_fn_eq_coe (A : (exprGL) n R) : «expr⇑ » A = (↑A : matrix n n R) :=\n  rfl\n#align coe_fn_eq_coe coe_fn_eq_coe\n\n",
- "coe_eq_to_GL_pos":
- "theorem coe_eq_to_GL_pos : (coe : special_linear_group n R → GL_pos n R) = to_GL_pos :=\n  rfl\n#align coe_eq_to_GL_pos coe_eq_to_GL_pos\n\n",
- "coe_GL_pos_neg":
- "@[norm_cast]\ntheorem coe_GL_pos_neg (g : special_linear_group n R) : ↑(-g) = -(↑g : GL_pos n R) :=\n  subtype.ext <| Units.ext rfl\n#align coe_GL_pos_neg coe_GL_pos_neg\n\n",
- "coe_GL_pos_coe_GL_coe_matrix":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprGL -/\n/-- Coercing a `special_linear_group` via `GL_pos` and `GL` is the same as coercing striaght to a\nmatrix. -/\n@[simp]\ntheorem coe_GL_pos_coe_GL_coe_matrix (g : special_linear_group n R) :\n    (↑(↑(↑g : GL_pos n R) : (exprGL) n R) : matrix n n R) = ↑g :=\n  rfl\n#align coe_GL_pos_coe_GL_coe_matrix coe_GL_pos_coe_GL_coe_matrix\n\n"}
+{"general_linear_equiv_to_linear_map":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₗ[ ] » -/\n/-\nCopyright (c) 2019 Johan Commelin. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Johan Commelin\n-/\n@[simp]\ntheorem general_linear_equiv_to_linear_map (f : GeneralLinearGroup R M) :\n    (generalLinearEquiv R M f : «expr →ₗ[ ] » M R M) = f :=\n  by\n  ext\n  rfl\n#align general_linear_equiv_to_linear_map general_linear_equiv_to_linear_map\n\n",
+ "coe_fn_general_linear_equiv":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n@[simp]\ntheorem coe_fn_general_linear_equiv (f : GeneralLinearGroup R M) : «expr⇑ » (generalLinearEquiv R M f) = (f : M → M) :=\n  rfl\n#align coe_fn_general_linear_equiv coe_fn_general_linear_equiv\n\n"}

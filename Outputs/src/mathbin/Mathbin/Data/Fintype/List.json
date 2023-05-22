@@ -1,4 +1,4 @@
 {"mem_lists_iff":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⟦ ⟧» -/\n@[simp]\ntheorem mem_lists_iff (s : Multiset α) (l : list α) : l ∈ lists s ↔ s = «expr⟦ ⟧» l :=\n  by\n  induction s using Quotient.inductionOn\n  simpa using perm_comm\n#align mem_lists_iff mem_lists_iff\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⟦ ⟧» -/\n@[simp]\ntheorem mem_lists_iff (s : Multiset α) (l : List α) : l ∈ lists s ↔ s = «expr⟦ ⟧» l :=\n  by\n  induction s using Quotient.inductionOn\n  simpa using perm_comm\n#align mem_lists_iff mem_lists_iff\n\n",
  "lists_coe":
- "/-\nCopyright (c) 2021 Yakov Pechersky. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Yakov Pechersky\n-/\n@[simp]\ntheorem lists_coe (l : list α) : lists (l : Multiset α) = l.permutations.to_finset :=\n  rfl\n#align lists_coe lists_coe\n\n"}
+ "/-\nCopyright (c) 2021 Yakov Pechersky. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Yakov Pechersky\n-/\n@[simp]\ntheorem lists_coe (l : List α) : lists (l : Multiset α) = l.permutations.to_finset :=\n  rfl\n#align lists_coe lists_coe\n\n"}

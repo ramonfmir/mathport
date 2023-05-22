@@ -1,7 +1,7 @@
 {"vadd_vsub":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr -ᵥ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr +ᵥ » -/\n/-- The map `g` from `V` to `V₂` corresponding to a map `f` from `P` to `P₂`, at a base point `p`,\nis an isometry if `f` is one. -/\ntheorem vadd_vsub {f : P → P₂} (hf : isometry f) {p : P} {g : V → V₂}\n    (hg : ∀ v, g v = «expr -ᵥ » (f («expr +ᵥ » v p)) (f p)) : isometry g :=\n  by\n  convert (vadd_const 𝕜 (f p)).symm.isometry.comp (hf.comp (vadd_const 𝕜 p).isometry)\n  exact funext hg\n#align vadd_vsub vadd_vsub\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr -ᵥ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr +ᵥ » -/\n#print vadd_vsub /-\n/-- The map `g` from `V` to `V₂` corresponding to a map `f` from `P` to `P₂`, at a base point `p`,\nis an isometry if `f` is one. -/\ntheorem vadd_vsub {f : P → P₂} (hf : Isometry f) {p : P} {g : V → V₂}\n    (hg : ∀ v, g v = «expr -ᵥ » (f («expr +ᵥ » v p)) (f p)) : Isometry g :=\n  by\n  convert(vadd_const 𝕜 (f p)).symm.isometry.comp (hf.comp (vadd_const 𝕜 p).isometry)\n  exact funext hg\n#align vadd_vsub vadd_vsub\n-/\n\n",
  "vadd_const_to_affine_equiv":
- "@[simp]\ntheorem vadd_const_to_affine_equiv (p : P) : (vadd_const 𝕜 p).to_affine_equiv = affine_equiv.vadd_const 𝕜 p :=\n  rfl\n#align vadd_const_to_affine_equiv vadd_const_to_affine_equiv\n\n",
+ "@[simp]\ntheorem vadd_const_to_affine_equiv (p : P) : (vadd_const 𝕜 p).to_affine_equiv = AffineEquiv.vaddConst 𝕜 p :=\n  rfl\n#align vadd_const_to_affine_equiv vadd_const_to_affine_equiv\n\n",
  "trans_refl":
  "@[simp]\ntheorem trans_refl : e.trans (refl 𝕜 P₂) = e :=\n  ext fun x => rfl\n#align trans_refl trans_refl\n\n",
  "trans_assoc":
@@ -9,15 +9,15 @@
  "to_isometry_equiv_symm":
  "@[simp]\ntheorem to_isometry_equiv_symm : e.to_isometry_equiv.symm = e.symm.to_isometry_equiv :=\n  rfl\n#align to_isometry_equiv_symm to_isometry_equiv_symm\n\n",
  "to_isometry_equiv_refl":
- "@[simp]\ntheorem to_isometry_equiv_refl : (refl 𝕜 P).to_isometry_equiv = isometry_equiv.refl P :=\n  rfl\n#align to_isometry_equiv_refl to_isometry_equiv_refl\n\n",
+ "@[simp]\ntheorem to_isometry_equiv_refl : (refl 𝕜 P).to_isometry_equiv = IsometryEquiv.refl P :=\n  rfl\n#align to_isometry_equiv_refl to_isometry_equiv_refl\n\n",
  "to_homeomorph_symm":
  "@[simp]\ntheorem to_homeomorph_symm : e.to_homeomorph.symm = e.symm.to_homeomorph :=\n  rfl\n#align to_homeomorph_symm to_homeomorph_symm\n\n",
  "to_homeomorph_refl":
- "@[simp]\ntheorem to_homeomorph_refl : (refl 𝕜 P).to_homeomorph = homeomorph.refl P :=\n  rfl\n#align to_homeomorph_refl to_homeomorph_refl\n\n",
+ "@[simp]\ntheorem to_homeomorph_refl : (refl 𝕜 P).to_homeomorph = Homeomorph.refl P :=\n  rfl\n#align to_homeomorph_refl to_homeomorph_refl\n\n",
  "to_affine_map_injective":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ᵃⁱ[ ] » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ᵃ[ ] » -/\ntheorem to_affine_map_injective : injective (to_affine_map : «expr →ᵃⁱ[ ] » P 𝕜 P₂ → «expr →ᵃ[ ] » P 𝕜 P₂)\n  | ⟨f, _⟩, ⟨g, _⟩, rfl => rfl\n#align to_affine_map_injective to_affine_map_injective\n\n",
  "to_affine_map_eq":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ᵃⁱ[ ] » -/\n@[simp]\ntheorem isometry_equiv_map.to_affine_map_eq (φ : «expr →ᵃⁱ[ ] » P₁ 𝕜 P₂) (E : affine_subspace 𝕜 P₁) [nonempty E] :\n    (E.isometry_equiv_map φ).to_affine_map = E.equiv_map_of_injective φ.to_affine_map φ.injective :=\n  rfl\n#align isometry_equiv_map.to_affine_map_eq isometry_equiv_map.to_affine_map_eq\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ᵃⁱ[ ] » -/\n@[simp]\ntheorem isometry_equiv_map.to_affine_map_eq (φ : «expr →ᵃⁱ[ ] » P₁ 𝕜 P₂) (E : AffineSubspace 𝕜 P₁) [Nonempty E] :\n    (E.isometry_equiv_map φ).to_affine_map = E.equiv_map_of_injective φ.to_affine_map φ.injective :=\n  rfl\n#align isometry_equiv_map.to_affine_map_eq isometry_equiv_map.to_affine_map_eq\n\n",
  "to_affine_isometry_to_affine_map":
  "-- somewhat arbitrary choice of simp direction\n@[simp]\ntheorem to_affine_isometry_to_affine_map : f.to_affine_isometry.to_affine_map = f.to_linear_map.to_affine_map :=\n  rfl\n#align to_affine_isometry_to_affine_map to_affine_isometry_to_affine_map\n\n",
  "to_affine_isometry_linear_isometry":
@@ -31,7 +31,7 @@
  "to_affine_equiv_symm":
  "@[simp]\ntheorem to_affine_equiv_symm : e.to_affine_equiv.symm = e.symm.to_affine_equiv :=\n  rfl\n#align to_affine_equiv_symm to_affine_equiv_symm\n\n",
  "to_affine_equiv_refl":
- "@[simp]\ntheorem to_affine_equiv_refl : (refl 𝕜 P).to_affine_equiv = affine_equiv.refl 𝕜 P :=\n  rfl\n#align to_affine_equiv_refl to_affine_equiv_refl\n\n",
+ "@[simp]\ntheorem to_affine_equiv_refl : (refl 𝕜 P).to_affine_equiv = AffineEquiv.refl 𝕜 P :=\n  rfl\n#align to_affine_equiv_refl to_affine_equiv_refl\n\n",
  "to_affine_equiv_injective":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ᵃⁱ[ ] » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ᵃ[ ] » -/\ntheorem to_affine_equiv_injective : injective (to_affine_equiv : «expr ≃ᵃⁱ[ ] » P 𝕜 P₂ → «expr ≃ᵃ[ ] » P 𝕜 P₂)\n  | ⟨e, _⟩, ⟨_, _⟩, rfl => rfl\n#align to_affine_equiv_injective to_affine_equiv_injective\n\n",
  "symm_trans_self":
@@ -39,37 +39,37 @@
  "symm_symm":
  "@[simp]\ntheorem symm_symm : e.symm.symm = e :=\n  ext fun x => rfl\n#align symm_symm symm_symm\n\n",
  "symm_const_vsub":
- "@[simp]\ntheorem symm_const_vsub (p : P) :\n    (const_vsub 𝕜 p).symm = (linear_isometry_equiv.neg 𝕜).to_affine_isometry_equiv.trans (vadd_const 𝕜 p) :=\n  by\n  ext\n  rfl\n#align symm_const_vsub symm_const_vsub\n\n",
+ "@[simp]\ntheorem symm_const_vsub (p : P) :\n    (const_vsub 𝕜 p).symm = (LinearIsometryEquiv.neg 𝕜).to_affine_isometry_equiv.trans (vadd_const 𝕜 p) :=\n  by\n  ext\n  rfl\n#align symm_const_vsub symm_const_vsub\n\n",
  "symm_apply_apply":
  "@[simp]\ntheorem symm_apply_apply (x : P) : e.symm (e x) = x :=\n  e.to_affine_equiv.symm_apply_apply x\n#align symm_apply_apply symm_apply_apply\n\n",
  "surjective":
  "protected theorem surjective : surjective e :=\n  e.1.surjective\n#align surjective surjective\n\n",
  "subtypeₐᵢ_to_affine_map":
- "@[simp]\ntheorem subtypeₐᵢ_to_affine_map (s : affine_subspace 𝕜 P) [nonempty s] : s.subtypeₐᵢ.to_affine_map = s.subtype :=\n  rfl\n#align subtypeₐᵢ_to_affine_map subtypeₐᵢ_to_affine_map\n\n",
+ "@[simp]\ntheorem subtypeₐᵢ_to_affine_map (s : AffineSubspace 𝕜 P) [Nonempty s] : s.subtypeₐᵢ.to_affine_map = s.subtype :=\n  rfl\n#align subtypeₐᵢ_to_affine_map subtypeₐᵢ_to_affine_map\n\n",
  "subtypeₐᵢ_linear_isometry":
- "@[simp]\ntheorem subtypeₐᵢ_linear_isometry (s : affine_subspace 𝕜 P) [nonempty s] :\n    s.subtypeₐᵢ.linear_isometry = s.direction.subtypeₗᵢ :=\n  rfl\n#align subtypeₐᵢ_linear_isometry subtypeₐᵢ_linear_isometry\n\n",
+ "@[simp]\ntheorem subtypeₐᵢ_linear_isometry (s : AffineSubspace 𝕜 P) [Nonempty s] :\n    s.subtypeₐᵢ.linear_isometry = s.direction.subtypeₗᵢ :=\n  rfl\n#align subtypeₐᵢ_linear_isometry subtypeₐᵢ_linear_isometry\n\n",
  "subtypeₐᵢ_linear":
- "theorem subtypeₐᵢ_linear (s : affine_subspace 𝕜 P) [nonempty s] : s.subtypeₐᵢ.linear = s.direction.subtype :=\n  rfl\n#align subtypeₐᵢ_linear subtypeₐᵢ_linear\n\n",
+ "theorem subtypeₐᵢ_linear (s : AffineSubspace 𝕜 P) [Nonempty s] : s.subtypeₐᵢ.linear = s.direction.subtype :=\n  rfl\n#align subtypeₐᵢ_linear subtypeₐᵢ_linear\n\n",
  "self_trans_symm":
  "@[simp]\ntheorem self_trans_symm : e.trans e.symm = refl 𝕜 P :=\n  ext e.symm_apply_apply\n#align self_trans_symm self_trans_symm\n\n",
  "refl_trans":
  "@[simp]\ntheorem refl_trans : (refl 𝕜 P).trans e = e :=\n  ext fun x => rfl\n#align refl_trans refl_trans\n\n",
  "range_eq_univ":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ᵃⁱ[ ] » -/\ntheorem range_eq_univ (e : «expr ≃ᵃⁱ[ ] » P 𝕜 P₂) : Set.range e = Set.univ :=\n  by\n  rw [← coe_to_isometry_equiv]\n  exact isometry_equiv.range_eq_univ _\n#align range_eq_univ range_eq_univ\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ᵃⁱ[ ] » -/\ntheorem range_eq_univ (e : «expr ≃ᵃⁱ[ ] » P 𝕜 P₂) : Set.range e = Set.univ :=\n  by\n  rw [← coe_to_isometry_equiv]\n  exact IsometryEquiv.range_eq_univ _\n#align range_eq_univ range_eq_univ\n\n",
  "point_reflection_to_affine_equiv":
- "@[simp]\ntheorem point_reflection_to_affine_equiv (x : P) :\n    (point_reflection 𝕜 x).to_affine_equiv = affine_equiv.point_reflection 𝕜 x :=\n  rfl\n#align point_reflection_to_affine_equiv point_reflection_to_affine_equiv\n\n",
+ "@[simp]\ntheorem point_reflection_to_affine_equiv (x : P) :\n    (point_reflection 𝕜 x).to_affine_equiv = AffineEquiv.pointReflection 𝕜 x :=\n  rfl\n#align point_reflection_to_affine_equiv point_reflection_to_affine_equiv\n\n",
  "point_reflection_symm":
- "@[simp]\ntheorem point_reflection_symm (x : P) : (point_reflection 𝕜 x).symm = point_reflection 𝕜 x :=\n  to_affine_equiv_injective <| affine_equiv.point_reflection_symm 𝕜 x\n#align point_reflection_symm point_reflection_symm\n\n",
+ "@[simp]\ntheorem point_reflection_symm (x : P) : (point_reflection 𝕜 x).symm = point_reflection 𝕜 x :=\n  to_affine_equiv_injective <| AffineEquiv.pointReflection_symm 𝕜 x\n#align point_reflection_symm point_reflection_symm\n\n",
  "point_reflection_self":
- "@[simp]\ntheorem point_reflection_self (x : P) : point_reflection 𝕜 x x = x :=\n  affine_equiv.point_reflection_self 𝕜 x\n#align point_reflection_self point_reflection_self\n\n",
+ "@[simp]\ntheorem point_reflection_self (x : P) : point_reflection 𝕜 x x = x :=\n  AffineEquiv.pointReflection_self 𝕜 x\n#align point_reflection_self point_reflection_self\n\n",
  "point_reflection_midpoint_right":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n@[simp]\ntheorem point_reflection_midpoint_right (x y : P) : point_reflection (exprℝ) (midpoint (exprℝ) x y) y = x :=\n  affine_equiv.point_reflection_midpoint_right x y\n#align point_reflection_midpoint_right point_reflection_midpoint_right\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n@[simp]\ntheorem point_reflection_midpoint_right (x y : P) : point_reflection (exprℝ) (midpoint (exprℝ) x y) y = x :=\n  AffineEquiv.pointReflection_midpoint_right x y\n#align point_reflection_midpoint_right point_reflection_midpoint_right\n\n",
  "point_reflection_midpoint_left":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n@[simp]\ntheorem point_reflection_midpoint_left (x y : P) : point_reflection (exprℝ) (midpoint (exprℝ) x y) x = y :=\n  affine_equiv.point_reflection_midpoint_left x y\n#align point_reflection_midpoint_left point_reflection_midpoint_left\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n@[simp]\ntheorem point_reflection_midpoint_left (x y : P) : point_reflection (exprℝ) (midpoint (exprℝ) x y) x = y :=\n  AffineEquiv.pointReflection_midpoint_left x y\n#align point_reflection_midpoint_left point_reflection_midpoint_left\n\n",
  "point_reflection_involutive":
- "theorem point_reflection_involutive (x : P) : function.involutive (point_reflection 𝕜 x) :=\n  equiv.point_reflection_involutive x\n#align point_reflection_involutive point_reflection_involutive\n\n",
+ "theorem point_reflection_involutive (x : P) : Function.Involutive (point_reflection 𝕜 x) :=\n  Equiv.pointReflection_involutive x\n#align point_reflection_involutive point_reflection_involutive\n\n",
  "point_reflection_fixed_iff":
- "theorem point_reflection_fixed_iff [Invertible (2 : 𝕜)] {x y : P} : point_reflection 𝕜 x y = y ↔ y = x :=\n  affine_equiv.point_reflection_fixed_iff_of_module 𝕜\n#align point_reflection_fixed_iff point_reflection_fixed_iff\n\n",
+ "theorem point_reflection_fixed_iff [Invertible (2 : 𝕜)] {x y : P} : point_reflection 𝕜 x y = y ↔ y = x :=\n  AffineEquiv.pointReflection_fixed_iff_of_module 𝕜\n#align point_reflection_fixed_iff point_reflection_fixed_iff\n\n",
  "point_reflection_apply":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr +ᵥ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr -ᵥ » -/\ntheorem point_reflection_apply (x y : P) : (point_reflection 𝕜 x) y = «expr +ᵥ » («expr -ᵥ » x y) x :=\n  rfl\n#align point_reflection_apply point_reflection_apply\n\n",
  "nndist_map":
@@ -83,33 +83,31 @@
  "map_eq_iff":
  "@[simp]\ntheorem map_eq_iff {x y : P} : e x = e y ↔ x = y :=\n  e.injective.eq_iff\n#align map_eq_iff map_eq_iff\n\n",
  "lipschitz":
- "protected theorem lipschitz : lipschitz_with 1 e :=\n  e.isometry.lipschitz\n#align lipschitz lipschitz\n\n",
+ "protected theorem lipschitz : LipschitzWith 1 e :=\n  e.isometry.lipschitz\n#align lipschitz lipschitz\n\n",
  "linear_isometry_equiv_mk'":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ₗᵢ[ ] » -/\n@[simp]\ntheorem linear_isometry_equiv_mk' (e : P₁ → P₂) (e' : «expr ≃ₗᵢ[ ] » V₁ 𝕜 V₂) (p h) :\n    (mk' e e' p h).linear_isometry_equiv = e' := by\n  ext\n  rfl\n#align linear_isometry_equiv_mk' linear_isometry_equiv_mk'\n\n",
  "linear_eq_linear_isometry":
  "-- `≃ᵃᵢ` would be more consistent with the linear isometry equiv notation, but it is uglier\n@[simp]\ntheorem linear_eq_linear_isometry : e.linear = e.linear_isometry_equiv.to_linear_equiv :=\n  by\n  ext\n  rfl\n#align linear_eq_linear_isometry linear_eq_linear_isometry\n\n",
- "isometry":
- "protected theorem isometry : isometry e :=\n  e.to_affine_isometry.isometry\n#align isometry isometry\n\n",
  "is_open_map_linear_iff":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ᵃ[ ] » -/\n/-- If `f` is an affine map, then its linear part is an open map iff `f` is an open map. -/\ntheorem affine_map.is_open_map_linear_iff {f : «expr →ᵃ[ ] » P 𝕜 P₂} : is_open_map f.linear ↔ is_open_map f :=\n  by\n  inhabit P\n  have :\n    (f.linear : V → V₂) =\n      (affine_isometry_equiv.vadd_const 𝕜 <| f default).to_homeomorph.symm ∘\n        f ∘ (affine_isometry_equiv.vadd_const 𝕜 default).to_homeomorph :=\n    by\n    ext v\n    simp\n  rw [this]\n  simp only [homeomorph.comp_is_open_map_iff, homeomorph.comp_is_open_map_iff']\n#align affine_map.is_open_map_linear_iff affine_map.is_open_map_linear_iff\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ᵃ[ ] » -/\n/-- If `f` is an affine map, then its linear part is an open map iff `f` is an open map. -/\ntheorem affine_map.is_open_map_linear_iff {f : «expr →ᵃ[ ] » P 𝕜 P₂} : IsOpenMap f.linear ↔ IsOpenMap f :=\n  by\n  inhabit P\n  have :\n    (f.linear : V → V₂) =\n      (affine_isometry_equiv.vadd_const 𝕜 <| f default).to_homeomorph.symm ∘\n        f ∘ (affine_isometry_equiv.vadd_const 𝕜 default).to_homeomorph :=\n    by\n    ext v\n    simp\n  rw [this]\n  simp only [Homeomorph.comp_isOpenMap_iff, Homeomorph.comp_isOpenMap_iff']\n#align affine_map.is_open_map_linear_iff affine_map.is_open_map_linear_iff\n\n",
  "injective":
  "protected theorem injective : injective e :=\n  e.1.injective\n#align injective injective\n\n",
  "id_to_affine_map":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ᵃ[ ] » -/\n@[simp]\ntheorem id_to_affine_map : (id.to_affine_map : «expr →ᵃ[ ] » P 𝕜 P) = affine_map.id 𝕜 P :=\n  rfl\n#align id_to_affine_map id_to_affine_map\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ᵃ[ ] » -/\n@[simp]\ntheorem id_to_affine_map : (id.to_affine_map : «expr →ᵃ[ ] » P 𝕜 P) = AffineMap.id 𝕜 P :=\n  rfl\n#align id_to_affine_map id_to_affine_map\n\n",
  "id_comp":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ᵃⁱ[ ] » -/\n@[simp]\ntheorem id_comp : (id : «expr →ᵃⁱ[ ] » P₂ 𝕜 P₂).comp f = f :=\n  ext fun x => rfl\n#align id_comp id_comp\n\n",
  "id_apply":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ᵃⁱ[ ] » -/\n@[simp]\ntheorem id_apply (x : P) : (affine_isometry.id : «expr →ᵃⁱ[ ] » P 𝕜 P) x = x :=\n  rfl\n#align id_apply id_apply\n\n",
  "ext":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ᵃⁱ[ ] » -/\n@[ext]\ntheorem ext {e e' : «expr ≃ᵃⁱ[ ] » P 𝕜 P₂} (h : ∀ x, e x = e' x) : e = e' :=\n  to_affine_equiv_injective <| affine_equiv.ext h\n#align ext ext\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ᵃⁱ[ ] » -/\n@[ext]\ntheorem ext {e e' : «expr ≃ᵃⁱ[ ] » P 𝕜 P₂} (h : ∀ x, e x = e' x) : e = e' :=\n  to_affine_equiv_injective <| AffineEquiv.ext h\n#align ext ext\n\n",
  "edist_map":
  "@[simp]\ntheorem edist_map (x y : P) : edist (e x) (e y) = edist x y :=\n  e.to_affine_isometry.edist_map x y\n#align edist_map edist_map\n\n",
  "ediam_range":
- "theorem ediam_range : emetric.diam (range f) = emetric.diam (univ : set P) :=\n  f.isometry.ediam_range\n#align ediam_range ediam_range\n\n",
+ "theorem ediam_range : EMetric.diam (range f) = EMetric.diam (univ : Set P) :=\n  f.isometry.ediam_range\n#align ediam_range ediam_range\n\n",
  "ediam_image":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\n@[simp]\ntheorem ediam_image (s : set P) : emetric.diam («expr '' » e s) = emetric.diam s :=\n  e.isometry.ediam_image s\n#align ediam_image ediam_image\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\n@[simp]\ntheorem ediam_image (s : Set P) : EMetric.diam («expr '' » e s) = EMetric.diam s :=\n  e.isometry.ediam_image s\n#align ediam_image ediam_image\n\n",
  "dist_point_reflection_self_real":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\ntheorem dist_point_reflection_self_real (x y : P) : dist (point_reflection (exprℝ) x y) y = 2 * dist x y := by\n  rw [dist_point_reflection_self, real.norm_two]\n#align dist_point_reflection_self_real dist_point_reflection_self_real\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\ntheorem dist_point_reflection_self_real (x y : P) : dist (point_reflection (exprℝ) x y) y = 2 * dist x y := by\n  rw [dist_point_reflection_self, Real.norm_two]\n#align dist_point_reflection_self_real dist_point_reflection_self_real\n\n",
  "dist_point_reflection_self'":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr‖ ‖» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr -ᵥ » -/\ntheorem dist_point_reflection_self' (x y : P) : dist (point_reflection 𝕜 x y) y = «expr‖ ‖» (bit0 («expr -ᵥ » x y)) :=\n  by rw [point_reflection_apply, dist_eq_norm_vsub V, vadd_vsub_assoc, bit0]\n#align dist_point_reflection_self' dist_point_reflection_self'\n\n",
  "dist_point_reflection_self":
@@ -119,27 +117,19 @@
  "dist_map":
  "@[simp]\ntheorem dist_map (x y : P) : dist (e x) (e y) = dist x y :=\n  e.to_affine_isometry.dist_map x y\n#align dist_map dist_map\n\n",
  "diam_range":
- "theorem diam_range : metric.diam (range f) = metric.diam (univ : set P) :=\n  f.isometry.diam_range\n#align diam_range diam_range\n\n",
+ "theorem diam_range : Metric.diam (range f) = Metric.diam (univ : Set P) :=\n  f.isometry.diam_range\n#align diam_range diam_range\n\n",
  "diam_image":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\n@[simp]\ntheorem diam_image (s : set P) : metric.diam («expr '' » e s) = metric.diam s :=\n  e.isometry.diam_image s\n#align diam_image diam_image\n\n",
- "continuous_within_at":
- "protected theorem continuous_within_at {s x} : continuous_within_at e s x :=\n  e.continuous.continuous_within_at\n#align continuous_within_at continuous_within_at\n\n",
- "continuous_on":
- "protected theorem continuous_on {s} : continuous_on e s :=\n  e.continuous.continuous_on\n#align continuous_on continuous_on\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\n@[simp]\ntheorem diam_image (s : Set P) : Metric.diam («expr '' » e s) = Metric.diam s :=\n  e.isometry.diam_image s\n#align diam_image diam_image\n\n",
  "continuous_linear_iff":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ᵃ[ ] » -/\n/-- If `f` is an affine map, then its linear part is continuous iff `f` is continuous. -/\ntheorem affine_map.continuous_linear_iff {f : «expr →ᵃ[ ] » P 𝕜 P₂} : continuous f.linear ↔ continuous f :=\n  by\n  inhabit P\n  have :\n    (f.linear : V → V₂) =\n      (affine_isometry_equiv.vadd_const 𝕜 <| f default).to_homeomorph.symm ∘\n        f ∘ (affine_isometry_equiv.vadd_const 𝕜 default).to_homeomorph :=\n    by\n    ext v\n    simp\n  rw [this]\n  simp only [homeomorph.comp_continuous_iff, homeomorph.comp_continuous_iff']\n#align affine_map.continuous_linear_iff affine_map.continuous_linear_iff\n\n",
- "continuous_at":
- "protected theorem continuous_at {x} : continuous_at e x :=\n  e.continuous.continuous_at\n#align continuous_at continuous_at\n\n",
- "continuous":
- "protected theorem continuous : continuous e :=\n  e.isometry.continuous\n#align continuous continuous\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ᵃ[ ] » -/\n/-- If `f` is an affine map, then its linear part is continuous iff `f` is continuous. -/\ntheorem affine_map.continuous_linear_iff {f : «expr →ᵃ[ ] » P 𝕜 P₂} : Continuous f.linear ↔ Continuous f :=\n  by\n  inhabit P\n  have :\n    (f.linear : V → V₂) =\n      (affine_isometry_equiv.vadd_const 𝕜 <| f default).to_homeomorph.symm ∘\n        f ∘ (affine_isometry_equiv.vadd_const 𝕜 default).to_homeomorph :=\n    by\n    ext v\n    simp\n  rw [this]\n  simp only [Homeomorph.comp_continuous_iff, Homeomorph.comp_continuous_iff']\n#align affine_map.continuous_linear_iff affine_map.continuous_linear_iff\n\n",
  "const_vadd_zero":
  "@[simp]\ntheorem const_vadd_zero : const_vadd 𝕜 P (0 : V) = refl 𝕜 P :=\n  ext <| zero_vadd V\n#align const_vadd_zero const_vadd_zero\n\n",
  "comp_id":
  "@[simp]\ntheorem comp_id : f.comp id = f :=\n  ext fun x => rfl\n#align comp_id comp_id\n\n",
  "comp_continuous_on_iff":
- "@[simp]\ntheorem comp_continuous_on_iff {f : α → P} {s : set α} : continuous_on (e ∘ f) s ↔ continuous_on f s :=\n  e.isometry.comp_continuous_on_iff\n#align comp_continuous_on_iff comp_continuous_on_iff\n\n",
+ "@[simp]\ntheorem comp_continuous_on_iff {f : α → P} {s : Set α} : ContinuousOn (e ∘ f) s ↔ ContinuousOn f s :=\n  e.isometry.comp_continuous_on_iff\n#align comp_continuous_on_iff comp_continuous_on_iff\n\n",
  "comp_continuous_iff":
- "@[simp]\ntheorem comp_continuous_iff {f : α → P} : continuous (e ∘ f) ↔ continuous f :=\n  e.isometry.comp_continuous_iff\n#align comp_continuous_iff comp_continuous_iff\n\n",
+ "@[simp]\ntheorem comp_continuous_iff {f : α → P} : Continuous (e ∘ f) ↔ Continuous f :=\n  e.isometry.comp_continuous_iff\n#align comp_continuous_iff comp_continuous_iff\n\n",
  "comp_assoc":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ᵃⁱ[ ] » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ᵃⁱ[ ] » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ᵃⁱ[ ] » -/\ntheorem comp_assoc (f : «expr →ᵃⁱ[ ] » P₃ 𝕜 P₄) (g : «expr →ᵃⁱ[ ] » P₂ 𝕜 P₃) (h : «expr →ᵃⁱ[ ] » P 𝕜 P₂) :\n    (f.comp g).comp h = f.comp (g.comp h) :=\n  rfl\n#align comp_assoc comp_assoc\n\n",
  "coe_vadd_const_symm":
@@ -163,7 +153,7 @@
  "coe_symm_trans":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ᵃⁱ[ ] » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ᵃⁱ[ ] » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n@[simp]\ntheorem coe_symm_trans (e₁ : «expr ≃ᵃⁱ[ ] » P 𝕜 P₂) (e₂ : «expr ≃ᵃⁱ[ ] » P₂ 𝕜 P₃) :\n    «expr⇑ » (e₁.trans e₂).symm = e₁.symm ∘ e₂.symm :=\n  rfl\n#align coe_symm_trans coe_symm_trans\n\n",
  "coe_subtypeₐᵢ":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n@[simp]\ntheorem coe_subtypeₐᵢ (s : affine_subspace 𝕜 P) [nonempty s] : «expr⇑ » s.subtypeₐᵢ = s.subtype :=\n  rfl\n#align coe_subtypeₐᵢ coe_subtypeₐᵢ\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n@[simp]\ntheorem coe_subtypeₐᵢ (s : AffineSubspace 𝕜 P) [Nonempty s] : «expr⇑ » s.subtypeₐᵢ = s.subtype :=\n  rfl\n#align coe_subtypeₐᵢ coe_subtypeₐᵢ\n\n",
  "coe_refl":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n@[simp]\ntheorem coe_refl : «expr⇑ » (refl 𝕜 P) = id :=\n  rfl\n#align coe_refl coe_refl\n\n",
  "coe_one":
@@ -177,9 +167,9 @@
  "coe_inv":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ᵃⁱ[ ] » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n@[simp]\ntheorem coe_inv (e : «expr ≃ᵃⁱ[ ] » P 𝕜 P) : «expr⇑ » e⁻¹ = e.symm :=\n  rfl\n#align coe_inv coe_inv\n\n",
  "coe_id":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ᵃⁱ[ ] » -/\n@[simp]\ntheorem coe_id : «expr⇑ » (id : «expr →ᵃⁱ[ ] » P 𝕜 P) = _root_.id :=\n  rfl\n#align coe_id coe_id\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ᵃⁱ[ ] » -/\n@[simp]\ntheorem coe_id : «expr⇑ » (id : «expr →ᵃⁱ[ ] » P 𝕜 P) = id :=\n  rfl\n#align coe_id coe_id\n\n",
  "coe_fn_injective":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ᵃⁱ[ ] » -/\ntheorem coe_fn_injective : @injective («expr →ᵃⁱ[ ] » P 𝕜 P₂) (P → P₂) coe_fn :=\n  affine_map.coe_fn_injective.comp to_affine_map_injective\n#align coe_fn_injective coe_fn_injective\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ᵃⁱ[ ] » -/\ntheorem coe_fn_injective : @injective («expr →ᵃⁱ[ ] » P 𝕜 P₂) (P → P₂) coe_fn :=\n  AffineMap.coeFn_injective.comp to_affine_map_injective\n#align coe_fn_injective coe_fn_injective\n\n",
  "coe_const_vsub":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:219:4: warning: unsupported binary notation `«expr -ᵥ » -/\n@[simp]\ntheorem coe_const_vsub (p : P) : «expr⇑ » (const_vsub 𝕜 p) = («expr -ᵥ » · ·) p :=\n  rfl\n#align coe_const_vsub coe_const_vsub\n\n",
  "coe_const_vadd":
@@ -187,10 +177,20 @@
  "coe_comp":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ᵃⁱ[ ] » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ᵃⁱ[ ] » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n@[simp]\ntheorem coe_comp (g : «expr →ᵃⁱ[ ] » P₂ 𝕜 P₃) (f : «expr →ᵃⁱ[ ] » P 𝕜 P₂) : «expr⇑ » (g.comp f) = g ∘ f :=\n  rfl\n#align coe_comp coe_comp\n\n",
  "coe_apply":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ᵃⁱ[ ] » -/\n@[simp]\ntheorem isometry_equiv_map.coe_apply (φ : «expr →ᵃⁱ[ ] » P₁ 𝕜 P₂) (E : affine_subspace 𝕜 P₁) [nonempty E] (g : E) :\n    ↑(E.isometry_equiv_map φ g) = φ g :=\n  rfl\n#align isometry_equiv_map.coe_apply isometry_equiv_map.coe_apply\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ᵃⁱ[ ] » -/\n@[simp]\ntheorem isometry_equiv_map.coe_apply (φ : «expr →ᵃⁱ[ ] » P₁ 𝕜 P₂) (E : AffineSubspace 𝕜 P₁) [Nonempty E] (g : E) :\n    ↑(E.isometry_equiv_map φ g) = φ g :=\n  rfl\n#align isometry_equiv_map.coe_apply isometry_equiv_map.coe_apply\n\n",
  "bijective":
  "protected theorem bijective : bijective e :=\n  e.1.bijective\n#align bijective bijective\n\n",
  "apply_symm_apply":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ᵃⁱ[ ] » -/\n@[simp]\ntheorem isometry_equiv_map.apply_symm_apply {E : affine_subspace 𝕜 P₁} [nonempty E] {φ : «expr →ᵃⁱ[ ] » P₁ 𝕜 P₂}\n    (x : E.map φ.to_affine_map) : φ ((E.isometry_equiv_map φ).symm x) = x :=\n  congr_arg coe <| (E.isometry_equiv_map φ).apply_symm_apply _\n#align isometry_equiv_map.apply_symm_apply isometry_equiv_map.apply_symm_apply\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ᵃⁱ[ ] » -/\n@[simp]\ntheorem isometry_equiv_map.apply_symm_apply {E : AffineSubspace 𝕜 P₁} [Nonempty E] {φ : «expr →ᵃⁱ[ ] » P₁ 𝕜 P₂}\n    (x : E.map φ.to_affine_map) : φ ((E.isometry_equiv_map φ).symm x) = x :=\n  congr_arg coe <| (E.isometry_equiv_map φ).apply_symm_apply _\n#align isometry_equiv_map.apply_symm_apply isometry_equiv_map.apply_symm_apply\n\n",
  "antilipschitz":
- "protected theorem antilipschitz : antilipschitz_with 1 e :=\n  e.isometry.antilipschitz\n#align antilipschitz antilipschitz\n\n"}
+ "protected theorem antilipschitz : AntilipschitzWith 1 e :=\n  e.isometry.antilipschitz\n#align antilipschitz antilipschitz\n\n",
+ "Isometry":
+ "#print Isometry /-\nprotected theorem Isometry : Isometry e :=\n  e.to_affine_isometry.isometry\n#align isometry Isometry\n-/\n\n",
+ "ContinuousWithinAt":
+ "#print ContinuousWithinAt /-\nprotected theorem ContinuousWithinAt {s x} : ContinuousWithinAt e s x :=\n  e.continuous.continuous_within_at\n#align continuous_within_at ContinuousWithinAt\n-/\n\n",
+ "ContinuousOn":
+ "#print ContinuousOn /-\nprotected theorem ContinuousOn {s} : ContinuousOn e s :=\n  e.continuous.continuous_on\n#align continuous_on ContinuousOn\n-/\n\n",
+ "ContinuousAt":
+ "#print ContinuousAt /-\nprotected theorem ContinuousAt {x} : ContinuousAt e x :=\n  e.continuous.continuous_at\n#align continuous_at ContinuousAt\n-/\n\n",
+ "Continuous":
+ "#print Continuous /-\nprotected theorem Continuous : Continuous e :=\n  e.isometry.continuous\n#align continuous Continuous\n-/\n\n"}

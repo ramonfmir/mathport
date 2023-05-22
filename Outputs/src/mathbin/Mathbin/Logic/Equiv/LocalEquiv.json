@@ -21,9 +21,9 @@
  "trans_self_symm":
  "/-- Composition of a local equiv and its inverse is equivalent to the restriction of the identity\nto the source -/\ntheorem trans_self_symm : e.trans e.symm ≈ LocalEquiv.ofSet e.source :=\n  by\n  have A : (e.trans e.symm).source = e.source := by mfld_set_tac\n  refine' ⟨by simp [A], fun x hx => _⟩\n  rw [A] at hx\n  simp only [hx, mfld_simps]\n#align trans_self_symm trans_self_symm\n\n",
  "trans_refl_restr'":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\ntheorem trans_refl_restr' (s : set β) : e.trans ((LocalEquiv.refl β).restr s) = e.restr (e.source ∩ «expr ⁻¹' » e s) :=\n  (LocalEquiv.ext (fun x => rfl) fun x => rfl) <| by\n    simp [trans_source]\n    rw [← inter_assoc, inter_self]\n#align trans_refl_restr' trans_refl_restr'\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\ntheorem trans_refl_restr' (s : Set β) : e.trans ((LocalEquiv.refl β).restr s) = e.restr (e.source ∩ «expr ⁻¹' » e s) :=\n  (LocalEquiv.ext (fun x => rfl) fun x => rfl) <| by\n    simp [trans_source]\n    rw [← inter_assoc, inter_self]\n#align trans_refl_restr' trans_refl_restr'\n\n",
  "trans_refl_restr":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\ntheorem trans_refl_restr (s : set β) : e.trans ((LocalEquiv.refl β).restr s) = e.restr («expr ⁻¹' » e s) :=\n  LocalEquiv.ext (fun x => rfl) (fun x => rfl) (by simp [trans_source])\n#align trans_refl_restr trans_refl_restr\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\ntheorem trans_refl_restr (s : Set β) : e.trans ((LocalEquiv.refl β).restr s) = e.restr («expr ⁻¹' » e s) :=\n  LocalEquiv.ext (fun x => rfl) (fun x => rfl) (by simp [trans_source])\n#align trans_refl_restr trans_refl_restr\n\n",
  "trans_refl":
  "@[simp, mfld_simps]\ntheorem trans_refl : e.trans (LocalEquiv.refl β) = e :=\n  LocalEquiv.ext (fun x => rfl) (fun x => rfl) (by simp [trans_source])\n#align trans_refl trans_refl\n\n",
  "trans_local_equiv_eq_trans":
@@ -41,7 +41,7 @@
  "target_subset_preimage_source":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\ntheorem target_subset_preimage_source : e.target ⊆ «expr ⁻¹' » e.symm e.source :=\n  e.symm_maps_to\n#align target_subset_preimage_source target_subset_preimage_source\n\n",
  "target_inter_inv_preimage_preimage":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\ntheorem target_inter_inv_preimage_preimage (s : set β) :\n    e.target ∩ «expr ⁻¹' » e.symm («expr ⁻¹' » e s) = e.target ∩ s :=\n  e.symm.source_inter_preimage_inv_preimage _\n#align target_inter_inv_preimage_preimage target_inter_inv_preimage_preimage\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\ntheorem target_inter_inv_preimage_preimage (s : Set β) :\n    e.target ∩ «expr ⁻¹' » e.symm («expr ⁻¹' » e s) = e.target ∩ s :=\n  e.symm.source_inter_preimage_inv_preimage _\n#align target_inter_inv_preimage_preimage target_inter_inv_preimage_preimage\n\n",
  "target_eq":
  "/-- Two equivalent local equivs have the same target -/\ntheorem eq_on_source.target_eq {e e' : LocalEquiv α β} (h : e ≈ e') : e.target = e'.target := by\n  simp only [← image_source_eq_target, ← h.source_eq, h.2.image_eq]\n#align eq_on_source.target_eq eq_on_source.target_eq\n\n",
  "symm_to_local_equiv":
@@ -53,19 +53,19 @@
  "symm_source":
  "@[simp, mfld_simps]\ntheorem symm_source : e.symm.source = e.target :=\n  rfl\n#align symm_source symm_source\n\n",
  "symm_piecewise":
- "theorem symm_piecewise (e e' : LocalEquiv α β) {s : set α} {t : set β} [∀ x, decidable (x ∈ s)] [∀ y, decidable (y ∈ t)]\n    (H : e.is_image s t) (H' : e'.is_image s t) :\n    (e.piecewise e' s t H H').symm = e.symm.piecewise e'.symm t s H.symm H'.symm :=\n  rfl\n#align symm_piecewise symm_piecewise\n\n",
+ "theorem symm_piecewise (e e' : LocalEquiv α β) {s : Set α} {t : Set β} [∀ x, Decidable (x ∈ s)] [∀ y, Decidable (y ∈ t)]\n    (H : e.is_image s t) (H' : e'.is_image s t) :\n    (e.piecewise e' s t H H').symm = e.symm.piecewise e'.symm t s H.symm H'.symm :=\n  rfl\n#align symm_piecewise symm_piecewise\n\n",
  "symm_maps_to":
  "theorem symm_maps_to (h : e.is_image s t) : MapsTo e.symm (e.target ∩ t) (e.source ∩ s) :=\n  h.symm.maps_to\n#align symm_maps_to symm_maps_to\n\n",
  "symm_image_target_inter_eq'":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\ntheorem symm_image_target_inter_eq' (s : set β) : «expr '' » e.symm (e.target ∩ s) = e.source ∩ «expr ⁻¹' » e s :=\n  e.symm.image_source_inter_eq' _\n#align symm_image_target_inter_eq' symm_image_target_inter_eq'\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\ntheorem symm_image_target_inter_eq' (s : Set β) : «expr '' » e.symm (e.target ∩ s) = e.source ∩ «expr ⁻¹' » e s :=\n  e.symm.image_source_inter_eq' _\n#align symm_image_target_inter_eq' symm_image_target_inter_eq'\n\n",
  "symm_image_target_inter_eq":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\ntheorem symm_image_target_inter_eq (s : set β) :\n    «expr '' » e.symm (e.target ∩ s) = e.source ∩ «expr ⁻¹' » e (e.target ∩ s) :=\n  e.symm.image_source_inter_eq _\n#align symm_image_target_inter_eq symm_image_target_inter_eq\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\ntheorem symm_image_target_inter_eq (s : Set β) :\n    «expr '' » e.symm (e.target ∩ s) = e.source ∩ «expr ⁻¹' » e (e.target ∩ s) :=\n  e.symm.image_source_inter_eq _\n#align symm_image_target_inter_eq symm_image_target_inter_eq\n\n",
  "symm_image_target_eq_source":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\ntheorem symm_image_target_eq_source : «expr '' » e.symm e.target = e.source :=\n  e.symm.image_source_eq_target\n#align symm_image_target_eq_source symm_image_target_eq_source\n\n",
  "symm_image_image_of_subset_source":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\ntheorem symm_image_image_of_subset_source {s : set α} (h : s ⊆ e.source) : «expr '' » e.symm («expr '' » e s) = s :=\n  (e.left_inv_on.mono h).image_image\n#align symm_image_image_of_subset_source symm_image_image_of_subset_source\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\ntheorem symm_image_image_of_subset_source {s : Set α} (h : s ⊆ e.source) : «expr '' » e.symm («expr '' » e s) = s :=\n  (e.left_inv_on.mono h).image_image\n#align symm_image_image_of_subset_source symm_image_image_of_subset_source\n\n",
  "symm_image_eq_source_inter_preimage":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\ntheorem symm_image_eq_source_inter_preimage {s : set β} (h : s ⊆ e.target) :\n    «expr '' » e.symm s = e.source ∩ «expr ⁻¹' » e s :=\n  e.symm.image_eq_target_inter_inv_preimage h\n#align symm_image_eq_source_inter_preimage symm_image_eq_source_inter_preimage\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\ntheorem symm_image_eq_source_inter_preimage {s : Set β} (h : s ⊆ e.target) :\n    «expr '' » e.symm s = e.source ∩ «expr ⁻¹' » e s :=\n  e.symm.image_eq_target_inter_inv_preimage h\n#align symm_image_eq_source_inter_preimage symm_image_eq_source_inter_preimage\n\n",
  "symm_image_eq":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\ntheorem symm_image_eq (h : e.is_image s t) : «expr '' » e.symm (e.target ∩ t) = e.source ∩ s :=\n  h.symm.image_eq\n#align symm_image_eq symm_image_eq\n\n",
  "symm_iff":
@@ -85,11 +85,11 @@
  "source_subset_preimage_target":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\ntheorem source_subset_preimage_target : e.source ⊆ «expr ⁻¹' » e e.target :=\n  e.maps_to\n#align source_subset_preimage_target source_subset_preimage_target\n\n",
  "source_inter_preimage_target_inter":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\ntheorem source_inter_preimage_target_inter (s : set β) :\n    e.source ∩ «expr ⁻¹' » e (e.target ∩ s) = e.source ∩ «expr ⁻¹' » e s :=\n  ext fun x => ⟨fun hx => ⟨hx.1, hx.2.2⟩, fun hx => ⟨hx.1, e.map_source hx.1, hx.2⟩⟩\n#align source_inter_preimage_target_inter source_inter_preimage_target_inter\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\ntheorem source_inter_preimage_target_inter (s : Set β) :\n    e.source ∩ «expr ⁻¹' » e (e.target ∩ s) = e.source ∩ «expr ⁻¹' » e s :=\n  ext fun x => ⟨fun hx => ⟨hx.1, hx.2.2⟩, fun hx => ⟨hx.1, e.map_source hx.1, hx.2⟩⟩\n#align source_inter_preimage_target_inter source_inter_preimage_target_inter\n\n",
  "source_inter_preimage_inv_preimage":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\ntheorem source_inter_preimage_inv_preimage (s : set α) :\n    e.source ∩ «expr ⁻¹' » e («expr ⁻¹' » e.symm s) = e.source ∩ s :=\n  Set.ext fun x => and_congr_right_iff.2 fun hx => by simp only [mem_preimage, e.left_inv hx]\n#align source_inter_preimage_inv_preimage source_inter_preimage_inv_preimage\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\ntheorem source_inter_preimage_inv_preimage (s : Set α) :\n    e.source ∩ «expr ⁻¹' » e («expr ⁻¹' » e.symm s) = e.source ∩ s :=\n  Set.ext fun x => and_congr_right_iff.2 fun hx => by simp only [mem_preimage, e.left_inv hx]\n#align source_inter_preimage_inv_preimage source_inter_preimage_inv_preimage\n\n",
  "source_inter_preimage_eq":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\n/-- Preimages are respected by equivalence -/\ntheorem eq_on_source.source_inter_preimage_eq {e e' : LocalEquiv α β} (he : e ≈ e') (s : set β) :\n    e.source ∩ «expr ⁻¹' » e s = e'.source ∩ «expr ⁻¹' » e' s := by rw [he.eq_on.inter_preimage_eq, he.source_eq]\n#align eq_on_source.source_inter_preimage_eq eq_on_source.source_inter_preimage_eq\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\n/-- Preimages are respected by equivalence -/\ntheorem eq_on_source.source_inter_preimage_eq {e e' : LocalEquiv α β} (he : e ≈ e') (s : Set β) :\n    e.source ∩ «expr ⁻¹' » e s = e'.source ∩ «expr ⁻¹' » e' s := by rw [he.eq_on.inter_preimage_eq, he.source_eq]\n#align eq_on_source.source_inter_preimage_eq eq_on_source.source_inter_preimage_eq\n\n",
  "source_eq":
  "/-- Two equivalent local equivs have the same source -/\ntheorem eq_on_source.source_eq {e e' : LocalEquiv α β} (h : e ≈ e') : e.source = e'.source :=\n  h.1\n#align eq_on_source.source_eq eq_on_source.source_eq\n\n",
  "right_inv_on":
@@ -99,23 +99,23 @@
  "restr_univ":
  "@[simp, mfld_simps]\ntheorem restr_univ {e : LocalEquiv α β} : e.restr univ = e :=\n  restr_eq_of_source_subset (subset_univ _)\n#align restr_univ restr_univ\n\n",
  "restr_trans":
- "theorem restr_trans (s : set α) : (e.restr s).trans e' = (e.trans e').restr s :=\n  (LocalEquiv.ext (fun x => rfl) fun x => rfl) <|\n    by\n    simp [trans_source, inter_comm]\n    rwa [inter_assoc]\n#align restr_trans restr_trans\n\n",
+ "theorem restr_trans (s : Set α) : (e.restr s).trans e' = (e.trans e').restr s :=\n  (LocalEquiv.ext (fun x => rfl) fun x => rfl) <|\n    by\n    simp [trans_source, inter_comm]\n    rwa [inter_assoc]\n#align restr_trans restr_trans\n\n",
  "restr_target":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\n@[simp, mfld_simps]\ntheorem restr_target (s : set α) : (e.restr s).target = e.target ∩ «expr ⁻¹' » e.symm s :=\n  rfl\n#align restr_target restr_target\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\n@[simp, mfld_simps]\ntheorem restr_target (s : Set α) : (e.restr s).target = e.target ∩ «expr ⁻¹' » e.symm s :=\n  rfl\n#align restr_target restr_target\n\n",
  "restr_source":
- "@[simp, mfld_simps]\ntheorem restr_source (s : set α) : (e.restr s).source = e.source ∩ s :=\n  rfl\n#align restr_source restr_source\n\n",
+ "@[simp, mfld_simps]\ntheorem restr_source (s : Set α) : (e.restr s).source = e.source ∩ s :=\n  rfl\n#align restr_source restr_source\n\n",
  "restr_eq_of_source_subset":
- "theorem restr_eq_of_source_subset {e : LocalEquiv α β} {s : set α} (h : e.source ⊆ s) : e.restr s = e :=\n  LocalEquiv.ext (fun _ => rfl) (fun _ => rfl) (by simp [inter_eq_self_of_subset_left h])\n#align restr_eq_of_source_subset restr_eq_of_source_subset\n\n",
+ "theorem restr_eq_of_source_subset {e : LocalEquiv α β} {s : Set α} (h : e.source ⊆ s) : e.restr s = e :=\n  LocalEquiv.ext (fun _ => rfl) (fun _ => rfl) (by simp [inter_eq_self_of_subset_left h])\n#align restr_eq_of_source_subset restr_eq_of_source_subset\n\n",
  "restr_coe_symm":
- "@[simp, mfld_simps]\ntheorem restr_coe_symm (s : set α) : ((e.restr s).symm : β → α) = e.symm :=\n  rfl\n#align restr_coe_symm restr_coe_symm\n\n",
+ "@[simp, mfld_simps]\ntheorem restr_coe_symm (s : Set α) : ((e.restr s).symm : β → α) = e.symm :=\n  rfl\n#align restr_coe_symm restr_coe_symm\n\n",
  "restr_coe":
- "@[simp, mfld_simps]\ntheorem restr_coe (s : set α) : (e.restr s : α → β) = e :=\n  rfl\n#align restr_coe restr_coe\n\n",
+ "@[simp, mfld_simps]\ntheorem restr_coe (s : Set α) : (e.restr s : α → β) = e :=\n  rfl\n#align restr_coe restr_coe\n\n",
  "restr":
- "/-- Restriction of local equivs respects equivalence -/\ntheorem eq_on_source.restr {e e' : LocalEquiv α β} (he : e ≈ e') (s : set α) : e.restr s ≈ e'.restr s :=\n  by\n  constructor\n  · simp [he.1]\n  · intro x hx\n    simp only [mem_inter_iff, restr_source] at hx\n    exact he.2 hx.1\n#align eq_on_source.restr eq_on_source.restr\n\n",
+ "/-- Restriction of local equivs respects equivalence -/\ntheorem eq_on_source.restr {e e' : LocalEquiv α β} (he : e ≈ e') (s : Set α) : e.restr s ≈ e'.restr s :=\n  by\n  constructor\n  · simp [he.1]\n  · intro x hx\n    simp only [mem_inter_iff, restr_source] at hx\n    exact he.2 hx.1\n#align eq_on_source.restr eq_on_source.restr\n\n",
  "refl_trans":
  "@[simp, mfld_simps]\ntheorem refl_trans : (LocalEquiv.refl α).trans e = e :=\n  LocalEquiv.ext (fun x => rfl) (fun x => rfl) (by simp [trans_source, preimage_id])\n#align refl_trans refl_trans\n\n",
  "refl_to_local_equiv":
- "-- All arguments are explicit to avoid missing information in the pretty printer output\n/- equivs give rise to local_equiv. We set up simp lemmas to reduce most properties of the local\nequiv to that of the equiv. -/\n@[simp, mfld_simps]\ntheorem refl_to_local_equiv : (equiv.refl α).to_local_equiv = LocalEquiv.refl α :=\n  rfl\n#align refl_to_local_equiv refl_to_local_equiv\n\n",
+ "-- All arguments are explicit to avoid missing information in the pretty printer output\n/- equivs give rise to local_equiv. We set up simp lemmas to reduce most properties of the local\nequiv to that of the equiv. -/\n@[simp, mfld_simps]\ntheorem refl_to_local_equiv : (Equiv.refl α).to_local_equiv = LocalEquiv.refl α :=\n  rfl\n#align refl_to_local_equiv refl_to_local_equiv\n\n",
  "refl_target":
  "@[simp, mfld_simps]\ntheorem refl_target : (LocalEquiv.refl α).target = univ :=\n  rfl\n#align refl_target refl_target\n\n",
  "refl_symm":
@@ -123,9 +123,9 @@
  "refl_source":
  "@[simp, mfld_simps]\ntheorem refl_source : (LocalEquiv.refl α).source = univ :=\n  rfl\n#align refl_source refl_source\n\n",
  "refl_restr_target":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\n@[simp, mfld_simps]\ntheorem refl_restr_target (s : set α) : ((LocalEquiv.refl α).restr s).target = s :=\n  by\n  change univ ∩ «expr ⁻¹' » id s = s\n  simp\n#align refl_restr_target refl_restr_target\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\n@[simp, mfld_simps]\ntheorem refl_restr_target (s : Set α) : ((LocalEquiv.refl α).restr s).target = s :=\n  by\n  change univ ∩ «expr ⁻¹' » id s = s\n  simp\n#align refl_restr_target refl_restr_target\n\n",
  "refl_restr_source":
- "@[simp, mfld_simps]\ntheorem refl_restr_source (s : set α) : ((LocalEquiv.refl α).restr s).source = s := by simp\n#align refl_restr_source refl_restr_source\n\n",
+ "@[simp, mfld_simps]\ntheorem refl_restr_source (s : Set α) : ((LocalEquiv.refl α).restr s).source = s := by simp\n#align refl_restr_source refl_restr_source\n\n",
  "refl_prod_refl":
  "@[simp, mfld_simps]\ntheorem refl_prod_refl : (LocalEquiv.refl α).prod (LocalEquiv.refl β) = LocalEquiv.refl (α × β) :=\n  by\n  ext1 ⟨x, y⟩\n  · rfl\n  · rintro ⟨x, y⟩\n    rfl\n  exact univ_prod_univ\n#align refl_prod_refl refl_prod_refl\n\n",
  "refl_coe":
@@ -143,17 +143,17 @@
  "prod_coe":
  "@[simp, mfld_simps]\ntheorem prod_coe (e : LocalEquiv α β) (e' : LocalEquiv γ δ) : (e.prod e' : α × γ → β × δ) = fun p => (e p.1, e' p.2) :=\n  rfl\n#align prod_coe prod_coe\n\n",
  "of_symm_image_eq":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\ntheorem of_symm_image_eq (h : «expr '' » e.symm (e.target ∩ t) = e.source ∩ s) : e.is_image s t :=\n  of_preimage_eq <| eq.trans (of_preimage_eq rfl).symm_image_eq.symm h\n#align of_symm_image_eq of_symm_image_eq\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\ntheorem of_symm_image_eq (h : «expr '' » e.symm (e.target ∩ t) = e.source ∩ s) : e.is_image s t :=\n  of_preimage_eq <| Eq.trans (of_preimage_eq rfl).symm_image_eq.symm h\n#align of_symm_image_eq of_symm_image_eq\n\n",
  "of_set_target":
- "@[simp, mfld_simps]\ntheorem of_set_target (s : set α) : (LocalEquiv.ofSet s).target = s :=\n  rfl\n#align of_set_target of_set_target\n\n",
+ "@[simp, mfld_simps]\ntheorem of_set_target (s : Set α) : (LocalEquiv.ofSet s).target = s :=\n  rfl\n#align of_set_target of_set_target\n\n",
  "of_set_symm":
- "@[simp, mfld_simps]\ntheorem of_set_symm (s : set α) : (LocalEquiv.ofSet s).symm = LocalEquiv.ofSet s :=\n  rfl\n#align of_set_symm of_set_symm\n\n",
+ "@[simp, mfld_simps]\ntheorem of_set_symm (s : Set α) : (LocalEquiv.ofSet s).symm = LocalEquiv.ofSet s :=\n  rfl\n#align of_set_symm of_set_symm\n\n",
  "of_set_source":
- "@[simp, mfld_simps]\ntheorem of_set_source (s : set α) : (LocalEquiv.ofSet s).source = s :=\n  rfl\n#align of_set_source of_set_source\n\n",
+ "@[simp, mfld_simps]\ntheorem of_set_source (s : Set α) : (LocalEquiv.ofSet s).source = s :=\n  rfl\n#align of_set_source of_set_source\n\n",
  "of_set_coe":
- "@[simp, mfld_simps]\ntheorem of_set_coe (s : set α) : (LocalEquiv.ofSet s : α → α) = id :=\n  rfl\n#align of_set_coe of_set_coe\n\n",
+ "@[simp, mfld_simps]\ntheorem of_set_coe (s : Set α) : (LocalEquiv.ofSet s : α → α) = id :=\n  rfl\n#align of_set_coe of_set_coe\n\n",
  "of_image_eq":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\ntheorem of_image_eq (h : «expr '' » e (e.source ∩ s) = e.target ∩ t) : e.is_image s t :=\n  of_symm_preimage_eq <| eq.trans (of_symm_preimage_eq rfl).image_eq.symm h\n#align of_image_eq of_image_eq\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\ntheorem of_image_eq (h : «expr '' » e (e.source ∩ s) = e.target ∩ t) : e.is_image s t :=\n  of_symm_preimage_eq <| Eq.trans (of_symm_preimage_eq rfl).image_eq.symm h\n#align of_image_eq of_image_eq\n\n",
  "mem_symm_trans_source":
  "/-- A lemma commonly useful when `e` and `e'` are charts of a manifold. -/\ntheorem mem_symm_trans_source {e' : LocalEquiv α γ} {x : α} (he : x ∈ e.source) (he' : x ∈ e'.source) :\n    e x ∈ (e.symm.trans e').source :=\n  ⟨e.maps_to he, by rwa [mem_preimage, LocalEquiv.symm_symm, e.left_inv he]⟩\n#align mem_symm_trans_source mem_symm_trans_source\n\n",
  "maps_to":
@@ -163,13 +163,13 @@
  "map_source":
  "@[simp, mfld_simps]\ntheorem map_source {x : α} (h : x ∈ e.source) : e x ∈ e.target :=\n  e.map_source' h\n#align map_source map_source\n\n",
  "left_inv_on_piecewise":
- "theorem left_inv_on_piecewise {e' : LocalEquiv α β} [∀ i, decidable (i ∈ s)] [∀ i, decidable (i ∈ t)]\n    (h : e.is_image s t) (h' : e'.is_image s t) :\n    LeftInvOn (t.piecewise e.symm e'.symm) (s.piecewise e e') (s.ite e.source e'.source) :=\n  by\n  rintro x (⟨he, hs⟩ | ⟨he, hs : x ∉ s⟩)\n  · rw [piecewise_eq_of_mem _ _ _ hs, piecewise_eq_of_mem _ _ _ ((h he).2 hs), e.left_inv he]\n  · rw [piecewise_eq_of_not_mem _ _ _ hs, piecewise_eq_of_not_mem _ _ _ ((h'.compl he).2 hs), e'.left_inv he]\n#align left_inv_on_piecewise left_inv_on_piecewise\n\n",
+ "theorem left_inv_on_piecewise {e' : LocalEquiv α β} [∀ i, Decidable (i ∈ s)] [∀ i, Decidable (i ∈ t)]\n    (h : e.is_image s t) (h' : e'.is_image s t) :\n    LeftInvOn (t.piecewise e.symm e'.symm) (s.piecewise e e') (s.ite e.source e'.source) :=\n  by\n  rintro x (⟨he, hs⟩ | ⟨he, hs : x ∉ s⟩)\n  · rw [piecewise_eq_of_mem _ _ _ hs, piecewise_eq_of_mem _ _ _ ((h he).2 hs), e.left_inv he]\n  · rw [piecewise_eq_of_not_mem _ _ _ hs, piecewise_eq_of_not_mem _ _ _ ((h'.compl he).2 hs), e'.left_inv he]\n#align left_inv_on_piecewise left_inv_on_piecewise\n\n",
  "left_inv_on":
  "protected theorem left_inv_on : LeftInvOn e.symm e e.source := fun x => e.left_inv\n#align left_inv_on left_inv_on\n\n",
  "left_inv":
  "@[simp, mfld_simps]\ntheorem left_inv {x : α} (h : x ∈ e.source) : e.symm (e x) = x :=\n  e.left_inv' h\n#align left_inv left_inv\n\n",
  "is_image_source_target_of_disjoint":
- "theorem is_image_source_target_of_disjoint (e' : LocalEquiv α β) (hs : Disjoint e.source e'.source)\n    (ht : Disjoint e.target e'.target) : e.is_image e'.source e'.target :=\n  is_image.of_image_eq <| by rw [hs.inter_eq, ht.inter_eq, image_empty]\n#align is_image_source_target_of_disjoint is_image_source_target_of_disjoint\n\n",
+ "theorem is_image_source_target_of_disjoint (e' : LocalEquiv α β) (hs : Disjoint e.source e'.source)\n    (ht : Disjoint e.target e'.target) : e.is_image e'.source e'.target :=\n  IsImage.of_image_eq <| by rw [hs.inter_eq, ht.inter_eq, image_empty]\n#align is_image_source_target_of_disjoint is_image_source_target_of_disjoint\n\n",
  "is_image_source_target":
  "theorem is_image_source_target : e.is_image e.source e.target := fun x hx => by simp [hx]\n#align is_image_source_target is_image_source_target\n\n",
  "inv_on":
@@ -187,15 +187,15 @@
  "image_trans_source":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\ntheorem image_trans_source : «expr '' » e (e.trans e').source = e.target ∩ e'.source :=\n  (e.symm.restr e'.source).symm.image_source_eq_target\n#align image_trans_source image_trans_source\n\n",
  "image_symm_image_of_subset_target":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\ntheorem image_symm_image_of_subset_target {s : set β} (h : s ⊆ e.target) : «expr '' » e («expr '' » e.symm s) = s :=\n  e.symm.symm_image_image_of_subset_source h\n#align image_symm_image_of_subset_target image_symm_image_of_subset_target\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\ntheorem image_symm_image_of_subset_target {s : Set β} (h : s ⊆ e.target) : «expr '' » e («expr '' » e.symm s) = s :=\n  e.symm.symm_image_image_of_subset_source h\n#align image_symm_image_of_subset_target image_symm_image_of_subset_target\n\n",
  "image_source_inter_eq'":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\ntheorem image_source_inter_eq' (s : set α) : «expr '' » e (e.source ∩ s) = e.target ∩ «expr ⁻¹' » e.symm s := by\n  rw [inter_comm, e.left_inv_on.image_inter', image_source_eq_target, inter_comm]\n#align image_source_inter_eq' image_source_inter_eq'\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\ntheorem image_source_inter_eq' (s : Set α) : «expr '' » e (e.source ∩ s) = e.target ∩ «expr ⁻¹' » e.symm s := by\n  rw [inter_comm, e.left_inv_on.image_inter', image_source_eq_target, inter_comm]\n#align image_source_inter_eq' image_source_inter_eq'\n\n",
  "image_source_inter_eq":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\ntheorem image_source_inter_eq (s : set α) :\n    «expr '' » e (e.source ∩ s) = e.target ∩ «expr ⁻¹' » e.symm (e.source ∩ s) := by\n  rw [inter_comm, e.left_inv_on.image_inter, image_source_eq_target, inter_comm]\n#align image_source_inter_eq image_source_inter_eq\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\ntheorem image_source_inter_eq (s : Set α) :\n    «expr '' » e (e.source ∩ s) = e.target ∩ «expr ⁻¹' » e.symm (e.source ∩ s) := by\n  rw [inter_comm, e.left_inv_on.image_inter, image_source_eq_target, inter_comm]\n#align image_source_inter_eq image_source_inter_eq\n\n",
  "image_source_eq_target":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\ntheorem image_source_eq_target : «expr '' » e e.source = e.target :=\n  e.bij_on.image_eq\n#align image_source_eq_target image_source_eq_target\n\n",
  "image_eq_target_inter_inv_preimage":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\ntheorem image_eq_target_inter_inv_preimage {s : set α} (h : s ⊆ e.source) :\n    «expr '' » e s = e.target ∩ «expr ⁻¹' » e.symm s := by\n  rw [← e.image_source_inter_eq', inter_eq_self_of_subset_right h]\n#align image_eq_target_inter_inv_preimage image_eq_target_inter_inv_preimage\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\ntheorem image_eq_target_inter_inv_preimage {s : Set α} (h : s ⊆ e.source) :\n    «expr '' » e s = e.target ∩ «expr ⁻¹' » e.symm s := by\n  rw [← e.image_source_inter_eq', inter_eq_self_of_subset_right h]\n#align image_eq_target_inter_inv_preimage image_eq_target_inter_inv_preimage\n\n",
  "image_eq":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\ntheorem image_eq (h : e.is_image s t) : «expr '' » e (e.source ∩ s) = e.target ∩ t :=\n  h.restr.image_source_eq_target\n#align image_eq image_eq\n\n",
  "iff_symm_preimage_eq":
@@ -217,11 +217,11 @@
  "eq_of_eq_on_source_univ":
  "/-- Two equivalent local equivs are equal when the source and target are univ -/\ntheorem eq_of_eq_on_source_univ (e e' : LocalEquiv α β) (h : e ≈ e') (s : e.source = univ) (t : e.target = univ) :\n    e = e' := by\n  apply LocalEquiv.ext (fun x => _) (fun x => _) h.1\n  · apply h.2\n    rw [s]\n    exact mem_univ _\n  · apply h.symm'.2\n    rw [symm_source, t]\n    exact mem_univ _\n#align eq_of_eq_on_source_univ eq_of_eq_on_source_univ\n\n",
  "disjoint_union_eq_piecewise":
- "theorem disjoint_union_eq_piecewise (e e' : LocalEquiv α β) (hs : Disjoint e.source e'.source)\n    (ht : Disjoint e.target e'.target) [∀ x, decidable (x ∈ e.source)] [∀ y, decidable (y ∈ e.target)] :\n    e.disjoint_union e' hs ht =\n      e.piecewise e' e.source e.target e.is_image_source_target\n        (e'.is_image_source_target_of_disjoint _ hs.symm ht.symm) :=\n  copy_eq _ _ _ _ _ _ _ _ _\n#align disjoint_union_eq_piecewise disjoint_union_eq_piecewise\n\n",
+ "theorem disjoint_union_eq_piecewise (e e' : LocalEquiv α β) (hs : Disjoint e.source e'.source)\n    (ht : Disjoint e.target e'.target) [∀ x, Decidable (x ∈ e.source)] [∀ y, Decidable (y ∈ e.target)] :\n    e.disjoint_union e' hs ht =\n      e.piecewise e' e.source e.target e.is_image_source_target\n        (e'.is_image_source_target_of_disjoint _ hs.symm ht.symm) :=\n  copy_eq _ _ _ _ _ _ _ _ _\n#align disjoint_union_eq_piecewise disjoint_union_eq_piecewise\n\n",
  "diff":
  "protected theorem diff {s' t'} (h : e.is_image s t) (h' : e.is_image s' t') : e.is_image (s \\ s') (t \\ t') :=\n  h.inter h'.compl\n#align diff diff\n\n",
  "copy_eq":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\ntheorem copy_eq (e : LocalEquiv α β) (f : α → β) (hf : «expr⇑ » e = f) (g : β → α) (hg : «expr⇑ » e.symm = g)\n    (s : set α) (hs : e.source = s) (t : set β) (ht : e.target = t) : e.copy f hf g hg s hs t ht = e :=\n  by\n  substs f g s t\n  cases e\n  rfl\n#align copy_eq copy_eq\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\ntheorem copy_eq (e : LocalEquiv α β) (f : α → β) (hf : «expr⇑ » e = f) (g : β → α) (hg : «expr⇑ » e.symm = g)\n    (s : Set α) (hs : e.source = s) (t : Set β) (ht : e.target = t) : e.copy f hf g hg s hs t ht = e :=\n  by\n  substs f g s t\n  cases e\n  rfl\n#align copy_eq copy_eq\n\n",
  "compl":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\nprotected theorem compl (h : e.is_image s t) : e.is_image («expr ᶜ» s) («expr ᶜ» t) := fun x hx => not_congr (h hx)\n#align compl compl\n\n",
  "coe_trans_symm":

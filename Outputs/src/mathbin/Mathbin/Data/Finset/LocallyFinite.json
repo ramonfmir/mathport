@@ -1,7 +1,7 @@
 {"uIcc_to_dual":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `finset.uIcc -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `finset.uIcc -/\ntheorem uIcc_to_dual (a b : α) : finset.uIcc (toDual a) (toDual b) = (finset.uIcc a b).map toDual.to_embedding :=\n  Icc_to_dual _ _\n#align uIcc_to_dual uIcc_to_dual\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `finset.uIcc -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `finset.uIcc -/\ntheorem uIcc_to_dual (a b : α) : finset.uIcc (toDual a) (toDual b) = (finset.uIcc a b).map toDual.to_embedding :=\n  Icc_toDual _ _\n#align uIcc_to_dual uIcc_to_dual\n\n",
  "uIcc_subset_uIcc_union_uIcc":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `finset.uIcc -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `finset.uIcc -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `finset.uIcc -/\n/-- A sort of triangle inequality. -/\ntheorem uIcc_subset_uIcc_union_uIcc : finset.uIcc a c ⊆ finset.uIcc a b ∪ finset.uIcc b c :=\n  coe_subset.1 <| by\n    push_cast\n    exact set.uIcc_subset_uIcc_union_uIcc\n#align uIcc_subset_uIcc_union_uIcc uIcc_subset_uIcc_union_uIcc\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `finset.uIcc -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `finset.uIcc -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `finset.uIcc -/\n/-- A sort of triangle inequality. -/\ntheorem uIcc_subset_uIcc_union_uIcc : finset.uIcc a c ⊆ finset.uIcc a b ∪ finset.uIcc b c :=\n  coe_subset.1 <| by\n    push_cast\n    exact Set.uIcc_subset_uIcc_union_uIcc\n#align uIcc_subset_uIcc_union_uIcc uIcc_subset_uIcc_union_uIcc\n\n",
  "uIcc_subset_uIcc_right":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `finset.uIcc -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `finset.uIcc -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `finset.uIcc -/\ntheorem uIcc_subset_uIcc_right (h : x ∈ finset.uIcc a b) : finset.uIcc x b ⊆ finset.uIcc a b :=\n  uIcc_subset_uIcc h right_mem_uIcc\n#align uIcc_subset_uIcc_right uIcc_subset_uIcc_right\n\n",
  "uIcc_subset_uIcc_left":
@@ -31,7 +31,7 @@
  "uIcc_injective_left":
  "theorem uIcc_injective_left (a : α) : injective (uIcc a) := by simpa only [uIcc_comm] using uIcc_injective_right a\n#align uIcc_injective_left uIcc_injective_left\n\n",
  "uIcc_eq_union":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `finset.uIcc -/\ntheorem uIcc_eq_union : finset.uIcc a b = Icc a b ∪ Icc b a :=\n  coe_injective <| by\n    push_cast\n    exact set.uIcc_eq_union\n#align uIcc_eq_union uIcc_eq_union\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `finset.uIcc -/\ntheorem uIcc_eq_union : finset.uIcc a b = Icc a b ∪ Icc b a :=\n  coe_injective <| by\n    push_cast\n    exact Set.uIcc_eq_union\n#align uIcc_eq_union uIcc_eq_union\n\n",
  "uIcc_comm":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `finset.uIcc -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `finset.uIcc -/\ntheorem uIcc_comm (a b : α) : finset.uIcc a b = finset.uIcc b a := by rw [uIcc, uIcc, inf_comm, sup_comm]\n#align uIcc_comm uIcc_comm\n\n",
  "right_not_mem_Ioo":
@@ -45,15 +45,19 @@
  "right_mem_Icc":
  "@[simp]\ntheorem right_mem_Icc : b ∈ Icc a b ↔ a ≤ b := by simp only [mem_Icc, and_true_iff, le_rfl]\n#align right_mem_Icc right_mem_Icc\n\n",
  "prod_prod_Ioi_mul_eq_prod_prod_off_diag":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `finset.prod_univ -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.prod_univ -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `finset.prod -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.prod -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `finset.prod_univ -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.prod_univ -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `finset.prod -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.prod -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\n@[to_additive]\ntheorem prod_prod_Ioi_mul_eq_prod_prod_off_diag [fintype ι] [linear_order ι] [locally_finite_order_top ι]\n    [locally_finite_order_bot ι] [comm_monoid α] (f : ι → ι → α) :\n    finset.prod_univ \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.prod_univ\"\n        (finset.prod \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.prod\" (Ioi i)\n          (f j i * f i j)) =\n      finset.prod_univ \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.prod_univ\"\n        (finset.prod \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.prod\"\n          («expr ᶜ» {i}) (f j i)) :=\n  by\n  simp_rw [← Ioi_disj_union_Iio, prod_disj_union, prod_mul_distrib]\n  congr 1\n  rw [prod_sigma', prod_sigma']\n  refine' prod_bij' (fun i hi => ⟨i.2, i.1⟩) _ _ (fun i hi => ⟨i.2, i.1⟩) _ _ _ <;> simp\n#align prod_prod_Ioi_mul_eq_prod_prod_off_diag prod_prod_Ioi_mul_eq_prod_prod_off_diag\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `finset.prod_univ -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.prod_univ -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `finset.prod -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.prod -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `finset.prod_univ -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.prod_univ -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `finset.prod -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.prod -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\n@[to_additive]\ntheorem prod_prod_Ioi_mul_eq_prod_prod_off_diag [Fintype ι] [linear_order ι] [LocallyFiniteOrderTop ι]\n    [LocallyFiniteOrderBot ι] [CommMonoid α] (f : ι → ι → α) :\n    finset.prod_univ \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.prod_univ\"\n        (finset.prod \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.prod\" (Ioi i)\n          (f j i * f i j)) =\n      finset.prod_univ \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.prod_univ\"\n        (finset.prod \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.prod\"\n          («expr ᶜ» {i}) (f j i)) :=\n  by\n  simp_rw [← Ioi_disj_union_Iio, prod_disj_union, prod_mul_distrib]\n  congr 1\n  rw [prod_sigma', prod_sigma']\n  refine' prod_bij' (fun i hi => ⟨i.2, i.1⟩) _ _ (fun i hi => ⟨i.2, i.1⟩) _ _ _ <;> simp\n#align prod_prod_Ioi_mul_eq_prod_prod_off_diag prod_prod_Ioi_mul_eq_prod_prod_off_diag\n\n",
  "not_mem_uIcc_of_lt":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `finset.uIcc -/\ntheorem not_mem_uIcc_of_lt : c < a → c < b → c ∉ finset.uIcc a b :=\n  by\n  rw [mem_uIcc]\n  exact set.not_mem_uIcc_of_lt\n#align not_mem_uIcc_of_lt not_mem_uIcc_of_lt\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `finset.uIcc -/\ntheorem not_mem_uIcc_of_lt : c < a → c < b → c ∉ finset.uIcc a b :=\n  by\n  rw [mem_uIcc]\n  exact Set.not_mem_uIcc_of_lt\n#align not_mem_uIcc_of_lt not_mem_uIcc_of_lt\n\n",
  "not_mem_uIcc_of_gt":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `finset.uIcc -/\ntheorem not_mem_uIcc_of_gt : a < c → b < c → c ∉ finset.uIcc a b :=\n  by\n  rw [mem_uIcc]\n  exact set.not_mem_uIcc_of_gt\n#align not_mem_uIcc_of_gt not_mem_uIcc_of_gt\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `finset.uIcc -/\ntheorem not_mem_uIcc_of_gt : a < c → b < c → c ∉ finset.uIcc a b :=\n  by\n  rw [mem_uIcc]\n  exact Set.not_mem_uIcc_of_gt\n#align not_mem_uIcc_of_gt not_mem_uIcc_of_gt\n\n",
  "not_mem_Ioi_self":
  "@[simp]\ntheorem not_mem_Ioi_self {b : α} : b ∉ Ioi b := fun h => lt_irrefl _ (mem_Ioi.1 h)\n#align not_mem_Ioi_self not_mem_Ioi_self\n\n",
  "not_mem_Iio_self":
  "@[simp]\ntheorem not_mem_Iio_self {b : α} : b ∉ Iio b := fun h => lt_irrefl _ (mem_Iio.1 h)\n#align not_mem_Iio_self not_mem_Iio_self\n\n",
+ "not_bdd_below":
+ "#print Set.Infinite.not_bddBelow /-\ntheorem Set.Infinite.not_bddBelow {s : Set α} : s.infinite → ¬BddBelow s :=\n  mt BddBelow.finite\n#align set.infinite.not_bdd_below Set.Infinite.not_bddBelow\n-/\n\n",
+ "not_bdd_above":
+ "#print Set.Infinite.not_bddAbove /-\ntheorem Set.Infinite.not_bddAbove {s : Set α} : s.infinite → ¬BddAbove s :=\n  mt BddAbove.finite\n#align set.infinite.not_bdd_above Set.Infinite.not_bddAbove\n-/\n\n",
  "nonempty_uIcc":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `finset.uIcc -/\n@[simp]\ntheorem nonempty_uIcc : Finset.Nonempty (finset.uIcc a b) :=\n  nonempty_Icc.2 inf_le_sup\n#align nonempty_uIcc nonempty_uIcc\n\n",
  "nonempty_Ioo":
@@ -96,6 +100,10 @@
  "@[simp]\ntheorem left_mem_Ico : a ∈ Ico a b ↔ a < b := by simp only [mem_Ico, true_and_iff, le_refl]\n#align left_mem_Ico left_mem_Ico\n\n",
  "left_mem_Icc":
  "@[simp]\ntheorem left_mem_Icc : a ∈ Icc a b ↔ a ≤ b := by simp only [mem_Icc, true_and_iff, le_rfl]\n#align left_mem_Icc left_mem_Icc\n\n",
+ "infinite_iff_exists_lt":
+ "#print Set.infinite_iff_exists_lt /-\ntheorem Set.infinite_iff_exists_lt [Nonempty α] : s.infinite ↔ ∀ a, ∃ b ∈ s, b < a :=\n  ⟨Set.Infinite.exists_lt, Set.infinite_of_forall_exists_lt⟩\n#align set.infinite_iff_exists_lt Set.infinite_iff_exists_lt\n-/\n\n",
+ "infinite_iff_exists_gt":
+ "#print Set.infinite_iff_exists_gt /-\ntheorem Set.infinite_iff_exists_gt [Nonempty α] : s.infinite ↔ ∀ a, ∃ b ∈ s, a < b :=\n  ⟨Set.Infinite.exists_gt, Set.infinite_of_forall_exists_gt⟩\n#align set.infinite_iff_exists_gt Set.infinite_iff_exists_gt\n-/\n\n",
  "image_add_right_Ioo":
  "theorem image_add_right_Ioo (a b c : α) : (Ioo a b).image (· + c) = Ioo (a + c) (b + c) :=\n  by\n  rw [← map_add_right_Ioo, map_eq_image]\n  rfl\n#align image_add_right_Ioo image_add_right_Ioo\n\n",
  "image_add_right_Ioc":
@@ -113,35 +121,39 @@
  "image_add_left_Icc":
  "@[simp]\ntheorem image_add_left_Icc (a b c : α) : (Icc a b).image ((· + ·) c) = Icc (c + a) (c + b) :=\n  by\n  rw [← map_add_left_Icc, map_eq_image]\n  rfl\n#align image_add_left_Icc image_add_left_Icc\n\n",
  "finite_of_bdd_above":
- "theorem _root_.bdd_below.finite_of_bdd_above {s : set α} (h₀ : BddBelow s) (h₁ : BddAbove s) : s.finite :=\n  by\n  let ⟨a, ha⟩ := h₀\n  let ⟨b, hb⟩ := h₁\n  classical exact ⟨set.fintype_of_mem_bounds ha hb⟩\n#align bdd_below.finite_of_bdd_above bdd_below.finite_of_bdd_above\n\n",
+ "#print BddBelow.finite_of_bddAbove /-\ntheorem BddBelow.finite_of_bddAbove {s : Set α} (h₀ : BddBelow s) (h₁ : BddAbove s) : s.finite :=\n  by\n  let ⟨a, ha⟩ := h₀\n  let ⟨b, hb⟩ := h₁\n  classical exact ⟨Set.fintypeOfMemBounds ha hb⟩\n#align bdd_below.finite_of_bdd_above BddBelow.finite_of_bddAbove\n-/\n\n",
  "finite":
- "theorem _root_.bdd_above.finite {s : set α} (hs : BddAbove s) : s.finite :=\n  hs.dual.finite\n#align bdd_above.finite bdd_above.finite\n\n",
+ "#print BddAbove.finite /-\ntheorem BddAbove.finite {s : Set α} (hs : BddAbove s) : s.finite :=\n  hs.dual.finite\n#align bdd_above.finite BddAbove.finite\n-/\n\n",
  "filter_lt_lt_eq_Ioo":
- "theorem filter_lt_lt_eq_Ioo [decidable_pred fun j => a < j ∧ j < b] : (univ.filter fun j => a < j ∧ j < b) = Ioo a b :=\n  by\n  ext\n  simp\n#align filter_lt_lt_eq_Ioo filter_lt_lt_eq_Ioo\n\n",
+ "theorem filter_lt_lt_eq_Ioo [DecidablePred fun j => a < j ∧ j < b] : (univ.filter fun j => a < j ∧ j < b) = Ioo a b :=\n  by\n  ext\n  simp\n#align filter_lt_lt_eq_Ioo filter_lt_lt_eq_Ioo\n\n",
  "filter_lt_le_eq_Ioc":
- "theorem filter_lt_le_eq_Ioc [decidable_pred fun j => a < j ∧ j ≤ b] : (univ.filter fun j => a < j ∧ j ≤ b) = Ioc a b :=\n  by\n  ext\n  simp\n#align filter_lt_le_eq_Ioc filter_lt_le_eq_Ioc\n\n",
+ "theorem filter_lt_le_eq_Ioc [DecidablePred fun j => a < j ∧ j ≤ b] : (univ.filter fun j => a < j ∧ j ≤ b) = Ioc a b :=\n  by\n  ext\n  simp\n#align filter_lt_le_eq_Ioc filter_lt_le_eq_Ioc\n\n",
  "filter_lt_eq_Ioi":
- "theorem filter_lt_eq_Ioi [decidable_pred ((· < ·) a)] : univ.filter ((· < ·) a) = Ioi a :=\n  by\n  ext\n  simp\n#align filter_lt_eq_Ioi filter_lt_eq_Ioi\n\n",
+ "theorem filter_lt_eq_Ioi [DecidablePred ((· < ·) a)] : univ.filter ((· < ·) a) = Ioi a :=\n  by\n  ext\n  simp\n#align filter_lt_eq_Ioi filter_lt_eq_Ioi\n\n",
  "filter_le_lt_eq_Ico":
- "theorem filter_le_lt_eq_Ico [decidable_pred fun j => a ≤ j ∧ j < b] : (univ.filter fun j => a ≤ j ∧ j < b) = Ico a b :=\n  by\n  ext\n  simp\n#align filter_le_lt_eq_Ico filter_le_lt_eq_Ico\n\n",
+ "theorem filter_le_lt_eq_Ico [DecidablePred fun j => a ≤ j ∧ j < b] : (univ.filter fun j => a ≤ j ∧ j < b) = Ico a b :=\n  by\n  ext\n  simp\n#align filter_le_lt_eq_Ico filter_le_lt_eq_Ico\n\n",
  "filter_le_le_eq_Icc":
- "theorem filter_le_le_eq_Icc [decidable_pred fun j => a ≤ j ∧ j ≤ b] : (univ.filter fun j => a ≤ j ∧ j ≤ b) = Icc a b :=\n  by\n  ext\n  simp\n#align filter_le_le_eq_Icc filter_le_le_eq_Icc\n\n",
+ "theorem filter_le_le_eq_Icc [DecidablePred fun j => a ≤ j ∧ j ≤ b] : (univ.filter fun j => a ≤ j ∧ j ≤ b) = Icc a b :=\n  by\n  ext\n  simp\n#align filter_le_le_eq_Icc filter_le_le_eq_Icc\n\n",
  "filter_le_eq_Ici":
- "theorem filter_le_eq_Ici [decidable_pred ((· ≤ ·) a)] : univ.filter ((· ≤ ·) a) = Ici a :=\n  by\n  ext\n  simp\n#align filter_le_eq_Ici filter_le_eq_Ici\n\n",
+ "theorem filter_le_eq_Ici [DecidablePred ((· ≤ ·) a)] : univ.filter ((· ≤ ·) a) = Ici a :=\n  by\n  ext\n  simp\n#align filter_le_eq_Ici filter_le_eq_Ici\n\n",
  "filter_gt_eq_Iio":
- "theorem filter_gt_eq_Iio [decidable_pred (· < a)] : univ.filter (· < a) = Iio a :=\n  by\n  ext\n  simp\n#align filter_gt_eq_Iio filter_gt_eq_Iio\n\n",
+ "theorem filter_gt_eq_Iio [DecidablePred (· < a)] : univ.filter (· < a) = Iio a :=\n  by\n  ext\n  simp\n#align filter_gt_eq_Iio filter_gt_eq_Iio\n\n",
  "filter_ge_eq_Iic":
- "theorem filter_ge_eq_Iic [decidable_pred (· ≤ a)] : univ.filter (· ≤ a) = Iic a :=\n  by\n  ext\n  simp\n#align filter_ge_eq_Iic filter_ge_eq_Iic\n\n",
+ "theorem filter_ge_eq_Iic [DecidablePred (· ≤ a)] : univ.filter (· ≤ a) = Iic a :=\n  by\n  ext\n  simp\n#align filter_ge_eq_Iic filter_ge_eq_Iic\n\n",
+ "exists_lt":
+ "#print Set.Infinite.exists_lt /-\ntheorem Set.Infinite.exists_lt (hs : s.infinite) : ∀ a, ∃ b ∈ s, b < a :=\n  not_bddBelow_iff.1 hs.not_bdd_below\n#align set.infinite.exists_lt Set.Infinite.exists_lt\n-/\n\n",
+ "exists_gt":
+ "#print Set.Infinite.exists_gt /-\ntheorem Set.Infinite.exists_gt (hs : s.infinite) : ∀ a, ∃ b ∈ s, a < b :=\n  not_bddAbove_iff.1 hs.not_bdd_above\n#align set.infinite.exists_gt Set.Infinite.exists_gt\n-/\n\n",
  "eq_of_mem_uIcc_of_mem_uIcc'":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `finset.uIcc -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `finset.uIcc -/\ntheorem eq_of_mem_uIcc_of_mem_uIcc' : b ∈ finset.uIcc a c → c ∈ finset.uIcc a b → b = c :=\n  by\n  simp_rw [mem_uIcc]\n  exact set.eq_of_mem_uIcc_of_mem_uIcc'\n#align eq_of_mem_uIcc_of_mem_uIcc' eq_of_mem_uIcc_of_mem_uIcc'\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `finset.uIcc -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `finset.uIcc -/\ntheorem eq_of_mem_uIcc_of_mem_uIcc' : b ∈ finset.uIcc a c → c ∈ finset.uIcc a b → b = c :=\n  by\n  simp_rw [mem_uIcc]\n  exact Set.eq_of_mem_uIcc_of_mem_uIcc'\n#align eq_of_mem_uIcc_of_mem_uIcc' eq_of_mem_uIcc_of_mem_uIcc'\n\n",
  "eq_of_mem_uIcc_of_mem_uIcc":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `finset.uIcc -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `finset.uIcc -/\ntheorem eq_of_mem_uIcc_of_mem_uIcc : a ∈ finset.uIcc b c → b ∈ finset.uIcc a c → a = b :=\n  by\n  simp_rw [mem_uIcc]\n  exact set.eq_of_mem_uIcc_of_mem_uIcc\n#align eq_of_mem_uIcc_of_mem_uIcc eq_of_mem_uIcc_of_mem_uIcc\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `finset.uIcc -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `finset.uIcc -/\ntheorem eq_of_mem_uIcc_of_mem_uIcc : a ∈ finset.uIcc b c → b ∈ finset.uIcc a c → a = b :=\n  by\n  simp_rw [mem_uIcc]\n  exact Set.eq_of_mem_uIcc_of_mem_uIcc\n#align eq_of_mem_uIcc_of_mem_uIcc eq_of_mem_uIcc_of_mem_uIcc\n\n",
  "disjoint_Ioi_Iio":
  "theorem disjoint_Ioi_Iio (a : α) : Disjoint (Ioi a) (Iio a) :=\n  disjoint_left.2 fun b hab hba => (mem_Ioi.1 hab).not_lt <| mem_Iio.1 hba\n#align disjoint_Ioi_Iio disjoint_Ioi_Iio\n\n",
  "card_Ioo_eq_card_Ioc_sub_one":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵈ» -/\ntheorem card_Ioo_eq_card_Ioc_sub_one (a b : α) : (Ioo a b).card = (Ioc a b).card - 1 :=\n  @card_Ioo_eq_card_Ico_sub_one («expr ᵒᵈ» α) _ _ _ _\n#align card_Ioo_eq_card_Ioc_sub_one card_Ioo_eq_card_Ioc_sub_one\n\n",
  "card_Ioo_eq_card_Ico_sub_one":
- "theorem card_Ioo_eq_card_Ico_sub_one (a b : α) : (Ioo a b).card = (Ico a b).card - 1 := by\n  classical\n    by_cases h : a ≤ b\n    · obtain rfl | h' := h.eq_or_lt\n      · rw [Ioo_self, Ico_self, card_empty]\n      rw [← Ioo_insert_left h', card_insert_of_not_mem left_not_mem_Ioo]\n      exact (nat.add_sub_cancel _ _).symm\n    · rw [Ioo_eq_empty fun h' => h h'.le, Ico_eq_empty fun h' => h h'.le, card_empty, zero_tsub]\n#align card_Ioo_eq_card_Ico_sub_one card_Ioo_eq_card_Ico_sub_one\n\n",
+ "theorem card_Ioo_eq_card_Ico_sub_one (a b : α) : (Ioo a b).card = (Ico a b).card - 1 := by\n  classical\n    by_cases h : a < b\n    · rw [Ico_eq_cons_Ioo h, card_cons]\n      exact (nat.add_sub_cancel _ _).symm\n    · rw [Ioo_eq_empty h, Ico_eq_empty h, card_empty, zero_tsub]\n#align card_Ioo_eq_card_Ico_sub_one card_Ioo_eq_card_Ico_sub_one\n\n",
  "card_Ioo_eq_card_Icc_sub_two":
  "theorem card_Ioo_eq_card_Icc_sub_two (a b : α) : (Ioo a b).card = (Icc a b).card - 2 :=\n  by\n  rw [card_Ioo_eq_card_Ico_sub_one, card_Ico_eq_card_Icc_sub_one]\n  rfl\n#align card_Ioo_eq_card_Icc_sub_two card_Ioo_eq_card_Icc_sub_two\n\n",
  "card_Ioi_eq_card_Ici_sub_one":
@@ -151,7 +163,7 @@
  "card_Iio_eq_card_Iic_sub_one":
  "theorem card_Iio_eq_card_Iic_sub_one (a : α) : (Iio a).card = (Iic a).card - 1 := by\n  rw [Iic_eq_cons_Iio, card_cons, add_tsub_cancel_right]\n#align card_Iio_eq_card_Iic_sub_one card_Iio_eq_card_Iic_sub_one\n\n",
  "card_Ico_eq_card_Icc_sub_one":
- "theorem card_Ico_eq_card_Icc_sub_one (a b : α) : (Ico a b).card = (Icc a b).card - 1 := by\n  classical\n    by_cases h : a ≤ b\n    · rw [← Ico_insert_right h, card_insert_of_not_mem right_not_mem_Ico]\n      exact (nat.add_sub_cancel _ _).symm\n    · rw [Ico_eq_empty fun h' => h h'.le, Icc_eq_empty h, card_empty, zero_tsub]\n#align card_Ico_eq_card_Icc_sub_one card_Ico_eq_card_Icc_sub_one\n\n",
+ "theorem card_Ico_eq_card_Icc_sub_one (a b : α) : (Ico a b).card = (Icc a b).card - 1 := by\n  classical\n    by_cases h : a ≤ b\n    · rw [Icc_eq_cons_Ico h, card_cons]\n      exact (nat.add_sub_cancel _ _).symm\n    · rw [Ico_eq_empty fun h' => h h'.le, Icc_eq_empty h, card_empty, zero_tsub]\n#align card_Ico_eq_card_Icc_sub_one card_Ico_eq_card_Icc_sub_one\n\n",
  "Ioo_subset_Ioo_right":
  "theorem Ioo_subset_Ioo_right (h : b₁ ≤ b₂) : Ioo a b₁ ⊆ Ioo a b₂ :=\n  Ioo_subset_Ioo le_rfl h\n#align Ioo_subset_Ioo_right Ioo_subset_Ioo_right\n\n",
  "Ioo_subset_Ioo_left":
@@ -189,7 +201,7 @@
  "Ioi_subset_Ici_self":
  "theorem Ioi_subset_Ici_self : Ioi a ⊆ Ici a := by simpa [← coe_subset] using Set.Ioi_subset_Ici_self\n#align Ioi_subset_Ici_self Ioi_subset_Ici_self\n\n",
  "Ioi_insert":
- "@[simp]\ntheorem Ioi_insert [decidable_eq α] (a : α) : insert a (Ioi a) = Ici a :=\n  by\n  ext\n  simp_rw [Finset.mem_insert, mem_Ici, mem_Ioi, le_iff_lt_or_eq, or_comm', eq_comm]\n#align Ioi_insert Ioi_insert\n\n",
+ "@[simp]\ntheorem Ioi_insert [DecidableEq α] (a : α) : insert a (Ioi a) = Ici a :=\n  by\n  ext\n  simp_rw [Finset.mem_insert, mem_Ici, mem_Ioi, le_iff_lt_or_eq, or_comm', eq_comm]\n#align Ioi_insert Ioi_insert\n\n",
  "Ioi_disj_union_Iio":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\ntheorem Ioi_disj_union_Iio (a : α) : (Ioi a).disj_union (Iio a) (disjoint_Ioi_Iio a) = «expr ᶜ» ({a} : Finset α) :=\n  by\n  ext\n  simp [eq_comm]\n#align Ioi_disj_union_Iio Ioi_disj_union_Iio\n\n",
  "Ioc_union_Ioc_eq_Ioc":
@@ -215,27 +227,29 @@
  "Ioc_insert_left":
  "@[simp]\ntheorem Ioc_insert_left (h : a ≤ b) : insert a (Ioc a b) = Icc a b := by\n  rw [← coe_inj, coe_insert, coe_Ioc, coe_Icc, Set.insert_eq, Set.union_comm, Set.Ioc_union_left h]\n#align Ioc_insert_left Ioc_insert_left\n\n",
  "Ioc_filter_lt_of_lt_right":
- "theorem Ioc_filter_lt_of_lt_right {a b c : α} [decidable_pred (· < c)] (h : b < c) :\n    (Ioc a b).filter (· < c) = Ioc a b :=\n  (Finset.filter_eq_self _).2 fun x hx => lt_of_le_of_lt (mem_Ioc.1 hx).2 h\n#align Ioc_filter_lt_of_lt_right Ioc_filter_lt_of_lt_right\n\n",
+ "theorem Ioc_filter_lt_of_lt_right {a b c : α} [DecidablePred (· < c)] (h : b < c) :\n    (Ioc a b).filter (· < c) = Ioc a b :=\n  (Finset.filter_eq_self _).2 fun x hx => lt_of_le_of_lt (mem_Ioc.1 hx).2 h\n#align Ioc_filter_lt_of_lt_right Ioc_filter_lt_of_lt_right\n\n",
  "Ioc_erase_right":
  "@[simp]\ntheorem Ioc_erase_right (a b : α) : (Ioc a b).erase b = Ioo a b := by simp [← coe_inj]\n#align Ioc_erase_right Ioc_erase_right\n\n",
  "Ioc_eq_empty_of_le":
  "@[simp]\ntheorem Ioc_eq_empty_of_le (h : b ≤ a) : Ioc a b = ∅ :=\n  Ioc_eq_empty h.not_lt\n#align Ioc_eq_empty_of_le Ioc_eq_empty_of_le\n\n",
  "Ioc_eq_empty_iff":
  "@[simp]\ntheorem Ioc_eq_empty_iff : Ioc a b = ∅ ↔ ¬a < b := by rw [← coe_eq_empty, coe_Ioc, Set.Ioc_eq_empty_iff]\n#align Ioc_eq_empty_iff Ioc_eq_empty_iff\n\n",
+ "Ioc_eq_cons_Ioo":
+ "/-- `finset.cons` version of `finset.Ioo_insert_right`. -/\ntheorem Ioc_eq_cons_Ioo (h : a < b) : Ioc a b = (Ioo a b).cons b right_not_mem_Ioo := by\n  classical rw [cons_eq_insert, Ioo_insert_right h]\n#align Ioc_eq_cons_Ioo Ioc_eq_cons_Ioo\n\n",
  "Ioc_diff_Ioo_self":
  "@[simp]\ntheorem Ioc_diff_Ioo_self (h : a < b) : Ioc a b \\ Ioo a b = {b} := by simp [← coe_inj, h]\n#align Ioc_diff_Ioo_self Ioc_diff_Ioo_self\n\n",
  "Iio_subset_Iic_self":
  "theorem Iio_subset_Iic_self : Iio a ⊆ Iic a := by simpa [← coe_subset] using Set.Iio_subset_Iic_self\n#align Iio_subset_Iic_self Iio_subset_Iic_self\n\n",
  "Iio_insert":
- "@[simp]\ntheorem Iio_insert [decidable_eq α] (b : α) : insert b (Iio b) = Iic b :=\n  by\n  ext\n  simp_rw [Finset.mem_insert, mem_Iic, mem_Iio, le_iff_lt_or_eq, or_comm']\n#align Iio_insert Iio_insert\n\n",
+ "@[simp]\ntheorem Iio_insert [DecidableEq α] (b : α) : insert b (Iio b) = Iic b :=\n  by\n  ext\n  simp_rw [Finset.mem_insert, mem_Iic, mem_Iio, le_iff_lt_or_eq, or_comm']\n#align Iio_insert Iio_insert\n\n",
  "Iio_filter_lt":
- "@[simp]\ntheorem Iio_filter_lt {α} [linear_order α] [locally_finite_order_bot α] (a b : α) :\n    (Iio a).filter (· < b) = Iio (min a b) := by\n  ext\n  simp [and_assoc']\n#align Iio_filter_lt Iio_filter_lt\n\n",
+ "@[simp]\ntheorem Iio_filter_lt {α} [linear_order α] [LocallyFiniteOrderBot α] (a b : α) :\n    (Iio a).filter (· < b) = Iio (min a b) := by\n  ext\n  simp [and_assoc']\n#align Iio_filter_lt Iio_filter_lt\n\n",
  "Iic_filter_lt_of_lt_right":
- "theorem Iic_filter_lt_of_lt_right {α} [preorder α] [locally_finite_order_bot α] {a c : α} [decidable_pred (· < c)]\n    (h : a < c) : (Iic a).filter (· < c) = Iic a :=\n  (Finset.filter_eq_self _).2 fun x hx => lt_of_le_of_lt (mem_Iic.1 hx) h\n#align Iic_filter_lt_of_lt_right Iic_filter_lt_of_lt_right\n\n",
+ "theorem Iic_filter_lt_of_lt_right {α} [preorder α] [LocallyFiniteOrderBot α] {a c : α} [DecidablePred (· < c)]\n    (h : a < c) : (Iic a).filter (· < c) = Iic a :=\n  (Finset.filter_eq_self _).2 fun x hx => lt_of_le_of_lt (mem_Iic.1 hx) h\n#align Iic_filter_lt_of_lt_right Iic_filter_lt_of_lt_right\n\n",
  "Iic_erase":
- "@[simp]\ntheorem Iic_erase [decidable_eq α] (b : α) : (Iic b).erase b = Iio b :=\n  by\n  ext\n  simp_rw [Finset.mem_erase, mem_Iic, mem_Iio, lt_iff_le_and_ne, and_comm']\n#align Iic_erase Iic_erase\n\n",
+ "@[simp]\ntheorem Iic_erase [DecidableEq α] (b : α) : (Iic b).erase b = Iio b :=\n  by\n  ext\n  simp_rw [Finset.mem_erase, mem_Iic, mem_Iio, lt_iff_le_and_ne, and_comm']\n#align Iic_erase Iic_erase\n\n",
  "Iic_eq_cons_Iio":
- "-- Purposefully written the other way around\ntheorem Iic_eq_cons_Iio (b : α) : Iic b = (Iio b).cons b not_mem_Iio_self := by\n  classical rw [cons_eq_insert, Iio_insert]\n#align Iic_eq_cons_Iio Iic_eq_cons_Iio\n\n",
+ "-- Purposefully written the other way around\n/-- `finset.cons` version of `finset.Iio_insert`. -/\ntheorem Iic_eq_cons_Iio (b : α) : Iic b = (Iio b).cons b not_mem_Iio_self := by\n  classical rw [cons_eq_insert, Iio_insert]\n#align Iic_eq_cons_Iio Iic_eq_cons_Iio\n\n",
  "Ico_union_Ico_eq_Ico":
  "theorem Ico_union_Ico_eq_Ico {a b c : α} (hab : a ≤ b) (hbc : b ≤ c) : Ico a b ∪ Ico b c = Ico a c := by\n  rw [← coe_inj, coe_union, coe_Ico, coe_Ico, coe_Ico, Set.Ico_union_Ico_eq_Ico hab hbc]\n#align Ico_union_Ico_eq_Ico Ico_union_Ico_eq_Ico\n\n",
  "Ico_union_Ico'":
@@ -271,21 +285,21 @@
  "Ico_insert_right":
  "@[simp]\ntheorem Ico_insert_right (h : a ≤ b) : insert b (Ico a b) = Icc a b := by\n  rw [← coe_inj, coe_insert, coe_Icc, coe_Ico, Set.insert_eq, Set.union_comm, Set.Ico_union_right h]\n#align Ico_insert_right Ico_insert_right\n\n",
  "Ico_filter_lt_of_right_le":
- "theorem Ico_filter_lt_of_right_le [decidable_pred (· < c)] (hbc : b ≤ c) : (Ico a b).filter (· < c) = Ico a b :=\n  filter_true_of_mem fun x hx => (mem_Ico.1 hx).2.trans_le hbc\n#align Ico_filter_lt_of_right_le Ico_filter_lt_of_right_le\n\n",
+ "theorem Ico_filter_lt_of_right_le [DecidablePred (· < c)] (hbc : b ≤ c) : (Ico a b).filter (· < c) = Ico a b :=\n  filter_true_of_mem fun x hx => (mem_Ico.1 hx).2.trans_le hbc\n#align Ico_filter_lt_of_right_le Ico_filter_lt_of_right_le\n\n",
  "Ico_filter_lt_of_le_right":
- "theorem Ico_filter_lt_of_le_right [decidable_pred (· < c)] (hcb : c ≤ b) : (Ico a b).filter (· < c) = Ico a c :=\n  by\n  ext x\n  rw [mem_filter, mem_Ico, mem_Ico, and_right_comm]\n  exact and_iff_left_of_imp fun h => h.2.trans_le hcb\n#align Ico_filter_lt_of_le_right Ico_filter_lt_of_le_right\n\n",
+ "theorem Ico_filter_lt_of_le_right [DecidablePred (· < c)] (hcb : c ≤ b) : (Ico a b).filter (· < c) = Ico a c :=\n  by\n  ext x\n  rw [mem_filter, mem_Ico, mem_Ico, and_right_comm]\n  exact and_iff_left_of_imp fun h => h.2.trans_le hcb\n#align Ico_filter_lt_of_le_right Ico_filter_lt_of_le_right\n\n",
  "Ico_filter_lt_of_le_left":
- "theorem Ico_filter_lt_of_le_left [decidable_pred (· < c)] (hca : c ≤ a) : (Ico a b).filter (· < c) = ∅ :=\n  filter_false_of_mem fun x hx => (hca.trans (mem_Ico.1 hx).1).not_lt\n#align Ico_filter_lt_of_le_left Ico_filter_lt_of_le_left\n\n",
+ "theorem Ico_filter_lt_of_le_left [DecidablePred (· < c)] (hca : c ≤ a) : (Ico a b).filter (· < c) = ∅ :=\n  filter_false_of_mem fun x hx => (hca.trans (mem_Ico.1 hx).1).not_lt\n#align Ico_filter_lt_of_le_left Ico_filter_lt_of_le_left\n\n",
  "Ico_filter_lt":
  "@[simp]\ntheorem Ico_filter_lt (a b c : α) : ((Ico a b).filter fun x => x < c) = Ico a (min b c) :=\n  by\n  cases le_total b c\n  · rw [Ico_filter_lt_of_right_le h, min_eq_left h]\n  · rw [Ico_filter_lt_of_le_right h, min_eq_right h]\n#align Ico_filter_lt Ico_filter_lt\n\n",
  "Ico_filter_le_of_right_le":
- "theorem Ico_filter_le_of_right_le {a b : α} [decidable_pred ((· ≤ ·) b)] : (Ico a b).filter ((· ≤ ·) b) = ∅ :=\n  filter_false_of_mem fun x hx => (mem_Ico.1 hx).2.not_le\n#align Ico_filter_le_of_right_le Ico_filter_le_of_right_le\n\n",
+ "theorem Ico_filter_le_of_right_le {a b : α} [DecidablePred ((· ≤ ·) b)] : (Ico a b).filter ((· ≤ ·) b) = ∅ :=\n  filter_false_of_mem fun x hx => (mem_Ico.1 hx).2.not_le\n#align Ico_filter_le_of_right_le Ico_filter_le_of_right_le\n\n",
  "Ico_filter_le_of_left_le":
- "theorem Ico_filter_le_of_left_le {a b c : α} [decidable_pred ((· ≤ ·) c)] (hac : a ≤ c) :\n    (Ico a b).filter ((· ≤ ·) c) = Ico c b := by\n  ext x\n  rw [mem_filter, mem_Ico, mem_Ico, and_comm', and_left_comm]\n  exact and_iff_right_of_imp fun h => hac.trans h.1\n#align Ico_filter_le_of_left_le Ico_filter_le_of_left_le\n\n",
+ "theorem Ico_filter_le_of_left_le {a b c : α} [DecidablePred ((· ≤ ·) c)] (hac : a ≤ c) :\n    (Ico a b).filter ((· ≤ ·) c) = Ico c b := by\n  ext x\n  rw [mem_filter, mem_Ico, mem_Ico, and_comm', and_left_comm]\n  exact and_iff_right_of_imp fun h => hac.trans h.1\n#align Ico_filter_le_of_left_le Ico_filter_le_of_left_le\n\n",
  "Ico_filter_le_of_le_left":
- "theorem Ico_filter_le_of_le_left {a b c : α} [decidable_pred ((· ≤ ·) c)] (hca : c ≤ a) :\n    (Ico a b).filter ((· ≤ ·) c) = Ico a b :=\n  filter_true_of_mem fun x hx => hca.trans (mem_Ico.1 hx).1\n#align Ico_filter_le_of_le_left Ico_filter_le_of_le_left\n\n",
+ "theorem Ico_filter_le_of_le_left {a b c : α} [DecidablePred ((· ≤ ·) c)] (hca : c ≤ a) :\n    (Ico a b).filter ((· ≤ ·) c) = Ico a b :=\n  filter_true_of_mem fun x hx => hca.trans (mem_Ico.1 hx).1\n#align Ico_filter_le_of_le_left Ico_filter_le_of_le_left\n\n",
  "Ico_filter_le_left":
- "theorem Ico_filter_le_left {a b : α} [decidable_pred (· ≤ a)] (hab : a < b) : ((Ico a b).filter fun x => x ≤ a) = {a} :=\n  by\n  ext x\n  rw [mem_filter, mem_Ico, mem_singleton, and_right_comm, ← le_antisymm_iff, eq_comm]\n  exact and_iff_left_of_imp fun h => h.le.trans_lt hab\n#align Ico_filter_le_left Ico_filter_le_left\n\n",
+ "theorem Ico_filter_le_left {a b : α} [DecidablePred (· ≤ a)] (hab : a < b) : ((Ico a b).filter fun x => x ≤ a) = {a} :=\n  by\n  ext x\n  rw [mem_filter, mem_Ico, mem_singleton, and_right_comm, ← le_antisymm_iff, eq_comm]\n  exact and_iff_left_of_imp fun h => h.le.trans_lt hab\n#align Ico_filter_le_left Ico_filter_le_left\n\n",
  "Ico_filter_le":
  "@[simp]\ntheorem Ico_filter_le (a b c : α) : ((Ico a b).filter fun x => c ≤ x) = Ico (max a c) b :=\n  by\n  cases le_total a c\n  · rw [Ico_filter_le_of_left_le h, max_eq_right h]\n  · rw [Ico_filter_le_of_le_left h, max_eq_left h]\n#align Ico_filter_le Ico_filter_le\n\n",
  "Ico_erase_left":
@@ -294,6 +308,8 @@
  "@[simp]\ntheorem Ico_eq_empty_of_le (h : b ≤ a) : Ico a b = ∅ :=\n  Ico_eq_empty h.not_lt\n#align Ico_eq_empty_of_le Ico_eq_empty_of_le\n\n",
  "Ico_eq_empty_iff":
  "@[simp]\ntheorem Ico_eq_empty_iff : Ico a b = ∅ ↔ ¬a < b := by rw [← coe_eq_empty, coe_Ico, Set.Ico_eq_empty_iff]\n#align Ico_eq_empty_iff Ico_eq_empty_iff\n\n",
+ "Ico_eq_cons_Ioo":
+ "/-- `finset.cons` version of `finset.Ioo_insert_left`. -/\ntheorem Ico_eq_cons_Ioo (h : a < b) : Ico a b = (Ioo a b).cons a left_not_mem_Ioo := by\n  classical rw [cons_eq_insert, Ioo_insert_left h]\n#align Ico_eq_cons_Ioo Ico_eq_cons_Ioo\n\n",
  "Ico_disjoint_Ico_consecutive":
  "theorem Ico_disjoint_Ico_consecutive (a b c : α) : Disjoint (Ico a b) (Ico b c) :=\n  disjoint_left.2 fun x hab hbc => (mem_Ico.mp hab).2.not_le (mem_Ico.mp hbc).1\n#align Ico_disjoint_Ico_consecutive Ico_disjoint_Ico_consecutive\n\n",
  "Ico_diff_Ioo_self":
@@ -303,9 +319,9 @@
  "Ico_diff_Ico_left":
  "@[simp]\ntheorem Ico_diff_Ico_left (a b c : α) : Ico a b \\ Ico a c = Ico (max a c) b :=\n  by\n  cases le_total a c\n  · ext x\n    rw [mem_sdiff, mem_Ico, mem_Ico, mem_Ico, max_eq_right h, and_right_comm, not_and, not_lt]\n    exact and_congr_left' ⟨fun hx => hx.2 hx.1, fun hx => ⟨h.trans hx, fun _ => hx⟩⟩\n  · rw [Ico_eq_empty_of_le h, sdiff_empty, max_eq_left h]\n#align Ico_diff_Ico_left Ico_diff_Ico_left\n\n",
  "Ici_erase":
- "@[simp]\ntheorem Ici_erase [decidable_eq α] (a : α) : (Ici a).erase a = Ioi a :=\n  by\n  ext\n  simp_rw [Finset.mem_erase, mem_Ici, mem_Ioi, lt_iff_le_and_ne, and_comm', ne_comm]\n#align Ici_erase Ici_erase\n\n",
+ "@[simp]\ntheorem Ici_erase [DecidableEq α] (a : α) : (Ici a).erase a = Ioi a :=\n  by\n  ext\n  simp_rw [Finset.mem_erase, mem_Ici, mem_Ioi, lt_iff_le_and_ne, and_comm', ne_comm]\n#align Ici_erase Ici_erase\n\n",
  "Ici_eq_cons_Ioi":
- "-- Purposefully written the other way around\ntheorem Ici_eq_cons_Ioi (a : α) : Ici a = (Ioi a).cons a not_mem_Ioi_self := by\n  classical rw [cons_eq_insert, Ioi_insert]\n#align Ici_eq_cons_Ioi Ici_eq_cons_Ioi\n\n",
+ "-- Purposefully written the other way around\n/-- `finset.cons` version of `finset.Ioi_insert`. -/\ntheorem Ici_eq_cons_Ioi (a : α) : Ici a = (Ioi a).cons a not_mem_Ioi_self := by\n  classical rw [cons_eq_insert, Ioi_insert]\n#align Ici_eq_cons_Ioi Ici_eq_cons_Ioi\n\n",
  "Icc_subset_uIcc'":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `finset.uIcc -/\ntheorem Icc_subset_uIcc' : Icc b a ⊆ finset.uIcc a b :=\n  Icc_subset_Icc inf_le_right le_sup_left\n#align Icc_subset_uIcc' Icc_subset_uIcc'\n\n",
  "Icc_subset_uIcc":
@@ -339,7 +355,7 @@
  "Icc_min_max":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `finset.uIcc -/\ntheorem Icc_min_max : Icc (min a b) (max a b) = finset.uIcc a b :=\n  rfl\n#align Icc_min_max Icc_min_max\n\n",
  "Icc_filter_lt_of_lt_right":
- "theorem Icc_filter_lt_of_lt_right {a b c : α} [decidable_pred (· < c)] (h : b < c) :\n    (Icc a b).filter (· < c) = Icc a b :=\n  (Finset.filter_eq_self _).2 fun x hx => lt_of_le_of_lt (mem_Icc.1 hx).2 h\n#align Icc_filter_lt_of_lt_right Icc_filter_lt_of_lt_right\n\n",
+ "theorem Icc_filter_lt_of_lt_right {a b c : α} [DecidablePred (· < c)] (h : b < c) :\n    (Icc a b).filter (· < c) = Icc a b :=\n  (Finset.filter_eq_self _).2 fun x hx => lt_of_le_of_lt (mem_Icc.1 hx).2 h\n#align Icc_filter_lt_of_lt_right Icc_filter_lt_of_lt_right\n\n",
  "Icc_erase_right":
  "@[simp]\ntheorem Icc_erase_right (a b : α) : (Icc a b).erase b = Ico a b := by simp [← coe_inj]\n#align Icc_erase_right Icc_erase_right\n\n",
  "Icc_erase_left":
@@ -351,9 +367,9 @@
  "Icc_eq_empty_iff":
  "@[simp]\ntheorem Icc_eq_empty_iff : Icc a b = ∅ ↔ ¬a ≤ b := by rw [← coe_eq_empty, coe_Icc, Set.Icc_eq_empty_iff]\n#align Icc_eq_empty_iff Icc_eq_empty_iff\n\n",
  "Icc_eq_cons_Ioc":
- "theorem Icc_eq_cons_Ioc (h : a ≤ b) : Icc a b = (Ioc a b).cons a left_not_mem_Ioc := by\n  classical rw [cons_eq_insert, Ioc_insert_left h]\n#align Icc_eq_cons_Ioc Icc_eq_cons_Ioc\n\n",
+ "/-- `finset.cons` version of `finset.Ioc_insert_left`. -/\ntheorem Icc_eq_cons_Ioc (h : a ≤ b) : Icc a b = (Ioc a b).cons a left_not_mem_Ioc := by\n  classical rw [cons_eq_insert, Ioc_insert_left h]\n#align Icc_eq_cons_Ioc Icc_eq_cons_Ioc\n\n",
  "Icc_eq_cons_Ico":
- "-- Those lemmas are purposefully the other way around\ntheorem Icc_eq_cons_Ico (h : a ≤ b) : Icc a b = (Ico a b).cons b right_not_mem_Ico := by\n  classical rw [cons_eq_insert, Ico_insert_right h]\n#align Icc_eq_cons_Ico Icc_eq_cons_Ico\n\n",
+ "-- Those lemmas are purposefully the other way around\n/-- `finset.cons` version of `finset.Ico_insert_right`. -/\ntheorem Icc_eq_cons_Ico (h : a ≤ b) : Icc a b = (Ico a b).cons b right_not_mem_Ico := by\n  classical rw [cons_eq_insert, Ico_insert_right h]\n#align Icc_eq_cons_Ico Icc_eq_cons_Ico\n\n",
  "Icc_diff_both":
  "@[simp]\ntheorem Icc_diff_both (a b : α) : Icc a b \\ {a, b} = Ioo a b := by simp [← coe_inj]\n#align Icc_diff_both Icc_diff_both\n\n",
  "Icc_diff_Ioo_self":

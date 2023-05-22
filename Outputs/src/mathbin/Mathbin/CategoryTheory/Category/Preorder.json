@@ -5,7 +5,7 @@
  "to_eq":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≅ » -/\ntheorem iso.to_eq {x y : X} (f : «expr ≅ » x y) : x = y :=\n  le_antisymm f.hom.le f.inv.le\n#align iso.to_eq iso.to_eq\n\n",
  "monotone":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⥤ » -/\n/-- A functor between preorder categories is monotone.\n-/\n@[mono]\ntheorem functor.monotone (f : «expr ⥤ » X Y) : monotone f.obj := fun x y hxy => (f.map hxy.hom).le\n#align functor.monotone functor.monotone\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⥤ » -/\n/-- A functor between preorder categories is monotone.\n-/\n@[mono]\ntheorem functor.monotone (f : «expr ⥤ » X Y) : Monotone f.obj := fun x y hxy => (f.map hxy.hom).le\n#align functor.monotone functor.monotone\n\n",
  "le_of_op_hom":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵖ» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⟶ » -/\ntheorem le_of_op_hom {x y : «expr ᵒᵖ» X} (h : «expr ⟶ » x y) : unop y ≤ unop x :=\n  h.unop.le\n#align le_of_op_hom le_of_op_hom\n\n",
  "le_of_hom_hom_of_le":
@@ -19,4 +19,4 @@
  "hom_of_le_comp":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≫ » -/\n@[simp]\ntheorem hom_of_le_comp {x y z : X} (h : x ≤ y) (k : y ≤ z) : «expr ≫ » h.hom k.hom = (h.trans k).hom :=\n  rfl\n#align hom_of_le_comp hom_of_le_comp\n\n",
  "functor_obj":
- "@[simp]\ntheorem monotone.functor_obj {f : X → Y} (h : monotone f) : h.functor.obj = f :=\n  rfl\n#align monotone.functor_obj monotone.functor_obj\n\n"}
+ "#print Monotone.functor_obj /-\n@[simp]\ntheorem Monotone.functor_obj {f : X → Y} (h : Monotone f) : h.functor.obj = f :=\n  rfl\n#align monotone.functor_obj Monotone.functor_obj\n-/\n\n"}

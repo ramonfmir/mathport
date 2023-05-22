@@ -2,11 +2,15 @@
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →+* » -/\n#print RingHom.injective_int /-\ntheorem RingHom.injective_int {α : Type _} [NonAssocRing α] (f : «expr →+* » ℤ α) [CharZero α] : function.injective f :=\n  subsingleton.elim (Int.castRingHom _) f ▸ Int.cast_injective\n#align ring_hom.injective_int RingHom.injective_int\n-/\n\n",
  "cast_ne_zero":
  "theorem cast_ne_zero [AddGroupWithOne α] [CharZero α] {n : ℤ} : (n : α) ≠ 0 ↔ n ≠ 0 :=\n  not_congr cast_eq_zero\n#align cast_ne_zero cast_ne_zero\n\n",
+ "cast_ne_one":
+ "theorem cast_ne_one [AddGroupWithOne α] [CharZero α] {n : ℤ} : (n : α) ≠ 1 ↔ n ≠ 1 :=\n  cast_eq_one.not\n#align cast_ne_one cast_ne_one\n\n",
  "cast_injective":
  "theorem cast_injective [AddGroupWithOne α] [CharZero α] : function.injective (coe : ℤ → α)\n  | m, n => cast_inj.1\n#align cast_injective cast_injective\n\n",
  "cast_inj":
  "#print cast_inj /-\n@[simp, norm_cast]\ntheorem cast_inj [AddGroupWithOne α] [CharZero α] {m n : ℤ} : (m : α) = n ↔ m = n := by\n  rw [← sub_eq_zero, ← cast_sub, cast_eq_zero, sub_eq_zero]\n#align cast_inj cast_inj\n-/\n\n",
  "cast_eq_zero":
- "/-\nCopyright (c) 2017 Mario Carneiro. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Mario Carneiro\n-/\n@[simp]\ntheorem cast_eq_zero [AddGroupWithOne α] [CharZero α] {n : ℤ} : (n : α) = 0 ↔ n = 0 :=\n  ⟨fun h => by\n    cases n\n    · rw [int.cast_of_nat] at h\n      exact congr_arg coe (Nat.cast_eq_zero.1 h)\n    · rw [cast_neg_succ_of_nat, neg_eq_zero, Nat.cast_eq_zero] at h\n      contradiction, fun h => by rw [h, cast_zero]⟩\n#align cast_eq_zero cast_eq_zero\n\n",
+ "/-\nCopyright (c) 2017 Mario Carneiro. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Mario Carneiro\n-/\n@[simp]\ntheorem cast_eq_zero [AddGroupWithOne α] [CharZero α] {n : ℤ} : (n : α) = 0 ↔ n = 0 :=\n  ⟨fun h => by\n    cases n\n    · rw [Int.cast_ofNat] at h\n      exact congr_arg coe (Nat.cast_eq_zero.1 h)\n    · rw [cast_neg_succ_of_nat, neg_eq_zero, Nat.cast_eq_zero] at h\n      contradiction, fun h => by rw [h, cast_zero]⟩\n#align cast_eq_zero cast_eq_zero\n\n",
+ "cast_eq_one":
+ "@[simp]\ntheorem cast_eq_one [AddGroupWithOne α] [CharZero α] {n : ℤ} : (n : α) = 1 ↔ n = 1 := by rw [← cast_one, cast_inj]\n#align cast_eq_one cast_eq_one\n\n",
  "cast_div_char_zero":
- "@[simp, norm_cast]\ntheorem cast_div_char_zero {k : Type _} [Field k] [CharZero k] {m n : ℤ} (n_dvd : n ∣ m) : ((m / n : ℤ) : k) = m / n :=\n  by\n  rcases eq_or_ne n 0 with (rfl | hn)\n  · simp [int.div_zero]\n  · exact cast_div n_dvd (cast_ne_zero.mpr hn)\n#align cast_div_char_zero cast_div_char_zero\n\n"}
+ "@[simp, norm_cast]\ntheorem cast_div_char_zero {k : Type _} [DivisionRing k] [CharZero k] {m n : ℤ} (n_dvd : n ∣ m) :\n    ((m / n : ℤ) : k) = m / n := by\n  rcases eq_or_ne n 0 with (rfl | hn)\n  · simp [Int.div_zero]\n  · exact cast_div n_dvd (cast_ne_zero.mpr hn)\n#align cast_div_char_zero cast_div_char_zero\n\n"}

@@ -2,6 +2,14 @@
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n@[simp]\ntheorem zero_lt_top [OrderedAddCommMonoid α] : (0 : WithTop α) < «expr⊤» :=\n  coe_lt_top 0\n#align zero_lt_top zero_lt_top\n\n",
  "zero_lt_coe":
  "@[simp, norm_cast]\ntheorem zero_lt_coe [OrderedAddCommMonoid α] (a : α) : (0 : WithTop α) < a ↔ 0 < a :=\n  coe_lt_coe\n#align zero_lt_coe zero_lt_coe\n\n",
+ "untop_one'":
+ "@[simp, to_additive]\ntheorem untop_one' (d : α) : (1 : WithTop α).untop' d = 1 :=\n  rfl\n#align untop_one' untop_one'\n\n",
+ "untop_one":
+ "@[simp, to_additive]\ntheorem untop_one : (1 : WithTop α).untop coe_ne_top = 1 :=\n  rfl\n#align untop_one untop_one\n\n",
+ "unbot_one'":
+ "@[simp, to_additive]\ntheorem unbot_one' [One α] (d : α) : (1 : WithBot α).unbot' d = 1 :=\n  rfl\n#align unbot_one' unbot_one'\n\n",
+ "unbot_one":
+ "@[simp, to_additive]\ntheorem unbot_one [One α] : (1 : WithBot α).unbot coe_ne_bot = 1 :=\n  rfl\n#align unbot_one unbot_one\n\n",
  "top_ne_one":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n@[simp, to_additive]\ntheorem top_ne_one : «expr⊤» ≠ (1 : WithTop α) :=\n  fun.\n#align top_ne_one top_ne_one\n\n",
  "top_ne_nat":
@@ -11,7 +19,9 @@
  "one_ne_top":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n@[simp, to_additive]\ntheorem one_ne_top : (1 : WithTop α) ≠ «expr⊤» :=\n  fun.\n#align one_ne_top one_ne_top\n\n",
  "one_lt_coe":
- "@[norm_cast, to_additive coe_pos]\ntheorem one_lt_coe [One α] [LT α] {a : α} : 1 < (a : WithBot α) ↔ 1 < a :=\n  coe_lt_coe\n#align one_lt_coe one_lt_coe\n\n",
+ "@[simp, norm_cast, to_additive coe_pos]\ntheorem one_lt_coe [One α] [LT α] {a : α} : 1 < (a : WithBot α) ↔ 1 < a :=\n  coe_lt_coe\n#align one_lt_coe one_lt_coe\n\n",
+ "one_le_coe":
+ "@[simp, norm_cast, to_additive coe_nonneg]\ntheorem one_le_coe [One α] [LE α] {a : α} : 1 ≤ (a : WithBot α) ↔ 1 ≤ a :=\n  coe_le_coe\n#align one_le_coe one_le_coe\n\n",
  "one_eq_coe":
  "@[simp, norm_cast, to_additive]\ntheorem one_eq_coe {a : α} : 1 = (a : WithTop α) ↔ a = 1 :=\n  trans eq_comm coe_eq_one\n#align one_eq_coe one_eq_coe\n\n",
  "nat_ne_top":
@@ -19,23 +29,25 @@
  "nat_ne_bot":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n@[simp]\ntheorem nat_ne_bot [AddMonoidWithOne α] (n : ℕ) : (n : WithBot α) ≠ «expr⊥» :=\n  coe_ne_bot\n#align nat_ne_bot nat_ne_bot\n\n",
  "map_one":
- "#print map_one /-\n@[to_additive]\nprotected theorem map_one {β} [One α] (f : α → β) : (1 : WithBot α).map f = (f 1 : WithBot β) :=\n  rfl\n#align map_one map_one\n-/\n\n",
+ "#print map_one /-\n@[simp, to_additive]\nprotected theorem map_one {β} [One α] (f : α → β) : (1 : WithBot α).map f = (f 1 : WithBot β) :=\n  rfl\n#align map_one map_one\n#align map_zero map_zero\n-/\n\n",
  "map_add":
  "#print map_add /-\n--  There is no `with_bot.map_mul_of_mul_hom`, since `with_bot` does not have a multiplication.\n@[simp]\nprotected theorem map_add {F} [Add β] [AddHomClass F α β] (f : F) (a b : WithBot α) :\n    (a + b).map f = a.map f + b.map f :=\n  WithTop.map_add f a b\n#align map_add map_add\n-/\n\n",
  "le_of_add_le_add_right":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵈ» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n#print le_of_add_le_add_right /-\nprotected theorem le_of_add_le_add_right [contravariant_class α α (swap (· + ·)) (· ≤ ·)] (ha : a ≠ «expr⊥»)\n    (h : b + a ≤ c + a) : b ≤ c :=\n  @WithTop.le_of_add_le_add_right («expr ᵒᵈ» α) _ _ _ _ _ _ ha h\n#align le_of_add_le_add_right le_of_add_le_add_right\n-/\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵈ» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n#print le_of_add_le_add_right /-\nprotected theorem le_of_add_le_add_right [ContravariantClass α α (swap (· + ·)) (· ≤ ·)] (ha : a ≠ «expr⊥»)\n    (h : b + a ≤ c + a) : b ≤ c :=\n  @WithTop.le_of_add_le_add_right («expr ᵒᵈ» α) _ _ _ _ _ _ ha h\n#align le_of_add_le_add_right le_of_add_le_add_right\n-/\n\n",
  "le_of_add_le_add_left":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵈ» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n#print le_of_add_le_add_left /-\nprotected theorem le_of_add_le_add_left [contravariant_class α α (· + ·) (· ≤ ·)] (ha : a ≠ «expr⊥»)\n    (h : a + b ≤ a + c) : b ≤ c :=\n  @WithTop.le_of_add_le_add_left («expr ᵒᵈ» α) _ _ _ _ _ _ ha h\n#align le_of_add_le_add_left le_of_add_le_add_left\n-/\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵈ» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n#print le_of_add_le_add_left /-\nprotected theorem le_of_add_le_add_left [ContravariantClass α α (· + ·) (· ≤ ·)] (ha : a ≠ «expr⊥»)\n    (h : a + b ≤ a + c) : b ≤ c :=\n  @WithTop.le_of_add_le_add_left («expr ᵒᵈ» α) _ _ _ _ _ _ ha h\n#align le_of_add_le_add_left le_of_add_le_add_left\n-/\n\n",
  "coe_one":
  "-- `by norm_cast` proves this lemma, so I did not tag it with `norm_cast`\n@[to_additive]\ntheorem coe_one [One α] : ((1 : α) : WithBot α) = 1 :=\n  rfl\n#align coe_one coe_one\n\n",
  "coe_nat":
  "@[norm_cast]\ntheorem coe_nat [AddMonoidWithOne α] (n : ℕ) : ((n : α) : WithBot α) = n :=\n  rfl\n#align coe_nat coe_nat\n\n",
  "coe_lt_one":
- "@[norm_cast, to_additive coe_lt_zero]\ntheorem coe_lt_one [One α] [LT α] {a : α} : (a : WithBot α) < 1 ↔ a < 1 :=\n  coe_lt_coe\n#align coe_lt_one coe_lt_one\n\n",
+ "@[simp, norm_cast, to_additive coe_lt_zero]\ntheorem coe_lt_one [One α] [LT α] {a : α} : (a : WithBot α) < 1 ↔ a < 1 :=\n  coe_lt_coe\n#align coe_lt_one coe_lt_one\n\n",
+ "coe_le_one":
+ "@[simp, norm_cast, to_additive coe_le_zero]\ntheorem coe_le_one [One α] [LE α] {a : α} : (a : WithBot α) ≤ 1 ↔ a ≤ 1 :=\n  coe_le_coe\n#align coe_le_one coe_le_one\n\n",
  "coe_eq_one":
  "-- `by norm_cast` proves this lemma, so I did not tag it with `norm_cast`\n@[to_additive]\ntheorem coe_eq_one [One α] {a : α} : (a : WithBot α) = 1 ↔ a = 1 :=\n  WithTop.coe_eq_one\n#align coe_eq_one coe_eq_one\n\n",
  "coe_coe_add_hom":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →+ » -/\n@[simp]\ntheorem coe_coe_add_hom [add_monoid α] : «expr⇑ » (addHom : «expr →+ » α (WithTop α)) = coe :=\n  rfl\n#align coe_coe_add_hom coe_coe_add_hom\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →+ » -/\n@[simp]\ntheorem coe_coe_add_hom [AddMonoid α] : «expr⇑ » (addHom : «expr →+ » α (WithTop α)) = coe :=\n  rfl\n#align coe_coe_add_hom coe_coe_add_hom\n\n",
  "coe_bit1":
  "theorem coe_bit1 [One α] {a : α} : ((bit1 a : α) : WithBot α) = bit1 a :=\n  rfl\n#align coe_bit1 coe_bit1\n\n",
  "coe_bit0":
@@ -49,7 +61,7 @@
  "bot_ne_nat":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n@[simp]\ntheorem bot_ne_nat [AddMonoidWithOne α] (n : ℕ) : («expr⊥» : WithBot α) ≠ n :=\n  bot_ne_coe\n#align bot_ne_nat bot_ne_nat\n\n",
  "bot_lt_add":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵈ» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\ntheorem bot_lt_add [partial_order α] {a b : WithBot α} : «expr⊥» < a + b ↔ «expr⊥» < a ∧ «expr⊥» < b :=\n  @WithTop.add_lt_top («expr ᵒᵈ» α) _ _ _ _\n#align bot_lt_add bot_lt_add\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵈ» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\ntheorem bot_lt_add [LT α] {a b : WithBot α} : «expr⊥» < a + b ↔ «expr⊥» < a ∧ «expr⊥» < b :=\n  @WithTop.add_lt_top («expr ᵒᵈ» α) _ _ _ _\n#align bot_lt_add bot_lt_add\n\n",
  "bot_add":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n@[simp]\ntheorem bot_add (a : WithBot α) : «expr⊥» + a = «expr⊥» :=\n  rfl\n#align bot_add bot_add\n\n",
  "add_top":
@@ -59,23 +71,23 @@
  "add_ne_bot":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\ntheorem add_ne_bot : a + b ≠ «expr⊥» ↔ a ≠ «expr⊥» ∧ b ≠ «expr⊥» :=\n  WithTop.add_ne_top\n#align add_ne_bot add_ne_bot\n\n",
  "add_lt_top":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\ntheorem add_lt_top [partial_order α] {a b : WithTop α} : a + b < «expr⊤» ↔ a < «expr⊤» ∧ b < «expr⊤» := by\n  simp_rw [lt_top_iff_ne_top, add_ne_top]\n#align add_lt_top add_lt_top\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\ntheorem add_lt_top [LT α] {a b : WithTop α} : a + b < «expr⊤» ↔ a < «expr⊤» ∧ b < «expr⊤» := by\n  simp_rw [WithTop.lt_top_iff_ne_top, add_ne_top]\n#align add_lt_top add_lt_top\n\n",
  "add_lt_add_right":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵈ» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n#print add_lt_add_right /-\nprotected theorem add_lt_add_right [covariant_class α α (swap (· + ·)) (· < ·)] (ha : a ≠ «expr⊥») (h : b < c) :\n    b + a < c + a :=\n  @WithTop.add_lt_add_right («expr ᵒᵈ» α) _ _ _ _ _ _ ha h\n#align add_lt_add_right add_lt_add_right\n-/\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵈ» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n#print add_lt_add_right /-\nprotected theorem add_lt_add_right [CovariantClass α α (swap (· + ·)) (· < ·)] (ha : a ≠ «expr⊥») (h : b < c) :\n    b + a < c + a :=\n  @WithTop.add_lt_add_right («expr ᵒᵈ» α) _ _ _ _ _ _ ha h\n#align add_lt_add_right add_lt_add_right\n-/\n\n",
  "add_lt_add_of_lt_of_le":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵈ» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n#print add_lt_add_of_lt_of_le /-\nprotected theorem add_lt_add_of_lt_of_le [covariant_class α α (· + ·) (· ≤ ·)]\n    [covariant_class α α (swap (· + ·)) (· < ·)] (hd : d ≠ «expr⊥») (hab : a < b) (hcd : c ≤ d) : a + c < b + d :=\n  @WithTop.add_lt_add_of_lt_of_le («expr ᵒᵈ» α) _ _ _ _ _ _ _ _ hd hab hcd\n#align add_lt_add_of_lt_of_le add_lt_add_of_lt_of_le\n-/\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵈ» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n#print add_lt_add_of_lt_of_le /-\nprotected theorem add_lt_add_of_lt_of_le [CovariantClass α α (· + ·) (· ≤ ·)]\n    [CovariantClass α α (swap (· + ·)) (· < ·)] (hd : d ≠ «expr⊥») (hab : a < b) (hcd : c ≤ d) : a + c < b + d :=\n  @WithTop.add_lt_add_of_lt_of_le («expr ᵒᵈ» α) _ _ _ _ _ _ _ _ hd hab hcd\n#align add_lt_add_of_lt_of_le add_lt_add_of_lt_of_le\n-/\n\n",
  "add_lt_add_of_le_of_lt":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵈ» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n#print add_lt_add_of_le_of_lt /-\nprotected theorem add_lt_add_of_le_of_lt [covariant_class α α (· + ·) (· < ·)]\n    [covariant_class α α (swap (· + ·)) (· ≤ ·)] (hb : b ≠ «expr⊥») (hab : a ≤ b) (hcd : c < d) : a + c < b + d :=\n  @WithTop.add_lt_add_of_le_of_lt («expr ᵒᵈ» α) _ _ _ _ _ _ _ _ hb hab hcd\n#align add_lt_add_of_le_of_lt add_lt_add_of_le_of_lt\n-/\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵈ» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n#print add_lt_add_of_le_of_lt /-\nprotected theorem add_lt_add_of_le_of_lt [CovariantClass α α (· + ·) (· < ·)]\n    [CovariantClass α α (swap (· + ·)) (· ≤ ·)] (hb : b ≠ «expr⊥») (hab : a ≤ b) (hcd : c < d) : a + c < b + d :=\n  @WithTop.add_lt_add_of_le_of_lt («expr ᵒᵈ» α) _ _ _ _ _ _ _ _ hb hab hcd\n#align add_lt_add_of_le_of_lt add_lt_add_of_le_of_lt\n-/\n\n",
  "add_lt_add_left":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵈ» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n#print add_lt_add_left /-\nprotected theorem add_lt_add_left [covariant_class α α (· + ·) (· < ·)] (ha : a ≠ «expr⊥») (h : b < c) :\n    a + b < a + c :=\n  @WithTop.add_lt_add_left («expr ᵒᵈ» α) _ _ _ _ _ _ ha h\n#align add_lt_add_left add_lt_add_left\n-/\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵈ» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n#print add_lt_add_left /-\nprotected theorem add_lt_add_left [CovariantClass α α (· + ·) (· < ·)] (ha : a ≠ «expr⊥») (h : b < c) : a + b < a + c :=\n  @WithTop.add_lt_add_left («expr ᵒᵈ» α) _ _ _ _ _ _ ha h\n#align add_lt_add_left add_lt_add_left\n-/\n\n",
  "add_lt_add_iff_right":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n#print add_lt_add_iff_right /-\nprotected theorem add_lt_add_iff_right [covariant_class α α (swap (· + ·)) (· < ·)]\n    [contravariant_class α α (swap (· + ·)) (· < ·)] (ha : a ≠ «expr⊥») : b + a < c + a ↔ b < c :=\n  ⟨lt_of_add_lt_add_right, WithBot.add_lt_add_right ha⟩\n#align add_lt_add_iff_right add_lt_add_iff_right\n-/\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n#print add_lt_add_iff_right /-\nprotected theorem add_lt_add_iff_right [CovariantClass α α (swap (· + ·)) (· < ·)]\n    [ContravariantClass α α (swap (· + ·)) (· < ·)] (ha : a ≠ «expr⊥») : b + a < c + a ↔ b < c :=\n  ⟨lt_of_add_lt_add_right, WithBot.add_lt_add_right ha⟩\n#align add_lt_add_iff_right add_lt_add_iff_right\n-/\n\n",
  "add_lt_add_iff_left":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n#print add_lt_add_iff_left /-\nprotected theorem add_lt_add_iff_left [covariant_class α α (· + ·) (· < ·)] [contravariant_class α α (· + ·) (· < ·)]\n    (ha : a ≠ «expr⊥») : a + b < a + c ↔ b < c :=\n  ⟨lt_of_add_lt_add_left, WithBot.add_lt_add_left ha⟩\n#align add_lt_add_iff_left add_lt_add_iff_left\n-/\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n#print add_lt_add_iff_left /-\nprotected theorem add_lt_add_iff_left [CovariantClass α α (· + ·) (· < ·)] [ContravariantClass α α (· + ·) (· < ·)]\n    (ha : a ≠ «expr⊥») : a + b < a + c ↔ b < c :=\n  ⟨lt_of_add_lt_add_left, WithBot.add_lt_add_left ha⟩\n#align add_lt_add_iff_left add_lt_add_iff_left\n-/\n\n",
  "add_le_add_iff_right":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n#print add_le_add_iff_right /-\nprotected theorem add_le_add_iff_right [covariant_class α α (swap (· + ·)) (· ≤ ·)]\n    [contravariant_class α α (swap (· + ·)) (· ≤ ·)] (ha : a ≠ «expr⊥») : b + a ≤ c + a ↔ b ≤ c :=\n  ⟨WithBot.le_of_add_le_add_right ha, fun h => add_le_add_right h a⟩\n#align add_le_add_iff_right add_le_add_iff_right\n-/\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n#print add_le_add_iff_right /-\nprotected theorem add_le_add_iff_right [CovariantClass α α (swap (· + ·)) (· ≤ ·)]\n    [ContravariantClass α α (swap (· + ·)) (· ≤ ·)] (ha : a ≠ «expr⊥») : b + a ≤ c + a ↔ b ≤ c :=\n  ⟨WithBot.le_of_add_le_add_right ha, fun h => add_le_add_right h a⟩\n#align add_le_add_iff_right add_le_add_iff_right\n-/\n\n",
  "add_le_add_iff_left":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n#print add_le_add_iff_left /-\nprotected theorem add_le_add_iff_left [covariant_class α α (· + ·) (· ≤ ·)] [contravariant_class α α (· + ·) (· ≤ ·)]\n    (ha : a ≠ «expr⊥») : a + b ≤ a + c ↔ b ≤ c :=\n  ⟨WithBot.le_of_add_le_add_left ha, fun h => add_le_add_left h a⟩\n#align add_le_add_iff_left add_le_add_iff_left\n-/\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n#print add_le_add_iff_left /-\nprotected theorem add_le_add_iff_left [CovariantClass α α (· + ·) (· ≤ ·)] [ContravariantClass α α (· + ·) (· ≤ ·)]\n    (ha : a ≠ «expr⊥») : a + b ≤ a + c ↔ b ≤ c :=\n  ⟨WithBot.le_of_add_le_add_left ha, fun h => add_le_add_left h a⟩\n#align add_le_add_iff_left add_le_add_iff_left\n-/\n\n",
  "add_eq_top":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n@[simp]\ntheorem add_eq_top : a + b = «expr⊤» ↔ a = «expr⊤» ∨ b = «expr⊤» := by\n  cases a <;> cases b <;> simp [none_eq_top, some_eq_coe, ← WithTop.coe_add]\n#align add_eq_top add_eq_top\n\n",
  "add_eq_coe":

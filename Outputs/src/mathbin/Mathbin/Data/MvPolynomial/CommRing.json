@@ -5,32 +5,32 @@
  "vars_neg":
  "@[simp]\ntheorem vars_neg : (-p).vars = p.vars := by simp [vars, degrees_neg]\n#align vars_neg vars_neg\n\n",
  "total_degree_sub":
- "theorem total_degree_sub (a b : mv_polynomial σ R) : (a - b).total_degree ≤ max a.total_degree b.total_degree :=\n  calc\n    (a - b).total_degree = (a + -b).total_degree := by rw [sub_eq_add_neg]\n    _ ≤ max a.total_degree (-b).total_degree := total_degree_add a (-b)\n    _ = max a.total_degree b.total_degree := by rw [total_degree_neg]\n    \n#align total_degree_sub total_degree_sub\n\n",
+ "theorem total_degree_sub (a b : MvPolynomial σ R) : (a - b).total_degree ≤ max a.total_degree b.total_degree :=\n  calc\n    (a - b).total_degree = (a + -b).total_degree := by rw [sub_eq_add_neg]\n    _ ≤ max a.total_degree (-b).total_degree := (totalDegree_add a (-b))\n    _ = max a.total_degree b.total_degree := by rw [total_degree_neg]\n    \n#align total_degree_sub total_degree_sub\n\n",
  "total_degree_neg":
- "@[simp]\ntheorem total_degree_neg (a : mv_polynomial σ R) : (-a).total_degree = a.total_degree := by\n  simp only [total_degree, support_neg]\n#align total_degree_neg total_degree_neg\n\n",
+ "@[simp]\ntheorem total_degree_neg (a : MvPolynomial σ R) : (-a).total_degree = a.total_degree := by\n  simp only [total_degree, support_neg]\n#align total_degree_neg total_degree_neg\n\n",
  "support_sub":
- "theorem support_sub (p q : mv_polynomial σ R) : (p - q).support ⊆ p.support ∪ q.support :=\n  finsupp.support_sub\n#align support_sub support_sub\n\n",
+ "theorem support_sub (p q : MvPolynomial σ R) : (p - q).support ⊆ p.support ∪ q.support :=\n  Finsupp.support_sub\n#align support_sub support_sub\n\n",
  "support_neg":
- "@[simp]\ntheorem support_neg : (-p).support = p.support :=\n  finsupp.support_neg p\n#align support_neg support_neg\n\n",
+ "@[simp]\ntheorem support_neg : (-p).support = p.support :=\n  Finsupp.support_neg p\n#align support_neg support_neg\n\n",
  "hom_C":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →+* » -/\ntheorem hom_C (f : «expr →+* » (mv_polynomial σ ℤ) S) (n : ℤ) : f (C n) = (n : S) :=\n  eq_intCast (f.comp C) n\n#align hom_C hom_C\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →+* » -/\ntheorem hom_C (f : «expr →+* » (MvPolynomial σ ℤ) S) (n : ℤ) : f (C n) = (n : S) :=\n  eq_intCast (f.comp C) n\n#align hom_C hom_C\n\n",
  "eval₂_sub":
- "@[simp]\ntheorem eval₂_sub : (p - q).eval₂ f g = p.eval₂ f g - q.eval₂ f g :=\n  (eval₂_hom f g).map_sub _ _\n#align eval₂_sub eval₂_sub\n\n",
+ "@[simp]\ntheorem eval₂_sub : (p - q).eval₂ f g = p.eval₂ f g - q.eval₂ f g :=\n  (eval₂Hom f g).map_sub _ _\n#align eval₂_sub eval₂_sub\n\n",
  "eval₂_neg":
- "@[simp]\ntheorem eval₂_neg : (-p).eval₂ f g = -p.eval₂ f g :=\n  (eval₂_hom f g).map_neg _\n#align eval₂_neg eval₂_neg\n\n",
+ "@[simp]\ntheorem eval₂_neg : (-p).eval₂ f g = -p.eval₂ f g :=\n  (eval₂Hom f g).map_neg _\n#align eval₂_neg eval₂_neg\n\n",
  "eval₂_hom_X":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →+* » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →+* » -/\n/-- A ring homomorphism f : Z[X_1, X_2, ...] → R\nis determined by the evaluations f(X_1), f(X_2), ... -/\n@[simp]\ntheorem eval₂_hom_X {R : Type u} (c : «expr →+* » ℤ S) (f : «expr →+* » (mv_polynomial R ℤ) S) (x : mv_polynomial R ℤ) :\n    eval₂ c (f ∘ X) x = f x :=\n  mv_polynomial.induction_on x\n    (fun n => by\n      rw [hom_C f, eval₂_C]\n      exact eq_intCast c n)\n    (fun p q hp hq => by\n      rw [eval₂_add, hp, hq]\n      exact (f.map_add _ _).symm)\n    fun p n hp => by\n    rw [eval₂_mul, eval₂_X, hp]\n    exact (f.map_mul _ _).symm\n#align eval₂_hom_X eval₂_hom_X\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →+* » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →+* » -/\n/-- A ring homomorphism f : Z[X_1, X_2, ...] → R\nis determined by the evaluations f(X_1), f(X_2), ... -/\n@[simp]\ntheorem eval₂_hom_X {R : Type u} (c : «expr →+* » ℤ S) (f : «expr →+* » (MvPolynomial R ℤ) S) (x : MvPolynomial R ℤ) :\n    eval₂ c (f ∘ X) x = f x :=\n  MvPolynomial.induction_on x\n    (fun n => by\n      rw [hom_C f, eval₂_C]\n      exact eq_intCast c n)\n    (fun p q hp hq => by\n      rw [eval₂_add, hp, hq]\n      exact (f.map_add _ _).symm)\n    fun p n hp => by\n    rw [eval₂_mul, eval₂_X, hp]\n    exact (f.map_mul _ _).symm\n#align eval₂_hom_X eval₂_hom_X\n\n",
  "degrees_sub":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊔ » -/\ntheorem degrees_sub (p q : mv_polynomial σ R) : (p - q).degrees ≤ «expr ⊔ » p.degrees q.degrees := by\n  simpa only [sub_eq_add_neg] using le_trans (degrees_add p (-q)) (by rw [degrees_neg])\n#align degrees_sub degrees_sub\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊔ » -/\ntheorem degrees_sub (p q : MvPolynomial σ R) : (p - q).degrees ≤ «expr ⊔ » p.degrees q.degrees := by\n  simpa only [sub_eq_add_neg] using le_trans (degrees_add p (-q)) (by rw [degrees_neg])\n#align degrees_sub degrees_sub\n\n",
  "degrees_neg":
- "theorem degrees_neg (p : mv_polynomial σ R) : (-p).degrees = p.degrees := by rw [degrees, support_neg] <;> rfl\n#align degrees_neg degrees_neg\n\n",
+ "theorem degrees_neg (p : MvPolynomial σ R) : (-p).degrees = p.degrees := by rw [degrees, support_neg] <;> rfl\n#align degrees_neg degrees_neg\n\n",
  "degree_of_sub_lt":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →₀ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →₀ » -/\ntheorem degree_of_sub_lt {x : σ} {f g : mv_polynomial σ R} {k : ℕ} (h : 0 < k)\n    (hf : ∀ m : «expr →₀ » σ ℕ, m ∈ f.support → k ≤ m x → coeff m f = coeff m g)\n    (hg : ∀ m : «expr →₀ » σ ℕ, m ∈ g.support → k ≤ m x → coeff m f = coeff m g) : degree_of x (f - g) < k :=\n  by\n  rw [degree_of_lt_iff h]\n  intro m hm\n  by_contra hc\n  simp only [not_lt] at hc\n  have h := support_sub σ f g hm\n  simp only [mem_support_iff, ne.def, coeff_sub, sub_eq_zero] at hm\n  cases' Finset.mem_union.1 h with cf cg\n  · exact hm (hf m cf hc)\n  · exact hm (hg m cg hc)\n#align degree_of_sub_lt degree_of_sub_lt\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →₀ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →₀ » -/\ntheorem degree_of_sub_lt {x : σ} {f g : MvPolynomial σ R} {k : ℕ} (h : 0 < k)\n    (hf : ∀ m : «expr →₀ » σ ℕ, m ∈ f.support → k ≤ m x → coeff m f = coeff m g)\n    (hg : ∀ m : «expr →₀ » σ ℕ, m ∈ g.support → k ≤ m x → coeff m f = coeff m g) : degreeOf x (f - g) < k :=\n  by\n  rw [degree_of_lt_iff h]\n  intro m hm\n  by_contra hc\n  simp only [not_lt] at hc\n  have h := support_sub σ f g hm\n  simp only [mem_support_iff, ne.def, coeff_sub, sub_eq_zero] at hm\n  cases' Finset.mem_union.1 h with cf cg\n  · exact hm (hf m cf hc)\n  · exact hm (hg m cg hc)\n#align degree_of_sub_lt degree_of_sub_lt\n\n",
  "coeff_sub":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →₀ » -/\n@[simp]\ntheorem coeff_sub (m : «expr →₀ » σ ℕ) (p q : mv_polynomial σ R) : coeff m (p - q) = coeff m p - coeff m q :=\n  finsupp.sub_apply _ _ _\n#align coeff_sub coeff_sub\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →₀ » -/\n@[simp]\ntheorem coeff_sub (m : «expr →₀ » σ ℕ) (p q : MvPolynomial σ R) : coeff m (p - q) = coeff m p - coeff m q :=\n  Finsupp.sub_apply _ _ _\n#align coeff_sub coeff_sub\n\n",
  "coeff_neg":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →₀ » -/\n@[simp]\ntheorem coeff_neg (m : «expr →₀ » σ ℕ) (p : mv_polynomial σ R) : coeff m (-p) = -coeff m p :=\n  finsupp.neg_apply _ _\n#align coeff_neg coeff_neg\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →₀ » -/\n@[simp]\ntheorem coeff_neg (m : «expr →₀ » σ ℕ) (p : MvPolynomial σ R) : coeff m (-p) = -coeff m p :=\n  Finsupp.neg_apply _ _\n#align coeff_neg coeff_neg\n\n",
  "C_sub":
- "/-\nCopyright (c) 2017 Johannes Hölzl. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Johannes Hölzl, Johan Commelin, Mario Carneiro\n-/\n@[simp]\ntheorem C_sub : (C (a - a') : mv_polynomial σ R) = C a - C a' :=\n  RingHom.map_sub _ _ _\n#align C_sub C_sub\n\n",
+ "/-\nCopyright (c) 2017 Johannes Hölzl. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Johannes Hölzl, Johan Commelin, Mario Carneiro\n-/\n@[simp]\ntheorem C_sub : (C (a - a') : MvPolynomial σ R) = C a - C a' :=\n  RingHom.map_sub _ _ _\n#align C_sub C_sub\n\n",
  "C_neg":
- "@[simp]\ntheorem C_neg : (C (-a) : mv_polynomial σ R) = -C a :=\n  RingHom.map_neg _ _\n#align C_neg C_neg\n\n"}
+ "@[simp]\ntheorem C_neg : (C (-a) : MvPolynomial σ R) = -C a :=\n  RingHom.map_neg _ _\n#align C_neg C_neg\n\n"}

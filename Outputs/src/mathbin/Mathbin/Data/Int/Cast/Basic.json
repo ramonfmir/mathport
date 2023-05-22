@@ -5,7 +5,7 @@
  "coe_nat_bit0":
  "@[simp, norm_cast]\ntheorem coe_nat_bit0 (n : ℕ) : (↑(bit0 n) : ℤ) = bit0 ↑n :=\n  rfl\n#align coe_nat_bit0 coe_nat_bit0\n\n",
  "cast_zero":
- "@[simp, norm_cast]\ntheorem cast_zero : ((0 : ℤ) : R) = 0 :=\n  (cast_of_nat 0).trans Nat.cast_zero\n#align cast_zero cast_zero\n\n",
+ "@[simp, norm_cast]\ntheorem cast_zero : ((0 : ℤ) : R) = 0 :=\n  (cast_ofNat 0).trans Nat.cast_zero\n#align cast_zero cast_zero\n\n",
  "cast_two":
  "theorem cast_two : ((2 : ℤ) : R) = 2 := by simp\n#align cast_two cast_two\n\n",
  "cast_three":
@@ -27,7 +27,7 @@
  "cast_four":
  "theorem cast_four : ((4 : ℤ) : R) = 4 := by simp\n#align cast_four cast_four\n\n",
  "cast_coe_nat":
- "@[simp, norm_cast]\ntheorem cast_coe_nat (n : ℕ) : ((n : ℤ) : R) = n :=\n  cast_of_nat _\n#align cast_coe_nat cast_coe_nat\n\n",
+ "@[simp, norm_cast]\ntheorem cast_coe_nat (n : ℕ) : ((n : ℤ) : R) = n :=\n  cast_ofNat _\n#align cast_coe_nat cast_coe_nat\n\n",
  "cast_bit1":
  "@[simp, norm_cast]\ntheorem cast_bit1 (n : ℤ) : ((bit1 n : ℤ) : R) = bit1 n := by rw [bit1, cast_add, cast_one, cast_bit0] <;> rfl\n#align cast_bit1 cast_bit1\n\n",
  "cast_bit0":

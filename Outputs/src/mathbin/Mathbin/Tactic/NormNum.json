@@ -1,7 +1,7 @@
 {"zpow_pos":
- "theorem zpow_pos {α} [div_inv_monoid α] (a : α) (b : ℤ) (b' : ℕ) (c : α) (hb : b = b') (h : a ^ b' = c) : a ^ b = c :=\n  by rw [← h, hb, zpow_ofNat]\n#align zpow_pos zpow_pos\n\n",
+ "theorem zpow_pos {α} [DivInvMonoid α] (a : α) (b : ℤ) (b' : ℕ) (c : α) (hb : b = b') (h : a ^ b' = c) : a ^ b = c := by\n  rw [← h, hb, zpow_ofNat]\n#align zpow_pos zpow_pos\n\n",
  "zpow_neg":
- "#print zpow_neg /-\ntheorem zpow_neg {α} [div_inv_monoid α] (a : α) (b : ℤ) (b' : ℕ) (c c' : α) (b0 : 0 < b') (hb : b = b') (h : a ^ b' = c)\n    (hc : c⁻¹ = c') : a ^ (-b) = c' := by rw [← hc, ← h, hb, zpow_neg_coe_of_pos _ b0]\n#align zpow_neg zpow_neg\n-/\n\n",
+ "#print zpow_neg /-\ntheorem zpow_neg {α} [DivInvMonoid α] (a : α) (b : ℤ) (b' : ℕ) (c c' : α) (b0 : 0 < b') (hb : b = b') (h : a ^ b' = c)\n    (hc : c⁻¹ = c') : a ^ (-b) = c' := by rw [← hc, ← h, hb, zpow_neg_coe_of_pos _ b0]\n#align zpow_neg zpow_neg\n-/\n\n",
  "zero_succ":
  "theorem zero_succ {α} [Semiring α] : (0 + 1 : α) = 1 :=\n  zero_add _\n#align zero_succ zero_succ\n\n",
  "zero_lt_one":
@@ -15,9 +15,9 @@
  "subst_into_add":
  "/-\nCopyright (c) 2017 Simon Hudon All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Simon Hudon, Mario Carneiro\n-/\ntheorem subst_into_add {α} [Add α] (l r tl tr t) (prl : (l : α) = tl) (prr : r = tr) (prt : tl + tr = t) : l + r = t :=\n  by rw [prl, prr, prt]\n#align subst_into_add subst_into_add\n\n",
  "sub_pos":
- "#print sub_pos /-\ntheorem sub_pos {α} [add_group α] (a b b' c : α) (hb : -b = b') (h : a + b' = c) : a - b = c := by\n  rwa [← hb, ← sub_eq_add_neg] at h\n#align sub_pos sub_pos\n-/\n\n",
+ "#print sub_pos /-\ntheorem sub_pos {α} [AddGroup α] (a b b' c : α) (hb : -b = b') (h : a + b' = c) : a - b = c := by\n  rwa [← hb, ← sub_eq_add_neg] at h\n#align sub_pos sub_pos\n-/\n\n",
  "sub_neg":
- "#print sub_neg /-\ntheorem sub_neg {α} [add_group α] (a b c : α) (h : a + b = c) : a - -b = c := by rwa [sub_neg_eq_add]\n#align sub_neg sub_neg\n-/\n\n",
+ "#print sub_neg /-\ntheorem sub_neg {α} [AddGroup α] (a b c : α) (h : a + b = c) : a - -b = c := by rwa [sub_neg_eq_add]\n#align sub_neg sub_neg\n-/\n\n",
  "sub_nat_pos":
  "theorem sub_nat_pos (a b c : ℕ) (h : b + c = a) : a - b = c :=\n  h ▸ add_tsub_cancel_left _ _\n#align sub_nat_pos sub_nat_pos\n\n",
  "sub_nat_neg":
@@ -45,15 +45,15 @@
  "rat_cast_bit0":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℚ -/\ntheorem rat_cast_bit0 {α} [DivisionRing α] [CharZero α] (a : exprℚ) (a' : α) (h : ↑a = a') : ↑(bit0 a) = bit0 a' :=\n  h ▸ Rat.cast_bit0 _\n#align rat_cast_bit0 rat_cast_bit0\n\n",
  "pow_bit1":
- "#print pow_bit1 /-\ntheorem pow_bit1 [monoid α] (a c₁ c₂ c : α) (b : ℕ) (h : a ^ b = c₁) (h₂ : c₁ * c₁ = c₂) (h₃ : c₂ * a = c) :\n    a ^ bit1 b = c := by rw [← h₃, ← h₂] <;> simp [pow_bit1, h]\n#align pow_bit1 pow_bit1\n-/\n\n",
+ "#print pow_bit1 /-\ntheorem pow_bit1 [Monoid α] (a c₁ c₂ c : α) (b : ℕ) (h : a ^ b = c₁) (h₂ : c₁ * c₁ = c₂) (h₃ : c₂ * a = c) :\n    a ^ bit1 b = c := by rw [← h₃, ← h₂] <;> simp [pow_bit1, h]\n#align pow_bit1 pow_bit1\n-/\n\n",
  "pow_bit0":
- "#print pow_bit0 /-\ntheorem pow_bit0 [monoid α] (a c' c : α) (b : ℕ) (h : a ^ b = c') (h₂ : c' * c' = c) : a ^ bit0 b = c :=\n  h₂ ▸ by simp [pow_bit0, h]\n#align pow_bit0 pow_bit0\n-/\n\n",
+ "#print pow_bit0 /-\ntheorem pow_bit0 [Monoid α] (a c' c : α) (b : ℕ) (h : a ^ b = c') (h₂ : c' * c' = c) : a ^ bit0 b = c :=\n  h₂ ▸ by simp [pow_bit0, h]\n#align pow_bit0 pow_bit0\n-/\n\n",
  "one_succ":
  "theorem one_succ {α} [Semiring α] : (1 + 1 : α) = 2 :=\n  rfl\n#align one_succ one_succ\n\n",
  "one_add":
  "theorem one_add {α} [Semiring α] (a b : α) (h : a + 1 = b) : 1 + a = b := by rwa [add_comm]\n#align one_add one_add\n\n",
  "not_refl_false_intro":
- "theorem not_refl_false_intro {α} (a : α) : (a ≠ a) = false :=\n  eq_false <| not_not_intro rfl\n#align not_refl_false_intro not_refl_false_intro\n\n",
+ "theorem not_refl_false_intro {α} (a : α) : (a ≠ a) = False :=\n  eq_false <| not_not_intro rfl\n#align not_refl_false_intro not_refl_false_intro\n\n",
  "nonneg_pos":
  "theorem nonneg_pos {α} [OrderedCancelAddCommMonoid α] (a : α) : 0 < a → 0 ≤ a :=\n  le_of_lt\n#align nonneg_pos nonneg_pos\n\n",
  "neg_succ_of_nat":
@@ -61,7 +61,7 @@
  "ne_zero_of_pos":
  "theorem ne_zero_of_pos {α} [OrderedAddCommGroup α] (a : α) : 0 < a → a ≠ 0 :=\n  ne_of_gt\n#align ne_zero_of_pos ne_zero_of_pos\n\n",
  "ne_zero_neg":
- "theorem ne_zero_neg {α} [add_group α] (a : α) : a ≠ 0 → -a ≠ 0 :=\n  mt neg_eq_zero.1\n#align ne_zero_neg ne_zero_neg\n\n",
+ "theorem ne_zero_neg {α} [AddGroup α] (a : α) : a ≠ 0 → -a ≠ 0 :=\n  mt neg_eq_zero.1\n#align ne_zero_neg ne_zero_neg\n\n",
  "nat_succ_eq":
  "theorem nat_succ_eq (a b c : ℕ) (h₁ : a = b) (h₂ : b + 1 = c) : nat.succ a = c := by rwa [h₁]\n#align nat_succ_eq nat_succ_eq\n\n",
  "nat_mod":
@@ -137,7 +137,7 @@
  "int_to_nat_neg":
  "theorem int_to_nat_neg (a : ℤ) (h : 0 < a) : (-a).to_nat = 0 := by simp only [Int.toNat_of_nonpos, h.le, neg_nonpos]\n#align int_to_nat_neg int_to_nat_neg\n\n",
  "int_to_nat_cast":
- "theorem int_to_nat_cast (a : ℕ) (b : ℤ)\n    (h :\n      (haveI := @nat.cast_coe ℤ\n          a :\n          ℤ) =\n        b) :\n    ↑a = b :=\n  eq.trans (by simp) h\n#align int_to_nat_cast int_to_nat_cast\n\n",
+ "theorem int_to_nat_cast (a : ℕ) (b : ℤ)\n    (h :\n      (haveI := @nat.cast_coe ℤ\n          a :\n          ℤ) =\n        b) :\n    ↑a = b :=\n  Eq.trans (by simp) h\n#align int_to_nat_cast int_to_nat_cast\n\n",
  "int_mod_neg":
  "theorem int_mod_neg (a b c : ℤ) (h : a % b = c) : a % -b = c :=\n  (Int.mod_neg _ _).trans h\n#align int_mod_neg int_mod_neg\n\n",
  "int_mod":
@@ -189,15 +189,15 @@
  "bit0_mul":
  "#print bit0_mul /-\ntheorem bit0_mul {α} [Semiring α] (a b c : α) (h : a * b = c) : bit0 a * b = bit0 c :=\n  h ▸ by simp [bit0, add_mul]\n#align bit0_mul bit0_mul\n-/\n\n",
  "add_pos_neg_pos":
- "theorem add_pos_neg_pos {α} [add_group α] (a b c : α) (h : c + b = a) : a + -b = c :=\n  h ▸ by simp\n#align add_pos_neg_pos add_pos_neg_pos\n\n",
+ "theorem add_pos_neg_pos {α} [AddGroup α] (a b c : α) (h : c + b = a) : a + -b = c :=\n  h ▸ by simp\n#align add_pos_neg_pos add_pos_neg_pos\n\n",
  "add_pos_neg_neg":
- "theorem add_pos_neg_neg {α} [add_group α] (a b c : α) (h : c + a = b) : a + -b = -c :=\n  h ▸ by simp\n#align add_pos_neg_neg add_pos_neg_neg\n\n",
+ "theorem add_pos_neg_neg {α} [AddGroup α] (a b c : α) (h : c + a = b) : a + -b = -c :=\n  h ▸ by simp\n#align add_pos_neg_neg add_pos_neg_neg\n\n",
  "add_neg_pos_pos":
- "theorem add_neg_pos_pos {α} [add_group α] (a b c : α) (h : a + c = b) : -a + b = c :=\n  h ▸ by simp\n#align add_neg_pos_pos add_neg_pos_pos\n\n",
+ "theorem add_neg_pos_pos {α} [AddGroup α] (a b c : α) (h : a + c = b) : -a + b = c :=\n  h ▸ by simp\n#align add_neg_pos_pos add_neg_pos_pos\n\n",
  "add_neg_pos_neg":
- "theorem add_neg_pos_neg {α} [add_group α] (a b c : α) (h : b + c = a) : -a + b = -c :=\n  h ▸ by simp\n#align add_neg_pos_neg add_neg_pos_neg\n\n",
+ "theorem add_neg_pos_neg {α} [AddGroup α] (a b c : α) (h : b + c = a) : -a + b = -c :=\n  h ▸ by simp\n#align add_neg_pos_neg add_neg_pos_neg\n\n",
  "add_neg_neg":
- "theorem add_neg_neg {α} [add_group α] (a b c : α) (h : b + a = c) : -a + -b = -c :=\n  h ▸ by simp\n#align add_neg_neg add_neg_neg\n\n",
+ "theorem add_neg_neg {α} [AddGroup α] (a b c : α) (h : b + a = c) : -a + -b = -c :=\n  h ▸ by simp\n#align add_neg_neg add_neg_neg\n\n",
  "add_bit1_bit1":
  "theorem add_bit1_bit1 {α} [Semiring α] (a b c : α) (h : a + b + 1 = c) : bit1 a + bit1 b = bit0 c :=\n  h ▸ by simp [bit0, bit1, add_left_comm, add_comm, add_assoc]\n#align add_bit1_bit1 add_bit1_bit1\n\n",
  "add_bit1_bit0":

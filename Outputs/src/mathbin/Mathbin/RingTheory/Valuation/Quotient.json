@@ -1,0 +1,12 @@
+{"supp_quot_supp":
+ "theorem supp_quot_supp : supp (v.on_quot le_rfl) = 0 :=\n  v.supp_quot_supp\n#align supp_quot_supp supp_quot_supp\n\n",
+ "supp_quot":
+ "/-- The quotient valuation on R/J has support supp(v)/J if J ⊆ supp v. -/\ntheorem supp_quot {J : Ideal R} (hJ : J ≤ supp v) : supp (v.on_quot hJ) = (supp v).map (Ideal.Quotient.mk J) :=\n  v.supp_quot hJ\n#align supp_quot supp_quot\n\n",
+ "self_le_supp_comap":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⧸ » -/\ntheorem self_le_supp_comap (J : Ideal R) (v : AddValuation («expr ⧸ » R J) Γ₀) :\n    J ≤ (v.comap (Ideal.Quotient.mk J)).supp :=\n  v.self_le_supp_comap J\n#align self_le_supp_comap self_le_supp_comap\n\n",
+ "on_quot_comap_eq":
+ "@[simp]\ntheorem on_quot_comap_eq {J : Ideal R} (hJ : J ≤ supp v) : (v.on_quot hJ).comap (Ideal.Quotient.mk J) = v :=\n  v.on_quot_comap_eq hJ\n#align on_quot_comap_eq on_quot_comap_eq\n\n",
+ "comap_supp":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →+* » -/\ntheorem comap_supp {S : Type _} [CommRing S] (f : «expr →+* » S R) : supp (v.comap f) = Ideal.comap f v.supp :=\n  v.comap_supp f\n#align comap_supp comap_supp\n\n",
+ "comap_on_quot_eq":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⧸ » -/\n@[simp]\ntheorem comap_on_quot_eq (J : Ideal R) (v : AddValuation («expr ⧸ » R J) Γ₀) :\n    (v.comap (Ideal.Quotient.mk J)).on_quot (v.self_le_supp_comap J) = v :=\n  v.comap_on_quot_eq J\n#align comap_on_quot_eq comap_on_quot_eq\n\n"}

@@ -1,4 +1,0 @@
-{"is_local_ring_hom_of_iso":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≅ » -/\ntheorem is_local_ring_hom_of_iso {R S : CommRing} (f : «expr ≅ » R S) : is_local_ring_hom f.hom :=\n  {\n    map_nonunit := fun a ha => by\n      convert f.inv.is_unit_map ha\n      rw [category_theory.iso.hom_inv_id_apply] }\n#align is_local_ring_hom_of_iso is_local_ring_hom_of_iso\n\n",
- "epi":
- "/-\nCopyright (c) 2021 Andrew Yang. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Andrew Yang\n-/\ntheorem is_localization.epi {R : Type _} [CommRing R] (M : Submonoid R) (S : Type _) [CommRing S] [algebra R S]\n    [is_localization M S] : Epi (CommRing.of_hom <| algebra_map R S) :=\n  ⟨fun T f₁ f₂ => @is_localization.ring_hom_ext R _ M S _ _ T _ _ _ _⟩\n#align is_localization.epi is_localization.epi\n\n"}

@@ -1,59 +1,59 @@
 {"univ_unique":
- "theorem univ_unique [unique α] : @Set.univ α = {default} :=\n  Set.ext fun x => iff_of_true trivial <| subsingleton.elim x default\n#align univ_unique univ_unique\n\n",
+ "theorem univ_unique [Unique α] : @Set.univ α = {default} :=\n  Set.ext fun x => iff_of_true trivial <| subsingleton.elim x default\n#align univ_unique univ_unique\n\n",
  "univ_union":
- "@[simp]\ntheorem univ_union {s : set α} : univ ∪ s = univ :=\n  top_sup_eq\n#align univ_union univ_union\n\n",
+ "@[simp]\ntheorem univ_union {s : Set α} : univ ∪ s = univ :=\n  top_sup_eq\n#align univ_union univ_union\n\n",
  "univ_subset_iff":
- "theorem univ_subset_iff {s : set α} : univ ⊆ s ↔ s = univ :=\n  @top_le_iff _ _ _ s\n#align univ_subset_iff univ_subset_iff\n\n",
+ "theorem univ_subset_iff {s : Set α} : univ ⊆ s ↔ s = univ :=\n  @top_le_iff _ _ _ s\n#align univ_subset_iff univ_subset_iff\n\n",
  "univ_nonempty":
- "@[simp]\ntheorem univ_nonempty : ∀ [h : nonempty α], (univ : set α).nonempty\n  | ⟨x⟩ => ⟨x, trivial⟩\n#align univ_nonempty univ_nonempty\n\n",
+ "@[simp]\ntheorem univ_nonempty : ∀ [h : Nonempty α], (univ : Set α).nonempty\n  | ⟨x⟩ => ⟨x, trivial⟩\n#align univ_nonempty univ_nonempty\n\n",
  "univ_inter":
- "@[simp]\ntheorem univ_inter (a : set α) : univ ∩ a = a :=\n  top_inf_eq\n#align univ_inter univ_inter\n\n",
+ "@[simp]\ntheorem univ_inter (a : Set α) : univ ∩ a = a :=\n  top_inf_eq\n#align univ_inter univ_inter\n\n",
  "univ_eq_true_false":
- "theorem univ_eq_true_false : univ = ({true, false} : set Prop) :=\n  eq.symm <| eq_univ_of_forall <| classical.cases (by simp) (by simp)\n#align univ_eq_true_false univ_eq_true_false\n\n",
+ "theorem univ_eq_true_false : univ = ({True, False} : Set Prop) :=\n  Eq.symm <| eq_univ_of_forall <| Classical.cases (by simp) (by simp)\n#align univ_eq_true_false univ_eq_true_false\n\n",
  "univ_eq_empty_iff":
- "@[simp]\ntheorem univ_eq_empty_iff : (univ : set α) = ∅ ↔ is_empty α :=\n  eq_empty_iff_forall_not_mem.trans ⟨fun H => ⟨fun x => H x trivial⟩, fun H x _ => @is_empty.false α H x⟩\n#align univ_eq_empty_iff univ_eq_empty_iff\n\n",
+ "@[simp]\ntheorem univ_eq_empty_iff : (univ : Set α) = ∅ ↔ IsEmpty α :=\n  eq_empty_iff_forall_not_mem.trans ⟨fun H => ⟨fun x => H x trivial⟩, fun H x _ => @is_empty.false α H x⟩\n#align univ_eq_empty_iff univ_eq_empty_iff\n\n",
  "univ_disjoint":
  "@[simp]\ntheorem univ_disjoint : Disjoint univ s ↔ s = ∅ :=\n  top_disjoint\n#align univ_disjoint univ_disjoint\n\n",
  "union_univ":
- "@[simp]\ntheorem union_univ {s : set α} : s ∪ univ = univ :=\n  sup_top_eq\n#align union_univ union_univ\n\n",
+ "@[simp]\ntheorem union_univ {s : Set α} : s ∪ univ = univ :=\n  sup_top_eq\n#align union_univ union_univ\n\n",
  "union_union_union_comm":
- "theorem union_union_union_comm (s t u v : set α) : s ∪ t ∪ (u ∪ v) = s ∪ u ∪ (t ∪ v) :=\n  sup_sup_sup_comm _ _ _ _\n#align union_union_union_comm union_union_union_comm\n\n",
+ "theorem union_union_union_comm (s t u v : Set α) : s ∪ t ∪ (u ∪ v) = s ∪ u ∪ (t ∪ v) :=\n  sup_sup_sup_comm _ _ _ _\n#align union_union_union_comm union_union_union_comm\n\n",
  "union_union_distrib_right":
- "theorem union_union_distrib_right (s t u : set α) : s ∪ t ∪ u = s ∪ u ∪ (t ∪ u) :=\n  sup_sup_distrib_right _ _ _\n#align union_union_distrib_right union_union_distrib_right\n\n",
+ "theorem union_union_distrib_right (s t u : Set α) : s ∪ t ∪ u = s ∪ u ∪ (t ∪ u) :=\n  sup_sup_distrib_right _ _ _\n#align union_union_distrib_right union_union_distrib_right\n\n",
  "union_union_distrib_left":
- "theorem union_union_distrib_left (s t u : set α) : s ∪ (t ∪ u) = s ∪ t ∪ (s ∪ u) :=\n  sup_sup_distrib_left _ _ _\n#align union_union_distrib_left union_union_distrib_left\n\n",
+ "theorem union_union_distrib_left (s t u : Set α) : s ∪ (t ∪ u) = s ∪ t ∪ (s ∪ u) :=\n  sup_sup_distrib_left _ _ _\n#align union_union_distrib_left union_union_distrib_left\n\n",
  "union_subset_union_right":
- "theorem union_subset_union_right (s) {t₁ t₂ : set α} (h : t₁ ⊆ t₂) : s ∪ t₁ ⊆ s ∪ t₂ :=\n  union_subset_union Subset.rfl h\n#align union_subset_union_right union_subset_union_right\n\n",
+ "theorem union_subset_union_right (s) {t₁ t₂ : Set α} (h : t₁ ⊆ t₂) : s ∪ t₁ ⊆ s ∪ t₂ :=\n  union_subset_union Subset.rfl h\n#align union_subset_union_right union_subset_union_right\n\n",
  "union_subset_union_left":
- "theorem union_subset_union_left {s₁ s₂ : set α} (t) (h : s₁ ⊆ s₂) : s₁ ∪ t ⊆ s₂ ∪ t :=\n  union_subset_union h Subset.rfl\n#align union_subset_union_left union_subset_union_left\n\n",
+ "theorem union_subset_union_left {s₁ s₂ : Set α} (t) (h : s₁ ⊆ s₂) : s₁ ∪ t ⊆ s₂ ∪ t :=\n  union_subset_union h Subset.rfl\n#align union_subset_union_left union_subset_union_left\n\n",
  "union_subset_union":
- "theorem union_subset_union {s₁ s₂ t₁ t₂ : set α} (h₁ : s₁ ⊆ s₂) (h₂ : t₁ ⊆ t₂) : s₁ ∪ t₁ ⊆ s₂ ∪ t₂ := fun x =>\n  Or.imp (@h₁ _) (@h₂ _)\n#align union_subset_union union_subset_union\n\n",
+ "theorem union_subset_union {s₁ s₂ t₁ t₂ : Set α} (h₁ : s₁ ⊆ s₂) (h₂ : t₁ ⊆ t₂) : s₁ ∪ t₁ ⊆ s₂ ∪ t₂ := fun x =>\n  Or.imp (@h₁ _) (@h₂ _)\n#align union_subset_union union_subset_union\n\n",
  "union_subset_iff":
- "@[simp]\ntheorem union_subset_iff {s t u : set α} : s ∪ t ⊆ u ↔ s ⊆ u ∧ t ⊆ u :=\n  (forall_congr' fun x => or_imp).trans forall_and\n#align union_subset_iff union_subset_iff\n\n",
+ "@[simp]\ntheorem union_subset_iff {s t u : Set α} : s ∪ t ⊆ u ↔ s ⊆ u ∧ t ⊆ u :=\n  (forall_congr' fun x => or_imp).trans forall_and\n#align union_subset_iff union_subset_iff\n\n",
  "union_subset":
- "theorem union_subset {s t r : set α} (sr : s ⊆ r) (tr : t ⊆ r) : s ∪ t ⊆ r := fun x => or.rec (@sr _) (@tr _)\n#align union_subset union_subset\n\n",
+ "theorem union_subset {s t r : Set α} (sr : s ⊆ r) (tr : t ⊆ r) : s ∪ t ⊆ r := fun x => or.rec (@sr _) (@tr _)\n#align union_subset union_subset\n\n",
  "union_singleton":
  "@[simp]\ntheorem union_singleton : s ∪ {a} = insert a s :=\n  union_comm _ _\n#align union_singleton union_singleton\n\n",
  "union_self":
- "@[simp]\ntheorem union_self (a : set α) : a ∪ a = a :=\n  ext fun x => or_self_iff _\n#align union_self union_self\n\n",
+ "@[simp]\ntheorem union_self (a : Set α) : a ∪ a = a :=\n  ext fun x => or_self_iff _\n#align union_self union_self\n\n",
  "union_right_comm":
- "theorem union_right_comm (s₁ s₂ s₃ : set α) : s₁ ∪ s₂ ∪ s₃ = s₁ ∪ s₃ ∪ s₂ :=\n  ext fun x => or_right_comm\n#align union_right_comm union_right_comm\n\n",
+ "theorem union_right_comm (s₁ s₂ s₃ : Set α) : s₁ ∪ s₂ ∪ s₃ = s₁ ∪ s₃ ∪ s₂ :=\n  ext fun x => or_right_comm\n#align union_right_comm union_right_comm\n\n",
  "union_right":
  "theorem union_right (ht : Disjoint s t) (hu : Disjoint s u) : Disjoint s (t ∪ u) :=\n  ht.sup_right hu\n#align union_right union_right\n\n",
  "union_nonempty":
  "@[simp]\ntheorem union_nonempty : (s ∪ t).nonempty ↔ s.nonempty ∨ t.nonempty :=\n  exists_or\n#align union_nonempty union_nonempty\n\n",
  "union_left_comm":
- "theorem union_left_comm (s₁ s₂ s₃ : set α) : s₁ ∪ (s₂ ∪ s₃) = s₂ ∪ (s₁ ∪ s₃) :=\n  ext fun x => or_left_comm\n#align union_left_comm union_left_comm\n\n",
+ "theorem union_left_comm (s₁ s₂ s₃ : Set α) : s₁ ∪ (s₂ ∪ s₃) = s₂ ∪ (s₁ ∪ s₃) :=\n  ext fun x => or_left_comm\n#align union_left_comm union_left_comm\n\n",
  "union_left":
  "theorem union_left (hs : Disjoint s u) (ht : Disjoint t u) : Disjoint (s ∪ t) u :=\n  hs.sup_left ht\n#align union_left union_left\n\n",
  "union_inter_distrib_right":
- "theorem union_inter_distrib_right {s t u : set α} : (s ∪ t) ∩ u = s ∩ u ∪ t ∩ u :=\n  inf_sup_right\n#align union_inter_distrib_right union_inter_distrib_right\n\n",
+ "theorem union_inter_distrib_right {s t u : Set α} : (s ∪ t) ∩ u = s ∩ u ∪ t ∩ u :=\n  inf_sup_right\n#align union_inter_distrib_right union_inter_distrib_right\n\n",
  "union_inter_distrib_left":
- "theorem union_inter_distrib_left {s t u : set α} : s ∪ t ∩ u = (s ∪ t) ∩ (s ∪ u) :=\n  sup_inf_left\n#align union_inter_distrib_left union_inter_distrib_left\n\n",
+ "theorem union_inter_distrib_left {s t u : Set α} : s ∪ t ∩ u = (s ∪ t) ∩ (s ∪ u) :=\n  sup_inf_left\n#align union_inter_distrib_left union_inter_distrib_left\n\n",
  "union_inter_cancel_right":
- "theorem union_inter_cancel_right {s t : set α} : (s ∪ t) ∩ t = t :=\n  inter_eq_self_of_subset_right <| subset_union_right _ _\n#align union_inter_cancel_right union_inter_cancel_right\n\n",
+ "theorem union_inter_cancel_right {s t : Set α} : (s ∪ t) ∩ t = t :=\n  inter_eq_self_of_subset_right <| subset_union_right _ _\n#align union_inter_cancel_right union_inter_cancel_right\n\n",
  "union_inter_cancel_left":
- "theorem union_inter_cancel_left {s t : set α} : (s ∪ t) ∩ s = s :=\n  inter_eq_self_of_subset_right <| subset_union_left _ _\n#align union_inter_cancel_left union_inter_cancel_left\n\n",
+ "theorem union_inter_cancel_left {s t : Set α} : (s ∪ t) ∩ s = s :=\n  inter_eq_self_of_subset_right <| subset_union_left _ _\n#align union_inter_cancel_left union_inter_cancel_left\n\n",
  "union_insert":
  "@[simp]\ntheorem union_insert : s ∪ insert a t = insert a (s ∪ t) :=\n  ext fun x => or_left_comm\n#align union_insert union_insert\n\n",
  "union_eq_union_iff_right":
@@ -61,185 +61,187 @@
  "union_eq_union_iff_left":
  "theorem union_eq_union_iff_left : s ∪ t = s ∪ u ↔ t ⊆ s ∪ u ∧ u ⊆ s ∪ t :=\n  sup_eq_sup_iff_left\n#align union_eq_union_iff_left union_eq_union_iff_left\n\n",
  "union_eq_self_of_subset_right":
- "theorem union_eq_self_of_subset_right {s t : set α} (h : t ⊆ s) : s ∪ t = s :=\n  union_eq_left_iff_subset.mpr h\n#align union_eq_self_of_subset_right union_eq_self_of_subset_right\n\n",
+ "theorem union_eq_self_of_subset_right {s t : Set α} (h : t ⊆ s) : s ∪ t = s :=\n  union_eq_left_iff_subset.mpr h\n#align union_eq_self_of_subset_right union_eq_self_of_subset_right\n\n",
  "union_eq_self_of_subset_left":
- "theorem union_eq_self_of_subset_left {s t : set α} (h : s ⊆ t) : s ∪ t = t :=\n  union_eq_right_iff_subset.mpr h\n#align union_eq_self_of_subset_left union_eq_self_of_subset_left\n\n",
+ "theorem union_eq_self_of_subset_left {s t : Set α} (h : s ⊆ t) : s ∪ t = t :=\n  union_eq_right_iff_subset.mpr h\n#align union_eq_self_of_subset_left union_eq_self_of_subset_left\n\n",
  "union_eq_right_iff_subset":
- "@[simp]\ntheorem union_eq_right_iff_subset {s t : set α} : s ∪ t = t ↔ s ⊆ t :=\n  sup_eq_right\n#align union_eq_right_iff_subset union_eq_right_iff_subset\n\n",
+ "@[simp]\ntheorem union_eq_right_iff_subset {s t : Set α} : s ∪ t = t ↔ s ⊆ t :=\n  sup_eq_right\n#align union_eq_right_iff_subset union_eq_right_iff_subset\n\n",
  "union_eq_left_iff_subset":
- "@[simp]\ntheorem union_eq_left_iff_subset {s t : set α} : s ∪ t = s ↔ t ⊆ s :=\n  sup_eq_left\n#align union_eq_left_iff_subset union_eq_left_iff_subset\n\n",
+ "@[simp]\ntheorem union_eq_left_iff_subset {s t : Set α} : s ∪ t = s ↔ t ⊆ s :=\n  sup_eq_left\n#align union_eq_left_iff_subset union_eq_left_iff_subset\n\n",
  "union_eq_diff_union_diff_union_inter":
- "theorem union_eq_diff_union_diff_union_inter (s t : set α) : s ∪ t = s \\ t ∪ t \\ s ∪ s ∩ t :=\n  sup_eq_sdiff_sup_sdiff_sup_inf\n#align union_eq_diff_union_diff_union_inter union_eq_diff_union_diff_union_inter\n\n",
+ "theorem union_eq_diff_union_diff_union_inter (s t : Set α) : s ∪ t = s \\ t ∪ t \\ s ∪ s ∩ t :=\n  sup_eq_sdiff_sup_sdiff_sup_inf\n#align union_eq_diff_union_diff_union_inter union_eq_diff_union_diff_union_inter\n\n",
  "union_eq_compl_compl_inter_compl":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\ntheorem union_eq_compl_compl_inter_compl (s t : set α) : s ∪ t = «expr ᶜ» («expr ᶜ» s ∩ «expr ᶜ» t) :=\n  ext fun x => or_iff_not_and_not\n#align union_eq_compl_compl_inter_compl union_eq_compl_compl_inter_compl\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\ntheorem union_eq_compl_compl_inter_compl (s t : Set α) : s ∪ t = «expr ᶜ» («expr ᶜ» s ∩ «expr ᶜ» t) :=\n  ext fun x => or_iff_not_and_not\n#align union_eq_compl_compl_inter_compl union_eq_compl_compl_inter_compl\n\n",
  "union_empty_iff":
- "@[simp]\ntheorem union_empty_iff {s t : set α} : s ∪ t = ∅ ↔ s = ∅ ∧ t = ∅ := by\n  simp only [← subset_empty_iff] <;> exact union_subset_iff\n#align union_empty_iff union_empty_iff\n\n",
+ "@[simp]\ntheorem union_empty_iff {s t : Set α} : s ∪ t = ∅ ↔ s = ∅ ∧ t = ∅ := by\n  simp only [← subset_empty_iff] <;> exact union_subset_iff\n#align union_empty_iff union_empty_iff\n\n",
  "union_empty":
- "@[simp]\ntheorem union_empty (a : set α) : a ∪ ∅ = a :=\n  ext fun x => or_false_iff _\n#align union_empty union_empty\n\n",
+ "@[simp]\ntheorem union_empty (a : Set α) : a ∪ ∅ = a :=\n  ext fun x => or_false_iff _\n#align union_empty union_empty\n\n",
  "union_distrib_right":
- "theorem union_distrib_right (s t u : set α) : s ∩ t ∪ u = (s ∪ u) ∩ (t ∪ u) :=\n  sup_inf_right\n#align union_distrib_right union_distrib_right\n\n",
+ "theorem union_distrib_right (s t u : Set α) : s ∩ t ∪ u = (s ∪ u) ∩ (t ∪ u) :=\n  sup_inf_right\n#align union_distrib_right union_distrib_right\n\n",
  "union_distrib_left":
- "theorem union_distrib_left (s t u : set α) : s ∪ t ∩ u = (s ∪ t) ∩ (s ∪ u) :=\n  sup_inf_left\n#align union_distrib_left union_distrib_left\n\n",
+ "theorem union_distrib_left (s t u : Set α) : s ∪ t ∩ u = (s ∪ t) ∩ (s ∪ u) :=\n  sup_inf_left\n#align union_distrib_left union_distrib_left\n\n",
  "union_diff_self":
- "@[simp]\ntheorem union_diff_self {s t : set α} : s ∪ t \\ s = s ∪ t :=\n  sup_sdiff_self _ _\n#align union_diff_self union_diff_self\n\n",
+ "@[simp]\ntheorem union_diff_self {s t : Set α} : s ∪ t \\ s = s ∪ t :=\n  sup_sdiff_self _ _\n#align union_diff_self union_diff_self\n\n",
  "union_diff_right":
- "@[simp]\ntheorem union_diff_right {s t : set α} : (s ∪ t) \\ t = s \\ t :=\n  sup_sdiff_right_self\n#align union_diff_right union_diff_right\n\n",
+ "@[simp]\ntheorem union_diff_right {s t : Set α} : (s ∪ t) \\ t = s \\ t :=\n  sup_sdiff_right_self\n#align union_diff_right union_diff_right\n\n",
  "union_diff_left":
- "@[simp]\ntheorem union_diff_left {s t : set α} : (s ∪ t) \\ s = t \\ s :=\n  sup_sdiff_left_self\n#align union_diff_left union_diff_left\n\n",
+ "@[simp]\ntheorem union_diff_left {s t : Set α} : (s ∪ t) \\ s = t \\ s :=\n  sup_sdiff_left_self\n#align union_diff_left union_diff_left\n\n",
  "union_diff_distrib":
- "theorem union_diff_distrib {s t u : set α} : (s ∪ t) \\ u = s \\ u ∪ t \\ u :=\n  sup_sdiff\n#align union_diff_distrib union_diff_distrib\n\n",
+ "theorem union_diff_distrib {s t u : Set α} : (s ∪ t) \\ u = s \\ u ∪ t \\ u :=\n  sup_sdiff\n#align union_diff_distrib union_diff_distrib\n\n",
  "union_diff_cancel_right":
- "theorem union_diff_cancel_right {s t : set α} (h : s ∩ t ⊆ ∅) : (s ∪ t) \\ t = s :=\n  Disjoint.sup_sdiff_cancel_right <| disjoint_iff_inf_le.2 h\n#align union_diff_cancel_right union_diff_cancel_right\n\n",
+ "theorem union_diff_cancel_right {s t : Set α} (h : s ∩ t ⊆ ∅) : (s ∪ t) \\ t = s :=\n  Disjoint.sup_sdiff_cancel_right <| disjoint_iff_inf_le.2 h\n#align union_diff_cancel_right union_diff_cancel_right\n\n",
  "union_diff_cancel_left":
- "theorem union_diff_cancel_left {s t : set α} (h : s ∩ t ⊆ ∅) : (s ∪ t) \\ s = t :=\n  Disjoint.sup_sdiff_cancel_left <| disjoint_iff_inf_le.2 h\n#align union_diff_cancel_left union_diff_cancel_left\n\n",
+ "theorem union_diff_cancel_left {s t : Set α} (h : s ∩ t ⊆ ∅) : (s ∪ t) \\ s = t :=\n  Disjoint.sup_sdiff_cancel_left <| disjoint_iff_inf_le.2 h\n#align union_diff_cancel_left union_diff_cancel_left\n\n",
  "union_diff_cancel'":
- "theorem union_diff_cancel' {s t u : set α} (h₁ : s ⊆ t) (h₂ : t ⊆ u) : t ∪ u \\ s = u :=\n  sup_sdiff_cancel' h₁ h₂\n#align union_diff_cancel' union_diff_cancel'\n\n",
+ "theorem union_diff_cancel' {s t u : Set α} (h₁ : s ⊆ t) (h₂ : t ⊆ u) : t ∪ u \\ s = u :=\n  sup_sdiff_cancel' h₁ h₂\n#align union_diff_cancel' union_diff_cancel'\n\n",
  "union_diff_cancel":
- "theorem union_diff_cancel {s t : set α} (h : s ⊆ t) : s ∪ t \\ s = t :=\n  sup_sdiff_cancel_right h\n#align union_diff_cancel union_diff_cancel\n\n",
+ "theorem union_diff_cancel {s t : Set α} (h : s ⊆ t) : s ∪ t \\ s = t :=\n  sup_sdiff_cancel_right h\n#align union_diff_cancel union_diff_cancel\n\n",
  "union_def":
- "theorem union_def {s₁ s₂ : set α} : s₁ ∪ s₂ = { a | a ∈ s₁ ∨ a ∈ s₂ } :=\n  rfl\n#align union_def union_def\n\n",
+ "theorem union_def {s₁ s₂ : Set α} : s₁ ∪ s₂ = { a | a ∈ s₁ ∨ a ∈ s₂ } :=\n  rfl\n#align union_def union_def\n\n",
  "union_congr_right":
  "theorem union_congr_right (hs : s ⊆ t ∪ u) (ht : t ⊆ s ∪ u) : s ∪ u = t ∪ u :=\n  sup_congr_right hs ht\n#align union_congr_right union_congr_right\n\n",
  "union_congr_left":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊔ » -/\ntheorem union_congr_left (ht : t ⊆ s ∪ u) (hu : u ⊆ s ∪ t) : s ∪ t = «expr ⊔ » s u :=\n  sup_congr_left ht hu\n#align union_congr_left union_congr_left\n\n",
  "union_compl_self":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\n@[simp]\ntheorem union_compl_self (s : set α) : s ∪ «expr ᶜ» s = univ :=\n  eq_univ_iff_forall.2 fun x => em _\n#align union_compl_self union_compl_self\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\n@[simp]\ntheorem union_compl_self (s : Set α) : s ∪ «expr ᶜ» s = univ :=\n  eq_univ_iff_forall.2 fun x => em _\n#align union_compl_self union_compl_self\n\n",
  "union_comm":
- "theorem union_comm (a b : set α) : a ∪ b = b ∪ a :=\n  ext fun x => or_comm\n#align union_comm union_comm\n\n",
+ "theorem union_comm (a b : Set α) : a ∪ b = b ∪ a :=\n  ext fun x => or_comm\n#align union_comm union_comm\n\n",
  "union_assoc":
- "theorem union_assoc (a b c : set α) : a ∪ b ∪ c = a ∪ (b ∪ c) :=\n  ext fun x => or_assoc\n#align union_assoc union_assoc\n\n",
+ "theorem union_assoc (a b c : Set α) : a ∪ b ∪ c = a ∪ (b ∪ c) :=\n  ext fun x => or_assoc\n#align union_assoc union_assoc\n\n",
  "union":
- "#print AntitoneOn.union /-\ntheorem AntitoneOn.union [preorder β] {f g : β → set α} {s : set β} (hf : antitone_on f s) (hg : antitone_on g s) :\n    antitone_on (fun x => f x ∪ g x) s :=\n  hf.sup hg\n#align antitone_on.union AntitoneOn.union\n-/\n\n",
+ "#print AntitoneOn.union /-\ntheorem AntitoneOn.union [preorder β] {f g : β → Set α} {s : Set β} (hf : AntitoneOn f s) (hg : AntitoneOn g s) :\n    AntitoneOn (fun x => f x ∪ g x) s :=\n  hf.sup hg\n#align antitone_on.union AntitoneOn.union\n-/\n\n",
  "trans":
- "@[trans]\ntheorem subset.trans {a b c : set α} (ab : a ⊆ b) (bc : b ⊆ c) : a ⊆ c := fun x h => bc <| ab h\n#align subset.trans subset.trans\n\n",
+ "@[trans]\ntheorem subset.trans {a b c : Set α} (ab : a ⊆ b) (bc : b ⊆ c) : a ⊆ c := fun x h => bc <| ab h\n#align subset.trans subset.trans\n\n",
  "top_eq_univ":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n/-\nCopyright (c) 2014 Jeremy Avigad. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Jeremy Avigad, Leonardo de Moura\n-/\n@[simp]\ntheorem top_eq_univ : («expr⊤» : set α) = univ :=\n  rfl\n#align top_eq_univ top_eq_univ\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n/-\nCopyright (c) 2014 Jeremy Avigad. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Jeremy Avigad, Leonardo de Moura\n-/\n@[simp]\ntheorem top_eq_univ : («expr⊤» : Set α) = univ :=\n  rfl\n#align top_eq_univ top_eq_univ\n\n",
  "to_type":
- "theorem nonempty.to_type : s.nonempty → nonempty α := fun ⟨x, hx⟩ => ⟨x⟩\n#align nonempty.to_type nonempty.to_type\n\n",
+ "theorem nonempty.to_type : s.nonempty → Nonempty α := fun ⟨x, hx⟩ => ⟨x⟩\n#align nonempty.to_type nonempty.to_type\n\n",
  "to_subtype":
- "theorem nonempty.to_subtype : s.nonempty → nonempty s :=\n  nonempty_subtype.2\n#align nonempty.to_subtype nonempty.to_subtype\n\n",
+ "theorem nonempty.to_subtype : s.nonempty → Nonempty s :=\n  nonempty_subtype.2\n#align nonempty.to_subtype nonempty.to_subtype\n\n",
  "symm_diff_subset_union":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ∆ » -/\ntheorem symm_diff_subset_union : «expr ∆ » s t ⊆ s ∪ t :=\n  @symmDiff_le_sup (set α) _ _ _\n#align symm_diff_subset_union symm_diff_subset_union\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ∆ » -/\ntheorem symm_diff_subset_union : «expr ∆ » s t ⊆ s ∪ t :=\n  @symmDiff_le_sup (Set α) _ _ _\n#align symm_diff_subset_union symm_diff_subset_union\n\n",
  "symm_diff_nonempty":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ∆ » -/\n@[simp]\ntheorem symm_diff_nonempty : («expr ∆ » s t).nonempty ↔ s ≠ t :=\n  nonempty_iff_ne_empty.trans symmDiff_eq_empty.not\n#align symm_diff_nonempty symm_diff_nonempty\n\n",
  "symm_diff_eq_empty":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ∆ » -/\n@[simp]\ntheorem symm_diff_eq_empty : «expr ∆ » s t = ∅ ↔ s = t :=\n  symmDiff_eq_bot\n#align symm_diff_eq_empty symm_diff_eq_empty\n\n",
  "symmDiff_def":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ∆ » -/\n#print symmDiff_def /-\nprotected theorem symmDiff_def (s t : set α) : «expr ∆ » s t = s \\ t ∪ t \\ s :=\n  rfl\n#align symm_diff_def symmDiff_def\n-/\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ∆ » -/\n#print symmDiff_def /-\nprotected theorem symmDiff_def (s t : Set α) : «expr ∆ » s t = s \\ t ∪ t \\ s :=\n  rfl\n#align symm_diff_def symmDiff_def\n-/\n\n",
  "sup_eq_union":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:219:4: warning: unsupported binary notation `«expr ⊔ » -/\n@[simp]\ntheorem sup_eq_union : ((«expr ⊔ » · ·) : set α → set α → set α) = (· ∪ ·) :=\n  rfl\n#align sup_eq_union sup_eq_union\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:219:4: warning: unsupported binary notation `«expr ⊔ » -/\n@[simp]\ntheorem sup_eq_union : ((«expr ⊔ » · ·) : Set α → Set α → Set α) = (· ∪ ·) :=\n  rfl\n#align sup_eq_union sup_eq_union\n\n",
  "subsingleton_univ_iff":
- "@[simp]\ntheorem subsingleton_univ_iff : (univ : set α).subsingleton ↔ subsingleton α :=\n  ⟨subsingleton_of_univ_subsingleton, fun h => @subsingleton_univ _ h⟩\n#align subsingleton_univ_iff subsingleton_univ_iff\n\n",
+ "@[simp]\ntheorem subsingleton_univ_iff : (univ : Set α).subsingleton ↔ subsingleton α :=\n  ⟨subsingleton_of_univ_subsingleton, fun h => @subsingleton_univ _ h⟩\n#align subsingleton_univ_iff subsingleton_univ_iff\n\n",
  "subsingleton_univ":
- "theorem subsingleton_univ [subsingleton α] : (univ : set α).subsingleton := fun x hx y hy => subsingleton.elim x y\n#align subsingleton_univ subsingleton_univ\n\n",
+ "theorem subsingleton_univ [subsingleton α] : (univ : Set α).subsingleton := fun x hx y hy => subsingleton.elim x y\n#align subsingleton_univ subsingleton_univ\n\n",
  "subsingleton_singleton":
- "@[simp]\ntheorem subsingleton_singleton {a} : ({a} : set α).subsingleton := fun x hx y hy =>\n  (eq_of_mem_singleton hx).symm ▸ (eq_of_mem_singleton hy).symm ▸ rfl\n#align subsingleton_singleton subsingleton_singleton\n\n",
+ "@[simp]\ntheorem subsingleton_singleton {a} : ({a} : Set α).subsingleton := fun x hx y hy =>\n  (eq_of_mem_singleton hx).symm ▸ (eq_of_mem_singleton hy).symm ▸ rfl\n#align subsingleton_singleton subsingleton_singleton\n\n",
  "subsingleton_or_nontrivial":
- "#print subsingleton_or_nontrivial /-\nprotected theorem subsingleton_or_nontrivial (s : set α) : s.subsingleton ∨ s.nontrivial := by\n  simp [or_iff_not_imp_right]\n#align subsingleton_or_nontrivial subsingleton_or_nontrivial\n-/\n\n",
+ "#print subsingleton_or_nontrivial /-\nprotected theorem subsingleton_or_nontrivial (s : Set α) : s.subsingleton ∨ s.nontrivial := by\n  simp [or_iff_not_imp_right]\n#align subsingleton_or_nontrivial subsingleton_or_nontrivial\n-/\n\n",
  "subsingleton_of_univ_subsingleton":
- "theorem subsingleton_of_univ_subsingleton (h : (univ : set α).subsingleton) : subsingleton α :=\n  ⟨fun a b => h (mem_univ a) (mem_univ b)⟩\n#align subsingleton_of_univ_subsingleton subsingleton_of_univ_subsingleton\n\n",
+ "theorem subsingleton_of_univ_subsingleton (h : (univ : Set α).subsingleton) : subsingleton α :=\n  ⟨fun a b => h (mem_univ a) (mem_univ b)⟩\n#align subsingleton_of_univ_subsingleton subsingleton_of_univ_subsingleton\n\n",
  "subsingleton_of_subsingleton":
- "theorem subsingleton_of_subsingleton [subsingleton α] {s : set α} : Set.Subsingleton s :=\n  subsingleton_univ.anti (subset_univ s)\n#align subsingleton_of_subsingleton subsingleton_of_subsingleton\n\n",
+ "theorem subsingleton_of_subsingleton [subsingleton α] {s : Set α} : Set.Subsingleton s :=\n  subsingleton_univ.anti (subset_univ s)\n#align subsingleton_of_subsingleton subsingleton_of_subsingleton\n\n",
  "subsingleton_of_subset_singleton":
  "theorem subsingleton_of_subset_singleton (h : s ⊆ {a}) : s.subsingleton :=\n  subsingleton_singleton.anti h\n#align subsingleton_of_subset_singleton subsingleton_of_subset_singleton\n\n",
  "subsingleton_of_forall_eq":
  "#print subsingleton_of_forall_eq /-\ntheorem subsingleton_of_forall_eq (a : α) (h : ∀ b ∈ s, b = a) : s.subsingleton := fun b hb c hc =>\n  (h _ hb).trans (h _ hc).symm\n#align subsingleton_of_forall_eq subsingleton_of_forall_eq\n-/\n\n",
  "subsingleton_is_top":
- "theorem subsingleton_is_top (α : Type _) [partial_order α] : Set.Subsingleton { x : α | is_top x } := fun x hx y hy =>\n  hx.is_max.eq_of_le (hy x)\n#align subsingleton_is_top subsingleton_is_top\n\n",
+ "theorem subsingleton_is_top (α : Type _) [partial_order α] : Set.Subsingleton { x : α | IsTop x } := fun x hx y hy =>\n  hx.is_max.eq_of_le (hy x)\n#align subsingleton_is_top subsingleton_is_top\n\n",
  "subsingleton_is_bot":
- "theorem subsingleton_is_bot (α : Type _) [partial_order α] : Set.Subsingleton { x : α | is_bot x } := fun x hx y hy =>\n  hx.is_min.eq_of_ge (hy x)\n#align subsingleton_is_bot subsingleton_is_bot\n\n",
+ "theorem subsingleton_is_bot (α : Type _) [partial_order α] : Set.Subsingleton { x : α | IsBot x } := fun x hx y hy =>\n  hx.is_min.eq_of_ge (hy x)\n#align subsingleton_is_bot subsingleton_is_bot\n\n",
  "subsingleton_iff_singleton":
  "theorem subsingleton_iff_singleton {x} (hx : x ∈ s) : s.subsingleton ↔ s = {x} :=\n  ⟨fun h => h.eq_singleton_of_mem hx, fun h => h.symm ▸ subsingleton_singleton⟩\n#align subsingleton_iff_singleton subsingleton_iff_singleton\n\n",
  "subsingleton_empty":
- "@[simp]\ntheorem subsingleton_empty : (∅ : set α).subsingleton := fun x => false.elim\n#align subsingleton_empty subsingleton_empty\n\n",
+ "@[simp]\ntheorem subsingleton_empty : (∅ : Set α).subsingleton := fun x => false.elim\n#align subsingleton_empty subsingleton_empty\n\n",
  "subsingleton_coe":
- "/-- `s`, coerced to a type, is a subsingleton type if and only if `s` is a subsingleton set. -/\n@[simp, norm_cast]\ntheorem subsingleton_coe (s : set α) : subsingleton s ↔ s.subsingleton :=\n  by\n  constructor\n  · refine' fun h => fun a ha b hb => _\n    exact SetCoe.ext_iff.2 (@subsingleton.elim s h ⟨a, ha⟩ ⟨b, hb⟩)\n  · exact fun h => subsingleton.intro fun a b => SetCoe.ext (h a.property b.property)\n#align subsingleton_coe subsingleton_coe\n\n",
+ "/-- `s`, coerced to a type, is a subsingleton type if and only if `s` is a subsingleton set. -/\n@[simp, norm_cast]\ntheorem subsingleton_coe (s : Set α) : subsingleton s ↔ s.subsingleton :=\n  by\n  constructor\n  · refine' fun h => fun a ha b hb => _\n    exact SetCoe.ext_iff.2 (@subsingleton.elim s h ⟨a, ha⟩ ⟨b, hb⟩)\n  · exact fun h => subsingleton.intro fun a b => SetCoe.ext (h a.property b.property)\n#align subsingleton_coe subsingleton_coe\n\n",
  "subset_univ":
- "@[simp]\ntheorem subset_univ (s : set α) : s ⊆ univ := fun x H => trivial\n#align subset_univ subset_univ\n\n",
+ "@[simp]\ntheorem subset_univ (s : Set α) : s ⊆ univ := fun x H => trivial\n#align subset_univ subset_univ\n\n",
  "subset_union_right":
- "@[simp]\ntheorem subset_union_right (s t : set α) : t ⊆ s ∪ t := fun x => or.inr\n#align subset_union_right subset_union_right\n\n",
+ "@[simp]\ntheorem subset_union_right (s t : Set α) : t ⊆ s ∪ t := fun x => or.inr\n#align subset_union_right subset_union_right\n\n",
  "subset_union_of_subset_right":
- "theorem subset_union_of_subset_right {s u : set α} (h : s ⊆ u) (t : set α) : s ⊆ t ∪ u :=\n  Subset.trans h (subset_union_right t u)\n#align subset_union_of_subset_right subset_union_of_subset_right\n\n",
+ "theorem subset_union_of_subset_right {s u : Set α} (h : s ⊆ u) (t : Set α) : s ⊆ t ∪ u :=\n  Subset.trans h (subset_union_right t u)\n#align subset_union_of_subset_right subset_union_of_subset_right\n\n",
  "subset_union_of_subset_left":
- "theorem subset_union_of_subset_left {s t : set α} (h : s ⊆ t) (u : set α) : s ⊆ t ∪ u :=\n  Subset.trans h (subset_union_left t u)\n#align subset_union_of_subset_left subset_union_of_subset_left\n\n",
+ "theorem subset_union_of_subset_left {s t : Set α} (h : s ⊆ t) (u : Set α) : s ⊆ t ∪ u :=\n  Subset.trans h (subset_union_left t u)\n#align subset_union_of_subset_left subset_union_of_subset_left\n\n",
  "subset_union_left":
- "@[simp]\ntheorem subset_union_left (s t : set α) : s ⊆ s ∪ t := fun x => or.inl\n#align subset_union_left subset_union_left\n\n",
+ "@[simp]\ntheorem subset_union_left (s t : Set α) : s ⊆ s ∪ t := fun x => or.inl\n#align subset_union_left subset_union_left\n\n",
  "subset_union_compl_iff_inter_subset":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\ntheorem subset_union_compl_iff_inter_subset {s t u : set α} : s ⊆ t ∪ «expr ᶜ» u ↔ s ∩ u ⊆ t :=\n  (@isCompl_compl _ u _).le_sup_right_iff_inf_left_le\n#align subset_union_compl_iff_inter_subset subset_union_compl_iff_inter_subset\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\ntheorem subset_union_compl_iff_inter_subset {s t u : Set α} : s ⊆ t ∪ «expr ᶜ» u ↔ s ∩ u ⊆ t :=\n  (@isCompl_compl _ u _).le_sup_right_iff_inf_left_le\n#align subset_union_compl_iff_inter_subset subset_union_compl_iff_inter_subset\n\n",
  "subset_symm_diff_union_symm_diff_right":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ∆ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ∆ » -/\ntheorem subset_symm_diff_union_symm_diff_right (h : Disjoint t u) : s ⊆ «expr ∆ » s t ∪ «expr ∆ » s u :=\n  h.le_symm_diff_sup_symm_diff_right\n#align subset_symm_diff_union_symm_diff_right subset_symm_diff_union_symm_diff_right\n\n",
  "subset_symm_diff_union_symm_diff_left":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ∆ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ∆ » -/\ntheorem subset_symm_diff_union_symm_diff_left (h : Disjoint s t) : u ⊆ «expr ∆ » s u ∪ «expr ∆ » t u :=\n  h.le_symm_diff_sup_symm_diff_left\n#align subset_symm_diff_union_symm_diff_left subset_symm_diff_union_symm_diff_left\n\n",
  "subset_singleton_iff_eq":
- "theorem subset_singleton_iff_eq {s : set α} {x : α} : s ⊆ {x} ↔ s = ∅ ∨ s = {x} :=\n  by\n  obtain rfl | hs := s.eq_empty_or_nonempty\n  use ⟨fun _ => or.inl rfl, fun _ => empty_subset _⟩\n  simp [eq_singleton_iff_nonempty_unique_mem, hs, hs.ne_empty]\n#align subset_singleton_iff_eq subset_singleton_iff_eq\n\n",
+ "theorem subset_singleton_iff_eq {s : Set α} {x : α} : s ⊆ {x} ↔ s = ∅ ∨ s = {x} :=\n  by\n  obtain rfl | hs := s.eq_empty_or_nonempty\n  use ⟨fun _ => or.inl rfl, fun _ => empty_subset _⟩\n  simp [eq_singleton_iff_nonempty_unique_mem, hs, hs.ne_empty]\n#align subset_singleton_iff_eq subset_singleton_iff_eq\n\n",
  "subset_singleton_iff":
  "theorem nonempty.subset_singleton_iff (h : s.nonempty) : s ⊆ {a} ↔ s = {a} :=\n  subset_singleton_iff_eq.trans <| or_iff_right h.ne_empty\n#align nonempty.subset_singleton_iff nonempty.subset_singleton_iff\n\n",
  "subset_right_of_subset_union":
  "theorem subset_right_of_subset_union (h : s ⊆ t ∪ u) (hab : Disjoint s t) : s ⊆ u :=\n  hab.left_le_of_le_sup_left h\n#align subset_right_of_subset_union subset_right_of_subset_union\n\n",
  "subset_of_mem_powerset":
- "theorem subset_of_mem_powerset {x s : set α} (h : x ∈ 𝒫 s) : x ⊆ s :=\n  h\n#align subset_of_mem_powerset subset_of_mem_powerset\n\n",
+ "theorem subset_of_mem_powerset {x s : Set α} (h : x ∈ 𝒫 s) : x ⊆ s :=\n  h\n#align subset_of_mem_powerset subset_of_mem_powerset\n\n",
  "subset_left_of_subset_union":
  "theorem subset_left_of_subset_union (h : s ⊆ t ∪ u) (hac : Disjoint s u) : s ⊆ t :=\n  hac.left_le_of_le_sup_right h\n#align subset_left_of_subset_union subset_left_of_subset_union\n\n",
  "subset_ite":
- "theorem subset_ite {t s s' u : set α} : u ⊆ t.ite s s' ↔ u ∩ t ⊆ s ∧ u \\ t ⊆ s' :=\n  by\n  simp only [subset_def, ← forall_and]\n  refine' forall_congr' fun x => _\n  by_cases hx : x ∈ t <;> simp [*, Set.ite]\n#align subset_ite subset_ite\n\n",
+ "theorem subset_ite {t s s' u : Set α} : u ⊆ t.ite s s' ↔ u ∩ t ⊆ s ∧ u \\ t ⊆ s' :=\n  by\n  simp only [subset_def, ← forall_and]\n  refine' forall_congr' fun x => _\n  by_cases hx : x ∈ t <;> simp [*, Set.ite]\n#align subset_ite subset_ite\n\n",
  "subset_inter_iff":
- "@[simp]\ntheorem subset_inter_iff {s t r : set α} : r ⊆ s ∩ t ↔ r ⊆ s ∧ r ⊆ t :=\n  (forall_congr' fun x => imp_and).trans forall_and\n#align subset_inter_iff subset_inter_iff\n\n",
+ "@[simp]\ntheorem subset_inter_iff {s t r : Set α} : r ⊆ s ∩ t ↔ r ⊆ s ∧ r ⊆ t :=\n  (forall_congr' fun x => imp_and).trans forall_and\n#align subset_inter_iff subset_inter_iff\n\n",
  "subset_inter":
- "theorem subset_inter {s t r : set α} (rs : r ⊆ s) (rt : r ⊆ t) : r ⊆ s ∩ t := fun x h => ⟨rs h, rt h⟩\n#align subset_inter subset_inter\n\n",
+ "theorem subset_inter {s t r : Set α} (rs : r ⊆ s) (rt : r ⊆ t) : r ⊆ s ∩ t := fun x h => ⟨rs h, rt h⟩\n#align subset_inter subset_inter\n\n",
+ "subset_insert_iff_of_not_mem":
+ "theorem subset_insert_iff_of_not_mem (ha : a ∉ s) : s ⊆ insert a t ↔ s ⊆ t :=\n  forall₂_congr fun b hb => or_iff_right <| ne_of_mem_of_not_mem hb ha\n#align subset_insert_iff_of_not_mem subset_insert_iff_of_not_mem\n\n",
  "subset_insert_diff_singleton":
- "theorem subset_insert_diff_singleton (x : α) (s : set α) : s ⊆ insert x (s \\ {x}) := by rw [← diff_singleton_subset_iff]\n#align subset_insert_diff_singleton subset_insert_diff_singleton\n\n",
+ "theorem subset_insert_diff_singleton (x : α) (s : Set α) : s ⊆ insert x (s \\ {x}) := by rw [← diff_singleton_subset_iff]\n#align subset_insert_diff_singleton subset_insert_diff_singleton\n\n",
  "subset_insert":
- "@[simp]\ntheorem subset_insert (x : α) (s : set α) : s ⊆ insert x s := fun y => or.inr\n#align subset_insert subset_insert\n\n",
+ "@[simp]\ntheorem subset_insert (x : α) (s : Set α) : s ⊆ insert x s := fun y => or.inr\n#align subset_insert subset_insert\n\n",
  "subset_eq_empty":
- "theorem subset_eq_empty {s t : set α} (h : t ⊆ s) (e : s = ∅) : t = ∅ :=\n  subset_empty_iff.1 <| e ▸ h\n#align subset_eq_empty subset_eq_empty\n\n",
+ "theorem subset_eq_empty {s t : Set α} (h : t ⊆ s) (e : s = ∅) : t = ∅ :=\n  subset_empty_iff.1 <| e ▸ h\n#align subset_eq_empty subset_eq_empty\n\n",
  "subset_empty_iff":
- "theorem subset_empty_iff {s : set α} : s ⊆ ∅ ↔ s = ∅ :=\n  (Subset.antisymm_iff.trans <| and_iff_left (empty_subset _)).symm\n#align subset_empty_iff subset_empty_iff\n\n",
+ "theorem subset_empty_iff {s : Set α} : s ⊆ ∅ ↔ s = ∅ :=\n  (Subset.antisymm_iff.trans <| and_iff_left (empty_subset _)).symm\n#align subset_empty_iff subset_empty_iff\n\n",
  "subset_diff_union":
- "theorem subset_diff_union (s t : set α) : s ⊆ s \\ t ∪ t :=\n  show s ≤ s \\ t ∪ t from le_sdiff_sup\n#align subset_diff_union subset_diff_union\n\n",
+ "theorem subset_diff_union (s t : Set α) : s ⊆ s \\ t ∪ t :=\n  show s ≤ s \\ t ∪ t from le_sdiff_sup\n#align subset_diff_union subset_diff_union\n\n",
  "subset_diff_singleton":
- "theorem subset_diff_singleton {x : α} {s t : set α} (h : s ⊆ t) (hx : x ∉ s) : s ⊆ t \\ {x} :=\n  subset_inter h <| subset_compl_comm.1 <| singleton_subset_iff.2 hx\n#align subset_diff_singleton subset_diff_singleton\n\n",
+ "theorem subset_diff_singleton {x : α} {s t : Set α} (h : s ⊆ t) (hx : x ∉ s) : s ⊆ t \\ {x} :=\n  subset_inter h <| subset_compl_comm.1 <| singleton_subset_iff.2 hx\n#align subset_diff_singleton subset_diff_singleton\n\n",
  "subset_diff":
  "theorem subset_diff : s ⊆ t \\ u ↔ s ⊆ t ∧ Disjoint s u :=\n  le_iff_subset.symm.trans le_sdiff\n#align subset_diff subset_diff\n\n",
  "subset_def":
  "-- TODO(Jeremy): write a tactic to unfold specific instances of generic notation?\ntheorem subset_def : (s ⊆ t) = ∀ x, x ∈ s → x ∈ t :=\n  rfl\n#align subset_def subset_def\n\n",
  "subset_compl_singleton_iff":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\n@[simp]\ntheorem subset_compl_singleton_iff {a : α} {s : set α} : s ⊆ «expr ᶜ» {a} ↔ a ∉ s :=\n  subset_compl_comm.trans singleton_subset_iff\n#align subset_compl_singleton_iff subset_compl_singleton_iff\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\n@[simp]\ntheorem subset_compl_singleton_iff {a : α} {s : Set α} : s ⊆ «expr ᶜ» {a} ↔ a ∉ s :=\n  subset_compl_comm.trans singleton_subset_iff\n#align subset_compl_singleton_iff subset_compl_singleton_iff\n\n",
  "subset_compl_iff_disjoint_right":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\ntheorem subset_compl_iff_disjoint_right : s ⊆ «expr ᶜ» t ↔ Disjoint s t :=\n  @le_compl_iff_disjoint_right (set α) _ _ _\n#align subset_compl_iff_disjoint_right subset_compl_iff_disjoint_right\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\ntheorem subset_compl_iff_disjoint_right : s ⊆ «expr ᶜ» t ↔ Disjoint s t :=\n  @le_compl_iff_disjoint_right (Set α) _ _ _\n#align subset_compl_iff_disjoint_right subset_compl_iff_disjoint_right\n\n",
  "subset_compl_iff_disjoint_left":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\ntheorem subset_compl_iff_disjoint_left : s ⊆ «expr ᶜ» t ↔ Disjoint t s :=\n  @le_compl_iff_disjoint_left (set α) _ _ _\n#align subset_compl_iff_disjoint_left subset_compl_iff_disjoint_left\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\ntheorem subset_compl_iff_disjoint_left : s ⊆ «expr ᶜ» t ↔ Disjoint t s :=\n  @le_compl_iff_disjoint_left (Set α) _ _ _\n#align subset_compl_iff_disjoint_left subset_compl_iff_disjoint_left\n\n",
  "subset_compl_comm":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\ntheorem subset_compl_comm : s ⊆ «expr ᶜ» t ↔ t ⊆ «expr ᶜ» s :=\n  @le_compl_iff_le_compl _ _ _ t\n#align subset_compl_comm subset_compl_comm\n\n",
  "subset":
- "#print Eq.subset /-\n/-- Duplicate of `eq.subset'`, which currently has elaboration problems. -/\ntheorem Eq.subset {α} {s t : set α} : s = t → s ⊆ t :=\n  Eq.subset'\n#align eq.subset Eq.subset\n-/\n\n",
+ "#print Eq.subset /-\n/-- Duplicate of `eq.subset'`, which currently has elaboration problems. -/\ntheorem Eq.subset {α} {s t : Set α} : s = t → s ⊆ t :=\n  Eq.subset'\n#align eq.subset Eq.subset\n-/\n\n",
  "strict_mono_on_singleton":
- "@[simp]\ntheorem strict_mono_on_singleton : strict_mono_on f {a} :=\n  subsingleton_singleton.strict_mono_on f\n#align strict_mono_on_singleton strict_mono_on_singleton\n\n",
+ "@[simp]\ntheorem strict_mono_on_singleton : StrictMonoOn f {a} :=\n  subsingleton_singleton.strict_mono_on f\n#align strict_mono_on_singleton strict_mono_on_singleton\n\n",
  "strict_mono_on_iff_strict_mono":
- "theorem strict_mono_on_iff_strict_mono : strict_mono_on f s ↔ strict_mono fun a : s => f a := by\n  simp [strict_mono, strict_mono_on]\n#align strict_mono_on_iff_strict_mono strict_mono_on_iff_strict_mono\n\n",
+ "theorem strict_mono_on_iff_strict_mono : StrictMonoOn f s ↔ StrictMono fun a : s => f a := by\n  simp [StrictMono, StrictMonoOn]\n#align strict_mono_on_iff_strict_mono strict_mono_on_iff_strict_mono\n\n",
  "strict_mono_on":
- "protected theorem subsingleton.strict_mono_on (h : s.subsingleton) : strict_mono_on f s := fun a ha b hb hlt =>\n  (hlt.ne (h ha hb)).elim\n#align subsingleton.strict_mono_on subsingleton.strict_mono_on\n\n",
+ "protected theorem subsingleton.strict_mono_on (h : s.subsingleton) : StrictMonoOn f s := fun a ha b hb hlt =>\n  (hlt.ne (h ha hb)).elim\n#align subsingleton.strict_mono_on subsingleton.strict_mono_on\n\n",
  "strict_anti_on_singleton":
- "@[simp]\ntheorem strict_anti_on_singleton : strict_anti_on f {a} :=\n  subsingleton_singleton.strict_anti_on f\n#align strict_anti_on_singleton strict_anti_on_singleton\n\n",
+ "@[simp]\ntheorem strict_anti_on_singleton : StrictAntiOn f {a} :=\n  subsingleton_singleton.strict_anti_on f\n#align strict_anti_on_singleton strict_anti_on_singleton\n\n",
  "strict_anti_on_iff_strict_anti":
- "theorem strict_anti_on_iff_strict_anti : strict_anti_on f s ↔ strict_anti fun a : s => f a := by\n  simp [strict_anti, strict_anti_on]\n#align strict_anti_on_iff_strict_anti strict_anti_on_iff_strict_anti\n\n",
+ "theorem strict_anti_on_iff_strict_anti : StrictAntiOn f s ↔ StrictAnti fun a : s => f a := by\n  simp [StrictAnti, StrictAntiOn]\n#align strict_anti_on_iff_strict_anti strict_anti_on_iff_strict_anti\n\n",
  "strict_anti_on":
- "protected theorem subsingleton.strict_anti_on (h : s.subsingleton) : strict_anti_on f s := fun a ha b hb hlt =>\n  (hlt.ne (h ha hb)).elim\n#align subsingleton.strict_anti_on subsingleton.strict_anti_on\n\n",
+ "protected theorem subsingleton.strict_anti_on (h : s.subsingleton) : StrictAntiOn f s := fun a ha b hb hlt =>\n  (hlt.ne (h ha hb)).elim\n#align subsingleton.strict_anti_on subsingleton.strict_anti_on\n\n",
  "ssubset_univ_iff":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊂ » -/\ntheorem ssubset_univ_iff : «expr ⊂ » s univ ↔ s ≠ univ :=\n  lt_top_iff_ne_top\n#align ssubset_univ_iff ssubset_univ_iff\n\n",
  "ssubset_singleton_iff":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊂ » -/\ntheorem ssubset_singleton_iff {s : set α} {x : α} : «expr ⊂ » s {x} ↔ s = ∅ :=\n  by\n  rw [ssubset_iff_subset_ne, subset_singleton_iff_eq, or_and_right, and_not_self_iff, or_false_iff,\n    and_iff_left_iff_imp]\n  exact fun h => ne_of_eq_of_ne h (singleton_ne_empty _).symm\n#align ssubset_singleton_iff ssubset_singleton_iff\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊂ » -/\ntheorem ssubset_singleton_iff {s : Set α} {x : α} : «expr ⊂ » s {x} ↔ s = ∅ :=\n  by\n  rw [ssubset_iff_subset_ne, subset_singleton_iff_eq, or_and_right, and_not_self_iff, or_false_iff,\n    and_iff_left_iff_imp]\n  exact fun h => ne_of_eq_of_ne h (singleton_ne_empty _).symm\n#align ssubset_singleton_iff ssubset_singleton_iff\n\n",
  "ssubset_of_subset_of_ssubset":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊂ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊂ » -/\n#print ssubset_of_subset_of_ssubset /-\nprotected theorem ssubset_of_subset_of_ssubset {s₁ s₂ s₃ : set α} (hs₁s₂ : s₁ ⊆ s₂) (hs₂s₃ : «expr ⊂ » s₂ s₃) :\n    «expr ⊂ » s₁ s₃ :=\n  ⟨Subset.trans hs₁s₂ hs₂s₃.1, fun hs₃s₁ => hs₂s₃.2 (Subset.trans hs₃s₁ hs₁s₂)⟩\n#align ssubset_of_subset_of_ssubset ssubset_of_subset_of_ssubset\n-/\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊂ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊂ » -/\n#print ssubset_of_subset_of_ssubset /-\nprotected theorem ssubset_of_subset_of_ssubset {s₁ s₂ s₃ : Set α} (hs₁s₂ : s₁ ⊆ s₂) (hs₂s₃ : «expr ⊂ » s₂ s₃) :\n    «expr ⊂ » s₁ s₃ :=\n  ⟨Subset.trans hs₁s₂ hs₂s₃.1, fun hs₃s₁ => hs₂s₃.2 (Subset.trans hs₃s₁ hs₁s₂)⟩\n#align ssubset_of_subset_of_ssubset ssubset_of_subset_of_ssubset\n-/\n\n",
  "ssubset_of_ssubset_of_subset":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊂ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊂ » -/\n#print ssubset_of_ssubset_of_subset /-\nprotected theorem ssubset_of_ssubset_of_subset {s₁ s₂ s₃ : set α} (hs₁s₂ : «expr ⊂ » s₁ s₂) (hs₂s₃ : s₂ ⊆ s₃) :\n    «expr ⊂ » s₁ s₃ :=\n  ⟨Subset.trans hs₁s₂.1 hs₂s₃, fun hs₃s₁ => hs₁s₂.2 (Subset.trans hs₂s₃ hs₃s₁)⟩\n#align ssubset_of_ssubset_of_subset ssubset_of_ssubset_of_subset\n-/\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊂ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊂ » -/\n#print ssubset_of_ssubset_of_subset /-\nprotected theorem ssubset_of_ssubset_of_subset {s₁ s₂ s₃ : Set α} (hs₁s₂ : «expr ⊂ » s₁ s₂) (hs₂s₃ : s₂ ⊆ s₃) :\n    «expr ⊂ » s₁ s₃ :=\n  ⟨Subset.trans hs₁s₂.1 hs₂s₃, fun hs₃s₁ => hs₁s₂.2 (Subset.trans hs₂s₃ hs₃s₁)⟩\n#align ssubset_of_ssubset_of_subset ssubset_of_ssubset_of_subset\n-/\n\n",
  "ssubset_insert":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊂ » -/\ntheorem ssubset_insert {s : set α} {a : α} (h : a ∉ s) : «expr ⊂ » s (insert a s) :=\n  ssubset_iff_insert.2 ⟨a, h, Subset.rfl⟩\n#align ssubset_insert ssubset_insert\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊂ » -/\ntheorem ssubset_insert {s : Set α} {a : α} (h : a ∉ s) : «expr ⊂ » s (insert a s) :=\n  ssubset_iff_insert.2 ⟨a, h, Subset.rfl⟩\n#align ssubset_insert ssubset_insert\n\n",
  "ssubset_iff_subset_ne":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊂ » -/\n#print ssubset_iff_subset_ne /-\nprotected theorem ssubset_iff_subset_ne {s t : set α} : «expr ⊂ » s t ↔ s ⊆ t ∧ s ≠ t :=\n  @lt_iff_le_and_ne (set α) _ s t\n#align ssubset_iff_subset_ne ssubset_iff_subset_ne\n-/\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊂ » -/\n#print ssubset_iff_subset_ne /-\nprotected theorem ssubset_iff_subset_ne {s t : Set α} : «expr ⊂ » s t ↔ s ⊆ t ∧ s ≠ t :=\n  @lt_iff_le_and_ne (Set α) _ s t\n#align ssubset_iff_subset_ne ssubset_iff_subset_ne\n-/\n\n",
  "ssubset_iff_of_subset":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊂ » -/\ntheorem ssubset_iff_of_subset {s t : set α} (h : s ⊆ t) : «expr ⊂ » s t ↔ ∃ x ∈ t, x ∉ s :=\n  ⟨exists_of_ssubset, fun ⟨x, hxt, hxs⟩ => ⟨h, fun h => hxs <| h hxt⟩⟩\n#align ssubset_iff_of_subset ssubset_iff_of_subset\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊂ » -/\ntheorem ssubset_iff_of_subset {s t : Set α} (h : s ⊆ t) : «expr ⊂ » s t ↔ ∃ x ∈ t, x ∉ s :=\n  ⟨exists_of_ssubset, fun ⟨x, hxt, hxs⟩ => ⟨h, fun h => hxs <| h hxt⟩⟩\n#align ssubset_iff_of_subset ssubset_iff_of_subset\n\n",
  "ssubset_iff_insert":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊂ » -/\n/- ./././Mathport/Syntax/Translate/Basic.lean:632:2: warning: expanding binder collection (a «expr ∉ » s) -/\ntheorem ssubset_iff_insert {s t : set α} : «expr ⊂ » s t ↔ ∃ (a : _)(_ : a ∉ s), insert a s ⊆ t :=\n  by\n  simp only [insert_subset, exists_and_right, ssubset_def, not_subset]\n  simp only [exists_prop, and_comm']\n#align ssubset_iff_insert ssubset_iff_insert\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊂ » -/\n/- ./././Mathport/Syntax/Translate/Basic.lean:635:2: warning: expanding binder collection (a «expr ∉ » s) -/\ntheorem ssubset_iff_insert {s t : Set α} : «expr ⊂ » s t ↔ ∃ (a : _)(_ : a ∉ s), insert a s ⊆ t :=\n  by\n  simp only [insert_subset, exists_and_right, ssubset_def, not_subset]\n  simp only [exists_prop, and_comm']\n#align ssubset_iff_insert ssubset_iff_insert\n\n",
  "ssubset_def":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊂ » -/\ntheorem ssubset_def : «expr ⊂ » s t = (s ⊆ t ∧ ¬t ⊆ s) :=\n  rfl\n#align ssubset_def ssubset_def\n\n",
  "some_snd_mem":
@@ -252,40 +254,44 @@
  "protected theorem nontrivial.some_fst_mem (hs : s.nontrivial) : hs.some.fst ∈ s :=\n  hs.some_spec.some\n#align nontrivial.some_fst_mem nontrivial.some_fst_mem\n\n",
  "singleton_union":
  "@[simp]\ntheorem singleton_union : {a} ∪ s = insert a s :=\n  rfl\n#align singleton_union singleton_union\n\n",
+ "singleton_subset_singleton":
+ "theorem singleton_subset_singleton : ({a} : Set α) ⊆ {b} ↔ a = b := by simp\n#align singleton_subset_singleton singleton_subset_singleton\n\n",
  "singleton_subset_iff":
- "@[simp]\ntheorem singleton_subset_iff {a : α} {s : set α} : {a} ⊆ s ↔ a ∈ s :=\n  forall_eq\n#align singleton_subset_iff singleton_subset_iff\n\n",
+ "@[simp]\ntheorem singleton_subset_iff {a : α} {s : Set α} : {a} ⊆ s ↔ a ∈ s :=\n  forall_eq\n#align singleton_subset_iff singleton_subset_iff\n\n",
  "singleton_nonempty":
- "@[simp]\ntheorem singleton_nonempty (a : α) : ({a} : set α).nonempty :=\n  ⟨a, rfl⟩\n#align singleton_nonempty singleton_nonempty\n\n",
+ "@[simp]\ntheorem singleton_nonempty (a : α) : ({a} : Set α).nonempty :=\n  ⟨a, rfl⟩\n#align singleton_nonempty singleton_nonempty\n\n",
  "singleton_ne_empty":
- "@[simp]\ntheorem singleton_ne_empty (a : α) : ({a} : set α) ≠ ∅ :=\n  (singleton_nonempty _).ne_empty\n#align singleton_ne_empty singleton_ne_empty\n\n",
+ "@[simp]\ntheorem singleton_ne_empty (a : α) : ({a} : Set α) ≠ ∅ :=\n  (singleton_nonempty _).ne_empty\n#align singleton_ne_empty singleton_ne_empty\n\n",
  "singleton_inter_nonempty":
  "@[simp]\ntheorem singleton_inter_nonempty : ({a} ∩ s).nonempty ↔ a ∈ s := by\n  simp only [Set.Nonempty, mem_inter_iff, mem_singleton_iff, exists_eq_left]\n#align singleton_inter_nonempty singleton_inter_nonempty\n\n",
  "singleton_inter_eq_empty":
  "@[simp]\ntheorem singleton_inter_eq_empty : {a} ∩ s = ∅ ↔ a ∉ s :=\n  not_nonempty_iff_eq_empty.symm.trans singleton_inter_nonempty.not\n#align singleton_inter_eq_empty singleton_inter_eq_empty\n\n",
  "singleton_injective":
- "theorem singleton_injective : injective (singleton : α → set α) := fun _ _ => singleton_eq_singleton_iff.mp\n#align singleton_injective singleton_injective\n\n",
+ "theorem singleton_injective : injective (singleton : α → Set α) := fun _ _ => singleton_eq_singleton_iff.mp\n#align singleton_injective singleton_injective\n\n",
  "singleton_eq_singleton_iff":
- "@[simp]\ntheorem singleton_eq_singleton_iff {x y : α} : {x} = ({y} : set α) ↔ x = y :=\n  ext_iff.trans eq_iff_eq_cancel_left\n#align singleton_eq_singleton_iff singleton_eq_singleton_iff\n\n",
+ "@[simp]\ntheorem singleton_eq_singleton_iff {x y : α} : {x} = ({y} : Set α) ↔ x = y :=\n  ext_iff.trans eq_iff_eq_cancel_left\n#align singleton_eq_singleton_iff singleton_eq_singleton_iff\n\n",
  "singleton_def":
- "theorem singleton_def (a : α) : ({a} : set α) = insert a ∅ :=\n  (insert_emptyc_eq _).symm\n#align singleton_def singleton_def\n\n",
+ "theorem singleton_def (a : α) : ({a} : Set α) = insert a ∅ :=\n  (insert_emptyc_eq _).symm\n#align singleton_def singleton_def\n\n",
  "set_of_true":
- "@[simp]\ntheorem set_of_true : { x : α | true } = univ :=\n  rfl\n#align set_of_true set_of_true\n\n",
+ "@[simp]\ntheorem set_of_true : { x : α | True } = univ :=\n  rfl\n#align set_of_true set_of_true\n\n",
  "set_of_subset_set_of":
  "@[simp]\ntheorem set_of_subset_set_of {p q : α → Prop} : { a | p a } ⊆ { a | q a } ↔ ∀ a, p a → q a :=\n  iff.rfl\n#align set_of_subset_set_of set_of_subset_set_of\n\n",
  "set_of_set":
- "theorem set_of_set {s : set α} : set_of s = s :=\n  rfl\n#align set_of_set set_of_set\n\n",
+ "theorem set_of_set {s : Set α} : setOf s = s :=\n  rfl\n#align set_of_set set_of_set\n\n",
  "set_of_or":
  "theorem set_of_or {p q : α → Prop} : { a | p a ∨ q a } = { a | p a } ∪ { a | q a } :=\n  rfl\n#align set_of_or set_of_or\n\n",
  "set_of_mem_eq":
- "@[simp]\ntheorem set_of_mem_eq {s : set α} : { x | x ∈ s } = s :=\n  rfl\n#align set_of_mem_eq set_of_mem_eq\n\n",
+ "@[simp]\ntheorem set_of_mem_eq {s : Set α} : { x | x ∈ s } = s :=\n  rfl\n#align set_of_mem_eq set_of_mem_eq\n\n",
+ "set_of_inter_eq_sep":
+ "theorem set_of_inter_eq_sep (p : α → Prop) (s : Set α) : { a | p a } ∩ s = { a ∈ s | p a } :=\n  inter_comm _ _\n#align set_of_inter_eq_sep set_of_inter_eq_sep\n\n",
  "set_of_false":
- "@[simp]\ntheorem set_of_false : { a : α | false } = ∅ :=\n  rfl\n#align set_of_false set_of_false\n\n",
+ "@[simp]\ntheorem set_of_false : { a : α | False } = ∅ :=\n  rfl\n#align set_of_false set_of_false\n\n",
  "set_of_eq_eq_singleton'":
  "@[simp]\ntheorem set_of_eq_eq_singleton' {a : α} : { x | a = x } = {a} :=\n  ext fun x => eq_comm\n#align set_of_eq_eq_singleton' set_of_eq_eq_singleton'\n\n",
  "set_of_eq_eq_singleton":
  "@[simp]\ntheorem set_of_eq_eq_singleton {a : α} : { n | n = a } = {a} :=\n  rfl\n#align set_of_eq_eq_singleton set_of_eq_eq_singleton\n\n",
  "set_of_bijective":
- "theorem set_of_bijective : bijective (set_of : (α → Prop) → set α) :=\n  bijective_id\n#align set_of_bijective set_of_bijective\n\n",
+ "theorem set_of_bijective : bijective (setOf : (α → Prop) → Set α) :=\n  bijective_id\n#align set_of_bijective set_of_bijective\n\n",
  "set_of_app_iff":
  "theorem set_of_app_iff {p : α → Prop} {x : α} : { x | p x } x ↔ p x :=\n  iff.rfl\n#align set_of_app_iff set_of_app_iff\n\n",
  "set_of_and":
@@ -293,17 +299,17 @@
  "set_compr_eq_eq_singleton":
  "theorem set_compr_eq_eq_singleton {a : α} : { b | b = a } = {a} :=\n  rfl\n#align set_compr_eq_eq_singleton set_compr_eq_eq_singleton\n\n",
  "set_coe_cast":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr↥ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr↥ » -/\n#print set_coe_cast /-\n@[simp]\ntheorem set_coe_cast : ∀ {s t : set α} (H' : s = t) (H : «expr↥ » s = «expr↥ » t) (x : s), cast H x = ⟨x.1, H' ▸ x.2⟩\n  | s, _, rfl, _, ⟨x, h⟩ => rfl\n#align set_coe_cast set_coe_cast\n-/\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr↥ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr↥ » -/\n#print set_coe_cast /-\n@[simp]\ntheorem set_coe_cast : ∀ {s t : Set α} (H' : s = t) (H : «expr↥ » s = «expr↥ » t) (x : s), cast H x = ⟨x.1, H' ▸ x.2⟩\n  | s, _, rfl, _, ⟨x, h⟩ => rfl\n#align set_coe_cast set_coe_cast\n-/\n\n",
  "set_cases":
- "@[elab_as_elim]\ntheorem set_cases {p : set α → Prop} (h0 : p ∅) (h1 : p univ) (s) : p s :=\n  s.eq_empty_or_nonempty.elim (fun h => h.symm ▸ h0) fun h => (eq_univ_of_nonempty h).symm ▸ h1\n#align set_cases set_cases\n\n",
+ "@[elab_as_elim]\ntheorem set_cases {p : Set α → Prop} (h0 : p ∅) (h1 : p univ) (s) : p s :=\n  s.eq_empty_or_nonempty.elim (fun h => h.symm ▸ h0) fun h => (eq_univ_of_nonempty h).symm ▸ h1\n#align set_cases set_cases\n\n",
  "sep_univ":
- "@[simp]\ntheorem sep_univ : { x ∈ (univ : set α) | p x } = { x | p x } :=\n  univ_inter p\n#align sep_univ sep_univ\n\n",
+ "@[simp]\ntheorem sep_univ : { x ∈ (univ : Set α) | p x } = { x | p x } :=\n  univ_inter p\n#align sep_univ sep_univ\n\n",
  "sep_union":
  "@[simp]\ntheorem sep_union : { x ∈ s ∪ t | p x } = { x ∈ s | p x } ∪ { x ∈ t | p x } :=\n  union_inter_distrib_right\n#align sep_union sep_union\n\n",
  "sep_true":
- "@[simp]\ntheorem sep_true : { x ∈ s | true } = s :=\n  inter_univ s\n#align sep_true sep_true\n\n",
+ "@[simp]\ntheorem sep_true : { x ∈ s | True } = s :=\n  inter_univ s\n#align sep_true sep_true\n\n",
  "sep_subset":
- "@[simp]\ntheorem sep_subset (s : set α) (p : α → Prop) : { x ∈ s | p x } ⊆ s := fun x => And.left\n#align sep_subset sep_subset\n\n",
+ "@[simp]\ntheorem sep_subset (s : Set α) (p : α → Prop) : { x ∈ s | p x } ⊆ s := fun x => And.left\n#align sep_subset sep_subset\n\n",
  "sep_set_of":
  "@[simp]\ntheorem sep_set_of : { x ∈ { y | p y } | q x } = { x | p x ∧ q x } :=\n  rfl\n#align sep_set_of sep_set_of\n\n",
  "sep_or":
@@ -313,7 +319,7 @@
  "sep_inter":
  "@[simp]\ntheorem sep_inter : { x ∈ s ∩ t | p x } = { x ∈ s | p x } ∩ { x ∈ t | p x } :=\n  inter_inter_distrib_right s t p\n#align sep_inter sep_inter\n\n",
  "sep_false":
- "@[simp]\ntheorem sep_false : { x ∈ s | false } = ∅ :=\n  inter_empty s\n#align sep_false sep_false\n\n",
+ "@[simp]\ntheorem sep_false : { x ∈ s | False } = ∅ :=\n  inter_empty s\n#align sep_false sep_false\n\n",
  "sep_ext_iff":
  "theorem sep_ext_iff : { x ∈ s | p x } = { x ∈ s | q x } ↔ ∀ x ∈ s, p x ↔ q x := by\n  simp_rw [ext_iff, mem_sep_iff, and_congr_right_iff]\n#align sep_ext_iff sep_ext_iff\n\n",
  "sep_eq_self_iff_mem_true":
@@ -323,35 +329,37 @@
  "sep_eq_empty_iff_mem_false":
  "@[simp]\ntheorem sep_eq_empty_iff_mem_false : { x ∈ s | p x } = ∅ ↔ ∀ x ∈ s, ¬p x := by\n  simp_rw [ext_iff, mem_sep_iff, mem_empty_iff_false, iff_false_iff, not_and]\n#align sep_eq_empty_iff_mem_false sep_eq_empty_iff_mem_false\n\n",
  "sep_empty":
- "@[simp]\ntheorem sep_empty (p : α → Prop) : { x ∈ (∅ : set α) | p x } = ∅ :=\n  empty_inter p\n#align sep_empty sep_empty\n\n",
+ "@[simp]\ntheorem sep_empty (p : α → Prop) : { x ∈ (∅ : Set α) | p x } = ∅ :=\n  empty_inter p\n#align sep_empty sep_empty\n\n",
  "sep_and":
  "@[simp]\ntheorem sep_and : { x ∈ s | p x ∧ q x } = { x ∈ s | p x } ∩ { x ∈ s | q x } :=\n  inter_inter_distrib_left s p q\n#align sep_and sep_and\n\n",
  "right":
  "theorem nonempty.right (h : (s ∩ t).nonempty) : t.nonempty :=\n  h.imp fun _ => And.right\n#align nonempty.right nonempty.right\n\n",
  "rfl":
- "theorem subset.rfl {s : set α} : s ⊆ s :=\n  Subset.refl s\n#align subset.rfl subset.rfl\n\n",
+ "theorem subset.rfl {s : Set α} : s ⊆ s :=\n  Subset.refl s\n#align subset.rfl subset.rfl\n\n",
  "refl":
- "@[refl]\ntheorem subset.refl (a : set α) : a ⊆ a := fun x => id\n#align subset.refl subset.refl\n\n",
+ "@[refl]\ntheorem subset.refl (a : Set α) : a ⊆ a := fun x => id\n#align subset.refl subset.refl\n\n",
  "powerset_univ":
- "@[simp]\ntheorem powerset_univ : 𝒫(univ : set α) = univ :=\n  eq_univ_of_forall subset_univ\n#align powerset_univ powerset_univ\n\n",
+ "@[simp]\ntheorem powerset_univ : 𝒫(univ : Set α) = univ :=\n  eq_univ_of_forall subset_univ\n#align powerset_univ powerset_univ\n\n",
+ "powerset_singleton":
+ "/-- The powerset of a singleton contains only `∅` and the singleton itself. -/\ntheorem powerset_singleton (x : α) : 𝒫({x} : Set α) = {∅, {x}} :=\n  by\n  ext y\n  rw [mem_powerset_iff, subset_singleton_iff_eq, mem_insert_iff, mem_singleton_iff]\n#align powerset_singleton powerset_singleton\n\n",
  "powerset_nonempty":
  "@[simp]\ntheorem powerset_nonempty : (𝒫 s).nonempty :=\n  ⟨∅, empty_subset s⟩\n#align powerset_nonempty powerset_nonempty\n\n",
  "powerset_mono":
  "@[simp]\ntheorem powerset_mono : 𝒫 s ⊆ 𝒫 t ↔ s ⊆ t :=\n  ⟨fun h => h (Subset.refl s), fun h u hu => Subset.trans hu h⟩\n#align powerset_mono powerset_mono\n\n",
  "powerset_inter":
- "theorem powerset_inter (s t : set α) : 𝒫(s ∩ t) = 𝒫 s ∩ 𝒫 t :=\n  ext fun u => subset_inter_iff\n#align powerset_inter powerset_inter\n\n",
+ "theorem powerset_inter (s t : Set α) : 𝒫(s ∩ t) = 𝒫 s ∩ 𝒫 t :=\n  ext fun u => subset_inter_iff\n#align powerset_inter powerset_inter\n\n",
  "powerset_empty":
- "@[simp]\ntheorem powerset_empty : 𝒫(∅ : set α) = {∅} :=\n  ext fun s => subset_empty_iff\n#align powerset_empty powerset_empty\n\n",
+ "@[simp]\ntheorem powerset_empty : 𝒫(∅ : Set α) = {∅} :=\n  ext fun s => subset_empty_iff\n#align powerset_empty powerset_empty\n\n",
  "pair_subset":
  "theorem nontrivial.pair_subset (hs : s.nontrivial) : ∃ (x y : _)(hab : x ≠ y), {x, y} ⊆ s :=\n  let ⟨x, hx, y, hy, hxy⟩ := hs\n  ⟨x, y, hxy, insert_subset.2 ⟨hx, singleton_subset_iff.2 hy⟩⟩\n#align nontrivial.pair_subset nontrivial.pair_subset\n\n",
  "pair_eq_singleton":
- "@[simp]\ntheorem pair_eq_singleton (a : α) : ({a, a} : set α) = {a} :=\n  union_self _\n#align pair_eq_singleton pair_eq_singleton\n\n",
+ "@[simp]\ntheorem pair_eq_singleton (a : α) : ({a, a} : Set α) = {a} :=\n  union_self _\n#align pair_eq_singleton pair_eq_singleton\n\n",
  "pair_eq_pair_iff":
- "theorem pair_eq_pair_iff {x y z w : α} : ({x, y} : set α) = {z, w} ↔ x = z ∧ y = w ∨ x = w ∧ y = z :=\n  by\n  simp only [Set.Subset.antisymm_iff, Set.insert_subset, Set.mem_insert_iff, Set.mem_singleton_iff,\n    Set.singleton_subset_iff]\n  constructor\n  · tauto\n  · rintro (⟨rfl, rfl⟩ | ⟨rfl, rfl⟩) <;> simp\n#align pair_eq_pair_iff pair_eq_pair_iff\n\n",
+ "theorem pair_eq_pair_iff {x y z w : α} : ({x, y} : Set α) = {z, w} ↔ x = z ∧ y = w ∨ x = w ∧ y = z :=\n  by\n  simp only [Set.Subset.antisymm_iff, Set.insert_subset, Set.mem_insert_iff, Set.mem_singleton_iff,\n    Set.singleton_subset_iff]\n  constructor\n  · tauto\n  · rintro (⟨rfl, rfl⟩ | ⟨rfl, rfl⟩) <;> simp\n#align pair_eq_pair_iff pair_eq_pair_iff\n\n",
  "pair_comm":
- "theorem pair_comm (a b : α) : ({a, b} : set α) = {b, a} :=\n  union_comm _ _\n#align pair_comm pair_comm\n\n",
+ "theorem pair_comm (a b : α) : ({a, b} : Set α) = {b, a} :=\n  union_comm _ _\n#align pair_comm pair_comm\n\n",
  "out":
- "#print Membership.Mem.out /-\n/-- If `h : a ∈ {x | p x}` then `h.out : p x`. These are definitionally equal, but this can\nnevertheless be useful for various reasons, e.g. to apply further projection notation or in an\nargument to `simp`. -/\ntheorem Membership.Mem.out {p : α → Prop} {a : α} (h : a ∈ { x | p x }) : p a :=\n  h\n#align has_mem.mem.out Membership.Mem.out\n-/\n\n",
+ "#print Membership.mem.out /-\n/-- If `h : a ∈ {x | p x}` then `h.out : p x`. These are definitionally equal, but this can\nnevertheless be useful for various reasons, e.g. to apply further projection notation or in an\nargument to `simp`. -/\ntheorem Membership.mem.out {p : α → Prop} {a : α} (h : a ∈ { x | p x }) : p a :=\n  h\n#align has_mem.mem.out Membership.mem.out\n-/\n\n",
  "of_diff":
  "theorem nonempty.of_diff (h : (s \\ t).nonempty) : s.nonempty :=\n  h.imp fun _ => And.left\n#align nonempty.of_diff nonempty.of_diff\n\n",
  "not_subsingleton_iff":
@@ -359,57 +367,57 @@
  "not_subset_singleton":
  "theorem nontrivial.not_subset_singleton {x} (hs : s.nontrivial) : ¬s ⊆ {x} :=\n  (not_congr subset_singleton_iff_eq).2 (not_or_of_not hs.ne_empty hs.ne_singleton)\n#align nontrivial.not_subset_singleton nontrivial.not_subset_singleton\n\n",
  "not_subset_iff_exists_mem_not_mem":
- "theorem not_subset_iff_exists_mem_not_mem {α : Type _} {s t : set α} : ¬s ⊆ t ↔ ∃ x, x ∈ s ∧ x ∉ t := by\n  simp [subset_def]\n#align not_subset_iff_exists_mem_not_mem not_subset_iff_exists_mem_not_mem\n\n",
+ "theorem not_subset_iff_exists_mem_not_mem {α : Type _} {s t : Set α} : ¬s ⊆ t ↔ ∃ x, x ∈ s ∧ x ∉ t := by\n  simp [subset_def]\n#align not_subset_iff_exists_mem_not_mem not_subset_iff_exists_mem_not_mem\n\n",
  "not_subset_empty":
  "theorem nontrivial.not_subset_empty (hs : s.nontrivial) : ¬s ⊆ ∅ :=\n  hs.nonempty.not_subset_empty\n#align nontrivial.not_subset_empty nontrivial.not_subset_empty\n\n",
  "not_subset":
  "theorem not_subset : ¬s ⊆ t ↔ ∃ a ∈ s, a ∉ t := by simp only [subset_def, not_forall]\n#align not_subset not_subset\n\n",
  "not_not_mem":
- "@[simp]\ntheorem not_not_mem : ¬a ∉ s ↔ a ∈ s :=\n  not_not\n#align not_not_mem not_not_mem\n\n",
+ "@[simp]\ntheorem not_not_mem : ¬a ∉ s ↔ a ∈ s :=\n  Classical.not_not\n#align not_not_mem not_not_mem\n\n",
  "not_nontrivial_singleton":
- "@[simp]\ntheorem not_nontrivial_singleton {x} : ¬({x} : set α).nontrivial := fun H =>\n  by\n  rw [nontrivial_iff_exists_ne (mem_singleton x)] at H\n  exact\n    let ⟨y, hy, hya⟩ := H\n    hya (mem_singleton_iff.1 hy)\n#align not_nontrivial_singleton not_nontrivial_singleton\n\n",
+ "@[simp]\ntheorem not_nontrivial_singleton {x} : ¬({x} : Set α).nontrivial := fun H =>\n  by\n  rw [nontrivial_iff_exists_ne (mem_singleton x)] at H\n  exact\n    let ⟨y, hy, hya⟩ := H\n    hya (mem_singleton_iff.1 hy)\n#align not_nontrivial_singleton not_nontrivial_singleton\n\n",
  "not_nontrivial_iff":
- "@[simp]\ntheorem not_nontrivial_iff : ¬s.nontrivial ↔ s.subsingleton :=\n  iff.not_left not_subsingleton_iff.symm\n#align not_nontrivial_iff not_nontrivial_iff\n\n",
+ "@[simp]\ntheorem not_nontrivial_iff : ¬s.nontrivial ↔ s.subsingleton :=\n  Iff.not_left not_subsingleton_iff.symm\n#align not_nontrivial_iff not_nontrivial_iff\n\n",
  "not_nontrivial_empty":
- "@[simp]\ntheorem not_nontrivial_empty : ¬(∅ : set α).nontrivial := fun h => h.ne_empty rfl\n#align not_nontrivial_empty not_nontrivial_empty\n\n",
+ "@[simp]\ntheorem not_nontrivial_empty : ¬(∅ : Set α).nontrivial := fun h => h.ne_empty rfl\n#align not_nontrivial_empty not_nontrivial_empty\n\n",
  "not_nonempty_iff_eq_empty":
- "/-- See also `set.nonempty_iff_ne_empty`. -/\ntheorem not_nonempty_iff_eq_empty {s : set α} : ¬s.nonempty ↔ s = ∅ := by\n  simp only [Set.Nonempty, eq_empty_iff_forall_not_mem, not_exists]\n#align not_nonempty_iff_eq_empty not_nonempty_iff_eq_empty\n\n",
+ "/-- See also `set.nonempty_iff_ne_empty`. -/\ntheorem not_nonempty_iff_eq_empty {s : Set α} : ¬s.nonempty ↔ s = ∅ := by\n  simp only [Set.Nonempty, eq_empty_iff_forall_not_mem, not_exists]\n#align not_nonempty_iff_eq_empty not_nonempty_iff_eq_empty\n\n",
  "not_nonempty_empty":
- "#print not_nonempty_empty /-\n@[simp]\ntheorem not_nonempty_empty : ¬(∅ : set α).nonempty := fun ⟨x, hx⟩ => hx\n#align not_nonempty_empty not_nonempty_empty\n-/\n\n",
+ "#print not_nonempty_empty /-\n@[simp]\ntheorem not_nonempty_empty : ¬(∅ : Set α).nonempty := fun ⟨x, hx⟩ => hx\n#align not_nonempty_empty not_nonempty_empty\n-/\n\n",
  "not_monotone_on_not_antitone_on_iff_exists_lt_lt":
- "/- ./././Mathport/Syntax/Translate/Basic.lean:632:2: warning: expanding binder collection (a b c «expr ∈ » s) -/\n/-- A function between linear orders which is neither monotone nor antitone makes a dent upright or\ndownright. -/\ntheorem not_monotone_on_not_antitone_on_iff_exists_lt_lt :\n    ¬monotone_on f s ∧ ¬antitone_on f s ↔\n      ∃ (a : _)(_ : a ∈ s)(b : _)(_ : b ∈ s)(c : _)(_ : c ∈ s),\n        a < b ∧ b < c ∧ (f a < f b ∧ f c < f b ∨ f b < f a ∧ f b < f c) :=\n  by\n  simp [monotone_on_iff_monotone, antitone_on_iff_antitone, and_assoc', exists_and_left,\n    not_monotone_not_antitone_iff_exists_lt_lt, @and_left_comm (_ ∈ s)]\n#align not_monotone_on_not_antitone_on_iff_exists_lt_lt not_monotone_on_not_antitone_on_iff_exists_lt_lt\n\n",
+ "/- ./././Mathport/Syntax/Translate/Basic.lean:635:2: warning: expanding binder collection (a b c «expr ∈ » s) -/\n/-- A function between linear orders which is neither monotone nor antitone makes a dent upright or\ndownright. -/\ntheorem not_monotone_on_not_antitone_on_iff_exists_lt_lt :\n    ¬MonotoneOn f s ∧ ¬AntitoneOn f s ↔\n      ∃ (a : _)(_ : a ∈ s)(b : _)(_ : b ∈ s)(c : _)(_ : c ∈ s),\n        a < b ∧ b < c ∧ (f a < f b ∧ f c < f b ∨ f b < f a ∧ f b < f c) :=\n  by\n  simp [monotone_on_iff_monotone, antitone_on_iff_antitone, and_assoc', exists_and_left,\n    not_monotone_not_antitone_iff_exists_lt_lt, @and_left_comm (_ ∈ s)]\n#align not_monotone_on_not_antitone_on_iff_exists_lt_lt not_monotone_on_not_antitone_on_iff_exists_lt_lt\n\n",
  "not_monotone_on_not_antitone_on_iff_exists_le_le":
- "/- ./././Mathport/Syntax/Translate/Basic.lean:632:2: warning: expanding binder collection (a b c «expr ∈ » s) -/\n/-- A function between linear orders which is neither monotone nor antitone makes a dent upright or\ndownright. -/\ntheorem not_monotone_on_not_antitone_on_iff_exists_le_le :\n    ¬monotone_on f s ∧ ¬antitone_on f s ↔\n      ∃ (a : _)(_ : a ∈ s)(b : _)(_ : b ∈ s)(c : _)(_ : c ∈ s),\n        a ≤ b ∧ b ≤ c ∧ (f a < f b ∧ f c < f b ∨ f b < f a ∧ f b < f c) :=\n  by\n  simp [monotone_on_iff_monotone, antitone_on_iff_antitone, and_assoc', exists_and_left,\n    not_monotone_not_antitone_iff_exists_le_le, @and_left_comm (_ ∈ s)]\n#align not_monotone_on_not_antitone_on_iff_exists_le_le not_monotone_on_not_antitone_on_iff_exists_le_le\n\n",
+ "/- ./././Mathport/Syntax/Translate/Basic.lean:635:2: warning: expanding binder collection (a b c «expr ∈ » s) -/\n/-- A function between linear orders which is neither monotone nor antitone makes a dent upright or\ndownright. -/\ntheorem not_monotone_on_not_antitone_on_iff_exists_le_le :\n    ¬MonotoneOn f s ∧ ¬AntitoneOn f s ↔\n      ∃ (a : _)(_ : a ∈ s)(b : _)(_ : b ∈ s)(c : _)(_ : c ∈ s),\n        a ≤ b ∧ b ≤ c ∧ (f a < f b ∧ f c < f b ∨ f b < f a ∧ f b < f c) :=\n  by\n  simp [monotone_on_iff_monotone, antitone_on_iff_antitone, and_assoc', exists_and_left,\n    not_monotone_not_antitone_iff_exists_le_le, @and_left_comm (_ ∈ s)]\n#align not_monotone_on_not_antitone_on_iff_exists_le_le not_monotone_on_not_antitone_on_iff_exists_le_le\n\n",
  "not_mem_subset":
  "theorem not_mem_subset (h : s ⊆ t) : a ∉ t → a ∉ s :=\n  mt <| mem_of_subset_of_mem h\n#align not_mem_subset not_mem_subset\n\n",
  "not_mem_of_mem_diff":
- "theorem not_mem_of_mem_diff {s t : set α} {x : α} (h : x ∈ s \\ t) : x ∉ t :=\n  h.right\n#align not_mem_of_mem_diff not_mem_of_mem_diff\n\n",
+ "theorem not_mem_of_mem_diff {s t : Set α} {x : α} (h : x ∈ s \\ t) : x ∉ t :=\n  h.right\n#align not_mem_of_mem_diff not_mem_of_mem_diff\n\n",
  "not_mem_of_mem_compl":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\ntheorem not_mem_of_mem_compl {s : set α} {x : α} (h : x ∈ «expr ᶜ» s) : x ∉ s :=\n  h\n#align not_mem_of_mem_compl not_mem_of_mem_compl\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\ntheorem not_mem_of_mem_compl {s : Set α} {x : α} (h : x ∈ «expr ᶜ» s) : x ∉ s :=\n  h\n#align not_mem_of_mem_compl not_mem_of_mem_compl\n\n",
  "not_mem_empty":
- "theorem not_mem_empty (x : α) : ¬x ∈ (∅ : set α) :=\n  id\n#align not_mem_empty not_mem_empty\n\n",
+ "theorem not_mem_empty (x : α) : ¬x ∈ (∅ : Set α) :=\n  id\n#align not_mem_empty not_mem_empty\n\n",
  "not_mem_diff_of_mem":
- "theorem not_mem_diff_of_mem {s t : set α} {x : α} (hx : x ∈ t) : x ∉ s \\ t := fun h => h.2 hx\n#align not_mem_diff_of_mem not_mem_diff_of_mem\n\n",
+ "theorem not_mem_diff_of_mem {s t : Set α} {x : α} (hx : x ∈ t) : x ∉ s \\ t := fun h => h.2 hx\n#align not_mem_diff_of_mem not_mem_diff_of_mem\n\n",
  "not_mem_compl_iff":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\ntheorem not_mem_compl_iff {x : α} : x ∉ «expr ᶜ» s ↔ x ∈ s :=\n  not_not\n#align not_mem_compl_iff not_mem_compl_iff\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\ntheorem not_mem_compl_iff {x : α} : x ∉ «expr ᶜ» s ↔ x ∈ s :=\n  Classical.not_not\n#align not_mem_compl_iff not_mem_compl_iff\n\n",
  "not_disjoint_iff_nonempty_inter":
  "theorem not_disjoint_iff_nonempty_inter : ¬Disjoint s t ↔ (s ∩ t).nonempty :=\n  not_disjoint_iff\n#align not_disjoint_iff_nonempty_inter not_disjoint_iff_nonempty_inter\n\n",
  "not_disjoint_iff":
- "theorem not_disjoint_iff : ¬Disjoint s t ↔ ∃ x, x ∈ s ∧ x ∈ t :=\n  Set.disjoint_iff.not.trans <| not_forall.trans <| exists_congr fun x => not_not\n#align not_disjoint_iff not_disjoint_iff\n\n",
+ "theorem not_disjoint_iff : ¬Disjoint s t ↔ ∃ x, x ∈ s ∧ x ∈ t :=\n  Set.disjoint_iff.not.trans <| not_forall.trans <| exists_congr fun x => Classical.not_not\n#align not_disjoint_iff not_disjoint_iff\n\n",
  "nontrivial_univ_iff":
- "@[simp]\ntheorem nontrivial_univ_iff : (univ : set α).nontrivial ↔ nontrivial α :=\n  ⟨nontrivial_of_univ_nontrivial, fun h => @nontrivial_univ _ h⟩\n#align nontrivial_univ_iff nontrivial_univ_iff\n\n",
+ "@[simp]\ntheorem nontrivial_univ_iff : (univ : Set α).nontrivial ↔ Nontrivial α :=\n  ⟨nontrivial_of_univ_nontrivial, fun h => @nontrivial_univ _ h⟩\n#align nontrivial_univ_iff nontrivial_univ_iff\n\n",
  "nontrivial_univ":
- "theorem nontrivial_univ [nontrivial α] : (univ : set α).nontrivial :=\n  let ⟨x, y, hxy⟩ := exists_pair_ne α\n  ⟨x, mem_univ _, y, mem_univ _, hxy⟩\n#align nontrivial_univ nontrivial_univ\n\n",
+ "theorem nontrivial_univ [Nontrivial α] : (univ : Set α).nontrivial :=\n  let ⟨x, y, hxy⟩ := exists_pair_ne α\n  ⟨x, mem_univ _, y, mem_univ _, hxy⟩\n#align nontrivial_univ nontrivial_univ\n\n",
  "nontrivial_pair":
- "theorem nontrivial_pair {x y} (hxy : x ≠ y) : ({x, y} : set α).nontrivial :=\n  ⟨x, mem_insert _ _, y, mem_insert_of_mem _ (mem_singleton _), hxy⟩\n#align nontrivial_pair nontrivial_pair\n\n",
+ "theorem nontrivial_pair {x y} (hxy : x ≠ y) : ({x, y} : Set α).nontrivial :=\n  ⟨x, mem_insert _ _, y, mem_insert_of_mem _ (mem_singleton _), hxy⟩\n#align nontrivial_pair nontrivial_pair\n\n",
  "nontrivial_of_univ_nontrivial":
- "theorem nontrivial_of_univ_nontrivial (h : (univ : set α).nontrivial) : nontrivial α :=\n  let ⟨x, _, y, _, hxy⟩ := h\n  ⟨⟨x, y, hxy⟩⟩\n#align nontrivial_of_univ_nontrivial nontrivial_of_univ_nontrivial\n\n",
+ "theorem nontrivial_of_univ_nontrivial (h : (univ : Set α).nontrivial) : Nontrivial α :=\n  let ⟨x, _, y, _, hxy⟩ := h\n  ⟨⟨x, y, hxy⟩⟩\n#align nontrivial_of_univ_nontrivial nontrivial_of_univ_nontrivial\n\n",
  "nontrivial_of_pair_subset":
  "theorem nontrivial_of_pair_subset {x y} (hxy : x ≠ y) (h : {x, y} ⊆ s) : s.nontrivial :=\n  (nontrivial_pair hxy).mono h\n#align nontrivial_of_pair_subset nontrivial_of_pair_subset\n\n",
  "nontrivial_of_nontrivial_coe":
- "/-- A type with a set `s` whose `coe_sort` is a nontrivial type is nontrivial.\nFor the corresponding result for `subtype`, see `subtype.nontrivial_iff_exists_ne`. -/\ntheorem nontrivial_of_nontrivial_coe (hs : nontrivial s) : nontrivial α :=\n  nontrivial_of_nontrivial <| nontrivial_coe_sort.1 hs\n#align nontrivial_of_nontrivial_coe nontrivial_of_nontrivial_coe\n\n",
+ "/-- A type with a set `s` whose `coe_sort` is a nontrivial type is nontrivial.\nFor the corresponding result for `subtype`, see `subtype.nontrivial_iff_exists_ne`. -/\ntheorem nontrivial_of_nontrivial_coe (hs : Nontrivial s) : Nontrivial α :=\n  nontrivial_of_nontrivial <| nontrivial_coe_sort.1 hs\n#align nontrivial_of_nontrivial_coe nontrivial_of_nontrivial_coe\n\n",
  "nontrivial_of_nontrivial":
- "theorem nontrivial_of_nontrivial (hs : s.nontrivial) : nontrivial α :=\n  let ⟨x, _, y, _, hxy⟩ := hs\n  ⟨⟨x, y, hxy⟩⟩\n#align nontrivial_of_nontrivial nontrivial_of_nontrivial\n\n",
+ "theorem nontrivial_of_nontrivial (hs : s.nontrivial) : Nontrivial α :=\n  let ⟨x, _, y, _, hxy⟩ := hs\n  ⟨⟨x, y, hxy⟩⟩\n#align nontrivial_of_nontrivial nontrivial_of_nontrivial\n\n",
  "nontrivial_of_mem_mem_ne":
  "theorem nontrivial_of_mem_mem_ne {x y} (hx : x ∈ s) (hy : y ∈ s) (hxy : x ≠ y) : s.nontrivial :=\n  ⟨x, hx, y, hy, hxy⟩\n#align nontrivial_of_mem_mem_ne nontrivial_of_mem_mem_ne\n\n",
  "nontrivial_of_lt":
@@ -417,9 +425,9 @@
  "nontrivial_of_exists_ne":
  "theorem nontrivial_of_exists_ne {x} (hx : x ∈ s) (h : ∃ y ∈ s, y ≠ x) : s.nontrivial :=\n  let ⟨y, hy, hyx⟩ := h\n  ⟨y, hy, x, hx, hyx⟩\n#align nontrivial_of_exists_ne nontrivial_of_exists_ne\n\n",
  "nontrivial_of_exists_lt":
- "/- ./././Mathport/Syntax/Translate/Basic.lean:632:2: warning: expanding binder collection (x y «expr ∈ » s) -/\ntheorem nontrivial_of_exists_lt [preorder α] (H : ∃ (x : _)(_ : x ∈ s)(y : _)(_ : y ∈ s), x < y) : s.nontrivial :=\n  let ⟨x, hx, y, hy, hxy⟩ := H\n  nontrivial_of_lt hx hy hxy\n#align nontrivial_of_exists_lt nontrivial_of_exists_lt\n\n",
+ "/- ./././Mathport/Syntax/Translate/Basic.lean:635:2: warning: expanding binder collection (x y «expr ∈ » s) -/\ntheorem nontrivial_of_exists_lt [preorder α] (H : ∃ (x : _)(_ : x ∈ s)(y : _)(_ : y ∈ s), x < y) : s.nontrivial :=\n  let ⟨x, hx, y, hy, hxy⟩ := H\n  nontrivial_of_lt hx hy hxy\n#align nontrivial_of_exists_lt nontrivial_of_exists_lt\n\n",
  "nontrivial_mono":
- "theorem nontrivial_mono {α : Type _} {s t : set α} (hst : s ⊆ t) (hs : nontrivial s) : nontrivial t :=\n  nontrivial.coe_sort <| (nontrivial_coe_sort.1 hs).mono hst\n#align nontrivial_mono nontrivial_mono\n\n",
+ "theorem nontrivial_mono {α : Type _} {s t : Set α} (hst : s ⊆ t) (hs : Nontrivial s) : Nontrivial t :=\n  Nontrivial.coe_sort <| (nontrivial_coe_sort.1 hs).mono hst\n#align nontrivial_mono nontrivial_mono\n\n",
  "nontrivial_iff_pair_subset":
  "theorem nontrivial_iff_pair_subset : s.nontrivial ↔ ∃ (x y : _)(hxy : x ≠ y), {x, y} ⊆ s :=\n  ⟨Nontrivial.pair_subset, fun H =>\n    let ⟨x, y, hxy, h⟩ := H\n    nontrivial_of_pair_subset hxy h⟩\n#align nontrivial_iff_pair_subset nontrivial_iff_pair_subset\n\n",
  "nontrivial_iff_ne_singleton":
@@ -427,9 +435,9 @@
  "nontrivial_iff_exists_ne":
  "#print nontrivial_iff_exists_ne /-\ntheorem nontrivial_iff_exists_ne {x} (hx : x ∈ s) : s.nontrivial ↔ ∃ y ∈ s, y ≠ x :=\n  ⟨fun H => H.exists_ne _, nontrivial_of_exists_ne hx⟩\n#align nontrivial_iff_exists_ne nontrivial_iff_exists_ne\n-/\n\n",
  "nontrivial_iff_exists_lt":
- "/- ./././Mathport/Syntax/Translate/Basic.lean:632:2: warning: expanding binder collection (x y «expr ∈ » s) -/\ntheorem nontrivial_iff_exists_lt [linear_order α] : s.nontrivial ↔ ∃ (x : _)(_ : x ∈ s)(y : _)(_ : y ∈ s), x < y :=\n  ⟨Nontrivial.exists_lt, nontrivial_of_exists_lt⟩\n#align nontrivial_iff_exists_lt nontrivial_iff_exists_lt\n\n",
+ "/- ./././Mathport/Syntax/Translate/Basic.lean:635:2: warning: expanding binder collection (x y «expr ∈ » s) -/\ntheorem nontrivial_iff_exists_lt [linear_order α] : s.nontrivial ↔ ∃ (x : _)(_ : x ∈ s)(y : _)(_ : y ∈ s), x < y :=\n  ⟨Nontrivial.exists_lt, nontrivial_of_exists_lt⟩\n#align nontrivial_iff_exists_lt nontrivial_iff_exists_lt\n\n",
  "nontrivial_coe_sort":
- "/-- `s`, coerced to a type, is a nontrivial type if and only if `s` is a nontrivial set. -/\n@[simp, norm_cast]\ntheorem nontrivial_coe_sort {s : set α} : nontrivial s ↔ s.nontrivial := by\n  simp_rw [← nontrivial_univ_iff, Set.Nontrivial, mem_univ, exists_true_left, SetCoe.exists, subtype.mk_eq_mk]\n#align nontrivial_coe_sort nontrivial_coe_sort\n\n",
+ "/-- `s`, coerced to a type, is a nontrivial type if and only if `s` is a nontrivial set. -/\n@[simp, norm_cast]\ntheorem nontrivial_coe_sort {s : Set α} : Nontrivial s ↔ s.nontrivial := by\n  simp_rw [← nontrivial_univ_iff, Set.Nontrivial, mem_univ, exists_true_left, SetCoe.exists, Subtype.mk_eq_mk]\n#align nontrivial_coe_sort nontrivial_coe_sort\n\n",
  "nonempty_of_ssubset'":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊂ » -/\ntheorem nonempty_of_ssubset' (ht : «expr ⊂ » s t) : t.nonempty :=\n  (nonempty_of_ssubset ht).of_diff\n#align nonempty_of_ssubset' nonempty_of_ssubset'\n\n",
  "nonempty_of_ssubset":
@@ -437,67 +445,67 @@
  "nonempty_of_not_subset":
  "theorem nonempty_of_not_subset (h : ¬s ⊆ t) : (s \\ t).nonempty :=\n  let ⟨x, xs, xt⟩ := not_subset.1 h\n  ⟨x, xs, xt⟩\n#align nonempty_of_not_subset nonempty_of_not_subset\n\n",
  "nonempty_of_nonempty_subtype":
- "theorem nonempty_of_nonempty_subtype [nonempty s] : s.nonempty :=\n  nonempty_subtype.mp ‹_›\n#align nonempty_of_nonempty_subtype nonempty_of_nonempty_subtype\n\n",
+ "theorem nonempty_of_nonempty_subtype [Nonempty s] : s.nonempty :=\n  nonempty_subtype.mp ‹_›\n#align nonempty_of_nonempty_subtype nonempty_of_nonempty_subtype\n\n",
  "nonempty_of_mem":
  "theorem nonempty_of_mem {x} (h : x ∈ s) : s.nonempty :=\n  ⟨x, h⟩\n#align nonempty_of_mem nonempty_of_mem\n\n",
  "nonempty_iff_univ_nonempty":
- "theorem nonempty_iff_univ_nonempty : nonempty α ↔ (univ : set α).nonempty :=\n  ⟨fun ⟨x⟩ => ⟨x, trivial⟩, fun ⟨x, _⟩ => ⟨x⟩⟩\n#align nonempty_iff_univ_nonempty nonempty_iff_univ_nonempty\n\n",
+ "theorem nonempty_iff_univ_nonempty : Nonempty α ↔ (univ : Set α).nonempty :=\n  ⟨fun ⟨x⟩ => ⟨x, trivial⟩, fun ⟨x, _⟩ => ⟨x⟩⟩\n#align nonempty_iff_univ_nonempty nonempty_iff_univ_nonempty\n\n",
  "nonempty_iff_ne_empty":
  "/-- See also `set.not_nonempty_iff_eq_empty`. -/\ntheorem nonempty_iff_ne_empty : s.nonempty ↔ s ≠ ∅ :=\n  not_nonempty_iff_eq_empty.not_right\n#align nonempty_iff_ne_empty nonempty_iff_ne_empty\n\n",
  "nonempty_diff":
- "theorem nonempty_diff {s t : set α} : (s \\ t).nonempty ↔ ¬s ⊆ t :=\n  inter_compl_nonempty_iff\n#align nonempty_diff nonempty_diff\n\n",
+ "theorem nonempty_diff {s t : Set α} : (s \\ t).nonempty ↔ ¬s ⊆ t :=\n  inter_compl_nonempty_iff\n#align nonempty_diff nonempty_diff\n\n",
  "nonempty_def":
  "theorem nonempty_def : s.nonempty ↔ ∃ x, x ∈ s :=\n  iff.rfl\n#align nonempty_def nonempty_def\n\n",
  "nonempty_compl":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\ntheorem nonempty_compl : («expr ᶜ» s).nonempty ↔ s ≠ univ :=\n  (ne_univ_iff_exists_not_mem s).symm\n#align nonempty_compl nonempty_compl\n\n",
  "nonempty_coe_sort":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr↥ » -/\n@[simp]\ntheorem nonempty_coe_sort {s : set α} : nonempty («expr↥ » s) ↔ s.nonempty :=\n  nonempty_subtype\n#align nonempty_coe_sort nonempty_coe_sort\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr↥ » -/\n@[simp]\ntheorem nonempty_coe_sort {s : Set α} : Nonempty («expr↥ » s) ↔ s.nonempty :=\n  nonempty_subtype\n#align nonempty_coe_sort nonempty_coe_sort\n\n",
  "nonempty_apply_iff":
- "theorem injective.nonempty_apply_iff {f : set α → set β} (hf : injective f) (h2 : f ∅ = ∅) {s : set α} :\n    (f s).nonempty ↔ s.nonempty := by rw [nonempty_iff_ne_empty, ← h2, nonempty_iff_ne_empty, hf.ne_iff]\n#align injective.nonempty_apply_iff injective.nonempty_apply_iff\n\n",
+ "theorem injective.nonempty_apply_iff {f : Set α → Set β} (hf : injective f) (h2 : f ∅ = ∅) {s : Set α} :\n    (f s).nonempty ↔ s.nonempty := by rw [nonempty_iff_ne_empty, ← h2, nonempty_iff_ne_empty, hf.ne_iff]\n#align injective.nonempty_apply_iff injective.nonempty_apply_iff\n\n",
  "nonempty":
  "protected theorem nontrivial.nonempty (hs : s.nontrivial) : s.nonempty :=\n  let ⟨x, hx, _⟩ := hs\n  ⟨x, hx⟩\n#align nontrivial.nonempty nontrivial.nonempty\n\n",
  "nmem_singleton_empty":
- "theorem nmem_singleton_empty {s : set α} : s ∉ ({∅} : set (set α)) ↔ s.nonempty :=\n  nonempty_iff_ne_empty.symm\n#align nmem_singleton_empty nmem_singleton_empty\n\n",
+ "theorem nmem_singleton_empty {s : Set α} : s ∉ ({∅} : Set (Set α)) ↔ s.nonempty :=\n  nonempty_iff_ne_empty.symm\n#align nmem_singleton_empty nmem_singleton_empty\n\n",
  "nmem_set_of_iff":
  "theorem nmem_set_of_iff {a : α} {p : α → Prop} : a ∉ { x | p x } ↔ ¬p a :=\n  iff.rfl\n#align nmem_set_of_iff nmem_set_of_iff\n\n",
  "ne_univ_iff_exists_not_mem":
- "theorem ne_univ_iff_exists_not_mem {α : Type _} (s : set α) : s ≠ univ ↔ ∃ a, a ∉ s := by\n  rw [← not_forall, ← eq_univ_iff_forall]\n#align ne_univ_iff_exists_not_mem ne_univ_iff_exists_not_mem\n\n",
+ "theorem ne_univ_iff_exists_not_mem {α : Type _} (s : Set α) : s ≠ univ ↔ ∃ a, a ∉ s := by\n  rw [← not_forall, ← eq_univ_iff_forall]\n#align ne_univ_iff_exists_not_mem ne_univ_iff_exists_not_mem\n\n",
  "ne_singleton":
  "theorem nontrivial.ne_singleton {x} (hs : s.nontrivial) : s ≠ {x} := fun H =>\n  by\n  rw [H] at hs\n  exact not_nontrivial_singleton hs\n#align nontrivial.ne_singleton nontrivial.ne_singleton\n\n",
  "ne_of_mem":
  "#print Disjoint.ne_of_mem /-\ntheorem Disjoint.ne_of_mem (h : Disjoint s t) {x y} (hx : x ∈ s) (hy : y ∈ t) : x ≠ y :=\n  disjoint_iff_forall_ne.mp h x hx y hy\n#align disjoint.ne_of_mem Disjoint.ne_of_mem\n-/\n\n",
  "ne_insert_of_not_mem":
- "theorem ne_insert_of_not_mem {s : set α} (t : set α) {a : α} : a ∉ s → s ≠ insert a t :=\n  mt fun e => e.symm ▸ mem_insert _ _\n#align ne_insert_of_not_mem ne_insert_of_not_mem\n\n",
+ "theorem ne_insert_of_not_mem {s : Set α} (t : Set α) {a : α} : a ∉ s → s ≠ insert a t :=\n  mt fun e => e.symm ▸ mem_insert _ _\n#align ne_insert_of_not_mem ne_insert_of_not_mem\n\n",
  "ne_empty":
  "protected theorem nontrivial.ne_empty (hs : s.nontrivial) : s ≠ ∅ :=\n  hs.nonempty.ne_empty\n#align nontrivial.ne_empty nontrivial.ne_empty\n\n",
  "monotone_set_of":
- "theorem monotone_set_of [preorder α] {p : α → β → Prop} (hp : ∀ b, monotone fun a => p a b) :\n    monotone fun a => { b | p a b } := fun a a' h b => hp b h\n#align monotone_set_of monotone_set_of\n\n",
+ "theorem monotone_set_of [preorder α] {p : α → β → Prop} (hp : ∀ b, Monotone fun a => p a b) :\n    Monotone fun a => { b | p a b } := fun a a' h b => hp b h\n#align monotone_set_of monotone_set_of\n\n",
  "monotone_powerset":
- "theorem monotone_powerset : monotone (powerset : set α → set (set α)) := fun s t => powerset_mono.2\n#align monotone_powerset monotone_powerset\n\n",
+ "theorem monotone_powerset : Monotone (powerset : Set α → Set (Set α)) := fun s t => powerset_mono.2\n#align monotone_powerset monotone_powerset\n\n",
  "monotone_on_singleton":
- "@[simp]\ntheorem monotone_on_singleton : monotone_on f {a} :=\n  subsingleton_singleton.monotone_on f\n#align monotone_on_singleton monotone_on_singleton\n\n",
+ "@[simp]\ntheorem monotone_on_singleton : MonotoneOn f {a} :=\n  subsingleton_singleton.monotone_on f\n#align monotone_on_singleton monotone_on_singleton\n\n",
  "monotone_on_iff_monotone":
- "theorem monotone_on_iff_monotone : monotone_on f s ↔ monotone fun a : s => f a := by simp [monotone, monotone_on]\n#align monotone_on_iff_monotone monotone_on_iff_monotone\n\n",
+ "theorem monotone_on_iff_monotone : MonotoneOn f s ↔ Monotone fun a : s => f a := by simp [Monotone, MonotoneOn]\n#align monotone_on_iff_monotone monotone_on_iff_monotone\n\n",
  "monotone_on":
- "protected theorem subsingleton.monotone_on (h : s.subsingleton) : monotone_on f s := fun a ha b hb _ =>\n  (congr_arg _ (h ha hb)).le\n#align subsingleton.monotone_on subsingleton.monotone_on\n\n",
+ "protected theorem subsingleton.monotone_on (h : s.subsingleton) : MonotoneOn f s := fun a ha b hb _ =>\n  (congr_arg _ (h ha hb)).le\n#align subsingleton.monotone_on subsingleton.monotone_on\n\n",
  "mono":
  "theorem nontrivial.mono (hs : s.nontrivial) (hst : s ⊆ t) : t.nontrivial :=\n  let ⟨x, hx, y, hy, hxy⟩ := hs\n  ⟨x, hst hx, y, hst hy, hxy⟩\n#align nontrivial.mono nontrivial.mono\n\n",
  "mem_univ":
  "@[simp]\ntheorem mem_univ (x : α) : x ∈ @univ α :=\n  trivial\n#align mem_univ mem_univ\n\n",
  "mem_union_right":
- "theorem mem_union_right {x : α} {b : set α} (a : set α) : x ∈ b → x ∈ a ∪ b :=\n  or.inr\n#align mem_union_right mem_union_right\n\n",
+ "theorem mem_union_right {x : α} {b : Set α} (a : Set α) : x ∈ b → x ∈ a ∪ b :=\n  or.inr\n#align mem_union_right mem_union_right\n\n",
  "mem_union_left":
- "theorem mem_union_left {x : α} {a : set α} (b : set α) : x ∈ a → x ∈ a ∪ b :=\n  or.inl\n#align mem_union_left mem_union_left\n\n",
+ "theorem mem_union_left {x : α} {a : Set α} (b : Set α) : x ∈ a → x ∈ a ∪ b :=\n  or.inl\n#align mem_union_left mem_union_left\n\n",
  "mem_union":
- "@[simp]\ntheorem mem_union (x : α) (a b : set α) : x ∈ a ∪ b ↔ x ∈ a ∨ x ∈ b :=\n  iff.rfl\n#align mem_union mem_union\n\n",
+ "@[simp]\ntheorem mem_union (x : α) (a b : Set α) : x ∈ a ∪ b ↔ x ∈ a ∨ x ∈ b :=\n  iff.rfl\n#align mem_union mem_union\n\n",
  "mem_symm_diff":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ∆ » -/\ntheorem mem_symm_diff : a ∈ «expr ∆ » s t ↔ a ∈ s ∧ a ∉ t ∨ a ∈ t ∧ a ∉ s :=\n  iff.rfl\n#align mem_symm_diff mem_symm_diff\n\n",
  "mem_singleton_of_eq":
- "theorem mem_singleton_of_eq {x y : α} (H : x = y) : x ∈ ({y} : set α) :=\n  H\n#align mem_singleton_of_eq mem_singleton_of_eq\n\n",
+ "theorem mem_singleton_of_eq {x y : α} (H : x = y) : x ∈ ({y} : Set α) :=\n  H\n#align mem_singleton_of_eq mem_singleton_of_eq\n\n",
  "mem_singleton_iff":
- "@[simp]\ntheorem mem_singleton_iff {a b : α} : a ∈ ({b} : set α) ↔ a = b :=\n  iff.rfl\n#align mem_singleton_iff mem_singleton_iff\n\n",
+ "@[simp]\ntheorem mem_singleton_iff {a b : α} : a ∈ ({b} : Set α) ↔ a = b :=\n  iff.rfl\n#align mem_singleton_iff mem_singleton_iff\n\n",
  "mem_singleton":
- "-- TODO: again, annotation needed\n@[simp]\ntheorem mem_singleton (a : α) : a ∈ ({a} : set α) :=\n  @rfl _ _\n#align mem_singleton mem_singleton\n\n",
+ "-- TODO: again, annotation needed\n@[simp]\ntheorem mem_singleton (a : α) : a ∈ ({a} : Set α) :=\n  @rfl _ _\n#align mem_singleton mem_singleton\n\n",
  "mem_set_of":
  "theorem mem_set_of {a : α} {p : α → Prop} : a ∈ { x | p x } ↔ p a :=\n  iff.rfl\n#align mem_set_of mem_set_of\n\n",
  "mem_sep_iff":
@@ -505,157 +513,159 @@
  "mem_sep":
  "theorem mem_sep (xs : x ∈ s) (px : p x) : x ∈ { x ∈ s | p x } :=\n  ⟨xs, px⟩\n#align mem_sep mem_sep\n\n",
  "mem_powerset_iff":
- "@[simp]\ntheorem mem_powerset_iff (x s : set α) : x ∈ 𝒫 s ↔ x ⊆ s :=\n  iff.rfl\n#align mem_powerset_iff mem_powerset_iff\n\n",
+ "@[simp]\ntheorem mem_powerset_iff (x s : Set α) : x ∈ 𝒫 s ↔ x ⊆ s :=\n  iff.rfl\n#align mem_powerset_iff mem_powerset_iff\n\n",
  "mem_powerset":
- "theorem mem_powerset {x s : set α} (h : x ⊆ s) : x ∈ 𝒫 s :=\n  h\n#align mem_powerset mem_powerset\n\n",
+ "theorem mem_powerset {x s : Set α} (h : x ⊆ s) : x ∈ 𝒫 s :=\n  h\n#align mem_powerset mem_powerset\n\n",
  "mem_or_mem_of_mem_union":
- "theorem mem_or_mem_of_mem_union {x : α} {a b : set α} (H : x ∈ a ∪ b) : x ∈ a ∨ x ∈ b :=\n  H\n#align mem_or_mem_of_mem_union mem_or_mem_of_mem_union\n\n",
+ "theorem mem_or_mem_of_mem_union {x : α} {a b : Set α} (H : x ∈ a ∪ b) : x ∈ a ∨ x ∈ b :=\n  H\n#align mem_or_mem_of_mem_union mem_or_mem_of_mem_union\n\n",
  "mem_of_subset_of_mem":
- "theorem mem_of_subset_of_mem {s₁ s₂ : set α} {a : α} (h : s₁ ⊆ s₂) : a ∈ s₁ → a ∈ s₂ :=\n  @h _\n#align mem_of_subset_of_mem mem_of_subset_of_mem\n\n",
+ "theorem mem_of_subset_of_mem {s₁ s₂ : Set α} {a : α} (h : s₁ ⊆ s₂) : a ∈ s₁ → a ∈ s₂ :=\n  @h _\n#align mem_of_subset_of_mem mem_of_subset_of_mem\n\n",
  "mem_of_mem_of_subset":
- "@[trans]\ntheorem mem_of_mem_of_subset {x : α} {s t : set α} (hx : x ∈ s) (h : s ⊆ t) : x ∈ t :=\n  h hx\n#align mem_of_mem_of_subset mem_of_mem_of_subset\n\n",
+ "@[trans]\ntheorem mem_of_mem_of_subset {x : α} {s t : Set α} (hx : x ∈ s) (h : s ⊆ t) : x ∈ t :=\n  h hx\n#align mem_of_mem_of_subset mem_of_mem_of_subset\n\n",
  "mem_of_mem_inter_right":
- "theorem mem_of_mem_inter_right {x : α} {a b : set α} (h : x ∈ a ∩ b) : x ∈ b :=\n  h.right\n#align mem_of_mem_inter_right mem_of_mem_inter_right\n\n",
+ "theorem mem_of_mem_inter_right {x : α} {a b : Set α} (h : x ∈ a ∩ b) : x ∈ b :=\n  h.right\n#align mem_of_mem_inter_right mem_of_mem_inter_right\n\n",
  "mem_of_mem_inter_left":
- "theorem mem_of_mem_inter_left {x : α} {a b : set α} (h : x ∈ a ∩ b) : x ∈ a :=\n  h.left\n#align mem_of_mem_inter_left mem_of_mem_inter_left\n\n",
+ "theorem mem_of_mem_inter_left {x : α} {a b : Set α} (h : x ∈ a ∩ b) : x ∈ a :=\n  h.left\n#align mem_of_mem_inter_left mem_of_mem_inter_left\n\n",
  "mem_of_mem_insert_of_ne":
  "theorem mem_of_mem_insert_of_ne : b ∈ insert a s → b ≠ a → b ∈ s :=\n  or.resolve_left\n#align mem_of_mem_insert_of_ne mem_of_mem_insert_of_ne\n\n",
  "mem_of_mem_diff":
- "theorem mem_of_mem_diff {s t : set α} {x : α} (h : x ∈ s \\ t) : x ∈ s :=\n  h.left\n#align mem_of_mem_diff mem_of_mem_diff\n\n",
+ "theorem mem_of_mem_diff {s t : Set α} {x : α} (h : x ∈ s \\ t) : x ∈ s :=\n  h.left\n#align mem_of_mem_diff mem_of_mem_diff\n\n",
  "mem_of_eq_of_mem":
- "@[trans]\ntheorem mem_of_eq_of_mem {x y : α} {s : set α} (hx : x = y) (h : y ∈ s) : x ∈ s :=\n  hx.symm ▸ h\n#align mem_of_eq_of_mem mem_of_eq_of_mem\n\n",
+ "@[trans]\ntheorem mem_of_eq_of_mem {x y : α} {s : Set α} (hx : x = y) (h : y ∈ s) : x ∈ s :=\n  hx.symm ▸ h\n#align mem_of_eq_of_mem mem_of_eq_of_mem\n\n",
  "mem_ite_univ_right":
- "@[simp]\ntheorem mem_ite_univ_right (p : Prop) [decidable p] (t : set α) (x : α) : x ∈ ite p t Set.univ ↔ p → x ∈ t :=\n  mem_dite_univ_right p (fun _ => t) x\n#align mem_ite_univ_right mem_ite_univ_right\n\n",
+ "@[simp]\ntheorem mem_ite_univ_right (p : Prop) [Decidable p] (t : Set α) (x : α) : x ∈ ite p t Set.univ ↔ p → x ∈ t :=\n  mem_dite_univ_right p (fun _ => t) x\n#align mem_ite_univ_right mem_ite_univ_right\n\n",
  "mem_ite_univ_left":
- "@[simp]\ntheorem mem_ite_univ_left (p : Prop) [decidable p] (t : set α) (x : α) : x ∈ ite p Set.univ t ↔ ¬p → x ∈ t :=\n  mem_dite_univ_left p (fun _ => t) x\n#align mem_ite_univ_left mem_ite_univ_left\n\n",
+ "@[simp]\ntheorem mem_ite_univ_left (p : Prop) [Decidable p] (t : Set α) (x : α) : x ∈ ite p Set.univ t ↔ ¬p → x ∈ t :=\n  mem_dite_univ_left p (fun _ => t) x\n#align mem_ite_univ_left mem_ite_univ_left\n\n",
  "mem_ite_empty_right":
- "@[simp]\ntheorem mem_ite_empty_right (p : Prop) [decidable p] (t : set α) (x : α) : x ∈ ite p t ∅ ↔ p ∧ x ∈ t := by\n  split_ifs <;> simp [h]\n#align mem_ite_empty_right mem_ite_empty_right\n\n",
+ "@[simp]\ntheorem mem_ite_empty_right (p : Prop) [Decidable p] (t : Set α) (x : α) : x ∈ ite p t ∅ ↔ p ∧ x ∈ t := by\n  split_ifs <;> simp [h]\n#align mem_ite_empty_right mem_ite_empty_right\n\n",
  "mem_ite_empty_left":
- "@[simp]\ntheorem mem_ite_empty_left (p : Prop) [decidable p] (t : set α) (x : α) : x ∈ ite p ∅ t ↔ ¬p ∧ x ∈ t := by\n  split_ifs <;> simp [h]\n#align mem_ite_empty_left mem_ite_empty_left\n\n",
+ "@[simp]\ntheorem mem_ite_empty_left (p : Prop) [Decidable p] (t : Set α) (x : α) : x ∈ ite p ∅ t ↔ ¬p ∧ x ∈ t := by\n  split_ifs <;> simp [h]\n#align mem_ite_empty_left mem_ite_empty_left\n\n",
  "mem_inter_iff":
- "@[simp]\ntheorem mem_inter_iff (x : α) (a b : set α) : x ∈ a ∩ b ↔ x ∈ a ∧ x ∈ b :=\n  iff.rfl\n#align mem_inter_iff mem_inter_iff\n\n",
+ "@[simp]\ntheorem mem_inter_iff (x : α) (a b : Set α) : x ∈ a ∩ b ↔ x ∈ a ∧ x ∈ b :=\n  iff.rfl\n#align mem_inter_iff mem_inter_iff\n\n",
  "mem_inter":
- "theorem mem_inter {x : α} {a b : set α} (ha : x ∈ a) (hb : x ∈ b) : x ∈ a ∩ b :=\n  ⟨ha, hb⟩\n#align mem_inter mem_inter\n\n",
+ "theorem mem_inter {x : α} {a b : Set α} (ha : x ∈ a) (hb : x ∈ b) : x ∈ a ∩ b :=\n  ⟨ha, hb⟩\n#align mem_inter mem_inter\n\n",
  "mem_insert_of_mem":
- "theorem mem_insert_of_mem {x : α} {s : set α} (y : α) : x ∈ s → x ∈ insert y s :=\n  or.inr\n#align mem_insert_of_mem mem_insert_of_mem\n\n",
+ "theorem mem_insert_of_mem {x : α} {s : Set α} (y : α) : x ∈ s → x ∈ insert y s :=\n  or.inr\n#align mem_insert_of_mem mem_insert_of_mem\n\n",
  "mem_insert_iff":
- "@[simp]\ntheorem mem_insert_iff {x a : α} {s : set α} : x ∈ insert a s ↔ x = a ∨ x ∈ s :=\n  iff.rfl\n#align mem_insert_iff mem_insert_iff\n\n",
+ "@[simp]\ntheorem mem_insert_iff {x a : α} {s : Set α} : x ∈ insert a s ↔ x = a ∨ x ∈ s :=\n  iff.rfl\n#align mem_insert_iff mem_insert_iff\n\n",
  "mem_insert":
- "theorem mem_insert (x : α) (s : set α) : x ∈ insert x s :=\n  or.inl rfl\n#align mem_insert mem_insert\n\n",
+ "theorem mem_insert (x : α) (s : Set α) : x ∈ insert x s :=\n  or.inl rfl\n#align mem_insert mem_insert\n\n",
  "mem_iff_nonempty":
- "theorem mem_iff_nonempty {α : Type _} [subsingleton α] {s : set α} {x : α} : x ∈ s ↔ s.nonempty :=\n  ⟨fun hx => ⟨x, hx⟩, fun ⟨y, hy⟩ => subsingleton.elim y x ▸ hy⟩\n#align mem_iff_nonempty mem_iff_nonempty\n\n",
+ "theorem mem_iff_nonempty {α : Type _} [subsingleton α] {s : Set α} {x : α} : x ∈ s ↔ s.nonempty :=\n  ⟨fun hx => ⟨x, hx⟩, fun ⟨y, hy⟩ => subsingleton.elim y x ▸ hy⟩\n#align mem_iff_nonempty mem_iff_nonempty\n\n",
  "mem_empty_iff_false":
- "@[simp]\ntheorem mem_empty_iff_false (x : α) : x ∈ (∅ : set α) ↔ false :=\n  iff.rfl\n#align mem_empty_iff_false mem_empty_iff_false\n\n",
+ "@[simp]\ntheorem mem_empty_iff_false (x : α) : x ∈ (∅ : Set α) ↔ False :=\n  iff.rfl\n#align mem_empty_iff_false mem_empty_iff_false\n\n",
  "mem_dite_univ_right":
- "theorem mem_dite_univ_right (p : Prop) [decidable p] (t : p → set α) (x : α) :\n    (x ∈ if h : p then t h else univ) ↔ ∀ h : p, x ∈ t h := by split_ifs <;> simp [h]\n#align mem_dite_univ_right mem_dite_univ_right\n\n",
+ "theorem mem_dite_univ_right (p : Prop) [Decidable p] (t : p → Set α) (x : α) :\n    (x ∈ if h : p then t h else univ) ↔ ∀ h : p, x ∈ t h := by split_ifs <;> simp [h]\n#align mem_dite_univ_right mem_dite_univ_right\n\n",
  "mem_dite_univ_left":
- "theorem mem_dite_univ_left (p : Prop) [decidable p] (t : ¬p → set α) (x : α) :\n    (x ∈ if h : p then univ else t h) ↔ ∀ h : ¬p, x ∈ t h := by split_ifs <;> simp [h]\n#align mem_dite_univ_left mem_dite_univ_left\n\n",
+ "theorem mem_dite_univ_left (p : Prop) [Decidable p] (t : ¬p → Set α) (x : α) :\n    (x ∈ if h : p then univ else t h) ↔ ∀ h : ¬p, x ∈ t h := by split_ifs <;> simp [h]\n#align mem_dite_univ_left mem_dite_univ_left\n\n",
  "mem_dite_empty_right":
- "theorem mem_dite_empty_right (p : Prop) [decidable p] (t : p → set α) (x : α) :\n    (x ∈ if h : p then t h else ∅) ↔ ∃ h : p, x ∈ t h := by split_ifs <;> simp [h]\n#align mem_dite_empty_right mem_dite_empty_right\n\n",
+ "theorem mem_dite_empty_right (p : Prop) [Decidable p] (t : p → Set α) (x : α) :\n    (x ∈ if h : p then t h else ∅) ↔ ∃ h : p, x ∈ t h := by split_ifs <;> simp [h]\n#align mem_dite_empty_right mem_dite_empty_right\n\n",
  "mem_dite_empty_left":
- "theorem mem_dite_empty_left (p : Prop) [decidable p] (t : ¬p → set α) (x : α) :\n    (x ∈ if h : p then ∅ else t h) ↔ ∃ h : ¬p, x ∈ t h := by split_ifs <;> simp [h]\n#align mem_dite_empty_left mem_dite_empty_left\n\n",
+ "theorem mem_dite_empty_left (p : Prop) [Decidable p] (t : ¬p → Set α) (x : α) :\n    (x ∈ if h : p then ∅ else t h) ↔ ∃ h : ¬p, x ∈ t h := by split_ifs <;> simp [h]\n#align mem_dite_empty_left mem_dite_empty_left\n\n",
  "mem_diff_singleton_empty":
- "theorem mem_diff_singleton_empty {t : set (set α)} : s ∈ t \\ {∅} ↔ s ∈ t ∧ s.nonempty :=\n  mem_diff_singleton.trans <| and_congr_right' nonempty_iff_ne_empty.symm\n#align mem_diff_singleton_empty mem_diff_singleton_empty\n\n",
+ "theorem mem_diff_singleton_empty {t : Set (Set α)} : s ∈ t \\ {∅} ↔ s ∈ t ∧ s.nonempty :=\n  mem_diff_singleton.trans <| and_congr_right' nonempty_iff_ne_empty.symm\n#align mem_diff_singleton_empty mem_diff_singleton_empty\n\n",
  "mem_diff_singleton":
- "theorem mem_diff_singleton {x y : α} {s : set α} : x ∈ s \\ {y} ↔ x ∈ s ∧ x ≠ y :=\n  iff.rfl\n#align mem_diff_singleton mem_diff_singleton\n\n",
+ "theorem mem_diff_singleton {x y : α} {s : Set α} : x ∈ s \\ {y} ↔ x ∈ s ∧ x ≠ y :=\n  iff.rfl\n#align mem_diff_singleton mem_diff_singleton\n\n",
  "mem_diff_of_mem":
- "theorem mem_diff_of_mem {s t : set α} {x : α} (h1 : x ∈ s) (h2 : x ∉ t) : x ∈ s \\ t :=\n  ⟨h1, h2⟩\n#align mem_diff_of_mem mem_diff_of_mem\n\n",
+ "theorem mem_diff_of_mem {s t : Set α} {x : α} (h1 : x ∈ s) (h2 : x ∉ t) : x ∈ s \\ t :=\n  ⟨h1, h2⟩\n#align mem_diff_of_mem mem_diff_of_mem\n\n",
  "mem_diff":
- "@[simp]\ntheorem mem_diff {s t : set α} (x : α) : x ∈ s \\ t ↔ x ∈ s ∧ x ∉ t :=\n  iff.rfl\n#align mem_diff mem_diff\n\n",
+ "@[simp]\ntheorem mem_diff {s t : Set α} (x : α) : x ∈ s \\ t ↔ x ∈ s ∧ x ∉ t :=\n  iff.rfl\n#align mem_diff mem_diff\n\n",
  "mem_def":
- "theorem mem_def {a : α} {s : set α} : a ∈ s ↔ s a :=\n  iff.rfl\n#align mem_def mem_def\n\n",
+ "theorem mem_def {a : α} {s : Set α} : a ∈ s ↔ s a :=\n  iff.rfl\n#align mem_def mem_def\n\n",
  "mem_compl_singleton_iff":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\ntheorem mem_compl_singleton_iff {a x : α} : x ∈ «expr ᶜ» ({a} : set α) ↔ x ≠ a :=\n  iff.rfl\n#align mem_compl_singleton_iff mem_compl_singleton_iff\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\ntheorem mem_compl_singleton_iff {a x : α} : x ∈ «expr ᶜ» ({a} : Set α) ↔ x ≠ a :=\n  iff.rfl\n#align mem_compl_singleton_iff mem_compl_singleton_iff\n\n",
  "mem_compl_iff":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\n@[simp]\ntheorem mem_compl_iff (s : set α) (x : α) : x ∈ «expr ᶜ» s ↔ x ∉ s :=\n  iff.rfl\n#align mem_compl_iff mem_compl_iff\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\n@[simp]\ntheorem mem_compl_iff (s : Set α) (x : α) : x ∈ «expr ᶜ» s ↔ x ∉ s :=\n  iff.rfl\n#align mem_compl_iff mem_compl_iff\n\n",
  "mem_compl":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\ntheorem mem_compl {s : set α} {x : α} (h : x ∉ s) : x ∈ «expr ᶜ» s :=\n  h\n#align mem_compl mem_compl\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\ntheorem mem_compl {s : Set α} {x : α} (h : x ∉ s) : x ∈ «expr ᶜ» s :=\n  h\n#align mem_compl mem_compl\n\n",
  "mem":
- "#print Subtype.mem /-\n/-- See also `subtype.prop` -/\ntheorem Subtype.mem {α : Type _} {s : set α} (p : s) : (p : α) ∈ s :=\n  p.prop\n#align subtype.mem Subtype.mem\n-/\n\n",
+ "#print Subtype.mem /-\n/-- See also `subtype.prop` -/\ntheorem Subtype.mem {α : Type _} {s : Set α} (p : s) : (p : α) ∈ s :=\n  p.prop\n#align subtype.mem Subtype.mem\n-/\n\n",
  "lt_iff_ssubset":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊂ » -/\ntheorem lt_iff_ssubset : s < t ↔ «expr ⊂ » s t :=\n  iff.rfl\n#align lt_iff_ssubset lt_iff_ssubset\n\n",
  "lt_eq_ssubset":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:219:4: warning: unsupported binary notation `«expr ⊂ » -/\n@[simp]\ntheorem lt_eq_ssubset : ((· < ·) : set α → set α → Prop) = («expr ⊂ » · ·) :=\n  rfl\n#align lt_eq_ssubset lt_eq_ssubset\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:219:4: warning: unsupported binary notation `«expr ⊂ » -/\n@[simp]\ntheorem lt_eq_ssubset : ((· < ·) : Set α → Set α → Prop) = («expr ⊂ » · ·) :=\n  rfl\n#align lt_eq_ssubset lt_eq_ssubset\n\n",
  "left":
  "theorem nonempty.left (h : (s ∩ t).nonempty) : s.nonempty :=\n  h.imp fun _ => And.left\n#align nonempty.left nonempty.left\n\n",
  "le_iff_subset":
  "theorem le_iff_subset : s ≤ t ↔ s ⊆ t :=\n  iff.rfl\n#align le_iff_subset le_iff_subset\n\n",
  "le_eq_subset":
- "@[simp]\ntheorem le_eq_subset : ((· ≤ ·) : set α → set α → Prop) = (· ⊆ ·) :=\n  rfl\n#align le_eq_subset le_eq_subset\n\n",
+ "@[simp]\ntheorem le_eq_subset : ((· ≤ ·) : Set α → Set α → Prop) = (· ⊆ ·) :=\n  rfl\n#align le_eq_subset le_eq_subset\n\n",
  "ite_univ":
- "@[simp]\ntheorem ite_univ (s s' : set α) : Set.ite univ s s' = s := by simp [Set.ite]\n#align ite_univ ite_univ\n\n",
+ "@[simp]\ntheorem ite_univ (s s' : Set α) : Set.ite univ s s' = s := by simp [Set.ite]\n#align ite_univ ite_univ\n\n",
  "ite_subset_union":
- "theorem ite_subset_union (t s s' : set α) : t.ite s s' ⊆ s ∪ s' :=\n  union_subset_union (inter_subset_left _ _) (diff_subset _ _)\n#align ite_subset_union ite_subset_union\n\n",
+ "theorem ite_subset_union (t s s' : Set α) : t.ite s s' ⊆ s ∪ s' :=\n  union_subset_union (inter_subset_left _ _) (diff_subset _ _)\n#align ite_subset_union ite_subset_union\n\n",
  "ite_same":
- "@[simp]\ntheorem ite_same (t s : set α) : t.ite s s = s :=\n  inter_union_diff _ _\n#align ite_same ite_same\n\n",
+ "@[simp]\ntheorem ite_same (t s : Set α) : t.ite s s = s :=\n  inter_union_diff _ _\n#align ite_same ite_same\n\n",
  "ite_right":
- "@[simp]\ntheorem ite_right (s t : set α) : s.ite t s = t ∩ s := by simp [Set.ite]\n#align ite_right ite_right\n\n",
+ "@[simp]\ntheorem ite_right (s t : Set α) : s.ite t s = t ∩ s := by simp [Set.ite]\n#align ite_right ite_right\n\n",
  "ite_mono":
- "theorem ite_mono (t : set α) {s₁ s₁' s₂ s₂' : set α} (h : s₁ ⊆ s₂) (h' : s₁' ⊆ s₂') : t.ite s₁ s₁' ⊆ t.ite s₂ s₂' :=\n  union_subset_union (inter_subset_inter_left _ h) (inter_subset_inter_left _ h')\n#align ite_mono ite_mono\n\n",
+ "theorem ite_mono (t : Set α) {s₁ s₁' s₂ s₂' : Set α} (h : s₁ ⊆ s₂) (h' : s₁' ⊆ s₂') : t.ite s₁ s₁' ⊆ t.ite s₂ s₂' :=\n  union_subset_union (inter_subset_inter_left _ h) (inter_subset_inter_left _ h')\n#align ite_mono ite_mono\n\n",
  "ite_left":
- "@[simp]\ntheorem ite_left (s t : set α) : s.ite s t = s ∪ t := by simp [Set.ite]\n#align ite_left ite_left\n\n",
+ "@[simp]\ntheorem ite_left (s t : Set α) : s.ite s t = s ∪ t := by simp [Set.ite]\n#align ite_left ite_left\n\n",
  "ite_inter_self":
- "@[simp]\ntheorem ite_inter_self (t s s' : set α) : t.ite s s' ∩ t = s ∩ t := by\n  rw [Set.ite, union_inter_distrib_right, diff_inter_self, inter_assoc, inter_self, union_empty]\n#align ite_inter_self ite_inter_self\n\n",
+ "@[simp]\ntheorem ite_inter_self (t s s' : Set α) : t.ite s s' ∩ t = s ∩ t := by\n  rw [Set.ite, union_inter_distrib_right, diff_inter_self, inter_assoc, inter_self, union_empty]\n#align ite_inter_self ite_inter_self\n\n",
  "ite_inter_of_inter_eq":
- "theorem ite_inter_of_inter_eq (t : set α) {s₁ s₂ s : set α} (h : s₁ ∩ s = s₂ ∩ s) : t.ite s₁ s₂ ∩ s = s₁ ∩ s := by\n  rw [← ite_inter, ← h, ite_same]\n#align ite_inter_of_inter_eq ite_inter_of_inter_eq\n\n",
+ "theorem ite_inter_of_inter_eq (t : Set α) {s₁ s₂ s : Set α} (h : s₁ ∩ s = s₂ ∩ s) : t.ite s₁ s₂ ∩ s = s₁ ∩ s := by\n  rw [← ite_inter, ← h, ite_same]\n#align ite_inter_of_inter_eq ite_inter_of_inter_eq\n\n",
  "ite_inter_inter":
- "theorem ite_inter_inter (t s₁ s₂ s₁' s₂' : set α) : t.ite (s₁ ∩ s₂) (s₁' ∩ s₂') = t.ite s₁ s₁' ∩ t.ite s₂ s₂' :=\n  by\n  ext x\n  simp only [Set.ite, Set.mem_inter_iff, Set.mem_diff, Set.mem_union]\n  itauto\n#align ite_inter_inter ite_inter_inter\n\n",
+ "theorem ite_inter_inter (t s₁ s₂ s₁' s₂' : Set α) : t.ite (s₁ ∩ s₂) (s₁' ∩ s₂') = t.ite s₁ s₁' ∩ t.ite s₂ s₂' :=\n  by\n  ext x\n  simp only [Set.ite, Set.mem_inter_iff, Set.mem_diff, Set.mem_union]\n  itauto\n#align ite_inter_inter ite_inter_inter\n\n",
  "ite_inter_compl_self":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\n@[simp]\ntheorem ite_inter_compl_self (t s s' : set α) : t.ite s s' ∩ «expr ᶜ» t = s' ∩ «expr ᶜ» t := by\n  rw [← ite_compl, ite_inter_self]\n#align ite_inter_compl_self ite_inter_compl_self\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\n@[simp]\ntheorem ite_inter_compl_self (t s s' : Set α) : t.ite s s' ∩ «expr ᶜ» t = s' ∩ «expr ᶜ» t := by\n  rw [← ite_compl, ite_inter_self]\n#align ite_inter_compl_self ite_inter_compl_self\n\n",
  "ite_inter":
- "theorem ite_inter (t s₁ s₂ s : set α) : t.ite (s₁ ∩ s) (s₂ ∩ s) = t.ite s₁ s₂ ∩ s := by rw [ite_inter_inter, ite_same]\n#align ite_inter ite_inter\n\n",
+ "theorem ite_inter (t s₁ s₂ s : Set α) : t.ite (s₁ ∩ s) (s₂ ∩ s) = t.ite s₁ s₂ ∩ s := by rw [ite_inter_inter, ite_same]\n#align ite_inter ite_inter\n\n",
  "ite_empty_right":
- "@[simp]\ntheorem ite_empty_right (t s : set α) : t.ite s ∅ = s ∩ t := by simp [Set.ite]\n#align ite_empty_right ite_empty_right\n\n",
+ "@[simp]\ntheorem ite_empty_right (t s : Set α) : t.ite s ∅ = s ∩ t := by simp [Set.ite]\n#align ite_empty_right ite_empty_right\n\n",
  "ite_empty_left":
- "@[simp]\ntheorem ite_empty_left (t s : set α) : t.ite ∅ s = s \\ t := by simp [Set.ite]\n#align ite_empty_left ite_empty_left\n\n",
+ "@[simp]\ntheorem ite_empty_left (t s : Set α) : t.ite ∅ s = s \\ t := by simp [Set.ite]\n#align ite_empty_left ite_empty_left\n\n",
  "ite_empty":
- "@[simp]\ntheorem ite_empty (s s' : set α) : Set.ite ∅ s s' = s' := by simp [Set.ite]\n#align ite_empty ite_empty\n\n",
+ "@[simp]\ntheorem ite_empty (s s' : Set α) : Set.ite ∅ s s' = s' := by simp [Set.ite]\n#align ite_empty ite_empty\n\n",
  "ite_diff_self":
- "@[simp]\ntheorem ite_diff_self (t s s' : set α) : t.ite s s' \\ t = s' \\ t :=\n  ite_inter_compl_self t s s'\n#align ite_diff_self ite_diff_self\n\n",
+ "@[simp]\ntheorem ite_diff_self (t s s' : Set α) : t.ite s s' \\ t = s' \\ t :=\n  ite_inter_compl_self t s s'\n#align ite_diff_self ite_diff_self\n\n",
  "ite_compl":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\n@[simp]\ntheorem ite_compl (t s s' : set α) : («expr ᶜ» t).ite s s' = t.ite s' s := by\n  rw [Set.ite, Set.ite, diff_compl, union_comm, diff_eq]\n#align ite_compl ite_compl\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\n@[simp]\ntheorem ite_compl (t s s' : Set α) : («expr ᶜ» t).ite s s' = t.ite s' s := by\n  rw [Set.ite, Set.ite, diff_compl, union_comm, diff_eq]\n#align ite_compl ite_compl\n\n",
  "is_empty_coe_sort":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr↥ » -/\n@[simp]\ntheorem is_empty_coe_sort {s : set α} : is_empty («expr↥ » s) ↔ s = ∅ :=\n  not_iff_not.1 <| by simpa using nonempty_iff_ne_empty\n#align is_empty_coe_sort is_empty_coe_sort\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr↥ » -/\n@[simp]\ntheorem is_empty_coe_sort {s : Set α} : IsEmpty («expr↥ » s) ↔ s = ∅ :=\n  not_iff_not.1 <| by simpa using nonempty_iff_ne_empty\n#align is_empty_coe_sort is_empty_coe_sort\n\n",
  "inter_univ":
- "@[simp]\ntheorem inter_univ (a : set α) : a ∩ univ = a :=\n  inf_top_eq\n#align inter_univ inter_univ\n\n",
+ "@[simp]\ntheorem inter_univ (a : Set α) : a ∩ univ = a :=\n  inf_top_eq\n#align inter_univ inter_univ\n\n",
  "inter_union_distrib_right":
- "theorem inter_union_distrib_right {s t u : set α} : s ∩ t ∪ u = (s ∪ u) ∩ (t ∪ u) :=\n  sup_inf_right\n#align inter_union_distrib_right inter_union_distrib_right\n\n",
+ "theorem inter_union_distrib_right {s t u : Set α} : s ∩ t ∪ u = (s ∪ u) ∩ (t ∪ u) :=\n  sup_inf_right\n#align inter_union_distrib_right inter_union_distrib_right\n\n",
  "inter_union_distrib_left":
- "theorem inter_union_distrib_left {s t u : set α} : s ∩ (t ∪ u) = s ∩ t ∪ s ∩ u :=\n  inf_sup_left\n#align inter_union_distrib_left inter_union_distrib_left\n\n",
+ "theorem inter_union_distrib_left {s t u : Set α} : s ∩ (t ∪ u) = s ∩ t ∪ s ∩ u :=\n  inf_sup_left\n#align inter_union_distrib_left inter_union_distrib_left\n\n",
  "inter_union_diff":
- "@[simp]\ntheorem inter_union_diff (s t : set α) : s ∩ t ∪ s \\ t = s :=\n  sup_inf_sdiff s t\n#align inter_union_diff inter_union_diff\n\n",
+ "@[simp]\ntheorem inter_union_diff (s t : Set α) : s ∩ t ∪ s \\ t = s :=\n  sup_inf_sdiff s t\n#align inter_union_diff inter_union_diff\n\n",
  "inter_union_compl":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\n@[simp]\ntheorem inter_union_compl (s t : set α) : s ∩ t ∪ s ∩ «expr ᶜ» t = s :=\n  inter_union_diff _ _\n#align inter_union_compl inter_union_compl\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\n@[simp]\ntheorem inter_union_compl (s t : Set α) : s ∩ t ∪ s ∩ «expr ᶜ» t = s :=\n  inter_union_diff _ _\n#align inter_union_compl inter_union_compl\n\n",
  "inter_symm_diff_distrib_right":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ∆ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ∆ » -/\ntheorem inter_symm_diff_distrib_right (s t u : set α) : «expr ∆ » s t ∩ u = «expr ∆ » (s ∩ u) (t ∩ u) :=\n  inf_symmDiff_distrib_right _ _ _\n#align inter_symm_diff_distrib_right inter_symm_diff_distrib_right\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ∆ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ∆ » -/\ntheorem inter_symm_diff_distrib_right (s t u : Set α) : «expr ∆ » s t ∩ u = «expr ∆ » (s ∩ u) (t ∩ u) :=\n  inf_symmDiff_distrib_right _ _ _\n#align inter_symm_diff_distrib_right inter_symm_diff_distrib_right\n\n",
  "inter_symm_diff_distrib_left":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ∆ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ∆ » -/\ntheorem inter_symm_diff_distrib_left (s t u : set α) : s ∩ «expr ∆ » t u = «expr ∆ » (s ∩ t) (s ∩ u) :=\n  inf_symmDiff_distrib_left _ _ _\n#align inter_symm_diff_distrib_left inter_symm_diff_distrib_left\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ∆ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ∆ » -/\ntheorem inter_symm_diff_distrib_left (s t u : Set α) : s ∩ «expr ∆ » t u = «expr ∆ » (s ∩ t) (s ∩ u) :=\n  inf_symmDiff_distrib_left _ _ _\n#align inter_symm_diff_distrib_left inter_symm_diff_distrib_left\n\n",
  "inter_subset_right":
- "@[simp]\ntheorem inter_subset_right (s t : set α) : s ∩ t ⊆ t := fun x => And.right\n#align inter_subset_right inter_subset_right\n\n",
+ "@[simp]\ntheorem inter_subset_right (s t : Set α) : s ∩ t ⊆ t := fun x => And.right\n#align inter_subset_right inter_subset_right\n\n",
  "inter_subset_left":
- "@[simp]\ntheorem inter_subset_left (s t : set α) : s ∩ t ⊆ s := fun x => And.left\n#align inter_subset_left inter_subset_left\n\n",
+ "@[simp]\ntheorem inter_subset_left (s t : Set α) : s ∩ t ⊆ s := fun x => And.left\n#align inter_subset_left inter_subset_left\n\n",
  "inter_subset_ite":
- "theorem inter_subset_ite (t s s' : set α) : s ∩ s' ⊆ t.ite s s' :=\n  ite_same t (s ∩ s') ▸ ite_mono _ (inter_subset_left _ _) (inter_subset_right _ _)\n#align inter_subset_ite inter_subset_ite\n\n",
+ "theorem inter_subset_ite (t s s' : Set α) : s ∩ s' ⊆ t.ite s s' :=\n  ite_same t (s ∩ s') ▸ ite_mono _ (inter_subset_left _ _) (inter_subset_right _ _)\n#align inter_subset_ite inter_subset_ite\n\n",
  "inter_subset_inter_right":
- "theorem inter_subset_inter_right {s t : set α} (u : set α) (H : s ⊆ t) : u ∩ s ⊆ u ∩ t :=\n  inter_subset_inter Subset.rfl H\n#align inter_subset_inter_right inter_subset_inter_right\n\n",
+ "theorem inter_subset_inter_right {s t : Set α} (u : Set α) (H : s ⊆ t) : u ∩ s ⊆ u ∩ t :=\n  inter_subset_inter Subset.rfl H\n#align inter_subset_inter_right inter_subset_inter_right\n\n",
  "inter_subset_inter_left":
- "theorem inter_subset_inter_left {s t : set α} (u : set α) (H : s ⊆ t) : s ∩ u ⊆ t ∩ u :=\n  inter_subset_inter H Subset.rfl\n#align inter_subset_inter_left inter_subset_inter_left\n\n",
+ "theorem inter_subset_inter_left {s t : Set α} (u : Set α) (H : s ⊆ t) : s ∩ u ⊆ t ∩ u :=\n  inter_subset_inter H Subset.rfl\n#align inter_subset_inter_left inter_subset_inter_left\n\n",
  "inter_subset_inter":
- "theorem inter_subset_inter {s₁ s₂ t₁ t₂ : set α} (h₁ : s₁ ⊆ t₁) (h₂ : s₂ ⊆ t₂) : s₁ ∩ s₂ ⊆ t₁ ∩ t₂ := fun x =>\n  and.imp (@h₁ _) (@h₂ _)\n#align inter_subset_inter inter_subset_inter\n\n",
+ "theorem inter_subset_inter {s₁ s₂ t₁ t₂ : Set α} (h₁ : s₁ ⊆ t₁) (h₂ : s₂ ⊆ t₂) : s₁ ∩ s₂ ⊆ t₁ ∩ t₂ := fun x =>\n  and.imp (@h₁ _) (@h₂ _)\n#align inter_subset_inter inter_subset_inter\n\n",
  "inter_subset":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\ntheorem inter_subset (a b c : set α) : a ∩ b ⊆ c ↔ a ⊆ «expr ᶜ» b ∪ c :=\n  forall_congr' fun x => and_imp.trans <| imp_congr_right fun _ => imp_iff_not_or\n#align inter_subset inter_subset\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\ntheorem inter_subset (a b c : Set α) : a ∩ b ⊆ c ↔ a ⊆ «expr ᶜ» b ∪ c :=\n  forall_congr' fun x => and_imp.trans <| imp_congr_right fun _ => imp_iff_not_or\n#align inter_subset inter_subset\n\n",
  "inter_singleton_nonempty":
  "@[simp]\ntheorem inter_singleton_nonempty : (s ∩ {a}).nonempty ↔ a ∈ s := by rw [inter_comm, singleton_inter_nonempty]\n#align inter_singleton_nonempty inter_singleton_nonempty\n\n",
  "inter_singleton_eq_empty":
  "@[simp]\ntheorem inter_singleton_eq_empty : s ∩ {a} = ∅ ↔ a ∉ s := by rw [inter_comm, singleton_inter_eq_empty]\n#align inter_singleton_eq_empty inter_singleton_eq_empty\n\n",
+ "inter_set_of_eq_sep":
+ "theorem inter_set_of_eq_sep (s : Set α) (p : α → Prop) : s ∩ { a | p a } = { a ∈ s | p a } :=\n  rfl\n#align inter_set_of_eq_sep inter_set_of_eq_sep\n\n",
  "inter_self":
- "@[simp]\ntheorem inter_self (a : set α) : a ∩ a = a :=\n  ext fun x => and_self_iff _\n#align inter_self inter_self\n\n",
+ "@[simp]\ntheorem inter_self (a : Set α) : a ∩ a = a :=\n  ext fun x => and_self_iff _\n#align inter_self inter_self\n\n",
  "inter_right_comm":
- "theorem inter_right_comm (s₁ s₂ s₃ : set α) : s₁ ∩ s₂ ∩ s₃ = s₁ ∩ s₃ ∩ s₂ :=\n  ext fun x => and_right_comm\n#align inter_right_comm inter_right_comm\n\n",
+ "theorem inter_right_comm (s₁ s₂ s₃ : Set α) : s₁ ∩ s₂ ∩ s₃ = s₁ ∩ s₃ ∩ s₂ :=\n  ext fun x => and_right_comm\n#align inter_right_comm inter_right_comm\n\n",
  "inter_right'":
- "theorem inter_right' (u : set α) (h : Disjoint s t) : Disjoint s (u ∩ t) :=\n  h.inf_right' _\n#align inter_right' inter_right'\n\n",
+ "theorem inter_right' (u : Set α) (h : Disjoint s t) : Disjoint s (u ∩ t) :=\n  h.inf_right' _\n#align inter_right' inter_right'\n\n",
  "inter_right":
- "theorem inter_right (u : set α) (h : Disjoint s t) : Disjoint s (t ∩ u) :=\n  h.inf_right _\n#align inter_right inter_right\n\n",
+ "theorem inter_right (u : Set α) (h : Disjoint s t) : Disjoint s (t ∩ u) :=\n  h.inf_right _\n#align inter_right inter_right\n\n",
  "inter_nonempty_iff_exists_right":
  "theorem inter_nonempty_iff_exists_right : (s ∩ t).nonempty ↔ ∃ x ∈ t, x ∈ s := by\n  simp_rw [inter_nonempty, exists_prop, and_comm']\n#align inter_nonempty_iff_exists_right inter_nonempty_iff_exists_right\n\n",
  "inter_nonempty_iff_exists_left":
@@ -663,65 +673,69 @@
  "inter_nonempty":
  "theorem inter_nonempty : (s ∩ t).nonempty ↔ ∃ x, x ∈ s ∧ x ∈ t :=\n  iff.rfl\n#align inter_nonempty inter_nonempty\n\n",
  "inter_left_comm":
- "theorem inter_left_comm (s₁ s₂ s₃ : set α) : s₁ ∩ (s₂ ∩ s₃) = s₂ ∩ (s₁ ∩ s₃) :=\n  ext fun x => and_left_comm\n#align inter_left_comm inter_left_comm\n\n",
+ "theorem inter_left_comm (s₁ s₂ s₃ : Set α) : s₁ ∩ (s₂ ∩ s₃) = s₂ ∩ (s₁ ∩ s₃) :=\n  ext fun x => and_left_comm\n#align inter_left_comm inter_left_comm\n\n",
  "inter_left'":
- "theorem inter_left' (u : set α) (h : Disjoint s t) : Disjoint (u ∩ s) t :=\n  h.inf_left' _\n#align inter_left' inter_left'\n\n",
+ "theorem inter_left' (u : Set α) (h : Disjoint s t) : Disjoint (u ∩ s) t :=\n  h.inf_left' _\n#align inter_left' inter_left'\n\n",
  "inter_left":
- "theorem inter_left (u : set α) (h : Disjoint s t) : Disjoint (s ∩ u) t :=\n  h.inf_left u\n#align inter_left inter_left\n\n",
+ "theorem inter_left (u : Set α) (h : Disjoint s t) : Disjoint (s ∩ u) t :=\n  h.inf_left u\n#align inter_left inter_left\n\n",
  "inter_inter_inter_comm":
- "theorem inter_inter_inter_comm (s t u v : set α) : s ∩ t ∩ (u ∩ v) = s ∩ u ∩ (t ∩ v) :=\n  inf_inf_inf_comm _ _ _ _\n#align inter_inter_inter_comm inter_inter_inter_comm\n\n",
+ "theorem inter_inter_inter_comm (s t u v : Set α) : s ∩ t ∩ (u ∩ v) = s ∩ u ∩ (t ∩ v) :=\n  inf_inf_inf_comm _ _ _ _\n#align inter_inter_inter_comm inter_inter_inter_comm\n\n",
  "inter_inter_distrib_right":
- "theorem inter_inter_distrib_right (s t u : set α) : s ∩ t ∩ u = s ∩ u ∩ (t ∩ u) :=\n  inf_inf_distrib_right _ _ _\n#align inter_inter_distrib_right inter_inter_distrib_right\n\n",
+ "theorem inter_inter_distrib_right (s t u : Set α) : s ∩ t ∩ u = s ∩ u ∩ (t ∩ u) :=\n  inf_inf_distrib_right _ _ _\n#align inter_inter_distrib_right inter_inter_distrib_right\n\n",
  "inter_inter_distrib_left":
- "theorem inter_inter_distrib_left (s t u : set α) : s ∩ (t ∩ u) = s ∩ t ∩ (s ∩ u) :=\n  inf_inf_distrib_left _ _ _\n#align inter_inter_distrib_left inter_inter_distrib_left\n\n",
+ "theorem inter_inter_distrib_left (s t u : Set α) : s ∩ (t ∩ u) = s ∩ t ∩ (s ∩ u) :=\n  inf_inf_distrib_left _ _ _\n#align inter_inter_distrib_left inter_inter_distrib_left\n\n",
  "inter_insert_of_not_mem":
  "theorem inter_insert_of_not_mem (h : a ∉ s) : s ∩ insert a t = s ∩ t :=\n  ext fun x => and_congr_right fun hx => or_iff_right <| ne_of_mem_of_not_mem hx h\n#align inter_insert_of_not_mem inter_insert_of_not_mem\n\n",
  "inter_insert_of_mem":
  "theorem inter_insert_of_mem (h : a ∈ s) : s ∩ insert a t = insert a (s ∩ t) := by\n  rw [insert_inter_distrib, insert_eq_of_mem h]\n#align inter_insert_of_mem inter_insert_of_mem\n\n",
  "inter_eq_self_of_subset_right":
- "theorem inter_eq_self_of_subset_right {s t : set α} : t ⊆ s → s ∩ t = t :=\n  inter_eq_right_iff_subset.mpr\n#align inter_eq_self_of_subset_right inter_eq_self_of_subset_right\n\n",
+ "theorem inter_eq_self_of_subset_right {s t : Set α} : t ⊆ s → s ∩ t = t :=\n  inter_eq_right_iff_subset.mpr\n#align inter_eq_self_of_subset_right inter_eq_self_of_subset_right\n\n",
  "inter_eq_self_of_subset_left":
- "theorem inter_eq_self_of_subset_left {s t : set α} : s ⊆ t → s ∩ t = s :=\n  inter_eq_left_iff_subset.mpr\n#align inter_eq_self_of_subset_left inter_eq_self_of_subset_left\n\n",
+ "theorem inter_eq_self_of_subset_left {s t : Set α} : s ⊆ t → s ∩ t = s :=\n  inter_eq_left_iff_subset.mpr\n#align inter_eq_self_of_subset_left inter_eq_self_of_subset_left\n\n",
  "inter_eq_right_iff_subset":
- "@[simp]\ntheorem inter_eq_right_iff_subset {s t : set α} : s ∩ t = t ↔ t ⊆ s :=\n  inf_eq_right\n#align inter_eq_right_iff_subset inter_eq_right_iff_subset\n\n",
+ "@[simp]\ntheorem inter_eq_right_iff_subset {s t : Set α} : s ∩ t = t ↔ t ⊆ s :=\n  inf_eq_right\n#align inter_eq_right_iff_subset inter_eq_right_iff_subset\n\n",
  "inter_eq_left_iff_subset":
- "@[simp]\ntheorem inter_eq_left_iff_subset {s t : set α} : s ∩ t = s ↔ s ⊆ t :=\n  inf_eq_left\n#align inter_eq_left_iff_subset inter_eq_left_iff_subset\n\n",
+ "@[simp]\ntheorem inter_eq_left_iff_subset {s t : Set α} : s ∩ t = s ↔ s ⊆ t :=\n  inf_eq_left\n#align inter_eq_left_iff_subset inter_eq_left_iff_subset\n\n",
  "inter_eq_inter_iff_right":
  "theorem inter_eq_inter_iff_right : s ∩ u = t ∩ u ↔ t ∩ u ⊆ s ∧ s ∩ u ⊆ t :=\n  inf_eq_inf_iff_right\n#align inter_eq_inter_iff_right inter_eq_inter_iff_right\n\n",
  "inter_eq_inter_iff_left":
  "theorem inter_eq_inter_iff_left : s ∩ t = s ∩ u ↔ s ∩ u ⊆ t ∧ s ∩ t ⊆ u :=\n  inf_eq_inf_iff_left\n#align inter_eq_inter_iff_left inter_eq_inter_iff_left\n\n",
  "inter_eq_compl_compl_union_compl":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\ntheorem inter_eq_compl_compl_union_compl (s t : set α) : s ∩ t = «expr ᶜ» («expr ᶜ» s ∪ «expr ᶜ» t) :=\n  ext fun x => and_iff_not_or_not\n#align inter_eq_compl_compl_union_compl inter_eq_compl_compl_union_compl\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\ntheorem inter_eq_compl_compl_union_compl (s t : Set α) : s ∩ t = «expr ᶜ» («expr ᶜ» s ∪ «expr ᶜ» t) :=\n  ext fun x => and_iff_not_or_not\n#align inter_eq_compl_compl_union_compl inter_eq_compl_compl_union_compl\n\n",
  "inter_eq":
  "#print Disjoint.inter_eq /-\ntheorem Disjoint.inter_eq : Disjoint s t → s ∩ t = ∅ :=\n  Disjoint.eq_bot\n#align disjoint.inter_eq Disjoint.inter_eq\n-/\n\n",
  "inter_empty":
- "@[simp]\ntheorem inter_empty (a : set α) : a ∩ ∅ = ∅ :=\n  ext fun x => and_false_iff _\n#align inter_empty inter_empty\n\n",
+ "@[simp]\ntheorem inter_empty (a : Set α) : a ∩ ∅ = ∅ :=\n  ext fun x => and_false_iff _\n#align inter_empty inter_empty\n\n",
  "inter_distrib_right":
- "theorem inter_distrib_right (s t u : set α) : (s ∪ t) ∩ u = s ∩ u ∪ t ∩ u :=\n  inf_sup_right\n#align inter_distrib_right inter_distrib_right\n\n",
+ "theorem inter_distrib_right (s t u : Set α) : (s ∪ t) ∩ u = s ∩ u ∪ t ∩ u :=\n  inf_sup_right\n#align inter_distrib_right inter_distrib_right\n\n",
  "inter_distrib_left":
- "theorem inter_distrib_left (s t u : set α) : s ∩ (t ∪ u) = s ∩ t ∪ s ∩ u :=\n  inf_sup_left\n#align inter_distrib_left inter_distrib_left\n\n",
+ "theorem inter_distrib_left (s t u : Set α) : s ∩ (t ∪ u) = s ∩ t ∪ s ∩ u :=\n  inf_sup_left\n#align inter_distrib_left inter_distrib_left\n\n",
  "inter_diff_self":
- "@[simp]\ntheorem inter_diff_self (a b : set α) : a ∩ (b \\ a) = ∅ :=\n  inf_sdiff_self_right\n#align inter_diff_self inter_diff_self\n\n",
+ "@[simp]\ntheorem inter_diff_self (a b : Set α) : a ∩ (b \\ a) = ∅ :=\n  inf_sdiff_self_right\n#align inter_diff_self inter_diff_self\n\n",
+ "inter_diff_distrib_right":
+ "theorem inter_diff_distrib_right (s t u : Set α) : s \\ t ∩ u = (s ∩ u) \\ (t ∩ u) :=\n  inf_sdiff_distrib_right _ _ _\n#align inter_diff_distrib_right inter_diff_distrib_right\n\n",
+ "inter_diff_distrib_left":
+ "theorem inter_diff_distrib_left (s t u : Set α) : s ∩ (t \\ u) = (s ∩ t) \\ (s ∩ u) :=\n  inf_sdiff_distrib_left _ _ _\n#align inter_diff_distrib_left inter_diff_distrib_left\n\n",
  "inter_diff_assoc":
- "theorem inter_diff_assoc (a b c : set α) : (a ∩ b) \\ c = a ∩ (b \\ c) :=\n  inf_sdiff_assoc\n#align inter_diff_assoc inter_diff_assoc\n\n",
+ "theorem inter_diff_assoc (a b c : Set α) : (a ∩ b) \\ c = a ∩ (b \\ c) :=\n  inf_sdiff_assoc\n#align inter_diff_assoc inter_diff_assoc\n\n",
  "inter_def":
- "theorem inter_def {s₁ s₂ : set α} : s₁ ∩ s₂ = { a | a ∈ s₁ ∧ a ∈ s₂ } :=\n  rfl\n#align inter_def inter_def\n\n",
+ "theorem inter_def {s₁ s₂ : Set α} : s₁ ∩ s₂ = { a | a ∈ s₁ ∧ a ∈ s₂ } :=\n  rfl\n#align inter_def inter_def\n\n",
  "inter_congr_right":
  "theorem inter_congr_right (hs : t ∩ u ⊆ s) (ht : s ∩ u ⊆ t) : s ∩ u = t ∩ u :=\n  inf_congr_right hs ht\n#align inter_congr_right inter_congr_right\n\n",
  "inter_congr_left":
  "theorem inter_congr_left (ht : s ∩ u ⊆ t) (hu : s ∩ t ⊆ u) : s ∩ t = s ∩ u :=\n  inf_congr_left ht hu\n#align inter_congr_left inter_congr_left\n\n",
  "inter_compl_self":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\n@[simp]\ntheorem inter_compl_self (s : set α) : s ∩ «expr ᶜ» s = ∅ :=\n  inf_compl_eq_bot\n#align inter_compl_self inter_compl_self\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\n@[simp]\ntheorem inter_compl_self (s : Set α) : s ∩ «expr ᶜ» s = ∅ :=\n  inf_compl_eq_bot\n#align inter_compl_self inter_compl_self\n\n",
  "inter_compl_nonempty_iff":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\ntheorem inter_compl_nonempty_iff {s t : set α} : (s ∩ «expr ᶜ» t).nonempty ↔ ¬s ⊆ t :=\n  (not_subset.trans <| exists_congr fun x => by simp [mem_compl]).symm\n#align inter_compl_nonempty_iff inter_compl_nonempty_iff\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\ntheorem inter_compl_nonempty_iff {s t : Set α} : (s ∩ «expr ᶜ» t).nonempty ↔ ¬s ⊆ t :=\n  (not_subset.trans <| exists_congr fun x => by simp [mem_compl]).symm\n#align inter_compl_nonempty_iff inter_compl_nonempty_iff\n\n",
  "inter_comm":
- "theorem inter_comm (a b : set α) : a ∩ b = b ∩ a :=\n  ext fun x => and_comm\n#align inter_comm inter_comm\n\n",
+ "theorem inter_comm (a b : Set α) : a ∩ b = b ∩ a :=\n  ext fun x => and_comm\n#align inter_comm inter_comm\n\n",
  "inter_assoc":
- "theorem inter_assoc (a b c : set α) : a ∩ b ∩ c = a ∩ (b ∩ c) :=\n  ext fun x => and_assoc\n#align inter_assoc inter_assoc\n\n",
+ "theorem inter_assoc (a b c : Set α) : a ∩ b ∩ c = a ∩ (b ∩ c) :=\n  ext fun x => and_assoc\n#align inter_assoc inter_assoc\n\n",
  "inter":
- "#print AntitoneOn.inter /-\ntheorem AntitoneOn.inter [preorder β] {f g : β → set α} {s : set β} (hf : antitone_on f s) (hg : antitone_on g s) :\n    antitone_on (fun x => f x ∩ g x) s :=\n  hf.inf hg\n#align antitone_on.inter AntitoneOn.inter\n-/\n\n",
+ "#print AntitoneOn.inter /-\ntheorem AntitoneOn.inter [preorder β] {f g : β → Set α} {s : Set β} (hf : AntitoneOn f s) (hg : AntitoneOn g s) :\n    AntitoneOn (fun x => f x ∩ g x) s :=\n  hf.inf hg\n#align antitone_on.inter AntitoneOn.inter\n-/\n\n",
  "insert_union_distrib":
- "theorem insert_union_distrib (a : α) (s t : set α) : insert a (s ∪ t) = insert a s ∪ insert a t :=\n  ext fun _ => or_or_distrib_left _ _ _\n#align insert_union_distrib insert_union_distrib\n\n",
+ "theorem insert_union_distrib (a : α) (s t : Set α) : insert a (s ∪ t) = insert a s ∪ insert a t :=\n  ext fun _ => or_or_distrib_left _ _ _\n#align insert_union_distrib insert_union_distrib\n\n",
  "insert_union":
  "theorem insert_union : insert a s ∪ t = insert a (s ∪ t) :=\n  ext fun x => or_assoc\n#align insert_union insert_union\n\n",
  "insert_subset_insert_iff":
@@ -731,7 +745,7 @@
  "insert_subset":
  "theorem insert_subset : insert a s ⊆ t ↔ a ∈ t ∧ s ⊆ t := by\n  simp only [subset_def, or_imp, forall_and, forall_eq, mem_insert_iff]\n#align insert_subset insert_subset\n\n",
  "insert_nonempty":
- "@[simp]\ntheorem insert_nonempty (a : α) (s : set α) : (insert a s).nonempty :=\n  ⟨a, mem_insert a s⟩\n#align insert_nonempty insert_nonempty\n\n",
+ "@[simp]\ntheorem insert_nonempty (a : α) (s : Set α) : (insert a s).nonempty :=\n  ⟨a, mem_insert a s⟩\n#align insert_nonempty insert_nonempty\n\n",
  "insert_ne_self":
  "theorem insert_ne_self : insert a s ≠ s ↔ a ∉ s :=\n  insert_eq_self.not\n#align insert_ne_self insert_ne_self\n\n",
  "insert_inter_of_not_mem":
@@ -739,39 +753,41 @@
  "insert_inter_of_mem":
  "theorem insert_inter_of_mem (h : a ∈ t) : insert a s ∩ t = insert a (s ∩ t) := by\n  rw [insert_inter_distrib, insert_eq_of_mem h]\n#align insert_inter_of_mem insert_inter_of_mem\n\n",
  "insert_inter_distrib":
- "theorem insert_inter_distrib (a : α) (s t : set α) : insert a (s ∩ t) = insert a s ∩ insert a t :=\n  ext fun y => or_and_left\n#align insert_inter_distrib insert_inter_distrib\n\n",
+ "theorem insert_inter_distrib (a : α) (s t : Set α) : insert a (s ∩ t) = insert a s ∩ insert a t :=\n  ext fun y => or_and_left\n#align insert_inter_distrib insert_inter_distrib\n\n",
  "insert_inj":
  "theorem insert_inj (ha : a ∉ s) : insert a s = insert b s ↔ a = b :=\n  ⟨fun h => eq_of_not_mem_of_mem_insert (h.subst <| mem_insert a s) ha, congr_arg _⟩\n#align insert_inj insert_inj\n\n",
  "insert_idem":
- "@[simp]\ntheorem insert_idem (a : α) (s : set α) : insert a (insert a s) = insert a s :=\n  insert_eq_of_mem <| mem_insert _ _\n#align insert_idem insert_idem\n\n",
+ "@[simp]\ntheorem insert_idem (a : α) (s : Set α) : insert a (insert a s) = insert a s :=\n  insert_eq_of_mem <| mem_insert _ _\n#align insert_idem insert_idem\n\n",
  "insert_eq_self":
  "@[simp]\ntheorem insert_eq_self : insert a s = s ↔ a ∈ s :=\n  ⟨fun h => h ▸ mem_insert _ _, insert_eq_of_mem⟩\n#align insert_eq_self insert_eq_self\n\n",
  "insert_eq_of_mem":
- "@[simp]\ntheorem insert_eq_of_mem {a : α} {s : set α} (h : a ∈ s) : insert a s = s :=\n  ext fun x => or_iff_right_of_imp fun e => e.symm ▸ h\n#align insert_eq_of_mem insert_eq_of_mem\n\n",
+ "@[simp]\ntheorem insert_eq_of_mem {a : α} {s : Set α} (h : a ∈ s) : insert a s = s :=\n  ext fun x => or_iff_right_of_imp fun e => e.symm ▸ h\n#align insert_eq_of_mem insert_eq_of_mem\n\n",
  "insert_eq":
- "theorem insert_eq (x : α) (s : set α) : insert x s = ({x} : set α) ∪ s :=\n  rfl\n#align insert_eq insert_eq\n\n",
+ "theorem insert_eq (x : α) (s : Set α) : insert x s = ({x} : Set α) ∪ s :=\n  rfl\n#align insert_eq insert_eq\n\n",
+ "insert_diff_singleton_comm":
+ "theorem insert_diff_singleton_comm (hab : a ≠ b) (s : Set α) : insert a (s \\ {b}) = insert a s \\ {b} := by\n  simp_rw [← union_singleton, union_diff_distrib, diff_singleton_eq_self (mem_singleton_iff.not.2 hab.symm)]\n#align insert_diff_singleton_comm insert_diff_singleton_comm\n\n",
  "insert_diff_singleton":
- "@[simp]\ntheorem insert_diff_singleton {a : α} {s : set α} : insert a (s \\ {a}) = insert a s := by\n  simp [insert_eq, union_diff_self, -union_singleton, -singleton_union]\n#align insert_diff_singleton insert_diff_singleton\n\n",
+ "@[simp]\ntheorem insert_diff_singleton {a : α} {s : Set α} : insert a (s \\ {a}) = insert a s := by\n  simp [insert_eq, union_diff_self, -union_singleton, -singleton_union]\n#align insert_diff_singleton insert_diff_singleton\n\n",
  "insert_diff_self_of_not_mem":
- "theorem insert_diff_self_of_not_mem {a : α} {s : set α} (h : a ∉ s) : insert a s \\ {a} = s :=\n  by\n  ext\n  simp [and_iff_left_of_imp fun hx : x ∈ s => show x ≠ a from fun hxa => h <| hxa ▸ hx]\n#align insert_diff_self_of_not_mem insert_diff_self_of_not_mem\n\n",
+ "theorem insert_diff_self_of_not_mem {a : α} {s : Set α} (h : a ∉ s) : insert a s \\ {a} = s :=\n  by\n  ext\n  simp [and_iff_left_of_imp fun hx : x ∈ s => show x ≠ a from fun hxa => h <| hxa ▸ hx]\n#align insert_diff_self_of_not_mem insert_diff_self_of_not_mem\n\n",
  "insert_diff_of_not_mem":
  "theorem insert_diff_of_not_mem (s) (h : a ∉ t) : insert a s \\ t = insert a (s \\ t) := by\n  classical\n    ext x\n    by_cases h' : x ∈ t\n    · have : x ≠ a := by\n        intro H\n        rw [H] at h'\n        exact h h'\n      simp [h, h', this]\n    · simp [h, h']\n#align insert_diff_of_not_mem insert_diff_of_not_mem\n\n",
  "insert_diff_of_mem":
  "@[simp]\ntheorem insert_diff_of_mem (s) (h : a ∈ t) : insert a s \\ t = s \\ t :=\n  by\n  ext\n  constructor <;> simp (config := { contextual := true }) [or_imp, h]\n#align insert_diff_of_mem insert_diff_of_mem\n\n",
  "insert_diff_eq_singleton":
- "@[simp]\ntheorem insert_diff_eq_singleton {a : α} {s : set α} (h : a ∉ s) : insert a s \\ s = {a} :=\n  by\n  ext\n  rw [Set.mem_diff, Set.mem_insert_iff, Set.mem_singleton_iff, or_and_right, and_not_self_iff, or_false_iff,\n    and_iff_left_iff_imp]\n  rintro rfl\n  exact h\n#align insert_diff_eq_singleton insert_diff_eq_singleton\n\n",
+ "@[simp]\ntheorem insert_diff_eq_singleton {a : α} {s : Set α} (h : a ∉ s) : insert a s \\ s = {a} :=\n  by\n  ext\n  rw [Set.mem_diff, Set.mem_insert_iff, Set.mem_singleton_iff, or_and_right, and_not_self_iff, or_false_iff,\n    and_iff_left_iff_imp]\n  rintro rfl\n  exact h\n#align insert_diff_eq_singleton insert_diff_eq_singleton\n\n",
  "insert_def":
- "theorem insert_def (x : α) (s : set α) : insert x s = { y | y = x ∨ y ∈ s } :=\n  rfl\n#align insert_def insert_def\n\n",
+ "theorem insert_def (x : α) (s : Set α) : insert x s = { y | y = x ∨ y ∈ s } :=\n  rfl\n#align insert_def insert_def\n\n",
  "insert_comm":
- "theorem insert_comm (a b : α) (s : set α) : insert a (insert b s) = insert b (insert a s) :=\n  ext fun x => or_left_comm\n#align insert_comm insert_comm\n\n",
+ "theorem insert_comm (a b : α) (s : Set α) : insert a (insert b s) = insert b (insert a s) :=\n  ext fun x => or_left_comm\n#align insert_comm insert_comm\n\n",
  "inr":
  "theorem nonempty.inr (ht : t.nonempty) : (s ∪ t).nonempty :=\n  ht.imp fun _ => or.inr\n#align nonempty.inr nonempty.inr\n\n",
  "inl":
  "theorem nonempty.inl (hs : s.nonempty) : (s ∪ t).nonempty :=\n  hs.imp fun _ => or.inl\n#align nonempty.inl nonempty.inl\n\n",
  "inf_eq_inter":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:219:4: warning: unsupported binary notation `«expr ⊓ » -/\n@[simp]\ntheorem inf_eq_inter : ((«expr ⊓ » · ·) : set α → set α → set α) = (· ∩ ·) :=\n  rfl\n#align inf_eq_inter inf_eq_inter\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:219:4: warning: unsupported binary notation `«expr ⊓ » -/\n@[simp]\ntheorem inf_eq_inter : ((«expr ⊓ » · ·) : Set α → Set α → Set α) = (· ∩ ·) :=\n  rfl\n#align inf_eq_inter inf_eq_inter\n\n",
  "induction_on":
- "theorem subsingleton.induction_on {p : set α → Prop} (hs : s.subsingleton) (he : p ∅) (h₁ : ∀ x, p {x}) : p s :=\n  by\n  rcases hs.eq_empty_or_singleton with (rfl | ⟨x, rfl⟩)\n  exacts[he, h₁ _]\n#align subsingleton.induction_on subsingleton.induction_on\n\n",
+ "theorem subsingleton.induction_on {p : Set α → Prop} (hs : s.subsingleton) (he : p ∅) (h₁ : ∀ x, p {x}) : p s :=\n  by\n  rcases hs.eq_empty_or_singleton with (rfl | ⟨x, rfl⟩)\n  exacts[he, h₁ _]\n#align subsingleton.induction_on subsingleton.induction_on\n\n",
  "inclusion_self":
  "@[simp]\ntheorem inclusion_self (x : s) : inclusion Subset.rfl x = x :=\n  by\n  cases x\n  rfl\n#align inclusion_self inclusion_self\n\n",
  "inclusion_right":
@@ -779,51 +795,51 @@
  "inclusion_mk":
  "@[simp]\ntheorem inclusion_mk {h : s ⊆ t} (a : α) (ha : a ∈ s) : inclusion h ⟨a, ha⟩ = ⟨a, h ha⟩ :=\n  rfl\n#align inclusion_mk inclusion_mk\n\n",
  "inclusion_injective":
- "theorem inclusion_injective (h : s ⊆ t) : injective (inclusion h)\n  | ⟨_, _⟩, ⟨_, _⟩ => subtype.ext_iff_val.2 ∘ subtype.ext_iff_val.1\n#align inclusion_injective inclusion_injective\n\n",
+ "theorem inclusion_injective (h : s ⊆ t) : injective (inclusion h)\n  | ⟨_, _⟩, ⟨_, _⟩ => Subtype.ext_iff_val.2 ∘ Subtype.ext_iff_val.1\n#align inclusion_injective inclusion_injective\n\n",
  "inclusion_inclusion":
  "@[simp]\ntheorem inclusion_inclusion (hst : s ⊆ t) (htu : t ⊆ u) (x : s) :\n    inclusion htu (inclusion hst x) = inclusion (hst.trans htu) x :=\n  by\n  cases x\n  rfl\n#align inclusion_inclusion inclusion_inclusion\n\n",
  "inclusion_eq_id":
  "theorem inclusion_eq_id (h : s ⊆ s) : inclusion h = id :=\n  funext inclusion_self\n#align inclusion_eq_id inclusion_eq_id\n\n",
  "inclusion_comp_inclusion":
- "@[simp]\ntheorem inclusion_comp_inclusion {α} {s t u : set α} (hst : s ⊆ t) (htu : t ⊆ u) :\n    inclusion htu ∘ inclusion hst = inclusion (hst.trans htu) :=\n  funext (inclusion_inclusion hst htu)\n#align inclusion_comp_inclusion inclusion_comp_inclusion\n\n",
+ "@[simp]\ntheorem inclusion_comp_inclusion {α} {s t u : Set α} (hst : s ⊆ t) (htu : t ⊆ u) :\n    inclusion htu ∘ inclusion hst = inclusion (hst.trans htu) :=\n  funext (inclusion_inclusion hst htu)\n#align inclusion_comp_inclusion inclusion_comp_inclusion\n\n",
  "forall_of_forall_insert":
- "-- useful in proofs by induction\ntheorem forall_of_forall_insert {P : α → Prop} {a : α} {s : set α} (H : ∀ x, x ∈ insert a s → P x) (x) (h : x ∈ s) :\n    P x :=\n  H _ (or.inr h)\n#align forall_of_forall_insert forall_of_forall_insert\n\n",
+ "-- useful in proofs by induction\ntheorem forall_of_forall_insert {P : α → Prop} {a : α} {s : Set α} (H : ∀ x, x ∈ insert a s → P x) (x) (h : x ∈ s) :\n    P x :=\n  H _ (or.inr h)\n#align forall_of_forall_insert forall_of_forall_insert\n\n",
  "forall_insert_of_forall":
- "theorem forall_insert_of_forall {P : α → Prop} {a : α} {s : set α} (H : ∀ x, x ∈ s → P x) (ha : P a) (x)\n    (h : x ∈ insert a s) : P x :=\n  h.elim (fun e => e.symm ▸ ha) (H _)\n#align forall_insert_of_forall forall_insert_of_forall\n\n",
+ "theorem forall_insert_of_forall {P : α → Prop} {a : α} {s : Set α} (H : ∀ x, x ∈ s → P x) (ha : P a) (x)\n    (h : x ∈ insert a s) : P x :=\n  h.elim (fun e => e.symm ▸ ha) (H _)\n#align forall_insert_of_forall forall_insert_of_forall\n\n",
  "forall_in_swap":
  "theorem forall_in_swap {p : α → β → Prop} : (∀ a ∈ s, ∀ (b), p a b) ↔ ∀ (b), ∀ a ∈ s, p a b := by tauto\n#align forall_in_swap forall_in_swap\n\n",
  "forall'":
- "#print SetCoe.forall' /-\ntheorem SetCoe.forall' {s : set α} {p : ∀ x, x ∈ s → Prop} : (∀ (x) (h : x ∈ s), p x h) ↔ ∀ x : s, p x x.2 :=\n  (@SetCoe.forall _ _ fun x => p x.1 x.2).symm\n#align set_coe.forall' SetCoe.forall'\n-/\n\n",
+ "#print SetCoe.forall' /-\ntheorem SetCoe.forall' {s : Set α} {p : ∀ x, x ∈ s → Prop} : (∀ (x) (h : x ∈ s), p x h) ↔ ∀ x : s, p x x.2 :=\n  (@SetCoe.forall _ _ fun x => p x.1 x.2).symm\n#align set_coe.forall' SetCoe.forall'\n-/\n\n",
  "forall":
- "#print SetCoe.forall /-\n@[simp]\ntheorem SetCoe.forall {s : set α} {p : s → Prop} : (∀ x : s, p x) ↔ ∀ (x) (h : x ∈ s), p ⟨x, h⟩ :=\n  subtype.forall\n#align set_coe.forall SetCoe.forall\n-/\n\n",
+ "#print SetCoe.forall /-\n@[simp]\ntheorem SetCoe.forall {s : Set α} {p : s → Prop} : (∀ x : s, p x) ↔ ∀ (x) (h : x ∈ s), p ⟨x, h⟩ :=\n  Subtype.forall\n#align set_coe.forall SetCoe.forall\n-/\n\n",
  "ext_iff":
- "theorem ext_iff {s t : set α} : s = t ↔ ∀ x, x ∈ s ↔ x ∈ t :=\n  ⟨fun h x => by rw [h], ext⟩\n#align ext_iff ext_iff\n\n",
+ "theorem ext_iff {s t : Set α} : s = t ↔ ∀ x, x ∈ s ↔ x ∈ t :=\n  ⟨fun h x => by rw [h], ext⟩\n#align ext_iff ext_iff\n\n",
  "ext":
- "@[ext]\ntheorem ext {a b : set α} (h : ∀ x, x ∈ a ↔ x ∈ b) : a = b :=\n  funext fun x => propext (h x)\n#align ext ext\n\n",
+ "@[ext]\ntheorem ext {a b : Set α} (h : ∀ x, x ∈ a ↔ x ∈ b) : a = b :=\n  funext fun x => propext (h x)\n#align ext ext\n\n",
  "exists_of_ssubset":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊂ » -/\ntheorem exists_of_ssubset {s t : set α} (h : «expr ⊂ » s t) : ∃ x ∈ t, x ∉ s :=\n  not_subset.1 h.2\n#align exists_of_ssubset exists_of_ssubset\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊂ » -/\ntheorem exists_of_ssubset {s t : Set α} (h : «expr ⊂ » s t) : ∃ x ∈ t, x ∉ s :=\n  not_subset.1 h.2\n#align exists_of_ssubset exists_of_ssubset\n\n",
  "exists_ne":
  "theorem nontrivial.exists_ne (hs : s.nontrivial) (z) : ∃ x ∈ s, x ≠ z :=\n  by\n  by_contra H; push_neg  at H\n  rcases hs with ⟨x, hx, y, hy, hxy⟩\n  rw [H x hx, H y hy] at hxy\n  exact hxy rfl\n#align nontrivial.exists_ne nontrivial.exists_ne\n\n",
  "exists_mem_of_nonempty":
- "theorem exists_mem_of_nonempty (α) : ∀ [nonempty α], ∃ x : α, x ∈ (univ : set α)\n  | ⟨x⟩ => ⟨x, trivial⟩\n#align exists_mem_of_nonempty exists_mem_of_nonempty\n\n",
+ "theorem exists_mem_of_nonempty (α) : ∀ [Nonempty α], ∃ x : α, x ∈ (univ : Set α)\n  | ⟨x⟩ => ⟨x, trivial⟩\n#align exists_mem_of_nonempty exists_mem_of_nonempty\n\n",
  "exists_lt":
- "/- ./././Mathport/Syntax/Translate/Basic.lean:632:2: warning: expanding binder collection (x y «expr ∈ » s) -/\ntheorem nontrivial.exists_lt [linear_order α] (hs : s.nontrivial) : ∃ (x : _)(_ : x ∈ s)(y : _)(_ : y ∈ s), x < y :=\n  let ⟨x, hx, y, hy, hxy⟩ := hs\n  or.elim (lt_or_gt_of_ne hxy) (fun H => ⟨x, hx, y, hy, H⟩) fun H => ⟨y, hy, x, hx, H⟩\n#align nontrivial.exists_lt nontrivial.exists_lt\n\n",
+ "/- ./././Mathport/Syntax/Translate/Basic.lean:635:2: warning: expanding binder collection (x y «expr ∈ » s) -/\ntheorem nontrivial.exists_lt [linear_order α] (hs : s.nontrivial) : ∃ (x : _)(_ : x ∈ s)(y : _)(_ : y ∈ s), x < y :=\n  let ⟨x, hx, y, hy, hxy⟩ := hs\n  or.elim (lt_or_gt_of_ne hxy) (fun H => ⟨x, hx, y, hy, H⟩) fun H => ⟨y, hy, x, hx, H⟩\n#align nontrivial.exists_lt nontrivial.exists_lt\n\n",
  "exists_eq_singleton_or_nontrivial":
  "theorem nonempty.exists_eq_singleton_or_nontrivial : s.nonempty → (∃ a, s = {a}) ∨ s.nontrivial := fun ⟨a, ha⟩ =>\n  (eq_singleton_or_nontrivial ha).imp_left <| exists.intro a\n#align nonempty.exists_eq_singleton_or_nontrivial nonempty.exists_eq_singleton_or_nontrivial\n\n",
  "exists_eq_singleton_iff_nonempty_subsingleton":
  "theorem exists_eq_singleton_iff_nonempty_subsingleton : (∃ a : α, s = {a}) ↔ s.nonempty ∧ s.subsingleton :=\n  by\n  refine' ⟨_, fun h => _⟩\n  · rintro ⟨a, rfl⟩\n    exact ⟨singleton_nonempty a, subsingleton_singleton⟩\n  · exact h.2.eq_empty_or_singleton.resolve_left h.1.ne_empty\n#align exists_eq_singleton_iff_nonempty_subsingleton exists_eq_singleton_iff_nonempty_subsingleton\n\n",
  "exists'":
- "#print SetCoe.exists' /-\ntheorem SetCoe.exists' {s : set α} {p : ∀ x, x ∈ s → Prop} : (∃ (x : _)(h : x ∈ s), p x h) ↔ ∃ x : s, p x x.2 :=\n  (@SetCoe.exists _ _ fun x => p x.1 x.2).symm\n#align set_coe.exists' SetCoe.exists'\n-/\n\n",
+ "#print SetCoe.exists' /-\ntheorem SetCoe.exists' {s : Set α} {p : ∀ x, x ∈ s → Prop} : (∃ (x : _)(h : x ∈ s), p x h) ↔ ∃ x : s, p x x.2 :=\n  (@SetCoe.exists _ _ fun x => p x.1 x.2).symm\n#align set_coe.exists' SetCoe.exists'\n-/\n\n",
  "exists":
- "#print SetCoe.exists /-\n@[simp]\ntheorem SetCoe.exists {s : set α} {p : s → Prop} : (∃ x : s, p x) ↔ ∃ (x : _)(h : x ∈ s), p ⟨x, h⟩ :=\n  subtype.exists\n#align set_coe.exists SetCoe.exists\n-/\n\n",
+ "#print SetCoe.exists /-\n@[simp]\ntheorem SetCoe.exists {s : Set α} {p : s → Prop} : (∃ x : s, p x) ↔ ∃ (x : _)(h : x ∈ s), p ⟨x, h⟩ :=\n  Subtype.exists\n#align set_coe.exists SetCoe.exists\n-/\n\n",
  "eq_univ_of_subset":
- "theorem eq_univ_of_subset {s t : set α} (h : s ⊆ t) (hs : s = univ) : t = univ :=\n  eq_univ_of_univ_subset <| hs ▸ h\n#align eq_univ_of_subset eq_univ_of_subset\n\n",
+ "theorem eq_univ_of_subset {s t : Set α} (h : s ⊆ t) (hs : s = univ) : t = univ :=\n  eq_univ_of_univ_subset <| hs ▸ h\n#align eq_univ_of_subset eq_univ_of_subset\n\n",
  "eq_univ_of_nonempty":
- "theorem eq_univ_of_nonempty {s : set α} : s.nonempty → s = univ := fun ⟨x, hx⟩ =>\n  eq_univ_of_forall fun y => subsingleton.elim x y ▸ hx\n#align eq_univ_of_nonempty eq_univ_of_nonempty\n\n",
+ "theorem eq_univ_of_nonempty {s : Set α} : s.nonempty → s = univ := fun ⟨x, hx⟩ =>\n  eq_univ_of_forall fun y => subsingleton.elim x y ▸ hx\n#align eq_univ_of_nonempty eq_univ_of_nonempty\n\n",
  "eq_univ_of_forall":
- "theorem eq_univ_of_forall {s : set α} : (∀ x, x ∈ s) → s = univ :=\n  eq_univ_iff_forall.2\n#align eq_univ_of_forall eq_univ_of_forall\n\n",
+ "theorem eq_univ_of_forall {s : Set α} : (∀ x, x ∈ s) → s = univ :=\n  eq_univ_iff_forall.2\n#align eq_univ_of_forall eq_univ_of_forall\n\n",
  "eq_univ_iff_forall":
- "theorem eq_univ_iff_forall {s : set α} : s = univ ↔ ∀ x, x ∈ s :=\n  univ_subset_iff.symm.trans <| forall_congr' fun x => imp_iff_right trivial\n#align eq_univ_iff_forall eq_univ_iff_forall\n\n",
+ "theorem eq_univ_iff_forall {s : Set α} : s = univ ↔ ∀ x, x ∈ s :=\n  univ_subset_iff.symm.trans <| forall_congr' fun x => imp_iff_right trivial\n#align eq_univ_iff_forall eq_univ_iff_forall\n\n",
  "eq_univ":
  "theorem nonempty.eq_univ [subsingleton α] : s.nonempty → s = univ :=\n  by\n  rintro ⟨x, hx⟩\n  refine' eq_univ_of_forall fun y => by rwa [subsingleton.elim y x]\n#align nonempty.eq_univ nonempty.eq_univ\n\n",
  "eq_singleton_or_nontrivial":
@@ -837,49 +853,49 @@
  "eq_or_ssubset_of_subset":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊂ » -/\n#print eq_or_ssubset_of_subset /-\nprotected theorem eq_or_ssubset_of_subset (h : s ⊆ t) : s = t ∨ «expr ⊂ » s t :=\n  eq_or_lt_of_le h\n#align eq_or_ssubset_of_subset eq_or_ssubset_of_subset\n-/\n\n",
  "eq_or_mem_of_mem_insert":
- "theorem eq_or_mem_of_mem_insert {x a : α} {s : set α} : x ∈ insert a s → x = a ∨ x ∈ s :=\n  id\n#align eq_or_mem_of_mem_insert eq_or_mem_of_mem_insert\n\n",
+ "theorem eq_or_mem_of_mem_insert {x a : α} {s : Set α} : x ∈ insert a s → x = a ∨ x ∈ s :=\n  id\n#align eq_or_mem_of_mem_insert eq_or_mem_of_mem_insert\n\n",
  "eq_of_subset_of_subset":
- "-- an alternative name\ntheorem eq_of_subset_of_subset {a b : set α} : a ⊆ b → b ⊆ a → a = b :=\n  subset.antisymm\n#align eq_of_subset_of_subset eq_of_subset_of_subset\n\n",
+ "-- an alternative name\ntheorem eq_of_subset_of_subset {a b : Set α} : a ⊆ b → b ⊆ a → a = b :=\n  Subset.antisymm\n#align eq_of_subset_of_subset eq_of_subset_of_subset\n\n",
  "eq_of_not_mem_of_mem_insert":
  "theorem eq_of_not_mem_of_mem_insert : b ∈ insert a s → b ∉ s → b = a :=\n  or.resolve_right\n#align eq_of_not_mem_of_mem_insert eq_of_not_mem_of_mem_insert\n\n",
  "eq_of_mem_singleton":
- "theorem eq_of_mem_singleton {x y : α} (h : x ∈ ({y} : set α)) : x = y :=\n  h\n#align eq_of_mem_singleton eq_of_mem_singleton\n\n",
+ "theorem eq_of_mem_singleton {x y : α} (h : x ∈ ({y} : Set α)) : x = y :=\n  h\n#align eq_of_mem_singleton eq_of_mem_singleton\n\n",
  "eq_of_inclusion_surjective":
- "theorem eq_of_inclusion_surjective {s t : set α} {h : s ⊆ t} (h_surj : function.surjective (inclusion h)) : s = t :=\n  by\n  refine' Set.Subset.antisymm h fun x hx => _\n  obtain ⟨y, hy⟩ := h_surj ⟨x, hx⟩\n  exact mem_of_eq_of_mem (congr_arg coe hy).symm y.prop\n#align eq_of_inclusion_surjective eq_of_inclusion_surjective\n\n",
+ "theorem eq_of_inclusion_surjective {s t : Set α} {h : s ⊆ t} (h_surj : function.surjective (inclusion h)) : s = t :=\n  by\n  refine' Set.Subset.antisymm h fun x hx => _\n  obtain ⟨y, hy⟩ := h_surj ⟨x, hx⟩\n  exact mem_of_eq_of_mem (congr_arg coe hy).symm y.prop\n#align eq_of_inclusion_surjective eq_of_inclusion_surjective\n\n",
  "eq_empty_or_singleton":
  "theorem subsingleton.eq_empty_or_singleton (hs : s.subsingleton) : s = ∅ ∨ ∃ x, s = {x} :=\n  s.eq_empty_or_nonempty.elim or.inl fun ⟨x, hx⟩ => or.inr ⟨x, hs.eq_singleton_of_mem hx⟩\n#align subsingleton.eq_empty_or_singleton subsingleton.eq_empty_or_singleton\n\n",
  "eq_empty_or_nonempty":
- "theorem eq_empty_or_nonempty (s : set α) : s = ∅ ∨ s.nonempty :=\n  or_iff_not_imp_left.2 nonempty_iff_ne_empty.2\n#align eq_empty_or_nonempty eq_empty_or_nonempty\n\n",
+ "theorem eq_empty_or_nonempty (s : Set α) : s = ∅ ∨ s.nonempty :=\n  or_iff_not_imp_left.2 nonempty_iff_ne_empty.2\n#align eq_empty_or_nonempty eq_empty_or_nonempty\n\n",
  "eq_empty_of_subset_empty":
- "theorem eq_empty_of_subset_empty {s : set α} : s ⊆ ∅ → s = ∅ :=\n  subset_empty_iff.1\n#align eq_empty_of_subset_empty eq_empty_of_subset_empty\n\n",
+ "theorem eq_empty_of_subset_empty {s : Set α} : s ⊆ ∅ → s = ∅ :=\n  subset_empty_iff.1\n#align eq_empty_of_subset_empty eq_empty_of_subset_empty\n\n",
  "eq_empty_of_ssubset_singleton":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊂ » -/\ntheorem eq_empty_of_ssubset_singleton {s : set α} {x : α} (hs : «expr ⊂ » s {x}) : s = ∅ :=\n  ssubset_singleton_iff.1 hs\n#align eq_empty_of_ssubset_singleton eq_empty_of_ssubset_singleton\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊂ » -/\ntheorem eq_empty_of_ssubset_singleton {s : Set α} {x : α} (hs : «expr ⊂ » s {x}) : s = ∅ :=\n  ssubset_singleton_iff.1 hs\n#align eq_empty_of_ssubset_singleton eq_empty_of_ssubset_singleton\n\n",
  "eq_empty_of_is_empty":
- "theorem eq_empty_of_is_empty [is_empty α] (s : set α) : s = ∅ :=\n  eq_empty_of_subset_empty fun x hx => is_empty_elim x\n#align eq_empty_of_is_empty eq_empty_of_is_empty\n\n",
+ "theorem eq_empty_of_is_empty [IsEmpty α] (s : Set α) : s = ∅ :=\n  eq_empty_of_subset_empty fun x hx => isEmptyElim x\n#align eq_empty_of_is_empty eq_empty_of_is_empty\n\n",
  "eq_empty_of_forall_not_mem":
  "theorem eq_empty_of_forall_not_mem (h : ∀ x, x ∉ s) : s = ∅ :=\n  subset_empty_iff.1 h\n#align eq_empty_of_forall_not_mem eq_empty_of_forall_not_mem\n\n",
  "eq_empty_iff_forall_not_mem":
- "theorem eq_empty_iff_forall_not_mem {s : set α} : s = ∅ ↔ ∀ x, x ∉ s :=\n  subset_empty_iff.symm\n#align eq_empty_iff_forall_not_mem eq_empty_iff_forall_not_mem\n\n",
+ "theorem eq_empty_iff_forall_not_mem {s : Set α} : s = ∅ ↔ ∀ x, x ∉ s :=\n  subset_empty_iff.symm\n#align eq_empty_iff_forall_not_mem eq_empty_iff_forall_not_mem\n\n",
  "empty_union":
- "@[simp]\ntheorem empty_union (a : set α) : ∅ ∪ a = a :=\n  ext fun x => false_or_iff _\n#align empty_union empty_union\n\n",
+ "@[simp]\ntheorem empty_union (a : Set α) : ∅ ∪ a = a :=\n  ext fun x => false_or_iff _\n#align empty_union empty_union\n\n",
  "empty_subset":
- "@[simp]\ntheorem empty_subset (s : set α) : ∅ ⊆ s :=\n  fun.\n#align empty_subset empty_subset\n\n",
+ "@[simp]\ntheorem empty_subset (s : Set α) : ∅ ⊆ s :=\n  fun.\n#align empty_subset empty_subset\n\n",
  "empty_ssubset_singleton":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊂ » -/\n@[simp]\ntheorem empty_ssubset_singleton : «expr ⊂ » (∅ : set α) {a} :=\n  (singleton_nonempty _).empty_ssubset\n#align empty_ssubset_singleton empty_ssubset_singleton\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊂ » -/\n@[simp]\ntheorem empty_ssubset_singleton : «expr ⊂ » (∅ : Set α) {a} :=\n  (singleton_nonempty _).empty_ssubset\n#align empty_ssubset_singleton empty_ssubset_singleton\n\n",
  "empty_ssubset":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊂ » -/\n@[simp]\ntheorem empty_ssubset : «expr ⊂ » ∅ s ↔ s.nonempty :=\n  (@bot_lt_iff_ne_bot (set α) _ _ _).trans nonempty_iff_ne_empty.symm\n#align empty_ssubset empty_ssubset\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊂ » -/\n@[simp]\ntheorem empty_ssubset : «expr ⊂ » ∅ s ↔ s.nonempty :=\n  (@bot_lt_iff_ne_bot (Set α) _ _ _).trans nonempty_iff_ne_empty.symm\n#align empty_ssubset empty_ssubset\n\n",
  "empty_ne_univ":
- "theorem empty_ne_univ [nonempty α] : (∅ : set α) ≠ univ := fun e =>\n  not_isEmpty_of_nonempty α <| univ_eq_empty_iff.1 e.symm\n#align empty_ne_univ empty_ne_univ\n\n",
+ "theorem empty_ne_univ [Nonempty α] : (∅ : Set α) ≠ univ := fun e =>\n  not_isEmpty_of_nonempty α <| univ_eq_empty_iff.1 e.symm\n#align empty_ne_univ empty_ne_univ\n\n",
  "empty_inter":
- "@[simp]\ntheorem empty_inter (a : set α) : ∅ ∩ a = ∅ :=\n  ext fun x => false_and_iff _\n#align empty_inter empty_inter\n\n",
+ "@[simp]\ntheorem empty_inter (a : Set α) : ∅ ∩ a = ∅ :=\n  ext fun x => false_and_iff _\n#align empty_inter empty_inter\n\n",
  "empty_disjoint":
- "@[simp]\ntheorem empty_disjoint (s : set α) : Disjoint ∅ s :=\n  disjoint_bot_left\n#align empty_disjoint empty_disjoint\n\n",
+ "@[simp]\ntheorem empty_disjoint (s : Set α) : Disjoint ∅ s :=\n  disjoint_bot_left\n#align empty_disjoint empty_disjoint\n\n",
  "empty_diff":
- "@[simp]\ntheorem empty_diff (s : set α) : (∅ \\ s : set α) = ∅ :=\n  bot_sdiff\n#align empty_diff empty_diff\n\n",
+ "@[simp]\ntheorem empty_diff (s : Set α) : (∅ \\ s : Set α) = ∅ :=\n  bot_sdiff\n#align empty_diff empty_diff\n\n",
  "empty_def":
- "theorem empty_def : (∅ : set α) = { x | false } :=\n  rfl\n#align empty_def empty_def\n\n",
+ "theorem empty_def : (∅ : Set α) = { x | False } :=\n  rfl\n#align empty_def empty_def\n\n",
  "elim":
- "theorem mem_union.elim {x : α} {a b : set α} {P : Prop} (H₁ : x ∈ a ∪ b) (H₂ : x ∈ a → P) (H₃ : x ∈ b → P) : P :=\n  or.elim H₁ H₂ H₃\n#align mem_union.elim mem_union.elim\n\n",
+ "theorem mem_union.elim {x : α} {a b : Set α} {P : Prop} (H₁ : x ∈ a ∪ b) (H₂ : x ∈ a → P) (H₃ : x ∈ b → P) : P :=\n  or.elim H₁ H₂ H₃\n#align mem_union.elim mem_union.elim\n\n",
  "disjoint_univ":
  "@[simp]\ntheorem disjoint_univ : Disjoint s univ ↔ s = ∅ :=\n  disjoint_top\n#align disjoint_univ disjoint_univ\n\n",
  "disjoint_union_right":
@@ -891,7 +907,7 @@
  "disjoint_singleton_left":
  "@[simp]\ntheorem disjoint_singleton_left : Disjoint {a} s ↔ a ∉ s := by simp [Set.disjoint_iff, subset_def] <;> exact iff.rfl\n#align disjoint_singleton_left disjoint_singleton_left\n\n",
  "disjoint_singleton":
- "@[simp]\ntheorem disjoint_singleton : Disjoint ({a} : set α) {b} ↔ a ≠ b := by rw [disjoint_singleton_left, mem_singleton_iff]\n#align disjoint_singleton disjoint_singleton\n\n",
+ "@[simp]\ntheorem disjoint_singleton : Disjoint ({a} : Set α) {b} ↔ a ≠ b := by rw [disjoint_singleton_left, mem_singleton_iff]\n#align disjoint_singleton disjoint_singleton\n\n",
  "disjoint_sdiff_right":
  "theorem disjoint_sdiff_right : Disjoint s (t \\ s) :=\n  disjoint_sdiff_self_right\n#align disjoint_sdiff_right disjoint_sdiff_right\n\n",
  "disjoint_sdiff_left":
@@ -899,7 +915,7 @@
  "disjoint_right":
  "theorem disjoint_right : Disjoint s t ↔ ∀ ⦃a⦄, a ∈ t → a ∉ s := by rw [disjoint_comm, disjoint_left]\n#align disjoint_right disjoint_right\n\n",
  "disjoint_or_nonempty_inter":
- "theorem disjoint_or_nonempty_inter (s t : set α) : Disjoint s t ∨ (s ∩ t).nonempty :=\n  (em _).imp_right not_disjoint_iff_nonempty_inter.mp\n#align disjoint_or_nonempty_inter disjoint_or_nonempty_inter\n\n",
+ "theorem disjoint_or_nonempty_inter (s t : Set α) : Disjoint s t ∨ (s ∩ t).nonempty :=\n  (em _).imp_right not_disjoint_iff_nonempty_inter.mp\n#align disjoint_or_nonempty_inter disjoint_or_nonempty_inter\n\n",
  "disjoint_of_subset_right":
  "theorem disjoint_of_subset_right (ht : t₁ ⊆ t₂) (h : Disjoint s t₂) : Disjoint s t₁ :=\n  h.mono_right ht\n#align disjoint_of_subset_right disjoint_of_subset_right\n\n",
  "disjoint_of_subset_left":
@@ -915,132 +931,138 @@
  "disjoint_iff":
  "#print disjoint_iff /-\nprotected theorem disjoint_iff : Disjoint s t ↔ s ∩ t ⊆ ∅ :=\n  disjoint_iff_inf_le\n#align disjoint_iff disjoint_iff\n-/\n\n",
  "disjoint_empty":
- "@[simp]\ntheorem disjoint_empty (s : set α) : Disjoint s ∅ :=\n  disjoint_bot_right\n#align disjoint_empty disjoint_empty\n\n",
+ "@[simp]\ntheorem disjoint_empty (s : Set α) : Disjoint s ∅ :=\n  disjoint_bot_right\n#align disjoint_empty disjoint_empty\n\n",
  "disjoint_compl_right_iff_subset":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\ntheorem disjoint_compl_right_iff_subset : Disjoint s («expr ᶜ» t) ↔ s ⊆ t :=\n  disjoint_compl_right_iff\n#align disjoint_compl_right_iff_subset disjoint_compl_right_iff_subset\n\n",
  "disjoint_compl_left_iff_subset":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\ntheorem disjoint_compl_left_iff_subset : Disjoint («expr ᶜ» s) t ↔ t ⊆ s :=\n  disjoint_compl_left_iff\n#align disjoint_compl_left_iff_subset disjoint_compl_left_iff_subset\n\n",
  "diff_univ":
- "@[simp]\ntheorem diff_univ (s : set α) : s \\ univ = ∅ :=\n  diff_eq_empty.2 (subset_univ s)\n#align diff_univ diff_univ\n\n",
+ "@[simp]\ntheorem diff_univ (s : Set α) : s \\ univ = ∅ :=\n  diff_eq_empty.2 (subset_univ s)\n#align diff_univ diff_univ\n\n",
  "diff_union_self":
- "@[simp]\ntheorem diff_union_self {s t : set α} : s \\ t ∪ t = s ∪ t :=\n  sdiff_sup_self _ _\n#align diff_union_self diff_union_self\n\n",
+ "@[simp]\ntheorem diff_union_self {s t : Set α} : s \\ t ∪ t = s ∪ t :=\n  sdiff_sup_self _ _\n#align diff_union_self diff_union_self\n\n",
  "diff_union_of_subset":
- "theorem diff_union_of_subset {s t : set α} (h : t ⊆ s) : s \\ t ∪ t = s :=\n  Subset.antisymm (union_subset (diff_subset _ _) h) (subset_diff_union _ _)\n#align diff_union_of_subset diff_union_of_subset\n\n",
+ "theorem diff_union_of_subset {s t : Set α} (h : t ⊆ s) : s \\ t ∪ t = s :=\n  Subset.antisymm (union_subset (diff_subset _ _) h) (subset_diff_union _ _)\n#align diff_union_of_subset diff_union_of_subset\n\n",
  "diff_union_inter":
- "@[simp]\ntheorem diff_union_inter (s t : set α) : s \\ t ∪ s ∩ t = s :=\n  by\n  rw [union_comm]\n  exact sup_inf_sdiff _ _\n#align diff_union_inter diff_union_inter\n\n",
+ "@[simp]\ntheorem diff_union_inter (s t : Set α) : s \\ t ∪ s ∩ t = s :=\n  by\n  rw [union_comm]\n  exact sup_inf_sdiff _ _\n#align diff_union_inter diff_union_inter\n\n",
+ "diff_union_diff_cancel":
+ "theorem diff_union_diff_cancel (hts : t ⊆ s) (hut : u ⊆ t) : s \\ t ∪ t \\ u = s \\ u :=\n  sdiff_sup_sdiff_cancel hts hut\n#align diff_union_diff_cancel diff_union_diff_cancel\n\n",
  "diff_subset_iff":
- "theorem diff_subset_iff {s t u : set α} : s \\ t ⊆ u ↔ s ⊆ t ∪ u :=\n  show s \\ t ≤ u ↔ s ≤ t ∪ u from sdiff_le_iff\n#align diff_subset_iff diff_subset_iff\n\n",
+ "theorem diff_subset_iff {s t u : Set α} : s \\ t ⊆ u ↔ s ⊆ t ∪ u :=\n  show s \\ t ≤ u ↔ s ≤ t ∪ u from sdiff_le_iff\n#align diff_subset_iff diff_subset_iff\n\n",
  "diff_subset_diff_right":
- "theorem diff_subset_diff_right {s t u : set α} (h : t ⊆ u) : s \\ u ⊆ s \\ t :=\n  sdiff_le_sdiff_left ‹t ≤ u›\n#align diff_subset_diff_right diff_subset_diff_right\n\n",
+ "theorem diff_subset_diff_right {s t u : Set α} (h : t ⊆ u) : s \\ u ⊆ s \\ t :=\n  sdiff_le_sdiff_left ‹t ≤ u›\n#align diff_subset_diff_right diff_subset_diff_right\n\n",
  "diff_subset_diff_left":
- "theorem diff_subset_diff_left {s₁ s₂ t : set α} (h : s₁ ⊆ s₂) : s₁ \\ t ⊆ s₂ \\ t :=\n  sdiff_le_sdiff_right ‹s₁ ≤ s₂›\n#align diff_subset_diff_left diff_subset_diff_left\n\n",
+ "theorem diff_subset_diff_left {s₁ s₂ t : Set α} (h : s₁ ⊆ s₂) : s₁ \\ t ⊆ s₂ \\ t :=\n  sdiff_le_sdiff_right ‹s₁ ≤ s₂›\n#align diff_subset_diff_left diff_subset_diff_left\n\n",
  "diff_subset_diff":
- "theorem diff_subset_diff {s₁ s₂ t₁ t₂ : set α} : s₁ ⊆ s₂ → t₂ ⊆ t₁ → s₁ \\ t₁ ⊆ s₂ \\ t₂ :=\n  show s₁ ≤ s₂ → t₂ ≤ t₁ → s₁ \\ t₁ ≤ s₂ \\ t₂ from sdiff_le_sdiff\n#align diff_subset_diff diff_subset_diff\n\n",
+ "theorem diff_subset_diff {s₁ s₂ t₁ t₂ : Set α} : s₁ ⊆ s₂ → t₂ ⊆ t₁ → s₁ \\ t₁ ⊆ s₂ \\ t₂ :=\n  show s₁ ≤ s₂ → t₂ ≤ t₁ → s₁ \\ t₁ ≤ s₂ \\ t₂ from sdiff_le_sdiff\n#align diff_subset_diff diff_subset_diff\n\n",
  "diff_subset_comm":
- "theorem diff_subset_comm {s t u : set α} : s \\ t ⊆ u ↔ s \\ u ⊆ t :=\n  show s \\ t ≤ u ↔ s \\ u ≤ t from sdiff_le_comm\n#align diff_subset_comm diff_subset_comm\n\n",
+ "theorem diff_subset_comm {s t u : Set α} : s \\ t ⊆ u ↔ s \\ u ⊆ t :=\n  show s \\ t ≤ u ↔ s \\ u ≤ t from sdiff_le_comm\n#align diff_subset_comm diff_subset_comm\n\n",
  "diff_subset":
- "theorem diff_subset (s t : set α) : s \\ t ⊆ s :=\n  show s \\ t ≤ s from sdiff_le\n#align diff_subset diff_subset\n\n",
+ "theorem diff_subset (s t : Set α) : s \\ t ⊆ s :=\n  show s \\ t ≤ s from sdiff_le\n#align diff_subset diff_subset\n\n",
  "diff_singleton_subset_iff":
- "@[simp]\ntheorem diff_singleton_subset_iff {x : α} {s t : set α} : s \\ {x} ⊆ t ↔ s ⊆ insert x t :=\n  by\n  rw [← union_singleton, union_comm]\n  apply diff_subset_iff\n#align diff_singleton_subset_iff diff_singleton_subset_iff\n\n",
+ "@[simp]\ntheorem diff_singleton_subset_iff {x : α} {s t : Set α} : s \\ {x} ⊆ t ↔ s ⊆ insert x t :=\n  by\n  rw [← union_singleton, union_comm]\n  apply diff_subset_iff\n#align diff_singleton_subset_iff diff_singleton_subset_iff\n\n",
+ "diff_singleton_ssubset":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊂ » -/\n@[simp]\ntheorem diff_singleton_ssubset {s : Set α} {a : α} : «expr ⊂ » (s \\ {a}) s ↔ a ∈ s :=\n  sdiff_le.lt_iff_ne.trans <| sdiff_eq_left.not.trans <| by simp\n#align diff_singleton_ssubset diff_singleton_ssubset\n\n",
  "diff_singleton_eq_self":
- "@[simp]\ntheorem diff_singleton_eq_self {a : α} {s : set α} (h : a ∉ s) : s \\ {a} = s :=\n  sdiff_eq_self_iff_disjoint.2 <| by simp [h]\n#align diff_singleton_eq_self diff_singleton_eq_self\n\n",
+ "@[simp]\ntheorem diff_singleton_eq_self {a : α} {s : Set α} (h : a ∉ s) : s \\ {a} = s :=\n  sdiff_eq_self_iff_disjoint.2 <| by simp [h]\n#align diff_singleton_eq_self diff_singleton_eq_self\n\n",
  "diff_self_inter":
- "@[simp]\ntheorem diff_self_inter {s t : set α} : s \\ (s ∩ t) = s \\ t :=\n  sdiff_inf_self_left _ _\n#align diff_self_inter diff_self_inter\n\n",
+ "@[simp]\ntheorem diff_self_inter {s t : Set α} : s \\ (s ∩ t) = s \\ t :=\n  sdiff_inf_self_left _ _\n#align diff_self_inter diff_self_inter\n\n",
  "diff_self":
- "@[simp]\ntheorem diff_self {s : set α} : s \\ s = ∅ :=\n  sdiff_self\n#align diff_self diff_self\n\n",
+ "@[simp]\ntheorem diff_self {s : Set α} : s \\ s = ∅ :=\n  sdiff_self\n#align diff_self diff_self\n\n",
  "diff_inter_self_eq_diff":
- "@[simp]\ntheorem diff_inter_self_eq_diff {s t : set α} : s \\ (t ∩ s) = s \\ t :=\n  sdiff_inf_self_right _ _\n#align diff_inter_self_eq_diff diff_inter_self_eq_diff\n\n",
+ "@[simp]\ntheorem diff_inter_self_eq_diff {s t : Set α} : s \\ (t ∩ s) = s \\ t :=\n  sdiff_inf_self_right _ _\n#align diff_inter_self_eq_diff diff_inter_self_eq_diff\n\n",
  "diff_inter_self":
- "@[simp]\ntheorem diff_inter_self {a b : set α} : b \\ a ∩ a = ∅ :=\n  inf_sdiff_self_left\n#align diff_inter_self diff_inter_self\n\n",
+ "@[simp]\ntheorem diff_inter_self {a b : Set α} : b \\ a ∩ a = ∅ :=\n  inf_sdiff_self_left\n#align diff_inter_self diff_inter_self\n\n",
  "diff_inter_diff":
- "theorem diff_inter_diff {s t u : set α} : s \\ t ∩ (s \\ u) = s \\ (t ∪ u) :=\n  sdiff_sup.symm\n#align diff_inter_diff diff_inter_diff\n\n",
+ "theorem diff_inter_diff {s t u : Set α} : s \\ t ∩ (s \\ u) = s \\ (t ∪ u) :=\n  sdiff_sup.symm\n#align diff_inter_diff diff_inter_diff\n\n",
  "diff_inter":
- "theorem diff_inter {s t u : set α} : s \\ (t ∩ u) = s \\ t ∪ s \\ u :=\n  sdiff_inf\n#align diff_inter diff_inter\n\n",
+ "theorem diff_inter {s t u : Set α} : s \\ (t ∩ u) = s \\ t ∪ s \\ u :=\n  sdiff_inf\n#align diff_inter diff_inter\n\n",
  "diff_eq_empty":
- "theorem diff_eq_empty {s t : set α} : s \\ t = ∅ ↔ s ⊆ t :=\n  sdiff_eq_bot_iff\n#align diff_eq_empty diff_eq_empty\n\n",
+ "theorem diff_eq_empty {s t : Set α} : s \\ t = ∅ ↔ s ⊆ t :=\n  sdiff_eq_bot_iff\n#align diff_eq_empty diff_eq_empty\n\n",
  "diff_eq_compl_inter":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\ntheorem diff_eq_compl_inter {s t : set α} : s \\ t = «expr ᶜ» t ∩ s := by rw [diff_eq, inter_comm]\n#align diff_eq_compl_inter diff_eq_compl_inter\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\ntheorem diff_eq_compl_inter {s t : Set α} : s \\ t = «expr ᶜ» t ∩ s := by rw [diff_eq, inter_comm]\n#align diff_eq_compl_inter diff_eq_compl_inter\n\n",
  "diff_eq":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\ntheorem diff_eq (s t : set α) : s \\ t = s ∩ «expr ᶜ» t :=\n  rfl\n#align diff_eq diff_eq\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\ntheorem diff_eq (s t : Set α) : s \\ t = s ∩ «expr ᶜ» t :=\n  rfl\n#align diff_eq diff_eq\n\n",
  "diff_empty":
- "@[simp]\ntheorem diff_empty {s : set α} : s \\ ∅ = s :=\n  sdiff_bot\n#align diff_empty diff_empty\n\n",
+ "@[simp]\ntheorem diff_empty {s : Set α} : s \\ ∅ = s :=\n  sdiff_bot\n#align diff_empty diff_empty\n\n",
  "diff_diff_right_self":
- "theorem diff_diff_right_self (s t : set α) : s \\ (s \\ t) = s ∩ t :=\n  sdiff_sdiff_right_self\n#align diff_diff_right_self diff_diff_right_self\n\n",
+ "theorem diff_diff_right_self (s t : Set α) : s \\ (s \\ t) = s ∩ t :=\n  sdiff_sdiff_right_self\n#align diff_diff_right_self diff_diff_right_self\n\n",
  "diff_diff_right":
- "theorem diff_diff_right {s t u : set α} : s \\ (t \\ u) = s \\ t ∪ s ∩ u :=\n  sdiff_sdiff_right'\n#align diff_diff_right diff_diff_right\n\n",
+ "theorem diff_diff_right {s t u : Set α} : s \\ (t \\ u) = s \\ t ∪ s ∩ u :=\n  sdiff_sdiff_right'\n#align diff_diff_right diff_diff_right\n\n",
+ "diff_diff_eq_sdiff_union":
+ "theorem diff_diff_eq_sdiff_union (h : u ⊆ s) : s \\ (t \\ u) = s \\ t ∪ u :=\n  sdiff_sdiff_eq_sdiff_sup h\n#align diff_diff_eq_sdiff_union diff_diff_eq_sdiff_union\n\n",
  "diff_diff_comm":
- "-- the following statement contains parentheses to help the reader\ntheorem diff_diff_comm {s t u : set α} : (s \\ t) \\ u = (s \\ u) \\ t :=\n  sdiff_sdiff_comm\n#align diff_diff_comm diff_diff_comm\n\n",
+ "-- the following statement contains parentheses to help the reader\ntheorem diff_diff_comm {s t u : Set α} : (s \\ t) \\ u = (s \\ u) \\ t :=\n  sdiff_sdiff_comm\n#align diff_diff_comm diff_diff_comm\n\n",
  "diff_diff_cancel_left":
- "theorem diff_diff_cancel_left {s t : set α} (h : s ⊆ t) : t \\ (t \\ s) = s :=\n  sdiff_sdiff_eq_self h\n#align diff_diff_cancel_left diff_diff_cancel_left\n\n",
+ "theorem diff_diff_cancel_left {s t : Set α} (h : s ⊆ t) : t \\ (t \\ s) = s :=\n  sdiff_sdiff_eq_self h\n#align diff_diff_cancel_left diff_diff_cancel_left\n\n",
  "diff_diff":
- "theorem diff_diff {u : set α} : (s \\ t) \\ u = s \\ (t ∪ u) :=\n  sdiff_sdiff_left\n#align diff_diff diff_diff\n\n",
+ "theorem diff_diff {u : Set α} : (s \\ t) \\ u = s \\ (t ∪ u) :=\n  sdiff_sdiff_left\n#align diff_diff diff_diff\n\n",
  "diff_compl":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\ntheorem diff_compl : s \\ «expr ᶜ» t = s ∩ t :=\n  sdiff_compl\n#align diff_compl diff_compl\n\n",
  "default_coe_singleton":
- "-- while `simp` is capable of proving this, it is not capable of turning the LHS into the RHS.\n@[simp]\ntheorem default_coe_singleton (x : α) : (default : ({x} : set α)) = ⟨x, rfl⟩ :=\n  rfl\n#align default_coe_singleton default_coe_singleton\n\n",
+ "-- while `simp` is capable of proving this, it is not capable of turning the LHS into the RHS.\n@[simp]\ntheorem default_coe_singleton (x : α) : (default : ({x} : Set α)) = ⟨x, rfl⟩ :=\n  rfl\n#align default_coe_singleton default_coe_singleton\n\n",
  "compl_univ_iff":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\n@[simp]\ntheorem compl_univ_iff {s : set α} : «expr ᶜ» s = univ ↔ s = ∅ :=\n  compl_eq_top\n#align compl_univ_iff compl_univ_iff\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\n@[simp]\ntheorem compl_univ_iff {s : Set α} : «expr ᶜ» s = univ ↔ s = ∅ :=\n  compl_eq_top\n#align compl_univ_iff compl_univ_iff\n\n",
  "compl_univ":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\n@[simp]\ntheorem compl_univ : «expr ᶜ» (univ : set α) = ∅ :=\n  compl_top\n#align compl_univ compl_univ\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\n@[simp]\ntheorem compl_univ : «expr ᶜ» (univ : Set α) = ∅ :=\n  compl_top\n#align compl_univ compl_univ\n\n",
  "compl_union_self":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\n@[simp]\ntheorem compl_union_self (s : set α) : «expr ᶜ» s ∪ s = univ := by rw [union_comm, union_compl_self]\n#align compl_union_self compl_union_self\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\n@[simp]\ntheorem compl_union_self (s : Set α) : «expr ᶜ» s ∪ s = univ := by rw [union_comm, union_compl_self]\n#align compl_union_self compl_union_self\n\n",
  "compl_union":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\n@[simp]\ntheorem compl_union (s t : set α) : «expr ᶜ» (s ∪ t) = «expr ᶜ» s ∩ «expr ᶜ» t :=\n  compl_sup\n#align compl_union compl_union\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\n@[simp]\ntheorem compl_union (s t : Set α) : «expr ᶜ» (s ∪ t) = «expr ᶜ» s ∩ «expr ᶜ» t :=\n  compl_sup\n#align compl_union compl_union\n\n",
  "compl_subset_iff_union":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\ntheorem compl_subset_iff_union {s t : set α} : «expr ᶜ» s ⊆ t ↔ s ∪ t = univ :=\n  iff.symm <| eq_univ_iff_forall.trans <| forall_congr' fun a => or_iff_not_imp_left\n#align compl_subset_iff_union compl_subset_iff_union\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\ntheorem compl_subset_iff_union {s t : Set α} : «expr ᶜ» s ⊆ t ↔ s ∪ t = univ :=\n  iff.symm <| eq_univ_iff_forall.trans <| forall_congr' fun a => or_iff_not_imp_left\n#align compl_subset_iff_union compl_subset_iff_union\n\n",
  "compl_subset_compl":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\n@[simp]\ntheorem compl_subset_compl : «expr ᶜ» s ⊆ «expr ᶜ» t ↔ t ⊆ s :=\n  @compl_le_compl_iff_le (set α) _ _ _\n#align compl_subset_compl compl_subset_compl\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\n@[simp]\ntheorem compl_subset_compl : «expr ᶜ» s ⊆ «expr ᶜ» t ↔ t ⊆ s :=\n  @compl_le_compl_iff_le (Set α) _ _ _\n#align compl_subset_compl compl_subset_compl\n\n",
  "compl_subset_comm":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\ntheorem compl_subset_comm : «expr ᶜ» s ⊆ t ↔ «expr ᶜ» t ⊆ s :=\n  @compl_le_iff_compl_le _ s _ _\n#align compl_subset_comm compl_subset_comm\n\n",
  "compl_singleton_eq":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\ntheorem compl_singleton_eq (a : α) : «expr ᶜ» ({a} : set α) = { x | x ≠ a } :=\n  rfl\n#align compl_singleton_eq compl_singleton_eq\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\ntheorem compl_singleton_eq (a : α) : «expr ᶜ» ({a} : Set α) = { x | x ≠ a } :=\n  rfl\n#align compl_singleton_eq compl_singleton_eq\n\n",
  "compl_set_of":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\ntheorem compl_set_of {α} (p : α → Prop) : «expr ᶜ» { a | p a } = { a | ¬p a } :=\n  rfl\n#align compl_set_of compl_set_of\n\n",
  "compl_ne_univ":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\ntheorem compl_ne_univ : «expr ᶜ» s ≠ univ ↔ s.nonempty :=\n  compl_univ_iff.not.trans nonempty_iff_ne_empty.symm\n#align compl_ne_univ compl_ne_univ\n\n",
  "compl_ne_eq_singleton":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\n@[simp]\ntheorem compl_ne_eq_singleton (a : α) : «expr ᶜ» ({ x | x ≠ a } : set α) = {a} :=\n  compl_compl _\n#align compl_ne_eq_singleton compl_ne_eq_singleton\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\n@[simp]\ntheorem compl_ne_eq_singleton (a : α) : «expr ᶜ» ({ x | x ≠ a } : Set α) = {a} :=\n  compl_compl _\n#align compl_ne_eq_singleton compl_ne_eq_singleton\n\n",
  "compl_inter_self":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\n@[simp]\ntheorem compl_inter_self (s : set α) : «expr ᶜ» s ∩ s = ∅ :=\n  compl_inf_eq_bot\n#align compl_inter_self compl_inter_self\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\n@[simp]\ntheorem compl_inter_self (s : Set α) : «expr ᶜ» s ∩ s = ∅ :=\n  compl_inf_eq_bot\n#align compl_inter_self compl_inter_self\n\n",
  "compl_inter":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\ntheorem compl_inter (s t : set α) : «expr ᶜ» (s ∩ t) = «expr ᶜ» s ∪ «expr ᶜ» t :=\n  compl_inf\n#align compl_inter compl_inter\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\ntheorem compl_inter (s t : Set α) : «expr ᶜ» (s ∩ t) = «expr ᶜ» s ∪ «expr ᶜ» t :=\n  compl_inf\n#align compl_inter compl_inter\n\n",
  "compl_eq_univ_diff":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\ntheorem compl_eq_univ_diff (s : set α) : «expr ᶜ» s = univ \\ s :=\n  top_sdiff.symm\n#align compl_eq_univ_diff compl_eq_univ_diff\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\ntheorem compl_eq_univ_diff (s : Set α) : «expr ᶜ» s = univ \\ s :=\n  top_sdiff.symm\n#align compl_eq_univ_diff compl_eq_univ_diff\n\n",
  "compl_empty_iff":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\n@[simp]\ntheorem compl_empty_iff {s : set α} : «expr ᶜ» s = ∅ ↔ s = univ :=\n  compl_eq_bot\n#align compl_empty_iff compl_empty_iff\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\n@[simp]\ntheorem compl_empty_iff {s : Set α} : «expr ᶜ» s = ∅ ↔ s = univ :=\n  compl_eq_bot\n#align compl_empty_iff compl_empty_iff\n\n",
  "compl_empty":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\n@[simp]\ntheorem compl_empty : «expr ᶜ» (∅ : set α) = univ :=\n  compl_bot\n#align compl_empty compl_empty\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\n@[simp]\ntheorem compl_empty : «expr ᶜ» (∅ : Set α) = univ :=\n  compl_bot\n#align compl_empty compl_empty\n\n",
  "compl_def":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\ntheorem compl_def (s : set α) : «expr ᶜ» s = { x | x ∉ s } :=\n  rfl\n#align compl_def compl_def\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\ntheorem compl_def (s : Set α) : «expr ᶜ» s = { x | x ∉ s } :=\n  rfl\n#align compl_def compl_def\n\n",
  "coe_sort":
- "theorem subsingleton.coe_sort {s : set α} : s.subsingleton → subsingleton s :=\n  s.subsingleton_coe.2\n#align subsingleton.coe_sort subsingleton.coe_sort\n\n",
+ "theorem subsingleton.coe_sort {s : Set α} : s.subsingleton → subsingleton s :=\n  s.subsingleton_coe.2\n#align subsingleton.coe_sort subsingleton.coe_sort\n\n",
  "coe_setOf":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr↥ » -/\n#print Set.coe_setOf /-\n@[simp]\ntheorem Set.coe_setOf (p : α → Prop) : «expr↥ » { x | p x } = { x // p x } :=\n  rfl\n#align set.coe_set_of Set.coe_setOf\n-/\n\n",
  "coe_inclusion":
  "@[simp]\ntheorem coe_inclusion (h : s ⊆ t) (x : s) : (inclusion h x : α) = (x : α) :=\n  rfl\n#align coe_inclusion coe_inclusion\n\n",
  "coe_eq_subtype":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr↥ » -/\n#print Set.coe_eq_subtype /-\ntheorem Set.coe_eq_subtype (s : set α) : «expr↥ » s = { x // x ∈ s } :=\n  rfl\n#align set.coe_eq_subtype Set.coe_eq_subtype\n-/\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr↥ » -/\n#print Set.coe_eq_subtype /-\ntheorem Set.coe_eq_subtype (s : Set α) : «expr↥ » s = { x // x ∈ s } :=\n  rfl\n#align set.coe_eq_subtype Set.coe_eq_subtype\n-/\n\n",
  "bot_eq_empty":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n@[simp]\ntheorem bot_eq_empty : («expr⊥» : set α) = ∅ :=\n  rfl\n#align bot_eq_empty bot_eq_empty\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n@[simp]\ntheorem bot_eq_empty : («expr⊥» : Set α) = ∅ :=\n  rfl\n#align bot_eq_empty bot_eq_empty\n\n",
  "bex_insert_iff":
- "theorem bex_insert_iff {P : α → Prop} {a : α} {s : set α} : (∃ x ∈ insert a s, P x) ↔ P a ∨ ∃ x ∈ s, P x :=\n  bex_or_left.trans <| or_congr_left bex_eq_left\n#align bex_insert_iff bex_insert_iff\n\n",
+ "theorem bex_insert_iff {P : α → Prop} {a : α} {s : Set α} : (∃ x ∈ insert a s, P x) ↔ P a ∨ ∃ x ∈ s, P x :=\n  bex_or_left.trans <| or_congr_left bex_eq_left\n#align bex_insert_iff bex_insert_iff\n\n",
  "ball_insert_iff":
- "theorem ball_insert_iff {P : α → Prop} {a : α} {s : set α} : (∀ x ∈ insert a s, P x) ↔ P a ∧ ∀ x ∈ s, P x :=\n  ball_or_left.trans <| and_congr_left' forall_eq\n#align ball_insert_iff ball_insert_iff\n\n",
+ "theorem ball_insert_iff {P : α → Prop} {a : α} {s : Set α} : (∀ x ∈ insert a s, P x) ↔ P a ∧ ∀ x ∈ s, P x :=\n  ball_or_left.trans <| and_congr_left' forall_eq\n#align ball_insert_iff ball_insert_iff\n\n",
  "ball_empty_iff":
- "theorem ball_empty_iff {p : α → Prop} : (∀ x ∈ (∅ : set α), p x) ↔ true :=\n  iff_true_intro fun x => false.elim\n#align ball_empty_iff ball_empty_iff\n\n",
+ "theorem ball_empty_iff {p : α → Prop} : (∀ x ∈ (∅ : Set α), p x) ↔ True :=\n  iff_true_intro fun x => false.elim\n#align ball_empty_iff ball_empty_iff\n\n",
  "antitone_set_of":
- "theorem antitone_set_of [preorder α] {p : α → β → Prop} (hp : ∀ b, antitone fun a => p a b) :\n    antitone fun a => { b | p a b } := fun a a' h b => hp b h\n#align antitone_set_of antitone_set_of\n\n",
+ "theorem antitone_set_of [preorder α] {p : α → β → Prop} (hp : ∀ b, Antitone fun a => p a b) :\n    Antitone fun a => { b | p a b } := fun a a' h b => hp b h\n#align antitone_set_of antitone_set_of\n\n",
  "antitone_on_singleton":
- "@[simp]\ntheorem antitone_on_singleton : antitone_on f {a} :=\n  subsingleton_singleton.antitone_on f\n#align antitone_on_singleton antitone_on_singleton\n\n",
+ "@[simp]\ntheorem antitone_on_singleton : AntitoneOn f {a} :=\n  subsingleton_singleton.antitone_on f\n#align antitone_on_singleton antitone_on_singleton\n\n",
  "antitone_on_iff_antitone":
- "theorem antitone_on_iff_antitone : antitone_on f s ↔ antitone fun a : s => f a := by simp [antitone, antitone_on]\n#align antitone_on_iff_antitone antitone_on_iff_antitone\n\n",
+ "theorem antitone_on_iff_antitone : AntitoneOn f s ↔ Antitone fun a : s => f a := by simp [Antitone, AntitoneOn]\n#align antitone_on_iff_antitone antitone_on_iff_antitone\n\n",
  "antitone_on":
- "protected theorem subsingleton.antitone_on (h : s.subsingleton) : antitone_on f s := fun a ha b hb _ =>\n  (congr_arg _ (h hb ha)).le\n#align subsingleton.antitone_on subsingleton.antitone_on\n\n",
+ "protected theorem subsingleton.antitone_on (h : s.subsingleton) : AntitoneOn f s := fun a ha b hb _ =>\n  (congr_arg _ (h hb ha)).le\n#align subsingleton.antitone_on subsingleton.antitone_on\n\n",
  "antitone_bforall":
- "/-- Quantifying over a set is antitone in the set -/\ntheorem antitone_bforall {P : α → Prop} : antitone fun s : set α => ∀ x ∈ s, P x := fun s t hst h x hx => h x <| hst hx\n#align antitone_bforall antitone_bforall\n\n",
+ "/-- Quantifying over a set is antitone in the set -/\ntheorem antitone_bforall {P : α → Prop} : Antitone fun s : Set α => ∀ x ∈ s, P x := fun s t hst h x hx => h x <| hst hx\n#align antitone_bforall antitone_bforall\n\n",
  "antisymm_iff":
- "theorem subset.antisymm_iff {a b : set α} : a = b ↔ a ⊆ b ∧ b ⊆ a :=\n  ⟨fun e => ⟨e.subset, e.symm.subset⟩, fun ⟨h₁, h₂⟩ => Subset.antisymm h₁ h₂⟩\n#align subset.antisymm_iff subset.antisymm_iff\n\n",
+ "theorem subset.antisymm_iff {a b : Set α} : a = b ↔ a ⊆ b ∧ b ⊆ a :=\n  ⟨fun e => ⟨e.subset, e.symm.subset⟩, fun ⟨h₁, h₂⟩ => Subset.antisymm h₁ h₂⟩\n#align subset.antisymm_iff subset.antisymm_iff\n\n",
  "antisymm":
- "theorem subset.antisymm {a b : set α} (h₁ : a ⊆ b) (h₂ : b ⊆ a) : a = b :=\n  Set.ext fun x => ⟨@h₁ _, @h₂ _⟩\n#align subset.antisymm subset.antisymm\n\n",
+ "theorem subset.antisymm {a b : Set α} (h₁ : a ⊆ b) (h₂ : b ⊆ a) : a = b :=\n  Set.ext fun x => ⟨@h₁ _, @h₂ _⟩\n#align subset.antisymm subset.antisymm\n\n",
  "anti":
  "theorem subsingleton.anti (ht : t.subsingleton) (hst : s ⊆ t) : s.subsingleton := fun x hx y hy => ht (hst hx) (hst hy)\n#align subsingleton.anti subsingleton.anti\n\n"}

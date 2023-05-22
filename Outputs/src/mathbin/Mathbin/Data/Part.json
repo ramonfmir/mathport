@@ -3,21 +3,21 @@
  "union_get_eq":
  "@[simp]\ntheorem union_get_eq [Union α] (a b : Part α) (hab : dom (a ∪ b)) :\n    (a ∪ b).get hab = a.get (left_dom_of_union_dom hab) ∪ b.get (right_dom_of_union_dom hab) := by tidy\n#align union_get_eq union_get_eq\n\n",
  "to_option_is_some":
- "/-\nCopyright (c) 2017 Mario Carneiro. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Mario Carneiro, Jeremy Avigad, Simon Hudon\n-/\n@[simp]\ntheorem to_option_is_some (o : Part α) [decidable o.dom] : o.to_option.is_some ↔ o.dom := by\n  by_cases o.dom <;> simp [h, Part.toOption]\n#align to_option_is_some to_option_is_some\n\n",
+ "/-\nCopyright (c) 2017 Mario Carneiro. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Mario Carneiro, Jeremy Avigad, Simon Hudon\n-/\n@[simp]\ntheorem to_option_is_some (o : Part α) [Decidable o.dom] : o.to_option.is_some ↔ o.dom := by\n  by_cases o.dom <;> simp [h, Part.toOption]\n#align to_option_is_some to_option_is_some\n\n",
  "to_option_is_none":
- "@[simp]\ntheorem to_option_is_none (o : Part α) [decidable o.dom] : o.to_option.is_none ↔ ¬o.dom := by\n  by_cases o.dom <;> simp [h, Part.toOption]\n#align to_option_is_none to_option_is_none\n\n",
+ "@[simp]\ntheorem to_option_is_none (o : Part α) [Decidable o.dom] : o.to_option.is_none ↔ ¬o.dom := by\n  by_cases o.dom <;> simp [h, Part.toOption]\n#align to_option_is_none to_option_is_none\n\n",
  "to_option_eq_none_iff":
- "theorem to_option_eq_none_iff {a : Part α} [decidable a.dom] : a.to_option = option.none ↔ ¬a.dom :=\n  ne.dite_eq_right_iff fun h => option.some_ne_none _\n#align to_option_eq_none_iff to_option_eq_none_iff\n\n",
+ "theorem to_option_eq_none_iff {a : Part α} [Decidable a.dom] : a.to_option = option.none ↔ ¬a.dom :=\n  Ne.dite_eq_right_iff fun h => Option.some_ne_none _\n#align to_option_eq_none_iff to_option_eq_none_iff\n\n",
  "to_option":
- "protected theorem dom.to_option {o : Part α} [decidable o.dom] (h : o.dom) : o.to_option = o.get h :=\n  dif_pos h\n#align dom.to_option dom.to_option\n\n",
+ "protected theorem dom.to_option {o : Part α} [Decidable o.dom] (h : o.dom) : o.to_option = o.get h :=\n  dif_pos h\n#align dom.to_option dom.to_option\n\n",
  "to_of_option":
- "@[simp]\ntheorem to_of_option (o : option α) : toOption (ofOption o) = o := by cases o <;> rfl\n#align to_of_option to_of_option\n\n",
+ "@[simp]\ntheorem to_of_option (o : Option α) : toOption (ofOption o) = o := by cases o <;> rfl\n#align to_of_option to_of_option\n\n",
  "subsingleton":
  "protected theorem subsingleton (o : Part α) : Set.Subsingleton { a | a ∈ o } := fun a ha b hb => mem_unique ha hb\n#align subsingleton subsingleton\n\n",
  "some_union_some":
  "theorem some_union_some [Union α] (a b : α) : some a ∪ some b = some (a ∪ b) := by tidy\n#align some_union_some some_union_some\n\n",
  "some_to_option":
- "@[simp]\ntheorem some_to_option (a : α) [decidable (some a).dom] : (some a).to_option = option.some a :=\n  dif_pos trivial\n#align some_to_option some_to_option\n\n",
+ "@[simp]\ntheorem some_to_option (a : α) [Decidable (some a).dom] : (some a).to_option = option.some a :=\n  dif_pos trivial\n#align some_to_option some_to_option\n\n",
  "some_sdiff_some":
  "theorem some_sdiff_some [SDiff α] (a b : α) : some a \\ some b = some (a \\ b) := by tidy\n#align some_sdiff_some some_sdiff_some\n\n",
  "some_ne_none":
@@ -33,7 +33,7 @@
  "some_inj":
  "@[simp]\ntheorem some_inj {a b : α} : Part.some a = some b ↔ a = b :=\n  some_injective.eq_iff\n#align some_inj some_inj\n\n",
  "some_get":
- "@[simp]\ntheorem some_get {a : Part α} (ha : a.dom) : Part.some (part.get a ha) = a :=\n  eq.symm (eq_some_iff.2 ⟨ha, rfl⟩)\n#align some_get some_get\n\n",
+ "@[simp]\ntheorem some_get {a : Part α} (ha : a.dom) : Part.some (part.get a ha) = a :=\n  Eq.symm (eq_some_iff.2 ⟨ha, rfl⟩)\n#align some_get some_get\n\n",
  "some_dom":
  "@[simp]\ntheorem some_dom (a : α) : (some a).dom :=\n  trivial\n#align some_dom some_dom\n\n",
  "some_div_some":
@@ -65,11 +65,11 @@
  "one_mem_one":
  "-- We define several instances for constants and operations on `part α` inherited from `α`.\n@[to_additive]\ntheorem one_mem_one [One α] : (1 : α) ∈ (1 : Part α) :=\n  ⟨trivial, rfl⟩\n#align one_mem_one one_mem_one\n\n",
  "of_to_option":
- "@[simp]\ntheorem of_to_option (o : Part α) [decidable o.dom] : ofOption (toOption o) = o :=\n  ext fun a => mem_ofOption.trans mem_toOption\n#align of_to_option of_to_option\n\n",
+ "@[simp]\ntheorem of_to_option (o : Part α) [Decidable o.dom] : ofOption (toOption o) = o :=\n  ext fun a => mem_ofOption.trans mem_toOption\n#align of_to_option of_to_option\n\n",
  "of_option_eq_get":
- "theorem of_option_eq_get {α} (o : option α) : ofOption o = ⟨_, @option.get _ o⟩ :=\n  Part.ext' (ofOption_dom o) fun h₁ h₂ => by cases o <;> [cases h₁, rfl]\n#align of_option_eq_get of_option_eq_get\n\n",
+ "theorem of_option_eq_get {α} (o : Option α) : ofOption o = ⟨_, @option.get _ o⟩ :=\n  Part.ext' (ofOption_dom o) fun h₁ h₂ => by cases o <;> [cases h₁, rfl]\n#align of_option_eq_get of_option_eq_get\n\n",
  "of_option_dom":
- "@[simp]\ntheorem of_option_dom {α} : ∀ o : option α, (ofOption o).dom ↔ o.is_some\n  | option.none => by simp [of_option, none]\n  | option.some a => by simp [of_option]\n#align of_option_dom of_option_dom\n\n",
+ "@[simp]\ntheorem of_option_dom {α} : ∀ o : Option α, (ofOption o).dom ↔ o.is_some\n  | option.none => by simp [of_option, none]\n  | option.some a => by simp [of_option]\n#align of_option_dom of_option_dom\n\n",
  "of_bind":
  "theorem dom.of_bind {f : α → Part β} {a : Part α} (h : (a.bind f).dom) : a.dom :=\n  h.some\n#align dom.of_bind dom.of_bind\n\n",
  "not_none_dom":
@@ -77,11 +77,11 @@
  "not_mem_none":
  "@[simp]\ntheorem not_mem_none (a : α) : a ∉ @none α := fun h => h.fst\n#align not_mem_none not_mem_none\n\n",
  "none_to_option":
- "@[simp]\ntheorem none_to_option [decidable (@none α).dom] : (none : Part α).to_option = option.none :=\n  dif_neg id\n#align none_to_option none_to_option\n\n",
+ "@[simp]\ntheorem none_to_option [Decidable (@none α).dom] : (none : Part α).to_option = option.none :=\n  dif_neg id\n#align none_to_option none_to_option\n\n",
  "none_ne_some":
  "@[simp]\ntheorem none_ne_some (x : α) : none ≠ some x :=\n  (some_ne_none x).symm\n#align none_ne_some none_ne_some\n\n",
  "ne_none_iff":
- "theorem ne_none_iff {o : Part α} : o ≠ none ↔ ∃ x, o = some x :=\n  by\n  constructor\n  · rw [ne, eq_none_iff', not_not]\n    exact fun h => ⟨o.get h, eq_some_iff.2 (get_mem h)⟩\n  · rintro ⟨x, rfl⟩\n    apply some_ne_none\n#align ne_none_iff ne_none_iff\n\n",
+ "theorem ne_none_iff {o : Part α} : o ≠ none ↔ ∃ x, o = some x :=\n  by\n  constructor\n  · rw [ne, eq_none_iff', Classical.not_not]\n    exact fun h => ⟨o.get h, eq_some_iff.2 (get_mem h)⟩\n  · rintro ⟨x, rfl⟩\n    apply some_ne_none\n#align ne_none_iff ne_none_iff\n\n",
  "mul_mem_mul":
  "@[to_additive]\ntheorem mul_mem_mul [Mul α] (a b : Part α) (ma mb : α) (ha : ma ∈ a) (hb : mb ∈ b) : ma * mb ∈ a * b := by tidy\n#align mul_mem_mul mul_mem_mul\n\n",
  "mul_get_eq":
@@ -93,7 +93,7 @@
  "mem_unique":
  "theorem mem_unique : ∀ {a b : α} {o : Part α}, a ∈ o → b ∈ o → a = b\n  | _, _, ⟨p, f⟩, ⟨h₁, rfl⟩, ⟨h₂, rfl⟩ => rfl\n#align mem_unique mem_unique\n\n",
  "mem_to_option":
- "@[simp]\ntheorem mem_to_option {o : Part α} [decidable o.dom] {a : α} : a ∈ toOption o ↔ a ∈ o :=\n  by\n  unfold to_option\n  by_cases h : o.dom <;> simp [h]\n  · exact ⟨fun h => ⟨_, h⟩, fun ⟨_, h⟩ => h⟩\n  · exact mt Exists.fst h\n#align mem_to_option mem_to_option\n\n",
+ "@[simp]\ntheorem mem_to_option {o : Part α} [Decidable o.dom] {a : α} : a ∈ toOption o ↔ a ∈ o :=\n  by\n  unfold to_option\n  by_cases h : o.dom <;> simp [h]\n  · exact ⟨fun h => ⟨_, h⟩, fun ⟨_, h⟩ => h⟩\n  · exact mt Exists.fst h\n#align mem_to_option mem_to_option\n\n",
  "mem_some_iff":
  "@[simp]\ntheorem mem_some_iff {a b} : b ∈ (some a : Part α) ↔ b = a :=\n  ⟨fun ⟨h, e⟩ => e.symm, fun e => ⟨trivial, e.symm⟩⟩\n#align mem_some_iff mem_some_iff\n\n",
  "mem_some":
@@ -101,7 +101,7 @@
  "mem_restrict":
  "@[simp]\ntheorem mem_restrict (p : Prop) (o : Part α) (h : p → o.dom) (a : α) : a ∈ restrict p o h ↔ p ∧ a ∈ o :=\n  by\n  dsimp [restrict, mem_eq]; constructor\n  · rintro ⟨h₀, h₁⟩\n    exact ⟨h₀, ⟨_, h₁⟩⟩\n  rintro ⟨h₀, h₁, h₂⟩; exact ⟨h₀, h₂⟩\n#align mem_restrict mem_restrict\n\n",
  "mem_of_option":
- "@[simp]\ntheorem mem_of_option {a : α} : ∀ {o : option α}, a ∈ ofOption o ↔ a ∈ o\n  | option.none => ⟨fun h => h.fst.elim, fun h => option.no_confusion h⟩\n  | option.some b => ⟨fun h => congr_arg option.some h.snd, fun h => ⟨trivial, option.some.inj h⟩⟩\n#align mem_of_option mem_of_option\n\n",
+ "@[simp]\ntheorem mem_of_option {a : α} : ∀ {o : Option α}, a ∈ ofOption o ↔ a ∈ o\n  | option.none => ⟨fun h => h.fst.elim, fun h => option.no_confusion h⟩\n  | option.some b => ⟨fun h => congr_arg option.some h.snd, fun h => ⟨trivial, option.some.inj h⟩⟩\n#align mem_of_option mem_of_option\n\n",
  "mem_mk_iff":
  "@[simp]\ntheorem mem_mk_iff {p : Prop} {o : p → α} {a : α} : a ∈ part.mk p o ↔ ∃ h, o h = a :=\n  iff.rfl\n#align mem_mk_iff mem_mk_iff\n\n",
  "mem_map_iff":
@@ -111,7 +111,7 @@
  "mem_eq":
  "theorem mem_eq (a : α) (o : Part α) : (a ∈ o) = ∃ h, o.get h = a :=\n  rfl\n#align mem_eq mem_eq\n\n",
  "mem_coe":
- "@[simp]\ntheorem mem_coe {a : α} {o : option α} : a ∈ (o : Part α) ↔ a ∈ o :=\n  mem_of_option\n#align mem_coe mem_coe\n\n",
+ "@[simp]\ntheorem mem_coe {a : α} {o : Option α} : a ∈ (o : Part α) ↔ a ∈ o :=\n  mem_ofOption\n#align mem_coe mem_coe\n\n",
  "mem_bind_iff":
  "@[simp]\ntheorem mem_bind_iff {f : Part α} {g : α → Part β} {b} : b ∈ f.bind g ↔ ∃ a ∈ f, b ∈ g a :=\n  ⟨match b with\n    | _, ⟨⟨h₁, h₂⟩, rfl⟩ => ⟨_, ⟨_, rfl⟩, ⟨_, rfl⟩⟩,\n    fun ⟨a, h₁, h₂⟩ => mem_bind h₁ h₂⟩\n#align mem_bind_iff mem_bind_iff\n\n",
  "mem_bind":
@@ -133,7 +133,7 @@
  "map_bind":
  "#print map_bind /-\n@[simp]\ntheorem map_bind {γ} (f : α → Part β) (x : Part α) (g : β → γ) : map g (x.bind f) = x.bind fun y => map g (f y) := by\n  rw [← bind_some_eq_map, bind_assoc] <;> simp [bind_some_eq_map]\n#align map_bind map_bind\n-/\n\n",
  "left_unique":
- "theorem mem.left_unique : relator.left_unique ((· ∈ ·) : α → Part α → Prop) := fun a o b => mem_unique\n#align mem.left_unique mem.left_unique\n\n",
+ "theorem mem.left_unique : Relator.LeftUnique ((· ∈ ·) : α → Part α → Prop) := fun a o b => mem_unique\n#align mem.left_unique mem.left_unique\n\n",
  "left_dom_of_union_dom":
  "theorem left_dom_of_union_dom [Union α] {a b : Part α} (hab : dom (a ∪ b)) : a.dom := by tidy\n#align left_dom_of_union_dom left_dom_of_union_dom\n\n",
  "left_dom_of_sdiff_dom":
@@ -163,13 +163,13 @@
  "get_some":
  "@[simp]\ntheorem get_some {a : α} (ha : (some a).dom) : get (some a) ha = a :=\n  rfl\n#align get_some get_some\n\n",
  "get_or_else_some":
- "@[simp]\ntheorem get_or_else_some (a : α) (d : α) [decidable (some a).dom] : getOrElse (some a) d = a :=\n  (some a).get_or_else_of_dom (some_dom a) d\n#align get_or_else_some get_or_else_some\n\n",
+ "@[simp]\ntheorem get_or_else_some (a : α) (d : α) [Decidable (some a).dom] : getOrElse (some a) d = a :=\n  (some a).get_or_else_of_dom (some_dom a) d\n#align get_or_else_some get_or_else_some\n\n",
  "get_or_else_of_not_dom":
- "theorem get_or_else_of_not_dom (a : Part α) (h : ¬a.dom) [decidable a.dom] (d : α) : getOrElse a d = d :=\n  dif_neg h\n#align get_or_else_of_not_dom get_or_else_of_not_dom\n\n",
+ "theorem get_or_else_of_not_dom (a : Part α) (h : ¬a.dom) [Decidable a.dom] (d : α) : getOrElse a d = d :=\n  dif_neg h\n#align get_or_else_of_not_dom get_or_else_of_not_dom\n\n",
  "get_or_else_of_dom":
- "theorem get_or_else_of_dom (a : Part α) (h : a.dom) [decidable a.dom] (d : α) : getOrElse a d = a.get h :=\n  dif_pos h\n#align get_or_else_of_dom get_or_else_of_dom\n\n",
+ "theorem get_or_else_of_dom (a : Part α) (h : a.dom) [Decidable a.dom] (d : α) : getOrElse a d = a.get h :=\n  dif_pos h\n#align get_or_else_of_dom get_or_else_of_dom\n\n",
  "get_or_else_none":
- "@[simp]\ntheorem get_or_else_none (d : α) [decidable (none : Part α).dom] : getOrElse none d = d :=\n  none.get_or_else_of_not_dom not_none_dom d\n#align get_or_else_none get_or_else_none\n\n",
+ "@[simp]\ntheorem get_or_else_none (d : α) [Decidable (none : Part α).dom] : getOrElse none d = d :=\n  none.get_or_else_of_not_dom not_none_dom d\n#align get_or_else_none get_or_else_none\n\n",
  "get_mem":
  "theorem get_mem {o : Part α} (h) : get o h ∈ o :=\n  ⟨_, rfl⟩\n#align get_mem get_mem\n\n",
  "get_eq_of_mem":
@@ -197,7 +197,7 @@
  "eq_get_iff_mem":
  "theorem eq_get_iff_mem {o : Part α} {a : α} (h : o.dom) : a = o.get h ↔ a ∈ o :=\n  eq_comm.trans (get_eq_iff_mem h)\n#align eq_get_iff_mem eq_get_iff_mem\n\n",
  "elim_to_option":
- "@[simp]\ntheorem elim_to_option {α β : Type _} (a : Part α) [decidable a.dom] (b : β) (f : α → β) :\n    a.to_option.elim b f = if h : a.dom then f (a.get h) else b :=\n  by\n  split_ifs\n  · rw [h.to_option]\n    rfl\n  · rw [Part.toOption_eq_none_iff.2 h]\n    rfl\n#align elim_to_option elim_to_option\n\n",
+ "@[simp]\ntheorem elim_to_option {α β : Type _} (a : Part α) [Decidable a.dom] (b : β) (f : α → β) :\n    a.to_option.elim b f = if h : a.dom then f (a.get h) else b :=\n  by\n  split_ifs\n  · rw [h.to_option]\n    rfl\n  · rw [Part.toOption_eq_none_iff.2 h]\n    rfl\n#align elim_to_option elim_to_option\n\n",
  "dom_iff_mem":
  "theorem dom_iff_mem : ∀ {o : Part α}, o.dom ↔ ∃ y, y ∈ o\n  | ⟨p, f⟩ => ⟨fun h => ⟨f h, h, rfl⟩, fun ⟨_, h, rfl⟩ => h⟩\n#align dom_iff_mem dom_iff_mem\n\n",
  "div_mem_div":
@@ -209,7 +209,7 @@
  "coe_none":
  "@[simp]\ntheorem coe_none : (@option.none α : Part α) = none :=\n  rfl\n#align coe_none coe_none\n\n",
  "bind_to_option":
- "theorem bind_to_option (f : α → Part β) (o : Part α) [decidable o.dom] [∀ a, decidable (f a).dom]\n    [decidable (o.bind f).dom] : (o.bind f).to_option = o.to_option.elim option.none fun a => (f a).to_option :=\n  by\n  by_cases o.dom\n  · simp_rw [h.to_option, h.bind]\n    rfl\n  · rw [Part.toOption_eq_none_iff.2 h]\n    exact Part.toOption_eq_none_iff.2 fun ho => h ho.of_bind\n#align bind_to_option bind_to_option\n\n",
+ "theorem bind_to_option (f : α → Part β) (o : Part α) [Decidable o.dom] [∀ a, Decidable (f a).dom]\n    [Decidable (o.bind f).dom] : (o.bind f).to_option = o.to_option.elim option.none fun a => (f a).to_option :=\n  by\n  by_cases o.dom\n  · simp_rw [h.to_option, h.bind]\n    rfl\n  · rw [Part.toOption_eq_none_iff.2 h]\n    exact Part.toOption_eq_none_iff.2 fun ho => h ho.of_bind\n#align bind_to_option bind_to_option\n\n",
  "bind_some_right":
  "@[simp]\ntheorem bind_some_right (x : Part α) : x.bind some = x := by rw [bind_some_eq_map] <;> simp [map_id']\n#align bind_some_right bind_some_right\n\n",
  "bind_some_eq_map":
@@ -235,9 +235,9 @@
  "bind":
  "protected theorem dom.bind {o : Part α} (h : o.dom) (f : α → Part β) : o.bind f = f (o.get h) :=\n  by\n  ext b\n  simp only [Part.mem_bind_iff, exists_prop]\n  refine' ⟨_, fun hb => ⟨o.get h, Part.get_mem _, hb⟩⟩\n  rintro ⟨a, ha, hb⟩\n  rwa [Part.get_eq_of_mem ha]\n#align dom.bind dom.bind\n\n",
  "assert_pos":
- "theorem assert_pos {p : Prop} {f : p → Part α} (h : p) : assert p f = f h :=\n  by\n  dsimp [assert]\n  cases h' : f h\n  simp only [h', h, true_and_iff, iff_self_iff, exists_prop_of_true, eq_iff_iff]\n  apply function.hfunext\n  · simp only [h, h', exists_prop_of_true]\n  · cc\n#align assert_pos assert_pos\n\n",
+ "theorem assert_pos {p : Prop} {f : p → Part α} (h : p) : assert p f = f h :=\n  by\n  dsimp [assert]\n  cases h' : f h\n  simp only [h', h, true_and_iff, iff_self_iff, exists_prop_of_true, eq_iff_iff]\n  apply Function.hfunext\n  · simp only [h, h', exists_prop_of_true]\n  · cc\n#align assert_pos assert_pos\n\n",
  "assert_neg":
- "theorem assert_neg {p : Prop} {f : p → Part α} (h : ¬p) : assert p f = none :=\n  by\n  dsimp [assert, none]; congr\n  · simp only [h, not_false_iff, exists_prop_of_false]\n  · apply function.hfunext\n    · simp only [h, not_false_iff, exists_prop_of_false]\n    cc\n#align assert_neg assert_neg\n\n",
+ "theorem assert_neg {p : Prop} {f : p → Part α} (h : ¬p) : assert p f = none :=\n  by\n  dsimp [assert, none]; congr\n  · simp only [h, not_false_iff, exists_prop_of_false]\n  · apply Function.hfunext\n    · simp only [h, not_false_iff, exists_prop_of_false]\n    cc\n#align assert_neg assert_neg\n\n",
  "assert_defined":
  "theorem assert_defined {p : Prop} {f : p → Part α} : ∀ h : p, (f h).dom → (assert p f).dom :=\n  exists.intro\n#align assert_defined assert_defined\n\n",
  "append_mem_append":

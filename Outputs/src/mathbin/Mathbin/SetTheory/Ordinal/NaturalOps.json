@@ -1,59 +1,59 @@
 {"zero_nadd":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `ordinal.nadd -/\n@[simp]\ntheorem zero_nadd : ordinal.nadd 0 a = a := by rw [nadd_comm, nadd_zero]\n#align zero_nadd zero_nadd\n\n",
  "to_ordinal_zero":
- "@[simp]\ntheorem to_ordinal_zero : to_ordinal 0 = 0 :=\n  rfl\n#align to_ordinal_zero to_ordinal_zero\n\n",
+ "@[simp]\ntheorem to_ordinal_zero : toOrdinal 0 = 0 :=\n  rfl\n#align to_ordinal_zero to_ordinal_zero\n\n",
  "to_ordinal_to_nat_ordinal":
- "@[simp]\ntheorem to_ordinal_to_nat_ordinal (a : nat_ordinal) : a.to_ordinal.to_nat_ordinal = a :=\n  rfl\n#align to_ordinal_to_nat_ordinal to_ordinal_to_nat_ordinal\n\n",
+ "@[simp]\ntheorem to_ordinal_to_nat_ordinal (a : NatOrdinal) : a.to_ordinal.to_nat_ordinal = a :=\n  rfl\n#align to_ordinal_to_nat_ordinal to_ordinal_to_nat_ordinal\n\n",
  "to_ordinal_symm_eq":
- "/-\nCopyright (c) 2022 Violeta Hernández Palacios. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Violeta Hernández Palacios\n-/\n@[simp]\ntheorem to_ordinal_symm_eq : nat_ordinal.to_ordinal.symm = ordinal.to_nat_ordinal :=\n  rfl\n#align to_ordinal_symm_eq to_ordinal_symm_eq\n\n",
+ "/-\nCopyright (c) 2022 Violeta Hernández Palacios. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Violeta Hernández Palacios\n-/\n@[simp]\ntheorem to_ordinal_symm_eq : NatOrdinal.toOrdinal.symm = Ordinal.toNatOrdinal :=\n  rfl\n#align to_ordinal_symm_eq to_ordinal_symm_eq\n\n",
  "to_ordinal_one":
- "@[simp]\ntheorem to_ordinal_one : to_ordinal 1 = 1 :=\n  rfl\n#align to_ordinal_one to_ordinal_one\n\n",
+ "@[simp]\ntheorem to_ordinal_one : toOrdinal 1 = 1 :=\n  rfl\n#align to_ordinal_one to_ordinal_one\n\n",
  "to_ordinal_min":
  "@[simp]\ntheorem to_ordinal_min : (min a b).to_ordinal = min a.to_ordinal b.to_ordinal :=\n  rfl\n#align to_ordinal_min to_ordinal_min\n\n",
  "to_ordinal_max":
  "@[simp]\ntheorem to_ordinal_max : (max a b).to_ordinal = max a.to_ordinal b.to_ordinal :=\n  rfl\n#align to_ordinal_max to_ordinal_max\n\n",
  "to_ordinal_eq_zero":
- "@[simp]\ntheorem to_ordinal_eq_zero (a) : to_ordinal a = 0 ↔ a = 0 :=\n  iff.rfl\n#align to_ordinal_eq_zero to_ordinal_eq_zero\n\n",
+ "@[simp]\ntheorem to_ordinal_eq_zero (a) : toOrdinal a = 0 ↔ a = 0 :=\n  iff.rfl\n#align to_ordinal_eq_zero to_ordinal_eq_zero\n\n",
  "to_ordinal_eq_one":
- "@[simp]\ntheorem to_ordinal_eq_one (a) : to_ordinal a = 1 ↔ a = 1 :=\n  iff.rfl\n#align to_ordinal_eq_one to_ordinal_eq_one\n\n",
+ "@[simp]\ntheorem to_ordinal_eq_one (a) : toOrdinal a = 1 ↔ a = 1 :=\n  iff.rfl\n#align to_ordinal_eq_one to_ordinal_eq_one\n\n",
  "to_ordinal_cast_nat":
- "@[simp]\ntheorem to_ordinal_cast_nat (n : ℕ) : to_ordinal n = n :=\n  by\n  induction' n with n hn\n  · rfl\n  · change nadd (to_ordinal n) 1 = n + 1\n    rw [hn]\n    apply nadd_one\n#align to_ordinal_cast_nat to_ordinal_cast_nat\n\n",
+ "@[simp]\ntheorem to_ordinal_cast_nat (n : ℕ) : toOrdinal n = n :=\n  by\n  induction' n with n hn\n  · rfl\n  · change nadd (to_ordinal n) 1 = n + 1\n    rw [hn]\n    apply nadd_one\n#align to_ordinal_cast_nat to_ordinal_cast_nat\n\n",
  "to_nat_ordinal_zero":
- "@[simp]\ntheorem to_nat_ordinal_zero : to_nat_ordinal 0 = 0 :=\n  rfl\n#align to_nat_ordinal_zero to_nat_ordinal_zero\n\n",
+ "@[simp]\ntheorem to_nat_ordinal_zero : toNatOrdinal 0 = 0 :=\n  rfl\n#align to_nat_ordinal_zero to_nat_ordinal_zero\n\n",
  "to_nat_ordinal_to_ordinal":
- "@[simp]\ntheorem to_nat_ordinal_to_ordinal (a : ordinal) : a.to_nat_ordinal.to_ordinal = a :=\n  rfl\n#align to_nat_ordinal_to_ordinal to_nat_ordinal_to_ordinal\n\n",
+ "@[simp]\ntheorem to_nat_ordinal_to_ordinal (a : Ordinal) : a.to_nat_ordinal.to_ordinal = a :=\n  rfl\n#align to_nat_ordinal_to_ordinal to_nat_ordinal_to_ordinal\n\n",
  "to_nat_ordinal_symm_eq":
- "@[simp]\ntheorem to_nat_ordinal_symm_eq : to_nat_ordinal.symm = nat_ordinal.to_ordinal :=\n  rfl\n#align to_nat_ordinal_symm_eq to_nat_ordinal_symm_eq\n\n",
+ "@[simp]\ntheorem to_nat_ordinal_symm_eq : toNatOrdinal.symm = NatOrdinal.toOrdinal :=\n  rfl\n#align to_nat_ordinal_symm_eq to_nat_ordinal_symm_eq\n\n",
  "to_nat_ordinal_one":
- "@[simp]\ntheorem to_nat_ordinal_one : to_nat_ordinal 1 = 1 :=\n  rfl\n#align to_nat_ordinal_one to_nat_ordinal_one\n\n",
+ "@[simp]\ntheorem to_nat_ordinal_one : toNatOrdinal 1 = 1 :=\n  rfl\n#align to_nat_ordinal_one to_nat_ordinal_one\n\n",
  "to_nat_ordinal_min":
  "@[simp]\ntheorem to_nat_ordinal_min :\n    (linear_order.min a b).to_nat_ordinal = linear_order.min a.to_nat_ordinal b.to_nat_ordinal :=\n  rfl\n#align to_nat_ordinal_min to_nat_ordinal_min\n\n",
  "to_nat_ordinal_max":
- "@[simp]\ntheorem to_nat_ordinal_max : to_nat_ordinal (max a b) = max a.to_nat_ordinal b.to_nat_ordinal :=\n  rfl\n#align to_nat_ordinal_max to_nat_ordinal_max\n\n",
+ "@[simp]\ntheorem to_nat_ordinal_max : toNatOrdinal (max a b) = max a.to_nat_ordinal b.to_nat_ordinal :=\n  rfl\n#align to_nat_ordinal_max to_nat_ordinal_max\n\n",
  "to_nat_ordinal_eq_zero":
- "@[simp]\ntheorem to_nat_ordinal_eq_zero (a) : to_nat_ordinal a = 0 ↔ a = 0 :=\n  iff.rfl\n#align to_nat_ordinal_eq_zero to_nat_ordinal_eq_zero\n\n",
+ "@[simp]\ntheorem to_nat_ordinal_eq_zero (a) : toNatOrdinal a = 0 ↔ a = 0 :=\n  iff.rfl\n#align to_nat_ordinal_eq_zero to_nat_ordinal_eq_zero\n\n",
  "to_nat_ordinal_eq_one":
- "@[simp]\ntheorem to_nat_ordinal_eq_one (a) : to_nat_ordinal a = 1 ↔ a = 1 :=\n  iff.rfl\n#align to_nat_ordinal_eq_one to_nat_ordinal_eq_one\n\n",
+ "@[simp]\ntheorem to_nat_ordinal_eq_one (a) : toNatOrdinal a = 1 ↔ a = 1 :=\n  iff.rfl\n#align to_nat_ordinal_eq_one to_nat_ordinal_eq_one\n\n",
  "to_nat_ordinal_cast_nat":
- "@[simp]\ntheorem to_nat_ordinal_cast_nat (n : ℕ) : to_nat_ordinal n = n :=\n  by\n  rw [← to_ordinal_cast_nat n]\n  rfl\n#align to_nat_ordinal_cast_nat to_nat_ordinal_cast_nat\n\n",
+ "@[simp]\ntheorem to_nat_ordinal_cast_nat (n : ℕ) : toNatOrdinal n = n :=\n  by\n  rw [← to_ordinal_cast_nat n]\n  rfl\n#align to_nat_ordinal_cast_nat to_nat_ordinal_cast_nat\n\n",
  "succ_nadd":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `ordinal.nadd -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `ordinal.nadd -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `ordinal.nadd -/\ntheorem succ_nadd : ordinal.nadd (succ a) b = succ (ordinal.nadd a b) := by\n  rw [← one_nadd (ordinal.nadd a b), ← nadd_assoc, one_nadd]\n#align succ_nadd succ_nadd\n\n",
  "succ_def":
- "theorem succ_def (a : nat_ordinal) : succ a = (a.to_ordinal + 1).to_nat_ordinal :=\n  rfl\n#align succ_def succ_def\n\n",
+ "theorem succ_def (a : NatOrdinal) : succ a = (a.to_ordinal + 1).to_nat_ordinal :=\n  rfl\n#align succ_def succ_def\n\n",
  "one_nadd":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `ordinal.nadd -/\n@[simp]\ntheorem one_nadd : ordinal.nadd 1 a = succ a := by rw [nadd_comm, nadd_one]\n#align one_nadd one_nadd\n\n",
  "nat_nadd":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `ordinal.nadd -/\n@[simp]\ntheorem nat_nadd (n : ℕ) : ordinal.nadd (↑n) a = a + n := by rw [nadd_comm, nadd_nat]\n#align nat_nadd nat_nadd\n\n",
  "nadd_zero":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `ordinal.nadd -/\n@[simp]\ntheorem nadd_zero : ordinal.nadd a 0 = a :=\n  by\n  induction' a using ordinal.induction with a IH\n  rw [nadd_def, blsub_zero, max_zero_right]\n  convert blsub_id a\n  ext (b hb)\n  exact IH _ hb\n#align nadd_zero nadd_zero\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `ordinal.nadd -/\n@[simp]\ntheorem nadd_zero : ordinal.nadd a 0 = a :=\n  by\n  induction' a using Ordinal.induction with a IH\n  rw [nadd_def, blsub_zero, max_zero_right]\n  convert blsub_id a\n  ext (b hb)\n  exact IH _ hb\n#align nadd_zero nadd_zero\n\n",
  "nadd_succ":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `ordinal.nadd -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `ordinal.nadd -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `ordinal.nadd -/\ntheorem nadd_succ : ordinal.nadd a (succ b) = succ (ordinal.nadd a b) := by\n  rw [← nadd_one (ordinal.nadd a b), nadd_assoc, nadd_one]\n#align nadd_succ nadd_succ\n\n",
  "nadd_right_cancel_iff":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `ordinal.nadd -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `ordinal.nadd -/\ntheorem nadd_right_cancel_iff : ∀ {a b c}, ordinal.nadd b a = ordinal.nadd c a ↔ b = c :=\n  @add_right_cancel_iff nat_ordinal _ _\n#align nadd_right_cancel_iff nadd_right_cancel_iff\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `ordinal.nadd -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `ordinal.nadd -/\ntheorem nadd_right_cancel_iff : ∀ {a b c}, ordinal.nadd b a = ordinal.nadd c a ↔ b = c :=\n  @add_right_cancel_iff NatOrdinal _ _\n#align nadd_right_cancel_iff nadd_right_cancel_iff\n\n",
  "nadd_right_cancel":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `ordinal.nadd -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `ordinal.nadd -/\ntheorem nadd_right_cancel : ∀ {a b c}, ordinal.nadd a b = ordinal.nadd c b → a = c :=\n  @_root_.add_right_cancel nat_ordinal _ _\n#align nadd_right_cancel nadd_right_cancel\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `ordinal.nadd -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `ordinal.nadd -/\ntheorem nadd_right_cancel : ∀ {a b c}, ordinal.nadd a b = ordinal.nadd c b → a = c :=\n  @add_right_cancel NatOrdinal _ _\n#align nadd_right_cancel nadd_right_cancel\n\n",
  "nadd_one":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `ordinal.nadd -/\n@[simp]\ntheorem nadd_one : ordinal.nadd a 1 = succ a :=\n  by\n  induction' a using ordinal.induction with a IH\n  rw [nadd_def, blsub_one, nadd_zero, max_eq_right_iff, blsub_le_iff]\n  intro i hi\n  rwa [IH i hi, succ_lt_succ_iff]\n#align nadd_one nadd_one\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `ordinal.nadd -/\n@[simp]\ntheorem nadd_one : ordinal.nadd a 1 = succ a :=\n  by\n  induction' a using Ordinal.induction with a IH\n  rw [nadd_def, blsub_one, nadd_zero, max_eq_right_iff, blsub_le_iff]\n  intro i hi\n  rwa [IH i hi, succ_lt_succ_iff]\n#align nadd_one nadd_one\n\n",
  "nadd_nat":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `ordinal.nadd -/\n@[simp]\ntheorem nadd_nat (n : ℕ) : ordinal.nadd a n = a + n :=\n  by\n  induction' n with n hn\n  · simp\n  · rw [Nat.cast_succ, add_one_eq_succ, nadd_succ, add_succ, hn]\n#align nadd_nat nadd_nat\n\n",
  "nadd_lt_nadd_right":
@@ -61,46 +61,46 @@
  "nadd_lt_nadd_left":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `ordinal.nadd -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `ordinal.nadd -/\ntheorem nadd_lt_nadd_left (h : b < c) (a) : ordinal.nadd a b < ordinal.nadd a c :=\n  lt_nadd_iff.2 (or.inr ⟨b, h, le_rfl⟩)\n#align nadd_lt_nadd_left nadd_lt_nadd_left\n\n",
  "nadd_lt_nadd_iff_right":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `ordinal.nadd -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `ordinal.nadd -/\ntheorem nadd_lt_nadd_iff_right : ∀ (a) {b c}, ordinal.nadd b a < ordinal.nadd c a ↔ b < c :=\n  @add_lt_add_iff_right nat_ordinal _ _ _ _\n#align nadd_lt_nadd_iff_right nadd_lt_nadd_iff_right\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `ordinal.nadd -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `ordinal.nadd -/\ntheorem nadd_lt_nadd_iff_right : ∀ (a) {b c}, ordinal.nadd b a < ordinal.nadd c a ↔ b < c :=\n  @add_lt_add_iff_right NatOrdinal _ _ _ _\n#align nadd_lt_nadd_iff_right nadd_lt_nadd_iff_right\n\n",
  "nadd_lt_nadd_iff_left":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `ordinal.nadd -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `ordinal.nadd -/\ntheorem nadd_lt_nadd_iff_left : ∀ (a) {b c}, ordinal.nadd a b < ordinal.nadd a c ↔ b < c :=\n  @add_lt_add_iff_left nat_ordinal _ _ _ _\n#align nadd_lt_nadd_iff_left nadd_lt_nadd_iff_left\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `ordinal.nadd -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `ordinal.nadd -/\ntheorem nadd_lt_nadd_iff_left : ∀ (a) {b c}, ordinal.nadd a b < ordinal.nadd a c ↔ b < c :=\n  @add_lt_add_iff_left NatOrdinal _ _ _ _\n#align nadd_lt_nadd_iff_left nadd_lt_nadd_iff_left\n\n",
  "nadd_left_cancel_iff":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `ordinal.nadd -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `ordinal.nadd -/\ntheorem nadd_left_cancel_iff : ∀ {a b c}, ordinal.nadd a b = ordinal.nadd a c ↔ b = c :=\n  @add_left_cancel_iff nat_ordinal _ _\n#align nadd_left_cancel_iff nadd_left_cancel_iff\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `ordinal.nadd -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `ordinal.nadd -/\ntheorem nadd_left_cancel_iff : ∀ {a b c}, ordinal.nadd a b = ordinal.nadd a c ↔ b = c :=\n  @add_left_cancel_iff NatOrdinal _ _\n#align nadd_left_cancel_iff nadd_left_cancel_iff\n\n",
  "nadd_left_cancel":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `ordinal.nadd -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `ordinal.nadd -/\ntheorem nadd_left_cancel : ∀ {a b c}, ordinal.nadd a b = ordinal.nadd a c → b = c :=\n  @_root_.add_left_cancel nat_ordinal _ _\n#align nadd_left_cancel nadd_left_cancel\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `ordinal.nadd -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `ordinal.nadd -/\ntheorem nadd_left_cancel : ∀ {a b c}, ordinal.nadd a b = ordinal.nadd a c → b = c :=\n  @add_left_cancel NatOrdinal _ _\n#align nadd_left_cancel nadd_left_cancel\n\n",
  "nadd_le_nadd_right":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `ordinal.nadd -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `ordinal.nadd -/\ntheorem nadd_le_nadd_right (h : b ≤ c) (a) : ordinal.nadd b a ≤ ordinal.nadd c a :=\n  by\n  rcases lt_or_eq_of_le h with (h | rfl)\n  · exact (nadd_lt_nadd_right h a).le\n  · exact le_rfl\n#align nadd_le_nadd_right nadd_le_nadd_right\n\n",
  "nadd_le_nadd_left":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `ordinal.nadd -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `ordinal.nadd -/\ntheorem nadd_le_nadd_left (h : b ≤ c) (a) : ordinal.nadd a b ≤ ordinal.nadd a c :=\n  by\n  rcases lt_or_eq_of_le h with (h | rfl)\n  · exact (nadd_lt_nadd_left h a).le\n  · exact le_rfl\n#align nadd_le_nadd_left nadd_le_nadd_left\n\n",
  "nadd_le_nadd_iff_right":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `ordinal.nadd -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `ordinal.nadd -/\ntheorem nadd_le_nadd_iff_right : ∀ (a) {b c}, ordinal.nadd b a ≤ ordinal.nadd c a ↔ b ≤ c :=\n  @_root_.add_le_add_iff_right nat_ordinal _ _ _ _\n#align nadd_le_nadd_iff_right nadd_le_nadd_iff_right\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `ordinal.nadd -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `ordinal.nadd -/\ntheorem nadd_le_nadd_iff_right : ∀ (a) {b c}, ordinal.nadd b a ≤ ordinal.nadd c a ↔ b ≤ c :=\n  @add_le_add_iff_right NatOrdinal _ _ _ _\n#align nadd_le_nadd_iff_right nadd_le_nadd_iff_right\n\n",
  "nadd_le_nadd_iff_left":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `ordinal.nadd -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `ordinal.nadd -/\ntheorem nadd_le_nadd_iff_left : ∀ (a) {b c}, ordinal.nadd a b ≤ ordinal.nadd a c ↔ b ≤ c :=\n  @add_le_add_iff_left nat_ordinal _ _ _ _\n#align nadd_le_nadd_iff_left nadd_le_nadd_iff_left\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `ordinal.nadd -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `ordinal.nadd -/\ntheorem nadd_le_nadd_iff_left : ∀ (a) {b c}, ordinal.nadd a b ≤ ordinal.nadd a c ↔ b ≤ c :=\n  @add_le_add_iff_left NatOrdinal _ _ _ _\n#align nadd_le_nadd_iff_left nadd_le_nadd_iff_left\n\n",
  "nadd_le_iff":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `ordinal.nadd -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `ordinal.nadd -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `ordinal.nadd -/\ntheorem nadd_le_iff : ordinal.nadd b c ≤ a ↔ (∀ b' < b, ordinal.nadd b' c < a) ∧ ∀ c' < c, ordinal.nadd b c' < a :=\n  by\n  rw [nadd_def]\n  simp [blsub_le_iff]\n#align nadd_le_iff nadd_le_iff\n\n",
  "nadd_def":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `ordinal.nadd -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `ordinal.nadd -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `ordinal.nadd -/\ntheorem nadd_def (a b : ordinal) :\n    ordinal.nadd a b =\n      max (blsub.{u, u} a fun a' h => ordinal.nadd a' b) (blsub.{u, u} b fun b' h => ordinal.nadd a b') :=\n  by rw [nadd]\n#align nadd_def nadd_def\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `ordinal.nadd -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `ordinal.nadd -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `ordinal.nadd -/\ntheorem nadd_def (a b : Ordinal) :\n    ordinal.nadd a b =\n      max (blsub.{u, u} a fun a' h => ordinal.nadd a' b) (blsub.{u, u} b fun b' h => ordinal.nadd a b') :=\n  by rw [nadd]\n#align nadd_def nadd_def\n\n",
  "nadd_comm":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `ordinal.nadd -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `ordinal.nadd -/\ntheorem nadd_comm : ∀ a b, ordinal.nadd a b = ordinal.nadd b a\n  | a, b => by\n    rw [nadd_def, nadd_def, max_comm]\n    congr <;> ext (c hc) <;> apply nadd_comm decreasing_by solve_by_elim [psigma.lex.left, psigma.lex.right]\n#align nadd_comm nadd_comm\n\n",
  "nadd_assoc":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `ordinal.nadd -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `ordinal.nadd -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `ordinal.nadd -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `ordinal.nadd -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `ordinal.nadd -/\ntheorem nadd_assoc : ∀ a b c, ordinal.nadd (ordinal.nadd a b) c = ordinal.nadd a (ordinal.nadd b c)\n  | a, b, c =>\n    by\n    rw [nadd_def a (ordinal.nadd b c), nadd_def, blsub_nadd_of_mono, blsub_nadd_of_mono, max_assoc]\n    · congr <;> ext (d hd) <;> apply nadd_assoc\n    · exact fun i j _ _ h => nadd_le_nadd_left h a\n    · exact fun i j _ _ h => nadd_le_nadd_right h c decreasing_by solve_by_elim [psigma.lex.left, psigma.lex.right]\n#align nadd_assoc nadd_assoc\n\n",
  "lt_wf":
- "theorem lt_wf : @well_founded nat_ordinal (· < ·) :=\n  ordinal.lt_wf\n#align lt_wf lt_wf\n\n",
+ "theorem lt_wf : @well_founded NatOrdinal (· < ·) :=\n  Ordinal.lt_wf\n#align lt_wf lt_wf\n\n",
  "lt_of_nadd_lt_nadd_right":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `ordinal.nadd -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `ordinal.nadd -/\ntheorem lt_of_nadd_lt_nadd_right : ∀ {a b c}, ordinal.nadd b a < ordinal.nadd c a → b < c :=\n  @_root_.lt_of_add_lt_add_right nat_ordinal _ _ _\n#align lt_of_nadd_lt_nadd_right lt_of_nadd_lt_nadd_right\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `ordinal.nadd -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `ordinal.nadd -/\ntheorem lt_of_nadd_lt_nadd_right : ∀ {a b c}, ordinal.nadd b a < ordinal.nadd c a → b < c :=\n  @lt_of_add_lt_add_right NatOrdinal _ _ _\n#align lt_of_nadd_lt_nadd_right lt_of_nadd_lt_nadd_right\n\n",
  "lt_of_nadd_lt_nadd_left":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `ordinal.nadd -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `ordinal.nadd -/\ntheorem lt_of_nadd_lt_nadd_left : ∀ {a b c}, ordinal.nadd a b < ordinal.nadd a c → b < c :=\n  @lt_of_add_lt_add_left nat_ordinal _ _ _\n#align lt_of_nadd_lt_nadd_left lt_of_nadd_lt_nadd_left\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `ordinal.nadd -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `ordinal.nadd -/\ntheorem lt_of_nadd_lt_nadd_left : ∀ {a b c}, ordinal.nadd a b < ordinal.nadd a c → b < c :=\n  @lt_of_add_lt_add_left NatOrdinal _ _ _\n#align lt_of_nadd_lt_nadd_left lt_of_nadd_lt_nadd_left\n\n",
  "lt_nadd_iff":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `ordinal.nadd -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `ordinal.nadd -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `ordinal.nadd -/\ntheorem lt_nadd_iff : a < ordinal.nadd b c ↔ (∃ b' < b, a ≤ ordinal.nadd b' c) ∨ ∃ c' < c, a ≤ ordinal.nadd b c' :=\n  by\n  rw [nadd_def]\n  simp [lt_blsub_iff]\n#align lt_nadd_iff lt_nadd_iff\n\n",
  "le_of_nadd_le_nadd_right":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `ordinal.nadd -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `ordinal.nadd -/\ntheorem le_of_nadd_le_nadd_right : ∀ {a b c}, ordinal.nadd b a ≤ ordinal.nadd c a → b ≤ c :=\n  @le_of_add_le_add_right nat_ordinal _ _ _\n#align le_of_nadd_le_nadd_right le_of_nadd_le_nadd_right\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `ordinal.nadd -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `ordinal.nadd -/\ntheorem le_of_nadd_le_nadd_right : ∀ {a b c}, ordinal.nadd b a ≤ ordinal.nadd c a → b ≤ c :=\n  @le_of_add_le_add_right NatOrdinal _ _ _\n#align le_of_nadd_le_nadd_right le_of_nadd_le_nadd_right\n\n",
  "le_of_nadd_le_nadd_left":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `ordinal.nadd -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `ordinal.nadd -/\ntheorem le_of_nadd_le_nadd_left : ∀ {a b c}, ordinal.nadd a b ≤ ordinal.nadd a c → b ≤ c :=\n  @le_of_add_le_add_left nat_ordinal _ _ _\n#align le_of_nadd_le_nadd_left le_of_nadd_le_nadd_left\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `ordinal.nadd -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `ordinal.nadd -/\ntheorem le_of_nadd_le_nadd_left : ∀ {a b c}, ordinal.nadd a b ≤ ordinal.nadd a c → b ≤ c :=\n  @le_of_add_le_add_left NatOrdinal _ _ _\n#align le_of_nadd_le_nadd_left le_of_nadd_le_nadd_left\n\n",
  "induction":
- "/-- `ordinal.induction` but for `nat_ordinal`. -/\ntheorem induction {p : nat_ordinal → Prop} : ∀ (i) (h : ∀ j, (∀ k, k < j → p k) → p j), p i :=\n  ordinal.induction\n#align induction induction\n\n",
+ "/-- `ordinal.induction` but for `nat_ordinal`. -/\ntheorem induction {p : NatOrdinal → Prop} : ∀ (i) (h : ∀ j, (∀ k, k < j → p k) → p j), p i :=\n  Ordinal.induction\n#align induction induction\n\n",
  "blsub_nadd_of_mono":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `ordinal.nadd -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `ordinal.nadd -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `ordinal.nadd -/\ntheorem blsub_nadd_of_mono {f : ∀ c < ordinal.nadd a b, ordinal.{max u v}}\n    (hf : ∀ {i j} (hi hj), i ≤ j → f i hi ≤ f j hj) :\n    blsub _ f =\n      max (blsub.{u, v} a fun a' ha' => f (ordinal.nadd a' b) <| nadd_lt_nadd_right ha' b)\n        (blsub.{u, v} b fun b' hb' => f (ordinal.nadd a b') <| nadd_lt_nadd_left hb' a) :=\n  by\n  apply (blsub_le_iff.2 fun i h => _).antisymm (max_le _ _)\n  · rcases lt_nadd_iff.1 h with (⟨a', ha', hi⟩ | ⟨b', hb', hi⟩)\n    · exact lt_max_of_lt_left ((hf h (nadd_lt_nadd_right ha' b) hi).trans_lt (lt_blsub _ _ _))\n    · exact lt_max_of_lt_right ((hf h (nadd_lt_nadd_left hb' a) hi).trans_lt (lt_blsub _ _ _))\n  all_goals\n    apply blsub_le_of_brange_subset.{u, u, v}\n    rintro c ⟨d, hd, rfl⟩\n    apply mem_brange_self\n#align blsub_nadd_of_mono blsub_nadd_of_mono\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `ordinal.nadd -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `ordinal.nadd -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `ordinal.nadd -/\ntheorem blsub_nadd_of_mono {f : ∀ c < ordinal.nadd a b, Ordinal.{max u v}}\n    (hf : ∀ {i j} (hi hj), i ≤ j → f i hi ≤ f j hj) :\n    blsub _ f =\n      max (blsub.{u, v} a fun a' ha' => f (ordinal.nadd a' b) <| nadd_lt_nadd_right ha' b)\n        (blsub.{u, v} b fun b' hb' => f (ordinal.nadd a b') <| nadd_lt_nadd_left hb' a) :=\n  by\n  apply (blsub_le_iff.2 fun i h => _).antisymm (max_le _ _)\n  · rcases lt_nadd_iff.1 h with (⟨a', ha', hi⟩ | ⟨b', hb', hi⟩)\n    · exact lt_max_of_lt_left ((hf h (nadd_lt_nadd_right ha' b) hi).trans_lt (lt_blsub _ _ _))\n    · exact lt_max_of_lt_right ((hf h (nadd_lt_nadd_left hb' a) hi).trans_lt (lt_blsub _ _ _))\n  all_goals\n    apply blsub_le_of_brange_subset.{u, u, v}\n    rintro c ⟨d, hd, rfl⟩\n    apply mem_brange_self\n#align blsub_nadd_of_mono blsub_nadd_of_mono\n\n",
  "add_one_eq_succ":
- "@[simp]\ntheorem add_one_eq_succ : ∀ a : nat_ordinal, a + 1 = succ a :=\n  nadd_one\n#align add_one_eq_succ add_one_eq_succ\n\n",
+ "@[simp]\ntheorem add_one_eq_succ : ∀ a : NatOrdinal, a + 1 = succ a :=\n  nadd_one\n#align add_one_eq_succ add_one_eq_succ\n\n",
  "add_le_nadd":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `ordinal.nadd -/\ntheorem add_le_nadd : a + b ≤ ordinal.nadd a b :=\n  by\n  apply b.limit_rec_on\n  · simp\n  · intro c h\n    rwa [add_succ, nadd_succ, succ_le_succ_iff]\n  · intro c hc H\n    rw [← is_normal.blsub_eq.{u, u} (add_is_normal a) hc, blsub_le_iff]\n    exact fun i hi => (H i hi).trans_lt (nadd_lt_nadd_left hi a)\n#align add_le_nadd add_le_nadd\n\n"}
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `ordinal.nadd -/\ntheorem add_le_nadd : a + b ≤ ordinal.nadd a b :=\n  by\n  apply b.limit_rec_on\n  · simp\n  · intro c h\n    rwa [add_succ, nadd_succ, succ_le_succ_iff]\n  · intro c hc H\n    rw [← IsNormal.blsub_eq.{u, u} (add_is_normal a) hc, blsub_le_iff]\n    exact fun i hi => (H i hi).trans_lt (nadd_lt_nadd_left hi a)\n#align add_le_nadd add_le_nadd\n\n"}

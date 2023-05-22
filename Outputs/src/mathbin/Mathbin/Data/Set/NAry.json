@@ -7,11 +7,11 @@
  "mem_image2_of_mem":
  "theorem mem_image2_of_mem (ha : a ∈ s) (hb : b ∈ t) : f a b ∈ image2 f s t :=\n  ⟨a, b, ha, hb, rfl⟩\n#align mem_image2_of_mem mem_image2_of_mem\n\n",
  "mem_image2_iff":
- "theorem mem_image2_iff (hf : injective2 f) : f a b ∈ image2 f s t ↔ a ∈ s ∧ b ∈ t :=\n  ⟨by\n    rintro ⟨a', b', ha', hb', h⟩\n    rcases hf h with ⟨rfl, rfl⟩\n    exact ⟨ha', hb'⟩, fun ⟨ha, hb⟩ => mem_image2_of_mem ha hb⟩\n#align mem_image2_iff mem_image2_iff\n\n",
+ "theorem mem_image2_iff (hf : Injective2 f) : f a b ∈ image2 f s t ↔ a ∈ s ∧ b ∈ t :=\n  ⟨by\n    rintro ⟨a', b', ha', hb', h⟩\n    rcases hf h with ⟨rfl, rfl⟩\n    exact ⟨ha', hb'⟩, fun ⟨ha, hb⟩ => mem_image2_of_mem ha hb⟩\n#align mem_image2_iff mem_image2_iff\n\n",
  "mem_image2":
  "/-\nCopyright (c) 2020 Floris van Doorn. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Floris van Doorn\n-/\n@[simp]\ntheorem mem_image2 : c ∈ image2 f s t ↔ ∃ a b, a ∈ s ∧ b ∈ t ∧ f a b = c :=\n  iff.rfl\n#align mem_image2 mem_image2\n\n",
  "image_uncurry_prod":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:177:8: unsupported: ambiguous notation -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `set.prod -/\n@[simp]\ntheorem image_uncurry_prod (s : set α) (t : set β) : «expr '' » (uncurry f) (set.prod s t) = image2 f s t :=\n  image_prod _\n#align image_uncurry_prod image_uncurry_prod\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:177:8: unsupported: ambiguous notation -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `set.prod -/\n@[simp]\ntheorem image_uncurry_prod (s : Set α) (t : Set β) : «expr '' » (uncurry f) (set.prod s t) = image2 f s t :=\n  image_prod _\n#align image_uncurry_prod image_uncurry_prod\n\n",
  "image_subset_image2_right":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\ntheorem image_subset_image2_right (ha : a ∈ s) : «expr '' » (f a) t ⊆ image2 f s t :=\n  ball_image_of_ball fun b => mem_image2_of_mem ha\n#align image_subset_image2_right image_subset_image2_right\n\n",
  "image_subset_image2_left":
@@ -43,17 +43,25 @@
  "image3_congr":
  "@[congr]\ntheorem image3_congr (h : ∀ a ∈ s, ∀ b ∈ t, ∀ c ∈ u, g a b c = g' a b c) : image3 g s t u = image3 g' s t u :=\n  by\n  ext x\n  constructor <;> rintro ⟨a, b, c, ha, hb, hc, rfl⟩ <;> exact ⟨a, b, c, ha, hb, hc, by rw [h a ha b hb c hc]⟩\n#align image3_congr image3_congr\n\n",
  "image2_union_right":
- "theorem image2_union_right : image2 f s (t ∪ t') = image2 f s t ∪ image2 f s t' :=\n  by\n  ext c\n  constructor\n  · rintro ⟨a, b, ha, h1b | h2b, rfl⟩ <;> [left, right] <;> exact ⟨_, _, ‹_›, ‹_›, rfl⟩\n  · rintro (⟨_, _, _, _, rfl⟩ | ⟨_, _, _, _, rfl⟩) <;> refine' ⟨_, _, ‹_›, _, rfl⟩ <;> simp [mem_union, *]\n#align image2_union_right image2_union_right\n\n",
+ "theorem image2_union_right : image2 f s (t ∪ t') = image2 f s t ∪ image2 f s t' := by\n  rw [← image2_swap, image2_union_left, image2_swap f, image2_swap f]\n#align image2_union_right image2_union_right\n\n",
  "image2_union_left":
  "theorem image2_union_left : image2 f (s ∪ s') t = image2 f s t ∪ image2 f s' t :=\n  by\n  ext c\n  constructor\n  · rintro ⟨a, b, ha | ha, hb, rfl⟩ <;> [left, right] <;> exact ⟨_, _, ‹_›, ‹_›, rfl⟩\n  · rintro (⟨_, _, _, _, rfl⟩ | ⟨_, _, _, _, rfl⟩) <;> refine' ⟨_, _, _, ‹_›, rfl⟩ <;> simp [mem_union, *]\n#align image2_union_left image2_union_left\n\n",
+ "image2_union_inter_subset_union":
+ "theorem image2_union_inter_subset_union : image2 f (s ∪ s') (t ∩ t') ⊆ image2 f s t ∪ image2 f s' t' :=\n  by\n  rw [image2_union_left]\n  exact union_subset_union (image2_subset_left <| inter_subset_left _ _) (image2_subset_left <| inter_subset_right _ _)\n#align image2_union_inter_subset_union image2_union_inter_subset_union\n\n",
+ "image2_union_inter_subset":
+ "theorem image2_union_inter_subset {f : α → α → β} {s t : Set α} (hf : ∀ a b, f a b = f b a) :\n    image2 f (s ∪ t) (s ∩ t) ⊆ image2 f s t := by\n  rw [image2_comm hf]\n  exact image2_inter_union_subset hf\n#align image2_union_inter_subset image2_union_inter_subset\n\n",
  "image2_swap":
- "theorem image2_swap (f : α → β → γ) (s : set α) (t : set β) : image2 f s t = image2 (fun a b => f b a) t s :=\n  by\n  ext\n  constructor <;> rintro ⟨a, b, ha, hb, rfl⟩ <;> refine' ⟨b, a, hb, ha, rfl⟩\n#align image2_swap image2_swap\n\n",
+ "theorem image2_swap (s : Set α) (t : Set β) : image2 f s t = image2 (fun a b => f b a) t s :=\n  by\n  ext\n  constructor <;> rintro ⟨a, b, ha, hb, rfl⟩ <;> refine' ⟨b, a, hb, ha, rfl⟩\n#align image2_swap image2_swap\n\n",
  "image2_subset_right":
  "theorem image2_subset_right (hs : s ⊆ s') : image2 f s t ⊆ image2 f s' t :=\n  image2_subset hs Subset.rfl\n#align image2_subset_right image2_subset_right\n\n",
  "image2_subset_left":
  "theorem image2_subset_left (ht : t ⊆ t') : image2 f s t ⊆ image2 f s t' :=\n  image2_subset Subset.rfl ht\n#align image2_subset_left image2_subset_left\n\n",
+ "image2_subset_iff_right":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\ntheorem image2_subset_iff_right : image2 f s t ⊆ u ↔ ∀ b ∈ t, «expr '' » (fun a => f a b) s ⊆ u := by\n  simp_rw [image2_subset_iff, image_subset_iff, subset_def, mem_preimage, @forall₂_swap α]\n#align image2_subset_iff_right image2_subset_iff_right\n\n",
+ "image2_subset_iff_left":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\ntheorem image2_subset_iff_left : image2 f s t ⊆ u ↔ ∀ a ∈ s, «expr '' » (fun b => f a b) t ⊆ u := by\n  simp_rw [image2_subset_iff, image_subset_iff, subset_def, mem_preimage]\n#align image2_subset_iff_left image2_subset_iff_left\n\n",
  "image2_subset_iff":
- "@[simp]\ntheorem image2_subset_iff {u : set γ} : image2 f s t ⊆ u ↔ ∀ x ∈ s, ∀ y ∈ t, f x y ∈ u :=\n  forall_image2_iff\n#align image2_subset_iff image2_subset_iff\n\n",
+ "@[simp]\ntheorem image2_subset_iff {u : Set γ} : image2 f s t ⊆ u ↔ ∀ x ∈ s, ∀ y ∈ t, f x y ∈ u :=\n  forall_image2_iff\n#align image2_subset_iff image2_subset_iff\n\n",
  "image2_subset":
  "/-- image2 is monotone with respect to `⊆`. -/\ntheorem image2_subset (hs : s ⊆ s') (ht : t ⊆ t') : image2 f s t ⊆ image2 f s' t' :=\n  by\n  rintro _ ⟨a, b, ha, hb, rfl⟩\n  exact mem_image2_of_mem (hs ha) (ht hb)\n#align image2_subset image2_subset\n\n",
  "image2_singleton_right":
@@ -63,7 +71,7 @@
  "image2_singleton":
  "theorem image2_singleton : image2 f {a} {b} = {f a b} := by simp\n#align image2_singleton image2_singleton\n\n",
  "image2_right_identity":
- "/-- If `b` is a right identity for `f : α → β → α`, then `{b}` is a right identity for\n`set.image2 f`. -/\ntheorem image2_right_identity {f : α → β → α} {b : β} (h : ∀ a, f a b = a) (s : set α) : image2 f s {b} = s := by\n  rw [image2_singleton_right, funext h, image_id']\n#align image2_right_identity image2_right_identity\n\n",
+ "/-- If `b` is a right identity for `f : α → β → α`, then `{b}` is a right identity for\n`set.image2 f`. -/\ntheorem image2_right_identity {f : α → β → α} {b : β} (h : ∀ a, f a b = a) (s : Set α) : image2 f s {b} = s := by\n  rw [image2_singleton_right, funext h, image_id']\n#align image2_right_identity image2_right_identity\n\n",
  "image2_right_comm":
  "theorem image2_right_comm {f : δ → γ → ε} {g : α → β → δ} {f' : α → γ → δ'} {g' : δ' → β → ε}\n    (h_right_comm : ∀ a b c, f (g a b) c = g' (f' a c) b) : image2 f (image2 g s t) u = image2 g' (image2 f' s u) t :=\n  by\n  rw [image2_swap g, image2_swap g']\n  exact image2_assoc fun _ _ _ => h_right_comm _ _ _\n#align image2_right_comm image2_right_comm\n\n",
  "image2_right":
@@ -73,19 +81,27 @@
  "image2_mk_eq_prod":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:177:8: unsupported: ambiguous notation -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `set.prod -/\n@[simp]\ntheorem image2_mk_eq_prod : image2 prod.mk s t = set.prod s t :=\n  ext <| by simp\n#align image2_mk_eq_prod image2_mk_eq_prod\n\n",
  "image2_left_identity":
- "/-- If `a` is a left identity for `f : α → β → β`, then `{a}` is a left identity for\n`set.image2 f`. -/\ntheorem image2_left_identity {f : α → β → β} {a : α} (h : ∀ b, f a b = b) (t : set β) : image2 f {a} t = t := by\n  rw [image2_singleton_left, show f a = id from funext h, image_id]\n#align image2_left_identity image2_left_identity\n\n",
+ "/-- If `a` is a left identity for `f : α → β → β`, then `{a}` is a left identity for\n`set.image2 f`. -/\ntheorem image2_left_identity {f : α → β → β} {a : α} (h : ∀ b, f a b = b) (t : Set β) : image2 f {a} t = t := by\n  rw [image2_singleton_left, show f a = id from funext h, image_id]\n#align image2_left_identity image2_left_identity\n\n",
  "image2_left_comm":
  "theorem image2_left_comm {f : α → δ → ε} {g : β → γ → δ} {f' : α → γ → δ'} {g' : β → δ' → ε}\n    (h_left_comm : ∀ a b c, f a (g b c) = g' b (f' a c)) : image2 f s (image2 g t u) = image2 g' t (image2 f' s u) :=\n  by\n  rw [image2_swap f', image2_swap f]\n  exact image2_assoc fun _ _ _ => h_left_comm _ _ _\n#align image2_left_comm image2_left_comm\n\n",
  "image2_left":
  "@[simp]\ntheorem image2_left (h : t.nonempty) : image2 (fun x y => x) s t = s := by simp [nonempty_def.mp h, ext_iff]\n#align image2_left image2_left\n\n",
+ "image2_inter_union_subset_union":
+ "theorem image2_inter_union_subset_union : image2 f (s ∩ s') (t ∪ t') ⊆ image2 f s t ∪ image2 f s' t' :=\n  by\n  rw [image2_union_right]\n  exact\n    union_subset_union (image2_subset_right <| inter_subset_left _ _) (image2_subset_right <| inter_subset_right _ _)\n#align image2_inter_union_subset_union image2_inter_union_subset_union\n\n",
+ "image2_inter_union_subset":
+ "theorem image2_inter_union_subset {f : α → α → β} {s t : Set α} (hf : ∀ a b, f a b = f b a) :\n    image2 f (s ∩ t) (s ∪ t) ⊆ image2 f s t := by\n  rw [inter_comm]\n  exact image2_inter_union_subset_union.trans (union_subset (image2_comm hf).subset subset.rfl)\n#align image2_inter_union_subset image2_inter_union_subset\n\n",
  "image2_inter_subset_right":
  "theorem image2_inter_subset_right : image2 f s (t ∩ t') ⊆ image2 f s t ∩ image2 f s t' :=\n  by\n  rintro _ ⟨a, b, ha, ⟨h1b, h2b⟩, rfl⟩\n  constructor <;> exact ⟨_, _, ‹_›, ‹_›, rfl⟩\n#align image2_inter_subset_right image2_inter_subset_right\n\n",
  "image2_inter_subset_left":
  "theorem image2_inter_subset_left : image2 f (s ∩ s') t ⊆ image2 f s t ∩ image2 f s' t :=\n  by\n  rintro _ ⟨a, b, ⟨h1a, h2a⟩, hb, rfl⟩\n  constructor <;> exact ⟨_, _, ‹_›, ‹_›, rfl⟩\n#align image2_inter_subset_left image2_inter_subset_left\n\n",
  "image2_inter_right":
- "theorem image2_inter_right (hf : injective2 f) : image2 f s (t ∩ t') = image2 f s t ∩ image2 f s t' := by\n  simp_rw [← image_uncurry_prod, prod_inter, image_inter hf.uncurry]\n#align image2_inter_right image2_inter_right\n\n",
+ "theorem image2_inter_right (hf : Injective2 f) : image2 f s (t ∩ t') = image2 f s t ∩ image2 f s t' := by\n  simp_rw [← image_uncurry_prod, prod_inter, image_inter hf.uncurry]\n#align image2_inter_right image2_inter_right\n\n",
  "image2_inter_left":
- "theorem image2_inter_left (hf : injective2 f) : image2 f (s ∩ s') t = image2 f s t ∩ image2 f s' t := by\n  simp_rw [← image_uncurry_prod, inter_prod, image_inter hf.uncurry]\n#align image2_inter_left image2_inter_left\n\n",
+ "theorem image2_inter_left (hf : Injective2 f) : image2 f (s ∩ s') t = image2 f s t ∩ image2 f s' t := by\n  simp_rw [← image_uncurry_prod, inter_prod, image_inter hf.uncurry]\n#align image2_inter_left image2_inter_left\n\n",
+ "image2_insert_right":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\n@[simp]\ntheorem image2_insert_right : image2 f s (insert b t) = «expr '' » (fun a => f a b) s ∪ image2 f s t := by\n  rw [insert_eq, image2_union_right, image2_singleton_right]\n#align image2_insert_right image2_insert_right\n\n",
+ "image2_insert_left":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\n@[simp]\ntheorem image2_insert_left : image2 f (insert a s) t = «expr '' » (fun b => f a b) t ∪ image2 f s t := by\n  rw [insert_eq, image2_union_left, image2_singleton_left]\n#align image2_insert_left image2_insert_left\n\n",
  "image2_image_right":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\ntheorem image2_image_right (f : α → γ → δ) (g : β → γ) :\n    image2 f s («expr '' » g t) = image2 (fun a b => f a (g b)) s t :=\n  by\n  ext; constructor\n  · rintro ⟨a, _, ha, ⟨b, hb, rfl⟩, rfl⟩\n    refine' ⟨a, b, ha, hb, rfl⟩\n  · rintro ⟨a, b, ha, hb, rfl⟩\n    refine' ⟨a, _, ha, ⟨b, hb, rfl⟩, rfl⟩\n#align image2_image_right image2_image_right\n\n",
  "image2_image_left_comm":
@@ -98,6 +114,8 @@
  "theorem image2_image2_right (f : α → δ → ε) (g : β → γ → δ) :\n    image2 f s (image2 g t u) = image3 (fun a b c => f a (g b c)) s t u :=\n  by\n  ext; constructor\n  · rintro ⟨a, _, ha, ⟨b, c, hb, hc, rfl⟩, rfl⟩\n    refine' ⟨a, b, c, ha, hb, hc, rfl⟩\n  · rintro ⟨a, b, c, ha, hb, hc, rfl⟩\n    refine' ⟨a, _, ha, ⟨b, c, hb, hc, rfl⟩, rfl⟩\n#align image2_image2_right image2_image2_right\n\n",
  "image2_image2_left":
  "theorem image2_image2_left (f : δ → γ → ε) (g : α → β → δ) :\n    image2 f (image2 g s t) u = image3 (fun a b c => f (g a b) c) s t u :=\n  by\n  ext; constructor\n  · rintro ⟨_, c, ⟨a, b, ha, hb, rfl⟩, hc, rfl⟩\n    refine' ⟨a, b, c, ha, hb, hc, rfl⟩\n  · rintro ⟨a, b, c, ha, hb, hc, rfl⟩\n    refine' ⟨_, c, ⟨a, b, ha, hb, rfl⟩, hc, rfl⟩\n#align image2_image2_left image2_image2_left\n\n",
+ "image2_image2_image2_comm":
+ "theorem image2_image2_image2_comm {f : ε → ζ → ν} {g : α → β → ε} {h : γ → δ → ζ} {f' : ε' → ζ' → ν} {g' : α → γ → ε'}\n    {h' : β → δ → ζ'} (h_comm : ∀ a b c d, f (g a b) (h c d) = f' (g' a c) (h' b d)) :\n    image2 f (image2 g s t) (image2 h u v) = image2 f' (image2 g' s u) (image2 h' t v) :=\n  by\n  ext\n  constructor\n  · rintro ⟨_, _, ⟨a, b, ha, hb, rfl⟩, ⟨c, d, hc, hd, rfl⟩, rfl⟩\n    exact ⟨_, _, ⟨a, c, ha, hc, rfl⟩, ⟨b, d, hb, hd, rfl⟩, (h_comm _ _ _ _).symm⟩\n  · rintro ⟨_, _, ⟨a, c, ha, hc, rfl⟩, ⟨b, d, hb, hd, rfl⟩, rfl⟩\n    exact ⟨_, _, ⟨a, b, ha, hb, rfl⟩, ⟨c, d, hc, hd, rfl⟩, h_comm _ _ _ _⟩\n#align image2_image2_image2_comm image2_image2_image2_comm\n\n",
  "image2_eq_empty_iff":
  "@[simp]\ntheorem image2_eq_empty_iff : image2 f s t = ∅ ↔ s = ∅ ∨ t = ∅ := by\n  simp_rw [← not_nonempty_iff_eq_empty, image2_nonempty_iff, not_and_or]\n#align image2_eq_empty_iff image2_eq_empty_iff\n\n",
  "image2_empty_right":
@@ -109,7 +127,7 @@
  "image2_distrib_subset_left":
  "/-- The other direction does not hold because of the `s`-`s` cross terms on the RHS. -/\ntheorem image2_distrib_subset_left {f : α → δ → ε} {g : β → γ → δ} {f₁ : α → β → β'} {f₂ : α → γ → γ'}\n    {g' : β' → γ' → ε} (h_distrib : ∀ a b c, f a (g b c) = g' (f₁ a b) (f₂ a c)) :\n    image2 f s (image2 g t u) ⊆ image2 g' (image2 f₁ s t) (image2 f₂ s u) :=\n  by\n  rintro _ ⟨a, _, ha, ⟨b, c, hb, hc, rfl⟩, rfl⟩\n  rw [h_distrib]\n  exact mem_image2_of_mem (mem_image2_of_mem ha hb) (mem_image2_of_mem ha hc)\n#align image2_distrib_subset_left image2_distrib_subset_left\n\n",
  "image2_curry":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:177:8: unsupported: ambiguous notation -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `set.prod -/\n@[simp]\ntheorem image2_curry (f : α × β → γ) (s : set α) (t : set β) :\n    image2 (fun a b => f (a, b)) s t = «expr '' » f (set.prod s t) := by simp [← image_uncurry_prod, uncurry]\n#align image2_curry image2_curry\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:177:8: unsupported: ambiguous notation -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `set.prod -/\n@[simp]\ntheorem image2_curry (f : α × β → γ) (s : Set α) (t : Set β) :\n    image2 (fun a b => f (a, b)) s t = «expr '' » f (set.prod s t) := by simp [← image_uncurry_prod, uncurry]\n#align image2_curry image2_curry\n\n",
  "image2_congr'":
  "/-- A common special case of `image2_congr` -/\ntheorem image2_congr' (h : ∀ a b, f a b = f' a b) : image2 f s t = image2 f' s t :=\n  image2_congr fun a _ b _ => h a b\n#align image2_congr' image2_congr'\n\n",
  "image2_congr":

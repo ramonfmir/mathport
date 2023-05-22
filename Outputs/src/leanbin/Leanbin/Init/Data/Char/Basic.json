@@ -7,8 +7,8 @@
  "ne_of_vne":
  "theorem ne_of_vne {c d : char} (h : c.val ≠ d.val) : c ≠ d := fun h' => absurd (veq_of_eq h') h\n#align ne_of_vne ne_of_vne\n\n",
  "is_valid_char_range_2":
- "theorem is_valid_char_range_2 (n : nat) (h₁ : 57343 < n) (h₂ : n < 1114112) : is_valid_char n :=\n  or.inr ⟨h₁, h₂⟩\n#align is_valid_char_range_2 is_valid_char_range_2\n\n",
+ "theorem is_valid_char_range_2 (n : Nat) (h₁ : 57343 < n) (h₂ : n < 1114112) : is_valid_char n :=\n  or.inr ⟨h₁, h₂⟩\n#align is_valid_char_range_2 is_valid_char_range_2\n\n",
  "is_valid_char_range_1":
- "/-\nCopyright (c) 2016 Microsoft Corporation. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthor: Leonardo de Moura\n-/\ntheorem is_valid_char_range_1 (n : nat) (h : n < 55296) : is_valid_char n :=\n  or.inl h\n#align is_valid_char_range_1 is_valid_char_range_1\n\n",
+ "/-\nCopyright (c) 2016 Microsoft Corporation. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthor: Leonardo de Moura\n-/\ntheorem is_valid_char_range_1 (n : Nat) (h : n < 55296) : is_valid_char n :=\n  or.inl h\n#align is_valid_char_range_1 is_valid_char_range_1\n\n",
  "eq_of_veq":
  "theorem eq_of_veq : ∀ {c d : char}, c.val = d.val → c = d\n  | ⟨v, h⟩, ⟨_, _⟩, rfl => rfl\n#align eq_of_veq eq_of_veq\n\n"}

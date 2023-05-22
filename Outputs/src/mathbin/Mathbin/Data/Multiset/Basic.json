@@ -8,8 +8,6 @@
  "@[simp]\ntheorem zero_inter (s : Multiset α) : 0 ∩ s = 0 :=\n  Quot.inductionOn s fun l => congr_arg coe l.nil_bag_inter\n#align zero_inter zero_inter\n\n",
  "zero_disjoint":
  "@[simp]\ntheorem zero_disjoint (l : Multiset α) : Disjoint 0 l\n  | a => (not_mem_nil a).elim\n#align zero_disjoint zero_disjoint\n\n",
- "well_founded_lt":
- "/-- Another way of expressing `strong_induction_on`: the `(<)` relation is well-founded. -/\ntheorem well_founded_lt : well_founded ((· < ·) : Multiset α → Multiset α → Prop) :=\n  subrelation.wf (fun _ _ => Multiset.card_lt_of_lt) (measure_wf Multiset.card)\n#align well_founded_lt well_founded_lt\n\n",
  "union_le_union_right":
  "theorem union_le_union_right (h : s ≤ t) (u) : s ∪ u ≤ t ∪ u :=\n  add_le_add_right (tsub_le_tsub_right h _) u\n#align union_le_union_right union_le_union_right\n\n",
  "union_le_union_left":
@@ -31,9 +29,9 @@
  "trans":
  "theorem rel.trans (r : α → α → Prop) [is_trans α r] {s t u : Multiset α} (r1 : Rel r s t) (r2 : Rel r t u) :\n    Rel r s u := by\n  induction' t using Multiset.induction_on with x t ih generalizing s u\n  · rw [rel_zero_right.mp r1, rel_zero_left.mp r2, rel_zero_left]\n  · obtain ⟨a, as, ha1, ha2, rfl⟩ := rel_cons_right.mp r1\n    obtain ⟨b, bs, hb1, hb2, rfl⟩ := rel_cons_left.mp r2\n    exact multiset.rel.cons (trans ha1 hb1) (ih ha2 hb2)\n#align rel.trans rel.trans\n\n",
  "to_list_zero":
- "@[simp]\ntheorem to_list_zero : (Multiset.toList 0 : list α) = [] :=\n  toList_eq_nil.mpr rfl\n#align to_list_zero to_list_zero\n\n",
+ "@[simp]\ntheorem to_list_zero : (Multiset.toList 0 : List α) = [] :=\n  toList_eq_nil.mpr rfl\n#align to_list_zero to_list_zero\n\n",
  "to_list_singleton":
- "@[simp]\ntheorem to_list_singleton (a : α) : ({a} : Multiset α).to_list = [a] :=\n  multiset.to_list_eq_singleton_iff.2 rfl\n#align to_list_singleton to_list_singleton\n\n",
+ "@[simp]\ntheorem to_list_singleton (a : α) : ({a} : Multiset α).to_list = [a] :=\n  Multiset.toList_eq_singleton_iff.2 rfl\n#align to_list_singleton to_list_singleton\n\n",
  "to_list_eq_singleton_iff":
  "@[simp]\ntheorem to_list_eq_singleton_iff {a : α} {m : Multiset α} : m.to_list = [a] ↔ m = {a} := by\n  rw [← perm_singleton, ← coe_eq_coe, coe_to_list, coe_singleton]\n#align to_list_eq_singleton_iff to_list_eq_singleton_iff\n\n",
  "to_list_eq_nil":
@@ -101,7 +99,7 @@
  "replicate_le_replicate":
  "theorem replicate_le_replicate (a : α) {k n : ℕ} : replicate k a ≤ replicate n a ↔ k ≤ n :=\n  replicate_le_coe.trans <| List.replicate_sublist_replicate _\n#align replicate_le_replicate replicate_le_replicate\n\n",
  "replicate_le_coe":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr <+ » -/\ntheorem replicate_le_coe {a : α} {n} {l : list α} : replicate n a ≤ l ↔ «expr <+ » (list.replicate n a) l :=\n  ⟨fun ⟨l', p, s⟩ => perm_replicate.1 p ▸ s, Sublist.subperm⟩\n#align replicate_le_coe replicate_le_coe\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr <+ » -/\ntheorem replicate_le_coe {a : α} {n} {l : List α} : replicate n a ≤ l ↔ «expr <+ » (List.replicate n a) l :=\n  ⟨fun ⟨l', p, s⟩ => perm_replicate.1 p ▸ s, Sublist.subperm⟩\n#align replicate_le_coe replicate_le_coe\n\n",
  "replicate_inter":
  "@[simp]\ntheorem replicate_inter (n : ℕ) (x : α) (s : Multiset α) : replicate n x ∩ s = replicate (min n (s.count x)) x :=\n  by\n  ext y\n  rw [count_inter, count_replicate, count_replicate]\n  by_cases y = x\n  · simp only [h, if_pos rfl]\n  · simp only [h, if_false, zero_min]\n#align replicate_inter replicate_inter\n\n",
  "replicate_add":
@@ -113,7 +111,7 @@
  "rel_replicate_right":
  "theorem rel_replicate_right {m : Multiset α} {a : α} {r : α → α → Prop} {n : ℕ} :\n    m.rel r (replicate n a) ↔ m.card = n ∧ ∀ x, x ∈ m → r x a :=\n  rel_flip.trans rel_replicate_left\n#align rel_replicate_right rel_replicate_right\n\n",
  "rel_replicate_left":
- "theorem rel_replicate_left {m : Multiset α} {a : α} {r : α → α → Prop} {n : ℕ} :\n    (replicate n a).rel r m ↔ m.card = n ∧ ∀ x, x ∈ m → r a x :=\n  ⟨fun h =>\n    ⟨(card_eq_card_of_rel h).symm.trans (card_replicate _ _), fun x hx =>\n      by\n      obtain ⟨b, hb1, hb2⟩ := exists_mem_of_rel_of_mem (rel_flip.2 h) hx\n      rwa [eq_of_mem_replicate hb1] at hb2⟩,\n    fun h =>\n    rel_of_forall (fun x y hx hy => (eq_of_mem_replicate hx).symm ▸ h.2 _ hy) (eq.trans (card_replicate _ _) h.1.symm)⟩\n#align rel_replicate_left rel_replicate_left\n\n",
+ "theorem rel_replicate_left {m : Multiset α} {a : α} {r : α → α → Prop} {n : ℕ} :\n    (replicate n a).rel r m ↔ m.card = n ∧ ∀ x, x ∈ m → r a x :=\n  ⟨fun h =>\n    ⟨(card_eq_card_of_rel h).symm.trans (card_replicate _ _), fun x hx =>\n      by\n      obtain ⟨b, hb1, hb2⟩ := exists_mem_of_rel_of_mem (rel_flip.2 h) hx\n      rwa [eq_of_mem_replicate hb1] at hb2⟩,\n    fun h =>\n    rel_of_forall (fun x y hx hy => (eq_of_mem_replicate hx).symm ▸ h.2 _ hy) (Eq.trans (card_replicate _ _) h.1.symm)⟩\n#align rel_replicate_left rel_replicate_left\n\n",
  "rel_refl_of_refl_on":
  "theorem rel_refl_of_refl_on {m : Multiset α} {r : α → α → Prop} : (∀ x ∈ m, r x x) → Rel r m m :=\n  by\n  apply m.induction_on\n  · intros\n    apply rel.zero\n  · intro a m ih h\n    exact rel.cons (h _ (mem_cons_self _ _)) (ih fun _ ha => h _ (mem_cons_of_mem ha))\n#align rel_refl_of_refl_on rel_refl_of_refl_on\n\n",
  "rel_of_forall":
@@ -137,7 +135,7 @@
  "rel_cons_right":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ::ₘ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ::ₘ » -/\ntheorem rel_cons_right {as b bs} :\n    Rel r as («expr ::ₘ » b bs) ↔ ∃ a as', r a b ∧ Rel r as' bs ∧ as = «expr ::ₘ » a as' :=\n  by\n  rw [← rel_flip, rel_cons_left]\n  refine' exists₂_congr fun a as' => _\n  rw [rel_flip, flip]\n#align rel_cons_right rel_cons_right\n\n",
  "rel_cons_left":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ::ₘ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ::ₘ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ::ₘ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ::ₘ » -/\ntheorem rel_cons_left {a as bs} :\n    Rel r («expr ::ₘ » a as) bs ↔ ∃ b bs', r a b ∧ Rel r as bs' ∧ bs = «expr ::ₘ » b bs' :=\n  by\n  constructor\n  · generalize hm : «expr ::ₘ » a as = m\n    intro h\n    induction h generalizing as\n    case zero => simp at hm; contradiction\n    case\n      cons a' b as' bs ha'b h ih =>\n      rcases cons_eq_cons.1 hm with (⟨eq₁, eq₂⟩ | ⟨h, cs, eq₁, eq₂⟩)\n      · subst eq₁\n        subst eq₂\n        exact ⟨b, bs, ha'b, h, rfl⟩\n      · rcases ih eq₂.symm with ⟨b', bs', h₁, h₂, eq⟩\n        exact ⟨b', «expr ::ₘ » b bs', h₁, eq₁.symm ▸ rel.cons ha'b h₂, eq.symm ▸ cons_swap _ _ _⟩\n  · exact fun ⟨b, bs', hab, h, eq⟩ => eq.symm ▸ rel.cons hab h\n#align rel_cons_left rel_cons_left\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ::ₘ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ::ₘ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ::ₘ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ::ₘ » -/\ntheorem rel_cons_left {a as bs} :\n    Rel r («expr ::ₘ » a as) bs ↔ ∃ b bs', r a b ∧ Rel r as bs' ∧ bs = «expr ::ₘ » b bs' :=\n  by\n  constructor\n  · generalize hm : «expr ::ₘ » a as = m\n    intro h\n    induction h generalizing as\n    case zero => simp at hm; contradiction\n    case\n      cons a' b as' bs ha'b h ih =>\n      rcases cons_eq_cons.1 hm with (⟨eq₁, eq₂⟩ | ⟨h, cs, eq₁, eq₂⟩)\n      · subst eq₁\n        subst eq₂\n        exact ⟨b, bs, ha'b, h, rfl⟩\n      · rcases ih eq₂.symm with ⟨b', bs', h₁, h₂, eq⟩\n        exact ⟨b', «expr ::ₘ » b bs', h₁, eq₁.symm ▸ rel.cons ha'b h₂, Eq.symm ▸ cons_swap _ _ _⟩\n  · exact fun ⟨b, bs', hab, h, Eq⟩ => Eq.symm ▸ rel.cons hab h\n#align rel_cons_left rel_cons_left\n\n",
  "rel_add_right":
  "theorem rel_add_right {as bs₀ bs₁} : Rel r as (bs₀ + bs₁) ↔ ∃ as₀ as₁, Rel r as₀ bs₀ ∧ Rel r as₁ bs₁ ∧ as = as₀ + as₁ :=\n  by rw [← rel_flip, rel_add_left] <;> simp [rel_flip]\n#align rel_add_right rel_add_right\n\n",
  "rel_add_left":
@@ -149,11 +147,11 @@
  "rec_on_0":
  "@[simp]\ntheorem rec_on_0 : @Multiset.recOn α C (0 : Multiset α) C_0 C_cons C_cons_heq = C_0 :=\n  rfl\n#align rec_on_0 rec_on_0\n\n",
  "quot_mk_to_coe''":
- "@[simp]\ntheorem quot_mk_to_coe'' (l : list α) : @eq (Multiset α) (Quot.mk Setoid.r l) l :=\n  rfl\n#align quot_mk_to_coe'' quot_mk_to_coe''\n\n",
+ "@[simp]\ntheorem quot_mk_to_coe'' (l : List α) : @Eq (Multiset α) (Quot.mk Setoid.r l) l :=\n  rfl\n#align quot_mk_to_coe'' quot_mk_to_coe''\n\n",
  "quot_mk_to_coe'":
- "@[simp]\ntheorem quot_mk_to_coe' (l : list α) : @eq (Multiset α) (Quot.mk (· ≈ ·) l) l :=\n  rfl\n#align quot_mk_to_coe' quot_mk_to_coe'\n\n",
+ "@[simp]\ntheorem quot_mk_to_coe' (l : List α) : @Eq (Multiset α) (Quot.mk (· ≈ ·) l) l :=\n  rfl\n#align quot_mk_to_coe' quot_mk_to_coe'\n\n",
  "quot_mk_to_coe":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⟦ ⟧» -/\n/-\nCopyright (c) 2015 Microsoft Corporation. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Mario Carneiro\n-/\n@[simp]\ntheorem quot_mk_to_coe (l : list α) : @eq (Multiset α) («expr⟦ ⟧» l) l :=\n  rfl\n#align quot_mk_to_coe quot_mk_to_coe\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⟦ ⟧» -/\n/-\nCopyright (c) 2015 Microsoft Corporation. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Mario Carneiro\n-/\n@[simp]\ntheorem quot_mk_to_coe (l : List α) : @Eq (Multiset α) («expr⟦ ⟧» l) l :=\n  rfl\n#align quot_mk_to_coe quot_mk_to_coe\n\n",
  "pmap_zero":
  "@[simp]\ntheorem pmap_zero {p : α → Prop} (f : ∀ a, p a → β) (h : ∀ a ∈ (0 : Multiset α), p a) : pmap f 0 h = 0 :=\n  rfl\n#align pmap_zero pmap_zero\n\n",
  "pmap_eq_map_attach":
@@ -164,12 +162,12 @@
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ::ₘ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ::ₘ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ::ₘ » -/\n@[simp]\ntheorem pmap_cons {p : α → Prop} (f : ∀ a, p a → β) (a : α) (m : Multiset α) :\n    ∀ h : ∀ b ∈ «expr ::ₘ » a m, p b,\n      pmap f («expr ::ₘ » a m) h =\n        «expr ::ₘ » (f a (h a (mem_cons_self a m))) (pmap f m fun a ha => h a <| mem_cons_of_mem ha) :=\n  Quotient.inductionOn m fun l h => rfl\n#align pmap_cons pmap_cons\n\n",
  "pmap_congr":
  "theorem pmap_congr {p q : α → Prop} {f : ∀ a, p a → β} {g : ∀ a, q a → β} (s : Multiset α) {H₁ H₂} :\n    (∀ a ∈ s, ∀ (h₁ h₂), f a h₁ = g a h₂) → pmap f s H₁ = pmap g s H₂ :=\n  Quot.inductionOn s (fun l H₁ H₂ h => congr_arg coe <| pmap_congr l h) H₁ H₂\n#align pmap_congr pmap_congr\n\n",
- "pairwise_nil":
- "@[simp]\ntheorem pairwise_nil (r : α → α → Prop) : Multiset.Pairwise r 0 :=\n  ⟨[], rfl, List.Pairwise.nil⟩\n#align pairwise_nil pairwise_nil\n\n",
+ "pairwise_zero":
+ "@[simp]\ntheorem pairwise_zero (r : α → α → Prop) : Multiset.Pairwise r 0 :=\n  ⟨[], rfl, List.Pairwise.nil⟩\n#align pairwise_zero pairwise_zero\n\n",
  "pairwise_coe_iff_pairwise":
- "theorem pairwise_coe_iff_pairwise {r : α → α → Prop} (hr : symmetric r) {l : list α} :\n    Multiset.Pairwise r l ↔ l.pairwise r :=\n  iff.intro (fun ⟨l', eq, h⟩ => ((quotient.exact eq).pairwise_iff hr).2 h) fun h => ⟨l, rfl, h⟩\n#align pairwise_coe_iff_pairwise pairwise_coe_iff_pairwise\n\n",
+ "theorem pairwise_coe_iff_pairwise {r : α → α → Prop} (hr : symmetric r) {l : List α} :\n    Multiset.Pairwise r l ↔ l.pairwise r :=\n  iff.intro (fun ⟨l', Eq, h⟩ => ((quotient.exact Eq).pairwise_iff hr).2 h) fun h => ⟨l, rfl, h⟩\n#align pairwise_coe_iff_pairwise pairwise_coe_iff_pairwise\n\n",
  "pairwise_coe_iff":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `list.perm -/\ntheorem pairwise_coe_iff {r : α → α → Prop} {l : list α} :\n    Multiset.Pairwise r l ↔ ∃ l' : list α, list.perm l l' ∧ l'.pairwise r :=\n  exists_congr <| by simp\n#align pairwise_coe_iff pairwise_coe_iff\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `list.perm -/\ntheorem pairwise_coe_iff {r : α → α → Prop} {l : List α} :\n    Multiset.Pairwise r l ↔ ∃ l' : List α, list.perm l l' ∧ l'.pairwise r :=\n  exists_congr <| by simp\n#align pairwise_coe_iff pairwise_coe_iff\n\n",
  "pair_comm":
  "theorem pair_comm (x y : α) : ({x, y} : Multiset α) = {y, x} :=\n  cons_swap x y 0\n#align pair_comm pair_comm\n\n",
  "one_le_count_iff_mem":
@@ -187,9 +185,9 @@
  "not_mem_mono":
  "theorem not_mem_mono (h : s ⊆ t) : a ∉ t → a ∉ s :=\n  mt <| @h _\n#align not_mem_mono not_mem_mono\n\n",
  "monotone_filter_right":
- "theorem monotone_filter_right (s : Multiset α) ⦃p q : α → Prop⦄ [decidable_pred p] [decidable_pred q] (h : p ≤ q) :\n    s.filter p ≤ s.filter q :=\n  Quotient.inductionOn s fun l => (l.monotone_filter_right h).subperm\n#align monotone_filter_right monotone_filter_right\n\n",
+ "theorem monotone_filter_right (s : Multiset α) ⦃p q : α → Prop⦄ [DecidablePred p] [DecidablePred q] (h : p ≤ q) :\n    s.filter p ≤ s.filter q :=\n  Quotient.inductionOn s fun l => (l.monotone_filter_right h).subperm\n#align monotone_filter_right monotone_filter_right\n\n",
  "monotone_filter_left":
- "theorem monotone_filter_left : monotone (filter p) := fun s t => filter_le_filter p\n#align monotone_filter_left monotone_filter_left\n\n",
+ "theorem monotone_filter_left : Monotone (filter p) := fun s t => filter_le_filter p\n#align monotone_filter_left monotone_filter_left\n\n",
  "mono":
  "theorem rel.mono {r p : α → β → Prop} {s t} (hst : Rel r s t) (h : ∀ a ∈ s, ∀ b ∈ t, r a b → p a b) : Rel p s t :=\n  by\n  induction hst\n  case zero => exact rel.zero\n  case\n    cons a b s t hab hst ih =>\n    apply rel.cons (h a (mem_cons_self _ _) b (mem_cons_self _ _) hab)\n    exact ih fun a' ha' b' hb' h' => h a' (mem_cons_of_mem ha') b' (mem_cons_of_mem hb') h'\n#align rel.mono rel.mono\n\n",
  "mem_union":
@@ -221,13 +219,13 @@
  "mem_map_of_injective":
  "theorem mem_map_of_injective {f : α → β} (H : function.injective f) {a : α} {s : Multiset α} : f a ∈ map f s ↔ a ∈ s :=\n  Quot.inductionOn s fun l => mem_map_of_injective H\n#align mem_map_of_injective mem_map_of_injective\n\n",
  "mem_map":
- "@[simp]\ntheorem mem_map {f : α → β} {b : β} {s : Multiset α} : b ∈ map f s ↔ ∃ a, a ∈ s ∧ f a = b :=\n  Quot.inductionOn s fun l => mem_map'\n#align mem_map mem_map\n\n",
+ "@[simp]\ntheorem mem_map {f : α → β} {b : β} {s : Multiset α} : b ∈ map f s ↔ ∃ a, a ∈ s ∧ f a = b :=\n  Quot.inductionOn s fun l => mem_map\n#align mem_map mem_map\n\n",
  "mem_inter":
  "@[simp]\ntheorem mem_inter : a ∈ s ∩ t ↔ a ∈ s ∧ a ∈ t :=\n  ⟨fun h => ⟨mem_of_le (inter_le_left _ _) h, mem_of_le (inter_le_right _ _) h⟩, fun ⟨h₁, h₂⟩ => by\n    rw [← cons_erase h₁, cons_inter_of_pos _ h₂] <;> apply mem_cons_self⟩\n#align mem_inter mem_inter\n\n",
  "mem_filter_of_mem":
  "theorem mem_filter_of_mem {a : α} {l} (m : a ∈ l) (h : p a) : a ∈ filter p l :=\n  mem_filter.2 ⟨m, h⟩\n#align mem_filter_of_mem mem_filter_of_mem\n\n",
  "mem_filter_map":
- "@[simp]\ntheorem mem_filter_map (f : α → option β) (s : Multiset α) {b : β} : b ∈ filterMap f s ↔ ∃ a, a ∈ s ∧ f a = some b :=\n  Quot.inductionOn s fun l => mem_filterMap f l\n#align mem_filter_map mem_filter_map\n\n",
+ "@[simp]\ntheorem mem_filter_map (f : α → Option β) (s : Multiset α) {b : β} : b ∈ filterMap f s ↔ ∃ a, a ∈ s ∧ f a = some b :=\n  Quot.inductionOn s fun l => mem_filterMap f l\n#align mem_filter_map mem_filter_map\n\n",
  "mem_filter":
  "@[simp]\ntheorem mem_filter {a : α} {s} : a ∈ filter p s ↔ a ∈ s ∧ p a :=\n  Quot.inductionOn s fun l => mem_filter\n#align mem_filter mem_filter\n\n",
  "mem_erase_of_ne":
@@ -239,7 +237,7 @@
  "mem_cons":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ::ₘ » -/\n@[simp]\ntheorem mem_cons {a b : α} {s : Multiset α} : a ∈ «expr ::ₘ » b s ↔ a = b ∨ a ∈ s :=\n  Quot.inductionOn s fun l => iff.rfl\n#align mem_cons mem_cons\n\n",
  "mem_coe":
- "@[simp]\ntheorem mem_coe {a : α} {l : list α} : a ∈ (l : Multiset α) ↔ a ∈ l :=\n  iff.rfl\n#align mem_coe mem_coe\n\n",
+ "@[simp]\ntheorem mem_coe {a : α} {l : List α} : a ∈ (l : Multiset α) ↔ a ∈ l :=\n  iff.rfl\n#align mem_coe mem_coe\n\n",
  "mem_attach":
  "@[simp]\ntheorem mem_attach (s : Multiset α) : ∀ x, x ∈ s.attach :=\n  Quot.inductionOn s fun l => mem_attach _\n#align mem_attach mem_attach\n\n",
  "mem_add":
@@ -247,13 +245,13 @@
  "map_zero":
  "#print map_zero /-\n@[simp]\ntheorem map_zero (f : α → β) : map f 0 = 0 :=\n  rfl\n#align map_zero map_zero\n-/\n\n",
  "map_union":
- "@[simp]\ntheorem map_union [decidable_eq β] {f : α → β} (finj : function.injective f) {s t : Multiset α} :\n    map f (s ∪ t) = map f s ∪ map f t :=\n  quotient.induction_on₂ s t fun l₁ l₂ => congr_arg coe (by rw [list.map_append f, List.map_diff finj])\n#align map_union map_union\n\n",
+ "@[simp]\ntheorem map_union [DecidableEq β] {f : α → β} (finj : function.injective f) {s t : Multiset α} :\n    map f (s ∪ t) = map f s ∪ map f t :=\n  quotient.induction_on₂ s t fun l₁ l₂ => congr_arg coe (by rw [list.map_append f, List.map_diff finj])\n#align map_union map_union\n\n",
  "map_surjective_of_surjective":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ::ₘ » -/\ntheorem map_surjective_of_surjective {f : α → β} (hf : function.surjective f) : function.surjective (map f) :=\n  by\n  intro s\n  induction' s using Multiset.induction_on with x s ih\n  · exact ⟨0, map_zero _⟩\n  · obtain ⟨y, rfl⟩ := hf x\n    obtain ⟨t, rfl⟩ := ih\n    exact ⟨«expr ::ₘ » y t, map_cons _ _ _⟩\n#align map_surjective_of_surjective map_surjective_of_surjective\n\n",
  "map_subset_map":
  "@[simp]\ntheorem map_subset_map {f : α → β} {s t : Multiset α} (H : s ⊆ t) : map f s ⊆ map f t := fun b m =>\n  let ⟨a, h, e⟩ := mem_map.1 m\n  mem_map.2 ⟨a, H h, e⟩\n#align map_subset_map map_subset_map\n\n",
  "map_strict_mono":
- "theorem map_strict_mono (f : α → β) : strict_mono (map f) := fun _ _ => map_lt_map\n#align map_strict_mono map_strict_mono\n\n",
+ "theorem map_strict_mono (f : α → β) : StrictMono (map f) := fun _ _ => map_lt_map\n#align map_strict_mono map_strict_mono\n\n",
  "map_singleton":
  "@[simp]\ntheorem map_singleton (f : α → β) (a : α) : ({a} : Multiset α).map f = {f a} :=\n  rfl\n#align map_singleton map_singleton\n\n",
  "map_set_pairwise":
@@ -265,7 +263,7 @@
  "map_nsmul":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n#print map_nsmul /-\ntheorem map_nsmul (f : α → β) (n : ℕ) (s) : map f («expr • » n s) = «expr • » n (map f s) :=\n  (mapAddMonoidHom f).map_nsmul _ _\n#align map_nsmul map_nsmul\n-/\n\n",
  "map_mono":
- "theorem map_mono (f : α → β) : monotone (map f) := fun _ _ => map_le_map\n#align map_mono map_mono\n\n",
+ "theorem map_mono (f : α → β) : Monotone (map f) := fun _ _ => map_le_map\n#align map_mono map_mono\n\n",
  "map_mk_eq_map_mk_of_rel":
  "theorem map_mk_eq_map_mk_of_rel {r : α → α → Prop} {s t : Multiset α} (hst : s.rel r t) :\n    s.map (Quot.mk r) = t.map (Quot.mk r) :=\n  rel.rec_on hst rfl fun a b s t hab hst ih => by simp [ih, quot.sound hab]\n#align map_mk_eq_map_mk_of_rel map_mk_eq_map_mk_of_rel\n\n",
  "map_map":
@@ -285,13 +283,13 @@
  "map_hcongr":
  "theorem map_hcongr {β' : Type _} {m : Multiset α} {f : α → β} {f' : α → β'} (h : β = β')\n    (hf : ∀ a ∈ m, HEq (f a) (f' a)) : HEq (map f m) (map f' m) := by subst h; simp at hf; simp [map_congr rfl hf]\n#align map_hcongr map_hcongr\n\n",
  "map_filter_map_of_inv":
- "theorem map_filter_map_of_inv (f : α → option β) (g : β → α) (H : ∀ x : α, (f x).map g = some x) (s : Multiset α) :\n    map g (filterMap f s) = s :=\n  Quot.inductionOn s fun l => congr_arg coe <| map_filterMap_of_inv f g H l\n#align map_filter_map_of_inv map_filter_map_of_inv\n\n",
+ "theorem map_filter_map_of_inv (f : α → Option β) (g : β → α) (H : ∀ x : α, (f x).map g = some x) (s : Multiset α) :\n    map g (filterMap f s) = s :=\n  Quot.inductionOn s fun l => congr_arg coe <| map_filterMap_of_inv f g H l\n#align map_filter_map_of_inv map_filter_map_of_inv\n\n",
  "map_filter_map":
- "theorem map_filter_map (f : α → option β) (g : β → γ) (s : Multiset α) :\n    map g (filterMap f s) = filterMap (fun x => (f x).map g) s :=\n  Quot.inductionOn s fun l => congr_arg coe <| map_filterMap f g l\n#align map_filter_map map_filter_map\n\n",
+ "theorem map_filter_map (f : α → Option β) (g : β → γ) (s : Multiset α) :\n    map g (filterMap f s) = filterMap (fun x => (f x).map g) s :=\n  Quot.inductionOn s fun l => congr_arg coe <| map_filterMap f g l\n#align map_filter_map map_filter_map\n\n",
  "map_filter":
  "theorem map_filter (f : β → α) (s : Multiset β) : filter p (map f s) = map f (filter (p ∘ f) s) :=\n  Quot.inductionOn s fun l => by simp [map_filter]\n#align map_filter map_filter\n\n",
  "map_erase":
- "theorem map_erase [decidable_eq α] [decidable_eq β] (f : α → β) (hf : function.injective f) (x : α) (s : Multiset α) :\n    (s.erase x).map f = (s.map f).erase (f x) :=\n  by\n  induction' s using Multiset.induction_on with y s ih\n  · simp\n  by_cases hxy : y = x\n  · cases hxy\n    simp\n  · rw [s.erase_cons_tail hxy, map_cons, map_cons, (s.map f).erase_cons_tail (hf.ne hxy), ih]\n#align map_erase map_erase\n\n",
+ "theorem map_erase [DecidableEq α] [DecidableEq β] (f : α → β) (hf : function.injective f) (x : α) (s : Multiset α) :\n    (s.erase x).map f = (s.map f).erase (f x) :=\n  by\n  induction' s using Multiset.induction_on with y s ih\n  · simp\n  by_cases hxy : y = x\n  · cases hxy\n    simp\n  · rw [s.erase_cons_tail hxy, map_cons, map_cons, (s.map f).erase_cons_tail (hf.ne hxy), ih]\n#align map_erase map_erase\n\n",
  "map_eq_zero":
  "#print map_eq_zero /-\n@[simp]\ntheorem map_eq_zero {s : Multiset α} {f : α → β} : s.map f = 0 ↔ s = 0 := by\n  rw [← Multiset.card_eq_zero, Multiset.card_map, Multiset.card_eq_zero]\n#align map_eq_zero map_eq_zero\n-/\n\n",
  "map_eq_singleton":
@@ -299,13 +297,13 @@
  "map_eq_map":
  "theorem map_eq_map {f : α → β} (hf : function.injective f) {s t : Multiset α} : s.map f = t.map f ↔ s = t :=\n  by\n  rw [← rel_eq, ← rel_eq, rel_map]\n  simp only [hf.eq_iff]\n#align map_eq_map map_eq_map\n\n",
  "map_eq_cons":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ::ₘ » -/\ntheorem map_eq_cons [decidable_eq α] (f : α → β) (s : Multiset α) (t : Multiset β) (b : β) :\n    (∃ a ∈ s, f a = b ∧ (s.erase a).map f = t) ↔ s.map f = «expr ::ₘ » b t :=\n  by\n  constructor\n  · rintro ⟨a, ha, rfl, rfl⟩\n    rw [← map_cons, Multiset.cons_erase ha]\n  · intro h\n    have : b ∈ s.map f := by\n      rw [h]\n      exact mem_cons_self _ _\n    obtain ⟨a, h1, rfl⟩ := mem_map.mp this\n    obtain ⟨u, rfl⟩ := exists_cons_of_mem h1\n    rw [map_cons, cons_inj_right] at h\n    refine' ⟨a, mem_cons_self _ _, rfl, _⟩\n    rw [Multiset.erase_cons_head, h]\n#align map_eq_cons map_eq_cons\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ::ₘ » -/\ntheorem map_eq_cons [DecidableEq α] (f : α → β) (s : Multiset α) (t : Multiset β) (b : β) :\n    (∃ a ∈ s, f a = b ∧ (s.erase a).map f = t) ↔ s.map f = «expr ::ₘ » b t :=\n  by\n  constructor\n  · rintro ⟨a, ha, rfl, rfl⟩\n    rw [← map_cons, Multiset.cons_erase ha]\n  · intro h\n    have : b ∈ s.map f := by\n      rw [h]\n      exact mem_cons_self _ _\n    obtain ⟨a, h1, rfl⟩ := mem_map.mp this\n    obtain ⟨u, rfl⟩ := exists_cons_of_mem h1\n    rw [map_cons, cons_inj_right] at h\n    refine' ⟨a, mem_cons_self _ _, rfl, _⟩\n    rw [Multiset.erase_cons_head, h]\n#align map_eq_cons map_eq_cons\n\n",
  "map_count_true_eq_filter_card":
- "/-- Mapping a multiset through a predicate and counting the `true`s yields the cardinality of the set\nfiltered by the predicate. Note that this uses the notion of a multiset of `Prop`s - due to the\ndecidability requirements of `count`, the decidability instance on the LHS is different from the\nRHS. In particular, the decidability instance on the left leaks `classical.dec_eq`.\nSee [here](https://github.com/leanprover-community/mathlib/pull/11306#discussion_r782286812)\nfor more discussion.\n-/\n@[simp]\ntheorem map_count_true_eq_filter_card (s : Multiset α) (p : α → Prop) [decidable_pred p] :\n    (s.map p).count true = (s.filter p).card := by\n  simp only [count_eq_card_filter_eq, map_filter, card_map, function.comp.left_id, eq_true_eq_id]\n#align map_count_true_eq_filter_card map_count_true_eq_filter_card\n\n",
+ "/-- Mapping a multiset through a predicate and counting the `true`s yields the cardinality of the set\nfiltered by the predicate. Note that this uses the notion of a multiset of `Prop`s - due to the\ndecidability requirements of `count`, the decidability instance on the LHS is different from the\nRHS. In particular, the decidability instance on the left leaks `classical.dec_eq`.\nSee [here](https://github.com/leanprover-community/mathlib/pull/11306#discussion_r782286812)\nfor more discussion.\n-/\n@[simp]\ntheorem map_count_true_eq_filter_card (s : Multiset α) (p : α → Prop) [DecidablePred p] :\n    (s.map p).count True = (s.filter p).card := by\n  simp only [count_eq_card_filter_eq, map_filter, card_map, function.comp.left_id, eq_true_eq_id]\n#align map_count_true_eq_filter_card map_count_true_eq_filter_card\n\n",
  "map_const'":
  "-- Not a `simp` lemma because `function.const` is reducibel in Lean 3\ntheorem map_const' (s : Multiset α) (b : β) : map (fun _ => b) s = replicate s.card b :=\n  map_const s b\n#align map_const' map_const'\n\n",
  "map_const":
- "@[simp]\ntheorem map_const (s : Multiset α) (b : β) : map (function.const α b) s = replicate s.card b :=\n  Quot.inductionOn s fun l => congr_arg coe <| map_const _ _\n#align map_const map_const\n\n",
+ "@[simp]\ntheorem map_const (s : Multiset α) (b : β) : map (Function.const α b) s = replicate s.card b :=\n  Quot.inductionOn s fun l => congr_arg coe <| map_const _ _\n#align map_const map_const\n\n",
  "map_cons":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ::ₘ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ::ₘ » -/\n@[simp]\ntheorem map_cons (f : α → β) (a s) : map f («expr ::ₘ » a s) = «expr ::ₘ » (f a) (map f s) :=\n  Quot.inductionOn s fun l => rfl\n#align map_cons map_cons\n\n",
  "map_congr":
@@ -335,7 +333,7 @@
  "le_inter":
  "theorem le_inter (h₁ : s ≤ t) (h₂ : s ≤ u) : s ≤ t ∩ u :=\n  by\n  revert s u; refine' Multiset.induction_on t _ fun a t IH => _ <;> intros\n  · simp [h₁]\n  by_cases a ∈ u\n  · rw [cons_inter_of_pos _ h, ← erase_le_iff_le_cons]\n    exact IH (erase_le_iff_le_cons.2 h₁) (erase_le_erase _ h₂)\n  · rw [cons_inter_of_neg _ h]\n    exact IH ((le_cons_of_not_mem <| mt (mem_of_le h₂) h).1 h₁) h₂\n#align le_inter le_inter\n\n",
  "le_induction_on":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⟦ ⟧» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⟦ ⟧» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr <+ » -/\n@[elab_as_elim]\ntheorem le_induction_on {C : Multiset α → Multiset α → Prop} {s t : Multiset α} (h : s ≤ t)\n    (H : ∀ {l₁ l₂ : list α}, «expr <+ » l₁ l₂ → C l₁ l₂) : C s t :=\n  quotient.induction_on₂ s t (fun l₁ l₂ ⟨l, p, s⟩ => (show «expr⟦ ⟧» l = «expr⟦ ⟧» l₁ from quot.sound p) ▸ H s) h\n#align le_induction_on le_induction_on\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⟦ ⟧» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⟦ ⟧» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr <+ » -/\n@[elab_as_elim]\ntheorem le_induction_on {C : Multiset α → Multiset α → Prop} {s t : Multiset α} (h : s ≤ t)\n    (H : ∀ {l₁ l₂ : List α}, «expr <+ » l₁ l₂ → C l₁ l₂) : C s t :=\n  quotient.induction_on₂ s t (fun l₁ l₂ ⟨l, p, s⟩ => (show «expr⟦ ⟧» l = «expr⟦ ⟧» l₁ from quot.sound p) ▸ H s) h\n#align le_induction_on le_induction_on\n\n",
  "le_iff_exists_add":
  "#print le_iff_exists_add /-\ntheorem le_iff_exists_add {s t : Multiset α} : s ≤ t ↔ ∃ u, t = s + u :=\n  ⟨fun h =>\n    leInductionOn h fun l₁ l₂ s =>\n      let ⟨l, p⟩ := s.exists_perm_append\n      ⟨l, quot.sound p⟩,\n    fun ⟨u, e⟩ => e.symm ▸ le_add_right _ _⟩\n#align le_iff_exists_add le_iff_exists_add\n-/\n\n",
  "le_iff_count":
@@ -363,7 +361,7 @@
  "inter_le_left":
  "theorem inter_le_left (s t : Multiset α) : s ∩ t ≤ s :=\n  quotient.induction_on₂ s t fun l₁ l₂ => (bagInter_sublist_left _ _).subperm\n#align inter_le_left inter_le_left\n\n",
  "inter_eq_zero_iff_disjoint":
- "theorem inter_eq_zero_iff_disjoint [decidable_eq α] {s t : Multiset α} : s ∩ t = 0 ↔ Disjoint s t := by\n  rw [← subset_zero] <;> simp [subset_iff, Disjoint]\n#align inter_eq_zero_iff_disjoint inter_eq_zero_iff_disjoint\n\n",
+ "theorem inter_eq_zero_iff_disjoint [DecidableEq α] {s t : Multiset α} : s ∩ t = 0 ↔ Disjoint s t := by\n  rw [← subset_zero] <;> simp [subset_iff, Disjoint]\n#align inter_eq_zero_iff_disjoint inter_eq_zero_iff_disjoint\n\n",
  "inter_comm":
  "theorem inter_comm (s t : Multiset α) : s ∩ t = t ∩ s :=\n  inf_comm\n#align inter_comm inter_comm\n\n",
  "inter_add_distrib":
@@ -413,45 +411,45 @@
  "filter_zero":
  "@[simp]\ntheorem filter_zero : filter p 0 = 0 :=\n  rfl\n#align filter_zero filter_zero\n\n",
  "filter_union":
- "@[simp]\ntheorem filter_union [decidable_eq α] (s t : Multiset α) : filter p (s ∪ t) = filter p s ∪ filter p t := by\n  simp [(· ∪ ·), union]\n#align filter_union filter_union\n\n",
+ "@[simp]\ntheorem filter_union [DecidableEq α] (s t : Multiset α) : filter p (s ∪ t) = filter p s ∪ filter p t := by\n  simp [(· ∪ ·), union]\n#align filter_union filter_union\n\n",
  "filter_subset":
  "@[simp]\ntheorem filter_subset (s : Multiset α) : filter p s ⊆ s :=\n  subset_of_le <| filter_le _ _\n#align filter_subset filter_subset\n\n",
  "filter_sub":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ::ₘ » -/\n@[simp]\ntheorem filter_sub [decidable_eq α] (s t : Multiset α) : filter p (s - t) = filter p s - filter p t :=\n  by\n  revert s; refine' Multiset.induction_on t (by simp) fun a t IH s => _\n  rw [sub_cons, IH]\n  by_cases p a\n  · rw [filter_cons_of_pos _ h, sub_cons]\n    congr\n    by_cases m : a ∈ s\n    · rw [← cons_inj_right a, ← filter_cons_of_pos _ h, cons_erase (mem_filter_of_mem m h), cons_erase m]\n    · rw [erase_of_not_mem m, erase_of_not_mem (mt mem_of_mem_filter m)]\n  · rw [filter_cons_of_neg _ h]\n    by_cases m : a ∈ s\n    · rw [(by rw [filter_cons_of_neg _ h] : filter p (erase s a) = filter p («expr ::ₘ » a (erase s a))), cons_erase m]\n    · rw [erase_of_not_mem m]\n#align filter_sub filter_sub\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ::ₘ » -/\n@[simp]\ntheorem filter_sub [DecidableEq α] (s t : Multiset α) : filter p (s - t) = filter p s - filter p t :=\n  by\n  revert s; refine' Multiset.induction_on t (by simp) fun a t IH s => _\n  rw [sub_cons, IH]\n  by_cases p a\n  · rw [filter_cons_of_pos _ h, sub_cons]\n    congr\n    by_cases m : a ∈ s\n    · rw [← cons_inj_right a, ← filter_cons_of_pos _ h, cons_erase (mem_filter_of_mem m h), cons_erase m]\n    · rw [erase_of_not_mem m, erase_of_not_mem (mt mem_of_mem_filter m)]\n  · rw [filter_cons_of_neg _ h]\n    by_cases m : a ∈ s\n    · rw [(by rw [filter_cons_of_neg _ h] : Filter p (erase s a) = Filter p («expr ::ₘ » a (erase s a))), cons_erase m]\n    · rw [erase_of_not_mem m]\n#align filter_sub filter_sub\n\n",
  "filter_singleton":
- "theorem filter_singleton {a : α} (p : α → Prop) [decidable_pred p] : filter p {a} = if p a then {a} else ∅ := by\n  simp only [singleton, filter_cons, filter_zero, add_zero, empty_eq_zero]\n#align filter_singleton filter_singleton\n\n",
+ "theorem filter_singleton {a : α} (p : α → Prop) [DecidablePred p] : filter p {a} = if p a then {a} else ∅ := by\n  simp only [singleton, filter_cons, filter_zero, add_zero, empty_eq_zero]\n#align filter_singleton filter_singleton\n\n",
  "filter_nsmul":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\ntheorem filter_nsmul (s : Multiset α) (n : ℕ) : filter p («expr • » n s) = «expr • » n (filter p s) :=\n  by\n  refine' s.induction_on _ _\n  · simp only [filter_zero, nsmul_zero]\n  · intro a ha ih\n    rw [nsmul_cons, filter_add, ih, filter_cons, nsmul_add]\n    congr\n    split_ifs with hp <;>\n      · simp only [filter_eq_self, nsmul_zero, filter_eq_nil]\n        intro b hb\n        rwa [mem_singleton.mp (mem_of_mem_nsmul hb)]\n#align filter_nsmul filter_nsmul\n\n",
  "filter_map_zero":
- "@[simp]\ntheorem filter_map_zero (f : α → option β) : filterMap f 0 = 0 :=\n  rfl\n#align filter_map_zero filter_map_zero\n\n",
+ "@[simp]\ntheorem filter_map_zero (f : α → Option β) : filterMap f 0 = 0 :=\n  rfl\n#align filter_map_zero filter_map_zero\n\n",
  "filter_map_some":
  "@[simp]\ntheorem filter_map_some (s : Multiset α) : filterMap some s = s :=\n  Quot.inductionOn s fun l => congr_arg coe <| filterMap_some l\n#align filter_map_some filter_map_some\n\n",
  "filter_map_map":
- "theorem filter_map_map (f : α → β) (g : β → option γ) (s : Multiset α) : filterMap g (map f s) = filterMap (g ∘ f) s :=\n  Quot.inductionOn s fun l => congr_arg coe <| filterMap_map f g l\n#align filter_map_map filter_map_map\n\n",
+ "theorem filter_map_map (f : α → β) (g : β → Option γ) (s : Multiset α) : filterMap g (map f s) = filterMap (g ∘ f) s :=\n  Quot.inductionOn s fun l => congr_arg coe <| filterMap_map f g l\n#align filter_map_map filter_map_map\n\n",
  "filter_map_le_filter_map":
- "theorem filter_map_le_filter_map (f : α → option β) {s t : Multiset α} (h : s ≤ t) : filterMap f s ≤ filterMap f t :=\n  leInductionOn h fun l₁ l₂ h => (h.filter_map _).subperm\n#align filter_map_le_filter_map filter_map_le_filter_map\n\n",
+ "theorem filter_map_le_filter_map (f : α → Option β) {s t : Multiset α} (h : s ≤ t) : filterMap f s ≤ filterMap f t :=\n  leInductionOn h fun l₁ l₂ h => (h.filter_map _).subperm\n#align filter_map_le_filter_map filter_map_le_filter_map\n\n",
  "filter_map_filter_map":
- "theorem filter_map_filter_map (f : α → option β) (g : β → option γ) (s : Multiset α) :\n    filterMap g (filterMap f s) = filterMap (fun x => (f x).bind g) s :=\n  Quot.inductionOn s fun l => congr_arg coe <| filterMap_filterMap f g l\n#align filter_map_filter_map filter_map_filter_map\n\n",
+ "theorem filter_map_filter_map (f : α → Option β) (g : β → Option γ) (s : Multiset α) :\n    filterMap g (filterMap f s) = filterMap (fun x => (f x).bind g) s :=\n  Quot.inductionOn s fun l => congr_arg coe <| filterMap_filterMap f g l\n#align filter_map_filter_map filter_map_filter_map\n\n",
  "filter_map_filter":
- "theorem filter_map_filter (f : α → option β) (s : Multiset α) :\n    filterMap f (filter p s) = filterMap (fun x => if p x then f x else none) s :=\n  Quot.inductionOn s fun l => congr_arg coe <| filterMap_filter p f l\n#align filter_map_filter filter_map_filter\n\n",
+ "theorem filter_map_filter (f : α → Option β) (s : Multiset α) :\n    filterMap f (filter p s) = filterMap (fun x => if p x then f x else none) s :=\n  Quot.inductionOn s fun l => congr_arg coe <| filterMap_filter p f l\n#align filter_map_filter filter_map_filter\n\n",
  "filter_map_eq_map":
  "theorem filter_map_eq_map (f : α → β) : filterMap (some ∘ f) = map f :=\n  funext fun s => Quot.inductionOn s fun l => @congr_arg _ _ _ _ coe <| congr_fun (filterMap_eq_map f) l\n#align filter_map_eq_map filter_map_eq_map\n\n",
  "filter_map_eq_filter":
- "theorem filter_map_eq_filter : filterMap (option.guard p) = filter p :=\n  funext fun s => Quot.inductionOn s fun l => @congr_arg _ _ _ _ coe <| congr_fun (filterMap_eq_filter p) l\n#align filter_map_eq_filter filter_map_eq_filter\n\n",
+ "theorem filter_map_eq_filter : filterMap (Option.guard p) = filter p :=\n  funext fun s => Quot.inductionOn s fun l => @congr_arg _ _ _ _ coe <| congr_fun (filterMap_eq_filter p) l\n#align filter_map_eq_filter filter_map_eq_filter\n\n",
  "filter_map_cons_some":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ::ₘ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ::ₘ » -/\n@[simp]\ntheorem filter_map_cons_some (f : α → option β) (a : α) (s : Multiset α) {b : β} (h : f a = some b) :\n    filterMap f («expr ::ₘ » a s) = «expr ::ₘ » b (filterMap f s) :=\n  Quot.inductionOn s fun l => @congr_arg _ _ _ _ coe <| filterMap_cons_some f a l h\n#align filter_map_cons_some filter_map_cons_some\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ::ₘ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ::ₘ » -/\n@[simp]\ntheorem filter_map_cons_some (f : α → Option β) (a : α) (s : Multiset α) {b : β} (h : f a = some b) :\n    filterMap f («expr ::ₘ » a s) = «expr ::ₘ » b (filterMap f s) :=\n  Quot.inductionOn s fun l => @congr_arg _ _ _ _ coe <| filterMap_cons_some f a l h\n#align filter_map_cons_some filter_map_cons_some\n\n",
  "filter_map_cons_none":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ::ₘ » -/\n@[simp]\ntheorem filter_map_cons_none {f : α → option β} (a : α) (s : Multiset α) (h : f a = none) :\n    filterMap f («expr ::ₘ » a s) = filterMap f s :=\n  Quot.inductionOn s fun l => @congr_arg _ _ _ _ coe <| filterMap_cons_none a l h\n#align filter_map_cons_none filter_map_cons_none\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ::ₘ » -/\n@[simp]\ntheorem filter_map_cons_none {f : α → Option β} (a : α) (s : Multiset α) (h : f a = none) :\n    filterMap f («expr ::ₘ » a s) = filterMap f s :=\n  Quot.inductionOn s fun l => @congr_arg _ _ _ _ coe <| filterMap_cons_none a l h\n#align filter_map_cons_none filter_map_cons_none\n\n",
  "filter_le_filter":
  "theorem filter_le_filter {s t} (h : s ≤ t) : filter p s ≤ filter p t :=\n  leInductionOn h fun l₁ l₂ h => (h.filter p).subperm\n#align filter_le_filter filter_le_filter\n\n",
  "filter_le":
  "@[simp]\ntheorem filter_le (s : Multiset α) : filter p s ≤ s :=\n  Quot.inductionOn s fun l => (filter_sublist _).subperm\n#align filter_le filter_le\n\n",
  "filter_inter":
- "@[simp]\ntheorem filter_inter [decidable_eq α] (s t : Multiset α) : filter p (s ∩ t) = filter p s ∩ filter p t :=\n  le_antisymm (le_inter (filter_le_filter _ <| inter_le_left _ _) (filter_le_filter _ <| inter_le_right _ _)) <|\n    le_filter.2 ⟨inf_le_inf (filter_le _ _) (filter_le _ _), fun a h => of_mem_filter (mem_of_le (inter_le_left _ _) h)⟩\n#align filter_inter filter_inter\n\n",
+ "@[simp]\ntheorem filter_inter [DecidableEq α] (s t : Multiset α) : filter p (s ∩ t) = filter p s ∩ filter p t :=\n  le_antisymm (le_inter (filter_le_filter _ <| inter_le_left _ _) (filter_le_filter _ <| inter_le_right _ _)) <|\n    le_filter.2 ⟨inf_le_inf (filter_le _ _) (filter_le _ _), fun a h => of_mem_filter (mem_of_le (inter_le_left _ _) h)⟩\n#align filter_inter filter_inter\n\n",
  "filter_filter_map":
- "theorem filter_filter_map (f : α → option β) (p : β → Prop) [decidable_pred p] (s : Multiset α) :\n    filter p (filterMap f s) = filterMap (fun x => (f x).filter p) s :=\n  Quot.inductionOn s fun l => congr_arg coe <| filter_filterMap f p l\n#align filter_filter_map filter_filter_map\n\n",
+ "theorem filter_filter_map (f : α → Option β) (p : β → Prop) [DecidablePred p] (s : Multiset α) :\n    filter p (filterMap f s) = filterMap (fun x => (f x).filter p) s :=\n  Quot.inductionOn s fun l => congr_arg coe <| filter_filterMap f p l\n#align filter_filter_map filter_filter_map\n\n",
  "filter_filter":
- "@[simp]\ntheorem filter_filter (q) [decidable_pred q] (s : Multiset α) : filter p (filter q s) = filter (fun a => p a ∧ q a) s :=\n  Quot.inductionOn s fun l => congr_arg coe <| filter_filter p q l\n#align filter_filter filter_filter\n\n",
+ "@[simp]\ntheorem filter_filter (q) [DecidablePred q] (s : Multiset α) : filter p (filter q s) = filter (fun a => p a ∧ q a) s :=\n  Quot.inductionOn s fun l => congr_arg coe <| filter_filter p q l\n#align filter_filter filter_filter\n\n",
  "filter_eq_self":
  "theorem filter_eq_self {s} : filter p s = s ↔ ∀ a ∈ s, p a :=\n  Quot.inductionOn s fun l =>\n    iff.trans ⟨fun h => (filter_sublist _).eq_of_length (@congr_arg _ _ _ _ card h), congr_arg coe⟩ filter_eq_self\n#align filter_eq_self filter_eq_self\n\n",
  "filter_eq_nil":
@@ -459,7 +457,7 @@
  "filter_eq'":
  "theorem filter_eq' (s : Multiset α) (b : α) : s.filter (· = b) = replicate (count b s) b :=\n  Quotient.inductionOn s fun l => congr_arg coe <| filter_eq' l b\n#align filter_eq' filter_eq'\n\n",
  "filter_eq":
- "theorem filter_eq (s : Multiset α) (b : α) : s.filter (eq b) = replicate (count b s) b := by\n  simp_rw [← filter_eq', eq_comm]\n#align filter_eq filter_eq\n\n",
+ "theorem filter_eq (s : Multiset α) (b : α) : s.filter (Eq b) = replicate (count b s) b := by\n  simp_rw [← filter_eq', eq_comm]\n#align filter_eq filter_eq\n\n",
  "filter_cons_of_pos":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ::ₘ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ::ₘ » -/\n@[simp]\ntheorem filter_cons_of_pos {a : α} (s) : p a → filter p («expr ::ₘ » a s) = «expr ::ₘ » a (filter p s) :=\n  Quot.inductionOn s fun l h => congr_arg coe <| filter_cons_of_pos l h\n#align filter_cons_of_pos filter_cons_of_pos\n\n",
  "filter_cons_of_neg":
@@ -467,17 +465,17 @@
  "filter_cons":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ::ₘ » -/\ntheorem filter_cons {a : α} (s : Multiset α) : filter p («expr ::ₘ » a s) = (if p a then {a} else 0) + filter p s :=\n  by\n  split_ifs with h\n  · rw [filter_cons_of_pos _ h, singleton_add]\n  · rw [filter_cons_of_neg _ h, zero_add]\n#align filter_cons filter_cons\n\n",
  "filter_congr":
- "theorem filter_congr {p q : α → Prop} [decidable_pred p] [decidable_pred q] {s : Multiset α} :\n    (∀ x ∈ s, p x ↔ q x) → filter p s = filter q s :=\n  Quot.inductionOn s fun l h => congr_arg coe <| filter_congr' h\n#align filter_congr filter_congr\n\n",
+ "theorem filter_congr {p q : α → Prop} [DecidablePred p] [DecidablePred q] {s : Multiset α} :\n    (∀ x ∈ s, p x ↔ q x) → filter p s = filter q s :=\n  Quot.inductionOn s fun l h => congr_arg coe <| filter_congr' h\n#align filter_congr filter_congr\n\n",
  "filter_add_not":
  "theorem filter_add_not (s : Multiset α) : filter p s + filter (fun a => ¬p a) s = s := by\n  rw [filter_add_filter, filter_eq_self.2, filter_eq_nil.2] <;> simp [decidable.em]\n#align filter_add_not filter_add_not\n\n",
  "filter_add_filter":
- "theorem filter_add_filter (q) [decidable_pred q] (s : Multiset α) :\n    filter p s + filter q s = filter (fun a => p a ∨ q a) s + filter (fun a => p a ∧ q a) s :=\n  Multiset.induction_on s rfl fun a s IH => by by_cases p a <;> by_cases q a <;> simp [*]\n#align filter_add_filter filter_add_filter\n\n",
+ "theorem filter_add_filter (q) [DecidablePred q] (s : Multiset α) :\n    filter p s + filter q s = filter (fun a => p a ∨ q a) s + filter (fun a => p a ∧ q a) s :=\n  Multiset.induction_on s rfl fun a s IH => by by_cases p a <;> by_cases q a <;> simp [*]\n#align filter_add_filter filter_add_filter\n\n",
  "filter_add":
  "@[simp]\ntheorem filter_add (s t : Multiset α) : filter p (s + t) = filter p s + filter p t :=\n  quotient.induction_on₂ s t fun l₁ l₂ => congr_arg coe <| filter_append _ _\n#align filter_add filter_add\n\n",
  "ext'":
  "@[ext]\ntheorem ext' {s t : Multiset α} : (∀ a, count a s = count a t) → s = t :=\n  ext.2\n#align ext' ext'\n\n",
  "ext":
- "theorem ext {s t : Multiset α} : s = t ↔ ∀ a, count a s = count a t :=\n  quotient.induction_on₂ s t fun l₁ l₂ => quotient.eq.trans perm_iff_count\n#align ext ext\n\n",
+ "theorem ext {s t : Multiset α} : s = t ↔ ∀ a, count a s = count a t :=\n  quotient.induction_on₂ s t fun l₁ l₂ => Quotient.eq'.trans perm_iff_count\n#align ext ext\n\n",
  "exists_multiset_eq_map_quot_mk":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ::ₘ » -/\ntheorem exists_multiset_eq_map_quot_mk {r : α → α → Prop} (s : Multiset (Quot r)) :\n    ∃ t : Multiset α, s = t.map (Quot.mk r) :=\n  Multiset.induction_on s ⟨0, rfl⟩ fun a s ⟨t, ht⟩ =>\n    Quot.inductionOn a fun a => ht.symm ▸ ⟨«expr ::ₘ » a t, (map_cons _ _ _).symm⟩\n#align exists_multiset_eq_map_quot_mk exists_multiset_eq_map_quot_mk\n\n",
  "exists_mem_of_rel_of_mem":
@@ -485,7 +483,7 @@
  "exists_mem_of_ne_zero":
  "theorem exists_mem_of_ne_zero {s : Multiset α} : s ≠ 0 → ∃ a : α, a ∈ s :=\n  Quot.inductionOn s fun l hl =>\n    match l, hl with\n    | [] => fun h => false.elim <| h rfl\n    | a :: l => fun _ => ⟨a, by simp⟩\n#align exists_mem_of_ne_zero exists_mem_of_ne_zero\n\n",
  "exists_cons_of_mem":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ::ₘ » -/\ntheorem exists_cons_of_mem {s : Multiset α} {a : α} : a ∈ s → ∃ t, s = «expr ::ₘ » a t :=\n  Quot.inductionOn s fun l (h : a ∈ l) =>\n    let ⟨l₁, l₂, e⟩ := mem_split h\n    e.symm ▸ ⟨(l₁ ++ l₂ : list α), quot.sound perm_middle⟩\n#align exists_cons_of_mem exists_cons_of_mem\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ::ₘ » -/\ntheorem exists_cons_of_mem {s : Multiset α} {a : α} : a ∈ s → ∃ t, s = «expr ::ₘ » a t :=\n  Quot.inductionOn s fun l (h : a ∈ l) =>\n    let ⟨l₁, l₂, e⟩ := mem_split h\n    e.symm ▸ ⟨(l₁ ++ l₂ : List α), quot.sound perm_middle⟩\n#align exists_cons_of_mem exists_cons_of_mem\n\n",
  "erase_zero":
  "@[simp]\ntheorem erase_zero (a : α) : (0 : Multiset α).erase a = 0 :=\n  rfl\n#align erase_zero erase_zero\n\n",
  "erase_subset":
@@ -533,7 +531,7 @@
  "eq_of_mem_replicate":
  "theorem eq_of_mem_replicate {a b : α} {n} : b ∈ replicate n a → b = a :=\n  eq_of_mem_replicate\n#align eq_of_mem_replicate eq_of_mem_replicate\n\n",
  "eq_of_mem_map_const":
- "theorem eq_of_mem_map_const {b₁ b₂ : β} {l : list α} (h : b₁ ∈ map (function.const α b₂) l) : b₁ = b₂ :=\n  eq_of_mem_replicate <| by rwa [map_const] at h\n#align eq_of_mem_map_const eq_of_mem_map_const\n\n",
+ "theorem eq_of_mem_map_const {b₁ b₂ : β} {l : List α} (h : b₁ ∈ map (Function.const α b₂) l) : b₁ = b₂ :=\n  eq_of_mem_replicate <| by rwa [map_const] at h\n#align eq_of_mem_map_const eq_of_mem_map_const\n\n",
  "eq_of_le_of_card_le":
  "theorem eq_of_le_of_card_le {s t : Multiset α} (h : s ≤ t) : card t ≤ card s → s = t :=\n  leInductionOn h fun l₁ l₂ s h₂ => congr_arg coe <| s.eq_of_length_le h₂\n#align eq_of_le_of_card_le eq_of_le_of_card_le\n\n",
  "empty_to_list":
@@ -543,9 +541,9 @@
  "empty_eq_zero":
  "@[simp]\ntheorem empty_eq_zero : (∅ : Multiset α) = 0 :=\n  rfl\n#align empty_eq_zero empty_eq_zero\n\n",
  "disjoint_union_right":
- "@[simp]\ntheorem disjoint_union_right [decidable_eq α] {s t u : Multiset α} : Disjoint s (t ∪ u) ↔ Disjoint s t ∧ Disjoint s u :=\n  by simp [Disjoint, or_imp, forall_and]\n#align disjoint_union_right disjoint_union_right\n\n",
+ "@[simp]\ntheorem disjoint_union_right [DecidableEq α] {s t u : Multiset α} : Disjoint s (t ∪ u) ↔ Disjoint s t ∧ Disjoint s u :=\n  by simp [Disjoint, or_imp, forall_and]\n#align disjoint_union_right disjoint_union_right\n\n",
  "disjoint_union_left":
- "@[simp]\ntheorem disjoint_union_left [decidable_eq α] {s t u : Multiset α} : Disjoint (s ∪ t) u ↔ Disjoint s u ∧ Disjoint t u :=\n  by simp [Disjoint, or_imp, forall_and]\n#align disjoint_union_left disjoint_union_left\n\n",
+ "@[simp]\ntheorem disjoint_union_left [DecidableEq α] {s t u : Multiset α} : Disjoint (s ∪ t) u ↔ Disjoint s u ∧ Disjoint t u :=\n  by simp [Disjoint, or_imp, forall_and]\n#align disjoint_union_left disjoint_union_left\n\n",
  "disjoint_singleton":
  "@[simp]\ntheorem disjoint_singleton {l : Multiset α} {a : α} : Disjoint l {a} ↔ a ∉ l := by\n  rw [disjoint_comm, singleton_disjoint]\n#align disjoint_singleton disjoint_singleton\n\n",
  "disjoint_right":
@@ -577,9 +575,9 @@
  "countp_zero":
  "@[simp]\ntheorem countp_zero : countp p 0 = 0 :=\n  rfl\n#align countp_zero countp_zero\n\n",
  "countp_true":
- "@[simp]\ntheorem countp_true {s : Multiset α} : countp (fun _ => true) s = card s :=\n  Quot.inductionOn s fun l => List.countp_true\n#align countp_true countp_true\n\n",
+ "@[simp]\ntheorem countp_true {s : Multiset α} : countp (fun _ => True) s = card s :=\n  Quot.inductionOn s fun l => List.countp_true\n#align countp_true countp_true\n\n",
  "countp_sub":
- "@[simp]\ntheorem countp_sub [decidable_eq α] {s t : Multiset α} (h : t ≤ s) : countp p (s - t) = countp p s - countp p t := by\n  simp [countp_eq_card_filter, h, filter_le_filter]\n#align countp_sub countp_sub\n\n",
+ "@[simp]\ntheorem countp_sub [DecidableEq α] {s t : Multiset α} (h : t ≤ s) : countp p (s - t) = countp p s - countp p t := by\n  simp [countp_eq_card_filter, h, filter_le_filter]\n#align countp_sub countp_sub\n\n",
  "countp_pos_of_mem":
  "theorem countp_pos_of_mem {s a} (h : a ∈ s) (pa : p a) : 0 < countp p s :=\n  countp_pos.2 ⟨_, h, pa⟩\n#align countp_pos_of_mem countp_pos_of_mem\n\n",
  "countp_pos":
@@ -587,25 +585,25 @@
  "countp_nsmul":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n@[simp]\ntheorem countp_nsmul (s) (n : ℕ) : countp p («expr • » n s) = n * countp p s := by\n  induction n <;> simp [*, succ_nsmul', succ_mul, zero_nsmul]\n#align countp_nsmul countp_nsmul\n\n",
  "countp_map":
- "theorem countp_map (f : α → β) (s : Multiset α) (p : β → Prop) [decidable_pred p] :\n    countp p (map f s) = (s.filter fun a => p (f a)).card :=\n  by\n  refine' Multiset.induction_on s _ fun a t IH => _\n  · rw [map_zero, countp_zero, filter_zero, card_zero]\n  · rw [map_cons, countp_cons, IH, filter_cons, card_add, apply_ite card, card_zero, card_singleton, add_comm]\n#align countp_map countp_map\n\n",
+ "theorem countp_map (f : α → β) (s : Multiset α) (p : β → Prop) [DecidablePred p] :\n    countp p (map f s) = (s.filter fun a => p (f a)).card :=\n  by\n  refine' Multiset.induction_on s _ fun a t IH => _\n  · rw [map_zero, countp_zero, filter_zero, card_zero]\n  · rw [map_cons, countp_cons, IH, filter_cons, card_add, apply_ite card, card_zero, card_singleton, add_comm]\n#align countp_map countp_map\n\n",
  "countp_le_of_le":
  "theorem countp_le_of_le {s t} (h : s ≤ t) : countp p s ≤ countp p t := by\n  simpa [countp_eq_card_filter] using card_le_of_le (filter_le_filter p h)\n#align countp_le_of_le countp_le_of_le\n\n",
  "countp_le_card":
  "theorem countp_le_card (s) : countp p s ≤ card s :=\n  Quot.inductionOn s fun l => countp_le_length p\n#align countp_le_card countp_le_card\n\n",
  "countp_filter":
- "@[simp]\ntheorem countp_filter (q) [decidable_pred q] (s : Multiset α) : countp p (filter q s) = countp (fun a => p a ∧ q a) s :=\n  by simp [countp_eq_card_filter]\n#align countp_filter countp_filter\n\n",
+ "@[simp]\ntheorem countp_filter (q) [DecidablePred q] (s : Multiset α) : countp p (filter q s) = countp (fun a => p a ∧ q a) s :=\n  by simp [countp_eq_card_filter]\n#align countp_filter countp_filter\n\n",
  "countp_false":
- "@[simp]\ntheorem countp_false {s : Multiset α} : countp (fun _ => false) s = 0 :=\n  Quot.inductionOn s fun l => List.countp_false\n#align countp_false countp_false\n\n",
+ "@[simp]\ntheorem countp_false {s : Multiset α} : countp (fun _ => False) s = 0 :=\n  Quot.inductionOn s fun l => List.countp_false\n#align countp_false countp_false\n\n",
  "countp_eq_zero":
  "theorem countp_eq_zero {s} : countp p s = 0 ↔ ∀ a ∈ s, ¬p a :=\n  Quot.inductionOn s fun l => List.countp_eq_zero p\n#align countp_eq_zero countp_eq_zero\n\n",
  "countp_eq_countp_filter_add":
- "theorem countp_eq_countp_filter_add (s) (p q : α → Prop) [decidable_pred p] [decidable_pred q] :\n    countp p s = (filter q s).countp p + (filter (fun a => ¬q a) s).countp p :=\n  Quot.inductionOn s fun l => l.countp_eq_countp_filter_add _ _\n#align countp_eq_countp_filter_add countp_eq_countp_filter_add\n\n",
+ "theorem countp_eq_countp_filter_add (s) (p q : α → Prop) [DecidablePred p] [DecidablePred q] :\n    countp p s = (filter q s).countp p + (filter (fun a => ¬q a) s).countp p :=\n  Quot.inductionOn s fun l => l.countp_eq_countp_filter_add _ _\n#align countp_eq_countp_filter_add countp_eq_countp_filter_add\n\n",
  "countp_eq_card_filter":
  "theorem countp_eq_card_filter (s) : countp p s = card (filter p s) :=\n  Quot.inductionOn s fun l => l.countp_eq_length_filter p\n#align countp_eq_card_filter countp_eq_card_filter\n\n",
  "countp_eq_card":
  "theorem countp_eq_card {s} : countp p s = card s ↔ ∀ a ∈ s, p a :=\n  Quot.inductionOn s fun l => List.countp_eq_length p\n#align countp_eq_card countp_eq_card\n\n",
  "countp_eq":
- "theorem rel.countp_eq (r : α → α → Prop) [is_trans α r] [is_symm α r] {s t : Multiset α} (x : α) [decidable_pred (r x)]\n    (h : Rel r s t) : countp (r x) s = countp (r x) t :=\n  by\n  induction' s using Multiset.induction_on with y s ih generalizing t\n  · rw [rel_zero_left.mp h]\n  · obtain ⟨b, bs, hb1, hb2, rfl⟩ := rel_cons_left.mp h\n    rw [countp_cons, countp_cons, ih hb2]\n    exact congr_arg _ (if_congr ⟨fun h => trans h hb1, fun h => trans h (symm hb1)⟩ rfl rfl)\n#align rel.countp_eq rel.countp_eq\n\n",
+ "theorem rel.countp_eq (r : α → α → Prop) [is_trans α r] [is_symm α r] {s t : Multiset α} (x : α) [DecidablePred (r x)]\n    (h : Rel r s t) : countp (r x) s = countp (r x) t :=\n  by\n  induction' s using Multiset.induction_on with y s ih generalizing t\n  · rw [rel_zero_left.mp h]\n  · obtain ⟨b, bs, hb1, hb2, rfl⟩ := rel_cons_left.mp h\n    rw [countp_cons, countp_cons, ih hb2]\n    exact congr_arg _ (if_congr ⟨fun h => trans h hb1, fun h => trans h (symm hb1)⟩ rfl rfl)\n#align rel.countp_eq rel.countp_eq\n\n",
  "countp_cons_of_pos":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ::ₘ » -/\n@[simp]\ntheorem countp_cons_of_pos {a : α} (s) : p a → countp p («expr ::ₘ » a s) = countp p s + 1 :=\n  Quot.inductionOn s <| countp_cons_of_pos p\n#align countp_cons_of_pos countp_cons_of_pos\n\n",
  "countp_cons_of_neg":
@@ -613,7 +611,7 @@
  "countp_cons":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ::ₘ » -/\ntheorem countp_cons (b : α) (s) : countp p («expr ::ₘ » b s) = countp p s + if p b then 1 else 0 :=\n  Quot.inductionOn s <| by simp [List.countp_cons]\n#align countp_cons countp_cons\n\n",
  "countp_congr":
- "theorem countp_congr {s s' : Multiset α} (hs : s = s') {p p' : α → Prop} [decidable_pred p] [decidable_pred p']\n    (hp : ∀ x ∈ s, p x = p' x) : s.countp p = s'.countp p' :=\n  quot.induction_on₂ s s'\n    (fun l l' hs hp => by\n      simp only [quot_mk_to_coe'', coe_eq_coe] at hs\n      exact hs.countp_congr hp)\n    hs hp\n#align countp_congr countp_congr\n\n",
+ "theorem countp_congr {s s' : Multiset α} (hs : s = s') {p p' : α → Prop} [DecidablePred p] [DecidablePred p']\n    (hp : ∀ x ∈ s, p x = p' x) : s.countp p = s'.countp p' :=\n  Quot.induction_on₂ s s'\n    (fun l l' hs hp => by\n      simp only [quot_mk_to_coe'', coe_eq_coe] at hs\n      exact hs.countp_congr hp)\n    hs hp\n#align countp_congr countp_congr\n\n",
  "countp_add":
  "@[simp]\ntheorem countp_add (s t) : countp p (s + t) = countp p s + countp p t := by simp [countp_eq_card_filter]\n#align countp_add countp_add\n\n",
  "count_zero":
@@ -637,11 +635,11 @@
  "count_ne_zero":
  "theorem count_ne_zero {a : α} {s : Multiset α} : count a s ≠ 0 ↔ a ∈ s := by simp [ne.def, count_eq_zero]\n#align count_ne_zero count_ne_zero\n\n",
  "count_map_eq_count'":
- "/-- `multiset.map f` preserves `count` if `f` is injective -/\ntheorem count_map_eq_count' [decidable_eq β] (f : α → β) (s : Multiset α) (hf : function.injective f) (x : α) :\n    (s.map f).count (f x) = s.count x := by\n  by_cases H : x ∈ s\n  · exact count_map_eq_count f _ (Set.injOn_of_injective hf _) _ H\n  · rw [count_eq_zero_of_not_mem H, count_eq_zero, mem_map]\n    rintro ⟨k, hks, hkx⟩\n    rw [hf hkx] at *\n    contradiction\n#align count_map_eq_count' count_map_eq_count'\n\n",
+ "/-- `multiset.map f` preserves `count` if `f` is injective -/\ntheorem count_map_eq_count' [DecidableEq β] (f : α → β) (s : Multiset α) (hf : function.injective f) (x : α) :\n    (s.map f).count (f x) = s.count x := by\n  by_cases H : x ∈ s\n  · exact count_map_eq_count f _ (Set.injOn_of_injective hf _) _ H\n  · rw [count_eq_zero_of_not_mem H, count_eq_zero, mem_map]\n    rintro ⟨k, hks, hkx⟩\n    rw [hf hkx] at *\n    contradiction\n#align count_map_eq_count' count_map_eq_count'\n\n",
  "count_map_eq_count":
- "/- ./././Mathport/Syntax/Translate/Basic.lean:632:2: warning: expanding binder collection (x «expr ∈ » s) -/\n/-- `multiset.map f` preserves `count` if `f` is injective on the set of elements contained in\nthe multiset -/\ntheorem count_map_eq_count [decidable_eq β] (f : α → β) (s : Multiset α) (hf : Set.InjOn f { x : α | x ∈ s }) (x)\n    (_ : x ∈ s) : (s.map f).count (f x) = s.count x :=\n  by\n  suffices (filter (fun a : α => f x = f a) s).count x = card (filter (fun a : α => f x = f a) s)\n    by\n    rw [count, countp_map, ← this]\n    exact count_filter_of_pos rfl\n  ·\n    rw [eq_replicate_card.2 fun b hb => ((hf H (mem_filter.1 hb).left) (mem_filter.1 hb).2).symm, count_replicate_self,\n      card_replicate]\n#align count_map_eq_count count_map_eq_count\n\n",
+ "/- ./././Mathport/Syntax/Translate/Basic.lean:635:2: warning: expanding binder collection (x «expr ∈ » s) -/\n/-- `multiset.map f` preserves `count` if `f` is injective on the set of elements contained in\nthe multiset -/\ntheorem count_map_eq_count [DecidableEq β] (f : α → β) (s : Multiset α) (hf : Set.InjOn f { x : α | x ∈ s }) (x)\n    (_ : x ∈ s) : (s.map f).count (f x) = s.count x :=\n  by\n  suffices (Filter (fun a : α => f x = f a) s).count x = card (Filter (fun a : α => f x = f a) s)\n    by\n    rw [count, countp_map, ← this]\n    exact count_filter_of_pos rfl\n  ·\n    rw [eq_replicate_card.2 fun b hb => ((hf H (mem_filter.1 hb).left) (mem_filter.1 hb).2).symm, count_replicate_self,\n      card_replicate]\n#align count_map_eq_count count_map_eq_count\n\n",
  "count_map":
- "theorem count_map {α β : Type _} (f : α → β) (s : Multiset α) [decidable_eq β] (b : β) :\n    count b (map f s) = (s.filter fun a => b = f a).card :=\n  countp_map _ _ _\n#align count_map count_map\n\n",
+ "theorem count_map {α β : Type _} (f : α → β) (s : Multiset α) [DecidableEq β] (b : β) :\n    count b (map f s) = (s.filter fun a => b = f a).card :=\n  countp_map _ _ _\n#align count_map count_map\n\n",
  "count_le_of_le":
  "theorem count_le_of_le (a : α) {s t} : s ≤ t → count a s ≤ count a t :=\n  countp_le_of_le _\n#align count_le_of_le count_le_of_le\n\n",
  "count_le_count_cons":
@@ -651,11 +649,11 @@
  "count_inter":
  "@[simp]\ntheorem count_inter (a : α) (s t : Multiset α) : count a (s ∩ t) = min (count a s) (count a t) :=\n  by\n  apply @nat.add_left_cancel (count a (s - t))\n  rw [← count_add, sub_add_inter, count_sub, tsub_add_min]\n#align count_inter count_inter\n\n",
  "count_filter_of_pos":
- "@[simp]\ntheorem count_filter_of_pos {p} [decidable_pred p] {a} {s : Multiset α} (h : p a) : count a (filter p s) = count a s :=\n  Quot.inductionOn s fun l => count_filter h\n#align count_filter_of_pos count_filter_of_pos\n\n",
+ "@[simp]\ntheorem count_filter_of_pos {p} [DecidablePred p] {a} {s : Multiset α} (h : p a) : count a (filter p s) = count a s :=\n  Quot.inductionOn s fun l => count_filter h\n#align count_filter_of_pos count_filter_of_pos\n\n",
  "count_filter_of_neg":
- "@[simp]\ntheorem count_filter_of_neg {p} [decidable_pred p] {a} {s : Multiset α} (h : ¬p a) : count a (filter p s) = 0 :=\n  Multiset.count_eq_zero_of_not_mem fun t => h (of_mem_filter t)\n#align count_filter_of_neg count_filter_of_neg\n\n",
+ "@[simp]\ntheorem count_filter_of_neg {p} [DecidablePred p] {a} {s : Multiset α} (h : ¬p a) : count a (filter p s) = 0 :=\n  Multiset.count_eq_zero_of_not_mem fun t => h (of_mem_filter t)\n#align count_filter_of_neg count_filter_of_neg\n\n",
  "count_filter":
- "theorem count_filter {p} [decidable_pred p] {a} {s : Multiset α} :\n    count a (filter p s) = if p a then count a s else 0 :=\n  by\n  split_ifs with h\n  · exact count_filter_of_pos h\n  · exact count_filter_of_neg h\n#align count_filter count_filter\n\n",
+ "theorem count_filter {p} [DecidablePred p] {a} {s : Multiset α} : count a (filter p s) = if p a then count a s else 0 :=\n  by\n  split_ifs with h\n  · exact count_filter_of_pos h\n  · exact count_filter_of_neg h\n#align count_filter count_filter\n\n",
  "count_erase_self":
  "@[simp]\ntheorem count_erase_self (a : α) (s : Multiset α) : count a (erase s a) = pred (count a s) :=\n  Quotient.inductionOn s <| count_erase_self a\n#align count_erase_self count_erase_self\n\n",
  "count_erase_of_ne":
@@ -665,7 +663,7 @@
  "count_eq_zero":
  "@[simp]\ntheorem count_eq_zero {a : α} {s : Multiset α} : count a s = 0 ↔ a ∉ s :=\n  iff_not_comm.1 <| count_pos.symm.trans pos_iff_ne_zero\n#align count_eq_zero count_eq_zero\n\n",
  "count_eq_card_filter_eq":
- "theorem count_eq_card_filter_eq [decidable_eq α] (s : Multiset α) (a : α) : s.count a = (s.filter (eq a)).card := by\n  rw [count, countp_eq_card_filter]\n#align count_eq_card_filter_eq count_eq_card_filter_eq\n\n",
+ "theorem count_eq_card_filter_eq [DecidableEq α] (s : Multiset α) (a : α) : s.count a = (s.filter (Eq a)).card := by\n  rw [count, countp_eq_card_filter]\n#align count_eq_card_filter_eq count_eq_card_filter_eq\n\n",
  "count_eq_card":
  "theorem count_eq_card {a : α} {s} : count a s = card s ↔ ∀ x ∈ s, a = x :=\n  countp_eq_card\n#align count_eq_card count_eq_card\n\n",
  "count_cons_self":
@@ -707,73 +705,73 @@
  "cons_erase":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ::ₘ » -/\n@[simp]\ntheorem cons_erase {s : Multiset α} {a : α} : a ∈ s → «expr ::ₘ » a (s.erase a) = s :=\n  Quot.inductionOn s fun l h => quot.sound (perm_cons_erase h).symm\n#align cons_erase cons_erase\n\n",
  "cons_eq_cons":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ::ₘ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ::ₘ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ::ₘ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ::ₘ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ::ₘ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ::ₘ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ::ₘ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ::ₘ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ::ₘ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ::ₘ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ::ₘ » -/\ntheorem cons_eq_cons {a b : α} {as bs : Multiset α} :\n    «expr ::ₘ » a as = «expr ::ₘ » b bs ↔\n      a = b ∧ as = bs ∨ a ≠ b ∧ ∃ cs, as = «expr ::ₘ » b cs ∧ bs = «expr ::ₘ » a cs :=\n  by\n  haveI : decidable_eq α := classical.dec_eq α\n  constructor\n  · intro eq\n    by_cases a = b\n    · subst h\n      simp_all\n    · have : a ∈ «expr ::ₘ » b bs := eq ▸ mem_cons_self _ _\n      have : a ∈ bs := by simpa [h]\n      rcases exists_cons_of_mem this with ⟨cs, hcs⟩\n      simp [h, hcs]\n      have : «expr ::ₘ » a as = «expr ::ₘ » b («expr ::ₘ » a cs) := by simp [eq, hcs]\n      have : «expr ::ₘ » a as = «expr ::ₘ » a («expr ::ₘ » b cs) := by rwa [cons_swap]\n      simpa using this\n  · intro h\n    rcases h with (⟨eq₁, eq₂⟩ | ⟨h, cs, eq₁, eq₂⟩)\n    · simp [*]\n    · simp [*, cons_swap a b]\n#align cons_eq_cons cons_eq_cons\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ::ₘ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ::ₘ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ::ₘ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ::ₘ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ::ₘ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ::ₘ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ::ₘ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ::ₘ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ::ₘ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ::ₘ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ::ₘ » -/\ntheorem cons_eq_cons {a b : α} {as bs : Multiset α} :\n    «expr ::ₘ » a as = «expr ::ₘ » b bs ↔\n      a = b ∧ as = bs ∨ a ≠ b ∧ ∃ cs, as = «expr ::ₘ » b cs ∧ bs = «expr ::ₘ » a cs :=\n  by\n  haveI : DecidableEq α := Classical.decEq α\n  constructor\n  · intro eq\n    by_cases a = b\n    · subst h\n      simp_all\n    · have : a ∈ «expr ::ₘ » b bs := Eq ▸ mem_cons_self _ _\n      have : a ∈ bs := by simpa [h]\n      rcases exists_cons_of_mem this with ⟨cs, hcs⟩\n      simp [h, hcs]\n      have : «expr ::ₘ » a as = «expr ::ₘ » b («expr ::ₘ » a cs) := by simp [Eq, hcs]\n      have : «expr ::ₘ » a as = «expr ::ₘ » a («expr ::ₘ » b cs) := by rwa [cons_swap]\n      simpa using this\n  · intro h\n    rcases h with (⟨eq₁, eq₂⟩ | ⟨h, cs, eq₁, eq₂⟩)\n    · simp [*]\n    · simp [*, cons_swap a b]\n#align cons_eq_cons cons_eq_cons\n\n",
  "cons_coe":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ::ₘ » -/\n@[simp]\ntheorem cons_coe (a : α) (l : list α) : («expr ::ₘ » a l : Multiset α) = (a :: l : list α) :=\n  rfl\n#align cons_coe cons_coe\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ::ₘ » -/\n@[simp]\ntheorem cons_coe (a : α) (l : List α) : («expr ::ₘ » a l : Multiset α) = (a :: l : List α) :=\n  rfl\n#align cons_coe cons_coe\n\n",
  "cons_add":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ::ₘ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ::ₘ » -/\n@[simp]\ntheorem cons_add (a : α) (s t : Multiset α) : «expr ::ₘ » a s + t = «expr ::ₘ » a (s + t) := by\n  rw [← singleton_add, ← singleton_add, add_assoc]\n#align cons_add cons_add\n\n",
  "coe_to_list":
  "@[simp, norm_cast]\ntheorem coe_to_list (s : Multiset α) : (s.to_list : Multiset α) = s :=\n  s.out_eq'\n#align coe_to_list coe_to_list\n\n",
  "coe_subsingleton_equiv":
- "@[simp]\ntheorem coe_subsingleton_equiv [subsingleton α] : (subsingletonEquiv α : list α → Multiset α) = coe :=\n  rfl\n#align coe_subsingleton_equiv coe_subsingleton_equiv\n\n",
+ "@[simp]\ntheorem coe_subsingleton_equiv [subsingleton α] : (subsingletonEquiv α : List α → Multiset α) = coe :=\n  rfl\n#align coe_subsingleton_equiv coe_subsingleton_equiv\n\n",
  "coe_subset":
- "@[simp]\ntheorem coe_subset {l₁ l₂ : list α} : (l₁ : Multiset α) ⊆ l₂ ↔ l₁ ⊆ l₂ :=\n  iff.rfl\n#align coe_subset coe_subset\n\n",
+ "@[simp]\ntheorem coe_subset {l₁ l₂ : List α} : (l₁ : Multiset α) ⊆ l₂ ↔ l₁ ⊆ l₂ :=\n  iff.rfl\n#align coe_subset coe_subset\n\n",
  "coe_sub":
- "@[simp]\ntheorem coe_sub (s t : list α) : (s - t : Multiset α) = (s.diff t : list α) :=\n  rfl\n#align coe_sub coe_sub\n\n",
+ "@[simp]\ntheorem coe_sub (s t : List α) : (s - t : Multiset α) = (s.diff t : List α) :=\n  rfl\n#align coe_sub coe_sub\n\n",
  "coe_singleton":
  "@[simp, norm_cast]\ntheorem coe_singleton (a : α) : ([a] : Multiset α) = {a} :=\n  rfl\n#align coe_singleton coe_singleton\n\n",
  "coe_reverse":
- "@[simp]\ntheorem coe_reverse (l : list α) : (reverse l : Multiset α) = l :=\n  quot.sound <| reverse_perm _\n#align coe_reverse coe_reverse\n\n",
+ "@[simp]\ntheorem coe_reverse (l : List α) : (reverse l : Multiset α) = l :=\n  quot.sound <| reverse_perm _\n#align coe_reverse coe_reverse\n\n",
  "coe_replicate":
- "theorem coe_replicate (n : ℕ) (a : α) : (list.replicate n a : Multiset α) = replicate n a :=\n  rfl\n#align coe_replicate coe_replicate\n\n",
+ "theorem coe_replicate (n : ℕ) (a : α) : (List.replicate n a : Multiset α) = replicate n a :=\n  rfl\n#align coe_replicate coe_replicate\n\n",
  "coe_pmap":
- "@[simp]\ntheorem coe_pmap {p : α → Prop} (f : ∀ a, p a → β) (l : list α) (H : ∀ a ∈ l, p a) : pmap f l H = l.pmap f H :=\n  rfl\n#align coe_pmap coe_pmap\n\n",
+ "@[simp]\ntheorem coe_pmap {p : α → Prop} (f : ∀ a, p a → β) (l : List α) (H : ∀ a ∈ l, p a) : pmap f l H = l.pmap f H :=\n  rfl\n#align coe_pmap coe_pmap\n\n",
  "coe_nil":
  "@[simp]\ntheorem coe_nil : (@nil α : Multiset α) = 0 :=\n  rfl\n#align coe_nil coe_nil\n\n",
  "coe_map_add_monoid_hom":
  "@[simp]\ntheorem coe_map_add_monoid_hom (f : α → β) : (mapAddMonoidHom f : Multiset α → Multiset β) = map f :=\n  rfl\n#align coe_map_add_monoid_hom coe_map_add_monoid_hom\n\n",
  "coe_map":
- "@[simp]\ntheorem coe_map (f : α → β) (l : list α) : map f ↑l = l.map f :=\n  rfl\n#align coe_map coe_map\n\n",
+ "@[simp]\ntheorem coe_map (f : α → β) (l : List α) : map f ↑l = l.map f :=\n  rfl\n#align coe_map coe_map\n\n",
  "coe_le":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr <+~ » -/\n@[simp]\ntheorem coe_le {l₁ l₂ : list α} : (l₁ : Multiset α) ≤ l₂ ↔ «expr <+~ » l₁ l₂ :=\n  iff.rfl\n#align coe_le coe_le\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr <+~ » -/\n@[simp]\ntheorem coe_le {l₁ l₂ : List α} : (l₁ : Multiset α) ≤ l₂ ↔ «expr <+~ » l₁ l₂ :=\n  iff.rfl\n#align coe_le coe_le\n\n",
  "coe_inter":
- "@[simp]\ntheorem coe_inter (s t : list α) : (s ∩ t : Multiset α) = (s.bag_inter t : list α) := by ext <;> simp\n#align coe_inter coe_inter\n\n",
+ "@[simp]\ntheorem coe_inter (s t : List α) : (s ∩ t : Multiset α) = (s.bag_inter t : List α) := by ext <;> simp\n#align coe_inter coe_inter\n\n",
  "coe_foldr_swap":
- "theorem coe_foldr_swap (f : α → β → β) (H : left_commutative f) (b : β) (l : list α) :\n    foldr f H b l = l.foldl (fun x y => f y x) b :=\n  (congr_arg (foldr f H b) (coe_reverse l)).symm.trans <| foldr_reverse _ _ _\n#align coe_foldr_swap coe_foldr_swap\n\n",
+ "theorem coe_foldr_swap (f : α → β → β) (H : left_commutative f) (b : β) (l : List α) :\n    foldr f H b l = l.foldl (fun x y => f y x) b :=\n  (congr_arg (foldr f H b) (coe_reverse l)).symm.trans <| foldr_reverse _ _ _\n#align coe_foldr_swap coe_foldr_swap\n\n",
  "coe_foldr":
- "@[simp]\ntheorem coe_foldr (f : α → β → β) (H : left_commutative f) (b : β) (l : list α) : foldr f H b l = l.foldr f b :=\n  rfl\n#align coe_foldr coe_foldr\n\n",
+ "@[simp]\ntheorem coe_foldr (f : α → β → β) (H : left_commutative f) (b : β) (l : List α) : foldr f H b l = l.foldr f b :=\n  rfl\n#align coe_foldr coe_foldr\n\n",
  "coe_foldl":
- "@[simp]\ntheorem coe_foldl (f : β → α → β) (H : right_commutative f) (b : β) (l : list α) : foldl f H b l = l.foldl f b :=\n  rfl\n#align coe_foldl coe_foldl\n\n",
+ "@[simp]\ntheorem coe_foldl (f : β → α → β) (H : right_commutative f) (b : β) (l : List α) : foldl f H b l = l.foldl f b :=\n  rfl\n#align coe_foldl coe_foldl\n\n",
  "coe_filter_map":
- "@[simp]\ntheorem coe_filter_map (f : α → option β) (l : list α) : filterMap f l = l.filter_map f :=\n  rfl\n#align coe_filter_map coe_filter_map\n\n",
+ "@[simp]\ntheorem coe_filter_map (f : α → Option β) (l : List α) : filterMap f l = l.filter_map f :=\n  rfl\n#align coe_filter_map coe_filter_map\n\n",
  "coe_filter":
- "@[simp]\ntheorem coe_filter (l : list α) : filter p ↑l = l.filter p :=\n  rfl\n#align coe_filter coe_filter\n\n",
+ "@[simp]\ntheorem coe_filter (l : List α) : filter p ↑l = l.filter p :=\n  rfl\n#align coe_filter coe_filter\n\n",
  "coe_erase":
- "@[simp]\ntheorem coe_erase (l : list α) (a : α) : erase (l : Multiset α) a = l.erase a :=\n  rfl\n#align coe_erase coe_erase\n\n",
+ "@[simp]\ntheorem coe_erase (l : List α) (a : α) : erase (l : Multiset α) a = l.erase a :=\n  rfl\n#align coe_erase coe_erase\n\n",
  "coe_eq_zero_iff_empty":
- "theorem coe_eq_zero_iff_empty (l : list α) : (l : Multiset α) = 0 ↔ l.empty :=\n  iff.trans (coe_eq_zero l) isEmpty_iff_eq_nil.symm\n#align coe_eq_zero_iff_empty coe_eq_zero_iff_empty\n\n",
+ "theorem coe_eq_zero_iff_empty (l : List α) : (l : Multiset α) = 0 ↔ l.empty :=\n  iff.trans (coe_eq_zero l) isEmpty_iff_eq_nil.symm\n#align coe_eq_zero_iff_empty coe_eq_zero_iff_empty\n\n",
  "coe_eq_zero":
- "@[simp]\ntheorem coe_eq_zero (l : list α) : (l : Multiset α) = 0 ↔ l = [] :=\n  iff.trans coe_eq_coe perm_nil\n#align coe_eq_zero coe_eq_zero\n\n",
+ "@[simp]\ntheorem coe_eq_zero (l : List α) : (l : Multiset α) = 0 ↔ l = [] :=\n  iff.trans coe_eq_coe perm_nil\n#align coe_eq_zero coe_eq_zero\n\n",
  "coe_eq_singleton":
- "@[simp, norm_cast]\ntheorem coe_eq_singleton {l : list α} {a : α} : (l : Multiset α) = {a} ↔ l = [a] := by\n  rw [← coe_singleton, coe_eq_coe, List.perm_singleton]\n#align coe_eq_singleton coe_eq_singleton\n\n",
+ "@[simp, norm_cast]\ntheorem coe_eq_singleton {l : List α} {a : α} : (l : Multiset α) = {a} ↔ l = [a] := by\n  rw [← coe_singleton, coe_eq_coe, List.perm_singleton]\n#align coe_eq_singleton coe_eq_singleton\n\n",
  "coe_eq_coe":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `list.perm -/\n@[simp]\ntheorem coe_eq_coe {l₁ l₂ : list α} : (l₁ : Multiset α) = l₂ ↔ list.perm l₁ l₂ :=\n  quotient.eq\n#align coe_eq_coe coe_eq_coe\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `list.perm -/\n@[simp]\ntheorem coe_eq_coe {l₁ l₂ : List α} : (l₁ : Multiset α) = l₂ ↔ list.perm l₁ l₂ :=\n  Quotient.eq'\n#align coe_eq_coe coe_eq_coe\n\n",
  "coe_disjoint":
- "@[simp]\ntheorem coe_disjoint (l₁ l₂ : list α) : @Disjoint α l₁ l₂ ↔ l₁.disjoint l₂ :=\n  iff.rfl\n#align coe_disjoint coe_disjoint\n\n",
+ "@[simp]\ntheorem coe_disjoint (l₁ l₂ : List α) : @Disjoint α l₁ l₂ ↔ l₁.disjoint l₂ :=\n  iff.rfl\n#align coe_disjoint coe_disjoint\n\n",
  "coe_countp_add_monoid_hom":
  "@[simp]\ntheorem coe_countp_add_monoid_hom : (countpAddMonoidHom p : Multiset α → ℕ) = countp p :=\n  rfl\n#align coe_countp_add_monoid_hom coe_countp_add_monoid_hom\n\n",
  "coe_countp":
- "@[simp]\ntheorem coe_countp (l : list α) : countp p l = l.countp p :=\n  rfl\n#align coe_countp coe_countp\n\n",
+ "@[simp]\ntheorem coe_countp (l : List α) : countp p l = l.countp p :=\n  rfl\n#align coe_countp coe_countp\n\n",
  "coe_count_add_monoid_hom":
  "@[simp]\ntheorem coe_count_add_monoid_hom {a : α} : (countAddMonoidHom a : Multiset α → ℕ) = count a :=\n  rfl\n#align coe_count_add_monoid_hom coe_count_add_monoid_hom\n\n",
  "coe_count":
- "@[simp]\ntheorem coe_count (a : α) (l : list α) : count a ↑l = l.count a :=\n  coe_countp _ _\n#align coe_count coe_count\n\n",
+ "@[simp]\ntheorem coe_count (a : α) (l : List α) : count a ↑l = l.count a :=\n  coe_countp _ _\n#align coe_count coe_count\n\n",
  "coe_card":
- "@[simp]\ntheorem coe_card (l : list α) : card (l : Multiset α) = length l :=\n  rfl\n#align coe_card coe_card\n\n",
+ "@[simp]\ntheorem coe_card (l : List α) : card (l : Multiset α) = length l :=\n  rfl\n#align coe_card coe_card\n\n",
  "coe_attach":
- "@[simp]\ntheorem coe_attach (l : list α) : @eq (Multiset { x // x ∈ l }) (@attach α l) l.attach :=\n  rfl\n#align coe_attach coe_attach\n\n",
+ "@[simp]\ntheorem coe_attach (l : List α) : @Eq (Multiset { x // x ∈ l }) (@attach α l) l.attach :=\n  rfl\n#align coe_attach coe_attach\n\n",
  "coe_add":
- "@[simp]\ntheorem coe_add (s t : list α) : (s + t : Multiset α) = (s ++ t : list α) :=\n  rfl\n#align coe_add coe_add\n\n",
+ "@[simp]\ntheorem coe_add (s t : List α) : (s + t : Multiset α) = (s ++ t : List α) :=\n  rfl\n#align coe_add coe_add\n\n",
  "choose_spec":
  "theorem choose_spec (hp : ∃! a, a ∈ l ∧ p a) : choose p l hp ∈ l ∧ p (choose p l hp) :=\n  (chooseX p l hp).property\n#align choose_spec choose_spec\n\n",
  "choose_property":
@@ -801,7 +799,7 @@
  "card_nsmul":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\ntheorem card_nsmul (s : Multiset α) (n : ℕ) : («expr • » n s).card = n * s.card := by\n  rw [card.map_nsmul s n, Nat.nsmul_eq_mul]\n#align card_nsmul card_nsmul\n\n",
  "card_mono":
- "@[mono]\ntheorem card_mono : monotone (@card α) := fun a b => card_le_of_le\n#align card_mono card_mono\n\n",
+ "@[mono]\ntheorem card_mono : Monotone (@card α) := fun a b => card_le_of_le\n#align card_mono card_mono\n\n",
  "card_map":
  "@[simp]\ntheorem card_map (f : α → β) (s) : card (map f s) = card s :=\n  Quot.inductionOn s fun l => length_map _ _\n#align card_map card_map\n\n",
  "card_lt_of_lt":
@@ -843,15 +841,15 @@
  "attach_map_val'":
  "theorem attach_map_val' (s : Multiset α) (f : α → β) : (s.attach.map fun i => f i.val) = s.map f :=\n  attach_map_val' _ _\n#align attach_map_val' attach_map_val'\n\n",
  "attach_map_val":
- "theorem attach_map_val (s : Multiset α) : s.attach.map subtype.val = s :=\n  attach_map_val _\n#align attach_map_val attach_map_val\n\n",
+ "theorem attach_map_val (s : Multiset α) : s.attach.map Subtype.val = s :=\n  attach_map_val _\n#align attach_map_val attach_map_val\n\n",
  "attach_map_coe'":
  "@[simp]\ntheorem attach_map_coe' (s : Multiset α) (f : α → β) : (s.attach.map fun i => f i) = s.map f :=\n  Quot.inductionOn s fun l => congr_arg coe <| attach_map_coe' l f\n#align attach_map_coe' attach_map_coe'\n\n",
  "attach_map_coe":
  "@[simp]\ntheorem attach_map_coe (s : Multiset α) : s.attach.map (coe : _ → α) = s :=\n  (attach_map_val' _ _).trans s.map_id\n#align attach_map_coe attach_map_coe\n\n",
  "attach_count_eq_count_coe":
- "@[simp]\ntheorem attach_count_eq_count_coe (m : Multiset α) (a) : m.attach.count a = m.count (a : α) :=\n  calc\n    m.attach.count a = (m.attach.map (coe : _ → α)).count (a : α) :=\n      (Multiset.count_map_eq_count' _ _ subtype.coe_injective _).symm\n    _ = m.count (a : α) := congr_arg _ m.attach_map_coe\n    \n#align attach_count_eq_count_coe attach_count_eq_count_coe\n\n",
+ "@[simp]\ntheorem attach_count_eq_count_coe (m : Multiset α) (a) : m.attach.count a = m.count (a : α) :=\n  calc\n    m.attach.count a = (m.attach.map (coe : _ → α)).count (a : α) :=\n      (Multiset.count_map_eq_count' _ _ Subtype.coe_injective _).symm\n    _ = m.count (a : α) := congr_arg _ m.attach_map_coe\n    \n#align attach_count_eq_count_coe attach_count_eq_count_coe\n\n",
  "attach_cons":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ::ₘ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ::ₘ » -/\ntheorem attach_cons (a : α) (m : Multiset α) :\n    («expr ::ₘ » a m).attach = «expr ::ₘ » ⟨a, mem_cons_self a m⟩ (m.attach.map fun p => ⟨p.1, mem_cons_of_mem p.2⟩) :=\n  Quotient.inductionOn m fun l =>\n    congr_arg coe <|\n      congr_arg (list.cons _) <| by rw [List.map_pmap] <;> exact List.pmap_congr _ fun _ _ _ _ => subtype.eq rfl\n#align attach_cons attach_cons\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ::ₘ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ::ₘ » -/\ntheorem attach_cons (a : α) (m : Multiset α) :\n    («expr ::ₘ » a m).attach = «expr ::ₘ » ⟨a, mem_cons_self a m⟩ (m.attach.map fun p => ⟨p.1, mem_cons_of_mem p.2⟩) :=\n  Quotient.inductionOn m fun l =>\n    congr_arg coe <|\n      congr_arg (List.cons _) <| by rw [List.map_pmap] <;> exact List.pmap_congr _ fun _ _ _ _ => Subtype.eq rfl\n#align attach_cons attach_cons\n\n",
  "add_union_distrib":
  "theorem add_union_distrib (s t u : Multiset α) : s + (t ∪ u) = s + t ∪ (s + u) := by\n  rw [add_comm, union_add_distrib, add_comm s, add_comm s]\n#align add_union_distrib add_union_distrib\n\n",
  "add_singleton_eq_iff":
@@ -861,10 +859,12 @@
  "add_inter_distrib":
  "theorem add_inter_distrib (s t u : Multiset α) : s + t ∩ u = (s + t) ∩ (s + u) := by\n  rw [add_comm, inter_add_distrib, add_comm s, add_comm s]\n#align add_inter_distrib add_inter_distrib\n\n",
  "add_hom_ext":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →+ » -/\n@[ext]\ntheorem add_hom_ext [add_zero_class β] ⦃f g : «expr →+ » (Multiset α) β⦄ (h : ∀ x, f {x} = g {x}) : f = g :=\n  by\n  ext s\n  induction' s using Multiset.induction_on with a s ih\n  · simp only [_root_.map_zero]\n  · simp only [← singleton_add, _root_.map_add, ih, h]\n#align add_hom_ext add_hom_ext\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →+ » -/\n@[ext]\ntheorem add_hom_ext [AddZeroClass β] ⦃f g : «expr →+ » (Multiset α) β⦄ (h : ∀ x, f {x} = g {x}) : f = g :=\n  by\n  ext s\n  induction' s using Multiset.induction_on with a s ih\n  · simp only [_root_.map_zero]\n  · simp only [← singleton_add, _root_.map_add, ih, h]\n#align add_hom_ext add_hom_ext\n\n",
  "add_eq_union_iff_disjoint":
- "theorem add_eq_union_iff_disjoint [decidable_eq α] {s t : Multiset α} : s + t = s ∪ t ↔ Disjoint s t := by\n  simp_rw [← inter_eq_zero_iff_disjoint, ext, count_add, count_union, count_inter, count_zero, Nat.min_eq_zero_iff,\n    Nat.add_eq_max_iff]\n#align add_eq_union_iff_disjoint add_eq_union_iff_disjoint\n\n",
+ "theorem add_eq_union_iff_disjoint [DecidableEq α] {s t : Multiset α} : s + t = s ∪ t ↔ Disjoint s t := by\n  simp_rw [← inter_eq_zero_iff_disjoint, ext, count_add, count_union, count_inter, count_zero, Nat.min_eq_zero_iff,\n    Nat.add_eq_max_iff]\n#align add_eq_union_iff_disjoint add_eq_union_iff_disjoint\n\n",
  "add_cons":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ::ₘ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ::ₘ » -/\n@[simp]\ntheorem add_cons (a : α) (s t : Multiset α) : s + «expr ::ₘ » a t = «expr ::ₘ » a (s + t) := by\n  rw [add_comm, cons_add, add_comm]\n#align add_cons add_cons\n\n",
  "add":
- "theorem rel.add {s t u v} (hst : Rel r s t) (huv : Rel r u v) : Rel r (s + u) (t + v) :=\n  by\n  induction hst\n  case zero => simpa using huv\n  case cons a b s t hab hst ih => simpa using ih.cons hab\n#align rel.add rel.add\n\n"}
+ "theorem rel.add {s t u v} (hst : Rel r s t) (huv : Rel r u v) : Rel r (s + u) (t + v) :=\n  by\n  induction hst\n  case zero => simpa using huv\n  case cons a b s t hab hst ih => simpa using ih.cons hab\n#align rel.add rel.add\n\n",
+ "WellFoundedLT":
+ "#print WellFoundedLT /-\n/-- Another way of expressing `strong_induction_on`: the `(<)` relation is well-founded. -/\ntheorem WellFoundedLT : well_founded ((· < ·) : Multiset α → Multiset α → Prop) :=\n  subrelation.wf (fun _ _ => Multiset.card_lt_of_lt) (measure_wf Multiset.card)\n#align well_founded_lt WellFoundedLT\n-/\n\n"}

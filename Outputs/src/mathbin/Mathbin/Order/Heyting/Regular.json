@@ -3,7 +3,7 @@
  "is_regular_top":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\ntheorem is_regular_top : IsRegular («expr⊤» : α) := by rw [IsRegular, compl_top, compl_bot]\n#align is_regular_top is_regular_top\n\n",
  "is_regular_of_decidable":
- "/-- A decidable proposition is intuitionistically Heyting-regular. -/\n@[nolint decidable_classical]\ntheorem is_regular_of_decidable (p : Prop) [decidable p] : IsRegular p :=\n  propext <| decidable.not_not_iff _\n#align is_regular_of_decidable is_regular_of_decidable\n\n",
+ "/-- A decidable proposition is intuitionistically Heyting-regular. -/\n@[nolint decidable_classical]\ntheorem is_regular_of_decidable (p : Prop) [Decidable p] : IsRegular p :=\n  propext <| decidable.not_not_iff _\n#align is_regular_of_decidable is_regular_of_decidable\n\n",
  "is_regular_of_boolean":
  "theorem is_regular_of_boolean : ∀ a : α, IsRegular a :=\n  compl_compl\n#align is_regular_of_boolean is_regular_of_boolean\n\n",
  "is_regular_compl":
@@ -33,9 +33,9 @@
  "coe_le_coe":
  "@[simp, norm_cast]\ntheorem coe_le_coe {a b : Regular α} : (a : α) ≤ b ↔ a ≤ b :=\n  iff.rfl\n#align coe_le_coe coe_le_coe\n\n",
  "coe_injective":
- "-- See note [reducible non-instances]\ntheorem coe_injective : injective (coe : Regular α → α) :=\n  subtype.coe_injective\n#align coe_injective coe_injective\n\n",
+ "-- See note [reducible non-instances]\ntheorem coe_injective : injective (coe : Regular α → α) :=\n  Subtype.coe_injective\n#align coe_injective coe_injective\n\n",
  "coe_inj":
- "@[simp]\ntheorem coe_inj {a b : Regular α} : (a : α) = b ↔ a = b :=\n  subtype.coe_inj\n#align coe_inj coe_inj\n\n",
+ "@[simp]\ntheorem coe_inj {a b : Regular α} : (a : α) = b ↔ a = b :=\n  Subtype.coe_inj\n#align coe_inj coe_inj\n\n",
  "coe_inf":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊓ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊓ » -/\n@[simp, norm_cast]\ntheorem coe_inf (a b : Regular α) : (↑(«expr ⊓ » a b) : α) = «expr ⊓ » a b :=\n  rfl\n#align coe_inf coe_inf\n\n",
  "coe_himp":

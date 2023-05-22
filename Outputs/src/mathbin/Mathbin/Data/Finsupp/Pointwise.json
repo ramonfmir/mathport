@@ -1,5 +1,5 @@
 {"support_mul":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →₀ » -/\ntheorem support_mul [decidable_eq α] {g₁ g₂ : «expr →₀ » α β} : (g₁ * g₂).support ⊆ g₁.support ∩ g₂.support :=\n  by\n  intro a h\n  simp only [mul_apply, mem_support_iff] at h\n  simp only [mem_support_iff, mem_inter, ne.def]\n  rw [← not_or]\n  intro w\n  apply h\n  cases w <;>\n    · rw [w]\n      simp\n#align support_mul support_mul\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →₀ » -/\ntheorem support_mul [DecidableEq α] {g₁ g₂ : «expr →₀ » α β} : (g₁ * g₂).support ⊆ g₁.support ∩ g₂.support :=\n  by\n  intro a h\n  simp only [mul_apply, mem_support_iff] at h\n  simp only [mem_support_iff, mem_inter, ne.def]\n  rw [← not_or]\n  intro w\n  apply h\n  cases w <;>\n    · rw [w]\n      simp\n#align support_mul support_mul\n\n",
  "mul_apply":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →₀ » -/\n@[simp]\ntheorem mul_apply {g₁ g₂ : «expr →₀ » α β} {a : α} : (g₁ * g₂) a = g₁ a * g₂ a :=\n  rfl\n#align mul_apply mul_apply\n\n",
  "coe_pointwise_smul":

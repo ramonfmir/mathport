@@ -5,4 +5,4 @@
  "multiset_sum_left":
  "theorem multiset_sum_left (s : Multiset α) (b : α) (h : ∀ a ∈ s, Commute a b) : Commute s.sum b :=\n  (Commute.multiset_sum_right _ _ fun a ha => (h _ ha).symm).symm\n#align multiset_sum_left multiset_sum_left\n\n",
  "dvd_prod":
- "/-\nCopyright (c) 2019 Chris Hughes. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Chris Hughes, Bhavik Mehta, Eric Wieser\n-/\ntheorem dvd_prod [comm_monoid α] {s : Multiset α} {a : α} : a ∈ s → a ∣ s.prod :=\n  Quotient.inductionOn s (fun l a h => by simpa using List.dvd_prod h) a\n#align dvd_prod dvd_prod\n\n"}
+ "/-\nCopyright (c) 2019 Chris Hughes. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Chris Hughes, Bhavik Mehta, Eric Wieser\n-/\ntheorem dvd_prod [CommMonoid α] {s : Multiset α} {a : α} : a ∈ s → a ∣ s.prod :=\n  Quotient.inductionOn s (fun l a h => by simpa using List.dvd_prod h) a\n#align dvd_prod dvd_prod\n\n"}

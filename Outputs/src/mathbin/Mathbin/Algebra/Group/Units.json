@@ -1,91 +1,93 @@
 {"val_mkOfMulEqOne":
- "#print Units.val_mkOfMulEqOne /-\n@[simp, to_additive]\ntheorem Units.val_mkOfMulEqOne [comm_monoid α] {a b : α} (h : a * b = 1) : (units.mk_of_mul_eq_one a b h : α) = a :=\n  rfl\n#align units.coe_mk_of_mul_eq_one Units.val_mkOfMulEqOne\n-/\n\n",
+ "#print Units.val_mkOfMulEqOne /-\n@[simp, to_additive]\ntheorem Units.val_mkOfMulEqOne [CommMonoid α] {a b : α} (h : a * b = 1) : (Units.mkOfMulEqOne a b h : α) = a :=\n  rfl\n#align units.coe_mk_of_mul_eq_one Units.val_mkOfMulEqOne\n#align add_units.coe_mk_of_add_eq_zero AddUnits.val_mkOfAddEqZero\n-/\n\n",
  "val_eq_coe":
  "@[simp, to_additive]\ntheorem val_eq_coe : a.val = (↑a : α) :=\n  rfl\n#align val_eq_coe val_eq_coe\n\n",
  "val_div_eq_divp":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ˣ» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr /ₚ » -/\n#print val_div_eq_divp /-\n/-- `field_simp` moves division inside `αˣ` to the right, and this lemma\nlifts the calculation to `α`.\n-/\n@[field_simps]\ntheorem val_div_eq_divp (u₁ u₂ : «expr ˣ» α) : ↑(u₁ / u₂) = «expr /ₚ » (↑u₁) u₂ := by\n  rw [divp, division_def, Units.val_mul]\n#align coe_div_eq_divp val_div_eq_divp\n-/\n\n",
  "unit_spec":
- "@[simp, to_additive]\ntheorem unit_spec (h : is_unit a) : ↑h.unit = a :=\n  rfl\n#align unit_spec unit_spec\n\n",
+ "@[simp, to_additive]\ntheorem unit_spec (h : IsUnit a) : ↑h.unit = a :=\n  rfl\n#align unit_spec unit_spec\n\n",
  "unit_of_coe_units":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ˣ» -/\n@[simp, to_additive]\ntheorem unit_of_coe_units {a : «expr ˣ» M} (h : is_unit (a : M)) : h.unit = a :=\n  Units.ext <| rfl\n#align unit_of_coe_units unit_of_coe_units\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ˣ» -/\n@[simp, to_additive]\ntheorem unit_of_coe_units {a : «expr ˣ» M} (h : IsUnit (a : M)) : h.unit = a :=\n  Units.ext <| rfl\n#align unit_of_coe_units unit_of_coe_units\n\n",
  "unique_one":
- "#print unique_one /-\n/-\nCopyright (c) 2017 Kenny Lau. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Kenny Lau, Mario Carneiro, Johannes Hölzl, Chris Hughes, Jens Wagemaker, Jon Eugster\n-/\n-- We don't provide notation for the additive version, because its use is somewhat rare.\n@[to_additive]\ntheorem unique_one {α : Type _} [unique α] [One α] : default = (1 : α) :=\n  unique.default_eq 1\n#align unique_has_one unique_one\n-/\n\n",
+ "#print unique_one /-\n/-\nCopyright (c) 2017 Kenny Lau. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Kenny Lau, Mario Carneiro, Johannes Hölzl, Chris Hughes, Jens Wagemaker, Jon Eugster\n-/\n-- We don't provide notation for the additive version, because its use is somewhat rare.\n@[to_additive]\ntheorem unique_one {α : Type _} [Unique α] [One α] : default = (1 : α) :=\n  Unique.default_eq 1\n#align unique_has_one unique_one\n#align unique_has_zero unique_zero\n-/\n\n",
  "one_divp":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ˣ» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr /ₚ » -/\n#print one_divp /-\n@[simp]\ntheorem one_divp (u : «expr ˣ» α) : «expr /ₚ » 1 u = ↑u⁻¹ :=\n  one_mul _\n#align one_divp one_divp\n-/\n\n",
  "mul_right_injective":
- "#print mul_right_injective /-\n@[to_additive]\nprotected theorem mul_right_injective (h : is_unit a) : injective ((· * ·) a) := fun _ _ => h.mul_left_cancel\n#align mul_right_injective mul_right_injective\n-/\n\n",
+ "#print mul_right_injective /-\n@[to_additive]\nprotected theorem mul_right_injective (h : IsUnit a) : injective ((· * ·) a) := fun _ _ => h.mul_left_cancel\n#align mul_right_injective mul_right_injective\n#align add_right_injective add_right_injective\n-/\n\n",
  "mul_right_inj":
- "#print mul_right_inj /-\n@[to_additive]\ntheorem mul_right_inj (h : is_unit a) : a * b = a * c ↔ b = c :=\n  let ⟨u, hu⟩ := h\n  hu ▸ u.mul_right_inj\n#align mul_right_inj mul_right_inj\n-/\n\n",
+ "#print mul_right_inj /-\n@[to_additive]\ntheorem mul_right_inj (h : IsUnit a) : a * b = a * c ↔ b = c :=\n  let ⟨u, hu⟩ := h\n  hu ▸ u.mul_right_inj\n#align mul_right_inj mul_right_inj\n#align add_right_inj add_right_inj\n-/\n\n",
  "mul_right_cancel":
- "#print mul_right_cancel /-\n@[to_additive]\nprotected theorem mul_right_cancel (h : is_unit b) : a * b = c * b → a = c :=\n  h.mul_left_inj.1\n#align mul_right_cancel mul_right_cancel\n-/\n\n",
+ "#print mul_right_cancel /-\n@[to_additive]\nprotected theorem mul_right_cancel (h : IsUnit b) : a * b = c * b → a = c :=\n  h.mul_left_inj.1\n#align mul_right_cancel mul_right_cancel\n#align add_right_cancel add_right_cancel\n-/\n\n",
  "mul_left_injective":
- "#print mul_left_injective /-\n@[to_additive]\nprotected theorem mul_left_injective (h : is_unit b) : injective (· * b) := fun _ _ => h.mul_right_cancel\n#align mul_left_injective mul_left_injective\n-/\n\n",
+ "#print mul_left_injective /-\n@[to_additive]\nprotected theorem mul_left_injective (h : IsUnit b) : injective (· * b) := fun _ _ => h.mul_right_cancel\n#align mul_left_injective mul_left_injective\n#align add_left_injective add_left_injective\n-/\n\n",
  "mul_left_inj":
- "#print mul_left_inj /-\n@[to_additive]\ntheorem mul_left_inj (h : is_unit a) : b * a = c * a ↔ b = c :=\n  let ⟨u, hu⟩ := h\n  hu ▸ u.mul_left_inj\n#align mul_left_inj mul_left_inj\n-/\n\n",
+ "#print mul_left_inj /-\n@[to_additive]\ntheorem mul_left_inj (h : IsUnit a) : b * a = c * a ↔ b = c :=\n  let ⟨u, hu⟩ := h\n  hu ▸ u.mul_left_inj\n#align mul_left_inj mul_left_inj\n#align add_left_inj add_left_inj\n-/\n\n",
  "mul_left_cancel":
- "#print mul_left_cancel /-\n@[to_additive]\nprotected theorem mul_left_cancel (h : is_unit a) : a * b = a * c → b = c :=\n  h.mul_right_inj.1\n#align mul_left_cancel mul_left_cancel\n-/\n\n",
+ "#print mul_left_cancel /-\n@[to_additive]\nprotected theorem mul_left_cancel (h : IsUnit a) : a * b = a * c → b = c :=\n  h.mul_right_inj.1\n#align mul_left_cancel mul_left_cancel\n#align add_left_cancel add_left_cancel\n-/\n\n",
  "mul_inv_of_eq":
  "@[to_additive]\ntheorem mul_inv_of_eq {a : α} (h : ↑u = a) : a * ↑u⁻¹ = 1 := by rw [← h, u.mul_inv]\n#align mul_inv_of_eq mul_inv_of_eq\n\n",
  "mul_inv_eq_one":
- "#print mul_inv_eq_one /-\n@[simp, to_additive]\ntheorem mul_inv_eq_one {a : α} : a * ↑u⁻¹ = 1 ↔ a = u :=\n  ⟨inv_inv u ▸ units.eq_inv_of_mul_eq_one_right, fun h => mul_inv_of_eq h.symm⟩\n#align mul_inv_eq_one mul_inv_eq_one\n-/\n\n",
+ "#print mul_inv_eq_one /-\n@[simp, to_additive]\ntheorem mul_inv_eq_one {a : α} : a * ↑u⁻¹ = 1 ↔ a = u :=\n  ⟨inv_inv u ▸ Units.eq_inv_of_mul_eq_one_right, fun h => mul_inv_of_eq h.symm⟩\n#align mul_inv_eq_one mul_inv_eq_one\n#align add_neg_eq_zero add_neg_eq_zero\n-/\n\n",
  "mul_inv_eq_iff_eq_mul":
- "#print mul_inv_eq_iff_eq_mul /-\n@[to_additive]\ntheorem mul_inv_eq_iff_eq_mul {a c : α} : a * ↑b⁻¹ = c ↔ a = c * b :=\n  ⟨fun h => by rw [← h, inv_mul_cancel_right], fun h => by rw [h, mul_inv_cancel_right]⟩\n#align mul_inv_eq_iff_eq_mul mul_inv_eq_iff_eq_mul\n-/\n\n",
+ "#print mul_inv_eq_iff_eq_mul /-\n@[to_additive]\ntheorem mul_inv_eq_iff_eq_mul {a c : α} : a * ↑b⁻¹ = c ↔ a = c * b :=\n  ⟨fun h => by rw [← h, inv_mul_cancel_right], fun h => by rw [h, mul_inv_cancel_right]⟩\n#align mul_inv_eq_iff_eq_mul mul_inv_eq_iff_eq_mul\n#align add_neg_eq_iff_eq_add add_neg_eq_iff_eq_add\n-/\n\n",
  "mul_inv_cancel_right":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ˣ» -/\n#print mul_inv_cancel_right /-\n@[simp, to_additive]\ntheorem mul_inv_cancel_right (a : α) (b : «expr ˣ» α) : a * b * ↑b⁻¹ = a := by rw [mul_assoc, mul_inv, mul_one]\n#align mul_inv_cancel_right mul_inv_cancel_right\n-/\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ˣ» -/\n#print mul_inv_cancel_right /-\n@[simp, to_additive]\ntheorem mul_inv_cancel_right (a : α) (b : «expr ˣ» α) : a * b * ↑b⁻¹ = a := by rw [mul_assoc, mul_inv, mul_one]\n#align mul_inv_cancel_right mul_inv_cancel_right\n#align add_neg_cancel_right add_neg_cancel_right\n-/\n\n",
  "mul_inv_cancel_left":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ˣ» -/\n#print mul_inv_cancel_left /-\n@[simp, to_additive]\ntheorem mul_inv_cancel_left (a : «expr ˣ» α) (b : α) : (a : α) * (↑a⁻¹ * b) = b := by rw [← mul_assoc, mul_inv, one_mul]\n#align mul_inv_cancel_left mul_inv_cancel_left\n-/\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ˣ» -/\n#print mul_inv_cancel_left /-\n@[simp, to_additive]\ntheorem mul_inv_cancel_left (a : «expr ˣ» α) (b : α) : (a : α) * (↑a⁻¹ * b) = b := by rw [← mul_assoc, mul_inv, one_mul]\n#align mul_inv_cancel_left mul_inv_cancel_left\n#align add_neg_cancel_left add_neg_cancel_left\n-/\n\n",
  "mul_inv_cancel":
- "#print mul_inv_cancel /-\n@[simp, to_additive]\nprotected theorem mul_inv_cancel : is_unit a → a * a⁻¹ = 1 :=\n  by\n  rintro ⟨u, rfl⟩\n  rw [← Units.val_inv_eq_inv_val, Units.mul_inv]\n#align mul_inv_cancel mul_inv_cancel\n-/\n\n",
+ "#print mul_inv_cancel /-\n@[simp, to_additive]\nprotected theorem mul_inv_cancel : IsUnit a → a * a⁻¹ = 1 :=\n  by\n  rintro ⟨u, rfl⟩\n  rw [← Units.val_inv_eq_inv_val, Units.mul_inv]\n#align mul_inv_cancel mul_inv_cancel\n-/\n\n",
  "mul_inv":
- "#print mul_inv /-\n@[simp, to_additive]\ntheorem mul_inv : (a * ↑a⁻¹ : α) = 1 :=\n  val_inv _\n#align mul_inv mul_inv\n-/\n\n",
+ "#print mul_inv /-\n@[simp, to_additive]\ntheorem mul_inv : (a * ↑a⁻¹ : α) = 1 :=\n  val_inv _\n#align mul_inv mul_inv\n#align neg_add neg_add\n-/\n\n",
  "mul_iff":
- "@[simp, to_additive]\ntheorem mul_iff [comm_monoid M] {x y : M} : is_unit (x * y) ↔ is_unit x ∧ is_unit y :=\n  ⟨fun h => ⟨isUnit_of_mul_isUnit_left h, isUnit_of_mul_isUnit_right h⟩, fun h => is_unit.mul h.1 h.2⟩\n#align mul_iff mul_iff\n\n",
+ "@[simp, to_additive]\ntheorem mul_iff [CommMonoid M] {x y : M} : IsUnit (x * y) ↔ IsUnit x ∧ IsUnit y :=\n  ⟨fun h => ⟨isUnit_of_mul_isUnit_left h, isUnit_of_mul_isUnit_right h⟩, fun h => IsUnit.mul h.1 h.2⟩\n#align mul_iff mul_iff\n\n",
  "mul_eq_one_iff_inv_eq":
- "#print mul_eq_one_iff_inv_eq /-\n@[to_additive]\ntheorem mul_eq_one_iff_inv_eq {a : α} : ↑u * a = 1 ↔ ↑u⁻¹ = a := by rw [← inv_mul_eq_one, inv_inv]\n#align mul_eq_one_iff_inv_eq mul_eq_one_iff_inv_eq\n-/\n\n",
+ "#print mul_eq_one_iff_inv_eq /-\n@[to_additive]\ntheorem mul_eq_one_iff_inv_eq {a : α} : ↑u * a = 1 ↔ ↑u⁻¹ = a := by rw [← inv_mul_eq_one, inv_inv]\n#align mul_eq_one_iff_inv_eq mul_eq_one_iff_inv_eq\n#align add_eq_zero_iff_neg_eq add_eq_zero_iff_neg_eq\n-/\n\n",
  "mul_eq_one_iff_eq_inv":
- "#print mul_eq_one_iff_eq_inv /-\n@[to_additive]\ntheorem mul_eq_one_iff_eq_inv {a : α} : a * u = 1 ↔ a = ↑u⁻¹ := by rw [← mul_inv_eq_one, inv_inv]\n#align mul_eq_one_iff_eq_inv mul_eq_one_iff_eq_inv\n-/\n\n",
+ "#print mul_eq_one_iff_eq_inv /-\n@[to_additive]\ntheorem mul_eq_one_iff_eq_inv {a : α} : a * u = 1 ↔ a = ↑u⁻¹ := by rw [← mul_inv_eq_one, inv_inv]\n#align mul_eq_one_iff_eq_inv mul_eq_one_iff_eq_inv\n#align add_eq_zero_iff_eq_neg add_eq_zero_iff_eq_neg\n-/\n\n",
+ "mul_eq_one":
+ "#print mul_eq_one /-\n@[simp, to_additive]\ntheorem mul_eq_one : a * b = 1 ↔ a = 1 ∧ b = 1 :=\n  ⟨fun h => ⟨eq_one_of_mul_right h, eq_one_of_mul_left h⟩,\n    by\n    rintro ⟨rfl, rfl⟩\n    exact mul_one _⟩\n#align mul_eq_one mul_eq_one\n#align add_eq_zero add_eq_zero\n-/\n\n",
  "mul_divp_cancel":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ˣ» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr /ₚ » -/\n#print mul_divp_cancel /-\n@[simp]\ntheorem mul_divp_cancel (a : α) (u : «expr ˣ» α) : «expr /ₚ » (a * u) u = a :=\n  (mul_assoc _ _ _).trans <| by rw [Units.mul_inv, mul_one]\n#align mul_divp_cancel mul_divp_cancel\n-/\n\n",
  "mul_coe_inv":
- "@[simp, to_additive]\ntheorem mul_coe_inv (h : is_unit a) : a * ↑h.unit⁻¹ = 1 := by convert h.unit.mul_inv\n#align mul_coe_inv mul_coe_inv\n\n",
+ "@[simp, to_additive]\ntheorem mul_coe_inv (h : IsUnit a) : a * ↑h.unit⁻¹ = 1 := by convert h.unit.mul_inv\n#align mul_coe_inv mul_coe_inv\n\n",
  "mul":
- "@[to_additive]\ntheorem is_unit.mul [monoid M] {x y : M} : is_unit x → is_unit y → is_unit (x * y) :=\n  by\n  rintro ⟨x, rfl⟩ ⟨y, rfl⟩\n  exact ⟨x * y, Units.val_mul _ _⟩\n#align is_unit.mul is_unit.mul\n\n",
+ "#print IsUnit.mul /-\n@[to_additive]\ntheorem IsUnit.mul [Monoid M] {x y : M} : IsUnit x → IsUnit y → IsUnit (x * y) :=\n  by\n  rintro ⟨x, rfl⟩ ⟨y, rfl⟩\n  exact ⟨x * y, Units.val_mul _ _⟩\n#align is_unit.mul IsUnit.mul\n#align is_add_unit.add IsAddUnit.add\n-/\n\n",
  "mk_coe":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ˣ» -/\n@[simp, to_additive]\ntheorem mk_coe (u : «expr ˣ» α) (y h₁ h₂) : mk (u : α) y h₁ h₂ = u :=\n  ext rfl\n#align mk_coe mk_coe\n\n",
  "isUnit_units_mul":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ˣ» -/\n#print Units.isUnit_units_mul /-\n/-- Multiplication by a `u : Mˣ` on the left doesn't affect `is_unit`. -/\n@[simp, to_additive \"Addition of a `u : add_units M` on the left doesn't affect `is_add_unit`.\"]\ntheorem Units.isUnit_units_mul {M : Type _} [monoid M] (u : «expr ˣ» M) (a : M) : is_unit (↑u * a) ↔ is_unit a :=\n  iff.intro\n    (fun ⟨v, hv⟩ => by\n      have : is_unit (↑u⁻¹ * (↑u * a)) := by exists u⁻¹ * v <;> rw [← hv, Units.val_mul]\n      rwa [← mul_assoc, Units.inv_mul, one_mul] at this)\n    u.is_unit.mul\n#align units.is_unit_units_mul Units.isUnit_units_mul\n-/\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ˣ» -/\n#print Units.isUnit_units_mul /-\n/-- Multiplication by a `u : Mˣ` on the left doesn't affect `is_unit`. -/\n@[simp, to_additive \"Addition of a `u : add_units M` on the left doesn't affect `is_add_unit`.\"]\ntheorem Units.isUnit_units_mul {M : Type _} [Monoid M] (u : «expr ˣ» M) (a : M) : IsUnit (↑u * a) ↔ IsUnit a :=\n  iff.intro\n    (fun ⟨v, hv⟩ => by\n      have : IsUnit (↑u⁻¹ * (↑u * a)) := by exists u⁻¹ * v <;> rw [← hv, Units.val_mul]\n      rwa [← mul_assoc, Units.inv_mul, one_mul] at this)\n    u.is_unit.mul\n#align units.is_unit_units_mul Units.isUnit_units_mul\n#align add_units.is_add_unit_add_units_add AddUnits.isAddUnit_addUnits_add\n-/\n\n",
  "isUnit_one":
- "#print isUnit_one /-\n@[simp, to_additive]\ntheorem isUnit_one [monoid M] : is_unit (1 : M) :=\n  ⟨1, rfl⟩\n#align is_unit_one isUnit_one\n-/\n\n",
+ "#print isUnit_one /-\n@[simp, to_additive]\ntheorem isUnit_one [Monoid M] : IsUnit (1 : M) :=\n  ⟨1, rfl⟩\n#align is_unit_one isUnit_one\n#align is_add_unit_zero isAddUnit_zero\n-/\n\n",
  "isUnit_of_subsingleton":
- "#print isUnit_of_subsingleton /-\n@[nontriviality, to_additive]\ntheorem isUnit_of_subsingleton [monoid M] [subsingleton M] (a : M) : is_unit a :=\n  ⟨⟨a, a, subsingleton.elim _ _, subsingleton.elim _ _⟩, rfl⟩\n#align is_unit_of_subsingleton isUnit_of_subsingleton\n-/\n\n",
+ "#print isUnit_of_subsingleton /-\n@[nontriviality, to_additive]\ntheorem isUnit_of_subsingleton [Monoid M] [subsingleton M] (a : M) : IsUnit a :=\n  ⟨⟨a, a, subsingleton.elim _ _, subsingleton.elim _ _⟩, rfl⟩\n#align is_unit_of_subsingleton isUnit_of_subsingleton\n#align is_add_unit_of_subsingleton isAddUnit_of_subsingleton\n-/\n\n",
  "isUnit_of_mul_isUnit_right":
- "#print isUnit_of_mul_isUnit_right /-\n@[to_additive]\ntheorem isUnit_of_mul_isUnit_right [comm_monoid M] {x y : M} (hu : is_unit (x * y)) : is_unit y :=\n  @isUnit_of_mul_isUnit_left _ _ y x <| by rwa [mul_comm]\n#align is_unit_of_mul_is_unit_right isUnit_of_mul_isUnit_right\n-/\n\n",
+ "#print isUnit_of_mul_isUnit_right /-\n@[to_additive]\ntheorem isUnit_of_mul_isUnit_right [CommMonoid M] {x y : M} (hu : IsUnit (x * y)) : IsUnit y :=\n  @isUnit_of_mul_isUnit_left _ _ y x <| by rwa [mul_comm]\n#align is_unit_of_mul_is_unit_right isUnit_of_mul_isUnit_right\n#align is_add_unit_of_add_is_add_unit_right isAddUnit_of_add_isAddUnit_right\n-/\n\n",
  "isUnit_of_mul_isUnit_left":
- "#print isUnit_of_mul_isUnit_left /-\n@[to_additive]\ntheorem isUnit_of_mul_isUnit_left [comm_monoid M] {x y : M} (hu : is_unit (x * y)) : is_unit x :=\n  let ⟨z, hz⟩ := isUnit_iff_exists_inv.1 hu\n  isUnit_iff_exists_inv.2 ⟨y * z, by rwa [← mul_assoc]⟩\n#align is_unit_of_mul_is_unit_left isUnit_of_mul_isUnit_left\n-/\n\n",
+ "#print isUnit_of_mul_isUnit_left /-\n@[to_additive]\ntheorem isUnit_of_mul_isUnit_left [CommMonoid M] {x y : M} (hu : IsUnit (x * y)) : IsUnit x :=\n  let ⟨z, hz⟩ := isUnit_iff_exists_inv.1 hu\n  isUnit_iff_exists_inv.2 ⟨y * z, by rwa [← mul_assoc]⟩\n#align is_unit_of_mul_is_unit_left isUnit_of_mul_isUnit_left\n#align is_add_unit_of_add_is_add_unit_left isAddUnit_of_add_isAddUnit_left\n-/\n\n",
  "isUnit_of_mul_eq_one":
- "#print isUnit_of_mul_eq_one /-\n@[to_additive]\ntheorem isUnit_of_mul_eq_one [comm_monoid M] (a b : M) (h : a * b = 1) : is_unit a :=\n  ⟨units.mk_of_mul_eq_one a b h, rfl⟩\n#align is_unit_of_mul_eq_one isUnit_of_mul_eq_one\n-/\n\n",
+ "#print isUnit_of_mul_eq_one /-\n@[to_additive]\ntheorem isUnit_of_mul_eq_one [CommMonoid M] (a b : M) (h : a * b = 1) : IsUnit a :=\n  ⟨Units.mkOfMulEqOne a b h, rfl⟩\n#align is_unit_of_mul_eq_one isUnit_of_mul_eq_one\n#align is_add_unit_of_add_eq_zero isAddUnit_of_add_eq_zero\n-/\n\n",
  "isUnit_mul_units":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ˣ» -/\n#print Units.isUnit_mul_units /-\n/-- Multiplication by a `u : Mˣ` on the right doesn't affect `is_unit`. -/\n@[simp, to_additive \"Addition of a `u : add_units M` on the right doesn't\\naffect `is_add_unit`.\"]\ntheorem Units.isUnit_mul_units [monoid M] (a : M) (u : «expr ˣ» M) : is_unit (a * u) ↔ is_unit a :=\n  iff.intro\n    (fun ⟨v, hv⟩ => by\n      have : is_unit (a * ↑u * ↑u⁻¹) := by exists v * u⁻¹ <;> rw [← hv, Units.val_mul]\n      rwa [mul_assoc, Units.mul_inv, mul_one] at this)\n    fun v => v.mul u.is_unit\n#align units.is_unit_mul_units Units.isUnit_mul_units\n-/\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ˣ» -/\n#print Units.isUnit_mul_units /-\n/-- Multiplication by a `u : Mˣ` on the right doesn't affect `is_unit`. -/\n@[simp, to_additive \"Addition of a `u : add_units M` on the right doesn't\\naffect `is_add_unit`.\"]\ntheorem Units.isUnit_mul_units [Monoid M] (a : M) (u : «expr ˣ» M) : IsUnit (a * u) ↔ IsUnit a :=\n  iff.intro\n    (fun ⟨v, hv⟩ => by\n      have : IsUnit (a * ↑u * ↑u⁻¹) := by exists v * u⁻¹ <;> rw [← hv, Units.val_mul]\n      rwa [mul_assoc, Units.mul_inv, mul_one] at this)\n    fun v => v.mul u.is_unit\n#align units.is_unit_mul_units Units.isUnit_mul_units\n#align add_units.is_add_unit_add_add_units AddUnits.isAddUnit_add_addUnits\n-/\n\n",
  "isUnit_iff_exists_inv'":
- "#print isUnit_iff_exists_inv' /-\n@[to_additive]\ntheorem isUnit_iff_exists_inv' [comm_monoid M] {a : M} : is_unit a ↔ ∃ b, b * a = 1 := by\n  simp [isUnit_iff_exists_inv, mul_comm]\n#align is_unit_iff_exists_inv' isUnit_iff_exists_inv'\n-/\n\n",
+ "#print isUnit_iff_exists_inv' /-\n@[to_additive]\ntheorem isUnit_iff_exists_inv' [CommMonoid M] {a : M} : IsUnit a ↔ ∃ b, b * a = 1 := by\n  simp [isUnit_iff_exists_inv, mul_comm]\n#align is_unit_iff_exists_inv' isUnit_iff_exists_inv'\n#align is_add_unit_iff_exists_neg' isAddUnit_iff_exists_neg'\n-/\n\n",
  "isUnit_iff_exists_inv":
- "#print isUnit_iff_exists_inv /-\n@[to_additive]\ntheorem isUnit_iff_exists_inv [comm_monoid M] {a : M} : is_unit a ↔ ∃ b, a * b = 1 :=\n  ⟨fun h => h.exists_right_inv, fun ⟨b, hab⟩ => isUnit_of_mul_eq_one _ b hab⟩\n#align is_unit_iff_exists_inv isUnit_iff_exists_inv\n-/\n\n",
+ "#print isUnit_iff_exists_inv /-\n@[to_additive]\ntheorem isUnit_iff_exists_inv [CommMonoid M] {a : M} : IsUnit a ↔ ∃ b, a * b = 1 :=\n  ⟨fun h => h.exists_right_inv, fun ⟨b, hab⟩ => isUnit_of_mul_eq_one _ b hab⟩\n#align is_unit_iff_exists_inv isUnit_iff_exists_inv\n#align is_add_unit_iff_exists_neg isAddUnit_iff_exists_neg\n-/\n\n",
  "isUnit":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ˣ» -/\n#print Units.isUnit /-\n@[simp, to_additive AddUnits.isAddUnit]\nprotected theorem Units.isUnit [monoid M] (u : «expr ˣ» M) : is_unit (u : M) :=\n  ⟨u, rfl⟩\n#align units.is_unit Units.isUnit\n-/\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ˣ» -/\n#print Units.isUnit /-\n@[simp, to_additive is_add_unit_add_unit]\nprotected theorem Units.isUnit [Monoid M] (u : «expr ˣ» M) : IsUnit (u : M) :=\n  ⟨u, rfl⟩\n#align units.is_unit Units.isUnit\n#align add_units.is_add_unit_add_unit AddUnits.isAddUnit\n-/\n\n",
  "inv_unique":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ˣ» -/\n#print inv_unique /-\n@[to_additive]\ntheorem inv_unique {u₁ u₂ : «expr ˣ» α} (h : (↑u₁ : α) = ↑u₂) : (↑u₁⁻¹ : α) = ↑u₂⁻¹ :=\n  units.inv_eq_of_mul_eq_one_right <| by rw [h, u₂.mul_inv]\n#align inv_unique inv_unique\n-/\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ˣ» -/\n#print inv_unique /-\n@[to_additive]\ntheorem inv_unique {u₁ u₂ : «expr ˣ» α} (h : (↑u₁ : α) = ↑u₂) : (↑u₁⁻¹ : α) = ↑u₂⁻¹ :=\n  Units.inv_eq_of_mul_eq_one_right <| by rw [h, u₂.mul_inv]\n#align inv_unique inv_unique\n#align neg_unique neg_unique\n-/\n\n",
  "inv_mul_of_eq":
  "@[to_additive]\ntheorem inv_mul_of_eq {a : α} (h : ↑u = a) : ↑u⁻¹ * a = 1 := by rw [← h, u.inv_mul]\n#align inv_mul_of_eq inv_mul_of_eq\n\n",
  "inv_mul_eq_one":
- "#print inv_mul_eq_one /-\n@[simp, to_additive]\ntheorem inv_mul_eq_one {a : α} : ↑u⁻¹ * a = 1 ↔ ↑u = a :=\n  ⟨inv_inv u ▸ units.inv_eq_of_mul_eq_one_right, inv_mul_of_eq⟩\n#align inv_mul_eq_one inv_mul_eq_one\n-/\n\n",
+ "#print inv_mul_eq_one /-\n@[simp, to_additive]\ntheorem inv_mul_eq_one {a : α} : ↑u⁻¹ * a = 1 ↔ ↑u = a :=\n  ⟨inv_inv u ▸ Units.inv_eq_of_mul_eq_one_right, inv_mul_of_eq⟩\n#align inv_mul_eq_one inv_mul_eq_one\n#align neg_add_eq_zero neg_add_eq_zero\n-/\n\n",
  "inv_mul_eq_iff_eq_mul":
- "#print inv_mul_eq_iff_eq_mul /-\n@[to_additive]\ntheorem inv_mul_eq_iff_eq_mul {b c : α} : ↑a⁻¹ * b = c ↔ b = a * c :=\n  ⟨fun h => by rw [← h, mul_inv_cancel_left], fun h => by rw [h, inv_mul_cancel_left]⟩\n#align inv_mul_eq_iff_eq_mul inv_mul_eq_iff_eq_mul\n-/\n\n",
+ "#print inv_mul_eq_iff_eq_mul /-\n@[to_additive]\ntheorem inv_mul_eq_iff_eq_mul {b c : α} : ↑a⁻¹ * b = c ↔ b = a * c :=\n  ⟨fun h => by rw [← h, mul_inv_cancel_left], fun h => by rw [h, inv_mul_cancel_left]⟩\n#align inv_mul_eq_iff_eq_mul inv_mul_eq_iff_eq_mul\n#align neg_add_eq_iff_eq_add neg_add_eq_iff_eq_add\n-/\n\n",
  "inv_mul_cancel_right":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ˣ» -/\n#print inv_mul_cancel_right /-\n@[simp, to_additive]\ntheorem inv_mul_cancel_right (a : α) (b : «expr ˣ» α) : a * ↑b⁻¹ * b = a := by rw [mul_assoc, inv_mul, mul_one]\n#align inv_mul_cancel_right inv_mul_cancel_right\n-/\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ˣ» -/\n#print inv_mul_cancel_right /-\n@[simp, to_additive]\ntheorem inv_mul_cancel_right (a : α) (b : «expr ˣ» α) : a * ↑b⁻¹ * b = a := by rw [mul_assoc, inv_mul, mul_one]\n#align inv_mul_cancel_right inv_mul_cancel_right\n#align neg_add_cancel_right neg_add_cancel_right\n-/\n\n",
  "inv_mul_cancel_left":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ˣ» -/\n#print inv_mul_cancel_left /-\n@[simp, to_additive]\ntheorem inv_mul_cancel_left (a : «expr ˣ» α) (b : α) : (↑a⁻¹ : α) * (a * b) = b := by rw [← mul_assoc, inv_mul, one_mul]\n#align inv_mul_cancel_left inv_mul_cancel_left\n-/\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ˣ» -/\n#print inv_mul_cancel_left /-\n@[simp, to_additive]\ntheorem inv_mul_cancel_left (a : «expr ˣ» α) (b : α) : (↑a⁻¹ : α) * (a * b) = b := by rw [← mul_assoc, inv_mul, one_mul]\n#align inv_mul_cancel_left inv_mul_cancel_left\n#align neg_add_cancel_left neg_add_cancel_left\n-/\n\n",
  "inv_mul_cancel":
- "#print inv_mul_cancel /-\n@[simp, to_additive]\nprotected theorem inv_mul_cancel : is_unit a → a⁻¹ * a = 1 :=\n  by\n  rintro ⟨u, rfl⟩\n  rw [← Units.val_inv_eq_inv_val, Units.inv_mul]\n#align inv_mul_cancel inv_mul_cancel\n-/\n\n",
+ "#print inv_mul_cancel /-\n@[simp, to_additive]\nprotected theorem inv_mul_cancel : IsUnit a → a⁻¹ * a = 1 :=\n  by\n  rintro ⟨u, rfl⟩\n  rw [← Units.val_inv_eq_inv_val, Units.inv_mul]\n#align inv_mul_cancel inv_mul_cancel\n-/\n\n",
  "inv_mul":
  "@[simp, to_additive]\ntheorem inv_mul : (↑a⁻¹ * a : α) = 1 :=\n  inv_val _\n#align inv_mul inv_mul\n\n",
  "inv_mk":
@@ -95,9 +97,9 @@
  "inv_eq_one_divp":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ˣ» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr /ₚ » -/\n#print inv_eq_one_divp /-\n/-- Used for `field_simp` to deal with inverses of units. -/\n@[field_simps]\ntheorem inv_eq_one_divp (u : «expr ˣ» α) : ↑u⁻¹ = «expr /ₚ » 1 u := by rw [one_divp]\n#align inv_eq_one_divp inv_eq_one_divp\n-/\n\n",
  "inv_eq_of_mul_eq_one_right":
- "#print inv_eq_of_mul_eq_one_right /-\n@[to_additive]\nprotected theorem inv_eq_of_mul_eq_one_right {a : α} (h : ↑u * a = 1) : ↑u⁻¹ = a :=\n  calc\n    ↑u⁻¹ = ↑u⁻¹ * 1 := by rw [mul_one]\n    _ = a := by rw [← h, inv_mul_cancel_left]\n    \n#align inv_eq_of_mul_eq_one_right inv_eq_of_mul_eq_one_right\n-/\n\n",
+ "#print inv_eq_of_mul_eq_one_right /-\n@[to_additive]\nprotected theorem inv_eq_of_mul_eq_one_right {a : α} (h : ↑u * a = 1) : ↑u⁻¹ = a :=\n  calc\n    ↑u⁻¹ = ↑u⁻¹ * 1 := by rw [mul_one]\n    _ = a := by rw [← h, inv_mul_cancel_left]\n    \n#align inv_eq_of_mul_eq_one_right inv_eq_of_mul_eq_one_right\n#align neg_eq_of_add_eq_zero_right neg_eq_of_add_eq_zero_right\n-/\n\n",
  "inv_eq_of_mul_eq_one_left":
- "#print inv_eq_of_mul_eq_one_left /-\n@[to_additive]\nprotected theorem inv_eq_of_mul_eq_one_left {a : α} (h : a * u = 1) : ↑u⁻¹ = a :=\n  calc\n    ↑u⁻¹ = 1 * ↑u⁻¹ := by rw [one_mul]\n    _ = a := by rw [← h, mul_inv_cancel_right]\n    \n#align inv_eq_of_mul_eq_one_left inv_eq_of_mul_eq_one_left\n-/\n\n",
+ "#print inv_eq_of_mul_eq_one_left /-\n@[to_additive]\nprotected theorem inv_eq_of_mul_eq_one_left {a : α} (h : a * u = 1) : ↑u⁻¹ = a :=\n  calc\n    ↑u⁻¹ = 1 * ↑u⁻¹ := by rw [one_mul]\n    _ = a := by rw [← h, mul_inv_cancel_right]\n    \n#align inv_eq_of_mul_eq_one_left inv_eq_of_mul_eq_one_left\n#align neg_eq_of_add_eq_zero_left neg_eq_of_add_eq_zero_left\n-/\n\n",
  "inv_eq_coe_inv":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ˣ» -/\n@[simp, to_additive]\ntheorem inv_eq_coe_inv : a.inv = ((a⁻¹ : «expr ˣ» α) : α) :=\n  rfl\n#align inv_eq_coe_inv inv_eq_coe_inv\n\n",
  "ext_iff":
@@ -105,17 +107,21 @@
  "ext":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ˣ» -/\n@[ext, to_additive]\ntheorem ext : function.injective (coe : «expr ˣ» α → α)\n  | ⟨v, i₁, vi₁, iv₁⟩, ⟨v', i₂, vi₂, iv₂⟩, e => by\n    change v = v' at e <;> subst v' <;> congr <;> simpa only [iv₂, vi₁, one_mul, mul_one] using mul_assoc i₂ v i₁\n#align ext ext\n\n",
  "exists_right_inv":
- "@[to_additive is_add_unit.exists_neg]\ntheorem is_unit.exists_right_inv [monoid M] {a : M} (h : is_unit a) : ∃ b, a * b = 1 :=\n  by\n  rcases h with ⟨⟨a, b, hab, _⟩, rfl⟩\n  exact ⟨b, hab⟩\n#align is_unit.exists_right_inv is_unit.exists_right_inv\n\n",
+ "#print IsUnit.exists_right_inv /-\n@[to_additive IsAddUnit.exists_neg]\ntheorem IsUnit.exists_right_inv [Monoid M] {a : M} (h : IsUnit a) : ∃ b, a * b = 1 :=\n  by\n  rcases h with ⟨⟨a, b, hab, _⟩, rfl⟩\n  exact ⟨b, hab⟩\n#align is_unit.exists_right_inv IsUnit.exists_right_inv\n#align is_add_unit.exists_neg IsAddUnit.exists_neg\n-/\n\n",
  "exists_left_inv":
- "@[to_additive is_add_unit.exists_neg']\ntheorem is_unit.exists_left_inv [monoid M] {a : M} (h : is_unit a) : ∃ b, b * a = 1 :=\n  by\n  rcases h with ⟨⟨a, b, _, hba⟩, rfl⟩\n  exact ⟨b, hba⟩\n#align is_unit.exists_left_inv is_unit.exists_left_inv\n\n",
+ "#print IsUnit.exists_left_inv /-\n@[to_additive IsAddUnit.exists_neg']\ntheorem IsUnit.exists_left_inv [Monoid M] {a : M} (h : IsUnit a) : ∃ b, b * a = 1 :=\n  by\n  rcases h with ⟨⟨a, b, _, hba⟩, rfl⟩\n  exact ⟨b, hba⟩\n#align is_unit.exists_left_inv IsUnit.exists_left_inv\n#align is_add_unit.exists_neg' IsAddUnit.exists_neg'\n-/\n\n",
+ "eq_one_of_mul_right":
+ "#print eq_one_of_mul_right /-\n@[to_additive]\ntheorem eq_one_of_mul_right (h : a * b = 1) : a = 1 :=\n  congr_arg Units.inv <| subsingleton.elim (units.mk _ _ (by rwa [mul_comm]) h) 1\n#align eq_one_of_mul_right eq_one_of_mul_right\n#align eq_zero_of_add_right eq_zero_of_add_right\n-/\n\n",
+ "eq_one_of_mul_left":
+ "#print eq_one_of_mul_left /-\n@[to_additive]\ntheorem eq_one_of_mul_left (h : a * b = 1) : b = 1 :=\n  congr_arg Units.inv <| subsingleton.elim (units.mk _ _ h <| by rwa [mul_comm]) 1\n#align eq_one_of_mul_left eq_one_of_mul_left\n#align eq_zero_of_add_left eq_zero_of_add_left\n-/\n\n",
  "eq_mul_inv_iff_mul_eq":
- "#print eq_mul_inv_iff_mul_eq /-\n@[to_additive]\ntheorem eq_mul_inv_iff_mul_eq {a b : α} : a = b * ↑c⁻¹ ↔ a * c = b :=\n  ⟨fun h => by rw [h, inv_mul_cancel_right], fun h => by rw [← h, mul_inv_cancel_right]⟩\n#align eq_mul_inv_iff_mul_eq eq_mul_inv_iff_mul_eq\n-/\n\n",
+ "#print eq_mul_inv_iff_mul_eq /-\n@[to_additive]\ntheorem eq_mul_inv_iff_mul_eq {a b : α} : a = b * ↑c⁻¹ ↔ a * c = b :=\n  ⟨fun h => by rw [h, inv_mul_cancel_right], fun h => by rw [← h, mul_inv_cancel_right]⟩\n#align eq_mul_inv_iff_mul_eq eq_mul_inv_iff_mul_eq\n#align eq_add_neg_iff_add_eq eq_add_neg_iff_add_eq\n-/\n\n",
  "eq_inv_of_mul_eq_one_right":
- "#print eq_inv_of_mul_eq_one_right /-\n@[to_additive]\nprotected theorem eq_inv_of_mul_eq_one_right {a : α} (h : a * u = 1) : a = ↑u⁻¹ :=\n  (units.inv_eq_of_mul_eq_one_left h).symm\n#align eq_inv_of_mul_eq_one_right eq_inv_of_mul_eq_one_right\n-/\n\n",
+ "#print eq_inv_of_mul_eq_one_right /-\n@[to_additive]\nprotected theorem eq_inv_of_mul_eq_one_right {a : α} (h : a * u = 1) : a = ↑u⁻¹ :=\n  (Units.inv_eq_of_mul_eq_one_left h).symm\n#align eq_inv_of_mul_eq_one_right eq_inv_of_mul_eq_one_right\n#align eq_neg_of_add_eq_zero_right eq_neg_of_add_eq_zero_right\n-/\n\n",
  "eq_inv_of_mul_eq_one_left":
- "#print eq_inv_of_mul_eq_one_left /-\n@[to_additive]\nprotected theorem eq_inv_of_mul_eq_one_left {a : α} (h : ↑u * a = 1) : a = ↑u⁻¹ :=\n  (units.inv_eq_of_mul_eq_one_right h).symm\n#align eq_inv_of_mul_eq_one_left eq_inv_of_mul_eq_one_left\n-/\n\n",
+ "#print eq_inv_of_mul_eq_one_left /-\n@[to_additive]\nprotected theorem eq_inv_of_mul_eq_one_left {a : α} (h : ↑u * a = 1) : a = ↑u⁻¹ :=\n  (Units.inv_eq_of_mul_eq_one_right h).symm\n#align eq_inv_of_mul_eq_one_left eq_inv_of_mul_eq_one_left\n#align eq_neg_of_add_eq_zero_left eq_neg_of_add_eq_zero_left\n-/\n\n",
  "eq_inv_mul_iff_mul_eq":
- "#print eq_inv_mul_iff_mul_eq /-\n@[to_additive]\ntheorem eq_inv_mul_iff_mul_eq {a c : α} : a = ↑b⁻¹ * c ↔ ↑b * a = c :=\n  ⟨fun h => by rw [h, mul_inv_cancel_left], fun h => by rw [← h, inv_mul_cancel_left]⟩\n#align eq_inv_mul_iff_mul_eq eq_inv_mul_iff_mul_eq\n-/\n\n",
+ "#print eq_inv_mul_iff_mul_eq /-\n@[to_additive]\ntheorem eq_inv_mul_iff_mul_eq {a c : α} : a = ↑b⁻¹ * c ↔ ↑b * a = c :=\n  ⟨fun h => by rw [h, mul_inv_cancel_left], fun h => by rw [← h, inv_mul_cancel_left]⟩\n#align eq_inv_mul_iff_mul_eq eq_inv_mul_iff_mul_eq\n#align eq_neg_add_iff_add_eq eq_neg_add_iff_add_eq\n-/\n\n",
  "eq_iff":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ˣ» -/\n@[norm_cast, to_additive]\ntheorem eq_iff {a b : «expr ˣ» α} : (a : α) = b ↔ a = b :=\n  ext.eq_iff\n#align eq_iff eq_iff\n\n",
  "eq_divp_iff_mul_eq":
@@ -131,13 +137,13 @@
  "divp_mul_cancel":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ˣ» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr /ₚ » -/\n#print divp_mul_cancel /-\n@[simp]\ntheorem divp_mul_cancel (a : α) (u : «expr ˣ» α) : «expr /ₚ » a u * u = a :=\n  (mul_assoc _ _ _).trans <| by rw [Units.inv_mul, mul_one]\n#align divp_mul_cancel divp_mul_cancel\n-/\n\n",
  "divp_left_inj":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ˣ» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr /ₚ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr /ₚ » -/\n#print divp_left_inj /-\n@[simp]\ntheorem divp_left_inj (u : «expr ˣ» α) {a b : α} : «expr /ₚ » a u = «expr /ₚ » b u ↔ a = b :=\n  units.mul_left_inj _\n#align divp_left_inj divp_left_inj\n-/\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ˣ» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr /ₚ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr /ₚ » -/\n#print divp_left_inj /-\n@[simp]\ntheorem divp_left_inj (u : «expr ˣ» α) {a b : α} : «expr /ₚ » a u = «expr /ₚ » b u ↔ a = b :=\n  Units.mul_left_inj _\n#align divp_left_inj divp_left_inj\n-/\n\n",
  "divp_inv":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ˣ» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr /ₚ » -/\n#print divp_inv /-\n@[simp]\ntheorem divp_inv (u : «expr ˣ» α) : «expr /ₚ » a u⁻¹ = a * u :=\n  rfl\n#align divp_inv divp_inv\n-/\n\n",
  "divp_eq_one_iff_eq":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ˣ» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr /ₚ » -/\n#print divp_eq_one_iff_eq /-\ntheorem divp_eq_one_iff_eq {a : α} {u : «expr ˣ» α} : «expr /ₚ » a u = 1 ↔ a = u :=\n  (units.mul_left_inj u).symm.trans <| by rw [divp_mul_cancel, one_mul]\n#align divp_eq_one_iff_eq divp_eq_one_iff_eq\n-/\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ˣ» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr /ₚ » -/\n#print divp_eq_one_iff_eq /-\ntheorem divp_eq_one_iff_eq {a : α} {u : «expr ˣ» α} : «expr /ₚ » a u = 1 ↔ a = u :=\n  (Units.mul_left_inj u).symm.trans <| by rw [divp_mul_cancel, one_mul]\n#align divp_eq_one_iff_eq divp_eq_one_iff_eq\n-/\n\n",
  "divp_eq_iff_mul_eq":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ˣ» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr /ₚ » -/\n#print divp_eq_iff_mul_eq /-\n@[field_simps]\ntheorem divp_eq_iff_mul_eq {x : α} {u : «expr ˣ» α} {y : α} : «expr /ₚ » x u = y ↔ y * u = x :=\n  u.mul_left_inj.symm.trans <| by rw [divp_mul_cancel] <;> exact ⟨eq.symm, eq.symm⟩\n#align divp_eq_iff_mul_eq divp_eq_iff_mul_eq\n-/\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ˣ» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr /ₚ » -/\n#print divp_eq_iff_mul_eq /-\n@[field_simps]\ntheorem divp_eq_iff_mul_eq {x : α} {u : «expr ˣ» α} {y : α} : «expr /ₚ » x u = y ↔ y * u = x :=\n  u.mul_left_inj.symm.trans <| by rw [divp_mul_cancel] <;> exact ⟨Eq.symm, Eq.symm⟩\n#align divp_eq_iff_mul_eq divp_eq_iff_mul_eq\n-/\n\n",
  "divp_eq_divp_iff":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ˣ» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr /ₚ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr /ₚ » -/\n#print divp_eq_divp_iff /-\n-- Theoretically redundant as `field_simp` lemma.\n@[field_simps]\ntheorem divp_eq_divp_iff {x y : α} {ux uy : «expr ˣ» α} : «expr /ₚ » x ux = «expr /ₚ » y uy ↔ x * uy = y * ux := by\n  rw [divp_eq_iff_mul_eq, divp_mul_eq_mul_divp, divp_eq_iff_mul_eq]\n#align divp_eq_divp_iff divp_eq_divp_iff\n-/\n\n",
  "divp_divp_eq_divp_mul":
@@ -155,8 +161,8 @@
  "coe_mk":
  "@[simp, to_additive]\ntheorem coe_mk (a : α) (b h₁ h₂) : ↑(units.mk a b h₁ h₂) = a :=\n  rfl\n#align coe_mk coe_mk\n\n",
  "coe_inv_mul":
- "@[simp, to_additive]\ntheorem coe_inv_mul (h : is_unit a) : ↑h.unit⁻¹ * a = 1 :=\n  Units.mul_inv _\n#align coe_inv_mul coe_inv_mul\n\n",
+ "@[simp, to_additive]\ntheorem coe_inv_mul (h : IsUnit a) : ↑h.unit⁻¹ * a = 1 :=\n  Units.mul_inv _\n#align coe_inv_mul coe_inv_mul\n\n",
  "coe_inv":
- "@[simp, to_additive]\ntheorem coe_inv {M : Type _} [division_monoid M] (u : Units M) : ↑u⁻¹ = (u⁻¹ : M) :=\n  eq.symm <| inv_eq_of_mul_eq_one_right u.mul_inv\n#align coe_inv coe_inv\n\n",
+ "@[simp, to_additive]\ntheorem coe_inv {M : Type _} [DivisionMonoid M] (u : Units M) : ↑u⁻¹ = (u⁻¹ : M) :=\n  Eq.symm <| inv_eq_of_mul_eq_one_right u.mul_inv\n#align coe_inv coe_inv\n\n",
  "coe_eq_one":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ˣ» -/\n@[simp, norm_cast, to_additive]\ntheorem coe_eq_one {a : «expr ˣ» α} : (a : α) = 1 ↔ a = 1 := by rw [← Units.val_one, eq_iff]\n#align coe_eq_one coe_eq_one\n\n"}

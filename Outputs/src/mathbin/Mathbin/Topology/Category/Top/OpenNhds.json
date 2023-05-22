@@ -1,0 +1,18 @@
+{"op_map_id_obj":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵖ» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr𝟙» -/\n@[simp]\ntheorem op_map_id_obj (x : X) (U : «expr ᵒᵖ» (OpenNhds x)) : (map ((«expr𝟙») X) x).op.obj U = U := by simp\n#align op_map_id_obj op_map_id_obj\n\n",
+ "map_obj":
+ "@[simp]\ntheorem map_obj (x : X) (U) (q) : (map f x).obj ⟨U, q⟩ = ⟨(Opens.map f).obj U, by tidy⟩ :=\n  rfl\n#align map_obj map_obj\n\n",
+ "map_id_obj_unop":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵖ» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr𝟙» -/\n@[simp]\ntheorem map_id_obj_unop (x : X) (U : «expr ᵒᵖ» (OpenNhds x)) : (map ((«expr𝟙») X) x).obj (unop U) = unop U := by simp\n#align map_id_obj_unop map_id_obj_unop\n\n",
+ "map_id_obj'":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr𝟙» -/\n@[simp]\ntheorem map_id_obj' (x : X) (U) (p) (q) : (map ((«expr𝟙») X) x).obj ⟨⟨U, p⟩, q⟩ = ⟨⟨U, p⟩, q⟩ :=\n  rfl\n#align map_id_obj' map_id_obj'\n\n",
+ "map_id_obj":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr𝟙» -/\n@[simp]\ntheorem map_id_obj (x : X) (U) : (map ((«expr𝟙») X) x).obj U = U := by tidy\n#align map_id_obj map_id_obj\n\n",
+ "inclusion_obj":
+ "/-\nCopyright (c) 2019 Scott Morrison. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Scott Morrison\n-/\n@[simp]\ntheorem inclusion_obj (x : X) (U) (p) : (inclusion x).obj ⟨U, p⟩ = U :=\n  rfl\n#align inclusion_obj inclusion_obj\n\n",
+ "inclusion_map_iso_inv":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr𝟙» -/\n@[simp]\ntheorem inclusion_map_iso_inv (x : X) : (inclusionMapIso f x).inv = («expr𝟙») _ :=\n  rfl\n#align inclusion_map_iso_inv inclusion_map_iso_inv\n\n",
+ "inclusion_map_iso_hom":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr𝟙» -/\n@[simp]\ntheorem inclusion_map_iso_hom (x : X) : (inclusionMapIso f x).hom = («expr𝟙») _ :=\n  rfl\n#align inclusion_map_iso_hom inclusion_map_iso_hom\n\n",
+ "OpenEmbedding":
+ "#print OpenEmbedding /-\ntheorem OpenEmbedding {x : X} (U : OpenNhds x) : OpenEmbedding U.1.inclusion :=\n  U.1.open_embedding\n#align open_embedding OpenEmbedding\n-/\n\n"}

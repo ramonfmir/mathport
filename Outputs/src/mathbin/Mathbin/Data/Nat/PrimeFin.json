@@ -5,7 +5,7 @@
  "pow_factors_to_finset":
  "theorem pow_factors_to_finset (n : ℕ) {k : ℕ} (hk : k ≠ 0) : (n ^ k).factors.to_finset = n.factors.to_finset :=\n  by\n  cases k\n  · simpa using hk\n  rw [pow_succ_factors_to_finset]\n#align pow_factors_to_finset pow_factors_to_finset\n\n",
  "infinite_set_of_prime":
- "/-\nCopyright (c) 2015 Microsoft Corporation. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Leonardo de Moura, Jeremy Avigad, Mario Carneiro\n-/\n/-- A version of `nat.exists_infinite_primes` using the `set.infinite` predicate. -/\ntheorem infinite_set_of_prime : { p | Prime p }.infinite :=\n  set.infinite_of_not_bdd_above not_bddAbove_setOf_prime\n#align infinite_set_of_prime infinite_set_of_prime\n\n",
+ "/-\nCopyright (c) 2015 Microsoft Corporation. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Leonardo de Moura, Jeremy Avigad, Mario Carneiro\n-/\n/-- A version of `nat.exists_infinite_primes` using the `set.infinite` predicate. -/\ntheorem infinite_set_of_prime : { p | Prime p }.infinite :=\n  Set.infinite_of_not_bddAbove not_bddAbove_setOf_prime\n#align infinite_set_of_prime infinite_set_of_prime\n\n",
  "factors_mul_to_finset_of_coprime":
  "theorem factors_mul_to_finset_of_coprime {a b : ℕ} (hab : coprime a b) :\n    (a * b).factors.to_finset = a.factors.to_finset ∪ b.factors.to_finset :=\n  (List.toFinset.ext <| mem_factors_mul_of_coprime hab).trans <| List.toFinset_union _ _\n#align factors_mul_to_finset_of_coprime factors_mul_to_finset_of_coprime\n\n",
  "factors_mul_to_finset":

@@ -1,20 +1,20 @@
 {"π_obj":
- "@[simp]\ntheorem π_obj (p : action_category M X) : (π M X).obj p = single_obj.star M :=\n  unit.ext\n#align π_obj π_obj\n\n",
+ "@[simp]\ntheorem π_obj (p : ActionCategory M X) : (π M X).obj p = SingleObj.star M :=\n  unit.ext\n#align π_obj π_obj\n\n",
  "π_map":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⟶ » -/\n/-\nCopyright (c) 2020 David Wärn. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: David Wärn\n-/\n@[simp]\ntheorem π_map (p q : action_category M X) (f : «expr ⟶ » p q) : (π M X).map f = f.val :=\n  rfl\n#align π_map π_map\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⟶ » -/\n/-\nCopyright (c) 2020 David Wärn. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: David Wärn\n-/\n@[simp]\ntheorem π_map (p q : ActionCategory M X) (f : «expr ⟶ » p q) : (π M X).map f = f.val :=\n  rfl\n#align π_map π_map\n\n",
  "val":
- "@[simp]\ntheorem hom_of_pair.val (t : X) (g : G) : (hom_of_pair t g).val = g :=\n  rfl\n#align hom_of_pair.val hom_of_pair.val\n\n",
+ "@[simp]\ntheorem hom_of_pair.val (t : X) (g : G) : (homOfPair t g).val = g :=\n  rfl\n#align hom_of_pair.val hom_of_pair.val\n\n",
  "stabilizer_iso_End_symm_apply":
- "@[simp]\ntheorem stabilizer_iso_End_symm_apply (f : End _) : (stabilizer_iso_End M x).inv_fun f = f :=\n  rfl\n#align stabilizer_iso_End_symm_apply stabilizer_iso_End_symm_apply\n\n",
+ "@[simp]\ntheorem stabilizer_iso_End_symm_apply (f : End _) : (stabilizerIsoEnd M x).inv_fun f = f :=\n  rfl\n#align stabilizer_iso_End_symm_apply stabilizer_iso_End_symm_apply\n\n",
  "stabilizer_iso_End_apply":
- "@[simp]\ntheorem stabilizer_iso_End_apply (f : stabilizer.submonoid M x) : (stabilizer_iso_End M x).to_fun f = f :=\n  rfl\n#align stabilizer_iso_End_apply stabilizer_iso_End_apply\n\n",
+ "@[simp]\ntheorem stabilizer_iso_End_apply (f : Stabilizer.submonoid M x) : (stabilizerIsoEnd M x).to_fun f = f :=\n  rfl\n#align stabilizer_iso_End_apply stabilizer_iso_End_apply\n\n",
  "id_val":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr𝟙» -/\n@[simp]\nprotected theorem id_val (x : action_category M X) : subtype.val ((«expr𝟙») x) = 1 :=\n  rfl\n#align id_val id_val\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr𝟙» -/\n@[simp]\nprotected theorem id_val (x : ActionCategory M X) : Subtype.val ((«expr𝟙») x) = 1 :=\n  rfl\n#align id_val id_val\n\n",
  "hom_as_subtype":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⟶ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\ntheorem hom_as_subtype (p q : action_category M X) : «expr ⟶ » p q = { m : M // «expr • » m p.back = q.back } :=\n  rfl\n#align hom_as_subtype hom_as_subtype\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⟶ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\ntheorem hom_as_subtype (p q : ActionCategory M X) : «expr ⟶ » p q = { m : M // «expr • » m p.back = q.back } :=\n  rfl\n#align hom_as_subtype hom_as_subtype\n\n",
  "comp_val":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⟶ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⟶ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≫ » -/\n@[simp]\nprotected theorem comp_val {x y z : action_category M X} (f : «expr ⟶ » x y) (g : «expr ⟶ » y z) :\n    («expr ≫ » f g).val = g.val * f.val :=\n  rfl\n#align comp_val comp_val\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⟶ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⟶ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≫ » -/\n@[simp]\nprotected theorem comp_val {x y z : ActionCategory M X} (f : «expr ⟶ » x y) (g : «expr ⟶ » y z) :\n    («expr ≫ » f g).val = g.val * f.val :=\n  rfl\n#align comp_val comp_val\n\n",
  "coe_back":
- "@[simp]\ntheorem coe_back (x : X) : (↑x : action_category M X).back = x :=\n  rfl\n#align coe_back coe_back\n\n",
+ "@[simp]\ntheorem coe_back (x : X) : (↑x : ActionCategory M X).back = x :=\n  rfl\n#align coe_back coe_back\n\n",
  "back_coe":
- "@[simp]\ntheorem back_coe (x : action_category M X) : ↑x.back = x := by ext <;> rfl\n#align back_coe back_coe\n\n"}
+ "@[simp]\ntheorem back_coe (x : ActionCategory M X) : ↑x.back = x := by ext <;> rfl\n#align back_coe back_coe\n\n"}

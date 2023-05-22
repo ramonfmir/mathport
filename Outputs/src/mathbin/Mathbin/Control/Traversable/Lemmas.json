@@ -7,7 +7,7 @@
  "traverse_eq_map_id'":
  "theorem traverse_eq_map_id' (f : β → γ) : traverse (id.mk ∘ f) = id.mk ∘ (map f : t β → t γ) :=\n  by\n  ext\n  exact traverse_eq_map_id _ _\n#align traverse_eq_map_id' traverse_eq_map_id'\n\n",
  "traverse_comp":
- "@[functor_norm]\ntheorem traverse_comp (g : α → F β) (h : β → G γ) :\n    traverse (comp.mk ∘ map h ∘ g) = (comp.mk ∘ map (traverse h) ∘ traverse g : t α → Comp F G (t γ)) :=\n  by\n  ext\n  exact comp_traverse _ _ _\n#align traverse_comp traverse_comp\n\n",
+ "@[functor_norm]\ntheorem traverse_comp (g : α → F β) (h : β → G γ) :\n    traverse (Comp.mk ∘ map h ∘ g) = (Comp.mk ∘ map (traverse h) ∘ traverse g : t α → Comp F G (t γ)) :=\n  by\n  ext\n  exact comp_traverse _ _ _\n#align traverse_comp traverse_comp\n\n",
  "pure_traverse":
  "theorem pure_traverse (x : t α) : traverse pure x = (pure x : F (t α)) := by\n  have : traverse pure x = pure (traverse id.mk x) := (naturality (pure_transformation F) id.mk x).symm <;>\n    rwa [id_traverse] at this\n#align pure_traverse pure_traverse\n\n",
  "pure_transformation_apply":
@@ -25,4 +25,4 @@
  "id_sequence":
  "theorem id_sequence (x : t α) : sequence (id.mk <$> x) = id.mk x := by\n  simp [sequence, traverse_map, id_traverse] <;> rfl\n#align id_sequence id_sequence\n\n",
  "comp_sequence":
- "theorem comp_sequence (x : t (F (G α))) : sequence (comp.mk <$> x) = Comp.mk (sequence <$> sequence x) := by\n  simp [sequence, traverse_map] <;> rw [← comp_traverse] <;> simp [map_id]\n#align comp_sequence comp_sequence\n\n"}
+ "theorem comp_sequence (x : t (F (G α))) : sequence (Comp.mk <$> x) = Comp.mk (sequence <$> sequence x) := by\n  simp [sequence, traverse_map] <;> rw [← comp_traverse] <;> simp [map_id]\n#align comp_sequence comp_sequence\n\n"}

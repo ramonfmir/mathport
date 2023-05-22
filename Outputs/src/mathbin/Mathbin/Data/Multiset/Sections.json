@@ -9,6 +9,6 @@
  "mem_sections":
  "theorem mem_sections {s : Multiset (Multiset α)} : ∀ {a}, a ∈ Sections s ↔ s.rel (fun s a => a ∈ s) a :=\n  Multiset.induction_on s (by simp) fun a s ih a' => by\n    simp [ih, rel_cons_left, -exists_and_left, exists_and_distrib_left.symm, eq_comm]\n#align mem_sections mem_sections\n\n",
  "coe_sections":
- "theorem coe_sections :\n    ∀ l : list (list α),\n      Sections (l.map fun l : list α => (l : Multiset α) : Multiset (Multiset α)) =\n        (l.sections.map fun l : list α => (l : Multiset α) : Multiset (Multiset α))\n  | [] => rfl\n  | a :: l => by\n    simp\n    rw [← cons_coe, sections_cons, bind_map_comm, coe_sections l]\n    simp [List.sections, (· ∘ ·), list.bind]\n#align coe_sections coe_sections\n\n",
+ "theorem coe_sections :\n    ∀ l : List (List α),\n      Sections (l.map fun l : List α => (l : Multiset α) : Multiset (Multiset α)) =\n        (l.sections.map fun l : List α => (l : Multiset α) : Multiset (Multiset α))\n  | [] => rfl\n  | a :: l => by\n    simp\n    rw [← cons_coe, sections_cons, bind_map_comm, coe_sections l]\n    simp [List.sections, (· ∘ ·), list.bind]\n#align coe_sections coe_sections\n\n",
  "card_sections":
  "theorem card_sections {s : Multiset (Multiset α)} : card (Sections s) = prod (s.map card) :=\n  Multiset.induction_on s (by simp) (by simp (config := { contextual := true }))\n#align card_sections card_sections\n\n"}

@@ -1,20 +1,20 @@
 {"traverse_nil":
- "@[simp]\ntheorem traverse_nil : traverse f ([] : list α') = (pure [] : F (list β')) :=\n  rfl\n#align traverse_nil traverse_nil\n\n",
+ "@[simp]\ntheorem traverse_nil : traverse f ([] : List α') = (pure [] : F (List β')) :=\n  rfl\n#align traverse_nil traverse_nil\n\n",
  "traverse_map":
  "protected theorem traverse_map {α β γ : Type u} (g : α → β) (f : β → G γ) (x : Sum σ α) :\n    Sum.traverse f (g <$> x) = Sum.traverse (f ∘ g) x := by\n  cases x <;> simp [Sum.traverse, id_map, functor_norm] <;> rfl\n#align traverse_map traverse_map\n\n",
  "traverse_eq_map_id":
  "protected theorem traverse_eq_map_id {α β} (f : α → β) (x : Sum σ α) : Sum.traverse (id.mk ∘ f) x = id.mk (f <$> x) :=\n  by induction x <;> simp! [*, functor_norm] <;> rfl\n#align traverse_eq_map_id traverse_eq_map_id\n\n",
  "traverse_cons":
- "@[simp]\ntheorem traverse_cons (a : α') (l : list α') : traverse f (a :: l) = (· :: ·) <$> f a <*> traverse f l :=\n  rfl\n#align traverse_cons traverse_cons\n\n",
+ "@[simp]\ntheorem traverse_cons (a : α') (l : List α') : traverse f (a :: l) = (· :: ·) <$> f a <*> traverse f l :=\n  rfl\n#align traverse_cons traverse_cons\n\n",
  "traverse_append":
- "@[simp]\ntheorem traverse_append : ∀ as bs : list α', traverse f (as ++ bs) = (· ++ ·) <$> traverse f as <*> traverse f bs\n  | [], bs => by\n    have : has_append.append ([] : list β') = id := by funext <;> rfl\n    simp [this, functor_norm]\n  | a :: as, bs => by simp [traverse_append as bs, functor_norm] <;> congr\n#align traverse_append traverse_append\n\n",
+ "@[simp]\ntheorem traverse_append : ∀ as bs : List α', traverse f (as ++ bs) = (· ++ ·) <$> traverse f as <*> traverse f bs\n  | [], bs => by\n    have : has_append.append ([] : List β') = id := by funext <;> rfl\n    simp [this, functor_norm]\n  | a :: as, bs => by simp [traverse_append as bs, functor_norm] <;> congr\n#align traverse_append traverse_append\n\n",
  "naturality":
  "protected theorem naturality {α β} (f : α → F β) (x : Sum σ α) : η (Sum.traverse f x) = Sum.traverse (@η _ ∘ f) x := by\n  cases x <;> simp! [Sum.traverse, functor_norm]\n#align naturality naturality\n\n",
  "mem_traverse":
- "theorem mem_traverse {f : α' → set β'} :\n    ∀ (l : list α') (n : list β'), n ∈ traverse f l ↔ Forall₂ (fun b a => b ∈ f a) n l\n  | [], [] => by simp\n  | a :: as, [] => by simp\n  | [], b :: bs => by simp\n  | a :: as, b :: bs => by simp [mem_traverse as bs]\n#align mem_traverse mem_traverse\n\n",
+ "theorem mem_traverse {f : α' → Set β'} :\n    ∀ (l : List α') (n : List β'), n ∈ traverse f l ↔ Forall₂ (fun b a => b ∈ f a) n l\n  | [], [] => by simp\n  | a :: as, [] => by simp\n  | [], b :: bs => by simp\n  | a :: as, b :: bs => by simp [mem_traverse as bs]\n#align mem_traverse mem_traverse\n\n",
  "map_traverse":
  "protected theorem map_traverse {α β γ} (g : α → G β) (f : β → γ) (x : Sum σ α) :\n    (· <$> ·) f <$> Sum.traverse g x = Sum.traverse ((· <$> ·) f ∘ g) x := by\n  cases x <;> simp [Sum.traverse, id_map, functor_norm] <;> congr <;> rfl\n#align map_traverse map_traverse\n\n",
  "id_traverse":
  "protected theorem id_traverse {σ α} (x : Sum σ α) : Sum.traverse id.mk x = x := by cases x <;> rfl\n#align id_traverse id_traverse\n\n",
  "comp_traverse":
- "@[nolint unused_arguments]\nprotected theorem comp_traverse {α β γ} (f : β → F γ) (g : α → G β) (x : Sum σ α) :\n    Sum.traverse (comp.mk ∘ (· <$> ·) f ∘ g) x = Comp.mk (Sum.traverse f <$> Sum.traverse g x) := by\n  cases x <;> simp! [Sum.traverse, map_id, functor_norm] <;> rfl\n#align comp_traverse comp_traverse\n\n"}
+ "@[nolint unused_arguments]\nprotected theorem comp_traverse {α β γ} (f : β → F γ) (g : α → G β) (x : Sum σ α) :\n    Sum.traverse (Comp.mk ∘ (· <$> ·) f ∘ g) x = Comp.mk (Sum.traverse f <$> Sum.traverse g x) := by\n  cases x <;> simp! [Sum.traverse, map_id, functor_norm] <;> rfl\n#align comp_traverse comp_traverse\n\n"}

@@ -35,13 +35,13 @@
  "one_mem_one":
  "@[to_additive]\ntheorem one_mem_one : (1 : α) ∈ (1 : interval α) :=\n  ⟨le_rfl, le_rfl⟩\n#align one_mem_one one_mem_one\n\n",
  "mul_eq_one_iff":
- "#print mul_eq_one_iff /-\n@[to_additive]\nprotected theorem mul_eq_one_iff : s * t = 1 ↔ ∃ a b, s = pure a ∧ t = pure b ∧ a * b = 1 :=\n  by\n  cases s\n  · simp [WithBot.none_eq_bot]\n  cases t\n  · simp [WithBot.none_eq_bot]\n  · simp [WithBot.some_eq_coe, ← nonempty_interval.coe_mul_interval, nonempty_interval.mul_eq_one_iff]\n#align mul_eq_one_iff mul_eq_one_iff\n-/\n\n",
+ "#print mul_eq_one_iff /-\n@[to_additive]\nprotected theorem mul_eq_one_iff : s * t = 1 ↔ ∃ a b, s = pure a ∧ t = pure b ∧ a * b = 1 :=\n  by\n  cases s\n  · simp [WithBot.none_eq_bot]\n  cases t\n  · simp [WithBot.none_eq_bot]\n  · simp [WithBot.some_eq_coe, ← nonempty_interval.coe_mul_interval, nonempty_interval.mul_eq_one_iff]\n#align mul_eq_one_iff mul_eq_one_iff\n#align add_eq_zero_iff add_eq_zero_iff\n-/\n\n",
  "mul_bot":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n@[simp, to_additive]\ntheorem mul_bot : s * «expr⊥» = «expr⊥» :=\n  Option.map₂_none_right _ _\n#align mul_bot mul_bot\n\n",
  "length_zero":
  "@[simp]\ntheorem length_zero : (0 : interval α).length = 0 :=\n  length_pure _\n#align length_zero length_zero\n\n",
  "length_sum_le":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `finset.sum -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.sum -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `finset.sum -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.sum -/\ntheorem length_sum_le (f : ι → interval α) (s : Finset ι) :\n    (finset.sum \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.sum\" s (f i)).length ≤\n      finset.sum \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.sum\" s (f i).length :=\n  finset.le_sum_of_subadditive _ length_zero length_add_le _ _\n#align length_sum_le length_sum_le\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `finset.sum -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.sum -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `finset.sum -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.sum -/\ntheorem length_sum_le (f : ι → interval α) (s : Finset ι) :\n    (finset.sum \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.sum\" s (f i)).length ≤\n      finset.sum \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.sum\" s (f i).length :=\n  Finset.le_sum_of_subadditive _ length_zero length_add_le _ _\n#align length_sum_le length_sum_le\n\n",
  "length_sum":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →+ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `finset.sum -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.sum -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `finset.sum -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.sum -/\n@[simp]\ntheorem length_sum (f : ι → nonempty_interval α) (s : Finset ι) :\n    (finset.sum \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.sum\" s (f i)).length =\n      finset.sum \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.sum\" s (f i).length :=\n  map_sum (⟨length, length_zero, length_add⟩ : «expr →+ » (nonempty_interval α) α) _ _\n#align length_sum length_sum\n\n",
  "length_sub_le":
@@ -87,7 +87,7 @@
  "coe_one_interval":
  "@[simp, norm_cast, to_additive]\ntheorem coe_one_interval : ((1 : nonempty_interval α) : interval α) = 1 :=\n  rfl\n#align coe_one_interval coe_one_interval\n\n",
  "coe_one":
- "@[simp, to_additive]\ntheorem coe_one : ((1 : interval α) : set α) = 1 :=\n  Icc_self _\n#align coe_one coe_one\n\n",
+ "@[simp, to_additive]\ntheorem coe_one : ((1 : interval α) : Set α) = 1 :=\n  Icc_self _\n#align coe_one coe_one\n\n",
  "coe_mul_interval":
  "@[simp, to_additive]\ntheorem coe_mul_interval : (↑(s * t) : interval α) = s * t :=\n  rfl\n#align coe_mul_interval coe_mul_interval\n\n",
  "coe_inv_interval":

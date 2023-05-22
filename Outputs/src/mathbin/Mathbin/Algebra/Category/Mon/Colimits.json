@@ -1,0 +1,8 @@
+{"quot_one":
+ "/-\nCopyright (c) 2019 Scott Morrison. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Scott Morrison\n-/\n-- There's always `of`\n-- Then one generator for each operation\n-- Make it an equivalence relation:\n-- There's always a `map` relation\n-- Then one relation per operation, describing the interaction with `of`\n-- Then one relation per argument of each operation\n-- And one relation per axiom\n@[simp]\ntheorem quot_one : Quot.mk Setoid.r one = (1 : colimit_type F) :=\n  rfl\n#align quot_one quot_one\n\n",
+ "quot_mul":
+ "@[simp]\ntheorem quot_mul (x y) : Quot.mk Setoid.r (mul x y) = (Quot.mk Setoid.r x * Quot.mk Setoid.r y : colimit_type F) :=\n  rfl\n#align quot_mul quot_mul\n\n",
+ "cocone_naturality_components":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⟶ » -/\n@[simp]\ntheorem cocone_naturality_components (j j' : J) (f : «expr ⟶ » j j') (x : F.obj j) :\n    (cocone_morphism F j') (F.map f x) = (cocone_morphism F j) x :=\n  by\n  rw [← cocone_naturality F f]\n  rfl\n#align cocone_naturality_components cocone_naturality_components\n\n",
+ "cocone_naturality":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⟶ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≫ » -/\n@[simp]\ntheorem cocone_naturality {j j' : J} (f : «expr ⟶ » j j') :\n    «expr ≫ » (F.map f) (cocone_morphism F j') = cocone_morphism F j :=\n  by\n  ext\n  apply quot.sound\n  apply Relation.Map\n#align cocone_naturality cocone_naturality\n\n"}

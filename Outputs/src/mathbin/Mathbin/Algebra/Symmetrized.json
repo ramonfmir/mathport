@@ -69,6 +69,6 @@
  "mul_def":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ˢʸᵐ» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⅟» -/\ntheorem mul_def [Add α] [Mul α] [One α] [Invertible (2 : α)] (a b : «expr ˢʸᵐ» α) :\n    a * b = sym ((«expr⅟») 2 * (unsym a * unsym b + unsym b * unsym a)) := by rfl\n#align mul_def mul_def\n\n",
  "mul_comm":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ˢʸᵐ» -/\n#print mul_comm /-\ntheorem mul_comm [Mul α] [add_comm_semigroup α] [One α] [Invertible (2 : α)] (a b : «expr ˢʸᵐ» α) : a * b = b * a := by\n  rw [mul_def, mul_def, add_comm]\n#align mul_comm mul_comm\n-/\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ˢʸᵐ» -/\n#print mul_comm /-\ntheorem mul_comm [Mul α] [AddCommSemigroup α] [One α] [Invertible (2 : α)] (a b : «expr ˢʸᵐ» α) : a * b = b * a := by\n  rw [mul_def, mul_def, add_comm]\n#align mul_comm mul_comm\n-/\n\n",
  "inv_of_sym":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⅟» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⅟» -/\n@[simp]\ntheorem inv_of_sym [Mul α] [Add α] [One α] [Invertible (2 : α)] (a : α) [Invertible a] :\n    («expr⅟») (sym a) = sym ((«expr⅟») a) :=\n  rfl\n#align inv_of_sym inv_of_sym\n\n"}

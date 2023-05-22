@@ -29,7 +29,7 @@
  "tsub_lt_tsub_iff_right":
  "#print tsub_lt_tsub_iff_right /-\n/-- This lemma also holds for `ennreal`, but we need a different proof for that. -/\ntheorem tsub_lt_tsub_iff_right (h : c ≤ a) : a - c < b - c ↔ a < b :=\n  Contravariant.AddLECancellable.tsub_lt_tsub_iff_right h\n#align tsub_lt_tsub_iff_right tsub_lt_tsub_iff_right\n-/\n\n",
  "tsub_lt_tsub_iff_left_of_le_of_le":
- "#print tsub_lt_tsub_iff_left_of_le_of_le /-\n/-- See `tsub_lt_tsub_iff_left_of_le` for a stronger statement in a linear order. -/\ntheorem tsub_lt_tsub_iff_left_of_le_of_le [contravariant_class α α (· + ·) (· < ·)] (h₁ : b ≤ a) (h₂ : c ≤ a) :\n    a - b < a - c ↔ c < b :=\n  Contravariant.AddLECancellable.tsub_lt_tsub_iff_left_of_le_of_le Contravariant.AddLECancellable h₁ h₂\n#align tsub_lt_tsub_iff_left_of_le_of_le tsub_lt_tsub_iff_left_of_le_of_le\n-/\n\n",
+ "#print tsub_lt_tsub_iff_left_of_le_of_le /-\n/-- See `tsub_lt_tsub_iff_left_of_le` for a stronger statement in a linear order. -/\ntheorem tsub_lt_tsub_iff_left_of_le_of_le [ContravariantClass α α (· + ·) (· < ·)] (h₁ : b ≤ a) (h₂ : c ≤ a) :\n    a - b < a - c ↔ c < b :=\n  Contravariant.AddLECancellable.tsub_lt_tsub_iff_left_of_le_of_le Contravariant.AddLECancellable h₁ h₂\n#align tsub_lt_tsub_iff_left_of_le_of_le tsub_lt_tsub_iff_left_of_le_of_le\n-/\n\n",
  "tsub_lt_tsub_iff_left_of_le":
  "#print tsub_lt_tsub_iff_left_of_le /-\n/-- See `lt_tsub_iff_left_of_le_of_le` for a weaker statement in a partial order. -/\ntheorem tsub_lt_tsub_iff_left_of_le (h : b ≤ a) : a - b < a - c ↔ c < b :=\n  Contravariant.AddLECancellable.tsub_lt_tsub_iff_left_of_le Contravariant.AddLECancellable h\n#align tsub_lt_tsub_iff_left_of_le tsub_lt_tsub_iff_left_of_le\n-/\n\n",
  "tsub_lt_self_iff":
@@ -87,7 +87,7 @@
  "lt_of_tsub_lt_tsub_right_of_le":
  "#print lt_of_tsub_lt_tsub_right_of_le /-\n/-- See `lt_of_tsub_lt_tsub_right` for a stronger statement in a linear order. -/\ntheorem lt_of_tsub_lt_tsub_right_of_le (h : c ≤ b) (h2 : a - c < b - c) : a < b :=\n  by\n  refine' ((tsub_le_tsub_iff_right h).mp h2.le).lt_of_ne _\n  rintro rfl\n  exact h2.false\n#align lt_of_tsub_lt_tsub_right_of_le lt_of_tsub_lt_tsub_right_of_le\n-/\n\n",
  "lt_of_tsub_lt_tsub_left_of_le":
- "#print lt_of_tsub_lt_tsub_left_of_le /-\n/-- See `lt_of_tsub_lt_tsub_left` for a stronger statement in a linear order. -/\ntheorem lt_of_tsub_lt_tsub_left_of_le [contravariant_class α α (· + ·) (· < ·)] (hca : c ≤ a) (h : a - b < a - c) :\n    c < b :=\n  Contravariant.AddLECancellable.lt_of_tsub_lt_tsub_left_of_le hca h\n#align lt_of_tsub_lt_tsub_left_of_le lt_of_tsub_lt_tsub_left_of_le\n-/\n\n",
+ "#print lt_of_tsub_lt_tsub_left_of_le /-\n/-- See `lt_of_tsub_lt_tsub_left` for a stronger statement in a linear order. -/\ntheorem lt_of_tsub_lt_tsub_left_of_le [ContravariantClass α α (· + ·) (· < ·)] (hca : c ≤ a) (h : a - b < a - c) :\n    c < b :=\n  Contravariant.AddLECancellable.lt_of_tsub_lt_tsub_left_of_le hca h\n#align lt_of_tsub_lt_tsub_left_of_le lt_of_tsub_lt_tsub_left_of_le\n-/\n\n",
  "le_tsub_iff_right":
  "#print le_tsub_iff_right /-\ntheorem le_tsub_iff_right (h : a ≤ c) : b ≤ c - a ↔ b + a ≤ c :=\n  Contravariant.AddLECancellable.le_tsub_iff_right h\n#align le_tsub_iff_right le_tsub_iff_right\n-/\n\n",
  "le_tsub_iff_left":

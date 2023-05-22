@@ -1,5 +1,5 @@
 {"true":
- "@[monotonicity]\ntheorem monotonicity.true (p : Prop) : implies p true := fun _ => trivial\n#align monotonicity.true monotonicity.true\n\n",
+ "@[monotonicity]\ntheorem monotonicity.true (p : Prop) : implies p True := fun _ => trivial\n#align monotonicity.true monotonicity.true\n\n",
  "pi":
  "/-\nCopyright (c) 2017 Johannes Hölzl. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Johannes Hölzl (CMU)\n-/\ntheorem monotonicity.pi {α : Sort u} {p q : α → Prop} (h : ∀ a, implies (p a) (q a)) : implies (∀ a, p a) (∀ a, q a) :=\n  fun h' a => h a (h' a)\n#align monotonicity.pi monotonicity.pi\n\n",
  "or":
@@ -9,7 +9,7 @@
  "imp":
  "theorem monotonicity.imp {p p' q q' : Prop} (h₁ : implies p' q') (h₂ : implies q p) : implies (p → p') (q → q') :=\n  fun h => h₁ ∘ h ∘ h₂\n#align monotonicity.imp monotonicity.imp\n\n",
  "false":
- "@[monotonicity]\ntheorem monotonicity.false (p : Prop) : implies false p :=\n  false.elim\n#align monotonicity.false monotonicity.false\n\n",
+ "@[monotonicity]\ntheorem monotonicity.false (p : Prop) : implies False p :=\n  false.elim\n#align monotonicity.false monotonicity.false\n\n",
  "exists":
  "@[monotonicity]\ntheorem monotonicity.exists {α : Sort u} {p q : α → Prop} (h : ∀ a, implies (p a) (q a)) :\n    implies (∃ a, p a) (∃ a, q a) :=\n  Exists.imp h\n#align monotonicity.exists monotonicity.exists\n\n",
  "const":

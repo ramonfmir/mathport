@@ -1,234 +1,296 @@
 {"univ_not_mem_univ":
- "/-- There is no universal set. -/\ntheorem univ_not_mem_univ : univ ∉ univ :=\n  mem_irrefl _\n#align univ_not_mem_univ univ_not_mem_univ\n\n",
- "union_hom":
- "@[simp]\ntheorem union_hom (x y : Set.{u}) : (x : Class.{u}) ∪ y = (x ∪ y : Set.{u}) :=\n  Set.ext fun z => iff.symm Set.mem_union\n#align union_hom union_hom\n\n",
+ "/-- **There is no universal set.**\n\nThis is stated as `univ ∉ univ`, meaning that `univ` (the class of all sets) is proper (does not\nbelong to the class of all sets). -/\ntheorem univ_not_mem_univ : univ ∉ univ :=\n  mem_irrefl _\n#align univ_not_mem_univ univ_not_mem_univ\n\n",
  "trans":
- "protected theorem resp.equiv.trans {n} {x y z : resp n} (h1 : resp.equiv x y) (h2 : resp.equiv y z) : resp.equiv x z :=\n  h1.euc h2.symm\n#align resp.equiv.trans resp.equiv.trans\n\n",
+ "protected theorem resp.equiv.trans {n} {x y z : Resp n} (h1 : Resp.Equiv x y) (h2 : Resp.Equiv y z) : Resp.Equiv x z :=\n  h1.euc h2.symm\n#align resp.equiv.trans resp.equiv.trans\n\n",
  "to_set_union":
- "@[simp]\ntheorem to_set_union (x y : Set.{u}) : (x ∪ y).to_set = x.to_set ∪ y.to_set :=\n  by\n  unfold has_union.union\n  rw [Set.union]\n  simp\n#align to_set_union to_set_union\n\n",
+ "@[simp]\ntheorem to_set_union (x y : ZFSet.{u}) : (x ∪ y).to_set = x.to_set ∪ y.to_set :=\n  by\n  unfold has_union.union\n  rw [ZFSet.union]\n  simp\n#align to_set_union to_set_union\n\n",
  "to_set_subset_iff":
- "@[simp]\ntheorem to_set_subset_iff {x y : Set} : x.to_set ⊆ y.to_set ↔ x ⊆ y := by simp [subset_def, Set.subset_def]\n#align to_set_subset_iff to_set_subset_iff\n\n",
+ "@[simp]\ntheorem to_set_subset_iff {x y : ZFSet} : x.to_set ⊆ y.to_set ↔ x ⊆ y := by simp [subset_def, Set.subset_def]\n#align to_set_subset_iff to_set_subset_iff\n\n",
  "to_set_singleton":
- "@[simp]\ntheorem to_set_singleton (x : Set) : ({x} : Set).to_set = {x} :=\n  by\n  ext\n  simp\n#align to_set_singleton to_set_singleton\n\n",
+ "@[simp]\ntheorem to_set_singleton (x : ZFSet) : ({x} : ZFSet).to_set = {x} :=\n  by\n  ext\n  simp\n#align to_set_singleton to_set_singleton\n\n",
  "to_set_sep":
- "@[simp]\ntheorem to_set_sep (a : Set) (p : Set → Prop) : { x ∈ a | p x }.to_set = { x ∈ a.to_set | p x } :=\n  by\n  ext\n  simp\n#align to_set_sep to_set_sep\n\n",
+ "@[simp]\ntheorem to_set_sep (a : ZFSet) (p : ZFSet → Prop) : { x ∈ a | p x }.to_set = { x ∈ a.to_set | p x } :=\n  by\n  ext\n  simp\n#align to_set_sep to_set_sep\n\n",
  "to_set_sdiff":
- "@[simp]\ntheorem to_set_sdiff (x y : Set.{u}) : (x \\ y).to_set = x.to_set \\ y.to_set :=\n  by\n  change { z ∈ x | z ∉ y }.to_set = _\n  ext\n  simp\n#align to_set_sdiff to_set_sdiff\n\n",
+ "@[simp]\ntheorem to_set_sdiff (x y : ZFSet.{u}) : (x \\ y).to_set = x.to_set \\ y.to_set :=\n  by\n  change { z ∈ x | z ∉ y }.to_set = _\n  ext\n  simp\n#align to_set_sdiff to_set_sdiff\n\n",
  "to_set_sUnion":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:177:8: unsupported: ambiguous notation -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `Set.sUnion -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:177:8: unsupported: ambiguous notation -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `Set.sUnion -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\n@[simp]\ntheorem to_set_sUnion (x : Set.{u}) : (Set.sUnion x).to_set = Set.sUnion («expr '' » to_set x.to_set) :=\n  by\n  ext\n  simp\n#align to_set_sUnion to_set_sUnion\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:177:8: unsupported: ambiguous notation -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `Set.sUnion -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:177:8: unsupported: ambiguous notation -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `Set.sUnion -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\n@[simp]\ntheorem to_set_sUnion (x : ZFSet.{u}) : (Set.sUnion x).to_set = Set.sUnion («expr '' » toSet x.to_set) :=\n  by\n  ext\n  simp\n#align to_set_sUnion to_set_sUnion\n\n",
+ "to_set_sInter":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:177:8: unsupported: ambiguous notation -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `Set.sInter -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:177:8: unsupported: ambiguous notation -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `Set.sInter -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\ntheorem to_set_sInter {x : ZFSet.{u}} (h : x.nonempty) :\n    (Set.sInter x).to_set = Set.sInter («expr '' » toSet x.to_set) :=\n  by\n  ext\n  simp [mem_sInter h]\n#align to_set_sInter to_set_sInter\n\n",
+ "to_set_range":
+ "@[simp]\ntheorem to_set_range {α : Type u} (f : α → ZFSet.{max u v}) : (range f).to_set = Set.range f :=\n  by\n  ext\n  simp\n#align to_set_range to_set_range\n\n",
  "to_set_pair":
- "@[simp]\ntheorem to_set_pair (x y : Set.{u}) : (pair x y).to_set = {{x}, {x, y}} := by simp [pair]\n#align to_set_pair to_set_pair\n\n",
+ "@[simp]\ntheorem to_set_pair (x y : ZFSet.{u}) : (pair x y).to_set = {{x}, {x, y}} := by simp [pair]\n#align to_set_pair to_set_pair\n\n",
  "to_set_inter":
- "@[simp]\ntheorem to_set_inter (x y : Set.{u}) : (x ∩ y).to_set = x.to_set ∩ y.to_set :=\n  by\n  unfold has_inter.inter\n  rw [Set.inter]\n  ext\n  simp\n#align to_set_inter to_set_inter\n\n",
+ "@[simp]\ntheorem to_set_inter (x y : ZFSet.{u}) : (x ∩ y).to_set = x.to_set ∩ y.to_set :=\n  by\n  unfold has_inter.inter\n  rw [ZFSet.inter]\n  ext\n  simp\n#align to_set_inter to_set_inter\n\n",
  "to_set_insert":
- "@[simp]\ntheorem to_set_insert (x y : Set) : (insert x y).to_set = insert x y.to_set :=\n  by\n  ext\n  simp\n#align to_set_insert to_set_insert\n\n",
+ "@[simp]\ntheorem to_set_insert (x y : ZFSet) : (insert x y).to_set = insert x y.to_set :=\n  by\n  ext\n  simp\n#align to_set_insert to_set_insert\n\n",
  "to_set_injective":
- "theorem to_set_injective : function.injective to_set := fun x y h => ext <| Set.ext_iff.1 h\n#align to_set_injective to_set_injective\n\n",
+ "theorem to_set_injective : function.injective toSet := fun x y h => ext <| Set.ext_iff.1 h\n#align to_set_injective to_set_injective\n\n",
  "to_set_inj":
- "@[simp]\ntheorem to_set_inj {x y : Set} : x.to_set = y.to_set ↔ x = y :=\n  to_set_injective.eq_iff\n#align to_set_inj to_set_inj\n\n",
+ "@[simp]\ntheorem to_set_inj {x y : ZFSet} : x.to_set = y.to_set ↔ x = y :=\n  toSet_injective.eq_iff\n#align to_set_inj to_set_inj\n\n",
  "to_set_image":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\n@[simp]\ntheorem to_set_image (f : Set → Set) [H : definable 1 f] (x : Set) : (image f x).to_set = «expr '' » f x.to_set :=\n  by\n  ext\n  simp\n#align to_set_image to_set_image\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\n@[simp]\ntheorem to_set_image (f : ZFSet → ZFSet) [H : Definable 1 f] (x : ZFSet) : (image f x).to_set = «expr '' » f x.to_set :=\n  by\n  ext\n  simp\n#align to_set_image to_set_image\n\n",
  "to_set_empty":
- "@[simp]\ntheorem to_set_empty : to_set ∅ = ∅ := by simp [to_set]\n#align to_set_empty to_set_empty\n\n",
+ "@[simp]\ntheorem to_set_empty : toSet ∅ = ∅ := by simp [to_set]\n#align to_set_empty to_set_empty\n\n",
  "to_Set_of_Set":
- "@[simp]\ntheorem to_Set_of_Set (A : Class.{u}) (x : Set.{u}) : to_Set A x ↔ A x :=\n  ⟨fun ⟨y, yx, py⟩ => by rwa [of_Set.inj yx] at py, fun px => ⟨x, rfl, px⟩⟩\n#align to_Set_of_Set to_Set_of_Set\n\n",
+ "@[simp]\ntheorem to_Set_of_Set (A : Class.{u}) (x : ZFSet.{u}) : ToSet A x ↔ A x :=\n  ⟨fun ⟨y, yx, py⟩ => by rwa [of_Set.inj yx] at py, fun px => ⟨x, rfl, px⟩⟩\n#align to_Set_of_Set to_Set_of_Set\n\n",
  "symm":
- "protected theorem resp.equiv.symm {n} {a b : resp n} : resp.equiv a b → resp.equiv b a :=\n  (resp.equiv.refl b).euc\n#align resp.equiv.symm resp.equiv.symm\n\n",
+ "protected theorem resp.equiv.symm {n} {a b : Resp n} : Resp.Equiv a b → Resp.Equiv b a :=\n  (Resp.Equiv.refl b).euc\n#align resp.equiv.symm resp.equiv.symm\n\n",
  "subset_iff":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⟦ ⟧» -/\n@[simp]\ntheorem subset_iff : ∀ {x y : pSet}, mk x ⊆ mk y ↔ x ⊆ y\n  | ⟨α, A⟩, ⟨β, B⟩ =>\n    ⟨fun h a => @h («expr⟦ ⟧» (A a)) (mem.mk A a), fun h z =>\n      Quotient.inductionOn z fun z ⟨a, za⟩ =>\n        let ⟨b, ab⟩ := h a\n        ⟨b, za.trans ab⟩⟩\n#align subset_iff subset_iff\n\n",
- "subset_hom":
- "@[simp]\ntheorem subset_hom (x y : Set.{u}) : (x : Class.{u}) ⊆ y ↔ x ⊆ y :=\n  iff.rfl\n#align subset_hom subset_hom\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⟦ ⟧» -/\n@[simp]\ntheorem subset_iff : ∀ {x y : PSet}, mk x ⊆ mk y ↔ x ⊆ y\n  | ⟨α, A⟩, ⟨β, B⟩ =>\n    ⟨fun h a => @h («expr⟦ ⟧» (A a)) (Mem.mk A a), fun h z =>\n      Quotient.inductionOn z fun z ⟨a, za⟩ =>\n        let ⟨b, ab⟩ := h a\n        ⟨b, za.trans ab⟩⟩\n#align subset_iff subset_iff\n\n",
  "subset_def":
- "theorem subset_def {x y : Set.{u}} : x ⊆ y ↔ ∀ ⦃z⦄, z ∈ x → z ∈ y :=\n  iff.rfl\n#align subset_def subset_def\n\n",
+ "theorem subset_def {x y : ZFSet.{u}} : x ⊆ y ↔ ∀ ⦃z⦄, z ∈ x → z ∈ y :=\n  iff.rfl\n#align subset_def subset_def\n\n",
  "sound":
- "theorem sound {x y : pSet} (h : pSet.equiv x y) : mk x = mk y :=\n  quotient.sound h\n#align sound sound\n\n",
+ "theorem sound {x y : PSet} (h : PSet.Equiv x y) : mk x = mk y :=\n  quotient.sound h\n#align sound sound\n\n",
+ "singleton_nonempty":
+ "theorem singleton_nonempty (u : ZFSet) : ZFSet.Nonempty {u} :=\n  insert_nonempty u ∅\n#align singleton_nonempty singleton_nonempty\n\n",
  "singleton_injective":
- "theorem singleton_injective : function.injective (@singleton Set Set _) := fun x y H =>\n  by\n  let this := congr_arg sUnion H\n  rwa [sUnion_singleton, sUnion_singleton] at this\n#align singleton_injective singleton_injective\n\n",
+ "theorem singleton_injective : function.injective (@singleton ZFSet ZFSet _) := fun x y H =>\n  by\n  let this := congr_arg unionₛ H\n  rwa [sUnion_singleton, sUnion_singleton] at this\n#align singleton_injective singleton_injective\n\n",
  "singleton_inj":
- "@[simp]\ntheorem singleton_inj {x y : Set} : ({x} : Set) = {y} ↔ x = y :=\n  singleton_injective.eq_iff\n#align singleton_inj singleton_inj\n\n",
- "sep_hom":
- "@[simp]\ntheorem sep_hom (p : Class.{u}) (x : Set.{u}) : (↑({ y ∈ x | p y }) : Class.{u}) = { y ∈ x | p y } :=\n  Set.ext fun y => Set.mem_sep\n#align sep_hom sep_hom\n\n",
+ "@[simp]\ntheorem singleton_inj {x y : ZFSet} : ({x} : ZFSet) = {y} ↔ x = y :=\n  singleton_injective.eq_iff\n#align singleton_inj singleton_inj\n\n",
+ "self":
+ "theorem hereditarily.self (h : x.hereditarily p) : p x :=\n  h.def.1\n#align hereditarily.self hereditarily.self\n\n",
  "sUnion_singleton":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:177:8: unsupported: ambiguous notation -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `Set.sUnion -/\n@[simp]\ntheorem sUnion_singleton {x : Set.{u}} : Set.sUnion ({x} : Set) = x :=\n  ext fun y => by simp_rw [mem_sUnion, exists_prop, mem_singleton, exists_eq_left]\n#align sUnion_singleton sUnion_singleton\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:177:8: unsupported: ambiguous notation -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `Set.sUnion -/\n@[simp]\ntheorem sUnion_singleton {x : ZFSet.{u}} : Set.sUnion ({x} : ZFSet) = x :=\n  ext fun y => by simp_rw [mem_sUnion, exists_prop, mem_singleton, exists_eq_left]\n#align sUnion_singleton sUnion_singleton\n\n",
+ "sUnion_pair":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:177:8: unsupported: ambiguous notation -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `Set.sUnion -/\n@[simp]\ntheorem sUnion_pair {x y : ZFSet.{u}} : Set.sUnion ({x, y} : ZFSet.{u}) = x ∪ y :=\n  by\n  ext\n  simp_rw [mem_union, mem_sUnion, mem_pair]\n  constructor\n  · rintro ⟨w, rfl | rfl, hw⟩\n    · exact or.inl hw\n    · exact or.inr hw\n  · rintro (hz | hz)\n    · exact ⟨x, or.inl rfl, hz⟩\n    · exact ⟨y, or.inr rfl, hz⟩\n#align sUnion_pair sUnion_pair\n\n",
  "sUnion_lem":
- "theorem sUnion_lem {α β : Type u} (A : α → pSet) (B : β → pSet) (αβ : ∀ a, ∃ b, equiv (A a) (B b)) :\n    ∀ a, ∃ b, equiv ((sUnion ⟨α, A⟩).func a) ((sUnion ⟨β, B⟩).func b)\n  | ⟨a, c⟩ => by\n    let ⟨b, hb⟩ := αβ a\n    induction' ea : A a with γ Γ\n    induction' eb : B b with δ Δ\n    rw [ea, eb] at hb\n    cases' hb with γδ δγ\n    exact\n      let c : type (A a) := c\n      let ⟨d, hd⟩ := γδ (by rwa [ea] at c)\n      have : pSet.equiv ((A a).func c) ((B b).func (eq.rec d (eq.symm eb))) :=\n        match A a, B b, ea, eb, c, d, hd with\n        | _, _, rfl, rfl, x, y, hd => hd\n      ⟨⟨b, by\n          rw [mk_func]\n          exact eq.rec d (eq.symm eb)⟩,\n        this⟩\n#align sUnion_lem sUnion_lem\n\n",
- "sUnion_hom":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:177:8: unsupported: ambiguous notation -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `Class.sUnion -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:177:8: unsupported: ambiguous notation -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `Class.sUnion -/\n@[simp]\ntheorem sUnion_hom (x : Set.{u}) : Class.sUnion (x : Class.{u}) = Class.sUnion x :=\n  Set.ext fun z => by\n    refine' iff.trans _ Set.mem_sUnion.symm\n    exact ⟨fun ⟨_, ⟨a, rfl, ax⟩, za⟩ => ⟨a, ax, za⟩, fun ⟨a, ax, za⟩ => ⟨_, ⟨a, rfl, ax⟩, za⟩⟩\n#align sUnion_hom sUnion_hom\n\n",
+ "theorem sUnion_lem {α β : Type u} (A : α → PSet) (B : β → PSet) (αβ : ∀ a, ∃ b, Equiv (A a) (B b)) :\n    ∀ a, ∃ b, Equiv ((unionₛ ⟨α, A⟩).func a) ((unionₛ ⟨β, B⟩).func b)\n  | ⟨a, c⟩ => by\n    let ⟨b, hb⟩ := αβ a\n    induction' ea : A a with γ Γ\n    induction' eb : B b with δ Δ\n    rw [ea, eb] at hb\n    cases' hb with γδ δγ\n    exact\n      let c : type (A a) := c\n      let ⟨d, hd⟩ := γδ (by rwa [ea] at c)\n      have : PSet.Equiv ((A a).func c) ((B b).func (eq.rec d (Eq.symm eb))) :=\n        match A a, B b, ea, eb, c, d, hd with\n        | _, _, rfl, rfl, x, y, hd => hd\n      ⟨⟨b, by\n          rw [mk_func]\n          exact eq.rec d (Eq.symm eb)⟩,\n        this⟩\n#align sUnion_lem sUnion_lem\n\n",
+ "sUnion_empty":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:177:8: unsupported: ambiguous notation -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `Class.sUnion -/\n@[simp]\ntheorem sUnion_empty : Class.sUnion (∅ : Class.{u}) = ∅ :=\n  by\n  ext\n  simp\n#align sUnion_empty sUnion_empty\n\n",
+ "sUnion_apply":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:177:8: unsupported: ambiguous notation -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `Class.sUnion -/\n@[simp]\ntheorem sUnion_apply {x : Class} {y : ZFSet} : (Class.sUnion x) y ↔ ∃ z : ZFSet, x z ∧ y ∈ z :=\n  by\n  constructor\n  · rintro ⟨-, ⟨z, rfl, hxz⟩, hyz⟩\n    exact ⟨z, hxz, hyz⟩\n  · exact fun ⟨z, hxz, hyz⟩ => ⟨_, coe_mem.2 hxz, hyz⟩\n#align sUnion_apply sUnion_apply\n\n",
+ "sInter_singleton":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:177:8: unsupported: ambiguous notation -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `Set.sInter -/\n@[simp]\ntheorem sInter_singleton {x : ZFSet.{u}} : Set.sInter ({x} : ZFSet) = x :=\n  ext fun y => by simp_rw [mem_sInter (singleton_nonempty x), mem_singleton, forall_eq]\n#align sInter_singleton sInter_singleton\n\n",
+ "sInter_empty":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:177:8: unsupported: ambiguous notation -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `Class.sInter -/\n@[simp]\ntheorem sInter_empty : Class.sInter (∅ : Class.{u}) = univ :=\n  by\n  ext\n  simp [sInter, ← univ]\n#align sInter_empty sInter_empty\n\n",
+ "sInter_apply":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:177:8: unsupported: ambiguous notation -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `Class.sInter -/\n@[simp]\ntheorem sInter_apply {x : Class.{u}} {y : ZFSet.{u}} : (Class.sInter x) y ↔ ∀ z : ZFSet.{u}, x z → y ∈ z :=\n  by\n  refine' ⟨fun hxy z hxz => hxy _ ⟨z, rfl, hxz⟩, _⟩\n  rintro H - ⟨z, rfl, hxz⟩\n  exact H _ hxz\n#align sInter_apply sInter_apply\n\n",
  "rfl":
- "protected theorem equiv.rfl : ∀ {x}, equiv x x :=\n  equiv.refl\n#align equiv.rfl equiv.rfl\n\n",
+ "protected theorem equiv.rfl : ∀ {x}, Equiv x x :=\n  Equiv.refl\n#align equiv.rfl equiv.rfl\n\n",
  "regularity":
- "theorem regularity (x : Set.{u}) (h : x ≠ ∅) : ∃ y ∈ x, x ∩ y = ∅ :=\n  by_contradiction fun ne =>\n    h <|\n      (eq_empty x).2 fun y =>\n        induction_on y fun z (IH : ∀ w : Set.{u}, w ∈ z → w ∉ x) =>\n          show z ∉ x from fun zx =>\n            ne\n              ⟨z, zx,\n                (eq_empty _).2 fun w wxz =>\n                  let ⟨wx, wz⟩ := mem_inter.1 wxz\n                  IH w wz wx⟩\n#align regularity regularity\n\n",
+ "theorem regularity (x : ZFSet.{u}) (h : x ≠ ∅) : ∃ y ∈ x, x ∩ y = ∅ :=\n  by_contradiction fun ne =>\n    h <|\n      (eq_empty x).2 fun y =>\n        inductionOn y fun z (IH : ∀ w : ZFSet.{u}, w ∈ z → w ∉ x) =>\n          show z ∉ x from fun zx =>\n            ne\n              ⟨z, zx,\n                (eq_empty _).2 fun w wxz =>\n                  let ⟨wx, wz⟩ := mem_inter.1 wxz\n                  IH w wz wx⟩\n#align regularity regularity\n\n",
  "refl":
- "protected theorem resp.equiv.refl {n} (a : resp n) : resp.equiv a a :=\n  a.2\n#align resp.equiv.refl resp.equiv.refl\n\n",
- "powerset_hom":
- "@[simp]\ntheorem powerset_hom (x : Set.{u}) : powerset.{u} x = Set.powerset x :=\n  Set.ext fun z => iff.symm Set.mem_powerset\n#align powerset_hom powerset_hom\n\n",
+ "protected theorem resp.equiv.refl {n} (a : Resp n) : Resp.Equiv a a :=\n  a.2\n#align resp.equiv.refl resp.equiv.refl\n\n",
+ "powerset_apply":
+ "@[simp]\ntheorem powerset_apply {A : Class.{u}} {x : ZFSet.{u}} : powerset A x ↔ ↑x ⊆ A :=\n  iff.rfl\n#align powerset_apply powerset_apply\n\n",
  "pair_mem_prod":
- "@[simp]\ntheorem pair_mem_prod {x y a b : Set.{u}} : pair a b ∈ prod x y ↔ a ∈ x ∧ b ∈ y :=\n  ⟨fun h =>\n    let ⟨a', a'x, b', b'y, e⟩ := mem_prod.1 h\n    match a', b', pair_injective e, a'x, b'y with\n    | _, _, ⟨rfl, rfl⟩, ax, bY => ⟨ax, bY⟩,\n    fun ⟨ax, bY⟩ => mem_prod.2 ⟨a, ax, b, bY, rfl⟩⟩\n#align pair_mem_prod pair_mem_prod\n\n",
+ "@[simp]\ntheorem pair_mem_prod {x y a b : ZFSet.{u}} : pair a b ∈ prod x y ↔ a ∈ x ∧ b ∈ y :=\n  ⟨fun h =>\n    let ⟨a', a'x, b', b'y, e⟩ := mem_prod.1 h\n    match a', b', pair_injective e, a'x, b'y with\n    | _, _, ⟨rfl, rfl⟩, ax, bY => ⟨ax, bY⟩,\n    fun ⟨ax, bY⟩ => mem_prod.2 ⟨a, ax, b, bY, rfl⟩⟩\n#align pair_mem_prod pair_mem_prod\n\n",
  "pair_injective":
- "theorem pair_injective : function.injective2 pair := fun x x' y y' H =>\n  by\n  have ae := ext_iff.1 H\n  simp only [pair, mem_pair] at ae\n  obtain rfl : x = x' := by\n    cases' (ae {x}).1 (by simp) with h h\n    · exact singleton_injective h\n    · have m : x' ∈ ({x} : Set) := by simp [h]\n      rw [mem_singleton.mp m]\n  have he : x = y → y = y' := by\n    rintro rfl\n    cases' (ae {x, y'}).2 (by simp only [eq_self_iff_true, or_true_iff]) with xy'x xy'xx\n    · rw [eq_comm, ← mem_singleton, ← xy'x, mem_pair]\n      exact or.inr rfl\n    · simpa [eq_comm] using (ext_iff.1 xy'xx y').1 (by simp)\n  obtain xyx | xyy' := (ae {x, y}).1 (by simp)\n  · obtain rfl := mem_singleton.mp ((ext_iff.1 xyx y).1 <| by simp)\n    simp [he rfl]\n  · obtain rfl | yy' := mem_pair.mp ((ext_iff.1 xyy' y).1 <| by simp)\n    · simp [he rfl]\n    · simp [yy']\n#align pair_injective pair_injective\n\n",
+ "theorem pair_injective : Function.Injective2 pair := fun x x' y y' H =>\n  by\n  have ae := ext_iff.1 H\n  simp only [pair, mem_pair] at ae\n  obtain rfl : x = x' := by\n    cases' (ae {x}).1 (by simp) with h h\n    · exact singleton_injective h\n    · have m : x' ∈ ({x} : ZFSet) := by simp [h]\n      rw [mem_singleton.mp m]\n  have he : x = y → y = y' := by\n    rintro rfl\n    cases' (ae {x, y'}).2 (by simp only [eq_self_iff_true, or_true_iff]) with xy'x xy'xx\n    · rw [eq_comm, ← mem_singleton, ← xy'x, mem_pair]\n      exact or.inr rfl\n    · simpa [eq_comm] using (ext_iff.1 xy'xx y').1 (by simp)\n  obtain xyx | xyy' := (ae {x, y}).1 (by simp)\n  · obtain rfl := mem_singleton.mp ((ext_iff.1 xyx y).1 <| by simp)\n    simp [he rfl]\n  · obtain rfl | yy' := mem_pair.mp ((ext_iff.1 xyy' y).1 <| by simp)\n    · simp [he rfl]\n    · simp [yy']\n#align pair_injective pair_injective\n\n",
  "pair_inj":
- "@[simp]\ntheorem pair_inj {x y x' y' : Set} : pair x y = pair x' y' ↔ x = x' ∧ y = y' :=\n  pair_injective.eq_iff\n#align pair_inj pair_inj\n\n",
+ "@[simp]\ntheorem pair_inj {x y x' y' : ZFSet} : pair x y = pair x' y' ↔ x = x' ∧ y = y' :=\n  pair_injective.eq_iff\n#align pair_inj pair_inj\n\n",
  "omega_zero":
- "@[simp]\ntheorem omega_zero : ∅ ∈ omega :=\n  ⟨⟨0⟩, equiv.rfl⟩\n#align omega_zero omega_zero\n\n",
+ "@[simp]\ntheorem omega_zero : ∅ ∈ omega :=\n  ⟨⟨0⟩, Equiv.rfl⟩\n#align omega_zero omega_zero\n\n",
  "omega_succ":
- "@[simp]\ntheorem omega_succ {n} : n ∈ omega.{u} → insert n n ∈ omega.{u} :=\n  Quotient.inductionOn n fun x ⟨⟨n⟩, h⟩ =>\n    ⟨⟨n + 1⟩,\n      Set.exact <| show insert (mk x) (mk x) = insert (mk <| of_nat n) (mk <| of_nat n) by rw [Set.sound h]; rfl⟩\n#align omega_succ omega_succ\n\n",
+ "@[simp]\ntheorem omega_succ {n} : n ∈ omega.{u} → insert n n ∈ omega.{u} :=\n  Quotient.inductionOn n fun x ⟨⟨n⟩, h⟩ =>\n    ⟨⟨n + 1⟩,\n      ZFSet.exact <| show insert (mk x) (mk x) = insert (mk <| ofNat n) (mk <| ofNat n) by rw [ZFSet.sound h]; rfl⟩\n#align omega_succ omega_succ\n\n",
  "not_nonempty_empty":
- "#print not_nonempty_empty /-\n@[simp]\ntheorem not_nonempty_empty : ¬Set.nonempty ∅ := by simp [Set.nonempty]\n#align not_nonempty_empty not_nonempty_empty\n-/\n\n",
+ "#print not_nonempty_empty /-\n@[simp]\ntheorem not_nonempty_empty : ¬ZFSet.Nonempty ∅ := by simp [ZFSet.Nonempty]\n#align not_nonempty_empty not_nonempty_empty\n-/\n\n",
+ "not_mem_sInter_of_not_mem":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:177:8: unsupported: ambiguous notation -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `Set.sInter -/\ntheorem not_mem_sInter_of_not_mem {x y z : ZFSet} (hy : ¬y ∈ z) (hz : z ∈ x) : ¬y ∈ Set.sInter x := fun hx =>\n  hy <| mem_of_mem_interₛ hx hz\n#align not_mem_sInter_of_not_mem not_mem_sInter_of_not_mem\n\n",
+ "not_mem_empty":
+ "@[simp]\ntheorem not_mem_empty (x : Class.{u}) : x ∉ (∅ : Class.{u}) := fun ⟨_, _, h⟩ => h\n#align not_mem_empty not_mem_empty\n\n",
+ "not_empty_hom":
+ "@[simp]\ntheorem not_empty_hom (x : ZFSet.{u}) : ¬(∅ : Class.{u}) x :=\n  id\n#align not_empty_hom not_empty_hom\n\n",
  "nonempty_type_iff_nonempty":
- "theorem nonempty_type_iff_nonempty {x : pSet} : nonempty x.type ↔ pSet.nonempty x :=\n  ⟨fun ⟨i⟩ => ⟨_, func_mem _ i⟩, fun ⟨i, j, h⟩ => ⟨j⟩⟩\n#align nonempty_type_iff_nonempty nonempty_type_iff_nonempty\n\n",
+ "theorem nonempty_type_iff_nonempty {x : PSet} : Nonempty x.type ↔ PSet.Nonempty x :=\n  ⟨fun ⟨i⟩ => ⟨_, func_mem _ i⟩, fun ⟨i, j, h⟩ => ⟨j⟩⟩\n#align nonempty_type_iff_nonempty nonempty_type_iff_nonempty\n\n",
  "nonempty_to_set_iff":
- "@[simp]\ntheorem nonempty_to_set_iff {u : Set} : u.to_set.nonempty ↔ u.nonempty :=\n  iff.rfl\n#align nonempty_to_set_iff nonempty_to_set_iff\n\n",
+ "@[simp]\ntheorem nonempty_to_set_iff {u : ZFSet} : u.to_set.nonempty ↔ u.nonempty :=\n  iff.rfl\n#align nonempty_to_set_iff nonempty_to_set_iff\n\n",
  "nonempty_of_nonempty_type":
- "theorem nonempty_of_nonempty_type (x : pSet) [h : nonempty x.type] : pSet.nonempty x :=\n  nonempty_type_iff_nonempty.1 h\n#align nonempty_of_nonempty_type nonempty_of_nonempty_type\n\n",
+ "theorem nonempty_of_nonempty_type (x : PSet) [h : Nonempty x.type] : PSet.Nonempty x :=\n  nonempty_type_iff_nonempty.1 h\n#align nonempty_of_nonempty_type nonempty_of_nonempty_type\n\n",
  "nonempty_of_mem":
- "theorem nonempty_of_mem {x u : Set} (h : x ∈ u) : u.nonempty :=\n  ⟨x, h⟩\n#align nonempty_of_mem nonempty_of_mem\n\n",
+ "theorem nonempty_of_mem {x u : ZFSet} (h : x ∈ u) : u.nonempty :=\n  ⟨x, h⟩\n#align nonempty_of_mem nonempty_of_mem\n\n",
  "nonempty_mk_iff":
- "@[simp]\ntheorem nonempty_mk_iff {x : pSet} : (mk x).nonempty ↔ x.nonempty :=\n  by\n  refine' ⟨_, fun ⟨a, h⟩ => ⟨mk a, h⟩⟩\n  rintro ⟨a, h⟩\n  induction a using Quotient.inductionOn\n  exact ⟨a, h⟩\n#align nonempty_mk_iff nonempty_mk_iff\n\n",
+ "@[simp]\ntheorem nonempty_mk_iff {x : PSet} : (mk x).nonempty ↔ x.nonempty :=\n  by\n  refine' ⟨_, fun ⟨a, h⟩ => ⟨mk a, h⟩⟩\n  rintro ⟨a, h⟩\n  induction a using Quotient.inductionOn\n  exact ⟨a, h⟩\n#align nonempty_mk_iff nonempty_mk_iff\n\n",
  "nonempty_def":
- "theorem nonempty_def (u : Set) : u.nonempty ↔ ∃ x, x ∈ u :=\n  iff.rfl\n#align nonempty_def nonempty_def\n\n",
+ "theorem nonempty_def (u : ZFSet) : u.nonempty ↔ ∃ x, x ∈ u :=\n  iff.rfl\n#align nonempty_def nonempty_def\n\n",
  "mk_type":
- "@[simp]\ntheorem mk_type (α A) : type ⟨α, A⟩ = α :=\n  rfl\n#align mk_type mk_type\n\n",
+ "@[simp]\ntheorem mk_type (α A) : Type ⟨α, A⟩ = α :=\n  rfl\n#align mk_type mk_type\n\n",
  "mk_out":
- "@[simp]\ntheorem mk_out : ∀ x : Set, mk x.out = x :=\n  quotient.out_eq\n#align mk_out mk_out\n\n",
+ "@[simp]\ntheorem mk_out : ∀ x : ZFSet, mk x.out = x :=\n  Quotient.out_eq\n#align mk_out mk_out\n\n",
  "mk_mem_iff":
- "@[simp]\ntheorem mk_mem_iff {x y : pSet} : mk x ∈ mk y ↔ x ∈ y :=\n  iff.rfl\n#align mk_mem_iff mk_mem_iff\n\n",
+ "@[simp]\ntheorem mk_mem_iff {x y : PSet} : mk x ∈ mk y ↔ x ∈ y :=\n  iff.rfl\n#align mk_mem_iff mk_mem_iff\n\n",
  "mk_func":
- "@[simp]\ntheorem mk_func (α A) : func ⟨α, A⟩ = A :=\n  rfl\n#align mk_func mk_func\n\n",
+ "@[simp]\ntheorem mk_func (α A) : Func ⟨α, A⟩ = A :=\n  rfl\n#align mk_func mk_func\n\n",
  "mk_eq":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⟦ ⟧» -/\n@[simp]\ntheorem mk_eq (x : pSet) : @eq Set («expr⟦ ⟧» x) (mk x) :=\n  rfl\n#align mk_eq mk_eq\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⟦ ⟧» -/\n@[simp]\ntheorem mk_eq (x : PSet) : @Eq ZFSet («expr⟦ ⟧» x) (mk x) :=\n  rfl\n#align mk_eq mk_eq\n\n",
  "mk":
- "theorem image.mk : ∀ (f : Set.{u} → Set.{u}) [H : definable 1 f] (x) {y} (h : y ∈ x), f y ∈ @image f H x\n  | _, ⟨F⟩, x, y => quotient.induction_on₂ x y fun ⟨α, A⟩ y ⟨a, ya⟩ => ⟨a, F.2 _ _ ya⟩\n#align image.mk image.mk\n\n",
+ "theorem image.mk : ∀ (f : ZFSet.{u} → ZFSet.{u}) [H : Definable 1 f] (x) {y} (h : y ∈ x), f y ∈ @image f H x\n  | _, ⟨F⟩, x, y => quotient.induction_on₂ x y fun ⟨α, A⟩ y ⟨a, ya⟩ => ⟨a, F.2 _ _ ya⟩\n#align image.mk image.mk\n\n",
  "mem_wf_aux":
- "private theorem mem_wf_aux : ∀ {x y : pSet.{u}}, equiv x y → acc (· ∈ ·) y\n  | ⟨α, A⟩, ⟨β, B⟩, H =>\n    ⟨_, by\n      rintro ⟨γ, C⟩ ⟨b, hc⟩\n      cases' H.exists_right b with a ha\n      have H := ha.trans hc.symm\n      rw [mk_func] at H\n      exact mem_wf_aux H⟩\n#align mem_wf_aux mem_wf_aux\n\n",
+ "private theorem mem_wf_aux : ∀ {x y : PSet.{u}}, Equiv x y → acc (· ∈ ·) y\n  | ⟨α, A⟩, ⟨β, B⟩, H =>\n    ⟨_, by\n      rintro ⟨γ, C⟩ ⟨b, hc⟩\n      cases' H.exists_right b with a ha\n      have H := ha.trans hc.symm\n      rw [mk_func] at H\n      exact mem_wf_aux H⟩\n#align mem_wf_aux mem_wf_aux\n\n",
  "mem_wf":
- "theorem mem_wf : @well_founded Class.{u} (· ∈ ·) :=\n  ⟨by\n    have H : ∀ x : Set.{u}, @acc Class.{u} (· ∈ ·) ↑x :=\n      by\n      refine' fun a => Set.induction_on a fun x IH => ⟨x, _⟩\n      rintro A ⟨z, rfl, hz⟩\n      exact IH z hz\n    · refine' fun A => ⟨A, _⟩\n      rintro B ⟨x, rfl, hx⟩\n      exact H x⟩\n#align mem_wf mem_wf\n\n",
+ "theorem mem_wf : @well_founded Class.{u} (· ∈ ·) :=\n  ⟨by\n    have H : ∀ x : ZFSet.{u}, @acc Class.{u} (· ∈ ·) ↑x :=\n      by\n      refine' fun a => ZFSet.inductionOn a fun x IH => ⟨x, _⟩\n      rintro A ⟨z, rfl, hz⟩\n      exact IH z hz\n    · refine' fun A => ⟨A, _⟩\n      rintro B ⟨x, rfl, hx⟩\n      exact H x⟩\n#align mem_wf mem_wf\n\n",
+ "mem_univ_hom":
+ "@[simp]\ntheorem mem_univ_hom (x : ZFSet.{u}) : univ.{u} x :=\n  trivial\n#align mem_univ_hom mem_univ_hom\n\n",
  "mem_univ":
- "theorem mem_univ {A : Class.{u}} : A ∈ univ.{u} ↔ ∃ x : Set.{u}, ↑x = A :=\n  exists_congr fun x => and_true_iff _\n#align mem_univ mem_univ\n\n",
+ "@[simp]\ntheorem mem_univ {A : Class.{u}} : A ∈ univ.{u} ↔ ∃ x : ZFSet.{u}, ↑x = A :=\n  exists_congr fun x => and_true_iff _\n#align mem_univ mem_univ\n\n",
  "mem_union":
- "@[simp]\ntheorem mem_union {x y z : Set.{u}} : z ∈ x ∪ y ↔ z ∈ x ∨ z ∈ y :=\n  by\n  rw [← mem_to_set]\n  simp\n#align mem_union mem_union\n\n",
+ "@[simp]\ntheorem mem_union {x y z : ZFSet.{u}} : z ∈ x ∪ y ↔ z ∈ x ∨ z ∈ y :=\n  by\n  rw [← mem_to_set]\n  simp\n#align mem_union mem_union\n\n",
  "mem_to_set":
- "@[simp]\ntheorem mem_to_set (a u : Set.{u}) : a ∈ u.to_set ↔ a ∈ u :=\n  iff.rfl\n#align mem_to_set mem_to_set\n\n",
+ "@[simp]\ntheorem mem_to_set (a u : ZFSet.{u}) : a ∈ u.to_set ↔ a ∈ u :=\n  iff.rfl\n#align mem_to_set mem_to_set\n\n",
  "mem_singleton":
- "@[simp]\ntheorem mem_singleton {x y : Set.{u}} : x ∈ @singleton Set.{u} Set.{u} _ y ↔ x = y :=\n  iff.trans mem_insert_iff ⟨fun o => or.rec (fun h => h) (fun n => absurd n (mem_empty _)) o, or.inl⟩\n#align mem_singleton mem_singleton\n\n",
+ "@[simp]\ntheorem mem_singleton {x y : ZFSet.{u}} : x ∈ @singleton ZFSet.{u} ZFSet.{u} _ y ↔ x = y :=\n  iff.trans mem_insert_iff ⟨fun o => or.rec (fun h => h) (fun n => absurd n (not_mem_empty _)) o, or.inl⟩\n#align mem_singleton mem_singleton\n\n",
  "mem_sep":
- "@[simp]\ntheorem mem_sep {p : Set.{u} → Prop} {x y : Set.{u}} : y ∈ { y ∈ x | p y } ↔ y ∈ x ∧ p y :=\n  quotient.induction_on₂ x y fun ⟨α, A⟩ y =>\n    ⟨fun ⟨⟨a, pa⟩, h⟩ => ⟨⟨a, h⟩, by rwa [@quotient.sound pSet _ _ _ h]⟩, fun ⟨⟨a, h⟩, pa⟩ =>\n      ⟨⟨a, by\n          rw [mk_func] at h\n          rwa [mk_func, ← Set.sound h]⟩,\n        h⟩⟩\n#align mem_sep mem_sep\n\n",
+ "@[simp]\ntheorem mem_sep {p : ZFSet.{u} → Prop} {x y : ZFSet.{u}} : y ∈ { y ∈ x | p y } ↔ y ∈ x ∧ p y :=\n  quotient.induction_on₂ x y fun ⟨α, A⟩ y =>\n    ⟨fun ⟨⟨a, pa⟩, h⟩ => ⟨⟨a, h⟩, by rwa [@quotient.sound PSet _ _ _ h]⟩, fun ⟨⟨a, h⟩, pa⟩ =>\n      ⟨⟨a, by\n          rw [mk_func] at h\n          rwa [mk_func, ← ZFSet.sound h]⟩,\n        h⟩⟩\n#align mem_sep mem_sep\n\n",
  "mem_sUnion_of_mem":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:177:8: unsupported: ambiguous notation -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `Set.sUnion -/\ntheorem mem_sUnion_of_mem {x y z : Set} (hy : y ∈ z) (hz : z ∈ x) : y ∈ Set.sUnion x :=\n  mem_sUnion.2 ⟨z, hz, hy⟩\n#align mem_sUnion_of_mem mem_sUnion_of_mem\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:177:8: unsupported: ambiguous notation -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `Set.sUnion -/\ntheorem mem_sUnion_of_mem {x y z : ZFSet} (hy : y ∈ z) (hz : z ∈ x) : y ∈ Set.sUnion x :=\n  mem_unionₛ.2 ⟨z, hz, hy⟩\n#align mem_sUnion_of_mem mem_sUnion_of_mem\n\n",
  "mem_sUnion":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⟦ ⟧» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:177:8: unsupported: ambiguous notation -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `Set.sUnion -/\n@[simp]\ntheorem mem_sUnion {x y : Set.{u}} : y ∈ Set.sUnion x ↔ ∃ z ∈ x, y ∈ z :=\n  quotient.induction_on₂ x y fun x y =>\n    iff.trans mem_sUnion ⟨fun ⟨z, h⟩ => ⟨«expr⟦ ⟧» z, h⟩, fun ⟨z, h⟩ => Quotient.inductionOn z (fun z h => ⟨z, h⟩) h⟩\n#align mem_sUnion mem_sUnion\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:177:8: unsupported: ambiguous notation -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `Class.sUnion -/\n@[simp]\ntheorem mem_sUnion {x y : Class.{u}} : y ∈ Class.sUnion x ↔ ∃ z, z ∈ x ∧ y ∈ z :=\n  by\n  constructor\n  · rintro ⟨w, rfl, z, hzx, hwz⟩\n    exact ⟨z, hzx, coe_mem.2 hwz⟩\n  · rintro ⟨w, hwx, z, rfl, hwz⟩\n    exact ⟨z, rfl, w, hwx, hwz⟩\n#align mem_sUnion mem_sUnion\n\n",
+ "mem_sInter":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:177:8: unsupported: ambiguous notation -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `Class.sInter -/\ntheorem mem_sInter {x y : Class.{u}} (h : x.nonempty) : y ∈ Class.sInter x ↔ ∀ z, z ∈ x → y ∈ z :=\n  by\n  refine' ⟨fun hy z => mem_of_mem_sInter hy, fun H => _⟩\n  simp_rw [mem_def, sInter_apply]\n  obtain ⟨z, hz⟩ := h\n  obtain ⟨y, rfl, hzy⟩ := H z (coe_mem.2 hz)\n  refine' ⟨y, rfl, fun w hxw => _⟩\n  simpa only [coe_mem, coe_apply] using H w (coe_mem.2 hxw)\n#align mem_sInter mem_sInter\n\n",
+ "mem_range":
+ "@[simp]\ntheorem mem_range {α : Type u} {f : α → ZFSet.{max u v}} {x : ZFSet.{max u v}} : x ∈ range f ↔ x ∈ Set.range f :=\n  Quotient.inductionOn x fun y => by\n    constructor\n    · rintro ⟨z, hz⟩\n      exact ⟨z.down, Quotient.eq_mk_iff_out.2 hz.symm⟩\n    · rintro ⟨z, hz⟩\n      use z\n      simpa [hz] using PSet.Equiv.symm (Quotient.mk_out y)\n#align mem_range mem_range\n\n",
  "mem_prod":
- "@[simp]\ntheorem mem_prod {x y z : Set.{u}} : z ∈ prod x y ↔ ∃ a ∈ x, ∃ b ∈ y, z = pair a b := by simp [Prod]\n#align mem_prod mem_prod\n\n",
+ "@[simp]\ntheorem mem_prod {x y z : ZFSet.{u}} : z ∈ prod x y ↔ ∃ a ∈ x, ∃ b ∈ y, z = pair a b := by simp [Prod]\n#align mem_prod mem_prod\n\n",
  "mem_powerset":
- "@[simp]\ntheorem mem_powerset {x y : Set.{u}} : y ∈ powerset x ↔ y ⊆ x :=\n  quotient.induction_on₂ x y fun ⟨α, A⟩ ⟨β, B⟩ =>\n    show (⟨β, B⟩ : pSet.{u}) ∈ pSet.powerset.{u} ⟨α, A⟩ ↔ _ by simp [mem_powerset, subset_iff]\n#align mem_powerset mem_powerset\n\n",
+ "@[simp]\ntheorem mem_powerset {x y : ZFSet.{u}} : y ∈ powerset x ↔ y ⊆ x :=\n  quotient.induction_on₂ x y fun ⟨α, A⟩ ⟨β, B⟩ =>\n    show (⟨β, B⟩ : PSet.{u}) ∈ PSet.powerset.{u} ⟨α, A⟩ ↔ _ by simp [mem_powerset, subset_iff]\n#align mem_powerset mem_powerset\n\n",
  "mem_pair_sep":
- "@[simp]\ntheorem mem_pair_sep {p} {x y z : Set.{u}} : z ∈ pair_sep p x y ↔ ∃ a ∈ x, ∃ b ∈ y, z = pair a b ∧ p a b :=\n  by\n  refine' mem_sep.trans ⟨And.right, fun e => ⟨_, e⟩⟩\n  rcases e with ⟨a, ax, b, bY, rfl, pab⟩\n  simp only [mem_powerset, subset_def, mem_union, pair, mem_pair]\n  rintro u (rfl | rfl) v <;> simp only [mem_singleton, mem_pair]\n  · rintro rfl\n    exact or.inl ax\n  · rintro (rfl | rfl) <;> [left, right] <;> assumption\n#align mem_pair_sep mem_pair_sep\n\n",
+ "@[simp]\ntheorem mem_pair_sep {p} {x y z : ZFSet.{u}} : z ∈ pairSep p x y ↔ ∃ a ∈ x, ∃ b ∈ y, z = pair a b ∧ p a b :=\n  by\n  refine' mem_sep.trans ⟨And.right, fun e => ⟨_, e⟩⟩\n  rcases e with ⟨a, ax, b, bY, rfl, pab⟩\n  simp only [mem_powerset, subset_def, mem_union, pair, mem_pair]\n  rintro u (rfl | rfl) v <;> simp only [mem_singleton, mem_pair]\n  · rintro rfl\n    exact or.inl ax\n  · rintro (rfl | rfl) <;> [left, right] <;> assumption\n#align mem_pair_sep mem_pair_sep\n\n",
  "mem_pair":
- "@[simp]\ntheorem mem_pair {x y z : Set.{u}} : x ∈ ({y, z} : Set) ↔ x = y ∨ x = z :=\n  iff.trans mem_insert_iff <| or_congr iff.rfl mem_singleton\n#align mem_pair mem_pair\n\n",
+ "@[simp]\ntheorem mem_pair {x y z : ZFSet.{u}} : x ∈ ({y, z} : ZFSet) ↔ x = y ∨ x = z :=\n  iff.trans mem_insert_iff <| or_congr iff.rfl mem_singleton\n#align mem_pair mem_pair\n\n",
+ "mem_of_mem_sInter":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:177:8: unsupported: ambiguous notation -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `Class.sInter -/\ntheorem mem_of_mem_sInter {x y z : Class} (hy : y ∈ Class.sInter x) (hz : z ∈ x) : y ∈ z :=\n  by\n  obtain ⟨w, rfl, hw⟩ := hy\n  exact coe_mem.2 (hw z hz)\n#align mem_of_mem_sInter mem_of_mem_sInter\n\n",
  "mem_map":
- "-- TODO(Mario): Prove this computably\n@[simp]\ntheorem mem_map {f : Set → Set} [H : definable 1 f] {x y : Set} : y ∈ map f x ↔ ∃ z ∈ x, pair z (f z) = y :=\n  mem_image\n#align mem_map mem_map\n\n",
+ "-- TODO(Mario): Prove this computably\n@[simp]\ntheorem mem_map {f : ZFSet → ZFSet} [H : Definable 1 f] {x y : ZFSet} : y ∈ map f x ↔ ∃ z ∈ x, pair z (f z) = y :=\n  mem_image\n#align mem_map mem_map\n\n",
  "mem_irrefl":
  "theorem mem_irrefl (x : Class) : x ∉ x :=\n  irrefl x\n#align mem_irrefl mem_irrefl\n\n",
  "mem_inter":
- "@[simp]\ntheorem mem_inter {x y z : Set.{u}} : z ∈ x ∩ y ↔ z ∈ x ∧ z ∈ y :=\n  @mem_sep fun z : Set.{u} => z ∈ y\n#align mem_inter mem_inter\n\n",
+ "@[simp]\ntheorem mem_inter {x y z : ZFSet.{u}} : z ∈ x ∩ y ↔ z ∈ x ∧ z ∈ y :=\n  @mem_sep fun z : ZFSet.{u} => z ∈ y\n#align mem_inter mem_inter\n\n",
  "mem_insert_of_mem":
- "theorem mem_insert_of_mem {y z : Set} (x) (h : z ∈ y) : z ∈ insert x y :=\n  mem_insert_iff.2 <| or.inr h\n#align mem_insert_of_mem mem_insert_of_mem\n\n",
+ "theorem mem_insert_of_mem {y z : ZFSet} (x) (h : z ∈ y) : z ∈ insert x y :=\n  mem_insert_iff.2 <| or.inr h\n#align mem_insert_of_mem mem_insert_of_mem\n\n",
  "mem_insert_iff":
- "@[simp]\ntheorem mem_insert_iff {x y z : Set.{u}} : x ∈ insert y z ↔ x = y ∨ x ∈ z :=\n  quotient.induction_on₃ x y z fun x y ⟨α, A⟩ =>\n    show (x ∈ pSet.mk (option α) fun o => option.rec y A o) ↔ mk x = mk y ∨ x ∈ pSet.mk α A from\n      ⟨fun m =>\n        match m with\n        | ⟨some a, ha⟩ => or.inr ⟨a, ha⟩\n        | ⟨none, h⟩ => or.inl (quotient.sound h),\n        fun m =>\n        match m with\n        | or.inr ⟨a, ha⟩ => ⟨some a, ha⟩\n        | or.inl h => ⟨none, quotient.exact h⟩⟩\n#align mem_insert_iff mem_insert_iff\n\n",
+ "@[simp]\ntheorem mem_insert_iff {x y z : ZFSet.{u}} : x ∈ insert y z ↔ x = y ∨ x ∈ z :=\n  quotient.induction_on₃ x y z fun x y ⟨α, A⟩ =>\n    show (x ∈ pSet.mk (Option α) fun o => option.rec y A o) ↔ mk x = mk y ∨ x ∈ pSet.mk α A from\n      ⟨fun m =>\n        match m with\n        | ⟨some a, ha⟩ => or.inr ⟨a, ha⟩\n        | ⟨none, h⟩ => or.inl (quotient.sound h),\n        fun m =>\n        match m with\n        | or.inr ⟨a, ha⟩ => ⟨some a, ha⟩\n        | or.inl h => ⟨none, quotient.exact h⟩⟩\n#align mem_insert_iff mem_insert_iff\n\n",
  "mem_insert":
- "theorem mem_insert (x y : Set) : x ∈ insert x y :=\n  mem_insert_iff.2 <| or.inl rfl\n#align mem_insert mem_insert\n\n",
+ "theorem mem_insert (x y : ZFSet) : x ∈ insert x y :=\n  mem_insert_iff.2 <| or.inl rfl\n#align mem_insert mem_insert\n\n",
  "mem_image":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⟦ ⟧» -/\n@[simp]\ntheorem mem_image : ∀ {f : Set.{u} → Set.{u}} [H : definable 1 f] {x y : Set.{u}}, y ∈ @image f H x ↔ ∃ z ∈ x, f z = y\n  | _, ⟨F⟩, x, y =>\n    quotient.induction_on₂ x y fun ⟨α, A⟩ y =>\n      ⟨fun ⟨a, ya⟩ => ⟨«expr⟦ ⟧» (A a), mem.mk A a, eq.symm <| quotient.sound ya⟩, fun ⟨z, hz, e⟩ =>\n        e ▸ image.mk _ _ hz⟩\n#align mem_image mem_image\n\n",
- "mem_hom_right":
- "@[simp]\ntheorem mem_hom_right (x y : Set.{u}) : (y : Class.{u}) x ↔ x ∈ y :=\n  iff.rfl\n#align mem_hom_right mem_hom_right\n\n",
- "mem_hom_left":
- "@[simp]\ntheorem mem_hom_left (x : Set.{u}) (A : Class.{u}) : (x : Class.{u}) ∈ A ↔ A x :=\n  to_Set_of_Set _ _\n#align mem_hom_left mem_hom_left\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⟦ ⟧» -/\n@[simp]\ntheorem mem_image :\n    ∀ {f : ZFSet.{u} → ZFSet.{u}} [H : Definable 1 f] {x y : ZFSet.{u}}, y ∈ @image f H x ↔ ∃ z ∈ x, f z = y\n  | _, ⟨F⟩, x, y =>\n    quotient.induction_on₂ x y fun ⟨α, A⟩ y =>\n      ⟨fun ⟨a, ya⟩ => ⟨«expr⟦ ⟧» (A a), Mem.mk A a, Eq.symm <| quotient.sound ya⟩, fun ⟨z, hz, e⟩ =>\n        e ▸ image.mk _ _ hz⟩\n#align mem_image mem_image\n\n",
  "mem_funs":
- "@[simp]\ntheorem mem_funs {x y f : Set.{u}} : f ∈ funs x y ↔ is_func x y f := by simp [funs, is_func]\n#align mem_funs mem_funs\n\n",
- "mem_empty":
- "@[simp]\ntheorem mem_empty (x) : x ∉ (∅ : Set.{u}) :=\n  Quotient.inductionOn x pSet.mem_empty\n#align mem_empty mem_empty\n\n",
+ "@[simp]\ntheorem mem_funs {x y f : ZFSet.{u}} : f ∈ funs x y ↔ IsFunc x y f := by simp [funs, is_func]\n#align mem_funs mem_funs\n\n",
  "mem_diff":
- "@[simp]\ntheorem mem_diff {x y z : Set.{u}} : z ∈ x \\ y ↔ z ∈ x ∧ z ∉ y :=\n  @mem_sep fun z : Set.{u} => z ∉ y\n#align mem_diff mem_diff\n\n",
+ "@[simp]\ntheorem mem_diff {x y z : ZFSet.{u}} : z ∈ x \\ y ↔ z ∈ x ∧ z ∉ y :=\n  @mem_sep fun z : ZFSet.{u} => z ∉ y\n#align mem_diff mem_diff\n\n",
+ "mem_def":
+ "theorem mem_def (A B : Class.{u}) : A ∈ B ↔ ∃ x, ↑x = A ∧ B x :=\n  iff.rfl\n#align mem_def mem_def\n\n",
  "mem_asymm":
  "theorem mem_asymm {x y : Class} : x ∈ y → y ∉ x :=\n  asymm\n#align mem_asymm mem_asymm\n\n",
+ "mem":
+ "theorem hereditarily.mem (h : x.hereditarily p) (hy : y ∈ x) : y.hereditarily p :=\n  h.def.2 _ hy\n#align hereditarily.mem hereditarily.mem\n\n",
  "map_unique":
- "theorem map_unique {f : Set.{u} → Set.{u}} [H : definable 1 f] {x z : Set.{u}} (zx : z ∈ x) :\n    ∃! w, pair z w ∈ map f x :=\n  ⟨f z, image.mk _ _ zx, fun y yx => by\n    let ⟨w, wx, we⟩ := mem_image.1 yx\n    let ⟨wz, fy⟩ := pair_injective we\n    rw [← fy, wz]⟩\n#align map_unique map_unique\n\n",
+ "theorem map_unique {f : ZFSet.{u} → ZFSet.{u}} [H : Definable 1 f] {x z : ZFSet.{u}} (zx : z ∈ x) :\n    ∃! w, pair z w ∈ map f x :=\n  ⟨f z, image.mk _ _ zx, fun y yx => by\n    let ⟨w, wx, we⟩ := mem_image.1 yx\n    let ⟨wz, fy⟩ := pair_injective we\n    rw [← fy, wz]⟩\n#align map_unique map_unique\n\n",
  "map_is_func":
- "@[simp]\ntheorem map_is_func {f : Set → Set} [H : definable 1 f] {x y : Set} : is_func x y (map f x) ↔ ∀ z ∈ x, f z ∈ y :=\n  ⟨fun ⟨ss, h⟩ z zx =>\n    let ⟨t, t1, t2⟩ := h z zx\n    (t2 (f z) (image.mk _ _ zx)).symm ▸ (pair_mem_prod.1 (ss t1)).right,\n    fun h =>\n    ⟨fun y yx =>\n      let ⟨z, zx, ze⟩ := mem_image.1 yx\n      ze ▸ pair_mem_prod.2 ⟨zx, h z zx⟩,\n      fun z => map_unique⟩⟩\n#align map_is_func map_is_func\n\n",
+ "@[simp]\ntheorem map_is_func {f : ZFSet → ZFSet} [H : Definable 1 f] {x y : ZFSet} : IsFunc x y (map f x) ↔ ∀ z ∈ x, f z ∈ y :=\n  ⟨fun ⟨ss, h⟩ z zx =>\n    let ⟨t, t1, t2⟩ := h z zx\n    (t2 (f z) (image.mk _ _ zx)).symm ▸ (pair_mem_prod.1 (ss t1)).right,\n    fun h =>\n    ⟨fun y yx =>\n      let ⟨z, zx, ze⟩ := mem_image.1 yx\n      ze ▸ pair_mem_prod.2 ⟨zx, h z zx⟩,\n      fun z => map_unique⟩⟩\n#align map_is_func map_is_func\n\n",
  "map_fval":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ′ » -/\n@[simp]\ntheorem map_fval {f : Set.{u} → Set.{u}} [H : pSet.definable 1 f] {x y : Set.{u}} (h : y ∈ x) :\n    («expr ′ » (Set.map f x) y : Class.{u}) = f y :=\n  Class.iota_val _ _ fun z => by\n    rw [Class.to_Set_of_Set, Class.mem_hom_right, mem_map]\n    exact\n      ⟨fun ⟨w, wz, pr⟩ => by\n        let ⟨wy, fw⟩ := Set.pair_injective pr\n        rw [← fw, wy], fun e => by\n        subst e\n        exact ⟨_, h, rfl⟩⟩\n#align map_fval map_fval\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ′ » -/\n@[simp]\ntheorem map_fval {f : ZFSet.{u} → ZFSet.{u}} [H : PSet.Definable 1 f] {x y : ZFSet.{u}} (h : y ∈ x) :\n    («expr ′ » (ZFSet.map f x) y : Class.{u}) = f y :=\n  Class.iota_val _ _ fun z => by\n    rw [Class.toSet_of_ZFSet, Class.coe_apply, mem_map]\n    exact\n      ⟨fun ⟨w, wz, pr⟩ => by\n        let ⟨wy, fw⟩ := ZFSet.pair_injective pr\n        rw [← fw, wy], fun e => by\n        subst e\n        exact ⟨_, h, rfl⟩⟩\n#align map_fval map_fval\n\n",
  "lift_mem_embed":
- "-- intended to be used with explicit universe parameters\ntheorem lift_mem_embed : ∀ x : pSet.{u}, pSet.lift.{u, max (u + 1) v} x ∈ embed.{u, v} := fun x => ⟨⟨x⟩, equiv.rfl⟩\n#align lift_mem_embed lift_mem_embed\n\n",
+ "-- intended to be used with explicit universe parameters\ntheorem lift_mem_embed : ∀ x : PSet.{u}, PSet.Lift.{u, max (u + 1) v} x ∈ embed.{u, v} := fun x => ⟨⟨x⟩, Equiv.rfl⟩\n#align lift_mem_embed lift_mem_embed\n\n",
  "iota_val":
- "theorem iota_val (A : Class) (x : Set) (H : ∀ y, A y ↔ y = x) : iota A = ↑x :=\n  Set.ext fun y => ⟨fun ⟨_, ⟨x', rfl, h⟩, yx'⟩ => by rwa [← (H x').1 <| (h x').2 rfl], fun yx => ⟨_, ⟨x, rfl, H⟩, yx⟩⟩\n#align iota_val iota_val\n\n",
+ "theorem iota_val (A : Class) (x : ZFSet) (H : ∀ y, A y ↔ y = x) : iota A = ↑x :=\n  ext fun y => ⟨fun ⟨_, ⟨x', rfl, h⟩, yx'⟩ => by rwa [← (H x').1 <| (h x').2 rfl], fun yx => ⟨_, ⟨x, rfl, H⟩, yx⟩⟩\n#align iota_val iota_val\n\n",
  "iota_ex":
- "/-- Unlike the other set constructors, the `iota` definite descriptor\n  is a set for any set input, but not constructively so, so there is no\n  associated `Class → Set` function. -/\ntheorem iota_ex (A) : iota.{u} A ∈ univ.{u} :=\n  mem_univ.2 <|\n    or.elim (classical.em <| ∃ x, ∀ y, A y ↔ y = x) (fun ⟨x, h⟩ => ⟨x, eq.symm <| iota_val A x h⟩) fun hn =>\n      ⟨∅, Set.ext fun z => empty_hom.symm ▸ ⟨false.rec _, fun ⟨_, ⟨x, rfl, H⟩, zA⟩ => hn ⟨x, H⟩⟩⟩\n#align iota_ex iota_ex\n\n",
- "inter_hom":
- "@[simp]\ntheorem inter_hom (x y : Set.{u}) : (x : Class.{u}) ∩ y = (x ∩ y : Set.{u}) :=\n  Set.ext fun z => iff.symm Set.mem_inter\n#align inter_hom inter_hom\n\n",
- "insert_hom":
- "@[simp]\ntheorem insert_hom (x y : Set.{u}) : @insert Set.{u} Class.{u} _ x y = ↑(insert x y) :=\n  Set.ext fun z => iff.symm Set.mem_insert_iff\n#align insert_hom insert_hom\n\n",
+ "/-- Unlike the other set constructors, the `iota` definite descriptor\n  is a set for any set input, but not constructively so, so there is no\n  associated `Class → Set` function. -/\ntheorem iota_ex (A) : iota.{u} A ∈ univ.{u} :=\n  mem_univ.2 <|\n    or.elim (classical.em <| ∃ x, ∀ y, A y ↔ y = x) (fun ⟨x, h⟩ => ⟨x, Eq.symm <| iota_val A x h⟩) fun hn =>\n      ⟨∅, ext fun z => coe_empty.symm ▸ ⟨false.rec _, fun ⟨_, ⟨x, rfl, H⟩, zA⟩ => hn ⟨x, H⟩⟩⟩\n#align iota_ex iota_ex\n\n",
+ "insert_nonempty":
+ "theorem insert_nonempty (u v : ZFSet) : (insert u v).nonempty :=\n  ⟨u, mem_insert u v⟩\n#align insert_nonempty insert_nonempty\n\n",
  "inj":
- "theorem of_Set.inj {x y : Set.{u}} (h : (x : Class.{u}) = y) : x = y :=\n  Set.ext fun z => by\n    change (x : Class.{u}) z ↔ (y : Class.{u}) z\n    rw [h]\n#align of_Set.inj of_Set.inj\n\n",
+ "theorem of_Set.inj {x y : ZFSet.{u}} (h : (x : Class.{u}) = y) : x = y :=\n  ZFSet.ext fun z => by\n    change (x : Class.{u}) z ↔ (y : Class.{u}) z\n    rw [h]\n#align of_Set.inj of_Set.inj\n\n",
  "induction_on":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⟦ ⟧» -/\n/-- Induction on the `∈` relation. -/\n@[elab_as_elim]\ntheorem induction_on {p : Set → Prop} (x) (h : ∀ x, (∀ y ∈ x, p y) → p x) : p x :=\n  Quotient.inductionOn x fun u =>\n    pSet.rec_on u fun α A IH =>\n      h _ fun y =>\n        show @has_mem.mem _ _ Set.has_mem y («expr⟦ ⟧» ⟨α, A⟩) → p y from\n          Quotient.inductionOn y fun v ⟨a, ha⟩ =>\n            by\n            rw [@quotient.sound pSet _ _ _ ha]\n            exact IH a\n#align induction_on induction_on\n\n",
+ "/-- Induction on the `∈` relation. -/\n@[elab_as_elim]\ntheorem induction_on {p : ZFSet → Prop} (x) (h : ∀ x, (∀ y ∈ x, p y) → p x) : p x :=\n  mem_wf.induction x h\n#align induction_on induction_on\n\n",
+ "hereditarily_iff":
+ "theorem hereditarily_iff : Hereditarily p x ↔ p x ∧ ∀ y ∈ x, Hereditarily p y := by rw [← hereditarily]\n#align hereditarily_iff hereditarily_iff\n\n",
  "fval_ex":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ′ » -/\ntheorem fval_ex (F A : Class.{u}) : «expr ′ » F A ∈ univ.{u} :=\n  iota_ex _\n#align fval_ex fval_ex\n\n",
  "func_mem":
- "theorem func_mem (x : pSet) (i : x.type) : x.func i ∈ x :=\n  by\n  cases x\n  apply mem.mk\n#align func_mem func_mem\n\n",
+ "theorem func_mem (x : PSet) (i : x.type) : x.func i ∈ x :=\n  by\n  cases x\n  apply mem.mk\n#align func_mem func_mem\n\n",
  "ext_iff":
- "theorem ext_iff {x y : Set.{u}} : x = y ↔ ∀ z : Set.{u}, z ∈ x ↔ z ∈ y :=\n  ⟨fun h => by simp [h], ext⟩\n#align ext_iff ext_iff\n\n",
+ "theorem ext_iff {x y : Class.{u}} : x = y ↔ ∀ z, x z ↔ y z :=\n  Set.ext_iff\n#align ext_iff ext_iff\n\n",
  "ext":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⟦ ⟧» -/\n@[ext]\ntheorem ext {x y : Set.{u}} : (∀ z : Set.{u}, z ∈ x ↔ z ∈ y) → x = y :=\n  quotient.induction_on₂ x y fun u v h => quotient.sound (mem.ext fun w => h («expr⟦ ⟧» w))\n#align ext ext\n\n",
+ "@[ext]\ntheorem ext {x y : Class.{u}} : (∀ z : ZFSet.{u}, x z ↔ y z) → x = y :=\n  Set.ext\n#align ext ext\n\n",
  "exists_right":
- "theorem equiv.exists_right {x y : pSet} (h : equiv x y) : ∀ j, ∃ i, equiv (x.func i) (y.func j) :=\n  (equiv_iff.1 h).2\n#align equiv.exists_right equiv.exists_right\n\n",
+ "theorem equiv.exists_right {x y : PSet} (h : Equiv x y) : ∀ j, ∃ i, Equiv (x.func i) (y.func j) :=\n  (equiv_iff.1 h).2\n#align equiv.exists_right equiv.exists_right\n\n",
  "exists_left":
- "theorem equiv.exists_left {x y : pSet} (h : equiv x y) : ∀ i, ∃ j, equiv (x.func i) (y.func j) :=\n  (equiv_iff.1 h).1\n#align equiv.exists_left equiv.exists_left\n\n",
+ "theorem equiv.exists_left {x y : PSet} (h : Equiv x y) : ∀ i, ∃ j, Equiv (x.func i) (y.func j) :=\n  (equiv_iff.1 h).1\n#align equiv.exists_left equiv.exists_left\n\n",
  "exact":
- "theorem exact {x y : pSet} : mk x = mk y → pSet.equiv x y :=\n  quotient.exact\n#align exact exact\n\n",
+ "theorem exact {x y : PSet} : mk x = mk y → PSet.Equiv x y :=\n  quotient.exact\n#align exact exact\n\n",
  "eval_val":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⟦ ⟧» -/\ntheorem eval_val {n f x} : (@eval (n + 1) f : Set → arity Set n) («expr⟦ ⟧» x) = eval n (resp.f f x) :=\n  rfl\n#align eval_val eval_val\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⟦ ⟧» -/\ntheorem eval_val {n f x} : (@eval (n + 1) f : ZFSet → Arity ZFSet n) («expr⟦ ⟧» x) = eval n (Resp.f f x) :=\n  rfl\n#align eval_val eval_val\n\n",
  "eval_mk":
- "@[simp]\ntheorem eval_mk {n f x} : (@resp.eval (n + 1) f : Set → arity Set n) (mk x) = resp.eval n (resp.f f x) :=\n  rfl\n#align eval_mk eval_mk\n\n",
+ "@[simp]\ntheorem eval_mk {n f x} : (@Resp.eval (n + 1) f : ZFSet → Arity ZFSet n) (mk x) = Resp.eval n (Resp.f f x) :=\n  rfl\n#align eval_mk eval_mk\n\n",
  "euc":
- "protected theorem resp.equiv.euc : ∀ {n} {a b c : resp n}, resp.equiv a b → resp.equiv c b → resp.equiv a c\n  | 0, a, b, c, hab, hcb => equiv.euc hab hcb\n  | n + 1, a, b, c, hab, hcb => fun x y h =>\n    @resp.equiv.euc n (a.f x) (b.f y) (c.f y) (hab _ _ h) (hcb _ _ <| equiv.refl y)\n#align resp.equiv.euc resp.equiv.euc\n\n",
+ "protected theorem resp.equiv.euc : ∀ {n} {a b c : Resp n}, Resp.Equiv a b → Resp.Equiv c b → Resp.Equiv a c\n  | 0, a, b, c, hab, hcb => Equiv.euc hab hcb\n  | n + 1, a, b, c, hab, hcb => fun x y h =>\n    @resp.equiv.euc n (a.f x) (b.f y) (c.f y) (hab _ _ h) (hcb _ _ <| Equiv.refl y)\n#align resp.equiv.euc resp.equiv.euc\n\n",
  "eta":
- "@[simp]\ntheorem eta : ∀ x : pSet, mk x.type x.func = x\n  | ⟨α, A⟩ => rfl\n#align eta eta\n\n",
+ "@[simp]\ntheorem eta : ∀ x : PSet, mk x.type x.func = x\n  | ⟨α, A⟩ => rfl\n#align eta eta\n\n",
  "equiv_of_is_empty":
- "protected theorem equiv_of_is_empty (x y : pSet) [is_empty x.type] [is_empty y.type] : equiv x y :=\n  equiv_iff.2 <| by simp\n#align equiv_of_is_empty equiv_of_is_empty\n\n",
+ "protected theorem equiv_of_is_empty (x y : PSet) [IsEmpty x.type] [IsEmpty y.type] : Equiv x y :=\n  equiv_iff.2 <| by simp\n#align equiv_of_is_empty equiv_of_is_empty\n\n",
  "equiv_iff_mem":
- "theorem equiv_iff_mem {x y : pSet.{u}} : equiv x y ↔ ∀ {w : pSet.{u}}, w ∈ x ↔ w ∈ y :=\n  ⟨mem.congr_right,\n    match x, y with\n    | ⟨α, A⟩, ⟨β, B⟩, h =>\n      ⟨fun a => h.1 (mem.mk A a), fun b =>\n        let ⟨a, h⟩ := h.2 (mem.mk B b)\n        ⟨a, h.symm⟩⟩⟩\n#align equiv_iff_mem equiv_iff_mem\n\n",
+ "theorem equiv_iff_mem {x y : PSet.{u}} : Equiv x y ↔ ∀ {w : PSet.{u}}, w ∈ x ↔ w ∈ y :=\n  ⟨Mem.congr_right,\n    match x, y with\n    | ⟨α, A⟩, ⟨β, B⟩, h =>\n      ⟨fun a => h.1 (Mem.mk A a), fun b =>\n        let ⟨a, h⟩ := h.2 (Mem.mk B b)\n        ⟨a, h.symm⟩⟩⟩\n#align equiv_iff_mem equiv_iff_mem\n\n",
  "equiv_iff":
- "theorem equiv_iff :\n    ∀ {x y : pSet}, equiv x y ↔ (∀ i, ∃ j, equiv (x.func i) (y.func j)) ∧ ∀ j, ∃ i, equiv (x.func i) (y.func j)\n  | ⟨α, A⟩, ⟨β, B⟩ => iff.rfl\n#align equiv_iff equiv_iff\n\n",
+ "theorem equiv_iff :\n    ∀ {x y : PSet}, Equiv x y ↔ (∀ i, ∃ j, Equiv (x.func i) (y.func j)) ∧ ∀ j, ∃ i, Equiv (x.func i) (y.func j)\n  | ⟨α, A⟩, ⟨β, B⟩ => iff.rfl\n#align equiv_iff equiv_iff\n\n",
  "equiv_empty":
- "protected theorem equiv_empty (x : pSet) [is_empty x.type] : equiv x ∅ :=\n  pSet.equiv_of_is_empty x _\n#align equiv_empty equiv_empty\n\n",
+ "protected theorem equiv_empty (x : PSet) [IsEmpty x.type] : Equiv x ∅ :=\n  PSet.equiv_of_isEmpty x _\n#align equiv_empty equiv_empty\n\n",
  "equiv_const":
- "theorem arity.equiv_const {a : pSet.{u}} : ∀ n, arity.equiv (arity.const a n) (arity.const a n)\n  | 0 => equiv.rfl\n  | n + 1 => fun x y h => arity.equiv_const _\n#align arity.equiv_const arity.equiv_const\n\n",
+ "theorem arity.equiv_const {a : PSet.{u}} : ∀ n, Arity.Equiv (Arity.Const a n) (Arity.Const a n)\n  | 0 => Equiv.rfl\n  | n + 1 => fun x y h => arity.equiv_const _\n#align arity.equiv_const arity.equiv_const\n\n",
+ "eq_univ_of_powerset_subset":
+ "/-- An induction principle for sets. If every subset of a class is a member, then the class is\n  universal. -/\ntheorem eq_univ_of_powerset_subset {A : Class} (hA : powerset A ⊆ A) : A = univ :=\n  eq_univ_of_forall\n    (by\n      by_contra' hnA\n      exact\n        WellFounded.min_mem ZFSet.mem_wf _ hnA\n          (hA fun x hx => Classical.not_not.1 fun hB => WellFounded.not_lt_min ZFSet.mem_wf _ hnA hB <| coe_apply.1 hx))\n#align eq_univ_of_powerset_subset eq_univ_of_powerset_subset\n\n",
+ "eq_univ_of_forall":
+ "theorem eq_univ_of_forall {A : Class.{u}} : (∀ x : ZFSet, A x) → A = univ :=\n  Set.eq_univ_of_forall\n#align eq_univ_of_forall eq_univ_of_forall\n\n",
+ "eq_univ_iff_forall":
+ "theorem eq_univ_iff_forall {A : Class.{u}} : A = univ ↔ ∀ x : ZFSet, A x :=\n  Set.eq_univ_iff_forall\n#align eq_univ_iff_forall eq_univ_iff_forall\n\n",
+ "eq_empty_or_nonempty":
+ "theorem eq_empty_or_nonempty (u : ZFSet) : u = ∅ ∨ u.nonempty :=\n  by\n  rw [eq_empty, ← not_exists]\n  apply em'\n#align eq_empty_or_nonempty eq_empty_or_nonempty\n\n",
  "eq_empty":
- "theorem eq_empty (x : Set.{u}) : x = ∅ ↔ ∀ y : Set.{u}, y ∉ x :=\n  ⟨fun h y => h.symm ▸ mem_empty y, fun h =>\n    ext fun y => ⟨fun yx => absurd yx (h y), fun y0 => absurd y0 (mem_empty _)⟩⟩\n#align eq_empty eq_empty\n\n",
+ "theorem eq_empty (x : ZFSet.{u}) : x = ∅ ↔ ∀ y : ZFSet.{u}, y ∉ x :=\n  by\n  rw [ext_iff]\n  simp\n#align eq_empty eq_empty\n\n",
  "eq":
- "theorem eq {x y : pSet} : mk x = mk y ↔ equiv x y :=\n  quotient.eq\n#align eq eq\n\n",
+ "theorem definable.eq {n} : ∀ (s : Arity ZFSet.{u} n) [H : Definable n s], (@Definable.Resp n s H).eval _ = s\n  | _, ⟨f⟩ => rfl\n#align definable.eq definable.eq\n\n",
  "empty_subset":
- "@[simp]\ntheorem empty_subset (x : Set.{u}) : (∅ : Set) ⊆ x :=\n  Quotient.inductionOn x fun y => subset_iff.2 <| pSet.empty_subset y\n#align empty_subset empty_subset\n\n",
- "empty_hom":
- "@[simp]\ntheorem empty_hom : ↑(∅ : Set.{u}) = (∅ : Class.{u}) :=\n  Set.ext fun y => (iff_false_iff _).2 (Set.mem_empty y)\n#align empty_hom empty_hom\n\n",
- "diff_hom":
- "@[simp]\ntheorem diff_hom (x y : Set.{u}) : (x : Class.{u}) \\ y = (x \\ y : Set.{u}) :=\n  Set.ext fun z => iff.symm Set.mem_diff\n#align diff_hom diff_hom\n\n",
+ "@[simp]\ntheorem empty_subset (x : ZFSet.{u}) : (∅ : ZFSet) ⊆ x :=\n  Quotient.inductionOn x fun y => subset_iff.2 <| PSet.empty_subset y\n#align empty_subset empty_subset\n\n",
+ "empty":
+ "theorem hereditarily.empty : Hereditarily p x → p ∅ :=\n  by\n  apply x.induction_on\n  intro y IH h\n  rcases ZFSet.eq_empty_or_nonempty y with (rfl | ⟨a, ha⟩)\n  · exact h.self\n  · exact IH a ha (h.mem ha)\n#align hereditarily.empty hereditarily.empty\n\n",
  "const_zero":
- "@[simp]\ntheorem const_zero {α : Type u} (a : α) : const a 0 = a :=\n  rfl\n#align const_zero const_zero\n\n",
+ "@[simp]\ntheorem const_zero {α : Type u} (a : α) : Const a 0 = a :=\n  rfl\n#align const_zero const_zero\n\n",
  "const_succ_apply":
- "theorem const_succ_apply {α : Type u} (a : α) (n : ℕ) (x : α) : const a n.succ x = const a n :=\n  rfl\n#align const_succ_apply const_succ_apply\n\n",
+ "theorem const_succ_apply {α : Type u} (a : α) (n : ℕ) (x : α) : Const a n.succ x = Const a n :=\n  rfl\n#align const_succ_apply const_succ_apply\n\n",
  "const_succ":
- "@[simp]\ntheorem const_succ {α : Type u} (a : α) (n : ℕ) : const a n.succ = fun _ => const a n :=\n  rfl\n#align const_succ const_succ\n\n",
+ "@[simp]\ntheorem const_succ {α : Type u} (a : α) (n : ℕ) : Const a n.succ = fun _ => Const a n :=\n  rfl\n#align const_succ const_succ\n\n",
  "congr_right":
- "theorem mem.congr_right : ∀ {x y : pSet.{u}}, equiv x y → ∀ {w : pSet.{u}}, w ∈ x ↔ w ∈ y\n  | ⟨α, A⟩, ⟨β, B⟩, ⟨αβ, βα⟩, w =>\n    ⟨fun ⟨a, ha⟩ =>\n      let ⟨b, hb⟩ := αβ a\n      ⟨b, ha.trans hb⟩,\n      fun ⟨b, hb⟩ =>\n      let ⟨a, ha⟩ := βα b\n      ⟨a, hb.euc ha⟩⟩\n#align mem.congr_right mem.congr_right\n\n",
+ "theorem mem.congr_right : ∀ {x y : PSet.{u}}, Equiv x y → ∀ {w : PSet.{u}}, w ∈ x ↔ w ∈ y\n  | ⟨α, A⟩, ⟨β, B⟩, ⟨αβ, βα⟩, w =>\n    ⟨fun ⟨a, ha⟩ =>\n      let ⟨b, hb⟩ := αβ a\n      ⟨b, ha.trans hb⟩,\n      fun ⟨b, hb⟩ =>\n      let ⟨a, ha⟩ := βα b\n      ⟨a, hb.euc ha⟩⟩\n#align mem.congr_right mem.congr_right\n\n",
  "congr_left":
- "theorem mem.congr_left : ∀ {x y : pSet.{u}}, equiv x y → ∀ {w : pSet.{u}}, x ∈ w ↔ y ∈ w\n  | x, y, h, ⟨α, A⟩ => ⟨fun ⟨a, ha⟩ => ⟨a, h.symm.trans ha⟩, fun ⟨a, ha⟩ => ⟨a, h.trans ha⟩⟩\n#align mem.congr_left mem.congr_left\n\n",
+ "theorem mem.congr_left : ∀ {x y : PSet.{u}}, Equiv x y → ∀ {w : PSet.{u}}, x ∈ w ↔ y ∈ w\n  | x, y, h, ⟨α, A⟩ => ⟨fun ⟨a, ha⟩ => ⟨a, h.symm.trans ha⟩, fun ⟨a, ha⟩ => ⟨a, h.trans ha⟩⟩\n#align mem.congr_left mem.congr_left\n\n",
+ "comm":
+ "protected theorem equiv.comm {x y} : Equiv x y ↔ Equiv y x :=\n  ⟨Equiv.symm, Equiv.symm⟩\n#align equiv.comm equiv.comm\n\n",
+ "coe_union":
+ "@[simp, norm_cast]\ntheorem coe_union (x y : ZFSet.{u}) : ↑(x ∪ y) = (x : Class.{u}) ∪ y :=\n  ext fun z => ZFSet.mem_union\n#align coe_union coe_union\n\n",
+ "coe_subset":
+ "@[simp, norm_cast]\ntheorem coe_subset (x y : ZFSet.{u}) : (x : Class.{u}) ⊆ y ↔ x ⊆ y :=\n  iff.rfl\n#align coe_subset coe_subset\n\n",
+ "coe_sep":
+ "@[simp, norm_cast]\ntheorem coe_sep (p : Class.{u}) (x : ZFSet.{u}) : (↑({ y ∈ x | p y }) : Class.{u}) = { y ∈ x | p y } :=\n  ext fun y => ZFSet.mem_sep\n#align coe_sep coe_sep\n\n",
+ "coe_sUnion":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:177:8: unsupported: ambiguous notation -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `Class.sUnion -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:177:8: unsupported: ambiguous notation -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `Class.sUnion -/\n@[simp, norm_cast]\ntheorem coe_sUnion (x : ZFSet.{u}) : ↑(Class.sUnion x) = Class.sUnion (x : Class.{u}) :=\n  ext fun y => ZFSet.mem_unionₛ.trans (unionₛ_apply.trans <| by simp_rw [coe_apply, exists_prop]).symm\n#align coe_sUnion coe_sUnion\n\n",
+ "coe_sInter":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:177:8: unsupported: ambiguous notation -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `Class.sInter -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:177:8: unsupported: ambiguous notation -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `Class.sInter -/\n@[simp, norm_cast]\ntheorem coe_sInter {x : ZFSet.{u}} (h : x.nonempty) : ↑(Class.sInter x) = Class.sInter (x : Class.{u}) :=\n  Set.ext fun y => (ZFSet.mem_interₛ h).trans interₛ_apply.symm\n#align coe_sInter coe_sInter\n\n",
+ "coe_powerset":
+ "@[simp, norm_cast]\ntheorem coe_powerset (x : ZFSet.{u}) : ↑x.powerset = powerset.{u} x :=\n  ext fun z => ZFSet.mem_powerset\n#align coe_powerset coe_powerset\n\n",
+ "coe_mem":
+ "@[simp, norm_cast]\ntheorem coe_mem {x : ZFSet.{u}} {A : Class.{u}} : (x : Class.{u}) ∈ A ↔ A x :=\n  toSet_of_ZFSet _ _\n#align coe_mem coe_mem\n\n",
+ "coe_inter":
+ "@[simp, norm_cast]\ntheorem coe_inter (x y : ZFSet.{u}) : ↑(x ∩ y) = (x : Class.{u}) ∩ y :=\n  ext fun z => ZFSet.mem_inter\n#align coe_inter coe_inter\n\n",
+ "coe_insert":
+ "@[simp, norm_cast]\ntheorem coe_insert (x y : ZFSet.{u}) : ↑(insert x y) = @insert ZFSet.{u} Class.{u} _ x y :=\n  ext fun z => ZFSet.mem_insert_iff\n#align coe_insert coe_insert\n\n",
+ "coe_empty":
+ "@[simp, norm_cast]\ntheorem coe_empty : ↑(∅ : ZFSet.{u}) = (∅ : Class.{u}) :=\n  ext fun y => (iff_false_iff _).2 <| ZFSet.not_mem_empty y\n#align coe_empty coe_empty\n\n",
+ "coe_diff":
+ "@[simp, norm_cast]\ntheorem coe_diff (x y : ZFSet.{u}) : ↑(x \\ y) = (x : Class.{u}) \\ y :=\n  ext fun z => ZFSet.mem_diff\n#align coe_diff coe_diff\n\n",
+ "coe_apply":
+ "@[simp]\ntheorem coe_apply {x y : ZFSet.{u}} : (y : Class.{u}) x ↔ x ∈ y :=\n  iff.rfl\n#align coe_apply coe_apply\n\n",
  "choice_mem_aux":
- "theorem choice_mem_aux (y : Set.{u}) (yx : y ∈ x) : (classical.epsilon fun z : Set.{u} => z ∈ y) ∈ y :=\n  (@classical.epsilon_spec _ fun z : Set.{u} => z ∈ y) <|\n    by_contradiction fun n => h <| by rwa [← (eq_empty y).2 fun z zx => n ⟨z, zx⟩]\n#align choice_mem_aux choice_mem_aux\n\n",
+ "theorem choice_mem_aux (y : ZFSet.{u}) (yx : y ∈ x) : (classical.epsilon fun z : ZFSet.{u} => z ∈ y) ∈ y :=\n  (@classical.epsilon_spec _ fun z : ZFSet.{u} => z ∈ y) <|\n    by_contradiction fun n => h <| by rwa [← (eq_empty y).2 fun z zx => n ⟨z, zx⟩]\n#align choice_mem_aux choice_mem_aux\n\n",
  "choice_mem":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ′ » -/\ntheorem choice_mem (y : Set.{u}) (yx : y ∈ x) : («expr ′ » (choice x) y : Class.{u}) ∈ (y : Class.{u}) :=\n  by\n  delta choice\n  rw [map_fval yx, Class.mem_hom_left, Class.mem_hom_right]\n  exact choice_mem_aux x h y yx\n#align choice_mem choice_mem\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ′ » -/\ntheorem choice_mem (y : ZFSet.{u}) (yx : y ∈ x) : («expr ′ » (choice x) y : Class.{u}) ∈ (y : Class.{u}) :=\n  by\n  delta choice\n  rw [map_fval yx, Class.coe_mem, Class.coe_apply]\n  exact choice_mem_aux x h y yx\n#align choice_mem choice_mem\n\n",
  "choice_is_func":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:177:8: unsupported: ambiguous notation -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `Class.sUnion -/\ntheorem choice_is_func : is_func x (Class.sUnion x) (choice x) :=\n  (@map_is_func _ (classical.all_definable _) _ _).2 fun y yx => mem_sUnion.2 ⟨y, yx, choice_mem_aux x h y yx⟩\n#align choice_is_func choice_is_func\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:177:8: unsupported: ambiguous notation -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `Class.sUnion -/\ntheorem choice_is_func : IsFunc x (Class.sUnion x) (choice x) :=\n  (@map_isFunc _ (Classical.AllDefinable _) _ _).2 fun y yx => mem_unionₛ.2 ⟨y, yx, choice_mem_aux x h y yx⟩\n#align choice_is_func choice_is_func\n\n",
  "arity_zero":
- "/-\nCopyright (c) 2018 Mario Carneiro. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Mario Carneiro\n-/\n@[simp]\ntheorem arity_zero (α : Type u) : arity α 0 = α :=\n  rfl\n#align arity_zero arity_zero\n\n",
+ "#print arity_zero /-\n/-\nCopyright (c) 2018 Mario Carneiro. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Mario Carneiro\n-/\n@[simp]\ntheorem arity_zero (α : Type u) : Arity α 0 = α :=\n  rfl\n#align arity_zero arity_zero\n-/\n\n",
  "arity_succ":
- "@[simp]\ntheorem arity_succ (α : Type u) (n : ℕ) : arity α n.succ = (α → arity α n) :=\n  rfl\n#align arity_succ arity_succ\n\n"}
+ "#print arity_succ /-\n@[simp]\ntheorem arity_succ (α : Type u) (n : ℕ) : Arity α n.succ = (α → Arity α n) :=\n  rfl\n#align arity_succ arity_succ\n-/\n\n",
+ "Eq":
+ "#print Eq /-\ntheorem Eq {x y : PSet} : mk x = mk y ↔ Equiv x y :=\n  Quotient.eq'\n#align eq Eq\n-/\n\n",
+ "Cong_to_Class_empty":
+ "@[simp]\ntheorem Cong_to_Class_empty : congToClass ∅ = ∅ := by\n  ext\n  simp [Cong_to_Class]\n#align Cong_to_Class_empty Cong_to_Class_empty\n\n",
+ "Class_to_Cong_empty":
+ "@[simp]\ntheorem Class_to_Cong_empty : classToCong ∅ = ∅ := by\n  ext\n  simp [Class_to_Cong]\n#align Class_to_Cong_empty Class_to_Cong_empty\n\n"}

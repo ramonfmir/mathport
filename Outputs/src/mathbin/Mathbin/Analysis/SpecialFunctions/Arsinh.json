@@ -1,11 +1,11 @@
 {"sinh_surjective":
- "/-- `sinh` is surjective, `∀ b, ∃ a, sinh a = b`. In this case, we use `a = arsinh b`. -/\ntheorem sinh_surjective : surjective sinh :=\n  left_inverse.surjective sinh_arsinh\n#align sinh_surjective sinh_surjective\n\n",
+ "/-- `sinh` is surjective, `∀ b, ∃ a, sinh a = b`. In this case, we use `a = arsinh b`. -/\ntheorem sinh_surjective : surjective sinh :=\n  LeftInverse.surjective sinh_arsinh\n#align sinh_surjective sinh_surjective\n\n",
  "sinh_bijective":
  "/-- `sinh` is bijective, both injective and surjective. -/\ntheorem sinh_bijective : bijective sinh :=\n  ⟨sinh_injective, sinh_surjective⟩\n#align sinh_bijective sinh_bijective\n\n",
  "sinh_arsinh":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n/-- `arsinh` is the right inverse of `sinh`. -/\n@[simp]\ntheorem sinh_arsinh (x : exprℝ) : sinh (arsinh x) = x :=\n  by\n  rw [sinh_eq, ← arsinh_neg, exp_arsinh, exp_arsinh, neg_sq]\n  field_simp\n#align sinh_arsinh sinh_arsinh\n\n",
  "has_strict_deriv_at_arsinh":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\ntheorem has_strict_deriv_at_arsinh (x : exprℝ) : has_strict_deriv_at arsinh (sqrt (1 + x ^ 2))⁻¹ x :=\n  by\n  convert\n    sinh_homeomorph.to_local_homeomorph.has_strict_deriv_at_symm (mem_univ x) (cosh_pos _).ne'\n      (has_strict_deriv_at_sinh _)\n  exact (cosh_arsinh _).symm\n#align has_strict_deriv_at_arsinh has_strict_deriv_at_arsinh\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\ntheorem has_strict_deriv_at_arsinh (x : exprℝ) : has_strict_deriv_at arsinh (sqrt (1 + x ^ 2))⁻¹ x :=\n  by\n  convert sinh_homeomorph.to_local_homeomorph.has_strict_deriv_at_symm (mem_univ x) (cosh_pos _).ne'\n      (has_strict_deriv_at_sinh _)\n  exact (cosh_arsinh _).symm\n#align has_strict_deriv_at_arsinh has_strict_deriv_at_arsinh\n\n",
  "has_deriv_at_arsinh":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\ntheorem has_deriv_at_arsinh (x : exprℝ) : has_deriv_at arsinh (sqrt (1 + x ^ 2))⁻¹ x :=\n  (has_strict_deriv_at_arsinh x).has_deriv_at\n#align has_deriv_at_arsinh has_deriv_at_arsinh\n\n",
  "exp_arsinh":
@@ -15,7 +15,7 @@
  "cosh_arsinh":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n@[simp]\ntheorem cosh_arsinh (x : exprℝ) : cosh (arsinh x) = sqrt (1 + x ^ 2) := by\n  rw [← sqrt_sq (cosh_pos _).le, cosh_sq', sinh_arsinh]\n#align cosh_arsinh cosh_arsinh\n\n",
  "continuous_arsinh":
- "@[continuity]\ntheorem continuous_arsinh : continuous arsinh :=\n  sinh_homeomorph.symm.continuous\n#align continuous_arsinh continuous_arsinh\n\n",
+ "@[continuity]\ntheorem continuous_arsinh : Continuous arsinh :=\n  sinh_homeomorph.symm.continuous\n#align continuous_arsinh continuous_arsinh\n\n",
  "cont_diff_arsinh":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«exprℕ∞» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\ntheorem cont_diff_arsinh {n : «exprℕ∞»} : cont_diff (exprℝ) n arsinh :=\n  sinh_homeomorph.cont_diff_symm_deriv (fun x => (cosh_pos x).ne') has_deriv_at_sinh cont_diff_sinh\n#align cont_diff_arsinh cont_diff_arsinh\n\n",
  "arsinh_zero":
@@ -23,7 +23,7 @@
  "arsinh_surjective":
  "theorem arsinh_surjective : surjective arsinh :=\n  sinh_equiv.symm.surjective\n#align arsinh_surjective arsinh_surjective\n\n",
  "arsinh_strict_mono":
- "theorem arsinh_strict_mono : strict_mono arsinh :=\n  sinh_order_iso.symm.strict_mono\n#align arsinh_strict_mono arsinh_strict_mono\n\n",
+ "theorem arsinh_strict_mono : StrictMono arsinh :=\n  sinh_order_iso.symm.strict_mono\n#align arsinh_strict_mono arsinh_strict_mono\n\n",
  "arsinh_sinh":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n/-- `arsinh` is the left inverse of `sinh`. -/\n@[simp]\ntheorem arsinh_sinh (x : exprℝ) : arsinh (sinh x) = x :=\n  rightInverse_of_injective_of_leftInverse sinh_injective sinh_arsinh x\n#align arsinh_sinh arsinh_sinh\n\n",
  "arsinh_pos_iff":

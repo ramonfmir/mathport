@@ -1,13 +1,13 @@
 {"zero_right":
- "@[simp]\ntheorem zero_right [mul_zero_class G₀] (a : G₀) : Commute a 0 :=\n  SemiconjBy.zero_right a\n#align zero_right zero_right\n\n",
+ "@[simp]\ntheorem zero_right [MulZeroClass G₀] (a : G₀) : Commute a 0 :=\n  SemiconjBy.zero_right a\n#align zero_right zero_right\n\n",
  "zero_left":
- "@[simp]\ntheorem zero_left [mul_zero_class G₀] (a : G₀) : Commute 0 a :=\n  SemiconjBy.zero_left a a\n#align zero_left zero_left\n\n",
+ "@[simp]\ntheorem zero_left [MulZeroClass G₀] (a : G₀) : Commute 0 a :=\n  SemiconjBy.zero_left a a\n#align zero_left zero_left\n\n",
  "ring_inverse_ring_inverse":
  "#print Commute.ring_inverse_ring_inverse /-\ntheorem Commute.ring_inverse_ring_inverse {a b : M₀} (h : Commute a b) : Commute (Ring.inverse a) (Ring.inverse b) :=\n  (Ring.mul_inverse_rev' h.symm).symm.trans <| (congr_arg _ h.symm.eq).trans <| Ring.mul_inverse_rev' h\n#align commute.ring_inverse_ring_inverse Commute.ring_inverse_ring_inverse\n-/\n\n",
  "mul_inverse_rev'":
- "/-\nCopyright (c) 2020 Johan Commelin. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Johan Commelin\n-/\ntheorem mul_inverse_rev' {a b : M₀} (h : Commute a b) : inverse (a * b) = inverse b * inverse a :=\n  by\n  by_cases hab : is_unit (a * b)\n  · obtain ⟨⟨a, rfl⟩, b, rfl⟩ := h.is_unit_mul_iff.mp hab\n    rw [← Units.val_mul, inverse_unit, inverse_unit, inverse_unit, ← Units.val_mul, mul_inv_rev]\n  obtain ha | hb := not_and_distrib.mp (mt h.is_unit_mul_iff.mpr hab)\n  · rw [inverse_non_unit _ hab, inverse_non_unit _ ha, mul_zero]\n  · rw [inverse_non_unit _ hab, inverse_non_unit _ hb, zero_mul]\n#align mul_inverse_rev' mul_inverse_rev'\n\n",
+ "/-\nCopyright (c) 2020 Johan Commelin. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Johan Commelin\n-/\ntheorem mul_inverse_rev' {a b : M₀} (h : Commute a b) : inverse (a * b) = inverse b * inverse a :=\n  by\n  by_cases hab : IsUnit (a * b)\n  · obtain ⟨⟨a, rfl⟩, b, rfl⟩ := h.is_unit_mul_iff.mp hab\n    rw [← Units.val_mul, inverse_unit, inverse_unit, inverse_unit, ← Units.val_mul, mul_inv_rev]\n  obtain ha | hb := not_and_distrib.mp (mt h.is_unit_mul_iff.mpr hab)\n  · rw [inverse_non_unit _ hab, inverse_non_unit _ ha, MulZeroClass.mul_zero]\n  · rw [inverse_non_unit _ hab, inverse_non_unit _ hb, MulZeroClass.zero_mul]\n#align mul_inverse_rev' mul_inverse_rev'\n\n",
  "mul_inverse_rev":
- "theorem mul_inverse_rev {M₀} [comm_monoid_with_zero M₀] (a b : M₀) : Ring.inverse (a * b) = inverse b * inverse a :=\n  mul_inverse_rev' (Commute.all _ _)\n#align mul_inverse_rev mul_inverse_rev\n\n",
+ "theorem mul_inverse_rev {M₀} [CommMonoidWithZero M₀] (a b : M₀) : Ring.inverse (a * b) = inverse b * inverse a :=\n  mul_inverse_rev' (Commute.all _ _)\n#align mul_inverse_rev mul_inverse_rev\n\n",
  "inv_right₀":
  "theorem inv_right₀ (h : Commute a b) : Commute a b⁻¹ :=\n  inv_right_iff₀.2 h\n#align inv_right₀ inv_right₀\n\n",
  "inv_right_iff₀":

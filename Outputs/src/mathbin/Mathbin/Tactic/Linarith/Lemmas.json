@@ -1,7 +1,7 @@
 {"zero_mul_eq":
  "-- used in the `nlinarith` normalization steps. The `_` argument is for uniformity.\n@[nolint unused_arguments]\ntheorem zero_mul_eq {α} {R : α → α → Prop} [Semiring α] {a b : α} (h : a = 0) (_ : R b 0) : a * b = 0 := by simp [h]\n#align zero_mul_eq zero_mul_eq\n\n",
  "zero_lt_one":
- "#print zero_lt_one /-\n/-\nCopyright (c) 2020 Robert Y. Lewis. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Robert Y. Lewis\n-/\ntheorem zero_lt_one {α} [OrderedSemiring α] [nontrivial α] : (0 : α) < 1 :=\n  zero_lt_one\n#align zero_lt_one zero_lt_one\n-/\n\n",
+ "#print zero_lt_one /-\n/-\nCopyright (c) 2020 Robert Y. Lewis. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Robert Y. Lewis\n-/\ntheorem zero_lt_one {α} [OrderedSemiring α] [Nontrivial α] : (0 : α) < 1 :=\n  zero_lt_one\n#align zero_lt_one zero_lt_one\n-/\n\n",
  "mul_zero_eq":
  "-- used in the `nlinarith` normalization steps. The `_` argument is for uniformity.\n@[nolint unused_arguments]\ntheorem mul_zero_eq {α} {R : α → α → Prop} [Semiring α] {a b : α} (_ : R a 0) (h : b = 0) : a * b = 0 := by simp [h]\n#align mul_zero_eq mul_zero_eq\n\n",
  "mul_nonpos":

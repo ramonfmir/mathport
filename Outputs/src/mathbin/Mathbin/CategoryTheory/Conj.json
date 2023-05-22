@@ -1,7 +1,7 @@
 {"trans_conj_Aut":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≅ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≪≫ » -/\n@[simp]\ntheorem trans_conj_Aut {Z : C} (β : «expr ≅ » Y Z) (f : Aut X) :\n    («expr ≪≫ » α β).conj_Aut f = β.conj_Aut (α.conj_Aut f) := by\n  simp only [conj_Aut_apply, iso.trans_symm, iso.trans_assoc]\n#align trans_conj_Aut trans_conj_Aut\n\n",
  "trans_conj":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≅ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≪≫ » -/\n@[simp]\ntheorem trans_conj {Z : C} (β : «expr ≅ » Y Z) (f : End X) : («expr ≪≫ » α β).conj f = β.conj (α.conj f) :=\n  hom_congr_trans α α β β f\n#align trans_conj trans_conj\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≅ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≪≫ » -/\n@[simp]\ntheorem trans_conj {Z : C} (β : «expr ≅ » Y Z) (f : End X) : («expr ≪≫ » α β).conj f = β.conj (α.conj f) :=\n  homCongr_trans α α β β f\n#align trans_conj trans_conj\n\n",
  "symm_self_conj":
  "@[simp]\ntheorem symm_self_conj (f : End X) : α.symm.conj (α.conj f) = f := by rw [← trans_conj, α.self_symm_id, refl_conj]\n#align symm_self_conj symm_self_conj\n\n",
  "self_symm_conj":
@@ -9,11 +9,11 @@
  "refl_conj":
  "@[simp]\ntheorem refl_conj (f : End X) : (Iso.refl X).conj f = f := by\n  rw [conj_apply, iso.refl_inv, iso.refl_hom, category.id_comp, category.comp_id]\n#align refl_conj refl_conj\n\n",
  "map_hom_congr":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≅ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≅ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⟶ » -/\ntheorem map_hom_congr {X Y X₁ Y₁ : C} (α : «expr ≅ » X X₁) (β : «expr ≅ » Y Y₁) (f : «expr ⟶ » X Y) :\n    F.map (iso.hom_congr α β f) = iso.hom_congr (F.map_iso α) (F.map_iso β) (F.map f) := by simp\n#align map_hom_congr map_hom_congr\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≅ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≅ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⟶ » -/\ntheorem map_hom_congr {X Y X₁ Y₁ : C} (α : «expr ≅ » X X₁) (β : «expr ≅ » Y Y₁) (f : «expr ⟶ » X Y) :\n    F.map (Iso.homCongr α β f) = Iso.homCongr (F.map_iso α) (F.map_iso β) (F.map f) := by simp\n#align map_hom_congr map_hom_congr\n\n",
  "map_conj_Aut":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⥤ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≅ » -/\ntheorem map_conj_Aut (F : «expr ⥤ » C D) {X Y : C} (α : «expr ≅ » X Y) (f : Aut X) :\n    F.map_iso (α.conj_Aut f) = (F.map_iso α).conj_Aut (F.map_iso f) := by\n  ext <;> simp only [map_iso_hom, iso.conj_Aut_hom, F.map_conj]\n#align map_conj_Aut map_conj_Aut\n\n",
  "map_conj":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≅ » -/\ntheorem map_conj {X Y : C} (α : «expr ≅ » X Y) (f : End X) : F.map (α.conj f) = (F.map_iso α).conj (F.map f) :=\n  map_hom_congr F α α f\n#align map_conj map_conj\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≅ » -/\ntheorem map_conj {X Y : C} (α : «expr ≅ » X Y) (f : End X) : F.map (α.conj f) = (F.map_iso α).conj (F.map f) :=\n  map_homCongr F α α f\n#align map_conj map_conj\n\n",
  "hom_congr_trans":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≅ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≅ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≅ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≅ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⟶ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≪≫ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≪≫ » -/\n@[simp]\ntheorem hom_congr_trans {X₁ Y₁ X₂ Y₂ X₃ Y₃ : C} (α₁ : «expr ≅ » X₁ X₂) (β₁ : «expr ≅ » Y₁ Y₂) (α₂ : «expr ≅ » X₂ X₃)\n    (β₂ : «expr ≅ » Y₂ Y₃) (f : «expr ⟶ » X₁ Y₁) :\n    («expr ≪≫ » α₁ α₂).hom_congr («expr ≪≫ » β₁ β₂) f = (α₁.hom_congr β₁).trans (α₂.hom_congr β₂) f := by simp\n#align hom_congr_trans hom_congr_trans\n\n",
  "hom_congr_symm":
@@ -35,7 +35,7 @@
  "conj_Aut_zpow":
  "@[simp]\ntheorem conj_Aut_zpow (f : Aut X) (n : ℤ) : α.conj_Aut (f ^ n) = α.conj_Aut f ^ n :=\n  α.conj_Aut.to_monoid_hom.map_zpow f n\n#align conj_Aut_zpow conj_Aut_zpow\n\n",
  "conj_Aut_trans":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≪≫ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≪≫ » -/\n@[simp]\ntheorem conj_Aut_trans (f g : Aut X) : α.conj_Aut («expr ≪≫ » f g) = «expr ≪≫ » (α.conj_Aut f) (α.conj_Aut g) :=\n  conj_Aut_mul α g f\n#align conj_Aut_trans conj_Aut_trans\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≪≫ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≪≫ » -/\n@[simp]\ntheorem conj_Aut_trans (f g : Aut X) : α.conj_Aut («expr ≪≫ » f g) = «expr ≪≫ » (α.conj_Aut f) (α.conj_Aut g) :=\n  conjAut_mul α g f\n#align conj_Aut_trans conj_Aut_trans\n\n",
  "conj_Aut_pow":
  "@[simp]\ntheorem conj_Aut_pow (f : Aut X) (n : ℕ) : α.conj_Aut (f ^ n) = α.conj_Aut f ^ n :=\n  α.conj_Aut.to_monoid_hom.map_pow f n\n#align conj_Aut_pow conj_Aut_pow\n\n",
  "conj_Aut_mul":

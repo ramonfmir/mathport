@@ -1,60 +1,60 @@
 {"top_apply":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n@[simp]\ntheorem top_apply (a : α) : («expr⊤» : top_hom α β) a = «expr⊤» :=\n  rfl\n#align top_apply top_apply\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n@[simp]\ntheorem top_apply (a : α) : («expr⊤» : TopHom α β) a = «expr⊤» :=\n  rfl\n#align top_apply top_apply\n\n",
  "to_fun_eq_coe":
- "@[simp]\ntheorem to_fun_eq_coe {f : bounded_order_hom α β} : f.to_fun = (f : α → β) :=\n  rfl\n#align to_fun_eq_coe to_fun_eq_coe\n\n",
+ "@[simp]\ntheorem to_fun_eq_coe {f : BoundedOrderHom α β} : f.to_fun = (f : α → β) :=\n  rfl\n#align to_fun_eq_coe to_fun_eq_coe\n\n",
  "symm_dual_id":
- "@[simp]\ntheorem symm_dual_id : bounded_order_hom.dual.symm (bounded_order_hom.id _) = bounded_order_hom.id α :=\n  rfl\n#align symm_dual_id symm_dual_id\n\n",
+ "@[simp]\ntheorem symm_dual_id : BoundedOrderHom.dual.symm (BoundedOrderHom.id _) = BoundedOrderHom.id α :=\n  rfl\n#align symm_dual_id symm_dual_id\n\n",
  "symm_dual_comp":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵈ» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵈ» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵈ» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵈ» -/\n@[simp]\ntheorem symm_dual_comp (g : bounded_order_hom («expr ᵒᵈ» β) («expr ᵒᵈ» γ))\n    (f : bounded_order_hom («expr ᵒᵈ» α) («expr ᵒᵈ» β)) :\n    bounded_order_hom.dual.symm (g.comp f) = (bounded_order_hom.dual.symm g).comp (bounded_order_hom.dual.symm f) :=\n  rfl\n#align symm_dual_comp symm_dual_comp\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵈ» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵈ» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵈ» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵈ» -/\n@[simp]\ntheorem symm_dual_comp (g : BoundedOrderHom («expr ᵒᵈ» β) («expr ᵒᵈ» γ))\n    (f : BoundedOrderHom («expr ᵒᵈ» α) («expr ᵒᵈ» β)) :\n    BoundedOrderHom.dual.symm (g.comp f) = (BoundedOrderHom.dual.symm g).comp (BoundedOrderHom.dual.symm f) :=\n  rfl\n#align symm_dual_comp symm_dual_comp\n\n",
  "sup_apply":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊔ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊔ » -/\n@[simp]\ntheorem sup_apply (a : α) : («expr ⊔ » f g) a = «expr ⊔ » (f a) (g a) :=\n  rfl\n#align sup_apply sup_apply\n\n",
  "map_eq_top_iff":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n/-\nCopyright (c) 2022 Yaël Dillies. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Yaël Dillies\n-/\n-- See note [lower instance priority]\n-- See note [lower instance priority]\n-- See note [lower instance priority]\n-- See note [lower instance priority]\n--⟨λ f, le_bot_iff.1 $ (le_map_inv_iff f).1 bot_le⟩\n-- See note [lower instance priority]\n@[simp]\ntheorem map_eq_top_iff [LE α] [OrderTop α] [partial_order β] [OrderTop β] [OrderIsoClass F α β] (f : F) {a : α} :\n    f a = «expr⊤» ↔ a = «expr⊤» := by rw [← map_top f, (equiv_like.injective f).eq_iff]\n#align map_eq_top_iff map_eq_top_iff\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n#print map_eq_top_iff /-\n/-\nCopyright (c) 2022 Yaël Dillies. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Yaël Dillies\n-/\n-- See note [lower instance priority]\n-- See note [lower instance priority]\n-- See note [lower instance priority]\n-- See note [lower instance priority]\n--⟨λ f, le_bot_iff.1 $ (le_map_inv_iff f).1 bot_le⟩\n-- See note [lower instance priority]\n@[simp]\ntheorem map_eq_top_iff [LE α] [OrderTop α] [partial_order β] [OrderTop β] [OrderIsoClass F α β] (f : F) {a : α} :\n    f a = «expr⊤» ↔ a = «expr⊤» := by rw [← map_top f, (EquivLike.injective f).eq_iff]\n#align map_eq_top_iff map_eq_top_iff\n-/\n\n",
  "map_eq_bot_iff":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n@[simp]\ntheorem map_eq_bot_iff [LE α] [OrderBot α] [partial_order β] [OrderBot β] [OrderIsoClass F α β] (f : F) {a : α} :\n    f a = «expr⊥» ↔ a = «expr⊥» := by rw [← map_bot f, (equiv_like.injective f).eq_iff]\n#align map_eq_bot_iff map_eq_bot_iff\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n#print map_eq_bot_iff /-\n@[simp]\ntheorem map_eq_bot_iff [LE α] [OrderBot α] [partial_order β] [OrderBot β] [OrderIsoClass F α β] (f : F) {a : α} :\n    f a = «expr⊥» ↔ a = «expr⊥» := by rw [← map_bot f, (EquivLike.injective f).eq_iff]\n#align map_eq_bot_iff map_eq_bot_iff\n-/\n\n",
  "inf_apply":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊓ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊓ » -/\n@[simp]\ntheorem inf_apply (a : α) : («expr ⊓ » f g) a = «expr ⊓ » (f a) (g a) :=\n  rfl\n#align inf_apply inf_apply\n\n",
  "id_comp":
- "@[simp]\ntheorem id_comp (f : bounded_order_hom α β) : (bounded_order_hom.id β).comp f = f :=\n  bounded_order_hom.ext fun a => rfl\n#align id_comp id_comp\n\n",
+ "@[simp]\ntheorem id_comp (f : BoundedOrderHom α β) : (BoundedOrderHom.id β).comp f = f :=\n  BoundedOrderHom.ext fun a => rfl\n#align id_comp id_comp\n\n",
  "id_apply":
- "@[simp]\ntheorem id_apply (a : α) : bounded_order_hom.id α a = a :=\n  rfl\n#align id_apply id_apply\n\n",
+ "@[simp]\ntheorem id_apply (a : α) : BoundedOrderHom.id α a = a :=\n  rfl\n#align id_apply id_apply\n\n",
  "ext":
- "@[ext]\ntheorem ext {f g : bounded_order_hom α β} (h : ∀ a, f a = g a) : f = g :=\n  fun_like.ext f g h\n#align ext ext\n\n",
+ "@[ext]\ntheorem ext {f g : BoundedOrderHom α β} (h : ∀ a, f a = g a) : f = g :=\n  FunLike.ext f g h\n#align ext ext\n\n",
  "dual_id":
- "@[simp]\ntheorem dual_id : (bounded_order_hom.id α).dual = bounded_order_hom.id _ :=\n  rfl\n#align dual_id dual_id\n\n",
+ "@[simp]\ntheorem dual_id : (BoundedOrderHom.id α).dual = BoundedOrderHom.id _ :=\n  rfl\n#align dual_id dual_id\n\n",
  "dual_comp":
- "@[simp]\ntheorem dual_comp (g : bounded_order_hom β γ) (f : bounded_order_hom α β) : (g.comp f).dual = g.dual.comp f.dual :=\n  rfl\n#align dual_comp dual_comp\n\n",
+ "@[simp]\ntheorem dual_comp (g : BoundedOrderHom β γ) (f : BoundedOrderHom α β) : (g.comp f).dual = g.dual.comp f.dual :=\n  rfl\n#align dual_comp dual_comp\n\n",
  "copy_eq":
- "theorem copy_eq (f : bounded_order_hom α β) (f' : α → β) (h : f' = f) : f.copy f' h = f :=\n  fun_like.ext' h\n#align copy_eq copy_eq\n\n",
+ "theorem copy_eq (f : BoundedOrderHom α β) (f' : α → β) (h : f' = f) : f.copy f' h = f :=\n  FunLike.ext' h\n#align copy_eq copy_eq\n\n",
  "comp_id":
- "@[simp]\ntheorem comp_id (f : bounded_order_hom α β) : f.comp (bounded_order_hom.id α) = f :=\n  bounded_order_hom.ext fun a => rfl\n#align comp_id comp_id\n\n",
+ "@[simp]\ntheorem comp_id (f : BoundedOrderHom α β) : f.comp (BoundedOrderHom.id α) = f :=\n  BoundedOrderHom.ext fun a => rfl\n#align comp_id comp_id\n\n",
  "comp_assoc":
- "@[simp]\ntheorem comp_assoc (f : bounded_order_hom γ δ) (g : bounded_order_hom β γ) (h : bounded_order_hom α β) :\n    (f.comp g).comp h = f.comp (g.comp h) :=\n  rfl\n#align comp_assoc comp_assoc\n\n",
+ "@[simp]\ntheorem comp_assoc (f : BoundedOrderHom γ δ) (g : BoundedOrderHom β γ) (h : BoundedOrderHom α β) :\n    (f.comp g).comp h = f.comp (g.comp h) :=\n  rfl\n#align comp_assoc comp_assoc\n\n",
  "comp_apply":
- "@[simp]\ntheorem comp_apply (f : bounded_order_hom β γ) (g : bounded_order_hom α β) (a : α) : (f.comp g) a = f (g a) :=\n  rfl\n#align comp_apply comp_apply\n\n",
+ "@[simp]\ntheorem comp_apply (f : BoundedOrderHom β γ) (g : BoundedOrderHom α β) (a : α) : (f.comp g) a = f (g a) :=\n  rfl\n#align comp_apply comp_apply\n\n",
  "coe_top":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n@[simp]\ntheorem coe_top : «expr⇑ » («expr⊤» : top_hom α β) = «expr⊤» :=\n  rfl\n#align coe_top coe_top\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n@[simp]\ntheorem coe_top : «expr⇑ » («expr⊤» : TopHom α β) = «expr⊤» :=\n  rfl\n#align coe_top coe_top\n\n",
  "coe_sup":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊔ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊔ » -/\n@[simp]\ntheorem coe_sup : «expr⇑ » («expr ⊔ » f g) = «expr ⊔ » f g :=\n  rfl\n#align coe_sup coe_sup\n\n",
  "coe_inf":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊓ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊓ » -/\n@[simp]\ntheorem coe_inf : «expr⇑ » («expr ⊓ » f g) = «expr ⊓ » f g :=\n  rfl\n#align coe_inf coe_inf\n\n",
  "coe_id":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n@[simp]\ntheorem coe_id : «expr⇑ » (bounded_order_hom.id α) = id :=\n  rfl\n#align coe_id coe_id\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n@[simp]\ntheorem coe_id : «expr⇑ » (BoundedOrderHom.id α) = id :=\n  rfl\n#align coe_id coe_id\n\n",
  "coe_copy":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n@[simp]\ntheorem coe_copy (f : bounded_order_hom α β) (f' : α → β) (h : f' = f) : «expr⇑ » (f.copy f' h) = f' :=\n  rfl\n#align coe_copy coe_copy\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n@[simp]\ntheorem coe_copy (f : BoundedOrderHom α β) (f' : α → β) (h : f' = f) : «expr⇑ » (f.copy f' h) = f' :=\n  rfl\n#align coe_copy coe_copy\n\n",
  "coe_comp_top_hom":
- "@[simp]\ntheorem coe_comp_top_hom (f : bounded_order_hom β γ) (g : bounded_order_hom α β) :\n    (f.comp g : top_hom α γ) = (f : top_hom β γ).comp g :=\n  rfl\n#align coe_comp_top_hom coe_comp_top_hom\n\n",
+ "@[simp]\ntheorem coe_comp_top_hom (f : BoundedOrderHom β γ) (g : BoundedOrderHom α β) :\n    (f.comp g : TopHom α γ) = (f : TopHom β γ).comp g :=\n  rfl\n#align coe_comp_top_hom coe_comp_top_hom\n\n",
  "coe_comp_order_hom":
- "@[simp]\ntheorem coe_comp_order_hom (f : bounded_order_hom β γ) (g : bounded_order_hom α β) :\n    (f.comp g : OrderHom α γ) = (f : OrderHom β γ).comp g :=\n  rfl\n#align coe_comp_order_hom coe_comp_order_hom\n\n",
+ "@[simp]\ntheorem coe_comp_order_hom (f : BoundedOrderHom β γ) (g : BoundedOrderHom α β) :\n    (f.comp g : OrderHom α γ) = (f : OrderHom β γ).comp g :=\n  rfl\n#align coe_comp_order_hom coe_comp_order_hom\n\n",
  "coe_comp_bot_hom":
- "@[simp]\ntheorem coe_comp_bot_hom (f : bounded_order_hom β γ) (g : bounded_order_hom α β) :\n    (f.comp g : bot_hom α γ) = (f : bot_hom β γ).comp g :=\n  rfl\n#align coe_comp_bot_hom coe_comp_bot_hom\n\n",
+ "@[simp]\ntheorem coe_comp_bot_hom (f : BoundedOrderHom β γ) (g : BoundedOrderHom α β) :\n    (f.comp g : BotHom α γ) = (f : BotHom β γ).comp g :=\n  rfl\n#align coe_comp_bot_hom coe_comp_bot_hom\n\n",
  "coe_comp":
- "@[simp]\ntheorem coe_comp (f : bounded_order_hom β γ) (g : bounded_order_hom α β) : (f.comp g : α → γ) = f ∘ g :=\n  rfl\n#align coe_comp coe_comp\n\n",
+ "@[simp]\ntheorem coe_comp (f : BoundedOrderHom β γ) (g : BoundedOrderHom α β) : (f.comp g : α → γ) = f ∘ g :=\n  rfl\n#align coe_comp coe_comp\n\n",
  "coe_bot":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n@[simp]\ntheorem coe_bot : «expr⇑ » («expr⊥» : bot_hom α β) = «expr⊥» :=\n  rfl\n#align coe_bot coe_bot\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n@[simp]\ntheorem coe_bot : «expr⇑ » («expr⊥» : BotHom α β) = «expr⊥» :=\n  rfl\n#align coe_bot coe_bot\n\n",
  "cancel_right":
- "theorem cancel_right {g₁ g₂ : bounded_order_hom β γ} {f : bounded_order_hom α β} (hf : surjective f) :\n    g₁.comp f = g₂.comp f ↔ g₁ = g₂ :=\n  ⟨fun h => bounded_order_hom.ext <| hf.forall.2 <| fun_like.ext_iff.1 h, congr_arg _⟩\n#align cancel_right cancel_right\n\n",
+ "theorem cancel_right {g₁ g₂ : BoundedOrderHom β γ} {f : BoundedOrderHom α β} (hf : surjective f) :\n    g₁.comp f = g₂.comp f ↔ g₁ = g₂ :=\n  ⟨fun h => BoundedOrderHom.ext <| hf.forall.2 <| FunLike.ext_iff.1 h, congr_arg _⟩\n#align cancel_right cancel_right\n\n",
  "cancel_left":
- "theorem cancel_left {g : bounded_order_hom β γ} {f₁ f₂ : bounded_order_hom α β} (hg : injective g) :\n    g.comp f₁ = g.comp f₂ ↔ f₁ = f₂ :=\n  ⟨fun h =>\n    bounded_order_hom.ext fun a => hg <| by rw [← bounded_order_hom.comp_apply, h, bounded_order_hom.comp_apply],\n    congr_arg _⟩\n#align cancel_left cancel_left\n\n",
+ "theorem cancel_left {g : BoundedOrderHom β γ} {f₁ f₂ : BoundedOrderHom α β} (hg : injective g) :\n    g.comp f₁ = g.comp f₂ ↔ f₁ = f₂ :=\n  ⟨fun h => BoundedOrderHom.ext fun a => hg <| by rw [← BoundedOrderHom.comp_apply, h, BoundedOrderHom.comp_apply],\n    congr_arg _⟩\n#align cancel_left cancel_left\n\n",
  "bot_apply":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n@[simp]\ntheorem bot_apply (a : α) : («expr⊥» : bot_hom α β) a = «expr⊥» :=\n  rfl\n#align bot_apply bot_apply\n\n"}
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n@[simp]\ntheorem bot_apply (a : α) : («expr⊥» : BotHom α β) a = «expr⊥» :=\n  rfl\n#align bot_apply bot_apply\n\n"}

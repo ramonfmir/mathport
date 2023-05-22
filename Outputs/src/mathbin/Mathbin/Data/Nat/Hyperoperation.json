@@ -1,0 +1,20 @@
+{"hyperoperation_zero":
+ "#print hyperoperation_zero /-\n/-\nCopyright (c) 2023 Mark Andrew Gerads. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Mark Andrew Gerads, Junyan Xu, Eric Wieser\n-/\n-- Basic hyperoperation lemmas\n@[simp]\ntheorem hyperoperation_zero (m : ℕ) : hyperoperation 0 m = nat.succ :=\n  funext fun k => by rw [hyperoperation, nat.succ_eq_add_one]\n#align hyperoperation_zero hyperoperation_zero\n-/\n\n",
+ "hyperoperation_two_two_eq_four":
+ "#print hyperoperation_two_two_eq_four /-\ntheorem hyperoperation_two_two_eq_four (n : ℕ) : hyperoperation (n + 1) 2 2 = 4 :=\n  by\n  induction' n with nn nih\n  · rw [hyperoperation_one]\n  · rw [hyperoperation_recursion, hyperoperation_ge_two_eq_self, nih]\n#align hyperoperation_two_two_eq_four hyperoperation_two_two_eq_four\n-/\n\n",
+ "hyperoperation_two":
+ "#print hyperoperation_two /-\n@[simp]\ntheorem hyperoperation_two : hyperoperation 2 = (· * ·) :=\n  by\n  ext (m k)\n  induction' k with bn bih\n  · rw [hyperoperation]\n    exact (nat.mul_zero m).symm\n  · rw [hyperoperation_recursion, hyperoperation_one, bih]\n    ring\n#align hyperoperation_two hyperoperation_two\n-/\n\n",
+ "hyperoperation_three":
+ "#print hyperoperation_three /-\n@[simp]\ntheorem hyperoperation_three : hyperoperation 3 = (· ^ ·) :=\n  by\n  ext (m k)\n  induction' k with bn bih\n  · rw [hyperoperation_ge_three_eq_one]\n    exact (pow_zero m).symm\n  · rw [hyperoperation_recursion, hyperoperation_two, bih]\n    exact (pow_succ m bn).symm\n#align hyperoperation_three hyperoperation_three\n-/\n\n",
+ "hyperoperation_recursion":
+ "#print hyperoperation_recursion /-\ntheorem hyperoperation_recursion (n m k : ℕ) :\n    hyperoperation (n + 1) m (k + 1) = hyperoperation n m (hyperoperation (n + 1) m k) := by\n  obtain _ | _ | _ := n <;> rw [hyperoperation]\n#align hyperoperation_recursion hyperoperation_recursion\n-/\n\n",
+ "hyperoperation_one":
+ "#print hyperoperation_one /-\n-- Interesting hyperoperation lemmas\n@[simp]\ntheorem hyperoperation_one : hyperoperation 1 = (· + ·) :=\n  by\n  ext (m k)\n  induction' k with bn bih\n  · rw [Nat.add_zero m, hyperoperation]\n  · rw [hyperoperation_recursion, bih, hyperoperation_zero]\n    exact nat.add_assoc m bn 1\n#align hyperoperation_one hyperoperation_one\n-/\n\n",
+ "hyperoperation_ge_two_eq_self":
+ "#print hyperoperation_ge_two_eq_self /-\ntheorem hyperoperation_ge_two_eq_self (n m : ℕ) : hyperoperation (n + 2) m 1 = m :=\n  by\n  induction' n with nn nih\n  · rw [hyperoperation_two]\n    ring\n  · rw [hyperoperation_recursion, hyperoperation_ge_three_eq_one, nih]\n#align hyperoperation_ge_two_eq_self hyperoperation_ge_two_eq_self\n-/\n\n",
+ "hyperoperation_ge_three_one":
+ "#print hyperoperation_ge_three_one /-\ntheorem hyperoperation_ge_three_one (n : ℕ) : ∀ k : ℕ, hyperoperation (n + 3) 1 k = 1 :=\n  by\n  induction' n with nn nih\n  · intro k\n    rw [hyperoperation_three, one_pow]\n  · intro k\n    cases k\n    · rw [hyperoperation_ge_three_eq_one]\n    · rw [hyperoperation_recursion, nih]\n#align hyperoperation_ge_three_one hyperoperation_ge_three_one\n-/\n\n",
+ "hyperoperation_ge_three_eq_one":
+ "#print hyperoperation_ge_three_eq_one /-\ntheorem hyperoperation_ge_three_eq_one (n m : ℕ) : hyperoperation (n + 3) m 0 = 1 := by rw [hyperoperation]\n#align hyperoperation_ge_three_eq_one hyperoperation_ge_three_eq_one\n-/\n\n",
+ "hyperoperation_ge_four_zero":
+ "#print hyperoperation_ge_four_zero /-\ntheorem hyperoperation_ge_four_zero (n k : ℕ) : hyperoperation (n + 4) 0 k = if Even k then 1 else 0 :=\n  by\n  induction' k with kk kih\n  · rw [hyperoperation_ge_three_eq_one]\n    simp only [even_zero, if_true]\n  · rw [hyperoperation_recursion]\n    rw [kih]\n    simp_rw [Nat.even_add_one]\n    split_ifs\n    · exact hyperoperation_ge_two_eq_self (n + 1) 0\n    · exact hyperoperation_ge_three_eq_one n 0\n#align hyperoperation_ge_four_zero hyperoperation_ge_four_zero\n-/\n\n"}

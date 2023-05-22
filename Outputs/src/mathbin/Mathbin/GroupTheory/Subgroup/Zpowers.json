@@ -1,0 +1,50 @@
+{"zpowers_one_eq_bot":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n@[simp, to_additive zmultiples_zero_eq_bot]\ntheorem zpowers_one_eq_bot : Subgroup.zpowers (1 : G) = «expr⊥» :=\n  Subgroup.zpowers_eq_bot.mpr rfl\n#align zpowers_one_eq_bot zpowers_one_eq_bot\n\n",
+ "zpowers_ne_bot":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n@[to_additive zmultiples_ne_bot]\ntheorem zpowers_ne_bot : zpowers g ≠ «expr⊥» ↔ g ≠ 1 :=\n  zpowers_eq_bot.not\n#align zpowers_ne_bot zpowers_ne_bot\n\n",
+ "zpowers_le":
+ "@[simp, to_additive zmultiples_le]\ntheorem zpowers_le {g : G} {H : Subgroup G} : zpowers g ≤ H ↔ g ∈ H := by\n  rw [zpowers_eq_closure, closure_le, Set.singleton_subset_iff, SetLike.mem_coe]\n#align zpowers_le zpowers_le\n\n",
+ "zpowers_eq_closure":
+ "theorem zpowers_eq_closure (g : G) : zpowers g = closure {g} :=\n  by\n  ext\n  exact mem_closure_singleton.symm\n#align zpowers_eq_closure zpowers_eq_closure\n\n",
+ "zpowers_eq_bot":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n@[simp, to_additive zmultiples_eq_bot]\ntheorem zpowers_eq_bot {g : G} : zpowers g = «expr⊥» ↔ g = 1 := by rw [eq_bot_iff, zpowers_le, mem_bot]\n#align zpowers_eq_bot zpowers_eq_bot\n\n",
+ "zpow_mem_zpowers":
+ "@[simp]\ntheorem zpow_mem_zpowers (g : G) (k : ℤ) : g ^ k ∈ zpowers g :=\n  mem_zpowers_iff.mpr ⟨k, rfl⟩\n#align zpow_mem_zpowers zpow_mem_zpowers\n\n",
+ "range_zpowers_hom":
+ "@[simp]\ntheorem range_zpowers_hom (g : G) : (zpowersHom G g).range = zpowers g :=\n  rfl\n#align range_zpowers_hom range_zpowers_hom\n\n",
+ "range_zmultiples_hom":
+ "@[simp]\ntheorem range_zmultiples_hom (a : A) : (zmultiplesHom A a).range = zmultiples a :=\n  rfl\n#align range_zmultiples_hom range_zmultiples_hom\n\n",
+ "ofMul_image_zpowers_eq_zmultiples_ofMul":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\n#print ofMul_image_zpowers_eq_zmultiples_ofMul /-\ntheorem ofMul_image_zpowers_eq_zmultiples_ofMul {x : G} :\n    «expr '' » Additive.ofMul (Subgroup.zpowers x : Set G) = AddSubgroup.zmultiples (Additive.ofMul x) :=\n  by\n  ext y\n  constructor\n  · rintro ⟨z, ⟨m, hm⟩, hz2⟩\n    use m\n    simp only\n    rwa [← ofMul_zpow, hm]\n  · rintro ⟨n, hn⟩\n    refine' ⟨x ^ n, ⟨n, rfl⟩, _⟩\n    rwa [ofMul_zpow]\n#align of_mul_image_zpowers_eq_zmultiples_of_mul ofMul_image_zpowers_eq_zmultiples_ofMul\n-/\n\n",
+ "ofAdd_image_zmultiples_eq_zpowers_ofAdd":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\n#print ofAdd_image_zmultiples_eq_zpowers_ofAdd /-\ntheorem ofAdd_image_zmultiples_eq_zpowers_ofAdd {x : A} :\n    «expr '' » Multiplicative.ofAdd (AddSubgroup.zmultiples x : Set A) = Subgroup.zpowers (Multiplicative.ofAdd x) :=\n  by\n  symm\n  rw [Equiv.eq_image_iff_symm_image_eq]\n  exact ofMul_image_zpowers_eq_zmultiples_ofMul\n#align of_add_image_zmultiples_eq_zpowers_of_add ofAdd_image_zmultiples_eq_zpowers_ofAdd\n-/\n\n",
+ "npow_mem_zpowers":
+ "@[simp]\ntheorem npow_mem_zpowers (g : G) (k : ℕ) : g ^ k ∈ zpowers g :=\n  zpow_ofNat g k ▸ zpow_mem_zpowers g k\n#align npow_mem_zpowers npow_mem_zpowers\n\n",
+ "mem_zpowers_iff":
+ "theorem mem_zpowers_iff {g h : G} : h ∈ zpowers g ↔ ∃ k : ℤ, g ^ k = h :=\n  iff.rfl\n#align mem_zpowers_iff mem_zpowers_iff\n\n",
+ "mem_zpowers":
+ "/-\nCopyright (c) 2020 Chris Hughes. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Chris Hughes\n-/\n@[simp]\ntheorem mem_zpowers (g : G) : g ∈ zpowers g :=\n  ⟨1, zpow_one _⟩\n#align mem_zpowers mem_zpowers\n\n",
+ "mem_zmultiples_iff":
+ "#print Int.mem_zmultiples_iff /-\ntheorem Int.mem_zmultiples_iff {a b : ℤ} : b ∈ AddSubgroup.zmultiples a ↔ a ∣ b :=\n  exists_congr fun k => by rw [mul_comm, eq_comm, ← smul_eq_mul]\n#align int.mem_zmultiples_iff Int.mem_zmultiples_iff\n-/\n\n",
+ "map_zpowers":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →* » -/\n#print MonoidHom.map_zpowers /-\n@[simp, to_additive map_zmultiples]\ntheorem MonoidHom.map_zpowers (f : «expr →* » G N) (x : G) : (Subgroup.zpowers x).map f = Subgroup.zpowers (f x) := by\n  rw [Subgroup.zpowers_eq_closure, Subgroup.zpowers_eq_closure, f.map_closure, Set.image_singleton]\n#align monoid_hom.map_zpowers MonoidHom.map_zpowers\n#align add_monoid_hom.map_zmultiples AddMonoidHom.map_zmultiples\n-/\n\n",
+ "int_cast_mul_mem_zmultiples":
+ "@[simp]\ntheorem int_cast_mul_mem_zmultiples : ↑(k : ℤ) * r ∈ zmultiples r := by\n  simpa only [← zsmul_eq_mul] using zsmul_mem_zmultiples r k\n#align int_cast_mul_mem_zmultiples int_cast_mul_mem_zmultiples\n\n",
+ "int_cast_mem_zmultiples_one":
+ "@[simp]\ntheorem int_cast_mem_zmultiples_one : ↑(k : ℤ) ∈ zmultiples (1 : R) :=\n  mem_zmultiples_iff.mp ⟨k, by simp⟩\n#align int_cast_mem_zmultiples_one int_cast_mem_zmultiples_one\n\n",
+ "forall_zpowers":
+ "@[simp]\ntheorem forall_zpowers {x : G} {p : zpowers x → Prop} : (∀ g, p g) ↔ ∀ m : ℤ, p ⟨x ^ m, m, rfl⟩ :=\n  Set.forall_subtype_range_iff\n#align forall_zpowers forall_zpowers\n\n",
+ "forall_mem_zpowers":
+ "theorem forall_mem_zpowers {x : G} {p : G → Prop} : (∀ g ∈ zpowers x, p g) ↔ ∀ m : ℤ, p (x ^ m) :=\n  Set.forall_range_iff\n#align forall_mem_zpowers forall_mem_zpowers\n\n",
+ "exists_zpowers":
+ "@[simp]\ntheorem exists_zpowers {x : G} {p : zpowers x → Prop} : (∃ g, p g) ↔ ∃ m : ℤ, p ⟨x ^ m, m, rfl⟩ :=\n  Set.exists_subtype_range_iff\n#align exists_zpowers exists_zpowers\n\n",
+ "exists_mem_zpowers":
+ "theorem exists_mem_zpowers {x : G} {p : G → Prop} : (∃ g ∈ zpowers x, p g) ↔ ∃ m : ℤ, p (x ^ m) :=\n  Set.exists_range_iff\n#align exists_mem_zpowers exists_mem_zpowers\n\n",
+ "coe_zpowers":
+ "@[norm_cast]\ntheorem coe_zpowers (g : G) : ↑(zpowers g) = Set.range fun n : ℤ => g ^ n :=\n  rfl\n#align coe_zpowers coe_zpowers\n\n",
+ "centralizer_closure":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⨅ , » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⨅ , » -/\n@[to_additive]\ntheorem centralizer_closure (S : Set G) :\n    (closure S).centralizer =\n      «expr⨅ , » \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⨅ , »\"\n        (zpowers g).centralizer :=\n  le_antisymm (le_infᵢ fun g => le_infᵢ fun hg => centralizer_le <| zpowers_le.2 <| subset_closure hg) <|\n    le_centralizer_iff.1 <|\n      (closure_le _).2 fun g => SetLike.mem_coe.2 ∘ zpowers_le.1 ∘ le_centralizer_iff.1 ∘ infᵢ_le_of_le g ∘ infᵢ_le _\n#align centralizer_closure centralizer_closure\n\n",
+ "center_eq_infi'":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⨅ , » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⨅ , » -/\n@[to_additive]\ntheorem center_eq_infi' (S : Set G) (hS : closure S = «expr⊤») :\n    center G =\n      «expr⨅ , » \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⨅ , »\"\n        (centralizer (zpowers g)) :=\n  by rw [center_eq_infi S hS, ← infᵢ_subtype'']\n#align center_eq_infi' center_eq_infi'\n\n",
+ "center_eq_infi":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⨅ , » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⨅ , » -/\n@[to_additive]\ntheorem center_eq_infi (S : Set G) (hS : closure S = «expr⊤») :\n    center G =\n      «expr⨅ , » \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⨅ , »\"\n        (centralizer (zpowers g)) :=\n  by rw [← centralizer_top, ← hS, centralizer_closure]\n#align center_eq_infi center_eq_infi\n\n"}

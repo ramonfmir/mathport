@@ -1,31 +1,31 @@
 {"preimage_univ":
  "theorem preimage_univ : r.preimage Set.univ = r.dom := by rw [preimage, image_univ, codom_inv]\n#align preimage_univ preimage_univ\n\n",
  "preimage_union":
- "theorem preimage_union (s t : set β) : r.preimage (s ∪ t) = r.preimage s ∪ r.preimage t :=\n  image_union _ s t\n#align preimage_union preimage_union\n\n",
+ "theorem preimage_union (s t : Set β) : r.preimage (s ∪ t) = r.preimage s ∪ r.preimage t :=\n  image_union _ s t\n#align preimage_union preimage_union\n\n",
  "preimage_mono":
- "theorem preimage_mono {s t : set β} (h : s ⊆ t) : r.preimage s ⊆ r.preimage t :=\n  image_mono _ h\n#align preimage_mono preimage_mono\n\n",
+ "theorem preimage_mono {s t : Set β} (h : s ⊆ t) : r.preimage s ⊆ r.preimage t :=\n  image_mono _ h\n#align preimage_mono preimage_mono\n\n",
  "preimage_inter":
- "theorem preimage_inter (s t : set β) : r.preimage (s ∩ t) ⊆ r.preimage s ∩ r.preimage t :=\n  image_inter _ s t\n#align preimage_inter preimage_inter\n\n",
+ "theorem preimage_inter (s t : Set β) : r.preimage (s ∩ t) ⊆ r.preimage s ∩ r.preimage t :=\n  image_inter _ s t\n#align preimage_inter preimage_inter\n\n",
  "preimage_id":
- "theorem preimage_id (s : set α) : preimage (@eq α) s = s := by simp only [preimage, inv_id, image_id]\n#align preimage_id preimage_id\n\n",
+ "theorem preimage_id (s : Set α) : preimage (@Eq α) s = s := by simp only [preimage, inv_id, image_id]\n#align preimage_id preimage_id\n\n",
  "preimage_eq_core":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\ntheorem preimage_eq_core (f : α → β) (s : set β) : «expr ⁻¹' » f s = (Function.graph f).core s := by\n  simp [Set.preimage, Function.graph, Rel.core]\n#align preimage_eq_core preimage_eq_core\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\ntheorem preimage_eq_core (f : α → β) (s : Set β) : «expr ⁻¹' » f s = (Function.graph f).core s := by\n  simp [Set.preimage, Function.graph, Rel.core]\n#align preimage_eq_core preimage_eq_core\n\n",
  "preimage_eq":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\ntheorem preimage_eq (f : α → β) (s : set β) : «expr ⁻¹' » f s = (Function.graph f).preimage s := by\n  simp [Set.preimage, Function.graph, Rel.preimage, Rel.inv, flip, Rel.image]\n#align preimage_eq preimage_eq\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\ntheorem preimage_eq (f : α → β) (s : Set β) : «expr ⁻¹' » f s = (Function.graph f).preimage s := by\n  simp [Set.preimage, Function.graph, Rel.preimage, Rel.inv, flip, Rel.image]\n#align preimage_eq preimage_eq\n\n",
  "preimage_def":
- "theorem preimage_def (s : set β) : preimage r s = { x | ∃ y ∈ s, r x y } :=\n  Set.ext fun x => mem_preimage _ _ _\n#align preimage_def preimage_def\n\n",
+ "theorem preimage_def (s : Set β) : preimage r s = { x | ∃ y ∈ s, r x y } :=\n  Set.ext fun x => mem_preimage _ _ _\n#align preimage_def preimage_def\n\n",
  "preimage_comp":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `rel.comp -/\ntheorem preimage_comp (s : Rel β γ) (t : set γ) : preimage (rel.comp r s) t = preimage r (preimage s t) := by\n  simp only [preimage, inv_comp, image_comp]\n#align preimage_comp preimage_comp\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `rel.comp -/\ntheorem preimage_comp (s : Rel β γ) (t : Set γ) : preimage (rel.comp r s) t = preimage r (preimage s t) := by\n  simp only [preimage, inv_comp, image_comp]\n#align preimage_comp preimage_comp\n\n",
  "mem_preimage":
- "theorem mem_preimage (x : α) (s : set β) : x ∈ r.preimage s ↔ ∃ y ∈ s, r x y :=\n  iff.rfl\n#align mem_preimage mem_preimage\n\n",
+ "theorem mem_preimage (x : α) (s : Set β) : x ∈ r.preimage s ↔ ∃ y ∈ s, r x y :=\n  iff.rfl\n#align mem_preimage mem_preimage\n\n",
  "mem_image":
- "theorem mem_image (y : β) (s : set α) : y ∈ image r s ↔ ∃ x ∈ s, r x y :=\n  iff.rfl\n#align mem_image mem_image\n\n",
+ "theorem mem_image (y : β) (s : Set α) : y ∈ image r s ↔ ∃ x ∈ s, r x y :=\n  iff.rfl\n#align mem_image mem_image\n\n",
  "mem_core":
- "theorem mem_core (x : α) (s : set β) : x ∈ r.core s ↔ ∀ y, r x y → y ∈ s :=\n  iff.rfl\n#align mem_core mem_core\n\n",
+ "theorem mem_core (x : α) (s : Set β) : x ∈ r.core s ↔ ∀ y, r x y → y ∈ s :=\n  iff.rfl\n#align mem_core mem_core\n\n",
  "inv_inv":
  "#print inv_inv /-\ntheorem inv_inv : inv (inv r) = r := by\n  ext (x y)\n  rfl\n#align inv_inv inv_inv\n-/\n\n",
  "inv_id":
- "theorem inv_id : inv (@eq α) = @eq α := by\n  ext (x y)\n  constructor <;> apply eq.symm\n#align inv_id inv_id\n\n",
+ "theorem inv_id : inv (@Eq α) = @Eq α := by\n  ext (x y)\n  constructor <;> apply Eq.symm\n#align inv_id inv_id\n\n",
  "inv_def":
  "/-\nCopyright (c) 2018 Jeremy Avigad. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Jeremy Avigad\n-/\ntheorem inv_def (x : α) (y : β) : r.inv y x ↔ r x y :=\n  iff.rfl\n#align inv_def inv_def\n\n",
  "inv_comp":
@@ -33,23 +33,23 @@
  "image_univ":
  "theorem image_univ : r.image Set.univ = r.codom := by\n  ext y\n  simp [mem_image, codom]\n#align image_univ image_univ\n\n",
  "image_union":
- "theorem image_union (s t : set α) : r.image (s ∪ t) = r.image s ∪ r.image t :=\n  le_antisymm (fun y ⟨x, xst, rxy⟩ => xst.elim (fun xs => or.inl ⟨x, ⟨xs, rxy⟩⟩) fun xt => or.inr ⟨x, ⟨xt, rxy⟩⟩)\n    (r.image_mono.le_map_sup s t)\n#align image_union image_union\n\n",
+ "theorem image_union (s t : Set α) : r.image (s ∪ t) = r.image s ∪ r.image t :=\n  le_antisymm (fun y ⟨x, xst, rxy⟩ => xst.elim (fun xs => or.inl ⟨x, ⟨xs, rxy⟩⟩) fun xt => or.inr ⟨x, ⟨xt, rxy⟩⟩)\n    (r.image_mono.le_map_sup s t)\n#align image_union image_union\n\n",
  "image_subset_iff":
- "theorem image_subset_iff (s : set α) (t : set β) : image r s ⊆ t ↔ s ⊆ core r t :=\n  iff.intro (fun h x xs y rxy => h ⟨x, xs, rxy⟩) fun h y ⟨x, xs, rxy⟩ => h xs y rxy\n#align image_subset_iff image_subset_iff\n\n",
+ "theorem image_subset_iff (s : Set α) (t : Set β) : image r s ⊆ t ↔ s ⊆ core r t :=\n  iff.intro (fun h x xs y rxy => h ⟨x, xs, rxy⟩) fun h y ⟨x, xs, rxy⟩ => h xs y rxy\n#align image_subset_iff image_subset_iff\n\n",
  "image_subset":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⇒ » -/\ntheorem image_subset : («expr ⇒ » (· ⊆ ·) (· ⊆ ·)) r.image r.image := fun s t h y ⟨x, xs, rxy⟩ => ⟨x, h xs, rxy⟩\n#align image_subset image_subset\n\n",
  "image_mono":
- "theorem image_mono : monotone r.image :=\n  r.image_subset\n#align image_mono image_mono\n\n",
+ "theorem image_mono : Monotone r.image :=\n  r.image_subset\n#align image_mono image_mono\n\n",
  "image_inter":
- "theorem image_inter (s t : set α) : r.image (s ∩ t) ⊆ r.image s ∩ r.image t :=\n  r.image_mono.map_inf_le s t\n#align image_inter image_inter\n\n",
+ "theorem image_inter (s t : Set α) : r.image (s ∩ t) ⊆ r.image s ∩ r.image t :=\n  r.image_mono.map_inf_le s t\n#align image_inter image_inter\n\n",
  "image_id":
- "@[simp]\ntheorem image_id (s : set α) : image (@eq α) s = s := by\n  ext x\n  simp [mem_image]\n#align image_id image_id\n\n",
+ "@[simp]\ntheorem image_id (s : Set α) : image (@Eq α) s = s := by\n  ext x\n  simp [mem_image]\n#align image_id image_id\n\n",
  "image_eq":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\n-- TODO: if image were defined with bounded quantification in corelib, the next two would\n-- be definitional\ntheorem image_eq (f : α → β) (s : set α) : «expr '' » f s = (Function.graph f).image s := by\n  simp [Set.image, Function.graph, Rel.image]\n#align image_eq image_eq\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\n-- TODO: if image were defined with bounded quantification in corelib, the next two would\n-- be definitional\ntheorem image_eq (f : α → β) (s : Set α) : «expr '' » f s = (Function.graph f).image s := by\n  simp [Set.image, Function.graph, Rel.image]\n#align image_eq image_eq\n\n",
  "image_core_gc":
  "theorem image_core_gc : GaloisConnection r.image r.core :=\n  image_subset_iff _\n#align image_core_gc image_core_gc\n\n",
  "image_comp":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `rel.comp -/\ntheorem image_comp (s : Rel β γ) (t : set α) : image (rel.comp r s) t = image s (image r t) :=\n  by\n  ext z; simp only [mem_image]; constructor\n  · rintro ⟨x, xt, y, rxy, syz⟩\n    exact ⟨y, ⟨x, xt, rxy⟩, syz⟩\n  rintro ⟨y, ⟨x, xt, rxy⟩, syz⟩; exact ⟨x, xt, y, rxy, syz⟩\n#align image_comp image_comp\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `rel.comp -/\ntheorem image_comp (s : Rel β γ) (t : Set α) : image (rel.comp r s) t = image s (image r t) :=\n  by\n  ext z; simp only [mem_image]; constructor\n  · rintro ⟨x, xt, y, rxy, syz⟩\n    exact ⟨y, ⟨x, xt, rxy⟩, syz⟩\n  rintro ⟨y, ⟨x, xt, rxy⟩, syz⟩; exact ⟨x, xt, y, rxy, syz⟩\n#align image_comp image_comp\n\n",
  "dom_mono":
  "theorem dom_mono {r s : Rel α β} (h : r ≤ s) : dom r ⊆ dom s := fun a ⟨b, hx⟩ => ⟨b, h a b hx⟩\n#align dom_mono dom_mono\n\n",
  "dom_inv":
@@ -57,21 +57,21 @@
  "core_univ":
  "@[simp]\ntheorem core_univ : r.core Set.univ = Set.univ :=\n  Set.ext (by simp [mem_core])\n#align core_univ core_univ\n\n",
  "core_union":
- "theorem core_union (s t : set β) : r.core s ∪ r.core t ⊆ r.core (s ∪ t) :=\n  r.core_mono.le_map_sup s t\n#align core_union core_union\n\n",
+ "theorem core_union (s t : Set β) : r.core s ∪ r.core t ⊆ r.core (s ∪ t) :=\n  r.core_mono.le_map_sup s t\n#align core_union core_union\n\n",
  "core_subset":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⇒ » -/\ntheorem core_subset : («expr ⇒ » (· ⊆ ·) (· ⊆ ·)) r.core r.core := fun s t h x h' y rxy => h (h' y rxy)\n#align core_subset core_subset\n\n",
  "core_mono":
- "theorem core_mono : monotone r.core :=\n  r.core_subset\n#align core_mono core_mono\n\n",
+ "theorem core_mono : Monotone r.core :=\n  r.core_subset\n#align core_mono core_mono\n\n",
  "core_inter":
- "theorem core_inter (s t : set β) : r.core (s ∩ t) = r.core s ∩ r.core t :=\n  Set.ext (by simp [mem_core, imp_and, forall_and])\n#align core_inter core_inter\n\n",
+ "theorem core_inter (s t : Set β) : r.core (s ∩ t) = r.core s ∩ r.core t :=\n  Set.ext (by simp [mem_core, imp_and, forall_and])\n#align core_inter core_inter\n\n",
  "core_id":
- "theorem core_id (s : set α) : core (@eq α) s = s := by simp [core]\n#align core_id core_id\n\n",
+ "theorem core_id (s : Set α) : core (@Eq α) s = s := by simp [core]\n#align core_id core_id\n\n",
  "core_comp":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `rel.comp -/\ntheorem core_comp (s : Rel β γ) (t : set γ) : core (rel.comp r s) t = core r (core s t) :=\n  by\n  ext x; simp [core, comp]; constructor\n  · exact fun h y rxy z => h z y rxy\n  · exact fun h z y rzy => h y rzy z\n#align core_comp core_comp\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `rel.comp -/\ntheorem core_comp (s : Rel β γ) (t : Set γ) : core (rel.comp r s) t = core r (core s t) :=\n  by\n  ext x; simp [core, comp]; constructor\n  · exact fun h y rxy z => h z y rxy\n  · exact fun h z y rzy => h y rzy z\n#align core_comp core_comp\n\n",
  "comp_right_id":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `rel.comp -/\n@[simp]\ntheorem comp_right_id (r : Rel α β) : rel.comp r (@eq β) = r :=\n  by\n  unfold comp\n  ext y\n  simp\n#align comp_right_id comp_right_id\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `rel.comp -/\n@[simp]\ntheorem comp_right_id (r : Rel α β) : rel.comp r (@Eq β) = r :=\n  by\n  unfold comp\n  ext y\n  simp\n#align comp_right_id comp_right_id\n\n",
  "comp_left_id":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `rel.comp -/\n@[simp]\ntheorem comp_left_id (r : Rel α β) : rel.comp (@eq α) r = r :=\n  by\n  unfold comp\n  ext x\n  simp\n#align comp_left_id comp_left_id\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `rel.comp -/\n@[simp]\ntheorem comp_left_id (r : Rel α β) : rel.comp (@Eq α) r = r :=\n  by\n  unfold comp\n  ext x\n  simp\n#align comp_left_id comp_left_id\n\n",
  "comp_assoc":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `rel.comp -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `rel.comp -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `rel.comp -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `rel.comp -/\ntheorem comp_assoc (r : Rel α β) (s : Rel β γ) (t : Rel γ δ) : rel.comp (rel.comp r s) t = rel.comp r (rel.comp s t) :=\n  by\n  unfold comp; ext (x w); constructor\n  · rintro ⟨z, ⟨y, rxy, syz⟩, tzw⟩\n    exact ⟨y, rxy, z, syz, tzw⟩\n  rintro ⟨y, rxy, z, syz, tzw⟩; exact ⟨z, ⟨y, rxy, syz⟩, tzw⟩\n#align comp_assoc comp_assoc\n\n",
  "codom_inv":

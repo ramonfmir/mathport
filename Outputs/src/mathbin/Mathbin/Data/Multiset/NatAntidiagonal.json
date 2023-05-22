@@ -3,7 +3,7 @@
  "mem_antidiagonal":
  "/-\nCopyright (c) 2019 Johan Commelin. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Johan Commelin\n-/\n/-- A pair (i, j) is contained in the antidiagonal of `n` if and only if `i + j = n`. -/\n@[simp]\ntheorem mem_antidiagonal {n : ℕ} {x : ℕ × ℕ} : x ∈ antidiagonal n ↔ x.1 + x.2 = n := by\n  rw [antidiagonal, mem_coe, List.Nat.mem_antidiagonal]\n#align mem_antidiagonal mem_antidiagonal\n\n",
  "map_swap_antidiagonal":
- "theorem map_swap_antidiagonal {n : ℕ} : (antidiagonal n).map prod.swap = antidiagonal n := by\n  rw [antidiagonal, coe_map, List.Nat.map_swap_antidiagonal, coe_reverse]\n#align map_swap_antidiagonal map_swap_antidiagonal\n\n",
+ "theorem map_swap_antidiagonal {n : ℕ} : (antidiagonal n).map Prod.swap = antidiagonal n := by\n  rw [antidiagonal, coe_map, List.Nat.map_swap_antidiagonal, coe_reverse]\n#align map_swap_antidiagonal map_swap_antidiagonal\n\n",
  "card_antidiagonal":
  "/-- The cardinality of the antidiagonal of `n` is `n+1`. -/\n@[simp]\ntheorem card_antidiagonal (n : ℕ) : (antidiagonal n).card = n + 1 := by\n  rw [antidiagonal, coe_card, List.Nat.length_antidiagonal]\n#align card_antidiagonal card_antidiagonal\n\n",
  "antidiagonal_zero":

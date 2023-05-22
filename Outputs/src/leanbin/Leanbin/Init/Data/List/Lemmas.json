@@ -1,114 +1,114 @@
 {"trans":
- "@[trans]\ntheorem subset.trans {l₁ l₂ l₃ : list α} (h₁ : l₁ ⊆ l₂) (h₂ : l₂ ⊆ l₃) : l₁ ⊆ l₃ := fun b i => h₂ (h₁ i)\n#align subset.trans subset.trans\n\n",
+ "@[trans]\ntheorem subset.trans {l₁ l₂ l₃ : List α} (h₁ : l₁ ⊆ l₂) (h₂ : l₂ ⊆ l₃) : l₁ ⊆ l₃ := fun b i => h₂ (h₁ i)\n#align subset.trans subset.trans\n\n",
  "subset_of_cons_subset":
- "theorem subset_of_cons_subset {a : α} {l₁ l₂ : list α} : a :: l₁ ⊆ l₂ → l₁ ⊆ l₂ := fun s b i => s (mem_cons_of_mem _ i)\n#align subset_of_cons_subset subset_of_cons_subset\n\n",
+ "theorem subset_of_cons_subset {a : α} {l₁ l₂ : List α} : a :: l₁ ⊆ l₂ → l₁ ⊆ l₂ := fun s b i => s (mem_cons_of_mem _ i)\n#align subset_of_cons_subset subset_of_cons_subset\n\n",
  "subset_cons_of_subset":
- "theorem subset_cons_of_subset (a : α) {l₁ l₂ : list α} : l₁ ⊆ l₂ → l₁ ⊆ a :: l₂ :=\n  fun (s : l₁ ⊆ l₂) (a : α) (i : a ∈ l₁) => or.inr (s i)\n#align subset_cons_of_subset subset_cons_of_subset\n\n",
+ "theorem subset_cons_of_subset (a : α) {l₁ l₂ : List α} : l₁ ⊆ l₂ → l₁ ⊆ a :: l₂ :=\n  fun (s : l₁ ⊆ l₂) (a : α) (i : a ∈ l₁) => or.inr (s i)\n#align subset_cons_of_subset subset_cons_of_subset\n\n",
  "subset_cons":
- "@[simp]\ntheorem subset_cons (a : α) (l : list α) : l ⊆ a :: l := fun b i => or.inr i\n#align subset_cons subset_cons\n\n",
+ "@[simp]\ntheorem subset_cons (a : α) (l : List α) : l ⊆ a :: l := fun b i => or.inr i\n#align subset_cons subset_cons\n\n",
  "subset_append_right":
- "@[simp]\ntheorem subset_append_right (l₁ l₂ : list α) : l₂ ⊆ l₁ ++ l₂ := fun b => mem_append_right _\n#align subset_append_right subset_append_right\n\n",
+ "@[simp]\ntheorem subset_append_right (l₁ l₂ : List α) : l₂ ⊆ l₁ ++ l₂ := fun b => mem_append_right _\n#align subset_append_right subset_append_right\n\n",
  "subset_append_left":
- "@[simp]\ntheorem subset_append_left (l₁ l₂ : list α) : l₁ ⊆ l₁ ++ l₂ := fun b => mem_append_left _\n#align subset_append_left subset_append_left\n\n",
+ "@[simp]\ntheorem subset_append_left (l₁ l₂ : List α) : l₁ ⊆ l₁ ++ l₂ := fun b => mem_append_left _\n#align subset_append_left subset_append_left\n\n",
  "refl":
- "@[refl, simp]\ntheorem subset.refl (l : list α) : l ⊆ l := fun b i => i\n#align subset.refl subset.refl\n\n",
+ "@[refl, simp]\ntheorem subset.refl (l : List α) : l ⊆ l := fun b i => i\n#align subset.refl subset.refl\n\n",
  "partition_eq_filter_filter":
- "@[simp]\ntheorem partition_eq_filter_filter (p : α → Prop) [decidable_pred p] :\n    ∀ l : list α, partition p l = (filter p l, filter (not ∘ p) l)\n  | [] => rfl\n  | a :: l => by by_cases pa : p a <;> simp [partition, filter, pa, partition_eq_filter_filter l]\n#align partition_eq_filter_filter partition_eq_filter_filter\n\n",
+ "@[simp]\ntheorem partition_eq_filter_filter (p : α → Prop) [DecidablePred p] :\n    ∀ l : List α, partition p l = (filter p l, filter (not ∘ p) l)\n  | [] => rfl\n  | a :: l => by by_cases pa : p a <;> simp [partition, Filter, pa, partition_eq_filter_filter l]\n#align partition_eq_filter_filter partition_eq_filter_filter\n\n",
  "not_mem_nil":
- "@[simp]\ntheorem not_mem_nil (a : α) : a ∉ ([] : list α) :=\n  not_false\n#align not_mem_nil not_mem_nil\n\n",
+ "@[simp]\ntheorem not_mem_nil (a : α) : a ∉ ([] : List α) :=\n  not_false\n#align not_mem_nil not_mem_nil\n\n",
  "not_bex_nil":
  "theorem not_bex_nil (p : α → Prop) : ¬∃ x ∈ @nil α, p x := fun ⟨x, hx, px⟩ => hx\n#align not_bex_nil not_bex_nil\n\n",
  "nil_subset":
- "@[simp]\ntheorem nil_subset (l : list α) : [] ⊆ l := fun b i => false.elim (Iff.mp (mem_nil_iff b) i)\n#align nil_subset nil_subset\n\n",
+ "@[simp]\ntheorem nil_subset (l : List α) : [] ⊆ l := fun b i => false.elim (Iff.mp (mem_nil_iff b) i)\n#align nil_subset nil_subset\n\n",
  "nil_bind":
- "@[simp]\ntheorem nil_bind (f : α → list β) : list.bind [] f = [] := by simp [join, list.bind]\n#align nil_bind nil_bind\n\n",
+ "@[simp]\ntheorem nil_bind (f : α → List β) : list.bind [] f = [] := by simp [join, list.bind]\n#align nil_bind nil_bind\n\n",
  "nil_append":
- "/-\nCopyright (c) 2014 Parikshit Khanna. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthor: Parikshit Khanna, Jeremy Avigad, Leonardo de Moura, Floris van Doorn\n-/\n@[simp]\ntheorem nil_append (s : list α) : [] ++ s = s :=\n  rfl\n#align nil_append nil_append\n\n",
+ "/-\nCopyright (c) 2014 Parikshit Khanna. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthor: Parikshit Khanna, Jeremy Avigad, Leonardo de Moura, Floris van Doorn\n-/\n@[simp]\ntheorem nil_append (s : List α) : [] ++ s = s :=\n  rfl\n#align nil_append nil_append\n\n",
  "ne_nil_of_length_eq_succ":
- "theorem ne_nil_of_length_eq_succ {l : list α} : ∀ {n : nat}, length l = succ n → l ≠ [] := by\n  induction l <;> intros <;> contradiction\n#align ne_nil_of_length_eq_succ ne_nil_of_length_eq_succ\n\n",
+ "theorem ne_nil_of_length_eq_succ {l : List α} : ∀ {n : Nat}, length l = succ n → l ≠ [] := by\n  induction l <;> intros <;> contradiction\n#align ne_nil_of_length_eq_succ ne_nil_of_length_eq_succ\n\n",
  "mem_nil_iff":
- "theorem mem_nil_iff (a : α) : a ∈ ([] : list α) ↔ false :=\n  iff.rfl\n#align mem_nil_iff mem_nil_iff\n\n",
+ "theorem mem_nil_iff (a : α) : a ∈ ([] : List α) ↔ False :=\n  iff.rfl\n#align mem_nil_iff mem_nil_iff\n\n",
  "mem_cons_self":
- "theorem mem_cons_self (a : α) (l : list α) : a ∈ a :: l :=\n  or.inl rfl\n#align mem_cons_self mem_cons_self\n\n",
+ "theorem mem_cons_self (a : α) (l : List α) : a ∈ a :: l :=\n  or.inl rfl\n#align mem_cons_self mem_cons_self\n\n",
  "mem_cons_of_mem":
- "theorem mem_cons_of_mem (y : α) {a : α} {l : list α} : a ∈ l → a ∈ y :: l := fun H => or.inr H\n#align mem_cons_of_mem mem_cons_of_mem\n\n",
+ "theorem mem_cons_of_mem (y : α) {a : α} {l : List α} : a ∈ l → a ∈ y :: l := fun H => or.inr H\n#align mem_cons_of_mem mem_cons_of_mem\n\n",
  "mem_cons_iff":
- "@[simp]\ntheorem mem_cons_iff (a y : α) (l : list α) : a ∈ y :: l ↔ a = y ∨ a ∈ l :=\n  iff.rfl\n#align mem_cons_iff mem_cons_iff\n\n",
+ "@[simp]\ntheorem mem_cons_iff (a y : α) (l : List α) : a ∈ y :: l ↔ a = y ∨ a ∈ l :=\n  iff.rfl\n#align mem_cons_iff mem_cons_iff\n\n",
  "mem_cons_eq":
- "@[rsimp]\ntheorem mem_cons_eq (a y : α) (l : list α) : (a ∈ y :: l) = (a = y ∨ a ∈ l) :=\n  rfl\n#align mem_cons_eq mem_cons_eq\n\n",
+ "@[rsimp]\ntheorem mem_cons_eq (a y : α) (l : List α) : (a ∈ y :: l) = (a = y ∨ a ∈ l) :=\n  rfl\n#align mem_cons_eq mem_cons_eq\n\n",
  "mem_append_right":
- "theorem mem_append_right {a : α} (l₁ : list α) {l₂ : list α} (h : a ∈ l₂) : a ∈ l₁ ++ l₂ :=\n  mem_append.2 (or.inr h)\n#align mem_append_right mem_append_right\n\n",
+ "theorem mem_append_right {a : α} (l₁ : List α) {l₂ : List α} (h : a ∈ l₂) : a ∈ l₁ ++ l₂ :=\n  mem_append.2 (or.inr h)\n#align mem_append_right mem_append_right\n\n",
  "mem_append_left":
- "theorem mem_append_left {a : α} {l₁ : list α} (l₂ : list α) (h : a ∈ l₁) : a ∈ l₁ ++ l₂ :=\n  mem_append.2 (or.inl h)\n#align mem_append_left mem_append_left\n\n",
+ "theorem mem_append_left {a : α} {l₁ : List α} (l₂ : List α) (h : a ∈ l₁) : a ∈ l₁ ++ l₂ :=\n  mem_append.2 (or.inl h)\n#align mem_append_left mem_append_left\n\n",
  "mem_append_eq":
- "@[rsimp]\ntheorem mem_append_eq (a : α) (s t : list α) : (a ∈ s ++ t) = (a ∈ s ∨ a ∈ t) :=\n  propext mem_append\n#align mem_append_eq mem_append_eq\n\n",
+ "@[rsimp]\ntheorem mem_append_eq (a : α) (s t : List α) : (a ∈ s ++ t) = (a ∈ s ∨ a ∈ t) :=\n  propext mem_append\n#align mem_append_eq mem_append_eq\n\n",
  "mem_append":
- "@[simp]\ntheorem mem_append {a : α} {s t : list α} : a ∈ s ++ t ↔ a ∈ s ∨ a ∈ t := by induction s <;> simp [*, or_assoc']\n#align mem_append mem_append\n\n",
+ "@[simp]\ntheorem mem_append {a : α} {s t : List α} : a ∈ s ++ t ↔ a ∈ s ∨ a ∈ t := by induction s <;> simp [*, or_assoc']\n#align mem_append mem_append\n\n",
  "map_singleton":
  "theorem map_singleton (f : α → β) (a : α) : map f [a] = [f a] :=\n  rfl\n#align map_singleton map_singleton\n\n",
  "map_map":
- "@[simp]\ntheorem map_map (g : β → γ) (f : α → β) (l : list α) : map g (map f l) = map (g ∘ f) l := by induction l <;> simp [*]\n#align map_map map_map\n\n",
+ "@[simp]\ntheorem map_map (g : β → γ) (f : α → β) (l : List α) : map g (map f l) = map (g ∘ f) l := by induction l <;> simp [*]\n#align map_map map_map\n\n",
  "map_id":
- "@[simp]\ntheorem map_id (l : list α) : map id l = l := by induction l <;> simp [*]\n#align map_id map_id\n\n",
+ "@[simp]\ntheorem map_id (l : List α) : map id l = l := by induction l <;> simp [*]\n#align map_id map_id\n\n",
  "map_cons":
  "theorem map_cons (f : α → β) (a l) : map f (a :: l) = f a :: map f l :=\n  rfl\n#align map_cons map_cons\n\n",
  "map_append":
  "@[simp]\ntheorem map_append (f : α → β) : ∀ l₁ l₂, map f (l₁ ++ l₂) = map f l₁ ++ map f l₂ := by\n  intro l₁ <;> induction l₁ <;> intros <;> simp [*]\n#align map_append map_append\n\n",
  "length_take_le":
- "theorem length_take_le (n) (l : list α) : length (take n l) ≤ n := by simp [min_le_left]\n#align length_take_le length_take_le\n\n",
+ "theorem length_take_le (n) (l : List α) : length (take n l) ≤ n := by simp [min_le_left]\n#align length_take_le length_take_le\n\n",
  "length_take":
- "@[simp]\ntheorem length_take : ∀ (i : ℕ) (l : list α), length (take i l) = min i (length l)\n  | 0, l => by simp [nat.zero_min]\n  | succ n, [] => by simp [nat.min_zero]\n  | succ n, a :: l => by simp [*, nat.min_succ_succ, add_one]\n#align length_take length_take\n\n",
+ "@[simp]\ntheorem length_take : ∀ (i : ℕ) (l : List α), length (take i l) = min i (length l)\n  | 0, l => by simp [nat.zero_min]\n  | succ n, [] => by simp [nat.min_zero]\n  | succ n, a :: l => by simp [*, nat.min_succ_succ, add_one]\n#align length_take length_take\n\n",
  "length_tail":
- "@[simp]\ntheorem length_tail (l : list α) : length (tail l) = length l - 1 := by cases l <;> rfl\n#align length_tail length_tail\n\n",
+ "@[simp]\ntheorem length_tail (l : List α) : length (tail l) = length l - 1 := by cases l <;> rfl\n#align length_tail length_tail\n\n",
  "length_repeat":
  "@[simp]\ntheorem length_repeat (a : α) (n : ℕ) : length (repeat a n) = n := by induction n <;> simp [*] <;> rfl\n#align length_repeat length_repeat\n\n",
  "length_remove_nth":
- "theorem length_remove_nth : ∀ (l : list α) (i : ℕ), i < length l → length (remove_nth l i) = length l - 1\n  | [], _, h => rfl\n  | x :: xs, 0, h => by simp [remove_nth]\n  | x :: xs, i + 1, h => by\n    have : i < length xs := lt_of_succ_lt_succ h\n    dsimp [remove_nth] <;>\n        rw [length_remove_nth xs i this, nat.sub_add_cancel (lt_of_le_of_lt (nat.zero_le _) this)] <;>\n      rfl\n#align length_remove_nth length_remove_nth\n\n",
+ "theorem length_remove_nth : ∀ (l : List α) (i : ℕ), i < length l → length (remove_nth l i) = length l - 1\n  | [], _, h => rfl\n  | x :: xs, 0, h => by simp [remove_nth]\n  | x :: xs, i + 1, h => by\n    have : i < length xs := lt_of_succ_lt_succ h\n    dsimp [remove_nth] <;>\n        rw [length_remove_nth xs i this, nat.sub_add_cancel (lt_of_le_of_lt (nat.zero_le _) this)] <;>\n      rfl\n#align length_remove_nth length_remove_nth\n\n",
  "length_map₂":
  "@[simp]\ntheorem length_map₂ (f : α → β → γ) (l₁) : ∀ l₂, length (zipWith f l₁ l₂) = min (length l₁) (length l₂) := by\n  induction l₁ <;> intro l₂ <;> cases l₂ <;> simp [*, add_one, min_succ_succ, nat.zero_min, nat.min_zero]\n#align length_map₂ length_map₂\n\n",
  "length_map_accumr₂":
- "-- This runs a function over two lists returning the intermediate results and a\n-- a final result.\n@[simp]\ntheorem length_map_accumr₂ :\n    ∀ (f : α → β → σ → σ × φ) (x y c), length (mapAccumr₂ f x y c).2 = min (length x) (length y)\n  | f, a :: x, b :: y, c =>\n    calc\n      succ (length (mapAccumr₂ f x y c).2) = succ (min (length x) (length y)) :=\n        congr_arg succ (length_map_accumr₂ f x y c)\n      _ = min (succ (length x)) (succ (length y)) := eq.symm (min_succ_succ (length x) (length y))\n      \n  | f, a :: x, [], c => rfl\n  | f, [], b :: y, c => rfl\n  | f, [], [], c => rfl\n#align length_map_accumr₂ length_map_accumr₂\n\n",
+ "-- This runs a function over two lists returning the intermediate results and a\n-- a final result.\n@[simp]\ntheorem length_map_accumr₂ :\n    ∀ (f : α → β → σ → σ × φ) (x y c), length (mapAccumr₂ f x y c).2 = min (length x) (length y)\n  | f, a :: x, b :: y, c =>\n    calc\n      succ (length (mapAccumr₂ f x y c).2) = succ (min (length x) (length y)) :=\n        congr_arg succ (length_map_accumr₂ f x y c)\n      _ = min (succ (length x)) (succ (length y)) := Eq.symm (min_succ_succ (length x) (length y))\n      \n  | f, a :: x, [], c => rfl\n  | f, [], b :: y, c => rfl\n  | f, [], [], c => rfl\n#align length_map_accumr₂ length_map_accumr₂\n\n",
  "length_map_accumr":
- "-- This runs a function over a list returning the intermediate results and a\n-- a final result.\n@[simp]\ntheorem length_map_accumr : ∀ (f : α → σ → σ × β) (x : list α) (s : σ), length (mapAccumr f x s).2 = length x\n  | f, a :: x, s => congr_arg succ (length_map_accumr f x s)\n  | f, [], s => rfl\n#align length_map_accumr length_map_accumr\n\n",
+ "-- This runs a function over a list returning the intermediate results and a\n-- a final result.\n@[simp]\ntheorem length_map_accumr : ∀ (f : α → σ → σ × β) (x : List α) (s : σ), length (mapAccumr f x s).2 = length x\n  | f, a :: x, s => congr_arg succ (length_map_accumr f x s)\n  | f, [], s => rfl\n#align length_map_accumr length_map_accumr\n\n",
  "length_map":
- "@[simp]\ntheorem length_map (f : α → β) (l : list α) : length (map f l) = length l := by induction l <;> simp [*]\n#align length_map length_map\n\n",
+ "@[simp]\ntheorem length_map (f : α → β) (l : List α) : length (map f l) = length l := by induction l <;> simp [*]\n#align length_map length_map\n\n",
  "length_le_of_sublist":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr <+ » -/\ntheorem length_le_of_sublist : ∀ {l₁ l₂ : list α}, «expr <+ » l₁ l₂ → length l₁ ≤ length l₂\n  | _, _, sublist.slnil => le_refl 0\n  | _, _, sublist.cons l₁ l₂ a s => le_succ_of_le (length_le_of_sublist s)\n  | _, _, sublist.cons2 l₁ l₂ a s => succ_le_succ (length_le_of_sublist s)\n#align length_le_of_sublist length_le_of_sublist\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr <+ » -/\ntheorem length_le_of_sublist : ∀ {l₁ l₂ : List α}, «expr <+ » l₁ l₂ → length l₁ ≤ length l₂\n  | _, _, sublist.slnil => le_refl 0\n  | _, _, sublist.cons l₁ l₂ a s => le_succ_of_le (length_le_of_sublist s)\n  | _, _, sublist.cons2 l₁ l₂ a s => succ_le_succ (length_le_of_sublist s)\n#align length_le_of_sublist length_le_of_sublist\n\n",
  "length_drop":
- "-- TODO(Leo): cleanup proof after arith dec proc\n@[simp]\ntheorem length_drop : ∀ (i : ℕ) (l : list α), length (drop i l) = length l - i\n  | 0, l => rfl\n  | succ i, [] => eq.symm (nat.zero_sub (succ i))\n  | succ i, x :: l =>\n    calc\n      length (drop (succ i) (x :: l)) = length l - i := length_drop i l\n      _ = succ (length l) - succ i := (nat.succ_sub_succ_eq_sub (length l) i).symm\n      \n#align length_drop length_drop\n\n",
+ "-- TODO(Leo): cleanup proof after arith dec proc\n@[simp]\ntheorem length_drop : ∀ (i : ℕ) (l : List α), length (drop i l) = length l - i\n  | 0, l => rfl\n  | succ i, [] => Eq.symm (nat.zero_sub (succ i))\n  | succ i, x :: l =>\n    calc\n      length (drop (succ i) (x :: l)) = length l - i := length_drop i l\n      _ = succ (length l) - succ i := (nat.succ_sub_succ_eq_sub (length l) i).symm\n      \n#align length_drop length_drop\n\n",
  "length_cons":
- "theorem length_cons (a : α) (l : list α) : length (a :: l) = length l + 1 :=\n  rfl\n#align length_cons length_cons\n\n",
+ "theorem length_cons (a : α) (l : List α) : length (a :: l) = length l + 1 :=\n  rfl\n#align length_cons length_cons\n\n",
  "length_append":
- "@[simp]\ntheorem length_append (s t : list α) : length (s ++ t) = length s + length t :=\n  by\n  induction s\n  · show length t = 0 + length t\n    · rw [nat.zero_add]\n  · simp [*, nat.add_comm, nat.add_left_comm]\n#align length_append length_append\n\n",
+ "@[simp]\ntheorem length_append (s t : List α) : length (s ++ t) = length s + length t :=\n  by\n  induction s\n  · show length t = 0 + length t\n    · rw [nat.zero_add]\n  · simp [*, nat.add_comm, nat.add_left_comm]\n#align length_append length_append\n\n",
  "filter_sublist":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr <+ » -/\n@[simp]\ntheorem filter_sublist {p : α → Prop} [h : decidable_pred p] : ∀ l : list α, «expr <+ » (filter p l) l\n  | [] => sublist.slnil\n  | a :: l =>\n    if pa : p a then by simp [pa] <;> apply sublist.cons2 <;> apply filter_sublist l\n    else by simp [pa] <;> apply sublist.cons <;> apply filter_sublist l\n#align filter_sublist filter_sublist\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr <+ » -/\n@[simp]\ntheorem filter_sublist {p : α → Prop} [h : DecidablePred p] : ∀ l : List α, «expr <+ » (filter p l) l\n  | [] => sublist.slnil\n  | a :: l =>\n    if pa : p a then by simp [pa] <;> apply sublist.cons2 <;> apply filter_sublist l\n    else by simp [pa] <;> apply sublist.cons <;> apply filter_sublist l\n#align filter_sublist filter_sublist\n\n",
  "filter_nil":
- "@[simp]\ntheorem filter_nil (p : α → Prop) [h : decidable_pred p] : filter p [] = [] :=\n  rfl\n#align filter_nil filter_nil\n\n",
+ "@[simp]\ntheorem filter_nil (p : α → Prop) [h : DecidablePred p] : filter p [] = [] :=\n  rfl\n#align filter_nil filter_nil\n\n",
  "filter_cons_of_pos":
- "@[simp]\ntheorem filter_cons_of_pos {p : α → Prop} [h : decidable_pred p] {a : α} :\n    ∀ l, p a → filter p (a :: l) = a :: filter p l := fun l pa => if_pos pa\n#align filter_cons_of_pos filter_cons_of_pos\n\n",
+ "@[simp]\ntheorem filter_cons_of_pos {p : α → Prop} [h : DecidablePred p] {a : α} :\n    ∀ l, p a → filter p (a :: l) = a :: filter p l := fun l pa => if_pos pa\n#align filter_cons_of_pos filter_cons_of_pos\n\n",
  "filter_cons_of_neg":
- "@[simp]\ntheorem filter_cons_of_neg {p : α → Prop} [h : decidable_pred p] {a : α} : ∀ l, ¬p a → filter p (a :: l) = filter p l :=\n  fun l pa => if_neg pa\n#align filter_cons_of_neg filter_cons_of_neg\n\n",
+ "@[simp]\ntheorem filter_cons_of_neg {p : α → Prop} [h : DecidablePred p] {a : α} : ∀ l, ¬p a → filter p (a :: l) = filter p l :=\n  fun l pa => if_neg pa\n#align filter_cons_of_neg filter_cons_of_neg\n\n",
  "filter_append":
- "@[simp]\ntheorem filter_append {p : α → Prop} [h : decidable_pred p] :\n    ∀ l₁ l₂ : list α, filter p (l₁ ++ l₂) = filter p l₁ ++ filter p l₂\n  | [], l₂ => rfl\n  | a :: l₁, l₂ => by by_cases pa : p a <;> simp [pa, filter_append]\n#align filter_append filter_append\n\n",
+ "@[simp]\ntheorem filter_append {p : α → Prop} [h : DecidablePred p] :\n    ∀ l₁ l₂ : List α, filter p (l₁ ++ l₂) = filter p l₁ ++ filter p l₂\n  | [], l₂ => rfl\n  | a :: l₁, l₂ => by by_cases pa : p a <;> simp [pa, filter_append]\n#align filter_append filter_append\n\n",
  "eq_or_mem_of_mem_cons":
- "theorem eq_or_mem_of_mem_cons {a y : α} {l : list α} : a ∈ y :: l → a = y ∨ a ∈ l := fun h => h\n#align eq_or_mem_of_mem_cons eq_or_mem_of_mem_cons\n\n",
+ "theorem eq_or_mem_of_mem_cons {a y : α} {l : List α} : a ∈ y :: l → a = y ∨ a ∈ l := fun h => h\n#align eq_or_mem_of_mem_cons eq_or_mem_of_mem_cons\n\n",
  "eq_nil_of_length_eq_zero":
- "theorem eq_nil_of_length_eq_zero {l : list α} : length l = 0 → l = [] :=\n  by\n  induction l <;> intros\n  rfl\n  contradiction\n#align eq_nil_of_length_eq_zero eq_nil_of_length_eq_zero\n\n",
+ "theorem eq_nil_of_length_eq_zero {l : List α} : length l = 0 → l = [] :=\n  by\n  induction l <;> intros\n  rfl\n  contradiction\n#align eq_nil_of_length_eq_zero eq_nil_of_length_eq_zero\n\n",
  "cons_subset_cons":
- "theorem cons_subset_cons {l₁ l₂ : list α} (a : α) (s : l₁ ⊆ l₂) : a :: l₁ ⊆ a :: l₂ := fun b hin =>\n  or.elim (eq_or_mem_of_mem_cons hin) (fun e : b = a => or.inl e) fun i : b ∈ l₁ => or.inr (s i)\n#align cons_subset_cons cons_subset_cons\n\n",
+ "theorem cons_subset_cons {l₁ l₂ : List α} (a : α) (s : l₁ ⊆ l₂) : a :: l₁ ⊆ a :: l₂ := fun b hin =>\n  or.elim (eq_or_mem_of_mem_cons hin) (fun e : b = a => or.inl e) fun i : b ∈ l₁ => or.inr (s i)\n#align cons_subset_cons cons_subset_cons\n\n",
  "cons_bind":
- "@[simp]\ntheorem cons_bind (x xs) (f : α → list β) : list.bind (x :: xs) f = f x ++ list.bind xs f := by simp [join, list.bind]\n#align cons_bind cons_bind\n\n",
+ "@[simp]\ntheorem cons_bind (x xs) (f : α → List β) : list.bind (x :: xs) f = f x ++ list.bind xs f := by simp [join, list.bind]\n#align cons_bind cons_bind\n\n",
  "cons_append":
- "@[simp]\ntheorem cons_append (x : α) (s t : list α) : x :: s ++ t = x :: (s ++ t) :=\n  rfl\n#align cons_append cons_append\n\n",
+ "@[simp]\ntheorem cons_append (x : α) (s t : List α) : x :: s ++ t = x :: (s ++ t) :=\n  rfl\n#align cons_append cons_append\n\n",
  "bex_cons":
- "theorem bex_cons (p : α → Prop) (a : α) (l : list α) : (∃ x ∈ a :: l, p x) ↔ p a ∨ ∃ x ∈ l, p x :=\n  ⟨fun ⟨x, h, px⟩ => by\n    simp at h\n    cases' h with h h\n    · cases h\n      exact or.inl px\n    · exact or.inr ⟨x, h, px⟩, fun o =>\n    o.elim (fun pa => ⟨a, mem_cons_self _ _, pa⟩) fun ⟨x, h, px⟩ => ⟨x, mem_cons_of_mem _ h, px⟩⟩\n#align bex_cons bex_cons\n\n",
+ "theorem bex_cons (p : α → Prop) (a : α) (l : List α) : (∃ x ∈ a :: l, p x) ↔ p a ∨ ∃ x ∈ l, p x :=\n  ⟨fun ⟨x, h, px⟩ => by\n    simp at h\n    cases' h with h h\n    · cases h\n      exact or.inl px\n    · exact or.inr ⟨x, h, px⟩, fun o =>\n    o.elim (fun pa => ⟨a, mem_cons_self _ _, pa⟩) fun ⟨x, h, px⟩ => ⟨x, mem_cons_of_mem _ h, px⟩⟩\n#align bex_cons bex_cons\n\n",
  "ball_nil":
  "theorem ball_nil (p : α → Prop) : ∀ x ∈ @nil α, p x := fun x => false.elim\n#align ball_nil ball_nil\n\n",
  "ball_cons":
- "theorem ball_cons (p : α → Prop) (a : α) (l : list α) : (∀ x ∈ a :: l, p x) ↔ p a ∧ ∀ x ∈ l, p x :=\n  ⟨fun al => ⟨al a (mem_cons_self _ _), fun x h => al x (mem_cons_of_mem _ h)⟩, fun ⟨pa, al⟩ x o =>\n    o.elim (fun e => e.symm ▸ pa) (al x)⟩\n#align ball_cons ball_cons\n\n",
+ "theorem ball_cons (p : α → Prop) (a : α) (l : List α) : (∀ x ∈ a :: l, p x) ↔ p a ∧ ∀ x ∈ l, p x :=\n  ⟨fun al => ⟨al a (mem_cons_self _ _), fun x h => al x (mem_cons_of_mem _ h)⟩, fun ⟨pa, al⟩ x o =>\n    o.elim (fun e => e.symm ▸ pa) (al x)⟩\n#align ball_cons ball_cons\n\n",
  "append_nil":
- "@[simp]\ntheorem append_nil (t : list α) : t ++ [] = t := by induction t <;> simp [*]\n#align append_nil append_nil\n\n",
+ "@[simp]\ntheorem append_nil (t : List α) : t ++ [] = t := by induction t <;> simp [*]\n#align append_nil append_nil\n\n",
  "append_bind":
- "@[simp]\ntheorem append_bind (xs ys) (f : α → list β) : list.bind (xs ++ ys) f = list.bind xs f ++ list.bind ys f := by\n  induction xs <;> [rfl, simp [*, cons_bind]]\n#align append_bind append_bind\n\n",
+ "@[simp]\ntheorem append_bind (xs ys) (f : α → List β) : list.bind (xs ++ ys) f = list.bind xs f ++ list.bind ys f := by\n  induction xs <;> [rfl, simp [*, cons_bind]]\n#align append_bind append_bind\n\n",
  "append_assoc":
- "@[simp]\ntheorem append_assoc (s t u : list α) : s ++ t ++ u = s ++ (t ++ u) := by induction s <;> simp [*]\n#align append_assoc append_assoc\n\n"}
+ "@[simp]\ntheorem append_assoc (s t u : List α) : s ++ t ++ u = s ++ (t ++ u) := by induction s <;> simp [*]\n#align append_assoc append_assoc\n\n"}

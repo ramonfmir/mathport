@@ -1,10 +1,10 @@
 {"ne_from_not_eq":
  "private theorem ne_from_not_eq {α} : ∀ x y : α, x ≠ y ↔ ¬x = y := fun _ _ => iff.rfl\n#align ne_from_not_eq ne_from_not_eq\n\n",
  "ite_cast":
- "-- names has the declarations in reverse order\n--some special lemmas to handle binary relations\n-- replace e' by normalized numeral\n-- step 1: pre-processing of numerals\n-- step 2: casts are moved upwards and eliminated\n-- step 3: casts are squashed\n-- step 4: post-processing of numerals\n-- TODO: move this elsewhere?\n@[norm_cast]\ntheorem ite_cast {α β} [has_lift_t α β] {c : Prop} [decidable c] {a b : α} : ↑(ite c a b) = ite c (↑a : β) (↑b : β) :=\n  by by_cases h : c <;> simp [h]\n#align ite_cast ite_cast\n\n",
+ "-- names has the declarations in reverse order\n--some special lemmas to handle binary relations\n-- replace e' by normalized numeral\n-- step 1: pre-processing of numerals\n-- step 2: casts are moved upwards and eliminated\n-- step 3: casts are squashed\n-- step 4: post-processing of numerals\n-- TODO: move this elsewhere?\n@[norm_cast]\ntheorem ite_cast {α β} [has_lift_t α β] {c : Prop} [Decidable c] {a b : α} : ↑(ite c a b) = ite c (↑a : β) (↑b : β) :=\n  by by_cases h : c <;> simp [h]\n#align ite_cast ite_cast\n\n",
  "gt_from_lt":
  "private theorem gt_from_lt {α} [LT α] : ∀ x y : α, x > y ↔ y < x := fun _ _ => iff.rfl\n#align gt_from_lt gt_from_lt\n\n",
  "ge_from_le":
  "/-\nCopyright (c) 2019 Paul-Nicolas Madelaine. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Paul-Nicolas Madelaine, Robert Y. Lewis\n-/\n-- special lemmas to handle the ≥, > and ≠ operators\nprivate theorem ge_from_le {α} [LE α] : ∀ x y : α, x ≥ y ↔ y ≤ x := fun _ _ => iff.rfl\n#align ge_from_le ge_from_le\n\n",
  "dite_cast":
- "@[norm_cast]\ntheorem dite_cast {α β} [has_lift_t α β] {c : Prop} [decidable c] {a : c → α} {b : ¬c → α} :\n    ↑(dite c a b) = dite c (fun h => (↑(a h) : β)) fun h => (↑(b h) : β) := by by_cases h : c <;> simp [h]\n#align dite_cast dite_cast\n\n"}
+ "@[norm_cast]\ntheorem dite_cast {α β} [has_lift_t α β] {c : Prop} [Decidable c] {a : c → α} {b : ¬c → α} :\n    ↑(dite c a b) = dite c (fun h => (↑(a h) : β)) fun h => (↑(b h) : β) := by by_cases h : c <;> simp [h]\n#align dite_cast dite_cast\n\n"}

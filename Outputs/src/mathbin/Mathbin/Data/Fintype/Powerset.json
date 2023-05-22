@@ -1,14 +1,14 @@
 {"univ_filter_card_eq":
- "@[simp]\ntheorem finset.univ_filter_card_eq (α : Type _) [fintype α] (k : ℕ) :\n    ((finset.univ : Finset (Finset α)).filter fun s => s.card = k) = finset.univ.powerset_len k :=\n  by\n  ext\n  simp [finset.mem_powerset_len]\n#align finset.univ_filter_card_eq finset.univ_filter_card_eq\n\n",
+ "#print Finset.univ_filter_card_eq /-\n@[simp]\ntheorem Finset.univ_filter_card_eq (α : Type _) [Fintype α] (k : ℕ) :\n    ((Finset.univ : Finset (Finset α)).filter fun s => s.card = k) = Finset.univ.powerset_len k :=\n  by\n  ext\n  simp [Finset.mem_powersetLen]\n#align finset.univ_filter_card_eq Finset.univ_filter_card_eq\n-/\n\n",
  "powerset_univ":
- "@[simp]\ntheorem finset.powerset_univ [fintype α] : (univ : Finset α).powerset = univ :=\n  coe_injective <| by simp [-coe_eq_univ]\n#align finset.powerset_univ finset.powerset_univ\n\n",
+ "#print Finset.powerset_univ /-\n@[simp]\ntheorem Finset.powerset_univ [Fintype α] : (univ : Finset α).powerset = univ :=\n  coe_injective <| by simp [-coe_eq_univ]\n#align finset.powerset_univ Finset.powerset_univ\n-/\n\n",
  "powerset_eq_univ":
- "@[simp]\ntheorem finset.powerset_eq_univ [fintype α] {s : Finset α} : s.powerset = univ ↔ s = univ := by\n  rw [← finset.powerset_univ, powerset_inj]\n#align finset.powerset_eq_univ finset.powerset_eq_univ\n\n",
+ "#print Finset.powerset_eq_univ /-\n@[simp]\ntheorem Finset.powerset_eq_univ [Fintype α] {s : Finset α} : s.powerset = univ ↔ s = univ := by\n  rw [← Finset.powerset_univ, powerset_inj]\n#align finset.powerset_eq_univ Finset.powerset_eq_univ\n-/\n\n",
  "mem_powerset_len_univ_iff":
- "theorem finset.mem_powerset_len_univ_iff [fintype α] {s : Finset α} {k : ℕ} :\n    s ∈ powerset_len k (univ : Finset α) ↔ card s = k :=\n  mem_powerset_len.trans <| and_iff_right <| subset_univ _\n#align finset.mem_powerset_len_univ_iff finset.mem_powerset_len_univ_iff\n\n",
+ "#print Finset.mem_powerset_len_univ_iff /-\ntheorem Finset.mem_powerset_len_univ_iff [Fintype α] {s : Finset α} {k : ℕ} :\n    s ∈ powersetLen k (univ : Finset α) ↔ card s = k :=\n  mem_powersetLen.trans <| and_iff_right <| subset_univ _\n#align finset.mem_powerset_len_univ_iff Finset.mem_powerset_len_univ_iff\n-/\n\n",
  "card_set":
- "-- Not to be confused with `set.finite`, the predicate\n@[simp]\ntheorem fintype.card_set [fintype α] : fintype.card (set α) = 2 ^ fintype.card α :=\n  (finset.card_map _).trans (finset.card_powerset _)\n#align fintype.card_set fintype.card_set\n\n",
+ "#print Fintype.card_set /-\n-- Not to be confused with `set.finite`, the predicate\n@[simp]\ntheorem Fintype.card_set [Fintype α] : Fintype.card (Set α) = 2 ^ Fintype.card α :=\n  (Finset.card_map _).trans (Finset.card_powerset _)\n#align fintype.card_set Fintype.card_set\n-/\n\n",
  "card_finset_len":
- "@[simp]\ntheorem fintype.card_finset_len [fintype α] (k : ℕ) :\n    fintype.card { s : Finset α // s.card = k } = Nat.choose (fintype.card α) k := by\n  simp [fintype.subtype_card, finset.card_univ]\n#align fintype.card_finset_len fintype.card_finset_len\n\n",
+ "#print Fintype.card_finset_len /-\n@[simp]\ntheorem Fintype.card_finset_len [Fintype α] (k : ℕ) :\n    Fintype.card { s : Finset α // s.card = k } = Nat.choose (Fintype.card α) k := by\n  simp [Fintype.subtype_card, Finset.card_univ]\n#align fintype.card_finset_len Fintype.card_finset_len\n-/\n\n",
  "card_finset":
- "/-\nCopyright (c) 2017 Mario Carneiro. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Mario Carneiro\n-/\n@[simp]\ntheorem fintype.card_finset [fintype α] : fintype.card (Finset α) = 2 ^ fintype.card α :=\n  finset.card_powerset finset.univ\n#align fintype.card_finset fintype.card_finset\n\n"}
+ "#print Fintype.card_finset /-\n/-\nCopyright (c) 2017 Mario Carneiro. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Mario Carneiro\n-/\n@[simp]\ntheorem Fintype.card_finset [Fintype α] : Fintype.card (Finset α) = 2 ^ Fintype.card α :=\n  Finset.card_powerset Finset.univ\n#align fintype.card_finset Fintype.card_finset\n-/\n\n"}

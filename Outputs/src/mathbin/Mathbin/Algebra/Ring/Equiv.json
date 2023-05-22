@@ -27,7 +27,7 @@
  "to_non_unital_ring_hom_commutes":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃+* » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →+* » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₙ+* » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₙ+* » -/\n/-- The two paths coercion can take to a `non_unital_ring_hom` are equivalent -/\n@[simp, norm_cast]\ntheorem to_non_unital_ring_hom_commutes (f : «expr ≃+* » R S) :\n    ((f : «expr →+* » R S) : «expr →ₙ+* » R S) = (f : «expr →ₙ+* » R S) :=\n  rfl\n#align to_non_unital_ring_hom_commutes to_non_unital_ring_hom_commutes\n\n",
  "to_non_unital_ring_hom_apply_symm_to_non_unital_ring_hom_apply":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃+* » -/\n@[simp]\ntheorem to_non_unital_ring_hom_apply_symm_to_non_unital_ring_hom_apply (e : «expr ≃+* » R S) :\n    ∀ y : S, e.to_non_unital_ring_hom (e.symm.to_non_unital_ring_hom y) = y :=\n  e.to_equiv.apply_symm_apply\n#align\n  to_non_unital_ring_hom_apply_symm_to_non_unital_ring_hom_apply to_non_unital_ring_hom_apply_symm_to_non_unital_ring_hom_apply\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃+* » -/\n@[simp]\ntheorem to_non_unital_ring_hom_apply_symm_to_non_unital_ring_hom_apply (e : «expr ≃+* » R S) :\n    ∀ y : S, e.to_non_unital_ring_hom (e.symm.to_non_unital_ring_hom y) = y :=\n  e.to_equiv.apply_symm_apply\n#align to_non_unital_ring_hom_apply_symm_to_non_unital_ring_hom_apply to_non_unital_ring_hom_apply_symm_to_non_unital_ring_hom_apply\n\n",
  "to_mul_equiv_eq_coe":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃+* » -/\n@[simp]\ntheorem to_mul_equiv_eq_coe (f : «expr ≃+* » R S) : f.to_mul_equiv = ↑f :=\n  rfl\n#align to_mul_equiv_eq_coe to_mul_equiv_eq_coe\n\n",
  "to_monoid_hom_refl":
@@ -57,11 +57,11 @@
  "symm_to_ring_hom_comp_to_ring_hom":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃+* » -/\n@[simp]\ntheorem symm_to_ring_hom_comp_to_ring_hom (e : «expr ≃+* » R S) :\n    e.symm.to_ring_hom.comp e.to_ring_hom = RingHom.id _ :=\n  by\n  ext\n  simp\n#align symm_to_ring_hom_comp_to_ring_hom symm_to_ring_hom_comp_to_ring_hom\n\n",
  "symm_to_ring_hom_apply_to_ring_hom_apply":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃+* » -/\n@[simp]\ntheorem symm_to_ring_hom_apply_to_ring_hom_apply (e : «expr ≃+* » R S) :\n    ∀ x : R, e.symm.to_ring_hom (e.to_ring_hom x) = x :=\n  equiv.symm_apply_apply e.to_equiv\n#align symm_to_ring_hom_apply_to_ring_hom_apply symm_to_ring_hom_apply_to_ring_hom_apply\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃+* » -/\n@[simp]\ntheorem symm_to_ring_hom_apply_to_ring_hom_apply (e : «expr ≃+* » R S) :\n    ∀ x : R, e.symm.to_ring_hom (e.to_ring_hom x) = x :=\n  Equiv.symm_apply_apply e.to_equiv\n#align symm_to_ring_hom_apply_to_ring_hom_apply symm_to_ring_hom_apply_to_ring_hom_apply\n\n",
  "symm_to_non_unital_ring_hom_comp_to_non_unital_ring_hom":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃+* » -/\n@[simp]\ntheorem symm_to_non_unital_ring_hom_comp_to_non_unital_ring_hom (e : «expr ≃+* » R S) :\n    e.symm.to_non_unital_ring_hom.comp e.to_non_unital_ring_hom = NonUnitalRingHom.id _ :=\n  by\n  ext\n  simp\n#align symm_to_non_unital_ring_hom_comp_to_non_unital_ring_hom symm_to_non_unital_ring_hom_comp_to_non_unital_ring_hom\n\n",
  "symm_to_non_unital_ring_hom_apply_to_non_unital_ring_hom_apply":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃+* » -/\n@[simp]\ntheorem symm_to_non_unital_ring_hom_apply_to_non_unital_ring_hom_apply (e : «expr ≃+* » R S) :\n    ∀ x : R, e.symm.to_non_unital_ring_hom (e.to_non_unital_ring_hom x) = x :=\n  equiv.symm_apply_apply e.to_equiv\n#align\n  symm_to_non_unital_ring_hom_apply_to_non_unital_ring_hom_apply symm_to_non_unital_ring_hom_apply_to_non_unital_ring_hom_apply\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃+* » -/\n@[simp]\ntheorem symm_to_non_unital_ring_hom_apply_to_non_unital_ring_hom_apply (e : «expr ≃+* » R S) :\n    ∀ x : R, e.symm.to_non_unital_ring_hom (e.to_non_unital_ring_hom x) = x :=\n  Equiv.symm_apply_apply e.to_equiv\n#align symm_to_non_unital_ring_hom_apply_to_non_unital_ring_hom_apply symm_to_non_unital_ring_hom_apply_to_non_unital_ring_hom_apply\n\n",
  "symm_symm":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃+* » -/\n@[simp]\ntheorem symm_symm (e : «expr ≃+* » R S) : e.symm.symm = e :=\n  ext fun x => rfl\n#align symm_symm symm_symm\n\n",
  "symm_mk":
@@ -73,15 +73,13 @@
  "symm_apply_apply":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃+* » -/\n@[simp]\ntheorem symm_apply_apply (e : «expr ≃+* » R S) : ∀ x, e.symm (e x) = x :=\n  e.to_equiv.symm_apply_apply\n#align symm_apply_apply symm_apply_apply\n\n",
  "surjective":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃+* » -/\nprotected theorem surjective (e : «expr ≃+* » R S) : function.surjective e :=\n  equiv_like.surjective e\n#align surjective surjective\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃+* » -/\nprotected theorem surjective (e : «expr ≃+* » R S) : function.surjective e :=\n  EquivLike.surjective e\n#align surjective surjective\n\n",
  "self_trans_symm":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃+* » -/\n@[simp]\ntheorem self_trans_symm (e : «expr ≃+* » R S) : e.trans e.symm = RingEquiv.refl R :=\n  ext e.3\n#align self_trans_symm self_trans_symm\n\n",
  "refl_apply":
  "@[simp]\ntheorem refl_apply (x : R) : RingEquiv.refl R x = x :=\n  rfl\n#align refl_apply refl_apply\n\n",
  "of_bijective_apply":
  "theorem of_bijective_apply [NonUnitalRingHomClass F R S] (f : F) (hf : function.bijective f) (x : R) :\n    ofBijective f hf x = f x :=\n  rfl\n#align of_bijective_apply of_bijective_apply\n\n",
- "no_zero_divisors":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃+* » -/\n/-- If two rings are isomorphic, and the second doesn't have zero divisors,\nthen so does the first. -/\nprotected theorem no_zero_divisors {A : Type _} (B : Type _) [Ring A] [Ring B] [no_zero_divisors B]\n    (e : «expr ≃+* » A B) : no_zero_divisors A :=\n  {\n    eq_zero_or_eq_zero_of_mul_eq_zero := fun x y hxy =>\n      by\n      have : e x * e y = 0 := by rw [← e.map_mul, hxy, e.map_zero]\n      simpa using eq_zero_or_eq_zero_of_mul_eq_zero this }\n#align no_zero_divisors no_zero_divisors\n\n",
  "mk_coe'":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃+* » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃+* » -/\n@[simp]\ntheorem mk_coe' (e : «expr ≃+* » R S) (f h₁ h₂ h₃ h₄) :\n    (ring_equiv.mk f («expr⇑ » e) h₁ h₂ h₃ h₄ : «expr ≃+* » S R) = e.symm :=\n  symm_bijective.injective <| ext fun x => rfl\n#align mk_coe' mk_coe'\n\n",
  "mk_coe":
@@ -108,22 +106,24 @@
  "#print map_eq_zero_iff /-\nprotected theorem map_eq_zero_iff : f x = 0 ↔ x = 0 :=\n  AddEquivClass.map_eq_zero_iff f\n#align map_eq_zero_iff map_eq_zero_iff\n-/\n\n",
  "map_eq_one_iff":
  "#print map_eq_one_iff /-\nprotected theorem map_eq_one_iff : f x = 1 ↔ x = 1 :=\n  MulEquivClass.map_eq_one_iff f\n#align map_eq_one_iff map_eq_one_iff\n-/\n\n",
+ "map_eq_neg_one_iff":
+ "theorem map_eq_neg_one_iff {x : R} : f x = -1 ↔ x = -1 := by\n  rw [← neg_eq_iff_eq_neg, ← neg_eq_iff_eq_neg, ← map_neg, RingEquiv.map_eq_one_iff]\n#align map_eq_neg_one_iff map_eq_neg_one_iff\n\n",
  "map_add":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃+* » -/\n#print map_add /-\n/-- A ring isomorphism preserves addition. -/\nprotected theorem map_add (e : «expr ≃+* » R S) (x y : R) : e (x + y) = e x + e y :=\n  map_add e x y\n#align map_add map_add\n-/\n\n",
  "inv_fun_eq_symm":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃+* » -/\n@[simp]\ntheorem inv_fun_eq_symm (f : «expr ≃+* » R S) : f.inv_fun = f.symm :=\n  rfl\n#align inv_fun_eq_symm inv_fun_eq_symm\n\n",
  "injective":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃+* » -/\nprotected theorem injective (e : «expr ≃+* » R S) : function.injective e :=\n  equiv_like.injective e\n#align injective injective\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃+* » -/\nprotected theorem injective (e : «expr ≃+* » R S) : function.injective e :=\n  EquivLike.injective e\n#align injective injective\n\n",
  "image_eq_preimage":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃+* » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\ntheorem image_eq_preimage (e : «expr ≃+* » R S) (s : set R) : «expr '' » e s = «expr ⁻¹' » e.symm s :=\n  e.to_equiv.image_eq_preimage s\n#align image_eq_preimage image_eq_preimage\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃+* » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\ntheorem image_eq_preimage (e : «expr ≃+* » R S) (s : Set R) : «expr '' » e s = «expr ⁻¹' » e.symm s :=\n  e.to_equiv.image_eq_preimage s\n#align image_eq_preimage image_eq_preimage\n\n",
  "ext_iff":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃+* » -/\nprotected theorem ext_iff {f g : «expr ≃+* » R S} : f = g ↔ ∀ x, f x = g x :=\n  fun_like.ext_iff\n#align ext_iff ext_iff\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃+* » -/\nprotected theorem ext_iff {f g : «expr ≃+* » R S} : f = g ↔ ∀ x, f x = g x :=\n  FunLike.ext_iff\n#align ext_iff ext_iff\n\n",
  "ext":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃+* » -/\n/-- Two ring isomorphisms agree if they are defined by the\n    same underlying function. -/\n@[ext]\ntheorem ext {f g : «expr ≃+* » R S} (h : ∀ x, f x = g x) : f = g :=\n  fun_like.ext f g h\n#align ext ext\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃+* » -/\n/-- Two ring isomorphisms agree if they are defined by the\n    same underlying function. -/\n@[ext]\ntheorem ext {f g : «expr ≃+* » R S} (h : ∀ x, f x = g x) : f = g :=\n  FunLike.ext f g h\n#align ext ext\n\n",
  "congr_fun":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃+* » -/\n#print congr_fun /-\nprotected theorem congr_fun {f g : «expr ≃+* » R S} (h : f = g) (x : R) : f x = g x :=\n  fun_like.congr_fun h x\n#align congr_fun congr_fun\n-/\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃+* » -/\n#print congr_fun /-\nprotected theorem congr_fun {f g : «expr ≃+* » R S} (h : f = g) (x : R) : f x = g x :=\n  FunLike.congr_fun h x\n#align congr_fun congr_fun\n-/\n\n",
  "congr_arg":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃+* » -/\n#print congr_arg /-\nprotected theorem congr_arg {f : «expr ≃+* » R S} {x x' : R} : x = x' → f x = f x' :=\n  fun_like.congr_arg f\n#align congr_arg congr_arg\n-/\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃+* » -/\n#print congr_arg /-\nprotected theorem congr_arg {f : «expr ≃+* » R S} {x x' : R} : x = x' → f x = f x' :=\n  FunLike.congr_arg f\n#align congr_arg congr_arg\n-/\n\n",
  "comp_symm":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃+* » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →+* » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →+* » -/\n@[simp]\ntheorem comp_symm (e : «expr ≃+* » R S) : (e : «expr →+* » R S).comp (e.symm : «expr →+* » S R) = RingHom.id S :=\n  RingHom.ext e.apply_symm_apply\n#align comp_symm comp_symm\n\n",
  "coe_trans":
@@ -169,14 +169,16 @@
  "coe_add_equiv_refl":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃+ » -/\n@[simp]\ntheorem coe_add_equiv_refl : (RingEquiv.refl R : «expr ≃+ » R R) = AddEquiv.refl R :=\n  rfl\n#align coe_add_equiv_refl coe_add_equiv_refl\n\n",
  "bijective":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃+* » -/\nprotected theorem bijective (e : «expr ≃+* » R S) : function.bijective e :=\n  equiv_like.bijective e\n#align bijective bijective\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃+* » -/\nprotected theorem bijective (e : «expr ≃+* » R S) : function.bijective e :=\n  EquivLike.bijective e\n#align bijective bijective\n\n",
  "apply_symm_apply":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃+* » -/\n@[simp]\ntheorem apply_symm_apply (e : «expr ≃+* » R S) : ∀ x, e (e.symm x) = x :=\n  e.to_equiv.apply_symm_apply\n#align apply_symm_apply apply_symm_apply\n\n",
  "Pi_congr_right_trans":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃+* » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃+* » -/\n@[simp]\ntheorem Pi_congr_right_trans {ι : Type _} {R S T : ι → Type _} [∀ i, NonUnitalNonAssocSemiring (R i)]\n    [∀ i, NonUnitalNonAssocSemiring (S i)] [∀ i, NonUnitalNonAssocSemiring (T i)] (e : ∀ i, «expr ≃+* » (R i) (S i))\n    (f : ∀ i, «expr ≃+* » (S i) (T i)) :\n    (piCongrRight e).trans (piCongrRight f) = Pi_congr_right fun i => (e i).trans (f i) :=\n  rfl\n#align Pi_congr_right_trans Pi_congr_right_trans\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃+* » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃+* » -/\n@[simp]\ntheorem Pi_congr_right_trans {ι : Type _} {R S T : ι → Type _} [∀ i, NonUnitalNonAssocSemiring (R i)]\n    [∀ i, NonUnitalNonAssocSemiring (S i)] [∀ i, NonUnitalNonAssocSemiring (T i)] (e : ∀ i, «expr ≃+* » (R i) (S i))\n    (f : ∀ i, «expr ≃+* » (S i) (T i)) :\n    (piCongrRight e).trans (piCongrRight f) = piCongrRight fun i => (e i).trans (f i) :=\n  rfl\n#align Pi_congr_right_trans Pi_congr_right_trans\n\n",
  "Pi_congr_right_symm":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃+* » -/\n@[simp]\ntheorem Pi_congr_right_symm {ι : Type _} {R S : ι → Type _} [∀ i, NonUnitalNonAssocSemiring (R i)]\n    [∀ i, NonUnitalNonAssocSemiring (S i)] (e : ∀ i, «expr ≃+* » (R i) (S i)) :\n    (piCongrRight e).symm = Pi_congr_right fun i => (e i).symm :=\n  rfl\n#align Pi_congr_right_symm Pi_congr_right_symm\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃+* » -/\n@[simp]\ntheorem Pi_congr_right_symm {ι : Type _} {R S : ι → Type _} [∀ i, NonUnitalNonAssocSemiring (R i)]\n    [∀ i, NonUnitalNonAssocSemiring (S i)] (e : ∀ i, «expr ≃+* » (R i) (S i)) :\n    (piCongrRight e).symm = piCongrRight fun i => (e i).symm :=\n  rfl\n#align Pi_congr_right_symm Pi_congr_right_symm\n\n",
  "Pi_congr_right_refl":
  "@[simp]\ntheorem Pi_congr_right_refl {ι : Type _} {R : ι → Type _} [∀ i, NonUnitalNonAssocSemiring (R i)] :\n    (piCongrRight fun i => RingEquiv.refl (R i)) = RingEquiv.refl _ :=\n  rfl\n#align Pi_congr_right_refl Pi_congr_right_refl\n\n",
+ "NoZeroDivisors":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃+* » -/\n#print NoZeroDivisors /-\n/-- If two rings are isomorphic, and the second doesn't have zero divisors,\nthen so does the first. -/\nprotected theorem NoZeroDivisors {A : Type _} (B : Type _) [Ring A] [Ring B] [NoZeroDivisors B] (e : «expr ≃+* » A B) :\n    NoZeroDivisors A :=\n  {\n    eq_zero_or_eq_zero_of_mul_eq_zero := fun x y hxy =>\n      by\n      have : e x * e y = 0 := by rw [← e.map_mul, hxy, e.map_zero]\n      simpa using eq_zero_or_eq_zero_of_mul_eq_zero this }\n#align no_zero_divisors NoZeroDivisors\n-/\n\n",
  "IsDomain":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃+* » -/\n#print IsDomain /-\n/-- If two rings are isomorphic, and the second is a domain, then so is the first. -/\nprotected theorem IsDomain {A : Type _} (B : Type _) [Ring A] [Ring B] [IsDomain B] (e : «expr ≃+* » A B) :\n    IsDomain A := by\n  haveI : nontrivial A := ⟨⟨e.symm 0, e.symm 1, e.symm.injective.ne zero_ne_one⟩⟩\n  haveI := e.no_zero_divisors B\n  exact NoZeroDivisors.to_isDomain _\n#align is_domain IsDomain\n-/\n\n"}
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃+* » -/\n#print IsDomain /-\n/-- If two rings are isomorphic, and the second is a domain, then so is the first. -/\nprotected theorem IsDomain {A : Type _} (B : Type _) [Ring A] [Ring B] [IsDomain B] (e : «expr ≃+* » A B) :\n    IsDomain A := by\n  haveI : Nontrivial A := ⟨⟨e.symm 0, e.symm 1, e.symm.injective.ne zero_ne_one⟩⟩\n  haveI := e.no_zero_divisors B\n  exact NoZeroDivisors.to_isDomain _\n#align is_domain IsDomain\n-/\n\n"}

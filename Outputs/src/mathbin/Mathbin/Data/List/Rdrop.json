@@ -3,7 +3,7 @@
  "rtake_while_suffix":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr <:+ » -/\ntheorem rtake_while_suffix : «expr <:+ » (l.rtake_while p) l :=\n  by\n  rw [← reverse_prefix, rtake_while, reverse_reverse]\n  exact take_while_prefix _\n#align rtake_while_suffix rtake_while_suffix\n\n",
  "rtake_while_nil":
- "@[simp]\ntheorem rtake_while_nil : rtakeWhile p ([] : list α) = [] := by simp [rtake_while, take_while]\n#align rtake_while_nil rtake_while_nil\n\n",
+ "@[simp]\ntheorem rtake_while_nil : rtakeWhile p ([] : List α) = [] := by simp [rtake_while, take_while]\n#align rtake_while_nil rtake_while_nil\n\n",
  "rtake_while_idempotent":
  "theorem rtake_while_idempotent : rtakeWhile p (rtakeWhile p l) = rtakeWhile p l :=\n  rtakeWhile_eq_self_iff.mpr fun _ => mem_rtakeWhile_imp\n#align rtake_while_idempotent rtake_while_idempotent\n\n",
  "rtake_while_eq_self_iff":
@@ -17,7 +17,7 @@
  "rtake_while_concat":
  "theorem rtake_while_concat (x : α) : rtakeWhile p (l ++ [x]) = if p x then rtakeWhile p l ++ [x] else [] :=\n  by\n  simp only [rtake_while, take_while, reverse_append, reverse_singleton, singleton_append]\n  split_ifs with h h <;> simp [h]\n#align rtake_while_concat rtake_while_concat\n\n",
  "rtake_nil":
- "@[simp]\ntheorem rtake_nil : rtake ([] : list α) n = [] := by simp [rtake]\n#align rtake_nil rtake_nil\n\n",
+ "@[simp]\ntheorem rtake_nil : rtake ([] : List α) n = [] := by simp [rtake]\n#align rtake_nil rtake_nil\n\n",
  "rtake_eq_reverse_take_reverse":
  "theorem rtake_eq_reverse_take_reverse : l.rtake n = reverse (l.reverse.take n) :=\n  by\n  rw [rtake]\n  induction' l using List.reverseRecOn with xs x IH generalizing n\n  · simp\n  · cases n\n    · simp\n    · simp [drop_append_eq_append_drop, IH]\n#align rtake_eq_reverse_take_reverse rtake_eq_reverse_take_reverse\n\n",
  "rtake_concat_succ":
@@ -29,7 +29,7 @@
  "rdrop_while_prefix":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr <+: » -/\ntheorem rdrop_while_prefix : «expr <+: » (l.rdrop_while p) l :=\n  by\n  rw [← reverse_suffix, rdrop_while, reverse_reverse]\n  exact drop_while_suffix _\n#align rdrop_while_prefix rdrop_while_prefix\n\n",
  "rdrop_while_nil":
- "@[simp]\ntheorem rdrop_while_nil : rdropWhile p ([] : list α) = [] := by simp [rdrop_while, drop_while]\n#align rdrop_while_nil rdrop_while_nil\n\n",
+ "@[simp]\ntheorem rdrop_while_nil : rdropWhile p ([] : List α) = [] := by simp [rdrop_while, drop_while]\n#align rdrop_while_nil rdrop_while_nil\n\n",
  "rdrop_while_last_not":
  "theorem rdrop_while_last_not (hl : l.rdrop_while p ≠ []) : ¬p ((rdropWhile p l).last hl) :=\n  by\n  simp_rw [rdrop_while]\n  rw [last_reverse]\n  exact drop_while_nth_le_zero_not _ _ _\n#align rdrop_while_last_not rdrop_while_last_not\n\n",
  "rdrop_while_idempotent":
@@ -45,7 +45,7 @@
  "rdrop_while_concat":
  "theorem rdrop_while_concat (x : α) : rdropWhile p (l ++ [x]) = if p x then rdropWhile p l else l ++ [x] :=\n  by\n  simp only [rdrop_while, drop_while, reverse_append, reverse_singleton, singleton_append]\n  split_ifs with h h <;> simp [h]\n#align rdrop_while_concat rdrop_while_concat\n\n",
  "rdrop_nil":
- "/-\nCopyright (c) 2022 Yakov Pechersky. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Yakov Pechersky\n-/\n@[simp]\ntheorem rdrop_nil : rdrop ([] : list α) n = [] := by simp [rdrop]\n#align rdrop_nil rdrop_nil\n\n",
+ "/-\nCopyright (c) 2022 Yakov Pechersky. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Yakov Pechersky\n-/\n@[simp]\ntheorem rdrop_nil : rdrop ([] : List α) n = [] := by simp [rdrop]\n#align rdrop_nil rdrop_nil\n\n",
  "rdrop_eq_reverse_drop_reverse":
  "theorem rdrop_eq_reverse_drop_reverse : l.rdrop n = reverse (l.reverse.drop n) :=\n  by\n  rw [rdrop]\n  induction' l using List.reverseRecOn with xs x IH generalizing n\n  · simp\n  · cases n\n    · simp [take_append]\n    · simp [take_append_eq_append_take, IH]\n#align rdrop_eq_reverse_drop_reverse rdrop_eq_reverse_drop_reverse\n\n",
  "rdrop_concat_succ":

@@ -3,7 +3,7 @@
  "top_himp":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⇨ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n#print top_himp /-\n@[simp]\ntheorem top_himp : «expr ⇨ » («expr⊤») a = a :=\n  eq_of_forall_le_iff fun b => by rw [le_himp_iff, inf_top_eq]\n#align top_himp top_himp\n-/\n\n",
  "top_eq":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n-- See note [reducible non-instances]\n-- See note [reducible non-instances]\n-- See note [reducible non-instances]\n-- See note [reducible non-instances]\n-- See note [reducible non-instances]\n-- See note [reducible non-instances]\n@[simp]\ntheorem top_eq : («expr⊤» : PUnit) = star :=\n  rfl\n#align top_eq top_eq\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n-- See note [reducible non-instances]\n-- See note [reducible non-instances]\n-- See note [reducible non-instances]\n-- See note [reducible non-instances]\n-- See note [reducible non-instances]\n-- See note [reducible non-instances]\n@[simp]\ntheorem top_eq : («expr⊤» : PUnit) = unit :=\n  rfl\n#align top_eq top_eq\n\n",
  "toDual_sdiff":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⇨ » -/\n#print toDual_sdiff /-\n@[simp]\ntheorem toDual_sdiff (a b : α) : toDual (a \\ b) = «expr ⇨ » (toDual b) (toDual a) :=\n  rfl\n#align to_dual_sdiff toDual_sdiff\n-/\n\n",
  "toDual_hnot":
@@ -45,7 +45,7 @@
  "sup_himp_distrib":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⇨ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊔ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊓ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⇨ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⇨ » -/\n#print sup_himp_distrib /-\ntheorem sup_himp_distrib (a b c : α) : «expr ⇨ » («expr ⊔ » a b) c = «expr ⊓ » («expr ⇨ » a c) («expr ⇨ » b c) :=\n  eq_of_forall_le_iff fun d => by\n    rw [le_inf_iff, le_himp_comm, sup_le_iff]\n    simp_rw [le_himp_comm]\n#align sup_himp_distrib sup_himp_distrib\n-/\n\n",
  "sup_eq":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊔ » -/\n@[simp]\ntheorem sup_eq : «expr ⊔ » a b = star :=\n  rfl\n#align sup_eq sup_eq\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊔ » -/\n@[simp]\ntheorem sup_eq : «expr ⊔ » a b = unit :=\n  rfl\n#align sup_eq sup_eq\n\n",
  "sup_compl_le_himp":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊔ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⇨ » -/\n#print sup_compl_le_himp /-\ntheorem sup_compl_le_himp : «expr ⊔ » b («expr ᶜ» a) ≤ «expr ⇨ » a b :=\n  sup_le le_himp compl_le_himp\n#align sup_compl_le_himp sup_compl_le_himp\n-/\n\n",
  "snd_sdiff":
@@ -123,7 +123,7 @@
  "sdiff_eq_bot_iff":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n#print sdiff_eq_bot_iff /-\n@[simp]\ntheorem sdiff_eq_bot_iff : a \\ b = «expr⊥» ↔ a ≤ b := by rw [← le_bot_iff, sdiff_le_iff, sup_bot_eq]\n#align sdiff_eq_bot_iff sdiff_eq_bot_iff\n-/\n\n",
  "sdiff_eq":
- "#print sdiff_eq /-\n@[simp]\ntheorem sdiff_eq : a \\ b = star :=\n  rfl\n#align sdiff_eq sdiff_eq\n-/\n\n",
+ "#print sdiff_eq /-\n@[simp]\ntheorem sdiff_eq : a \\ b = unit :=\n  rfl\n#align sdiff_eq sdiff_eq\n-/\n\n",
  "sdiff_bot":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n#print sdiff_bot /-\n@[simp]\ntheorem sdiff_bot : a \\ «expr⊥» = a :=\n  eq_of_forall_ge_iff fun b => by rw [sdiff_le_iff, bot_sup_eq]\n#align sdiff_bot sdiff_bot\n-/\n\n",
  "ofDual_hnot":
@@ -136,6 +136,8 @@
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊔ » -/\n#print le_sup_sdiff /-\ntheorem le_sup_sdiff : a ≤ «expr ⊔ » b (a \\ b) :=\n  sdiff_le_iff.1 le_rfl\n#align le_sup_sdiff le_sup_sdiff\n-/\n\n",
  "le_sdiff_sup":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊔ » -/\n#print le_sdiff_sup /-\ntheorem le_sdiff_sup : a ≤ «expr ⊔ » (a \\ b) b := by rw [sup_comm, ← sdiff_le_iff]\n#align le_sdiff_sup le_sdiff_sup\n-/\n\n",
+ "le_sdiff_of_le_left":
+ "#print Disjoint.le_sdiff_of_le_left /-\n/-- See `le_sdiff` for a stronger version in generalised Boolean algebras. -/\ntheorem Disjoint.le_sdiff_of_le_left (hac : Disjoint a c) (hab : a ≤ b) : a ≤ b \\ c :=\n  hac.sdiff_eq_left.ge.trans <| sdiff_le_sdiff_right hab\n#align disjoint.le_sdiff_of_le_left Disjoint.le_sdiff_of_le_left\n-/\n\n",
  "le_hnot_inf_hnot":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr￢ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊔ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊓ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr￢ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr￢ » -/\n#print le_hnot_inf_hnot /-\ntheorem le_hnot_inf_hnot : «expr￢ » («expr ⊔ » a b) ≤ «expr ⊓ » («expr￢ » a) («expr￢ » b) :=\n  le_inf (hnot_anti le_sup_left) <| hnot_anti le_sup_right\n#align le_hnot_inf_hnot le_hnot_inf_hnot\n-/\n\n",
  "le_himp_iff_left":
@@ -171,7 +173,7 @@
  "inf_himp":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊓ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⇨ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊓ » -/\n#print inf_himp /-\n-- `p ∧ (p → q) ↔ p ∧ q`\n@[simp]\ntheorem inf_himp (a b : α) : «expr ⊓ » a («expr ⇨ » a b) = «expr ⊓ » a b :=\n  le_antisymm (le_inf inf_le_left <| by rw [inf_comm, ← le_himp_iff]) <| inf_le_inf_left _ le_himp\n#align inf_himp inf_himp\n-/\n\n",
  "inf_eq":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊓ » -/\n@[simp]\ntheorem inf_eq : «expr ⊓ » a b = star :=\n  rfl\n#align inf_eq inf_eq\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊓ » -/\n@[simp]\ntheorem inf_eq : «expr ⊓ » a b = unit :=\n  rfl\n#align inf_eq inf_eq\n\n",
  "inf_compl_self":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊓ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n#print inf_compl_self /-\n@[simp]\ntheorem inf_compl_self (a : α) : «expr ⊓ » a («expr ᶜ» a) = «expr⊥» :=\n  disjoint_compl_right.eq_bot\n#align inf_compl_self inf_compl_self\n-/\n\n",
  "inf_compl_eq_bot":
@@ -203,7 +205,7 @@
  "hnot_hnot_hnot":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr￢ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr￢ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr￢ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr￢ » -/\n#print hnot_hnot_hnot /-\n@[simp]\ntheorem hnot_hnot_hnot (a : α) : «expr￢ » («expr￢ » («expr￢ » a)) = «expr￢ » a :=\n  hnot_hnot_le.antisymm <| hnot_anti hnot_hnot_le\n#align hnot_hnot_hnot hnot_hnot_hnot\n-/\n\n",
  "hnot_eq":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr￢ » -/\n@[simp, nolint simp_nf]\ntheorem hnot_eq : «expr￢ » a = star :=\n  rfl\n#align hnot_eq hnot_eq\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr￢ » -/\n@[simp, nolint simp_nf]\ntheorem hnot_eq : «expr￢ » a = unit :=\n  rfl\n#align hnot_eq hnot_eq\n\n",
  "hnot_def":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr￢ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr￢ » -/\ntheorem hnot_def [∀ i, HNot (π i)] (a : ∀ i, π i) : «expr￢ » a = fun i => «expr￢ » (a i) :=\n  rfl\n#align hnot_def hnot_def\n\n",
  "hnot_bot":
@@ -211,7 +213,7 @@
  "hnot_apply":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr￢ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr￢ » -/\n@[simp]\ntheorem hnot_apply [∀ i, HNot (π i)] (a : ∀ i, π i) (i : ι) : («expr￢ » a) i = «expr￢ » (a i) :=\n  rfl\n#align hnot_apply hnot_apply\n\n",
  "hnot_anti":
- "#print hnot_anti /-\ntheorem hnot_anti : antitone (hnot : α → α) := fun a b h => hnot_le_comm.1 <| hnot_hnot_le.trans h\n#align hnot_anti hnot_anti\n-/\n\n",
+ "#print hnot_anti /-\ntheorem hnot_anti : Antitone (hnot : α → α) := fun a b h => hnot_le_comm.1 <| hnot_hnot_le.trans h\n#align hnot_anti hnot_anti\n-/\n\n",
  "himp_triangle":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊓ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⇨ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⇨ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⇨ » -/\n#print himp_triangle /-\ntheorem himp_triangle (a b c : α) : «expr ⊓ » («expr ⇨ » a b) («expr ⇨ » b c) ≤ «expr ⇨ » a c :=\n  by\n  rw [le_himp_iff, inf_right_comm, ← le_himp_iff]\n  exact himp_inf_le.trans le_himp_himp\n#align himp_triangle himp_triangle\n-/\n\n",
  "himp_top":
@@ -220,6 +222,8 @@
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⇨ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n#print himp_self /-\n-- `p → p`\n@[simp]\ntheorem himp_self : «expr ⇨ » a a = «expr⊤» :=\n  top_le_iff.1 <| le_himp_iff.2 inf_le_right\n#align himp_self himp_self\n-/\n\n",
  "himp_left_comm":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⇨ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⇨ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⇨ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⇨ » -/\n#print himp_left_comm /-\n-- `p → q → r ↔ q → p → r`\ntheorem himp_left_comm (a b c : α) : «expr ⇨ » a («expr ⇨ » b c) = «expr ⇨ » b («expr ⇨ » a c) := by\n  simp_rw [himp_himp, inf_comm]\n#align himp_left_comm himp_left_comm\n-/\n\n",
+ "himp_le_of_right_le":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⇨ » -/\n#print Codisjoint.himp_le_of_right_le /-\n/-- See `himp_le` for a stronger version in Boolean algebras. -/\ntheorem Codisjoint.himp_le_of_right_le (hac : Codisjoint a c) (hba : b ≤ a) : «expr ⇨ » c b ≤ a :=\n  (himp_le_himp_left hba).trans_eq hac.himp_eq_right\n#align codisjoint.himp_le_of_right_le Codisjoint.himp_le_of_right_le\n-/\n\n",
  "himp_le_himp_right":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⇨ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⇨ » -/\n#print himp_le_himp_right /-\ntheorem himp_le_himp_right (h : a ≤ b) : «expr ⇨ » b c ≤ «expr ⇨ » a c :=\n  le_himp_iff.2 <| (inf_le_inf_left _ h).trans himp_inf_le\n#align himp_le_himp_right himp_le_himp_right\n-/\n\n",
  "himp_le_himp_left":
@@ -253,7 +257,7 @@
  "himp_eq_left":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⇨ » -/\n#print Codisjoint.himp_eq_left /-\ntheorem Codisjoint.himp_eq_left (h : Codisjoint a b) : «expr ⇨ » a b = b :=\n  h.symm.himp_eq_right\n#align codisjoint.himp_eq_left Codisjoint.himp_eq_left\n-/\n\n",
  "himp_eq":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⇨ » -/\n#print himp_eq /-\n-- eligible for `dsimp`\n@[simp]\ntheorem himp_eq : «expr ⇨ » a b = star :=\n  rfl\n#align himp_eq himp_eq\n-/\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⇨ » -/\n#print himp_eq /-\n-- eligible for `dsimp`\n@[simp]\ntheorem himp_eq : «expr ⇨ » a b = unit :=\n  rfl\n#align himp_eq himp_eq\n-/\n\n",
  "himp_def":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⇨ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⇨ » -/\ntheorem himp_def [∀ i, HImp (π i)] (a b : ∀ i, π i) : «expr ⇨ » a b = fun i => «expr ⇨ » (a i) (b i) :=\n  rfl\n#align himp_def himp_def\n\n",
  "himp_compl_comm":
@@ -313,7 +317,7 @@
  "compl_iff_not":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\n#print compl_iff_not /-\n@[simp]\ntheorem compl_iff_not (p : Prop) : «expr ᶜ» p ↔ ¬p :=\n  iff.rfl\n#align compl_iff_not compl_iff_not\n-/\n\n",
  "compl_eq":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\n@[simp]\ntheorem compl_eq : «expr ᶜ» a = star :=\n  rfl\n#align compl_eq compl_eq\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\n@[simp]\ntheorem compl_eq : «expr ᶜ» a = unit :=\n  rfl\n#align compl_eq compl_eq\n\n",
  "compl_compl_inf_distrib":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊓ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊓ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\n#print compl_compl_inf_distrib /-\ntheorem compl_compl_inf_distrib (a b : α) :\n    «expr ᶜ» («expr ᶜ» («expr ⊓ » a b)) = «expr ⊓ » («expr ᶜ» («expr ᶜ» a)) («expr ᶜ» («expr ᶜ» b)) :=\n  by\n  refine' ((compl_anti compl_sup_compl_le).trans (compl_sup_distrib _ _).le).antisymm _\n  rw [le_compl_iff_disjoint_right, disjoint_assoc, disjoint_compl_compl_left_iff, disjoint_left_comm,\n    disjoint_compl_compl_left_iff, ← disjoint_assoc, inf_comm]\n  exact disjoint_compl_right\n#align compl_compl_inf_distrib compl_compl_inf_distrib\n-/\n\n",
  "compl_compl_himp_distrib":
@@ -323,7 +327,7 @@
  "compl_bot":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n#print compl_bot /-\n@[simp]\ntheorem compl_bot : «expr ᶜ» («expr⊥» : α) = «expr⊤» := by rw [← himp_bot, himp_self]\n#align compl_bot compl_bot\n-/\n\n",
  "compl_anti":
- "#print compl_anti /-\ntheorem compl_anti : antitone (compl : α → α) := fun a b h => le_compl_comm.1 <| h.trans le_compl_compl\n#align compl_anti compl_anti\n-/\n\n",
+ "#print compl_anti /-\ntheorem compl_anti : Antitone (compl : α → α) := fun a b h => le_compl_comm.1 <| h.trans le_compl_compl\n#align compl_anti compl_anti\n-/\n\n",
  "codisjoint_hnot_right":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr￢ » -/\n#print LE.le.codisjoint_hnot_right /-\ntheorem LE.le.codisjoint_hnot_right (h : b ≤ a) : Codisjoint a («expr￢ » b) :=\n  codisjoint_hnot_right.mono_left h\n#align has_le.le.codisjoint_hnot_right LE.le.codisjoint_hnot_right\n-/\n\n",
  "codisjoint_hnot_left":
@@ -337,4 +341,4 @@
  "bot_himp":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⇨ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n#print bot_himp /-\n@[simp]\ntheorem bot_himp (a : α) : «expr ⇨ » («expr⊥») a = «expr⊤» :=\n  himp_eq_top_iff.2 bot_le\n#align bot_himp bot_himp\n-/\n\n",
  "bot_eq":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n@[simp]\ntheorem bot_eq : («expr⊥» : PUnit) = star :=\n  rfl\n#align bot_eq bot_eq\n\n"}
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n@[simp]\ntheorem bot_eq : («expr⊥» : PUnit) = unit :=\n  rfl\n#align bot_eq bot_eq\n\n"}

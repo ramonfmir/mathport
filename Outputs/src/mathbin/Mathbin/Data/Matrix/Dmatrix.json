@@ -1,24 +1,24 @@
 {"zero_apply":
- "@[simp]\ntheorem zero_apply [∀ i j, Zero (α i j)] (i j) : (0 : dmatrix m n α) i j = 0 :=\n  rfl\n#align zero_apply zero_apply\n\n",
+ "@[simp]\ntheorem zero_apply [∀ i j, Zero (α i j)] (i j) : (0 : DMatrix m n α) i j = 0 :=\n  rfl\n#align zero_apply zero_apply\n\n",
  "sub_apply":
- "@[simp]\ntheorem sub_apply [∀ i j, Sub (α i j)] (M N : dmatrix m n α) (i j) : (M - N) i j = M i j - N i j :=\n  rfl\n#align sub_apply sub_apply\n\n",
+ "@[simp]\ntheorem sub_apply [∀ i j, Sub (α i j)] (M N : DMatrix m n α) (i j) : (M - N) i j = M i j - N i j :=\n  rfl\n#align sub_apply sub_apply\n\n",
  "neg_apply":
- "@[simp]\ntheorem neg_apply [∀ i j, Neg (α i j)] (M : dmatrix m n α) (i j) : (-M) i j = -M i j :=\n  rfl\n#align neg_apply neg_apply\n\n",
+ "@[simp]\ntheorem neg_apply [∀ i j, Neg (α i j)] (M : DMatrix m n α) (i j) : (-M) i j = -M i j :=\n  rfl\n#align neg_apply neg_apply\n\n",
  "map_zero":
- "#print map_zero /-\n@[simp]\ntheorem map_zero [∀ i j, Zero (α i j)] {β : m → n → Type w} [∀ i j, Zero (β i j)] {f : ∀ ⦃i j⦄, α i j → β i j}\n    (h : ∀ i j, f (0 : α i j) = 0) : (0 : dmatrix m n α).map f = 0 :=\n  by\n  ext\n  simp [h]\n#align map_zero map_zero\n-/\n\n",
+ "#print map_zero /-\n@[simp]\ntheorem map_zero [∀ i j, Zero (α i j)] {β : m → n → Type w} [∀ i j, Zero (β i j)] {f : ∀ ⦃i j⦄, α i j → β i j}\n    (h : ∀ i j, f (0 : α i j) = 0) : (0 : DMatrix m n α).map f = 0 :=\n  by\n  ext\n  simp [h]\n#align map_zero map_zero\n-/\n\n",
  "map_sub":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →+ » -/\n#print map_sub /-\ntheorem map_sub [∀ i j, add_group (α i j)] {β : m → n → Type w} [∀ i j, add_group (β i j)]\n    (f : ∀ ⦃i j⦄, «expr →+ » (α i j) (β i j)) (M N : dmatrix m n α) :\n    ((M - N).map fun i j => @f i j) = (M.map fun i j => @f i j) - N.map fun i j => @f i j :=\n  by\n  ext\n  simp\n#align map_sub map_sub\n-/\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →+ » -/\n#print map_sub /-\ntheorem map_sub [∀ i j, AddGroup (α i j)] {β : m → n → Type w} [∀ i j, AddGroup (β i j)]\n    (f : ∀ ⦃i j⦄, «expr →+ » (α i j) (β i j)) (M N : DMatrix m n α) :\n    ((M - N).map fun i j => @f i j) = (M.map fun i j => @f i j) - N.map fun i j => @f i j :=\n  by\n  ext\n  simp\n#align map_sub map_sub\n-/\n\n",
  "map_map":
- "@[simp]\ntheorem map_map {M : dmatrix m n α} {β : m → n → Type w} {γ : m → n → Type z} {f : ∀ ⦃i j⦄, α i j → β i j}\n    {g : ∀ ⦃i j⦄, β i j → γ i j} : (M.map f).map g = M.map fun i j x => g (f x) :=\n  by\n  ext\n  simp\n#align map_map map_map\n\n",
- "map_dmatrix_apply":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →+ » -/\n@[simp]\ntheorem add_monoid_hom.map_dmatrix_apply [∀ i j, add_monoid (α i j)] {β : m → n → Type w} [∀ i j, add_monoid (β i j)]\n    (f : ∀ ⦃i j⦄, «expr →+ » (α i j) (β i j)) (M : dmatrix m n α) :\n    add_monoid_hom.map_dmatrix f M = M.map fun i j => @f i j :=\n  rfl\n#align add_monoid_hom.map_dmatrix_apply add_monoid_hom.map_dmatrix_apply\n\n",
+ "@[simp]\ntheorem map_map {M : DMatrix m n α} {β : m → n → Type w} {γ : m → n → Type z} {f : ∀ ⦃i j⦄, α i j → β i j}\n    {g : ∀ ⦃i j⦄, β i j → γ i j} : (M.map f).map g = M.map fun i j x => g (f x) :=\n  by\n  ext\n  simp\n#align map_map map_map\n\n",
  "map_apply":
- "@[simp]\ntheorem map_apply {M : dmatrix m n α} {β : m → n → Type w} {f : ∀ ⦃i j⦄, α i j → β i j} {i : m} {j : n} :\n    M.map f i j = f (M i j) :=\n  rfl\n#align map_apply map_apply\n\n",
+ "@[simp]\ntheorem map_apply {M : DMatrix m n α} {β : m → n → Type w} {f : ∀ ⦃i j⦄, α i j → β i j} {i : m} {j : n} :\n    M.map f i j = f (M i j) :=\n  rfl\n#align map_apply map_apply\n\n",
  "map_add":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →+ » -/\n#print map_add /-\ntheorem map_add [∀ i j, add_monoid (α i j)] {β : m → n → Type w} [∀ i j, add_monoid (β i j)]\n    (f : ∀ ⦃i j⦄, «expr →+ » (α i j) (β i j)) (M N : dmatrix m n α) :\n    ((M + N).map fun i j => @f i j) = (M.map fun i j => @f i j) + N.map fun i j => @f i j :=\n  by\n  ext\n  simp\n#align map_add map_add\n-/\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →+ » -/\n#print map_add /-\ntheorem map_add [∀ i j, AddMonoid (α i j)] {β : m → n → Type w} [∀ i j, AddMonoid (β i j)]\n    (f : ∀ ⦃i j⦄, «expr →+ » (α i j) (β i j)) (M N : DMatrix m n α) :\n    ((M + N).map fun i j => @f i j) = (M.map fun i j => @f i j) + N.map fun i j => @f i j :=\n  by\n  ext\n  simp\n#align map_add map_add\n-/\n\n",
+ "mapDMatrix_apply":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →+ » -/\n#print AddMonoidHom.mapDMatrix_apply /-\n@[simp]\ntheorem AddMonoidHom.mapDMatrix_apply [∀ i j, AddMonoid (α i j)] {β : m → n → Type w} [∀ i j, AddMonoid (β i j)]\n    (f : ∀ ⦃i j⦄, «expr →+ » (α i j) (β i j)) (M : DMatrix m n α) :\n    AddMonoidHom.mapDMatrix f M = M.map fun i j => @f i j :=\n  rfl\n#align add_monoid_hom.map_dmatrix_apply AddMonoidHom.mapDMatrix_apply\n-/\n\n",
  "ext_iff":
  "/-\nCopyright (c) 2021 Scott Morrison. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Scott Morrison\n-/\ntheorem ext_iff : (∀ i j, M i j = N i j) ↔ M = N :=\n  ⟨fun h => funext fun i => funext <| h i, fun h => by simp [h]⟩\n#align ext_iff ext_iff\n\n",
  "ext":
  "@[ext]\ntheorem ext : (∀ i j, M i j = N i j) → M = N :=\n  ext_iff.mp\n#align ext ext\n\n",
  "add_apply":
- "@[simp]\ntheorem add_apply [∀ i j, Add (α i j)] (M N : dmatrix m n α) (i j) : (M + N) i j = M i j + N i j :=\n  rfl\n#align add_apply add_apply\n\n"}
+ "@[simp]\ntheorem add_apply [∀ i j, Add (α i j)] (M N : DMatrix m n α) (i j) : (M + N) i j = M i j + N i j :=\n  rfl\n#align add_apply add_apply\n\n"}

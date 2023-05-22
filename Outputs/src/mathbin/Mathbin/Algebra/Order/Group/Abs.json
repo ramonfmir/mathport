@@ -13,7 +13,7 @@
  "neg_le_abs_self":
  "#print neg_le_abs_self /-\ntheorem neg_le_abs_self (a : α) : -a ≤ |a| :=\n  le_max_right _ _\n#align neg_le_abs_self neg_le_abs_self\n-/\n\n",
  "neg_abs_le_self":
- "#print neg_abs_le_self /-\ntheorem neg_abs_le_self (a : α) : -|a| ≤ a :=\n  by\n  cases' le_total 0 a with h h\n  ·\n    calc\n      -|a| = -a := congr_arg has_neg.neg (abs_of_nonneg h)\n      _ ≤ 0 := neg_nonpos.mpr h\n      _ ≤ a := h\n      \n  ·\n    calc\n      -|a| = - -a := congr_arg has_neg.neg (abs_of_nonpos h)\n      _ ≤ a := (neg_neg a).le\n      \n#align neg_abs_le_self neg_abs_le_self\n-/\n\n",
+ "#print neg_abs_le_self /-\ntheorem neg_abs_le_self (a : α) : -|a| ≤ a :=\n  by\n  cases' le_total 0 a with h h\n  ·\n    calc\n      -|a| = -a := congr_arg has_neg.neg (abs_of_nonneg h)\n      _ ≤ 0 := (neg_nonpos.mpr h)\n      _ ≤ a := h\n      \n  ·\n    calc\n      -|a| = - -a := congr_arg has_neg.neg (abs_of_nonpos h)\n      _ ≤ a := (neg_neg a).le\n      \n#align neg_abs_le_self neg_abs_le_self\n-/\n\n",
  "neg_abs_le_neg":
  "#print neg_abs_le_neg /-\ntheorem neg_abs_le_neg (a : α) : -|a| ≤ -a := by simpa using neg_abs_le_self (-a)\n#align neg_abs_le_neg neg_abs_le_neg\n-/\n\n",
  "min_abs_abs_le_abs_min":
@@ -37,7 +37,7 @@
  "le_abs":
  "#print le_abs /-\ntheorem le_abs : a ≤ |b| ↔ a ≤ b ∨ a ≤ -b :=\n  le_max_iff\n#align le_abs le_abs\n-/\n\n",
  "eq_or_eq_neg_of_abs_eq":
- "#print eq_or_eq_neg_of_abs_eq /-\ntheorem eq_or_eq_neg_of_abs_eq {a b : α} (h : |a| = b) : a = b ∨ a = -b := by\n  simpa only [← h, eq_comm, eq_neg_iff_eq_neg] using abs_choice a\n#align eq_or_eq_neg_of_abs_eq eq_or_eq_neg_of_abs_eq\n-/\n\n",
+ "#print eq_or_eq_neg_of_abs_eq /-\ntheorem eq_or_eq_neg_of_abs_eq {a b : α} (h : |a| = b) : a = b ∨ a = -b := by\n  simpa only [← h, eq_comm, neg_eq_iff_eq_neg] using abs_choice a\n#align eq_or_eq_neg_of_abs_eq eq_or_eq_neg_of_abs_eq\n-/\n\n",
  "eq_of_abs_sub_nonpos":
  "#print eq_of_abs_sub_nonpos /-\ntheorem eq_of_abs_sub_nonpos (h : |a - b| ≤ 0) : a = b :=\n  eq_of_abs_sub_eq_zero (le_antisymm h (abs_nonneg (a - b)))\n#align eq_of_abs_sub_nonpos eq_of_abs_sub_nonpos\n-/\n\n",
  "eq_of_abs_sub_eq_zero":
@@ -45,9 +45,9 @@
  "dist_bdd_within_interval":
  "#print dist_bdd_within_interval /-\ntheorem dist_bdd_within_interval {a b lb ub : α} (hal : lb ≤ a) (hau : a ≤ ub) (hbl : lb ≤ b) (hbu : b ≤ ub) :\n    |a - b| ≤ ub - lb :=\n  abs_sub_le_iff.2 ⟨sub_le_sub hau hbl, sub_le_sub hbu hal⟩\n#align dist_bdd_within_interval dist_bdd_within_interval\n-/\n\n",
  "apply_abs_le_mul_of_one_le'":
- "#print apply_abs_le_mul_of_one_le' /-\n@[to_additive]\ntheorem apply_abs_le_mul_of_one_le' {β : Type _} [mul_one_class β] [preorder β] [covariant_class β β (· * ·) (· ≤ ·)]\n    [covariant_class β β (swap (· * ·)) (· ≤ ·)] {f : α → β} {a : α} (h₁ : 1 ≤ f a) (h₂ : 1 ≤ f (-a)) :\n    f (|a|) ≤ f a * f (-a) :=\n  (le_total a 0).by_cases (fun ha => (abs_of_nonpos ha).symm ▸ le_mul_of_one_le_left' h₁) fun ha =>\n    (abs_of_nonneg ha).symm ▸ le_mul_of_one_le_right' h₂\n#align apply_abs_le_mul_of_one_le' apply_abs_le_mul_of_one_le'\n-/\n\n",
+ "#print apply_abs_le_mul_of_one_le' /-\n@[to_additive]\ntheorem apply_abs_le_mul_of_one_le' {β : Type _} [MulOneClass β] [preorder β] [CovariantClass β β (· * ·) (· ≤ ·)]\n    [CovariantClass β β (swap (· * ·)) (· ≤ ·)] {f : α → β} {a : α} (h₁ : 1 ≤ f a) (h₂ : 1 ≤ f (-a)) :\n    f (|a|) ≤ f a * f (-a) :=\n  (le_total a 0).by_cases (fun ha => (abs_of_nonpos ha).symm ▸ le_mul_of_one_le_left' h₁) fun ha =>\n    (abs_of_nonneg ha).symm ▸ le_mul_of_one_le_right' h₂\n#align apply_abs_le_mul_of_one_le' apply_abs_le_mul_of_one_le'\n#align apply_abs_le_add_of_nonneg' apply_abs_le_add_of_nonneg'\n-/\n\n",
  "apply_abs_le_mul_of_one_le":
- "#print apply_abs_le_mul_of_one_le /-\n@[to_additive]\ntheorem apply_abs_le_mul_of_one_le {β : Type _} [mul_one_class β] [preorder β] [covariant_class β β (· * ·) (· ≤ ·)]\n    [covariant_class β β (swap (· * ·)) (· ≤ ·)] {f : α → β} (h : ∀ x, 1 ≤ f x) (a : α) : f (|a|) ≤ f a * f (-a) :=\n  apply_abs_le_mul_of_one_le' (h _) (h _)\n#align apply_abs_le_mul_of_one_le apply_abs_le_mul_of_one_le\n-/\n\n",
+ "#print apply_abs_le_mul_of_one_le /-\n@[to_additive]\ntheorem apply_abs_le_mul_of_one_le {β : Type _} [MulOneClass β] [preorder β] [CovariantClass β β (· * ·) (· ≤ ·)]\n    [CovariantClass β β (swap (· * ·)) (· ≤ ·)] {f : α → β} (h : ∀ x, 1 ≤ f x) (a : α) : f (|a|) ≤ f a * f (-a) :=\n  apply_abs_le_mul_of_one_le' (h _) (h _)\n#align apply_abs_le_mul_of_one_le apply_abs_le_mul_of_one_le\n#align apply_abs_le_add_of_nonneg apply_abs_le_add_of_nonneg\n-/\n\n",
  "add_abs_nonneg":
  "#print add_abs_nonneg /-\ntheorem add_abs_nonneg (a : α) : 0 ≤ a + |a| := by\n  rw [← add_right_neg a]\n  apply add_le_add_left\n  exact neg_le_abs_self a\n#align add_abs_nonneg add_abs_nonneg\n-/\n\n",
  "abs_zero":
@@ -103,13 +103,13 @@
  "abs_le":
  "#print abs_le /-\ntheorem abs_le : |a| ≤ b ↔ -b ≤ a ∧ a ≤ b := by rw [abs_le', and_comm, neg_le]\n#align abs_le abs_le\n-/\n\n",
  "abs_eq_zero":
- "#print abs_eq_zero /-\n@[simp]\ntheorem abs_eq_zero : |a| = 0 ↔ a = 0 :=\n  decidable.not_iff_not.1 <| ne_comm.trans <| (abs_nonneg a).lt_iff_ne.symm.trans abs_pos\n#align abs_eq_zero abs_eq_zero\n-/\n\n",
+ "#print abs_eq_zero /-\n@[simp]\ntheorem abs_eq_zero : |a| = 0 ↔ a = 0 :=\n  Decidable.not_iff_not.1 <| ne_comm.trans <| (abs_nonneg a).lt_iff_ne.symm.trans abs_pos\n#align abs_eq_zero abs_eq_zero\n-/\n\n",
  "abs_eq_sup_inv":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊔ » -/\n#print abs_eq_sup_inv /-\n/-\nCopyright (c) 2016 Jeremy Avigad. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Jeremy Avigad, Leonardo de Moura, Mario Carneiro, Johannes Hölzl\n-/\n-- see Note [lower instance priority]\n@[to_additive]\ntheorem abs_eq_sup_inv [Inv α] [HasSup α] (a : α) : |a| = «expr ⊔ » a a⁻¹ :=\n  rfl\n#align abs_eq_sup_inv abs_eq_sup_inv\n-/\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊔ » -/\n#print abs_eq_sup_inv /-\n/-\nCopyright (c) 2016 Jeremy Avigad. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Jeremy Avigad, Leonardo de Moura, Mario Carneiro, Johannes Hölzl\n-/\n-- see Note [lower instance priority]\n@[to_additive]\ntheorem abs_eq_sup_inv [Inv α] [Sup α] (a : α) : |a| = «expr ⊔ » a a⁻¹ :=\n  rfl\n#align abs_eq_sup_inv abs_eq_sup_inv\n#align abs_eq_sup_neg abs_eq_sup_neg\n-/\n\n",
  "abs_eq_max_neg":
  "#print abs_eq_max_neg /-\ntheorem abs_eq_max_neg : abs a = max a (-a) :=\n  rfl\n#align abs_eq_max_neg abs_eq_max_neg\n-/\n\n",
  "abs_eq_abs":
- "#print abs_eq_abs /-\ntheorem abs_eq_abs {a b : α} : |a| = |b| ↔ a = b ∨ a = -b :=\n  by\n  refine' ⟨fun h => _, fun h => _⟩\n  ·\n    obtain rfl | rfl := eq_or_eq_neg_of_abs_eq h <;>\n      simpa only [neg_eq_iff_neg_eq, neg_inj, or_comm, @eq_comm _ (-b)] using abs_choice b\n  · cases h <;> simp only [h, abs_neg]\n#align abs_eq_abs abs_eq_abs\n-/\n\n",
+ "#print abs_eq_abs /-\ntheorem abs_eq_abs {a b : α} : |a| = |b| ↔ a = b ∨ a = -b :=\n  by\n  refine' ⟨fun h => _, fun h => _⟩\n  · obtain rfl | rfl := eq_or_eq_neg_of_abs_eq h <;> simpa only [neg_eq_iff_eq_neg, neg_inj, or_comm] using abs_choice b\n  · cases h <;> simp only [h, abs_neg]\n#align abs_eq_abs abs_eq_abs\n-/\n\n",
  "abs_eq":
  "#print abs_eq /-\ntheorem abs_eq (hb : 0 ≤ b) : |a| = b ↔ a = b ∨ a = -b :=\n  by\n  refine' ⟨eq_or_eq_neg_of_abs_eq, _⟩\n  rintro (rfl | rfl) <;> simp only [abs_neg, abs_of_nonneg hb]\n#align abs_eq abs_eq\n-/\n\n",
  "abs_choice":

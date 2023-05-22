@@ -1,13 +1,13 @@
 {"vieta_formula_quadratic":
  "#print vieta_formula_quadratic /-\n/-- Vieta's formula for a quadratic equation, relating the coefficients of the polynomial with\n  its roots. This particular version states that if we have a root `x` of a monic quadratic\n  polynomial, then there is another root `y` such that `x + y` is negative the `a_1` coefficient\n  and `x * y` is the `a_0` coefficient. -/\ntheorem vieta_formula_quadratic {b c x : α} (h : x * x - b * x + c = 0) :\n    ∃ y : α, y * y - b * y + c = 0 ∧ x + y = b ∧ x * y = c :=\n  by\n  have : c = x * (b - x) := (eq_neg_of_add_eq_zero_right h).trans (by simp [mul_sub, mul_comm])\n  refine' ⟨b - x, _, by simp, by rw [this]⟩\n  rw [this, sub_add, ← sub_mul, sub_self]\n#align Vieta_formula_quadratic vieta_formula_quadratic\n-/\n\n",
  "to_noZeroDivisors":
- "#print IsRightCancelMulZero.to_noZeroDivisors /-\ntheorem IsRightCancelMulZero.to_noZeroDivisors [Ring α] [is_right_cancel_mul_zero α] : no_zero_divisors α :=\n  by\n  refine' ⟨fun x y h => _⟩\n  by_cases hy : y = 0\n  · right\n    exact hy\n  · left\n    rw [← sub_zero (x * y), ← zero_mul y, ← sub_mul] at h\n    convert is_right_cancel_mul_zero.mul_right_cancel_of_ne_zero hy h\n    rw [sub_zero]\n#align is_right_cancel_mul_zero.to_no_zero_divisors IsRightCancelMulZero.to_noZeroDivisors\n-/\n\n",
+ "#print IsRightCancelMulZero.to_noZeroDivisors /-\ntheorem IsRightCancelMulZero.to_noZeroDivisors [Ring α] [IsRightCancelMulZero α] : NoZeroDivisors α :=\n  by\n  refine' ⟨fun x y h => _⟩\n  by_cases hy : y = 0\n  · right\n    exact hy\n  · left\n    rw [← sub_zero (x * y), ← MulZeroClass.zero_mul y, ← sub_mul] at h\n    convert is_right_cancel_mul_zero.mul_right_cancel_of_ne_zero hy h\n    rw [sub_zero]\n#align is_right_cancel_mul_zero.to_no_zero_divisors IsRightCancelMulZero.to_noZeroDivisors\n-/\n\n",
  "to_isDomain":
- "#print NoZeroDivisors.to_isDomain /-\ntheorem NoZeroDivisors.to_isDomain [Ring α] [h : nontrivial α] [no_zero_divisors α] : IsDomain α :=\n  { NoZeroDivisors.to_isCancelMulZero α, h with }\n#align no_zero_divisors.to_is_domain NoZeroDivisors.to_isDomain\n-/\n\n",
+ "#print NoZeroDivisors.to_isDomain /-\ntheorem NoZeroDivisors.to_isDomain [Ring α] [h : Nontrivial α] [NoZeroDivisors α] : IsDomain α :=\n  { NoZeroDivisors.to_isCancelMulZero α, h with }\n#align no_zero_divisors.to_is_domain NoZeroDivisors.to_isDomain\n-/\n\n",
  "succ_ne_self":
- "#print succ_ne_self /-\ntheorem succ_ne_self [NonAssocRing α] [nontrivial α] (a : α) : a + 1 ≠ a := fun h =>\n  one_ne_zero ((add_right_inj a).mp (by simp [h]))\n#align succ_ne_self succ_ne_self\n-/\n\n",
+ "#print succ_ne_self /-\ntheorem succ_ne_self [NonAssocRing α] [Nontrivial α] (a : α) : a + 1 ≠ a := fun h =>\n  one_ne_zero ((add_right_inj a).mp (by simp [h]))\n#align succ_ne_self succ_ne_self\n-/\n\n",
  "pred_ne_self":
- "#print pred_ne_self /-\ntheorem pred_ne_self [NonAssocRing α] [nontrivial α] (a : α) : a - 1 ≠ a := fun h =>\n  one_ne_zero (neg_injective ((add_right_inj a).mp (by simpa [sub_eq_add_neg] using h)))\n#align pred_ne_self pred_ne_self\n-/\n\n",
+ "#print pred_ne_self /-\ntheorem pred_ne_self [NonAssocRing α] [Nontrivial α] (a : α) : a - 1 ≠ a := fun h =>\n  one_ne_zero (neg_injective ((add_right_inj a).mp (by simpa [sub_eq_add_neg] using h)))\n#align pred_ne_self pred_ne_self\n-/\n\n",
  "mul_right_apply":
  "theorem mul_right_apply {R : Type _} [NonUnitalNonAssocSemiring R] (a r : R) : mulRight r a = a * r :=\n  rfl\n#align mul_right_apply mul_right_apply\n\n",
  "map_bit0":

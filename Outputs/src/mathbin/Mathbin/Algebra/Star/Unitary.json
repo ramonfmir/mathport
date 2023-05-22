@@ -1,9 +1,9 @@
 {"to_units_injective":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ˣ» -/\ntheorem to_units_injective : function.injective (toUnits : unitary R → «expr ˣ» R) := fun x y h =>\n  subtype.ext <| Units.ext_iff.mp h\n#align to_units_injective to_units_injective\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ˣ» -/\ntheorem to_units_injective : function.injective (toUnits : unitary R → «expr ˣ» R) := fun x y h =>\n  Subtype.ext <| Units.ext_iff.mp h\n#align to_units_injective to_units_injective\n\n",
  "star_mul_self_of_mem":
  "@[simp]\ntheorem star_mul_self_of_mem {U : R} (hU : U ∈ unitary R) : star U * U = 1 :=\n  hU.1\n#align star_mul_self_of_mem star_mul_self_of_mem\n\n",
  "star_mul_self":
- "@[simp]\ntheorem star_mul_self (U : unitary R) : star U * U = 1 :=\n  subtype.ext <| coe_star_mul_self U\n#align star_mul_self star_mul_self\n\n",
+ "@[simp]\ntheorem star_mul_self (U : unitary R) : star U * U = 1 :=\n  Subtype.ext <| coe_star_mul_self U\n#align star_mul_self star_mul_self\n\n",
  "star_mem_iff":
  "@[simp]\ntheorem star_mem_iff {U : R} : star U ∈ unitary R ↔ U ∈ unitary R :=\n  ⟨fun h => star_star U ▸ star_mem h, star_mem⟩\n#align star_mem_iff star_mem_iff\n\n",
  "star_mem":
@@ -15,7 +15,7 @@
  "mul_star_self_of_mem":
  "@[simp]\ntheorem mul_star_self_of_mem {U : R} (hU : U ∈ unitary R) : U * star U = 1 :=\n  hU.2\n#align mul_star_self_of_mem mul_star_self_of_mem\n\n",
  "mul_star_self":
- "@[simp]\ntheorem mul_star_self (U : unitary R) : U * star U = 1 :=\n  subtype.ext <| coe_mul_star_self U\n#align mul_star_self mul_star_self\n\n",
+ "@[simp]\ntheorem mul_star_self (U : unitary R) : U * star U = 1 :=\n  Subtype.ext <| coe_mul_star_self U\n#align mul_star_self mul_star_self\n\n",
  "mem_iff_star_mul_self":
  "theorem mem_iff_star_mul_self {U : R} : U ∈ unitary R ↔ star U * U = 1 :=\n  mem_iff.trans <| and_iff_left_of_imp fun h => mul_comm (star U) U ▸ h\n#align mem_iff_star_mul_self mem_iff_star_mul_self\n\n",
  "mem_iff_self_mul_star":

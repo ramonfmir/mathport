@@ -1,1 +1,12 @@
-{}
+{"mem_commutant_iff":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →L[ ] » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℂ -/\n@[simp]\ntheorem mem_commutant_iff {S : von_neumann_algebra H} {z : «expr →L[ ] » H (exprℂ) H} :\n    z ∈ S.commutant ↔ ∀ g ∈ S, g * z = z * g :=\n  iff.rfl\n#align mem_commutant_iff mem_commutant_iff\n\n",
+ "mem_carrier":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →L[ ] » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℂ -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →L[ ] » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℂ -/\n/-\nCopyright (c) 2022 Scott Morrison. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Scott Morrison\n-/\n-- TODO: Without this, `von_neumann_algebra` times out. Why?\n@[simp]\ntheorem mem_carrier {S : von_neumann_algebra H} {x : «expr →L[ ] » H (exprℂ) H} :\n    x ∈ S.carrier ↔ x ∈ (S : Set («expr →L[ ] » H (exprℂ) H)) :=\n  iff.rfl\n#align mem_carrier mem_carrier\n\n",
+ "ext":
+ "@[ext]\ntheorem ext {S T : von_neumann_algebra H} (h : ∀ x, x ∈ S ↔ x ∈ T) : S = T :=\n  SetLike.ext h\n#align ext ext\n\n",
+ "commutant_commutant":
+ "@[simp]\ntheorem commutant_commutant (S : von_neumann_algebra H) : S.commutant.commutant = S :=\n  SetLike.coe_injective S.centralizer_centralizer'\n#align commutant_commutant commutant_commutant\n\n",
+ "coe_commutant":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →L[ ] » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℂ -/\n@[simp]\ntheorem coe_commutant (S : von_neumann_algebra H) :\n    ↑S.commutant = Set.centralizer (S : Set («expr →L[ ] » H (exprℂ) H)) :=\n  rfl\n#align coe_commutant coe_commutant\n\n",
+ "centralizer_centralizer":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →L[ ] » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℂ -/\n@[simp]\ntheorem centralizer_centralizer (S : von_neumann_algebra H) :\n    Set.centralizer (Set.centralizer (S : Set («expr →L[ ] » H (exprℂ) H))) = S :=\n  S.centralizer_centralizer'\n#align centralizer_centralizer centralizer_centralizer\n\n"}

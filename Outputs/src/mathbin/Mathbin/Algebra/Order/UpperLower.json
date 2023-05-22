@@ -1,47 +1,47 @@
-{"upper_closure_smul":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n@[simp, to_additive]\ntheorem upper_closure_smul : upper_closure («expr • » a s) = «expr • » a (upper_closure s) :=\n  upper_closure_image <| OrderIso.mulLeft a\n#align upper_closure_smul upper_closure_smul\n\n",
- "upper_closure_one":
- "@[simp, to_additive]\ntheorem upper_closure_one : upper_closure (1 : set α) = 1 :=\n  upper_closure_singleton _\n#align upper_closure_one upper_closure_one\n\n",
- "upper_closure_mul_distrib":
- "@[simp, to_additive]\ntheorem upper_closure_mul_distrib : upper_closure (s * t) = upper_closure s * upper_closure t :=\n  SetLike.coe_injective <| by rw [upper_set.coe_mul, mul_upper_closure, upper_closure_mul, upper_set.upper_closure]\n#align upper_closure_mul_distrib upper_closure_mul_distrib\n\n",
- "upper_closure_mul":
- "@[to_additive]\ntheorem upper_closure_mul : ↑(upper_closure s) * t = upper_closure (s * t) :=\n  by\n  simp_rw [mul_comm _ t]\n  exact mul_upper_closure _ _\n#align upper_closure_mul upper_closure_mul\n\n",
+{"upperClosure_smul":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n#print upperClosure_smul /-\n@[simp, to_additive]\ntheorem upperClosure_smul : upperClosure («expr • » a s) = «expr • » a (upperClosure s) :=\n  upperClosure_image <| OrderIso.mulLeft a\n#align upper_closure_smul upperClosure_smul\n#align upper_closure_vadd upperClosure_vadd\n-/\n\n",
+ "upperClosure_one":
+ "#print upperClosure_one /-\n@[simp, to_additive]\ntheorem upperClosure_one : upperClosure (1 : Set α) = 1 :=\n  upperClosure_singleton _\n#align upper_closure_one upperClosure_one\n#align upper_closure_zero upperClosure_zero\n-/\n\n",
+ "upperClosure_mul_distrib":
+ "#print upperClosure_mul_distrib /-\n@[simp, to_additive]\ntheorem upperClosure_mul_distrib : upperClosure (s * t) = upperClosure s * upperClosure t :=\n  SetLike.coe_injective <| by rw [UpperSet.coe_mul, mul_upperClosure, upperClosure_mul, UpperSet.upperClosure]\n#align upper_closure_mul_distrib upperClosure_mul_distrib\n#align upper_closure_add_distrib upperClosure_add_distrib\n-/\n\n",
+ "upperClosure_mul":
+ "#print upperClosure_mul /-\n@[to_additive]\ntheorem upperClosure_mul : ↑(upperClosure s) * t = upperClosure (s * t) :=\n  by\n  simp_rw [mul_comm _ t]\n  exact mul_upperClosure _ _\n#align upper_closure_mul upperClosure_mul\n#align upper_closure_add upperClosure_add\n-/\n\n",
  "smul_subset":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n@[to_additive]\ntheorem is_lower_set.smul_subset (hs : is_lower_set s) (hx : x ≤ 1) : «expr • » x s ⊆ s :=\n  smul_set_subset_iff.2 fun y => hs <| mul_le_of_le_one_left' hx\n#align is_lower_set.smul_subset is_lower_set.smul_subset\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n#print IsLowerSet.smul_subset /-\n@[to_additive]\ntheorem IsLowerSet.smul_subset (hs : IsLowerSet s) (hx : x ≤ 1) : «expr • » x s ⊆ s :=\n  smul_set_subset_iff.2 fun y => hs <| mul_le_of_le_one_left' hx\n#align is_lower_set.smul_subset IsLowerSet.smul_subset\n#align is_lower_set.vadd_subset IsLowerSet.vadd_subset\n-/\n\n",
  "smul":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n@[to_additive]\ntheorem set.ord_connected.smul (hs : s.ord_connected) : («expr • » a s).ord_connected :=\n  by\n  rw [← hs.upper_closure_inter_lower_closure, smul_set_inter]\n  exact (upper_closure _).upper.smul.ord_connected.inter (lower_closure _).lower.smul.ord_connected\n#align set.ord_connected.smul set.ord_connected.smul\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n#print Set.OrdConnected.smul /-\n@[to_additive]\ntheorem Set.OrdConnected.smul (hs : s.ord_connected) : («expr • » a s).ord_connected :=\n  by\n  rw [← hs.upper_closure_inter_lower_closure, smul_set_inter]\n  exact (upperClosure _).upper.smul.ord_connected.inter (lowerClosure _).lower.smul.ord_connected\n#align set.ord_connected.smul Set.OrdConnected.smul\n#align set.ord_connected.vadd Set.OrdConnected.vadd\n-/\n\n",
  "one_mul":
- "#print one_mul /-\n@[to_additive]\nprivate theorem one_mul (s : lower_set α) : 1 * s = s :=\n  SetLike.coe_injective <|\n    (subset_mul_right _ right_mem_Iic).antisymm' <|\n      by\n      rw [← smul_eq_mul, ← bUnion_smul_set]\n      exact Union₂_subset fun _ => s.lower.smul_subset\n#align one_mul one_mul\n-/\n\n",
- "mul_upper_closure":
- "@[to_additive]\ntheorem mul_upper_closure : s * upper_closure t = upper_closure (s * t) := by\n  simp_rw [← smul_eq_mul, ← bUnion_smul_set, upper_closure_Union, upper_closure_smul, upper_set.coe_infi₂,\n    upper_set.coe_smul]\n#align mul_upper_closure mul_upper_closure\n\n",
+ "#print one_mul /-\n@[to_additive]\nprivate theorem one_mul (s : LowerSet α) : 1 * s = s :=\n  SetLike.coe_injective <|\n    (subset_mul_right _ right_mem_Iic).antisymm' <|\n      by\n      rw [← smul_eq_mul, ← bUnion_smul_set]\n      exact Union₂_subset fun _ => s.lower.smul_subset\n#align one_mul one_mul\n#align zero_add zero_add\n-/\n\n",
+ "mul_upperClosure":
+ "#print mul_upperClosure /-\n@[to_additive]\ntheorem mul_upperClosure : s * upperClosure t = upperClosure (s * t) := by\n  simp_rw [← smul_eq_mul, ← bUnion_smul_set, upperClosure_unionᵢ, upperClosure_smul, UpperSet.coe_infᵢ₂,\n    upper_set.coe_smul]\n#align mul_upper_closure mul_upperClosure\n#align add_upper_closure add_upperClosure\n-/\n\n",
  "mul_right":
- "@[to_additive]\ntheorem is_lower_set.mul_right (hs : is_lower_set s) : is_lower_set (s * t) :=\n  hs.of_dual.mul_right\n#align is_lower_set.mul_right is_lower_set.mul_right\n\n",
- "mul_lower_closure":
- "@[to_additive]\ntheorem mul_lower_closure : s * lower_closure t = lower_closure (s * t) := by\n  simp_rw [← smul_eq_mul, ← bUnion_smul_set, lower_closure_Union, lower_closure_smul, lower_set.coe_supr₂,\n    lower_set.coe_smul]\n#align mul_lower_closure mul_lower_closure\n\n",
+ "#print IsLowerSet.mul_right /-\n@[to_additive]\ntheorem IsLowerSet.mul_right (hs : IsLowerSet s) : IsLowerSet (s * t) :=\n  hs.of_dual.mul_right\n#align is_lower_set.mul_right IsLowerSet.mul_right\n#align is_lower_set.add_right IsLowerSet.add_right\n-/\n\n",
+ "mul_lowerClosure":
+ "#print mul_lowerClosure /-\n@[to_additive]\ntheorem mul_lowerClosure : s * lowerClosure t = lowerClosure (s * t) := by\n  simp_rw [← smul_eq_mul, ← bUnion_smul_set, lowerClosure_unionᵢ, lowerClosure_smul, LowerSet.coe_supᵢ₂,\n    lower_set.coe_smul]\n#align mul_lower_closure mul_lowerClosure\n#align add_lower_closure add_lowerClosure\n-/\n\n",
  "mul_left":
- "@[to_additive]\ntheorem is_lower_set.mul_left (ht : is_lower_set t) : is_lower_set (s * t) :=\n  ht.of_dual.mul_left\n#align is_lower_set.mul_left is_lower_set.mul_left\n\n",
- "lower_closure_smul":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n@[simp, to_additive]\ntheorem lower_closure_smul : lower_closure («expr • » a s) = «expr • » a (lower_closure s) :=\n  lower_closure_image <| OrderIso.mulLeft a\n#align lower_closure_smul lower_closure_smul\n\n",
- "lower_closure_one":
- "@[simp, to_additive]\ntheorem lower_closure_one : lower_closure (1 : set α) = 1 :=\n  lower_closure_singleton _\n#align lower_closure_one lower_closure_one\n\n",
- "lower_closure_mul_distrib":
- "@[simp, to_additive]\ntheorem lower_closure_mul_distrib : lower_closure (s * t) = lower_closure s * lower_closure t :=\n  SetLike.coe_injective <| by rw [lower_set.coe_mul, mul_lower_closure, lower_closure_mul, lower_set.lower_closure]\n#align lower_closure_mul_distrib lower_closure_mul_distrib\n\n",
- "lower_closure_mul":
- "@[to_additive]\ntheorem lower_closure_mul : ↑(lower_closure s) * t = lower_closure (s * t) :=\n  by\n  simp_rw [mul_comm _ t]\n  exact mul_lower_closure _ _\n#align lower_closure_mul lower_closure_mul\n\n",
+ "#print IsLowerSet.mul_left /-\n@[to_additive]\ntheorem IsLowerSet.mul_left (ht : IsLowerSet t) : IsLowerSet (s * t) :=\n  ht.of_dual.mul_left\n#align is_lower_set.mul_left IsLowerSet.mul_left\n#align is_lower_set.add_left IsLowerSet.add_left\n-/\n\n",
+ "lowerClosure_smul":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n#print lowerClosure_smul /-\n@[simp, to_additive]\ntheorem lowerClosure_smul : lowerClosure («expr • » a s) = «expr • » a (lowerClosure s) :=\n  lowerClosure_image <| OrderIso.mulLeft a\n#align lower_closure_smul lowerClosure_smul\n#align lower_closure_vadd lowerClosure_vadd\n-/\n\n",
+ "lowerClosure_one":
+ "#print lowerClosure_one /-\n@[simp, to_additive]\ntheorem lowerClosure_one : lowerClosure (1 : Set α) = 1 :=\n  lowerClosure_singleton _\n#align lower_closure_one lowerClosure_one\n#align lower_closure_zero lowerClosure_zero\n-/\n\n",
+ "lowerClosure_mul_distrib":
+ "#print lowerClosure_mul_distrib /-\n@[simp, to_additive]\ntheorem lowerClosure_mul_distrib : lowerClosure (s * t) = lowerClosure s * lowerClosure t :=\n  SetLike.coe_injective <| by rw [LowerSet.coe_mul, mul_lowerClosure, lowerClosure_mul, LowerSet.lowerClosure]\n#align lower_closure_mul_distrib lowerClosure_mul_distrib\n#align lower_closure_add_distrib lowerClosure_add_distrib\n-/\n\n",
+ "lowerClosure_mul":
+ "#print lowerClosure_mul /-\n@[to_additive]\ntheorem lowerClosure_mul : ↑(lowerClosure s) * t = lowerClosure (s * t) :=\n  by\n  simp_rw [mul_comm _ t]\n  exact mul_lowerClosure _ _\n#align lower_closure_mul lowerClosure_mul\n#align lower_closure_add lowerClosure_add\n-/\n\n",
  "inv":
- "@[to_additive]\ntheorem is_lower_set.inv (hs : is_lower_set s) : is_upper_set s⁻¹ := fun x y h => hs <| inv_le_inv' h\n#align is_lower_set.inv is_lower_set.inv\n\n",
+ "#print IsLowerSet.inv /-\n@[to_additive]\ntheorem IsLowerSet.inv (hs : IsLowerSet s) : IsUpperSet s⁻¹ := fun x y h => hs <| inv_le_inv' h\n#align is_lower_set.inv IsLowerSet.inv\n#align is_lower_set.neg IsLowerSet.neg\n-/\n\n",
  "div_right":
- "@[to_additive]\ntheorem is_lower_set.div_right (hs : is_lower_set s) : is_lower_set (s / t) :=\n  hs.of_dual.div_right\n#align is_lower_set.div_right is_lower_set.div_right\n\n",
+ "#print IsLowerSet.div_right /-\n@[to_additive]\ntheorem IsLowerSet.div_right (hs : IsLowerSet s) : IsLowerSet (s / t) :=\n  hs.of_dual.div_right\n#align is_lower_set.div_right IsLowerSet.div_right\n#align is_lower_set.sub_right IsLowerSet.sub_right\n-/\n\n",
  "div_left":
- "@[to_additive]\ntheorem is_lower_set.div_left (ht : is_lower_set t) : is_upper_set (s / t) :=\n  ht.of_dual.div_left\n#align is_lower_set.div_left is_lower_set.div_left\n\n",
+ "#print IsLowerSet.div_left /-\n@[to_additive]\ntheorem IsLowerSet.div_left (ht : IsLowerSet t) : IsUpperSet (s / t) :=\n  ht.of_dual.div_left\n#align is_lower_set.div_left IsLowerSet.div_left\n#align is_lower_set.sub_left IsLowerSet.sub_left\n-/\n\n",
  "coe_smul":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n@[simp, norm_cast, to_additive]\ntheorem coe_smul (a : α) (s : lower_set α) : (↑(«expr • » a s) : set α) = «expr • » a s :=\n  rfl\n#align coe_smul coe_smul\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n@[simp, norm_cast, to_additive]\ntheorem coe_smul (a : α) (s : LowerSet α) : (↑(«expr • » a s) : Set α) = «expr • » a s :=\n  rfl\n#align coe_smul coe_smul\n\n",
  "coe_one":
- "@[simp, norm_cast, to_additive]\ntheorem coe_one : ((1 : upper_set α) : set α) = Set.Ici 1 :=\n  rfl\n#align coe_one coe_one\n\n",
+ "@[simp, norm_cast, to_additive]\ntheorem coe_one : ((1 : UpperSet α) : Set α) = Set.Ici 1 :=\n  rfl\n#align coe_one coe_one\n\n",
  "coe_mul":
- "@[simp, norm_cast, to_additive]\ntheorem coe_mul (s t : lower_set α) : (↑(s * t) : set α) = s * t :=\n  rfl\n#align coe_mul coe_mul\n\n",
+ "@[simp, norm_cast, to_additive]\ntheorem coe_mul (s t : LowerSet α) : (↑(s * t) : Set α) = s * t :=\n  rfl\n#align coe_mul coe_mul\n\n",
  "coe_div":
- "@[simp, norm_cast, to_additive]\ntheorem coe_div (s t : lower_set α) : (↑(s / t) : set α) = s / t :=\n  rfl\n#align coe_div coe_div\n\n",
+ "@[simp, norm_cast, to_additive]\ntheorem coe_div (s t : LowerSet α) : (↑(s / t) : Set α) = s / t :=\n  rfl\n#align coe_div coe_div\n\n",
  "Iic_one":
  "@[simp, to_additive]\ntheorem Iic_one : Iic (1 : α) = 1 :=\n  rfl\n#align Iic_one Iic_one\n\n",
  "Ici_one":

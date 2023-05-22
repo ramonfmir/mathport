@@ -7,9 +7,9 @@
  "ite_dite_distrib_left":
  "#print ite_dite_distrib_left /-\ntheorem ite_dite_distrib_left {a : α} {b : q → α} {c : ¬q → α} :\n    ite p a (dite q b c) = dite q (fun hq => ite p a <| b hq) fun hq => ite p a <| c hq :=\n  dite_dite_distrib_left\n#align ite_dite_distrib_left ite_dite_distrib_left\n-/\n\n",
  "forall":
- "#print Prop.forall /-\ntheorem Prop.forall {f : Prop → Prop} : (∀ p, f p) ↔ f true ∧ f false :=\n  ⟨fun h => ⟨h _, h _⟩, by\n    rintro ⟨h₁, h₀⟩ p\n    by_cases hp : p <;> simp only [hp] <;> assumption⟩\n#align Prop.forall Prop.forall\n-/\n\n",
+ "#print Prop.forall /-\ntheorem Prop.forall {f : Prop → Prop} : (∀ p, f p) ↔ f True ∧ f False :=\n  ⟨fun h => ⟨h _, h _⟩, by\n    rintro ⟨h₁, h₀⟩ p\n    by_cases hp : p <;> simp only [hp] <;> assumption⟩\n#align Prop.forall Prop.forall\n-/\n\n",
  "exists":
- "#print Prop.exists /-\ntheorem Prop.exists {f : Prop → Prop} : (∃ p, f p) ↔ f true ∨ f false :=\n  ⟨fun ⟨p, h⟩ => by refine' (em p).imp _ _ <;> intro H <;> convert h <;> simp [H], by rintro (h | h) <;> exact ⟨_, h⟩⟩\n#align Prop.exists Prop.exists\n-/\n\n",
+ "#print Prop.exists /-\ntheorem Prop.exists {f : Prop → Prop} : (∃ p, f p) ↔ f True ∨ f False :=\n  ⟨fun ⟨p, h⟩ => by refine' (em p).imp _ _ <;> intro H <;> convert h <;> simp [H], by rintro (h | h) <;> exact ⟨_, h⟩⟩\n#align Prop.exists Prop.exists\n-/\n\n",
  "dite_ite_distrib_right":
  "#print dite_ite_distrib_right /-\ntheorem dite_ite_distrib_right {a : p → α} {b : p → α} {c : ¬p → α} :\n    dite p (fun hp => ite q (a hp) (b hp)) c = ite q (dite p a c) (dite p b c) :=\n  dite_dite_distrib_right\n#align dite_ite_distrib_right dite_ite_distrib_right\n-/\n\n",
  "dite_ite_distrib_left":

@@ -29,13 +29,13 @@
  "prod_apply":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →* » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →* » -/\n@[simp, to_additive prod_apply]\ntheorem prod_apply (f : «expr →* » M N) (g : «expr →* » M P) (x) : f.prod g x = (f x, g x) :=\n  rfl\n#align prod_apply prod_apply\n\n",
  "one_mk_mul_one_mk":
- "@[to_additive]\ntheorem one_mk_mul_one_mk [monoid M] [Mul N] (b₁ b₂ : N) : ((1 : M), b₁) * (1, b₂) = (1, b₁ * b₂) := by\n  rw [mk_mul_mk, mul_one]\n#align one_mk_mul_one_mk one_mk_mul_one_mk\n\n",
+ "@[to_additive]\ntheorem one_mk_mul_one_mk [Monoid M] [Mul N] (b₁ b₂ : N) : ((1 : M), b₁) * (1, b₂) = (1, b₁ * b₂) := by\n  rw [mk_mul_mk, mul_one]\n#align one_mk_mul_one_mk one_mk_mul_one_mk\n\n",
  "one_eq_mk":
  "@[to_additive]\ntheorem one_eq_mk [One M] [One N] : (1 : M × N) = (1, 1) :=\n  rfl\n#align one_eq_mk one_eq_mk\n\n",
  "mul_def":
  "@[to_additive]\ntheorem mul_def [Mul M] [Mul N] (p q : M × N) : p * q = (p.1 * q.1, p.2 * q.2) :=\n  rfl\n#align mul_def mul_def\n\n",
  "mk_one_mul_mk_one":
- "@[to_additive]\ntheorem mk_one_mul_mk_one [Mul M] [monoid N] (a₁ a₂ : M) : (a₁, (1 : N)) * (a₂, 1) = (a₁ * a₂, 1) := by\n  rw [mk_mul_mk, mul_one]\n#align mk_one_mul_mk_one mk_one_mul_mk_one\n\n",
+ "@[to_additive]\ntheorem mk_one_mul_mk_one [Mul M] [Monoid N] (a₁ a₂ : M) : (a₁, (1 : N)) * (a₂, 1) = (a₁ * a₂, 1) := by\n  rw [mk_mul_mk, mul_one]\n#align mk_one_mul_mk_one mk_one_mul_mk_one\n\n",
  "mk_mul_mk":
  "@[simp, to_additive]\ntheorem mk_mul_mk [Mul M] [Mul N] (a₁ a₂ : M) (b₁ b₂ : N) : (a₁, b₁) * (a₂, b₂) = (a₁ * a₂, b₁ * b₂) :=\n  rfl\n#align mk_mul_mk mk_mul_mk\n\n",
  "mk_eq_one":
@@ -51,7 +51,7 @@
  "fst_one":
  "@[simp, to_additive]\ntheorem fst_one [One M] [One N] : (1 : M × N).1 = 1 :=\n  rfl\n#align fst_one fst_one\n\n",
  "fst_mul_snd":
- "@[to_additive]\ntheorem fst_mul_snd [mul_one_class M] [mul_one_class N] (p : M × N) : (p.fst, 1) * (1, p.snd) = p :=\n  ext (mul_one p.1) (one_mul p.2)\n#align fst_mul_snd fst_mul_snd\n\n",
+ "@[to_additive]\ntheorem fst_mul_snd [MulOneClass M] [MulOneClass N] (p : M × N) : (p.fst, 1) * (1, p.snd) = p :=\n  ext (mul_one p.1) (one_mul p.2)\n#align fst_mul_snd fst_mul_snd\n\n",
  "fst_mul":
  "/-\nCopyright (c) 2020 Yury Kudryashov. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Simon Hudon, Patrick Massot, Yury Kudryashov\n-/\n@[simp, to_additive]\ntheorem fst_mul [Mul M] [Mul N] (p q : M × N) : (p * q).1 = p.1 * q.1 :=\n  rfl\n#align fst_mul fst_mul\n\n",
  "fst_inv":
@@ -65,11 +65,11 @@
  "fst_comp_inl":
  "@[simp, to_additive]\ntheorem fst_comp_inl : (fst M N).comp (inl M N) = id M :=\n  rfl\n#align fst_comp_inl fst_comp_inl\n\n",
  "embed_product_injective":
- "@[to_additive]\ntheorem embed_product_injective (α : Type _) [monoid α] : function.injective (embedProduct α) := fun a₁ a₂ h =>\n  Units.ext <| (congr_arg prod.fst h : _)\n#align embed_product_injective embed_product_injective\n\n",
+ "@[to_additive]\ntheorem embed_product_injective (α : Type _) [Monoid α] : function.injective (embedProduct α) := fun a₁ a₂ h =>\n  Units.ext <| (congr_arg Prod.fst h : _)\n#align embed_product_injective embed_product_injective\n\n",
  "coprod_unique":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →* » -/\n@[simp, to_additive]\ntheorem coprod_unique (f : «expr →* » (M × N) P) : (f.comp (inl M N)).coprod (f.comp (inr M N)) = f :=\n  ext fun x => by simp [coprod_apply, inl_apply, inr_apply, ← map_mul]\n#align coprod_unique coprod_unique\n\n",
  "coprod_inl_inr":
- "@[simp, to_additive]\ntheorem coprod_inl_inr {M N : Type _} [comm_monoid M] [comm_monoid N] : (inl M N).coprod (inr M N) = id (M × N) :=\n  coprod_unique (id <| M × N)\n#align coprod_inl_inr coprod_inl_inr\n\n",
+ "@[simp, to_additive]\ntheorem coprod_inl_inr {M N : Type _} [CommMonoid M] [CommMonoid N] : (inl M N).coprod (inr M N) = id (M × N) :=\n  coprod_unique (id <| M × N)\n#align coprod_inl_inr coprod_inl_inr\n\n",
  "coprod_comp_inr":
  "@[simp, to_additive]\ntheorem coprod_comp_inr : (f.coprod g).comp (inr M N) = g :=\n  ext fun x => by simp [coprod_apply]\n#align coprod_comp_inr coprod_comp_inr\n\n",
  "coprod_comp_inl":
@@ -77,16 +77,16 @@
  "coprod_apply":
  "@[simp, to_additive]\ntheorem coprod_apply (p : M × N) : f.coprod g p = f p.1 * g p.2 :=\n  rfl\n#align coprod_apply coprod_apply\n\n",
  "comp_coprod":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →* » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →* » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →* » -/\n@[to_additive]\ntheorem comp_coprod {Q : Type _} [comm_monoid Q] (h : «expr →* » P Q) (f : «expr →* » M P) (g : «expr →* » N P) :\n    h.comp (f.coprod g) = (h.comp f).coprod (h.comp g) :=\n  ext fun x => by simp\n#align comp_coprod comp_coprod\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →* » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →* » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →* » -/\n@[to_additive]\ntheorem comp_coprod {Q : Type _} [CommMonoid Q] (h : «expr →* » P Q) (f : «expr →* » M P) (g : «expr →* » N P) :\n    h.comp (f.coprod g) = (h.comp f).coprod (h.comp g) :=\n  ext fun x => by simp\n#align comp_coprod comp_coprod\n\n",
  "coe_snd":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n@[simp, to_additive]\ntheorem coe_snd : «expr⇑ » (snd M N) = prod.snd :=\n  rfl\n#align coe_snd coe_snd\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n@[simp, to_additive]\ntheorem coe_snd : «expr⇑ » (snd M N) = Prod.snd :=\n  rfl\n#align coe_snd coe_snd\n\n",
  "coe_prod_map":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n@[simp, to_additive coe_prod_map]\ntheorem coe_prod_map : «expr⇑ » (prodMap f g) = prod.map f g :=\n  rfl\n#align coe_prod_map coe_prod_map\n\n",
  "coe_prod_comm_symm":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃* » -/\n@[simp, to_additive coe_prod_comm_symm]\ntheorem coe_prod_comm_symm : «expr⇑ » (prodComm : «expr ≃* » (M × N) (N × M)).symm = prod.swap :=\n  rfl\n#align coe_prod_comm_symm coe_prod_comm_symm\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃* » -/\n@[simp, to_additive coe_prod_comm_symm]\ntheorem coe_prod_comm_symm : «expr⇑ » (prodComm : «expr ≃* » (M × N) (N × M)).symm = Prod.swap :=\n  rfl\n#align coe_prod_comm_symm coe_prod_comm_symm\n\n",
  "coe_prod_comm":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃* » -/\n@[simp, to_additive coe_prod_comm]\ntheorem coe_prod_comm : «expr⇑ » (prodComm : «expr ≃* » (M × N) (N × M)) = prod.swap :=\n  rfl\n#align coe_prod_comm coe_prod_comm\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃* » -/\n@[simp, to_additive coe_prod_comm]\ntheorem coe_prod_comm : «expr⇑ » (prodComm : «expr ≃* » (M × N) (N × M)) = Prod.swap :=\n  rfl\n#align coe_prod_comm coe_prod_comm\n\n",
  "coe_prod":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →* » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →* » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n@[to_additive coe_prod]\ntheorem coe_prod (f : «expr →* » M N) (g : «expr →* » M P) : «expr⇑ » (f.prod g) = pi.prod f g :=\n  rfl\n#align coe_prod coe_prod\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →* » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →* » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n@[to_additive coe_prod]\ntheorem coe_prod (f : «expr →* » M N) (g : «expr →* » M P) : «expr⇑ » (f.prod g) = Pi.prod f g :=\n  rfl\n#align coe_prod coe_prod\n\n",
  "coe_fst":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n@[simp, to_additive]\ntheorem coe_fst : «expr⇑ » (fst M N) = prod.fst :=\n  rfl\n#align coe_fst coe_fst\n\n"}
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n@[simp, to_additive]\ntheorem coe_fst : «expr⇑ » (fst M N) = Prod.fst :=\n  rfl\n#align coe_fst coe_fst\n\n"}

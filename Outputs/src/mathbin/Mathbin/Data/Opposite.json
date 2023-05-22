@@ -5,7 +5,7 @@
  "unop_inj_iff":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵖ» -/\n@[simp]\ntheorem unop_inj_iff (x y : «expr ᵒᵖ» α) : unop x = unop y ↔ x = y :=\n  unop_injective.eq_iff\n#align unop_inj_iff unop_inj_iff\n\n",
  "unop_eq_iff_eq_op":
- "theorem unop_eq_iff_eq_op {x} {y : α} : unop x = y ↔ x = op y :=\n  equiv_to_opposite.symm.apply_eq_iff_eq_symm_apply\n#align unop_eq_iff_eq_op unop_eq_iff_eq_op\n\n",
+ "theorem unop_eq_iff_eq_op {x} {y : α} : unop x = y ↔ x = op y :=\n  equivToOpposite.symm.apply_eq_iff_eq_symm_apply\n#align unop_eq_iff_eq_op unop_eq_iff_eq_op\n\n",
  "op_unop":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵖ» -/\n@[simp]\ntheorem op_unop (x : «expr ᵒᵖ» α) : op (unop x) = x :=\n  rfl\n#align op_unop op_unop\n\n",
  "op_injective":
@@ -13,8 +13,8 @@
  "op_inj_iff":
  "-- We could prove these by `iff.rfl`, but that would make these eligible for `dsimp`. That would be\n-- a bad idea because `opposite` is irreducible.\n@[simp]\ntheorem op_inj_iff (x y : α) : op x = op y ↔ x = y :=\n  op_injective.eq_iff\n#align op_inj_iff op_inj_iff\n\n",
  "op_eq_iff_eq_unop":
- "theorem op_eq_iff_eq_unop {x : α} {y} : op x = y ↔ x = unop y :=\n  equiv_to_opposite.apply_eq_iff_eq_symm_apply\n#align op_eq_iff_eq_unop op_eq_iff_eq_unop\n\n",
+ "theorem op_eq_iff_eq_unop {x : α} {y} : op x = y ↔ x = unop y :=\n  equivToOpposite.apply_eq_iff_eq_symm_apply\n#align op_eq_iff_eq_unop op_eq_iff_eq_unop\n\n",
  "equiv_to_opposite_symm_coe":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵖ» -/\n@[simp]\ntheorem equiv_to_opposite_symm_coe : (equiv_to_opposite.symm : «expr ᵒᵖ» α → α) = unop :=\n  rfl\n#align equiv_to_opposite_symm_coe equiv_to_opposite_symm_coe\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵖ» -/\n@[simp]\ntheorem equiv_to_opposite_symm_coe : (equivToOpposite.symm : «expr ᵒᵖ» α → α) = unop :=\n  rfl\n#align equiv_to_opposite_symm_coe equiv_to_opposite_symm_coe\n\n",
  "equiv_to_opposite_coe":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵖ» -/\n@[simp]\ntheorem equiv_to_opposite_coe : (equiv_to_opposite : α → «expr ᵒᵖ» α) = op :=\n  rfl\n#align equiv_to_opposite_coe equiv_to_opposite_coe\n\n"}
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵖ» -/\n@[simp]\ntheorem equiv_to_opposite_coe : (equivToOpposite : α → «expr ᵒᵖ» α) = op :=\n  rfl\n#align equiv_to_opposite_coe equiv_to_opposite_coe\n\n"}

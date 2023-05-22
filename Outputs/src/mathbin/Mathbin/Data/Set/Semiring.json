@@ -1,12 +1,42 @@
-{"up_lt_up":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊂ » -/\ntheorem up_lt_up {s t : set α} : s.up < t.up ↔ «expr ⊂ » s t :=\n  iff.rfl\n#align up_lt_up up_lt_up\n\n",
+{"zero_def":
+ "theorem zero_def : (0 : SetSemiring α) = Set.up ∅ :=\n  rfl\n#align zero_def zero_def\n\n",
+ "up_union":
+ "#print Set.up_union /-\n@[simp]\ntheorem Set.up_union (s t : Set α) : (s ∪ t).up = s.up + t.up :=\n  rfl\n#align set.up_union Set.up_union\n-/\n\n",
+ "up_one":
+ "#print Set.up_one /-\n@[simp]\ntheorem Set.up_one : (1 : Set α).up = 1 :=\n  rfl\n#align set.up_one Set.up_one\n-/\n\n",
+ "up_mul":
+ "#print Set.up_mul /-\n@[simp]\ntheorem Set.up_mul (s t : Set α) : (s * t).up = s.up * t.up :=\n  rfl\n#align set.up_mul Set.up_mul\n-/\n\n",
+ "up_lt_up":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊂ » -/\ntheorem up_lt_up {s t : Set α} : s.up < t.up ↔ «expr ⊂ » s t :=\n  iff.rfl\n#align up_lt_up up_lt_up\n\n",
  "up_le_up":
- "-- TODO: These lemmas are not tagged `simp` because `set.le_eq_subset` simplifies the LHS\ntheorem up_le_up {s t : set α} : s.up ≤ t.up ↔ s ⊆ t :=\n  iff.rfl\n#align up_le_up up_le_up\n\n",
+ "-- TODO: These lemmas are not tagged `simp` because `set.le_eq_subset` simplifies the LHS\ntheorem up_le_up {s t : Set α} : s.up ≤ t.up ↔ s ⊆ t :=\n  iff.rfl\n#align up_le_up up_le_up\n\n",
+ "up_image":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →* » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\n#print Set.up_image /-\n@[simp]\ntheorem Set.up_image [MulOneClass α] [MulOneClass β] (f : «expr →* » α β) (s : Set α) :\n    («expr '' » f s).up = imageHom f s.up :=\n  rfl\n#align set.up_image Set.up_image\n-/\n\n",
+ "up_empty":
+ "#print Set.up_empty /-\n@[simp]\ntheorem Set.up_empty : (∅ : Set α).up = 0 :=\n  rfl\n#align set.up_empty Set.up_empty\n-/\n\n",
  "up_down":
  "@[simp]\nprotected theorem up_down (s : SetSemiring α) : s.down.up = s :=\n  rfl\n#align up_down up_down\n\n",
+ "one_def":
+ "theorem one_def : (1 : SetSemiring α) = Set.up 1 :=\n  rfl\n#align one_def one_def\n\n",
+ "mul_def":
+ "/- Since addition on `set_semiring` is commutative (it is set union), there is no need\nto also have the instance `covariant_class (set_semiring α) (set_semiring α) (swap (+)) (≤)`. -/\n-- reducibility linter complains if we use `(s.down * t.down).up`\ntheorem mul_def (s t : SetSemiring α) : s * t = (s.down * t.down).up :=\n  rfl\n#align mul_def mul_def\n\n",
+ "image_hom_def":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →* » -/\ntheorem image_hom_def [MulOneClass α] [MulOneClass β] (f : «expr →* » α β) (s : SetSemiring α) :\n    imageHom f s = (image f s.down).up :=\n  rfl\n#align image_hom_def image_hom_def\n\n",
+ "down_zero":
+ "@[simp]\ntheorem down_zero : (0 : SetSemiring α).down = ∅ :=\n  rfl\n#align down_zero down_zero\n\n",
  "down_up":
- "/-\nCopyright (c) 2020 Floris van Doorn. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Floris van Doorn\n-/\n@[simp]\nprotected theorem down_up (s : set α) : s.up.down = s :=\n  rfl\n#align down_up down_up\n\n",
+ "/-\nCopyright (c) 2020 Floris van Doorn. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Floris van Doorn\n-/\n@[simp]\nprotected theorem down_up (s : Set α) : s.up.down = s :=\n  rfl\n#align down_up down_up\n\n",
  "down_subset_down":
  "@[simp]\ntheorem down_subset_down {s t : SetSemiring α} : s.down ⊆ t.down ↔ s ≤ t :=\n  iff.rfl\n#align down_subset_down down_subset_down\n\n",
  "down_ssubset_down":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊂ » -/\n@[simp]\ntheorem down_ssubset_down {s t : SetSemiring α} : «expr ⊂ » s.down t.down ↔ s < t :=\n  iff.rfl\n#align down_ssubset_down down_ssubset_down\n\n"}
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊂ » -/\n@[simp]\ntheorem down_ssubset_down {s t : SetSemiring α} : «expr ⊂ » s.down t.down ↔ s < t :=\n  iff.rfl\n#align down_ssubset_down down_ssubset_down\n\n",
+ "down_one":
+ "@[simp]\ntheorem down_one : (1 : SetSemiring α).down = 1 :=\n  rfl\n#align down_one down_one\n\n",
+ "down_mul":
+ "@[simp]\ntheorem down_mul (s t : SetSemiring α) : (s * t).down = s.down * t.down :=\n  rfl\n#align down_mul down_mul\n\n",
+ "down_image_hom":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →* » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\n@[simp]\ntheorem down_image_hom [MulOneClass α] [MulOneClass β] (f : «expr →* » α β) (s : SetSemiring α) :\n    (imageHom f s).down = «expr '' » f s.down :=\n  rfl\n#align down_image_hom down_image_hom\n\n",
+ "down_add":
+ "@[simp]\ntheorem down_add (s t : SetSemiring α) : (s + t).down = s.down ∪ t.down :=\n  rfl\n#align down_add down_add\n\n",
+ "add_def":
+ "theorem add_def (s t : SetSemiring α) : s + t = (s.down ∪ t.down).up :=\n  rfl\n#align add_def add_def\n\n"}

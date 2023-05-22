@@ -1,7 +1,7 @@
 {"to_lie_hom_injective":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₐ[ ] » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₗ⁅ ⁆ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₗ⁅ ⁆ » -/\ntheorem to_lie_hom_injective {f g : «expr →ₐ[ ] » A R B} (h : (f : «expr →ₗ⁅ ⁆ » A R B) = (g : «expr →ₗ⁅ ⁆ » A R B)) :\n    f = g := by\n  ext a\n  exact lie_hom.congr_fun h a\n#align to_lie_hom_injective to_lie_hom_injective\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₐ[ ] » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₗ⁅ ⁆ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₗ⁅ ⁆ » -/\ntheorem to_lie_hom_injective {f g : «expr →ₐ[ ] » A R B} (h : (f : «expr →ₗ⁅ ⁆ » A R B) = (g : «expr →ₗ⁅ ⁆ » A R B)) :\n    f = g := by\n  ext a\n  exact LieHom.congr_fun h a\n#align to_lie_hom_injective to_lie_hom_injective\n\n",
  "to_lie_hom_id":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₗ⁅ ⁆ » -/\n@[simp]\ntheorem to_lie_hom_id : (alg_hom.id R A : «expr →ₗ⁅ ⁆ » A R A) = lie_hom.id :=\n  rfl\n#align to_lie_hom_id to_lie_hom_id\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₗ⁅ ⁆ » -/\n@[simp]\ntheorem to_lie_hom_id : (AlgHom.id R A : «expr →ₗ⁅ ⁆ » A R A) = LieHom.id :=\n  rfl\n#align to_lie_hom_id to_lie_hom_id\n\n",
  "to_lie_hom_comp":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₗ⁅ ⁆ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₗ⁅ ⁆ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₗ⁅ ⁆ » -/\n@[simp]\ntheorem to_lie_hom_comp : (g.comp f : «expr →ₗ⁅ ⁆ » A R C) = (g : «expr →ₗ⁅ ⁆ » B R C).comp (f : «expr →ₗ⁅ ⁆ » A R B) :=\n  rfl\n#align to_lie_hom_comp to_lie_hom_comp\n\n",
  "to_lie_hom_coe":
@@ -13,15 +13,15 @@
  "to_lie_equiv_apply":
  "@[simp]\ntheorem to_lie_equiv_apply (x : A₁) : e.to_lie_equiv x = e x :=\n  rfl\n#align to_lie_equiv_apply to_lie_equiv_apply\n\n",
  "to_endomorphism_restrict_eq_to_endomorphism":
- "@[simp]\ntheorem to_endomorphism_restrict_eq_to_endomorphism (h := N.to_endomorphism_comp_subtype_mem x) :\n    (to_endomorphism R L M x).restrict h = to_endomorphism R L N x :=\n  by\n  ext\n  simp [linear_map.restrict_apply]\n#align to_endomorphism_restrict_eq_to_endomorphism to_endomorphism_restrict_eq_to_endomorphism\n\n",
+ "@[simp]\ntheorem to_endomorphism_restrict_eq_to_endomorphism (h := N.to_endomorphism_comp_subtype_mem x) :\n    (to_endomorphism R L M x).restrict h = to_endomorphism R L N x :=\n  by\n  ext\n  simp [LinearMap.restrict_apply]\n#align to_endomorphism_restrict_eq_to_endomorphism to_endomorphism_restrict_eq_to_endomorphism\n\n",
  "to_endomorphism_module_End":
- "@[simp]\ntheorem lie_module.to_endomorphism_module_End : lie_module.to_endomorphism R (module.End R M) M = lie_hom.id :=\n  by\n  ext (g m)\n  simp [lie_eq_smul]\n#align lie_module.to_endomorphism_module_End lie_module.to_endomorphism_module_End\n\n",
+ "@[simp]\ntheorem lie_module.to_endomorphism_module_End : lie_module.to_endomorphism R (Module.End R M) M = LieHom.id :=\n  by\n  ext (g m)\n  simp [lie_eq_smul]\n#align lie_module.to_endomorphism_module_End lie_module.to_endomorphism_module_End\n\n",
  "to_endomorphism_mk":
- "@[simp]\ntheorem lie_subalgebra.to_endomorphism_mk (K : lie_subalgebra R L) {x : L} (hx : x ∈ K) :\n    lie_module.to_endomorphism R K M ⟨x, hx⟩ = lie_module.to_endomorphism R L M x :=\n  rfl\n#align lie_subalgebra.to_endomorphism_mk lie_subalgebra.to_endomorphism_mk\n\n",
+ "@[simp]\ntheorem lie_subalgebra.to_endomorphism_mk (K : LieSubalgebra R L) {x : L} (hx : x ∈ K) :\n    lie_module.to_endomorphism R K M ⟨x, hx⟩ = lie_module.to_endomorphism R L M x :=\n  rfl\n#align lie_subalgebra.to_endomorphism_mk lie_subalgebra.to_endomorphism_mk\n\n",
  "to_endomorphism_eq":
- "theorem lie_subalgebra.to_endomorphism_eq (K : lie_subalgebra R L) {x : K} :\n    lie_module.to_endomorphism R K M x = lie_module.to_endomorphism R L M x :=\n  rfl\n#align lie_subalgebra.to_endomorphism_eq lie_subalgebra.to_endomorphism_eq\n\n",
+ "theorem lie_subalgebra.to_endomorphism_eq (K : LieSubalgebra R L) {x : K} :\n    lie_module.to_endomorphism R K M x = lie_module.to_endomorphism R L M x :=\n  rfl\n#align lie_subalgebra.to_endomorphism_eq lie_subalgebra.to_endomorphism_eq\n\n",
  "to_endomorphism_comp_subtype_mem":
- "theorem to_endomorphism_comp_subtype_mem (m : M) (hm : m ∈ (N : submodule R M)) :\n    (to_endomorphism R L M x).comp (N : submodule R M).subtype ⟨m, hm⟩ ∈ (N : submodule R M) := by\n  simpa using N.lie_mem hm\n#align to_endomorphism_comp_subtype_mem to_endomorphism_comp_subtype_mem\n\n",
+ "theorem to_endomorphism_comp_subtype_mem (m : M) (hm : m ∈ (N : Submodule R M)) :\n    (to_endomorphism R L M x).comp (N : Submodule R M).subtype ⟨m, hm⟩ ∈ (N : Submodule R M) := by\n  simpa using N.lie_mem hm\n#align to_endomorphism_comp_subtype_mem to_endomorphism_comp_subtype_mem\n\n",
  "of_associative_ring_bracket":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⁅ , ⁆» -/\ntheorem of_associative_ring_bracket (x y : A) : «expr⁅ , ⁆» x y = x * y - y * x :=\n  rfl\n#align of_associative_ring_bracket of_associative_ring_bracket\n\n",
  "lie_eq_smul":
@@ -33,7 +33,7 @@
  "lie_conj_symm":
  "@[simp]\ntheorem lie_conj_symm : e.lie_conj.symm = e.symm.lie_conj :=\n  rfl\n#align lie_conj_symm lie_conj_symm\n\n",
  "lie_conj_apply":
- "@[simp]\ntheorem lie_conj_apply (f : module.End R M₁) : e.lie_conj f = e.conj f :=\n  rfl\n#align lie_conj_apply lie_conj_apply\n\n",
+ "@[simp]\ntheorem lie_conj_apply (f : Module.End R M₁) : e.lie_conj f = e.conj f :=\n  rfl\n#align lie_conj_apply lie_conj_apply\n\n",
  "lie_apply":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⁅ , ⁆» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⁅ , ⁆» -/\n@[simp]\ntheorem lie_apply {α : Type _} (f g : α → A) (a : α) : («expr⁅ , ⁆» f g) a = «expr⁅ , ⁆» (f a) (g a) :=\n  rfl\n#align lie_apply lie_apply\n\n",
  "commute_iff_lie_eq":
@@ -41,10 +41,10 @@
  "coe_to_lie_hom":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₗ⁅ ⁆ » -/\n@[simp]\ntheorem coe_to_lie_hom : ((f : «expr →ₗ⁅ ⁆ » A R B) : A → B) = f :=\n  rfl\n#align coe_to_lie_hom coe_to_lie_hom\n\n",
  "coe_map_to_endomorphism_le":
- "theorem coe_map_to_endomorphism_le : (N : submodule R M).map (lie_module.to_endomorphism R L M x) ≤ N :=\n  by\n  rintro n ⟨m, hm, rfl⟩\n  exact N.lie_mem hm\n#align coe_map_to_endomorphism_le coe_map_to_endomorphism_le\n\n",
+ "theorem coe_map_to_endomorphism_le : (N : Submodule R M).map (lie_module.to_endomorphism R L M x) ≤ N :=\n  by\n  rintro n ⟨m, hm, rfl⟩\n  exact N.lie_mem hm\n#align coe_map_to_endomorphism_le coe_map_to_endomorphism_le\n\n",
  "ad_eq_lmul_left_sub_lmul_right":
- "theorem lie_algebra.ad_eq_lmul_left_sub_lmul_right (A : Type v) [Ring A] [algebra R A] :\n    (ad R A : A → module.End R A) = linear_map.mul_left R - linear_map.mul_right R :=\n  by\n  ext (a b)\n  simp [lie_ring.of_associative_ring_bracket]\n#align lie_algebra.ad_eq_lmul_left_sub_lmul_right lie_algebra.ad_eq_lmul_left_sub_lmul_right\n\n",
+ "theorem lie_algebra.ad_eq_lmul_left_sub_lmul_right (A : Type v) [Ring A] [Algebra R A] :\n    (ad R A : A → Module.End R A) = LinearMap.mulLeft R - LinearMap.mulRight R :=\n  by\n  ext (a b)\n  simp [lie_ring.of_associative_ring_bracket]\n#align lie_algebra.ad_eq_lmul_left_sub_lmul_right lie_algebra.ad_eq_lmul_left_sub_lmul_right\n\n",
  "ad_comp_incl_eq":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₗ[ ] » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₗ[ ] » -/\ntheorem lie_subalgebra.ad_comp_incl_eq (K : lie_subalgebra R L) (x : K) :\n    (ad R L ↑x).comp (K.incl : «expr →ₗ[ ] » K R L) = (K.incl : «expr →ₗ[ ] » K R L).comp (ad R K x) :=\n  by\n  ext y\n  simp only [ad_apply, lie_hom.coe_to_linear_map, lie_subalgebra.coe_incl, linear_map.coe_comp,\n    lie_subalgebra.coe_bracket, Function.comp_apply]\n#align lie_subalgebra.ad_comp_incl_eq lie_subalgebra.ad_comp_incl_eq\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₗ[ ] » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₗ[ ] » -/\ntheorem lie_subalgebra.ad_comp_incl_eq (K : LieSubalgebra R L) (x : K) :\n    (ad R L ↑x).comp (K.incl : «expr →ₗ[ ] » K R L) = (K.incl : «expr →ₗ[ ] » K R L).comp (ad R K x) :=\n  by\n  ext y\n  simp only [ad_apply, LieHom.coe_toLinearMap, LieSubalgebra.coe_incl, LinearMap.coe_comp, LieSubalgebra.coe_bracket,\n    Function.comp_apply]\n#align lie_subalgebra.ad_comp_incl_eq lie_subalgebra.ad_comp_incl_eq\n\n",
  "ad_apply":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⁅ , ⁆» -/\n@[simp]\ntheorem lie_algebra.ad_apply (x y : L) : lie_algebra.ad R L x y = «expr⁅ , ⁆» x y :=\n  rfl\n#align lie_algebra.ad_apply lie_algebra.ad_apply\n\n"}

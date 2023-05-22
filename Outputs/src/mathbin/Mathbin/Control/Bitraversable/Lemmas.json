@@ -1,18 +1,18 @@
 {"tsnd_tfst":
- "@[higher_order tsnd_comp_tfst]\ntheorem tsnd_tfst {α₀ α₁ β₀ β₁} (f : α₀ → F α₁) (f' : β₀ → G β₁) (x : t α₀ β₀) :\n    Comp.mk (tsnd f' <$> tfst f x) = bitraverse (comp.mk ∘ map pure ∘ f) (comp.mk ∘ pure ∘ f') x := by\n  rw [← comp_bitraverse] <;> simp [tfst, tsnd]\n#align tsnd_tfst tsnd_tfst\n\n",
+ "@[higher_order.1tsnd_comp_tfst]\ntheorem tsnd_tfst {α₀ α₁ β₀ β₁} (f : α₀ → F α₁) (f' : β₀ → G β₁) (x : t α₀ β₀) :\n    Comp.mk (tsnd f' <$> tfst f x) = bitraverse (Comp.mk ∘ map pure ∘ f) (Comp.mk ∘ pure ∘ f') x := by\n  rw [← comp_bitraverse] <;> simp [tfst, tsnd]\n#align tsnd_tfst tsnd_tfst\n\n",
  "tsnd_eq_snd_id":
- "@[higher_order]\ntheorem tsnd_eq_snd_id {α β β'} (f : β → β') (x : t α β) : tsnd (id.mk ∘ f) x = id.mk (snd f x) := by\n  simp [tsnd, snd, pure_eq_id_mk_comp_id, -comp.right_id, bitraverse_eq_bimap_id]\n#align tsnd_eq_snd_id tsnd_eq_snd_id\n\n",
+ "@[higher_order.1]\ntheorem tsnd_eq_snd_id {α β β'} (f : β → β') (x : t α β) : tsnd (id.mk ∘ f) x = id.mk (snd f x) := by\n  simp [tsnd, snd, pure_eq_id_mk_comp_id, -comp.right_id, bitraverse_eq_bimap_id]\n#align tsnd_eq_snd_id tsnd_eq_snd_id\n\n",
  "tfst_tsnd":
- "@[higher_order tfst_comp_tsnd]\ntheorem tfst_tsnd {α₀ α₁ β₀ β₁} (f : α₀ → F α₁) (f' : β₀ → G β₁) (x : t α₀ β₀) :\n    Comp.mk (tfst f <$> tsnd f' x) = bitraverse (comp.mk ∘ pure ∘ f) (comp.mk ∘ map pure ∘ f') x := by\n  rw [← comp_bitraverse] <;> simp [tfst, tsnd]\n#align tfst_tsnd tfst_tsnd\n\n",
+ "@[higher_order.1tfst_comp_tsnd]\ntheorem tfst_tsnd {α₀ α₁ β₀ β₁} (f : α₀ → F α₁) (f' : β₀ → G β₁) (x : t α₀ β₀) :\n    Comp.mk (tfst f <$> tsnd f' x) = bitraverse (Comp.mk ∘ pure ∘ f) (Comp.mk ∘ map pure ∘ f') x := by\n  rw [← comp_bitraverse] <;> simp [tfst, tsnd]\n#align tfst_tsnd tfst_tsnd\n\n",
  "tfst_eq_fst_id":
- "@[higher_order]\ntheorem tfst_eq_fst_id {α α' β} (f : α → α') (x : t α β) : tfst (id.mk ∘ f) x = id.mk (fst f x) := by\n  simp [tfst, fst, pure_eq_id_mk_comp_id, -comp.right_id, bitraverse_eq_bimap_id]\n#align tfst_eq_fst_id tfst_eq_fst_id\n\n",
+ "@[higher_order.1]\ntheorem tfst_eq_fst_id {α α' β} (f : α → α') (x : t α β) : tfst (id.mk ∘ f) x = id.mk (fst f x) := by\n  simp [tfst, fst, pure_eq_id_mk_comp_id, -comp.right_id, bitraverse_eq_bimap_id]\n#align tfst_eq_fst_id tfst_eq_fst_id\n\n",
  "pure_eq_id_mk_comp_id":
  "private theorem pure_eq_id_mk_comp_id {α} : pure = id.mk ∘ @id α :=\n  rfl\n#align pure_eq_id_mk_comp_id pure_eq_id_mk_comp_id\n\n",
  "id_tsnd":
- "@[higher_order tsnd_id]\ntheorem id_tsnd : ∀ {α β} (x : t α β), tsnd id.mk x = id.mk x :=\n  @id_bitraverse _ _ _\n#align id_tsnd id_tsnd\n\n",
+ "@[higher_order.1tsnd_id]\ntheorem id_tsnd : ∀ {α β} (x : t α β), tsnd id.mk x = id.mk x :=\n  @id_bitraverse _ _ _\n#align id_tsnd id_tsnd\n\n",
  "id_tfst":
- "/-\nCopyright (c) 2019 Simon Hudon. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Simon Hudon\n-/\n@[higher_order tfst_id]\ntheorem id_tfst : ∀ {α β} (x : t α β), tfst id.mk x = id.mk x :=\n  @id_bitraverse _ _ _\n#align id_tfst id_tfst\n\n",
+ "/-\nCopyright (c) 2019 Simon Hudon. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Simon Hudon\n-/\n@[higher_order.1tfst_id]\ntheorem id_tfst : ∀ {α β} (x : t α β), tfst id.mk x = id.mk x :=\n  @id_bitraverse _ _ _\n#align id_tfst id_tfst\n\n",
  "comp_tsnd":
- "@[higher_order tsnd_comp_tsnd]\ntheorem comp_tsnd {α β₀ β₁ β₂} (g : β₀ → F β₁) (g' : β₁ → G β₂) (x : t α β₀) :\n    Comp.mk (tsnd g' <$> tsnd g x) = tsnd (comp.mk ∘ map g' ∘ g) x := by rw [← comp_bitraverse] <;> simp [tsnd] <;> rfl\n#align comp_tsnd comp_tsnd\n\n",
+ "@[higher_order.1tsnd_comp_tsnd]\ntheorem comp_tsnd {α β₀ β₁ β₂} (g : β₀ → F β₁) (g' : β₁ → G β₂) (x : t α β₀) :\n    Comp.mk (tsnd g' <$> tsnd g x) = tsnd (Comp.mk ∘ map g' ∘ g) x := by rw [← comp_bitraverse] <;> simp [tsnd] <;> rfl\n#align comp_tsnd comp_tsnd\n\n",
  "comp_tfst":
- "@[higher_order tfst_comp_tfst]\ntheorem comp_tfst {α₀ α₁ α₂ β} (f : α₀ → F α₁) (f' : α₁ → G α₂) (x : t α₀ β) :\n    Comp.mk (tfst f' <$> tfst f x) = tfst (comp.mk ∘ map f' ∘ f) x := by\n  rw [← comp_bitraverse] <;> simp [tfst, map_comp_pure, has_pure.pure]\n#align comp_tfst comp_tfst\n\n"}
+ "@[higher_order.1tfst_comp_tfst]\ntheorem comp_tfst {α₀ α₁ α₂ β} (f : α₀ → F α₁) (f' : α₁ → G α₂) (x : t α₀ β) :\n    Comp.mk (tfst f' <$> tfst f x) = tfst (Comp.mk ∘ map f' ∘ f) x := by\n  rw [← comp_bitraverse] <;> simp [tfst, map_comp_pure, has_pure.pure]\n#align comp_tfst comp_tfst\n\n"}

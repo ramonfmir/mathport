@@ -12,8 +12,6 @@
  "-- Lower the priority since it unifies with any quotient type.\n@[simp]\ntheorem quot_mk_eq_coe (x : R) : Quot.mk c x = (x : c.quotient) :=\n  rfl\n#align quot_mk_eq_coe quot_mk_eq_coe\n\n",
  "mul":
  "protected theorem mul {w x y z} : c w x → c y z → c (w * y) (x * z) :=\n  c.mul'\n#align mul mul\n\n",
- "eq":
- "/-- Two elements are related by a congruence relation `c` iff they are represented by the same\nelement of the quotient by `c`. -/\n@[simp]\nprotected theorem eq {a b : R} : (a : c.quotient) = b ↔ c a b :=\n  quotient.eq'\n#align eq eq\n\n",
  "coe_zsmul":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n@[simp, norm_cast]\ntheorem coe_zsmul (z : ℤ) (x : R) : (↑(«expr • » z x) : c.quotient) = «expr • » z x :=\n  rfl\n#align coe_zsmul coe_zsmul\n\n",
  "coe_zero":
@@ -39,4 +37,6 @@
  "coe_add":
  "@[simp, norm_cast]\ntheorem coe_add (x y : R) : (↑(x + y) : c.quotient) = ↑x + ↑y :=\n  rfl\n#align coe_add coe_add\n\n",
  "add":
- "protected theorem add {w x y z} : c w x → c y z → c (w + y) (x + z) :=\n  c.add'\n#align add add\n\n"}
+ "protected theorem add {w x y z} : c w x → c y z → c (w + y) (x + z) :=\n  c.add'\n#align add add\n\n",
+ "Eq":
+ "#print Eq /-\n/-- Two elements are related by a congruence relation `c` iff they are represented by the same\nelement of the quotient by `c`. -/\n@[simp]\nprotected theorem Eq {a b : R} : (a : c.quotient) = b ↔ c a b :=\n  Quotient.eq''\n#align eq Eq\n-/\n\n"}

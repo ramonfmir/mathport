@@ -23,7 +23,7 @@
  "mem_carrier_mk":
  "theorem mem_carrier_mk {a : α} : a ∈ carrier (ConjClasses.mk a) :=\n  IsConj.refl _\n#align mem_carrier_mk mem_carrier_mk\n\n",
  "mem_carrier_iff_mk_eq":
- "theorem mem_carrier_iff_mk_eq {a : α} {b : ConjClasses α} : a ∈ carrier b ↔ ConjClasses.mk a = b :=\n  by\n  revert b\n  rw [forall_is_conj]\n  intro b\n  rw [carrier, eq_comm, mk_eq_mk_iff_is_conj, ← quotient_mk_eq_mk, quotient.lift_mk]\n  rfl\n#align mem_carrier_iff_mk_eq mem_carrier_iff_mk_eq\n\n",
+ "theorem mem_carrier_iff_mk_eq {a : α} {b : ConjClasses α} : a ∈ carrier b ↔ ConjClasses.mk a = b :=\n  by\n  revert b\n  rw [forall_is_conj]\n  intro b\n  rw [carrier, eq_comm, mk_eq_mk_iff_is_conj, ← quotient_mk_eq_mk, Quotient.lift_mk]\n  rfl\n#align mem_carrier_iff_mk_eq mem_carrier_iff_mk_eq\n\n",
  "map_surjective":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →* » -/\ntheorem map_surjective {f : «expr →* » α β} (hf : function.surjective f) : function.surjective (ConjClasses.map f) :=\n  by\n  intro b\n  obtain ⟨b, rfl⟩ := ConjClasses.mk_surjective b\n  obtain ⟨a, rfl⟩ := hf b\n  exact ⟨ConjClasses.mk a, rfl⟩\n#align map_surjective map_surjective\n\n",
  "map_isConj":
@@ -33,9 +33,9 @@
  "isConj_one_left":
  "#print isConj_one_left /-\n@[simp]\ntheorem isConj_one_left {a : α} : IsConj a 1 ↔ a = 1 :=\n  calc\n    IsConj a 1 ↔ IsConj 1 a := ⟨IsConj.symm, IsConj.symm⟩\n    _ ↔ a = 1 := isConj_one_right\n    \n#align is_conj_one_left isConj_one_left\n-/\n\n",
  "isConj_iff₀":
- "#print isConj_iff₀ /-\n@[simp]\ntheorem isConj_iff₀ [group_with_zero α] {a b : α} : IsConj a b ↔ ∃ c : α, c ≠ 0 ∧ c * a * c⁻¹ = b :=\n  ⟨fun ⟨c, hc⟩ =>\n    ⟨c, by\n      rw [← Units.val_inv_eq_inv_val, units.mul_inv_eq_iff_eq_mul]\n      exact ⟨c.ne_zero, hc⟩⟩,\n    fun ⟨c, c0, hc⟩ =>\n    ⟨Units.mk0 c c0,\n      by\n      rw [SemiconjBy, ← units.mul_inv_eq_iff_eq_mul, Units.val_inv_eq_inv_val, Units.val_mk0]\n      exact hc⟩⟩\n#align is_conj_iff₀ isConj_iff₀\n-/\n\n",
+ "#print isConj_iff₀ /-\n@[simp]\ntheorem isConj_iff₀ [GroupWithZero α] {a b : α} : IsConj a b ↔ ∃ c : α, c ≠ 0 ∧ c * a * c⁻¹ = b :=\n  ⟨fun ⟨c, hc⟩ =>\n    ⟨c, by\n      rw [← Units.val_inv_eq_inv_val, Units.mul_inv_eq_iff_eq_mul]\n      exact ⟨c.ne_zero, hc⟩⟩,\n    fun ⟨c, c0, hc⟩ =>\n    ⟨Units.mk0 c c0,\n      by\n      rw [SemiconjBy, ← Units.mul_inv_eq_iff_eq_mul, Units.val_inv_eq_inv_val, Units.val_mk0]\n      exact hc⟩⟩\n#align is_conj_iff₀ isConj_iff₀\n-/\n\n",
  "isConj_iff_eq":
- "#print isConj_iff_eq /-\n@[simp]\ntheorem isConj_iff_eq {α : Type _} [comm_monoid α] {a b : α} : IsConj a b ↔ a = b :=\n  ⟨fun ⟨c, hc⟩ =>\n    by\n    rw [SemiconjBy, mul_comm, ← units.mul_inv_eq_iff_eq_mul, mul_assoc, c.mul_inv, mul_one] at hc\n    exact hc, fun h => by rw [h]⟩\n#align is_conj_iff_eq isConj_iff_eq\n-/\n\n",
+ "#print isConj_iff_eq /-\n@[simp]\ntheorem isConj_iff_eq {α : Type _} [CommMonoid α] {a b : α} : IsConj a b ↔ a = b :=\n  ⟨fun ⟨c, hc⟩ =>\n    by\n    rw [SemiconjBy, mul_comm, ← Units.mul_inv_eq_iff_eq_mul, mul_assoc, c.mul_inv, mul_one] at hc\n    exact hc, fun h => by rw [h]⟩\n#align is_conj_iff_eq isConj_iff_eq\n-/\n\n",
  "isConj_iff_conjugatesOf_eq":
  "#print isConj_iff_conjugatesOf_eq /-\ntheorem isConj_iff_conjugatesOf_eq {a b : α} : IsConj a b ↔ conjugatesOf a = conjugatesOf b :=\n  ⟨IsConj.conjugatesOf_eq, fun h => by\n    have ha := mem_conjugatesOf_self\n    rwa [← h] at ha⟩\n#align is_conj_iff_conjugates_of_eq isConj_iff_conjugatesOf_eq\n-/\n\n",
  "isConj_iff":

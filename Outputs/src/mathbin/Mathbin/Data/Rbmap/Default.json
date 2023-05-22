@@ -9,7 +9,7 @@
  "not_mem_of_find_entry_none":
  "theorem not_mem_of_find_entry_none [is_strict_weak_order α lt] {k : α} {m : rbmap α β lt} :\n    m.find_entry k = none → k ∉ m := by\n  cases' m with t p; cases t <;> simp [find_entry]\n  · intros\n    simp [has_mem.mem, rbmap.mem]\n  all_goals intro h; exact rbtree.not_mem_of_find_none h\n#align not_mem_of_find_entry_none not_mem_of_find_entry_none\n\n",
  "not_mem_of_empty":
- "theorem not_mem_of_empty {m : rbmap α β lt} (k : α) : m.empty = tt → k ∉ m := by\n  cases' m with n p <;> cases n <;>\n    simp [has_mem.mem, mk_rbmap, mk_rbtree, rbmap.mem, rbmap.empty, rbtree.empty, false_imp_iff]\n#align not_mem_of_empty not_mem_of_empty\n\n",
+ "theorem not_mem_of_empty {m : rbmap α β lt} (k : α) : m.empty = true → k ∉ m := by\n  cases' m with n p <;> cases n <;>\n    simp [has_mem.mem, mk_rbmap, mk_rbtree, rbmap.mem, rbmap.empty, rbtree.empty, false_imp_iff]\n#align not_mem_of_empty not_mem_of_empty\n\n",
  "not_mem_mk_rbmap":
  "-- Lemmas\ntheorem not_mem_mk_rbmap : ∀ k : α, k ∉ mk_rbmap α β lt := by simp [has_mem.mem, mk_rbmap, mk_rbtree, rbmap.mem]\n#align not_mem_mk_rbmap not_mem_mk_rbmap\n\n",
  "min_is_minimal_of_total":
@@ -79,16 +79,16 @@
  "equiv_or_mem_of_mem_insert":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≈[ ] » -/\ntheorem equiv_or_mem_of_mem_insert [is_strict_weak_order α lt] {k₁ k₂ : α} {v : β} {m : rbmap α β lt} :\n    k₁ ∈ m.insert k₂ v → «expr ≈[ ] » k₁ lt k₂ ∨ k₁ ∈ m := fun h =>\n  or.elim (rbtree.equiv_or_mem_of_mem_insert (to_rbtree_mem' v h)) (fun h => or.inl (eqv_keys_of_eqv_entries h))\n    fun h => or.inr (to_rbmap_mem h)\n#align equiv_or_mem_of_mem_insert equiv_or_mem_of_mem_insert\n\n",
  "eq_some_of_to_value_eq_some":
- "theorem eq_some_of_to_value_eq_some {e : option (α × β)} {v : β} : to_value e = some v → ∃ k, e = some (k, v) :=\n  by\n  cases' e with val <;> simp [to_value, false_imp_iff]\n  · cases val\n    simp\n#align eq_some_of_to_value_eq_some eq_some_of_to_value_eq_some\n\n",
+ "theorem eq_some_of_to_value_eq_some {e : Option (α × β)} {v : β} : to_value e = some v → ∃ k, e = some (k, v) :=\n  by\n  cases' e with val <;> simp [to_value, false_imp_iff]\n  · cases val\n    simp\n#align eq_some_of_to_value_eq_some eq_some_of_to_value_eq_some\n\n",
  "eq_or_mem_of_mem_ins":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≈[ ] » -/\ntheorem eq_or_mem_of_mem_ins [is_strict_total_order α lt] {k₁ k₂ : α} {v : β} {m : rbmap α β lt} :\n    k₁ ∈ m.insert k₂ v → k₁ = k₂ ∨ k₁ ∈ m := fun h =>\n  suffices «expr ≈[ ] » k₁ lt k₂ ∨ k₁ ∈ m by simp [eqv_lt_iff_eq] at this <;> assumption\n  incomp_or_mem_of_mem_ins h\n#align eq_or_mem_of_mem_ins eq_or_mem_of_mem_ins\n\n",
  "eq_of_find_entry_some":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≈[ ] » -/\ntheorem eq_of_find_entry_some [is_strict_total_order α lt] {k₁ k₂ : α} {v : β} {m : rbmap α β lt} :\n    m.find_entry k₁ = some (k₂, v) → k₁ = k₂ := fun h =>\n  suffices «expr ≈[ ] » k₁ lt k₂ from eq_of_eqv_lt this\n  eqv_of_find_entry_some h\n#align eq_of_find_entry_some eq_of_find_entry_some\n\n",
  "eq_none_of_to_value_eq_none":
- "theorem eq_none_of_to_value_eq_none {e : option (α × β)} : to_value e = none → e = none := by\n  cases e <;> simp [to_value, false_imp_iff]\n#align eq_none_of_to_value_eq_none eq_none_of_to_value_eq_none\n\n",
+ "theorem eq_none_of_to_value_eq_none {e : Option (α × β)} : to_value e = none → e = none := by\n  cases e <;> simp [to_value, false_imp_iff]\n#align eq_none_of_to_value_eq_none eq_none_of_to_value_eq_none\n\n",
  "eq_leaf_of_min_eq_none":
  "theorem eq_leaf_of_min_eq_none {m : rbmap α β lt} : m.min = none → m = mk_rbmap α β lt :=\n  rbtree.eq_leaf_of_min_eq_none\n#align eq_leaf_of_min_eq_none eq_leaf_of_min_eq_none\n\n",
  "eq_leaf_of_max_eq_none":
  "theorem eq_leaf_of_max_eq_none {m : rbmap α β lt} : m.max = none → m = mk_rbmap α β lt :=\n  rbtree.eq_leaf_of_max_eq_none\n#align eq_leaf_of_max_eq_none eq_leaf_of_max_eq_none\n\n",
  "constains_correct":
- "theorem constains_correct [is_strict_weak_order α lt] (k : α) (m : rbmap α β lt) : k ∈ m ↔ m.contains k = tt :=\n  by\n  apply iff.intro\n  · intro h\n    have h := Iff.mp (find_entry_correct k m) h\n    cases' h with e h\n    cases' h with h₁ h₂\n    simp [contains, h₁, option.is_some]\n  · simp [contains]\n    intro h\n    generalize he : find_entry m k = e\n    cases e\n    · simp [he, option.is_some] at h\n      contradiction\n    · exact mem_of_find_entry_some he\n#align constains_correct constains_correct\n\n"}
+ "theorem constains_correct [is_strict_weak_order α lt] (k : α) (m : rbmap α β lt) : k ∈ m ↔ m.contains k = true :=\n  by\n  apply iff.intro\n  · intro h\n    have h := Iff.mp (find_entry_correct k m) h\n    cases' h with e h\n    cases' h with h₁ h₂\n    simp [contains, h₁, option.is_some]\n  · simp [contains]\n    intro h\n    generalize he : find_entry m k = e\n    cases e\n    · simp [he, option.is_some] at h\n      contradiction\n    · exact mem_of_find_entry_some he\n#align constains_correct constains_correct\n\n"}

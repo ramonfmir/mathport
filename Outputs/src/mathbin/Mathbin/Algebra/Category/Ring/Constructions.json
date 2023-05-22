@@ -1,0 +1,8 @@
+{"subsingleton_of_is_terminal":
+ "-- The factor map is a ⊗ b ↦ f(a) * g(b).\ntheorem subsingleton_of_is_terminal {X : CommRing} (hX : IsTerminal X) : subsingleton X :=\n  (hX.unique_up_to_iso punit_is_terminal).CommRing_iso_to_ring_equiv.to_equiv.subsingleton_congr.mpr\n    (show subsingleton PUnit by infer_instance)\n#align subsingleton_of_is_terminal subsingleton_of_is_terminal\n\n",
+ "pushout_cocone_inr":
+ "@[simp]\ntheorem pushout_cocone_inr :\n    (pushout_cocone f g).inr = by\n      letI := f.to_algebra\n      letI := g.to_algebra\n      exact algebra.tensor_product.include_right.to_ring_hom :=\n  rfl\n#align pushout_cocone_inr pushout_cocone_inr\n\n",
+ "pushout_cocone_inl":
+ "/-\nCopyright (c) 2021 Andrew Yang. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Andrew Yang\n-/\n@[simp]\ntheorem pushout_cocone_inl :\n    (pushout_cocone f g).inl = by\n      letI := f.to_algebra\n      letI := g.to_algebra\n      exact algebra.tensor_product.include_left.to_ring_hom :=\n  rfl\n#align pushout_cocone_inl pushout_cocone_inl\n\n",
+ "pushout_cocone_X":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `tensor_product -/\n@[simp]\ntheorem pushout_cocone_X :\n    (pushout_cocone f g).X = by\n      letI := f.to_algebra\n      letI := g.to_algebra\n      exact CommRing.of (tensor_product A R B) :=\n  rfl\n#align pushout_cocone_X pushout_cocone_X\n\n"}

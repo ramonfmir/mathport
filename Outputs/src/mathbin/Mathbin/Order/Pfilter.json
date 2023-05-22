@@ -1,34 +1,34 @@
 {"top_mem":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n/-- A specific witness of `pfilter.nonempty` when `P` has a top element. -/\n@[simp]\ntheorem top_mem : «expr⊤» ∈ F :=\n  ideal.bot_mem _\n#align top_mem top_mem\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n/-- A specific witness of `pfilter.nonempty` when `P` has a top element. -/\n@[simp]\ntheorem top_mem : «expr⊤» ∈ F :=\n  Ideal.bot_mem _\n#align top_mem top_mem\n\n",
  "principal_le_principal_iff":
  "theorem principal_le_principal_iff {p q : P} : principal q ≤ principal p ↔ p ≤ q := by simp\n#align principal_le_principal_iff principal_le_principal_iff\n\n",
  "principal_le_iff":
- "@[simp]\ntheorem principal_le_iff {F : pfilter P} : principal x ≤ F ↔ x ∈ F :=\n  ideal.principal_le_iff\n#align principal_le_iff principal_le_iff\n\n",
+ "@[simp]\ntheorem principal_le_iff {F : PFilter P} : principal x ≤ F ↔ x ∈ F :=\n  Ideal.principal_le_iff\n#align principal_le_iff principal_le_iff\n\n",
  "of_def":
- "/-\nCopyright (c) 2020 Mathieu Guay-Paquet. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Mathieu Guay-Paquet\n-/\ntheorem is_pfilter.of_def [preorder P] {F : set P} (nonempty : F.nonempty) (directed : DirectedOn (· ≥ ·) F)\n    (mem_of_le : ∀ {x y : P}, x ≤ y → x ∈ F → y ∈ F) : is_pfilter F :=\n  ⟨fun _ _ _ _ => mem_of_le ‹_› ‹_›, nonempty, Directed⟩\n#align is_pfilter.of_def is_pfilter.of_def\n\n",
- "nonempty":
- "theorem nonempty : (F : set P).nonempty :=\n  F.dual.nonempty\n#align nonempty nonempty\n\n",
+ "/-\nCopyright (c) 2020 Mathieu Guay-Paquet. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Mathieu Guay-Paquet\n-/\ntheorem is_pfilter.of_def [preorder P] {F : Set P} (nonempty : F.nonempty) (directed : DirectedOn (· ≥ ·) F)\n    (mem_of_le : ∀ {x y : P}, x ≤ y → x ∈ F → y ∈ F) : IsPFilter F :=\n  ⟨fun _ _ _ _ => mem_of_le ‹_› ‹_›, Nonempty, Directed⟩\n#align is_pfilter.of_def is_pfilter.of_def\n\n",
  "mem_principal":
- "@[simp]\ntheorem mem_principal : x ∈ principal y ↔ y ≤ x :=\n  ideal.mem_principal\n#align mem_principal mem_principal\n\n",
+ "@[simp]\ntheorem mem_principal : x ∈ principal y ↔ y ≤ x :=\n  Ideal.mem_principal\n#align mem_principal mem_principal\n\n",
  "mem_of_mem_of_le":
- "@[trans]\ntheorem mem_of_mem_of_le {F G : pfilter P} : x ∈ F → F ≤ G → x ∈ G :=\n  ideal.mem_of_mem_of_le\n#align mem_of_mem_of_le mem_of_mem_of_le\n\n",
+ "@[trans]\ntheorem mem_of_mem_of_le {F G : PFilter P} : x ∈ F → F ≤ G → x ∈ G :=\n  Ideal.mem_of_mem_of_le\n#align mem_of_mem_of_le mem_of_mem_of_le\n\n",
  "mem_of_le":
- "theorem mem_of_le {F : pfilter P} : x ≤ y → x ∈ F → y ∈ F := fun h => F.dual.lower h\n#align mem_of_le mem_of_le\n\n",
+ "theorem mem_of_le {F : PFilter P} : x ≤ y → x ∈ F → y ∈ F := fun h => F.dual.lower h\n#align mem_of_le mem_of_le\n\n",
  "mem_def":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵈ» -/\n@[simp]\ntheorem mem_def (x : P) (I : ideal («expr ᵒᵈ» P)) : x ∈ (⟨I⟩ : pfilter P) ↔ OrderDual.toDual x ∈ I :=\n  iff.rfl\n#align mem_def mem_def\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵈ» -/\n@[simp]\ntheorem mem_def (x : P) (I : Ideal («expr ᵒᵈ» P)) : x ∈ (⟨I⟩ : PFilter P) ↔ OrderDual.toDual x ∈ I :=\n  iff.rfl\n#align mem_def mem_def\n\n",
  "mem_coe":
- "@[simp]\ntheorem mem_coe : x ∈ (F : set P) ↔ x ∈ F :=\n  iff_of_eq rfl\n#align mem_coe mem_coe\n\n",
+ "@[simp]\ntheorem mem_coe : x ∈ (F : Set P) ↔ x ∈ F :=\n  iff_of_eq rfl\n#align mem_coe mem_coe\n\n",
  "is_pfilter":
- "theorem is_pfilter : is_pfilter (F : set P) :=\n  F.dual.is_ideal\n#align is_pfilter is_pfilter\n\n",
+ "theorem is_pfilter : IsPFilter (F : Set P) :=\n  F.dual.is_ideal\n#align is_pfilter is_pfilter\n\n",
  "inf_mem_iff":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊓ » -/\n@[simp]\ntheorem inf_mem_iff : «expr ⊓ » x y ∈ F ↔ x ∈ F ∧ y ∈ F :=\n  ideal.sup_mem_iff\n#align inf_mem_iff inf_mem_iff\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊓ » -/\n@[simp]\ntheorem inf_mem_iff : «expr ⊓ » x y ∈ F ↔ x ∈ F ∧ y ∈ F :=\n  Ideal.sup_mem_iff\n#align inf_mem_iff inf_mem_iff\n\n",
  "inf_mem":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊓ » -/\n/-- A specific witness of `pfilter.directed` when `P` has meets. -/\ntheorem inf_mem (hx : x ∈ F) (hy : y ∈ F) : «expr ⊓ » x y ∈ F :=\n  ideal.sup_mem hx hy\n#align inf_mem inf_mem\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊓ » -/\n/-- A specific witness of `pfilter.directed` when `P` has meets. -/\ntheorem inf_mem (hx : x ∈ F) (hy : y ∈ F) : «expr ⊓ » x y ∈ F :=\n  Ideal.sup_mem hx hy\n#align inf_mem inf_mem\n\n",
  "ext":
- "/-- Two filters are equal when their underlying sets are equal. -/\n@[ext]\ntheorem ext (h : (s : set P) = t) : s = t := by\n  cases s\n  cases t\n  exact congr_arg _ (ideal.ext h)\n#align ext ext\n\n",
+ "/-- Two filters are equal when their underlying sets are equal. -/\n@[ext]\ntheorem ext (h : (s : Set P) = t) : s = t := by\n  cases s\n  cases t\n  exact congr_arg _ (Ideal.ext h)\n#align ext ext\n\n",
  "antitone_principal":
- "-- defeq abuse\ntheorem antitone_principal : antitone (principal : P → pfilter P) := by delta antitone <;> simp\n#align antitone_principal antitone_principal\n\n",
+ "-- defeq abuse\ntheorem antitone_principal : Antitone (principal : P → PFilter P) := by delta Antitone <;> simp\n#align antitone_principal antitone_principal\n\n",
+ "Nonempty":
+ "#print Nonempty /-\ntheorem Nonempty : (F : Set P).nonempty :=\n  F.dual.nonempty\n#align nonempty Nonempty\n-/\n\n",
  "Inf_gc":
- "theorem Inf_gc :\n    GaloisConnection (fun x => OrderDual.toDual (principal x)) fun F => infₛ (OrderDual.ofDual F : pfilter P) :=\n  fun x F => by\n  simp\n  rfl\n#align Inf_gc Inf_gc\n\n",
+ "theorem Inf_gc :\n    GaloisConnection (fun x => OrderDual.toDual (principal x)) fun F => infₛ (OrderDual.ofDual F : PFilter P) :=\n  fun x F => by\n  simp\n  rfl\n#align Inf_gc Inf_gc\n\n",
  "Directed":
- "#print Directed /-\ntheorem Directed : DirectedOn (· ≥ ·) (F : set P) :=\n  F.dual.directed\n#align directed Directed\n-/\n\n"}
+ "#print Directed /-\ntheorem Directed : DirectedOn (· ≥ ·) (F : Set P) :=\n  F.dual.directed\n#align directed Directed\n-/\n\n"}

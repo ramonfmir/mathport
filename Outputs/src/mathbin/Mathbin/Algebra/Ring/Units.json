@@ -1,13 +1,13 @@
 {"sub_iff":
- "#print IsUnit.sub_iff /-\ntheorem IsUnit.sub_iff [Ring α] {x y : α} : is_unit (x - y) ↔ is_unit (y - x) :=\n  (IsUnit.neg_iff _).symm.trans <| neg_sub x y ▸ iff.rfl\n#align is_unit.sub_iff IsUnit.sub_iff\n-/\n\n",
+ "#print IsUnit.sub_iff /-\ntheorem IsUnit.sub_iff [Ring α] {x y : α} : IsUnit (x - y) ↔ IsUnit (y - x) :=\n  (IsUnit.neg_iff _).symm.trans <| neg_sub x y ▸ iff.rfl\n#align is_unit.sub_iff IsUnit.sub_iff\n-/\n\n",
  "sub_divp":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ˣ» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr /ₚ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr /ₚ » -/\n@[field_simps]\ntheorem sub_divp (a b : α) (u : «expr ˣ» α) : a - «expr /ₚ » b u = «expr /ₚ » (a * u - b) u := by\n  simp only [divp, sub_mul, Units.mul_inv_cancel_right]\n#align sub_divp sub_divp\n\n",
  "neg_iff":
- "#print IsUnit.neg_iff /-\n@[simp]\ntheorem IsUnit.neg_iff [monoid α] [HasDistribNeg α] (a : α) : is_unit (-a) ↔ is_unit a :=\n  ⟨fun h => neg_neg a ▸ h.neg, IsUnit.neg⟩\n#align is_unit.neg_iff IsUnit.neg_iff\n-/\n\n",
+ "#print IsUnit.neg_iff /-\n@[simp]\ntheorem IsUnit.neg_iff [Monoid α] [HasDistribNeg α] (a : α) : IsUnit (-a) ↔ IsUnit a :=\n  ⟨fun h => neg_neg a ▸ h.neg, IsUnit.neg⟩\n#align is_unit.neg_iff IsUnit.neg_iff\n-/\n\n",
  "neg_divp":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ˣ» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr /ₚ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr /ₚ » -/\n@[field_simps]\ntheorem neg_divp (a : α) (u : «expr ˣ» α) : -«expr /ₚ » a u = «expr /ₚ » (-a) u := by simp only [divp, neg_mul]\n#align neg_divp neg_divp\n\n",
  "neg":
- "#print IsUnit.neg /-\ntheorem IsUnit.neg [monoid α] [HasDistribNeg α] {a : α} : is_unit a → is_unit (-a)\n  | ⟨x, hx⟩ => hx ▸ (-x).is_unit\n#align is_unit.neg IsUnit.neg\n-/\n\n",
+ "#print IsUnit.neg /-\ntheorem IsUnit.neg [Monoid α] [HasDistribNeg α] {a : α} : IsUnit a → IsUnit (-a)\n  | ⟨x, hx⟩ => hx ▸ (-x).is_unit\n#align is_unit.neg IsUnit.neg\n-/\n\n",
  "divp_sub_divp_same":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ˣ» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr /ₚ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr /ₚ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr /ₚ » -/\n@[field_simps]\ntheorem divp_sub_divp_same (a b : α) (u : «expr ˣ» α) : «expr /ₚ » a u - «expr /ₚ » b u = «expr /ₚ » (a - b) u := by\n  rw [sub_eq_add_neg, sub_eq_add_neg, neg_divp, divp_add_divp_same]\n#align divp_sub_divp_same divp_sub_divp_same\n\n",
  "divp_sub_divp":

@@ -1,33 +1,37 @@
-{"mono_comp":
+{"monotone":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\n#print ScottContinuous.monotone /-\n-- see Note [lower instance priority]\n-- see Note [lower instance priority]\n-- see Note [lower instance priority]\n-- see Note [lower instance priority]\nprotected theorem ScottContinuous.monotone [preorder β] {f : α → β} (h : ScottContinuous f) : Monotone f :=\n  by\n  intro a b hab\n  have e1 : IsLUB («expr '' » f {a, b}) (f b) := by\n    apply h\n    · exact Set.insert_nonempty _ _\n    · exact directedOn_pair le_refl hab\n    · rw [IsLUB, upperBounds_insert, upperBounds_singleton,\n        Set.inter_eq_self_of_subset_right (set.Ici_subset_Ici.mpr hab)]\n      exact isLeast_Ici\n  apply e1.1\n  rw [Set.image_pair]\n  exact Set.mem_insert _ _\n#align scott_continuous.monotone ScottContinuous.monotone\n-/\n\n",
+ "mono_comp":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≼ » -/\n#print Directed.mono_comp /-\ntheorem Directed.mono_comp {ι} {rb : β → β → Prop} {g : α → β} {f : ι → α}\n    (hg : ∀ ⦃x y⦄, «expr ≼ » x y → rb (g x) (g y)) (hf : Directed r f) : Directed rb (g ∘ f) :=\n  directed_comp.2 <| hf.mono hg\n#align directed.mono_comp Directed.mono_comp\n-/\n\n",
  "mono'":
- "#print DirectedOn.mono' /-\ntheorem DirectedOn.mono' {s : set α} (hs : DirectedOn r s) (h : ∀ ⦃a⦄, a ∈ s → ∀ ⦃b⦄, b ∈ s → r a b → r' a b) :\n    DirectedOn r' s := fun x hx y hy =>\n  let ⟨z, hz, hxz, hyz⟩ := hs _ hx _ hy\n  ⟨z, hz, h hx hz hxz, h hy hz hyz⟩\n#align directed_on.mono' DirectedOn.mono'\n-/\n\n",
+ "#print DirectedOn.mono' /-\ntheorem DirectedOn.mono' {s : Set α} (hs : DirectedOn r s) (h : ∀ ⦃a⦄, a ∈ s → ∀ ⦃b⦄, b ∈ s → r a b → r' a b) :\n    DirectedOn r' s := fun x hx y hy =>\n  let ⟨z, hz, hxz, hyz⟩ := hs _ hx _ hy\n  ⟨z, hz, h hx hz hxz, h hy hz hyz⟩\n#align directed_on.mono' DirectedOn.mono'\n-/\n\n",
  "mono":
  "#print Directed.mono /-\ntheorem Directed.mono {s : α → α → Prop} {ι} {f : ι → α} (H : ∀ a b, r a b → s a b) (h : Directed r f) : Directed s f :=\n  fun a b =>\n  let ⟨c, h₁, h₂⟩ := h a b\n  ⟨c, H _ _ h₁, H _ _ h₂⟩\n#align directed.mono Directed.mono\n-/\n\n",
  "is_top_of_is_max":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵈ» -/\n#print DirectedOn.is_top_of_is_max /-\ntheorem DirectedOn.is_top_of_is_max {s : set α} (hd : DirectedOn (· ≤ ·) s) {m} (hm : m ∈ s)\n    (hmax : ∀ a ∈ s, m ≤ a → a ≤ m) : ∀ a ∈ s, a ≤ m :=\n  @DirectedOn.is_bot_of_is_min («expr ᵒᵈ» α) _ s hd m hm hmax\n#align directed_on.is_top_of_is_max DirectedOn.is_top_of_is_max\n-/\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵈ» -/\n#print DirectedOn.is_top_of_is_max /-\ntheorem DirectedOn.is_top_of_is_max {s : Set α} (hd : DirectedOn (· ≤ ·) s) {m} (hm : m ∈ s)\n    (hmax : ∀ a ∈ s, m ≤ a → a ≤ m) : ∀ a ∈ s, a ≤ m :=\n  @DirectedOn.is_bot_of_is_min («expr ᵒᵈ» α) _ s hd m hm hmax\n#align directed_on.is_top_of_is_max DirectedOn.is_top_of_is_max\n-/\n\n",
  "is_bot_of_is_min":
- "#print DirectedOn.is_bot_of_is_min /-\ntheorem DirectedOn.is_bot_of_is_min {s : set α} (hd : DirectedOn (· ≥ ·) s) {m} (hm : m ∈ s)\n    (hmin : ∀ a ∈ s, a ≤ m → m ≤ a) : ∀ a ∈ s, m ≤ a := fun a as =>\n  let ⟨x, xs, xm, xa⟩ := hd m hm a as\n  (hmin x xs xm).trans xa\n#align directed_on.is_bot_of_is_min DirectedOn.is_bot_of_is_min\n-/\n\n",
+ "#print DirectedOn.is_bot_of_is_min /-\ntheorem DirectedOn.is_bot_of_is_min {s : Set α} (hd : DirectedOn (· ≥ ·) s) {m} (hm : m ∈ s)\n    (hmin : ∀ a ∈ s, a ≤ m → m ≤ a) : ∀ a ∈ s, m ≤ a := fun a as =>\n  let ⟨x, xs, xm, xa⟩ := hd m hm a as\n  (hmin x xs xm).trans xa\n#align directed_on.is_bot_of_is_min DirectedOn.is_bot_of_is_min\n-/\n\n",
  "isTop_or_exists_gt":
- "#print isTop_or_exists_gt /-\ntheorem isTop_or_exists_gt [IsDirected α (· ≤ ·)] (a : α) : is_top a ∨ ∃ b, a < b :=\n  (em (is_max a)).imp IsMax.isTop not_isMax_iff.mp\n#align is_top_or_exists_gt isTop_or_exists_gt\n-/\n\n",
+ "#print isTop_or_exists_gt /-\ntheorem isTop_or_exists_gt [IsDirected α (· ≤ ·)] (a : α) : IsTop a ∨ ∃ b, a < b :=\n  (em (IsMax a)).imp IsMax.isTop not_isMax_iff.mp\n#align is_top_or_exists_gt isTop_or_exists_gt\n-/\n\n",
  "isTop_iff_isMax":
- "#print isTop_iff_isMax /-\ntheorem isTop_iff_isMax [IsDirected α (· ≤ ·)] : is_top a ↔ is_max a :=\n  ⟨IsTop.isMax, IsMax.isTop⟩\n#align is_top_iff_is_max isTop_iff_isMax\n-/\n\n",
+ "#print isTop_iff_isMax /-\ntheorem isTop_iff_isMax [IsDirected α (· ≤ ·)] : IsTop a ↔ IsMax a :=\n  ⟨IsTop.isMax, IsMax.isTop⟩\n#align is_top_iff_is_max isTop_iff_isMax\n-/\n\n",
  "isTop":
- "#print IsMax.isTop /-\nprotected theorem IsMax.isTop [IsDirected α (· ≤ ·)] (h : is_max a) : is_top a :=\n  h.to_dual.is_bot\n#align is_max.is_top IsMax.isTop\n-/\n\n",
+ "#print IsMax.isTop /-\nprotected theorem IsMax.isTop [IsDirected α (· ≤ ·)] (h : IsMax a) : IsTop a :=\n  h.to_dual.is_bot\n#align is_max.is_top IsMax.isTop\n-/\n\n",
  "isDirected_mono":
  "#print isDirected_mono /-\n-- see Note [lower instance priority]\ntheorem isDirected_mono [IsDirected α r] (h : ∀ ⦃a b⦄, r a b → s a b) : IsDirected α s :=\n  ⟨fun a b =>\n    let ⟨c, ha, hb⟩ := IsDirected.directed a b\n    ⟨c, h ha, h hb⟩⟩\n#align is_directed_mono isDirected_mono\n-/\n\n",
  "isBot_or_exists_lt":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵈ» -/\n#print isBot_or_exists_lt /-\ntheorem isBot_or_exists_lt [IsDirected α (· ≥ ·)] (a : α) : is_bot a ∨ ∃ b, b < a :=\n  @isTop_or_exists_gt («expr ᵒᵈ» α) _ _ a\n#align is_bot_or_exists_lt isBot_or_exists_lt\n-/\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵈ» -/\n#print isBot_or_exists_lt /-\ntheorem isBot_or_exists_lt [IsDirected α (· ≥ ·)] (a : α) : IsBot a ∨ ∃ b, b < a :=\n  @isTop_or_exists_gt («expr ᵒᵈ» α) _ _ a\n#align is_bot_or_exists_lt isBot_or_exists_lt\n-/\n\n",
  "isBot_iff_isMin":
- "#print isBot_iff_isMin /-\ntheorem isBot_iff_isMin [IsDirected α (· ≥ ·)] : is_bot a ↔ is_min a :=\n  ⟨IsBot.isMin, IsMin.isBot⟩\n#align is_bot_iff_is_min isBot_iff_isMin\n-/\n\n",
+ "#print isBot_iff_isMin /-\ntheorem isBot_iff_isMin [IsDirected α (· ≥ ·)] : IsBot a ↔ IsMin a :=\n  ⟨IsBot.isMin, IsMin.isBot⟩\n#align is_bot_iff_is_min isBot_iff_isMin\n-/\n\n",
  "isBot":
- "#print IsMin.isBot /-\nprotected theorem IsMin.isBot [IsDirected α (· ≥ ·)] (h : is_min a) : is_bot a := fun b =>\n  let ⟨c, hca, hcb⟩ := exists_le_le a b\n  (h hca).trans hcb\n#align is_min.is_bot IsMin.isBot\n-/\n\n",
+ "#print IsMin.isBot /-\nprotected theorem IsMin.isBot [IsDirected α (· ≥ ·)] (h : IsMin a) : IsBot a := fun b =>\n  let ⟨c, hca, hcb⟩ := exists_le_le a b\n  (h hca).trans hcb\n#align is_min.is_bot IsMin.isBot\n-/\n\n",
+ "insert":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≼ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≼ » -/\n#print DirectedOn.insert /-\ntheorem DirectedOn.insert (h : reflexive r) (a : α) {s : Set α} (hd : DirectedOn r s)\n    (ha : ∀ b ∈ s, ∃ c ∈ s, «expr ≼ » a c ∧ «expr ≼ » b c) : DirectedOn r (insert a s) :=\n  by\n  rintro x (rfl | hx) y (rfl | hy)\n  · exact ⟨y, Set.mem_insert _ _, h _, h _⟩\n  · obtain ⟨w, hws, hwr⟩ := ha y hy\n    exact ⟨w, Set.mem_insert_of_mem _ hws, hwr⟩\n  · obtain ⟨w, hws, hwr⟩ := ha x hx\n    exact ⟨w, Set.mem_insert_of_mem _ hws, hwr.symm⟩\n  · obtain ⟨w, hws, hwr⟩ := hd x hx y hy\n    exact ⟨w, Set.mem_insert_of_mem _ hws, hwr⟩\n#align directed_on.insert DirectedOn.insert\n-/\n\n",
  "extend_bot":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n#print Directed.extend_bot /-\ntheorem Directed.extend_bot [preorder α] [OrderBot α] {e : ι → β} {f : ι → α} (hf : Directed (· ≤ ·) f)\n    (he : function.injective e) : Directed (· ≤ ·) (function.extend e f («expr⊥»)) :=\n  by\n  intro a b\n  rcases(em (∃ i, e i = a)).symm with (ha | ⟨i, rfl⟩)\n  · use b\n    simp [function.extend_apply' _ _ _ ha]\n  rcases(em (∃ i, e i = b)).symm with (hb | ⟨j, rfl⟩)\n  · use e i\n    simp [function.extend_apply' _ _ _ hb]\n  rcases hf i j with ⟨k, hi, hj⟩\n  use e k\n  simp only [he.extend_apply, *, true_and_iff]\n#align directed.extend_bot Directed.extend_bot\n-/\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n#print Directed.extend_bot /-\ntheorem Directed.extend_bot [preorder α] [OrderBot α] {e : ι → β} {f : ι → α} (hf : Directed (· ≤ ·) f)\n    (he : function.injective e) : Directed (· ≤ ·) (Function.extend e f («expr⊥»)) :=\n  by\n  intro a b\n  rcases(em (∃ i, e i = a)).symm with (ha | ⟨i, rfl⟩)\n  · use b\n    simp [Function.extend_apply' _ _ _ ha]\n  rcases(em (∃ i, e i = b)).symm with (hb | ⟨j, rfl⟩)\n  · use e i\n    simp [Function.extend_apply' _ _ _ hb]\n  rcases hf i j with ⟨k, hi, hj⟩\n  use e k\n  simp only [he.extend_apply, *, true_and_iff]\n#align directed.extend_bot Directed.extend_bot\n-/\n\n",
  "exists_lt_of_directed_le":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵈ» -/\n#print exists_lt_of_directed_le /-\ntheorem exists_lt_of_directed_le [IsDirected β (· ≤ ·)] [nontrivial β] : ∃ a b : β, a < b :=\n  let ⟨a, b, h⟩ := exists_lt_of_directed_ge («expr ᵒᵈ» β)\n  ⟨b, a, h⟩\n#align exists_lt_of_directed_le exists_lt_of_directed_le\n-/\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵈ» -/\n#print exists_lt_of_directed_le /-\ntheorem exists_lt_of_directed_le [IsDirected β (· ≤ ·)] [Nontrivial β] : ∃ a b : β, a < b :=\n  let ⟨a, b, h⟩ := exists_lt_of_directed_ge («expr ᵒᵈ» β)\n  ⟨b, a, h⟩\n#align exists_lt_of_directed_le exists_lt_of_directed_le\n-/\n\n",
  "exists_lt_of_directed_ge":
- "#print exists_lt_of_directed_ge /-\ntheorem exists_lt_of_directed_ge [IsDirected β (· ≥ ·)] [nontrivial β] : ∃ a b : β, a < b :=\n  by\n  rcases exists_pair_ne β with ⟨a, b, hne⟩\n  rcases isBot_or_exists_lt a with (ha | ⟨c, hc⟩)\n  exacts[⟨a, b, (ha b).lt_of_ne hne⟩, ⟨_, _, hc⟩]\n#align exists_lt_of_directed_ge exists_lt_of_directed_ge\n-/\n\n",
+ "#print exists_lt_of_directed_ge /-\ntheorem exists_lt_of_directed_ge [IsDirected β (· ≥ ·)] [Nontrivial β] : ∃ a b : β, a < b :=\n  by\n  rcases exists_pair_ne β with ⟨a, b, hne⟩\n  rcases isBot_or_exists_lt a with (ha | ⟨c, hc⟩)\n  exacts[⟨a, b, (ha b).lt_of_ne hne⟩, ⟨_, _, hc⟩]\n#align exists_lt_of_directed_ge exists_lt_of_directed_ge\n-/\n\n",
  "exists_le_le":
  "#print exists_le_le /-\ntheorem exists_le_le [LE α] [IsDirected α (· ≥ ·)] (a b : α) : ∃ c, c ≤ a ∧ c ≤ b :=\n  directed_of (· ≥ ·) a b\n#align exists_le_le exists_le_le\n-/\n\n",
  "exists_ge_ge":
@@ -39,25 +43,31 @@
  "directed_of":
  "#print directed_of /-\ntheorem directed_of (r : α → α → Prop) [IsDirected α r] (a b : α) : ∃ c, r a c ∧ r b c :=\n  IsDirected.directed _ _\n#align directed_of directed_of\n-/\n\n",
  "directed_le":
- "#print Antitone.directed_le /-\ntheorem Antitone.directed_le [SemilatticeInf α] [preorder β] {f : α → β} (hf : antitone f) : Directed (· ≤ ·) f :=\n  directed_of_inf hf\n#align antitone.directed_le Antitone.directed_le\n-/\n\n",
+ "#print Antitone.directed_le /-\ntheorem Antitone.directed_le [SemilatticeInf α] [preorder β] {f : α → β} (hf : Antitone f) : Directed (· ≤ ·) f :=\n  directed_of_inf hf\n#align antitone.directed_le Antitone.directed_le\n-/\n\n",
  "directed_id_iff":
  "#print directed_id_iff /-\ntheorem directed_id_iff : Directed r id ↔ IsDirected α r :=\n  ⟨fun h => ⟨h⟩, @directed_id _ _⟩\n#align directed_id_iff directed_id_iff\n-/\n\n",
  "directed_id":
  "#print directed_id /-\ntheorem directed_id [IsDirected α r] : Directed r id := by convert directed_of r\n#align directed_id directed_id\n-/\n\n",
  "directed_ge":
- "#print Monotone.directed_ge /-\ntheorem Monotone.directed_ge [SemilatticeInf α] [preorder β] {f : α → β} (hf : monotone f) : Directed (· ≥ ·) f :=\n  directed_of_inf hf\n#align monotone.directed_ge Monotone.directed_ge\n-/\n\n",
+ "#print Monotone.directed_ge /-\ntheorem Monotone.directed_ge [SemilatticeInf α] [preorder β] {f : α → β} (hf : Monotone f) : Directed (· ≥ ·) f :=\n  directed_of_inf hf\n#align monotone.directed_ge Monotone.directed_ge\n-/\n\n",
  "directed_comp":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹'o » -/\n#print directed_comp /-\ntheorem directed_comp {ι} {f : ι → β} {g : β → α} : Directed r (g ∘ f) ↔ Directed («expr ⁻¹'o » g r) f :=\n  iff.rfl\n#align directed_comp directed_comp\n-/\n\n",
  "directedOn_univ_iff":
  "#print directedOn_univ_iff /-\ntheorem directedOn_univ_iff : DirectedOn r Set.univ ↔ IsDirected α r :=\n  ⟨fun h =>\n    ⟨fun a b =>\n      let ⟨c, _, hc⟩ := h a trivial b trivial\n      ⟨c, hc⟩⟩,\n    @directedOn_univ _ _⟩\n#align directed_on_univ_iff directedOn_univ_iff\n-/\n\n",
  "directedOn_univ":
  "#print directedOn_univ /-\ntheorem directedOn_univ [IsDirected α r] : DirectedOn r Set.univ := fun a _ b _ =>\n  let ⟨c, hc⟩ := directed_of r a b\n  ⟨c, trivial, hc⟩\n#align directed_on_univ directedOn_univ\n-/\n\n",
+ "directedOn_singleton":
+ "#print directedOn_singleton /-\ntheorem directedOn_singleton (h : reflexive r) (a : α) : DirectedOn r ({a} : Set α) := fun x hx y hy =>\n  ⟨x, hx, h _, hx.symm ▸ hy.symm ▸ h _⟩\n#align directed_on_singleton directedOn_singleton\n-/\n\n",
  "directedOn_range":
- "#print directedOn_range /-\ntheorem directedOn_range {f : β → α} : Directed r f ↔ DirectedOn r (Set.range f) := by\n  simp_rw [Directed, DirectedOn, Set.forall_range_iff, Set.exists_range_iff]\n#align directed_on_range directedOn_range\n-/\n\n",
+ "#print directedOn_range /-\ntheorem directedOn_range {f : ι → α} : Directed r f ↔ DirectedOn r (Set.range f) := by\n  simp_rw [Directed, DirectedOn, Set.forall_range_iff, Set.exists_range_iff]\n#align directed_on_range directedOn_range\n-/\n\n",
+ "directedOn_pair'":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≼ » -/\n#print directedOn_pair' /-\ntheorem directedOn_pair' (h : reflexive r) {a b : α} (hab : «expr ≼ » a b) : DirectedOn r ({b, a} : Set α) :=\n  by\n  rw [Set.pair_comm]\n  apply directedOn_pair h hab\n#align directed_on_pair' directedOn_pair'\n-/\n\n",
+ "directedOn_pair":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≼ » -/\n#print directedOn_pair /-\ntheorem directedOn_pair (h : reflexive r) {a b : α} (hab : «expr ≼ » a b) : DirectedOn r ({a, b} : Set α) :=\n  (directedOn_singleton h _).insert h _ fun c hc => ⟨c, hc, hc.symm ▸ hab, h _⟩\n#align directed_on_pair directedOn_pair\n-/\n\n",
  "directedOn_of_sup_mem":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊔ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊔ » -/\n#print directedOn_of_sup_mem /-\n/-- A set stable by supremum is `≤`-directed. -/\ntheorem directedOn_of_sup_mem [SemilatticeSup α] {S : set α} (H : ∀ ⦃i j⦄, i ∈ S → j ∈ S → «expr ⊔ » i j ∈ S) :\n    DirectedOn (· ≤ ·) S := fun a ha b hb => ⟨«expr ⊔ » a b, H ha hb, le_sup_left, le_sup_right⟩\n#align directed_on_of_sup_mem directedOn_of_sup_mem\n-/\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊔ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊔ » -/\n#print directedOn_of_sup_mem /-\n/-- A set stable by supremum is `≤`-directed. -/\ntheorem directedOn_of_sup_mem [SemilatticeSup α] {S : Set α} (H : ∀ ⦃i j⦄, i ∈ S → j ∈ S → «expr ⊔ » i j ∈ S) :\n    DirectedOn (· ≤ ·) S := fun a ha b hb => ⟨«expr ⊔ » a b, H ha hb, le_sup_left, le_sup_right⟩\n#align directed_on_of_sup_mem directedOn_of_sup_mem\n-/\n\n",
  "directedOn_of_inf_mem":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊓ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊓ » -/\n#print directedOn_of_inf_mem /-\n/-- A set stable by infimum is `≥`-directed. -/\ntheorem directedOn_of_inf_mem [SemilatticeInf α] {S : set α} (H : ∀ ⦃i j⦄, i ∈ S → j ∈ S → «expr ⊓ » i j ∈ S) :\n    DirectedOn (· ≥ ·) S := fun a ha b hb => ⟨«expr ⊓ » a b, H ha hb, inf_le_left, inf_le_right⟩\n#align directed_on_of_inf_mem directedOn_of_inf_mem\n-/\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊓ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊓ » -/\n#print directedOn_of_inf_mem /-\n/-- A set stable by infimum is `≥`-directed. -/\ntheorem directedOn_of_inf_mem [SemilatticeInf α] {S : Set α} (H : ∀ ⦃i j⦄, i ∈ S → j ∈ S → «expr ⊓ » i j ∈ S) :\n    DirectedOn (· ≥ ·) S := fun a ha b hb => ⟨«expr ⊓ » a b, H ha hb, inf_le_left, inf_le_right⟩\n#align directed_on_of_inf_mem directedOn_of_inf_mem\n-/\n\n",
  "directedOn_image":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹'o » -/\n#print directedOn_image /-\ntheorem directedOn_image {s} {f : β → α} : DirectedOn r («expr '' » f s) ↔ DirectedOn («expr ⁻¹'o » f r) s := by\n  simp only [DirectedOn, Set.ball_image_iff, Set.bex_image_iff, Order.Preimage]\n#align directed_on_image directedOn_image\n-/\n\n",
  "directedOn_iff_directed":

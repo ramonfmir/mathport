@@ -3,7 +3,7 @@
  "refl":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ~ » -/\nprivate theorem rel.refl : ∀ q : quotient s, «expr ~ » q q := fun q => Quot.inductionOn q fun a => setoid.refl a\n#align rel.refl rel.refl\n\n",
  "lift_indep_pr1":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⟦ ⟧» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⟦ ⟧» -/\nprotected theorem lift_indep_pr1 (f : ∀ a, β («expr⟦ ⟧» a))\n    (h : ∀ (a b : α) (p : r a b), (eq.rec (f a) (sound p) : β («expr⟦ ⟧» b)) = f b) (q : Quot r) :\n    (lift (quot.indep f) (quot.indep_coherent f h) q).1 = q :=\n  Quot.ind (fun a : α => eq.refl (quot.indep f a).1) q\n#align lift_indep_pr1 lift_indep_pr1\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⟦ ⟧» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⟦ ⟧» -/\nprotected theorem lift_indep_pr1 (f : ∀ a, β («expr⟦ ⟧» a))\n    (h : ∀ (a b : α) (p : r a b), (eq.rec (f a) (sound p) : β («expr⟦ ⟧» b)) = f b) (q : Quot r) :\n    (lift (quot.indep f) (quot.indep_coherent f h) q).1 = q :=\n  Quot.ind (fun a : α => Eq.refl (quot.indep f a).1) q\n#align lift_indep_pr1 lift_indep_pr1\n\n",
  "lift_beta":
  "protected theorem lift_beta {α : Sort u} {r : α → α → Prop} {β : Sort v} (f : α → β) (c : ∀ a b, r a b → f a = f b)\n    (a : α) : lift f c (Quot.mk r a) = f a :=\n  rfl\n#align lift_beta lift_beta\n\n",
  "is_equivalence":
@@ -23,12 +23,12 @@
  "ind":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⟦ ⟧» -/\n@[elab_as_elim]\nprotected theorem ind {α : Sort u} [s : setoid α] {β : quotient s → Prop} : (∀ a, β («expr⟦ ⟧» a)) → ∀ q, β q :=\n  Quot.ind\n#align ind ind\n\n",
  "iff_subst":
- "/-\nCopyright (c) 2015 Microsoft Corporation. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthor: Leonardo de Moura\n\nQuotient types.\n-/\n-- We import propext here, otherwise we would need a quot.lift for propositions. \n-- iff can now be used to do substitutions in a calculation\n@[subst]\ntheorem iff_subst {a b : Prop} {p : Prop → Prop} (h₁ : a ↔ b) (h₂ : p a) : p b :=\n  eq.subst (propext h₁) h₂\n#align iff_subst iff_subst\n\n",
+ "/-\nCopyright (c) 2015 Microsoft Corporation. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthor: Leonardo de Moura\n\nQuotient types.\n-/\n-- We import propext here, otherwise we would need a quot.lift for propositions. \n-- iff can now be used to do substitutions in a calculation\n@[subst]\ntheorem iff_subst {a b : Prop} {p : Prop → Prop} (h₁ : a ↔ b) (h₂ : p a) : p b :=\n  Eq.subst (propext h₁) h₂\n#align iff_subst iff_subst\n\n",
  "exists_rep":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⟦ ⟧» -/\ntheorem exists_rep {α : Sort u} [s : setoid α] (q : quotient s) : ∃ a : α, «expr⟦ ⟧» a = q :=\n  quot.exists_rep q\n#align exists_rep exists_rep\n\n",
  "exact":
- "#print Quot.exact /-\ntheorem Quot.exact {a b : α} (H : Quot.mk r a = Quot.mk r b) : EqvGen r a b :=\n  @quotient.exact _ (EqvGen.Setoid r) a b\n    (@congr_arg _ _ _ _ (Quot.lift (@Quotient.mk'' _ (EqvGen.Setoid r)) fun x y h => quot.sound (eqv_gen.rel x y h)) H)\n#align quot.exact Quot.exact\n-/\n\n",
+ "#print Quot.exact /-\ntheorem Quot.exact {a b : α} (H : Quot.mk r a = Quot.mk r b) : EqvGen r a b :=\n  @quotient.exact _ (EqvGen.Setoid r) a b\n    (@congr_arg _ _ _ _ (Quot.lift (@Quotient.mk' _ (EqvGen.Setoid r)) fun x y h => quot.sound (eqv_gen.rel x y h)) H)\n#align quot.exact Quot.exact\n-/\n\n",
  "eq_imp_rel":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ~ » -/\nprivate theorem eq_imp_rel {q₁ q₂ : quotient s} : q₁ = q₂ → «expr ~ » q₁ q₂ := fun h => eq.rec_on h (rel.refl q₁)\n#align eq_imp_rel eq_imp_rel\n\n",
  "EqvGen_sound":
- "#print Quot.EqvGen_sound /-\ntheorem Quot.EqvGen_sound {r : α → α → Prop} {a b : α} (H : EqvGen r a b) : Quot.mk r a = Quot.mk r b :=\n  eqv_gen.rec_on H (fun x y h => quot.sound h) (fun x => rfl) (fun x y _ IH => eq.symm IH) fun x y z _ _ IH₁ IH₂ =>\n    eq.trans IH₁ IH₂\n#align quot.eqv_gen_sound Quot.EqvGen_sound\n-/\n\n"}
+ "#print Quot.EqvGen_sound /-\ntheorem Quot.EqvGen_sound {r : α → α → Prop} {a b : α} (H : EqvGen r a b) : Quot.mk r a = Quot.mk r b :=\n  eqv_gen.rec_on H (fun x y h => quot.sound h) (fun x => rfl) (fun x y _ IH => Eq.symm IH) fun x y z _ _ IH₁ IH₂ =>\n    Eq.trans IH₁ IH₂\n#align quot.eqv_gen_sound Quot.EqvGen_sound\n-/\n\n"}

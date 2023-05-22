@@ -1,9 +1,9 @@
-{"well_founded_lt_dual_iff":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵈ» -/\ntheorem well_founded_lt_dual_iff (α : Type _) [LT α] : well_founded_lt («expr ᵒᵈ» α) ↔ well_founded_gt α :=\n  ⟨fun h => ⟨h.wf⟩, fun h => ⟨h.wf⟩⟩\n#align well_founded_lt_dual_iff well_founded_lt_dual_iff\n\n",
- "well_founded_gt_dual_iff":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵈ» -/\n-- see Note [lower instance priority]\n-- see Note [lower instance priority]\n-- See note [lower instance priority]\n-- See note [lower instance priority]\ntheorem well_founded_gt_dual_iff (α : Type _) [LT α] : well_founded_gt («expr ᵒᵈ» α) ↔ well_founded_lt α :=\n  ⟨fun h => ⟨h.wf⟩, fun h => ⟨h.wf⟩⟩\n#align well_founded_gt_dual_iff well_founded_gt_dual_iff\n\n",
+{"wellFoundedLT_dual_iff":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵈ» -/\n#print wellFoundedLT_dual_iff /-\ntheorem wellFoundedLT_dual_iff (α : Type _) [LT α] : WellFoundedLT («expr ᵒᵈ» α) ↔ WellFoundedGT α :=\n  ⟨fun h => ⟨h.wf⟩, fun h => ⟨h.wf⟩⟩\n#align well_founded_lt_dual_iff wellFoundedLT_dual_iff\n-/\n\n",
+ "wellFoundedGT_dual_iff":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵈ» -/\n#print wellFoundedGT_dual_iff /-\n-- see Note [lower instance priority]\n-- see Note [lower instance priority]\n-- See note [lower instance priority]\n-- See note [lower instance priority]\ntheorem wellFoundedGT_dual_iff (α : Type _) [LT α] : WellFoundedGT («expr ᵒᵈ» α) ↔ WellFoundedLT α :=\n  ⟨fun h => ⟨h.wf⟩, fun h => ⟨h.wf⟩⟩\n#align well_founded_gt_dual_iff wellFoundedGT_dual_iff\n-/\n\n",
  "unbounded_of_is_empty":
- "theorem unbounded_of_is_empty [is_empty α] {r : α → α → Prop} (s : set α) : unbounded r s :=\n  is_empty_elim\n#align unbounded_of_is_empty unbounded_of_is_empty\n\n",
+ "theorem unbounded_of_is_empty [IsEmpty α] {r : α → α → Prop} (s : Set α) : Unbounded r s :=\n  isEmptyElim\n#align unbounded_of_is_empty unbounded_of_is_empty\n\n",
  "transitive_of_trans":
  "#print transitive_of_trans /-\ntheorem transitive_of_trans (r : α → α → Prop) [is_trans α r] : transitive r := fun _ _ _ => trans\n#align transitive_of_trans transitive_of_trans\n-/\n\n",
  "transitive_lt":
@@ -19,7 +19,7 @@
  "trans_trichotomous_left":
  "#print trans_trichotomous_left /-\ntheorem trans_trichotomous_left [is_trans α r] [is_trichotomous α r] {a b c : α} : ¬r b a → r b c → r a c :=\n  by\n  intro h₁ h₂; rcases trichotomous_of r a b with (h₃ | h₃ | h₃)\n  exact trans h₃ h₂; rw [h₃]; exact h₂; exfalso; exact h₁ h₃\n#align trans_trichotomous_left trans_trichotomous_left\n-/\n\n",
  "swap":
- "theorem is_strict_total_order.swap (r) [is_strict_total_order α r] : is_strict_total_order α (swap r) :=\n  { is_trichotomous.swap r, is_strict_order.swap r with }\n#align is_strict_total_order.swap is_strict_total_order.swap\n\n",
+ "#print IsStrictTotalOrder.swap /-\ntheorem IsStrictTotalOrder.swap (r) [is_strict_total_order α r] : is_strict_total_order α (swap r) :=\n  { IsTrichotomous.swap r, IsStrictOrder.swap r with }\n#align is_strict_total_order.swap IsStrictTotalOrder.swap\n-/\n\n",
  "superset_of_eq":
  "#print superset_of_eq /-\ntheorem superset_of_eq [is_refl α (· ⊆ ·)] : a = b → b ⊆ a := fun h => h ▸ subset_rfl\n#align superset_of_eq superset_of_eq\n-/\n\n",
  "superset_antisymm_iff":
@@ -75,15 +75,15 @@
  "ssubset_asymm":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:219:4: warning: unsupported binary notation `«expr ⊂ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊂ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊂ » -/\n#print ssubset_asymm /-\ntheorem ssubset_asymm [is_asymm α («expr ⊂ » · ·)] {a b : α} (h : «expr ⊂ » a b) : ¬«expr ⊂ » b a :=\n  asymm h\n#align ssubset_asymm ssubset_asymm\n-/\n\n",
  "right_iff_left_not_left_of":
- "#print right_iff_left_not_left_of /-\n/-- A version of `right_iff_left_not_left` with explicit `r` and `s`. -/\ntheorem right_iff_left_not_left_of (r s : α → α → Prop) [is_nonstrict_strict_order α r s] {a b : α} :\n    s a b ↔ r a b ∧ ¬r b a :=\n  right_iff_left_not_left\n#align right_iff_left_not_left_of right_iff_left_not_left_of\n-/\n\n",
+ "#print right_iff_left_not_left_of /-\n/-- A version of `right_iff_left_not_left` with explicit `r` and `s`. -/\ntheorem right_iff_left_not_left_of (r s : α → α → Prop) [IsNonstrictStrictOrder α r s] {a b : α} :\n    s a b ↔ r a b ∧ ¬r b a :=\n  right_iff_left_not_left\n#align right_iff_left_not_left_of right_iff_left_not_left_of\n-/\n\n",
  "right_iff_left_not_left":
- "#print right_iff_left_not_left /-\ntheorem right_iff_left_not_left {r s : α → α → Prop} [is_nonstrict_strict_order α r s] {a b : α} :\n    s a b ↔ r a b ∧ ¬r b a :=\n  is_nonstrict_strict_order.right_iff_left_not_left _ _\n#align right_iff_left_not_left right_iff_left_not_left\n-/\n\n",
+ "#print right_iff_left_not_left /-\ntheorem right_iff_left_not_left {r s : α → α → Prop} [IsNonstrictStrictOrder α r s] {a b : α} :\n    s a b ↔ r a b ∧ ¬r b a :=\n  is_nonstrict_strict_order.right_iff_left_not_left _ _\n#align right_iff_left_not_left right_iff_left_not_left\n-/\n\n",
  "rel_of_subsingleton":
  "#print rel_of_subsingleton /-\ntheorem rel_of_subsingleton (r) [is_refl α r] [subsingleton α] (x y) : r x y :=\n  subsingleton.elim x y ▸ refl x\n#align rel_of_subsingleton rel_of_subsingleton\n-/\n\n",
  "of_eq":
  "#print of_eq /-\n/-\nCopyright (c) 2020 Jeremy Avigad. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Jeremy Avigad, Mario Carneiro, Yury G. Kudryashov\n-/\ntheorem of_eq [is_refl α r] : ∀ {a b}, a = b → r a b\n  | _, _, ⟨h⟩ => refl _\n#align of_eq of_eq\n-/\n\n",
  "not_unbounded_iff":
- "@[simp]\ntheorem not_unbounded_iff {r : α → α → Prop} (s : set α) : ¬unbounded r s ↔ bounded r s := by\n  rw [not_iff_comm, not_bounded_iff]\n#align not_unbounded_iff not_unbounded_iff\n\n",
+ "@[simp]\ntheorem not_unbounded_iff {r : α → α → Prop} (s : Set α) : ¬Unbounded r s ↔ Bounded r s := by\n  rw [not_iff_comm, not_bounded_iff]\n#align not_unbounded_iff not_unbounded_iff\n\n",
  "not_subset_of_ssubset":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊂ » -/\n#print not_subset_of_ssubset /-\ntheorem not_subset_of_ssubset (h : «expr ⊂ » a b) : ¬b ⊆ a :=\n  (ssubset_iff_subset_not_subset.1 h).2\n#align not_subset_of_ssubset not_subset_of_ssubset\n-/\n\n",
  "not_ssubset_of_subset":
@@ -91,9 +91,9 @@
  "not_rel_of_subsingleton":
  "#print not_rel_of_subsingleton /-\ntheorem not_rel_of_subsingleton (r) [is_irrefl α r] [subsingleton α] (x y) : ¬r x y :=\n  subsingleton.elim x y ▸ irrefl x\n#align not_rel_of_subsingleton not_rel_of_subsingleton\n-/\n\n",
  "not_bounded_iff":
- "@[simp]\ntheorem not_bounded_iff {r : α → α → Prop} (s : set α) : ¬bounded r s ↔ unbounded r s := by\n  simp only [bounded, unbounded, not_forall, not_exists, exists_prop, not_and, not_not]\n#align not_bounded_iff not_bounded_iff\n\n",
+ "@[simp]\ntheorem not_bounded_iff {r : α → α → Prop} (s : Set α) : ¬Bounded r s ↔ Unbounded r s := by\n  simp only [bounded, unbounded, not_forall, not_exists, exists_prop, not_and, Classical.not_not]\n#align not_bounded_iff not_bounded_iff\n\n",
  "neg_trans":
- "theorem is_order_connected.neg_trans {r : α → α → Prop} [is_order_connected α r] {a b c} (h₁ : ¬r a b) (h₂ : ¬r b c) :\n    ¬r a c :=\n  mt (is_order_connected.conn a b c) <| by simp [h₁, h₂]\n#align is_order_connected.neg_trans is_order_connected.neg_trans\n\n",
+ "#print IsOrderConnected.neg_trans /-\ntheorem IsOrderConnected.neg_trans {r : α → α → Prop} [IsOrderConnected α r] {a b c} (h₁ : ¬r a b) (h₂ : ¬r b c) :\n    ¬r a c :=\n  mt (is_order_connected.conn a b c) <| by simp [h₁, h₂]\n#align is_order_connected.neg_trans IsOrderConnected.neg_trans\n-/\n\n",
  "ne_of_ssuperset":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:219:4: warning: unsupported binary notation `«expr ⊂ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊂ » -/\n#print ne_of_ssuperset /-\ntheorem ne_of_ssuperset [is_irrefl α («expr ⊂ » · ·)] {a b : α} : «expr ⊂ » a b → b ≠ a :=\n  ne_of_irrefl'\n#align ne_of_ssuperset ne_of_ssuperset\n-/\n\n",
  "ne_of_ssubset":
@@ -106,22 +106,22 @@
  "#print ne_of_irrefl' /-\ntheorem ne_of_irrefl' {r} [is_irrefl α r] : ∀ {x y : α}, r x y → y ≠ x\n  | _, _, h, rfl => irrefl _ h\n#align ne_of_irrefl' ne_of_irrefl'\n-/\n\n",
  "ne_of_irrefl":
  "#print ne_of_irrefl /-\n-- see Note [lower instance priority]\ntheorem ne_of_irrefl {r} [is_irrefl α r] : ∀ {x y : α}, r x y → x ≠ y\n  | _, _, h, rfl => irrefl _ h\n#align ne_of_irrefl ne_of_irrefl\n-/\n\n",
- "is_well_order":
- "-- This isn't made into an instance as it loops with `is_irrefl α r`.\ntheorem subsingleton.is_well_order [subsingleton α] (r : α → α → Prop) [hr : is_irrefl α r] : is_well_order α r :=\n  { hr with\n    trichotomous := fun a b => or.inr <| or.inl <| subsingleton.elim a b\n    trans := fun a b c h => (not_rel_of_subsingleton r a b h).elim\n    wf := ⟨fun a => ⟨_, fun y h => (not_rel_of_subsingleton r y a h).elim⟩⟩ }\n#align subsingleton.is_well_order subsingleton.is_well_order\n\n",
- "is_well_founded":
- "theorem subrelation.is_well_founded (r : α → α → Prop) [is_well_founded α r] {s : α → α → Prop} (h : subrelation s r) :\n    is_well_founded α s :=\n  ⟨h.wf is_well_founded.wf⟩\n#align subrelation.is_well_founded subrelation.is_well_founded\n\n",
- "is_trichotomous":
- "protected theorem is_total.is_trichotomous (r) [is_total α r] : is_trichotomous α r :=\n  ⟨fun a b => or_left_comm.1 (or.inr <| total_of r a b)⟩\n#align is_total.is_trichotomous is_total.is_trichotomous\n\n",
- "is_irrefl":
- "protected theorem is_asymm.is_irrefl [is_asymm α r] : is_irrefl α r :=\n  ⟨fun a h => asymm h h⟩\n#align is_asymm.is_irrefl is_asymm.is_irrefl\n\n",
- "is_antisymm":
- "protected theorem is_asymm.is_antisymm (r) [is_asymm α r] : is_antisymm α r :=\n  ⟨fun x y h₁ h₂ => (asymm h₁ h₂).elim⟩\n#align is_asymm.is_antisymm is_asymm.is_antisymm\n\n",
+ "isWellOrder":
+ "#print Subsingleton.isWellOrder /-\n-- This isn't made into an instance as it loops with `is_irrefl α r`.\ntheorem Subsingleton.isWellOrder [subsingleton α] (r : α → α → Prop) [hr : is_irrefl α r] : IsWellOrder α r :=\n  { hr with\n    trichotomous := fun a b => or.inr <| or.inl <| subsingleton.elim a b\n    trans := fun a b c h => (not_rel_of_subsingleton r a b h).elim\n    wf := ⟨fun a => ⟨_, fun y h => (not_rel_of_subsingleton r y a h).elim⟩⟩ }\n#align subsingleton.is_well_order Subsingleton.isWellOrder\n-/\n\n",
+ "isWellFounded":
+ "#print Subrelation.isWellFounded /-\ntheorem Subrelation.isWellFounded (r : α → α → Prop) [IsWellFounded α r] {s : α → α → Prop} (h : subrelation s r) :\n    IsWellFounded α s :=\n  ⟨h.wf is_well_founded.wf⟩\n#align subrelation.is_well_founded Subrelation.isWellFounded\n-/\n\n",
+ "isTrichotomous":
+ "#print IsTotal.isTrichotomous /-\nprotected theorem IsTotal.isTrichotomous (r) [is_total α r] : is_trichotomous α r :=\n  ⟨fun a b => or_left_comm.1 (or.inr <| total_of r a b)⟩\n#align is_total.is_trichotomous IsTotal.isTrichotomous\n-/\n\n",
  "isStrictWeakOrder_of_isOrderConnected":
- "#print isStrictWeakOrder_of_isOrderConnected /-\ntheorem isStrictWeakOrder_of_isOrderConnected [is_asymm α r] [is_order_connected α r] : is_strict_weak_order α r :=\n  {\n    @is_asymm.is_irrefl α r\n      _ with\n    trans := fun a b c h₁ h₂ => (is_order_connected.conn _ c _ h₁).resolve_right (asymm h₂)\n    incomp_trans := fun a b c ⟨h₁, h₂⟩ ⟨h₃, h₄⟩ =>\n      ⟨is_order_connected.neg_trans h₁ h₃, is_order_connected.neg_trans h₄ h₂⟩ }\n#align is_strict_weak_order_of_is_order_connected isStrictWeakOrder_of_isOrderConnected\n-/\n\n",
+ "#print isStrictWeakOrder_of_isOrderConnected /-\ntheorem isStrictWeakOrder_of_isOrderConnected [is_asymm α r] [IsOrderConnected α r] : is_strict_weak_order α r :=\n  {\n    @IsAsymm.isIrrefl α r\n      _ with\n    trans := fun a b c h₁ h₂ => (is_order_connected.conn _ c _ h₁).resolve_right (asymm h₂)\n    incomp_trans := fun a b c ⟨h₁, h₂⟩ ⟨h₃, h₄⟩ =>\n      ⟨IsOrderConnected.neg_trans h₁ h₃, IsOrderConnected.neg_trans h₄ h₂⟩ }\n#align is_strict_weak_order_of_is_order_connected isStrictWeakOrder_of_isOrderConnected\n-/\n\n",
+ "isIrrefl":
+ "#print IsAsymm.isIrrefl /-\nprotected theorem IsAsymm.isIrrefl [is_asymm α r] : is_irrefl α r :=\n  ⟨fun a h => asymm h h⟩\n#align is_asymm.is_irrefl IsAsymm.isIrrefl\n-/\n\n",
+ "isAntisymm":
+ "#print IsAsymm.isAntisymm /-\nprotected theorem IsAsymm.isAntisymm (r) [is_asymm α r] : is_antisymm α r :=\n  ⟨fun x y h₁ h₂ => (asymm h₁ h₂).elim⟩\n#align is_asymm.is_antisymm IsAsymm.isAntisymm\n-/\n\n",
  "induction":
- "/-- Inducts on a well-founded `>` relation. -/\ntheorem induction {C : α → Prop} : ∀ a, (∀ x, (∀ y, x < y → C y) → C x) → C a :=\n  is_well_founded.induction _\n#align induction induction\n\n",
+ "/-- Inducts on a well-founded `>` relation. -/\ntheorem induction {C : α → Prop} : ∀ a, (∀ x, (∀ y, x < y → C y) → C x) → C a :=\n  IsWellFounded.induction _\n#align induction induction\n\n",
  "fix_eq":
- "/-- The value from `well_founded_gt.fix` is built from the successive ones as specified. -/\ntheorem fix_eq {C : α → Sort _} (F : ∀ x : α, (∀ y : α, x < y → C y) → C x) : ∀ x, fix F x = F x fun y h => fix F y :=\n  is_well_founded.fix_eq _ F\n#align fix_eq fix_eq\n\n",
+ "/-- The value from `well_founded_gt.fix` is built from the successive ones as specified. -/\ntheorem fix_eq {C : α → Sort _} (F : ∀ x : α, (∀ y : α, x < y → C y) → C x) : ∀ x, fix F x = F x fun y h => fix F y :=\n  IsWellFounded.fix_eq _ F\n#align fix_eq fix_eq\n\n",
  "extensional_of_trichotomous_of_irrefl":
  "#print extensional_of_trichotomous_of_irrefl /-\n/-- In a trichotomous irreflexive order, every element is determined by the set of predecessors. -/\ntheorem extensional_of_trichotomous_of_irrefl (r : α → α → Prop) [is_trichotomous α r] [is_irrefl α r] {a b : α}\n    (H : ∀ x, r x a ↔ r x b) : a = b :=\n  ((@trichotomous _ r _ a b).resolve_left <| mt (H _).2 <| irrefl a).resolve_right <| mt (H _).1 <| irrefl b\n#align extensional_of_trichotomous_of_irrefl extensional_of_trichotomous_of_irrefl\n-/\n\n",
  "eq_or_ssubset_of_subset":
@@ -129,15 +129,15 @@
  "eq_empty_relation":
  "#print eq_empty_relation /-\ntheorem eq_empty_relation (r) [is_irrefl α r] [subsingleton α] : r = empty_relation :=\n  funext₂ <| by simpa using not_rel_of_subsingleton r\n#align eq_empty_relation eq_empty_relation\n-/\n\n",
  "empty_relation_apply":
- "#print empty_relation_apply /-\n@[simp]\ntheorem empty_relation_apply (a b : α) : empty_relation a b ↔ false :=\n  iff.rfl\n#align empty_relation_apply empty_relation_apply\n-/\n\n",
+ "#print empty_relation_apply /-\n@[simp]\ntheorem empty_relation_apply (a b : α) : empty_relation a b ↔ False :=\n  iff.rfl\n#align empty_relation_apply empty_relation_apply\n-/\n\n",
  "comm_of":
  "#print comm_of /-\n/-- A version of `comm` with `r` explicit.\n\nThis lemma matches the lemmas from lean core in `init.algebra.classes`, but is missing there.  -/\ntheorem comm_of (r : α → α → Prop) [is_symm α r] {a b : α} : r a b ↔ r b a :=\n  comm\n#align comm_of comm_of\n-/\n\n",
  "comm":
  "#print comm /-\ntheorem comm [is_symm α r] {a b : α} : r a b ↔ r b a :=\n  ⟨symm, symm⟩\n#align comm comm\n-/\n\n",
  "asymmetric":
- "theorem well_founded.asymmetric {α : Sort _} {r : α → α → Prop} (h : well_founded r) : ∀ ⦃a b⦄, r a b → ¬r b a\n  | a => fun b hab hba => well_founded.asymmetric hba hab termination_by' ⟨_, h⟩\n#align well_founded.asymmetric well_founded.asymmetric\n\n",
+ "#print WellFounded.asymmetric /-\ntheorem WellFounded.asymmetric {α : Sort _} {r : α → α → Prop} (h : well_founded r) : ∀ ⦃a b⦄, r a b → ¬r b a\n  | a => fun b hab hba => WellFounded.asymmetric hba hab termination_by' ⟨_, h⟩\n#align well_founded.asymmetric WellFounded.asymmetric\n-/\n\n",
  "apply":
- "/-- All values are accessible under the well-founded `>`. -/\ntheorem apply : ∀ a : α, acc (· > ·) a :=\n  is_well_founded.apply _\n#align apply apply\n\n",
+ "/-- All values are accessible under the well-founded `>`. -/\ntheorem apply : ∀ a : α, acc (· > ·) a :=\n  IsWellFounded.apply _\n#align apply apply\n\n",
  "antisymm_of'":
  "#print antisymm_of' /-\n/-- A version of `antisymm'` with `r` explicit.\n\nThis lemma matches the lemmas from lean core in `init.algebra.classes`, but is missing there.  -/\n@[elab_without_expected_type]\ntheorem antisymm_of' (r : α → α → Prop) [is_antisymm α r] {a b : α} : r a b → r b a → b = a :=\n  antisymm'\n#align antisymm_of' antisymm_of'\n-/\n\n",
  "antisymm_of":

@@ -9,4 +9,4 @@
  "eq_nat_abs_iff_mul_eq_zero":
  "theorem eq_nat_abs_iff_mul_eq_zero : a.nat_abs = n ↔ (a - n) * (a + n) = 0 := by\n  rw [nat_abs_eq_iff, mul_eq_zero, sub_eq_zero, add_eq_zero_iff_eq_neg]\n#align eq_nat_abs_iff_mul_eq_zero eq_nat_abs_iff_mul_eq_zero\n\n",
  "dvd_div_of_mul_dvd":
- "theorem dvd_div_of_mul_dvd {a b c : ℤ} (h : a * b ∣ c) : b ∣ c / a :=\n  by\n  rcases eq_or_ne a 0 with (rfl | ha)\n  · simp only [int.div_zero, dvd_zero]\n  rcases h with ⟨d, rfl⟩\n  refine' ⟨d, _⟩\n  rw [mul_assoc, Int.mul_ediv_cancel_left _ ha]\n#align dvd_div_of_mul_dvd dvd_div_of_mul_dvd\n\n"}
+ "theorem dvd_div_of_mul_dvd {a b c : ℤ} (h : a * b ∣ c) : b ∣ c / a :=\n  by\n  rcases eq_or_ne a 0 with (rfl | ha)\n  · simp only [Int.div_zero, dvd_zero]\n  rcases h with ⟨d, rfl⟩\n  refine' ⟨d, _⟩\n  rw [mul_assoc, Int.mul_ediv_cancel_left _ ha]\n#align dvd_div_of_mul_dvd dvd_div_of_mul_dvd\n\n"}

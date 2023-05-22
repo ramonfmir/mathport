@@ -5,13 +5,15 @@
  "union_empty":
  "@[simp]\ntheorem union_empty {s : AList β} : s ∪ (∅ : AList β) = s :=\n  ext <| by simp\n#align union_empty union_empty\n\n",
  "union_comm_of_disjoint":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `list.perm -/\ntheorem union_comm_of_disjoint {s₁ s₂ : AList β} (h : Disjoint s₁ s₂) : list.perm (s₁ ∪ s₂).entries (s₂ ∪ s₁).entries :=\n  lookup_ext (alist.nodupkeys _) (alist.nodupkeys _)\n    (by\n      intros ; simp\n      constructor <;> intro h'\n      cases h'\n      · right\n        refine' ⟨_, h'⟩\n        apply h\n        rw [keys, ← List.dlookup_is_some, h']\n        exact rfl\n      · left\n        rw [h'.2]\n      cases h'\n      · right\n        refine' ⟨_, h'⟩\n        intro h''\n        apply h _ h''\n        rw [keys, ← List.dlookup_is_some, h']\n        exact rfl\n      · left\n        rw [h'.2])\n#align union_comm_of_disjoint union_comm_of_disjoint\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `list.perm -/\ntheorem union_comm_of_disjoint {s₁ s₂ : AList β} (h : Disjoint s₁ s₂) : list.perm (s₁ ∪ s₂).entries (s₂ ∪ s₁).entries :=\n  lookup_ext (alist.nodupkeys _) (alist.nodupkeys _)\n    (by\n      intros ; simp\n      constructor <;> intro h'\n      cases h'\n      · right\n        refine' ⟨_, h'⟩\n        apply h\n        rw [keys, ← List.dlookup_isSome, h']\n        exact rfl\n      · left\n        rw [h'.2]\n      cases h'\n      · right\n        refine' ⟨_, h'⟩\n        intro h''\n        apply h _ h''\n        rw [keys, ← List.dlookup_isSome, h']\n        exact rfl\n      · left\n        rw [h'.2])\n#align union_comm_of_disjoint union_comm_of_disjoint\n\n",
  "union_assoc":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `list.perm -/\ntheorem union_assoc {s₁ s₂ s₃ : AList β} : list.perm (s₁ ∪ s₂ ∪ s₃).entries (s₁ ∪ (s₂ ∪ s₃)).entries :=\n  lookup_ext (alist.nodupkeys _) (alist.nodupkeys _)\n    (by simp [decidable.not_or_iff_and_not, or_assoc', and_or_left, and_assoc'])\n#align union_assoc union_assoc\n\n",
  "to_alist_cons":
- "theorem to_alist_cons (a : α) (b : β a) (xs : list (sigma β)) : List.toAList (⟨a, b⟩ :: xs) = insert a b xs.to_alist :=\n  rfl\n#align to_alist_cons to_alist_cons\n\n",
+ "theorem to_alist_cons (a : α) (b : β a) (xs : List (Sigma β)) : List.toAList (⟨a, b⟩ :: xs) = insert a b xs.to_alist :=\n  rfl\n#align to_alist_cons to_alist_cons\n\n",
  "singleton_entries":
  "@[simp]\ntheorem singleton_entries (a : α) (b : β a) : (singleton a b).entries = [sigma.mk a b] :=\n  rfl\n#align singleton_entries singleton_entries\n\n",
+ "recursion_insert_mk":
+ "theorem recursion_insert_mk {C : AList β → Sort _} (H0 : C ∅)\n    (IH : ∀ (a : α) (b : β a) (l : AList β) (h : a ∉ l), C l → C (l.insert a b)) {a : α} (b : β a) {l : AList β}\n    (h : a ∉ l) : @insertRec α β _ C H0 IH (l.insert a b) = IH a b l h (@insertRec α β _ C H0 IH l) :=\n  @insertRec_insert α β _ C H0 IH ⟨a, b⟩ l h\n#align recursion_insert_mk recursion_insert_mk\n\n",
  "perm_union":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `list.perm -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `list.perm -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `list.perm -/\ntheorem perm_union {s₁ s₂ s₃ s₄ : AList β} (p₁₂ : list.perm s₁.entries s₂.entries)\n    (p₃₄ : list.perm s₃.entries s₄.entries) : list.perm (s₁ ∪ s₃).entries (s₂ ∪ s₄).entries := by\n  simp [p₁₂.kunion s₃.nodupkeys p₃₄]\n#align perm_union perm_union\n\n",
  "perm_replace":
@@ -24,16 +26,18 @@
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `list.perm -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `list.perm -/\ntheorem perm_erase {a : α} {s₁ s₂ : AList β} :\n    list.perm s₁.entries s₂.entries → list.perm (erase a s₁).entries (erase a s₂).entries :=\n  Perm.kerase s₁.nodupkeys\n#align perm_erase perm_erase\n\n",
  "not_mem_empty":
  "@[simp]\ntheorem not_mem_empty (a : α) : a ∉ (∅ : AList β) :=\n  not_mem_nil a\n#align not_mem_empty not_mem_empty\n\n",
+ "mk_cons_eq_insert":
+ "theorem mk_cons_eq_insert (c : Sigma β) (l : List (Sigma β)) (h : (c :: l).nodupkeys) :\n    (⟨c :: l, h⟩ : AList β) = insert c.1 c.2 ⟨l, nodupKeys_of_nodupKeys_cons h⟩ := by\n  simpa [insert] using (kerase_of_not_mem_keys <| not_mem_keys_of_nodupkeys_cons h).symm\n#align mk_cons_eq_insert mk_cons_eq_insert\n\n",
  "mem_union":
  "@[simp]\ntheorem mem_union {a} {s₁ s₂ : AList β} : a ∈ s₁ ∪ s₂ ↔ a ∈ s₁ ∨ a ∈ s₂ :=\n  mem_keys_kunion\n#align mem_union mem_union\n\n",
  "mem_replace":
  "@[simp]\ntheorem mem_replace {a a' : α} {b : β a} {s : AList β} : a' ∈ replace a b s ↔ a' ∈ s := by\n  rw [mem_keys, keys_replace, ← mem_keys]\n#align mem_replace mem_replace\n\n",
  "mem_of_perm":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `list.perm -/\ntheorem mem_of_perm {a : α} {s₁ s₂ : AList β} (p : list.perm s₁.entries s₂.entries) : a ∈ s₁ ↔ a ∈ s₂ :=\n  (p.map sigma.fst).mem_iff\n#align mem_of_perm mem_of_perm\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `list.perm -/\ntheorem mem_of_perm {a : α} {s₁ s₂ : AList β} (p : list.perm s₁.entries s₂.entries) : a ∈ s₁ ↔ a ∈ s₂ :=\n  (p.map Sigma.fst).mem_iff\n#align mem_of_perm mem_of_perm\n\n",
  "mem_lookup_union_middle":
- "theorem mem_lookup_union_middle {a} {b : β a} {s₁ s₂ s₃ : AList β} :\n    b ∈ lookup a (s₁ ∪ s₃) → a ∉ s₂ → b ∈ lookup a (s₁ ∪ s₂ ∪ s₃) :=\n  mem_lookup_kunion_middle\n#align mem_lookup_union_middle mem_lookup_union_middle\n\n",
+ "theorem mem_lookup_union_middle {a} {b : β a} {s₁ s₂ s₃ : AList β} :\n    b ∈ lookup a (s₁ ∪ s₃) → a ∉ s₂ → b ∈ lookup a (s₁ ∪ s₂ ∪ s₃) :=\n  mem_dlookup_kunion_middle\n#align mem_lookup_union_middle mem_lookup_union_middle\n\n",
  "mem_lookup_union":
- "@[simp]\ntheorem mem_lookup_union {a} {b : β a} {s₁ s₂ : AList β} :\n    b ∈ lookup a (s₁ ∪ s₂) ↔ b ∈ lookup a s₁ ∨ a ∉ s₁ ∧ b ∈ lookup a s₂ :=\n  mem_lookup_kunion\n#align mem_lookup_union mem_lookup_union\n\n",
+ "@[simp]\ntheorem mem_lookup_union {a} {b : β a} {s₁ s₂ : AList β} :\n    b ∈ lookup a (s₁ ∪ s₂) ↔ b ∈ lookup a s₁ ∨ a ∉ s₁ ∧ b ∈ lookup a s₂ :=\n  mem_dlookup_kunion\n#align mem_lookup_union mem_lookup_union\n\n",
  "mem_lookup_iff":
  "theorem mem_lookup_iff {a : α} {b : β a} {s : AList β} : b ∈ lookup a s ↔ sigma.mk a b ∈ s.entries :=\n  mem_dlookup_iff s.nodupkeys\n#align mem_lookup_iff mem_lookup_iff\n\n",
  "mem_keys":
@@ -43,13 +47,13 @@
  "mem_erase":
  "@[simp]\ntheorem mem_erase {a a' : α} {s : AList β} : a' ∈ erase a s ↔ a' ≠ a ∧ a' ∈ s := by\n  rw [mem_keys, keys_erase, s.keys_nodup.mem_erase_iff, ← mem_keys]\n#align mem_erase mem_erase\n\n",
  "lookup_union_right":
- "@[simp]\ntheorem lookup_union_right {a} {s₁ s₂ : AList β} : a ∉ s₁ → lookup a (s₁ ∪ s₂) = lookup a s₂ :=\n  lookup_kunion_right\n#align lookup_union_right lookup_union_right\n\n",
+ "@[simp]\ntheorem lookup_union_right {a} {s₁ s₂ : AList β} : a ∉ s₁ → lookup a (s₁ ∪ s₂) = lookup a s₂ :=\n  dlookup_kunion_right\n#align lookup_union_right lookup_union_right\n\n",
  "lookup_union_left":
- "@[simp]\ntheorem lookup_union_left {a} {s₁ s₂ : AList β} : a ∈ s₁ → lookup a (s₁ ∪ s₂) = lookup a s₁ :=\n  lookup_kunion_left\n#align lookup_union_left lookup_union_left\n\n",
+ "@[simp]\ntheorem lookup_union_left {a} {s₁ s₂ : AList β} : a ∈ s₁ → lookup a (s₁ ∪ s₂) = lookup a s₁ :=\n  dlookup_kunion_left\n#align lookup_union_left lookup_union_left\n\n",
  "lookup_to_alist":
- "@[simp]\ntheorem lookup_to_alist {a} (s : list (sigma β)) : lookup a s.to_alist = s.lookup a := by\n  rw [List.toAList, lookup, lookup_dedupkeys]\n#align lookup_to_alist lookup_to_alist\n\n",
+ "@[simp]\ntheorem lookup_to_alist {a} (s : List (Sigma β)) : lookup a s.to_alist = s.lookup a := by\n  rw [List.toAList, lookup, lookup_dedupkeys]\n#align lookup_to_alist lookup_to_alist\n\n",
  "lookup_is_some":
- "theorem lookup_is_some {a : α} {s : AList β} : (s.lookup a).is_some ↔ a ∈ s :=\n  lookup_is_some\n#align lookup_is_some lookup_is_some\n\n",
+ "theorem lookup_is_some {a : α} {s : AList β} : (s.lookup a).is_some ↔ a ∈ s :=\n  dlookup_isSome\n#align lookup_is_some lookup_is_some\n\n",
  "lookup_insert_ne":
  "@[simp]\ntheorem lookup_insert_ne {a a'} {b' : β a'} {s : AList β} (h : a ≠ a') : lookup a (insert a' b' s) = lookup a s :=\n  dlookup_kinsert_ne h\n#align lookup_insert_ne lookup_insert_ne\n\n",
  "lookup_insert":
@@ -59,7 +63,7 @@
  "lookup_erase":
  "@[simp]\ntheorem lookup_erase (a) (s : AList β) : lookup a (erase a s) = none :=\n  dlookup_kerase a s.nodupkeys\n#align lookup_erase lookup_erase\n\n",
  "lookup_eq_none":
- "theorem lookup_eq_none {a : α} {s : AList β} : lookup a s = none ↔ a ∉ s :=\n  lookup_eq_none\n#align lookup_eq_none lookup_eq_none\n\n",
+ "theorem lookup_eq_none {a : α} {s : AList β} : lookup a s = none ↔ a ∉ s :=\n  dlookup_eq_none\n#align lookup_eq_none lookup_eq_none\n\n",
  "lookup_empty":
  "@[simp]\ntheorem lookup_empty (a) : lookup a (∅ : AList β) = none :=\n  rfl\n#align lookup_empty lookup_empty\n\n",
  "keys_singleton":
@@ -78,6 +82,12 @@
  "theorem insert_union {a} {b : β a} {s₁ s₂ : AList β} : insert a b (s₁ ∪ s₂) = insert a b s₁ ∪ s₂ := by ext <;> simp\n#align insert_union insert_union\n\n",
  "insert_singleton_eq":
  "@[simp]\ntheorem insert_singleton_eq {a : α} {b b' : β a} : insert a b (singleton a b') = singleton a b :=\n  ext <| by\n    simp only [AList.insert_entries, List.kerase_cons_eq, and_self_iff, AList.singleton_entries, heq_iff_eq,\n      eq_self_iff_true]\n#align insert_singleton_eq insert_singleton_eq\n\n",
+ "insert_rec_insert":
+ "theorem insert_rec_insert {C : AList β → Sort _} (H0 : C ∅)\n    (IH : ∀ (a : α) (b : β a) (l : AList β) (h : a ∉ l), C l → C (l.insert a b)) {c : Sigma β} {l : AList β}\n    (h : c.1 ∉ l) : @insertRec α β _ C H0 IH (l.insert c.1 c.2) = IH c.1 c.2 l h (@insertRec α β _ C H0 IH l) :=\n  by\n  cases' l with l hl\n  suffices\n    HEq (@insert_rec α β _ C H0 IH ⟨c :: l, nodupkeys_cons.2 ⟨h, hl⟩⟩)\n      (IH c.1 c.2 ⟨l, hl⟩ h (@insert_rec α β _ C H0 IH ⟨l, hl⟩))\n    by\n    cases c\n    apply eq_of_heq\n    convert this <;> rw [insert_of_neg h]\n  rw [insert_rec]\n  apply cast_heq\n#align insert_rec_insert insert_rec_insert\n\n",
+ "insert_rec_empty":
+ "-- Test that the `induction` tactic works on `insert_rec`.\n@[simp]\ntheorem insert_rec_empty {C : AList β → Sort _} (H0 : C ∅)\n    (IH : ∀ (a : α) (b : β a) (l : AList β) (h : a ∉ l), C l → C (l.insert a b)) : @insertRec α β _ C H0 IH ∅ = H0 :=\n  by\n  change @insert_rec α β _ C H0 IH ⟨[], _⟩ = H0\n  rw [insert_rec]\n#align insert_rec_empty insert_rec_empty\n\n",
+ "insert_of_neg":
+ "-- Todo: rename to `insert_of_not_mem`.\ntheorem insert_of_neg {a} {b : β a} {s : AList β} (h : a ∉ s) :\n    insert a b s = ⟨⟨a, b⟩ :: s.entries, nodupKeys_cons.2 ⟨h, s.2⟩⟩ :=\n  ext <| insert_entries_of_neg h\n#align insert_of_neg insert_of_neg\n\n",
  "insert_insert_of_ne":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `list.perm -/\ntheorem insert_insert_of_ne {a a'} {b : β a} {b' : β a'} (s : AList β) (h : a ≠ a') :\n    list.perm ((s.insert a b).insert a' b').entries ((s.insert a' b').insert a b).entries := by\n  simp only [insert_entries] <;> rw [kerase_cons_ne, kerase_cons_ne, kerase_comm] <;> [apply perm.swap, exact h,\n    exact h.symm]\n#align insert_insert_of_ne insert_insert_of_ne\n\n",
  "insert_insert":
@@ -97,7 +107,7 @@
  "erase_erase":
  "theorem erase_erase (a a' : α) (s : AList β) : (s.erase a).erase a' = (s.erase a').erase a :=\n  ext <| kerase_kerase\n#align erase_erase erase_erase\n\n",
  "entries_to_alist":
- "@[simp]\ntheorem entries_to_alist (xs : list (sigma β)) : (List.toAList xs).entries = dedupkeys xs :=\n  rfl\n#align entries_to_alist entries_to_alist\n\n",
+ "@[simp]\ntheorem entries_to_alist (xs : List (Sigma β)) : (List.toAList xs).entries = dedupKeys xs :=\n  rfl\n#align entries_to_alist entries_to_alist\n\n",
  "empty_union":
  "@[simp]\ntheorem empty_union {s : AList β} : (∅ : AList β) ∪ s = s :=\n  ext rfl\n#align empty_union empty_union\n\n",
  "empty_entries":

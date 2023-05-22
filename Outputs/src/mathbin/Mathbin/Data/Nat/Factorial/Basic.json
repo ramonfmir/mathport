@@ -1,5 +1,5 @@
 {"zero_desc_factorial_succ":
- "theorem zero_desc_factorial_succ (k : ℕ) : (0 : ℕ).desc_factorial k.succ = 0 := by\n  rw [desc_factorial_succ, zero_tsub, zero_mul]\n#align zero_desc_factorial_succ zero_desc_factorial_succ\n\n",
+ "theorem zero_desc_factorial_succ (k : ℕ) : (0 : ℕ).desc_factorial k.succ = 0 := by\n  rw [desc_factorial_succ, zero_tsub, MulZeroClass.zero_mul]\n#align zero_desc_factorial_succ zero_desc_factorial_succ\n\n",
  "zero_asc_factorial":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `nat.factorial -/\n@[simp]\ntheorem zero_asc_factorial (k : ℕ) : (0 : ℕ).asc_factorial k = nat.factorial k :=\n  by\n  induction' k with t ht\n  · rfl\n  rw [asc_factorial, ht, zero_add, Nat.factorial_succ]\n#align zero_asc_factorial zero_asc_factorial\n\n",
  "succ_desc_factorial_succ":
@@ -21,13 +21,13 @@
  "pow_lt_asc_factorial'":
  "theorem pow_lt_asc_factorial' (n k : ℕ) : (n + 1) ^ (k + 2) < n.asc_factorial (k + 2) :=\n  by\n  rw [pow_succ]\n  exact\n    Nat.mul_lt_mul (nat.add_lt_add_right (nat.lt_add_of_pos_right succ_pos') 1) (pow_succ_le_asc_factorial n _)\n      (pow_pos succ_pos' _)\n#align pow_lt_asc_factorial' pow_lt_asc_factorial'\n\n",
  "pow_lt_asc_factorial":
- "theorem pow_lt_asc_factorial (n : ℕ) : ∀ {k : ℕ}, 2 ≤ k → (n + 1) ^ k < n.asc_factorial k\n  | 0 => by rintro ⟨⟩\n  | 1 => by rintro (_ | ⟨⟨⟩⟩)\n  | k + 2 => fun _ => pow_lt_asc_factorial' n k\n#align pow_lt_asc_factorial pow_lt_asc_factorial\n\n",
+ "theorem pow_lt_asc_factorial (n : ℕ) : ∀ {k : ℕ}, 2 ≤ k → (n + 1) ^ k < n.asc_factorial k\n  | 0 => by rintro ⟨⟩\n  | 1 => by rintro (_ | ⟨⟨⟩⟩)\n  | k + 2 => fun _ => pow_lt_ascFactorial' n k\n#align pow_lt_asc_factorial pow_lt_asc_factorial\n\n",
  "one_lt_factorial":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `nat.factorial -/\ntheorem one_lt_factorial : 1 < nat.factorial n ↔ 1 < n :=\n  factorial_lt one_pos\n#align one_lt_factorial one_lt_factorial\n\n",
  "mul_factorial_pred":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `nat.factorial -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `nat.factorial -/\ntheorem mul_factorial_pred (hn : 0 < n) : n * nat.factorial (n - 1) = nat.factorial n :=\n  tsub_add_cancel_of_le (nat.succ_le_of_lt hn) ▸ rfl\n#align mul_factorial_pred mul_factorial_pred\n\n",
  "monotone_factorial":
- "theorem monotone_factorial : monotone factorial := fun n m => factorial_le\n#align monotone_factorial monotone_factorial\n\n",
+ "theorem monotone_factorial : Monotone factorial := fun n m => factorial_le\n#align monotone_factorial monotone_factorial\n\n",
  "lt_factorial_self":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `nat.factorial -/\ntheorem lt_factorial_self {n : ℕ} (hi : 3 ≤ n) : n < nat.factorial n :=\n  by\n  rw [← succ_pred_eq_of_pos ((zero_lt_two.trans (lt.base 2)).trans_le hi), factorial_succ]\n  exact\n    lt_mul_of_one_lt_right (pred n).succ_pos\n      ((one_lt_two.trans_le (le_pred_of_lt (succ_le_iff.mp hi))).trans_le (self_le_factorial _))\n#align lt_factorial_self lt_factorial_self\n\n",
  "factorial_zero":
@@ -47,7 +47,7 @@
  "factorial_mul_pow_le_factorial":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `nat.factorial -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `nat.factorial -/\ntheorem factorial_mul_pow_le_factorial : ∀ {m n : ℕ}, nat.factorial m * m.succ ^ n ≤ nat.factorial (m + n)\n  | m, 0 => by simp\n  | m, n + 1 => by\n    rw [← add_assoc, Nat.factorial_succ, mul_comm (nat.succ _), pow_succ', ← mul_assoc] <;>\n      exact\n        mul_le_mul factorial_mul_pow_le_factorial (nat.succ_le_succ (nat.le_add_right _ _)) (nat.zero_le _)\n          (nat.zero_le _)\n#align factorial_mul_pow_le_factorial factorial_mul_pow_le_factorial\n\n",
  "factorial_mul_desc_factorial":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `nat.factorial -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `nat.factorial -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `nat.factorial -/\n/-- `n.desc_factorial k = n! / (n - k)!` but without ℕ-division. See `nat.desc_factorial_eq_div`\nfor the version using ℕ-division. -/\ntheorem factorial_mul_desc_factorial : ∀ {n k : ℕ}, k ≤ n → nat.factorial (n - k) * n.desc_factorial k = nat.factorial n\n  | n, 0 => fun _ => by rw [desc_factorial_zero, mul_one, tsub_zero]\n  | 0, succ k => fun h => by\n    exfalso\n    exact not_succ_le_zero k h\n  | succ n, succ k => fun h => by\n    rw [succ_desc_factorial_succ, succ_sub_succ, ← mul_assoc, mul_comm (nat.factorial (n - k)), mul_assoc,\n      factorial_mul_desc_factorial (nat.succ_le_succ_iff.1 h), factorial_succ]\n#align factorial_mul_desc_factorial factorial_mul_desc_factorial\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `nat.factorial -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `nat.factorial -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `nat.factorial -/\n/-- `n.desc_factorial k = n! / (n - k)!` but without ℕ-division. See `nat.desc_factorial_eq_div`\nfor the version using ℕ-division. -/\ntheorem factorial_mul_desc_factorial : ∀ {n k : ℕ}, k ≤ n → nat.factorial (n - k) * n.desc_factorial k = nat.factorial n\n  | n, 0 => fun _ => by rw [desc_factorial_zero, mul_one, tsub_zero]\n  | 0, succ k => fun h => by\n    exfalso\n    exact not_succ_le_zero k h\n  | succ n, succ k => fun h => by\n    rw [succ_desc_factorial_succ, succ_sub_succ, ← mul_assoc, mul_comm (nat.factorial (n - k)), mul_assoc,\n      factorial_mul_desc_factorial (Nat.succ_le_succ_iff.1 h), factorial_succ]\n#align factorial_mul_desc_factorial factorial_mul_desc_factorial\n\n",
  "factorial_mul_asc_factorial":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `nat.factorial -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `nat.factorial -/\n/-- `n.asc_factorial k = (n + k)! / n!` but without ℕ-division. See `nat.asc_factorial_eq_div` for\nthe version with ℕ-division. -/\ntheorem factorial_mul_asc_factorial (n : ℕ) : ∀ k, nat.factorial n * n.asc_factorial k = nat.factorial (n + k)\n  | 0 => by rw [asc_factorial, add_zero, mul_one]\n  | k + 1 => by rw [asc_factorial_succ, mul_left_comm, factorial_mul_asc_factorial, ← add_assoc, factorial]\n#align factorial_mul_asc_factorial factorial_mul_asc_factorial\n\n",
  "factorial_lt":
@@ -83,7 +83,7 @@
  "asc_factorial_succ":
  "theorem asc_factorial_succ {n k : ℕ} : n.asc_factorial k.succ = (n + k + 1) * n.asc_factorial k :=\n  rfl\n#align asc_factorial_succ asc_factorial_succ\n\n",
  "asc_factorial_pos":
- "theorem asc_factorial_pos (n k : ℕ) : 0 < n.asc_factorial k :=\n  (pow_pos (succ_pos n) k).trans_le (pow_succ_le_asc_factorial n k)\n#align asc_factorial_pos asc_factorial_pos\n\n",
+ "theorem asc_factorial_pos (n k : ℕ) : 0 < n.asc_factorial k :=\n  (pow_pos (succ_pos n) k).trans_le (pow_succ_le_ascFactorial n k)\n#align asc_factorial_pos asc_factorial_pos\n\n",
  "asc_factorial_of_sub":
  "theorem asc_factorial_of_sub {n k : ℕ} (h : k < n) :\n    (n - k) * (n - k).asc_factorial k = (n - (k + 1)).asc_factorial (k + 1) :=\n  by\n  set t := n - k.succ with ht\n  suffices h' : n - k = t.succ; · rw [← ht, h', succ_asc_factorial, asc_factorial_succ]\n  rw [ht, succ_eq_add_one, ← tsub_tsub_assoc (succ_le_of_lt h) (succ_pos _), succ_sub_one]\n#align asc_factorial_of_sub asc_factorial_of_sub\n\n",
  "asc_factorial_lt_pow_add":

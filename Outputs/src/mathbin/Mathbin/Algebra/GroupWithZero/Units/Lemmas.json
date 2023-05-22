@@ -41,7 +41,7 @@
  "map_div₀":
  "#print map_div₀ /-\n@[simp]\ntheorem map_div₀ : f (a / b) = f a / f b :=\n  map_div' f (map_inv₀ f) a b\n#align map_div₀ map_div₀\n-/\n\n",
  "inverse_apply":
- "#print MonoidWithZero.inverse_apply /-\n@[simp]\ntheorem MonoidWithZero.inverse_apply {M : Type _} [comm_monoid_with_zero M] (a : M) :\n    MonoidWithZero.inverse a = Ring.inverse a :=\n  rfl\n#align monoid_with_zero.inverse_apply MonoidWithZero.inverse_apply\n-/\n\n",
+ "#print MonoidWithZero.inverse_apply /-\n@[simp]\ntheorem MonoidWithZero.inverse_apply {M : Type _} [CommMonoidWithZero M] (a : M) :\n    MonoidWithZero.inverse a = Ring.inverse a :=\n  rfl\n#align monoid_with_zero.inverse_apply MonoidWithZero.inverse_apply\n-/\n\n",
  "inv_mul_eq_one₀":
  "#print inv_mul_eq_one₀ /-\ntheorem inv_mul_eq_one₀ (ha : a ≠ 0) : a⁻¹ * b = 1 ↔ a = b :=\n  ha.is_unit.inv_mul_eq_one\n#align inv_mul_eq_one₀ inv_mul_eq_one₀\n-/\n\n",
  "inv_mul_eq_iff_eq_mul₀":
@@ -88,7 +88,9 @@
  "#print div_eq_div_iff /-\n@[field_simps]\ntheorem div_eq_div_iff (hb : b ≠ 0) (hd : d ≠ 0) : a / b = c / d ↔ a * d = c * b :=\n  hb.is_unit.div_eq_div_iff hd.is_unit\n#align div_eq_div_iff div_eq_div_iff\n-/\n\n",
  "div_div_div_cancel_right":
  "#print div_div_div_cancel_right /-\ntheorem div_div_div_cancel_right (a : G₀) (hc : c ≠ 0) : a / c / (b / c) = a / b := by\n  rw [div_div_eq_mul_div, div_mul_cancel _ hc]\n#align div_div_div_cancel_right div_div_div_cancel_right\n-/\n\n",
+ "div_div_cancel_left'":
+ "#print div_div_cancel_left' /-\ntheorem div_div_cancel_left' (ha : a ≠ 0) : a / b / a = b⁻¹ :=\n  ha.is_unit.div_div_cancel_left\n#align div_div_cancel_left' div_div_cancel_left'\n-/\n\n",
  "div_div_cancel'":
  "#print div_div_cancel' /-\ntheorem div_div_cancel' (ha : a ≠ 0) : a / (a / b) = b :=\n  ha.is_unit.div_div_cancel\n#align div_div_cancel' div_div_cancel'\n-/\n\n",
  "coe_inverse":
- "#print MonoidWithZero.coe_inverse /-\n@[simp]\ntheorem MonoidWithZero.coe_inverse {M : Type _} [comm_monoid_with_zero M] :\n    (MonoidWithZero.inverse : M → M) = Ring.inverse :=\n  rfl\n#align monoid_with_zero.coe_inverse MonoidWithZero.coe_inverse\n-/\n\n"}
+ "#print MonoidWithZero.coe_inverse /-\n@[simp]\ntheorem MonoidWithZero.coe_inverse {M : Type _} [CommMonoidWithZero M] :\n    (MonoidWithZero.inverse : M → M) = Ring.inverse :=\n  rfl\n#align monoid_with_zero.coe_inverse MonoidWithZero.coe_inverse\n-/\n\n"}

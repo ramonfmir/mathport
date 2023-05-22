@@ -3,7 +3,7 @@
  "zero_lt":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ˣ» -/\n#print Units.zero_lt /-\n@[simp]\ntheorem Units.zero_lt (u : «expr ˣ» α) : (0 : α) < u :=\n  zero_lt_iff.2 <| u.ne_zero\n#align units.zero_lt Units.zero_lt\n-/\n\n",
  "zero_le'":
- "#print zero_le' /-\n/-\nCopyright (c) 2020 Kenny Lau. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Kenny Lau, Johan Commelin, Patrick Massot\n-/\n/-\nThe following facts are true more generally in a (linearly) ordered commutative monoid.\n-/\n@[simp]\ntheorem zero_le' : 0 ≤ a := by simpa only [mul_zero, mul_one] using mul_le_mul_left' zero_le_one a\n#align zero_le' zero_le'\n-/\n\n",
+ "#print zero_le' /-\n/-\nCopyright (c) 2020 Kenny Lau. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Kenny Lau, Johan Commelin, Patrick Massot\n-/\n/-\nThe following facts are true more generally in a (linearly) ordered commutative monoid.\n-/\n@[simp]\ntheorem zero_le' : 0 ≤ a := by simpa only [MulZeroClass.mul_zero, mul_one] using mul_le_mul_left' zero_le_one a\n#align zero_le' zero_le'\n-/\n\n",
  "one_le_mul₀":
  "#print one_le_mul₀ /-\n/-- Alias of `one_le_mul'` for unification. -/\ntheorem one_le_mul₀ (ha : 1 ≤ a) (hb : 1 ≤ b) : 1 ≤ a * b :=\n  one_le_mul ha hb\n#align one_le_mul₀ one_le_mul₀\n-/\n\n",
  "one_le_inv₀":
@@ -17,7 +17,7 @@
  "mul_lt_mul₀":
  "#print mul_lt_mul₀ /-\ntheorem mul_lt_mul₀ (hab : a < b) (hcd : c < d) : a * c < b * d :=\n  mul_lt_mul_of_lt_of_le₀ hab.le (ne_zero_of_lt hab) hcd\n#align mul_lt_mul₀ mul_lt_mul₀\n-/\n\n",
  "mul_lt_mul_of_lt_of_le₀":
- "#print mul_lt_mul_of_lt_of_le₀ /-\ntheorem mul_lt_mul_of_lt_of_le₀ (hab : a ≤ b) (hb : b ≠ 0) (hcd : c < d) : a * c < b * d :=\n  have hd : d ≠ 0 := ne_zero_of_lt hcd\n  if ha : a = 0 then by\n    rw [ha, zero_mul, zero_lt_iff]\n    exact mul_ne_zero hb hd\n  else\n    if hc : c = 0 then by\n      rw [hc, mul_zero, zero_lt_iff]\n      exact mul_ne_zero hb hd\n    else show Units.mk0 a ha * Units.mk0 c hc < Units.mk0 b hb * Units.mk0 d hd from mul_lt_mul_of_le_of_lt hab hcd\n#align mul_lt_mul_of_lt_of_le₀ mul_lt_mul_of_lt_of_le₀\n-/\n\n",
+ "#print mul_lt_mul_of_lt_of_le₀ /-\ntheorem mul_lt_mul_of_lt_of_le₀ (hab : a ≤ b) (hb : b ≠ 0) (hcd : c < d) : a * c < b * d :=\n  have hd : d ≠ 0 := ne_zero_of_lt hcd\n  if ha : a = 0 then by\n    rw [ha, MulZeroClass.zero_mul, zero_lt_iff]\n    exact mul_ne_zero hb hd\n  else\n    if hc : c = 0 then by\n      rw [hc, MulZeroClass.mul_zero, zero_lt_iff]\n      exact mul_ne_zero hb hd\n    else show Units.mk0 a ha * Units.mk0 c hc < Units.mk0 b hb * Units.mk0 d hd from mul_lt_mul_of_le_of_lt hab hcd\n#align mul_lt_mul_of_lt_of_le₀ mul_lt_mul_of_lt_of_le₀\n-/\n\n",
  "mul_le_one₀":
  "#print mul_le_one₀ /-\n-- TODO: Do we really need the following two?\n/-- Alias of `mul_le_one'` for unification. -/\ntheorem mul_le_one₀ (ha : a ≤ 1) (hb : b ≤ 1) : a * b ≤ 1 :=\n  mul_le_one' ha hb\n#align mul_le_one₀ mul_le_one₀\n-/\n\n",
  "mul_le_mul_right₀":

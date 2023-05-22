@@ -1,7 +1,7 @@
 {"to_colorable":
- "theorem to_colorable [fintype P.parts] : G.colorable (fintype.card P.parts) :=\n  P.to_coloring.to_colorable\n#align to_colorable to_colorable\n\n",
+ "theorem to_colorable [Fintype P.parts] : G.colorable (Fintype.card P.parts) :=\n  P.to_coloring.to_colorable\n#align to_colorable to_colorable\n\n",
  "partitionable_iff_colorable":
- "theorem partitionable_iff_colorable {n : ℕ} : G.partitionable n ↔ G.colorable n :=\n  by\n  constructor\n  · rintro ⟨P, hf, h⟩\n    haveI : fintype P.parts := hf.fintype\n    rw [set.finite.card_to_finset] at h\n    apply P.to_colorable.mono h\n  · rintro ⟨C⟩\n    refine' ⟨C.to_partition, C.color_classes_finite, le_trans _ (fintype.card_fin n).le⟩\n    generalize_proofs h\n    haveI : fintype C.color_classes := C.color_classes_finite.fintype\n    rw [h.card_to_finset]\n    exact C.card_color_classes_le\n#align partitionable_iff_colorable partitionable_iff_colorable\n\n",
+ "theorem partitionable_iff_colorable {n : ℕ} : G.partitionable n ↔ G.colorable n :=\n  by\n  constructor\n  · rintro ⟨P, hf, h⟩\n    haveI : Fintype P.parts := hf.fintype\n    rw [Set.Finite.card_toFinset] at h\n    apply P.to_colorable.mono h\n  · rintro ⟨C⟩\n    refine' ⟨C.to_partition, C.color_classes_finite, le_trans _ (Fintype.card_fin n).le⟩\n    generalize_proofs h\n    haveI : Fintype C.color_classes := C.color_classes_finite.fintype\n    rw [h.card_to_finset]\n    exact C.card_color_classes_le\n#align partitionable_iff_colorable partitionable_iff_colorable\n\n",
  "part_of_vertex_ne_of_adj":
  "theorem part_of_vertex_ne_of_adj {v w : V} (h : G.adj v w) : P.part_of_vertex v ≠ P.part_of_vertex w :=\n  by\n  intro hn\n  have hw := P.mem_part_of_vertex w\n  rw [← hn] at hw\n  exact P.independent _ (P.part_of_vertex_mem v) (P.mem_part_of_vertex v) hw (G.ne_of_adj h) h\n#align part_of_vertex_ne_of_adj part_of_vertex_ne_of_adj\n\n",
  "part_of_vertex_mem":

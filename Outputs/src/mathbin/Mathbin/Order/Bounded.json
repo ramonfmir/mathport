@@ -1,154 +1,154 @@
 {"unbounded_lt_univ":
- "theorem unbounded_lt_univ [preorder α] [NoTopOrder α] : unbounded (· < ·) (@Set.univ α) :=\n  unbounded_lt_of_unbounded_le unbounded_le_univ\n#align unbounded_lt_univ unbounded_lt_univ\n\n",
+ "theorem unbounded_lt_univ [preorder α] [NoTopOrder α] : Unbounded (· < ·) (@Set.univ α) :=\n  unbounded_lt_of_unbounded_le unbounded_le_univ\n#align unbounded_lt_univ unbounded_lt_univ\n\n",
  "unbounded_lt_of_unbounded_le":
- "theorem unbounded_lt_of_unbounded_le [preorder α] (h : unbounded (· ≤ ·) s) : unbounded (· < ·) s :=\n  h.rel_mono fun _ _ => le_of_lt\n#align unbounded_lt_of_unbounded_le unbounded_lt_of_unbounded_le\n\n",
+ "theorem unbounded_lt_of_unbounded_le [preorder α] (h : Unbounded (· ≤ ·) s) : Unbounded (· < ·) s :=\n  h.rel_mono fun _ _ => le_of_lt\n#align unbounded_lt_of_unbounded_le unbounded_lt_of_unbounded_le\n\n",
  "unbounded_lt_of_forall_exists_le":
- "theorem unbounded_lt_of_forall_exists_le [preorder α] (h : ∀ a, ∃ b ∈ s, a ≤ b) : unbounded (· < ·) s := fun a =>\n  let ⟨b, hb, hb'⟩ := h a\n  ⟨b, hb, fun hba => hba.not_le hb'⟩\n#align unbounded_lt_of_forall_exists_le unbounded_lt_of_forall_exists_le\n\n",
+ "theorem unbounded_lt_of_forall_exists_le [preorder α] (h : ∀ a, ∃ b ∈ s, a ≤ b) : Unbounded (· < ·) s := fun a =>\n  let ⟨b, hb, hb'⟩ := h a\n  ⟨b, hb, fun hba => hba.not_le hb'⟩\n#align unbounded_lt_of_forall_exists_le unbounded_lt_of_forall_exists_le\n\n",
  "unbounded_lt_inter_not_lt":
- "theorem unbounded_lt_inter_not_lt [SemilatticeSup α] (a : α) :\n    unbounded (· < ·) (s ∩ { b | ¬b < a }) ↔ unbounded (· < ·) s :=\n  by\n  rw [← not_bounded_iff, ← not_bounded_iff, not_iff_not]\n  exact bounded_lt_inter_not_lt a\n#align unbounded_lt_inter_not_lt unbounded_lt_inter_not_lt\n\n",
+ "theorem unbounded_lt_inter_not_lt [SemilatticeSup α] (a : α) :\n    Unbounded (· < ·) (s ∩ { b | ¬b < a }) ↔ Unbounded (· < ·) s :=\n  by\n  rw [← not_bounded_iff, ← not_bounded_iff, not_iff_not]\n  exact bounded_lt_inter_not_lt a\n#align unbounded_lt_inter_not_lt unbounded_lt_inter_not_lt\n\n",
  "unbounded_lt_inter_lt":
- "theorem unbounded_lt_inter_lt [linear_order α] [NoMaxOrder α] (a : α) :\n    unbounded (· < ·) (s ∩ { b | a < b }) ↔ unbounded (· < ·) s :=\n  by\n  rw [← not_bounded_iff, ← not_bounded_iff, not_iff_not]\n  exact bounded_lt_inter_lt a\n#align unbounded_lt_inter_lt unbounded_lt_inter_lt\n\n",
+ "theorem unbounded_lt_inter_lt [linear_order α] [NoMaxOrder α] (a : α) :\n    Unbounded (· < ·) (s ∩ { b | a < b }) ↔ Unbounded (· < ·) s :=\n  by\n  rw [← not_bounded_iff, ← not_bounded_iff, not_iff_not]\n  exact bounded_lt_inter_lt a\n#align unbounded_lt_inter_lt unbounded_lt_inter_lt\n\n",
  "unbounded_lt_inter_le":
- "theorem unbounded_lt_inter_le [linear_order α] (a : α) : unbounded (· < ·) (s ∩ { b | a ≤ b }) ↔ unbounded (· < ·) s :=\n  by\n  convert unbounded_lt_inter_not_lt a\n  ext\n  exact not_lt.symm\n#align unbounded_lt_inter_le unbounded_lt_inter_le\n\n",
+ "theorem unbounded_lt_inter_le [linear_order α] (a : α) : Unbounded (· < ·) (s ∩ { b | a ≤ b }) ↔ Unbounded (· < ·) s :=\n  by\n  convert unbounded_lt_inter_not_lt a\n  ext\n  exact not_lt.symm\n#align unbounded_lt_inter_le unbounded_lt_inter_le\n\n",
  "unbounded_lt_iff_unbounded_le":
- "theorem unbounded_lt_iff_unbounded_le [preorder α] [NoMaxOrder α] : unbounded (· < ·) s ↔ unbounded (· ≤ ·) s := by\n  simp_rw [← not_bounded_iff, bounded_le_iff_bounded_lt]\n#align unbounded_lt_iff_unbounded_le unbounded_lt_iff_unbounded_le\n\n",
+ "theorem unbounded_lt_iff_unbounded_le [preorder α] [NoMaxOrder α] : Unbounded (· < ·) s ↔ Unbounded (· ≤ ·) s := by\n  simp_rw [← not_bounded_iff, bounded_le_iff_bounded_lt]\n#align unbounded_lt_iff_unbounded_le unbounded_lt_iff_unbounded_le\n\n",
  "unbounded_lt_iff":
- "theorem unbounded_lt_iff [linear_order α] : unbounded (· < ·) s ↔ ∀ a, ∃ b ∈ s, a ≤ b := by\n  simp only [unbounded, not_lt]\n#align unbounded_lt_iff unbounded_lt_iff\n\n",
+ "theorem unbounded_lt_iff [linear_order α] : Unbounded (· < ·) s ↔ ∀ a, ∃ b ∈ s, a ≤ b := by\n  simp only [unbounded, not_lt]\n#align unbounded_lt_iff unbounded_lt_iff\n\n",
  "unbounded_lt_Ioi":
- "theorem unbounded_lt_Ioi [SemilatticeSup α] [NoMaxOrder α] (a : α) : unbounded (· < ·) (Set.Ioi a) :=\n  unbounded_lt_of_unbounded_le (unbounded_le_Ioi a)\n#align unbounded_lt_Ioi unbounded_lt_Ioi\n\n",
+ "theorem unbounded_lt_Ioi [SemilatticeSup α] [NoMaxOrder α] (a : α) : Unbounded (· < ·) (Set.Ioi a) :=\n  unbounded_lt_of_unbounded_le (unbounded_le_Ioi a)\n#align unbounded_lt_Ioi unbounded_lt_Ioi\n\n",
  "unbounded_lt_Ici":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊔ » -/\ntheorem unbounded_lt_Ici [SemilatticeSup α] (a : α) : unbounded (· < ·) (Set.Ici a) := fun b =>\n  ⟨«expr ⊔ » a b, le_sup_left, le_sup_right.not_lt⟩\n#align unbounded_lt_Ici unbounded_lt_Ici\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊔ » -/\ntheorem unbounded_lt_Ici [SemilatticeSup α] (a : α) : Unbounded (· < ·) (Set.Ici a) := fun b =>\n  ⟨«expr ⊔ » a b, le_sup_left, le_sup_right.not_lt⟩\n#align unbounded_lt_Ici unbounded_lt_Ici\n\n",
  "unbounded_le_univ":
- "theorem unbounded_le_univ [LE α] [NoTopOrder α] : unbounded (· ≤ ·) (@Set.univ α) := fun a =>\n  let ⟨b, hb⟩ := exists_not_le a\n  ⟨b, ⟨⟩, hb⟩\n#align unbounded_le_univ unbounded_le_univ\n\n",
+ "theorem unbounded_le_univ [LE α] [NoTopOrder α] : Unbounded (· ≤ ·) (@Set.univ α) := fun a =>\n  let ⟨b, hb⟩ := exists_not_le a\n  ⟨b, ⟨⟩, hb⟩\n#align unbounded_le_univ unbounded_le_univ\n\n",
  "unbounded_le_of_forall_exists_lt":
- "theorem unbounded_le_of_forall_exists_lt [preorder α] (h : ∀ a, ∃ b ∈ s, a < b) : unbounded (· ≤ ·) s := fun a =>\n  let ⟨b, hb, hb'⟩ := h a\n  ⟨b, hb, fun hba => hba.not_lt hb'⟩\n#align unbounded_le_of_forall_exists_lt unbounded_le_of_forall_exists_lt\n\n",
+ "theorem unbounded_le_of_forall_exists_lt [preorder α] (h : ∀ a, ∃ b ∈ s, a < b) : Unbounded (· ≤ ·) s := fun a =>\n  let ⟨b, hb, hb'⟩ := h a\n  ⟨b, hb, fun hba => hba.not_lt hb'⟩\n#align unbounded_le_of_forall_exists_lt unbounded_le_of_forall_exists_lt\n\n",
  "unbounded_le_inter_not_le":
- "theorem unbounded_le_inter_not_le [SemilatticeSup α] (a : α) :\n    unbounded (· ≤ ·) (s ∩ { b | ¬b ≤ a }) ↔ unbounded (· ≤ ·) s :=\n  by\n  rw [← not_bounded_iff, ← not_bounded_iff, not_iff_not]\n  exact bounded_le_inter_not_le a\n#align unbounded_le_inter_not_le unbounded_le_inter_not_le\n\n",
+ "theorem unbounded_le_inter_not_le [SemilatticeSup α] (a : α) :\n    Unbounded (· ≤ ·) (s ∩ { b | ¬b ≤ a }) ↔ Unbounded (· ≤ ·) s :=\n  by\n  rw [← not_bounded_iff, ← not_bounded_iff, not_iff_not]\n  exact bounded_le_inter_not_le a\n#align unbounded_le_inter_not_le unbounded_le_inter_not_le\n\n",
  "unbounded_le_inter_lt":
- "theorem unbounded_le_inter_lt [linear_order α] (a : α) : unbounded (· ≤ ·) (s ∩ { b | a < b }) ↔ unbounded (· ≤ ·) s :=\n  by\n  convert unbounded_le_inter_not_le a\n  ext\n  exact lt_iff_not_le\n#align unbounded_le_inter_lt unbounded_le_inter_lt\n\n",
+ "theorem unbounded_le_inter_lt [linear_order α] (a : α) : Unbounded (· ≤ ·) (s ∩ { b | a < b }) ↔ Unbounded (· ≤ ·) s :=\n  by\n  convert unbounded_le_inter_not_le a\n  ext\n  exact lt_iff_not_le\n#align unbounded_le_inter_lt unbounded_le_inter_lt\n\n",
  "unbounded_le_inter_le":
- "theorem unbounded_le_inter_le [linear_order α] (a : α) : unbounded (· ≤ ·) (s ∩ { b | a ≤ b }) ↔ unbounded (· ≤ ·) s :=\n  by\n  rw [← not_bounded_iff, ← not_bounded_iff, not_iff_not]\n  exact bounded_le_inter_le a\n#align unbounded_le_inter_le unbounded_le_inter_le\n\n",
+ "theorem unbounded_le_inter_le [linear_order α] (a : α) : Unbounded (· ≤ ·) (s ∩ { b | a ≤ b }) ↔ Unbounded (· ≤ ·) s :=\n  by\n  rw [← not_bounded_iff, ← not_bounded_iff, not_iff_not]\n  exact bounded_le_inter_le a\n#align unbounded_le_inter_le unbounded_le_inter_le\n\n",
  "unbounded_le_iff":
- "theorem unbounded_le_iff [linear_order α] : unbounded (· ≤ ·) s ↔ ∀ a, ∃ b ∈ s, a < b := by\n  simp only [unbounded, not_le]\n#align unbounded_le_iff unbounded_le_iff\n\n",
+ "theorem unbounded_le_iff [linear_order α] : Unbounded (· ≤ ·) s ↔ ∀ a, ∃ b ∈ s, a < b := by\n  simp only [unbounded, not_le]\n#align unbounded_le_iff unbounded_le_iff\n\n",
  "unbounded_le_Ioi":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊔ » -/\ntheorem unbounded_le_Ioi [SemilatticeSup α] [NoMaxOrder α] (a : α) : unbounded (· ≤ ·) (Set.Ioi a) := fun b =>\n  let ⟨c, hc⟩ := exists_gt («expr ⊔ » a b)\n  ⟨c, le_sup_left.trans_lt hc, (le_sup_right.trans_lt hc).not_le⟩\n#align unbounded_le_Ioi unbounded_le_Ioi\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊔ » -/\ntheorem unbounded_le_Ioi [SemilatticeSup α] [NoMaxOrder α] (a : α) : Unbounded (· ≤ ·) (Set.Ioi a) := fun b =>\n  let ⟨c, hc⟩ := exists_gt («expr ⊔ » a b)\n  ⟨c, le_sup_left.trans_lt hc, (le_sup_right.trans_lt hc).not_le⟩\n#align unbounded_le_Ioi unbounded_le_Ioi\n\n",
  "unbounded_le_Ici":
- "theorem unbounded_le_Ici [SemilatticeSup α] [NoMaxOrder α] (a : α) : unbounded (· ≤ ·) (Set.Ici a) :=\n  (unbounded_le_Ioi a).mono Set.Ioi_subset_Ici_self\n#align unbounded_le_Ici unbounded_le_Ici\n\n",
+ "theorem unbounded_le_Ici [SemilatticeSup α] [NoMaxOrder α] (a : α) : Unbounded (· ≤ ·) (Set.Ici a) :=\n  (unbounded_le_Ioi a).mono Set.Ioi_subset_Ici_self\n#align unbounded_le_Ici unbounded_le_Ici\n\n",
  "unbounded_inter_not":
- "theorem unbounded_inter_not (H : ∀ a b, ∃ m, ∀ c, r c a ∨ r c b → r c m) (a : α) :\n    unbounded r (s ∩ { b | ¬r b a }) ↔ unbounded r s := by simp_rw [← not_bounded_iff, bounded_inter_not H]\n#align unbounded_inter_not unbounded_inter_not\n\n",
+ "theorem unbounded_inter_not (H : ∀ a b, ∃ m, ∀ c, r c a ∨ r c b → r c m) (a : α) :\n    Unbounded r (s ∩ { b | ¬r b a }) ↔ Unbounded r s := by simp_rw [← not_bounded_iff, bounded_inter_not H]\n#align unbounded_inter_not unbounded_inter_not\n\n",
  "unbounded_inter_ge":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵈ» -/\ntheorem unbounded_inter_ge [linear_order α] (a : α) : unbounded (· > ·) (s ∩ { b | b ≤ a }) ↔ unbounded (· > ·) s :=\n  @unbounded_lt_inter_le («expr ᵒᵈ» α) s _ a\n#align unbounded_inter_ge unbounded_inter_ge\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵈ» -/\ntheorem unbounded_inter_ge [linear_order α] (a : α) : Unbounded (· > ·) (s ∩ { b | b ≤ a }) ↔ Unbounded (· > ·) s :=\n  @unbounded_lt_inter_le («expr ᵒᵈ» α) s _ a\n#align unbounded_inter_ge unbounded_inter_ge\n\n",
  "unbounded_gt_univ":
- "theorem unbounded_gt_univ [preorder α] [NoBotOrder α] : unbounded (· > ·) (@Set.univ α) :=\n  unbounded_gt_of_unbounded_ge unbounded_ge_univ\n#align unbounded_gt_univ unbounded_gt_univ\n\n",
+ "theorem unbounded_gt_univ [preorder α] [NoBotOrder α] : Unbounded (· > ·) (@Set.univ α) :=\n  unbounded_gt_of_unbounded_ge unbounded_ge_univ\n#align unbounded_gt_univ unbounded_gt_univ\n\n",
  "unbounded_gt_of_unbounded_ge":
- "theorem unbounded_gt_of_unbounded_ge [preorder α] (h : unbounded (· ≥ ·) s) : unbounded (· > ·) s := fun a =>\n  let ⟨b, hb, hba⟩ := h a\n  ⟨b, hb, fun hba' => hba (le_of_lt hba')⟩\n#align unbounded_gt_of_unbounded_ge unbounded_gt_of_unbounded_ge\n\n",
+ "theorem unbounded_gt_of_unbounded_ge [preorder α] (h : Unbounded (· ≥ ·) s) : Unbounded (· > ·) s := fun a =>\n  let ⟨b, hb, hba⟩ := h a\n  ⟨b, hb, fun hba' => hba (le_of_lt hba')⟩\n#align unbounded_gt_of_unbounded_ge unbounded_gt_of_unbounded_ge\n\n",
  "unbounded_gt_of_forall_exists_ge":
- "theorem unbounded_gt_of_forall_exists_ge [preorder α] (h : ∀ a, ∃ b ∈ s, b ≤ a) : unbounded (· > ·) s := fun a =>\n  let ⟨b, hb, hb'⟩ := h a\n  ⟨b, hb, fun hba => not_le_of_gt hba hb'⟩\n#align unbounded_gt_of_forall_exists_ge unbounded_gt_of_forall_exists_ge\n\n",
+ "theorem unbounded_gt_of_forall_exists_ge [preorder α] (h : ∀ a, ∃ b ∈ s, b ≤ a) : Unbounded (· > ·) s := fun a =>\n  let ⟨b, hb, hb'⟩ := h a\n  ⟨b, hb, fun hba => not_le_of_gt hba hb'⟩\n#align unbounded_gt_of_forall_exists_ge unbounded_gt_of_forall_exists_ge\n\n",
  "unbounded_gt_inter_not_gt":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵈ» -/\ntheorem unbounded_gt_inter_not_gt [SemilatticeInf α] (a : α) :\n    unbounded (· > ·) (s ∩ { b | ¬a < b }) ↔ unbounded (· > ·) s :=\n  @unbounded_lt_inter_not_lt («expr ᵒᵈ» α) s _ a\n#align unbounded_gt_inter_not_gt unbounded_gt_inter_not_gt\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵈ» -/\ntheorem unbounded_gt_inter_not_gt [SemilatticeInf α] (a : α) :\n    Unbounded (· > ·) (s ∩ { b | ¬a < b }) ↔ Unbounded (· > ·) s :=\n  @unbounded_lt_inter_not_lt («expr ᵒᵈ» α) s _ a\n#align unbounded_gt_inter_not_gt unbounded_gt_inter_not_gt\n\n",
  "unbounded_gt_inter_gt":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵈ» -/\ntheorem unbounded_gt_inter_gt [linear_order α] [NoMinOrder α] (a : α) :\n    unbounded (· > ·) (s ∩ { b | b < a }) ↔ unbounded (· > ·) s :=\n  @unbounded_lt_inter_lt («expr ᵒᵈ» α) s _ _ a\n#align unbounded_gt_inter_gt unbounded_gt_inter_gt\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵈ» -/\ntheorem unbounded_gt_inter_gt [linear_order α] [NoMinOrder α] (a : α) :\n    Unbounded (· > ·) (s ∩ { b | b < a }) ↔ Unbounded (· > ·) s :=\n  @unbounded_lt_inter_lt («expr ᵒᵈ» α) s _ _ a\n#align unbounded_gt_inter_gt unbounded_gt_inter_gt\n\n",
  "unbounded_gt_iff_unbounded_ge":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵈ» -/\ntheorem unbounded_gt_iff_unbounded_ge [preorder α] [NoMinOrder α] : unbounded (· > ·) s ↔ unbounded (· ≥ ·) s :=\n  @unbounded_lt_iff_unbounded_le («expr ᵒᵈ» α) _ _ _\n#align unbounded_gt_iff_unbounded_ge unbounded_gt_iff_unbounded_ge\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵈ» -/\ntheorem unbounded_gt_iff_unbounded_ge [preorder α] [NoMinOrder α] : Unbounded (· > ·) s ↔ Unbounded (· ≥ ·) s :=\n  @unbounded_lt_iff_unbounded_le («expr ᵒᵈ» α) _ _ _\n#align unbounded_gt_iff_unbounded_ge unbounded_gt_iff_unbounded_ge\n\n",
  "unbounded_gt_iff":
- "theorem unbounded_gt_iff [linear_order α] : unbounded (· > ·) s ↔ ∀ a, ∃ b ∈ s, b ≤ a :=\n  ⟨fun h a =>\n    let ⟨b, hb, hba⟩ := h a\n    ⟨b, hb, le_of_not_gt hba⟩,\n    unbounded_gt_of_forall_exists_ge⟩\n#align unbounded_gt_iff unbounded_gt_iff\n\n",
+ "theorem unbounded_gt_iff [linear_order α] : Unbounded (· > ·) s ↔ ∀ a, ∃ b ∈ s, b ≤ a :=\n  ⟨fun h a =>\n    let ⟨b, hb, hba⟩ := h a\n    ⟨b, hb, le_of_not_gt hba⟩,\n    unbounded_gt_of_forall_exists_ge⟩\n#align unbounded_gt_iff unbounded_gt_iff\n\n",
  "unbounded_ge_univ":
- "theorem unbounded_ge_univ [LE α] [NoBotOrder α] : unbounded (· ≥ ·) (@Set.univ α) := fun a =>\n  let ⟨b, hb⟩ := exists_not_ge a\n  ⟨b, ⟨⟩, hb⟩\n#align unbounded_ge_univ unbounded_ge_univ\n\n",
+ "theorem unbounded_ge_univ [LE α] [NoBotOrder α] : Unbounded (· ≥ ·) (@Set.univ α) := fun a =>\n  let ⟨b, hb⟩ := exists_not_ge a\n  ⟨b, ⟨⟩, hb⟩\n#align unbounded_ge_univ unbounded_ge_univ\n\n",
  "unbounded_ge_of_forall_exists_gt":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵈ» -/\ntheorem unbounded_ge_of_forall_exists_gt [preorder α] (h : ∀ a, ∃ b ∈ s, b < a) : unbounded (· ≥ ·) s :=\n  @unbounded_le_of_forall_exists_lt («expr ᵒᵈ» α) _ _ h\n#align unbounded_ge_of_forall_exists_gt unbounded_ge_of_forall_exists_gt\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵈ» -/\ntheorem unbounded_ge_of_forall_exists_gt [preorder α] (h : ∀ a, ∃ b ∈ s, b < a) : Unbounded (· ≥ ·) s :=\n  @unbounded_le_of_forall_exists_lt («expr ᵒᵈ» α) _ _ h\n#align unbounded_ge_of_forall_exists_gt unbounded_ge_of_forall_exists_gt\n\n",
  "unbounded_ge_inter_not_ge":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵈ» -/\ntheorem unbounded_ge_inter_not_ge [SemilatticeInf α] (a : α) :\n    unbounded (· ≥ ·) (s ∩ { b | ¬a ≤ b }) ↔ unbounded (· ≥ ·) s :=\n  @unbounded_le_inter_not_le («expr ᵒᵈ» α) s _ a\n#align unbounded_ge_inter_not_ge unbounded_ge_inter_not_ge\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵈ» -/\ntheorem unbounded_ge_inter_not_ge [SemilatticeInf α] (a : α) :\n    Unbounded (· ≥ ·) (s ∩ { b | ¬a ≤ b }) ↔ Unbounded (· ≥ ·) s :=\n  @unbounded_le_inter_not_le («expr ᵒᵈ» α) s _ a\n#align unbounded_ge_inter_not_ge unbounded_ge_inter_not_ge\n\n",
  "unbounded_ge_inter_gt":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵈ» -/\ntheorem unbounded_ge_inter_gt [linear_order α] (a : α) : unbounded (· ≥ ·) (s ∩ { b | b < a }) ↔ unbounded (· ≥ ·) s :=\n  @unbounded_le_inter_lt («expr ᵒᵈ» α) s _ a\n#align unbounded_ge_inter_gt unbounded_ge_inter_gt\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵈ» -/\ntheorem unbounded_ge_inter_gt [linear_order α] (a : α) : Unbounded (· ≥ ·) (s ∩ { b | b < a }) ↔ Unbounded (· ≥ ·) s :=\n  @unbounded_le_inter_lt («expr ᵒᵈ» α) s _ a\n#align unbounded_ge_inter_gt unbounded_ge_inter_gt\n\n",
  "unbounded_ge_iff_unbounded_inter_ge":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵈ» -/\ntheorem unbounded_ge_iff_unbounded_inter_ge [linear_order α] (a : α) :\n    unbounded (· ≥ ·) (s ∩ { b | b ≤ a }) ↔ unbounded (· ≥ ·) s :=\n  @unbounded_le_inter_le («expr ᵒᵈ» α) s _ a\n#align unbounded_ge_iff_unbounded_inter_ge unbounded_ge_iff_unbounded_inter_ge\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵈ» -/\ntheorem unbounded_ge_iff_unbounded_inter_ge [linear_order α] (a : α) :\n    Unbounded (· ≥ ·) (s ∩ { b | b ≤ a }) ↔ Unbounded (· ≥ ·) s :=\n  @unbounded_le_inter_le («expr ᵒᵈ» α) s _ a\n#align unbounded_ge_iff_unbounded_inter_ge unbounded_ge_iff_unbounded_inter_ge\n\n",
  "unbounded_ge_iff":
- "theorem unbounded_ge_iff [linear_order α] : unbounded (· ≥ ·) s ↔ ∀ a, ∃ b ∈ s, b < a :=\n  ⟨fun h a =>\n    let ⟨b, hb, hba⟩ := h a\n    ⟨b, hb, lt_of_not_ge hba⟩,\n    unbounded_ge_of_forall_exists_gt⟩\n#align unbounded_ge_iff unbounded_ge_iff\n\n",
+ "theorem unbounded_ge_iff [linear_order α] : Unbounded (· ≥ ·) s ↔ ∀ a, ∃ b ∈ s, b < a :=\n  ⟨fun h a =>\n    let ⟨b, hb, hba⟩ := h a\n    ⟨b, hb, lt_of_not_ge hba⟩,\n    unbounded_ge_of_forall_exists_gt⟩\n#align unbounded_ge_iff unbounded_ge_iff\n\n",
  "rel_mono":
- "theorem unbounded.rel_mono {r' : α → α → Prop} (hr : r' ≤ r) (h : unbounded r s) : unbounded r' s := fun a =>\n  let ⟨b, hb, hba⟩ := h a\n  ⟨b, hb, fun hba' => hba (hr b a hba')⟩\n#align unbounded.rel_mono unbounded.rel_mono\n\n",
+ "theorem unbounded.rel_mono {r' : α → α → Prop} (hr : r' ≤ r) (h : Unbounded r s) : Unbounded r' s := fun a =>\n  let ⟨b, hb, hba⟩ := h a\n  ⟨b, hb, fun hba' => hba (hr b a hba')⟩\n#align unbounded.rel_mono unbounded.rel_mono\n\n",
  "mono":
- "theorem unbounded.mono (hst : s ⊆ t) (hs : unbounded r s) : unbounded r t := fun a =>\n  let ⟨b, hb, hb'⟩ := hs a\n  ⟨b, hst hb, hb'⟩\n#align unbounded.mono unbounded.mono\n\n",
+ "theorem unbounded.mono (hst : s ⊆ t) (hs : Unbounded r s) : Unbounded r t := fun a =>\n  let ⟨b, hb, hb'⟩ := hs a\n  ⟨b, hst hb, hb'⟩\n#align unbounded.mono unbounded.mono\n\n",
  "bounded_self":
- "theorem bounded_self (a : α) : bounded r { b | r b a } :=\n  ⟨a, fun x => id⟩\n#align bounded_self bounded_self\n\n",
+ "theorem bounded_self (a : α) : Bounded r { b | r b a } :=\n  ⟨a, fun x => id⟩\n#align bounded_self bounded_self\n\n",
  "bounded_lt_inter_not_lt":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊔ » -/\ntheorem bounded_lt_inter_not_lt [SemilatticeSup α] (a : α) : bounded (· < ·) (s ∩ { b | ¬b < a }) ↔ bounded (· < ·) s :=\n  bounded_inter_not (fun x y => ⟨«expr ⊔ » x y, fun z h => h.elim lt_sup_of_lt_left lt_sup_of_lt_right⟩) a\n#align bounded_lt_inter_not_lt bounded_lt_inter_not_lt\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊔ » -/\ntheorem bounded_lt_inter_not_lt [SemilatticeSup α] (a : α) : Bounded (· < ·) (s ∩ { b | ¬b < a }) ↔ Bounded (· < ·) s :=\n  bounded_inter_not (fun x y => ⟨«expr ⊔ » x y, fun z h => h.elim lt_sup_of_lt_left lt_sup_of_lt_right⟩) a\n#align bounded_lt_inter_not_lt bounded_lt_inter_not_lt\n\n",
  "bounded_lt_inter_lt":
- "theorem bounded_lt_inter_lt [linear_order α] [NoMaxOrder α] (a : α) :\n    bounded (· < ·) (s ∩ { b | a < b }) ↔ bounded (· < ·) s :=\n  by\n  rw [← bounded_le_iff_bounded_lt, ← bounded_le_iff_bounded_lt]\n  exact bounded_le_inter_lt a\n#align bounded_lt_inter_lt bounded_lt_inter_lt\n\n",
+ "theorem bounded_lt_inter_lt [linear_order α] [NoMaxOrder α] (a : α) :\n    Bounded (· < ·) (s ∩ { b | a < b }) ↔ Bounded (· < ·) s :=\n  by\n  rw [← bounded_le_iff_bounded_lt, ← bounded_le_iff_bounded_lt]\n  exact bounded_le_inter_lt a\n#align bounded_lt_inter_lt bounded_lt_inter_lt\n\n",
  "bounded_lt_inter_le":
- "theorem bounded_lt_inter_le [linear_order α] (a : α) : bounded (· < ·) (s ∩ { b | a ≤ b }) ↔ bounded (· < ·) s :=\n  by\n  convert bounded_lt_inter_not_lt a\n  ext\n  exact not_lt.symm\n#align bounded_lt_inter_le bounded_lt_inter_le\n\n",
+ "theorem bounded_lt_inter_le [linear_order α] (a : α) : Bounded (· < ·) (s ∩ { b | a ≤ b }) ↔ Bounded (· < ·) s :=\n  by\n  convert bounded_lt_inter_not_lt a\n  ext\n  exact not_lt.symm\n#align bounded_lt_inter_le bounded_lt_inter_le\n\n",
  "bounded_lt_Ioo":
- "theorem bounded_lt_Ioo [preorder α] (a b : α) : bounded (· < ·) (Set.Ioo a b) :=\n  (bounded_lt_Iio b).mono Set.Ioo_subset_Iio_self\n#align bounded_lt_Ioo bounded_lt_Ioo\n\n",
+ "theorem bounded_lt_Ioo [preorder α] (a b : α) : Bounded (· < ·) (Set.Ioo a b) :=\n  (bounded_lt_Iio b).mono Set.Ioo_subset_Iio_self\n#align bounded_lt_Ioo bounded_lt_Ioo\n\n",
  "bounded_lt_Ioc":
- "theorem bounded_lt_Ioc [preorder α] [NoMaxOrder α] (a b : α) : bounded (· < ·) (Set.Ioc a b) :=\n  (bounded_lt_Iic b).mono Set.Ioc_subset_Iic_self\n#align bounded_lt_Ioc bounded_lt_Ioc\n\n",
+ "theorem bounded_lt_Ioc [preorder α] [NoMaxOrder α] (a b : α) : Bounded (· < ·) (Set.Ioc a b) :=\n  (bounded_lt_Iic b).mono Set.Ioc_subset_Iic_self\n#align bounded_lt_Ioc bounded_lt_Ioc\n\n",
  "bounded_lt_Iio":
- "theorem bounded_lt_Iio [preorder α] (a : α) : bounded (· < ·) (Set.Iio a) :=\n  bounded_self a\n#align bounded_lt_Iio bounded_lt_Iio\n\n",
+ "theorem bounded_lt_Iio [preorder α] (a : α) : Bounded (· < ·) (Set.Iio a) :=\n  bounded_self a\n#align bounded_lt_Iio bounded_lt_Iio\n\n",
  "bounded_lt_Iic":
- "theorem bounded_lt_Iic [preorder α] [NoMaxOrder α] (a : α) : bounded (· < ·) (Set.Iic a) := by\n  simp only [← bounded_le_iff_bounded_lt, bounded_le_Iic]\n#align bounded_lt_Iic bounded_lt_Iic\n\n",
+ "theorem bounded_lt_Iic [preorder α] [NoMaxOrder α] (a : α) : Bounded (· < ·) (Set.Iic a) := by\n  simp only [← bounded_le_iff_bounded_lt, bounded_le_Iic]\n#align bounded_lt_Iic bounded_lt_Iic\n\n",
  "bounded_lt_Ico":
- "theorem bounded_lt_Ico [preorder α] (a b : α) : bounded (· < ·) (Set.Ico a b) :=\n  (bounded_lt_Iio b).mono Set.Ico_subset_Iio_self\n#align bounded_lt_Ico bounded_lt_Ico\n\n",
+ "theorem bounded_lt_Ico [preorder α] (a b : α) : Bounded (· < ·) (Set.Ico a b) :=\n  (bounded_lt_Iio b).mono Set.Ico_subset_Iio_self\n#align bounded_lt_Ico bounded_lt_Ico\n\n",
  "bounded_lt_Icc":
- "theorem bounded_lt_Icc [preorder α] [NoMaxOrder α] (a b : α) : bounded (· < ·) (Set.Icc a b) :=\n  (bounded_lt_Iic b).mono Set.Icc_subset_Iic_self\n#align bounded_lt_Icc bounded_lt_Icc\n\n",
+ "theorem bounded_lt_Icc [preorder α] [NoMaxOrder α] (a b : α) : Bounded (· < ·) (Set.Icc a b) :=\n  (bounded_lt_Iic b).mono Set.Icc_subset_Iic_self\n#align bounded_lt_Icc bounded_lt_Icc\n\n",
  "bounded_le_of_bounded_lt":
- "theorem bounded_le_of_bounded_lt [preorder α] (h : bounded (· < ·) s) : bounded (· ≤ ·) s :=\n  h.rel_mono fun _ _ => le_of_lt\n#align bounded_le_of_bounded_lt bounded_le_of_bounded_lt\n\n",
+ "theorem bounded_le_of_bounded_lt [preorder α] (h : Bounded (· < ·) s) : Bounded (· ≤ ·) s :=\n  h.rel_mono fun _ _ => le_of_lt\n#align bounded_le_of_bounded_lt bounded_le_of_bounded_lt\n\n",
  "bounded_le_inter_not_le":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊔ » -/\ntheorem bounded_le_inter_not_le [SemilatticeSup α] (a : α) : bounded (· ≤ ·) (s ∩ { b | ¬b ≤ a }) ↔ bounded (· ≤ ·) s :=\n  bounded_inter_not (fun x y => ⟨«expr ⊔ » x y, fun z h => h.elim le_sup_of_le_left le_sup_of_le_right⟩) a\n#align bounded_le_inter_not_le bounded_le_inter_not_le\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊔ » -/\ntheorem bounded_le_inter_not_le [SemilatticeSup α] (a : α) : Bounded (· ≤ ·) (s ∩ { b | ¬b ≤ a }) ↔ Bounded (· ≤ ·) s :=\n  bounded_inter_not (fun x y => ⟨«expr ⊔ » x y, fun z h => h.elim le_sup_of_le_left le_sup_of_le_right⟩) a\n#align bounded_le_inter_not_le bounded_le_inter_not_le\n\n",
  "bounded_le_inter_lt":
- "theorem bounded_le_inter_lt [linear_order α] (a : α) : bounded (· ≤ ·) (s ∩ { b | a < b }) ↔ bounded (· ≤ ·) s := by\n  simp_rw [← not_le, bounded_le_inter_not_le]\n#align bounded_le_inter_lt bounded_le_inter_lt\n\n",
+ "theorem bounded_le_inter_lt [linear_order α] (a : α) : Bounded (· ≤ ·) (s ∩ { b | a < b }) ↔ Bounded (· ≤ ·) s := by\n  simp_rw [← not_le, bounded_le_inter_not_le]\n#align bounded_le_inter_lt bounded_le_inter_lt\n\n",
  "bounded_le_inter_le":
- "theorem bounded_le_inter_le [linear_order α] (a : α) : bounded (· ≤ ·) (s ∩ { b | a ≤ b }) ↔ bounded (· ≤ ·) s :=\n  by\n  refine' ⟨_, bounded.mono (Set.inter_subset_left s _)⟩\n  rw [← @bounded_le_inter_lt _ s _ a]\n  exact bounded.mono fun x ⟨hx, hx'⟩ => ⟨hx, le_of_lt hx'⟩\n#align bounded_le_inter_le bounded_le_inter_le\n\n",
+ "theorem bounded_le_inter_le [linear_order α] (a : α) : Bounded (· ≤ ·) (s ∩ { b | a ≤ b }) ↔ Bounded (· ≤ ·) s :=\n  by\n  refine' ⟨_, bounded.mono (Set.inter_subset_left s _)⟩\n  rw [← @bounded_le_inter_lt _ s _ a]\n  exact bounded.mono fun x ⟨hx, hx'⟩ => ⟨hx, le_of_lt hx'⟩\n#align bounded_le_inter_le bounded_le_inter_le\n\n",
  "bounded_le_iff_bounded_lt":
- "theorem bounded_le_iff_bounded_lt [preorder α] [NoMaxOrder α] : bounded (· ≤ ·) s ↔ bounded (· < ·) s :=\n  by\n  refine' ⟨fun h => _, bounded_le_of_bounded_lt⟩\n  cases' h with a ha\n  cases' exists_gt a with b hb\n  exact ⟨b, fun c hc => lt_of_le_of_lt (ha c hc) hb⟩\n#align bounded_le_iff_bounded_lt bounded_le_iff_bounded_lt\n\n",
+ "theorem bounded_le_iff_bounded_lt [preorder α] [NoMaxOrder α] : Bounded (· ≤ ·) s ↔ Bounded (· < ·) s :=\n  by\n  refine' ⟨fun h => _, bounded_le_of_bounded_lt⟩\n  cases' h with a ha\n  cases' exists_gt a with b hb\n  exact ⟨b, fun c hc => lt_of_le_of_lt (ha c hc) hb⟩\n#align bounded_le_iff_bounded_lt bounded_le_iff_bounded_lt\n\n",
  "bounded_le_Ioo":
- "theorem bounded_le_Ioo [preorder α] (a b : α) : bounded (· ≤ ·) (Set.Ioo a b) :=\n  (bounded_le_Iio b).mono Set.Ioo_subset_Iio_self\n#align bounded_le_Ioo bounded_le_Ioo\n\n",
+ "theorem bounded_le_Ioo [preorder α] (a b : α) : Bounded (· ≤ ·) (Set.Ioo a b) :=\n  (bounded_le_Iio b).mono Set.Ioo_subset_Iio_self\n#align bounded_le_Ioo bounded_le_Ioo\n\n",
  "bounded_le_Ioc":
- "theorem bounded_le_Ioc [preorder α] (a b : α) : bounded (· ≤ ·) (Set.Ioc a b) :=\n  (bounded_le_Iic b).mono Set.Ioc_subset_Iic_self\n#align bounded_le_Ioc bounded_le_Ioc\n\n",
+ "theorem bounded_le_Ioc [preorder α] (a b : α) : Bounded (· ≤ ·) (Set.Ioc a b) :=\n  (bounded_le_Iic b).mono Set.Ioc_subset_Iic_self\n#align bounded_le_Ioc bounded_le_Ioc\n\n",
  "bounded_le_Iio":
- "theorem bounded_le_Iio [preorder α] (a : α) : bounded (· ≤ ·) (Set.Iio a) :=\n  bounded_le_of_bounded_lt (bounded_lt_Iio a)\n#align bounded_le_Iio bounded_le_Iio\n\n",
+ "theorem bounded_le_Iio [preorder α] (a : α) : Bounded (· ≤ ·) (Set.Iio a) :=\n  bounded_le_of_bounded_lt (bounded_lt_Iio a)\n#align bounded_le_Iio bounded_le_Iio\n\n",
  "bounded_le_Iic":
- "theorem bounded_le_Iic [preorder α] (a : α) : bounded (· ≤ ·) (Set.Iic a) :=\n  bounded_self a\n#align bounded_le_Iic bounded_le_Iic\n\n",
+ "theorem bounded_le_Iic [preorder α] (a : α) : Bounded (· ≤ ·) (Set.Iic a) :=\n  bounded_self a\n#align bounded_le_Iic bounded_le_Iic\n\n",
  "bounded_le_Ico":
- "theorem bounded_le_Ico [preorder α] (a b : α) : bounded (· ≤ ·) (Set.Ico a b) :=\n  (bounded_le_Iio b).mono Set.Ico_subset_Iio_self\n#align bounded_le_Ico bounded_le_Ico\n\n",
+ "theorem bounded_le_Ico [preorder α] (a b : α) : Bounded (· ≤ ·) (Set.Ico a b) :=\n  (bounded_le_Iio b).mono Set.Ico_subset_Iio_self\n#align bounded_le_Ico bounded_le_Ico\n\n",
  "bounded_le_Icc":
- "theorem bounded_le_Icc [preorder α] (a b : α) : bounded (· ≤ ·) (Set.Icc a b) :=\n  (bounded_le_Iic b).mono Set.Icc_subset_Iic_self\n#align bounded_le_Icc bounded_le_Icc\n\n",
+ "theorem bounded_le_Icc [preorder α] (a b : α) : Bounded (· ≤ ·) (Set.Icc a b) :=\n  (bounded_le_Iic b).mono Set.Icc_subset_Iic_self\n#align bounded_le_Icc bounded_le_Icc\n\n",
  "bounded_inter_not":
- "theorem bounded_inter_not (H : ∀ a b, ∃ m, ∀ c, r c a ∨ r c b → r c m) (a : α) :\n    bounded r (s ∩ { b | ¬r b a }) ↔ bounded r s :=\n  by\n  refine' ⟨_, bounded.mono (Set.inter_subset_left s _)⟩\n  rintro ⟨b, hb⟩\n  cases' H a b with m hm\n  exact ⟨m, fun c hc => hm c (or_iff_not_imp_left.2 fun hca => hb c ⟨hc, hca⟩)⟩\n#align bounded_inter_not bounded_inter_not\n\n",
+ "theorem bounded_inter_not (H : ∀ a b, ∃ m, ∀ c, r c a ∨ r c b → r c m) (a : α) :\n    Bounded r (s ∩ { b | ¬r b a }) ↔ Bounded r s :=\n  by\n  refine' ⟨_, bounded.mono (Set.inter_subset_left s _)⟩\n  rintro ⟨b, hb⟩\n  cases' H a b with m hm\n  exact ⟨m, fun c hc => hm c (or_iff_not_imp_left.2 fun hca => hb c ⟨hc, hca⟩)⟩\n#align bounded_inter_not bounded_inter_not\n\n",
  "bounded_gt_inter_not_gt":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵈ» -/\ntheorem bounded_gt_inter_not_gt [SemilatticeInf α] (a : α) : bounded (· > ·) (s ∩ { b | ¬a < b }) ↔ bounded (· > ·) s :=\n  @bounded_lt_inter_not_lt («expr ᵒᵈ» α) s _ a\n#align bounded_gt_inter_not_gt bounded_gt_inter_not_gt\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵈ» -/\ntheorem bounded_gt_inter_not_gt [SemilatticeInf α] (a : α) : Bounded (· > ·) (s ∩ { b | ¬a < b }) ↔ Bounded (· > ·) s :=\n  @bounded_lt_inter_not_lt («expr ᵒᵈ» α) s _ a\n#align bounded_gt_inter_not_gt bounded_gt_inter_not_gt\n\n",
  "bounded_gt_inter_gt":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵈ» -/\ntheorem bounded_gt_inter_gt [linear_order α] [NoMinOrder α] (a : α) :\n    bounded (· > ·) (s ∩ { b | b < a }) ↔ bounded (· > ·) s :=\n  @bounded_lt_inter_lt («expr ᵒᵈ» α) s _ _ a\n#align bounded_gt_inter_gt bounded_gt_inter_gt\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵈ» -/\ntheorem bounded_gt_inter_gt [linear_order α] [NoMinOrder α] (a : α) :\n    Bounded (· > ·) (s ∩ { b | b < a }) ↔ Bounded (· > ·) s :=\n  @bounded_lt_inter_lt («expr ᵒᵈ» α) s _ _ a\n#align bounded_gt_inter_gt bounded_gt_inter_gt\n\n",
  "bounded_gt_inter_ge":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵈ» -/\ntheorem bounded_gt_inter_ge [linear_order α] (a : α) : bounded (· > ·) (s ∩ { b | b ≤ a }) ↔ bounded (· > ·) s :=\n  @bounded_lt_inter_le («expr ᵒᵈ» α) s _ a\n#align bounded_gt_inter_ge bounded_gt_inter_ge\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵈ» -/\ntheorem bounded_gt_inter_ge [linear_order α] (a : α) : Bounded (· > ·) (s ∩ { b | b ≤ a }) ↔ Bounded (· > ·) s :=\n  @bounded_lt_inter_le («expr ᵒᵈ» α) s _ a\n#align bounded_gt_inter_ge bounded_gt_inter_ge\n\n",
  "bounded_gt_Ioo":
- "theorem bounded_gt_Ioo [preorder α] (a b : α) : bounded (· > ·) (Set.Ioo a b) :=\n  (bounded_gt_Ioi a).mono Set.Ioo_subset_Ioi_self\n#align bounded_gt_Ioo bounded_gt_Ioo\n\n",
+ "theorem bounded_gt_Ioo [preorder α] (a b : α) : Bounded (· > ·) (Set.Ioo a b) :=\n  (bounded_gt_Ioi a).mono Set.Ioo_subset_Ioi_self\n#align bounded_gt_Ioo bounded_gt_Ioo\n\n",
  "bounded_gt_Ioi":
- "theorem bounded_gt_Ioi [preorder α] (a : α) : bounded (· > ·) (Set.Ioi a) :=\n  bounded_self a\n#align bounded_gt_Ioi bounded_gt_Ioi\n\n",
+ "theorem bounded_gt_Ioi [preorder α] (a : α) : Bounded (· > ·) (Set.Ioi a) :=\n  bounded_self a\n#align bounded_gt_Ioi bounded_gt_Ioi\n\n",
  "bounded_gt_Ioc":
- "theorem bounded_gt_Ioc [preorder α] (a b : α) : bounded (· > ·) (Set.Ioc a b) :=\n  (bounded_gt_Ioi a).mono Set.Ioc_subset_Ioi_self\n#align bounded_gt_Ioc bounded_gt_Ioc\n\n",
+ "theorem bounded_gt_Ioc [preorder α] (a b : α) : Bounded (· > ·) (Set.Ioc a b) :=\n  (bounded_gt_Ioi a).mono Set.Ioc_subset_Ioi_self\n#align bounded_gt_Ioc bounded_gt_Ioc\n\n",
  "bounded_gt_Ico":
- "theorem bounded_gt_Ico [preorder α] [NoMinOrder α] (a b : α) : bounded (· > ·) (Set.Ico a b) :=\n  (bounded_gt_Ici a).mono Set.Ico_subset_Ici_self\n#align bounded_gt_Ico bounded_gt_Ico\n\n",
+ "theorem bounded_gt_Ico [preorder α] [NoMinOrder α] (a b : α) : Bounded (· > ·) (Set.Ico a b) :=\n  (bounded_gt_Ici a).mono Set.Ico_subset_Ici_self\n#align bounded_gt_Ico bounded_gt_Ico\n\n",
  "bounded_gt_Ici":
- "theorem bounded_gt_Ici [preorder α] [NoMinOrder α] (a : α) : bounded (· > ·) (Set.Ici a) := by\n  simp only [← bounded_ge_iff_bounded_gt, bounded_ge_Ici]\n#align bounded_gt_Ici bounded_gt_Ici\n\n",
+ "theorem bounded_gt_Ici [preorder α] [NoMinOrder α] (a : α) : Bounded (· > ·) (Set.Ici a) := by\n  simp only [← bounded_ge_iff_bounded_gt, bounded_ge_Ici]\n#align bounded_gt_Ici bounded_gt_Ici\n\n",
  "bounded_gt_Icc":
- "theorem bounded_gt_Icc [preorder α] [NoMinOrder α] (a b : α) : bounded (· > ·) (Set.Icc a b) :=\n  (bounded_gt_Ici a).mono Set.Icc_subset_Ici_self\n#align bounded_gt_Icc bounded_gt_Icc\n\n",
+ "theorem bounded_gt_Icc [preorder α] [NoMinOrder α] (a b : α) : Bounded (· > ·) (Set.Icc a b) :=\n  (bounded_gt_Ici a).mono Set.Icc_subset_Ici_self\n#align bounded_gt_Icc bounded_gt_Icc\n\n",
  "bounded_ge_of_bounded_gt":
- "theorem bounded_ge_of_bounded_gt [preorder α] (h : bounded (· > ·) s) : bounded (· ≥ ·) s :=\n  let ⟨a, ha⟩ := h\n  ⟨a, fun b hb => le_of_lt (ha b hb)⟩\n#align bounded_ge_of_bounded_gt bounded_ge_of_bounded_gt\n\n",
+ "theorem bounded_ge_of_bounded_gt [preorder α] (h : Bounded (· > ·) s) : Bounded (· ≥ ·) s :=\n  let ⟨a, ha⟩ := h\n  ⟨a, fun b hb => le_of_lt (ha b hb)⟩\n#align bounded_ge_of_bounded_gt bounded_ge_of_bounded_gt\n\n",
  "bounded_ge_inter_not_ge":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵈ» -/\ntheorem bounded_ge_inter_not_ge [SemilatticeInf α] (a : α) : bounded (· ≥ ·) (s ∩ { b | ¬a ≤ b }) ↔ bounded (· ≥ ·) s :=\n  @bounded_le_inter_not_le («expr ᵒᵈ» α) s _ a\n#align bounded_ge_inter_not_ge bounded_ge_inter_not_ge\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵈ» -/\ntheorem bounded_ge_inter_not_ge [SemilatticeInf α] (a : α) : Bounded (· ≥ ·) (s ∩ { b | ¬a ≤ b }) ↔ Bounded (· ≥ ·) s :=\n  @bounded_le_inter_not_le («expr ᵒᵈ» α) s _ a\n#align bounded_ge_inter_not_ge bounded_ge_inter_not_ge\n\n",
  "bounded_ge_inter_gt":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵈ» -/\ntheorem bounded_ge_inter_gt [linear_order α] (a : α) : bounded (· ≥ ·) (s ∩ { b | b < a }) ↔ bounded (· ≥ ·) s :=\n  @bounded_le_inter_lt («expr ᵒᵈ» α) s _ a\n#align bounded_ge_inter_gt bounded_ge_inter_gt\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵈ» -/\ntheorem bounded_ge_inter_gt [linear_order α] (a : α) : Bounded (· ≥ ·) (s ∩ { b | b < a }) ↔ Bounded (· ≥ ·) s :=\n  @bounded_le_inter_lt («expr ᵒᵈ» α) s _ a\n#align bounded_ge_inter_gt bounded_ge_inter_gt\n\n",
  "bounded_ge_inter_ge":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵈ» -/\ntheorem bounded_ge_inter_ge [linear_order α] (a : α) : bounded (· ≥ ·) (s ∩ { b | b ≤ a }) ↔ bounded (· ≥ ·) s :=\n  @bounded_le_inter_le («expr ᵒᵈ» α) s _ a\n#align bounded_ge_inter_ge bounded_ge_inter_ge\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵈ» -/\ntheorem bounded_ge_inter_ge [linear_order α] (a : α) : Bounded (· ≥ ·) (s ∩ { b | b ≤ a }) ↔ Bounded (· ≥ ·) s :=\n  @bounded_le_inter_le («expr ᵒᵈ» α) s _ a\n#align bounded_ge_inter_ge bounded_ge_inter_ge\n\n",
  "bounded_ge_iff_bounded_gt":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵈ» -/\ntheorem bounded_ge_iff_bounded_gt [preorder α] [NoMinOrder α] : bounded (· ≥ ·) s ↔ bounded (· > ·) s :=\n  @bounded_le_iff_bounded_lt («expr ᵒᵈ» α) _ _ _\n#align bounded_ge_iff_bounded_gt bounded_ge_iff_bounded_gt\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵈ» -/\ntheorem bounded_ge_iff_bounded_gt [preorder α] [NoMinOrder α] : Bounded (· ≥ ·) s ↔ Bounded (· > ·) s :=\n  @bounded_le_iff_bounded_lt («expr ᵒᵈ» α) _ _ _\n#align bounded_ge_iff_bounded_gt bounded_ge_iff_bounded_gt\n\n",
  "bounded_ge_Ioo":
- "theorem bounded_ge_Ioo [preorder α] (a b : α) : bounded (· ≥ ·) (Set.Ioo a b) :=\n  (bounded_ge_Ioi a).mono Set.Ioo_subset_Ioi_self\n#align bounded_ge_Ioo bounded_ge_Ioo\n\n",
+ "theorem bounded_ge_Ioo [preorder α] (a b : α) : Bounded (· ≥ ·) (Set.Ioo a b) :=\n  (bounded_ge_Ioi a).mono Set.Ioo_subset_Ioi_self\n#align bounded_ge_Ioo bounded_ge_Ioo\n\n",
  "bounded_ge_Ioi":
- "theorem bounded_ge_Ioi [preorder α] (a : α) : bounded (· ≥ ·) (Set.Ioi a) :=\n  bounded_ge_of_bounded_gt (bounded_gt_Ioi a)\n#align bounded_ge_Ioi bounded_ge_Ioi\n\n",
+ "theorem bounded_ge_Ioi [preorder α] (a : α) : Bounded (· ≥ ·) (Set.Ioi a) :=\n  bounded_ge_of_bounded_gt (bounded_gt_Ioi a)\n#align bounded_ge_Ioi bounded_ge_Ioi\n\n",
  "bounded_ge_Ioc":
- "theorem bounded_ge_Ioc [preorder α] (a b : α) : bounded (· ≥ ·) (Set.Ioc a b) :=\n  (bounded_ge_Ioi a).mono Set.Ioc_subset_Ioi_self\n#align bounded_ge_Ioc bounded_ge_Ioc\n\n",
+ "theorem bounded_ge_Ioc [preorder α] (a b : α) : Bounded (· ≥ ·) (Set.Ioc a b) :=\n  (bounded_ge_Ioi a).mono Set.Ioc_subset_Ioi_self\n#align bounded_ge_Ioc bounded_ge_Ioc\n\n",
  "bounded_ge_Ico":
- "theorem bounded_ge_Ico [preorder α] (a b : α) : bounded (· ≥ ·) (Set.Ico a b) :=\n  (bounded_ge_Ici a).mono Set.Ico_subset_Ici_self\n#align bounded_ge_Ico bounded_ge_Ico\n\n",
+ "theorem bounded_ge_Ico [preorder α] (a b : α) : Bounded (· ≥ ·) (Set.Ico a b) :=\n  (bounded_ge_Ici a).mono Set.Ico_subset_Ici_self\n#align bounded_ge_Ico bounded_ge_Ico\n\n",
  "bounded_ge_Ici":
- "theorem bounded_ge_Ici [preorder α] (a : α) : bounded (· ≥ ·) (Set.Ici a) :=\n  bounded_self a\n#align bounded_ge_Ici bounded_ge_Ici\n\n",
+ "theorem bounded_ge_Ici [preorder α] (a : α) : Bounded (· ≥ ·) (Set.Ici a) :=\n  bounded_self a\n#align bounded_ge_Ici bounded_ge_Ici\n\n",
  "bounded_ge_Icc":
- "theorem bounded_ge_Icc [preorder α] (a b : α) : bounded (· ≥ ·) (Set.Icc a b) :=\n  (bounded_ge_Ici a).mono Set.Icc_subset_Ici_self\n#align bounded_ge_Icc bounded_ge_Icc\n\n"}
+ "theorem bounded_ge_Icc [preorder α] (a b : α) : Bounded (· ≥ ·) (Set.Icc a b) :=\n  (bounded_ge_Ici a).mono Set.Icc_subset_Ici_self\n#align bounded_ge_Icc bounded_ge_Icc\n\n"}

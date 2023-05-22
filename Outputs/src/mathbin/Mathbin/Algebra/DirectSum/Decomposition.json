@@ -1,9 +1,9 @@
 {"sum_support_decompose":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `finset.sum -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.sum -/\ntheorem sum_support_decompose [∀ (i) (x : ℳ i), decidable (x ≠ 0)] (r : M) :\n    finset.sum \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.sum\"\n        (decompose ℳ r).support (decompose ℳ r i : M) =\n      r :=\n  by\n  conv_rhs => rw [← (decompose ℳ).symm_apply_apply r, ← sum_support_of (fun i => ℳ i) (decompose ℳ r)]\n  rw [decompose_symm_sum]\n  simp_rw [decompose_symm_of]\n#align sum_support_decompose sum_support_decompose\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `finset.sum -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.sum -/\ntheorem sum_support_decompose [∀ (i) (x : ℳ i), Decidable (x ≠ 0)] (r : M) :\n    finset.sum \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.sum\"\n        (decompose ℳ r).support (decompose ℳ r i : M) =\n      r :=\n  by\n  conv_rhs => rw [← (decompose ℳ).symm_apply_apply r, ← sum_support_of (fun i => ℳ i) (decompose ℳ r)]\n  rw [decompose_symm_sum]\n  simp_rw [decompose_symm_of]\n#align sum_support_decompose sum_support_decompose\n\n",
  "is_internal":
- "/-\nCopyright (c) 2022 Eric Wieser. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Eric Wieser, Jujian Zhang\n-/\nprotected theorem decomposition.is_internal : direct_sum.is_internal ℳ :=\n  ⟨decomposition.right_inv.injective, decomposition.left_inv.surjective⟩\n#align decomposition.is_internal decomposition.is_internal\n\n",
+ "/-\nCopyright (c) 2022 Eric Wieser. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Eric Wieser, Jujian Zhang\n-/\nprotected theorem decomposition.is_internal : DirectSum.IsInternal ℳ :=\n  ⟨decomposition.right_inv.injective, decomposition.left_inv.surjective⟩\n#align decomposition.is_internal decomposition.is_internal\n\n",
  "induction_on":
- "protected theorem decomposition.induction_on {p : M → Prop} (h_zero : p 0) (h_homogeneous : ∀ {i} (m : ℳ i), p (m : M))\n    (h_add : ∀ m m' : M, p m → p m' → p (m + m')) : ∀ m, p m :=\n  by\n  let ℳ' : ι → AddSubmonoid M := fun i =>\n    (⟨ℳ i, fun _ _ => add_mem_class.add_mem, zero_mem_class.zero_mem _⟩ : AddSubmonoid M)\n  haveI t : direct_sum.decomposition ℳ' :=\n    { decompose' := direct_sum.decompose ℳ\n      left_inv := fun _ => (decompose ℳ).left_inv _\n      right_inv := fun _ => (decompose ℳ).right_inv _ }\n  have mem : ∀ m, m ∈ supᵢ ℳ' := fun m =>\n    (direct_sum.is_internal.add_submonoid_supr_eq_top ℳ' (decomposition.is_internal ℳ')).symm ▸ trivial\n  exact fun m => add_submonoid.supr_induction ℳ' (mem m) (fun i m h => h_homogeneous ⟨m, h⟩) h_zero h_add\n#align decomposition.induction_on decomposition.induction_on\n\n",
+ "protected theorem decomposition.induction_on {p : M → Prop} (h_zero : p 0) (h_homogeneous : ∀ {i} (m : ℳ i), p (m : M))\n    (h_add : ∀ m m' : M, p m → p m' → p (m + m')) : ∀ m, p m :=\n  by\n  let ℳ' : ι → AddSubmonoid M := fun i =>\n    (⟨ℳ i, fun _ _ => add_mem_class.add_mem, zero_mem_class.zero_mem _⟩ : AddSubmonoid M)\n  haveI t : direct_sum.decomposition ℳ' :=\n    { decompose' := direct_sum.decompose ℳ\n      left_inv := fun _ => (decompose ℳ).left_inv _\n      right_inv := fun _ => (decompose ℳ).right_inv _ }\n  have mem : ∀ m, m ∈ supᵢ ℳ' := fun m =>\n    (DirectSum.IsInternal.addSubmonoid_supᵢ_eq_top ℳ' (decomposition.is_internal ℳ')).symm ▸ trivial\n  exact fun m => AddSubmonoid.supᵢ_induction ℳ' (mem m) (fun i m h => h_homogeneous ⟨m, h⟩) h_zero h_add\n#align decomposition.induction_on decomposition.induction_on\n\n",
  "decompose_zero":
  "@[simp]\ntheorem decompose_zero : decompose ℳ (0 : M) = 0 :=\n  map_zero (decompose_add_equiv ℳ)\n#align decompose_zero decompose_zero\n\n",
  "decompose_symm_zero":
@@ -13,7 +13,7 @@
  "decompose_symm_sub":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `direct_sum -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `direct_sum -/\n@[simp]\ntheorem decompose_symm_sub\n    (x y : direct_sum \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `direct_sum\" (ℳ i)) :\n    (decompose ℳ).symm (x - y) = (decompose ℳ).symm x - (decompose ℳ).symm y :=\n  map_sub (decompose_add_equiv ℳ).symm x y\n#align decompose_symm_sub decompose_symm_sub\n\n",
  "decompose_symm_of":
- "@[simp]\ntheorem decompose_symm_of {i : ι} (x : ℳ i) : (decompose ℳ).symm (direct_sum.of _ i x) = x :=\n  direct_sum.coe_add_monoid_hom_of ℳ _ _\n#align decompose_symm_of decompose_symm_of\n\n",
+ "@[simp]\ntheorem decompose_symm_of {i : ι} (x : ℳ i) : (decompose ℳ).symm (DirectSum.of _ i x) = x :=\n  DirectSum.coeAddMonoidHom_of ℳ _ _\n#align decompose_symm_of decompose_symm_of\n\n",
  "decompose_symm_neg":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `direct_sum -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `direct_sum -/\n@[simp]\ntheorem decompose_symm_neg\n    (x : direct_sum \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `direct_sum\" (ℳ i)) :\n    (decompose ℳ).symm (-x) = -(decompose ℳ).symm x :=\n  map_neg (decompose_add_equiv ℳ).symm x\n#align decompose_symm_neg decompose_symm_neg\n\n",
  "decompose_symm_add":
@@ -25,15 +25,15 @@
  "decompose_smul":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n@[simp]\ntheorem decompose_smul (r : R) (x : M) : decompose ℳ («expr • » r x) = «expr • » r (decompose ℳ x) :=\n  map_smul (decompose_linear_equiv ℳ) r x\n#align decompose_smul decompose_smul\n\n",
  "decompose_of_mem_same":
- "theorem decompose_of_mem_same {x : M} {i : ι} (hx : x ∈ ℳ i) : (decompose ℳ x i : M) = x := by\n  rw [decompose_of_mem _ hx, direct_sum.of_eq_same, subtype.coe_mk]\n#align decompose_of_mem_same decompose_of_mem_same\n\n",
+ "theorem decompose_of_mem_same {x : M} {i : ι} (hx : x ∈ ℳ i) : (decompose ℳ x i : M) = x := by\n  rw [decompose_of_mem _ hx, DirectSum.of_eq_same, Subtype.coe_mk]\n#align decompose_of_mem_same decompose_of_mem_same\n\n",
  "decompose_of_mem_ne":
- "theorem decompose_of_mem_ne {x : M} {i j : ι} (hx : x ∈ ℳ i) (hij : i ≠ j) : (decompose ℳ x j : M) = 0 := by\n  rw [decompose_of_mem _ hx, direct_sum.of_eq_of_ne _ _ _ _ hij, ZeroMemClass.coe_zero]\n#align decompose_of_mem_ne decompose_of_mem_ne\n\n",
+ "theorem decompose_of_mem_ne {x : M} {i j : ι} (hx : x ∈ ℳ i) (hij : i ≠ j) : (decompose ℳ x j : M) = 0 := by\n  rw [decompose_of_mem _ hx, DirectSum.of_eq_of_ne _ _ _ _ hij, ZeroMemClass.coe_zero]\n#align decompose_of_mem_ne decompose_of_mem_ne\n\n",
  "decompose_of_mem":
- "theorem decompose_of_mem {x : M} {i : ι} (hx : x ∈ ℳ i) : decompose ℳ x = direct_sum.of (fun i => ℳ i) i ⟨x, hx⟩ :=\n  decompose_coe _ ⟨x, hx⟩\n#align decompose_of_mem decompose_of_mem\n\n",
+ "theorem decompose_of_mem {x : M} {i : ι} (hx : x ∈ ℳ i) : decompose ℳ x = DirectSum.of (fun i => ℳ i) i ⟨x, hx⟩ :=\n  decompose_coe _ ⟨x, hx⟩\n#align decompose_of_mem decompose_of_mem\n\n",
  "decompose_neg":
  "@[simp]\ntheorem decompose_neg (x : M) : decompose ℳ (-x) = -decompose ℳ x :=\n  map_neg (decompose_add_equiv ℳ) x\n#align decompose_neg decompose_neg\n\n",
  "decompose_coe":
- "@[simp]\ntheorem decompose_coe {i : ι} (x : ℳ i) : decompose ℳ (x : M) = direct_sum.of _ i x := by\n  rw [← decompose_symm_of, equiv.apply_symm_apply]\n#align decompose_coe decompose_coe\n\n",
+ "@[simp]\ntheorem decompose_coe {i : ι} (x : ℳ i) : decompose ℳ (x : M) = DirectSum.of _ i x := by\n  rw [← decompose_symm_of, Equiv.apply_symm_apply]\n#align decompose_coe decompose_coe\n\n",
  "decompose_add":
  "@[simp]\ntheorem decompose_add (x y : M) : decompose ℳ (x + y) = decompose ℳ x + decompose ℳ y :=\n  map_add (decompose_add_equiv ℳ) x y\n#align decompose_add decompose_add\n\n",
  "decompose'_eq":

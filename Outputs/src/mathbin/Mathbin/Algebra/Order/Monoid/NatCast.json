@@ -11,18 +11,18 @@
  "zero_lt_four":
  "#print zero_lt_four /-\n/-- See `zero_lt_four'` for a version with the type explicit. -/\n@[simp]\ntheorem zero_lt_four : (0 : α) < 4 :=\n  lt_add_of_lt_of_nonneg zero_lt_two zero_le_two\n#align zero_lt_four zero_lt_four\n-/\n\n",
  "zero_le_two":
- "#print zero_le_two /-\ntheorem zero_le_two [preorder α] [ZeroLEOneClass α] [covariant_class α α (· + ·) (· ≤ ·)] : (0 : α) ≤ 2 :=\n  add_nonneg zero_le_one zero_le_one\n#align zero_le_two zero_le_two\n-/\n\n",
+ "#print zero_le_two /-\ntheorem zero_le_two [preorder α] [ZeroLEOneClass α] [CovariantClass α α (· + ·) (· ≤ ·)] : (0 : α) ≤ 2 :=\n  add_nonneg zero_le_one zero_le_one\n#align zero_le_two zero_le_two\n-/\n\n",
  "zero_le_three":
- "#print zero_le_three /-\ntheorem zero_le_three [preorder α] [ZeroLEOneClass α] [covariant_class α α (· + ·) (· ≤ ·)] : (0 : α) ≤ 3 :=\n  add_nonneg zero_le_two zero_le_one\n#align zero_le_three zero_le_three\n-/\n\n",
+ "#print zero_le_three /-\ntheorem zero_le_three [preorder α] [ZeroLEOneClass α] [CovariantClass α α (· + ·) (· ≤ ·)] : (0 : α) ≤ 3 :=\n  add_nonneg zero_le_two zero_le_one\n#align zero_le_three zero_le_three\n-/\n\n",
  "zero_le_four":
- "#print zero_le_four /-\ntheorem zero_le_four [preorder α] [ZeroLEOneClass α] [covariant_class α α (· + ·) (· ≤ ·)] : (0 : α) ≤ 4 :=\n  add_nonneg zero_le_two zero_le_two\n#align zero_le_four zero_le_four\n-/\n\n",
+ "#print zero_le_four /-\ntheorem zero_le_four [preorder α] [ZeroLEOneClass α] [CovariantClass α α (· + ·) (· ≤ ·)] : (0 : α) ≤ 4 :=\n  add_nonneg zero_le_two zero_le_two\n#align zero_le_four zero_le_four\n-/\n\n",
  "one_lt_two":
- "#print one_lt_two /-\ntheorem one_lt_two [covariant_class α α (· + ·) (· < ·)] : (1 : α) < 2 :=\n  lt_add_one _\n#align one_lt_two one_lt_two\n-/\n\n",
+ "#print one_lt_two /-\ntheorem one_lt_two [CovariantClass α α (· + ·) (· < ·)] : (1 : α) < 2 :=\n  lt_add_one _\n#align one_lt_two one_lt_two\n-/\n\n",
  "one_le_two'":
- "#print one_le_two' /-\ntheorem one_le_two' [LE α] [ZeroLEOneClass α] [covariant_class α α (swap (· + ·)) (· ≤ ·)] : (1 : α) ≤ 2 :=\n  calc\n    1 = 0 + 1 := (zero_add 1).symm\n    _ ≤ 1 + 1 := add_le_add_right zero_le_one _\n    \n#align one_le_two' one_le_two'\n-/\n\n",
+ "#print one_le_two' /-\ntheorem one_le_two' [LE α] [ZeroLEOneClass α] [CovariantClass α α (swap (· + ·)) (· ≤ ·)] : (1 : α) ≤ 2 :=\n  calc\n    1 = 0 + 1 := (zero_add 1).symm\n    _ ≤ 1 + 1 := add_le_add_right zero_le_one _\n    \n#align one_le_two' one_le_two'\n-/\n\n",
  "one_le_two":
- "#print one_le_two /-\ntheorem one_le_two [LE α] [ZeroLEOneClass α] [covariant_class α α (· + ·) (· ≤ ·)] : (1 : α) ≤ 2 :=\n  calc\n    1 = 1 + 0 := (add_zero 1).symm\n    _ ≤ 1 + 1 := add_le_add_left zero_le_one _\n    \n#align one_le_two one_le_two\n-/\n\n",
+ "#print one_le_two /-\ntheorem one_le_two [LE α] [ZeroLEOneClass α] [CovariantClass α α (· + ·) (· ≤ ·)] : (1 : α) ≤ 2 :=\n  calc\n    1 = 1 + 0 := (add_zero 1).symm\n    _ ≤ 1 + 1 := add_le_add_left zero_le_one _\n    \n#align one_le_two one_le_two\n-/\n\n",
  "lt_one_add":
- "#print lt_one_add /-\ntheorem lt_one_add [One α] [add_zero_class α] [partial_order α] [ZeroLEOneClass α] [ne_zero (1 : α)]\n    [covariant_class α α (swap (· + ·)) (· < ·)] (a : α) : a < 1 + a :=\n  lt_add_of_pos_left _ zero_lt_one\n#align lt_one_add lt_one_add\n-/\n\n",
+ "#print lt_one_add /-\ntheorem lt_one_add [One α] [AddZeroClass α] [partial_order α] [ZeroLEOneClass α] [NeZero (1 : α)]\n    [CovariantClass α α (swap (· + ·)) (· < ·)] (a : α) : a < 1 + a :=\n  lt_add_of_pos_left _ zero_lt_one\n#align lt_one_add lt_one_add\n-/\n\n",
  "lt_add_one":
- "#print lt_add_one /-\n/-\nCopyright (c) 2016 Jeremy Avigad. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Jeremy Avigad, Leonardo de Moura, Mario Carneiro, Johannes Hölzl, Yuyang Zhao\n-/\ntheorem lt_add_one [One α] [add_zero_class α] [partial_order α] [ZeroLEOneClass α] [ne_zero (1 : α)]\n    [covariant_class α α (· + ·) (· < ·)] (a : α) : a < a + 1 :=\n  lt_add_of_pos_right _ zero_lt_one\n#align lt_add_one lt_add_one\n-/\n\n"}
+ "#print lt_add_one /-\n/-\nCopyright (c) 2016 Jeremy Avigad. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Jeremy Avigad, Leonardo de Moura, Mario Carneiro, Johannes Hölzl, Yuyang Zhao\n-/\ntheorem lt_add_one [One α] [AddZeroClass α] [partial_order α] [ZeroLEOneClass α] [NeZero (1 : α)]\n    [CovariantClass α α (· + ·) (· < ·)] (a : α) : a < a + 1 :=\n  lt_add_of_pos_right _ zero_lt_one\n#align lt_add_one lt_add_one\n-/\n\n"}

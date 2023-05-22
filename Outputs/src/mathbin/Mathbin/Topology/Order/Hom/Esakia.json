@@ -5,9 +5,9 @@
  "id_apply":
  "@[simp]\ntheorem id_apply (a : α) : esakia_hom.id α a = a :=\n  rfl\n#align id_apply id_apply\n\n",
  "ext":
- "@[ext]\ntheorem ext {f g : esakia_hom α β} (h : ∀ a, f a = g a) : f = g :=\n  fun_like.ext f g h\n#align ext ext\n\n",
+ "@[ext]\ntheorem ext {f g : esakia_hom α β} (h : ∀ a, f a = g a) : f = g :=\n  FunLike.ext f g h\n#align ext ext\n\n",
  "copy_eq":
- "theorem copy_eq (f : esakia_hom α β) (f' : α → β) (h : f' = f) : f.copy f' h = f :=\n  fun_like.ext' h\n#align copy_eq copy_eq\n\n",
+ "theorem copy_eq (f : esakia_hom α β) (f' : α → β) (h : f' = f) : f.copy f' h = f :=\n  FunLike.ext' h\n#align copy_eq copy_eq\n\n",
  "comp_id":
  "@[simp]\ntheorem comp_id (f : esakia_hom α β) : f.comp (esakia_hom.id α) = f :=\n  ext fun a => rfl\n#align comp_id comp_id\n\n",
  "comp_assoc":
@@ -19,7 +19,7 @@
  "coe_id_order_hom":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →o » -/\n@[simp]\ntheorem coe_id_order_hom : (pseudo_epimorphism.id α : «expr →o » α α) = OrderHom.id :=\n  rfl\n#align coe_id_order_hom coe_id_order_hom\n\n",
  "coe_id_continuous_order_hom":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →Co » -/\n@[simp]\ntheorem coe_id_continuous_order_hom : (esakia_hom.id α : «expr →Co » α α) = continuous_order_hom.id α :=\n  rfl\n#align coe_id_continuous_order_hom coe_id_continuous_order_hom\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →Co » -/\n@[simp]\ntheorem coe_id_continuous_order_hom : (esakia_hom.id α : «expr →Co » α α) = ContinuousOrderHom.id α :=\n  rfl\n#align coe_id_continuous_order_hom coe_id_continuous_order_hom\n\n",
  "coe_id":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n@[simp]\ntheorem coe_id : «expr⇑ » (esakia_hom.id α) = id :=\n  rfl\n#align coe_id coe_id\n\n",
  "coe_copy":
@@ -33,6 +33,6 @@
  "coe_comp":
  "@[simp]\ntheorem coe_comp (g : esakia_hom β γ) (f : esakia_hom α β) : (g.comp f : α → γ) = g ∘ f :=\n  rfl\n#align coe_comp coe_comp\n\n",
  "cancel_right":
- "theorem cancel_right {g₁ g₂ : esakia_hom β γ} {f : esakia_hom α β} (hf : surjective f) :\n    g₁.comp f = g₂.comp f ↔ g₁ = g₂ :=\n  ⟨fun h => ext <| hf.forall.2 <| fun_like.ext_iff.1 h, congr_arg _⟩\n#align cancel_right cancel_right\n\n",
+ "theorem cancel_right {g₁ g₂ : esakia_hom β γ} {f : esakia_hom α β} (hf : surjective f) :\n    g₁.comp f = g₂.comp f ↔ g₁ = g₂ :=\n  ⟨fun h => ext <| hf.forall.2 <| FunLike.ext_iff.1 h, congr_arg _⟩\n#align cancel_right cancel_right\n\n",
  "cancel_left":
  "theorem cancel_left {g : esakia_hom β γ} {f₁ f₂ : esakia_hom α β} (hg : injective g) :\n    g.comp f₁ = g.comp f₂ ↔ f₁ = f₂ :=\n  ⟨fun h => ext fun a => hg <| by rw [← comp_apply, h, comp_apply], congr_arg _⟩\n#align cancel_left cancel_left\n\n"}

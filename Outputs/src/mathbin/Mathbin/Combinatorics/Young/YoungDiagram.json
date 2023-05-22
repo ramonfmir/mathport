@@ -1,94 +1,94 @@
 {"up_left_mem":
- "/-- In \"English notation\", a Young diagram is drawn so that (i1, j1) ≤ (i2, j2)\n    means (i1, j1) is weakly up-and-left of (i2, j2). -/\ntheorem up_left_mem (μ : young_diagram) {i1 i2 j1 j2 : ℕ} (hi : i1 ≤ i2) (hj : j1 ≤ j2) (hcell : (i2, j2) ∈ μ) :\n    (i1, j1) ∈ μ :=\n  μ.is_lower_set (Prod.mk_le_mk.mpr ⟨hi, hj⟩) hcell\n#align up_left_mem up_left_mem\n\n",
+ "/-- In \"English notation\", a Young diagram is drawn so that (i1, j1) ≤ (i2, j2)\n    means (i1, j1) is weakly up-and-left of (i2, j2). -/\ntheorem up_left_mem (μ : YoungDiagram) {i1 i2 j1 j2 : ℕ} (hi : i1 ≤ i2) (hj : j1 ≤ j2) (hcell : (i2, j2) ∈ μ) :\n    (i1, j1) ∈ μ :=\n  μ.is_lower_set (Prod.mk_le_mk.mpr ⟨hi, hj⟩) hcell\n#align up_left_mem up_left_mem\n\n",
  "transpose_transpose":
- "@[simp]\ntheorem transpose_transpose (μ : young_diagram) : μ.transpose.transpose = μ :=\n  by\n  ext\n  simp\n#align transpose_transpose transpose_transpose\n\n",
+ "@[simp]\ntheorem transpose_transpose (μ : YoungDiagram) : μ.transpose.transpose = μ :=\n  by\n  ext\n  simp\n#align transpose_transpose transpose_transpose\n\n",
  "transpose_mono":
- "@[mono]\nprotected theorem transpose_mono {μ ν : young_diagram} (h_le : μ ≤ ν) : μ.transpose ≤ ν.transpose :=\n  transpose_le_iff.mpr h_le\n#align transpose_mono transpose_mono\n\n",
+ "@[mono]\nprotected theorem transpose_mono {μ ν : YoungDiagram} (h_le : μ ≤ ν) : μ.transpose ≤ ν.transpose :=\n  transpose_le_iff.mpr h_le\n#align transpose_mono transpose_mono\n\n",
  "transpose_le_iff":
- "@[simp]\ntheorem transpose_le_iff {μ ν : young_diagram} : μ.transpose ≤ ν.transpose ↔ μ ≤ ν :=\n  ⟨fun h => by\n    convert young_diagram.le_of_transpose_le h\n    simp, fun h => by\n    convert @young_diagram.le_of_transpose_le _ _ _\n    simpa⟩\n#align transpose_le_iff transpose_le_iff\n\n",
+ "@[simp]\ntheorem transpose_le_iff {μ ν : YoungDiagram} : μ.transpose ≤ ν.transpose ↔ μ ≤ ν :=\n  ⟨fun h => by\n    convert YoungDiagram.le_of_transpose_le h\n    simp, fun h => by\n    convert@YoungDiagram.le_of_transpose_le _ _ _\n    simpa⟩\n#align transpose_le_iff transpose_le_iff\n\n",
  "transpose_eq_iff_eq_transpose":
- "theorem transpose_eq_iff_eq_transpose {μ ν : young_diagram} : μ.transpose = ν ↔ μ = ν.transpose := by\n  constructor <;>\n    · rintro rfl\n      simp\n#align transpose_eq_iff_eq_transpose transpose_eq_iff_eq_transpose\n\n",
+ "theorem transpose_eq_iff_eq_transpose {μ ν : YoungDiagram} : μ.transpose = ν ↔ μ = ν.transpose := by\n  constructor <;>\n    · rintro rfl\n      simp\n#align transpose_eq_iff_eq_transpose transpose_eq_iff_eq_transpose\n\n",
  "transpose_eq_iff":
- "@[simp]\ntheorem transpose_eq_iff {μ ν : young_diagram} : μ.transpose = ν.transpose ↔ μ = ν :=\n  by\n  rw [transpose_eq_iff_eq_transpose]\n  simp\n#align transpose_eq_iff transpose_eq_iff\n\n",
+ "@[simp]\ntheorem transpose_eq_iff {μ ν : YoungDiagram} : μ.transpose = ν.transpose ↔ μ = ν :=\n  by\n  rw [transpose_eq_iff_eq_transpose]\n  simp\n#align transpose_eq_iff transpose_eq_iff\n\n",
  "row_lens_sorted":
- "theorem row_lens_sorted (μ : young_diagram) : μ.row_lens.sorted (· ≥ ·) :=\n  (List.pairwise_le_range _).map _ μ.row_len_anti\n#align row_lens_sorted row_lens_sorted\n\n",
+ "theorem row_lens_sorted (μ : YoungDiagram) : μ.row_lens.sorted (· ≥ ·) :=\n  (List.pairwise_le_range _).map _ μ.row_len_anti\n#align row_lens_sorted row_lens_sorted\n\n",
  "row_lens_of_row_lens_eq_self":
- "/-- The right_inv direction of the equivalence -/\ntheorem row_lens_of_row_lens_eq_self {w : list ℕ} {hw : w.sorted (· ≥ ·)} (hpos : ∀ x ∈ w, 0 < x) :\n    (of_row_lens w hw).row_lens = w := by\n  ext (i r)\n  cases lt_or_ge i w.length\n  · simp only [option.mem_def, ← List.nthLe_eq_iff, h, row_lens_length_of_row_lens hpos]\n    revert r\n    simpa only [eq_iff_eq_cancel_right, nth_le_row_lens] using row_len_of_row_lens _ h\n  · rw [list.nth_eq_none_iff.mpr h, list.nth_eq_none_iff.mpr]\n    rwa [row_lens_length_of_row_lens hpos]\n#align row_lens_of_row_lens_eq_self row_lens_of_row_lens_eq_self\n\n",
+ "/-- The right_inv direction of the equivalence -/\ntheorem row_lens_of_row_lens_eq_self {w : List ℕ} {hw : w.sorted (· ≥ ·)} (hpos : ∀ x ∈ w, 0 < x) :\n    (ofRowLens w hw).row_lens = w := by\n  ext (i r)\n  cases lt_or_ge i w.length\n  · simp only [Option.mem_def, ← List.nthLe_eq_iff, h, row_lens_length_of_row_lens hpos]\n    revert r\n    simpa only [eq_iff_eq_cancel_right, nth_le_row_lens] using row_len_of_row_lens _ h\n  · rw [list.nth_eq_none_iff.mpr h, list.nth_eq_none_iff.mpr]\n    rwa [row_lens_length_of_row_lens hpos]\n#align row_lens_of_row_lens_eq_self row_lens_of_row_lens_eq_self\n\n",
  "row_lens_length_of_row_lens":
- "/-- The number of rows in `of_row_lens w hw` is the length of `w` -/\ntheorem row_lens_length_of_row_lens {w : list ℕ} {hw : w.sorted (· ≥ ·)} (hpos : ∀ x ∈ w, 0 < x) :\n    (of_row_lens w hw).row_lens.length = w.length :=\n  by\n  simp only [length_row_lens, col_len, Nat.find_eq_iff, mem_cells, mem_of_row_lens, lt_self_iff_false,\n    is_empty.exists_iff, not_not]\n  exact ⟨id, fun n hn => ⟨hn, hpos _ (List.nthLe_mem _ _ hn)⟩⟩\n#align row_lens_length_of_row_lens row_lens_length_of_row_lens\n\n",
+ "/-- The number of rows in `of_row_lens w hw` is the length of `w` -/\ntheorem row_lens_length_of_row_lens {w : List ℕ} {hw : w.sorted (· ≥ ·)} (hpos : ∀ x ∈ w, 0 < x) :\n    (ofRowLens w hw).row_lens.length = w.length :=\n  by\n  simp only [length_row_lens, col_len, Nat.find_eq_iff, mem_cells, mem_of_row_lens, lt_self_iff_false,\n    IsEmpty.exists_iff, Classical.not_not]\n  exact ⟨id, fun n hn => ⟨hn, hpos _ (List.nthLe_mem _ _ hn)⟩⟩\n#align row_lens_length_of_row_lens row_lens_length_of_row_lens\n\n",
  "row_len_transpose":
- "@[simp]\ntheorem row_len_transpose (μ : young_diagram) (i : ℕ) : μ.transpose.row_len i = μ.col_len i := by\n  simp [row_len, col_len]\n#align row_len_transpose row_len_transpose\n\n",
+ "@[simp]\ntheorem row_len_transpose (μ : YoungDiagram) (i : ℕ) : μ.transpose.row_len i = μ.col_len i := by simp [row_len, col_len]\n#align row_len_transpose row_len_transpose\n\n",
  "row_len_of_row_lens":
- "/-- The length of the `i`th row in `of_row_lens w hw` is the `i`th entry of `w` -/\ntheorem row_len_of_row_lens {w : list ℕ} {hw : w.sorted (· ≥ ·)} (i : ℕ) (hi : i < w.length) :\n    (of_row_lens w hw).row_len i = w.nth_le i hi := by simp [row_len, Nat.find_eq_iff, mem_of_row_lens, hi]\n#align row_len_of_row_lens row_len_of_row_lens\n\n",
+ "/-- The length of the `i`th row in `of_row_lens w hw` is the `i`th entry of `w` -/\ntheorem row_len_of_row_lens {w : List ℕ} {hw : w.sorted (· ≥ ·)} (i : ℕ) (hi : i < w.length) :\n    (ofRowLens w hw).row_len i = w.nth_le i hi := by simp [row_len, Nat.find_eq_iff, mem_of_row_lens, hi]\n#align row_len_of_row_lens row_len_of_row_lens\n\n",
  "row_len_eq_card":
- "theorem row_len_eq_card (μ : young_diagram) {i : ℕ} : μ.row_len i = (μ.row i).card := by simp [row_eq_prod]\n#align row_len_eq_card row_len_eq_card\n\n",
+ "theorem row_len_eq_card (μ : YoungDiagram) {i : ℕ} : μ.row_len i = (μ.row i).card := by simp [row_eq_prod]\n#align row_len_eq_card row_len_eq_card\n\n",
  "row_len_anti":
- "@[mono]\ntheorem row_len_anti (μ : young_diagram) (i1 i2 : ℕ) (hi : i1 ≤ i2) : μ.row_len i2 ≤ μ.row_len i1 :=\n  by\n  by_contra' h_lt\n  rw [← lt_self_iff_false (μ.row_len i1)]\n  rw [← mem_iff_lt_row_len] at h_lt⊢\n  exact μ.up_left_mem hi (by rfl) h_lt\n#align row_len_anti row_len_anti\n\n",
+ "@[mono]\ntheorem row_len_anti (μ : YoungDiagram) (i1 i2 : ℕ) (hi : i1 ≤ i2) : μ.row_len i2 ≤ μ.row_len i1 :=\n  by\n  by_contra' h_lt\n  rw [← lt_self_iff_false (μ.row_len i1)]\n  rw [← mem_iff_lt_row_len] at h_lt⊢\n  exact μ.up_left_mem hi (by rfl) h_lt\n#align row_len_anti row_len_anti\n\n",
  "row_eq_prod":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:177:8: unsupported: ambiguous notation -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `lower_set.prod -/\ntheorem row_eq_prod {μ : young_diagram} {i : ℕ} : μ.row i = lower_set.prod {i} (Finset.range (μ.row_len i)) :=\n  by\n  ext ⟨a, b⟩\n  simp only [finset.mem_product, Finset.mem_singleton, Finset.mem_range, mem_row_iff, mem_iff_lt_row_len, and_comm',\n    and_congr_right_iff]\n  rintro rfl\n  rfl\n#align row_eq_prod row_eq_prod\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:177:8: unsupported: ambiguous notation -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `finset.product -/\ntheorem row_eq_prod {μ : YoungDiagram} {i : ℕ} : μ.row i = finset.product {i} (Finset.range (μ.row_len i)) :=\n  by\n  ext ⟨a, b⟩\n  simp only [Finset.mem_product, Finset.mem_singleton, Finset.mem_range, mem_row_iff, mem_iff_lt_row_len, and_comm',\n    and_congr_right_iff]\n  rintro rfl\n  rfl\n#align row_eq_prod row_eq_prod\n\n",
  "pos_of_mem_row_lens":
- "theorem pos_of_mem_row_lens (μ : young_diagram) (x : ℕ) (hx : x ∈ μ.row_lens) : 0 < x :=\n  by\n  rw [row_lens, List.mem_map'] at hx\n  obtain ⟨i, hi, rfl : μ.row_len i = x⟩ := hx\n  rwa [List.mem_range, ← mem_iff_lt_col_len, mem_iff_lt_row_len] at hi\n#align pos_of_mem_row_lens pos_of_mem_row_lens\n\n",
+ "theorem pos_of_mem_row_lens (μ : YoungDiagram) (x : ℕ) (hx : x ∈ μ.row_lens) : 0 < x :=\n  by\n  rw [row_lens, List.mem_map] at hx\n  obtain ⟨i, hi, rfl : μ.row_len i = x⟩ := hx\n  rwa [List.mem_range, ← mem_iff_lt_col_len, mem_iff_lt_row_len] at hi\n#align pos_of_mem_row_lens pos_of_mem_row_lens\n\n",
  "of_row_lens_to_row_lens_eq_self":
- "/-- The left_inv direction of the equivalence -/\ntheorem of_row_lens_to_row_lens_eq_self {μ : young_diagram} : of_row_lens _ (row_lens_sorted μ) = μ :=\n  by\n  ext ⟨i, j⟩\n  simp only [mem_cells, mem_of_row_lens, length_row_lens, nth_le_row_lens]\n  simpa [← mem_iff_lt_col_len, mem_iff_lt_row_len] using j.zero_le.trans_lt\n#align of_row_lens_to_row_lens_eq_self of_row_lens_to_row_lens_eq_self\n\n",
+ "/-- The left_inv direction of the equivalence -/\ntheorem of_row_lens_to_row_lens_eq_self {μ : YoungDiagram} : ofRowLens _ (rowLens_sorted μ) = μ :=\n  by\n  ext ⟨i, j⟩\n  simp only [mem_cells, mem_of_row_lens, length_row_lens, nth_le_row_lens]\n  simpa [← mem_iff_lt_col_len, mem_iff_lt_row_len] using j.zero_le.trans_lt\n#align of_row_lens_to_row_lens_eq_self of_row_lens_to_row_lens_eq_self\n\n",
  "nth_le_row_lens":
- "@[simp]\ntheorem nth_le_row_lens {μ : young_diagram} {i : ℕ} {hi : i < μ.row_lens.length} :\n    μ.row_lens.nth_le i hi = μ.row_len i := by simp only [row_lens, List.nthLe_range, List.nthLe_map']\n#align nth_le_row_lens nth_le_row_lens\n\n",
+ "@[simp]\ntheorem nth_le_row_lens {μ : YoungDiagram} {i : ℕ} {hi : i < μ.row_lens.length} :\n    μ.row_lens.nth_le i hi = μ.row_len i := by simp only [row_lens, List.nthLe_range, List.nthLe_map']\n#align nth_le_row_lens nth_le_row_lens\n\n",
  "not_mem_bot":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n@[simp]\ntheorem not_mem_bot (x : ℕ × ℕ) : x ∉ («expr⊥» : young_diagram) :=\n  Finset.not_mem_empty x\n#align not_mem_bot not_mem_bot\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n@[simp]\ntheorem not_mem_bot (x : ℕ × ℕ) : x ∉ («expr⊥» : YoungDiagram) :=\n  Finset.not_mem_empty x\n#align not_mem_bot not_mem_bot\n\n",
  "mk_mem_row_iff":
- "theorem mk_mem_row_iff {μ : young_diagram} {i j : ℕ} : (i, j) ∈ μ.row i ↔ (i, j) ∈ μ := by simp [row]\n#align mk_mem_row_iff mk_mem_row_iff\n\n",
+ "theorem mk_mem_row_iff {μ : YoungDiagram} {i j : ℕ} : (i, j) ∈ μ.row i ↔ (i, j) ∈ μ := by simp [row]\n#align mk_mem_row_iff mk_mem_row_iff\n\n",
  "mk_mem_col_iff":
- "theorem mk_mem_col_iff {μ : young_diagram} {i j : ℕ} : (i, j) ∈ μ.col j ↔ (i, j) ∈ μ := by simp [col]\n#align mk_mem_col_iff mk_mem_col_iff\n\n",
+ "theorem mk_mem_col_iff {μ : YoungDiagram} {i j : ℕ} : (i, j) ∈ μ.col j ↔ (i, j) ∈ μ := by simp [col]\n#align mk_mem_col_iff mk_mem_col_iff\n\n",
  "mem_transpose":
- "@[simp]\ntheorem mem_transpose {μ : young_diagram} {c : ℕ × ℕ} : c ∈ μ.transpose ↔ c.swap ∈ μ := by simp [transpose]\n#align mem_transpose mem_transpose\n\n",
+ "@[simp]\ntheorem mem_transpose {μ : YoungDiagram} {c : ℕ × ℕ} : c ∈ μ.transpose ↔ c.swap ∈ μ := by simp [transpose]\n#align mem_transpose mem_transpose\n\n",
  "mem_sup":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊔ » -/\n@[simp]\ntheorem mem_sup {μ ν : young_diagram} {x : ℕ × ℕ} : x ∈ «expr ⊔ » μ ν ↔ x ∈ μ ∨ x ∈ ν :=\n  Finset.mem_union\n#align mem_sup mem_sup\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊔ » -/\n@[simp]\ntheorem mem_sup {μ ν : YoungDiagram} {x : ℕ × ℕ} : x ∈ «expr ⊔ » μ ν ↔ x ∈ μ ∨ x ∈ ν :=\n  Finset.mem_union\n#align mem_sup mem_sup\n\n",
  "mem_row_iff":
- "theorem mem_row_iff {μ : young_diagram} {i : ℕ} {c : ℕ × ℕ} : c ∈ μ.row i ↔ c ∈ μ ∧ c.fst = i := by simp [row]\n#align mem_row_iff mem_row_iff\n\n",
+ "theorem mem_row_iff {μ : YoungDiagram} {i : ℕ} {c : ℕ × ℕ} : c ∈ μ.row i ↔ c ∈ μ ∧ c.fst = i := by simp [row]\n#align mem_row_iff mem_row_iff\n\n",
  "mem_of_row_lens":
- "theorem mem_of_row_lens {w : list ℕ} {hw : w.sorted (· ≥ ·)} {c : ℕ × ℕ} :\n    c ∈ of_row_lens w hw ↔ ∃ h : c.fst < w.length, c.snd < w.nth_le c.fst h :=\n  young_diagram.mem_cells_of_row_lens\n#align mem_of_row_lens mem_of_row_lens\n\n",
+ "theorem mem_of_row_lens {w : List ℕ} {hw : w.sorted (· ≥ ·)} {c : ℕ × ℕ} :\n    c ∈ ofRowLens w hw ↔ ∃ h : c.fst < w.length, c.snd < w.nth_le c.fst h :=\n  YoungDiagram.mem_cellsOfRowLens\n#align mem_of_row_lens mem_of_row_lens\n\n",
  "mem_mk":
- "@[simp]\ntheorem mem_mk (c : ℕ × ℕ) (cells) (is_lower_set) : c ∈ young_diagram.mk cells is_lower_set ↔ c ∈ cells :=\n  iff.rfl\n#align mem_mk mem_mk\n\n",
+ "@[simp]\ntheorem mem_mk (c : ℕ × ℕ) (cells) (is_lower_set) : c ∈ young_diagram.mk cells IsLowerSet ↔ c ∈ cells :=\n  iff.rfl\n#align mem_mk mem_mk\n\n",
  "mem_inf":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊓ » -/\n@[simp]\ntheorem mem_inf {μ ν : young_diagram} {x : ℕ × ℕ} : x ∈ «expr ⊓ » μ ν ↔ x ∈ μ ∧ x ∈ ν :=\n  Finset.mem_inter\n#align mem_inf mem_inf\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊓ » -/\n@[simp]\ntheorem mem_inf {μ ν : YoungDiagram} {x : ℕ × ℕ} : x ∈ «expr ⊓ » μ ν ↔ x ∈ μ ∧ x ∈ ν :=\n  Finset.mem_inter\n#align mem_inf mem_inf\n\n",
  "mem_iff_lt_row_len":
- "theorem mem_iff_lt_row_len {μ : young_diagram} {i j : ℕ} : (i, j) ∈ μ ↔ j < μ.row_len i :=\n  by\n  rw [row_len, Nat.lt_find_iff]\n  push_neg\n  exact ⟨fun h _ hmj => μ.up_left_mem (by rfl) hmj h, fun h => h _ (by rfl)⟩\n#align mem_iff_lt_row_len mem_iff_lt_row_len\n\n",
+ "theorem mem_iff_lt_row_len {μ : YoungDiagram} {i j : ℕ} : (i, j) ∈ μ ↔ j < μ.row_len i :=\n  by\n  rw [row_len, Nat.lt_find_iff]\n  push_neg\n  exact ⟨fun h _ hmj => μ.up_left_mem (by rfl) hmj h, fun h => h _ (by rfl)⟩\n#align mem_iff_lt_row_len mem_iff_lt_row_len\n\n",
  "mem_iff_lt_col_len":
- "theorem mem_iff_lt_col_len {μ : young_diagram} {i j : ℕ} : (i, j) ∈ μ ↔ i < μ.col_len j :=\n  by\n  rw [← row_len_transpose, ← mem_iff_lt_row_len]\n  simp\n#align mem_iff_lt_col_len mem_iff_lt_col_len\n\n",
+ "theorem mem_iff_lt_col_len {μ : YoungDiagram} {i j : ℕ} : (i, j) ∈ μ ↔ i < μ.col_len j :=\n  by\n  rw [← row_len_transpose, ← mem_iff_lt_row_len]\n  simp\n#align mem_iff_lt_col_len mem_iff_lt_col_len\n\n",
  "mem_col_iff":
- "theorem mem_col_iff {μ : young_diagram} {j : ℕ} {c : ℕ × ℕ} : c ∈ μ.col j ↔ c ∈ μ ∧ c.snd = j := by simp [col]\n#align mem_col_iff mem_col_iff\n\n",
+ "theorem mem_col_iff {μ : YoungDiagram} {j : ℕ} {c : ℕ × ℕ} : c ∈ μ.col j ↔ c ∈ μ ∧ c.snd = j := by simp [col]\n#align mem_col_iff mem_col_iff\n\n",
  "mem_cells_of_row_lens":
- "protected theorem mem_cells_of_row_lens {w : list ℕ} {c : ℕ × ℕ} :\n    c ∈ young_diagram.cells_of_row_lens w ↔ ∃ h : c.fst < w.length, c.snd < w.nth_le c.fst h :=\n  by\n  induction w generalizing c <;> rw [young_diagram.cells_of_row_lens]\n  · simp [young_diagram.cells_of_row_lens]\n  · rcases c with ⟨⟨_, _⟩, _⟩\n    · simp\n    · simpa [w_ih, -finset.singleton_product, Nat.succ_lt_succ_iff]\n#align mem_cells_of_row_lens mem_cells_of_row_lens\n\n",
+ "protected theorem mem_cells_of_row_lens {w : List ℕ} {c : ℕ × ℕ} :\n    c ∈ YoungDiagram.cellsOfRowLens w ↔ ∃ h : c.fst < w.length, c.snd < w.nth_le c.fst h :=\n  by\n  induction w generalizing c <;> rw [YoungDiagram.cellsOfRowLens]\n  · simp [YoungDiagram.cellsOfRowLens]\n  · rcases c with ⟨⟨_, _⟩, _⟩\n    · simp\n    · simpa [w_ih, -Finset.singleton_product, Nat.succ_lt_succ_iff]\n#align mem_cells_of_row_lens mem_cells_of_row_lens\n\n",
  "mem_cells":
- "/-\nCopyright (c) 2022 Jake Levinson. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Jake Levinson\n-/\n@[simp]\ntheorem mem_cells {μ : young_diagram} (c : ℕ × ℕ) : c ∈ μ.cells ↔ c ∈ μ :=\n  iff.rfl\n#align mem_cells mem_cells\n\n",
+ "/-\nCopyright (c) 2022 Jake Levinson. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Jake Levinson\n-/\n@[simp]\ntheorem mem_cells {μ : YoungDiagram} (c : ℕ × ℕ) : c ∈ μ.cells ↔ c ∈ μ :=\n  iff.rfl\n#align mem_cells mem_cells\n\n",
  "length_row_lens":
- "@[simp]\ntheorem length_row_lens {μ : young_diagram} : μ.row_lens.length = μ.col_len 0 := by\n  simp only [row_lens, list.length_map, List.length_range]\n#align length_row_lens length_row_lens\n\n",
+ "@[simp]\ntheorem length_row_lens {μ : YoungDiagram} : μ.row_lens.length = μ.col_len 0 := by\n  simp only [row_lens, list.length_map, List.length_range]\n#align length_row_lens length_row_lens\n\n",
  "le_of_transpose_le":
- "-- This is effectively both directions of `transpose_le_iff` below.\nprotected theorem le_of_transpose_le {μ ν : young_diagram} (h_le : μ.transpose ≤ ν) : μ ≤ ν.transpose := fun c hc =>\n  by\n  simp only [mem_transpose]\n  apply h_le\n  simpa\n#align le_of_transpose_le le_of_transpose_le\n\n",
+ "-- This is effectively both directions of `transpose_le_iff` below.\nprotected theorem le_of_transpose_le {μ ν : YoungDiagram} (h_le : μ.transpose ≤ ν) : μ ≤ ν.transpose := fun c hc =>\n  by\n  simp only [mem_transpose]\n  apply h_le\n  simpa\n#align le_of_transpose_le le_of_transpose_le\n\n",
  "exists_not_mem_row":
- "protected theorem exists_not_mem_row (μ : young_diagram) (i : ℕ) : ∃ j, (i, j) ∉ μ :=\n  by\n  obtain ⟨j, hj⟩ :=\n    infinite.exists_not_mem_finset\n      (μ.cells.preimage (prod.mk i) fun _ _ _ _ h => by\n        cases h\n        rfl)\n  rw [finset.mem_preimage] at hj\n  exact ⟨j, hj⟩\n#align exists_not_mem_row exists_not_mem_row\n\n",
+ "protected theorem exists_not_mem_row (μ : YoungDiagram) (i : ℕ) : ∃ j, (i, j) ∉ μ :=\n  by\n  obtain ⟨j, hj⟩ :=\n    Infinite.exists_not_mem_finset\n      (μ.cells.preimage (prod.mk i) fun _ _ _ _ h => by\n        cases h\n        rfl)\n  rw [Finset.mem_preimage] at hj\n  exact ⟨j, hj⟩\n#align exists_not_mem_row exists_not_mem_row\n\n",
  "exists_not_mem_col":
- "protected theorem exists_not_mem_col (μ : young_diagram) (j : ℕ) : ∃ i, (i, j) ∉ μ.cells :=\n  by\n  convert μ.transpose.exists_not_mem_row j\n  simp\n#align exists_not_mem_col exists_not_mem_col\n\n",
+ "protected theorem exists_not_mem_col (μ : YoungDiagram) (j : ℕ) : ∃ i, (i, j) ∉ μ.cells :=\n  by\n  convert μ.transpose.exists_not_mem_row j\n  simp\n#align exists_not_mem_col exists_not_mem_col\n\n",
  "col_len_transpose":
- "@[simp]\ntheorem col_len_transpose (μ : young_diagram) (j : ℕ) : μ.transpose.col_len j = μ.row_len j := by\n  simp [row_len, col_len]\n#align col_len_transpose col_len_transpose\n\n",
+ "@[simp]\ntheorem col_len_transpose (μ : YoungDiagram) (j : ℕ) : μ.transpose.col_len j = μ.row_len j := by simp [row_len, col_len]\n#align col_len_transpose col_len_transpose\n\n",
  "col_len_eq_card":
- "theorem col_len_eq_card (μ : young_diagram) {j : ℕ} : μ.col_len j = (μ.col j).card := by simp [col_eq_prod]\n#align col_len_eq_card col_len_eq_card\n\n",
+ "theorem col_len_eq_card (μ : YoungDiagram) {j : ℕ} : μ.col_len j = (μ.col j).card := by simp [col_eq_prod]\n#align col_len_eq_card col_len_eq_card\n\n",
  "col_len_anti":
- "@[mono]\ntheorem col_len_anti (μ : young_diagram) (j1 j2 : ℕ) (hj : j1 ≤ j2) : μ.col_len j2 ≤ μ.col_len j1 := by\n  convert μ.transpose.row_len_anti j1 j2 hj <;> simp\n#align col_len_anti col_len_anti\n\n",
+ "@[mono]\ntheorem col_len_anti (μ : YoungDiagram) (j1 j2 : ℕ) (hj : j1 ≤ j2) : μ.col_len j2 ≤ μ.col_len j1 := by\n  convert μ.transpose.row_len_anti j1 j2 hj <;> simp\n#align col_len_anti col_len_anti\n\n",
  "col_eq_prod":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:177:8: unsupported: ambiguous notation -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `lower_set.prod -/\ntheorem col_eq_prod {μ : young_diagram} {j : ℕ} : μ.col j = lower_set.prod (Finset.range (μ.col_len j)) {j} :=\n  by\n  ext ⟨a, b⟩\n  simp only [finset.mem_product, Finset.mem_singleton, Finset.mem_range, mem_col_iff, mem_iff_lt_col_len, and_comm',\n    and_congr_right_iff]\n  rintro rfl\n  rfl\n#align col_eq_prod col_eq_prod\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:177:8: unsupported: ambiguous notation -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `finset.product -/\ntheorem col_eq_prod {μ : YoungDiagram} {j : ℕ} : μ.col j = finset.product (Finset.range (μ.col_len j)) {j} :=\n  by\n  ext ⟨a, b⟩\n  simp only [Finset.mem_product, Finset.mem_singleton, Finset.mem_range, mem_col_iff, mem_iff_lt_col_len, and_comm',\n    and_congr_right_iff]\n  rintro rfl\n  rfl\n#align col_eq_prod col_eq_prod\n\n",
  "coe_sup":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊔ » -/\n@[simp, norm_cast]\ntheorem coe_sup (μ ν : young_diagram) : ↑(«expr ⊔ » μ ν) = (μ ∪ ν : set (ℕ × ℕ)) :=\n  Finset.coe_union _ _\n#align coe_sup coe_sup\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊔ » -/\n@[simp, norm_cast]\ntheorem coe_sup (μ ν : YoungDiagram) : ↑(«expr ⊔ » μ ν) = (μ ∪ ν : Set (ℕ × ℕ)) :=\n  Finset.coe_union _ _\n#align coe_sup coe_sup\n\n",
  "coe_inf":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊓ » -/\n@[simp, norm_cast]\ntheorem coe_inf (μ ν : young_diagram) : ↑(«expr ⊓ » μ ν) = (μ ∩ ν : set (ℕ × ℕ)) :=\n  Finset.coe_inter _ _\n#align coe_inf coe_inf\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊓ » -/\n@[simp, norm_cast]\ntheorem coe_inf (μ ν : YoungDiagram) : ↑(«expr ⊓ » μ ν) = (μ ∩ ν : Set (ℕ × ℕ)) :=\n  Finset.coe_inter _ _\n#align coe_inf coe_inf\n\n",
  "coe_bot":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n@[simp, norm_cast]\ntheorem coe_bot : ↑(«expr⊥» : young_diagram) = (∅ : set (ℕ × ℕ)) :=\n  rfl\n#align coe_bot coe_bot\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n@[simp, norm_cast]\ntheorem coe_bot : ↑(«expr⊥» : YoungDiagram) = (∅ : Set (ℕ × ℕ)) :=\n  rfl\n#align coe_bot coe_bot\n\n",
  "cells_sup":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊔ » -/\n@[simp]\ntheorem cells_sup (μ ν : young_diagram) : («expr ⊔ » μ ν).cells = μ.cells ∪ ν.cells :=\n  rfl\n#align cells_sup cells_sup\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊔ » -/\n@[simp]\ntheorem cells_sup (μ ν : YoungDiagram) : («expr ⊔ » μ ν).cells = μ.cells ∪ ν.cells :=\n  rfl\n#align cells_sup cells_sup\n\n",
  "cells_subset_iff":
- "@[simp]\ntheorem cells_subset_iff {μ ν : young_diagram} : μ.cells ⊆ ν.cells ↔ μ ≤ ν :=\n  iff.rfl\n#align cells_subset_iff cells_subset_iff\n\n",
+ "@[simp]\ntheorem cells_subset_iff {μ ν : YoungDiagram} : μ.cells ⊆ ν.cells ↔ μ ≤ ν :=\n  iff.rfl\n#align cells_subset_iff cells_subset_iff\n\n",
  "cells_ssubset_iff":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊂ » -/\n@[simp]\ntheorem cells_ssubset_iff {μ ν : young_diagram} : «expr ⊂ » μ.cells ν.cells ↔ μ < ν :=\n  iff.rfl\n#align cells_ssubset_iff cells_ssubset_iff\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊂ » -/\n@[simp]\ntheorem cells_ssubset_iff {μ ν : YoungDiagram} : «expr ⊂ » μ.cells ν.cells ↔ μ < ν :=\n  iff.rfl\n#align cells_ssubset_iff cells_ssubset_iff\n\n",
  "cells_inf":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊓ » -/\n@[simp]\ntheorem cells_inf (μ ν : young_diagram) : («expr ⊓ » μ ν).cells = μ.cells ∩ ν.cells :=\n  rfl\n#align cells_inf cells_inf\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊓ » -/\n@[simp]\ntheorem cells_inf (μ ν : YoungDiagram) : («expr ⊓ » μ ν).cells = μ.cells ∩ ν.cells :=\n  rfl\n#align cells_inf cells_inf\n\n",
  "cells_bot":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n@[simp]\ntheorem cells_bot : («expr⊥» : young_diagram).cells = ∅ :=\n  rfl\n#align cells_bot cells_bot\n\n"}
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n@[simp]\ntheorem cells_bot : («expr⊥» : YoungDiagram).cells = ∅ :=\n  rfl\n#align cells_bot cells_bot\n\n"}

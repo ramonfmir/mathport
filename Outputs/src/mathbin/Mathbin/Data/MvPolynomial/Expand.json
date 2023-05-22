@@ -1,20 +1,20 @@
 {"rename_expand":
- "@[simp]\ntheorem rename_expand (f : σ → τ) (p : ℕ) (φ : mv_polynomial σ R) : rename f (expand p φ) = expand p (rename f φ) := by\n  simp [expand, bind₁_rename, rename_bind₁]\n#align rename_expand rename_expand\n\n",
+ "@[simp]\ntheorem rename_expand (f : σ → τ) (p : ℕ) (φ : MvPolynomial σ R) : rename f (expand p φ) = expand p (rename f φ) := by\n  simp [expand, bind₁_rename, rename_bind₁]\n#align rename_expand rename_expand\n\n",
  "rename_comp_expand":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₐ[ ] » -/\n@[simp]\ntheorem rename_comp_expand (f : σ → τ) (p : ℕ) :\n    (rename f).comp (expand p) = (expand p).comp (rename f : «expr →ₐ[ ] » (mv_polynomial σ R) R (mv_polynomial τ R)) :=\n  by\n  ext1 φ\n  simp only [rename_expand, alg_hom.comp_apply]\n#align rename_comp_expand rename_comp_expand\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₐ[ ] » -/\n@[simp]\ntheorem rename_comp_expand (f : σ → τ) (p : ℕ) :\n    (rename f).comp (expand p) = (expand p).comp (rename f : «expr →ₐ[ ] » (MvPolynomial σ R) R (MvPolynomial τ R)) :=\n  by\n  ext1 φ\n  simp only [rename_expand, AlgHom.comp_apply]\n#align rename_comp_expand rename_comp_expand\n\n",
  "map_expand":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →+* » -/\n@[simp]\ntheorem map_expand (f : «expr →+* » R S) (p : ℕ) (φ : mv_polynomial σ R) : map f (expand p φ) = expand p (map f φ) := by\n  simp [expand, map_bind₁]\n#align map_expand map_expand\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →+* » -/\n@[simp]\ntheorem map_expand (f : «expr →+* » R S) (p : ℕ) (φ : MvPolynomial σ R) : map f (expand p φ) = expand p (map f φ) := by\n  simp [expand, map_bind₁]\n#align map_expand map_expand\n\n",
  "expand_one_apply":
- "theorem expand_one_apply (f : mv_polynomial σ R) : expand 1 f = f := by\n  simp only [expand, bind₁_X_left, alg_hom.id_apply, RingHom.toFun_eq_coe, eval₂_hom_C_left, alg_hom.coe_to_ring_hom,\n    pow_one, alg_hom.coe_mk]\n#align expand_one_apply expand_one_apply\n\n",
+ "theorem expand_one_apply (f : MvPolynomial σ R) : expand 1 f = f := by\n  simp only [expand, bind₁_X_left, AlgHom.id_apply, RingHom.toFun_eq_coe, eval₂_hom_C_left, AlgHom.coe_toRingHom,\n    pow_one, AlgHom.coe_mks]\n#align expand_one_apply expand_one_apply\n\n",
  "expand_one":
- "@[simp]\ntheorem expand_one : expand 1 = alg_hom.id R (mv_polynomial σ R) :=\n  by\n  ext1 f\n  rw [expand_one_apply, alg_hom.id_apply]\n#align expand_one expand_one\n\n",
+ "@[simp]\ntheorem expand_one : expand 1 = AlgHom.id R (MvPolynomial σ R) :=\n  by\n  ext1 f\n  rw [expand_one_apply, AlgHom.id_apply]\n#align expand_one expand_one\n\n",
  "expand_monomial":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →₀ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `finset.prod -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.prod -/\n@[simp]\ntheorem expand_monomial (p : ℕ) (d : «expr →₀ » σ ℕ) (r : R) :\n    expand p (monomial d r) =\n      C r *\n        finset.prod \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `finset.prod\" d.support\n          ((X i ^ p) ^ d i) :=\n  bind₁_monomial _ _ _\n#align expand_monomial expand_monomial\n\n",
  "expand_comp_bind₁":
- "theorem expand_comp_bind₁ (p : ℕ) (f : σ → mv_polynomial τ R) :\n    (expand p).comp (bind₁ f) = bind₁ fun i => expand p (f i) :=\n  by\n  apply alg_hom_ext\n  intro i\n  simp only [alg_hom.comp_apply, bind₁_X_right]\n#align expand_comp_bind₁ expand_comp_bind₁\n\n",
+ "theorem expand_comp_bind₁ (p : ℕ) (f : σ → MvPolynomial τ R) :\n    (expand p).comp (bind₁ f) = bind₁ fun i => expand p (f i) :=\n  by\n  apply alg_hom_ext\n  intro i\n  simp only [AlgHom.comp_apply, bind₁_X_right]\n#align expand_comp_bind₁ expand_comp_bind₁\n\n",
  "expand_bind₁":
- "theorem expand_bind₁ (p : ℕ) (f : σ → mv_polynomial τ R) (φ : mv_polynomial σ R) :\n    expand p (bind₁ f φ) = bind₁ (fun i => expand p (f i)) φ := by rw [← alg_hom.comp_apply, expand_comp_bind₁]\n#align expand_bind₁ expand_bind₁\n\n",
+ "theorem expand_bind₁ (p : ℕ) (f : σ → MvPolynomial τ R) (φ : MvPolynomial σ R) :\n    expand p (bind₁ f φ) = bind₁ (fun i => expand p (f i)) φ := by rw [← AlgHom.comp_apply, expand_comp_bind₁]\n#align expand_bind₁ expand_bind₁\n\n",
  "expand_X":
- "@[simp]\ntheorem expand_X (p : ℕ) (i : σ) : expand p (X i : mv_polynomial σ R) = X i ^ p :=\n  eval₂_hom_X' _ _ _\n#align expand_X expand_X\n\n",
+ "@[simp]\ntheorem expand_X (p : ℕ) (i : σ) : expand p (X i : MvPolynomial σ R) = X i ^ p :=\n  eval₂Hom_X' _ _ _\n#align expand_X expand_X\n\n",
  "expand_C":
- "/-\nCopyright (c) 2020 Johan Commelin. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Johan Commelin, Robert Y. Lewis\n-/\n@[simp]\ntheorem expand_C (p : ℕ) (r : R) : expand p (C r : mv_polynomial σ R) = C r :=\n  eval₂_hom_C _ _ _\n#align expand_C expand_C\n\n"}
+ "/-\nCopyright (c) 2020 Johan Commelin. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Johan Commelin, Robert Y. Lewis\n-/\n@[simp]\ntheorem expand_C (p : ℕ) (r : R) : expand p (C r : MvPolynomial σ R) = C r :=\n  eval₂Hom_C _ _ _\n#align expand_C expand_C\n\n"}

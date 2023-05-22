@@ -19,7 +19,7 @@
  "size_le":
  "theorem size_le {m n : ℕ} : size m ≤ n ↔ m < 2 ^ n :=\n  ⟨fun h => lt_of_lt_of_le (lt_size_self _) (pow_le_pow_of_le_right (by decide) h),\n    by\n    rw [← one_shiftl]; revert n\n    apply binary_rec _ _ m\n    · intro n h\n      simp\n    · intro b m IH n h\n      by_cases e : bit b m = 0\n      · simp [e]\n      rw [size_bit e]\n      cases' n with n\n      · exact e.elim (nat.eq_zero_of_le_zero (le_of_lt_succ h))\n      · apply succ_le_succ (IH _)\n        apply lt_imp_lt_of_le_imp_le (fun h' => bit0_le_bit _ h') h⟩\n#align size_le size_le\n\n",
  "size_eq_zero":
- "theorem size_eq_zero {n : ℕ} : size n = 0 ↔ n = 0 := by\n  have := @size_pos n <;> simp [pos_iff_ne_zero] at this <;> exact decidable.not_iff_not.1 this\n#align size_eq_zero size_eq_zero\n\n",
+ "theorem size_eq_zero {n : ℕ} : size n = 0 ↔ n = 0 := by\n  have := @size_pos n <;> simp [pos_iff_ne_zero] at this <;> exact Decidable.not_iff_not.1 this\n#align size_eq_zero size_eq_zero\n\n",
  "size_eq_bits_len":
  "theorem size_eq_bits_len (n : ℕ) : n.bits.length = n.size :=\n  by\n  induction' n using Nat.binaryRec' with b n h ih; · simp\n  rw [size_bit, bits_append_bit _ _ h]\n  · simp [ih]\n  · simpa [bit_eq_zero_iff]\n#align size_eq_bits_len size_eq_bits_len\n\n",
  "size_bit1":
@@ -43,4 +43,4 @@
  "lt_size_self":
  "theorem lt_size_self (n : ℕ) : n < 2 ^ size n := by\n  rw [← one_shiftl]\n  have : ∀ {n}, n = 0 → n < shiftl 1 (size n) := by simp\n  apply binary_rec _ _ n\n  · apply this rfl\n  intro b n IH\n  by_cases bit b n = 0\n  · apply this h\n  rw [size_bit h, shiftl_succ]\n  exact bit_lt_bit0 _ IH\n#align lt_size_self lt_size_self\n\n",
  "lt_size":
- "theorem lt_size {m n : ℕ} : m < size n ↔ 2 ^ m ≤ n := by rw [← not_lt, decidable.iff_not_comm, not_lt, size_le]\n#align lt_size lt_size\n\n"}
+ "theorem lt_size {m n : ℕ} : m < size n ↔ 2 ^ m ≤ n := by rw [← not_lt, Decidable.iff_not_comm, not_lt, size_le]\n#align lt_size lt_size\n\n"}

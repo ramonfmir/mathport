@@ -1,19 +1,19 @@
 {"zero_horner":
  "/-\nCopyright (c) 2018 Mario Carneiro. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Mario Carneiro\n-/\ntheorem zero_horner {α} [CommSemiring α] (x n b) : @horner α _ 0 x n b = b := by simp [horner]\n#align zero_horner zero_horner\n\n",
  "unfold_sub":
- "theorem unfold_sub {α} [add_group α] (a b c : α) (h : a + -b = c) : a - b = c := by rw [sub_eq_add_neg, h]\n#align unfold_sub unfold_sub\n\n",
+ "theorem unfold_sub {α} [AddGroup α] (a b c : α) (h : a + -b = c) : a - b = c := by rw [sub_eq_add_neg, h]\n#align unfold_sub unfold_sub\n\n",
  "unfold_div":
  "theorem unfold_div {α} [DivisionRing α] (a b c : α) (h : a * b⁻¹ = c) : a / b = c := by rw [div_eq_mul_inv, h]\n#align unfold_div unfold_div\n\n",
  "subst_into_pow":
- "theorem subst_into_pow {α} [monoid α] (l r tl tr t) (prl : (l : α) = tl) (prr : (r : ℕ) = tr) (prt : tl ^ tr = t) :\n    l ^ r = t := by rw [prl, prr, prt]\n#align subst_into_pow subst_into_pow\n\n",
+ "theorem subst_into_pow {α} [Monoid α] (l r tl tr t) (prl : (l : α) = tl) (prr : (r : ℕ) = tr) (prt : tl ^ tr = t) :\n    l ^ r = t := by rw [prl, prr, prt]\n#align subst_into_pow subst_into_pow\n\n",
  "pow_succ":
  "#print pow_succ /-\ntheorem pow_succ {α} [CommSemiring α] (a n b c) (h₁ : (a : α) ^ n = b) (h₂ : b * a = c) : a ^ (n + 1) = c := by\n  rw [← h₂, ← h₁, pow_succ']\n#align pow_succ pow_succ\n-/\n\n",
  "pow_add_rev_right":
- "theorem pow_add_rev_right {α} [monoid α] (a b : α) (m n : ℕ) : b * a ^ m * a ^ n = b * a ^ (m + n) := by\n  simp [pow_add, mul_assoc]\n#align pow_add_rev_right pow_add_rev_right\n\n",
+ "theorem pow_add_rev_right {α} [Monoid α] (a b : α) (m n : ℕ) : b * a ^ m * a ^ n = b * a ^ (m + n) := by\n  simp [pow_add, mul_assoc]\n#align pow_add_rev_right pow_add_rev_right\n\n",
  "pow_add_rev":
- "theorem pow_add_rev {α} [monoid α] (a : α) (m n : ℕ) : a ^ m * a ^ n = a ^ (m + n) := by simp [pow_add]\n#align pow_add_rev pow_add_rev\n\n",
+ "theorem pow_add_rev {α} [Monoid α] (a : α) (m n : ℕ) : a ^ m * a ^ n = a ^ (m + n) := by simp [pow_add]\n#align pow_add_rev pow_add_rev\n\n",
  "mul_assoc_rev":
- "theorem mul_assoc_rev {α} [semigroup α] (a b c : α) : a * (b * c) = a * b * c := by simp [mul_assoc]\n#align mul_assoc_rev mul_assoc_rev\n\n",
+ "theorem mul_assoc_rev {α} [Semigroup α] (a b c : α) : a * (b * c) = a * b * c := by simp [mul_assoc]\n#align mul_assoc_rev mul_assoc_rev\n\n",
  "horner_pow":
  "theorem horner_pow {α} [CommSemiring α] (a x n m n' a') (h₁ : n * m = n') (h₂ : a ^ m = a') :\n    @horner α _ a x n 0 ^ m = horner a' x n' 0 := by simp [h₁.symm, h₂.symm, horner, mul_pow, pow_mul]\n#align horner_pow horner_pow\n\n",
  "horner_neg":
@@ -43,4 +43,4 @@
  "const_add_horner":
  "theorem const_add_horner {α} [CommSemiring α] (k a x n b b') (h : k + b = b') :\n    k + @horner α _ a x n b = horner a x n b' := by simp [h.symm, horner] <;> cc\n#align const_add_horner const_add_horner\n\n",
  "add_neg_eq_sub":
- "theorem add_neg_eq_sub {α} [add_group α] (a b : α) : a + -b = a - b :=\n  (sub_eq_add_neg a b).symm\n#align add_neg_eq_sub add_neg_eq_sub\n\n"}
+ "theorem add_neg_eq_sub {α} [AddGroup α] (a b : α) : a + -b = a - b :=\n  (sub_eq_add_neg a b).symm\n#align add_neg_eq_sub add_neg_eq_sub\n\n"}

@@ -1,10 +1,12 @@
 {"support_indicator_subset":
- "theorem support_indicator_subset : ((indicator s f).support : set ι) ⊆ s :=\n  by\n  intro i hi\n  rw [mem_coe, mem_support_iff] at hi\n  by_contra\n  exact hi (indicator_of_not_mem h _)\n#align support_indicator_subset support_indicator_subset\n\n",
+ "theorem support_indicator_subset : ((indicator s f).support : Set ι) ⊆ s :=\n  by\n  intro i hi\n  rw [mem_coe, mem_support_iff] at hi\n  by_contra\n  exact hi (indicator_of_not_mem h _)\n#align support_indicator_subset support_indicator_subset\n\n",
+ "single_eq_indicator":
+ "theorem single_eq_indicator (i : ι) (b : α) : single i b = indicator {i} fun _ _ => b := by\n  classical\n    ext\n    simp [single_apply, indicator_apply, @eq_comm _ a]\n#align single_eq_indicator single_eq_indicator\n\n",
  "indicator_of_not_mem":
- "theorem indicator_of_not_mem (hi : i ∉ s) (f : ∀ i ∈ s, α) : indicator s f i = 0 :=\n  dif_neg hi\n#align indicator_of_not_mem indicator_of_not_mem\n\n",
+ "theorem indicator_of_not_mem (hi : i ∉ s) (f : ∀ i ∈ s, α) : indicator s f i = 0 :=\n  @dif_neg _ (id _) hi _ _ _\n#align indicator_of_not_mem indicator_of_not_mem\n\n",
  "indicator_of_mem":
- "/-\nCopyright (c) 2022 Yaël Dillies. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Yaël Dillies\n-/\ntheorem indicator_of_mem (hi : i ∈ s) (f : ∀ i ∈ s, α) : indicator s f i = f i hi :=\n  dif_pos hi\n#align indicator_of_mem indicator_of_mem\n\n",
+ "/-\nCopyright (c) 2022 Yaël Dillies. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Yaël Dillies\n-/\ntheorem indicator_of_mem (hi : i ∈ s) (f : ∀ i ∈ s, α) : indicator s f i = f i hi :=\n  @dif_pos _ (id _) hi _ _ _\n#align indicator_of_mem indicator_of_mem\n\n",
  "indicator_injective":
  "theorem indicator_injective : injective fun f : ∀ i ∈ s, α => indicator s f :=\n  by\n  intro a b h\n  ext (i hi)\n  rw [← indicator_of_mem hi a, ← indicator_of_mem hi b]\n  exact congr_fun h i\n#align indicator_injective indicator_injective\n\n",
  "indicator_apply":
- "@[simp]\ntheorem indicator_apply : indicator s f i = if hi : i ∈ s then f i hi else 0 :=\n  rfl\n#align indicator_apply indicator_apply\n\n"}
+ "@[simp]\ntheorem indicator_apply [DecidableEq ι] : indicator s f i = if hi : i ∈ s then f i hi else 0 := by convert rfl\n#align indicator_apply indicator_apply\n\n"}

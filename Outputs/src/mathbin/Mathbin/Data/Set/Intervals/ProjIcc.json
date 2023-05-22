@@ -1,7 +1,7 @@
 {"strict_mono_on_proj_Icc":
- "theorem strict_mono_on_proj_Icc : strict_mono_on (projIcc a b h) (Icc a b) := fun x hx y hy hxy => by\n  simpa only [proj_Icc_of_mem, hx, hy]\n#align strict_mono_on_proj_Icc strict_mono_on_proj_Icc\n\n",
+ "theorem strict_mono_on_proj_Icc : StrictMonoOn (projIcc a b h) (Icc a b) := fun x hx y hy hxy => by\n  simpa only [proj_Icc_of_mem, hx, hy]\n#align strict_mono_on_proj_Icc strict_mono_on_proj_Icc\n\n",
  "strictMonoOn_IccExtend":
- "#print StrictMono.strictMonoOn_IccExtend /-\ntheorem StrictMono.strictMonoOn_IccExtend (hf : strict_mono f) : strict_mono_on (IccExtend h f) (Icc a b) :=\n  hf.comp_strict_mono_on (strictMonoOn_projIcc h)\n#align strict_mono.strict_mono_on_Icc_extend StrictMono.strictMonoOn_IccExtend\n-/\n\n",
+ "#print StrictMono.strictMonoOn_IccExtend /-\ntheorem StrictMono.strictMonoOn_IccExtend (hf : StrictMono f) : StrictMonoOn (IccExtend h f) (Icc a b) :=\n  hf.comp_strict_mono_on (strictMonoOn_projIcc h)\n#align strict_mono.strict_mono_on_Icc_extend StrictMono.strictMonoOn_IccExtend\n-/\n\n",
  "range_proj_Icc":
  "@[simp]\ntheorem range_proj_Icc : range (projIcc a b h) = univ :=\n  (projIcc_surjective h).range_eq\n#align range_proj_Icc range_proj_Icc\n\n",
  "proj_Icc_surjective":
@@ -19,13 +19,13 @@
  "proj_Icc_left":
  "@[simp]\ntheorem proj_Icc_left : projIcc a b h a = ⟨a, left_mem_Icc.2 h⟩ :=\n  projIcc_of_le_left h le_rfl\n#align proj_Icc_left proj_Icc_left\n\n",
  "proj_Icc_eq_right":
- "theorem proj_Icc_eq_right (h : a < b) : projIcc a b h.le x = ⟨b, right_mem_Icc.mpr h.le⟩ ↔ b ≤ x :=\n  by\n  refine' ⟨fun h' => _, proj_Icc_of_right_le _⟩\n  simp_rw [subtype.ext_iff_val, proj_Icc] at h'\n  have := ((max_choice _ _).resolve_left (by simp [h.ne', h'])).symm.trans h'\n  exact min_eq_left_iff.mp this\n#align proj_Icc_eq_right proj_Icc_eq_right\n\n",
+ "theorem proj_Icc_eq_right (h : a < b) : projIcc a b h.le x = ⟨b, right_mem_Icc.mpr h.le⟩ ↔ b ≤ x :=\n  by\n  refine' ⟨fun h' => _, proj_Icc_of_right_le _⟩\n  simp_rw [Subtype.ext_iff_val, proj_Icc] at h'\n  have := ((max_choice _ _).resolve_left (by simp [h.ne', h'])).symm.trans h'\n  exact min_eq_left_iff.mp this\n#align proj_Icc_eq_right proj_Icc_eq_right\n\n",
  "proj_Icc_eq_left":
- "theorem proj_Icc_eq_left (h : a < b) : projIcc a b h.le x = ⟨a, left_mem_Icc.mpr h.le⟩ ↔ x ≤ a :=\n  by\n  refine' ⟨fun h' => _, proj_Icc_of_le_left _⟩\n  simp_rw [subtype.ext_iff_val, proj_Icc, max_eq_left_iff, min_le_iff, h.not_le, false_or_iff] at h'\n  exact h'\n#align proj_Icc_eq_left proj_Icc_eq_left\n\n",
+ "theorem proj_Icc_eq_left (h : a < b) : projIcc a b h.le x = ⟨a, left_mem_Icc.mpr h.le⟩ ↔ x ≤ a :=\n  by\n  refine' ⟨fun h' => _, proj_Icc_of_le_left _⟩\n  simp_rw [Subtype.ext_iff_val, proj_Icc, max_eq_left_iff, min_le_iff, h.not_le, false_or_iff] at h'\n  exact h'\n#align proj_Icc_eq_left proj_Icc_eq_left\n\n",
  "proj_Icc_coe":
  "@[simp]\ntheorem proj_Icc_coe (x : Icc a b) : projIcc a b h x = x :=\n  by\n  cases x\n  apply proj_Icc_of_mem\n#align proj_Icc_coe proj_Icc_coe\n\n",
  "monotone_proj_Icc":
- "theorem monotone_proj_Icc : monotone (projIcc a b h) := fun x y hxy => max_le_max le_rfl <| min_le_min le_rfl hxy\n#align monotone_proj_Icc monotone_proj_Icc\n\n",
+ "theorem monotone_proj_Icc : Monotone (projIcc a b h) := fun x y hxy => max_le_max le_rfl <| min_le_min le_rfl hxy\n#align monotone_proj_Icc monotone_proj_Icc\n\n",
  "Icc_extend_right":
  "@[simp]\ntheorem Icc_extend_right (f : Icc a b → β) : IccExtend h f b = f ⟨b, right_mem_Icc.2 h⟩ :=\n  IccExtend_of_right_le h f le_rfl\n#align Icc_extend_right Icc_extend_right\n\n",
  "Icc_extend_range":
@@ -41,4 +41,4 @@
  "Icc_extend_coe":
  "@[simp]\ntheorem Icc_extend_coe (f : Icc a b → β) (x : Icc a b) : IccExtend h f x = f x :=\n  congr_arg f <| projIcc_val h x\n#align Icc_extend_coe Icc_extend_coe\n\n",
  "IccExtend":
- "#print Monotone.IccExtend /-\ntheorem Monotone.IccExtend (hf : monotone f) : monotone (IccExtend h f) :=\n  hf.comp <| monotone_projIcc h\n#align monotone.Icc_extend Monotone.IccExtend\n-/\n\n"}
+ "#print Monotone.IccExtend /-\ntheorem Monotone.IccExtend (hf : Monotone f) : Monotone (IccExtend h f) :=\n  hf.comp <| monotone_projIcc h\n#align monotone.Icc_extend Monotone.IccExtend\n-/\n\n"}

@@ -1,6 +1,6 @@
 {"ne_zero_iff_odd":
- "theorem ne_zero_iff_odd {n : ℕ} : (n : zmod 2) ≠ 0 ↔ Odd n := by\n  constructor <;>\n    · contrapose\n      simp [eq_zero_iff_even]\n#align ne_zero_iff_odd ne_zero_iff_odd\n\n",
+ "theorem ne_zero_iff_odd {n : ℕ} : (n : ZMod 2) ≠ 0 ↔ Odd n := by\n  constructor <;>\n    · contrapose\n      simp [eq_zero_iff_even]\n#align ne_zero_iff_odd ne_zero_iff_odd\n\n",
  "eq_zero_iff_even":
- "/-\nCopyright (c) 2020 Kyle Miller. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Kyle Miller\n-/\ntheorem eq_zero_iff_even {n : ℕ} : (n : zmod 2) = 0 ↔ Even n :=\n  (char_p.cast_eq_zero_iff (zmod 2) 2 n).trans even_iff_two_dvd.symm\n#align eq_zero_iff_even eq_zero_iff_even\n\n",
+ "/-\nCopyright (c) 2020 Kyle Miller. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Kyle Miller\n-/\ntheorem eq_zero_iff_even {n : ℕ} : (n : ZMod 2) = 0 ↔ Even n :=\n  (char_p.cast_eq_zero_iff (ZMod 2) 2 n).trans even_iff_two_dvd.symm\n#align eq_zero_iff_even eq_zero_iff_even\n\n",
  "eq_one_iff_odd":
- "theorem eq_one_iff_odd {n : ℕ} : (n : zmod 2) = 1 ↔ Odd n :=\n  by\n  rw [← @Nat.cast_one (zmod 2), zmod.eq_iff_modeq_nat, nat.odd_iff, Nat.ModEq]\n  norm_num\n#align eq_one_iff_odd eq_one_iff_odd\n\n"}
+ "theorem eq_one_iff_odd {n : ℕ} : (n : ZMod 2) = 1 ↔ Odd n :=\n  by\n  rw [← @Nat.cast_one (ZMod 2), ZMod.eq_iff_modEq_nat, Nat.odd_iff, Nat.ModEq]\n  norm_num\n#align eq_one_iff_odd eq_one_iff_odd\n\n"}

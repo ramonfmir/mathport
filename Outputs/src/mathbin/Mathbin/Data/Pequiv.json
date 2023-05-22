@@ -3,23 +3,23 @@
  "trans_single_of_mem":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃. » -/\ntheorem trans_single_of_mem {a : α} {b : β} (c : γ) {f : «expr ≃. » α β} (h : b ∈ f a) :\n    f.trans (single b c) = single a c :=\n  symm_injective <| single_trans_of_mem _ ((mem_iff_mem f).2 h)\n#align trans_single_of_mem trans_single_of_mem\n\n",
  "trans_single_of_eq_none":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃. » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\ntheorem trans_single_of_eq_none {b : β} (c : γ) {f : «expr ≃. » δ β} (h : f.symm b = none) :\n    f.trans (single b c) = «expr⊥» := by\n  ext\n  simp only [eq_none_iff_forall_not_mem, option.mem_def, f.eq_some_iff] at h\n  dsimp [PEquiv.trans, single]\n  simp\n  intros\n  split_ifs <;> simp_all\n#align trans_single_of_eq_none trans_single_of_eq_none\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃. » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\ntheorem trans_single_of_eq_none {b : β} (c : γ) {f : «expr ≃. » δ β} (h : f.symm b = none) :\n    f.trans (single b c) = «expr⊥» := by\n  ext\n  simp only [eq_none_iff_forall_not_mem, Option.mem_def, f.eq_some_iff] at h\n  dsimp [PEquiv.trans, single]\n  simp\n  intros\n  split_ifs <;> simp_all\n#align trans_single_of_eq_none trans_single_of_eq_none\n\n",
  "trans_refl":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃. » -/\n@[simp]\ntheorem trans_refl (f : «expr ≃. » α β) : f.trans (PEquiv.refl β) = f := by ext <;> dsimp [PEquiv.trans] <;> simp\n#align trans_refl trans_refl\n\n",
  "trans_eq_some":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃. » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃. » -/\ntheorem trans_eq_some (f : «expr ≃. » α β) (g : «expr ≃. » β γ) (a : α) (c : γ) :\n    f.trans g a = some c ↔ ∃ b, f a = some b ∧ g b = some c :=\n  option.bind_eq_some'\n#align trans_eq_some trans_eq_some\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃. » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃. » -/\ntheorem trans_eq_some (f : «expr ≃. » α β) (g : «expr ≃. » β γ) (a : α) (c : γ) :\n    f.trans g a = some c ↔ ∃ b, f a = some b ∧ g b = some c :=\n  Option.bind_eq_some'\n#align trans_eq_some trans_eq_some\n\n",
  "trans_eq_none":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃. » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃. » -/\ntheorem trans_eq_none (f : «expr ≃. » α β) (g : «expr ≃. » β γ) (a : α) :\n    f.trans g a = none ↔ ∀ b c, b ∉ f a ∨ c ∉ g b :=\n  by\n  simp only [eq_none_iff_forall_not_mem, mem_trans, imp_iff_not_or.symm]\n  push_neg; tauto\n#align trans_eq_none trans_eq_none\n\n",
  "trans_bot":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃. » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃. » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n@[simp]\ntheorem trans_bot (f : «expr ≃. » α β) : f.trans («expr⊥» : «expr ≃. » β γ) = «expr⊥» := by\n  ext <;> dsimp [PEquiv.trans] <;> simp\n#align trans_bot trans_bot\n\n",
  "trans_assoc":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃. » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃. » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃. » -/\ntheorem trans_assoc (f : «expr ≃. » α β) (g : «expr ≃. » β γ) (h : «expr ≃. » γ δ) :\n    (f.trans g).trans h = f.trans (g.trans h) :=\n  ext fun _ => option.bind_assoc _ _ _\n#align trans_assoc trans_assoc\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃. » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃. » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃. » -/\ntheorem trans_assoc (f : «expr ≃. » α β) (g : «expr ≃. » β γ) (h : «expr ≃. » γ δ) :\n    (f.trans g).trans h = f.trans (g.trans h) :=\n  ext fun _ => Option.bind_assoc _ _ _\n#align trans_assoc trans_assoc\n\n",
  "to_pequiv_trans":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ » -/\ntheorem to_pequiv_trans (f : «expr ≃ » α β) (g : «expr ≃ » β γ) :\n    (f.trans g).to_pequiv = f.to_pequiv.trans g.to_pequiv :=\n  rfl\n#align to_pequiv_trans to_pequiv_trans\n\n",
  "to_pequiv_symm":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ » -/\ntheorem to_pequiv_symm (f : «expr ≃ » α β) : f.symm.to_pequiv = f.to_pequiv.symm :=\n  rfl\n#align to_pequiv_symm to_pequiv_symm\n\n",
  "to_pequiv_refl":
- "-- `split_ifs; finish` closes this goal from here\n@[simp]\ntheorem to_pequiv_refl : (equiv.refl α).to_pequiv = PEquiv.refl α :=\n  rfl\n#align to_pequiv_refl to_pequiv_refl\n\n",
+ "-- `split_ifs; finish` closes this goal from here\n@[simp]\ntheorem to_pequiv_refl : (Equiv.refl α).to_pequiv = PEquiv.refl α :=\n  rfl\n#align to_pequiv_refl to_pequiv_refl\n\n",
  "to_pequiv_apply":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ » -/\ntheorem to_pequiv_apply (f : «expr ≃ » α β) (x : α) : f.to_pequiv x = some (f x) :=\n  rfl\n#align to_pequiv_apply to_pequiv_apply\n\n",
  "symm_trans_self":
@@ -51,7 +51,7 @@
  "single_apply":
  "@[simp]\ntheorem single_apply (a : α) (b : β) : single a b a = some b :=\n  if_pos rfl\n#align single_apply single_apply\n\n",
  "self_trans_symm":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃. » -/\ntheorem self_trans_symm (f : «expr ≃. » α β) : f.trans f.symm = ofSet { a | (f a).is_some } :=\n  by\n  ext\n  dsimp [PEquiv.trans]\n  simp only [eq_some_iff f, Option.isSome_iff_exists, option.mem_def, bind_eq_some', of_set_eq_some_iff]\n  constructor\n  · rintro ⟨b, hb₁, hb₂⟩\n    exact ⟨PEquiv.inj _ hb₂ hb₁, b, hb₂⟩\n  · simp (config := { contextual := true })\n#align self_trans_symm self_trans_symm\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃. » -/\ntheorem self_trans_symm (f : «expr ≃. » α β) : f.trans f.symm = ofSet { a | (f a).is_some } :=\n  by\n  ext\n  dsimp [PEquiv.trans]\n  simp only [eq_some_iff f, Option.isSome_iff_exists, Option.mem_def, bind_eq_some', of_set_eq_some_iff]\n  constructor\n  · rintro ⟨b, hb₁, hb₂⟩\n    exact ⟨PEquiv.inj _ hb₂ hb₁, b, hb₂⟩\n  · simp (config := { contextual := true })\n#align self_trans_symm self_trans_symm\n\n",
  "refl_trans":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃. » -/\n@[simp]\ntheorem refl_trans (f : «expr ≃. » α β) : (PEquiv.refl α).trans f = f := by ext <;> dsimp [PEquiv.trans] <;> rfl\n#align refl_trans refl_trans\n\n",
  "refl_apply":
@@ -61,21 +61,21 @@
  "of_set_symm":
  "@[simp]\ntheorem of_set_symm : (ofSet s).symm = ofSet s :=\n  rfl\n#align of_set_symm of_set_symm\n\n",
  "of_set_eq_some_self_iff":
- "@[simp]\ntheorem of_set_eq_some_self_iff {s : set α} {h : decidable_pred (· ∈ s)} {a : α} : ofSet s a = some a ↔ a ∈ s :=\n  mem_of_set_self_iff\n#align of_set_eq_some_self_iff of_set_eq_some_self_iff\n\n",
+ "@[simp]\ntheorem of_set_eq_some_self_iff {s : Set α} {h : DecidablePred (· ∈ s)} {a : α} : ofSet s a = some a ↔ a ∈ s :=\n  mem_ofSet_self_iff\n#align of_set_eq_some_self_iff of_set_eq_some_self_iff\n\n",
  "of_set_eq_some_iff":
- "@[simp]\ntheorem of_set_eq_some_iff {s : set α} {h : decidable_pred (· ∈ s)} {a b : α} : ofSet s b = some a ↔ a = b ∧ a ∈ s :=\n  mem_of_set_iff\n#align of_set_eq_some_iff of_set_eq_some_iff\n\n",
+ "@[simp]\ntheorem of_set_eq_some_iff {s : Set α} {h : DecidablePred (· ∈ s)} {a b : α} : ofSet s b = some a ↔ a = b ∧ a ∈ s :=\n  mem_ofSet_iff\n#align of_set_eq_some_iff of_set_eq_some_iff\n\n",
  "of_set_eq_refl":
- "@[simp]\ntheorem of_set_eq_refl {s : set α} [decidable_pred (· ∈ s)] : ofSet s = PEquiv.refl α ↔ s = Set.univ :=\n  ⟨fun h => by\n    rw [Set.eq_univ_iff_forall]\n    intro\n    rw [← mem_of_set_self_iff, h]\n    exact rfl, fun h => by simp only [← of_set_univ, h]⟩\n#align of_set_eq_refl of_set_eq_refl\n\n",
+ "@[simp]\ntheorem of_set_eq_refl {s : Set α} [DecidablePred (· ∈ s)] : ofSet s = PEquiv.refl α ↔ s = Set.univ :=\n  ⟨fun h => by\n    rw [Set.eq_univ_iff_forall]\n    intro\n    rw [← mem_of_set_self_iff, h]\n    exact rfl, fun h => by simp only [← of_set_univ, h]⟩\n#align of_set_eq_refl of_set_eq_refl\n\n",
  "mem_trans":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃. » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃. » -/\ntheorem mem_trans (f : «expr ≃. » α β) (g : «expr ≃. » β γ) (a : α) (c : γ) :\n    c ∈ f.trans g a ↔ ∃ b, b ∈ f a ∧ c ∈ g b :=\n  option.bind_eq_some'\n#align mem_trans mem_trans\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃. » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃. » -/\ntheorem mem_trans (f : «expr ≃. » α β) (g : «expr ≃. » β γ) (a : α) (c : γ) :\n    c ∈ f.trans g a ↔ ∃ b, b ∈ f a ∧ c ∈ g b :=\n  Option.bind_eq_some'\n#align mem_trans mem_trans\n\n",
  "mem_single_iff":
  "theorem mem_single_iff (a₁ a₂ : α) (b₁ b₂ : β) : b₁ ∈ single a₂ b₂ a₁ ↔ a₁ = a₂ ∧ b₁ = b₂ := by\n  dsimp [single] <;> split_ifs <;> simp [*, eq_comm]\n#align mem_single_iff mem_single_iff\n\n",
  "mem_single":
  "theorem mem_single (a : α) (b : β) : b ∈ single a b a :=\n  if_pos rfl\n#align mem_single mem_single\n\n",
  "mem_of_set_self_iff":
- "theorem mem_of_set_self_iff {s : set α} [decidable_pred (· ∈ s)] {a : α} : a ∈ ofSet s a ↔ a ∈ s := by\n  dsimp [of_set] <;> split_ifs <;> simp [*]\n#align mem_of_set_self_iff mem_of_set_self_iff\n\n",
+ "theorem mem_of_set_self_iff {s : Set α} [DecidablePred (· ∈ s)] {a : α} : a ∈ ofSet s a ↔ a ∈ s := by\n  dsimp [of_set] <;> split_ifs <;> simp [*]\n#align mem_of_set_self_iff mem_of_set_self_iff\n\n",
  "mem_of_set_iff":
- "theorem mem_of_set_iff {s : set α} [decidable_pred (· ∈ s)] {a b : α} : a ∈ ofSet s b ↔ a = b ∧ a ∈ s :=\n  by\n  dsimp [of_set]\n  split_ifs\n  · simp only [iff_self_and, eq_comm]\n    rintro rfl\n    exact h\n  · simp only [false_iff_iff, not_and]\n    rintro rfl\n    exact h\n#align mem_of_set_iff mem_of_set_iff\n\n",
+ "theorem mem_of_set_iff {s : Set α} [DecidablePred (· ∈ s)] {a b : α} : a ∈ ofSet s b ↔ a = b ∧ a ∈ s :=\n  by\n  dsimp [of_set]\n  split_ifs\n  · simp only [iff_self_and, eq_comm]\n    rintro rfl\n    exact h\n  · simp only [false_iff_iff, not_and]\n    rintro rfl\n    exact h\n#align mem_of_set_iff mem_of_set_iff\n\n",
  "mem_iff_mem":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃. » -/\ntheorem mem_iff_mem (f : «expr ≃. » α β) : ∀ {a : α} {b : β}, a ∈ f.symm b ↔ b ∈ f a :=\n  f.3\n#align mem_iff_mem mem_iff_mem\n\n",
  "le_def":
@@ -85,17 +85,17 @@
  "injective_of_forall_ne_is_some":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃. » -/\n/-- If the domain of a `pequiv` is `α` except a point, its forward direction is injective. -/\ntheorem injective_of_forall_ne_is_some (f : «expr ≃. » α β) (a₂ : α) (h : ∀ a₁ : α, a₁ ≠ a₂ → is_some (f a₁)) :\n    injective f :=\n  has_left_inverse.injective\n    ⟨fun b => option.rec_on b a₂ fun b' => option.rec_on (f.symm b') a₂ id, fun x => by\n      classical\n        cases hfx : f x\n        · have : x = a₂ := not_imp_comm.1 (h x) (hfx.symm ▸ by simp)\n          simp [this]\n        · dsimp only\n          rw [(eq_some_iff f).2 hfx]\n          rfl⟩\n#align injective_of_forall_ne_is_some injective_of_forall_ne_is_some\n\n",
  "injective_of_forall_is_some":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃. » -/\n/-- If the domain of a `pequiv` is all of `α`, its forward direction is injective. -/\ntheorem injective_of_forall_is_some {f : «expr ≃. » α β} (h : ∀ a : α, is_some (f a)) : injective f :=\n  (classical.em (nonempty α)).elim (fun hn => injective_of_forall_ne_isSome f (classical.choice hn) fun a _ => h a)\n    fun hn x => (hn ⟨x⟩).elim\n#align injective_of_forall_is_some injective_of_forall_is_some\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃. » -/\n/-- If the domain of a `pequiv` is all of `α`, its forward direction is injective. -/\ntheorem injective_of_forall_is_some {f : «expr ≃. » α β} (h : ∀ a : α, is_some (f a)) : injective f :=\n  (classical.em (Nonempty α)).elim (fun hn => injective_of_forall_ne_isSome f (Classical.choice hn) fun a _ => h a)\n    fun hn x => (hn ⟨x⟩).elim\n#align injective_of_forall_is_some injective_of_forall_is_some\n\n",
  "inj":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃. » -/\nprotected theorem inj (f : «expr ≃. » α β) {a₁ a₂ : α} {b : β} (h₁ : b ∈ f a₁) (h₂ : b ∈ f a₂) : a₁ = a₂ := by\n  rw [← mem_iff_mem] at * <;> cases h : f.symm b <;> simp_all\n#align inj inj\n\n",
  "ext_iff":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃. » -/\ntheorem ext_iff {f g : «expr ≃. » α β} : f = g ↔ ∀ x, f x = g x :=\n  ⟨congr_fun ∘ congr_arg _, ext⟩\n#align ext_iff ext_iff\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃. » -/\ntheorem ext_iff {f g : «expr ≃. » α β} : f = g ↔ ∀ x, f x = g x :=\n  FunLike.ext_iff\n#align ext_iff ext_iff\n\n",
  "ext":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃. » -/\n@[ext]\ntheorem ext : ∀ {f g : «expr ≃. » α β} (h : ∀ x, f x = g x), f = g\n  | ⟨f₁, f₂, hf⟩, ⟨g₁, g₂, hg⟩, h => by\n    have h : f₁ = g₁ := funext h\n    have : ∀ b, f₂ b = g₂ b := by\n      subst h\n      intro b\n      have hf := fun a => hf a b\n      have hg := fun a => hg a b\n      cases' h : g₂ b with a\n      · simp only [h, option.not_mem_none, false_iff_iff] at hg\n        simp only [hg, iff_false_iff] at hf\n        rwa [option.eq_none_iff_forall_not_mem]\n      · rw [← option.mem_def, hf, ← hg, h, option.mem_def]\n    simp [*, funext_iff]\n#align ext ext\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃. » -/\n@[ext]\ntheorem ext {f g : «expr ≃. » α β} (h : ∀ x, f x = g x) : f = g :=\n  FunLike.ext f g h\n#align ext ext\n\n",
  "eq_some_iff":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃. » -/\ntheorem eq_some_iff (f : «expr ≃. » α β) : ∀ {a : α} {b : β}, f.symm b = some a ↔ f a = some b :=\n  f.3\n#align eq_some_iff eq_some_iff\n\n",
  "coe_mk_apply":
- "/-\nCopyright (c) 2019 Chris Hughes. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Chris Hughes\n-/\n@[simp]\ntheorem coe_mk_apply (f₁ : α → option β) (f₂ : β → option α) (h) (x : α) :\n    (pequiv.mk f₁ f₂ h : α → option β) x = f₁ x :=\n  rfl\n#align coe_mk_apply coe_mk_apply\n\n",
+ "/-\nCopyright (c) 2019 Chris Hughes. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Chris Hughes\n-/\n@[simp]\ntheorem coe_mk_apply (f₁ : α → Option β) (f₂ : β → Option α) (h) (x : α) :\n    (pequiv.mk f₁ f₂ h : α → Option β) x = f₁ x :=\n  rfl\n#align coe_mk_apply coe_mk_apply\n\n",
  "bot_trans":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃. » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃. » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n@[simp]\ntheorem bot_trans (f : «expr ≃. » β γ) : («expr⊥» : «expr ≃. » α β).trans f = «expr⊥» := by\n  ext <;> dsimp [PEquiv.trans] <;> simp\n#align bot_trans bot_trans\n\n",
  "bot_apply":

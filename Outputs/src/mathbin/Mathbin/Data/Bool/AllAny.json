@@ -1,18 +1,18 @@
 {"any_of_mem":
- "theorem any_of_mem {p : α → bool} (h₁ : a ∈ l) (h₂ : p a) : any l p :=\n  any_iff_exists.2 ⟨_, h₁, h₂⟩\n#align any_of_mem any_of_mem\n\n",
+ "theorem any_of_mem {p : α → Bool} (h₁ : a ∈ l) (h₂ : p a) : any l p :=\n  any_iff_exists.2 ⟨_, h₁, h₂⟩\n#align any_of_mem any_of_mem\n\n",
  "any_nil":
- "@[simp]\ntheorem any_nil (p : α → bool) : any [] p = ff :=\n  rfl\n#align any_nil any_nil\n\n",
+ "@[simp]\ntheorem any_nil (p : α → Bool) : any [] p = false :=\n  rfl\n#align any_nil any_nil\n\n",
  "any_iff_exists_prop":
  "theorem any_iff_exists_prop : (any l fun a => p a) ↔ ∃ a ∈ l, p a := by simp [any_iff_exists]\n#align any_iff_exists_prop any_iff_exists_prop\n\n",
  "any_iff_exists":
- "theorem any_iff_exists {p : α → bool} : any l p ↔ ∃ a ∈ l, p a :=\n  by\n  induction' l with a l ih\n  · exact iff_of_false Bool.not_false' (not_exists_mem_nil _)\n  simp only [any_cons, Bool.or_coe_iff, ih, exists_mem_cons_iff]\n#align any_iff_exists any_iff_exists\n\n",
+ "theorem any_iff_exists {p : α → Bool} : any l p ↔ ∃ a ∈ l, p a :=\n  by\n  induction' l with a l ih\n  · exact iff_of_false Bool.not_false' (not_exists_mem_nil _)\n  simp only [any_cons, Bool.or_coe_iff, ih, exists_mem_cons_iff]\n#align any_iff_exists any_iff_exists\n\n",
  "any_cons":
- "@[simp]\ntheorem any_cons (p : α → bool) (a : α) (l : list α) : any (a :: l) p = (p a || any l p) :=\n  rfl\n#align any_cons any_cons\n\n",
+ "@[simp]\ntheorem any_cons (p : α → Bool) (a : α) (l : List α) : any (a :: l) p = (p a || any l p) :=\n  rfl\n#align any_cons any_cons\n\n",
  "all_nil":
- "/-\nCopyright (c) 2017 Mario Carneiro. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Mario Carneiro\n-/\n@[simp]\ntheorem all_nil (p : α → bool) : all [] p = tt :=\n  rfl\n#align all_nil all_nil\n\n",
+ "/-\nCopyright (c) 2017 Mario Carneiro. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Mario Carneiro\n-/\n@[simp]\ntheorem all_nil (p : α → Bool) : all [] p = true :=\n  rfl\n#align all_nil all_nil\n\n",
  "all_iff_forall_prop":
  "theorem all_iff_forall_prop : (all l fun a => p a) ↔ ∀ a ∈ l, p a := by simp only [all_iff_forall, Bool.of_decide_iff]\n#align all_iff_forall_prop all_iff_forall_prop\n\n",
  "all_iff_forall":
- "theorem all_iff_forall {p : α → bool} : all l p ↔ ∀ a ∈ l, p a :=\n  by\n  induction' l with a l ih\n  · exact iff_of_true rfl (forall_mem_nil _)\n  simp only [all_cons, Bool.and_coe_iff, ih, forall_mem_cons]\n#align all_iff_forall all_iff_forall\n\n",
+ "theorem all_iff_forall {p : α → Bool} : all l p ↔ ∀ a ∈ l, p a :=\n  by\n  induction' l with a l ih\n  · exact iff_of_true rfl (forall_mem_nil _)\n  simp only [all_cons, Bool.and_coe_iff, ih, forall_mem_cons]\n#align all_iff_forall all_iff_forall\n\n",
  "all_cons":
- "@[simp]\ntheorem all_cons (p : α → bool) (a : α) (l : list α) : all (a :: l) p = (p a && all l p) :=\n  rfl\n#align all_cons all_cons\n\n"}
+ "@[simp]\ntheorem all_cons (p : α → Bool) (a : α) (l : List α) : all (a :: l) p = (p a && all l p) :=\n  rfl\n#align all_cons all_cons\n\n"}

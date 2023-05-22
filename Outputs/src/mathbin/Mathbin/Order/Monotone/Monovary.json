@@ -3,15 +3,13 @@
  "subset":
  "#print AntivaryOn.subset /-\nprotected theorem AntivaryOn.subset (hst : s ⊆ t) (h : AntivaryOn f g t) : AntivaryOn f g s := fun i hi j hj =>\n  h (hst hi) (hst hj)\n#align antivary_on.subset AntivaryOn.subset\n-/\n\n",
  "monovary_toDual_right":
- "#print monovary_toDual_right /-\n@[simp]\ntheorem monovary_toDual_right : Monovary f (to_dual ∘ g) ↔ Antivary f g :=\n  forall_swap\n#align monovary_to_dual_right monovary_toDual_right\n-/\n\n",
+ "#print monovary_toDual_right /-\n@[simp]\ntheorem monovary_toDual_right : Monovary f (toDual ∘ g) ↔ Antivary f g :=\n  forall_swap\n#align monovary_to_dual_right monovary_toDual_right\n-/\n\n",
  "monovary_toDual_left":
- "#print monovary_toDual_left /-\n@[simp]\ntheorem monovary_toDual_left : Monovary (to_dual ∘ f) g ↔ Antivary f g :=\n  iff.rfl\n#align monovary_to_dual_left monovary_toDual_left\n-/\n\n",
+ "#print monovary_toDual_left /-\n@[simp]\ntheorem monovary_toDual_left : Monovary (toDual ∘ f) g ↔ Antivary f g :=\n  iff.rfl\n#align monovary_to_dual_left monovary_toDual_left\n-/\n\n",
  "monovary_self":
  "#print monovary_self /-\ntheorem monovary_self (f : ι → α) : Monovary f f := fun i j => le_of_lt\n#align monovary_self monovary_self\n-/\n\n",
- "monovary_on":
- "#print Subsingleton.monovary_on /-\nprotected theorem Subsingleton.monovary_on [subsingleton ι] (f : ι → α) (g : ι → β) (s : set ι) : MonovaryOn f g s :=\n  fun i _ j _ h => (ne_of_apply_ne _ h.ne <| subsingleton.elim _ _).elim\n#align subsingleton.monovary_on Subsingleton.monovary_on\n-/\n\n",
  "monovary_id_iff":
- "#print monovary_id_iff /-\n@[simp]\ntheorem monovary_id_iff : Monovary f id ↔ monotone f :=\n  monotone_iff_forall_lt.symm\n#align monovary_id_iff monovary_id_iff\n-/\n\n",
+ "#print monovary_id_iff /-\n@[simp]\ntheorem monovary_id_iff : Monovary f id ↔ Monotone f :=\n  monotone_iff_forall_lt.symm\n#align monovary_id_iff monovary_id_iff\n-/\n\n",
  "monovary_const_right":
  "#print monovary_const_right /-\ntheorem monovary_const_right (f : ι → α) (b : β) : Monovary f (const ι b) := fun i j h => (h.ne rfl).elim\n#align monovary_const_right monovary_const_right\n-/\n\n",
  "monovary_const_left":
@@ -21,53 +19,51 @@
  "monovaryOn_univ":
  "#print monovaryOn_univ /-\n@[simp]\ntheorem monovaryOn_univ : MonovaryOn f g univ ↔ Monovary f g :=\n  ⟨fun h i j => h trivial trivial, fun h i _ j _ hij => h hij⟩\n#align monovary_on_univ monovaryOn_univ\n-/\n\n",
  "monovaryOn_toDual_right":
- "#print monovaryOn_toDual_right /-\n@[simp]\ntheorem monovaryOn_toDual_right : MonovaryOn f (to_dual ∘ g) s ↔ AntivaryOn f g s :=\n  forall₂_swap\n#align monovary_on_to_dual_right monovaryOn_toDual_right\n-/\n\n",
+ "#print monovaryOn_toDual_right /-\n@[simp]\ntheorem monovaryOn_toDual_right : MonovaryOn f (toDual ∘ g) s ↔ AntivaryOn f g s :=\n  forall₂_swap\n#align monovary_on_to_dual_right monovaryOn_toDual_right\n-/\n\n",
  "monovaryOn_toDual_left":
- "#print monovaryOn_toDual_left /-\n@[simp]\ntheorem monovaryOn_toDual_left : MonovaryOn (to_dual ∘ f) g s ↔ AntivaryOn f g s :=\n  iff.rfl\n#align monovary_on_to_dual_left monovaryOn_toDual_left\n-/\n\n",
+ "#print monovaryOn_toDual_left /-\n@[simp]\ntheorem monovaryOn_toDual_left : MonovaryOn (toDual ∘ f) g s ↔ AntivaryOn f g s :=\n  iff.rfl\n#align monovary_on_to_dual_left monovaryOn_toDual_left\n-/\n\n",
  "monovaryOn_self":
- "#print monovaryOn_self /-\ntheorem monovaryOn_self (f : ι → α) (s : set ι) : MonovaryOn f f s := fun i _ j _ => le_of_lt\n#align monovary_on_self monovaryOn_self\n-/\n\n",
+ "#print monovaryOn_self /-\ntheorem monovaryOn_self (f : ι → α) (s : Set ι) : MonovaryOn f f s := fun i _ j _ => le_of_lt\n#align monovary_on_self monovaryOn_self\n-/\n\n",
  "monovaryOn_id_iff":
- "#print monovaryOn_id_iff /-\n@[simp]\ntheorem monovaryOn_id_iff : MonovaryOn f id s ↔ monotone_on f s :=\n  monotoneOn_iff_forall_lt.symm\n#align monovary_on_id_iff monovaryOn_id_iff\n-/\n\n",
+ "#print monovaryOn_id_iff /-\n@[simp]\ntheorem monovaryOn_id_iff : MonovaryOn f id s ↔ MonotoneOn f s :=\n  monotoneOn_iff_forall_lt.symm\n#align monovary_on_id_iff monovaryOn_id_iff\n-/\n\n",
  "monovaryOn_const_right":
- "#print monovaryOn_const_right /-\ntheorem monovaryOn_const_right (f : ι → α) (b : β) (s : set ι) : MonovaryOn f (const ι b) s := fun i _ j _ h =>\n  (h.ne rfl).elim\n#align monovary_on_const_right monovaryOn_const_right\n-/\n\n",
+ "#print monovaryOn_const_right /-\ntheorem monovaryOn_const_right (f : ι → α) (b : β) (s : Set ι) : MonovaryOn f (const ι b) s := fun i _ j _ h =>\n  (h.ne rfl).elim\n#align monovary_on_const_right monovaryOn_const_right\n-/\n\n",
  "monovaryOn_const_left":
- "#print monovaryOn_const_left /-\ntheorem monovaryOn_const_left (g : ι → β) (a : α) (s : set ι) : MonovaryOn (const ι a) g s := fun i _ j _ _ => le_rfl\n#align monovary_on_const_left monovaryOn_const_left\n-/\n\n",
+ "#print monovaryOn_const_left /-\ntheorem monovaryOn_const_left (g : ι → β) (a : α) (s : Set ι) : MonovaryOn (const ι a) g s := fun i _ j _ _ => le_rfl\n#align monovary_on_const_left monovaryOn_const_left\n-/\n\n",
  "monovaryOn_comm":
  "#print monovaryOn_comm /-\nprotected theorem monovaryOn_comm : MonovaryOn f g s ↔ MonovaryOn g f s :=\n  ⟨MonovaryOn.symm, MonovaryOn.symm⟩\n#align monovary_on_comm monovaryOn_comm\n-/\n\n",
  "monovaryOn":
- "#print AntitoneOn.monovaryOn /-\nprotected theorem AntitoneOn.monovaryOn (hf : antitone_on f s) (hg : antitone_on g s) : MonovaryOn f g s :=\n  (hf.dual_right.antivary_on hg).dual_left\n#align antitone_on.monovary_on AntitoneOn.monovaryOn\n-/\n\n",
+ "#print AntitoneOn.monovaryOn /-\nprotected theorem AntitoneOn.monovaryOn (hf : AntitoneOn f s) (hg : AntitoneOn g s) : MonovaryOn f g s :=\n  (hf.dual_right.antivary_on hg).dual_left\n#align antitone_on.monovary_on AntitoneOn.monovaryOn\n-/\n\n",
  "monovary":
- "#print Antitone.monovary /-\nprotected theorem Antitone.monovary (hf : antitone f) (hg : antitone g) : Monovary f g :=\n  (hf.dual_right.antivary hg).dual_left\n#align antitone.monovary Antitone.monovary\n-/\n\n",
+ "#print Antitone.monovary /-\nprotected theorem Antitone.monovary (hf : Antitone f) (hg : Antitone g) : Monovary f g :=\n  (hf.dual_right.antivary hg).dual_left\n#align antitone.monovary Antitone.monovary\n-/\n\n",
  "empty":
  "#print AntivaryOn.empty /-\n@[simp]\ntheorem AntivaryOn.empty : AntivaryOn f g ∅ := fun i => false.elim\n#align antivary_on.empty AntivaryOn.empty\n-/\n\n",
  "dual_right":
- "#print AntivaryOn.dual_right /-\ntheorem AntivaryOn.dual_right : AntivaryOn f g s → MonovaryOn f (to_dual ∘ g) s :=\n  swap₂\n#align antivary_on.dual_right AntivaryOn.dual_right\n-/\n\n",
+ "#print AntivaryOn.dual_right /-\ntheorem AntivaryOn.dual_right : AntivaryOn f g s → MonovaryOn f (toDual ∘ g) s :=\n  swap₂\n#align antivary_on.dual_right AntivaryOn.dual_right\n-/\n\n",
  "dual_left":
- "#print AntivaryOn.dual_left /-\ntheorem AntivaryOn.dual_left : AntivaryOn f g s → MonovaryOn (to_dual ∘ f) g s :=\n  id\n#align antivary_on.dual_left AntivaryOn.dual_left\n-/\n\n",
+ "#print AntivaryOn.dual_left /-\ntheorem AntivaryOn.dual_left : AntivaryOn f g s → MonovaryOn (toDual ∘ f) g s :=\n  id\n#align antivary_on.dual_left AntivaryOn.dual_left\n-/\n\n",
  "dual":
- "#print AntivaryOn.dual /-\ntheorem AntivaryOn.dual : AntivaryOn f g s → AntivaryOn (to_dual ∘ f) (to_dual ∘ g) s :=\n  swap₂\n#align antivary_on.dual AntivaryOn.dual\n-/\n\n",
+ "#print AntivaryOn.dual /-\ntheorem AntivaryOn.dual : AntivaryOn f g s → AntivaryOn (toDual ∘ f) (toDual ∘ g) s :=\n  swap₂\n#align antivary_on.dual AntivaryOn.dual\n-/\n\n",
  "comp_right":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\n#print AntivaryOn.comp_right /-\ntheorem AntivaryOn.comp_right (h : AntivaryOn f g s) (k : ι' → ι) : AntivaryOn (f ∘ k) (g ∘ k) («expr ⁻¹' » k s) :=\n  fun i hi j hj => h hi hj\n#align antivary_on.comp_right AntivaryOn.comp_right\n-/\n\n",
  "comp_monotone_on_left":
- "#print AntivaryOn.comp_monotone_on_left /-\ntheorem AntivaryOn.comp_monotone_on_left (h : AntivaryOn f g s) (hf : monotone f') : AntivaryOn (f' ∘ f) g s :=\n  fun i hi j hj hij => hf <| h hi hj hij\n#align antivary_on.comp_monotone_on_left AntivaryOn.comp_monotone_on_left\n-/\n\n",
+ "#print AntivaryOn.comp_monotone_on_left /-\ntheorem AntivaryOn.comp_monotone_on_left (h : AntivaryOn f g s) (hf : Monotone f') : AntivaryOn (f' ∘ f) g s :=\n  fun i hi j hj hij => hf <| h hi hj hij\n#align antivary_on.comp_monotone_on_left AntivaryOn.comp_monotone_on_left\n-/\n\n",
  "comp_monotone_left":
- "#print Antivary.comp_monotone_left /-\ntheorem Antivary.comp_monotone_left (h : Antivary f g) (hf : monotone f') : Antivary (f' ∘ f) g := fun i j hij =>\n  hf <| h hij\n#align antivary.comp_monotone_left Antivary.comp_monotone_left\n-/\n\n",
+ "#print Antivary.comp_monotone_left /-\ntheorem Antivary.comp_monotone_left (h : Antivary f g) (hf : Monotone f') : Antivary (f' ∘ f) g := fun i j hij =>\n  hf <| h hij\n#align antivary.comp_monotone_left Antivary.comp_monotone_left\n-/\n\n",
  "comp_monotoneOn_right":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\n#print AntivaryOn.comp_monotoneOn_right /-\ntheorem AntivaryOn.comp_monotoneOn_right (h : AntivaryOn f g s) (hg : monotone_on g' («expr '' » g s)) :\n    AntivaryOn f (g' ∘ g) s := fun i hi j hj hij =>\n  h hi hj <| hg.reflect_lt (mem_image_of_mem _ hi) (mem_image_of_mem _ hj) hij\n#align antivary_on.comp_monotone_on_right AntivaryOn.comp_monotoneOn_right\n-/\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\n#print AntivaryOn.comp_monotoneOn_right /-\ntheorem AntivaryOn.comp_monotoneOn_right (h : AntivaryOn f g s) (hg : MonotoneOn g' («expr '' » g s)) :\n    AntivaryOn f (g' ∘ g) s := fun i hi j hj hij =>\n  h hi hj <| hg.reflect_lt (mem_image_of_mem _ hi) (mem_image_of_mem _ hj) hij\n#align antivary_on.comp_monotone_on_right AntivaryOn.comp_monotoneOn_right\n-/\n\n",
  "comp_antitone_on_left":
- "#print AntivaryOn.comp_antitone_on_left /-\ntheorem AntivaryOn.comp_antitone_on_left (h : AntivaryOn f g s) (hf : antitone f') : MonovaryOn (f' ∘ f) g s :=\n  fun i hi j hj hij => hf <| h hi hj hij\n#align antivary_on.comp_antitone_on_left AntivaryOn.comp_antitone_on_left\n-/\n\n",
+ "#print AntivaryOn.comp_antitone_on_left /-\ntheorem AntivaryOn.comp_antitone_on_left (h : AntivaryOn f g s) (hf : Antitone f') : MonovaryOn (f' ∘ f) g s :=\n  fun i hi j hj hij => hf <| h hi hj hij\n#align antivary_on.comp_antitone_on_left AntivaryOn.comp_antitone_on_left\n-/\n\n",
  "comp_antitone_left":
- "#print Antivary.comp_antitone_left /-\ntheorem Antivary.comp_antitone_left (h : Antivary f g) (hf : antitone f') : Monovary (f' ∘ f) g := fun i j hij =>\n  hf <| h hij\n#align antivary.comp_antitone_left Antivary.comp_antitone_left\n-/\n\n",
+ "#print Antivary.comp_antitone_left /-\ntheorem Antivary.comp_antitone_left (h : Antivary f g) (hf : Antitone f') : Monovary (f' ∘ f) g := fun i j hij =>\n  hf <| h hij\n#align antivary.comp_antitone_left Antivary.comp_antitone_left\n-/\n\n",
  "comp_antitoneOn_right":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\n#print AntivaryOn.comp_antitoneOn_right /-\ntheorem AntivaryOn.comp_antitoneOn_right (h : AntivaryOn f g s) (hg : antitone_on g' («expr '' » g s)) :\n    MonovaryOn f (g' ∘ g) s := fun i hi j hj hij =>\n  h hj hi <| hg.reflect_lt (mem_image_of_mem _ hi) (mem_image_of_mem _ hj) hij\n#align antivary_on.comp_antitone_on_right AntivaryOn.comp_antitoneOn_right\n-/\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\n#print AntivaryOn.comp_antitoneOn_right /-\ntheorem AntivaryOn.comp_antitoneOn_right (h : AntivaryOn f g s) (hg : AntitoneOn g' («expr '' » g s)) :\n    MonovaryOn f (g' ∘ g) s := fun i hi j hj hij =>\n  h hj hi <| hg.reflect_lt (mem_image_of_mem _ hi) (mem_image_of_mem _ hj) hij\n#align antivary_on.comp_antitone_on_right AntivaryOn.comp_antitoneOn_right\n-/\n\n",
  "antivary_toDual_right":
- "#print antivary_toDual_right /-\n@[simp]\ntheorem antivary_toDual_right : Antivary f (to_dual ∘ g) ↔ Monovary f g :=\n  forall_swap\n#align antivary_to_dual_right antivary_toDual_right\n-/\n\n",
+ "#print antivary_toDual_right /-\n@[simp]\ntheorem antivary_toDual_right : Antivary f (toDual ∘ g) ↔ Monovary f g :=\n  forall_swap\n#align antivary_to_dual_right antivary_toDual_right\n-/\n\n",
  "antivary_toDual_left":
- "#print antivary_toDual_left /-\n@[simp]\ntheorem antivary_toDual_left : Antivary (to_dual ∘ f) g ↔ Monovary f g :=\n  iff.rfl\n#align antivary_to_dual_left antivary_toDual_left\n-/\n\n",
- "antivary_on":
- "#print Subsingleton.antivary_on /-\nprotected theorem Subsingleton.antivary_on [subsingleton ι] (f : ι → α) (g : ι → β) (s : set ι) : AntivaryOn f g s :=\n  fun i _ j _ h => (ne_of_apply_ne _ h.ne <| subsingleton.elim _ _).elim\n#align subsingleton.antivary_on Subsingleton.antivary_on\n-/\n\n",
+ "#print antivary_toDual_left /-\n@[simp]\ntheorem antivary_toDual_left : Antivary (toDual ∘ f) g ↔ Monovary f g :=\n  iff.rfl\n#align antivary_to_dual_left antivary_toDual_left\n-/\n\n",
  "antivary_id_iff":
- "#print antivary_id_iff /-\n@[simp]\ntheorem antivary_id_iff : Antivary f id ↔ antitone f :=\n  antitone_iff_forall_lt.symm\n#align antivary_id_iff antivary_id_iff\n-/\n\n",
+ "#print antivary_id_iff /-\n@[simp]\ntheorem antivary_id_iff : Antivary f id ↔ Antitone f :=\n  antitone_iff_forall_lt.symm\n#align antivary_id_iff antivary_id_iff\n-/\n\n",
  "antivary_const_right":
  "#print antivary_const_right /-\ntheorem antivary_const_right (f : ι → α) (b : β) : Antivary f (const ι b) := fun i j h => (h.ne rfl).elim\n#align antivary_const_right antivary_const_right\n-/\n\n",
  "antivary_const_left":
@@ -77,18 +73,18 @@
  "antivaryOn_univ":
  "#print antivaryOn_univ /-\n@[simp]\ntheorem antivaryOn_univ : AntivaryOn f g univ ↔ Antivary f g :=\n  ⟨fun h i j => h trivial trivial, fun h i _ j _ hij => h hij⟩\n#align antivary_on_univ antivaryOn_univ\n-/\n\n",
  "antivaryOn_toDual_right":
- "#print antivaryOn_toDual_right /-\n@[simp]\ntheorem antivaryOn_toDual_right : AntivaryOn f (to_dual ∘ g) s ↔ MonovaryOn f g s :=\n  forall₂_swap\n#align antivary_on_to_dual_right antivaryOn_toDual_right\n-/\n\n",
+ "#print antivaryOn_toDual_right /-\n@[simp]\ntheorem antivaryOn_toDual_right : AntivaryOn f (toDual ∘ g) s ↔ MonovaryOn f g s :=\n  forall₂_swap\n#align antivary_on_to_dual_right antivaryOn_toDual_right\n-/\n\n",
  "antivaryOn_toDual_left":
- "#print antivaryOn_toDual_left /-\n@[simp]\ntheorem antivaryOn_toDual_left : AntivaryOn (to_dual ∘ f) g s ↔ MonovaryOn f g s :=\n  iff.rfl\n#align antivary_on_to_dual_left antivaryOn_toDual_left\n-/\n\n",
+ "#print antivaryOn_toDual_left /-\n@[simp]\ntheorem antivaryOn_toDual_left : AntivaryOn (toDual ∘ f) g s ↔ MonovaryOn f g s :=\n  iff.rfl\n#align antivary_on_to_dual_left antivaryOn_toDual_left\n-/\n\n",
  "antivaryOn_id_iff":
- "#print antivaryOn_id_iff /-\n@[simp]\ntheorem antivaryOn_id_iff : AntivaryOn f id s ↔ antitone_on f s :=\n  antitoneOn_iff_forall_lt.symm\n#align antivary_on_id_iff antivaryOn_id_iff\n-/\n\n",
+ "#print antivaryOn_id_iff /-\n@[simp]\ntheorem antivaryOn_id_iff : AntivaryOn f id s ↔ AntitoneOn f s :=\n  antitoneOn_iff_forall_lt.symm\n#align antivary_on_id_iff antivaryOn_id_iff\n-/\n\n",
  "antivaryOn_const_right":
- "#print antivaryOn_const_right /-\ntheorem antivaryOn_const_right (f : ι → α) (b : β) (s : set ι) : AntivaryOn f (const ι b) s := fun i _ j _ h =>\n  (h.ne rfl).elim\n#align antivary_on_const_right antivaryOn_const_right\n-/\n\n",
+ "#print antivaryOn_const_right /-\ntheorem antivaryOn_const_right (f : ι → α) (b : β) (s : Set ι) : AntivaryOn f (const ι b) s := fun i _ j _ h =>\n  (h.ne rfl).elim\n#align antivary_on_const_right antivaryOn_const_right\n-/\n\n",
  "antivaryOn_const_left":
- "#print antivaryOn_const_left /-\ntheorem antivaryOn_const_left (g : ι → β) (a : α) (s : set ι) : AntivaryOn (const ι a) g s := fun i _ j _ _ => le_rfl\n#align antivary_on_const_left antivaryOn_const_left\n-/\n\n",
+ "#print antivaryOn_const_left /-\ntheorem antivaryOn_const_left (g : ι → β) (a : α) (s : Set ι) : AntivaryOn (const ι a) g s := fun i _ j _ _ => le_rfl\n#align antivary_on_const_left antivaryOn_const_left\n-/\n\n",
  "antivaryOn_comm":
  "#print antivaryOn_comm /-\nprotected theorem antivaryOn_comm : AntivaryOn f g s ↔ AntivaryOn g f s :=\n  ⟨AntivaryOn.symm, AntivaryOn.symm⟩\n#align antivary_on_comm antivaryOn_comm\n-/\n\n",
  "antivaryOn":
- "#print AntitoneOn.antivaryOn /-\nprotected theorem AntitoneOn.antivaryOn (hf : antitone_on f s) (hg : monotone_on g s) : AntivaryOn f g s :=\n  (hf.monovary_on hg.dual_right).dual_right\n#align antitone_on.antivary_on AntitoneOn.antivaryOn\n-/\n\n",
+ "#print AntitoneOn.antivaryOn /-\nprotected theorem AntitoneOn.antivaryOn (hf : AntitoneOn f s) (hg : MonotoneOn g s) : AntivaryOn f g s :=\n  (hf.monovary_on hg.dual_right).dual_right\n#align antitone_on.antivary_on AntitoneOn.antivaryOn\n-/\n\n",
  "antivary":
- "#print Antitone.antivary /-\nprotected theorem Antitone.antivary (hf : antitone f) (hg : monotone g) : Antivary f g :=\n  (hf.monovary hg.dual_right).dual_right\n#align antitone.antivary Antitone.antivary\n-/\n\n"}
+ "#print Antitone.antivary /-\nprotected theorem Antitone.antivary (hf : Antitone f) (hg : Monotone g) : Antivary f g :=\n  (hf.monovary hg.dual_right).dual_right\n#align antitone.antivary Antitone.antivary\n-/\n\n"}

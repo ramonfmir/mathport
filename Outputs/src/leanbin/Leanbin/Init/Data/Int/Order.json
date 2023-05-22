@@ -29,7 +29,7 @@
  "sub_lt_sub":
  "#print sub_lt_sub /-\nprotected theorem sub_lt_sub {a b c d : ℤ} (hab : a < b) (hcd : c < d) : a - d < b - c :=\n  int.add_lt_add hab (int.neg_lt_neg hcd)\n#align sub_lt_sub sub_lt_sub\n-/\n\n",
  "sub_lt_self":
- "#print sub_lt_self /-\nprotected theorem sub_lt_self (a : ℤ) {b : ℤ} (h : 0 < b) : a - b < a :=\n  calc\n    a - b = a + -b := rfl\n    _ < a + 0 := int.add_lt_add_left (int.neg_neg_of_pos h) _\n    _ = a := by rw [int.add_zero]\n    \n#align sub_lt_self sub_lt_self\n-/\n\n",
+ "#print sub_lt_self /-\nprotected theorem sub_lt_self (a : ℤ) {b : ℤ} (h : 0 < b) : a - b < a :=\n  calc\n    a - b = a + -b := rfl\n    _ < a + 0 := (int.add_lt_add_left (int.neg_neg_of_pos h) _)\n    _ = a := by rw [int.add_zero]\n    \n#align sub_lt_self sub_lt_self\n-/\n\n",
  "sub_lt_of_sub_lt":
  "protected theorem sub_lt_of_sub_lt {a b c : ℤ} (h : a - b < c) : a - c < b :=\n  int.sub_left_lt_of_lt_add (int.lt_add_of_sub_right_lt h)\n#align sub_lt_of_sub_lt sub_lt_of_sub_lt\n\n",
  "sub_left_lt_of_lt_add":
@@ -43,7 +43,7 @@
  "sub_le_sub":
  "#print sub_le_sub /-\nprotected theorem sub_le_sub {a b c d : ℤ} (hab : a ≤ b) (hcd : c ≤ d) : a - d ≤ b - c :=\n  int.add_le_add hab (int.neg_le_neg hcd)\n#align sub_le_sub sub_le_sub\n-/\n\n",
  "sub_le_self":
- "#print sub_le_self /-\nprotected theorem sub_le_self (a : ℤ) {b : ℤ} (h : 0 ≤ b) : a - b ≤ a :=\n  calc\n    a - b = a + -b := rfl\n    _ ≤ a + 0 := int.add_le_add_left (int.neg_nonpos_of_nonneg h) _\n    _ = a := by rw [int.add_zero]\n    \n#align sub_le_self sub_le_self\n-/\n\n",
+ "#print sub_le_self /-\nprotected theorem sub_le_self (a : ℤ) {b : ℤ} (h : 0 ≤ b) : a - b ≤ a :=\n  calc\n    a - b = a + -b := rfl\n    _ ≤ a + 0 := (int.add_le_add_left (int.neg_nonpos_of_nonneg h) _)\n    _ = a := by rw [int.add_zero]\n    \n#align sub_le_self sub_le_self\n-/\n\n",
  "sub_le_of_sub_le":
  "protected theorem sub_le_of_sub_le {a b c : ℤ} (h : a - b ≤ c) : a - c ≤ b :=\n  int.sub_left_le_of_le_add (int.le_add_of_sub_right_le h)\n#align sub_le_of_sub_le sub_le_of_sub_le\n\n",
  "sub_eq_zero_of_eq":
@@ -53,7 +53,7 @@
  "sub_add_cancel":
  "#print sub_add_cancel /-\nprotected theorem sub_add_cancel (a b : ℤ) : a - b + b = a :=\n  int.neg_add_cancel_right a b\n#align sub_add_cancel sub_add_cancel\n-/\n\n",
  "sign_of_succ":
- "theorem sign_of_succ (n : nat) : sign (nat.succ n) = 1 :=\n  rfl\n#align sign_of_succ sign_of_succ\n\n",
+ "theorem sign_of_succ (n : Nat) : sign (nat.succ n) = 1 :=\n  rfl\n#align sign_of_succ sign_of_succ\n\n",
  "sign_eq_zero_iff_zero":
  "theorem sign_eq_zero_iff_zero (a : ℤ) : sign a = 0 ↔ a = 0 :=\n  ⟨eq_zero_of_sign_eq_zero, fun h => by rw [h, sign_zero]⟩\n#align sign_eq_zero_iff_zero sign_eq_zero_iff_zero\n\n",
  "sign_eq_one_of_pos":
@@ -95,7 +95,7 @@
  "neg_mul_neg":
  "#print neg_mul_neg /-\nprotected theorem neg_mul_neg (a b : ℤ) : -a * -b = a * b := by simp\n#align neg_mul_neg neg_mul_neg\n-/\n\n",
  "neg_mul_eq_neg_mul_symm":
- "theorem neg_mul_eq_neg_mul_symm (a b : ℤ) : -a * b = -(a * b) :=\n  eq.symm (int.neg_mul_eq_neg_mul a b)\n#align neg_mul_eq_neg_mul_symm neg_mul_eq_neg_mul_symm\n\n",
+ "theorem neg_mul_eq_neg_mul_symm (a b : ℤ) : -a * b = -(a * b) :=\n  Eq.symm (int.neg_mul_eq_neg_mul a b)\n#align neg_mul_eq_neg_mul_symm neg_mul_eq_neg_mul_symm\n\n",
  "neg_mul_eq_neg_mul":
  "#print neg_mul_eq_neg_mul /-\nprotected theorem neg_mul_eq_neg_mul (a b : ℤ) : -(a * b) = -a * b :=\n  int.neg_eq_of_add_eq_zero (by rw [← Int.add_mul, int.add_right_neg, int.zero_mul])\n#align neg_mul_eq_neg_mul neg_mul_eq_neg_mul\n-/\n\n",
  "neg_mul_eq_mul_neg":
@@ -163,7 +163,7 @@
  "mul_neg_of_neg_of_pos":
  "#print mul_neg_of_neg_of_pos /-\nprotected theorem mul_neg_of_neg_of_pos {a b : ℤ} (ha : a < 0) (hb : 0 < b) : a * b < 0 :=\n  by\n  have h : a * b < 0 * b := int.mul_lt_mul_of_pos_right ha hb\n  rwa [int.zero_mul] at h\n#align mul_neg_of_neg_of_pos mul_neg_of_neg_of_pos\n-/\n\n",
  "mul_neg_eq_neg_mul_symm":
- "theorem mul_neg_eq_neg_mul_symm (a b : ℤ) : a * -b = -(a * b) :=\n  eq.symm (int.neg_mul_eq_mul_neg a b)\n#align mul_neg_eq_neg_mul_symm mul_neg_eq_neg_mul_symm\n\n",
+ "theorem mul_neg_eq_neg_mul_symm (a b : ℤ) : a * -b = -(a * b) :=\n  Eq.symm (int.neg_mul_eq_mul_neg a b)\n#align mul_neg_eq_neg_mul_symm mul_neg_eq_neg_mul_symm\n\n",
  "mul_lt_mul_of_pos_right":
  "#print mul_lt_mul_of_pos_right /-\nprotected theorem mul_lt_mul_of_pos_right {a b c : ℤ} (h₁ : a < b) (h₂ : 0 < c) : a * c < b * c :=\n  by\n  have : 0 < b - a := int.sub_pos_of_lt h₁\n  have : 0 < (b - a) * c := int.mul_pos this h₂\n  rw [int.sub_mul] at this\n  exact int.lt_of_sub_pos this\n#align mul_lt_mul_of_pos_right mul_lt_mul_of_pos_right\n-/\n\n",
  "mul_lt_mul_of_pos_left":
@@ -211,11 +211,11 @@
  "lt_neg_add_of_add_lt":
  "#print lt_neg_add_of_add_lt /-\nprotected theorem lt_neg_add_of_add_lt {a b c : ℤ} (h : a + b < c) : b < -a + c :=\n  by\n  have h := int.add_lt_add_left h (-a)\n  rwa [int.neg_add_cancel_left] at h\n#align lt_neg_add_of_add_lt lt_neg_add_of_add_lt\n-/\n\n",
  "lt_irrefl":
- "#print lt_irrefl /-\nprotected theorem lt_irrefl (a : ℤ) : ¬a < a := fun this : a < a =>\n  lt.elim this fun n => fun hn : a + nat.succ n = a =>\n    have : a + nat.succ n = a + 0 := by rw [hn, int.add_zero]\n    have : nat.succ n = 0 := Int.ofNat.inj (int.add_left_cancel this)\n    show false from nat.succ_ne_zero _ this\n#align lt_irrefl lt_irrefl\n-/\n\n",
+ "#print lt_irrefl /-\nprotected theorem lt_irrefl (a : ℤ) : ¬a < a := fun this : a < a =>\n  lt.elim this fun n => fun hn : a + nat.succ n = a =>\n    have : a + nat.succ n = a + 0 := by rw [hn, int.add_zero]\n    have : nat.succ n = 0 := Int.ofNat.inj (int.add_left_cancel this)\n    show False from nat.succ_ne_zero _ this\n#align lt_irrefl lt_irrefl\n-/\n\n",
  "lt_iff_le_not_le":
  "#print lt_iff_le_not_le /-\nprotected theorem lt_iff_le_not_le {a b : ℤ} : a < b ↔ a ≤ b ∧ ¬b ≤ a :=\n  by\n  simp [int.lt_iff_le_and_ne]; constructor <;> intro h\n  · cases' h with hab hn\n    constructor\n    · assumption\n    · intro hba\n      simp [int.le_antisymm hab hba] at *\n      contradiction\n  · cases' h with hab hn\n    constructor\n    · assumption\n    · intro h\n      simp_all\n#align lt_iff_le_not_le lt_iff_le_not_le\n-/\n\n",
  "lt_iff_le_and_ne":
- "#print lt_iff_le_and_ne /-\nprotected theorem lt_iff_le_and_ne (a b : ℤ) : a < b ↔ a ≤ b ∧ a ≠ b :=\n  iff.intro (fun h => ⟨le_of_lt h, int.ne_of_lt h⟩) fun ⟨aleb, aneb⟩ =>\n    le.elim aleb fun n => fun hn : a + n = b =>\n      have : n ≠ 0 := fun this : n = 0 => aneb (by rw [← hn, this, Int.ofNat_zero, int.add_zero])\n      have : n = nat.succ (nat.pred n) := eq.symm (nat.succ_pred_eq_of_pos (nat.pos_of_ne_zero this))\n      lt.intro (by rw [this] at hn; exact hn)\n#align lt_iff_le_and_ne lt_iff_le_and_ne\n-/\n\n",
+ "#print lt_iff_le_and_ne /-\nprotected theorem lt_iff_le_and_ne (a b : ℤ) : a < b ↔ a ≤ b ∧ a ≠ b :=\n  iff.intro (fun h => ⟨le_of_lt h, int.ne_of_lt h⟩) fun ⟨aleb, aneb⟩ =>\n    le.elim aleb fun n => fun hn : a + n = b =>\n      have : n ≠ 0 := fun this : n = 0 => aneb (by rw [← hn, this, Int.ofNat_zero, int.add_zero])\n      have : n = nat.succ (nat.pred n) := Eq.symm (nat.succ_pred_eq_of_pos (nat.pos_of_ne_zero this))\n      lt.intro (by rw [this] at hn; exact hn)\n#align lt_iff_le_and_ne lt_iff_le_and_ne\n-/\n\n",
  "lt_iff_add_one_le":
  "/-\nCopyright (c) 2016 Jeremy Avigad. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Jeremy Avigad\n\nThe order relation on the integers.\n-/\ntheorem lt_iff_add_one_le (a b : ℤ) : a < b ↔ a + 1 ≤ b :=\n  iff.refl _\n#align lt_iff_add_one_le lt_iff_add_one_le\n\n",
  "lt_add_succ":
@@ -317,13 +317,13 @@
  "eq_of_sub_eq_zero":
  "#print eq_of_sub_eq_zero /-\nprotected theorem eq_of_sub_eq_zero {a b : ℤ} (h : a - b = 0) : a = b :=\n  by\n  have : 0 + b = b := by rw [int.zero_add]\n  have : a - b + b = b := by rwa [h]\n  rwa [int.sub_eq_add_neg, int.neg_add_cancel_right] at this\n#align eq_of_sub_eq_zero eq_of_sub_eq_zero\n-/\n\n",
  "eq_of_mul_eq_mul_right":
- "protected theorem eq_of_mul_eq_mul_right {a b c : ℤ} (ha : a ≠ 0) (h : b * a = c * a) : b = c :=\n  have : b * a - c * a = 0 := int.sub_eq_zero_of_eq h\n  have : (b - c) * a = 0 := by rw [int.sub_mul, this]\n  have : b - c = 0 := (int.eq_zero_or_eq_zero_of_mul_eq_zero this).resolve_right ha\n  int.eq_of_sub_eq_zero this\n#align eq_of_mul_eq_mul_right eq_of_mul_eq_mul_right\n\n",
+ "protected theorem eq_of_mul_eq_mul_right {a b c : ℤ} (ha : a ≠ 0) (h : b * a = c * a) : b = c :=\n  have : b * a - c * a = 0 := int.sub_eq_zero_of_eq h\n  have : (b - c) * a = 0 := by rw [int.sub_mul, this]\n  have : b - c = 0 := (Int.eq_zero_or_eq_zero_of_mul_eq_zero this).resolve_right ha\n  int.eq_of_sub_eq_zero this\n#align eq_of_mul_eq_mul_right eq_of_mul_eq_mul_right\n\n",
  "eq_of_mul_eq_mul_left":
- "protected theorem eq_of_mul_eq_mul_left {a b c : ℤ} (ha : a ≠ 0) (h : a * b = a * c) : b = c :=\n  have : a * b - a * c = 0 := int.sub_eq_zero_of_eq h\n  have : a * (b - c) = 0 := by rw [int.mul_sub, this]\n  have : b - c = 0 := (int.eq_zero_or_eq_zero_of_mul_eq_zero this).resolve_left ha\n  int.eq_of_sub_eq_zero this\n#align eq_of_mul_eq_mul_left eq_of_mul_eq_mul_left\n\n",
+ "protected theorem eq_of_mul_eq_mul_left {a b c : ℤ} (ha : a ≠ 0) (h : a * b = a * c) : b = c :=\n  have : a * b - a * c = 0 := int.sub_eq_zero_of_eq h\n  have : a * (b - c) = 0 := by rw [int.mul_sub, this]\n  have : b - c = 0 := (Int.eq_zero_or_eq_zero_of_mul_eq_zero this).resolve_left ha\n  int.eq_of_sub_eq_zero this\n#align eq_of_mul_eq_mul_left eq_of_mul_eq_mul_left\n\n",
  "eq_neg_succ_of_lt_zero":
  "theorem eq_neg_succ_of_lt_zero : ∀ {a : ℤ}, a < 0 → ∃ n : ℕ, a = -[n+1]\n  | (n : ℕ), h => absurd h (not_lt_of_ge (ofNat_zero_le _))\n  | -[n+1], h => ⟨n, rfl⟩\n#align eq_neg_succ_of_lt_zero eq_neg_succ_of_lt_zero\n\n",
  "eq_neg_of_eq_neg":
- "#print eq_neg_of_eq_neg /-\nprotected theorem eq_neg_of_eq_neg {a b : ℤ} (h : a = -b) : b = -a := by rw [h, int.neg_neg]\n#align eq_neg_of_eq_neg eq_neg_of_eq_neg\n-/\n\n",
+ "protected theorem eq_neg_of_eq_neg {a b : ℤ} (h : a = -b) : b = -a := by rw [h, int.neg_neg]\n#align eq_neg_of_eq_neg eq_neg_of_eq_neg\n\n",
  "eq_nat_abs_of_zero_le":
  "theorem eq_nat_abs_of_zero_le {a : ℤ} (h : 0 ≤ a) : a = natAbs a :=\n  by\n  let ⟨n, e⟩ := eq_ofNat_of_zero_le h\n  rw [e] <;> rfl\n#align eq_nat_abs_of_zero_le eq_nat_abs_of_zero_le\n\n",
  "eq_coe_of_zero_le":
@@ -337,7 +337,7 @@
  "coe_zero_le":
  "theorem coe_zero_le (n : ℕ) : 0 ≤ (↑n : ℤ) :=\n  ofNat_le_ofNat_of_le n.zero_le\n#align coe_zero_le coe_zero_le\n\n",
  "coe_succ_pos":
- "theorem coe_succ_pos (n : nat) : 0 < (nat.succ n : ℤ) :=\n  ofNat_lt_ofNat_of_lt (nat.succ_pos _)\n#align coe_succ_pos coe_succ_pos\n\n",
+ "theorem coe_succ_pos (n : Nat) : 0 < (nat.succ n : ℤ) :=\n  ofNat_lt_ofNat_of_lt (nat.succ_pos _)\n#align coe_succ_pos coe_succ_pos\n\n",
  "coe_nat_lt_coe_nat_of_lt":
  "theorem coe_nat_lt_coe_nat_of_lt {m n : ℕ} (h : m < n) : (↑m : ℤ) < ↑n :=\n  (ofNat_lt _ _).mpr h\n#align coe_nat_lt_coe_nat_of_lt coe_nat_lt_coe_nat_of_lt\n\n",
  "coe_nat_lt_coe_nat_iff":

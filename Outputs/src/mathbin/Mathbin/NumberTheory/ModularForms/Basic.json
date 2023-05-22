@@ -9,11 +9,11 @@
  "neg_apply":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `upper_half_plane -/\n@[simp]\ntheorem neg_apply (f : cusp_form Γ k) (z : upper_half_plane) : (-f) z = -f z :=\n  rfl\n#align neg_apply neg_apply\n\n",
  "mul_coe":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«exprSL( , )» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `upper_half_plane -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℂ -/\n@[simp]\ntheorem mul_coe {k_1 k_2 : ℤ} {Γ : subgroup («exprSL( , )» 2 ℤ)} (f : modular_form Γ k_1) (g : modular_form Γ k_2) :\n    (f.mul g : upper_half_plane → exprℂ) = f * g :=\n  rfl\n#align mul_coe mul_coe\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«exprSL( , )» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `upper_half_plane -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℂ -/\n@[simp]\ntheorem mul_coe {k_1 k_2 : ℤ} {Γ : Subgroup («exprSL( , )» 2 ℤ)} (f : modular_form Γ k_1) (g : modular_form Γ k_2) :\n    (f.mul g : upper_half_plane → exprℂ) = f * g :=\n  rfl\n#align mul_coe mul_coe\n\n",
  "modular_form_to_fun_eq_coe":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `upper_half_plane -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℂ -/\n/-\nCopyright (c) 2022 Chris Birkbeck. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Chris Birkbeck\n-/\n@[simp]\ntheorem modular_form_to_fun_eq_coe {f : modular_form Γ k} : f.to_fun = (f : upper_half_plane → exprℂ) :=\n  rfl\n#align modular_form_to_fun_eq_coe modular_form_to_fun_eq_coe\n\n",
  "ext":
- "@[ext]\ntheorem cusp_form.ext {f g : cusp_form Γ k} (h : ∀ x, f x = g x) : f = g :=\n  fun_like.ext f g h\n#align cusp_form.ext cusp_form.ext\n\n",
+ "@[ext]\ntheorem cusp_form.ext {f g : cusp_form Γ k} (h : ∀ x, f x = g x) : f = g :=\n  FunLike.ext f g h\n#align cusp_form.ext cusp_form.ext\n\n",
  "cusp_form_to_fun_eq_coe":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `upper_half_plane -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℂ -/\n@[simp]\ntheorem cusp_form_to_fun_eq_coe {f : cusp_form Γ k} : f.to_fun = (f : upper_half_plane → exprℂ) :=\n  rfl\n#align cusp_form_to_fun_eq_coe cusp_form_to_fun_eq_coe\n\n",
  "coe_zero":

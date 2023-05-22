@@ -13,7 +13,7 @@
  "nat_mul_inj":
  "#print nat_mul_inj /-\ntheorem nat_mul_inj {n : ℕ} {a b : R} (h : (n : R) * a = (n : R) * b) : n = 0 ∨ a = b :=\n  by\n  rw [← sub_eq_zero, ← mul_sub, mul_eq_zero, sub_eq_zero] at h\n  exact_mod_cast h\n#align nat_mul_inj nat_mul_inj\n-/\n\n",
  "injective_nat":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →+* » -/\n#print RingHom.injective_nat /-\ntheorem RingHom.injective_nat (f : «expr →+* » ℕ R) [CharZero R] : function.injective f :=\n  subsingleton.elim (nat.cast_ring_hom _) f ▸ Nat.cast_injective\n#align ring_hom.injective_nat RingHom.injective_nat\n-/\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →+* » -/\n#print RingHom.injective_nat /-\ntheorem RingHom.injective_nat (f : «expr →+* » ℕ R) [CharZero R] : function.injective f :=\n  subsingleton.elim (Nat.castRingHom _) f ▸ Nat.cast_injective\n#align ring_hom.injective_nat RingHom.injective_nat\n-/\n\n",
  "half_sub":
  "#print half_sub /-\ntheorem half_sub (a : R) : a / 2 - a = -(a / 2) := by rw [← neg_sub, sub_half]\n#align half_sub half_sub\n-/\n\n",
  "half_add_self":
@@ -21,13 +21,13 @@
  "eq_neg_self_iff":
  "#print eq_neg_self_iff /-\ntheorem eq_neg_self_iff {a : R} : a = -a ↔ a = 0 :=\n  eq_neg_iff_add_eq_zero.trans add_self_eq_zero\n#align eq_neg_self_iff eq_neg_self_iff\n-/\n\n",
  "charZero_iff":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →+* » -/\n#print RingHom.charZero_iff /-\ntheorem RingHom.charZero_iff {ϕ : «expr →+* » R S} (hϕ : function.injective ϕ) : CharZero R ↔ CharZero S :=\n  ⟨fun hR => ⟨by intro a b h <;> rwa [← @Nat.cast_inj R, ← hϕ.eq_iff, map_nat_cast ϕ, map_nat_cast ϕ]⟩, fun hS =>\n    ϕ.char_zero⟩\n#align ring_hom.char_zero_iff RingHom.charZero_iff\n-/\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →+* » -/\n#print RingHom.charZero_iff /-\ntheorem RingHom.charZero_iff {ϕ : «expr →+* » R S} (hϕ : function.injective ϕ) : CharZero R ↔ CharZero S :=\n  ⟨fun hR => ⟨by intro a b h <;> rwa [← @Nat.cast_inj R, ← hϕ.eq_iff, map_natCast ϕ, map_natCast ϕ]⟩, fun hS =>\n    ϕ.char_zero⟩\n#align ring_hom.char_zero_iff RingHom.charZero_iff\n-/\n\n",
  "charZero":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →+* » -/\n#print RingHom.charZero /-\ntheorem RingHom.charZero (ϕ : «expr →+* » R S) [hS : CharZero S] : CharZero R :=\n  ⟨fun a b h => char_zero.cast_injective (by rw [← map_nat_cast ϕ, ← map_nat_cast ϕ, h])⟩\n#align ring_hom.char_zero RingHom.charZero\n-/\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →+* » -/\n#print RingHom.charZero /-\ntheorem RingHom.charZero (ϕ : «expr →+* » R S) [hS : CharZero S] : CharZero R :=\n  ⟨fun a b h => char_zero.cast_injective (by rw [← map_natCast ϕ, ← map_natCast ϕ, h])⟩\n#align ring_hom.char_zero RingHom.charZero\n-/\n\n",
  "cast_pow_eq_one":
  "/-\nCopyright (c) 2014 Mario Carneiro. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Mario Carneiro\n-/\n@[simp]\ntheorem cast_pow_eq_one {R : Type _} [Semiring R] [CharZero R] (q : ℕ) (n : ℕ) (hn : n ≠ 0) : (q : R) ^ n = 1 ↔ q = 1 :=\n  by\n  rw [← cast_pow, cast_eq_one]\n  exact pow_eq_one_iff hn\n#align cast_pow_eq_one cast_pow_eq_one\n\n",
  "cast_div_char_zero":
- "@[simp, norm_cast]\ntheorem cast_div_char_zero {k : Type _} [Field k] [CharZero k] {m n : ℕ} (n_dvd : n ∣ m) : ((m / n : ℕ) : k) = m / n :=\n  by\n  rcases eq_or_ne n 0 with (rfl | hn)\n  · simp\n  · exact cast_div n_dvd (cast_ne_zero.2 hn)\n#align cast_div_char_zero cast_div_char_zero\n\n",
+ "@[simp, norm_cast]\ntheorem cast_div_char_zero {k : Type _} [DivisionSemiring k] [CharZero k] {m n : ℕ} (n_dvd : n ∣ m) :\n    ((m / n : ℕ) : k) = m / n := by\n  rcases eq_or_ne n 0 with (rfl | hn)\n  · simp\n  · exact cast_div n_dvd (cast_ne_zero.2 hn)\n#align cast_div_char_zero cast_div_char_zero\n\n",
  "bit1_injective":
  "#print bit1_injective /-\ntheorem bit1_injective : function.injective (bit1 : R → R) := fun a b h =>\n  by\n  simp only [bit1, add_left_inj] at h\n  exact bit0_injective h\n#align bit1_injective bit1_injective\n-/\n\n",
  "bit1_eq_one":

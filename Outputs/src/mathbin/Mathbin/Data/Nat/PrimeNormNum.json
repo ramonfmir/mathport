@@ -13,7 +13,7 @@
  "min_fac_helper_1":
  "theorem min_fac_helper_1 {n k k' : ℕ} (e : k + 1 = k') (np : Nat.minFac (bit1 n) ≠ bit1 k) (h : min_fac_helper n k) :\n    min_fac_helper n k' := by\n  rw [← e]\n  refine'\n    ⟨nat.succ_pos _, (lt_of_le_of_ne (lt_of_le_of_ne _ _ : k + 1 + k < _) min_fac_ne_bit0.symm : bit0 (k + 1) < _)⟩\n  · rw [add_right_comm]\n    exact h.2\n  · rw [add_right_comm]\n    exact np.symm\n#align min_fac_helper_1 min_fac_helper_1\n\n",
  "min_fac_helper_0":
- "theorem min_fac_helper_0 (n : ℕ) (h : 0 < n) : min_fac_helper n 1 :=\n  by\n  refine' ⟨zero_lt_one, lt_of_le_of_ne _ min_fac_ne_bit0.symm⟩\n  rw [Nat.succ_le_iff]\n  refine' lt_of_le_of_ne (nat.min_fac_pos _) fun e => Nat.not_prime_one _\n  rw [e]\n  exact Nat.minFac_prime (Nat.bit1_lt h).ne'\n#align min_fac_helper_0 min_fac_helper_0\n\n",
+ "theorem min_fac_helper_0 (n : ℕ) (h : 0 < n) : min_fac_helper n 1 :=\n  by\n  refine' ⟨zero_lt_one, lt_of_le_of_ne _ min_fac_ne_bit0.symm⟩\n  rw [Nat.succ_le_iff]\n  refine' lt_of_le_of_ne (Nat.minFac_pos _) fun e => Nat.not_prime_one _\n  rw [e]\n  exact Nat.minFac_prime (Nat.bit1_lt h).ne'\n#align min_fac_helper_0 min_fac_helper_0\n\n",
  "min_fac_bit0":
  "theorem min_fac_bit0 (n : ℕ) : Nat.minFac (bit0 n) = 2 := by\n  simp [Nat.minFac_eq, show 2 ∣ bit0 n by simp [bit0_eq_two_mul n]]\n#align min_fac_bit0 min_fac_bit0\n\n",
  "is_prime_helper":
@@ -23,12 +23,12 @@
  "factors_helper_same_sn":
  "theorem factors_helper_same_sn (a : ℕ) : factors_helper a a [a] :=\n  factors_helper_same _ _ _ _ (mul_one _) (factors_helper_nil _)\n#align factors_helper_same_sn factors_helper_same_sn\n\n",
  "factors_helper_same":
- "theorem factors_helper_same (n m a : ℕ) (l : list ℕ) (h : a * m = n) (H : factors_helper m a l) :\n    factors_helper n a (a :: l) := fun pa => factors_helper_cons' _ _ _ _ _ h le_rfl (Nat.prime_def_minFac.1 pa).2 H pa\n#align factors_helper_same factors_helper_same\n\n",
+ "theorem factors_helper_same (n m a : ℕ) (l : List ℕ) (h : a * m = n) (H : factors_helper m a l) :\n    factors_helper n a (a :: l) := fun pa => factors_helper_cons' _ _ _ _ _ h le_rfl (Nat.prime_def_minFac.1 pa).2 H pa\n#align factors_helper_same factors_helper_same\n\n",
  "factors_helper_nil":
  "theorem factors_helper_nil (a : ℕ) : factors_helper 1 a [] := fun pa => ⟨List.Chain.nil, by rintro _ ⟨⟩, List.prod_nil⟩\n#align factors_helper_nil factors_helper_nil\n\n",
  "factors_helper_end":
- "theorem factors_helper_end (n : ℕ) (l : list ℕ) (H : factors_helper n 2 l) : nat.factors n = l :=\n  let ⟨h₁, h₂, h₃⟩ := H Nat.prime_two\n  have := List.chain'_iff_pairwise.1 (@List.Chain'.tail _ _ (_ :: _) h₁)\n  (list.eq_of_perm_of_sorted (nat.factors_unique h₃ h₂) this (nat.factors_sorted _)).symm\n#align factors_helper_end factors_helper_end\n\n",
+ "theorem factors_helper_end (n : ℕ) (l : List ℕ) (H : factors_helper n 2 l) : Nat.factors n = l :=\n  let ⟨h₁, h₂, h₃⟩ := H Nat.prime_two\n  have := List.chain'_iff_pairwise.1 (@List.Chain'.tail _ _ (_ :: _) h₁)\n  (List.eq_of_perm_of_sorted (Nat.factors_unique h₃ h₂) this (Nat.factors_sorted _)).symm\n#align factors_helper_end factors_helper_end\n\n",
  "factors_helper_cons'":
- "theorem factors_helper_cons' (n m a b : ℕ) (l : list ℕ) (h₁ : b * m = n) (h₂ : a ≤ b) (h₃ : Nat.minFac b = b)\n    (H : factors_helper m b l) : factors_helper n a (b :: l) := fun pa =>\n  have pb : b.prime := Nat.prime_def_minFac.2 ⟨le_trans pa.two_le h₂, h₃⟩\n  let ⟨f₁, f₂, f₃⟩ := H pb\n  ⟨List.Chain.cons h₂ f₁, fun c h => h.elim (fun e => e.symm ▸ pb) (f₂ _), by rw [List.prod_cons, f₃, h₁]⟩\n#align factors_helper_cons' factors_helper_cons'\n\n",
+ "theorem factors_helper_cons' (n m a b : ℕ) (l : List ℕ) (h₁ : b * m = n) (h₂ : a ≤ b) (h₃ : Nat.minFac b = b)\n    (H : factors_helper m b l) : factors_helper n a (b :: l) := fun pa =>\n  have pb : b.prime := Nat.prime_def_minFac.2 ⟨le_trans pa.two_le h₂, h₃⟩\n  let ⟨f₁, f₂, f₃⟩ := H pb\n  ⟨List.Chain.cons h₂ f₁, fun c h => h.elim (fun e => e.symm ▸ pb) (f₂ _), by rw [List.prod_cons, f₃, h₁]⟩\n#align factors_helper_cons' factors_helper_cons'\n\n",
  "factors_helper_cons":
- "theorem factors_helper_cons (n m a b : ℕ) (l : list ℕ) (h₁ : b * m = n) (h₂ : a < b) (h₃ : Nat.minFac b = b)\n    (H : factors_helper m b l) : factors_helper n a (b :: l) :=\n  factors_helper_cons' _ _ _ _ _ h₁ h₂.le h₃ H\n#align factors_helper_cons factors_helper_cons\n\n"}
+ "theorem factors_helper_cons (n m a b : ℕ) (l : List ℕ) (h₁ : b * m = n) (h₂ : a < b) (h₃ : Nat.minFac b = b)\n    (H : factors_helper m b l) : factors_helper n a (b :: l) :=\n  factors_helper_cons' _ _ _ _ _ h₁ h₂.le h₃ H\n#align factors_helper_cons factors_helper_cons\n\n"}

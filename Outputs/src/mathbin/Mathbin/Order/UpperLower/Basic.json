@@ -1,0 +1,396 @@
+{"upperClosure_univ":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n#print upperClosure_univ /-\n@[simp]\ntheorem upperClosure_univ : upperClosure (univ : Set α) = «expr⊥» :=\n  le_bot_iff.1 subset_upperClosure\n#align upper_closure_univ upperClosure_univ\n-/\n\n",
+ "upperClosure_unionₛ":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⨅ , » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⨅ , » -/\n#print upperClosure_unionₛ /-\n@[simp]\ntheorem upperClosure_unionₛ (S : Set (Set α)) :\n    upperClosure (⋃₀ S) =\n      «expr⨅ , » \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⨅ , »\"\n        (upperClosure s) :=\n  by simp_rw [sUnion_eq_bUnion, upperClosure_unionᵢ]\n#align upper_closure_sUnion upperClosure_unionₛ\n-/\n\n",
+ "upperClosure_unionᵢ":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⋃ , » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⋃ , » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⨅ , » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⨅ , » -/\n#print upperClosure_unionᵢ /-\n@[simp]\ntheorem upperClosure_unionᵢ (f : ι → Set α) :\n    upperClosure\n        («expr⋃ , » \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⋃ , »\" (f i)) =\n      «expr⨅ , » \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⨅ , »\"\n        (upperClosure (f i)) :=\n  by\n  ext\n  simp [← exists_and_right, @exists_comm α]\n#align upper_closure_Union upperClosure_unionᵢ\n-/\n\n",
+ "upperClosure_union":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊓ » -/\n#print upperClosure_union /-\n@[simp]\ntheorem upperClosure_union (s t : Set α) : upperClosure (s ∪ t) = «expr ⊓ » (upperClosure s) (upperClosure t) :=\n  by\n  ext\n  simp [or_and_right, exists_or]\n#align upper_closure_union upperClosure_union\n-/\n\n",
+ "upperClosure_singleton":
+ "#print upperClosure_singleton /-\n@[simp]\ntheorem upperClosure_singleton (a : α) : upperClosure ({a} : Set α) = UpperSet.Ici a :=\n  by\n  ext\n  simp\n#align upper_closure_singleton upperClosure_singleton\n-/\n\n",
+ "upperClosure_prod":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:177:8: unsupported: ambiguous notation -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `lower_set.prod -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:177:8: unsupported: ambiguous notation -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `lower_set.prod -/\n#print upperClosure_prod /-\n@[simp]\ntheorem upperClosure_prod (s : Set α) (t : Set β) :\n    upperClosure (lower_set.prod s t) = lower_set.prod (upperClosure s) (upperClosure t) :=\n  by\n  ext\n  simp [Prod.le_def, and_and_and_comm _ (_ ∈ t)]\n#align upper_closure_prod upperClosure_prod\n-/\n\n",
+ "upperClosure_min":
+ "#print upperClosure_min /-\ntheorem upperClosure_min (h : s ⊆ t) (ht : IsUpperSet t) : ↑(upperClosure s) ⊆ t := fun a ⟨b, hb, hba⟩ => ht hba <| h hb\n#align upper_closure_min upperClosure_min\n-/\n\n",
+ "upperClosure_inter_lowerClosure":
+ "#print Set.OrdConnected.upperClosure_inter_lowerClosure /-\ntheorem Set.OrdConnected.upperClosure_inter_lowerClosure (h : s.ord_connected) :\n    ↑(upperClosure s) ∩ ↑(lowerClosure s) = s :=\n  (subset_inter subset_upperClosure subset_lowerClosure).antisymm' fun a ⟨⟨b, hb, hba⟩, c, hc, hac⟩ =>\n    h.out hb hc ⟨hba, hac⟩\n#align set.ord_connected.upper_closure_inter_lower_closure Set.OrdConnected.upperClosure_inter_lowerClosure\n-/\n\n",
+ "upperClosure_image":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃o » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\n#print upperClosure_image /-\n@[simp]\ntheorem upperClosure_image (f : «expr ≃o » α β) : upperClosure («expr '' » f s) = UpperSet.map f (upperClosure s) :=\n  by\n  rw [← f.symm_symm, ← UpperSet.symm_map, f.symm_symm]\n  ext\n  simp [-UpperSet.symm_map, UpperSet.map, OrderIso.symm, ← f.le_symm_apply]\n#align upper_closure_image upperClosure_image\n-/\n\n",
+ "upperClosure_eq_top_iff":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n#print upperClosure_eq_top_iff /-\n@[simp]\ntheorem upperClosure_eq_top_iff : upperClosure s = «expr⊤» ↔ s = ∅ :=\n  ⟨fun h => subset_empty_iff.1 <| subset_upperClosure.trans (congr_arg coe h).subset,\n    by\n    rintro rfl\n    exact upperClosure_empty⟩\n#align upper_closure_eq_top_iff upperClosure_eq_top_iff\n-/\n\n",
+ "upperClosure_empty":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n#print upperClosure_empty /-\n@[simp]\ntheorem upperClosure_empty : upperClosure (∅ : Set α) = «expr⊤» :=\n  by\n  ext\n  simp\n#align upper_closure_empty upperClosure_empty\n-/\n\n",
+ "upperClosure_anti":
+ "#print upperClosure_anti /-\ntheorem upperClosure_anti : Antitone (upperClosure : Set α → UpperSet α) :=\n  gc_upperClosure_coe.monotone_l\n#align upper_closure_anti upperClosure_anti\n-/\n\n",
+ "upperClosure":
+ "#print UpperSet.upperClosure /-\n@[simp]\nprotected theorem UpperSet.upperClosure (s : UpperSet α) : upperClosure (s : Set α) = s :=\n  SetLike.coe_injective s.2.upper_closure\n#align upper_set.upper_closure UpperSet.upperClosure\n-/\n\n",
+ "upperBounds_lowerClosure":
+ "#print upperBounds_lowerClosure /-\n@[simp]\ntheorem upperBounds_lowerClosure : upperBounds (lowerClosure s : Set α) = upperBounds s :=\n  (upperBounds_mono_set subset_lowerClosure).antisymm fun a ha b ⟨c, hc, hcb⟩ => hcb.trans <| ha hc\n#align upper_bounds_lower_closure upperBounds_lowerClosure\n-/\n\n",
+ "upper":
+ "protected theorem upper (s : UpperSet α) : IsUpperSet (s : Set α) :=\n  s.upper'\n#align upper upper\n\n",
+ "union":
+ "#print IsLowerSet.union /-\ntheorem IsLowerSet.union (hs : IsLowerSet s) (ht : IsLowerSet t) : IsLowerSet (s ∪ t) := fun a b h =>\n  Or.imp (hs h) (ht h)\n#align is_lower_set.union IsLowerSet.union\n-/\n\n",
+ "top_prod_top":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:177:8: unsupported: ambiguous notation -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `lower_set.prod -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n@[simp]\ntheorem top_prod_top : lower_set.prod («expr⊤» : LowerSet α) («expr⊤» : LowerSet β) = «expr⊤» :=\n  ext univ_prod_univ\n#align top_prod_top top_prod_top\n\n",
+ "top_prod":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:177:8: unsupported: ambiguous notation -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `upper_set.prod -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n@[simp]\ntheorem top_prod : upper_set.prod («expr⊤» : UpperSet α) t = «expr⊤» :=\n  ext empty_prod\n#align top_prod top_prod\n\n",
+ "top_mem":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n#print IsUpperSet.top_mem /-\ntheorem IsUpperSet.top_mem (hs : IsUpperSet s) : «expr⊤» ∈ s ↔ s.nonempty :=\n  ⟨fun h => ⟨_, h⟩, fun ⟨a, ha⟩ => hs le_top ha⟩\n#align is_upper_set.top_mem IsUpperSet.top_mem\n-/\n\n",
+ "symm_map":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃o » -/\n@[simp]\ntheorem symm_map (f : «expr ≃o » α β) : (map f).symm = map f.symm :=\n  FunLike.ext _ _ fun s => SetLike.coe_injective <| Set.preimage_equiv_eq_image_symm _ _\n#align symm_map symm_map\n\n",
+ "supᵢ_Iic":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⨆ , » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⨆ , » -/\n#print LowerSet.supᵢ_Iic /-\n@[simp]\ntheorem LowerSet.supᵢ_Iic (s : Set α) :\n    «expr⨆ , » \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⨆ , »\" (LowerSet.Iic a) =\n      lowerClosure s :=\n  by\n  ext\n  simp\n#align lower_set.supr_Iic LowerSet.supᵢ_Iic\n-/\n\n",
+ "sup_prod":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:177:8: unsupported: ambiguous notation -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `lower_set.prod -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊔ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊔ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:177:8: unsupported: ambiguous notation -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `lower_set.prod -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:177:8: unsupported: ambiguous notation -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `lower_set.prod -/\n@[simp]\ntheorem sup_prod : lower_set.prod («expr ⊔ » s₁ s₂) t = «expr ⊔ » (lower_set.prod s₁ t) (lower_set.prod s₂ t) :=\n  ext union_prod\n#align sup_prod sup_prod\n\n",
+ "subset_upperClosure":
+ "#print subset_upperClosure /-\ntheorem subset_upperClosure : s ⊆ upperClosure s := fun x hx => ⟨x, hx, le_rfl⟩\n#align subset_upper_closure subset_upperClosure\n-/\n\n",
+ "subset_lowerClosure":
+ "#print subset_lowerClosure /-\ntheorem subset_lowerClosure : s ⊆ lowerClosure s := fun x hx => ⟨x, hx, le_rfl⟩\n#align subset_lower_closure subset_lowerClosure\n-/\n\n",
+ "prod_top":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:177:8: unsupported: ambiguous notation -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `upper_set.prod -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n@[simp]\ntheorem prod_top : upper_set.prod s («expr⊤» : UpperSet β) = «expr⊤» :=\n  ext prod_empty\n#align prod_top prod_top\n\n",
+ "prod_sup_prod":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊔ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:177:8: unsupported: ambiguous notation -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `upper_set.prod -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:177:8: unsupported: ambiguous notation -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `upper_set.prod -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:177:8: unsupported: ambiguous notation -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `upper_set.prod -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊔ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊔ » -/\ntheorem prod_sup_prod :\n    «expr ⊔ » (upper_set.prod s₁ t₁) (upper_set.prod s₂ t₂) = upper_set.prod («expr ⊔ » s₁ s₂) («expr ⊔ » t₁ t₂) :=\n  ext prod_inter_prod\n#align prod_sup_prod prod_sup_prod\n\n",
+ "prod_sup":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:177:8: unsupported: ambiguous notation -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `lower_set.prod -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊔ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊔ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:177:8: unsupported: ambiguous notation -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `lower_set.prod -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:177:8: unsupported: ambiguous notation -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `lower_set.prod -/\n@[simp]\ntheorem prod_sup : lower_set.prod s («expr ⊔ » t₁ t₂) = «expr ⊔ » (lower_set.prod s t₁) (lower_set.prod s t₂) :=\n  ext prod_union\n#align prod_sup prod_sup\n\n",
+ "prod_self_lt_prod_self":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:177:8: unsupported: ambiguous notation -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `lower_set.prod -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:177:8: unsupported: ambiguous notation -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `lower_set.prod -/\n@[simp]\ntheorem prod_self_lt_prod_self : lower_set.prod s₁ s₁ < lower_set.prod s₂ s₂ ↔ s₁ < s₂ :=\n  prod_self_ssubset_prod_self\n#align prod_self_lt_prod_self prod_self_lt_prod_self\n\n",
+ "prod_self_le_prod_self":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:177:8: unsupported: ambiguous notation -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `lower_set.prod -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:177:8: unsupported: ambiguous notation -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `lower_set.prod -/\n@[simp]\ntheorem prod_self_le_prod_self : lower_set.prod s₁ s₁ ≤ lower_set.prod s₂ s₂ ↔ s₁ ≤ s₂ :=\n  prod_self_subset_prod_self\n#align prod_self_le_prod_self prod_self_le_prod_self\n\n",
+ "prod_mono_right":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:177:8: unsupported: ambiguous notation -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `lower_set.prod -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:177:8: unsupported: ambiguous notation -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `lower_set.prod -/\ntheorem prod_mono_right : t₁ ≤ t₂ → lower_set.prod s t₁ ≤ lower_set.prod s t₂ :=\n  prod_mono_right\n#align prod_mono_right prod_mono_right\n\n",
+ "prod_mono_left":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:177:8: unsupported: ambiguous notation -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `lower_set.prod -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:177:8: unsupported: ambiguous notation -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `lower_set.prod -/\ntheorem prod_mono_left : s₁ ≤ s₂ → lower_set.prod s₁ t ≤ lower_set.prod s₂ t :=\n  prod_mono_left\n#align prod_mono_left prod_mono_left\n\n",
+ "prod_mono":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:177:8: unsupported: ambiguous notation -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `lower_set.prod -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:177:8: unsupported: ambiguous notation -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `lower_set.prod -/\ntheorem prod_mono : s₁ ≤ s₂ → t₁ ≤ t₂ → lower_set.prod s₁ t₁ ≤ lower_set.prod s₂ t₂ :=\n  prod_mono\n#align prod_mono prod_mono\n\n",
+ "prod_le_prod_iff":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:177:8: unsupported: ambiguous notation -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `lower_set.prod -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:177:8: unsupported: ambiguous notation -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `lower_set.prod -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\ntheorem prod_le_prod_iff :\n    lower_set.prod s₁ t₁ ≤ lower_set.prod s₂ t₂ ↔ s₁ ≤ s₂ ∧ t₁ ≤ t₂ ∨ s₁ = «expr⊥» ∨ t₁ = «expr⊥» :=\n  prod_subset_prod_iff.trans <| by simp\n#align prod_le_prod_iff prod_le_prod_iff\n\n",
+ "prod_inf_prod":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊓ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:177:8: unsupported: ambiguous notation -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `lower_set.prod -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:177:8: unsupported: ambiguous notation -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `lower_set.prod -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:177:8: unsupported: ambiguous notation -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `lower_set.prod -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊓ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊓ » -/\ntheorem prod_inf_prod :\n    «expr ⊓ » (lower_set.prod s₁ t₁) (lower_set.prod s₂ t₂) = lower_set.prod («expr ⊓ » s₁ s₂) («expr ⊓ » t₁ t₂) :=\n  ext prod_inter_prod\n#align prod_inf_prod prod_inf_prod\n\n",
+ "prod_inf":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:177:8: unsupported: ambiguous notation -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `lower_set.prod -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊓ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊓ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:177:8: unsupported: ambiguous notation -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `lower_set.prod -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:177:8: unsupported: ambiguous notation -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `lower_set.prod -/\n@[simp]\ntheorem prod_inf : lower_set.prod s («expr ⊓ » t₁ t₂) = «expr ⊓ » (lower_set.prod s t₁) (lower_set.prod s t₂) :=\n  ext prod_inter\n#align prod_inf prod_inf\n\n",
+ "prod_eq_top":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:177:8: unsupported: ambiguous notation -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `upper_set.prod -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n@[simp]\ntheorem prod_eq_top : upper_set.prod s t = «expr⊤» ↔ s = «expr⊤» ∨ t = «expr⊤» :=\n  by\n  simp_rw [SetLike.ext'_iff]\n  exact prod_eq_empty_iff\n#align prod_eq_top prod_eq_top\n\n",
+ "prod_eq_bot":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:177:8: unsupported: ambiguous notation -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `lower_set.prod -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n@[simp]\ntheorem prod_eq_bot : lower_set.prod s t = «expr⊥» ↔ s = «expr⊥» ∨ t = «expr⊥» :=\n  by\n  simp_rw [SetLike.ext'_iff]\n  exact prod_eq_empty_iff\n#align prod_eq_bot prod_eq_bot\n\n",
+ "prod_bot":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:177:8: unsupported: ambiguous notation -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `lower_set.prod -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n@[simp]\ntheorem prod_bot : lower_set.prod s («expr⊥» : LowerSet β) = «expr⊥» :=\n  ext prod_empty\n#align prod_bot prod_bot\n\n",
+ "prod":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:177:8: unsupported: ambiguous notation -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `set.prod -/\n#print IsLowerSet.prod /-\ntheorem IsLowerSet.prod (hs : IsLowerSet s) (ht : IsLowerSet t) : IsLowerSet (set.prod s t) := fun a b h ha =>\n  ⟨hs h.1 ha.1, ht h.2 ha.2⟩\n#align is_lower_set.prod IsLowerSet.prod\n-/\n\n",
+ "preimage":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\n#print IsLowerSet.preimage /-\ntheorem IsLowerSet.preimage (hs : IsLowerSet s) {f : β → α} (hf : Monotone f) : IsLowerSet («expr ⁻¹' » f s : Set β) :=\n  fun x y hxy => hs <| hf hxy\n#align is_lower_set.preimage IsLowerSet.preimage\n-/\n\n",
+ "ordConnected_iff_upperClosure_inter_lowerClosure":
+ "#print ordConnected_iff_upperClosure_inter_lowerClosure /-\ntheorem ordConnected_iff_upperClosure_inter_lowerClosure :\n    s.ord_connected ↔ ↑(upperClosure s) ∩ ↑(lowerClosure s) = s :=\n  by\n  refine' ⟨Set.OrdConnected.upperClosure_inter_lowerClosure, fun h => _⟩\n  rw [← h]\n  exact (UpperSet.upper _).ord_connected.inter (LowerSet.lower _).ord_connected\n#align ord_connected_iff_upper_closure_inter_lower_closure ordConnected_iff_upperClosure_inter_lowerClosure\n-/\n\n",
+ "ordConnected":
+ "#print IsLowerSet.ordConnected /-\ntheorem IsLowerSet.ordConnected (h : IsLowerSet s) : s.ord_connected :=\n  ⟨fun a _ b hb => Icc_subset_Iic_self.trans <| h.Iic_subset hb⟩\n#align is_lower_set.ord_connected IsLowerSet.ordConnected\n-/\n\n",
+ "not_top_mem":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n#print IsUpperSet.not_top_mem /-\ntheorem IsUpperSet.not_top_mem (hs : IsUpperSet s) : «expr⊤» ∉ s ↔ s = ∅ :=\n  hs.top_mem.not.trans not_nonempty_iff_eq_empty\n#align is_upper_set.not_top_mem IsUpperSet.not_top_mem\n-/\n\n",
+ "not_mem_top":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n@[simp]\ntheorem not_mem_top : a ∉ («expr⊤» : UpperSet α) :=\n  id\n#align not_mem_top not_mem_top\n\n",
+ "not_mem_bot":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n@[simp]\ntheorem not_mem_bot : a ∉ («expr⊥» : LowerSet α) :=\n  id\n#align not_mem_bot not_mem_bot\n\n",
+ "not_bot_mem":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n#print IsLowerSet.not_bot_mem /-\ntheorem IsLowerSet.not_bot_mem (hs : IsLowerSet s) : «expr⊥» ∉ s ↔ s = ∅ :=\n  hs.bot_mem.not.trans not_nonempty_iff_eq_empty\n#align is_lower_set.not_bot_mem IsLowerSet.not_bot_mem\n-/\n\n",
+ "not_bddBelow_Iio":
+ "#print not_bddBelow_Iio /-\ntheorem not_bddBelow_Iio : ¬BddBelow (Iio a) :=\n  (isLowerSet_Iio _).not_bdd_below nonempty_Iio\n#align not_bdd_below_Iio not_bddBelow_Iio\n-/\n\n",
+ "not_bddBelow_Iic":
+ "#print not_bddBelow_Iic /-\ntheorem not_bddBelow_Iic : ¬BddBelow (Iic a) :=\n  (isLowerSet_Iic _).not_bdd_below nonempty_Iic\n#align not_bdd_below_Iic not_bddBelow_Iic\n-/\n\n",
+ "not_bddBelow":
+ "#print IsLowerSet.not_bddBelow /-\ntheorem IsLowerSet.not_bddBelow (hs : IsLowerSet s) : s.nonempty → ¬BddBelow s :=\n  by\n  rintro ⟨a, ha⟩ ⟨b, hb⟩\n  obtain ⟨c, hc⟩ := exists_lt b\n  exact hc.not_le (hb <| hs (hc.le.trans <| hb ha) ha)\n#align is_lower_set.not_bdd_below IsLowerSet.not_bddBelow\n-/\n\n",
+ "not_bddAbove_Ioi":
+ "#print not_bddAbove_Ioi /-\ntheorem not_bddAbove_Ioi : ¬BddAbove (Ioi a) :=\n  (isUpperSet_Ioi _).not_bdd_above nonempty_Ioi\n#align not_bdd_above_Ioi not_bddAbove_Ioi\n-/\n\n",
+ "not_bddAbove_Ici":
+ "#print not_bddAbove_Ici /-\ntheorem not_bddAbove_Ici : ¬BddAbove (Ici a) :=\n  (isUpperSet_Ici _).not_bdd_above nonempty_Ici\n#align not_bdd_above_Ici not_bddAbove_Ici\n-/\n\n",
+ "not_bddAbove":
+ "#print IsUpperSet.not_bddAbove /-\ntheorem IsUpperSet.not_bddAbove (hs : IsUpperSet s) : s.nonempty → ¬BddAbove s :=\n  by\n  rintro ⟨a, ha⟩ ⟨b, hb⟩\n  obtain ⟨c, hc⟩ := exists_gt b\n  exact hc.not_le (hb <| hs ((hb ha).trans hc.le) ha)\n#align is_upper_set.not_bdd_above IsUpperSet.not_bddAbove\n-/\n\n",
+ "monotone_mem":
+ "#print Set.monotone_mem /-\n@[simp]\ntheorem Set.monotone_mem : Monotone (· ∈ s) ↔ IsUpperSet s :=\n  iff.rfl\n#align set.monotone_mem Set.monotone_mem\n-/\n\n",
+ "mem_upperClosure":
+ "#print mem_upperClosure /-\n@[simp]\ntheorem mem_upperClosure : x ∈ upperClosure s ↔ ∃ a ∈ s, a ≤ x :=\n  iff.rfl\n#align mem_upper_closure mem_upperClosure\n-/\n\n",
+ "mem_top":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n@[simp]\ntheorem mem_top : a ∈ («expr⊤» : LowerSet α) :=\n  trivial\n#align mem_top mem_top\n\n",
+ "mem_supr₂_iff":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⨆ , » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⨆ , » -/\n@[simp]\ntheorem mem_supr₂_iff {f : ∀ i, κ i → LowerSet α} :\n    a ∈ «expr⨆ , » \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⨆ , »\" (f i j) ↔\n      ∃ i j, a ∈ f i j :=\n  by simp_rw [mem_supr_iff]\n#align mem_supr₂_iff mem_supr₂_iff\n\n",
+ "mem_supr_iff":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⨆ , » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⨆ , » -/\n@[simp]\ntheorem mem_supr_iff {f : ι → LowerSet α} :\n    a ∈ «expr⨆ , » \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⨆ , »\" (f i) ↔\n      ∃ i, a ∈ f i :=\n  by\n  rw [← SetLike.mem_coe, coe_supr]\n  exact mem_Union\n#align mem_supr_iff mem_supr_iff\n\n",
+ "mem_sup_iff":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊔ » -/\n@[simp]\ntheorem mem_sup_iff : a ∈ «expr ⊔ » s t ↔ a ∈ s ∨ a ∈ t :=\n  iff.rfl\n#align mem_sup_iff mem_sup_iff\n\n",
+ "mem_prod":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:177:8: unsupported: ambiguous notation -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `lower_set.prod -/\n@[simp]\ntheorem mem_prod {s : LowerSet α} {t : LowerSet β} : x ∈ lower_set.prod s t ↔ x.1 ∈ s ∧ x.2 ∈ t :=\n  iff.rfl\n#align mem_prod mem_prod\n\n",
+ "mem_mk":
+ "@[simp]\ntheorem mem_mk (carrier : Set α) (lower') {a : α} : a ∈ mk carrier lower' ↔ a ∈ carrier :=\n  iff.rfl\n#align mem_mk mem_mk\n\n",
+ "mem_map":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃o » -/\n@[simp]\ntheorem mem_map {f : «expr ≃o » α β} {b : β} : b ∈ map f s ↔ f.symm b ∈ s :=\n  by\n  rw [← f.symm_symm, ← symm_map, f.symm_symm]\n  rfl\n#align mem_map mem_map\n\n",
+ "mem_lowerClosure":
+ "#print mem_lowerClosure /-\n@[simp]\ntheorem mem_lowerClosure : x ∈ lowerClosure s ↔ ∃ a ∈ s, x ≤ a :=\n  iff.rfl\n#align mem_lower_closure mem_lowerClosure\n-/\n\n",
+ "mem_infi₂_iff":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⨅ , » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⨅ , » -/\n@[simp]\ntheorem mem_infi₂_iff {f : ∀ i, κ i → LowerSet α} :\n    a ∈ «expr⨅ , » \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⨅ , »\" (f i j) ↔\n      ∀ i j, a ∈ f i j :=\n  by simp_rw [mem_infi_iff]\n#align mem_infi₂_iff mem_infi₂_iff\n\n",
+ "mem_infi_iff":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⨅ , » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⨅ , » -/\n@[simp]\ntheorem mem_infi_iff {f : ι → LowerSet α} :\n    a ∈ «expr⨅ , » \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⨅ , »\" (f i) ↔\n      ∀ i, a ∈ f i :=\n  by\n  rw [← SetLike.mem_coe, coe_infi]\n  exact mem_Inter\n#align mem_infi_iff mem_infi_iff\n\n",
+ "mem_inf_iff":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊓ » -/\n@[simp]\ntheorem mem_inf_iff : a ∈ «expr ⊓ » s t ↔ a ∈ s ∧ a ∈ t :=\n  iff.rfl\n#align mem_inf_iff mem_inf_iff\n\n",
+ "mem_compl_iff":
+ "@[simp]\ntheorem mem_compl_iff : a ∈ s.compl ↔ a ∉ s :=\n  iff.rfl\n#align mem_compl_iff mem_compl_iff\n\n",
+ "mem_bot":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n@[simp]\ntheorem mem_bot : a ∈ («expr⊥» : UpperSet α) :=\n  trivial\n#align mem_bot mem_bot\n\n",
+ "mem_Sup_iff":
+ "@[simp]\ntheorem mem_Sup_iff : a ∈ supₛ S ↔ ∃ s ∈ S, a ∈ s :=\n  mem_unionᵢ₂\n#align mem_Sup_iff mem_Sup_iff\n\n",
+ "mem_Ioi_iff":
+ "@[simp]\ntheorem mem_Ioi_iff : b ∈ Ioi a ↔ a < b :=\n  iff.rfl\n#align mem_Ioi_iff mem_Ioi_iff\n\n",
+ "mem_Inf_iff":
+ "@[simp]\ntheorem mem_Inf_iff : a ∈ infₛ S ↔ ∀ s ∈ S, a ∈ s :=\n  mem_interᵢ₂\n#align mem_Inf_iff mem_Inf_iff\n\n",
+ "mem_Iio_iff":
+ "@[simp]\ntheorem mem_Iio_iff : b ∈ Iio a ↔ b < a :=\n  iff.rfl\n#align mem_Iio_iff mem_Iio_iff\n\n",
+ "mem_Iic_iff":
+ "@[simp]\ntheorem mem_Iic_iff : b ∈ Iic a ↔ b ≤ a :=\n  iff.rfl\n#align mem_Iic_iff mem_Iic_iff\n\n",
+ "mem_Ici_iff":
+ "@[simp]\ntheorem mem_Ici_iff : b ∈ Ici a ↔ a ≤ b :=\n  iff.rfl\n#align mem_Ici_iff mem_Ici_iff\n\n",
+ "map_refl":
+ "@[simp]\ntheorem map_refl : map (OrderIso.refl α) = OrderIso.refl _ :=\n  by\n  ext\n  simp\n#align map_refl map_refl\n\n",
+ "map_map":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃o » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃o » -/\n@[simp]\ntheorem map_map (g : «expr ≃o » β γ) (f : «expr ≃o » α β) : map g (map f s) = map (f.trans g) s :=\n  by\n  ext\n  simp\n#align map_map map_map\n\n",
+ "map_Ioi":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃o » -/\n@[simp]\ntheorem map_Ioi (f : «expr ≃o » α β) (a : α) : map f (Ioi a) = Ioi (f a) :=\n  by\n  ext\n  simp\n#align map_Ioi map_Ioi\n\n",
+ "map_Iio":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃o » -/\n@[simp]\ntheorem map_Iio (f : «expr ≃o » α β) (a : α) : map f (Iio a) = Iio (f a) :=\n  by\n  ext\n  simp\n#align map_Iio map_Iio\n\n",
+ "map_Iic":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃o » -/\n@[simp]\ntheorem map_Iic (f : «expr ≃o » α β) (a : α) : map f (Iic a) = Iic (f a) :=\n  by\n  ext\n  simp\n#align map_Iic map_Iic\n\n",
+ "map_Ici":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃o » -/\n@[simp]\ntheorem map_Ici (f : «expr ≃o » α β) (a : α) : map f (Ici a) = Ici (f a) :=\n  by\n  ext\n  simp\n#align map_Ici map_Ici\n\n",
+ "lowerClosure_univ":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n#print lowerClosure_univ /-\n@[simp]\ntheorem lowerClosure_univ : lowerClosure (univ : Set α) = «expr⊤» :=\n  top_le_iff.1 subset_lowerClosure\n#align lower_closure_univ lowerClosure_univ\n-/\n\n",
+ "lowerClosure_unionₛ":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⨆ , » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⨆ , » -/\n#print lowerClosure_unionₛ /-\n@[simp]\ntheorem lowerClosure_unionₛ (S : Set (Set α)) :\n    lowerClosure (⋃₀ S) =\n      «expr⨆ , » \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⨆ , »\"\n        (lowerClosure s) :=\n  by simp_rw [sUnion_eq_bUnion, lowerClosure_unionᵢ]\n#align lower_closure_sUnion lowerClosure_unionₛ\n-/\n\n",
+ "lowerClosure_unionᵢ":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⋃ , » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⋃ , » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⨆ , » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⨆ , » -/\n#print lowerClosure_unionᵢ /-\n@[simp]\ntheorem lowerClosure_unionᵢ (f : ι → Set α) :\n    lowerClosure\n        («expr⋃ , » \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⋃ , »\" (f i)) =\n      «expr⨆ , » \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⨆ , »\"\n        (lowerClosure (f i)) :=\n  by\n  ext\n  simp [← exists_and_right, @exists_comm α]\n#align lower_closure_Union lowerClosure_unionᵢ\n-/\n\n",
+ "lowerClosure_union":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊔ » -/\n#print lowerClosure_union /-\n@[simp]\ntheorem lowerClosure_union (s t : Set α) : lowerClosure (s ∪ t) = «expr ⊔ » (lowerClosure s) (lowerClosure t) :=\n  by\n  ext\n  simp [or_and_right, exists_or]\n#align lower_closure_union lowerClosure_union\n-/\n\n",
+ "lowerClosure_singleton":
+ "#print lowerClosure_singleton /-\n@[simp]\ntheorem lowerClosure_singleton (a : α) : lowerClosure ({a} : Set α) = LowerSet.Iic a :=\n  by\n  ext\n  simp\n#align lower_closure_singleton lowerClosure_singleton\n-/\n\n",
+ "lowerClosure_prod":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:177:8: unsupported: ambiguous notation -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `lower_set.prod -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:177:8: unsupported: ambiguous notation -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `lower_set.prod -/\n#print lowerClosure_prod /-\n@[simp]\ntheorem lowerClosure_prod (s : Set α) (t : Set β) :\n    lowerClosure (lower_set.prod s t) = lower_set.prod (lowerClosure s) (lowerClosure t) :=\n  by\n  ext\n  simp [Prod.le_def, and_and_and_comm _ (_ ∈ t)]\n#align lower_closure_prod lowerClosure_prod\n-/\n\n",
+ "lowerClosure_mono":
+ "#print lowerClosure_mono /-\ntheorem lowerClosure_mono : Monotone (lowerClosure : Set α → LowerSet α) :=\n  gc_lowerClosure_coe.monotone_l\n#align lower_closure_mono lowerClosure_mono\n-/\n\n",
+ "lowerClosure_min":
+ "#print lowerClosure_min /-\ntheorem lowerClosure_min (h : s ⊆ t) (ht : IsLowerSet t) : ↑(lowerClosure s) ⊆ t := fun a ⟨b, hb, hab⟩ => ht hab <| h hb\n#align lower_closure_min lowerClosure_min\n-/\n\n",
+ "lowerClosure_image":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃o » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\n#print lowerClosure_image /-\n@[simp]\ntheorem lowerClosure_image (f : «expr ≃o » α β) : lowerClosure («expr '' » f s) = LowerSet.map f (lowerClosure s) :=\n  by\n  rw [← f.symm_symm, ← LowerSet.symm_map, f.symm_symm]\n  ext\n  simp [-LowerSet.symm_map, LowerSet.map, OrderIso.symm, ← f.symm_apply_le]\n#align lower_closure_image lowerClosure_image\n-/\n\n",
+ "lowerClosure_eq_bot_iff":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n#print lowerClosure_eq_bot_iff /-\n@[simp]\ntheorem lowerClosure_eq_bot_iff : lowerClosure s = «expr⊥» ↔ s = ∅ :=\n  ⟨fun h => subset_empty_iff.1 <| subset_lowerClosure.trans (congr_arg coe h).subset,\n    by\n    rintro rfl\n    exact lowerClosure_empty⟩\n#align lower_closure_eq_bot_iff lowerClosure_eq_bot_iff\n-/\n\n",
+ "lowerClosure_empty":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n#print lowerClosure_empty /-\n@[simp]\ntheorem lowerClosure_empty : lowerClosure (∅ : Set α) = «expr⊥» :=\n  by\n  ext\n  simp\n#align lower_closure_empty lowerClosure_empty\n-/\n\n",
+ "lowerClosure":
+ "#print LowerSet.lowerClosure /-\n@[simp]\nprotected theorem LowerSet.lowerClosure (s : LowerSet α) : lowerClosure (s : Set α) = s :=\n  SetLike.coe_injective s.2.lower_closure\n#align lower_set.lower_closure LowerSet.lowerClosure\n-/\n\n",
+ "lowerBounds_upperClosure":
+ "#print lowerBounds_upperClosure /-\n@[simp]\ntheorem lowerBounds_upperClosure : lowerBounds (upperClosure s : Set α) = lowerBounds s :=\n  (lowerBounds_mono_set subset_upperClosure).antisymm fun a ha b ⟨c, hc, hcb⟩ => (ha hc).trans hcb\n#align lower_bounds_upper_closure lowerBounds_upperClosure\n-/\n\n",
+ "lower":
+ "protected theorem lower (s : LowerSet α) : IsLowerSet (s : Set α) :=\n  s.lower'\n#align lower lower\n\n",
+ "isUpperSet_univ":
+ "#print isUpperSet_univ /-\ntheorem isUpperSet_univ : IsUpperSet (univ : Set α) := fun _ _ _ => id\n#align is_upper_set_univ isUpperSet_univ\n-/\n\n",
+ "isUpperSet_unionₛ":
+ "#print isUpperSet_unionₛ /-\ntheorem isUpperSet_unionₛ {S : Set (Set α)} (hf : ∀ s ∈ S, IsUpperSet s) : IsUpperSet (⋃₀ S) := fun a b h =>\n  Exists₂.imp fun s hs => hf s hs h\n#align is_upper_set_sUnion isUpperSet_unionₛ\n-/\n\n",
+ "isUpperSet_unionᵢ₂":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⋃ , » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⋃ , » -/\n#print isUpperSet_unionᵢ₂ /-\ntheorem isUpperSet_unionᵢ₂ {f : ∀ i, κ i → Set α} (hf : ∀ i j, IsUpperSet (f i j)) :\n    IsUpperSet\n      («expr⋃ , » \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⋃ , »\" (f i j)) :=\n  isUpperSet_unionᵢ fun i => isUpperSet_unionᵢ <| hf i\n#align is_upper_set_Union₂ isUpperSet_unionᵢ₂\n-/\n\n",
+ "isUpperSet_unionᵢ":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⋃ , » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⋃ , » -/\n#print isUpperSet_unionᵢ /-\ntheorem isUpperSet_unionᵢ {f : ι → Set α} (hf : ∀ i, IsUpperSet (f i)) :\n    IsUpperSet\n      («expr⋃ , » \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⋃ , »\" (f i)) :=\n  fun a b h => Exists₂.imp <| forall_range_iff.2 fun i => hf i h\n#align is_upper_set_Union isUpperSet_unionᵢ\n-/\n\n",
+ "isUpperSet_setOf":
+ "#print isUpperSet_setOf /-\n@[simp]\ntheorem isUpperSet_setOf : IsUpperSet { a | p a } ↔ Monotone p :=\n  iff.rfl\n#align is_upper_set_set_of isUpperSet_setOf\n-/\n\n",
+ "isUpperSet_preimage_toDual_iff":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵈ» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\n#print isUpperSet_preimage_toDual_iff /-\n@[simp]\ntheorem isUpperSet_preimage_toDual_iff {s : Set («expr ᵒᵈ» α)} : IsUpperSet («expr ⁻¹' » toDual s) ↔ IsLowerSet s :=\n  iff.rfl\n#align is_upper_set_preimage_to_dual_iff isUpperSet_preimage_toDual_iff\n-/\n\n",
+ "isUpperSet_preimage_ofDual_iff":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\n#print isUpperSet_preimage_ofDual_iff /-\n@[simp]\ntheorem isUpperSet_preimage_ofDual_iff : IsUpperSet («expr ⁻¹' » ofDual s) ↔ IsLowerSet s :=\n  iff.rfl\n#align is_upper_set_preimage_of_dual_iff isUpperSet_preimage_ofDual_iff\n-/\n\n",
+ "isUpperSet_interₛ":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⋂₀ » -/\n#print isUpperSet_interₛ /-\ntheorem isUpperSet_interₛ {S : Set (Set α)} (hf : ∀ s ∈ S, IsUpperSet s) : IsUpperSet («expr⋂₀ » S) := fun a b h =>\n  forall₂_imp fun s hs => hf s hs h\n#align is_upper_set_sInter isUpperSet_interₛ\n-/\n\n",
+ "isUpperSet_interᵢ₂":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⋂ , » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⋂ , » -/\n#print isUpperSet_interᵢ₂ /-\ntheorem isUpperSet_interᵢ₂ {f : ∀ i, κ i → Set α} (hf : ∀ i j, IsUpperSet (f i j)) :\n    IsUpperSet\n      («expr⋂ , » \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⋂ , »\" (f i j)) :=\n  isUpperSet_interᵢ fun i => isUpperSet_interᵢ <| hf i\n#align is_upper_set_Inter₂ isUpperSet_interᵢ₂\n-/\n\n",
+ "isUpperSet_interᵢ":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⋂ , » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⋂ , » -/\n#print isUpperSet_interᵢ /-\ntheorem isUpperSet_interᵢ {f : ι → Set α} (hf : ∀ i, IsUpperSet (f i)) :\n    IsUpperSet\n      («expr⋂ , » \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⋂ , »\" (f i)) :=\n  fun a b h => forall₂_imp <| forall_range_iff.2 fun i => hf i h\n#align is_upper_set_Inter isUpperSet_interᵢ\n-/\n\n",
+ "isUpperSet_iff_forall_lt":
+ "#print isUpperSet_iff_forall_lt /-\ntheorem isUpperSet_iff_forall_lt : IsUpperSet s ↔ ∀ ⦃a b : α⦄, a < b → a ∈ s → b ∈ s :=\n  forall_congr' fun a => by simp [le_iff_eq_or_lt, or_imp, forall_and]\n#align is_upper_set_iff_forall_lt isUpperSet_iff_forall_lt\n-/\n\n",
+ "isUpperSet_iff_Ioi_subset":
+ "#print isUpperSet_iff_Ioi_subset /-\ntheorem isUpperSet_iff_Ioi_subset : IsUpperSet s ↔ ∀ ⦃a⦄, a ∈ s → Ioi a ⊆ s := by\n  simp [isUpperSet_iff_forall_lt, subset_def, @forall_swap (_ ∈ s)]\n#align is_upper_set_iff_Ioi_subset isUpperSet_iff_Ioi_subset\n-/\n\n",
+ "isUpperSet_iff_Ici_subset":
+ "#print isUpperSet_iff_Ici_subset /-\ntheorem isUpperSet_iff_Ici_subset : IsUpperSet s ↔ ∀ ⦃a⦄, a ∈ s → Ici a ⊆ s := by\n  simp [IsUpperSet, subset_def, @forall_swap (_ ∈ s)]\n#align is_upper_set_iff_Ici_subset isUpperSet_iff_Ici_subset\n-/\n\n",
+ "isUpperSet_empty":
+ "#print isUpperSet_empty /-\n/-\nCopyright (c) 2022 Yaël Dillies, Sara Rousta. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Yaël Dillies, Sara Rousta\n-/\ntheorem isUpperSet_empty : IsUpperSet (∅ : Set α) := fun _ _ _ => id\n#align is_upper_set_empty isUpperSet_empty\n-/\n\n",
+ "isUpperSet_compl":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\n#print isUpperSet_compl /-\n@[simp]\ntheorem isUpperSet_compl : IsUpperSet («expr ᶜ» s) ↔ IsLowerSet s :=\n  ⟨fun h => by\n    convert h.compl\n    rw [compl_compl], IsLowerSet.compl⟩\n#align is_upper_set_compl isUpperSet_compl\n-/\n\n",
+ "isUpperSet_Ioi":
+ "#print isUpperSet_Ioi /-\ntheorem isUpperSet_Ioi : IsUpperSet (Ioi a) := fun _ _ => flip lt_of_lt_of_le\n#align is_upper_set_Ioi isUpperSet_Ioi\n-/\n\n",
+ "isUpperSet_Ici":
+ "#print isUpperSet_Ici /-\ntheorem isUpperSet_Ici : IsUpperSet (Ici a) := fun _ _ => ge_trans\n#align is_upper_set_Ici isUpperSet_Ici\n-/\n\n",
+ "isLowerSet_univ":
+ "#print isLowerSet_univ /-\ntheorem isLowerSet_univ : IsLowerSet (univ : Set α) := fun _ _ _ => id\n#align is_lower_set_univ isLowerSet_univ\n-/\n\n",
+ "isLowerSet_unionₛ":
+ "#print isLowerSet_unionₛ /-\ntheorem isLowerSet_unionₛ {S : Set (Set α)} (hf : ∀ s ∈ S, IsLowerSet s) : IsLowerSet (⋃₀ S) := fun a b h =>\n  Exists₂.imp fun s hs => hf s hs h\n#align is_lower_set_sUnion isLowerSet_unionₛ\n-/\n\n",
+ "isLowerSet_unionᵢ₂":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⋃ , » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⋃ , » -/\n#print isLowerSet_unionᵢ₂ /-\ntheorem isLowerSet_unionᵢ₂ {f : ∀ i, κ i → Set α} (hf : ∀ i j, IsLowerSet (f i j)) :\n    IsLowerSet\n      («expr⋃ , » \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⋃ , »\" (f i j)) :=\n  isLowerSet_unionᵢ fun i => isLowerSet_unionᵢ <| hf i\n#align is_lower_set_Union₂ isLowerSet_unionᵢ₂\n-/\n\n",
+ "isLowerSet_unionᵢ":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⋃ , » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⋃ , » -/\n#print isLowerSet_unionᵢ /-\ntheorem isLowerSet_unionᵢ {f : ι → Set α} (hf : ∀ i, IsLowerSet (f i)) :\n    IsLowerSet\n      («expr⋃ , » \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⋃ , »\" (f i)) :=\n  fun a b h => Exists₂.imp <| forall_range_iff.2 fun i => hf i h\n#align is_lower_set_Union isLowerSet_unionᵢ\n-/\n\n",
+ "isLowerSet_setOf":
+ "#print isLowerSet_setOf /-\n@[simp]\ntheorem isLowerSet_setOf : IsLowerSet { a | p a } ↔ Antitone p :=\n  forall_swap\n#align is_lower_set_set_of isLowerSet_setOf\n-/\n\n",
+ "isLowerSet_preimage_toDual_iff":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵈ» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\n#print isLowerSet_preimage_toDual_iff /-\n@[simp]\ntheorem isLowerSet_preimage_toDual_iff {s : Set («expr ᵒᵈ» α)} : IsLowerSet («expr ⁻¹' » toDual s) ↔ IsUpperSet s :=\n  iff.rfl\n#align is_lower_set_preimage_to_dual_iff isLowerSet_preimage_toDual_iff\n-/\n\n",
+ "isLowerSet_preimage_ofDual_iff":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\n#print isLowerSet_preimage_ofDual_iff /-\n@[simp]\ntheorem isLowerSet_preimage_ofDual_iff : IsLowerSet («expr ⁻¹' » ofDual s) ↔ IsUpperSet s :=\n  iff.rfl\n#align is_lower_set_preimage_of_dual_iff isLowerSet_preimage_ofDual_iff\n-/\n\n",
+ "isLowerSet_interₛ":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⋂₀ » -/\n#print isLowerSet_interₛ /-\ntheorem isLowerSet_interₛ {S : Set (Set α)} (hf : ∀ s ∈ S, IsLowerSet s) : IsLowerSet («expr⋂₀ » S) := fun a b h =>\n  forall₂_imp fun s hs => hf s hs h\n#align is_lower_set_sInter isLowerSet_interₛ\n-/\n\n",
+ "isLowerSet_interᵢ₂":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⋂ , » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⋂ , » -/\n#print isLowerSet_interᵢ₂ /-\ntheorem isLowerSet_interᵢ₂ {f : ∀ i, κ i → Set α} (hf : ∀ i j, IsLowerSet (f i j)) :\n    IsLowerSet\n      («expr⋂ , » \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⋂ , »\" (f i j)) :=\n  isLowerSet_interᵢ fun i => isLowerSet_interᵢ <| hf i\n#align is_lower_set_Inter₂ isLowerSet_interᵢ₂\n-/\n\n",
+ "isLowerSet_interᵢ":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⋂ , » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⋂ , » -/\n#print isLowerSet_interᵢ /-\ntheorem isLowerSet_interᵢ {f : ι → Set α} (hf : ∀ i, IsLowerSet (f i)) :\n    IsLowerSet\n      («expr⋂ , » \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⋂ , »\" (f i)) :=\n  fun a b h => forall₂_imp <| forall_range_iff.2 fun i => hf i h\n#align is_lower_set_Inter isLowerSet_interᵢ\n-/\n\n",
+ "isLowerSet_iff_forall_lt":
+ "#print isLowerSet_iff_forall_lt /-\ntheorem isLowerSet_iff_forall_lt : IsLowerSet s ↔ ∀ ⦃a b : α⦄, b < a → a ∈ s → b ∈ s :=\n  forall_congr' fun a => by simp [le_iff_eq_or_lt, or_imp, forall_and]\n#align is_lower_set_iff_forall_lt isLowerSet_iff_forall_lt\n-/\n\n",
+ "isLowerSet_iff_Iio_subset":
+ "#print isLowerSet_iff_Iio_subset /-\ntheorem isLowerSet_iff_Iio_subset : IsLowerSet s ↔ ∀ ⦃a⦄, a ∈ s → Iio a ⊆ s := by\n  simp [isLowerSet_iff_forall_lt, subset_def, @forall_swap (_ ∈ s)]\n#align is_lower_set_iff_Iio_subset isLowerSet_iff_Iio_subset\n-/\n\n",
+ "isLowerSet_iff_Iic_subset":
+ "#print isLowerSet_iff_Iic_subset /-\ntheorem isLowerSet_iff_Iic_subset : IsLowerSet s ↔ ∀ ⦃a⦄, a ∈ s → Iic a ⊆ s := by\n  simp [IsLowerSet, subset_def, @forall_swap (_ ∈ s)]\n#align is_lower_set_iff_Iic_subset isLowerSet_iff_Iic_subset\n-/\n\n",
+ "isLowerSet_empty":
+ "#print isLowerSet_empty /-\ntheorem isLowerSet_empty : IsLowerSet (∅ : Set α) := fun _ _ _ => id\n#align is_lower_set_empty isLowerSet_empty\n-/\n\n",
+ "isLowerSet_compl":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\n#print isLowerSet_compl /-\n@[simp]\ntheorem isLowerSet_compl : IsLowerSet («expr ᶜ» s) ↔ IsUpperSet s :=\n  ⟨fun h => by\n    convert h.compl\n    rw [compl_compl], IsUpperSet.compl⟩\n#align is_lower_set_compl isLowerSet_compl\n-/\n\n",
+ "isLowerSet_Iio":
+ "#print isLowerSet_Iio /-\ntheorem isLowerSet_Iio : IsLowerSet (Iio a) := fun _ _ => lt_of_le_of_lt\n#align is_lower_set_Iio isLowerSet_Iio\n-/\n\n",
+ "isLowerSet_Iic":
+ "#print isLowerSet_Iic /-\ntheorem isLowerSet_Iic : IsLowerSet (Iic a) := fun _ _ => le_trans\n#align is_lower_set_Iic isLowerSet_Iic\n-/\n\n",
+ "inter":
+ "#print IsLowerSet.inter /-\ntheorem IsLowerSet.inter (hs : IsLowerSet s) (ht : IsLowerSet t) : IsLowerSet (s ∩ t) := fun a b h =>\n  and.imp (hs h) (ht h)\n#align is_lower_set.inter IsLowerSet.inter\n-/\n\n",
+ "infᵢ_Ici":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⨅ , » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⨅ , » -/\n#print UpperSet.infᵢ_Ici /-\n@[simp]\ntheorem UpperSet.infᵢ_Ici (s : Set α) :\n    «expr⨅ , » \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⨅ , »\" (UpperSet.Ici a) =\n      upperClosure s :=\n  by\n  ext\n  simp\n#align upper_set.infi_Ici UpperSet.infᵢ_Ici\n-/\n\n",
+ "inf_prod":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:177:8: unsupported: ambiguous notation -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `lower_set.prod -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊓ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊓ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:177:8: unsupported: ambiguous notation -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `lower_set.prod -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:177:8: unsupported: ambiguous notation -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `lower_set.prod -/\n@[simp]\ntheorem inf_prod : lower_set.prod («expr ⊓ » s₁ s₂) t = «expr ⊓ » (lower_set.prod s₁ t) (lower_set.prod s₂ t) :=\n  ext inter_prod\n#align inf_prod inf_prod\n\n",
+ "image":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃o » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\n#print IsLowerSet.image /-\ntheorem IsLowerSet.image (hs : IsLowerSet s) (f : «expr ≃o » α β) : IsLowerSet («expr '' » f s : Set β) :=\n  by\n  change IsLowerSet («expr '' » (f : «expr ≃ » α β) s)\n  rw [Set.image_equiv_eq_preimage_symm]\n  exact hs.preimage f.symm.monotone\n#align is_lower_set.image IsLowerSet.image\n-/\n\n",
+ "gc_upperClosure_coe":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵈ» -/\n#print gc_upperClosure_coe /-\ntheorem gc_upperClosure_coe :\n    GaloisConnection (toDual ∘ upperClosure : Set α → «expr ᵒᵈ» (UpperSet α)) (coe ∘ ofDual) := fun s t =>\n  ⟨fun h => subset_upperClosure.trans <| UpperSet.coe_subset_coe.2 h, fun h => upperClosure_min h t.upper⟩\n#align gc_upper_closure_coe gc_upperClosure_coe\n-/\n\n",
+ "gc_lowerClosure_coe":
+ "#print gc_lowerClosure_coe /-\ntheorem gc_lowerClosure_coe : GaloisConnection (lowerClosure : Set α → LowerSet α) coe := fun s t =>\n  ⟨fun h => subset_lowerClosure.trans <| LowerSet.coe_subset_coe.2 h, fun h => lowerClosure_min h t.lower⟩\n#align gc_lower_closure_coe gc_lowerClosure_coe\n-/\n\n",
+ "ext":
+ "@[ext]\ntheorem ext {s t : LowerSet α} : (s : Set α) = t → s = t :=\n  SetLike.ext'\n#align ext ext\n\n",
+ "disjoint_prod":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:177:8: unsupported: ambiguous notation -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `lower_set.prod -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:177:8: unsupported: ambiguous notation -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `lower_set.prod -/\n@[simp]\ntheorem disjoint_prod : Disjoint (lower_set.prod s₁ t₁) (lower_set.prod s₂ t₂) ↔ Disjoint s₁ s₂ ∨ Disjoint t₁ t₂ := by\n  simp_rw [disjoint_iff, prod_inf_prod, prod_eq_bot]\n#align disjoint_prod disjoint_prod\n\n",
+ "disjoint_coe":
+ "@[simp, norm_cast]\ntheorem disjoint_coe : Disjoint (s : Set α) t ↔ Disjoint s t := by simp [disjoint_iff, SetLike.ext'_iff]\n#align disjoint_coe disjoint_coe\n\n",
+ "compl_top":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n#print compl_top /-\nprotected theorem compl_top : («expr⊤» : LowerSet α).compl = «expr⊤» :=\n  UpperSet.ext compl_univ\n#align compl_top compl_top\n-/\n\n",
+ "compl_supₛ":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⨆ , » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⨆ , » -/\n#print compl_supₛ /-\nprotected theorem compl_supₛ (S : Set (LowerSet α)) :\n    (supₛ S).compl =\n      «expr⨆ , » \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⨆ , »\"\n        (LowerSet.compl s) :=\n  UpperSet.ext <| by simp only [coe_compl, coe_Sup, compl_Union₂, UpperSet.coe_supᵢ₂]\n#align compl_Sup compl_supₛ\n-/\n\n",
+ "compl_supᵢ":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⨆ , » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⨆ , » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⨆ , » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⨆ , » -/\n#print compl_supᵢ /-\nprotected theorem compl_supᵢ (f : ι → LowerSet α) :\n    («expr⨆ , » \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⨆ , »\" (f i)).compl =\n      «expr⨆ , » \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⨆ , »\" (f i).compl :=\n  UpperSet.ext <| by simp only [coe_compl, coe_supr, compl_Union, UpperSet.coe_supᵢ]\n#align compl_supr compl_supᵢ\n-/\n\n",
+ "compl_supr₂":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⨆ , » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⨆ , » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⨆ , » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⨆ , » -/\n@[simp]\ntheorem compl_supr₂ (f : ∀ i, κ i → LowerSet α) :\n    («expr⨆ , » \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⨆ , »\" (f i j)).compl =\n      «expr⨆ , » \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⨆ , »\" (f i j).compl :=\n  by simp_rw [LowerSet.compl_supᵢ]\n#align compl_supr₂ compl_supr₂\n\n",
+ "compl_sup":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊔ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊔ » -/\n#print compl_sup /-\nprotected theorem compl_sup (s t : LowerSet α) : («expr ⊔ » s t).compl = «expr ⊔ » s.compl t.compl :=\n  UpperSet.ext compl_sup\n#align compl_sup compl_sup\n-/\n\n",
+ "compl_map":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃o » -/\n@[simp]\ntheorem compl_map (f : «expr ≃o » α β) (s : LowerSet α) : (map f s).compl = UpperSet.map f s.compl :=\n  SetLike.coe_injective (Set.image_compl_eq f.bijective).symm\n#align compl_map compl_map\n\n",
+ "compl_le_compl":
+ "#print compl_le_compl /-\n@[simp]\ntheorem compl_le_compl : s.compl ≤ t.compl ↔ s ≤ t :=\n  compl_subset_compl\n#align compl_le_compl compl_le_compl\n-/\n\n",
+ "compl_infₛ":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⨅ , » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⨅ , » -/\n#print compl_infₛ /-\nprotected theorem compl_infₛ (S : Set (LowerSet α)) :\n    (infₛ S).compl =\n      «expr⨅ , » \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⨅ , »\"\n        (LowerSet.compl s) :=\n  UpperSet.ext <| by simp only [coe_compl, coe_Inf, compl_Inter₂, UpperSet.coe_infᵢ₂]\n#align compl_Inf compl_infₛ\n-/\n\n",
+ "compl_infᵢ":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⨅ , » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⨅ , » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⨅ , » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⨅ , » -/\n#print compl_infᵢ /-\nprotected theorem compl_infᵢ (f : ι → LowerSet α) :\n    («expr⨅ , » \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⨅ , »\" (f i)).compl =\n      «expr⨅ , » \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⨅ , »\" (f i).compl :=\n  UpperSet.ext <| by simp only [coe_compl, coe_infi, compl_Inter, UpperSet.coe_infᵢ]\n#align compl_infi compl_infᵢ\n-/\n\n",
+ "compl_infi₂":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⨅ , » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⨅ , » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⨅ , » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⨅ , » -/\n@[simp]\ntheorem compl_infi₂ (f : ∀ i, κ i → LowerSet α) :\n    («expr⨅ , » \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⨅ , »\" (f i j)).compl =\n      «expr⨅ , » \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⨅ , »\" (f i j).compl :=\n  by simp_rw [LowerSet.compl_infᵢ]\n#align compl_infi₂ compl_infi₂\n\n",
+ "compl_inf":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊓ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊓ » -/\n#print compl_inf /-\nprotected theorem compl_inf (s t : LowerSet α) : («expr ⊓ » s t).compl = «expr ⊓ » s.compl t.compl :=\n  UpperSet.ext compl_inf\n#align compl_inf compl_inf\n-/\n\n",
+ "compl_compl":
+ "#print compl_compl /-\n@[simp]\ntheorem compl_compl (s : LowerSet α) : s.compl.compl = s :=\n  LowerSet.ext <| compl_compl _\n#align compl_compl compl_compl\n-/\n\n",
+ "compl_bot":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n#print compl_bot /-\nprotected theorem compl_bot : («expr⊥» : LowerSet α).compl = «expr⊥» :=\n  UpperSet.ext compl_empty\n#align compl_bot compl_bot\n-/\n\n",
+ "compl":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\n#print IsLowerSet.compl /-\ntheorem IsLowerSet.compl (hs : IsLowerSet s) : IsUpperSet («expr ᶜ» s) := fun a b h hb ha => hb <| hs h ha\n#align is_lower_set.compl IsLowerSet.compl\n-/\n\n",
+ "coe_upperClosure":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⋃ , » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⋃ , » -/\n#print coe_upperClosure /-\n-- We do not tag those two as `simp` to respect the abstraction.\n@[norm_cast]\ntheorem coe_upperClosure (s : Set α) :\n    ↑(upperClosure s) =\n      «expr⋃ , » \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⋃ , »\" (Ici a) :=\n  by\n  ext\n  simp\n#align coe_upper_closure coe_upperClosure\n-/\n\n",
+ "coe_top":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n@[simp, norm_cast]\ntheorem coe_top : ((«expr⊤» : LowerSet α) : Set α) = univ :=\n  rfl\n#align coe_top coe_top\n\n",
+ "coe_supr₂":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⨆ , » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⨆ , » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⋃ , » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⋃ , » -/\n@[simp, norm_cast]\ntheorem coe_supr₂ (f : ∀ i, κ i → LowerSet α) :\n    (↑(«expr⨆ , » \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⨆ , »\" (f i j)) :\n        Set α) =\n      «expr⋃ , » \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⋃ , »\" (f i j) :=\n  by simp_rw [coe_supr]\n#align coe_supr₂ coe_supr₂\n\n",
+ "coe_supr":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⨆ , » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⨆ , » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⋃ , » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⋃ , » -/\n@[simp, norm_cast]\ntheorem coe_supr (f : ι → LowerSet α) :\n    (↑(«expr⨆ , » \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⨆ , »\" (f i)) : Set α) =\n      «expr⋃ , » \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⋃ , »\" (f i) :=\n  by simp_rw [supᵢ, coe_Sup, mem_range, Union_exists, Union_Union_eq']\n#align coe_supr coe_supr\n\n",
+ "coe_sup":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊔ » -/\n@[simp, norm_cast]\ntheorem coe_sup (s t : LowerSet α) : (↑(«expr ⊔ » s t) : Set α) = s ∪ t :=\n  rfl\n#align coe_sup coe_sup\n\n",
+ "coe_subset_coe":
+ "@[simp, norm_cast]\ntheorem coe_subset_coe : (s : Set α) ⊆ t ↔ s ≤ t :=\n  iff.rfl\n#align coe_subset_coe coe_subset_coe\n\n",
+ "coe_prod":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:177:8: unsupported: ambiguous notation -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `lower_set.prod -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:177:8: unsupported: ambiguous notation -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `lower_set.prod -/\n@[simp, norm_cast]\ntheorem coe_prod : (↑(lower_set.prod s t) : Set (α × β)) = lower_set.prod s t :=\n  rfl\n#align coe_prod coe_prod\n\n",
+ "coe_map":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\n@[simp, norm_cast]\ntheorem coe_map : (map f s : Set β) = «expr '' » f s :=\n  rfl\n#align coe_map coe_map\n\n",
+ "coe_lowerClosure":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⋃ , » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⋃ , » -/\n#print coe_lowerClosure /-\n@[norm_cast]\ntheorem coe_lowerClosure (s : Set α) :\n    ↑(lowerClosure s) =\n      «expr⋃ , » \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⋃ , »\" (Iic a) :=\n  by\n  ext\n  simp\n#align coe_lower_closure coe_lowerClosure\n-/\n\n",
+ "coe_infi₂":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⨅ , » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⨅ , » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⋂ , » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⋂ , » -/\n@[simp, norm_cast]\ntheorem coe_infi₂ (f : ∀ i, κ i → LowerSet α) :\n    (↑(«expr⨅ , » \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⨅ , »\" (f i j)) :\n        Set α) =\n      «expr⋂ , » \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⋂ , »\" (f i j) :=\n  by simp_rw [coe_infi]\n#align coe_infi₂ coe_infi₂\n\n",
+ "coe_infi":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⨅ , » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⨅ , » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⋂ , » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⋂ , » -/\n@[simp, norm_cast]\ntheorem coe_infi (f : ι → LowerSet α) :\n    (↑(«expr⨅ , » \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⨅ , »\" (f i)) : Set α) =\n      «expr⋂ , » \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⋂ , »\" (f i) :=\n  by simp_rw [infᵢ, coe_Inf, mem_range, Inter_exists, Inter_Inter_eq']\n#align coe_infi coe_infi\n\n",
+ "coe_inf":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊓ » -/\n@[simp, norm_cast]\ntheorem coe_inf (s t : LowerSet α) : (↑(«expr ⊓ » s t) : Set α) = s ∩ t :=\n  rfl\n#align coe_inf coe_inf\n\n",
+ "coe_eq_univ":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n@[simp, norm_cast]\ntheorem coe_eq_univ : (s : Set α) = univ ↔ s = «expr⊤» := by simp [SetLike.ext'_iff]\n#align coe_eq_univ coe_eq_univ\n\n",
+ "coe_eq_empty":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n@[simp, norm_cast]\ntheorem coe_eq_empty : (s : Set α) = ∅ ↔ s = «expr⊥» := by simp [SetLike.ext'_iff]\n#align coe_eq_empty coe_eq_empty\n\n",
+ "coe_compl":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\n@[simp]\ntheorem coe_compl (s : LowerSet α) : (s.compl : Set α) = «expr ᶜ» s :=\n  rfl\n#align coe_compl coe_compl\n\n",
+ "coe_bot":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n@[simp, norm_cast]\ntheorem coe_bot : ((«expr⊥» : LowerSet α) : Set α) = ∅ :=\n  rfl\n#align coe_bot coe_bot\n\n",
+ "coe_Sup":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⋃ , » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⋃ , » -/\n@[simp, norm_cast]\ntheorem coe_Sup (S : Set (LowerSet α)) :\n    (↑(supₛ S) : Set α) =\n      «expr⋃ , » \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⋃ , »\" ↑s :=\n  rfl\n#align coe_Sup coe_Sup\n\n",
+ "coe_Ioi":
+ "@[simp]\ntheorem coe_Ioi (a : α) : ↑(Ioi a) = Set.Ioi a :=\n  rfl\n#align coe_Ioi coe_Ioi\n\n",
+ "coe_Inf":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⋂ , » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⋂ , » -/\n@[simp, norm_cast]\ntheorem coe_Inf (S : Set (LowerSet α)) :\n    (↑(infₛ S) : Set α) =\n      «expr⋂ , » \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⋂ , »\" ↑s :=\n  rfl\n#align coe_Inf coe_Inf\n\n",
+ "coe_Iio":
+ "@[simp]\ntheorem coe_Iio (a : α) : ↑(Iio a) = Set.Iio a :=\n  rfl\n#align coe_Iio coe_Iio\n\n",
+ "coe_Iic":
+ "@[simp]\ntheorem coe_Iic (a : α) : ↑(Iic a) = Set.Iic a :=\n  rfl\n#align coe_Iic coe_Iic\n\n",
+ "coe_Ici":
+ "@[simp]\ntheorem coe_Ici (a : α) : ↑(Ici a) = Set.Ici a :=\n  rfl\n#align coe_Ici coe_Ici\n\n",
+ "codisjoint_prod":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:177:8: unsupported: ambiguous notation -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `upper_set.prod -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:177:8: unsupported: ambiguous notation -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `upper_set.prod -/\n@[simp]\ntheorem codisjoint_prod :\n    Codisjoint (upper_set.prod s₁ t₁) (upper_set.prod s₂ t₂) ↔ Codisjoint s₁ s₂ ∨ Codisjoint t₁ t₂ := by\n  simp_rw [codisjoint_iff, prod_sup_prod, prod_eq_top]\n#align codisjoint_prod codisjoint_prod\n\n",
+ "codisjoint_coe":
+ "@[simp, norm_cast]\ntheorem codisjoint_coe : Codisjoint (s : Set α) t ↔ Disjoint s t := by\n  simp [disjoint_iff, codisjoint_iff, SetLike.ext'_iff]\n#align codisjoint_coe codisjoint_coe\n\n",
+ "carrier_eq_coe":
+ "@[simp]\ntheorem carrier_eq_coe (s : LowerSet α) : s.carrier = s :=\n  rfl\n#align carrier_eq_coe carrier_eq_coe\n\n",
+ "bot_prod_bot":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:177:8: unsupported: ambiguous notation -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `upper_set.prod -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n@[simp]\ntheorem bot_prod_bot : upper_set.prod («expr⊥» : UpperSet α) («expr⊥» : UpperSet β) = «expr⊥» :=\n  ext univ_prod_univ\n#align bot_prod_bot bot_prod_bot\n\n",
+ "bot_prod":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:177:8: unsupported: ambiguous notation -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `lower_set.prod -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n@[simp]\ntheorem bot_prod : lower_set.prod («expr⊥» : LowerSet α) t = «expr⊥» :=\n  ext empty_prod\n#align bot_prod bot_prod\n\n",
+ "bot_mem":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n#print IsLowerSet.bot_mem /-\ntheorem IsLowerSet.bot_mem (hs : IsLowerSet s) : «expr⊥» ∈ s ↔ s.nonempty :=\n  ⟨fun h => ⟨_, h⟩, fun ⟨a, ha⟩ => hs bot_le ha⟩\n#align is_lower_set.bot_mem IsLowerSet.bot_mem\n-/\n\n",
+ "bddBelow_upperClosure":
+ "#print bddBelow_upperClosure /-\n@[simp]\ntheorem bddBelow_upperClosure : BddBelow (upperClosure s : Set α) ↔ BddBelow s := by\n  simp_rw [BddBelow, lowerBounds_upperClosure]\n#align bdd_below_upper_closure bddBelow_upperClosure\n-/\n\n",
+ "bddAbove_lowerClosure":
+ "#print bddAbove_lowerClosure /-\n@[simp]\ntheorem bddAbove_lowerClosure : BddAbove (lowerClosure s : Set α) ↔ BddAbove s := by\n  simp_rw [BddAbove, upperBounds_lowerClosure]\n#align bdd_above_lower_closure bddAbove_lowerClosure\n-/\n\n",
+ "antitone_mem":
+ "#print Set.antitone_mem /-\n@[simp]\ntheorem Set.antitone_mem : Antitone (· ∈ s) ↔ IsLowerSet s :=\n  forall_swap\n#align set.antitone_mem Set.antitone_mem\n-/\n\n",
+ "Ioi_top":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n@[simp]\ntheorem Ioi_top [OrderTop α] : Ioi («expr⊤» : α) = «expr⊤» :=\n  SetLike.coe_injective Ioi_top\n#align Ioi_top Ioi_top\n\n",
+ "Ioi_le_Ici":
+ "theorem Ioi_le_Ici (a : α) : Ioi a ≤ Ici a :=\n  Ioi_subset_Ici_self\n#align Ioi_le_Ici Ioi_le_Ici\n\n",
+ "Iio_bot":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n@[simp]\ntheorem Iio_bot [OrderBot α] : Iio («expr⊥» : α) = «expr⊥» :=\n  SetLike.coe_injective Iio_bot\n#align Iio_bot Iio_bot\n\n",
+ "Iic_top":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n@[simp]\ntheorem Iic_top [OrderTop α] : Iic («expr⊤» : α) = «expr⊤» :=\n  SetLike.coe_injective Iic_top\n#align Iic_top Iic_top\n\n",
+ "Iic_prod":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:177:8: unsupported: ambiguous notation -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `lower_set.prod -/\ntheorem Iic_prod (x : α × β) : Iic x = lower_set.prod (Iic x.1) (Iic x.2) :=\n  rfl\n#align Iic_prod Iic_prod\n\n",
+ "Iic_infi₂":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⨅ , » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⨅ , » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⨅ , » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⨅ , » -/\n@[simp]\ntheorem Iic_infi₂ (f : ∀ i, κ i → α) :\n    Iic («expr⨅ , » \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⨅ , »\" (f i j)) =\n      «expr⨅ , » \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⨅ , »\" (Iic (f i j)) :=\n  by simp_rw [Iic_infi]\n#align Iic_infi₂ Iic_infi₂\n\n",
+ "Iic_infi":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⨅ , » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⨅ , » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⨅ , » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⨅ , » -/\n@[simp]\ntheorem Iic_infi (f : ι → α) :\n    Iic («expr⨅ , » \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⨅ , »\" (f i)) =\n      «expr⨅ , » \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⨅ , »\" (Iic (f i)) :=\n  SetLike.ext fun c => by simp only [mem_Iic_iff, mem_infi_iff, le_infᵢ_iff]\n#align Iic_infi Iic_infi\n\n",
+ "Iic_inf":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊓ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊓ » -/\n@[simp]\ntheorem Iic_inf [SemilatticeInf α] (a b : α) : Iic («expr ⊓ » a b) = «expr ⊓ » (Iic a) (Iic b) :=\n  SetLike.coe_injective Iic_inter_Iic.symm\n#align Iic_inf Iic_inf\n\n",
+ "Iic_Inf":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⨅ , » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⨅ , » -/\n@[simp]\ntheorem Iic_Inf (S : Set α) :\n    Iic (infₛ S) =\n      «expr⨅ , » \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⨅ , »\" (Iic a) :=\n  SetLike.ext fun c => by simp only [mem_Iic_iff, mem_infi₂_iff, le_infₛ_iff]\n#align Iic_Inf Iic_Inf\n\n",
+ "Ici_supr₂":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⨆ , » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⨆ , » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⨆ , » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⨆ , » -/\n@[simp]\ntheorem Ici_supr₂ (f : ∀ i, κ i → α) :\n    Ici («expr⨆ , » \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⨆ , »\" (f i j)) =\n      «expr⨆ , » \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⨆ , »\" (Ici (f i j)) :=\n  by simp_rw [Ici_supr]\n#align Ici_supr₂ Ici_supr₂\n\n",
+ "Ici_supr":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⨆ , » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⨆ , » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⨆ , » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⨆ , » -/\n@[simp]\ntheorem Ici_supr (f : ι → α) :\n    Ici («expr⨆ , » \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⨆ , »\" (f i)) =\n      «expr⨆ , » \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⨆ , »\" (Ici (f i)) :=\n  SetLike.ext fun c => by simp only [mem_Ici_iff, mem_supr_iff, supᵢ_le_iff]\n#align Ici_supr Ici_supr\n\n",
+ "Ici_sup":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊔ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊔ » -/\n@[simp]\ntheorem Ici_sup [SemilatticeSup α] (a b : α) : Ici («expr ⊔ » a b) = «expr ⊔ » (Ici a) (Ici b) :=\n  ext Ici_inter_Ici.symm\n#align Ici_sup Ici_sup\n\n",
+ "Ici_prod_Ici":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:177:8: unsupported: ambiguous notation -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `lower_set.prod -/\n@[simp]\ntheorem Ici_prod_Ici (a : α) (b : β) : lower_set.prod (Iic a) (Iic b) = Iic (a, b) :=\n  rfl\n#align Ici_prod_Ici Ici_prod_Ici\n\n",
+ "Ici_prod":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:177:8: unsupported: ambiguous notation -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `upper_set.prod -/\ntheorem Ici_prod (x : α × β) : Ici x = upper_set.prod (Ici x.1) (Ici x.2) :=\n  rfl\n#align Ici_prod Ici_prod\n\n",
+ "Ici_le_Ioi":
+ "theorem Ici_le_Ioi (a : α) : Ici a ≤ Ioi a :=\n  Ioi_subset_Ici_self\n#align Ici_le_Ioi Ici_le_Ioi\n\n",
+ "Ici_bot":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n@[simp]\ntheorem Ici_bot [OrderBot α] : Ici («expr⊥» : α) = «expr⊥» :=\n  SetLike.coe_injective Ici_bot\n#align Ici_bot Ici_bot\n\n",
+ "Ici_Sup":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⨆ , » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⨆ , » -/\n@[simp]\ntheorem Ici_Sup (S : Set α) :\n    Ici (supₛ S) =\n      «expr⨆ , » \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⨆ , »\" (Ici a) :=\n  SetLike.ext fun c => by simp only [mem_Ici_iff, mem_supr_iff, supₛ_le_iff]\n#align Ici_Sup Ici_Sup\n\n"}

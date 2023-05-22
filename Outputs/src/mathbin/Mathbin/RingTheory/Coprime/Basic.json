@@ -31,7 +31,7 @@
  "of_add_mul_left_left":
  "#print IsCoprime.of_add_mul_left_left /-\ntheorem IsCoprime.of_add_mul_left_left (h : IsCoprime (x + y * z) y) : IsCoprime x y :=\n  let ⟨a, b, H⟩ := h\n  ⟨a, a * z + b, by\n    simpa only [add_mul, mul_add, add_assoc, add_comm, add_left_comm, mul_assoc, mul_comm, mul_left_comm] using H⟩\n#align is_coprime.of_add_mul_left_left IsCoprime.of_add_mul_left_left\n-/\n\n",
  "not_isCoprime_zero_zero":
- "#print not_isCoprime_zero_zero /-\ntheorem not_isCoprime_zero_zero [nontrivial R] : ¬IsCoprime (0 : R) 0 :=\n  mt isCoprime_zero_right.mp not_isUnit_zero\n#align not_coprime_zero_zero not_isCoprime_zero_zero\n-/\n\n",
+ "#print not_isCoprime_zero_zero /-\ntheorem not_isCoprime_zero_zero [Nontrivial R] : ¬IsCoprime (0 : R) 0 :=\n  mt isCoprime_zero_right.mp not_isUnit_zero\n#align not_coprime_zero_zero not_isCoprime_zero_zero\n-/\n\n",
  "neg_right_iff":
  "theorem neg_right_iff (x y : R) : IsCoprime x (-y) ↔ IsCoprime x y :=\n  ⟨fun h => neg_neg y ▸ h.neg_right, neg_right⟩\n#align neg_right_iff neg_right_iff\n\n",
  "neg_right":
@@ -45,7 +45,7 @@
  "neg_left":
  "theorem neg_left {x y : R} (h : IsCoprime x y) : IsCoprime (-x) y :=\n  by\n  obtain ⟨a, b, h⟩ := h\n  use -a, b\n  rwa [neg_mul_neg]\n#align neg_left neg_left\n\n",
  "ne_zero":
- "#print IsCoprime.ne_zero /-\n/-- If a 2-vector `p` satisfies `is_coprime (p 0) (p 1)`, then `p ≠ 0`. -/\ntheorem IsCoprime.ne_zero [nontrivial R] {p : fin 2 → R} (h : IsCoprime (p 0) (p 1)) : p ≠ 0 :=\n  by\n  rintro rfl\n  exact not_isCoprime_zero_zero h\n#align is_coprime.ne_zero IsCoprime.ne_zero\n-/\n\n",
+ "#print IsCoprime.ne_zero /-\n/-- If a 2-vector `p` satisfies `is_coprime (p 0) (p 1)`, then `p ≠ 0`. -/\ntheorem IsCoprime.ne_zero [Nontrivial R] {p : Fin 2 → R} (h : IsCoprime (p 0) (p 1)) : p ≠ 0 :=\n  by\n  rintro rfl\n  exact not_isCoprime_zero_zero h\n#align is_coprime.ne_zero IsCoprime.ne_zero\n-/\n\n",
  "mul_right_iff":
  "#print IsCoprime.mul_right_iff /-\ntheorem IsCoprime.mul_right_iff : IsCoprime x (y * z) ↔ IsCoprime x y ∧ IsCoprime x z := by\n  rw [isCoprime_comm, IsCoprime.mul_left_iff, isCoprime_comm, @isCoprime_comm _ _ z]\n#align is_coprime.mul_right_iff IsCoprime.mul_right_iff\n-/\n\n",
  "mul_right":
@@ -75,19 +75,19 @@
  "map":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →+* » -/\n#print IsCoprime.map /-\ntheorem IsCoprime.map (H : IsCoprime x y) {S : Type v} [CommSemiring S] (f : «expr →+* » R S) : IsCoprime (f x) (f y) :=\n  let ⟨a, b, h⟩ := H\n  ⟨f a, f b, by rw [← f.map_mul, ← f.map_mul, ← f.map_add, h, f.map_one]⟩\n#align is_coprime.map IsCoprime.map\n-/\n\n",
  "isUnit_of_dvd'":
- "#print IsCoprime.isUnit_of_dvd' /-\ntheorem IsCoprime.isUnit_of_dvd' {a b x : R} (h : IsCoprime a b) (ha : x ∣ a) (hb : x ∣ b) : is_unit x :=\n  (h.of_coprime_of_dvd_left ha).is_unit_of_dvd hb\n#align is_coprime.is_unit_of_dvd' IsCoprime.isUnit_of_dvd'\n-/\n\n",
+ "#print IsCoprime.isUnit_of_dvd' /-\ntheorem IsCoprime.isUnit_of_dvd' {a b x : R} (h : IsCoprime a b) (ha : x ∣ a) (hb : x ∣ b) : IsUnit x :=\n  (h.of_coprime_of_dvd_left ha).is_unit_of_dvd hb\n#align is_coprime.is_unit_of_dvd' IsCoprime.isUnit_of_dvd'\n-/\n\n",
  "isUnit_of_dvd":
- "#print IsCoprime.isUnit_of_dvd /-\ntheorem IsCoprime.isUnit_of_dvd (H : IsCoprime x y) (d : x ∣ y) : is_unit x :=\n  let ⟨k, hk⟩ := d\n  isCoprime_self.1 <| IsCoprime.of_mul_right_left <| show IsCoprime x (x * k) from hk ▸ H\n#align is_coprime.is_unit_of_dvd IsCoprime.isUnit_of_dvd\n-/\n\n",
+ "#print IsCoprime.isUnit_of_dvd /-\ntheorem IsCoprime.isUnit_of_dvd (H : IsCoprime x y) (d : x ∣ y) : IsUnit x :=\n  let ⟨k, hk⟩ := d\n  isCoprime_self.1 <| IsCoprime.of_mul_right_left <| show IsCoprime x (x * k) from hk ▸ H\n#align is_coprime.is_unit_of_dvd IsCoprime.isUnit_of_dvd\n-/\n\n",
  "isCoprime_zero_right":
- "#print isCoprime_zero_right /-\ntheorem isCoprime_zero_right : IsCoprime x 0 ↔ is_unit x :=\n  isCoprime_comm.trans isCoprime_zero_left\n#align is_coprime_zero_right isCoprime_zero_right\n-/\n\n",
+ "#print isCoprime_zero_right /-\ntheorem isCoprime_zero_right : IsCoprime x 0 ↔ IsUnit x :=\n  isCoprime_comm.trans isCoprime_zero_left\n#align is_coprime_zero_right isCoprime_zero_right\n-/\n\n",
  "isCoprime_zero_left":
- "#print isCoprime_zero_left /-\ntheorem isCoprime_zero_left : IsCoprime 0 x ↔ is_unit x :=\n  ⟨fun ⟨a, b, H⟩ => isUnit_of_mul_eq_one x b <| by rwa [mul_zero, zero_add, mul_comm] at H, fun H =>\n    let ⟨b, hb⟩ := isUnit_iff_exists_inv'.1 H\n    ⟨1, b, by rwa [one_mul, zero_add]⟩⟩\n#align is_coprime_zero_left isCoprime_zero_left\n-/\n\n",
+ "#print isCoprime_zero_left /-\ntheorem isCoprime_zero_left : IsCoprime 0 x ↔ IsUnit x :=\n  ⟨fun ⟨a, b, H⟩ => isUnit_of_mul_eq_one x b <| by rwa [MulZeroClass.mul_zero, zero_add, mul_comm] at H, fun H =>\n    let ⟨b, hb⟩ := isUnit_iff_exists_inv'.1 H\n    ⟨1, b, by rwa [one_mul, zero_add]⟩⟩\n#align is_coprime_zero_left isCoprime_zero_left\n-/\n\n",
  "isCoprime_self":
- "#print isCoprime_self /-\ntheorem isCoprime_self : IsCoprime x x ↔ is_unit x :=\n  ⟨fun ⟨a, b, h⟩ => isUnit_of_mul_eq_one x (a + b) <| by rwa [mul_comm, add_mul], fun h =>\n    let ⟨b, hb⟩ := isUnit_iff_exists_inv'.1 h\n    ⟨b, 0, by rwa [zero_mul, add_zero]⟩⟩\n#align is_coprime_self isCoprime_self\n-/\n\n",
+ "#print isCoprime_self /-\ntheorem isCoprime_self : IsCoprime x x ↔ IsUnit x :=\n  ⟨fun ⟨a, b, h⟩ => isUnit_of_mul_eq_one x (a + b) <| by rwa [mul_comm, add_mul], fun h =>\n    let ⟨b, hb⟩ := isUnit_iff_exists_inv'.1 h\n    ⟨b, 0, by rwa [MulZeroClass.zero_mul, add_zero]⟩⟩\n#align is_coprime_self isCoprime_self\n-/\n\n",
  "isCoprime_one_right":
- "#print isCoprime_one_right /-\ntheorem isCoprime_one_right : IsCoprime x 1 :=\n  ⟨0, 1, by rw [one_mul, zero_mul, zero_add]⟩\n#align is_coprime_one_right isCoprime_one_right\n-/\n\n",
+ "#print isCoprime_one_right /-\ntheorem isCoprime_one_right : IsCoprime x 1 :=\n  ⟨0, 1, by rw [one_mul, MulZeroClass.zero_mul, zero_add]⟩\n#align is_coprime_one_right isCoprime_one_right\n-/\n\n",
  "isCoprime_one_left":
- "#print isCoprime_one_left /-\ntheorem isCoprime_one_left : IsCoprime 1 x :=\n  ⟨1, 0, by rw [one_mul, zero_mul, add_zero]⟩\n#align is_coprime_one_left isCoprime_one_left\n-/\n\n",
+ "#print isCoprime_one_left /-\ntheorem isCoprime_one_left : IsCoprime 1 x :=\n  ⟨1, 0, by rw [one_mul, MulZeroClass.zero_mul, add_zero]⟩\n#align is_coprime_one_left isCoprime_one_left\n-/\n\n",
  "isCoprime_mul_unit_right_right":
  "#print isCoprime_mul_unit_right_right /-\ntheorem isCoprime_mul_unit_right_right : IsCoprime y (z * x) ↔ IsCoprime y z :=\n  mul_comm x z ▸ isCoprime_mul_unit_left_right hu y z\n#align is_coprime_mul_unit_right_right isCoprime_mul_unit_right_right\n-/\n\n",
  "isCoprime_mul_unit_right_left":

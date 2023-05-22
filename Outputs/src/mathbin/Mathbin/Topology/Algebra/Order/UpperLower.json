@@ -1,0 +1,8 @@
+{"upperClosure":
+ "#print IsOpen.upperClosure /-\nprotected theorem IsOpen.upperClosure : IsOpen s → IsOpen (upperClosure s : Set α) :=\n  has_upper_lower_closure.is_open_upper_closure _\n#align is_open.upper_closure IsOpen.upperClosure\n-/\n\n",
+ "lowerClosure":
+ "#print IsOpen.lowerClosure /-\nprotected theorem IsOpen.lowerClosure : IsOpen s → IsOpen (lowerClosure s : Set α) :=\n  has_upper_lower_closure.is_open_lower_closure _\n#align is_open.lower_closure IsOpen.lowerClosure\n-/\n\n",
+ "interior":
+ "#print Set.OrdConnected.interior /-\nprotected theorem Set.OrdConnected.interior (h : s.ord_connected) : (interior s).ord_connected :=\n  by\n  rw [← h.upper_closure_inter_lower_closure, interior_inter]\n  exact (upperClosure s).upper.interior.ord_connected.inter (lowerClosure s).lower.interior.ord_connected\n#align set.ord_connected.interior Set.OrdConnected.interior\n-/\n\n",
+ "closure":
+ "#print IsLowerSet.closure /-\nprotected theorem IsLowerSet.closure : IsLowerSet s → IsLowerSet (closure s) :=\n  has_upper_lower_closure.is_lower_set_closure _\n#align is_lower_set.closure IsLowerSet.closure\n-/\n\n"}

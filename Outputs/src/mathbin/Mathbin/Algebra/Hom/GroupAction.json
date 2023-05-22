@@ -31,11 +31,11 @@
  "ext_ring":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →+[ ] » -/\n@[ext]\ntheorem ext_ring {f g : «expr →+[ ] » R R M'} (h : f 1 = g 1) : f = g :=\n  by\n  ext x\n  rw [← mul_one x, ← smul_eq_mul R, f.map_smul, g.map_smul, h]\n#align ext_ring ext_ring\n\n",
  "ext_iff":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →+*[ ] » -/\ntheorem ext_iff {f g : «expr →+*[ ] » R M S} : f = g ↔ ∀ x, f x = g x :=\n  fun_like.ext_iff\n#align ext_iff ext_iff\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →+*[ ] » -/\ntheorem ext_iff {f g : «expr →+*[ ] » R M S} : f = g ↔ ∀ x, f x = g x :=\n  FunLike.ext_iff\n#align ext_iff ext_iff\n\n",
  "ext":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →+*[ ] » -/\n@[ext]\ntheorem ext : ∀ {f g : «expr →+*[ ] » R M S}, (∀ x, f x = g x) → f = g :=\n  fun_like.ext\n#align ext ext\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →+*[ ] » -/\n@[ext]\ntheorem ext : ∀ {f g : «expr →+*[ ] » R M S}, (∀ x, f x = g x) → f = g :=\n  FunLike.ext\n#align ext ext\n\n",
  "congr_fun":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →+[ ] » -/\n#print congr_fun /-\nprotected theorem congr_fun {f g : «expr →+[ ] » A M B} (h : f = g) (x : A) : f x = g x :=\n  fun_like.congr_fun h _\n#align congr_fun congr_fun\n-/\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →+[ ] » -/\n#print congr_fun /-\nprotected theorem congr_fun {f g : «expr →+[ ] » A M B} (h : f = g) (x : A) : f x = g x :=\n  FunLike.congr_fun h _\n#align congr_fun congr_fun\n-/\n\n",
  "comp_id":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →+*[ ] » -/\n@[simp]\ntheorem comp_id (f : «expr →+*[ ] » R M S) : f.comp (MulSemiringActionHom.id M) = f :=\n  ext fun x => by rw [comp_apply, id_apply]\n#align comp_id comp_id\n\n",
  "comp_apply":

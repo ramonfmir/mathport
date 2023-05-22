@@ -3,9 +3,9 @@
  "succ_coe_nat_pos":
  "@[simp]\ntheorem succ_coe_nat_pos (n : ℕ) : 0 < (n : ℤ) + 1 :=\n  lt_add_one_iff.mpr (by simp)\n#align succ_coe_nat_pos succ_coe_nat_pos\n\n",
  "strict_mono_on_nat_abs":
- "theorem strict_mono_on_nat_abs : strict_mono_on natAbs (Ici 0) := fun a ha b hb hab =>\n  natAbs_lt_natAbs_of_nonneg_of_lt ha hab\n#align strict_mono_on_nat_abs strict_mono_on_nat_abs\n\n",
+ "theorem strict_mono_on_nat_abs : StrictMonoOn natAbs (Ici 0) := fun a ha b hb hab =>\n  natAbs_lt_natAbs_of_nonneg_of_lt ha hab\n#align strict_mono_on_nat_abs strict_mono_on_nat_abs\n\n",
  "strict_anti_on_nat_abs":
- "theorem strict_anti_on_nat_abs : strict_anti_on natAbs (Iic 0) := fun a ha b hb hab => by\n  simpa [Int.natAbs_neg] using nat_abs_lt_nat_abs_of_nonneg_of_lt (right.nonneg_neg_iff.mpr hb) (neg_lt_neg_iff.mpr hab)\n#align strict_anti_on_nat_abs strict_anti_on_nat_abs\n\n",
+ "theorem strict_anti_on_nat_abs : StrictAntiOn natAbs (Iic 0) := fun a ha b hb hab => by\n  simpa [Int.natAbs_neg] using nat_abs_lt_nat_abs_of_nonneg_of_lt (right.nonneg_neg_iff.mpr hb) (neg_lt_neg_iff.mpr hab)\n#align strict_anti_on_nat_abs strict_anti_on_nat_abs\n\n",
  "nat_abs_lt_iff_sq_lt":
  "theorem nat_abs_lt_iff_sq_lt {a b : ℤ} : a.nat_abs < b.nat_abs ↔ a ^ 2 < b ^ 2 :=\n  by\n  rw [sq, sq]\n  exact nat_abs_lt_iff_mul_self_lt\n#align nat_abs_lt_iff_sq_lt nat_abs_lt_iff_sq_lt\n\n",
  "nat_abs_le_iff_sq_le":

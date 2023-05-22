@@ -1,76 +1,90 @@
 {"zpow":
- "theorem zpow {x : R} (hx : is_self_adjoint x) (n : ℤ) : is_self_adjoint (x ^ n) := by\n  simp only [is_self_adjoint_iff, star_zpow₀, hx.star_eq]\n#align zpow zpow\n\n",
+ "theorem zpow {x : R} (hx : IsSelfAdjoint x) (n : ℤ) : IsSelfAdjoint (x ^ n) := by\n  simp only [isSelfAdjoint_iff, star_zpow₀, hx.star_eq]\n#align zpow zpow\n\n",
  "sub":
- "theorem sub {x y : R} (hx : is_self_adjoint x) (hy : is_self_adjoint y) : is_self_adjoint (x - y) := by\n  simp only [is_self_adjoint_iff, star_sub, hx.star_eq, hy.star_eq]\n#align sub sub\n\n",
+ "theorem sub {x y : R} (hx : IsSelfAdjoint x) (hy : IsSelfAdjoint y) : IsSelfAdjoint (x - y) := by\n  simp only [isSelfAdjoint_iff, star_sub, hx.star_eq, hy.star_eq]\n#align sub sub\n\n",
  "star_mul_self":
- "@[simp]\ntheorem star_mul_self [semigroup R] [StarSemigroup R] (x : R) : is_self_adjoint (star x * x) := by\n  simp only [is_self_adjoint, star_mul, star_star]\n#align star_mul_self star_mul_self\n\n",
+ "@[simp]\ntheorem star_mul_self [Semigroup R] [StarSemigroup R] (x : R) : IsSelfAdjoint (star x * x) := by\n  simp only [IsSelfAdjoint, star_mul, star_star]\n#align star_mul_self star_mul_self\n\n",
  "star_iff":
- "@[simp]\ntheorem star_iff [InvolutiveStar R] {x : R} : is_self_adjoint (star x) ↔ is_self_adjoint x := by\n  simpa only [is_self_adjoint, star_star] using eq_comm\n#align star_iff star_iff\n\n",
+ "@[simp]\ntheorem star_iff [InvolutiveStar R] {x : R} : IsSelfAdjoint (star x) ↔ IsSelfAdjoint x := by\n  simpa only [IsSelfAdjoint, star_star] using eq_comm\n#align star_iff star_iff\n\n",
  "star_hom_apply":
- "/-- Functions in a `star_hom_class` preserve self-adjoint elements. -/\ntheorem star_hom_apply {F R S : Type _} [Star R] [Star S] [StarHomClass F R S] {x : R} (hx : is_self_adjoint x)\n    (f : F) : is_self_adjoint (f x) :=\n  show star (f x) = f x from map_star f x ▸ congr_arg f hx\n#align star_hom_apply star_hom_apply\n\n",
+ "/-- Functions in a `star_hom_class` preserve self-adjoint elements. -/\ntheorem star_hom_apply {F R S : Type _} [Star R] [Star S] [StarHomClass F R S] {x : R} (hx : IsSelfAdjoint x) (f : F) :\n    IsSelfAdjoint (f x) :=\n  show star (f x) = f x from map_star f x ▸ congr_arg f hx\n#align star_hom_apply star_hom_apply\n\n",
  "star_eq":
- "theorem star_eq [Star R] {x : R} (hx : is_self_adjoint x) : star x = x :=\n  hx\n#align star_eq star_eq\n\n",
+ "theorem star_eq [Star R] {x : R} (hx : IsSelfAdjoint x) : star x = x :=\n  hx\n#align star_eq star_eq\n\n",
  "star_comm_self'":
- "/-\nCopyright (c) 2021 Frédéric Dupuis. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Frédéric Dupuis\n-/\ntheorem star_comm_self' [Mul R] [Star R] (x : R) [is_star_normal x] : star x * x = x * star x :=\n  is_star_normal.star_comm_self\n#align star_comm_self' star_comm_self'\n\n",
+ "#print star_comm_self' /-\n/-\nCopyright (c) 2021 Frédéric Dupuis. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Frédéric Dupuis\n-/\ntheorem star_comm_self' [Mul R] [Star R] (x : R) [IsStarNormal x] : star x * x = x * star x :=\n  is_star_normal.star_comm_self\n#align star_comm_self' star_comm_self'\n-/\n\n",
  "star_coe_eq":
- "@[simp, norm_cast]\ntheorem star_coe_eq {x : skew_adjoint R} : star (x : R) = -x :=\n  x.prop\n#align star_coe_eq star_coe_eq\n\n",
+ "@[simp, norm_cast]\ntheorem star_coe_eq {x : skewAdjoint R} : star (x : R) = -x :=\n  x.prop\n#align star_coe_eq star_coe_eq\n\n",
+ "smul_mem_skewAdjoint":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n#print IsSelfAdjoint.smul_mem_skewAdjoint /-\n/-- Scalar multiplication of a self-adjoint element by a skew-adjoint element produces a\nskew-adjoint element. -/\ntheorem IsSelfAdjoint.smul_mem_skewAdjoint [Ring R] [AddCommGroup A] [Module R A] [StarAddMonoid R] [StarAddMonoid A]\n    [StarModule R A] {r : R} (hr : r ∈ skewAdjoint R) {a : A} (ha : IsSelfAdjoint a) : «expr • » r a ∈ skewAdjoint A :=\n  (star_smul _ _).trans <| (congr_arg₂ _ hr ha).trans <| neg_smul _ _\n#align is_self_adjoint.smul_mem_skew_adjoint IsSelfAdjoint.smul_mem_skewAdjoint\n-/\n\n",
  "smul_mem":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n#print smul_mem /-\ntheorem smul_mem [monoid R] [DistribMulAction R A] [StarModule R A] (r : R) {x : A} (h : x ∈ skew_adjoint A) :\n    «expr • » r x ∈ skew_adjoint A := by rw [mem_iff, star_smul, star_trivial, mem_iff.mp h, smul_neg r]\n#align smul_mem smul_mem\n-/\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\ntheorem smul_mem [Monoid R] [DistribMulAction R A] [StarModule R A] (r : R) {x : A} (h : x ∈ skewAdjoint A) :\n    «expr • » r x ∈ skewAdjoint A := by rw [mem_iff, star_smul, star_trivial, mem_iff.mp h, smul_neg r]\n#align smul_mem smul_mem\n\n",
  "smul":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\ntheorem smul [SMul R A] [StarModule R A] (r : R) {x : A} (hx : is_self_adjoint x) : is_self_adjoint («expr • » r x) :=\n  by simp only [is_self_adjoint_iff, star_smul, star_trivial, hx.star_eq]\n#align smul smul\n\n",
- "rat_cast_mem":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℚ -/\ntheorem rat_cast_mem : ∀ x : exprℚ, is_self_adjoint (x : R)\n  | ⟨a, b, h1, h2⟩ => by rw [is_self_adjoint, Rat.cast_mk', star_mul', star_inv', star_natCast, star_intCast]\n#align rat_cast_mem rat_cast_mem\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\ntheorem smul {r : R} (hr : IsSelfAdjoint r) {x : A} (hx : IsSelfAdjoint x) : IsSelfAdjoint («expr • » r x) := by\n  simp only [isSelfAdjoint_iff, star_smul, hr.star_eq, hx.star_eq]\n#align smul smul\n\n",
  "pow":
- "theorem pow {x : R} (hx : is_self_adjoint x) (n : ℕ) : is_self_adjoint (x ^ n) := by\n  simp only [is_self_adjoint_iff, star_pow, hx.star_eq]\n#align pow pow\n\n",
+ "theorem pow {x : R} (hx : IsSelfAdjoint x) (n : ℕ) : IsSelfAdjoint (x ^ n) := by\n  simp only [isSelfAdjoint_iff, star_pow, hx.star_eq]\n#align pow pow\n\n",
  "neg":
- "theorem neg {x : R} (hx : is_self_adjoint x) : is_self_adjoint (-x) := by\n  simp only [is_self_adjoint_iff, star_neg, hx.star_eq]\n#align neg neg\n\n",
+ "theorem neg {x : R} (hx : IsSelfAdjoint x) : IsSelfAdjoint (-x) := by\n  simp only [isSelfAdjoint_iff, star_neg, hx.star_eq]\n#align neg neg\n\n",
  "mul_star_self":
- "@[simp]\ntheorem mul_star_self [semigroup R] [StarSemigroup R] (x : R) : is_self_adjoint (x * star x) := by\n  simpa only [star_star] using star_mul_self (star x)\n#align mul_star_self mul_star_self\n\n",
+ "@[simp]\ntheorem mul_star_self [Semigroup R] [StarSemigroup R] (x : R) : IsSelfAdjoint (x * star x) := by\n  simpa only [star_star] using star_mul_self (star x)\n#align mul_star_self mul_star_self\n\n",
  "mul":
- "theorem mul {x y : R} (hx : is_self_adjoint x) (hy : is_self_adjoint y) : is_self_adjoint (x * y) := by\n  simp only [is_self_adjoint_iff, star_mul', hx.star_eq, hy.star_eq]\n#align mul mul\n\n",
+ "theorem mul {x y : R} (hx : IsSelfAdjoint x) (hy : IsSelfAdjoint y) : IsSelfAdjoint (x * y) := by\n  simp only [isSelfAdjoint_iff, star_mul', hx.star_eq, hy.star_eq]\n#align mul mul\n\n",
  "mem_iff":
- "theorem mem_iff {x : R} : x ∈ skew_adjoint R ↔ star x = -x :=\n  by\n  rw [← add_subgroup.mem_carrier]\n  exact iff.rfl\n#align mem_iff mem_iff\n\n",
+ "theorem mem_iff {x : R} : x ∈ skewAdjoint R ↔ star x = -x :=\n  by\n  rw [← AddSubgroup.mem_carrier]\n  exact iff.rfl\n#align mem_iff mem_iff\n\n",
  "is_star_normal_of_mem":
- "theorem is_star_normal_of_mem {x : R} (hx : x ∈ skew_adjoint R) : is_star_normal x :=\n  ⟨by\n    simp only [mem_iff] at hx\n    simp only [hx, Commute.neg_left]⟩\n#align is_star_normal_of_mem is_star_normal_of_mem\n\n",
- "is_star_normal":
- "theorem is_star_normal {x : R} (hx : is_self_adjoint x) : is_star_normal x :=\n  ⟨by simp only [hx.star_eq]⟩\n#align is_star_normal is_star_normal\n\n",
+ "theorem is_star_normal_of_mem {x : R} (hx : x ∈ skewAdjoint R) : IsStarNormal x :=\n  ⟨by\n    simp only [mem_iff] at hx\n    simp only [hx, Commute.neg_left]⟩\n#align is_star_normal_of_mem is_star_normal_of_mem\n\n",
  "is_self_adjoint_zero":
- "theorem _root_.is_self_adjoint_zero : is_self_adjoint (0 : R) :=\n  star_zero R\n#align is_self_adjoint_zero is_self_adjoint_zero\n\n",
+ "#print isSelfAdjoint_zero /-\ntheorem isSelfAdjoint_zero : IsSelfAdjoint (0 : R) :=\n  star_zero R\n#align is_self_adjoint_zero isSelfAdjoint_zero\n-/\n\n",
+ "is_self_adjoint_star_add_self":
+ "#print isSelfAdjoint_star_add_self /-\ntheorem isSelfAdjoint_star_add_self (x : R) : IsSelfAdjoint (star x + x) := by\n  simp only [isSelfAdjoint_iff, add_comm, star_add, star_star]\n#align is_self_adjoint_star_add_self isSelfAdjoint_star_add_self\n-/\n\n",
+ "is_self_adjoint_rat_cast":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℚ -/\n#print isSelfAdjoint_ratCast /-\ntheorem isSelfAdjoint_ratCast (x : exprℚ) : IsSelfAdjoint (x : R) :=\n  star_ratCast _\n#align is_self_adjoint_rat_cast isSelfAdjoint_ratCast\n-/\n\n",
  "is_self_adjoint_one":
- "theorem _root_.is_self_adjoint_one : is_self_adjoint (1 : R) :=\n  star_one R\n#align is_self_adjoint_one is_self_adjoint_one\n\n",
+ "#print isSelfAdjoint_one /-\ntheorem isSelfAdjoint_one : IsSelfAdjoint (1 : R) :=\n  star_one R\n#align is_self_adjoint_one isSelfAdjoint_one\n-/\n\n",
+ "is_self_adjoint_nat_cast":
+ "#print isSelfAdjoint_natCast /-\n@[simp]\ntheorem isSelfAdjoint_natCast (n : ℕ) : IsSelfAdjoint (n : R) :=\n  star_natCast _\n#align is_self_adjoint_nat_cast isSelfAdjoint_natCast\n-/\n\n",
+ "is_self_adjoint_int_cast":
+ "#print isSelfAdjoint_intCast /-\n@[simp]\ntheorem isSelfAdjoint_intCast (z : ℤ) : IsSelfAdjoint (z : R) :=\n  star_intCast _\n#align is_self_adjoint_int_cast isSelfAdjoint_intCast\n-/\n\n",
  "is_self_adjoint_iff":
- "theorem _root_.is_self_adjoint_iff [Star R] {x : R} : is_self_adjoint x ↔ star x = x :=\n  iff.rfl\n#align is_self_adjoint_iff is_self_adjoint_iff\n\n",
+ "#print isSelfAdjoint_iff /-\ntheorem isSelfAdjoint_iff [Star R] {x : R} : IsSelfAdjoint x ↔ star x = x :=\n  iff.rfl\n#align is_self_adjoint_iff isSelfAdjoint_iff\n-/\n\n",
+ "is_self_adjoint_add_star_self":
+ "#print isSelfAdjoint_add_star_self /-\ntheorem isSelfAdjoint_add_star_self (x : R) : IsSelfAdjoint (x + star x) := by\n  simp only [isSelfAdjoint_iff, add_comm, star_add, star_star]\n#align is_self_adjoint_add_star_self isSelfAdjoint_add_star_self\n-/\n\n",
+ "isSelfAdjoint_smul_of_mem_skewAdjoint":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n#print isSelfAdjoint_smul_of_mem_skewAdjoint /-\n/-- Scalar multiplication of a skew-adjoint element by a skew-adjoint element produces a\nself-adjoint element. -/\ntheorem isSelfAdjoint_smul_of_mem_skewAdjoint [Ring R] [AddCommGroup A] [Module R A] [StarAddMonoid R] [StarAddMonoid A]\n    [StarModule R A] {r : R} (hr : r ∈ skewAdjoint R) {a : A} (ha : a ∈ skewAdjoint A) :\n    IsSelfAdjoint («expr • » r a) :=\n  (star_smul _ _).trans <| (congr_arg₂ _ hr ha).trans <| neg_smul_neg _ _\n#align is_self_adjoint_smul_of_mem_skew_adjoint isSelfAdjoint_smul_of_mem_skewAdjoint\n-/\n\n",
  "inv":
- "theorem inv {x : R} (hx : is_self_adjoint x) : is_self_adjoint x⁻¹ := by\n  simp only [is_self_adjoint_iff, star_inv', hx.star_eq]\n#align inv inv\n\n",
+ "theorem inv {x : R} (hx : IsSelfAdjoint x) : IsSelfAdjoint x⁻¹ := by\n  simp only [isSelfAdjoint_iff, star_inv', hx.star_eq]\n#align inv inv\n\n",
  "div":
- "theorem div {x y : R} (hx : is_self_adjoint x) (hy : is_self_adjoint y) : is_self_adjoint (x / y) := by\n  simp only [is_self_adjoint_iff, star_div', hx.star_eq, hy.star_eq]\n#align div div\n\n",
+ "theorem div {x y : R} (hx : IsSelfAdjoint x) (hy : IsSelfAdjoint y) : IsSelfAdjoint (x / y) := by\n  simp only [isSelfAdjoint_iff, star_div', hx.star_eq, hy.star_eq]\n#align div div\n\n",
  "conjugate'":
- "theorem conjugate' {x : R} (hx : x ∈ skew_adjoint R) (z : R) : star z * x * z ∈ skew_adjoint R := by\n  simp only [mem_iff, star_mul, star_star, mem_iff.mp hx, neg_mul, mul_neg, mul_assoc]\n#align conjugate' conjugate'\n\n",
+ "theorem conjugate' {x : R} (hx : x ∈ skewAdjoint R) (z : R) : star z * x * z ∈ skewAdjoint R := by\n  simp only [mem_iff, star_mul, star_star, mem_iff.mp hx, neg_mul, mul_neg, mul_assoc]\n#align conjugate' conjugate'\n\n",
  "conjugate":
- "theorem conjugate {x : R} (hx : x ∈ skew_adjoint R) (z : R) : z * x * star z ∈ skew_adjoint R := by\n  simp only [mem_iff, star_mul, star_star, mem_iff.mp hx, neg_mul, mul_neg, mul_assoc]\n#align conjugate conjugate\n\n",
+ "theorem conjugate {x : R} (hx : x ∈ skewAdjoint R) (z : R) : z * x * star z ∈ skewAdjoint R := by\n  simp only [mem_iff, star_mul, star_star, mem_iff.mp hx, neg_mul, mul_neg, mul_assoc]\n#align conjugate conjugate\n\n",
  "coe_zpow":
- "@[simp, norm_cast]\ntheorem coe_zpow (x : self_adjoint R) (z : ℤ) : ↑(x ^ z) = (x : R) ^ z :=\n  rfl\n#align coe_zpow coe_zpow\n\n",
+ "@[simp, norm_cast]\ntheorem coe_zpow (x : selfAdjoint R) (z : ℤ) : ↑(x ^ z) = (x : R) ^ z :=\n  rfl\n#align coe_zpow coe_zpow\n\n",
  "coe_smul":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n@[simp, norm_cast]\ntheorem coe_smul [monoid R] [DistribMulAction R A] [StarModule R A] (r : R) (x : skew_adjoint A) :\n    ↑(«expr • » r x) = «expr • » r (x : A) :=\n  rfl\n#align coe_smul coe_smul\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n@[simp, norm_cast]\ntheorem coe_smul [Monoid R] [DistribMulAction R A] [StarModule R A] (r : R) (x : skewAdjoint A) :\n    ↑(«expr • » r x) = «expr • » r (x : A) :=\n  rfl\n#align coe_smul coe_smul\n\n",
  "coe_rat_smul":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℚ -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n@[simp, norm_cast]\ntheorem coe_rat_smul (x : self_adjoint R) (a : exprℚ) : ↑(«expr • » a x) = «expr • » a (x : R) :=\n  rfl\n#align coe_rat_smul coe_rat_smul\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℚ -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n@[simp, norm_cast]\ntheorem coe_rat_smul (x : selfAdjoint R) (a : exprℚ) : ↑(«expr • » a x) = «expr • » a (x : R) :=\n  rfl\n#align coe_rat_smul coe_rat_smul\n\n",
  "coe_rat_cast":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℚ -/\n@[simp, norm_cast]\ntheorem coe_rat_cast (x : exprℚ) : ↑(x : self_adjoint R) = (x : R) :=\n  rfl\n#align coe_rat_cast coe_rat_cast\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℚ -/\n@[simp, norm_cast]\ntheorem coe_rat_cast (x : exprℚ) : ↑(x : selfAdjoint R) = (x : R) :=\n  rfl\n#align coe_rat_cast coe_rat_cast\n\n",
  "coe_pow":
- "@[simp, norm_cast]\ntheorem coe_pow (x : self_adjoint R) (n : ℕ) : ↑(x ^ n) = (x : R) ^ n :=\n  rfl\n#align coe_pow coe_pow\n\n",
+ "@[simp, norm_cast]\ntheorem coe_pow (x : selfAdjoint R) (n : ℕ) : ↑(x ^ n) = (x : R) ^ n :=\n  rfl\n#align coe_pow coe_pow\n\n",
  "coe_one":
- "@[simp, norm_cast]\ntheorem coe_one : ↑(1 : self_adjoint R) = (1 : R) :=\n  rfl\n#align coe_one coe_one\n\n",
+ "@[simp, norm_cast]\ntheorem coe_one : ↑(1 : selfAdjoint R) = (1 : R) :=\n  rfl\n#align coe_one coe_one\n\n",
  "coe_mul":
- "@[simp, norm_cast]\ntheorem coe_mul (x y : self_adjoint R) : ↑(x * y) = (x : R) * y :=\n  rfl\n#align coe_mul coe_mul\n\n",
+ "@[simp, norm_cast]\ntheorem coe_mul (x y : selfAdjoint R) : ↑(x * y) = (x : R) * y :=\n  rfl\n#align coe_mul coe_mul\n\n",
  "coe_inv":
- "@[simp, norm_cast]\ntheorem coe_inv (x : self_adjoint R) : ↑x⁻¹ = (x : R)⁻¹ :=\n  rfl\n#align coe_inv coe_inv\n\n",
+ "@[simp, norm_cast]\ntheorem coe_inv (x : selfAdjoint R) : ↑x⁻¹ = (x : R)⁻¹ :=\n  rfl\n#align coe_inv coe_inv\n\n",
  "coe_div":
- "@[simp, norm_cast]\ntheorem coe_div (x y : self_adjoint R) : ↑(x / y) = (x / y : R) :=\n  rfl\n#align coe_div coe_div\n\n",
+ "@[simp, norm_cast]\ntheorem coe_div (x y : selfAdjoint R) : ↑(x / y) = (x / y : R) :=\n  rfl\n#align coe_div coe_div\n\n",
  "bit1":
- "#print bit1 /-\ntheorem bit1 {x : R} (hx : is_self_adjoint x) : is_self_adjoint (bit1 x) := by\n  simp only [is_self_adjoint_iff, star_bit1, hx.star_eq]\n#align bit1 bit1\n-/\n\n",
+ "#print bit1 /-\ntheorem bit1 {x : R} (hx : IsSelfAdjoint x) : IsSelfAdjoint (bit1 x) := by\n  simp only [isSelfAdjoint_iff, star_bit1, hx.star_eq]\n#align bit1 bit1\n-/\n\n",
  "bit0_mem":
- "theorem bit0_mem {x : R} (hx : x ∈ skew_adjoint R) : bit0 x ∈ skew_adjoint R := by\n  rw [mem_iff, star_bit0, mem_iff.mp hx, bit0, bit0, neg_add]\n#align bit0_mem bit0_mem\n\n",
+ "theorem bit0_mem {x : R} (hx : x ∈ skewAdjoint R) : bit0 x ∈ skewAdjoint R := by\n  rw [mem_iff, star_bit0, mem_iff.mp hx, bit0, bit0, neg_add]\n#align bit0_mem bit0_mem\n\n",
  "bit0":
- "#print bit0 /-\ntheorem bit0 {x : R} (hx : is_self_adjoint x) : is_self_adjoint (bit0 x) := by\n  simp only [is_self_adjoint_iff, star_bit0, hx.star_eq]\n#align bit0 bit0\n-/\n\n",
+ "#print bit0 /-\ntheorem bit0 {x : R} (hx : IsSelfAdjoint x) : IsSelfAdjoint (bit0 x) := by\n  simp only [isSelfAdjoint_iff, star_bit0, hx.star_eq]\n#align bit0 bit0\n-/\n\n",
+ "all":
+ "-- named to match `commute.all`\n/-- All elements are self-adjoint when `star` is trivial. -/\ntheorem all [Star R] [TrivialStar R] (r : R) : IsSelfAdjoint r :=\n  star_trivial _\n#align all all\n\n",
  "add":
- "theorem add {x y : R} (hx : is_self_adjoint x) (hy : is_self_adjoint y) : is_self_adjoint (x + y) := by\n  simp only [is_self_adjoint_iff, star_add, hx.star_eq, hy.star_eq]\n#align add add\n\n"}
+ "theorem add {x y : R} (hx : IsSelfAdjoint x) (hy : IsSelfAdjoint y) : IsSelfAdjoint (x + y) := by\n  simp only [isSelfAdjoint_iff, star_add, hx.star_eq, hy.star_eq]\n#align add add\n\n",
+ "IsStarNormal":
+ "#print IsStarNormal /-\ntheorem IsStarNormal {x : R} (hx : IsSelfAdjoint x) : IsStarNormal x :=\n  ⟨by simp only [hx.star_eq]⟩\n#align is_star_normal IsStarNormal\n-/\n\n"}

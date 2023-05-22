@@ -1,34 +1,34 @@
 {"to_fun_eq_coe":
- "@[simp]\ntheorem to_fun_eq_coe {f : biheyting_hom α β} : f.to_fun = (f : α → β) :=\n  rfl\n#align to_fun_eq_coe to_fun_eq_coe\n\n",
- "map_symm_diff":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ∆ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ∆ » -/\n@[simp]\ntheorem map_symm_diff (a b : α) : f («expr ∆ » a b) = «expr ∆ » (f a) (f b) := by simp_rw [symmDiff, map_sup, map_sdiff]\n#align map_symm_diff map_symm_diff\n\n",
+ "@[simp]\ntheorem to_fun_eq_coe {f : BiheytingHom α β} : f.to_fun = (f : α → β) :=\n  rfl\n#align to_fun_eq_coe to_fun_eq_coe\n\n",
+ "map_symmDiff":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ∆ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ∆ » -/\n#print map_symmDiff /-\n@[simp]\ntheorem map_symmDiff (a b : α) : f («expr ∆ » a b) = «expr ∆ » (f a) (f b) := by simp_rw [symmDiff, map_sup, map_sdiff]\n#align map_symm_diff map_symmDiff\n-/\n\n",
  "map_hnot":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr￢ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr￢ » -/\n-- TODO: `map_bihimp`\n@[simp]\ntheorem map_hnot (a : α) : f («expr￢ » a) = «expr￢ » (f a) := by rw [← top_sdiff', ← top_sdiff', map_sdiff, map_top]\n#align map_hnot map_hnot\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr￢ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr￢ » -/\n#print map_hnot /-\n-- TODO: `map_bihimp`\n@[simp]\ntheorem map_hnot (a : α) : f («expr￢ » a) = «expr￢ » (f a) := by rw [← top_sdiff', ← top_sdiff', map_sdiff, map_top]\n#align map_hnot map_hnot\n-/\n\n",
  "map_compl":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\n/-\nCopyright (c) 2022 Yaël Dillies. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Yaël Dillies\n-/\n-- See note [lower instance priority]\n-- See note [lower instance priority]\n-- See note [lower instance priority]\n-- See note [lower instance priority]\n-- See note [lower instance priority]\n-- See note [lower instance priority]\n-- See note [lower instance priority]\n-- See note [reducible non instances]\n@[simp]\ntheorem map_compl (a : α) : f («expr ᶜ» a) = «expr ᶜ» (f a) := by rw [← himp_bot, ← himp_bot, map_himp, map_bot]\n#align map_compl map_compl\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\n#print map_compl /-\n/-\nCopyright (c) 2022 Yaël Dillies. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Yaël Dillies\n-/\n-- See note [lower instance priority]\n-- See note [lower instance priority]\n-- See note [lower instance priority]\n-- See note [lower instance priority]\n-- See note [lower instance priority]\n-- See note [lower instance priority]\n-- See note [lower instance priority]\n-- See note [reducible non instances]\n@[simp]\ntheorem map_compl (a : α) : f («expr ᶜ» a) = «expr ᶜ» (f a) := by rw [← himp_bot, ← himp_bot, map_himp, map_bot]\n#align map_compl map_compl\n-/\n\n",
  "map_bihimp":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⇔ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⇔ » -/\n@[simp]\ntheorem map_bihimp (a b : α) : f («expr ⇔ » a b) = «expr ⇔ » (f a) (f b) := by simp_rw [bihimp, map_inf, map_himp]\n#align map_bihimp map_bihimp\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⇔ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⇔ » -/\n#print map_bihimp /-\n@[simp]\ntheorem map_bihimp (a b : α) : f («expr ⇔ » a b) = «expr ⇔ » (f a) (f b) := by simp_rw [bihimp, map_inf, map_himp]\n#align map_bihimp map_bihimp\n-/\n\n",
  "id_comp":
- "@[simp]\ntheorem id_comp (f : biheyting_hom α β) : (biheyting_hom.id β).comp f = f :=\n  ext fun a => rfl\n#align id_comp id_comp\n\n",
+ "@[simp]\ntheorem id_comp (f : BiheytingHom α β) : (BiheytingHom.id β).comp f = f :=\n  ext fun a => rfl\n#align id_comp id_comp\n\n",
  "id_apply":
- "@[simp]\ntheorem id_apply (a : α) : biheyting_hom.id α a = a :=\n  rfl\n#align id_apply id_apply\n\n",
+ "@[simp]\ntheorem id_apply (a : α) : BiheytingHom.id α a = a :=\n  rfl\n#align id_apply id_apply\n\n",
  "ext":
- "@[ext]\ntheorem ext {f g : biheyting_hom α β} (h : ∀ a, f a = g a) : f = g :=\n  fun_like.ext f g h\n#align ext ext\n\n",
+ "@[ext]\ntheorem ext {f g : BiheytingHom α β} (h : ∀ a, f a = g a) : f = g :=\n  FunLike.ext f g h\n#align ext ext\n\n",
  "copy_eq":
- "theorem copy_eq (f : biheyting_hom α β) (f' : α → β) (h : f' = f) : f.copy f' h = f :=\n  fun_like.ext' h\n#align copy_eq copy_eq\n\n",
+ "theorem copy_eq (f : BiheytingHom α β) (f' : α → β) (h : f' = f) : f.copy f' h = f :=\n  FunLike.ext' h\n#align copy_eq copy_eq\n\n",
  "comp_id":
- "@[simp]\ntheorem comp_id (f : biheyting_hom α β) : f.comp (biheyting_hom.id α) = f :=\n  ext fun a => rfl\n#align comp_id comp_id\n\n",
+ "@[simp]\ntheorem comp_id (f : BiheytingHom α β) : f.comp (BiheytingHom.id α) = f :=\n  ext fun a => rfl\n#align comp_id comp_id\n\n",
  "comp_assoc":
- "@[simp]\ntheorem comp_assoc (f : biheyting_hom γ δ) (g : biheyting_hom β γ) (h : biheyting_hom α β) :\n    (f.comp g).comp h = f.comp (g.comp h) :=\n  rfl\n#align comp_assoc comp_assoc\n\n",
+ "@[simp]\ntheorem comp_assoc (f : BiheytingHom γ δ) (g : BiheytingHom β γ) (h : BiheytingHom α β) :\n    (f.comp g).comp h = f.comp (g.comp h) :=\n  rfl\n#align comp_assoc comp_assoc\n\n",
  "comp_apply":
- "@[simp]\ntheorem comp_apply (f : biheyting_hom β γ) (g : biheyting_hom α β) (a : α) : f.comp g a = f (g a) :=\n  rfl\n#align comp_apply comp_apply\n\n",
+ "@[simp]\ntheorem comp_apply (f : BiheytingHom β γ) (g : BiheytingHom α β) (a : α) : f.comp g a = f (g a) :=\n  rfl\n#align comp_apply comp_apply\n\n",
  "coe_id":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n@[simp]\ntheorem coe_id : «expr⇑ » (biheyting_hom.id α) = id :=\n  rfl\n#align coe_id coe_id\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n@[simp]\ntheorem coe_id : «expr⇑ » (BiheytingHom.id α) = id :=\n  rfl\n#align coe_id coe_id\n\n",
  "coe_copy":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n@[simp]\ntheorem coe_copy (f : biheyting_hom α β) (f' : α → β) (h : f' = f) : «expr⇑ » (f.copy f' h) = f' :=\n  rfl\n#align coe_copy coe_copy\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n@[simp]\ntheorem coe_copy (f : BiheytingHom α β) (f' : α → β) (h : f' = f) : «expr⇑ » (f.copy f' h) = f' :=\n  rfl\n#align coe_copy coe_copy\n\n",
  "coe_comp":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n@[simp]\ntheorem coe_comp (f : biheyting_hom β γ) (g : biheyting_hom α β) : «expr⇑ » (f.comp g) = f ∘ g :=\n  rfl\n#align coe_comp coe_comp\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n@[simp]\ntheorem coe_comp (f : BiheytingHom β γ) (g : BiheytingHom α β) : «expr⇑ » (f.comp g) = f ∘ g :=\n  rfl\n#align coe_comp coe_comp\n\n",
  "cancel_right":
- "theorem cancel_right (hf : surjective f) : g₁.comp f = g₂.comp f ↔ g₁ = g₂ :=\n  ⟨fun h => ext <| hf.forall.2 <| fun_like.ext_iff.1 h, congr_arg _⟩\n#align cancel_right cancel_right\n\n",
+ "theorem cancel_right (hf : surjective f) : g₁.comp f = g₂.comp f ↔ g₁ = g₂ :=\n  ⟨fun h => ext <| hf.forall.2 <| FunLike.ext_iff.1 h, congr_arg _⟩\n#align cancel_right cancel_right\n\n",
  "cancel_left":
- "theorem cancel_left (hg : injective g) : g.comp f₁ = g.comp f₂ ↔ f₁ = f₂ :=\n  ⟨fun h => biheyting_hom.ext fun a => hg <| by rw [← comp_apply, h, comp_apply], congr_arg _⟩\n#align cancel_left cancel_left\n\n"}
+ "theorem cancel_left (hg : injective g) : g.comp f₁ = g.comp f₂ ↔ f₁ = f₂ :=\n  ⟨fun h => BiheytingHom.ext fun a => hg <| by rw [← comp_apply, h, comp_apply], congr_arg _⟩\n#align cancel_left cancel_left\n\n"}

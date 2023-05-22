@@ -1,7 +1,9 @@
-{"well_founded_lift₂_iff":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⟦ ⟧» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⟦ ⟧» -/\n#print wellFounded_lift₂_iff /-\n/-- A relation is well founded iff its lift to a quotient is. -/\n@[simp]\ntheorem wellFounded_lift₂_iff [s : setoid α] {r : α → α → Prop} {H} :\n    well_founded (quotient.lift₂ r H) ↔ well_founded r :=\n  ⟨fun hr => by\n    suffices ∀ {x : quotient s} {a : α}, «expr⟦ ⟧» a = x → acc r a by exact ⟨fun a => this rfl⟩\n    · refine' fun x => hr.induction x _\n      rintro x IH a rfl\n      exact ⟨_, fun b hb => IH («expr⟦ ⟧» b) hb rfl⟩, (Quotient.outRelEmbedding H).well_founded⟩\n#align well_founded_lift₂_iff wellFounded_lift₂_iff\n-/\n\n",
- "well_founded":
+{"well_founded":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ↪r » -/\nprotected theorem well_founded : ∀ (f : «expr ↪r » r s) (h : well_founded s), well_founded r\n  | f, ⟨H⟩ => ⟨fun a => f.acc _ (H _)⟩\n#align well_founded well_founded\n\n",
+ "wellFounded_lift₂_iff":
+ "#print wellFounded_lift₂_iff /-\n/-- A relation is well founded iff its lift to a quotient is. -/\ntheorem wellFounded_lift₂_iff [setoid α] {r : α → α → Prop} {H} : well_founded (quotient.lift₂ r H) ↔ well_founded r :=\n  by\n  constructor\n  · exact RelHomClass.wellFounded (Quotient.mkRelHom H)\n  · refine' fun wf => ⟨fun q => _⟩\n    obtain ⟨a, rfl⟩ := q.exists_rep\n    exact acc_lift₂_iff.2 (wf.apply a)\n#align well_founded_lift₂_iff wellFounded_lift₂_iff\n-/\n\n",
+ "wellFounded_liftOn₂'_iff":
+ "#print wellFounded_liftOn₂'_iff /-\n@[simp]\ntheorem wellFounded_liftOn₂'_iff {s : setoid α} {r : α → α → Prop} {H} :\n    (well_founded fun x y : quotient s => Quotient.liftOn₂' x y r H) ↔ well_founded r :=\n  wellFounded_lift₂_iff\n#align well_founded_lift_on₂'_iff wellFounded_liftOn₂'_iff\n-/\n\n",
  "wellFounded_iff":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →r » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →r » -/\n#print Surjective.wellFounded_iff /-\n-- TODO: define a `rel_iff_class` so we don't have to do all the `convert` trickery?\ntheorem Surjective.wellFounded_iff {f : α → β} (hf : surjective f) (o : ∀ {a b}, r a b ↔ s (f a) (f b)) :\n    well_founded r ↔ well_founded s :=\n  iff.intro\n    (by\n      refine' RelHomClass.wellFounded (rel_hom.mk _ _ : «expr →r » s r)\n      · exact Classical.choose hf.has_right_inverse\n      intro a b h; apply o.2; convert h\n      iterate 2 apply Classical.choose_spec hf.has_right_inverse)\n    (RelHomClass.wellFounded (⟨f, fun _ _ => o.1⟩ : «expr →r » r s))\n#align surjective.well_founded_iff Surjective.wellFounded_iff\n-/\n\n",
  "trans_apply":
@@ -30,8 +32,6 @@
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃r » -/\ntheorem map_rel_iff (f : «expr ≃r » r s) {a b} : s (f a) (f b) ↔ r a b :=\n  f.map_rel_iff'\n#align map_rel_iff map_rel_iff\n\n",
  "map_rel":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →r » -/\nprotected theorem map_rel (f : «expr →r » r s) {a b} : r a b → s (f a) (f b) :=\n  f.map_rel'\n#align map_rel map_rel\n\n",
- "is_well_order":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ↪r » -/\nprotected theorem is_well_order : ∀ (f : «expr ↪r » r s) [is_well_order β s], is_well_order α r\n  | f, H => { f.is_strict_total_order with wf := f.well_founded H.wf }\n#align is_well_order is_well_order\n\n",
  "is_trichotomous":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ↪r » -/\nprotected theorem is_trichotomous : ∀ (f : «expr ↪r » r s) [is_trichotomous β s], is_trichotomous α r\n  | ⟨f, o⟩, ⟨H⟩ => ⟨fun a b => (or_congr o (or_congr f.inj'.eq_iff o)).1 (H _ _)⟩\n#align is_trichotomous is_trichotomous\n\n",
  "is_trans":
@@ -65,9 +65,9 @@
  "inj":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ↪r » -/\n@[simp]\ntheorem inj (f : «expr ↪r » r s) {a b} : f a = f b ↔ a = b :=\n  f.injective.eq_iff\n#align inj inj\n\n",
  "ext_iff":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃r » -/\ntheorem ext_iff {f g : «expr ≃r » r s} : f = g ↔ ∀ x, f x = g x :=\n  fun_like.ext_iff\n#align ext_iff ext_iff\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃r » -/\ntheorem ext_iff {f g : «expr ≃r » r s} : f = g ↔ ∀ x, f x = g x :=\n  FunLike.ext_iff\n#align ext_iff ext_iff\n\n",
  "ext":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃r » -/\n@[ext]\ntheorem ext ⦃f g : «expr ≃r » r s⦄ (h : ∀ x, f x = g x) : f = g :=\n  fun_like.ext f g h\n#align ext ext\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃r » -/\n@[ext]\ntheorem ext ⦃f g : «expr ≃r » r s⦄ (h : ∀ x, f x = g x) : f = g :=\n  FunLike.ext f g h\n#align ext ext\n\n",
  "eq_preimage":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ↪r » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹'o » -/\ntheorem eq_preimage (f : «expr ↪r » r s) : r = «expr ⁻¹'o » f s :=\n  by\n  ext (a b)\n  exact f.map_rel_iff.symm\n#align eq_preimage eq_preimage\n\n",
  "eq_iff_eq":
@@ -87,7 +87,7 @@
  "coe_fn_mk":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ » -/\n@[simp]\ntheorem coe_fn_mk (f : «expr ≃ » α β) (o : ∀ ⦃a b⦄, s (f a) (f b) ↔ r a b) : (rel_iso.mk f o : α → β) = f :=\n  rfl\n#align coe_fn_mk coe_fn_mk\n\n",
  "coe_fn_injective":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃r » -/\n/-- The map `coe_fn : (r ≃r s) → (α → β)` is injective. Lean fails to parse\n`function.injective (λ e : r ≃r s, (e : α → β))`, so we use a trick to say the same. -/\ntheorem coe_fn_injective : @function.injective («expr ≃r » r s) (α → β) coe_fn :=\n  fun_like.coe_injective\n#align coe_fn_injective coe_fn_injective\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃r » -/\n/-- The map `coe_fn : (r ≃r s) → (α → β)` is injective. Lean fails to parse\n`function.injective (λ e : r ≃r s, (e : α → β))`, so we use a trick to say the same. -/\ntheorem coe_fn_injective : @function.injective («expr ≃r » r s) (α → β) coe_fn :=\n  FunLike.coe_injective\n#align coe_fn_injective coe_fn_injective\n\n",
  "coe_coe_fn":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃r » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ↪r » -/\n@[simp]\ntheorem coe_coe_fn (f : «expr ≃r » r s) : ((f : «expr ↪r » r s) : α → β) = f :=\n  rfl\n#align coe_coe_fn coe_coe_fn\n\n",
  "cast_trans":
@@ -100,5 +100,13 @@
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃r » -/\nprotected theorem bijective (e : «expr ≃r » r s) : bijective e :=\n  e.to_equiv.bijective\n#align bijective bijective\n\n",
  "apply_symm_apply":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃r » -/\n@[simp]\ntheorem apply_symm_apply (e : «expr ≃r » r s) (x : β) : e (e.symm x) = x :=\n  e.to_equiv.apply_symm_apply x\n#align apply_symm_apply apply_symm_apply\n\n",
+ "acc_lift₂_iff":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⟦ ⟧» -/\n#print acc_lift₂_iff /-\n@[simp]\ntheorem acc_lift₂_iff [setoid α] {r : α → α → Prop} {H} {a} : acc (quotient.lift₂ r H) («expr⟦ ⟧» a) ↔ acc r a :=\n  by\n  constructor\n  · exact RelHomClass.acc (Quotient.mkRelHom H) a\n  · intro ac\n    induction' ac with _ H IH\n    dsimp at IH\n    refine' ⟨_, fun q h => _⟩\n    obtain ⟨a', rfl⟩ := q.exists_rep\n    exact IH a' h\n#align acc_lift₂_iff acc_lift₂_iff\n-/\n\n",
+ "acc_liftOn₂'_iff":
+ "#print acc_liftOn₂'_iff /-\n@[simp]\ntheorem acc_liftOn₂'_iff {s : setoid α} {r : α → α → Prop} {H} {a} :\n    acc (fun x y => Quotient.liftOn₂' x y r H) (Quotient.mk'' a : quotient s) ↔ acc r a :=\n  acc_lift₂_iff\n#align acc_lift_on₂'_iff acc_liftOn₂'_iff\n-/\n\n",
  "acc":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ↪r » -/\nprotected theorem acc (f : «expr ↪r » r s) (a : α) : acc s (f a) → acc r a :=\n  by\n  generalize h : f a = b; intro ac\n  induction' ac with _ H IH generalizing a; subst h\n  exact ⟨_, fun a' h => IH (f a') (f.map_rel_iff.2 h) _ rfl⟩\n#align acc acc\n\n"}
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ↪r » -/\nprotected theorem acc (f : «expr ↪r » r s) (a : α) : acc s (f a) → acc r a :=\n  by\n  generalize h : f a = b; intro ac\n  induction' ac with _ H IH generalizing a; subst h\n  exact ⟨_, fun a' h => IH (f a') (f.map_rel_iff.2 h) _ rfl⟩\n#align acc acc\n\n",
+ "IsWellOrder":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ↪r » -/\n#print IsWellOrder /-\nprotected theorem IsWellOrder : ∀ (f : «expr ↪r » r s) [IsWellOrder β s], IsWellOrder α r\n  | f, H => { f.is_strict_total_order with wf := f.well_founded H.wf }\n#align is_well_order IsWellOrder\n-/\n\n",
+ "IsWellFounded":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ↪r » -/\n#print IsWellFounded /-\nprotected theorem IsWellFounded (f : «expr ↪r » r s) [IsWellFounded β s] : IsWellFounded α r :=\n  ⟨f.well_founded is_well_founded.wf⟩\n#align is_well_founded IsWellFounded\n-/\n\n"}

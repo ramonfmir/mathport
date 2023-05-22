@@ -3,9 +3,9 @@
  "zpow_two_nonneg":
  "#print zpow_two_nonneg /-\ntheorem zpow_two_nonneg (a : α) : 0 ≤ a ^ (2 : ℤ) :=\n  zpow_bit0_nonneg _ _\n#align zpow_two_nonneg zpow_two_nonneg\n-/\n\n",
  "zpow_strictMono":
- "#print zpow_strictMono /-\ntheorem zpow_strictMono (hx : 1 < a) : strict_mono ((· ^ ·) a : ℤ → α) :=\n  strictMono_int_of_lt_succ fun n =>\n    have xpos : 0 < a := zero_lt_one.trans hx\n    calc\n      a ^ n < a ^ n * a := lt_mul_of_one_lt_right (zpow_pos_of_pos xpos _) hx\n      _ = a ^ (n + 1) := (zpow_add_one₀ xpos.ne' _).symm\n      \n#align zpow_strict_mono zpow_strictMono\n-/\n\n",
+ "#print zpow_strictMono /-\ntheorem zpow_strictMono (hx : 1 < a) : StrictMono ((· ^ ·) a : ℤ → α) :=\n  strictMono_int_of_lt_succ fun n =>\n    have xpos : 0 < a := zero_lt_one.trans hx\n    calc\n      a ^ n < a ^ n * a := lt_mul_of_one_lt_right (zpow_pos_of_pos xpos _) hx\n      _ = a ^ (n + 1) := (zpow_add_one₀ xpos.ne' _).symm\n      \n#align zpow_strict_mono zpow_strictMono\n-/\n\n",
  "zpow_strictAnti":
- "#print zpow_strictAnti /-\ntheorem zpow_strictAnti (h₀ : 0 < a) (h₁ : a < 1) : strict_anti ((· ^ ·) a : ℤ → α) :=\n  strictAnti_int_of_succ_lt fun n =>\n    calc\n      a ^ (n + 1) = a ^ n * a := zpow_add_one₀ h₀.ne' _\n      _ < a ^ n * 1 := (mul_lt_mul_left <| zpow_pos_of_pos h₀ _).2 h₁\n      _ = a ^ n := mul_one _\n      \n#align zpow_strict_anti zpow_strictAnti\n-/\n\n",
+ "#print zpow_strictAnti /-\ntheorem zpow_strictAnti (h₀ : 0 < a) (h₁ : a < 1) : StrictAnti ((· ^ ·) a : ℤ → α) :=\n  strictAnti_int_of_succ_lt fun n =>\n    calc\n      a ^ (n + 1) = a ^ n * a := zpow_add_one₀ h₀.ne' _\n      _ < a ^ n * 1 := ((mul_lt_mul_left <| zpow_pos_of_pos h₀ _).2 h₁)\n      _ = a ^ n := mul_one _\n      \n#align zpow_strict_anti zpow_strictAnti\n-/\n\n",
  "zpow_pos_of_pos":
  "#print Nat.zpow_pos_of_pos /-\nprotected theorem Nat.zpow_pos_of_pos {a : ℕ} (h : 0 < a) (n : ℤ) : 0 < (a : α) ^ n :=\n  by\n  apply zpow_pos_of_pos\n  exact_mod_cast h\n#align nat.zpow_pos_of_pos Nat.zpow_pos_of_pos\n-/\n\n",
  "zpow_pos_iff":
@@ -16,6 +16,8 @@
  "#print Odd.zpow_nonneg_iff /-\nprotected theorem Odd.zpow_nonneg_iff (hn : Odd n) : 0 ≤ a ^ n ↔ 0 ≤ a := by\n  cases' hn with k hk <;> simpa only [hk, two_mul] using zpow_bit1_nonneg_iff\n#align odd.zpow_nonneg_iff Odd.zpow_nonneg_iff\n-/\n\n",
  "zpow_nonneg":
  "#print Even.zpow_nonneg /-\nprotected theorem Even.zpow_nonneg (hn : Even n) (a : α) : 0 ≤ a ^ n := by\n  obtain ⟨k, rfl⟩ := hn <;> exact zpow_bit0_nonneg _ _\n#align even.zpow_nonneg Even.zpow_nonneg\n-/\n\n",
+ "zpow_neg_two_nonneg":
+ "#print zpow_neg_two_nonneg /-\ntheorem zpow_neg_two_nonneg (a : α) : 0 ≤ a ^ (-2 : ℤ) :=\n  zpow_bit0_nonneg _ (-1)\n#align zpow_neg_two_nonneg zpow_neg_two_nonneg\n-/\n\n",
  "zpow_neg_iff":
  "#print Odd.zpow_neg_iff /-\ntheorem Odd.zpow_neg_iff (hn : Odd n) : a ^ n < 0 ↔ a < 0 := by\n  cases' hn with k hk <;> simpa only [hk, two_mul] using zpow_bit1_neg_iff\n#align odd.zpow_neg_iff Odd.zpow_neg_iff\n-/\n\n",
  "zpow_ne_zero_of_pos":
@@ -25,9 +27,9 @@
  "zpow_le_one_of_nonpos":
  "#print zpow_le_one_of_nonpos /-\ntheorem zpow_le_one_of_nonpos (ha : 1 ≤ a) (hn : n ≤ 0) : a ^ n ≤ 1 :=\n  (zpow_le_of_le ha hn).trans_eq <| zpow_zero _\n#align zpow_le_one_of_nonpos zpow_le_one_of_nonpos\n-/\n\n",
  "zpow_le_of_le":
- "#print zpow_le_of_le /-\n/-\nCopyright (c) 2014 Robert Lewis. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Robert Lewis, Leonardo de Moura, Mario Carneiro, Floris van Doorn\n-/\ntheorem zpow_le_of_le (ha : 1 ≤ a) (h : m ≤ n) : a ^ m ≤ a ^ n :=\n  by\n  have ha₀ : 0 < a := one_pos.trans_le ha\n  lift n - m to ℕ using sub_nonneg.2 h with k hk\n  calc\n    a ^ m = a ^ m * 1 := (mul_one _).symm\n    _ ≤ a ^ m * a ^ k := mul_le_mul_of_nonneg_left (one_le_pow_of_one_le ha _) (zpow_nonneg ha₀.le _)\n    _ = a ^ n := by rw [← zpow_ofNat, ← zpow_add₀ ha₀.ne', hk, add_sub_cancel'_right]\n    \n#align zpow_le_of_le zpow_le_of_le\n-/\n\n",
+ "#print zpow_le_of_le /-\n/-\nCopyright (c) 2014 Robert Lewis. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Robert Lewis, Leonardo de Moura, Mario Carneiro, Floris van Doorn\n-/\ntheorem zpow_le_of_le (ha : 1 ≤ a) (h : m ≤ n) : a ^ m ≤ a ^ n :=\n  by\n  have ha₀ : 0 < a := one_pos.trans_le ha\n  lift n - m to ℕ using sub_nonneg.2 h with k hk\n  calc\n    a ^ m = a ^ m * 1 := (mul_one _).symm\n    _ ≤ a ^ m * a ^ k := (mul_le_mul_of_nonneg_left (one_le_pow_of_one_le ha _) (zpow_nonneg ha₀.le _))\n    _ = a ^ n := by rw [← zpow_ofNat, ← zpow_add₀ ha₀.ne', hk, add_sub_cancel'_right]\n    \n#align zpow_le_of_le zpow_le_of_le\n-/\n\n",
  "zpow_le_max_of_min_le":
- "#print zpow_le_max_of_min_le /-\ntheorem zpow_le_max_of_min_le {x : α} (hx : 1 ≤ x) {a b c : ℤ} (h : min a b ≤ c) :\n    x ^ (-c) ≤ max (x ^ (-a)) (x ^ (-b)) :=\n  haveI : antitone fun n : ℤ => x ^ (-n) := fun m n h => zpow_le_of_le hx (neg_le_neg h)\n  (this h).trans_eq this.map_min\n#align zpow_le_max_of_min_le zpow_le_max_of_min_le\n-/\n\n",
+ "#print zpow_le_max_of_min_le /-\ntheorem zpow_le_max_of_min_le {x : α} (hx : 1 ≤ x) {a b c : ℤ} (h : min a b ≤ c) :\n    x ^ (-c) ≤ max (x ^ (-a)) (x ^ (-b)) :=\n  haveI : Antitone fun n : ℤ => x ^ (-n) := fun m n h => zpow_le_of_le hx (neg_le_neg h)\n  (this h).trans_eq this.map_min\n#align zpow_le_max_of_min_le zpow_le_max_of_min_le\n-/\n\n",
  "zpow_le_max_iff_min_le":
  "#print zpow_le_max_iff_min_le /-\ntheorem zpow_le_max_iff_min_le {x : α} (hx : 1 < x) {a b c : ℤ} : x ^ (-c) ≤ max (x ^ (-a)) (x ^ (-b)) ↔ min a b ≤ c :=\n  by simp_rw [le_max_iff, min_le_iff, zpow_le_iff_le hx, neg_le_neg_iff]\n#align zpow_le_max_iff_min_le zpow_le_max_iff_min_le\n-/\n\n",
  "zpow_le_iff_le":

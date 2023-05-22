@@ -7,14 +7,14 @@
  "map_traverse":
  "theorem map_traverse {G : Type _ → Type _} [applicative G] [CommApplicative G] {α β γ : Type _} (g : α → G β)\n    (h : β → γ) (x : Multiset α) : functor.map (functor.map h) (traverse g x) = traverse (functor.map h ∘ g) x :=\n  Quotient.inductionOn x (by intro <;> simp [traverse, functor_norm] <;> rw [is_lawful_functor.comp_map, map_traverse])\n#align map_traverse map_traverse\n\n",
  "map_comp_coe":
- "@[simp]\ntheorem map_comp_coe {α β} (h : α → β) : functor.map h ∘ coe = (coe ∘ functor.map h : list α → Multiset β) := by\n  funext <;> simp [functor.map]\n#align map_comp_coe map_comp_coe\n\n",
+ "@[simp]\ntheorem map_comp_coe {α β} (h : α → β) : functor.map h ∘ coe = (coe ∘ functor.map h : List α → Multiset β) := by\n  funext <;> simp [functor.map]\n#align map_comp_coe map_comp_coe\n\n",
  "lift_coe":
- "@[simp]\ntheorem lift_coe {α β : Type _} (x : list α) (f : list α → β) (h : ∀ a b : list α, a ≈ b → f a = f b) :\n    quotient.lift f h (x : Multiset α) = f x :=\n  quotient.lift_mk _ _ _\n#align lift_coe lift_coe\n\n",
+ "@[simp]\ntheorem lift_coe {α β : Type _} (x : List α) (f : List α → β) (h : ∀ a b : List α, a ≈ b → f a = f b) :\n    quotient.lift f h (x : Multiset α) = f x :=\n  Quotient.lift_mk _ _ _\n#align lift_coe lift_coe\n\n",
  "id_traverse":
  "theorem id_traverse {α : Type _} (x : Multiset α) : traverse id.mk x = x :=\n  Quotient.inductionOn x (by intro ; simp [traverse]; rfl)\n#align id_traverse id_traverse\n\n",
  "fmap_def":
  "/-\nCopyright (c) 2018 Simon Hudon. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Mario Carneiro, Johannes Hölzl, Simon Hudon, Kenny Lau\n-/\n@[simp]\ntheorem fmap_def {α' β'} {s : Multiset α'} (f : α' → β') : f <$> s = s.map f :=\n  rfl\n#align fmap_def fmap_def\n\n",
  "comp_traverse":
- "theorem comp_traverse {G H : Type _ → Type _} [applicative G] [applicative H] [CommApplicative G] [CommApplicative H]\n    {α β γ : Type _} (g : α → G β) (h : β → H γ) (x : Multiset α) :\n    traverse (comp.mk ∘ functor.map h ∘ g) x = Comp.mk (functor.map (traverse h) (traverse g x)) :=\n  Quotient.inductionOn x\n    (by intro <;> simp [traverse, comp_traverse, functor_norm] <;> simp [(· <$> ·), (· ∘ ·), functor_norm])\n#align comp_traverse comp_traverse\n\n",
+ "theorem comp_traverse {G H : Type _ → Type _} [applicative G] [applicative H] [CommApplicative G] [CommApplicative H]\n    {α β γ : Type _} (g : α → G β) (h : β → H γ) (x : Multiset α) :\n    traverse (Comp.mk ∘ functor.map h ∘ g) x = Comp.mk (functor.map (traverse h) (traverse g x)) :=\n  Quotient.inductionOn x\n    (by intro <;> simp [traverse, comp_traverse, functor_norm] <;> simp [(· <$> ·), (· ∘ ·), functor_norm])\n#align comp_traverse comp_traverse\n\n",
  "bind_def":
  "@[simp]\ntheorem bind_def {α β} : (· >>= ·) = @bind α β :=\n  rfl\n#align bind_def bind_def\n\n"}

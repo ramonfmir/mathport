@@ -7,7 +7,7 @@
  "out_inj":
  "@[ext]\ntheorem out_inj {α} (a b : Erased α) (h : a.out = b.out) : a = b := by simpa using congr_arg mk h\n#align out_inj out_inj\n\n",
  "nonempty_iff":
- "@[simp]\ntheorem nonempty_iff {α} : nonempty (Erased α) ↔ nonempty α :=\n  ⟨fun ⟨a⟩ => ⟨a.out⟩, fun ⟨a⟩ => ⟨mk a⟩⟩\n#align nonempty_iff nonempty_iff\n\n",
+ "@[simp]\ntheorem nonempty_iff {α} : Nonempty (Erased α) ↔ Nonempty α :=\n  ⟨fun ⟨a⟩ => ⟨a.out⟩, fun ⟨a⟩ => ⟨mk a⟩⟩\n#align nonempty_iff nonempty_iff\n\n",
  "mk_out":
  "@[simp]\ntheorem mk_out {α} : ∀ a : Erased α, mk (out a) = a\n  | ⟨s, h⟩ => by simp [mk] <;> congr <;> exact Classical.choose_spec h\n#align mk_out mk_out\n\n",
  "map_out":

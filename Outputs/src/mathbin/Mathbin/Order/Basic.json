@@ -1,11 +1,15 @@
-{"update_lt_self_iff":
+{"update_lt_update_iff":
+ "#print update_lt_update_iff /-\n@[simp]\ntheorem update_lt_update_iff : update x i a < update x i b ↔ a < b :=\n  lt_iff_lt_of_le_iff_le' update_le_update_iff' update_le_update_iff'\n#align update_lt_update_iff update_lt_update_iff\n-/\n\n",
+ "update_lt_self_iff":
  "#print update_lt_self_iff /-\n@[simp]\ntheorem update_lt_self_iff : update x i a < x ↔ a < x i := by simp [lt_iff_le_not_le]\n#align update_lt_self_iff update_lt_self_iff\n-/\n\n",
+ "update_le_update_iff'":
+ "#print update_le_update_iff' /-\n@[simp]\ntheorem update_le_update_iff' : update x i a ≤ update x i b ↔ a ≤ b := by simp [update_le_update_iff]\n#align update_le_update_iff' update_le_update_iff'\n-/\n\n",
  "update_le_update_iff":
- "/- ./././Mathport/Syntax/Translate/Basic.lean:632:2: warning: expanding binder collection (j «expr ≠ » i) -/\n#print update_le_update_iff /-\ntheorem update_le_update_iff : function.update x i a ≤ function.update y i b ↔ a ≤ b ∧ ∀ (j) (_ : j ≠ i), x j ≤ y j :=\n  by simp (config := { contextual := true }) [update_le_iff]\n#align update_le_update_iff update_le_update_iff\n-/\n\n",
+ "/- ./././Mathport/Syntax/Translate/Basic.lean:635:2: warning: expanding binder collection (j «expr ≠ » i) -/\n#print update_le_update_iff /-\ntheorem update_le_update_iff : Function.update x i a ≤ Function.update y i b ↔ a ≤ b ∧ ∀ (j) (_ : j ≠ i), x j ≤ y j :=\n  by simp (config := { contextual := true }) [update_le_iff]\n#align update_le_update_iff update_le_update_iff\n-/\n\n",
  "update_le_self_iff":
  "#print update_le_self_iff /-\n@[simp]\ntheorem update_le_self_iff : update x i a ≤ x ↔ a ≤ x i := by simp [update_le_iff]\n#align update_le_self_iff update_le_self_iff\n-/\n\n",
  "update_le_iff":
- "/- ./././Mathport/Syntax/Translate/Basic.lean:632:2: warning: expanding binder collection (j «expr ≠ » i) -/\n#print update_le_iff /-\ntheorem update_le_iff : function.update x i a ≤ y ↔ a ≤ y i ∧ ∀ (j) (_ : j ≠ i), x j ≤ y j :=\n  function.forall_update_iff _ fun j z => z ≤ y j\n#align update_le_iff update_le_iff\n-/\n\n",
+ "/- ./././Mathport/Syntax/Translate/Basic.lean:635:2: warning: expanding binder collection (j «expr ≠ » i) -/\n#print update_le_iff /-\ntheorem update_le_iff : Function.update x i a ≤ y ↔ a ≤ y i ∧ ∀ (j) (_ : j ≠ i), x j ≤ y j :=\n  Function.forall_update_iff _ fun j z => z ≤ y j\n#align update_le_iff update_le_iff\n-/\n\n",
  "toPreorder_injective":
  "#print PartialOrder.toPreorder_injective /-\n@[ext]\ntheorem PartialOrder.toPreorder_injective {α : Type _} : function.injective (@partial_order.to_preorder α) :=\n  fun A B h => by\n  cases A\n  cases B\n  injection h\n  congr\n#align partial_order.to_preorder_injective PartialOrder.toPreorder_injective\n-/\n\n",
  "toPartialOrder_injective":
@@ -47,7 +51,7 @@
  "ne_of_not_le":
  "#print ne_of_not_le /-\ntheorem ne_of_not_le [preorder α] {a b : α} (h : ¬a ≤ b) : a ≠ b := fun hab => h (le_of_eq hab)\n#align ne_of_not_le ne_of_not_le\n-/\n\n",
  "ne_iff_lt_iff_le":
- "#print ne_iff_lt_iff_le /-\n@[simp]\ntheorem ne_iff_lt_iff_le [partial_order α] {a b : α} : (a ≠ b ↔ a < b) ↔ a ≤ b :=\n  haveI := classical.dec\n  Decidable.ne_iff_lt_iff_le\n#align ne_iff_lt_iff_le ne_iff_lt_iff_le\n-/\n\n",
+ "#print ne_iff_lt_iff_le /-\n@[simp]\ntheorem ne_iff_lt_iff_le [partial_order α] {a b : α} : (a ≠ b ↔ a < b) ↔ a ≤ b :=\n  haveI := Classical.dec\n  Decidable.ne_iff_lt_iff_le\n#align ne_iff_lt_iff_le ne_iff_lt_iff_le\n-/\n\n",
  "ne'":
  "theorem ne' [preorder α] {x y : α} (h : x < y) : y ≠ x :=\n  h.ne.symm\n#align ne' ne'\n\n",
  "mk_lt_mk_iff_right":
@@ -67,27 +71,27 @@
  "min_rec":
  "#print min_rec /-\ntheorem min_rec (hx : x ≤ y → p x) (hy : y ≤ x → p y) : p (min x y) :=\n  (le_total x y).rec (fun h => (min_eq_left h).symm.subst (hx h)) fun h => (min_eq_right h).symm.subst (hy h)\n#align min_rec min_rec\n-/\n\n",
  "min_eq":
- "theorem min_eq : min a b = star :=\n  rfl\n#align min_eq min_eq\n\n",
+ "theorem min_eq : min a b = unit :=\n  rfl\n#align min_eq min_eq\n\n",
  "min_def_lt":
  "#print min_def_lt /-\ntheorem min_def_lt (x y : α) : min x y = if x < y then x else y :=\n  by\n  rw [min_comm, min_def, ← ite_not]\n  simp only [not_le]\n#align min_def_lt min_def_lt\n-/\n\n",
  "min_def'":
- "#print min_def' /-\n-- Variant of `min_def` with the branches reversed.\ntheorem min_def' [linear_order α] (a b : α) : min a b = if b ≤ a then b else a :=\n  by\n  rw [min_def]\n  rcases lt_trichotomy a b with (lt | eq | gt)\n  · rw [if_pos lt.le, if_neg (not_le.mpr lt)]\n  · rw [if_pos eq.le, if_pos Eq.ge, eq]\n  · rw [if_neg (not_le.mpr GT.gt), if_pos gt.le]\n#align min_def' min_def'\n-/\n\n",
+ "#print min_def' /-\n-- Variant of `min_def` with the branches reversed.\ntheorem min_def' [linear_order α] (a b : α) : min a b = if b ≤ a then b else a :=\n  by\n  rw [min_def]\n  rcases lt_trichotomy a b with (lt | eq | gt)\n  · rw [if_pos lt.le, if_neg (not_le.mpr lt)]\n  · rw [if_pos Eq.le, if_pos Eq.ge, Eq]\n  · rw [if_neg (not_le.mpr GT.gt), if_pos gt.le]\n#align min_def' min_def'\n-/\n\n",
  "max_rec'":
  "#print max_rec' /-\ntheorem max_rec' (p : α → Prop) (hx : p x) (hy : p y) : p (max x y) :=\n  max_rec (fun _ => hx) fun _ => hy\n#align max_rec' max_rec'\n-/\n\n",
  "max_rec":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵈ» -/\n#print max_rec /-\ntheorem max_rec (hx : y ≤ x → p x) (hy : x ≤ y → p y) : p (max x y) :=\n  @min_rec («expr ᵒᵈ» α) _ _ _ _ hx hy\n#align max_rec max_rec\n-/\n\n",
  "max_eq":
- "theorem max_eq : max a b = star :=\n  rfl\n#align max_eq max_eq\n\n",
+ "theorem max_eq : max a b = unit :=\n  rfl\n#align max_eq max_eq\n\n",
  "max_def_lt":
  "#print max_def_lt /-\ntheorem max_def_lt (x y : α) : max x y = if x < y then y else x :=\n  by\n  rw [max_comm, max_def, ← ite_not]\n  simp only [not_le]\n#align max_def_lt max_def_lt\n-/\n\n",
  "max_def'":
- "#print max_def' /-\n-- Variant of `min_def` with the branches reversed.\n-- This is sometimes useful as it used to be the default.\ntheorem max_def' [linear_order α] (a b : α) : max a b = if b ≤ a then a else b :=\n  by\n  rw [max_def]\n  rcases lt_trichotomy a b with (lt | eq | gt)\n  · rw [if_pos lt.le, if_neg (not_le.mpr lt)]\n  · rw [if_pos eq.le, if_pos Eq.ge, eq]\n  · rw [if_neg (not_le.mpr GT.gt), if_pos gt.le]\n#align max_def' max_def'\n-/\n\n",
+ "#print max_def' /-\n-- Variant of `min_def` with the branches reversed.\n-- This is sometimes useful as it used to be the default.\ntheorem max_def' [linear_order α] (a b : α) : max a b = if b ≤ a then a else b :=\n  by\n  rw [max_def]\n  rcases lt_trichotomy a b with (lt | eq | gt)\n  · rw [if_pos lt.le, if_neg (not_le.mpr lt)]\n  · rw [if_pos Eq.le, if_pos Eq.ge, Eq]\n  · rw [if_neg (not_le.mpr GT.gt), if_pos gt.le]\n#align max_def' max_def'\n-/\n\n",
  "lt_update_self_iff":
  "#print lt_update_self_iff /-\n@[simp]\ntheorem lt_update_self_iff : x < update x i a ↔ x i < a := by simp [lt_iff_le_not_le]\n#align lt_update_self_iff lt_update_self_iff\n-/\n\n",
  "lt_trans'":
  "#print lt_trans' /-\ntheorem lt_trans' : b < c → a < b → a < c :=\n  flip lt_trans\n#align lt_trans' lt_trans'\n-/\n\n",
  "lt_self_iff_false":
- "#print lt_self_iff_false /-\n@[simp]\ntheorem lt_self_iff_false (x : α) : x < x ↔ false :=\n  ⟨lt_irrefl x, false.elim⟩\n#align lt_self_iff_false lt_self_iff_false\n-/\n\n",
+ "#print lt_self_iff_false /-\n@[simp]\ntheorem lt_self_iff_false (x : α) : x < x ↔ False :=\n  ⟨lt_irrefl x, false.elim⟩\n#align lt_self_iff_false lt_self_iff_false\n-/\n\n",
  "lt_or_lt_iff_ne":
  "#print lt_or_lt_iff_ne /-\n/-- A version of `ne_iff_lt_or_gt` with LHS and RHS reversed. -/\n@[simp]\ntheorem lt_or_lt_iff_ne [linear_order α] {x y : α} : x < y ∨ y < x ↔ x ≠ y :=\n  ne_iff_lt_or_gt.symm\n#align lt_or_lt_iff_ne lt_or_lt_iff_ne\n-/\n\n",
  "lt_or_lt":
@@ -95,7 +99,7 @@
  "lt_or_le":
  "#print lt_or_le /-\ntheorem lt_or_le [linear_order α] {a b : α} (h : a ≤ b) (c : α) : a < c ∨ c ≤ b :=\n  (lt_or_ge a c).imp id fun hc => le_trans hc h\n#align lt_or_le lt_or_le\n-/\n\n",
  "lt_of_strongLT":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≺ » -/\n#print lt_of_strongLT /-\ntheorem lt_of_strongLT [nonempty ι] (h : «expr ≺ » a b) : a < b :=\n  by\n  inhabit ι\n  exact Pi.lt_def.2 ⟨le_of_strongLT h, default, h _⟩\n#align lt_of_strong_lt lt_of_strongLT\n-/\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≺ » -/\n#print lt_of_strongLT /-\ntheorem lt_of_strongLT [Nonempty ι] (h : «expr ≺ » a b) : a < b :=\n  by\n  inhabit ι\n  exact Pi.lt_def.2 ⟨le_of_strongLT h, default, h _⟩\n#align lt_of_strong_lt lt_of_strongLT\n-/\n\n",
  "lt_of_not_le":
  "#print lt_of_not_le /-\ntheorem lt_of_not_le [linear_order α] {a b : α} (h : ¬b ≤ a) : a < b :=\n  ((le_total _ _).resolve_right h).lt_of_not_le h\n#align lt_of_not_le lt_of_not_le\n-/\n\n",
  "lt_of_lt_of_le'":
@@ -137,7 +141,7 @@
  "le_update_self_iff":
  "#print le_update_self_iff /-\n@[simp]\ntheorem le_update_self_iff : x ≤ update x i a ↔ x i ≤ a := by simp [le_update_iff]\n#align le_update_self_iff le_update_self_iff\n-/\n\n",
  "le_update_iff":
- "/- ./././Mathport/Syntax/Translate/Basic.lean:632:2: warning: expanding binder collection (j «expr ≠ » i) -/\n#print le_update_iff /-\ntheorem le_update_iff : x ≤ function.update y i a ↔ x i ≤ a ∧ ∀ (j) (_ : j ≠ i), x j ≤ y j :=\n  function.forall_update_iff _ fun j z => x j ≤ z\n#align le_update_iff le_update_iff\n-/\n\n",
+ "/- ./././Mathport/Syntax/Translate/Basic.lean:635:2: warning: expanding binder collection (j «expr ≠ » i) -/\n#print le_update_iff /-\ntheorem le_update_iff : x ≤ Function.update y i a ↔ x i ≤ a ∧ ∀ (j) (_ : j ≠ i), x j ≤ y j :=\n  Function.forall_update_iff _ fun j z => x j ≤ z\n#align le_update_iff le_update_iff\n-/\n\n",
  "le_trans'":
  "#print le_trans' /-\n/-\nCopyright (c) 2014 Jeremy Avigad. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Jeremy Avigad, Mario Carneiro\n-/\ntheorem le_trans' : b ≤ c → a ≤ b → a ≤ c :=\n  flip le_trans\n#align le_trans' le_trans'\n-/\n\n",
  "le_rfl":
@@ -179,12 +183,14 @@
  "le_iff_eq_or_lt":
  "#print le_iff_eq_or_lt /-\ntheorem le_iff_eq_or_lt [partial_order α] {a b : α} : a ≤ b ↔ a = b ∨ a < b :=\n  le_iff_lt_or_eq.trans or_comm\n#align le_iff_eq_or_lt le_iff_eq_or_lt\n-/\n\n",
  "le_iff_eq":
- "theorem le_iff_eq (h : a ≤ b) : b ≤ a ↔ b = a :=\n  ⟨fun h' => h'.antisymm h, eq.le⟩\n#align le_iff_eq le_iff_eq\n\n",
+ "theorem le_iff_eq (h : a ≤ b) : b ≤ a ↔ b = a :=\n  ⟨fun h' => h'.antisymm h, Eq.le⟩\n#align le_iff_eq le_iff_eq\n\n",
  "le_def":
  "theorem le_def [LE α] [LE β] {x y : α × β} : x ≤ y ↔ x.1 ≤ y.1 ∧ x.2 ≤ y.2 :=\n  iff.rfl\n#align le_def le_def\n\n",
  "le_Prop_eq":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:219:4: warning: unsupported binary notation `«->» -/\n#print le_Prop_eq /-\n@[simp]\ntheorem le_Prop_eq : ((· ≤ ·) : Prop → Prop → Prop) = («->» · ·) :=\n  rfl\n#align le_Prop_eq le_Prop_eq\n-/\n\n",
  "le": "@[simp]\nprotected theorem le : a ≤ b :=\n  trivial\n#align le le\n\n",
+ "gt_or_eq_of_le":
+ "#print gt_or_eq_of_le /-\ntheorem gt_or_eq_of_le [partial_order α] {a b : α} (hab : a ≤ b) : a < b ∨ b = a :=\n  (eq_or_gt_of_le hab).symm\n#align gt_or_eq_of_le gt_or_eq_of_le\n-/\n\n",
  "gt_iff_ne":
  "theorem gt_iff_ne (h : a ≤ b) : a < b ↔ b ≠ a :=\n  ⟨fun h => h.ne.symm, h.lt_of_ne'⟩\n#align gt_iff_ne gt_iff_ne\n\n",
  "gt_iff_lt":
@@ -205,8 +211,6 @@
  "#print forall_lt_iff_le' /-\ntheorem forall_lt_iff_le' [linear_order α] {a b : α} : (∀ ⦃c⦄, a < c → b < c) ↔ b ≤ a :=\n  ⟨le_of_forall_lt', fun h c hac => lt_of_le_of_lt h hac⟩\n#align forall_lt_iff_le' forall_lt_iff_le'\n-/\n\n",
  "forall_lt_iff_le":
  "#print forall_lt_iff_le /-\ntheorem forall_lt_iff_le [linear_order α] {a b : α} : (∀ ⦃c⦄, c < a → c < b) ↔ a ≤ b :=\n  ⟨le_of_forall_lt, fun h c hca => lt_of_lt_of_le hca h⟩\n#align forall_lt_iff_le forall_lt_iff_le\n-/\n\n",
- "false":
- "protected theorem false [preorder α] {x : α} : x < x → false :=\n  lt_irrefl x\n#align false false\n\n",
  "ext":
  "#print LinearOrder.ext /-\ntheorem LinearOrder.ext {α} {A B : linear_order α}\n    (H :\n      ∀ x y : α,\n        (haveI := A\n          x ≤ y) ↔\n          x ≤ y) :\n    A = B := by\n  ext (x y)\n  exact H x y\n#align linear_order.ext LinearOrder.ext\n-/\n\n",
  "exists_ge_of_linear":
@@ -216,7 +220,9 @@
  "eq_or_lt_of_le":
  "#print eq_or_lt_of_le /-\ntheorem eq_or_lt_of_le [partial_order α] {a b : α} (h : a ≤ b) : a = b ∨ a < b :=\n  h.lt_or_eq.symm\n#align eq_or_lt_of_le eq_or_lt_of_le\n-/\n\n",
  "eq_or_gt_of_le":
- "#print eq_or_gt_of_le /-\ntheorem eq_or_gt_of_le [partial_order α] {a b : α} (h : a ≤ b) : b = a ∨ a < b :=\n  h.lt_or_eq.symm.imp eq.symm id\n#align eq_or_gt_of_le eq_or_gt_of_le\n-/\n\n",
+ "#print eq_or_gt_of_le /-\ntheorem eq_or_gt_of_le [partial_order α] {a b : α} (h : a ≤ b) : b = a ∨ a < b :=\n  h.lt_or_eq.symm.imp Eq.symm id\n#align eq_or_gt_of_le eq_or_gt_of_le\n-/\n\n",
+ "eq_or_eq_or_eq_of_forall_not_lt_lt":
+ "#print eq_or_eq_or_eq_of_forall_not_lt_lt /-\n/-- If a linear order has no elements `x < y < z`, then it has at most two elements. -/\ntheorem eq_or_eq_or_eq_of_forall_not_lt_lt {α : Type _} [linear_order α] (h : ∀ ⦃x y z : α⦄, x < y → y < z → False)\n    (x y z : α) : x = y ∨ y = z ∨ x = z := by\n  by_contra hne; push_neg  at hne\n  cases' hne.1.lt_or_lt with h₁ h₁ <;> cases' hne.2.1.lt_or_lt with h₂ h₂ <;> cases' hne.2.2.lt_or_lt with h₃ h₃\n  exacts[h h₁ h₂, h h₂ h₃, h h₃ h₂, h h₃ h₁, h h₁ h₃, h h₂ h₃, h h₁ h₃, h h₂ h₁]\n#align eq_or_eq_or_eq_of_forall_not_lt_lt eq_or_eq_or_eq_of_forall_not_lt_lt\n-/\n\n",
  "eq_of_le_of_not_lt":
  "#print eq_of_le_of_not_lt /-\ntheorem eq_of_le_of_not_lt [partial_order α] {a b : α} (hab : a ≤ b) (hba : ¬a < b) : a = b :=\n  hab.eq_or_lt.resolve_right hba\n#align eq_of_le_of_not_lt eq_of_le_of_not_lt\n-/\n\n",
  "eq_of_le_of_forall_le_of_dense":
@@ -233,12 +239,14 @@
  "#print eq_of_forall_gt_iff /-\ntheorem eq_of_forall_gt_iff [linear_order α] {a b : α} (h : ∀ c, a < c ↔ b < c) : a = b :=\n  (le_of_forall_lt' fun _ => (h _).2).antisymm <| le_of_forall_lt' fun _ => (h _).1\n#align eq_of_forall_gt_iff eq_of_forall_gt_iff\n-/\n\n",
  "eq_of_forall_ge_iff":
  "#print eq_of_forall_ge_iff /-\ntheorem eq_of_forall_ge_iff [partial_order α] {a b : α} (H : ∀ c, a ≤ c ↔ b ≤ c) : a = b :=\n  ((H _).2 le_rfl).antisymm ((H _).1 le_rfl)\n#align eq_of_forall_ge_iff eq_of_forall_ge_iff\n-/\n\n",
+ "eq_iff_not_lt_of_le":
+ "#print eq_iff_not_lt_of_le /-\ntheorem eq_iff_not_lt_of_le {α} [partial_order α] {x y : α} : x ≤ y → y = x ↔ ¬x < y := by\n  rw [lt_iff_le_and_ne, not_and, Classical.not_not, eq_comm]\n#align eq_iff_not_lt_of_le eq_iff_not_lt_of_le\n-/\n\n",
  "eq_iff_le_not_lt":
- "#print eq_iff_le_not_lt /-\ntheorem eq_iff_le_not_lt [partial_order α] {a b : α} : a = b ↔ a ≤ b ∧ ¬a < b :=\n  haveI := classical.dec\n  Decidable.eq_iff_le_not_lt\n#align eq_iff_le_not_lt eq_iff_le_not_lt\n-/\n\n",
+ "#print eq_iff_le_not_lt /-\ntheorem eq_iff_le_not_lt [partial_order α] {a b : α} : a = b ↔ a ≤ b ∧ ¬a < b :=\n  haveI := Classical.dec\n  Decidable.eq_iff_le_not_lt\n#align eq_iff_le_not_lt eq_iff_le_not_lt\n-/\n\n",
  "dual_dual":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵈ» -/\ntheorem linear_order.dual_dual (α : Type _) [H : linear_order α] : OrderDual.linearOrder («expr ᵒᵈ» α) = H :=\n  LinearOrder.ext fun _ _ => iff.rfl\n#align linear_order.dual_dual linear_order.dual_dual\n\n",
  "denselyOrdered_orderDual":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵈ» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵈ» -/\n#print denselyOrdered_orderDual /-\n@[simp]\ntheorem denselyOrdered_orderDual [LT α] : DenselyOrdered («expr ᵒᵈ» α) ↔ DenselyOrdered α :=\n  ⟨by\n    convert @OrderDual.denselyOrdered («expr ᵒᵈ» α) _\n    cases ‹LT α›\n    rfl, @OrderDual.denselyOrdered α _⟩\n#align densely_ordered_order_dual denselyOrdered_orderDual\n-/\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵈ» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵈ» -/\n#print denselyOrdered_orderDual /-\n@[simp]\ntheorem denselyOrdered_orderDual [LT α] : DenselyOrdered («expr ᵒᵈ» α) ↔ DenselyOrdered α :=\n  ⟨by\n    convert@OrderDual.denselyOrdered («expr ᵒᵈ» α) _\n    cases ‹LT α›\n    rfl, @OrderDual.denselyOrdered α _⟩\n#align densely_ordered_order_dual denselyOrdered_orderDual\n-/\n\n",
  "dense_or_discrete":
  "#print dense_or_discrete /-\ntheorem dense_or_discrete [linear_order α] (a₁ a₂ : α) :\n    (∃ a, a₁ < a ∧ a < a₂) ∨ (∀ a, a₁ < a → a₂ ≤ a) ∧ ∀ a < a₂, a ≤ a₁ :=\n  or_iff_not_imp_left.2 fun h =>\n    ⟨fun a ha₁ => le_of_not_gt fun ha₂ => h ⟨a, ha₁, ha₂⟩, fun a ha₂ => le_of_not_gt fun ha₁ => h ⟨a, ha₁, ha₂⟩⟩\n#align dense_or_discrete dense_or_discrete\n-/\n\n",
  "const_lt_const":
@@ -252,8 +260,10 @@
  "commutative_of_le":
  "#print commutative_of_le /-\n/-- To prove commutativity of a binary operation `○`, we only to check `a ○ b ≤ b ○ a` for all `a`,\n`b`. -/\ntheorem commutative_of_le {f : β → β → α} (comm : ∀ a b, f a b ≤ f b a) : ∀ a b, f a b = f b a := fun a b =>\n  (comm _ _).antisymm <| comm _ _\n#align commutative_of_le commutative_of_le\n-/\n\n",
  "coe_lt_coe":
- "@[simp, norm_cast]\ntheorem coe_lt_coe [LT α] {p : α → Prop} {x y : subtype p} : (x : α) < y ↔ x < y :=\n  iff.rfl\n#align coe_lt_coe coe_lt_coe\n\n",
+ "@[simp, norm_cast]\ntheorem coe_lt_coe [LT α] {p : α → Prop} {x y : Subtype p} : (x : α) < y ↔ x < y :=\n  iff.rfl\n#align coe_lt_coe coe_lt_coe\n\n",
  "coe_le_coe":
- "@[simp, norm_cast]\ntheorem coe_le_coe [LE α] {p : α → Prop} {x y : subtype p} : (x : α) ≤ y ↔ x ≤ y :=\n  iff.rfl\n#align coe_le_coe coe_le_coe\n\n",
+ "@[simp, norm_cast]\ntheorem coe_le_coe [LE α] {p : α → Prop} {x y : Subtype p} : (x : α) ≤ y ↔ x ≤ y :=\n  iff.rfl\n#align coe_le_coe coe_le_coe\n\n",
  "associative_of_commutative_of_le":
- "#print associative_of_commutative_of_le /-\n/-- To prove associativity of a commutative binary operation `○`, we only to check\n`(a ○ b) ○ c ≤ a ○ (b ○ c)` for all `a`, `b`, `c`. -/\ntheorem associative_of_commutative_of_le {f : α → α → α} (comm : commutative f)\n    (assoc : ∀ a b c, f (f a b) c ≤ f a (f b c)) : associative f := fun a b c =>\n  le_antisymm (assoc _ _ _) <| by\n    rw [comm, comm b, comm _ c, comm a]\n    exact assoc _ _ _\n#align associative_of_commutative_of_le associative_of_commutative_of_le\n-/\n\n"}
+ "#print associative_of_commutative_of_le /-\n/-- To prove associativity of a commutative binary operation `○`, we only to check\n`(a ○ b) ○ c ≤ a ○ (b ○ c)` for all `a`, `b`, `c`. -/\ntheorem associative_of_commutative_of_le {f : α → α → α} (comm : commutative f)\n    (assoc : ∀ a b c, f (f a b) c ≤ f a (f b c)) : associative f := fun a b c =>\n  le_antisymm (assoc _ _ _) <| by\n    rw [comm, comm b, comm _ c, comm a]\n    exact assoc _ _ _\n#align associative_of_commutative_of_le associative_of_commutative_of_le\n-/\n\n",
+ "False":
+ "#print False /-\nprotected theorem False [preorder α] {x : α} : x < x → False :=\n  lt_irrefl x\n#align false False\n-/\n\n"}

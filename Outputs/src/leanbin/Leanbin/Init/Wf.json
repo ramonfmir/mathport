@@ -23,6 +23,6 @@
  "fix_F_eq":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≺ » -/\ntheorem fix_F_eq (x : α) (acx : acc r x) :\n    fix_F F x acx = F x fun (y : α) (p : «expr ≺ » y x) => fix_F F y (acc.inv acx p) :=\n  acc.drec (fun x r ih => rfl) acx\n#align fix_F_eq fix_F_eq\n\n",
  "empty_wf":
- "/-- Empty relation is well-founded -/\ntheorem empty_wf {α : Sort u} : well_founded (@empty_relation α) :=\n  well_founded.intro fun a : α => acc.intro a fun (b : α) (lt : false) => false.rec _ lt\n#align empty_wf empty_wf\n\n",
+ "/-- Empty relation is well-founded -/\ntheorem empty_wf {α : Sort u} : well_founded (@empty_relation α) :=\n  well_founded.intro fun a : α => acc.intro a fun (b : α) (lt : False) => false.rec _ lt\n#align empty_wf empty_wf\n\n",
  "accessible":
  "-- The inverse image of a well-founded relation is well-founded\ntheorem accessible {a : α} (ac : acc r (f a)) : acc (inv_image r f) a :=\n  acc_aux ac a rfl\n#align accessible accessible\n\n"}

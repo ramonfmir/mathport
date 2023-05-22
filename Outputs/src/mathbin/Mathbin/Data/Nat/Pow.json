@@ -1,7 +1,7 @@
 {"sq_sub_sq":
  "#print sq_sub_sq /-\ntheorem sq_sub_sq (a b : ℕ) : a ^ 2 - b ^ 2 = (a + b) * (a - b) :=\n  by\n  rw [sq, sq]\n  exact nat.mul_self_sub_mul_self_eq a b\n#align sq_sub_sq sq_sub_sq\n-/\n\n",
  "pow_right_strict_mono":
- "theorem pow_right_strict_mono {x : ℕ} (k : 2 ≤ x) : strict_mono fun n : ℕ => x ^ n := fun _ _ =>\n  pow_lt_pow_of_lt_right k\n#align pow_right_strict_mono pow_right_strict_mono\n\n",
+ "theorem pow_right_strict_mono {x : ℕ} (k : 2 ≤ x) : StrictMono fun n : ℕ => x ^ n := fun _ _ => pow_lt_pow_of_lt_right k\n#align pow_right_strict_mono pow_right_strict_mono\n\n",
  "pow_right_injective":
  "theorem pow_right_injective {x : ℕ} (k : 2 ≤ x) : function.injective fun n : ℕ => x ^ n :=\n  StrictMono.injective (pow_right_strictMono k)\n#align pow_right_injective pow_right_injective\n\n",
  "pow_mod":
@@ -17,7 +17,7 @@
  "pow_lt_iff_lt_left":
  "theorem pow_lt_iff_lt_left {m x y : ℕ} (k : 1 ≤ m) : x ^ m < y ^ m ↔ x < y :=\n  StrictMono.lt_iff_lt (pow_left_strictMono k)\n#align pow_lt_iff_lt_left pow_lt_iff_lt_left\n\n",
  "pow_left_strict_mono":
- "theorem pow_left_strict_mono {m : ℕ} (k : 1 ≤ m) : strict_mono fun x : ℕ => x ^ m := fun _ _ h =>\n  pow_lt_pow_of_lt_left h k\n#align pow_left_strict_mono pow_left_strict_mono\n\n",
+ "theorem pow_left_strict_mono {m : ℕ} (k : 1 ≤ m) : StrictMono fun x : ℕ => x ^ m := fun _ _ h =>\n  pow_lt_pow_of_lt_left h k\n#align pow_left_strict_mono pow_left_strict_mono\n\n",
  "pow_left_injective":
  "theorem pow_left_injective {m : ℕ} (k : 1 ≤ m) : function.injective fun x : ℕ => x ^ m :=\n  StrictMono.injective (pow_left_strictMono k)\n#align pow_left_injective pow_left_injective\n\n",
  "pow_le_pow_of_le_right":
@@ -25,9 +25,9 @@
  "pow_le_pow_of_le_left":
  "#print pow_le_pow_of_le_left /-\n/-\nCopyright (c) 2014 Floris van Doorn (c) 2016 Microsoft Corporation. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Floris van Doorn, Leonardo de Moura, Jeremy Avigad, Mario Carneiro\n-/\n-- This is redundant with `pow_le_pow_of_le_left'`,\n-- We leave a version in the `nat` namespace as well.\n-- (The global `pow_le_pow_of_le_left` needs an extra hypothesis `0 ≤ x`.)\nprotected theorem pow_le_pow_of_le_left {x y : ℕ} (H : x ≤ y) : ∀ i : ℕ, x ^ i ≤ y ^ i :=\n  pow_le_pow_of_le_left' H\n#align pow_le_pow_of_le_left pow_le_pow_of_le_left\n-/\n\n",
  "pow_le_iff_le_right":
- "theorem pow_le_iff_le_right {x m n : ℕ} (k : 2 ≤ x) : x ^ m ≤ x ^ n ↔ m ≤ n :=\n  strict_mono.le_iff_le (pow_right_strictMono k)\n#align pow_le_iff_le_right pow_le_iff_le_right\n\n",
+ "theorem pow_le_iff_le_right {x m n : ℕ} (k : 2 ≤ x) : x ^ m ≤ x ^ n ↔ m ≤ n :=\n  StrictMono.le_iff_le (pow_right_strictMono k)\n#align pow_le_iff_le_right pow_le_iff_le_right\n\n",
  "pow_le_iff_le_left":
- "theorem pow_le_iff_le_left {m x y : ℕ} (k : 1 ≤ m) : x ^ m ≤ y ^ m ↔ x ≤ y :=\n  strict_mono.le_iff_le (pow_left_strictMono k)\n#align pow_le_iff_le_left pow_le_iff_le_left\n\n",
+ "theorem pow_le_iff_le_left {m x y : ℕ} (k : 1 ≤ m) : x ^ m ≤ y ^ m ↔ x ≤ y :=\n  StrictMono.le_iff_le (pow_left_strictMono k)\n#align pow_le_iff_le_left pow_le_iff_le_left\n\n",
  "pow_dvd_pow_iff_pow_le_pow":
  "theorem pow_dvd_pow_iff_pow_le_pow {k l : ℕ} : ∀ {x : ℕ} (w : 0 < x), x ^ k ∣ x ^ l ↔ x ^ k ≤ x ^ l\n  | x + 1, w => by\n    constructor\n    · intro a\n      exact le_of_dvd (pow_pos (succ_pos x) l) a\n    · intro a\n      cases' x with x\n      · simp only [one_pow]\n      · have le := (pow_le_iff_le_right (nat.le_add_left _ _)).mp a\n        use (x + 2) ^ (l - k)\n        rw [← pow_add, add_comm k, tsub_add_cancel_of_le le]\n#align pow_dvd_pow_iff_pow_le_pow pow_dvd_pow_iff_pow_le_pow\n\n",
  "pow_dvd_pow_iff_le_right'":
@@ -57,11 +57,11 @@
  "not_pos_pow_dvd":
  "theorem not_pos_pow_dvd : ∀ {p k : ℕ} (hp : 1 < p) (hk : 1 < k), ¬p ^ k ∣ p\n  | succ p, succ k, hp, hk, h =>\n    have : succ p * succ p ^ k ∣ succ p * 1 := by simpa [pow_succ] using h\n    have : succ p ^ k ∣ 1 := dvd_of_mul_dvd_mul_left (succ_pos _) this\n    have he : succ p ^ k = 1 := eq_one_of_dvd_one this\n    have : k < succ p ^ k := lt_pow_self hp k\n    have : k < 1 := by rwa [he] at this\n    have : k = 0 := nat.eq_zero_of_le_zero <| le_of_lt_succ this\n    have : 1 < 1 := by rwa [this] at hk\n    absurd this (by decide)\n#align not_pos_pow_dvd not_pos_pow_dvd\n\n",
  "nat_pow":
- "#print StrictMono.nat_pow /-\ntheorem StrictMono.nat_pow {n : ℕ} (hn : 1 ≤ n) {f : ℕ → ℕ} (hf : strict_mono f) : strict_mono fun m => f m ^ n :=\n  (Nat.pow_left_strictMono hn).comp hf\n#align strict_mono.nat_pow StrictMono.nat_pow\n-/\n\n",
+ "#print StrictMono.nat_pow /-\ntheorem StrictMono.nat_pow {n : ℕ} (hn : 1 ≤ n) {f : ℕ → ℕ} (hf : StrictMono f) : StrictMono fun m => f m ^ n :=\n  (Nat.pow_left_strictMono hn).comp hf\n#align strict_mono.nat_pow StrictMono.nat_pow\n-/\n\n",
  "mul_lt_mul_pow_succ":
  "theorem mul_lt_mul_pow_succ {n a q : ℕ} (a0 : 0 < a) (q1 : 1 < q) : n * q < a * q ^ (n + 1) :=\n  by\n  rw [pow_succ', ← mul_assoc, mul_lt_mul_right (zero_lt_one.trans q1)]\n  exact lt_mul_of_one_le_of_lt (nat.succ_le_iff.mpr a0) (Nat.lt_pow_self q1 n)\n#align mul_lt_mul_pow_succ mul_lt_mul_pow_succ\n\n",
  "mod_pow_succ":
- "theorem mod_pow_succ {b : ℕ} (w m : ℕ) : m % b ^ succ w = b * (m / b % b ^ w) + m % b :=\n  by\n  by_cases b_h : b = 0\n  · simp [b_h, pow_succ]\n  have b_pos := nat.pos_of_ne_zero b_h\n  apply nat.strong_induction_on m\n  clear m\n  intro p IH\n  cases' lt_or_ge p (b ^ succ w) with h₁ h₁\n  -- base case: p < b^succ w\n  · have h₂ : p / b < b ^ w := by\n      rw [div_lt_iff_lt_mul b_pos]\n      simpa [pow_succ'] using h₁\n    rw [mod_eq_of_lt h₁, mod_eq_of_lt h₂]\n    simp [div_add_mod]\n  -- step: p ≥ b^succ w\n  · -- Generate condition for induction hypothesis\n    have h₂ : p - b ^ succ w < p := tsub_lt_self ((pow_pos b_pos _).trans_le h₁) (pow_pos b_pos _)\n    -- Apply induction\n    rw [mod_eq_sub_mod h₁, IH _ h₂]\n    -- Normalize goal and h1\n    simp only [pow_succ]\n    simp only [GE.ge, pow_succ] at h₁\n    -- Pull subtraction outside mod and div\n    rw [sub_mul_mod _ _ _ h₁, sub_mul_div _ _ _ h₁]\n    -- Cancel subtraction inside mod b^w\n    have p_b_ge : b ^ w ≤ p / b := by\n      rw [le_div_iff_mul_le b_pos, mul_comm]\n      exact h₁\n    rw [eq.symm (mod_eq_sub_mod p_b_ge)]\n#align mod_pow_succ mod_pow_succ\n\n",
+ "theorem mod_pow_succ {b : ℕ} (w m : ℕ) : m % b ^ succ w = b * (m / b % b ^ w) + m % b :=\n  by\n  by_cases b_h : b = 0\n  · simp [b_h, pow_succ]\n  have b_pos := nat.pos_of_ne_zero b_h\n  apply nat.strong_induction_on m\n  clear m\n  intro p IH\n  cases' lt_or_ge p (b ^ succ w) with h₁ h₁\n  -- base case: p < b^succ w\n  · have h₂ : p / b < b ^ w := by\n      rw [div_lt_iff_lt_mul b_pos]\n      simpa [pow_succ'] using h₁\n    rw [mod_eq_of_lt h₁, mod_eq_of_lt h₂]\n    simp [div_add_mod]\n  -- step: p ≥ b^succ w\n  · -- Generate condition for induction hypothesis\n    have h₂ : p - b ^ succ w < p := tsub_lt_self ((pow_pos b_pos _).trans_le h₁) (pow_pos b_pos _)\n    -- Apply induction\n    rw [mod_eq_sub_mod h₁, IH _ h₂]\n    -- Normalize goal and h1\n    simp only [pow_succ]\n    simp only [GE.ge, pow_succ] at h₁\n    -- Pull subtraction outside mod and div\n    rw [sub_mul_mod _ _ _ h₁, sub_mul_div _ _ _ h₁]\n    -- Cancel subtraction inside mod b^w\n    have p_b_ge : b ^ w ≤ p / b := by\n      rw [le_div_iff_mul_le b_pos, mul_comm]\n      exact h₁\n    rw [Eq.symm (mod_eq_sub_mod p_b_ge)]\n#align mod_pow_succ mod_pow_succ\n\n",
  "lt_two_pow":
  "theorem lt_two_pow (n : ℕ) : n < 2 ^ n :=\n  lt_pow_self (by decide) n\n#align lt_two_pow lt_two_pow\n\n",
  "lt_pow_self":

@@ -1,66 +1,66 @@
 {"or_eq_of_eq_true_right":
- "#print or_eq_of_eq_true_right /-\ntheorem or_eq_of_eq_true_right {a b : Prop} (h : b = true) : (a ∨ b) = true :=\n  h.symm ▸ propext (or_true_iff _)\n#align or_eq_of_eq_true_right or_eq_of_eq_true_right\n-/\n\n",
+ "#print or_eq_of_eq_true_right /-\ntheorem or_eq_of_eq_true_right {a b : Prop} (h : b = True) : (a ∨ b) = True :=\n  h.symm ▸ propext (or_true_iff _)\n#align or_eq_of_eq_true_right or_eq_of_eq_true_right\n-/\n\n",
  "or_eq_of_eq_true_left":
- "#print or_eq_of_eq_true_left /-\ntheorem or_eq_of_eq_true_left {a b : Prop} (h : a = true) : (a ∨ b) = true :=\n  h.symm ▸ propext (true_or_iff _)\n#align or_eq_of_eq_true_left or_eq_of_eq_true_left\n-/\n\n",
+ "#print or_eq_of_eq_true_left /-\ntheorem or_eq_of_eq_true_left {a b : Prop} (h : a = True) : (a ∨ b) = True :=\n  h.symm ▸ propext (true_or_iff _)\n#align or_eq_of_eq_true_left or_eq_of_eq_true_left\n-/\n\n",
  "or_eq_of_eq_false_right":
- "#print or_eq_of_eq_false_right /-\ntheorem or_eq_of_eq_false_right {a b : Prop} (h : b = false) : (a ∨ b) = a :=\n  h.symm ▸ propext (or_false_iff _)\n#align or_eq_of_eq_false_right or_eq_of_eq_false_right\n-/\n\n",
+ "#print or_eq_of_eq_false_right /-\ntheorem or_eq_of_eq_false_right {a b : Prop} (h : b = False) : (a ∨ b) = a :=\n  h.symm ▸ propext (or_false_iff _)\n#align or_eq_of_eq_false_right or_eq_of_eq_false_right\n-/\n\n",
  "or_eq_of_eq_false_left":
- "#print or_eq_of_eq_false_left /-\ntheorem or_eq_of_eq_false_left {a b : Prop} (h : a = false) : (a ∨ b) = b :=\n  h.symm ▸ propext (false_or_iff _)\n#align or_eq_of_eq_false_left or_eq_of_eq_false_left\n-/\n\n",
+ "#print or_eq_of_eq_false_left /-\ntheorem or_eq_of_eq_false_left {a b : Prop} (h : a = False) : (a ∨ b) = b :=\n  h.symm ▸ propext (false_or_iff _)\n#align or_eq_of_eq_false_left or_eq_of_eq_false_left\n-/\n\n",
  "or_eq_of_eq":
  "#print or_eq_of_eq /-\ntheorem or_eq_of_eq {a b : Prop} (h : a = b) : (a ∨ b) = a :=\n  h ▸ propext (or_self_iff _)\n#align or_eq_of_eq or_eq_of_eq\n-/\n\n",
  "not_imp_eq_of_eq_false_right":
- "#print not_imp_eq_of_eq_false_right /-\n/-- Remark: the congruence closure module will only use this lemma if\n   cc_config.em is tt. -/\ntheorem not_imp_eq_of_eq_false_right {a b : Prop} (h : b = false) : (not a → b) = a :=\n  h.symm ▸ propext (iff.intro (fun h' => by_contradiction fun hna => h' hna) fun ha hna => hna ha)\n#align not_imp_eq_of_eq_false_right not_imp_eq_of_eq_false_right\n-/\n\n",
+ "#print not_imp_eq_of_eq_false_right /-\n/-- Remark: the congruence closure module will only use this lemma if\n   cc_config.em is tt. -/\ntheorem not_imp_eq_of_eq_false_right {a b : Prop} (h : b = False) : (not a → b) = a :=\n  h.symm ▸ propext (iff.intro (fun h' => by_contradiction fun hna => h' hna) fun ha hna => hna ha)\n#align not_imp_eq_of_eq_false_right not_imp_eq_of_eq_false_right\n-/\n\n",
  "not_eq_of_eq_true":
- "#print not_eq_of_eq_true /-\ntheorem not_eq_of_eq_true {a : Prop} (h : a = true) : not a = false :=\n  h.symm ▸ propext not_true\n#align not_eq_of_eq_true not_eq_of_eq_true\n-/\n\n",
+ "#print not_eq_of_eq_true /-\ntheorem not_eq_of_eq_true {a : Prop} (h : a = True) : not a = False :=\n  h.symm ▸ propext not_true\n#align not_eq_of_eq_true not_eq_of_eq_true\n-/\n\n",
  "not_eq_of_eq_false":
- "#print not_eq_of_eq_false /-\ntheorem not_eq_of_eq_false {a : Prop} (h : a = false) : not a = true :=\n  h.symm ▸ propext not_false_iff\n#align not_eq_of_eq_false not_eq_of_eq_false\n-/\n\n",
+ "#print not_eq_of_eq_false /-\ntheorem not_eq_of_eq_false {a : Prop} (h : a = False) : not a = True :=\n  h.symm ▸ propext not_false_iff\n#align not_eq_of_eq_false not_eq_of_eq_false\n-/\n\n",
  "ne_of_ne_of_eq":
  "#print ne_of_ne_of_eq /-\ntheorem ne_of_ne_of_eq {α : Sort u} {a b c : α} (h₁ : a ≠ b) (h₂ : b = c) : a ≠ c :=\n  h₂ ▸ h₁\n#align ne_of_ne_of_eq ne_of_ne_of_eq\n-/\n\n",
  "ne_of_eq_of_ne":
  "#print ne_of_eq_of_ne /-\ntheorem ne_of_eq_of_ne {α : Sort u} {a b c : α} (h₁ : a = b) (h₂ : b ≠ c) : a ≠ c :=\n  h₁.symm ▸ h₂\n#align ne_of_eq_of_ne ne_of_eq_of_ne\n-/\n\n",
  "imp_eq_true_of_eq":
- "#print imp_eq_true_of_eq /-\ntheorem imp_eq_true_of_eq {a b : Prop} (h : a = b) : (a → b) = true :=\n  h ▸ propext (iff.intro (fun h => trivial) fun h ha => ha)\n#align imp_eq_true_of_eq imp_eq_true_of_eq\n-/\n\n",
+ "#print imp_eq_true_of_eq /-\ntheorem imp_eq_true_of_eq {a b : Prop} (h : a = b) : (a → b) = True :=\n  h ▸ propext (iff.intro (fun h => trivial) fun h ha => ha)\n#align imp_eq_true_of_eq imp_eq_true_of_eq\n-/\n\n",
  "imp_eq_of_eq_true_right":
- "#print imp_eq_of_eq_true_right /-\ntheorem imp_eq_of_eq_true_right {a b : Prop} (h : b = true) : (a → b) = true :=\n  h.symm ▸ propext (iff.intro (fun h => trivial) fun h₁ h₂ => h₁)\n#align imp_eq_of_eq_true_right imp_eq_of_eq_true_right\n-/\n\n",
+ "#print imp_eq_of_eq_true_right /-\ntheorem imp_eq_of_eq_true_right {a b : Prop} (h : b = True) : (a → b) = True :=\n  h.symm ▸ propext (iff.intro (fun h => trivial) fun h₁ h₂ => h₁)\n#align imp_eq_of_eq_true_right imp_eq_of_eq_true_right\n-/\n\n",
  "imp_eq_of_eq_true_left":
- "#print imp_eq_of_eq_true_left /-\ntheorem imp_eq_of_eq_true_left {a b : Prop} (h : a = true) : (a → b) = b :=\n  h.symm ▸ propext (iff.intro (fun h => h trivial) fun h₁ h₂ => h₁)\n#align imp_eq_of_eq_true_left imp_eq_of_eq_true_left\n-/\n\n",
+ "#print imp_eq_of_eq_true_left /-\ntheorem imp_eq_of_eq_true_left {a b : Prop} (h : a = True) : (a → b) = b :=\n  h.symm ▸ propext (iff.intro (fun h => h trivial) fun h₁ h₂ => h₁)\n#align imp_eq_of_eq_true_left imp_eq_of_eq_true_left\n-/\n\n",
  "imp_eq_of_eq_false_right":
- "#print imp_eq_of_eq_false_right /-\ntheorem imp_eq_of_eq_false_right {a b : Prop} (h : b = false) : (a → b) = not a :=\n  h.symm ▸ propext (iff.intro (fun h => h) fun hna ha => hna ha)\n#align imp_eq_of_eq_false_right imp_eq_of_eq_false_right\n-/\n\n",
+ "#print imp_eq_of_eq_false_right /-\ntheorem imp_eq_of_eq_false_right {a b : Prop} (h : b = False) : (a → b) = not a :=\n  h.symm ▸ propext (iff.intro (fun h => h) fun hna ha => hna ha)\n#align imp_eq_of_eq_false_right imp_eq_of_eq_false_right\n-/\n\n",
  "imp_eq_of_eq_false_left":
- "#print imp_eq_of_eq_false_left /-\ntheorem imp_eq_of_eq_false_left {a b : Prop} (h : a = false) : (a → b) = true :=\n  h.symm ▸ propext (iff.intro (fun h => trivial) fun h₁ h₂ => false.elim h₂)\n#align imp_eq_of_eq_false_left imp_eq_of_eq_false_left\n-/\n\n",
+ "#print imp_eq_of_eq_false_left /-\ntheorem imp_eq_of_eq_false_left {a b : Prop} (h : a = False) : (a → b) = True :=\n  h.symm ▸ propext (iff.intro (fun h => trivial) fun h₁ h₂ => false.elim h₂)\n#align imp_eq_of_eq_false_left imp_eq_of_eq_false_left\n-/\n\n",
  "iff_eq_true_of_eq":
- "#print iff_eq_true_of_eq /-\ntheorem iff_eq_true_of_eq {a b : Prop} (h : a = b) : (a ↔ b) = true :=\n  h ▸ propext (iff_self_iff _)\n#align iff_eq_true_of_eq iff_eq_true_of_eq\n-/\n\n",
+ "#print iff_eq_true_of_eq /-\ntheorem iff_eq_true_of_eq {a b : Prop} (h : a = b) : (a ↔ b) = True :=\n  h ▸ propext (iff_self_iff _)\n#align iff_eq_true_of_eq iff_eq_true_of_eq\n-/\n\n",
  "iff_eq_of_eq_true_right":
- "#print iff_eq_of_eq_true_right /-\ntheorem iff_eq_of_eq_true_right {a b : Prop} (h : b = true) : (a ↔ b) = a :=\n  h.symm ▸ propext (iff_true_iff _)\n#align iff_eq_of_eq_true_right iff_eq_of_eq_true_right\n-/\n\n",
+ "#print iff_eq_of_eq_true_right /-\ntheorem iff_eq_of_eq_true_right {a b : Prop} (h : b = True) : (a ↔ b) = a :=\n  h.symm ▸ propext (iff_true_iff _)\n#align iff_eq_of_eq_true_right iff_eq_of_eq_true_right\n-/\n\n",
  "iff_eq_of_eq_true_left":
- "#print iff_eq_of_eq_true_left /-\n/-\nCopyright (c) 2017 Microsoft Corporation. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Leonardo de Moura\n-/\ntheorem iff_eq_of_eq_true_left {a b : Prop} (h : a = true) : (a ↔ b) = b :=\n  h.symm ▸ propext (true_iff_iff _)\n#align iff_eq_of_eq_true_left iff_eq_of_eq_true_left\n-/\n\n",
+ "#print iff_eq_of_eq_true_left /-\n/-\nCopyright (c) 2017 Microsoft Corporation. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Leonardo de Moura\n-/\ntheorem iff_eq_of_eq_true_left {a b : Prop} (h : a = True) : (a ↔ b) = b :=\n  h.symm ▸ propext (true_iff_iff _)\n#align iff_eq_of_eq_true_left iff_eq_of_eq_true_left\n-/\n\n",
  "if_eq_of_eq_true":
- "#print if_eq_of_eq_true /-\ntheorem if_eq_of_eq_true {c : Prop} [d : decidable c] {α : Sort u} (t e : α) (h : c = true) : @ite α c d t e = t :=\n  if_pos (of_eq_true h)\n#align if_eq_of_eq_true if_eq_of_eq_true\n-/\n\n",
+ "#print if_eq_of_eq_true /-\ntheorem if_eq_of_eq_true {c : Prop} [d : Decidable c] {α : Sort u} (t e : α) (h : c = True) : @ite α c d t e = t :=\n  if_pos (of_eq_true h)\n#align if_eq_of_eq_true if_eq_of_eq_true\n-/\n\n",
  "if_eq_of_eq_false":
- "#print if_eq_of_eq_false /-\ntheorem if_eq_of_eq_false {c : Prop} [d : decidable c] {α : Sort u} (t e : α) (h : c = false) : @ite α c d t e = e :=\n  if_neg (not_of_eq_false h)\n#align if_eq_of_eq_false if_eq_of_eq_false\n-/\n\n",
+ "#print if_eq_of_eq_false /-\ntheorem if_eq_of_eq_false {c : Prop} [d : Decidable c] {α : Sort u} (t e : α) (h : c = False) : @ite α c d t e = e :=\n  if_neg (not_of_eq_false h)\n#align if_eq_of_eq_false if_eq_of_eq_false\n-/\n\n",
  "if_eq_of_eq":
- "#print if_eq_of_eq /-\ntheorem if_eq_of_eq (c : Prop) [d : decidable c] {α : Sort u} {t e : α} (h : t = e) : @ite α c d t e = t :=\n  match d with\n  | is_true hc => rfl\n  | is_false hnc => eq.symm h\n#align if_eq_of_eq if_eq_of_eq\n-/\n\n",
+ "#print if_eq_of_eq /-\ntheorem if_eq_of_eq (c : Prop) [d : Decidable c] {α : Sort u} {t e : α} (h : t = e) : @ite α c d t e = t :=\n  match d with\n  | is_true hc => rfl\n  | is_false hnc => Eq.symm h\n#align if_eq_of_eq if_eq_of_eq\n-/\n\n",
  "false_of_a_eq_not_a":
- "#print false_of_a_eq_not_a /-\ntheorem false_of_a_eq_not_a {a : Prop} (h : a = not a) : false :=\n  have : not a := fun ha => absurd ha (eq.mp h ha)\n  absurd (eq.mpr h this) this\n#align false_of_a_eq_not_a false_of_a_eq_not_a\n-/\n\n",
+ "#print false_of_a_eq_not_a /-\ntheorem false_of_a_eq_not_a {a : Prop} (h : a = not a) : False :=\n  have : not a := fun ha => absurd ha (eq.mp h ha)\n  absurd (eq.mpr h this) this\n#align false_of_a_eq_not_a false_of_a_eq_not_a\n-/\n\n",
  "eq_true_of_not_eq_false":
- "#print eq_true_of_not_eq_false /-\n/-- Remark: the congruence closure module will only use this lemma if\n   cc_config.em is tt. -/\ntheorem eq_true_of_not_eq_false {a : Prop} (h : not a = false) : a = true :=\n  eq_true (by_contradiction fun hna => eq.mp h hna)\n#align eq_true_of_not_eq_false eq_true_of_not_eq_false\n-/\n\n",
+ "#print eq_true_of_not_eq_false /-\n/-- Remark: the congruence closure module will only use this lemma if\n   cc_config.em is tt. -/\ntheorem eq_true_of_not_eq_false {a : Prop} (h : not a = False) : a = True :=\n  eq_true (by_contradiction fun hna => eq.mp h hna)\n#align eq_true_of_not_eq_false eq_true_of_not_eq_false\n-/\n\n",
  "eq_true_of_and_eq_true_right":
- "#print eq_true_of_and_eq_true_right /-\ntheorem eq_true_of_and_eq_true_right {a b : Prop} (h : (a ∧ b) = true) : b = true :=\n  eq_true (And.right (of_eq_true h))\n#align eq_true_of_and_eq_true_right eq_true_of_and_eq_true_right\n-/\n\n",
+ "#print eq_true_of_and_eq_true_right /-\ntheorem eq_true_of_and_eq_true_right {a b : Prop} (h : (a ∧ b) = True) : b = True :=\n  eq_true (And.right (of_eq_true h))\n#align eq_true_of_and_eq_true_right eq_true_of_and_eq_true_right\n-/\n\n",
  "eq_true_of_and_eq_true_left":
- "#print eq_true_of_and_eq_true_left /-\ntheorem eq_true_of_and_eq_true_left {a b : Prop} (h : (a ∧ b) = true) : a = true :=\n  eq_true (And.left (of_eq_true h))\n#align eq_true_of_and_eq_true_left eq_true_of_and_eq_true_left\n-/\n\n",
+ "#print eq_true_of_and_eq_true_left /-\ntheorem eq_true_of_and_eq_true_left {a b : Prop} (h : (a ∧ b) = True) : a = True :=\n  eq_true (And.left (of_eq_true h))\n#align eq_true_of_and_eq_true_left eq_true_of_and_eq_true_left\n-/\n\n",
  "eq_false_of_or_eq_false_right":
- "#print eq_false_of_or_eq_false_right /-\ntheorem eq_false_of_or_eq_false_right {a b : Prop} (h : (a ∨ b) = false) : b = false :=\n  eq_false fun hb => false.elim (eq.mp h (or.inr hb))\n#align eq_false_of_or_eq_false_right eq_false_of_or_eq_false_right\n-/\n\n",
+ "#print eq_false_of_or_eq_false_right /-\ntheorem eq_false_of_or_eq_false_right {a b : Prop} (h : (a ∨ b) = False) : b = False :=\n  eq_false fun hb => false.elim (eq.mp h (or.inr hb))\n#align eq_false_of_or_eq_false_right eq_false_of_or_eq_false_right\n-/\n\n",
  "eq_false_of_or_eq_false_left":
- "#print eq_false_of_or_eq_false_left /-\ntheorem eq_false_of_or_eq_false_left {a b : Prop} (h : (a ∨ b) = false) : a = false :=\n  eq_false fun ha => false.elim (eq.mp h (or.inl ha))\n#align eq_false_of_or_eq_false_left eq_false_of_or_eq_false_left\n-/\n\n",
+ "#print eq_false_of_or_eq_false_left /-\ntheorem eq_false_of_or_eq_false_left {a b : Prop} (h : (a ∨ b) = False) : a = False :=\n  eq_false fun ha => false.elim (eq.mp h (or.inl ha))\n#align eq_false_of_or_eq_false_left eq_false_of_or_eq_false_left\n-/\n\n",
  "eq_false_of_not_eq_true":
- "#print eq_false_of_not_eq_true /-\ntheorem eq_false_of_not_eq_true {a : Prop} (h : not a = true) : a = false :=\n  eq_false fun ha => absurd ha (eq.mpr h trivial)\n#align eq_false_of_not_eq_true eq_false_of_not_eq_true\n-/\n\n",
+ "#print eq_false_of_not_eq_true /-\ntheorem eq_false_of_not_eq_true {a : Prop} (h : not a = True) : a = False :=\n  eq_false fun ha => absurd ha (eq.mpr h trivial)\n#align eq_false_of_not_eq_true eq_false_of_not_eq_true\n-/\n\n",
  "and_eq_of_eq_true_right":
- "#print and_eq_of_eq_true_right /-\ntheorem and_eq_of_eq_true_right {a b : Prop} (h : b = true) : (a ∧ b) = a :=\n  h.symm ▸ propext (and_true_iff _)\n#align and_eq_of_eq_true_right and_eq_of_eq_true_right\n-/\n\n",
+ "#print and_eq_of_eq_true_right /-\ntheorem and_eq_of_eq_true_right {a b : Prop} (h : b = True) : (a ∧ b) = a :=\n  h.symm ▸ propext (and_true_iff _)\n#align and_eq_of_eq_true_right and_eq_of_eq_true_right\n-/\n\n",
  "and_eq_of_eq_true_left":
- "#print and_eq_of_eq_true_left /-\ntheorem and_eq_of_eq_true_left {a b : Prop} (h : a = true) : (a ∧ b) = b :=\n  h.symm ▸ propext (true_and_iff _)\n#align and_eq_of_eq_true_left and_eq_of_eq_true_left\n-/\n\n",
+ "#print and_eq_of_eq_true_left /-\ntheorem and_eq_of_eq_true_left {a b : Prop} (h : a = True) : (a ∧ b) = b :=\n  h.symm ▸ propext (true_and_iff _)\n#align and_eq_of_eq_true_left and_eq_of_eq_true_left\n-/\n\n",
  "and_eq_of_eq_false_right":
- "#print and_eq_of_eq_false_right /-\ntheorem and_eq_of_eq_false_right {a b : Prop} (h : b = false) : (a ∧ b) = false :=\n  h.symm ▸ propext (and_false_iff _)\n#align and_eq_of_eq_false_right and_eq_of_eq_false_right\n-/\n\n",
+ "#print and_eq_of_eq_false_right /-\ntheorem and_eq_of_eq_false_right {a b : Prop} (h : b = False) : (a ∧ b) = False :=\n  h.symm ▸ propext (and_false_iff _)\n#align and_eq_of_eq_false_right and_eq_of_eq_false_right\n-/\n\n",
  "and_eq_of_eq_false_left":
- "#print and_eq_of_eq_false_left /-\ntheorem and_eq_of_eq_false_left {a b : Prop} (h : a = false) : (a ∧ b) = false :=\n  h.symm ▸ propext (false_and_iff _)\n#align and_eq_of_eq_false_left and_eq_of_eq_false_left\n-/\n\n",
+ "#print and_eq_of_eq_false_left /-\ntheorem and_eq_of_eq_false_left {a b : Prop} (h : a = False) : (a ∧ b) = False :=\n  h.symm ▸ propext (false_and_iff _)\n#align and_eq_of_eq_false_left and_eq_of_eq_false_left\n-/\n\n",
  "and_eq_of_eq":
  "#print and_eq_of_eq /-\ntheorem and_eq_of_eq {a b : Prop} (h : a = b) : (a ∧ b) = a :=\n  h ▸ propext (and_self_iff _)\n#align and_eq_of_eq and_eq_of_eq\n-/\n\n"}

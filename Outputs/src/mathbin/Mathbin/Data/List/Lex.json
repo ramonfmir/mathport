@@ -1,11 +1,11 @@
 {"to_ne":
- "theorem to_ne : ∀ {l₁ l₂ : list α}, Lex (· ≠ ·) l₁ l₂ → l₁ ≠ l₂\n  | _, _, cons h, e => to_ne h (list.cons.inj e).2\n  | _, _, Rel r, e => r (list.cons.inj e).1\n#align to_ne to_ne\n\n",
+ "theorem to_ne : ∀ {l₁ l₂ : List α}, Lex (· ≠ ·) l₁ l₂ → l₁ ≠ l₂\n  | _, _, cons h, e => to_ne h (list.cons.inj e).2\n  | _, _, Rel r, e => r (list.cons.inj e).1\n#align to_ne to_ne\n\n",
  "not_nil_right":
- "@[simp]\ntheorem not_nil_right (r : α → α → Prop) (l : list α) : ¬Lex r l [] :=\n  fun.\n#align not_nil_right not_nil_right\n\n",
+ "@[simp]\ntheorem not_nil_right (r : α → α → Prop) (l : List α) : ¬Lex r l [] :=\n  fun.\n#align not_nil_right not_nil_right\n\n",
  "nil_lt_cons":
- "--Note: this overrides an instance in core lean\ntheorem nil_lt_cons [LT α] (a : α) (l : list α) : [] < a :: l :=\n  lex.nil\n#align nil_lt_cons nil_lt_cons\n\n",
+ "--Note: this overrides an instance in core lean\ntheorem nil_lt_cons [LT α] (a : α) (l : List α) : [] < a :: l :=\n  Lex.nil\n#align nil_lt_cons nil_lt_cons\n\n",
  "ne_iff":
- "theorem ne_iff {l₁ l₂ : list α} (H : length l₁ ≤ length l₂) : Lex (· ≠ ·) l₁ l₂ ↔ l₁ ≠ l₂ := by\n  classical exact Decidable.List.Lex.ne_iff H\n#align ne_iff ne_iff\n\n",
+ "theorem ne_iff {l₁ l₂ : List α} (H : length l₁ ≤ length l₂) : Lex (· ≠ ·) l₁ l₂ ↔ l₁ ≠ l₂ := by\n  classical exact Decidable.List.Lex.ne_iff H\n#align ne_iff ne_iff\n\n",
  "imp":
  "theorem imp {r s : α → α → Prop} (H : ∀ a b, r a b → s a b) : ∀ l₁ l₂, Lex r l₁ l₂ → Lex s l₁ l₂\n  | _, _, nil => nil\n  | _, _, cons h => cons (imp _ _ h)\n  | _, _, Rel r => rel (H _ _ r)\n#align imp imp\n\n",
  "cons_iff":

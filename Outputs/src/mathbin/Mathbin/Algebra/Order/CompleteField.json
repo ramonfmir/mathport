@@ -1,15 +1,15 @@
 {"ring_hom_monotone":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →+* » -/\ntheorem ring_hom_monotone (hR : ∀ r : R, 0 ≤ r → ∃ s : R, s ^ 2 = r) (f : «expr →+* » R S) : monotone f :=\n  (monotone_iff_map_nonneg f).2 fun r h => by\n    obtain ⟨s, rfl⟩ := hR r h\n    rw [map_pow]\n    apply sq_nonneg\n#align ring_hom_monotone ring_hom_monotone\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →+* » -/\ntheorem ring_hom_monotone (hR : ∀ r : R, 0 ≤ r → ∃ s : R, s ^ 2 = r) (f : «expr →+* » R S) : Monotone f :=\n  (monotone_iff_map_nonneg f).2 fun r h => by\n    obtain ⟨s, rfl⟩ := hR r h\n    rw [map_pow]\n    apply sq_nonneg\n#align ring_hom_monotone ring_hom_monotone\n\n",
  "mem_cut_map_iff":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℚ -/\n@[simp]\ntheorem mem_cut_map_iff : b ∈ cut_map β a ↔ ∃ q : exprℚ, (q : α) < a ∧ (q : β) = b :=\n  iff.rfl\n#align mem_cut_map_iff mem_cut_map_iff\n\n",
  "lt_induced_map_iff":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℚ -/\ntheorem lt_induced_map_iff : b < induced_map α β a ↔ ∃ q : exprℚ, b < q ∧ (q : α) < a :=\n  ⟨fun h => (exists_rat_btwn h).imp fun q => and.imp_right coe_lt_induced_map_iff.1, fun ⟨q, hbq, hqa⟩ =>\n    hbq.trans <| by rwa [coe_lt_induced_map_iff]⟩\n#align lt_induced_map_iff lt_induced_map_iff\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℚ -/\ntheorem lt_induced_map_iff : b < induced_map α β a ↔ ∃ q : exprℚ, b < q ∧ (q : α) < a :=\n  ⟨fun h => (exists_rat_btwn h).imp fun q => And.imp_right coe_lt_induced_map_iff.1, fun ⟨q, hbq, hqa⟩ =>\n    hbq.trans <| by rwa [coe_lt_induced_map_iff]⟩\n#align lt_induced_map_iff lt_induced_map_iff\n\n",
  "le_induced_map_mul_self_of_mem_cut_map":
  "/-- Preparatory lemma for `induced_ring_hom`. -/\ntheorem le_induced_map_mul_self_of_mem_cut_map (ha : 0 < a) (b : β) (hb : b ∈ cut_map β (a * a)) :\n    b ≤ induced_map α β a * induced_map α β a :=\n  by\n  obtain ⟨q, hb, rfl⟩ := hb\n  obtain ⟨q', hq', hqq', hqa⟩ := exists_rat_pow_btwn two_ne_zero hb (mul_self_pos.2 ha.ne')\n  trans (q' : β) ^ 2\n  exact_mod_cast hqq'.le\n  rw [pow_two] at hqa⊢\n  exact\n    mul_self_le_mul_self (by exact_mod_cast hq'.le)\n      (le_csupₛ (cut_map_bdd_above β a) <| coe_mem_cut_map_iff.2 <| lt_of_mul_self_lt_mul_self ha.le hqa)\n#align le_induced_map_mul_self_of_mem_cut_map le_induced_map_mul_self_of_mem_cut_map\n\n",
  "induced_order_ring_iso_symm":
  "@[simp]\ntheorem induced_order_ring_iso_symm : (induced_order_ring_iso β γ).symm = induced_order_ring_iso γ β :=\n  rfl\n#align induced_order_ring_iso_symm induced_order_ring_iso_symm\n\n",
  "induced_order_ring_iso_self":
- "@[simp]\ntheorem induced_order_ring_iso_self : induced_order_ring_iso β β = order_ring_iso.refl β :=\n  order_ring_iso.ext induced_map_self\n#align induced_order_ring_iso_self induced_order_ring_iso_self\n\n",
+ "@[simp]\ntheorem induced_order_ring_iso_self : induced_order_ring_iso β β = OrderRingIso.refl β :=\n  OrderRingIso.ext induced_map_self\n#align induced_order_ring_iso_self induced_order_ring_iso_self\n\n",
  "induced_map_zero":
  "@[simp]\ntheorem induced_map_zero : induced_map α β 0 = 0 := by exact_mod_cast induced_map_rat α β 0\n#align induced_map_zero induced_map_zero\n\n",
  "induced_map_self":
@@ -21,13 +21,13 @@
  "induced_map_nonneg":
  "theorem induced_map_nonneg (ha : 0 ≤ a) : 0 ≤ induced_map α β a :=\n  (induced_map_zero α _).ge.trans <| induced_map_mono _ _ ha\n#align induced_map_nonneg induced_map_nonneg\n\n",
  "induced_map_mono":
- "theorem induced_map_mono : monotone (induced_map α β) := fun a b h =>\n  csupₛ_le_csupₛ (cut_map_bdd_above β _) (cut_map_nonempty β _) (cut_map_mono β h)\n#align induced_map_mono induced_map_mono\n\n",
+ "theorem induced_map_mono : Monotone (induced_map α β) := fun a b h =>\n  csupₛ_le_csupₛ (cut_map_bdd_above β _) (cut_map_nonempty β _) (cut_map_mono β h)\n#align induced_map_mono induced_map_mono\n\n",
  "induced_map_inv_self":
  "@[simp]\ntheorem induced_map_inv_self (b : β) : induced_map γ β (induced_map β γ b) = b := by\n  rw [induced_map_induced_map, induced_map_self]\n#align induced_map_inv_self induced_map_inv_self\n\n",
  "induced_map_induced_map":
  "@[simp]\ntheorem induced_map_induced_map (a : α) : induced_map β γ (induced_map α β a) = induced_map α γ a :=\n  eq_of_forall_rat_lt_iff_lt fun q => by\n    rw [coe_lt_induced_map_iff, coe_lt_induced_map_iff, iff.comm, coe_lt_induced_map_iff]\n#align induced_map_induced_map induced_map_induced_map\n\n",
  "induced_map_add":
- "theorem induced_map_add (x y : α) : induced_map α β (x + y) = induced_map α β x + induced_map α β y :=\n  by\n  rw [induced_map, cut_map_add]\n  exact csupₛ_add (cut_map_nonempty β x) (cut_map_bdd_above β x) (cut_map_nonempty β y) (cut_map_bdd_above β y)\n#align induced_map_add induced_map_add\n\n",
+ "theorem induced_map_add (x y : α) : induced_map α β (x + y) = induced_map α β x + induced_map α β y :=\n  by\n  rw [[anonymous], cut_map_add]\n  exact csupₛ_add (cut_map_nonempty β x) (cut_map_bdd_above β x) (cut_map_nonempty β y) (cut_map_bdd_above β y)\n#align induced_map_add induced_map_add\n\n",
  "exists_mem_cut_map_mul_self_of_lt_induced_map_mul_self":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℚ -/\n/-- Preparatory lemma for `induced_ring_hom`. -/\ntheorem exists_mem_cut_map_mul_self_of_lt_induced_map_mul_self (ha : 0 < a) (b : β)\n    (hba : b < induced_map α β a * induced_map α β a) : ∃ c ∈ cut_map β (a * a), b < c :=\n  by\n  obtain hb | hb := lt_or_le b 0\n  · refine' ⟨0, _, hb⟩\n    rw [← Rat.cast_zero, coe_mem_cut_map_iff, Rat.cast_zero]\n    exact mul_self_pos.2 ha.ne'\n  obtain ⟨q, hq, hbq, hqa⟩ := exists_rat_pow_btwn two_ne_zero hba (hb.trans_lt hba)\n  rw [← cast_pow] at hbq\n  refine' ⟨(q ^ 2 : exprℚ), coe_mem_cut_map_iff.2 _, hbq⟩\n  rw [pow_two] at hqa⊢\n  push_cast\n  obtain ⟨q', hq', hqa'⟩ := lt_induced_map_iff.1 (lt_of_mul_self_lt_mul_self _ hqa)\n  exact mul_self_lt_mul_self (by exact_mod_cast hq.le) (hqa'.trans' <| by assumption_mod_cast)\n  exact induced_map_nonneg ha.le\n#align exists_mem_cut_map_mul_self_of_lt_induced_map_mul_self exists_mem_cut_map_mul_self_of_lt_induced_map_mul_self\n\n",
  "cut_map_self":

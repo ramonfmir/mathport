@@ -1,100 +1,100 @@
 {"top_to_lower_set":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n@[simp]\ntheorem top_to_lower_set : («expr⊤» : ideal P).to_lower_set = «expr⊤» :=\n  rfl\n#align top_to_lower_set top_to_lower_set\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n@[simp]\ntheorem top_to_lower_set : («expr⊤» : Ideal P).to_lower_set = «expr⊤» :=\n  rfl\n#align top_to_lower_set top_to_lower_set\n\n",
  "top_of_top_mem":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\ntheorem top_of_top_mem (h : «expr⊤» ∈ I) : I = «expr⊤» := by\n  ext\n  exact iff_of_true (I.lower le_top h) trivial\n#align top_of_top_mem top_of_top_mem\n\n",
  "top_not_mem":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\ntheorem is_proper.top_not_mem (hI : is_proper I) : «expr⊤» ∉ I := fun h => hI.ne_top <| top_of_top_mem h\n#align is_proper.top_not_mem is_proper.top_not_mem\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\ntheorem is_proper.top_not_mem (hI : IsProper I) : «expr⊤» ∉ I := fun h => hI.ne_top <| top_of_top_mem h\n#align is_proper.top_not_mem is_proper.top_not_mem\n\n",
  "to_lower_set_injective":
- "/-\nCopyright (c) 2020 David Wärn. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: David Wärn\n-/\ntheorem to_lower_set_injective : injective (to_lower_set : ideal P → lower_set P) := fun s t h =>\n  by\n  cases s\n  cases t\n  congr\n#align to_lower_set_injective to_lower_set_injective\n\n",
+ "/-\nCopyright (c) 2020 David Wärn. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: David Wärn\n-/\ntheorem to_lower_set_injective : injective (to_lower_set : Ideal P → LowerSet P) := fun s t h =>\n  by\n  cases s\n  cases t\n  congr\n#align to_lower_set_injective to_lower_set_injective\n\n",
  "sup_mem_iff":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊔ » -/\n@[simp]\ntheorem sup_mem_iff : «expr ⊔ » x y ∈ I ↔ x ∈ I ∧ y ∈ I :=\n  ⟨fun h => ⟨I.lower le_sup_left h, I.lower le_sup_right h⟩, fun h => sup_mem h.1 h.2⟩\n#align sup_mem_iff sup_mem_iff\n\n",
  "sup_mem":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊔ » -/\n/-- A specific witness of `I.directed` when `P` has joins. -/\ntheorem sup_mem (hx : x ∈ s) (hy : y ∈ s) : «expr ⊔ » x y ∈ s :=\n  let ⟨z, hz, hx, hy⟩ := s.directed x hx y hy\n  s.lower (sup_le hx hy) hz\n#align sup_mem sup_mem\n\n",
  "principal_top":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n@[simp]\ntheorem principal_top : principal («expr⊤» : P) = «expr⊤» :=\n  to_lower_set_injective <| lower_set.Iic_top\n#align principal_top principal_top\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n@[simp]\ntheorem principal_top : principal («expr⊤» : P) = «expr⊤» :=\n  toLowerSet_injective <| LowerSet.Iic_top\n#align principal_top principal_top\n\n",
  "principal_le_iff":
  "@[simp]\ntheorem principal_le_iff : principal x ≤ I ↔ x ∈ I :=\n  ⟨fun h => h le_rfl, fun hx y hy => I.lower hy hx⟩\n#align principal_le_iff principal_le_iff\n\n",
  "principal_bot":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n@[simp]\ntheorem principal_bot : principal («expr⊥» : P) = «expr⊥» :=\n  rfl\n#align principal_bot principal_bot\n\n",
  "not_mem_or_compl_not_mem":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\ntheorem is_proper.not_mem_or_compl_not_mem (hI : is_proper I) : x ∉ I ∨ «expr ᶜ» x ∉ I :=\n  by\n  have h : «expr ᶜ» x ∈ I → x ∉ I := hI.not_mem_of_compl_mem\n  tauto\n#align is_proper.not_mem_or_compl_not_mem is_proper.not_mem_or_compl_not_mem\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\ntheorem is_proper.not_mem_or_compl_not_mem (hI : IsProper I) : x ∉ I ∨ «expr ᶜ» x ∉ I :=\n  by\n  have h : «expr ᶜ» x ∈ I → x ∉ I := hI.not_mem_of_compl_mem\n  tauto\n#align is_proper.not_mem_or_compl_not_mem is_proper.not_mem_or_compl_not_mem\n\n",
  "not_mem_of_compl_mem":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊔ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\ntheorem is_proper.not_mem_of_compl_mem (hI : is_proper I) (hxc : «expr ᶜ» x ∈ I) : x ∉ I :=\n  by\n  intro hx\n  apply hI.top_not_mem\n  have ht : «expr ⊔ » x («expr ᶜ» x) ∈ I := sup_mem ‹_› ‹_›\n  rwa [sup_compl_eq_top] at ht\n#align is_proper.not_mem_of_compl_mem is_proper.not_mem_of_compl_mem\n\n",
- "nonempty":
- "protected theorem nonempty (s : ideal P) : (s : set P).nonempty :=\n  s.nonempty'\n#align nonempty nonempty\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊔ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\ntheorem is_proper.not_mem_of_compl_mem (hI : IsProper I) (hxc : «expr ᶜ» x ∈ I) : x ∉ I :=\n  by\n  intro hx\n  apply hI.top_not_mem\n  have ht : «expr ⊔ » x («expr ᶜ» x) ∈ I := sup_mem ‹_› ‹_›\n  rwa [sup_compl_eq_top] at ht\n#align is_proper.not_mem_of_compl_mem is_proper.not_mem_of_compl_mem\n\n",
  "ne_top":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\ntheorem is_proper.ne_top (hI : is_proper I) : I ≠ «expr⊤» := fun h => is_proper.ne_univ <| congr_arg coe h\n#align is_proper.ne_top is_proper.ne_top\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\ntheorem is_proper.ne_top (hI : IsProper I) : I ≠ «expr⊤» := fun h => is_proper.ne_univ <| congr_arg coe h\n#align is_proper.ne_top is_proper.ne_top\n\n",
  "monotone":
- "theorem sequence_of_cofinals.monotone : monotone (sequence_of_cofinals p 𝒟) :=\n  by\n  apply monotone_nat_of_le_succ\n  intro n\n  dsimp only [sequence_of_cofinals]\n  cases encodable.decode ι n\n  · rfl\n  · apply cofinal.le_above\n#align sequence_of_cofinals.monotone sequence_of_cofinals.monotone\n\n",
+ "theorem sequence_of_cofinals.monotone : Monotone (sequenceOfCofinals p 𝒟) :=\n  by\n  apply monotone_nat_of_le_succ\n  intro n\n  dsimp only [sequence_of_cofinals]\n  cases encodable.decode ι n\n  · rfl\n  · apply cofinal.le_above\n#align sequence_of_cofinals.monotone sequence_of_cofinals.monotone\n\n",
  "mem_sup":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊔ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊔ » -/\n@[simp]\ntheorem mem_sup : x ∈ «expr ⊔ » I J ↔ ∃ i ∈ I, ∃ j ∈ J, x ≤ «expr ⊔ » i j :=\n  iff.rfl\n#align mem_sup mem_sup\n\n",
  "mem_principal":
  "@[simp]\ntheorem mem_principal : x ∈ principal y ↔ x ≤ y :=\n  iff.rfl\n#align mem_principal mem_principal\n\n",
  "mem_of_mem_of_le":
- "@[trans]\ntheorem mem_of_mem_of_le {x : P} {I J : ideal P} : x ∈ I → I ≤ J → x ∈ J :=\n  @Set.mem_of_mem_of_subset P x I J\n#align mem_of_mem_of_le mem_of_mem_of_le\n\n",
+ "@[trans]\ntheorem mem_of_mem_of_le {x : P} {I J : Ideal P} : x ∈ I → I ≤ J → x ∈ J :=\n  @Set.mem_of_mem_of_subset P x I J\n#align mem_of_mem_of_le mem_of_mem_of_le\n\n",
  "mem_inf":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊓ » -/\n@[simp]\ntheorem mem_inf : x ∈ «expr ⊓ » I J ↔ x ∈ I ∧ x ∈ J :=\n  iff.rfl\n#align mem_inf mem_inf\n\n",
  "mem_ideal_of_cofinals":
- "theorem mem_ideal_of_cofinals : p ∈ ideal_of_cofinals p 𝒟 :=\n  ⟨0, le_rfl⟩\n#align mem_ideal_of_cofinals mem_ideal_of_cofinals\n\n",
+ "theorem mem_ideal_of_cofinals : p ∈ idealOfCofinals p 𝒟 :=\n  ⟨0, le_rfl⟩\n#align mem_ideal_of_cofinals mem_ideal_of_cofinals\n\n",
  "mem_compl_of_ge":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\ntheorem mem_compl_of_ge {x y : P} : x ≤ y → x ∈ «expr ᶜ» (I : set P) → y ∈ «expr ᶜ» (I : set P) := fun h =>\n  mt <| I.lower h\n#align mem_compl_of_ge mem_compl_of_ge\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\ntheorem mem_compl_of_ge {x y : P} : x ≤ y → x ∈ «expr ᶜ» (I : Set P) → y ∈ «expr ᶜ» (I : Set P) := fun h =>\n  mt <| I.lower h\n#align mem_compl_of_ge mem_compl_of_ge\n\n",
  "mem_Inf":
  "@[simp]\ntheorem mem_Inf : x ∈ infₛ S ↔ ∀ s ∈ S, x ∈ s := by simp_rw [← SetLike.mem_coe, coe_Inf, mem_Inter₂]\n#align mem_Inf mem_Inf\n\n",
  "lt_sup_principal_of_not_mem":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊔ » -/\ntheorem lt_sup_principal_of_not_mem (hx : x ∉ I) : I < «expr ⊔ » I (principal x) :=\n  le_sup_left.lt_of_ne fun h => hx <| by simpa only [left_eq_sup, principal_le_iff] using h\n#align lt_sup_principal_of_not_mem lt_sup_principal_of_not_mem\n\n",
  "lower":
- "protected theorem lower (s : ideal P) : is_lower_set (s : set P) :=\n  s.lower'\n#align lower lower\n\n",
+ "protected theorem lower (s : Ideal P) : IsLowerSet (s : Set P) :=\n  s.lower'\n#align lower lower\n\n",
  "le_above":
  "theorem le_above : x ≤ D.above x :=\n  exists.elim (Classical.choose_spec <| D.mem_gt x) fun _ b => b\n#align le_above le_above\n\n",
  "is_proper_of_not_mem":
- "theorem is_proper_of_not_mem {I : ideal P} {p : P} (nmem : p ∉ I) : is_proper I :=\n  ⟨fun hp => by\n    change p ∉ ↑I at nmem\n    rw [hp] at nmem\n    exact nmem (mem_univ p)⟩\n#align is_proper_of_not_mem is_proper_of_not_mem\n\n",
+ "theorem is_proper_of_not_mem {I : Ideal P} {p : P} (nmem : p ∉ I) : IsProper I :=\n  ⟨fun hp => by\n    change p ∉ ↑I at nmem\n    rw [hp] at nmem\n    exact nmem (mem_univ p)⟩\n#align is_proper_of_not_mem is_proper_of_not_mem\n\n",
  "is_proper_of_ne_top":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\ntheorem is_proper_of_ne_top (ne_top : I ≠ «expr⊤») : is_proper I :=\n  ⟨fun h => ne_top <| ext h⟩\n#align is_proper_of_ne_top is_proper_of_ne_top\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\ntheorem is_proper_of_ne_top (ne_top : I ≠ «expr⊤») : IsProper I :=\n  ⟨fun h => ne_top <| ext h⟩\n#align is_proper_of_ne_top is_proper_of_ne_top\n\n",
  "is_proper_iff_ne_top":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\ntheorem is_proper_iff_ne_top : is_proper I ↔ I ≠ «expr⊤» :=\n  ⟨fun h => h.ne_top, fun h => is_proper_of_ne_top h⟩\n#align is_proper_iff_ne_top is_proper_iff_ne_top\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\ntheorem is_proper_iff_ne_top : IsProper I ↔ I ≠ «expr⊤» :=\n  ⟨fun h => h.ne_top, fun h => isProper_of_ne_top h⟩\n#align is_proper_iff_ne_top is_proper_iff_ne_top\n\n",
  "is_proper":
- "theorem _root_.is_coatom.is_proper (hI : IsCoatom I) : is_proper I :=\n  is_proper_of_ne_top hI.1\n#align is_coatom.is_proper is_coatom.is_proper\n\n",
+ "#print IsCoatom.isProper /-\ntheorem IsCoatom.isProper (hI : IsCoatom I) : IsProper I :=\n  isProper_of_ne_top hI.1\n#align is_coatom.is_proper IsCoatom.isProper\n-/\n\n",
  "is_maximal_iff_is_coatom":
- "theorem is_maximal_iff_is_coatom : is_maximal I ↔ IsCoatom I :=\n  ⟨fun h => h.is_coatom, fun h => h.is_maximal⟩\n#align is_maximal_iff_is_coatom is_maximal_iff_is_coatom\n\n",
+ "theorem is_maximal_iff_is_coatom : IsMaximal I ↔ IsCoatom I :=\n  ⟨fun h => h.is_coatom, fun h => h.is_maximal⟩\n#align is_maximal_iff_is_coatom is_maximal_iff_is_coatom\n\n",
  "is_maximal":
- "theorem _root_.is_coatom.is_maximal (hI : IsCoatom I) : is_maximal I :=\n  { is_coatom.is_proper ‹_› with maximal_proper := fun _ _ => by simp [hI.2 _ ‹_›] }\n#align is_coatom.is_maximal is_coatom.is_maximal\n\n",
+ "#print IsCoatom.isMaximal /-\ntheorem IsCoatom.isMaximal (hI : IsCoatom I) : IsMaximal I :=\n  { IsCoatom.isProper ‹_› with maximal_proper := fun _ _ => by simp [hI.2 _ ‹_›] }\n#align is_coatom.is_maximal IsCoatom.isMaximal\n-/\n\n",
  "is_ideal":
- "protected theorem is_ideal (s : ideal P) : is_ideal (s : set P) :=\n  ⟨s.lower, s.nonempty, s.directed⟩\n#align is_ideal is_ideal\n\n",
+ "protected theorem is_ideal (s : Ideal P) : IsIdeal (s : Set P) :=\n  ⟨s.lower, s.nonempty, s.directed⟩\n#align is_ideal is_ideal\n\n",
  "is_coatom'":
- "theorem is_maximal.is_coatom' [is_maximal I] : IsCoatom I :=\n  is_maximal.is_coatom ‹_›\n#align is_maximal.is_coatom' is_maximal.is_coatom'\n\n",
+ "theorem is_maximal.is_coatom' [IsMaximal I] : IsCoatom I :=\n  IsMaximal.isCoatom ‹_›\n#align is_maximal.is_coatom' is_maximal.is_coatom'\n\n",
  "is_coatom":
- "theorem is_maximal.is_coatom (h : is_maximal I) : IsCoatom I :=\n  ⟨is_maximal.to_is_proper.ne_top, fun J h => ext <| is_maximal.maximal_proper h⟩\n#align is_maximal.is_coatom is_maximal.is_coatom\n\n",
+ "theorem is_maximal.is_coatom (h : IsMaximal I) : IsCoatom I :=\n  ⟨is_maximal.to_is_proper.ne_top, fun J h => ext <| is_maximal.maximal_proper h⟩\n#align is_maximal.is_coatom is_maximal.is_coatom\n\n",
  "inter_nonempty":
- "theorem inter_nonempty [IsDirected P (· ≥ ·)] (I J : ideal P) : (I ∩ J : set P).nonempty :=\n  by\n  obtain ⟨a, ha⟩ := I.nonempty\n  obtain ⟨b, hb⟩ := J.nonempty\n  obtain ⟨c, hac, hbc⟩ := exists_le_le a b\n  exact ⟨c, I.lower hac ha, J.lower hbc hb⟩\n#align inter_nonempty inter_nonempty\n\n",
+ "theorem inter_nonempty [IsDirected P (· ≥ ·)] (I J : Ideal P) : (I ∩ J : Set P).nonempty :=\n  by\n  obtain ⟨a, ha⟩ := I.nonempty\n  obtain ⟨b, hb⟩ := J.nonempty\n  obtain ⟨c, hac, hbc⟩ := exists_le_le a b\n  exact ⟨c, I.lower hac ha, J.lower hbc hb⟩\n#align inter_nonempty inter_nonempty\n\n",
  "ext":
- "@[ext]\ntheorem ext {s t : ideal P} : (s : set P) = t → s = t :=\n  SetLike.ext'\n#align ext ext\n\n",
+ "@[ext]\ntheorem ext {s t : Ideal P} : (s : Set P) = t → s = t :=\n  SetLike.ext'\n#align ext ext\n\n",
  "eq_sup_of_le_sup":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊓ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊓ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊓ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊔ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊔ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊓ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊓ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊔ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊔ » -/\ntheorem eq_sup_of_le_sup {x i j : P} (hi : i ∈ I) (hj : j ∈ J) (hx : x ≤ «expr ⊔ » i j) :\n    ∃ i' ∈ I, ∃ j' ∈ J, x = «expr ⊔ » i' j' :=\n  by\n  refine' ⟨«expr ⊓ » x i, I.lower inf_le_right hi, «expr ⊓ » x j, J.lower inf_le_right hj, _⟩\n  calc\n    x = «expr ⊓ » x («expr ⊔ » i j) := left_eq_inf.mpr hx\n    _ = «expr ⊔ » («expr ⊓ » x i) («expr ⊓ » x j) := inf_sup_left\n    \n#align eq_sup_of_le_sup eq_sup_of_le_sup\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊓ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊓ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊔ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊓ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊓ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊓ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊔ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊔ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊔ » -/\ntheorem eq_sup_of_le_sup {x i j : P} (hi : i ∈ I) (hj : j ∈ J) (hx : x ≤ «expr ⊔ » i j) :\n    ∃ i' ∈ I, ∃ j' ∈ J, x = «expr ⊔ » i' j' :=\n  by\n  refine' ⟨«expr ⊓ » x i, I.lower inf_le_right hi, «expr ⊓ » x j, J.lower inf_le_right hj, _⟩\n  calc\n    x = «expr ⊓ » x («expr ⊔ » i j) := left_eq_inf.mpr hx\n    _ = «expr ⊔ » («expr ⊓ » x i) («expr ⊓ » x j) := inf_sup_left\n    \n#align eq_sup_of_le_sup eq_sup_of_le_sup\n\n",
  "encode_mem":
- "theorem sequence_of_cofinals.encode_mem (i : ι) : sequence_of_cofinals p 𝒟 (encodable.encode i + 1) ∈ 𝒟 i :=\n  by\n  dsimp only [sequence_of_cofinals]\n  rw [encodable.encodek]\n  apply cofinal.above_mem\n#align sequence_of_cofinals.encode_mem sequence_of_cofinals.encode_mem\n\n",
+ "theorem sequence_of_cofinals.encode_mem (i : ι) : sequenceOfCofinals p 𝒟 (encodable.encode i + 1) ∈ 𝒟 i :=\n  by\n  dsimp only [sequence_of_cofinals]\n  rw [encodable.encodek]\n  apply cofinal.above_mem\n#align sequence_of_cofinals.encode_mem sequence_of_cofinals.encode_mem\n\n",
  "cofinal_meets_ideal_of_cofinals":
- "/-- `ideal_of_cofinals p 𝒟` is `𝒟`-generic. -/\ntheorem cofinal_meets_ideal_of_cofinals (i : ι) : ∃ x : P, x ∈ 𝒟 i ∧ x ∈ ideal_of_cofinals p 𝒟 :=\n  ⟨_, sequence_of_cofinals.encode_mem p 𝒟 i, _, le_rfl⟩\n#align cofinal_meets_ideal_of_cofinals cofinal_meets_ideal_of_cofinals\n\n",
+ "/-- `ideal_of_cofinals p 𝒟` is `𝒟`-generic. -/\ntheorem cofinal_meets_ideal_of_cofinals (i : ι) : ∃ x : P, x ∈ 𝒟 i ∧ x ∈ idealOfCofinals p 𝒟 :=\n  ⟨_, sequenceOfCofinals.encode_mem p 𝒟 i, _, le_rfl⟩\n#align cofinal_meets_ideal_of_cofinals cofinal_meets_ideal_of_cofinals\n\n",
  "coe_top":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n@[simp]\ntheorem coe_top : ((«expr⊤» : ideal P) : set P) = univ :=\n  rfl\n#align coe_top coe_top\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n@[simp]\ntheorem coe_top : ((«expr⊤» : Ideal P) : Set P) = univ :=\n  rfl\n#align coe_top coe_top\n\n",
  "coe_to_lower_set":
- "@[simp]\ntheorem coe_to_lower_set (s : ideal P) : (s.to_lower_set : set P) = s :=\n  rfl\n#align coe_to_lower_set coe_to_lower_set\n\n",
+ "@[simp]\ntheorem coe_to_lower_set (s : Ideal P) : (s.to_lower_set : Set P) = s :=\n  rfl\n#align coe_to_lower_set coe_to_lower_set\n\n",
  "coe_sup_eq":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊔ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊔ » -/\ntheorem coe_sup_eq : ↑(«expr ⊔ » I J) = { x | ∃ i ∈ I, ∃ j ∈ J, x = «expr ⊔ » i j } :=\n  Set.ext fun _ =>\n    ⟨fun ⟨_, _, _, _, _⟩ => eq_sup_of_le_sup ‹_› ‹_› ‹_›, fun ⟨i, _, j, _, _⟩ => ⟨i, ‹_›, j, ‹_›, le_of_eq ‹_›⟩⟩\n#align coe_sup_eq coe_sup_eq\n\n",
  "coe_sup":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊔ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊔ » -/\n@[simp]\ntheorem coe_sup : ↑(«expr ⊔ » s t) = { x | ∃ a ∈ s, ∃ b ∈ t, x ≤ «expr ⊔ » a b } :=\n  rfl\n#align coe_sup coe_sup\n\n",
  "coe_subset_coe":
- "@[simp]\ntheorem coe_subset_coe : (s : set P) ⊆ t ↔ s ≤ t :=\n  iff.rfl\n#align coe_subset_coe coe_subset_coe\n\n",
+ "@[simp]\ntheorem coe_subset_coe : (s : Set P) ⊆ t ↔ s ≤ t :=\n  iff.rfl\n#align coe_subset_coe coe_subset_coe\n\n",
  "coe_ssubset_coe":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊂ » -/\n@[simp]\ntheorem coe_ssubset_coe : «expr ⊂ » (s : set P) t ↔ s < t :=\n  iff.rfl\n#align coe_ssubset_coe coe_ssubset_coe\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊂ » -/\n@[simp]\ntheorem coe_ssubset_coe : «expr ⊂ » (s : Set P) t ↔ s < t :=\n  iff.rfl\n#align coe_ssubset_coe coe_ssubset_coe\n\n",
  "coe_inf":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊓ » -/\n@[simp]\ntheorem coe_inf : (↑(«expr ⊓ » s t) : set P) = s ∩ t :=\n  rfl\n#align coe_inf coe_inf\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊓ » -/\n@[simp]\ntheorem coe_inf : (↑(«expr ⊓ » s t) : Set P) = s ∩ t :=\n  rfl\n#align coe_inf coe_inf\n\n",
  "coe_Inf":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⋂ , » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⋂ , » -/\n@[simp]\ntheorem coe_Inf :\n    (↑(infₛ S) : set P) =\n      «expr⋂ , » \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⋂ , »\" ↑s :=\n  lower_set.coe_infi₂ _\n#align coe_Inf coe_Inf\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⋂ , » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⋂ , » -/\n@[simp]\ntheorem coe_Inf :\n    (↑(infₛ S) : Set P) =\n      «expr⋂ , » \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr⋂ , »\" ↑s :=\n  LowerSet.coe_infᵢ₂ _\n#align coe_Inf coe_Inf\n\n",
  "carrier_eq_coe":
- "@[simp]\ntheorem carrier_eq_coe (s : ideal P) : s.carrier = s :=\n  rfl\n#align carrier_eq_coe carrier_eq_coe\n\n",
+ "@[simp]\ntheorem carrier_eq_coe (s : Ideal P) : s.carrier = s :=\n  rfl\n#align carrier_eq_coe carrier_eq_coe\n\n",
  "bot_mem":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n@[simp]\ntheorem bot_mem (s : ideal P) : «expr⊥» ∈ s :=\n  s.lower bot_le s.nonempty.some_mem\n#align bot_mem bot_mem\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n@[simp]\ntheorem bot_mem (s : Ideal P) : «expr⊥» ∈ s :=\n  s.lower bot_le s.nonempty.some_mem\n#align bot_mem bot_mem\n\n",
  "above_mem":
  "theorem above_mem : D.above x ∈ D :=\n  exists.elim (Classical.choose_spec <| D.mem_gt x) fun a _ => a\n#align above_mem above_mem\n\n",
+ "Nonempty":
+ "#print Nonempty /-\nprotected theorem Nonempty (s : Ideal P) : (s : Set P).nonempty :=\n  s.nonempty'\n#align nonempty Nonempty\n-/\n\n",
  "Directed":
- "#print Directed /-\nprotected theorem Directed (s : ideal P) : DirectedOn (· ≤ ·) (s : set P) :=\n  s.directed'\n#align directed Directed\n-/\n\n"}
+ "#print Directed /-\nprotected theorem Directed (s : Ideal P) : DirectedOn (· ≤ ·) (s : Set P) :=\n  s.directed'\n#align directed Directed\n-/\n\n"}

@@ -9,7 +9,7 @@
  "sqrt_one":
  "@[simp]\ntheorem sqrt_one : sqrt 1 = 1 := by simp [sqrt]\n#align sqrt_one sqrt_one\n\n",
  "sqrt_nonneg":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\ntheorem sqrt_nonneg (x : exprℝ) : 0 ≤ sqrt x :=\n  nnreal.coe_nonneg _\n#align sqrt_nonneg sqrt_nonneg\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\ntheorem sqrt_nonneg (x : exprℝ) : 0 ≤ sqrt x :=\n  NNReal.coe_nonneg _\n#align sqrt_nonneg sqrt_nonneg\n\n",
  "sqrt_ne_zero'":
  "theorem sqrt_ne_zero' : sqrt x ≠ 0 ↔ 0 < x := by rw [← not_le, not_iff_not, sqrt_eq_zero']\n#align sqrt_ne_zero' sqrt_ne_zero'\n\n",
  "sqrt_ne_zero":
@@ -21,9 +21,9 @@
  "sqrt_mul'":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n@[simp]\ntheorem sqrt_mul' (x) {y : exprℝ} (hy : 0 ≤ y) : sqrt (x * y) = sqrt x * sqrt y := by\n  rw [mul_comm, sqrt_mul hy, mul_comm]\n#align sqrt_mul' sqrt_mul'\n\n",
  "sqrt_mul":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n-- if can prove `0 < a`, report positivity\n-- else report nonnegativity\n@[simp]\ntheorem sqrt_mul (hx : 0 ≤ x) (y : exprℝ) : sqrt (x * y) = sqrt x * sqrt y := by\n  simp_rw [sqrt, ← nnreal.coe_mul, nnreal.coe_eq, real.to_nnreal_mul hx, nnreal.sqrt_mul]\n#align sqrt_mul sqrt_mul\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n-- if can prove `0 < a`, report positivity\n-- else report nonnegativity\n@[simp]\ntheorem sqrt_mul (hx : 0 ≤ x) (y : exprℝ) : sqrt (x * y) = sqrt x * sqrt y := by\n  simp_rw [sqrt, ← NNReal.coe_mul, NNReal.coe_eq, Real.toNNReal_mul hx, NNReal.sqrt_mul]\n#align sqrt_mul sqrt_mul\n\n",
  "sqrt_lt_sqrt_iff_of_pos":
- "theorem sqrt_lt_sqrt_iff_of_pos (hy : 0 < y) : sqrt x < sqrt y ↔ x < y := by\n  rw [sqrt, sqrt, nnreal.coe_lt_coe, nnreal.sqrt_lt_sqrt_iff, to_nnreal_lt_to_nnreal_iff hy]\n#align sqrt_lt_sqrt_iff_of_pos sqrt_lt_sqrt_iff_of_pos\n\n",
+ "theorem sqrt_lt_sqrt_iff_of_pos (hy : 0 < y) : sqrt x < sqrt y ↔ x < y := by\n  rw [sqrt, sqrt, NNReal.coe_lt_coe, NNReal.sqrt_lt_sqrt_iff, to_nnreal_lt_to_nnreal_iff hy]\n#align sqrt_lt_sqrt_iff_of_pos sqrt_lt_sqrt_iff_of_pos\n\n",
  "sqrt_lt_sqrt_iff":
  "@[simp]\ntheorem sqrt_lt_sqrt_iff (hx : 0 ≤ x) : sqrt x < sqrt y ↔ x < y :=\n  lt_iff_lt_of_le_iff_le (sqrt_le_sqrt_iff hx)\n#align sqrt_lt_sqrt_iff sqrt_lt_sqrt_iff\n\n",
  "sqrt_lt_sqrt":
@@ -33,21 +33,21 @@
  "sqrt_lt":
  "theorem sqrt_lt (hx : 0 ≤ x) (hy : 0 ≤ y) : sqrt x < y ↔ x < y ^ 2 := by rw [← sqrt_lt_sqrt_iff hx, sqrt_sq hy]\n#align sqrt_lt sqrt_lt\n\n",
  "sqrt_le_sqrt_iff":
- "@[simp]\ntheorem sqrt_le_sqrt_iff (hy : 0 ≤ y) : sqrt x ≤ sqrt y ↔ x ≤ y := by\n  rw [sqrt, sqrt, nnreal.coe_le_coe, nnreal.sqrt_le_sqrt_iff, real.to_nnreal_le_to_nnreal_iff hy]\n#align sqrt_le_sqrt_iff sqrt_le_sqrt_iff\n\n",
+ "@[simp]\ntheorem sqrt_le_sqrt_iff (hy : 0 ≤ y) : sqrt x ≤ sqrt y ↔ x ≤ y := by\n  rw [sqrt, sqrt, NNReal.coe_le_coe, NNReal.sqrt_le_sqrt_iff, Real.toNNReal_le_toNNReal_iff hy]\n#align sqrt_le_sqrt_iff sqrt_le_sqrt_iff\n\n",
  "sqrt_le_sqrt":
- "theorem sqrt_le_sqrt (h : x ≤ y) : sqrt x ≤ sqrt y :=\n  by\n  rw [sqrt, sqrt, nnreal.coe_le_coe, nnreal.sqrt_le_sqrt_iff]\n  exact to_nnreal_le_to_nnreal h\n#align sqrt_le_sqrt sqrt_le_sqrt\n\n",
+ "theorem sqrt_le_sqrt (h : x ≤ y) : sqrt x ≤ sqrt y :=\n  by\n  rw [sqrt, sqrt, NNReal.coe_le_coe, NNReal.sqrt_le_sqrt_iff]\n  exact to_nnreal_le_to_nnreal h\n#align sqrt_le_sqrt sqrt_le_sqrt\n\n",
  "sqrt_le_left":
- "theorem sqrt_le_left (hy : 0 ≤ y) : sqrt x ≤ y ↔ x ≤ y ^ 2 := by\n  rw [sqrt, ← real.le_to_nnreal_iff_coe_le hy, nnreal.sqrt_le_iff, sq, ← real.to_nnreal_mul hy,\n    real.to_nnreal_le_to_nnreal_iff (mul_self_nonneg y), sq]\n#align sqrt_le_left sqrt_le_left\n\n",
+ "theorem sqrt_le_left (hy : 0 ≤ y) : sqrt x ≤ y ↔ x ≤ y ^ 2 := by\n  rw [sqrt, ← Real.le_toNNReal_iff_coe_le hy, NNReal.sqrt_le_iff, sq, ← Real.toNNReal_mul hy,\n    Real.toNNReal_le_toNNReal_iff (mul_self_nonneg y), sq]\n#align sqrt_le_left sqrt_le_left\n\n",
  "sqrt_le_iff":
  "theorem sqrt_le_iff : sqrt x ≤ y ↔ 0 ≤ y ∧ x ≤ y ^ 2 :=\n  by\n  rw [← and_iff_right_of_imp fun h => (sqrt_nonneg x).trans h, and_congr_right_iff]\n  exact sqrt_le_left\n#align sqrt_le_iff sqrt_le_iff\n\n",
  "sqrt_inv":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n@[simp]\ntheorem sqrt_inv (x : exprℝ) : sqrt x⁻¹ = (sqrt x)⁻¹ := by\n  rw [sqrt, real.to_nnreal_inv, nnreal.sqrt_inv, nnreal.coe_inv, sqrt]\n#align sqrt_inv sqrt_inv\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n@[simp]\ntheorem sqrt_inv (x : exprℝ) : sqrt x⁻¹ = (sqrt x)⁻¹ := by\n  rw [sqrt, Real.toNNReal_inv, NNReal.sqrt_inv, NNReal.coe_inv, sqrt]\n#align sqrt_inv sqrt_inv\n\n",
  "sqrt_inj":
  "@[simp]\ntheorem sqrt_inj (hx : 0 ≤ x) (hy : 0 ≤ y) : sqrt x = sqrt y ↔ x = y := by simp [le_antisymm_iff, hx, hy]\n#align sqrt_inj sqrt_inj\n\n",
  "sqrt_eq_zero_of_nonpos":
- "theorem sqrt_eq_zero_of_nonpos (h : x ≤ 0) : sqrt x = 0 := by simp [sqrt, real.to_nnreal_eq_zero.2 h]\n#align sqrt_eq_zero_of_nonpos sqrt_eq_zero_of_nonpos\n\n",
+ "theorem sqrt_eq_zero_of_nonpos (h : x ≤ 0) : sqrt x = 0 := by simp [sqrt, Real.toNNReal_eq_zero.2 h]\n#align sqrt_eq_zero_of_nonpos sqrt_eq_zero_of_nonpos\n\n",
  "sqrt_eq_zero'":
- "theorem sqrt_eq_zero' : sqrt x = 0 ↔ x ≤ 0 := by\n  rw [sqrt, nnreal.coe_eq_zero, nnreal.sqrt_eq_zero, real.to_nnreal_eq_zero]\n#align sqrt_eq_zero' sqrt_eq_zero'\n\n",
+ "theorem sqrt_eq_zero' : sqrt x = 0 ↔ x ≤ 0 := by\n  rw [sqrt, NNReal.coe_eq_zero, NNReal.sqrt_eq_zero, Real.toNNReal_eq_zero]\n#align sqrt_eq_zero' sqrt_eq_zero'\n\n",
  "sqrt_eq_zero":
  "@[simp]\ntheorem sqrt_eq_zero (h : 0 ≤ x) : sqrt x = 0 ↔ x = 0 := by simpa using sqrt_inj h le_rfl\n#align sqrt_eq_zero sqrt_eq_zero\n\n",
  "sqrt_eq_one":
@@ -69,9 +69,9 @@
  "sqrt_div":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n@[simp]\ntheorem sqrt_div (hx : 0 ≤ x) (y : exprℝ) : sqrt (x / y) = sqrt x / sqrt y := by\n  rw [division_def, sqrt_mul hx, sqrt_inv, division_def]\n#align sqrt_div sqrt_div\n\n",
  "sqrt_aux_nonneg":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℚ -/\ntheorem sqrt_aux_nonneg (f : CauSeq (exprℚ) abs) : ∀ i : ℕ, 0 ≤ sqrt_aux f i\n  | 0 => by\n    rw [sqrt_aux, Rat.mkRat_eq, Rat.divInt_eq_div] <;> apply div_nonneg <;> exact Int.cast_nonneg.2 (Int.ofNat_nonneg _)\n  | n + 1 => le_max_left _ _\n#align sqrt_aux_nonneg sqrt_aux_nonneg\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℚ -/\ntheorem sqrt_aux_nonneg (f : CauSeq (exprℚ) abs) : ∀ i : ℕ, 0 ≤ sqrtAux f i\n  | 0 => by\n    rw [sqrt_aux, Rat.mkRat_eq, Rat.divInt_eq_div] <;> apply div_nonneg <;> exact Int.cast_nonneg.2 (Int.ofNat_nonneg _)\n  | n + 1 => le_max_left _ _\n#align sqrt_aux_nonneg sqrt_aux_nonneg\n\n",
  "sqrt":
- "@[continuity]\ntheorem continuous.sqrt (h : continuous f) : continuous fun x => sqrt (f x) :=\n  continuous_sqrt.comp h\n#align continuous.sqrt continuous.sqrt\n\n",
+ "#print Continuous.sqrt /-\n@[continuity]\ntheorem Continuous.sqrt (h : Continuous f) : Continuous fun x => sqrt (f x) :=\n  continuous_sqrt.comp h\n#align continuous.sqrt Continuous.sqrt\n-/\n\n",
  "sq_sqrt":
  "@[simp]\ntheorem sq_sqrt (h : 0 ≤ x) : sqrt x ^ 2 = x := by rw [sq, mul_self_sqrt h]\n#align sq_sqrt sq_sqrt\n\n",
  "sq_lt":
@@ -79,15 +79,15 @@
  "sq_le":
  "#print sq_le /-\ntheorem sq_le (h : 0 ≤ y) : x ^ 2 ≤ y ↔ -sqrt y ≤ x ∧ x ≤ sqrt y :=\n  by\n  constructor\n  · simpa only [abs_le] using abs_le_sqrt\n  · rw [← abs_le, ← sq_abs]\n    exact (le_sqrt (abs_nonneg x) h).mp\n#align sq_le sq_le\n-/\n\n",
  "real_sqrt_le_nat_sqrt_succ":
- "/-- The real square root is at most the natural square root plus one -/\ntheorem real_sqrt_le_nat_sqrt_succ {a : ℕ} : real.sqrt ↑a ≤ nat.sqrt a + 1 :=\n  by\n  rw [real.sqrt_le_iff]\n  constructor\n  · norm_cast\n    simp\n  · norm_cast\n    exact le_of_lt (Nat.lt_succ_sqrt' a)\n#align real_sqrt_le_nat_sqrt_succ real_sqrt_le_nat_sqrt_succ\n\n",
+ "/-- The real square root is at most the natural square root plus one -/\ntheorem real_sqrt_le_nat_sqrt_succ {a : ℕ} : Real.sqrt ↑a ≤ Nat.sqrt a + 1 :=\n  by\n  rw [Real.sqrt_le_iff]\n  constructor\n  · norm_cast\n    simp\n  · norm_cast\n    exact le_of_lt (Nat.lt_succ_sqrt' a)\n#align real_sqrt_le_nat_sqrt_succ real_sqrt_le_nat_sqrt_succ\n\n",
  "neg_sqrt_lt_of_sq_lt":
  "theorem neg_sqrt_lt_of_sq_lt (h : x ^ 2 < y) : -sqrt y < x :=\n  (sq_lt.mp h).1\n#align neg_sqrt_lt_of_sq_lt neg_sqrt_lt_of_sq_lt\n\n",
  "neg_sqrt_le_of_sq_le":
  "theorem neg_sqrt_le_of_sq_le (h : x ^ 2 ≤ y) : -sqrt y ≤ x :=\n  ((sq_le ((sq_nonneg x).trans h)).mp h).1\n#align neg_sqrt_le_of_sq_le neg_sqrt_le_of_sq_le\n\n",
  "nat_sqrt_le_real_sqrt":
- "/-- The natural square root is at most the real square root -/\ntheorem nat_sqrt_le_real_sqrt {a : ℕ} : ↑(nat.sqrt a) ≤ real.sqrt ↑a :=\n  by\n  rw [real.le_sqrt (nat.cast_nonneg _) (nat.cast_nonneg _)]\n  norm_cast\n  exact Nat.sqrt_le' a\n#align nat_sqrt_le_real_sqrt nat_sqrt_le_real_sqrt\n\n",
+ "/-- The natural square root is at most the real square root -/\ntheorem nat_sqrt_le_real_sqrt {a : ℕ} : ↑(Nat.sqrt a) ≤ Real.sqrt ↑a :=\n  by\n  rw [Real.le_sqrt (Nat.cast_nonneg _) (Nat.cast_nonneg _)]\n  norm_cast\n  exact Nat.sqrt_le' a\n#align nat_sqrt_le_real_sqrt nat_sqrt_le_real_sqrt\n\n",
  "mul_self_sqrt":
- "@[simp]\ntheorem mul_self_sqrt (h : 0 ≤ x) : sqrt x * sqrt x = x := by\n  rw [sqrt, ← nnreal.coe_mul, nnreal.mul_self_sqrt, real.coe_to_nnreal _ h]\n#align mul_self_sqrt mul_self_sqrt\n\n",
+ "@[simp]\ntheorem mul_self_sqrt (h : 0 ≤ x) : sqrt x * sqrt x = x := by\n  rw [sqrt, ← NNReal.coe_mul, NNReal.mul_self_sqrt, Real.coe_toNNReal _ h]\n#align mul_self_sqrt mul_self_sqrt\n\n",
  "lt_sqrt_of_sq_lt":
  "theorem lt_sqrt_of_sq_lt (h : x ^ 2 < y) : x < sqrt y :=\n  (sq_lt.mp h).2\n#align lt_sqrt_of_sq_lt lt_sqrt_of_sq_lt\n\n",
  "lt_sqrt":
@@ -105,8 +105,8 @@
  "div_sqrt":
  "@[simp]\ntheorem div_sqrt : x / sqrt x = sqrt x := by\n  cases le_or_lt x 0\n  · rw [sqrt_eq_zero'.mpr h, div_zero]\n  · rw [div_eq_iff (sqrt_ne_zero'.mpr h), mul_self_sqrt h.le]\n#align div_sqrt div_sqrt\n\n",
  "continuous_sqrt":
- "@[continuity]\ntheorem continuous_sqrt : continuous sqrt :=\n  nnreal.continuous_coe.comp <| nnreal.sqrt.continuous.comp continuous_real_to_nnreal\n#align continuous_sqrt continuous_sqrt\n\n",
+ "@[continuity]\ntheorem continuous_sqrt : Continuous sqrt :=\n  NNReal.continuous_coe.comp <| NNReal.sqrt.continuous.comp continuous_real_toNNReal\n#align continuous_sqrt continuous_sqrt\n\n",
  "coe_sqrt":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `nnreal -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n/- TODO(Mario): finish the proof\ntheorem sqrt_aux_converges (f : cau_seq ℚ abs) : ∃ h x, 0 ≤ x ∧ x * x = max 0 (mk f) ∧\n  mk ⟨sqrt_aux f, h⟩ = x :=\nbegin\n  rcases sqrt_exists (le_max_left 0 (mk f)) with ⟨x, x0, hx⟩,\n  suffices : ∃ h, mk ⟨sqrt_aux f, h⟩ = x,\n  { exact this.imp (λ h e, ⟨x, x0, hx, e⟩) },\n  apply of_near,\n\n  rsuffices ⟨δ, δ0, hδ⟩ : ∃ δ > 0, ∀ i, abs (↑(sqrt_aux f i) - x) < δ / 2 ^ i,\n  { intros }\nend -/\n/-quotient.lift_on x\n  (λ f, mk ⟨sqrt_aux f, (sqrt_aux_converges f).fst⟩)\n  (λ f g e, begin\n    rcases sqrt_aux_converges f with ⟨hf, x, x0, xf, xs⟩,\n    rcases sqrt_aux_converges g with ⟨hg, y, y0, yg, ys⟩,\n    refine xs.trans (eq.trans _ ys.symm),\n    rw [← @mul_self_inj_of_nonneg ℝ _ x y x0 y0, xf, yg],\n    congr' 1, exact quotient.sound e\n  end)-/\n@[simp, norm_cast]\ntheorem coe_sqrt {x : nnreal} : (nnreal.sqrt x : exprℝ) = real.sqrt x := by rw [real.sqrt, real.to_nnreal_coe]\n#align coe_sqrt coe_sqrt\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `nnreal -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `exprℝ -/\n/- TODO(Mario): finish the proof\ntheorem sqrt_aux_converges (f : cau_seq ℚ abs) : ∃ h x, 0 ≤ x ∧ x * x = max 0 (mk f) ∧\n  mk ⟨sqrt_aux f, h⟩ = x :=\nbegin\n  rcases sqrt_exists (le_max_left 0 (mk f)) with ⟨x, x0, hx⟩,\n  suffices : ∃ h, mk ⟨sqrt_aux f, h⟩ = x,\n  { exact this.imp (λ h e, ⟨x, x0, hx, e⟩) },\n  apply of_near,\n\n  rsuffices ⟨δ, δ0, hδ⟩ : ∃ δ > 0, ∀ i, abs (↑(sqrt_aux f i) - x) < δ / 2 ^ i,\n  { intros }\nend -/\n/-quotient.lift_on x\n  (λ f, mk ⟨sqrt_aux f, (sqrt_aux_converges f).fst⟩)\n  (λ f g e, begin\n    rcases sqrt_aux_converges f with ⟨hf, x, x0, xf, xs⟩,\n    rcases sqrt_aux_converges g with ⟨hg, y, y0, yg, ys⟩,\n    refine xs.trans (eq.trans _ ys.symm),\n    rw [← @mul_self_inj_of_nonneg ℝ _ x y x0 y0, xf, yg],\n    congr' 1, exact quotient.sound e\n  end)-/\n@[simp, norm_cast]\ntheorem coe_sqrt {x : nnreal} : (NNReal.sqrt x : exprℝ) = Real.sqrt x := by rw [Real.sqrt, Real.toNNReal_coe]\n#align coe_sqrt coe_sqrt\n\n",
  "abs_le_sqrt":
  "theorem abs_le_sqrt (h : x ^ 2 ≤ y) : |x| ≤ sqrt y := by rw [← sqrt_sq_eq_abs] <;> exact sqrt_le_sqrt h\n#align abs_le_sqrt abs_le_sqrt\n\n"}

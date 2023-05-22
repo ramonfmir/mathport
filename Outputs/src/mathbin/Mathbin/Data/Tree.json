@@ -1,1 +1,8 @@
-{}
+{"num_leaves_pos":
+ "theorem num_leaves_pos (x : Tree α) : 0 < x.num_leaves :=\n  by\n  rw [num_leaves_eq_num_nodes_succ]\n  exact x.num_nodes.zero_lt_succ\n#align num_leaves_pos num_leaves_pos\n\n",
+ "num_leaves_eq_num_nodes_succ":
+ "/-\nCopyright (c) 2019 mathlib community. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Mario Carneiro, Wojciech Nawrocki\n-/\ntheorem num_leaves_eq_num_nodes_succ (x : Tree α) : x.num_leaves = x.num_nodes + 1 := by\n  induction x <;> simp [*, nat.add_comm, nat.add_assoc, nat.add_left_comm]\n#align num_leaves_eq_num_nodes_succ num_leaves_eq_num_nodes_succ\n\n",
+ "left_node_right_eq_self":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr △ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr △ » -/\n-- Notation for making a node with `unit` data\ntheorem left_node_right_eq_self : ∀ {x : Tree Unit} (hx : x ≠ nil), «expr △ » x.left x.right = x\n  | nil, h => by trivial\n  | «expr △ » a b, _ => rfl\n#align left_node_right_eq_self left_node_right_eq_self\n\n",
+ "height_le_num_nodes":
+ "theorem height_le_num_nodes : ∀ x : Tree α, x.height ≤ x.num_nodes\n  | nil => le_rfl\n  | node _ a b =>\n    nat.succ_le_succ\n      (max_le (trans a.height_le_num_nodes <| a.num_nodes.le_add_right _)\n        (trans b.height_le_num_nodes <| b.num_nodes.le_add_left _))\n#align height_le_num_nodes height_le_num_nodes\n\n"}

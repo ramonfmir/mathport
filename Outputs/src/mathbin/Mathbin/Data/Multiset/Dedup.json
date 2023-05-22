@@ -25,7 +25,7 @@
  "dedup_nsmul":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n@[simp]\ntheorem dedup_nsmul {s : Multiset α} {n : ℕ} (h0 : n ≠ 0) : («expr • » n s).dedup = s.dedup :=\n  by\n  ext a\n  by_cases h : a ∈ s <;> simp [h, h0]\n#align dedup_nsmul dedup_nsmul\n\n",
  "dedup_map_dedup_eq":
- "theorem dedup_map_dedup_eq [decidable_eq β] (f : α → β) (s : Multiset α) : dedup (map f (dedup s)) = dedup (map f s) :=\n  by simp [dedup_ext]\n#align dedup_map_dedup_eq dedup_map_dedup_eq\n\n",
+ "theorem dedup_map_dedup_eq [DecidableEq β] (f : α → β) (s : Multiset α) : dedup (map f (dedup s)) = dedup (map f s) :=\n  by simp [dedup_ext]\n#align dedup_map_dedup_eq dedup_map_dedup_eq\n\n",
  "dedup_le":
  "theorem dedup_le (s : Multiset α) : dedup s ≤ s :=\n  Quot.inductionOn s fun l => (dedup_sublist _).subperm\n#align dedup_le dedup_le\n\n",
  "dedup_idempotent":
@@ -41,8 +41,8 @@
  "dedup_cons_of_mem":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ::ₘ » -/\n@[simp]\ntheorem dedup_cons_of_mem {a : α} {s : Multiset α} : a ∈ s → dedup («expr ::ₘ » a s) = dedup s :=\n  Quot.inductionOn s fun l m => @congr_arg _ _ _ _ coe <| dedup_cons_of_mem m\n#align dedup_cons_of_mem dedup_cons_of_mem\n\n",
  "dedup_bind_dedup":
- "@[simp]\ntheorem dedup_bind_dedup [decidable_eq β] (m : Multiset α) (f : α → Multiset β) :\n    (m.dedup.bind f).dedup = (m.bind f).dedup := by\n  ext x\n  simp_rw [count_dedup, mem_bind, mem_dedup]\n#align dedup_bind_dedup dedup_bind_dedup\n\n",
+ "@[simp]\ntheorem dedup_bind_dedup [DecidableEq β] (m : Multiset α) (f : α → Multiset β) :\n    (m.dedup.bind f).dedup = (m.bind f).dedup := by\n  ext x\n  simp_rw [count_dedup, mem_bind, mem_dedup]\n#align dedup_bind_dedup dedup_bind_dedup\n\n",
  "count_dedup":
  "theorem count_dedup (m : Multiset α) (a : α) : m.dedup.count a = if a ∈ m then 1 else 0 :=\n  Quot.inductionOn m fun l => count_dedup _ _\n#align count_dedup count_dedup\n\n",
  "coe_dedup":
- "/-\nCopyright (c) 2017 Mario Carneiro. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Mario Carneiro\n-/\n@[simp]\ntheorem coe_dedup (l : list α) : @dedup α _ l = l.dedup :=\n  rfl\n#align coe_dedup coe_dedup\n\n"}
+ "/-\nCopyright (c) 2017 Mario Carneiro. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Mario Carneiro\n-/\n@[simp]\ntheorem coe_dedup (l : List α) : @dedup α _ l = l.dedup :=\n  rfl\n#align coe_dedup coe_dedup\n\n"}

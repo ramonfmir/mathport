@@ -1,5 +1,5 @@
 {"symm":
- "theorem is_uniform.symm : symmetric (is_uniform G ε) := fun s t h t' ht' s' hs' ht hs =>\n  by\n  rw [edge_density_comm _ t', edge_density_comm _ t]\n  exact h hs' ht' hs ht\n#align is_uniform.symm is_uniform.symm\n\n",
+ "theorem is_uniform.symm : symmetric (IsUniform G ε) := fun s t h t' ht' s' hs' ht hs =>\n  by\n  rw [edge_density_comm _ t', edge_density_comm _ t]\n  exact h hs' ht' hs ht\n#align is_uniform.symm is_uniform.symm\n\n",
  "right_nonuniform_witnesses_subset":
  "theorem right_nonuniform_witnesses_subset (h : ¬G.is_uniform ε s t) : (G.nonuniform_witnesses ε s t).2 ⊆ t :=\n  by\n  rw [nonuniform_witnesses, dif_pos h]\n  exact (not_is_uniform_iff.1 h).some_spec.2.some_spec.1\n#align right_nonuniform_witnesses_subset right_nonuniform_witnesses_subset\n\n",
  "right_nonuniform_witnesses_card":
@@ -13,19 +13,19 @@
  "nonuniform_witness_subset":
  "theorem nonuniform_witness_subset (h : ¬G.is_uniform ε s t) : G.nonuniform_witness ε s t ⊆ s :=\n  by\n  unfold nonuniform_witness\n  split_ifs\n  · exact G.left_nonuniform_witnesses_subset h\n  · exact G.right_nonuniform_witnesses_subset fun i => h i.symm\n#align nonuniform_witness_subset nonuniform_witness_subset\n\n",
  "nonuniform_witness_spec":
- "theorem nonuniform_witness_spec (h₁ : s ≠ t) (h₂ : ¬G.is_uniform ε s t) :\n    ε ≤ |G.edge_density (G.nonuniform_witness ε s t) (G.nonuniform_witness ε t s) - G.edge_density s t| :=\n  by\n  unfold nonuniform_witness\n  rcases trichotomous_of well_ordering_rel s t with (lt | rfl | gt)\n  · rw [if_pos lt, if_neg (asymm lt)]\n    exact G.nonuniform_witnesses_spec h₂\n  · cases h₁ rfl\n  · rw [if_neg (asymm GT.gt), if_pos GT.gt, edge_density_comm, edge_density_comm _ s]\n    apply G.nonuniform_witnesses_spec fun i => h₂ i.symm\n#align nonuniform_witness_spec nonuniform_witness_spec\n\n",
+ "theorem nonuniform_witness_spec (h₁ : s ≠ t) (h₂ : ¬G.is_uniform ε s t) :\n    ε ≤ |G.edge_density (G.nonuniform_witness ε s t) (G.nonuniform_witness ε t s) - G.edge_density s t| :=\n  by\n  unfold nonuniform_witness\n  rcases trichotomous_of WellOrderingRel s t with (lt | rfl | gt)\n  · rw [if_pos lt, if_neg (asymm lt)]\n    exact G.nonuniform_witnesses_spec h₂\n  · cases h₁ rfl\n  · rw [if_neg (asymm GT.gt), if_pos GT.gt, edge_density_comm, edge_density_comm _ s]\n    apply G.nonuniform_witnesses_spec fun i => h₂ i.symm\n#align nonuniform_witness_spec nonuniform_witness_spec\n\n",
  "nonuniform_witness_mem_nonuniform_witnesses":
  "theorem nonuniform_witness_mem_nonuniform_witnesses (h : ¬G.is_uniform ε s t) (ht : t ∈ P.parts) (hst : s ≠ t) :\n    G.nonuniform_witness ε s t ∈ P.nonuniform_witnesses G ε s :=\n  mem_image_of_mem _ <| mem_filter.2 ⟨ht, hst, h⟩\n#align nonuniform_witness_mem_nonuniform_witnesses nonuniform_witness_mem_nonuniform_witnesses\n\n",
  "nonuniform_witness_card_le":
  "theorem nonuniform_witness_card_le (h : ¬G.is_uniform ε s t) : (s.card : 𝕜) * ε ≤ (G.nonuniform_witness ε s t).card :=\n  by\n  unfold nonuniform_witness\n  split_ifs\n  · exact G.left_nonuniform_witnesses_card h\n  · exact G.right_nonuniform_witnesses_card fun i => h i.symm\n#align nonuniform_witness_card_le nonuniform_witness_card_le\n\n",
  "nonempty_of_not_uniform":
- "theorem nonempty_of_not_uniform (h : ¬P.is_uniform G ε) : P.parts.nonempty :=\n  nonempty_of_ne_empty fun h₁ => h <| is_uniform_of_empty h₁\n#align nonempty_of_not_uniform nonempty_of_not_uniform\n\n",
+ "theorem nonempty_of_not_uniform (h : ¬P.is_uniform G ε) : P.parts.nonempty :=\n  nonempty_of_ne_empty fun h₁ => h <| isUniformOfEmpty h₁\n#align nonempty_of_not_uniform nonempty_of_not_uniform\n\n",
  "non_uniforms_mono":
- "theorem non_uniforms_mono {ε ε' : 𝕜} (h : ε ≤ ε') : P.non_uniforms G ε' ⊆ P.non_uniforms G ε :=\n  monotone_filter_right _ fun uv => mt <| simple_graph.is_uniform.mono h\n#align non_uniforms_mono non_uniforms_mono\n\n",
+ "theorem non_uniforms_mono {ε ε' : 𝕜} (h : ε ≤ ε') : P.non_uniforms G ε' ⊆ P.non_uniforms G ε :=\n  monotone_filter_right _ fun uv => mt <| SimpleGraph.IsUniform.mono h\n#align non_uniforms_mono non_uniforms_mono\n\n",
  "non_uniforms_bot":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\ntheorem non_uniforms_bot (hε : 0 < ε) : («expr⊥» : finpartition A).non_uniforms G ε = ∅ :=\n  by\n  rw [eq_empty_iff_forall_not_mem]\n  rintro ⟨u, v⟩\n  simp only [finpartition.mk_mem_non_uniforms_iff, finpartition.parts_bot, mem_map, not_and, not_not, exists_imp]\n  rintro x hx rfl y hy rfl h\n  exact G.is_uniform_singleton hε\n#align non_uniforms_bot non_uniforms_bot\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\ntheorem non_uniforms_bot (hε : 0 < ε) : («expr⊥» : Finpartition A).non_uniforms G ε = ∅ :=\n  by\n  rw [eq_empty_iff_forall_not_mem]\n  rintro ⟨u, v⟩\n  simp only [Finpartition.mk_mem_nonUniforms_iff, Finpartition.parts_bot, mem_map, not_and, Classical.not_not,\n    exists_imp]\n  rintro x hx rfl y hy rfl h\n  exact G.is_uniform_singleton hε\n#align non_uniforms_bot non_uniforms_bot\n\n",
  "mono":
- "theorem is_uniform.mono {ε ε' : 𝕜} (hP : P.is_uniform G ε) (h : ε ≤ ε') : P.is_uniform G ε' :=\n  ((nat.cast_le.2 <| card_le_of_subset <| P.non_uniforms_mono G h).trans hP).trans <|\n    mul_le_mul_of_nonneg_left h <| nat.cast_nonneg _\n#align is_uniform.mono is_uniform.mono\n\n",
+ "theorem is_uniform.mono {ε ε' : 𝕜} (hP : P.is_uniform G ε) (h : ε ≤ ε') : P.is_uniform G ε' :=\n  ((Nat.cast_le.2 <| card_le_of_subset <| P.non_uniforms_mono G h).trans hP).trans <|\n    mul_le_mul_of_nonneg_left h <| Nat.cast_nonneg _\n#align is_uniform.mono is_uniform.mono\n\n",
  "mk_mem_non_uniforms_iff":
  "theorem mk_mem_non_uniforms_iff (u v : Finset α) (ε : 𝕜) :\n    (u, v) ∈ P.non_uniforms G ε ↔ u ∈ P.parts ∧ v ∈ P.parts ∧ u ≠ v ∧ ¬G.is_uniform ε u v := by\n  rw [non_uniforms, mem_filter, mem_off_diag, and_assoc', and_assoc']\n#align mk_mem_non_uniforms_iff mk_mem_non_uniforms_iff\n\n",
  "left_nonuniform_witnesses_subset":
@@ -35,10 +35,10 @@
  "is_uniform_singleton":
  "theorem is_uniform_singleton (hε : 0 < ε) : G.is_uniform ε {a} {b} :=\n  by\n  intro s' hs' t' ht' hs ht\n  rw [card_singleton, Nat.cast_one, one_mul] at hs ht\n  obtain rfl | rfl := Finset.subset_singleton_iff.1 hs'\n  · replace hs : ε ≤ 0 := by simpa using hs\n    exact (hε.not_le hs).elim\n  obtain rfl | rfl := Finset.subset_singleton_iff.1 ht'\n  · replace ht : ε ≤ 0 := by simpa using ht\n    exact (hε.not_le ht).elim\n  · rwa [sub_self, abs_zero]\n#align is_uniform_singleton is_uniform_singleton\n\n",
  "is_uniform_one":
- "theorem is_uniform_one : P.is_uniform G (1 : 𝕜) :=\n  by\n  rw [is_uniform, mul_one, nat.cast_le]\n  refine' (card_filter_le _ _).trans _\n  rw [off_diag_card, nat.mul_sub_left_distrib, mul_one]\n#align is_uniform_one is_uniform_one\n\n",
+ "theorem is_uniform_one : P.is_uniform G (1 : 𝕜) :=\n  by\n  rw [is_uniform, mul_one, Nat.cast_le]\n  refine' (card_filter_le _ _).trans _\n  rw [off_diag_card, nat.mul_sub_left_distrib, mul_one]\n#align is_uniform_one is_uniform_one\n\n",
  "is_uniform_of_empty":
  "theorem is_uniform_of_empty (hP : P.parts = ∅) : P.is_uniform G ε := by simp [is_uniform, hP, non_uniforms]\n#align is_uniform_of_empty is_uniform_of_empty\n\n",
  "is_uniform_comm":
- "theorem is_uniform_comm : is_uniform G ε s t ↔ is_uniform G ε t s :=\n  ⟨fun h => h.symm, fun h => h.symm⟩\n#align is_uniform_comm is_uniform_comm\n\n",
+ "theorem is_uniform_comm : IsUniform G ε s t ↔ IsUniform G ε t s :=\n  ⟨fun h => h.symm, fun h => h.symm⟩\n#align is_uniform_comm is_uniform_comm\n\n",
  "bot_is_uniform":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\ntheorem bot_is_uniform (hε : 0 < ε) : («expr⊥» : finpartition A).is_uniform G ε :=\n  by\n  rw [finpartition.is_uniform, finpartition.card_bot, non_uniforms_bot _ hε, finset.card_empty, Nat.cast_zero]\n  exact mul_nonneg (nat.cast_nonneg _) hε.le\n#align bot_is_uniform bot_is_uniform\n\n"}
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\ntheorem bot_is_uniform (hε : 0 < ε) : («expr⊥» : Finpartition A).is_uniform G ε :=\n  by\n  rw [Finpartition.IsUniform, Finpartition.card_bot, non_uniforms_bot _ hε, Finset.card_empty, Nat.cast_zero]\n  exact mul_nonneg (Nat.cast_nonneg _) hε.le\n#align bot_is_uniform bot_is_uniform\n\n"}

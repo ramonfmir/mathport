@@ -7,16 +7,16 @@
  "not_finite_iff_infinite":
  "#print not_finite_iff_infinite /-\n@[simp]\ntheorem not_finite_iff_infinite : ¬Finite α ↔ Infinite α :=\n  ⟨infinite.mk, fun h => h.1⟩\n#align not_finite_iff_infinite not_finite_iff_infinite\n-/\n\n",
  "not_finite":
- "#print not_finite /-\ntheorem not_finite (α : Sort _) [Infinite α] [Finite α] : false :=\n  @infinite.not_finite α ‹_› ‹_›\n#align not_finite not_finite\n-/\n\n",
+ "#print not_finite /-\ntheorem not_finite (α : Sort _) [Infinite α] [Finite α] : False :=\n  @infinite.not_finite α ‹_› ‹_›\n#align not_finite not_finite\n-/\n\n",
  "infinite_iff":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ » -/\n#print Equiv.infinite_iff /-\ntheorem Equiv.infinite_iff (e : «expr ≃ » α β) : Infinite α ↔ Infinite β :=\n  not_finite_iff_infinite.symm.trans <| e.finite_iff.not.trans not_finite_iff_infinite\n#align equiv.infinite_iff Equiv.infinite_iff\n-/\n\n",
  "finite_or_infinite":
  "#print finite_or_infinite /-\ntheorem finite_or_infinite (α : Sort _) : Finite α ∨ Infinite α :=\n  or_iff_not_imp_left.2 <| not_finite_iff_infinite.1\n#align finite_or_infinite finite_or_infinite\n-/\n\n",
  "finite_iff_exists_equiv_fin":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ » -/\n#print finite_iff_exists_equiv_fin /-\n/-\nCopyright (c) 2022 Kyle Miller. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Kyle Miller\n-/\ntheorem finite_iff_exists_equiv_fin {α : Sort _} : Finite α ↔ ∃ n, nonempty («expr ≃ » α (fin n)) :=\n  ⟨fun ⟨e⟩ => ⟨_, ⟨e⟩⟩, fun ⟨n, ⟨e⟩⟩ => ⟨e⟩⟩\n#align finite_iff_exists_equiv_fin finite_iff_exists_equiv_fin\n-/\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ » -/\n#print finite_iff_exists_equiv_fin /-\n/-\nCopyright (c) 2022 Kyle Miller. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Kyle Miller\n-/\ntheorem finite_iff_exists_equiv_fin {α : Sort _} : Finite α ↔ ∃ n, Nonempty («expr ≃ » α (Fin n)) :=\n  ⟨fun ⟨e⟩ => ⟨_, ⟨e⟩⟩, fun ⟨n, ⟨e⟩⟩ => ⟨e⟩⟩\n#align finite_iff_exists_equiv_fin finite_iff_exists_equiv_fin\n-/\n\n",
  "finite_iff":
  "#print Function.Bijective.finite_iff /-\ntheorem Function.Bijective.finite_iff {f : α → β} (h : bijective f) : Finite α ↔ Finite β :=\n  (Equiv.ofBijective f h).finite_iff\n#align function.bijective.finite_iff Function.Bijective.finite_iff\n-/\n\n",
  "false":
- "#print Infinite.false /-\nprotected theorem Infinite.false [Finite α] (h : Infinite α) : false :=\n  not_finite α\n#align infinite.false Infinite.false\n-/\n\n",
+ "#print Infinite.false /-\nprotected theorem Infinite.false [Finite α] (h : Infinite α) : False :=\n  not_finite α\n#align infinite.false Infinite.false\n-/\n\n",
  "exists_equiv_fin":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ » -/\n#print Finite.exists_equiv_fin /-\ntheorem Finite.exists_equiv_fin (α : Sort _) [h : Finite α] : ∃ n : ℕ, nonempty («expr ≃ » α (fin n)) :=\n  finite_iff_exists_equiv_fin.mp h\n#align finite.exists_equiv_fin Finite.exists_equiv_fin\n-/\n\n"}
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ » -/\n#print Finite.exists_equiv_fin /-\ntheorem Finite.exists_equiv_fin (α : Sort _) [h : Finite α] : ∃ n : ℕ, Nonempty («expr ≃ » α (Fin n)) :=\n  finite_iff_exists_equiv_fin.mp h\n#align finite.exists_equiv_fin Finite.exists_equiv_fin\n-/\n\n"}

@@ -23,7 +23,7 @@
  "to_rel_iso_lt_apply":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃o » -/\n@[simp]\ntheorem to_rel_iso_lt_apply (e : «expr ≃o » α β) (x : α) : e.to_rel_iso_lt x = e x :=\n  rfl\n#align to_rel_iso_lt_apply to_rel_iso_lt_apply\n\n",
  "to_order_iso_to_equiv":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ » -/\n@[simp]\ntheorem to_order_iso_to_equiv (e : «expr ≃ » α β) (h₁ : monotone e) (h₂ : monotone e.symm) :\n    (e.to_order_iso h₁ h₂).to_equiv = e :=\n  rfl\n#align to_order_iso_to_equiv to_order_iso_to_equiv\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ » -/\n@[simp]\ntheorem to_order_iso_to_equiv (e : «expr ≃ » α β) (h₁ : Monotone e) (h₂ : Monotone e.symm) :\n    (e.to_order_iso h₁ h₂).to_equiv = e :=\n  rfl\n#align to_order_iso_to_equiv to_order_iso_to_equiv\n\n",
  "to_fun_eq_coe":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃o » -/\n@[simp]\ntheorem to_fun_eq_coe {f : «expr ≃o » α β} : f.to_fun = f :=\n  rfl\n#align to_fun_eq_coe to_fun_eq_coe\n\n",
  "to_equiv_symm":
@@ -68,20 +68,18 @@
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃o » -/\n@[simp]\ntheorem symm_apply_apply (e : «expr ≃o » α β) (x : α) : e.symm (e x) = x :=\n  e.to_equiv.symm_apply_apply x\n#align symm_apply_apply symm_apply_apply\n\n",
  "surjective":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃o » -/\nprotected theorem surjective (e : «expr ≃o » α β) : function.surjective e :=\n  e.to_equiv.surjective\n#align surjective surjective\n\n",
- "strict_mono":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃o » -/\nprotected theorem strict_mono (e : «expr ≃o » α β) : strict_mono e :=\n  e.to_order_embedding.strict_mono\n#align strict_mono strict_mono\n\n",
  "snd_comp_prod":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →o » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →o » -/\n@[simp]\ntheorem snd_comp_prod (f : «expr →o » α β) (g : «expr →o » α γ) : snd.comp (f.prod g) = g :=\n  ext _ _ rfl\n#align snd_comp_prod snd_comp_prod\n\n",
  "refl_trans":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃o » -/\n@[simp]\ntheorem refl_trans (e : «expr ≃o » α β) : (refl α).trans e = e :=\n  by\n  ext x\n  rfl\n#align refl_trans refl_trans\n\n",
  "refl_to_equiv":
- "@[simp]\ntheorem refl_to_equiv : (refl α).to_equiv = equiv.refl α :=\n  rfl\n#align refl_to_equiv refl_to_equiv\n\n",
+ "@[simp]\ntheorem refl_to_equiv : (refl α).to_equiv = Equiv.refl α :=\n  rfl\n#align refl_to_equiv refl_to_equiv\n\n",
  "refl_apply":
  "@[simp]\ntheorem refl_apply (x : α) : refl α x = x :=\n  rfl\n#align refl_apply refl_apply\n\n",
  "prod_mono":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →o » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →o » -/\n@[mono]\ntheorem prod_mono {f₁ f₂ : «expr →o » α β} (hf : f₁ ≤ f₂) {g₁ g₂ : «expr →o » α γ} (hg : g₁ ≤ g₂) :\n    f₁.prod g₁ ≤ f₂.prod g₂ := fun x => Prod.le_def.2 ⟨hf _, hg _⟩\n#align prod_mono prod_mono\n\n",
  "prod_comm_symm":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃o » -/\n@[simp]\ntheorem prod_comm_symm : (prodComm : «expr ≃o » (α × β) (β × α)).symm = prod_comm :=\n  rfl\n#align prod_comm_symm prod_comm_symm\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃o » -/\n@[simp]\ntheorem prod_comm_symm : (prodComm : «expr ≃o » (α × β) (β × α)).symm = prodComm :=\n  rfl\n#align prod_comm_symm prod_comm_symm\n\n",
  "order_hom_eq_id":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →o » -/\ntheorem order_hom_eq_id [subsingleton α] (g : «expr →o » α α) : g = OrderHom.id :=\n  subsingleton.elim _ _\n#align order_hom_eq_id order_hom_eq_id\n\n",
  "orderEmbeddingOfLTEmbedding_apply":
@@ -92,10 +90,8 @@
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃r » -/\n@[simp]\ntheorem of_rel_iso_lt_symm {α β} [partial_order α] [partial_order β]\n    (e : «expr ≃r » ((· < ·) : α → α → Prop) ((· < ·) : β → β → Prop)) : (ofRelIsoLT e).symm = ofRelIsoLT e.symm :=\n  rfl\n#align of_rel_iso_lt_symm of_rel_iso_lt_symm\n\n",
  "of_rel_iso_lt_apply":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃r » -/\n@[simp]\ntheorem of_rel_iso_lt_apply {α β} [partial_order α] [partial_order β]\n    (e : «expr ≃r » ((· < ·) : α → α → Prop) ((· < ·) : β → β → Prop)) (x : α) : ofRelIsoLT e x = e x :=\n  rfl\n#align of_rel_iso_lt_apply of_rel_iso_lt_apply\n\n",
- "monotone":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃o » -/\nprotected theorem monotone (e : «expr ≃o » α β) : monotone e :=\n  e.to_order_embedding.monotone\n#align monotone monotone\n\n",
  "mono":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →o » -/\nprotected theorem mono (f : «expr →o » α β) : monotone f :=\n  f.monotone\n#align mono mono\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →o » -/\nprotected theorem mono (f : «expr →o » α β) : Monotone f :=\n  f.monotone\n#align mono mono\n\n",
  "mk_le_mk":
  "@[simp]\ntheorem mk_le_mk {f g : α → β} {hf hg} : mk f hf ≤ mk g hg ↔ f ≤ g :=\n  iff.rfl\n#align mk_le_mk mk_le_mk\n\n",
  "map_top'":
@@ -109,9 +105,9 @@
  "map_lt_map_iff":
  "#print map_lt_map_iff /-\ntheorem map_lt_map_iff (f : F) {a b : α} : f a < f b ↔ a < b :=\n  lt_iff_lt_of_le_iff_le' (map_le_map_iff f) (map_le_map_iff f)\n#align map_lt_map_iff map_lt_map_iff\n-/\n\n",
  "map_inv_lt_iff":
- "#print map_inv_lt_iff /-\n@[simp]\ntheorem map_inv_lt_iff (f : F) {a : α} {b : β} : equiv_like.inv f b < a ↔ b < f a :=\n  by\n  convert (map_lt_map_iff _).symm\n  exact (equiv_like.right_inv _ _).symm\n#align map_inv_lt_iff map_inv_lt_iff\n-/\n\n",
+ "#print map_inv_lt_iff /-\n@[simp]\ntheorem map_inv_lt_iff (f : F) {a : α} {b : β} : equiv_like.inv f b < a ↔ b < f a :=\n  by\n  convert(map_lt_map_iff _).symm\n  exact (equiv_like.right_inv _ _).symm\n#align map_inv_lt_iff map_inv_lt_iff\n-/\n\n",
  "map_inv_le_iff":
- "#print map_inv_le_iff /-\n@[simp]\ntheorem map_inv_le_iff (f : F) {a : α} {b : β} : equiv_like.inv f b ≤ a ↔ b ≤ f a :=\n  by\n  convert (map_le_map_iff _).symm\n  exact (equiv_like.right_inv _ _).symm\n#align map_inv_le_iff map_inv_le_iff\n-/\n\n",
+ "#print map_inv_le_iff /-\n@[simp]\ntheorem map_inv_le_iff (f : F) {a : α} {b : β} : equiv_like.inv f b ≤ a ↔ b ≤ f a :=\n  by\n  convert(map_le_map_iff _).symm\n  exact (equiv_like.right_inv _ _).symm\n#align map_inv_le_iff map_inv_le_iff\n-/\n\n",
  "map_inf_le":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ↪o » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊓ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊓ » -/\n#print OrderEmbedding.map_inf_le /-\ntheorem OrderEmbedding.map_inf_le [SemilatticeInf α] [SemilatticeInf β] (f : «expr ↪o » α β) (x y : α) :\n    f («expr ⊓ » x y) ≤ «expr ⊓ » (f x) (f y) :=\n  f.monotone.map_inf_le x y\n#align order_embedding.map_inf_le OrderEmbedding.map_inf_le\n-/\n\n",
  "map_inf":
@@ -121,7 +117,7 @@
  "map_bot":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃o » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n#print OrderIso.map_bot /-\ntheorem OrderIso.map_bot [LE α] [partial_order β] [OrderBot α] [OrderBot β] (f : «expr ≃o » α β) :\n    f («expr⊥») = «expr⊥» :=\n  f.map_bot' (fun _ => bot_le) fun _ => bot_le\n#align order_iso.map_bot OrderIso.map_bot\n-/\n\n",
  "lt_map_inv_iff":
- "#print lt_map_inv_iff /-\n@[simp]\ntheorem lt_map_inv_iff (f : F) {a : α} {b : β} : a < equiv_like.inv f b ↔ f a < b :=\n  by\n  convert (map_lt_map_iff _).symm\n  exact (equiv_like.right_inv _ _).symm\n#align lt_map_inv_iff lt_map_inv_iff\n-/\n\n",
+ "#print lt_map_inv_iff /-\n@[simp]\ntheorem lt_map_inv_iff (f : F) {a : α} {b : β} : a < equiv_like.inv f b ↔ f a < b :=\n  by\n  convert(map_lt_map_iff _).symm\n  exact (equiv_like.right_inv _ _).symm\n#align lt_map_inv_iff lt_map_inv_iff\n-/\n\n",
  "lt_iff_lt":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃o » -/\n@[simp]\ntheorem lt_iff_lt (e : «expr ≃o » α β) {x y : α} : e x < e y ↔ x < y :=\n  e.to_order_embedding.lt_iff_lt\n#align lt_iff_lt lt_iff_lt\n\n",
  "lt_embedding_apply":
@@ -131,13 +127,11 @@
  "le_map_sup":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ↪o » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊔ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⊔ » -/\n#print OrderEmbedding.le_map_sup /-\ntheorem OrderEmbedding.le_map_sup [SemilatticeSup α] [SemilatticeSup β] (f : «expr ↪o » α β) (x y : α) :\n    «expr ⊔ » (f x) (f y) ≤ f («expr ⊔ » x y) :=\n  f.monotone.le_map_sup x y\n#align order_embedding.le_map_sup OrderEmbedding.le_map_sup\n-/\n\n",
  "le_map_inv_iff":
- "#print le_map_inv_iff /-\n@[simp]\ntheorem le_map_inv_iff (f : F) {a : α} {b : β} : a ≤ equiv_like.inv f b ↔ f a ≤ b :=\n  by\n  convert (map_le_map_iff _).symm\n  exact (equiv_like.right_inv _ _).symm\n#align le_map_inv_iff le_map_inv_iff\n-/\n\n",
+ "#print le_map_inv_iff /-\n@[simp]\ntheorem le_map_inv_iff (f : F) {a : α} {b : β} : a ≤ equiv_like.inv f b ↔ f a ≤ b :=\n  by\n  convert(map_le_map_iff _).symm\n  exact (equiv_like.right_inv _ _).symm\n#align le_map_inv_iff le_map_inv_iff\n-/\n\n",
  "le_iff_le":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃o » -/\n@[simp]\ntheorem le_iff_le (e : «expr ≃o » α β) {x y : α} : e x ≤ e y ↔ x ≤ y :=\n  e.map_rel_iff\n#align le_iff_le le_iff_le\n\n",
  "le_def":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →o » -/\ntheorem le_def {f g : «expr →o » α β} : f ≤ g ↔ ∀ x, f x ≤ g x :=\n  iff.rfl\n#align le_def le_def\n\n",
- "is_well_order":
- "protected theorem is_well_order [is_well_order β (· < ·)] : is_well_order α (· < ·) :=\n  f.lt_embedding.is_well_order\n#align is_well_order is_well_order\n\n",
  "isCompl_iff":
  "#print OrderIso.isCompl_iff /-\ntheorem OrderIso.isCompl_iff {x y : α} : IsCompl x y ↔ IsCompl (f x) (f y) :=\n  ⟨f.is_compl, fun h => f.symm_apply_apply x ▸ f.symm_apply_apply y ▸ f.symm.is_compl h⟩\n#align order_iso.is_compl_iff OrderIso.isCompl_iff\n-/\n\n",
  "isCompl":
@@ -147,13 +141,13 @@
  "id_comp":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →o » -/\n@[simp]\ntheorem id_comp (f : «expr →o » α β) : comp id f = f := by\n  ext\n  rfl\n#align id_comp id_comp\n\n",
  "fun_unique_symm_apply":
- "@[simp]\ntheorem fun_unique_symm_apply {α β : Type _} [unique α] [preorder β] :\n    ((funUnique α β).symm : β → α → β) = function.const α :=\n  rfl\n#align fun_unique_symm_apply fun_unique_symm_apply\n\n",
+ "@[simp]\ntheorem fun_unique_symm_apply {α β : Type _} [Unique α] [preorder β] :\n    ((funUnique α β).symm : β → α → β) = Function.const α :=\n  rfl\n#align fun_unique_symm_apply fun_unique_symm_apply\n\n",
  "fst_prod_snd":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →o » -/\n@[simp]\ntheorem fst_prod_snd : (fst : «expr →o » (α × β) α).prod snd = id :=\n  by\n  ext ⟨x, y⟩ : 2\n  rfl\n#align fst_prod_snd fst_prod_snd\n\n",
  "fst_comp_prod":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →o » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →o » -/\n@[simp]\ntheorem fst_comp_prod (f : «expr →o » α β) (g : «expr →o » α γ) : fst.comp (f.prod g) = f :=\n  ext _ _ rfl\n#align fst_comp_prod fst_comp_prod\n\n",
  "ext":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃o » -/\n-- See note [partially-applied ext lemmas]\n@[ext]\ntheorem ext {f g : «expr ≃o » α β} (h : (f : α → β) = g) : f = g :=\n  fun_like.coe_injective h\n#align ext ext\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃o » -/\n-- See note [partially-applied ext lemmas]\n@[ext]\ntheorem ext {f g : «expr ≃o » α β} (h : (f : α → β) = g) : f = g :=\n  FunLike.coe_injective h\n#align ext ext\n\n",
  "eq_iff_eq":
  "@[simp]\ntheorem eq_iff_eq {a b} : f a = f b ↔ a = b :=\n  f.injective.eq_iff\n#align eq_iff_eq eq_iff_eq\n\n",
  "dual_id":
@@ -171,7 +165,7 @@
  "curry_apply":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →o » -/\n@[simp]\ntheorem curry_apply (f : «expr →o » (α × β) γ) (x : α) (y : β) : curry f x y = f (x, y) :=\n  rfl\n#align curry_apply curry_apply\n\n",
  "copy_eq":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →o » -/\ntheorem copy_eq (f : «expr →o » α β) (f' : α → β) (h : f' = f) : f.copy f' h = f :=\n  fun_like.ext' h\n#align copy_eq copy_eq\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →o » -/\ntheorem copy_eq (f : «expr →o » α β) (f' : α → β) (h : f' = f) : f.copy f' h = f :=\n  FunLike.ext' h\n#align copy_eq copy_eq\n\n",
  "const_comp":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →o » -/\n@[simp]\ntheorem const_comp (f : «expr →o » α β) (c : γ) : (const β c).comp f = const α c :=\n  rfl\n#align const_comp const_comp\n\n",
  "complementedLattice_iff":
@@ -189,31 +183,31 @@
  "coe_trans":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃o » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃o » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n@[simp]\ntheorem coe_trans (e : «expr ≃o » α β) (e' : «expr ≃o » β γ) : «expr⇑ » (e.trans e') = e' ∘ e :=\n  rfl\n#align coe_trans coe_trans\n\n",
  "coe_to_order_iso":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n@[simp]\ntheorem coe_to_order_iso (e : «expr ≃ » α β) (h₁ : monotone e) (h₂ : monotone e.symm) :\n    «expr⇑ » (e.to_order_iso h₁ h₂) = e :=\n  rfl\n#align coe_to_order_iso coe_to_order_iso\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n@[simp]\ntheorem coe_to_order_iso (e : «expr ≃ » α β) (h₁ : Monotone e) (h₂ : Monotone e.symm) :\n    «expr⇑ » (e.to_order_iso h₁ h₂) = e :=\n  rfl\n#align coe_to_order_iso coe_to_order_iso\n\n",
  "coe_to_order_embedding":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃o » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n@[simp]\ntheorem coe_to_order_embedding (e : «expr ≃o » α β) : «expr⇑ » e.to_order_embedding = e :=\n  rfl\n#align coe_to_order_embedding coe_to_order_embedding\n\n",
  "coe_to_dual_top_equiv_eq":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵈ» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵈ» -/\ntheorem coe_to_dual_top_equiv_eq [LE α] :\n    (WithBot.toDualTopEquiv : WithBot («expr ᵒᵈ» α) → «expr ᵒᵈ» (WithTop α)) = to_dual ∘ WithBot.ofDual :=\n  funext fun _ => rfl\n#align coe_to_dual_top_equiv_eq coe_to_dual_top_equiv_eq\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵈ» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵈ» -/\ntheorem coe_to_dual_top_equiv_eq [LE α] :\n    (WithBot.toDualTopEquiv : WithBot («expr ᵒᵈ» α) → «expr ᵒᵈ» (WithTop α)) = toDual ∘ WithBot.ofDual :=\n  funext fun _ => rfl\n#align coe_to_dual_top_equiv_eq coe_to_dual_top_equiv_eq\n\n",
  "coe_to_dual_bot_equiv_eq":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵈ» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵈ» -/\ntheorem coe_to_dual_bot_equiv_eq [LE α] :\n    (WithTop.toDualBotEquiv : WithTop («expr ᵒᵈ» α) → «expr ᵒᵈ» (WithBot α)) = to_dual ∘ WithTop.ofDual :=\n  funext fun _ => rfl\n#align coe_to_dual_bot_equiv_eq coe_to_dual_bot_equiv_eq\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵈ» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵈ» -/\ntheorem coe_to_dual_bot_equiv_eq [LE α] :\n    (WithTop.toDualBotEquiv : WithTop («expr ᵒᵈ» α) → «expr ᵒᵈ» (WithBot α)) = toDual ∘ WithTop.ofDual :=\n  funext fun _ => rfl\n#align coe_to_dual_bot_equiv_eq coe_to_dual_bot_equiv_eq\n\n",
  "coe_refl":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n@[simp]\ntheorem coe_refl : «expr⇑ » (refl α) = id :=\n  rfl\n#align coe_refl coe_refl\n\n",
  "coe_prod_comm":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃o » -/\n@[simp]\ntheorem coe_prod_comm : «expr⇑ » (prodComm : «expr ≃o » (α × β) (β × α)) = prod.swap :=\n  rfl\n#align coe_prod_comm coe_prod_comm\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃o » -/\n@[simp]\ntheorem coe_prod_comm : «expr⇑ » (prodComm : «expr ≃o » (α × β) (β × α)) = Prod.swap :=\n  rfl\n#align coe_prod_comm coe_prod_comm\n\n",
  "coe_of_strict_mono":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n@[simp]\ntheorem coe_of_strict_mono {α β} [linear_order α] [preorder β] {f : α → β} (h : strict_mono f) :\n    «expr⇑ » (ofStrictMono f h) = f :=\n  rfl\n#align coe_of_strict_mono coe_of_strict_mono\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n@[simp]\ntheorem coe_of_strict_mono {α β} [linear_order α] [preorder β] {f : α → β} (h : StrictMono f) :\n    «expr⇑ » (ofStrictMono f h) = f :=\n  rfl\n#align coe_of_strict_mono coe_of_strict_mono\n\n",
  "coe_of_map_le_iff":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n@[simp]\ntheorem coe_of_map_le_iff {α β} [partial_order α] [preorder β] {f : α → β} (h) : «expr⇑ » (ofMapLeIff f h) = f :=\n  rfl\n#align coe_of_map_le_iff coe_of_map_le_iff\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n@[simp]\ntheorem coe_of_map_le_iff {α β} [partial_order α] [preorder β] {f : α → β} (h) : «expr⇑ » (ofMapLEIff f h) = f :=\n  rfl\n#align coe_of_map_le_iff coe_of_map_le_iff\n\n",
  "coe_le_coe":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →o » -/\n@[simp, norm_cast]\ntheorem coe_le_coe {f g : «expr →o » α β} : (f : α → β) ≤ g ↔ f ≤ g :=\n  iff.rfl\n#align coe_le_coe coe_le_coe\n\n",
  "coe_fun_mk":
- "@[simp]\ntheorem coe_fun_mk {f : α → β} (hf : _root_.monotone f) : (mk f hf : α → β) = f :=\n  rfl\n#align coe_fun_mk coe_fun_mk\n\n",
+ "@[simp]\ntheorem coe_fun_mk {f : α → β} (hf : Monotone f) : (mk f hf : α → β) = f :=\n  rfl\n#align coe_fun_mk coe_fun_mk\n\n",
  "coe_eq":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →o » -/\ntheorem coe_eq (f : «expr →o » α β) : coe f = f := by ext <;> rfl\n#align coe_eq coe_eq\n\n",
  "coe_dual_dual_symm":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n@[simp]\ntheorem coe_dual_dual_symm : «expr⇑ » (dualDual α).symm = of_dual ∘ of_dual :=\n  rfl\n#align coe_dual_dual_symm coe_dual_dual_symm\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n@[simp]\ntheorem coe_dual_dual_symm : «expr⇑ » (dualDual α).symm = ofDual ∘ ofDual :=\n  rfl\n#align coe_dual_dual_symm coe_dual_dual_symm\n\n",
  "coe_dual_dual":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n@[simp]\ntheorem coe_dual_dual : «expr⇑ » (dualDual α) = to_dual ∘ to_dual :=\n  rfl\n#align coe_dual_dual coe_dual_dual\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n@[simp]\ntheorem coe_dual_dual : «expr⇑ » (dualDual α) = toDual ∘ toDual :=\n  rfl\n#align coe_dual_dual coe_dual_dual\n\n",
  "coe_copy":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →o » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n@[simp]\ntheorem coe_copy (f : «expr →o » α β) (f' : α → β) (h : f' = f) : «expr⇑ » (f.copy f' h) = f' :=\n  rfl\n#align coe_copy coe_copy\n\n",
  "codisjoint_map_orderIso_iff":
@@ -229,4 +223,10 @@
  "apply_eq_iff_eq":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃o » -/\n@[simp]\ntheorem apply_eq_iff_eq (e : «expr ≃o » α β) {x y : α} : e x = e y ↔ x = y :=\n  e.to_equiv.apply_eq_iff_eq\n#align apply_eq_iff_eq apply_eq_iff_eq\n\n",
  "acc":
- "protected theorem acc (a : α) : acc (· < ·) (f a) → acc (· < ·) a :=\n  f.lt_embedding.acc a\n#align acc acc\n\n"}
+ "protected theorem acc (a : α) : acc (· < ·) (f a) → acc (· < ·) a :=\n  f.lt_embedding.acc a\n#align acc acc\n\n",
+ "StrictMono":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃o » -/\n#print StrictMono /-\nprotected theorem StrictMono (e : «expr ≃o » α β) : StrictMono e :=\n  e.to_order_embedding.strict_mono\n#align strict_mono StrictMono\n-/\n\n",
+ "Monotone":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃o » -/\n#print Monotone /-\nprotected theorem Monotone (e : «expr ≃o » α β) : Monotone e :=\n  e.to_order_embedding.monotone\n#align monotone Monotone\n-/\n\n",
+ "IsWellOrder":
+ "#print IsWellOrder /-\nprotected theorem IsWellOrder [IsWellOrder β (· < ·)] : IsWellOrder α (· < ·) :=\n  f.lt_embedding.is_well_order\n#align is_well_order IsWellOrder\n-/\n\n"}

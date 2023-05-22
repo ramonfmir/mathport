@@ -9,7 +9,7 @@
  "map":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `language.hom -/\ntheorem cg.map {N : Type _} [L.Structure N] (f : language.hom M L N) {s : L.substructure M} (hs : s.cg) :\n    (s.map f).cg :=\n  let ⟨t, ht⟩ := cg_def.1 hs\n  cg_def.2 ⟨«expr '' » f t, ht.1.image _, by rw [closure_image, ht.2]⟩\n#align cg.map cg.map\n\n",
  "fg_iff_exists_fin_generating_family":
- "theorem fg_iff_exists_fin_generating_family {N : L.substructure M} :\n    N.fg ↔ ∃ (n : ℕ)(s : fin n → M), closure L (range s) = N :=\n  by\n  rw [fg_def]\n  constructor\n  · rintro ⟨S, Sfin, hS⟩\n    obtain ⟨n, f, rfl⟩ := Sfin.fin_embedding\n    exact ⟨n, f, hS⟩\n  · rintro ⟨n, s, hs⟩\n    refine' ⟨range s, finite_range s, hs⟩\n#align fg_iff_exists_fin_generating_family fg_iff_exists_fin_generating_family\n\n",
+ "theorem fg_iff_exists_fin_generating_family {N : L.substructure M} :\n    N.fg ↔ ∃ (n : ℕ)(s : Fin n → M), closure L (range s) = N :=\n  by\n  rw [fg_def]\n  constructor\n  · rintro ⟨S, Sfin, hS⟩\n    obtain ⟨n, f, rfl⟩ := Sfin.fin_embedding\n    exact ⟨n, f, hS⟩\n  · rintro ⟨n, s, hs⟩\n    refine' ⟨range s, finite_range s, hs⟩\n#align fg_iff_exists_fin_generating_family fg_iff_exists_fin_generating_family\n\n",
  "fg_iff_Structure_fg":
  "theorem substructure.fg_iff_Structure_fg (S : L.substructure M) : S.fg ↔ Structure.fg L S :=\n  by\n  rw [Structure.fg_def]\n  refine' ⟨fun h => fg.of_map_embedding S.subtype _, fun h => _⟩\n  · rw [← hom.range_eq_map, range_subtype]\n    exact h\n  · have h := h.map S.subtype.to_hom\n    rw [← hom.range_eq_map, range_subtype] at h\n    exact h\n#align substructure.fg_iff_Structure_fg substructure.fg_iff_Structure_fg\n\n",
  "fg_iff":
@@ -17,15 +17,15 @@
  "fg_def":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\ntheorem fg_def : fg L M ↔ («expr⊤» : L.substructure M).fg :=\n  ⟨fun h => h.1, fun h => ⟨h⟩⟩\n#align fg_def fg_def\n\n",
  "fg_closure_singleton":
- "theorem fg_closure_singleton (x : M) : fg (closure L ({x} : set M)) :=\n  fg_closure (finite_singleton x)\n#align fg_closure_singleton fg_closure_singleton\n\n",
+ "theorem fg_closure_singleton (x : M) : fg (closure L ({x} : Set M)) :=\n  fg_closure (finite_singleton x)\n#align fg_closure_singleton fg_closure_singleton\n\n",
  "fg_closure":
- "theorem fg_closure {s : set M} (hs : s.finite) : fg (closure L s) :=\n  ⟨hs.to_finset, by rw [hs.coe_to_finset]⟩\n#align fg_closure fg_closure\n\n",
+ "theorem fg_closure {s : Set M} (hs : s.finite) : fg (closure L s) :=\n  ⟨hs.to_finset, by rw [hs.coe_to_finset]⟩\n#align fg_closure fg_closure\n\n",
  "fg_bot":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\ntheorem fg_bot : («expr⊥» : L.substructure M).fg :=\n  ⟨∅, by rw [Finset.coe_empty, closure_empty]⟩\n#align fg_bot fg_bot\n\n",
  "cg_iff_empty_or_exists_nat_generating_family":
- "theorem cg_iff_empty_or_exists_nat_generating_family {N : L.substructure M} :\n    N.cg ↔ ↑N = (∅ : set M) ∨ ∃ s : ℕ → M, closure L (range s) = N :=\n  by\n  rw [cg_def]\n  constructor\n  · rintro ⟨S, Scount, hS⟩\n    cases' eq_empty_or_nonempty ↑N with h h\n    · exact or.intro_left _ h\n    obtain ⟨f, h'⟩ := (Scount.union (set.countable_singleton h.some)).exists_eq_range (singleton_nonempty h.some).inr\n    refine' Or.intro_right _ ⟨f, _⟩\n    rw [← h', closure_union, hS, sup_eq_left, closure_le]\n    exact singleton_subset_iff.2 h.some_mem\n  · intro h\n    cases' h with h h\n    · refine' ⟨∅, countable_empty, closure_eq_of_le (empty_subset _) _⟩\n      rw [← SetLike.coe_subset_coe, h]\n      exact empty_subset _\n    · obtain ⟨f, rfl⟩ := h\n      exact ⟨range f, countable_range _, rfl⟩\n#align cg_iff_empty_or_exists_nat_generating_family cg_iff_empty_or_exists_nat_generating_family\n\n",
+ "theorem cg_iff_empty_or_exists_nat_generating_family {N : L.substructure M} :\n    N.cg ↔ ↑N = (∅ : Set M) ∨ ∃ s : ℕ → M, closure L (range s) = N :=\n  by\n  rw [cg_def]\n  constructor\n  · rintro ⟨S, Scount, hS⟩\n    cases' eq_empty_or_nonempty ↑N with h h\n    · exact or.intro_left _ h\n    obtain ⟨f, h'⟩ := (Scount.union (Set.countable_singleton h.some)).exists_eq_range (singleton_nonempty h.some).inr\n    refine' Or.intro_right _ ⟨f, _⟩\n    rw [← h', closure_union, hS, sup_eq_left, closure_le]\n    exact singleton_subset_iff.2 h.some_mem\n  · intro h\n    cases' h with h h\n    · refine' ⟨∅, countable_empty, closure_eq_of_le (empty_subset _) _⟩\n      rw [← SetLike.coe_subset_coe, h]\n      exact empty_subset _\n    · obtain ⟨f, rfl⟩ := h\n      exact ⟨range f, countable_range _, rfl⟩\n#align cg_iff_empty_or_exists_nat_generating_family cg_iff_empty_or_exists_nat_generating_family\n\n",
  "cg_iff_countable":
- "theorem cg_iff_countable [countable (Σl, L.functions l)] : cg L M ↔ countable M := by\n  rw [cg_def, cg_iff_countable, top_equiv.to_equiv.countable_iff]\n#align cg_iff_countable cg_iff_countable\n\n",
+ "theorem cg_iff_countable [Countable (Σl, L.functions l)] : cg L M ↔ Countable M := by\n  rw [cg_def, cg_iff_countable, top_equiv.to_equiv.countable_iff]\n#align cg_iff_countable cg_iff_countable\n\n",
  "cg_iff_Structure_cg":
  "theorem substructure.cg_iff_Structure_cg (S : L.substructure M) : S.cg ↔ Structure.cg L S :=\n  by\n  rw [Structure.cg_def]\n  refine' ⟨fun h => cg.of_map_embedding S.subtype _, fun h => _⟩\n  · rw [← hom.range_eq_map, range_subtype]\n    exact h\n  · have h := h.map S.subtype.to_hom\n    rw [← hom.range_eq_map, range_subtype] at h\n    exact h\n#align substructure.cg_iff_Structure_cg substructure.cg_iff_Structure_cg\n\n",
  "cg_iff":
@@ -33,9 +33,9 @@
  "cg_def":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\ntheorem cg_def : cg L M ↔ («expr⊤» : L.substructure M).cg :=\n  ⟨fun h => h.1, fun h => ⟨h⟩⟩\n#align cg_def cg_def\n\n",
  "cg_closure_singleton":
- "theorem cg_closure_singleton (x : M) : cg (closure L ({x} : set M)) :=\n  (fg_closure_singleton x).cg\n#align cg_closure_singleton cg_closure_singleton\n\n",
+ "theorem cg_closure_singleton (x : M) : cg (closure L ({x} : Set M)) :=\n  (fg_closure_singleton x).cg\n#align cg_closure_singleton cg_closure_singleton\n\n",
  "cg_closure":
- "theorem cg_closure {s : set M} (hs : s.countable) : cg (closure L s) :=\n  ⟨s, hs, rfl⟩\n#align cg_closure cg_closure\n\n",
+ "theorem cg_closure {s : Set M} (hs : s.countable) : cg (closure L s) :=\n  ⟨s, hs, rfl⟩\n#align cg_closure cg_closure\n\n",
  "cg_bot":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\ntheorem cg_bot : («expr⊥» : L.substructure M).cg :=\n  fg_bot.cg\n#align cg_bot cg_bot\n\n",
  "cg":

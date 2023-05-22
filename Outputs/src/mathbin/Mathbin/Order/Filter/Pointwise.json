@@ -1,17 +1,17 @@
 {"zero_smul_nonneg":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\ntheorem ne_bot.zero_smul_nonneg (hg : g.ne_bot) : 0 ≤ «expr • » (0 : filter α) g :=\n  le_smul_iff.2 fun t₁ h₁ t₂ h₂ =>\n    let ⟨b, hb⟩ := hg.nonempty_of_mem h₂\n    ⟨_, _, h₁, hb, zero_smul _ _⟩\n#align ne_bot.zero_smul_nonneg ne_bot.zero_smul_nonneg\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\ntheorem ne_bot.zero_smul_nonneg (hg : g.ne_bot) : 0 ≤ «expr • » (0 : Filter α) g :=\n  le_smul_iff.2 fun t₁ h₁ t₂ h₂ =>\n    let ⟨b, hb⟩ := hg.nonempty_of_mem h₂\n    ⟨_, _, h₁, hb, zero_smul _ _⟩\n#align ne_bot.zero_smul_nonneg ne_bot.zero_smul_nonneg\n\n",
  "zero_smul_filter_nonpos":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\ntheorem zero_smul_filter_nonpos : «expr • » (0 : α) g ≤ 0 :=\n  by\n  refine' fun s hs => mem_smul_filter.2 _\n  convert univ_mem\n  refine' eq_univ_iff_forall.2 fun a => _\n  rwa [mem_preimage, zero_smul]\n#align zero_smul_filter_nonpos zero_smul_filter_nonpos\n\n",
  "zero_smul_filter":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\ntheorem zero_smul_filter (hg : g.ne_bot) : «expr • » (0 : α) g = 0 :=\n  zero_smul_filter_nonpos.antisymm <|\n    le_map_iff.2 fun s hs =>\n      by\n      simp_rw [Set.image_eta, zero_smul, (hg.nonempty_of_mem hs).image_const]\n      exact zero_mem_zero\n#align zero_smul_filter zero_smul_filter\n\n",
  "zero_mul_nonneg":
- "theorem ne_bot.zero_mul_nonneg (hg : g.ne_bot) : 0 ≤ 0 * g :=\n  le_mul_iff.2 fun t₁ h₁ t₂ h₂ =>\n    let ⟨b, hb⟩ := hg.nonempty_of_mem h₂\n    ⟨_, _, h₁, hb, zero_mul _⟩\n#align ne_bot.zero_mul_nonneg ne_bot.zero_mul_nonneg\n\n",
+ "theorem ne_bot.zero_mul_nonneg (hg : g.ne_bot) : 0 ≤ 0 * g :=\n  le_mul_iff.2 fun t₁ h₁ t₂ h₂ =>\n    let ⟨b, hb⟩ := hg.nonempty_of_mem h₂\n    ⟨_, _, h₁, hb, MulZeroClass.zero_mul _⟩\n#align ne_bot.zero_mul_nonneg ne_bot.zero_mul_nonneg\n\n",
  "zero_div_nonneg":
- "theorem ne_bot.zero_div_nonneg (hg : g.ne_bot) : 0 ≤ 0 / g :=\n  filter.le_div_iff.2 fun t₁ h₁ t₂ h₂ =>\n    let ⟨b, hb⟩ := hg.nonempty_of_mem h₂\n    ⟨_, _, h₁, hb, zero_div _⟩\n#align ne_bot.zero_div_nonneg ne_bot.zero_div_nonneg\n\n",
+ "theorem ne_bot.zero_div_nonneg (hg : g.ne_bot) : 0 ≤ 0 / g :=\n  Filter.le_div_iff.2 fun t₁ h₁ t₂ h₂ =>\n    let ⟨b, hb⟩ := hg.nonempty_of_mem h₂\n    ⟨_, _, h₁, hb, zero_div _⟩\n#align ne_bot.zero_div_nonneg ne_bot.zero_div_nonneg\n\n",
  "vsub_pure":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr -ᵥ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:219:4: warning: unsupported binary notation `«expr -ᵥ » -/\n@[simp]\ntheorem vsub_pure : «expr -ᵥ » f (pure b) = f.map («expr -ᵥ » · b) :=\n  map₂_pure_right\n#align vsub_pure vsub_pure\n\n",
  "vsub_ne_bot_iff":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr -ᵥ » -/\n@[simp]\ntheorem vsub_ne_bot_iff : («expr -ᵥ » f g : filter α).ne_bot ↔ f.ne_bot ∧ g.ne_bot :=\n  map₂_ne_bot_iff\n#align vsub_ne_bot_iff vsub_ne_bot_iff\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr -ᵥ » -/\n@[simp]\ntheorem vsub_ne_bot_iff : («expr -ᵥ » f g : Filter α).ne_bot ↔ f.ne_bot ∧ g.ne_bot :=\n  map₂_neBot_iff\n#align vsub_ne_bot_iff vsub_ne_bot_iff\n\n",
  "vsub_mem_vsub":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr -ᵥ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr -ᵥ » -/\ntheorem vsub_mem_vsub : s ∈ f → t ∈ g → «expr -ᵥ » s t ∈ «expr -ᵥ » f g :=\n  image2_mem_map₂\n#align vsub_mem_vsub vsub_mem_vsub\n\n",
  "vsub_le_vsub_right":
@@ -23,25 +23,25 @@
  "vsub_eq_bot_iff":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr -ᵥ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n@[simp]\ntheorem vsub_eq_bot_iff : «expr -ᵥ » f g = «expr⊥» ↔ f = «expr⊥» ∨ g = «expr⊥» :=\n  map₂_eq_bot_iff\n#align vsub_eq_bot_iff vsub_eq_bot_iff\n\n",
  "vsub_bot":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr -ᵥ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n@[simp]\ntheorem vsub_bot : «expr -ᵥ » f («expr⊥» : filter β) = «expr⊥» :=\n  map₂_bot_right\n#align vsub_bot vsub_bot\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr -ᵥ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n@[simp]\ntheorem vsub_bot : «expr -ᵥ » f («expr⊥» : Filter β) = «expr⊥» :=\n  map₂_bot_right\n#align vsub_bot vsub_bot\n\n",
  "vsub":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr -ᵥ » -/\ntheorem ne_bot.vsub : ne_bot f → ne_bot g → ne_bot («expr -ᵥ » f g) :=\n  ne_bot.map₂\n#align ne_bot.vsub ne_bot.vsub\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr -ᵥ » -/\ntheorem ne_bot.vsub : NeBot f → NeBot g → NeBot («expr -ᵥ » f g) :=\n  NeBot.map₂\n#align ne_bot.vsub ne_bot.vsub\n\n",
  "top_pow":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n@[to_additive nsmul_top]\ntheorem top_pow : ∀ {n : ℕ}, n ≠ 0 → («expr⊤» : filter α) ^ n = «expr⊤»\n  | 0 => fun h => (h rfl).elim\n  | 1 => fun _ => pow_one _\n  | n + 2 => fun _ => by rw [pow_succ, top_pow n.succ_ne_zero, top_mul_top]\n#align top_pow top_pow\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n@[to_additive nsmul_top]\ntheorem top_pow : ∀ {n : ℕ}, n ≠ 0 → («expr⊤» : Filter α) ^ n = «expr⊤»\n  | 0 => fun h => (h rfl).elim\n  | 1 => fun _ => pow_one _\n  | n + 2 => fun _ => by rw [pow_succ, top_pow n.succ_ne_zero, top_mul_top]\n#align top_pow top_pow\n\n",
  "top_mul_top":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n@[simp, to_additive]\ntheorem top_mul_top : («expr⊤» : filter α) * «expr⊤» = «expr⊤» :=\n  mul_top_of_one_le le_top\n#align top_mul_top top_mul_top\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n@[simp, to_additive]\ntheorem top_mul_top : («expr⊤» : Filter α) * «expr⊤» = «expr⊤» :=\n  mul_top_of_one_le le_top\n#align top_mul_top top_mul_top\n\n",
  "top_mul_of_one_le":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n@[to_additive]\ntheorem top_mul_of_one_le (hf : 1 ≤ f) : «expr⊤» * f = «expr⊤» :=\n  by\n  refine' top_le_iff.1 fun s => _\n  simp only [mem_mul, mem_top, exists_and_left, exists_eq_left]\n  rintro ⟨t, ht, hs⟩\n  rwa [univ_mul_of_one_mem (mem_one.1 <| hf ht), univ_subset_iff] at hs\n#align top_mul_of_one_le top_mul_of_one_le\n\n",
  "tendsto_one":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr∀ᶠ in , » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr∀ᶠ in , » -/\n@[simp, to_additive]\ntheorem tendsto_one {a : filter β} {f : β → α} :\n    tendsto f a 1 ↔\n      «expr∀ᶠ in , » \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr∀ᶠ in , »\" a\n        (f x = 1) :=\n  tendsto_pure\n#align tendsto_one tendsto_one\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr∀ᶠ in , » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr∀ᶠ in , » -/\n@[simp, to_additive]\ntheorem tendsto_one {a : Filter β} {f : β → α} :\n    Tendsto f a 1 ↔\n      «expr∀ᶠ in , » \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr∀ᶠ in , »\" a\n        (f x = 1) :=\n  tendsto_pure\n#align tendsto_one tendsto_one\n\n",
  "smul_zero_nonneg":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\ntheorem ne_bot.smul_zero_nonneg (hf : f.ne_bot) : 0 ≤ «expr • » f (0 : filter β) :=\n  le_smul_iff.2 fun t₁ h₁ t₂ h₂ =>\n    let ⟨a, ha⟩ := hf.nonempty_of_mem h₁\n    ⟨_, _, ha, h₂, smul_zero _⟩\n#align ne_bot.smul_zero_nonneg ne_bot.smul_zero_nonneg\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\ntheorem ne_bot.smul_zero_nonneg (hf : f.ne_bot) : 0 ≤ «expr • » f (0 : Filter β) :=\n  le_smul_iff.2 fun t₁ h₁ t₂ h₂ =>\n    let ⟨a, ha⟩ := hf.nonempty_of_mem h₁\n    ⟨_, _, ha, h₂, smul_zero _⟩\n#align ne_bot.smul_zero_nonneg ne_bot.smul_zero_nonneg\n\n",
  "smul_set_mem_smul_filter":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n@[to_additive]\ntheorem smul_set_mem_smul_filter : s ∈ f → «expr • » a s ∈ «expr • » a f :=\n  image_mem_map\n#align smul_set_mem_smul_filter smul_set_mem_smul_filter\n\n",
  "smul_pure":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:219:4: warning: unsupported binary notation `«expr • » -/\n@[simp, to_additive]\ntheorem smul_pure : «expr • » f (pure b) = f.map («expr • » · b) :=\n  map₂_pure_right\n#align smul_pure smul_pure\n\n",
  "smul_ne_bot_iff":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n@[simp, to_additive]\ntheorem smul_ne_bot_iff : («expr • » f g).ne_bot ↔ f.ne_bot ∧ g.ne_bot :=\n  map₂_ne_bot_iff\n#align smul_ne_bot_iff smul_ne_bot_iff\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n@[simp, to_additive]\ntheorem smul_ne_bot_iff : («expr • » f g).ne_bot ↔ f.ne_bot ∧ g.ne_bot :=\n  map₂_neBot_iff\n#align smul_ne_bot_iff smul_ne_bot_iff\n\n",
  "smul_mem_smul":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n@[to_additive]\ntheorem smul_mem_smul : s ∈ f → t ∈ g → «expr • » s t ∈ «expr • » f g :=\n  image2_mem_map₂\n#align smul_mem_smul smul_mem_smul\n\n",
  "smul_le_smul_right":
@@ -51,97 +51,97 @@
  "smul_le_smul":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n@[to_additive]\ntheorem smul_le_smul : f₁ ≤ f₂ → g₁ ≤ g₂ → «expr • » f₁ g₁ ≤ «expr • » f₂ g₂ :=\n  map₂_mono\n#align smul_le_smul smul_le_smul\n\n",
  "smul_filter_ne_bot_iff":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n@[simp, to_additive]\ntheorem smul_filter_ne_bot_iff : («expr • » a f).ne_bot ↔ f.ne_bot :=\n  map_ne_bot_iff _\n#align smul_filter_ne_bot_iff smul_filter_ne_bot_iff\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n@[simp, to_additive]\ntheorem smul_filter_ne_bot_iff : («expr • » a f).ne_bot ↔ f.ne_bot :=\n  map_neBot_iff _\n#align smul_filter_ne_bot_iff smul_filter_ne_bot_iff\n\n",
  "smul_filter_le_smul_filter":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n@[to_additive]\ntheorem smul_filter_le_smul_filter (hf : f₁ ≤ f₂) : «expr • » a f₁ ≤ «expr • » a f₂ :=\n  map_mono hf\n#align smul_filter_le_smul_filter smul_filter_le_smul_filter\n\n",
  "smul_filter_eq_bot_iff":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n@[simp, to_additive]\ntheorem smul_filter_eq_bot_iff : «expr • » a f = «expr⊥» ↔ f = «expr⊥» :=\n  map_eq_bot_iff\n#align smul_filter_eq_bot_iff smul_filter_eq_bot_iff\n\n",
  "smul_filter_bot":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n@[simp, to_additive]\ntheorem smul_filter_bot : «expr • » a («expr⊥» : filter β) = «expr⊥» :=\n  map_bot\n#align smul_filter_bot smul_filter_bot\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n@[simp, to_additive]\ntheorem smul_filter_bot : «expr • » a («expr⊥» : Filter β) = «expr⊥» :=\n  map_bot\n#align smul_filter_bot smul_filter_bot\n\n",
  "smul_filter":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n@[to_additive]\ntheorem ne_bot.smul_filter : f.ne_bot → («expr • » a f).ne_bot := fun h => h.map _\n#align ne_bot.smul_filter ne_bot.smul_filter\n\n",
  "smul_eq_bot_iff":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n@[simp, to_additive]\ntheorem smul_eq_bot_iff : «expr • » f g = «expr⊥» ↔ f = «expr⊥» ∨ g = «expr⊥» :=\n  map₂_eq_bot_iff\n#align smul_eq_bot_iff smul_eq_bot_iff\n\n",
  "smul_bot":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n@[simp, to_additive]\ntheorem smul_bot : «expr • » f («expr⊥» : filter β) = «expr⊥» :=\n  map₂_bot_right\n#align smul_bot smul_bot\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n@[simp, to_additive]\ntheorem smul_bot : «expr • » f («expr⊥» : Filter β) = «expr⊥» :=\n  map₂_bot_right\n#align smul_bot smul_bot\n\n",
  "smul":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n@[to_additive]\ntheorem ne_bot.smul : ne_bot f → ne_bot g → ne_bot («expr • » f g) :=\n  ne_bot.map₂\n#align ne_bot.smul ne_bot.smul\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n@[to_additive]\ntheorem ne_bot.smul : NeBot f → NeBot g → NeBot («expr • » f g) :=\n  NeBot.map₂\n#align ne_bot.smul ne_bot.smul\n\n",
  "pure_vsub_pure":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr -ᵥ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr -ᵥ » -/\n@[simp]\ntheorem pure_vsub_pure : «expr -ᵥ » (pure a : filter β) (pure b) = (pure («expr -ᵥ » a b) : filter α) :=\n  map₂_pure\n#align pure_vsub_pure pure_vsub_pure\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr -ᵥ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr -ᵥ » -/\n@[simp]\ntheorem pure_vsub_pure : «expr -ᵥ » (pure a : Filter β) (pure b) = (pure («expr -ᵥ » a b) : Filter α) :=\n  map₂_pure\n#align pure_vsub_pure pure_vsub_pure\n\n",
  "pure_vsub":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr -ᵥ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:219:4: warning: unsupported binary notation `«expr -ᵥ » -/\n@[simp]\ntheorem pure_vsub : «expr -ᵥ » (pure a : filter β) g = g.map ((«expr -ᵥ » · ·) a) :=\n  map₂_pure_left\n#align pure_vsub pure_vsub\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr -ᵥ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:219:4: warning: unsupported binary notation `«expr -ᵥ » -/\n@[simp]\ntheorem pure_vsub : «expr -ᵥ » (pure a : Filter β) g = g.map ((«expr -ᵥ » · ·) a) :=\n  map₂_pure_left\n#align pure_vsub pure_vsub\n\n",
  "pure_smul_pure":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n@[simp, to_additive]\ntheorem pure_smul_pure : «expr • » (pure a : filter α) (pure b : filter β) = pure («expr • » a b) :=\n  map₂_pure\n#align pure_smul_pure pure_smul_pure\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n@[simp, to_additive]\ntheorem pure_smul_pure : «expr • » (pure a : Filter α) (pure b : Filter β) = pure («expr • » a b) :=\n  map₂_pure\n#align pure_smul_pure pure_smul_pure\n\n",
  "pure_smul":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:219:4: warning: unsupported binary notation `«expr • » -/\n@[simp, to_additive]\ntheorem pure_smul : «expr • » (pure a : filter α) g = g.map ((«expr • » · ·) a) :=\n  map₂_pure_left\n#align pure_smul pure_smul\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:219:4: warning: unsupported binary notation `«expr • » -/\n@[simp, to_additive]\ntheorem pure_smul : «expr • » (pure a : Filter α) g = g.map ((«expr • » · ·) a) :=\n  map₂_pure_left\n#align pure_smul pure_smul\n\n",
  "pure_one_hom_apply":
- "@[simp, to_additive]\ntheorem pure_one_hom_apply (a : α) : pure_one_hom a = pure a :=\n  rfl\n#align pure_one_hom_apply pure_one_hom_apply\n\n",
+ "@[simp, to_additive]\ntheorem pure_one_hom_apply (a : α) : pureOneHom a = pure a :=\n  rfl\n#align pure_one_hom_apply pure_one_hom_apply\n\n",
  "pure_one":
- "@[simp, to_additive]\ntheorem pure_one : pure 1 = (1 : filter α) :=\n  rfl\n#align pure_one pure_one\n\n",
+ "@[simp, to_additive]\ntheorem pure_one : pure 1 = (1 : Filter α) :=\n  rfl\n#align pure_one pure_one\n\n",
  "pure_mul_pure":
- "@[simp, to_additive]\ntheorem pure_mul_pure : (pure a : filter α) * pure b = pure (a * b) :=\n  map₂_pure\n#align pure_mul_pure pure_mul_pure\n\n",
+ "@[simp, to_additive]\ntheorem pure_mul_pure : (pure a : Filter α) * pure b = pure (a * b) :=\n  map₂_pure\n#align pure_mul_pure pure_mul_pure\n\n",
  "pure_mul_hom_apply":
- "@[simp, to_additive]\ntheorem pure_mul_hom_apply (a : α) : pure_mul_hom a = pure a :=\n  rfl\n#align pure_mul_hom_apply pure_mul_hom_apply\n\n",
+ "@[simp, to_additive]\ntheorem pure_mul_hom_apply (a : α) : pureMulHom a = pure a :=\n  rfl\n#align pure_mul_hom_apply pure_mul_hom_apply\n\n",
  "pure_mul":
  "@[simp, to_additive]\ntheorem pure_mul : pure a * g = g.map ((· * ·) a) :=\n  map₂_pure_left\n#align pure_mul pure_mul\n\n",
  "pure_monoid_hom_apply":
- "@[simp, to_additive]\ntheorem pure_monoid_hom_apply (a : α) : pure_monoid_hom a = pure a :=\n  rfl\n#align pure_monoid_hom_apply pure_monoid_hom_apply\n\n",
+ "@[simp, to_additive]\ntheorem pure_monoid_hom_apply (a : α) : pureMonoidHom a = pure a :=\n  rfl\n#align pure_monoid_hom_apply pure_monoid_hom_apply\n\n",
  "pure_div_pure":
- "@[simp, to_additive]\ntheorem pure_div_pure : (pure a : filter α) / pure b = pure (a / b) :=\n  map₂_pure\n#align pure_div_pure pure_div_pure\n\n",
+ "@[simp, to_additive]\ntheorem pure_div_pure : (pure a : Filter α) / pure b = pure (a / b) :=\n  map₂_pure\n#align pure_div_pure pure_div_pure\n\n",
  "pure_div":
  "@[simp, to_additive]\ntheorem pure_div : pure a / g = g.map ((· / ·) a) :=\n  map₂_pure_left\n#align pure_div pure_div\n\n",
  "principal_one":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `filter.principal -/\n@[simp, to_additive]\ntheorem principal_one : (filter.principal) 1 = (1 : filter α) :=\n  principal_singleton _\n#align principal_one principal_one\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `filter.principal -/\n@[simp, to_additive]\ntheorem principal_one : (filter.principal) 1 = (1 : Filter α) :=\n  principal_singleton _\n#align principal_one principal_one\n\n",
  "pow_mem_pow":
  "@[to_additive]\ntheorem pow_mem_pow (hs : s ∈ f) : ∀ n : ℕ, s ^ n ∈ f ^ n\n  | 0 => by\n    rw [pow_zero]\n    exact one_mem_one\n  | n + 1 => by\n    rw [pow_succ]\n    exact mul_mem_mul hs (pow_mem_pow _)\n#align pow_mem_pow pow_mem_pow\n\n",
  "one_prod_one":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `filter.prod -/\n@[simp, to_additive]\ntheorem one_prod_one [One β] : filter.prod (1 : filter α) (1 : filter β) = 1 :=\n  prod_pure_pure\n#align one_prod_one one_prod_one\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `filter.prod -/\n@[simp, to_additive]\ntheorem one_prod_one [One β] : filter.prod (1 : Filter α) (1 : Filter β) = 1 :=\n  prod_pure_pure\n#align one_prod_one one_prod_one\n\n",
  "one_ne_bot":
- "@[to_additive]\ntheorem one_ne_bot : (1 : filter α).ne_bot :=\n  filter.pure_ne_bot\n#align one_ne_bot one_ne_bot\n\n",
+ "@[to_additive]\ntheorem one_ne_bot : (1 : Filter α).ne_bot :=\n  Filter.pure_neBot\n#align one_ne_bot one_ne_bot\n\n",
  "one_mem_one":
- "@[to_additive]\ntheorem one_mem_one : (1 : set α) ∈ (1 : filter α) :=\n  mem_pure.2 one_mem_one\n#align one_mem_one one_mem_one\n\n",
+ "@[to_additive]\ntheorem one_mem_one : (1 : Set α) ∈ (1 : Filter α) :=\n  mem_pure.2 one_mem_one\n#align one_mem_one one_mem_one\n\n",
  "one_le_div_iff":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n#print one_le_div_iff /-\n@[simp, to_additive]\nprotected theorem one_le_div_iff : 1 ≤ f / g ↔ ¬Disjoint f g :=\n  by\n  refine' ⟨fun h hfg => _, _⟩\n  · obtain ⟨s, hs, t, ht, hst⟩ := hfg.le_bot (mem_bot : ∅ ∈ «expr⊥»)\n    exact Set.one_mem_div_iff.1 (h <| div_mem_div hs ht) (disjoint_iff.2 hst.symm)\n  · rintro h s ⟨t₁, t₂, h₁, h₂, hs⟩\n    exact hs (Set.one_mem_div_iff.2 fun ht => h <| disjoint_of_disjoint_of_mem ht h₁ h₂)\n#align one_le_div_iff one_le_div_iff\n-/\n\n",
  "one_le_div":
  "@[to_additive]\ntheorem ne_bot.one_le_div (h : f.ne_bot) : 1 ≤ f / f :=\n  by\n  rintro s ⟨t₁, t₂, h₁, h₂, hs⟩\n  obtain ⟨a, ha₁, ha₂⟩ := Set.not_disjoint_iff.1 (h.not_disjoint h₁ h₂)\n  rw [mem_one, ← div_self' a]\n  exact hs (Set.div_mem_div ha₁ ha₂)\n#align ne_bot.one_le_div ne_bot.one_le_div\n\n",
  "of_vsub_right":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr -ᵥ » -/\ntheorem ne_bot.of_vsub_right : («expr -ᵥ » f g : filter α).ne_bot → g.ne_bot :=\n  ne_bot.of_map₂_right\n#align ne_bot.of_vsub_right ne_bot.of_vsub_right\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr -ᵥ » -/\ntheorem ne_bot.of_vsub_right : («expr -ᵥ » f g : Filter α).ne_bot → g.ne_bot :=\n  NeBot.of_map₂_right\n#align ne_bot.of_vsub_right ne_bot.of_vsub_right\n\n",
  "of_vsub_left":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr -ᵥ » -/\ntheorem ne_bot.of_vsub_left : («expr -ᵥ » f g : filter α).ne_bot → f.ne_bot :=\n  ne_bot.of_map₂_left\n#align ne_bot.of_vsub_left ne_bot.of_vsub_left\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr -ᵥ » -/\ntheorem ne_bot.of_vsub_left : («expr -ᵥ » f g : Filter α).ne_bot → f.ne_bot :=\n  NeBot.of_map₂_left\n#align ne_bot.of_vsub_left ne_bot.of_vsub_left\n\n",
  "of_smul_right":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n@[to_additive]\ntheorem ne_bot.of_smul_right : («expr • » f g).ne_bot → g.ne_bot :=\n  ne_bot.of_map₂_right\n#align ne_bot.of_smul_right ne_bot.of_smul_right\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n@[to_additive]\ntheorem ne_bot.of_smul_right : («expr • » f g).ne_bot → g.ne_bot :=\n  NeBot.of_map₂_right\n#align ne_bot.of_smul_right ne_bot.of_smul_right\n\n",
  "of_smul_left":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n@[to_additive]\ntheorem ne_bot.of_smul_left : («expr • » f g).ne_bot → f.ne_bot :=\n  ne_bot.of_map₂_left\n#align ne_bot.of_smul_left ne_bot.of_smul_left\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n@[to_additive]\ntheorem ne_bot.of_smul_left : («expr • » f g).ne_bot → f.ne_bot :=\n  NeBot.of_map₂_left\n#align ne_bot.of_smul_left ne_bot.of_smul_left\n\n",
  "of_smul_filter":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n@[to_additive]\ntheorem ne_bot.of_smul_filter : («expr • » a f).ne_bot → f.ne_bot :=\n  ne_bot.of_map\n#align ne_bot.of_smul_filter ne_bot.of_smul_filter\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n@[to_additive]\ntheorem ne_bot.of_smul_filter : («expr • » a f).ne_bot → f.ne_bot :=\n  NeBot.of_map\n#align ne_bot.of_smul_filter ne_bot.of_smul_filter\n\n",
  "of_mul_right":
- "@[to_additive]\ntheorem ne_bot.of_mul_right : (f * g).ne_bot → g.ne_bot :=\n  ne_bot.of_map₂_right\n#align ne_bot.of_mul_right ne_bot.of_mul_right\n\n",
+ "@[to_additive]\ntheorem ne_bot.of_mul_right : (f * g).ne_bot → g.ne_bot :=\n  NeBot.of_map₂_right\n#align ne_bot.of_mul_right ne_bot.of_mul_right\n\n",
  "of_mul_left":
- "@[to_additive]\ntheorem ne_bot.of_mul_left : (f * g).ne_bot → f.ne_bot :=\n  ne_bot.of_map₂_left\n#align ne_bot.of_mul_left ne_bot.of_mul_left\n\n",
+ "@[to_additive]\ntheorem ne_bot.of_mul_left : (f * g).ne_bot → f.ne_bot :=\n  NeBot.of_map₂_left\n#align ne_bot.of_mul_left ne_bot.of_mul_left\n\n",
  "of_div_right":
- "@[to_additive]\ntheorem ne_bot.of_div_right : (f / g).ne_bot → g.ne_bot :=\n  ne_bot.of_map₂_right\n#align ne_bot.of_div_right ne_bot.of_div_right\n\n",
+ "@[to_additive]\ntheorem ne_bot.of_div_right : (f / g).ne_bot → g.ne_bot :=\n  NeBot.of_map₂_right\n#align ne_bot.of_div_right ne_bot.of_div_right\n\n",
  "of_div_left":
- "@[to_additive]\ntheorem ne_bot.of_div_left : (f / g).ne_bot → f.ne_bot :=\n  ne_bot.of_map₂_left\n#align ne_bot.of_div_left ne_bot.of_div_left\n\n",
+ "@[to_additive]\ntheorem ne_bot.of_div_left : (f / g).ne_bot → f.ne_bot :=\n  NeBot.of_map₂_left\n#align ne_bot.of_div_left ne_bot.of_div_left\n\n",
  "nsmul_top":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n--TODO: `to_additive` trips up on the `1 : ℕ` used in the pattern-matching.\ntheorem nsmul_top {α : Type _} [add_monoid α] : ∀ {n : ℕ}, n ≠ 0 → «expr • » n («expr⊤» : filter α) = «expr⊤»\n  | 0 => fun h => (h rfl).elim\n  | 1 => fun _ => one_nsmul _\n  | n + 2 => fun _ => by rw [succ_nsmul, nsmul_top n.succ_ne_zero, top_add_top]\n#align nsmul_top nsmul_top\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n--TODO: `to_additive` trips up on the `1 : ℕ` used in the pattern-matching.\ntheorem nsmul_top {α : Type _} [AddMonoid α] : ∀ {n : ℕ}, n ≠ 0 → «expr • » n («expr⊤» : Filter α) = «expr⊤»\n  | 0 => fun h => (h rfl).elim\n  | 1 => fun _ => one_nsmul _\n  | n + 2 => fun _ => by rw [succ_nsmul, nsmul_top n.succ_ne_zero, top_add_top]\n#align nsmul_top nsmul_top\n\n",
  "not_one_le_div_iff":
- "@[to_additive]\ntheorem not_one_le_div_iff : ¬1 ≤ f / g ↔ Disjoint f g :=\n  filter.one_le_div_iff.not_left\n#align not_one_le_div_iff not_one_le_div_iff\n\n",
+ "@[to_additive]\ntheorem not_one_le_div_iff : ¬1 ≤ f / g ↔ Disjoint f g :=\n  Filter.one_le_div_iff.not_left\n#align not_one_le_div_iff not_one_le_div_iff\n\n",
  "ne_bot_inv_iff":
- "@[simp, to_additive]\ntheorem ne_bot_inv_iff : f⁻¹.ne_bot ↔ ne_bot f :=\n  map_ne_bot_iff _\n#align ne_bot_inv_iff ne_bot_inv_iff\n\n",
+ "@[simp, to_additive]\ntheorem ne_bot_inv_iff : f⁻¹.ne_bot ↔ NeBot f :=\n  map_neBot_iff _\n#align ne_bot_inv_iff ne_bot_inv_iff\n\n",
  "mul_zero_nonneg":
- "theorem ne_bot.mul_zero_nonneg (hf : f.ne_bot) : 0 ≤ f * 0 :=\n  le_mul_iff.2 fun t₁ h₁ t₂ h₂ =>\n    let ⟨a, ha⟩ := hf.nonempty_of_mem h₁\n    ⟨_, _, ha, h₂, mul_zero _⟩\n#align ne_bot.mul_zero_nonneg ne_bot.mul_zero_nonneg\n\n",
+ "theorem ne_bot.mul_zero_nonneg (hf : f.ne_bot) : 0 ≤ f * 0 :=\n  le_mul_iff.2 fun t₁ h₁ t₂ h₂ =>\n    let ⟨a, ha⟩ := hf.nonempty_of_mem h₁\n    ⟨_, _, ha, h₂, MulZeroClass.mul_zero _⟩\n#align ne_bot.mul_zero_nonneg ne_bot.mul_zero_nonneg\n\n",
  "mul_top_of_one_le":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊤» -/\n@[to_additive]\ntheorem mul_top_of_one_le (hf : 1 ≤ f) : f * «expr⊤» = «expr⊤» :=\n  by\n  refine' top_le_iff.1 fun s => _\n  simp only [mem_mul, mem_top, exists_and_left, exists_eq_left]\n  rintro ⟨t, ht, hs⟩\n  rwa [mul_univ_of_one_mem (mem_one.1 <| hf ht), univ_subset_iff] at hs\n#align mul_top_of_one_le mul_top_of_one_le\n\n",
  "mul_pure":
  "@[simp, to_additive]\ntheorem mul_pure : f * pure b = f.map (· * b) :=\n  map₂_pure_right\n#align mul_pure mul_pure\n\n",
  "mul_ne_bot_iff":
- "@[simp, to_additive]\ntheorem mul_ne_bot_iff : (f * g).ne_bot ↔ f.ne_bot ∧ g.ne_bot :=\n  map₂_ne_bot_iff\n#align mul_ne_bot_iff mul_ne_bot_iff\n\n",
+ "@[simp, to_additive]\ntheorem mul_ne_bot_iff : (f * g).ne_bot ↔ f.ne_bot ∧ g.ne_bot :=\n  map₂_neBot_iff\n#align mul_ne_bot_iff mul_ne_bot_iff\n\n",
  "mul_mul":
- "@[to_additive]\ntheorem tendsto.mul_mul [MulHomClass F α β] (m : F) {f₁ g₁ : filter α} {f₂ g₂ : filter β} :\n    tendsto m f₁ f₂ → tendsto m g₁ g₂ → tendsto m (f₁ * g₁) (f₂ * g₂) := fun hf hg =>\n  (filter.map_mul m).trans_le <| mul_le_mul' hf hg\n#align tendsto.mul_mul tendsto.mul_mul\n\n",
+ "@[to_additive]\ntheorem tendsto.mul_mul [MulHomClass F α β] (m : F) {f₁ g₁ : Filter α} {f₂ g₂ : Filter β} :\n    Tendsto m f₁ f₂ → Tendsto m g₁ g₂ → Tendsto m (f₁ * g₁) (f₂ * g₂) := fun hf hg =>\n  (Filter.map_mul m).trans_le <| mul_le_mul' hf hg\n#align tendsto.mul_mul tendsto.mul_mul\n\n",
  "mul_mem_mul":
  "@[to_additive]\ntheorem mul_mem_mul : s ∈ f → t ∈ g → s * t ∈ f * g :=\n  image2_mem_map₂\n#align mul_mem_mul mul_mem_mul\n\n",
  "mul_eq_one_iff":
- "#print mul_eq_one_iff /-\n@[to_additive]\nprotected theorem mul_eq_one_iff : f * g = 1 ↔ ∃ a b, f = pure a ∧ g = pure b ∧ a * b = 1 :=\n  by\n  refine' ⟨fun hfg => _, _⟩\n  · obtain ⟨t₁, t₂, h₁, h₂, h⟩ : (1 : set α) ∈ f * g := hfg.symm.subst one_mem_one\n    have hfg : (f * g).ne_bot := hfg.symm.subst one_ne_bot\n    rw [(hfg.nonempty_of_mem <| mul_mem_mul h₁ h₂).subset_one_iff, Set.mul_eq_one_iff] at h\n    obtain ⟨a, b, rfl, rfl, h⟩ := h\n    refine' ⟨a, b, _, _, h⟩\n    · rwa [← hfg.of_mul_left.le_pure_iff, le_pure_iff]\n    · rwa [← hfg.of_mul_right.le_pure_iff, le_pure_iff]\n  · rintro ⟨a, b, rfl, rfl, h⟩\n    rw [pure_mul_pure, h, pure_one]\n#align mul_eq_one_iff mul_eq_one_iff\n-/\n\n",
+ "#print mul_eq_one_iff /-\n@[to_additive]\nprotected theorem mul_eq_one_iff : f * g = 1 ↔ ∃ a b, f = pure a ∧ g = pure b ∧ a * b = 1 :=\n  by\n  refine' ⟨fun hfg => _, _⟩\n  · obtain ⟨t₁, t₂, h₁, h₂, h⟩ : (1 : Set α) ∈ f * g := hfg.symm.subst one_mem_one\n    have hfg : (f * g).ne_bot := hfg.symm.subst one_ne_bot\n    rw [(hfg.nonempty_of_mem <| mul_mem_mul h₁ h₂).subset_one_iff, Set.mul_eq_one_iff] at h\n    obtain ⟨a, b, rfl, rfl, h⟩ := h\n    refine' ⟨a, b, _, _, h⟩\n    · rwa [← hfg.of_mul_left.le_pure_iff, le_pure_iff]\n    · rwa [← hfg.of_mul_right.le_pure_iff, le_pure_iff]\n  · rintro ⟨a, b, rfl, rfl, h⟩\n    rw [pure_mul_pure, h, pure_one]\n#align mul_eq_one_iff mul_eq_one_iff\n#align add_eq_zero_iff add_eq_zero_iff\n-/\n\n",
  "mul_eq_bot_iff":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n@[simp, to_additive]\ntheorem mul_eq_bot_iff : f * g = «expr⊥» ↔ f = «expr⊥» ∨ g = «expr⊥» :=\n  map₂_eq_bot_iff\n#align mul_eq_bot_iff mul_eq_bot_iff\n\n",
  "mul_bot":
@@ -149,15 +149,15 @@
  "mul_add_subset":
  "theorem mul_add_subset : f * (g + h) ≤ f * g + f * h :=\n  map₂_distrib_le_left mul_add\n#align mul_add_subset mul_add_subset\n\n",
  "mul":
- "@[to_additive]\ntheorem ne_bot.mul : ne_bot f → ne_bot g → ne_bot (f * g) :=\n  ne_bot.map₂\n#align ne_bot.mul ne_bot.mul\n\n",
+ "@[to_additive]\ntheorem ne_bot.mul : NeBot f → NeBot g → NeBot (f * g) :=\n  NeBot.map₂\n#align ne_bot.mul ne_bot.mul\n\n",
  "mem_vsub":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr -ᵥ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr -ᵥ » -/\ntheorem mem_vsub {s : set α} : s ∈ «expr -ᵥ » f g ↔ ∃ t₁ t₂, t₁ ∈ f ∧ t₂ ∈ g ∧ «expr -ᵥ » t₁ t₂ ⊆ s :=\n  iff.rfl\n#align mem_vsub mem_vsub\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr -ᵥ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr -ᵥ » -/\ntheorem mem_vsub {s : Set α} : s ∈ «expr -ᵥ » f g ↔ ∃ t₁ t₂, t₁ ∈ f ∧ t₂ ∈ g ∧ «expr -ᵥ » t₁ t₂ ⊆ s :=\n  iff.rfl\n#align mem_vsub mem_vsub\n\n",
  "mem_smul_filter":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:219:4: warning: unsupported binary notation `«expr • » -/\n@[to_additive]\ntheorem mem_smul_filter : s ∈ «expr • » a f ↔ «expr ⁻¹' » ((«expr • » · ·) a) s ∈ f :=\n  iff.rfl\n#align mem_smul_filter mem_smul_filter\n\n",
  "mem_smul":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n@[to_additive]\ntheorem mem_smul : t ∈ «expr • » f g ↔ ∃ t₁ t₂, t₁ ∈ f ∧ t₂ ∈ g ∧ «expr • » t₁ t₂ ⊆ t :=\n  iff.rfl\n#align mem_smul mem_smul\n\n",
  "mem_one":
- "/-\nCopyright (c) 2019 Zhouhang Zhou. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Zhouhang Zhou, Yaël Dillies\n-/\n@[simp, to_additive]\ntheorem mem_one : s ∈ (1 : filter α) ↔ (1 : α) ∈ s :=\n  mem_pure\n#align mem_one mem_one\n\n",
+ "/-\nCopyright (c) 2019 Zhouhang Zhou. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Zhouhang Zhou, Yaël Dillies\n-/\n@[simp, to_additive]\ntheorem mem_one : s ∈ (1 : Filter α) ↔ (1 : α) ∈ s :=\n  mem_pure\n#align mem_one mem_one\n\n",
  "mem_mul":
  "@[to_additive]\ntheorem mem_mul : s ∈ f * g ↔ ∃ t₁ t₂, t₁ ∈ f ∧ t₂ ∈ g ∧ t₁ * t₂ ⊆ s :=\n  iff.rfl\n#align mem_mul mem_mul\n\n",
  "mem_inv":
@@ -175,17 +175,17 @@
  "map_smul":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n@[simp, to_additive]\ntheorem map_smul : map (fun b => «expr • » a b) f = «expr • » a f :=\n  rfl\n#align map_smul map_smul\n\n",
  "map_one'":
- "@[simp, to_additive]\nprotected theorem map_one' (f : α → β) : (1 : filter α).map f = pure (f 1) :=\n  rfl\n#align map_one' map_one'\n\n",
+ "@[simp, to_additive]\nprotected theorem map_one' (f : α → β) : (1 : Filter α).map f = pure (f 1) :=\n  rfl\n#align map_one' map_one'\n\n",
  "map_one":
- "#print map_one /-\n@[simp, to_additive]\nprotected theorem map_one [OneHomClass F α β] (φ : F) : map φ 1 = 1 := by rw [filter.map_one', map_one, pure_one]\n#align map_one map_one\n-/\n\n",
+ "#print map_one /-\n@[simp, to_additive]\nprotected theorem map_one [OneHomClass F α β] (φ : F) : map φ 1 = 1 := by rw [Filter.map_one', map_one, pure_one]\n#align map_one map_one\n#align map_zero map_zero\n-/\n\n",
  "map_mul":
- "#print map_mul /-\n@[to_additive]\nprotected theorem map_mul [MulHomClass F α β] (m : F) : (f₁ * f₂).map m = f₁.map m * f₂.map m :=\n  map_map₂_distrib <| map_mul m\n#align map_mul map_mul\n-/\n\n",
+ "#print map_mul /-\n@[to_additive]\nprotected theorem map_mul [MulHomClass F α β] (m : F) : (f₁ * f₂).map m = f₁.map m * f₂.map m :=\n  map_map₂_distrib <| map_mul m\n#align map_mul map_mul\n#align map_add map_add\n-/\n\n",
  "map_inv'":
- "@[to_additive]\ntheorem map_inv' : f⁻¹.map m = (f.map m)⁻¹ :=\n  semiconj.filter_map (map_inv m) f\n#align map_inv' map_inv'\n\n",
+ "@[to_additive]\ntheorem map_inv' : f⁻¹.map m = (f.map m)⁻¹ :=\n  Semiconj.filter_map (map_inv m) f\n#align map_inv' map_inv'\n\n",
  "map_inv":
- "#print map_inv /-\n@[simp, to_additive]\nprotected theorem map_inv : f.map has_inv.inv = f⁻¹ :=\n  rfl\n#align map_inv map_inv\n-/\n\n",
+ "#print map_inv /-\n@[simp, to_additive]\nprotected theorem map_inv : f.map has_inv.inv = f⁻¹ :=\n  rfl\n#align map_inv map_inv\n#align map_neg map_neg\n-/\n\n",
  "map_div":
- "#print map_div /-\n@[to_additive]\nprotected theorem map_div : (f / g).map m = f.map m / g.map m :=\n  map_map₂_distrib <| map_div m\n#align map_div map_div\n-/\n\n",
+ "#print map_div /-\n@[to_additive]\nprotected theorem map_div : (f / g).map m = f.map m / g.map m :=\n  map_map₂_distrib <| map_div m\n#align map_div map_div\n#align map_sub map_sub\n-/\n\n",
  "le_vsub_iff":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr -ᵥ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr -ᵥ » -/\n@[simp]\ntheorem le_vsub_iff : h ≤ «expr -ᵥ » f g ↔ ∀ ⦃s⦄, s ∈ f → ∀ ⦃t⦄, t ∈ g → «expr -ᵥ » s t ∈ h :=\n  le_map₂_iff\n#align le_vsub_iff le_vsub_iff\n\n",
  "le_smul_iff":
@@ -197,39 +197,39 @@
  "le_div_iff":
  "#print le_div_iff /-\n@[simp, to_additive]\nprotected theorem le_div_iff : h ≤ f / g ↔ ∀ ⦃s⦄, s ∈ f → ∀ ⦃t⦄, t ∈ g → s / t ∈ h :=\n  le_map₂_iff\n#align le_div_iff le_div_iff\n-/\n\n",
  "is_unit_pure":
- "@[to_additive]\ntheorem is_unit_pure (a : α) : is_unit (pure a : filter α) :=\n  (Group.isUnit a).filter\n#align is_unit_pure is_unit_pure\n\n",
+ "@[to_additive]\ntheorem is_unit_pure (a : α) : IsUnit (pure a : Filter α) :=\n  (Group.isUnit a).filter\n#align is_unit_pure is_unit_pure\n\n",
  "is_unit_iff_singleton":
- "@[simp]\ntheorem is_unit_iff_singleton : is_unit f ↔ ∃ a, f = pure a := by simp only [is_unit_iff, Group.isUnit, and_true_iff]\n#align is_unit_iff_singleton is_unit_iff_singleton\n\n",
+ "@[simp]\ntheorem is_unit_iff_singleton : IsUnit f ↔ ∃ a, f = pure a := by simp only [is_unit_iff, Group.isUnit, and_true_iff]\n#align is_unit_iff_singleton is_unit_iff_singleton\n\n",
  "is_unit_iff":
- "@[to_additive]\ntheorem is_unit_iff : is_unit f ↔ ∃ a, f = pure a ∧ is_unit a :=\n  by\n  constructor\n  · rintro ⟨u, rfl⟩\n    obtain ⟨a, b, ha, hb, h⟩ := filter.mul_eq_one_iff.1 u.mul_inv\n    refine' ⟨a, ha, ⟨a, b, h, pure_injective _⟩, rfl⟩\n    rw [← pure_mul_pure, ← ha, ← hb]\n    exact u.inv_mul\n  · rintro ⟨a, rfl, ha⟩\n    exact ha.filter\n#align is_unit_iff is_unit_iff\n\n",
+ "@[to_additive]\ntheorem is_unit_iff : IsUnit f ↔ ∃ a, f = pure a ∧ IsUnit a :=\n  by\n  constructor\n  · rintro ⟨u, rfl⟩\n    obtain ⟨a, b, ha, hb, h⟩ := Filter.mul_eq_one_iff.1 u.mul_inv\n    refine' ⟨a, ha, ⟨a, b, h, pure_injective _⟩, rfl⟩\n    rw [← pure_mul_pure, ← ha, ← hb]\n    exact u.inv_mul\n  · rintro ⟨a, rfl, ha⟩\n    exact ha.filter\n#align is_unit_iff is_unit_iff\n\n",
  "inv_pure":
- "@[simp, to_additive]\ntheorem inv_pure : (pure a : filter α)⁻¹ = pure a⁻¹ :=\n  rfl\n#align inv_pure inv_pure\n\n",
+ "@[simp, to_additive]\ntheorem inv_pure : (pure a : Filter α)⁻¹ = pure a⁻¹ :=\n  rfl\n#align inv_pure inv_pure\n\n",
  "inv_mem_inv":
  "@[to_additive]\ntheorem inv_mem_inv (hs : s ∈ f) : s⁻¹ ∈ f⁻¹ := by rwa [mem_inv, inv_preimage, inv_inv]\n#align inv_mem_inv inv_mem_inv\n\n",
  "inv_le_self":
- "@[simp, to_additive]\ntheorem inv_le_self : f⁻¹ ≤ f ↔ f⁻¹ = f :=\n  ⟨fun h => h.antisymm <| inv_le_iff_le_inv.1 h, eq.le⟩\n#align inv_le_self inv_le_self\n\n",
+ "@[simp, to_additive]\ntheorem inv_le_self : f⁻¹ ≤ f ↔ f⁻¹ = f :=\n  ⟨fun h => h.antisymm <| inv_le_iff_le_inv.1 h, Eq.le⟩\n#align inv_le_self inv_le_self\n\n",
  "inv_le_inv_iff":
- "#print inv_le_inv_iff /-\n@[simp, to_additive]\nprotected theorem inv_le_inv_iff : f⁻¹ ≤ g⁻¹ ↔ f ≤ g :=\n  ⟨fun h => inv_inv f ▸ inv_inv g ▸ filter.inv_le_inv h, filter.inv_le_inv⟩\n#align inv_le_inv_iff inv_le_inv_iff\n-/\n\n",
+ "#print inv_le_inv_iff /-\n@[simp, to_additive]\nprotected theorem inv_le_inv_iff : f⁻¹ ≤ g⁻¹ ↔ f ≤ g :=\n  ⟨fun h => inv_inv f ▸ inv_inv g ▸ Filter.inv_le_inv h, Filter.inv_le_inv⟩\n#align inv_le_inv_iff inv_le_inv_iff\n#align neg_le_neg_iff neg_le_neg_iff\n-/\n\n",
  "inv_le_inv":
  "#print inv_le_inv /-\n@[to_additive]\nprotected theorem inv_le_inv (hf : f ≤ g) : f⁻¹ ≤ g⁻¹ :=\n  map_mono hf\n#align inv_le_inv inv_le_inv\n-/\n\n",
  "inv_le_iff_le_inv":
- "@[to_additive]\ntheorem inv_le_iff_le_inv : f⁻¹ ≤ g ↔ f ≤ g⁻¹ := by rw [← filter.inv_le_inv_iff, inv_inv]\n#align inv_le_iff_le_inv inv_le_iff_le_inv\n\n",
+ "@[to_additive]\ntheorem inv_le_iff_le_inv : f⁻¹ ≤ g ↔ f ≤ g⁻¹ := by rw [← Filter.inv_le_inv_iff, inv_inv]\n#align inv_le_iff_le_inv inv_le_iff_le_inv\n\n",
  "inv_inv":
- "@[to_additive]\ntheorem tendsto.inv_inv : tendsto m f₁ f₂ → tendsto m f₁⁻¹ f₂⁻¹ := fun hf =>\n  (filter.map_inv' m).trans_le <| filter.inv_le_inv hf\n#align tendsto.inv_inv tendsto.inv_inv\n\n",
+ "@[to_additive]\ntheorem tendsto.inv_inv : Tendsto m f₁ f₂ → Tendsto m f₁⁻¹ f₂⁻¹ := fun hf =>\n  (Filter.map_inv' m).trans_le <| Filter.inv_le_inv hf\n#align tendsto.inv_inv tendsto.inv_inv\n\n",
  "inv_eq_bot_iff":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n@[simp, to_additive]\ntheorem inv_eq_bot_iff : f⁻¹ = «expr⊥» ↔ f = «expr⊥» :=\n  map_eq_bot_iff\n#align inv_eq_bot_iff inv_eq_bot_iff\n\n",
  "inv":
  "@[to_additive]\ntheorem ne_bot.inv : f.ne_bot → f⁻¹.ne_bot := fun h => h.map _\n#align ne_bot.inv ne_bot.inv\n\n",
  "filter":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →* » -/\n@[to_additive]\nprotected theorem _root_.is_unit.filter : is_unit a → is_unit (pure a : filter α) :=\n  IsUnit.map (pure_monoid_hom : «expr →* » α (filter α))\n#align is_unit.filter is_unit.filter\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →* » -/\n#print IsUnit.filter /-\n@[to_additive]\nprotected theorem IsUnit.filter : IsUnit a → IsUnit (pure a : Filter α) :=\n  IsUnit.map (pureMonoidHom : «expr →* » α (Filter α))\n#align is_unit.filter IsUnit.filter\n#align is_add_unit.filter IsAddUnit.filter\n-/\n\n",
  "eventually_one":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr∀ᶠ in , » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr∀ᶠ in , » -/\n@[simp, to_additive]\ntheorem eventually_one {p : α → Prop} :\n    «expr∀ᶠ in , » \"./././Mathport/Syntax/Translate/Expr.lean:210:13: unsupported notation `«expr∀ᶠ in , »\" 1 (p x) ↔\n      p 1 :=\n  eventually_pure\n#align eventually_one eventually_one\n\n",
  "div_zero_nonneg":
- "theorem ne_bot.div_zero_nonneg (hf : f.ne_bot) : 0 ≤ f / 0 :=\n  filter.le_div_iff.2 fun t₁ h₁ t₂ h₂ =>\n    let ⟨a, ha⟩ := hf.nonempty_of_mem h₁\n    ⟨_, _, ha, h₂, div_zero _⟩\n#align ne_bot.div_zero_nonneg ne_bot.div_zero_nonneg\n\n",
+ "theorem ne_bot.div_zero_nonneg (hf : f.ne_bot) : 0 ≤ f / 0 :=\n  Filter.le_div_iff.2 fun t₁ h₁ t₂ h₂ =>\n    let ⟨a, ha⟩ := hf.nonempty_of_mem h₁\n    ⟨_, _, ha, h₂, div_zero _⟩\n#align ne_bot.div_zero_nonneg ne_bot.div_zero_nonneg\n\n",
  "div_pure":
  "@[simp, to_additive]\ntheorem div_pure : f / pure b = f.map (· / b) :=\n  map₂_pure_right\n#align div_pure div_pure\n\n",
  "div_ne_bot_iff":
- "@[simp, to_additive]\ntheorem div_ne_bot_iff : (f / g).ne_bot ↔ f.ne_bot ∧ g.ne_bot :=\n  map₂_ne_bot_iff\n#align div_ne_bot_iff div_ne_bot_iff\n\n",
+ "@[simp, to_additive]\ntheorem div_ne_bot_iff : (f / g).ne_bot ↔ f.ne_bot ∧ g.ne_bot :=\n  map₂_neBot_iff\n#align div_ne_bot_iff div_ne_bot_iff\n\n",
  "div_mem_div":
  "@[to_additive]\ntheorem div_mem_div : s ∈ f → t ∈ g → s / t ∈ f / g :=\n  image2_mem_map₂\n#align div_mem_div div_mem_div\n\n",
  "div_le_div_right":
@@ -241,25 +241,25 @@
  "div_eq_bot_iff":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n@[simp, to_additive]\ntheorem div_eq_bot_iff : f / g = «expr⊥» ↔ f = «expr⊥» ∨ g = «expr⊥» :=\n  map₂_eq_bot_iff\n#align div_eq_bot_iff div_eq_bot_iff\n\n",
  "div_div":
- "@[to_additive]\ntheorem tendsto.div_div : tendsto m f₁ f₂ → tendsto m g₁ g₂ → tendsto m (f₁ / g₁) (f₂ / g₂) := fun hf hg =>\n  (filter.map_div m).trans_le <| filter.div_le_div hf hg\n#align tendsto.div_div tendsto.div_div\n\n",
+ "@[to_additive]\ntheorem tendsto.div_div : Tendsto m f₁ f₂ → Tendsto m g₁ g₂ → Tendsto m (f₁ / g₁) (f₂ / g₂) := fun hf hg =>\n  (Filter.map_div m).trans_le <| Filter.div_le_div hf hg\n#align tendsto.div_div tendsto.div_div\n\n",
  "div_bot":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n@[simp, to_additive]\ntheorem div_bot : f / «expr⊥» = «expr⊥» :=\n  map₂_bot_right\n#align div_bot div_bot\n\n",
  "div":
- "@[to_additive]\ntheorem ne_bot.div : ne_bot f → ne_bot g → ne_bot (f / g) :=\n  ne_bot.map₂\n#align ne_bot.div ne_bot.div\n\n",
+ "@[to_additive]\ntheorem ne_bot.div : NeBot f → NeBot g → NeBot (f / g) :=\n  NeBot.map₂\n#align ne_bot.div ne_bot.div\n\n",
  "comap_mul_comap_le":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\n-- The other direction does not hold in general\n@[to_additive]\ntheorem comap_mul_comap_le [MulHomClass F α β] (m : F) {f g : filter β} : f.comap m * g.comap m ≤ (f * g).comap m :=\n  fun s ⟨t, ⟨t₁, t₂, ht₁, ht₂, t₁t₂⟩, mt⟩ =>\n  ⟨«expr ⁻¹' » m t₁, «expr ⁻¹' » m t₂, ⟨t₁, ht₁, Subset.rfl⟩, ⟨t₂, ht₂, Subset.rfl⟩,\n    (preimage_mul_preimage_subset _).trans <| (preimage_mono t₁t₂).trans mt⟩\n#align comap_mul_comap_le comap_mul_comap_le\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\n-- The other direction does not hold in general\n@[to_additive]\ntheorem comap_mul_comap_le [MulHomClass F α β] (m : F) {f g : Filter β} : f.comap m * g.comap m ≤ (f * g).comap m :=\n  fun s ⟨t, ⟨t₁, t₂, ht₁, ht₂, t₁t₂⟩, mt⟩ =>\n  ⟨«expr ⁻¹' » m t₁, «expr ⁻¹' » m t₂, ⟨t₁, ht₁, Subset.rfl⟩, ⟨t₂, ht₂, Subset.rfl⟩,\n    (preimage_mul_preimage_subset _).trans <| (preimage_mono t₁t₂).trans mt⟩\n#align comap_mul_comap_le comap_mul_comap_le\n\n",
  "coe_pure_one_hom":
- "@[simp, to_additive]\ntheorem coe_pure_one_hom : (pure_one_hom : α → filter α) = pure :=\n  rfl\n#align coe_pure_one_hom coe_pure_one_hom\n\n",
+ "@[simp, to_additive]\ntheorem coe_pure_one_hom : (pureOneHom : α → Filter α) = pure :=\n  rfl\n#align coe_pure_one_hom coe_pure_one_hom\n\n",
  "coe_pure_mul_hom":
- "@[simp, to_additive]\ntheorem coe_pure_mul_hom : (pure_mul_hom : α → filter α) = pure :=\n  rfl\n#align coe_pure_mul_hom coe_pure_mul_hom\n\n",
+ "@[simp, to_additive]\ntheorem coe_pure_mul_hom : (pureMulHom : α → Filter α) = pure :=\n  rfl\n#align coe_pure_mul_hom coe_pure_mul_hom\n\n",
  "coe_pure_monoid_hom":
- "@[simp, to_additive]\ntheorem coe_pure_monoid_hom : (pure_monoid_hom : α → filter α) = pure :=\n  rfl\n#align coe_pure_monoid_hom coe_pure_monoid_hom\n\n",
+ "@[simp, to_additive]\ntheorem coe_pure_monoid_hom : (pureMonoidHom : α → Filter α) = pure :=\n  rfl\n#align coe_pure_monoid_hom coe_pure_monoid_hom\n\n",
  "bot_vsub":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr -ᵥ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n@[simp]\ntheorem bot_vsub : «expr -ᵥ » («expr⊥» : filter β) g = «expr⊥» :=\n  map₂_bot_left\n#align bot_vsub bot_vsub\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr -ᵥ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n@[simp]\ntheorem bot_vsub : «expr -ᵥ » («expr⊥» : Filter β) g = «expr⊥» :=\n  map₂_bot_left\n#align bot_vsub bot_vsub\n\n",
  "bot_smul":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n@[simp, to_additive]\ntheorem bot_smul : «expr • » («expr⊥» : filter α) g = «expr⊥» :=\n  map₂_bot_left\n#align bot_smul bot_smul\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n@[simp, to_additive]\ntheorem bot_smul : «expr • » («expr⊥» : Filter α) g = «expr⊥» :=\n  map₂_bot_left\n#align bot_smul bot_smul\n\n",
  "bot_pow":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n@[simp, to_additive nsmul_bot]\ntheorem bot_pow {n : ℕ} (hn : n ≠ 0) : («expr⊥» : filter α) ^ n = «expr⊥» := by\n  rw [← tsub_add_cancel_of_le (nat.succ_le_of_lt <| nat.pos_of_ne_zero hn), pow_succ, bot_mul]\n#align bot_pow bot_pow\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n@[simp, to_additive nsmul_bot]\ntheorem bot_pow {n : ℕ} (hn : n ≠ 0) : («expr⊥» : Filter α) ^ n = «expr⊥» := by\n  rw [← tsub_add_cancel_of_le (nat.succ_le_of_lt <| nat.pos_of_ne_zero hn), pow_succ, bot_mul]\n#align bot_pow bot_pow\n\n",
  "bot_mul":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⊥» -/\n@[simp, to_additive]\ntheorem bot_mul : «expr⊥» * g = «expr⊥» :=\n  map₂_bot_left\n#align bot_mul bot_mul\n\n",
  "bot_div":

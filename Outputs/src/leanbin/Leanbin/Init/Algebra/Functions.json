@@ -9,11 +9,11 @@
  "min_eq_right_of_lt":
  "#print min_eq_right_of_lt /-\ntheorem min_eq_right_of_lt {a b : α} (h : b < a) : min a b = b :=\n  min_eq_right (le_of_lt h)\n#align min_eq_right_of_lt min_eq_right_of_lt\n-/\n\n",
  "min_eq_right":
- "#print min_eq_right /-\n@[ematch]\ntheorem min_eq_right {a b : α} (h : b ≤ a) : min a b = b :=\n  eq.subst (min_comm b a) (min_eq_left h)\n#align min_eq_right min_eq_right\n-/\n\n",
+ "#print min_eq_right /-\n@[ematch]\ntheorem min_eq_right {a b : α} (h : b ≤ a) : min a b = b :=\n  Eq.subst (min_comm b a) (min_eq_left h)\n#align min_eq_right min_eq_right\n-/\n\n",
  "min_eq_left_of_lt":
  "#print min_eq_left_of_lt /-\n-- these rely on lt_of_lt\ntheorem min_eq_left_of_lt {a b : α} (h : a < b) : min a b = a :=\n  min_eq_left (le_of_lt h)\n#align min_eq_left_of_lt min_eq_left_of_lt\n-/\n\n",
  "min_eq_left":
- "#print min_eq_left /-\n@[ematch]\ntheorem min_eq_left {a b : α} (h : a ≤ b) : min a b = a := by apply eq.symm; apply eq_min (le_refl _) h; intros ;\n  assumption\n#align min_eq_left min_eq_left\n-/\n\n",
+ "#print min_eq_left /-\n@[ematch]\ntheorem min_eq_left {a b : α} (h : a ≤ b) : min a b = a := by apply Eq.symm; apply eq_min (le_refl _) h; intros ;\n  assumption\n#align min_eq_left min_eq_left\n-/\n\n",
  "min_def":
  "#print min_def /-\n/-\nCopyright (c) 2016 Microsoft Corporation. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Jeremy Avigad, Leonardo de Moura\n-/\ntheorem min_def (a b : α) : min a b = if a ≤ b then a else b := by rw [congr_fun linear_order.min_def a, min_default]\n#align min_def min_def\n-/\n\n",
  "min_comm":
@@ -31,11 +31,11 @@
  "max_eq_right_of_lt":
  "#print max_eq_right_of_lt /-\ntheorem max_eq_right_of_lt {a b : α} (h : a < b) : max a b = b :=\n  max_eq_right (le_of_lt h)\n#align max_eq_right_of_lt max_eq_right_of_lt\n-/\n\n",
  "max_eq_right":
- "#print max_eq_right /-\ntheorem max_eq_right {a b : α} (h : a ≤ b) : max a b = b :=\n  eq.subst (max_comm b a) (max_eq_left h)\n#align max_eq_right max_eq_right\n-/\n\n",
+ "#print max_eq_right /-\ntheorem max_eq_right {a b : α} (h : a ≤ b) : max a b = b :=\n  Eq.subst (max_comm b a) (max_eq_left h)\n#align max_eq_right max_eq_right\n-/\n\n",
  "max_eq_left_of_lt":
  "#print max_eq_left_of_lt /-\ntheorem max_eq_left_of_lt {a b : α} (h : b < a) : max a b = a :=\n  max_eq_left (le_of_lt h)\n#align max_eq_left_of_lt max_eq_left_of_lt\n-/\n\n",
  "max_eq_left":
- "#print max_eq_left /-\ntheorem max_eq_left {a b : α} (h : b ≤ a) : max a b = a := by apply eq.symm; apply eq_max (le_refl _) h; intros ;\n  assumption\n#align max_eq_left max_eq_left\n-/\n\n",
+ "#print max_eq_left /-\ntheorem max_eq_left {a b : α} (h : b ≤ a) : max a b = a := by apply Eq.symm; apply eq_max (le_refl _) h; intros ;\n  assumption\n#align max_eq_left max_eq_left\n-/\n\n",
  "max_def":
  "#print max_def /-\ntheorem max_def (a b : α) : max a b = if a ≤ b then b else a := by rw [congr_fun linear_order.max_def a, max_default]\n#align max_def max_def\n-/\n\n",
  "max_comm":

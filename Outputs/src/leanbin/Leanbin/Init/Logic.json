@@ -1,25 +1,25 @@
 {"up_down":
  "/-- Bijection between α and plift α -/\ntheorem up_down {α : Sort u} : ∀ b : PLift α, up (down b) = b\n  | up a => rfl\n#align up_down up_down\n\n",
  "unique":
- "#print ExistsUnique.unique /-\ntheorem ExistsUnique.unique {α : Sort u} {p : α → Prop} (h : ∃! x, p x) {y₁ y₂ : α} (py₁ : p y₁) (py₂ : p y₂) :\n    y₁ = y₂ :=\n  exists_unique.elim h fun x => fun this : p x => fun unique : ∀ y, p y → y = x =>\n    show y₁ = y₂ from eq.trans (unique _ py₁) (eq.symm (unique _ py₂))\n#align unique_of_exists_unique ExistsUnique.unique\n-/\n\n",
+ "#print ExistsUnique.unique /-\ntheorem ExistsUnique.unique {α : Sort u} {p : α → Prop} (h : ∃! x, p x) {y₁ y₂ : α} (py₁ : p y₁) (py₂ : p y₂) :\n    y₁ = y₂ :=\n  exists_unique.elim h fun x => fun this : p x => fun unique : ∀ y, p y → y = x =>\n    show y₁ = y₂ from Eq.trans (Unique _ py₁) (Eq.symm (Unique _ py₂))\n#align unique_of_exists_unique ExistsUnique.unique\n-/\n\n",
  "type_eq_of_heq":
- "#print type_eq_of_heq /-\ntheorem type_eq_of_heq (h : HEq a b) : α = β :=\n  heq.rec_on h (eq.refl α)\n#align type_eq_of_heq type_eq_of_heq\n-/\n\n",
+ "#print type_eq_of_heq /-\ntheorem type_eq_of_heq (h : HEq a b) : α = β :=\n  heq.rec_on h (Eq.refl α)\n#align type_eq_of_heq type_eq_of_heq\n-/\n\n",
  "true_or_iff":
- "#print true_or_iff /-\n@[simp]\ntheorem true_or_iff (a : Prop) : true ∨ a ↔ true :=\n  iff_true_intro (or.inl trivial)\n#align true_or true_or_iff\n-/\n\n",
+ "#print true_or_iff /-\n@[simp]\ntheorem true_or_iff (a : Prop) : True ∨ a ↔ True :=\n  iff_true_intro (or.inl trivial)\n#align true_or true_or_iff\n-/\n\n",
  "true_ne_false":
- "#print true_ne_false /-\ntheorem true_ne_false : ¬true = false :=\n  ne_false_of_self trivial\n#align true_ne_false true_ne_false\n-/\n\n",
+ "#print true_ne_false /-\ntheorem true_ne_false : ¬True = False :=\n  ne_false_of_self trivial\n#align true_ne_false true_ne_false\n-/\n\n",
  "true_imp_iff":
- "#print true_imp_iff /-\ntheorem true_imp_iff (α : Prop) : true → α ↔ α :=\n  iff.intro (fun h => h trivial) fun h h' => h\n#align true_implies_iff true_imp_iff\n-/\n\n",
+ "#print true_imp_iff /-\ntheorem true_imp_iff (α : Prop) : True → α ↔ α :=\n  iff.intro (fun h => h trivial) fun h h' => h\n#align true_implies_iff true_imp_iff\n-/\n\n",
  "true_iff_iff":
- "#print true_iff_iff /-\n@[simp]\ntheorem true_iff_iff (a : Prop) : (true ↔ a) ↔ a :=\n  iff.trans iff.comm (iff_true_iff a)\n#align true_iff true_iff_iff\n-/\n\n",
+ "#print true_iff_iff /-\n@[simp]\ntheorem true_iff_iff (a : Prop) : (True ↔ a) ↔ a :=\n  iff.trans iff.comm (iff_true_iff a)\n#align true_iff true_iff_iff\n-/\n\n",
  "true_iff_false":
- "#print true_iff_false /-\ntheorem true_iff_false : (true ↔ false) ↔ false :=\n  iff_false_intro fun h => Iff.mp h trivial\n#align true_iff_false true_iff_false\n-/\n\n",
+ "#print true_iff_false /-\ntheorem true_iff_false : (True ↔ False) ↔ False :=\n  iff_false_intro fun h => Iff.mp h trivial\n#align true_iff_false true_iff_false\n-/\n\n",
  "true_eq_false_of_false":
- "#print true_eq_false_of_false /-\ntheorem true_eq_false_of_false : false → true = false :=\n  false.elim\n#align true_eq_false_of_false true_eq_false_of_false\n-/\n\n",
+ "#print true_eq_false_of_false /-\ntheorem true_eq_false_of_false : False → True = False :=\n  false.elim\n#align true_eq_false_of_false true_eq_false_of_false\n-/\n\n",
  "true_and_iff":
- "#print true_and_iff /-\n@[simp]\ntheorem true_and_iff (a : Prop) : true ∧ a ↔ a :=\n  and_iff_right trivial\n#align true_and true_and_iff\n-/\n\n",
+ "#print true_and_iff /-\n@[simp]\ntheorem true_and_iff (a : Prop) : True ∧ a ↔ a :=\n  and_iff_right trivial\n#align true_and true_and_iff\n-/\n\n",
  "trivial":
- "#print trivial /-\ntheorem trivial : true :=\n  ⟨⟩\n#align trivial trivial\n-/\n\n",
+ "#print trivial /-\ntheorem trivial : True :=\n  ⟨⟩\n#align trivial trivial\n-/\n\n",
  "trans_rel_right":
  "#print trans_rel_right /-\ntheorem trans_rel_right {α : Sort u} {a b c : α} (r : α → α → Prop) (h₁ : a = b) (h₂ : r b c) : r a c :=\n  h₁.symm ▸ h₂\n#align trans_rel_right trans_rel_right\n-/\n\n",
  "trans_rel_left":
@@ -31,11 +31,11 @@
  "symm":
  "@[symm]\ntheorem iff.symm (h : a ↔ b) : b ↔ a :=\n  iff.intro (Iff.mpr h) (Iff.mp h)\n#align iff.symm iff.symm\n\n",
  "substr":
- "@[elab_as_elim]\ntheorem eq.substr {α : Sort u} {p : α → Prop} {a b : α} (h₁ : b = a) : p a → p b :=\n  eq.subst (eq.symm h₁)\n#align eq.substr eq.substr\n\n",
+ "@[elab_as_elim]\ntheorem eq.substr {α : Sort u} {p : α → Prop} {a b : α} (h₁ : b = a) : p a → p b :=\n  Eq.subst (Eq.symm h₁)\n#align eq.substr eq.substr\n\n",
  "subst":
  "theorem heq.subst {p : ∀ T : Sort u, T → Prop} : HEq a b → p α a → p β b :=\n  heq.rec_on\n#align heq.subst heq.subst\n\n",
  "right_comm":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `f -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `f -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `f -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `f -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `f -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `f -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `f -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `f -/\n#print right_comm /-\ntheorem right_comm : commutative f → associative f → right_commutative f := fun hcomm hassoc => fun a b c =>\n  calc\n    f (f a b) c = f a (f b c) := hassoc a b c\n    _ = f a (f c b) := hcomm b c ▸ rfl\n    _ = f (f a c) b := eq.symm (hassoc a c b)\n    \n#align right_comm right_comm\n-/\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `f -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `f -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `f -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `f -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `f -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `f -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `f -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `f -/\n#print right_comm /-\ntheorem right_comm : commutative f → associative f → right_commutative f := fun hcomm hassoc => fun a b c =>\n  calc\n    f (f a b) c = f a (f b c) := hassoc a b c\n    _ = f a (f c b) := (hcomm b c ▸ rfl)\n    _ = f (f a c) b := Eq.symm (hassoc a c b)\n    \n#align right_comm right_comm\n-/\n\n",
  "rfl":
  "theorem iff.rfl {a : Prop} : a ↔ a :=\n  iff.refl a\n#align iff.rfl iff.rfl\n\n",
  "resolve_right":
@@ -45,11 +45,11 @@
  "refl":
  "@[refl]\ntheorem iff.refl (a : Prop) : a ↔ a :=\n  iff.intro (fun h => h) fun h => h\n#align iff.refl iff.refl\n\n",
  "rec_subsingleton":
- "#print rec_subsingleton /-\nprotected theorem rec_subsingleton {p : Prop} [h : decidable p] {h₁ : p → Sort u} {h₂ : ¬p → Sort u}\n    [h₃ : ∀ h : p, subsingleton (h₁ h)] [h₄ : ∀ h : ¬p, subsingleton (h₂ h)] :\n    subsingleton (decidable.rec_on h h₂ h₁) :=\n  match h with\n  | is_true h => h₃ h\n  | is_false h => h₄ h\n#align rec_subsingleton rec_subsingleton\n-/\n\n",
+ "#print rec_subsingleton /-\nprotected theorem rec_subsingleton {p : Prop} [h : Decidable p] {h₁ : p → Sort u} {h₂ : ¬p → Sort u}\n    [h₃ : ∀ h : p, subsingleton (h₁ h)] [h₄ : ∀ h : ¬p, subsingleton (h₂ h)] :\n    subsingleton (decidable.rec_on h h₂ h₁) :=\n  match h with\n  | is_true h => h₃ h\n  | is_false h => h₄ h\n#align rec_subsingleton rec_subsingleton\n-/\n\n",
  "proof_irrel":
  "#print proof_irrel /-\n-- proof irrelevance is built in\ntheorem proof_irrel {a : Prop} (h₁ h₂ : a) : h₁ = h₂ :=\n  rfl\n#align proof_irrel proof_irrel\n-/\n\n",
  "or_true_iff":
- "#print or_true_iff /-\n@[simp]\ntheorem or_true_iff (a : Prop) : a ∨ true ↔ true :=\n  iff_true_intro (or.inr trivial)\n#align or_true or_true_iff\n-/\n\n",
+ "#print or_true_iff /-\n@[simp]\ntheorem or_true_iff (a : Prop) : a ∨ True ↔ True :=\n  iff_true_intro (or.inr trivial)\n#align or_true or_true_iff\n-/\n\n",
  "or_self_iff":
  "#print or_self_iff /-\n@[simp]\ntheorem or_self_iff (a : Prop) : a ∨ a ↔ a :=\n  iff.intro (or.rec id id) or.inl\n#align or_self or_self_iff\n-/\n\n",
  "or_left_comm":
@@ -59,7 +59,7 @@
  "or_iff_left_of_imp":
  "theorem or_iff_left_of_imp (hb : b → a) : a ∨ b ↔ a :=\n  iff.intro (or.rec id hb) or.inl\n#align or_iff_left_of_imp or_iff_left_of_impₓ\n\n",
  "or_false_iff":
- "#print or_false_iff /-\n@[simp]\ntheorem or_false_iff (a : Prop) : a ∨ false ↔ a :=\n  iff.intro (or.rec id false.elim) or.inl\n#align or_false or_false_iff\n-/\n\n",
+ "#print or_false_iff /-\n@[simp]\ntheorem or_false_iff (a : Prop) : a ∨ False ↔ a :=\n  iff.intro (or.rec id false.elim) or.inl\n#align or_false or_false_iff\n-/\n\n",
  "or_congr":
  "#print or_congr /-\n@[congr]\ntheorem or_congr (h₁ : a ↔ c) (h₂ : b ↔ d) : a ∨ b ↔ c ∨ d :=\n  iff.intro (Or.imp (Iff.mp h₁) (Iff.mp h₂)) (Or.imp (Iff.mpr h₁) (Iff.mpr h₂))\n#align or_congr or_congr\n-/\n\n",
  "or_comm'":
@@ -73,59 +73,59 @@
  "optParam_eq":
  "#print optParam_eq /-\n/-\nCopyright (c) 2014 Microsoft Corporation. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Leonardo de Moura, Jeremy Avigad, Floris van Doorn\n-/\n@[simp]\ntheorem optParam_eq (α : Sort u) (default : α) : optParam α default = α :=\n  rfl\n#align opt_param_eq optParam_eq\n-/\n\n",
  "of_not_not":
- "#print of_not_not /-\ntheorem of_not_not [decidable p] : ¬¬p → p := fun hnn => by_contradiction fun hn => absurd hn hnn\n#align of_not_not of_not_not\n-/\n\n",
+ "#print of_not_not /-\ntheorem of_not_not [Decidable p] : ¬¬p → p := fun hnn => by_contradiction fun hn => absurd hn hnn\n#align of_not_not of_not_not\n-/\n\n",
  "of_iff_true":
- "#print of_iff_true /-\ntheorem of_iff_true (h : a ↔ true) : a :=\n  Iff.mp (iff.symm h) trivial\n#align of_iff_true of_iff_true\n-/\n\n",
+ "#print of_iff_true /-\ntheorem of_iff_true (h : a ↔ True) : a :=\n  Iff.mp (iff.symm h) trivial\n#align of_iff_true of_iff_true\n-/\n\n",
  "of_heq_true":
- "#print of_heq_true /-\ntheorem of_heq_true {a : Prop} (h : HEq a true) : a :=\n  of_eq_true (eq_of_heq h)\n#align of_heq_true of_heq_true\n-/\n\n",
+ "#print of_heq_true /-\ntheorem of_heq_true {a : Prop} (h : HEq a True) : a :=\n  of_eq_true (eq_of_heq h)\n#align of_heq_true of_heq_true\n-/\n\n",
  "of_eq_true":
- "#print of_eq_true /-\ntheorem of_eq_true {p : Prop} (h : p = true) : p :=\n  h.symm ▸ trivial\n#align of_eq_true of_eq_true\n-/\n\n",
+ "#print of_eq_true /-\ntheorem of_eq_true {p : Prop} (h : p = True) : p :=\n  h.symm ▸ trivial\n#align of_eq_true of_eq_true\n-/\n\n",
  "not_true":
- "#print not_true /-\n@[simp]\ntheorem not_true : ¬true ↔ false :=\n  iff_false_intro (not_not_intro trivial)\n#align not_true not_true\n-/\n\n",
+ "#print not_true /-\n@[simp]\ntheorem not_true : ¬True ↔ False :=\n  iff_false_intro (not_not_intro trivial)\n#align not_true not_true\n-/\n\n",
  "not_or_of_not":
  "#print not_or_of_not /-\ntheorem not_or_of_not {a b : Prop} : ¬a → ¬b → ¬(a ∨ b)\n  | hna, hnb, or.inl ha => absurd ha hna\n  | hna, hnb, or.inr hb => absurd hb hnb\n#align not_or not_or_of_not\n-/\n\n",
  "not_or_iff_and_not":
- "theorem not_or_iff_and_not (p q) [d₁ : decidable p] [d₂ : decidable q] : ¬(p ∨ q) ↔ ¬p ∧ ¬q :=\n  iff.intro\n    (fun h =>\n      match d₁ with\n      | is_true h₁ => false.elim <| h (or.inl h₁)\n      | is_false h₁ =>\n        match d₂ with\n        | is_true h₂ => false.elim <| h (or.inr h₂)\n        | is_false h₂ => ⟨h₁, h₂⟩)\n    fun ⟨np, nq⟩ h => or.elim h np nq\n#align not_or_iff_and_not not_or_iff_and_not\n\n",
+ "theorem not_or_iff_and_not (p q) [d₁ : Decidable p] [d₂ : Decidable q] : ¬(p ∨ q) ↔ ¬p ∧ ¬q :=\n  iff.intro\n    (fun h =>\n      match d₁ with\n      | is_true h₁ => false.elim <| h (or.inl h₁)\n      | is_false h₁ =>\n        match d₂ with\n        | is_true h₂ => false.elim <| h (or.inr h₂)\n        | is_false h₂ => ⟨h₁, h₂⟩)\n    fun ⟨np, nq⟩ h => or.elim h np nq\n#align not_or_iff_and_not not_or_iff_and_not\n\n",
  "not_of_not_not_not":
  "#print not_of_not_not_not /-\ntheorem not_of_not_not_not (h : ¬¬¬a) : ¬a := fun ha => absurd (not_not_intro ha) h\n#align not_of_not_not_not not_of_not_not_not\n-/\n\n",
  "not_of_iff_false":
- "#print not_of_iff_false /-\ntheorem not_of_iff_false : (a ↔ false) → ¬a :=\n  Iff.mp\n#align not_of_iff_false not_of_iff_false\n-/\n\n",
+ "#print not_of_iff_false /-\ntheorem not_of_iff_false : (a ↔ False) → ¬a :=\n  Iff.mp\n#align not_of_iff_false not_of_iff_false\n-/\n\n",
  "not_of_eq_false":
- "#print not_of_eq_false /-\ntheorem not_of_eq_false {p : Prop} (h : p = false) : ¬p := fun hp => h ▸ hp\n#align not_of_eq_false not_of_eq_false\n-/\n\n",
+ "#print not_of_eq_false /-\ntheorem not_of_eq_false {p : Prop} (h : p = False) : ¬p := fun hp => h ▸ hp\n#align not_of_eq_false not_of_eq_false\n-/\n\n",
  "not_not_not":
  "#print not_not_not /-\ntheorem not_not_not (a : Prop) : ¬¬¬a ↔ ¬a :=\n  iff.intro (fun (hl : ¬¬¬a) (ha : a) => hl (not_not_intro ha)) absurd\n#align not_non_contradictory_iff_absurd not_not_not\n-/\n\n",
  "not_not_intro":
  "/- warning: not_not_intro clashes with non_contradictory_intro -> not_not_intro\nCase conversion may be inaccurate. Consider using '#align not_not_intro not_not_introₓ'. -/\n#print not_not_intro /-\ntheorem not_not_intro (ha : a) : ¬¬a := fun hna : ¬a => hna ha\n#align not_not_intro not_not_intro\n-/\n\n",
  "not_not_iff":
- "theorem not_not_iff (p) [decidable p] : ¬¬p ↔ p :=\n  iff.intro of_not_not not_not_intro\n#align not_not_iff not_not_iff\n\n",
+ "theorem not_not_iff (p) [Decidable p] : ¬¬p ↔ p :=\n  iff.intro of_not_not not_not_intro\n#align not_not_iff not_not_iff\n\n",
  "not_not_em":
  "#print not_not_em /-\ntheorem not_not_em (a : Prop) : ¬¬(a ∨ ¬a) := fun not_em : ¬(a ∨ ¬a) =>\n  have neg_a : ¬a := fun pos_a : a => absurd (or.inl pos_a) not_em\n  absurd (or.inr neg_a) not_em\n#align non_contradictory_em not_not_em\n-/\n\n",
  "not_iff_self":
- "#print not_iff_self /-\n@[simp]\ntheorem not_iff_self (a : Prop) : (¬a ↔ a) ↔ false :=\n  iff_false_intro fun h =>\n    have h' : ¬a := fun ha => (Iff.mpr h ha) ha\n    h' (Iff.mp h h')\n#align not_iff_self not_iff_self\n-/\n\n",
+ "#print not_iff_self /-\n@[simp]\ntheorem not_iff_self (a : Prop) : (¬a ↔ a) ↔ False :=\n  iff_false_intro fun h =>\n    have h' : ¬a := fun ha => (Iff.mpr h ha) ha\n    h' (Iff.mp h h')\n#align not_iff_self not_iff_self\n-/\n\n",
  "not_false_iff":
- "#print not_false_iff /-\n@[simp]\ntheorem not_false_iff : ¬false ↔ true :=\n  iff_true_intro not_false\n#align not_false_iff not_false_iff\n-/\n\n",
+ "#print not_false_iff /-\n@[simp]\ntheorem not_false_iff : ¬False ↔ True :=\n  iff_true_intro not_false\n#align not_false_iff not_false_iff\n-/\n\n",
  "not_false":
- "#print not_false /-\ntheorem not_false : ¬false :=\n  id\n#align not_false not_false\n-/\n\n",
+ "#print not_false /-\ntheorem not_false : ¬False :=\n  id\n#align not_false not_false\n-/\n\n",
  "not_congr":
  "#print not_congr /-\n@[congr]\ntheorem not_congr (h : a ↔ b) : ¬a ↔ ¬b :=\n  iff.intro (fun h₁ h₂ => h₁ (Iff.mpr h h₂)) fun h₁ h₂ => h₁ (Iff.mp h h₂)\n#align not_congr not_congr\n-/\n\n",
  "not_and_self_iff":
- "#print not_and_self_iff /-\n@[simp]\ntheorem not_and_self_iff (a : Prop) : ¬a ∧ a ↔ false :=\n  iff_false_intro fun h => And.elim h fun h₁ h₂ => absurd h₂ h₁\n#align not_and_self not_and_self_iff\n-/\n\n",
+ "#print not_and_self_iff /-\n@[simp]\ntheorem not_and_self_iff (a : Prop) : ¬a ∧ a ↔ False :=\n  iff_false_intro fun h => And.elim h fun h₁ h₂ => absurd h₂ h₁\n#align not_and_self not_and_self_iff\n-/\n\n",
  "not_and_iff_or_not":
- "theorem not_and_iff_or_not (p q : Prop) [d₁ : decidable p] [d₂ : decidable q] : ¬(p ∧ q) ↔ ¬p ∨ ¬q :=\n  iff.intro\n    (fun h =>\n      match d₁ with\n      | is_true h₁ =>\n        match d₂ with\n        | is_true h₂ => absurd (and.intro h₁ h₂) h\n        | is_false h₂ => or.inr h₂\n      | is_false h₁ => or.inl h₁)\n    fun h ⟨hp, hq⟩ => or.elim h (fun h => h hp) fun h => h hq\n#align not_and_iff_or_not not_and_iff_or_not\n\n",
+ "theorem not_and_iff_or_not (p q : Prop) [d₁ : Decidable p] [d₂ : Decidable q] : ¬(p ∧ q) ↔ ¬p ∨ ¬q :=\n  iff.intro\n    (fun h =>\n      match d₁ with\n      | is_true h₁ =>\n        match d₂ with\n        | is_true h₂ => absurd (and.intro h₁ h₂) h\n        | is_false h₂ => or.inr h₂\n      | is_false h₁ => or.inl h₁)\n    fun h ⟨hp, hq⟩ => or.elim h (fun h => h hp) fun h => h hq\n#align not_and_iff_or_not not_and_iff_or_not\n\n",
  "nonempty_of_exists":
- "#print nonempty_of_exists /-\ntheorem nonempty_of_exists {α : Sort u} {p : α → Prop} : (∃ x, p x) → nonempty α\n  | ⟨w, h⟩ => ⟨w⟩\n#align nonempty_of_exists nonempty_of_exists\n-/\n\n",
+ "#print nonempty_of_exists /-\ntheorem nonempty_of_exists {α : Sort u} {p : α → Prop} : (∃ x, p x) → Nonempty α\n  | ⟨w, h⟩ => ⟨w⟩\n#align nonempty_of_exists nonempty_of_exists\n-/\n\n",
  "neq_of_not_iff":
- "#print neq_of_not_iff /-\ntheorem neq_of_not_iff {a b : Prop} : ¬(a ↔ b) → a ≠ b := fun h₁ h₂ =>\n  have : a ↔ b := eq.subst h₂ (iff.refl a)\n  absurd this h₁\n#align neq_of_not_iff neq_of_not_iff\n-/\n\n",
+ "#print neq_of_not_iff /-\ntheorem neq_of_not_iff {a b : Prop} : ¬(a ↔ b) → a ≠ b := fun h₁ h₂ =>\n  have : a ↔ b := Eq.subst h₂ (iff.refl a)\n  absurd this h₁\n#align neq_of_not_iff neq_of_not_iff\n-/\n\n",
  "neg_resolve_right":
  "theorem or.neg_resolve_right {a b : Prop} (h : a ∨ ¬b) (hb : b) : a :=\n  or.elim h id fun nb => absurd hb nb\n#align or.neg_resolve_right or.neg_resolve_right\n\n",
  "neg_resolve_left":
  "theorem or.neg_resolve_left {a b : Prop} (h : ¬a ∨ b) (ha : a) : b :=\n  or.elim h (fun na => absurd ha na) id\n#align or.neg_resolve_left or.neg_resolve_left\n\n",
  "ne_true_of_not":
- "#print ne_true_of_not /-\ntheorem ne_true_of_not : ¬p → p ≠ true := fun (hnp : ¬p) (heq : p = true) => (HEq ▸ hnp) trivial\n#align ne_true_of_not ne_true_of_not\n-/\n\n",
+ "#print ne_true_of_not /-\ntheorem ne_true_of_not : ¬p → p ≠ True := fun (hnp : ¬p) (heq : p = True) => (HEq ▸ hnp) trivial\n#align ne_true_of_not ne_true_of_not\n-/\n\n",
  "ne_self_iff_false":
- "#print ne_self_iff_false /-\ntheorem ne_self_iff_false {α : Sort u} (a : α) : not (a = a) ↔ false :=\n  iff.intro false_of_ne false.elim\n#align ne_self_iff_false ne_self_iff_false\n-/\n\n",
+ "#print ne_self_iff_false /-\ntheorem ne_self_iff_false {α : Sort u} (a : α) : not (a = a) ↔ False :=\n  iff.intro false_of_ne false.elim\n#align ne_self_iff_false ne_self_iff_false\n-/\n\n",
  "ne_false_of_self":
- "#print ne_false_of_self /-\ntheorem ne_false_of_self : p → p ≠ false := fun (hp : p) (heq : p = false) => HEq ▸ hp\n#align ne_false_of_self ne_false_of_self\n-/\n\n",
+ "#print ne_false_of_self /-\ntheorem ne_false_of_self : p → p ≠ False := fun (hp : p) (heq : p = False) => HEq ▸ hp\n#align ne_false_of_self ne_false_of_self\n-/\n\n",
  "mt":
  "#print mt /-\n/-- Modus tollens. If an implication is true, then so is its contrapositive. -/\ntheorem mt {a b : Prop} (h₁ : a → b) (h₂ : ¬b) : ¬a := fun ha : a => h₂ (h₁ ha)\n#align mt mt\n-/\n\n",
  "mpr":
@@ -143,21 +143,21 @@
  "let_body_eq":
  "#print let_body_eq /-\ntheorem let_body_eq {α : Sort v} {β : α → Sort u} (a : α) {b₁ b₂ : ∀ x : α, β x} :\n    (∀ x, b₁ x = b₂ x) →\n      (let x : α := a\n        b₁ x) =\n        let x : α := a\n        b₂ x :=\n  fun h => h a\n#align let_body_eq let_body_eq\n-/\n\n",
  "left_comm":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `f -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `f -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `f -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `f -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `f -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `f -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `f -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `f -/\n#print left_comm /-\ntheorem left_comm : commutative f → associative f → left_commutative f := fun hcomm hassoc => fun a b c =>\n  calc\n    f a (f b c) = f (f a b) c := eq.symm (hassoc a b c)\n    _ = f (f b a) c := hcomm a b ▸ rfl\n    _ = f b (f a c) := hassoc b a c\n    \n#align left_comm left_comm\n-/\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `f -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `f -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `f -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `f -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `f -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `f -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `f -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `f -/\n#print left_comm /-\ntheorem left_comm : commutative f → associative f → left_commutative f := fun hcomm hassoc => fun a b c =>\n  calc\n    f a (f b c) = f (f a b) c := Eq.symm (hassoc a b c)\n    _ = f (f b a) c := (hcomm a b ▸ rfl)\n    _ = f b (f a c) := hassoc b a c\n    \n#align left_comm left_comm\n-/\n\n",
  "irreflexive":
  "theorem inv_image.irreflexive (f : α → β) (h : irreflexive r) : irreflexive (inv_image r f) :=\n  fun (a : α) (h₁ : inv_image r f a a) => h (f a) h₁\n#align inv_image.irreflexive inv_image.irreflexive\n\n",
  "irrefl":
- "#print irrefl /-\ntheorem irrefl (h : a ≠ a) : false :=\n  h rfl\n#align irrefl irrefl\n-/\n\n",
+ "#print irrefl /-\ntheorem irrefl (h : a ≠ a) : False :=\n  h rfl\n#align irrefl irrefl\n-/\n\n",
  "intro":
  "@[intro]\ntheorem exists_unique.intro {α : Sort u} {p : α → Prop} (w : α) (h₁ : p w) (h₂ : ∀ y, p y → y = w) : ∃! x, p x :=\n  exists.intro w ⟨h₁, h₂⟩\n#align exists_unique.intro exists_unique.intro\n\n",
  "imp_true_iff":
- "#print imp_true_iff /-\n@[simp]\ntheorem imp_true_iff (α : Sort u) : α → true ↔ true :=\n  iff.intro (fun h => trivial) fun ha h => trivial\n#align implies_true_iff imp_true_iff\n-/\n\n",
+ "#print imp_true_iff /-\n@[simp]\ntheorem imp_true_iff (α : Sort u) : α → True ↔ True :=\n  iff.intro (fun h => trivial) fun ha h => trivial\n#align implies_true_iff imp_true_iff\n-/\n\n",
  "imp_right":
  "theorem or.imp_right (h : a → b) : c ∨ a → c ∨ b :=\n  Or.imp id h\n#align or.imp_right or.imp_right\n\n",
  "imp_of_if_pos":
- "#print imp_of_if_pos /-\ntheorem imp_of_if_pos {c t e : Prop} [decidable c] (h : ite c t e) : c → t := fun hc =>\n  eq.rec_on (if_pos hc : ite c t e = t) h\n#align implies_of_if_pos imp_of_if_pos\n-/\n\n",
+ "#print imp_of_if_pos /-\ntheorem imp_of_if_pos {c t e : Prop} [Decidable c] (h : ite c t e) : c → t := fun hc =>\n  eq.rec_on (if_pos hc : ite c t e = t) h\n#align implies_of_if_pos imp_of_if_pos\n-/\n\n",
  "imp_of_if_neg":
- "#print imp_of_if_neg /-\ntheorem imp_of_if_neg {c t e : Prop} [decidable c] (h : ite c t e) : ¬c → e := fun hnc =>\n  eq.rec_on (if_neg hnc : ite c t e = e) h\n#align implies_of_if_neg imp_of_if_neg\n-/\n\n",
+ "#print imp_of_if_neg /-\ntheorem imp_of_if_neg {c t e : Prop} [Decidable c] (h : ite c t e) : ¬c → e := fun hnc =>\n  eq.rec_on (if_neg hnc : ite c t e = e) h\n#align implies_of_if_neg imp_of_if_neg\n-/\n\n",
  "imp_left":
  "theorem or.imp_left (h : a → b) : a ∨ c → b ∨ c :=\n  Or.imp h id\n#align or.imp_left or.imp_left\n\n",
  "imp_congr_right":
@@ -169,45 +169,45 @@
  "imp":
  "/- warning: exists_imp_exists clashes with Exists.imp -> Exists.imp\nCase conversion may be inaccurate. Consider using '#align exists_imp_exists Exists.impₓ'. -/\n#print Exists.imp /-\ntheorem Exists.imp {α : Sort u} {p q : α → Prop} (h : ∀ a, p a → q a) (p : ∃ a, p a) : ∃ a, q a :=\n  exists.elim p fun a hp => ⟨a, h a hp⟩\n#align exists_imp_exists Exists.imp\n-/\n\n",
  "iff_true_intro":
- "#print iff_true_intro /-\ntheorem iff_true_intro (h : a) : a ↔ true :=\n  iff.intro (fun hl => trivial) fun hr => h\n#align iff_true_intro iff_true_intro\n-/\n\n",
+ "#print iff_true_intro /-\ntheorem iff_true_intro (h : a) : a ↔ True :=\n  iff.intro (fun hl => trivial) fun hr => h\n#align iff_true_intro iff_true_intro\n-/\n\n",
  "iff_true_iff":
- "#print iff_true_iff /-\n@[simp]\ntheorem iff_true_iff (a : Prop) : (a ↔ true) ↔ a :=\n  iff.intro (fun h => Iff.mpr h trivial) iff_true_intro\n#align iff_true iff_true_iff\n-/\n\n",
+ "#print iff_true_iff /-\n@[simp]\ntheorem iff_true_iff (a : Prop) : (a ↔ True) ↔ a :=\n  iff.intro (fun h => Iff.mpr h trivial) iff_true_intro\n#align iff_true iff_true_iff\n-/\n\n",
  "iff_self_iff":
- "#print iff_self_iff /-\n@[simp]\ntheorem iff_self_iff (a : Prop) : (a ↔ a) ↔ true :=\n  iff_true_intro iff.rfl\n#align iff_self iff_self_iff\n-/\n\n",
+ "#print iff_self_iff /-\n@[simp]\ntheorem iff_self_iff (a : Prop) : (a ↔ a) ↔ True :=\n  iff_true_intro iff.rfl\n#align iff_self iff_self_iff\n-/\n\n",
  "iff_not_self":
- "#print iff_not_self /-\n@[simp]\ntheorem iff_not_self (a : Prop) : (a ↔ ¬a) ↔ false :=\n  iff_false_intro fun h =>\n    have h' : ¬a := fun ha => (Iff.mp h ha) ha\n    h' (Iff.mpr h h')\n#align iff_not_self iff_not_self\n-/\n\n",
+ "#print iff_not_self /-\n@[simp]\ntheorem iff_not_self (a : Prop) : (a ↔ ¬a) ↔ False :=\n  iff_false_intro fun h =>\n    have h' : ¬a := fun ha => (Iff.mp h ha) ha\n    h' (Iff.mpr h h')\n#align iff_not_self iff_not_self\n-/\n\n",
  "iff_iff_implies_and_implies":
  "#print iff_iff_implies_and_implies /-\ntheorem iff_iff_implies_and_implies (a b : Prop) : (a ↔ b) ↔ (a → b) ∧ (b → a) :=\n  iff.intro (fun h => and.intro h.mp h.mpr) fun h => iff.intro h.left h.right\n#align iff_iff_implies_and_implies iff_iff_implies_and_implies\n-/\n\n",
  "iff_false_intro":
- "#print iff_false_intro /-\ntheorem iff_false_intro (h : ¬a) : a ↔ false :=\n  iff.intro h (false.rec a)\n#align iff_false_intro iff_false_intro\n-/\n\n",
+ "#print iff_false_intro /-\ntheorem iff_false_intro (h : ¬a) : a ↔ False :=\n  iff.intro h (false.rec a)\n#align iff_false_intro iff_false_intro\n-/\n\n",
  "iff_false_iff":
- "#print iff_false_iff /-\n@[simp]\ntheorem iff_false_iff (a : Prop) : (a ↔ false) ↔ ¬a :=\n  iff.intro Iff.mp iff_false_intro\n#align iff_false iff_false_iff\n-/\n\n",
+ "#print iff_false_iff /-\n@[simp]\ntheorem iff_false_iff (a : Prop) : (a ↔ False) ↔ ¬a :=\n  iff.intro Iff.mp iff_false_intro\n#align iff_false iff_false_iff\n-/\n\n",
  "iff_congr":
  "@[congr]\ntheorem iff_congr (h₁ : a ↔ c) (h₂ : b ↔ d) : (a ↔ b) ↔ (c ↔ d) :=\n  (iff_iff_implies_and_implies a b).trans\n    ((and_congr (imp_congr h₁ h₂) (imp_congr h₂ h₁)).trans (iff_iff_implies_and_implies c d).symm)\n#align iff_congr iff_congrₓ\n\n",
  "if_true":
- "#print if_true /-\n@[simp]\ntheorem if_true {α : Sort u} {h : decidable true} (t e : α) : @ite α true h t e = t :=\n  if_pos trivial\n#align if_true if_true\n-/\n\n",
+ "#print if_true /-\n@[simp]\ntheorem if_true {α : Sort u} {h : Decidable True} (t e : α) : @ite α True h t e = t :=\n  if_pos trivial\n#align if_true if_true\n-/\n\n",
  "if_t_t":
- "#print if_t_t /-\n@[simp]\ntheorem if_t_t (c : Prop) [h : decidable c] {α : Sort u} (t : α) : ite c t t = t :=\n  match h with\n  | is_true hc => rfl\n  | is_false hnc => rfl\n#align if_t_t if_t_t\n-/\n\n",
+ "#print if_t_t /-\n@[simp]\ntheorem if_t_t (c : Prop) [h : Decidable c] {α : Sort u} (t : α) : ite c t t = t :=\n  match h with\n  | is_true hc => rfl\n  | is_false hnc => rfl\n#align if_t_t if_t_t\n-/\n\n",
  "if_simp_congr_prop":
- "#print if_simp_congr_prop /-\n@[congr]\ntheorem if_simp_congr_prop {b c x y u v : Prop} [dec_b : decidable b] (h_c : b ↔ c) (h_t : x ↔ u) (h_e : y ↔ v) :\n    ite b x y ↔ @ite Prop c (decidable_of_decidable_of_iff dec_b h_c) u v :=\n  @if_ctx_simp_congr_prop b c x y u v dec_b h_c (fun h => h_t) fun h => h_e\n#align if_simp_congr_prop if_simp_congr_prop\n-/\n\n",
+ "#print if_simp_congr_prop /-\n@[congr]\ntheorem if_simp_congr_prop {b c x y u v : Prop} [dec_b : Decidable b] (h_c : b ↔ c) (h_t : x ↔ u) (h_e : y ↔ v) :\n    ite b x y ↔ @ite Prop c (decidable_of_decidable_of_iff dec_b h_c) u v :=\n  @if_ctx_simp_congr_prop b c x y u v dec_b h_c (fun h => h_t) fun h => h_e\n#align if_simp_congr_prop if_simp_congr_prop\n-/\n\n",
  "if_pos":
- "#print if_pos /-\ntheorem if_pos {c : Prop} [h : decidable c] (hc : c) {α : Sort u} {t e : α} : ite c t e = t :=\n  match h with\n  | is_true hc => rfl\n  | is_false hnc => absurd hc hnc\n#align if_pos if_pos\n-/\n\n",
+ "#print if_pos /-\ntheorem if_pos {c : Prop} [h : Decidable c] (hc : c) {α : Sort u} {t e : α} : ite c t e = t :=\n  match h with\n  | is_true hc => rfl\n  | is_false hnc => absurd hc hnc\n#align if_pos if_pos\n-/\n\n",
  "if_neg":
- "#print if_neg /-\ntheorem if_neg {c : Prop} [h : decidable c] (hnc : ¬c) {α : Sort u} {t e : α} : ite c t e = e :=\n  match h with\n  | is_true hc => absurd hc hnc\n  | is_false hnc => rfl\n#align if_neg if_neg\n-/\n\n",
+ "#print if_neg /-\ntheorem if_neg {c : Prop} [h : Decidable c] (hnc : ¬c) {α : Sort u} {t e : α} : ite c t e = e :=\n  match h with\n  | is_true hc => absurd hc hnc\n  | is_false hnc => rfl\n#align if_neg if_neg\n-/\n\n",
  "if_false":
- "#print if_false /-\n@[simp]\ntheorem if_false {α : Sort u} {h : decidable false} (t e : α) : @ite α false h t e = e :=\n  if_neg not_false\n#align if_false if_false\n-/\n\n",
+ "#print if_false /-\n@[simp]\ntheorem if_false {α : Sort u} {h : Decidable False} (t e : α) : @ite α False h t e = e :=\n  if_neg not_false\n#align if_false if_false\n-/\n\n",
  "if_ctx_simp_congr_prop":
- "#print if_ctx_simp_congr_prop /-\ntheorem if_ctx_simp_congr_prop {b c x y u v : Prop} [dec_b : decidable b] (h_c : b ↔ c) (h_t : c → (x ↔ u))\n    (h_e : ¬c → (y ↔ v)) : ite b x y ↔ @ite Prop c (decidable_of_decidable_of_iff dec_b h_c) u v :=\n  @if_ctx_congr_prop b c x y u v dec_b (decidable_of_decidable_of_iff dec_b h_c) h_c h_t h_e\n#align if_ctx_simp_congr_prop if_ctx_simp_congr_prop\n-/\n\n",
+ "#print if_ctx_simp_congr_prop /-\ntheorem if_ctx_simp_congr_prop {b c x y u v : Prop} [dec_b : Decidable b] (h_c : b ↔ c) (h_t : c → (x ↔ u))\n    (h_e : ¬c → (y ↔ v)) : ite b x y ↔ @ite Prop c (decidable_of_decidable_of_iff dec_b h_c) u v :=\n  @if_ctx_congr_prop b c x y u v dec_b (decidable_of_decidable_of_iff dec_b h_c) h_c h_t h_e\n#align if_ctx_simp_congr_prop if_ctx_simp_congr_prop\n-/\n\n",
  "if_ctx_congr_prop":
- "#print if_ctx_congr_prop /-\ntheorem if_ctx_congr_prop {b c x y u v : Prop} [dec_b : decidable b] [dec_c : decidable c] (h_c : b ↔ c)\n    (h_t : c → (x ↔ u)) (h_e : ¬c → (y ↔ v)) : ite b x y ↔ ite c u v :=\n  match dec_b, dec_c with\n  | is_false h₁, is_false h₂ => h_e h₂\n  | is_true h₁, is_true h₂ => h_t h₂\n  | is_false h₁, is_true h₂ => absurd h₂ (Iff.mp (not_congr h_c) h₁)\n  | is_true h₁, is_false h₂ => absurd h₁ (Iff.mpr (not_congr h_c) h₂)\n#align if_ctx_congr_prop if_ctx_congr_prop\n-/\n\n",
+ "#print if_ctx_congr_prop /-\ntheorem if_ctx_congr_prop {b c x y u v : Prop} [dec_b : Decidable b] [dec_c : Decidable c] (h_c : b ↔ c)\n    (h_t : c → (x ↔ u)) (h_e : ¬c → (y ↔ v)) : ite b x y ↔ ite c u v :=\n  match dec_b, dec_c with\n  | is_false h₁, is_false h₂ => h_e h₂\n  | is_true h₁, is_true h₂ => h_t h₂\n  | is_false h₁, is_true h₂ => absurd h₂ (Iff.mp (not_congr h_c) h₁)\n  | is_true h₁, is_false h₂ => absurd h₁ (Iff.mpr (not_congr h_c) h₂)\n#align if_ctx_congr_prop if_ctx_congr_prop\n-/\n\n",
  "if_ctx_congr":
- "#print if_ctx_congr /-\ntheorem if_ctx_congr {α : Sort u} {b c : Prop} [dec_b : decidable b] [dec_c : decidable c] {x y u v : α} (h_c : b ↔ c)\n    (h_t : c → x = u) (h_e : ¬c → y = v) : ite b x y = ite c u v :=\n  match dec_b, dec_c with\n  | is_false h₁, is_false h₂ => h_e h₂\n  | is_true h₁, is_true h₂ => h_t h₂\n  | is_false h₁, is_true h₂ => absurd h₂ (Iff.mp (not_congr h_c) h₁)\n  | is_true h₁, is_false h₂ => absurd h₁ (Iff.mpr (not_congr h_c) h₂)\n#align if_ctx_congr if_ctx_congr\n-/\n\n",
+ "#print if_ctx_congr /-\ntheorem if_ctx_congr {α : Sort u} {b c : Prop} [dec_b : Decidable b] [dec_c : Decidable c] {x y u v : α} (h_c : b ↔ c)\n    (h_t : c → x = u) (h_e : ¬c → y = v) : ite b x y = ite c u v :=\n  match dec_b, dec_c with\n  | is_false h₁, is_false h₂ => h_e h₂\n  | is_true h₁, is_true h₂ => h_t h₂\n  | is_false h₁, is_true h₂ => absurd h₂ (Iff.mp (not_congr h_c) h₁)\n  | is_true h₁, is_false h₂ => absurd h₁ (Iff.mpr (not_congr h_c) h₂)\n#align if_ctx_congr if_ctx_congr\n-/\n\n",
  "if_congr_prop":
- "#print if_congr_prop /-\n@[congr]\ntheorem if_congr_prop {b c x y u v : Prop} [dec_b : decidable b] [dec_c : decidable c] (h_c : b ↔ c) (h_t : x ↔ u)\n    (h_e : y ↔ v) : ite b x y ↔ ite c u v :=\n  if_ctx_congr_prop h_c (fun h => h_t) fun h => h_e\n#align if_congr_prop if_congr_prop\n-/\n\n",
+ "#print if_congr_prop /-\n@[congr]\ntheorem if_congr_prop {b c x y u v : Prop} [dec_b : Decidable b] [dec_c : Decidable c] (h_c : b ↔ c) (h_t : x ↔ u)\n    (h_e : y ↔ v) : ite b x y ↔ ite c u v :=\n  if_ctx_congr_prop h_c (fun h => h_t) fun h => h_e\n#align if_congr_prop if_congr_prop\n-/\n\n",
  "if_congr":
- "#print if_congr /-\ntheorem if_congr {α : Sort u} {b c : Prop} [dec_b : decidable b] [dec_c : decidable c] {x y u v : α} (h_c : b ↔ c)\n    (h_t : x = u) (h_e : y = v) : ite b x y = ite c u v :=\n  @if_ctx_congr α b c dec_b dec_c x y u v h_c (fun h => h_t) fun h => h_e\n#align if_congr if_congr\n-/\n\n",
+ "#print if_congr /-\ntheorem if_congr {α : Sort u} {b c : Prop} [dec_b : Decidable b] [dec_c : Decidable c] {x y u v : α} (h_c : b ↔ c)\n    (h_t : x = u) (h_e : y = v) : ite b x y = ite c u v :=\n  @if_ctx_congr α b c dec_b dec_c x y u v h_c (fun h => h_t) fun h => h_e\n#align if_congr if_congr\n-/\n\n",
  "heq_self_iff_true":
- "#print heq_self_iff_true /-\ntheorem heq_self_iff_true {α : Sort u} (a : α) : HEq a a ↔ true :=\n  iff_true_intro (heq.refl a)\n#align heq_self_iff_true heq_self_iff_true\n-/\n\n",
+ "#print heq_self_iff_true /-\ntheorem heq_self_iff_true {α : Sort u} (a : α) : HEq a a ↔ True :=\n  iff_true_intro (heq.refl a)\n#align heq_self_iff_true heq_self_iff_true\n-/\n\n",
  "heq_of_heq_of_eq":
  "#print heq_of_heq_of_eq /-\n@[trans]\ntheorem heq_of_heq_of_eq (h₁ : HEq a b) (h₂ : b = b') : HEq a b' :=\n  heq.trans h₁ (heq_of_eq h₂)\n#align heq_of_heq_of_eq heq_of_heq_of_eq\n-/\n\n",
  "heq_of_eq_rec_right":
@@ -217,33 +217,33 @@
  "heq_of_eq_of_heq":
  "#print heq_of_eq_of_heq /-\n@[trans]\ntheorem heq_of_eq_of_heq (h₁ : a = a') (h₂ : HEq a' b) : HEq a b :=\n  heq.trans (heq_of_eq h₁) h₂\n#align heq_of_eq_of_heq heq_of_eq_of_heq\n-/\n\n",
  "heq_of_eq":
- "#print heq_of_eq /-\ntheorem heq_of_eq (h : a = a') : HEq a a' :=\n  eq.subst h (heq.refl a)\n#align heq_of_eq heq_of_eq\n-/\n\n",
+ "#print heq_of_eq /-\ntheorem heq_of_eq (h : a = a') : HEq a a' :=\n  Eq.subst h (heq.refl a)\n#align heq_of_eq heq_of_eq\n-/\n\n",
  "helim":
  "protected theorem subsingleton.helim {α β : Sort u} [h : subsingleton α] (h : α = β) : ∀ (a : α) (b : β), HEq a b :=\n  eq.rec_on h fun a b : α => heq_of_eq (subsingleton.elim a b)\n#align subsingleton.helim subsingleton.helim\n\n",
  "get":
- "#print AsTrue.get /-\ntheorem AsTrue.get {c : Prop} [h₁ : decidable c] (h₂ : as_true c) : c :=\n  match h₁, h₂ with\n  | is_true h_c, h₂ => h_c\n  | is_false h_c, h₂ => false.elim h₂\n#align of_as_true AsTrue.get\n-/\n\n",
+ "#print AsTrue.get /-\ntheorem AsTrue.get {c : Prop} [h₁ : Decidable c] (h₂ : as_true c) : c :=\n  match h₁, h₂ with\n  | is_true h_c, h₂ => h_c\n  | is_false h_c, h₂ => false.elim h₂\n#align of_as_true AsTrue.get\n-/\n\n",
  "forall_not_of_not_exists":
  "#print forall_not_of_not_exists /-\ntheorem forall_not_of_not_exists {α : Sort u} {p : α → Prop} : (¬∃ x, p x) → ∀ x, ¬p x := fun hne x hp => hne ⟨x, hp⟩\n#align forall_not_of_not_exists forall_not_of_not_exists\n-/\n\n",
  "forall_congr'":
  "#print forall_congr' /-\n@[congr]\ntheorem forall_congr' {α : Sort u} {p q : α → Prop} (h : ∀ a, p a ↔ q a) : (∀ a, p a) ↔ ∀ a, q a :=\n  iff.intro (fun p a => Iff.mp (h a) (p a)) fun q a => Iff.mpr (h a) (q a)\n#align forall_congr forall_congr'\n-/\n\n",
  "ff_ne_tt":
- "theorem bool.ff_ne_tt : ff = tt → false :=\n  fun.\n#align bool.ff_ne_tt bool.ff_ne_tt\n\n",
+ "theorem bool.ff_ne_tt : false = true → False :=\n  fun.\n#align bool.ff_ne_tt bool.ff_ne_tt\n\n",
  "false_or_iff":
- "#print false_or_iff /-\n@[simp]\ntheorem false_or_iff (a : Prop) : false ∨ a ↔ a :=\n  iff.trans or_comm (or_false_iff a)\n#align false_or false_or_iff\n-/\n\n",
+ "#print false_or_iff /-\n@[simp]\ntheorem false_or_iff (a : Prop) : False ∨ a ↔ a :=\n  iff.trans or_comm (or_false_iff a)\n#align false_or false_or_iff\n-/\n\n",
  "false_of_true_iff_false":
- "#print false_of_true_iff_false /-\ntheorem false_of_true_iff_false : (true ↔ false) → false := fun h => Iff.mp h trivial\n#align false_of_true_iff_false false_of_true_iff_false\n-/\n\n",
+ "#print false_of_true_iff_false /-\ntheorem false_of_true_iff_false : (True ↔ False) → False := fun h => Iff.mp h trivial\n#align false_of_true_iff_false false_of_true_iff_false\n-/\n\n",
  "false_of_true_eq_false":
- "#print false_of_true_eq_false /-\ntheorem false_of_true_eq_false : true = false → false := fun h => h ▸ trivial\n#align false_of_true_eq_false false_of_true_eq_false\n-/\n\n",
+ "#print false_of_true_eq_false /-\ntheorem false_of_true_eq_false : True = False → False := fun h => h ▸ trivial\n#align false_of_true_eq_false false_of_true_eq_false\n-/\n\n",
  "false_of_ne":
- "#print false_of_ne /-\ntheorem false_of_ne {α : Sort u} {a : α} : a ≠ a → false :=\n  ne.irrefl\n#align false_of_ne false_of_ne\n-/\n\n",
+ "#print false_of_ne /-\ntheorem false_of_ne {α : Sort u} {a : α} : a ≠ a → False :=\n  ne.irrefl\n#align false_of_ne false_of_ne\n-/\n\n",
  "false_imp_iff":
- "#print false_imp_iff /-\ntheorem false_imp_iff (a : Prop) : false → a ↔ true :=\n  iff.intro (fun h => trivial) fun ha h => false.elim h\n#align false_implies_iff false_imp_iff\n-/\n\n",
+ "#print false_imp_iff /-\ntheorem false_imp_iff (a : Prop) : False → a ↔ True :=\n  iff.intro (fun h => trivial) fun ha h => false.elim h\n#align false_implies_iff false_imp_iff\n-/\n\n",
  "false_iff_true":
- "#print false_iff_true /-\ntheorem false_iff_true : (false ↔ true) ↔ false :=\n  iff_false_intro fun h => Iff.mpr h trivial\n#align false_iff_true false_iff_true\n-/\n\n",
+ "#print false_iff_true /-\ntheorem false_iff_true : (False ↔ True) ↔ False :=\n  iff_false_intro fun h => Iff.mpr h trivial\n#align false_iff_true false_iff_true\n-/\n\n",
  "false_iff_iff":
- "#print false_iff_iff /-\n@[simp]\ntheorem false_iff_iff (a : Prop) : (false ↔ a) ↔ ¬a :=\n  iff.trans iff.comm (iff_false_iff a)\n#align false_iff false_iff_iff\n-/\n\n",
+ "#print false_iff_iff /-\n@[simp]\ntheorem false_iff_iff (a : Prop) : (False ↔ a) ↔ ¬a :=\n  iff.trans iff.comm (iff_false_iff a)\n#align false_iff false_iff_iff\n-/\n\n",
  "false_and_iff":
- "#print false_and_iff /-\n@[simp]\ntheorem false_and_iff (a : Prop) : false ∧ a ↔ false :=\n  iff_false_intro And.left\n#align false_and false_and_iff\n-/\n\n",
+ "#print false_and_iff /-\n@[simp]\ntheorem false_and_iff (a : Prop) : False ∧ a ↔ False :=\n  iff_false_intro And.left\n#align false_and false_and_iff\n-/\n\n",
  "exists_unique_of_exists_of_unique":
  "#print exists_unique_of_exists_of_unique /-\ntheorem exists_unique_of_exists_of_unique {α : Sort u} {p : α → Prop} (hex : ∃ x, p x)\n    (hunique : ∀ y₁ y₂, p y₁ → p y₂ → y₁ = y₂) : ∃! x, p x :=\n  exists.elim hex fun x px => exists_unique.intro x px fun y => fun this : p y => hunique y x this px\n#align exists_unique_of_exists_of_unique exists_unique_of_exists_of_unique\n-/\n\n",
  "exists_unique_congr":
@@ -253,45 +253,45 @@
  "exists":
  "#print ExistsUnique.exists /-\ntheorem ExistsUnique.exists {α : Sort u} {p : α → Prop} (h : ∃! x, p x) : ∃ x, p x :=\n  exists.elim h fun x hx => ⟨x, And.left hx⟩\n#align exists_of_exists_unique ExistsUnique.exists\n-/\n\n",
  "eq_self_iff_true":
- "#print eq_self_iff_true /-\n@[simp]\ntheorem eq_self_iff_true {α : Sort u} (a : α) : a = a ↔ true :=\n  iff_true_intro rfl\n#align eq_self_iff_true eq_self_iff_true\n-/\n\n",
+ "#print eq_self_iff_true /-\n@[simp]\ntheorem eq_self_iff_true {α : Sort u} (a : α) : a = a ↔ True :=\n  iff_true_intro rfl\n#align eq_self_iff_true eq_self_iff_true\n-/\n\n",
  "eq_rec_heq":
  "#print eq_rec_heq /-\ntheorem eq_rec_heq {α : Sort u} {φ : α → Sort v} : ∀ {a a' : α} (h : a = a') (p : φ a), HEq (eq.rec_on h p : φ a') p\n  | a, _, rfl, p => heq.refl p\n#align eq_rec_heq eq_rec_heq\n-/\n\n",
  "eq_rec_compose":
- "#print eq_rec_compose /-\ntheorem eq_rec_compose :\n    ∀ {α β φ : Sort u} (p₁ : β = φ) (p₂ : α = β) (a : α),\n      (eq.rec_on p₁ (eq.rec_on p₂ a : β) : φ) = eq.rec_on (eq.trans p₂ p₁) a\n  | α, _, _, rfl, rfl, a => rfl\n#align eq_rec_compose eq_rec_compose\n-/\n\n",
+ "#print eq_rec_compose /-\ntheorem eq_rec_compose :\n    ∀ {α β φ : Sort u} (p₁ : β = φ) (p₂ : α = β) (a : α),\n      (eq.rec_on p₁ (eq.rec_on p₂ a : β) : φ) = eq.rec_on (Eq.trans p₂ p₁) a\n  | α, _, _, rfl, rfl, a => rfl\n#align eq_rec_compose eq_rec_compose\n-/\n\n",
  "eq_comm":
- "#print eq_comm /-\ntheorem eq_comm {α : Sort u} {a b : α} : a = b ↔ b = a :=\n  ⟨eq.symm, eq.symm⟩\n#align eq_comm eq_comm\n-/\n\n",
+ "#print eq_comm /-\ntheorem eq_comm {α : Sort u} {a b : α} : a = b ↔ b = a :=\n  ⟨Eq.symm, Eq.symm⟩\n#align eq_comm eq_comm\n-/\n\n",
  "em":
- "#print em /-\n-- We use \"dependent\" if-then-else to be able to communicate the if-then-else condition\n-- to the branches\n/-- Law of Excluded Middle. -/\ntheorem em (p : Prop) [decidable p] : p ∨ ¬p :=\n  by_cases or.inl or.inr\n#align em em\n-/\n\n",
+ "#print em /-\n-- We use \"dependent\" if-then-else to be able to communicate the if-then-else condition\n-- to the branches\n/-- Law of Excluded Middle. -/\ntheorem em (p : Prop) [Decidable p] : p ∨ ¬p :=\n  by_cases or.inl or.inr\n#align em em\n-/\n\n",
  "elim":
  "protected theorem subsingleton.elim {α : Sort u} [h : subsingleton α] : ∀ a b : α, a = b :=\n  subsingleton.rec (fun p => p) h\n#align subsingleton.elim subsingleton.elim\n\n",
  "down_up":
  "theorem down_up {α : Sort u} (a : α) : down (up a) = a :=\n  rfl\n#align down_up down_up\n\n",
  "dif_pos":
- "#print dif_pos /-\n@[simp]\ntheorem dif_pos {c : Prop} [h : decidable c] (hc : c) {α : Sort u} {t : c → α} {e : ¬c → α} : dite c t e = t hc :=\n  match h with\n  | is_true hc => rfl\n  | is_false hnc => absurd hc hnc\n#align dif_pos dif_pos\n-/\n\n",
+ "#print dif_pos /-\n@[simp]\ntheorem dif_pos {c : Prop} [h : Decidable c] (hc : c) {α : Sort u} {t : c → α} {e : ¬c → α} : dite c t e = t hc :=\n  match h with\n  | is_true hc => rfl\n  | is_false hnc => absurd hc hnc\n#align dif_pos dif_pos\n-/\n\n",
  "dif_neg":
- "#print dif_neg /-\n@[simp]\ntheorem dif_neg {c : Prop} [h : decidable c] (hnc : ¬c) {α : Sort u} {t : c → α} {e : ¬c → α} : dite c t e = e hnc :=\n  match h with\n  | is_true hc => absurd hc hnc\n  | is_false hnc => rfl\n#align dif_neg dif_neg\n-/\n\n",
+ "#print dif_neg /-\n@[simp]\ntheorem dif_neg {c : Prop} [h : Decidable c] (hnc : ¬c) {α : Sort u} {t : c → α} {e : ¬c → α} : dite c t e = e hnc :=\n  match h with\n  | is_true hc => absurd hc hnc\n  | is_false hnc => rfl\n#align dif_neg dif_neg\n-/\n\n",
  "dif_eq_if":
- "#print dif_eq_if /-\n-- Remark: dite and ite are \"defally equal\" when we ignore the proofs.\ntheorem dif_eq_if (c : Prop) [h : decidable c] {α : Sort u} (t : α) (e : α) :\n    (dite c (fun h => t) fun h => e) = ite c t e :=\n  match h with\n  | is_true hc => rfl\n  | is_false hnc => rfl\n#align dif_eq_if dif_eq_if\n-/\n\n",
+ "#print dif_eq_if /-\n-- Remark: dite and ite are \"defally equal\" when we ignore the proofs.\ntheorem dif_eq_if (c : Prop) [h : Decidable c] {α : Sort u} (t : α) (e : α) :\n    (dite c (fun h => t) fun h => e) = ite c t e :=\n  match h with\n  | is_true hc => rfl\n  | is_false hnc => rfl\n#align dif_eq_if dif_eq_if\n-/\n\n",
  "dif_ctx_simp_congr":
- "#print dif_ctx_simp_congr /-\ntheorem dif_ctx_simp_congr {α : Sort u} {b c : Prop} [dec_b : decidable b] {x : b → α} {u : c → α} {y : ¬b → α}\n    {v : ¬c → α} (h_c : b ↔ c) (h_t : ∀ h : c, x (Iff.mpr h_c h) = u h)\n    (h_e : ∀ h : ¬c, y (Iff.mpr (not_congr h_c) h) = v h) :\n    @dite α b dec_b x y = @dite α c (decidable_of_decidable_of_iff dec_b h_c) u v :=\n  @dif_ctx_congr α b c dec_b (decidable_of_decidable_of_iff dec_b h_c) x u y v h_c h_t h_e\n#align dif_ctx_simp_congr dif_ctx_simp_congr\n-/\n\n",
+ "#print dif_ctx_simp_congr /-\ntheorem dif_ctx_simp_congr {α : Sort u} {b c : Prop} [dec_b : Decidable b] {x : b → α} {u : c → α} {y : ¬b → α}\n    {v : ¬c → α} (h_c : b ↔ c) (h_t : ∀ h : c, x (Iff.mpr h_c h) = u h)\n    (h_e : ∀ h : ¬c, y (Iff.mpr (not_congr h_c) h) = v h) :\n    @dite α b dec_b x y = @dite α c (decidable_of_decidable_of_iff dec_b h_c) u v :=\n  @dif_ctx_congr α b c dec_b (decidable_of_decidable_of_iff dec_b h_c) x u y v h_c h_t h_e\n#align dif_ctx_simp_congr dif_ctx_simp_congr\n-/\n\n",
  "dif_ctx_congr":
- "#print dif_ctx_congr /-\n@[congr]\ntheorem dif_ctx_congr {α : Sort u} {b c : Prop} [dec_b : decidable b] [dec_c : decidable c] {x : b → α} {u : c → α}\n    {y : ¬b → α} {v : ¬c → α} (h_c : b ↔ c) (h_t : ∀ h : c, x (Iff.mpr h_c h) = u h)\n    (h_e : ∀ h : ¬c, y (Iff.mpr (not_congr h_c) h) = v h) : @dite α b dec_b x y = @dite α c dec_c u v :=\n  match dec_b, dec_c with\n  | is_false h₁, is_false h₂ => h_e h₂\n  | is_true h₁, is_true h₂ => h_t h₂\n  | is_false h₁, is_true h₂ => absurd h₂ (Iff.mp (not_congr h_c) h₁)\n  | is_true h₁, is_false h₂ => absurd h₁ (Iff.mpr (not_congr h_c) h₂)\n#align dif_ctx_congr dif_ctx_congr\n-/\n\n",
+ "#print dif_ctx_congr /-\n@[congr]\ntheorem dif_ctx_congr {α : Sort u} {b c : Prop} [dec_b : Decidable b] [dec_c : Decidable c] {x : b → α} {u : c → α}\n    {y : ¬b → α} {v : ¬c → α} (h_c : b ↔ c) (h_t : ∀ h : c, x (Iff.mpr h_c h) = u h)\n    (h_e : ∀ h : ¬c, y (Iff.mpr (not_congr h_c) h) = v h) : @dite α b dec_b x y = @dite α c dec_c u v :=\n  match dec_b, dec_c with\n  | is_false h₁, is_false h₂ => h_e h₂\n  | is_true h₁, is_true h₂ => h_t h₂\n  | is_false h₁, is_true h₂ => absurd h₂ (Iff.mp (not_congr h_c) h₁)\n  | is_true h₁, is_false h₂ => absurd h₁ (Iff.mpr (not_congr h_c) h₂)\n#align dif_ctx_congr dif_ctx_congr\n-/\n\n",
  "def":
  "@[simp]\ntheorem ne.def {α : Sort u} (a b : α) : (a ≠ b) = ¬a = b :=\n  rfl\n#align ne.def ne.def\n\n",
  "decide_True'":
- "#print decide_True' /-\n@[simp]\ntheorem decide_True' (h : decidable true) : @decide true h = tt :=\n  decidable.cases_on h (fun h => false.elim (Iff.mp not_true h)) fun _ => rfl\n#align to_bool_true_eq_tt decide_True'\n-/\n\n",
+ "#print decide_True' /-\n@[simp]\ntheorem decide_True' (h : Decidable True) : @decide True h = true :=\n  decidable.cases_on h (fun h => false.elim (Iff.mp not_true h)) fun _ => rfl\n#align to_bool_true_eq_tt decide_True'\n-/\n\n",
  "decide_False'":
- "#print decide_False' /-\n@[simp]\ntheorem decide_False' (h : decidable false) : @decide false h = ff :=\n  decidable.cases_on h (fun h => rfl) fun h => false.elim h\n#align to_bool_false_eq_ff decide_False'\n-/\n\n",
+ "#print decide_False' /-\n@[simp]\ntheorem decide_False' (h : Decidable False) : @decide False h = false :=\n  decidable.cases_on h (fun h => rfl) fun h => false.elim h\n#align to_bool_false_eq_ff decide_False'\n-/\n\n",
  "decidable_eq_inr_neg":
- "#print decidable_eq_inr_neg /-\ntheorem decidable_eq_inr_neg {α : Sort u} [h : decidable_eq α] {a b : α} : ∀ n : a ≠ b, h a b = is_false n := fun n =>\n  match h a b with\n  | is_true e => absurd e n\n  | is_false n₁ => proof_irrel n n₁ ▸ eq.refl (is_false n)\n#align decidable_eq_inr_neg decidable_eq_inr_neg\n-/\n\n",
+ "theorem decidable_eq_inr_neg {α : Sort u} [h : DecidableEq α] {a b : α} : ∀ n : a ≠ b, h a b = is_false n := fun n =>\n  match h a b with\n  | is_true e => absurd e n\n  | is_false n₁ => proof_irrel n n₁ ▸ Eq.refl (is_false n)\n#align decidable_eq_inr_neg decidable_eq_inr_neg\n\n",
  "decidable_eq_inl_refl":
- "#print decidable_eq_inl_refl /-\ntheorem decidable_eq_inl_refl {α : Sort u} [h : decidable_eq α] (a : α) : h a a = is_true (eq.refl a) :=\n  match h a a with\n  | is_true e => rfl\n  | is_false n => absurd rfl n\n#align decidable_eq_inl_refl decidable_eq_inl_refl\n-/\n\n",
+ "theorem decidable_eq_inl_refl {α : Sort u} [h : DecidableEq α] (a : α) : h a a = is_true (Eq.refl a) :=\n  match h a a with\n  | is_true e => rfl\n  | is_false n => absurd rfl n\n#align decidable_eq_inl_refl decidable_eq_inl_refl\n\n",
  "congr_fun":
- "#print congr_fun /-\ntheorem congr_fun {α : Sort u} {β : α → Sort v} {f g : ∀ x, β x} (h : f = g) (a : α) : f a = g a :=\n  eq.subst h (eq.refl (f a))\n#align congr_fun congr_fun\n-/\n\n",
+ "#print congr_fun /-\ntheorem congr_fun {α : Sort u} {β : α → Sort v} {f g : ∀ x, β x} (h : f = g) (a : α) : f a = g a :=\n  Eq.subst h (Eq.refl (f a))\n#align congr_fun congr_fun\n-/\n\n",
  "congr_arg":
  "#print congr_arg /-\ntheorem congr_arg {α : Sort u} {β : Sort v} {a₁ a₂ : α} (f : α → β) : a₁ = a₂ → f a₁ = f a₂ :=\n  congr rfl\n#align congr_arg congr_arg\n-/\n\n",
  "congr":
- "#print congr /-\ntheorem congr {α : Sort u} {β : Sort v} {f₁ f₂ : α → β} {a₁ a₂ : α} (h₁ : f₁ = f₂) (h₂ : a₁ = a₂) : f₁ a₁ = f₂ a₂ :=\n  eq.subst h₁ (eq.subst h₂ rfl)\n#align congr congr\n-/\n\n",
+ "#print congr /-\ntheorem congr {α : Sort u} {β : Sort v} {f₁ f₂ : α → β} {a₁ a₂ : α} (h₁ : f₁ = f₂) (h₂ : a₁ = a₂) : f₁ a₁ = f₂ a₂ :=\n  Eq.subst h₁ (Eq.subst h₂ rfl)\n#align congr congr\n-/\n\n",
  "comm":
  "theorem iff.comm : (a ↔ b) ↔ (b ↔ a) :=\n  iff.intro iff.symm iff.symm\n#align iff.comm iff.comm\n\n",
  "cast_proof_irrel":
@@ -301,13 +301,13 @@
  "cast_eq":
  "#print cast_eq /-\ntheorem cast_eq {α : Sort u} (h : α = α) (a : α) : cast h a = a :=\n  rfl\n#align cast_eq cast_eq\n-/\n\n",
  "by_contradiction":
- "/- warning: by_contradiction clashes with classical.by_contradiction -> by_contradiction\nCase conversion may be inaccurate. Consider using '#align by_contradiction by_contradictionₓ'. -/\n#print by_contradiction /-\ntheorem by_contradiction [decidable p] (h : ¬p → false) : p :=\n  if h₁ : p then h₁ else false.rec _ (h h₁)\n#align by_contradiction by_contradiction\n-/\n\n",
+ "/- warning: by_contradiction clashes with classical.by_contradiction -> by_contradiction\nCase conversion may be inaccurate. Consider using '#align by_contradiction by_contradictionₓ'. -/\n#print by_contradiction /-\ntheorem by_contradiction [Decidable p] (h : ¬p → False) : p :=\n  if h₁ : p then h₁ else false.rec _ (h h₁)\n#align by_contradiction by_contradiction\n-/\n\n",
  "and_true_iff":
- "#print and_true_iff /-\n@[simp]\ntheorem and_true_iff (a : Prop) : a ∧ true ↔ a :=\n  and_iff_left trivial\n#align and_true and_true_iff\n-/\n\n",
+ "#print and_true_iff /-\n@[simp]\ntheorem and_true_iff (a : Prop) : a ∧ True ↔ a :=\n  and_iff_left trivial\n#align and_true and_true_iff\n-/\n\n",
  "and_self_iff":
  "#print and_self_iff /-\n@[simp]\ntheorem and_self_iff (a : Prop) : a ∧ a ↔ a :=\n  iff.intro And.left fun h => ⟨h, h⟩\n#align and_self and_self_iff\n-/\n\n",
  "and_not_self_iff":
- "#print and_not_self_iff /-\n@[simp]\ntheorem and_not_self_iff (a : Prop) : a ∧ ¬a ↔ false :=\n  iff_false_intro fun ⟨h₁, h₂⟩ => absurd h₁ h₂\n#align and_not_self and_not_self_iff\n-/\n\n",
+ "#print and_not_self_iff /-\n@[simp]\ntheorem and_not_self_iff (a : Prop) : a ∧ ¬a ↔ False :=\n  iff_false_intro fun ⟨h₁, h₂⟩ => absurd h₁ h₂\n#align and_not_self and_not_self_iff\n-/\n\n",
  "and_left_comm":
  "#print and_left_comm /-\ntheorem and_left_comm : a ∧ b ∧ c ↔ b ∧ a ∧ c :=\n  iff.trans (iff.symm and_assoc) (iff.trans (and_congr and_comm (iff.refl c)) and_assoc)\n#align and.left_comm and_left_comm\n-/\n\n",
  "and_implies":
@@ -317,7 +317,7 @@
  "and_iff_left":
  "theorem and_iff_left {a b : Prop} (hb : b) : a ∧ b ↔ a :=\n  iff.intro And.left fun ha => ⟨ha, hb⟩\n#align and_iff_left and_iff_leftₓ\n\n",
  "and_false_iff":
- "#print and_false_iff /-\n@[simp]\ntheorem and_false_iff (a : Prop) : a ∧ false ↔ false :=\n  iff_false_intro And.right\n#align and_false and_false_iff\n-/\n\n",
+ "#print and_false_iff /-\n@[simp]\ntheorem and_false_iff (a : Prop) : a ∧ False ↔ False :=\n  iff_false_intro And.right\n#align and_false and_false_iff\n-/\n\n",
  "and_congr_right":
  "#print and_congr_right /-\ntheorem and_congr_right (h : a → (b ↔ c)) : a ∧ b ↔ a ∧ c :=\n  iff.intro (fun ⟨ha, hb⟩ => ⟨ha, Iff.mp (h ha) hb⟩) fun ⟨ha, hc⟩ => ⟨ha, Iff.mpr (h ha) hc⟩\n#align and_congr_right and_congr_right\n-/\n\n",
  "and_congr":

@@ -1,9 +1,9 @@
 {"update_comp_eq_of_not_mem_range'":
- "theorem update_comp_eq_of_not_mem_range' {α β : Sort _} {γ : β → Sort _} [decidable_eq β] (g : ∀ b, γ b) {f : α → β}\n    {i : β} (a : γ i) (h : i ∉ Set.range f) : (fun j => (function.update g i a) (f j)) = fun j => g (f j) :=\n  update_comp_eq_of_forall_ne' _ _ fun x hx => h ⟨x, hx⟩\n#align update_comp_eq_of_not_mem_range' update_comp_eq_of_not_mem_range'\n\n",
+ "theorem update_comp_eq_of_not_mem_range' {α β : Sort _} {γ : β → Sort _} [DecidableEq β] (g : ∀ b, γ b) {f : α → β}\n    {i : β} (a : γ i) (h : i ∉ Set.range f) : (fun j => (Function.update g i a) (f j)) = fun j => g (f j) :=\n  update_comp_eq_of_forall_ne' _ _ fun x hx => h ⟨x, hx⟩\n#align update_comp_eq_of_not_mem_range' update_comp_eq_of_not_mem_range'\n\n",
  "update_comp_eq_of_not_mem_range":
- "/-- Non-dependent version of `function.update_comp_eq_of_not_mem_range'` -/\ntheorem update_comp_eq_of_not_mem_range {α β γ : Sort _} [decidable_eq β] (g : β → γ) {f : α → β} {i : β} (a : γ)\n    (h : i ∉ Set.range f) : function.update g i a ∘ f = g ∘ f :=\n  update_comp_eq_of_not_mem_range' g a h\n#align update_comp_eq_of_not_mem_range update_comp_eq_of_not_mem_range\n\n",
+ "/-- Non-dependent version of `function.update_comp_eq_of_not_mem_range'` -/\ntheorem update_comp_eq_of_not_mem_range {α β γ : Sort _} [DecidableEq β] (g : β → γ) {f : α → β} {i : β} (a : γ)\n    (h : i ∉ Set.range f) : Function.update g i a ∘ f = g ∘ f :=\n  update_comp_eq_of_not_mem_range' g a h\n#align update_comp_eq_of_not_mem_range update_comp_eq_of_not_mem_range\n\n",
  "univ_pi_piecewise":
- "theorem univ_pi_piecewise {ι : Type _} {α : ι → Type _} (s : set ι) (t : ∀ i, set (α i)) [∀ x, decidable (x ∈ s)] :\n    pi univ (s.piecewise t fun _ => univ) = pi s t := by simp\n#align univ_pi_piecewise univ_pi_piecewise\n\n",
+ "theorem univ_pi_piecewise {ι : Type _} {α : ι → Type _} (s : Set ι) (t : ∀ i, Set (α i)) [∀ x, Decidable (x ∈ s)] :\n    pi univ (s.piecewise t fun _ => univ) = pi s t := by simp\n#align univ_pi_piecewise univ_pi_piecewise\n\n",
  "union_union":
  "theorem surj_on.union_union (h₁ : SurjOn f s₁ t₁) (h₂ : SurjOn f s₂ t₂) : SurjOn f (s₁ ∪ s₂) (t₁ ∪ t₂) :=\n  (h₁.mono (subset_union_left _ _) (Subset.refl _)).union (h₂.mono (subset_union_right _ _) (Subset.refl _))\n#align surj_on.union_union surj_on.union_union\n\n",
  "union":
@@ -13,45 +13,45 @@
  "symm":
  "theorem bij_on.symm {g : β → α} (h : InvOn f g t s) (hf : BijOn f s t) : BijOn g t s :=\n  ⟨h.2.maps_to hf.surj_on, h.1.inj_on, h.2.surj_on hf.maps_to⟩\n#align bij_on.symm bij_on.symm\n\n",
  "surjective_maps_to_image_restrict":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\ntheorem surjective_maps_to_image_restrict (f : α → β) (s : set α) :\n    surjective ((mapsTo_image f s).restrict f s («expr '' » f s)) := fun ⟨y, x, hs, hxy⟩ => ⟨⟨x, hs⟩, subtype.ext hxy⟩\n#align surjective_maps_to_image_restrict surjective_maps_to_image_restrict\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\ntheorem surjective_maps_to_image_restrict (f : α → β) (s : Set α) :\n    surjective ((mapsTo_image f s).restrict f s («expr '' » f s)) := fun ⟨y, x, hs, hxy⟩ => ⟨⟨x, hs⟩, Subtype.ext hxy⟩\n#align surjective_maps_to_image_restrict surjective_maps_to_image_restrict\n\n",
  "surjective_iff_surj_on_univ":
  "theorem surjective_iff_surj_on_univ : surjective f ↔ SurjOn f univ univ := by simp [surjective, surj_on, subset_def]\n#align surjective_iff_surj_on_univ surjective_iff_surj_on_univ\n\n",
  "surj_on_singleton":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\n@[simp]\ntheorem surj_on_singleton : SurjOn f s {b} ↔ b ∈ «expr '' » f s :=\n  singleton_subset_iff\n#align surj_on_singleton surj_on_singleton\n\n",
  "surj_on_range":
- "theorem surj_on_range (h : semiconj f fa fb) (ha : surjective fa) : SurjOn fb (range f) (range f) :=\n  by\n  rw [← image_univ]\n  exact h.surj_on_image (ha.surj_on univ)\n#align surj_on_range surj_on_range\n\n",
+ "theorem surj_on_range (h : Semiconj f fa fb) (ha : surjective fa) : SurjOn fb (range f) (range f) :=\n  by\n  rw [← image_univ]\n  exact h.surj_on_image (ha.surj_on univ)\n#align surj_on_range surj_on_range\n\n",
  "surj_on_of_subsingleton'":
  "theorem surj_on_of_subsingleton' [subsingleton β] (f : α → β) (h : t.nonempty → s.nonempty) : SurjOn f s t :=\n  fun a ha => Subsingleton.mem_iff_nonempty.2 <| (h ⟨a, ha⟩).image _\n#align surj_on_of_subsingleton' surj_on_of_subsingleton'\n\n",
  "surj_on_of_subsingleton":
- "theorem surj_on_of_subsingleton [subsingleton α] (f : α → α) (s : set α) : SurjOn f s s :=\n  surjOn_of_subsingleton' _ id\n#align surj_on_of_subsingleton surj_on_of_subsingleton\n\n",
+ "theorem surj_on_of_subsingleton [subsingleton α] (f : α → α) (s : Set α) : SurjOn f s s :=\n  surjOn_of_subsingleton' _ id\n#align surj_on_of_subsingleton surj_on_of_subsingleton\n\n",
  "surj_on_image":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\ntheorem surj_on_image (h : semiconj f fa fb) (ha : SurjOn fa s t) : SurjOn fb («expr '' » f s) («expr '' » f t) :=\n  by\n  rintro y ⟨x, hxt, rfl⟩\n  rcases ha hxt with ⟨x, hxs, rfl⟩\n  rw [h x]\n  exact mem_image_of_mem _ (mem_image_of_mem _ hxs)\n#align surj_on_image surj_on_image\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\ntheorem surj_on_image (h : Semiconj f fa fb) (ha : SurjOn fa s t) : SurjOn fb («expr '' » f s) («expr '' » f t) :=\n  by\n  rintro y ⟨x, hxt, rfl⟩\n  rcases ha hxt with ⟨x, hxs, rfl⟩\n  rw [h x]\n  exact mem_image_of_mem _ (mem_image_of_mem _ hxs)\n#align surj_on_image surj_on_image\n\n",
  "surj_on_iff_surjective":
  "theorem surj_on_iff_surjective : SurjOn f s univ ↔ surjective (s.restrict f) :=\n  ⟨fun H b =>\n    let ⟨a, as, e⟩ := @H b trivial\n    ⟨⟨a, as⟩, e⟩,\n    fun H b _ =>\n    let ⟨⟨a, as⟩, e⟩ := H b\n    ⟨a, as, e⟩⟩\n#align surj_on_iff_surjective surj_on_iff_surjective\n\n",
  "surj_on_iff_exists_map_subtype":
- "theorem surj_on_iff_exists_map_subtype :\n    SurjOn f s t ↔ ∃ (t' : set β)(g : s → t'), t ⊆ t' ∧ surjective g ∧ ∀ x : s, f x = g x :=\n  ⟨fun h => ⟨_, (mapsTo_image f s).restrict f s _, h, surjective_mapsTo_image_restrict _ _, fun _ => rfl⟩,\n    fun ⟨t', g, htt', hg, hfg⟩ y hy =>\n    let ⟨x, hx⟩ := hg ⟨y, htt' hy⟩\n    ⟨x, x.2, by rw [hfg, hx, subtype.coe_mk]⟩⟩\n#align surj_on_iff_exists_map_subtype surj_on_iff_exists_map_subtype\n\n",
+ "theorem surj_on_iff_exists_map_subtype :\n    SurjOn f s t ↔ ∃ (t' : Set β)(g : s → t'), t ⊆ t' ∧ surjective g ∧ ∀ x : s, f x = g x :=\n  ⟨fun h => ⟨_, (mapsTo_image f s).restrict f s _, h, surjective_mapsTo_image_restrict _ _, fun _ => rfl⟩,\n    fun ⟨t', g, htt', hg, hfg⟩ y hy =>\n    let ⟨x, hx⟩ := hg ⟨y, htt' hy⟩\n    ⟨x, x.2, by rw [hfg, hx, Subtype.coe_mk]⟩⟩\n#align surj_on_iff_exists_map_subtype surj_on_iff_exists_map_subtype\n\n",
  "surj_on_iff_exists_bij_on_subset":
- "/- ./././Mathport/Syntax/Translate/Basic.lean:632:2: warning: expanding binder collection (s' «expr ⊆ » s) -/\ntheorem surj_on_iff_exists_bij_on_subset : SurjOn f s t ↔ ∃ (s' : _)(_ : s' ⊆ s), BijOn f s' t :=\n  by\n  constructor\n  · rcases eq_empty_or_nonempty t with (rfl | ht)\n    · exact fun _ => ⟨∅, empty_subset _, bij_on_empty f⟩\n    · intro h\n      haveI : nonempty α := ⟨Classical.choose (h.comap_nonempty ht)⟩\n      exact ⟨_, h.maps_to_inv_fun_on.image_subset, h.bij_on_subset⟩\n  · rintro ⟨s', hs', hfs'⟩\n    exact hfs'.surj_on.mono hs' (subset.refl _)\n#align surj_on_iff_exists_bij_on_subset surj_on_iff_exists_bij_on_subset\n\n",
+ "/- ./././Mathport/Syntax/Translate/Basic.lean:635:2: warning: expanding binder collection (s' «expr ⊆ » s) -/\ntheorem surj_on_iff_exists_bij_on_subset : SurjOn f s t ↔ ∃ (s' : _)(_ : s' ⊆ s), BijOn f s' t :=\n  by\n  constructor\n  · rcases eq_empty_or_nonempty t with (rfl | ht)\n    · exact fun _ => ⟨∅, empty_subset _, bij_on_empty f⟩\n    · intro h\n      haveI : Nonempty α := ⟨Classical.choose (h.comap_nonempty ht)⟩\n      exact ⟨_, h.maps_to_inv_fun_on.image_subset, h.bij_on_subset⟩\n  · rintro ⟨s', hs', hfs'⟩\n    exact hfs'.surj_on.mono hs' (subset.refl _)\n#align surj_on_iff_exists_bij_on_subset surj_on_iff_exists_bij_on_subset\n\n",
  "surj_on_iff":
  "theorem eq_on.surj_on_iff (h : EqOn f₁ f₂ s) : SurjOn f₁ s t ↔ SurjOn f₂ s t :=\n  ⟨fun H => H.congr h, fun H => H.congr h.symm⟩\n#align eq_on.surj_on_iff eq_on.surj_on_iff\n\n",
  "surj_on_id":
- "theorem surj_on_id (s : set α) : SurjOn id s s := by simp [surj_on]\n#align surj_on_id surj_on_id\n\n",
+ "theorem surj_on_id (s : Set α) : SurjOn id s s := by simp [surj_on]\n#align surj_on_id surj_on_id\n\n",
  "surj_on_empty":
- "theorem surj_on_empty (f : α → β) (s : set α) : SurjOn f s ∅ :=\n  empty_subset _\n#align surj_on_empty surj_on_empty\n\n",
+ "theorem surj_on_empty (f : α → β) (s : Set α) : SurjOn f s ∅ :=\n  empty_subset _\n#align surj_on_empty surj_on_empty\n\n",
  "surj_on_compl":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\ntheorem maps_to.surj_on_compl (h : MapsTo f s t) (h' : surjective f) : SurjOn f («expr ᶜ» s) («expr ᶜ» t) :=\n  h'.forall.2 fun x ht => mem_image_of_mem _ fun hs => ht (h hs)\n#align maps_to.surj_on_compl maps_to.surj_on_compl\n\n",
  "surj_on":
- "theorem surjective.surj_on (hf : surjective f) (s : set β) : SurjOn f univ s :=\n  (surjective_iff_surjOn_univ.1 hf).mono (Subset.refl _) (subset_univ _)\n#align surjective.surj_on surjective.surj_on\n\n",
+ "theorem surjective.surj_on (hf : surjective f) (s : Set β) : SurjOn f univ s :=\n  (surjective_iff_surjOn_univ.1 hf).mono (Subset.refl _) (subset_univ _)\n#align surjective.surj_on surjective.surj_on\n\n",
  "subset_range":
  "theorem bij_on.subset_range (h : BijOn f s t) : t ⊆ range f :=\n  h.surj_on.subset_range\n#align bij_on.subset_range bij_on.subset_range\n\n",
  "subset_preimage":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\ntheorem maps_to.subset_preimage {f : α → β} {s : set α} {t : set β} (hf : MapsTo f s t) : s ⊆ «expr ⁻¹' » f t :=\n  hf\n#align maps_to.subset_preimage maps_to.subset_preimage\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\ntheorem maps_to.subset_preimage {f : α → β} {s : Set α} {t : Set β} (hf : MapsTo f s t) : s ⊆ «expr ⁻¹' » f t :=\n  hf\n#align maps_to.subset_preimage maps_to.subset_preimage\n\n",
  "strict_mono":
- "#print StrictMonoOn.strictMono /-\nprotected theorem StrictMonoOn.strictMono (h : strict_mono_on f s) : strict_mono (f ∘ coe : s → β) := fun x y hlt =>\n  h x.coe_prop y.coe_prop hlt\n#align strict_mono_on.strict_mono StrictMonoOn.strictMono\n-/\n\n",
+ "#print StrictMonoOn.strictMono /-\nprotected theorem StrictMonoOn.strictMono (h : StrictMonoOn f s) : StrictMono (f ∘ coe : s → β) := fun x y hlt =>\n  h x.coe_prop y.coe_prop hlt\n#align strict_mono_on.strict_mono StrictMonoOn.strictMono\n-/\n\n",
  "strict_anti":
- "#print StrictAntiOn.strictAnti /-\nprotected theorem StrictAntiOn.strictAnti (h : strict_anti_on f s) : strict_anti (f ∘ coe : s → β) := fun x y hlt =>\n  h x.coe_prop y.coe_prop hlt\n#align strict_anti_on.strict_anti StrictAntiOn.strictAnti\n-/\n\n",
+ "#print StrictAntiOn.strictAnti /-\nprotected theorem StrictAntiOn.strictAnti (h : StrictAntiOn f s) : StrictAnti (f ∘ coe : s → β) := fun x y hlt =>\n  h x.coe_prop y.coe_prop hlt\n#align strict_anti_on.strict_anti StrictAntiOn.strictAnti\n-/\n\n",
  "strictMono_restrict":
- "#print strictMono_restrict /-\n@[simp]\ntheorem strictMono_restrict [preorder α] [preorder β] {f : α → β} {s : set α} :\n    strict_mono (s.restrict f) ↔ strict_mono_on f s := by simp [Set.restrict, strict_mono, strict_mono_on]\n#align strict_mono_restrict strictMono_restrict\n-/\n\n",
+ "#print strictMono_restrict /-\n@[simp]\ntheorem strictMono_restrict [preorder α] [preorder β] {f : α → β} {s : Set α} :\n    StrictMono (s.restrict f) ↔ StrictMonoOn f s := by simp [Set.restrict, StrictMono, StrictMonoOn]\n#align strict_mono_restrict strictMono_restrict\n-/\n\n",
  "right_inv_on_singleton":
  "@[simp]\ntheorem right_inv_on_singleton : RightInvOn f' f {b} ↔ f (f' b) = b :=\n  singleton_subset_iff\n#align right_inv_on_singleton right_inv_on_singleton\n\n",
  "right_inv_on_range":
@@ -59,29 +59,29 @@
  "right_inv_on_of_left_inv_on":
  "theorem inj_on.right_inv_on_of_left_inv_on (hf : InjOn f s) (hf' : LeftInvOn f f' t) (h₁ : MapsTo f s t)\n    (h₂ : MapsTo f' t s) : RightInvOn f f' s := fun x h => hf (h₂ <| h₁ h) h (hf' (h₁ h))\n#align inj_on.right_inv_on_of_left_inv_on inj_on.right_inv_on_of_left_inv_on\n\n",
  "right_inv_on_inv_fun_on":
- "theorem surj_on.right_inv_on_inv_fun_on [nonempty α] (h : SurjOn f s t) : RightInvOn (invFunOn f s) f t := fun y hy =>\n  inv_fun_on_eq <| mem_image_iff_bex.1 <| h hy\n#align surj_on.right_inv_on_inv_fun_on surj_on.right_inv_on_inv_fun_on\n\n",
+ "theorem surj_on.right_inv_on_inv_fun_on [Nonempty α] (h : SurjOn f s t) : RightInvOn (invFunOn f s) f t := fun y hy =>\n  invFunOn_eq <| mem_image_iff_bex.1 <| h hy\n#align surj_on.right_inv_on_inv_fun_on surj_on.right_inv_on_inv_fun_on\n\n",
  "right_inv_on_image":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\ntheorem left_inv_on.right_inv_on_image (h : LeftInvOn f' f s) : RightInvOn f' f («expr '' » f s) := fun y ⟨x, hx, eq⟩ =>\n  eq ▸ congr_arg f <| h.eq hx\n#align left_inv_on.right_inv_on_image left_inv_on.right_inv_on_image\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\ntheorem left_inv_on.right_inv_on_image (h : LeftInvOn f' f s) : RightInvOn f' f («expr '' » f s) := fun y ⟨x, hx, Eq⟩ =>\n  Eq ▸ congr_arg f <| h.eq hx\n#align left_inv_on.right_inv_on_image left_inv_on.right_inv_on_image\n\n",
  "right_inv_on_id":
- "theorem right_inv_on_id (s : set α) : RightInvOn id id s := fun a _ => rfl\n#align right_inv_on_id right_inv_on_id\n\n",
+ "theorem right_inv_on_id (s : Set α) : RightInvOn id id s := fun a _ => rfl\n#align right_inv_on_id right_inv_on_id\n\n",
  "right_inv_on_empty":
  "@[simp]\ntheorem right_inv_on_empty (f' : β → α) (f : α → β) : RightInvOn f' f ∅ :=\n  empty_subset _\n#align right_inv_on_empty right_inv_on_empty\n\n",
  "right_inv_on":
- "theorem right_inverse.right_inv_on {g : β → α} (h : right_inverse f g) (s : set α) : RightInvOn f g s := fun x hx => h x\n#align right_inverse.right_inv_on right_inverse.right_inv_on\n\n",
+ "theorem right_inverse.right_inv_on {g : β → α} (h : right_inverse f g) (s : Set α) : RightInvOn f g s := fun x hx => h x\n#align right_inverse.right_inv_on right_inverse.right_inv_on\n\n",
  "restrict_preimage_surjective":
- "theorem restrict_preimage_surjective (hf : surjective f) : surjective (t.restrict_preimage f) := fun x =>\n  ⟨⟨_, show f (hf x).some ∈ t from (hf x).some_spec.symm ▸ x.2⟩, subtype.ext (hf x).some_spec⟩\n#align restrict_preimage_surjective restrict_preimage_surjective\n\n",
+ "theorem restrict_preimage_surjective (hf : surjective f) : surjective (t.restrict_preimage f) := fun x =>\n  ⟨⟨_, show f (hf x).some ∈ t from (hf x).some_spec.symm ▸ x.2⟩, Subtype.ext (hf x).some_spec⟩\n#align restrict_preimage_surjective restrict_preimage_surjective\n\n",
  "restrict_preimage_injective":
- "theorem restrict_preimage_injective (hf : injective f) : injective (t.restrict_preimage f) := fun x y e =>\n  subtype.mk.inj_arrow e fun e => subtype.coe_injective (hf e)\n#align restrict_preimage_injective restrict_preimage_injective\n\n",
+ "theorem restrict_preimage_injective (hf : injective f) : injective (t.restrict_preimage f) := fun x y e =>\n  subtype.mk.inj_arrow e fun e => Subtype.coe_injective (hf e)\n#align restrict_preimage_injective restrict_preimage_injective\n\n",
  "restrict_preimage_bijective":
  "theorem restrict_preimage_bijective (hf : bijective f) : bijective (t.restrict_preimage f) :=\n  ⟨t.restrict_preimage_injective hf.1, t.restrict_preimage_surjective hf.2⟩\n#align restrict_preimage_bijective restrict_preimage_bijective\n\n",
  "restrict_piecewise_compl":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\n@[simp]\ntheorem restrict_piecewise_compl (f g : α → β) (s : set α) [∀ x, decidable (x ∈ s)] :\n    («expr ᶜ» s).restrict (piecewise s f g) = («expr ᶜ» s).restrict g :=\n  restrict_ite_compl _ _ _\n#align restrict_piecewise_compl restrict_piecewise_compl\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\n@[simp]\ntheorem restrict_piecewise_compl (f g : α → β) (s : Set α) [∀ x, Decidable (x ∈ s)] :\n    («expr ᶜ» s).restrict (piecewise s f g) = («expr ᶜ» s).restrict g :=\n  restrict_ite_compl _ _ _\n#align restrict_piecewise_compl restrict_piecewise_compl\n\n",
  "restrict_piecewise":
- "@[simp]\ntheorem restrict_piecewise (f g : α → β) (s : set α) [∀ x, decidable (x ∈ s)] :\n    s.restrict (piecewise s f g) = s.restrict f :=\n  restrict_ite _ _ _\n#align restrict_piecewise restrict_piecewise\n\n",
+ "@[simp]\ntheorem restrict_piecewise (f g : α → β) (s : Set α) [∀ x, Decidable (x ∈ s)] :\n    s.restrict (piecewise s f g) = s.restrict f :=\n  restrict_ite _ _ _\n#align restrict_piecewise restrict_piecewise\n\n",
  "restrict_ite_compl":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\n@[simp]\ntheorem restrict_ite_compl (f g : α → β) (s : set α) [∀ x, decidable (x ∈ s)] :\n    ((«expr ᶜ» s).restrict fun a => if a ∈ s then f a else g a) = («expr ᶜ» s).restrict g :=\n  restrict_dite_compl _ _\n#align restrict_ite_compl restrict_ite_compl\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\n@[simp]\ntheorem restrict_ite_compl (f g : α → β) (s : Set α) [∀ x, Decidable (x ∈ s)] :\n    ((«expr ᶜ» s).restrict fun a => if a ∈ s then f a else g a) = («expr ᶜ» s).restrict g :=\n  restrict_dite_compl _ _\n#align restrict_ite_compl restrict_ite_compl\n\n",
  "restrict_ite":
- "@[simp]\ntheorem restrict_ite (f g : α → β) (s : set α) [∀ x, decidable (x ∈ s)] :\n    (s.restrict fun a => if a ∈ s then f a else g a) = s.restrict f :=\n  restrict_dite _ _\n#align restrict_ite restrict_ite\n\n",
+ "@[simp]\ntheorem restrict_ite (f g : α → β) (s : Set α) [∀ x, Decidable (x ∈ s)] :\n    (s.restrict fun a => if a ∈ s then f a else g a) = s.restrict f :=\n  restrict_dite _ _\n#align restrict_ite restrict_ite\n\n",
  "restrict_inj":
  "theorem maps_to.restrict_inj (h : MapsTo f s t) : injective (h.restrict f s t) ↔ InjOn f s := by\n  rw [h.restrict_eq_cod_restrict, injective_cod_restrict, inj_on_iff_injective]\n#align maps_to.restrict_inj maps_to.restrict_inj\n\n",
  "restrict_extend_range":
@@ -91,47 +91,47 @@
  "restrict_eq_restrict_iff":
  "@[simp]\ntheorem restrict_eq_restrict_iff : restrict s f₁ = restrict s f₂ ↔ EqOn f₁ f₂ s :=\n  restrict_eq_iff\n#align restrict_eq_restrict_iff restrict_eq_restrict_iff\n\n",
  "restrict_eq_iff":
- "theorem restrict_eq_iff {f : ∀ a, π a} {s : set α} {g : ∀ a : s, π a} :\n    restrict s f = g ↔ ∀ (a) (ha : a ∈ s), f a = g ⟨a, ha⟩ :=\n  funext_iff.trans subtype.forall\n#align restrict_eq_iff restrict_eq_iff\n\n",
+ "theorem restrict_eq_iff {f : ∀ a, π a} {s : Set α} {g : ∀ a : s, π a} :\n    restrict s f = g ↔ ∀ (a) (ha : a ∈ s), f a = g ⟨a, ha⟩ :=\n  funext_iff.trans Subtype.forall\n#align restrict_eq_iff restrict_eq_iff\n\n",
  "restrict_eq_cod_restrict":
  "/-- Reverse of `set.cod_restrict_restrict`. -/\ntheorem maps_to.restrict_eq_cod_restrict (h : MapsTo f s t) :\n    h.restrict f s t = codRestrict (s.restrict f) t fun x => h x.2 :=\n  rfl\n#align maps_to.restrict_eq_cod_restrict maps_to.restrict_eq_cod_restrict\n\n",
  "restrict_eq":
- "/-\nCopyright (c) 2014 Jeremy Avigad. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Jeremy Avigad, Andrew Zipperer, Haitao Zhang, Minchao Wu, Yury Kudryashov\n-/\ntheorem restrict_eq (f : α → β) (s : set α) : s.restrict f = f ∘ coe :=\n  rfl\n#align restrict_eq restrict_eq\n\n",
+ "/-\nCopyright (c) 2014 Jeremy Avigad. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Jeremy Avigad, Andrew Zipperer, Haitao Zhang, Minchao Wu, Yury Kudryashov\n-/\ntheorem restrict_eq (f : α → β) (s : Set α) : s.restrict f = f ∘ coe :=\n  rfl\n#align restrict_eq restrict_eq\n\n",
  "restrict_dite_compl":
- "/- ./././Mathport/Syntax/Translate/Basic.lean:632:2: warning: expanding binder collection (a «expr ∉ » s) -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\n@[simp]\ntheorem restrict_dite_compl {s : set α} [∀ x, decidable (x ∈ s)] (f : ∀ a ∈ s, β) (g : ∀ (a) (_ : a ∉ s), β) :\n    ((«expr ᶜ» s).restrict fun a => if h : a ∈ s then f a h else g a h) = fun a => g a a.2 :=\n  funext fun a => dif_neg a.2\n#align restrict_dite_compl restrict_dite_compl\n\n",
+ "/- ./././Mathport/Syntax/Translate/Basic.lean:635:2: warning: expanding binder collection (a «expr ∉ » s) -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\n@[simp]\ntheorem restrict_dite_compl {s : Set α} [∀ x, Decidable (x ∈ s)] (f : ∀ a ∈ s, β) (g : ∀ (a) (_ : a ∉ s), β) :\n    ((«expr ᶜ» s).restrict fun a => if h : a ∈ s then f a h else g a h) = fun a => g a a.2 :=\n  funext fun a => dif_neg a.2\n#align restrict_dite_compl restrict_dite_compl\n\n",
  "restrict_dite":
- "/- ./././Mathport/Syntax/Translate/Basic.lean:632:2: warning: expanding binder collection (a «expr ∉ » s) -/\n@[simp]\ntheorem restrict_dite {s : set α} [∀ x, decidable (x ∈ s)] (f : ∀ a ∈ s, β) (g : ∀ (a) (_ : a ∉ s), β) :\n    (s.restrict fun a => if h : a ∈ s then f a h else g a h) = fun a => f a a.2 :=\n  funext fun a => dif_pos a.2\n#align restrict_dite restrict_dite\n\n",
+ "/- ./././Mathport/Syntax/Translate/Basic.lean:635:2: warning: expanding binder collection (a «expr ∉ » s) -/\n@[simp]\ntheorem restrict_dite {s : Set α} [∀ x, Decidable (x ∈ s)] (f : ∀ a ∈ s, β) (g : ∀ (a) (_ : a ∉ s), β) :\n    (s.restrict fun a => if h : a ∈ s then f a h else g a h) = fun a => f a a.2 :=\n  funext fun a => dif_pos a.2\n#align restrict_dite restrict_dite\n\n",
  "restrict_comp_cod_restrict":
- "@[simp]\ntheorem restrict_comp_cod_restrict {f : ι → α} {g : α → β} {b : set α} (h : ∀ x, f x ∈ b) :\n    b.restrict g ∘ b.cod_restrict f h = g ∘ f :=\n  rfl\n#align restrict_comp_cod_restrict restrict_comp_cod_restrict\n\n",
+ "@[simp]\ntheorem restrict_comp_cod_restrict {f : ι → α} {g : α → β} {b : Set α} (h : ∀ x, f x ∈ b) :\n    b.restrict g ∘ b.cod_restrict f h = g ∘ f :=\n  rfl\n#align restrict_comp_cod_restrict restrict_comp_cod_restrict\n\n",
  "restrict_apply":
- "@[simp]\ntheorem restrict_apply (f : α → β) (s : set α) (x : s) : s.restrict f x = f x :=\n  rfl\n#align restrict_apply restrict_apply\n\n",
+ "@[simp]\ntheorem restrict_apply (f : α → β) (s : Set α) (x : s) : s.restrict f x = f x :=\n  rfl\n#align restrict_apply restrict_apply\n\n",
  "restrict":
- "protected theorem restrict (h : monotone f) (s : set α) : monotone (s.restrict f) := fun x y hxy => h hxy\n#align restrict restrict\n\n",
+ "protected theorem restrict (h : Monotone f) (s : Set α) : Monotone (s.restrict f) := fun x y hxy => h hxy\n#align restrict restrict\n\n",
  "range_restrict_preimage":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\ntheorem range_restrict_preimage : range (t.restrict_preimage f) = «expr ⁻¹' » coe (range f) :=\n  by\n  delta Set.restrictPreimage\n  rw [maps_to.range_restrict, Set.image_preimage_eq_inter_range, Set.preimage_inter, Subtype.coe_preimage_self,\n    Set.univ_inter]\n#align range_restrict_preimage range_restrict_preimage\n\n",
  "range_restrict":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\ntheorem maps_to.range_restrict (f : α → β) (s : set α) (t : set β) (h : MapsTo f s t) :\n    range (h.restrict f s t) = «expr ⁻¹' » coe («expr '' » f s) :=\n  Set.range_subtype_map f h\n#align maps_to.range_restrict maps_to.range_restrict\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\ntheorem maps_to.range_restrict (f : α → β) (s : Set α) (t : Set β) (h : MapsTo f s t) :\n    range (h.restrict f s t) = «expr ⁻¹' » coe («expr '' » f s) :=\n  Set.range_subtype_map f h\n#align maps_to.range_restrict maps_to.range_restrict\n\n",
  "range_piecewise":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\ntheorem range_piecewise (f g : α → β) : range (s.piecewise f g) = «expr '' » f s ∪ «expr '' » g («expr ᶜ» s) :=\n  by\n  ext y; constructor\n  · rintro ⟨x, rfl⟩\n    by_cases h : x ∈ s <;> [left, right] <;> use x <;> simp [h]\n  · rintro (⟨x, hx, rfl⟩ | ⟨x, hx, rfl⟩) <;> use x <;> simp_all\n#align range_piecewise range_piecewise\n\n",
  "range_factorization":
- "protected theorem range_factorization (h : monotone f) : monotone (Set.rangeFactorization f) :=\n  h\n#align range_factorization range_factorization\n\n",
+ "protected theorem range_factorization (h : Monotone f) : Monotone (Set.rangeFactorization f) :=\n  h\n#align range_factorization range_factorization\n\n",
  "range_extend_subset":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\ntheorem range_extend_subset (f : α → β) (g : α → γ) (g' : β → γ) :\n    range (extend f g g') ⊆ range g ∪ «expr '' » g' («expr ᶜ» (range f)) := by\n  classical\n    rintro _ ⟨y, rfl⟩\n    rw [extend_def]\n    split_ifs\n    exacts[or.inl (mem_range_self _), or.inr (mem_image_of_mem _ h)]\n#align range_extend_subset range_extend_subset\n\n",
  "range_extend":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\ntheorem range_extend {f : α → β} (hf : injective f) (g : α → γ) (g' : β → γ) :\n    range (extend f g g') = range g ∪ «expr '' » g' («expr ᶜ» (range f)) :=\n  by\n  refine' (range_extend_subset _ _ _).antisymm _\n  rintro z (⟨x, rfl⟩ | ⟨y, hy, rfl⟩)\n  exacts[⟨f x, hf.extend_apply _ _ _⟩, ⟨y, extend_apply' _ _ _ hy⟩]\n#align range_extend range_extend\n\n",
  "preimage_inv_fun_of_not_mem":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\ntheorem preimage_inv_fun_of_not_mem [n : nonempty α] {f : α → β} (hf : injective f) {s : set α}\n    (h : classical.choice n ∉ s) : «expr ⁻¹' » (inv_fun f) s = «expr '' » f s :=\n  by\n  ext x\n  rcases em (x ∈ range f) with (⟨a, rfl⟩ | hx)\n  · rw [mem_preimage, left_inverse_inv_fun hf, hf.mem_set_image]\n  · have : x ∉ «expr '' » f s := fun h' => hx (image_subset_range _ _ h')\n    simp only [mem_preimage, inv_fun_neg hx, h, this]\n#align preimage_inv_fun_of_not_mem preimage_inv_fun_of_not_mem\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\ntheorem preimage_inv_fun_of_not_mem [n : Nonempty α] {f : α → β} (hf : injective f) {s : Set α}\n    (h : Classical.choice n ∉ s) : «expr ⁻¹' » (invFun f) s = «expr '' » f s :=\n  by\n  ext x\n  rcases em (x ∈ range f) with (⟨a, rfl⟩ | hx)\n  · rw [mem_preimage, left_inverse_inv_fun hf, hf.mem_set_image]\n  · have : x ∉ «expr '' » f s := fun h' => hx (image_subset_range _ _ h')\n    simp only [mem_preimage, inv_fun_neg hx, h, this]\n#align preimage_inv_fun_of_not_mem preimage_inv_fun_of_not_mem\n\n",
  "preimage_inv_fun_of_mem":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\ntheorem preimage_inv_fun_of_mem [n : nonempty α] {f : α → β} (hf : injective f) {s : set α}\n    (h : classical.choice n ∈ s) : «expr ⁻¹' » (inv_fun f) s = «expr '' » f s ∪ «expr ᶜ» (range f) :=\n  by\n  ext x\n  rcases em (x ∈ range f) with (⟨a, rfl⟩ | hx)\n  · simp [left_inverse_inv_fun hf _, hf.mem_set_image]\n  · simp [mem_preimage, inv_fun_neg hx, h, hx]\n#align preimage_inv_fun_of_mem preimage_inv_fun_of_mem\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\ntheorem preimage_inv_fun_of_mem [n : Nonempty α] {f : α → β} (hf : injective f) {s : Set α}\n    (h : Classical.choice n ∈ s) : «expr ⁻¹' » (invFun f) s = «expr '' » f s ∪ «expr ᶜ» (range f) :=\n  by\n  ext x\n  rcases em (x ∈ range f) with (⟨a, rfl⟩ | hx)\n  · simp [left_inverse_inv_fun hf _, hf.mem_set_image]\n  · simp [mem_preimage, inv_fun_neg hx, h, hx]\n#align preimage_inv_fun_of_mem preimage_inv_fun_of_mem\n\n",
  "preimage_image_inter":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\ntheorem inj_on.preimage_image_inter (hf : InjOn f s) (hs : s₁ ⊆ s) : «expr ⁻¹' » f («expr '' » f s₁) ∩ s = s₁ :=\n  ext fun x => ⟨fun ⟨h₁, h₂⟩ => hf.mem_of_mem_image hs h₂ h₁, fun h => ⟨mem_image_of_mem _ h, hs h⟩⟩\n#align inj_on.preimage_image_inter inj_on.preimage_image_inter\n\n",
  "piecewise_univ":
- "@[simp]\ntheorem piecewise_univ [∀ i : α, decidable (i ∈ (Set.univ : set α))] : piecewise Set.univ f g = f :=\n  by\n  ext i\n  simp [piecewise]\n#align piecewise_univ piecewise_univ\n\n",
+ "@[simp]\ntheorem piecewise_univ [∀ i : α, Decidable (i ∈ (Set.univ : Set α))] : piecewise Set.univ f g = f :=\n  by\n  ext i\n  simp [piecewise]\n#align piecewise_univ piecewise_univ\n\n",
  "piecewise_singleton":
- "theorem piecewise_singleton (x : α) [∀ y, decidable (y ∈ ({x} : set α))] [decidable_eq α] (f g : α → β) :\n    piecewise {x} f g = function.update g x (f x) := by\n  ext y\n  by_cases hy : y = x\n  · subst y\n    simp\n  · simp [hy]\n#align piecewise_singleton piecewise_singleton\n\n",
+ "theorem piecewise_singleton (x : α) [∀ y, Decidable (y ∈ ({x} : Set α))] [DecidableEq α] (f g : α → β) :\n    piecewise {x} f g = Function.update g x (f x) := by\n  ext y\n  by_cases hy : y = x\n  · subst y\n    simp\n  · simp [hy]\n#align piecewise_singleton piecewise_singleton\n\n",
  "piecewise_same":
  "@[simp]\ntheorem piecewise_same : s.piecewise f f = f := by\n  ext x\n  by_cases hx : x ∈ s <;> simp [hx]\n#align piecewise_same piecewise_same\n\n",
  "piecewise_range_comp":
- "@[simp]\ntheorem piecewise_range_comp {ι : Sort _} (f : ι → α) [∀ j, decidable (j ∈ range f)] (g₁ g₂ : α → β) :\n    (range f).piecewise g₁ g₂ ∘ f = g₁ ∘ f :=\n  eq_on.comp_eq <| piecewise_eqOn _ _ _\n#align piecewise_range_comp piecewise_range_comp\n\n",
+ "@[simp]\ntheorem piecewise_range_comp {ι : Sort _} (f : ι → α) [∀ j, Decidable (j ∈ range f)] (g₁ g₂ : α → β) :\n    (range f).piecewise g₁ g₂ ∘ f = g₁ ∘ f :=\n  EqOn.comp_eq <| piecewise_eqOn _ _ _\n#align piecewise_range_comp piecewise_range_comp\n\n",
  "piecewise_preimage":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\ntheorem piecewise_preimage (f g : α → β) (t) :\n    «expr ⁻¹' » (s.piecewise f g) t = s.ite («expr ⁻¹' » f t) («expr ⁻¹' » g t) :=\n  ext fun x => by by_cases x ∈ s <;> simp [*, Set.ite]\n#align piecewise_preimage piecewise_preimage\n\n",
  "piecewise_op₂":
@@ -139,21 +139,21 @@
  "piecewise_op":
  "theorem piecewise_op {δ' : α → Sort _} (h : ∀ i, δ i → δ' i) :\n    (s.piecewise (fun x => h x (f x)) fun x => h x (g x)) = fun x => h x (s.piecewise f g x) :=\n  funext fun x => (apply_piecewise _ _ _ _).symm\n#align piecewise_op piecewise_op\n\n",
  "piecewise_mem_pi":
- "theorem piecewise_mem_pi {δ : α → Type _} {t : set α} {t' : ∀ i, set (δ i)} {f g} (hf : f ∈ pi t t')\n    (hg : g ∈ pi t t') : s.piecewise f g ∈ pi t t' := by\n  intro i ht\n  by_cases hs : i ∈ s <;> simp [hf i ht, hg i ht, hs]\n#align piecewise_mem_pi piecewise_mem_pi\n\n",
+ "theorem piecewise_mem_pi {δ : α → Type _} {t : Set α} {t' : ∀ i, Set (δ i)} {f g} (hf : f ∈ pi t t')\n    (hg : g ∈ pi t t') : s.piecewise f g ∈ pi t t' := by\n  intro i ht\n  by_cases hs : i ∈ s <;> simp [hf i ht, hg i ht, hs]\n#align piecewise_mem_pi piecewise_mem_pi\n\n",
  "piecewise_le_piecewise":
- "/- ./././Mathport/Syntax/Translate/Basic.lean:632:2: warning: expanding binder collection (i «expr ∉ » s) -/\ntheorem piecewise_le_piecewise {δ : α → Type _} [∀ i, preorder (δ i)] {s : set α} [∀ j, decidable (j ∈ s)]\n    {f₁ f₂ g₁ g₂ : ∀ i, δ i} (h₁ : ∀ i ∈ s, f₁ i ≤ g₁ i) (h₂ : ∀ (i) (_ : i ∉ s), f₂ i ≤ g₂ i) :\n    s.piecewise f₁ f₂ ≤ s.piecewise g₁ g₂ := by apply piecewise_le <;> intros <;> simp [*]\n#align piecewise_le_piecewise piecewise_le_piecewise\n\n",
+ "/- ./././Mathport/Syntax/Translate/Basic.lean:635:2: warning: expanding binder collection (i «expr ∉ » s) -/\ntheorem piecewise_le_piecewise {δ : α → Type _} [∀ i, preorder (δ i)] {s : Set α} [∀ j, Decidable (j ∈ s)]\n    {f₁ f₂ g₁ g₂ : ∀ i, δ i} (h₁ : ∀ i ∈ s, f₁ i ≤ g₁ i) (h₂ : ∀ (i) (_ : i ∉ s), f₂ i ≤ g₂ i) :\n    s.piecewise f₁ f₂ ≤ s.piecewise g₁ g₂ := by apply piecewise_le <;> intros <;> simp [*]\n#align piecewise_le_piecewise piecewise_le_piecewise\n\n",
  "piecewise_le":
- "/- ./././Mathport/Syntax/Translate/Basic.lean:632:2: warning: expanding binder collection (i «expr ∉ » s) -/\ntheorem piecewise_le {δ : α → Type _} [∀ i, preorder (δ i)] {s : set α} [∀ j, decidable (j ∈ s)] {f₁ f₂ g : ∀ i, δ i}\n    (h₁ : ∀ i ∈ s, f₁ i ≤ g i) (h₂ : ∀ (i) (_ : i ∉ s), f₂ i ≤ g i) : s.piecewise f₁ f₂ ≤ g := fun i =>\n  if h : i ∈ s then by simp [*] else by simp [*]\n#align piecewise_le piecewise_le\n\n",
+ "/- ./././Mathport/Syntax/Translate/Basic.lean:635:2: warning: expanding binder collection (i «expr ∉ » s) -/\ntheorem piecewise_le {δ : α → Type _} [∀ i, preorder (δ i)] {s : Set α} [∀ j, Decidable (j ∈ s)] {f₁ f₂ g : ∀ i, δ i}\n    (h₁ : ∀ i ∈ s, f₁ i ≤ g i) (h₂ : ∀ (i) (_ : i ∉ s), f₂ i ≤ g i) : s.piecewise f₁ f₂ ≤ g := fun i =>\n  if h : i ∈ s then by simp [*] else by simp [*]\n#align piecewise_le piecewise_le\n\n",
  "piecewise_ite'":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\ntheorem eq_on.piecewise_ite' {f f' g : α → β} {t t'} (h : EqOn f g (t ∩ s)) (h' : EqOn f' g (t' ∩ «expr ᶜ» s)) :\n    EqOn (s.piecewise f f') g (s.ite t t') := by simp [eq_on_piecewise, *]\n#align eq_on.piecewise_ite' eq_on.piecewise_ite'\n\n",
  "piecewise_ite":
  "theorem eq_on.piecewise_ite {f f' g : α → β} {t t'} (h : EqOn f g t) (h' : EqOn f' g t') :\n    EqOn (s.piecewise f f') g (s.ite t t') :=\n  (h.mono (inter_subset_left _ _)).piecewise_ite' s (h'.mono (inter_subset_left _ _))\n#align eq_on.piecewise_ite eq_on.piecewise_ite\n\n",
  "piecewise_insert_self":
- "@[simp]\ntheorem piecewise_insert_self {j : α} [∀ i, decidable (i ∈ insert j s)] : (insert j s).piecewise f g j = f j := by\n  simp [piecewise]\n#align piecewise_insert_self piecewise_insert_self\n\n",
+ "@[simp]\ntheorem piecewise_insert_self {j : α} [∀ i, Decidable (i ∈ insert j s)] : (insert j s).piecewise f g j = f j := by\n  simp [piecewise]\n#align piecewise_insert_self piecewise_insert_self\n\n",
  "piecewise_insert_of_ne":
- "@[simp]\ntheorem piecewise_insert_of_ne {i j : α} (h : i ≠ j) [∀ i, decidable (i ∈ insert j s)] :\n    (insert j s).piecewise f g i = s.piecewise f g i := by simp [piecewise, h]\n#align piecewise_insert_of_ne piecewise_insert_of_ne\n\n",
+ "@[simp]\ntheorem piecewise_insert_of_ne {i j : α} (h : i ≠ j) [∀ i, Decidable (i ∈ insert j s)] :\n    (insert j s).piecewise f g i = s.piecewise f g i := by simp [piecewise, h]\n#align piecewise_insert_of_ne piecewise_insert_of_ne\n\n",
  "piecewise_insert":
- "theorem piecewise_insert [decidable_eq α] (j : α) [∀ i, decidable (i ∈ insert j s)] :\n    (insert j s).piecewise f g = function.update (s.piecewise f g) j (f j) :=\n  by\n  simp [piecewise]\n  ext i\n  by_cases h : i = j\n  · rw [h]\n    simp\n  · by_cases h' : i ∈ s <;> simp [h, h']\n#align piecewise_insert piecewise_insert\n\n",
+ "theorem piecewise_insert [DecidableEq α] (j : α) [∀ i, Decidable (i ∈ insert j s)] :\n    (insert j s).piecewise f g = Function.update (s.piecewise f g) j (f j) :=\n  by\n  simp [piecewise]\n  ext i\n  by_cases h : i = j\n  · rw [h]\n    simp\n  · by_cases h' : i ∈ s <;> simp [h, h']\n#align piecewise_insert piecewise_insert\n\n",
  "piecewise_eq_on_compl":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\ntheorem piecewise_eq_on_compl (f g : α → β) : EqOn (s.piecewise f g) g («expr ᶜ» s) := fun _ =>\n  piecewise_eq_of_not_mem _ _ _\n#align piecewise_eq_on_compl piecewise_eq_on_compl\n\n",
  "piecewise_eq_on":
@@ -163,17 +163,17 @@
  "piecewise_eq_of_mem":
  "@[simp]\ntheorem piecewise_eq_of_mem {i : α} (hi : i ∈ s) : s.piecewise f g i = f i :=\n  if_pos hi\n#align piecewise_eq_of_mem piecewise_eq_of_mem\n\n",
  "piecewise_empty":
- "@[simp]\ntheorem piecewise_empty [∀ i : α, decidable (i ∈ (∅ : set α))] : piecewise ∅ f g = g :=\n  by\n  ext i\n  simp [piecewise]\n#align piecewise_empty piecewise_empty\n\n",
+ "@[simp]\ntheorem piecewise_empty [∀ i : α, Decidable (i ∈ (∅ : Set α))] : piecewise ∅ f g = g :=\n  by\n  ext i\n  simp [piecewise]\n#align piecewise_empty piecewise_empty\n\n",
  "piecewise_compl":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\n@[simp]\ntheorem piecewise_compl [∀ i, decidable (i ∈ «expr ᶜ» s)] : («expr ᶜ» s).piecewise f g = s.piecewise g f :=\n  funext fun x => if hx : x ∈ s then by simp [hx] else by simp [hx]\n#align piecewise_compl piecewise_compl\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\n@[simp]\ntheorem piecewise_compl [∀ i, Decidable (i ∈ «expr ᶜ» s)] : («expr ᶜ» s).piecewise f g = s.piecewise g f :=\n  funext fun x => if hx : x ∈ s then by simp [hx] else by simp [hx]\n#align piecewise_compl piecewise_compl\n\n",
  "pi_piecewise":
- "@[simp]\ntheorem pi_piecewise {ι : Type _} {α : ι → Type _} (s s' : set ι) (t t' : ∀ i, set (α i)) [∀ x, decidable (x ∈ s')] :\n    pi s (s'.piecewise t t') = pi (s ∩ s') t ∩ pi (s \\ s') t' :=\n  by\n  ext x\n  simp only [mem_pi, mem_inter_iff, ← forall_and]\n  refine' forall_congr' fun i => _\n  by_cases hi : i ∈ s' <;> simp [*]\n#align pi_piecewise pi_piecewise\n\n",
+ "@[simp]\ntheorem pi_piecewise {ι : Type _} {α : ι → Type _} (s s' : Set ι) (t t' : ∀ i, Set (α i)) [∀ x, Decidable (x ∈ s')] :\n    pi s (s'.piecewise t t') = pi (s ∩ s') t ∩ pi (s \\ s') t' :=\n  by\n  ext x\n  simp only [mem_pi, mem_inter_iff, ← forall_and]\n  refine' forall_congr' fun i => _\n  by_cases hi : i ∈ s' <;> simp [*]\n#align pi_piecewise pi_piecewise\n\n",
  "ne_iff":
  "theorem inj_on.ne_iff {x y} (h : InjOn f s) (hx : x ∈ s) (hy : y ∈ s) : f x ≠ f y ↔ x ≠ y :=\n  (h.eq_iff hx hy).not\n#align inj_on.ne_iff inj_on.ne_iff\n\n",
  "monotone_on_of_right_inv_on_of_maps_to":
- "theorem monotone_on_of_right_inv_on_of_maps_to [partial_order α] [linear_order β] {φ : β → α} {ψ : α → β} {t : set β}\n    {s : set α} (hφ : monotone_on φ t) (φψs : Set.RightInvOn ψ φ s) (ψts : Set.MapsTo ψ s t) : monotone_on ψ s :=\n  by\n  rintro x xs y ys l\n  rcases le_total (ψ x) (ψ y) with (ψxy | ψyx)\n  · exact ψxy\n  · cases le_antisymm l (φψs.eq ys ▸ φψs.eq xs ▸ hφ (ψts ys) (ψts xs) ψyx)\n    rfl\n#align monotone_on_of_right_inv_on_of_maps_to monotone_on_of_right_inv_on_of_maps_to\n\n",
+ "theorem monotone_on_of_right_inv_on_of_maps_to [partial_order α] [linear_order β] {φ : β → α} {ψ : α → β} {t : Set β}\n    {s : Set α} (hφ : MonotoneOn φ t) (φψs : Set.RightInvOn ψ φ s) (ψts : Set.MapsTo ψ s t) : MonotoneOn ψ s :=\n  by\n  rintro x xs y ys l\n  rcases le_total (ψ x) (ψ y) with (ψxy | ψyx)\n  · exact ψxy\n  · cases le_antisymm l (φψs.eq ys ▸ φψs.eq xs ▸ hφ (ψts ys) (ψts xs) ψyx)\n    rfl\n#align monotone_on_of_right_inv_on_of_maps_to monotone_on_of_right_inv_on_of_maps_to\n\n",
  "monotone":
- "#print AntitoneOn.monotone /-\nprotected theorem AntitoneOn.monotone (h : antitone_on f s) : antitone (f ∘ coe : s → β) := fun x y hle =>\n  h x.coe_prop y.coe_prop hle\n#align antitone_on.monotone AntitoneOn.monotone\n-/\n\n",
+ "#print AntitoneOn.monotone /-\nprotected theorem AntitoneOn.monotone (h : AntitoneOn f s) : Antitone (f ∘ coe : s → β) := fun x y hle =>\n  h x.coe_prop y.coe_prop hle\n#align antitone_on.monotone AntitoneOn.monotone\n-/\n\n",
  "mono_right":
  "theorem maps_to.mono_right (hf : MapsTo f s t₁) (ht : t₁ ⊆ t₂) : MapsTo f s t₂ := fun x hx => ht (hf hx)\n#align maps_to.mono_right maps_to.mono_right\n\n",
  "mono_left":
@@ -183,41 +183,43 @@
  "mk":
  "theorem bij_on.mk (h₁ : MapsTo f s t) (h₂ : InjOn f s) (h₃ : SurjOn f s t) : BijOn f s t :=\n  ⟨h₁, h₂, h₃⟩\n#align bij_on.mk bij_on.mk\n\n",
  "mem_of_mem_image":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\ntheorem inj_on.mem_of_mem_image {x} (hf : InjOn f s) (hs : s₁ ⊆ s) (h : x ∈ s) (h₁ : f x ∈ «expr '' » f s₁) : x ∈ s₁ :=\n  let ⟨x', h', eq⟩ := h₁\n  hf (hs h') h eq ▸ h'\n#align inj_on.mem_of_mem_image inj_on.mem_of_mem_image\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\ntheorem inj_on.mem_of_mem_image {x} (hf : InjOn f s) (hs : s₁ ⊆ s) (h : x ∈ s) (h₁ : f x ∈ «expr '' » f s₁) : x ∈ s₁ :=\n  let ⟨x', h', Eq⟩ := h₁\n  hf (hs h') h Eq ▸ h'\n#align inj_on.mem_of_mem_image inj_on.mem_of_mem_image\n\n",
  "mem_image_iff":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\ntheorem inj_on.mem_image_iff {x} (hf : InjOn f s) (hs : s₁ ⊆ s) (hx : x ∈ s) : f x ∈ «expr '' » f s₁ ↔ x ∈ s₁ :=\n  ⟨hf.mem_of_mem_image hs hx, mem_image_of_mem f⟩\n#align inj_on.mem_image_iff inj_on.mem_image_iff\n\n",
  "mem_iff":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\ntheorem maps_to.mem_iff (h : MapsTo f s t) (hc : MapsTo f («expr ᶜ» s) («expr ᶜ» t)) {x} : f x ∈ t ↔ x ∈ s :=\n  ⟨fun ht => by_contra fun hs => hc hs ht, fun hx => h hx⟩\n#align maps_to.mem_iff maps_to.mem_iff\n\n",
  "maps_univ_to":
- "@[simp]\ntheorem maps_univ_to (f : α → β) (s : set β) : MapsTo f univ s ↔ ∀ a, f a ∈ s :=\n  ⟨fun h a => h (mem_univ _), fun h x _ => h x⟩\n#align maps_univ_to maps_univ_to\n\n",
+ "@[simp]\ntheorem maps_univ_to (f : α → β) (s : Set β) : MapsTo f univ s ↔ ∀ a, f a ∈ s :=\n  ⟨fun h a => h (mem_univ _), fun h x _ => h x⟩\n#align maps_univ_to maps_univ_to\n\n",
  "maps_to_univ":
- "theorem maps_to_univ (f : α → β) (s : set α) : MapsTo f s univ := fun x h => trivial\n#align maps_to_univ maps_to_univ\n\n",
+ "theorem maps_to_univ (f : α → β) (s : Set α) : MapsTo f s univ := fun x h => trivial\n#align maps_to_univ maps_to_univ\n\n",
  "maps_to_union":
  "@[simp]\ntheorem maps_to_union : MapsTo f (s₁ ∪ s₂) t ↔ MapsTo f s₁ t ∧ MapsTo f s₂ t :=\n  ⟨fun h => ⟨h.mono (subset_union_left s₁ s₂) (Subset.refl t), h.mono (subset_union_right s₁ s₂) (Subset.refl t)⟩,\n    fun h => h.1.union h.2⟩\n#align maps_to_union maps_to_union\n\n",
  "maps_to_singleton":
  "@[simp]\ntheorem maps_to_singleton : MapsTo f {a} t ↔ f a ∈ t :=\n  singleton_subset_iff\n#align maps_to_singleton maps_to_singleton\n\n",
  "maps_to_range":
- "theorem maps_to_range (h : semiconj f fa fb) : MapsTo fb (range f) (range f) := fun y ⟨x, hy⟩ => hy ▸ ⟨fa x, h x⟩\n#align maps_to_range maps_to_range\n\n",
+ "theorem maps_to_range (h : Semiconj f fa fb) : MapsTo fb (range f) (range f) := fun y ⟨x, hy⟩ => hy ▸ ⟨fa x, h x⟩\n#align maps_to_range maps_to_range\n\n",
+ "maps_to_prod_map_diagonal":
+ "theorem maps_to_prod_map_diagonal : MapsTo (prod.map f f) (diagonal α) (diagonal β) :=\n  diagonal_subset_iff.2 fun x => rfl\n#align maps_to_prod_map_diagonal maps_to_prod_map_diagonal\n\n",
  "maps_to_preimage":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\ntheorem maps_to_preimage (h : semiconj f fa fb) {s t : set β} (hb : MapsTo fb s t) :\n    MapsTo fa («expr ⁻¹' » f s) («expr ⁻¹' » f t) := fun x hx => by simp only [mem_preimage, h x, hb hx]\n#align maps_to_preimage maps_to_preimage\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\ntheorem maps_to_preimage (h : Semiconj f fa fb) {s t : Set β} (hb : MapsTo fb s t) :\n    MapsTo fa («expr ⁻¹' » f s) («expr ⁻¹' » f t) := fun x hx => by simp only [mem_preimage, h x, hb hx]\n#align maps_to_preimage maps_to_preimage\n\n",
  "maps_to_of_subsingleton'":
  "theorem maps_to_of_subsingleton' [subsingleton β] (f : α → β) (h : s.nonempty → t.nonempty) : MapsTo f s t :=\n  fun a ha => Subsingleton.mem_iff_nonempty.2 <| h ⟨a, ha⟩\n#align maps_to_of_subsingleton' maps_to_of_subsingleton'\n\n",
  "maps_to_of_subsingleton":
- "theorem maps_to_of_subsingleton [subsingleton α] (f : α → α) (s : set α) : MapsTo f s s :=\n  mapsTo_of_subsingleton' _ id\n#align maps_to_of_subsingleton maps_to_of_subsingleton\n\n",
+ "theorem maps_to_of_subsingleton [subsingleton α] (f : α → α) (s : Set α) : MapsTo f s s :=\n  mapsTo_of_subsingleton' _ id\n#align maps_to_of_subsingleton maps_to_of_subsingleton\n\n",
  "maps_to_inv_fun_on":
- "theorem surj_on.maps_to_inv_fun_on [nonempty α] (h : SurjOn f s t) : MapsTo (invFunOn f s) t s := fun y hy =>\n  mem_preimage.2 <| inv_fun_on_mem <| mem_image_iff_bex.1 <| h hy\n#align surj_on.maps_to_inv_fun_on surj_on.maps_to_inv_fun_on\n\n",
+ "theorem surj_on.maps_to_inv_fun_on [Nonempty α] (h : SurjOn f s t) : MapsTo (invFunOn f s) t s := fun y hy =>\n  mem_preimage.2 <| invFunOn_mem <| mem_image_iff_bex.1 <| h hy\n#align surj_on.maps_to_inv_fun_on surj_on.maps_to_inv_fun_on\n\n",
  "maps_to_inter":
  "@[simp]\ntheorem maps_to_inter : MapsTo f s (t₁ ∩ t₂) ↔ MapsTo f s t₁ ∧ MapsTo f s t₂ :=\n  ⟨fun h => ⟨h.mono (Subset.refl s) (inter_subset_left t₁ t₂), h.mono (Subset.refl s) (inter_subset_right t₁ t₂)⟩,\n    fun h => h.1.inter h.2⟩\n#align maps_to_inter maps_to_inter\n\n",
  "maps_to_image":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\ntheorem maps_to_image (h : semiconj f fa fb) (ha : MapsTo fa s t) : MapsTo fb («expr '' » f s) («expr '' » f t) :=\n  fun y ⟨x, hx, hy⟩ => hy ▸ ⟨fa x, ha hx, h x⟩\n#align maps_to_image maps_to_image\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\ntheorem maps_to_image (h : Semiconj f fa fb) (ha : MapsTo fa s t) : MapsTo fb («expr '' » f s) («expr '' » f t) :=\n  fun y ⟨x, hx, hy⟩ => hy ▸ ⟨fa x, ha hx, h x⟩\n#align maps_to_image maps_to_image\n\n",
  "maps_to_iff_exists_map_subtype":
- "theorem maps_to_iff_exists_map_subtype : MapsTo f s t ↔ ∃ g : s → t, ∀ x : s, f x = g x :=\n  ⟨fun h => ⟨h.restrict f s t, fun _ => rfl⟩, fun ⟨g, hg⟩ x hx =>\n    by\n    erw [hg ⟨x, hx⟩]\n    apply subtype.coe_prop⟩\n#align maps_to_iff_exists_map_subtype maps_to_iff_exists_map_subtype\n\n",
+ "theorem maps_to_iff_exists_map_subtype : MapsTo f s t ↔ ∃ g : s → t, ∀ x : s, f x = g x :=\n  ⟨fun h => ⟨h.restrict f s t, fun _ => rfl⟩, fun ⟨g, hg⟩ x hx =>\n    by\n    erw [hg ⟨x, hx⟩]\n    apply Subtype.coe_prop⟩\n#align maps_to_iff_exists_map_subtype maps_to_iff_exists_map_subtype\n\n",
  "maps_to_iff":
  "theorem eq_on.maps_to_iff (H : EqOn f₁ f₂ s) : MapsTo f₁ s t ↔ MapsTo f₂ s t :=\n  ⟨fun h => h.congr H, fun h => h.congr H.symm⟩\n#align eq_on.maps_to_iff eq_on.maps_to_iff\n\n",
  "maps_to_id":
- "theorem maps_to_id (s : set α) : MapsTo id s s := fun x => id\n#align maps_to_id maps_to_id\n\n",
+ "theorem maps_to_id (s : Set α) : MapsTo id s s := fun x => id\n#align maps_to_id maps_to_id\n\n",
  "maps_to_empty":
- "theorem maps_to_empty (f : α → β) (t : set β) : MapsTo f ∅ t :=\n  empty_subset _\n#align maps_to_empty maps_to_empty\n\n",
+ "theorem maps_to_empty (f : α → β) (t : Set β) : MapsTo f ∅ t :=\n  empty_subset _\n#align maps_to_empty maps_to_empty\n\n",
  "maps_to_compl":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\ntheorem surj_on.maps_to_compl (h : SurjOn f s t) (h' : injective f) : MapsTo f («expr ᶜ» s) («expr ᶜ» t) :=\n  fun x hs ht =>\n  let ⟨x', hx', HEq⟩ := h ht\n  hs <| h' HEq ▸ hx'\n#align surj_on.maps_to_compl surj_on.maps_to_compl\n\n",
  "maps_to'":
@@ -225,33 +227,33 @@
  "maps_to":
  "theorem right_inv_on.maps_to (h : RightInvOn f' f t) (hf : SurjOn f' t s) : MapsTo f s t :=\n  h.maps_to hf\n#align right_inv_on.maps_to right_inv_on.maps_to\n\n",
  "maps_range_to":
- "@[simp]\ntheorem maps_range_to (f : α → β) (g : γ → α) (s : set β) : MapsTo f (range g) s ↔ MapsTo (f ∘ g) univ s := by\n  rw [← image_univ, maps_image_to]\n#align maps_range_to maps_range_to\n\n",
+ "@[simp]\ntheorem maps_range_to (f : α → β) (g : γ → α) (s : Set β) : MapsTo f (range g) s ↔ MapsTo (f ∘ g) univ s := by\n  rw [← image_univ, maps_image_to]\n#align maps_range_to maps_range_to\n\n",
  "maps_image_to":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\n@[simp]\ntheorem maps_image_to (f : α → β) (g : γ → α) (s : set γ) (t : set β) :\n    MapsTo f («expr '' » g s) t ↔ MapsTo (f ∘ g) s t :=\n  ⟨fun h c hc => h ⟨c, hc, rfl⟩, fun h d ⟨c, hc⟩ => hc.2 ▸ h hc.1⟩\n#align maps_image_to maps_image_to\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\n@[simp]\ntheorem maps_image_to (f : α → β) (g : γ → α) (s : Set γ) (t : Set β) :\n    MapsTo f («expr '' » g s) t ↔ MapsTo (f ∘ g) s t :=\n  ⟨fun h c hc => h ⟨c, hc, rfl⟩, fun h d ⟨c, hc⟩ => hc.2 ▸ h hc.1⟩\n#align maps_image_to maps_image_to\n\n",
  "left_inv_on_singleton":
  "@[simp]\ntheorem left_inv_on_singleton : LeftInvOn f' f {a} ↔ f' (f a) = a :=\n  singleton_subset_iff\n#align left_inv_on_singleton left_inv_on_singleton\n\n",
  "left_inv_on_of_right_inv_on":
  "theorem surj_on.left_inv_on_of_right_inv_on (hf : SurjOn f s t) (hf' : RightInvOn f f' s) : LeftInvOn f f' t :=\n  fun y hy => by\n  let ⟨x, hx, HEq⟩ := hf hy\n  rw [← HEq, hf' hx]\n#align surj_on.left_inv_on_of_right_inv_on surj_on.left_inv_on_of_right_inv_on\n\n",
  "left_inv_on_inv_fun_on":
- "theorem inj_on.left_inv_on_inv_fun_on [nonempty α] (h : InjOn f s) : LeftInvOn (invFunOn f s) f s := fun a ha =>\n  h (invFunOn_apply_mem ha) ha (invFunOn_apply_eq ha)\n#align inj_on.left_inv_on_inv_fun_on inj_on.left_inv_on_inv_fun_on\n\n",
+ "theorem inj_on.left_inv_on_inv_fun_on [Nonempty α] (h : InjOn f s) : LeftInvOn (invFunOn f s) f s := fun a ha =>\n  h (invFunOn_apply_mem ha) ha (invFunOn_apply_eq ha)\n#align inj_on.left_inv_on_inv_fun_on inj_on.left_inv_on_inv_fun_on\n\n",
  "left_inv_on_id":
- "theorem left_inv_on_id (s : set α) : LeftInvOn id id s := fun a _ => rfl\n#align left_inv_on_id left_inv_on_id\n\n",
+ "theorem left_inv_on_id (s : Set α) : LeftInvOn id id s := fun a _ => rfl\n#align left_inv_on_id left_inv_on_id\n\n",
  "left_inv_on_empty":
  "@[simp]\ntheorem left_inv_on_empty (f' : β → α) (f : α → β) : LeftInvOn f' f ∅ :=\n  empty_subset _\n#align left_inv_on_empty left_inv_on_empty\n\n",
  "left_inv_on":
- "theorem left_inverse.left_inv_on {g : β → α} (h : left_inverse f g) (s : set β) : LeftInvOn f g s := fun x hx => h x\n#align left_inverse.left_inv_on left_inverse.left_inv_on\n\n",
+ "theorem left_inverse.left_inv_on {g : β → α} (h : left_inverse f g) (s : Set β) : LeftInvOn f g s := fun x hx => h x\n#align left_inverse.left_inv_on left_inverse.left_inv_on\n\n",
  "le_piecewise":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵈ» -/\n/- ./././Mathport/Syntax/Translate/Basic.lean:632:2: warning: expanding binder collection (i «expr ∉ » s) -/\ntheorem le_piecewise {δ : α → Type _} [∀ i, preorder (δ i)] {s : set α} [∀ j, decidable (j ∈ s)] {f₁ f₂ g : ∀ i, δ i}\n    (h₁ : ∀ i ∈ s, g i ≤ f₁ i) (h₂ : ∀ (i) (_ : i ∉ s), g i ≤ f₂ i) : g ≤ s.piecewise f₁ f₂ :=\n  @piecewise_le α (fun i => «expr ᵒᵈ» (δ i)) _ s _ _ _ _ h₁ h₂\n#align le_piecewise le_piecewise\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵈ» -/\n/- ./././Mathport/Syntax/Translate/Basic.lean:635:2: warning: expanding binder collection (i «expr ∉ » s) -/\ntheorem le_piecewise {δ : α → Type _} [∀ i, preorder (δ i)] {s : Set α} [∀ j, Decidable (j ∈ s)] {f₁ f₂ g : ∀ i, δ i}\n    (h₁ : ∀ i ∈ s, g i ≤ f₁ i) (h₂ : ∀ (i) (_ : i ∉ s), g i ≤ f₂ i) : g ≤ s.piecewise f₁ f₂ :=\n  @piecewise_le α (fun i => «expr ᵒᵈ» (δ i)) _ s _ _ _ _ h₁ h₂\n#align le_piecewise le_piecewise\n\n",
  "iterate_restrict":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ^[ ]» -/\ntheorem maps_to.iterate_restrict {f : α → α} {s : set α} (h : MapsTo f s s) (n : ℕ) :\n    «expr ^[ ]» (h.restrict f s s) n = (h.iterate n).restrict _ _ _ :=\n  by\n  funext x\n  rw [subtype.ext_iff, maps_to.coe_restrict_apply]\n  induction' n with n ihn generalizing x\n  · rfl\n  · simp [nat.iterate, ihn]\n#align maps_to.iterate_restrict maps_to.iterate_restrict\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ^[ ]» -/\ntheorem maps_to.iterate_restrict {f : α → α} {s : Set α} (h : MapsTo f s s) (n : ℕ) :\n    «expr ^[ ]» (h.restrict f s s) n = (h.iterate n).restrict _ _ _ :=\n  by\n  funext x\n  rw [Subtype.ext_iff, maps_to.coe_restrict_apply]\n  induction' n with n ihn generalizing x\n  · rfl\n  · simp [nat.iterate, ihn]\n#align maps_to.iterate_restrict maps_to.iterate_restrict\n\n",
  "iterate":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ^[ ]» -/\ntheorem bij_on.iterate {f : α → α} {s : set α} (h : BijOn f s s) : ∀ n, BijOn («expr ^[ ]» f n) s s\n  | 0 => s.bij_on_id\n  | n + 1 => (bij_on.iterate n).comp h\n#align bij_on.iterate bij_on.iterate\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ^[ ]» -/\ntheorem bij_on.iterate {f : α → α} {s : Set α} (h : BijOn f s s) : ∀ n, BijOn («expr ^[ ]» f n) s s\n  | 0 => s.bij_on_id\n  | n + 1 => (bij_on.iterate n).comp h\n#align bij_on.iterate bij_on.iterate\n\n",
  "inv_on_singleton":
  "@[simp]\ntheorem inv_on_singleton : InvOn f' f {a} {b} ↔ f' (f a) = a ∧ f (f' b) = b := by simp [inv_on]\n#align inv_on_singleton inv_on_singleton\n\n",
  "inv_on_inv_fun_on":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\ntheorem surj_on.inv_on_inv_fun_on [nonempty α] (h : SurjOn f s t) :\n    InvOn (invFunOn f s) f («expr '' » (invFunOn f s) t) t :=\n  by\n  refine' ⟨_, h.right_inv_on_inv_fun_on⟩\n  rintro _ ⟨y, hy, rfl⟩\n  rw [h.right_inv_on_inv_fun_on hy]\n#align surj_on.inv_on_inv_fun_on surj_on.inv_on_inv_fun_on\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\ntheorem surj_on.inv_on_inv_fun_on [Nonempty α] (h : SurjOn f s t) :\n    InvOn (invFunOn f s) f («expr '' » (invFunOn f s) t) t :=\n  by\n  refine' ⟨_, h.right_inv_on_inv_fun_on⟩\n  rintro _ ⟨y, hy, rfl⟩\n  rw [h.right_inv_on_inv_fun_on hy]\n#align surj_on.inv_on_inv_fun_on surj_on.inv_on_inv_fun_on\n\n",
  "inv_on_id":
- "theorem inv_on_id (s : set α) : InvOn id id s s :=\n  ⟨s.left_inv_on_id, s.right_inv_on_id⟩\n#align inv_on_id inv_on_id\n\n",
+ "theorem inv_on_id (s : Set α) : InvOn id id s s :=\n  ⟨s.left_inv_on_id, s.right_inv_on_id⟩\n#align inv_on_id inv_on_id\n\n",
  "inv_on_empty":
  "@[simp]\ntheorem inv_on_empty (f' : β → α) (f : α → β) : InvOn f' f ∅ ∅ := by simp [inv_on]\n#align inv_on_empty inv_on_empty\n\n",
  "inv_on":
@@ -259,11 +261,11 @@
  "inv_fun_on_pos":
  "theorem inv_fun_on_pos (h : ∃ a ∈ s, f a = b) : invFunOn f s b ∈ s ∧ f (invFunOn f s b) = b := by\n  rw [bex_def] at h <;> rw [inv_fun_on, dif_pos h] <;> exact Classical.choose_spec h\n#align inv_fun_on_pos inv_fun_on_pos\n\n",
  "inv_fun_on_neg":
- "theorem inv_fun_on_neg (h : ¬∃ a ∈ s, f a = b) : invFunOn f s b = classical.choice ‹nonempty α› := by\n  rw [bex_def] at h <;> rw [inv_fun_on, dif_neg h]\n#align inv_fun_on_neg inv_fun_on_neg\n\n",
+ "theorem inv_fun_on_neg (h : ¬∃ a ∈ s, f a = b) : invFunOn f s b = Classical.choice ‹Nonempty α› := by\n  rw [bex_def] at h <;> rw [inv_fun_on, dif_neg h]\n#align inv_fun_on_neg inv_fun_on_neg\n\n",
  "inv_fun_on_mem":
  "theorem inv_fun_on_mem (h : ∃ a ∈ s, f a = b) : invFunOn f s b ∈ s :=\n  (invFunOn_pos h).left\n#align inv_fun_on_mem inv_fun_on_mem\n\n",
  "inv_fun_on_image":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\ntheorem inj_on.inv_fun_on_image [nonempty α] (h : InjOn f s₂) (ht : s₁ ⊆ s₂) :\n    «expr '' » (invFunOn f s₂) («expr '' » f s₁) = s₁ :=\n  h.left_inv_on_inv_fun_on.image_image' ht\n#align inj_on.inv_fun_on_image inj_on.inv_fun_on_image\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\ntheorem inj_on.inv_fun_on_image [Nonempty α] (h : InjOn f s₂) (ht : s₁ ⊆ s₂) :\n    «expr '' » (invFunOn f s₂) («expr '' » f s₁) = s₁ :=\n  h.left_inv_on_inv_fun_on.image_image' ht\n#align inj_on.inv_fun_on_image inj_on.inv_fun_on_image\n\n",
  "inv_fun_on_eq":
  "theorem inv_fun_on_eq (h : ∃ a ∈ s, f a = b) : f (invFunOn f s b) = b :=\n  (invFunOn_pos h).right\n#align inv_fun_on_eq inv_fun_on_eq\n\n",
  "inv_fun_on_apply_mem":
@@ -271,7 +273,7 @@
  "inv_fun_on_apply_eq":
  "theorem inv_fun_on_apply_eq (h : a ∈ s) : f (invFunOn f s (f a)) = f a :=\n  invFunOn_eq ⟨a, h, rfl⟩\n#align inv_fun_on_apply_eq inv_fun_on_apply_eq\n\n",
  "inter_preimage_eq":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\ntheorem eq_on.inter_preimage_eq (heq : EqOn f₁ f₂ s) (t : set β) : s ∩ «expr ⁻¹' » f₁ t = s ∩ «expr ⁻¹' » f₂ t :=\n  ext fun x => and_congr_right_iff.2 fun hx => by rw [mem_preimage, mem_preimage, HEq hx]\n#align eq_on.inter_preimage_eq eq_on.inter_preimage_eq\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\ntheorem eq_on.inter_preimage_eq (heq : EqOn f₁ f₂ s) (t : Set β) : s ∩ «expr ⁻¹' » f₁ t = s ∩ «expr ⁻¹' » f₂ t :=\n  ext fun x => and_congr_right_iff.2 fun hx => by rw [mem_preimage, mem_preimage, HEq hx]\n#align eq_on.inter_preimage_eq eq_on.inter_preimage_eq\n\n",
  "inter_maps_to":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\ntheorem bij_on.inter_maps_to (h₁ : BijOn f s₁ t₁) (h₂ : MapsTo f s₂ t₂) (h₃ : s₁ ∩ «expr ⁻¹' » f t₂ ⊆ s₂) :\n    BijOn f (s₁ ∩ s₂) (t₁ ∩ t₂) :=\n  ⟨h₁.maps_to.inter_inter h₂, h₁.inj_on.mono <| inter_subset_left _ _, fun y hy =>\n    let ⟨x, hx, hxy⟩ := h₁.surj_on hy.1\n    ⟨x, ⟨hx, h₃ ⟨hx, hxy.symm.rec_on hy.2⟩⟩, hxy⟩⟩\n#align bij_on.inter_maps_to bij_on.inter_maps_to\n\n",
  "inter_inter":
@@ -281,45 +283,45 @@
  "inter":
  "theorem bij_on.inter (h₁ : BijOn f s₁ t₁) (h₂ : BijOn f s₂ t₂) (h : InjOn f (s₁ ∪ s₂)) : BijOn f (s₁ ∩ s₂) (t₁ ∩ t₂) :=\n  ⟨h₁.maps_to.inter_inter h₂.maps_to, h₁.inj_on.mono <| inter_subset_left _ _, h₁.surj_on.inter_inter h₂.surj_on h⟩\n#align bij_on.inter bij_on.inter\n\n",
  "insert_inj_on":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\ntheorem insert_inj_on (s : set α) : («expr ᶜ» s).inj_on fun a => insert a s := fun a ha b _ => (insert_inj ha).1\n#align insert_inj_on insert_inj_on\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\ntheorem insert_inj_on (s : Set α) : («expr ᶜ» s).inj_on fun a => insert a s := fun a ha b _ => (insert_inj ha).1\n#align insert_inj_on insert_inj_on\n\n",
  "injective_piecewise_iff":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\n/- ./././Mathport/Syntax/Translate/Basic.lean:632:2: warning: expanding binder collection (y «expr ∉ » s) -/\ntheorem injective_piecewise_iff {f g : α → β} :\n    injective (s.piecewise f g) ↔ InjOn f s ∧ InjOn g («expr ᶜ» s) ∧ ∀ x ∈ s, ∀ (y) (_ : y ∉ s), f x ≠ g y :=\n  by\n  rw [injective_iff_inj_on_univ, ← union_compl_self s, inj_on_union (@disjoint_compl_right _ _ s),\n    (piecewise_eq_on s f g).inj_on_iff, (piecewise_eq_on_compl s f g).inj_on_iff]\n  refine' and_congr iff.rfl (and_congr iff.rfl <| forall₄_congr fun x hx y hy => _)\n  rw [piecewise_eq_of_mem s f g hx, piecewise_eq_of_not_mem s f g hy]\n#align injective_piecewise_iff injective_piecewise_iff\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\n/- ./././Mathport/Syntax/Translate/Basic.lean:635:2: warning: expanding binder collection (y «expr ∉ » s) -/\ntheorem injective_piecewise_iff {f g : α → β} :\n    injective (s.piecewise f g) ↔ InjOn f s ∧ InjOn g («expr ᶜ» s) ∧ ∀ x ∈ s, ∀ (y) (_ : y ∉ s), f x ≠ g y :=\n  by\n  rw [injective_iff_inj_on_univ, ← union_compl_self s, inj_on_union (@disjoint_compl_right _ _ s),\n    (piecewise_eq_on s f g).inj_on_iff, (piecewise_eq_on_compl s f g).inj_on_iff]\n  refine' and_congr iff.rfl (and_congr iff.rfl <| forall₄_congr fun x hx y hy => _)\n  rw [piecewise_eq_of_mem s f g hx, piecewise_eq_of_not_mem s f g hy]\n#align injective_piecewise_iff injective_piecewise_iff\n\n",
  "injective_iff_inj_on_univ":
  "theorem injective_iff_inj_on_univ : injective f ↔ InjOn f univ :=\n  ⟨fun h x hx y hy hxy => h hxy, fun h _ _ heq => h trivial trivial HEq⟩\n#align injective_iff_inj_on_univ injective_iff_inj_on_univ\n\n",
  "injective_cod_restrict":
- "@[simp]\ntheorem injective_cod_restrict {f : ι → α} {s : set α} (h : ∀ x, f x ∈ s) :\n    injective (codRestrict f s h) ↔ injective f := by simp only [injective, subtype.ext_iff, coe_cod_restrict_apply]\n#align injective_cod_restrict injective_cod_restrict\n\n",
+ "@[simp]\ntheorem injective_cod_restrict {f : ι → α} {s : Set α} (h : ∀ x, f x ∈ s) :\n    injective (codRestrict f s h) ↔ injective f := by simp only [injective, Subtype.ext_iff, coe_cod_restrict_apply]\n#align injective_cod_restrict injective_cod_restrict\n\n",
  "inj_on_union":
  "theorem inj_on_union (h : Disjoint s₁ s₂) :\n    InjOn f (s₁ ∪ s₂) ↔ InjOn f s₁ ∧ InjOn f s₂ ∧ ∀ x ∈ s₁, ∀ y ∈ s₂, f x ≠ f y :=\n  by\n  refine' ⟨fun H => ⟨H.mono <| subset_union_left _ _, H.mono <| subset_union_right _ _, _⟩, _⟩\n  · intro x hx y hy hxy\n    obtain rfl : x = y\n    exact H (or.inl hx) (or.inr hy) hxy\n    exact h.le_bot ⟨hx, hy⟩\n  · rintro ⟨h₁, h₂, h₁₂⟩\n    rintro x (hx | hx) y (hy | hy) hxy\n    exacts[h₁ hx hy hxy, (h₁₂ _ hx _ hy hxy).elim, (h₁₂ _ hy _ hx hxy.symm).elim, h₂ hx hy hxy]\n#align inj_on_union inj_on_union\n\n",
  "inj_on_singleton":
  "@[simp]\ntheorem inj_on_singleton (f : α → β) (a : α) : InjOn f {a} :=\n  subsingleton_singleton.inj_on f\n#align inj_on_singleton inj_on_singleton\n\n",
  "inj_on_range":
- "theorem inj_on_range (h : semiconj f fa fb) (ha : injective fa) (hf : InjOn f (range fa)) : InjOn fb (range f) :=\n  by\n  rw [← image_univ] at *\n  exact h.inj_on_image (ha.inj_on univ) hf\n#align inj_on_range inj_on_range\n\n",
+ "theorem inj_on_range (h : Semiconj f fa fb) (ha : injective fa) (hf : InjOn f (range fa)) : InjOn fb (range f) :=\n  by\n  rw [← image_univ] at *\n  exact h.inj_on_image (ha.inj_on univ) hf\n#align inj_on_range inj_on_range\n\n",
  "inj_on_preimage":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\ntheorem inj_on_preimage (h : semiconj f fa fb) {s : set β} (hb : InjOn fb s) (hf : InjOn f («expr ⁻¹' » f s)) :\n    InjOn fa («expr ⁻¹' » f s) := by\n  intro x hx y hy H\n  have := congr_arg f H\n  rw [h.eq, h.eq] at this\n  exact hf hx hy (hb hx hy this)\n#align inj_on_preimage inj_on_preimage\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\ntheorem inj_on_preimage (h : Semiconj f fa fb) {s : Set β} (hb : InjOn fb s) (hf : InjOn f («expr ⁻¹' » f s)) :\n    InjOn fa («expr ⁻¹' » f s) := by\n  intro x hx y hy H\n  have := congr_arg f H\n  rw [h.eq, h.eq] at this\n  exact hf hx hy (hb hx hy this)\n#align inj_on_preimage inj_on_preimage\n\n",
  "inj_on_of_subsingleton":
- "theorem inj_on_of_subsingleton [subsingleton α] (f : α → β) (s : set α) : InjOn f s :=\n  (injective_of_subsingleton _).inj_on _\n#align inj_on_of_subsingleton inj_on_of_subsingleton\n\n",
+ "theorem inj_on_of_subsingleton [subsingleton α] (f : α → β) (s : Set α) : InjOn f s :=\n  (injective_of_subsingleton _).inj_on _\n#align inj_on_of_subsingleton inj_on_of_subsingleton\n\n",
  "inj_on_of_injective":
- "theorem inj_on_of_injective (h : injective f) (s : set α) : InjOn f s := fun x hx y hy hxy => h hxy\n#align inj_on_of_injective inj_on_of_injective\n\n",
+ "theorem inj_on_of_injective (h : injective f) (s : Set α) : InjOn f s := fun x hx y hy hxy => h hxy\n#align inj_on_of_injective inj_on_of_injective\n\n",
  "inj_on_insert":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\ntheorem inj_on_insert {f : α → β} {s : set α} {a : α} (has : a ∉ s) :\n    Set.InjOn f (insert a s) ↔ Set.InjOn f s ∧ f a ∉ «expr '' » f s :=\n  by\n  have : Disjoint s {a} := disjoint_iff_inf_le.mpr fun x ⟨hxs, (hxa : x = a)⟩ => has (hxa ▸ hxs)\n  rw [← union_singleton, inj_on_union this]\n  simp\n#align inj_on_insert inj_on_insert\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\ntheorem inj_on_insert {f : α → β} {s : Set α} {a : α} (has : a ∉ s) :\n    Set.InjOn f (insert a s) ↔ Set.InjOn f s ∧ f a ∉ «expr '' » f s :=\n  by\n  have : Disjoint s {a} := disjoint_iff_inf_le.mpr fun x ⟨hxs, (hxa : x = a)⟩ => has (hxa ▸ hxs)\n  rw [← union_singleton, inj_on_union this]\n  simp\n#align inj_on_insert inj_on_insert\n\n",
  "inj_on_image":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\ntheorem inj_on_image (h : semiconj f fa fb) (ha : InjOn fa s) (hf : InjOn f («expr '' » fa s)) :\n    InjOn fb («expr '' » f s) := by\n  rintro _ ⟨x, hx, rfl⟩ _ ⟨y, hy, rfl⟩ H\n  simp only [← h.eq] at H\n  exact congr_arg f (ha hx hy <| hf (mem_image_of_mem fa hx) (mem_image_of_mem fa hy) H)\n#align inj_on_image inj_on_image\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\ntheorem inj_on_image (h : Semiconj f fa fb) (ha : InjOn fa s) (hf : InjOn f («expr '' » fa s)) :\n    InjOn fb («expr '' » f s) := by\n  rintro _ ⟨x, hx, rfl⟩ _ ⟨y, hy, rfl⟩ H\n  simp only [← h.eq] at H\n  exact congr_arg f (ha hx hy <| hf (mem_image_of_mem fa hx) (mem_image_of_mem fa hy) H)\n#align inj_on_image inj_on_image\n\n",
  "inj_on_iff_injective":
- "theorem inj_on_iff_injective : InjOn f s ↔ injective (s.restrict f) :=\n  ⟨fun H a b h => subtype.eq <| H a.2 b.2 h, fun H a as b bs h => congr_arg subtype.val <| @H ⟨a, as⟩ ⟨b, bs⟩ h⟩\n#align inj_on_iff_injective inj_on_iff_injective\n\n",
+ "theorem inj_on_iff_injective : InjOn f s ↔ injective (s.restrict f) :=\n  ⟨fun H a b h => Subtype.eq <| H a.2 b.2 h, fun H a as b bs h => congr_arg Subtype.val <| @H ⟨a, as⟩ ⟨b, bs⟩ h⟩\n#align inj_on_iff_injective inj_on_iff_injective\n\n",
  "inj_on_iff":
  "theorem eq_on.inj_on_iff (H : EqOn f₁ f₂ s) : InjOn f₁ s ↔ InjOn f₂ s :=\n  ⟨fun h => h.congr H, fun h => h.congr H.symm⟩\n#align eq_on.inj_on_iff eq_on.inj_on_iff\n\n",
  "inj_on_id":
- "theorem inj_on_id (s : set α) : InjOn id s :=\n  injective_id.inj_on _\n#align inj_on_id inj_on_id\n\n",
+ "theorem inj_on_id (s : Set α) : InjOn id s :=\n  injective_id.inj_on _\n#align inj_on_id inj_on_id\n\n",
  "inj_on_empty":
  "@[simp]\ntheorem inj_on_empty (f : α → β) : InjOn f ∅ :=\n  subsingleton_empty.inj_on f\n#align inj_on_empty inj_on_empty\n\n",
  "inj_on":
- "theorem left_inv_on.inj_on (h : LeftInvOn f₁' f s) : InjOn f s := fun x₁ h₁ x₂ h₂ heq =>\n  calc\n    x₁ = f₁' (f x₁) := eq.symm <| h h₁\n    _ = f₁' (f x₂) := congr_arg f₁' HEq\n    _ = x₂ := h h₂\n    \n#align left_inv_on.inj_on left_inv_on.inj_on\n\n",
+ "theorem left_inv_on.inj_on (h : LeftInvOn f₁' f s) : InjOn f s := fun x₁ h₁ x₂ h₂ heq =>\n  calc\n    x₁ = f₁' (f x₁) := Eq.symm <| h h₁\n    _ = f₁' (f x₂) := (congr_arg f₁' HEq)\n    _ = x₂ := h h₂\n    \n#align left_inv_on.inj_on left_inv_on.inj_on\n\n",
  "injOn":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵈ» -/\n#print StrictAntiOn.injOn /-\ntheorem StrictAntiOn.injOn [linear_order α] [preorder β] {f : α → β} {s : set α} (H : strict_anti_on f s) :\n    s.inj_on f :=\n  @StrictMonoOn.injOn α («expr ᵒᵈ» β) _ _ f s H\n#align strict_anti_on.inj_on StrictAntiOn.injOn\n-/\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵈ» -/\n#print StrictAntiOn.injOn /-\ntheorem StrictAntiOn.injOn [linear_order α] [preorder β] {f : α → β} {s : Set α} (H : StrictAntiOn f s) : s.inj_on f :=\n  @StrictMonoOn.injOn α («expr ᵒᵈ» β) _ _ f s H\n#align strict_anti_on.inj_on StrictAntiOn.injOn\n-/\n\n",
  "image_subset":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\ntheorem maps_to.image_subset (h : MapsTo f s t) : «expr '' » f s ⊆ t :=\n  mapsTo'.1 h\n#align maps_to.image_subset maps_to.image_subset\n\n",
  "image_restrict":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\ntheorem image_restrict (f : α → β) (s t : set α) :\n    «expr '' » (s.restrict f) («expr ⁻¹' » coe t) = «expr '' » f (t ∩ s) := by\n  rw [restrict, image_comp, image_preimage_eq_inter_range, Subtype.range_coe]\n#align image_restrict image_restrict\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\ntheorem image_restrict (f : α → β) (s t : Set α) :\n    «expr '' » (s.restrict f) («expr ⁻¹' » coe t) = «expr '' » f (t ∩ s) := by\n  rw [restrict, image_comp, image_preimage_eq_inter_range, Subtype.range_coe]\n#align image_restrict image_restrict\n\n",
  "image_inter'":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\ntheorem left_inv_on.image_inter' (hf : LeftInvOn f' f s) : «expr '' » f (s₁ ∩ s) = «expr ⁻¹' » f' s₁ ∩ «expr '' » f s :=\n  by\n  apply subset.antisymm\n  · rintro _ ⟨x, ⟨h₁, h⟩, rfl⟩\n    exact ⟨by rwa [mem_preimage, hf h], mem_image_of_mem _ h⟩\n  · rintro _ ⟨h₁, ⟨x, h, rfl⟩⟩\n    exact mem_image_of_mem _ ⟨by rwa [← hf h], h⟩\n#align left_inv_on.image_inter' left_inv_on.image_inter'\n\n",
  "image_inter":
@@ -335,19 +337,19 @@
  "image_eq":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\ntheorem bij_on.image_eq (h : BijOn f s t) : «expr '' » f s = t :=\n  h.surj_on.image_eq_of_maps_to h.maps_to\n#align bij_on.image_eq bij_on.image_eq\n\n",
  "image":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\n#print Disjoint.image /-\ntheorem Disjoint.image {s t u : set α} {f : α → β} (h : Disjoint s t) (hf : InjOn f u) (hs : s ⊆ u) (ht : t ⊆ u) :\n    Disjoint («expr '' » f s) («expr '' » f t) :=\n  by\n  rw [disjoint_iff_inter_eq_empty] at h⊢\n  rw [← hf.image_inter hs ht, h, image_empty]\n#align disjoint.image Disjoint.image\n-/\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\n#print Disjoint.image /-\ntheorem Disjoint.image {s t u : Set α} {f : α → β} (h : Disjoint s t) (hf : InjOn f u) (hs : s ⊆ u) (ht : t ⊆ u) :\n    Disjoint («expr '' » f s) («expr '' » f t) :=\n  by\n  rw [disjoint_iff_inter_eq_empty] at h⊢\n  rw [← hf.image_inter hs ht, h, image_empty]\n#align disjoint.image Disjoint.image\n-/\n\n",
  "extend_domain":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\nprotected theorem inv_on.extend_domain (h : InvOn g₁ g₂ s t) :\n    InvOn (g₁.extend_domain f) (g₂.extend_domain f) («expr '' » (coe ∘ f) s) («expr '' » (coe ∘ f) t) :=\n  ⟨h.1.extend_domain, h.2.extend_domain⟩\n#align inv_on.extend_domain inv_on.extend_domain\n\n",
  "exists_inj_on_iff_injective":
- "theorem exists_inj_on_iff_injective [nonempty β] : (∃ f : α → β, InjOn f s) ↔ ∃ f : s → β, injective f :=\n  ⟨fun ⟨f, hf⟩ => ⟨_, hf.injective⟩, fun ⟨f, hf⟩ =>\n    by\n    lift f to α → β using trivial\n    exact ⟨f, inj_on_iff_injective.2 hf⟩⟩\n#align exists_inj_on_iff_injective exists_inj_on_iff_injective\n\n",
+ "theorem exists_inj_on_iff_injective [Nonempty β] : (∃ f : α → β, InjOn f s) ↔ ∃ f : s → β, injective f :=\n  ⟨fun ⟨f, hf⟩ => ⟨_, hf.injective⟩, fun ⟨f, hf⟩ =>\n    by\n    lift f to α → β using trivial\n    exact ⟨f, inj_on_iff_injective.2 hf⟩⟩\n#align exists_inj_on_iff_injective exists_inj_on_iff_injective\n\n",
  "eq_restrict_iff":
- "theorem eq_restrict_iff {s : set α} {f : ∀ a : s, π a} {g : ∀ a, π a} :\n    f = restrict s g ↔ ∀ (a) (ha : a ∈ s), f ⟨a, ha⟩ = g a :=\n  funext_iff.trans subtype.forall\n#align eq_restrict_iff eq_restrict_iff\n\n",
+ "theorem eq_restrict_iff {s : Set α} {f : ∀ a : s, π a} {g : ∀ a, π a} :\n    f = restrict s g ↔ ∀ (a) (ha : a ∈ s), f ⟨a, ha⟩ = g a :=\n  funext_iff.trans Subtype.forall\n#align eq_restrict_iff eq_restrict_iff\n\n",
  "eq_on_union":
  "@[simp]\ntheorem eq_on_union : EqOn f₁ f₂ (s₁ ∪ s₂) ↔ EqOn f₁ f₂ s₁ ∧ EqOn f₁ f₂ s₂ :=\n  ball_or_left\n#align eq_on_union eq_on_union\n\n",
  "eq_on_singleton":
  "@[simp]\ntheorem eq_on_singleton : EqOn f₁ f₂ {a} ↔ f₁ a = f₂ a := by simp [Set.EqOn]\n#align eq_on_singleton eq_on_singleton\n\n",
  "eq_on_refl":
- "@[refl]\ntheorem eq_on_refl (f : α → β) (s : set α) : EqOn f f s := fun _ _ => rfl\n#align eq_on_refl eq_on_refl\n\n",
+ "@[refl]\ntheorem eq_on_refl (f : α → β) (s : Set α) : EqOn f f s := fun _ _ => rfl\n#align eq_on_refl eq_on_refl\n\n",
  "eq_on_range":
  "@[simp]\ntheorem eq_on_range {ι : Sort _} {f : ι → α} {g₁ g₂ : α → β} : EqOn g₁ g₂ (range f) ↔ g₁ ∘ f = g₂ ∘ f :=\n  forall_range_iff.trans <| funext_iff.symm\n#align eq_on_range eq_on_range\n\n",
  "eq_on_piecewise":
@@ -367,33 +369,33 @@
  "eq":
  "theorem right_inv_on.eq (h : RightInvOn f' f t) {y} (hy : y ∈ t) : f (f' y) = y :=\n  h hy\n#align right_inv_on.eq right_inv_on.eq\n\n",
  "congr_strict_mono_on":
- "theorem eq_on.congr_strict_mono_on (h : s.eq_on f₁ f₂) : strict_mono_on f₁ s ↔ strict_mono_on f₂ s :=\n  ⟨fun h₁ => h₁.congr h, fun h₂ => h₂.congr h.symm⟩\n#align eq_on.congr_strict_mono_on eq_on.congr_strict_mono_on\n\n",
+ "theorem eq_on.congr_strict_mono_on (h : s.eq_on f₁ f₂) : StrictMonoOn f₁ s ↔ StrictMonoOn f₂ s :=\n  ⟨fun h₁ => h₁.congr h, fun h₂ => h₂.congr h.symm⟩\n#align eq_on.congr_strict_mono_on eq_on.congr_strict_mono_on\n\n",
  "congr_strict_anti_on":
- "theorem eq_on.congr_strict_anti_on (h : s.eq_on f₁ f₂) : strict_anti_on f₁ s ↔ strict_anti_on f₂ s :=\n  ⟨fun h₁ => h₁.congr h, fun h₂ => h₂.congr h.symm⟩\n#align eq_on.congr_strict_anti_on eq_on.congr_strict_anti_on\n\n",
+ "theorem eq_on.congr_strict_anti_on (h : s.eq_on f₁ f₂) : StrictAntiOn f₁ s ↔ StrictAntiOn f₂ s :=\n  ⟨fun h₁ => h₁.congr h, fun h₂ => h₂.congr h.symm⟩\n#align eq_on.congr_strict_anti_on eq_on.congr_strict_anti_on\n\n",
  "congr_right":
  "theorem right_inv_on.congr_right (h₁ : RightInvOn f' f₁ t) (hg : MapsTo f' t s) (heq : EqOn f₁ f₂ s) :\n    RightInvOn f' f₂ t :=\n  LeftInvOn.congr_left h₁ hg HEq\n#align right_inv_on.congr_right right_inv_on.congr_right\n\n",
  "congr_monotone_on":
- "theorem eq_on.congr_monotone_on (h : s.eq_on f₁ f₂) : monotone_on f₁ s ↔ monotone_on f₂ s :=\n  ⟨fun h₁ => h₁.congr h, fun h₂ => h₂.congr h.symm⟩\n#align eq_on.congr_monotone_on eq_on.congr_monotone_on\n\n",
+ "theorem eq_on.congr_monotone_on (h : s.eq_on f₁ f₂) : MonotoneOn f₁ s ↔ MonotoneOn f₂ s :=\n  ⟨fun h₁ => h₁.congr h, fun h₂ => h₂.congr h.symm⟩\n#align eq_on.congr_monotone_on eq_on.congr_monotone_on\n\n",
  "congr_left":
  "theorem right_inv_on.congr_left (h₁ : RightInvOn f₁' f t) (heq : EqOn f₁' f₂' t) : RightInvOn f₂' f t :=\n  h₁.congr_right HEq\n#align right_inv_on.congr_left right_inv_on.congr_left\n\n",
  "congr_antitone_on":
- "theorem eq_on.congr_antitone_on (h : s.eq_on f₁ f₂) : antitone_on f₁ s ↔ antitone_on f₂ s :=\n  ⟨fun h₁ => h₁.congr h, fun h₂ => h₂.congr h.symm⟩\n#align eq_on.congr_antitone_on eq_on.congr_antitone_on\n\n",
+ "theorem eq_on.congr_antitone_on (h : s.eq_on f₁ f₂) : AntitoneOn f₁ s ↔ AntitoneOn f₂ s :=\n  ⟨fun h₁ => h₁.congr h, fun h₂ => h₂.congr h.symm⟩\n#align eq_on.congr_antitone_on eq_on.congr_antitone_on\n\n",
  "congr":
  "theorem bij_on.congr (h₁ : BijOn f₁ s t) (h : EqOn f₁ f₂ s) : BijOn f₂ s t :=\n  BijOn.mk (h₁.maps_to.congr h) (h₁.inj_on.congr h) (h₁.surj_on.congr h)\n#align bij_on.congr bij_on.congr\n\n",
  "compl":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᶜ» -/\ntheorem bij_on.compl (hst : BijOn f s t) (hf : bijective f) : BijOn f («expr ᶜ» s) («expr ᶜ» t) :=\n  ⟨hst.surj_on.maps_to_compl hf.1, hf.1.inj_on _, hst.maps_to.surj_on_compl hf.2⟩\n#align bij_on.compl bij_on.compl\n\n",
  "comp_strictMonoOn":
- "#print StrictAntiOn.comp_strictMonoOn /-\ntheorem StrictAntiOn.comp_strictMonoOn [preorder α] [preorder β] [preorder γ] {g : β → γ} {f : α → β} {s : set α}\n    {t : set β} (hg : strict_anti_on g t) (hf : strict_mono_on f s) (hs : Set.MapsTo f s t) :\n    strict_anti_on (g ∘ f) s := fun x hx y hy hxy => hg (hs hx) (hs hy) <| hf hx hy hxy\n#align strict_anti_on.comp_strict_mono_on StrictAntiOn.comp_strictMonoOn\n-/\n\n",
+ "#print StrictAntiOn.comp_strictMonoOn /-\ntheorem StrictAntiOn.comp_strictMonoOn [preorder α] [preorder β] [preorder γ] {g : β → γ} {f : α → β} {s : Set α}\n    {t : Set β} (hg : StrictAntiOn g t) (hf : StrictMonoOn f s) (hs : Set.MapsTo f s t) : StrictAntiOn (g ∘ f) s :=\n  fun x hx y hy hxy => hg (hs hx) (hs hy) <| hf hx hy hxy\n#align strict_anti_on.comp_strict_mono_on StrictAntiOn.comp_strictMonoOn\n-/\n\n",
  "comp_strictAntiOn":
- "#print StrictMonoOn.comp_strictAntiOn /-\ntheorem StrictMonoOn.comp_strictAntiOn [preorder α] [preorder β] [preorder γ] {g : β → γ} {f : α → β} {s : set α}\n    {t : set β} (hg : strict_mono_on g t) (hf : strict_anti_on f s) (hs : Set.MapsTo f s t) :\n    strict_anti_on (g ∘ f) s := fun x hx y hy hxy => hg (hs hy) (hs hx) <| hf hx hy hxy\n#align strict_mono_on.comp_strict_anti_on StrictMonoOn.comp_strictAntiOn\n-/\n\n",
+ "#print StrictMonoOn.comp_strictAntiOn /-\ntheorem StrictMonoOn.comp_strictAntiOn [preorder α] [preorder β] [preorder γ] {g : β → γ} {f : α → β} {s : Set α}\n    {t : Set β} (hg : StrictMonoOn g t) (hf : StrictAntiOn f s) (hs : Set.MapsTo f s t) : StrictAntiOn (g ∘ f) s :=\n  fun x hx y hy hxy => hg (hs hy) (hs hx) <| hf hx hy hxy\n#align strict_mono_on.comp_strict_anti_on StrictMonoOn.comp_strictAntiOn\n-/\n\n",
  "comp_right":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\ntheorem surj_on.comp_right {s : set β} {t : set γ} (hf : surjective f) (hg : SurjOn g s t) :\n    SurjOn (g ∘ f) («expr ⁻¹' » f s) t := by rwa [surj_on, image_comp g f, image_preimage_eq _ hf]\n#align surj_on.comp_right surj_on.comp_right\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\ntheorem surj_on.comp_right {s : Set β} {t : Set γ} (hf : surjective f) (hg : SurjOn g s t) :\n    SurjOn (g ∘ f) («expr ⁻¹' » f s) t := by rwa [surj_on, image_comp g f, image_preimage_eq _ hf]\n#align surj_on.comp_right surj_on.comp_right\n\n",
  "comp_left":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\ntheorem surj_on.comp_left (hf : SurjOn f s t) (g : β → γ) : SurjOn (g ∘ f) s («expr '' » g t) :=\n  by\n  rw [surj_on, image_comp g f]\n  exact image_subset _ hf\n#align surj_on.comp_left surj_on.comp_left\n\n",
  "comp_inj_on":
  "theorem injective.comp_inj_on (hg : injective g) (hf : s.inj_on f) : s.inj_on (g ∘ f) :=\n  (hg.inj_on univ).comp hf (mapsTo_univ _ _)\n#align injective.comp_inj_on injective.comp_inj_on\n\n",
  "comp":
- "#print StrictAntiOn.comp /-\ntheorem StrictAntiOn.comp [preorder α] [preorder β] [preorder γ] {g : β → γ} {f : α → β} {s : set α} {t : set β}\n    (hg : strict_anti_on g t) (hf : strict_anti_on f s) (hs : Set.MapsTo f s t) : strict_mono_on (g ∘ f) s :=\n  fun x hx y hy hxy => hg (hs hy) (hs hx) <| hf hx hy hxy\n#align strict_anti_on.comp StrictAntiOn.comp\n-/\n\n",
+ "#print StrictAntiOn.comp /-\ntheorem StrictAntiOn.comp [preorder α] [preorder β] [preorder γ] {g : β → γ} {f : α → β} {s : Set α} {t : Set β}\n    (hg : StrictAntiOn g t) (hf : StrictAntiOn f s) (hs : Set.MapsTo f s t) : StrictMonoOn (g ∘ f) s :=\n  fun x hx y hy hxy => hg (hs hy) (hs hx) <| hf hx hy hxy\n#align strict_anti_on.comp StrictAntiOn.comp\n-/\n\n",
  "comap_nonempty":
  "theorem surj_on.comap_nonempty (h : SurjOn f s t) (ht : t.nonempty) : s.nonempty :=\n  (ht.mono h).of_image\n#align surj_on.comap_nonempty surj_on.comap_nonempty\n\n",
  "coe_restrict_apply":
@@ -401,13 +403,13 @@
  "coe_restrict":
  "theorem maps_to.coe_restrict (h : Set.MapsTo f s t) : coe ∘ h.restrict f s t = s.restrict f :=\n  rfl\n#align maps_to.coe_restrict maps_to.coe_restrict\n\n",
  "coe_cod_restrict_apply":
- "@[simp]\ntheorem coe_cod_restrict_apply (f : ι → α) (s : set α) (h : ∀ x, f x ∈ s) (x : ι) : (codRestrict f s h x : α) = f x :=\n  rfl\n#align coe_cod_restrict_apply coe_cod_restrict_apply\n\n",
+ "@[simp]\ntheorem coe_cod_restrict_apply (f : ι → α) (s : Set α) (h : ∀ x, f x ∈ s) (x : ι) : (codRestrict f s h x : α) = f x :=\n  rfl\n#align coe_cod_restrict_apply coe_cod_restrict_apply\n\n",
  "cod_restrict_restrict":
  "/-- Restricting the domain and then the codomain is the same as `maps_to.restrict`. -/\n@[simp]\ntheorem cod_restrict_restrict (h : ∀ x : s, f x ∈ t) :\n    codRestrict (s.restrict f) t h = MapsTo.restrict f s t fun x hx => h ⟨x, hx⟩ :=\n  rfl\n#align cod_restrict_restrict cod_restrict_restrict\n\n",
  "cod_restrict":
- "protected theorem cod_restrict (h : monotone f) {s : set β} (hs : ∀ x, f x ∈ s) : monotone (s.cod_restrict f hs) :=\n  h\n#align cod_restrict cod_restrict\n\n",
+ "protected theorem cod_restrict (h : Monotone f) {s : Set β} (hs : ∀ x, f x ∈ s) : Monotone (s.cod_restrict f hs) :=\n  h\n#align cod_restrict cod_restrict\n\n",
  "codRestrict":
- "#print StrictMono.codRestrict /-\ntheorem StrictMono.codRestrict [preorder α] [preorder β] {f : α → β} (hf : strict_mono f) {s : set β}\n    (hs : ∀ x, f x ∈ s) : strict_mono (Set.codRestrict f s hs) :=\n  hf\n#align strict_mono.cod_restrict StrictMono.codRestrict\n-/\n\n",
+ "#print StrictMono.codRestrict /-\ntheorem StrictMono.codRestrict [preorder α] [preorder β] {f : α → β} (hf : StrictMono f) {s : Set β}\n    (hs : ∀ x, f x ∈ s) : StrictMono (Set.codRestrict f s hs) :=\n  hf\n#align strict_mono.cod_restrict StrictMono.codRestrict\n-/\n\n",
  "cancel_right":
  "theorem surj_on.cancel_right (hf : s.surj_on f t) (hf' : s.maps_to f t) : s.eq_on (g₁ ∘ f) (g₂ ∘ f) ↔ t.eq_on g₁ g₂ :=\n  ⟨fun h => h.cancel_right hf, fun h => h.comp_right hf'⟩\n#align surj_on.cancel_right surj_on.cancel_right\n\n",
  "cancel_left":
@@ -415,7 +417,7 @@
  "bijective_iff_bij_on_univ":
  "theorem bijective_iff_bij_on_univ : bijective f ↔ BijOn f univ univ :=\n  iff.intro\n    (fun h =>\n      let ⟨inj, surj⟩ := h\n      ⟨mapsTo_univ f _, inj.inj_on _, Iff.mp surjective_iff_surjOn_univ surj⟩)\n    fun h =>\n    let ⟨map, inj, surj⟩ := h\n    ⟨Iff.mpr injective_iff_injOn_univ inj, Iff.mpr surjective_iff_surjOn_univ surj⟩\n#align bijective_iff_bij_on_univ bijective_iff_bij_on_univ\n\n",
  "bijective":
- "theorem bij_on.bijective (h : BijOn f s t) : bijective (h.maps_to.restrict f s t) :=\n  ⟨fun x y h' => subtype.ext <| h.inj_on x.2 y.2 <| subtype.ext_iff.1 h', fun ⟨y, hy⟩ =>\n    let ⟨x, hx, hxy⟩ := h.surj_on hy\n    ⟨⟨x, hx⟩, subtype.eq hxy⟩⟩\n#align bij_on.bijective bij_on.bijective\n\n",
+ "theorem bij_on.bijective (h : BijOn f s t) : bijective (h.maps_to.restrict f s t) :=\n  ⟨fun x y h' => Subtype.ext <| h.inj_on x.2 y.2 <| Subtype.ext_iff.1 h', fun ⟨y, hy⟩ =>\n    let ⟨x, hx, hxy⟩ := h.surj_on hy\n    ⟨⟨x, hx⟩, Subtype.eq hxy⟩⟩\n#align bij_on.bijective bij_on.bijective\n\n",
  "bij_on_symm_image":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\ntheorem bij_on_symm_image : BijOn e.symm («expr '' » e s) s :=\n  e.bij_on_image.symm e.inv_on\n#align bij_on_symm_image bij_on_symm_image\n\n",
  "bij_on_symm":
@@ -423,21 +425,21 @@
  "bij_on_swap":
  "theorem bij_on_swap (ha : a ∈ s) (hb : b ∈ s) : BijOn (swap a b) s s :=\n  (swap a b).bij_on fun x => by\n    obtain rfl | hxa := eq_or_ne x a <;> obtain rfl | hxb := eq_or_ne x b <;> simp [*, swap_apply_of_ne_of_ne]\n#align bij_on_swap bij_on_swap\n\n",
  "bij_on_subset":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\ntheorem surj_on.bij_on_subset [nonempty α] (h : SurjOn f s t) : BijOn f («expr '' » (invFunOn f s) t) t :=\n  by\n  refine' h.inv_on_inv_fun_on.bij_on _ (maps_to_image _ _)\n  rintro _ ⟨y, hy, rfl⟩\n  rwa [h.right_inv_on_inv_fun_on hy]\n#align surj_on.bij_on_subset surj_on.bij_on_subset\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\ntheorem surj_on.bij_on_subset [Nonempty α] (h : SurjOn f s t) : BijOn f («expr '' » (invFunOn f s) t) t :=\n  by\n  refine' h.inv_on_inv_fun_on.bij_on _ (maps_to_image _ _)\n  rintro _ ⟨y, hy, rfl⟩\n  rwa [h.right_inv_on_inv_fun_on hy]\n#align surj_on.bij_on_subset surj_on.bij_on_subset\n\n",
  "bij_on_singleton":
  "@[simp]\ntheorem bij_on_singleton : BijOn f {a} {b} ↔ f a = b := by simp [bij_on, eq_comm]\n#align bij_on_singleton bij_on_singleton\n\n",
  "bij_on_range":
- "theorem bij_on_range (h : semiconj f fa fb) (ha : bijective fa) (hf : injective f) : BijOn fb (range f) (range f) :=\n  by\n  rw [← image_univ]\n  exact h.bij_on_image (bijective_iff_bij_on_univ.1 ha) (hf.inj_on univ)\n#align bij_on_range bij_on_range\n\n",
+ "theorem bij_on_range (h : Semiconj f fa fb) (ha : bijective fa) (hf : injective f) : BijOn fb (range f) (range f) :=\n  by\n  rw [← image_univ]\n  exact h.bij_on_image (bijective_iff_bij_on_univ.1 ha) (hf.inj_on univ)\n#align bij_on_range bij_on_range\n\n",
  "bij_on_of_subsingleton'":
  "theorem bij_on_of_subsingleton' [subsingleton α] [subsingleton β] (f : α → β) (h : s.nonempty ↔ t.nonempty) :\n    BijOn f s t :=\n  ⟨mapsTo_of_subsingleton' _ h.1, injOn_of_subsingleton _ _, surjOn_of_subsingleton' _ h.2⟩\n#align bij_on_of_subsingleton' bij_on_of_subsingleton'\n\n",
  "bij_on_of_subsingleton":
- "theorem bij_on_of_subsingleton [subsingleton α] (f : α → α) (s : set α) : BijOn f s s :=\n  bijOn_of_subsingleton' _ iff.rfl\n#align bij_on_of_subsingleton bij_on_of_subsingleton\n\n",
+ "theorem bij_on_of_subsingleton [subsingleton α] (f : α → α) (s : Set α) : BijOn f s s :=\n  bijOn_of_subsingleton' _ iff.rfl\n#align bij_on_of_subsingleton bij_on_of_subsingleton\n\n",
  "bij_on_image":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\ntheorem bij_on_image : BijOn e s («expr '' » e s) :=\n  (e.injective.inj_on _).bij_on_image\n#align bij_on_image bij_on_image\n\n",
  "bij_on_iff":
  "theorem eq_on.bij_on_iff (H : EqOn f₁ f₂ s) : BijOn f₁ s t ↔ BijOn f₂ s t :=\n  ⟨fun h => h.congr H, fun h => h.congr H.symm⟩\n#align eq_on.bij_on_iff eq_on.bij_on_iff\n\n",
  "bij_on_id":
- "theorem bij_on_id (s : set α) : BijOn id s s :=\n  ⟨s.maps_to_id, s.inj_on_id, s.surj_on_id⟩\n#align bij_on_id bij_on_id\n\n",
+ "theorem bij_on_id (s : Set α) : BijOn id s s :=\n  ⟨s.maps_to_id, s.inj_on_id, s.surj_on_id⟩\n#align bij_on_id bij_on_id\n\n",
  "bij_on_empty":
  "@[simp]\ntheorem bij_on_empty (f : α → β) : BijOn f ∅ ∅ :=\n  ⟨mapsTo_empty f ∅, injOn_empty f, surjOn_empty f ∅⟩\n#align bij_on_empty bij_on_empty\n\n",
  "bij_on_comm":
@@ -451,4 +453,4 @@
  "apply_piecewise":
  "theorem apply_piecewise {δ' : α → Sort _} (h : ∀ i, δ i → δ' i) {x : α} :\n    h x (s.piecewise f g x) = s.piecewise (fun x => h x (f x)) (fun x => h x (g x)) x := by\n  by_cases hx : x ∈ s <;> simp [hx]\n#align apply_piecewise apply_piecewise\n\n",
  "antitone_on_of_right_inv_on_of_maps_to":
- "theorem antitone_on_of_right_inv_on_of_maps_to [partial_order α] [linear_order β] {φ : β → α} {ψ : α → β} {t : set β}\n    {s : set α} (hφ : antitone_on φ t) (φψs : Set.RightInvOn ψ φ s) (ψts : Set.MapsTo ψ s t) : antitone_on ψ s :=\n  (monotoneOn_of_rightInvOn_of_mapsTo hφ.dual_left φψs ψts).dual_right\n#align antitone_on_of_right_inv_on_of_maps_to antitone_on_of_right_inv_on_of_maps_to\n\n"}
+ "theorem antitone_on_of_right_inv_on_of_maps_to [partial_order α] [linear_order β] {φ : β → α} {ψ : α → β} {t : Set β}\n    {s : Set α} (hφ : AntitoneOn φ t) (φψs : Set.RightInvOn ψ φ s) (ψts : Set.MapsTo ψ s t) : AntitoneOn ψ s :=\n  (monotoneOn_of_rightInvOn_of_mapsTo hφ.dual_left φψs ψts).dual_right\n#align antitone_on_of_right_inv_on_of_maps_to antitone_on_of_right_inv_on_of_maps_to\n\n"}

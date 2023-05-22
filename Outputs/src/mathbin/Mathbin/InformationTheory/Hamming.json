@@ -1,104 +1,104 @@
 {"to_hamming_zero":
- "@[simp]\ntheorem to_hamming_zero [∀ i, Zero (β i)] : to_hamming (0 : ∀ i, β i) = 0 :=\n  rfl\n#align to_hamming_zero to_hamming_zero\n\n",
+ "@[simp]\ntheorem to_hamming_zero [∀ i, Zero (β i)] : toHamming (0 : ∀ i, β i) = 0 :=\n  rfl\n#align to_hamming_zero to_hamming_zero\n\n",
  "to_hamming_symm_eq":
- "@[simp]\ntheorem to_hamming_symm_eq : (@to_hamming _ β).symm = of_hamming :=\n  rfl\n#align to_hamming_symm_eq to_hamming_symm_eq\n\n",
+ "@[simp]\ntheorem to_hamming_symm_eq : (@toHamming _ β).symm = ofHamming :=\n  rfl\n#align to_hamming_symm_eq to_hamming_symm_eq\n\n",
  "to_hamming_sub":
- "@[simp]\ntheorem to_hamming_sub [∀ i, Sub (β i)] {x y : ∀ i, β i} : to_hamming (x - y) = to_hamming x - to_hamming y :=\n  rfl\n#align to_hamming_sub to_hamming_sub\n\n",
+ "@[simp]\ntheorem to_hamming_sub [∀ i, Sub (β i)] {x y : ∀ i, β i} : toHamming (x - y) = toHamming x - toHamming y :=\n  rfl\n#align to_hamming_sub to_hamming_sub\n\n",
  "to_hamming_smul":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n@[simp]\ntheorem to_hamming_smul [∀ i, SMul α (β i)] {r : α} {x : ∀ i, β i} :\n    to_hamming («expr • » r x) = «expr • » r (to_hamming x) :=\n  rfl\n#align to_hamming_smul to_hamming_smul\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n@[simp]\ntheorem to_hamming_smul [∀ i, SMul α (β i)] {r : α} {x : ∀ i, β i} :\n    toHamming («expr • » r x) = «expr • » r (toHamming x) :=\n  rfl\n#align to_hamming_smul to_hamming_smul\n\n",
  "to_hamming_of_hamming":
- "@[simp]\ntheorem to_hamming_of_hamming (x : hamming β) : to_hamming (of_hamming x) = x :=\n  rfl\n#align to_hamming_of_hamming to_hamming_of_hamming\n\n",
+ "@[simp]\ntheorem to_hamming_of_hamming (x : Hamming β) : toHamming (ofHamming x) = x :=\n  rfl\n#align to_hamming_of_hamming to_hamming_of_hamming\n\n",
  "to_hamming_neg":
- "@[simp]\ntheorem to_hamming_neg [∀ i, Neg (β i)] {x : ∀ i, β i} : to_hamming (-x) = -to_hamming x :=\n  rfl\n#align to_hamming_neg to_hamming_neg\n\n",
+ "@[simp]\ntheorem to_hamming_neg [∀ i, Neg (β i)] {x : ∀ i, β i} : toHamming (-x) = -toHamming x :=\n  rfl\n#align to_hamming_neg to_hamming_neg\n\n",
  "to_hamming_inj":
- "@[simp]\ntheorem to_hamming_inj {x y : ∀ i, β i} : to_hamming x = to_hamming y ↔ x = y :=\n  iff.rfl\n#align to_hamming_inj to_hamming_inj\n\n",
+ "@[simp]\ntheorem to_hamming_inj {x y : ∀ i, β i} : toHamming x = toHamming y ↔ x = y :=\n  iff.rfl\n#align to_hamming_inj to_hamming_inj\n\n",
  "to_hamming_add":
- "@[simp]\ntheorem to_hamming_add [∀ i, Add (β i)] {x y : ∀ i, β i} : to_hamming (x + y) = to_hamming x + to_hamming y :=\n  rfl\n#align to_hamming_add to_hamming_add\n\n",
- "swap_hamming_dist":
- "/-- Corresponds to `swap_dist`. -/\ntheorem swap_hamming_dist : swap (@hamming_dist _ β _ _) = hamming_dist :=\n  by\n  funext x y\n  exact hamming_dist_comm _ _\n#align swap_hamming_dist swap_hamming_dist\n\n",
+ "@[simp]\ntheorem to_hamming_add [∀ i, Add (β i)] {x y : ∀ i, β i} : toHamming (x + y) = toHamming x + toHamming y :=\n  rfl\n#align to_hamming_add to_hamming_add\n\n",
+ "swap_hammingDist":
+ "#print swap_hammingDist /-\n/-- Corresponds to `swap_dist`. -/\ntheorem swap_hammingDist : swap (@hammingDist _ β _ _) = hammingDist :=\n  by\n  funext x y\n  exact hammingDist_comm _ _\n#align swap_hamming_dist swap_hammingDist\n-/\n\n",
  "of_hamming_zero":
- "@[simp]\ntheorem of_hamming_zero [∀ i, Zero (β i)] : of_hamming (0 : hamming β) = 0 :=\n  rfl\n#align of_hamming_zero of_hamming_zero\n\n",
+ "@[simp]\ntheorem of_hamming_zero [∀ i, Zero (β i)] : ofHamming (0 : Hamming β) = 0 :=\n  rfl\n#align of_hamming_zero of_hamming_zero\n\n",
  "of_hamming_to_hamming":
- "@[simp]\ntheorem of_hamming_to_hamming (x : ∀ i, β i) : of_hamming (to_hamming x) = x :=\n  rfl\n#align of_hamming_to_hamming of_hamming_to_hamming\n\n",
+ "@[simp]\ntheorem of_hamming_to_hamming (x : ∀ i, β i) : ofHamming (toHamming x) = x :=\n  rfl\n#align of_hamming_to_hamming of_hamming_to_hamming\n\n",
  "of_hamming_symm_eq":
- "@[simp]\ntheorem of_hamming_symm_eq : (@of_hamming _ β).symm = to_hamming :=\n  rfl\n#align of_hamming_symm_eq of_hamming_symm_eq\n\n",
+ "@[simp]\ntheorem of_hamming_symm_eq : (@ofHamming _ β).symm = toHamming :=\n  rfl\n#align of_hamming_symm_eq of_hamming_symm_eq\n\n",
  "of_hamming_sub":
- "@[simp]\ntheorem of_hamming_sub [∀ i, Sub (β i)] {x y : hamming β} : of_hamming (x - y) = of_hamming x - of_hamming y :=\n  rfl\n#align of_hamming_sub of_hamming_sub\n\n",
+ "@[simp]\ntheorem of_hamming_sub [∀ i, Sub (β i)] {x y : Hamming β} : ofHamming (x - y) = ofHamming x - ofHamming y :=\n  rfl\n#align of_hamming_sub of_hamming_sub\n\n",
  "of_hamming_smul":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n@[simp]\ntheorem of_hamming_smul [∀ i, SMul α (β i)] {r : α} {x : hamming β} :\n    of_hamming («expr • » r x) = «expr • » r (of_hamming x) :=\n  rfl\n#align of_hamming_smul of_hamming_smul\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n@[simp]\ntheorem of_hamming_smul [∀ i, SMul α (β i)] {r : α} {x : Hamming β} :\n    ofHamming («expr • » r x) = «expr • » r (ofHamming x) :=\n  rfl\n#align of_hamming_smul of_hamming_smul\n\n",
  "of_hamming_neg":
- "@[simp]\ntheorem of_hamming_neg [∀ i, Neg (β i)] {x : hamming β} : of_hamming (-x) = -of_hamming x :=\n  rfl\n#align of_hamming_neg of_hamming_neg\n\n",
+ "@[simp]\ntheorem of_hamming_neg [∀ i, Neg (β i)] {x : Hamming β} : ofHamming (-x) = -ofHamming x :=\n  rfl\n#align of_hamming_neg of_hamming_neg\n\n",
  "of_hamming_inj":
- "@[simp]\ntheorem of_hamming_inj {x y : hamming β} : of_hamming x = of_hamming y ↔ x = y :=\n  iff.rfl\n#align of_hamming_inj of_hamming_inj\n\n",
+ "@[simp]\ntheorem of_hamming_inj {x y : Hamming β} : ofHamming x = ofHamming y ↔ x = y :=\n  iff.rfl\n#align of_hamming_inj of_hamming_inj\n\n",
  "of_hamming_add":
- "@[simp]\ntheorem of_hamming_add [∀ i, Add (β i)] {x y : hamming β} : of_hamming (x + y) = of_hamming x + of_hamming y :=\n  rfl\n#align of_hamming_add of_hamming_add\n\n",
+ "@[simp]\ntheorem of_hamming_add [∀ i, Add (β i)] {x y : Hamming β} : ofHamming (x + y) = ofHamming x + ofHamming y :=\n  rfl\n#align of_hamming_add of_hamming_add\n\n",
  "norm_eq_hamming_norm":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr‖ ‖» -/\n@[simp, push_cast]\ntheorem norm_eq_hamming_norm [∀ i, Zero (β i)] (x : hamming β) : «expr‖ ‖» x = hamming_norm (of_hamming x) :=\n  rfl\n#align norm_eq_hamming_norm norm_eq_hamming_norm\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr‖ ‖» -/\n@[simp, push_cast]\ntheorem norm_eq_hamming_norm [∀ i, Zero (β i)] (x : Hamming β) : «expr‖ ‖» x = hammingNorm (ofHamming x) :=\n  rfl\n#align norm_eq_hamming_norm norm_eq_hamming_norm\n\n",
  "nnnorm_eq_hamming_norm":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr‖ ‖₊» -/\n@[simp, push_cast]\ntheorem nnnorm_eq_hamming_norm [∀ i, add_comm_group (β i)] (x : hamming β) :\n    «expr‖ ‖₊» x = hamming_norm (of_hamming x) :=\n  rfl\n#align nnnorm_eq_hamming_norm nnnorm_eq_hamming_norm\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr‖ ‖₊» -/\n@[simp, push_cast]\ntheorem nnnorm_eq_hamming_norm [∀ i, AddCommGroup (β i)] (x : Hamming β) : «expr‖ ‖₊» x = hammingNorm (ofHamming x) :=\n  rfl\n#align nnnorm_eq_hamming_norm nnnorm_eq_hamming_norm\n\n",
  "nndist_eq_hamming_dist":
- "@[simp, push_cast]\ntheorem nndist_eq_hamming_dist (x y : hamming β) : nndist x y = hamming_dist (of_hamming x) (of_hamming y) :=\n  rfl\n#align nndist_eq_hamming_dist nndist_eq_hamming_dist\n\n",
+ "@[simp, push_cast]\ntheorem nndist_eq_hamming_dist (x y : Hamming β) : nndist x y = hammingDist (ofHamming x) (ofHamming y) :=\n  rfl\n#align nndist_eq_hamming_dist nndist_eq_hamming_dist\n\n",
  "hamming_zero_eq_dist":
- "/-- Corresponds to `zero_eq_dist`. -/\n@[simp]\ntheorem hamming_zero_eq_dist {x y : ∀ i, β i} : 0 = hamming_dist x y ↔ x = y := by rw [eq_comm, hamming_dist_eq_zero]\n#align hamming_zero_eq_dist hamming_zero_eq_dist\n\n",
- "hamming_norm_zero":
- "/-- Corresponds to `norm_zero`. -/\n@[simp]\ntheorem hamming_norm_zero : hamming_norm (0 : ∀ i, β i) = 0 :=\n  hamming_dist_self _\n#align hamming_norm_zero hamming_norm_zero\n\n",
- "hamming_norm_smul_le_hamming_norm":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\ntheorem hamming_norm_smul_le_hamming_norm [Zero α] [∀ i, SMulWithZero α (β i)] {k : α} {x : ∀ i, β i} :\n    hamming_norm («expr • » k x) ≤ hamming_norm x :=\n  hamming_norm_comp_le_hamming_norm (fun i (c : β i) => «expr • » k c) fun i => by simp_rw [smul_zero]\n#align hamming_norm_smul_le_hamming_norm hamming_norm_smul_le_hamming_norm\n\n",
- "hamming_norm_smul":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\ntheorem hamming_norm_smul [Zero α] [∀ i, SMulWithZero α (β i)] {k : α} (hk : ∀ i, IsSMulRegular (β i) k)\n    (x : ∀ i, β i) : hamming_norm («expr • » k x) = hamming_norm x :=\n  hamming_norm_comp (fun i (c : β i) => «expr • » k c) hk fun i => by simp_rw [smul_zero]\n#align hamming_norm_smul hamming_norm_smul\n\n",
- "hamming_norm_pos_iff":
- "/-- Corresponds to `norm_pos_iff`. -/\n@[simp]\ntheorem hamming_norm_pos_iff {x : ∀ i, β i} : 0 < hamming_norm x ↔ x ≠ 0 :=\n  hamming_dist_pos\n#align hamming_norm_pos_iff hamming_norm_pos_iff\n\n",
- "hamming_norm_nonneg":
- "/-- Corresponds to `norm_nonneg`. -/\n@[simp]\ntheorem hamming_norm_nonneg {x : ∀ i, β i} : 0 ≤ hamming_norm x :=\n  zero_le _\n#align hamming_norm_nonneg hamming_norm_nonneg\n\n",
- "hamming_norm_ne_zero_iff":
- "/-- Corresponds to `norm_ne_zero_iff`. -/\ntheorem hamming_norm_ne_zero_iff {x : ∀ i, β i} : hamming_norm x ≠ 0 ↔ x ≠ 0 :=\n  hamming_norm_eq_zero.not\n#align hamming_norm_ne_zero_iff hamming_norm_ne_zero_iff\n\n",
- "hamming_norm_lt_one":
- "@[simp]\ntheorem hamming_norm_lt_one {x : ∀ i, β i} : hamming_norm x < 1 ↔ x = 0 :=\n  hamming_dist_lt_one\n#align hamming_norm_lt_one hamming_norm_lt_one\n\n",
- "hamming_norm_le_card_fintype":
- "theorem hamming_norm_le_card_fintype {x : ∀ i, β i} : hamming_norm x ≤ fintype.card ι :=\n  hamming_dist_le_card_fintype\n#align hamming_norm_le_card_fintype hamming_norm_le_card_fintype\n\n",
- "hamming_norm_eq_zero":
- "/-- Corresponds to `norm_eq_zero`. -/\n@[simp]\ntheorem hamming_norm_eq_zero {x : ∀ i, β i} : hamming_norm x = 0 ↔ x = 0 :=\n  hamming_dist_eq_zero\n#align hamming_norm_eq_zero hamming_norm_eq_zero\n\n",
- "hamming_norm_comp_le_hamming_norm":
- "theorem hamming_norm_comp_le_hamming_norm (f : ∀ i, γ i → β i) {x : ∀ i, γ i} (hf : ∀ i, f i 0 = 0) :\n    (hamming_norm fun i => f i (x i)) ≤ hamming_norm x :=\n  by\n  convert hamming_dist_comp_le_hamming_dist f\n  simp_rw [hf]\n  rfl\n#align hamming_norm_comp_le_hamming_norm hamming_norm_comp_le_hamming_norm\n\n",
- "hamming_norm_comp":
- "theorem hamming_norm_comp (f : ∀ i, γ i → β i) {x : ∀ i, γ i} (hf₁ : ∀ i, injective (f i)) (hf₂ : ∀ i, f i 0 = 0) :\n    (hamming_norm fun i => f i (x i)) = hamming_norm x :=\n  by\n  convert hamming_dist_comp f hf₁\n  simp_rw [hf₂]\n  rfl\n#align hamming_norm_comp hamming_norm_comp\n\n",
- "hamming_dist_zero_right":
- "/-- Corresponds to `dist_zero_right`. -/\n@[simp]\ntheorem hamming_dist_zero_right (x : ∀ i, β i) : hamming_dist x 0 = hamming_norm x :=\n  rfl\n#align hamming_dist_zero_right hamming_dist_zero_right\n\n",
- "hamming_dist_zero_left":
- "/-- Corresponds to `dist_zero_left`. -/\n@[simp]\ntheorem hamming_dist_zero_left : hamming_dist (0 : ∀ i, β i) = hamming_norm :=\n  funext fun x => by rw [hamming_dist_comm, hamming_dist_zero_right]\n#align hamming_dist_zero_left hamming_dist_zero_left\n\n",
- "hamming_dist_triangle_right":
- "/-- Corresponds to `dist_triangle_right`. -/\ntheorem hamming_dist_triangle_right (x y z : ∀ i, β i) : hamming_dist x y ≤ hamming_dist x z + hamming_dist y z :=\n  by\n  rw [hamming_dist_comm y]\n  exact hamming_dist_triangle _ _ _\n#align hamming_dist_triangle_right hamming_dist_triangle_right\n\n",
- "hamming_dist_triangle_left":
- "/-- Corresponds to `dist_triangle_left`. -/\ntheorem hamming_dist_triangle_left (x y z : ∀ i, β i) : hamming_dist x y ≤ hamming_dist z x + hamming_dist z y :=\n  by\n  rw [hamming_dist_comm z]\n  exact hamming_dist_triangle _ _ _\n#align hamming_dist_triangle_left hamming_dist_triangle_left\n\n",
- "hamming_dist_triangle":
- "/-- Corresponds to `dist_triangle`. -/\ntheorem hamming_dist_triangle (x y z : ∀ i, β i) : hamming_dist x z ≤ hamming_dist x y + hamming_dist y z := by\n  classical\n    simp_rw [hamming_dist]\n    refine' le_trans (card_mono _) (card_union_le _ _)\n    rw [← filter_or]\n    refine' monotone_filter_right _ _\n    intro i h\n    by_contra' H\n    exact h (eq.trans H.1 H.2)\n#align hamming_dist_triangle hamming_dist_triangle\n\n",
- "hamming_dist_smul_le_hamming_dist":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:219:4: warning: unsupported binary notation `«expr • » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\ntheorem hamming_dist_smul_le_hamming_dist [∀ i, SMul α (β i)] {k : α} {x y : ∀ i, β i} :\n    hamming_dist («expr • » k x) («expr • » k y) ≤ hamming_dist x y :=\n  hamming_dist_comp_le_hamming_dist fun i => («expr • » · ·) k\n#align hamming_dist_smul_le_hamming_dist hamming_dist_smul_le_hamming_dist\n\n",
- "hamming_dist_smul":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:219:4: warning: unsupported binary notation `«expr • » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/-- Corresponds to `dist_smul` with the discrete norm on `α`. -/\ntheorem hamming_dist_smul [∀ i, SMul α (β i)] {k : α} {x y : ∀ i, β i} (hk : ∀ i, IsSMulRegular (β i) k) :\n    hamming_dist («expr • » k x) («expr • » k y) = hamming_dist x y :=\n  hamming_dist_comp (fun i => («expr • » · ·) k) hk\n#align hamming_dist_smul hamming_dist_smul\n\n",
- "hamming_dist_self":
- "/-\nCopyright (c) 2022 Wrenna Robson. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Wrenna Robson\n-/\n/-- Corresponds to `dist_self`. -/\n@[simp]\ntheorem hamming_dist_self (x : ∀ i, β i) : hamming_dist x x = 0 :=\n  by\n  rw [hamming_dist, card_eq_zero, filter_eq_empty_iff]\n  exact fun _ _ H => H rfl\n#align hamming_dist_self hamming_dist_self\n\n",
- "hamming_dist_pos":
- "/-- Corresponds to `dist_pos`. -/\n@[simp]\ntheorem hamming_dist_pos {x y : ∀ i, β i} : 0 < hamming_dist x y ↔ x ≠ y := by\n  rw [← hamming_dist_ne_zero, iff_not_comm, not_lt, le_zero_iff]\n#align hamming_dist_pos hamming_dist_pos\n\n",
- "hamming_dist_nonneg":
- "/-- Corresponds to `dist_nonneg`. -/\ntheorem hamming_dist_nonneg {x y : ∀ i, β i} : 0 ≤ hamming_dist x y :=\n  zero_le _\n#align hamming_dist_nonneg hamming_dist_nonneg\n\n",
- "hamming_dist_ne_zero":
- "/-- Corresponds to `dist_ne_zero`. -/\ntheorem hamming_dist_ne_zero {x y : ∀ i, β i} : hamming_dist x y ≠ 0 ↔ x ≠ y :=\n  hamming_dist_eq_zero.not\n#align hamming_dist_ne_zero hamming_dist_ne_zero\n\n",
- "hamming_dist_lt_one":
- "@[simp]\ntheorem hamming_dist_lt_one {x y : ∀ i, β i} : hamming_dist x y < 1 ↔ x = y := by\n  rw [Nat.lt_one_iff, hamming_dist_eq_zero]\n#align hamming_dist_lt_one hamming_dist_lt_one\n\n",
- "hamming_dist_le_card_fintype":
- "theorem hamming_dist_le_card_fintype {x y : ∀ i, β i} : hamming_dist x y ≤ fintype.card ι :=\n  card_le_univ _\n#align hamming_dist_le_card_fintype hamming_dist_le_card_fintype\n\n",
- "hamming_dist_eq_zero":
- "/-- Corresponds to `dist_eq_zero`. -/\n@[simp]\ntheorem hamming_dist_eq_zero {x y : ∀ i, β i} : hamming_dist x y = 0 ↔ x = y :=\n  ⟨eq_of_hamming_dist_eq_zero, fun H => by\n    rw [H]\n    exact hamming_dist_self _⟩\n#align hamming_dist_eq_zero hamming_dist_eq_zero\n\n",
- "hamming_dist_eq_hamming_norm":
- "/-- Corresponds to `dist_eq_norm`. -/\ntheorem hamming_dist_eq_hamming_norm [∀ i, add_group (β i)] (x y : ∀ i, β i) :\n    hamming_dist x y = hamming_norm (x - y) := by simp_rw [hamming_norm, hamming_dist, pi.sub_apply, sub_ne_zero]\n#align hamming_dist_eq_hamming_norm hamming_dist_eq_hamming_norm\n\n",
- "hamming_dist_comp_le_hamming_dist":
- "theorem hamming_dist_comp_le_hamming_dist (f : ∀ i, γ i → β i) {x y : ∀ i, γ i} :\n    (hamming_dist (fun i => f i (x i)) fun i => f i (y i)) ≤ hamming_dist x y :=\n  card_mono (monotone_filter_right _ fun i H1 H2 => H1 <| congr_arg (f i) H2)\n#align hamming_dist_comp_le_hamming_dist hamming_dist_comp_le_hamming_dist\n\n",
- "hamming_dist_comp":
- "theorem hamming_dist_comp (f : ∀ i, γ i → β i) {x y : ∀ i, γ i} (hf : ∀ i, injective (f i)) :\n    (hamming_dist (fun i => f i (x i)) fun i => f i (y i)) = hamming_dist x y :=\n  by\n  refine' le_antisymm (hamming_dist_comp_le_hamming_dist _) _\n  exact card_mono (monotone_filter_right _ fun i H1 H2 => H1 <| hf i H2)\n#align hamming_dist_comp hamming_dist_comp\n\n",
- "hamming_dist_comm":
- "/-- Corresponds to `dist_comm`. -/\ntheorem hamming_dist_comm (x y : ∀ i, β i) : hamming_dist x y = hamming_dist y x := by simp_rw [hamming_dist, ne_comm]\n#align hamming_dist_comm hamming_dist_comm\n\n",
- "eq_of_hamming_dist_eq_zero":
- "/-- Corresponds to `eq_of_dist_eq_zero`. -/\ntheorem eq_of_hamming_dist_eq_zero {x y : ∀ i, β i} : hamming_dist x y = 0 → x = y := by\n  simp_rw [hamming_dist, card_eq_zero, filter_eq_empty_iff, not_not, funext_iff, mem_univ, forall_true_left, imp_self]\n#align eq_of_hamming_dist_eq_zero eq_of_hamming_dist_eq_zero\n\n",
+ "#print hamming_zero_eq_dist /-\n/-- Corresponds to `zero_eq_dist`. -/\n@[simp]\ntheorem hamming_zero_eq_dist {x y : ∀ i, β i} : 0 = hammingDist x y ↔ x = y := by rw [eq_comm, hammingDist_eq_zero]\n#align hamming_zero_eq_dist hamming_zero_eq_dist\n-/\n\n",
+ "hammingNorm_zero":
+ "#print hammingNorm_zero /-\n/-- Corresponds to `norm_zero`. -/\n@[simp]\ntheorem hammingNorm_zero : hammingNorm (0 : ∀ i, β i) = 0 :=\n  hammingDist_self _\n#align hamming_norm_zero hammingNorm_zero\n-/\n\n",
+ "hammingNorm_smul_le_hammingNorm":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n#print hammingNorm_smul_le_hammingNorm /-\ntheorem hammingNorm_smul_le_hammingNorm [Zero α] [∀ i, SMulWithZero α (β i)] {k : α} {x : ∀ i, β i} :\n    hammingNorm («expr • » k x) ≤ hammingNorm x :=\n  hammingNorm_comp_le_hammingNorm (fun i (c : β i) => «expr • » k c) fun i => by simp_rw [smul_zero]\n#align hamming_norm_smul_le_hamming_norm hammingNorm_smul_le_hammingNorm\n-/\n\n",
+ "hammingNorm_smul":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n#print hammingNorm_smul /-\ntheorem hammingNorm_smul [Zero α] [∀ i, SMulWithZero α (β i)] {k : α} (hk : ∀ i, IsSMulRegular (β i) k) (x : ∀ i, β i) :\n    hammingNorm («expr • » k x) = hammingNorm x :=\n  hammingNorm_comp (fun i (c : β i) => «expr • » k c) hk fun i => by simp_rw [smul_zero]\n#align hamming_norm_smul hammingNorm_smul\n-/\n\n",
+ "hammingNorm_pos_iff":
+ "#print hammingNorm_pos_iff /-\n/-- Corresponds to `norm_pos_iff`. -/\n@[simp]\ntheorem hammingNorm_pos_iff {x : ∀ i, β i} : 0 < hammingNorm x ↔ x ≠ 0 :=\n  hammingDist_pos\n#align hamming_norm_pos_iff hammingNorm_pos_iff\n-/\n\n",
+ "hammingNorm_nonneg":
+ "#print hammingNorm_nonneg /-\n/-- Corresponds to `norm_nonneg`. -/\n@[simp]\ntheorem hammingNorm_nonneg {x : ∀ i, β i} : 0 ≤ hammingNorm x :=\n  zero_le _\n#align hamming_norm_nonneg hammingNorm_nonneg\n-/\n\n",
+ "hammingNorm_ne_zero_iff":
+ "#print hammingNorm_ne_zero_iff /-\n/-- Corresponds to `norm_ne_zero_iff`. -/\ntheorem hammingNorm_ne_zero_iff {x : ∀ i, β i} : hammingNorm x ≠ 0 ↔ x ≠ 0 :=\n  hammingNorm_eq_zero.not\n#align hamming_norm_ne_zero_iff hammingNorm_ne_zero_iff\n-/\n\n",
+ "hammingNorm_lt_one":
+ "#print hammingNorm_lt_one /-\n@[simp]\ntheorem hammingNorm_lt_one {x : ∀ i, β i} : hammingNorm x < 1 ↔ x = 0 :=\n  hammingDist_lt_one\n#align hamming_norm_lt_one hammingNorm_lt_one\n-/\n\n",
+ "hammingNorm_le_card_fintype":
+ "#print hammingNorm_le_card_fintype /-\ntheorem hammingNorm_le_card_fintype {x : ∀ i, β i} : hammingNorm x ≤ Fintype.card ι :=\n  hammingDist_le_card_fintype\n#align hamming_norm_le_card_fintype hammingNorm_le_card_fintype\n-/\n\n",
+ "hammingNorm_eq_zero":
+ "#print hammingNorm_eq_zero /-\n/-- Corresponds to `norm_eq_zero`. -/\n@[simp]\ntheorem hammingNorm_eq_zero {x : ∀ i, β i} : hammingNorm x = 0 ↔ x = 0 :=\n  hammingDist_eq_zero\n#align hamming_norm_eq_zero hammingNorm_eq_zero\n-/\n\n",
+ "hammingNorm_comp_le_hammingNorm":
+ "#print hammingNorm_comp_le_hammingNorm /-\ntheorem hammingNorm_comp_le_hammingNorm (f : ∀ i, γ i → β i) {x : ∀ i, γ i} (hf : ∀ i, f i 0 = 0) :\n    (hammingNorm fun i => f i (x i)) ≤ hammingNorm x :=\n  by\n  convert hammingDist_comp_le_hammingDist f\n  simp_rw [hf]\n  rfl\n#align hamming_norm_comp_le_hamming_norm hammingNorm_comp_le_hammingNorm\n-/\n\n",
+ "hammingNorm_comp":
+ "#print hammingNorm_comp /-\ntheorem hammingNorm_comp (f : ∀ i, γ i → β i) {x : ∀ i, γ i} (hf₁ : ∀ i, injective (f i)) (hf₂ : ∀ i, f i 0 = 0) :\n    (hammingNorm fun i => f i (x i)) = hammingNorm x :=\n  by\n  convert hammingDist_comp f hf₁\n  simp_rw [hf₂]\n  rfl\n#align hamming_norm_comp hammingNorm_comp\n-/\n\n",
+ "hammingDist_zero_right":
+ "#print hammingDist_zero_right /-\n/-- Corresponds to `dist_zero_right`. -/\n@[simp]\ntheorem hammingDist_zero_right (x : ∀ i, β i) : hammingDist x 0 = hammingNorm x :=\n  rfl\n#align hamming_dist_zero_right hammingDist_zero_right\n-/\n\n",
+ "hammingDist_zero_left":
+ "#print hammingDist_zero_left /-\n/-- Corresponds to `dist_zero_left`. -/\n@[simp]\ntheorem hammingDist_zero_left : hammingDist (0 : ∀ i, β i) = hammingNorm :=\n  funext fun x => by rw [hammingDist_comm, hammingDist_zero_right]\n#align hamming_dist_zero_left hammingDist_zero_left\n-/\n\n",
+ "hammingDist_triangle_right":
+ "#print hammingDist_triangle_right /-\n/-- Corresponds to `dist_triangle_right`. -/\ntheorem hammingDist_triangle_right (x y z : ∀ i, β i) : hammingDist x y ≤ hammingDist x z + hammingDist y z :=\n  by\n  rw [hammingDist_comm y]\n  exact hammingDist_triangle _ _ _\n#align hamming_dist_triangle_right hammingDist_triangle_right\n-/\n\n",
+ "hammingDist_triangle_left":
+ "#print hammingDist_triangle_left /-\n/-- Corresponds to `dist_triangle_left`. -/\ntheorem hammingDist_triangle_left (x y z : ∀ i, β i) : hammingDist x y ≤ hammingDist z x + hammingDist z y :=\n  by\n  rw [hammingDist_comm z]\n  exact hammingDist_triangle _ _ _\n#align hamming_dist_triangle_left hammingDist_triangle_left\n-/\n\n",
+ "hammingDist_triangle":
+ "#print hammingDist_triangle /-\n/-- Corresponds to `dist_triangle`. -/\ntheorem hammingDist_triangle (x y z : ∀ i, β i) : hammingDist x z ≤ hammingDist x y + hammingDist y z := by\n  classical\n    simp_rw [hammingDist]\n    refine' le_trans (card_mono _) (card_union_le _ _)\n    rw [← filter_or]\n    refine' monotone_filter_right _ _\n    intro i h\n    by_contra' H\n    exact h (Eq.trans H.1 H.2)\n#align hamming_dist_triangle hammingDist_triangle\n-/\n\n",
+ "hammingDist_smul_le_hammingDist":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:219:4: warning: unsupported binary notation `«expr • » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n#print hammingDist_smul_le_hammingDist /-\ntheorem hammingDist_smul_le_hammingDist [∀ i, SMul α (β i)] {k : α} {x y : ∀ i, β i} :\n    hammingDist («expr • » k x) («expr • » k y) ≤ hammingDist x y :=\n  hammingDist_comp_le_hammingDist fun i => («expr • » · ·) k\n#align hamming_dist_smul_le_hamming_dist hammingDist_smul_le_hammingDist\n-/\n\n",
+ "hammingDist_smul":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:219:4: warning: unsupported binary notation `«expr • » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n#print hammingDist_smul /-\n/-- Corresponds to `dist_smul` with the discrete norm on `α`. -/\ntheorem hammingDist_smul [∀ i, SMul α (β i)] {k : α} {x y : ∀ i, β i} (hk : ∀ i, IsSMulRegular (β i) k) :\n    hammingDist («expr • » k x) («expr • » k y) = hammingDist x y :=\n  hammingDist_comp (fun i => («expr • » · ·) k) hk\n#align hamming_dist_smul hammingDist_smul\n-/\n\n",
+ "hammingDist_self":
+ "#print hammingDist_self /-\n/-\nCopyright (c) 2022 Wrenna Robson. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Wrenna Robson\n-/\n/-- Corresponds to `dist_self`. -/\n@[simp]\ntheorem hammingDist_self (x : ∀ i, β i) : hammingDist x x = 0 :=\n  by\n  rw [hammingDist, card_eq_zero, filter_eq_empty_iff]\n  exact fun _ _ H => H rfl\n#align hamming_dist_self hammingDist_self\n-/\n\n",
+ "hammingDist_pos":
+ "#print hammingDist_pos /-\n/-- Corresponds to `dist_pos`. -/\n@[simp]\ntheorem hammingDist_pos {x y : ∀ i, β i} : 0 < hammingDist x y ↔ x ≠ y := by\n  rw [← hammingDist_ne_zero, iff_not_comm, not_lt, le_zero_iff]\n#align hamming_dist_pos hammingDist_pos\n-/\n\n",
+ "hammingDist_nonneg":
+ "#print hammingDist_nonneg /-\n/-- Corresponds to `dist_nonneg`. -/\ntheorem hammingDist_nonneg {x y : ∀ i, β i} : 0 ≤ hammingDist x y :=\n  zero_le _\n#align hamming_dist_nonneg hammingDist_nonneg\n-/\n\n",
+ "hammingDist_ne_zero":
+ "#print hammingDist_ne_zero /-\n/-- Corresponds to `dist_ne_zero`. -/\ntheorem hammingDist_ne_zero {x y : ∀ i, β i} : hammingDist x y ≠ 0 ↔ x ≠ y :=\n  hammingDist_eq_zero.not\n#align hamming_dist_ne_zero hammingDist_ne_zero\n-/\n\n",
+ "hammingDist_lt_one":
+ "#print hammingDist_lt_one /-\n@[simp]\ntheorem hammingDist_lt_one {x y : ∀ i, β i} : hammingDist x y < 1 ↔ x = y := by rw [Nat.lt_one_iff, hammingDist_eq_zero]\n#align hamming_dist_lt_one hammingDist_lt_one\n-/\n\n",
+ "hammingDist_le_card_fintype":
+ "#print hammingDist_le_card_fintype /-\ntheorem hammingDist_le_card_fintype {x y : ∀ i, β i} : hammingDist x y ≤ Fintype.card ι :=\n  card_le_univ _\n#align hamming_dist_le_card_fintype hammingDist_le_card_fintype\n-/\n\n",
+ "hammingDist_eq_zero":
+ "#print hammingDist_eq_zero /-\n/-- Corresponds to `dist_eq_zero`. -/\n@[simp]\ntheorem hammingDist_eq_zero {x y : ∀ i, β i} : hammingDist x y = 0 ↔ x = y :=\n  ⟨eq_of_hammingDist_eq_zero, fun H => by\n    rw [H]\n    exact hammingDist_self _⟩\n#align hamming_dist_eq_zero hammingDist_eq_zero\n-/\n\n",
+ "hammingDist_eq_hammingNorm":
+ "#print hammingDist_eq_hammingNorm /-\n/-- Corresponds to `dist_eq_norm`. -/\ntheorem hammingDist_eq_hammingNorm [∀ i, AddGroup (β i)] (x y : ∀ i, β i) : hammingDist x y = hammingNorm (x - y) := by\n  simp_rw [hammingNorm, hammingDist, Pi.sub_apply, sub_ne_zero]\n#align hamming_dist_eq_hamming_norm hammingDist_eq_hammingNorm\n-/\n\n",
+ "hammingDist_comp_le_hammingDist":
+ "#print hammingDist_comp_le_hammingDist /-\ntheorem hammingDist_comp_le_hammingDist (f : ∀ i, γ i → β i) {x y : ∀ i, γ i} :\n    (hammingDist (fun i => f i (x i)) fun i => f i (y i)) ≤ hammingDist x y :=\n  card_mono (monotone_filter_right _ fun i H1 H2 => H1 <| congr_arg (f i) H2)\n#align hamming_dist_comp_le_hamming_dist hammingDist_comp_le_hammingDist\n-/\n\n",
+ "hammingDist_comp":
+ "#print hammingDist_comp /-\ntheorem hammingDist_comp (f : ∀ i, γ i → β i) {x y : ∀ i, γ i} (hf : ∀ i, injective (f i)) :\n    (hammingDist (fun i => f i (x i)) fun i => f i (y i)) = hammingDist x y :=\n  by\n  refine' le_antisymm (hammingDist_comp_le_hammingDist _) _\n  exact card_mono (monotone_filter_right _ fun i H1 H2 => H1 <| hf i H2)\n#align hamming_dist_comp hammingDist_comp\n-/\n\n",
+ "hammingDist_comm":
+ "#print hammingDist_comm /-\n/-- Corresponds to `dist_comm`. -/\ntheorem hammingDist_comm (x y : ∀ i, β i) : hammingDist x y = hammingDist y x := by simp_rw [hammingDist, ne_comm]\n#align hamming_dist_comm hammingDist_comm\n-/\n\n",
+ "eq_of_hammingDist_eq_zero":
+ "#print eq_of_hammingDist_eq_zero /-\n/-- Corresponds to `eq_of_dist_eq_zero`. -/\ntheorem eq_of_hammingDist_eq_zero {x y : ∀ i, β i} : hammingDist x y = 0 → x = y := by\n  simp_rw [hammingDist, card_eq_zero, filter_eq_empty_iff, Classical.not_not, funext_iff, mem_univ, forall_true_left,\n    imp_self]\n#align eq_of_hamming_dist_eq_zero eq_of_hammingDist_eq_zero\n-/\n\n",
  "dist_eq_hamming_dist":
- "@[simp, push_cast]\ntheorem dist_eq_hamming_dist (x y : hamming β) : dist x y = hamming_dist (of_hamming x) (of_hamming y) :=\n  rfl\n#align dist_eq_hamming_dist dist_eq_hamming_dist\n\n"}
+ "@[simp, push_cast]\ntheorem dist_eq_hamming_dist (x y : Hamming β) : dist x y = hammingDist (ofHamming x) (ofHamming y) :=\n  rfl\n#align dist_eq_hamming_dist dist_eq_hamming_dist\n\n"}

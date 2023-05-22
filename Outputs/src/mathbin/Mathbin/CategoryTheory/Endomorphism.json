@@ -7,7 +7,7 @@
  "mul_def":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≫ » -/\n@[simp]\ntheorem mul_def (xs ys : End X) : xs * ys = «expr ≫ » ys xs :=\n  rfl\n#align mul_def mul_def\n\n",
  "is_unit_iff_is_iso":
- "theorem is_unit_iff_is_iso {C : Type u} [Category.{v} C] {X : C} (f : End X) : is_unit (f : End X) ↔ IsIso f :=\n  ⟨fun h => { out := ⟨h.unit.inv, ⟨h.unit.inv_val, h.unit.val_inv⟩⟩ }, fun h => ⟨⟨f, inv f, by simp, by simp⟩, rfl⟩⟩\n#align is_unit_iff_is_iso is_unit_iff_is_iso\n\n",
+ "theorem is_unit_iff_is_iso {C : Type u} [Category.{v} C] {X : C} (f : End X) : IsUnit (f : End X) ↔ IsIso f :=\n  ⟨fun h => { out := ⟨h.unit.inv, ⟨h.unit.inv_val, h.unit.val_inv⟩⟩ }, fun h => ⟨⟨f, inv f, by simp, by simp⟩, rfl⟩⟩\n#align is_unit_iff_is_iso is_unit_iff_is_iso\n\n",
  "Aut_mul_def":
  "theorem Aut_mul_def (f g : Aut X) : f * g = g.trans f :=\n  rfl\n#align Aut_mul_def Aut_mul_def\n\n",
  "Aut_inv_def":

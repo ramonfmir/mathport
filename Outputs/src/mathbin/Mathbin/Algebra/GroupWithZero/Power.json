@@ -29,11 +29,11 @@
  "zpow_bit1'":
  "#print zpow_bit1' /-\ntheorem zpow_bit1' (a : G₀) (n : ℤ) : a ^ bit1 n = (a * a) ^ n * a := by rw [zpow_bit1₀, (Commute.refl a).mul_zpow]\n#align zpow_bit1' zpow_bit1'\n-/\n\n",
  "zpow_add₀":
- "#print zpow_add₀ /-\ntheorem zpow_add₀ {a : G₀} (ha : a ≠ 0) (m n : ℤ) : a ^ (m + n) = a ^ m * a ^ n :=\n  by\n  induction' n using int.induction_on with n ihn n ihn\n  case hz => simp\n  · simp only [← add_assoc, zpow_add_one₀ ha, ihn, mul_assoc]\n  · rw [zpow_sub_one₀ ha, ← mul_assoc, ← ihn, ← zpow_sub_one₀ ha, add_sub_assoc]\n#align zpow_add₀ zpow_add₀\n-/\n\n",
+ "#print zpow_add₀ /-\ntheorem zpow_add₀ {a : G₀} (ha : a ≠ 0) (m n : ℤ) : a ^ (m + n) = a ^ m * a ^ n :=\n  by\n  induction' n using Int.induction_on with n ihn n ihn\n  case hz => simp\n  · simp only [← add_assoc, zpow_add_one₀ ha, ihn, mul_assoc]\n  · rw [zpow_sub_one₀ ha, ← mul_assoc, ← ihn, ← zpow_sub_one₀ ha, add_sub_assoc]\n#align zpow_add₀ zpow_add₀\n-/\n\n",
  "zpow_add_one₀":
  "#print zpow_add_one₀ /-\ntheorem zpow_add_one₀ {a : G₀} (ha : a ≠ 0) : ∀ n : ℤ, a ^ (n + 1) = a ^ n * a\n  | (n : ℕ) => by simp only [← Int.ofNat_succ, zpow_ofNat, pow_succ']\n  | -[0+1] => by erw [zpow_zero, zpow_negSucc, pow_one, inv_mul_cancel ha]\n  | -[n + 1+1] => by\n    rw [Int.negSucc_eq, zpow_neg, neg_add, neg_add_cancel_right, zpow_neg, ← Int.ofNat_succ, zpow_ofNat, zpow_ofNat,\n      pow_succ _ (n + 1), mul_inv_rev, mul_assoc, inv_mul_cancel ha, mul_one]\n#align zpow_add_one₀ zpow_add_one₀\n-/\n\n",
  "zpow_add'":
- "#print zpow_add' /-\ntheorem zpow_add' {a : G₀} {m n : ℤ} (h : a ≠ 0 ∨ m + n ≠ 0 ∨ m = 0 ∧ n = 0) : a ^ (m + n) = a ^ m * a ^ n :=\n  by\n  by_cases hm : m = 0; · simp [hm]\n  by_cases hn : n = 0; · simp [hn]\n  by_cases ha : a = 0\n  · subst a\n    simp only [false_or_iff, eq_self_iff_true, not_true, ne.def, hm, hn, false_and_iff, or_false_iff] at h\n    rw [zero_zpow _ h, zero_zpow _ hm, zero_mul]\n  · exact zpow_add₀ ha m n\n#align zpow_add' zpow_add'\n-/\n\n",
+ "#print zpow_add' /-\ntheorem zpow_add' {a : G₀} {m n : ℤ} (h : a ≠ 0 ∨ m + n ≠ 0 ∨ m = 0 ∧ n = 0) : a ^ (m + n) = a ^ m * a ^ n :=\n  by\n  by_cases hm : m = 0; · simp [hm]\n  by_cases hn : n = 0; · simp [hn]\n  by_cases ha : a = 0\n  · subst a\n    simp only [false_or_iff, eq_self_iff_true, not_true, ne.def, hm, hn, false_and_iff, or_false_iff] at h\n    rw [zero_zpow _ h, zero_zpow _ hm, MulZeroClass.zero_mul]\n  · exact zpow_add₀ ha m n\n#align zpow_add' zpow_add'\n-/\n\n",
  "zero_zpow_eq":
  "#print zero_zpow_eq /-\ntheorem zero_zpow_eq (n : ℤ) : (0 : G₀) ^ n = if n = 0 then 1 else 0 :=\n  by\n  split_ifs with h\n  · rw [h, zpow_zero]\n  · rw [zero_zpow _ h]\n#align zero_zpow_eq zero_zpow_eq\n-/\n\n",
  "zero_zpow":
@@ -43,11 +43,11 @@
  "pow_sub₀":
  "#print pow_sub₀ /-\n/-\nCopyright (c) 2020 Johan Commelin. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Johan Commelin\n-/\ntheorem pow_sub₀ (a : G₀) {m n : ℕ} (ha : a ≠ 0) (h : n ≤ m) : a ^ (m - n) = a ^ m * (a ^ n)⁻¹ :=\n  by\n  have h1 : m - n + n = m := tsub_add_cancel_of_le h\n  have h2 : a ^ (m - n) * a ^ n = a ^ m := by rw [← pow_add, h1]\n  simpa only [div_eq_mul_inv] using eq_div_of_mul_eq (pow_ne_zero _ ha) h2\n#align pow_sub₀ pow_sub₀\n-/\n\n",
  "pow_sub_of_lt":
- "#print pow_sub_of_lt /-\ntheorem pow_sub_of_lt (a : G₀) {m n : ℕ} (h : n < m) : a ^ (m - n) = a ^ m * (a ^ n)⁻¹ :=\n  by\n  obtain rfl | ha := eq_or_ne a 0\n  · rw [zero_pow (tsub_pos_of_lt h), zero_pow (n.zero_le.trans_lt h), zero_mul]\n  · exact pow_sub₀ _ ha h.le\n#align pow_sub_of_lt pow_sub_of_lt\n-/\n\n",
+ "#print pow_sub_of_lt /-\ntheorem pow_sub_of_lt (a : G₀) {m n : ℕ} (h : n < m) : a ^ (m - n) = a ^ m * (a ^ n)⁻¹ :=\n  by\n  obtain rfl | ha := eq_or_ne a 0\n  · rw [zero_pow (tsub_pos_of_lt h), zero_pow (n.zero_le.trans_lt h), MulZeroClass.zero_mul]\n  · exact pow_sub₀ _ ha h.le\n#align pow_sub_of_lt pow_sub_of_lt\n-/\n\n",
  "pow_inv_comm₀":
  "#print pow_inv_comm₀ /-\ntheorem pow_inv_comm₀ (a : G₀) (m n : ℕ) : a⁻¹ ^ m * a ^ n = a ^ n * a⁻¹ ^ m :=\n  (Commute.refl a).inv_left₀.pow_pow m n\n#align pow_inv_comm₀ pow_inv_comm₀\n-/\n\n",
  "map_zpow₀":
- "#print map_zpow₀ /-\n/-- If a monoid homomorphism `f` between two `group_with_zero`s maps `0` to `0`, then it maps `x^n`,\n`n : ℤ`, to `(f x)^n`. -/\n@[simp]\ntheorem map_zpow₀ {F G₀ G₀' : Type _} [group_with_zero G₀] [group_with_zero G₀'] [MonoidWithZeroHomClass F G₀ G₀']\n    (f : F) (x : G₀) (n : ℤ) : f (x ^ n) = f x ^ n :=\n  map_zpow' f (map_inv₀ f) x n\n#align map_zpow₀ map_zpow₀\n-/\n\n",
+ "#print map_zpow₀ /-\n/-- If a monoid homomorphism `f` between two `group_with_zero`s maps `0` to `0`, then it maps `x^n`,\n`n : ℤ`, to `(f x)^n`. -/\n@[simp]\ntheorem map_zpow₀ {F G₀ G₀' : Type _} [GroupWithZero G₀] [GroupWithZero G₀'] [MonoidWithZeroHomClass F G₀ G₀'] (f : F)\n    (x : G₀) (n : ℤ) : f (x ^ n) = f x ^ n :=\n  map_zpow' f (map_inv₀ f) x n\n#align map_zpow₀ map_zpow₀\n-/\n\n",
  "inv_pow_sub₀":
  "#print inv_pow_sub₀ /-\ntheorem inv_pow_sub₀ (ha : a ≠ 0) (h : n ≤ m) : a⁻¹ ^ (m - n) = (a ^ m)⁻¹ * a ^ n := by\n  rw [pow_sub₀ _ (inv_ne_zero ha) h, inv_pow, inv_pow, inv_inv]\n#align inv_pow_sub₀ inv_pow_sub₀\n-/\n\n",
  "inv_pow_sub_of_lt":

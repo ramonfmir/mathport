@@ -1,88 +1,88 @@
 {"zero_seq":
- "@[simp]\ntheorem zero_seq (x : free_abelian_group α) : (0 : free_abelian_group (α → β)) <*> x = 0 :=\n  zero_bind _\n#align zero_seq zero_seq\n\n",
+ "@[simp]\ntheorem zero_seq (x : FreeAbelianGroup α) : (0 : FreeAbelianGroup (α → β)) <*> x = 0 :=\n  zero_bind _\n#align zero_seq zero_seq\n\n",
  "zero_bind":
- "@[simp]\ntheorem zero_bind (f : α → free_abelian_group β) : 0 >>= f = 0 :=\n  (lift f).map_zero\n#align zero_bind zero_bind\n\n",
- "unique":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →+ » -/\nprotected theorem unique (g : «expr →+ » (free_abelian_group α) β) (hg : ∀ x, g (of x) = f x) {x} : g x = lift f x :=\n  AddMonoidHom.congr_fun (lift.symm_apply_eq.mp (funext hg : g ∘ of = f)) _\n#align unique unique\n\n",
+ "@[simp]\ntheorem zero_bind (f : α → FreeAbelianGroup β) : 0 >>= f = 0 :=\n  (lift f).map_zero\n#align zero_bind zero_bind\n\n",
  "sub_seq":
- "@[simp]\ntheorem sub_seq (f g : free_abelian_group (α → β)) (x : free_abelian_group α) : f - g <*> x = (f <*> x) - (g <*> x) :=\n  sub_bind _ _ _\n#align sub_seq sub_seq\n\n",
+ "@[simp]\ntheorem sub_seq (f g : FreeAbelianGroup (α → β)) (x : FreeAbelianGroup α) : f - g <*> x = (f <*> x) - (g <*> x) :=\n  sub_bind _ _ _\n#align sub_seq sub_seq\n\n",
  "sub_bind":
- "@[simp]\ntheorem sub_bind (f : α → free_abelian_group β) (x y : free_abelian_group α) : x - y >>= f = (x >>= f) - (y >>= f) :=\n  map_sub (lift f) _ _\n#align sub_bind sub_bind\n\n",
+ "@[simp]\ntheorem sub_bind (f : α → FreeAbelianGroup β) (x y : FreeAbelianGroup α) : x - y >>= f = (x >>= f) - (y >>= f) :=\n  map_sub (lift f) _ _\n#align sub_bind sub_bind\n\n",
  "seq_zero":
- "@[simp]\ntheorem seq_zero (f : free_abelian_group (α → β)) : f <*> 0 = 0 :=\n  (seq_add_group_hom f).map_zero\n#align seq_zero seq_zero\n\n",
+ "@[simp]\ntheorem seq_zero (f : FreeAbelianGroup (α → β)) : f <*> 0 = 0 :=\n  (seqAddGroupHom f).map_zero\n#align seq_zero seq_zero\n\n",
  "seq_sub":
- "@[simp]\ntheorem seq_sub (f : free_abelian_group (α → β)) (x y : free_abelian_group α) : f <*> x - y = (f <*> x) - (f <*> y) :=\n  (seq_add_group_hom f).map_sub x y\n#align seq_sub seq_sub\n\n",
+ "@[simp]\ntheorem seq_sub (f : FreeAbelianGroup (α → β)) (x y : FreeAbelianGroup α) : f <*> x - y = (f <*> x) - (f <*> y) :=\n  (seqAddGroupHom f).map_sub x y\n#align seq_sub seq_sub\n\n",
  "seq_neg":
- "@[simp]\ntheorem seq_neg (f : free_abelian_group (α → β)) (x : free_abelian_group α) : f <*> -x = -(f <*> x) :=\n  (seq_add_group_hom f).map_neg x\n#align seq_neg seq_neg\n\n",
+ "@[simp]\ntheorem seq_neg (f : FreeAbelianGroup (α → β)) (x : FreeAbelianGroup α) : f <*> -x = -(f <*> x) :=\n  (seqAddGroupHom f).map_neg x\n#align seq_neg seq_neg\n\n",
  "seq_add":
- "@[simp]\ntheorem seq_add (f : free_abelian_group (α → β)) (x y : free_abelian_group α) : f <*> x + y = (f <*> x) + (f <*> y) :=\n  (seq_add_group_hom f).map_add x y\n#align seq_add seq_add\n\n",
+ "@[simp]\ntheorem seq_add (f : FreeAbelianGroup (α → β)) (x y : FreeAbelianGroup α) : f <*> x + y = (f <*> x) + (f <*> y) :=\n  (seqAddGroupHom f).map_add x y\n#align seq_add seq_add\n\n",
  "pure_seq":
- "@[simp]\ntheorem pure_seq (f : α → β) (x : free_abelian_group α) : pure f <*> x = f <$> x :=\n  pure_bind _ _\n#align pure_seq pure_seq\n\n",
+ "@[simp]\ntheorem pure_seq (f : α → β) (x : FreeAbelianGroup α) : pure f <*> x = f <$> x :=\n  pure_bind _ _\n#align pure_seq pure_seq\n\n",
  "pure_bind":
- "@[simp]\ntheorem pure_bind (f : α → free_abelian_group β) (x) : pure x >>= f = f x :=\n  lift.of _ _\n#align pure_bind pure_bind\n\n",
+ "@[simp]\ntheorem pure_bind (f : α → FreeAbelianGroup β) (x) : pure x >>= f = f x :=\n  lift.of _ _\n#align pure_bind pure_bind\n\n",
  "one_def":
- "theorem one_def : (1 : free_abelian_group α) = of 1 :=\n  rfl\n#align one_def one_def\n\n",
+ "theorem one_def : (1 : FreeAbelianGroup α) = of 1 :=\n  rfl\n#align one_def one_def\n\n",
  "of_one":
- "theorem of_one : (of 1 : free_abelian_group α) = 1 :=\n  rfl\n#align of_one of_one\n\n",
+ "theorem of_one : (of 1 : FreeAbelianGroup α) = 1 :=\n  rfl\n#align of_one of_one\n\n",
  "of_mul_of":
  "@[simp]\ntheorem of_mul_of (x y : α) : of x * of y = of (x * y) :=\n  rfl\n#align of_mul_of of_mul_of\n\n",
  "of_mul_hom_coe":
- "@[simp]\ntheorem of_mul_hom_coe : (of_mul_hom : α → free_abelian_group α) = of :=\n  rfl\n#align of_mul_hom_coe of_mul_hom_coe\n\n",
+ "@[simp]\ntheorem of_mul_hom_coe : (ofMulHom : α → FreeAbelianGroup α) = of :=\n  rfl\n#align of_mul_hom_coe of_mul_hom_coe\n\n",
  "of_mul":
  "theorem of_mul (x y : α) : of (x * y) = of x * of y :=\n  rfl\n#align of_mul of_mul\n\n",
  "of_injective":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →+ » -/\ntheorem of_injective : function.injective (of : α → free_abelian_group α) := fun x y hoxy =>\n  by_contradiction fun hxy : x ≠ y =>\n    let f : «expr →+ » (free_abelian_group α) ℤ := lift fun z => if x = z then (1 : ℤ) else 0\n    have hfx1 : f (of x) = 1 := (lift.of _ _).trans <| if_pos rfl\n    have hfy1 : f (of y) = 1 := hoxy ▸ hfx1\n    have hfy0 : f (of y) = 0 := (lift.of _ _).trans <| if_neg hxy\n    one_ne_zero <| hfy1.symm.trans hfy0\n#align of_injective of_injective\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →+ » -/\ntheorem of_injective : function.injective (of : α → FreeAbelianGroup α) := fun x y hoxy =>\n  by_contradiction fun hxy : x ≠ y =>\n    let f : «expr →+ » (FreeAbelianGroup α) ℤ := lift fun z => if x = z then (1 : ℤ) else 0\n    have hfx1 : f (of x) = 1 := (lift.of _ _).trans <| if_pos rfl\n    have hfy1 : f (of y) = 1 := hoxy ▸ hfx1\n    have hfy0 : f (of y) = 0 := (lift.of _ _).trans <| if_neg hxy\n    one_ne_zero <| hfy1.symm.trans hfy0\n#align of_injective of_injective\n\n",
  "of":
- "/-\nCopyright (c) 2018 Kenny Lau. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Kenny Lau\n-/\n@[simp]\nprotected theorem of (x : α) : lift f (of x) = f x :=\n  by\n  convert @abelianization.lift.of (free_group α) _ (Multiplicative β) _ _ _\n  convert free_group.lift.of.symm\n#align of of\n\n",
+ "/-\nCopyright (c) 2018 Kenny Lau. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Kenny Lau\n-/\n@[simp]\nprotected theorem of (x : α) : lift f (of x) = f x :=\n  by\n  convert@Abelianization.lift.of (FreeGroup α) _ (Multiplicative β) _ _ _\n  convert free_group.lift.of.symm\n#align of of\n\n",
  "neg_seq":
- "@[simp]\ntheorem neg_seq (f : free_abelian_group (α → β)) (x : free_abelian_group α) : -f <*> x = -(f <*> x) :=\n  neg_bind _ _\n#align neg_seq neg_seq\n\n",
+ "@[simp]\ntheorem neg_seq (f : FreeAbelianGroup (α → β)) (x : FreeAbelianGroup α) : -f <*> x = -(f <*> x) :=\n  neg_bind _ _\n#align neg_seq neg_seq\n\n",
  "neg_bind":
- "@[simp]\ntheorem neg_bind (f : α → free_abelian_group β) (x : free_abelian_group α) : -x >>= f = -(x >>= f) :=\n  map_neg (lift f) _\n#align neg_bind neg_bind\n\n",
+ "@[simp]\ntheorem neg_bind (f : α → FreeAbelianGroup β) (x : FreeAbelianGroup α) : -x >>= f = -(x >>= f) :=\n  map_neg (lift f) _\n#align neg_bind neg_bind\n\n",
  "mul_def":
- "theorem mul_def (x y : free_abelian_group α) : x * y = lift (fun x₂ => lift (fun x₁ => of (x₁ * x₂)) x) y :=\n  rfl\n#align mul_def mul_def\n\n",
+ "theorem mul_def (x y : FreeAbelianGroup α) : x * y = lift (fun x₂ => lift (fun x₁ => of (x₁ * x₂)) x) y :=\n  rfl\n#align mul_def mul_def\n\n",
  "map_zero":
- "#print map_zero /-\n@[simp]\nprotected theorem map_zero (f : α → β) : f <$> (0 : free_abelian_group α) = 0 :=\n  (lift (of ∘ f)).map_zero\n#align map_zero map_zero\n-/\n\n",
+ "#print map_zero /-\n@[simp]\nprotected theorem map_zero (f : α → β) : f <$> (0 : FreeAbelianGroup α) = 0 :=\n  (lift (of ∘ f)).map_zero\n#align map_zero map_zero\n-/\n\n",
  "map_sub":
- "#print map_sub /-\n@[simp]\nprotected theorem map_sub (f : α → β) (x y : free_abelian_group α) : f <$> (x - y) = f <$> x - f <$> y :=\n  map_sub (lift <| of ∘ f) _ _\n#align map_sub map_sub\n-/\n\n",
+ "#print map_sub /-\n@[simp]\nprotected theorem map_sub (f : α → β) (x y : FreeAbelianGroup α) : f <$> (x - y) = f <$> x - f <$> y :=\n  map_sub (lift <| of ∘ f) _ _\n#align map_sub map_sub\n-/\n\n",
  "map_pure":
- "@[simp]\ntheorem map_pure (f : α → β) (x : α) : f <$> (pure x : free_abelian_group α) = pure (f x) :=\n  rfl\n#align map_pure map_pure\n\n",
+ "@[simp]\ntheorem map_pure (f : α → β) (x : α) : f <$> (pure x : FreeAbelianGroup α) = pure (f x) :=\n  rfl\n#align map_pure map_pure\n\n",
  "map_of_apply":
  "-- version of map_of which uses `map`\n@[simp]\ntheorem map_of_apply {f : α → β} (a : α) : map f (of a) = of (f a) :=\n  rfl\n#align map_of_apply map_of_apply\n\n",
  "map_of":
  "@[simp]\ntheorem map_of (f : α → β) (y : α) : f <$> of y = of (f y) :=\n  rfl\n#align map_of map_of\n\n",
  "map_neg":
- "#print map_neg /-\n@[simp]\nprotected theorem map_neg (f : α → β) (x : free_abelian_group α) : f <$> (-x) = -f <$> x :=\n  map_neg (lift <| of ∘ f) _\n#align map_neg map_neg\n-/\n\n",
+ "#print map_neg /-\n@[simp]\nprotected theorem map_neg (f : α → β) (x : FreeAbelianGroup α) : f <$> (-x) = -f <$> x :=\n  map_neg (lift <| of ∘ f) _\n#align map_neg map_neg\n-/\n\n",
  "map_id_apply":
- "theorem map_id_apply (x : free_abelian_group α) : map id x = x :=\n  by\n  rw [map_id]\n  rfl\n#align map_id_apply map_id_apply\n\n",
+ "theorem map_id_apply (x : FreeAbelianGroup α) : map id x = x :=\n  by\n  rw [map_id]\n  rfl\n#align map_id_apply map_id_apply\n\n",
  "map_id":
- "theorem map_id : map id = AddMonoidHom.id (free_abelian_group α) :=\n  eq.symm <| lift.ext _ _ fun x => lift.unique of (AddMonoidHom.id _) fun y => add_monoid_hom.id_apply _ _\n#align map_id map_id\n\n",
+ "theorem map_id : map id = AddMonoidHom.id (FreeAbelianGroup α) :=\n  Eq.symm <| lift.ext _ _ fun x => lift.unique of (AddMonoidHom.id _) fun y => AddMonoidHom.id_apply _ _\n#align map_id map_id\n\n",
  "map_hom":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →+ » -/\ntheorem map_hom {α β γ} [add_comm_group β] [add_comm_group γ] (a : free_abelian_group α) (f : α → β)\n    (g : «expr →+ » β γ) : g (lift f a) = lift (g ∘ f) a :=\n  by\n  suffices : (g.comp (lift f)) a = lift (g ∘ f) a\n  exact this\n  apply @lift.unique\n  intro a\n  show g ((lift f) (of a)) = g (f a)\n  simp only [(· ∘ ·), lift.of]\n#align map_hom map_hom\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →+ » -/\ntheorem map_hom {α β γ} [AddCommGroup β] [AddCommGroup γ] (a : FreeAbelianGroup α) (f : α → β) (g : «expr →+ » β γ) :\n    g (lift f a) = lift (g ∘ f) a :=\n  by\n  suffices : (g.comp (lift f)) a = lift (g ∘ f) a\n  exact this\n  apply @lift.unique\n  intro a\n  show g ((lift f) (of a)) = g (f a)\n  simp only [(· ∘ ·), lift.of]\n#align map_hom map_hom\n\n",
  "map_comp_apply":
- "theorem map_comp_apply {f : α → β} {g : β → γ} (x : free_abelian_group α) : map (g ∘ f) x = (map g) ((map f) x) :=\n  by\n  rw [map_comp]\n  rfl\n#align map_comp_apply map_comp_apply\n\n",
+ "theorem map_comp_apply {f : α → β} {g : β → γ} (x : FreeAbelianGroup α) : map (g ∘ f) x = (map g) ((map f) x) :=\n  by\n  rw [map_comp]\n  rfl\n#align map_comp_apply map_comp_apply\n\n",
  "map_comp":
- "theorem map_comp {f : α → β} {g : β → γ} : map (g ∘ f) = (map g).comp (map f) :=\n  eq.symm <| lift.ext _ _ fun x => eq.symm <| lift_comp _ _ _\n#align map_comp map_comp\n\n",
+ "theorem map_comp {f : α → β} {g : β → γ} : map (g ∘ f) = (map g).comp (map f) :=\n  Eq.symm <| lift.ext _ _ fun x => Eq.symm <| lift_comp _ _ _\n#align map_comp map_comp\n\n",
  "map_add":
- "#print map_add /-\n@[simp]\nprotected theorem map_add (f : α → β) (x y : free_abelian_group α) : f <$> (x + y) = f <$> x + f <$> y :=\n  (lift _).map_add _ _\n#align map_add map_add\n-/\n\n",
+ "#print map_add /-\n@[simp]\nprotected theorem map_add (f : α → β) (x y : FreeAbelianGroup α) : f <$> (x + y) = f <$> x + f <$> y :=\n  (lift _).map_add _ _\n#align map_add map_add\n-/\n\n",
  "lift_neg'":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →+ » -/\ntheorem lift_neg' {β} [add_comm_group β] (f : α → β) : lift (-f) = -lift f :=\n  AddMonoidHom.ext fun _ => (lift_add_group_hom _ _ : «expr →+ » (α → β) β).map_neg _\n#align lift_neg' lift_neg'\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →+ » -/\ntheorem lift_neg' {β} [AddCommGroup β] (f : α → β) : lift (-f) = -lift f :=\n  AddMonoidHom.ext fun _ => (liftAddGroupHom _ _ : «expr →+ » (α → β) β).map_neg _\n#align lift_neg' lift_neg'\n\n",
  "lift_monoid_symm_coe":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →+* » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n@[simp]\ntheorem lift_monoid_symm_coe (f : «expr →+* » (free_abelian_group α) R) :\n    «expr⇑ » (lift_monoid.symm f) = lift.symm ↑f :=\n  rfl\n#align lift_monoid_symm_coe lift_monoid_symm_coe\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →+* » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n@[simp]\ntheorem lift_monoid_symm_coe (f : «expr →+* » (FreeAbelianGroup α) R) : «expr⇑ » (liftMonoid.symm f) = lift.symm ↑f :=\n  rfl\n#align lift_monoid_symm_coe lift_monoid_symm_coe\n\n",
  "lift_monoid_coe_add_monoid_hom":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →* » -/\n@[simp]\ntheorem lift_monoid_coe_add_monoid_hom (f : «expr →* » α R) : ↑(lift_monoid f) = lift f :=\n  rfl\n#align lift_monoid_coe_add_monoid_hom lift_monoid_coe_add_monoid_hom\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →* » -/\n@[simp]\ntheorem lift_monoid_coe_add_monoid_hom (f : «expr →* » α R) : ↑(liftMonoid f) = lift f :=\n  rfl\n#align lift_monoid_coe_add_monoid_hom lift_monoid_coe_add_monoid_hom\n\n",
  "lift_monoid_coe":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →* » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n@[simp]\ntheorem lift_monoid_coe (f : «expr →* » α R) : «expr⇑ » (lift_monoid f) = lift f :=\n  rfl\n#align lift_monoid_coe lift_monoid_coe\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →* » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n@[simp]\ntheorem lift_monoid_coe (f : «expr →* » α R) : «expr⇑ » (liftMonoid f) = lift f :=\n  rfl\n#align lift_monoid_coe lift_monoid_coe\n\n",
  "lift_comp":
- "theorem lift_comp {α} {β} {γ} [add_comm_group γ] (f : α → β) (g : β → γ) (x : free_abelian_group α) :\n    lift (g ∘ f) x = lift g (map f x) :=\n  by\n  apply free_abelian_group.induction_on x\n  · exact AddMonoidHom.map_zero _\n  · intro y\n    rfl\n  · intro x h\n    simp only [h, AddMonoidHom.map_neg]\n  · intro x y h₁ h₂\n    simp only [h₁, h₂, AddMonoidHom.map_add]\n#align lift_comp lift_comp\n\n",
+ "theorem lift_comp {α} {β} {γ} [AddCommGroup γ] (f : α → β) (g : β → γ) (x : FreeAbelianGroup α) :\n    lift (g ∘ f) x = lift g (map f x) := by\n  apply FreeAbelianGroup.induction_on x\n  · exact AddMonoidHom.map_zero _\n  · intro y\n    rfl\n  · intro x h\n    simp only [h, AddMonoidHom.map_neg]\n  · intro x y h₁ h₂\n    simp only [h₁, h₂, AddMonoidHom.map_add]\n#align lift_comp lift_comp\n\n",
  "induction_on'":
- "@[elab_as_elim]\nprotected theorem induction_on' {C : free_abelian_group α → Prop} (z : free_abelian_group α) (C0 : C 0)\n    (C1 : ∀ x, C <| pure x) (Cn : ∀ x, C (pure x) → C (-pure x)) (Cp : ∀ x y, C x → C y → C (x + y)) : C z :=\n  free_abelian_group.induction_on z C0 C1 Cn Cp\n#align induction_on' induction_on'\n\n",
+ "@[elab_as_elim]\nprotected theorem induction_on' {C : FreeAbelianGroup α → Prop} (z : FreeAbelianGroup α) (C0 : C 0)\n    (C1 : ∀ x, C <| pure x) (Cn : ∀ x, C (pure x) → C (-pure x)) (Cp : ∀ x y, C x → C y → C (x + y)) : C z :=\n  FreeAbelianGroup.induction_on z C0 C1 Cn Cp\n#align induction_on' induction_on'\n\n",
  "induction_on":
- "@[elab_as_elim]\nprotected theorem induction_on {C : free_abelian_group α → Prop} (z : free_abelian_group α) (C0 : C 0)\n    (C1 : ∀ x, C <| of x) (Cn : ∀ x, C (of x) → C (-of x)) (Cp : ∀ x y, C x → C y → C (x + y)) : C z :=\n  Quotient.inductionOn' z fun x =>\n    Quot.inductionOn x fun L =>\n      list.rec_on L C0 fun ⟨x, b⟩ tl ih => bool.rec_on b (Cp _ _ (Cn _ (C1 x)) ih) (Cp _ _ (C1 x) ih)\n#align induction_on induction_on\n\n",
+ "@[elab_as_elim]\nprotected theorem induction_on {C : FreeAbelianGroup α → Prop} (z : FreeAbelianGroup α) (C0 : C 0) (C1 : ∀ x, C <| of x)\n    (Cn : ∀ x, C (of x) → C (-of x)) (Cp : ∀ x y, C x → C y → C (x + y)) : C z :=\n  Quotient.inductionOn' z fun x =>\n    Quot.inductionOn x fun L =>\n      list.rec_on L C0 fun ⟨x, b⟩ tl ih => bool.rec_on b (Cp _ _ (Cn _ (C1 x)) ih) (Cp _ _ (C1 x) ih)\n#align induction_on induction_on\n\n",
  "ext":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →+ » -/\n/-- See note [partially-applied ext lemmas]. -/\n@[ext]\nprotected theorem ext (g h : «expr →+ » (free_abelian_group α) β) (H : ∀ x, g (of x) = h (of x)) : g = h :=\n  lift.symm.injective <| funext H\n#align ext ext\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →+ » -/\n/-- See note [partially-applied ext lemmas]. -/\n@[ext]\nprotected theorem ext (g h : «expr →+ » (FreeAbelianGroup α) β) (H : ∀ x, g (of x) = h (of x)) : g = h :=\n  lift.symm.injective <| funext H\n#align ext ext\n\n",
  "add_seq":
- "@[simp]\ntheorem add_seq (f g : free_abelian_group (α → β)) (x : free_abelian_group α) : f + g <*> x = (f <*> x) + (g <*> x) :=\n  add_bind _ _ _\n#align add_seq add_seq\n\n",
+ "@[simp]\ntheorem add_seq (f g : FreeAbelianGroup (α → β)) (x : FreeAbelianGroup α) : f + g <*> x = (f <*> x) + (g <*> x) :=\n  add_bind _ _ _\n#align add_seq add_seq\n\n",
  "add_bind":
- "@[simp]\ntheorem add_bind (f : α → free_abelian_group β) (x y : free_abelian_group α) : x + y >>= f = (x >>= f) + (y >>= f) :=\n  (lift _).map_add _ _\n#align add_bind add_bind\n\n",
+ "@[simp]\ntheorem add_bind (f : α → FreeAbelianGroup β) (x y : FreeAbelianGroup α) : x + y >>= f = (x >>= f) + (y >>= f) :=\n  (lift _).map_add _ _\n#align add_bind add_bind\n\n",
  "add'":
- "theorem lift.add' {α β} [add_comm_group β] (a : free_abelian_group α) (f g : α → β) :\n    lift (f + g) a = lift f a + lift g a :=\n  by\n  refine' free_abelian_group.induction_on a _ _ _ _\n  · simp only [(lift _).map_zero, zero_add]\n  · intro x\n    simp only [lift.of, pi.add_apply]\n  · intro x h\n    simp only [map_neg, lift.of, pi.add_apply, neg_add]\n  · intro x y hx hy\n    simp only [(lift _).map_add, hx, hy, add_add_add_comm]\n#align lift.add' lift.add'\n\n"}
+ "theorem lift.add' {α β} [AddCommGroup β] (a : FreeAbelianGroup α) (f g : α → β) :\n    lift (f + g) a = lift f a + lift g a :=\n  by\n  refine' FreeAbelianGroup.induction_on a _ _ _ _\n  · simp only [(lift _).map_zero, zero_add]\n  · intro x\n    simp only [lift.of, Pi.add_apply]\n  · intro x h\n    simp only [map_neg, lift.of, Pi.add_apply, neg_add]\n  · intro x y hx hy\n    simp only [(lift _).map_add, hx, hy, add_add_add_comm]\n#align lift.add' lift.add'\n\n",
+ "Unique":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →+ » -/\n#print Unique /-\nprotected theorem Unique (g : «expr →+ » (FreeAbelianGroup α) β) (hg : ∀ x, g (of x) = f x) {x} : g x = lift f x :=\n  AddMonoidHom.congr_fun (lift.symm_apply_eq.mp (funext hg : g ∘ of = f)) _\n#align unique Unique\n-/\n\n"}

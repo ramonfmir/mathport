@@ -1,39 +1,39 @@
 {"zero_mem":
- "theorem zero_mem (h : (p : set M).nonempty) : (0 : M) ∈ p :=\n  let ⟨x, hx⟩ := h\n  zero_smul R (x : M) ▸ p.smul_mem 0 hx\n#align zero_mem zero_mem\n\n",
+ "theorem zero_mem (h : (p : Set M).nonempty) : (0 : M) ∈ p :=\n  let ⟨x, hx⟩ := h\n  zero_smul R (x : M) ▸ p.smul_mem 0 hx\n#align zero_mem zero_mem\n\n",
  "subtype_eq_val":
- "theorem subtype_eq_val : (sub_mul_action.subtype p : p → M) = subtype.val :=\n  rfl\n#align subtype_eq_val subtype_eq_val\n\n",
+ "theorem subtype_eq_val : (SubMulAction.subtype p : p → M) = Subtype.val :=\n  rfl\n#align subtype_eq_val subtype_eq_val\n\n",
  "subtype_apply":
  "@[simp]\ntheorem subtype_apply (x : p) : p.subtype x = x :=\n  rfl\n#align subtype_apply subtype_apply\n\n",
  "submonoid":
- "/- -- Previously, the relatively useless :\nlemma orbit_of_sub_mul {p : sub_mul_action R M} (m : p) :\n  (mul_action.orbit R m : set M) = mul_action.orbit R (m : M) := rfl\n-/\n/-- Stabilizers in monoid sub_mul_action coincide with stabilizers in the ambient space -/\ntheorem stabilizer_of_sub_mul.submonoid {p : sub_mul_action R M} (m : p) :\n    mul_action.stabilizer.submonoid R m = mul_action.stabilizer.submonoid R (m : M) :=\n  by\n  ext\n  simp only [mul_action.mem_stabilizer_submonoid_iff, ← sub_mul_action.coe_smul, SetLike.coe_eq_coe]\n#align stabilizer_of_sub_mul.submonoid stabilizer_of_sub_mul.submonoid\n\n",
+ "/- -- Previously, the relatively useless :\nlemma orbit_of_sub_mul {p : sub_mul_action R M} (m : p) :\n  (mul_action.orbit R m : set M) = mul_action.orbit R (m : M) := rfl\n-/\n/-- Stabilizers in monoid sub_mul_action coincide with stabilizers in the ambient space -/\ntheorem stabilizer_of_sub_mul.submonoid {p : SubMulAction R M} (m : p) :\n    MulAction.Stabilizer.submonoid R m = MulAction.Stabilizer.submonoid R (m : M) :=\n  by\n  ext\n  simp only [MulAction.mem_stabilizer_submonoid_iff, ← SubMulAction.val_smul, SetLike.coe_eq_coe]\n#align stabilizer_of_sub_mul.submonoid stabilizer_of_sub_mul.submonoid\n\n",
  "stabilizer_of_sub_mul":
- "/-- Stabilizers in group sub_mul_action coincide with stabilizers in the ambient space -/\ntheorem stabilizer_of_sub_mul {p : sub_mul_action R M} (m : p) :\n    mul_action.stabilizer R m = mul_action.stabilizer R (m : M) :=\n  by\n  rw [← subgroup.to_submonoid_eq]\n  exact stabilizer_of_sub_mul.submonoid m\n#align stabilizer_of_sub_mul stabilizer_of_sub_mul\n\n",
+ "/-- Stabilizers in group sub_mul_action coincide with stabilizers in the ambient space -/\ntheorem stabilizer_of_sub_mul {p : SubMulAction R M} (m : p) :\n    MulAction.stabilizer R m = MulAction.stabilizer R (m : M) :=\n  by\n  rw [← Subgroup.toSubmonoid_eq]\n  exact stabilizer_of_sub_mul.submonoid m\n#align stabilizer_of_sub_mul stabilizer_of_sub_mul\n\n",
  "smul_of_tower_mem":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\ntheorem smul_of_tower_mem (s : S) {x : M} (h : x ∈ p) : «expr • » s x ∈ p :=\n  by\n  rw [← one_smul R x, ← smul_assoc]\n  exact p.smul_mem _ h\n#align smul_of_tower_mem smul_of_tower_mem\n\n",
  "smul_mem_iff'":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n@[simp]\ntheorem smul_mem_iff' {G} [group G] [SMul G R] [MulAction G M] [IsScalarTower G R M] (g : G) {x : M} :\n    «expr • » g x ∈ p ↔ x ∈ p :=\n  ⟨fun h => inv_smul_smul g x ▸ p.smul_of_tower_mem g⁻¹ h, p.smul_of_tower_mem g⟩\n#align smul_mem_iff' smul_mem_iff'\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n@[simp]\ntheorem smul_mem_iff' {G} [Group G] [SMul G R] [MulAction G M] [IsScalarTower G R M] (g : G) {x : M} :\n    «expr • » g x ∈ p ↔ x ∈ p :=\n  ⟨fun h => inv_smul_smul g x ▸ p.smul_of_tower_mem g⁻¹ h, p.smul_of_tower_mem g⟩\n#align smul_mem_iff' smul_mem_iff'\n\n",
  "smul_mem_iff":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\ntheorem smul_mem_iff (s0 : s ≠ 0) : «expr • » s x ∈ p ↔ x ∈ p :=\n  p.smul_mem_iff' (Units.mk0 s s0)\n#align smul_mem_iff smul_mem_iff\n\n",
  "smul_mem":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n#print smul_mem /-\ntheorem smul_mem (r : R) (h : x ∈ p) : «expr • » r x ∈ p :=\n  p.smul_mem' r h\n#align smul_mem smul_mem\n-/\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\ntheorem smul_mem (r : R) (h : x ∈ p) : «expr • » r x ∈ p :=\n  p.smul_mem' r h\n#align smul_mem smul_mem\n\n",
  "smul_def":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n@[to_additive]\ntheorem smul_def (r : R) (x : s) : «expr • » r x = ⟨«expr • » r x, smul_mem r x.2⟩ :=\n  rfl\n#align smul_def smul_def\n\n",
  "neg_mem_iff":
- "@[simp]\ntheorem neg_mem_iff : -x ∈ p ↔ x ∈ p :=\n  ⟨fun h => by\n    rw [← neg_neg x]\n    exact neg_mem _ h, neg_mem _⟩\n#align neg_mem_iff neg_mem_iff\n\n",
+ "#print neg_mem_iff /-\n@[simp]\ntheorem neg_mem_iff : -x ∈ p ↔ x ∈ p :=\n  ⟨fun h => by\n    rw [← neg_neg x]\n    exact neg_mem _ h, neg_mem _⟩\n#align neg_mem_iff neg_mem_iff\n-/\n\n",
  "neg_mem":
  "theorem neg_mem (hx : x ∈ p) : -x ∈ p := by\n  rw [← neg_one_smul R]\n  exact p.smul_mem _ hx\n#align neg_mem neg_mem\n\n",
  "mk_smul_mk":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n-- lower priority so later simp lemmas are used first; to appease simp_nf\n@[simp, to_additive]\ntheorem mk_smul_mk (r : R) (x : M) (hx : x ∈ s) : «expr • » r (⟨x, hx⟩ : s) = ⟨«expr • » r x, smul_mem r hx⟩ :=\n  rfl\n#align mk_smul_mk mk_smul_mk\n\n",
  "mem_carrier":
- "@[simp]\ntheorem mem_carrier {p : sub_mul_action R M} {x : M} : x ∈ p.carrier ↔ x ∈ (p : set M) :=\n  iff.rfl\n#align mem_carrier mem_carrier\n\n",
+ "@[simp]\ntheorem mem_carrier {p : SubMulAction R M} {x : M} : x ∈ p.carrier ↔ x ∈ (p : Set M) :=\n  iff.rfl\n#align mem_carrier mem_carrier\n\n",
  "forall_smul_mem_iff":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n@[simp]\ntheorem forall_smul_mem_iff {R M S : Type _} [monoid R] [MulAction R M] [SetLike S M] [smul_mem_class S R M] {N : S}\n    {x : M} : (∀ a : R, «expr • » a x ∈ N) ↔ x ∈ N :=\n  ⟨fun h => by simpa using h 1, fun h a => smul_mem_class.smul_mem a h⟩\n#align forall_smul_mem_iff forall_smul_mem_iff\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n@[simp]\ntheorem forall_smul_mem_iff {R M S : Type _} [Monoid R] [MulAction R M] [SetLike S M] [SMulMemClass S R M] {N : S}\n    {x : M} : (∀ a : R, «expr • » a x ∈ N) ↔ x ∈ N :=\n  ⟨fun h => by simpa using h 1, fun h a => smul_mem_class.smul_mem a h⟩\n#align forall_smul_mem_iff forall_smul_mem_iff\n\n",
  "ext":
- "@[ext]\ntheorem ext {p q : sub_mul_action R M} (h : ∀ x, x ∈ p ↔ x ∈ q) : p = q :=\n  SetLike.ext h\n#align ext ext\n\n",
+ "@[ext]\ntheorem ext {p q : SubMulAction R M} (h : ∀ x, x ∈ p ↔ x ∈ q) : p = q :=\n  SetLike.ext h\n#align ext ext\n\n",
  "copy_eq":
- "theorem copy_eq (p : sub_mul_action R M) (s : set M) (hs : s = ↑p) : p.copy s hs = p :=\n  SetLike.coe_injective hs\n#align copy_eq copy_eq\n\n",
+ "theorem copy_eq (p : SubMulAction R M) (s : Set M) (hs : s = ↑p) : p.copy s hs = p :=\n  SetLike.coe_injective hs\n#align copy_eq copy_eq\n\n",
  "coe_subtype":
- "-- Prefer subclasses of `mul_action` over `smul_mem_class`.\n@[simp]\nprotected theorem coe_subtype : (smul_mem_class.subtype S' : S' → M) = coe :=\n  rfl\n#align coe_subtype coe_subtype\n\n",
+ "-- Prefer subclasses of `mul_action` over `smul_mem_class`.\n@[simp]\nprotected theorem coe_subtype : (SMulMemClass.subtype S' : S' → M) = coe :=\n  rfl\n#align coe_subtype coe_subtype\n\n",
  "coe_smul_of_tower":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n@[simp, norm_cast]\ntheorem coe_smul_of_tower (s : S) (x : p) : ((«expr • » s x : p) : M) = «expr • » s ↑x :=\n  rfl\n#align coe_smul_of_tower coe_smul_of_tower\n\n",
  "coe_smul":
@@ -43,6 +43,6 @@
  "coe_mk":
  "@[simp, norm_cast]\ntheorem coe_mk (x : M) (hx : x ∈ p) : ((⟨x, hx⟩ : p) : M) = x :=\n  rfl\n#align coe_mk coe_mk\n\n",
  "coe_image_orbit":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\n/-- Orbits in a `sub_mul_action` coincide with orbits in the ambient space. -/\ntheorem coe_image_orbit {p : sub_mul_action R M} (m : p) :\n    «expr '' » coe (mul_action.orbit R m) = mul_action.orbit R (m : M) :=\n  (Set.range_comp _ _).symm\n#align coe_image_orbit coe_image_orbit\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\n/-- Orbits in a `sub_mul_action` coincide with orbits in the ambient space. -/\ntheorem coe_image_orbit {p : SubMulAction R M} (m : p) :\n    «expr '' » coe (MulAction.orbit R m) = MulAction.orbit R (m : M) :=\n  (Set.range_comp _ _).symm\n#align coe_image_orbit coe_image_orbit\n\n",
  "coe_copy":
- "@[simp]\ntheorem coe_copy (p : sub_mul_action R M) (s : set M) (hs : s = ↑p) : (p.copy s hs : set M) = s :=\n  rfl\n#align coe_copy coe_copy\n\n"}
+ "@[simp]\ntheorem coe_copy (p : SubMulAction R M) (s : Set M) (hs : s = ↑p) : (p.copy s hs : Set M) = s :=\n  rfl\n#align coe_copy coe_copy\n\n"}

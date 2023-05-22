@@ -15,6 +15,6 @@
  "neg_one_pow_ne_zero":
  "@[simp]\ntheorem neg_one_pow_ne_zero {n : ℕ} : (-1 : ℤ) ^ n ≠ 0 :=\n  pow_ne_zero _ (abs_pos.mp (by simp))\n#align neg_one_pow_ne_zero neg_one_pow_ne_zero\n\n",
  "is_unit_sq":
- "theorem is_unit_sq {a : ℤ} (ha : is_unit a) : a ^ 2 = 1 := by rw [sq, is_unit_mul_self ha]\n#align is_unit_sq is_unit_sq\n\n",
+ "theorem is_unit_sq {a : ℤ} (ha : IsUnit a) : a ^ 2 = 1 := by rw [sq, is_unit_mul_self ha]\n#align is_unit_sq is_unit_sq\n\n",
  "is_unit_iff_abs_eq":
- "/-\nCopyright (c) 2016 Jeremy Avigad. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Jeremy Avigad\n-/\ntheorem is_unit_iff_abs_eq {x : ℤ} : is_unit x ↔ abs x = 1 := by\n  rw [is_unit_iff_nat_abs_eq, abs_eq_nat_abs, ← Int.ofNat_one, coe_nat_inj']\n#align is_unit_iff_abs_eq is_unit_iff_abs_eq\n\n"}
+ "/-\nCopyright (c) 2016 Jeremy Avigad. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Jeremy Avigad\n-/\ntheorem is_unit_iff_abs_eq {x : ℤ} : IsUnit x ↔ abs x = 1 := by\n  rw [is_unit_iff_nat_abs_eq, abs_eq_nat_abs, ← Int.ofNat_one, coe_nat_inj']\n#align is_unit_iff_abs_eq is_unit_iff_abs_eq\n\n"}

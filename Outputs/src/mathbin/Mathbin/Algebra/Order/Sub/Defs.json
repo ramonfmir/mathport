@@ -3,7 +3,7 @@
  "tsub_tsub_tsub_le_tsub":
  "#print tsub_tsub_tsub_le_tsub /-\ntheorem tsub_tsub_tsub_le_tsub : c - a - (c - b) ≤ b - a :=\n  by\n  rw [tsub_le_iff_left, tsub_le_iff_left, add_left_comm]\n  exact le_tsub_add.trans (add_le_add_left le_add_tsub _)\n#align tsub_tsub_tsub_le_tsub tsub_tsub_tsub_le_tsub\n-/\n\n",
  "tsub_tsub_le_tsub_add":
- "#print tsub_tsub_le_tsub_add /-\ntheorem tsub_tsub_le_tsub_add {a b c : α} : a - (b - c) ≤ a - b + c :=\n  tsub_le_iff_right.2 <|\n    calc\n      a ≤ a - b + b := le_tsub_add\n      _ ≤ a - b + (c + (b - c)) := add_le_add_left le_add_tsub _\n      _ = a - b + c + (b - c) := (add_assoc _ _ _).symm\n      \n#align tsub_tsub_le_tsub_add tsub_tsub_le_tsub_add\n-/\n\n",
+ "#print tsub_tsub_le_tsub_add /-\ntheorem tsub_tsub_le_tsub_add {a b c : α} : a - (b - c) ≤ a - b + c :=\n  tsub_le_iff_right.2 <|\n    calc\n      a ≤ a - b + b := le_tsub_add\n      _ ≤ a - b + (c + (b - c)) := (add_le_add_left le_add_tsub _)\n      _ = a - b + c + (b - c) := (add_assoc _ _ _).symm\n      \n#align tsub_tsub_le_tsub_add tsub_tsub_le_tsub_add\n-/\n\n",
  "tsub_tsub_le":
  "#print tsub_tsub_le /-\n/-- See `tsub_tsub_cancel_of_le` for the equality. -/\ntheorem tsub_tsub_le : b - (b - a) ≤ a :=\n  tsub_le_iff_right.mpr le_add_tsub\n#align tsub_tsub_le tsub_tsub_le\n-/\n\n",
  "tsub_tsub":
@@ -69,7 +69,7 @@
  "eq_tsub_of_add_eq":
  "#print eq_tsub_of_add_eq /-\ntheorem eq_tsub_of_add_eq (h : a + c = b) : a = b - c :=\n  Contravariant.AddLECancellable.eq_tsub_of_add_eq h\n#align eq_tsub_of_add_eq eq_tsub_of_add_eq\n-/\n\n",
  "antitone_const_tsub":
- "#print antitone_const_tsub /-\ntheorem antitone_const_tsub : antitone fun x => c - x := fun x y hxy => tsub_le_tsub rfl.le hxy\n#align antitone_const_tsub antitone_const_tsub\n-/\n\n",
+ "#print antitone_const_tsub /-\ntheorem antitone_const_tsub : Antitone fun x => c - x := fun x y hxy => tsub_le_tsub rfl.le hxy\n#align antitone_const_tsub antitone_const_tsub\n-/\n\n",
  "add_tsub_le_tsub_add":
  "#print add_tsub_le_tsub_add /-\n/-- See `tsub_add_eq_add_tsub` for the equality. -/\ntheorem add_tsub_le_tsub_add : a + b - c ≤ a - c + b :=\n  by\n  rw [add_comm, add_comm _ b]\n  exact add_tsub_le_assoc\n#align add_tsub_le_tsub_add add_tsub_le_tsub_add\n-/\n\n",
  "add_tsub_le_right":

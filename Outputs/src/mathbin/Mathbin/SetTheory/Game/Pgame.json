@@ -15,7 +15,7 @@
  "zero_left_moves":
  "@[simp]\ntheorem zero_left_moves : left_moves 0 = PEmpty :=\n  rfl\n#align zero_left_moves zero_left_moves\n\n",
  "zero_le_of_is_empty_right_moves":
- "@[simp]\ntheorem zero_le_of_is_empty_right_moves (x : pgame) [is_empty x.right_moves] : 0 ≤ x :=\n  zero_le.2 is_empty_elim\n#align zero_le_of_is_empty_right_moves zero_le_of_is_empty_right_moves\n\n",
+ "@[simp]\ntheorem zero_le_of_is_empty_right_moves (x : pgame) [IsEmpty x.right_moves] : 0 ≤ x :=\n  zero_le.2 isEmptyElim\n#align zero_le_of_is_empty_right_moves zero_le_of_is_empty_right_moves\n\n",
  "zero_le_neg_iff":
  "@[simp]\ntheorem zero_le_neg_iff {x : pgame} : 0 ≤ -x ↔ x ≤ 0 := by rw [le_neg_iff, neg_zero]\n#align zero_le_neg_iff zero_le_neg_iff\n\n",
  "zero_le_lf":
@@ -37,9 +37,9 @@
  "wf_is_option":
  "theorem wf_is_option : well_founded is_option :=\n  ⟨fun x =>\n    move_rec_on x fun x IHl IHr =>\n      acc.intro x fun y h => by\n        induction' h with _ i _ j\n        · exact IHl i\n        · exact IHr j⟩\n#align wf_is_option wf_is_option\n\n",
  "trans":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `pgame.equiv -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `pgame.equiv -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `pgame.equiv -/\n@[trans]\nprotected theorem equiv.trans {x y z} : pgame.equiv x y → pgame.equiv y z → pgame.equiv x z :=\n  trans\n#align equiv.trans equiv.trans\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `pgame.equiv -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `pgame.equiv -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `pgame.equiv -/\n#print Equiv.trans /-\n@[trans]\nprotected theorem Equiv.trans {x y z} : pgame.equiv x y → pgame.equiv y z → pgame.equiv x z :=\n  trans\n#align equiv.trans Equiv.trans\n-/\n\n",
  "symm":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `pgame.equiv -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `pgame.equiv -/\n@[symm]\nprotected theorem equiv.symm {x y} : pgame.equiv x y → pgame.equiv y x :=\n  symm\n#align equiv.symm equiv.symm\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `pgame.equiv -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `pgame.equiv -/\n#print Equiv.symm /-\n@[symm]\nprotected theorem Equiv.symm {x y} : pgame.equiv x y → pgame.equiv y x :=\n  symm\n#align equiv.symm Equiv.symm\n-/\n\n",
  "swap_iff":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `pgame.fuzzy -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `pgame.fuzzy -/\ntheorem fuzzy.swap_iff {x y : pgame} : pgame.fuzzy x y ↔ pgame.fuzzy y x :=\n  ⟨fuzzy.swap, fuzzy.swap⟩\n#align fuzzy.swap_iff fuzzy.swap_iff\n\n",
  "swap":
@@ -67,13 +67,13 @@
  "right_response_spec":
  "/-- Show that the response for right provided by `right_response` preserves the right-player-wins\ncondition. -/\ntheorem right_response_spec {x : pgame} (h : x ≤ 0) (i : x.left_moves) :\n    (x.move_left i).move_right (right_response h i) ≤ 0 :=\n  Classical.choose_spec <| (le_zero.1 h) i\n#align right_response_spec right_response_spec\n\n",
  "right_moves_of_lists":
- "theorem right_moves_of_lists (L R : list pgame) : (of_lists L R).right_moves = ULift (fin R.length) :=\n  rfl\n#align right_moves_of_lists right_moves_of_lists\n\n",
+ "theorem right_moves_of_lists (L R : List pgame) : (of_lists L R).right_moves = ULift (Fin R.length) :=\n  rfl\n#align right_moves_of_lists right_moves_of_lists\n\n",
  "right_moves_neg":
  "theorem right_moves_neg : ∀ x : pgame, (-x).right_moves = x.left_moves\n  | ⟨_, _, _, _⟩ => rfl\n#align right_moves_neg right_moves_neg\n\n",
  "right_moves_mk":
  "@[simp]\ntheorem right_moves_mk {xl xr xL xR} : (⟨xl, xr, xL, xR⟩ : pgame).right_moves = xr :=\n  rfl\n#align right_moves_mk right_moves_mk\n\n",
  "right_moves_add_cases":
- "theorem right_moves_add_cases {x y : pgame} (k) {P : (x + y).right_moves → Prop}\n    (hl : ∀ j, P <| to_right_moves_add (sum.inl j)) (hr : ∀ j, P <| to_right_moves_add (sum.inr j)) : P k :=\n  by\n  rw [← to_right_moves_add.apply_symm_apply k]\n  cases' to_right_moves_add.symm k with i i\n  · exact hl i\n  · exact hr i\n#align right_moves_add_cases right_moves_add_cases\n\n",
+ "theorem right_moves_add_cases {x y : pgame} (k) {P : (x + y).right_moves → Prop}\n    (hl : ∀ j, P <| to_right_moves_add (Sum.inl j)) (hr : ∀ j, P <| to_right_moves_add (Sum.inr j)) : P k :=\n  by\n  rw [← to_right_moves_add.apply_symm_apply k]\n  cases' to_right_moves_add.symm k with i i\n  · exact hl i\n  · exact hr i\n#align right_moves_add_cases right_moves_add_cases\n\n",
  "right_moves_add":
  "theorem right_moves_add : ∀ x y : pgame.{u}, (x + y).right_moves = Sum x.right_moves y.right_moves\n  | ⟨_, _, _, _⟩, ⟨_, _, _, _⟩ => rfl\n#align right_moves_add right_moves_add\n\n",
  "relabel_move_right'":
@@ -91,25 +91,23 @@
  "one_left_moves":
  "@[simp]\ntheorem one_left_moves : left_moves 1 = PUnit :=\n  rfl\n#align one_left_moves one_left_moves\n\n",
  "of_lists_move_right'":
- "@[simp]\ntheorem of_lists_move_right' {L R : list pgame} (i : (of_lists L R).right_moves) :\n    (of_lists L R).move_right i = R.nth_le (to_of_lists_right_moves.symm i) (to_of_lists_right_moves.symm i).is_lt :=\n  rfl\n#align of_lists_move_right' of_lists_move_right'\n\n",
+ "@[simp]\ntheorem of_lists_move_right' {L R : List pgame} (i : (of_lists L R).right_moves) :\n    (of_lists L R).move_right i = R.nth_le (to_of_lists_right_moves.symm i) (to_of_lists_right_moves.symm i).is_lt :=\n  rfl\n#align of_lists_move_right' of_lists_move_right'\n\n",
  "of_lists_move_right":
- "theorem of_lists_move_right {L R : list pgame} (i : fin R.length) :\n    (of_lists L R).move_right (to_of_lists_right_moves i) = R.nth_le i i.is_lt :=\n  rfl\n#align of_lists_move_right of_lists_move_right\n\n",
+ "theorem of_lists_move_right {L R : List pgame} (i : Fin R.length) :\n    (of_lists L R).move_right (to_of_lists_right_moves i) = R.nth_le i i.is_lt :=\n  rfl\n#align of_lists_move_right of_lists_move_right\n\n",
  "of_lists_move_left'":
- "@[simp]\ntheorem of_lists_move_left' {L R : list pgame} (i : (of_lists L R).left_moves) :\n    (of_lists L R).move_left i = L.nth_le (to_of_lists_left_moves.symm i) (to_of_lists_left_moves.symm i).is_lt :=\n  rfl\n#align of_lists_move_left' of_lists_move_left'\n\n",
+ "@[simp]\ntheorem of_lists_move_left' {L R : List pgame} (i : (of_lists L R).left_moves) :\n    (of_lists L R).move_left i = L.nth_le (to_of_lists_left_moves.symm i) (to_of_lists_left_moves.symm i).is_lt :=\n  rfl\n#align of_lists_move_left' of_lists_move_left'\n\n",
  "of_lists_move_left":
- "theorem of_lists_move_left {L R : list pgame} (i : fin L.length) :\n    (of_lists L R).move_left (to_of_lists_left_moves i) = L.nth_le i i.is_lt :=\n  rfl\n#align of_lists_move_left of_lists_move_left\n\n",
+ "theorem of_lists_move_left {L R : List pgame} (i : Fin L.length) :\n    (of_lists L R).move_left (to_of_lists_left_moves i) = L.nth_le i i.is_lt :=\n  rfl\n#align of_lists_move_left of_lists_move_left\n\n",
  "not_lf":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `pgame.lf -/\n@[simp]\ntheorem not_lf {x y : pgame} : ¬pgame.lf x y ↔ y ≤ x :=\n  not_le_lf.2\n#align not_lf not_lf\n\n",
- "not_le_lf":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `pgame.lf -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `pgame.lf -/\nprivate theorem not_le_lf {x y : pgame} : (¬x ≤ y ↔ pgame.lf y x) ∧ (¬pgame.lf x y ↔ y ≤ x) :=\n  by\n  induction' x with xl xr xL xR IHxl IHxr generalizing y\n  induction' y with yl yr yL yR IHyl IHyr\n  simp only [mk_le_mk, mk_lf_mk, IHxl, IHxr, IHyl, IHyr, not_and_or, not_or, not_forall, not_exists, and_comm',\n    or_comm', iff_self_iff, and_self_iff]\n#align not_le_lf not_le_lf\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `pgame.lf -/\n@[simp]\ntheorem not_lf {x y : pgame} : ¬pgame.lf x y ↔ y ≤ x :=\n  Classical.not_not\n#align not_lf not_lf\n\n",
  "not_le":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `pgame.lf -/\n#print not_le /-\n@[simp]\nprotected theorem not_le {x y : pgame} : ¬x ≤ y ↔ pgame.lf y x :=\n  not_le_lf.1\n#align not_le not_le\n-/\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `pgame.lf -/\n#print not_le /-\n@[simp]\nprotected theorem not_le {x y : pgame} : ¬x ≤ y ↔ pgame.lf y x :=\n  iff.rfl\n#align not_le not_le\n-/\n\n",
  "not_gt":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `pgame.lf -/\ntheorem lf.not_gt {x y} (h : pgame.lf x y) : ¬y < x := fun h' => h.not_ge h'.le\n#align lf.not_gt lf.not_gt\n\n",
  "not_gf":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `pgame.lf -/\ntheorem _root_.has_le.le.not_gf {x y : pgame} : x ≤ y → ¬pgame.lf y x :=\n  not_lf.2\n#align has_le.le.not_gf has_le.le.not_gf\n\n",
  "not_ge":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `pgame.lf -/\ntheorem lf.not_ge {x y : pgame} : pgame.lf x y → ¬y ≤ x :=\n  pgame.not_le.2\n#align lf.not_ge lf.not_ge\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `pgame.lf -/\ntheorem lf.not_ge {x y : pgame} : pgame.lf x y → ¬y ≤ x :=\n  id\n#align lf.not_ge lf.not_ge\n\n",
  "not_fuzzy_of_le":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `pgame.fuzzy -/\ntheorem not_fuzzy_of_le {x y : pgame} (h : x ≤ y) : ¬pgame.fuzzy x y := fun h' => h'.2.not_ge h\n#align not_fuzzy_of_le not_fuzzy_of_le\n\n",
  "not_fuzzy_of_ge":
@@ -125,7 +123,7 @@
  "neg_star":
  "@[simp]\ntheorem neg_star : -star = star := by simp [star]\n#align neg_star neg_star\n\n",
  "neg_of_lists":
- "@[simp]\ntheorem neg_of_lists (L R : list pgame) : -of_lists L R = of_lists (R.map fun x => -x) (L.map fun x => -x) :=\n  by\n  simp only [of_lists, neg_def, list.length_map, List.nthLe_map', eq_self_iff_true, true_and_iff]\n  constructor;\n  all_goals\n    apply hfunext\n    · simp\n    · intro a a' ha\n      congr 2\n      have : ∀ {m n} (h₁ : m = n) {b : ULift (fin m)} {c : ULift (fin n)} (h₂ : HEq b c), (b.down : ℕ) = ↑c.down :=\n        by\n        rintro m n rfl b c rfl\n        rfl\n      exact this (list.length_map _ _).symm ha\n#align neg_of_lists neg_of_lists\n\n",
+ "@[simp]\ntheorem neg_of_lists (L R : List pgame) : -of_lists L R = of_lists (R.map fun x => -x) (L.map fun x => -x) :=\n  by\n  simp only [of_lists, neg_def, list.length_map, List.nthLe_map', eq_self_iff_true, true_and_iff]\n  constructor;\n  all_goals\n    apply hfunext\n    · simp\n    · intro a a' ha\n      congr 2\n      have : ∀ {m n} (h₁ : m = n) {b : ULift (Fin m)} {c : ULift (Fin n)} (h₂ : HEq b c), (b.down : ℕ) = ↑c.down :=\n        by\n        rintro m n rfl b c rfl\n        rfl\n      exact this (list.length_map _ _).symm ha\n#align neg_of_lists neg_of_lists\n\n",
  "neg_lt_zero_iff":
  "@[simp]\ntheorem neg_lt_zero_iff {x : pgame} : -x < 0 ↔ 0 < x := by rw [neg_lt_iff, neg_zero]\n#align neg_lt_zero_iff neg_lt_zero_iff\n\n",
  "neg_lt_neg_iff":
@@ -155,7 +153,7 @@
  "neg_equiv_zero_iff":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `pgame.equiv -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `pgame.equiv -/\n@[simp]\ntheorem neg_equiv_zero_iff {x : pgame} : pgame.equiv (-x) 0 ↔ pgame.equiv x 0 := by rw [neg_equiv_iff, neg_zero]\n#align neg_equiv_zero_iff neg_equiv_zero_iff\n\n",
  "neg_equiv_neg_iff":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `pgame.equiv -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `pgame.equiv -/\n@[simp]\ntheorem neg_equiv_neg_iff {x y : pgame} : pgame.equiv (-x) (-y) ↔ pgame.equiv x y := by\n  rw [equiv, equiv, neg_le_neg_iff, neg_le_neg_iff, and_comm]\n#align neg_equiv_neg_iff neg_equiv_neg_iff\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `pgame.equiv -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `pgame.equiv -/\n@[simp]\ntheorem neg_equiv_neg_iff {x y : pgame} : pgame.equiv (-x) (-y) ↔ pgame.equiv x y := by\n  rw [Equiv, Equiv, neg_le_neg_iff, neg_le_neg_iff, and_comm]\n#align neg_equiv_neg_iff neg_equiv_neg_iff\n\n",
  "neg_equiv_iff":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `pgame.equiv -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `pgame.equiv -/\ntheorem neg_equiv_iff {x y : pgame} : pgame.equiv (-x) y ↔ pgame.equiv x (-y) := by\n  rw [← neg_neg y, neg_equiv_neg_iff, neg_neg]\n#align neg_equiv_iff neg_equiv_iff\n\n",
  "neg_def":
@@ -199,7 +197,7 @@
  "mk_lf_of_le":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `pgame.lf -/\ntheorem mk_lf_of_le {xl xr y j} (xL) {xR : xr → pgame} : xR j ≤ y → pgame.lf (mk xl xr xL xR) y :=\n  @lf_of_move_right_le (mk _ _ _ _) y j\n#align mk_lf_of_le mk_lf_of_le\n\n",
  "mk_lf_mk":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `pgame.lf -/\n/-- Definition of `x ⧏ y` on pre-games built using the constructor. -/\n@[simp]\ntheorem mk_lf_mk {xl xr xL xR yl yr yL yR} :\n    pgame.lf (mk xl xr xL xR) (mk yl yr yL yR) ↔ (∃ i, mk xl xr xL xR ≤ yL i) ∨ ∃ j, xR j ≤ mk yl yr yL yR :=\n  show (le_lf _ _).2 ↔ _ by\n    rw [le_lf]\n    rfl\n#align mk_lf_mk mk_lf_mk\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `pgame.lf -/\n/-- Definition of `x ⧏ y` on pre-games built using the constructor. -/\n@[simp]\ntheorem mk_lf_mk {xl xr xL xR yl yr yL yR} :\n    pgame.lf (mk xl xr xL xR) (mk yl yr yL yR) ↔ (∃ i, mk xl xr xL xR ≤ yL i) ∨ ∃ j, xR j ≤ mk yl yr yL yR :=\n  lf_iff_exists_le\n#align mk_lf_mk mk_lf_mk\n\n",
  "mk_lf":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `pgame.lf -/\ntheorem mk_lf {xl xr} (xL : xl → pgame) (xR : xr → pgame) (j) : pgame.lf (mk xl xr xL xR) (xR j) :=\n  @lf_move_right (mk _ _ _ _) j\n#align mk_lf mk_lf\n\n",
  "mk_left_moves_equiv":
@@ -207,15 +205,15 @@
  "mk_left":
  "theorem subsequent.mk_left {xl xr} (xL : xl → pgame) (xR : xr → pgame) (i : xl) : subsequent (xL i) (mk xl xr xL xR) :=\n  @subsequent.move_left (mk _ _ _ _) i\n#align subsequent.mk_left subsequent.mk_left\n\n",
  "mk_le_mk":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `pgame.lf -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `pgame.lf -/\n-- the orderings of the clauses here are carefully chosen so that\n--   and.left/or.inl refer to moves by Left, and\n--   and.right/or.inr refer to moves by Right.\n/-- Definition of `x ≤ y` on pre-games built using the constructor. -/\n@[simp]\ntheorem mk_le_mk {xl xr xL xR yl yr yL yR} :\n    mk xl xr xL xR ≤ mk yl yr yL yR ↔ (∀ i, pgame.lf (xL i) (mk yl yr yL yR)) ∧ ∀ j, pgame.lf (mk xl xr xL xR) (yR j) :=\n  show (le_lf _ _).1 ↔ _ by\n    rw [le_lf]\n    rfl\n#align mk_le_mk mk_le_mk\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `pgame.lf -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `pgame.lf -/\n/-- Definition of `x ≤ y` on pre-games built using the constructor. -/\n@[simp]\ntheorem mk_le_mk {xl xr xL xR yl yr yL yR} :\n    mk xl xr xL xR ≤ mk yl yr yL yR ↔ (∀ i, pgame.lf (xL i) (mk yl yr yL yR)) ∧ ∀ j, pgame.lf (mk xl xr xL xR) (yR j) :=\n  le_iff_forall_lf\n#align mk_le_mk mk_le_mk\n\n",
  "mk_add_move_right_inr":
- "@[simp]\ntheorem mk_add_move_right_inr {xl xr yl yr} {xL xR yL yR} {i} :\n    (mk xl xr xL xR + mk yl yr yL yR).move_right (sum.inr i) = mk xl xr xL xR + (mk yl yr yL yR).move_right i :=\n  rfl\n#align mk_add_move_right_inr mk_add_move_right_inr\n\n",
+ "@[simp]\ntheorem mk_add_move_right_inr {xl xr yl yr} {xL xR yL yR} {i} :\n    (mk xl xr xL xR + mk yl yr yL yR).move_right (Sum.inr i) = mk xl xr xL xR + (mk yl yr yL yR).move_right i :=\n  rfl\n#align mk_add_move_right_inr mk_add_move_right_inr\n\n",
  "mk_add_move_right_inl":
- "@[simp]\ntheorem mk_add_move_right_inl {xl xr yl yr} {xL xR yL yR} {i} :\n    (mk xl xr xL xR + mk yl yr yL yR).move_right (sum.inl i) = (mk xl xr xL xR).move_right i + mk yl yr yL yR :=\n  rfl\n#align mk_add_move_right_inl mk_add_move_right_inl\n\n",
+ "@[simp]\ntheorem mk_add_move_right_inl {xl xr yl yr} {xL xR yL yR} {i} :\n    (mk xl xr xL xR + mk yl yr yL yR).move_right (Sum.inl i) = (mk xl xr xL xR).move_right i + mk yl yr yL yR :=\n  rfl\n#align mk_add_move_right_inl mk_add_move_right_inl\n\n",
  "mk_add_move_left_inr":
- "@[simp]\ntheorem mk_add_move_left_inr {xl xr yl yr} {xL xR yL yR} {i} :\n    (mk xl xr xL xR + mk yl yr yL yR).move_left (sum.inr i) = mk xl xr xL xR + (mk yl yr yL yR).move_left i :=\n  rfl\n#align mk_add_move_left_inr mk_add_move_left_inr\n\n",
+ "@[simp]\ntheorem mk_add_move_left_inr {xl xr yl yr} {xL xR yL yR} {i} :\n    (mk xl xr xL xR + mk yl yr yL yR).move_left (Sum.inr i) = mk xl xr xL xR + (mk yl yr yL yR).move_left i :=\n  rfl\n#align mk_add_move_left_inr mk_add_move_left_inr\n\n",
  "mk_add_move_left_inl":
- "@[simp]\ntheorem mk_add_move_left_inl {xl xr yl yr} {xL xR yL yR} {i} :\n    (mk xl xr xL xR + mk yl yr yL yR).move_left (sum.inl i) = (mk xl xr xL xR).move_left i + mk yl yr yL yR :=\n  rfl\n#align mk_add_move_left_inl mk_add_move_left_inl\n\n",
+ "@[simp]\ntheorem mk_add_move_left_inl {xl xr yl yr} {xL xR yL yR} {i} :\n    (mk xl xr xL xR + mk yl yr yL yR).move_left (Sum.inl i) = (mk xl xr xL xR).move_left i + mk yl yr yL yR :=\n  rfl\n#align mk_add_move_left_inl mk_add_move_left_inl\n\n",
  "mk'_right_moves_equiv":
  "@[simp]\ntheorem mk'_right_moves_equiv {x y L R hL hR} : (@relabelling.mk' x y L R hL hR).right_moves_equiv = R.symm :=\n  rfl\n#align mk'_right_moves_equiv mk'_right_moves_equiv\n\n",
  "mk'_left_moves_equiv":
@@ -237,7 +235,7 @@
  "lt_neg_iff":
  "theorem lt_neg_iff {x y : pgame} : y < -x ↔ x < -y := by rw [← neg_neg x, neg_lt_neg_iff, neg_neg]\n#align lt_neg_iff lt_neg_iff\n\n",
  "lt_iff_sub_pos":
- "theorem lt_iff_sub_pos {x y : pgame} : x < y ↔ 0 < y - x :=\n  ⟨fun h => lt_of_le_of_lt (zero_le_add_right_neg x) (add_lt_add_right h _), fun h =>\n    calc\n      x ≤ 0 + x := (zero_add_relabelling x).symm.le\n      _ < y - x + x := add_lt_add_right h _\n      _ ≤ y + (-x + x) := (add_assoc_relabelling _ _ _).le\n      _ ≤ y + 0 := add_le_add_left (add_left_neg_le_zero x) _\n      _ ≤ y := (add_zero_relabelling y).le\n      ⟩\n#align lt_iff_sub_pos lt_iff_sub_pos\n\n",
+ "theorem lt_iff_sub_pos {x y : pgame} : x < y ↔ 0 < y - x :=\n  ⟨fun h => lt_of_le_of_lt (zero_le_add_right_neg x) (add_lt_add_right h _), fun h =>\n    calc\n      x ≤ 0 + x := (zero_add_relabelling x).symm.le\n      _ < y - x + x := (add_lt_add_right h _)\n      _ ≤ y + (-x + x) := (add_assoc_relabelling _ _ _).le\n      _ ≤ y + 0 := (add_le_add_left (add_left_neg_le_zero x) _)\n      _ ≤ y := (add_zero_relabelling y).le\n      ⟩\n#align lt_iff_sub_pos lt_iff_sub_pos\n\n",
  "lt_iff_le_and_lf":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `pgame.lf -/\ntheorem lt_iff_le_and_lf {x y : pgame} : x < y ↔ x ≤ y ∧ pgame.lf x y :=\n  iff.rfl\n#align lt_iff_le_and_lf lt_iff_le_and_lf\n\n",
  "lt_congr_right":
@@ -291,11 +289,11 @@
  "lf_irrefl":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `pgame.lf -/\ntheorem lf_irrefl (x : pgame) : ¬pgame.lf x x :=\n  le_rfl.not_gf\n#align lf_irrefl lf_irrefl\n\n",
  "lf_iff_sub_zero_lf":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `pgame.lf -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `pgame.lf -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `pgame.lf -/\ntheorem lf_iff_sub_zero_lf {x y : pgame} : pgame.lf x y ↔ pgame.lf 0 (y - x) :=\n  ⟨fun h => (zero_le_add_right_neg x).trans_lf (add_lf_add_right h _), fun h =>\n    calc\n      x ≤ 0 + x := (zero_add_relabelling x).symm.le\n      pgame.lf _ (y - x + x) := add_lf_add_right h _\n      _ ≤ y + (-x + x) := (add_assoc_relabelling _ _ _).le\n      _ ≤ y + 0 := add_le_add_left (add_left_neg_le_zero x) _\n      _ ≤ y := (add_zero_relabelling y).le\n      ⟩\n#align lf_iff_sub_zero_lf lf_iff_sub_zero_lf\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `pgame.lf -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `pgame.lf -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `pgame.lf -/\ntheorem lf_iff_sub_zero_lf {x y : pgame} : pgame.lf x y ↔ pgame.lf 0 (y - x) :=\n  ⟨fun h => (zero_le_add_right_neg x).trans_lf (add_lf_add_right h _), fun h =>\n    calc\n      x ≤ 0 + x := (zero_add_relabelling x).symm.le\n      pgame.lf _ (y - x + x) := (add_lf_add_right h _)\n      _ ≤ y + (-x + x) := (add_assoc_relabelling _ _ _).le\n      _ ≤ y + 0 := (add_le_add_left (add_left_neg_le_zero x) _)\n      _ ≤ y := (add_zero_relabelling y).le\n      ⟩\n#align lf_iff_sub_zero_lf lf_iff_sub_zero_lf\n\n",
  "lf_iff_lt_or_fuzzy":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `pgame.lf -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `pgame.fuzzy -/\ntheorem lf_iff_lt_or_fuzzy {x y : pgame} : pgame.lf x y ↔ x < y ∨ pgame.fuzzy x y :=\n  by\n  simp only [lt_iff_le_and_lf, fuzzy, ← pgame.not_le]\n  tauto\n#align lf_iff_lt_or_fuzzy lf_iff_lt_or_fuzzy\n\n",
  "lf_iff_exists_le":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `pgame.lf -/\n/-- Definition of `x ⧏ y` on pre-games, in terms of `≤` -/\ntheorem lf_iff_exists_le {x y : pgame} : pgame.lf x y ↔ (∃ i, x ≤ y.move_left i) ∨ ∃ j, x.move_right j ≤ y :=\n  by\n  cases x\n  cases y\n  exact mk_lf_mk\n#align lf_iff_exists_le lf_iff_exists_le\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `pgame.lf -/\n/-- Definition of `x ⧏ y` on pre-games, in terms of `≤`.\n\nThe ordering here is chosen so that `or.inl` refer to moves by Left, and `or.inr` refer to\nmoves by Right. -/\ntheorem lf_iff_exists_le {x y : pgame} : pgame.lf x y ↔ (∃ i, x ≤ y.move_left i) ∨ ∃ j, x.move_right j ≤ y :=\n  by\n  rw [lf, le_iff_forall_lf, not_and_or]\n  simp\n#align lf_iff_exists_le lf_iff_exists_le\n\n",
  "lf_def":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `pgame.lf -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `pgame.lf -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `pgame.lf -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `pgame.lf -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `pgame.lf -/\n/-- The definition of `x ⧏ y` on pre-games, in terms of `⧏` two moves later. -/\ntheorem lf_def {x y : pgame} :\n    pgame.lf x y ↔\n      (∃ i, (∀ i', pgame.lf (x.move_left i') (y.move_left i)) ∧ ∀ j, pgame.lf x ((y.move_left i).move_right j)) ∨\n        ∃ j, (∀ i, pgame.lf ((x.move_right j).move_left i) y) ∧ ∀ j', pgame.lf (x.move_right j) (y.move_right j') :=\n  by\n  rw [lf_iff_exists_le]\n  conv =>\n    lhs\n    simp only [le_iff_forall_lf]\n#align lf_def lf_def\n\n",
  "lf_congr_right":
@@ -309,17 +307,17 @@
  "left_response_spec":
  "/-- Show that the response for left provided by `left_response` preserves the left-player-wins\ncondition. -/\ntheorem left_response_spec {x : pgame} (h : 0 ≤ x) (j : x.right_moves) :\n    0 ≤ (x.move_right j).move_left (left_response h j) :=\n  Classical.choose_spec <| (zero_le.1 h) j\n#align left_response_spec left_response_spec\n\n",
  "left_moves_of_lists":
- "-- TODO define this at the level of games, as well, and perhaps also for finsets of games.\ntheorem left_moves_of_lists (L R : list pgame) : (of_lists L R).left_moves = ULift (fin L.length) :=\n  rfl\n#align left_moves_of_lists left_moves_of_lists\n\n",
+ "-- TODO define this at the level of games, as well, and perhaps also for finsets of games.\ntheorem left_moves_of_lists (L R : List pgame) : (of_lists L R).left_moves = ULift (Fin L.length) :=\n  rfl\n#align left_moves_of_lists left_moves_of_lists\n\n",
  "left_moves_neg":
  "theorem left_moves_neg : ∀ x : pgame, (-x).left_moves = x.right_moves\n  | ⟨_, _, _, _⟩ => rfl\n#align left_moves_neg left_moves_neg\n\n",
  "left_moves_mk":
  "/-\nCopyright (c) 2019 Mario Carneiro. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Reid Barton, Mario Carneiro, Isabel Longbottom, Scott Morrison\n-/\n@[simp]\ntheorem left_moves_mk {xl xr xL xR} : (⟨xl, xr, xL, xR⟩ : pgame).left_moves = xl :=\n  rfl\n#align left_moves_mk left_moves_mk\n\n",
  "left_moves_add_cases":
- "theorem left_moves_add_cases {x y : pgame} (k) {P : (x + y).left_moves → Prop}\n    (hl : ∀ i, P <| to_left_moves_add (sum.inl i)) (hr : ∀ i, P <| to_left_moves_add (sum.inr i)) : P k :=\n  by\n  rw [← to_left_moves_add.apply_symm_apply k]\n  cases' to_left_moves_add.symm k with i i\n  · exact hl i\n  · exact hr i\n#align left_moves_add_cases left_moves_add_cases\n\n",
+ "theorem left_moves_add_cases {x y : pgame} (k) {P : (x + y).left_moves → Prop}\n    (hl : ∀ i, P <| to_left_moves_add (Sum.inl i)) (hr : ∀ i, P <| to_left_moves_add (Sum.inr i)) : P k :=\n  by\n  rw [← to_left_moves_add.apply_symm_apply k]\n  cases' to_left_moves_add.symm k with i i\n  · exact hl i\n  · exact hr i\n#align left_moves_add_cases left_moves_add_cases\n\n",
  "left_moves_add":
  "theorem left_moves_add : ∀ x y : pgame.{u}, (x + y).left_moves = Sum x.left_moves y.left_moves\n  | ⟨_, _, _, _⟩, ⟨_, _, _, _⟩ => rfl\n#align left_moves_add left_moves_add\n\n",
  "le_zero_of_is_empty_left_moves":
- "@[simp]\ntheorem le_zero_of_is_empty_left_moves (x : pgame) [is_empty x.left_moves] : x ≤ 0 :=\n  le_zero.2 is_empty_elim\n#align le_zero_of_is_empty_left_moves le_zero_of_is_empty_left_moves\n\n",
+ "@[simp]\ntheorem le_zero_of_is_empty_left_moves (x : pgame) [IsEmpty x.left_moves] : x ≤ 0 :=\n  le_zero.2 isEmptyElim\n#align le_zero_of_is_empty_left_moves le_zero_of_is_empty_left_moves\n\n",
  "le_zero_lf":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `pgame.lf -/\n/-- The definition of `x ≤ 0` on pre-games, in terms of `⧏ 0`. -/\ntheorem le_zero_lf {x : pgame} : x ≤ 0 ↔ ∀ i, pgame.lf (x.move_left i) 0 :=\n  by\n  rw [le_iff_forall_lf]\n  simp\n#align le_zero_lf le_zero_lf\n\n",
  "le_zero":
@@ -339,9 +337,9 @@
  "le_neg_iff":
  "theorem le_neg_iff {x y : pgame} : y ≤ -x ↔ x ≤ -y := by rw [← neg_neg x, neg_le_neg_iff, neg_neg]\n#align le_neg_iff le_neg_iff\n\n",
  "le_iff_sub_nonneg":
- "theorem le_iff_sub_nonneg {x y : pgame} : x ≤ y ↔ 0 ≤ y - x :=\n  ⟨fun h => (zero_le_add_right_neg x).trans (add_le_add_right h _), fun h =>\n    calc\n      x ≤ 0 + x := (zero_add_relabelling x).symm.le\n      _ ≤ y - x + x := add_le_add_right h _\n      _ ≤ y + (-x + x) := (add_assoc_relabelling _ _ _).le\n      _ ≤ y + 0 := add_le_add_left (add_left_neg_le_zero x) _\n      _ ≤ y := (add_zero_relabelling y).le\n      ⟩\n#align le_iff_sub_nonneg le_iff_sub_nonneg\n\n",
+ "theorem le_iff_sub_nonneg {x y : pgame} : x ≤ y ↔ 0 ≤ y - x :=\n  ⟨fun h => (zero_le_add_right_neg x).trans (add_le_add_right h _), fun h =>\n    calc\n      x ≤ 0 + x := (zero_add_relabelling x).symm.le\n      _ ≤ y - x + x := (add_le_add_right h _)\n      _ ≤ y + (-x + x) := (add_assoc_relabelling _ _ _).le\n      _ ≤ y + 0 := (add_le_add_left (add_left_neg_le_zero x) _)\n      _ ≤ y := (add_zero_relabelling y).le\n      ⟩\n#align le_iff_sub_nonneg le_iff_sub_nonneg\n\n",
  "le_iff_forall_lf":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `pgame.lf -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `pgame.lf -/\n/-- Definition of `x ≤ y` on pre-games, in terms of `⧏` -/\ntheorem le_iff_forall_lf {x y : pgame} : x ≤ y ↔ (∀ i, pgame.lf (x.move_left i) y) ∧ ∀ j, pgame.lf x (y.move_right j) :=\n  by\n  cases x\n  cases y\n  exact mk_le_mk\n#align le_iff_forall_lf le_iff_forall_lf\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `pgame.lf -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `pgame.lf -/\n/-- Definition of `x ≤ y` on pre-games, in terms of `⧏`.\n\nThe ordering here is chosen so that `and.left` refer to moves by Left, and `and.right` refer to\nmoves by Right. -/\ntheorem le_iff_forall_lf {x y : pgame} : x ≤ y ↔ (∀ i, pgame.lf (x.move_left i) y) ∧ ∀ j, pgame.lf x (y.move_right j) :=\n  by\n  unfold LE.le\n  rw [Sym2.GameAdd.fix_eq]\n  rfl\n#align le_iff_forall_lf le_iff_forall_lf\n\n",
  "le_def":
  "/-- The definition of `x ≤ y` on pre-games, in terms of `≤` two moves later. -/\ntheorem le_def {x y : pgame} :\n    x ≤ y ↔\n      (∀ i, (∃ i', x.move_left i ≤ y.move_left i') ∨ ∃ j, (x.move_left i).move_right j ≤ y) ∧\n        ∀ j, (∃ i, x ≤ (y.move_right j).move_left i) ∨ ∃ j', x.move_right j' ≤ y.move_right j :=\n  by\n  rw [le_iff_forall_lf]\n  conv =>\n    lhs\n    simp only [lf_iff_exists_le]\n#align le_def le_def\n\n",
  "le_congr_right":
@@ -357,9 +355,9 @@
  "is_option_neg_neg":
  "@[simp]\ntheorem is_option_neg_neg {x y : pgame} : is_option (-x) (-y) ↔ is_option x y := by rw [is_option_neg, neg_neg]\n#align is_option_neg_neg is_option_neg_neg\n\n",
  "is_option_neg":
- "theorem is_option_neg {x y : pgame} : is_option x (-y) ↔ is_option (-x) y :=\n  by\n  rw [is_option_iff, is_option_iff, or_comm']\n  cases y;\n  apply or_congr <;>\n    · apply exists_congr\n      intro\n      rw [← neg_eq_iff_neg_eq]\n      exact eq_comm\n#align is_option_neg is_option_neg\n\n",
+ "theorem is_option_neg {x y : pgame} : is_option x (-y) ↔ is_option (-x) y :=\n  by\n  rw [is_option_iff, is_option_iff, or_comm']\n  cases y;\n  apply or_congr <;>\n    · apply exists_congr\n      intro\n      rw [neg_eq_iff_eq_neg]\n      rfl\n#align is_option_neg is_option_neg\n\n",
  "isEmpty":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `pgame.equiv -/\n#print Equiv.isEmpty /-\ntheorem Equiv.isEmpty (x : pgame) [is_empty x.left_moves] [is_empty x.right_moves] : pgame.equiv x 0 :=\n  (relabelling.is_empty x).equiv\n#align equiv.is_empty Equiv.isEmpty\n-/\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `pgame.equiv -/\n#print Equiv.isEmpty /-\ntheorem Equiv.isEmpty (x : pgame) [IsEmpty x.left_moves] [IsEmpty x.right_moves] : pgame.equiv x 0 :=\n  (relabelling.is_empty x).equiv\n#align equiv.is_empty Equiv.isEmpty\n-/\n\n",
  "ge":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `pgame.relabelling -/\n#print GE.ge /-\ntheorem GE.ge {x y : pgame} (r : pgame.relabelling x y) : y ≤ x :=\n  r.symm.le\n#align ge GE.ge\n-/\n\n",
  "fuzzy_of_fuzzy_of_equiv":
@@ -390,8 +388,6 @@
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `pgame.equiv -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `pgame.equiv -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `pgame.equiv -/\ntheorem equiv_congr_left {y₁ y₂} : pgame.equiv y₁ y₂ ↔ ∀ x₁, pgame.equiv x₁ y₁ ↔ pgame.equiv x₁ y₂ :=\n  ⟨fun h x₁ => ⟨fun h' => h'.trans h, fun h' => h'.trans h.symm⟩, fun h => (h y₁).1 <| equiv_rfl⟩\n#align equiv_congr_left equiv_congr_left\n\n",
  "equiv_comm":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `pgame.equiv -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `pgame.equiv -/\nprotected theorem equiv_comm {x y} : pgame.equiv x y ↔ pgame.equiv y x :=\n  comm\n#align equiv_comm equiv_comm\n\n",
- "equiv":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `pgame.relabelling -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `pgame.equiv -/\n/-- A relabelling lets us prove equivalence of games. -/\ntheorem equiv (r : pgame.relabelling x y) : pgame.equiv x y :=\n  ⟨r.le, r.ge⟩\n#align equiv equiv\n\n",
  "add_zero_equiv":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `pgame.equiv -/\n/-- `x + 0` is equivalent to `x`. -/\ntheorem add_zero_equiv (x : pgame.{u}) : pgame.equiv (x + 0) x :=\n  (add_zero_relabelling x).equiv\n#align add_zero_equiv add_zero_equiv\n\n",
  "add_right_neg_le_zero":
@@ -399,15 +395,15 @@
  "add_right_neg_equiv":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `pgame.equiv -/\ntheorem add_right_neg_equiv (x : pgame) : pgame.equiv (x + -x) 0 :=\n  ⟨add_right_neg_le_zero x, zero_le_add_right_neg x⟩\n#align add_right_neg_equiv add_right_neg_equiv\n\n",
  "add_move_right_inr":
- "@[simp]\ntheorem add_move_right_inr (x : pgame) {y : pgame} (i) :\n    (x + y).move_right (to_right_moves_add (sum.inr i)) = x + y.move_right i :=\n  by\n  cases x\n  cases y\n  rfl\n#align add_move_right_inr add_move_right_inr\n\n",
+ "@[simp]\ntheorem add_move_right_inr (x : pgame) {y : pgame} (i) :\n    (x + y).move_right (to_right_moves_add (Sum.inr i)) = x + y.move_right i :=\n  by\n  cases x\n  cases y\n  rfl\n#align add_move_right_inr add_move_right_inr\n\n",
  "add_move_right_inl":
- "@[simp]\ntheorem add_move_right_inl {x : pgame} (y : pgame) (i) :\n    (x + y).move_right (to_right_moves_add (sum.inl i)) = x.move_right i + y :=\n  by\n  cases x\n  cases y\n  rfl\n#align add_move_right_inl add_move_right_inl\n\n",
+ "@[simp]\ntheorem add_move_right_inl {x : pgame} (y : pgame) (i) :\n    (x + y).move_right (to_right_moves_add (Sum.inl i)) = x.move_right i + y :=\n  by\n  cases x\n  cases y\n  rfl\n#align add_move_right_inl add_move_right_inl\n\n",
  "add_move_left_inr":
- "@[simp]\ntheorem add_move_left_inr (x : pgame) {y : pgame} (i) :\n    (x + y).move_left (to_left_moves_add (sum.inr i)) = x + y.move_left i :=\n  by\n  cases x\n  cases y\n  rfl\n#align add_move_left_inr add_move_left_inr\n\n",
+ "@[simp]\ntheorem add_move_left_inr (x : pgame) {y : pgame} (i) :\n    (x + y).move_left (to_left_moves_add (Sum.inr i)) = x + y.move_left i :=\n  by\n  cases x\n  cases y\n  rfl\n#align add_move_left_inr add_move_left_inr\n\n",
  "add_move_left_inl":
- "@[simp]\ntheorem add_move_left_inl {x : pgame} (y : pgame) (i) :\n    (x + y).move_left (to_left_moves_add (sum.inl i)) = x.move_left i + y :=\n  by\n  cases x\n  cases y\n  rfl\n#align add_move_left_inl add_move_left_inl\n\n",
+ "@[simp]\ntheorem add_move_left_inl {x : pgame} (y : pgame) (i) :\n    (x + y).move_left (to_left_moves_add (Sum.inl i)) = x.move_left i + y :=\n  by\n  cases x\n  cases y\n  rfl\n#align add_move_left_inl add_move_left_inl\n\n",
  "add_lf_add_right":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `pgame.lf -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `pgame.lf -/\ntheorem add_lf_add_right {y z : pgame} (h : pgame.lf y z) (x) : pgame.lf (y + x) (z + x) :=\n  suffices z + x ≤ y + x → z ≤ y by\n    rw [← pgame.not_le] at h⊢\n    exact mt this h\n  fun w =>\n  calc\n    z ≤ z + 0 := (add_zero_relabelling _).symm.le\n    _ ≤ z + (x + -x) := add_le_add_left (zero_le_add_right_neg x) _\n    _ ≤ z + x + -x := (add_assoc_relabelling _ _ _).symm.le\n    _ ≤ y + x + -x := add_le_add_right w _\n    _ ≤ y + (x + -x) := (add_assoc_relabelling _ _ _).le\n    _ ≤ y + 0 := add_le_add_left (add_right_neg_le_zero x) _\n    _ ≤ y := (add_zero_relabelling _).le\n    \n#align add_lf_add_right add_lf_add_right\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `pgame.lf -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `pgame.lf -/\ntheorem add_lf_add_right {y z : pgame} (h : pgame.lf y z) (x) : pgame.lf (y + x) (z + x) :=\n  suffices z + x ≤ y + x → z ≤ y by\n    rw [← pgame.not_le] at h⊢\n    exact mt this h\n  fun w =>\n  calc\n    z ≤ z + 0 := (add_zero_relabelling _).symm.le\n    _ ≤ z + (x + -x) := (add_le_add_left (zero_le_add_right_neg x) _)\n    _ ≤ z + x + -x := (add_assoc_relabelling _ _ _).symm.le\n    _ ≤ y + x + -x := (add_le_add_right w _)\n    _ ≤ y + (x + -x) := (add_assoc_relabelling _ _ _).le\n    _ ≤ y + 0 := (add_le_add_left (add_right_neg_le_zero x) _)\n    _ ≤ y := (add_zero_relabelling _).le\n    \n#align add_lf_add_right add_lf_add_right\n\n",
  "add_lf_add_of_lf_of_le":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `pgame.lf -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `pgame.lf -/\ntheorem add_lf_add_of_lf_of_le {w x y z : pgame} (hwx : pgame.lf w x) (hyz : y ≤ z) : pgame.lf (w + y) (x + z) :=\n  lf_of_lf_of_le (add_lf_add_right hwx y) (add_le_add_left hyz x)\n#align add_lf_add_of_lf_of_le add_lf_add_of_lf_of_le\n\n",
  "add_lf_add_of_le_of_lf":
@@ -415,11 +411,11 @@
  "add_lf_add_left":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `pgame.lf -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `pgame.lf -/\ntheorem add_lf_add_left {y z : pgame} (h : pgame.lf y z) (x) : pgame.lf (x + y) (x + z) :=\n  by\n  rw [lf_congr add_comm_equiv add_comm_equiv]\n  apply add_lf_add_right h\n#align add_lf_add_left add_lf_add_left\n\n",
  "add_left_neg_le_zero":
- "theorem add_left_neg_le_zero : ∀ x : pgame, -x + x ≤ 0\n  | ⟨xl, xr, xL, xR⟩ =>\n    le_zero.2 fun i => by\n      cases i\n      · -- If Left played in -x, Right responds with the same move in x.\n        refine' ⟨@to_right_moves_add _ ⟨_, _, _, _⟩ (sum.inr i), _⟩\n        convert @add_left_neg_le_zero (xR i)\n        apply add_move_right_inr\n      · -- If Left in x, Right responds with the same move in -x.\n        dsimp\n        refine' ⟨@to_right_moves_add ⟨_, _, _, _⟩ _ (sum.inl i), _⟩\n        convert @add_left_neg_le_zero (xL i)\n        apply add_move_right_inl\n#align add_left_neg_le_zero add_left_neg_le_zero\n\n",
+ "theorem add_left_neg_le_zero : ∀ x : pgame, -x + x ≤ 0\n  | ⟨xl, xr, xL, xR⟩ =>\n    le_zero.2 fun i => by\n      cases i\n      · -- If Left played in -x, Right responds with the same move in x.\n        refine' ⟨@to_right_moves_add _ ⟨_, _, _, _⟩ (Sum.inr i), _⟩\n        convert@add_left_neg_le_zero (xR i)\n        apply add_move_right_inr\n      · -- If Left in x, Right responds with the same move in -x.\n        dsimp\n        refine' ⟨@to_right_moves_add ⟨_, _, _, _⟩ _ (Sum.inl i), _⟩\n        convert@add_left_neg_le_zero (xL i)\n        apply add_move_right_inl\n#align add_left_neg_le_zero add_left_neg_le_zero\n\n",
  "add_left_neg_equiv":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `pgame.equiv -/\ntheorem add_left_neg_equiv (x : pgame) : pgame.equiv (-x + x) 0 :=\n  ⟨add_left_neg_le_zero x, zero_le_add_left_neg x⟩\n#align add_left_neg_equiv add_left_neg_equiv\n\n",
  "add_le_add_right'":
- "private theorem add_le_add_right' : ∀ {x y z : pgame} (h : x ≤ y), x + z ≤ y + z\n  | mk xl xr xL xR, mk yl yr yL yR, mk zl zr zL zR => fun h =>\n    by\n    refine' le_def.2 ⟨fun i => _, fun i => _⟩ <;> cases i\n    · rw [le_def] at h\n      cases h\n      rcases h_left i with (⟨i', ih⟩ | ⟨j, jh⟩)\n      · exact or.inl ⟨to_left_moves_add (sum.inl i'), add_le_add_right' ih⟩\n      · refine' or.inr ⟨to_right_moves_add (sum.inl j), _⟩\n        convert add_le_add_right' jh\n        apply add_move_right_inl\n    · exact or.inl ⟨@to_left_moves_add _ ⟨_, _, _, _⟩ (sum.inr i), add_le_add_right' h⟩\n    · rw [le_def] at h\n      cases h\n      rcases h_right i with (⟨i, ih⟩ | ⟨j', jh⟩)\n      · refine' or.inl ⟨to_left_moves_add (sum.inl i), _⟩\n        convert add_le_add_right' ih\n        apply add_move_left_inl\n      · exact or.inr ⟨to_right_moves_add (sum.inl j'), add_le_add_right' jh⟩\n    · exact or.inr ⟨@to_right_moves_add _ ⟨_, _, _, _⟩ (sum.inr i), add_le_add_right' h⟩decreasing_by pgame_wf_tac\n#align add_le_add_right' add_le_add_right'\n\n",
+ "private theorem add_le_add_right' : ∀ {x y z : pgame} (h : x ≤ y), x + z ≤ y + z\n  | mk xl xr xL xR, mk yl yr yL yR, mk zl zr zL zR => fun h =>\n    by\n    refine' le_def.2 ⟨fun i => _, fun i => _⟩ <;> cases i\n    · rw [le_def] at h\n      cases h\n      rcases h_left i with (⟨i', ih⟩ | ⟨j, jh⟩)\n      · exact or.inl ⟨to_left_moves_add (Sum.inl i'), add_le_add_right' ih⟩\n      · refine' or.inr ⟨to_right_moves_add (Sum.inl j), _⟩\n        convert add_le_add_right' jh\n        apply add_move_right_inl\n    · exact or.inl ⟨@to_left_moves_add _ ⟨_, _, _, _⟩ (Sum.inr i), add_le_add_right' h⟩\n    · rw [le_def] at h\n      cases h\n      rcases h_right i with (⟨i, ih⟩ | ⟨j', jh⟩)\n      · refine' or.inl ⟨to_left_moves_add (Sum.inl i), _⟩\n        convert add_le_add_right' ih\n        apply add_move_left_inl\n      · exact or.inr ⟨to_right_moves_add (Sum.inl j'), add_le_add_right' jh⟩\n    · exact or.inr ⟨@to_right_moves_add _ ⟨_, _, _, _⟩ (Sum.inr i), add_le_add_right' h⟩decreasing_by pgame_wf_tac\n#align add_le_add_right' add_le_add_right'\n\n",
  "add_congr_right":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `pgame.equiv -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `pgame.equiv -/\ntheorem add_congr_right {x y z : pgame} : pgame.equiv y z → pgame.equiv (x + y) (x + z) :=\n  add_congr equiv_rfl\n#align add_congr_right add_congr_right\n\n",
  "add_congr_left":
@@ -431,4 +427,6 @@
  "add_comm_equiv":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `pgame.equiv -/\ntheorem add_comm_equiv {x y : pgame} : pgame.equiv (x + y) (y + x) :=\n  (add_comm_relabelling x y).equiv\n#align add_comm_equiv add_comm_equiv\n\n",
  "add_assoc_equiv":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `pgame.equiv -/\ntheorem add_assoc_equiv {x y z : pgame} : pgame.equiv (x + y + z) (x + (y + z)) :=\n  (add_assoc_relabelling x y z).equiv\n#align add_assoc_equiv add_assoc_equiv\n\n"}
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `pgame.equiv -/\ntheorem add_assoc_equiv {x y z : pgame} : pgame.equiv (x + y + z) (x + (y + z)) :=\n  (add_assoc_relabelling x y z).equiv\n#align add_assoc_equiv add_assoc_equiv\n\n",
+ "Equiv":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `pgame.relabelling -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `pgame.equiv -/\n#print Equiv /-\n/-- A relabelling lets us prove equivalence of games. -/\ntheorem Equiv (r : pgame.relabelling x y) : pgame.equiv x y :=\n  ⟨r.le, r.ge⟩\n#align equiv Equiv\n-/\n\n"}

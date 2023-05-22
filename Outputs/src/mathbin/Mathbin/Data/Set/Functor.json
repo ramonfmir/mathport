@@ -1,9 +1,9 @@
 {"seq_eq_set_seq":
- "@[simp]\ntheorem seq_eq_set_seq (s : set (α → β)) (t : set α) : s <*> t = s.seq t :=\n  rfl\n#align seq_eq_set_seq seq_eq_set_seq\n\n",
+ "@[simp]\ntheorem seq_eq_set_seq (s : Set (α → β)) (t : Set α) : s <*> t = s.seq t :=\n  rfl\n#align seq_eq_set_seq seq_eq_set_seq\n\n",
  "pure_def":
- "@[simp]\ntheorem pure_def (a : α) : (pure a : set α) = {a} :=\n  rfl\n#align pure_def pure_def\n\n",
+ "@[simp]\ntheorem pure_def (a : α) : (pure a : Set α) = {a} :=\n  rfl\n#align pure_def pure_def\n\n",
  "image2_def":
- "/-- `set.image2` in terms of monadic operations. Note that this can't be taken as the definition\nbecause of the lack of universe polymorphism. -/\ntheorem image2_def {α β γ : Type _} (f : α → β → γ) (s : set α) (t : set β) : image2 f s t = f <$> s <*> t :=\n  by\n  ext\n  simp\n#align image2_def image2_def\n\n",
+ "/-- `set.image2` in terms of monadic operations. Note that this can't be taken as the definition\nbecause of the lack of universe polymorphism. -/\ntheorem image2_def {α β γ : Type _} (f : α → β → γ) (s : Set α) (t : Set β) : image2 f s t = f <$> s <*> t :=\n  by\n  ext\n  simp\n#align image2_def image2_def\n\n",
  "fmap_eq_image":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\n@[simp]\ntheorem fmap_eq_image (f : α → β) : f <$> s = «expr '' » f s :=\n  rfl\n#align fmap_eq_image fmap_eq_image\n\n",
  "bind_def":

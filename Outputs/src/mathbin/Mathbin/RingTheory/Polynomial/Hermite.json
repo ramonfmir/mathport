@@ -1,0 +1,26 @@
+{"nat_degree_hermite":
+ "@[simp]\ntheorem nat_degree_hermite {n : ℕ} : (hermite n).nat_degree = n :=\n  natDegree_eq_of_degree_eq_some (degree_hermite n)\n#align nat_degree_hermite nat_degree_hermite\n\n",
+ "leading_coeff_hermite":
+ "@[simp]\ntheorem leading_coeff_hermite (n : ℕ) : (hermite n).leading_coeff = 1 := by\n  rw [← coeff_nat_degree, nat_degree_hermite, coeff_hermite_self]\n#align leading_coeff_hermite leading_coeff_hermite\n\n",
+ "hermite_zero":
+ "@[simp]\ntheorem hermite_zero : hermite 0 = C 1 :=\n  rfl\n#align hermite_zero hermite_zero\n\n",
+ "hermite_succ":
+ "/-\nCopyright (c) 2023 Luke Mantle. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Luke Mantle\n-/\n@[simp]\ntheorem hermite_succ (n : ℕ) : hermite (n + 1) = X * hermite n - (hermite n).derivative := by rw [hermite]\n#align hermite_succ hermite_succ\n\n",
+ "hermite_one":
+ "@[simp]\ntheorem hermite_one : hermite 1 = X := by\n  rw [hermite_succ, hermite_zero]\n  simp only [map_one, mul_one, derivative_one, sub_zero]\n#align hermite_one hermite_one\n\n",
+ "hermite_monic":
+ "theorem hermite_monic (n : ℕ) : (hermite n).monic :=\n  leading_coeff_hermite n\n#align hermite_monic hermite_monic\n\n",
+ "hermite_eq_iterate":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ^[ ]» -/\ntheorem hermite_eq_iterate (n : ℕ) : hermite n = («expr ^[ ]» (fun p => X * p - p.derivative) n) 1 :=\n  by\n  induction' n with n ih\n  · rfl\n  · rw [Function.iterate_succ_apply', ← ih, hermite_succ]\n#align hermite_eq_iterate hermite_eq_iterate\n\n",
+ "degree_hermite":
+ "@[simp]\ntheorem degree_hermite (n : ℕ) : (hermite n).degree = n :=\n  by\n  rw [degree_eq_of_le_of_coeff_ne_zero]\n  simp_rw [degree_le_iff_coeff_zero, WithBot.coe_lt_coe]\n  · intro m\n    exact coeff_hermite_of_lt\n  · simp [coeff_hermite_self n]\n#align degree_hermite degree_hermite\n\n",
+ "coeff_hermite_succ_zero":
+ "theorem coeff_hermite_succ_zero (n : ℕ) : coeff (hermite (n + 1)) 0 = -coeff (hermite n) 1 := by simp [coeff_derivative]\n#align coeff_hermite_succ_zero coeff_hermite_succ_zero\n\n",
+ "coeff_hermite_succ_succ":
+ "theorem coeff_hermite_succ_succ (n k : ℕ) :\n    coeff (hermite (n + 1)) (k + 1) = coeff (hermite n) k - (k + 2) * coeff (hermite n) (k + 2) :=\n  by\n  rw [hermite_succ, coeff_sub, coeff_X_mul, coeff_derivative, mul_comm]\n  norm_cast\n#align coeff_hermite_succ_succ coeff_hermite_succ_succ\n\n",
+ "coeff_hermite_self":
+ "@[simp]\ntheorem coeff_hermite_self (n : ℕ) : coeff (hermite n) n = 1 :=\n  by\n  induction' n with n ih\n  · apply coeff_C\n  · rw [coeff_hermite_succ_succ, ih, coeff_hermite_of_lt, MulZeroClass.mul_zero, sub_zero]\n    simp\n#align coeff_hermite_self coeff_hermite_self\n\n",
+ "coeff_hermite_of_odd_add":
+ "theorem coeff_hermite_of_odd_add {n k : ℕ} (hnk : Odd (n + k)) : coeff (hermite n) k = 0 :=\n  by\n  induction' n with n ih generalizing k\n  · rw [zero_add] at hnk\n    exact coeff_hermite_of_lt hnk.pos\n  · cases k\n    · rw [nat.succ_add_eq_succ_add] at hnk\n      rw [coeff_hermite_succ_zero, ih hnk, neg_zero]\n    · rw [coeff_hermite_succ_succ, ih, ih, MulZeroClass.mul_zero, sub_zero]\n      · rwa [nat.succ_add_eq_succ_add] at hnk\n      · rw [(by rw [nat.succ_add, nat.add_succ] : n.succ + k.succ = n + k + 2)] at hnk\n        exact (nat.odd_add.mp hnk).mpr even_two\n#align coeff_hermite_of_odd_add coeff_hermite_of_odd_add\n\n",
+ "coeff_hermite_of_lt":
+ "theorem coeff_hermite_of_lt {n k : ℕ} (hnk : n < k) : coeff (hermite n) k = 0 :=\n  by\n  obtain ⟨k, rfl⟩ := Nat.exists_eq_add_of_lt hnk\n  clear hnk\n  induction' n with n ih generalizing k\n  · apply coeff_C\n  · have : n + k + 1 + 2 = n + (k + 2) + 1 := by ring\n    rw [nat.succ_eq_add_one, coeff_hermite_succ_succ, add_right_comm, this, ih k, ih (k + 2), MulZeroClass.mul_zero,\n      sub_zero]\n#align coeff_hermite_of_lt coeff_hermite_of_lt\n\n"}

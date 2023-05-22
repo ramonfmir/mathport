@@ -5,11 +5,11 @@
  "one_ne_coe":
  "@[simp, to_additive]\ntheorem one_ne_coe {a : α} : (1 : WithOne α) ≠ a :=\n  coe_ne_one.symm\n#align one_ne_coe one_ne_coe\n\n",
  "ne_one_iff_exists":
- "@[to_additive]\ntheorem ne_one_iff_exists {x : WithOne α} : x ≠ 1 ↔ ∃ a : α, ↑a = x :=\n  option.ne_none_iff_exists\n#align ne_one_iff_exists ne_one_iff_exists\n\n",
+ "@[to_additive]\ntheorem ne_one_iff_exists {x : WithOne α} : x ≠ 1 ↔ ∃ a : α, ↑a = x :=\n  Option.ne_none_iff_exists\n#align ne_one_iff_exists ne_one_iff_exists\n\n",
  "inv_zero":
  "@[simp]\ntheorem inv_zero [Inv α] : (0 : WithZero α)⁻¹ = 0 :=\n  rfl\n#align inv_zero inv_zero\n\n",
  "coe_zpow":
- "@[simp, norm_cast]\ntheorem coe_zpow [div_inv_monoid α] {a : α} (n : ℤ) : ↑(a ^ n : α) = (↑a ^ n : WithZero α) :=\n  rfl\n#align coe_zpow coe_zpow\n\n",
+ "@[simp, norm_cast]\ntheorem coe_zpow [DivInvMonoid α] {a : α} (n : ℤ) : ↑(a ^ n : α) = (↑a ^ n : WithZero α) :=\n  rfl\n#align coe_zpow coe_zpow\n\n",
  "coe_unone":
  "@[simp, to_additive coe_unzero]\ntheorem coe_unone {x : WithOne α} (hx : x ≠ 1) : ↑(unone hx) = x :=\n  WithBot.coe_unbot x hx\n#align coe_unone coe_unone\n\n",
  "coe_pow":
@@ -17,13 +17,13 @@
  "coe_one":
  "@[simp, norm_cast]\ntheorem coe_one [One α] : ((1 : α) : WithZero α) = 1 :=\n  rfl\n#align coe_one coe_one\n\n",
  "coe_ne_one":
- "@[simp, to_additive]\ntheorem coe_ne_one {a : α} : (a : WithOne α) ≠ (1 : WithOne α) :=\n  option.some_ne_none a\n#align coe_ne_one coe_ne_one\n\n",
+ "@[simp, to_additive]\ntheorem coe_ne_one {a : α} : (a : WithOne α) ≠ (1 : WithOne α) :=\n  Option.some_ne_none a\n#align coe_ne_one coe_ne_one\n\n",
  "coe_mul":
  "@[simp, norm_cast]\ntheorem coe_mul {α : Type u} [Mul α] {a b : α} : ((a * b : α) : WithZero α) = a * b :=\n  rfl\n#align coe_mul coe_mul\n\n",
  "coe_inv":
  "@[simp, norm_cast]\ntheorem coe_inv [Inv α] (a : α) : ((a⁻¹ : α) : WithZero α) = a⁻¹ :=\n  rfl\n#align coe_inv coe_inv\n\n",
  "coe_inj":
- "@[simp, norm_cast, to_additive]\ntheorem coe_inj {a b : α} : (a : WithOne α) = b ↔ a = b :=\n  option.some_inj\n#align coe_inj coe_inj\n\n",
+ "@[simp, norm_cast, to_additive]\ntheorem coe_inj {a b : α} : (a : WithOne α) = b ↔ a = b :=\n  Option.some_inj\n#align coe_inj coe_inj\n\n",
  "coe_div":
  "@[norm_cast]\ntheorem coe_div [Div α] (a b : α) : ↑(a / b : α) = (a / b : WithZero α) :=\n  rfl\n#align coe_div coe_div\n\n",
  "cases_on":

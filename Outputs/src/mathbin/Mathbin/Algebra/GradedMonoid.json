@@ -3,56 +3,56 @@
  "pow_mem_graded":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\ntheorem pow_mem_graded (n : ℕ) {r : R} {i : ι} (h : r ∈ A i) : r ^ n ∈ A («expr • » n i) :=\n  by\n  induction n\n  · rw [pow_zero, zero_nsmul]\n    exact one_mem_graded _\n  · rw [pow_succ', succ_nsmul']\n    exact mul_mem_graded n_ih h\n#align pow_mem_graded pow_mem_graded\n\n",
  "one_mem_graded":
- "theorem set_like.one_mem_graded {S : Type _} [SetLike S R] [One R] [Zero ι] (A : ι → S) [set_like.has_graded_one A] :\n    (1 : R) ∈ A 0 :=\n  set_like.has_graded_one.one_mem\n#align set_like.one_mem_graded set_like.one_mem_graded\n\n",
+ "#print SetLike.one_mem_graded /-\ntheorem SetLike.one_mem_graded {S : Type _} [SetLike S R] [One R] [Zero ι] (A : ι → S) [SetLike.GradedOne A] :\n    (1 : R) ∈ A 0 :=\n  set_like.has_graded_one.one_mem\n#align set_like.one_mem_graded SetLike.one_mem_graded\n-/\n\n",
  "mul_mem_graded":
- "theorem set_like.mul_mem_graded {S : Type _} [SetLike S R] [Mul R] [Add ι] {A : ι → S} [set_like.has_graded_mul A] ⦃i j⦄\n    {gi gj} (hi : gi ∈ A i) (hj : gj ∈ A j) : gi * gj ∈ A (i + j) :=\n  set_like.has_graded_mul.mul_mem hi hj\n#align set_like.mul_mem_graded set_like.mul_mem_graded\n\n",
- "mul":
- "theorem set_like.is_homogeneous.mul [Add ι] [Mul R] {A : ι → S} [set_like.has_graded_mul A] {a b : R} :\n    set_like.is_homogeneous A a → set_like.is_homogeneous A b → set_like.is_homogeneous A (a * b)\n  | ⟨i, hi⟩, ⟨j, hj⟩ => ⟨i + j, set_like.mul_mem_graded hi hj⟩\n#align set_like.is_homogeneous.mul set_like.is_homogeneous.mul\n\n",
+ "#print SetLike.mul_mem_graded /-\ntheorem SetLike.mul_mem_graded {S : Type _} [SetLike S R] [Mul R] [Add ι] {A : ι → S} [SetLike.GradedMul A] ⦃i j⦄\n    {gi gj} (hi : gi ∈ A i) (hj : gj ∈ A j) : gi * gj ∈ A (i + j) :=\n  set_like.has_graded_mul.mul_mem hi hj\n#align set_like.mul_mem_graded SetLike.mul_mem_graded\n-/\n\n",
  "mk_zero_smul":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n@[simp]\ntheorem mk_zero_smul {i} (a : A 0) (b : A i) : mk _ («expr • » a b) = mk _ a * mk _ b :=\n  sigma.ext (zero_add _).symm <| eq_rec_heq _ _\n#align mk_zero_smul mk_zero_smul\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n@[simp]\ntheorem mk_zero_smul {i} (a : A 0) (b : A i) : mk _ («expr • » a b) = mk _ a * mk _ b :=\n  Sigma.ext (zero_add _).symm <| eq_rec_heq _ _\n#align mk_zero_smul mk_zero_smul\n\n",
  "mk_zero_pow":
- "@[simp]\ntheorem mk_zero_pow (a : A 0) (n : ℕ) : mk _ (a ^ n) = mk _ a ^ n :=\n  sigma.ext (nsmul_zero n).symm <| eq_rec_heq _ _\n#align mk_zero_pow mk_zero_pow\n\n",
+ "@[simp]\ntheorem mk_zero_pow (a : A 0) (n : ℕ) : mk _ (a ^ n) = mk _ a ^ n :=\n  Sigma.ext (nsmul_zero n).symm <| eq_rec_heq _ _\n#align mk_zero_pow mk_zero_pow\n\n",
  "mk_pow":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\ntheorem mk_pow [add_monoid ι] [gmonoid A] {i} (a : A i) (n : ℕ) : mk i a ^ n = mk («expr • » n i) (gmonoid.gnpow _ a) :=\n  by\n  induction' n with n\n  · rw [pow_zero]\n    exact (gmonoid.gnpow_zero' ⟨_, a⟩).symm\n  · rw [pow_succ, n_ih, mk_mul_mk]\n    exact (gmonoid.gnpow_succ' n ⟨_, a⟩).symm\n#align mk_pow mk_pow\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\ntheorem mk_pow [AddMonoid ι] [GMonoid A] {i} (a : A i) (n : ℕ) : mk i a ^ n = mk («expr • » n i) (gmonoid.gnpow _ a) :=\n  by\n  induction' n with n\n  · rw [pow_zero]\n    exact (gmonoid.gnpow_zero' ⟨_, a⟩).symm\n  · rw [pow_succ, n_ih, mk_mul_mk]\n    exact (gmonoid.gnpow_succ' n ⟨_, a⟩).symm\n#align mk_pow mk_pow\n\n",
  "mk_mul_mk":
- "/-\nCopyright (c) 2021 Eric Wieser. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Eric Wieser\n-/\ntheorem mk_mul_mk [Add ι] [ghas_mul A] {i j} (a : A i) (b : A j) : mk i a * mk j b = mk (i + j) (ghas_mul.mul a b) :=\n  rfl\n#align mk_mul_mk mk_mul_mk\n\n",
- "mk_list_dprod":
- "theorem graded_monoid.mk_list_dprod (l : list α) (fι : α → ι) (fA : ∀ a, A (fι a)) :\n    graded_monoid.mk _ (l.dprod fι fA) = (l.map fun a => graded_monoid.mk (fι a) (fA a)).prod :=\n  by\n  induction l\n  · simp\n    rfl\n  · simp [← l_ih, graded_monoid.mk_mul_mk, List.prod_cons]\n    rfl\n#align graded_monoid.mk_list_dprod graded_monoid.mk_list_dprod\n\n",
+ "/-\nCopyright (c) 2021 Eric Wieser. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Eric Wieser\n-/\ntheorem mk_mul_mk [Add ι] [GMul A] {i j} (a : A i) (b : A j) : mk i a * mk j b = mk (i + j) (ghas_mul.mul a b) :=\n  rfl\n#align mk_mul_mk mk_mul_mk\n\n",
+ "mk_list_dProd":
+ "#print GradedMonoid.mk_list_dProd /-\ntheorem GradedMonoid.mk_list_dProd (l : List α) (fι : α → ι) (fA : ∀ a, A (fι a)) :\n    GradedMonoid.mk _ (l.dprod fι fA) = (l.map fun a => GradedMonoid.mk (fι a) (fA a)).prod :=\n  by\n  induction l\n  · simp\n    rfl\n  · simp [← l_ih, GradedMonoid.mk_mul_mk, List.prod_cons]\n    rfl\n#align graded_monoid.mk_list_dprod GradedMonoid.mk_list_dProd\n-/\n\n",
  "list_prod_of_fn_mem_graded":
- "theorem list_prod_of_fn_mem_graded {n} (i : fin n → ι) (r : fin n → R) (h : ∀ j, r j ∈ A (i j)) :\n    (List.ofFn r).prod ∈ A (List.ofFn i).sum :=\n  by\n  rw [list.of_fn_eq_map, list.of_fn_eq_map]\n  exact list_prod_map_mem_graded _ _ _ fun _ _ => h _\n#align list_prod_of_fn_mem_graded list_prod_of_fn_mem_graded\n\n",
- "list_prod_of_fn_eq_dprod":
- "theorem graded_monoid.list_prod_of_fn_eq_dprod {n : ℕ} (f : fin n → graded_monoid A) :\n    (List.ofFn f).prod = graded_monoid.mk _ ((List.finRange n).dprod (fun i => (f i).1) fun i => (f i).2) := by\n  rw [list.of_fn_eq_map, graded_monoid.list_prod_map_eq_dprod]\n#align graded_monoid.list_prod_of_fn_eq_dprod graded_monoid.list_prod_of_fn_eq_dprod\n\n",
+ "theorem list_prod_of_fn_mem_graded {n} (i : Fin n → ι) (r : Fin n → R) (h : ∀ j, r j ∈ A (i j)) :\n    (List.ofFn r).prod ∈ A (List.ofFn i).sum :=\n  by\n  rw [List.ofFn_eq_map, List.ofFn_eq_map]\n  exact list_prod_map_mem_graded _ _ _ fun _ _ => h _\n#align list_prod_of_fn_mem_graded list_prod_of_fn_mem_graded\n\n",
+ "list_prod_ofFn_eq_dProd":
+ "#print GradedMonoid.list_prod_ofFn_eq_dProd /-\ntheorem GradedMonoid.list_prod_ofFn_eq_dProd {n : ℕ} (f : Fin n → GradedMonoid A) :\n    (List.ofFn f).prod = GradedMonoid.mk _ ((List.finRange n).dprod (fun i => (f i).1) fun i => (f i).2) := by\n  rw [List.ofFn_eq_map, GradedMonoid.list_prod_map_eq_dProd]\n#align graded_monoid.list_prod_of_fn_eq_dprod GradedMonoid.list_prod_ofFn_eq_dProd\n-/\n\n",
  "list_prod_map_mem_graded":
- "theorem list_prod_map_mem_graded {ι'} (l : list ι') (i : ι' → ι) (r : ι' → R) (h : ∀ j ∈ l, r j ∈ A (i j)) :\n    (l.map r).prod ∈ A (l.map i).sum := by\n  induction l\n  · rw [List.map_nil, List.map_nil, List.prod_nil, list.sum_nil]\n    exact one_mem_graded _\n  · rw [list.map_cons, list.map_cons, List.prod_cons, list.sum_cons]\n    exact mul_mem_graded (h _ <| list.mem_cons_self _ _) (l_ih fun j hj => h _ <| list.mem_cons_of_mem _ hj)\n#align list_prod_map_mem_graded list_prod_map_mem_graded\n\n",
- "list_prod_map_eq_dprod":
- "/-- A variant of `graded_monoid.mk_list_dprod` for rewriting in the other direction. -/\ntheorem graded_monoid.list_prod_map_eq_dprod (l : list α) (f : α → graded_monoid A) :\n    (l.map f).prod = graded_monoid.mk _ (l.dprod (fun i => (f i).1) fun i => (f i).2) :=\n  by\n  rw [graded_monoid.mk_list_dprod, graded_monoid.mk]\n  simp_rw [sigma.eta]\n#align graded_monoid.list_prod_map_eq_dprod graded_monoid.list_prod_map_eq_dprod\n\n",
- "list_dprod_eq":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr↥ » -/\n/-- A version of `list.coe_dprod_set_like` with `subtype.mk`. -/\ntheorem set_like.list_dprod_eq (A : ι → S) [set_like.graded_monoid A] (fι : α → ι) (fA : ∀ a, A (fι a)) (l : list α) :\n    (l.dprod fι fA : (fun i => «expr↥ » (A i)) _) =\n      ⟨List.prod (l.map fun a => fA a),\n        (l.dprod_index_eq_map_sum fι).symm ▸ list_prod_map_mem_graded l _ _ fun i hi => (fA i).prop⟩ :=\n  subtype.ext <| set_like.coe_list_dprod _ _ _ _\n#align set_like.list_dprod_eq set_like.list_dprod_eq\n\n",
- "is_homogeneous_one":
- "theorem set_like.is_homogeneous_one [Zero ι] [One R] (A : ι → S) [set_like.has_graded_one A] :\n    set_like.is_homogeneous A (1 : R) :=\n  ⟨0, set_like.one_mem_graded _⟩\n#align set_like.is_homogeneous_one set_like.is_homogeneous_one\n\n",
- "is_homogeneous_coe":
- "@[simp]\ntheorem set_like.is_homogeneous_coe {A : ι → S} {i} (x : A i) : set_like.is_homogeneous A (x : R) :=\n  ⟨i, x.prop⟩\n#align set_like.is_homogeneous_coe set_like.is_homogeneous_coe\n\n",
+ "theorem list_prod_map_mem_graded {ι'} (l : List ι') (i : ι' → ι) (r : ι' → R) (h : ∀ j ∈ l, r j ∈ A (i j)) :\n    (l.map r).prod ∈ A (l.map i).sum := by\n  induction l\n  · rw [List.map_nil, List.map_nil, List.prod_nil, List.sum_nil]\n    exact one_mem_graded _\n  · rw [list.map_cons, list.map_cons, List.prod_cons, List.sum_cons]\n    exact mul_mem_graded (h _ <| list.mem_cons_self _ _) (l_ih fun j hj => h _ <| list.mem_cons_of_mem _ hj)\n#align list_prod_map_mem_graded list_prod_map_mem_graded\n\n",
+ "list_prod_map_eq_dProd":
+ "#print GradedMonoid.list_prod_map_eq_dProd /-\n/-- A variant of `graded_monoid.mk_list_dprod` for rewriting in the other direction. -/\ntheorem GradedMonoid.list_prod_map_eq_dProd (l : List α) (f : α → GradedMonoid A) :\n    (l.map f).prod = GradedMonoid.mk _ (l.dprod (fun i => (f i).1) fun i => (f i).2) :=\n  by\n  rw [GradedMonoid.mk_list_dProd, GradedMonoid.mk]\n  simp_rw [Sigma.eta]\n#align graded_monoid.list_prod_map_eq_dprod GradedMonoid.list_prod_map_eq_dProd\n-/\n\n",
+ "list_dProd_eq":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr↥ » -/\n#print SetLike.list_dProd_eq /-\n/-- A version of `list.coe_dprod_set_like` with `subtype.mk`. -/\ntheorem SetLike.list_dProd_eq (A : ι → S) [SetLike.GradedMonoid A] (fι : α → ι) (fA : ∀ a, A (fι a)) (l : List α) :\n    (l.dprod fι fA : (fun i => «expr↥ » (A i)) _) =\n      ⟨List.prod (l.map fun a => fA a),\n        (l.dprod_index_eq_map_sum fι).symm ▸ list_prod_map_mem_graded l _ _ fun i hi => (fA i).prop⟩ :=\n  Subtype.ext <| SetLike.coe_list_dProd _ _ _ _\n#align set_like.list_dprod_eq SetLike.list_dProd_eq\n-/\n\n",
+ "homogeneous_one":
+ "#print SetLike.homogeneous_one /-\ntheorem SetLike.homogeneous_one [Zero ι] [One R] (A : ι → S) [SetLike.GradedOne A] : SetLike.Homogeneous A (1 : R) :=\n  ⟨0, SetLike.one_mem_graded _⟩\n#align set_like.is_homogeneous_one SetLike.homogeneous_one\n-/\n\n",
+ "homogeneous_mul":
+ "#print SetLike.homogeneous_mul /-\ntheorem SetLike.homogeneous_mul [Add ι] [Mul R] {A : ι → S} [SetLike.GradedMul A] {a b : R} :\n    SetLike.Homogeneous A a → SetLike.Homogeneous A b → SetLike.Homogeneous A (a * b)\n  | ⟨i, hi⟩, ⟨j, hj⟩ => ⟨i + j, SetLike.mul_mem_graded hi hj⟩\n#align set_like.is_homogeneous.mul SetLike.homogeneous_mul\n-/\n\n",
+ "homogeneous_coe":
+ "#print SetLike.homogeneous_coe /-\n@[simp]\ntheorem SetLike.homogeneous_coe {A : ι → S} {i} (x : A i) : SetLike.Homogeneous A (x : R) :=\n  ⟨i, x.prop⟩\n#align set_like.is_homogeneous_coe SetLike.homogeneous_coe\n-/\n\n",
  "gnpow_rec_zero":
- "@[simp]\ntheorem gnpow_rec_zero (a : graded_monoid A) : graded_monoid.mk _ (gnpow_rec 0 a.snd) = 1 :=\n  sigma.ext (zero_nsmul _) (heq_of_cast_eq _ rfl).symm\n#align gnpow_rec_zero gnpow_rec_zero\n\n",
+ "@[simp]\ntheorem gnpow_rec_zero (a : GradedMonoid A) : GradedMonoid.mk _ (gnpowRec 0 a.snd) = 1 :=\n  Sigma.ext (zero_nsmul _) (heq_of_cast_eq _ rfl).symm\n#align gnpow_rec_zero gnpow_rec_zero\n\n",
  "gnpow_rec_succ":
- "@[simp]\ntheorem gnpow_rec_succ (n : ℕ) (a : graded_monoid A) :\n    (graded_monoid.mk _ <| gnpow_rec n.succ a.snd) = a * ⟨_, gnpow_rec n a.snd⟩ :=\n  sigma.ext (succ_nsmul _ _) (heq_of_cast_eq _ rfl).symm\n#align gnpow_rec_succ gnpow_rec_succ\n\n",
- "dprod_nil":
- "@[simp]\ntheorem list.dprod_nil (fι : α → ι) (fA : ∀ a, A (fι a)) :\n    (list.nil : list α).dprod fι fA = graded_monoid.ghas_one.one :=\n  rfl\n#align list.dprod_nil list.dprod_nil\n\n",
- "dprod_monoid":
- "/-- When all the indexed types are the same, the dependent product is just the regular product. -/\n@[simp]\ntheorem list.dprod_monoid {α} [add_monoid ι] [monoid R] (l : list α) (fι : α → ι) (fA : α → R) :\n    (l.dprod fι fA : (fun i : ι => R) _) = ((l.map fA).prod : _) :=\n  by\n  induction l\n  · rw [list.dprod_nil, List.map_nil, List.prod_nil]\n    rfl\n  · rw [list.dprod_cons, list.map_cons, List.prod_cons, l_ih]\n    rfl\n#align list.dprod_monoid list.dprod_monoid\n\n",
- "dprod_index_nil":
- "@[simp]\ntheorem list.dprod_index_nil (fι : α → ι) : ([] : list α).dprod_index fι = 0 :=\n  rfl\n#align list.dprod_index_nil list.dprod_index_nil\n\n",
- "dprod_index_eq_map_sum":
- "theorem list.dprod_index_eq_map_sum (l : list α) (fι : α → ι) : l.dprod_index fι = (l.map fι).sum :=\n  by\n  dsimp only [list.dprod_index]\n  induction l\n  · simp\n  · simp [l_ih]\n#align list.dprod_index_eq_map_sum list.dprod_index_eq_map_sum\n\n",
- "dprod_index_cons":
- "@[simp]\ntheorem list.dprod_index_cons (a : α) (l : list α) (fι : α → ι) : (a :: l).dprod_index fι = fι a + l.dprod_index fι :=\n  rfl\n#align list.dprod_index_cons list.dprod_index_cons\n\n",
- "dprod_cons":
- "-- the `( : _)` in this lemma statement results in the type on the RHS not being unfolded, which\n-- is nicer in the goal view.\n@[simp]\ntheorem list.dprod_cons (fι : α → ι) (fA : ∀ a, A (fι a)) (a : α) (l : list α) :\n    (a :: l).dprod fι fA = (graded_monoid.ghas_mul.mul (fA a) (l.dprod fι fA) : _) :=\n  rfl\n#align list.dprod_cons list.dprod_cons\n\n",
- "coe_list_dprod":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr↥ » -/\n/-- Coercing a dependent product of subtypes is the same as taking the regular product of the\ncoercions. -/\n@[simp]\ntheorem set_like.coe_list_dprod (A : ι → S) [set_like.graded_monoid A] (fι : α → ι) (fA : ∀ a, A (fι a)) (l : list α) :\n    ↑(l.dprod fι fA : (fun i => «expr↥ » (A i)) _) = (List.prod (l.map fun a => fA a) : R) :=\n  by\n  induction l\n  · rw [list.dprod_nil, coe_ghas_one, List.map_nil, List.prod_nil]\n  · rw [list.dprod_cons, coe_ghas_mul, list.map_cons, List.prod_cons, l_ih]\n#align set_like.coe_list_dprod set_like.coe_list_dprod\n\n",
+ "@[simp]\ntheorem gnpow_rec_succ (n : ℕ) (a : GradedMonoid A) :\n    (GradedMonoid.mk _ <| gnpowRec n.succ a.snd) = a * ⟨_, gnpowRec n a.snd⟩ :=\n  Sigma.ext (succ_nsmul _ _) (heq_of_cast_eq _ rfl).symm\n#align gnpow_rec_succ gnpow_rec_succ\n\n",
+ "dProd_nil":
+ "#print List.dProd_nil /-\n@[simp]\ntheorem List.dProd_nil (fι : α → ι) (fA : ∀ a, A (fι a)) :\n    (List.nil : List α).dprod fι fA = graded_monoid.ghas_one.one :=\n  rfl\n#align list.dprod_nil List.dProd_nil\n-/\n\n",
+ "dProd_monoid":
+ "#print List.dProd_monoid /-\n/-- When all the indexed types are the same, the dependent product is just the regular product. -/\n@[simp]\ntheorem List.dProd_monoid {α} [AddMonoid ι] [Monoid R] (l : List α) (fι : α → ι) (fA : α → R) :\n    (l.dprod fι fA : (fun i : ι => R) _) = ((l.map fA).prod : _) :=\n  by\n  induction l\n  · rw [List.dProd_nil, List.map_nil, List.prod_nil]\n    rfl\n  · rw [List.dProd_cons, list.map_cons, List.prod_cons, l_ih]\n    rfl\n#align list.dprod_monoid List.dProd_monoid\n-/\n\n",
+ "dProd_cons":
+ "#print List.dProd_cons /-\n-- the `( : _)` in this lemma statement results in the type on the RHS not being unfolded, which\n-- is nicer in the goal view.\n@[simp]\ntheorem List.dProd_cons (fι : α → ι) (fA : ∀ a, A (fι a)) (a : α) (l : List α) :\n    (a :: l).dprod fι fA = (graded_monoid.ghas_mul.mul (fA a) (l.dprod fι fA) : _) :=\n  rfl\n#align list.dprod_cons List.dProd_cons\n-/\n\n",
+ "dProdIndex_nil":
+ "#print List.dProdIndex_nil /-\n@[simp]\ntheorem List.dProdIndex_nil (fι : α → ι) : ([] : List α).dprod_index fι = 0 :=\n  rfl\n#align list.dprod_index_nil List.dProdIndex_nil\n-/\n\n",
+ "dProdIndex_eq_map_sum":
+ "#print List.dProdIndex_eq_map_sum /-\ntheorem List.dProdIndex_eq_map_sum (l : List α) (fι : α → ι) : l.dprod_index fι = (l.map fι).sum :=\n  by\n  dsimp only [List.dProdIndex]\n  induction l\n  · simp\n  · simp [l_ih]\n#align list.dprod_index_eq_map_sum List.dProdIndex_eq_map_sum\n-/\n\n",
+ "dProdIndex_cons":
+ "#print List.dProdIndex_cons /-\n@[simp]\ntheorem List.dProdIndex_cons (a : α) (l : List α) (fι : α → ι) : (a :: l).dprod_index fι = fι a + l.dprod_index fι :=\n  rfl\n#align list.dprod_index_cons List.dProdIndex_cons\n-/\n\n",
+ "coe_list_dProd":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr↥ » -/\n#print SetLike.coe_list_dProd /-\n/-- Coercing a dependent product of subtypes is the same as taking the regular product of the\ncoercions. -/\n@[simp]\ntheorem SetLike.coe_list_dProd (A : ι → S) [SetLike.GradedMonoid A] (fι : α → ι) (fA : ∀ a, A (fι a)) (l : List α) :\n    ↑(l.dprod fι fA : (fun i => «expr↥ » (A i)) _) = (List.prod (l.map fun a => fA a) : R) :=\n  by\n  induction l\n  · rw [List.dProd_nil, coe_ghas_one, List.map_nil, List.prod_nil]\n  · rw [List.dProd_cons, coe_ghas_mul, list.map_cons, List.prod_cons, l_ih]\n#align set_like.coe_list_dprod SetLike.coe_list_dProd\n-/\n\n",
  "coe_gnpow":
- "@[simp]\ntheorem set_like.coe_gnpow {S : Type _} [SetLike S R] [monoid R] [add_monoid ι] (A : ι → S) [set_like.graded_monoid A]\n    {i : ι} (x : A i) (n : ℕ) : ↑(@graded_monoid.gmonoid.gnpow _ (fun i => A i) _ _ n _ x) = (x ^ n : R) :=\n  rfl\n#align set_like.coe_gnpow set_like.coe_gnpow\n\n",
- "coe_ghas_one":
- "@[simp]\ntheorem set_like.coe_ghas_one {S : Type _} [SetLike S R] [One R] [Zero ι] (A : ι → S) [set_like.has_graded_one A] :\n    ↑(@graded_monoid.ghas_one.one _ (fun i => A i) _ _) = (1 : R) :=\n  rfl\n#align set_like.coe_ghas_one set_like.coe_ghas_one\n\n",
- "coe_ghas_mul":
- "@[simp]\ntheorem set_like.coe_ghas_mul {S : Type _} [SetLike S R] [Mul R] [Add ι] (A : ι → S) [set_like.has_graded_mul A]\n    {i j : ι} (x : A i) (y : A j) : ↑(@graded_monoid.ghas_mul.mul _ (fun i => A i) _ _ _ _ x y) = (x * y : R) :=\n  rfl\n#align set_like.coe_ghas_mul set_like.coe_ghas_mul\n\n"}
+ "#print SetLike.coe_gnpow /-\n@[simp]\ntheorem SetLike.coe_gnpow {S : Type _} [SetLike S R] [Monoid R] [AddMonoid ι] (A : ι → S) [SetLike.GradedMonoid A]\n    {i : ι} (x : A i) (n : ℕ) : ↑(@graded_monoid.gmonoid.gnpow _ (fun i => A i) _ _ n _ x) = (x ^ n : R) :=\n  rfl\n#align set_like.coe_gnpow SetLike.coe_gnpow\n-/\n\n",
+ "coe_gOne":
+ "#print SetLike.coe_gOne /-\n@[simp]\ntheorem SetLike.coe_gOne {S : Type _} [SetLike S R] [One R] [Zero ι] (A : ι → S) [SetLike.GradedOne A] :\n    ↑(@graded_monoid.ghas_one.one _ (fun i => A i) _ _) = (1 : R) :=\n  rfl\n#align set_like.coe_ghas_one SetLike.coe_gOne\n-/\n\n",
+ "coe_gMul":
+ "#print SetLike.coe_gMul /-\n@[simp]\ntheorem SetLike.coe_gMul {S : Type _} [SetLike S R] [Mul R] [Add ι] (A : ι → S) [SetLike.GradedMul A] {i j : ι}\n    (x : A i) (y : A j) : ↑(@graded_monoid.ghas_mul.mul _ (fun i => A i) _ _ _ _ x y) = (x * y : R) :=\n  rfl\n#align set_like.coe_ghas_mul SetLike.coe_gMul\n-/\n\n"}

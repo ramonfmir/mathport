@@ -1,23 +1,23 @@
 {"update_inr_comp_inr":
- "@[simp]\ntheorem update_inr_comp_inr [decidable_eq β] [decidable_eq (Sum α β)] {f : Sum α β → γ} {i : β} {x : γ} :\n    update f (inr i) x ∘ inr = update (f ∘ inr) i x :=\n  update_comp_eq_of_injective _ inr_injective _ _\n#align update_inr_comp_inr update_inr_comp_inr\n\n",
+ "@[simp]\ntheorem update_inr_comp_inr [DecidableEq β] [DecidableEq (Sum α β)] {f : Sum α β → γ} {i : β} {x : γ} :\n    update f (inr i) x ∘ inr = update (f ∘ inr) i x :=\n  update_comp_eq_of_injective _ inr_injective _ _\n#align update_inr_comp_inr update_inr_comp_inr\n\n",
  "update_inr_comp_inl":
- "@[simp]\ntheorem update_inr_comp_inl [decidable_eq (Sum α β)] {f : Sum α β → γ} {i : β} {x : γ} :\n    update f (inr i) x ∘ inl = f ∘ inl :=\n  update_comp_eq_of_forall_ne _ _ fun _ => inl_ne_inr\n#align update_inr_comp_inl update_inr_comp_inl\n\n",
+ "@[simp]\ntheorem update_inr_comp_inl [DecidableEq (Sum α β)] {f : Sum α β → γ} {i : β} {x : γ} :\n    update f (inr i) x ∘ inl = f ∘ inl :=\n  update_comp_eq_of_forall_ne _ _ fun _ => inl_ne_inr\n#align update_inr_comp_inl update_inr_comp_inl\n\n",
  "update_inr_apply_inr":
- "@[simp]\ntheorem update_inr_apply_inr [decidable_eq β] [decidable_eq (Sum α β)] {f : Sum α β → γ} {i j : β} {x : γ} :\n    update f (inr i) x (inr j) = update (f ∘ inr) i x j := by rw [← update_inr_comp_inr]\n#align update_inr_apply_inr update_inr_apply_inr\n\n",
+ "@[simp]\ntheorem update_inr_apply_inr [DecidableEq β] [DecidableEq (Sum α β)] {f : Sum α β → γ} {i j : β} {x : γ} :\n    update f (inr i) x (inr j) = update (f ∘ inr) i x j := by rw [← update_inr_comp_inr]\n#align update_inr_apply_inr update_inr_apply_inr\n\n",
  "update_inr_apply_inl":
- "@[simp]\ntheorem update_inr_apply_inl [decidable_eq (Sum α β)] {f : Sum α β → γ} {i : α} {j : β} {x : γ} :\n    update f (inr j) x (inl i) = f (inl i) :=\n  function.update_noteq inl_ne_inr _ _\n#align update_inr_apply_inl update_inr_apply_inl\n\n",
+ "@[simp]\ntheorem update_inr_apply_inl [DecidableEq (Sum α β)] {f : Sum α β → γ} {i : α} {j : β} {x : γ} :\n    update f (inr j) x (inl i) = f (inl i) :=\n  Function.update_noteq inl_ne_inr _ _\n#align update_inr_apply_inl update_inr_apply_inl\n\n",
  "update_inl_comp_inr":
- "@[simp]\ntheorem update_inl_comp_inr [decidable_eq (Sum α β)] {f : Sum α β → γ} {i : α} {x : γ} :\n    update f (inl i) x ∘ inr = f ∘ inr :=\n  update_comp_eq_of_forall_ne _ _ fun _ => inr_ne_inl\n#align update_inl_comp_inr update_inl_comp_inr\n\n",
+ "@[simp]\ntheorem update_inl_comp_inr [DecidableEq (Sum α β)] {f : Sum α β → γ} {i : α} {x : γ} :\n    update f (inl i) x ∘ inr = f ∘ inr :=\n  update_comp_eq_of_forall_ne _ _ fun _ => inr_ne_inl\n#align update_inl_comp_inr update_inl_comp_inr\n\n",
  "update_inl_comp_inl":
- "@[simp]\ntheorem update_inl_comp_inl [decidable_eq α] [decidable_eq (Sum α β)] {f : Sum α β → γ} {i : α} {x : γ} :\n    update f (inl i) x ∘ inl = update (f ∘ inl) i x :=\n  update_comp_eq_of_injective _ inl_injective _ _\n#align update_inl_comp_inl update_inl_comp_inl\n\n",
+ "@[simp]\ntheorem update_inl_comp_inl [DecidableEq α] [DecidableEq (Sum α β)] {f : Sum α β → γ} {i : α} {x : γ} :\n    update f (inl i) x ∘ inl = update (f ∘ inl) i x :=\n  update_comp_eq_of_injective _ inl_injective _ _\n#align update_inl_comp_inl update_inl_comp_inl\n\n",
  "update_inl_apply_inr":
- "@[simp]\ntheorem update_inl_apply_inr [decidable_eq (Sum α β)] {f : Sum α β → γ} {i : α} {j : β} {x : γ} :\n    update f (inl i) x (inr j) = f (inr j) :=\n  function.update_noteq inr_ne_inl _ _\n#align update_inl_apply_inr update_inl_apply_inr\n\n",
+ "@[simp]\ntheorem update_inl_apply_inr [DecidableEq (Sum α β)] {f : Sum α β → γ} {i : α} {j : β} {x : γ} :\n    update f (inl i) x (inr j) = f (inr j) :=\n  Function.update_noteq inr_ne_inl _ _\n#align update_inl_apply_inr update_inl_apply_inr\n\n",
  "update_inl_apply_inl":
- "@[simp]\ntheorem update_inl_apply_inl [decidable_eq α] [decidable_eq (Sum α β)] {f : Sum α β → γ} {i j : α} {x : γ} :\n    update f (inl i) x (inl j) = update (f ∘ inl) i x j := by rw [← update_inl_comp_inl]\n#align update_inl_apply_inl update_inl_apply_inl\n\n",
+ "@[simp]\ntheorem update_inl_apply_inl [DecidableEq α] [DecidableEq (Sum α β)] {f : Sum α β → γ} {i j : α} {x : γ} :\n    update f (inl i) x (inl j) = update (f ∘ inl) i x j := by rw [← update_inl_comp_inl]\n#align update_inl_apply_inl update_inl_apply_inl\n\n",
  "update_elim_inr":
- "@[simp]\ntheorem update_elim_inr [decidable_eq β] [decidable_eq (Sum α β)] {f : α → γ} {g : β → γ} {i : β} {x : γ} :\n    update (sum.elim f g) (inr i) x = sum.elim f (update g i x) :=\n  update_eq_iff.2 ⟨by simp, by simp (config := { contextual := true })⟩\n#align update_elim_inr update_elim_inr\n\n",
+ "@[simp]\ntheorem update_elim_inr [DecidableEq β] [DecidableEq (Sum α β)] {f : α → γ} {g : β → γ} {i : β} {x : γ} :\n    update (Sum.elim f g) (inr i) x = Sum.elim f (update g i x) :=\n  update_eq_iff.2 ⟨by simp, by simp (config := { contextual := true })⟩\n#align update_elim_inr update_elim_inr\n\n",
  "update_elim_inl":
- "@[simp]\ntheorem update_elim_inl [decidable_eq α] [decidable_eq (Sum α β)] {f : α → γ} {g : β → γ} {i : α} {x : γ} :\n    update (sum.elim f g) (inl i) x = sum.elim (update f i x) g :=\n  update_eq_iff.2 ⟨by simp, by simp (config := { contextual := true })⟩\n#align update_elim_inl update_elim_inl\n\n",
+ "@[simp]\ntheorem update_elim_inl [DecidableEq α] [DecidableEq (Sum α β)] {f : α → γ} {g : β → γ} {i : α} {x : γ} :\n    update (Sum.elim f g) (inl i) x = Sum.elim (update f i x) g :=\n  update_eq_iff.2 ⟨by simp, by simp (config := { contextual := true })⟩\n#align update_elim_inl update_elim_inl\n\n",
  "swap_swap_eq":
  "@[simp]\ntheorem swap_swap_eq : swap ∘ swap = @id (Sum α β) :=\n  funext <| swap_swap\n#align swap_swap_eq swap_swap_eq\n\n",
  "swap_swap":
@@ -31,73 +31,79 @@
  "swap_inl":
  "@[simp]\ntheorem swap_inl (x : α) : swap (inl x : Sum α β) = inr x :=\n  rfl\n#align swap_inl swap_inl\n\n",
  "swap":
- "protected theorem lift_rel.swap (h : lift_rel r s x y) : lift_rel s r x.swap y.swap :=\n  by\n  cases h\n  exacts[lift_rel.inr ‹_›, lift_rel.inl ‹_›]\n#align lift_rel.swap lift_rel.swap\n\n",
+ "protected theorem lift_rel.swap (h : LiftRel r s x y) : LiftRel s r x.swap y.swap :=\n  by\n  cases h\n  exacts[lift_rel.inr ‹_›, lift_rel.inl ‹_›]\n#align lift_rel.swap lift_rel.swap\n\n",
  "sum_map":
- "theorem surjective.sum_map {f : α → β} {g : α' → β'} (hf : surjective f) (hg : surjective g) : surjective (sum.map f g)\n  | inl y =>\n    let ⟨x, hx⟩ := hf y\n    ⟨inl x, congr_arg inl hx⟩\n  | inr y =>\n    let ⟨x, hx⟩ := hg y\n    ⟨inr x, congr_arg inr hx⟩\n#align surjective.sum_map surjective.sum_map\n\n",
+ "theorem bijective.sum_map {f : α → β} {g : α' → β'} (hf : bijective f) (hg : bijective g) : bijective (Sum.map f g) :=\n  ⟨hf.injective.sum_map hg.injective, hf.surjective.sum_map hg.surjective⟩\n#align bijective.sum_map bijective.sum_map\n\n",
  "sum_elim":
- "theorem injective.sum_elim {f : α → γ} {g : β → γ} (hf : injective f) (hg : injective g) (hfg : ∀ a b, f a ≠ g b) :\n    injective (sum.elim f g)\n  | inl x, inl y, h => congr_arg inl <| hf h\n  | inl x, inr y, h => (hfg x y h).elim\n  | inr x, inl y, h => (hfg y x h.symm).elim\n  | inr x, inr y, h => congr_arg inr <| hg h\n#align injective.sum_elim injective.sum_elim\n\n",
+ "theorem injective.sum_elim {f : α → γ} {g : β → γ} (hf : injective f) (hg : injective g) (hfg : ∀ a b, f a ≠ g b) :\n    injective (Sum.elim f g)\n  | inl x, inl y, h => congr_arg inl <| hf h\n  | inl x, inr y, h => (hfg x y h).elim\n  | inr x, inl y, h => (hfg y x h.symm).elim\n  | inr x, inr y, h => congr_arg inr <| hg h\n#align injective.sum_elim injective.sum_elim\n\n",
  "not_lift_rel_inr_inl":
- "@[simp]\ntheorem not_lift_rel_inr_inl : ¬lift_rel r s (inr b) (inl c) :=\n  fun.\n#align not_lift_rel_inr_inl not_lift_rel_inr_inl\n\n",
+ "@[simp]\ntheorem not_lift_rel_inr_inl : ¬LiftRel r s (inr b) (inl c) :=\n  fun.\n#align not_lift_rel_inr_inl not_lift_rel_inr_inl\n\n",
  "not_lift_rel_inl_inr":
- "@[simp]\ntheorem not_lift_rel_inl_inr : ¬lift_rel r s (inl a) (inr d) :=\n  fun.\n#align not_lift_rel_inl_inr not_lift_rel_inl_inr\n\n",
+ "@[simp]\ntheorem not_lift_rel_inl_inr : ¬LiftRel r s (inl a) (inr d) :=\n  fun.\n#align not_lift_rel_inl_inr not_lift_rel_inl_inr\n\n",
  "not_is_right":
  "theorem not_is_right : ¬x.is_right ↔ x.is_left := by simp\n#align not_is_right not_is_right\n\n",
  "not_is_left":
  "theorem not_is_left : ¬x.is_left ↔ x.is_right := by simp\n#align not_is_left not_is_left\n\n",
  "mono_right":
- "theorem lex.mono_right (hs : ∀ a b, s₁ a b → s₂ a b) (h : lex r s₁ x y) : lex r s₂ x y :=\n  h.mono (fun _ _ => id) hs\n#align lex.mono_right lex.mono_right\n\n",
+ "theorem lex.mono_right (hs : ∀ a b, s₁ a b → s₂ a b) (h : Lex r s₁ x y) : Lex r s₂ x y :=\n  h.mono (fun _ _ => id) hs\n#align lex.mono_right lex.mono_right\n\n",
  "mono_left":
- "theorem lex.mono_left (hr : ∀ a b, r₁ a b → r₂ a b) (h : lex r₁ s x y) : lex r₂ s x y :=\n  h.mono hr fun _ _ => id\n#align lex.mono_left lex.mono_left\n\n",
+ "theorem lex.mono_left (hr : ∀ a b, r₁ a b → r₂ a b) (h : Lex r₁ s x y) : Lex r₂ s x y :=\n  h.mono hr fun _ _ => id\n#align lex.mono_left lex.mono_left\n\n",
  "mono":
- "theorem lex.mono (hr : ∀ a b, r₁ a b → r₂ a b) (hs : ∀ a b, s₁ a b → s₂ a b) (h : lex r₁ s₁ x y) : lex r₂ s₂ x y :=\n  by\n  cases h\n  exacts[lex.inl (hr _ _ ‹_›), lex.inr (hs _ _ ‹_›), lex.sep _ _]\n#align lex.mono lex.mono\n\n",
+ "theorem lex.mono (hr : ∀ a b, r₁ a b → r₂ a b) (hs : ∀ a b, s₁ a b → s₂ a b) (h : Lex r₁ s₁ x y) : Lex r₂ s₂ x y :=\n  by\n  cases h\n  exacts[lex.inl (hr _ _ ‹_›), lex.inr (hs _ _ ‹_›), lex.sep _ _]\n#align lex.mono lex.mono\n\n",
+ "map_surjective":
+ "@[simp]\ntheorem map_surjective {f : α → γ} {g : β → δ} : surjective (Sum.map f g) ↔ surjective f ∧ surjective g :=\n  ⟨fun h =>\n    ⟨fun c => by\n      obtain ⟨a | b, h⟩ := h (inl c)\n      · exact ⟨a, inl_injective h⟩\n      · cases h, fun d => by\n      obtain ⟨a | b, h⟩ := h (inr d)\n      · cases h\n      · exact ⟨b, inr_injective h⟩⟩,\n    fun h => h.1.sum_map h.2⟩\n#align map_surjective map_surjective\n\n",
  "map_map":
  "@[simp]\ntheorem map_map {α'' β''} (f' : α' → α'') (g' : β' → β'') (f : α → α') (g : β → β') :\n    ∀ x : Sum α β, (x.map f g).map f' g' = x.map (f' ∘ f) (g' ∘ g)\n  | inl a => rfl\n  | inr b => rfl\n#align map_map map_map\n\n",
  "map_inr":
  "@[simp]\ntheorem map_inr (f : α → α') (g : β → β') (x : β) : (inr x).map f g = inr (g x) :=\n  rfl\n#align map_inr map_inr\n\n",
  "map_inl":
  "@[simp]\ntheorem map_inl (f : α → α') (g : β → β') (x : α) : (inl x).map f g = inl (f x) :=\n  rfl\n#align map_inl map_inl\n\n",
+ "map_injective":
+ "@[simp]\ntheorem map_injective {f : α → γ} {g : β → δ} : injective (Sum.map f g) ↔ injective f ∧ injective g :=\n  ⟨fun h =>\n    ⟨fun a₁ a₂ ha => inl_injective <| @h (inl a₁) (inl a₂) (congr_arg inl ha : _), fun b₁ b₂ hb =>\n      inr_injective <| @h (inr b₁) (inr b₂) (congr_arg inr hb : _)⟩,\n    fun h => h.1.sum_map h.2⟩\n#align map_injective map_injective\n\n",
  "map_id_id":
- "@[simp]\ntheorem map_id_id (α β) : sum.map (@id α) (@id β) = id :=\n  funext fun x => sum.rec_on x (fun _ => rfl) fun _ => rfl\n#align map_id_id map_id_id\n\n",
+ "@[simp]\ntheorem map_id_id (α β) : Sum.map (@id α) (@id β) = id :=\n  funext fun x => sum.rec_on x (fun _ => rfl) fun _ => rfl\n#align map_id_id map_id_id\n\n",
  "map_comp_map":
- "@[simp]\ntheorem map_comp_map {α'' β''} (f' : α' → α'') (g' : β' → β'') (f : α → α') (g : β → β') :\n    sum.map f' g' ∘ sum.map f g = sum.map (f' ∘ f) (g' ∘ g) :=\n  funext <| map_map f' g' f g\n#align map_comp_map map_comp_map\n\n",
+ "@[simp]\ntheorem map_comp_map {α'' β''} (f' : α' → α'') (g' : β' → β'') (f : α → α') (g : β → β') :\n    Sum.map f' g' ∘ Sum.map f g = Sum.map (f' ∘ f) (g' ∘ g) :=\n  funext <| map_map f' g' f g\n#align map_comp_map map_comp_map\n\n",
+ "map_bijective":
+ "@[simp]\ntheorem map_bijective {f : α → γ} {g : β → δ} : bijective (Sum.map f g) ↔ bijective f ∧ bijective g :=\n  (map_injective.and map_surjective).trans <| and_and_and_comm _ _ _ _\n#align map_bijective map_bijective\n\n",
  "lift_rel_swap_iff":
- "@[simp]\ntheorem lift_rel_swap_iff : lift_rel s r x.swap y.swap ↔ lift_rel r s x y :=\n  ⟨fun h => by\n    rw [← swap_swap x, ← swap_swap y]\n    exact h.swap, lift_rel.swap⟩\n#align lift_rel_swap_iff lift_rel_swap_iff\n\n",
+ "@[simp]\ntheorem lift_rel_swap_iff : LiftRel s r x.swap y.swap ↔ LiftRel r s x y :=\n  ⟨fun h => by\n    rw [← swap_swap x, ← swap_swap y]\n    exact h.swap, LiftRel.swap⟩\n#align lift_rel_swap_iff lift_rel_swap_iff\n\n",
  "lift_rel_subrelation_lex":
- "theorem lift_rel_subrelation_lex : subrelation (lift_rel r s) (lex r s) := fun a b => lift_rel.lex\n#align lift_rel_subrelation_lex lift_rel_subrelation_lex\n\n",
+ "theorem lift_rel_subrelation_lex : subrelation (LiftRel r s) (Lex r s) := fun a b => LiftRel.lex\n#align lift_rel_subrelation_lex lift_rel_subrelation_lex\n\n",
  "lift_rel_inr_inr":
- "@[simp]\ntheorem lift_rel_inr_inr : lift_rel r s (inr b) (inr d) ↔ s b d :=\n  ⟨fun h => by\n    cases h\n    assumption, lift_rel.inr⟩\n#align lift_rel_inr_inr lift_rel_inr_inr\n\n",
+ "@[simp]\ntheorem lift_rel_inr_inr : LiftRel r s (inr b) (inr d) ↔ s b d :=\n  ⟨fun h => by\n    cases h\n    assumption, lift_rel.inr⟩\n#align lift_rel_inr_inr lift_rel_inr_inr\n\n",
  "lift_rel_inl_inl":
- "@[simp]\ntheorem lift_rel_inl_inl : lift_rel r s (inl a) (inl c) ↔ r a c :=\n  ⟨fun h => by\n    cases h\n    assumption, lift_rel.inl⟩\n#align lift_rel_inl_inl lift_rel_inl_inl\n\n",
+ "@[simp]\ntheorem lift_rel_inl_inl : LiftRel r s (inl a) (inl c) ↔ r a c :=\n  ⟨fun h => by\n    cases h\n    assumption, lift_rel.inl⟩\n#align lift_rel_inl_inl lift_rel_inl_inl\n\n",
  "lex_wf":
- "theorem lex_wf (ha : well_founded r) (hb : well_founded s) : well_founded (lex r s) :=\n  have aca : ∀ a, acc (lex r s) (inl a) := fun a => lex_acc_inl (ha.apply a)\n  ⟨fun x => sum.rec_on x aca fun b => lex_acc_inr aca (hb.apply b)⟩\n#align lex_wf lex_wf\n\n",
+ "theorem lex_wf (ha : well_founded r) (hb : well_founded s) : well_founded (Lex r s) :=\n  have aca : ∀ a, acc (Lex r s) (inl a) := fun a => lex_acc_inl (ha.apply a)\n  ⟨fun x => sum.rec_on x aca fun b => lex_acc_inr aca (hb.apply b)⟩\n#align lex_wf lex_wf\n\n",
  "lex_inr_inr":
- "@[simp]\ntheorem lex_inr_inr : lex r s (inr b₁) (inr b₂) ↔ s b₁ b₂ :=\n  ⟨fun h => by\n    cases h\n    assumption, Lex.inr⟩\n#align lex_inr_inr lex_inr_inr\n\n",
+ "@[simp]\ntheorem lex_inr_inr : Lex r s (inr b₁) (inr b₂) ↔ s b₁ b₂ :=\n  ⟨fun h => by\n    cases h\n    assumption, Lex.inr⟩\n#align lex_inr_inr lex_inr_inr\n\n",
  "lex_inr_inl":
- "@[simp]\ntheorem lex_inr_inl : ¬lex r s (inr b) (inl a) :=\n  fun.\n#align lex_inr_inl lex_inr_inl\n\n",
+ "@[simp]\ntheorem lex_inr_inl : ¬Lex r s (inr b) (inl a) :=\n  fun.\n#align lex_inr_inl lex_inr_inl\n\n",
  "lex_inl_inl":
- "@[simp]\ntheorem lex_inl_inl : lex r s (inl a₁) (inl a₂) ↔ r a₁ a₂ :=\n  ⟨fun h => by\n    cases h\n    assumption, Lex.inl⟩\n#align lex_inl_inl lex_inl_inl\n\n",
+ "@[simp]\ntheorem lex_inl_inl : Lex r s (inl a₁) (inl a₂) ↔ r a₁ a₂ :=\n  ⟨fun h => by\n    cases h\n    assumption, Lex.inl⟩\n#align lex_inl_inl lex_inl_inl\n\n",
  "lex_acc_inr":
- "theorem lex_acc_inr (aca : ∀ a, acc (lex r s) (inl a)) {b} (acb : acc s b) : acc (lex r s) (inr b) :=\n  by\n  induction' acb with b H IH\n  constructor; intro y h\n  cases' h with _ _ _ b' _ h' a\n  · exact IH _ h'\n  · exact aca _\n#align lex_acc_inr lex_acc_inr\n\n",
+ "theorem lex_acc_inr (aca : ∀ a, acc (Lex r s) (inl a)) {b} (acb : acc s b) : acc (Lex r s) (inr b) :=\n  by\n  induction' acb with b H IH\n  constructor; intro y h\n  cases' h with _ _ _ b' _ h' a\n  · exact IH _ h'\n  · exact aca _\n#align lex_acc_inr lex_acc_inr\n\n",
  "lex_acc_inl":
- "theorem lex_acc_inl {a} (aca : acc r a) : acc (lex r s) (inl a) :=\n  by\n  induction' aca with a H IH\n  constructor; intro y h\n  cases' h with a' _ h'\n  exact IH _ h'\n#align lex_acc_inl lex_acc_inl\n\n",
+ "theorem lex_acc_inl {a} (aca : acc r a) : acc (Lex r s) (inl a) :=\n  by\n  induction' aca with a H IH\n  constructor; intro y h\n  cases' h with a' _ h'\n  exact IH _ h'\n#align lex_acc_inl lex_acc_inl\n\n",
  "lex":
- "protected theorem lift_rel.lex {a b : Sum α β} (h : lift_rel r s a b) : lex r s a b :=\n  by\n  cases h\n  exacts[lex.inl ‹_›, lex.inr ‹_›]\n#align lift_rel.lex lift_rel.lex\n\n",
+ "protected theorem lift_rel.lex {a b : Sum α β} (h : LiftRel r s a b) : Lex r s a b :=\n  by\n  cases h\n  exacts[lex.inl ‹_›, lex.inr ‹_›]\n#align lift_rel.lex lift_rel.lex\n\n",
  "is_right_swap":
  "@[simp]\ntheorem is_right_swap (x : Sum α β) : x.swap.is_right = x.is_left := by cases x <;> rfl\n#align is_right_swap is_right_swap\n\n",
  "is_right_map":
- "@[simp]\ntheorem is_right_map (f : α → β) (g : γ → δ) (x : Sum α γ) : is_right (x.map f g) = is_right x := by cases x <;> rfl\n#align is_right_map is_right_map\n\n",
+ "@[simp]\ntheorem is_right_map (f : α → β) (g : γ → δ) (x : Sum α γ) : isRight (x.map f g) = isRight x := by cases x <;> rfl\n#align is_right_map is_right_map\n\n",
  "is_right_iff":
- "theorem is_right_iff : x.is_right ↔ ∃ y, x = sum.inr y := by cases x <;> simp\n#align is_right_iff is_right_iff\n\n",
+ "theorem is_right_iff : x.is_right ↔ ∃ y, x = Sum.inr y := by cases x <;> simp\n#align is_right_iff is_right_iff\n\n",
  "is_right_eq_ff":
- "@[simp]\ntheorem is_right_eq_ff : x.is_right = ff ↔ x.is_left := by cases x <;> simp\n#align is_right_eq_ff is_right_eq_ff\n\n",
+ "@[simp]\ntheorem is_right_eq_ff : x.is_right = false ↔ x.is_left := by cases x <;> simp\n#align is_right_eq_ff is_right_eq_ff\n\n",
  "is_left_swap":
  "@[simp]\ntheorem is_left_swap (x : Sum α β) : x.swap.is_left = x.is_right := by cases x <;> rfl\n#align is_left_swap is_left_swap\n\n",
  "is_left_map":
- "@[simp]\ntheorem is_left_map (f : α → β) (g : γ → δ) (x : Sum α γ) : is_left (x.map f g) = is_left x := by cases x <;> rfl\n#align is_left_map is_left_map\n\n",
+ "@[simp]\ntheorem is_left_map (f : α → β) (g : γ → δ) (x : Sum α γ) : isLeft (x.map f g) = isLeft x := by cases x <;> rfl\n#align is_left_map is_left_map\n\n",
  "is_left_iff":
- "theorem is_left_iff : x.is_left ↔ ∃ y, x = sum.inl y := by cases x <;> simp\n#align is_left_iff is_left_iff\n\n",
+ "theorem is_left_iff : x.is_left ↔ ∃ y, x = Sum.inl y := by cases x <;> simp\n#align is_left_iff is_left_iff\n\n",
  "is_left_eq_ff":
- "@[simp]\ntheorem is_left_eq_ff : x.is_left = ff ↔ x.is_right := by cases x <;> simp\n#align is_left_eq_ff is_left_eq_ff\n\n",
+ "@[simp]\ntheorem is_left_eq_ff : x.is_left = false ↔ x.is_right := by cases x <;> simp\n#align is_left_eq_ff is_left_eq_ff\n\n",
  "inr_ne_inl":
  "theorem inr_ne_inl {a : α} {b : β} : inr b ≠ inl a :=\n  fun.\n#align inr_ne_inl inr_ne_inl\n\n",
  "inr_injective":
@@ -129,31 +135,31 @@
  "exists":
  "@[simp]\ntheorem exists {p : Sum α β → Prop} : (∃ x, p x) ↔ (∃ a, p (inl a)) ∨ ∃ b, p (inr b) :=\n  ⟨fun h =>\n    match h with\n    | ⟨inl a, h⟩ => or.inl ⟨a, h⟩\n    | ⟨inr b, h⟩ => or.inr ⟨b, h⟩,\n    fun h =>\n    match h with\n    | or.inl ⟨a, h⟩ => ⟨inl a, h⟩\n    | or.inr ⟨b, h⟩ => ⟨inr b, h⟩⟩\n#align exists exists\n\n",
  "elim_update_right":
- "theorem elim_update_right [decidable_eq α] [decidable_eq β] (f : α → γ) (g : β → γ) (i : β) (c : γ) :\n    sum.elim f (function.update g i c) = function.update (sum.elim f g) (inr i) c :=\n  by\n  ext x; cases x\n  · simp\n  · by_cases h : x = i\n    · subst h\n      simp\n    · simp [h]\n#align elim_update_right elim_update_right\n\n",
+ "theorem elim_update_right [DecidableEq α] [DecidableEq β] (f : α → γ) (g : β → γ) (i : β) (c : γ) :\n    Sum.elim f (Function.update g i c) = Function.update (Sum.elim f g) (inr i) c :=\n  by\n  ext x; cases x\n  · simp\n  · by_cases h : x = i\n    · subst h\n      simp\n    · simp [h]\n#align elim_update_right elim_update_right\n\n",
  "elim_update_left":
- "theorem elim_update_left [decidable_eq α] [decidable_eq β] (f : α → γ) (g : β → γ) (i : α) (c : γ) :\n    sum.elim (function.update f i c) g = function.update (sum.elim f g) (inl i) c :=\n  by\n  ext x; cases x\n  · by_cases h : x = i\n    · subst h\n      simp\n    · simp [h]\n  · simp\n#align elim_update_left elim_update_left\n\n",
+ "theorem elim_update_left [DecidableEq α] [DecidableEq β] (f : α → γ) (g : β → γ) (i : α) (c : γ) :\n    Sum.elim (Function.update f i c) g = Function.update (Sum.elim f g) (inl i) c :=\n  by\n  ext x; cases x\n  · by_cases h : x = i\n    · subst h\n      simp\n    · simp [h]\n  · simp\n#align elim_update_left elim_update_left\n\n",
  "elim_map":
- "theorem elim_map {α β γ δ ε : Sort _} {f₁ : α → β} {f₂ : β → ε} {g₁ : γ → δ} {g₂ : δ → ε} {x} :\n    sum.elim f₂ g₂ (sum.map f₁ g₁ x) = sum.elim (f₂ ∘ f₁) (g₂ ∘ g₁) x := by cases x <;> rfl\n#align elim_map elim_map\n\n",
+ "theorem elim_map {α β γ δ ε : Sort _} {f₁ : α → β} {f₂ : β → ε} {g₁ : γ → δ} {g₂ : δ → ε} {x} :\n    Sum.elim f₂ g₂ (Sum.map f₁ g₁ x) = Sum.elim (f₂ ∘ f₁) (g₂ ∘ g₁) x := by cases x <;> rfl\n#align elim_map elim_map\n\n",
  "elim_lam_const_lam_const":
- "@[simp]\ntheorem elim_lam_const_lam_const (c : γ) : (sum.elim (fun _ : α => c) fun _ : β => c) = fun _ => c :=\n  sum.elim_const_const c\n#align elim_lam_const_lam_const elim_lam_const_lam_const\n\n",
+ "@[simp]\ntheorem elim_lam_const_lam_const (c : γ) : (Sum.elim (fun _ : α => c) fun _ : β => c) = fun _ => c :=\n  Sum.elim_const_const c\n#align elim_lam_const_lam_const elim_lam_const_lam_const\n\n",
  "elim_inr":
- "@[simp]\ntheorem elim_inr {α β γ : Sort _} (f : α → γ) (g : β → γ) (x : β) : sum.elim f g (inr x) = g x :=\n  rfl\n#align elim_inr elim_inr\n\n",
+ "@[simp]\ntheorem elim_inr {α β γ : Sort _} (f : α → γ) (g : β → γ) (x : β) : Sum.elim f g (inr x) = g x :=\n  rfl\n#align elim_inr elim_inr\n\n",
  "elim_inl_inr":
- "@[simp]\ntheorem elim_inl_inr {α β : Sort _} : @sum.elim α β _ inl inr = id :=\n  funext fun x => sum.cases_on x (fun _ => rfl) fun _ => rfl\n#align elim_inl_inr elim_inl_inr\n\n",
+ "@[simp]\ntheorem elim_inl_inr {α β : Sort _} : @Sum.elim α β _ inl inr = id :=\n  funext fun x => sum.cases_on x (fun _ => rfl) fun _ => rfl\n#align elim_inl_inr elim_inl_inr\n\n",
  "elim_inl":
- "@[simp]\ntheorem elim_inl {α β γ : Sort _} (f : α → γ) (g : β → γ) (x : α) : sum.elim f g (inl x) = f x :=\n  rfl\n#align elim_inl elim_inl\n\n",
+ "@[simp]\ntheorem elim_inl {α β γ : Sort _} (f : α → γ) (g : β → γ) (x : α) : Sum.elim f g (inl x) = f x :=\n  rfl\n#align elim_inl elim_inl\n\n",
  "elim_const_const":
- "theorem elim_const_const (c : γ) : sum.elim (const _ c : α → γ) (const _ c : β → γ) = const _ c :=\n  by\n  ext x\n  cases x <;> rfl\n#align elim_const_const elim_const_const\n\n",
+ "theorem elim_const_const (c : γ) : Sum.elim (const _ c : α → γ) (const _ c : β → γ) = const _ c :=\n  by\n  ext x\n  cases x <;> rfl\n#align elim_const_const elim_const_const\n\n",
  "elim_comp_map":
- "theorem elim_comp_map {α β γ δ ε : Sort _} {f₁ : α → β} {f₂ : β → ε} {g₁ : γ → δ} {g₂ : δ → ε} :\n    sum.elim f₂ g₂ ∘ sum.map f₁ g₁ = sum.elim (f₂ ∘ f₁) (g₂ ∘ g₁) :=\n  funext fun _ => elim_map\n#align elim_comp_map elim_comp_map\n\n",
+ "theorem elim_comp_map {α β γ δ ε : Sort _} {f₁ : α → β} {f₂ : β → ε} {g₁ : γ → δ} {g₂ : δ → ε} :\n    Sum.elim f₂ g₂ ∘ Sum.map f₁ g₁ = Sum.elim (f₂ ∘ f₁) (g₂ ∘ g₁) :=\n  funext fun _ => elim_map\n#align elim_comp_map elim_comp_map\n\n",
  "elim_comp_inr":
- "@[simp]\ntheorem elim_comp_inr {α β γ : Sort _} (f : α → γ) (g : β → γ) : sum.elim f g ∘ inr = g :=\n  rfl\n#align elim_comp_inr elim_comp_inr\n\n",
+ "@[simp]\ntheorem elim_comp_inr {α β γ : Sort _} (f : α → γ) (g : β → γ) : Sum.elim f g ∘ inr = g :=\n  rfl\n#align elim_comp_inr elim_comp_inr\n\n",
  "elim_comp_inl_inr":
- "@[simp]\ntheorem elim_comp_inl_inr {α β γ : Sort _} (f : Sum α β → γ) : sum.elim (f ∘ inl) (f ∘ inr) = f :=\n  funext fun x => sum.cases_on x (fun _ => rfl) fun _ => rfl\n#align elim_comp_inl_inr elim_comp_inl_inr\n\n",
+ "@[simp]\ntheorem elim_comp_inl_inr {α β γ : Sort _} (f : Sum α β → γ) : Sum.elim (f ∘ inl) (f ∘ inr) = f :=\n  funext fun x => sum.cases_on x (fun _ => rfl) fun _ => rfl\n#align elim_comp_inl_inr elim_comp_inl_inr\n\n",
  "elim_comp_inl":
- "@[simp]\ntheorem elim_comp_inl {α β γ : Sort _} (f : α → γ) (g : β → γ) : sum.elim f g ∘ inl = f :=\n  rfl\n#align elim_comp_inl elim_comp_inl\n\n",
+ "@[simp]\ntheorem elim_comp_inl {α β γ : Sort _} (f : α → γ) (g : β → γ) : Sum.elim f g ∘ inl = f :=\n  rfl\n#align elim_comp_inl elim_comp_inl\n\n",
  "comp_elim":
- "theorem comp_elim {α β γ δ : Sort _} (f : γ → δ) (g : α → γ) (h : β → γ) :\n    f ∘ sum.elim g h = sum.elim (f ∘ g) (f ∘ h) :=\n  funext fun x => sum.cases_on x (fun _ => rfl) fun _ => rfl\n#align comp_elim comp_elim\n\n",
+ "theorem comp_elim {α β γ δ : Sort _} (f : γ → δ) (g : α → γ) (h : β → γ) :\n    f ∘ Sum.elim g h = Sum.elim (f ∘ g) (f ∘ h) :=\n  funext fun x => sum.cases_on x (fun _ => rfl) fun _ => rfl\n#align comp_elim comp_elim\n\n",
  "bnot_is_right":
  "@[simp]\ntheorem bnot_is_right (x : Sum α β) : not x.is_right = x.is_left := by cases x <;> rfl\n#align bnot_is_right bnot_is_right\n\n",
  "bnot_is_left":

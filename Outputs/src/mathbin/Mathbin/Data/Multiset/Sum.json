@@ -9,13 +9,13 @@
  "disj_sum_zero":
  "@[simp]\ntheorem disj_sum_zero : s.disj_sum (0 : Multiset β) = s.map inl :=\n  add_zero _\n#align disj_sum_zero disj_sum_zero\n\n",
  "disj_sum_strict_mono_right":
- "theorem disj_sum_strict_mono_right (s : Multiset α) : strict_mono (s.disj_sum : Multiset β → Multiset (Sum α β)) :=\n  fun s₁ s₂ => disjSum_lt_disjSum_of_le_of_lt le_rfl\n#align disj_sum_strict_mono_right disj_sum_strict_mono_right\n\n",
+ "theorem disj_sum_strict_mono_right (s : Multiset α) : StrictMono (s.disj_sum : Multiset β → Multiset (Sum α β)) :=\n  fun s₁ s₂ => disjSum_lt_disjSum_of_le_of_lt le_rfl\n#align disj_sum_strict_mono_right disj_sum_strict_mono_right\n\n",
  "disj_sum_strict_mono_left":
- "theorem disj_sum_strict_mono_left (t : Multiset β) : strict_mono fun s : Multiset α => s.disj_sum t := fun s₁ s₂ hs =>\n  disjSum_lt_disjSum_of_lt_of_le hs le_rfl\n#align disj_sum_strict_mono_left disj_sum_strict_mono_left\n\n",
+ "theorem disj_sum_strict_mono_left (t : Multiset β) : StrictMono fun s : Multiset α => s.disj_sum t := fun s₁ s₂ hs =>\n  disjSum_lt_disjSum_of_lt_of_le hs le_rfl\n#align disj_sum_strict_mono_left disj_sum_strict_mono_left\n\n",
  "disj_sum_mono_right":
- "theorem disj_sum_mono_right (s : Multiset α) : monotone (s.disj_sum : Multiset β → Multiset (Sum α β)) :=\n  fun t₁ t₂ ht => add_le_add_left (map_le_map ht) _\n#align disj_sum_mono_right disj_sum_mono_right\n\n",
+ "theorem disj_sum_mono_right (s : Multiset α) : Monotone (s.disj_sum : Multiset β → Multiset (Sum α β)) :=\n  fun t₁ t₂ ht => add_le_add_left (map_le_map ht) _\n#align disj_sum_mono_right disj_sum_mono_right\n\n",
  "disj_sum_mono_left":
- "theorem disj_sum_mono_left (t : Multiset β) : monotone fun s : Multiset α => s.disj_sum t := fun s₁ s₂ hs =>\n  add_le_add_right (map_le_map hs) _\n#align disj_sum_mono_left disj_sum_mono_left\n\n",
+ "theorem disj_sum_mono_left (t : Multiset β) : Monotone fun s : Multiset α => s.disj_sum t := fun s₁ s₂ hs =>\n  add_le_add_right (map_le_map hs) _\n#align disj_sum_mono_left disj_sum_mono_left\n\n",
  "disj_sum_mono":
  "theorem disj_sum_mono (hs : s₁ ≤ s₂) (ht : t₁ ≤ t₂) : s₁.disj_sum t₁ ≤ s₂.disj_sum t₂ :=\n  add_le_add (map_le_map hs) (map_le_map ht)\n#align disj_sum_mono disj_sum_mono\n\n",
  "disj_sum_lt_disj_sum_of_lt_of_le":

@@ -1,10 +1,10 @@
 {"snd_prod":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₐ[ ] » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₐ[ ] » -/\n@[simp]\ntheorem snd_prod (f : «expr →ₐ[ ] » A R B) (g : «expr →ₐ[ ] » A R C) : (snd R B C).comp (prod f g) = g := by ext <;> rfl\n#align snd_prod snd_prod\n\n",
  "prod_fst_snd":
- "@[simp]\ntheorem prod_fst_snd : prod (fst R A B) (snd R A B) = 1 :=\n  fun_like.coe_injective pi.prod_fst_snd\n#align prod_fst_snd prod_fst_snd\n\n",
+ "@[simp]\ntheorem prod_fst_snd : prod (fst R A B) (snd R A B) = 1 :=\n  FunLike.coe_injective Pi.prod_fst_snd\n#align prod_fst_snd prod_fst_snd\n\n",
  "fst_prod":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₐ[ ] » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₐ[ ] » -/\n@[simp]\ntheorem fst_prod (f : «expr →ₐ[ ] » A R B) (g : «expr →ₐ[ ] » A R C) : (fst R B C).comp (prod f g) = f := by ext <;> rfl\n#align fst_prod fst_prod\n\n",
  "coe_prod":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₐ[ ] » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₐ[ ] » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\ntheorem coe_prod (f : «expr →ₐ[ ] » A R B) (g : «expr →ₐ[ ] » A R C) : «expr⇑ » (f.prod g) = pi.prod f g :=\n  rfl\n#align coe_prod coe_prod\n\n",
- "algebra_map_apply":
- "/-\nCopyright (c) 2018 Kenny Lau. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Kenny Lau, Yury Kudryashov\n-/\n@[simp]\ntheorem algebra_map_apply (r : R) : algebra_map R (A × B) r = (algebra_map R A r, algebra_map R B r) :=\n  rfl\n#align algebra_map_apply algebra_map_apply\n\n"}
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₐ[ ] » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₐ[ ] » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\ntheorem coe_prod (f : «expr →ₐ[ ] » A R B) (g : «expr →ₐ[ ] » A R C) : «expr⇑ » (f.prod g) = Pi.prod f g :=\n  rfl\n#align coe_prod coe_prod\n\n",
+ "algebraMap_apply":
+ "#print algebraMap_apply /-\n/-\nCopyright (c) 2018 Kenny Lau. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Kenny Lau, Yury Kudryashov\n-/\n@[simp]\ntheorem algebraMap_apply (r : R) : algebraMap R (A × B) r = (algebraMap R A r, algebraMap R B r) :=\n  rfl\n#align algebra_map_apply algebraMap_apply\n-/\n\n"}

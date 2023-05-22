@@ -1,8 +1,8 @@
 {"vne_of_ne":
- "theorem vne_of_ne {i j : fin n} (h : i ≠ j) : i.val ≠ j.val := fun h' => absurd (eq_of_veq h') h\n#align vne_of_ne vne_of_ne\n\n",
+ "theorem vne_of_ne {i j : Fin n} (h : i ≠ j) : i.val ≠ j.val := fun h' => absurd (eq_of_veq h') h\n#align vne_of_ne vne_of_ne\n\n",
  "veq_of_eq":
- "theorem veq_of_eq : ∀ {i j : fin n}, i = j → i.val = j.val\n  | ⟨iv, ilt⟩, _, rfl => rfl\n#align veq_of_eq veq_of_eq\n\n",
+ "theorem veq_of_eq : ∀ {i j : Fin n}, i = j → i.val = j.val\n  | ⟨iv, ilt⟩, _, rfl => rfl\n#align veq_of_eq veq_of_eq\n\n",
  "ne_of_vne":
- "theorem ne_of_vne {i j : fin n} (h : i.val ≠ j.val) : i ≠ j := fun h' => absurd (veq_of_eq h') h\n#align ne_of_vne ne_of_vne\n\n",
+ "theorem ne_of_vne {i j : Fin n} (h : i.val ≠ j.val) : i ≠ j := fun h' => absurd (veq_of_eq h') h\n#align ne_of_vne ne_of_vne\n\n",
  "eq_of_veq":
- "/-\nCopyright (c) 2016 Microsoft Corporation. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthor: Leonardo de Moura\n-/\ntheorem eq_of_veq : ∀ {i j : fin n}, i.val = j.val → i = j\n  | ⟨iv, ilt₁⟩, ⟨iv, ilt₂⟩, rfl => rfl\n#align eq_of_veq eq_of_veq\n\n"}
+ "/-\nCopyright (c) 2016 Microsoft Corporation. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthor: Leonardo de Moura\n-/\ntheorem eq_of_veq : ∀ {i j : Fin n}, i.val = j.val → i = j\n  | ⟨iv, ilt₁⟩, ⟨iv, ilt₂⟩, rfl => rfl\n#align eq_of_veq eq_of_veq\n\n"}

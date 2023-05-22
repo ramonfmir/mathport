@@ -23,9 +23,9 @@
  "id_map'":
  "@[simp]\ntheorem id_map' (x : f α) : (fun a => a) <$> x = x :=\n  id_map _\n#align id_map' id_map'ₓ\n\n",
  "guard_true":
- "#print guard_true /-\n@[simp]\ntheorem guard_true {h : decidable true} : @guard F _ true h = pure () := by simp [guard]\n#align guard_true guard_true\n-/\n\n",
+ "#print guard_true /-\n@[simp]\ntheorem guard_true {h : Decidable True} : @guard F _ True h = pure () := by simp [guard]\n#align guard_true guard_true\n-/\n\n",
  "guard_false":
- "#print guard_false /-\n@[simp]\ntheorem guard_false {h : decidable false} : @guard F _ false h = failure := by simp [guard]\n#align guard_false guard_false\n-/\n\n",
+ "#print guard_false /-\n@[simp]\ntheorem guard_false {h : Decidable False} : @guard F _ False h = failure := by simp [guard]\n#align guard_false guard_false\n-/\n\n",
  "fish_pure":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:219:4: warning: unsupported binary notation `«expr >=> » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr >=> » -/\n#print fish_pure /-\n-- >=> is already defined in the core library but it is unusable\n-- because of its precedence (it is defined with precedence 2) and\n-- because it is defined as a lambda instead of having a named\n-- function\n@[functor_norm]\ntheorem fish_pure {α β} (f : α → m β) : «expr >=> » f pure = f := by simp only [(«expr >=> » · ·), functor_norm]\n#align fish_pure fish_pure\n-/\n\n",
  "fish_pipe":

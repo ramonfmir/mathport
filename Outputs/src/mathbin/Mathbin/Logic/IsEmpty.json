@@ -1,46 +1,46 @@
 {"wellFounded_of_isEmpty":
- "#print wellFounded_of_isEmpty /-\ntheorem wellFounded_of_isEmpty {α} [is_empty α] (r : α → α → Prop) : well_founded r :=\n  ⟨is_empty_elim⟩\n#align well_founded_of_empty wellFounded_of_isEmpty\n-/\n\n",
+ "#print wellFounded_of_isEmpty /-\ntheorem wellFounded_of_isEmpty {α} [IsEmpty α] (r : α → α → Prop) : well_founded r :=\n  ⟨isEmptyElim⟩\n#align well_founded_of_empty wellFounded_of_isEmpty\n-/\n\n",
  "prop_iff":
- "protected theorem prop_iff {p : Prop} : is_empty p ↔ ¬p :=\n  isEmpty_iff\n#align prop_iff prop_iff\n\n",
+ "protected theorem prop_iff {p : Prop} : IsEmpty p ↔ ¬p :=\n  isEmpty_iff\n#align prop_iff prop_iff\n\n",
  "not_nonempty_iff":
- "#print not_nonempty_iff /-\n-- see Note [lower instance priority]\n@[simp]\ntheorem not_nonempty_iff : ¬nonempty α ↔ is_empty α :=\n  ⟨fun h => ⟨fun x => h ⟨x⟩⟩, fun h1 h2 => h2.elim h1.elim⟩\n#align not_nonempty_iff not_nonempty_iff\n-/\n\n",
+ "#print not_nonempty_iff /-\n-- see Note [lower instance priority]\n@[simp]\ntheorem not_nonempty_iff : ¬Nonempty α ↔ IsEmpty α :=\n  ⟨fun h => ⟨fun x => h ⟨x⟩⟩, fun h1 h2 => h2.elim h1.elim⟩\n#align not_nonempty_iff not_nonempty_iff\n-/\n\n",
  "not_isEmpty_of_nonempty":
- "#print not_isEmpty_of_nonempty /-\n@[simp]\ntheorem not_isEmpty_of_nonempty [h : nonempty α] : ¬is_empty α :=\n  not_isEmpty_iff.mpr h\n#align not_is_empty_of_nonempty not_isEmpty_of_nonempty\n-/\n\n",
+ "#print not_isEmpty_of_nonempty /-\n@[simp]\ntheorem not_isEmpty_of_nonempty [h : Nonempty α] : ¬IsEmpty α :=\n  not_isEmpty_iff.mpr h\n#align not_is_empty_of_nonempty not_isEmpty_of_nonempty\n-/\n\n",
  "not_isEmpty_iff":
- "#print not_isEmpty_iff /-\n@[simp]\ntheorem not_isEmpty_iff : ¬is_empty α ↔ nonempty α :=\n  not_iff_comm.mp not_nonempty_iff\n#align not_is_empty_iff not_isEmpty_iff\n-/\n\n",
+ "#print not_isEmpty_iff /-\n@[simp]\ntheorem not_isEmpty_iff : ¬IsEmpty α ↔ Nonempty α :=\n  not_iff_comm.mp not_nonempty_iff\n#align not_is_empty_iff not_isEmpty_iff\n-/\n\n",
  "isEmpty_ulift":
- "#print isEmpty_ulift /-\n@[simp]\ntheorem isEmpty_ulift {α} : is_empty (ULift α) ↔ is_empty α := by simp only [← not_nonempty_iff, nonempty_ulift]\n#align is_empty_ulift isEmpty_ulift\n-/\n\n",
+ "#print isEmpty_ulift /-\n@[simp]\ntheorem isEmpty_ulift {α} : IsEmpty (ULift α) ↔ IsEmpty α := by simp only [← not_nonempty_iff, nonempty_ulift]\n#align is_empty_ulift isEmpty_ulift\n-/\n\n",
  "isEmpty_sum":
- "#print isEmpty_sum /-\n@[simp]\ntheorem isEmpty_sum {α β} : is_empty (Sum α β) ↔ is_empty α ∧ is_empty β := by\n  simp only [← not_nonempty_iff, nonempty_sum, not_or]\n#align is_empty_sum isEmpty_sum\n-/\n\n",
+ "#print isEmpty_sum /-\n@[simp]\ntheorem isEmpty_sum {α β} : IsEmpty (Sum α β) ↔ IsEmpty α ∧ IsEmpty β := by\n  simp only [← not_nonempty_iff, nonempty_sum, not_or]\n#align is_empty_sum isEmpty_sum\n-/\n\n",
  "isEmpty_subtype":
- "#print isEmpty_subtype /-\n@[simp]\ntheorem isEmpty_subtype (p : α → Prop) : is_empty (subtype p) ↔ ∀ x, ¬p x := by\n  simp only [← not_nonempty_iff, nonempty_subtype, not_exists]\n#align is_empty_subtype isEmpty_subtype\n-/\n\n",
+ "#print isEmpty_subtype /-\n@[simp]\ntheorem isEmpty_subtype (p : α → Prop) : IsEmpty (Subtype p) ↔ ∀ x, ¬p x := by\n  simp only [← not_nonempty_iff, nonempty_subtype, not_exists]\n#align is_empty_subtype isEmpty_subtype\n-/\n\n",
  "isEmpty_sigma":
- "#print isEmpty_sigma /-\n@[simp]\ntheorem isEmpty_sigma {α} {E : α → Type _} : is_empty (sigma E) ↔ ∀ a, is_empty (E a) := by\n  simp only [← not_nonempty_iff, nonempty_sigma, not_exists]\n#align is_empty_sigma isEmpty_sigma\n-/\n\n",
+ "#print isEmpty_sigma /-\n@[simp]\ntheorem isEmpty_sigma {α} {E : α → Type _} : IsEmpty (Sigma E) ↔ ∀ a, IsEmpty (E a) := by\n  simp only [← not_nonempty_iff, nonempty_sigma, not_exists]\n#align is_empty_sigma isEmpty_sigma\n-/\n\n",
  "isEmpty_psum":
- "#print isEmpty_psum /-\n@[simp]\ntheorem isEmpty_psum {α β} : is_empty (PSum α β) ↔ is_empty α ∧ is_empty β := by\n  simp only [← not_nonempty_iff, nonempty_psum, not_or]\n#align is_empty_psum isEmpty_psum\n-/\n\n",
+ "#print isEmpty_psum /-\n@[simp]\ntheorem isEmpty_psum {α β} : IsEmpty (PSum α β) ↔ IsEmpty α ∧ IsEmpty β := by\n  simp only [← not_nonempty_iff, nonempty_psum, not_or]\n#align is_empty_psum isEmpty_psum\n-/\n\n",
  "isEmpty_psigma":
- "#print isEmpty_psigma /-\n@[simp]\ntheorem isEmpty_psigma {α} {E : α → Sort _} : is_empty (PSigma E) ↔ ∀ a, is_empty (E a) := by\n  simp only [← not_nonempty_iff, nonempty_psigma, not_exists]\n#align is_empty_psigma isEmpty_psigma\n-/\n\n",
+ "#print isEmpty_psigma /-\n@[simp]\ntheorem isEmpty_psigma {α} {E : α → Sort _} : IsEmpty (PSigma E) ↔ ∀ a, IsEmpty (E a) := by\n  simp only [← not_nonempty_iff, nonempty_psigma, not_exists]\n#align is_empty_psigma isEmpty_psigma\n-/\n\n",
  "isEmpty_prod":
- "#print isEmpty_prod /-\n@[simp]\ntheorem isEmpty_prod {α β : Type _} : is_empty (α × β) ↔ is_empty α ∨ is_empty β := by\n  simp only [← not_nonempty_iff, nonempty_prod, not_and_or]\n#align is_empty_prod isEmpty_prod\n-/\n\n",
+ "#print isEmpty_prod /-\n@[simp]\ntheorem isEmpty_prod {α β : Type _} : IsEmpty (α × β) ↔ IsEmpty α ∨ IsEmpty β := by\n  simp only [← not_nonempty_iff, nonempty_prod, not_and_or]\n#align is_empty_prod isEmpty_prod\n-/\n\n",
  "isEmpty_pprod":
- "#print isEmpty_pprod /-\n@[simp]\ntheorem isEmpty_pprod : is_empty (PProd α β) ↔ is_empty α ∨ is_empty β := by\n  simp only [← not_nonempty_iff, nonempty_pprod, not_and_or]\n#align is_empty_pprod isEmpty_pprod\n-/\n\n",
+ "#print isEmpty_pprod /-\n@[simp]\ntheorem isEmpty_pprod : IsEmpty (PProd α β) ↔ IsEmpty α ∨ IsEmpty β := by\n  simp only [← not_nonempty_iff, nonempty_pprod, not_and_or]\n#align is_empty_pprod isEmpty_pprod\n-/\n\n",
  "isEmpty_plift":
- "#print isEmpty_plift /-\n@[simp]\ntheorem isEmpty_plift {α} : is_empty (PLift α) ↔ is_empty α := by simp only [← not_nonempty_iff, nonempty_plift]\n#align is_empty_plift isEmpty_plift\n-/\n\n",
+ "#print isEmpty_plift /-\n@[simp]\ntheorem isEmpty_plift {α} : IsEmpty (PLift α) ↔ IsEmpty α := by simp only [← not_nonempty_iff, nonempty_plift]\n#align is_empty_plift isEmpty_plift\n-/\n\n",
  "isEmpty_pi":
- "#print isEmpty_pi /-\n@[simp]\ntheorem isEmpty_pi {π : α → Sort _} : is_empty (∀ a, π a) ↔ ∃ a, is_empty (π a) := by\n  simp only [← not_nonempty_iff, classical.nonempty_pi, not_forall]\n#align is_empty_pi isEmpty_pi\n-/\n\n",
+ "#print isEmpty_pi /-\n@[simp]\ntheorem isEmpty_pi {π : α → Sort _} : IsEmpty (∀ a, π a) ↔ ∃ a, IsEmpty (π a) := by\n  simp only [← not_nonempty_iff, Classical.nonempty_pi, not_forall]\n#align is_empty_pi isEmpty_pi\n-/\n\n",
  "isEmpty_or_nonempty":
- "#print isEmpty_or_nonempty /-\ntheorem isEmpty_or_nonempty : is_empty α ∨ nonempty α :=\n  (em <| is_empty α).elim or.inl <| or.inr ∘ not_isEmpty_iff.mp\n#align is_empty_or_nonempty isEmpty_or_nonempty\n-/\n\n",
+ "#print isEmpty_or_nonempty /-\ntheorem isEmpty_or_nonempty : IsEmpty α ∨ Nonempty α :=\n  (em <| IsEmpty α).elim or.inl <| or.inr ∘ not_isEmpty_iff.mp\n#align is_empty_or_nonempty isEmpty_or_nonempty\n-/\n\n",
  "isEmpty_of_false":
- "#print Subtype.isEmpty_of_false /-\n/-- subtypes by an all-false predicate are false. -/\ntheorem Subtype.isEmpty_of_false {p : α → Prop} (hp : ∀ a, ¬p a) : is_empty (subtype p) :=\n  ⟨fun x => hp _ x.2⟩\n#align subtype.is_empty_of_false Subtype.isEmpty_of_false\n-/\n\n",
+ "#print Subtype.isEmpty_of_false /-\n/-- subtypes by an all-false predicate are false. -/\ntheorem Subtype.isEmpty_of_false {p : α → Prop} (hp : ∀ a, ¬p a) : IsEmpty (Subtype p) :=\n  ⟨fun x => hp _ x.2⟩\n#align subtype.is_empty_of_false Subtype.isEmpty_of_false\n-/\n\n",
  "isEmpty_iff":
- "#print isEmpty_iff /-\n-- Test that `pi.is_empty` finds this instance.\ntheorem isEmpty_iff : is_empty α ↔ α → false :=\n  ⟨@is_empty.false α, is_empty.mk⟩\n#align is_empty_iff isEmpty_iff\n-/\n\n",
+ "#print isEmpty_iff /-\n-- Test that `pi.is_empty` finds this instance.\ntheorem isEmpty_iff : IsEmpty α ↔ α → False :=\n  ⟨@is_empty.false α, is_empty.mk⟩\n#align is_empty_iff isEmpty_iff\n-/\n\n",
  "isEmpty_Prop":
- "#print isEmpty_Prop /-\n@[simp]\ntheorem isEmpty_Prop {p : Prop} : is_empty p ↔ ¬p := by simp only [← not_nonempty_iff, nonempty_Prop]\n#align is_empty_Prop isEmpty_Prop\n-/\n\n",
+ "#print isEmpty_Prop /-\n@[simp]\ntheorem isEmpty_Prop {p : Prop} : IsEmpty p ↔ ¬p := by simp only [← not_nonempty_iff, nonempty_Prop]\n#align is_empty_Prop isEmpty_Prop\n-/\n\n",
  "isEmpty":
- "#print Function.isEmpty /-\n/-\nCopyright (c) 2021 Floris van Doorn. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Floris van Doorn\n-/\nprotected theorem Function.isEmpty [is_empty β] (f : α → β) : is_empty α :=\n  ⟨fun x => is_empty.false (f x)⟩\n#align function.is_empty Function.isEmpty\n-/\n\n",
+ "#print Function.isEmpty /-\n/-\nCopyright (c) 2021 Floris van Doorn. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Floris van Doorn\n-/\nprotected theorem Function.isEmpty [IsEmpty β] (f : α → β) : IsEmpty α :=\n  ⟨fun x => is_empty.false (f x)⟩\n#align function.is_empty Function.isEmpty\n-/\n\n",
  "forall_iff":
- "@[simp]\ntheorem forall_iff {p : α → Prop} : (∀ a, p a) ↔ true :=\n  iff_true_intro is_empty_elim\n#align forall_iff forall_iff\n\n",
+ "@[simp]\ntheorem forall_iff {p : α → Prop} : (∀ a, p a) ↔ True :=\n  iff_true_intro isEmptyElim\n#align forall_iff forall_iff\n\n",
  "extend_of_isEmpty":
- "#print Function.extend_of_isEmpty /-\ntheorem Function.extend_of_isEmpty [is_empty α] (f : α → β) (g : α → γ) (h : β → γ) : function.extend f g h = h :=\n  funext fun x => function.extend_apply' _ _ _ fun ⟨a, h⟩ => is_empty_elim a\n#align function.extend_of_empty Function.extend_of_isEmpty\n-/\n\n",
+ "#print Function.extend_of_isEmpty /-\ntheorem Function.extend_of_isEmpty [IsEmpty α] (f : α → β) (g : α → γ) (h : β → γ) : Function.extend f g h = h :=\n  funext fun x => Function.extend_apply' _ _ _ fun ⟨a, h⟩ => isEmptyElim a\n#align function.extend_of_empty Function.extend_of_isEmpty\n-/\n\n",
  "exists_iff":
- "@[simp]\ntheorem exists_iff {p : α → Prop} : (∃ a, p a) ↔ false :=\n  iff_false_intro fun ⟨x, hx⟩ => is_empty.false x\n#align exists_iff exists_iff\n\n"}
+ "@[simp]\ntheorem exists_iff {p : α → Prop} : (∃ a, p a) ↔ False :=\n  iff_false_intro fun ⟨x, hx⟩ => is_empty.false x\n#align exists_iff exists_iff\n\n"}

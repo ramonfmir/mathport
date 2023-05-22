@@ -7,7 +7,7 @@
  "zeroth_convergent'_eq_h":
  "@[simp]\ntheorem zeroth_convergent'_eq_h : g.convergents' 0 = g.h := by simp [convergents']\n#align zeroth_convergent'_eq_h zeroth_convergent'_eq_h\n\n",
  "zeroth_convergent'_aux_eq_zero":
- "@[simp]\ntheorem zeroth_convergent'_aux_eq_zero {s : seq <| pair K} : convergents'_aux s 0 = 0 :=\n  rfl\n#align zeroth_convergent'_aux_eq_zero zeroth_convergent'_aux_eq_zero\n\n",
+ "@[simp]\ntheorem zeroth_convergent'_aux_eq_zero {s : Seq <| Pair K} : convergents'Aux s 0 = 0 :=\n  rfl\n#align zeroth_convergent'_aux_eq_zero zeroth_convergent'_aux_eq_zero\n\n",
  "zeroth_continuant_eq_h_one":
  "@[simp]\ntheorem zeroth_continuant_eq_h_one : g.continuants 0 = ⟨g.h, 1⟩ :=\n  rfl\n#align zeroth_continuant_eq_h_one zeroth_continuant_eq_h_one\n\n",
  "zeroth_continuant_aux_eq_one_zero":
@@ -21,25 +21,25 @@
  "terminated_at_iff_part_denom_none":
  "theorem terminated_at_iff_part_denom_none : g.terminated_at n ↔ g.partial_denominators.nth n = none := by\n  rw [terminated_at_iff_s_none, part_denom_none_iff_s_none]\n#align terminated_at_iff_part_denom_none terminated_at_iff_part_denom_none\n\n",
  "second_continuant_aux_eq":
- "theorem second_continuant_aux_eq {gp : pair K} (zeroth_s_eq : g.s.nth 0 = some gp) :\n    g.continuants_aux 2 = ⟨gp.b * g.h + gp.a, gp.b⟩ := by\n  simp [zeroth_s_eq, continuants_aux, next_continuants, next_denominator, next_numerator]\n#align second_continuant_aux_eq second_continuant_aux_eq\n\n",
+ "theorem second_continuant_aux_eq {gp : Pair K} (zeroth_s_eq : g.s.nth 0 = some gp) :\n    g.continuants_aux 2 = ⟨gp.b * g.h + gp.a, gp.b⟩ := by\n  simp [zeroth_s_eq, continuants_aux, next_continuants, next_denominator, next_numerator]\n#align second_continuant_aux_eq second_continuant_aux_eq\n\n",
  "part_num_none_iff_s_none":
  "theorem part_num_none_iff_s_none : g.partial_numerators.nth n = none ↔ g.s.nth n = none := by\n  cases s_nth_eq : g.s.nth n <;> simp [partial_numerators, s_nth_eq]\n#align part_num_none_iff_s_none part_num_none_iff_s_none\n\n",
  "part_num_eq_s_a":
- "theorem part_num_eq_s_a {gp : pair α} (s_nth_eq : g.s.nth n = some gp) : g.partial_numerators.nth n = some gp.a := by\n  simp [partial_numerators, s_nth_eq]\n#align part_num_eq_s_a part_num_eq_s_a\n\n",
+ "theorem part_num_eq_s_a {gp : Pair α} (s_nth_eq : g.s.nth n = some gp) : g.partial_numerators.nth n = some gp.a := by\n  simp [partial_numerators, s_nth_eq]\n#align part_num_eq_s_a part_num_eq_s_a\n\n",
  "part_denom_none_iff_s_none":
  "theorem part_denom_none_iff_s_none : g.partial_denominators.nth n = none ↔ g.s.nth n = none := by\n  cases s_nth_eq : g.s.nth n <;> simp [partial_denominators, s_nth_eq]\n#align part_denom_none_iff_s_none part_denom_none_iff_s_none\n\n",
  "part_denom_eq_s_b":
- "theorem part_denom_eq_s_b {gp : pair α} (s_nth_eq : g.s.nth n = some gp) : g.partial_denominators.nth n = some gp.b :=\n  by simp [partial_denominators, s_nth_eq]\n#align part_denom_eq_s_b part_denom_eq_s_b\n\n",
+ "theorem part_denom_eq_s_b {gp : Pair α} (s_nth_eq : g.s.nth n = some gp) : g.partial_denominators.nth n = some gp.b :=\n  by simp [partial_denominators, s_nth_eq]\n#align part_denom_eq_s_b part_denom_eq_s_b\n\n",
  "num_eq_conts_a":
  "theorem num_eq_conts_a : g.numerators n = (g.continuants n).a :=\n  rfl\n#align num_eq_conts_a num_eq_conts_a\n\n",
  "nth_cont_eq_succ_nth_cont_aux":
  "theorem nth_cont_eq_succ_nth_cont_aux : g.continuants n = g.continuants_aux (n + 1) :=\n  rfl\n#align nth_cont_eq_succ_nth_cont_aux nth_cont_eq_succ_nth_cont_aux\n\n",
  "first_numerator_eq":
- "theorem first_numerator_eq {gp : pair K} (zeroth_s_eq : g.s.nth 0 = some gp) : g.numerators 1 = gp.b * g.h + gp.a := by\n  simp [num_eq_conts_a, first_continuant_eq zeroth_s_eq]\n#align first_numerator_eq first_numerator_eq\n\n",
+ "theorem first_numerator_eq {gp : Pair K} (zeroth_s_eq : g.s.nth 0 = some gp) : g.numerators 1 = gp.b * g.h + gp.a := by\n  simp [num_eq_conts_a, first_continuant_eq zeroth_s_eq]\n#align first_numerator_eq first_numerator_eq\n\n",
  "first_denominator_eq":
- "theorem first_denominator_eq {gp : pair K} (zeroth_s_eq : g.s.nth 0 = some gp) : g.denominators 1 = gp.b := by\n  simp [denom_eq_conts_b, first_continuant_eq zeroth_s_eq]\n#align first_denominator_eq first_denominator_eq\n\n",
+ "theorem first_denominator_eq {gp : Pair K} (zeroth_s_eq : g.s.nth 0 = some gp) : g.denominators 1 = gp.b := by\n  simp [denom_eq_conts_b, first_continuant_eq zeroth_s_eq]\n#align first_denominator_eq first_denominator_eq\n\n",
  "first_continuant_eq":
- "theorem first_continuant_eq {gp : pair K} (zeroth_s_eq : g.s.nth 0 = some gp) :\n    g.continuants 1 = ⟨gp.b * g.h + gp.a, gp.b⟩ := by\n  simp [nth_cont_eq_succ_nth_cont_aux, second_continuant_aux_eq zeroth_s_eq]\n#align first_continuant_eq first_continuant_eq\n\n",
+ "theorem first_continuant_eq {gp : Pair K} (zeroth_s_eq : g.s.nth 0 = some gp) :\n    g.continuants 1 = ⟨gp.b * g.h + gp.a, gp.b⟩ := by\n  simp [nth_cont_eq_succ_nth_cont_aux, second_continuant_aux_eq zeroth_s_eq]\n#align first_continuant_eq first_continuant_eq\n\n",
  "first_continuant_aux_eq_h_one":
  "@[simp]\ntheorem first_continuant_aux_eq_h_one : g.continuants_aux 1 = ⟨g.h, 1⟩ :=\n  rfl\n#align first_continuant_aux_eq_h_one first_continuant_aux_eq_h_one\n\n",
  "exists_s_b_of_part_denom":
@@ -52,6 +52,10 @@
  "theorem exists_conts_a_of_num {A : K} (nth_num_eq : g.numerators n = A) :\n    ∃ conts, g.continuants n = conts ∧ conts.a = A := by simpa\n#align exists_conts_a_of_num exists_conts_a_of_num\n\n",
  "denom_eq_conts_b":
  "theorem denom_eq_conts_b : g.denominators n = (g.continuants n).b :=\n  rfl\n#align denom_eq_conts_b denom_eq_conts_b\n\n",
+ "convergents'_aux_succ_some":
+ "theorem convergents'_aux_succ_some {s : Seq (Pair K)} {p : Pair K} (h : s.head = some p) (n : ℕ) :\n    convergents'Aux s (n + 1) = p.a / (p.b + convergents'Aux s.tail n) := by\n  rw [convergents'_aux, h, convergents'_aux._match_1]\n#align convergents'_aux_succ_some convergents'_aux_succ_some\n\n",
+ "convergents'_aux_succ_none":
+ "theorem convergents'_aux_succ_none {s : Seq (Pair K)} (h : s.head = none) (n : ℕ) : convergents'Aux s (n + 1) = 0 := by\n  rw [convergents'_aux, h, convergents'_aux._match_1]\n#align convergents'_aux_succ_none convergents'_aux_succ_none\n\n",
  "convergent_eq_num_div_denom":
  "theorem convergent_eq_num_div_denom : g.convergents n = g.numerators n / g.denominators n :=\n  rfl\n#align convergent_eq_num_div_denom convergent_eq_num_div_denom\n\n",
  "convergent_eq_conts_a_div_conts_b":

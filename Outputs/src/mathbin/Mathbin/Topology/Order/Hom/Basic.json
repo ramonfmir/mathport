@@ -1,26 +1,26 @@
 {"to_fun_eq_coe":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →Co » -/\n/-\nCopyright (c) 2022 Yaël Dillies. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Yaël Dillies\n-/\n-- See note [lower instance priority]\n@[simp]\ntheorem to_fun_eq_coe {f : «expr →Co » α β} : f.to_fun = (f : α → β) :=\n  rfl\n#align to_fun_eq_coe to_fun_eq_coe\n\n",
  "id_comp":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →Co » -/\n@[simp]\ntheorem id_comp (f : «expr →Co » α β) : (continuous_order_hom.id β).comp f = f :=\n  ext fun a => rfl\n#align id_comp id_comp\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →Co » -/\n@[simp]\ntheorem id_comp (f : «expr →Co » α β) : (ContinuousOrderHom.id β).comp f = f :=\n  ext fun a => rfl\n#align id_comp id_comp\n\n",
  "id_apply":
- "@[simp]\ntheorem id_apply (a : α) : continuous_order_hom.id α a = a :=\n  rfl\n#align id_apply id_apply\n\n",
+ "@[simp]\ntheorem id_apply (a : α) : ContinuousOrderHom.id α a = a :=\n  rfl\n#align id_apply id_apply\n\n",
  "ext":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →Co » -/\n@[ext]\ntheorem ext {f g : «expr →Co » α β} (h : ∀ a, f a = g a) : f = g :=\n  fun_like.ext f g h\n#align ext ext\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →Co » -/\n@[ext]\ntheorem ext {f g : «expr →Co » α β} (h : ∀ a, f a = g a) : f = g :=\n  FunLike.ext f g h\n#align ext ext\n\n",
  "copy_eq":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →Co » -/\ntheorem copy_eq (f : «expr →Co » α β) (f' : α → β) (h : f' = f) : f.copy f' h = f :=\n  fun_like.ext' h\n#align copy_eq copy_eq\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →Co » -/\ntheorem copy_eq (f : «expr →Co » α β) (f' : α → β) (h : f' = f) : f.copy f' h = f :=\n  FunLike.ext' h\n#align copy_eq copy_eq\n\n",
  "comp_id":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →Co » -/\n@[simp]\ntheorem comp_id (f : «expr →Co » α β) : f.comp (continuous_order_hom.id α) = f :=\n  ext fun a => rfl\n#align comp_id comp_id\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →Co » -/\n@[simp]\ntheorem comp_id (f : «expr →Co » α β) : f.comp (ContinuousOrderHom.id α) = f :=\n  ext fun a => rfl\n#align comp_id comp_id\n\n",
  "comp_assoc":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →Co » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →Co » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →Co » -/\n@[simp]\ntheorem comp_assoc (f : «expr →Co » γ δ) (g : «expr →Co » β γ) (h : «expr →Co » α β) :\n    (f.comp g).comp h = f.comp (g.comp h) :=\n  rfl\n#align comp_assoc comp_assoc\n\n",
  "comp_apply":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →Co » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →Co » -/\n@[simp]\ntheorem comp_apply (f : «expr →Co » β γ) (g : «expr →Co » α β) (a : α) : (f.comp g) a = f (g a) :=\n  rfl\n#align comp_apply comp_apply\n\n",
  "coe_id":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n@[simp]\ntheorem coe_id : «expr⇑ » (continuous_order_hom.id α) = id :=\n  rfl\n#align coe_id coe_id\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n@[simp]\ntheorem coe_id : «expr⇑ » (ContinuousOrderHom.id α) = id :=\n  rfl\n#align coe_id coe_id\n\n",
  "coe_copy":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →Co » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n@[simp]\ntheorem coe_copy (f : «expr →Co » α β) (f' : α → β) (h : f' = f) : «expr⇑ » (f.copy f' h) = f' :=\n  rfl\n#align coe_copy coe_copy\n\n",
  "coe_comp":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →Co » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →Co » -/\n@[simp]\ntheorem coe_comp (f : «expr →Co » β γ) (g : «expr →Co » α β) : (f.comp g : α → γ) = f ∘ g :=\n  rfl\n#align coe_comp coe_comp\n\n",
  "cancel_right":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →Co » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →Co » -/\ntheorem cancel_right {g₁ g₂ : «expr →Co » β γ} {f : «expr →Co » α β} (hf : surjective f) :\n    g₁.comp f = g₂.comp f ↔ g₁ = g₂ :=\n  ⟨fun h => ext <| hf.forall.2 <| fun_like.ext_iff.1 h, congr_arg _⟩\n#align cancel_right cancel_right\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →Co » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →Co » -/\ntheorem cancel_right {g₁ g₂ : «expr →Co » β γ} {f : «expr →Co » α β} (hf : surjective f) :\n    g₁.comp f = g₂.comp f ↔ g₁ = g₂ :=\n  ⟨fun h => ext <| hf.forall.2 <| FunLike.ext_iff.1 h, congr_arg _⟩\n#align cancel_right cancel_right\n\n",
  "cancel_left":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →Co » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →Co » -/\ntheorem cancel_left {g : «expr →Co » β γ} {f₁ f₂ : «expr →Co » α β} (hg : injective g) :\n    g.comp f₁ = g.comp f₂ ↔ f₁ = f₂ :=\n  ⟨fun h => ext fun a => hg <| by rw [← comp_apply, h, comp_apply], congr_arg _⟩\n#align cancel_left cancel_left\n\n"}

@@ -1,7 +1,7 @@
 {"to_mul_symm_eq":
- "@[simp]\ntheorem to_mul_symm_eq : (@toMul α).symm = of_mul :=\n  rfl\n#align to_mul_symm_eq to_mul_symm_eq\n\n",
+ "@[simp]\ntheorem to_mul_symm_eq : (@toMul α).symm = ofMul :=\n  rfl\n#align to_mul_symm_eq to_mul_symm_eq\n\n",
  "to_add_symm_eq":
- "@[simp]\ntheorem to_add_symm_eq : (@toAdd α).symm = of_add :=\n  rfl\n#align to_add_symm_eq to_add_symm_eq\n\n",
+ "@[simp]\ntheorem to_add_symm_eq : (@toAdd α).symm = ofAdd :=\n  rfl\n#align to_add_symm_eq to_add_symm_eq\n\n",
  "toMul_zero":
  "#print toMul_zero /-\n@[simp]\ntheorem toMul_zero [One α] : (0 : Additive α).to_mul = 1 :=\n  rfl\n#align to_mul_zero toMul_zero\n-/\n\n",
  "toMul_sub":
@@ -23,9 +23,9 @@
  "toAdd_div":
  "#print toAdd_div /-\n@[simp]\ntheorem toAdd_div [Sub α] (x y : Multiplicative α) : (x / y).to_add = x.to_add - y.to_add :=\n  rfl\n#align to_add_div toAdd_div\n-/\n\n",
  "of_mul_symm_eq":
- "/-\nCopyright (c) 2018 Mario Carneiro. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Mario Carneiro\n-/\n@[simp]\ntheorem of_mul_symm_eq : (@ofMul α).symm = to_mul :=\n  rfl\n#align of_mul_symm_eq of_mul_symm_eq\n\n",
+ "/-\nCopyright (c) 2018 Mario Carneiro. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Mario Carneiro\n-/\n@[simp]\ntheorem of_mul_symm_eq : (@ofMul α).symm = toMul :=\n  rfl\n#align of_mul_symm_eq of_mul_symm_eq\n\n",
  "of_add_symm_eq":
- "@[simp]\ntheorem of_add_symm_eq : (@ofAdd α).symm = to_add :=\n  rfl\n#align of_add_symm_eq of_add_symm_eq\n\n",
+ "@[simp]\ntheorem of_add_symm_eq : (@ofAdd α).symm = toAdd :=\n  rfl\n#align of_add_symm_eq of_add_symm_eq\n\n",
  "ofMul_toMul":
  "#print ofMul_toMul /-\n@[simp]\ntheorem ofMul_toMul (x : Additive α) : Additive.ofMul x.to_mul = x :=\n  rfl\n#align of_mul_to_mul ofMul_toMul\n-/\n\n",
  "ofMul_one":

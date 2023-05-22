@@ -1,42 +1,42 @@
 {"sorted_univ_to_finset":
- "@[simp]\ntheorem sorted_univ_to_finset (α) [fintype α] [Encodable α] [decidable_eq α] :\n    (sorted_univ α).to_finset = finset.univ :=\n  finset.sort_to_finset _ _\n#align sorted_univ_to_finset sorted_univ_to_finset\n\n",
+ "@[simp]\ntheorem sorted_univ_to_finset (α) [Fintype α] [Encodable α] [DecidableEq α] : (sortedUniv α).to_finset = Finset.univ :=\n  Finset.sort_toFinset _ _\n#align sorted_univ_to_finset sorted_univ_to_finset\n\n",
  "sorted_univ_nodup":
- "@[simp]\ntheorem sorted_univ_nodup (α) [fintype α] [Encodable α] : (sorted_univ α).nodup :=\n  finset.sort_nodup _ _\n#align sorted_univ_nodup sorted_univ_nodup\n\n",
+ "@[simp]\ntheorem sorted_univ_nodup (α) [Fintype α] [Encodable α] : (sortedUniv α).nodup :=\n  Finset.sort_nodup _ _\n#align sorted_univ_nodup sorted_univ_nodup\n\n",
  "raise_sorted":
- "/-- `raise l n` is an non-decreasing sequence. -/\ntheorem raise_sorted : ∀ l n, list.sorted (· ≤ ·) (raise l n)\n  | [], n => list.sorted_nil\n  | m :: l, n => List.chain_iff_pairwise.1 (raise_chain _ _)\n#align raise_sorted raise_sorted\n\n",
+ "/-- `raise l n` is an non-decreasing sequence. -/\ntheorem raise_sorted : ∀ l n, List.Sorted (· ≤ ·) (raise l n)\n  | [], n => List.sorted_nil\n  | m :: l, n => List.chain_iff_pairwise.1 (raise_chain _ _)\n#align raise_sorted raise_sorted\n\n",
  "raise_lower'":
- "theorem raise_lower' : ∀ {l n}, (∀ m ∈ l, n ≤ m) → list.sorted (· < ·) l → raise' (lower' l n) n = l\n  | [], n, h₁, h₂ => rfl\n  | m :: l, n, h₁, h₂ => by\n    have : n ≤ m := h₁ _ (l.mem_cons_self _)\n    simp [raise', lower', tsub_add_cancel_of_le this,\n      raise_lower' (list.rel_of_sorted_cons h₂ : ∀ a ∈ l, m < a) h₂.of_cons]\n#align raise_lower' raise_lower'\n\n",
+ "theorem raise_lower' : ∀ {l n}, (∀ m ∈ l, n ≤ m) → List.Sorted (· < ·) l → raise' (lower' l n) n = l\n  | [], n, h₁, h₂ => rfl\n  | m :: l, n, h₁, h₂ => by\n    have : n ≤ m := h₁ _ (l.mem_cons_self _)\n    simp [raise', lower', tsub_add_cancel_of_le this,\n      raise_lower' (List.rel_of_sorted_cons h₂ : ∀ a ∈ l, m < a) h₂.of_cons]\n#align raise_lower' raise_lower'\n\n",
  "raise_lower":
- "theorem raise_lower : ∀ {l n}, list.sorted (· ≤ ·) (n :: l) → raise (lower l n) n = l\n  | [], n, h => rfl\n  | m :: l, n, h => by\n    have : n ≤ m := list.rel_of_sorted_cons h _ (l.mem_cons_self _)\n    simp [raise, lower, tsub_add_cancel_of_le this, raise_lower h.of_cons]\n#align raise_lower raise_lower\n\n",
+ "theorem raise_lower : ∀ {l n}, List.Sorted (· ≤ ·) (n :: l) → raise (lower l n) n = l\n  | [], n, h => rfl\n  | m :: l, n, h => by\n    have : n ≤ m := List.rel_of_sorted_cons h _ (l.mem_cons_self _)\n    simp [raise, lower, tsub_add_cancel_of_le this, raise_lower h.of_cons]\n#align raise_lower raise_lower\n\n",
  "raise_chain":
  "theorem raise_chain : ∀ l n, List.Chain (· ≤ ·) n (raise l n)\n  | [], n => List.Chain.nil\n  | m :: l, n => List.Chain.cons (nat.le_add_left _ _) (raise_chain _ _)\n#align raise_chain raise_chain\n\n",
  "raise'_sorted":
- "/-- `raise' l n` is a strictly increasing sequence. -/\ntheorem raise'_sorted : ∀ l n, list.sorted (· < ·) (raise' l n)\n  | [], n => list.sorted_nil\n  | m :: l, n => List.chain_iff_pairwise.1 (raise'_chain _ (lt_succ_self _))\n#align raise'_sorted raise'_sorted\n\n",
+ "/-- `raise' l n` is a strictly increasing sequence. -/\ntheorem raise'_sorted : ∀ l n, List.Sorted (· < ·) (raise' l n)\n  | [], n => List.sorted_nil\n  | m :: l, n => List.chain_iff_pairwise.1 (raise'_chain _ (lt_succ_self _))\n#align raise'_sorted raise'_sorted\n\n",
  "raise'_chain":
  "theorem raise'_chain : ∀ (l) {m n}, m < n → List.Chain (· < ·) m (raise' l n)\n  | [], m, n, h => List.Chain.nil\n  | a :: l, m, n, h => List.Chain.cons (lt_of_lt_of_le h (nat.le_add_left _ _)) (raise'_chain _ (lt_succ_self _))\n#align raise'_chain raise'_chain\n\n",
  "mem_sorted_univ":
- "-- TODO: Unify with `fintype_pi` and find a better name\n@[simp]\ntheorem mem_sorted_univ {α} [fintype α] [Encodable α] (x : α) : x ∈ sorted_univ α :=\n  (finset.mem_sort _).2 (finset.mem_univ _)\n#align mem_sorted_univ mem_sorted_univ\n\n",
+ "-- TODO: Unify with `fintype_pi` and find a better name\n@[simp]\ntheorem mem_sorted_univ {α} [Fintype α] [Encodable α] (x : α) : x ∈ sortedUniv α :=\n  (Finset.mem_sort _).2 (Finset.mem_univ _)\n#align mem_sorted_univ mem_sorted_univ\n\n",
  "lower_raise'":
  "theorem lower_raise' : ∀ l n, lower' (raise' l n) n = l\n  | [], n => rfl\n  | m :: l, n => by simp [raise', lower', add_tsub_cancel_right, lower_raise']\n#align lower_raise' lower_raise'\n\n",
  "lower_raise":
  "theorem lower_raise : ∀ l n, lower (raise l n) n = l\n  | [], n => rfl\n  | m :: l, n => by rw [raise, lower, add_tsub_cancel_right, lower_raise]\n#align lower_raise lower_raise\n\n",
  "list_of_nat_zero":
- "@[simp]\ntheorem list_of_nat_zero : of_nat (list α) 0 = [] := by rw [← @encode_list_nil α, of_nat_encode]\n#align list_of_nat_zero list_of_nat_zero\n\n",
+ "@[simp]\ntheorem list_of_nat_zero : ofNat (List α) 0 = [] := by rw [← @encode_list_nil α, of_nat_encode]\n#align list_of_nat_zero list_of_nat_zero\n\n",
  "list_of_nat_succ":
- "@[simp]\ntheorem list_of_nat_succ (v : ℕ) : of_nat (list α) (succ v) = of_nat α v.unpair.1 :: of_nat (list α) v.unpair.2 :=\n  of_nat_of_decode <|\n    show decode_list (succ v) = _ by\n      cases' e : unpair v with v₁ v₂\n      simp [decode_list, e]\n      rw [show decode_list v₂ = decode (list α) v₂ from rfl, decode_eq_of_nat] <;> rfl\n#align list_of_nat_succ list_of_nat_succ\n\n",
+ "@[simp]\ntheorem list_of_nat_succ (v : ℕ) : ofNat (List α) (succ v) = ofNat α v.unpair.1 :: ofNat (List α) v.unpair.2 :=\n  ofNat_of_decode <|\n    show decodeList (succ v) = _ by\n      cases' e : unpair v with v₁ v₂\n      simp [decode_list, e]\n      rw [show decode_list v₂ = decode (List α) v₂ from rfl, decode_eq_of_nat] <;> rfl\n#align list_of_nat_succ list_of_nat_succ\n\n",
  "length_sorted_univ":
- "@[simp]\ntheorem length_sorted_univ (α) [fintype α] [Encodable α] : (sorted_univ α).length = fintype.card α :=\n  finset.length_sort _\n#align length_sorted_univ length_sorted_univ\n\n",
+ "@[simp]\ntheorem length_sorted_univ (α) [Fintype α] [Encodable α] : (sortedUniv α).length = Fintype.card α :=\n  Finset.length_sort _\n#align length_sorted_univ length_sorted_univ\n\n",
  "length_le_encode":
- "theorem length_le_encode : ∀ l : list α, length l ≤ encode l\n  | [] => _root_.zero_le _\n  | a :: l => succ_le_succ <| (length_le_encode l).trans (right_le_mkpair _ _)\n#align length_le_encode length_le_encode\n\n",
+ "theorem length_le_encode : ∀ l : List α, length l ≤ encode l\n  | [] => zero_le _\n  | a :: l => succ_le_succ <| (length_le_encode l).trans (right_le_pair _ _)\n#align length_le_encode length_le_encode\n\n",
  "is_linear_order":
  "private theorem enle.is_linear_order : is_linear_order α enle :=\n  (RelEmbedding.preimage ⟨encode, encode_injective⟩ (· ≤ ·)).is_linear_order\n#align enle.is_linear_order enle.is_linear_order\n\n",
  "encode_list_nil":
  "/-\nCopyright (c) 2018 Mario Carneiro. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Mario Carneiro\n-/\n@[simp]\ntheorem encode_list_nil : encode (@nil α) = 0 :=\n  rfl\n#align encode_list_nil encode_list_nil\n\n",
  "encode_list_cons":
- "@[simp]\ntheorem encode_list_cons (a : α) (l : list α) : encode (a :: l) = succ (mkpair (encode a) (encode l)) :=\n  rfl\n#align encode_list_cons encode_list_cons\n\n",
+ "@[simp]\ntheorem encode_list_cons (a : α) (l : List α) : encode (a :: l) = succ (pair (encode a) (encode l)) :=\n  rfl\n#align encode_list_cons encode_list_cons\n\n",
  "denumerable_list_aux":
- "theorem denumerable_list_aux : ∀ n : ℕ, ∃ a ∈ @decode_list α _ n, encode_list a = n\n  | 0 => by rw [decode_list] <;> exact ⟨_, rfl, rfl⟩\n  | succ v => by\n    cases' e : unpair v with v₁ v₂\n    have h := unpair_right_le v\n    rw [e] at h\n    rcases have : v₂ < succ v := lt_succ_of_le h\n      denumerable_list_aux v₂ with\n      ⟨a, h₁, h₂⟩\n    rw [option.mem_def] at h₁\n    use of_nat α v₁ :: a\n    simp [decode_list, e, h₂, h₁, encode_list, mkpair_unpair' e]\n#align denumerable_list_aux denumerable_list_aux\n\n",
+ "theorem denumerable_list_aux : ∀ n : ℕ, ∃ a ∈ @decodeList α _ n, encodeList a = n\n  | 0 => by rw [decode_list] <;> exact ⟨_, rfl, rfl⟩\n  | succ v => by\n    cases' e : unpair v with v₁ v₂\n    have h := unpair_right_le v\n    rw [e] at h\n    rcases have : v₂ < succ v := lt_succ_of_le h\n      denumerable_list_aux v₂ with\n      ⟨a, h₁, h₂⟩\n    rw [Option.mem_def] at h₁\n    use of_nat α v₁ :: a\n    simp [decode_list, e, h₂, h₁, encode_list, mkpair_unpair' e]\n#align denumerable_list_aux denumerable_list_aux\n\n",
  "decode_list_zero":
- "@[simp]\ntheorem decode_list_zero : decode (list α) 0 = some [] :=\n  show decode_list 0 = some [] by rw [decode_list]\n#align decode_list_zero decode_list_zero\n\n",
+ "@[simp]\ntheorem decode_list_zero : decode (List α) 0 = some [] :=\n  show decodeList 0 = some [] by rw [decode_list]\n#align decode_list_zero decode_list_zero\n\n",
  "decode_list_succ":
- "@[simp]\ntheorem decode_list_succ (v : ℕ) :\n    decode (list α) (succ v) = (· :: ·) <$> decode α v.unpair.1 <*> decode (list α) v.unpair.2 :=\n  show decode_list (succ v) = _ by\n    cases' e : unpair v with v₁ v₂\n    simp [decode_list, e]; rfl\n#align decode_list_succ decode_list_succ\n\n"}
+ "@[simp]\ntheorem decode_list_succ (v : ℕ) :\n    decode (List α) (succ v) = (· :: ·) <$> decode α v.unpair.1 <*> decode (List α) v.unpair.2 :=\n  show decodeList (succ v) = _ by\n    cases' e : unpair v with v₁ v₂\n    simp [decode_list, e]; rfl\n#align decode_list_succ decode_list_succ\n\n"}

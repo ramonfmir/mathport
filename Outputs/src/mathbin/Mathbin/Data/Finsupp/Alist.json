@@ -1,0 +1,22 @@
+{"to_alist_lookup_finsupp":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →₀ » -/\n#print Finsupp.toAList_lookupFinsupp /-\n@[simp]\ntheorem Finsupp.toAList_lookupFinsupp (f : «expr →₀ » α M) : f.to_alist.lookup_finsupp = f :=\n  by\n  ext\n  classical\n    by_cases h : f a = 0\n    · suffices f.to_alist.lookup a = none by simp [h, this]\n      · simp [lookup_eq_none, h]\n    · suffices f.to_alist.lookup a = some (f a) by simp [h, this]\n      · apply mem_lookup_iff.2\n        simpa using h\n#align finsupp.to_alist_lookup_finsupp Finsupp.toAList_lookupFinsupp\n-/\n\n",
+ "to_alist_keys_to_finset":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →₀ » -/\n/-\nCopyright (c) 2022 Violeta Hernández. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Violeta Hernández\n-/\n@[simp]\ntheorem to_alist_keys_to_finset [DecidableEq α] (f : «expr →₀ » α M) : f.to_alist.keys.to_finset = f.support :=\n  by\n  ext\n  simp [to_alist, AList.mem_keys, AList.keys, List.keys]\n#align to_alist_keys_to_finset to_alist_keys_to_finset\n\n",
+ "singleton_lookup_finsupp":
+ "@[simp]\ntheorem singleton_lookup_finsupp (a : α) (m : M) : (singleton a m).lookup_finsupp = Finsupp.single a m := by\n  classical simp [← AList.insert_empty]\n#align singleton_lookup_finsupp singleton_lookup_finsupp\n\n",
+ "mem_to_alist":
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →₀ » -/\n@[simp]\ntheorem mem_to_alist {f : «expr →₀ » α M} {x : α} : x ∈ f.to_alist ↔ f x ≠ 0 := by\n  classical rw [AList.mem_keys, ← List.mem_toFinset, to_alist_keys_to_finset, mem_support_iff]\n#align mem_to_alist mem_to_alist\n\n",
+ "lookup_finsupp_surjective":
+ "theorem lookup_finsupp_surjective : function.surjective (@lookupFinsupp α M _) := fun f =>\n  ⟨_, Finsupp.toAList_lookupFinsupp f⟩\n#align lookup_finsupp_surjective lookup_finsupp_surjective\n\n",
+ "lookup_finsupp_support":
+ "@[simp]\ntheorem lookup_finsupp_support [DecidableEq α] [DecidableEq M] (l : AList fun x : α => M) :\n    l.lookup_finsupp.support = (l.1.filter fun x => Sigma.snd x ≠ 0).keys.to_finset := by convert rfl\n#align lookup_finsupp_support lookup_finsupp_support\n\n",
+ "lookup_finsupp_eq_zero_iff":
+ "theorem lookup_finsupp_eq_zero_iff [DecidableEq α] {l : AList fun x : α => M} {a : α} :\n    l.lookup_finsupp a = 0 ↔ a ∉ l ∨ (0 : M) ∈ l.lookup a :=\n  by\n  rw [lookup_finsupp_apply, ← lookup_eq_none]\n  cases' lookup a l with m <;> simp\n#align lookup_finsupp_eq_zero_iff lookup_finsupp_eq_zero_iff\n\n",
+ "lookup_finsupp_eq_iff_of_ne_zero":
+ "theorem lookup_finsupp_eq_iff_of_ne_zero [DecidableEq α] {l : AList fun x : α => M} {a : α} {x : M} (hx : x ≠ 0) :\n    l.lookup_finsupp a = x ↔ x ∈ l.lookup a := by\n  rw [lookup_finsupp_apply]\n  cases' lookup a l with m <;> simp [hx.symm]\n#align lookup_finsupp_eq_iff_of_ne_zero lookup_finsupp_eq_iff_of_ne_zero\n\n",
+ "lookup_finsupp_apply":
+ "@[simp]\ntheorem lookup_finsupp_apply [DecidableEq α] (l : AList fun x : α => M) (a : α) :\n    l.lookup_finsupp a = (l.lookup a).get_or_else 0 := by convert rfl\n#align lookup_finsupp_apply lookup_finsupp_apply\n\n",
+ "insert_lookup_finsupp":
+ "@[simp]\ntheorem insert_lookup_finsupp [DecidableEq α] (l : AList fun x : α => M) (a : α) (m : M) :\n    (l.insert a m).lookup_finsupp = l.lookup_finsupp.update a m :=\n  by\n  ext b\n  by_cases h : b = a <;> simp [h]\n#align insert_lookup_finsupp insert_lookup_finsupp\n\n",
+ "empty_lookup_finsupp":
+ "@[simp]\ntheorem empty_lookup_finsupp : lookupFinsupp (∅ : AList fun x : α => M) = 0 := by\n  classical\n    ext\n    simp\n#align empty_lookup_finsupp empty_lookup_finsupp\n\n"}

@@ -1,7 +1,7 @@
 {"trans_symm":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ₛₗ[ ] » -/\n@[simp]\ntheorem trans_symm : (e₁₂.trans e₂₃ : «expr ≃ₛₗ[ ] » M₁ σ₁₃ M₃).symm = e₂₃.symm.trans e₁₂.symm :=\n  rfl\n#align trans_symm trans_symm\n\n",
  "trans_refl":
- "@[simp]\ntheorem trans_refl : e.trans (refl S M₂) = e :=\n  to_equiv_injective e.to_equiv.trans_refl\n#align trans_refl trans_refl\n\n",
+ "@[simp]\ntheorem trans_refl : e.trans (refl S M₂) = e :=\n  toEquiv_injective e.to_equiv.trans_refl\n#align trans_refl trans_refl\n\n",
  "trans_apply":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ₛₗ[ ] » -/\n@[simp]\ntheorem trans_apply (c : M₁) : (e₁₂.trans e₂₃ : «expr ≃ₛₗ[ ] » M₁ σ₁₃ M₃) c = e₂₃ (e₁₂ c) :=\n  rfl\n#align trans_apply trans_apply\n\n",
  "to_nat_linear_equiv_trans":
@@ -11,13 +11,13 @@
  "to_nat_linear_equiv_symm":
  "@[simp]\ntheorem to_nat_linear_equiv_symm : e.to_nat_linear_equiv.symm = e.symm.to_nat_linear_equiv :=\n  rfl\n#align to_nat_linear_equiv_symm to_nat_linear_equiv_symm\n\n",
  "to_nat_linear_equiv_refl":
- "@[simp]\ntheorem to_nat_linear_equiv_refl : (AddEquiv.refl M).to_nat_linear_equiv = linear_equiv.refl ℕ M :=\n  rfl\n#align to_nat_linear_equiv_refl to_nat_linear_equiv_refl\n\n",
+ "@[simp]\ntheorem to_nat_linear_equiv_refl : (AddEquiv.refl M).to_nat_linear_equiv = LinearEquiv.refl ℕ M :=\n  rfl\n#align to_nat_linear_equiv_refl to_nat_linear_equiv_refl\n\n",
  "to_linear_map_symm_comp_eq":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₛₗ[ ] » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₛₗ[ ] » -/\ntheorem to_linear_map_symm_comp_eq (f : «expr →ₛₗ[ ] » M₃ σ₃₁ M₁) (g : «expr →ₛₗ[ ] » M₃ σ₃₂ M₂) :\n    e₁₂.symm.to_linear_map.comp g = f ↔ g = e₁₂.to_linear_map.comp f :=\n  by\n  constructor <;> intro H <;> ext\n  · simp [← H, ← e₁₂.to_equiv.symm_comp_eq f g]\n  · simp [H, e₁₂.to_equiv.symm_comp_eq f g]\n#align to_linear_map_symm_comp_eq to_linear_map_symm_comp_eq\n\n",
  "to_linear_map_injective":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ₛₗ[ ] » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₛₗ[ ] » -/\ntheorem to_linear_map_injective : injective (coe : «expr ≃ₛₗ[ ] » M σ M₂ → «expr →ₛₗ[ ] » M σ M₂) := fun e₁ e₂ H =>\n  to_equiv_injective <| equiv.ext <| linear_map.congr_fun H\n#align to_linear_map_injective to_linear_map_injective\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ₛₗ[ ] » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₛₗ[ ] » -/\ntheorem to_linear_map_injective : injective (coe : «expr ≃ₛₗ[ ] » M σ M₂ → «expr →ₛₗ[ ] » M σ M₂) := fun e₁ e₂ H =>\n  toEquiv_injective <| Equiv.ext <| LinearMap.congr_fun H\n#align to_linear_map_injective to_linear_map_injective\n\n",
  "to_linear_map_inj":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ₛₗ[ ] » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₛₗ[ ] » -/\n@[simp, norm_cast]\ntheorem to_linear_map_inj {e₁ e₂ : «expr ≃ₛₗ[ ] » M σ M₂} : (e₁ : «expr →ₛₗ[ ] » M σ M₂) = e₂ ↔ e₁ = e₂ :=\n  to_linear_map_injective.eq_iff\n#align to_linear_map_inj to_linear_map_inj\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ₛₗ[ ] » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₛₗ[ ] » -/\n@[simp, norm_cast]\ntheorem to_linear_map_inj {e₁ e₂ : «expr ≃ₛₗ[ ] » M σ M₂} : (e₁ : «expr →ₛₗ[ ] » M σ M₂) = e₂ ↔ e₁ = e₂ :=\n  toLinearMap_injective.eq_iff\n#align to_linear_map_inj to_linear_map_inj\n\n",
  "to_linear_map_eq_coe":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₛₗ[ ] » -/\ntheorem to_linear_map_eq_coe : e.to_linear_map = (e : «expr →ₛₗ[ ] » M σ M₂) :=\n  rfl\n#align to_linear_map_eq_coe to_linear_map_eq_coe\n\n",
  "to_int_linear_equiv_trans":
@@ -27,21 +27,21 @@
  "to_int_linear_equiv_symm":
  "@[simp]\ntheorem to_int_linear_equiv_symm : e.to_int_linear_equiv.symm = e.symm.to_int_linear_equiv :=\n  rfl\n#align to_int_linear_equiv_symm to_int_linear_equiv_symm\n\n",
  "to_int_linear_equiv_refl":
- "@[simp]\ntheorem to_int_linear_equiv_refl : (AddEquiv.refl M).to_int_linear_equiv = linear_equiv.refl ℤ M :=\n  rfl\n#align to_int_linear_equiv_refl to_int_linear_equiv_refl\n\n",
+ "@[simp]\ntheorem to_int_linear_equiv_refl : (AddEquiv.refl M).to_int_linear_equiv = LinearEquiv.refl ℤ M :=\n  rfl\n#align to_int_linear_equiv_refl to_int_linear_equiv_refl\n\n",
  "to_fun_eq_coe":
  "@[simp]\ntheorem to_fun_eq_coe : e.to_fun = e :=\n  rfl\n#align to_fun_eq_coe to_fun_eq_coe\n\n",
  "to_equiv_injective":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ₛₗ[ ] » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ » -/\n-- This exists for compatibility, previously `≃ₗ[R]` extended `≃` instead of `≃+`.\ntheorem to_equiv_injective : function.injective (to_equiv : «expr ≃ₛₗ[ ] » M σ M₂ → «expr ≃ » M M₂) :=\n  fun ⟨_, _, _, _, _, _⟩ ⟨_, _, _, _, _, _⟩ h => linear_equiv.mk.inj_eq.mpr (equiv.mk.inj h)\n#align to_equiv_injective to_equiv_injective\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ₛₗ[ ] » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ » -/\n-- This exists for compatibility, previously `≃ₗ[R]` extended `≃` instead of `≃+`.\ntheorem to_equiv_injective : function.injective (toEquiv : «expr ≃ₛₗ[ ] » M σ M₂ → «expr ≃ » M M₂) :=\n  fun ⟨_, _, _, _, _, _⟩ ⟨_, _, _, _, _, _⟩ h => linear_equiv.mk.inj_eq.mpr (equiv.mk.inj h)\n#align to_equiv_injective to_equiv_injective\n\n",
  "to_equiv_inj":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ₛₗ[ ] » -/\n@[simp]\ntheorem to_equiv_inj {e₁ e₂ : «expr ≃ₛₗ[ ] » M σ M₂} : e₁.to_equiv = e₂.to_equiv ↔ e₁ = e₂ :=\n  to_equiv_injective.eq_iff\n#align to_equiv_inj to_equiv_inj\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ₛₗ[ ] » -/\n@[simp]\ntheorem to_equiv_inj {e₁ e₂ : «expr ≃ₛₗ[ ] » M σ M₂} : e₁.to_equiv = e₂.to_equiv ↔ e₁ = e₂ :=\n  toEquiv_injective.eq_iff\n#align to_equiv_inj to_equiv_inj\n\n",
  "to_add_monoid_hom_commutes":
  "/-- The two paths coercion can take to an `add_monoid_hom` are equivalent -/\ntheorem to_add_monoid_hom_commutes : e.to_linear_map.to_add_monoid_hom = e.to_add_equiv.to_add_monoid_hom :=\n  rfl\n#align to_add_monoid_hom_commutes to_add_monoid_hom_commutes\n\n",
  "to_add_equiv_to_nat_linear_equiv":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ₗ[ ] » -/\n@[simp]\ntheorem _root_.linear_equiv.to_add_equiv_to_nat_linear_equiv (e : «expr ≃ₗ[ ] » M ℕ M₂) :\n    e.to_add_equiv.to_nat_linear_equiv = e :=\n  fun_like.coe_injective rfl\n#align linear_equiv.to_add_equiv_to_nat_linear_equiv linear_equiv.to_add_equiv_to_nat_linear_equiv\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ₗ[ ] » -/\n#print LinearEquiv.toAddEquiv_toNatLinearEquiv /-\n@[simp]\ntheorem LinearEquiv.toAddEquiv_toNatLinearEquiv (e : «expr ≃ₗ[ ] » M ℕ M₂) : e.to_add_equiv.to_nat_linear_equiv = e :=\n  FunLike.coe_injective rfl\n#align linear_equiv.to_add_equiv_to_nat_linear_equiv LinearEquiv.toAddEquiv_toNatLinearEquiv\n-/\n\n",
  "to_add_equiv_to_int_linear_equiv":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ₗ[ ] » -/\n@[simp]\ntheorem _root_.linear_equiv.to_add_equiv_to_int_linear_equiv (e : «expr ≃ₗ[ ] » M ℤ M₂) :\n    e.to_add_equiv.to_int_linear_equiv = e :=\n  fun_like.coe_injective rfl\n#align linear_equiv.to_add_equiv_to_int_linear_equiv linear_equiv.to_add_equiv_to_int_linear_equiv\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ₗ[ ] » -/\n#print LinearEquiv.toAddEquiv_toIntLinearEquiv /-\n@[simp]\ntheorem LinearEquiv.toAddEquiv_toIntLinearEquiv (e : «expr ≃ₗ[ ] » M ℤ M₂) : e.to_add_equiv.to_int_linear_equiv = e :=\n  FunLike.coe_injective rfl\n#align linear_equiv.to_add_equiv_to_int_linear_equiv LinearEquiv.toAddEquiv_toIntLinearEquiv\n-/\n\n",
  "symm_trans_self":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ₛₗ[ ] » -/\n@[simp]\ntheorem symm_trans_self (f : «expr ≃ₛₗ[ ] » M₁ σ₁₂ M₂) : f.symm.trans f = linear_equiv.refl R₂ M₂ :=\n  by\n  ext x\n  simp\n#align symm_trans_self symm_trans_self\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ₛₗ[ ] » -/\n@[simp]\ntheorem symm_trans_self (f : «expr ≃ₛₗ[ ] » M₁ σ₁₂ M₂) : f.symm.trans f = LinearEquiv.refl R₂ M₂ :=\n  by\n  ext x\n  simp\n#align symm_trans_self symm_trans_self\n\n",
  "symm_trans_apply":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ₛₗ[ ] » -/\ntheorem symm_trans_apply (c : M₃) : (e₁₂.trans e₂₃ : «expr ≃ₛₗ[ ] » M₁ σ₁₃ M₃).symm c = e₁₂.symm (e₂₃.symm c) :=\n  rfl\n#align symm_trans_apply symm_trans_apply\n\n",
  "symm_symm":
@@ -61,21 +61,21 @@
  "smul_def":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ₗ[ ] » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr • » -/\n@[simp]\nprotected theorem smul_def (f : «expr ≃ₗ[ ] » M R M) (a : M) : «expr • » f a = f a :=\n  rfl\n#align smul_def smul_def\n\n",
  "self_trans_symm":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ₛₗ[ ] » -/\n@[simp]\ntheorem self_trans_symm (f : «expr ≃ₛₗ[ ] » M₁ σ₁₂ M₂) : f.trans f.symm = linear_equiv.refl R₁ M₁ :=\n  by\n  ext x\n  simp\n#align self_trans_symm self_trans_symm\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ₛₗ[ ] » -/\n@[simp]\ntheorem self_trans_symm (f : «expr ≃ₛₗ[ ] » M₁ σ₁₂ M₂) : f.trans f.symm = LinearEquiv.refl R₁ M₁ :=\n  by\n  ext x\n  simp\n#align self_trans_symm self_trans_symm\n\n",
  "restrict_scalars_injective":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ₗ[ ] » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ₗ[ ] » -/\ntheorem restrict_scalars_injective :\n    function.injective (restrict_scalars R : «expr ≃ₗ[ ] » M S M₂ → «expr ≃ₗ[ ] » M R M₂) := fun f g h =>\n  ext (linear_equiv.congr_fun h : _)\n#align restrict_scalars_injective restrict_scalars_injective\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ₗ[ ] » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ₗ[ ] » -/\ntheorem restrict_scalars_injective :\n    function.injective (restrictScalars R : «expr ≃ₗ[ ] » M S M₂ → «expr ≃ₗ[ ] » M R M₂) := fun f g h =>\n  ext (LinearEquiv.congr_fun h : _)\n#align restrict_scalars_injective restrict_scalars_injective\n\n",
  "restrict_scalars_inj":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ₗ[ ] » -/\n@[simp]\ntheorem restrict_scalars_inj (f g : «expr ≃ₗ[ ] » M S M₂) : f.restrict_scalars R = g.restrict_scalars R ↔ f = g :=\n  (restrict_scalars_injective R).eq_iff\n#align restrict_scalars_inj restrict_scalars_inj\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ₗ[ ] » -/\n@[simp]\ntheorem restrict_scalars_inj (f g : «expr ≃ₗ[ ] » M S M₂) : f.restrict_scalars R = g.restrict_scalars R ↔ f = g :=\n  (restrictScalars_injective R).eq_iff\n#align restrict_scalars_inj restrict_scalars_inj\n\n",
  "refl_trans":
- "@[simp]\ntheorem refl_trans : (refl R M).trans e = e :=\n  to_equiv_injective e.to_equiv.refl_trans\n#align refl_trans refl_trans\n\n",
+ "@[simp]\ntheorem refl_trans : (refl R M).trans e = e :=\n  toEquiv_injective e.to_equiv.refl_trans\n#align refl_trans refl_trans\n\n",
  "refl_to_linear_map":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₗ[ ] » -/\n@[simp, norm_cast]\ntheorem refl_to_linear_map [Module R M] : (linear_equiv.refl R M : «expr →ₗ[ ] » M R M) = linear_map.id :=\n  rfl\n#align refl_to_linear_map refl_to_linear_map\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₗ[ ] » -/\n@[simp, norm_cast]\ntheorem refl_to_linear_map [Module R M] : (LinearEquiv.refl R M : «expr →ₗ[ ] » M R M) = LinearMap.id :=\n  rfl\n#align refl_to_linear_map refl_to_linear_map\n\n",
  "refl_symm":
- "@[simp]\ntheorem refl_symm [Module R M] : (refl R M).symm = linear_equiv.refl R M :=\n  rfl\n#align refl_symm refl_symm\n\n",
+ "@[simp]\ntheorem refl_symm [Module R M] : (refl R M).symm = LinearEquiv.refl R M :=\n  rfl\n#align refl_symm refl_symm\n\n",
  "refl_apply":
  "@[simp]\ntheorem refl_apply [Module R M] (x : M) : refl R M x = x :=\n  rfl\n#align refl_apply refl_apply\n\n",
  "of_subsingleton_self":
- "@[simp]\ntheorem of_subsingleton_self : of_subsingleton M M = refl R M :=\n  by\n  ext\n  simp\n#align of_subsingleton_self of_subsingleton_self\n\n",
+ "@[simp]\ntheorem of_subsingleton_self : ofSubsingleton M M = refl R M :=\n  by\n  ext\n  simp\n#align of_subsingleton_self of_subsingleton_self\n\n",
  "mk_coe'":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ₛₗ[ ] » -/\n@[simp]\ntheorem mk_coe' (f h₁ h₂ h₃ h₄) : (linear_equiv.mk f h₁ h₂ («expr⇑ » e) h₃ h₄ : «expr ≃ₛₗ[ ] » M₂ σ' M) = e.symm :=\n  symm_bijective.injective <| ext fun x => rfl\n#align mk_coe' mk_coe'\n\n",
  "mk_coe":
@@ -97,13 +97,13 @@
  "injective":
  "protected theorem injective : function.injective e :=\n  e.to_equiv.injective\n#align injective injective\n\n",
  "image_symm_eq_preimage":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\nprotected theorem image_symm_eq_preimage (s : set M₂) : «expr '' » e.symm s = «expr ⁻¹' » e s :=\n  e.to_equiv.symm.image_eq_preimage s\n#align image_symm_eq_preimage image_symm_eq_preimage\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\nprotected theorem image_symm_eq_preimage (s : Set M₂) : «expr '' » e.symm s = «expr ⁻¹' » e s :=\n  e.to_equiv.symm.image_eq_preimage s\n#align image_symm_eq_preimage image_symm_eq_preimage\n\n",
  "image_eq_preimage":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\nprotected theorem image_eq_preimage (s : set M) : «expr '' » e s = «expr ⁻¹' » e.symm s :=\n  e.to_equiv.image_eq_preimage s\n#align image_eq_preimage image_eq_preimage\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr '' » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ⁻¹' » -/\nprotected theorem image_eq_preimage (s : Set M) : «expr '' » e s = «expr ⁻¹' » e.symm s :=\n  e.to_equiv.image_eq_preimage s\n#align image_eq_preimage image_eq_preimage\n\n",
  "ext_iff":
- "theorem ext_iff : e = e' ↔ ∀ x, e x = e' x :=\n  fun_like.ext_iff\n#align ext_iff ext_iff\n\n",
+ "theorem ext_iff : e = e' ↔ ∀ x, e x = e' x :=\n  FunLike.ext_iff\n#align ext_iff ext_iff\n\n",
  "ext":
- "@[ext]\ntheorem ext (h : ∀ x, e x = e' x) : e = e' :=\n  fun_like.ext _ _ h\n#align ext ext\n\n",
+ "@[ext]\ntheorem ext (h : ∀ x, e x = e' x) : e = e' :=\n  FunLike.ext _ _ h\n#align ext ext\n\n",
  "eq_to_linear_map_symm_comp":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₛₗ[ ] » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₛₗ[ ] » -/\ntheorem eq_to_linear_map_symm_comp (f : «expr →ₛₗ[ ] » M₃ σ₃₁ M₁) (g : «expr →ₛₗ[ ] » M₃ σ₃₂ M₂) :\n    f = e₁₂.symm.to_linear_map.comp g ↔ e₁₂.to_linear_map.comp f = g :=\n  by\n  constructor <;> intro H <;> ext\n  · simp [H, e₁₂.to_equiv.eq_symm_comp f g]\n  · simp [← H, ← e₁₂.to_equiv.eq_symm_comp f g]\n#align eq_to_linear_map_symm_comp eq_to_linear_map_symm_comp\n\n",
  "eq_symm_comp":
@@ -115,9 +115,9 @@
  "eq_comp_symm":
  "theorem eq_comp_symm {α : Type _} (f : M₂ → α) (g : M₁ → α) : f = g ∘ e₁₂.symm ↔ f ∘ e₁₂ = g :=\n  e₁₂.to_equiv.eq_comp_symm f g\n#align eq_comp_symm eq_comp_symm\n\n",
  "congr_fun":
- "#print congr_fun /-\nprotected theorem congr_fun (h : e = e') (x : M) : e x = e' x :=\n  fun_like.congr_fun h x\n#align congr_fun congr_fun\n-/\n\n",
+ "#print congr_fun /-\nprotected theorem congr_fun (h : e = e') (x : M) : e x = e' x :=\n  FunLike.congr_fun h x\n#align congr_fun congr_fun\n-/\n\n",
  "congr_arg":
- "#print congr_arg /-\nprotected theorem congr_arg {x x'} : x = x' → e x = e x' :=\n  fun_like.congr_arg e\n#align congr_arg congr_arg\n-/\n\n",
+ "#print congr_arg /-\nprotected theorem congr_arg {x x'} : x = x' → e x = e x' :=\n  FunLike.congr_arg e\n#align congr_arg congr_arg\n-/\n\n",
  "comp_to_linear_map_symm_eq":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₛₗ[ ] » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₛₗ[ ] » -/\ntheorem comp_to_linear_map_symm_eq (f : «expr →ₛₗ[ ] » M₂ σ₂₃ M₃) (g : «expr →ₛₗ[ ] » M₁ σ₁₃ M₃) :\n    g.comp e₁₂.symm.to_linear_map = f ↔ g = f.comp e₁₂.to_linear_map :=\n  by\n  constructor <;> intro H <;> ext\n  · simp [← H, ← e₁₂.to_equiv.comp_symm_eq f g]\n  · simp [H, e₁₂.to_equiv.comp_symm_eq f g]\n#align comp_to_linear_map_symm_eq comp_to_linear_map_symm_eq\n\n",
  "comp_symm_eq":
@@ -141,15 +141,15 @@
  "coe_to_equiv":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n@[simp]\ntheorem coe_to_equiv : «expr⇑ » e.to_equiv = e :=\n  rfl\n#align coe_to_equiv coe_to_equiv\n\n",
  "coe_to_add_equiv":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n-- Note: The linter thinks the `ring_hom_comp_triple` argument is doubled -- it is not.\n@[simp]\ntheorem coe_to_add_equiv : «expr⇑ » e.to_add_equiv = e :=\n  rfl\n#align coe_to_add_equiv coe_to_add_equiv\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n-- Note: the `ring_hom_comp_triple σ₃₂ σ₂₁ σ₃₁` is unused, but is convenient to carry around\n-- implicitly for lemmas like `linear_equiv.self_trans_symm`.\n@[simp]\ntheorem coe_to_add_equiv : «expr⇑ » e.to_add_equiv = e :=\n  rfl\n#align coe_to_add_equiv coe_to_add_equiv\n\n",
  "coe_symm_mk":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ₗ[ ] » -/\n@[simp]\ntheorem coe_symm_mk [Module R M] [Module R M₂] {to_fun inv_fun map_add map_smul left_inv right_inv} :\n    «expr⇑ » (⟨to_fun, map_add, map_smul, inv_fun, left_inv, right_inv⟩ : «expr ≃ₗ[ ] » M R M₂).symm = inv_fun :=\n  rfl\n#align coe_symm_mk coe_symm_mk\n\n",
  "coe_of_involutive":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →+* » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₛₗ[ ] » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n@[simp]\ntheorem coe_of_involutive {σ σ' : «expr →+* » R R} [RingHomInvPair σ σ'] [RingHomInvPair σ' σ] {module_M : Module R M}\n    (f : «expr →ₛₗ[ ] » M σ M) (hf : involutive f) : «expr⇑ » (of_involutive f hf) = f :=\n  rfl\n#align coe_of_involutive coe_of_involutive\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →+* » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₛₗ[ ] » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n@[simp]\ntheorem coe_of_involutive {σ σ' : «expr →+* » R R} [RingHomInvPair σ σ'] [RingHomInvPair σ' σ] {module_M : Module R M}\n    (f : «expr →ₛₗ[ ] » M σ M) (hf : Involutive f) : «expr⇑ » (ofInvolutive f hf) = f :=\n  rfl\n#align coe_of_involutive coe_of_involutive\n\n",
  "coe_mk":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ₛₗ[ ] » -/\n/-\nCopyright (c) 2020 Anne Baanen. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Nathaniel Thomas, Jeremy Avigad, Johannes Hölzl, Mario Carneiro, Anne Baanen,\n  Frédéric Dupuis, Heather Macbeth\n-/\n-- `R, S, σ, σ'` become metavars, but it's OK since they are outparams.\n-- `σ'` becomes a metavariable, but it's OK since it's an outparam\n-- see Note [function coercion]\n@[simp]\ntheorem coe_mk {to_fun inv_fun map_add map_smul left_inv right_inv} :\n    «expr⇑ » (⟨to_fun, map_add, map_smul, inv_fun, left_inv, right_inv⟩ : «expr ≃ₛₗ[ ] » M σ M₂) = to_fun :=\n  rfl\n#align coe_mk coe_mk\n\n",
  "coe_injective":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ₛₗ[ ] » -/\ntheorem coe_injective : @injective («expr ≃ₛₗ[ ] » M σ M₂) (M → M₂) coe_fn :=\n  fun_like.coe_injective\n#align coe_injective coe_injective\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ≃ₛₗ[ ] » -/\ntheorem coe_injective : @injective («expr ≃ₛₗ[ ] » M σ M₂) (M → M₂) coe_fn :=\n  FunLike.coe_injective\n#align coe_injective coe_injective\n\n",
  "coe_coe":
  "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr⇑ » -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr →ₛₗ[ ] » -/\n@[simp, norm_cast]\ntheorem coe_coe : «expr⇑ » (e : «expr →ₛₗ[ ] » M σ M₂) = e :=\n  rfl\n#align coe_coe coe_coe\n\n",
  "bijective":

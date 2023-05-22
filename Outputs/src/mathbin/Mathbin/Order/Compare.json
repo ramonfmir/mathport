@@ -1,5 +1,5 @@
 {"toDual_compares_toDual":
- "#print toDual_compares_toDual /-\n@[simp]\ntheorem toDual_compares_toDual [LT α] {a b : α} {o : ordering} : compares o (toDual a) (toDual b) ↔ compares o b a :=\n  by\n  cases o\n  exacts[iff.rfl, eq_comm, iff.rfl]\n#align to_dual_compares_to_dual toDual_compares_toDual\n-/\n\n",
+ "#print toDual_compares_toDual /-\n@[simp]\ntheorem toDual_compares_toDual [LT α] {a b : α} {o : ordering} : Compares o (toDual a) (toDual b) ↔ Compares o b a :=\n  by\n  cases o\n  exacts[iff.rfl, eq_comm, iff.rfl]\n#align to_dual_compares_to_dual toDual_compares_toDual\n-/\n\n",
  "swap_or_else":
  "theorem swap_or_else (o₁ o₂) : (or_else o₁ o₂).swap = or_else o₁.swap o₂.swap := by\n  cases o₁ <;> try rfl <;> cases o₂ <;> rfl\n#align swap_or_else swap_or_else\n\n",
  "swap_inj":
@@ -9,62 +9,62 @@
  "or_else_eq_lt":
  "theorem or_else_eq_lt (o₁ o₂) : or_else o₁ o₂ = lt ↔ o₁ = lt ∨ o₁ = eq ∧ o₂ = lt := by\n  cases o₁ <;> cases o₂ <;> exact by decide\n#align or_else_eq_lt or_else_eq_lt\n\n",
  "ofDual_compares_ofDual":
- "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵈ» -/\n#print ofDual_compares_ofDual /-\n@[simp]\ntheorem ofDual_compares_ofDual [LT α] {a b : «expr ᵒᵈ» α} {o : ordering} :\n    compares o (ofDual a) (ofDual b) ↔ compares o b a :=\n  by\n  cases o\n  exacts[iff.rfl, eq_comm, iff.rfl]\n#align of_dual_compares_of_dual ofDual_compares_ofDual\n-/\n\n",
+ "/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵈ» -/\n#print ofDual_compares_ofDual /-\n@[simp]\ntheorem ofDual_compares_ofDual [LT α] {a b : «expr ᵒᵈ» α} {o : ordering} :\n    Compares o (ofDual a) (ofDual b) ↔ Compares o b a :=\n  by\n  cases o\n  exacts[iff.rfl, eq_comm, iff.rfl]\n#align of_dual_compares_of_dual ofDual_compares_ofDual\n-/\n\n",
  "ne_lt":
- "theorem compares.ne_lt [preorder α] : ∀ {o} {a b : α}, compares o a b → (o ≠ lt ↔ b ≤ a)\n  | lt, a, b, h => ⟨absurd rfl, fun h' => (not_le_of_lt h h').elim⟩\n  | eq, a, b, h => ⟨fun _ => ge_of_eq h, fun _ h => by injection h⟩\n  | GT.gt, a, b, h => ⟨fun _ => le_of_lt h, fun _ h => by injection h⟩\n#align compares.ne_lt compares.ne_lt\n\n",
+ "theorem compares.ne_lt [preorder α] : ∀ {o} {a b : α}, Compares o a b → (o ≠ lt ↔ b ≤ a)\n  | lt, a, b, h => ⟨absurd rfl, fun h' => (not_le_of_lt h h').elim⟩\n  | Eq, a, b, h => ⟨fun _ => ge_of_eq h, fun _ h => by injection h⟩\n  | GT.gt, a, b, h => ⟨fun _ => le_of_lt h, fun _ h => by injection h⟩\n#align compares.ne_lt compares.ne_lt\n\n",
  "ne_gt":
- "theorem compares.ne_gt [preorder α] {o} {a b : α} (h : compares o a b) : o ≠ GT.gt ↔ a ≤ b :=\n  (not_congr swap_eq_iff_eq_swap.symm).trans h.swap.ne_lt\n#align compares.ne_gt compares.ne_gt\n\n",
+ "theorem compares.ne_gt [preorder α] {o} {a b : α} (h : Compares o a b) : o ≠ gt ↔ a ≤ b :=\n  (not_congr swap_eq_iff_eq_swap.symm).trans h.swap.ne_lt\n#align compares.ne_gt compares.ne_gt\n\n",
  "lt_iff_lt_of_cmp_eq_cmp":
  "#print lt_iff_lt_of_cmp_eq_cmp /-\ntheorem lt_iff_lt_of_cmp_eq_cmp (h : cmp x y = cmp x' y') : x < y ↔ x' < y' := by\n  rw [← cmp_eq_lt_iff, ← cmp_eq_lt_iff, h]\n#align lt_iff_lt_of_cmp_eq_cmp lt_iff_lt_of_cmp_eq_cmp\n-/\n\n",
  "le_total":
- "theorem compares.le_total [preorder α] {a b : α} : ∀ {o}, compares o a b → a ≤ b ∨ b ≤ a\n  | lt, h => or.inl (le_of_lt h)\n  | eq, h => or.inl (le_of_eq h)\n  | GT.gt, h => or.inr (le_of_lt h)\n#align compares.le_total compares.le_total\n\n",
+ "theorem compares.le_total [preorder α] {a b : α} : ∀ {o}, Compares o a b → a ≤ b ∨ b ≤ a\n  | lt, h => or.inl (le_of_lt h)\n  | Eq, h => or.inl (le_of_eq h)\n  | GT.gt, h => or.inr (le_of_lt h)\n#align compares.le_total compares.le_total\n\n",
  "le_iff_le_of_cmp_eq_cmp":
  "#print le_iff_le_of_cmp_eq_cmp /-\ntheorem le_iff_le_of_cmp_eq_cmp (h : cmp x y = cmp x' y') : x ≤ y ↔ x' ≤ y' :=\n  by\n  rw [← not_lt, ← not_lt]\n  apply not_congr\n  apply lt_iff_lt_of_cmp_eq_cmp\n  rwa [cmp_eq_cmp_symm]\n#align le_iff_le_of_cmp_eq_cmp le_iff_le_of_cmp_eq_cmp\n-/\n\n",
  "le_antisymm":
- "theorem compares.le_antisymm [preorder α] {a b : α} : ∀ {o}, compares o a b → a ≤ b → b ≤ a → a = b\n  | lt, h, _, hba => (not_le_of_lt h hba).elim\n  | eq, h, _, _ => h\n  | GT.gt, h, hab, _ => (not_le_of_lt h hab).elim\n#align compares.le_antisymm compares.le_antisymm\n\n",
+ "theorem compares.le_antisymm [preorder α] {a b : α} : ∀ {o}, Compares o a b → a ≤ b → b ≤ a → a = b\n  | lt, h, _, hba => (not_le_of_lt h hba).elim\n  | Eq, h, _, _ => h\n  | GT.gt, h, hab, _ => (not_le_of_lt h hab).elim\n#align compares.le_antisymm compares.le_antisymm\n\n",
  "inj":
- "theorem compares.inj [preorder α] {o₁} : ∀ {o₂} {a b : α}, compares o₁ a b → compares o₂ a b → o₁ = o₂\n  | lt, a, b, h₁, h₂ => h₁.eq_lt.2 h₂\n  | eq, a, b, h₁, h₂ => h₁.eq_eq.2 h₂\n  | GT.gt, a, b, h₁, h₂ => h₁.eq_gt.2 h₂\n#align compares.inj compares.inj\n\n",
+ "theorem compares.inj [preorder α] {o₁} : ∀ {o₂} {a b : α}, Compares o₁ a b → Compares o₂ a b → o₁ = o₂\n  | lt, a, b, h₁, h₂ => h₁.eq_lt.2 h₂\n  | Eq, a, b, h₁, h₂ => h₁.eq_eq.2 h₂\n  | GT.gt, a, b, h₁, h₂ => h₁.eq_gt.2 h₂\n#align compares.inj compares.inj\n\n",
  "eq_lt":
- "theorem compares.eq_lt [preorder α] : ∀ {o} {a b : α}, compares o a b → (o = lt ↔ a < b)\n  | lt, a, b, h => ⟨fun _ => h, fun _ => rfl⟩\n  | eq, a, b, h => ⟨fun h => by injection h, fun h' => (ne_of_lt h' h).elim⟩\n  | GT.gt, a, b, h => ⟨fun h => by injection h, fun h' => (lt_asymm h h').elim⟩\n#align compares.eq_lt compares.eq_lt\n\n",
+ "theorem compares.eq_lt [preorder α] : ∀ {o} {a b : α}, Compares o a b → (o = lt ↔ a < b)\n  | lt, a, b, h => ⟨fun _ => h, fun _ => rfl⟩\n  | Eq, a, b, h => ⟨fun h => by injection h, fun h' => (ne_of_lt h' h).elim⟩\n  | GT.gt, a, b, h => ⟨fun h => by injection h, fun h' => (lt_asymm h h').elim⟩\n#align compares.eq_lt compares.eq_lt\n\n",
  "eq_iff_eq_of_cmp_eq_cmp":
  "#print eq_iff_eq_of_cmp_eq_cmp /-\ntheorem eq_iff_eq_of_cmp_eq_cmp (h : cmp x y = cmp x' y') : x = y ↔ x' = y' := by\n  rw [le_antisymm_iff, le_antisymm_iff, le_iff_le_of_cmp_eq_cmp h, le_iff_le_of_cmp_eq_cmp (cmp_eq_cmp_symm.1 h)]\n#align eq_iff_eq_of_cmp_eq_cmp eq_iff_eq_of_cmp_eq_cmp\n-/\n\n",
  "eq_gt":
- "theorem compares.eq_gt [preorder α] {o} {a b : α} (h : compares o a b) : o = GT.gt ↔ b < a :=\n  swap_eq_iff_eq_swap.symm.trans h.swap.eq_lt\n#align compares.eq_gt compares.eq_gt\n\n",
+ "theorem compares.eq_gt [preorder α] {o} {a b : α} (h : Compares o a b) : o = gt ↔ b < a :=\n  swap_eq_iff_eq_swap.symm.trans h.swap.eq_lt\n#align compares.eq_gt compares.eq_gt\n\n",
  "eq_eq":
- "theorem compares.eq_eq [preorder α] : ∀ {o} {a b : α}, compares o a b → (o = eq ↔ a = b)\n  | lt, a, b, h => ⟨fun h => by injection h, fun h' => (ne_of_lt h h').elim⟩\n  | eq, a, b, h => ⟨fun _ => h, fun _ => rfl⟩\n  | GT.gt, a, b, h => ⟨fun h => by injection h, fun h' => (ne_of_gt h h').elim⟩\n#align compares.eq_eq compares.eq_eq\n\n",
+ "theorem compares.eq_eq [preorder α] : ∀ {o} {a b : α}, Compares o a b → (o = eq ↔ a = b)\n  | lt, a, b, h => ⟨fun h => by injection h, fun h' => (ne_of_lt h h').elim⟩\n  | Eq, a, b, h => ⟨fun _ => h, fun _ => rfl⟩\n  | GT.gt, a, b, h => ⟨fun h => by injection h, fun h' => (ne_of_gt h h').elim⟩\n#align compares.eq_eq compares.eq_eq\n\n",
  "compares_swap":
  "theorem compares_swap [LT α] {a b : α} {o : ordering} : o.swap.compares a b ↔ o.compares b a :=\n  by\n  cases o\n  exacts[iff.rfl, eq_comm, iff.rfl]\n#align compares_swap compares_swap\n\n",
  "compares_iff_of_compares_impl":
- "theorem compares_iff_of_compares_impl {β : Type _} [linear_order α] [preorder β] {a b : α} {a' b' : β}\n    (h : ∀ {o}, compares o a b → compares o a' b') (o) : compares o a b ↔ compares o a' b' :=\n  by\n  refine' ⟨h, fun ho => _⟩\n  cases' lt_trichotomy a b with hab hab\n  · change compares ordering.lt a b at hab\n    rwa [ho.inj (h hab)]\n  · cases' hab with hab hab\n    · change compares ordering.eq a b at hab\n      rwa [ho.inj (h hab)]\n    · change compares ordering.gt a b at hab\n      rwa [ho.inj (h hab)]\n#align compares_iff_of_compares_impl compares_iff_of_compares_impl\n\n",
+ "theorem compares_iff_of_compares_impl {β : Type _} [linear_order α] [preorder β] {a b : α} {a' b' : β}\n    (h : ∀ {o}, Compares o a b → Compares o a' b') (o) : Compares o a b ↔ Compares o a' b' :=\n  by\n  refine' ⟨h, fun ho => _⟩\n  cases' lt_trichotomy a b with hab hab\n  · change compares ordering.lt a b at hab\n    rwa [ho.inj (h hab)]\n  · cases' hab with hab hab\n    · change compares ordering.eq a b at hab\n      rwa [ho.inj (h hab)]\n    · change compares ordering.gt a b at hab\n      rwa [ho.inj (h hab)]\n#align compares_iff_of_compares_impl compares_iff_of_compares_impl\n\n",
  "cmp_swap":
- "#print cmp_swap /-\n@[simp]\ntheorem cmp_swap [preorder α] [@decidable_rel α (· < ·)] (a b : α) : (cmp a b).swap = cmp b a :=\n  by\n  unfold cmp cmpUsing\n  by_cases a < b <;> by_cases h₂ : b < a <;> simp [h, h₂, ordering.swap]\n  exact lt_asymm h h₂\n#align cmp_swap cmp_swap\n-/\n\n",
+ "#print cmp_swap /-\n@[simp]\ntheorem cmp_swap [preorder α] [@DecidableRel α (· < ·)] (a b : α) : (cmp a b).swap = cmp b a :=\n  by\n  unfold cmp cmpUsing\n  by_cases a < b <;> by_cases h₂ : b < a <;> simp [h, h₂, ordering.swap]\n  exact lt_asymm h h₂\n#align cmp_swap cmp_swap\n-/\n\n",
  "cmp_self_eq_eq":
  "#print cmp_self_eq_eq /-\n@[simp]\ntheorem cmp_self_eq_eq : cmp x x = ordering.eq := by rw [cmp_eq_eq_iff]\n#align cmp_self_eq_eq cmp_self_eq_eq\n-/\n\n",
  "cmp_eq_lt_iff":
- "#print cmp_eq_lt_iff /-\n@[simp]\ntheorem cmp_eq_lt_iff : cmp x y = ordering.lt ↔ x < y :=\n  ordering.compares.eq_lt (cmp_compares x y)\n#align cmp_eq_lt_iff cmp_eq_lt_iff\n-/\n\n",
+ "#print cmp_eq_lt_iff /-\n@[simp]\ntheorem cmp_eq_lt_iff : cmp x y = ordering.lt ↔ x < y :=\n  Ordering.Compares.eq_lt (cmp_compares x y)\n#align cmp_eq_lt_iff cmp_eq_lt_iff\n-/\n\n",
  "cmp_eq_lt":
  "theorem has_lt.lt.cmp_eq_lt (h : x < y) : cmp x y = ordering.lt :=\n  (cmp_eq_lt_iff _ _).2 h\n#align has_lt.lt.cmp_eq_lt has_lt.lt.cmp_eq_lt\n\n",
  "cmp_eq_gt_iff":
- "#print cmp_eq_gt_iff /-\n@[simp]\ntheorem cmp_eq_gt_iff : cmp x y = ordering.gt ↔ y < x :=\n  ordering.compares.eq_gt (cmp_compares x y)\n#align cmp_eq_gt_iff cmp_eq_gt_iff\n-/\n\n",
+ "#print cmp_eq_gt_iff /-\n@[simp]\ntheorem cmp_eq_gt_iff : cmp x y = ordering.gt ↔ y < x :=\n  Ordering.Compares.eq_gt (cmp_compares x y)\n#align cmp_eq_gt_iff cmp_eq_gt_iff\n-/\n\n",
  "cmp_eq_gt":
  "theorem has_lt.lt.cmp_eq_gt (h : x < y) : cmp y x = ordering.gt :=\n  (cmp_eq_gt_iff _ _).2 h\n#align has_lt.lt.cmp_eq_gt has_lt.lt.cmp_eq_gt\n\n",
  "cmp_eq_eq_iff":
- "#print cmp_eq_eq_iff /-\n@[simp]\ntheorem cmp_eq_eq_iff : cmp x y = ordering.eq ↔ x = y :=\n  ordering.compares.eq_eq (cmp_compares x y)\n#align cmp_eq_eq_iff cmp_eq_eq_iff\n-/\n\n",
+ "#print cmp_eq_eq_iff /-\n@[simp]\ntheorem cmp_eq_eq_iff : cmp x y = ordering.eq ↔ x = y :=\n  Ordering.Compares.eq_eq (cmp_compares x y)\n#align cmp_eq_eq_iff cmp_eq_eq_iff\n-/\n\n",
  "cmp_eq_eq'":
- "theorem eq.cmp_eq_eq' (h : x = y) : cmp y x = ordering.eq :=\n  h.symm.cmp_eq_eq\n#align eq.cmp_eq_eq' eq.cmp_eq_eq'\n\n",
+ "#print Eq.cmp_eq_eq' /-\ntheorem Eq.cmp_eq_eq' (h : x = y) : cmp y x = ordering.eq :=\n  h.symm.cmp_eq_eq\n#align eq.cmp_eq_eq' Eq.cmp_eq_eq'\n-/\n\n",
  "cmp_eq_eq":
- "theorem eq.cmp_eq_eq (h : x = y) : cmp x y = ordering.eq :=\n  (cmp_eq_eq_iff _ _).2 h\n#align eq.cmp_eq_eq eq.cmp_eq_eq\n\n",
+ "#print Eq.cmp_eq_eq /-\ntheorem Eq.cmp_eq_eq (h : x = y) : cmp x y = ordering.eq :=\n  (cmp_eq_eq_iff _ _).2 h\n#align eq.cmp_eq_eq Eq.cmp_eq_eq\n-/\n\n",
  "cmp_eq_cmp_symm":
  "#print cmp_eq_cmp_symm /-\ntheorem cmp_eq_cmp_symm : cmp x y = cmp x' y' ↔ cmp y x = cmp y' x' := by rw [← cmp_swap x', ← cmp_swap x, swap_inj]\n#align cmp_eq_cmp_symm cmp_eq_cmp_symm\n-/\n\n",
  "cmp_eq":
- "theorem ordering.compares.cmp_eq [linear_order α] {a b : α} {o : ordering} (h : o.compares a b) : cmp a b = o :=\n  (cmp_compares a b).inj h\n#align ordering.compares.cmp_eq ordering.compares.cmp_eq\n\n",
+ "#print Ordering.Compares.cmp_eq /-\ntheorem Ordering.Compares.cmp_eq [linear_order α] {a b : α} {o : ordering} (h : o.compares a b) : cmp a b = o :=\n  (cmp_compares a b).inj h\n#align ordering.compares.cmp_eq Ordering.Compares.cmp_eq\n-/\n\n",
  "cmp_compares":
  "#print cmp_compares /-\ntheorem cmp_compares [linear_order α] (a b : α) : (cmp a b).compares a b := by\n  obtain h | h | h := lt_trichotomy a b <;> simp [cmp, cmpUsing, h, h.not_lt]\n#align cmp_compares cmp_compares\n-/\n\n",
  "cmpLE_toDual":
- "/- warning: cmp_to_dual clashes with cmp_le_to_dual -> cmpLE_toDual\nCase conversion may be inaccurate. Consider using '#align cmp_to_dual cmpLE_toDualₓ'. -/\n#print cmpLE_toDual /-\n@[simp]\ntheorem cmpLE_toDual [LT α] [@decidable_rel α (· < ·)] (x y : α) : cmp (toDual x) (toDual y) = cmp y x :=\n  rfl\n#align cmp_to_dual cmpLE_toDual\n-/\n\n",
+ "/- warning: cmp_to_dual clashes with cmp_le_to_dual -> cmpLE_toDual\nCase conversion may be inaccurate. Consider using '#align cmp_to_dual cmpLE_toDualₓ'. -/\n#print cmpLE_toDual /-\n@[simp]\ntheorem cmpLE_toDual [LT α] [@DecidableRel α (· < ·)] (x y : α) : cmp (toDual x) (toDual y) = cmp y x :=\n  rfl\n#align cmp_to_dual cmpLE_toDual\n-/\n\n",
  "cmpLE_swap":
- "#print cmpLE_swap /-\n/-\nCopyright (c) 2017 Mario Carneiro. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Mario Carneiro\n-/\ntheorem cmpLE_swap {α} [LE α] [is_total α (· ≤ ·)] [@decidable_rel α (· ≤ ·)] (x y : α) :\n    (cmpLE x y).swap = cmpLE y x :=\n  by\n  by_cases xy : x ≤ y <;> by_cases yx : y ≤ x <;> simp [cmpLE, *, ordering.swap]\n  cases not_or_of_not xy yx (total_of _ _ _)\n#align cmp_le_swap cmpLE_swap\n-/\n\n",
+ "#print cmpLE_swap /-\n/-\nCopyright (c) 2017 Mario Carneiro. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Mario Carneiro\n-/\ntheorem cmpLE_swap {α} [LE α] [is_total α (· ≤ ·)] [@DecidableRel α (· ≤ ·)] (x y : α) : (cmpLE x y).swap = cmpLE y x :=\n  by\n  by_cases xy : x ≤ y <;> by_cases yx : y ≤ x <;> simp [cmpLE, *, ordering.swap]\n  cases not_or_of_not xy yx (total_of _ _ _)\n#align cmp_le_swap cmpLE_swap\n-/\n\n",
  "cmpLE_ofDual":
- "/- warning: cmp_of_dual clashes with cmp_le_of_dual -> cmpLE_ofDual\nCase conversion may be inaccurate. Consider using '#align cmp_of_dual cmpLE_ofDualₓ'. -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵈ» -/\n#print cmpLE_ofDual /-\n@[simp]\ntheorem cmpLE_ofDual [LT α] [@decidable_rel α (· < ·)] (x y : «expr ᵒᵈ» α) : cmp (ofDual x) (ofDual y) = cmp y x :=\n  rfl\n#align cmp_of_dual cmpLE_ofDual\n-/\n\n",
+ "/- warning: cmp_of_dual clashes with cmp_le_of_dual -> cmpLE_ofDual\nCase conversion may be inaccurate. Consider using '#align cmp_of_dual cmpLE_ofDualₓ'. -/\n/- ./././Mathport/Syntax/Translate/Expr.lean:207:4: warning: unsupported notation `«expr ᵒᵈ» -/\n#print cmpLE_ofDual /-\n@[simp]\ntheorem cmpLE_ofDual [LT α] [@DecidableRel α (· < ·)] (x y : «expr ᵒᵈ» α) : cmp (ofDual x) (ofDual y) = cmp y x :=\n  rfl\n#align cmp_of_dual cmpLE_ofDual\n-/\n\n",
  "cmpLE_eq_cmp":
- "#print cmpLE_eq_cmp /-\ntheorem cmpLE_eq_cmp {α} [preorder α] [is_total α (· ≤ ·)] [@decidable_rel α (· ≤ ·)] [@decidable_rel α (· < ·)]\n    (x y : α) : cmpLE x y = cmp x y :=\n  by\n  by_cases xy : x ≤ y <;> by_cases yx : y ≤ x <;> simp [cmpLE, lt_iff_le_not_le, *, cmp, cmpUsing]\n  cases not_or_of_not xy yx (total_of _ _ _)\n#align cmp_le_eq_cmp cmpLE_eq_cmp\n-/\n\n"}
+ "#print cmpLE_eq_cmp /-\ntheorem cmpLE_eq_cmp {α} [preorder α] [is_total α (· ≤ ·)] [@DecidableRel α (· ≤ ·)] [@DecidableRel α (· < ·)]\n    (x y : α) : cmpLE x y = cmp x y :=\n  by\n  by_cases xy : x ≤ y <;> by_cases yx : y ≤ x <;> simp [cmpLE, lt_iff_le_not_le, *, cmp, cmpUsing]\n  cases not_or_of_not xy yx (total_of _ _ _)\n#align cmp_le_eq_cmp cmpLE_eq_cmp\n-/\n\n"}

@@ -1,4 +1,4 @@
-{"finsupp_lequiv_direct_sum_symm_lof":
- "@[simp]\ntheorem finsupp_lequiv_direct_sum_symm_lof (i : ι) (m : M) :\n    (finsupp_lequiv_direct_sum R M ι).symm (direct_sum.lof R ι _ i m) = finsupp.single i m :=\n  letI : ∀ m : M, decidable (m ≠ 0) := classical.dec_pred _\n  dfinsupp.to_finsupp_single i m\n#align finsupp_lequiv_direct_sum_symm_lof finsupp_lequiv_direct_sum_symm_lof\n\n",
- "finsupp_lequiv_direct_sum_single":
- "/-\nCopyright (c) 2019 Johannes Hölzl. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Johannes Hölzl\n-/\n@[simp]\ntheorem finsupp_lequiv_direct_sum_single (i : ι) (m : M) :\n    finsupp_lequiv_direct_sum R M ι (finsupp.single i m) = direct_sum.lof R ι _ i m :=\n  finsupp.to_dfinsupp_single i m\n#align finsupp_lequiv_direct_sum_single finsupp_lequiv_direct_sum_single\n\n"}
+{"finsuppLEquivDirectSum_symm_lof":
+ "#print finsuppLEquivDirectSum_symm_lof /-\n@[simp]\ntheorem finsuppLEquivDirectSum_symm_lof (i : ι) (m : M) :\n    (finsuppLEquivDirectSum R M ι).symm (DirectSum.lof R ι _ i m) = Finsupp.single i m :=\n  letI : ∀ m : M, Decidable (m ≠ 0) := Classical.decPred _\n  Dfinsupp.toFinsupp_single i m\n#align finsupp_lequiv_direct_sum_symm_lof finsuppLEquivDirectSum_symm_lof\n-/\n\n",
+ "finsuppLEquivDirectSum_single":
+ "#print finsuppLEquivDirectSum_single /-\n/-\nCopyright (c) 2019 Johannes Hölzl. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Johannes Hölzl\n-/\n@[simp]\ntheorem finsuppLEquivDirectSum_single (i : ι) (m : M) :\n    finsuppLEquivDirectSum R M ι (Finsupp.single i m) = DirectSum.lof R ι _ i m :=\n  Finsupp.toDfinsupp_single i m\n#align finsupp_lequiv_direct_sum_single finsuppLEquivDirectSum_single\n-/\n\n"}
